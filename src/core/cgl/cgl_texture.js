@@ -277,13 +277,17 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
+
+
+    console.log("is float", this.textureType == Texture.TYPE_FLOAT);
+    if (this.textureType == Texture.TYPE_FLOAT)
+        this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, data);
+    else
+        this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
+
     this._setFilter();
 
-    // if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
-    // {
-    //     this._cgl.gl.generateMipmap(this.texTarget);
-    // }
+
     this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);

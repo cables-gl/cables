@@ -1,0 +1,71 @@
+{
+    "id": "81a807c3-f814-4815-a43c-5914c223faf4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1643638670612
+        },
+        {
+            "message": " added lib: fflate.js",
+            "author": "pandur",
+            "date": 1643639536682
+        },
+        {
+            "message": "Ops.User.pandur.ExrFile renamed to Ops.Dev.ExrTexture",
+            "author": "pandur",
+            "date": 1643645413360
+        },
+        {
+            "message": " added lib: exrloader.js",
+            "author": "pandur",
+            "date": 1643645515924
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1643638688319,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "EXR File"
+            },
+            {
+                "type": 0,
+                "name": "Remove Alpha",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Channels"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.ExrFile"
+    },
+    "libs": [
+        "fflate.js",
+        "exrloader.js"
+    ]
+}
