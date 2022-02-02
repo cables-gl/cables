@@ -19,6 +19,6 @@ exec.onTriggered = () =>
 {
     if (!inTex.get()) return;
 
-    outFpTex.set(null);
+    outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outFpTex.set(tc.copy(inTex.get()));
 };
