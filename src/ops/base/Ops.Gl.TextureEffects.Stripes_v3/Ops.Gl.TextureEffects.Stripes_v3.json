@@ -91,7 +91,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Stripes_v3"
     },
-    "summary": "Create a texture of stripes ",
+    "summary": "Create a texture of stripes /lines",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -155,5 +155,6 @@
                 "text": "Trigger out "
             }
         ]
-    }
+    },
+    "caniusequery": ""
 }

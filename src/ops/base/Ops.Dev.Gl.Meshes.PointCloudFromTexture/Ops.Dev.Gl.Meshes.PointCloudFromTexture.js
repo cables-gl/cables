@@ -88,8 +88,6 @@ function setupMesh()
     geom.verticesIndices = [];
     numVerts = verts.length / 3;
 
-    console.log("points  numVerts", numVerts);
-
     if (mesh)mesh.dispose();
 
     if (numVerts > 0)

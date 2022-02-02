@@ -1,6 +1,6 @@
 const
     inFile = op.inUrl("EXR File", [".exr"]),
-    inAlpha=op.inBool("Remove Alpha",false),
+    inAlpha = op.inBool("Remove Alpha", false),
     outTex = op.outTexture("Texture"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
@@ -12,7 +12,7 @@ let
     timedLoader = null,
     finishedLoading = false;
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
 inAlpha.onChange =
 inFile.onChange = reloadSoon;
@@ -41,61 +41,54 @@ function loadBin(addCacheBuster)
     {
         oReq.onload = (oEvent) =>
         {
-            // boundingPoints = [];
-
-            // maxTime = 0;
             const arrayBuffer = oReq.response;
-            // gltf = parseGltf(arrayBuffer);
             const l = new CABLES.EXRLoader();
-            const p = l.parse(arrayBuffer);
 
-            console.log(l, p);
-
-            outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-
-            if (p)
+            try
             {
-                const arr=new Float32Array(p.data.length);
-                for (let i = 0; i < p.data.length; i++)
-                    arr[i]=p.data[i] ;
+                const p = l.parse(arrayBuffer);
 
-                if(inAlpha.get())
+                console.log(l, p);
+
+                outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+
+                if (p)
                 {
-                    for (let i = 0; i < arr.length; i+=4)arr[i]=1;
+                    const arr = new Float32Array(p.data.length);
+                    for (let i = 0; i < p.data.length; i++)
+                        arr[i] = p.data[i];
 
+                    if (inAlpha.get())
+                        for (let i = 3; i < arr.length; i += 4)arr[i] = 1;
+
+                    let channels = "";
+                    for (let i = 0; i < p.header.channels.length; i++)
+                        channels += p.header.channels[i].name;
+
+                    outChannels.set(channels);
+
+                    const tex = new CGL.Texture(cgl, {
+                        "filter": CGL.Texture.FILTER_NEAREST,
+                        "wrap": CGL.Texture.WRAP_REPEAT,
+                        "isFloatingPointTexture": true });
+
+                    tex.initFromData(arr, p.width, p.height, CGL.Texture.FILTER_NEAREST, CGL.Texture.WRAP_REPEAT);
+                    outTex.set(tex);
+                    outWidth.set(p.width);
+                    outHeight.set(p.height);
                 }
-
-let channels="";
-for(let i=0;i<p.header.channels.length;i++)
-{
-    channels+=p.header.channels[i].name;
-}
-
-//     if(p.header.channelOrder)
-// channels=p.header.channelOrder.replaceAll(" ","");
-
-outChannels.set(channels);
-// console.log(inFile.get(), arr,p,channels);
-
-
-                const tex = new CGL.Texture(cgl, {
-                    "filter": CGL.Texture.FILTER_NEAREST,
-                    "wrap": CGL.Texture.WRAP_REPEAT,
-                    "isFloatingPointTexture": true });
-
-                tex.initFromData(arr, p.width, p.height, CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
-                outTex.set(tex);
-                outWidth.set(p.width);
-                outHeight.set(p.height);
-
+                else
+                {
+                    outWidth.set(0);
+                    outHeight.set(0);
+                }
             }
-            else
+            catch (e)
             {
-                outWidth.set(0);
-                outHeight.set(0);
-
+                op.error(e);
             }
 
+            cgl.patch.loading.finished(loadingId);
             finishedLoading = true;
             outLoading.set(false);
 

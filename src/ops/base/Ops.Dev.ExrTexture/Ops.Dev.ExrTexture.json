@@ -62,7 +62,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.pandur.ExrFile"
+        "name": "Ops.Dev.ExrTexture"
     },
     "libs": [
         "fflate.js",
