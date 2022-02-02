@@ -95,23 +95,25 @@ function updateResolution()
         h = Math.ceil(height.get());
     }
 
+    outRatio.set(w / h);
+
     if ((w != tex.width || h != tex.height) && (w !== 0 && h !== 0))
     {
         // height.set(h);
         // width.set(w);
         tex.setSize(w, h);
-        outRatio.set(w / h);
+
         effect.setSourceTexture(tex);
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
     }
 
-    if (texOut.get() && selectedFilter != CGL.Texture.FILTER_NEAREST)
-    {
-        if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering when scaling will not work on ios devices.", 0);
-        else op.setUiError("hintnpot", null, 0);
-    }
-    else op.setUiError("hintnpot", null, 0);
+    // if (texOut.get() && selectedFilter != CGL.Texture.FILTER_NEAREST)
+    // {
+    //     if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering when scaling will not work on ios devices.", 0);
+    //     else op.setUiError("hintnpot", null, 0);
+    // }
+    // else op.setUiError("hintnpot", null, 0);
 }
 
 function updateSizePorts()
