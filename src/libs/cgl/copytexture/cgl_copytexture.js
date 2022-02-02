@@ -43,9 +43,9 @@ class CopyTexture
 
         this.mesh = MESHES.getSimpleRect(this.cgl, "texEffectRect");
 
-        this._uniTexInput =
+        // this._uniTexInput =
 
-        console.log(this.effect);
+        // console.log(this.effect);
     }
 
     copy(tex)
