@@ -23,7 +23,7 @@ for (let i = 0; i < inArray.length; i += 1)
     if (i > 0) keys.forEach(function (key) { portObj[key].setUiAttribs({ "greyout": true }); });
 }
 
-const outValues = op.outArray("Array Out", [], 1);
+const outValues = op.outArray("Array Out", 1);
 
 inModeSwitch.onChange = function ()
 {

@@ -1,45 +1,45 @@
-var inArr=op.inArray("Array");
+let inArr = op.inArray("Array", 2);
 
-var outNum=op.outValue("Num Items");
+let outNum = op.outValue("Num Items");
 
-var outMinX=op.outValue("Min X");
-var outMaxX=op.outValue("Max X");
-var outAvgX=op.outValue("Average X");
+let outMinX = op.outValue("Min X");
+let outMaxX = op.outValue("Max X");
+let outAvgX = op.outValue("Average X");
 
-var outMinY=op.outValue("Min Y");
-var outMaxY=op.outValue("Max Y");
-var outAvgY=op.outValue("Average Y");
+let outMinY = op.outValue("Min Y");
+let outMaxY = op.outValue("Max Y");
+let outAvgY = op.outValue("Average Y");
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    var arr=inArr.get();
+    let arr = inArr.get();
 
-    var minX=999999999;
-    var maxX=-999999999;
-    var avgX=0;
+    let minX = 999999999;
+    let maxX = -999999999;
+    let avgX = 0;
 
-    var minY=999999999;
-    var maxY=-999999999;
-    var avgY=0;
+    let minY = 999999999;
+    let maxY = -999999999;
+    let avgY = 0;
     outNum.set(0);
 
-    if(arr)
+    if (arr)
     {
-        outNum.set(arr.length/2);
+        outNum.set(arr.length / 2);
 
-        for(var i=0;i<arr.length;i+=2)
+        for (let i = 0; i < arr.length; i += 2)
         {
-            avgX+=arr[i];
-            minX=Math.min(minX,arr[i]);
-            maxX=Math.max(maxX,arr[i]);
+            avgX += arr[i];
+            minX = Math.min(minX, arr[i]);
+            maxX = Math.max(maxX, arr[i]);
 
-            avgY+=arr[i+1];
-            minY=Math.min(minY,arr[i+1]);
-            maxY=Math.max(maxY,arr[i+1]);
+            avgY += arr[i + 1];
+            minY = Math.min(minY, arr[i + 1]);
+            maxY = Math.max(maxY, arr[i + 1]);
         }
 
-        avgX/=arr.length/2;
-        avgY/=arr.length/2;
+        avgX /= arr.length / 2;
+        avgY /= arr.length / 2;
     }
 
     outMinX.set(minX);

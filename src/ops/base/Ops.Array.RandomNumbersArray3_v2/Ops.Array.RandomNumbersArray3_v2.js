@@ -5,7 +5,7 @@ const
     seed = op.inValueFloat("random seed"),
     closed = op.inValueBool("Last == First"),
     inInteger = op.inValueBool("Integer", false),
-    values = op.outArray("values"),
+    values = op.outArray("values", null, 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");
 
