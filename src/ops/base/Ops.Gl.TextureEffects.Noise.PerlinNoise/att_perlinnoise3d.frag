@@ -3,6 +3,8 @@ UNI float x;
 UNI float y;
 UNI float scale;
 UNI float rangeMul;
+UNI float harmonics;
+UNI float aspect;
 
 IN vec2 texCoord;
 UNI sampler2D tex;
@@ -12,6 +14,9 @@ UNI sampler2D tex;
     UNI float offMul;
 #endif
 
+#ifdef HAS_TEX_MASK
+    UNI sampler2D texMask;
+#endif
 
 UNI float amount;
 
@@ -233,8 +238,22 @@ void main()
     #endif
 
 
+
     float aa=texture(tex,texCoord).r;
-    float v=(Perlin3D(vec3(p.x,p.y,z)+offset));
+    // float v=(Perlin3D(vec3(p.x,p.y,z)+offset));
+
+
+    float v = 0.0;
+    p.x*=aspect;
+
+    v+=Perlin3D(vec3(p.x,p.y,z)+offset);
+
+    if (harmonics >= 2.0) v += Perlin3D(vec3(p.x,p.y,z)*2.2+offset) * 0.5;
+    if (harmonics >= 3.0) v += Perlin3D(vec3(p.x,p.y,z)*4.3+offset) * 0.25;
+    if (harmonics >= 4.0) v += Perlin3D(vec3(p.x,p.y,z)*8.4+offset) * 0.125;
+    if (harmonics >= 5.0) v += Perlin3D(vec3(p.x,p.y,z)*16.5+offset) * 0.0625;
+
+
     v*=rangeMul;
     v=v*0.5+0.5;
     float v2=v;
@@ -247,6 +266,10 @@ void main()
 
     vec4 col=vec4(v,v2,v3,1.0);
 
+    float str=1.0;
+    #ifdef HAS_TEX_MASK
+        str=texture(texMask,texCoord).r;
+    #endif
 
-    outColor=cgl_blend(base,col,amount);
+    outColor=cgl_blend(base,col,amount*str);
 }
