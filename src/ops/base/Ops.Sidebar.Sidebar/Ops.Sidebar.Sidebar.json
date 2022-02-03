@@ -114,5 +114,12 @@
     "relatedops": null,
     "youtubeids": [
         "cpRVswVdvI0"
+    ],
+    "changelog": [
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888157315
+        }
     ]
 }

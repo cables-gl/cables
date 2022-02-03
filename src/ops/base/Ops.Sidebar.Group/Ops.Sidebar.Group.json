@@ -47,5 +47,12 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888105549
+        }
+    ]
 }

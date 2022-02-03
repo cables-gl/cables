@@ -87,5 +87,12 @@
                 "text": "Either `1`, `2`, `3` or `4`"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "do not reset to default-bpm while recording",
+            "author": "stephan",
+            "date": 1643887931009
+        }
+    ]
 }

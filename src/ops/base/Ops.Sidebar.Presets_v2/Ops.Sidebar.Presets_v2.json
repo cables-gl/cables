@@ -101,5 +101,12 @@
     "summary": "manage sidebar presets",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888121397
+        }
+    ]
 }

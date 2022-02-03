@@ -68,5 +68,12 @@
                 "text": "Current number in loop"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "add current count in extended title",
+            "author": "stephan",
+            "date": 1643887814335
+        }
+    ]
 }
