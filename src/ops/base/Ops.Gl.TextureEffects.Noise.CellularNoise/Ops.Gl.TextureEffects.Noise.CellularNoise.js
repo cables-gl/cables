@@ -6,6 +6,7 @@ const
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
     scale = op.inValue("Scale", 3),
+    inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
     tile = op.inValueBool("Tileable", false),
 
     trigger = op.outTrigger("trigger");
@@ -45,6 +46,12 @@ const
 const uniOffMul = new CGL.Uniform(shader, "f", "offMul", inOffsetMul);
 
 op.setPortGroup("Offset Map", [inTexOffsetTex, offsetZ, offsetY, offsetX, inOffsetMul]);
+
+const uniHarmonics = new CGL.Uniform(shader, "f", "harmonics", 0);
+inHarmonics.onChange = () =>
+{
+    uniHarmonics.setValue(parseFloat(inHarmonics.get()));
+};
 
 offsetX.onChange =
 offsetY.onChange =
