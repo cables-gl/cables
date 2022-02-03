@@ -37,13 +37,7 @@ class CopyTexture
 
         const textureUniform = new CGL.Uniform(this.bgShader, "t", "tex", 0);
 
-        // this.effect = new CGL.TextureEffect(this.cgl, { "isFloatingPointTexture": this._options.isFloatingPointTexture, "clear": false });
-
         this.mesh = MESHES.getSimpleRect(this.cgl, "texEffectRect");
-
-        // this._uniTexInput =
-
-        // console.log(this.effect);
     }
 
     copy(tex)
@@ -59,22 +53,11 @@ class CopyTexture
         }
         else
         {
-            // if (IS_WEBGL_1)
-            // {
-            //     this._fb = new CGL.Framebuffer(cgl, size, size, {
-            //         "isFloatingPointTexture": true,
-            //         "filter": CGL.Texture.FILTER_LINEAR,
-            //         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
-            //     });
-            // }
-            // else
-            // {
             this._fb = new CGL.Framebuffer2(cgl, w, h, {
                 "isFloatingPointTexture": this._options.isFloatingPointTexture,
                 "filter": CGL.Texture.FILTER_LINEAR,
                 "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
             });
-            // }
         }
 
         cgl.frameStore.renderOffscreen = true;

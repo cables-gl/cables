@@ -278,8 +278,6 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-
-    console.log("is float", this.textureType == Texture.TYPE_FLOAT);
     if (this.textureType == Texture.TYPE_FLOAT)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, data);
     else
