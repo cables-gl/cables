@@ -1,5 +1,5 @@
-let inArr = op.inArray("Array3x");
-let outArr = op.outArray("Array2x");
+let inArr = op.inArray("Array3x", null, 3);
+let outArr = op.outArray("Array2x", null, 2);
 
 let arr = [];
 

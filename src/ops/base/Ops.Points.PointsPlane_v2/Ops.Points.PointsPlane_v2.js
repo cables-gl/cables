@@ -5,11 +5,11 @@ const
     inWidth = op.inFloat("Height", 2),
     inRowOffset = op.inFloat("Row Offset", 0),
     inCenter = op.inValueBool("Center", true),
-    outArr = op.outArray("Result"),
+    outArr = op.outArray("Result", [], 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length"),
-    outRowNums = op.outArray("Row Numbers"),
-    outColNums = op.outArray("Column Numbers");
+    outRowNums = op.outArray("Row Numbers", [], 1),
+    outColNums = op.outArray("Column Numbers", [], 1);
 
 inNumX.onChange =
 inNumY.onChange =

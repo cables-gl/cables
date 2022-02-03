@@ -711,9 +711,9 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.inArray = function (name, v)
+    Op.prototype.inArray = function (name, v, stride)
     {
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -856,9 +856,9 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outArray = function (name, v)
+    Op.prototype.outArray = function (name, v, stride)
     {
-        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
+        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;

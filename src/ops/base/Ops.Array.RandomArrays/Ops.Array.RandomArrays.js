@@ -23,12 +23,14 @@ for (let i = 0; i < inArray.length; i += 1)
     if (i > 0) keys.forEach(function (key) { portObj[key].setUiAttribs({ "greyout": true }); });
 }
 
-const outValues = op.outArray("Array Out");
+const outValues = op.outArray("Array Out", [], 1);
 
 inModeSwitch.onChange = function ()
 {
     const mode = inModeSwitch.get();
     const modes = inModeSwitch.uiAttribs.values;
+
+    outValues.setUiAttribs({ "stride": inModeSwitch.get().length });
 
     const index = modes.indexOf(mode);
 
