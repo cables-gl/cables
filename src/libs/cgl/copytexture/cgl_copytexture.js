@@ -7,10 +7,8 @@ class CopyTexture
     {
         this.cgl = cgl;
 
-        this.effect = null;
         this._options = options;
         this._fb = null;
-        this._prevViewPort = [];
 
         const shader = options.shader || ""
             .endl() + "UNI sampler2D tex;"
@@ -34,7 +32,7 @@ class CopyTexture
             .endl() + "}";
 
 
-        this.bgShader = new CGL.Shader(cgl, "copytexture");
+        this.bgShader = new CGL.Shader(cgl, "corelib copytexture " + name);
         this.bgShader.setSource(verts, shader);
 
         const textureUniform = new CGL.Uniform(this.bgShader, "t", "tex", 0);
@@ -84,13 +82,22 @@ class CopyTexture
 
         cgl.setTexture(0, tex.tex);
 
+        cgl.pushShader(this.bgShader);
         this.mesh.render(this.bgShader);
+        cgl.popShader();
 
         this._fb.renderEnd();
         cgl.frameStore.renderOffscreen = false;
 
 
         return this._fb.getTextureColor();
+    }
+
+    dispose()
+    {
+        this._fb.dispose();
+        this.bgShader.dispose();
+        this.mesh.dispose();
     }
 }
 

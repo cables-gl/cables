@@ -147,6 +147,7 @@ function doRender()
 
     updateResolution();
 
+    const oldEffect = cgl.currentTextureEffect;
     cgl.currentTextureEffect = effect;
     effect.setSourceTexture(tex);
 
@@ -170,7 +171,7 @@ function doRender()
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
     cgl.popBlend(false);
-    cgl.currentTextureEffect = null;
+    cgl.currentTextureEffect = oldEffect;
 }
 
 function onWrapChange()
