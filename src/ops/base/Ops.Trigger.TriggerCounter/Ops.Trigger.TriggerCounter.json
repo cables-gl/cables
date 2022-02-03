@@ -46,5 +46,12 @@
                 "text": "The number of times the input port `Execute` has been triggered  "
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "add current count in extended title",
+            "author": "stephan",
+            "date": 1643887791013
+        }
+    ]
 }

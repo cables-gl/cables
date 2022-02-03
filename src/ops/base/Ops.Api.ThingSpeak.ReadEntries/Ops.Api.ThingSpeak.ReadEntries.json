@@ -71,5 +71,12 @@
                 "text": "Whether or not the read succeeded"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed a typo that would lead to not reading entries at all",
+            "author": "stephan",
+            "date": 1643887331357
+        }
+    ]
 }

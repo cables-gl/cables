@@ -31,6 +31,11 @@
             "message": "Ops.User.pandur.Ops.Sidebar.SidebarVariables renamed to Ops.Sidebar.SidebarVariables",
             "author": "pandur",
             "date": 1562068752993
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888145467
         }
     ],
     "summary": "show values of all variables in a sidebar",

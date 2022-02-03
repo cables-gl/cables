@@ -28,5 +28,12 @@
     "summary": "display a value or string",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888074052
+        }
+    ]
 }

@@ -94,5 +94,12 @@
                 "text": "the current value"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888099984
+        }
+    ]
 }

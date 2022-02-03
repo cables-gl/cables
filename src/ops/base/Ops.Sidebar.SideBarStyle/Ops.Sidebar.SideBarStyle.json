@@ -15,6 +15,11 @@
             "message": "Ops.User.pandur.SideBarStyle renamed to Ops.Sidebar.SideBarStyle",
             "author": "pandur",
             "date": 1622531294836
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888127921
         }
     ],
     "authorName": "pandur",

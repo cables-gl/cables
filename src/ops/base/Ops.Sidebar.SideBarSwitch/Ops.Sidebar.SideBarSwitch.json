@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.sidebartabs renamed to Ops.Sidebar.SideBarSwitch",
             "author": "pandur",
             "date": 1622531349899
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888132724
         }
     ],
     "authorName": "pandur",
