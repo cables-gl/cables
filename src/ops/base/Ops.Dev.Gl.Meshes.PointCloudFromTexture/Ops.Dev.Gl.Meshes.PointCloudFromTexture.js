@@ -15,7 +15,7 @@ let numVerts = 0;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
-    // "priority": 111,
+    "priority": -10,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": "",
@@ -90,8 +90,7 @@ function setupMesh()
 
     if (mesh)mesh.dispose();
 
-    if (numVerts > 0)
-        mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
 
     if (!mesh) return;
     mesh.addVertexNumbers = true;
