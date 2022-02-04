@@ -341,7 +341,8 @@ Geometry.prototype.calculateNormals = function (options)
     else
     {
         const faceNormals = [];
-        faceNormals.length = this.verticesIndices.length / 3;
+
+        faceNormals.length = Math.floor(this.verticesIndices.length / 3);
 
 
         for (let i = 0; i < this.verticesIndices.length; i += 3)
