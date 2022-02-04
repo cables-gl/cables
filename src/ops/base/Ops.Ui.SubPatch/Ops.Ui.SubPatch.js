@@ -179,7 +179,7 @@ function setupPorts()
 
 op.addNewInPort = function (otherPort, type, objType)
 {
-    const newName = "out" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
+    const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
 
     const o = { "name": newName, "type": otherPort.type };
     if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
