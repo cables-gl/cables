@@ -1,51 +1,51 @@
-const inArray=op.inArray("Array in"),
-        outArray=op.outArray("Array out"),
-        outArrayLength = op.outNumber("Array lengths"),
-        newArr=[];
+const inArray = op.inArray("Array in", 3),
+    outArray = op.outArray("Array out"),
+    outArrayLength = op.outNumber("Array lengths"),
+    newArr = [];
 
 outArray.set(newArr);
 
-var showingError = false;
+let showingError = false;
 
 inArray.onChange =
-inArray.onChange=function()
+inArray.onChange = function ()
 {
-    var arr=inArray.get();
+    let arr = inArray.get();
 
-    if(!arr)
+    if (!arr)
     {
         outArray.set(null);
         return;
     }
 
-    if(newArr.length!=arr.length)newArr.length=arr.length;
+    if (newArr.length != arr.length)newArr.length = arr.length;
 
-    newArr.length = Math.floor(arr.length/3);
+    newArr.length = Math.floor(arr.length / 3);
 
-    if(arr.length % 3 !== 0)
+    if (arr.length % 3 !== 0)
     {
-        if(!showingError)
+        if (!showingError)
         {
-            op.uiAttr({error:"Arrays length not divisible by 3 !"});
+            op.uiAttr({ "error": "Arrays length not divisible by 3 !" });
             showingError = true;
         }
         return;
     }
 
-    if(showingError)
+    if (showingError)
     {
         showingError = false;
-        op.uiAttr({error:null});
+        op.uiAttr({ "error": null });
     }
 
-    var vec = vec3.create();
+    let vec = vec3.create();
 
-    for(var i=0;i<newArr.length;i++)
+    for (let i = 0; i < newArr.length; i++)
     {
-        //get xyz components place into a vec3
-        vec3.set(vec,arr[i*3+0],arr[i*3+1],arr[i*3+2]);
-        //get length of vector and place into array- note single number !
-        newArr[i] = vec3.len(vec) ;
+        // get xyz components place into a vec3
+        vec3.set(vec, arr[i * 3 + 0], arr[i * 3 + 1], arr[i * 3 + 2]);
+        // get length of vector and place into array- note single number !
+        newArr[i] = vec3.len(vec);
     }
 
     outArray.set(null);

@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.LocalFileToDataUrl renamed to Ops.Sidebar.LocalFileToDataUrl",
             "author": "pandur",
             "date": 1597843619028
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888092603
         }
     ],
     "authorName": "pandur",

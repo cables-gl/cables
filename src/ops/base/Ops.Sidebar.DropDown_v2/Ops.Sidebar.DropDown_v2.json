@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "tim",
             "date": 1579692851160
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888080304
         }
     ],
     "authorName": "tim",

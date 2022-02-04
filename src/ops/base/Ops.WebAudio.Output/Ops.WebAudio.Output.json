@@ -38,5 +38,12 @@
                 "text": "Mutes the input"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "un-suspending the audiocontext via integrated play-button does not \"pop\" volume anymore",
+            "author": "stephan",
+            "date": 1643887951231
+        }
+    ]
 }

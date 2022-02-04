@@ -107,6 +107,11 @@
             "message": "Ops.User.pandur.ColorPicker2 renamed to Ops.Sidebar.ColorPicker_v3",
             "author": "pandur",
             "date": 1629366157692
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888065820
         }
     ],
     "libs": [
