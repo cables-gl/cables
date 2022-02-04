@@ -10,6 +10,8 @@ const tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
         "isFloatingPointTexture": true
     });
 
+outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+
 exec.onTriggered = () =>
 {
     if (!inTex.get()) return;
