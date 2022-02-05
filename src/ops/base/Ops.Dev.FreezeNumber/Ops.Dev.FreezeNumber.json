@@ -1,0 +1,48 @@
+{
+    "id": "97dea923-f00f-44cf-bef9-808a2556105b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1643831572318
+        },
+        {
+            "message": "Ops.User.pandur.FreezeString renamed to Ops.Dev.FreezeString",
+            "author": "pandur",
+            "date": 1644069266522
+        },
+        {
+            "message": "cloned op from Ops.Dev.FreezeString",
+            "author": "pandur",
+            "date": 1644069298775
+        },
+        {
+            "message": "Ops.User.pandur.Ops.Dev.FreezeNumber renamed to Ops.Dev.FreezeNumber",
+            "author": "pandur",
+            "date": 1644069354548
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Button"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Frozen Number",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Dev.FreezeNumber"
+    },
+    "authorName": "pandur",
+    "created": 1644069298775
+}
