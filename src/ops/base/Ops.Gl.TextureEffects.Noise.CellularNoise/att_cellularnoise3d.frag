@@ -6,12 +6,16 @@ IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float amount;
 UNI float harmonics;
+UNI float aspect;
 
 #ifdef HAS_TEX_OFFSETMAP
     UNI sampler2D texOffsetZ;
     UNI float offMul;
 #endif
 
+#ifdef HAS_TEX_MASK
+    UNI sampler2D texMask;
+#endif
 
 {{CGL.BLENDMODES}}
 
@@ -129,6 +133,8 @@ void main()
         p=abs(texCoord-0.5);
     #endif
 
+    p.x*=aspect;
+
     p=p*scale;
 
     p=vec2(p.x+0.5-x,p.y+0.5-y);
@@ -185,6 +191,11 @@ void main()
     vec4 base=texture(tex,texCoord);
 
 
-    outColor=cgl_blend(base,col,amount);
+    float str=1.0;
+    #ifdef HAS_TEX_MASK
+        str=texture(texMask,texCoord).r;
+    #endif
+
+    outColor=cgl_blend(base,col,amount*str);
 
 }

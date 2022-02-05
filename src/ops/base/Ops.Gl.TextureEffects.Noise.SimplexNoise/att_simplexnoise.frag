@@ -7,6 +7,20 @@ UNI float seed;
 UNI float x;
 UNI float y;
 UNI float time;
+UNI float aspect;
+UNI float harmonics;
+
+#ifdef HAS_TEX_OFFSETMAP
+    UNI sampler2D texOffsetZ;
+    UNI float offMul;
+#endif
+
+
+#ifdef HAS_TEX_MASK
+    UNI sampler2D texMask;
+#endif
+
+
 
 {{CGL.BLENDMODES}}
 
@@ -159,16 +173,74 @@ void main()
 {
 
     vec2 p=vec2(texCoord.x-0.5,texCoord.y-0.5);
+
+    p.x*=aspect;
+
+
     p=p*scale;
 
     p=vec2(p.x+0.5-x,p.y+0.5-y);
 
-    float v=SimplexPerlin3D(vec3(p.x,p.y,time))*0.5+0.5;
+    vec3 offset;
+    #ifdef HAS_TEX_OFFSETMAP
+        vec4 offMap=texture(texOffsetZ,texCoord);
+
+        #ifdef OFFSET_X_R
+            offset.x=offMap.r;
+        #endif
+        #ifdef OFFSET_X_G
+            offset.x=offMap.g;
+        #endif
+        #ifdef OFFSET_X_B
+            offset.x=offMap.b;
+        #endif
+
+        #ifdef OFFSET_Y_R
+            offset.y=offMap.r;
+        #endif
+        #ifdef OFFSET_Y_G
+            offset.y=offMap.g;
+        #endif
+        #ifdef OFFSET_Y_B
+            offset.y=offMap.b;
+        #endif
+
+        #ifdef OFFSET_Z_R
+            offset.z=offMap.r;
+        #endif
+        #ifdef OFFSET_Z_G
+            offset.z=offMap.g;
+        #endif
+        #ifdef OFFSET_Z_B
+            offset.z=offMap.b;
+        #endif
+
+        offset*=offMul;
+    #endif
+
+    float v=SimplexPerlin3D(vec3(p.x,p.y,time)+offset)*0.5+0.5;
+
+
+    if (harmonics >= 2.0) v += SimplexPerlin3D(vec3(p.x,p.y,time)*2.3+offset) * 0.5;
+    if (harmonics >= 3.0) v += SimplexPerlin3D(vec3(p.x,p.y,time)*4.2+offset) * 0.25;
+    if (harmonics >= 4.0) v += SimplexPerlin3D(vec3(p.x,p.y,time)*8.1+offset) * 0.125;
+    if (harmonics >= 5.0) v += SimplexPerlin3D(vec3(p.x,p.y,time)*16.7+offset) * 0.0625;
+
+
 
     //blend section
     vec4 col=vec4(v,v,v,1.0);
 
     vec4 base=texture(tex,texCoord);
 
-    outColor=cgl_blend(base,col,amount);
+    // outColor=cgl_blend(base,col,amount);
+
+
+    float str=1.0;
+    #ifdef HAS_TEX_MASK
+        str=texture(texMask,texCoord).r;
+    #endif
+
+    outColor=cgl_blend(base,col,amount*str);
+
 }

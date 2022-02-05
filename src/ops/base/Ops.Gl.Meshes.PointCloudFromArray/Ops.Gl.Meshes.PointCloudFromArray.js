@@ -1,13 +1,13 @@
 const
     exe = op.inTrigger("exe"),
-    arr = op.inArray("Array"),
+    arr = op.inArray("Array", 3),
     numPoints = op.inValueInt("Num Points"),
     outTrigger = op.outTrigger("Trigger out"),
     outGeom = op.outObject("Geometry"),
     pTexCoordRand = op.inValueBool("Scramble Texcoords", true),
     seed = op.inValue("Seed"),
-    inCoords = op.inArray("Coordinates"),
-    vertCols = op.inArray("Vertex Colors");
+    inCoords = op.inArray("Coordinates", 2),
+    vertCols = op.inArray("Vertex Colors", 4);
 
 const cgl = op.patch.cgl;
 
@@ -71,6 +71,8 @@ function updateTexCoordsPorts()
 
     mesh = null;
     needsRebuild = true;
+
+    console.log("AJHKA", inCoords.isLinked(), inCoords.get());
 }
 
 function updateNumVerts()
@@ -121,20 +123,22 @@ function rebuild()
 
     if (!texCoords || texCoords.length != num * 2) texCoords = new Float32Array(num * 2); // num*2;//=
 
-    let changed = false;
+    let changed = true;
     let rndTc = pTexCoordRand.get();
 
-    Math.randomSeed = seed.get();
-    let genCoords = !inCoords.isLinked();
-    changed = !inCoords.isLinked();
-
-    for (let i = 0; i < num; i++)
+    if (!inCoords.isLinked())
     {
-        if (geom.vertices[i * 3] != verts[i * 3] ||
-            geom.vertices[i * 3 + 1] != verts[i * 3 + 1] ||
-            geom.vertices[i * 3 + 2] != verts[i * 3 + 2])
+        Math.randomSeed = seed.get();
+        texCoords = []; // needed otherwise its using the reference to input incoords port
+        // let genCoords = !inCoords.isLinked();
+
+        for (let i = 0; i < num; i++)
         {
-            if (genCoords)
+            if (geom.vertices[i * 3] != verts[i * 3] ||
+                geom.vertices[i * 3 + 1] != verts[i * 3 + 1] ||
+                geom.vertices[i * 3 + 2] != verts[i * 3 + 2])
+            {
+                // if (genCoords)
                 if (rndTc)
                 {
                     texCoords[i * 2] = Math.seededRandom();
@@ -145,7 +149,7 @@ function rebuild()
                     texCoords[i * 2] = i / num;
                     texCoords[i * 2 + 1] = i / num;
                 }
-            changed = true;
+            }
         }
     }
 
@@ -163,9 +167,13 @@ function rebuild()
     }
     else geom.vertexColors = [];
 
+    console.log("changed", changed);
+
     if (changed)
     {
-        if (!genCoords) texCoords = inCoords.get();
+        if (inCoords.isLinked()) texCoords = inCoords.get();
+
+        // console.log(texCoords,inCoords.isLinked());
 
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);

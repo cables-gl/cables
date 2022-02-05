@@ -1,11 +1,14 @@
 const
     render = op.inTrigger("render"),
+    inTexMask = op.inTexture("Mask"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
     scale = op.inValue("Scale", 3),
+    inAspect = op.inBool("Aspect", false),
+
     inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
     tile = op.inValueBool("Tileable", false),
 
@@ -18,6 +21,7 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.cellularnoise3d_fr
 
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniOffset = new CGL.Uniform(shader, "t", "texOffsetZ", 1),
+    uniMask = new CGL.Uniform(shader, "t", "texMask", 2),
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
     uniZ = new CGL.Uniform(shader, "f", "z", z),
     uniX = new CGL.Uniform(shader, "f", "x", x),
@@ -47,6 +51,7 @@ const uniOffMul = new CGL.Uniform(shader, "f", "offMul", inOffsetMul);
 
 op.setPortGroup("Offset Map", [inTexOffsetTex, offsetZ, offsetY, offsetX, inOffsetMul]);
 
+const uniAspect = new CGL.Uniform(shader, "f", "aspect", 1);
 const uniHarmonics = new CGL.Uniform(shader, "f", "harmonics", 0);
 inHarmonics.onChange = () =>
 {
@@ -56,9 +61,11 @@ inHarmonics.onChange = () =>
 offsetX.onChange =
 offsetY.onChange =
 offsetZ.onChange =
+inTexMask.onChange =
 inTexOffsetTex.onChange = () =>
 {
     shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetTex.get());
+    shader.toggleDefine("HAS_TEX_MASK", inTexMask.get());
 
     shader.toggleDefine("OFFSET_X_R", offsetX.get() == "R");
     shader.toggleDefine("OFFSET_X_G", offsetX.get() == "G");
@@ -86,8 +93,12 @@ render.onTriggered = function ()
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
+    if (inAspect.get()) uniAspect.setValue(cgl.currentTextureEffect.getWidth() / cgl.currentTextureEffect.getHeight());
+    else uniAspect.setValue(1);
+
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     if (inTexOffsetTex.get()) cgl.setTexture(1, inTexOffsetTex.get().tex);
+    if (inTexMask.get()) cgl.setTexture(2, inTexMask.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

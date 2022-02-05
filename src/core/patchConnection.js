@@ -109,7 +109,9 @@ PatchConnectionReceiver.prototype._receive = function (ev)
         }
         const port1 = op1.getPort(data.vars.port1);
         const port2 = op2.getPort(data.vars.port2);
-        port1.removeLinkTo(port2);
+
+        if (port1 && port2) port1.removeLinkTo(port2);
+        else this._log.warn("paco unlink could not find port...");
     }
     else if (data.event == CONSTANTS.PACO.PACO_LINK)
     {

@@ -100,7 +100,7 @@ void main()
     mat4 mMatrix=modelMatrix;
     vec4 pos = vec4( vPosition, 1. );
 
-gl_PointSize=0.0;
+    gl_PointSize=0.0;
 
     {{MODULE_VERTEX_POSITION}}
 
@@ -128,16 +128,14 @@ gl_PointSize=0.0;
 
             addPointSize=1.0-(distance(addPointSize,0.5)*2.0);
             // addPointSize=abs(1.0-(distance(addPointSize,0.5)*2.0));
-addPointSize=addPointSize*addPointSize*addPointSize*2.0;
+            addPointSize=addPointSize*addPointSize*addPointSize*2.0;
 
             // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
         #endif
 
-addPointSize*=texPointSizeMul;
-
+        addPointSize*=texPointSizeMul;
 
     #endif
-
 
     ps=0.0;
     #ifndef SCALE_BY_DISTANCE
