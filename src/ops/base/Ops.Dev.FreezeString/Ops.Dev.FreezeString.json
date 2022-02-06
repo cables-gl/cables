@@ -1,0 +1,36 @@
+{
+    "id": "9ae2598f-8b5a-4749-aff3-a507c9957225",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1643831572318
+        },
+        {
+            "message": "Ops.User.pandur.FreezeString renamed to Ops.Dev.FreezeString",
+            "author": "pandur",
+            "date": 1644069266522
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 1,
+                "name": "Button"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Frozen String"
+            }
+        ],
+        "name": "Ops.User.pandur.FreezeString"
+    },
+    "authorName": "pandur",
+    "created": 1643831677411
+}
