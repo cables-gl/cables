@@ -137,7 +137,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Dev.PbrMaterial"
+        "name": "Ops.Gl.Pbr.PbrMaterial"
     },
     "authorName": "amajesticseaflapflap",
     "created": 1642599874914,
