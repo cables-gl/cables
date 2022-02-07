@@ -27,7 +27,7 @@ start.onTriggered = function ()
     if (!canRead)
     {
         outFinished.set(true);
-        op.error("cannot read texture!");
+        op.logError("cannot read texture!");
         return;
     }
 
@@ -49,8 +49,8 @@ start.onTriggered = function ()
     const data2 = imageData.data;
 
     // flip image
-    Array.from({ "length": height }, (val, i) => data2.slice(i * width * 4, (i + 1) * width * 4))
-        .forEach((val, i) => data2.set(val, (height - i - 1) * width * 4));
+    Array.from({ "length": height }, (val, i) => { return data2.slice(i * width * 4, (i + 1) * width * 4); })
+        .forEach((val, i) => { return data2.set(val, (height - i - 1) * width * 4); });
 
     context.putImageData(imageData, 0, 0);
 

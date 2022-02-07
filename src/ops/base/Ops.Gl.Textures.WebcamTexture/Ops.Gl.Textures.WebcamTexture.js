@@ -125,7 +125,7 @@ function startWebcam()
             .catch(function (error)
             {
                 available.set(false);
-                op.error(error.name + ": " + error.message);
+                op.logError(error.name + ": " + error.message);
                 outError.set(error.name + ": " + error.message);
             });
     }
@@ -135,7 +135,7 @@ function startWebcam()
         navigator.getUserMedia(constraints, camInitComplete,
             function (error)
             {
-                op.error(error.name + ": " + error.message);
+                op.logError(error.name + ": " + error.message);
                 available.set(false);
             });
     }

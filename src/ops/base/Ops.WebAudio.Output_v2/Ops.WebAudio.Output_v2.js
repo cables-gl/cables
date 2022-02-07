@@ -58,7 +58,7 @@ inAudio.onChange = function ()
             }
             catch (e)
             {
-                op.error(e);
+                op.logError(e);
             }
         }
 
@@ -103,7 +103,7 @@ function setVolume(fromMute)
     volume = CABLES.clamp(volume, 0, 1);
 
     if (!gainNode)
-        op.error("gainNode undefined");
+        op.logError("gainNode undefined");
 
     if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
 

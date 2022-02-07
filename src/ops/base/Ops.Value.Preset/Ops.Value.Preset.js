@@ -76,7 +76,7 @@ op.init = function ()
 {
     if (presets.length > 0 && data.length == 0)
     {
-        op.error("it happened again!!");
+        op.logError("it happened again!!");
 
         // this happened only once for now, find out how to reproduce it!!!
         const keys = Object.keys(presets[0].values);

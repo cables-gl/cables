@@ -113,7 +113,7 @@ function buildMesh()
     }
     catch (ex)
     {
-        op.error(ex);
+        op.logError(ex);
         return;
     }
 

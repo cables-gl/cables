@@ -30,7 +30,7 @@ function startStop()
     }
     catch (e)
     {
-        op.error(e);
+        op.logError(e);
     }
 }
 

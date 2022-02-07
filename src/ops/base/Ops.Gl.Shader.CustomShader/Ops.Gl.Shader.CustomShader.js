@@ -173,7 +173,7 @@ function updateShader()
         }
         else
         {
-            op.error("unsupported uniform type", uniform.type, uniform);
+            op.logError("unsupported uniform type", uniform.type, uniform);
         }
     }
 

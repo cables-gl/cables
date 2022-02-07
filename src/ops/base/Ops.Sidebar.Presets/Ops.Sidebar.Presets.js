@@ -105,7 +105,7 @@ function deSerializeSidebar(obj)
                 }
                 else
                 {
-                    op.error("unknown p!");
+                    op.logError("unknown p!");
                 }
 
                 const def = theOp.getPortByName("Input");

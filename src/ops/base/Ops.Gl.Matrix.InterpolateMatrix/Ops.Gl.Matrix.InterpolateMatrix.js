@@ -23,7 +23,7 @@ exe.onTriggered = function ()
     if (!arr1 || !arr2 || arr1.length != arr2.length)
     {
         outArr.set(null);
-        op.error("arrays wrong");
+        op.logError("arrays wrong");
     }
     else
     {

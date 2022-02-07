@@ -22,18 +22,17 @@ op.setPortGroup("Rotation", [inDoRot, inRot]);
 op.setPortGroup("Origin", [inDoOrigin, inOriginX, inOriginY]);
 
 inTransUnit.onChange =
-inDoScale.onChange =
-inDoOrigin.onChange =
-inOriginX.onChange =
-inOriginY.onChange =
-inDoRot.onChange =
-inDoTranslate.onChange =
-inDoRot.onChange =
-inTransX.onChange =
-inTransY.onChange =
-inScale.onChange =
-inRot.onChange =
-    update;
+    inDoScale.onChange =
+    inDoOrigin.onChange =
+    inOriginX.onChange =
+    inOriginY.onChange =
+    inDoRot.onChange =
+    inDoTranslate.onChange =
+    inDoRot.onChange =
+    inTransX.onChange =
+    inTransY.onChange =
+    inScale.onChange =
+    inRot.onChange = update;
 
 let ele = null;
 
@@ -76,7 +75,7 @@ function update()
         }
         catch (e)
         {
-            op.error(e);
+            op.logError(e);
         }
     }
     else

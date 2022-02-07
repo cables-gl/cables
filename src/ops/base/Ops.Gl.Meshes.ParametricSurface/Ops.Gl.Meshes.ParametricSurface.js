@@ -788,7 +788,7 @@ const create = () =>
         }
         catch (e)
         {
-            if (e instanceof ReferenceError || e instanceof SyntaxError) { op.error(e); return; }
+            if (e instanceof ReferenceError || e instanceof SyntaxError) { op.logError(e); return; }
             op.log(e);
         }
         geom = new CGL.Geometry("parametric surface");

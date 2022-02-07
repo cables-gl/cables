@@ -76,7 +76,7 @@ function calcNormals()
 {
     if (!geom)
     {
-        op.error("calc normals: no geom!");
+        op.logError("calc normals: no geom!");
         return;
     }
 
@@ -247,7 +247,7 @@ function reload()
                 {
                     if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
 
-                    op.error("ajax error:", err);
+                    op.logError("ajax error:", err);
                     op.patch.loading.finished(loadingId);
                     return;
                 }

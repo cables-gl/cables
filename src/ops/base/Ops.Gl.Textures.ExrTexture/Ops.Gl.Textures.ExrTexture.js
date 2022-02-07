@@ -85,7 +85,7 @@ function loadBin(addCacheBuster)
             }
             catch (e)
             {
-                op.error(e);
+                op.logError(e);
             }
 
             cgl.patch.loading.finished(loadingId);

@@ -17,7 +17,7 @@ const reload = function ()
             }
             catch (e)
             {
-                op.error(e);
+                op.logError(e);
                 result.set(null);
                 len.set(0);
             }

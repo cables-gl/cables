@@ -64,8 +64,8 @@ dataStr.onChange = function ()
     }
     catch (e)
     {
-        op.error("cannot load subpatch data...");
-        op.error(e);
+        op.logError("cannot load subpatch data...");
+        op.logError(e);
     }
 };
 

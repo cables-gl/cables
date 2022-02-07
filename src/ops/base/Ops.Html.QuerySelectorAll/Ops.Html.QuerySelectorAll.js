@@ -6,13 +6,14 @@ const
     inSource = op.inStringEditor("Document", "xml"),
     elementPort = op.outArray("Elements");
 
-if(inMode.get() === "document") {
+if (inMode.get() === "document")
+{
     inSource.setUiAttribs({ "greyout": true });
-    inMimeType.set("text/html")
+    inMimeType.set("text/html");
     inMimeType.setUiAttribs({ "greyout": true });
 }
 
-inUpdate.onTriggered=
+inUpdate.onTriggered =
 queryPort.onChange =
 inMimeType.onChange =
 inSource.onChange = update;
@@ -24,18 +25,23 @@ function update()
     const q = queryPort.get();
     const theDocument = inSource.get();
     const mode = inMode.get();
-    if(mode === "string input" && theDocument) {
+    if (mode === "string input" && theDocument)
+    {
         let parser = new DOMParser();
         let htmlDoc = null;
-        try {
+        try
+        {
             htmlDoc = parser.parseFromString(theDocument, inMimeType.get());
             const el = Array.from(htmlDoc.querySelectorAll(q));
             elementPort.set(el);
         }
-        catch (e) {
-            op.error(e);
+        catch (e)
+        {
+            op.logError(e);
         }
-    }else{
+    }
+    else
+    {
         try
         {
             const el = Array.from(document.querySelectorAll(q));
@@ -43,20 +49,22 @@ function update()
         }
         catch (e)
         {
-            op.error(e);
+            op.logError(e);
         }
     }
-
 }
 
-function modeChange() {
-    if(inMode.get() === "document") {
+function modeChange()
+{
+    if (inMode.get() === "document")
+    {
         inSource.setUiAttribs({ "greyout": true });
-        inMimeType.set("text/html")
+        inMimeType.set("text/html");
         inMimeType.setUiAttribs({ "greyout": true });
-    }else{
+    }
+    else
+    {
         inSource.setUiAttribs({ "greyout": false });
         inMimeType.setUiAttribs({ "greyout": false });
     }
 }
-

@@ -39,7 +39,7 @@ function sendNamedTrigger(name)
 
     if (!arr)
     {
-        op.error("unknown trigger array!", name);
+        op.logError("unknown trigger array!", name);
         return;
     }
 

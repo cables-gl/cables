@@ -151,7 +151,7 @@ function startWebcam()
             .then(camInitComplete)
             .catch(function (error)
             {
-                op.error(error.name + ": " + error.message);
+                op.logError(error.name + ": " + error.message);
                 outError.set(error.name + ": " + error.message);
             });
     }
