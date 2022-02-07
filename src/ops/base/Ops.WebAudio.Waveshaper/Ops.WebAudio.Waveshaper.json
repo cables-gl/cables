@@ -29,6 +29,7 @@
             {
                 "type": 0,
                 "name": "Oversampling index",
+                "group": "Waveshape Settings",
                 "subType": "integer"
             },
             {
