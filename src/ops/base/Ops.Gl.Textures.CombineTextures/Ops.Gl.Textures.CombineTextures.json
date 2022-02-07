@@ -40,6 +40,11 @@
             "message": "Ops.User.pandur.CombineTextures renamed to Ops.Dev.CombineTextures",
             "author": "pandur",
             "date": 1643801154556
+        },
+        {
+            "message": "Ops.Dev.CombineTextures renamed to Ops.Gl.Textures.CombineTextures",
+            "author": "pandur",
+            "date": 1644228725597
         }
     ],
     "coreLibs": [
@@ -56,42 +61,98 @@
             {
                 "type": 2,
                 "name": "R",
+                "group": "Red",
                 "objType": "texture"
             },
             {
                 "type": 0,
                 "name": "R Source index",
+                "group": "Red",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "R Value index",
+                "group": "Red",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "R Default",
+                "group": "Red",
+                "subType": "number"
             },
             {
                 "type": 2,
                 "name": "G",
+                "group": "Green",
                 "objType": "texture"
             },
             {
                 "type": 0,
                 "name": "G Source index",
+                "group": "Green",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "G Value index",
+                "group": "Green",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "G Default",
+                "group": "Green",
+                "subType": "number"
             },
             {
                 "type": 2,
                 "name": "B",
+                "group": "Blue",
                 "objType": "texture"
             },
             {
                 "type": 0,
                 "name": "B Source index",
+                "group": "Blue",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "B Value index",
+                "group": "Blue",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "B Default",
+                "group": "Blue",
+                "subType": "number"
             },
             {
                 "type": 2,
                 "name": "A",
+                "group": "Alpha",
                 "objType": "texture"
             },
             {
                 "type": 0,
                 "name": "A Source index",
+                "group": "Alpha",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "A Value index",
+                "group": "Alpha",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "A Default",
+                "group": "Alpha",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -105,6 +166,15 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.CombineTextures"
+        "name": "Ops.Gl.Textures.CombineTextures"
+    },
+    "summary": "combine multiple textures into one by copying colorchannels",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

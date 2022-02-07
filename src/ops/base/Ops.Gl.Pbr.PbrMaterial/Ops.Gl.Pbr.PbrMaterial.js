@@ -15,7 +15,7 @@ const inRoughness = op.inFloatSlider("Roughness", 0.5);
 const inMetalness = op.inFloatSlider("Metalness", 1.0);
 const inToggleGS = op.inBool("Use mesh tangents/binormals", false);
 const inToggleGR = op.inBool("Disable geometric roughness", false);
-const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Opaque");
+const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");

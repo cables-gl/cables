@@ -45,6 +45,11 @@
             "message": "Ops.User.pandur.MeshInstancerFromTexture2 renamed to Ops.Dev.Gl.Meshes.MeshInstancerFromTexture_v2",
             "author": "pandur",
             "date": 1635878441688
+        },
+        {
+            "message": "Ops.Dev.Gl.Meshes.MeshInstancerFromTexture_v2 renamed to Ops.Gl.Meshes.MeshInstancerFromTexture_v2",
+            "author": "pandur",
+            "date": 1644228890076
         }
     ],
     "authorName": "pandur",

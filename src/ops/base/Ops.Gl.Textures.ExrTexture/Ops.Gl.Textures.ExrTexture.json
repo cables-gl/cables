@@ -20,6 +20,11 @@
             "message": " added lib: exrloader.js",
             "author": "pandur",
             "date": 1643645515924
+        },
+        {
+            "message": "Ops.Dev.ExrTexture renamed to Ops.Gl.Textures.ExrTexture",
+            "author": "pandur",
+            "date": 1644228701961
         }
     ],
     "authorName": "pandur",
@@ -67,5 +72,14 @@
     "libs": [
         "fflate.js",
         "exrloader.js"
-    ]
+    ],
+    "summary": "load .exr floating point texture files",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
