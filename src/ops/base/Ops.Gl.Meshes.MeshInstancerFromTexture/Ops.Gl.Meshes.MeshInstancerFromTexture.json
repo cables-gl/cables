@@ -35,6 +35,11 @@
             "message": "Ops.Gl.Meshes.MeshInstancerFromTexture renamed to Ops.Dev.Gl.Meshes.MeshInstancerFromTexture",
             "author": "pandur",
             "date": 1628066474823
+        },
+        {
+            "message": "Ops.Dev.Gl.Meshes.MeshInstancerFromTexture renamed to Ops.Gl.Meshes.MeshInstancerFromTexture",
+            "author": "pandur",
+            "date": 1644230341657
         }
     ],
     "authorName": "pandur",
@@ -130,5 +135,6 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "caniusequery": ""
 }

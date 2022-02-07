@@ -30,6 +30,11 @@
             "message": "Ops.Gl.Meshes.PointCloudFromTexture renamed to Ops.Dev.Gl.Meshes.PointCloudFromTexture",
             "author": "pandur",
             "date": 1628153813182
+        },
+        {
+            "message": "Ops.Dev.Gl.Meshes.PointCloudFromTexture renamed to Ops.Gl.Meshes.PointCloudFromTexture",
+            "author": "pandur",
+            "date": 1644228870110
         }
     ],
     "authorName": "pandur",
@@ -76,5 +81,14 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "visualize a RGB texture as XYZ coordinates as points",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

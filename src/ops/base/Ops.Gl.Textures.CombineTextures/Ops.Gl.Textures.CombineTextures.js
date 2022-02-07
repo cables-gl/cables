@@ -4,9 +4,9 @@ const
     inTexR = op.inTexture("R"),
     inSrcR = op.inSwitch("R Source", ["R", "G", "B", "A"], "R"),
     inTexG = op.inTexture("G"),
-    inSrcG = op.inSwitch("G Source", ["R", "G", "B", "A"], "R"),
+    inSrcG = op.inSwitch("G Source", ["R", "G", "B", "A"], "G"),
     inTexB = op.inTexture("B"),
-    inSrcB = op.inSwitch("B Source", ["R", "G", "B", "A"], "R"),
+    inSrcB = op.inSwitch("B Source", ["R", "G", "B", "A"], "B"),
     inTexA = op.inTexture("A"),
     inSrcA = op.inSwitch("A Source", ["R", "G", "B", "A"], "R"),
 

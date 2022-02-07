@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "amajesticseaflapflap",
             "date": 1642599258807
+        },
+        {
+            "message": "Ops.Dev.PbrMaterial renamed to Ops.Gl.Pbr.PbrMaterial",
+            "author": "pandur",
+            "date": 1644228803318
         }
     ],
     "layout": {
@@ -149,6 +154,14 @@
             "url": "https://github.com/google/filament/blob/main/LICENSE",
             "licence": "Apache License"
         }
-    ]
-
+    ],
+    "summary": "PBR/Physical Based Rendering Material for realistic materials",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

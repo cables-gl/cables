@@ -10,6 +10,11 @@
             "message": "Ops.User.simod.TestDistortion renamed to Ops.WebAudio.Waveshaper",
             "author": "simod",
             "date": 1618845684382
+        },
+        {
+            "message": "fix: use default values on creation",
+            "author": "pandur",
+            "date": 1644222283756
         }
     ],
     "authorName": "simod",

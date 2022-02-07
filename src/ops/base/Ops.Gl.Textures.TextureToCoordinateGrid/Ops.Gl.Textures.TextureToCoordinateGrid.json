@@ -1,5 +1,5 @@
 {
-    "id": "5f33dd4a-a553-4f0f-b3b1-66a80cd240a7",
+    "id": "91f30465-4a4c-4447-9b16-072252f0a977",
     "changelog": [
         {
             "message": "created op",
@@ -32,21 +32,16 @@
             "date": 1643797942632
         },
         {
-            "message": "cloned op from Ops.Dev.TextureToCoordinateGrid",
+            "message": "Ops.Dev.TextureToCoordinateGrid renamed to Ops.Gl.Textures.TextureToCoordinateGrid",
             "author": "pandur",
-            "date": 1643798809254
-        },
-        {
-            "message": "Ops.User.pandur.CombineTextures renamed to Ops.Dev.CombineTextures",
-            "author": "pandur",
-            "date": 1643801154556
+            "date": 1644229037728
         }
     ],
     "coreLibs": [
         "cgl_copytexture"
     ],
     "authorName": "pandur",
-    "created": 1643798809254,
+    "created": 1643797752609,
     "layout": {
         "portsIn": [
             {
@@ -55,43 +50,18 @@
             },
             {
                 "type": 2,
-                "name": "R",
+                "name": "RGBE Texture",
                 "objType": "texture"
             },
             {
                 "type": 0,
-                "name": "R Source index",
-                "subType": "integer"
-            },
-            {
-                "type": 2,
-                "name": "G",
-                "objType": "texture"
+                "name": "Aspect",
+                "subType": "number"
             },
             {
                 "type": 0,
-                "name": "G Source index",
-                "subType": "integer"
-            },
-            {
-                "type": 2,
-                "name": "B",
-                "objType": "texture"
-            },
-            {
-                "type": 0,
-                "name": "B Source index",
-                "subType": "integer"
-            },
-            {
-                "type": 2,
-                "name": "A",
-                "objType": "texture"
-            },
-            {
-                "type": 0,
-                "name": "A Source index",
-                "subType": "integer"
+                "name": "Threshold",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -101,10 +71,19 @@
             },
             {
                 "type": 2,
-                "name": "Texture",
+                "name": "HDR Texture",
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.CombineTextures"
+        "name": "Ops.Dev.TextureToCoordinateGrid"
+    },
+    "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
