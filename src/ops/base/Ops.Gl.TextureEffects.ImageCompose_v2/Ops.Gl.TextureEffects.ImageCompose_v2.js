@@ -149,6 +149,8 @@ function doRender()
 
     const oldEffect = cgl.currentTextureEffect;
     cgl.currentTextureEffect = effect;
+    cgl.currentTextureEffect.width = width.get();
+    cgl.currentTextureEffect.height = height.get();
     effect.setSourceTexture(tex);
 
     let bgTex = CGL.Texture.getBlackTexture(cgl);
