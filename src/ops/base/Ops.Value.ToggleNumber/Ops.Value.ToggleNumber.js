@@ -1,12 +1,13 @@
-// inputs
-const useValue1Port = op.inValueBool("Use Value 1", false);
-const value0port = op.inValue("Value 0", 0);
-const value1port = op.inValue("Value 1", 1);
+const
+    useValue1Port = op.inValueBool("Use Value 1", false),
+    value0port = op.inValue("Value 0", 0),
+    value1port = op.inValue("Value 1", 1),
+    outValuePort = op.outNumber("Out Value", 0);
 
-// outputs
-const outValuePort = op.outValue("Out Value", 0);
+value0port.onChange =
+    value1port.onChange =
+    useValue1Port.onChange = setOutput;
 
-// functions
 function setOutput()
 {
     const useValue1 = useValue1Port.get();
@@ -19,8 +20,3 @@ function setOutput()
         outValuePort.set(value0port.get());
     }
 }
-
-// change listeners
-value0port.onChange = setOutput;
-value1port.onChange = setOutput;
-useValue1Port.onChange = setOutput;

@@ -2,7 +2,7 @@ const
     inBool = op.inValueBool("Boolean"),
     valFalse = op.inValue("Value false", 0),
     valTrue = op.inValue("Value true", 1),
-    outVal = op.outValue("Result");
+    outVal = op.outNumber("Result");
 
 inBool.onChange =
     valTrue.onChange =
