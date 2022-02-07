@@ -1,58 +1,58 @@
-var inArr=op.inArray("Array");
+let inArr = op.inArray("Array"),
 
-var outNum=op.outValue("Num Items");
+    outNum = op.outValue("Num Items"),
 
-var outMinX=op.outValue("Min X");
-var outMaxX=op.outValue("Max X");
-var outAvgX=op.outValue("Average X");
+    outMinX = op.outNumber("Min X"),
+    outMaxX = op.outNumber("Max X"),
+    outAvgX = op.outNumber("Average X"),
 
-var outMinY=op.outValue("Min Y");
-var outMaxY=op.outValue("Max Y");
-var outAvgY=op.outValue("Average Y");
+    outMinY = op.outNumber("Min Y"),
+    outMaxY = op.outNumber("Max Y"),
+    outAvgY = op.outNumber("Average Y"),
 
-var outMinZ=op.outValue("Min Z");
-var outMaxZ=op.outValue("Max Z");
-var outAvgZ=op.outValue("Average Z");
+    outMinZ = op.outNumber("Min Z"),
+    outMaxZ = op.outNumber("Max Z"),
+    outAvgZ = op.outNumber("Average Z");
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    var arr=inArr.get();
+    let arr = inArr.get();
 
-    var minX=999999999;
-    var maxX=-999999999;
-    var avgX=0;
+    let minX = 999999999;
+    let maxX = -999999999;
+    let avgX = 0;
 
-    var minZ=999999999;
-    var maxZ=-999999999;
-    var avgZ=0;
+    let minZ = 999999999;
+    let maxZ = -999999999;
+    let avgZ = 0;
 
-    var minY=999999999;
-    var maxY=-999999999;
-    var avgY=0;
+    let minY = 999999999;
+    let maxY = -999999999;
+    let avgY = 0;
     outNum.set(0);
 
-    if(arr)
+    if (arr)
     {
-        outNum.set(arr.length/3);
+        outNum.set(arr.length / 3);
 
-        for(var i=0;i<arr.length;i+=3)
+        for (let i = 0; i < arr.length; i += 3)
         {
-            avgX+=arr[i];
-            minX=Math.min(minX,arr[i]);
-            maxX=Math.max(maxX,arr[i]);
+            avgX += arr[i];
+            minX = Math.min(minX, arr[i]);
+            maxX = Math.max(maxX, arr[i]);
 
-            avgY+=arr[i+1];
-            minY=Math.min(minY,arr[i+1]);
-            maxY=Math.max(maxY,arr[i+1]);
+            avgY += arr[i + 1];
+            minY = Math.min(minY, arr[i + 1]);
+            maxY = Math.max(maxY, arr[i + 1]);
 
-            avgZ+=arr[i+2];
-            minZ=Math.min(minZ,arr[i+2]);
-            maxZ=Math.max(maxZ,arr[i+2]);
+            avgZ += arr[i + 2];
+            minZ = Math.min(minZ, arr[i + 2]);
+            maxZ = Math.max(maxZ, arr[i + 2]);
         }
 
-        avgX/=arr.length/3;
-        avgY/=arr.length/3;
-        avgZ/=arr.length/3;
+        avgX /= arr.length / 3;
+        avgY /= arr.length / 3;
+        avgZ /= arr.length / 3;
     }
 
     outMinX.set(minX);
@@ -66,5 +66,4 @@ inArr.onChange=function()
     outMinZ.set(minZ);
     outMaxZ.set(maxZ);
     outAvgZ.set(avgZ);
-
 };

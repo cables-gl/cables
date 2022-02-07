@@ -1,15 +1,15 @@
 const
-    array=op.inArray("array"),
-    outLength=op.outValue("length");
+    array = op.inArray("array"),
+    outLength = op.outNumber("length");
 
-outLength.ignoreValueSerialize=true;
+outLength.ignoreValueSerialize = true;
 
 function update()
 {
-    var l=0;
-    if(array.get()) l=array.get().length;
-    else l=-1;
+    let l = 0;
+    if (array.get()) l = array.get().length;
+    else l = -1;
     outLength.set(l);
 }
 
-array.onChange=update;
+array.onChange = update;

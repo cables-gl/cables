@@ -1,14 +1,14 @@
-let inArr = op.inArray("Array", 2);
+let inArr = op.inArray("Array", 2),
 
-let outNum = op.outValue("Num Items");
+    outNum = op.outNumber("Num Items"),
 
-let outMinX = op.outValue("Min X");
-let outMaxX = op.outValue("Max X");
-let outAvgX = op.outValue("Average X");
+    outMinX = op.outNumber("Min X"),
+    outMaxX = op.outNumber("Max X"),
+    outAvgX = op.outNumber("Average X"),
 
-let outMinY = op.outValue("Min Y");
-let outMaxY = op.outValue("Max Y");
-let outAvgY = op.outValue("Average Y");
+    outMinY = op.outNumber("Min Y"),
+    outMaxY = op.outNumber("Max Y"),
+    outAvgY = op.outNumber("Average Y");
 
 inArr.onChange = function ()
 {

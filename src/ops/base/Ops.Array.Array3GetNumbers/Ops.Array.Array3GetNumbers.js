@@ -1,9 +1,9 @@
 const
     pArr = op.inArray("Array", 3),
     pIndex = op.inValueInt("Index"),
-    outX = op.outValue("X"),
-    outY = op.outValue("Y"),
-    outZ = op.outValue("Z");
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outZ = op.outNumber("Z");
 
 pArr.onChange =
     pIndex.onChange = update;

@@ -6,28 +6,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Average X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Average Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Average Z",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Array.Array3Average"
+        "name": "Ops.Array.Array3GetAverage"
     },
     "summary": "average x,y,z values of an array3x",
     "youtubeid": "",

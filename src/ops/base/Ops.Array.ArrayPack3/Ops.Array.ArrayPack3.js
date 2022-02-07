@@ -4,7 +4,7 @@ const exe = op.inTrigger("Trigger in"),
     inArr3 = op.inArray("Array 3"),
     exeOut = op.outTrigger("Trigger out"),
     outArr = op.outArray("Array out"),
-    outNum = op.outValue("Num Points"),
+    outNum = op.outNumber("Num Points"),
     outArrayLength = op.outNumber("Array length");
 
 let showingError = false;

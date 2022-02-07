@@ -1,35 +1,36 @@
-var inExec=op.inTriggerButton("Calculate");
-var inArr=op.inArray("Array3x");
-var inDist=op.inValue("Distance");
-var inNormalized=op.inValueBool("Normalized");
+const
+    inExec = op.inTriggerButton("Calculate"),
+    inArr = op.inArray("Array3x"),
+    inDist = op.inValue("Distance"),
+    inNormalized = op.inValueBool("Normalized"),
 
-var outNext=op.outTrigger("Next");
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
+    outNext = op.outTrigger("Next"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outZ = op.outNumber("Z"),
 
-var outSplineLength=op.outValue("Spline Length");
+    outSplineLength = op.outNumber("Spline Length");
 
-var animX=new CABLES.Anim();
-var animY=new CABLES.Anim();
-var animZ=new CABLES.Anim();
+let animX = new CABLES.Anim();
+let animY = new CABLES.Anim();
+let animZ = new CABLES.Anim();
 
-var needsMapping=true;
+let needsMapping = true;
 
-function dist(x1,y1,z1,x2,y2,z2)
+function dist(x1, y1, z1, x2, y2, z2)
 {
-	var xd = x1-x2;
-	var yd = y1-y2;
-	var zd = z1-z2;
-    return Math.sqrt(xd*xd + yd*yd + zd*zd);
+    let xd = x1 - x2;
+    let yd = y1 - y2;
+    let zd = z1 - z2;
+    return Math.sqrt(xd * xd + yd * yd + zd * zd);
 }
 
 function splineLength(arr)
 {
-    var l=0;
-    for(var i=3;i<arr.length;i+=3)
+    let l = 0;
+    for (let i = 3; i < arr.length; i += 3)
     {
-        l+=dist(arr[i-3],arr[i-2],arr[i-1],arr[i+0],arr[i+1],arr[i+2]);
+        l += dist(arr[i - 3], arr[i - 2], arr[i - 1], arr[i + 0], arr[i + 1], arr[i + 2]);
     }
 
     outSplineLength.set(l);
@@ -41,39 +42,38 @@ function mapArrays()
     animX.clear();
     animY.clear();
     animZ.clear();
-    var arr=inArr.get();
-    var sl=splineLength(arr);
+    let arr = inArr.get();
+    let sl = splineLength(arr);
 
-    var distPos=0;
+    let distPos = 0;
 
-    for(var i=0;i<arr.length;i+=3)
+    for (let i = 0; i < arr.length; i += 3)
     {
-        var p=i/(arr.length-3);
-        if(i>0)
+        let p = i / (arr.length - 3);
+        if (i > 0)
         {
-            distPos+=dist(arr[i-3],arr[i-2],arr[i-1],arr[i+0],arr[i+1],arr[i+2]);
+            distPos += dist(arr[i - 3], arr[i - 2], arr[i - 1], arr[i + 0], arr[i + 1], arr[i + 2]);
         }
 
-        animX.setValue(distPos,arr[i+0]);
-        animY.setValue(distPos,arr[i+1]);
-        animZ.setValue(distPos,arr[i+2]);
+        animX.setValue(distPos, arr[i + 0]);
+        animY.setValue(distPos, arr[i + 1]);
+        animZ.setValue(distPos, arr[i + 2]);
     }
 
-    needsMapping=false;
+    needsMapping = false;
 }
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    needsMapping=true;
+    needsMapping = true;
 };
 
-
-inExec.onTriggered=function()
+inExec.onTriggered = function ()
 {
-    if(needsMapping)mapArrays();
+    if (needsMapping)mapArrays();
 
-    var d=inDist.get();
-    if(inNormalized.get())d*=outSplineLength.get();
+    let d = inDist.get();
+    if (inNormalized.get())d *= outSplineLength.get();
 
     outX.set(animX.getValue(d));
     outY.set(animY.getValue(d));
@@ -81,5 +81,3 @@ inExec.onTriggered=function()
 
     outNext.trigger();
 };
-
-

@@ -1,40 +1,37 @@
-var inArr=op.inArray("Array3x");
-var inCalc=op.inTriggerButton("Calculate");
-var outValue=op.outValue("Length");
+const
+    inArr = op.inArray("Array3x"),
+    inCalc = op.inTriggerButton("Calculate"),
+    outValue = op.outNumber("Length");
 
-var needsCalc=true;
+let needsCalc = true;
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    needsCalc=true;
-    
+    needsCalc = true;
 };
 
-
-inCalc.onTriggered=function()
+inCalc.onTriggered = function ()
 {
-    if(needsCalc)
+    if (needsCalc)
     {
-        needsCalc=false;
-        var arr=inArr.get();
-        if(!arr || arr.length<3)
+        needsCalc = false;
+        let arr = inArr.get();
+        if (!arr || arr.length < 3)
         {
             outValue.set(0);
             return;
         }
-        
-        var l=0;
-        for(var i=3;i<arr.length;i+=3)
-        {
-        	var xd = arr[i-3]-arr[i+0];
-        	var yd = arr[i-2]-arr[i+1];
-        	var zd = arr[i-1]-arr[i+2];
-            l+=Math.sqrt(xd*xd + yd*yd + zd*zd);
-        }
-        
-        if(l!=l)l=0;
-        outValue.set(l);
-        
-    }
 
+        let l = 0;
+        for (let i = 3; i < arr.length; i += 3)
+        {
+        	let xd = arr[i - 3] - arr[i + 0];
+        	let yd = arr[i - 2] - arr[i + 1];
+        	let zd = arr[i - 1] - arr[i + 2];
+            l += Math.sqrt(xd * xd + yd * yd + zd * zd);
+        }
+
+        if (l != l)l = 0;
+        outValue.set(l);
+    }
 };

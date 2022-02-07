@@ -1,9 +1,8 @@
-
-let inArr = op.inArray("Array", 3);
-
-let avgX = op.outValue("Average X");
-let avgY = op.outValue("Average Y");
-let avgZ = op.outValue("Average Z");
+const
+    inArr = op.inArray("Array", 3),
+    avgX = op.outNumber("Average X"),
+    avgY = op.outNumber("Average Y"),
+    avgZ = op.outNumber("Average Z");
 
 inArr.onChange = function ()
 {
