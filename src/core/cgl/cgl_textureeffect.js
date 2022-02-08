@@ -99,17 +99,8 @@ TextureEffect.prototype.setSourceTexture = function (tex)
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     }
 };
-
-TextureEffect.prototype.startEffect = function (bgTex)
+TextureEffect.prototype.continueEffect = function ()
 {
-    if (!this._textureTarget)
-    {
-        this._log.warn("effect has no target");
-        return;
-    }
-
-    this.switched = false;
-
     this._cgl.pushDepthTest(false);
 
     this._cgl.pushModelMatrix();
@@ -126,6 +117,20 @@ TextureEffect.prototype.startEffect = function (bgTex)
 
     this._cgl.pushModelMatrix();
     mat4.identity(this._cgl.mvMatrix);
+};
+
+
+TextureEffect.prototype.startEffect = function (bgTex)
+{
+    if (!this._textureTarget)
+    {
+        this._log.warn("effect has no target");
+        return;
+    }
+
+    this.switched = false;
+
+    this.continueEffect();
 
     if (bgTex)
     {
@@ -136,7 +141,7 @@ TextureEffect.prototype.startEffect = function (bgTex)
 
 TextureEffect.prototype.endEffect = function ()
 {
-    this._cgl.popDepthTest(false);
+    this._cgl.popDepthTest();
     this._cgl.popModelMatrix();
 
     this._cgl.popPMatrix();
