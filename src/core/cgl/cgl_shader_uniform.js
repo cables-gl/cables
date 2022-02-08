@@ -653,6 +653,7 @@ Uniform.prototype.updateValueM4 = function ()
         this._cgl.profileData.profileShaderGetUniform++;
         this._cgl.profileData.profileShaderGetUniformName = this._name;
     }
+    if (!this._value)console.log("this.name", this.name, this._value);
     this._shader.getCgl().gl.uniformMatrix4fv(this._loc, false, this._value);
     this._cgl.profileData.profileUniformCount++;
 };

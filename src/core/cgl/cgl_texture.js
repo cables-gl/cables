@@ -288,6 +288,8 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 
     this.updateMipMap();
 
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
+
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
