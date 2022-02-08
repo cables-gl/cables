@@ -1,5 +1,7 @@
 const
     exec = op.inTrigger("Execute"),
+    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
+    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
 
     inTexR = op.inTexture("R"),
     inSrcR = op.inSwitch("R Source", ["R", "G", "B", "A"], "R"),
@@ -26,11 +28,12 @@ op.setPortGroup("Green", [inSrcGDefault, inTexG, inSrcG, inSrcGVal]);
 op.setPortGroup("Blue", [inSrcBDefault, inTexB, inSrcB, inSrcBVal]);
 op.setPortGroup("Alpha", [inSrcADefault, inTexA, inSrcA, inSrcAVal]);
 
+const cgl = op.patch.cgl;
 let needsUpdate = true;
-const tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
+let tc = new CGL.CopyTexture(cgl, "combinetextures",
     {
         "shader": attachments.rgbe2fp_frag,
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": false
     });
 
 const
@@ -45,30 +48,54 @@ const
     uniFloatA = new CGL.Uniform(tc.bgShader, "f", "defaultA", inSrcADefault);
 
 inSrcRDefault.onChange =
-inSrcGDefault.onChange =
-inSrcBDefault.onChange =
-inSrcADefault.onChange =
-inTexR.onChange =
-inTexG.onChange =
-inTexB.onChange = () =>
-{
-    needsUpdate = true;
-};
+    inSrcGDefault.onChange =
+    inSrcBDefault.onChange =
+    inSrcADefault.onChange =
+    inTexR.onChange =
+    inTexG.onChange =
+    inTexB.onChange =
+    inTexA.onChange = () =>
+    {
+        needsUpdate = true;
+    };
 
 inTexR.onLinkChanged =
-inTexG.onLinkChanged =
-inTexB.onLinkChanged =
-inTexA.onLinkChanged =
-inSrcR.onChange =
-inSrcG.onChange =
-inSrcB.onChange =
-inSrcAVal.onChange =
-inSrcRVal.onChange =
-inSrcGVal.onChange =
-inSrcBVal.onChange =
-inSrcAVal.onChange = updateDefines;
+    inTexG.onLinkChanged =
+    inTexB.onLinkChanged =
+    inTexA.onLinkChanged =
+    inSrcR.onChange =
+    inSrcG.onChange =
+    inSrcB.onChange =
+    inSrcA.onChange =
+    inSrcRVal.onChange =
+    inSrcGVal.onChange =
+    inSrcBVal.onChange =
+    inSrcAVal.onChange = updateDefines;
 
 updateDefines();
+
+tfilter.onChange =
+twrap.onChange = () =>
+{
+    let selectedWrap = CGL.Texture.WRAP_REPEAT;
+    if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    let selectedFilter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
+    if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
+
+    tc.dispose();
+    tc = new CGL.CopyTexture(cgl, "combinetextures",
+        {
+            "shader": attachments.rgbe2fp_frag,
+            "isFloatingPointTexture": false,
+            "filter": selectedFilter,
+            "wrap": selectedWrap
+        });
+
+    needsUpdate = true;
+};
 
 function updateDefines()
 {
@@ -117,13 +144,12 @@ function updateDefines()
     tc.bgShader.toggleDefine("HAS_B", inTexB.isLinked());
     tc.bgShader.toggleDefine("HAS_A", inTexA.isLinked());
 
+    console.log(tc.bgShader._defines);
     needsUpdate = true;
 }
 
 exec.onTriggered = () =>
 {
-    // if (!inTexR.get()) return;
-
     if (needsUpdate)
     {
         tc.bgShader.popTextures();
@@ -138,7 +164,7 @@ exec.onTriggered = () =>
         uniFloatB.setValue(inSrcBDefault.get()),
         uniFloatA.setValue(inSrcADefault.get());
 
-        outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+        outFpTex.set(CGL.Texture.getEmptyTexture(cgl));
 
         outFpTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get()));
         needsUpdate = false;
