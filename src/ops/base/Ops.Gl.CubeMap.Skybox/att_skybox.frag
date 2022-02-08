@@ -61,6 +61,7 @@ void main() {
 
     #ifdef RGBE
         vec3 hdrColor=DecodeRGBE8(SAMPLETEX(skybox, newPos));
+
         float gamma=expGamma.x;
         float exposure=expGamma.y;
         hdrColor = vec3(1.0) - exp(-hdrColor * exposure);
