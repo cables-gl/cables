@@ -234,7 +234,7 @@ function render()
             }
             catch (e)
             {
-                op.error(e);
+                op.logError(e);
             }
 
             frames.length = 0;

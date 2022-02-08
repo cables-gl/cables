@@ -11,7 +11,7 @@ inStore.onTriggered = storeValue;
 const localStorageSupport = !!window.localStorage;
 if (!localStorageSupport)
 {
-    op.error("your browser does not support or blocks access to localStorage, output will be inValue!");
+    op.logError("your browser does not support or blocks access to localStorage, output will be inValue!");
     outSupported.set(false);
 }
 

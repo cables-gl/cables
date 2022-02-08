@@ -102,7 +102,7 @@ function addToWorld()
 
     if (!world)
     {
-        op.error("no physics world!?");
+        op.logError("no physics world!?");
         outNum.set(0);
         return;
     }

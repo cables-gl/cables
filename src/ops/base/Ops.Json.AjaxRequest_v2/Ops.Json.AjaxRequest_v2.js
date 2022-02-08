@@ -73,7 +73,7 @@ function reload(addCachebuster, force = false)
                     op.patch.loading.finished(loadingId);
                     isLoading.set(false);
 
-                    op.error(err);
+                    op.logError(err);
                     return;
                 }
                 try
@@ -94,7 +94,7 @@ function reload(addCachebuster, force = false)
                 }
                 catch (e)
                 {
-                    op.error(e);
+                    op.logError(e);
                     op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                     op.patch.loading.finished(loadingId);
                     isLoading.set(false);

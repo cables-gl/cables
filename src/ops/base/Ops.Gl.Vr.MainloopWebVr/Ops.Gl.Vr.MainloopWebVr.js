@@ -91,7 +91,7 @@ if (navigator.getVRDisplays)
         }
         else
         {
-            op.error("could not find vr display...");
+            op.logError("could not find vr display...");
         }
     });
 }

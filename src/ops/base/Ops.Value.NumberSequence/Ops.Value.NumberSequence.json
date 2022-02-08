@@ -1,43 +1,42 @@
 {
-    "updated": 1524055075032,
     "authorName": "tim",
     "id": "33b08c9a-639a-4edc-8908-fa4df58a4b51",
     "created": 1524055059631,
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "In Value",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 1,
+                "name": "Value Changed"
+            },
+            {
+                "type": 0,
                 "name": "Out Value 0",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Value 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Value 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Value 3",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Value Changed"
             }
         ],
-        "name": "Ops.Value.ValueHub"
+        "name": "Ops.Value.NumberSequence"
     },
     "summary": "Copies the input value to the output ports (value sequence)",
     "docs": {

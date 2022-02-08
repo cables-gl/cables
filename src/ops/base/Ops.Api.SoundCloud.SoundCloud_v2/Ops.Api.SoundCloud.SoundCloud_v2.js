@@ -26,14 +26,14 @@ const fetchData = (token) =>
         "headers": {
             "Authorization": "OAuth " + token
         }
-    }).then((response) => response.json()).then((data) =>
+    }).then((response) => { return response.json(); }).then((data) =>
     {
         const trackUrl = baseUrl + "/tracks/" + data.id + "/streams";
         fetch(trackUrl, {
             "headers": {
                 "Authorization": "OAuth " + token
             }
-        }).then((response) => response.json()).then((trackData) =>
+        }).then((response) => { return response.json(); }).then((trackData) =>
         {
             const availableFormats = Object.keys(trackData);
             streamFormats.setUiAttribs({ "values": availableFormats });
@@ -52,7 +52,7 @@ const fetchData = (token) =>
             catch (e)
             {
                 op.setUiError("error", "failed to load track from soundcloud");
-                op.error(e);
+                op.logError(e);
             }
         });
     });
@@ -77,7 +77,7 @@ function resolve()
                 "client_secret": clientSecret.get(),
                 "grant_type": "client_credentials"
             })
-        }).then((response) => response.json()).then((data) =>
+        }).then((response) => { return response.json(); }).then((data) =>
         {
             const newToken = data.access_token;
             accessToken = newToken;

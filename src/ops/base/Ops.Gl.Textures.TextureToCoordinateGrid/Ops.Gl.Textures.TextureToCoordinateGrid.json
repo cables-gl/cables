@@ -1,0 +1,89 @@
+{
+    "id": "91f30465-4a4c-4447-9b16-072252f0a977",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642868426174
+        },
+        {
+            "message": " added core lib: cgl_texturecopy",
+            "author": "pandur",
+            "date": 1642868439042
+        },
+        {
+            "message": " added core lib: cgl_copytexture",
+            "author": "pandur",
+            "date": 1642869069922
+        },
+        {
+            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
+            "author": "pandur",
+            "date": 1642869809458
+        },
+        {
+            "message": "cloned op from Ops.Dev.Rgbe2HdrTexture",
+            "author": "pandur",
+            "date": 1643797752609
+        },
+        {
+            "message": "Ops.User.pandur.TextureToCoordinateGrid renamed to Ops.Dev.TextureToCoordinateGrid",
+            "author": "pandur",
+            "date": 1643797942632
+        },
+        {
+            "message": "Ops.Dev.TextureToCoordinateGrid renamed to Ops.Gl.Textures.TextureToCoordinateGrid",
+            "author": "pandur",
+            "date": 1644229037728
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture"
+    ],
+    "authorName": "pandur",
+    "created": 1643797752609,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 2,
+                "name": "RGBE Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Threshold",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "HDR Texture",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.TextureToCoordinateGrid"
+    },
+    "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

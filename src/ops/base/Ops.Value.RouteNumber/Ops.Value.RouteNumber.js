@@ -30,7 +30,7 @@ function createOutPorts()
     let arr = [];
     for (let i = 0; i < NUM_PORTS; i++)
     {
-        let port = op.outValue("Index " + i + " Value");
+        let port = op.outNumber("Index " + i + " Value");
         arr.push(port);
     }
     return arr;

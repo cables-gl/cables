@@ -71,8 +71,6 @@ function updateTexCoordsPorts()
 
     mesh = null;
     needsRebuild = true;
-
-    console.log("AJHKA", inCoords.isLinked(), inCoords.get());
 }
 
 function updateNumVerts()

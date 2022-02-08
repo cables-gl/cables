@@ -82,7 +82,7 @@ function load()
         {
             if (err)
             {
-                op.error(err);
+                op.logError(err);
                 return;
             }
             try
@@ -118,7 +118,7 @@ function load()
                 op.patch.setVarValue(varNameData, null);
                 op.patch.setVarValue(varNameTex, null);
 
-                op.error(e);
+                op.logError(e);
                 op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                 op.patch.loading.finished(loadingId);
                 updateLoaded();

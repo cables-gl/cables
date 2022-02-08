@@ -84,15 +84,19 @@ inDryWet.onChange = () =>
 
 inWaveshapeArray.onChange = inDistortionAmount.onChange = changeDistortion;
 
-inOversampling.onChange = () =>
+inOversampling.onChange = updateOversampling;
+
+function updateOversampling()
 {
     waveshaperNode.oversample = inOversampling.get();
-};
+}
 
-inOutputGain.onChange = () =>
+inOutputGain.onChange = updateGain;
+
+function updateGain()
 {
     outputNode.gain.linearRampToValueAtTime(Number(inOutputGain.get()), audioContext.currentTime + 0.01);
-};
+}
 
 let oldAudioIn = null;
 inAudio.onChange = function ()
@@ -122,6 +126,8 @@ inAudio.onChange = function ()
         {
             inAudio.get().connect(inputNode);
             audioOut.set(outputNode);
+            updateGain();
+            updateOversampling();
         }
     }
     oldAudioIn = inAudio.get();

@@ -156,7 +156,7 @@ execute.onTriggered = function ()
 {
     if (!shader)
     {
-        op.error("lambert has no shader...");
+        op.logError("lambert has no shader...");
         return;
     }
 

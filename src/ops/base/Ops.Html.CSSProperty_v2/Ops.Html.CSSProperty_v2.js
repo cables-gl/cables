@@ -41,7 +41,7 @@ function update()
         }
         catch (e)
         {
-            op.error(e);
+            op.logError(e);
         }
     }
     else

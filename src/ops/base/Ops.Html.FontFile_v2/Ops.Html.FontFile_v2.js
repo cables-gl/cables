@@ -51,7 +51,7 @@ function addStyle()
             }, (fontFace) =>
             {
                 op.setUiError("loadingerror", "Font loading error!" + fontFaceObj.status);
-                // op.error("Font loading error! Current status", fontFaceObj.status);
+                // op.logError("Font loading error! Current status", fontFaceObj.status);
             });
         }
         else

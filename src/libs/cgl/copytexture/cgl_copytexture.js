@@ -49,7 +49,8 @@ class CopyTexture
 
         if (this._fb)
         {
-            this._fb.setSize(w, h);
+            if (this._fb.getWidth() != w || this._fb.getHeight() != h)
+                this._fb.setSize(w, h);
         }
         else
         {

@@ -280,7 +280,7 @@ function setClosed(b)
 function onOpenCloseBtnClick(ev)
 {
     ev.stopPropagation();
-    if (!sidebarEl) { op.error("Sidebar could not be closed..."); return; }
+    if (!sidebarEl) { op.logError("Sidebar could not be closed..."); return; }
     sidebarEl.classList.toggle("sidebar--closed");
     const btn = ev.target;
     let btnText = BTN_TEXT_OPEN;

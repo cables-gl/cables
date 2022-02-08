@@ -3,10 +3,10 @@ const
     arr = op.inArray("Array"),
     pStep = op.inValue("Step"),
     trigger = op.outTrigger("Trigger"),
-    idx = op.outValue("Index"),
-    valX = op.outValue("Value 1"),
-    valY = op.outValue("Value 2"),
-    valZ = op.outValue("Value 3");
+    idx = op.outNumber("Index"),
+    valX = op.outNumber("Value 1"),
+    valY = op.outNumber("Value 2"),
+    valZ = op.outNumber("Value 3");
 
 let ar = arr.get() || [];
 

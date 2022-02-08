@@ -8,11 +8,11 @@ const
     active = op.inValueBool("Active", true),
     inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
-    width = op.outValue("Width"),
-    height = op.outValue("Height"),
-    ratio = op.outValue("Aspect Ratio"),
-    loaded = op.outValue("Loaded", false),
-    loading = op.outValue("Loading", false);
+    width = op.outNumber("Width"),
+    height = op.outNumber("Height"),
+    ratio = op.outNumber("Aspect Ratio"),
+    loaded = op.outNumber("Loaded", false),
+    loading = op.outNumber("Loading", false);
 
 op.setPortGroup("Size", [width, height]);
 
@@ -106,7 +106,6 @@ function realReload(nocache)
                     if (err)
                     {
                         setTempTexture();
-                        // op.error(err);
                         op.setUiError("urlerror", "could not load texture:<br/>\"" + filename.get() + "\"", 2);
                         cgl.patch.loading.finished(loadingId);
                         return;

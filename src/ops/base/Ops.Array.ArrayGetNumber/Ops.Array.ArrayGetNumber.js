@@ -1,7 +1,7 @@
 const
     array = op.inArray("array"),
     index = op.inValueInt("index"),
-    value = op.outValue("value");
+    value = op.outNumber("value");
 
 array.ignoreValueSerialize = true;
 

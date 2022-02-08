@@ -66,7 +66,7 @@ function doTrigger()
     if (!arr)
     {
         op.setUiError("unknowntrigger", "unknown trigger");
-        op.error("unknown trigger array!", op.varName.get());
+        op.logError("unknown trigger array!", op.varName.get());
 
         return;
     }

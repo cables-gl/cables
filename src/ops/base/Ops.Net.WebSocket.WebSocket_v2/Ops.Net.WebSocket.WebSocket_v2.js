@@ -51,7 +51,7 @@ function connect()
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
     if (!window.WebSocket)
-        op.error("Sorry, but your browser doesn't support WebSockets.");
+        op.logError("Sorry, but your browser doesn't support WebSockets.");
 
     try
     {

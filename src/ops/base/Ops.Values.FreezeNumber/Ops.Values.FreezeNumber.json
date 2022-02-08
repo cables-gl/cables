@@ -1,5 +1,5 @@
 {
-    "id": "340fb9e2-27ab-47f0-b3cc-2ef001f485c5",
+    "id": "97dea923-f00f-44cf-bef9-808a2556105b",
     "changelog": [
         {
             "message": "created op",
@@ -22,21 +22,17 @@
             "date": 1644069354548
         },
         {
-            "message": "cloned op from Ops.Dev.FreezeNumber",
+            "message": "Ops.Dev.FreezeNumber renamed to Ops.Values.FreezeNumber",
             "author": "pandur",
-            "date": 1644069519267
-        },
-        {
-            "message": "Ops.User.pandur.FreezeArray renamed to Ops.Dev.FreezeArray",
-            "author": "pandur",
-            "date": 1644069805228
+            "date": 1644228541865
         }
     ],
     "layout": {
         "portsIn": [
             {
-                "type": 3,
-                "name": "Number"
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
             },
             {
                 "type": 1,
@@ -45,12 +41,22 @@
         ],
         "portsOut": [
             {
-                "type": 3,
-                "name": "Frozen Array"
+                "type": 0,
+                "name": "Frozen Number",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.FreezeArray"
+        "name": "Ops.Dev.FreezeNumber"
     },
     "authorName": "pandur",
-    "created": 1644069519267
+    "created": 1644069298775,
+    "summary": "capture the current input and copy it to the output, even after a reload",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

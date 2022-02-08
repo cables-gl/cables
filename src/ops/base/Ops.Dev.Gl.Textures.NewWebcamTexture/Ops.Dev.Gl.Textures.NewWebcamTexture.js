@@ -189,7 +189,7 @@ function getCamConstraints()
         {
             console.log("FIND BY LABEL", deviceInfo, camInputDevices, deviceLabel);
             // Find by label
-            deviceInfo = camInputDevices.filter((d) => d.label === deviceLabel);
+            deviceInfo = camInputDevices.filter((d) => { return d.label === deviceLabel; });
             if (deviceInfo)
             {
                 deviceInfo = deviceInfo[0];
@@ -255,13 +255,13 @@ function restartWebcam()
             .then(camInitComplete)
             .catch((error) =>
             {
-                op.error(error.name + ": " + error.message, error);
+                op.logError(error.name + ": " + error.message, error);
                 outError.set(error.name + ": " + error.message);
             });
     }
     else if (navigator.getUserMedia)
     {
-        navigator.getUserMedia(constraints, camInitComplete, () => available.set(false));
+        navigator.getUserMedia(constraints, camInitComplete, () => { return available.set(false); });
     }
 }
 
@@ -281,14 +281,14 @@ function initDevices()
     const constraints = getCamConstraints();
 
     navigator.mediaDevices.getUserMedia(constraints)
-        .then((res) => navigator.mediaDevices.enumerateDevices())
+        .then((res) => { return navigator.mediaDevices.enumerateDevices(); })
         .then((devices) =>
         {
             camInputDevices = devices
-                .filter((device) => device.kind === "videoinput");
+                .filter((device) => { return device.kind === "videoinput"; });
 
             console.log("AVAILABLE", camInputDevices);
-            inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => d.label || idx);
+            inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => { return d.label || idx; });
             outDevices.set(inInputDevices.uiAttribs.values);
             cgl.patch.loading.finished(loadingId);
             camLoaded = true;

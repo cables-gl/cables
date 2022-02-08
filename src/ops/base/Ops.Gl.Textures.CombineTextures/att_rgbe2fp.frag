@@ -4,10 +4,14 @@ UNI sampler2D texB;
 UNI sampler2D texA;
 IN vec2 texCoord;
 
+UNI float defaultR;
+UNI float defaultG;
+UNI float defaultB;
+UNI float defaultA;
+
 void main()
 {
-
-    float r=0.,g=0.,b=0.,a=1.;
+    float r=defaultR,g=defaultG,b=defaultB,a=defaultA;
 
     #ifdef HAS_R
         #ifdef R_SRC_R
@@ -69,6 +73,18 @@ void main()
         #endif
     #endif
 
+    #ifdef INV_R
+        r=1.0-r;
+    #endif
+    #ifdef INV_G
+        g=1.0-g;
+    #endif
+    #ifdef INV_B
+        b=1.0-b;
+    #endif
+    #ifdef INV_A
+        a=1.0-a;
+    #endif
 
     outColor = vec4(r,g,b,a);
 }

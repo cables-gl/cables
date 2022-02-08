@@ -63,7 +63,7 @@ function spawn()
     world = cgl.frameStore.world;
     if (!world)
     {
-        op.error("cannon has no world");
+        op.logError("cannon has no world");
         return;
     }
 

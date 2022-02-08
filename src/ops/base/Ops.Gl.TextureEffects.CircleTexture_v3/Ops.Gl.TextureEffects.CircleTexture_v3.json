@@ -8,6 +8,7 @@
             {
                 "type": 0,
                 "name": "Blend Mode index",
+                "group": "Blending",
                 "subType": "integer"
             },
             {
@@ -49,6 +50,7 @@
             {
                 "type": 0,
                 "name": "fallOff index",
+                "group": "Style",
                 "subType": "integer"
             },
             {
@@ -112,6 +114,11 @@
             "message": "Ops.User.pandur.MyCircleTexture3 renamed to Ops.Gl.TextureEffects.CircleTexture_v3",
             "author": "pandur",
             "date": 1606731339940
+        },
+        {
+            "message": "Warn Overflow is disabled by default",
+            "author": "pandur",
+            "date": 1644235715948
         }
     ],
     "authorName": "pandur",

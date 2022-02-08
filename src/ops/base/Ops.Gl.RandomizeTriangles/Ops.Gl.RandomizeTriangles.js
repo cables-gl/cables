@@ -13,7 +13,7 @@ inGeom.onChange = function ()
     if (!geom) return;
     if (geom.verticesIndices && geom.verticesIndices.length > 0)
     {
-        op.error("cannot randomize indexed geom ");
+        op.logError("cannot randomize indexed geom ");
         return;
     }
 

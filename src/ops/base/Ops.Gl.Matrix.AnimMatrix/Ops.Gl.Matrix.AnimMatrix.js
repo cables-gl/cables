@@ -115,7 +115,7 @@ function ipMat(perc)
     if (!arr1 || !arr2 || arr1.length != arr2.length)
     {
         outArr.set(null);
-        op.error("arrays wrong", arr1.length, arr2.length);
+        op.logError("arrays wrong", arr1.length, arr2.length);
     }
     else
     {

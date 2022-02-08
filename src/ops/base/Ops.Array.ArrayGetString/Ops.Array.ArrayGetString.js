@@ -1,24 +1,20 @@
-var array=op.inArray("array");
-var index=op.inValueInt("index");
+const
+    array = op.inArray("array"),
+    index = op.inValueInt("index"),
+    result = op.outString("result");
 
-//when out is set to op.outString then index.onChange doesn't work
-var result=op.outString("result");//original code
+array.ignoreValueSerialize = true;
 
-//setting it to a op.outValue does work on change
-//var result=op.outValue("result");
+index.onChange = update;
+let arr = null;
 
-array.ignoreValueSerialize=true;
-
-index.onChange=update;
-var arr=null;
-
-array.onChange=function()
+array.onChange = function ()
 {
-    arr=array.get();
+    arr = array.get();
     update();
 };
 
 function update()
 {
-    if(arr) result.set( arr[index.get()]);
+    if (arr) result.set(arr[index.get()]);
 }

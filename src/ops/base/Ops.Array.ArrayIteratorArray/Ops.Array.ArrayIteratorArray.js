@@ -2,7 +2,7 @@ const
     exe = op.inTrigger("exe"),
     arr = op.inArray("array"),
     trigger = op.outTrigger("trigger"),
-    idx = op.outValue("index"),
+    idx = op.outNumber("index"),
     val = op.outArray("Result");
 
 exe.onTriggered = function ()
