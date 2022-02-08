@@ -39,7 +39,7 @@ vec2 SampleSphericalMap(vec3 direction)
     #ifdef WEBGL1
         vec3 newDirection = normalize(direction);
 		vec2 sampleUV = vec2(atan(newDirection.z, newDirection.x), asin(newDirection.y+1e-6));
-        sampleUV *= vec2(0.1591, 0.3183);
+        sampleUV *= vec2(-0.1591, 0.3183);
         sampleUV += 0.5;
     #endif
     return sampleUV * vec2(-1.,1.);

@@ -11,7 +11,7 @@ UNI float defaultA;
 
 void main()
 {
-    float r=defaultR,g=defaultG,b=defaultB,a=defaultA;
+    float r=defaultR, g=defaultG, b=defaultB, a=defaultA;
 
     #ifdef HAS_R
         #ifdef R_SRC_R
@@ -86,5 +86,8 @@ void main()
         a=1.0-a;
     #endif
 
+
     outColor = vec4(r,g,b,a);
 }
+
+

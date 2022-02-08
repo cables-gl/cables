@@ -21,7 +21,7 @@ const
     inSrcADefault = op.inFloatSlider("A Default", 1),
 
     next = op.outTrigger("Next"),
-    outFpTex = op.outTexture("Texture");
+    outTex = op.outTexture("Texture");
 
 op.setPortGroup("Red", [inSrcRDefault, inTexR, inSrcR, inSrcRVal]);
 op.setPortGroup("Green", [inSrcGDefault, inTexG, inSrcG, inSrcGVal]);
@@ -30,22 +30,18 @@ op.setPortGroup("Alpha", [inSrcADefault, inTexA, inSrcA, inSrcAVal]);
 
 const cgl = op.patch.cgl;
 let needsUpdate = true;
-let tc = new CGL.CopyTexture(cgl, "combinetextures",
-    {
-        "shader": attachments.rgbe2fp_frag,
-        "isFloatingPointTexture": false
-    });
+let tc = null;
 
-const
-    unitexR = new CGL.Uniform(tc.bgShader, "t", "texR", 0),
-    unitexG = new CGL.Uniform(tc.bgShader, "t", "texG", 1),
-    unitexB = new CGL.Uniform(tc.bgShader, "t", "texB", 2),
-    unitexA = new CGL.Uniform(tc.bgShader, "t", "texA", 3),
+let
+    unitexR,
+    unitexG,
+    unitexB,
+    unitexA,
 
-    uniFloatR = new CGL.Uniform(tc.bgShader, "f", "defaultR", inSrcRDefault),
-    uniFloatG = new CGL.Uniform(tc.bgShader, "f", "defaultG", inSrcGDefault),
-    uniFloatB = new CGL.Uniform(tc.bgShader, "f", "defaultB", inSrcBDefault),
-    uniFloatA = new CGL.Uniform(tc.bgShader, "f", "defaultA", inSrcADefault);
+    uniFloatR,
+    uniFloatG,
+    uniFloatB,
+    uniFloatA;
 
 inSrcRDefault.onChange =
     inSrcGDefault.onChange =
@@ -75,30 +71,45 @@ inTexR.onLinkChanged =
 updateDefines();
 
 tfilter.onChange =
-twrap.onChange = () =>
+twrap.onChange = initShader;
+
+function initShader()
 {
-    let selectedWrap = CGL.Texture.WRAP_REPEAT;
-    if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    let wrap = CGL.Texture.WRAP_REPEAT;
+    if (twrap.get() == "mirrored repeat") wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (twrap.get() == "clamp to edge") wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    let selectedFilter = CGL.Texture.FILTER_NEAREST;
-    if (tfilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
-    if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
+    let filter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
+    if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
 
-    tc.dispose();
+    if (tc)tc.dispose();
     tc = new CGL.CopyTexture(cgl, "combinetextures",
         {
             "shader": attachments.rgbe2fp_frag,
             "isFloatingPointTexture": false,
-            "filter": selectedFilter,
-            "wrap": selectedWrap
+            "filter": filter,
+            "wrap": wrap
         });
 
+    unitexR = new CGL.Uniform(tc.bgShader, "t", "texR", 0);
+    unitexG = new CGL.Uniform(tc.bgShader, "t", "texG", 1);
+    unitexB = new CGL.Uniform(tc.bgShader, "t", "texB", 2);
+    unitexA = new CGL.Uniform(tc.bgShader, "t", "texA", 3);
+
+    uniFloatR = new CGL.Uniform(tc.bgShader, "f", "defaultR", inSrcRDefault);
+    uniFloatG = new CGL.Uniform(tc.bgShader, "f", "defaultG", inSrcGDefault);
+    uniFloatB = new CGL.Uniform(tc.bgShader, "f", "defaultB", inSrcBDefault);
+    uniFloatA = new CGL.Uniform(tc.bgShader, "f", "defaultA", inSrcADefault);
+
+    updateDefines();
     needsUpdate = true;
-};
+}
 
 function updateDefines()
 {
+    if (!tc) return;
+
     inSrcR.setUiAttribs({ "greyout": !inTexR.isLinked() });
     inSrcG.setUiAttribs({ "greyout": !inTexG.isLinked() });
     inSrcB.setUiAttribs({ "greyout": !inTexB.isLinked() });
@@ -155,18 +166,22 @@ exec.onTriggered = () =>
         tc.bgShader.popTextures();
 
         if (inTexR.get()) tc.bgShader.pushTexture(unitexR, inTexR.get().tex);
+        else tc.bgShader.pushTexture(unitexR, CGL.Texture.getEmptyTexture(cgl).tex);
         if (inTexG.get()) tc.bgShader.pushTexture(unitexG, inTexG.get().tex);
+        else tc.bgShader.pushTexture(unitexG, CGL.Texture.getEmptyTexture(cgl).tex);
         if (inTexB.get()) tc.bgShader.pushTexture(unitexB, inTexB.get().tex);
+        else tc.bgShader.pushTexture(unitexB, CGL.Texture.getEmptyTexture(cgl).tex);
         if (inTexA.get()) tc.bgShader.pushTexture(unitexA, inTexA.get().tex);
+        else tc.bgShader.pushTexture(unitexA, CGL.Texture.getEmptyTexture(cgl).tex);
 
-        uniFloatR.setValue(inSrcRDefault.get()),
-        uniFloatG.setValue(inSrcGDefault.get()),
-        uniFloatB.setValue(inSrcBDefault.get()),
+        uniFloatR.setValue(inSrcRDefault.get());
+        uniFloatG.setValue(inSrcGDefault.get());
+        uniFloatB.setValue(inSrcBDefault.get());
         uniFloatA.setValue(inSrcADefault.get());
 
-        outFpTex.set(CGL.Texture.getEmptyTexture(cgl));
+        outTex.set(CGL.Texture.getEmptyTexture(cgl));
+        outTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get() || CGL.Texture.getEmptyTexture(cgl)));
 
-        outFpTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get()));
         needsUpdate = false;
     }
 

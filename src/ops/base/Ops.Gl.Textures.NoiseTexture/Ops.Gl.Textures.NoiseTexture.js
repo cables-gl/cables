@@ -49,6 +49,6 @@ function update()
 
     tex.initFromData(pixels, width, height);
 
-    outTex.set(null);
+    outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outTex.set(tex);
 }
