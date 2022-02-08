@@ -59,7 +59,6 @@ class CopyTexture
             if (this._options.hasOwnProperty("filter"))filter = this._options.filter;
             if (this._options.hasOwnProperty("wrap"))wrap = this._options.wrap;
 
-            console.log(wrap, filter);
             const options = {
                 "isFloatingPointTexture": this._options.isFloatingPointTexture,
                 "filter": filter,
