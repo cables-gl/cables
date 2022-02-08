@@ -31,17 +31,7 @@ op.setPortGroup("Alpha", [inSrcADefault, inTexA, inSrcA, inSrcAVal]);
 const cgl = op.patch.cgl;
 let needsUpdate = true;
 let tc = null;
-
-let
-    unitexR,
-    unitexG,
-    unitexB,
-    unitexA,
-
-    uniFloatR,
-    uniFloatG,
-    uniFloatB,
-    uniFloatA;
+let unitexR, unitexG, unitexB, unitexA, uniFloatR, uniFloatG, uniFloatB, uniFloatA;
 
 inSrcRDefault.onChange =
     inSrcGDefault.onChange =
@@ -68,10 +58,8 @@ inTexR.onLinkChanged =
     inSrcBVal.onChange =
     inSrcAVal.onChange = updateDefines;
 
-updateDefines();
-
 tfilter.onChange =
-twrap.onChange = initShader;
+    twrap.onChange = initShader;
 
 function initShader()
 {
@@ -155,7 +143,6 @@ function updateDefines()
     tc.bgShader.toggleDefine("HAS_B", inTexB.isLinked());
     tc.bgShader.toggleDefine("HAS_A", inTexA.isLinked());
 
-    console.log(tc.bgShader._defines);
     needsUpdate = true;
 }
 
