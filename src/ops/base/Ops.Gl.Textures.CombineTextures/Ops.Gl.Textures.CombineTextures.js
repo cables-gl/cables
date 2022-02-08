@@ -150,6 +150,7 @@ exec.onTriggered = () =>
 {
     if (needsUpdate)
     {
+        if (!tc)initShader();
         tc.bgShader.popTextures();
 
         if (inTexR.get()) tc.bgShader.pushTexture(unitexR, inTexR.get().tex);
