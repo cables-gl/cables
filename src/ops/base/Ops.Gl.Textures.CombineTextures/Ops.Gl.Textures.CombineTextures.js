@@ -45,28 +45,28 @@ const
     uniFloatA = new CGL.Uniform(tc.bgShader, "f", "defaultA", inSrcADefault);
 
 inSrcRDefault.onChange =
-inSrcGDefault.onChange =
-inSrcBDefault.onChange =
-inSrcADefault.onChange =
-inTexR.onChange =
-inTexG.onChange =
-inTexB.onChange = () =>
-{
-    needsUpdate = true;
-};
+    inSrcGDefault.onChange =
+    inSrcBDefault.onChange =
+    inSrcADefault.onChange =
+    inTexR.onChange =
+    inTexG.onChange =
+    inTexB.onChange = () =>
+    {
+        needsUpdate = true;
+    };
 
 inTexR.onLinkChanged =
-inTexG.onLinkChanged =
-inTexB.onLinkChanged =
-inTexA.onLinkChanged =
-inSrcR.onChange =
-inSrcG.onChange =
-inSrcB.onChange =
-inSrcAVal.onChange =
-inSrcRVal.onChange =
-inSrcGVal.onChange =
-inSrcBVal.onChange =
-inSrcAVal.onChange = updateDefines;
+    inTexG.onLinkChanged =
+    inTexB.onLinkChanged =
+    inTexA.onLinkChanged =
+    inSrcR.onChange =
+    inSrcG.onChange =
+    inSrcB.onChange =
+    inSrcAVal.onChange =
+    inSrcRVal.onChange =
+    inSrcGVal.onChange =
+    inSrcBVal.onChange =
+    inSrcAVal.onChange = updateDefines;
 
 updateDefines();
 
@@ -122,8 +122,6 @@ function updateDefines()
 
 exec.onTriggered = () =>
 {
-    // if (!inTexR.get()) return;
-
     if (needsUpdate)
     {
         tc.bgShader.popTextures();
@@ -140,7 +138,7 @@ exec.onTriggered = () =>
 
         outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
 
-        outFpTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get()));
+        outFpTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get() || CGL.Texture.getEmptyTexture(op.patch.cgl)));
         needsUpdate = false;
     }
 

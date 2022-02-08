@@ -78,7 +78,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.PbrPrecomputeIbl"
+        "name": "Ops.Gl.Pbr.PbrEnvironmentLight"
     },
     "authorName": "amajesticseaflapflap",
     "created": 1642599890799,
