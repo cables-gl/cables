@@ -325,12 +325,14 @@ Mesh.prototype.updateNormals = function (geom)
 
 Mesh.prototype._setVertexNumbers = function (arr)
 {
-    if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts)
+    if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts || arr)
     {
         if (arr) this._verticesNumbers = arr;
-        else this._verticesNumbers = new Float32Array(this._numVerts);
-
-        for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
+        else
+        {
+            this._verticesNumbers = new Float32Array(this._numVerts);
+            for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
+        }
 
         this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (attr, geom, shader) =>
         {
