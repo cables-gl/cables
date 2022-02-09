@@ -175,7 +175,7 @@ op.onFileChanged = function (fn)
 {
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
-        textureOut.set(null);
+        textureOut.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
         textureOut.set(CGL.Texture.getTempTexture(cgl));
         realReload(true);
     }

@@ -1,54 +1,54 @@
-var inWidth=op.inValueInt("Width",256);
-var inHeight=op.inValueInt("Height",256);
-var inColor=op.inValueBool("Color",false);
-var outTex=op.outTexture("Texture");
+const
+    inWidth = op.inValueInt("Width", 256),
+    inHeight = op.inValueInt("Height", 256),
+    inColor = op.inValueBool("Color", false),
+    outTex = op.outTexture("Texture");
 
-var cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-inWidth.onChange=
-    inHeight.onChange=
-    inColor.onChange=update;
+inWidth.onChange =
+    inHeight.onChange =
+    inColor.onChange = update;
 
 update();
 
 function update()
 {
-    var width=Math.ceil(inWidth.get());
-    var height=Math.ceil(inHeight.get());
+    let width = Math.ceil(inWidth.get());
+    let height = Math.ceil(inHeight.get());
 
-    if(width<1)width=1;
-    if(height<1)height=1;
+    if (width < 1)width = 1;
+    if (height < 1)height = 1;
 
-    const num =width*4*height;
-    const pixels=new Uint8Array(num);
-    var i=0;
+    const num = width * 4 * height;
+    const pixels = new Uint8Array(num);
 
-    if(inColor.get())
+    if (inColor.get())
     {
-        for(i=0;i<num;i+=4)
+        for (let i = 0; i < num; i += 4)
         {
-            pixels[i+0]=Math.random()*255;
-            pixels[i+1]=Math.random()*255;
-            pixels[i+2]=Math.random()*255;
-            pixels[i+3]=255;
+            pixels[i + 0] = Math.random() * 255;
+            pixels[i + 1] = Math.random() * 255;
+            pixels[i + 2] = Math.random() * 255;
+            pixels[i + 3] = 255;
         }
     }
     else
     {
-        for(i=0;i<num;i+=4)
+        for (let i = 0; i < num; i += 4)
         {
-            var c=Math.random()*255;
-            pixels[i+0]=c;
-            pixels[i+1]=c;
-            pixels[i+2]=c;
-            pixels[i+3]=255;
+            let c = Math.random() * 255;
+            pixels[i + 0] = c;
+            pixels[i + 1] = c;
+            pixels[i + 2] = c;
+            pixels[i + 3] = 255;
         }
     }
 
-    var tex=new CGL.Texture(cgl,{wrap:CGL.Texture.WRAP_REPEAT});
+    let tex = new CGL.Texture(cgl, { "wrap": CGL.Texture.WRAP_REPEAT });
 
-    tex.initFromData(pixels,width,height);
+    tex.initFromData(pixels, width, height);
 
-    outTex.set(null);
+    outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outTex.set(tex);
 }

@@ -49,16 +49,24 @@ class CopyTexture
 
         if (this._fb)
         {
-            if (this._fb.getWidth() != w || this._fb.getHeight() != h)
-                this._fb.setSize(w, h);
+            if (this._fb.getWidth() != w || this._fb.getHeight() != h) this._fb.setSize(w, h);
         }
         else
         {
-            this._fb = new CGL.Framebuffer2(cgl, w, h, {
+            let filter = CGL.Texture.FILTER_LINEAR;
+            let wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+            if (this._options.hasOwnProperty("filter"))filter = this._options.filter;
+            if (this._options.hasOwnProperty("wrap"))wrap = this._options.wrap;
+
+            const options = {
                 "isFloatingPointTexture": this._options.isFloatingPointTexture,
-                "filter": CGL.Texture.FILTER_LINEAR,
-                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-            });
+                "filter": filter,
+                "wrap": wrap,
+            };
+
+            if (cgl.glVersion == 1) this._fb = new CGL.Framebuffer(cgl, w, h, options);
+            else this._fb = new CGL.Framebuffer2(cgl, w, h, options);
         }
 
         cgl.frameStore.renderOffscreen = true;
@@ -73,15 +81,14 @@ class CopyTexture
         this._fb.renderEnd();
         cgl.frameStore.renderOffscreen = false;
 
-
         return this._fb.getTextureColor();
     }
 
     dispose()
     {
-        this._fb.dispose();
-        this.bgShader.dispose();
-        this.mesh.dispose();
+        if (this._fb) this._fb.dispose();
+        if (this.bgShader) this.bgShader.dispose();
+        if (this.mesh) this.mesh.dispose();
     }
 }
 
