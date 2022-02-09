@@ -11,17 +11,20 @@ inHidden.setUiAttribs({ "hideParam": true, "hidePort": true });
 
 function update()
 {
-
     inHidden.set(JSON.stringify(inStr.get()));
-
 }
 
-inHidden.onChange=()=>
+outArr.onLinkChanged = () =>
+{
+    outArr.set(JSON.parse(inHidden.get()));
+};
+
+inHidden.onChange = () =>
 {
     outArr.set(null);
     try
     {
-    outArr.set(JSON.parse(inHidden.get()));
-
-    }catch(e){}
-}
+        outArr.set(JSON.parse(inHidden.get()));
+    }
+    catch (e) {}
+};

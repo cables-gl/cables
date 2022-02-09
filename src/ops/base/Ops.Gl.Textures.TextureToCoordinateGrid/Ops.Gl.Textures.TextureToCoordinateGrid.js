@@ -21,4 +21,6 @@ exec.onTriggered = () =>
 
     outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outFpTex.set(tc.copy(inTex.get()));
+
+    next.trigger();
 };

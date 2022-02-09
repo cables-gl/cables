@@ -75,7 +75,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.TextureToCoordinateGrid"
+        "name": "Ops.Gl.Textures.TextureToCoordinateGrid"
     },
     "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
     "issues": "",
