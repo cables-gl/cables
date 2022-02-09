@@ -103,8 +103,8 @@ function initFb()
 
     fb = null;
 
-    let w = inWidth.get();
-    let h = inWidth.get();
+    let w = Math.max(1, inWidth.get());
+    let h = Math.max(1, inWidth.get());
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;

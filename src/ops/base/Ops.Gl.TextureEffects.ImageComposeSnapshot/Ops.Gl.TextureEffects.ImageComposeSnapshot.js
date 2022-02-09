@@ -20,16 +20,18 @@ render.onTriggered = () =>
     {
         tc = new CGL.CopyTexture(cgl, "textureThief",
             {
-                "isFloatingPointTexture": shouldFp
+                "isFloatingPointTexture": shouldFp,
             });
         fp = shouldFp;
     }
 
     const vp = cgl.getViewPort();
     outTex.set(CGL.Texture.getEmptyTexture(cgl));
-    outTex.set(tc.copy(cgl.currentTextureEffect.getCurrentSourceTexture()));
 
-    effect.startEffect(cgl.currentTextureEffect.getCurrentSourceTexture());
+    const tx = cgl.currentTextureEffect.getCurrentSourceTexture();
+    outTex.set(tc.copy(tx));
+
+    effect.continueEffect(tx);
 
     trigger.trigger();
 };

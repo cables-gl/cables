@@ -46,7 +46,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.FreezeNumber"
+        "name": "Ops.Values.FreezeNumber"
     },
     "authorName": "pandur",
     "created": 1644069298775,

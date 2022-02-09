@@ -1,27 +1,26 @@
 const
-    inTitle=op.inString("title",'New comment'),
-    inText=op.inTextarea("text")
-    ;
+    inTitle = op.inString("title", "New comment"),
+    inText = op.inTextarea("text");
+inTitle.setUiAttribs({ "hidePort": true });
+inText.setUiAttribs({ "hidePort": true });
 
-op.init=
-    inTitle.onChange=
-    inText.onChange=
-    op.onLoaded=update;
+op.init =
+    inTitle.onChange =
+    inText.onChange =
+    op.onLoaded = update;
 
 update();
 
 function update()
 {
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
         op.uiAttr(
             {
-                'comment_title':inTitle.get(),
-                'comment_text':inText.get()
+                "comment_title": inTitle.get(),
+                "comment_text": inText.get()
             });
 
-        op.name=inTitle.get();
+        op.name = inTitle.get();
     }
 }
-
-

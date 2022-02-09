@@ -21,11 +21,13 @@
             {
                 "type": 0,
                 "name": "filter index",
+                "group": "Texture settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "wrap index",
+                "group": "Texture settings",
                 "subType": "integer"
             }
         ],
@@ -45,7 +47,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.Gl.Meshes.GeometryToTexture"
+        "name": "Ops.Gl.Meshes.GeometryToTexture"
     },
     "summary": "convert vertices of a geometry to a data texture",
     "docs": {

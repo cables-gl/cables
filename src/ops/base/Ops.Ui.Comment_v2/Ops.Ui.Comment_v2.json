@@ -10,16 +10,8 @@
         }
     ],
     "layout": {
-        "portsIn": [
-            {
-                "type": "5",
-                "name": "title"
-            },
-            {
-                "type": "5",
-                "name": "text"
-            }
-        ],
+        "portsIn": [],
+        "portsOut": [],
         "name": "Ops.Ui.Comment_v2"
     },
     "summary": "Displays a comment in the patch area",
