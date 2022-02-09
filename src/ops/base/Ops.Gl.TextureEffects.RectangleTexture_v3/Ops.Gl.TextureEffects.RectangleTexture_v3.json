@@ -8,6 +8,7 @@
             {
                 "type": 0,
                 "name": "Blend Mode index",
+                "group": "Blending",
                 "subType": "integer"
             },
             {
@@ -107,6 +108,11 @@
             "message": "Ops.Gl.TextureEffects.Rectangle_v3 renamed to Ops.Gl.TextureEffects.RectangleTexture_v3",
             "author": "pandur",
             "date": 1587376324199
+        },
+        {
+            "message": "fix bug with alpha rendering",
+            "author": "pandur",
+            "date": 1644326911147
         }
     ],
     "summary": "Draw a 2D rectangle with controllable parameters",
