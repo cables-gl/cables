@@ -323,11 +323,12 @@ Mesh.prototype.updateNormals = function (geom)
 };
 
 
-Mesh.prototype._setVertexNumbers = function ()
+Mesh.prototype._setVertexNumbers = function (arr)
 {
     if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts)
     {
-        this._verticesNumbers = new Float32Array(this._numVerts);
+        if (arr) this._verticesNumbers = arr;
+        else this._verticesNumbers = new Float32Array(this._numVerts);
 
         for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
 
