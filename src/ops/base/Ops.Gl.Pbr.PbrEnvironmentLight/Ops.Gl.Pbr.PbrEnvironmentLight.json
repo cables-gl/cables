@@ -80,6 +80,20 @@
         ],
         "name": "Ops.Gl.Pbr.PbrEnvironmentLight"
     },
+    "credits": [
+        {
+            "title": "BabylonJS Shader Code",
+            "author": "Babylon.js",
+            "url": "https://github.com/BabylonJS/Babylon.js/blob/master/license.md",
+            "licence": "Apache License"
+        },
+        {
+            "title": "Filament Code",
+            "author": "google",
+            "url": "https://github.com/google/filament/blob/main/LICENSE",
+            "licence": "Apache License"
+        }
+    ],
     "authorName": "amajesticseaflapflap",
     "created": 1642599890799,
     "summary": "PBR image based lighting setup",
