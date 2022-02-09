@@ -1,0 +1,1 @@
+filter an array of arbitrary stride by one set of elements and output the filtered array

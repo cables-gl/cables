@@ -65,6 +65,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Number",
+                "text": "current input value"
+            },
+            {
+                "name": "Button",
+                "text": "freeze the output value"
+            }
+        ]
     }
 }
