@@ -39,6 +39,19 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Download",
+                "text": "download file every time triggered"
+            },
+            {
+                "name": "Filename",
+                "text": "the filename of the downloaded file"
+            },
+            {
+                "name": "Content String",
+                "text": "the files contents"
+            }
+        ]
     }
 }

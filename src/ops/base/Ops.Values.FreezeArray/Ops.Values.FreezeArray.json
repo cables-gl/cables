@@ -54,7 +54,7 @@
                 "name": "Frozen Array"
             }
         ],
-        "name": "Ops.User.pandur.FreezeArray"
+        "name": "Ops.Values.FreezeArray"
     },
     "authorName": "pandur",
     "created": 1644069519267,
@@ -65,6 +65,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Number",
+                "text": "current input value"
+            },
+            {
+                "name": "Button",
+                "text": "freeze the output value"
+            }
+        ]
     }
 }

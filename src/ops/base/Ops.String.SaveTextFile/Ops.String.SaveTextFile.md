@@ -1,0 +1,1 @@
+make your browser download a textfile containing the input-string on trigger

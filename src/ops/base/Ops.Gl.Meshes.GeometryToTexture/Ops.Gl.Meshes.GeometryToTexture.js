@@ -5,13 +5,10 @@ const
 
     tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
-    // inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
+    inRandomize = op.inBool("Randomize", false),
     next = op.outTrigger("Next"),
     outNumVerts = op.outNumber("Total Vertices"),
     outTex = op.outTexture("Texture");
-    // outTex2 = op.outTexture("Texture 2"),
-    // outTex3 = op.outTexture("Texture 3"),
-    // outTex4 = op.outTexture("Texture 4");
 
 op.setPortGroup("Texture settings", [tfilter, twrap]);
 
@@ -20,19 +17,17 @@ const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
 
+let needsUpdate = true;
 let shader = null;
+const showingError = false;
+const tex = null;
+let fb = null;
+let needInit = true;
+let mesh = null;
 
 inWidth.onChange =
     tfilter.onChange =
-    // inNumTex.onChange =
     twrap.onChange = initFbLater;
-
-const showingError = false;
-
-let fb = null;
-const tex = null;
-let needInit = true;
-let mesh = null;
 
 updateUI();
 
@@ -56,17 +51,48 @@ mod.addModule({
 
 mod.addUniformVert("f", "MOD_texSize", inWidth);
 
+function shuffleArray(array)
+{
+    let i = 0;
+    let j = 0;
+    let temp = null;
+
+    for (i = array.length - 1; i > 0; i -= 1)
+    {
+        j = Math.floor(Math.seededRandom() * (i + 1));
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+inRandomize.onChange =
 inGeom.onChange = function ()
 {
-    const g = inGeom.get();
+    const geo = inGeom.get();
+    needsUpdate = true;
 
     if (mesh)mesh.dispose();
-    if (g)
+    if (geo)
     {
+        const g = geo.copy();
+
         mesh = new CGL.Mesh(cgl, g, cgl.gl.POINTS);
         mesh.addVertexNumbers = true;
-        mesh._setVertexNumbers();
-        outNumVerts.set(g.vertices.length / 3);
+
+        let numVerts = g.vertices.length / 3;
+
+        if (inRandomize.get())
+        {
+            let vertNums = new Float32Array(numVerts);
+            for (let i = 0; i < numVerts; i++) vertNums[i] = i;
+            shuffleArray(vertNums);
+
+            mesh._setVertexNumbers(vertNums);
+        }
+        else mesh._setVertexNumbers();
+
+        outNumVerts.set(numVerts);
     }
     else
     {
@@ -89,22 +115,17 @@ function initFbLater()
     warning();
 }
 
-// drawBuffArr.length = 0;
-// for (let i = 0; i < numTextures; i++)drawBuffArr[i] = true;
-
 function initFb()
 {
     needInit = false;
     if (fb)fb.delete();
 
     console.log("initfb");
-    // const oldLen = drawBuffArr.length;
-    // numTextures = parseInt(inNumTex.get());
 
     fb = null;
 
-    let w = inWidth.get();
-    let h = inWidth.get();
+    let w = Math.max(1, inWidth.get());
+    let h = Math.max(1, inWidth.get());
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
@@ -119,7 +140,6 @@ function initFb()
             {
                 "isFloatingPointTexture": true,
                 "multisampling": false,
-                // "numRenderBuffers": numTextures,
                 "wrap": selectedWrap,
                 "filter": filter,
                 "depth": true,
@@ -143,6 +163,8 @@ exec.onTriggered = function ()
     const vp = cgl.getViewPort();
 
     if (!fb || needInit)initFb();
+
+    let needsUpdate = true;
 
     prevViewPort[0] = vp[0];
     prevViewPort[1] = vp[1];
@@ -181,14 +203,6 @@ exec.onTriggered = function ()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
-    // if (numTextures >= 2)
-    // {
-    //     outTex.set(fb.getTextureColorNum(0));
-    //     // outTex2.set(fb.getTextureColorNum(1));
-    //     // outTex3.set(fb.getTextureColorNum(2));
-    //     // outTex4.set(fb.getTextureColorNum(3));
-    // }
-    // else
     outTex.set(fb.getTextureColor());
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);

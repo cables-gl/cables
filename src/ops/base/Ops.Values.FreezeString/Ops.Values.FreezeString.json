@@ -34,7 +34,7 @@
                 "name": "Frozen String"
             }
         ],
-        "name": "Ops.User.pandur.FreezeString"
+        "name": "Ops.Values.FreezeString"
     },
     "authorName": "pandur",
     "created": 1643831677411,
@@ -45,6 +45,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "String",
+                "text": "current input value"
+            },
+            {
+                "name": "Button",
+                "text": "freeze the output value"
+            }
+        ]
     }
 }

@@ -68,9 +68,8 @@ void main()
     // col = vec4( (1.0-d)*vec3(r,g,b),1.0);
 
     col=vec4( _blend(base.rgb,vec3(r,g,b)) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*(1.0-d)*amount),1.0);
+    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*a*(1.0-d)*amount),1.0);
     outColor=col;
-    // outColor= cgl_blend(base,col,amount);
 
 
 }

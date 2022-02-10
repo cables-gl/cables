@@ -68,16 +68,5 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.finish();
     cgl.popShader();
 
-    // cgl.pushShader(shader);
-    // cgl.currentTextureEffect.bind();
-
-    // if (inAspect.get()) uniformAspect.set(texture.height / texture.width);
-    // else uniformAspect.set(1);
-
-    // cgl.setTexture(0, texture.tex);
-
-    // cgl.currentTextureEffect.finish();
-    // cgl.popShader();
-
     trigger.trigger();
 };

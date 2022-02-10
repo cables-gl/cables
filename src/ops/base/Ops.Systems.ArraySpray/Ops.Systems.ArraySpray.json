@@ -25,6 +25,11 @@
             "message": "Added output trigger",
             "author": "simod",
             "date": 1571748235057
+        },
+        {
+            "message": "fix bug with centering axis parameters",
+            "author": "pandur",
+            "date": 1644336157366
         }
     ],
     "authorName": "pandur",
