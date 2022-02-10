@@ -38,6 +38,7 @@ function getSupportedMimeTypes(media, types, codecs, codecsB)
 const
     recordingToggle = op.inBool("Recording", false),
 
+    inFilename = op.inString("Filename", "cables"),
     inCodecs = op.inDropDown("Mimetype", supportedVideos),
     inMbit = op.inFloat("MBit", 5),
     inFPS = op.inFloat("FPS", 30),
@@ -177,6 +178,8 @@ function startRecording()
         return;
     }
 
+    recordedBlobs = [];
+
     op.setUiError("noobj", null);
 
     console.log("start recording: ", inCodecs.get());
@@ -224,7 +227,7 @@ function download()
     let ext = "webm";
     if (codec.indexOf("video/x-matroska") >= 0)ext = "mkv";
     if (codec.indexOf("video/mp4") >= 0)ext = "mp4";
-    a.download = "test." + ext;
+    a.download = (inFilename.get() || "cables") + "." + ext;
     document.body.appendChild(a);
     a.click();
     setTimeout(() =>
