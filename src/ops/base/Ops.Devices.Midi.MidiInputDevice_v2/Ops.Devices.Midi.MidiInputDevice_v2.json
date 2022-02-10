@@ -60,9 +60,7 @@
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiNRPN"
     ],
-    "youtubeids": [
-        "eDlaFD_d5lc"
-    ],
+    "youtubeids": [],
     "docs": {
         "ports": [
             {

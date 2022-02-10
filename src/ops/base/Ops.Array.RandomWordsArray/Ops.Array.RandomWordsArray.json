@@ -12,9 +12,10 @@
         ]
     },
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Words"
             }
         ],
