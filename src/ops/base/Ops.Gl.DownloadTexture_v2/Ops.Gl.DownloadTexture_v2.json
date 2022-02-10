@@ -1,1 +1,63 @@
-{"id":"00d2a6ea-5843-43d0-9428-dbc47c112e6e","changelog":[{"message":"created op","author":"pandur","date":1599663115666}],"authorName":"pandur","created":1599663137521,"layout":{"portsIn":[{"type":"2","name":"Texture"},{"type":"1","name":"Download"},{"type":"5","name":"Filename"}],"portsOut":[{"type":"0","name":"Finished","subType":"boolean"}],"name":"Ops.Gl.DownloadTexture_v2"},"summary":"Download a texture as png file","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"Texture","text":"Texture in to capture"},{"name":"Download","text":"Trigger to download the texture/image"},{"name":"Filename","text":"The name of the downloaded file"},{"name":"Finished","text":"When the texture is downloaded outputs true"}]}}
+{
+    "id": "00d2a6ea-5843-43d0-9428-dbc47c112e6e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599663115666
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1599663137521,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "1",
+                "name": "Download"
+            },
+            {
+                "type": "5",
+                "name": "Filename"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Finished",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.DownloadTexture_v2"
+    },
+    "summary": "Download a texture as png file",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "YFvVsEPirRc"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "Texture in to capture"
+            },
+            {
+                "name": "Download",
+                "text": "Trigger to download the texture/image"
+            },
+            {
+                "name": "Filename",
+                "text": "The name of the downloaded file"
+            },
+            {
+                "name": "Finished",
+                "text": "When the texture is downloaded outputs true"
+            }
+        ]
+    }
+}
