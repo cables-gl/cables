@@ -56,15 +56,9 @@
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiNRPN"
     ],
-    "youtubeids": [
-        "eDlaFD_d5lc"
-    ],
+    "youtubeids": [],
     "docs": {
         "ports": [
-            {
-                "name": "Device",
-                "text": "list of your midi devices"
-            },
             {
                 "name": "Learn",
                 "text": "press button and send midi signal to automatically create op"

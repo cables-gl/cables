@@ -53,7 +53,16 @@
     },
     "summary": "draw a graph of a value into a texture",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "value",
+                "text": "input value to graph. When using with repeat, use a Number Switch connected to Repeat Op's index to feed multiple numbers"
+            },
+            {
+                "name": "index",
+                "text": "use a Repeat Op index out to add multiple graphs to your texture"
+            }
+        ]
     },
     "changelog": [
         {
@@ -61,5 +70,9 @@
             "author": "pandur",
             "date": 1572942675116
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
