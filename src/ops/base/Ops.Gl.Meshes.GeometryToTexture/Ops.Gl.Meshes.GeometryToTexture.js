@@ -192,6 +192,13 @@ exec.onTriggered = function ()
 
     mod.bind();
 
+    if (!cgl.getShader())
+    {
+        op.setUiError("not in mainloop", "Needs to be connected to mainloop branch");
+        return;
+    }
+    else op.setUiError("not in mainloop", null);
+
     if (mesh)
     {
         cgl.getShader().setDrawBuffers(drawBuffArr);
