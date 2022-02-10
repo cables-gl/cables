@@ -2,6 +2,7 @@ const numValues = op.inValueInt("Num Values", 100);
 const inModeSwitch = op.inSwitch("Mode", ["A", "AB", "ABC", "ABCD"], "A");
 const inSeed = op.inValueFloat("Random Seed ", 0);
 const inInteger = op.inBool("Integer", false);
+const outValues = op.outArray("Array Out");
 
 const letters = ["A", "B", "C", "D"];
 
@@ -23,7 +24,6 @@ for (let i = 0; i < inArray.length; i += 1)
     if (i > 0) keys.forEach(function (key) { portObj[key].setUiAttribs({ "greyout": true }); });
 }
 
-const outValues = op.outArray("Array Out", 1);
 
 inModeSwitch.onChange = function ()
 {

@@ -856,10 +856,12 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outArray = function (name, stride)
+    Op.prototype.outArray = function (name, v, stride)
     {
+        if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
-        // if (v !== undefined) p.set(v);
+        if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
+
         p.ignoreValueSerialize = true;
         return p;
     };
