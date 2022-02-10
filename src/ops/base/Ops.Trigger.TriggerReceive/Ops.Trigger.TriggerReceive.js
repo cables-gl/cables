@@ -50,5 +50,4 @@ function updateError()
         op.setUiError("unknowntrigger", "unknown trigger");
     }
     else op.setUiError("unknowntrigger", null);
-    console.log("op.varName", op.varName.get());
 }
