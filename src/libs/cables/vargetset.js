@@ -144,8 +144,8 @@ const VarSetOpWrapper = class
                 this._op.patch.setVarValue(name, null);
             }
 
-            this._op.patch.setVarValue(name, this._valuePort.get());
         }
+        this._op.patch.setVarValue(name, this._valuePort.get());
         if (triggered && this._nextPort) this._nextPort.trigger();
     }
 };
