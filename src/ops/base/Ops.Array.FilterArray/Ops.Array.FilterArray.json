@@ -56,6 +56,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Stride index",
+                "text": "the type of the array (Array3, Array2, ...)"
+            },
+            {
+                "name": "Compare Element index",
+                "text": "which element to compare (see stride)"
+            }
+        ]
     }
 }

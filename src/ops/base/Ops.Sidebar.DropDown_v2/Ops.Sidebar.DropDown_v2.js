@@ -5,6 +5,7 @@ const valuesPort = op.inArray("Values");
 const defaultValuePort = op.inString("Default", "");
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
+const inSize = op.inInt("Lines", 1);
 
 // outputs
 const siblingsPort = op.outObject("Children");
@@ -43,6 +44,7 @@ const labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
 const input = document.createElement("select");
+
 input.classList.add("sidebar__select-select");
 el.appendChild(input);
 input.addEventListener("input", onInput);
@@ -72,6 +74,11 @@ valuesPort.onChange = onValuesPortChange;
 let options = [];
 // functions
 
+inSize.onChange = () =>
+{
+    input.setAttribute("size", inSize.get());
+};
+
 op.onLoaded = function ()
 {
     valuePort.set(defaultValuePort.get());
@@ -91,6 +98,7 @@ function onValuesPortChange()
         options.forEach(function (option)
         {
             const optionEl = document.createElement("option");
+
             optionEl.setAttribute("value", option);
             if (option === defaultValue || option === valuePort.get())
             {

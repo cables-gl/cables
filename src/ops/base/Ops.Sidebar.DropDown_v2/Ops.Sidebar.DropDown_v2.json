@@ -41,6 +41,11 @@
                 "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Lines",
+                "subType": "integer"
             }
         ],
         "portsOut": [
