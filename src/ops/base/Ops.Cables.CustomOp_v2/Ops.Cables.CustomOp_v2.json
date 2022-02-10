@@ -50,60 +50,27 @@
                 "name": "Library"
             },
             {
-                "type": 1,
-                "name": "Update"
-            },
-            {
-                "type": 3,
+                "type": 2,
                 "name": "Data"
-            },
-            {
-                "type": 5,
-                "name": "Filter Unit"
-            },
-            {
-                "type": 3,
-                "name": "Links"
-            },
-            {
-                "type": 3,
-                "name": "Unit Names"
-            },
-            {
-                "type": 3,
-                "name": "Unit Pos"
-            },
-            {
-                "type": 0,
-                "name": "Unit Cluster Size",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Sphere Size",
-                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": 3,
-                "name": "Positions Internal"
+                "type": 1,
+                "name": "Ready"
             },
             {
-                "type": 3,
-                "name": "Positions Internal TC"
+                "type": 2,
+                "name": "Graph"
             },
             {
-                "type": 3,
-                "name": "Positions External"
+                "type": 0,
+                "name": "Error",
+                "subType": "boolean"
             },
             {
-                "type": 3,
-                "name": "Positions External TC"
-            },
-            {
-                "type": 3,
-                "name": "modified Data"
+                "type": 5,
+                "name": "Error message"
             }
         ],
         "name": "Ops.Cables.CustomOp_v2"
