@@ -1282,7 +1282,6 @@ Patch.prototype.getVars = function (t)
     return vars;
 };
 
-
 /**
  * @function exitError
  * @memberof Patch

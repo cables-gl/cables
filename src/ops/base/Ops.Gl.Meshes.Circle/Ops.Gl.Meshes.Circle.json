@@ -83,7 +83,15 @@
             {
                 "name": "render",
                 "text": "Executes the op, renders a circle to the canvas."
+            },
+            {
+                "name": "innerRadius",
+                "text": "From 0 to 1"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

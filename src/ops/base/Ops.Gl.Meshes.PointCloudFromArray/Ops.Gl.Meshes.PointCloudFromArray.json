@@ -76,12 +76,19 @@
                 "text": "Random seed for Scramble Texcoords"
             },
             {
+                "name": "Coordinates",
+                "text": "Array2 for texture coordinates to cover your point cloud"
+            },
+            {
+                "name": "Vertex Colors",
+                "text": "input an Array4 (RGBA) - must be the correct size to color all of your points. PointMaterial needs to be set to \"use vertex colors\""
+            },
+            {
                 "name": "Geometry",
                 "text": "Outputs geometry object"
             }
         ]
     },
-    "youtubeid": "tFM2Ixf-ixs",
     "issues": "",
     "collections": [
         "pointArrays"
@@ -114,5 +121,8 @@
             "author": "pandur",
             "date": 1628232921767
         }
+    ],
+    "youtubeids": [
+        "tFM2Ixf-ixs"
     ]
 }

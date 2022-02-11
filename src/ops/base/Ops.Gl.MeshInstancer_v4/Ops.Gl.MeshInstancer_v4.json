@@ -100,7 +100,9 @@
         "Ops.Array.RandomNumbersArray3",
         "Ops.Array.RandomNumbersArray4"
     ],
-    "youtubeids": [],
+    "youtubeids": [
+        "DW9U5tv1GHM"
+    ],
     "docs": {
         "ports": [
             {
@@ -120,10 +122,6 @@
                 "text": "Enable to set a limit on how many instances are created"
             },
             {
-                "name": "Limit",
-                "text": "If limit instances is enabled this number determines how many instances are created"
-            },
-            {
                 "name": "positions",
                 "text": "Needs an XYZ array to determine the positions of each instance"
             },
@@ -138,10 +136,6 @@
             {
                 "name": "Material blend mode index",
                 "text": "Pick a material blend mode with an integer"
-            },
-            {
-                "name": "Material blend mode",
-                "text": "Multiply, Add or Normal. Pick the blending mode the material for instances "
             },
             {
                 "name": "Colors",

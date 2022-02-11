@@ -255,7 +255,7 @@ const execute = () =>
                         const oldHandler = port.onChange;
                         port.onChange = (p, v) =>
                         {
-                            savePortData();
+                            if (!port.isLinked()) savePortData();
                             oldHandler(p, v);
                         };
                     }
@@ -263,7 +263,7 @@ const execute = () =>
                     {
                         port.onChange = () =>
                         {
-                            savePortData();
+                            if (!port.isLinked()) savePortData();
                         };
                     }
 
@@ -273,7 +273,7 @@ const execute = () =>
                         const oldValueHandler = port.onValueChanged;
                         port.onValueChanged = (p, v) =>
                         {
-                            savePortData();
+                            if (!port.isLinked()) savePortData();
                             oldValueHandler(p, v);
                         };
                     }
