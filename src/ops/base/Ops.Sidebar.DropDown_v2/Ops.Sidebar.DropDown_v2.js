@@ -6,6 +6,8 @@ const defaultValuePort = op.inString("Default", "");
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
 const inSize = op.inInt("Lines", 1);
+const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
+setDefaultValueButtonPort.onTriggered = setDefault;
 
 // outputs
 const siblingsPort = op.outObject("Children");
@@ -172,11 +174,11 @@ function onDefaultValueChanged()
 
 function onLabelTextChanged()
 {
-    const labelText = labelPort.get();
-    label.textContent = labelText;
+    const lblText = labelPort.get();
+    label.textContent = lblText;
     if (CABLES.UI)
     {
-        op.setTitle("Dropdown: " + labelText);
+        op.setTitle("Dropdown: " + lblText);
     }
 }
 
@@ -198,20 +200,20 @@ function onParentChanged()
     }
 }
 
-function showElement(el)
+function showElement(ele)
 {
-    if (el)
+    if (ele)
     {
-        el.style.display = "block";
+        ele.style.display = "block";
     }
     setSelectedProperty();
 }
 
-function hideElement(el)
+function hideElement(ele)
 {
-    if (el)
+    if (ele)
     {
-        el.style.display = "none";
+        ele.style.display = "none";
     }
 }
 
@@ -220,10 +222,19 @@ function onDelete()
     removeElementFromDOM(el);
 }
 
-function removeElementFromDOM(el)
+function removeElementFromDOM(ele)
 {
-    if (el && el.parentNode && el.parentNode.removeChild)
+    if (ele && ele.parentNode && ele.parentNode.removeChild)
     {
-        el.parentNode.removeChild(el);
+        ele.parentNode.removeChild(ele);
+    }
+}
+
+function setDefault()
+{
+    defaultValuePort.set(input.value);
+    if (CABLES.UI && op.isCurrentUiOp())
+    {
+        gui.opParams.show(op); /* update DOM */
     }
 }

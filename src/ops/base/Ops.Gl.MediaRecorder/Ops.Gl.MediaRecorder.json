@@ -15,6 +15,11 @@
             "message": "Ops.Dev.MediaRecorder renamed to Ops.Gl.MediaRecorder",
             "author": "pandur",
             "date": 1638262270448
+        },
+        {
+            "message": "remove autoDownload option",
+            "author": "stephan",
+            "date": 1644588080538
         }
     ],
     "authorName": "pandur",
@@ -64,11 +69,6 @@
                 "type": 5,
                 "name": "Video Canvas Id",
                 "group": "Inputs"
-            },
-            {
-                "type": 0,
-                "name": "Auto Download",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
