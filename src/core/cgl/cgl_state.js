@@ -186,6 +186,7 @@ const Context = function (_patch)
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
             this._log.error("canvas lost...", event);
+            this.emitEvent("webglcontextlost");
             this.aborted = true;
         });
 
