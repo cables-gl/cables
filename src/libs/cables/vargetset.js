@@ -90,6 +90,7 @@ const VarSetOpWrapper = class
             this._op.refreshParams();
         }
         this._updateDisplay();
+        this._op.patch.emitEvent("opVariableNameChanged", this._op, this._varNamePort.get());
     }
 
     _createVar()
@@ -232,6 +233,7 @@ const VarGetOpWrapper = class
             this._op.setUiAttrib({ "extendTitle": "#invalid" });
             this._valueOutPort.set(0);
         }
+        this._op.patch.emitEvent("opVariableNameChanged", this._op, this._varnamePort.get());
     }
 };
 
