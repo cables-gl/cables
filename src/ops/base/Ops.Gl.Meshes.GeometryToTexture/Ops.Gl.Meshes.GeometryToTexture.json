@@ -62,6 +62,10 @@
                 "text": "Trigger the op"
             },
             {
+                "name": "Tex Size",
+                "text": "set the dimension of the square texture"
+            },
+            {
                 "name": "filter index",
                 "text": "Pick a filter mode with an integer"
             },
@@ -122,5 +126,6 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "caniusequery": ""
 }
