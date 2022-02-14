@@ -1,6 +1,6 @@
 const
     inExec = op.inTriggerButton("Transform"),
-    inArr = op.inArray("Array"),
+    inArr = op.inArray("Array", 3),
     transX = op.inFloat("Translate X"),
     transY = op.inFloat("Translate Y"),
     transZ = op.inFloat("Translate Z"),
@@ -11,7 +11,7 @@ const
     rotY = op.inFloat("Rotation Y"),
     rotZ = op.inFloat("Rotation Z"),
     next = op.outTrigger("Next"),
-    outArr = op.outArray("Result");
+    outArr = op.outArray("Result", 3);
 
 op.setPortGroup("Translation", [transX, transY, transZ]);
 op.setPortGroup("Scale", [scaleX, scaleY, scaleZ]);
