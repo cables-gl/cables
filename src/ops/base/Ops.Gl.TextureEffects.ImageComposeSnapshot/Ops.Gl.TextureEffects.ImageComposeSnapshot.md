@@ -1,0 +1,1 @@
+trigger this op to grab the state of an imagecompose, depending on where this op is placed in an imagecompose stack. This op can give you live output of your changes, or be triggered on demand by patching something like a GateTrigger.
