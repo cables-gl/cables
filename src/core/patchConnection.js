@@ -28,7 +28,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
 
     if (data.event == CONSTANTS.PACO.PACO_OP_CREATE)
     {
-        this._log.log("op create: data.vars.objName");
+        this._log.log("op create:", data.vars.objName);
         if (this._patch.getOpById(data.vars.opId)) return;
 
         let op = null;
@@ -38,23 +38,37 @@ PatchConnectionReceiver.prototype._receive = function (ev)
             gui.serverOps.loadOpLibs(data.vars.objName, () =>
             {
                 op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
-                op.id = data.vars.opId;
-                op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
+                if (op)
+                {
+                    op.id = data.vars.opId;
+                    op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
+                    if (data.vars.portsIn)
+                    {
+                        data.vars.portsIn.forEach((portInfo) =>
+                        {
+                            const port = op.getPortByName(portInfo.name);
+                            if (port) port.set(portInfo.value);
+                        });
+                    }
+                }
             });
         }
         else
         {
             op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
-            op.id = data.vars.opId;
-            op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
-        }
-        if (op && data.vars.portsIn)
-        {
-            data.vars.portsIn.forEach((portInfo) =>
+            if (op)
             {
-                const port = op.getPortByName(portInfo.name);
-                if (port) port.set(portInfo.value);
-            });
+                op.id = data.vars.opId;
+                op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
+                if (data.vars.portsIn)
+                {
+                    data.vars.portsIn.forEach((portInfo) =>
+                    {
+                        const port = op.getPortByName(portInfo.name);
+                        if (port) port.set(portInfo.value);
+                    });
+                }
+            }
         }
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
@@ -117,24 +131,25 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         const op1 = this._patch.getOpById(data.vars.op1);
         const op2 = this._patch.getOpById(data.vars.op2);
-        this._patch.link(op1, data.vars.port1, op2, data.vars.port2);
+        if (op1 && op2) this._patch.link(op1, data.vars.port1, op2, data.vars.port2);
     }
     else if (data.event == CONSTANTS.PACO.PACO_VALUECHANGE)
     {
         // do not handle variable creation events
         if (data.vars.v === "+ create new one") return;
         const op = this._patch.getOpById(data.vars.op);
-        const p = op.getPort(data.vars.port);
-        p.set(data.vars.v);
+        if (op)
+        {
+            const p = op.getPort(data.vars.port);
+            if (p) p.set(data.vars.v);
+        }
     }
     else if (data.event == CONSTANTS.PACO.PACO_VARIABLES)
     {
-        if (data.vars.variables)
+        const op = this._patch.getOpById(data.vars.opId);
+        if (op)
         {
-            data.vars.variables.forEach((variable) =>
-            {
-                this._patch.setVarValue(variable.name, variable.value, variable.type);
-            });
+            if (op.varName) op.varName.set(data.vars.varName);
         }
     }
     else
@@ -195,20 +210,13 @@ const PatchConnectionSender = function (patch)
         this.send(CABLES.PACO_UIATTRIBS, { "op": op.id, "uiAttribs": op.uiAttribs });
     });
 
-    patch.addEventListener("variablesChanged", () =>
+    patch.addEventListener("opVariableNameChanged", (op, varName) =>
     {
-        const vars = [];
-        const patchVars = patch.getVars();
-        for (const i in patch.getVars())
-        {
-            const patchVar = patchVars[i];
-            vars.push({
-                "name": patchVar.getName(),
-                "type": patchVar.type,
-                "value": patchVar.getValue()
-            });
-        }
-        this.send(CABLES.PACO_VARIABLES, { "variables": vars });
+        const vars = {
+            "opId": op.id,
+            "varName": varName
+        };
+        this.send(CABLES.PACO_VARIABLES, vars);
     });
 
     patch.addEventListener("onLink", (p1, p2) =>
