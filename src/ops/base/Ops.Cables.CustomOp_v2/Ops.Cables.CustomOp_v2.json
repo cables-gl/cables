@@ -48,31 +48,9 @@
             {
                 "type": 5,
                 "name": "Library"
-            },
-            {
-                "type": 2,
-                "name": "Data"
             }
         ],
-        "portsOut": [
-            {
-                "type": 1,
-                "name": "Ready"
-            },
-            {
-                "type": 2,
-                "name": "Graph"
-            },
-            {
-                "type": 0,
-                "name": "Error",
-                "subType": "boolean"
-            },
-            {
-                "type": 5,
-                "name": "Error message"
-            }
-        ],
+        "portsOut": [],
         "name": "Ops.Cables.CustomOp_v2"
     },
     "summary": "code a custom op that will only be available in the current patch",

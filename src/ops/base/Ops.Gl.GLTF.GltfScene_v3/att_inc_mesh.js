@@ -3,6 +3,19 @@ let gltfMesh = class
 {
     constructor(name, prim, gltf, finished)
     {
+
+
+
+    this.PRIM_POINTS=0;
+    this.LINES=1;
+    this.LINE_LOOP=2;
+    this.LINE_STRIP=3;
+    this.TRIANGLES=4;
+    this.TRIANGLE_STRIP=5;
+    this.TRIANGLE_FAN=6;
+
+
+
         this.test = 0;
         this.name = name;
         this.material = prim.material;
@@ -10,6 +23,7 @@ let gltfMesh = class
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
+        this.primitive=prim.mode||4;
 
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
 
@@ -38,8 +52,6 @@ let gltfMesh = class
 
                 this._matPbrMetalness=this.materialJson.pbrMetallicRoughness.metallicFactor||null;
                 this._matPbrRoughness=this.materialJson.pbrMetallicRoughness.roughnessFactor||null;
-
-
             }
         }
 
@@ -239,41 +251,45 @@ let gltfMesh = class
             }
         }
 
-        if (!geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
-
-        if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
+        if(this.primitive==this.TRIANGLES)
         {
-            const bitan = vec3.create();
-            const tan = vec3.create();
+            if (!geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
 
-            const tangents = geom.tangents;
-            geom.tangents = new Float32Array(tangents.length / 4 * 3);
-            geom.biTangents = new Float32Array(tangents.length / 4 * 3);
-
-            for (let i = 0; i < tangents.length; i += 4)
+            if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
             {
-                const idx = i / 4 * 3;
+                const bitan = vec3.create();
+                const tan = vec3.create();
 
-                vec3.cross(
-                    bitan,
-                    [geom.vertexNormals[idx], geom.vertexNormals[idx + 1], geom.vertexNormals[idx + 2]],
-                    [tangents[i], tangents[i + 1], tangents[i + 2]]
-                );
+                const tangents = geom.tangents;
+                geom.tangents = new Float32Array(tangents.length / 4 * 3);
+                geom.biTangents = new Float32Array(tangents.length / 4 * 3);
 
-                vec3.div(bitan, bitan, [tangents[i + 3], tangents[i + 3], tangents[i + 3]]);
-                vec3.normalize(bitan, bitan);
+                for (let i = 0; i < tangents.length; i += 4)
+                {
+                    const idx = i / 4 * 3;
 
-                geom.biTangents[idx + 0] = bitan[0];
-                geom.biTangents[idx + 1] = bitan[1];
-                geom.biTangents[idx + 2] = bitan[2];
+                    vec3.cross(
+                        bitan,
+                        [geom.vertexNormals[idx], geom.vertexNormals[idx + 1], geom.vertexNormals[idx + 2]],
+                        [tangents[i], tangents[i + 1], tangents[i + 2]]
+                    );
 
-                geom.tangents[idx + 0] = tangents[i + 0];
-                geom.tangents[idx + 1] = tangents[i + 1];
-                geom.tangents[idx + 2] = tangents[i + 2];
+                    vec3.div(bitan, bitan, [tangents[i + 3], tangents[i + 3], tangents[i + 3]]);
+                    vec3.normalize(bitan, bitan);
+
+                    geom.biTangents[idx + 0] = bitan[0];
+                    geom.biTangents[idx + 1] = bitan[1];
+                    geom.biTangents[idx + 2] = bitan[2];
+
+                    geom.tangents[idx + 0] = tangents[i + 0];
+                    geom.tangents[idx + 1] = tangents[i + 1];
+                    geom.tangents[idx + 2] = tangents[i + 2];
+                }
             }
+
+            if (geom.tangents.length === 0 || inCalcNormals.get()) geom.calcTangentsBitangents();
         }
 
-        if (geom.tangents.length === 0 || inCalcNormals.get()) geom.calcTangentsBitangents();
         this.geom = geom;
 
         this.bounds = geom.getBounds();
@@ -290,10 +306,19 @@ let gltfMesh = class
                 g.unIndex(false, true);
             }
 
-            this.mesh = new CGL.Mesh(cgl, g);
-            this.mesh._geom = null;
 
-            // this.geom = null;
+            let glprim;
+            if(this.primitive==this.TRIANGLES)glprim=cgl.gl.TRIANGLES;
+            else if(this.primitive==this.LINES)glprim=cgl.gl.LINES;
+            else if(this.primitive==this.LINE_STRIP)glprim=cgl.gl.LINE_STRIP;
+            else if(this.primitive==this.POINTS)glprim=cgl.gl.POINTS;
+            else
+            {
+                op.logWarn("unknown primitive type",this);
+            }
+
+            this.mesh = new CGL.Mesh(cgl, g,glprim);
+            this.mesh._geom = null;
         }
         else
         {
@@ -373,6 +398,7 @@ let gltfMesh = class
                     }
                     else uniPbrRoughness.setValue(0);
             }
+
 
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
 

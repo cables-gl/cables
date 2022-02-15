@@ -77,7 +77,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Dev.Gl.Meshes.PointCloudFromTexture"
+        "name": "Ops.Gl.Meshes.PointCloudFromTexture"
     },
     "coreLibs": [
         "cgl_shadermodifier"
@@ -89,6 +89,27 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Num Points",
+                "text": "set a limit to the number of points that will be rendered - \"0\" is no limit"
+            },
+            {
+                "name": "Axis index",
+                "text": "XYZ or XY (2d) cloud mode"
+            },
+            {
+                "name": "Texture",
+                "text": "RGB texture input where each pixels color value assigns a points position in 3D space"
+            },
+            {
+                "name": "Point Size",
+                "text": "mono color texture input to change each points size"
+            },
+            {
+                "name": "Normalize",
+                "text": "center the pointcloud"
+            }
+        ]
     }
 }

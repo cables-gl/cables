@@ -12,6 +12,7 @@ const cgl = op.patch.cgl;
 // let inTexUniform = null;
 let mesh = null;
 let numVerts = 0;
+let currentNum = 0;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -36,7 +37,7 @@ inNorm.onChange =
 
 let needsMeshSetup = true;
 
-inTex.onChange =
+inTex.onChange = () => { if (inTex.get() != CGL.Texture.getEmptyTexture(cgl))needsMeshSetup = true; };
 inNum.onChange = () => { needsMeshSetup = true; };
 updateDefines();
 
@@ -50,6 +51,13 @@ function updateDefines()
 
 function doRender()
 {
+    if (inTex.get() == CGL.Texture.getEmptyTexture(cgl))
+    {
+        trigger.trigger();
+
+        return;
+    }
+
     if (needsMeshSetup)setupMesh();
     mod.bind();
     if (!inTex.get() || !inTex.get().tex) return;
@@ -67,8 +75,10 @@ function doRender()
 function setupMesh()
 {
     if (!inTex.get()) return;
-
     const num = inTex.get().width * inTex.get().height;
+
+    if (num == currentNum) return;
+    currentNum = num;
 
     let verts = new Float32Array(num * 3);
     let texCoords = new Float32Array(num * 2);

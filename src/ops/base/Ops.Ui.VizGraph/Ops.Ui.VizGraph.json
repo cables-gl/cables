@@ -60,6 +60,10 @@
                 "type": 0,
                 "name": "Number 8",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [],
