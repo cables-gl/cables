@@ -152,6 +152,14 @@ PatchConnectionReceiver.prototype._receive = function (ev)
             if (op.varName) op.varName.set(data.vars.varName);
         }
     }
+    else if (data.event == CONSTANTS.PACO.PACO_TRIGGERS)
+    {
+        const op = this._patch.getOpById(data.vars.opId);
+        if (op)
+        {
+            if (op.varName) op.varName.set(data.vars.varName);
+        }
+    }
     else
     {
         this._log.warn("unknown patchConnectionEvent!", ev);
@@ -217,6 +225,15 @@ const PatchConnectionSender = function (patch)
             "varName": varName
         };
         this.send(CABLES.PACO_VARIABLES, vars);
+    });
+
+    patch.addEventListener("opTriggerNameChanged", (op, varName) =>
+    {
+        const vars = {
+            "opId": op.id,
+            "varName": varName
+        };
+        this.send(CABLES.PACO_TRIGGERS, vars);
     });
 
     patch.addEventListener("onLink", (p1, p2) =>
