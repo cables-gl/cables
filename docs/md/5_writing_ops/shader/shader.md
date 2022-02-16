@@ -2,7 +2,7 @@
 
 In the following section, we are going to take an in-depth look at how to write (and modify) shaders in cables. To properly understand this guide, it is recommended that you already have some basic [shader knowledge](http://www.thebookofshaders.com) and are familiar with the basic [GLSL](https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)) syntax. Also, you can create a patch with a [CustomShader](https://cables.gl/op/Ops.Gl.Shader.CustomShader_v2) to follow along with this tutorial, as we shall explain the ins and outs of authoring shaders in cables with this op. The CustomShader op allows you to quickly write your own shaders.
 
-## Preqrequisites
+## Prerequisites
 
 To get started, let's have a look at the CustomShader op's vertex and fragment shader default code:
 
