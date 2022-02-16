@@ -21,20 +21,16 @@ function getSupportedMimeTypes(media, types, codecs, codecsB)
     {
         const mimeType = `${media}/${type}`;
         codecs.forEach((codec) =>
-        {
-            return [`${mimeType}; codecs=${codec}`].forEach((variation) =>
+            [`${mimeType}; codecs=${codec}`].forEach((variation) =>
             {
                 if (isSupported(variation)) supported.push(variation);
 
                 codecsB.forEach((codecB) =>
-                {
-                    return [`${mimeType}; codecs=${codec},${codecB}`].forEach((eachVariation) =>
+                    [`${mimeType}; codecs=${codec},${codecB}`].forEach((eachVariation) =>
                     {
                         if (isSupported(eachVariation)) supported.push(eachVariation);
-                    });
-                });
-            });
-        });
+                    }));
+            }));
     });
     return supported;
 }
@@ -208,11 +204,13 @@ function stopRecording()
     op.verbose("mediaRecorder.videoBitsPerSecond  ", mediaRecorder.videoBitsPerSecond / 1024 / 1024);
     op.verbose("mediaRecorder.mimeType  ", mediaRecorder.mimeType);
 
+    mediaRecorder.onstop = download;
+
     mediaRecorder.stop();
     outState.set(mediaRecorder.state);
 
     op.verbose("Recorded Blobs: ", recordedBlobs);
-    download();
+    // download();
 }
 
 function download()

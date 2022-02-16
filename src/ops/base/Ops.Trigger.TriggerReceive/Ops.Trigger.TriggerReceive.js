@@ -39,6 +39,7 @@ op.varName.onChange = function ()
     cbs.push(doTrigger);
     oldName = op.varName.get();
     updateError();
+    op.patch.emitEvent("opTriggerNameChanged", op, op.varName.get());
 };
 
 op.on("uiParamPanel", updateError);
