@@ -1622,7 +1622,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
         let infoLog = cgl.gl.getShaderInfoLog(shader) || "empty shader info log";
         const badLines = getBadLines(infoLog);
-        let htmlWarning = "<div class=\"shaderErrorCode\">";
+        let htmlWarning = "<div class=\"shaderErrorCodeInner\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
         for (const i in lines)
