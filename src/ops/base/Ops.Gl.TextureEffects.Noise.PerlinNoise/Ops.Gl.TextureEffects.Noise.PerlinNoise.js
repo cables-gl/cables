@@ -11,7 +11,6 @@ const
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
-
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
@@ -59,7 +58,10 @@ offsetX.onChange =
 offsetY.onChange =
 offsetZ.onChange =
 inTexMask.onChange =
-inTexOffsetZ.onChange = () =>
+inTexOffsetZ.onChange = updateDefines;
+updateDefines();
+
+function updateDefines()
 {
     shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.get());
     shader.toggleDefine("HAS_TEX_MASK", inTexMask.get());
@@ -80,7 +82,7 @@ inTexOffsetZ.onChange = () =>
     offsetY.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     inOffsetMul.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
-};
+}
 
 // end offsetmap
 
