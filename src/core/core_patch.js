@@ -384,7 +384,7 @@ Patch.prototype.createOp = function (identifier, id)
     {
         this._crashedOps.push(objName);
 
-        this.emitEvent("exceptionOp", e, objName);
+        this.emitEvent("exceptionOp", e, objName, op);
 
         if (!this.isEditorMode())
         {
