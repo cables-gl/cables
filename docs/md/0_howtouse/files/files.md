@@ -21,17 +21,8 @@ To convert a file upload it, then click it in the file browser. on the right you
 
 ### automatic 3d file Format conversions:
 
-`.obj`, `.fbx`, `.dae` files will be automatically converted to `.3d.json`
+`.fbx` files will be automatically converted to `.glb` gltf binary files
 
-this is done using [assimp2json](https://github.com/acgessler/assimp2json)
-
-
-
-### SVG to mesh
-
-file ending: `.svg`
-
-convert an svg file to a 2d mesh
 
 ### SVG path points
 
