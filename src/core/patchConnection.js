@@ -94,7 +94,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
     else if (data.event == CONSTANTS.PACO.PACO_OP_DELETE)
     {
-        this._log.log("op delete");
+        this._log.log("op delete", data.vars.objName);
         this._patch.deleteOp(data.vars.op, true);
     }
     else if (data.event == CONSTANTS.PACO.PACO_OP_ENABLE)
@@ -178,7 +178,7 @@ const PatchConnectionSender = function (patch)
     patch.addEventListener("onOpDelete",
         (op) =>
         {
-            this.send(CABLES.PACO_OP_DELETE, { "op": op.id });
+            this.send(CABLES.PACO_OP_DELETE, { "op": op.id, "objName": op.objName });
         });
 
     patch.addEventListener("onOpAdd",
