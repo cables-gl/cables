@@ -382,7 +382,13 @@ function savePortData()
             newPortsData.portsOut[port.name] = portData;
         }
     });
-    const serializedPortsData = JSON.stringify(newPortsData);
+
+    let serializedPortsData = "";
+    try
+    {
+        serializedPortsData = JSON.stringify(newPortsData);
+    }
+    catch (e) {}
     portsData.set(serializedPortsData);
 }
 

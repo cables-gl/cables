@@ -1,21 +1,20 @@
 const
-    geometry=op.inObject("Geometry"),
-    outVertices=op.outArray("Vertices"),
-    outFaces=op.outArray("Faces"),
-    outTextcoords=op.outArray("TexCoords"),
-    outVertexColors=op.outArray("Vertex Colors"),
-    outNormals=op.outArray("Normals"),
-    outBiTangents=op.outArray("BiTangents"),
-    outTangents=op.outArray("Tangents");
+    geometry = op.inObject("Geometry"),
+    outVertices = op.outArray("Vertices", 3),
+    outFaces = op.outArray("Faces", 3),
+    outTextcoords = op.outArray("TexCoords", 2),
+    outVertexColors = op.outArray("Vertex Colors", 4),
+    outNormals = op.outArray("Normals", 3),
+    outBiTangents = op.outArray("BiTangents", 3),
+    outTangents = op.outArray("Tangents", 3);
 
-
-geometry.onChange=function()
+geometry.onChange = function ()
 {
-    var geom=geometry.get();
-    if(!geom) return;
+    let geom = geometry.get();
+    if (!geom) return;
 
     // convert float32array to array
-    var verts =  Array.prototype.slice.call(geom.vertices);
+    let verts = Array.prototype.slice.call(geom.vertices);
 
     outVertices.set(verts);
     outFaces.set(geom.verticesIndices);

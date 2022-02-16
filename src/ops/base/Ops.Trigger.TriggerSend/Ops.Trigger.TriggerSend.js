@@ -54,6 +54,7 @@ function updateName()
     op.setTitle(">" + op.varName.get());
 
     if (op.isCurrentUiOp()) gui.opParams.show(op);
+    op.patch.emitEvent("opTriggerNameChanged", op, op.varName.get());
 }
 
 function doTrigger()
@@ -66,8 +67,6 @@ function doTrigger()
     if (!arr)
     {
         op.setUiError("unknowntrigger", "unknown trigger");
-        op.logError("unknown trigger array!", op.varName.get());
-
         return;
     }
     else op.setUiError("unknowntrigger", null);
