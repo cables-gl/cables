@@ -6,15 +6,15 @@ const
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inColor = op.inValueBool("Color", false),
     inFp = op.inBool("Floating point", false),
+    inOutR = op.inBool("Channel R", true),
     inMinR = op.inFloat("Min R", 0),
     inMaxR = op.inFloat("Max R", 1),
+    inOutG = op.inBool("Channel G", true),
     inMinG = op.inFloat("Min G", 0),
     inMaxG = op.inFloat("Max G", 1),
+    inOutB = op.inBool("Channel B", true),
     inMinB = op.inFloat("Min B", 0),
     inMaxB = op.inFloat("Max B", 1),
-    inOutR = op.inBool("Channel R", true),
-    inOutG = op.inBool("Channel G", true),
-    inOutB = op.inBool("Channel B", true),
     outTex = op.outTexture("Texture");
 
 const cgl = op.patch.cgl;
@@ -66,11 +66,11 @@ function update()
     const minR = inMinR.get();
     const diffR = inMaxR.get() - minR;
 
-    const minG = inMinR.get();
-    const diffG = inMaxR.get() - minG;
+    const minG = inMinG.get();
+    const diffG = inMaxG.get() - minG;
 
-    const minB = inMinR.get();
-    const diffB = inMaxR.get() - minB;
+    const minB = inMinB.get();
+    const diffB = inMaxB.get() - minB;
 
     if (inFp.get())
     {
@@ -91,9 +91,7 @@ function update()
             for (let i = 0; i < num; i += 4)
             {
                 let c = minR + Math.random() * diffR;
-                pixels[i + 0] = c;
-                pixels[i + 1] = c;
-                pixels[i + 2] = c;
+                pixels[i + 0] = pixels[i + 1] = pixels[i + 2] = c;
                 pixels[i + 3] = 1;
             }
         }
@@ -116,14 +114,17 @@ function update()
         {
             for (let i = 0; i < num; i += 4)
             {
-                let c = (minR + Math.random() * diffR) * 255;
-                pixels[i + 0] = c;
-                pixels[i + 1] = c;
-                pixels[i + 2] = c;
+                pixels[i + 0] =
+                pixels[i + 1] =
+                pixels[i + 2] = (minR + Math.random() * diffR) * 255;
                 pixels[i + 3] = 255;
             }
         }
     }
+
+    if (!inOutR.get()) for (let i = 0; i < num; i += 4)pixels[i + 0] = 0.0;
+    if (!inOutG.get()) for (let i = 0; i < num; i += 4)pixels[i + 1] = 0.0;
+    if (!inOutB.get()) for (let i = 0; i < num; i += 4)pixels[i + 2] = 0.0;
 
     let cgl_filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;

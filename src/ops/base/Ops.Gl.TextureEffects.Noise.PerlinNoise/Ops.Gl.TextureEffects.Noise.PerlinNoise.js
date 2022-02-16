@@ -3,7 +3,7 @@ const
     inTexMask = op.inTexture("Mask"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
-    inMode = op.inSwitch("Color", ["Mono", "RGB"], "Mono"),
+    inMode = op.inSwitch("Color", ["Mono", "RGB", "R", "G", "B"], "Mono"),
     scale = op.inValue("Scale", 22),
     inAspect = op.inBool("Aspect", false),
     rangeMul = op.inValue("Multiply", 1),
@@ -58,11 +58,16 @@ offsetX.onChange =
 offsetY.onChange =
 offsetZ.onChange =
 inTexMask.onChange =
+inMode.onChange =
 inTexOffsetZ.onChange = updateDefines;
 updateDefines();
 
 function updateDefines()
 {
+    shader.toggleDefine("NO_CHANNEL_R", inMode.get() == "G" || inMode.get() == "B");
+    shader.toggleDefine("NO_CHANNEL_G", inMode.get() == "R" || inMode.get() == "B");
+    shader.toggleDefine("NO_CHANNEL_B", inMode.get() == "R" || inMode.get() == "G");
+
     shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.get());
     shader.toggleDefine("HAS_TEX_MASK", inTexMask.get());
 
@@ -82,14 +87,9 @@ function updateDefines()
     offsetY.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     inOffsetMul.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
-}
 
-// end offsetmap
-
-inMode.onChange = () =>
-{
     shader.toggleDefine("RGB", inMode.get() == "RGB");
-};
+}
 
 render.onTriggered = function ()
 {

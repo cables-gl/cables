@@ -36,6 +36,11 @@
             },
             {
                 "type": 0,
+                "name": "Channel R",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Min R",
                 "subType": "number"
             },
@@ -43,6 +48,11 @@
                 "type": 0,
                 "name": "Max R",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Channel G",
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -56,6 +66,11 @@
             },
             {
                 "type": 0,
+                "name": "Channel B",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Min B",
                 "subType": "number"
             },
@@ -63,21 +78,6 @@
                 "type": 0,
                 "name": "Max B",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Channel R",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Channel G",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Channel B",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
