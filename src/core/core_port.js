@@ -602,6 +602,7 @@ Port.prototype.setVariable = function (v)
     }
 
     this.setUiAttribs(attr);
+    this.parent.patch.emitEvent("portSetVariable", this.parent, this, v);
 };
 
 Port.prototype._handleNoTriggerOpAnimUpdates = function (a)

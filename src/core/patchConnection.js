@@ -160,6 +160,15 @@ PatchConnectionReceiver.prototype._receive = function (ev)
             if (op.varName) op.varName.set(data.vars.varName);
         }
     }
+    else if (data.event == CONSTANTS.PACO.PACO_PORT_SETVARIABLE)
+    {
+        const op = this._patch.getOpById(data.vars.opId);
+        if (op)
+        {
+            const p = op.getPortByName(data.vars.portName);
+            if (p) p.setVariable(data.vars.variableName);
+        }
+    }
     else
     {
         this._log.warn("unknown patchConnectionEvent!", ev);
@@ -244,6 +253,16 @@ const PatchConnectionSender = function (patch)
             "port1": p1.name,
             "port2": p2.name,
         });
+    });
+
+    patch.addEventListener("portSetVariable", (op, port, variableName) =>
+    {
+        const vars = {
+            "opId": op.id,
+            "portName": port.name,
+            "variableName": variableName
+        };
+        this.send(CABLES.PACO_PORT_SETVARIABLE, vars);
     });
 };
 
