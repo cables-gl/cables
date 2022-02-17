@@ -99,6 +99,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Inherit Velocity",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "Feedback Positions",
                 "objType": "texture"
@@ -135,7 +140,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.User.pandur.ParticleSystem"
+        "name": "Ops.Dev.ParticleSystem"
     },
     "summary": "convert a RGBE texture to HDR/floating point texture",
     "issues": "",

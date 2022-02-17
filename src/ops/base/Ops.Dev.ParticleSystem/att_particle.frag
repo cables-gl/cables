@@ -18,7 +18,10 @@ UNI float lifeTime;
 UNI float time;
 UNI float timeDiff;
 
-UNI vec3 velocity;
+
+
+UNI vec4 velocity; // xyz: xyz  / w: inherit velocity
+
 
 UNI float spread;
 
@@ -57,13 +60,14 @@ void main()
     float lifeProgress=( (time-vtiming.r) / (vtiming.g-vtiming.r));
 
 
-    newPos.rgb+=timeDiff*velocity;
+    newPos.rgb+=timeDiff*velocity.rgb*3.0;
 
     // newPos.rgb+=normalize(newPos.rgb-oldPos.rgb)*0.2;
 
     // newPos.rgb+=(oldVelocity.rgb)*smoothstep(0.0,1.0,lifeProgress)*0.9;
     // newPos.rgb+=(oldVelocity.rgb)*(1.0-smoothstep(0.0,1.0,lifeProgress)*0.1);
-    newPos.rgb+=(oldVelocity.rgb)*(1.0-lifeProgress*1.5);
+
+    newPos.rgb-=((1.0-lifeProgress)*timeDiff*40.8*velocity.w)*oldVelocity.rgb;
 
 
     // gl_Position
