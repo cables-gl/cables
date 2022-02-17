@@ -8,7 +8,7 @@ class CopyTexture
         this.cgl = cgl;
 
         this._options = options;
-        this._fb = null;
+        this.fb = null;
 
         const shader = options.shader || ""
             .endl() + "UNI sampler2D tex;"
@@ -47,9 +47,9 @@ class CopyTexture
             h = this._options.height || tex.height,
             cgl = this.cgl;
 
-        if (this._fb)
+        if (this.fb)
         {
-            if (this._fb.getWidth() != w || this._fb.getHeight() != h) this._fb.setSize(w, h);
+            if (this.fb.getWidth() != w || this.fb.getHeight() != h) this.fb.setSize(w, h);
         }
         else
         {
@@ -61,16 +61,17 @@ class CopyTexture
 
             const options = {
                 "isFloatingPointTexture": this._options.isFloatingPointTexture,
+                "numRenderBuffers": this._options.numRenderBuffers || 1,
                 "filter": filter,
                 "wrap": wrap,
             };
 
-            if (cgl.glVersion == 1) this._fb = new CGL.Framebuffer(cgl, w, h, options);
-            else this._fb = new CGL.Framebuffer2(cgl, w, h, options);
+            if (cgl.glVersion == 1) this.fb = new CGL.Framebuffer(cgl, w, h, options);
+            else this.fb = new CGL.Framebuffer2(cgl, w, h, options);
         }
 
         cgl.frameStore.renderOffscreen = true;
-        this._fb.renderStart(cgl);
+        this.fb.renderStart(cgl);
 
         cgl.setTexture(0, tex.tex);
 
@@ -78,15 +79,15 @@ class CopyTexture
         this.mesh.render(this.bgShader);
         cgl.popShader();
 
-        this._fb.renderEnd();
+        this.fb.renderEnd();
         cgl.frameStore.renderOffscreen = false;
 
-        return this._fb.getTextureColor();
+        return this.fb.getTextureColor();
     }
 
     dispose()
     {
-        if (this._fb) this._fb.dispose();
+        if (this.fb) this.fb.dispose();
         if (this.bgShader) this.bgShader.dispose();
         if (this.mesh) this.mesh.dispose();
     }

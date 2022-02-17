@@ -11,6 +11,7 @@ const
     inPrompt = op.inTriggerButton("Open Prompt"),
     inModal = op.inTriggerButton("Open Modal"),
     inTab = op.inTriggerButton("Open new Tab"),
+    inExc = op.inTriggerButton("Throw Exception"),
     outBlah = op.outNumber("Something");
 
 op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError]);
@@ -92,6 +93,11 @@ inModal.onTriggered = () =>
         "title": "Title",
         "text": "Dialog content <b>can be <i>html</i><b>"
     });
+};
+
+inExc.onTriggered = () =>
+{
+    throw new Error();
 };
 
 inTab.onTriggered = () =>
