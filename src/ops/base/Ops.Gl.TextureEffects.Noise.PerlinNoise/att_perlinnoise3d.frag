@@ -271,5 +271,19 @@ void main()
         str=texture(texMask,texCoord).r;
     #endif
 
-    outColor=cgl_blend(base,col,amount*str);
+    col=cgl_blend(base,col,amount*str);
+
+    #ifdef NO_CHANNEL_R
+        col.r=base.r;
+    #endif
+    #ifdef NO_CHANNEL_G
+        col.g=base.g;
+    #endif
+    #ifdef NO_CHANNEL_B
+        col.b=base.b;
+    #endif
+
+
+
+    outColor=col;
 }

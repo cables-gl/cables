@@ -4,7 +4,11 @@ const
 
 op.setUiAttrib({ "height": 150, "resizable": true });
 
-inTex.onChange = () => { outTex.set(inTex.get()); };
+inTex.onChange = () =>
+{
+    outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+    outTex.set(inTex.get());
+};
 
 op.renderPreviewLayer = (ctx, pos, size) =>
 {

@@ -8,6 +8,7 @@
             {
                 "type": 0,
                 "name": "Blend Mode index",
+                "group": "Blending",
                 "subType": "integer"
             },
             {
@@ -25,6 +26,16 @@
                 "type": 0,
                 "name": "RGB",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Normalize",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
             }
         ],
         "portsOut": [

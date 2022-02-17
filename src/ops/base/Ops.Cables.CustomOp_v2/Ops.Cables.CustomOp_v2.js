@@ -49,7 +49,7 @@ op.onError = function (ex)
         op.setUiError("error", ex);
         const str = inJS.get();
         const badLines = [];
-        let htmlWarning = "<div class=\"shaderErrorCode\">";
+        let htmlWarning = "<div class=\"shaderErrorCodeInner\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
         let anonLine = "";

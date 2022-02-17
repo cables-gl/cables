@@ -62,7 +62,10 @@ offsetX.onChange =
 offsetY.onChange =
 offsetZ.onChange =
 inTexMask.onChange =
-inTexOffsetTex.onChange = () =>
+inTexOffsetTex.onChange = updateDefines;
+updateDefines();
+
+function updateDefines()
 {
     shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetTex.get());
     shader.toggleDefine("HAS_TEX_MASK", inTexMask.get());
@@ -82,7 +85,7 @@ inTexOffsetTex.onChange = () =>
     offsetX.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });
     offsetY.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });
-};
+}
 
 // end offsetmap
 
