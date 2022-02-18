@@ -319,9 +319,6 @@ let gltfMesh = class
 
             this.mesh = new CGL.Mesh(cgl, g,glprim);
             this.mesh._geom = null;
-
-
-            // this.geom = null;
         }
         else
         {
