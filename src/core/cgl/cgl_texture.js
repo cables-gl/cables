@@ -406,8 +406,8 @@ Texture.prototype.getInfoReadable = function ()
 
 Texture.prototype.getInfoOneLine = function ()
 {
-    let txt = "" + this.width + "x" + this.height;
-    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " HDR";
+    let txt = "" + this.width + " x " + this.height;
+    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit";
 
     if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";
     if (this.filter === CGL.Texture.FILTER_LINEAR) txt += " linear";

@@ -37,6 +37,10 @@
                 "type": 2,
                 "name": "Texture Out",
                 "objType": "texture"
+            },
+            {
+                "type": 5,
+                "name": "Info"
             }
         ],
         "name": "Ops.Ui.VizTexture"
