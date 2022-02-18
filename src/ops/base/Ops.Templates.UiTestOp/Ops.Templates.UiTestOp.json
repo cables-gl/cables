@@ -101,6 +101,10 @@
             {
                 "type": 1,
                 "name": "Open new Tab"
+            },
+            {
+                "type": 1,
+                "name": "Throw Exception"
             }
         ],
         "portsOut": [

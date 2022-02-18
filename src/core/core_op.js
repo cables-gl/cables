@@ -426,8 +426,8 @@ const Op = function ()
                 "display": "editor",
                 "editorSyntax": syntax,
                 hideFormatButton
-            })
-        );
+            }));
+
         p.value = "";
         if (v !== undefined)
         {
@@ -436,7 +436,6 @@ const Op = function ()
         }
         return p;
     };
-
 
     // old
     Op.prototype.inValueEditor = function (name, v, syntax, hideFormatButton = true)
@@ -1053,6 +1052,11 @@ const Op = function ()
     Op.prototype.getFirstOutPortByType = function (type)
     {
         for (const ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
+    };
+
+    Op.prototype.getFirstInPortByType = function (type)
+    {
+        for (const ipo in this.portsIn) if (this.portsIn[ipo].type == type) return this.portsIn[ipo];
     };
 
     /**
