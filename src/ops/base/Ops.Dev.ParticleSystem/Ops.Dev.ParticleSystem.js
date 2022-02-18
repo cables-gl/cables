@@ -5,7 +5,8 @@ const
     inReset = op.inTriggerButton("Reset"),
 
     // inTime=op.inFloat("Time",0),
-    inLifeTimeMax = op.inFloat("Max Lifetime", 3),
+    inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
+    inLifeTimeMax = op.inFloat("Max Lifetime", 2),
 
     posX = op.inFloatSlider("Position X", 0),
     posY = op.inFloatSlider("Position Y", 0),
@@ -46,7 +47,7 @@ const tcPos = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos",
 
 const tcTiming = new CGL.CopyTexture(op.patch.cgl, "particlesys_timing", { "isFloatingPointTexture": true });
 
-// only used when no input texture is given, just for very simple systems...
+// only used when no input texture is given, just for simple systems...
 const tcFeedback = new CGL.CopyTexture(op.patch.cgl, "particlesys_feedback", { "isFloatingPointTexture": true });
 const tcFeedbackVel = new CGL.CopyTexture(op.patch.cgl, "particlesys_feedbackvel", { "isFloatingPointTexture": true });
 
@@ -59,7 +60,7 @@ const
     uniTexFeedbackVel = new CGL.Uniform(tcPos.bgShader, "t", "texFeedbackVel", 4),
 
     uniTime = new CGL.Uniform(tcPos.bgShader, "f", "time", 0),
-    uniLifeTime = new CGL.Uniform(tcPos.bgShader, "f", "lifeTime", inLifeTimeMax),
+    uniLifeTime = new CGL.Uniform(tcPos.bgShader, "2f", "lifeTime", inLifeTimeMin, inLifeTimeMax),
     uniTimeDiff = new CGL.Uniform(tcPos.bgShader, "f", "timeDiff", 0),
 
     uniVel = new CGL.Uniform(tcPos.bgShader, "4f", "velocity", moveX, moveY, moveZ, inherVel),

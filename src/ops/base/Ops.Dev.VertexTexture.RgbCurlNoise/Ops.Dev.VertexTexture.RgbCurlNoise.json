@@ -1,0 +1,65 @@
+{
+    "summary": "apply simple mathematical functions on pixels color values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.RgbCurlNoise"
+    },
+    "authorName": "pandur",
+    "id": "10bc3a93-47c6-48ea-aebb-20f990153e62",
+    "created": 1644943743609,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1644943743609
+        },
+        {
+            "message": "Ops.User.pandur.RgbCurlNoise renamed to Ops.Dev.VertexTexture.RgbCurlNoise",
+            "author": "pandur",
+            "date": 1645187747964
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Operation index",
+                "text": "c-x: subtraction x from color value, x-c: subtract color value from x value, c*x: multiply color value by x, x/c: divide x value by color value, c/x: divide color value by x value, c%x: modulo operation on color value by modulus x of which the remainder is the result for your selected color channel"
+            }
+        ]
+    }
+}
