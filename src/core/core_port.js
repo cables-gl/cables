@@ -340,6 +340,10 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim();
+        this.anim.addEventListener("onChange", () =>
+        {
+            this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
+        });
         if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
         for (const ani in objPort.anim.keys)
         {
@@ -634,7 +638,14 @@ Port.prototype.setAnimated = function (a)
     if (this._animated != a)
     {
         this._animated = a;
-        if (this._animated && !this.anim) this.anim = new Anim();
+        if (this._animated && !this.anim)
+        {
+            this.anim = new Anim();
+            this.anim.addEventListener("onChange", () =>
+            {
+                this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
+            });
+        }
         this._onAnimToggle();
     }
 
@@ -646,7 +657,14 @@ Port.prototype.setAnimated = function (a)
 Port.prototype.toggleAnim = function (val)
 {
     this._animated = !this._animated;
-    if (this._animated && !this.anim) this.anim = new Anim();
+    if (this._animated && !this.anim)
+    {
+        this.anim = new Anim();
+        this.anim.addEventListener("onChange", () =>
+        {
+            this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
+        });
+    }
     this.setAnimated(this._animated);
     this._onAnimToggle();
     this.setUiAttribs({ "isAnimated": this._animated });

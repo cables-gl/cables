@@ -169,6 +169,38 @@ PatchConnectionReceiver.prototype._receive = function (ev)
             if (p) p.setVariable(data.vars.variableName);
         }
     }
+    else if (data.event == CONSTANTS.PACO.PACO_PORT_SETANIMATED)
+    {
+        const op = this._patch.getOpById(data.vars.opId);
+        if (op)
+        {
+            const p = op.portsIn[data.vars.portIndex];
+            if (p)
+            {
+                if (data.vars.hasOwnProperty("targetState"))
+                {
+                    // p.setAnimated(data.vars.targetState);
+                    this._patch.emitEvent("pacoPortValueSetAnimated", op, data.vars.portIndex, data.vars.targetState, data.vars.defaultValue);
+                }
+            }
+        }
+    }
+    else if (data.event == CONSTANTS.PACO.PACO_PORT_ANIM_UPDATED)
+    {
+        const op = this._patch.getOpById(data.vars.opId);
+        if (op)
+        {
+            const p = op.getPortByName(data.vars.portName);
+            if (p)
+            {
+                const objPort = p.getSerialized();
+                objPort.anim = data.vars.anim;
+                p.anim = null;
+                p.deSerializeSettings(objPort);
+                this._patch.emitEvent("pacoPortAnimUpdated", p);
+            }
+        }
+    }
     else
     {
         this._log.warn("unknown patchConnectionEvent!", ev);
@@ -263,6 +295,19 @@ const PatchConnectionSender = function (patch)
             "variableName": variableName
         };
         this.send(CABLES.PACO_PORT_SETVARIABLE, vars);
+    });
+
+    patch.addEventListener("portAnimUpdated", (op, port, anim) =>
+    {
+        if (op && port)
+        {
+            const vars = {
+                "opId": op.id,
+                "portName": port.name,
+                "anim": anim.getSerialized()
+            };
+            this.send(CABLES.PACO_PORT_ANIM_UPDATED, vars);
+        }
     });
 };
 
