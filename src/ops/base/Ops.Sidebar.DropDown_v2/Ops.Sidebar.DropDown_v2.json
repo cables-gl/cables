@@ -10,6 +10,11 @@
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888080304
+        },
+        {
+            "message": "add trigger to set default value",
+            "author": "stephan",
+            "date": 1645186240876
         }
     ],
     "authorName": "tim",

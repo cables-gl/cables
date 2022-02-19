@@ -1,4 +1,5 @@
 IN vec2 texCoord;
+
 UNI sampler2D texOldPos;
 UNI sampler2D texSpawnPos;
 UNI sampler2D texTiming;
@@ -6,15 +7,13 @@ UNI sampler2D texTiming;
 UNI sampler2D texFeedbackVel;
 UNI sampler2D texSpawnVel;
 
-UNI vec3 pos;
 
 UNI float reset;
 
-UNI float sizeX;
-UNI float sizeY;
-UNI float sizeZ;
+UNI vec3 pos;
+UNI vec3 scale;
 
-UNI float lifeTime;
+UNI vec2 lifeTime;
 UNI float time;
 UNI float timeDiff;
 
@@ -44,15 +43,15 @@ void main()
 
         // if(rnd.x==0.0 && rnd.y==0. && rnd.z==0.0)rnd=vec3(time+9999.0);
 
-        // rnd.x*=sizeX;
-        // rnd.y*=sizeY;
-        // rnd.z*=sizeZ;
+        // rnd.x*=scale.x;
+        // rnd.y*=scale.y;
+        // rnd.z*=scale.z;
         oldVelocity=texture(texSpawnVel,texCoord);
 
         newPos.rgb+= rnd;
 
         vtiming.r=time;
-        vtiming.g=time+cgl_random(time*texCoord)*lifeTime;
+        vtiming.g=(cgl_random(time*texCoord)*(lifeTime.y-lifeTime.x))+lifeTime.x+time;
     }
 
     vtiming.a=1.0;

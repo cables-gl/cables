@@ -1,5 +1,6 @@
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
+import { EventTarget } from "./eventtarget";
 
 const ANIM = {};
 
@@ -485,6 +486,8 @@ export { ANIM };
  */
 const Anim = function (cfg)
 {
+    EventTarget.apply(this);
+
     cfg = cfg || {};
     this.keys = [];
     this.onChange = null;
@@ -508,6 +511,18 @@ const Anim = function (cfg)
 Anim.prototype.forceChangeCallback = function ()
 {
     if (this.onChange !== null) this.onChange();
+    this.emitEvent("onChange", this);
+};
+
+Anim.prototype.getLoop = function ()
+{
+    return this.loop;
+};
+
+Anim.prototype.setLoop = function (target)
+{
+    this.loop = target;
+    this.emitEvent("onChange", this);
 };
 
 /**
@@ -565,6 +580,7 @@ Anim.prototype.clear = function (time)
 
     if (time) this.setValue(time, v);
     if (this.onChange !== null) this.onChange();
+    this.emitEvent("onChange", this);
 };
 
 Anim.prototype.sortKeys = function ()
@@ -625,8 +641,18 @@ Anim.prototype.setValue = function (time, value, cb)
     }
 
     if (this.onChange) this.onChange();
+    this.emitEvent("onChange", this);
     this._needsSort = true;
     return found;
+};
+
+Anim.prototype.setKeyEasing = function (index, e)
+{
+    if (this.keys[index])
+    {
+        this.keys[index].setEasing(e);
+        this.emitEvent("onChange", this);
+    }
 };
 
 Anim.prototype.getSerialized = function ()
@@ -729,6 +755,7 @@ Anim.prototype.addKey = function (k)
     {
         this.keys.push(k);
         if (this.onChange !== null) this.onChange();
+        this.emitEvent("onChange", this);
     }
 };
 

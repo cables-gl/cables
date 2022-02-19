@@ -73,6 +73,13 @@ inExec.onTriggered = function ()
     const blob = new Blob([data.buffer], { "type": img.mimeType });
     const sourceURI = URL.createObjectURL(blob);
 
+    if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
+    else if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
+    else if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
+    else if (tfilter.get() == "Anisotropic") cgl_filter = CGL.Texture.FILTER_ANISOTROPIC;
+
+    cgl_aniso = parseFloat(aniso.get());
+
     tex = CGL.Texture.load(cgl, sourceURI,
         function (err)
         {
@@ -103,13 +110,6 @@ inExec.onTriggered = function ()
 
 function onFilterChange()
 {
-    if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
-    else if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
-    else if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
-    else if (tfilter.get() == "Anisotropic") cgl_filter = CGL.Texture.FILTER_ANISOTROPIC;
-
-    cgl_aniso = parseFloat(aniso.get());
-
     reloadSoon();
 }
 

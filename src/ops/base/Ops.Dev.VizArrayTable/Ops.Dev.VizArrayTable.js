@@ -1,6 +1,6 @@
 const inArr = op.inArray("Array");
 
-op.setUiAttribs({ "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
 op.renderPreviewLayer = (ctx, pos, size) =>
 {

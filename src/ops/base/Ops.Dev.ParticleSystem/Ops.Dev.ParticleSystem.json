@@ -59,6 +59,11 @@
             },
             {
                 "type": 0,
+                "name": "Min Lifetime",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Max Lifetime",
                 "subType": "number"
             },

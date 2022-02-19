@@ -1,6 +1,7 @@
 const
     inTex = op.inTexture("Texture In"),
-    outTex = op.outTexture("Texture Out");
+    outTex = op.outTexture("Texture Out"),
+    outInfo = op.outString("Info");
 
 op.setUiAttrib({ "height": 150, "resizable": true });
 
@@ -138,6 +139,13 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         s[0], s[1],
         pos[0] + (size[0] - sizeImg[0]) / 2, pos[1] + (size[1] - sizeImg[1]) / 2,
         sizeImg[0], sizeImg[1]);
+
+    // ctx.font = "normal 10px sourceCodePro";
+    // ctx.fillStyle = "#ccc";
+    // ctx.fillText(port.get().getInfoOneLine()+"",pos[0]+10,pos[1]+size[1]);
+
+    if (port.get() && port.get().getInfoOneLine) outInfo.set(port.get().getInfoOneLine());
+    else outInfo.set("unknown");
 
     cgl.gl.clearColor(0, 0, 0, 1);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);

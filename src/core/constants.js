@@ -95,6 +95,8 @@ export const CONSTANTS = {
         "PACO_UIATTRIBS": 9,
         "PACO_VARIABLES": 10,
         "PACO_TRIGGERS": 11,
-        "PACO_PORT_SETVARIABLE": 12
+        "PACO_PORT_SETVARIABLE": 12,
+        "PACO_PORT_SETANIMATED": 13,
+        "PACO_PORT_ANIM_UPDATED": 14
     },
 };

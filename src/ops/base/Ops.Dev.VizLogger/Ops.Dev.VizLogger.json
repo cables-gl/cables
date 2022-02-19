@@ -1,0 +1,37 @@
+{
+    "id": "22b731fe-bc97-42fe-a550-92cf0cedb133",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1645174841480
+        },
+        {
+            "message": "Ops.User.pandur.ValueLogger renamed to Ops.Dev.Logger",
+            "author": "pandur",
+            "date": 1645187910828
+        },
+        {
+            "message": "Ops.Dev.Logger renamed to Ops.Dev.VizLogger",
+            "author": "pandur",
+            "date": 1645187932105
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.User.pandur.ValueLogger"
+    },
+    "authorName": "pandur",
+    "created": 1645174874478
+}
