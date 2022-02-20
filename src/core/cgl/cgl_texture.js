@@ -268,7 +268,7 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this.filter = filter;
     this.wrap = wrap;
     if (filter == undefined) this.filter = Texture.FILTER_LINEAR;
-    if (wrap == undefined) this.wrap = Texture.CLAMP_TO_EDGE;
+    if (wrap == undefined) this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
     this.width = w;
     this.height = h;
     this._fromData = true;
@@ -407,7 +407,7 @@ Texture.prototype.getInfoReadable = function ()
 Texture.prototype.getInfoOneLine = function ()
 {
     let txt = "" + this.width + " x " + this.height;
-    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit";
+    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
 
     if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";
     if (this.filter === CGL.Texture.FILTER_LINEAR) txt += " linear";
