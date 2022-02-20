@@ -1,6 +1,6 @@
 const inTex = op.inTexture("Texture");
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 380, "resizable": true });
 
 let pixelData = null;
 let lastWidth;
@@ -82,15 +82,10 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    // return pixelData;
-
     const arr = pixelData;
     let stride = 4;
 
     if (!arr) return;
-
-    // if (inArr.links.length > 0 && inArr.links[0].getOtherPort(inArr))
-    // stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || 1;
 
     let lines = Math.floor(size[1] / sc / 10 - 1);
     let padding = 4;
@@ -99,9 +94,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
     let isFp = realTexture.isFloatingPoint();
 
     if (realTexture && realTexture.getInfoOneLine)
-        ctx.fillText(realTexture.getInfoOneLine(),
-            pos[0] / sc + padding,
-            pos[1] / sc + padding + lineHeight - 2);
+        op.setUiAttrib({ "extendTitle": realTexture.getInfoOneLine() });
 
     for (let i = 0; i < lines * stride; i += stride)
     {
@@ -109,14 +102,14 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
         ctx.fillText(i / stride,
             pos[0] / sc + padding,
-            pos[1] / sc + lineHeight + lineHeight + i / stride * lineHeight + padding);
+            pos[1] / sc + lineHeight + i / stride * lineHeight + padding);
 
         if (inTex.get().isFloatingPoint()) ctx.fillStyle = "rgba(" + arr[i + 0] * 255 + "," + arr[i + 1] * 255 + "," + arr[i + 2] * 255 + "," + arr[i + 3] * 255 + ")";
         else ctx.fillStyle = "rgba(" + arr[i + 0] + "," + arr[i + 1] + "," + arr[i + 2] + "," + arr[i + 3] + ")";
 
         ctx.fillRect(
             pos[0] / sc + padding + 25,
-            pos[1] / sc + lineHeight + lineHeight + i / stride * lineHeight + padding - 7,
+            pos[1] / sc + lineHeight + i / stride * lineHeight + padding - 7,
             15, 8);
 
         ctx.fillStyle = "#ccc";
@@ -135,7 +128,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
             else if (typeof v == "array") str = "[]";
             else if (typeof v == "object") str = "{}";
 
-            ctx.fillText(str, pos[0] / sc + s * 80 + 70, pos[1] / sc + 10 + i / stride * 10 + padding + lineHeight);
+            ctx.fillText(str, pos[0] / sc + s * 60 + 70, pos[1] / sc + 10 + i / stride * 10 + padding);
         }
     }
 
