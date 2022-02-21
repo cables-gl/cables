@@ -33,6 +33,6 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.User.pandur.VizTextureTable"
+        "name": "Ops.Dev.VizTextureTable"
     }
 }
