@@ -9,6 +9,9 @@ UNI float seed2;
 UNI float minIn;
 UNI float maxIn;
 
+UNI float aspect;
+
+
 #define PI 3.14159265
 #define TAU (2.0*PI)
 
@@ -18,7 +21,12 @@ void pR(inout vec2 p, float a)
 }
 
 //cell code from https://www.shadertoy.com/view/lldfWH
-vec4 hex(vec2 uv, out vec2 id) {
+vec4 hex(vec2 uv, out vec2 id)
+{
+    #ifdef ASPECT
+        uv.x*=aspect;
+    #endif
+
     uv *= mat2(1.1547,0.0,-0.5773503,1.0);
     vec2 f = fract(uv);
     float triid = 1.0;
@@ -78,3 +86,5 @@ void main()
 
     outColor=cgl_blend(base,rnd,amount);
 }
+
+//
