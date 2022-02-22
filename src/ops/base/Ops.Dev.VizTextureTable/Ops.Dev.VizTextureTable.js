@@ -14,8 +14,6 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         realTexture = inTex.get(),
         gl = op.patch.cgl.gl;
 
-    if (!realTexture) return;
-
     ctx.fillStyle = "#222";
     ctx.fillRect(
         pos[0],
@@ -24,7 +22,10 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         size[1]
     );
 
+    if (!realTexture) return;
+
     const sc = 1000 / gui.patchView._patchRenderer.viewBox.zoom * 1.5;
+    let lines = Math.floor(size[1] / sc / 10 - 1);
 
     ctx.save();
     ctx.scale(sc, sc);
@@ -73,7 +74,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
     gl.readPixels(
         0, 0,
-        Math.min(90, realTexture.width),
+        Math.min(lines * 4, realTexture.width),
         1,
         channels,
         channelType,
@@ -87,7 +88,6 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
     if (!arr) return;
 
-    let lines = Math.floor(size[1] / sc / 10 - 1);
     let padding = 4;
     let lineHeight = 10;
 
