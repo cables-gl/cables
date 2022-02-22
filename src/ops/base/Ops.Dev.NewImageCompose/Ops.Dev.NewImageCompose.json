@@ -63,7 +63,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.NgImageCompose"
+        "name": "Ops.Dev.NewImageCompose"
     },
     "summary": "Compose Images and effects as layers to generate new Images",
     "credits": [

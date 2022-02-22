@@ -141,6 +141,8 @@ Texture.prototype.clone = function ()
         "height": this.height,
     });
 
+    this._cgl.profileData.addHeavyEvent("texture created", this.name, this.width + "x" + this.height);
+
     if (!this.compareSettings(newTex))
     {
         this._log.error("Cloned texture settings do not compare!");

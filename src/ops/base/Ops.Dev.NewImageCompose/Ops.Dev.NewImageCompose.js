@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    inTex=op.inTexture("Base Texture"),
+    inTex = op.inTexture("Base Texture"),
     inUseVPSize = op.inBool("Use viewport size", true),
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
@@ -16,25 +16,21 @@ const cgl = op.patch.cgl;
 op.setPortGroup("Texture Size", [inUseVPSize, width, height]);
 op.setPortGroup("Texture Settings", [inWrap, inFilter, fpTexture]);
 
+const prevViewPort = [0, 0, 0, 0];
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
 let effect = null;
 let tex = null;
 let w = 8, h = 8;
-
-const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
-let selectedFilter = CGL.Texture.FILTER_LINEAR;
-let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-inWrap.onChange = onWrapChange;
-inFilter.onChange = onFilterChange;
+inWrap.onChange =
+    inFilter.onChange =
+    fpTexture.onChange = reInitLater;
 
-render.onTriggered = op.preRender = doRender;
+render.onTriggered =
+    op.preRender = doRender;
 
-onFilterChange();
-onWrapChange();
 updateUi();
-
 
 function initEffect()
 {
@@ -45,6 +41,17 @@ function initEffect()
     else op.setUiError("fpmipmap", null);
 
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get() });
+
+    let selectedFilter = CGL.Texture.FILTER_LINEAR;
+    let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    if (inWrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;
+    else if (inWrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    else if (inWrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    if (inFilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
+    else if (inFilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
+    else if (inFilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
 
     tex = new CGL.Texture(cgl,
         {
@@ -62,16 +69,16 @@ function initEffect()
     reInitEffect = false;
 }
 
-fpTexture.onChange = function ()
+function reInitLater()
 {
     reInitEffect = true;
-};
+}
 
 function updateResolution()
 {
     if (!effect)initEffect();
 
-    if(inTex.get())
+    if (inTex.get())
     {
         w = inTex.get().width;
         h = inTex.get().height;
@@ -97,20 +104,19 @@ function updateResolution()
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
     }
-
 }
 
 function updateUi()
 {
-    width.setUiAttribs({ "greyout": inUseVPSize.get() || inTex.isLinked()});
-    height.setUiAttribs({ "greyout": inUseVPSize.get() || inTex.isLinked()});
-    inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked()});
-    inFilter.setUiAttribs({ "greyout": inTex.isLinked()});
-    inWrap.setUiAttribs({ "greyout": inTex.isLinked()});
-    fpTexture.setUiAttribs({ "greyout": inTex.isLinked()});
+    width.setUiAttribs({ "greyout": inUseVPSize.get() || inTex.isLinked() });
+    height.setUiAttribs({ "greyout": inUseVPSize.get() || inTex.isLinked() });
+    inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked() });
+    inFilter.setUiAttribs({ "greyout": inTex.isLinked() });
+    inWrap.setUiAttribs({ "greyout": inTex.isLinked() });
+    fpTexture.setUiAttribs({ "greyout": inTex.isLinked() });
 }
 
-inTex.onLinkChanged=
+inTex.onLinkChanged =
 inUseVPSize.onChange = updateUi;
 
 op.preRender = function ()
@@ -138,7 +144,7 @@ function doRender()
     cgl.currentTextureEffect.height = height.get();
     effect.setSourceTexture(tex);
 
-    effect.startEffect(inTex.get()||CGL.Texture.getEmptyTexture(cgl),true);
+    effect.startEffect(inTex.get() || CGL.Texture.getEmptyTexture(cgl), true);
 
     trigger.trigger();
 
@@ -150,22 +156,4 @@ function doRender()
 
     cgl.popBlend(false);
     cgl.currentTextureEffect = oldEffect;
-}
-
-function onWrapChange()
-{
-    if (inWrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;
-    if (inWrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (inWrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
-
-    reInitEffect = true;
-}
-
-function onFilterChange()
-{
-    if (inFilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
-    if (inFilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
-    if (inFilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
-
-    reInitEffect = true;
 }
