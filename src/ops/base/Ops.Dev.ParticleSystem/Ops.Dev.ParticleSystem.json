@@ -143,6 +143,11 @@
                 "type": 2,
                 "name": "Test",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Tex Size",
+                "subType": "number"
             }
         ],
         "name": "Ops.Dev.ParticleSystem"

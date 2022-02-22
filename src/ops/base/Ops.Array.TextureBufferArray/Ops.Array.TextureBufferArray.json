@@ -63,6 +63,11 @@
             "message": "Ops.Array.RingBufferTextures renamed to Ops.Array.TextureBufferArray",
             "author": "pandur",
             "date": 1608539502722
+        },
+        {
+            "message": "array seemed not being updated",
+            "author": "pandur",
+            "date": 1645516714215
         }
     ]
 }
