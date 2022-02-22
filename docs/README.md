@@ -1,3 +1,7 @@
+# report problem with cables
+
+go here: https://github.com/cables-gl/cables_docs/discussions/new
+
 # cables.gl docs
 This repository contains files of the documentation on the cables.gl website: 
 https://cables.gl/docs/docs
