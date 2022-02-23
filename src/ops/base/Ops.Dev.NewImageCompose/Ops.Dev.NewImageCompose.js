@@ -1,6 +1,8 @@
 const
-    RGBA8 = "RGBA 8bit",
-    RGBA32 = "RGBA 32bit",
+    RGBA8 = "RGBA 8bit ubyte",
+    RGBA32 = "RGBA 32bit float";
+
+const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("Base Texture"),
     inUseVPSize = op.inBool("Use viewport size", true),
@@ -19,8 +21,9 @@ const
 const cgl = op.patch.cgl;
 op.setPortGroup("Texture Size", [inUseVPSize, width, height, inWrap, inFilter, inPixel]);
 
-const prevViewPort = [0, 0, 0, 0];
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
+
+const prevViewPort = [0, 0, 0, 0];
 let effect = null;
 let tex = null;
 let reInitEffect = true;
@@ -28,6 +31,9 @@ let reInitEffect = true;
 inWrap.onChange =
     inFilter.onChange =
     inPixel.onChange = reInitLater;
+
+inTex.onLinkChanged =
+inUseVPSize.onChange = updateUi;
 
 render.onTriggered =
     op.preRender = doRender;
@@ -80,27 +86,21 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    let isFloat = false;
-    if (inTex.get()) isFloat = inTex.get().isFloatingPoint();
-    else isFloat = inPixel.get() == RGBA32;
-    return isFloat;
+    if (inTex.get()) return inTex.get().isFloatingPoint();
+    return inPixel.get() == RGBA32;
 }
 
 function getWidth()
 {
-    let w;
-    if (inTex.get()) w = inTex.get().width;
-    else if (inUseVPSize.get()) w = cgl.getViewPort()[2];
-    else w = Math.ceil(width.get());
-    return w;
+    if (inTex.get()) return inTex.get().width;
+    if (inUseVPSize.get()) return cgl.getViewPort()[2];
+    return Math.ceil(width.get());
 }
 function getHeight()
 {
-    let h;
-    if (inTex.get()) h = inTex.get().height;
-    else if (inUseVPSize.get()) h = cgl.getViewPort()[3];
-    else h = Math.ceil(height.get());
-    return h;
+    if (inTex.get()) return inTex.get().height;
+    else if (inUseVPSize.get()) return cgl.getViewPort()[3];
+    else return Math.ceil(height.get());
 }
 
 function reInitLater()
@@ -140,9 +140,6 @@ function updateUi()
         if (getFloatingPoint() && getFilter() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
 }
-
-inTex.onLinkChanged =
-inUseVPSize.onChange = updateUi;
 
 op.preRender = function ()
 {
