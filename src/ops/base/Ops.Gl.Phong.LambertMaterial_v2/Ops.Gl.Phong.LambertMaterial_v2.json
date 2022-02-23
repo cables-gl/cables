@@ -120,5 +120,6 @@
                 "text": "Shader output to be used with i.e. GLTF models"
             }
         ]
-    }
+    },
+    "exampleProjectId": "PAvm26"
 }

@@ -40,5 +40,6 @@
     "summary": "select textures to render to",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "INQQgo"
 }

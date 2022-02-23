@@ -192,5 +192,6 @@
                 "text": "true when third note is played, false when not"
             }
         ]
-    }
+    },
+    "exampleProjectId": "dfF3DI"
 }

@@ -60,5 +60,6 @@
     },
     "coreLibs": [
         "vargetset"
-    ]
+    ],
+    "exampleProjectId": "8WWthI"
 }

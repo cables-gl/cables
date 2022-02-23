@@ -26,5 +26,6 @@
     "summary": "simulate fisheye effect",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "qIOrS-"
 }

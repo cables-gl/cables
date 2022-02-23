@@ -24,5 +24,6 @@
     "summary": "set css filter to html element (blur/opacity/contrast)",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "xpfcbo"
 }

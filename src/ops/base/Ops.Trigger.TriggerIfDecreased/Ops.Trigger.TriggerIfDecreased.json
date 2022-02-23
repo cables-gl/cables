@@ -36,5 +36,6 @@
     "relatedops": [
         "Ops.Trigger.TriggerIfIncreased"
     ],
-    "youtubeids": []
+    "youtubeids": [],
+    "exampleProjectId": "AFiCfe"
 }

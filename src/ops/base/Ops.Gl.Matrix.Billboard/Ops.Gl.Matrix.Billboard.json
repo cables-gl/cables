@@ -21,5 +21,6 @@
     "summary": "rotate an object to always face the camera",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "GVpkrq"
 }

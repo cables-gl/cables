@@ -1,1 +1,67 @@
-{"id":"b5249226-6095-4828-8a1c-080654e192fa","changelog":[{"message":"created op","author":"pandur","date":1587021606549},{"message":"Ops.Vars.VarSetNumber2 renamed to Ops.Vars.VarSetNumber_v2","author":"pandur","date":1587115375796},{"message":" added core lib: cgl_vars.js","author":"pandur","date":1589536714482},{"message":" added lib: cannon.js","author":"pandur","date":1589536735030}],"authorName":"pandur","created":1587021615034,"layout":{"portsIn":[{"type":"0","name":"Value","subType":"number"},{"type":"0","name":"Variable","group":"Variable","subType":"string"},{"type":"1","name":"Create new variable","group":"Variable"},{"type":"1","name":"","group":"Variable"}],"name":"Ops.Vars.VarSetNumber_v2"},"summary":"set a variable number","issues":"","collections":null,"relatedops":null,"youtubeids":["sUR6b0zvuSY"],"coreLibs":["vargetset"],"docs":{"ports":[]}}
+{
+    "id": "b5249226-6095-4828-8a1c-080654e192fa",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587021606549
+        },
+        {
+            "message": "Ops.Vars.VarSetNumber2 renamed to Ops.Vars.VarSetNumber_v2",
+            "author": "pandur",
+            "date": 1587115375796
+        },
+        {
+            "message": " added core lib: cgl_vars.js",
+            "author": "pandur",
+            "date": 1589536714482
+        },
+        {
+            "message": " added lib: cannon.js",
+            "author": "pandur",
+            "date": 1589536735030
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587021615034,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Variable",
+                "group": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Create new variable",
+                "group": "Variable"
+            },
+            {
+                "type": "1",
+                "name": "",
+                "group": "Variable"
+            }
+        ],
+        "name": "Ops.Vars.VarSetNumber_v2"
+    },
+    "summary": "set a variable number",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "coreLibs": [
+        "vargetset"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "1tfFT6"
+}

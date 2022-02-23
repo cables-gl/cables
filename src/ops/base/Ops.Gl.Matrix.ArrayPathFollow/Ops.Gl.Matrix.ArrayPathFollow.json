@@ -1,1 +1,66 @@
-{"layout":{"portsIn":[{"type":"1","name":"exe"},{"type":"3","name":"array"},{"type":"0","name":"time","subType":"number"},{"type":"0","name":"duration","subType":"number"},{"type":"0","name":"offset","subType":"number"},{"type":"0","name":"look ahead","subType":"number"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"1","name":"transform lookat"},{"type":"0","name":"index","subType":"number"}],"name":"Ops.Gl.Matrix.ArrayPathFollow"},"summary":"interpolate position on a spline/array3x","docs":{"ports":[]},"authorName":"pandur","id":"395bff14-d092-4e7e-a723-b6a69564add2","created":1520592871298,"collections":["transform","Spline","interpolate"],"relatedops":null,"issues":"","youtubeids":[]}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "look ahead",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "1",
+                "name": "transform lookat"
+            },
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.ArrayPathFollow"
+    },
+    "summary": "interpolate position on a spline/array3x",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "395bff14-d092-4e7e-a723-b6a69564add2",
+    "created": 1520592871298,
+    "collections": [
+        "transform",
+        "Spline",
+        "interpolate"
+    ],
+    "relatedops": null,
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "lL9_EF"
+}

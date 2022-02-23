@@ -33,5 +33,6 @@
     "summary": "Uses a BW Texture to reveal the layer underneath.",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "WrXR27"
 }

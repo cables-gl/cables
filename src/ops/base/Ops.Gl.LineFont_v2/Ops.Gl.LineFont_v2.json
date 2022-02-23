@@ -1,1 +1,61 @@
-{"authorName":"pandur","id":"a3615010-05af-45bc-bf98-6972c2de21bc","created":1628689608755,"layout":{"portsIn":[{"type":1,"name":"render"},{"type":5,"name":"Text"},{"type":0,"name":"Letter Spacing","subType":"number"},{"type":0,"name":"align index","subType":"integer"},{"type":0,"name":"Render","subType":"boolean"}],"portsOut":[{"type":3,"name":"Lines"}],"name":"Ops.User.pandur.LineFont2"},"summary":"A Simple way to write text on the screen.","youtubeid":"","collections":["drawText"],"relatedops":null,"docs":{"ports":[]},"changelog":[{"message":"cloned op from Ops.Gl.LineFont","author":"pandur","date":1628689608756},{"message":"Ops.User.pandur.LineFont2 renamed to Ops.Gl.LineFont_v2","author":"pandur","date":1629396876653}]}
+{
+    "authorName": "pandur",
+    "id": "a3615010-05af-45bc-bf98-6972c2de21bc",
+    "created": 1628689608755,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "align index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Lines"
+            }
+        ],
+        "name": "Ops.User.pandur.LineFont2"
+    },
+    "summary": "A Simple way to write text on the screen.",
+    "youtubeid": "",
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.LineFont",
+            "author": "pandur",
+            "date": 1628689608756
+        },
+        {
+            "message": "Ops.User.pandur.LineFont2 renamed to Ops.Gl.LineFont_v2",
+            "author": "pandur",
+            "date": 1629396876653
+        }
+    ],
+    "exampleProjectId": "1JzPLu"
+}

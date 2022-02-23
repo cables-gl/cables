@@ -35,5 +35,6 @@
     "summary": "Remove colors from image / greyscale",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "g1kmT6"
 }

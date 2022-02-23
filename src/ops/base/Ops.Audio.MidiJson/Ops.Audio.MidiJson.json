@@ -57,5 +57,6 @@
     "summary": "read MIDI information at time x",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "yJPMCV"
 }

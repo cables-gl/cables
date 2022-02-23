@@ -34,5 +34,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.RoundCorners"
     },
-    "summary": "draw round corners around image (border)"
+    "summary": "draw round corners around image (border)",
+    "exampleProjectId": "iYLmJ5"
 }

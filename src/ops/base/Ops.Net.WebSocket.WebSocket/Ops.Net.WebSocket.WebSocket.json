@@ -34,5 +34,6 @@
     "summary": "create a websocket connection and receive data from it",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "gu7DBo"
 }

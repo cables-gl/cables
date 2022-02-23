@@ -19,8 +19,11 @@
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
-    "coreLibs":["vargetset"],
+    "coreLibs": [
+        "vargetset"
+    ],
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "1tfFT6"
 }

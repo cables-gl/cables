@@ -1,1 +1,58 @@
-{"id":"3a3a4c1f-3824-4fa2-b287-1368bde0f0a0","authorName":"pandur","created":1603024159409,"changelog":[{"message":"cloned op from Ops.Gl.ShaderEffects.ColorArea_v3","author":"pandur","date":1603024159409},{"message":"Ops.User.pandur.VertexColorAsAlpha renamed to Ops.Gl.ShaderEffects.VertexColorAsAlpha","author":"pandur","date":1603024875101}],"coreLibs":["cgl_shadermodifier"],"layout":{"portsIn":[{"type":"1","name":"Render"},{"type":"0","name":"Input index","subType":"integer"},{"type":"5","name":"Input"},{"type":"0","name":"Invert","subType":"boolean"}],"portsOut":[{"type":"1","name":"Next"}],"name":"Ops.Gl.ShaderEffects.VertexColorAsAlpha"},"summary":"Use mesh vertexcolor as Alpha/Opacity","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "3a3a4c1f-3824-4fa2-b287-1368bde0f0a0",
+    "authorName": "pandur",
+    "created": 1603024159409,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.ColorArea_v3",
+            "author": "pandur",
+            "date": 1603024159409
+        },
+        {
+            "message": "Ops.User.pandur.VertexColorAsAlpha renamed to Ops.Gl.ShaderEffects.VertexColorAsAlpha",
+            "author": "pandur",
+            "date": 1603024875101
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Input index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Input"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.VertexColorAsAlpha"
+    },
+    "summary": "Use mesh vertexcolor as Alpha/Opacity",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ChcFXk"
+}

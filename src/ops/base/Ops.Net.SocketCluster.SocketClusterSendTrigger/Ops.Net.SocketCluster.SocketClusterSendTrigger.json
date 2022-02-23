@@ -54,5 +54,6 @@
                 "text": "the name of the trigger (created with TriggerSend)"
             }
         ]
-    }
+    },
+    "exampleProjectId": "mecjP3"
 }

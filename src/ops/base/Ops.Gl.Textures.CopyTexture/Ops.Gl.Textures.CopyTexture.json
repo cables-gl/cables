@@ -120,5 +120,6 @@
     "summary": "copy a texture and optionally resize it",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "G2_my7"
 }

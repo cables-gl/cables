@@ -22,5 +22,6 @@
     "summary": "Is a template for creating Value ports",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "rWJICn"
 }

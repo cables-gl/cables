@@ -101,5 +101,6 @@
     "summary": "image based lighting material using cubemaps",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "mhtbcl"
 }

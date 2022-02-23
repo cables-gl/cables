@@ -1,1 +1,91 @@
-{"id":"93f03721-4b1e-4dee-aef9-7ef17c9cd6c1","changelog":[{"message":"created op","author":"pandur","date":1602053082458},{"message":"Ops.User.pandur.Texture2Array3 renamed to Ops.Gl.TextureToPointArray3","author":"pandur","date":1602058759969}],"authorName":"pandur","created":1602053285517,"layout":{"portsIn":[{"type":"1","name":"update"},{"type":"0","name":"Center","subType":"boolean"},{"type":"0","name":"Threshold Remove","subType":"number"},{"type":"0","name":"Z Multiply","subType":"number"},{"type":"2","name":"texture"},{"type":"0","name":"Width","group":"Size","subType":"number"},{"type":"0","name":"Height","group":"Size","subType":"number"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"3","name":"Points"},{"type":"0","name":"Total Points","subType":"number"},{"type":"0","name":"Min Z","subType":"number"},{"type":"0","name":"Max Z","subType":"number"}],"name":"Ops.User.pandur.Texture2Array3"},"summary":"generate an array3 of grid positions from a texture","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "93f03721-4b1e-4dee-aef9-7ef17c9cd6c1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1602053082458
+        },
+        {
+            "message": "Ops.User.pandur.Texture2Array3 renamed to Ops.Gl.TextureToPointArray3",
+            "author": "pandur",
+            "date": 1602058759969
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1602053285517,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "update"
+            },
+            {
+                "type": "0",
+                "name": "Center",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Threshold Remove",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z Multiply",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "group": "Size",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "Total Points",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.Texture2Array3"
+    },
+    "summary": "generate an array3 of grid positions from a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "U8IO1k"
+}

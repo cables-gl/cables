@@ -1,1 +1,67 @@
-{"authorName":"pandur","id":"aac7f721-208f-411a-adb3-79adae2e471a","created":1517953593075,"layout":{"portsIn":[{"type":"0","name":"Speed","group":"Controls","subType":"number"},{"type":"0","name":"Play","group":"Controls","subType":"boolean"},{"type":"1","name":"Reset","group":"Controls"},{"type":"0","name":"Sync to timeline","subType":"boolean"}],"portsOut":[{"type":"0","name":"Time","subType":"number"}],"name":"Ops.Anim.Timer_v2"},"summary":"A timer that can be started, paused and reset by triggering","issues":"","collections":null,"relatedops":null,"docs":{"ports":[{"name":"Speed","text":"Multiply time by this amount"},{"name":"Play","text":"Starts timer when set to true"},{"name":"Reset","text":"Resets timer to 0"},{"name":"Time","text":"Time elapsed"}]},"youtubeids":["22222"]}
+{
+    "authorName": "pandur",
+    "id": "aac7f721-208f-411a-adb3-79adae2e471a",
+    "created": 1517953593075,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Speed",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Play",
+                "group": "Controls",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Reset",
+                "group": "Controls"
+            },
+            {
+                "type": "0",
+                "name": "Sync to timeline",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Anim.Timer_v2"
+    },
+    "summary": "A timer that can be started, paused and reset by triggering",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Speed",
+                "text": "Multiply time by this amount"
+            },
+            {
+                "name": "Play",
+                "text": "Starts timer when set to true"
+            },
+            {
+                "name": "Reset",
+                "text": "Resets timer to 0"
+            },
+            {
+                "name": "Time",
+                "text": "Time elapsed"
+            }
+        ]
+    },
+    "youtubeids": [
+        "22222"
+    ],
+    "exampleProjectId": "YTuOQm"
+}
