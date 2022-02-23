@@ -31,20 +31,20 @@
             {
                 "type": 0,
                 "name": "Filter index",
-                "group": "Texture Settings",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Wrap index",
-                "group": "Texture Settings",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "HDR",
-                "group": "Texture Settings",
-                "subType": "boolean"
+                "name": "Pixel Format index",
+                "group": "Texture Size",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -60,6 +60,16 @@
             {
                 "type": 0,
                 "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
                 "subType": "number"
             }
         ],
