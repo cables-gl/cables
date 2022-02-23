@@ -100,6 +100,8 @@ function addFace(verts)
 
 function buildMesh()
 {
+    op.setUiError("mesh", null);
+
     obj = {};
 
     faces = [];
@@ -113,6 +115,7 @@ function buildMesh()
     }
     catch (ex)
     {
+        op.setUiError("mesh", ex);
         op.logError(ex);
         return;
     }
