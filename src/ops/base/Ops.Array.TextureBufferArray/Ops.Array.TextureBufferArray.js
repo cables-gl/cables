@@ -46,7 +46,7 @@ function init()
     textures.length = inNum.get();
     sorted.length = inNum.get();
 
-    op.log(inTexture.get());
+    // op.log(inTexture.get());
 
     for (let i = 0; i < inNum.get(); i++)
     {
@@ -188,10 +188,12 @@ function render()
             sorted[textures.length - i - 1] = textures[(index + i + 1) % inNum.get()];
         }
 
+        outArr.set(null);
         outArr.set(sorted);
     }
     else
     {
+        outArr.set(null);
         outArr.set(textures);
     }
     index++;

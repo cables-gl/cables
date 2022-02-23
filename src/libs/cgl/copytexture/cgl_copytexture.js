@@ -42,6 +42,7 @@ class CopyTexture
 
     copy(tex)
     {
+        if (!tex) return CGL.Texture.getEmptyTexture(this.cgl);
         const
             w = this._options.width || tex.width,
             h = this._options.height || tex.height,

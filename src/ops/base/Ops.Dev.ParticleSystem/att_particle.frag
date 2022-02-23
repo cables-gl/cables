@@ -48,10 +48,14 @@ void main()
         // rnd.z*=scale.z;
         oldVelocity=texture(texSpawnVel,texCoord);
 
-        newPos.rgb+= rnd;
+        newPos.rgb+=rnd;
 
         vtiming.r=time;
+
         vtiming.g=(cgl_random(time*texCoord)*(lifeTime.y-lifeTime.x))+lifeTime.x+time;
+
+        if(reset==1.0)
+            vtiming.g=time+cgl_random(time*22.0*texCoord)*lifeTime.y;
     }
 
     vtiming.a=1.0;

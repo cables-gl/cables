@@ -224,7 +224,7 @@ void main()
 
     rnd*=timeDelta;
 
-    vec3 coord=base.xyz+rnd;
+    vec3 coord=base.xyz+rnd*0.3;
     // coord.x+=( Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale )*timeDelta);
     // coord.y+=( Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale )*timeDelta);
     // coord.z+=( Perlin3D( ( (base.xyz+30.0) + vec3(x,y,z)) *scale )*timeDelta);

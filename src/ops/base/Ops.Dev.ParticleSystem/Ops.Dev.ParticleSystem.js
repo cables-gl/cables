@@ -25,7 +25,8 @@ const
     next = op.outTrigger("Next"),
     outTexPos = op.outTexture("Positions", emptyTex),
     outTexTiming = op.outTexture("Timing", emptyTex),
-    outTest = op.outTexture("Test", emptyTex);
+    outTest = op.outTexture("Test", emptyTex),
+    outTexSize = op.outNumber("Tex Size");
 
 op.setPortGroup("Constant Velocity", [moveX, moveY, moveZ]);
 op.setPortGroup("Position", [posX, posY, posZ]);
@@ -83,6 +84,7 @@ const texBlack = new CGL.Texture(cgl, {
 function createTextures()
 {
     const size = Math.ceil(Math.sqrt(inNumParticles.get()));
+    outTexSize.set(size);
 
     console.log(size);
 
