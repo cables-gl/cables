@@ -27,5 +27,6 @@
         ],
         "name": "Ops.Math.CircleCoordinates"
     },
-    "summary": "x and y coordinates of a circle"
+    "summary": "x and y coordinates of a circle",
+    "exampleProjectId": "uAkdL5"
 }

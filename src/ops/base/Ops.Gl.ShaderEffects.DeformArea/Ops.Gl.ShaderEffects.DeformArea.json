@@ -71,5 +71,6 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "exampleProjectId": "CQ0wmo"
 }

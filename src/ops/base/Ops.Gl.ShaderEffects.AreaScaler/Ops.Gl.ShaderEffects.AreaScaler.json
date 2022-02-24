@@ -56,5 +56,6 @@
     "summary": "modify scale of meshes in an area",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "LXN7D-"
 }

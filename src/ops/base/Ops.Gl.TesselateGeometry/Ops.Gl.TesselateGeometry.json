@@ -1,1 +1,32 @@
-{"layout":{"portsIn":[{"type":"2","name":"Geometry"},{"type":"0","name":"Iterations","subType":"integer"}],"portsOut":[{"type":"2","name":"Result"},{"type":"0","name":"Num Vertices","subType":"number"}],"name":"Ops.Gl.TesselateGeometry"},"summary":"create new triangles in a mesh (subdivide)","authorName":"pandur","id":"eb3f0bd8-211c-4336-a3ad-fa31c50d705d","created":1515175859293}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Iterations",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Num Vertices",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.TesselateGeometry"
+    },
+    "summary": "create new triangles in a mesh (subdivide)",
+    "authorName": "pandur",
+    "id": "eb3f0bd8-211c-4336-a3ad-fa31c50d705d",
+    "created": 1515175859293,
+    "exampleProjectId": "gLrrJV"
+}

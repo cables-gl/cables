@@ -77,5 +77,6 @@
                 "text": "allow for setting an empty hash, usually triggers a page reload"
             }
         ]
-    }
+    },
+    "exampleProjectId": "EfiWpG"
 }

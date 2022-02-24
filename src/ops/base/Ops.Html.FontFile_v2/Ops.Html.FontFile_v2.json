@@ -1,1 +1,53 @@
-{"id":"68177370-116e-4c76-aef3-3b10d68e7227","changelog":[{"message":"created op","author":"pandur","date":1582125861169}],"authorName":"pandur","created":1582125874800,"layout":{"portsIn":[{"type":"5","name":"file"},{"type":"5","name":"family"}],"portsOut":[{"type":"0","name":"Loaded","subType":"number"},{"type":"1","name":"Loaded Trigger"}],"name":"Ops.Html.FontFile_v2"},"summary":"Load a font file like .otf, .ttf, .woff via css","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]},"todos":[{"message":"catch error when font not loaded","author":"pandur","id":"1c2356ef-c435-485a-a9aa-849e50b95bd2","date":1605426341004}]}
+{
+    "id": "68177370-116e-4c76-aef3-3b10d68e7227",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582125861169
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1582125874800,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "file"
+            },
+            {
+                "type": "5",
+                "name": "family"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Loaded Trigger"
+            }
+        ],
+        "name": "Ops.Html.FontFile_v2"
+    },
+    "summary": "Load a font file like .otf, .ttf, .woff via css",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "catch error when font not loaded",
+            "author": "pandur",
+            "id": "1c2356ef-c435-485a-a9aa-849e50b95bd2",
+            "date": 1605426341004
+        }
+    ],
+    "exampleProjectId": "xR9zIR"
+}

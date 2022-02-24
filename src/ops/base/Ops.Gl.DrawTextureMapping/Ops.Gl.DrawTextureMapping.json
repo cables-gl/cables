@@ -28,5 +28,6 @@
         ],
         "name": "Ops.Gl.DrawTextureMapping"
     },
-    "summary": "draw texture mapping coordinates"
+    "summary": "draw texture mapping coordinates",
+    "exampleProjectId": "Nu7dJ5"
 }

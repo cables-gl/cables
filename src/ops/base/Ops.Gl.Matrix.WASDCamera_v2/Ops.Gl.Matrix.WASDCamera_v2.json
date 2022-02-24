@@ -1,1 +1,195 @@
-{"author":"58dabd06a0d7ec8d1a982e66","authorName":"pandur","id":"af6c3fe2-58a9-4f81-be41-4c21aabffde9","created":1509796773993,"layout":{"portsIn":[{"type":1,"name":"render"},{"type":0,"name":"Enable pointer lock","subType":"boolean"},{"type":0,"name":"Speed","subType":"number"},{"type":0,"name":"Mouse Speed","subType":"number"},{"type":0,"name":"Allow Flying","subType":"boolean"},{"type":0,"name":"Active","subType":"boolean"},{"type":0,"name":"Move X+","group":"Move","subType":"boolean"},{"type":0,"name":"Move X-","group":"Move","subType":"boolean"},{"type":0,"name":"Move Y+","group":"Move","subType":"boolean"},{"type":0,"name":"Move Y-","group":"Move","subType":"boolean"},{"type":1,"name":"Reset"}],"portsOut":[{"type":1,"name":"trigger"},{"type":0,"name":"isLocked","subType":"number"},{"type":0,"name":"posX","subType":"number"},{"type":0,"name":"posY","subType":"number"},{"type":0,"name":"posZ","subType":"number"},{"type":1,"name":"Mouse Left"},{"type":1,"name":"Mouse Right"},{"type":0,"name":"Dir X","subType":"number"},{"type":0,"name":"Dir Y","subType":"number"},{"type":0,"name":"Dir Z","subType":"number"}],"name":"Ops.Gl.Matrix.WASDCamera_v2"},"summary":"simple camera you control with W,A,S,D keys like in a FPS game","docs":{"ports":[{"name":"render","text":"Trigger the op"},{"name":"Enable pointer lock","text":"If true pointer lock can be enabled"},{"name":"Allow Flying","text":"Allows vertical movement"},{"name":"Speed","text":"Movement speed multiplier - default 1"},{"name":"trigger","text":"trigger out"},{"name":"isLocked","text":"If pointer lock is active this is true"},{"name":"posX","text":"X position in space"},{"name":"posY","text":"Y position in space"},{"name":"posZ","text":"Z position in space"},{"name":"Mouse Left","text":"Trigger out on left mouse button down"},{"name":"Mouse Right","text":"Trigger out on right mouse button down"},{"name":"Dir X","text":"Direction of camera X"},{"name":"Dir Y","text":"Direction of camera Y"},{"name":"Dir Z","text":"Direction of camera Z"}]},"changelog":[{"message":"Added speed control for camera speed","author":"cables","date":1565358593987},{"message":"added active toggle to completly disable it","author":"pandur","date":1643616438582}],"issues":"","collections":null,"relatedops":null,"youtubeids":[]}
+{
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "af6c3fe2-58a9-4f81-be41-4c21aabffde9",
+    "created": 1509796773993,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Enable pointer lock",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mouse Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Allow Flying",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move X+",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move X-",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Y+",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Y-",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "isLocked",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "posX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "posY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "posZ",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Left"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Right"
+            },
+            {
+                "type": 0,
+                "name": "Dir X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.WASDCamera_v2"
+    },
+    "summary": "simple camera you control with W,A,S,D keys like in a FPS game",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Enable pointer lock",
+                "text": "If true pointer lock can be enabled"
+            },
+            {
+                "name": "Allow Flying",
+                "text": "Allows vertical movement"
+            },
+            {
+                "name": "Speed",
+                "text": "Movement speed multiplier - default 1"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger out"
+            },
+            {
+                "name": "isLocked",
+                "text": "If pointer lock is active this is true"
+            },
+            {
+                "name": "posX",
+                "text": "X position in space"
+            },
+            {
+                "name": "posY",
+                "text": "Y position in space"
+            },
+            {
+                "name": "posZ",
+                "text": "Z position in space"
+            },
+            {
+                "name": "Mouse Left",
+                "text": "Trigger out on left mouse button down"
+            },
+            {
+                "name": "Mouse Right",
+                "text": "Trigger out on right mouse button down"
+            },
+            {
+                "name": "Dir X",
+                "text": "Direction of camera X"
+            },
+            {
+                "name": "Dir Y",
+                "text": "Direction of camera Y"
+            },
+            {
+                "name": "Dir Z",
+                "text": "Direction of camera Z"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Added speed control for camera speed",
+            "author": "cables",
+            "date": 1565358593987
+        },
+        {
+            "message": "added active toggle to completly disable it",
+            "author": "pandur",
+            "date": 1643616438582
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "oLCaao"
+}

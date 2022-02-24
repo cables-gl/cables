@@ -56,5 +56,6 @@
     "summary": "simulating an old camera effect of fading away the edges of the image",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "WDPlT6"
 }

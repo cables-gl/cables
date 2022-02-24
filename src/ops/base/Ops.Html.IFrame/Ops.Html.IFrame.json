@@ -39,5 +39,6 @@
         ],
         "name": "Ops.Html.IFrame"
     },
-    "summary": "show another website in an iframe element"
+    "summary": "show another website in an iframe element",
+    "exampleProjectId": "SLesr2"
 }

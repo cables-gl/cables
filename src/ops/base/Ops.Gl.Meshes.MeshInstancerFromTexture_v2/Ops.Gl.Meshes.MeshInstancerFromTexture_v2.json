@@ -160,5 +160,6 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "exampleProjectId": "H3cEpX"
 }

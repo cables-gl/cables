@@ -71,5 +71,6 @@
                 "text": "url to a library (can also be uploaded to cables) - be aware that you are completely on your own here, no support (keep CORS in mind, though)"
             }
         ]
-    }
+    },
+    "exampleProjectId": "5Joi9t"
 }

@@ -148,5 +148,6 @@
                 "text": "`true` when the voice is currently paused. You need to connect `Update State` to e.g. `MainLoop` for this to be updated."
             }
         ]
-    }
+    },
+    "exampleProjectId": "WubOWc"
 }

@@ -57,5 +57,6 @@
     "summary": "simple controller example op for game characters",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "m5V6VB"
 }

@@ -64,5 +64,6 @@
         "Ops.WebAudio.AudioAnalyzer",
         "Ops.WebAudio.FftTexture"
     ],
-    "youtubeids": []
+    "youtubeids": [],
+    "exampleProjectId": "F6Fhyp"
 }

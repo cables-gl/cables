@@ -33,5 +33,6 @@
     "summary": "generate polyhedron meshes ",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "VRG6Q6"
 }

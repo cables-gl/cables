@@ -56,5 +56,6 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "exampleProjectId": "gLrrJV"
 }

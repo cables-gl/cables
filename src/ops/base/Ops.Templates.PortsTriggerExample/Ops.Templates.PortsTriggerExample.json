@@ -24,5 +24,6 @@
     "summary": "Is a template for creating Trigger ports",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "rWJICn"
 }

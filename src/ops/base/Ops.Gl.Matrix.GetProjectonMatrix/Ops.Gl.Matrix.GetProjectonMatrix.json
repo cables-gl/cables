@@ -24,5 +24,6 @@
     "summary": "get current projectionmatrix",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "573_4S"
 }

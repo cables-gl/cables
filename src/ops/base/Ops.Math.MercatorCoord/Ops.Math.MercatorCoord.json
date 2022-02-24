@@ -34,5 +34,6 @@
         ],
         "name": "Ops.Math.MercatorCoord"
     },
-    "summary": "project mercator coordinates"
+    "summary": "project mercator coordinates",
+    "exampleProjectId": "oi9AI4"
 }

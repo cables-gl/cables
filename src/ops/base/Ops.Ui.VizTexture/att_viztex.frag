@@ -13,7 +13,7 @@ float LinearizeDepth(float d,float zNear,float zFar)
 
 void main()
 {
-    vec4 col=vec4(vec3(0.15),1.0);
+    vec4 col=vec4(vec3(0.),0.0);
 
     vec4 colTex=texture2D(tex,texCoord);
 

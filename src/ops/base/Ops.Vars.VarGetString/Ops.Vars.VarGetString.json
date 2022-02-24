@@ -39,8 +39,11 @@
             }
         ]
     },
-    "coreLibs":["vargetset"],
+    "coreLibs": [
+        "vargetset"
+    ],
     "youtubeids": [
         "sUR6b0zvuSY"
-    ]
+    ],
+    "exampleProjectId": "W14clJ"
 }

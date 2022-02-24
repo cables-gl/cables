@@ -1,1 +1,92 @@
-{"id":"5677b5b5-753a-4fbf-9e91-64c81ec68a2f","changelog":[{"message":"created op","author":"cables","date":1563449317441},{"message":"fix bugs with NaN values","author":"pandur","date":1643616950027}],"authorName":"cables","created":1563449330030,"layout":{"portsIn":[{"type":1,"name":"Update"},{"type":0,"name":"Value","subType":"number"},{"type":0,"name":"Inc factor","subType":"number"},{"type":0,"name":"Dec factor","subType":"number"}],"portsOut":[{"type":1,"name":"Next"},{"type":0,"name":"Result","subType":"number"}],"name":"Ops.Anim.Smooth"},"summary":"Smooths out jumps in values (AverageInterpolation)","issues":"","collections":null,"relatedops":null,"youtubeids":["00Rvb749wrc"],"docs":{"ports":[{"name":"Update","text":"Trigger the op"},{"name":"Separate inc/dec","text":"Enable to have separate control over the smoothing when values increase or decrease"},{"name":"Value","text":"The value to smooth"},{"name":"Inc factor","text":"Amount of smoothing applied to values that increase from the previous number"},{"name":"Dec factor","text":"Amount of smoothing applied to values that decrease from the previous number"},{"name":"Next","text":"Trigger out"},{"name":"Result","text":"The smoothed result"}]}}
+{
+    "id": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1563449317441
+        },
+        {
+            "message": "fix bugs with NaN values",
+            "author": "pandur",
+            "date": 1643616950027
+        }
+    ],
+    "authorName": "cables",
+    "created": 1563449330030,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Inc factor",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dec factor",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Anim.Smooth"
+    },
+    "summary": "Smooths out jumps in values (AverageInterpolation)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "00Rvb749wrc"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Separate inc/dec",
+                "text": "Enable to have separate control over the smoothing when values increase or decrease"
+            },
+            {
+                "name": "Value",
+                "text": "The value to smooth"
+            },
+            {
+                "name": "Inc factor",
+                "text": "Amount of smoothing applied to values that increase from the previous number"
+            },
+            {
+                "name": "Dec factor",
+                "text": "Amount of smoothing applied to values that decrease from the previous number"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The smoothed result"
+            }
+        ]
+    },
+    "exampleProjectId": "c9gqda"
+}

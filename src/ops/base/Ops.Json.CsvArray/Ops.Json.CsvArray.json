@@ -1,1 +1,51 @@
-{"authorName":"pandur","id":"2e76c1f8-19ac-4e9d-8db8-58b2f9fbc1d3","created":1519816793278,"layout":{"portsIn":[{"type":"5","name":"file"}],"portsOut":[{"type":"3","name":"result"},{"type":"0","name":"num items","subType":"number"}],"name":"Ops.Json.CsvArray"},"summary":"parse CSV files as array","docs":{"ports":[{"name":"file","text":"The CSV-file you want to use in cables as an array"},{"name":"result","text":"The parsed two-dimensional array containing all the rows and columns from the CSV-file"},{"name":"num items","text":"The number of rows "}]},"todos":[{"message":"add error handling","author":"cables","id":"377bbe9c-80cf-4ffd-845c-ffbeb5041821","date":1605510385309}]}
+{
+    "authorName": "pandur",
+    "id": "2e76c1f8-19ac-4e9d-8db8-58b2f9fbc1d3",
+    "created": 1519816793278,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "file"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "result"
+            },
+            {
+                "type": "0",
+                "name": "num items",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.CsvArray"
+    },
+    "summary": "parse CSV files as array",
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "The CSV-file you want to use in cables as an array"
+            },
+            {
+                "name": "result",
+                "text": "The parsed two-dimensional array containing all the rows and columns from the CSV-file"
+            },
+            {
+                "name": "num items",
+                "text": "The number of rows "
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "add error handling",
+            "author": "cables",
+            "id": "377bbe9c-80cf-4ffd-845c-ffbeb5041821",
+            "date": 1605510385309
+        }
+    ],
+    "exampleProjectId": "UlL2G1"
+}

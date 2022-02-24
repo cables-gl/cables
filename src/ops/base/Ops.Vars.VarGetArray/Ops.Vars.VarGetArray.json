@@ -47,5 +47,6 @@
     },
     "coreLibs": [
         "cgl_light"
-    ]
+    ],
+    "exampleProjectId": "3LkNp6"
 }

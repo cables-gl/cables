@@ -74,5 +74,6 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "exampleProjectId": "HtcN9Z"
 }

@@ -70,5 +70,6 @@
                 "text": "Currently the same as the input port `Channel`. In MQTT you could also subscribe via wildcards, e.g. `/sensor1/#`, this will subscribe to `/sensor1/x` as well as `/sensor1/y`. Currently not supported…"
             }
         ]
-    }
+    },
+    "exampleProjectId": "_IZUSv"
 }

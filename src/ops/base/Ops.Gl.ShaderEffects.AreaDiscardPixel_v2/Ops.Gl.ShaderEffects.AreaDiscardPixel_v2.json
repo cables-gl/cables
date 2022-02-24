@@ -112,5 +112,6 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "exampleProjectId": "GQiw18"
 }

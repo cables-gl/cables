@@ -78,5 +78,6 @@
                 "text": "If set to true, rotations will be done around the cube-center, if false rotations will be done around a corner."
             }
         ]
-    }
+    },
+    "exampleProjectId": "0ghhQ6"
 }

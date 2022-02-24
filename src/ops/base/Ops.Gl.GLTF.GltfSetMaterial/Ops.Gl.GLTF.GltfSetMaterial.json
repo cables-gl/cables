@@ -57,5 +57,6 @@
                 "text": "Material out, should be connected to Material input of GLTFScene"
             }
         ]
-    }
+    },
+    "exampleProjectId": "Mk3Dv2"
 }

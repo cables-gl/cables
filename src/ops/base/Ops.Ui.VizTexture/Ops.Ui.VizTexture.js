@@ -78,12 +78,10 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
     }
 
-    // this._shader.toggleDefine("CUBEMAP", true);
-
     this._shaderTypeUniform.setValue(texType);
     let s = [port.parent.patch.cgl.canvasWidth, port.parent.patch.cgl.canvasHeight];
 
-    cgl.gl.clearColor(0.2, 0.2, 0.2, 1);
+    cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     cgl.pushModelMatrix();
@@ -127,12 +125,23 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
     if (!ctx.imageSmoothingEnabled)
     {
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(pos[0], pos[1] - 10, 10, 10);
         ctx.fillStyle = "#ffffff";
+        ctx.fillRect(pos[0], pos[1] - 10, 10, 10);
+        ctx.fillStyle = "#000000";
         ctx.fillRect(pos[0], pos[1] - 10, 5, 5);
         ctx.fillRect(pos[0] + 5, pos[1] - 10 + 5, 5, 5);
     }
+
+    // console.log(size);
+    let stepY = (size[1] / 10);
+    let stepX = (size[0] / 10);
+    for (let x = 0; x < 10; x++)
+        for (let y = 0; y < 10; y++)
+        {
+            if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
+            else ctx.fillStyle = "#111111";
+            ctx.fillRect(pos[0] + stepX * x, pos[1] + stepY * y, stepX, stepY);
+        }
 
     ctx.drawImage(cgl.canvas,
         0, 0,
@@ -140,14 +149,10 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         pos[0] + (size[0] - sizeImg[0]) / 2, pos[1] + (size[1] - sizeImg[1]) / 2,
         sizeImg[0], sizeImg[1]);
 
-    // ctx.font = "normal 10px sourceCodePro";
-    // ctx.fillStyle = "#ccc";
-    // ctx.fillText(port.get().getInfoOneLine()+"",pos[0]+10,pos[1]+size[1]);
-
     if (port.get() && port.get().getInfoOneLine) outInfo.set(port.get().getInfoOneLine());
     else outInfo.set("unknown");
 
-    cgl.gl.clearColor(0, 0, 0, 1);
+    cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     perf.finish();

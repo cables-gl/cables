@@ -1,1 +1,75 @@
-{"authorName":"mickey","created":1524902340627,"layout":{"portsIn":[{"type":2,"name":"Texture"},{"type":1,"name":"Trigger"},{"type":0,"name":"Use JPEG","subType":"boolean"},{"type":0,"name":"Output dataUrl","subType":"boolean"}],"portsOut":[{"type":5,"name":"Base64 string"},{"type":0,"name":"Loading","subType":"boolean"}],"name":"Ops.Gl.Textures.TextureToBase64"},"summary":"Converts a texture into a base-64 image string","docs":{"ports":[{"name":"Texture","text":"Input texture to be converted"},{"name":"Trigger","text":"Trigger to do the conversion, put this behind a TriggerLimiter or TriggerOnce"},{"name":"Use JPEG","text":"Default is a PNG lossless image, this toggle asks explicitly for a JPEG"},{"name":"Output dataUrl","text":"Choose whether to export a string that is only a Base64, or already as a DataUrl"},{"name":"Base64 string","text":"The string conversion of the texture"},{"name":"Loading","text":"Gives you the status of the conversion and whether it has finished"}]},"id":"dcc29c06-c3df-434f-9782-736548220bda","issues":"","collections":null,"relatedops":["Base64ToTexture"],"youtubeids":[]}
+{
+    "authorName": "mickey",
+    "created": 1524902340627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Texture"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Use JPEG",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Output dataUrl",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Base64 string"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Textures.TextureToBase64"
+    },
+    "summary": "Converts a texture into a base-64 image string",
+    "docs": {
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "Input texture to be converted"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger to do the conversion, put this behind a TriggerLimiter or TriggerOnce"
+            },
+            {
+                "name": "Use JPEG",
+                "text": "Default is a PNG lossless image, this toggle asks explicitly for a JPEG"
+            },
+            {
+                "name": "Output dataUrl",
+                "text": "Choose whether to export a string that is only a Base64, or already as a DataUrl"
+            },
+            {
+                "name": "Base64 string",
+                "text": "The string conversion of the texture"
+            },
+            {
+                "name": "Loading",
+                "text": "Gives you the status of the conversion and whether it has finished"
+            }
+        ]
+    },
+    "id": "dcc29c06-c3df-434f-9782-736548220bda",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Base64ToTexture"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "dNuMWr"
+}

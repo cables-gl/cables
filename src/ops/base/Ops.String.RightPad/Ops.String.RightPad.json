@@ -33,5 +33,6 @@
     "summary": "create a string with a fixed length filling the space with a character",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "8LJxz7"
 }

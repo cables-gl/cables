@@ -48,5 +48,6 @@
     },
     "libs": [
         "moment.js"
-    ]
+    ],
+    "exampleProjectId": "mzfGGl"
 }

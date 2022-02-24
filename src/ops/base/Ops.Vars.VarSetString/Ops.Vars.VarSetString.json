@@ -22,12 +22,15 @@
     "docs": {
         "ports": []
     },
-    "coreLibs":["vargetset"],
+    "coreLibs": [
+        "vargetset"
+    ],
     "changelog": [
         {
             "message": "Ops.Vars.SetVariableString renamed to Ops.Vars.VarSetString",
             "author": "pandur",
             "date": 1560418772776
         }
-    ]
+    ],
+    "exampleProjectId": "W14clJ"
 }

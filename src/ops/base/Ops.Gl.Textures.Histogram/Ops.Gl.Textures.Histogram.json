@@ -31,5 +31,6 @@
     "summary": "graphical representation of distribution of color in a texture",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Z315nc"
 }

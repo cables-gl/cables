@@ -40,5 +40,6 @@
                 "text": "This outputs all midi data from midi clock to note on/off and midi cc"
             }
         ]
-    }
+    },
+    "exampleProjectId": "dfF3DI"
 }

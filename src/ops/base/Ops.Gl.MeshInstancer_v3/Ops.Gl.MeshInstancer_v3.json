@@ -155,5 +155,6 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "exampleProjectId": "oOsjJ5"
 }
