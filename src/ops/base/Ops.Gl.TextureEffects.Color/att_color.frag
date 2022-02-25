@@ -28,4 +28,7 @@ void main()
     outColor= cgl_blend(base,col,am);
     outColor.a*=base.a;
 
+
+    // outColor=cgl_blendPixel(base,col,amount);
+
 }
