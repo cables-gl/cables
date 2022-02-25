@@ -1,9 +1,10 @@
 {
     "summary": "Outputs `true` if patch is executed in the cables editor (UI)",
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "UI",
                 "subType": "boolean"
             }
