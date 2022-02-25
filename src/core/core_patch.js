@@ -276,6 +276,7 @@ Patch.prototype.getAssetPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
+    if (filename && filename.startsWith("data:")) return filename;
     if (this._isLocal && !this.config.allowLocalFileAccess) this.exitError("localAccess", "Browser security forbids loading files directly without a webserver. Upload files to a server to work. use allowLocalFileAccess:true to ignore this.");
     if (!filename) return filename;
     filename = String(filename);
