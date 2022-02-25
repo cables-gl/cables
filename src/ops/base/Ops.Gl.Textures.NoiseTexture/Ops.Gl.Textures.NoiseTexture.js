@@ -5,7 +5,8 @@ const
     tfilter = op.inSwitch("Filter", ["nearest", "linear"], "nearest"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inColor = op.inValueBool("Color", false),
-    inFp = op.inBool("Floating point", false),
+    inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
+
     inOutR = op.inBool("Channel R", true),
     inMinR = op.inFloat("Min R", 0),
     inMaxR = op.inFloat("Max R", 1),
@@ -21,7 +22,7 @@ const cgl = op.patch.cgl;
 
 inWidth.onChange =
     inHeight.onChange =
-    inFp.onChange =
+    inPixel.onChange =
     inMinR.onChange =
     inMaxR.onChange =
     inMinG.onChange =
@@ -39,7 +40,8 @@ update();
 
 function update()
 {
-    if (!inFp.get())
+    const isFp = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    if (!isFp)
     {
         if (
             inMinR.get() < 0.0 || inMinR.get() > 1.0 ||
@@ -72,7 +74,7 @@ function update()
     const minB = inMinB.get();
     const diffB = inMaxB.get() - minB;
 
-    if (inFp.get())
+    if (isFp)
     {
         pixels = new Float32Array(num);
 
@@ -135,7 +137,7 @@ function update()
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
     if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    let tex = new CGL.Texture(cgl, { "isFloatingPointTexture": inFp.get() });
+    let tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp });
 
     tex.initFromData(pixels, width, height, cgl_filter, cgl_wrap);
 

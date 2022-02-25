@@ -301,6 +301,13 @@ TextureEffect.getBlendCode = function ()
         + "   #ifdef BM_SUBSTRACT".endl()
         + "       colNew=max(base + blend - vec3(1.0), vec3(0.0));".endl()
         + "   #endif".endl()
+
+
+        + "   #ifdef BM_SUBTRACT".endl()
+        + "       colNew=base - blend;".endl()
+        + "   #endif".endl()
+
+
         + "   #ifdef BM_DIFFERENCE".endl()
         + "       colNew=abs(base - blend);".endl()
         + "   #endif".endl()
@@ -363,67 +370,51 @@ TextureEffect.getBlendCode = function ()
             + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
             + "col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
             + "return col;".endl()
-        + "}"
+        + "}" +
+
+        "vec4 cgl_blendPixel(vec4 base,vec4 col,float amount)".endl() +
+        "{".endl() +
+            "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
+
+            "#ifdef BM_ALPHAMASKED".endl() +
+            "   if(col.a==0.0) return base;".endl() +
+            "   return vec4(col.rgb,base.a);".endl() +
+            "#endif".endl() +
+
+            "return vec4(".endl() +
+                "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
+                "clamp(base.a+(col.a*amount),0.,1.));".endl() +
+        "}".endl()
+
     );
 };
 
 TextureEffect.onChangeBlendSelect = function (shader, blendName)
 {
-    if (blendName == "normal") shader.define("BM_NORMAL");
-    else shader.removeDefine("BM_NORMAL");
-
-    if (blendName == "multiply") shader.define("BM_MULTIPLY");
-    else shader.removeDefine("BM_MULTIPLY");
-
-    if (blendName == "multiply invert") shader.define("BM_MULTIPLY_INV");
-    else shader.removeDefine("BM_MULTIPLY_INV");
-
-    if (blendName == "average") shader.define("BM_AVERAGE");
-    else shader.removeDefine("BM_AVERAGE");
-
-    if (blendName == "add") shader.define("BM_ADD");
-    else shader.removeDefine("BM_ADD");
-
-    if (blendName == "substract") shader.define("BM_SUBSTRACT");
-    else shader.removeDefine("BM_SUBSTRACT");
-
-    if (blendName == "difference") shader.define("BM_DIFFERENCE");
-    else shader.removeDefine("BM_DIFFERENCE");
-
-    if (blendName == "negation") shader.define("BM_NEGATION");
-    else shader.removeDefine("BM_NEGATION");
-
-    if (blendName == "exclusion") shader.define("BM_EXCLUSION");
-    else shader.removeDefine("BM_EXCLUSION");
-
-    if (blendName == "lighten") shader.define("BM_LIGHTEN");
-    else shader.removeDefine("BM_LIGHTEN");
-
-    if (blendName == "darken") shader.define("BM_DARKEN");
-    else shader.removeDefine("BM_DARKEN");
-
-    if (blendName == "overlay") shader.define("BM_OVERLAY");
-    else shader.removeDefine("BM_OVERLAY");
-
-    if (blendName == "screen") shader.define("BM_SCREEN");
-    else shader.removeDefine("BM_SCREEN");
-
-    if (blendName == "softlight") shader.define("BM_SOFTLIGHT");
-    else shader.removeDefine("BM_SOFTLIGHT");
-
-    if (blendName == "hardlight") shader.define("BM_HARDLIGHT");
-    else shader.removeDefine("BM_HARDLIGHT");
-
-    if (blendName == "color dodge") shader.define("BM_COLORDODGE");
-    else shader.removeDefine("BM_COLORDODGE");
-
-    if (blendName == "color burn") shader.define("BM_COLORBURN");
-    else shader.removeDefine("BM_COLORBURN");
+    shader.toggleDefine("BM_NORMAL", blendName == "normal");
+    shader.toggleDefine("BM_MULTIPLY", blendName == "multiply");
+    shader.toggleDefine("BM_MULTIPLY_INV", blendName == "multiply invert");
+    shader.toggleDefine("BM_AVERAGE", blendName == "average");
+    shader.toggleDefine("BM_ADD", blendName == "add");
+    shader.toggleDefine("BM_SUBSTRACT", blendName == "substract");
+    shader.toggleDefine("BM_SUBTRACT", blendName == "subtract");
+    shader.toggleDefine("BM_DIFFERENCE", blendName == "difference");
+    shader.toggleDefine("BM_NEGATION", blendName == "negation");
+    shader.toggleDefine("BM_EXCLUSION", blendName == "exclusion");
+    shader.toggleDefine("BM_LIGHTEN", blendName == "lighten");
+    shader.toggleDefine("BM_DARKEN", blendName == "darken");
+    shader.toggleDefine("BM_OVERLAY", blendName == "overlay");
+    shader.toggleDefine("BM_SCREEN", blendName == "screen");
+    shader.toggleDefine("BM_SOFTLIGHT", blendName == "softlight");
+    shader.toggleDefine("BM_HARDLIGHT", blendName == "hardlight");
+    shader.toggleDefine("BM_COLORDODGE", blendName == "color dodge");
+    shader.toggleDefine("BM_COLORBURN", blendName == "color burn");
+    shader.toggleDefine("BM_ALPHAMASKED", blendName == "alpha mask");
 };
 
 TextureEffect.AddBlendSelect = function (op, name, defaultMode)
 {
-    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], defaultMode || "normal");
+    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "subtract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight", "alpha mask"], defaultMode || "normal");
     return p;
 };
 
