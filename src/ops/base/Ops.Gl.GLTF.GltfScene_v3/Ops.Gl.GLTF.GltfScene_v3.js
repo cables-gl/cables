@@ -284,7 +284,10 @@ function finishLoading()
 
     if (gltf)
     {
-        op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+        if (inFile.get() && !inFile.get().startsWith("data:"))
+        {
+            op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+        }
 
         gltf.loaded = Date.now();
         // if (gltf.bounds)outBounds.set(gltf.bounds);
@@ -342,28 +345,32 @@ function loadBin(addCacheBuster)
     if (!loadingId)loadingId = cgl.patch.loading.start("gltf" + inFile.get(), inFile.get());
 
     let url = op.patch.getFilePath(String(inFile.get()));
-    if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
+    if (inFile.get() && !inFile.get().startsWith("data:"))
+    {
+        if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
+    }
     finishedLoading = false;
     outLoading.set(true);
-    const oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.responseType = "arraybuffer";
-    closeTab();
-
-    cgl.patch.loading.addAssetLoadingTask(() =>
-    {
-        oReq.onload = (oEvent) =>
+    fetch(url)
+        .then((res) => { return res.arrayBuffer(); })
+        .then((arrayBuffer) =>
         {
             boundingPoints = [];
 
             maxTime = 0;
-            const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
 
             finishLoading();
-        };
+        });
+    closeTab();
 
-        oReq.send(null);
+    const oReq = new XMLHttpRequest();
+    oReq.open("GET", url, true);
+    oReq.responseType = "arraybuffer";
+
+    cgl.patch.loading.addAssetLoadingTask(() =>
+    {
+
     });
 }
 

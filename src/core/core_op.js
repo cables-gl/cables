@@ -1325,7 +1325,7 @@ const Op = function ()
         if (!txt && !this._uiErrors.hasOwnProperty(id)) return;
         if (this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt == txt) return;
 
-        if (id.indexOf(" ") > -1) this._log.warn("setuierror id cant have spaces!");
+        if (id.indexOf(" ") > -1) this._log.warn("setuierror id cant have spaces! ", id);
 
         if (!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
         else

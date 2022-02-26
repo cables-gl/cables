@@ -1,8 +1,4 @@
 const
-    RGBA8 = "RGBA 8bit ubyte",
-    RGBA32 = "RGBA 32bit float";
-
-const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("Base Texture"),
     inUseVPSize = op.inBool("Use viewport size", true),
@@ -10,7 +6,7 @@ const
     height = op.inValueInt("Height", 480),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
-    inPixel = op.inDropDown("Pixel Format", [RGBA8, RGBA32], RGBA8),
+    inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
@@ -87,7 +83,7 @@ function getWrap()
 function getFloatingPoint()
 {
     if (inTex.get()) return inTex.get().isFloatingPoint();
-    return inPixel.get() == RGBA32;
+    return inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
 }
 
 function getWidth()

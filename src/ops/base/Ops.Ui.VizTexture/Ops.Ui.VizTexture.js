@@ -132,10 +132,10 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         ctx.fillRect(pos[0] + 5, pos[1] - 10 + 5, 5, 5);
     }
 
-    // console.log(size);
+    let numX = (10 * size[0] / size[1]);
     let stepY = (size[1] / 10);
-    let stepX = (size[0] / 10);
-    for (let x = 0; x < 10; x++)
+    let stepX = (size[0] / numX);
+    for (let x = 0; x < numX; x++)
         for (let y = 0; y < 10; y++)
         {
             if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";

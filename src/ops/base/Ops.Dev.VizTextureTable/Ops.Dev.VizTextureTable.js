@@ -8,6 +8,11 @@ let lastHeight;
 let fb;
 let lastFloatingPoint;
 
+inTex.onLinkChanged = () =>
+{
+    op.setUiAttrib({ "extendTitle": "" });
+};
+
 op.renderPreviewLayer = (ctx, pos, size) =>
 {
     const

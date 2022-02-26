@@ -639,7 +639,8 @@ Texture.getEmptyTexture = function (cgl)
     if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
     cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
-    const data = new Uint8Array(8 * 8 * 4); // .fill(0);
+    const data = new Uint8Array(8 * 8 * 4).fill(255);
+    for (let i = 0; i < 8 * 8 * 4; i += 4) data[i + 3] = 0;
 
     cgl.tempTextureEmpty.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
@@ -888,5 +889,10 @@ Texture.WRAP_CLAMP_TO_EDGE = 2;
 Texture.TYPE_DEFAULT = 0;
 Texture.TYPE_DEPTH = 1;
 Texture.TYPE_FLOAT = 2;
+
+
+Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
+Texture.PFORMATSTR_RGBA8UB = "RGBA 8bit ubyte";
+Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_RGBA32F];
 
 export { Texture };

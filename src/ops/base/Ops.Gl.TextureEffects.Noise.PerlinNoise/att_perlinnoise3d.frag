@@ -271,7 +271,8 @@ void main()
         str=texture(texMask,texCoord).r;
     #endif
 
-    col=cgl_blend(base,col,amount*str);
+    col=cgl_blendPixel(base,col,amount*str);
+
 
     #ifdef NO_CHANNEL_R
         col.r=base.r;
