@@ -220,6 +220,8 @@ function download()
         op.warn("download canceled, no recordedBlobs");
     }
 
+    if (!mediaRecorder) return;
+
     const blob = new Blob(recordedBlobs, { "type": "application/octet-stream" });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");

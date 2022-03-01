@@ -17,51 +17,51 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Node Name"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Z",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Found",
                 "subType": "boolean"
             }

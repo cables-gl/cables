@@ -58,6 +58,9 @@ inEle.onChange = function ()
 
 inEle.onLinkChanged = function ()
 {
+    cachedLeft = -1;
+    cachedTop = -1;
+
     if (!inEle.isLinked())
     {
         if (oldEle)
@@ -112,7 +115,7 @@ function setProperties()
         getScreenCoord();
         const yy = cgl.canvas.offsetTop + y;
 
-        if (yy != cachedLeft)
+        if (yy != cachedTop)
         {
             ele.style.top = yy + "px";
             cachedTop = yy;
@@ -123,17 +126,22 @@ function setProperties()
             ele.style.left = x + "px";
             cachedLeft = x;
         }
-    }
 
-    if (inHideBehind.get())
-        if (visible)ele.style.display = "initial";
-        else ele.style.display = "none";
+        if (inHideBehind.get())
+        {
+            if (visible)ele.style.display = "initial";
+            else ele.style.display = "none";
+        }
+    }
 
     next.trigger();
 }
 
 function removeProperties(ele)
 {
+    cachedLeft = -1;
+    cachedTop = -1;
+
     if (!ele) ele = inEle.get();
     if (ele && ele.style)
     {

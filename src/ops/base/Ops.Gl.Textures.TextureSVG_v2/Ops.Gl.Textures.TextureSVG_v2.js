@@ -34,12 +34,10 @@ function createCanvas()
     ctx.canvas.width = canvas.width = texWidth.get();
     ctx.canvas.height = canvas.height = texHeight.get();
 
-
     canvas.style.display = "none";
     const body = document.getElementsByTagName("body")[0];
     body.appendChild(canvas);
 }
-
 
 textureOut.set(new CGL.Texture(cgl));
 
@@ -76,7 +74,6 @@ function onWrapChange()
 
     reload();
 }
-
 
 function reload()
 {

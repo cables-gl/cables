@@ -7,6 +7,11 @@
                 "type": 0,
                 "name": "UI",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Remote Viewer",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Cables.UIMode"
