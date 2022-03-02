@@ -17,18 +17,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array3"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Seed",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Result"
             }
         ],
