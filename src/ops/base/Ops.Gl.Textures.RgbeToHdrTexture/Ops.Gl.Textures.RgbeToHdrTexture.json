@@ -55,7 +55,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.Rgbe2HdrTexture"
+        "name": "Ops.Gl.Textures.RgbeToHdrTexture"
     },
     "summary": "convert a RGBE texture to HDR/floating point texture",
     "issues": "",

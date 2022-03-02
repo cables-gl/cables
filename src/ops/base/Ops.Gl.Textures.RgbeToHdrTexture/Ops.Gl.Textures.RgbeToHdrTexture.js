@@ -7,7 +7,9 @@ const
 const tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
     {
         "shader": attachments.rgbe2fp_frag,
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": true,
+        "filter": CGL.Texture.FILTER_NEAREST
+
     });
 
 outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
@@ -18,4 +20,6 @@ exec.onTriggered = () =>
 
     outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outFpTex.set(tc.copy(inTex.get()));
+
+    next.trigger();
 };
