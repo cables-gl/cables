@@ -263,12 +263,17 @@ function printInfo()
 
         for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            let bufView = gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices].bufferView;
-
-            if (sizeBufferViews.indexOf(bufView) == -1)
+            const accessor=gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices];
+            if(accessor)
             {
-                sizeBufferViews.push(bufView);
-                if (gltf.json.bufferViews[bufView])sizes.meshes += gltf.json.bufferViews[bufView].byteLength;
+                let bufView = accessor.bufferView;
+
+                if (sizeBufferViews.indexOf(bufView) == -1)
+                {
+                    sizeBufferViews.push(bufView);
+                    if (gltf.json.bufferViews[bufView])sizes.meshes += gltf.json.bufferViews[bufView].byteLength;
+                }
+
             }
 
             for (let k in gltf.json.meshes[i].primitives[j].attributes)

@@ -4,8 +4,8 @@ const useMouseCoords = op.inBool("Use Mouse Coordinates", true);
 
 op.x = op.inFloat("x");
 op.y = op.inFloat("y");
-op.enabled = op.inBool("enabled");
-op.enabled.set(true);
+const inEnabled = op.inBool("enabled");
+inEnabled.set(true);
 
 op.trigger = op.outTrigger("trigger");
 const somethingPicked = op.outBool("Something Picked");
@@ -124,7 +124,7 @@ const doRender = function ()
         cgl.canvas.style.cursor = cursor.get();
     }
 
-    if (op.enabled.get() && op.x.get() >= 0 && !canceledTouch)
+    if (inEnabled.get() && op.x.get() >= 0 && !canceledTouch)
     {
         if (CABLES.now() - lastReadPixel >= 50)
         {
@@ -147,8 +147,8 @@ const doRender = function ()
 
             renderPickingPass();
 
-            let x = Math.floor(op.x.get() / minimizeFB / window.devicePixelRatio);
-            let y = Math.floor(vpH - op.y.get() / minimizeFB / window.devicePixelRatio);
+            let x = Math.floor(op.x.get() / minimizeFB);
+            let y = Math.floor(vpH - op.y.get() / minimizeFB);
             if (x < 0)x = 0;
             if (y < 0)y = 0;
 

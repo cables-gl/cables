@@ -6,13 +6,13 @@ let gltfMesh = class
 
 
 
-    this.PRIM_POINTS=0;
-    this.LINES=1;
-    this.LINE_LOOP=2;
-    this.LINE_STRIP=3;
-    this.TRIANGLES=4;
-    this.TRIANGLE_STRIP=5;
-    this.TRIANGLE_FAN=6;
+        this.POINTS=0;
+        this.LINES=1;
+        this.LINE_LOOP=2;
+        this.LINE_STRIP=3;
+        this.TRIANGLES=4;
+        this.TRIANGLE_STRIP=5;
+        this.TRIANGLE_FAN=6;
 
 
 
@@ -23,7 +23,8 @@ let gltfMesh = class
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
-        this.primitive=prim.mode||4;
+        this.primitive=4;
+        if(prim.hasOwnProperty("mode"))this.primitive=prim.mode;
 
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
 

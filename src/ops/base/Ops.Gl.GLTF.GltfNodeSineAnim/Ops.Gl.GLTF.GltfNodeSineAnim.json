@@ -38,6 +38,21 @@
                 "type": 0,
                 "name": "Amplitude",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -51,7 +66,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.GltfSineAnim"
+        "name": "Ops.Gl.GLTF.GltfNodeSineAnim"
     },
     "summary": "sine animate gltf nodes by a filter",
     "issues": "",

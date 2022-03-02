@@ -14,15 +14,11 @@ const
 let listenerElement = null;
 let oldStr = null;
 let prevDisplay = "block";
-
-const div = document.createElement("div");
-div.dataset.op = op.id;
-div.classList.add("cablesEle");
+let div = null;
 
 const canvas = op.patch.cgl.canvas.parentElement;
 
-canvas.appendChild(div);
-outElement.set(div);
+createElement();
 
 inClass.onChange = updateClass;
 inBreaks.onChange = inText.onChange = updateText;
@@ -38,6 +34,24 @@ updateInteractive();
 op.onDelete = removeElement;
 
 outElement.onLinkChanged = updateStyle;
+
+function createElement()
+{
+    div = document.createElement("div");
+    div.dataset.op = op.id;
+    div.classList.add("cablesEle");
+
+    canvas.appendChild(div);
+    outElement.set(div);
+}
+
+function removeElement()
+{
+    if (div) removeClasses();
+    if (div && div.parentNode) div.parentNode.removeChild(div);
+    oldStr = null;
+    div = null;
+}
 
 function setCSSVisible(visible)
 {
@@ -75,15 +89,10 @@ function updateText()
     outElement.set(div);
 }
 
-function removeElement()
-{
-    if (div) removeClasses();
-    if (div && div.parentNode) div.parentNode.removeChild(div);
-}
-
 // inline css inisde div
 function updateStyle()
 {
+    if (!div) return;
     if (inStyle.get() != div.style)
     {
         div.setAttribute("style", inStyle.get());
@@ -104,6 +113,8 @@ let oldClassesStr = "";
 
 function removeClasses()
 {
+    if (!div) return;
+
     const classes = (inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
@@ -199,7 +210,17 @@ function addListeners()
 
 op.addEventListener("onEnabledChange", function (enabled)
 {
-    setCSSVisible(div.style.visibility != "visible");
+    removeElement();
+    if (enabled)
+    {
+        createElement();
+        updateStyle();
+        updateClass();
+        updateText();
+        updateInteractive();
+    }
+    // if(enabled) updateVisibility();
+    // else setCSSVisible(false);
 });
 
 function warning()

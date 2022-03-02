@@ -44,18 +44,22 @@ const uniFogDensity = new CGL.Uniform(shader, "f", "inFogDensity", inFogDensity)
 const uniFogStart = new CGL.Uniform(shader, "f", "inFogStart", inFogStart);
 const uniFogEnd = new CGL.Uniform(shader, "f", "inFogEnd", inFogEnd);
 
+CGL.TextureEffect.setupBlending(op, shader, blendMode, inAmount);
+
+let texturesChanged = false;
+inGradientTexture.onChange =
 inBgTex.onChange = () =>
 {
-    shader.toggleDefine("HAS_BG_TEX", inBgTex.get() && inBgTex.get().tex);
+    texturesChanged = true;
 };
 
-inGradientTexture.onChange = () =>
+function updateDefines()
 {
+    shader.toggleDefine("HAS_BG_TEX", inBgTex.get() && inBgTex.get().tex);
+
     if (inGradientTexture.get() && inGradientTexture.get().tex) shader.define("HAS_GRADIENT_TEX");
     else shader.removeDefine("HAS_GRADIENT_TEX");
-};
-
-CGL.TextureEffect.setupBlending(op, shader, blendMode, inAmount);
+}
 
 render.onTriggered = function ()
 {
@@ -68,6 +72,9 @@ render.onTriggered = function ()
     {
         op.setUiError("noDepthTex", null);
     }
+
+    if (texturesChanged)updateDefines();
+
     if (image.get() && image.get().tex)
     {
         const a =
