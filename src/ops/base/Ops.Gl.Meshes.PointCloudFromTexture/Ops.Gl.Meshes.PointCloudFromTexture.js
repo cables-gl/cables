@@ -66,7 +66,13 @@ function doRender()
 
     mod.setUniformValue("MOD_texSize", inTex.get().width + 1);
 
-    if (numVerts > 0 && inNum.get() >= 0 && mesh) mesh.render(cgl.getShader());
+    if (numVerts > 0 && inNum.get() >= 0 && mesh)
+    {
+        if (inNum.get() > 0)mesh.setNumVertices(Math.min(numVerts, inNum.get()));
+        else mesh.setNumVertices(numVerts);
+
+        mesh.render(cgl.getShader());
+    }
 
     trigger.trigger();
     mod.unbind();
