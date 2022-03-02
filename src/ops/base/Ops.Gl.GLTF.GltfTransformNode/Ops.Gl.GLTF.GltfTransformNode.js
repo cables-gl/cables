@@ -11,8 +11,10 @@ const
     outFound = op.outBool("Found");
 
 const cgl = op.patch.cgl;
-const origTrans = vec3.create();
-const origRot = quat.create();
+
+let q = quat.create();
+let mat = mat4.create();
+let qmat = mat4.create();
 
 let node = null;
 let currentSceneLoaded = null;
@@ -48,28 +50,21 @@ inExec.onTriggered = function ()
             {
                 node = cgl.frameStore.currentScene.nodes[i];
                 outFound.set(true);
-                vec3.set(origTrans, node._node.translation[0], node._node.translation[1], node._node.translation[2]);
-
-                quat.set(origRot, node._node.rotation[0], node._node.rotation[1], node._node.rotation[2], node._node.rotation[3]);
             }
         }
     }
 
     if (node)
     {
-        node._node.translation[0] = origTrans[0] + inPosX.get();
-        node._node.translation[1] = origTrans[1] + inPosY.get();
-        node._node.translation[2] = origTrans[2] + inPosZ.get();
+        mat4.identity(mat);
+        mat4.translate(mat, mat, [inPosX.get(), inPosY.get(), inPosZ.get()]);
 
-        if (!node._node.rotation)node._node.rotation = quat.create();
-        quat.fromEuler(node._node.rotation,
-            inRotX.get(),
-            inRotY.get(),
-            inRotZ.get());
+        mat4.rotateX(mat, mat, inRotX.get());
+        mat4.rotateY(mat, mat, inRotY.get());
+        mat4.rotateZ(mat, mat, inRotZ.get());
 
-        node.updateMatrix();
+        node.addMulMat = mat;
     }
-
 
     next.trigger();
 };

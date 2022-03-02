@@ -15,17 +15,15 @@ OUT vec2 texCoord;
 
 void main()
 {
-   texCoord=(attrTexCoord*(attrTexSize)) + attrTexOffsets;
-   mat4 instMVMat=instMat;
-   instMVMat[3][0]*=scale;
+    texCoord=(attrTexCoord*(attrTexSize)) + attrTexOffsets;
+    mat4 instMVMat=instMat;
+    instMVMat[3][0]*=scale;
 
-   texPos=attrTexPos;
+    texPos=attrTexPos;
 
-   vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );
+    vec4 vert=vec4( vPosition.x*(attrTexSize.x/attrTexSize.y)*scale,vPosition.y*scale,vPosition.z*scale, 1. );
 
-   mat4 mvMatrix=viewMatrix * modelMatrix * instMVMat;
+    mat4 mvMatrix=viewMatrix * modelMatrix * instMVMat;
 
-   #ifndef BILLBOARD
-       gl_Position = projMatrix * mvMatrix * vert;
-   #endif
+    gl_Position = projMatrix * mvMatrix * vert;
 }

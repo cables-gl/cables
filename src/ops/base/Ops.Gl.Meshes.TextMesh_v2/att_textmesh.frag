@@ -14,14 +14,14 @@ UNI float a;
 
 void main()
 {
-   vec4 col=texture(tex,texCoord);
-   col.a=col.r;
-   col.r*=r;
-   col.g*=g;
-   col.b*=b;
-   col*=a;
-   if(col.a==0.0)discard;
+    vec4 col=texture(tex,texCoord);
+    col.a=col.r;
+    col.r*=r;
+    col.g*=g;
+    col.b*=b;
+    col*=a;
 
+    if(col.a==0.0)discard;
 
     #ifdef DO_MULTEX
         col*=texture(texMul,texPos);
@@ -31,7 +31,5 @@ void main()
         col*=texture(texMulMask,texPos).r;
     #endif
 
-
-
-   outColor=col;
+    outColor=col;
 }

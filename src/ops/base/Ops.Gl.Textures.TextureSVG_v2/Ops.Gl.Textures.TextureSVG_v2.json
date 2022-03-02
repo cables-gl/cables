@@ -12,47 +12,38 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "File"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture width",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture height",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Wrap index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Wrap",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Filter index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Filter",
-                "subType": "string"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loaded",
                 "subType": "boolean"
             }

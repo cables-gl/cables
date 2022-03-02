@@ -17,6 +17,7 @@ const gltfNode = class
         this._gltf = gltf;
         this.absMat = mat4.create();
         this.addTranslate = null;
+        this.addMat = null;
         this.updateMatrix();
         this._animActions={};
     }
@@ -219,7 +220,11 @@ const gltfNode = class
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
 
+
         if (this.addTranslate)mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
+
+        if (this.addMulMat) mat4.mul(cgl.mMatrix, cgl.mMatrix, this.addMulMat);
+
 
         mat4.copy(this.absMat, cgl.mMatrix);
     }

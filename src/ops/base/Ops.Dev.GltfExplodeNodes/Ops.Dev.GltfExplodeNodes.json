@@ -1,0 +1,17 @@
+{
+    "id": "5652c2ef-2a9f-48f6-80ef-70e154db04b5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1645815819278
+        },
+        {
+            "message": "Ops.User.pandur.GltfExplodeNodes renamed to Ops.Dev.GltfExplodeNodes",
+            "author": "pandur",
+            "date": 1645816806623
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1645815823890
+}
