@@ -16,7 +16,7 @@ const cgl = op.patch.cgl;
 op.setPortGroup("Texture Size", [useVPSize, width, height]);
 op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture, inTransp]);
 
-texOut.set(CGL.Texture.getEmptyTexture(cgl));
+texOut.set(CGL.Texture.getEmptyTexture(cgl, fpTexture.get()));
 let effect = null;
 let tex = null;
 let w = 8, h = 8;
@@ -70,7 +70,7 @@ function initEffect()
         });
 
     effect.setSourceTexture(tex);
-    texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    texOut.set(CGL.Texture.getEmptyTexture(cgl, fpTexture.get()));
 
     reInitEffect = false;
 }
@@ -104,7 +104,7 @@ function updateResolution()
         tex.setSize(w, h);
 
         effect.setSourceTexture(tex);
-        texOut.set(CGL.Texture.getEmptyTexture(cgl));
+        texOut.set(CGL.Texture.getEmptyTexture(cgl, fpTexture.get()));
         texOut.set(tex);
     }
 
@@ -154,7 +154,7 @@ function doRender()
     effect.setSourceTexture(tex);
 
     let bgTex = CGL.Texture.getBlackTexture(cgl);
-    if (inTransp.get())bgTex = CGL.Texture.getEmptyTexture(cgl);
+    if (inTransp.get())bgTex = CGL.Texture.getEmptyTexture(cgl, fpTexture.get());
 
     effect.startEffect(bgTex);
 
