@@ -1,20 +1,21 @@
-const render = op.inTrigger("render");
-const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
-const amount = op.inValueSlider("amount", 1);
+const
+    render = op.inTrigger("render"),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode"),
+    amount = op.inValueSlider("amount", 1),
 
-const image = op.inTexture("Image");
-const removeAlphaSrc = op.inValueBool("removeAlphaSrc", false);
+    image = op.inTexture("Image"),
+    removeAlphaSrc = op.inValueBool("removeAlphaSrc", false),
 
-const imageAlpha = op.inTexture("Mask");
-const alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance");
-const invAlphaChannel = op.inValueBool("Invert alpha channel");
+    imageAlpha = op.inTexture("Mask"),
+    alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance"),
+    invAlphaChannel = op.inValueBool("Invert alpha channel"),
 
-const inAspect = op.inValueBool("Aspect Ratio", false);
-const inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X");
-const inAspectPos = op.inValueSlider("Position", 0.0);
-const inAspectCrop = op.inValueBool("Crop", false);
+    inAspect = op.inValueBool("Aspect Ratio", false),
+    inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X"),
+    inAspectPos = op.inValueSlider("Position", 0.0),
+    inAspectCrop = op.inValueBool("Crop", false),
 
-const trigger = op.outTrigger("trigger");
+    trigger = op.outTrigger("trigger");
 
 blendMode.set("normal");
 const cgl = op.patch.cgl;
@@ -151,7 +152,6 @@ alphaSrc.set("alpha channel");
 
     const uniScaleX = new CGL.Uniform(shader, "f", "scaleX", scaleX);
     const uniScaleY = new CGL.Uniform(shader, "f", "scaleY", scaleY);
-
     const uniPosX = new CGL.Uniform(shader, "f", "posX", posX);
     const uniPosY = new CGL.Uniform(shader, "f", "posY", posY);
     const uniRotate = new CGL.Uniform(shader, "f", "rotate", rotate);
@@ -162,36 +162,12 @@ alphaSrc.set("alpha channel");
 function updateTransformPorts()
 {
     shader.toggleDefine("TEX_TRANSFORM", doTransform.get());
-    if (doTransform.get())
-    {
-        // scaleX.setUiAttribs({hidePort:false});
-        // scaleY.setUiAttribs({hidePort:false});
-        // posX.setUiAttribs({hidePort:false});
-        // posY.setUiAttribs({hidePort:false});
-        // rotate.setUiAttribs({hidePort:false});
 
-        scaleX.setUiAttribs({ "greyout": false });
-        scaleY.setUiAttribs({ "greyout": false });
-        posX.setUiAttribs({ "greyout": false });
-        posY.setUiAttribs({ "greyout": false });
-        rotate.setUiAttribs({ "greyout": false });
-    }
-    else
-    {
-        scaleX.setUiAttribs({ "greyout": true });
-        scaleY.setUiAttribs({ "greyout": true });
-        posX.setUiAttribs({ "greyout": true });
-        posY.setUiAttribs({ "greyout": true });
-        rotate.setUiAttribs({ "greyout": true });
-
-        // scaleX.setUiAttribs({"hidePort":true});
-        // scaleY.setUiAttribs({"hidePort":true});
-        // posX.setUiAttribs({"hidePort":true});
-        // posY.setUiAttribs({"hidePort":true});
-        // rotate.setUiAttribs({"hidePort":true});
-    }
-
-    // op.refreshParams();
+    scaleX.setUiAttribs({ "greyout": !doTransform.get() });
+    scaleY.setUiAttribs({ "greyout": !doTransform.get() });
+    posX.setUiAttribs({ "greyout": !doTransform.get() });
+    posY.setUiAttribs({ "greyout": !doTransform.get() });
+    rotate.setUiAttribs({ "greyout": !doTransform.get() });
 }
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
@@ -222,6 +198,14 @@ function doRender()
 
         const imgTex = cgl.currentTextureEffect.getCurrentSourceTexture();
         cgl.setTexture(0, imgTex.tex);
+
+        if (imgTex && tex)
+        {
+            if (tex.textureType != imgTex.textureType && (tex.textureType != CGL.Texture.TYPE_FLOAT || imgTex.textureType != CGL.Texture.TYPE_FLOAT))
+                op.setUiError("textypediff", "Drawing 32bit texture into an 8 bit can result in data/precision loss", 1);
+            else
+                op.setUiError("textypediff", null);
+        }
 
         const asp = 1 / (cgl.currentTextureEffect.getWidth() / cgl.currentTextureEffect.getHeight()) * (tex.width / tex.height);
         // uniTexAspect.setValue(1 / (tex.height / tex.width * imgTex.width / imgTex.height));

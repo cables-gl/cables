@@ -1,5 +1,5 @@
 {
-    "id": "35cc1b97-3deb-4cbb-91b5-1658697d4460",
+    "id": "ae3585c4-b49a-4dd5-b7be-1f53a90bb060",
     "changelog": [
         {
             "message": "created op",
@@ -25,13 +25,23 @@
             "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
             "author": "pandur",
             "date": 1644228758190
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.RgbeToHdrTexture",
+            "author": "pandur",
+            "date": 1646228077372
+        },
+        {
+            "message": "Ops.User.pandur.HdrToRgbeTexture renamed to Ops.Gl.Textures.HdrToRgbeTexture",
+            "author": "pandur",
+            "date": 1646228514830
         }
     ],
     "coreLibs": [
         "cgl_copytexture"
     ],
     "authorName": "pandur",
-    "created": 1642868505891,
+    "created": 1646228077372,
     "layout": {
         "portsIn": [
             {
@@ -55,7 +65,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Gl.Textures.RgbeToHdrTexture"
+        "name": "Ops.Gl.Textures.HdrToRgbeTexture"
     },
     "summary": "convert a RGBE texture to HDR/floating point texture",
     "issues": "",

@@ -23,7 +23,7 @@ const prevViewPort = [0, 0, 0, 0];
 let effect = null;
 let tex = null;
 let reInitEffect = true;
-
+let isFloatTex = false;
 inWrap.onChange =
     inFilter.onChange =
     inPixel.onChange = reInitLater;
@@ -82,8 +82,9 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    if (inTex.get()) return inTex.get().isFloatingPoint();
-    return inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    if (inTex.get()) isFloatTex = inTex.get().isFloatingPoint();
+    isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    return isFloatTex;
 }
 
 function getWidth()
@@ -115,8 +116,6 @@ function updateResolution()
     ) && (getWidth() !== 0 && getHeight() !== 0))
     {
         initEffect();
-        // tex.setSize(w, h);
-
         effect.setSourceTexture(tex);
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
@@ -162,7 +161,7 @@ function doRender()
     cgl.currentTextureEffect.height = height.get();
     effect.setSourceTexture(tex);
 
-    effect.startEffect(inTex.get() || CGL.Texture.getEmptyTexture(cgl), true);
+    effect.startEffect(inTex.get() || CGL.Texture.getEmptyTexture(cgl, isFloatTex), true);
 
     trigger.trigger();
 

@@ -23,7 +23,13 @@ op.renderPreviewLayer = (ctx, pos, size) =>
     const arr = inArr.get() || [];
     let stride = 1;
 
-    if (!arr) return;
+    if (!arr)
+    {
+        op.setUiAttrib({ "extendTitle": "" });
+        return;
+    }
+
+    op.setUiAttrib({ "extendTitle": "length: " + arr.length });
 
     if (inArr.links.length > 0 && inArr.links[0].getOtherPort(inArr))
         stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || 1;
