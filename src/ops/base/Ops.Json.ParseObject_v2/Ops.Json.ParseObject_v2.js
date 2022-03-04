@@ -24,7 +24,7 @@ function parse()
     }
     catch (ex)
     {
-        op.logError(e);
+        op.logError(ex);
         isValid.set(false);
 
         let outStr = "";
