@@ -5,43 +5,43 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Amount of points",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Sphere size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Random seed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Random distance from sphere",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Distribution index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Total points",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Array length",
                 "subType": "number"
             }
