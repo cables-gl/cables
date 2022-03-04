@@ -298,16 +298,12 @@ TextureEffect.getBlendCode = function ()
         + "   #ifdef BM_ADD".endl()
         + "       colNew=min(base + blend, vec3(1.0));".endl()
         + "   #endif".endl()
-        + "   #ifdef BM_SUBSTRACT".endl()
+        + "   #ifdef BM_SUBTRACT_ONE".endl()
         + "       colNew=max(base + blend - vec3(1.0), vec3(0.0));".endl()
         + "   #endif".endl()
-
-
         + "   #ifdef BM_SUBTRACT".endl()
         + "       colNew=base - blend;".endl()
         + "   #endif".endl()
-
-
         + "   #ifdef BM_DIFFERENCE".endl()
         + "       colNew=abs(base - blend);".endl()
         + "   #endif".endl()
@@ -396,7 +392,7 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
     shader.toggleDefine("BM_MULTIPLY_INV", blendName == "multiply invert");
     shader.toggleDefine("BM_AVERAGE", blendName == "average");
     shader.toggleDefine("BM_ADD", blendName == "add");
-    shader.toggleDefine("BM_SUBSTRACT", blendName == "substract");
+    shader.toggleDefine("BM_SUBTRACT_ONE", blendName == "subtract one");
     shader.toggleDefine("BM_SUBTRACT", blendName == "subtract");
     shader.toggleDefine("BM_DIFFERENCE", blendName == "difference");
     shader.toggleDefine("BM_NEGATION", blendName == "negation");
@@ -431,7 +427,8 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
         else if (str == "lighten") str = "light";
         else if (str == "darken") str = "darken";
         else if (str == "average") str = "avg";
-        else if (str == "substract") str = "sub";
+        else if (str == "subtract one") str = "sub one";
+        else if (str == "subtract") str = "sub";
         else if (str == "difference") str = "diff";
         else if (str == "negation") str = "neg";
         else if (str == "negation") str = "neg";
