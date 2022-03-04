@@ -891,6 +891,7 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
 Patch.prototype.deSerialize = function (obj, genIds)
 {
     if (this.aborted) return;
+    const newOps = [];
 
     const loadingId = this.loading.start("core", "deserialize");
     // if (this.onLoadStart) this.onLoadStart();
@@ -916,6 +917,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
     }
 
     const reqs = new Requirements(this);
+
+    this.emitEvent("patchLoadStart");
 
     // add ops...
     for (const iop in obj.ops)
@@ -962,6 +965,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty("value"))
                     port2.set(obj.ops[iop].portsOut[ipo].value);
             }
+            newOps.push(op);
         }
 
         // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
@@ -1048,7 +1052,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
 
-    this.emitEvent("patchLoadEnd");
+    this.emitEvent("patchLoadEnd", newOps, obj, genIds);
     // if (this.onLoadEnd) this.onLoadEnd();
 };
 
