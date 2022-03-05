@@ -73,7 +73,7 @@ inGeom.onChange = function ()
     needsUpdate = true;
 
     if (mesh)mesh.dispose();
-    if (geo)
+    if (geo && geo.copy)
     {
         const g = geo.copy();
 
@@ -164,57 +164,64 @@ exec.onTriggered = function ()
 
     if (!fb || needInit)initFb();
 
-    let needsUpdate = true;
-
-    prevViewPort[0] = vp[0];
-    prevViewPort[1] = vp[1];
-    prevViewPort[2] = vp[2];
-    prevViewPort[3] = vp[3];
-
-    fb.renderStart(cgl);
-
-    cgl.pushPMatrix();
-    mat4.identity(cgl.pMatrix);
-
-    cgl.pushViewMatrix();
-    mat4.identity(cgl.vMatrix);
-
-    cgl.pushModelMatrix();
-    mat4.identity(cgl.mMatrix);
-
-    cgl.gl.viewport(0, 0, inWidth.get(), inWidth.get());
-
-    mat4.ortho(
-        cgl.pMatrix,
-        0, inWidth.get(),
-        0, inWidth.get(),
-        -1.00, 100);
-
-    mod.bind();
-
-    if (!cgl.getShader())
+    if (inGeom.get())
     {
-        op.setUiError("not in mainloop", "Needs to be connected to mainloop branch");
-        return;
-    }
-    else op.setUiError("not in mainloop", null);
+        let needsUpdate = true;
 
-    if (mesh)
+        prevViewPort[0] = vp[0];
+        prevViewPort[1] = vp[1];
+        prevViewPort[2] = vp[2];
+        prevViewPort[3] = vp[3];
+
+        fb.renderStart(cgl);
+
+        cgl.pushPMatrix();
+        mat4.identity(cgl.pMatrix);
+
+        cgl.pushViewMatrix();
+        mat4.identity(cgl.vMatrix);
+
+        cgl.pushModelMatrix();
+        mat4.identity(cgl.mMatrix);
+
+        cgl.gl.viewport(0, 0, inWidth.get(), inWidth.get());
+
+        mat4.ortho(
+            cgl.pMatrix,
+            0, inWidth.get(),
+            0, inWidth.get(),
+            -1.00, 100);
+
+        mod.bind();
+
+        if (!cgl.getShader())
+        {
+            op.setUiError("not in mainloop", "Needs to be connected to mainloop branch");
+            return;
+        }
+        else op.setUiError("not in mainloop", null);
+
+        if (mesh)
+        {
+            cgl.getShader().setDrawBuffers(drawBuffArr);
+            mesh.render(cgl.getShader());
+        }
+
+        cgl.popPMatrix();
+        cgl.popModelMatrix();
+        cgl.popViewMatrix();
+        fb.renderEnd(cgl);
+
+        outTex.set(fb.getTextureColor());
+
+        cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
+
+        mod.unbind();
+    }
+    else
     {
-        cgl.getShader().setDrawBuffers(drawBuffArr);
-        mesh.render(cgl.getShader());
+        outTex.set(CGL.Texture.getEmptyTexture(cgl));
     }
-
-    cgl.popPMatrix();
-    cgl.popModelMatrix();
-    cgl.popViewMatrix();
-    fb.renderEnd(cgl);
-
-    outTex.set(fb.getTextureColor());
-
-    cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
-
-    mod.unbind();
 
     next.trigger();
 };

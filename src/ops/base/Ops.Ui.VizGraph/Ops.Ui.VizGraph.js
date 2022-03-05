@@ -46,6 +46,14 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         "#888888",
     ];
 
+    ctx.fillStyle = "#222";
+    ctx.fillRect(
+        pos[0],
+        pos[1],
+        size[0],
+        size[1]
+    );
+
     for (let p = 0; p < op.portsIn.length; p++)
     {
         if (!op.portsIn[p].isLinked()) continue;

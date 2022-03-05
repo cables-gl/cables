@@ -25,24 +25,14 @@
             {
                 "type": 0,
                 "name": "Distribution index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Distribution",
                 "group": "Distribution",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Selection index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Selection",
                 "group": "Distribution",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,

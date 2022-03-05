@@ -86,7 +86,9 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "PrkdnENo8wQ"
+    ],
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.Shader.Shader2Texture",

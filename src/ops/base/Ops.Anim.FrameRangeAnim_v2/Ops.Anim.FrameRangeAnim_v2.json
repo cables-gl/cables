@@ -57,7 +57,12 @@
     },
     "summary": "parses string containing ranges of frames and play as coherent animation",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Frames",
+                "text": "frame range (ex. \"0-10\")"
+            }
+        ]
     },
     "changelog": [
         {
@@ -70,5 +75,10 @@
             "author": "pandur",
             "date": 1615829957178
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
