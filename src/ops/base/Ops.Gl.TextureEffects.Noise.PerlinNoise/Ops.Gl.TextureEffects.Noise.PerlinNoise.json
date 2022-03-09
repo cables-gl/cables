@@ -18,6 +18,12 @@
             },
             {
                 "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"

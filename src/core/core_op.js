@@ -1467,11 +1467,12 @@ const Op = function ()
     {
         for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-            else
-            {
-                this._log.error("setPortGroup: invalid port!");
-            }
+            if (ports[i])
+                if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
+                else
+                {
+                    this._log.error("setPortGroup: invalid port!");
+                }
         }
     };
 
