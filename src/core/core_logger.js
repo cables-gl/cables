@@ -32,28 +32,33 @@ export default class Logger
     error(args)
     {
         console.error("[" + this.initiator + "]", ...arguments);
+        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "error", arguments);
     }
 
     info(args)
     {
         console.error("[" + this.initiator + "]", ...arguments);
+        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "info", arguments);
     }
 
     warn(args)
     {
         console.warn("[" + this.initiator + "]", ...arguments);
+        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "warn", arguments);
     }
 
     verbose()
     {
         if ((CABLES.UI && CABLES.UI.logFilter.shouldPrint(this.initiator, ...arguments)) || !CABLES.logSilent)
             console.log("[" + this.initiator + "]", ...arguments);
+        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "verbose", arguments);
     }
 
     log(args)
     {
         if ((CABLES.UI && CABLES.UI.logFilter.shouldPrint(this.initiator, ...arguments)) || !CABLES.logSilent)
             console.log("[" + this.initiator + "]", ...arguments);
+        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "log", arguments);
     }
 
     userInteraction(text)
