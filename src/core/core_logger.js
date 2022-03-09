@@ -12,6 +12,7 @@ export default class Logger
     {
         console.error("[" + this.initiator + "] ", t);
         console.log((new Error()).stack);
+        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "error", t);
     }
 
     groupCollapsed(t)
