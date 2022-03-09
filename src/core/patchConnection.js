@@ -53,7 +53,17 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         if (data.vars.json)
         {
-            this._patch.deSerialize(data.vars.json, data.vars.genIds);
+            if (window.gui)
+            {
+                gui.serverOps.loadProjectLibs(data.vars.json, () =>
+                {
+                    this._patch.deSerialize(data.vars.json, data.vars.genIds);
+                });
+            }
+            else
+            {
+                this._patch.deSerialize(data.vars.json, data.vars.genIds);
+            }
         }
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)

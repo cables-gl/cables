@@ -1128,6 +1128,7 @@ const Op = function ()
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
+        if (window.gui) window.gui.emitEvent("opLogEvent", this.objName, "error", arguments);
     };
 
     Op.prototype.warn = Op.prototype.logWarn = function ()
