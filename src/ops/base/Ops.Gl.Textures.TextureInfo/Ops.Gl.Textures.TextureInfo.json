@@ -2,63 +2,63 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Texture"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Name",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ratio",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Filter",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Wrap",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Flipped",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "HDR",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Is Empty Default Texture",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Is Default Texture",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Id",
                 "subType": "number"
             }

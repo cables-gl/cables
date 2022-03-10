@@ -22,117 +22,117 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Camera Type index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Up X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Up Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Up Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Forward X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Forward Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Forward Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Near Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Far Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Bottom Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Top Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Left Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "FOV",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Aspect Ratio",
                 "subType": "number"
             }

@@ -1,7 +1,7 @@
 const
     active = op.inBool("Active", true),
-    outFPS = op.outValue("FPS"),
-    outMS = op.outValue("MS");
+    outFPS = op.outNumber("FPS"),
+    outMS = op.outNumber("MS");
 
 op.onDelete = function ()
 {

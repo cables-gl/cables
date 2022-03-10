@@ -5,10 +5,9 @@ const
     inSimpleIncrement = op.inBool("Simple Delta", false),
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
     active = op.inValueBool("active", true),
-
-    delta = op.outValue("delta", 0),
-    deltaX = op.outValue("delta X", 0),
-    deltaOrig = op.outValue("browser event delta", 0),
+    delta = op.outNumber("delta", 0),
+    deltaX = op.outNumber("delta X", 0),
+    deltaOrig = op.outNumber("browser event delta", 0),
     trigger = op.outTrigger("Wheel Action");
 
 const cgl = op.patch.cgl;

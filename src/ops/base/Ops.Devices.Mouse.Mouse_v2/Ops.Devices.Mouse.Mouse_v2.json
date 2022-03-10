@@ -37,6 +37,7 @@
             {
                 "type": 0,
                 "name": "Area index",
+                "group": "Behavior",
                 "subType": "integer"
             },
             {

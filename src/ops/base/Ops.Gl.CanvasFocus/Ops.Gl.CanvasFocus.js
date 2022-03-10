@@ -1,6 +1,6 @@
-const hasFocus=op.outValue("has focus");
+const hasFocus = op.outBool("has focus");
 
-op.onDelete=removeListeners;
+op.onDelete = removeListeners;
 addListeners();
 
 function onFocus()
@@ -15,14 +15,12 @@ function onBlur()
 
 function addListeners()
 {
-    op.patch.cgl.canvas.addEventListener("focus",onFocus);
-    op.patch.cgl.canvas.addEventListener("blur",onBlur);
+    op.patch.cgl.canvas.addEventListener("focus", onFocus);
+    op.patch.cgl.canvas.addEventListener("blur", onBlur);
 }
 
 function removeListeners()
 {
-    op.patch.cgl.canvas.removeEventListener("focus",onFocus);
-    op.patch.cgl.canvas.removeEventListener("blur",onBlur);
+    op.patch.cgl.canvas.removeEventListener("focus", onFocus);
+    op.patch.cgl.canvas.removeEventListener("blur", onBlur);
 }
-
-

@@ -1,7 +1,7 @@
 const fpsLimit = op.inValue("FPS Limit", 0);
 const trigger = op.outTrigger("trigger");
-const width = op.outValue("width");
-const height = op.outValue("height");
+const width = op.outNumber("width");
+const height = op.outNumber("height");
 const reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true);
 const reduceLoadingFPS = op.inValueBool("Reduce FPS loading");
 const clear = op.inValueBool("Clear", true);

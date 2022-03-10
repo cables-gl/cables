@@ -1,34 +1,33 @@
 {
-    "updated": 1527699223201,
     "authorName": "action",
     "id": "93ebaebf-0ebf-4aae-b0d8-2996ae44f1ed",
     "created": 1527699223211,
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Phase",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Frequency",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

@@ -10,7 +10,7 @@ const
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
-    outRatio = op.outValue("Aspect Ratio"),
+    outRatio = op.outNumber("Aspect Ratio"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height");
 

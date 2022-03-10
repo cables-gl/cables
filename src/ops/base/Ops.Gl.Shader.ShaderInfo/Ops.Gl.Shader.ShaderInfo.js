@@ -5,12 +5,11 @@ const
     showModules = op.inTriggerButton("Show Modules"),
     showUniforms = op.inTriggerButton("Show Uniforms"),
     showState = op.inTriggerButton("State Info"),
-    // createCustom = op.inTriggerButton("Create Customshader"),
     next = op.outTrigger("Next"),
     outName = op.outString("Name"),
     outId = op.outString("Id"),
-    outNumUniforms = op.outValue("Num Uniforms"),
-    outNumAttributes = op.outValue("Num Attributes"),
+    outNumUniforms = op.outNumber("Num Uniforms"),
+    outNumAttributes = op.outNumber("Num Attributes"),
     outAttributeNames = op.outArray("Arributes Names"),
     outDefines = op.outArray("Num Defines");
 

@@ -1,18 +1,16 @@
-// input
-var x = op.inValue('X');
-var y = op.inValue('Y');
+const
+    x = op.inValue("X"),
+    y = op.inValue("Y"),
+    phase = op.inValue("Phase", 0.0),
+    mul = op.inValue("Frequency", 1.0),
+    result = op.outNumber("Result");
 
-var phase = op.inValue('Phase', 0.0);
-var mul = op.inValue('Frequency', 1.0);
+x.onChange =
+    y.onChange = update;
 
-// output
-var result = op.outValue('Result');
-
-x.onChange=update;
-y.onChange=update;
-
-function update() {
+function update()
+{
     result.set(
-        mul.get() * Math.atan2( x.get() , y.get() ) + phase.get()
+        mul.get() * Math.atan2(x.get(), y.get()) + phase.get()
     );
 }
