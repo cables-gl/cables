@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
-    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     inSize = op.inValueSlider("size"),
     inInner = op.inValueSlider("Inner"),
     inStretch = op.inValueSlider("Stretch"),

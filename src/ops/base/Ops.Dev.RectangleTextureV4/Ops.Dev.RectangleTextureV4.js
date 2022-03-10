@@ -1,13 +1,13 @@
 const render = op.inTrigger("render"),
+    amount = op.inValueSlider("Amount", 1),
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    amount = op.inValueSlider("Amount", 1),
     inCenterMode = op.inBool("Center", false),
     inWidth = op.inValueSlider("Width", 0.25),
     inHeight = op.inValueSlider("Height", 0.25),
-    inAspect = op.inBool("Aspect Ratio", false),
-    inPosX = op.inValueSlider("X", 0.5),
-    inPosY = op.inValueSlider("Y", 0.5),
+    inAspect = op.inBool("Aspect Ratio", true),
+    inPosX = op.inValueSlider("X", 0),
+    inPosY = op.inValueSlider("Y", 0),
     inRot = op.inValue("Rotate", 0),
     inRoundness = op.inValueSlider("roundness", 0),
     r = op.inValueSlider("r", 1.0),
@@ -21,7 +21,6 @@ r.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Size", [inWidth, inHeight, inAspect]);
 op.setPortGroup("Position", [inPosX, inPosY]);
 op.setPortGroup("Color", [r, g, b, a]);
-
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, "textureeffect rectangle");
@@ -41,7 +40,7 @@ let textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniformAmount = new CGL.Uniform(shader, "f", "amount", amount),
     uniformAspect = new CGL.Uniform(shader, "f", "aspect", 1);
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount,maskAlpha);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 inCenterMode.onChange = function ()
 {

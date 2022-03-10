@@ -9,66 +9,66 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exec"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Draw Bodies",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Groundplane",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Gravity X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Gravity Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Gravity Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Solver Iterations",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Contact Stiffness",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Contact Relaxation",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Simulate",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Bodies",
                 "subType": "number"
             }
