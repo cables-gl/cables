@@ -152,7 +152,8 @@
             },
             {
                 "type": 2,
-                "name": "shader"
+                "name": "shader",
+                "objType": "shader"
             }
         ],
         "name": "Ops.Gl.Shader.PointMaterial_v4"

@@ -57,7 +57,7 @@ function initEffect()
 
     outWidth.set(getWidth());
     outHeight.set(getHeight());
-    outRatio.set(getWidth(), getHeight());
+    outRatio.set(getWidth() / getHeight());
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
     reInitEffect = false;
@@ -72,6 +72,7 @@ function getFilter()
     if (inFilter.get() == "linear") return CGL.Texture.FILTER_LINEAR;
     if (inFilter.get() == "mipmap") return CGL.Texture.FILTER_MIPMAP;
 }
+
 function getWrap()
 {
     if (inTex.get()) return inTex.get().wrap;
@@ -93,6 +94,7 @@ function getWidth()
     if (inUseVPSize.get()) return cgl.getViewPort()[2];
     return Math.ceil(width.get());
 }
+
 function getHeight()
 {
     if (inTex.get()) return inTex.get().height;

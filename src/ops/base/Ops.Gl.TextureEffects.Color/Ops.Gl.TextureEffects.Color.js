@@ -1,7 +1,9 @@
 const
     render = op.inTrigger("render"),
-    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op),
     amount = op.inValueSlider("Amount", 1),
+    maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
+
     inMask = op.inTexture("Mask"),
     inMaskInvert = op.inValueBool("Mask Invert"),
     r = op.inValueSlider("r", Math.random()),
@@ -17,7 +19,7 @@ const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "textureeffect color");
 const srcFrag = attachments.color_frag || "";
 shader.setSource(shader.getDefaultVertexShader(), srcFrag);
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", TEX_SLOT),

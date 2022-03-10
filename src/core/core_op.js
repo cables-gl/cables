@@ -1128,6 +1128,7 @@ const Op = function ()
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
+        if (window.gui) window.gui.emitEvent("opLogEvent", this.objName, "error", arguments);
     };
 
     Op.prototype.warn = Op.prototype.logWarn = function ()
@@ -1467,11 +1468,12 @@ const Op = function ()
     {
         for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-            else
-            {
-                this._log.error("setPortGroup: invalid port!");
-            }
+            if (ports[i])
+                if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
+                else
+                {
+                    this._log.error("setPortGroup: invalid port!");
+                }
         }
     };
 

@@ -27,7 +27,7 @@ const
     flipTex = op.inValueBool("Flip Texture", false),
 
     trigger = op.outTrigger("trigger"),
-    shaderOut = op.outObject("shader");
+    shaderOut = op.outObject("shader", null, "shader");
 
 op.setPortGroup("Texture", [texture, textureMulColor, textureMask, texMaskChan, textureColorize, textureOpacity, colorizeRandom]);
 

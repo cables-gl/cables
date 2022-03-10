@@ -1,7 +1,9 @@
 const
     render = op.inTrigger("render"),
     inTexMask = op.inTexture("Mask"),
-    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op),
+    maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
+
     amount = op.inValueSlider("Amount", 1),
     inMode = op.inSwitch("Color", ["Mono", "RGB", "R", "G", "B"], "Mono"),
     scale = op.inValue("Scale", 22),
@@ -32,7 +34,7 @@ const
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
     rangeMulUniform = new CGL.Uniform(shader, "f", "rangeMul", rangeMul);
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 // offsetMap
 

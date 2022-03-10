@@ -139,7 +139,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         for (let y = 0; y < 10; y++)
         {
             if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
-            else ctx.fillStyle = "#444444";
+            else ctx.fillStyle = "#393939";
             ctx.fillRect(pos[0] + stepX * x, pos[1] + stepY * y, stepX, stepY);
         }
 
