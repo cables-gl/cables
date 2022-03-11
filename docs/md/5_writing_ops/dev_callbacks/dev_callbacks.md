@@ -15,7 +15,7 @@ To be  informed of port-value-changes, function-triggers (also see [Ports](../de
 
 Can be implemented for the following port types:
 
-**Value
+**Number
 String
 Boolean
 Array
@@ -79,7 +79,7 @@ op.init = function()
 
 ### onLoaded
 
-Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You normally won't need this as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is **not** called when the patch has just been added to the patch, only when the patch is loaded, so it is better to use `init` (see on top).
+Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You normally won't need this as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is **not** called when the op has just been added to the patch, only when the patch is loaded, so it is better to use `init` (see above).
 
 ```javascript
 op.onLoaded = function()
@@ -92,7 +92,7 @@ op.onLoaded = function()
 If your op needs to clean up after itself when it is deleted from the patch you can implement `onDelete`:
 
 ```javascript
-op.onDelete( function()
+op.onDelete = function()
 {
 	// do some manual cleanup here
 });
@@ -103,9 +103,9 @@ Sometimes you will want to create a UI element to show if there is an error or a
 
 To do this use the following format:
 ```javascript
-if(condition) op.setUiError("error ID/must be unique per error","Error message to show in UI",0);
+if(condition) op.setUiError("errorID", "error ID/must be unique per error","Error message to show in UI",0);
 //this resets the error message so it disappears
-else op.setUiError("error ID",null);
+else op.setUiError("errorID",null);
 ```
 The number in the last part of the function defines what kind of error is shown
 0 - hint / grey color
@@ -147,7 +147,7 @@ Do **not** use `console.log()`!
 
 ### canvas resize
 
-Whenever the canvas is resized `onResize` gets called.
+Whenever the canvas is resized a `resize` event is fired, you can add a listener to this event to handle canvas-size changes in your ops.
 
 ```javascript
 op.patch.cgl.addEventListener("resize",onResize);
