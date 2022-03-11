@@ -15,6 +15,8 @@ newPos += (MOD_boneMats[index] * pos) * attrWeights.w ;
 newNorm = (vec4((MOD_boneMats[index] * vec4(norm.xyz, 0.0)) * attrWeights.w).xyz)+newNorm;
 
 pos=newPos;
+
+
 norm=normalize(newNorm.xyz);
 
 
