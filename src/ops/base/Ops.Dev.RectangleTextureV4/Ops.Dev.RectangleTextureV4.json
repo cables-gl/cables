@@ -7,6 +7,12 @@
             },
             {
                 "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Blend Mode index",
                 "group": "Blending",
                 "subType": "integer"
@@ -16,12 +22,6 @@
                 "name": "Alpha Mask index",
                 "group": "Blending",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Amount",
-                "group": "Blending",
-                "subType": "number"
             },
             {
                 "type": 0,
@@ -99,7 +99,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.RectangleTextureV4"
+        "name": "Ops.Dev.RectangleTextureV4"
     },
     "authorName": "pandur",
     "id": "268ad86e-1f6d-4099-b5c0-e1e0150adbfb",

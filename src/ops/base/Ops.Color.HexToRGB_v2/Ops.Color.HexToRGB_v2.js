@@ -1,40 +1,42 @@
 const
-    hex=op.inString("Hex","#ff0000"),
-    asBytes=op.inValueBool("Bytes"),
-    outR=op.outValue("R"),
-    outG=op.outValue("G"),
-    outB=op.outValue("B");
+    hex = op.inString("Hex", "#ff0000"),
+    asBytes = op.inValueBool("Bytes"),
+    outR = op.outNumber("R"),
+    outG = op.outNumber("G"),
+    outB = op.outNumber("B");
 
-function hexToR(h) {
-    return parseInt((cutHex(h)).substring(0,2),16)||0;
+function hexToR(h)
+{
+    return parseInt((cutHex(h)).substring(0, 2), 16) || 0;
 }
-function hexToG(h) {
-    return parseInt((cutHex(h)).substring(2,4),16)||0;
+function hexToG(h)
+{
+    return parseInt((cutHex(h)).substring(2, 4), 16) || 0;
 }
-function hexToB(h) {
-    return parseInt((cutHex(h)).substring(4,6),16)||0;
+function hexToB(h)
+{
+    return parseInt((cutHex(h)).substring(4, 6), 16) || 0;
 }
-function cutHex(h) {
-    return (h.charAt(0)=="#") ? h.substring(1,7):h;
+function cutHex(h)
+{
+    return (h.charAt(0) == "#") ? h.substring(1, 7) : h;
 }
 
-
-hex.onChange=parse;
-asBytes.onChange=parse;
+hex.onChange = parse;
+asBytes.onChange = parse;
 
 function parse()
 {
-    var str=hex.get()||'';
-    var r=hexToR(str);
-    var g=hexToG(str);
-    var b=hexToB(str);
+    let str = hex.get() || "";
+    let r = hexToR(str);
+    let g = hexToG(str);
+    let b = hexToB(str);
 
-
-    if(!asBytes.get())
+    if (!asBytes.get())
     {
-        r/=255;
-        g/=255;
-        b/=255;
+        r /= 255;
+        g /= 255;
+        b /= 255;
     }
 
     outR.set(r);

@@ -7,6 +7,12 @@
             },
             {
                 "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Blend Mode index",
                 "group": "Blending",
                 "subType": "integer"
@@ -16,12 +22,6 @@
                 "name": "Alpha Mask index",
                 "group": "Blending",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Amount",
-                "group": "Blending",
-                "subType": "number"
             },
             {
                 "type": 0,
@@ -104,7 +104,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.CircleTexturev4"
+        "name": "Ops.Dev.CircleTextureV4"
     },
     "changelog": [
         {

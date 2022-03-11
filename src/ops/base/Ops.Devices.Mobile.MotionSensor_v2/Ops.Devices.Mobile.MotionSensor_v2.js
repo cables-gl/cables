@@ -1,19 +1,19 @@
 const
     mulAxis = op.inValue("Mul Orientation", 1),
     req = op.inTrigger("Request Permissions"),
-    axis1 = op.outValue("Orientation Alpha"),
-    axis2 = op.outValue("Orientation Beta"),
-    axis3 = op.outValue("Orientation Gamma"),
-    accX = op.outValue("Acceleration X"),
-    accY = op.outValue("Acceleration Y"),
-    accZ = op.outValue("Acceleration Z"),
-    accNoGravX = op.outValue("Acceleration X no gravity"),
-    accNoGravY = op.outValue("Acceleration Y no gravity"),
-    accNoGravZ = op.outValue("Acceleration Z no gravity"),
+    axis1 = op.outNumber("Orientation Alpha"),
+    axis2 = op.outNumber("Orientation Beta"),
+    axis3 = op.outNumber("Orientation Gamma"),
+    accX = op.outNumber("Acceleration X"),
+    accY = op.outNumber("Acceleration Y"),
+    accZ = op.outNumber("Acceleration Z"),
+    accNoGravX = op.outNumber("Acceleration X no gravity"),
+    accNoGravY = op.outNumber("Acceleration Y no gravity"),
+    accNoGravZ = op.outNumber("Acceleration Z no gravity"),
 
-    rotRate1 = op.outValue("Rotation Rate Alpha"),
-    rotRate2 = op.outValue("Rotation Rate Beta"),
-    rotRate3 = op.outValue("Rotation Rate Gamma"),
+    rotRate1 = op.outNumber("Rotation Rate Alpha"),
+    rotRate2 = op.outNumber("Rotation Rate Beta"),
+    rotRate3 = op.outNumber("Rotation Rate Gamma"),
 
     outObj = op.outObject("Object");
 

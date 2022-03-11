@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("Render"),
+    amount = op.inValueSlider("Amount", 1),
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    amount = op.inValueSlider("Amount", 1),
-    inSize = op.inValueSlider("Size",0.25),
+    inSize = op.inValueSlider("Size", 0.25),
     inInner = op.inValueSlider("Inner"),
     inStretchX = op.inValueSlider("Stretch X"),
     inStretchY = op.inValueSlider("Stretch Y"),
@@ -20,7 +20,7 @@ const
 
 r.setUiAttribs({ "colorPick": true });
 
-op.setPortGroup("Size", [inSize, inInner, inStretchX,inStretchY]);
+op.setPortGroup("Size", [inSize, inInner, inStretchX, inStretchY]);
 op.setPortGroup("Position", [inX, inY]);
 op.setPortGroup("Style", [warnOverflow, fallOff, inFadeOut]);
 
@@ -33,7 +33,7 @@ updateDefines();
 let
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
-    uniStretch = new CGL.Uniform(shader, "2f", "stretch", inStretchX,inStretchY),
+    uniStretch = new CGL.Uniform(shader, "2f", "stretch", inStretchX, inStretchY),
     uniSize = new CGL.Uniform(shader, "f", "size", inSize),
     uniFadeOut = new CGL.Uniform(shader, "f", "fadeOut", inFadeOut),
     uniInner = new CGL.Uniform(shader, "f", "inner", inInner),
@@ -48,19 +48,18 @@ let
 fallOff.onChange =
     warnOverflow.onChange = updateDefines;
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount,maskAlpha);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 function updateDefines()
 {
-    shader.toggleDefine("FALLOFF_LINEAR",fallOff.get() == "Linear");
-    shader.toggleDefine("FALLOFF_SMOOTHSTEP",fallOff.get() == "SmoothStep");
-    shader.toggleDefine("WARN_OVERFLOW",warnOverflow.get());
+    shader.toggleDefine("FALLOFF_LINEAR", fallOff.get() == "Linear");
+    shader.toggleDefine("FALLOFF_SMOOTHSTEP", fallOff.get() == "SmoothStep");
+    shader.toggleDefine("WARN_OVERFLOW", warnOverflow.get());
 }
 
 render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
-
 
     let a = cgl.currentTextureEffect.getHeight() / cgl.currentTextureEffect.getWidth();
     aspect.set(a);

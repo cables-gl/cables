@@ -1,8 +1,8 @@
 const
-    width = op.outValue("width"),
-    height = op.outValue("height"),
-    pixelRatio = op.outValue("Pixel Ratio"),
-    aspect = op.outValue("Aspect Ratio"),
+    width = op.outNumber("width"),
+    height = op.outNumber("height"),
+    pixelRatio = op.outNumber("Pixel Ratio"),
+    aspect = op.outNumber("Aspect Ratio"),
     landscape = op.outBool("Landscape");
 
 let cgl = op.patch.cgl;

@@ -132,25 +132,28 @@ function draw()
         }
         else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.SPHERE)
         {
-            // wireSphere.render(cgl, 1.0);
-            meshCube.render(
-                1.0,
-                1.0,
-                1.0);
+            meshCube.render(1.0, 1.0, 1.0);
         }
-        else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.TRIMESH)
+
+        if (world.bodies[i].shapes[0].cbl_geom)
         {
-            meshCube.render(
-                1.0,
-                1.0,
-                1.0);
+            if (!world.bodies[i].shapes[0].cbl_mesh)
+                world.bodies[i].shapes[0].cbl_mesh = new CGL.Mesh(cgl, world.bodies[i].shapes[0].cbl_geom, cgl.gl.LINES);
+
+            cgl.pushModelMatrix();
+            mat4.identity(cgl.mMatrix);
+
+            meshCube.render(0, 0, 0);
+
+            mat4.multiply(cgl.mMatrix, cgl.mMatrix, world.bodies[i].shapes[0].cbl_mat);
+
+            world.bodies[i].shapes[0].cbl_mesh.render(meshCube.colorShader.shader);
+
+            cgl.popModelMatrix();
         }
-        // else op.log("unknown!", world.bodies[i].shapes[0].type);
 
         cgl.popModelMatrix();
     }
-
-    // cgl.popDepthTest();
 }
 
 exec.onTriggered = function ()

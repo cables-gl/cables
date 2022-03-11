@@ -67,7 +67,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Dev.ExrTexture"
+        "name": "Ops.Gl.Textures.ExrTexture"
     },
     "libs": [
         "fflate.js",

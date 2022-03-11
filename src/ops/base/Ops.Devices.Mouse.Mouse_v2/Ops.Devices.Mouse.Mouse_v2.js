@@ -11,14 +11,14 @@ const
     smooth = op.inValueBool("smooth"),
     smoothSpeed = op.inValueFloat("smoothSpeed", 20),
     multiply = op.inValueFloat("multiply", 1),
-    outMouseX = op.outValue("x", 0),
-    outMouseY = op.outValue("y", 0),
+    outMouseX = op.outNumber("x", 0),
+    outMouseY = op.outNumber("y", 0),
     mouseDown = op.outValueBool("button down"),
     mouseClick = op.outTrigger("click"),
     mouseUp = op.outTrigger("Button Up"),
     mouseClickRight = op.outTrigger("click right"),
     mouseOver = op.outValueBool("mouseOver"),
-    outButton = op.outValue("button");
+    outButton = op.outNumber("button");
 
 op.setPortGroup("Behavior", [relative, normalize, flipY, area, rightClickPrevDef, touchscreen]);
 op.setPortGroup("Smoothing", [smooth, smoothSpeed, multiply]);
