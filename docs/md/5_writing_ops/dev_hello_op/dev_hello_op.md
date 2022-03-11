@@ -9,7 +9,7 @@ Or you can press escape to browse to the ops menu then enter your own unique op 
 
 A naming example below:
 ```javascript
-`HelloOp` is the short-name of your op and `Ops.user.yourname.HelloOp` the unique name.
+`HelloOp` is the short-name of your op and `Ops.User.yourname.HelloOp` the unique name.
 ```
 Now add the following code:
 
@@ -30,7 +30,8 @@ In this example we will just forward the input value to an out-port. So let’s 
 var myOutPort = op.outNumber("Output");
 ```
 
-In the top of the editor window click on `Save` and afterwards `Execute`, now reload the patch (the browser window) by pressing `cmd + r`. Now click on `Op` —> `Add` on the very top of the window, enter the name of the op you just created – `HelloOp` and press Enter.
+In the top of the editor window click on `Save` the new code will then be executed, now reload the patch (the browser window) by pressing `cmd + r`. 
+Now click on `Op` —> `Add` (or use the `Esc`-Shortcut) on the very top of the window, enter the name of the op you just created – `HelloOp` and press Enter.
 
 You now see your newly created op with one input- and one output-port:
 
@@ -135,7 +136,7 @@ We will call this code **update**, the normal syntax for making your own functio
 ```javascript
 function myFunctionName()
 {
-  //code gos here
+  //code goes here
 }
 ```
 Replace the previous code with this:
