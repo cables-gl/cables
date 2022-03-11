@@ -210,6 +210,11 @@
             "message": "compatibility with more glb files",
             "author": "pandur",
             "date": 1643616726676
+        },
+        {
+            "message": "add support for dataurls",
+            "author": "stephan",
+            "date": 1646674536478
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

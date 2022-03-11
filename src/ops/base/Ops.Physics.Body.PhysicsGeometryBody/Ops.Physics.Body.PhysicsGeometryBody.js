@@ -178,7 +178,7 @@ function render()
         body.position.y = vec[1];
         body.position.z = vec[2];
 
-        mat4.copy(shape.cbl_mat, cgl.mMatrix);
+        if (shape.cbl_mat)mat4.copy(shape.cbl_mat, cgl.mMatrix);
 
         mat4.getRotation(q, cgl.mMatrix);
         // quat.invert(q, q);

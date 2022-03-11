@@ -40,8 +40,9 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Order"
+                "type": 0,
+                "name": "Space index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
