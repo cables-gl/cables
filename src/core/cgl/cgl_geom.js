@@ -239,6 +239,7 @@ Geometry.prototype.copy = function ()
     let i = 0;
     const geom = new Geometry(this.name + " copy");
     geom.faceVertCount = this.faceVertCount;
+    geom.glPrimitive = this.glPrimitive;
 
     // geom.vertices.length=this.vertices.length;
     // for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];

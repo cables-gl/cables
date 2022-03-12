@@ -11,10 +11,28 @@ const
     outNum = op.outNumber("Found");
 
 const cgl = op.patch.cgl;
+let scene = null;
+
+op.onDelete =
+inExec.onLinkChanged = remove;
+
+function remove()
+{
+    if (scene)
+        for (let i = 0; i < scene.nodes.length; i++)
+        {
+            if (scene.nodes[i].name.indexOf(inFilter.get()) >= 0)
+            {
+                scene.nodes[i].addTranslate = null;
+            }
+        }
+}
 
 inExec.onTriggered = function ()
 {
     if (!cgl.frameStore.currentScene) return;
+
+    scene = cgl.frameStore.currentScene;
 
     let node = null;
 

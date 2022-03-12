@@ -113,6 +113,7 @@ geom.onChange = function ()
         mesh = null;
         return;
     }
+
     mesh = new CGL.Mesh(cgl, geom.get());
     reset();
 };

@@ -23,6 +23,16 @@
             {
                 "type": 1,
                 "name": "Screenshot"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -344,6 +344,7 @@ function loadBin(addCacheBuster)
 
     if (!loadingId)loadingId = cgl.patch.loading.start("gltf" + inFile.get(), inFile.get());
 
+    let fileToLoad = inFile.get();
     let url = op.patch.getFilePath(String(inFile.get()));
     if (inFile.get() && !inFile.get().startsWith("data:"))
     {
@@ -352,9 +353,16 @@ function loadBin(addCacheBuster)
     finishedLoading = false;
     outLoading.set(true);
     fetch(url)
-        .then((res) => { return res.arrayBuffer(); })
+        .then((res) => res.arrayBuffer())
         .then((arrayBuffer) =>
         {
+            if (inFile.get() != fileToLoad)
+            {
+                cgl.patch.loading.finished(loadingId);
+                loadingId = null;
+                return;
+            }
+
             boundingPoints = [];
 
             maxTime = 0;

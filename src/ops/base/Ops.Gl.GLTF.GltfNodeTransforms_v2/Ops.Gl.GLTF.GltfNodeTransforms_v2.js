@@ -2,6 +2,7 @@ const
     inExec = op.inTrigger("Render"),
     inStr = op.inString("Search", ""),
     inSort = op.inSwitch("Order", ["None", "AlphaNumerical"], "None"),
+    inSpace = op.inSwitch("Space", ["GLTF", "World"], "GLTF"),
     outPos = op.outArray("Positions"),
     next = op.outTrigger("Next"),
     outScale = op.outArray("Scale"),
@@ -38,6 +39,8 @@ function update()
     const arrScale = [];
     const arrNames = [];
 
+    const worldspace = inSpace.get() == "World";
+
     for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
     {
         if (cgl.frameStore.currentScene.nodes[i].name.indexOf(inStr.get()) == 0)
@@ -47,12 +50,26 @@ function update()
             arrNames.push(n.name);
 
             const tr = vec3.create();
-            mat4.getTranslation(tr, node.modelMatAbs());
+
+            const m = node.modelMatAbs();
+            // const m=node.modelMatLocal();
+            // console.log(node.modelMatLocal())
+
+            if (worldspace)
+            {
+                // mat4.sub(m,cgl.mMatrix,m);
+                // mat4.mul(m,m,cgl.mMatrix);
+            }
+
+            mat4.getTranslation(tr, m);
+
+            // const empty=vec3.create();
+            // vec3.transformMat4(tr, empty, m);
 
             arrPos.push(tr[0], tr[1], tr[2]);
 
             const q = quat.create();
-            mat4.getRotation(q, node.modelMatAbs());
+            mat4.getRotation(q, m);
             arrRot.push(q[0], q[1], q[2], q[3]);
 
             // if (n.translation) arrPos.push(n.translation[0], n.translation[1], n.translation[2]);

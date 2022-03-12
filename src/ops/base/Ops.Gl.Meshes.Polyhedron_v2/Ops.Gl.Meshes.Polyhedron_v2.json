@@ -38,6 +38,11 @@
             "message": "cloned op from Ops.Gl.Meshes.Polyhedron",
             "author": "stephan",
             "date": 1637079875909
+        },
+        {
+            "message": "fixed crash when using illegal seed",
+            "author": "stephan",
+            "date": 1646674582145
         }
     ],
     "exampleProjectId": "VRG6Q6"
