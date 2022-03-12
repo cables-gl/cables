@@ -17,7 +17,7 @@ const gltfNode = class
         this._gltf = gltf;
         this.absMat = mat4.create();
         this.addTranslate = null;
-        this.addMat = null;
+        this.addMulMat = null;
         this.updateMatrix();
         this._animActions={};
     }
@@ -164,9 +164,11 @@ const gltfNode = class
         if (!this._animTrans && !this._animRot && !this._animScale)
         {
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);
+            this._animMat=null;
         }
         else
         {
+            this._animMat=this._animMat||mat4.create();
             mat4.identity(this._animMat);
 
             const playAnims = true;
@@ -197,8 +199,6 @@ const gltfNode = class
                     CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
                 }
 
-
-
                 mat4.fromQuat(this._tempMat, this._tempQuat);
                 mat4.mul(this._animMat, this._animMat, this._tempMat);
             }
@@ -220,11 +220,9 @@ const gltfNode = class
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
 
-
         if (this.addTranslate)mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
 
         if (this.addMulMat) mat4.mul(cgl.mMatrix, cgl.mMatrix, this.addMulMat);
-
 
         mat4.copy(this.absMat, cgl.mMatrix);
     }
@@ -239,7 +237,6 @@ const gltfNode = class
 
         if (this.hidden && !drawHidden)
         {
-
         }
         else
         {
