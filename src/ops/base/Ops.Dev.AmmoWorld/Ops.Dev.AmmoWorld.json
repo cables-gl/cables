@@ -1,0 +1,53 @@
+{
+    "id": "1005fcd0-5f40-49c5-8d46-45e95fcecf37",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647106458705
+        },
+        {
+            "message": " added lib: ammo.js",
+            "author": "pandur",
+            "date": 1647106816831
+        },
+        {
+            "message": " added core lib: ammoworld",
+            "author": "pandur",
+            "date": 1647109039816
+        },
+        {
+            "message": "Ops.User.pandur.AmmoWorld renamed to Ops.Dev.AmmoWorld",
+            "author": "pandur",
+            "date": 1647117184569
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Total Bodies",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.AmmoWorld"
+    },
+    "authorName": "pandur",
+    "created": 1647106814814,
+    "libs": [
+        "ammo.js"
+    ],
+    "coreLibs": [
+        "ammoworld"
+    ]
+}
