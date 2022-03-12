@@ -56,15 +56,15 @@ CABLES.AmmoWorld = class
 
     renderDebug()
     {
-        for (let i = 0; i < this.bodies.length; i++)
-        {
-            const tmpTrans = new Ammo.btTransform();
-            const ms = this.bodies[i].getMotionState();
-            ms.getWorldTransform(tmpTrans);
+        // for (let i = 0; i < this.bodies.length; i++)
+        // {
+        //     const tmpTrans = new Ammo.btTransform();
+        //     const ms = this.bodies[i].getMotionState();
+        //     ms.getWorldTransform(tmpTrans);
 
-            const orig = tmpTrans.getOrigin();
-            console.log(orig.x(), orig.y(), orig.z());
-        }
+        //     const orig = tmpTrans.getOrigin();
+        //     console.log(orig.x(), orig.y(), orig.z());
+        // }
     }
 
     frame()
