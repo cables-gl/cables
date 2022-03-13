@@ -1,0 +1,65 @@
+{
+    "id": "d9c57405-9cc0-475f-b81d-21401a7ab326",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647107457096
+        },
+        {
+            "message": "Ops.User.pandur.AmmoBody renamed to Ops.Dev.AmmoBody",
+            "author": "pandur",
+            "date": 1647117199087
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1647107505781,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Shape index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 1,
+                "name": "Transformed"
+            }
+        ],
+        "name": "Ops.User.pandur.AmmoBody"
+    }
+}
