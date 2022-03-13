@@ -7,6 +7,8 @@ CABLES.AmmoWorld = class
     {
         this.world = null;
         this.bodies = [];
+        this._countIndex = 1;
+        this._bodymeta = {};
 
         try
         {
@@ -33,6 +35,7 @@ CABLES.AmmoWorld = class
         this.world.setGravity(new Ammo.btVector3(0, -10, 0));
 
         console.log("world setup done");
+        console.log(this.world);
     }
 
     dispose()
@@ -67,12 +70,29 @@ CABLES.AmmoWorld = class
         if (idx > -1) this.bodies.splice(idx, 1);
     }
 
-    addRigidBody(b)
+    createRigidBody()
     {
-        this.world.addRigidBody(b);
-        this.bodies.push(b);
 
-        console.log(b);
+    }
+
+    addRigidBody(body)
+    {
+        body.setUserIndex(++this._countIndex);
+        this.world.addRigidBody(body);
+        this.bodies.push(body);
+
+        console.log(body);
+    }
+
+    setBodyMeta(body, meta)
+    {
+        if (body.getUserIndex() == 0)body.setUserIndex(++this._countIndex);
+        this._bodymeta[body.getUserIndex()] = meta;
+    }
+
+    getBodyMeta(body)
+    {
+        return this._bodymeta[body.getUserIndex()];
     }
 
     numBodies()

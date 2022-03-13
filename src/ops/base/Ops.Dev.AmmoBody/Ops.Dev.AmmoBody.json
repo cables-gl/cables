@@ -46,6 +46,10 @@
                 "subType": "number"
             },
             {
+                "type": 5,
+                "name": "Name"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }

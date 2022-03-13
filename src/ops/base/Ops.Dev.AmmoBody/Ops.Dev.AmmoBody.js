@@ -5,6 +5,7 @@ const
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
     inMass = op.inFloat("Mass", 0),
+    inName = op.inString("Name", ""),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("next"),
     transformed = op.outTrigger("Transformed");
@@ -19,6 +20,8 @@ let transform = null;
 let motionState = null;
 let tmpOrigin = vec3.create();
 let doResetPos = false;
+
+inName.onChange = updateBodyMeta;
 
 inShape.onChange =
 inMass.onChange =
@@ -42,6 +45,15 @@ inReset.onTriggered = () =>
     // doResetPos=true;
     removeBody();
 };
+
+function updateBodyMeta()
+{
+    if (world)
+        world.setBodyMeta(body,
+            {
+                "name": inName.get()
+            });
+}
 
 function setup()
 {
@@ -70,9 +82,11 @@ function setup()
 
     let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
-
     world.addRigidBody(body);
-    console.log("body added...");
+
+    updateBodyMeta();
+
+    console.log("body added...", body);
 }
 
 function renderTransformed()
