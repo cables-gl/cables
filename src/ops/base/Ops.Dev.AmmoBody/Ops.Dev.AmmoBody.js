@@ -8,6 +8,8 @@ const
     inMass = op.inFloat("Mass", 0),
     inName = op.inString("Name", ""),
     inReset = op.inTriggerButton("Reset"),
+    inActivate = op.inTriggerButton("Activate"),
+    inNeverDeactivate = op.inBool("Never Deactivate"),
     next = op.outTrigger("next"),
     transformed = op.outTrigger("Transformed");
 
@@ -22,7 +24,10 @@ let motionState = null;
 const tmpOrigin = vec3.create();
 const tmpQuat = quat.create();
 const tmpScale = vec3.create();
+let transMat = mat4.create();
 
+let btOrigin = null;
+let btQuat = null;
 let doResetPos = false;
 
 inName.onChange = updateBodyMeta;
@@ -38,6 +43,11 @@ inSizeX.onChange = () =>
     removeBody();
 };
 
+inActivate.onTriggered = () =>
+{
+    if (body)body.activate();
+};
+
 function removeBody()
 {
     if (world && body) world.removeRigidBody(body);
@@ -46,9 +56,6 @@ function removeBody()
 
 inReset.onTriggered = () =>
 {
-    // transform = new Ammo.btTransform();
-    // transform.setIdentity();
-    // doResetPos=true;
     removeBody();
 };
 
@@ -57,8 +64,11 @@ function updateBodyMeta()
     if (world)
         world.setBodyMeta(body,
             {
-                "name": inName.get()
+                "name": inName.get(),
+                "mass": inMass.get(),
             });
+
+    op.setUiAttribs({ "extendTitle": inName.get() });
 }
 
 function setup()
@@ -66,11 +76,9 @@ function setup()
     if (world && body) world.removeRigidBody(body);
 
     tmpTrans = new Ammo.btTransform();
-
     transform = new Ammo.btTransform();
+
     transform.setIdentity();
-    // transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
-    // transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
 
     copyCglTransform(transform);
 
@@ -99,11 +107,9 @@ function setup()
     world.addRigidBody(body);
 
     updateBodyMeta();
-
+    // updateDeactivation();
     console.log("body added...", body);
 }
-
-let transMat = mat4.create();
 
 function renderTransformed()
 {
@@ -113,8 +119,6 @@ function renderTransformed()
         ms.getWorldTransform(tmpTrans);
         let p = tmpTrans.getOrigin();
         let q = tmpTrans.getRotation();
-        // objThree.position.set( p.x(), p.y(), p.z() );
-        // objThree.quaternion.set( q.x(), q.y(), q.z(), q.w() );
 
         cgl.pushModelMatrix();
 
@@ -127,11 +131,7 @@ function renderTransformed()
         if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
         mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
-
-        // mat4.translate(cgl.mMatrix, cgl.mMatrix, [p.x(), p.y(), p.z()]);
         mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
-
-        // mat4.scale(cgl.mMatrix, cgl.mMatrix, [inSizeX.get(), inSizeY.get(), inSizeZ.get()]);
 
         transformed.trigger();
 
@@ -141,29 +141,32 @@ function renderTransformed()
 
 function copyCglTransform(transform)
 {
+    if (!btOrigin)
+    {
+        btOrigin = new Ammo.btVector3(0, 0, 0);
+        btQuat = new Ammo.btQuaternion(0, 0, 0, 0);
+    }
     mat4.getTranslation(tmpOrigin, cgl.mMatrix);
     mat4.getRotation(tmpQuat, cgl.mMatrix);
-    // mat4.getScaling(tmpScale, cgl.mMatrix);
 
-    // console.log(q);
+    let changed = false;
 
-    transform.setOrigin(new Ammo.btVector3(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]));
-    transform.setRotation(new Ammo.btQuaternion(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]));
-    // transform.setScale(new Ammo.btQuaternion(tmpScale[0], tmpScale[1], tmpScale[2]));
+    btOrigin.setValue(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]);
+    btQuat.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);
+
+    transform.setOrigin(btOrigin);
+    transform.setRotation(btQuat);
 }
 
 function update()
 {
-    if (world != cgl.frameStore.ammoWorld)
-    {
-        removeBody();
-    }
+    if (world != cgl.frameStore.ammoWorld) removeBody();
 
     world = cgl.frameStore.ammoWorld;
     if (!world) return;
     if (!body)setup(world);
 
-    // -----
+    if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
     if (inMass.get() == 0 || doResetPos)
     {

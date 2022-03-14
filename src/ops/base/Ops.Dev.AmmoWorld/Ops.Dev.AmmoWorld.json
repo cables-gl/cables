@@ -60,6 +60,10 @@
                 "name": "Depth",
                 "group": "Debug Renderer",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Activate All"
             }
         ],
         "portsOut": [

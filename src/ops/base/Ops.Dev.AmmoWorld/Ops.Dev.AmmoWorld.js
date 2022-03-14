@@ -8,6 +8,8 @@ const
     inDrawContacts = op.inBool("Draw Contact Points", false),
     inIgnClear = op.inBool("Depth", true),
 
+    inActivateAll = op.inTriggerButton("Activate All"),
+
     next = op.outTrigger("next"),
     outNumBodies = op.outNumber("Total Bodies"),
     outPoints = op.outArray("debug points");
@@ -24,6 +26,11 @@ inReset.onTriggered = () =>
 {
     if (ammoWorld)ammoWorld.dispose();
     ammoWorld = null;
+};
+
+inActivateAll.onTriggered = () =>
+{
+    ammoWorld.activateAllBodies();
 };
 
 function update()
@@ -53,8 +60,11 @@ function update()
 
     if (debugmode)
     {
+        cgl.pushModelMatrix();
         cgl.pushDepthTest(inIgnClear.get());
         cgl.pushDepthWrite(inIgnClear.get());
+
+        mat4.identity(cgl.mMatrix);
 
         ammoWorld.renderDebug(cgl);
         ammoWorld.debugDrawer.setDebugMode(debugmode);
@@ -62,5 +72,6 @@ function update()
 
         cgl.popDepthTest();
         cgl.popDepthWrite();
+        cgl.popModelMatrix();
     }
 }

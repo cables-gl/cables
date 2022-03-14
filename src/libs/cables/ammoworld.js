@@ -106,12 +106,19 @@ CABLES.AmmoWorld = class
         return this.bodies.length;
     }
 
-
     frame()
     {
         if (!this.world) return;
         let deltaTime = 16; // TODO
         this.world.stepSimulation(deltaTime, 10);
+    }
+
+    activateAllBodies()
+    {
+        // for (let i = 0; i < this.bodies.length; i++)
+        // {
+        //     this.bodies[i].activate();
+        // }
     }
 
     renderDebug(cgl)
@@ -122,6 +129,16 @@ CABLES.AmmoWorld = class
     }
 };
 
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AmmoDebugConstants = {
@@ -182,7 +199,6 @@ class AmmoDebugDrawer
         console.log("this.getDebugMode", this.getDebugMode(), this.enabled);
     }
 
-
     enable()
     {
         this.enabled = true;
@@ -200,7 +216,6 @@ class AmmoDebugDrawer
             return;
         }
 
-
         if (!this._lineGeom)
         {
             this._lineGeom = new CGL.Geometry("marker");
@@ -208,13 +223,11 @@ class AmmoDebugDrawer
             this._lineMesh.setGeom(this._lineGeom);
             this._lineGeom.vertices = [];
 
-
             this._pointGeom = new CGL.Geometry("marker");
             this._pointMesh = new CGL.Mesh(cgl, this._pointGeom, cgl.gl.POINTS);
             this._pointMesh.setGeom(this._pointGeom);
             this._pointGeom.vertices = [];
         }
-
 
         this._lineMesh.render(cgl.getShader());
         this._pointMesh.render(cgl.getShader());
@@ -231,9 +244,7 @@ class AmmoDebugDrawer
         this.vertPointCols = [];
         this.indexPoints = 0;
 
-
         this.world.debugDrawWorld();
-
 
         // console.log("upd", this.index);
         // console.log(this._lineGeom.vertices);
@@ -305,7 +316,6 @@ class AmmoDebugDrawer
         this.vertCols[idxCol + 2] = b;
         this.vertCols[idxCol + 3] = 1;
 
-
         const fromX = heap[(from + 0) / 4];
         const fromY = heap[(from + 4) / 4];
         const fromZ = heap[(from + 8) / 4];
@@ -327,12 +337,10 @@ class AmmoDebugDrawer
         this.verts[idx + 1] = toY;
         this.verts[idx + 2] = toZ;
 
-
         this.vertCols[idxCol + 0] = r;
         this.vertCols[idxCol + 1] = g;
         this.vertCols[idxCol + 2] = b;
         this.vertCols[idxCol + 3] = 1;
-
 
         this.index++;
 
