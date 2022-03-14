@@ -1,6 +1,7 @@
 const
     inExec = op.inTrigger("Update"),
-    inShape = op.inDropDown("Shape", ["Box", "Sphere"], "Box"),
+    inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone"], "Box"),
+    inRadius = op.inFloat("Radius", 1),
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
@@ -29,6 +30,7 @@ inName.onChange = updateBodyMeta;
 op.onDelete =
 inShape.onChange =
 inMass.onChange =
+inRadius.onChange =
 inSizeY.onChange =
 inSizeZ.onChange =
 inSizeX.onChange = () =>
@@ -77,9 +79,17 @@ function setup()
     let colShape;
 
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
-    if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inSizeX.get());
+    if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inRadius.get());
+    if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
+    if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
+    if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
 
-    colShape.setMargin(0.15);
+    inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Cylinder" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
+    inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
+    inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Cylinder" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
+    inRadius.setUiAttribs({ "greyout": inShape.get() == "Box" });
+
+    colShape.setMargin(0.05);
 
     let localInertia = new Ammo.btVector3(0, 0, 0);
     colShape.calculateLocalInertia(inMass.get(), localInertia);
@@ -110,7 +120,13 @@ function renderTransformed()
 
         mat4.identity(cgl.mMatrix);
 
-        mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], [inSizeX.get(), inSizeY.get(), inSizeZ.get()]);
+        let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
+
+        if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
+        if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
+        if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
+
+        mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
 
         // mat4.translate(cgl.mMatrix, cgl.mMatrix, [p.x(), p.y(), p.z()]);
         mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
