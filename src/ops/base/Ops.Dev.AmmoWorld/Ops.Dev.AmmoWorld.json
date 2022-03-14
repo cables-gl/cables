@@ -40,11 +40,25 @@
             {
                 "type": 0,
                 "name": "Draw Wireframe",
+                "group": "Debug Renderer",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Draw AABB",
+                "group": "Debug Renderer",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Contact Points",
+                "group": "Debug Renderer",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
+                "group": "Debug Renderer",
                 "subType": "boolean"
             }
         ],

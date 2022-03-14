@@ -204,37 +204,20 @@ class AmmoDebugDrawer
         if (!this._lineGeom)
         {
             this._lineGeom = new CGL.Geometry("marker");
-            // this._lineGeom.setPointVertices(
-            //     [
-            //         0.00001, 0, 0, 1, 0, 0,
-            //         0, 0.00001, 0, 0, 1, 0,
-            //         0, 0, 0.00001, 0, 0, 1,
-            //     ]
-            // );
             this._lineMesh = new CGL.Mesh(cgl, this._lineGeom, cgl.gl.LINES);
-            // this._lineGeom.glPrimitive = cgl.gl.LINES;
             this._lineMesh.setGeom(this._lineGeom);
             this._lineGeom.vertices = [];
-            console.log("new debug mesh...");
+
+
+            this._pointGeom = new CGL.Geometry("marker");
+            this._pointMesh = new CGL.Mesh(cgl, this._pointGeom, cgl.gl.POINTS);
+            this._pointMesh.setGeom(this._pointGeom);
+            this._pointGeom.vertices = [];
         }
 
 
-        // if (this.indexArray)
-        // {
-        //     if (Atomics.load(this.indexArray, 0) === 0)
-        //     {
-        //         this.index = 0;
-        //         this.world.debugDrawWorld();
-        //         Atomics.store(this.indexArray, 0, this.index);
-        //     }
-        // }
-        // else
-        // {
-
-        // console.log(1);
-
         this._lineMesh.render(cgl.getShader());
-        // }
+        this._pointMesh.render(cgl.getShader());
     }
 
     update()
@@ -243,20 +226,69 @@ class AmmoDebugDrawer
         this.verts = [];
         this.vertCols = [];
         this.index = 0;
+
+        this.vertPoints = [];
+        this.vertPointCols = [];
+        this.indexPoints = 0;
+
+
         this.world.debugDrawWorld();
+
 
         // console.log("upd", this.index);
         // console.log(this._lineGeom.vertices);
         this._lineGeom.setPointVertices(this.verts);
         this._lineGeom.vertexColors = this.vertCols;
-
         this._lineMesh.setGeom(this._lineGeom);
 
+        this._pointGeom.setPointVertices(this.vertPoints);
+        this._pointGeom.vertexColors = this.vertPointCols;
+        this._pointMesh.setGeom(this._pointGeom);
+        // console.log(this.indexPoints);
 
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, this.verts, 3);
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
     }
+
+    // virtual void   drawTriangle(const btVector3& a, const btVector3& b, const btVector3& c, const btVector3& color, btScalar alpha);
+    // virtual void   drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color);
+
+    drawContactPoint(pointOnB, normalOnB, distance, lifeTime, color)
+    {
+        // AmmoDebugDrawer.prototype.drawContactPoint = function(pointOnB, normalOnB, distance, lifeTime, color) {
+        const heap = Ammo.HEAPF32;
+        const r = heap[(color + 0) / 4];
+        const g = heap[(color + 4) / 4];
+        const b = heap[(color + 8) / 4];
+
+        const x = heap[(pointOnB + 0) / 4];
+        const y = heap[(pointOnB + 4) / 4];
+        const z = heap[(pointOnB + 8) / 4];
+
+        let idx = this.indexPoints * 3;
+
+        this.vertPoints[idx + 0] = x;
+        this.vertPoints[idx + 1] = y;
+        this.vertPoints[idx + 2] = z;
+
+        this.vertPointCols[idx + 0] = r;
+        this.vertPointCols[idx + 1] = g;
+        this.vertPointCols[idx + 2] = b;
+        this.vertPointCols[idx + 3] = 1;
+        this.indexPoints++;
+
+        // setXYZ(this.verticesArray, this.index, x, y, z);
+        // setXYZ(this.colorsArray, this.index++, r, g, b);
+
+        // const dx = heap[(normalOnB + 0) / 4] * distance;
+        // const dy = heap[(normalOnB + 4) / 4] * distance;
+        // const dz = heap[(normalOnB + 8) / 4] * distance;
+        // setXYZ(this.verticesArray, this.index, x + dx, y + dy, z + dz);
+        // setXYZ(this.colorsArray, this.index++, r, g, b);
+        //   };
+    }
+
 
     drawLine(from, to, color)
     {
@@ -311,25 +343,25 @@ class AmmoDebugDrawer
     }
 
     // TODO: figure out how to make lifeTime work
-    drawContactPoint(pointOnB, normalOnB, distance, lifeTime, color)
-    {
-        // const heap = Ammo.HEAPF32;
-        // const r = heap[(color + 0) / 4];
-        // const g = heap[(color + 4) / 4];
-        // const b = heap[(color + 8) / 4];
+    // drawContactPoint(pointOnB, normalOnB, distance, lifeTime, color)
+    // {
+    //     // const heap = Ammo.HEAPF32;
+    //     // const r = heap[(color + 0) / 4];
+    //     // const g = heap[(color + 4) / 4];
+    //     // const b = heap[(color + 8) / 4];
 
-        // const x = heap[(pointOnB + 0) / 4];
-        // const y = heap[(pointOnB + 4) / 4];
-        // const z = heap[(pointOnB + 8) / 4];
-        // setXYZ(this.verticesArray, this.index, x, y, z);
-        // setXYZ(this.colorsArray, this.index++, r, g, b);
+    //     // const x = heap[(pointOnB + 0) / 4];
+    //     // const y = heap[(pointOnB + 4) / 4];
+    //     // const z = heap[(pointOnB + 8) / 4];
+    //     // setXYZ(this.verticesArray, this.index, x, y, z);
+    //     // setXYZ(this.colorsArray, this.index++, r, g, b);
 
-        // const dx = heap[(normalOnB + 0) / 4] * distance;
-        // const dy = heap[(normalOnB + 4) / 4] * distance;
-        // const dz = heap[(normalOnB + 8) / 4] * distance;
-        // setXYZ(this.verticesArray, this.index, x + dx, y + dy, z + dz);
-        // setXYZ(this.colorsArray, this.index++, r, g, b);
-    }
+    //     // const dx = heap[(normalOnB + 0) / 4] * distance;
+    //     // const dy = heap[(normalOnB + 4) / 4] * distance;
+    //     // const dz = heap[(normalOnB + 8) / 4] * distance;
+    //     // setXYZ(this.verticesArray, this.index, x + dx, y + dy, z + dz);
+    //     // setXYZ(this.colorsArray, this.index++, r, g, b);
+    // }
 
     reportErrorWarning(warningString)
     {

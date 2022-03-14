@@ -26,6 +26,7 @@ let doResetPos = false;
 
 inName.onChange = updateBodyMeta;
 
+op.onDelete =
 inShape.onChange =
 inMass.onChange =
 inSizeY.onChange =
@@ -78,7 +79,7 @@ function setup()
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
     if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inSizeX.get());
 
-    colShape.setMargin(0.05);
+    colShape.setMargin(0.15);
 
     let localInertia = new Ammo.btVector3(0, 0, 0);
     colShape.calculateLocalInertia(inMass.get(), localInertia);

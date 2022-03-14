@@ -4,11 +4,15 @@ const
     inSim = op.inBool("Simulate", true),
 
     inDrawWireframe = op.inBool("Draw Wireframe", true),
-    inDrawAABB = op.inBool("Draw AABB", true),
+    inDrawAABB = op.inBool("Draw AABB", false),
+    inDrawContacts = op.inBool("Draw Contact Points", false),
+    inIgnClear = op.inBool("Depth", true),
 
     next = op.outTrigger("next"),
     outNumBodies = op.outNumber("Total Bodies"),
     outPoints = op.outArray("debug points");
+
+op.setPortGroup("Debug Renderer", [inDrawWireframe, inDrawAABB, inIgnClear, inDrawContacts]);
 
 inExec.onTriggered = update;
 
@@ -43,16 +47,17 @@ function update()
     let debugmode = 0;
     if (inDrawWireframe.get())debugmode |= 1;
     if (inDrawAABB.get())debugmode |= 2;
+    if (inDrawContacts.get())debugmode |= 8;
 
-    console.log(debugmode);
+    debugmode |= 16384;
 
     if (debugmode)
     {
-        cgl.pushDepthTest(false);
-        cgl.pushDepthWrite(false);
+        cgl.pushDepthTest(inIgnClear.get());
+        cgl.pushDepthWrite(inIgnClear.get());
 
         ammoWorld.renderDebug(cgl);
-
+        ammoWorld.debugDrawer.setDebugMode(debugmode);
         outPoints.set(ammoWorld.debugDrawer.verts);
 
         cgl.popDepthTest();
