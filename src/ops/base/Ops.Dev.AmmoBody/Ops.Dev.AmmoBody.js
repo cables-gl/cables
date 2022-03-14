@@ -18,7 +18,10 @@ let world = null;
 let tmpTrans = null;
 let transform = null;
 let motionState = null;
-let tmpOrigin = vec3.create();
+const tmpOrigin = vec3.create();
+const tmpQuat = quat.create();
+const tmpScale = vec3.create();
+
 let doResetPos = false;
 
 inName.onChange = updateBodyMeta;
@@ -89,6 +92,8 @@ function setup()
     console.log("body added...", body);
 }
 
+let transMat = mat4.create();
+
 function renderTransformed()
 {
     let ms = body.getMotionState();
@@ -103,8 +108,13 @@ function renderTransformed()
         cgl.pushModelMatrix();
 
         mat4.identity(cgl.mMatrix);
-        mat4.translate(cgl.mMatrix, cgl.mMatrix, [p.x(), p.y(), p.z()]);
-        mat4.scale(cgl.mMatrix, cgl.mMatrix, [inSizeX.get(), inSizeY.get(), inSizeZ.get()]);
+
+        mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], [inSizeX.get(), inSizeY.get(), inSizeZ.get()]);
+
+        // mat4.translate(cgl.mMatrix, cgl.mMatrix, [p.x(), p.y(), p.z()]);
+        mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
+
+        // mat4.scale(cgl.mMatrix, cgl.mMatrix, [inSizeX.get(), inSizeY.get(), inSizeZ.get()]);
 
         transformed.trigger();
 
@@ -112,10 +122,17 @@ function renderTransformed()
     }
 }
 
-function copyCglTransform(bgTransform)
+function copyCglTransform(transform)
 {
     mat4.getTranslation(tmpOrigin, cgl.mMatrix);
+    mat4.getRotation(tmpQuat, cgl.mMatrix);
+    // mat4.getScaling(tmpScale, cgl.mMatrix);
+
+    // console.log(q);
+
     transform.setOrigin(new Ammo.btVector3(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]));
+    transform.setRotation(new Ammo.btQuaternion(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]));
+    // transform.setScale(new Ammo.btQuaternion(tmpScale[0], tmpScale[1], tmpScale[2]));
 }
 
 function update()

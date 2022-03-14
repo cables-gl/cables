@@ -31,6 +31,21 @@
             {
                 "type": 1,
                 "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Simulate",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Wireframe",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw AABB",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -42,6 +57,10 @@
                 "type": 0,
                 "name": "Total Bodies",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "debug points"
             }
         ],
         "name": "Ops.Dev.AmmoWorld"
