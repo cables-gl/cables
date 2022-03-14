@@ -807,6 +807,33 @@ const Op = function ()
     };
 
     /**
+     * create output boolean port,value will be converted to 0 or 1
+     * @function outBool
+     * @instance
+     * @memberof Op
+     * @param {String} name
+     * @return {Port} created port
+     */
+    Op.prototype.outBoolNum = function (name, v)
+    {
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "boolnum"
+            })
+        );
+
+        p.set = function (b)
+        {
+            this.setValue(b ? 1 : 0);
+            // console.log("bool set", b, this.get());
+        }.bind(p);
+
+        if (v !== undefined) p.set(v);
+        else p.set(0);
+        return p;
+    };
+
+    /**
      * create output string port
      * @function outString
      * @instance

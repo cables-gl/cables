@@ -859,20 +859,4 @@ class ValueSelectPort extends SwitchPort
 }
 
 
-// class BoolPort extends Port
-// {
-//     set(b)
-//     {
-//         super.set(b ? 1 : 0);
-//         // console.log("bool set", b, this.get());
-//     }
-
-//     get()
-//     {
-//         // console.log("bool get", super.get());
-//         return super.get() ? 1 : 0;
-//     }
-// }
-
-
 export { Port, SwitchPort, ValueSelectPort };

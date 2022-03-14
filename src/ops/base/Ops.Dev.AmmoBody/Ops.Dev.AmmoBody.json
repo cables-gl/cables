@@ -46,6 +46,10 @@
                 "subType": "number"
             },
             {
+                "type": 5,
+                "name": "Name"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }
@@ -60,6 +64,6 @@
                 "name": "Transformed"
             }
         ],
-        "name": "Ops.User.pandur.AmmoBody"
+        "name": "Ops.Dev.AmmoBody"
     }
 }
