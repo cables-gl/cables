@@ -95,9 +95,9 @@ function setup()
     if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
     if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
 
-    inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Cylinder" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
+    inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
     inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
-    inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Cylinder" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
+    inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
     inRadius.setUiAttribs({ "greyout": inShape.get() == "Box" });
 
     colShape.setMargin(0.05);
@@ -136,6 +136,7 @@ function renderTransformed()
 
         if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
         if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
+        // if (inShape.get() == "Cylinder") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
         if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
         mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
