@@ -228,6 +228,7 @@ Geometry.prototype.flipVertDir = function ()
         newInd[i + 1] = this.verticesIndices[i + 1];
         newInd[i + 2] = this.verticesIndices[i];
     }
+    this.verticesIndices = newInd;
 };
 
 
