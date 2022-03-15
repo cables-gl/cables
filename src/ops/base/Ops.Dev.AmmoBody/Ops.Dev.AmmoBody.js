@@ -10,7 +10,9 @@ const
     inReset = op.inTriggerButton("Reset"),
     inActivate = op.inTriggerButton("Activate"),
     inNeverDeactivate = op.inBool("Never Deactivate"),
+
     next = op.outTrigger("next"),
+    outRayHit = op.outBoolNum("Ray Hit"),
     transformed = op.outTrigger("Transformed");
 
 inExec.onTriggered = update;
@@ -73,7 +75,8 @@ function updateBodyMeta()
 
 function setup()
 {
-    if (world && body) world.removeRigidBody(body);
+    if (world)
+        if (world && body) world.removeRigidBody(body);
 
     tmpTrans = new Ammo.btTransform();
     transform = new Ammo.btTransform();
@@ -105,6 +108,11 @@ function setup()
     let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
     world.addRigidBody(body);
+
+    world.on("rayCastHit", (name) =>
+    {
+        outRayHit.set(name == inName.get());
+    });
 
     updateBodyMeta();
     // updateDeactivation();
