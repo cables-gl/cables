@@ -2,7 +2,7 @@ const
     TAU = Math.PI * 2,
     cgl = op.patch.cgl,
     inTrigger = op.inTrigger("render"),
-    inRadius = op.inValue("radius", 1),
+    inRadius = op.inValue("radius", 0.5),
     inStacks = op.inValue("stacks", 32),
     inSlices = op.inValue("slices", 32),
     inStacklimit = op.inValueSlider("Filloffset", 1),

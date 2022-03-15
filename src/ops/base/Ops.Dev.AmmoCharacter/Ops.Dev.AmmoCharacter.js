@@ -1,6 +1,5 @@
 const
     inExec = op.inTrigger("Update"),
-    inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone"], "Box"),
     inRadius = op.inFloat("Radius", 1),
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
@@ -9,7 +8,19 @@ const
     inName = op.inString("Name", ""),
     inReset = op.inTriggerButton("Reset"),
     inActivate = op.inTriggerButton("Activate"),
-    inNeverDeactivate = op.inBool("Never Deactivate"),
+
+
+    inMoveXP=op.inBool("Move X+",false),
+    inMoveXM=op.inBool("Move X-",false),
+    inMoveYP=op.inBool("Move Y+",false),
+    inMoveYM=op.inBool("Move Y-",false),
+    inMoveZP=op.inBool("Move Z+",false),
+    inMoveZM=op.inBool("Move Z-",false),
+
+    inSpeed=op.inFloat("Speed",1),
+
+
+    inTest = op.inTriggerButton("Test"),
     next = op.outTrigger("next"),
     transformed = op.outTrigger("Transformed");
 
@@ -33,7 +44,6 @@ let doResetPos = false;
 inName.onChange = updateBodyMeta;
 
 op.onDelete =
-inShape.onChange =
 inMass.onChange =
 inRadius.onChange =
 inSizeY.onChange =
@@ -57,6 +67,20 @@ function removeBody()
 inReset.onTriggered = () =>
 {
     removeBody();
+};
+
+
+let btVelocity=null
+inTest.onTriggered=()=>
+{
+
+    if(!btVelocity)
+    {
+        btVelocity=new Ammo.btVector3(1,0,0);
+    }
+    body.activate();
+    body.setLinearVelocity(btVelocity);
+
 };
 
 function updateBodyMeta()
@@ -84,18 +108,8 @@ function setup()
 
     motionState = new Ammo.btDefaultMotionState(transform);
 
-    let colShape;
+    let colShape = new Ammo.btSphereShape(inRadius.get());
 
-    if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
-    if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inRadius.get());
-    if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
-    if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
-    if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
-
-    inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Cylinder" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
-    inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
-    inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Cylinder" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
-    inRadius.setUiAttribs({ "greyout": inShape.get() == "Box" });
 
     colShape.setMargin(0.05);
 
@@ -124,11 +138,8 @@ function renderTransformed()
 
         mat4.identity(cgl.mMatrix);
 
-        let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
+        let scale = [inRadius.get(), inRadius.get(), inRadius.get()];
 
-        if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
-        if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
-        if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
         mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
         mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
@@ -166,7 +177,32 @@ function update()
     if (!world) return;
     if (!body)setup(world);
 
-    if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
+    body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
+
+
+    let vx=0,vy=0,vz=0.0;
+
+    if(inMoveXM.get()) vx=-inSpeed.get();
+    if(inMoveXP.get()) vx=inSpeed.get();
+
+    if(inMoveZP.get()) vz=-inSpeed.get();
+    if(inMoveZM.get()) vz=inSpeed.get();
+
+    if(inMoveYP.get()) vy=inSpeed.get();
+
+
+    if(!btVelocity)
+    {
+        btVelocity=new Ammo.btVector3(0,0,0);
+    }
+    if(vx!=0||vy!=0||vz!=0)
+    {
+        btVelocity.setValue(vx,vy,vz)
+
+        body.setLinearVelocity(btVelocity);
+    }
+
+
 
     if (inMass.get() == 0 || doResetPos)
     {
