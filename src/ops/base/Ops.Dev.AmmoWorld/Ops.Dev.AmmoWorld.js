@@ -3,6 +3,10 @@ const
     inReset = op.inTriggerButton("Reset"),
     inSim = op.inBool("Simulate", true),
 
+    inGravX = op.inFloat("Gravity X", 0),
+    inGravY = op.inFloat("Gravity Y", -9),
+    inGravZ = op.inFloat("Gravity Z", 0),
+
     inDrawWireframe = op.inBool("Draw Wireframe", true),
     inDrawAABB = op.inBool("Draw AABB", false),
     inDrawContacts = op.inBool("Draw Contact Points", false),
@@ -14,13 +18,14 @@ const
     outNumBodies = op.outNumber("Total Bodies"),
     outPoints = op.outArray("debug points");
 
+op.setPortGroup("Gravity", [inGravX, inGravZ, inGravY]);
 op.setPortGroup("Debug Renderer", [inDrawWireframe, inDrawAABB, inIgnClear, inDrawContacts]);
 
 inExec.onTriggered = update;
 
 const cgl = op.patch.cgl;
 let deltaTime, lastTime;
-let ammoWorld = new CABLES.AmmoWorld();
+let ammoWorld = null;// new CABLES.AmmoWorld();
 
 inReset.onTriggered = () =>
 {
@@ -33,9 +38,21 @@ inActivateAll.onTriggered = () =>
     ammoWorld.activateAllBodies();
 };
 
+inGravX.onChange = inGravZ.onChange = inGravY.onChange = updateGravity;
+
+function updateGravity()
+{
+    if (ammoWorld && ammoWorld.world)
+        ammoWorld.world.setGravity(new Ammo.btVector3(inGravX.get(), inGravY.get(), inGravZ.get()));
+}
+
 function update()
 {
-    if (!ammoWorld) ammoWorld = new CABLES.AmmoWorld();
+    if (!ammoWorld)
+    {
+        ammoWorld = new CABLES.AmmoWorld();
+        updateGravity();
+    }
     if (!ammoWorld.world) return;
     deltaTime = performance.now() - lastTime;
 
