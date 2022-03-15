@@ -347,7 +347,7 @@ class AmmoDebugDrawer
         this.vertCols[idxCol + 0] = r;
         this.vertCols[idxCol + 1] = g;
         this.vertCols[idxCol + 2] = b;
-        this.vertCols[idxCol + 3] = 1;
+        this.vertCols[idxCol + 3] = 0.6;
 
         const fromX = heap[(from + 0) / 4];
         const fromY = heap[(from + 4) / 4];
@@ -373,7 +373,7 @@ class AmmoDebugDrawer
         this.vertCols[idxCol + 0] = r;
         this.vertCols[idxCol + 1] = g;
         this.vertCols[idxCol + 2] = b;
-        this.vertCols[idxCol + 3] = 1;
+        this.vertCols[idxCol + 3] = 0.6;
 
         this.index++;
 
