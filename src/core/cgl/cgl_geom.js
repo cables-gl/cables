@@ -753,7 +753,7 @@ Geometry.buildFromFaces = function (arr, name)
         const c = arr[i + 2];
         const face = [-1, -1, -1];
 
-        for (let iv = 0; iv < vertices; iv += 3)
+        for (let iv = 0; iv < vertices.length; iv += 3)
         {
             if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
             if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
@@ -783,7 +783,7 @@ Geometry.buildFromFaces = function (arr, name)
         verticesIndices.push(parseInt(face[2], 10));
     }
 
-    const geom = new Geometry(this.name);
+    const geom = new Geometry(name);
     geom.name = name;
     geom.vertices = vertices;
     geom.verticesIndices = verticesIndices;
