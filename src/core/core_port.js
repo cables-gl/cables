@@ -258,7 +258,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
 
                     if (this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
-                    this.parent.patch.emitEvent("exception".ex, this.parent);
+                    this.parent.patch.emitEvent("exception", ex, this.parent);
                     if (this.parent.onError) this.parent.onError(ex);
                 }
 
