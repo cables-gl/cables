@@ -190,6 +190,47 @@ Geometry.prototype.calcNormals = function (smooth)
     this.calculateNormals(options);
 };
 
+/**
+ * @function flipNormals
+ * @memberof Geometry
+ * @description flip normals
+ */
+Geometry.prototype.flipNormals = function ()
+{
+    let vec = vec3.create();
+
+    for (let i = 0; i < this.vertexNormals.length; i += 3)
+    {
+        vec3.set(vec,
+            this.vertexNormals[i + 0],
+            this.vertexNormals[i + 1],
+            this.vertexNormals[i + 2]);
+        vec3.normalize(vec, vec);
+
+        this.vertexNormals[i + 0] = vec[0];
+        this.vertexNormals[i + 1] = vec[1];
+        this.vertexNormals[i + 2] = vec[2];
+    }
+};
+
+/**
+ * @function flipVertDir
+ * @memberof Geometry
+ * @description flip order of vertices in geom faces
+ */
+Geometry.prototype.flipVertDir = function ()
+{
+    const newInd = [];
+    newInd.length = this.verticesIndices.length;
+    for (let i = 0; i < this.verticesIndices.length; i += 3)
+    {
+        newInd[i] = this.verticesIndices[i + 2];
+        newInd[i + 1] = this.verticesIndices[i + 1];
+        newInd[i + 2] = this.verticesIndices[i];
+    }
+};
+
+
 Geometry.prototype.setPointVertices = function (verts)
 {
     if (verts.length % 3 !== 0)
