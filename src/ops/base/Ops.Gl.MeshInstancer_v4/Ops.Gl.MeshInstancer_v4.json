@@ -144,6 +144,10 @@
                 "text": "Needs an RGBA array to determine the color of each instance."
             },
             {
+                "name": "TexCoords",
+                "text": "Needs an array4 in standard UV range (0-1). First two numbers are for UV coordinates. Second two are for UV scale. [ U, V,  U scale, V scale ]"
+            },
+            {
                 "name": "Trigger Out",
                 "text": "Trigger Out"
             },
@@ -156,5 +160,6 @@
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-    "exampleProjectId": "oOsjJ5"
+    "exampleProjectId": "oOsjJ5",
+    "caniusequery": ""
 }
