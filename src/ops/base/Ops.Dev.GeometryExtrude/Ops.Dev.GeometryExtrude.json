@@ -17,7 +17,7 @@
             {
                 "type": 2,
                 "name": "Geometry",
-                "objType": "Geometry"
+                "objType": "geometry"
             },
             {
                 "type": 0,
@@ -31,12 +31,12 @@
             },
             {
                 "type": 0,
-                "name": "Cap Back",
+                "name": "Top",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Cap Front",
+                "name": "Bottom",
                 "subType": "boolean"
             }
         ],
@@ -44,10 +44,10 @@
             {
                 "type": 2,
                 "name": "Result Geometry",
-                "objType": "Geometry"
+                "objType": "geometry"
             }
         ],
-        "name": "Ops.User.pandur.GeometryExtrude"
+        "name": "Ops.Dev.GeometryExtrude"
     },
     "authorName": "pandur",
     "created": 1647367985009

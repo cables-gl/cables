@@ -1,10 +1,10 @@
 const
-    inGeom = op.inObject("Geometry", null, "Geometry"),
+    inGeom = op.inObject("Geometry", null, "geometry"),
     inHeight = op.inFloat("Height", 0.2),
     inExtrudeWalls = op.inBool("Walls", true),
-    inCapBack = op.inBool("Cap Back", true),
-    inCapFront = op.inBool("Cap Front", true),
-    outGeom = op.outObject("Result Geometry", null, "Geometry");
+    inCapTop = op.inBool("Top", true),
+    inCapBottom = op.inBool("Bottom", true),
+    outGeom = op.outObject("Result Geometry", null, "geometry");
 
 function isClockwise(verts)
 {
@@ -19,8 +19,8 @@ function isClockwise(verts)
 }
 
 inExtrudeWalls.onChange =
-inCapBack.onChange =
-inCapFront.onChange =
+inCapTop.onChange =
+inCapBottom.onChange =
 inHeight.onChange =
 inGeom.onChange = () =>
 {
@@ -31,8 +31,6 @@ inGeom.onChange = () =>
         outGeom.set(null);
         return;
     }
-
-    // const newGeom=new CGL.Geometry();//geom.copy();
 
     function edgesUsedMulti(idx1, idx2)
     {
@@ -74,25 +72,42 @@ inGeom.onChange = () =>
             // 1
             if (!edgesUsedMulti(vert1, vert2))
             {
-                verts.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2]]);
-                verts.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2] + h]);
-                verts.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
+                const a = [];
+                a.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2]]);
+                a.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2] + h]);
+                a.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
 
-                verts.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2] + h]);
-                verts.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
-                verts.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2] + h]);
+                if (!isClockwise(a)) verts = verts.concat(a);
+                else verts = verts.concat(a.reverse());
+
+                a.length = 0;
+                a.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2] + h]);
+                a.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
+                a.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2] + h]);
+
+                if (!isClockwise(a)) verts = verts.concat(a);
+                else verts = verts.concat(a.reverse());
             }
 
             // 2
             if (!edgesUsedMulti(vert3, vert2))
             {
-                verts.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2]]);
-                verts.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2] + h]);
-                verts.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
+                const a = [];
+                a.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2]]);
+                a.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2] + h]);
+                a.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
 
-                verts.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2] + h]);
-                verts.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
-                verts.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2] + h]);
+                if (isClockwise(a)) verts = verts.concat(a);
+                else verts = verts.concat(a.reverse());
+
+                a.length = 0;
+
+                a.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2] + h]);
+                a.push([geom.vertices[vert2 * 3 + 0], geom.vertices[vert2 * 3 + 1], geom.vertices[vert2 * 3 + 2]]);
+                a.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2] + h]);
+
+                if (isClockwise(a)) verts = verts.concat(a);
+                else verts = verts.concat(a.reverse());
             }
             // 3
 
@@ -102,6 +117,11 @@ inGeom.onChange = () =>
                 a.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2]]);
                 a.push([geom.vertices[vert3 * 3 + 0], geom.vertices[vert3 * 3 + 1], geom.vertices[vert3 * 3 + 2] + h]);
                 a.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2]]);
+
+                if (!isClockwise(a)) verts = verts.concat(a);
+                else verts = verts.concat(a.reverse());
+
+                a.length = 0;
 
                 a.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2] + h]);
                 a.push([geom.vertices[vert1 * 3 + 0], geom.vertices[vert1 * 3 + 1], geom.vertices[vert1 * 3 + 2]]);
@@ -114,11 +134,11 @@ inGeom.onChange = () =>
         }
 
     // newGeom.setVertices(verts);
-    const newGeom = CGL.Geometry.buildFromFaces(verts, "extrude");
+    const newGeom = CGL.Geometry.buildFromFaces(verts, "extrude", true);
 
     // newGeom.verticesIndices=indices;
 
-    newGeom.calculateNormals({ "forceZUp": true });
+    newGeom.calculateNormals();
     // console.log(indices);
 
     newGeom.calcTangentsBitangents();
@@ -141,14 +161,16 @@ inGeom.onChange = () =>
     //  }
     // //--------
 
-    if (inCapFront.get())
+    if (inCapBottom.get())
     {
         newGeom.merge(geom);
     }
 
-    if (inCapBack.get())
+    if (inCapTop.get())
     {
         const flippedgeo = geom.copy();
+        // flippedgeo.calculateNormals();
+        // flippedgeo.calcTangentsBitangents();
 
         for (let i = 0; i < flippedgeo.vertices.length; i += 3)
         {

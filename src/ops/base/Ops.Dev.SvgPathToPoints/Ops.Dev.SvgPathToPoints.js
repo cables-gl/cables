@@ -49,7 +49,7 @@ inStr.onChange = () =>
         let parent = null;
         for (let j = i - 1; j >= 0; --j)
         {
-        // a contour is a hole if it is inside its parent and has different winding
+            // a contour is a hole if it is inside its parent and has different winding
             if (polys[j].inside(polys[i].points[0]) && polys[i].area * polys[j].area < 0)
             {
                 parent = polys[j];
@@ -102,23 +102,49 @@ inStr.onChange = () =>
         {
             arr.push(polys[i].points[j].x, polys[i].points[j].y, 0);
         }
-
-        polys[i].children.forEach((child) =>
-        {
-            const hole = [];
-            child.points.forEach(({ x, y }) => hole.push(x, y, 0));
-
-            holes.push(hole);
-        });
-        if (polys[i].children.length == 0)holes.push([]);
-
         coords.push(arr);
+
+        if (polys[i].children)
+        {
+            for (let j = 0; j < polys[i].children.length; j++)
+            {
+                const hole = [];
+
+                for (let k = 0; k < polys[i].children[j].points.length; k++)
+                {
+                    hole.push(
+                        polys[i].children[j].points[k].x,
+                        polys[i].children[j].points[k].y,
+                        0);
+                }
+
+                holes.push(hole);
+                if (j > 0) coords.push([]);
+            }
+        }
+
+        // if (!polys[i].children || polys[i].children.length == 0)holes.push([]);
+
+        // polys[i].children.forEach((child) =>
+        // {
+        //     const hole = [];
+        //     child.points.forEach(({ x, y }) => hole.push(x, y, 0));
+
+        //     holes.push(hole);
+        //     coords.push([]);
+        // });
+
+        // for(let i=holes.length;i<arr.length;i++) holes.push([]);
+
+        // if (polys[i].children.length == 0)console.log(arr);
+
+        // for(let i=coords.length;i<holes.length;i++) coords.push([]);
     }
 
     outArr.set(null);
-    outArr.set(coords);
-
     outHoles.set(null);
+
+    outArr.set(coords);
     outHoles.set(holes);
 };
 
