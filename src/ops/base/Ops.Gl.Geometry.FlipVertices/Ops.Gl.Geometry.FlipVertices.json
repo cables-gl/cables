@@ -1,0 +1,41 @@
+{
+    "authorName": "pandur",
+    "id": "548079e7-616d-4f7a-98a0-509c9c7bc36d",
+    "created": 1647448642143,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.Ops.Gl.Geometry.FlipVertices"
+    },
+    "summary": "flip all normals of a geometry",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Geometry.FlipNormals",
+            "author": "pandur",
+            "date": 1647448642143
+        },
+        {
+            "message": "Ops.User.pandur.Ops.Gl.Geometry.FlipVertices renamed to Ops.Gl.Geometry.FlipVertices",
+            "author": "pandur",
+            "date": 1647448852953
+        }
+    ]
+}

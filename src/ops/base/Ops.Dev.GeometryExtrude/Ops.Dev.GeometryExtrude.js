@@ -1,6 +1,6 @@
 const
     inGeom = op.inObject("Geometry", null, "geometry"),
-    inHeight = op.inFloat("Height", 0.2),
+    inHeight = op.inFloat("Height", 0.5),
     inSmooth = op.inBool("Smooth", true),
     inExtrudeWalls = op.inBool("Walls", true),
     inCapTop = op.inBool("Top", true),

@@ -1,11 +1,11 @@
 const
     inStr = op.inString("SVG Path"),
     inStepSize = op.inFloat("Bezier Stepsize", 3),
-    outArr = op.outArray("Points A"),
-    outHoles = op.outArray("Points B"),
-    inRescale=op.inBool("Rescale",false),
+    inRescale = op.inFloat("Rescale", 1),
     outGeom = op.outObject("Geometry", null, "geometry");
+
 inStepSize.onChange =
+inRescale.onChange =
 inStr.onChange = () =>
 {
     let str = inStr.get();
@@ -97,14 +97,27 @@ inStr.onChange = () =>
     }
     root.forEach(process);
 
-
     const finalVertexData = new Float32Array(totalPoints * 3);
 
-    for(let i=0;i<finalVertexData.length/3;i++)
+    let max = -99999;
+
+    for (let i = 0; i < finalVertexData.length / 3; i++)
     {
-        finalVertexData[i*3+0]=vertexData[i*2+0];
-        finalVertexData[i*3+1]=vertexData[i*2+1]*-1;
-        finalVertexData[i*3+2]=0;
+        finalVertexData[i * 3 + 0] = vertexData[i * 2 + 0];
+        finalVertexData[i * 3 + 1] = vertexData[i * 2 + 1] * -1;
+        max = Math.max(finalVertexData[i * 3 + 1], max);
+
+        finalVertexData[i * 3 + 2] = 0;
+    }
+
+    let resc = inRescale.get();
+    if (resc != 0)
+    {
+        for (let i = 0; i < finalVertexData.length / 3; i++)
+        {
+            finalVertexData[i * 3 + 0] /= max * resc;
+            finalVertexData[i * 3 + 1] /= max * resc;
+        }
     }
 
     let geom = new CGL.Geometry("circle");
@@ -120,7 +133,6 @@ inStr.onChange = () =>
     // console.log(indices);
 
     outGeom.set(geom);
-
 };
 
 const PATH_COMMANDS = {

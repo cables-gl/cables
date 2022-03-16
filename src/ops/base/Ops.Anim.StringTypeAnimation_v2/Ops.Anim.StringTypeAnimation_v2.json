@@ -12,40 +12,40 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "text"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Restart"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed Variation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Show Cursor",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Changed"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Finished"
             }
         ],

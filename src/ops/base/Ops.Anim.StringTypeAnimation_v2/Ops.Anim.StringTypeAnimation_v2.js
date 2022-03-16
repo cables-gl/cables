@@ -1,81 +1,78 @@
-var text=op.inStringEditor("text");
-var inRestart=op.inTriggerButton("Restart");
-var speed=op.inValue("Speed",500);
-var speedVariation=op.inValueSlider("Speed Variation");
-const showCursor=op.inBool("Show Cursor",true);
+let text = op.inStringEditor("text", "hello world");
+let inRestart = op.inTriggerButton("Restart");
+let speed = op.inValue("Speed", 500);
+let speedVariation = op.inValueSlider("Speed Variation");
+const showCursor = op.inBool("Show Cursor", true);
 
-var outText=op.outString("Result");
-var outChanged=op.outTrigger("Changed");
-var outFinished=op.outTrigger("Finished");
+let outText = op.outString("Result");
+let outChanged = op.outTrigger("Changed");
+let outFinished = op.outTrigger("Finished");
 
-outText.set('  \n  ');
-var pos=0;
-var updateInterval=0;
-var cursorblink=true;
-var finished=false;
+outText.set("  \n  ");
+let pos = 0;
+let updateInterval = 0;
+let cursorblink = true;
+let finished = false;
 
 function setNewTimeout()
 {
     clearTimeout(updateInterval);
-    var ms=speed.get()*(Math.random()*(speedVariation.get()*2-1));
-    if(text.get() && pos>text.get().length)ms=speed.get();
-    updateInterval=setTimeout(update,speed.get()+ms);
+    let ms = speed.get() * (Math.random() * (speedVariation.get() * 2 - 1));
+    if (text.get() && pos > text.get().length)ms = speed.get();
+    updateInterval = setTimeout(update, speed.get() + ms);
 }
 
-inRestart.onTriggered=function()
+inRestart.onTriggered = function ()
 {
-    finished=false;
-    pos=0;
+    finished = false;
+    pos = 0;
     setNewTimeout();
 };
 
 function update()
 {
-    if(!text.get() || text.get()==='' || text.get()==='0' ||text.get()=='0' )
+    if (!text.get() || text.get() === "" || text.get() === "0" || text.get() == "0")
     {
-        outText.set(' ');
+        outText.set(" ");
         return;
     }
 
-    var t=text.get().substring(0,pos);
-    cursorblink=!cursorblink;
+    let t = text.get().substring(0, pos);
+    cursorblink = !cursorblink;
 
-    if(pos>text.get().length && cursorblink)
+    if (pos > text.get().length && cursorblink)
     {
-        if(showCursor.get())
+        if (showCursor.get())
         {
             // t+=' ';
             // pos++;
         }
 
-        if(!finished)
+        if (!finished)
         {
             outFinished.trigger();
-            finished=true;
+            finished = true;
         }
     }
     else
     {
-        finished=false;
-        if(showCursor.get())
+        finished = false;
+        if (showCursor.get())
         {
-            t+='_';
+            t += "_";
         }
         pos++;
     }
 
-    outText.set( t );
+    outText.set(t);
     outChanged.trigger();
     setNewTimeout();
 }
 
-text.onChange=function()
+text.onChange = function ()
 {
-    finished=false;
-    pos=0;
+    finished = false;
+    pos = 0;
     setNewTimeout();
-    outText.set('');
+    outText.set("");
 };
-
-
-
