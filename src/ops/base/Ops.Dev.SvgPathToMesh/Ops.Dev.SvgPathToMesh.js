@@ -111,10 +111,13 @@ inStr.onChange = () =>
     }
 
     let resc = inRescale.get();
-    for (let i = 0; i < finalVertexData.length / 3; i++)
+    if (resc != 0)
     {
-        finalVertexData[i * 3 + 0] /= max * resc;
-        finalVertexData[i * 3 + 1] /= max * resc;
+        for (let i = 0; i < finalVertexData.length / 3; i++)
+        {
+            finalVertexData[i * 3 + 0] /= max * resc;
+            finalVertexData[i * 3 + 1] /= max * resc;
+        }
     }
 
     let geom = new CGL.Geometry("circle");
