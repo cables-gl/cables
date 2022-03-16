@@ -1,6 +1,7 @@
 const
     inGeom = op.inObject("Geometry", null, "geometry"),
     inHeight = op.inFloat("Height", 0.2),
+    inSmooth = op.inBool("Smooth", true),
     inExtrudeWalls = op.inBool("Walls", true),
     inCapTop = op.inBool("Top", true),
     inCapBottom = op.inBool("Bottom", true),
@@ -18,6 +19,7 @@ function isClockwise(verts)
     return sum > 0.0;
 }
 
+inSmooth.onChange =
 inExtrudeWalls.onChange =
 inCapTop.onChange =
 inCapBottom.onChange =
@@ -130,36 +132,12 @@ inGeom.onChange = () =>
                 if (!isClockwise(a)) verts = verts.concat(a);
                 else verts = verts.concat(a.reverse());
             }
-        // inHeight
         }
 
-    // newGeom.setVertices(verts);
     const newGeom = CGL.Geometry.buildFromFaces(verts, "extrude", true);
 
-    // newGeom.verticesIndices=indices;
-
     newGeom.calculateNormals();
-    // console.log(indices);
-
     newGeom.calcTangentsBitangents();
-    // newGeom.flipNormals();
-
-    // //--------
-    // let vec=vec3.create();
-
-    // for(let i=0;i<geom.vertexNormals.length;i+=3)
-    // {
-    //     vec3.set(vec,
-    //         geom.vertexNormals[i+0],
-    //         geom.vertexNormals[i+1],
-    //         geom.vertexNormals[i+2]);
-    //     vec3.normalize(vec,vec);
-
-    //     geom.vertexNormals[i+0]=vec[0];
-    //     geom.vertexNormals[i+1]=vec[1];
-    //     geom.vertexNormals[i+2]=vec[2];
-    //  }
-    // //--------
 
     if (inCapBottom.get())
     {
@@ -169,18 +147,23 @@ inGeom.onChange = () =>
     if (inCapTop.get())
     {
         const flippedgeo = geom.copy();
-        // flippedgeo.calculateNormals();
-        // flippedgeo.calcTangentsBitangents();
 
         for (let i = 0; i < flippedgeo.vertices.length; i += 3)
-        {
             flippedgeo.vertices[i + 2] += h;
-        }
+
         flippedgeo.flipVertDir();
+        flippedgeo.flipNormals();
         newGeom.merge(flippedgeo);
     }
 
     newGeom.flipVertDir();
+
+    if (!inSmooth.get())
+    {
+        newGeom.unIndex();
+        newGeom.calculateNormals({ "forceZUp": true });
+        newGeom.flipNormals();
+    }
 
     outGeom.set(null);
     outGeom.set(newGeom);

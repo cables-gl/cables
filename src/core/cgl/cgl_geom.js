@@ -195,9 +195,14 @@ Geometry.prototype.calcNormals = function (smooth)
  * @memberof Geometry
  * @description flip normals
  */
-Geometry.prototype.flipNormals = function ()
+Geometry.prototype.flipNormals = function (x, y, z)
 {
     let vec = vec3.create();
+
+    if (x == undefined)x = 1;
+    if (y == undefined)y = 1;
+    if (z == undefined)z = 1;
+
 
     for (let i = 0; i < this.vertexNormals.length; i += 3)
     {
@@ -205,6 +210,11 @@ Geometry.prototype.flipNormals = function ()
             this.vertexNormals[i + 0],
             this.vertexNormals[i + 1],
             this.vertexNormals[i + 2]);
+
+        vec[0] *= -x;
+        vec[1] *= -y;
+        vec[2] *= -z;
+
         vec3.normalize(vec, vec);
 
         this.vertexNormals[i + 0] = vec[0];

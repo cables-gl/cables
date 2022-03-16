@@ -26,6 +26,11 @@
             },
             {
                 "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Walls",
                 "subType": "boolean"
             },

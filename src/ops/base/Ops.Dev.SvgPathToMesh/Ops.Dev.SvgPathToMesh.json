@@ -1,0 +1,59 @@
+{
+    "id": "47ac6cff-af76-4ba0-b2e3-4334109f96cd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647416911262
+        },
+        {
+            "message": " added lib: earcut.js",
+            "author": "pandur",
+            "date": 1647417096569
+        },
+        {
+            "message": "Ops.User.pandur.SvgPathToMesh renamed to Ops.Dev.SvgPathToMesh",
+            "author": "pandur",
+            "date": 1647448101899
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "SVG Path"
+            },
+            {
+                "type": 0,
+                "name": "Bezier Stepsize",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rescale",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points A"
+            },
+            {
+                "type": 3,
+                "name": "Points B"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            }
+        ],
+        "name": "Ops.User.pandur.SvgPathToMesh"
+    },
+    "authorName": "pandur",
+    "created": 1647416958593,
+    "libs": [
+        "earcut.js"
+    ]
+}
