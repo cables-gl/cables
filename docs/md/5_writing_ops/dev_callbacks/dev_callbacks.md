@@ -61,25 +61,30 @@ myPort.onLinkChanged = function()
 
 ### init
 
-In case you have some initialisation code which depends on the ports being set you can place it inside an `init` function. Here you can be sure that the input port is set correctly (when the user enters a value in the op parameters or when the port is connected to another op).
+In case you have some initialisation code for your op you can place it inside an `init` function or just plainly into
+the op-code outside of any callbacks or functions.
 
-When you inspect existing ops by pressing the `View Code` button in the op parameters, you will notice that most ops don’t use this function. This is because most ops don’t depend on their input ports and can be initialised without the input ports being set.
+When you inspect existing ops by pressing the `View Code` button in the op parameters, you will notice that most ops don’t use this function, as
+op init is done asynchronously and most of the time it's better to just initalize outside of callbacks and handle port-value-changes in
+the corresponding `onChange`;
 
-
+Please be aware that this function will be called twice on patch load. If you need to initialize a variable global to the op, 
+you might be better  off doing that outside of any callback. If you do this in `init`, create a variable, set them null and check for that.
 
 ```javascript
-const inPort = op.inValueFloat('In Value');
+const inPort = op.inFloat('In Value');
 
 op.init = function()
 {
 	const value = inPort.get();
-    // your code which depends on inPort being set goes here
 }
 ```
 
 ### onLoaded
 
-Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You normally won't need this as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is **not** called when the op has just been added to the patch, only when the patch is loaded, so it is better to use `init` (see above).
+Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. 
+You normally won't need this, as op-specific init-code can just be put in your op-code without a callback. 
+`op.onLoaded` is **not** called when the op has just been added to the patch, only when the patch is loaded.
 
 ```javascript
 op.onLoaded = function()
