@@ -74,6 +74,11 @@
                 "name": "next"
             },
             {
+                "type": 0,
+                "name": "Ray Hit",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "Transformed"
             }

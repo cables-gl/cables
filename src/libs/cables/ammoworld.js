@@ -2,15 +2,17 @@
 
 // https://github.com/InfiniteLee/ammo-debug-drawer
 
-CABLES.AmmoWorld = class
+const AmmoWorld = class extends CABLES.EventTarget
 {
     constructor()
     {
+        super();
         this.world = null;
         this.debugDrawer = null;
         this.bodies = [];
         this._countIndex = 1;
         this._bodymeta = {};
+        this.lastTime = performance.now();
 
         try
         {
@@ -34,7 +36,7 @@ CABLES.AmmoWorld = class
 
         this.world = new Ammo.btDiscreteDynamicsWorld(this.dispatcher, this.overlappingPairCache, this.solver, this.collisionConfiguration);
 
-        this.world.setGravity(new Ammo.btVector3(0, -10, 0));
+        this.world.setGravity(new Ammo.btVector3(0, -9, 0));
 
         this.debugDrawer = new AmmoDebugDrawer(this.world, { });
         this.debugDrawer.enable();
@@ -109,16 +111,19 @@ CABLES.AmmoWorld = class
     frame()
     {
         if (!this.world) return;
-        let deltaTime = 16; // TODO
+        let deltaTime = performance.now() - this.lastTime;
+
         this.world.stepSimulation(deltaTime, 10);
+
+        this.lastTime = performance.now();
     }
 
     activateAllBodies()
     {
-        // for (let i = 0; i < this.bodies.length; i++)
-        // {
-        //     this.bodies[i].activate();
-        // }
+        for (let i = 0; i < this.bodies.length; i++)
+        {
+            this.bodies[i].activate();
+        }
     }
 
     renderDebug(cgl)
@@ -197,6 +202,33 @@ class AmmoDebugDrawer
         this.world.setDebugDrawer(this.debugDrawer);
 
         console.log("this.getDebugMode", this.getDebugMode(), this.enabled);
+
+
+        this._lineShader = null;
+        this._shaderFrag = ""
+            .endl() + "precision highp float;"
+            .endl() + "IN vec4 vertCol;"
+
+            .endl() + "void main()"
+            .endl() + "{"
+            .endl() + "    outColor = vertCol;"
+            .endl() + "}";
+
+        this._shaderVert = ""
+            .endl() + "IN vec3 vPosition;"
+            .endl() + "UNI mat4 projMatrix;"
+            .endl() + "UNI mat4 mvMatrix;"
+            .endl() + "OUT vec4 vertCol;"
+            .endl() + "IN vec4 attrVertColor;"
+
+            .endl() + "void main()"
+            .endl() + "{"
+            .endl() + "   vec4 pos=vec4(vPosition, 1.0);"
+            .endl() + "   vertCol=attrVertColor;"
+            .endl() + "   gl_PointSize=10.0;"
+
+            .endl() + "   gl_Position = projMatrix * mvMatrix * pos;"
+            .endl() + "}";
     }
 
     enable()
@@ -216,33 +248,43 @@ class AmmoDebugDrawer
             return;
         }
 
+        if (!this._lineShader)
+        {
+            this._lineShader = new CGL.Shader(cgl, "ammoDebugLineShader");
+            this._lineShader.setSource(this._shaderVert, this._shaderFrag);
+        }
+
         if (!this._lineGeom)
         {
-            this._lineGeom = new CGL.Geometry("marker");
+            this._lineGeom = new CGL.Geometry("ammoDebugLines");
             this._lineMesh = new CGL.Mesh(cgl, this._lineGeom, cgl.gl.LINES);
             this._lineMesh.setGeom(this._lineGeom);
             this._lineGeom.vertices = [];
 
-            this._pointGeom = new CGL.Geometry("marker");
-            this._pointMesh = new CGL.Mesh(cgl, this._pointGeom, cgl.gl.POINTS);
+            this._pointGeom = new CGL.Geometry("ammoDebugPoints");
+            this._pointMesh = new CGL.Mesh(cgl, this._pointGeom, cgl.gl.LINES);
             this._pointMesh.setGeom(this._pointGeom);
             this._pointGeom.vertices = [];
         }
 
-        this._lineMesh.render(cgl.getShader());
-        this._pointMesh.render(cgl.getShader());
+        this._lineShader.glPrimitive = cgl.gl.LINES;
+        this._lineMesh.render(this._lineShader);
+
+        this._lineShader.glPrimitive = cgl.gl.POINTS;
+        this._pointMesh.render(this._lineShader);
     }
 
     update()
     {
         if (!this._lineGeom) return;
+
+        this.index = 0;
         this.verts = [];
         this.vertCols = [];
-        this.index = 0;
 
+        this.indexPoints = 0;
         this.vertPoints = [];
         this.vertPointCols = [];
-        this.indexPoints = 0;
 
         this.world.debugDrawWorld();
 
@@ -255,7 +297,7 @@ class AmmoDebugDrawer
         this._pointGeom.setPointVertices(this.vertPoints);
         this._pointGeom.vertexColors = this.vertPointCols;
         this._pointMesh.setGeom(this._pointGeom);
-        // console.log(this.indexPoints);
+
 
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, this.verts, 3);
@@ -278,26 +320,17 @@ class AmmoDebugDrawer
         const z = heap[(pointOnB + 8) / 4];
 
         let idx = this.indexPoints * 3;
+        let idxc = this.indexPoints * 4;
 
         this.vertPoints[idx + 0] = x;
         this.vertPoints[idx + 1] = y;
         this.vertPoints[idx + 2] = z;
 
-        this.vertPointCols[idx + 0] = r;
-        this.vertPointCols[idx + 1] = g;
-        this.vertPointCols[idx + 2] = b;
-        this.vertPointCols[idx + 3] = 1;
+        this.vertPointCols[idxc + 0] = r;
+        this.vertPointCols[idxc + 1] = g;
+        this.vertPointCols[idxc + 2] = b;
+        this.vertPointCols[idxc + 3] = 1;
         this.indexPoints++;
-
-        // setXYZ(this.verticesArray, this.index, x, y, z);
-        // setXYZ(this.colorsArray, this.index++, r, g, b);
-
-        // const dx = heap[(normalOnB + 0) / 4] * distance;
-        // const dy = heap[(normalOnB + 4) / 4] * distance;
-        // const dz = heap[(normalOnB + 8) / 4] * distance;
-        // setXYZ(this.verticesArray, this.index, x + dx, y + dy, z + dz);
-        // setXYZ(this.colorsArray, this.index++, r, g, b);
-        //   };
     }
 
 
@@ -314,7 +347,7 @@ class AmmoDebugDrawer
         this.vertCols[idxCol + 0] = r;
         this.vertCols[idxCol + 1] = g;
         this.vertCols[idxCol + 2] = b;
-        this.vertCols[idxCol + 3] = 1;
+        this.vertCols[idxCol + 3] = 0.6;
 
         const fromX = heap[(from + 0) / 4];
         const fromY = heap[(from + 4) / 4];
@@ -340,7 +373,7 @@ class AmmoDebugDrawer
         this.vertCols[idxCol + 0] = r;
         this.vertCols[idxCol + 1] = g;
         this.vertCols[idxCol + 2] = b;
-        this.vertCols[idxCol + 3] = 1;
+        this.vertCols[idxCol + 3] = 0.6;
 
         this.index++;
 
@@ -400,3 +433,5 @@ class AmmoDebugDrawer
         return this.debugDrawMode;
     }
 }
+
+CABLES.AmmoWorld = AmmoWorld;

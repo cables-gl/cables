@@ -36,7 +36,6 @@ void main()
 
     vec4 col=color;
 
-
     #ifdef HAS_TEXTURE_MASK
         float mask;
         #ifdef TEXTURE_MASK_R
@@ -74,7 +73,6 @@ void main()
             float a=smoothstep(0.25,0.25-fwidth(gl_PointCoord.x),circ);
             if(a==0.0)discard;
             col.a=a*color.a;
-            // col.r=0.0;
         #endif
     #endif
 
@@ -93,7 +91,6 @@ void main()
     #ifdef HAS_TEXTURE_OPACITY
         col.a*=opacity;
     #endif
-
 
     #ifdef VERTEX_COLORS
         col.rgb = vertexColor.rgb;

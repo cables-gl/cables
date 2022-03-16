@@ -190,6 +190,48 @@ Geometry.prototype.calcNormals = function (smooth)
     this.calculateNormals(options);
 };
 
+/**
+ * @function flipNormals
+ * @memberof Geometry
+ * @description flip normals
+ */
+Geometry.prototype.flipNormals = function ()
+{
+    let vec = vec3.create();
+
+    for (let i = 0; i < this.vertexNormals.length; i += 3)
+    {
+        vec3.set(vec,
+            this.vertexNormals[i + 0],
+            this.vertexNormals[i + 1],
+            this.vertexNormals[i + 2]);
+        vec3.normalize(vec, vec);
+
+        this.vertexNormals[i + 0] = vec[0];
+        this.vertexNormals[i + 1] = vec[1];
+        this.vertexNormals[i + 2] = vec[2];
+    }
+};
+
+/**
+ * @function flipVertDir
+ * @memberof Geometry
+ * @description flip order of vertices in geom faces
+ */
+Geometry.prototype.flipVertDir = function ()
+{
+    const newInd = [];
+    newInd.length = this.verticesIndices.length;
+    for (let i = 0; i < this.verticesIndices.length; i += 3)
+    {
+        newInd[i] = this.verticesIndices[i + 2];
+        newInd[i + 1] = this.verticesIndices[i + 1];
+        newInd[i + 2] = this.verticesIndices[i];
+    }
+    this.verticesIndices = newInd;
+};
+
+
 Geometry.prototype.setPointVertices = function (verts)
 {
     if (verts.length % 3 !== 0)
@@ -753,7 +795,7 @@ Geometry.buildFromFaces = function (arr, name)
         const c = arr[i + 2];
         const face = [-1, -1, -1];
 
-        for (let iv = 0; iv < vertices; iv += 3)
+        for (let iv = 0; iv < vertices.length; iv += 3)
         {
             if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
             if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
@@ -783,7 +825,7 @@ Geometry.buildFromFaces = function (arr, name)
         verticesIndices.push(parseInt(face[2], 10));
     }
 
-    const geom = new Geometry(this.name);
+    const geom = new Geometry(name);
     geom.name = name;
     geom.vertices = vertices;
     geom.verticesIndices = verticesIndices;

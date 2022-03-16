@@ -39,6 +39,24 @@
             },
             {
                 "type": 0,
+                "name": "Gravity X",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Draw Wireframe",
                 "group": "Debug Renderer",
                 "subType": "boolean"

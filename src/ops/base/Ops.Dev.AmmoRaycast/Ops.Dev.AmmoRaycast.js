@@ -2,28 +2,27 @@ const
     inExec = op.inTrigger("Update"),
     inX = op.inValueFloat("Screen X"),
     inY = op.inValueFloat("Screen Y"),
-    active=op.inBool("Active",true),
-    inCursor=op.inBool("Change Cursor",true),
+    active = op.inBool("Active", true),
+    inCursor = op.inBool("Change Cursor", true),
     next = op.outTrigger("next"),
 
-    outHasHit=op.outBoolNum("Has Hit",false),
-    outName=op.outString("Hit Body Name","");
+    outHasHit = op.outBoolNum("Has Hit", false),
+    outName = op.outString("Hit Body Name", "");
 
 inExec.onTriggered = update;
 
 const cgl = op.patch.cgl;
 let world = null;
-let didsetCursor=false;
+let didsetCursor = false;
 
-let mat=mat4.create();
+let mat = mat4.create();
 
 function update()
 {
     world = cgl.frameStore.ammoWorld;
     if (!world) return;
 
-
-    if(active.get())
+    if (active.get())
     {
         const x = inX.get();
         const y = inY.get();
@@ -42,20 +41,21 @@ function update()
 
         vec3.transformMat4(to, to, mat);
 
-        const afrom=new Ammo.btVector3(origin[0],origin[1],origin[2]);
-        const ato=new Ammo.btVector3(to[0],to[1],to[2]);
+        const afrom = new Ammo.btVector3(origin[0], origin[1], origin[2]);
+        const ato = new Ammo.btVector3(to[0], to[1], to[2]);
 
         // world.ClosestRayResultCallback(afrom,ato);
 
-        const rayCallback = new Ammo.ClosestRayResultCallback(afrom,ato);
-        world.world.rayTest(afrom,ato,rayCallback);
+        const rayCallback = new Ammo.ClosestRayResultCallback(afrom, ato);
+        world.world.rayTest(afrom, ato, rayCallback);
 
         if (rayCallback.hasHit())
         {
-            const meta=world.getBodyMeta(rayCallback.get_m_collisionObject());
+            const meta = world.getBodyMeta(rayCallback.get_m_collisionObject());
 
-            if(meta)
+            if (meta)
             {
+                world.emitEvent("rayCastHit", meta.name);
                 outName.set(meta.name);
             }
             // console.log();
@@ -68,10 +68,11 @@ function update()
         }
         else
         {
+            world.emitEvent("rayCastHit", null);
+
             outName.set("");
         }
         outHasHit.set(rayCallback.hasHit());
-
 
         if (rayCallback.hasHit() && inCursor.get())
         {
@@ -84,11 +85,8 @@ function update()
             didsetCursor = false;
         }
 
-
-		 //closestResults(from, to);
+		 // closestResults(from, to);
     }
-
-
 
     next.trigger();
 }
