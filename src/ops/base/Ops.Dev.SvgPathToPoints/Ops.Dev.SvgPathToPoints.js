@@ -9,11 +9,11 @@ inStr.onChange = () =>
 {
     let str = inStr.get();
 
-    if (!str || str.length < 2)return;
+    if (!str || str.length < 2) return;
 
     str = str.replace(/([A-Z,a-z])/g, " $1 ");
 
-    const cmds=fromPathToArray(str);
+    const cmds = fromPathToArray(str);
 
     // create a list of closed contours
     const polys = [];
@@ -120,7 +120,6 @@ inStr.onChange = () =>
 
     outHoles.set(null);
     outHoles.set(holes);
-
 };
 
 const PATH_COMMANDS = {
@@ -153,7 +152,7 @@ function fromPathToArray(path)
         .trim()
         .split(/\s*,|\s+/);
 
-    console.log(items);
+    // console.log(items);
     const segments = [];
     let currentCommand = "";
     let currentElement = {};
@@ -188,9 +187,7 @@ function fromPathToArray(path)
     return segments;
 }
 
-
 // https://stackoverflow.com/questions/50554803/triangulate-path-data-from-opentype-js-using-earcut
-
 
 const MAX_BEZIER_STEPS = 15;
 // this is for inside checks - doesn't have to be particularly
@@ -206,7 +203,6 @@ class Polygon
         this.area = 0.0;
 
         this.BEZIER_STEP_SIZE = inStepSize.get();
-
     }
 
     moveTo(p)
@@ -274,8 +270,6 @@ class Polygon
         return (count % 2) !== 0;
     }
 }
-
-
 
 function distance(p1, p2)
 {

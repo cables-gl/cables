@@ -27,7 +27,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.VizNum"
+        "name": "Ops.Ui.VizNumber"
     },
     "authorName": "pandur",
     "created": 1637676964149,

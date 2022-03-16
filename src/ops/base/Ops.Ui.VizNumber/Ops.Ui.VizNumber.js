@@ -5,11 +5,17 @@ op.setUiAttrib({ "widthOnlyGrow": true });
 
 inNum.onChange = () =>
 {
-    const n = inNum.get();
+    let n = inNum.get();
     if (op.patch.isEditorMode())
     {
-        let str = Math.round(inNum.get() * 10000) / 10000;
-        if (str[0] != "-")str = " " + str;
+        let str = "";
+        if (n === null)str = "null";
+        else if (n === undefined)str = "undefined";
+        else
+        {
+            str = Math.round(n * 10000) / 10000;
+            if (str[0] != "-")str = " " + str;
+        }
         op.setTitle(str);
     }
 
