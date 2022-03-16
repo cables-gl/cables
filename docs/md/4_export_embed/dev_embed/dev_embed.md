@@ -75,7 +75,7 @@ You should subscribe to the `CABLES.jsLoaded` event to initialize the patch, thi
 
     <script>
 
-        var patch=null
+        let patch=null
 
         document.addEventListener("CABLES.jsLoaded", function(event)
         {
@@ -115,7 +115,7 @@ make sure `clear` checkbox is NOT checked in MainLoop.
 
 in patch options set the following canvas context attributes:
 
-```
+```javascript
 canvas:{
     alpha:true,
     premultipliedAlpha:true

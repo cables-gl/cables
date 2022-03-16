@@ -76,7 +76,7 @@ Click this [link](dev_ports_object/dev_ports_object) for an example
 ##### Display: String
 
 ```javascript
-var inPort = op.inString("inPort");
+const inPort = op.inString("inPort");
 
 inPort.onChange=function() {
 	op.log( "Port changed to: " + inPort.get() === "foo bar" );
@@ -89,7 +89,7 @@ inPort.onChange=function() {
 ![Editor Button](img/editor.png)
 
 ```javascript
-var text = op.inStringEditor("text");
+const text = op.inStringEditor("text");
 
 text.onChange=function() {
     op.log('text changed to:' + text.get());
@@ -109,13 +109,13 @@ text.setUiAttribs({ "editorSyntax": "css" });
 For a fixed amount of values to choose from.
 
 ```javascript
-var options = op.inDropDown("options", ['option a','option b']);
+const options = op.inDropDown("options", ['option a','option b']);
 ```
 
 ### Array Ports
 
 ```javascript
-var options = op.inArray("options");
+const options = op.inArray("options");
 ```
 
 A Javascript array, which can either contain simple values, arrays or objects.
@@ -125,7 +125,7 @@ E.g. `[1, 2, 3]`, `[[1, 2], [3, 4]]`, `[{"one": 2}, {"three": 4}]`
 ### Object Ports
 
 ```javascript
-var data = op.inObject("data");
+const data = op.inObject("data");
 ```
 
 An object can contain basically anything, e.g.:
@@ -147,7 +147,7 @@ An object can contain basically anything, e.g.:
 Once a port is linked with another port `myPort.onLinkChanged` is executed. When it is executed the port may not have a value yet, it just sais: «There is a new connection». Later on `myPort.onLinkChanged` is called and you can get the new value with `myPort.get()`.
 
 ```javascript
-var myPort = op.inFloat("My Port");
+const myPort = op.inFloat("My Port");
 
 myPort.onLinkChanged = function() {
 	op.log("A link to myPort has been added or removed");
@@ -171,7 +171,7 @@ myPort.onLinkChanged = function() {
 	if(myPort.isLinked()) {
 		op.log("myPort has been linked");
 		// get the other port, as there can be multiple connections, get the last added one
-		var otherPort = myPort.links[links.length-1].getOtherPort(myPort);
+        const otherPort = myPort.links[links.length-1].getOtherPort(myPort);
 		op.log("Port is linked to: ", otherPort.name);
 	} else {
 		op.log("myPort has been unlinked ");

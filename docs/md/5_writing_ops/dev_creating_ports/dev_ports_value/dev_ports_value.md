@@ -10,18 +10,18 @@ JavaScript numbers are always stored as double precision floating point numbers
 Value ports can hold a single float like -1 or 2.45
 
 ```javascript
-//strict mode allows us to write cleaner code
+// strict mode allows us to write cleaner code
 "use strict";
 
-//Create a input port of the type value
+// Create a input port of the type value
 const inVal   = op.inFloat("Value in");
-//Create a output port of the type value
+// Create a output port of the type value
 const outResult  = op.outNumber("Value out");
 
-//when input port changes call the function 'update'
+// when input port changes call the function 'update'
 inVal.onChange = update;
 
-//this function runs every time the input port changes
+// this function runs every time the input port changes
 function update()
 {
     outResult.set(inVal.get());

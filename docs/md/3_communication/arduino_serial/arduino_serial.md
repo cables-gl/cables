@@ -37,7 +37,7 @@ Then execute the binary by running:
 
 You should now see an output like this:
 
-```
+```bash
 2018/04/10 14:43:31 main.go:97: Version:1.94
 2018/04/10 14:43:31 main.go:104: Hostname: Carolin-MacBook-Pro.local
 2018/04/10 14:43:31 main.go:110: Garbage collection is on using Standard mode, meaning we just let Golang determine when to garbage collect.
@@ -57,7 +57,7 @@ Now open a new tab in your browser and go to `http://localhost:8989/`, this is t
 
 Before we can access the Serial data, we need to connect to the Serial device. In the input field on the bottom enter `list` and press _Send_. This will list all available serial devices. The output should look something like this:
 
-```
+```json
 { "SerialPorts": [ { "Name": "/dev/cu.Bluetooth-Incoming-Port", "Friendly": "cu.Bluetooth-Incoming-Port", "SerialNumber": "", "DeviceClass": "", "IsOpen": false, "IsPrimary": false, "RelatedNames": null, "Baud": 0, "BufferAlgorithm": "", "AvailableBufferAlgorithms": [ "default", "timed", "nodemcu", "tinyg", "tinyg_old", "tinyg_linemode", "tinyg_tidmode", "tinygg2", "grbl", "marlin" ], "Ver": 1.94, "UsbVid": "", "UsbPid": "", "FeedRateOverride": 0 }, { "Name": "/dev/cu.usbmodem1421", "Friendly": "cu.usbmodem1421", "SerialNumber": "", "DeviceClass": "", "IsOpen": false, "IsPrimary": false, "RelatedNames": null, "Baud": 0, "BufferAlgorithm": "", "AvailableBufferAlgorithms": [ "default", "timed", "nodemcu", "tinyg", "tinyg_old", "tinyg_linemode", "tinyg_tidmode", "tinygg2", "grbl", "marlin" ], "Ver": 1.94, "UsbVid": "", "UsbPid": "", "FeedRateOverride": 0 }, { "Name": "/dev/tty.Bluetooth-Incoming-Port", "Friendly": "tty.Bluetooth-Incoming-Port", "SerialNumber": "", "DeviceClass": "", "IsOpen": false, "IsPrimary": false, "RelatedNames": null, "Baud": 0, "BufferAlgorithm": "", "AvailableBufferAlgorithms": [ "default", "timed", "nodemcu", "tinyg", "tinyg_old", "tinyg_linemode", "tinyg_tidmode", "tinygg2", "grbl", "marlin" ], "Ver": 1.94, "UsbVid": "", "UsbPid": "", "FeedRateOverride": 0 }, { "Name": "/dev/tty.usbmodem1421", "Friendly": "tty.usbmodem1421", "SerialNumber": "", "DeviceClass": "", "IsOpen": false, "IsPrimary": false, "RelatedNames": null, "Baud": 0, "BufferAlgorithm": "", "AvailableBufferAlgorithms": [ "default", "timed", "nodemcu", "tinyg", "tinyg_old", "tinyg_linemode", "tinyg_tidmode", "tinygg2", "grbl", "marlin" ], "Ver": 1.94, "UsbVid": "", "UsbPid": "", "FeedRateOverride": 0 } ] }
 ```
 

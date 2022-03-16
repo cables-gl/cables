@@ -68,11 +68,11 @@ When you inspect existing ops by pressing the `View Code` button in the op param
 
 
 ```javascript
-var inPort = op.inValueFloat('In Value');
+const inPort = op.inValueFloat('In Value');
 
 op.init = function()
 {
-	var value = inPort.get();
+	const value = inPort.get();
     // your code which depends on inPort being set goes here
 }
 ```
@@ -84,7 +84,7 @@ Gets called when the whole patch is loaded / all ops are linked / all external l
 ```javascript
 op.onLoaded = function()
 {
-	// do something
+	// do something on loading
 };
 ```
 ### onDelete
@@ -95,7 +95,7 @@ If your op needs to clean up after itself when it is deleted from the patch you 
 op.onDelete = function()
 {
 	// do some manual cleanup here
-});
+};
 ```
 
 ### op.setUiError
@@ -104,7 +104,7 @@ Sometimes you will want to create a UI element to show if there is an error or a
 To do this use the following format:
 ```javascript
 if(condition) op.setUiError("errorID", "error ID/must be unique per error","Error message to show in UI",0);
-//this resets the error message so it disappears
+// this resets the error message so it disappears
 else op.setUiError("errorID",null);
 ```
 The number in the last part of the function defines what kind of error is shown
@@ -116,9 +116,9 @@ The number in the last part of the function defines what kind of error is shown
 <br>
 example code to show an error:
 ```javascript
-//create a port of the type boolean
+// create a port of the type boolean
 const switch1=op.inBool("Error",false);
-//if port changes run this function
+// if port changes run this function
 switch1.onChange=function()
 {
 	if(switch1.get()) op.setUiError("error1","switch 1 is true",2);

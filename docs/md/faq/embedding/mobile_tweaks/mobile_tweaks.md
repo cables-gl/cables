@@ -5,7 +5,7 @@
 disable highlighting canvas and elements on touch effect:
 warning: this can potentially a problem for screen readers or vision impaired people!
 
-```
+```css
 *
 {
     -webkit-tap-highlight-color: transparent;
@@ -21,7 +21,7 @@ warning: this can potentially a problem for screen readers or vision impaired pe
 
 to remove rubberband scrolling effect on ios, add `overflow:hidden` to your body style
 
-```
+```css
 body {
     overflow: hidden;
 }

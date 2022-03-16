@@ -32,16 +32,16 @@ Use `inValueInt` to look up the index of the array.<br>
 
 All arrays should make a copy of an array and not a reference.
 
-```
-var arrIn;
-var newArray;
+```javascript
+let arrIn;
+let myArray;
 // This line below is a reference.This will modify the array in the op before this one.
 //Better to avoid doing this
-newArray = arrIn ;
+myArray = arrIn ;
 //It's better to make a deep copy like this
-for(var i = 0 ; i < arrIn; i++)
+for(let i = 0 ; i < arrIn; i++)
 {
-  newArray[i] = arrIn[i];
+  myArray[i] = arrIn[i];
 }
 ```
 

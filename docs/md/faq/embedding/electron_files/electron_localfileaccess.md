@@ -5,7 +5,7 @@ put this into the CABLES.Patch constructor options: `allowLocalFileAccess:true`
 
 It should then look like this:
 
-```
+```javascript
     CABLES.patch = new CABLES.Patch({
         // ... your old options should stay
         allowLocalFileAccess:true,

@@ -8,7 +8,7 @@ Create a new op by clicking `Op` -> `Create` (in the navigation bar at the top l
 Or you can press escape to browse to the ops menu then enter your own unique op name in the search bar, then click the button with `Create Ops.User.YourUserName.YourOpsName` to create your own op.
 
 A naming example below:
-```javascript
+```text
 `HelloOp` is the short-name of your op and `Ops.User.yourname.HelloOp` the unique name.
 ```
 Now add the following code:
@@ -27,7 +27,7 @@ We have now defined a new port called `myInPort` with the visible text label `My
 In this example we will just forward the input value to an out-port. So let’s define it below:
 
 ```javascript
-var myOutPort = op.outNumber("Output");
+const myOutPort = op.outNumber("Output");
 ```
 
 In the top of the editor window click on `Save` the new code will then be executed, now reload the patch (the browser window) by pressing `cmd + r`. 
@@ -45,7 +45,7 @@ Add the following lines below:
 ```javascript
 myInPort.onChange = function()
 {
-  	var inputValue = myInPort.get(); // get the new value from the input port
+    const inputValue = myInPort.get(); // get the new value from the input port
     myOutPort.set(inputValue); // set the output value
 };
 ```
@@ -62,7 +62,7 @@ const myOutPort = op.outNumber("Output");
 
 myInPort.onChange = function()
 {
-  	var inputValue = myInPort.get();
+    const inputValue = myInPort.get();
     myOutPort.set(inputValue);
 };
 ```
@@ -141,13 +141,13 @@ function myFunctionName()
 ```
 Replace the previous code with this:
 ```javascript
-//calls the update function on a change
+// calls the update function on a change
 myInPort.onChange = update;
 
-//calls the update function on a change
+// calls the update function on a change
 multiplyValueIn.onChange = update;
 
-//the function update is called whenever a port changes
+// the function update is called whenever a port changes
 function update ()
 {
     var result = myInPort.get() * multiplyValueIn.get() ;
