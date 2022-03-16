@@ -1,0 +1,64 @@
+{
+    "authorName": "pandur",
+    "id": "023d1e35-1231-4c50-a044-4a0e63609ba5",
+    "created": 1518868364510,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Prevent Default",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Enabled",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "On Press"
+            },
+            {
+                "type": 0,
+                "name": "Key Code",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            }
+        ],
+        "name": "Ops.Devices.Keyboard.KeyPress_v2"
+    },
+    "summary": "triggers when a key is pressed",
+    "docs": {
+        "ports": []
+    },
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": null,
+    "exampleProjectId": "lmGgPZ",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Ops.Devices.Keyboard.KeyPress renamed to Ops.Devices.Keyboard.KeyPress_v2",
+            "author": "stephan",
+            "date": 1647266078375
+        },
+        {
+            "message": "added area-input, enable/disable and key-name output",
+            "author": "stephan",
+            "date": 1647442062066
+        }
+    ]
+}
