@@ -83,6 +83,7 @@ function tess()
         geom.verticesIndices = res.elements;
         geom.calculateNormals();
         geom.mapTexCoords2d();
+        geom.flipVertDir();
 
         outGeom.set(null);
         outGeom.set(geom);

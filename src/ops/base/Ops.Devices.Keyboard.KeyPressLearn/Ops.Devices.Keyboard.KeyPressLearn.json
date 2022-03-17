@@ -2,53 +2,52 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "key code",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "canvas only",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mod Key index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Mod Key",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Enabled",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Prevent Default",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "learn"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "on press"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "on release"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pressed",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Key"
             }
         ],
         "name": "Ops.Devices.Keyboard.KeyPressLearn"
@@ -96,5 +95,12 @@
     ],
     "relatedops": [
         ""
+    ],
+    "changelog": [
+        {
+            "message": "added key-name to extended title and outport",
+            "author": "stephan",
+            "date": 1647444317354
+        }
     ]
 }

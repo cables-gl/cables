@@ -195,9 +195,14 @@ Geometry.prototype.calcNormals = function (smooth)
  * @memberof Geometry
  * @description flip normals
  */
-Geometry.prototype.flipNormals = function ()
+Geometry.prototype.flipNormals = function (x, y, z)
 {
     let vec = vec3.create();
+
+    if (x == undefined)x = 1;
+    if (y == undefined)y = 1;
+    if (z == undefined)z = 1;
+
 
     for (let i = 0; i < this.vertexNormals.length; i += 3)
     {
@@ -205,6 +210,11 @@ Geometry.prototype.flipNormals = function ()
             this.vertexNormals[i + 0],
             this.vertexNormals[i + 1],
             this.vertexNormals[i + 2]);
+
+        vec[0] *= -x;
+        vec[1] *= -y;
+        vec[2] *= -z;
+
         vec3.normalize(vec, vec);
 
         this.vertexNormals[i + 0] = vec[0];
@@ -783,7 +793,7 @@ Geometry.prototype.mapTexCoords2d = function ()
 // -----------------
 
 // TODO : move this into "old" circle op
-Geometry.buildFromFaces = function (arr, name)
+Geometry.buildFromFaces = function (arr, name, optimize)
 {
     const vertices = [];
     const verticesIndices = [];
@@ -795,12 +805,13 @@ Geometry.buildFromFaces = function (arr, name)
         const c = arr[i + 2];
         const face = [-1, -1, -1];
 
-        for (let iv = 0; iv < vertices.length; iv += 3)
-        {
-            if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
-            if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
-            if (vertices[iv + 0] == c[0] && vertices[iv + 1] == c[1] && vertices[iv + 2] == c[2]) face[2] = iv / 3;
-        }
+        if (optimize)
+            for (let iv = 0; iv < vertices.length; iv += 3)
+            {
+                if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
+                if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
+                if (vertices[iv + 0] == c[0] && vertices[iv + 1] == c[1] && vertices[iv + 2] == c[2]) face[2] = iv / 3;
+            }
 
         if (face[0] == -1)
         {

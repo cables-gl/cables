@@ -1,15 +1,18 @@
-const inNum = op.inString("String", "");
+const inStr = op.inString("String", "");
 const outNum = op.outString("Result");
 
 op.setUiAttrib({ "widthOnlyGrow": true });
 
-inNum.onChange = () =>
+inStr.onChange = () =>
 {
-    const str = inNum.get();
+    let str = inStr.get();
     if (op.patch.isEditorMode())
     {
+        if (str === null)str = "null";
+        else if (str === undefined)str = "undefined";
+        else str = "\"" + (String(str) || "") + "\"";
         op.setTitle(str);
     }
 
-    outNum.set(inNum.get());
+    outNum.set(inStr.get());
 };

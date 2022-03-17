@@ -1,10 +1,11 @@
 const
     inStr = op.inString("SVG Path"),
     inStepSize = op.inFloat("Bezier Stepsize", 3),
-    outArr = op.outArray("Points A"),
-    outHoles = op.outArray("Points B");
+    inRescale = op.inFloat("Rescale", 1),
+    outGeom = op.outObject("Geometry", null, "geometry");
 
 inStepSize.onChange =
+inRescale.onChange =
 inStr.onChange = () =>
 {
     let str = inStr.get();
@@ -71,81 +72,67 @@ inStr.onChange = () =>
     let vertexCount = 0;
     const indices = [];
 
-    // function process(poly) {
-    //   // construct input for earcut
-    //   const coords = [];
-    //   const holes = [];
-    //   poly.points.forEach(({x, y}) => coords.push(x, y));
-    //   poly.children.forEach(child => {
-    //     // children's children are new, separate shapes
-    //     child.children.forEach(process);
-
-    //     holes.push(coords.length / 2);
-    //     child.points.forEach(({x, y}) => coords.push(x, y));
-    //   });
-
-    //   // add vertex data
-    //   vertexData.set(coords, vertexCount * 2);
-    //   // add index data
-    //   earcut(coords, holes).forEach(i => indices.push(i + vertexCount));
-    //   vertexCount += coords.length / 2;
-    // }
-    // root.forEach(process);
-
-    const coords = [];
-    const holes = [];
-
-    for (let i = 0; i < polys.length; i++)
+    function process(poly)
     {
-        const arr = [];
-        for (let j = 0; j < polys[i].points.length; j++)
+        // construct input for earcut
+        const coords = [];
+        const holes = [];
+
+        poly.points.forEach(({ x, y }) => coords.push(x, y));
+
+        poly.children.forEach((child) =>
         {
-            arr.push(polys[i].points[j].x, polys[i].points[j].y, 0);
-        }
-        coords.push(arr);
+            // children's children are new, separate shapes
+            child.children.forEach(process);
 
-        if (polys[i].children)
-        {
-            for (let j = 0; j < polys[i].children.length; j++)
-            {
-                const hole = [];
+            holes.push(coords.length / 2);
+            child.points.forEach(({ x, y }) => coords.push(x, y));
+        });
 
-                for (let k = 0; k < polys[i].children[j].points.length; k++)
-                {
-                    hole.push(
-                        polys[i].children[j].points[k].x,
-                        polys[i].children[j].points[k].y,
-                        0);
-                }
+        // add vertex data
+        vertexData.set(coords, vertexCount * 2);
+        // add index data
+        earcut(coords, holes).forEach((i) => indices.push(i + vertexCount));
+        vertexCount += coords.length / 2;
+    }
+    root.forEach(process);
 
-                holes.push(hole);
-                if (j > 0) coords.push([]);
-            }
-        }
+    const finalVertexData = new Float32Array(totalPoints * 3);
 
-        // if (!polys[i].children || polys[i].children.length == 0)holes.push([]);
+    let max = -99999;
 
-        // polys[i].children.forEach((child) =>
-        // {
-        //     const hole = [];
-        //     child.points.forEach(({ x, y }) => hole.push(x, y, 0));
+    for (let i = 0; i < finalVertexData.length / 3; i++)
+    {
+        finalVertexData[i * 3 + 0] = vertexData[i * 2 + 0];
+        finalVertexData[i * 3 + 1] = vertexData[i * 2 + 1] * -1;
+        max = Math.max(finalVertexData[i * 3 + 1], max);
 
-        //     holes.push(hole);
-        //     coords.push([]);
-        // });
-
-        // for(let i=holes.length;i<arr.length;i++) holes.push([]);
-
-        // if (polys[i].children.length == 0)console.log(arr);
-
-        // for(let i=coords.length;i<holes.length;i++) coords.push([]);
+        finalVertexData[i * 3 + 2] = 0;
     }
 
-    outArr.set(null);
-    outHoles.set(null);
+    let resc = inRescale.get();
+    if (resc != 0)
+    {
+        for (let i = 0; i < finalVertexData.length / 3; i++)
+        {
+            finalVertexData[i * 3 + 0] /= max * resc;
+            finalVertexData[i * 3 + 1] /= max * resc;
+        }
+    }
 
-    outArr.set(coords);
-    outHoles.set(holes);
+    let geom = new CGL.Geometry("circle");
+    geom.setVertices(finalVertexData);
+    geom.verticesIndices = indices;
+
+    geom.mapTexCoords2d();
+    geom.flipVertDir();
+    geom.calculateNormals();
+    geom.calcTangentsBitangents();
+
+    // console.log(vertexData);
+    // console.log(indices);
+
+    outGeom.set(geom);
 };
 
 const PATH_COMMANDS = {

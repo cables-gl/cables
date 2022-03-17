@@ -6,10 +6,13 @@ const preventDefault = op.inValueBool("Prevent Default");
 const learn = op.inTriggerButton("learn");
 const onPress = op.outTrigger("on press");
 const onRelease = op.outTrigger("on release");
-const outPressed = op.outValue("Pressed", false);
+const outPressed = op.outBoolNum("Pressed", false);
+const outKey = op.outString("Key");
 
 const cgl = op.patch.cgl;
 let learning = false;
+
+modKey.onChange = learnedKeyCode.onChange = updateKeyName;
 
 function onKeyDown(e)
 {
@@ -124,5 +127,17 @@ canvasOnly.onChange = function ()
     removeListeners();
     addListener();
 };
+
+function updateKeyName()
+{
+    let keyName = CABLES.keyCodeToName(learnedKeyCode.get());
+    const modKeyName = modKey.get();
+    if (modKeyName && modKeyName !== "none")
+    {
+        keyName = modKeyName.charAt(0).toUpperCase() + modKeyName.slice(1) + "-" + keyName;
+    }
+    op.setUiAttribs({ "extendTitle": keyName });
+    outKey.set(keyName);
+}
 
 addCanvasListener();

@@ -383,24 +383,38 @@ function savePortData()
         }
     });
 
-    let serializedPortsData = "";
+    let serializedPortsData = "{}";
     try
     {
         serializedPortsData = JSON.stringify(newPortsData);
     }
-    catch (e) {}
+    catch (e)
+    {
+        op.log("failed to stringify new port data", newPortsData);
+    }
     portsData.set(serializedPortsData);
 }
 
 const getOldPorts = () =>
 {
-    const oldPorts = JSON.parse(portsData.get());
+    const jsonData = portsData.get();
+    let oldPorts = {};
+    try
+    {
+        oldPorts = JSON.parse(jsonData);
+    }
+    catch (e)
+    {
+        op.log("failed to parse old port data", jsonData);
+    }
+
+    let oldPortsIn = {};
     let oldPortsOut = {};
+
     if (oldPorts.portsOut)
     {
         oldPortsOut = oldPorts.portsOut;
     }
-    let oldPortsIn = {};
     if (oldPorts.portsIn)
     {
         oldPortsIn = oldPorts.portsIn;

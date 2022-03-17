@@ -141,6 +141,8 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
+        // this.patch.config.canvas.antialias = false;
+
         if (!this.patch.config.canvas.forceWebGl1)
             this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
