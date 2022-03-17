@@ -15,6 +15,16 @@
             "message": "Ops.User.pandur.Opentype renamed to Ops.Dev.Opentype",
             "author": "pandur",
             "date": 1642927521851
+        },
+        {
+            "message": "Ops.Dev.Opentype renamed to Ops.Dev.OpentypeFont",
+            "author": "pandur",
+            "date": 1647541530515
+        },
+        {
+            "message": "Ops.Dev.OpentypeFont renamed to Ops.Dev.Opentype",
+            "author": "pandur",
+            "date": 1647541547697
         }
     ],
     "libs": [
