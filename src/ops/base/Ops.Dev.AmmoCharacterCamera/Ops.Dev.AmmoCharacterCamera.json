@@ -1,0 +1,88 @@
+{
+    "id": "0dca47aa-09e4-4b5d-b0d8-22390a950293",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647536355939
+        },
+        {
+            "message": "Ops.User.pandur.AmmoCharacterCamera renamed to Ops.Dev.AmmoCharacterCamera",
+            "author": "pandur",
+            "date": 1647541639855
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1647536365620,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Enable pointer lock",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Character Name"
+            },
+            {
+                "type": 0,
+                "name": "Mouse Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Allow Flying",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "isLocked",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Left"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Right"
+            },
+            {
+                "type": 0,
+                "name": "Dir X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.AmmoCharacterCamera"
+    }
+}
