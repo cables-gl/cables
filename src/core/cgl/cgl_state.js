@@ -654,16 +654,16 @@ const Context = function (_patch)
 
             found = true;
 
+
             this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
-            if (!this._loggedGlError)
-            {
-                this.patch.printTriggerStack();
-
-                this._log.stack("glerror");
-
-                this._loggedGlError = true;
-            }
+            if (this.canvas.id.indexOf("glGuiCanvas") == -1)
+                if (!this._loggedGlError)
+                {
+                    this.patch.printTriggerStack();
+                    this._log.stack("glerror");
+                    this._loggedGlError = true;
+                }
         }
         error = this.gl.getError();
 

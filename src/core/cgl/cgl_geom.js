@@ -359,6 +359,8 @@ Geometry.prototype.copy = function ()
  */
 Geometry.prototype.calculateNormals = function (options)
 {
+    // todo: should check angle of normals to get edges    https://community.khronos.org/t/calculating-accurate-vertex-normals/28152
+
     const u = vec3.create();
     const v = vec3.create();
     const n = vec3.create();
