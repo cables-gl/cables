@@ -267,6 +267,13 @@ Geometry.prototype.setPointVertices = function (verts)
     }
 };
 
+/**
+ * merge a different geometry into the this geometry
+ * @function merge
+ * @param {Geometry} geom
+ * @memberof Geometry
+ * @instance
+ */
 Geometry.prototype.merge = function (geom)
 {
     if (!geom) return;
@@ -286,6 +293,12 @@ Geometry.prototype.merge = function (geom)
     this.biTangents = UTILS.float32Concat(this.biTangents, geom.biTangents);
 };
 
+/**
+ * create a copy of the geometry
+ * @function copy
+ * @memberof Geometry
+ * @instance
+ */
 Geometry.prototype.copy = function ()
 {
     let i = 0;
@@ -338,6 +351,12 @@ Geometry.prototype.copy = function ()
     return geom;
 };
 
+/**
+ * Calculaten normals
+ * @function calculateNormals
+ * @memberof Geometry
+ * @instance
+ */
 Geometry.prototype.calculateNormals = function (options)
 {
     const u = vec3.create();
@@ -385,7 +404,6 @@ Geometry.prototype.calculateNormals = function (options)
         for (let i = 0; i < this.vertices.length; i += 9)
         {
             const triangle = [[this.vertices[i + 0], this.vertices[i + 1], this.vertices[i + 2]], [this.vertices[i + 3], this.vertices[i + 4], this.vertices[i + 5]], [this.vertices[i + 6], this.vertices[i + 7], this.vertices[i + 8]]];
-
             const nn = calcNormal(triangle);
             norms.push(nn[0], nn[1], nn[2], nn[0], nn[1], nn[2], nn[0], nn[1], nn[2]);
         }
@@ -396,7 +414,6 @@ Geometry.prototype.calculateNormals = function (options)
         const faceNormals = [];
 
         faceNormals.length = Math.floor(this.verticesIndices.length / 3);
-
 
         for (let i = 0; i < this.verticesIndices.length; i += 3)
         {
@@ -525,7 +542,6 @@ Geometry.prototype.calcTangentsBitangents = function ()
         const r = 1.0 / (s1 * t2 - s2 * t1);
 
         vec3.set(sdir, (t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
-
         vec3.set(tdir, (s1 * x2 - s2 * x1) * r, (s1 * y2 - s2 * y1) * r, (s1 * z2 - s2 * z1) * r);
 
         tempVertices[i1] = sdir;
@@ -560,11 +576,9 @@ Geometry.prototype.calcTangentsBitangents = function ()
         vec3.subtract(temp2, tempVert, temp1);
 
         vec3.normalize(normalized, temp2);
-
         vec3.cross(crossPd, normal, tempVert);
 
         const intermDot = vec3.dot(crossPd, tempVertices[vert + vertexCount]);
-
         const w = 1.0;// intermDot < 0.0 ? -1.0 : 1.0;
 
         vec3.scale(tan, normalized, 1 / w);
@@ -600,10 +614,8 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     const newTangents = [];
     const newBiTangents = [];
 
-
     let count = 0;
     let i = 0;
-    // this.vertexNormals = this.vertexNormals || [];
 
     for (i = 0; i < this.verticesIndices.length; i += 3)
     {
@@ -628,7 +640,6 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
                 this.biTangents[this.verticesIndices[i + 0] * 3 + 0],
                 this.biTangents[this.verticesIndices[i + 0] * 3 + 1],
                 this.biTangents[this.verticesIndices[i + 0] * 3 + 2]);
-
 
         if (!this.texCoords)
         {
@@ -701,7 +712,6 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
                 this.biTangents[this.verticesIndices[i + 2] * 3 + 1],
                 this.biTangents[this.verticesIndices[i + 2] * 3 + 2]);
 
-
         if (!this.texCoords)
         {
             newTexCoords.push(0, 0);
@@ -731,11 +741,10 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 Geometry.prototype.calcBarycentric = function ()
 {
     this.barycentrics.length = this.vertices.length;
-    let i = 0;
-    for (i = 0; i < this.vertices.length; i++) this.barycentrics[i] = 0;
+    for (let i = 0; i < this.vertices.length; i++) this.barycentrics[i] = 0;
 
     let count = 0;
-    for (i = 0; i < this.vertices.length; i += 3)
+    for (let i = 0; i < this.vertices.length; i += 3)
     {
         this.barycentrics[i + count] = 1;
         count++;
