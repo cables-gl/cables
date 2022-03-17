@@ -1,9 +1,7 @@
-
 const addSpacesCheckBox = op.inBool("add spaces", false),
     newLinesCheckBox = op.inBool("new lines", false),
     stringPorts = [],
     result = op.outString("concat string");
-
 
 stringPorts.onChange = addSpacesCheckBox.onChange =
 newLinesCheckBox.onChange = update;
@@ -28,7 +26,7 @@ function update()
     {
         const inString = stringPorts[i].get();
         if (!inString) continue;
-        if (space) str += " ";
+        if (i > 0 && space) str += " ";
         if (i > 0 && newLinesCheckBox.get()) nl = "\n";
         str += nl;
         str += inString;
