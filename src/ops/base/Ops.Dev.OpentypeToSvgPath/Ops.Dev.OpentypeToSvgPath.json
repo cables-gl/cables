@@ -23,6 +23,11 @@
             {
                 "type": 5,
                 "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "subType": "number"
             }
         ],
         "portsOut": [
