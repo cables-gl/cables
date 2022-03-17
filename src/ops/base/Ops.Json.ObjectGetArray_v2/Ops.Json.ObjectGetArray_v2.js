@@ -17,7 +17,6 @@ key.onChange = function ()
 
 function update()
 {
-    console.log(data.get());
     result.set(null);
     const dat = data.get();
     const k = key.get();
