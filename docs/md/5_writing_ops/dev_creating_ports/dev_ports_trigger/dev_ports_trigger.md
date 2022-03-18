@@ -10,26 +10,26 @@ Trigger ports can also be triggered under certain conditions <br>
 For example the `Mouse op` sends a trigger out of the `click port` once a user has clicked in the preview pane
 
 ```javascript
-//strict mode allows us to write cleaner code
+// strict mode allows us to write cleaner code
 "use strict";
 
-//Create a input port of the type Trigger
+// Create a input port of the type Trigger
 const inExecute  = op.inTrigger("Trigger In",{"display": "button"});
-//create a button in UI panel of the op which can be clicked
+// create a button in UI panel of the op which can be clicked
 const inButton   = op.inTriggerButton("Press me");
 
-//Create a output port of the type Trigger
+// Create a output port of the type Trigger
 const outTrigger = op.outTrigger("Trigger out");
 
-//when input port is triggered call the function 'update'
+// when input port is triggered call the function 'update'
 inExecute.onTriggered = update;
-//if user presses the button in the op pane call function 'update'
+// if user presses the button in the op pane call function 'update'
 inButton.onTriggered = update;
 
-//this function runs every time the input port is triggered
+// this function runs every time the input port is triggered
 function update()
 {
-    //send a trigger out of the output port
+    // send a trigger out of the output port
     outTrigger.trigger();
 }
 ```

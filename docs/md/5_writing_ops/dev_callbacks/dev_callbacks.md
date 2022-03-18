@@ -15,7 +15,7 @@ To be  informed of port-value-changes, function-triggers (also see [Ports](../de
 
 Can be implemented for the following port types:
 
-**Value
+**Number
 String
 Boolean
 Array
@@ -61,30 +61,35 @@ myPort.onLinkChanged = function()
 
 ### init
 
-In case you have some initialisation code which depends on the ports being set you can place it inside an `init` function. Here you can be sure that the input port is set correctly (when the user enters a value in the op parameters or when the port is connected to another op).
+In case you have some initialisation code for your op you can place it inside an `init` function or just plainly into
+the op-code outside of any callbacks or functions.
 
-When you inspect existing ops by pressing the `View Code` button in the op parameters, you will notice that most ops don’t use this function. This is because most ops don’t depend on their input ports and can be initialised without the input ports being set.
+When you inspect existing ops by pressing the `View Code` button in the op parameters, you will notice that most ops don’t use this function, as
+op init is done asynchronously and most of the time it's better to just initalize outside of callbacks and handle port-value-changes in
+the corresponding `onChange`;
 
-
+Please be aware that this function will be called twice on patch load. If you need to initialize a variable global to the op, 
+you might be better  off doing that outside of any callback. If you do this in `init`, create a variable, set them null and check for that.
 
 ```javascript
-var inPort = op.inValueFloat('In Value');
+const inPort = op.inFloat('In Value');
 
 op.init = function()
 {
-	var value = inPort.get();
-    // your code which depends on inPort being set goes here
+	const value = inPort.get();
 }
 ```
 
 ### onLoaded
 
-Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. You normally won't need this as op-specific init-code can just be put in your op-code without a callback. `op.onLoaded` is **not** called when the patch has just been added to the patch, only when the patch is loaded, so it is better to use `init` (see on top).
+Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. 
+You normally won't need this, as op-specific init-code can just be put in your op-code without a callback. 
+`op.onLoaded` is **not** called when the op has just been added to the patch, only when the patch is loaded.
 
 ```javascript
 op.onLoaded = function()
 {
-	// do something
+	// do something on loading
 };
 ```
 ### onDelete
@@ -92,10 +97,10 @@ op.onLoaded = function()
 If your op needs to clean up after itself when it is deleted from the patch you can implement `onDelete`:
 
 ```javascript
-op.onDelete( function()
+op.onDelete = function()
 {
 	// do some manual cleanup here
-});
+};
 ```
 
 ### op.setUiError
@@ -103,9 +108,9 @@ Sometimes you will want to create a UI element to show if there is an error or a
 
 To do this use the following format:
 ```javascript
-if(condition) op.setUiError("error ID/must be unique per error","Error message to show in UI",0);
-//this resets the error message so it disappears
-else op.setUiError("error ID",null);
+if(condition) op.setUiError("errorID", "error ID/must be unique per error","Error message to show in UI",0);
+// this resets the error message so it disappears
+else op.setUiError("errorID",null);
 ```
 The number in the last part of the function defines what kind of error is shown
 0 - hint / grey color
@@ -116,9 +121,9 @@ The number in the last part of the function defines what kind of error is shown
 <br>
 example code to show an error:
 ```javascript
-//create a port of the type boolean
+// create a port of the type boolean
 const switch1=op.inBool("Error",false);
-//if port changes run this function
+// if port changes run this function
 switch1.onChange=function()
 {
 	if(switch1.get()) op.setUiError("error1","switch 1 is true",2);
@@ -147,7 +152,7 @@ Do **not** use `console.log()`!
 
 ### canvas resize
 
-Whenever the canvas is resized `onResize` gets called.
+Whenever the canvas is resized a `resize` event is fired, you can add a listener to this event to handle canvas-size changes in your ops.
 
 ```javascript
 op.patch.cgl.addEventListener("resize",onResize);

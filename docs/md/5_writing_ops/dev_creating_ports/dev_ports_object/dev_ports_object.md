@@ -16,7 +16,7 @@ These objects can be as complex as necessary.
 Code example below:
 
 ```javascript
-
+// strict mode allows us to write cleaner code
 "use strict";
 
 /*
@@ -32,27 +32,27 @@ to see the following code:
 }
 */
 
-//Create a input port of the type value
+// Create a input port of the type value
 const inObj  = op.inObject("Object in");
-//Create a output port of the type value
+// Create a output port of the type value
 const outKeyVal=op.outString("Test");
 
-//when input port changes call the function 'update'
+// when input port changes call the function 'update'
 inObj.onChange=update;
 
-//this function runs every time the input port changes
+// this function runs every time the input port changes
 function update()
 {
-    //if the inObj port can't read anything then
-    //the output port is set to unknown
+    // if the inObj port can't read anything then
+    // the output port is set to unknown
     if(!inObj.get()) outKeyVal.set( 'unknown' );
-    //if the key value coming in matches 'hello'
-    //then get the key value associated with the in port
-    //in this case it's the value 'world'
-        else outKeyVal.set( inObj.get().hello );
+    // if the key value coming in matches 'hello'
+    // then get the key value associated with the in port
+    // in this case it's the value 'world'
+    else outKeyVal.set( inObj.get().hello );
 
-    //try changing the 'hello' to 'one' to get the
-    //other value
+    // try changing the 'hello' to 'one' to get the
+    // other value
 
 }
 ```

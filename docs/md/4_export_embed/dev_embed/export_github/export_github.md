@@ -63,6 +63,8 @@ You can choose how the contents of your export should look, the defaults should 
 If your patch uses uploaded files (textures, audio, data, ...) choose one of the following options to have
 these files included in the export.
 
+**Use "All" if you are generating filenames on the fly (iterators, arrays, ...) to make sure all files are available in the Export**
+
 - Automatic: Tries to guess which files are used in the patch and includes only used assets.
 - All: Includes all the assets uploaded to the patch or referenced in there, this is the safe option.
 - None: Does not include any assets in the export, smaller download but some things might not work in the export
@@ -74,5 +76,5 @@ these files included in the export.
 
 ### Compatibility
 
-- Modern browsers: does nothing to make sure your patch runs in every browser
+- Modern browsers: exports your patch as is
 - Old browsers: uses [babel](https://babeljs.io/) to try make your patch run on older browsers, in general should not be needed anymore

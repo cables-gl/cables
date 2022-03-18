@@ -21,18 +21,18 @@ When you embed a patch into your website (see [Docs: Embedding](https://dev.cabl
 
 short version:
 
-```
+```javascript
     CABLES.patch.setVariable("IsInteracting",true);
 ```
 
 long version (get the variable object)
 
 ```javascript
-var myVar = CABLES.patch.getVar("IsInteracting");
+const myVar = CABLES.patch.getVar("IsInteracting");
 
 if(myVar) {
     // get the current value
-    var currentValue = myVar.getValue();
+    const currentValue = myVar.getValue();
 
     // change the value
     myVar.setValue(true);
@@ -46,7 +46,7 @@ if(myVar) {
 You can add a listener to a variable which gets called every time the variable changes:
 
 ```javascript
-var myVar = CABLES.patch.getVar("IsInteracting");
+const myVar = CABLES.patch.getVar("IsInteracting");
 
 if(myVar) {
 	// will be called every time value changes
@@ -81,7 +81,7 @@ If you want to test certain aspects of your patch which involve getting / settin
 then enter:
 
 ```javascript
-var myCablesVar = gui.corePatch().getVar('name of your variable');
+const myCablesVar = gui.corePatch().getVar('name of your variable');
 myCablesVar.setValue(123);
 console.log(myCablesVar.getValue()); // prints 123
 ```

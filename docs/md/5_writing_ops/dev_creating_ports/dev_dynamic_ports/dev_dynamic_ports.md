@@ -26,7 +26,7 @@ This is an op with one dynamic port which can be linked to a value or object por
 
 ```javascript
 
-var dynPort = op.inDynamic(
+const dynPort = op.inDynamic(
   "My Dynamic Port",
   [
    CABLES.OP_PORT_TYPE_VALUE,

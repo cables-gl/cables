@@ -12,22 +12,24 @@ This will also create a checkbox which can be clicked<br>
 ![Button](../img/creating_ports_boolean_checkbox_ui_pane.png)
 
 ```javascript
-//strict mode allows us to write cleaner code
+// strict mode allows us to write cleaner code
 "use strict";
 
-//Create a input port of the type Boolean
+// Create a input port of the type Boolean
 const inBoolean = op.inBool("Boolean in");
 
 //Create a output port of the type value
 const outBoolean = op.outBoolNum("Boolean out");
+// Create a output port of the type value
+const outBoolean = op.outBool("Boolean out");
 
-//when input port changes call the function 'update'
+// when input port changes call the function 'update'
 inBoolean.onChange = update;
 
-//this function runs every time the input port changes
+// this function runs every time the input port changes
 function update()
 {
-    //set the ouput port to the value of the input port
+    // set the ouput port to the value of the input port
     outBoolean.set(inBoolean.get());
 }
 ```

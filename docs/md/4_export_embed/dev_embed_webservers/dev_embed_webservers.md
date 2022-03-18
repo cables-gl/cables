@@ -76,7 +76,7 @@ cd /Users/yourname/Downloads/MyPatch
 
 And start the local web server:
 
-```
+```bash
 http-server
 ```
 

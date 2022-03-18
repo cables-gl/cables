@@ -8,13 +8,13 @@ Different port examples below.
 
 Floating point number ports in and out:
 ```javascript
-const inFloat = op.inFloat("float in");
-const outNumber = op.outNumber("number out");
+const inFloat = op.inFloat("Float in");
+const outNumber = op.outNumber("Number out");
 ```
 Integer number ports in and out:
 ```javascript
-const inInt = op.inInt("int in");
-const outNumber = op.outNumber("number out");
+const inInt = op.inInt("Int in");
+const outNumber = op.outNumber("Number out");
 ```
 String ports in and out:
 ```javascript
@@ -30,8 +30,8 @@ const outBoolean = op.outBoolNum("Boolean out");
 
 Trigger ports in and out:
 ```javascript
-const execute = op.inTrigger("Trigger In");
-const trigger = op.outTrigger("Trigger out");
+const inTrigger = op.inTrigger("Trigger In");
+const outTrigger = op.outTrigger("Trigger out");
 ```
 Array ports in and out:
 ```javascript
@@ -55,8 +55,8 @@ The code you write inside your op will be executed once the op is added to the p
 All your initialisation-code should be in the root of your code, e.g.
 
 ```javascript
-var inPort = op.inFloat("My Input Port");
-var outPort = op.outNumber("My Output Port");
+const inPort = op.inFloat("My Input Port");
+const outPort = op.outNumber("My Output Port");
 
 // put your initialisation code here
 ...
@@ -98,7 +98,7 @@ If your op has one main-port which is needed to trigger it, call it `Execute`, i
 
 
 ```javascript
-var innerRadius = op.inFloat("Inner Radius");
+const innerRadius = op.inFloat("Inner Radius");
 ```
 
 # Op Documentation

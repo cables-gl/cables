@@ -3,12 +3,12 @@ There are 2 methods for this:
 
 In the Javascript code (inside the exported `index.html` file) add the following at the end:
 
-```Javascript
+```javascript
 function preventBehavior(e) {
   e.preventDefault(); 
 };
 
-var canvas = document.getElementById('glcanvas');
+const canvas = document.getElementById('glcanvas');
 canvas.addEventListener('touchmove', preventBehavior, false);
 ```
 
