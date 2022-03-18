@@ -25,7 +25,7 @@ const outString = op.outString("String out");
 Boolean ports in and out:
 ```javascript
 const inBoolean = op.inBool("Boolean in");
-const outBoolean = op.outBool("Boolean out");
+const outBoolean = op.outBoolNum("Boolean out");
 ```
 
 Trigger ports in and out:

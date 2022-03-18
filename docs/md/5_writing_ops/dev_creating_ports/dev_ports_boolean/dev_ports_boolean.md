@@ -19,7 +19,7 @@ This will also create a checkbox which can be clicked<br>
 const inBoolean = op.inBool("Boolean in");
 
 //Create a output port of the type value
-const outBoolean = op.outBool("Boolean out");
+const outBoolean = op.outBoolNum("Boolean out");
 
 //when input port changes call the function 'update'
 inBoolean.onChange = update;
