@@ -8,9 +8,13 @@ Our editor also includes some handy operations from within the **Files** manager
 ## Supported file types:
 
 Image/Video: `.exr`, `.hdr`,`.png`, `.jpg`, `.jpeg`, `.webp`,`.webm`, `.svg`, `.mp4`,`.mpg`,`.m4a`,`.mkv`,`.mov`
+
 Audio: `.ogg`, `.mp3`, `.aac`,`.wav`
+
 Fonts: `.ttf`,`.woff`,`.woff2`,`.otf`
-3D models: `.glb`, `.fbx`, `.dae`(check)
+
+3D models: `.glb`, `.fbx`, `.dae`
+
 MIDI: `.mid`
 
 
