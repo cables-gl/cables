@@ -1,0 +1,144 @@
+{
+    "id": "fb2ac304-5c36-419c-ba71-cdf43aed8a53",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "kikohs",
+            "date": 1647361182194
+        }
+    ],
+    "authorName": "kikohs",
+    "created": 1647614687158,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Input Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Locale index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Locale string"
+            },
+            {
+                "type": 0,
+                "name": "Style index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Minimum Integer Digits",
+                "group": "Format",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Minimum Fraction Digits",
+                "group": "Format",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Maximum Fraction Digits",
+                "group": "Format",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Minimum Significant Digits",
+                "group": "Significant Digits",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Maximum Significant Digits",
+                "group": "Significant Digits",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Use Grouping",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Currency Name",
+                "group": "Currency"
+            },
+            {
+                "type": 0,
+                "name": "Currency Display index",
+                "group": "Currency",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Formatted Number"
+            },
+            {
+                "type": 0,
+                "name": "Has error",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.stephan.NumberFormatter"
+    },
+    "summary": "Format a number to a string in the given locale and format",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Locale string",
+                "text": "A string with a BCP 47 language tag"
+            },
+            {
+                "name": "Style index",
+                "text": "The formatting style to use"
+            },
+            {
+                "name": "Minimum Integer Digits",
+                "text": "The minimum number of integer digits to use. Possible values are from 1 to 21"
+            },
+            {
+                "name": "Minimum Fraction Digits",
+                "text": "The minimum number of fraction digits to use. Possible values are from 0 to 20"
+            },
+            {
+                "name": "Maximum Fraction Digits",
+                "text": "The maximum number of fraction digits to use. Possible values are from 0 to 20"
+            },
+            {
+                "name": "Maximum Significant Digits",
+                "text": "The minimum number of significant digits to use. Possible values are from 1 to 21"
+            },
+            {
+                "name": "Minimum Significant Digits",
+                "text": "The maximum number of significant digits to use. Possible values are from 1 to 21"
+            },
+            {
+                "name": "Use Grouping",
+                "text": "Whether to use grouping separators, such as thousands separators."
+            },
+            {
+                "name": "Currency Name",
+                "text": "The currency to use in currency formatting. Possible values are the ISO 4217 currency codes."
+            },
+            {
+                "name": "Currency Display index",
+                "text": "How to display the currency in currency formatting"
+            }
+        ]
+    },
+    "exampleProjectId": ""
+}
