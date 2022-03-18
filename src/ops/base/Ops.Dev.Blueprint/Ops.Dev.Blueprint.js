@@ -297,6 +297,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 {
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
+        let listenerId;
         const cb = () =>
         {
             const parentSubPatch = op.patch.ops.find((subOp) =>
@@ -315,12 +316,12 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
             op.patch.removeEventListener(listenerId);
         };
 
-        const listenerId = op.patch.addEventListener("patchLoadEnd", cb);
 
         if (editorMode)
         {
             gui.serverOps.loadProjectLibs(data, () =>
             {
+                listenerId = op.patch.addEventListener("patchLoadEnd", cb);
                 op.patch.deSerialize(data, false);
                 const originalSubPatchId = gui.patchView.getCurrentSubPatch();
                 // gui.patchView.setCurrentSubPatch(subPatchId);
@@ -329,6 +330,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
         }
         else
         {
+            listenerId = op.patch.addEventListener("patchLoadEnd", cb);
             op.patch.deSerialize(data, false);
         }
     }

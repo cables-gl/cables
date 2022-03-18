@@ -1,6 +1,7 @@
 const
     inExec = op.inTrigger("Update"),
     inRadius = op.inFloat("Radius", 1),
+    inStyle = op.inSwitch("View", ["3rd Person", "1st Person"], "3rd Person"),
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
@@ -9,16 +10,18 @@ const
     inReset = op.inTriggerButton("Reset"),
     inActivate = op.inTriggerButton("Activate"),
 
+    inMoveXP = op.inBool("Move X+", false),
+    inMoveXM = op.inBool("Move X-", false),
+    inMoveYP = op.inBool("Move Y+", false),
+    inMoveYM = op.inBool("Move Y-", false),
+    inMoveZP = op.inBool("Move Z+", false),
+    inMoveZM = op.inBool("Move Z-", false),
 
-    inMoveXP=op.inBool("Move X+",false),
-    inMoveXM=op.inBool("Move X-",false),
-    inMoveYP=op.inBool("Move Y+",false),
-    inMoveYM=op.inBool("Move Y-",false),
-    inMoveZP=op.inBool("Move Z+",false),
-    inMoveZM=op.inBool("Move Z-",false),
+    inDirX = op.inFloat("Dir X"),
+    inDirY = op.inFloat("Dir Y"),
+    inDirZ = op.inFloat("Dir Z"),
 
-    inSpeed=op.inFloat("Speed",1),
-
+    inSpeed = op.inFloat("Speed", 1),
 
     inTest = op.inTriggerButton("Test"),
     next = op.outTrigger("next"),
@@ -69,18 +72,15 @@ inReset.onTriggered = () =>
     removeBody();
 };
 
-
-let btVelocity=null
-inTest.onTriggered=()=>
+let btVelocity = null;
+inTest.onTriggered = () =>
 {
-
-    if(!btVelocity)
+    if (!btVelocity)
     {
-        btVelocity=new Ammo.btVector3(1,0,0);
+        btVelocity = new Ammo.btVector3(1, 0, 0);
     }
     body.activate();
     body.setLinearVelocity(btVelocity);
-
 };
 
 function updateBodyMeta()
@@ -110,7 +110,6 @@ function setup()
 
     let colShape = new Ammo.btSphereShape(inRadius.get());
 
-
     colShape.setMargin(0.05);
 
     let localInertia = new Ammo.btVector3(0, 0, 0);
@@ -118,6 +117,8 @@ function setup()
 
     let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
+    body.setDamping(0.7, 0.01);
+
     world.addRigidBody(body);
 
     updateBodyMeta();
@@ -139,7 +140,6 @@ function renderTransformed()
         mat4.identity(cgl.mMatrix);
 
         let scale = [inRadius.get(), inRadius.get(), inRadius.get()];
-
 
         mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
         mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
@@ -179,30 +179,41 @@ function update()
 
     body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
-
-    let vx=0,vy=0,vz=0.0;
-
-    if(inMoveXM.get()) vx=-inSpeed.get();
-    if(inMoveXP.get()) vx=inSpeed.get();
-
-    if(inMoveZP.get()) vz=-inSpeed.get();
-    if(inMoveZM.get()) vz=inSpeed.get();
-
-    if(inMoveYP.get()) vy=inSpeed.get();
-
-
-    if(!btVelocity)
+    if (!btVelocity)
     {
-        btVelocity=new Ammo.btVector3(0,0,0);
-    }
-    if(vx!=0||vy!=0||vz!=0)
-    {
-        btVelocity.setValue(vx,vy,vz)
-
-        body.setLinearVelocity(btVelocity);
+        btVelocity = new Ammo.btVector3(0, 0, 0);
     }
 
+    let vx = 0, vy = 0, vz = 0.0;
 
+    if (inStyle.get() == "3rd Person")
+    {
+        if (inMoveXM.get()) vx = -inSpeed.get();
+        if (inMoveXP.get()) vx = inSpeed.get();
+
+        if (inMoveZP.get()) vz = -inSpeed.get();
+        if (inMoveZM.get()) vz = inSpeed.get();
+
+        if (inMoveYP.get()) vy = inSpeed.get();
+
+        if (vx != 0 || vy != 0 || vz != 0)
+        {
+            btVelocity.setValue(vx, vy, vz);
+            body.setLinearVelocity(btVelocity);
+        }
+    }
+    else
+    {
+        let speed = inSpeed.get();
+        if (inMoveZP.get()) btVelocity.setValue(inDirX.get() * speed, inDirY.get() * speed, inDirZ.get() * speed);
+        if (inMoveZM.get()) btVelocity.setValue(-inDirX.get() * speed, -inDirY.get() * speed, -inDirZ.get() * speed);
+
+        if (inMoveZP.get() || inMoveZM.get())
+        {
+            // console.log(-inDirX.get(), -inDirY.get(), -inDirZ.get());
+            body.setLinearVelocity(btVelocity);
+        }
+    }
 
     if (inMass.get() == 0 || doResetPos)
     {

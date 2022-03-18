@@ -25,6 +25,11 @@
             },
             {
                 "type": 0,
+                "name": "View index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Size X",
                 "subType": "number"
             },
@@ -87,6 +92,21 @@
             },
             {
                 "type": 0,
+                "name": "Dir X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
@@ -105,7 +125,7 @@
                 "name": "Transformed"
             }
         ],
-        "name": "Ops.User.pandur.AmmoCharacter"
+        "name": "Ops.Dev.AmmoCharacter"
     },
     "authorName": "pandur",
     "created": 1647282185058

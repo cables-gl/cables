@@ -10,7 +10,11 @@ inStr.onChange = () =>
 {
     let str = inStr.get();
 
-    if (!str || str.length < 2) return;
+    if (!str || str.length < 2)
+    {
+        outGeom.set(null);
+        return;
+    }
 
     str = str.replace(/([A-Z,a-z])/g, " $1 ");
 

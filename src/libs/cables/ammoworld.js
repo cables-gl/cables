@@ -95,12 +95,21 @@ const AmmoWorld = class extends CABLES.EventTarget
     setBodyMeta(body, meta)
     {
         if (body.getUserIndex() == 0)body.setUserIndex(++this._countIndex);
+        meta.body = body;
         this._bodymeta[body.getUserIndex()] = meta;
     }
 
     getBodyMeta(body)
     {
         return this._bodymeta[body.getUserIndex()];
+    }
+
+    getBodyByName(n)
+    {
+        for (let i in this._bodymeta)
+        {
+            if (this._bodymeta[i].name == n) return this._bodymeta[i].body;
+        }
     }
 
     numBodies()
