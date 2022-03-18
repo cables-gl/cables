@@ -35,7 +35,7 @@ function update()
         outVal.set(v);
         if (hasError)
         {
-            op.setUiEerror("noanim", null);
+            op.setUiError("noanim", null);
             hasError = false;
 
             animVal.anim.onChange = animChange;
@@ -43,7 +43,7 @@ function update()
     }
     else
     {
-        op.setUiEerror("noanim", "Port \"animVal\" should be animated");
+        op.setUiError("noanim", "Port \"animVal\" should be animated");
         hasError = true;
     }
 }
