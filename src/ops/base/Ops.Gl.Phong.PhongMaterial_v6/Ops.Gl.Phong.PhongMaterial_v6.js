@@ -220,11 +220,12 @@ const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
 const inEmissiveMaskIntensity = op.inFloatSlider("Emissive Mask Intensity", 1);
 const inEnvMapIntensity = op.inFloatSlider("Env Map Intensity", 1);
+const inEnvMapBlend = op.inSwitch("Env Map Blend", ["Add", "Multiply", "Mix"], "Add");
 const inLuminanceMaskIntensity = op.inFloatSlider("Env Mask Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
 op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
-op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEmissiveMaskIntensity, inEnvMapIntensity, inLuminanceMaskIntensity]);
+op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvMapBlend, inEmissiveMaskIntensity, inEnvMapIntensity, inLuminanceMaskIntensity]);
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
@@ -546,6 +547,7 @@ function updateEnvTexture()
         envTextureUniform = null;
         inEnvMapIntensityUni = null;
     }
+
     updateEnvTextureLater = false;
 }
 
@@ -574,25 +576,21 @@ function updateLuminanceMaskTexture()
 
 // TEX OPACITY
 
-function updateAlphaMaskMethod()
+function updateDefines()
 {
-    if (alphaMaskSource.get() == "Alpha Channel") shader.define("ALPHA_MASK_ALPHA");
-    else shader.removeDefine("ALPHA_MASK_ALPHA");
+    shader.toggleDefine("ENV_BLEND_ADD", inEnvMapBlend.get() == "Add");
+    shader.toggleDefine("ENV_BLEND_MUL", inEnvMapBlend.get() == "Multiply");
+    shader.toggleDefine("ENV_BLEND_MIX", inEnvMapBlend.get() == "Mix");
 
-    if (alphaMaskSource.get() == "Luminance") shader.define("ALPHA_MASK_LUMI");
-    else shader.removeDefine("ALPHA_MASK_LUMI");
-
-    if (alphaMaskSource.get() == "R") shader.define("ALPHA_MASK_R");
-    else shader.removeDefine("ALPHA_MASK_R");
-
-    if (alphaMaskSource.get() == "G") shader.define("ALPHA_MASK_G");
-    else shader.removeDefine("ALPHA_MASK_G");
-
-    if (alphaMaskSource.get() == "B") shader.define("ALPHA_MASK_B");
-    else shader.removeDefine("ALPHA_MASK_B");
+    shader.toggleDefine("ALPHA_MASK_ALPHA", alphaMaskSource.get() == "Alpha Channel");
+    shader.toggleDefine("ALPHA_MASK_LUMI", alphaMaskSource.get() == "Luminance");
+    shader.toggleDefine("ALPHA_MASK_R", alphaMaskSource.get() == "R");
+    shader.toggleDefine("ALPHA_MASK_G", alphaMaskSource.get() == "G");
+    shader.toggleDefine("ALPHA_MASK_B", alphaMaskSource.get() == "B");
 }
 
-alphaMaskSource.onChange = updateAlphaMaskMethod;
+inEnvMapBlend.onChange = updateDefines;
+alphaMaskSource.onChange = updateDefines;
 
 function updateAlphaTexture()
 {
@@ -615,7 +613,7 @@ function updateAlphaTexture()
         alphaMaskSource.setUiAttribs({ "greyout": true });
         discardTransPxl.setUiAttribs({ "greyout": true });
     }
-    updateAlphaMaskMethod();
+    updateDefines();
 }
 
 discardTransPxl.onChange = function ()

@@ -238,6 +238,12 @@
             },
             {
                 "type": 0,
+                "name": "Env Map Blend index",
+                "group": "Texture Intensities",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Env Mask Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
@@ -245,6 +251,7 @@
             {
                 "type": 0,
                 "name": "Alpha Mask Source index",
+                "group": "Opacity Texture",
                 "subType": "integer"
             }
         ],
