@@ -1,20 +1,14 @@
-
 let gltfMesh = class
 {
     constructor(name, prim, gltf, finished)
     {
-
-
-
-        this.POINTS=0;
-        this.LINES=1;
-        this.LINE_LOOP=2;
-        this.LINE_STRIP=3;
-        this.TRIANGLES=4;
-        this.TRIANGLE_STRIP=5;
-        this.TRIANGLE_FAN=6;
-
-
+        this.POINTS = 0;
+        this.LINES = 1;
+        this.LINE_LOOP = 2;
+        this.LINE_STRIP = 3;
+        this.TRIANGLES = 4;
+        this.TRIANGLE_STRIP = 5;
+        this.TRIANGLE_FAN = 6;
 
         this.test = 0;
         this.name = name;
@@ -23,39 +17,34 @@ let gltfMesh = class
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
-        this.primitive=4;
-        if(prim.hasOwnProperty("mode"))this.primitive=prim.mode;
+        this.primitive = 4;
+        if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
 
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
 
         gltf.loadingMeshes = gltf.loadingMeshes || 0;
         gltf.loadingMeshes++;
 
-        this.materialJson=
-            this._matPbrMetalness=
-            this._matPbrRoughness=
-            this._matDiffuseColor=null;
+        this.materialJson =
+            this._matPbrMetalness =
+            this._matPbrRoughness =
+            this._matDiffuseColor = null;
 
-
-
-        if(gltf.json.materials)
+        if (gltf.json.materials)
         {
-            if(this.material!=-1)this.materialJson=gltf.json.materials[this.material];
+            if (this.material != -1) this.materialJson = gltf.json.materials[this.material];
 
-            if(this.materialJson && this.materialJson.pbrMetallicRoughness)
+            if (this.materialJson && this.materialJson.pbrMetallicRoughness)
             {
+                if (this.materialJson.pbrMetallicRoughness.baseColorFactor)
+                    this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
 
-                if( this.materialJson.pbrMetallicRoughness.baseColorFactor)
-                    this._matDiffuseColor=this.materialJson.pbrMetallicRoughness.baseColorFactor;
+                this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
 
-
-                this._matDiffuseColor=this.materialJson.pbrMetallicRoughness.baseColorFactor;
-
-                this._matPbrMetalness=this.materialJson.pbrMetallicRoughness.metallicFactor||null;
-                this._matPbrRoughness=this.materialJson.pbrMetallicRoughness.roughnessFactor||null;
+                this._matPbrMetalness = this.materialJson.pbrMetallicRoughness.metallicFactor || null;
+                this._matPbrRoughness = this.materialJson.pbrMetallicRoughness.roughnessFactor || null;
             }
         }
-
 
         if (gltf.useDraco && prim.extensions.KHR_draco_mesh_compression)
         {
@@ -138,35 +127,34 @@ let gltfMesh = class
         }
     }
 
+    _linearToSrgb(x)
+    {
+        if (x <= 0)
+            return 0;
+        else if (x >= 1)
+            return 1;
+        else if (x < 0.0031308)
+            return x * 12.92;
+        else
+            return Math.pow(x, 1 / 2.2) * 1.055 - 0.055;
+    }
 
-
-	_linearToSrgb(x) {
-		if (x <= 0)
-			return 0;
-		else if (x >= 1)
-			return 1;
-		else if (x < 0.0031308)
-			return x * 12.92;
-		else
-			return Math.pow(x, 1 / 2.2) * 1.055 - 0.055;
-	}
-
-    setGeomVertCols(tgeom,arr)
+    setGeomVertCols(tgeom, arr)
     {
         if (arr instanceof Float32Array)
         {
-            let div=false;
+            let div = false;
             for (let i = 0; i < arr.length; i++)
             {
-                if(arr[i]>1)
+                if (arr[i] > 1)
                 {
-                    div=true;
-                    continue
+                    div = true;
+                    continue;
                 }
             }
 
-            if(div)
-            for (let i = 0; i < arr.length; i++)  arr[i] /= 65535;
+            if (div)
+                for (let i = 0; i < arr.length; i++) arr[i] /= 65535;
 
             tgeom.vertexColors = arr;
         }
@@ -174,21 +162,17 @@ let gltfMesh = class
         else if (arr instanceof Uint16Array)
         {
             const fb = new Float32Array(arr.length);
-            for (let i = 0; i < arr.length; i++)  fb[i] = arr[i] / 65535;
+            for (let i = 0; i < arr.length; i++) fb[i] = arr[i] / 65535;
 
             tgeom.vertexColors = fb;
-        } else tgeom.vertexColors = arr;
-
-
-        for(let i=0;i<tgeom.vertexColors.length;i++)
-        {
-            tgeom.vertexColors[i]=this._linearToSrgb(tgeom.vertexColors[i]);
         }
+        else tgeom.vertexColors = arr;
 
-
-
+        for (let i = 0; i < tgeom.vertexColors.length; i++)
+        {
+            tgeom.vertexColors[i] = this._linearToSrgb(tgeom.vertexColors[i]);
+        }
     }
-
 
     fillGeomAttribs(gltf, tgeom, attribs, setGeom)
     {
@@ -196,7 +180,7 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
         if (attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords = gltf.accBuffers[attribs.TEXCOORD_0];
         if (attribs.hasOwnProperty("TANGENT"))tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
-        if (attribs.hasOwnProperty("COLOR_0"))this.setGeomVertCols(tgeom,gltf.accBuffers[attribs.COLOR_0]);
+        if (attribs.hasOwnProperty("COLOR_0")) this.setGeomVertCols(tgeom, gltf.accBuffers[attribs.COLOR_0]);
 
         if (attribs.hasOwnProperty("TEXCOORD_1"))tgeom.setAttribute("attrTexCoord1", gltf.accBuffers[attribs.TEXCOORD_1], 2);
         if (attribs.hasOwnProperty("TEXCOORD_2"))tgeom.setAttribute("attrTexCoord2", gltf.accBuffers[attribs.TEXCOORD_2], 2);
@@ -213,7 +197,6 @@ let gltfMesh = class
             tgeom.setAttribute("attrJoints", gltf.accBuffers[attribs.JOINTS_0], 4);
         }
 
-
         if (attribs.hasOwnProperty("POSITION")) gltf.accBuffersDelete.push(attribs.POSITION);
         if (attribs.hasOwnProperty("NORMAL")) gltf.accBuffersDelete.push(attribs.NORMAL);
         if (attribs.hasOwnProperty("TEXCOORD_0")) gltf.accBuffersDelete.push(attribs.TEXCOORD_0);
@@ -223,7 +206,6 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("TEXCOORD_2")) gltf.accBuffersDelete.push(attribs.TEXCOORD_2);
         if (attribs.hasOwnProperty("TEXCOORD_3")) gltf.accBuffersDelete.push(attribs.TEXCOORD_3);
         if (attribs.hasOwnProperty("TEXCOORD_4")) gltf.accBuffersDelete.push(attribs.TEXCOORD_4);
-
 
         if (setGeom !== false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }
@@ -252,7 +234,7 @@ let gltfMesh = class
             }
         }
 
-        if(this.primitive==this.TRIANGLES)
+        if (this.primitive == this.TRIANGLES)
         {
             if (!geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
 
@@ -296,7 +278,7 @@ let gltfMesh = class
         this.bounds = geom.getBounds();
     }
 
-    render(cgl, ignoreMaterial,skinRenderer)
+    render(cgl, ignoreMaterial, skinRenderer)
     {
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
@@ -307,18 +289,17 @@ let gltfMesh = class
                 g.unIndex(false, true);
             }
 
-
             let glprim;
-            if(this.primitive==this.TRIANGLES)glprim=cgl.gl.TRIANGLES;
-            else if(this.primitive==this.LINES)glprim=cgl.gl.LINES;
-            else if(this.primitive==this.LINE_STRIP)glprim=cgl.gl.LINE_STRIP;
-            else if(this.primitive==this.POINTS)glprim=cgl.gl.POINTS;
+            if (this.primitive == this.TRIANGLES)glprim = cgl.gl.TRIANGLES;
+            else if (this.primitive == this.LINES)glprim = cgl.gl.LINES;
+            else if (this.primitive == this.LINE_STRIP)glprim = cgl.gl.LINE_STRIP;
+            else if (this.primitive == this.POINTS)glprim = cgl.gl.POINTS;
             else
             {
-                op.logWarn("unknown primitive type",this);
+                op.logWarn("unknown primitive type", this);
             }
 
-            this.mesh = new CGL.Mesh(cgl, g,glprim);
+            this.mesh = new CGL.Mesh(cgl, g, glprim);
             this.mesh._geom = null;
         }
         else
@@ -356,58 +337,53 @@ let gltfMesh = class
                 }
             }
 
-            let useMat =  !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
-            if(skinRenderer)useMat=false;
+            let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
+            if (skinRenderer)useMat = false;
 
             // console.log(gltf.shaders[this.material])
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
+            const uniDiff = cgl.getShader().uniformColorDiffuse;
 
-            const uniDiff=cgl.getShader().uniformColorDiffuse;
+            const uniPbrMetalness = cgl.getShader().uniformPbrMetalness;
+            const uniPbrRoughness = cgl.getShader().uniformPbrRoughness;
 
-            const uniPbrMetalness=cgl.getShader().uniformPbrMetalness;
-            const uniPbrRoughness=cgl.getShader().uniformPbrRoughness;
-
-            if(inUseMatProps.get())
+            if (inUseMatProps.get())
             {
-
-                if(uniDiff && this._matDiffuseColor)
+                if (uniDiff && this._matDiffuseColor)
                 {
-                    this._matDiffuseColorOrig=[uniDiff.getValue()[0],uniDiff.getValue()[1],uniDiff.getValue()[2],uniDiff.getValue()[3]];
+                    this._matDiffuseColorOrig = [uniDiff.getValue()[0], uniDiff.getValue()[1], uniDiff.getValue()[2], uniDiff.getValue()[3]];
                     uniDiff.setValue(this._matDiffuseColor);
 
                     // console.log("rough",this._matDiffuseColor)
-
                 }
 
-                if(uniPbrMetalness)
-                    if(this._matPbrMetalness!=null)
+                if (uniPbrMetalness)
+                    if (this._matPbrMetalness != null)
                     {
-                        this._matPbrMetalnessOrig=uniPbrMetalness.getValue();
+                        this._matPbrMetalnessOrig = uniPbrMetalness.getValue();
                         uniPbrMetalness.setValue(this._matPbrMetalness);
                     }
                     else
-                    uniPbrMetalness.setValue(0);
+                        uniPbrMetalness.setValue(0);
 
-
-                if(uniPbrRoughness)
-                    if( this._matPbrRoughness!=null )
+                if (uniPbrRoughness)
+                    if (this._matPbrRoughness != null)
                     {
-                        this._matPbrRoughnessOrig=uniPbrRoughness.getValue();
+                        this._matPbrRoughnessOrig = uniPbrRoughness.getValue();
                         uniPbrRoughness.setValue(this._matPbrRoughness);
                     }
                     else uniPbrRoughness.setValue(0);
             }
 
-
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
 
-            if(inUseMatProps.get())
+            if (inUseMatProps.get())
             {
-                if(uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
-                if(uniPbrMetalness && this._matPbrMetalnessOrig!=undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
-                if(uniPbrRoughness && this._matPbrRoughnessOrig!=undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
+                if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
+                if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
+                if (uniPbrRoughness && this._matPbrRoughnessOrig != undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
             }
 
             if (useMat) cgl.popShader();

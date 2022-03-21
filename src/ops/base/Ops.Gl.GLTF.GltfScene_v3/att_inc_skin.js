@@ -2,22 +2,25 @@ const GltfSkin = class
 {
     constructor(node)
     {
-        this._mod=null;
-        this._node=node;
+        this._mod = null;
+        this._node = node;
+        this._lastTime = 0;
+        this._matArr = [];
+        this._m = mat4.create();
+        this._invBindMatrix = mat4.create();
     }
 
     renderFinish(cgl)
     {
         cgl.popModelMatrix();
         this._mod.unbind();
-
     }
 
-    renderStart(cgl,time)
+    renderStart(cgl, time)
     {
-        if(!this._mod)
+        if (!this._mod)
         {
-            this._mod = new CGL.ShaderModifier(cgl, op.name+this._node.name);
+            this._mod = new CGL.ShaderModifier(cgl, op.name + this._node.name);
 
             this._mod.addModule({
                 "priority": -2,
@@ -26,42 +29,46 @@ const GltfSkin = class
                 "srcBodyVert": attachments.skin_vert || ""
             });
 
-            this._mod.addUniformVert("m4[]", "MOD_boneMats", []);//bohnenmatze
+            this._mod.addUniformVert("m4[]", "MOD_boneMats", []);// bohnenmatze
             const tr = vec3.create();
         }
-
-        let arr = []; // TODO make member
 
         const skinIdx = this._node.skin;
         const arrLength = gltf.json.skins[skinIdx].joints.length * 16;
 
-        if (arr.length != arrLength) arr.length = arrLength;
-
-        const invBindMatrix = mat4.create();
-        const m = mat4.create();
-
-        for (let i = 0; i < gltf.json.skins[skinIdx].joints.length; i++)
+        // if(this._lastTime!=inTime.get())
         {
-            const jointIdx = gltf.json.skins[skinIdx].joints[i];
-            const nodeJoint = gltf.nodes[jointIdx];
+            // this._lastTime=inTime.get();
+            if (this._matArr.length != arrLength) this._matArr.length = arrLength;
 
-            for (let j = 0; j < 16; j++)
-                invBindMatrix[j] = gltf.accBuffers[gltf.json.skins[skinIdx].inverseBindMatrices][i * 16 + j];
+            for (let i = 0; i < gltf.json.skins[skinIdx].joints.length; i++)
+            {
+                const i16 = i * 16;
+                const jointIdx = gltf.json.skins[skinIdx].joints[i];
+                const nodeJoint = gltf.nodes[jointIdx];
 
-            mat4.mul(m, nodeJoint.modelMatAbs(), invBindMatrix);
+                for (let j = 0; j < 16; j++)
+                    this._invBindMatrix[j] = gltf.accBuffers[gltf.json.skins[skinIdx].inverseBindMatrices][i16 + j];
 
-            for (let j = 0; j < m.length; j++) arr[i * 16 + j] = m[j];
+                mat4.mul(this._m, nodeJoint.modelMatAbs(), this._invBindMatrix);
+
+                for (let j = 0; j < this._m.length; j++) this._matArr[i16 + j] = this._m[j];
+            }
+
+            this._mod.setUniformValue("MOD_boneMats", this._matArr);
+            // this._lastTime = time;
         }
+        // else
+        // {
+        //     // console.log("skip")
+        // }
 
-        this._mod.setUniformValue("MOD_boneMats", arr);
         this._mod.define("SKIN_NUM_BONES", gltf.json.skins[skinIdx].joints.length);
+
         this._mod.bind();
 
         // draw mesh...
         cgl.pushModelMatrix();
         mat4.identity(cgl.mMatrix);
-
-    // console.log("draw skin...",time)
-
     }
 };
