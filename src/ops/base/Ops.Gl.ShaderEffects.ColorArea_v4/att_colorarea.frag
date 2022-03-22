@@ -4,6 +4,11 @@ vec3 MOD_size=vec3(MOD_inSizeAmountFalloffSizeX.x);
     MOD_size=1.0/MOD_scale;
 #endif
 
+vec3 MOD_col=MOD_color;
+
+MOD_col=texture(MOD_tex,gl_FragCoord.xy/ float( textureSize(MOD_tex,0).xy) ).rgb;
+
+
 
 #ifdef MOD_AREA_SPHERE
     float MOD_de=distance(
@@ -51,16 +56,16 @@ vec3 MOD_size=vec3(MOD_inSizeAmountFalloffSizeX.x);
 #endif
 
 #ifdef MOD_BLEND_NORMAL
-    col.rgb=mix(col.rgb,MOD_color, MOD_de*MOD_inSizeAmountFalloffSizeX.y);
+    col.rgb=mix(col.rgb,MOD_col, MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif
 
 
 #ifdef MOD_BLEND_MULTIPLY
-    col.rgb=mix(col.rgb,col.rgb*MOD_color,MOD_de*MOD_inSizeAmountFalloffSizeX.y);
+    col.rgb=mix(col.rgb,col.rgb*MOD_col,MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif
 
 #ifdef MOD_BLEND_ADD
-    col.rgb+=MOD_de*MOD_inSizeAmountFalloffSizeX.y*MOD_color;
+    col.rgb+=MOD_de*MOD_inSizeAmountFalloffSizeX.y*MOD_col;
 #endif
 
 

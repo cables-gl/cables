@@ -12,16 +12,17 @@ const
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    doScale = op.inBool("Change Size",false),
+    doScale = op.inBool("Change Size", false),
     sizeX = op.inFloat("Size X", 1),
     sizeY = op.inFloat("Size Y", 1),
     sizeZ = op.inFloat("Size Z", 1),
+    inTex = op.inTexture("Texture"),
 
     inWorldSpace = op.inValueBool("WorldSpace", true),
     inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");
 
-op.setPortGroup("Scale", [doScale,sizeX, sizeZ, sizeY]);
+op.setPortGroup("Scale", [doScale, sizeX, sizeZ, sizeY]);
 op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Color", [inBlend, r, g, b]);
 r.setUiAttribs({ "colorPick": true });
@@ -70,7 +71,8 @@ mod.addModule({
 mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, 0);
 mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
-mod.addUniform("3f", "MOD_scale",sizeX,sizeY,sizeZ);
+mod.addUniform("3f", "MOD_scale", sizeX, sizeY, sizeZ);
+mod.addUniform("t", "MOD_tex");
 
 updateDefines();
 
@@ -119,9 +121,9 @@ function updateDefines()
     mod.toggleDefine("MOD_DOSCALE", doScale.get());
 
     // mod.removeUniform("3f", "MOD_scale",sizeX,sizeY,sizeZ);
-    sizeX.setUiAttribs({"greyout":!doScale.get()});
-    sizeY.setUiAttribs({"greyout":!doScale.get()});
-    sizeZ.setUiAttribs({"greyout":!doScale.get()});
+    sizeX.setUiAttribs({ "greyout": !doScale.get() });
+    sizeY.setUiAttribs({ "greyout": !doScale.get() });
+    sizeZ.setUiAttribs({ "greyout": !doScale.get() });
 }
 
 function drawHelpers()
@@ -135,7 +137,12 @@ function doRender()
     // if(doScale.get()) mod.setUniformValue("MOD_scale",[sizeX.get(),sizeY.get(),sizeZ.get()]);
     mod.bind();
 
+    let tex = inTex.get();
 
+    if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
+    else tex = tex.tex;
+
+    mod.pushTexture("MOD_tex", tex);
 
     drawHelpers();
     next.trigger();
