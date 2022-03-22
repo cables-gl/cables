@@ -58,6 +58,7 @@ function initEffect()
     outWidth.set(getWidth());
     outHeight.set(getHeight());
     outRatio.set(getWidth() / getHeight());
+
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
     reInitEffect = false;
@@ -167,6 +168,7 @@ function doRender()
 
     trigger.trigger();
 
+    texOut.set(CGL.Texture.getEmptyTexture(cgl));
     texOut.set(effect.getCurrentSourceTexture());
 
     effect.endEffect();
