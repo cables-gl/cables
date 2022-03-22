@@ -16,6 +16,7 @@ const
     sizeX = op.inFloat("Size X", 1),
     sizeY = op.inFloat("Size Y", 1),
     sizeZ = op.inFloat("Size Z", 1),
+    inTex = op.inTexture("Texture"),
 
     inWorldSpace = op.inValueBool("WorldSpace", true),
     inPrio = op.inBool("Priority", true),
@@ -43,6 +44,7 @@ const srcBodyVert = ""
     .endl();
 
 inWorldSpace.onChange =
+    inTex.onLinkChanged =
     inArea.onChange =
     inInvert.onChange =
     doScale.onChange =
@@ -71,6 +73,10 @@ mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff
 mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
 mod.addUniform("3f", "MOD_scale", sizeX, sizeY, sizeZ);
+<<<<<<< HEAD
+=======
+mod.addUniform("t", "MOD_tex");
+>>>>>>> ccbd4b1b8b30ee2e3ece17e09d3c25bf71ac79db
 
 updateDefines();
 
@@ -122,6 +128,8 @@ function updateDefines()
     sizeX.setUiAttribs({ "greyout": !doScale.get() });
     sizeY.setUiAttribs({ "greyout": !doScale.get() });
     sizeZ.setUiAttribs({ "greyout": !doScale.get() });
+
+    mod.toggleDefine("MOD_USE_TEX", inTex.isLinked());
 }
 
 function drawHelpers()
@@ -134,6 +142,13 @@ function doRender()
 {
     // if(doScale.get()) mod.setUniformValue("MOD_scale",[sizeX.get(),sizeY.get(),sizeZ.get()]);
     mod.bind();
+
+    let tex = inTex.get();
+
+    if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
+    else tex = tex.tex;
+
+    mod.pushTexture("MOD_tex", tex);
 
     drawHelpers();
     next.trigger();
