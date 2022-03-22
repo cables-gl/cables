@@ -41,10 +41,6 @@
     "docs": {
         "ports": [
             {
-                "name": "Screenshot",
-                "text": "Trigger to make a screenshot"
-            },
-            {
                 "name": "Filename",
                 "text": "name of saved file"
             },
@@ -53,17 +49,14 @@
                 "text": "Uses canvas size"
             },
             {
-                "name": "Width",
-                "text": "Width of screenshot in pixels"
-            },
-            {
-                "name": "Height",
-                "text": "Height of screenshot in pixels"
+                "name": "Screenshot",
+                "text": "Trigger to make a screenshot"
             },
             {
                 "name": "Finished",
                 "text": "Trigger out when screenshot has been created"
             }
         ]
-    }
+    },
+    "caniusequery": ""
 }

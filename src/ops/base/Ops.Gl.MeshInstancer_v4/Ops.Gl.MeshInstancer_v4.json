@@ -63,6 +63,7 @@
             {
                 "type": 0,
                 "name": "Rotation Type index",
+                "group": "Parameters",
                 "subType": "integer"
             },
             {

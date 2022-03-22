@@ -1,1 +1,47 @@
-{"id":"69faf293-140d-4a2c-ab2e-7e5577ab113d","changelog":[{"message":"created op","author":"pandur","date":1612134585608},{"message":"Ops.User.pandur.ArrayIndexBetween renamed to Ops.Array.ArrayIndexBetween","author":"pandur","date":1613487312645}],"authorName":"pandur","created":1612134620395,"layout":{"portsIn":[{"type":3,"name":"Array"},{"type":0,"name":"Value","subType":"number"}],"portsOut":[{"type":0,"name":"Index","subType":"number"}],"name":"Ops.User.pandur.ArrayIndexBetween"},"summary":"output index where value is greater than number and smaller then next number ","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "69faf293-140d-4a2c-ab2e-7e5577ab113d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1612134585608
+        },
+        {
+            "message": "Ops.User.pandur.ArrayIndexBetween renamed to Ops.Array.ArrayIndexBetween",
+            "author": "pandur",
+            "date": 1613487312645
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1612134620395,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayIndexBetween"
+    },
+    "summary": "output index where value is greater than number and smaller than next number ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": ""
+}

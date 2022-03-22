@@ -115,6 +115,44 @@
         "DW9U5tv1GHM"
     ],
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Scale",
+                "text": "rescale incoming texture"
+            },
+            {
+                "name": "Blendmode index",
+                "text": "normal, multiply, add"
+            },
+            {
+                "name": "Target index",
+                "text": "color or pointsize"
+            },
+            {
+                "name": "Amount",
+                "text": "strength of texture colors or pointsize values"
+            },
+            {
+                "name": "Use Texture Alpha",
+                "text": "applies alpha channel from incoming texture. "
+            },
+            {
+                "name": "Texture",
+                "text": "currently texture is auto sized to a square ratio"
+            },
+            {
+                "name": "Mapping index",
+                "text": "XY, XZ, YZ, or screenspace"
+            },
+            {
+                "name": "Discard",
+                "text": "limit repeat of texture"
+            },
+            {
+                "name": "WorldSpace",
+                "text": "use world position coordinates"
+            }
+        ]
+    },
+    "caniusequery": ""
 }

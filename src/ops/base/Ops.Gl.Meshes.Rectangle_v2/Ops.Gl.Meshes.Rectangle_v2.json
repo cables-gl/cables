@@ -86,12 +86,13 @@
         ],
         "name": "Ops.Gl.Meshes.Rectangle_v2"
     },
-    "summary": "draw a rectangle (plane)",
+    "summary": "draw a rectangle (plane, square)",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "caniusequery": ""
 }
