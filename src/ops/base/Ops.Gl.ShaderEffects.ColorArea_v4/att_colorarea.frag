@@ -1,23 +1,24 @@
-vec3 size=vec3(MOD_inSizeAmountFalloffSizeX.x);
+
+vec3 MOD_size=vec3(MOD_inSizeAmountFalloffSizeX.x);
 #ifdef MOD_DOSCALE
-    size/=MOD_scale;
+    MOD_size=1.0/MOD_scale;
 #endif
 
 
 #ifdef MOD_AREA_SPHERE
     float MOD_de=distance(
-        MOD_pos*size,
-        MOD_vertPos.xyz*size
-        );
+        MOD_pos*MOD_size,
+        MOD_vertPos.xyz*MOD_size
+        )/MOD_inSizeAmountFalloffSizeX.x;
 #endif
 
 #ifdef MOD_AREA_BOX
     float MOD_de=1.0;
 
     if(
-        abs(MOD_vertPos.x-MOD_pos.x) > 1.0/size.x ||
-        abs(MOD_vertPos.y-MOD_pos.y) > 1.0/size.y ||
-        abs(MOD_vertPos.z-MOD_pos.z) > 1.0/size.z ) MOD_de=0.0;
+        abs((MOD_vertPos.xyz*MOD_size).x-(MOD_pos.xyz*MOD_size).x) > MOD_inSizeAmountFalloffSizeX.x ||
+        abs((MOD_vertPos.xyz*MOD_size).y-(MOD_pos.xyz*MOD_size).y) > MOD_inSizeAmountFalloffSizeX.x ||
+        abs((MOD_vertPos.xyz*MOD_size).z-(MOD_pos.xyz*MOD_size).z) > MOD_inSizeAmountFalloffSizeX.x )  MOD_de=0.0;
 
 #endif
 
