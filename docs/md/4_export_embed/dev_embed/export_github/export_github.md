@@ -7,7 +7,7 @@ Select the "GITHUB" option in the export dialog:
 ## Prerequisites
 
 - an account on [github](https://github.com/)
-- any repository, create one [here](https://github.com/new) if needed
+- any repository, create one [here](https://github.com/new) if needed (add at least one file, otherwise the repo doesnt exists for github)
 - an [access token](https://github.com/settings/tokens) for your github-user with at least "repo" permissions
 - (if wanted) activate [github pages](https://pages.github.com/) for your repository in the repositories settings on github
   - your repository needs to be made public for this to be free
