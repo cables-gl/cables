@@ -73,10 +73,7 @@ mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff
 mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
 mod.addUniform("3f", "MOD_scale", sizeX, sizeY, sizeZ);
-<<<<<<< HEAD
-=======
 mod.addUniform("t", "MOD_tex");
->>>>>>> ccbd4b1b8b30ee2e3ece17e09d3c25bf71ac79db
 
 updateDefines();
 
