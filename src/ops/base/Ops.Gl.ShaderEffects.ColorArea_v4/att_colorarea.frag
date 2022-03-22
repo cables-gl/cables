@@ -6,9 +6,9 @@ vec3 MOD_size=vec3(MOD_inSizeAmountFalloffSizeX.x);
 
 vec3 MOD_col=MOD_color;
 
-MOD_col=texture(MOD_tex,gl_FragCoord.xy/ float( textureSize(MOD_tex,0).xy) ).rgb;
-
-
+#ifdef MOD_USE_TEX
+    MOD_col=texture(MOD_tex,gl_FragCoord.xy/ float( textureSize(MOD_tex,0).xy) ).rgb;
+#endif
 
 #ifdef MOD_AREA_SPHERE
     float MOD_de=distance(
@@ -24,7 +24,6 @@ MOD_col=texture(MOD_tex,gl_FragCoord.xy/ float( textureSize(MOD_tex,0).xy) ).rgb
         abs((MOD_vertPos.xyz*MOD_size).x-(MOD_pos.xyz*MOD_size).x) > MOD_inSizeAmountFalloffSizeX.x ||
         abs((MOD_vertPos.xyz*MOD_size).y-(MOD_pos.xyz*MOD_size).y) > MOD_inSizeAmountFalloffSizeX.x ||
         abs((MOD_vertPos.xyz*MOD_size).z-(MOD_pos.xyz*MOD_size).z) > MOD_inSizeAmountFalloffSizeX.x )  MOD_de=0.0;
-
 #endif
 
 #ifdef MOD_AREA_AXIS_X

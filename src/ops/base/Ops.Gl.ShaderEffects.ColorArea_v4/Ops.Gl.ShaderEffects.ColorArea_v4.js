@@ -44,6 +44,7 @@ const srcBodyVert = ""
     .endl();
 
 inWorldSpace.onChange =
+    inTex.onLinkChanged =
     inArea.onChange =
     inInvert.onChange =
     doScale.onChange =
@@ -124,6 +125,8 @@ function updateDefines()
     sizeX.setUiAttribs({ "greyout": !doScale.get() });
     sizeY.setUiAttribs({ "greyout": !doScale.get() });
     sizeZ.setUiAttribs({ "greyout": !doScale.get() });
+
+    mod.toggleDefine("MOD_USE_TEX", inTex.isLinked());
 }
 
 function drawHelpers()
