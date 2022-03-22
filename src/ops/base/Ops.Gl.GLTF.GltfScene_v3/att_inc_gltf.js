@@ -1,4 +1,3 @@
-
 const CHUNK_HEADER_SIZE = 8;
 
 const Gltf = class
@@ -117,7 +116,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
     }
     else
     {
-        op.warn("unknown type",chunk.type)
+        op.warn("unknown type", chunk.type);
     }
 
     return chunk;
@@ -170,7 +169,6 @@ function loadAnims(gltf)
                 else if (sampler.interpolation == "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
-
                 // console.log(bufferOut)
 
                 // if there is no keyframe for time 0 copy value of first keyframe at time 0
@@ -186,23 +184,21 @@ function loadAnims(gltf)
 
                     for (let k = 0; k < numComps; k++)
                     {
-                        if(anims[k].defaultEasing === CABLES.EASING_CUBICSPLINE)
+                        if (anims[k].defaultEasing === CABLES.EASING_CUBICSPLINE)
                         {
-                            const idx=((j * numComps)*3+k);
+                            const idx = ((j * numComps) * 3 + k);
 
-                            const key=anims[k].setValue(bufferIn[j], bufferOut[idx+numComps]);
-                            key.bezTangIn=bufferOut[idx];
-                            key.bezTangOut=bufferOut[idx+(numComps*2)];
+                            const key = anims[k].setValue(bufferIn[j], bufferOut[idx + numComps]);
+                            key.bezTangIn = bufferOut[idx];
+                            key.bezTangOut = bufferOut[idx + (numComps * 2)];
 
                             // console.log(an.name,k,bufferOut[idx+1]);
-
                         }
                         else
                         {
                             // console.log(an.name,k,bufferOut[j * numComps + k]);
                             anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
                         }
-
                     }
                 }
 
@@ -218,7 +214,6 @@ function loadAnims(gltf)
             }
         }
     }
-
 
     outAnims.set(null);
     outAnims.set(Object.keys(uniqueAnimNames));
@@ -279,7 +274,6 @@ function parseGltf(arrayBuffer)
 
     outVersion.set(version);
 
-
     const chunks = [];
     gltf.chunks = chunks;
 
@@ -289,12 +283,12 @@ function parseGltf(arrayBuffer)
     outJson.set(gltf.json);
     outExtensions.set(gltf.json.extensionsUsed || []);
 
-    let ch=readChunk(dv, byteArray, arrayBuffer, pos);
-    while(ch)
+    let ch = readChunk(dv, byteArray, arrayBuffer, pos);
+    while (ch)
     {
         chunks.push(ch);
         pos += ch.size + CHUNK_HEADER_SIZE;
-        ch=readChunk(dv, byteArray, arrayBuffer, pos);
+        ch = readChunk(dv, byteArray, arrayBuffer, pos);
     }
 
     gltf.chunks = chunks;
@@ -330,7 +324,6 @@ function parseGltf(arrayBuffer)
 
             const view = views[acc.bufferView];
 
-
             // if(!view || !acc)
             // {
 
@@ -353,7 +346,6 @@ function parseGltf(arrayBuffer)
             //   decoderModule.destroy(decoder);
             //   decoderModule.destroy(decodedGeometry);
 
-
             // 5120 (BYTE)	1
             // 5121 (UNSIGNED_BYTE)	1
             // 5122 (SHORT)	2
@@ -366,7 +358,6 @@ function parseGltf(arrayBuffer)
                     let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
                     let stride = view.byteStride || 0;
                     let dataBuff = null;
-
 
                     if (acc.componentType == 5126 || acc.componentType == 5125) // 4byte FLOAT or INT
                     {
@@ -415,7 +406,6 @@ function parseGltf(arrayBuffer)
                             accPos += 1;
                         }
                     }
-
 
                     else
                     {
@@ -492,7 +482,6 @@ function parseGltf(arrayBuffer)
     if (gltf.json.cameras) loadCams(gltf);
 
     gltf.timing.push("finished", Math.round((performance.now() - gltf.startTime)));
-
 
     return gltf;
 }

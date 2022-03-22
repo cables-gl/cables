@@ -22,7 +22,7 @@ inFont.onChange = async function ()
 
     for (let i = 0; i < paths.length; i++)
     {
-        console.log(paths[i]);
+        // console.log(paths[i]);
 
         for (let j = 0; j < paths[i].commands.length; j++)
         {

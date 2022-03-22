@@ -19,7 +19,7 @@ const gltfNode = class
         this.addTranslate = null;
         this.addMulMat = null;
         this.updateMatrix();
-        this._animActions={};
+        this._animActions = {};
     }
 
     get skin()
@@ -112,33 +112,31 @@ const gltfNode = class
         else return null;
     }
 
-
     setAnimAction(name)
     {
-        if(name && !this._animActions[name]) return console.log("no action found: ",name);
+        if (name && !this._animActions[name]) return console.log("no action found: ", name);
 
-        for(let path in this._animActions[name])
+        for (let path in this._animActions[name])
         {
             if (path == "translation") this._animTrans = this._animActions[name][path];
             else if (path == "rotation") this._animRot = this._animActions[name][path];
             else if (path == "scale") this._animScale = this._animActions[name][path];
-            else console.warn("unknown anim path", path,this._animActions[name][path]);
+            else console.warn("unknown anim path", path, this._animActions[name][path]);
         }
-
     }
 
-    setAnim(path,name, anims)
+    setAnim(path, name, anims)
     {
-        this._animActions[name]=this._animActions[name]||{};
+        this._animActions[name] = this._animActions[name] || {};
 
-        if(this._animActions[name][path])op.warn("animation action path already exists",name,path,this._animActions[name][path]);
+        if (this._animActions[name][path])op.warn("animation action path already exists", name, path, this._animActions[name][path]);
 
-        this._animActions[name][path]=anims;
+        this._animActions[name][path] = anims;
 
         // console.log(name,path,this._animTrans);
         // console.log(this._animActions);
 
-        if (path == "translation")  this._animTrans = anims;
+        if (path == "translation") this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
         else console.warn("unknown anim path", path, anims);
@@ -146,7 +144,7 @@ const gltfNode = class
 
     modelMatLocal()
     {
-        return this._animMat||this.mat;
+        return this._animMat || this.mat;
     }
 
     modelMatAbs()
@@ -156,19 +154,18 @@ const gltfNode = class
 
     transform(cgl, _time)
     {
-        if (!_time && _time!=0)_time = time;
+        if (!_time && _time != 0)_time = time;
 
-        // mat4.identity(cgl.mMatrix);
-
+        this._lastTimeTrans = _time;
 
         if (!this._animTrans && !this._animRot && !this._animScale)
         {
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);
-            this._animMat=null;
+            this._animMat = null;
         }
         else
         {
-            this._animMat=this._animMat||mat4.create();
+            this._animMat = this._animMat || mat4.create();
             mat4.identity(this._animMat);
 
             const playAnims = true;
@@ -185,16 +182,15 @@ const gltfNode = class
 
             if (playAnims && this._animRot)
             {
-
-                if(this._animRot[0].defaultEasing==CABLES.EASING_LINEAR) CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
-                else if(this._animRot[0].defaultEasing==CABLES.EASING_ABSOLUTE)
+                if (this._animRot[0].defaultEasing == CABLES.EASING_LINEAR) CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                else if (this._animRot[0].defaultEasing == CABLES.EASING_ABSOLUTE)
                 {
-                    this._tempQuat[0]=this._animRot[0].getValue(_time);
-                    this._tempQuat[1]=this._animRot[1].getValue(_time);
-                    this._tempQuat[2]=this._animRot[2].getValue(_time);
-                    this._tempQuat[3]=this._animRot[3].getValue(_time);
+                    this._tempQuat[0] = this._animRot[0].getValue(_time);
+                    this._tempQuat[1] = this._animRot[1].getValue(_time);
+                    this._tempQuat[2] = this._animRot[2].getValue(_time);
+                    this._tempQuat[3] = this._animRot[3].getValue(_time);
                 }
-                else if(this._animRot[0].defaultEasing==CABLES.EASING_CUBICSPLINE)
+                else if (this._animRot[0].defaultEasing == CABLES.EASING_CUBICSPLINE)
                 {
                     CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
                 }
@@ -231,24 +227,24 @@ const gltfNode = class
     {
         if (!dontTransform) cgl.pushModelMatrix();
 
-        if(_time===undefined)_time=gltf.time;
+        if (_time === undefined)_time = gltf.time;
 
-        if (!dontTransform || this.skinRenderer) this.transform(cgl, _time );
+        if (!dontTransform || this.skinRenderer) this.transform(cgl, _time);
 
         if (this.hidden && !drawHidden)
         {
         }
         else
         {
-            if(this.skinRenderer)
+            if (this.skinRenderer)
             {
-                this.skinRenderer.time=_time;
-                if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer);
+                this.skinRenderer.time = _time;
+                if (!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer);
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial,null);
+                    this.mesh.render(cgl, ignoreMaterial, null);
             }
         }
 
@@ -258,7 +254,6 @@ const gltfNode = class
                 {
                     gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
                 }
-
 
         if (!dontTransform)cgl.popModelMatrix();
     }

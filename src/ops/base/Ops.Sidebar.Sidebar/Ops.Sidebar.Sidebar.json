@@ -120,6 +120,11 @@
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888157315
+        },
+        {
+            "message": "fixed typos in parameter names",
+            "author": "stephan",
+            "date": 1647621496703
         }
     ],
     "exampleProjectId": "aDgYX5"

@@ -6,49 +6,49 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MidiJson"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Beat",
                 "subType": "number"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Track Names"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Names"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Progress"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Velocity"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Tracks",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "BPM",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Data"
             }
         ],

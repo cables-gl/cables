@@ -26,7 +26,10 @@ const side = op.inValueBool("Side");
 
 // outputs
 const childrenPort = op.outObject("childs");
+childrenPort.setUiAttribs({ "title": "Children" });
+
 const isOpenOut = op.outBool("Opfened");
+isOpenOut.setUiAttribs({ "title": "Opened" });
 
 let sidebarEl = document.querySelector("." + SIDEBAR_ID);
 if (!sidebarEl)

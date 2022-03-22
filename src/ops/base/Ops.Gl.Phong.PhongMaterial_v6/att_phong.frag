@@ -496,7 +496,16 @@ void main()
             luminanceColor *= texture(texAO, texCoord).g*inTextureIntensities.AO;
         #endif
 
-        calculatedColor.rgb += luminanceColor;
+        #ifdef ENV_BLEND_ADD
+            calculatedColor.rgb += luminanceColor;
+        #endif
+        #ifdef ENV_BLEND_MUL
+            calculatedColor.rgb *= luminanceColor;
+        #endif
+
+        #ifdef ENV_BLEND_MIX
+            calculatedColor.rgb=mix(luminanceColor,calculatedColor.rgb,luminanceColor);
+        #endif
 
 
     #endif
