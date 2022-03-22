@@ -225,7 +225,16 @@
         "QNLw21hSweg"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Hide Nodes",
+                "text": "Hide some GLTF nodes by name"
+            },
+            {
+                "name": "Json",
+                "text": "The whole GLTF scene as JSON data"
+            }
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"

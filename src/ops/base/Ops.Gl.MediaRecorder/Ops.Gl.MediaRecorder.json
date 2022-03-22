@@ -101,5 +101,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ioiDIR"
+    "exampleProjectId": "ioiDIR",
+    "caniusequery": ""
 }
