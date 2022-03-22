@@ -12,65 +12,65 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration ",
                 "group": "Time",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "offset",
                 "group": "Time",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time",
                 "group": "Time",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "segments",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "radius",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mulX",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mulY",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "index",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             }
