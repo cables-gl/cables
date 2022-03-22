@@ -1,4 +1,5 @@
 const
+    inLoadingTask = op.inBool("Loading Task", false),
     inWarning1 = op.inBool("Warning", false),
     inUiError = op.inBool("Error", false),
     inUiHint = op.inBool("Hint", false),
@@ -17,6 +18,23 @@ const
 op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
+
+let loadingId = null;
+
+op.onDelete = () =>
+{
+    if (loadingId) op.patch.loading.finished(loadingId);
+};
+
+inLoadingTask.onChange = () =>
+{
+    if (inLoadingTask.get()) loadingId = op.patch.loading.start("test ui op file", "test.txt");
+    else
+    {
+        op.patch.loading.finished(loadingId);
+        loadingId = null;
+    }
+};
 
 inWarning1.onChange = () =>
 {

@@ -13,6 +13,8 @@ import Logger from "./core_logger";
  */
 const LoadingStatus = function (patch)
 {
+    CABLES.EventTarget.apply(this);
+
     this._log = new Logger("LoadingStatus");
     this._loadingAssets = {};
     this._cbFinished = [];
@@ -60,6 +62,7 @@ LoadingStatus.prototype.checkStatus = function ()
 
     if (this._countFinished === 0)
     {
+        this.emitEvent("finishedAll");
         for (let j = 0; j < this._cbFinished.length; j++)
         {
             if (this._cbFinished[j])
@@ -76,6 +79,18 @@ LoadingStatus.prototype.checkStatus = function ()
         }
     }
 };
+
+LoadingStatus.prototype.getList = function ()
+{
+    let arr = [];
+    for (const i in this._loadingAssets)
+    {
+        arr.push(this._loadingAssets[i]);
+    }
+
+    return arr;
+};
+
 
 LoadingStatus.prototype.getListJobs = function ()
 {
@@ -117,6 +132,7 @@ LoadingStatus.prototype.finished = function (id)
     {
         this._loadingAssets[id].finished = true;
         this._loadingAssets[id].timeEnd = Date.now();
+        this.emitEvent("finishedTask");
     }
 
     this.checkStatus();
@@ -148,6 +164,7 @@ LoadingStatus.prototype.addAssetLoadingTask = function (cb)
     {
         cb();
     }
+    this.emitEvent("addAssetTask");
 };
 
 LoadingStatus.prototype.existByName = function (name)
@@ -175,6 +192,8 @@ LoadingStatus.prototype.start = function (type, name)
         "order": this._order,
     };
     this._order++;
+
+    this.emitEvent("startTask");
 
     return id;
 };
