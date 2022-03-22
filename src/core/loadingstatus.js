@@ -60,13 +60,12 @@ LoadingStatus.prototype.checkStatus = function ()
 
     if (this._countFinished === 0)
     {
-        this.emitEvent("finishedAll");
         for (let j = 0; j < this._cbFinished.length; j++)
         {
             if (this._cbFinished[j])
             {
                 const cb = this._cbFinished[j];
-                setTimeout(() => { cb(this._patch); }, 200);
+                setTimeout(() => { cb(this._patch); this.emitEvent("finishedAll"); }, 100);
             }
         }
 
@@ -75,6 +74,7 @@ LoadingStatus.prototype.checkStatus = function ()
             this._wasFinishedPrinted = true;
             this.print();
         }
+        this.emitEvent("finishedAll");
     }
 };
 
@@ -130,10 +130,10 @@ LoadingStatus.prototype.finished = function (id)
     {
         this._loadingAssets[id].finished = true;
         this._loadingAssets[id].timeEnd = Date.now();
-        this.emitEvent("finishedTask");
     }
 
     this.checkStatus();
+    this.emitEvent("finishedTask");
 };
 
 LoadingStatus.prototype._startAssetTasks = function ()

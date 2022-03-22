@@ -112,6 +112,8 @@ function update()
 
 op.onDelete = function ()
 {
+    const ele = inEle.get();
+
     if (ele && ele.classList)
     {
         ele.classList.remove("CABLES_animFadeIn");
