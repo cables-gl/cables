@@ -36,6 +36,7 @@
             {
                 "type": 0,
                 "name": "Blend  index",
+                "group": "Color",
                 "subType": "integer"
             },
             {
