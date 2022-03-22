@@ -1,6 +1,4 @@
 import { generateUUID } from "./utils";
-// eslint-disable-next-line
-import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL properly.. wtf?
 import Logger from "./core_logger";
 
 /**
