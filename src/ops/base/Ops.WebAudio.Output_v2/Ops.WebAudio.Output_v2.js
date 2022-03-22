@@ -15,7 +15,6 @@ const
 
 op.setPortGroup("Volume Settings", [inMute, inGain]);
 
-let masterVolume = 1;
 let oldAudioIn = null;
 let connectedToOut = false;
 let fsElement = null;
@@ -27,8 +26,9 @@ inMute.onChange = () =>
 
 inGain.onChange = setVolume;
 op.onMasterVolumeChanged = setVolume;
-op.patch.on("pause", setVolume);
-op.patch.on("resume", setVolume);
+
+let pauseId = op.patch.on("pause", setVolume);
+let resumeId = op.patch.on("resume", setVolume);
 
 audioCtx.addEventListener("statechange", updateStateError);
 inShowSusp.onChange = updateAudioStateButton;
@@ -38,9 +38,11 @@ updateAudioStateButton();
 
 op.onDelete = () =>
 {
-    if (gainNode)gainNode.disconnect();
+    if (gainNode) gainNode.disconnect();
     gainNode = null;
-    if (fsElement)fsElement.remove();
+    if (fsElement) fsElement.remove();
+    if (pauseId) op.patch.off(pauseId);
+    if (resumeId) op.patch.off(resumeId);
 };
 
 inAudio.onChange = function ()
@@ -200,7 +202,7 @@ function updateAudioStateButton()
 
         if (isSuspended)
         {
-            console.log("was suspended - set vol");
+            op.log("was suspended - set vol");
             setVolume(true);
         }
     }
