@@ -114,7 +114,7 @@ const gltfNode = class
 
     setAnimAction(name)
     {
-        if (name && !this._animActions[name]) return console.log("no action found: ", name);
+        if (name && !this._animActions[name]) return;// console.log("no action found: ", name);
 
         for (let path in this._animActions[name])
         {

@@ -4,6 +4,7 @@ const
     inRecord = op.inBool("Record Events", false),
     inReset = op.inTriggerButton("Reset"),
     inClear = op.inTriggerButton("Clear"),
+    inReResize = op.inBool("ReRender on Resize", true),
     next = op.outTrigger("Next"),
     nextPrerendered = op.outTrigger("Prerendered Frame"),
     outProgress = op.outNumber("Progress", 0),
@@ -17,6 +18,19 @@ let prerenderCount = 0;
 let delaystart = false;
 
 let events = [0];
+
+op.patch.cgl.on("resize", () =>
+{
+    if (inReResize.get())
+    {
+        console.log("resized...");
+        if (!isPrerendering && outProgress.get() == 1)
+        {
+            isPrerendering = true;
+            prerenderCount = 0;
+        }
+    }
+});
 
 inEvents.onChange = () =>
 {

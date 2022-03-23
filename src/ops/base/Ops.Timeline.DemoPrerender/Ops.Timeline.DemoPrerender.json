@@ -32,6 +32,11 @@
             {
                 "type": 1,
                 "name": "Clear"
+            },
+            {
+                "type": 0,
+                "name": "ReRender on Resize",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
