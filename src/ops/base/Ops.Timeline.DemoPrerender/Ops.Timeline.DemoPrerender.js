@@ -14,18 +14,22 @@ exec.onTriggered = render;
 inEvents.setUiAttribs({ "hidePort": true });
 
 let isPrerendering = true;
+
 let prerenderCount = 0;
 let delaystart = false;
-
+let restartTime = 0;
+let restartTimeFreeTimer = 0;
 let events = [0];
 
 op.patch.cgl.on("resize", () =>
 {
     if (inReResize.get())
     {
-        console.log("resized...");
         if (!isPrerendering && outProgress.get() == 1)
         {
+            restartTime = op.patch.timer.getTime();
+            restartTimeFreeTimer = op.patch.freeTimer.getTime();
+
             isPrerendering = true;
             prerenderCount = 0;
         }
@@ -127,8 +131,8 @@ function render()
 
         if (prerenderCount >= events.length + numExtraFrames)
         {
-            op.patch.timer.setTime(0);
-            op.patch.freeTimer.setTime(0);
+            op.patch.timer.setTime(restartTime);
+            op.patch.freeTimer.setTime(restartTimeFreeTimer);
 
             // setTimeout(() =>
             // {
