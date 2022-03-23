@@ -99,11 +99,14 @@ function update()
     const img = new Image();
     const loadingId = op.patch.loading.start("svg2texture", filename.get());
 
-    img.onerror = function (e)
+    img.onabort = img.onerror = function (e)
     {
         outLoaded.set(false);
-    //     op.patch.loading.finished(loadingId);
-    //     op.uiAttr( { 'error': 'Could not load SVG file!' } );
+        op.logError("could not load file",);
+        op.patch.loading.finished(loadingId);
+
+        //     op.patch.loading.finished(loadingId);
+        op.setUiError("error", "Could not load SVG file!");
     };
 
     outLoaded.set(false);

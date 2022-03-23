@@ -205,12 +205,31 @@ function update()
     else
     {
         let speed = inSpeed.get();
-        if (inMoveZP.get()) btVelocity.setValue(inDirX.get() * speed, inDirY.get() * speed, inDirZ.get() * speed);
-        if (inMoveZM.get()) btVelocity.setValue(-inDirX.get() * speed, -inDirY.get() * speed, -inDirZ.get() * speed);
-
-        if (inMoveZP.get() || inMoveZM.get())
+        let doMove = false;
+        if (inMoveZP.get())
         {
-            // console.log(-inDirX.get(), -inDirY.get(), -inDirZ.get());
+            btVelocity.setValue(inDirX.get() * speed, inDirY.get() * speed, inDirZ.get() * speed);
+            doMove = true;
+        }
+        if (inMoveZM.get())
+        {
+            btVelocity.setValue(-inDirX.get() * speed, -inDirY.get() * speed, -inDirZ.get() * speed);
+            doMove = true;
+        }
+
+        if (inMoveXP.get())
+        {
+            btVelocity.setValue(-inDirZ.get() * speed, inDirY.get() * speed, inDirX.get() * speed);
+            doMove = true;
+        }
+        if (inMoveXM.get())
+        {
+            btVelocity.setValue(inDirZ.get() * speed, inDirY.get() * speed, -inDirX.get() * speed);
+            doMove = true;
+        }
+
+        if (doMove)
+        {
             body.setLinearVelocity(btVelocity);
         }
     }

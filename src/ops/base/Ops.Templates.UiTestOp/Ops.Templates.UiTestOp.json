@@ -43,6 +43,11 @@
         "portsIn": [
             {
                 "type": 0,
+                "name": "Loading Task",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Warning",
                 "group": "Warnings",
                 "subType": "boolean"

@@ -17,21 +17,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Shader"
+                "type": 2,
+                "name": "Shader",
+                "objType": "shader"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Material Name"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Material"
             }
         ],
-        "name": "Ops.Gl.GltfSetMaterial"
+        "name": "Ops.Gl.GLTF.GltfSetMaterial"
     },
     "summary": "Assigns a material to a node inside of the gltfScene op",
     "issues": "",

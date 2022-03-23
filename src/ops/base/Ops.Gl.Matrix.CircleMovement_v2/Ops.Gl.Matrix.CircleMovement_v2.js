@@ -31,10 +31,11 @@ render.onTriggered = function ()
     cgl.pushModelMatrix();
 
     let time = inTime.get() / duration.get();// +Math.round(segments.get())*0.1*percent.get();
+
     time += offset.get();
 
-    const x = animX.getValue(time) * mulX.get() * radius.get();
-    const y = animY.getValue(time) * mulY.get() * radius.get();
+    let x = animX.getValue(time) * mulX.get() * radius.get();
+    let y = animY.getValue(time) * mulY.get() * radius.get();
 
     outX.set(x);
     outY.set(y);

@@ -17,10 +17,11 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Value"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Vars.VarSetObject_v2"
     },
     "coreLibs": [

@@ -131,10 +131,12 @@ const VarSetOpWrapper = class
         //     console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
 
 
+        const v = this._valuePort.get();
+
         if (this._type == "array")
         {
             this._arr = [];
-            CABLES.copyArray(this._valuePort.get(), this._arr);
+            CABLES.copyArray(v, this._arr);
             this._op.patch.setVarValue(name, null);
             this._op.patch.setVarValue(name, this._arr);
         }
@@ -143,8 +145,11 @@ const VarSetOpWrapper = class
             if (this._type == "object")
             {
                 this._op.patch.setVarValue(name, null);
+
+                if (v && v.tex && v._cgl && this._valuePort.uiAttribs.objType != "texture") this._op.setUiError("texobj", "Dont use object variables for textures, use varSetTexture");
+                else this._op.setUiError("texobj", null);
             }
-            this._op.patch.setVarValue(name, this._valuePort.get());
+            this._op.patch.setVarValue(name, v);
         }
         if (triggered && this._nextPort) this._nextPort.trigger();
     }

@@ -14,7 +14,7 @@ const
     step = op.inValue("Step", 1),
     rMeth = op.inDropDown("Red", options, "Horizontal Difference Red"),
     rFlip = op.inBool("Red Flip", false),
-    gMeth = op.inDropDown("Green", options, "Vertical Difference Red"),
+    gMeth = op.inDropDown("Green", options, "Vertical Difference Green"),
     gFlip = op.inBool("Green Flip", false),
     bMeth = op.inDropDown("Blue", options, "Midpoint"),
     bFlip = op.inBool("Blue Flip", false),

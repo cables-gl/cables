@@ -1,0 +1,172 @@
+{
+    "authorName": "pandur",
+    "id": "83a4b2b8-23ff-4491-b538-e89ac7934d1a",
+    "created": 1647945952281,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Blend  index",
+                "group": "Color",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Change Size",
+                "group": "Scale",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "WorldSpace",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Priority",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.ColorArea_v4"
+    },
+    "changelog": [
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1591626936196
+        },
+        {
+            "message": "Ops.User.pandur.ColorAreaAsShaderModule renamed to Ops.Gl.ShaderEffects.ColorArea_v3",
+            "author": "pandur",
+            "date": 1591627475894
+        },
+        {
+            "message": " removed core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1637743799055
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1637743918180
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.ColorArea_v3",
+            "author": "pandur",
+            "date": 1647945952282
+        },
+        {
+            "message": "Ops.User.pandur.ColorArea4 renamed to Ops.Gl.ShaderEffects.ColorArea_v4",
+            "author": "pandur",
+            "date": 1647948028954
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "summary": "colorize all meshes around current position",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cUU0fNw3rEg"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "0Ti2gT"
+}

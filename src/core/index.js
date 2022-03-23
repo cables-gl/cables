@@ -1,3 +1,4 @@
+import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL properly.. wtf?
 import * as base64 from "./base64";
 import { EventTarget } from "./eventtarget";
 import * as utils from "./utils";
@@ -13,7 +14,6 @@ import { Instancing } from "./instancing";
 import { LoadingStatus } from "./loadingstatus";
 import { WEBAUDIO } from "./webaudio";
 import { Variable } from "./sessionvar";
-
 import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
