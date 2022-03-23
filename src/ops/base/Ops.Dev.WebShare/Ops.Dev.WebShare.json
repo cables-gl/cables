@@ -31,7 +31,17 @@
             },
             {
                 "type": 5,
+                "name": "Data URL",
+                "group": "File"
+            },
+            {
+                "type": 5,
                 "name": "Filetype",
+                "group": "File"
+            },
+            {
+                "type": 5,
+                "name": "Filename",
                 "group": "File"
             },
             {
@@ -50,6 +60,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.WebShare"
+        "name": "Ops.Dev.WebShare"
     }
 }

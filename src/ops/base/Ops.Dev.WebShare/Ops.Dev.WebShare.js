@@ -2,63 +2,85 @@ const
     inText = op.inString("Text", "check out undev"),
     inUrl = op.inString("URL", "https://undev.studio"),
     inBase64 = op.inString("Base64 File"),
+    inDataUrl = op.inString("Data URL"),
     inFileType = op.inString("Filetype", "image/png"),
+    inFileName = op.inString("Filename", "screenshot.png"),
     exec = op.inTriggerButton("Share"),
     outStatus = op.outString("Status", "none"),
     outSupport = op.outBoolNum("Supported", !!navigator.share);
 
-op.setPortGroup("File", [inFileType, inBase64]);
+op.setPortGroup("File", [inBase64, inDataUrl, inFileType, inFileName]);
 
-function dataURLtoFile(dataurl, filename)
+if (!navigator.share)
 {
-    let arr = dataurl.split(","),
-        mimeType = arr[0].match(/:(.*?);/)[1],
-        decodedData = atob(arr[1]),
-        lengthOfDecodedData = decodedData.length,
-        u8array = new Uint8Array(lengthOfDecodedData);
-
-        console.log("mimeType",mimeType);
-
-    while (lengthOfDecodedData--)
-    {
-        u8array[lengthOfDecodedData] = decodedData.charCodeAt(lengthOfDecodedData);
-    }
-    return new File([u8array], filename, { "type": mimeType });
+    op.setUiError("noShare", "webshare api not supported on this device", 1);
 }
 
 exec.onTriggered = () =>
 {
-    const obj = {};
-    obj.text = inText.get();
-    obj.url = inUrl.get();
+    op.setUiError("noShare", null);
+    if (!navigator.share)
+    {
+        op.setUiError("noShare", "webshare api not supported on this device", 1);
+        outSupport.set(false);
+        return;
+    }
+    outSupport.set(true);
 
+    const shareData = {};
+    shareData.text = inText.get();
+    shareData.url = inUrl.get();
+
+    let url = inDataUrl.get();
     if (inBase64.get())
     {
-        // const byteCharacters = atob(inBase64.get());
-        // let blob = base64toBlob(inBase64.get(), inFileType.get());
-        // const byteArray = new Uint8Array(byteCharacters);
-        // const blob = new Blob([byteArray], { "type": inFileType.get() });
-        // const file = new File([blob], "picture.png", { "type": inFileType.get() });
-        // let file = dataURLtoFile("data:" + inFileType.get() + ";base64," + inBase64.get(),"bilt.png");
-        let file = dataURLtoFile(inBase64.get(),"bilt.png");
-        obj.files = [file];
-
-        console.log("canshare...",navigator.canShare({files: [file]}));
+        url = "data:" + inFileType.get() + ";base64," + inBase64.get();
     }
 
-
-
-    if (navigator.share)
+    if (url)
     {
-        navigator.share(obj)
-            .then(() =>
+        fetch(url)
+            .then((res) => res.blob())
+            .then((blob) =>
             {
-                outStatus.set("success");
-            })
-            .catch((error) =>
-            {
-                outStatus.set("error");
-                console.log("Error sharing", error);
+                shareData.files = [
+                    new File(
+                        [blob],
+                        inFileName.get(),
+                        {
+                            "type": inFileType.get(),
+                            "lastModified": new Date().getTime()
+                        }
+                    )
+                ];
+                if (!navigator.canShare(shareData))
+                {
+                    op.setUiError("noShare", "browser can't share data", 1);
+                    op.log("browser cant share data", shareData);
+                }
+                else
+                {
+                    doShare(shareData);
+                }
             });
     }
+    else
+    {
+        doShare(shareData);
+    }
 };
+
+function doShare(shareData)
+{
+    navigator.share(shareData)
+        .then(() =>
+        {
+            outStatus.set("success");
+        })
+        .catch((error) =>
+        {
+            outStatus.set("error");
+            op.setUiError("noShare", "Error sharing", error);
+            op.log("Error sharing", error);
+        });
+}
