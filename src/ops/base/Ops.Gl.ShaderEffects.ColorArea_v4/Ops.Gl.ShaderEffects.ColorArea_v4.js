@@ -58,8 +58,8 @@ mod.addModule({
     "priority": 2,
     "title": vertModTitle,
     "name": "MODULE_VERTEX_POSITION",
-    srcHeadVert,
-    srcBodyVert
+    "srcHeadVert": srcHeadVert,
+    "srcBodyVert": srcBodyVert
 });
 
 mod.addModule({
