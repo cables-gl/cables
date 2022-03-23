@@ -653,8 +653,8 @@ Uniform.prototype.updateValueM4 = function ()
         this._cgl.profileData.profileShaderGetUniform++;
         this._cgl.profileData.profileShaderGetUniformName = this._name;
     }
-    if (!this._value || this._value.length != 16)console.log("this.name", this.name, this._value);
-    console.log("typem4 ", this._value.constructor.name);
+    if (!this._value || this._value.length % 16 != 0) return console.log("this.name", this._name, this._value);
+
     this._shader.getCgl().gl.uniformMatrix4fv(this._loc, false, this._value);
     this._cgl.profileData.profileUniformCount++;
 };
