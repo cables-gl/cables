@@ -2,6 +2,7 @@ const
     parentPort = op.inObject("Parent"),
     outParent = op.outObject("Parent Out");
 
+const canvas = op.patch.cgl.canvas.parentElement;
 
 const inPorts = [];
 for (let i = 0; i < 10; i++)
@@ -14,7 +15,7 @@ for (let i = 0; i < 10; i++)
         if (!p.get())
         {
             const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-            const currentChild = document.querySelector(selector);
+            const currentChild = canvas.querySelector(selector);
             if (currentChild) delete currentChild.dataset.cablesChildId;
         }
     };
@@ -23,15 +24,8 @@ for (let i = 0; i < 10; i++)
         if (!p.isLinked())
         {
             const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-            const currentChild = document.querySelector(selector);
-            if (currentChild)
-            {
-                if (currentChild.parentNode)
-                {
-                    currentChild.parentNode.removeChild(currentChild);
-                }
-                delete currentChild.dataset.cablesChildId;
-            }
+            const currentChild = canvas.querySelector(selector);
+            if (currentChild) currentChild.remove();
         }
     };
 }
@@ -45,6 +39,22 @@ parentPort.onLinkChanged = () =>
     else
     {
         rebuild();
+    }
+};
+
+outParent.onLinkChanged = () =>
+{
+    if (!outParent.isLinked())
+    {
+        const parentDiv = parentPort.get();
+        if (parentDiv && parentDiv.dataset.op)
+        {
+            const inDoc = canvas.querySelector("[data-op=' " + parentDiv.dataset.op + " ']");
+            if (!inDoc)
+            {
+                canvas.appendChild(parentDiv);
+            }
+        }
     }
 };
 
@@ -62,10 +72,10 @@ function cleanUp()
     for (let i = 0; i < inPorts.length; i++)
     {
         const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-        const currentChild = document.querySelector(selector);
+        const currentChild = canvas.querySelector(selector);
         if (currentChild && currentChild.parentNode)
         {
-            currentChild.parentNode.removeChild(currentChild);
+            currentChild.remove();
         }
     }
     outParent.set(null);
@@ -84,7 +94,10 @@ function rebuild()
     {
         const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
         const currentChild = parent.querySelector(selector);
-        if (currentChild) parent.removeChild(currentChild);
+        if (currentChild)
+        {
+            currentChild.remove();
+        }
         const p = inPorts[i].get();
         if (p && parent)
         {
