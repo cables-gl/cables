@@ -55,8 +55,15 @@ exec.onTriggered = () =>
                 ];
                 if (!navigator.canShare(shareData))
                 {
+                    op.setUiError("noShare", "browser can't share files", 1);
+                    op.log("browser cant share files", shareData);
+                    delete shareData.files;
+                }
+                if (!navigator.canShare(shareData))
+                {
                     op.setUiError("noShare", "browser can't share data", 1);
                     op.log("browser cant share data", shareData);
+                    outStatus.set("error");
                 }
                 else
                 {

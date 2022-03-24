@@ -1,16 +1,17 @@
-var inPos=op.inValueSlider("Position");
-var inRadius=op.inValue("Radius",1);
+const
+    inPos = op.inFloat("Position"),
+    inRadius = op.inFloat("Radius", 1),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y");
 
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-
-inPos.onChange=calc;
-inRadius.onChange=calc;
+inPos.onChange =
+    inRadius.onChange = calc;
 
 function calc()
 {
-    var degInRad = (360*inPos.get())*CGL.DEG2RAD;
-    outX.set(Math.sin(degInRad)*inRadius.get());
-    outY.set(Math.cos(degInRad)*inRadius.get());
-}
+    const r = inRadius.get();
+    const degInRad = (360 * inPos.get()) * CGL.DEG2RAD;
 
+    outX.set(Math.sin(degInRad) * r);
+    outY.set(Math.cos(degInRad) * r);
+}
