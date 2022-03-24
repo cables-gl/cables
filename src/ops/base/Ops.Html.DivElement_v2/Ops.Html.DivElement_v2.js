@@ -41,6 +41,8 @@ function createElement()
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 
+    if (inId.get()) div.id = inId.get();
+
     canvas.appendChild(div);
     outElement.set(div);
 }
