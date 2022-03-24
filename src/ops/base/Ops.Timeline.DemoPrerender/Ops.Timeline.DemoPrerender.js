@@ -4,6 +4,7 @@ const
     inRecord = op.inBool("Record Events", false),
     inReset = op.inTriggerButton("Reset"),
     inClear = op.inTriggerButton("Clear"),
+    inReResize = op.inBool("ReRender on Resize", true),
     next = op.outTrigger("Next"),
     nextPrerendered = op.outTrigger("Prerendered Frame"),
     outProgress = op.outNumber("Progress", 0),
@@ -13,10 +14,27 @@ exec.onTriggered = render;
 inEvents.setUiAttribs({ "hidePort": true });
 
 let isPrerendering = true;
+
 let prerenderCount = 0;
 let delaystart = false;
-
+let restartTime = 0;
+let restartTimeFreeTimer = 0;
 let events = [0];
+
+op.patch.cgl.on("resize", () =>
+{
+    if (inReResize.get())
+    {
+        if (!isPrerendering && outProgress.get() == 1)
+        {
+            restartTime = op.patch.timer.getTime();
+            restartTimeFreeTimer = op.patch.freeTimer.getTime();
+
+            isPrerendering = true;
+            prerenderCount = 0;
+        }
+    }
+});
 
 inEvents.onChange = () =>
 {
@@ -113,8 +131,8 @@ function render()
 
         if (prerenderCount >= events.length + numExtraFrames)
         {
-            op.patch.timer.setTime(0);
-            op.patch.freeTimer.setTime(0);
+            op.patch.timer.setTime(restartTime);
+            op.patch.freeTimer.setTime(restartTimeFreeTimer);
 
             // setTimeout(() =>
             // {
