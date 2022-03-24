@@ -93,5 +93,6 @@ function rebuild()
         }
     }
 
+    outParent.set(null);
     outParent.set(parent);
 }
