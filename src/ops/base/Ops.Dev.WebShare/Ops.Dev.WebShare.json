@@ -61,5 +61,32 @@
             }
         ],
         "name": "Ops.Dev.WebShare"
+    },
+    "summary": "opens a sharing dialog to share text and images",
+    "issues": "",
+    "caniusequery": "web-share",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Text",
+                "text": "text to share"
+            },
+            {
+                "name": "URL",
+                "text": "url to share"
+            },
+            {
+                "name": "Status",
+                "text": "success/error"
+            },
+            {
+                "name": "Supported",
+                "text": "true/false for browser support of web-share-api"
+            }
+        ]
     }
 }

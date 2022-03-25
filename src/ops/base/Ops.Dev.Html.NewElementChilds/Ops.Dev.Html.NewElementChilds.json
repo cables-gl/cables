@@ -1,0 +1,86 @@
+{
+    "id": "ad7eea9a-f4af-4ab7-bb70-922242529681",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1556520624739
+        },
+        {
+            "message": "cloned op from Ops.Html.ElementChilds",
+            "author": "stephan",
+            "date": 1648049930135
+        },
+        {
+            "message": "Ops.User.stephan.NewElementChilds renamed to Ops.Dev.Html.NewElementChilds",
+            "author": "stephan",
+            "date": 1648049980618
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1648049930133,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Parent"
+            },
+            {
+                "type": 2,
+                "name": "Child 1"
+            },
+            {
+                "type": 2,
+                "name": "Child 2"
+            },
+            {
+                "type": 2,
+                "name": "Child 3"
+            },
+            {
+                "type": 2,
+                "name": "Child 4"
+            },
+            {
+                "type": 2,
+                "name": "Child 5"
+            },
+            {
+                "type": 2,
+                "name": "Child 6"
+            },
+            {
+                "type": 2,
+                "name": "Child 7"
+            },
+            {
+                "type": 2,
+                "name": "Child 8"
+            },
+            {
+                "type": 2,
+                "name": "Child 9"
+            },
+            {
+                "type": 2,
+                "name": "Child 10"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Parent Out"
+            }
+        ],
+        "name": "Ops.Html.ElementChilds"
+    },
+    "summary": "Set childs of a HTML Element",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "S4VD0H"
+}
