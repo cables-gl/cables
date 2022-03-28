@@ -113,22 +113,25 @@ function update()
 
     img.onload = function ()
     {
-        createCanvas();
-        op.patch.loading.finished(loadingId);
-        canvas.width = texWidth.get();
-        canvas.height = texHeight.get();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        textureOut.set(new CGL.Texture.createFromImage(cgl, canvas,
-            {
-                "wrap": cgl_wrap,
-                "filter": cgl_filter,
-                "width": canvas.width,
-                "height": canvas.height,
-                "unpackAlpha": true
-            }));
-        removeCanvas();
-        outLoaded.set(true);
+        cgl.addNextFrameOnceCallback(() =>
+        {
+            createCanvas();
+            op.patch.loading.finished(loadingId);
+            canvas.width = texWidth.get();
+            canvas.height = texHeight.get();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            textureOut.set(new CGL.Texture.createFromImage(cgl, canvas,
+                {
+                    "wrap": cgl_wrap,
+                    "filter": cgl_filter,
+                    "width": canvas.width,
+                    "height": canvas.height,
+                    "unpackAlpha": true
+                }));
+            removeCanvas();
+            outLoaded.set(true);
+        });
     };
 
     img.src = data;

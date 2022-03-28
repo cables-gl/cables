@@ -50,6 +50,11 @@
                 "type": 0,
                 "name": "Environment map does not contain RGBE data",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rotation",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -56,19 +56,43 @@
             },
             {
                 "type": 0,
-                "name": "Use mesh tangents/binormals",
-                "group": "Shader Parameters",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Disable geometric roughness",
                 "group": "Shader Parameters",
                 "subType": "boolean"
             },
             {
                 "type": 0,
+                "name": "Use roughness from normal map",
+                "group": "Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Alpha Mode index",
+                "group": "Shader Parameters",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Tonemapping index",
+                "group": "Tonemapping",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Exposure",
+                "group": "Tonemapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Use Vertex Colours",
+                "group": "Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Vertex Colour Mode index",
                 "group": "Shader Parameters",
                 "subType": "integer"
             },

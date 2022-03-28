@@ -21,7 +21,7 @@ let numTextures = 1;
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
-
+const drawBuffArr = [];
 let lastShader = null;
 let shader = null;
 
@@ -74,8 +74,6 @@ function initFbLater()
     needInit = true;
     warning();
 }
-
-const drawBuffArr = [];
 
 function resetShader()
 {

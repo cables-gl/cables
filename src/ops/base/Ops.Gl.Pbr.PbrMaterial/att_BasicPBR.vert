@@ -7,6 +7,9 @@ IN vec3  attrVertNormal;
 IN vec3  attrTangent;
 IN vec3  attrBiTangent;
 IN float attrVertIndex;
+#ifdef VERTEX_COLORS
+IN vec4 attrVertColor;
+#endif
 
 {{MODULES_HEAD}}
 
@@ -14,11 +17,14 @@ OUT vec2 texCoord;
 OUT vec4 FragPos;
 OUT mat3 TBN;
 OUT vec3 norm;
+OUT vec3 normM;
+#ifdef VERTEX_COLORS
+OUT vec4 vCol0;
+#endif
 
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
-
 
 void main()
 {
@@ -53,9 +59,14 @@ void main()
     #endif
     #endif
 
-    TBN = mat3(tangent, bitangent, N);
+    #ifdef VERTEX_COLORS
+    vCol0 = attrVertColor;
+    #endif
 
-    norm = N;
+    TBN = mat3(tangent, bitangent, N);
+    normM = N;
+    norm = attrVertNormal;
     {{MODULE_VERTEX_POSITION}}
     gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;
 }
+

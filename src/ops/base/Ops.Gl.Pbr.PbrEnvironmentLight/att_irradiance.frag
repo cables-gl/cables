@@ -25,10 +25,11 @@ precision highp int;
 UNI vec3 camPos;
 
 IN  vec3 FragPos;
+UNI float rotation;
 UNI vec2 filteringInfo;
 UNI sampler2D EquiCubemap;
 
-vec2 SampleSphericalMap(vec3 direction)
+vec2 SampleSphericalMap(vec3 direction, float rotation)
 {
     #ifndef WEBGL1
         vec3 newDirection = normalize(direction);
@@ -43,6 +44,7 @@ vec2 SampleSphericalMap(vec3 direction)
         sampleUV *= vec2(-0.1591, 0.3183);
         sampleUV += 0.5;
     #endif
+    sampleUV.x += rotation;
     return sampleUV * vec2(-1.,1.);
 }
 
@@ -175,9 +177,9 @@ void main()
             float mipLevel = clamp(l + 1.0, 0.0, maxLevel);
 
             #ifndef DONT_USE_RGBE_CUBEMAPS
-            vec3 c = DecodeRGBE8(SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * Ls), mipLevel)).rgb;
+            vec3 c = DecodeRGBE8(SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * Ls, rotation), mipLevel)).rgb;
             #else
-            vec3 c = SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * Ls), mipLevel).rgb;
+            vec3 c = SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * Ls, rotation), mipLevel).rgb;
             #endif
             col.rgb += c;
         }
