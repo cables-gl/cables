@@ -33,7 +33,12 @@ void main()
     texCoord = attrTexCoord;
     texCoord.y = 1.0 - texCoord.y;
     vec4 pos = vec4(vPosition,  1.0);
-
+    norm = attrVertNormal;
+    vec3 tangent = attrTangent;
+    vec3 bitangent = attrBiTangent;
+    
+    {{MODULE_VERTEX_POSITION}}
+    
     #ifndef INSTANCING
     FragPos = mMatrix * pos;
     #else
@@ -41,21 +46,21 @@ void main()
     #endif
 
     #ifndef INSTANCING
-    vec3 tangent = normalize(vec3(mMatrix * vec4(attrTangent,    0.0)));
-    vec3 N = normalize(vec3(mMatrix * vec4(attrVertNormal, 0.0)));
+    tangent = normalize(vec3(mMatrix * vec4(tangent,    0.0)));
+    vec3 N = normalize(vec3(mMatrix * vec4(norm, 0.0)));
     #else
-    vec3 tangent = normalize(vec3(instMat * vec4(attrTangent,    0.0)));
-    vec3 N = normalize(vec3(instMat * vec4(attrVertNormal, 0.0)));
+    tangent = normalize(vec3(instMat * vec4(tangent,    0.0)));
+    vec3 N = normalize(vec3(instMat * vec4(norm, 0.0)));
     #endif
 
     #ifndef DONT_USE_GS
     tangent      = normalize(tangent - dot(tangent, N) * N);
-    vec3 bitangent = cross(N, tangent);
+    bitangent = cross(N, tangent);
     #else
     #ifndef INSTANCING
-    vec3 bitangent = normalize(vec3(mMatrix * vec4(attrBiTangent,  0.0)));
+    bitangent = normalize(vec3(mMatrix * vec4(bitangent,  0.0)));
     #else
-    vec3 bitangent = normalize(vec3(instMat * vec4(attrBiTangent,  0.0)));
+    bitangent = normalize(vec3(instMat * vec4(bitangent,  0.0)));
     #endif
     #endif
 
@@ -65,8 +70,6 @@ void main()
 
     TBN = mat3(tangent, bitangent, N);
     normM = N;
-    norm = attrVertNormal;
-    {{MODULE_VERTEX_POSITION}}
+
     gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;
 }
-
