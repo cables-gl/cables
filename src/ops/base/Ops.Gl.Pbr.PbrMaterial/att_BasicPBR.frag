@@ -166,6 +166,7 @@ void main()
     #ifdef VERTEX_COLORS
     #ifdef VCOL_COLOUR
         albedo.rgb *= pow(vCol0.rgb, vec3(2.2));
+        AlbedoMap.rgb *= pow(vCol0.rgb, vec3(2.2));
     #endif
     #ifdef VCOL_AORM
         AO = vCol0.r;
@@ -185,7 +186,7 @@ void main()
 
     // set up values for later calculations
     float NdotV          = abs(dot(N, V));
-    vec3  F0             = mix(vec3(0.04), albedo.rgb, metalness);
+    vec3  F0             = mix(vec3(0.04), AlbedoMap.rgb, metalness);
 
     #ifndef WEBGL1
     #ifndef DONT_USE_GR
@@ -266,4 +267,3 @@ void main()
     {{MODULE_COLOR}}
     outColor = col;
 }
-
