@@ -2,29 +2,19 @@ const
     inObj = op.inObject("MidiJson"),
     inTime = op.inValue("Time"),
     outBeat = op.outValue("Beat"),
-
     outTrackNames = op.outArray("Track Names"),
     outNames = op.outArray("Names"),
     outProgress = op.outArray("Progress"),
     outVelocity = op.outArray("Velocity"),
-
     outNumTracks = op.outValue("Num Tracks"),
     outBPM = op.outValue("BPM"),
     outData = op.outObject("Data");
 
-let
-    midi = null,
-    bpm = 0,
-    arrNames = [],
-    arrProgress = [],
-    arrVelocity = [],
-    data =
-    {
-        "beat": 0,
-        "names": arrNames,
-        "progress": arrProgress,
-        "velocity": arrVelocity,
-    };
+let midi = null;
+let arrNames = [];
+let arrProgress = [];
+let arrVelocity = [];
+let bpm = 0;
 
 inObj.onChange = function ()
 {
@@ -32,7 +22,8 @@ inObj.onChange = function ()
     outNumTracks.set(0);
 
     midi = inObj.get();
-    if (!midi || !midi.tracks) return;
+    if (!midi) return;
+    if (!midi.tracks) return;
 
     outNumTracks.set(midi.tracks.length);
 
@@ -62,13 +53,16 @@ inObj.onChange = function ()
 
 inTime.onChange = function ()
 {
-    if (!midi || !midi.tracks) return;
+    if (!midi) return;
+    if (!midi.tracks) return;
 
     let time = inTime.get();
     outNames.set(null);
     outProgress.set(null);
     outVelocity.set(null);
     outData.set(null);
+
+    let beat = Math.round(inTime.get() / 60 * (bpm));
 
     for (let t = 0; t < midi.tracks.length; t++)
     {
@@ -87,6 +81,19 @@ inTime.onChange = function ()
                 arrProgress[t] = (time - note.time) / (note.duration);
                 arrNames[t] = note.name;
                 arrVelocity[t] = note.velocity;
+
+                const data =
+                {
+                    "beat": 0,
+                    "names": arrNames,
+                    "progress": arrProgress,
+                    "velocity": arrVelocity,
+                    "midi": note.midi,
+                    "beat": beat
+
+                };
+
+                outData.set(data);
             }
         }
     }
@@ -95,9 +102,5 @@ inTime.onChange = function ()
     outProgress.set(arrProgress);
     outVelocity.set(arrVelocity);
 
-    let beat = Math.round(inTime.get() / 60 * bpm);
-    data.beat = beat;
-    outData.set(data);
-
-    outBeat.set(beat || 0);
+    outBeat.set(beat);
 };

@@ -24,10 +24,11 @@ precision highp int;
 
 IN  vec3 FragPos;
 UNI float roughness;
+UNI float rotation;
 UNI vec2 filteringInfo;
 UNI sampler2D EquiCubemap;
 
-vec2 SampleSphericalMap(vec3 direction)
+vec2 SampleSphericalMap(vec3 direction, float rotation)
 {
     #ifndef WEBGL1
         vec3 newDirection = normalize(direction);
@@ -42,6 +43,7 @@ vec2 SampleSphericalMap(vec3 direction)
         sampleUV *= vec2(-0.1591, 0.3183);
         sampleUV += 0.5;
     #endif
+    sampleUV.x += rotation;
     return sampleUV * vec2(-1.,1.);
 }
 
@@ -157,7 +159,7 @@ void main()
 
     if (alphaG == 0.)
     {
-        result = SAMPLETEX(EquiCubemap, SampleSphericalMap(n), 0.0);
+        result = SAMPLETEX(EquiCubemap, SampleSphericalMap(n, rotation), 0.0);
     }
     else
     {
@@ -198,9 +200,9 @@ void main()
                 weight += NoL;
 
                 #ifndef DONT_USE_RGBE_CUBEMAPS
-                vec3 c = DecodeRGBE8(SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * L), mipLevel)).rgb;
+                vec3 c = DecodeRGBE8(SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * L, rotation), mipLevel)).rgb;
                 #else
-                vec3 c = SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * L), mipLevel).rgb;
+                vec3 c = SAMPLETEX(EquiCubemap, SampleSphericalMap(tbn * L, rotation), mipLevel).rgb;
                 #endif
                 result.rgb += c * NoL;
             }

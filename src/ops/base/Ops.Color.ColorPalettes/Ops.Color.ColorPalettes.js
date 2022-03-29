@@ -14,31 +14,37 @@ body.appendChild(canvas);
 let ctx = canvas.getContext("2d");
 
 index.onChange =
-inLinear.onChange =
-() =>
-{
-    op.patch.cgl.addNextFrameOnceCallback(buildTexture);
-};
+inLinear.onChange = buildTextureLater;
 
 let arr = [];
 arr.length = 5 * 3;
 let lastFilter = null;
 
+buildTextureLater();
+
 function hexToR(h)
 {
     return parseInt((cutHex(h)).substring(0, 2), 16);
 }
+
 function hexToG(h)
 {
     return parseInt((cutHex(h)).substring(2, 4), 16);
 }
+
 function hexToB(h)
 {
     return parseInt((cutHex(h)).substring(4, 6), 16);
 }
+
 function cutHex(h)
 {
     return (h.charAt(0) == "#") ? h.substring(1, 7) : h;
+}
+
+function buildTextureLater()
+{
+    op.patch.cgl.addNextFrameOnceCallback(buildTexture);
 }
 
 function buildTexture()
@@ -1085,5 +1091,3 @@ const colors = [
     "#990000", "#336699", "#DDDDDD", "#999999", "333333",
     "#F13A4B", "#3D3C3E", "#22BDAF", "#F4F4F4", "D7D7D7",
     "#F53A59", "#001D2D", "#15A88C", "#B7D9C8", "F3F5F4",];
-
-buildTexture();

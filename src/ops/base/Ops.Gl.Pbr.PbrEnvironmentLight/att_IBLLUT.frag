@@ -121,11 +121,12 @@ IN vec3 P;
 			float NoH = clamp(H.z, 0.0, 1.0);
 
 			if (NoL > 0.0) {
-				float v  = Visibility(NoV, NoL, a) * NoL * (VoH / NoH);
+				float Gv = Visibility(NoV, NoL, a) * NoL * (VoH / NoH);
 				float Fc = pow(1.0 - VoH, 5.0);
 
-				r.x 	+= v * (1.0 - Fc);
-				r.y 	+= v * Fc;
+				// modified for multiscattering https://google.github.io/filament/Filament.md.html#toc5.3.4.7
+			    r.x += Gv * Fc;
+				r.y += Gv;
 			}
 		}
 		r *= NUM_SAMPLES_FLOAT_INVERSED4;
