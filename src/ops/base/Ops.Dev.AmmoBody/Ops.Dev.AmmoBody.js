@@ -4,6 +4,7 @@ const
     inMass = op.inFloat("Mass", 0),
     inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone", "Geom Convex Hull"], "Box"),
     inGeom = op.inObject("Geometry", null, "geometry"),
+    inGeomSimplify = op.inInt("Simplify Max Triangles", 50),
     inRadius = op.inFloat("Radius", 1),
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
@@ -11,6 +12,7 @@ const
     inReset = op.inTriggerButton("Reset"),
     inActivate = op.inTriggerButton("Activate"),
     inNeverDeactivate = op.inBool("Never Deactivate"),
+    inActive = op.inBool("Active", true),
 
     next = op.outTrigger("next"),
     outRayHit = op.outBoolNum("Ray Hit"),
@@ -37,17 +39,19 @@ let doScale = true;
 inName.onChange = updateBodyMeta;
 
 inExec.onLinkChanged =
-op.onDelete =
-inGeom.onChange =
-inShape.onChange =
-inMass.onChange =
-inRadius.onChange =
-inSizeY.onChange =
-inSizeZ.onChange =
-inSizeX.onChange = () =>
-{
-    removeBody();
-};
+    op.onDelete =
+    inGeomSimplify.onChange =
+    inActive.onChange =
+    inGeom.onChange =
+    inShape.onChange =
+    inMass.onChange =
+    inRadius.onChange =
+    inSizeY.onChange =
+    inSizeZ.onChange =
+    inSizeX.onChange = () =>
+    {
+        removeBody();
+    };
 
 inActivate.onTriggered = () =>
 {
@@ -117,6 +121,7 @@ function getTriangle(geom, i)
 
 function setup()
 {
+    if (!inActive.get()) return;
     doScale = true;
 
     if (world)
@@ -157,7 +162,15 @@ function setup()
         const _vec3_2 = new Ammo.btVector3(0, 0, 0);
         const _vec3_3 = new Ammo.btVector3(0, 0, 0);
 
-        for (let i = 0; i < geom.getNumTriangles(); i++)
+        let step = 1;
+
+        if (geom.getNumTriangles() > inGeomSimplify.get() && inGeomSimplify.get() > 0)
+        {
+            step = Math.floor(geom.getNumTriangles() / inGeomSimplify.get());
+        }
+
+        console.log("num t", step);
+        for (let i = 0; i < geom.getNumTriangles(); i += step)
         {
             const triangle = getTriangle(geom, i);
 
@@ -193,10 +206,12 @@ function setup()
         inSizeX.setUiAttribs({ "greyout": true });
         inSizeY.setUiAttribs({ "greyout": true });
         inSizeZ.setUiAttribs({ "greyout": true });
+        inGeomSimplify.setUiAttribs({ "greyout": false });
         doScale = false;
     }
     else
     {
+        inGeomSimplify.setUiAttribs({ "greyout": true });
         inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
         inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
         inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
@@ -225,6 +240,7 @@ function setup()
 function renderTransformed()
 {
     if (!body) return;
+    if (!inActive.get()) return;
 
     let ms = body.getMotionState();
     if (ms)

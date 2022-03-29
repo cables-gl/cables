@@ -41,6 +41,11 @@
             },
             {
                 "type": 0,
+                "name": "Simplify Max Triangles",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Radius",
                 "subType": "number"
             },
@@ -70,6 +75,11 @@
             {
                 "type": 0,
                 "name": "Never Deactivate",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
                 "subType": "boolean"
             }
         ],
