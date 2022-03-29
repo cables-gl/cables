@@ -223,6 +223,13 @@ Geometry.prototype.flipNormals = function (x, y, z)
     }
 };
 
+Geometry.prototype.getNumTriangles = function ()
+{
+    if (this.verticesIndices && this.verticesIndices.length) return this.verticesIndices.length / 3;
+    return this.vertices.length / 3;
+};
+
+
 /**
  * @function flipVertDir
  * @memberof Geometry

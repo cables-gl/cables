@@ -21,9 +21,23 @@
                 "name": "Update"
             },
             {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
                 "type": 0,
                 "name": "Shape index",
                 "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
             },
             {
                 "type": 0,
@@ -44,15 +58,6 @@
                 "type": 0,
                 "name": "Size Z",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Mass",
-                "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "Name"
             },
             {
                 "type": 1,
