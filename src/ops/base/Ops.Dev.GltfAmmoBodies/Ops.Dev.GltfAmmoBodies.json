@@ -1,0 +1,47 @@
+{
+    "id": "ea7553aa-0836-4512-9253-34b86d62accc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1648640936153
+        },
+        {
+            "message": "Ops.User.pandur.GltfAmmoBodies renamed to Ops.Dev.GltfAmmoBodies",
+            "author": "pandur",
+            "date": 1648643407287
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1648640939510,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 5,
+                "name": "Filter Meshes"
+            },
+            {
+                "type": 0,
+                "name": "Mass kg",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Multiply",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Meshes",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.GltfAmmoBodies"
+    }
+}
