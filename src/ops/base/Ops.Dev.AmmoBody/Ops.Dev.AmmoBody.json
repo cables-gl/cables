@@ -21,8 +21,27 @@
                 "name": "Update"
             },
             {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
                 "type": 0,
                 "name": "Shape index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Simplify Max Triangles",
                 "subType": "integer"
             },
             {
@@ -46,15 +65,6 @@
                 "subType": "number"
             },
             {
-                "type": 0,
-                "name": "Mass",
-                "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "Name"
-            },
-            {
                 "type": 1,
                 "name": "Reset"
             },
@@ -65,6 +75,11 @@
             {
                 "type": 0,
                 "name": "Never Deactivate",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
                 "subType": "boolean"
             }
         ],
