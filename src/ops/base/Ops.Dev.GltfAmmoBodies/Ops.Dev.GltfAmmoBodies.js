@@ -83,9 +83,7 @@ function addToWorld()
     scene = cgl.frameStore.currentScene;
     if (!scene || !cgl.frameStore.ammoWorld) return;
 
-    if (
-        world != cgl.frameStore.ammoWorld ||
-        currentSceneLoaded != scene.loaded) removeFromWorld();
+    if (world != cgl.frameStore.ammoWorld || currentSceneLoaded != scene.loaded) removeFromWorld();
 
     world = cgl.frameStore.ammoWorld;
 
@@ -112,8 +110,10 @@ function addToWorld()
         const sc = vec3.create();
         mat4.getScaling(sc, scene.nodes[i].modelMatAbs());
 
+        console.log("sc", sc, scene.nodes[i]._scale);
         // colShape = new Ammo.btBoxShape(new Ammo.btVector3(0.25,0.25,0.25));
-        colShape = CABLES.AmmoWorld.createConvexHullFromGeom(scene.nodes[i].mesh.meshes[0].geom, 100, sc);
+
+        colShape = CABLES.AmmoWorld.createConvexHullFromGeom(scene.nodes[i].mesh.meshes[0].geom, 100, scene.nodes[i]._scale);
 
         colShape.setMargin(0.05);
 
@@ -127,11 +127,12 @@ function addToWorld()
         let body = new Ammo.btRigidBody(rbInfo);
         world.addRigidBody(body);
 
-        bodies.push({
-            "node": scene.nodes[i],
-            "motionState": motionState,
-            "body": body
-        });
+        bodies.push(
+            {
+                "node": scene.nodes[i],
+                "motionState": motionState,
+                "body": body
+            });
     }
 
     outNum.set(bodies.length);

@@ -503,30 +503,35 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
 
     let step = 1;
 
-    if (geom.getNumTriangles() > numTris && numTris > 0)
+    if (geom.vertices.length / 3 > numTris && numTris > 0)
     {
-        step = Math.floor(geom.getNumTriangles() / numTris);
+        step = Math.floor(geom.vertices.length / 3 / numTris);
     }
 
     console.log("num t", step);
-    for (let i = 0; i < geom.getNumTriangles(); i += step)
+    for (let i = 0; i < geom.vertices.length / 3; i += step)
     {
-        const triangle = this._getGeomTriangle(geom, i);
+        _vec3_1.setX(geom.vertices[i * 3 + 0] * scale[0]);
+        _vec3_1.setY(geom.vertices[i * 3 + 1] * scale[1]);
+        _vec3_1.setZ(geom.vertices[i * 3 + 2] * scale[2]);
+        colShape.addPoint(_vec3_1, true); // todo: only set true on last vertex
 
-        _vec3_1.setX(triangle[0] * scale[0]);
-        _vec3_1.setY(triangle[1] * scale[1]);
-        _vec3_1.setZ(triangle[2] * scale[2]);
-        colShape.addPoint(_vec3_1, true);
+        // const triangle = this._getGeomTriangle(geom, i);
 
-        _vec3_2.setX(triangle[3] * scale[0]);
-        _vec3_2.setY(triangle[4] * scale[1]);
-        _vec3_2.setZ(triangle[5] * scale[2]);
-        colShape.addPoint(_vec3_2, true);
+        // _vec3_1.setX(triangle[0] * scale[0]);
+        // _vec3_1.setY(triangle[1] * scale[1]);
+        // _vec3_1.setZ(triangle[2] * scale[2]);
+        // colShape.addPoint(_vec3_1, false);
 
-        _vec3_3.setX(triangle[6] * scale[0]);
-        _vec3_3.setY(triangle[7] * scale[1]);
-        _vec3_3.setZ(triangle[8] * scale[2]);
-        colShape.addPoint(_vec3_3, true);
+        // _vec3_2.setX(triangle[3] * scale[0]);
+        // _vec3_2.setY(triangle[4] * scale[1]);
+        // _vec3_2.setZ(triangle[5] * scale[2]);
+        // colShape.addPoint(_vec3_2, false);
+
+        // _vec3_3.setX(triangle[6] * scale[0]);
+        // _vec3_3.setY(triangle[7] * scale[1]);
+        // _vec3_3.setZ(triangle[8] * scale[2]);
+        // colShape.addPoint(_vec3_3, true);
 
         // triangle_mesh.addTriangle(
         //     _vec3_1,
@@ -535,6 +540,9 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
         //     true
         // );
     }
+    // colShape.optimizeConvexHull();
+
+    colShape.initializePolyhedralFeatures();
 
     Ammo.destroy(_vec3_1);
     Ammo.destroy(_vec3_2);
