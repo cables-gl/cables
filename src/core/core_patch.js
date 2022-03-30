@@ -814,6 +814,7 @@ Patch.prototype.reloadOp = function (objName, cb)
         oldOp.deleted = true;
         const self = this;
         const op = this.addOp(objName, oldOp.uiAttribs);
+        if (oldOp.storage) op.storage = oldOp.storage;
         ops.push(op);
 
         let j, k, l;
