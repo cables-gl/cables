@@ -199,6 +199,7 @@ class AmmoDebugDrawer
 
         this.debugDrawer = new Ammo.DebugDrawer();
         this.debugDrawer.drawLine = this.drawLine.bind(this);
+        this.debugDrawer.drawTriangle = this.drawTriangle.bind(this);
         this.debugDrawer.drawContactPoint = this.drawContactPoint.bind(this);
         this.debugDrawer.reportErrorWarning = this.reportErrorWarning.bind(this);
         this.debugDrawer.draw3dText = this.draw3dText.bind(this);
@@ -313,7 +314,7 @@ class AmmoDebugDrawer
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
     }
 
-    // virtual void   drawTriangle(const btVector3& a, const btVector3& b, const btVector3& c, const btVector3& color, btScalar alpha);
+
     // virtual void   drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color);
 
     drawContactPoint(pointOnB, normalOnB, distance, lifeTime, color)
@@ -342,6 +343,14 @@ class AmmoDebugDrawer
         this.indexPoints++;
     }
 
+    // virtual void   drawTriangle(const btVector3& a, const btVector3& b, const btVector3& c, const btVector3& color, btScalar alpha);
+    drawTriangle(a, b, c, color)
+    {
+        console.log("draw triangle!");
+        this.drawLine(a, b, color);
+        this.drawLine(b, c, color);
+        this.drawLine(a, c, color);
+    }
 
     drawLine(from, to, color)
     {
@@ -365,6 +374,8 @@ class AmmoDebugDrawer
         this.verts[idx + 0] = fromX;
         this.verts[idx + 1] = fromY;
         this.verts[idx + 2] = fromZ;
+
+
         // setXYZ(this.verticesArray, this.index, fromX, fromY, fromZ);
         // setXYZ(this.colorsArray, this.index++, r, g, b);
 
@@ -482,8 +493,9 @@ AmmoWorld._getGeomTriangle = function (geom, i)
     return arr;
 };
 
-AmmoWorld.createConvexHullFromGeom = function (geom, numTris)
+AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
 {
+    scale = scale || [1, 1, 1];
     const colShape = new Ammo.btConvexHullShape();
     const _vec3_1 = new Ammo.btVector3(0, 0, 0);
     const _vec3_2 = new Ammo.btVector3(0, 0, 0);
@@ -501,19 +513,19 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris)
     {
         const triangle = this._getGeomTriangle(geom, i);
 
-        _vec3_1.setX(triangle[0]);
-        _vec3_1.setY(triangle[1]);
-        _vec3_1.setZ(triangle[2]);
+        _vec3_1.setX(triangle[0] * scale[0]);
+        _vec3_1.setY(triangle[1] * scale[1]);
+        _vec3_1.setZ(triangle[2] * scale[2]);
         colShape.addPoint(_vec3_1, true);
 
-        _vec3_2.setX(triangle[3]);
-        _vec3_2.setY(triangle[4]);
-        _vec3_2.setZ(triangle[5]);
+        _vec3_2.setX(triangle[3] * scale[0]);
+        _vec3_2.setY(triangle[4] * scale[1]);
+        _vec3_2.setZ(triangle[5] * scale[2]);
         colShape.addPoint(_vec3_2, true);
 
-        _vec3_3.setX(triangle[6]);
-        _vec3_3.setY(triangle[7]);
-        _vec3_3.setZ(triangle[8]);
+        _vec3_3.setX(triangle[6] * scale[0]);
+        _vec3_3.setY(triangle[7] * scale[1]);
+        _vec3_3.setZ(triangle[8] * scale[2]);
         colShape.addPoint(_vec3_3, true);
 
         // triangle_mesh.addTriangle(

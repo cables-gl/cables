@@ -26,7 +26,7 @@ const sizeVec = vec3.create();
 
 const meshCube = new CGL.WireCube(cgl);
 
-let tmpTrans=null;
+let tmpTrans = null;
 
 inMass.onChange =
 inNames.onChange =
@@ -42,12 +42,15 @@ function update()
 
     for (let i = 0; i < bodies.length; i++)
     {
-
         cgl.pushModelMatrix();
 
+        const sc = vec3.create();
+        mat4.getScaling(sc, cgl.mMatrix);
+
         mat4.identity(cgl.mMatrix);
-        // mat4.translate(cgl.mMatrix,cgl.mMatrix,[]);
-        mat4.mul(cgl.mMatrix,cgl.mMatrix,bodies[i].node.modelMatAbs());
+
+        mat4.mul(cgl.mMatrix, cgl.mMatrix, bodies[i].node.modelMatAbs());
+        mat4.scale(cgl.mMatrix, cgl.mMatrix, sc);
 
         if (!tmpTrans)tmpTrans = new Ammo.btTransform();
 
@@ -57,35 +60,6 @@ function update()
         bodies[i].body.setWorldTransform(tmpTrans);
 
         cgl.popModelMatrix();
-
-        // vec3.transformMat4(vec, empty, bodies[i].node.modelMatAbs());
-        // bodies[i].body.position.x = vec[0];
-        // bodies[i].body.position.y = vec[1];
-        // bodies[i].body.position.z = vec[2];
-
-        // if (bodies[i].bounds && bodies[i].body)
-        // {
-        //     const sc = vec3.create();
-        //     mat4.getScaling(sc, bodies[i].node.modelMatAbs());
-
-        //     const mul = inMulSize.get();
-
-        //     const hex = bodies[i].bounds.size[0] * 0.5 * mul * sc[0];
-        //     const hey = bodies[i].bounds.size[1] * 0.5 * mul * sc[1];
-        //     const hez = bodies[i].bounds.size[2] * 0.5 * mul * sc[2];
-
-        //     if (bodies[i].body.shapes[0].halfExtents.x != hex ||
-        //         bodies[i].body.shapes[0].halfExtents.y != hey ||
-        //         bodies[i].body.shapes[0].halfExtents.z != hez)
-        //     {
-        //         bodies[i].body.shapes[0].halfExtents.x = bodies[i].bounds.size[0] * 0.5 * mul * sc[0];
-        //         bodies[i].body.shapes[0].halfExtents.y = bodies[i].bounds.size[1] * 0.5 * mul * sc[1];
-        //         bodies[i].body.shapes[0].halfExtents.z = bodies[i].bounds.size[2] * 0.5 * mul * sc[2];
-
-        //         // bodies[i].body.computeAABB();
-        //         bodies[i].body.updateBoundingRadius();
-        //     }
-        // }
     }
 }
 
@@ -123,20 +97,23 @@ function addToWorld()
     }
     if (!scene) return;
 
-
     currentSceneLoaded = scene.loaded;
     for (let i = 0; i < scene.nodes.length; i++)
     {
         if (!scene.nodes[i].mesh) continue;
         if (scene.nodes[i].name.indexOf(inNames.get()) == -1) continue;
 
-
-        let colShape=null;
+        let colShape = null;
 
         console.log(scene.nodes[i]);
 
+        scene.nodes[i].transform(cgl, 0);
+        scene.nodes[i].updateMatrix();
+        const sc = vec3.create();
+        mat4.getScaling(sc, scene.nodes[i].modelMatAbs());
+
         // colShape = new Ammo.btBoxShape(new Ammo.btVector3(0.25,0.25,0.25));
-        colShape = CABLES.AmmoWorld.createConvexHullFromGeom(scene.nodes[i].mesh.meshes[0].geom, 100);
+        colShape = CABLES.AmmoWorld.createConvexHullFromGeom(scene.nodes[i].mesh.meshes[0].geom, 100, sc);
 
         colShape.setMargin(0.05);
 
@@ -152,11 +129,9 @@ function addToWorld()
 
         bodies.push({
             "node": scene.nodes[i],
-            "motionState":motionState,
+            "motionState": motionState,
             "body": body
         });
-
-        // world.addBody(body);
     }
 
     outNum.set(bodies.length);
