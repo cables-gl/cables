@@ -92,11 +92,14 @@ Port.prototype.getValueForDisplay = function ()
 {
     let str = String(this.value);
 
-    // if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
-    // {
-    //     if (!this.val) str = "false";
-    //     else str = "true";
-    // }
+    if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
+    {
+        str += " - ";
+
+        if (!this.value) str += "false";
+        else str += "true";
+    }
+
     if (str.length > 100) str = str.substring(0, 100);
 
     return str;

@@ -1,3 +1,5 @@
+// https://github.com/enable3d/enable3d/blob/master/packages/ammoPhysics/src/three-to-ammo.js
+
 const
     inExec = op.inTrigger("Update"),
     inName = op.inString("Name", ""),
@@ -60,7 +62,12 @@ inActivate.onTriggered = () =>
 
 function removeBody()
 {
-    if (world && body) world.removeRigidBody(body);
+    if (world && body)
+    {
+        world.removeRigidBody(body);
+        // Ammo.destroy(body);
+    }
+
     body = null;
 }
 
@@ -81,44 +88,6 @@ function updateBodyMeta()
     op.setUiAttribs({ "extendTitle": inName.get() });
 }
 
-function getTriangle(geom, i)
-{
-    const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    if (geom.verticesIndices && geom.verticesIndices.length)
-    {
-        const i3 = i * 3;
-        const i13 = (i + 1) * 3;
-        const i23 = (i + 2) * 3;
-        arr[0] = geom.vertices[geom.verticesIndices[i3] * 3 + 0];
-        arr[1] = geom.vertices[geom.verticesIndices[i3] * 3 + 1];
-        arr[2] = geom.vertices[geom.verticesIndices[i3] * 3 + 2];
-
-        arr[3] = geom.vertices[geom.verticesIndices[i13] * 3 + 0];
-        arr[4] = geom.vertices[geom.verticesIndices[i13] * 3 + 1];
-        arr[5] = geom.vertices[geom.verticesIndices[i13] * 3 + 2];
-
-        arr[6] = geom.vertices[geom.verticesIndices[i23] * 3 + 0];
-        arr[7] = geom.vertices[geom.verticesIndices[i23] * 3 + 1];
-        arr[8] = geom.vertices[geom.verticesIndices[i23] * 3 + 2];
-    }
-    else
-    {
-        arr[0] = geom.vertices[i * 9 + 0];
-        arr[1] = geom.vertices[i * 9 + 1];
-        arr[2] = geom.vertices[i * 9 + 2];
-
-        arr[3] = geom.vertices[i * 9 + 3];
-        arr[4] = geom.vertices[i * 9 + 4];
-        arr[5] = geom.vertices[i * 9 + 5];
-
-        arr[6] = geom.vertices[i * 9 + 6];
-        arr[7] = geom.vertices[i * 9 + 7];
-        arr[8] = geom.vertices[i * 9 + 8];
-    }
-
-    return arr;
-}
-
 function setup()
 {
     if (!inActive.get()) return;
@@ -129,14 +98,13 @@ function setup()
 
     if (!tmpTrans)tmpTrans = new Ammo.btTransform();
     if (!transform)transform = new Ammo.btTransform();
+    if (colShape)Ammo.destroy(colShape);
 
     transform.setIdentity();
 
-    copyCglTransform(transform);
+    CABLES.AmmoWorld.copyCglTransform(cgl, transform);
 
     if (motionState)Ammo.destroy(motionState);
-    if (colShape)Ammo.destroy(colShape);
-
     motionState = new Ammo.btDefaultMotionState(transform);
 
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
@@ -153,49 +121,10 @@ function setup()
         }
         else op.setUiError("nogeom", null);
 
-        colShape = new Ammo.btConvexHullShape();
-        // const triangle_mesh = new Ammo.btTriangleMesh();
-
         const geom = inGeom.get();
         if (!geom) return;
-        const _vec3_1 = new Ammo.btVector3(0, 0, 0);
-        const _vec3_2 = new Ammo.btVector3(0, 0, 0);
-        const _vec3_3 = new Ammo.btVector3(0, 0, 0);
 
-        let step = 1;
-
-        if (geom.getNumTriangles() > inGeomSimplify.get() && inGeomSimplify.get() > 0)
-        {
-            step = Math.floor(geom.getNumTriangles() / inGeomSimplify.get());
-        }
-
-        console.log("num t", step);
-        for (let i = 0; i < geom.getNumTriangles(); i += step)
-        {
-            const triangle = getTriangle(geom, i);
-
-            _vec3_1.setX(triangle[0]);
-            _vec3_1.setY(triangle[1]);
-            _vec3_1.setZ(triangle[2]);
-            colShape.addPoint(_vec3_1, true);
-
-            _vec3_2.setX(triangle[3]);
-            _vec3_2.setY(triangle[4]);
-            _vec3_2.setZ(triangle[5]);
-            colShape.addPoint(_vec3_2, true);
-
-            _vec3_3.setX(triangle[6]);
-            _vec3_3.setY(triangle[7]);
-            _vec3_3.setZ(triangle[8]);
-            colShape.addPoint(_vec3_3, true);
-
-            // triangle_mesh.addTriangle(
-            //     _vec3_1,
-            //     _vec3_2,
-            //     _vec3_3,
-            //     true
-            // );
-        }
+        colShape = CABLES.AmmoWorld.createConvexHullFromGeom(geom, inGeomSimplify.get());
 
         inRadius.set(1);
         inSizeX.set(1);
@@ -269,25 +198,6 @@ function renderTransformed()
     }
 }
 
-function copyCglTransform(transform)
-{
-    if (!btOrigin)
-    {
-        btOrigin = new Ammo.btVector3(0, 0, 0);
-        btQuat = new Ammo.btQuaternion(0, 0, 0, 0);
-    }
-    mat4.getTranslation(tmpOrigin, cgl.mMatrix);
-    mat4.getRotation(tmpQuat, cgl.mMatrix);
-
-    let changed = false;
-
-    btOrigin.setValue(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]);
-    btQuat.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);
-
-    transform.setOrigin(btOrigin);
-    transform.setRotation(btQuat);
-}
-
 function update()
 {
     if (world != cgl.frameStore.ammoWorld) removeBody();
@@ -300,7 +210,7 @@ function update()
 
     if (inMass.get() == 0 || doResetPos)
     {
-        copyCglTransform(transform);
+        CABLES.AmmoWorld.copyCglTransform(cgl, transform);
 
         motionState.setWorldTransform(transform);
         body.setWorldTransform(transform);
