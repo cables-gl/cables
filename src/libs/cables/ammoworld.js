@@ -567,6 +567,7 @@ AmmoWorld.copyCglTransform = function (cgl, transform)
     mat4.getRotation(tmpQuat, cgl.mMatrix);
     // quat.invert(tmpQuat, tmpQuat);
 
+
     // console.log(tmpQuat);
     //    let changed = false;
 
