@@ -314,22 +314,25 @@ inTrigger.onTriggered = function ()
     uniformFilteringInfo.setValue(filteringInfo);
     uniformPrefilteringInfo.setValue(prefilteringInfo);
 
-    if (IBLLUTSizeChanged)
+    if(!cgl.frameStore.shadowPass)
     {
-        computeIBLLUT(Number(inIBLLUTSize.get()));
-        IBLLUTSizeChanged = false;
-    }
+        if (IBLLUTSizeChanged)
+        {
+            computeIBLLUT(Number(inIBLLUTSize.get()));
+            IBLLUTSizeChanged = false;
+        }
 
-    if (PrefilteredSizeChanged)
-    {
-        capturePrefilteredCubemap(Number(inPrefilteredSize.get()));
-        PrefilteredSizeChanged = false;
-    }
+        if (PrefilteredSizeChanged)
+        {
+            capturePrefilteredCubemap(Number(inPrefilteredSize.get()));
+            PrefilteredSizeChanged = false;
+        }
 
-    if (IrradianceSizeChanged)
-    {
-        captureIrradianceCubemap(Number(inIrradianceSize.get()));
-        IrradianceSizeChanged = false;
+        if (IrradianceSizeChanged)
+        {
+            captureIrradianceCubemap(Number(inIrradianceSize.get()));
+            IrradianceSizeChanged = false;
+        }
     }
 
     pbrEnv.texIBLLUT = outTexIBLLUT.get();
