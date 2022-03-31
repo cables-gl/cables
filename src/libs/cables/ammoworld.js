@@ -199,6 +199,7 @@ class AmmoDebugDrawer
 
         this.debugDrawer = new Ammo.DebugDrawer();
         this.debugDrawer.drawLine = this.drawLine.bind(this);
+        this.debugDrawer.drawTriangle = this.drawTriangle.bind(this);
         this.debugDrawer.drawContactPoint = this.drawContactPoint.bind(this);
         this.debugDrawer.reportErrorWarning = this.reportErrorWarning.bind(this);
         this.debugDrawer.draw3dText = this.draw3dText.bind(this);
@@ -313,7 +314,7 @@ class AmmoDebugDrawer
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
     }
 
-    // virtual void   drawTriangle(const btVector3& a, const btVector3& b, const btVector3& c, const btVector3& color, btScalar alpha);
+
     // virtual void   drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color);
 
     drawContactPoint(pointOnB, normalOnB, distance, lifeTime, color)
@@ -342,6 +343,14 @@ class AmmoDebugDrawer
         this.indexPoints++;
     }
 
+    // virtual void   drawTriangle(const btVector3& a, const btVector3& b, const btVector3& c, const btVector3& color, btScalar alpha);
+    drawTriangle(a, b, c, color)
+    {
+        console.log("draw triangle!");
+        this.drawLine(a, b, color);
+        this.drawLine(b, c, color);
+        this.drawLine(a, c, color);
+    }
 
     drawLine(from, to, color)
     {
@@ -365,6 +374,8 @@ class AmmoDebugDrawer
         this.verts[idx + 0] = fromX;
         this.verts[idx + 1] = fromY;
         this.verts[idx + 2] = fromZ;
+
+
         // setXYZ(this.verticesArray, this.index, fromX, fromY, fromZ);
         // setXYZ(this.colorsArray, this.index++, r, g, b);
 
@@ -442,5 +453,129 @@ class AmmoDebugDrawer
         return this.debugDrawMode;
     }
 }
+
+
+AmmoWorld._getGeomTriangle = function (geom, i)
+{
+    const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    if (geom.verticesIndices && geom.verticesIndices.length)
+    {
+        const i3 = i * 3;
+        const i13 = (i + 1) * 3;
+        const i23 = (i + 2) * 3;
+        arr[0] = geom.vertices[geom.verticesIndices[i3] * 3 + 0];
+        arr[1] = geom.vertices[geom.verticesIndices[i3] * 3 + 1];
+        arr[2] = geom.vertices[geom.verticesIndices[i3] * 3 + 2];
+
+        arr[3] = geom.vertices[geom.verticesIndices[i13] * 3 + 0];
+        arr[4] = geom.vertices[geom.verticesIndices[i13] * 3 + 1];
+        arr[5] = geom.vertices[geom.verticesIndices[i13] * 3 + 2];
+
+        arr[6] = geom.vertices[geom.verticesIndices[i23] * 3 + 0];
+        arr[7] = geom.vertices[geom.verticesIndices[i23] * 3 + 1];
+        arr[8] = geom.vertices[geom.verticesIndices[i23] * 3 + 2];
+    }
+    else
+    {
+        arr[0] = geom.vertices[i * 9 + 0];
+        arr[1] = geom.vertices[i * 9 + 1];
+        arr[2] = geom.vertices[i * 9 + 2];
+
+        arr[3] = geom.vertices[i * 9 + 3];
+        arr[4] = geom.vertices[i * 9 + 4];
+        arr[5] = geom.vertices[i * 9 + 5];
+
+        arr[6] = geom.vertices[i * 9 + 6];
+        arr[7] = geom.vertices[i * 9 + 7];
+        arr[8] = geom.vertices[i * 9 + 8];
+    }
+
+    return arr;
+};
+
+AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
+{
+    scale = scale || [1, 1, 1];
+    const colShape = new Ammo.btConvexHullShape();
+    const _vec3_1 = new Ammo.btVector3(0, 0, 0);
+    const _vec3_2 = new Ammo.btVector3(0, 0, 0);
+    const _vec3_3 = new Ammo.btVector3(0, 0, 0);
+
+    let step = 1;
+
+    if (geom.vertices.length / 3 > numTris && numTris > 0)
+    {
+        step = Math.floor(geom.vertices.length / 3 / numTris);
+    }
+
+    console.log("num t", step);
+    for (let i = 0; i < geom.vertices.length / 3; i += step)
+    {
+        _vec3_1.setX(geom.vertices[i * 3 + 0] * scale[0]);
+        _vec3_1.setY(geom.vertices[i * 3 + 1] * scale[1]);
+        _vec3_1.setZ(geom.vertices[i * 3 + 2] * scale[2]);
+        colShape.addPoint(_vec3_1, true); // todo: only set true on last vertex
+
+        // const triangle = this._getGeomTriangle(geom, i);
+
+        // _vec3_1.setX(triangle[0] * scale[0]);
+        // _vec3_1.setY(triangle[1] * scale[1]);
+        // _vec3_1.setZ(triangle[2] * scale[2]);
+        // colShape.addPoint(_vec3_1, false);
+
+        // _vec3_2.setX(triangle[3] * scale[0]);
+        // _vec3_2.setY(triangle[4] * scale[1]);
+        // _vec3_2.setZ(triangle[5] * scale[2]);
+        // colShape.addPoint(_vec3_2, false);
+
+        // _vec3_3.setX(triangle[6] * scale[0]);
+        // _vec3_3.setY(triangle[7] * scale[1]);
+        // _vec3_3.setZ(triangle[8] * scale[2]);
+        // colShape.addPoint(_vec3_3, true);
+
+        // triangle_mesh.addTriangle(
+        //     _vec3_1,
+        //     _vec3_2,
+        //     _vec3_3,
+        //     true
+        // );
+    }
+    // colShape.optimizeConvexHull();
+
+    colShape.initializePolyhedralFeatures();
+
+    Ammo.destroy(_vec3_1);
+    Ammo.destroy(_vec3_2);
+    Ammo.destroy(_vec3_3);
+
+    return colShape;
+};
+
+
+AmmoWorld.copyCglTransform = function (cgl, transform)
+{
+    // if (!btOrigin)
+    // {
+    const btOrigin = new Ammo.btVector3(0, 0, 0);
+    const btQuat = new Ammo.btQuaternion(0, 0, 0, 0);
+    // }
+
+    const tmpOrigin = vec3.create();
+    const tmpQuat = quat.create();
+
+    mat4.getTranslation(tmpOrigin, cgl.mMatrix);
+    mat4.getRotation(tmpQuat, cgl.mMatrix);
+
+    let changed = false;
+
+    btOrigin.setValue(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]);
+    btQuat.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);
+
+    transform.setOrigin(btOrigin);
+    transform.setRotation(btQuat);
+
+    Ammo.destroy(btOrigin);
+    Ammo.destroy(btQuat);
+};
 
 CABLES.AmmoWorld = AmmoWorld;
