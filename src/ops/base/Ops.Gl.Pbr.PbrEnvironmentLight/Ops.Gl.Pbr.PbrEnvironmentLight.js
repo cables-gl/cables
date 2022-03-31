@@ -249,6 +249,8 @@ function capturePrefilteredCubemap(size)
         captureFBO.renderEnd();
     }
     captureFBO.delete();
+    cgl.setTexture(0, null);
+
     outTexPrefiltered.set(null);
     outTexPrefiltered.set(PrefilteredFrameBuffer.getTextureColor());
 }

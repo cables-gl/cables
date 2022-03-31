@@ -95,13 +95,13 @@ function updateText()
 function updateStyle()
 {
     if (!div) return;
-    if (inStyle.get() != div.style)
-    {
-        div.setAttribute("style", inStyle.get());
-        updateVisibility();
-        outElement.set(null);
-        outElement.set(div);
-    }
+    // if (inStyle.get() != div.style)
+    // {
+    div.setAttribute("style", inStyle.get());
+    updateVisibility();
+    outElement.set(null);
+    outElement.set(div);
+    // }
 
     if (!div.parentElement)
     {
