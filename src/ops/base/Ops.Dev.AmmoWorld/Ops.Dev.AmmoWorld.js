@@ -7,11 +7,6 @@ const
     inGravY = op.inFloat("Gravity Y", -9),
     inGravZ = op.inFloat("Gravity Z", 0),
 
-    inDrawWireframe = op.inBool("Draw Wireframe", true),
-    inDrawAABB = op.inBool("Draw AABB", false),
-    inDrawContacts = op.inBool("Draw Contact Points", false),
-    inIgnClear = op.inBool("Depth", true),
-
     inActivateAll = op.inTriggerButton("Activate All"),
 
     next = op.outTrigger("next"),
@@ -19,7 +14,6 @@ const
     outPoints = op.outArray("debug points");
 
 op.setPortGroup("Gravity", [inGravX, inGravZ, inGravY]);
-op.setPortGroup("Debug Renderer", [inDrawWireframe, inDrawAABB, inIgnClear, inDrawContacts]);
 
 inExec.onTriggered = update;
 
@@ -67,28 +61,4 @@ function update()
 
     lastTime = performance.now();
     cgl.frameStore.ammoWorld = old;
-
-    let debugmode = 0;
-    if (inDrawWireframe.get())debugmode |= 1;
-    if (inDrawAABB.get())debugmode |= 2;
-    if (inDrawContacts.get())debugmode |= 8;
-
-    debugmode |= 16384;
-
-    if (debugmode)
-    {
-        cgl.pushModelMatrix();
-        cgl.pushDepthTest(inIgnClear.get());
-        cgl.pushDepthWrite(inIgnClear.get());
-
-        mat4.identity(cgl.mMatrix);
-
-        ammoWorld.renderDebug(cgl);
-        ammoWorld.debugDrawer.setDebugMode(debugmode);
-        outPoints.set(ammoWorld.debugDrawer.verts);
-
-        cgl.popDepthTest();
-        cgl.popDepthWrite();
-        cgl.popModelMatrix();
-    }
 }

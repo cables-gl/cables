@@ -46,11 +46,10 @@ function update()
 
         const sc = vec3.create();
         mat4.getScaling(sc, cgl.mMatrix);
-
         mat4.identity(cgl.mMatrix);
 
         mat4.mul(cgl.mMatrix, cgl.mMatrix, bodies[i].node.modelMatAbs());
-        mat4.scale(cgl.mMatrix, cgl.mMatrix, sc);
+        // mat4.scale(cgl.mMatrix, cgl.mMatrix, sc);
 
         if (!tmpTrans)tmpTrans = new Ammo.btTransform();
 

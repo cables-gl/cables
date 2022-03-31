@@ -5,9 +5,9 @@ const
     isLocked = op.outValue("isLocked", false),
 
     // moveSpeed = op.inFloat("Speed", 1),
-    inName=op.inString("Character Name","player1"),
+    inName = op.inString("Character Name", "player1"),
     mouseSpeed = op.inFloat("Mouse Speed", 1),
-    fly = op.inValueBool("Allow Flying", true),
+    // fly = op.inValueBool("Allow Flying", true),
     inActive = op.inBool("Active", true),
 
     // inMoveXPos = op.inBool("Move X+"),
@@ -86,15 +86,14 @@ inActive.onChange = () =>
     }
 };
 
-let tmpTrans =null;
+let tmpTrans = null;
 
 render.onTriggered = function ()
 {
-
-if(!inActive.get())return trigger.trigger();
-    if(!tmpTrans)
+    if (!inActive.get()) return trigger.trigger();
+    if (!tmpTrans)
     {
-        tmpTrans=new Ammo.btTransform();
+        tmpTrans = new Ammo.btTransform();
     }
 
     if (cgl.frameStore.shadowPass) return trigger.trigger();
@@ -102,7 +101,7 @@ if(!inActive.get())return trigger.trigger();
     calcCameraMovement();
     // move();
 
-    if (!fly.get())posY = 0.0;
+    // if (!fly.get())posY = 0.0;
 
     if (speedx !== 0.0 || speedy !== 0.0 || speedz !== 0)
     {
@@ -115,18 +114,25 @@ if(!inActive.get())return trigger.trigger();
 
     const ammoWorld = cgl.frameStore.ammoWorld;
 
-    if(!ammoWorld)return;
+    if (!ammoWorld)
+    {
+        console.log("char no ammoworld");
+        return;
+    }
 
     // vec3.set(vPos, -posX, -posY, -posZ);
-    const body=ammoWorld.getBodyByName(inName.get());
+    const body = ammoWorld.getBodyByName(inName.get());
 
-    if(body)
+    if (body)
     {
         let ms = body.getMotionState();
         ms.getWorldTransform(tmpTrans);
         let p = tmpTrans.getOrigin();
-        vec3.set(vPos, -p.x(),-p.y()-2,-p.z());
-        // console.log("found!")
+        vec3.set(vPos, -p.x(), -p.y() - 2, -p.z());
+    }
+    else
+    {
+        console.log("char body not found!");
     }
 
     mat4.identity(cgl.vMatrix);
@@ -269,7 +275,7 @@ function startPointerLock(e)
 {
     const test = false;
 
-    if (render.isLinked() && enablePointerLock.get() && e.buttons==1)
+    if (render.isLinked() && enablePointerLock.get() && e.buttons == 1)
     {
         document.addEventListener("pointermove", moveCallback, false);
         canvas.requestPointerLock = canvas.requestPointerLock ||
@@ -341,5 +347,3 @@ function moveCallbackNoPL(e)
         mouseNoPL.lastY = e.clientY;
     }
 }
-
-
