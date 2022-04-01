@@ -12,6 +12,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         this._countIndex = 1;
         this._bodymeta = {};
         this.lastTime = performance.now();
+        this._collisionCb = [];
 
         try
         {
@@ -85,7 +86,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         this.world.addRigidBody(body);
         this.bodies.push(body);
 
-        console.log(body);
+        // console.log(body);
     }
 
     setBodyMeta(body, meta)
@@ -120,6 +121,8 @@ const AmmoWorld = class extends CABLES.EventTarget
 
         this.world.stepSimulation(deltaTime, 10);
 
+        this._checkCollisions();
+
         this.lastTime = performance.now();
     }
 
@@ -129,6 +132,102 @@ const AmmoWorld = class extends CABLES.EventTarget
         {
             this.bodies[i].activate();
         }
+    }
+
+    removeCollision(id)
+    {
+        let idx = -1;
+        for (let i = 0; i < this._collisionCb.length; i++)
+        {
+            if (this._collisionCb[i].id == id) idx = i;
+        }
+        this._collisionCb.splice(idx, 1);
+    }
+
+    onCollision(name0, name1, cb)
+    {
+        const o = {
+            "name0": name0,
+            "name1": name1,
+            "cb": cb,
+            "id": CABLES.uuid()
+        };
+        this._collisionCb.push(o);
+        return o.id;
+    }
+
+    _emitCollision(col, colliding, meta, contactManifold)
+    {
+        col._isColliding = true;
+        col.cb(colliding, meta, contactManifold);
+    }
+
+    _checkCollisions()
+    {
+        let numManifolds = this.dispatcher.getNumManifolds();
+
+
+        for (let i = 0; i < this._collisionCb.length; i++)
+        {
+            this._collisionCb[i]._wasColliding = this._collisionCb[i]._isColliding;
+            this._collisionCb[i]._isColliding = false;
+        }
+
+        for (let i = 0; i < numManifolds; i++)
+        {
+            let contactManifold = this.dispatcher.getManifoldByIndexInternal(i);
+            let numContacts = contactManifold.getNumContacts();
+
+            for (let j = 0; j < numContacts; j++)
+            {
+                // let contactPoint = contactManifold.getContactPoint(j);
+                // let distance = contactPoint.getDistance();
+
+                let meta0 = this.getBodyMeta(contactManifold.getBody0());
+                let meta1 = this.getBodyMeta(contactManifold.getBody1());
+                // console.log("this._collisionCb.length", this._collisionCb.length);
+
+                if (meta0 && meta1)
+                {
+                    for (let k = 0; k < this._collisionCb.length; k++)
+                    {
+                        if (meta0.name == this._collisionCb[k].name0)
+                        {
+                            if (this._collisionCb[k].name1)
+                            {
+                                if (meta1.name == this._collisionCb[k].name1) this._emitCollision(this._collisionCb[k], true, meta1, contactManifold);
+                            }
+                            else this._emitCollision(this._collisionCb[k], true, meta1, contactManifold);
+                        }
+                        if (meta1.name == this._collisionCb[k].name0)
+                        {
+                            if (this._collisionCb[k].name1)
+                            {
+                                if (meta0.name == this._collisionCb[k].name1) this._emitCollision(this._collisionCb[k], true, meta0, contactManifold);
+                            }
+                            else this._emitCollision(this._collisionCb[k], true, meta0, contactManifold);
+                        }
+                    }
+                }
+                // console.log(
+                // this.getBodyMeta(contactManifold.getBody0()),
+                // this.getBodyMeta(contactManifold.getBody1()));
+
+                // console.log({ "manifoldIndex": i, "contactIndex": j, "distance": distance });
+            }
+        }
+
+
+        for (let i = 0; i < this._collisionCb.length; i++)
+        {
+            if (!this._collisionCb[i]._isColliding && this._collisionCb[i]._wasColliding)
+            {
+                this._emitCollision(this._collisionCb[i], false, null, null);
+                this._collisionCb[i]._isColliding = this._collisionCb[i]._wasColliding = false;
+            }
+        }
+
+        // console.log("nommanifolds...");
     }
 };
 
@@ -186,7 +285,7 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
         step = Math.floor(geom.vertices.length / 3 / numTris);
     }
 
-    console.log("num t", step);
+    // console.log("num t", step);
     for (let i = 0; i < geom.vertices.length / 3; i += step)
     {
         _vec3_1.setX(geom.vertices[i * 3 + 0] * scale[0]);
