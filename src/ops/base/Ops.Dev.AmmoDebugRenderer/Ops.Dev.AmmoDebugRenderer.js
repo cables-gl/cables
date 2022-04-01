@@ -14,16 +14,18 @@ op.setPortGroup("Options", [inDrawContacts, inDrawWireframe, inDrawAABB, inIgnCl
 const cgl = op.patch.cgl;
 
 let debugDrawer = null;
+let oldWorld = null;
 
 inRender.onTriggered = () =>
 {
     const ammoWorld = cgl.frameStore.ammoWorld;
     if (!ammoWorld) return;
 
-    if (!debugDrawer)
+    if (!debugDrawer || oldWorld != ammoWorld.world)
     {
         debugDrawer = new CABLES.AmmoDebugDrawer(ammoWorld.world, { });
         debugDrawer.enable();
+        oldWorld = ammoWorld.world;
     }
 
     if (!inActive.get())
