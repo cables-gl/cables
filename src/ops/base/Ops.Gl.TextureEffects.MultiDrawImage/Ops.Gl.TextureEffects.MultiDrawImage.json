@@ -20,13 +20,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 1 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 1",
                 "group": "Image 1",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -37,22 +32,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 1 index",
+                "group": "Image 1",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 1",
-                "group": "Image 1"
             },
             {
                 "type": 0,
                 "name": "Opacity 1 index",
+                "group": "Image 1",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 1",
-                "group": "Image 1"
             },
             {
                 "type": 0,
@@ -69,13 +56,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 2 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 2",
                 "group": "Image 2",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -86,22 +68,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 2 index",
+                "group": "Image 2",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 2",
-                "group": "Image 2"
             },
             {
                 "type": 0,
                 "name": "Opacity 2 index",
+                "group": "Image 2",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 2",
-                "group": "Image 2"
             },
             {
                 "type": 0,
@@ -118,13 +92,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 3 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 3",
                 "group": "Image 3",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -135,22 +104,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 3 index",
+                "group": "Image 3",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 3",
-                "group": "Image 3"
             },
             {
                 "type": 0,
                 "name": "Opacity 3 index",
+                "group": "Image 3",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 3",
-                "group": "Image 3"
             },
             {
                 "type": 0,
@@ -167,13 +128,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 4 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 4",
                 "group": "Image 4",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -184,22 +140,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 4 index",
+                "group": "Image 4",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 4",
-                "group": "Image 4"
             },
             {
                 "type": 0,
                 "name": "Opacity 4 index",
+                "group": "Image 4",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 4",
-                "group": "Image 4"
             },
             {
                 "type": 0,
@@ -216,13 +164,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 5 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 5",
                 "group": "Image 5",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -233,22 +176,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 5 index",
+                "group": "Image 5",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 5",
-                "group": "Image 5"
             },
             {
                 "type": 0,
                 "name": "Opacity 5 index",
+                "group": "Image 5",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 5",
-                "group": "Image 5"
             },
             {
                 "type": 0,
@@ -265,13 +200,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 6 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 6",
                 "group": "Image 6",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -282,22 +212,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 6 index",
+                "group": "Image 6",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 6",
-                "group": "Image 6"
             },
             {
                 "type": 0,
                 "name": "Opacity 6 index",
+                "group": "Image 6",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 6",
-                "group": "Image 6"
             },
             {
                 "type": 0,
@@ -314,13 +236,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 7 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 7",
                 "group": "Image 7",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -331,22 +248,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 7 index",
+                "group": "Image 7",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 7",
-                "group": "Image 7"
             },
             {
                 "type": 0,
                 "name": "Opacity 7 index",
+                "group": "Image 7",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 7",
-                "group": "Image 7"
             },
             {
                 "type": 0,
@@ -363,13 +272,8 @@
             {
                 "type": 0,
                 "name": "Blendmode 8 index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blendmode 8",
                 "group": "Image 8",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 2,
@@ -380,22 +284,14 @@
             {
                 "type": 0,
                 "name": "Mask Source 8 index",
+                "group": "Image 8",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mask Source 8",
-                "group": "Image 8"
             },
             {
                 "type": 0,
                 "name": "Opacity 8 index",
+                "group": "Image 8",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Opacity 8",
-                "group": "Image 8"
             },
             {
                 "type": 0,

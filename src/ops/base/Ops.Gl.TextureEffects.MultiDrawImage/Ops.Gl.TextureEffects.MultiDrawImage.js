@@ -154,7 +154,7 @@ function getBlendCode(idx, name, alpha, hasMask, maskMode)
         if (maskMode === "R")src = src + "newColor.a *= texture(texMask" + idx + ",texCoord).r;".endl();
         else if (maskMode === "R inv")src = src + "newColor.a *= 1.0-texture(texMask" + idx + ",texCoord).r;".endl();
         else if (maskMode === "A")src = src + "newColor.a *= texture(texMask" + idx + ",texCoord).a;".endl();
-        else if (maskMode === "R inv")src = src + "newColor.a *= 1.0-texture(texMask" + idx + ",texCoord).a;".endl();
+        else if (maskMode === "A inv")src = src + "newColor.a *= 1.0-texture(texMask" + idx + ",texCoord).a;".endl();
 
     src = src + "col = vec4( mix( oldColor,col, newColor.a));".endl()
 

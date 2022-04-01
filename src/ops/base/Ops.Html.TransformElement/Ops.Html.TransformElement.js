@@ -34,7 +34,11 @@ inAlignHor.onChange =
 function updateTransform()
 {
     const ele = inEle.get();
-    if (!ele) return;
+    if (!ele)
+    {
+        oldEle = null;
+        return;
+    }
 
     let translateStr = "";
     if (inAlignVert.get() == "Left")translateStr = "0%";
@@ -53,7 +57,17 @@ function updateTransform()
 
 inEle.onChange = function ()
 {
+    const ele = inEle.get();
+    if (!ele)
+    {
+        removeProperties(oldEle);
+
+        oldEle = null;
+        return;
+    }
+
     updateTransform();
+    setProperties();
 };
 
 inEle.onLinkChanged = function ()
