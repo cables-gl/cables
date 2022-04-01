@@ -2,24 +2,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "number",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "min",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "max",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }

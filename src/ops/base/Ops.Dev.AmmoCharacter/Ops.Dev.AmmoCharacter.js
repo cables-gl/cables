@@ -185,16 +185,17 @@ function update()
     }
 
     let vx = 0, vy = 0, vz = 0.0;
+    let speed = inSpeed.get();
 
     if (inStyle.get() == "3rd Person")
     {
-        if (inMoveXM.get()) vx = -inSpeed.get();
-        if (inMoveXP.get()) vx = inSpeed.get();
+        if (inMoveXM.get()) vx = -speed;
+        if (inMoveXP.get()) vx = speed;
 
-        if (inMoveZP.get()) vz = -inSpeed.get();
-        if (inMoveZM.get()) vz = inSpeed.get();
+        if (inMoveZP.get()) vz = -speed;
+        if (inMoveZM.get()) vz = speed;
 
-        if (inMoveYP.get()) vy = inSpeed.get();
+        if (inMoveYP.get()) vy = speed;
 
         if (vx != 0 || vy != 0 || vz != 0)
         {
@@ -204,32 +205,51 @@ function update()
     }
     else
     {
-        let speed = inSpeed.get();
         let doMove = false;
         if (inMoveZP.get())
         {
-            btVelocity.setValue(inDirX.get() * speed, inDirY.get() * speed, inDirZ.get() * speed);
+            vx = inDirX.get() * speed;
+            vy = inDirY.get() * speed;
+            vz = inDirZ.get() * speed;
             doMove = true;
         }
         if (inMoveZM.get())
         {
-            btVelocity.setValue(-inDirX.get() * speed, -inDirY.get() * speed, -inDirZ.get() * speed);
+            vx = -inDirX.get() * speed;
+            vy = -inDirY.get() * speed;
+            vz = -inDirZ.get() * speed;
             doMove = true;
         }
 
         if (inMoveXP.get())
         {
-            btVelocity.setValue(-inDirZ.get() * speed, inDirY.get() * speed, inDirX.get() * speed);
+            vx = -inDirZ.get() * speed;
+            vy = inDirY.get() * speed;
+            vz = inDirX.get() * speed;
             doMove = true;
         }
         if (inMoveXM.get())
         {
-            btVelocity.setValue(inDirZ.get() * speed, inDirY.get() * speed, -inDirX.get() * speed);
+            vx = inDirZ.get() * speed;
+            vy = inDirY.get() * speed;
+            vz = -inDirX.get() * speed;
             doMove = true;
         }
 
+        if (inMoveYP.get())
+        {
+            vy = 3;
+            // vx=-inDirZ.get() * speed;
+            // vy=inDirY.get() * speed;
+            // vz=inDirX.get() * speed;
+        }
+        else vy = 0;
+
+        doMove = true;
+
         if (doMove)
         {
+            btVelocity.setValue(vx, vy, vz);
             body.setLinearVelocity(btVelocity);
         }
     }

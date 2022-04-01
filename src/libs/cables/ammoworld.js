@@ -557,7 +557,7 @@ AmmoWorld.copyCglTransform = function (cgl, transform)
     // if (!btOrigin)
     // {
     const btOrigin = new Ammo.btVector3(0, 0, 0);
-    const btQuat = new Ammo.btQuaternion(0, 0, 0, 0);
+    const btQuat = new Ammo.btQuaternion(0, 0, 0, 1);
     // }
 
     const tmpOrigin = vec3.create();
@@ -565,8 +565,11 @@ AmmoWorld.copyCglTransform = function (cgl, transform)
 
     mat4.getTranslation(tmpOrigin, cgl.mMatrix);
     mat4.getRotation(tmpQuat, cgl.mMatrix);
+    // quat.invert(tmpQuat, tmpQuat);
 
-    let changed = false;
+
+    // console.log(tmpQuat);
+    //    let changed = false;
 
     btOrigin.setValue(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]);
     btQuat.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);

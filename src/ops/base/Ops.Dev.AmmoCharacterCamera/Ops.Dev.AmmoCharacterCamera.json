@@ -36,11 +36,6 @@
             },
             {
                 "type": 0,
-                "name": "Allow Flying",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             },
@@ -83,6 +78,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.AmmoCharacterCamera"
+        "name": "Ops.Dev.AmmoCharacterCamera"
     }
 }
