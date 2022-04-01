@@ -1,4 +1,5 @@
-# How can I save images/textures/screenshots/videos of my patch?
+# Screenshots and Video recording
+## How can I save images/textures/screenshots/videos of my patch?
 We have ops for this!
 For images, screenshots - check out the [Download Texture Operator](https://cables.gl/op/Ops.Gl.DownloadTexture_v2) . This will let you save your texture on demand and in custom resolutions. You can learn all about it in our [video tutorial here](https://www.youtube.com/watch?v=YFvVsEPirRc).
 
