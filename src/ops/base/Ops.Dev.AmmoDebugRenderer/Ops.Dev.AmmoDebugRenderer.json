@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.AmmoDebugRenderer renamed to Ops.Dev.AmmoDebugRenderer",
             "author": "pandur",
             "date": 1648724622788
+        },
+        {
+            "message": " added core lib: ammodebugdrawer",
+            "author": "pandur",
+            "date": 1648814836906
         }
     ],
     "authorName": "pandur",
@@ -56,6 +61,9 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.AmmoDebugRenderer"
-    }
+        "name": "Ops.Dev.AmmoDebugRenderer"
+    },
+    "coreLibs": [
+        "ammodebugdrawer"
+    ]
 }

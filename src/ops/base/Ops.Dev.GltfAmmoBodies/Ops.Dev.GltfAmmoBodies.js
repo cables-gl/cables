@@ -143,6 +143,11 @@ function addToWorld()
         let body = new Ammo.btRigidBody(rbInfo);
         world.addRigidBody(body);
 
+        world.setBodyMeta(body,
+            {
+                "name": scene.nodes[i].name,
+            });
+
         bodies.push(
             {
                 "node": scene.nodes[i],

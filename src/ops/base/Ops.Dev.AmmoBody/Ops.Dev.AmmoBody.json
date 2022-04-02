@@ -79,6 +79,11 @@
             },
             {
                 "type": 0,
+                "name": "Ghost Object",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }

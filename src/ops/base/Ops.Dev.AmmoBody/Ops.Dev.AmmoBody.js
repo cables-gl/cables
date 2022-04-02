@@ -14,6 +14,7 @@ const
     inReset = op.inTriggerButton("Reset"),
     inActivate = op.inTriggerButton("Activate"),
     inNeverDeactivate = op.inBool("Never Deactivate"),
+    inGhostObject = op.inBool("Ghost Object"),
     inActive = op.inBool("Active", true),
 
     next = op.outTrigger("next"),
@@ -43,6 +44,7 @@ inName.onChange = updateBodyMeta;
 inExec.onLinkChanged =
     op.onDelete =
     inGeomSimplify.onChange =
+    inGhostObject.onChange =
     inActive.onChange =
     inGeom.onChange =
     inShape.onChange =
@@ -155,6 +157,16 @@ function setup()
     let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
     world.addRigidBody(body);
+
+    // 		CF_STATIC_OBJECT= 1,
+    // 		CF_KINEMATIC_OBJECT= 2,
+    // 		CF_NO_CONTACT_RESPONSE = 4,
+    // 		CF_CUSTOM_MATERIAL_CALLBACK = 8,//this allows per-triangle material (friction/restitution)
+    // 		CF_CHARACTER_OBJECT = 16,
+    // 		CF_DISABLE_VISUALIZE_OBJECT = 32, //disable debug drawing
+    // 		CF_DISABLE_SPU_COLLISION_PROCESSING = 64//disable parallel/SPU processing
+    if (inGhostObject.get())
+        body.setCollisionFlags(body.getCollisionFlags() | 4);
 
     world.on("rayCastHit", (name) =>
     {
