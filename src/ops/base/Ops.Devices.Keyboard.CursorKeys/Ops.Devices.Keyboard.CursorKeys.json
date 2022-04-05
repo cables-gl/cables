@@ -3,39 +3,44 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "canvas only",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Cursor Keys",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "WASD",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Up",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Down",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Left",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right",
                 "subType": "number"
             }

@@ -109,10 +109,6 @@
                 "type": 0,
                 "name": "Speed",
                 "subType": "number"
-            },
-            {
-                "type": 1,
-                "name": "Test"
             }
         ],
         "portsOut": [

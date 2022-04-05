@@ -23,7 +23,6 @@ const
 
     inSpeed = op.inFloat("Speed", 1),
 
-    inTest = op.inTriggerButton("Test"),
     next = op.outTrigger("next"),
     transformed = op.outTrigger("Transformed");
 
@@ -47,14 +46,14 @@ let doResetPos = false;
 inName.onChange = updateBodyMeta;
 
 op.onDelete =
-inMass.onChange =
-inRadius.onChange =
-inSizeY.onChange =
-inSizeZ.onChange =
-inSizeX.onChange = () =>
-{
-    removeBody();
-};
+    inMass.onChange =
+    inRadius.onChange =
+    inSizeY.onChange =
+    inSizeZ.onChange =
+    inSizeX.onChange = () =>
+    {
+        removeBody();
+    };
 
 inActivate.onTriggered = () =>
 {
@@ -73,15 +72,6 @@ inReset.onTriggered = () =>
 };
 
 let btVelocity = null;
-inTest.onTriggered = () =>
-{
-    if (!btVelocity)
-    {
-        btVelocity = new Ammo.btVector3(1, 0, 0);
-    }
-    body.activate();
-    body.setLinearVelocity(btVelocity);
-};
 
 function updateBodyMeta()
 {
@@ -239,9 +229,6 @@ function update()
         if (inMoveYP.get())
         {
             vy = 3;
-            // vx=-inDirZ.get() * speed;
-            // vy=inDirY.get() * speed;
-            // vz=inDirX.get() * speed;
         }
         else vy = 0;
 

@@ -102,35 +102,13 @@ function addToWorld()
 
         let colShape = null;
 
-        console.log(scene.nodes[i]);
-
         scene.nodes[i].transform(cgl, 0);
         scene.nodes[i].updateMatrix();
         const sc = vec3.create();
         mat4.getScaling(sc, scene.nodes[i].modelMatAbs());
 
-        console.log("sc", sc, scene.nodes[i]._scale);
-
-        // colShape = new Ammo.btBoxShape(new Ammo.btVector3(0.25,0.25,0.25));
-
         colShape = CABLES.AmmoWorld.createConvexHullFromGeom(scene.nodes[i].mesh.meshes[0].geom, 100, scene.nodes[i]._scale);
 
-        // Instead of scaling the rigid body you will need to instead scale the shape used for collision detection. This is done by calling btCollisionShape::setLocalScaling(). You may need to call btCollisionWorld::updateSingleAABB( rigidbody ) to get the new bounding box of the scale to take effect.
-        // bodies[i].body
-
-        // if (scene.nodes[i]._scale)
-        // {
-        //     const scal = new Ammo.btVector3(
-        //         scene.nodes[i]._scale[0],
-        //         scene.nodes[i]._scale[1],
-        //         scene.nodes[i]._scale[2]);
-
-        //     colShape.setLocalScaling(scal);
-
-        // }
-
-        // scene.nodes[i]._scale = null;
-        // scene.nodes[i]._node._scale = null;
         colShape.setMargin(0.05);
 
         let localInertia = new Ammo.btVector3(0, 0, 0);

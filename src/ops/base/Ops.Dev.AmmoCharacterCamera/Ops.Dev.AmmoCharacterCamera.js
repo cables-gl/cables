@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     enablePointerLock = op.inBool("Enable pointer lock", true),
     trigger = op.outTrigger("trigger"),
-    isLocked = op.outValue("isLocked", false),
+    isLocked = op.outBoolNum("isLocked", false),
 
     // moveSpeed = op.inFloat("Speed", 1),
     inName = op.inString("Character Name", "player1"),
@@ -23,7 +23,6 @@ const
 
     outMouseDown = op.outTrigger("Mouse Left"),
     outMouseDownRight = op.outTrigger("Mouse Right"),
-
     outDirX = op.outValue("Dir X"),
     outDirY = op.outValue("Dir Y"),
     outDirZ = op.outValue("Dir Z");
