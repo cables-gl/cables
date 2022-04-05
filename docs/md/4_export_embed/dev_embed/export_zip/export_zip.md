@@ -34,3 +34,6 @@ these files included in the export.
 
 - Modern browsers: exports your patch as is
 - Old browsers: uses [babel](https://babeljs.io/) to try make your patch run on older browsers, in general should not be needed anymore
+
+## Video Tutorial
+[![IMAGE ALT TEXT](https://img.youtube.com/vi/B4M9FddXk1I/mqdefault.jpg)](http://www.youtube.com/watch?v=B4M9FddXk1I "Export to .Zip")
