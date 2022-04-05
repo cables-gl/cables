@@ -20,6 +20,7 @@ inExec.onTriggered = update;
 const cgl = op.patch.cgl;
 let deltaTime, lastTime;
 let ammoWorld = null;// new CABLES.AmmoWorld();
+let loadingId = null;
 
 inReset.onTriggered = () =>
 {
@@ -44,8 +45,18 @@ function update()
 {
     if (!ammoWorld)
     {
-        ammoWorld = new CABLES.AmmoWorld();
-        updateGravity();
+        if (Ammo.cablesSetupDone)
+        {
+            ammoWorld = new CABLES.AmmoWorld();
+            updateGravity();
+            cgl.patch.loading.finished(loadingId);
+            loadingId = null;
+        }
+        else
+        {
+            if (!loadingId) loadingId = cgl.patch.loading.start("ammoWorld", "ammoWASM");
+            return;
+        }
     }
     if (!ammoWorld.world) return;
     deltaTime = performance.now() - lastTime;

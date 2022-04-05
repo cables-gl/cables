@@ -15,16 +15,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         this._collisionCb = [];
         this.numCollisionsListeners = 0;
 
-        try
-        {
-            Ammo().then(() => { this.setupWorld(); });
-        }
-        catch (e)
-        {
-            console.log("ammo already exists ...");
-            if (Ammo) this.setupWorld();
-            else console.log(e);
-        }
+        this.setupWorld();
     }
 
     setupWorld()

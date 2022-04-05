@@ -20,6 +20,11 @@
             "message": "Ops.User.pandur.AmmoWorld renamed to Ops.Dev.AmmoWorld",
             "author": "pandur",
             "date": 1647117184569
+        },
+        {
+            "message": "added lib: ammo.wasm.js",
+            "author": "stephan",
+            "date": 1649173851872
         }
     ],
     "layout": {
@@ -80,7 +85,7 @@
     "authorName": "pandur",
     "created": 1647106814814,
     "libs": [
-        "ammo.js"
+        "ammo.wasm.js"
     ],
     "coreLibs": [
         "ammoworld"
