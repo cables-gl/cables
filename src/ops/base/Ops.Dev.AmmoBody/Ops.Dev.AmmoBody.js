@@ -174,8 +174,6 @@ function setup()
     });
 
     updateBodyMeta();
-    // updateDeactivation();
-    console.log("body added...", body);
 }
 
 function renderTransformed()

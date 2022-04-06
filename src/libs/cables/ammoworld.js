@@ -13,22 +13,13 @@ const AmmoWorld = class extends CABLES.EventTarget
         this._bodymeta = {};
         this.lastTime = performance.now();
         this._collisionCb = [];
+        this.numCollisionsListeners = 0;
 
-        try
-        {
-            Ammo().then(() => { this.setupWorld(); });
-        }
-        catch (e)
-        {
-            console.log("ammo already exists ...");
-            if (Ammo) this.setupWorld();
-            else console.log(e);
-        }
+        this.setupWorld();
     }
 
     setupWorld()
     {
-        console.log(Ammo);
         this.collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
         this.dispatcher = new Ammo.btCollisionDispatcher(this.collisionConfiguration);
         this.overlappingPairCache = new Ammo.btDbvtBroadphase();
@@ -37,10 +28,6 @@ const AmmoWorld = class extends CABLES.EventTarget
         this.world = new Ammo.btDiscreteDynamicsWorld(this.dispatcher, this.overlappingPairCache, this.solver, this.collisionConfiguration);
 
         this.world.setGravity(new Ammo.btVector3(0, -9, 0));
-
-
-        console.log("world setup done");
-        console.log(this.world);
     }
 
     dispose()
@@ -142,6 +129,7 @@ const AmmoWorld = class extends CABLES.EventTarget
             if (this._collisionCb[i].id == id) idx = i;
         }
         this._collisionCb.splice(idx, 1);
+        this.numCollisionsListeners = this._collisionCb.length;
     }
 
     onCollision(name0, name1, cb)
@@ -153,6 +141,7 @@ const AmmoWorld = class extends CABLES.EventTarget
             "id": CABLES.uuid()
         };
         this._collisionCb.push(o);
+        this.numCollisionsListeners = this._collisionCb.length;
         return o.id;
     }
 
@@ -180,12 +169,8 @@ const AmmoWorld = class extends CABLES.EventTarget
 
             for (let j = 0; j < numContacts; j++)
             {
-                // let contactPoint = contactManifold.getContactPoint(j);
-                // let distance = contactPoint.getDistance();
-
                 let meta0 = this.getBodyMeta(contactManifold.getBody0());
                 let meta1 = this.getBodyMeta(contactManifold.getBody1());
-                // console.log("this._collisionCb.length", this._collisionCb.length);
 
                 if (meta0 && meta1)
                 {
@@ -209,11 +194,6 @@ const AmmoWorld = class extends CABLES.EventTarget
                         }
                     }
                 }
-                // console.log(
-                // this.getBodyMeta(contactManifold.getBody0()),
-                // this.getBodyMeta(contactManifold.getBody1()));
-
-                // console.log({ "manifoldIndex": i, "contactIndex": j, "distance": distance });
             }
         }
 
@@ -226,8 +206,6 @@ const AmmoWorld = class extends CABLES.EventTarget
                 this._collisionCb[i]._isColliding = this._collisionCb[i]._wasColliding = false;
             }
         }
-
-        // console.log("nommanifolds...");
     }
 };
 
@@ -285,39 +263,13 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
         step = Math.floor(geom.vertices.length / 3 / numTris);
     }
 
-    // console.log("num t", step);
     for (let i = 0; i < geom.vertices.length / 3; i += step)
     {
         _vec3_1.setX(geom.vertices[i * 3 + 0] * scale[0]);
         _vec3_1.setY(geom.vertices[i * 3 + 1] * scale[1]);
         _vec3_1.setZ(geom.vertices[i * 3 + 2] * scale[2]);
         colShape.addPoint(_vec3_1, true); // todo: only set true on last vertex
-
-        // const triangle = this._getGeomTriangle(geom, i);
-
-        // _vec3_1.setX(triangle[0] * scale[0]);
-        // _vec3_1.setY(triangle[1] * scale[1]);
-        // _vec3_1.setZ(triangle[2] * scale[2]);
-        // colShape.addPoint(_vec3_1, false);
-
-        // _vec3_2.setX(triangle[3] * scale[0]);
-        // _vec3_2.setY(triangle[4] * scale[1]);
-        // _vec3_2.setZ(triangle[5] * scale[2]);
-        // colShape.addPoint(_vec3_2, false);
-
-        // _vec3_3.setX(triangle[6] * scale[0]);
-        // _vec3_3.setY(triangle[7] * scale[1]);
-        // _vec3_3.setZ(triangle[8] * scale[2]);
-        // colShape.addPoint(_vec3_3, true);
-
-        // triangle_mesh.addTriangle(
-        //     _vec3_1,
-        //     _vec3_2,
-        //     _vec3_3,
-        //     true
-        // );
     }
-    // colShape.optimizeConvexHull();
 
     colShape.initializePolyhedralFeatures();
 
@@ -331,22 +283,14 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
 
 AmmoWorld.copyCglTransform = function (cgl, transform)
 {
-    // if (!btOrigin)
-    // {
     const btOrigin = new Ammo.btVector3(0, 0, 0);
     const btQuat = new Ammo.btQuaternion(0, 0, 0, 1);
-    // }
 
     const tmpOrigin = vec3.create();
     const tmpQuat = quat.create();
 
     mat4.getTranslation(tmpOrigin, cgl.mMatrix);
     mat4.getRotation(tmpQuat, cgl.mMatrix);
-    // quat.invert(tmpQuat, tmpQuat);
-
-
-    // console.log(tmpQuat);
-    //    let changed = false;
 
     btOrigin.setValue(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]);
     btQuat.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);

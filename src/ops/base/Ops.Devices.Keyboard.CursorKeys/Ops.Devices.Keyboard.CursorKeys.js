@@ -2,6 +2,7 @@ const
     canvasOnly = op.inValueBool("canvas only", true),
     keysCursor = op.inValueBool("Cursor Keys", true),
     keysWasd = op.inValueBool("WASD", true),
+    inActive = op.inBool("Active", true),
     pressedUp = op.outValue("Up"),
     pressedDown = op.outValue("Down"),
     pressedLeft = op.outValue("Left"),
@@ -53,12 +54,19 @@ op.onDelete = function ()
     document.removeEventListener("keydown", onKeyDown, false);
 };
 
-
 function addListener()
 {
     if (canvasOnly.get()) addCanvasListener();
     else addDocumentListener();
 }
+
+inActive.onChange = () =>
+{
+    pressedUp.set(false);
+    pressedDown.set(false);
+    pressedLeft.set(false);
+    pressedRight.set(false);
+};
 
 function removeListeners()
 {
