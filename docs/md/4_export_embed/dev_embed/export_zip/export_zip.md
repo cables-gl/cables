@@ -11,7 +11,7 @@ The resulting zip-file will include an example index.html to make integration ea
 on a webserver should give you a running patch in no time.
 
 ## Video Tutorial
-[![IMAGE ALT TEXT](https://img.youtube.com/vi/B4M9FddXk1I/mqdefault.jpg)](http://www.youtube.com/watch?v=B4M9FddXk1I "Export to .Zip")
+<iframe width="384" height="216" src="https://www.youtube.com/embed/B4M9FddXk1I" title=".Zip Export - Byte Size" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Export Options
 
