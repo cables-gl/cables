@@ -27,7 +27,7 @@ and then copy the "API ID" to the textfield in the export dialog in cables.
 Create an [access token](https://app.netlify.com/user/applications) and copy it into the textfield.
 
 ## Video Tutorial
-[![IMAGE ALT TEXT](https://img.youtube.com/vi/L5BGMs7vKuI/mqdefault.jpg)](http://www.youtube.com/watch?v=L5BGMs7vKuI "Export to Netlify")
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L5BGMs7vKuI" title="Netlify Export - Byte Size" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## WALKTHOUGH
 - enter the above information
