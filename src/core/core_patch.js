@@ -714,18 +714,25 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
     }
 };
 
-Patch.prototype.serialize = function (asObj)
+Patch.prototype.serialize = function (options)
 {
     const obj = {};
+
+    options = options || {};
+    if (!options.hasOwnProperty("removeBlueprints"))options.removeBlueprints = true;
 
     obj.ops = [];
     obj.settings = this.settings;
     for (const i in this.ops)
     {
-        obj.ops.push(this.ops[i].getSerialized());
+        const op = this.ops[i];
+
+        if (options.removeBlueprints && op.storage && op.storage.blueprint) continue;
+
+        obj.ops.push(op.getSerialized());
     }
 
-    if (asObj) return obj;
+    if (options.asObject) return obj;
     return JSON.stringify(obj);
 };
 
