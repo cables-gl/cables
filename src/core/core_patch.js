@@ -10,6 +10,7 @@ import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
 import Logger from "./core_logger";
+import PatchVariable from "./core_variable";
 
 
 /**
@@ -1077,101 +1078,6 @@ Patch.prototype.profile = function (enable)
 // ----------------------
 
 /**
- * @type {Object}
- * @name Variable
- * @param {String} name
- * @param {String|Number} value
- * @memberof Patch
- * @constructor
- */
-Patch.Variable = function (name, val, type)
-{
-    this._name = name;
-    this._changeListeners = [];
-    this.type = type;
-    this.setValue(val);
-};
-
-/**
- * @function Variable.getValue
- * @memberof Patch.Variable
- * @returns {String|Number|Boolean}
- */
-
-Patch.Variable.prototype.getValue = function ()
-{
-    return this._v;
-};
-
-/**
- * @function getName
- * @memberof Patch.Variable
- * @instance
- * @returns {String|Number|Boolean}
- * @function
- */
-Patch.Variable.prototype.getName = function ()
-{
-    return this._name;
-};
-
-/**
- * @function setValue
- * @memberof Patch.Variable
- * @instance
- * @returns {String|Number|Boolean}
- * @function
- */
-Patch.Variable.prototype.setValue = function (v)
-{
-    this._v = v;
-    for (let i = 0; i < this._changeListeners.length; i++)
-    {
-        this._changeListeners[i](v, this);
-    }
-};
-
-/**
- * function will be called when value of variable is changed
- * @function addListener
- * @memberof Patch.Variable
- * @instance
- * @param {Function} callback
- */
-Patch.Variable.prototype.addListener = function (cb)
-{
-    const ind = this._changeListeners.indexOf(cb);
-    if (ind == -1) this._changeListeners.push(cb);
-};
-
-/**
- * remove listener
- * @function removeListener
- * @memberof Patch.Variable
- * @instance
- * @param {Function} callback
- */
-Patch.Variable.prototype.removeListener = function (cb)
-{
-    const ind = this._changeListeners.indexOf(cb);
-    this._changeListeners.splice(ind, 1);
-};
-
-// ------------------
-
-// // old?
-// Patch.prototype.addVariableListener = function(cb) {
-//     this._variableListeners.push(cb);
-// };
-
-// // old?
-// Patch.prototype._callVariableListener = function(cb) {
-//     for (var i = 0; i < this._variableListeners.length; i++) {
-//         this._variableListeners[i]();
-//     }
-// };
-
-/**
  * set variable value
  * @function setVariable
  * @memberof Patch
@@ -1229,7 +1135,7 @@ Patch.prototype.setVarValue = function (name, val, type)
     }
     else
     {
-        this._variables[name] = new Patch.Variable(name, val, type);
+        this._variables[name] = new PatchVariable(name, val, type);
         this._sortVars();
         this.emitEvent("variablesChanged");
     }

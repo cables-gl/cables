@@ -1,8 +1,5 @@
 // todo: old... remove this from ops...
 
-
-// var CABLES=CABLES || {};
-
 const Variable = function ()
 {
     let value = null;
