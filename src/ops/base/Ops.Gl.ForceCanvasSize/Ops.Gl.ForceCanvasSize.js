@@ -34,6 +34,12 @@ inPresets.onChange = updateRatioPreset;
 
 const cgl = op.patch.cgl;
 
+if (window.getComputedStyle(cgl.canvas).position === "absolute")
+{
+    cgl.canvas.style.position = "initial";
+    console.warn("[cables forceCanvasSize] - canvas was positioned absolute, not compatible with Ops.Gl.ForceCanvasSize");
+}
+
 updateUi();
 
 function updateMethod()
