@@ -4,6 +4,10 @@ const
     inExec = op.inTrigger("Update"),
     inName = op.inString("Name", ""),
     inMass = op.inFloat("Mass", 0),
+    inFriction = op.inFloat("Friction", 0.5),
+    inRollingFriction = op.inFloat("Rolling Friction", 0.5),
+    inRestitution = op.inFloat("Restitution", 0.5),
+
     inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone", "Geom Convex Hull"], "Box"),
     inGeom = op.inObject("Geometry", null, "geometry"),
     inGeomSimplify = op.inInt("Simplify Max Triangles", 50),
@@ -11,11 +15,11 @@ const
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
-    inReset = op.inTriggerButton("Reset"),
-    inActivate = op.inTriggerButton("Activate"),
     inNeverDeactivate = op.inBool("Never Deactivate"),
     inGhostObject = op.inBool("Ghost Object"),
     inActive = op.inBool("Active", true),
+    inReset = op.inTriggerButton("Reset"),
+    inActivate = op.inTriggerButton("Activate"),
 
     next = op.outTrigger("next"),
     outRayHit = op.outBoolNum("Ray Hit"),
@@ -41,7 +45,14 @@ let colShape = null;
 let doScale = true;
 inName.onChange = updateBodyMeta;
 
+op.setPortGroup("Parameters", [inRestitution, inFriction, inRollingFriction, inMass]);
+op.setPortGroup("Shape", [inShape, inGeom, inGeomSimplify, inRadius, inSizeY, inSizeX, inSizeZ]);
+op.setPortGroup("Flags", [inNeverDeactivate, inActive, inGhostObject]);
+
 inExec.onLinkChanged =
+    inFriction.onChange =
+    inRestitution.onChange =
+    inRollingFriction.onChange =
     op.onDelete =
     inGeomSimplify.onChange =
     inGhostObject.onChange =
@@ -173,7 +184,16 @@ function setup()
         outRayHit.set(name == inName.get());
     });
 
+    updateParams();
     updateBodyMeta();
+}
+
+function updateParams()
+{
+    if (!body) return;
+    body.setFriction(inFriction.get());
+    body.setRollingFriction(inRollingFriction.get());
+    body.setRestitution(inRestitution.get());
 }
 
 function renderTransformed()
@@ -215,7 +235,7 @@ function update()
     world = cgl.frameStore.ammoWorld;
     if (!world) return;
     if (!body)setup(world);
-
+    if (!body) return;
     if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
     if (inMass.get() == 0 || doResetPos)
