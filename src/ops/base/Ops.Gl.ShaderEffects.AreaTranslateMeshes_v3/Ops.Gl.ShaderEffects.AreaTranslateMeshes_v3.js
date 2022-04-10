@@ -6,9 +6,9 @@ const
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    mulx = op.inValue("Multiply x",1),
-    muly = op.inValue("Multiply y",1),
-    mulz = op.inValue("Multiply z",1);
+    mulx = op.inValue("Multiply x", 1),
+    muly = op.inValue("Multiply y", 1),
+    mulz = op.inValue("Multiply z", 1);
 
 const cgl = op.patch.cgl;
 
@@ -58,7 +58,7 @@ render.onTriggered = function ()
                     "posZ": z
                 });
 
-        if (op.isCurrentUiOp() || CABLES.UI.renderHelper)
+        if (cgl.shouldDrawHelpers(op))
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
@@ -67,29 +67,6 @@ render.onTriggered = function ()
         }
     }
 
-    // if (cgl.getShader() != shader)
-    // {
-    // if (shader) removeModule();
-    // shader = cgl.getShader();
-
-    // moduleVert = shader.addModule(
-    //     {
-    //         "title": op.objName,
-    //         "name": "MODULE_VERTEX_POSITION",
-    //         srcHeadVert,
-    //         srcBodyVert
-    //     });
-
-    // uniforms.inSize = new CGL.Uniform(shader, "f", moduleVert.prefix + "size", inSize);
-    // uniforms.inStrength = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
-    // uniforms.inSmooth = new CGL.Uniform(shader, "f", moduleVert.prefix + "smooth", inSmooth);
-
-    // uniforms.x = new CGL.Uniform(shader, "f", moduleVert.prefix + "x", x);
-    // uniforms.y = new CGL.Uniform(shader, "f", moduleVert.prefix + "y", y);
-    // uniforms.z = new CGL.Uniform(shader, "f", moduleVert.prefix + "z", z);
-    // }
-
-    // if (!shader) return;
     mod.bind();
     next.trigger();
     mod.unbind();
