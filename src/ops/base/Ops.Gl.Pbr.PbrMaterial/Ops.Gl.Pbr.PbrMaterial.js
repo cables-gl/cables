@@ -21,6 +21,8 @@ const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 
 const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
 const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "roughness", "metalness"], "colour");
+const inHeightDepth = op.inFloat("Height Intensity", 1.0);
+const inUseOptimizedHeight = op.inValueBool("Use faster less accurate heightmapping", false);
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
@@ -31,7 +33,7 @@ const inMipLevels = op.inInt("Num mip levels");
 const inTexAlbedo = op.inTexture("Albedo");
 const inTexAORM = op.inTexture("AORM");
 const inTexNormal = op.inTexture("Normal map");
-
+const inTexHeight = op.inTexture("Height");
 const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 
@@ -41,33 +43,33 @@ const shaderOut = op.outObject("Shader");
 shaderOut.ignoreValueSerialize = true;
 // UI stuff
 op.toWorkPortsNeedToBeLinked(inTrigger);
-op.toWorkPortsNeedToBeLinked(inTexIrradiance);
-op.toWorkPortsNeedToBeLinked(inTexPrefiltered);
-op.toWorkPortsNeedToBeLinked(inTexIBLLUT);
-op.toWorkPortsNeedToBeLinked(inMipLevels);
+//op.toWorkPortsNeedToBeLinked(inTexIrradiance);
+//op.toWorkPortsNeedToBeLinked(inTexPrefiltered);
+//op.toWorkPortsNeedToBeLinked(inTexIBLLUT);
+//op.toWorkPortsNeedToBeLinked(inMipLevels);
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
-op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode]);
-op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal]);
+op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight]);
+op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexHeight]);
 op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 // globals
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
 PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 // light sources (except IBL)
-let PBRLightStack = {};
-const lightUniforms = [];
-const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
+var PBRLightStack         = {};
+const lightUniforms       = [];
+const LIGHT_INDEX_REGEX   = new RegExp("{{LIGHT_INDEX}}", "g");
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PBR_FRAGMENT_HEAD}}", "g");
 const FRAGMENT_BODY_REGEX = new RegExp("{{PBR_FRAGMENT_BODY}}", "g");
-const lightFragmentHead = attachments.light_head_frag;
+const lightFragmentHead   = attachments.light_head_frag;
 const lightFragmentBodies = {
     "point": attachments.light_body_point_frag,
     "directional": attachments.light_body_directional_frag,
     "spot": attachments.light_body_spot_frag,
 };
-const createLightFragmentHead = (n) => { return lightFragmentHead.replace("{{LIGHT_INDEX}}", n); };
-const createLightFragmentBody = (n, type) => { return lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n); };
+const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createLightFragmentBody = (n, type) => lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n);
 let currentLightCount = -1;
 
 if (cgl.glVersion == 1)
@@ -105,10 +107,12 @@ const inMipLevelsUniform = new CGL.Uniform(PBRShader, "f", "MAX_REFLECTION_LOD",
 const inTonemappingExposureUniform = new CGL.Uniform(PBRShader, "f", "tonemappingExposure", 1.0);
 const inDiffuseIntensityUniform = new CGL.Uniform(PBRShader, "f", "diffuseIntensity", 1.0);
 const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularIntensity", 1.0);
+const inHeightUniform = new CGL.Uniform(PBRShader, "t", "_HeightMap", 0);
 
 const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const inRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", 0.5);
 const inMetalnessUniform = new CGL.Uniform(PBRShader, "f", "_Metalness", 0);
+const inHeightDepthUniform = new CGL.Uniform(PBRShader, "f", "_HeightDepth", 1.0);
 
 PBRShader.uniformColorDiffuse = inDiffuseColor;
 PBRShader.uniformPbrMetalness = inMetalnessUniform;
@@ -186,6 +190,10 @@ inTexNormal.onChange = () =>
 {
     PBRShader.toggleDefine("USE_NORMAL_TEX", inTexNormal.get());
 };
+inTexHeight.onChange = () =>
+{
+    PBRShader.toggleDefine("USE_HEIGHT_TEX", inTexHeight.get());
+};
 inToggleNMGR.onChange = () =>
 {
     PBRShader.toggleDefine("DONT_USE_NMGR", inToggleNMGR);
@@ -193,6 +201,10 @@ inToggleNMGR.onChange = () =>
 inToggleGR.onChange = () =>
 {
     PBRShader.toggleDefine("DONT_USE_GR", inToggleGR);
+};
+inUseOptimizedHeight.onChange = () =>
+{
+    PBRShader.toggleDefine("USE_OPTIMIZED_HEIGHT", inUseOptimizedHeight);
 };
 inAlphaMode.onChange = function ()
 {
@@ -248,7 +260,7 @@ inTonemapping.onChange = function ()
 };
 function setEnvironmentLighting(enabled)
 {
-    if (enabled)
+    if(enabled)
     {
         PBRShader.define("USE_ENVIRONMENT_LIGHTING");
     }
@@ -299,14 +311,14 @@ function updateLightUniforms()
 
 function buildShader()
 {
-    const vertexShader = attachments.BasicPBR_vert;
+    const vertexShader  = attachments.BasicPBR_vert;
     const lightIncludes = attachments.light_includes_frag;
-    let fragmentShader = attachments.BasicPBR_frag;
+    let fragmentShader  = attachments.BasicPBR_frag;
 
     let fragmentHead = "";
     let fragmentBody = "";
 
-    if (PBRLightStack.length > 0)
+    if(PBRLightStack.length > 0)
     {
         fragmentHead = fragmentHead.concat(lightIncludes);
     }
@@ -348,7 +360,7 @@ function buildShader()
 
 function updateLights()
 {
-    if (cgl.frameStore.lightStack && currentLightCount !== cgl.frameStore.lightStack.length)
+    if(cgl.frameStore.lightStack && currentLightCount !== cgl.frameStore.lightStack.length)
     {
         PBRLightStack = cgl.frameStore.lightStack;
         buildShader();
@@ -372,22 +384,22 @@ function doRender()
         PBRShader.pushTexture(inIrradianceUniform, pbrEnv.texDiffIrr.tex, cgl.gl.TEXTURE_CUBE_MAP);
         PBRShader.pushTexture(inPrefilteredUniform, pbrEnv.texPreFiltered.tex, cgl.gl.TEXTURE_CUBE_MAP);
         inMipLevelsUniform.setValue(pbrEnv.texPreFilteredMipLevels || 7);
-        // op.setUiError("noPbrEnv", null);
+        //op.setUiError("noPbrEnv", null);
         setEnvironmentLighting(true);
     }
     else
     {
-        // op.setUiError("noPbrEnv", "No PBR precompute environment setup found in branch");
+        //op.setUiError("noPbrEnv", "No PBR precompute environment setup found in branch");
         setEnvironmentLighting(false);
-        // PBRShader.pushTexture(inIBLLUTUniform, CGL.Texture.getEmptyTexture(cgl).tex);
-        // PBRShader.pushTexture(inIrradianceUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
-        // PBRShader.pushTexture(inPrefilteredUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
-        // inMipLevelsUniform.setValue(7);
+        //PBRShader.pushTexture(inIBLLUTUniform, CGL.Texture.getEmptyTexture(cgl).tex);
+        //PBRShader.pushTexture(inIrradianceUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
+        //PBRShader.pushTexture(inPrefilteredUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
+        //inMipLevelsUniform.setValue(7);
     }
 
     if (inTexIBLLUT.get())
     {
-        // op.setUiError("noPbrEnv", null);
+        //op.setUiError("noPbrEnv", null);
         setEnvironmentLighting(true);
         PBRShader.pushTexture(inIBLLUTUniform, inTexIBLLUT.get().tex);
         inMipLevelsUniform.setValue(inMipLevels.get());
@@ -398,11 +410,17 @@ function doRender()
     if (inTexAlbedo.get()) PBRShader.pushTexture(inAlbedoUniform, inTexAlbedo.get().tex);
     if (inTexAORM.get()) PBRShader.pushTexture(inAORMUniform, inTexAORM.get().tex);
     if (inTexNormal.get()) PBRShader.pushTexture(inNormalUniform, inTexNormal.get().tex);
+    if (inTexHeight.get()) PBRShader.pushTexture(inHeightUniform, inTexHeight.get().tex);
 
     if (!inTexAORM.get())
     {
         inRoughnessUniform.setValue(inRoughness.get());
         inMetalnessUniform.setValue(inMetalness.get());
+    }
+
+    if (inTexHeight.get())
+    {
+        inHeightDepthUniform.setValue(inHeightDepth.get());
     }
 
     if (inTonemappingExposure.get()) inTonemappingExposureUniform.setValue(inTonemappingExposure.get());
