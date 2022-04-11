@@ -27,42 +27,86 @@
             {
                 "type": 0,
                 "name": "Mass",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Friction",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rolling Friction",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Restitution",
+                "group": "Parameters",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Shape index",
+                "group": "Shape",
                 "subType": "integer"
             },
             {
                 "type": 2,
                 "name": "Geometry",
+                "group": "Shape",
                 "objType": "geometry"
             },
             {
                 "type": 0,
                 "name": "Simplify Max Triangles",
+                "group": "Shape",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Radius",
+                "group": "Shape",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Size X",
+                "group": "Shape",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Size Y",
+                "group": "Shape",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Size Z",
+                "group": "Shape",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Never Deactivate",
+                "group": "Flags",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Ghost Object",
+                "group": "Flags",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "group": "Flags",
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -71,21 +115,6 @@
             {
                 "type": 1,
                 "name": "Activate"
-            },
-            {
-                "type": 0,
-                "name": "Never Deactivate",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Ghost Object",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Active",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

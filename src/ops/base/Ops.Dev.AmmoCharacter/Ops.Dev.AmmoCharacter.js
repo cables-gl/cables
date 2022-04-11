@@ -166,7 +166,7 @@ function update()
     world = cgl.frameStore.ammoWorld;
     if (!world) return;
     if (!body)setup(world);
-
+    if (!body) return;
     body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
     if (!btVelocity)

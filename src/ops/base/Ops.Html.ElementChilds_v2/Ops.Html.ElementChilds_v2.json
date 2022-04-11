@@ -15,6 +15,11 @@
             "message": "Ops.User.stephan.NewElementChilds renamed to Ops.Dev.Html.NewElementChilds",
             "author": "stephan",
             "date": 1648049980618
+        },
+        {
+            "message": "Ops.Dev.Html.NewElementChilds renamed to Ops.Html.ElementChilds_v2",
+            "author": "stephan",
+            "date": 1649257968601
         }
     ],
     "authorName": "stephan",
