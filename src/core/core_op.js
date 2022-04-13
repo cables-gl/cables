@@ -807,6 +807,33 @@ const Op = function ()
     };
 
     /**
+     * create output boolean port,value will be converted to 0 or 1
+     * @function outBool
+     * @instance
+     * @memberof Op
+     * @param {String} name
+     * @return {Port} created port
+     */
+    Op.prototype.outBoolNum = function (name, v)
+    {
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "boolnum"
+            })
+        );
+
+        p.set = function (b)
+        {
+            this.setValue(b ? 1 : 0);
+            // console.log("bool set", b, this.get());
+        }.bind(p);
+
+        if (v !== undefined) p.set(v);
+        else p.set(0);
+        return p;
+    };
+
+    /**
      * create output string port
      * @function outString
      * @instance
@@ -1128,6 +1155,7 @@ const Op = function ()
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
+        if (window.gui) window.gui.emitEvent("opLogEvent", this.objName, "error", arguments);
     };
 
     Op.prototype.warn = Op.prototype.logWarn = function ()
@@ -1467,11 +1495,12 @@ const Op = function ()
     {
         for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-            else
-            {
-                this._log.error("setPortGroup: invalid port!");
-            }
+            if (ports[i])
+                if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
+                else
+                {
+                    this._log.error("setPortGroup: invalid port!");
+                }
         }
     };
 

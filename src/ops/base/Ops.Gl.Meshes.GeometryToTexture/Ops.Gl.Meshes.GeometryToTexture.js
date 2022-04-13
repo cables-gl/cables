@@ -120,8 +120,6 @@ function initFb()
     needInit = false;
     if (fb)fb.delete();
 
-    console.log("initfb");
-
     fb = null;
 
     let w = Math.max(1, inWidth.get());

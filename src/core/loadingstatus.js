@@ -1,6 +1,4 @@
 import { generateUUID } from "./utils";
-// eslint-disable-next-line
-import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL properly.. wtf?
 import Logger from "./core_logger";
 
 /**
@@ -13,6 +11,8 @@ import Logger from "./core_logger";
  */
 const LoadingStatus = function (patch)
 {
+    CABLES.EventTarget.apply(this);
+
     this._log = new Logger("LoadingStatus");
     this._loadingAssets = {};
     this._cbFinished = [];
@@ -65,7 +65,7 @@ LoadingStatus.prototype.checkStatus = function ()
             if (this._cbFinished[j])
             {
                 const cb = this._cbFinished[j];
-                setTimeout(() => { cb(this._patch); }, 200);
+                setTimeout(() => { cb(this._patch); this.emitEvent("finishedAll"); }, 100);
             }
         }
 
@@ -74,8 +74,21 @@ LoadingStatus.prototype.checkStatus = function ()
             this._wasFinishedPrinted = true;
             this.print();
         }
+        this.emitEvent("finishedAll");
     }
 };
+
+LoadingStatus.prototype.getList = function ()
+{
+    let arr = [];
+    for (const i in this._loadingAssets)
+    {
+        arr.push(this._loadingAssets[i]);
+    }
+
+    return arr;
+};
+
 
 LoadingStatus.prototype.getListJobs = function ()
 {
@@ -120,6 +133,7 @@ LoadingStatus.prototype.finished = function (id)
     }
 
     this.checkStatus();
+    this.emitEvent("finishedTask");
 };
 
 LoadingStatus.prototype._startAssetTasks = function ()
@@ -148,6 +162,7 @@ LoadingStatus.prototype.addAssetLoadingTask = function (cb)
     {
         cb();
     }
+    this.emitEvent("addAssetTask");
 };
 
 LoadingStatus.prototype.existByName = function (name)
@@ -175,6 +190,8 @@ LoadingStatus.prototype.start = function (type, name)
         "order": this._order,
     };
     this._order++;
+
+    this.emitEvent("startTask");
 
     return id;
 };

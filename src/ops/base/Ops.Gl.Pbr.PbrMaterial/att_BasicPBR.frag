@@ -5,7 +5,9 @@ precision highp int;
 // set by cables
 UNI vec3 camPos;
 // utility maps
+#ifdef USE_ENVIRONMENT_LIGHTING
 uniform sampler2D IBL_BRDF_LUT;
+#endif
 // mesh maps
 #ifdef USE_ALBEDO_TEX
     UNI sampler2D _AlbedoMap;
@@ -22,17 +24,44 @@ uniform sampler2D IBL_BRDF_LUT;
     UNI float _Metalness;
 #endif
 // IBL inputs
+#ifdef USE_ENVIRONMENT_LIGHTING
 UNI samplerCube _irradiance;
 UNI samplerCube _prefilteredEnvironmentColour;
 UNI float MAX_REFLECTION_LOD;
-UNI float tonemappingExposure;
 UNI float diffuseIntensity;
 UNI float specularIntensity;
+#endif
+UNI float tonemappingExposure;
 
 IN vec2 texCoord;
 IN vec4 FragPos;
 IN mat3 TBN;
 IN vec3 norm;
+IN vec3 normM;
+#ifdef VERTEX_COLORS
+IN vec4 vCol0;
+#endif
+
+// structs
+struct Light {
+    vec3 color;
+    vec3 position;
+    vec3 specular;
+
+    #define INTENSITY x
+    #define ATTENUATION y
+    #define FALLOFF z
+    #define RADIUS w
+    vec4 lightProperties;
+
+    int castLight;
+
+    vec3 conePointAt;
+    #define COSCONEANGLE x
+    #define COSCONEANGLEINNER y
+    #define SPOTEXPONENT z
+    vec3 spotProperties;
+};
 
 
 #ifdef WEBGL1
@@ -41,18 +70,6 @@ IN vec3 norm;
     #endif
 #endif
 #define SAMPLETEX textureLod
-
-// from https://github.com/BabylonJS/Babylon.js/blob/993b28ea5189b846a6b02594a15d743d973aee4b/src/Shaders/background.fragment.fx
-// modified to fit variable names / structure
-float pow5(float value) {
-    float sq = value * value;
-    return sq * sq * value;
-}
-highp vec3 F_Schlick(float VoH, const vec3 f0, float roughness)
-{
-    float weight = mix(0.25, 1.0, 1.0 - roughness);
-    return f0 + weight * (1.0 - f0) * pow5(clamp(1.0 - VoH, 0.0, 1.0));
-}
 
 // https://community.khronos.org/t/addition-of-two-hdr-rgbe-values/55669
 highp vec4 EncodeRGBE8(highp vec3 rgb)
@@ -100,6 +117,8 @@ float Dither_InterleavedGradientNoise(float a) {
     return step(noise, a);
 }
 #endif
+
+{{PBR_FRAGMENT_HEAD}}
 void main()
 {
     vec4 col;
@@ -134,7 +153,7 @@ void main()
         internalNormals      = internalNormals * 2.0 - 1.0;
         internalNormals      = normalize(TBN * internalNormals);
     #else
-        vec3 internalNormals = norm;
+        vec3 internalNormals = normM;
     #endif
 
     // initialize texture values
@@ -144,19 +163,42 @@ void main()
     vec3  N              = normalize(internalNormals);
     vec3  albedo         = pow(AlbedoMap.rgb, vec3(2.2));
 
+    #ifdef VERTEX_COLORS
+    #ifdef VCOL_COLOUR
+        albedo.rgb *= pow(vCol0.rgb, vec3(2.2));
+        AlbedoMap.rgb *= pow(vCol0.rgb, vec3(2.2));
+    #endif
+    #ifdef VCOL_AORM
+        AO = vCol0.r;
+        specK = vCol0.g;
+        metalness = vCol0.b;
+    #endif
+    #ifdef VCOL_AO
+        AO = vCol0.r;
+    #endif
+    #ifdef VCOL_R
+        specK = vCol0.g;
+    #endif
+    #ifdef VCOL_M
+        metalness = vCol0.b;
+    #endif
+    #endif
+
     // set up values for later calculations
     float NdotV          = abs(dot(N, V));
     vec3  F0             = mix(vec3(0.04), AlbedoMap.rgb, metalness);
-    vec3  kS             = F_Schlick(NdotV, F0, specK);
-    vec3  kD             = 1.0 - kS;
-    kD                  *= 1.0 - metalness; // remove diffuse lighting from metals
 
     #ifndef WEBGL1
     #ifndef DONT_USE_GR
     // from https://github.com/BabylonJS/Babylon.js/blob/5e6321d887637877d8b28b417410abbbeb651c6e/src/Shaders/ShadersInclude/pbrHelperFunctions.fx
     // modified to fit variable names
-    vec3 nDfdx = dFdx(norm.xyz);
-    vec3 nDfdy = dFdy(norm.xyz);
+    #ifndef DONT_USE_NMGR
+    vec3 nDfdx = dFdx(normM.xyz);
+    vec3 nDfdy = dFdy(normM.xyz);
+    #else
+    vec3 nDfdx = dFdx(N.xyz) + dFdx(normM.xyz);
+    vec3 nDfdy = dFdy(N.xyz) + dFdy(normM.xyz);
+    #endif
     float slopeSquare = max(dot(nDfdx, nDfdx), dot(nDfdy, nDfdy));
 
     // Vive analytical lights roughness factor.
@@ -167,51 +209,61 @@ void main()
     #endif
 
 	// IBL
-	// diffuse irradiance
-	vec3 IBLIrradiance         = DecodeRGBE8(SAMPLETEX(_irradiance, N.xyz, 0.0)) * diffuseIntensity;
-    vec3 diffuse               = IBLIrradiance * albedo * AO;
-    // environment reflections
-	float envSampleSpecK       = specK * MAX_REFLECTION_LOD;
-	vec3  R                    = reflect(-V, N);
-	vec3  envSampleUV          = normalize(R);
-	vec3  prefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, envSampleUV.xyz, envSampleSpecK)) * specularIntensity;
-
-    vec2 envBRDF  = texture(IBL_BRDF_LUT, vec2(max(NdotV, 0.0), specK)).rg;
-    vec3 specular = prefilteredEnvColour * (kS * envBRDF.x + envBRDF.y);
-
+	// from https://github.com/google/filament/blob/df6a100fcba66d9c99328a49d41fe3adecc0165d/shaders/src/light_indirect.fs
+	// and https://github.com/google/filament/blob/df6a100fcba66d9c99328a49d41fe3adecc0165d/shaders/src/shading_lit.fs
+	// modified to fit structure/variable names
+	#ifdef USE_ENVIRONMENT_LIGHTING
+	vec2 envBRDF = texture(IBL_BRDF_LUT, vec2(NdotV, specK)).xy;
+	vec3 E = mix(envBRDF.xxx, envBRDF.yyy, F0);
+    #endif
     float specOcclusion    = environmentRadianceOcclusion(AO, NdotV);
-    float horizonOcclusion = environmentHorizonOcclusion(-V, N, norm);
+    float horizonOcclusion = environmentHorizonOcclusion(-V, N, normM);
+
+    #ifdef USE_ENVIRONMENT_LIGHTING
+    float envSampleSpecK = specK * MAX_REFLECTION_LOD;
+    vec3  R = reflect(-V, N);
+
+	vec3  prefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, R, envSampleSpecK)) * specularIntensity;
+
+	vec3 Fr = E * prefilteredEnvColour;
+	Fr *= specOcclusion * horizonOcclusion * (1.0 + F0 * (1.0 / envBRDF.y - 1.0));
+	Fr *= 1.0 + F0; // TODO: this might be wrong, figure this out
+
+    vec3 IBLIrradiance = DecodeRGBE8(SAMPLETEX(_irradiance, N, 0.0)) * diffuseIntensity;
+	vec3 Fd = (1.0 - metalness) * albedo * IBLIrradiance * (1.0 - E) * AO;
+    #endif
+    vec3 directLighting = vec3(0.0);
+
+    {{PBR_FRAGMENT_BODY}}
 
     // combine IBL
-    vec3 ambient  = (kD * diffuse + specular * specOcclusion * horizonOcclusion);
-
-    col.rgb = pow(ambient, vec3(1.0/2.2));
+    col.rgb = directLighting;
+    #ifdef USE_ENVIRONMENT_LIGHTING
+    col.rgb += Fr + Fd;
+    #endif
     col.a   = 1.0;
 
     #ifdef ALPHA_BLEND
     col.a = AlbedoMap.a;
     #endif
 
-    col.rgb = clamp(col.rgb, vec3(0.0), vec3(1.0));
+    // from https://github.com/BabylonJS/Babylon.js/blob/5e6321d887637877d8b28b417410abbbeb651c6e/src/Shaders/tonemap.fragment.fx
+    // modified to fit variable names
+    #ifdef TONEMAP_HejiDawson
+        col.rgb *= tonemappingExposure;
+
+        vec3 X = max(vec3(0.0, 0.0, 0.0), col.rgb - 0.004);
+        vec3 retColor = (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);
+
+        col.rgb = retColor * retColor;
+    #elif defined(TONEMAP_Photographic)
+        col.rgb =  vec3(1.0, 1.0, 1.0) - exp2(-tonemappingExposure * col.rgb);
+    #else
+        col.rgb *= tonemappingExposure;
+        //col.rgb = clamp(col.rgb, vec3(0.0), vec3(1.0));
+    #endif
+
+    col.rgb = pow(col.rgb, vec3(1.0/2.2));
     {{MODULE_COLOR}}
     outColor = col;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

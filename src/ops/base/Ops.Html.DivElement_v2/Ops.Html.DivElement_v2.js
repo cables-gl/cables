@@ -41,6 +41,8 @@ function createElement()
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 
+    if (inId.get()) div.id = inId.get();
+
     canvas.appendChild(div);
     outElement.set(div);
 }
@@ -93,13 +95,13 @@ function updateText()
 function updateStyle()
 {
     if (!div) return;
-    if (inStyle.get() != div.style)
-    {
-        div.setAttribute("style", inStyle.get());
-        updateVisibility();
-        outElement.set(null);
-        outElement.set(div);
-    }
+    // if (inStyle.get() != div.style)
+    // {
+    div.setAttribute("style", inStyle.get());
+    updateVisibility();
+    outElement.set(null);
+    outElement.set(div);
+    // }
 
     if (!div.parentElement)
     {

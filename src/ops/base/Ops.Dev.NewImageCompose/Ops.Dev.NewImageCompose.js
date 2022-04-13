@@ -10,7 +10,7 @@ const
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
-    outRatio = op.outValue("Aspect Ratio"),
+    outRatio = op.outNumber("Aspect Ratio"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height");
 
@@ -57,7 +57,8 @@ function initEffect()
 
     outWidth.set(getWidth());
     outHeight.set(getHeight());
-    outRatio.set(getWidth(), getHeight());
+    outRatio.set(getWidth() / getHeight());
+
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
     reInitEffect = false;
@@ -72,6 +73,7 @@ function getFilter()
     if (inFilter.get() == "linear") return CGL.Texture.FILTER_LINEAR;
     if (inFilter.get() == "mipmap") return CGL.Texture.FILTER_MIPMAP;
 }
+
 function getWrap()
 {
     if (inTex.get()) return inTex.get().wrap;
@@ -93,6 +95,7 @@ function getWidth()
     if (inUseVPSize.get()) return cgl.getViewPort()[2];
     return Math.ceil(width.get());
 }
+
 function getHeight()
 {
     if (inTex.get()) return inTex.get().height;
@@ -165,6 +168,7 @@ function doRender()
 
     trigger.trigger();
 
+    texOut.set(CGL.Texture.getEmptyTexture(cgl));
     texOut.set(effect.getCurrentSourceTexture());
 
     effect.endEffect();

@@ -4,7 +4,7 @@ const
     inDay = op.inValueInt("Day"),
     inHour = op.inValueInt("Hour"),
     inMinute = op.inValueInt("Minute"),
-    outTimestamp = op.outValue("Timestamp");
+    outTimestamp = op.outNumber("Timestamp");
 
 inYear.onChange =
 inMonth.onChange =

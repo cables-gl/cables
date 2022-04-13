@@ -1,16 +1,16 @@
 const
     inTex = op.inObject("Texture"),
-    outName = op.outValue("Name"),
-    outWidth = op.outValue("Width"),
-    outHeight = op.outValue("Height"),
-    outRatio = op.outValue("Ratio"),
-    outFilter = op.outValue("Filter"),
-    outWrap = op.outValue("Wrap"),
-    outFlipped = op.outValue("Flipped"),
-    outFp = op.outValue("HDR"),
-    outDefaultEmpty = op.outValue("Is Empty Default Texture", false),
-    outDefaultTex = op.outValue("Is Default Texture", false),
-    outId = op.outValue("Id");
+    outName = op.outNumber("Name"),
+    outWidth = op.outNumber("Width"),
+    outHeight = op.outNumber("Height"),
+    outRatio = op.outNumber("Ratio"),
+    outFilter = op.outNumber("Filter"),
+    outWrap = op.outNumber("Wrap"),
+    outFlipped = op.outNumber("Flipped"),
+    outFp = op.outNumber("HDR"),
+    outDefaultEmpty = op.outNumber("Is Empty Default Texture", false),
+    outDefaultTex = op.outNumber("Is Default Texture", false),
+    outId = op.outNumber("Id");
 
 const emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl);
 const defaultTex = CGL.Texture.getTempTexture(op.patch.cgl);

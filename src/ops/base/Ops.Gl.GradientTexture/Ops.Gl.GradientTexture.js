@@ -8,7 +8,8 @@ const inGrad = op.inGradient("Gradient"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
 
     inGradArray = op.inArray("Gradient Array"),
-    outTex = op.outTexture("Texture");
+    outTex = op.outTexture("Texture"),
+    outColors = op.outArray("Colors");
 
 const cgl = op.patch.cgl;
 
@@ -143,6 +144,17 @@ function update()
         }
         tex.initFromData(pixels, width, width, selectedFilter, selectedWrap);
     }
+
+    const colorArr = [];
+    for (let i = 0; i < keys.length - 1; i++)
+    {
+        // animR.setValue(keys[i].pos, keys[i].r);
+        // animG.setValue(keys[i].pos, keys[i].g);
+        // animB.setValue(keys[i].pos, keys[i].b);
+        colorArr.push(keys[i].r, keys[i].g, keys[i].b);
+    }
+
+    outColors.set(colorArr);
 
     outTex.set(null);
     outTex.set(tex);

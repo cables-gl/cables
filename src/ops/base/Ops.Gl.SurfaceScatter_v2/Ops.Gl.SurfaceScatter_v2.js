@@ -13,9 +13,9 @@ const
     inLimit = op.inValueInt("Limit Num", 0),
     inRotateRandom = op.inValueBool("Random Rotate", true),
     outNext = op.outTrigger("Next"),
-    outArrPositions = op.outArray("Positions"),
-    outArrScale = op.outArray("Scale"),
-    outArrRotations = op.outArray("Quaternions");
+    outArrPositions = op.outArray("Positions", 3),
+    outArrScale = op.outArray("Scale", 3),
+    outArrRotations = op.outArray("Quaternions", 4);
 const cgl = op.patch.cgl;
 const mod = null;
 let recalc = true;

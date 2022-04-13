@@ -8,6 +8,7 @@ const
 
 const gl = op.patch.cgl.gl;
 let fb = null;
+outString.ignoreValueSerialize = true;
 
 // Create a 2D canvas to store the result
 const canvas = document.createElement("canvas");

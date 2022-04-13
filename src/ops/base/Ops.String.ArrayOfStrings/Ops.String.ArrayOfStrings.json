@@ -1,0 +1,42 @@
+{
+    "id": "846f9998-1c05-4757-8011-21020ed01c6d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647500903127
+        },
+        {
+            "message": "Ops.User.pandur.ArrayOfStrings renamed to Ops.String.ArrayOfStrings",
+            "author": "pandur",
+            "date": 1647503418945
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Attach Number",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayOfStrings"
+    },
+    "authorName": "pandur",
+    "created": 1647500932771
+}

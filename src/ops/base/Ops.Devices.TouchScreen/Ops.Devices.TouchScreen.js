@@ -4,15 +4,15 @@ const
     hdpi = op.inValueBool("HDPI Coordinates", false),
     active = op.inValueBool("Active", true),
 
-    outTouched = op.outValue("Touched", false),
-    numFingers = op.outValue("Fingers", 0),
+    outTouched = op.outNumber("Touched", false),
+    numFingers = op.outNumber("Fingers", 0),
 
-    f1x = op.outValue("Finger 1 X", 0),
-    f1y = op.outValue("Finger 1 Y", 0),
-    f1f = op.outValue("Finger 1 Force", 0),
+    f1x = op.outNumber("Finger 1 X", 0),
+    f1y = op.outNumber("Finger 1 Y", 0),
+    f1f = op.outNumber("Finger 1 Force", 0),
 
-    f2x = op.outValue("Finger 2 X", 0),
-    f2y = op.outValue("Finger 2 Y", 0),
+    f2x = op.outNumber("Finger 2 X", 0),
+    f2y = op.outNumber("Finger 2 Y", 0),
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
 
     outEvents = op.outArray("Events"),

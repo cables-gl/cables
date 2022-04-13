@@ -23,6 +23,16 @@
             {
                 "type": 1,
                 "name": "Screenshot"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -41,10 +51,6 @@
     "docs": {
         "ports": [
             {
-                "name": "Screenshot",
-                "text": "Trigger to make a screenshot"
-            },
-            {
                 "name": "Filename",
                 "text": "name of saved file"
             },
@@ -53,12 +59,8 @@
                 "text": "Uses canvas size"
             },
             {
-                "name": "Width",
-                "text": "Width of screenshot in pixels"
-            },
-            {
-                "name": "Height",
-                "text": "Height of screenshot in pixels"
+                "name": "Screenshot",
+                "text": "Trigger to make a screenshot"
             },
             {
                 "name": "Finished",
@@ -66,5 +68,6 @@
             }
         ]
     },
-    "exampleProjectId": "OB0Qmi"
+    "exampleProjectId": "OB0Qmi",
+    "caniusequery": ""
 }

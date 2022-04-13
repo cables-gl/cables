@@ -1,10 +1,11 @@
 {
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "has focus",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.CanvasFocus"

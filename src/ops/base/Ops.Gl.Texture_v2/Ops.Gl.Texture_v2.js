@@ -93,6 +93,8 @@ function realReload(nocache)
         loaded.set(false);
         loading.set(true);
 
+        const fileToLoad = filename.get();
+
         op.setUiAttrib({ "extendTitle": CABLES.basename(url) });
         if (needsRefresh) op.refreshParams();
 
@@ -103,6 +105,13 @@ function realReload(nocache)
             CGL.Texture.load(cgl, url,
                 function (err, newTex)
                 {
+                    if (filename.get() != fileToLoad)
+                    {
+                        cgl.patch.loading.finished(loadingId);
+                        loadingId = null;
+                        return;
+                    }
+
                     if (err)
                     {
                         setTempTexture();

@@ -49,6 +49,10 @@
                 "type": 2,
                 "name": "Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 3,
+                "name": "Colors"
             }
         ],
         "name": "Ops.Gl.GradientTexture"

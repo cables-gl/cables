@@ -2,56 +2,66 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Timestamp 1"
+                "type": 0,
+                "name": "Timestamp 1",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Timestamp 2"
+                "type": 0,
+                "name": "Timestamp 2",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Stop at 0"
+                "type": 0,
+                "name": "Stop at 0",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Year"
+                "type": 0,
+                "name": "Year",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Month"
+                "type": 0,
+                "name": "Month",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Day"
+                "type": 0,
+                "name": "Day",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Hours"
+                "type": 0,
+                "name": "Hours",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Minutes"
+                "type": 0,
+                "name": "Minutes",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Seconds"
+                "type": 0,
+                "name": "Seconds",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Milliseconds"
+                "type": 0,
+                "name": "Milliseconds",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Diff"
+                "type": 0,
+                "name": "Diff",
+                "subType": "number"
             }
         ],
         "name": "Ops.Date.DateDifference"
     },
     "summary": "Calculates the difference between two timestamps",
-    "updated": 1511019287733,
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "34cd865c-cc4d-4c58-afb2-626773eb412e",

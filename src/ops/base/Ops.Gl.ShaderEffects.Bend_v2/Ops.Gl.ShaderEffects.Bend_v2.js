@@ -6,6 +6,7 @@ const rotZ = op.inValue("RotZ");
 const scale = op.inValue("Scale", 2);
 const offset = op.inValue("Offset", 0.25);
 const limited = op.inValueBool("Limited", true);
+
 const next = op.outTrigger("trigger");
 
 const srcHeadVert = attachments.bend_vert;
@@ -49,15 +50,6 @@ mod.addUniformVert("m4", "MOD_invTransMatrix", invTransMatrix);
 
 amount.onChange = function () { amountRadians = amount.get() * CGL.DEG2RAD; };
 
-function updateRange()
-{
-    if (uniRange)uniRange.setValue(limited.get() ? [0, 1] : [-Infinity, Infinity]);
-}
-
-updateRange();
-
-limited.onChange = updateRange;
-
 mat4.identity(transMatrix);
 mat4.identity(invTransMatrix);
 
@@ -85,9 +77,10 @@ function updateMatrices()
     matricesValid = true;
 }
 
-
 render.onTriggered = function ()
 {
+    mod.setUniformValue("MOD_range", limited.get() ? [0, 1] : [-99999, 99999]);
+
     updateMatrices();
 
     mod.bind();

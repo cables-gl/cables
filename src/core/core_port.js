@@ -92,11 +92,14 @@ Port.prototype.getValueForDisplay = function ()
 {
     let str = String(this.value);
 
-    // if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
-    // {
-    //     if (!this.val) str = "false";
-    //     else str = "true";
-    // }
+    if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
+    {
+        str += " - ";
+
+        if (!this.value) str += "false";
+        else str += "true";
+    }
+
     if (str.length > 100) str = str.substring(0, 100);
 
     return str;
@@ -258,7 +261,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
 
                     if (this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
-                    this.parent.patch.emitEvent("exception".ex, this.parent);
+                    this.parent.patch.emitEvent("exception", ex, this.parent);
                     if (this.parent.onError) this.parent.onError(ex);
                 }
 
@@ -857,22 +860,6 @@ class ValueSelectPort extends SwitchPort
         super.setUiAttribs(newAttribs);
     }
 }
-
-
-// class BoolPort extends Port
-// {
-//     set(b)
-//     {
-//         super.set(b ? 1 : 0);
-//         // console.log("bool set", b, this.get());
-//     }
-
-//     get()
-//     {
-//         // console.log("bool get", super.get());
-//         return super.get() ? 1 : 0;
-//     }
-// }
 
 
 export { Port, SwitchPort, ValueSelectPort };

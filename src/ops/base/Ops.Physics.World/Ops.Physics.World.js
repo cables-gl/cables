@@ -48,8 +48,24 @@ function setGravity()
 {
     if (!world) return;
 
+    world.solver = new CANNON.SplitSolver(world.solver);
+
     world.gravity.set(gravX.get(), gravY.get(), gravZ.get()); // m/s²
     world.solver.iterations = inIter.get();
+
+    world.defaultContactMaterial.contactEquationStiffness = inDefStiff.get() * 1e10;
+    world.defaultContactMaterial.contactEquationRelaxation = inDefRelax.get();
+    // world.defaultContactMaterial.friction = 9999999999999;
+    world.defaultContactMaterial.restitution = 0.1;
+    world.solver.tolerance = 0.0001;
+
+    // const physicsMaterial = new CANNON.Material("slipperyMaterial");
+    // let physicsContactMaterial = new CANNON.ContactMaterial(physicsMaterial,
+    //     physicsMaterial,
+    //     0.1, // friction coefficient
+    //     0.3 // restitution
+    // );
+    // world.addContactMaterial(physicsContactMaterial);
 }
 
 function setup()
@@ -59,8 +75,8 @@ function setup()
 
     world.broadphase = new CANNON.NaiveBroadphase();
 
-    world.defaultContactMaterial.contactEquationStiffness = inDefStiff.get() * 1e10;
-    world.defaultContactMaterial.contactEquationRelaxation = inDefRelax.get();
+    // world.defaultContactMaterial.contactEquationStiffness = inDefStiff.get() * 1e10;
+    // world.defaultContactMaterial.contactEquationRelaxation = inDefRelax.get();
     // world.defaultContactMaterial.contactEquationStiffness = 1e10;
     // world.defaultContactMaterial.contactEquationRelaxation = 4;
     // world.defaultContactMaterial.friction = 9999999999999;
@@ -132,25 +148,28 @@ function draw()
         }
         else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.SPHERE)
         {
-            // wireSphere.render(cgl, 1.0);
-            meshCube.render(
-                1.0,
-                1.0,
-                1.0);
+            meshCube.render(world.bodies[i].shapes[0].radius, world.bodies[i].shapes[0].radius, world.bodies[i].shapes[0].radius);
         }
-        else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.TRIMESH)
+
+        if (world.bodies[i].shapes[0].cbl_geom)
         {
-            meshCube.render(
-                1.0,
-                1.0,
-                1.0);
+            if (!world.bodies[i].shapes[0].cbl_mesh)
+                world.bodies[i].shapes[0].cbl_mesh = new CGL.Mesh(cgl, world.bodies[i].shapes[0].cbl_geom, cgl.gl.LINES);
+
+            cgl.pushModelMatrix();
+            mat4.identity(cgl.mMatrix);
+
+            meshCube.render(0, 0, 0);
+
+            mat4.multiply(cgl.mMatrix, cgl.mMatrix, world.bodies[i].shapes[0].cbl_mat);
+
+            world.bodies[i].shapes[0].cbl_mesh.render(meshCube.colorShader.shader);
+
+            cgl.popModelMatrix();
         }
-        // else op.log("unknown!", world.bodies[i].shapes[0].type);
 
         cgl.popModelMatrix();
     }
-
-    // cgl.popDepthTest();
 }
 
 exec.onTriggered = function ()

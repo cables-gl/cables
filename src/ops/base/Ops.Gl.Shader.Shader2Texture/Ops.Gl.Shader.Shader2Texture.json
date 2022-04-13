@@ -34,24 +34,14 @@
             {
                 "type": 0,
                 "name": "filter index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "filter",
                 "group": "Texture settings",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "wrap index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "wrap",
                 "group": "Texture settings",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -63,10 +53,6 @@
                 "type": 0,
                 "name": "Num Textures index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Num Textures"
             }
         ],
         "portsOut": [

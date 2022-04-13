@@ -1,0 +1,84 @@
+{
+    "authorName": "pandur",
+    "id": "979df145-edc2-4014-9d7e-1e66ce1c4b06",
+    "created": 1648126657222,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Data"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Note"
+            },
+            {
+                "type": 0,
+                "name": "Midi",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Channel",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Beat Start",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Beat End",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Count",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time since last",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Reseted"
+            }
+        ],
+        "name": "Ops.Audio.MidiJsonNote_v2"
+    },
+    "summary": "filter midiJson for notes",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Audio.MidiJsonNote",
+            "author": "pandur",
+            "date": 1648126657222
+        },
+        {
+            "message": "Ops.User.pandur.MidiJsonNote2 renamed to Ops.Audio.MidiJsonNote_v2",
+            "author": "pandur",
+            "date": 1648128219030
+        }
+    ]
+}

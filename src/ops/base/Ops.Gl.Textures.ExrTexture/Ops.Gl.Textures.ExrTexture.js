@@ -47,9 +47,6 @@ function loadBin(addCacheBuster)
             try
             {
                 const p = l.parse(arrayBuffer);
-
-                console.log(l, p);
-
                 outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
 
                 if (p)
@@ -91,8 +88,6 @@ function loadBin(addCacheBuster)
             cgl.patch.loading.finished(loadingId);
             finishedLoading = true;
             outLoading.set(false);
-
-            // finishLoading();
         };
 
         oReq.send(null);

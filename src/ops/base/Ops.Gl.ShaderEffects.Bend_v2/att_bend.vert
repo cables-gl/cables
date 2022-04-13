@@ -10,6 +10,7 @@ void MOD_bendDistort(inout vec3 pos, inout vec3 norm)
         float bendAngle = MOD_amount;
         float radius = 1.0 / bendAngle;
 
+        // float d = clamp(pos.x, MOD_range.x, MOD_range.y);
         float d = clamp(pos.x, MOD_range.x, MOD_range.y);
         float th = PI * 0.5 + (bendAngle * d);
         float s = sin(th);

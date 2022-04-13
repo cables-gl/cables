@@ -10,6 +10,7 @@ const
 inSeed.onChange =
     min.onChange =
     max.onChange = update;
+update();
 
 function update()
 {

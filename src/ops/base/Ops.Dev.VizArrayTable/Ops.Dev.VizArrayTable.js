@@ -56,7 +56,12 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
             if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
             else if (typeof v == "string") str = v;
-            else if (typeof v == "array") str = "[]";
+            else if (Array.isArray(v))
+            {
+                let preview = "...";
+                if (v.length == 0) preview = "";
+                str = "[" + preview + "] (" + v.length + ")";
+            }
             else if (typeof v == "object") str = "{}";
 
             ctx.fillText(str, pos[0] / sc + s * 100 + 50, pos[1] / sc + 10 + i / stride * 10 + padding);

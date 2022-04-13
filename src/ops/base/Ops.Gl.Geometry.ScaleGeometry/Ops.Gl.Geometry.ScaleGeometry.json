@@ -5,18 +5,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result"
             }
         ],

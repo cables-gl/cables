@@ -1,1 +1,74 @@
-{"authorName":"pandur","id":"e898374c-5651-4f43-82d5-f06c7695444b","created":1619892949713,"layout":{"portsIn":[{"type":1,"name":"Execute"},{"type":3,"name":"Array"},{"type":0,"name":"Value 1","subType":"number"},{"type":0,"name":"Value 2","subType":"number"},{"type":0,"name":"Value 3","subType":"number"},{"type":1,"name":"Reset"}],"portsOut":[{"type":1,"name":"Next"},{"type":3,"name":"Result Array"}],"name":"Ops.User.pandur.Array3PushNumbers_v2"},"summary":"Push three numbers to the end of an array (was ArrayPushValue3x)","changelog":[{"message":"Ops.Array.ArrayPushValue3x renamed to Ops.Array.Array3PushNumbers","author":"pandur","date":1567672473987},{"message":"cloned op from Ops.Array.Array3PushNumbers","author":"pandur","date":1619892949713},{"message":"Ops.User.pandur.Array3PushNumbers_v2 renamed to Ops.Array.Array3PushNumbers_v2","author":"pandur","date":1619941765323}],"issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "authorName": "pandur",
+    "id": "e898374c-5651-4f43-82d5-f06c7695444b",
+    "created": 1619892949713,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value 3",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result Array"
+            }
+        ],
+        "name": "Ops.User.pandur.Array3PushNumbers_v2"
+    },
+    "summary": "Push three numbers to the end of an array (was ArrayPushValue3x)",
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayPushValue3x renamed to Ops.Array.Array3PushNumbers",
+            "author": "pandur",
+            "date": 1567672473987
+        },
+        {
+            "message": "cloned op from Ops.Array.Array3PushNumbers",
+            "author": "pandur",
+            "date": 1619892949713
+        },
+        {
+            "message": "Ops.User.pandur.Array3PushNumbers_v2 renamed to Ops.Array.Array3PushNumbers_v2",
+            "author": "pandur",
+            "date": 1619941765323
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "",
+    "exampleProjectId": "uOzMH7"
+}

@@ -1,16 +1,15 @@
 const
     exec = op.inTrigger("Execute"),
     trigger = op.outTrigger("Trigger"),
-    x = op.outValue("X"),
-    y = op.outValue("Y"),
-    visi = op.outValue("Visible");
+    x = op.outNumber("X"),
+    y = op.outNumber("Y"),
+    visi = op.outNumber("Visible");
 
 const cgl = op.patch.cgl;
 const trans = vec3.create();
 const m = mat4.create();
 const pos = vec3.create();
 const identVec = vec3.create();
-
 
 exec.onTriggered = function ()
 {

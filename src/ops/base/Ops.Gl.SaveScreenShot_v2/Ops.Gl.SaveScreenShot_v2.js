@@ -42,16 +42,6 @@ exe.onTriggered = function ()
 
 function updateSizePorts()
 {
-    if (useSize.get())
-    {
-        width.setUiAttribs({ "hidePort": true, "greyout": true });
-        height.setUiAttribs({ "hidePort": true, "greyout": true });
-    }
-    else
-    {
-        width.set(op.patch.cgl.canvasWidth);
-        height.set(op.patch.cgl.canvasHeight);
-        width.setUiAttribs({ "hidePort": false, "greyout": false });
-        height.setUiAttribs({ "hidePort": false, "greyout": false });
-    }
+    width.setUiAttribs({ "greyout": useSize.get() });
+    height.setUiAttribs({ "greyout": useSize.get() });
 }

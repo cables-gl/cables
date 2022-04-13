@@ -1,16 +1,16 @@
 const
     exe = op.inTrigger("exe"),
-    geom = op.inObject("geom"),
+    geom = op.inObject("geom", null, "geometry"),
     inScale = op.inValue("Scale", 1),
     doLimit = op.inValueBool("Limit Instances", false),
     inLimit = op.inValueInt("Limit", 100),
-    inTranslates = op.inArray("positions"),
-    inScales = op.inArray("Scale Array"),
-    inRot = op.inArray("Rotations"),
+    inTranslates = op.inArray("positions", 3),
+    inScales = op.inArray("Scale Array", 3),
+    inRot = op.inArray("Rotations", 3),
     inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions"], "Euler"),
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
-    inColor = op.inArray("Colors"),
-    inTexCoords = op.inArray("TexCoords"),
+    inColor = op.inArray("Colors", 4),
+    inTexCoords = op.inArray("TexCoords", 2),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outValue("Num");
 
@@ -113,6 +113,7 @@ geom.onChange = function ()
         mesh = null;
         return;
     }
+
     mesh = new CGL.Mesh(cgl, geom.get());
     reset();
 };
@@ -137,7 +138,9 @@ function setupArray()
     const tcArr = inTexCoords.get();
     const scales = inScales.get();
 
-    // shader.toggleDefine("COLORIZE_INSTANCES", colArr);
+    let stride = 3;
+    if (inRotMeth.get() == "Quaternions")stride = 4;
+    inRot.setUiAttribs({ "stride": stride });
 
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
     if (instColorArray.length != num * 4)

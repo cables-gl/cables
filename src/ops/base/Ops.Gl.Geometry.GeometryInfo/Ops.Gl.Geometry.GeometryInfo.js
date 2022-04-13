@@ -10,6 +10,12 @@ const
     outVertexColors = op.outValue("VertexColors"),
     outAttribs = op.outValue("Other Attributes");
 
+geometry.onLinkChanged = () =>
+{
+    console.log("link change!");
+    console.log(geometry.get());
+};
+
 geometry.onChange = function ()
 {
     let geom = geometry.get();

@@ -1,0 +1,91 @@
+{
+    "id": "76843a4d-947f-41ca-9c8f-0faa6ce7380a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599662719074
+        },
+        {
+            "message": "cloned op from Ops.Gl.SaveScreenShot_v2",
+            "author": "pandur",
+            "date": 1647956302962
+        },
+        {
+            "message": "Ops.User.pandur.SaveScreenshot3 renamed to Ops.Gl.SaveScreenShot_v3",
+            "author": "pandur",
+            "date": 1647956411429
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1647956302961,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 0,
+                "name": "Use Canvas Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Screenshot"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.Gl.SaveScreenShot_v2"
+    },
+    "summary": "Download the current screen content as png file",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Filename",
+                "text": "name of saved file"
+            },
+            {
+                "name": "Use Canvas Size",
+                "text": "Uses canvas size"
+            },
+            {
+                "name": "Screenshot",
+                "text": "Trigger to make a screenshot"
+            },
+            {
+                "name": "Width",
+                "text": "Width of screenshot in pixels"
+            },
+            {
+                "name": "Height",
+                "text": "Height of screenshot in pixels"
+            },
+            {
+                "name": "Finished",
+                "text": "Trigger out when screenshot has been created"
+            }
+        ]
+    },
+    "exampleProjectId": "OB0Qmi",
+    "caniusequery": ""
+}

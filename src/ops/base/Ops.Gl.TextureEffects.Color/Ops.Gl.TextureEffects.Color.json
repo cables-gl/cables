@@ -18,6 +18,12 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
                 "type": 2,
                 "name": "Mask",
                 "objType": "texture"

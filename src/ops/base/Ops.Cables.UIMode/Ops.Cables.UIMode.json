@@ -20,16 +20,30 @@
         "ports": [
             {
                 "name": "UI",
-                "text": "`True` is the patch is viewed inside the cables editor"
+                "text": "`True` if the patch is viewed inside the cables editor"
+            },
+            {
+                "name": "Remote Viewer",
+                "text": "`True` if the patch is viewed inside the cables remote viewer"
             }
         ]
     },
     "authorName": "pandur",
     "id": "7c110d60-829f-4b06-b3e4-0af911550570",
     "created": 1540834918658,
-    "youtubeid": "",
     "collections": [
         "dataInfo"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "add output boolean for remote viewer",
+            "author": "stephan",
+            "date": 1646674613446
+        }
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": ""
 }

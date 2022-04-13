@@ -5,48 +5,48 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Amount",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "RotX",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "RotY",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "RotZ",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Limited",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

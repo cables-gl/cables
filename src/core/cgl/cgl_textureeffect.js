@@ -372,20 +372,22 @@ TextureEffect.getBlendCode = function ()
         "{".endl() +
             "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
 
+
+            "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
+
             "#ifdef BM_ALPHAMASKED".endl() +
-            "   if(col.a==0.0) return base;".endl() +
-            "   return vec4(col.rgb,base.a);".endl() +
+                "newA=base.a;".endl() +
             "#endif".endl() +
 
             "return vec4(".endl() +
                 "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
-                "clamp(base.a+(col.a*amount),0.,1.));".endl() +
+                "newA);".endl() +
         "}".endl()
 
     );
 };
 
-TextureEffect.onChangeBlendSelect = function (shader, blendName)
+TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha)
 {
     shader.toggleDefine("BM_NORMAL", blendName == "normal");
     shader.toggleDefine("BM_MULTIPLY", blendName == "multiply");
@@ -405,22 +407,31 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
     shader.toggleDefine("BM_HARDLIGHT", blendName == "hardlight");
     shader.toggleDefine("BM_COLORDODGE", blendName == "color dodge");
     shader.toggleDefine("BM_COLORBURN", blendName == "color burn");
-    shader.toggleDefine("BM_ALPHAMASKED", blendName == "alpha mask");
+
+    shader.toggleDefine("BM_ALPHAMASKED", maskAlpha);
 };
 
 TextureEffect.AddBlendSelect = function (op, name, defaultMode)
 {
-    const p = op.inValueSelect(name, ["normal", "alpha mask", "lighten", "darken", "multiply", "multiply invert", "average", "add", "subtract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight", "subtract one", ], defaultMode || "normal");
+    const p = op.inValueSelect(name || "Blend Mode", ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "subtract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight", "subtract one"], defaultMode || "normal");
     return p;
 };
 
-TextureEffect.setupBlending = function (op, shader, blendMode, amount)
+TextureEffect.AddBlendAlphaMask = function (op, name, defaultMode)
+{
+    const p = op.inSwitch(name || "Alpha Mask", ["Off", "On"], defaultMode || "Off");
+    return p;
+};
+
+TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alphaMaskPort)
 {
     const onChange = () =>
     {
-        TextureEffect.onChangeBlendSelect(shader, blendMode.get());
+        let maskAlpha = false;
+        if (alphaMaskPort) maskAlpha = alphaMaskPort.get() == "On";
+        TextureEffect.onChangeBlendSelect(shader, blendPort.get(), maskAlpha);
 
-        let str = blendMode.get();
+        let str = blendPort.get();
         if (str == "normal") str = null;
         else if (str == "multiply") str = "mul";
         else if (str == "multiply invert") str = "mulinv";
@@ -442,11 +453,18 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
 
         op.setUiAttrib({ "extendTitle": str });
     };
-    op.setPortGroup("Blending", [blendMode, amount]);
+    op.setPortGroup("Blending", [blendPort, amountPort, alphaMaskPort]);
 
-    blendMode.onChange = onChange;
+    let maskAlpha = false;
 
-    TextureEffect.onChangeBlendSelect(shader, blendMode.get());
+    blendPort.onChange = onChange;
+    if (alphaMaskPort)
+    {
+        alphaMaskPort.onChange = onChange;
+        maskAlpha = alphaMaskPort.get() == "On";
+    }
+
+    TextureEffect.onChangeBlendSelect(shader, blendPort.get(), maskAlpha);
 };
 
 export { TextureEffect };

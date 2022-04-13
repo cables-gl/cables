@@ -3,9 +3,9 @@ const
     speed = op.inValue("Speed", 0.01),
     inputType = op.inSwitch("Input Type", ["All", "Mouse", "Touch"], "All"),
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
-    outDeltaX = op.outValue("Delta X"),
-    outDeltaY = op.outValue("Delta Y"),
-    outDragging = op.outValue("Is Dragging");
+    outDeltaX = op.outNumber("Delta X"),
+    outDeltaY = op.outNumber("Delta Y"),
+    outDragging = op.outNumber("Is Dragging");
 
 let listenerElement = null;
 const absoluteX = 0;

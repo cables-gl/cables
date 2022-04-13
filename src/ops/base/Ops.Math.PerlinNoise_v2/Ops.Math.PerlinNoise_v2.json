@@ -77,8 +77,13 @@
             {
                 "name": "Seed",
                 "text": "Noise Seed"
+            },
+            {
+                "name": "Result",
+                "text": "Output range 0-1"
             }
         ]
     },
-    "exampleProjectId": "gOCdhL"
+    "exampleProjectId": "gOCdhL",
+    "caniusequery": ""
 }

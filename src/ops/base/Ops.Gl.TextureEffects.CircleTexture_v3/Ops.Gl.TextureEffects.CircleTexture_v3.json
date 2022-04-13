@@ -7,15 +7,15 @@
             },
             {
                 "type": 0,
-                "name": "Blend Mode index",
-                "group": "Blending",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
             },
             {
                 "type": 0,

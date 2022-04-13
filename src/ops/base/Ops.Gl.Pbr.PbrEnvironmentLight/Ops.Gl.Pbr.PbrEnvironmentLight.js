@@ -58,6 +58,7 @@ const inIrradianceSize = op.inDropDown("Size Irradiance map", [16, 32, 64], 64);
 const inPrefilteredSize = op.inDropDown("Size pre-filtered environment", [64, 128], 128);
 const inIBLLUTSize = op.inDropDown("Size IBL LUT", [128, 256, 512, 1024], 256);
 const inToggleRGBE = op.inBool("Environment map does not contain RGBE data", false);
+const inRotation = op.inFloatSlider("Rotation", 0.0);
 
 let IrradianceSizeChanged = true;
 let PrefilteredSizeChanged = true;
@@ -123,12 +124,14 @@ let filteringInfo = [0, 0];
 IrradianceShader.offScreenPass = true;
 const uniformIrradianceCubemap = new CGL.Uniform(IrradianceShader, "t", "EquiCubemap", 0);
 const uniformFilteringInfo = new CGL.Uniform(IrradianceShader, "2f", "filteringInfo", filteringInfo);
+const uniformRotation = new CGL.Uniform(IrradianceShader, "f", "rotation", 0);
 IrradianceShader.setSource(attachments.irradiance_vert, attachments.irradiance_frag);
 
 let prefilteringInfo = [0, 0];
 PrefilteringShader.offScreenPass = true;
 const uniformPrefilteringCubemap = new CGL.Uniform(PrefilteringShader, "t", "EquiCubemap", 0);
 const uniformPrefilteringRoughness = new CGL.Uniform(PrefilteringShader, "f", "roughness", 0);
+const uniformPrefilteringRotation = new CGL.Uniform(PrefilteringShader, "f", "rotation", 0);
 const uniformPrefilteringInfo = new CGL.Uniform(PrefilteringShader, "2f", "filteringInfo", prefilteringInfo);
 PrefilteringShader.setSource(attachments.prefiltering_vert, attachments.prefiltering_frag);
 
@@ -144,6 +147,12 @@ inToggleRGBE.onChange = () =>
 
     IrradianceSizeChanged = true;
     PrefilteredSizeChanged = true;
+};
+
+inRotation.onChange = () =>
+{
+    PrefilteredSizeChanged =
+    IrradianceSizeChanged = true;
 };
 
 // utility functions
@@ -167,6 +176,7 @@ function captureIrradianceCubemap(size)
 
     IrradianceShader.popTextures();
     IrradianceShader.pushTexture(uniformIrradianceCubemap, inCubemap.get().tex);
+    uniformRotation.setValue(inRotation.get());
 
     IrradianceFrameBuffer.renderStart(cgl);
     for (let i = 0; i < 6; i += 1)
@@ -216,6 +226,7 @@ function capturePrefilteredCubemap(size)
 
     PrefilteringShader.popTextures();
     PrefilteringShader.pushTexture(uniformPrefilteringCubemap, inCubemap.get().tex);
+    uniformPrefilteringRotation.setValue(inRotation.get());
 
     for (let mip = 0; mip <= maxMipLevels; ++mip)
     {
@@ -238,6 +249,8 @@ function capturePrefilteredCubemap(size)
         captureFBO.renderEnd();
     }
     captureFBO.delete();
+    cgl.setTexture(0, null);
+
     outTexPrefiltered.set(null);
     outTexPrefiltered.set(PrefilteredFrameBuffer.getTextureColor());
 }
@@ -301,22 +314,25 @@ inTrigger.onTriggered = function ()
     uniformFilteringInfo.setValue(filteringInfo);
     uniformPrefilteringInfo.setValue(prefilteringInfo);
 
-    if (IBLLUTSizeChanged)
+    if(!cgl.frameStore.shadowPass)
     {
-        computeIBLLUT(Number(inIBLLUTSize.get()));
-        IBLLUTSizeChanged = false;
-    }
+        if (IBLLUTSizeChanged)
+        {
+            computeIBLLUT(Number(inIBLLUTSize.get()));
+            IBLLUTSizeChanged = false;
+        }
 
-    if (PrefilteredSizeChanged)
-    {
-        capturePrefilteredCubemap(Number(inPrefilteredSize.get()));
-        PrefilteredSizeChanged = false;
-    }
+        if (PrefilteredSizeChanged)
+        {
+            capturePrefilteredCubemap(Number(inPrefilteredSize.get()));
+            PrefilteredSizeChanged = false;
+        }
 
-    if (IrradianceSizeChanged)
-    {
-        captureIrradianceCubemap(Number(inIrradianceSize.get()));
-        IrradianceSizeChanged = false;
+        if (IrradianceSizeChanged)
+        {
+            captureIrradianceCubemap(Number(inIrradianceSize.get()));
+            IrradianceSizeChanged = false;
+        }
     }
 
     pbrEnv.texIBLLUT = outTexIBLLUT.get();
