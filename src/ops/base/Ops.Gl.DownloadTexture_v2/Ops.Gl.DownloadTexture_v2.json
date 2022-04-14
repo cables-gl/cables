@@ -12,21 +12,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Download"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Filename"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Finished",
                 "subType": "boolean"
             }
