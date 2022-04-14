@@ -42,6 +42,11 @@
                 "type": 0,
                 "name": "Hires Displays",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Unit index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
