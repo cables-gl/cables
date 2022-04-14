@@ -1,7 +1,13 @@
 {
     "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Pixel Unit index",
+                "subType": "integer"
+            }
+        ],
         "portsOut": [
             {
                 "type": 0,

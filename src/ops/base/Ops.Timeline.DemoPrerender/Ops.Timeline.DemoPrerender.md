@@ -5,7 +5,7 @@ The process prerendering jumps to the timeline-time of those events and renders 
 
 0. if the patch/timing changed a log click "clear" to remove all previous recorded events
 1. select prerender op, activate "record events" and save the patch
-2. reload the patch and wait for the demo play and finish
+2. reload the patch and wait for the demo play and finish and save the patch
 3. "Num Events" should show the number of detected events.
 4. it may be necessary to repeat step 2 a few times, until all huge spikes at scene changes in the performance op graph are gone...
 5. uncheck "record events" and save patch again

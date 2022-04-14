@@ -8,6 +8,11 @@
             {
                 "type": 1,
                 "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Unit index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
