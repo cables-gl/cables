@@ -320,9 +320,10 @@ presetRename.onTriggered = function ()
             const current = presetNames.get();
             const idx = presetNames.uiAttribs.values.indexOf(current);
             presets[idx].name = str;
+            presetNames.set(str);
             saveData();
-            op.refreshParams();
             updateDropdown();
+            op.refreshParams();
         }
     });
 };
