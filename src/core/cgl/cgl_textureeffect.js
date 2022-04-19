@@ -298,10 +298,9 @@ TextureEffect.checkOpInEffect = function (op, minver)
     return true;
 };
 
-TextureEffect.getBlendCode = function ()
+TextureEffect.getBlendCode = function (ver)
 {
-    return (
-        "".endl()
+    let src = "".endl()
         + "vec3 _blend(vec3 base,vec3 blend)".endl()
         + "{".endl()
         + "   vec3 colNew=blend;".endl()
@@ -383,31 +382,33 @@ TextureEffect.getBlendCode = function ()
         + "      colNew=vec3(BlendColorBurnf(base.r, blend.r),BlendColorBurnf(base.g, blend.g),BlendColorBurnf(base.b, blend.b));".endl()
         + "   #endif".endl()
         + "   return colNew;".endl()
-        + "}".endl()
-        + "vec4 cgl_blend(vec4 oldColor,vec4 newColor,float amount)".endl()
-        + "{".endl()
-            + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
-            + "col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
-            + "return col;".endl()
-        + "}" +
+        + "}".endl();
 
-        "vec4 cgl_blendPixel(vec4 base,vec4 col,float amount)".endl() +
-        "{".endl() +
-            "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
+    if (!ver)
+        src += "vec4 cgl_blend(vec4 oldColor,vec4 newColor,float amount)".endl()
+                + "{".endl()
+                    + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
+                    + "col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
+                    + "return col;".endl()
+                + "}".endl();
 
+    if (ver >= 3)
+        src += "vec4 cgl_blendPixel(vec4 base,vec4 col,float amount)".endl() +
+                "{".endl() +
+                    "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
 
-            "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
+                    "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
 
-            "#ifdef BM_ALPHAMASKED".endl() +
-                "newA=base.a;".endl() +
-            "#endif".endl() +
+                    "#ifdef BM_ALPHAMASKED".endl() +
+                        "newA=base.a;".endl() +
+                    "#endif".endl() +
 
-            "return vec4(".endl() +
-                "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
-                "newA);".endl() +
-        "}".endl()
+                    "return vec4(".endl() +
+                        "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
+                        "newA);".endl() +
+                "}".endl();
 
-    );
+    return src;
 };
 
 TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha)

@@ -18,7 +18,7 @@ UNI float roundness;
 
 #define DEG2RAD 0.785398163397
 
-{{CGL.BLENDMODES}}
+{{CGL.BLENDMODES3}}
 
 mat2 rot(float angle)
 {

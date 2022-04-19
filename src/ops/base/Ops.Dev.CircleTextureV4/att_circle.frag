@@ -17,7 +17,7 @@ UNI vec2 stretch;
 UNI float x;
 UNI float y;
 
-{{CGL.BLENDMODES}}
+{{CGL.BLENDMODES3}}
 
 float dist(float x,float y,float x2,float y2)
 {

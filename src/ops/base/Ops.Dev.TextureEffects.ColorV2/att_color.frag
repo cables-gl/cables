@@ -9,7 +9,7 @@ UNI float amount;
     UNI sampler2D mask;
 #endif
 
-{{CGL.BLENDMODES}}
+{{CGL.BLENDMODES3}}
 
 void main()
 {
