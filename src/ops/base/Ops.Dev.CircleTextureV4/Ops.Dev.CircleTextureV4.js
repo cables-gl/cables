@@ -59,7 +59,7 @@ function updateDefines()
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     let a = cgl.currentTextureEffect.getHeight() / cgl.currentTextureEffect.getWidth();
     aspect.set(a);
