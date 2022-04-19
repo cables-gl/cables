@@ -57,6 +57,7 @@ function initEffect()
 
     outWidth.set(getWidth());
     outHeight.set(getHeight());
+
     outRatio.set(getWidth() / getHeight());
 
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
@@ -160,6 +161,7 @@ function doRender()
 
     const oldEffect = cgl.currentTextureEffect;
     cgl.currentTextureEffect = effect;
+    cgl.currentTextureEffect.imgCompVer = 3;
     cgl.currentTextureEffect.width = width.get();
     cgl.currentTextureEffect.height = height.get();
     effect.setSourceTexture(tex);

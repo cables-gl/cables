@@ -10,9 +10,8 @@ const srcHeadVert = ""
     .endl();
 
 const srcBodyVert = ""
-    .endl() + "   vertColor=attrVertColor;"
+    .endl() + "vertColor=attrVertColor;"
     .endl();
-
 
 render.onTriggered = doRender;
 
@@ -31,7 +30,6 @@ mod.addModule({
     "srcHeadFrag": attachments.colorarea_head_frag,
     "srcBodyFrag": attachments.colorarea_frag
 });
-
 
 function doRender()
 {

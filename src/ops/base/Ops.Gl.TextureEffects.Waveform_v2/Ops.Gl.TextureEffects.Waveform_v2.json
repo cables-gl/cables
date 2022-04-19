@@ -18,6 +18,7 @@
             {
                 "type": 0,
                 "name": "Blend Mode index",
+                "group": "Blending",
                 "subType": "integer"
             },
             {

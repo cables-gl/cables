@@ -188,11 +188,11 @@ void main()
     d = clamp(d,0.0,1.0);
 
     //blend section
-    vec4 col = vec4(vec4(r,g,b,a)) ;
+    vec4 col = vec4(r,g,b,a);
     //original texture
     vec4 base = texture(tex,texCoord);
     //blend stuff
-    outColor = cgl_blend(base,col,d*amount);
+    outColor = cgl_blendPixel(base,col,d*amount);
     // outColor.rgb=vec3(d);
 }
 

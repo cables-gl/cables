@@ -175,5 +175,9 @@ void main()
 
     vec4 base=texture(tex,texCoord);
 
-    outColor=cgl_blend(base,col,wave*amount);
+    // outColor=cgl_blend(base,col,wave*amount);
+    outColor=cgl_blendPixel(base,col,amount*wave);
+
 }
+
+

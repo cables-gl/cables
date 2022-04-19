@@ -26,10 +26,10 @@ void main()
     float total = floor(uv.x*lineSize-lineSize/2.0) +floor(uv.y*lineSize-lineSize/2.0);
     float r = mod(total,2.0);
 
-    //blend section
     vec4 col=vec4(r,r,r,1.0);
-    //original texture
     vec4 base=texture(tex,texCoord);
-    //blend stuff
-    outColor=cgl_blend(base,col,amount);
+
+    // outColor=cgl_blend(base,col,amount);
+    outColor=cgl_blendPixel(base,col,amount);
+
 }

@@ -65,8 +65,10 @@ void main()
         v = step(uv.x,uPow);
     #endif
 
-    vec4 col = vec4(vec3(r,g,b),1.0);
+    vec4 col = vec4(r,g,b,1.0);
     vec4 base = texture(tex,texCoord);
 
-    outColor = cgl_blend(base,col,v*amount);
+    // outColor = cgl_blend(base,col,v*amount);
+    outColor=cgl_blendPixel(base,col,amount*v);
+
 }

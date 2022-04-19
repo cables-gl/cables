@@ -56,5 +56,7 @@ void main()
     vec4 col=vec4(vec3(r,g,b),1.0);
     vec4 base=texture(tex,texCoord);
 
-    outColor=cgl_blend(base,col,amount*stripe);
+    outColor=cgl_blendPixel(base,col,amount*stripe);
+
+
 }

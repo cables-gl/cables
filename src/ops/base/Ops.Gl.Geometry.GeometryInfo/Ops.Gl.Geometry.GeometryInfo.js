@@ -12,8 +12,6 @@ const
 
 geometry.onLinkChanged = () =>
 {
-    console.log("link change!");
-    console.log(geometry.get());
 };
 
 geometry.onChange = function ()
