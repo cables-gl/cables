@@ -21,6 +21,8 @@ const TextureEffect = function (cgl, options)
     //     };
     // if(options && options.fp)opts.isFloatingPointTexture=true;
 
+    this.imgCompVer = 0;
+    this.aspectRatio = 1;
     this._textureTarget = null; // new CGL.Texture(this._cgl,opts);
     this._frameBuf = this._cgl.gl.createFramebuffer();
     this._frameBuf2 = this._cgl.gl.createFramebuffer();
@@ -98,6 +100,8 @@ TextureEffect.prototype.setSourceTexture = function (tex)
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     }
+
+    this.aspectRatio = this._textureSource.width / this._textureSource.height;
 };
 TextureEffect.prototype.continueEffect = function ()
 {
@@ -258,14 +262,29 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
     return true;
 };
 
-TextureEffect.checkOpInEffect = function (op)
+TextureEffect.checkOpInEffect = function (op, minver)
 {
-    if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
+    minver = minver || 0;
+
+    if (op.patch.cgl.currentTextureEffect)
     {
-        op.setUiError("texeffect", null);
-        // op.uiAttr({ "error": null });
-        return true;
+        if (op.uiAttribs.uierrors && op.patch.cgl.currentTextureEffect.imgCompVer >= minver)
+        {
+            op.setUiError("texeffect", null);
+            return true;
+        }
+
+        if (minver && op.patch.cgl.currentTextureEffect.imgCompVer < minver)
+        {
+            op.setUiError("texeffect", "This op must be a child of an ImageCompose op with version >=" + minver, 1);
+        }
     }
+    // if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
+    // {
+    //     op.setUiError("texeffect", null);
+    //     // op.uiAttr({ "error": null });
+    //     return true;
+    // }
 
     if (op.patch.cgl.currentTextureEffect) return true;
 
