@@ -68,5 +68,7 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "caniusequery": "",
+    "exampleProjectId": ""
 }

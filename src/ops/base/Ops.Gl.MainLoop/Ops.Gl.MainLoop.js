@@ -1,14 +1,16 @@
-const fpsLimit = op.inValue("FPS Limit", 0);
-const trigger = op.outTrigger("trigger");
-const width = op.outNumber("width");
-const height = op.outNumber("height");
-const reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true);
-const reduceLoadingFPS = op.inValueBool("Reduce FPS loading");
-const clear = op.inValueBool("Clear", true);
-const clearAlpha = op.inValueBool("ClearAlpha", true);
-const fullscreen = op.inValueBool("Fullscreen Button", false);
-const active = op.inValueBool("Active", true);
-const hdpi = op.inValueBool("Hires Displays", false);
+const
+    fpsLimit = op.inValue("FPS Limit", 0),
+    trigger = op.outTrigger("trigger"),
+    width = op.outNumber("width"),
+    height = op.outNumber("height"),
+    reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true),
+    reduceLoadingFPS = op.inValueBool("Reduce FPS loading"),
+    clear = op.inValueBool("Clear", true),
+    clearAlpha = op.inValueBool("ClearAlpha", true),
+    fullscreen = op.inValueBool("Fullscreen Button", false),
+    active = op.inValueBool("Active", true),
+    hdpi = op.inValueBool("Hires Displays", false),
+    inUnit = op.inSwitch("Pixel Unit", ["Display", "CSS"], "Display");
 
 op.onAnimFrame = render;
 hdpi.onChange = function ()
@@ -18,6 +20,11 @@ hdpi.onChange = function ()
 
     op.patch.cgl.updateSize();
     if (CABLES.UI) gui.setLayout();
+
+    inUnit.setUiAttribs({ "greyout": !hdpi.get() });
+
+    // if (!hdpi.get())inUnit.set("CSS");
+    // else inUnit.set("Display");
 };
 
 active.onChange = function ()
@@ -58,6 +65,12 @@ let winVisible = true;
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
+
+inUnit.onChange = () =>
+{
+    width.set(0);
+    height.set(0);
+};
 
 function getFpsLimit()
 {
@@ -151,8 +164,11 @@ function render(time)
 
     if (cgl.canvasWidth != width.get() || cgl.canvasHeight != height.get())
     {
-        width.set(cgl.canvasWidth);
-        height.set(cgl.canvasHeight);
+        let div = 1;
+        if (inUnit.get() == "CSS")div = op.patch.cgl.pixelDensity;
+
+        width.set(cgl.canvasWidth / div);
+        height.set(cgl.canvasHeight / div);
     }
 
     if (CABLES.now() - rframeStart > 1000)
