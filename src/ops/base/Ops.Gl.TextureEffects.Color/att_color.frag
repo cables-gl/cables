@@ -25,5 +25,5 @@ void main()
         am*=1.0-msk;
     #endif
 
-    outColor=cgl_blendPixel(base,col,am);
+    outColor=cgl_blend(base,col,am);
 }

@@ -11,7 +11,6 @@ UNI float r;
 UNI float g;
 UNI float b;
 
-
 {{CGL.BLENDMODES}}
 
 #define PI 3.14159265
@@ -56,5 +55,5 @@ void main()
     vec4 col=vec4(vec3(r,g,b),1.0);
     vec4 base=texture(tex,texCoord);
 
-    outColor=cgl_blendPixel(base,col,amount*stripe);
+    outColor=cgl_blend(base,col,amount*stripe);
 }
