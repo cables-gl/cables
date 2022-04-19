@@ -384,7 +384,6 @@ TextureEffect.getBlendCode = function ()
         + "   #endif".endl()
         + "   return colNew;".endl()
         + "}".endl()
-
         + "vec4 cgl_blend(vec4 oldColor,vec4 newColor,float amount)".endl()
         + "{".endl()
             + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()

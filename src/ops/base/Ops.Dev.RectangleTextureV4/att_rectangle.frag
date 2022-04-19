@@ -62,7 +62,7 @@ void main()
     // col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*a*(1.0-d)*amount),1.0);
     // outColor=col;
 
-    outColor=cgl_blend(base,col,amount*(1.0-d));
+    outColor=cgl_blendPixel(base,col,amount*(1.0-d));
     // outColor=vec4(1.0,1.0,1.0,1.0-d);
 
 

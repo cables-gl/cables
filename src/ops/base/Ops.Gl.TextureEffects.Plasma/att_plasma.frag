@@ -39,6 +39,6 @@ void main() {
        vec4 col=vec4( _blend(base.rgb,vec3(newColor.g)) ,1.0);
     #endif
 
-    outColor=cgl_blend(base,col,amount);
+    outColor=cgl_blendPixel(base,col,amount);
 
 }
