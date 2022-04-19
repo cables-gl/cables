@@ -114,7 +114,8 @@ function update()
     cgl.currentTextureEffect.bind();
 
     fillShapeUniform.setValue(fillShape.get());
-    uniformAspect.setValue(cgl.currentTextureEffect.getWidth() / cgl.currentTextureEffect.getHeight());
+    uniformAspect.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width / cgl.currentTextureEffect.getCurrentSourceTexture().height);
+
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
     cgl.currentTextureEffect.finish();

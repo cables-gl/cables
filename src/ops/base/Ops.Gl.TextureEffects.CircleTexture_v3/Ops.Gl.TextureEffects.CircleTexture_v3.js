@@ -27,15 +27,14 @@ let trigger = op.outTrigger("trigger");
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, "textureeffect stripes");
 shader.setSource(shader.getDefaultVertexShader(), attachments.circle_frag);
+let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
+let amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
-const
-    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
-    amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
-    uniStretch = new CGL.Uniform(shader, "f", "stretch", inStretch),
-    uniSize = new CGL.Uniform(shader, "f", "size", inSize),
-    uniFadeOut = new CGL.Uniform(shader, "f", "fadeOut", inFadeOut),
-    uniInner = new CGL.Uniform(shader, "f", "inner", inInner),
-    aspect = new CGL.Uniform(shader, "f", "aspect", 1);
+let uniStretch = new CGL.Uniform(shader, "f", "stretch", inStretch);
+let uniSize = new CGL.Uniform(shader, "f", "size", inSize);
+let uniFadeOut = new CGL.Uniform(shader, "f", "fadeOut", inFadeOut);
+let uniInner = new CGL.Uniform(shader, "f", "inner", inInner);
+let aspect = new CGL.Uniform(shader, "f", "aspect", 1);
 
 inSize.set(0.25);
 

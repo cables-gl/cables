@@ -196,6 +196,6 @@ void main()
         str=texture(texMask,texCoord).r;
     #endif
 
-    outColor=cgl_blendPixel(base,col,amount*str);
+    outColor=cgl_blend(base,col,amount*str);
 
 }

@@ -15,7 +15,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.UseVertexColor"
+        "name": "Ops.User.pandur.UseVertexColor"
     },
     "changelog": [
         {

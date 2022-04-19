@@ -100,7 +100,7 @@ render.onTriggered = function ()
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
-    if (inAspect.get()) uniAspect.setValue(cgl.currentTextureEffect.aspectRatio);
+    if (inAspect.get()) uniAspect.setValue(cgl.currentTextureEffect.getWidth() / cgl.currentTextureEffect.getHeight());
     else uniAspect.setValue(1);
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);

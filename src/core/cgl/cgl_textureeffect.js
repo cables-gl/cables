@@ -26,9 +26,6 @@ const TextureEffect = function (cgl, options)
     this._frameBuf2 = this._cgl.gl.createFramebuffer();
     this._renderbuffer = this._cgl.gl.createRenderbuffer();
     this._renderbuffer2 = this._cgl.gl.createRenderbuffer();
-
-    this.imgCompVer = 0;
-    this.aspectRatio = 1;
     this.switched = false;
     this.depth = false;
 };
@@ -101,9 +98,7 @@ TextureEffect.prototype.setSourceTexture = function (tex)
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     }
-    this.aspectRatio = this._textureSource.width / this._textureSource.height;
 };
-
 TextureEffect.prototype.continueEffect = function ()
 {
     this._cgl.pushDepthTest(false);
@@ -124,6 +119,7 @@ TextureEffect.prototype.continueEffect = function ()
     mat4.identity(this._cgl.mvMatrix);
 };
 
+
 TextureEffect.prototype.startEffect = function (bgTex)
 {
     if (!this._textureTarget)
@@ -136,8 +132,10 @@ TextureEffect.prototype.startEffect = function (bgTex)
 
     this.continueEffect();
 
-    if (bgTex) this._bgTex = bgTex;
-
+    if (bgTex)
+    {
+        this._bgTex = bgTex;
+    }
     this._countEffects = 0;
 };
 
@@ -260,23 +258,13 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
     return true;
 };
 
-TextureEffect.checkOpInEffect = function (op, minver)
+TextureEffect.checkOpInEffect = function (op)
 {
-    if (!CABLES.UI) return;
-    minver = minver || 0;
-
-    if (op.patch.cgl.currentTextureEffect)
+    if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
     {
-        if (op.uiAttribs.uierrors && op.patch.cgl.currentTextureEffect.imgCompVer >= minver)
-        {
-            op.setUiError("texeffect", null);
-            return true;
-        }
-
-        if (minver && op.patch.cgl.currentTextureEffect.imgCompVer < minver)
-        {
-            op.setUiError("texeffect", "This op must be a child of an ImageCompose op with version >=" + minver, 1);
-        }
+        op.setUiError("texeffect", null);
+        // op.uiAttr({ "error": null });
+        return true;
     }
 
     if (op.patch.cgl.currentTextureEffect) return true;

@@ -288,6 +288,7 @@ Framebuffer2.prototype.setSize = function (w, h)
         }
     }
 
+
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 
