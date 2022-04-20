@@ -1,29 +1,29 @@
 {
-    "id": "a1d57718-20a0-4d18-89d3-69947b0d1acf",
+    "id": "fce7d8bc-5a2e-49b8-8f55-8ab8784493d5",
     "changelog": [
         {
             "message": "created op",
             "author": "andro",
-            "date": 1583496113544
+            "date": 1583497185593
         },
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Stripes_v3",
+            "message": "cloned op from Ops.Gl.TextureEffects.Waveform_v2",
             "author": "pandur",
-            "date": 1650440014993
+            "date": 1650440285309
         },
         {
-            "message": "Ops.User.pandur.StripesV4 renamed to Ops.Dev.StripesV4",
+            "message": "Ops.User.pandur.WaveformV3 renamed to Ops.Dev.WaveformV3",
             "author": "pandur",
-            "date": 1650440141037
+            "date": 1650440305629
         }
     ],
-    "authorName": "pandur",
-    "created": 1650440014992,
+    "authorName": "andro",
+    "created": 1650440285308,
     "layout": {
         "portsIn": [
             {
                 "type": 1,
-                "name": "Render"
+                "name": "render"
             },
             {
                 "type": 0,
@@ -45,38 +45,53 @@
             },
             {
                 "type": 0,
-                "name": "Num",
+                "name": "Waveform index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amplitude",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Width",
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Glow",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "invert color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Solid fill",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Rotate",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Offset",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Gradients",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Circular",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Invert",
-                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -100,9 +115,9 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.StripesV4"
+        "name": "Ops.Dev.WaveformV3"
     },
-    "summary": "Create a texture of stripes /lines",
+    "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -110,12 +125,12 @@
     "docs": {
         "ports": [
             {
-                "name": "Render",
+                "name": "render",
                 "text": "Trigger in"
             },
             {
                 "name": "Blend Mode index",
-                "text": "Pick a blend mode with an integer"
+                "text": "Use an integer to pick a blend mode"
             },
             {
                 "name": "Blend Mode",
@@ -123,50 +138,69 @@
             },
             {
                 "name": "Amount",
-                "text": "Amount of blending"
+                "text": "Amount of blend to apply"
             },
             {
-                "name": "Num",
-                "text": "Number of stripes"
+                "name": "Waveform index",
+                "text": "Picks a waveform with an integer"
             },
             {
-                "name": "Width",
-                "text": "width of each stripe"
+                "name": "Waveform",
+                "text": "Pick a waveform with a dropdown"
+            },
+            {
+                "name": "Amplitude",
+                "text": "Amplitude/Height of the wave"
+            },
+            {
+                "name": "Frequency",
+                "text": "Amount of repetitions on the screen"
+            },
+            {
+                "name": "Line Width",
+                "text": "Width of the line"
+            },
+            {
+                "name": "Line Glow",
+                "text": "Applies a glow/fade to the edge of the line"
+            },
+            {
+                "name": "invert color",
+                "text": "Inverts color"
+            },
+            {
+                "name": "Solid fill",
+                "text": "Fills one half of the waveform, enable invert color to flip it over"
+            },
+            {
+                "name": "Offset X",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Offset on the Y axis"
             },
             {
                 "name": "Rotate",
-                "text": "rotate everything"
-            },
-            {
-                "name": "Offset",
-                "text": "offset stripes from zero"
-            },
-            {
-                "name": "Gradients",
-                "text": "Enable gradient mode"
-            },
-            {
-                "name": "Circular",
-                "text": "Enable circular stripes "
+                "text": "Rotate the texture"
             },
             {
                 "name": "r",
-                "text": "red"
+                "text": "Red color of the line"
             },
             {
                 "name": "g",
-                "text": "green "
+                "text": "Green color of the line"
             },
             {
                 "name": "b",
-                "text": "blue "
+                "text": "Blue color of the line"
             },
             {
                 "name": "trigger",
-                "text": "Trigger out "
+                "text": "Trigger out"
             }
         ]
     },
-    "caniusequery": "",
-    "exampleProjectId": "dYhlT6"
+    "exampleProjectId": "9aF_26"
 }

@@ -17,9 +17,9 @@ const
 
 r.setUiAttribs({ "colorPick": true });
 
-smoothed.onChange = updateDefines;
-circular.onChange = updateDefines;
-invert.onChange = updateDefines;
+smoothed.onChange =
+    circular.onChange =
+    invert.onChange = updateDefines;
 
 function updateDefines()
 {
@@ -45,11 +45,11 @@ const
     uniformG = new CGL.Uniform(shader, "f", "g", g),
     uniformB = new CGL.Uniform(shader, "f", "b", b);
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount,maskAlpha);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op,3)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
