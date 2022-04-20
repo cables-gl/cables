@@ -54,8 +54,9 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     const texture = cgl.currentTextureEffect.getCurrentSourceTexture();
-    if (inAspect.get()) uniformAspect.set(texture.height / texture.width);
-    else uniformAspect.set(1);
+    // if (inAspect.get())
+    uniformAspect.set(cgl.currentTextureEffect.aspectRatio);
+    // else uniformAspect.set(1);
 
     cgl.setTexture(0, texture.tex);
 
