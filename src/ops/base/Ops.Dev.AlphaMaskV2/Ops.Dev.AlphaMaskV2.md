@@ -1,0 +1,1 @@
+make sure imagecompose is set to alpha 0 or not cleared
