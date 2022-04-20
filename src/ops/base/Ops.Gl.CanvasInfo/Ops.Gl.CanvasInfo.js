@@ -1,7 +1,7 @@
 const
     width = op.outNumber("width"),
     height = op.outNumber("height"),
-    inUnit = op.inSwitch("Pixel Unit", ["Display", "CSS"], "CSS"),
+    inUnit = op.inSwitch("Pixel Unit", ["Display", "CSS"], "Display"),
     pixelRatio = op.outNumber("Pixel Ratio"),
     aspect = op.outNumber("Aspect Ratio"),
     landscape = op.outBool("Landscape");

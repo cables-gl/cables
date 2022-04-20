@@ -48,7 +48,7 @@ inCenterMode.onChange = function ()
 };
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();

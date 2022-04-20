@@ -4,6 +4,7 @@ const
     amount = op.inValueSlider("amount", 1),
 
     image = op.inTexture("Image"),
+    inAlphaPremul = op.inValueBool("Premultiplied", false),
     removeAlphaSrc = op.inValueBool("removeAlphaSrc", false),
 
     imageAlpha = op.inTexture("Mask"),
@@ -26,8 +27,6 @@ imageAlpha.onLinkChanged = updateAlphaPorts;
 op.setPortGroup("Mask", [imageAlpha, alphaSrc, invAlphaChannel]);
 op.setPortGroup("Aspect Ratio", [inAspect, inAspectPos, inAspectCrop, inAspectAxis]);
 
-removeAlphaSrc.onChange = updateRemoveAlphaSrc;
-
 function updateAlphaPorts()
 {
     if (imageAlpha.isLinked())
@@ -47,22 +46,18 @@ function updateAlphaPorts()
 op.toWorkPortsNeedToBeLinked(image);
 
 shader.setSource(attachments.drawimage_vert, attachments.drawimage_frag);
-const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
-const textureImaghe = new CGL.Uniform(shader, "t", "image", 1);
-const textureAlpha = new CGL.Uniform(shader, "t", "imageAlpha", 2);
 
-const uniTexAspect = new CGL.Uniform(shader, "f", "aspectTex", 1);
-const uniAspectPos = new CGL.Uniform(shader, "f", "aspectPos", inAspectPos);
+const
+    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
+    textureImaghe = new CGL.Uniform(shader, "t", "image", 1),
+    textureAlpha = new CGL.Uniform(shader, "t", "imageAlpha", 2),
+    uniTexAspect = new CGL.Uniform(shader, "f", "aspectTex", 1),
+    uniAspectPos = new CGL.Uniform(shader, "f", "aspectPos", inAspectPos);
 
-invAlphaChannel.onChange = function ()
-{
-    if (invAlphaChannel.get()) shader.define("INVERT_ALPHA");
-    else shader.removeDefine("INVERT_ALPHA");
-};
+inAspect.onChange =
+    inAspectCrop.onChange =
+    inAspectAxis.onChange = updateAspectRatio;
 
-inAspect.onChange = updateAspectRatio;
-inAspectCrop.onChange = updateAspectRatio;
-inAspectAxis.onChange = updateAspectRatio;
 function updateAspectRatio()
 {
     shader.removeDefine("ASPECT_AXIS_X");
@@ -92,72 +87,37 @@ function updateAspectRatio()
     }
 }
 
-function updateRemoveAlphaSrc()
-{
-    if (removeAlphaSrc.get()) shader.define("REMOVE_ALPHA_SRC");
-    else shader.removeDefine("REMOVE_ALPHA_SRC");
-}
-
-alphaSrc.onChange = function ()
-{
-    shader.toggleDefine("ALPHA_FROM_LUMINANCE", alphaSrc.get() == "luminance");
-    shader.toggleDefine("ALPHA_FROM_INV_UMINANCE", alphaSrc.get() == "luminance_inv");
-};
-
 alphaSrc.set("alpha channel");
 
-{
-    //
-    // texture flip
-    //
-    const flipX = op.inValueBool("flip x");
-    const flipY = op.inValueBool("flip y");
+//
+// texture flip
+//
+const flipX = op.inValueBool("flip x");
+const flipY = op.inValueBool("flip y");
 
-    flipX.onChange = function ()
-    {
-        if (flipX.get()) shader.define("TEX_FLIP_X");
-        else shader.removeDefine("TEX_FLIP_X");
-    };
+//
+// texture transform
+//
 
-    flipY.onChange = function ()
-    {
-        if (flipY.get()) shader.define("TEX_FLIP_Y");
-        else shader.removeDefine("TEX_FLIP_Y");
-    };
-}
+let doTransform = op.inValueBool("Transform");
 
-{
-    //
-    // texture transform
-    //
+let scaleX = op.inValueSlider("Scale X", 1);
+let scaleY = op.inValueSlider("Scale Y", 1);
 
-    var doTransform = op.inValueBool("Transform");
+let posX = op.inValue("Position X", 0);
+let posY = op.inValue("Position Y", 0);
 
-    var scaleX = op.inValueSlider("Scale X", 1);
-    var scaleY = op.inValueSlider("Scale Y", 1);
+let rotate = op.inValue("Rotation", 0);
 
-    var posX = op.inValue("Position X", 0);
-    var posY = op.inValue("Position Y", 0);
+const inClipRepeat = op.inValueBool("Clip Repeat", false);
 
-    var rotate = op.inValue("Rotation", 0);
+const uniScaleX = new CGL.Uniform(shader, "f", "scaleX", scaleX);
+const uniScaleY = new CGL.Uniform(shader, "f", "scaleY", scaleY);
+const uniPosX = new CGL.Uniform(shader, "f", "posX", posX);
+const uniPosY = new CGL.Uniform(shader, "f", "posY", posY);
+const uniRotate = new CGL.Uniform(shader, "f", "rotate", rotate);
 
-    const inClipRepeat = op.inValueBool("Clip Repeat", false);
-
-    inClipRepeat.onChange = updateClip;
-    function updateClip()
-    {
-        if (inClipRepeat.get()) shader.define("CLIP_REPEAT");
-        else shader.removeDefine("CLIP_REPEAT");
-    }
-
-    const uniScaleX = new CGL.Uniform(shader, "f", "scaleX", scaleX);
-    const uniScaleY = new CGL.Uniform(shader, "f", "scaleY", scaleY);
-    const uniPosX = new CGL.Uniform(shader, "f", "posX", posX);
-    const uniPosY = new CGL.Uniform(shader, "f", "posY", posY);
-    const uniRotate = new CGL.Uniform(shader, "f", "rotate", rotate);
-
-    doTransform.onChange = updateTransformPorts;
-}
+doTransform.onChange = updateTransformPorts;
 
 function updateTransformPorts()
 {
@@ -174,17 +134,39 @@ CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
-imageAlpha.onChange = function ()
+render.onTriggered = doRender;
+
+inClipRepeat.onChange =
+    imageAlpha.onChange =
+    inAlphaPremul.onChange =
+    invAlphaChannel.onChange =
+    flipY.onChange =
+    flipX.onChange =
+    removeAlphaSrc.onChange =
+    alphaSrc.onChange = updateDefines;
+
+updateTransformPorts();
+updateAlphaPorts();
+updateAspectRatio();
+updateDefines();
+
+function updateDefines()
 {
-    if (imageAlpha.get() && imageAlpha.get().tex)
-    {
-        shader.define("HAS_TEXTUREALPHA");
-    }
-    else
-    {
-        shader.removeDefine("HAS_TEXTUREALPHA");
-    }
-};
+    shader.toggleDefine("REMOVE_ALPHA_SRC", removeAlphaSrc.get());
+
+    shader.toggleDefine("CLIP_REPEAT", inClipRepeat.get());
+
+    shader.toggleDefine("HAS_TEXTUREALPHA", imageAlpha.get() && imageAlpha.get().tex);
+
+    shader.toggleDefine("TEX_FLIP_X", flipX.get());
+    shader.toggleDefine("TEX_FLIP_Y", flipY.get());
+
+    shader.toggleDefine("INVERT_ALPHA", invAlphaChannel.get());
+
+    shader.toggleDefine("ALPHA_FROM_LUMINANCE", alphaSrc.get() == "luminance");
+    shader.toggleDefine("ALPHA_FROM_INV_UMINANCE", alphaSrc.get() == "luminance_inv");
+    shader.toggleDefine("PREMUL", inAlphaPremul.get());
+}
 
 function doRender()
 {
@@ -235,9 +217,3 @@ function doRender()
 
     trigger.trigger();
 }
-
-render.onTriggered = doRender;
-updateTransformPorts();
-updateRemoveAlphaSrc();
-updateAlphaPorts();
-updateAspectRatio();

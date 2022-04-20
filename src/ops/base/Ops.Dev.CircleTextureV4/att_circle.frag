@@ -17,7 +17,7 @@ UNI vec2 stretch;
 UNI float x;
 UNI float y;
 
-{{CGL.BLENDMODES}}
+{{CGL.BLENDMODES3}}
 
 float dist(float x,float y,float x2,float y2)
 {
@@ -45,12 +45,7 @@ void main()
         if(dist>sz && dist<sz+fade)v=1.0-((dist-sz)/(fade));
     #endif
 
-    // col=vec4( _blend(base.rgb,vec3(r,g,b)) ,1.0);
-    // col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*v*amount*a),1.0);
-    // outColor=col;
-
     outColor=cgl_blendPixel(base,col,amount*v);
-
 
     #ifdef WARN_OVERFLOW
         float width=0.01;

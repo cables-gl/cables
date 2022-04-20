@@ -18,6 +18,12 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
                 "type": 2,
                 "name": "Mask",
                 "objType": "texture"
@@ -52,13 +58,13 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Color"
+        "name": "Ops.Dev.TextureEffects.ColorV2"
     },
     "summary": "fill image using a color (overlay)",
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "c0acfc80-16f9-4f17-978d-bad650f3ed1c",
-    "created": 1514932008499,
+    "id": "6dada2b7-da7c-47ee-87a9-a12e87055208",
+    "created": 1650374368022,
     "issues": "",
     "collections": [
         "generator"
@@ -68,5 +74,17 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "AnqmT6"
+    "exampleProjectId": "AnqmT6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Color",
+            "author": "pandur",
+            "date": 1650374368024
+        },
+        {
+            "message": "Ops.User.pandur.ColorV2 renamed to Ops.Dev.TextureEffects.ColorV2",
+            "author": "pandur",
+            "date": 1650374388166
+        }
+    ]
 }
