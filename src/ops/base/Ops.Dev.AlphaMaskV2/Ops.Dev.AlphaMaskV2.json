@@ -40,7 +40,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.AlphaMaskV2"
+        "name": "Ops.Dev.AlphaMaskV2"
     },
     "summary": "set alphachannel of current imagecompose via a texture mask",
     "youtubeid": "",
