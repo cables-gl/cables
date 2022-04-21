@@ -130,6 +130,9 @@ void main()
             );
     #endif
 
+    #ifdef ALPHA_MASK
+    blendRGBA.a=baseRGBA.a;
+    #endif
 
     outColor=blendRGBA;
 }
