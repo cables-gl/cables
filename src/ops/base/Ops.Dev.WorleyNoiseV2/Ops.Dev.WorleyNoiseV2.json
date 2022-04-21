@@ -1,14 +1,12 @@
 {
+    "authorName": "pandur",
+    "id": "fc6fbe7c-4bf8-4fdc-bd37-95b9f50a5bf2",
+    "created": 1650544734875,
     "layout": {
         "portsIn": [
             {
                 "type": 1,
                 "name": "render"
-            },
-            {
-                "type": 2,
-                "name": "Mask",
-                "objType": "texture"
             },
             {
                 "type": 0,
@@ -29,18 +27,28 @@
                 "subType": "number"
             },
             {
-                "type": 0,
-                "name": "Color index",
-                "subType": "integer"
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
             },
             {
                 "type": 0,
-                "name": "Scale",
+                "name": "X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Multiply",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
                 "subType": "number"
             },
             {
@@ -50,21 +58,23 @@
             },
             {
                 "type": 0,
-                "name": "X",
-                "group": "Position",
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "RangeA",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Y",
-                "group": "Position",
+                "name": "RangeB",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Z",
-                "group": "Position",
-                "subType": "number"
+                "name": "Tileable",
+                "subType": "boolean"
             },
             {
                 "type": 2,
@@ -103,20 +113,20 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.PerlinNoiseV2"
+        "name": "Ops.Dev.WorleyNoiseV2"
     },
-    "summary": "draw perlin noise into an image",
     "credits": [
         {
-            "title": "GPU-Noise-Lib",
-            "author": "Brian Sharpe",
-            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
-            "licence": "Public Domain"
+            "title": "Worley Noise",
+            "author": "Stefan Gustavson",
+            "url": "https://thebookofshaders.com/edit.php#12/2d-cnoise-2x2x2.frag",
+            "licence": "MIT"
         }
     ],
-    "authorName": "pandur",
-    "id": "b4b238d3-db68-4206-8dc7-4b52433fc932",
-    "created": 1650439417750,
+    "summary": "Worley noise",
+    "docs": {
+        "ports": []
+    },
     "issues": "",
     "collections": [
         "random",
@@ -124,30 +134,17 @@
     ],
     "relatedops": null,
     "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "exampleProjectId": "sivDJd",
     "changelog": [
         {
-            "message": "added offset texture parameter",
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.WorleyNoise",
             "author": "pandur",
-            "date": 1643616523852
+            "date": 1650544734876
         },
         {
-            "message": "added harmonics parameter",
+            "message": "Ops.User.pandur.WorleyNoiseV2 renamed to Ops.Dev.WorleyNoiseV2",
             "author": "pandur",
-            "date": 1643810362103
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.PerlinNoise",
-            "author": "pandur",
-            "date": 1650439417751
-        },
-        {
-            "message": "Ops.User.pandur.PerlinNoiseV2 renamed to Ops.Dev.PerlinNoiseV2",
-            "author": "pandur",
-            "date": 1650439572456
+            "date": 1650547481836
         }
-    ],
-    "exampleProjectId": "zfzmT6"
+    ]
 }
