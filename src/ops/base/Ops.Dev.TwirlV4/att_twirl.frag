@@ -16,8 +16,8 @@ void main()
     center =((center+1.0)/2.0);
     vec2 tc = texCoord;
     tc -= center;
-    tc.y/=aspect;
-    float dist = length(tc);
+
+    float dist = length(vec2(tc.x,tc.y/aspect));
     if (dist < radius)
     {
         float percent = (radius - dist) / radius;

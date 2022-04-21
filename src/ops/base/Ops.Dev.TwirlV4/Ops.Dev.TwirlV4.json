@@ -47,7 +47,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.TwirlV4"
+        "name": "Ops.Dev.TwirlV4"
     },
     "summary": "Creates a twirl/swirl/spiral effect in a texture",
     "collections": null,
