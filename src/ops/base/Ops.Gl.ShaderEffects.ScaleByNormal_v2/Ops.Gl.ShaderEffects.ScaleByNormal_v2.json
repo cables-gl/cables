@@ -31,6 +31,9 @@
     "collections": [
         "vertexDeformers"
     ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
     "relatedops": null,
     "changelog": [
         {
