@@ -1,0 +1,50 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "ratsnake",
+    "id": "9c14f158-d634-4421-b581-51f3fd2044c5",
+    "created": 1650542221509,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.ratsnake.ScaleByNormalz"
+    },
+    "summary": "scale vertices of an object in the direction of face normals",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.ScaleByNormal",
+            "author": "ratsnake",
+            "date": 1650542221509
+        },
+        {
+            "message": "Ops.User.ratsnake.ScaleByNormalz renamed to Ops.Gl.ShaderEffects.ScaleByNormal_v2",
+            "author": "pandur",
+            "date": 1650616094580
+        }
+    ]
+}

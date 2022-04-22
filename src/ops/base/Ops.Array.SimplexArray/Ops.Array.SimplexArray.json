@@ -51,7 +51,7 @@
     "libs": [
         "perlin.js"
     ],
-    "summary": "Creates An array filled with Simplex noise values",
+    "summary": "Creates An array filled with Simplex noise values (Range: -1, 1)",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -84,5 +84,6 @@
             }
         ]
     },
-    "exampleProjectId": "rNAlhL"
+    "exampleProjectId": "rNAlhL",
+    "caniusequery": ""
 }
