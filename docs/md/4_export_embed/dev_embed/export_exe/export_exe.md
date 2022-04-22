@@ -43,7 +43,7 @@ building the executables!
 
 Enter your generated [access token](https://github.com/settings/tokens) that has at least "repo" permissions in github.
 
-## WALKTHOUGH
+## WALKTHROUGH
 - enter the above information
 - click on button
 - wait for the two buttons to appear
