@@ -23,12 +23,12 @@
             },
             {
                 "type": 0,
-                "name": "mono",
+                "name": "channelA",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Alpha",
+                "name": "mono",
                 "subType": "boolean"
             }
         ],
@@ -38,9 +38,21 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.ColorChannel"
+        "name": "Ops.User.pandur.ColorChannelV2"
     },
     "authorName": "pandur",
-    "id": "c7c5dadd-16fd-4c3b-a910-6882048e6b8d",
-    "created": 1540831235400
+    "id": "0a512974-0920-4aa8-89dc-4dda184c0d46",
+    "created": 1650525599264,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ColorChannel",
+            "author": "pandur",
+            "date": 1650525599264
+        },
+        {
+            "message": "Ops.User.pandur.ColorChannelV2 renamed to Ops.Dev.ColorChannelV2",
+            "author": "pandur",
+            "date": 1650526157505
+        }
+    ]
 }

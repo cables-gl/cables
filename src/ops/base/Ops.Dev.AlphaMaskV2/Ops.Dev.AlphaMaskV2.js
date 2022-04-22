@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     inAmount = op.inFloatSlider("Amount", 1),
-    inMethod=op.inSwitch("Method",['Override','Mul','Add'],'Override'),
-    inInvert=op.inBool("Invert",false),
+    inMethod = op.inSwitch("Method", ["Override", "Mul", "Add"], "Override"),
+    inInvert = op.inBool("Invert", false),
     image = op.inTexture("image"),
     next = op.outTrigger("trigger");
 
@@ -30,15 +30,15 @@ method.onChange = function ()
     shader.toggleDefine("USE_TEXTURE", image.get());
 
     shader.toggleDefine("INVERT", inInvert.get());
-    shader.toggleDefine("METH_MUL", inMethod.get()=="Mul");
-    shader.toggleDefine("METH_ADD", inMethod.get()=="Add");
-    shader.toggleDefine("METH_OVERRIDE", inMethod.get()=="Override");
-
+    shader.toggleDefine("METH_MUL", inMethod.get() == "Mul");
+    shader.toggleDefine("METH_ADD", inMethod.get() == "Add");
+    shader.toggleDefine("METH_OVERRIDE", inMethod.get() == "Override");
 };
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op,3)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
+    if (!image.get()) return next.trigger();
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();

@@ -5,6 +5,7 @@ const
 
     image = op.inTexture("Image"),
     inAlphaPremul = op.inValueBool("Premultiplied", false),
+    inAlphaMask = op.inValueBool("Alpha Mask", false),
     removeAlphaSrc = op.inValueBool("removeAlphaSrc", false),
 
     imageAlpha = op.inTexture("Mask"),
@@ -139,6 +140,7 @@ render.onTriggered = doRender;
 inClipRepeat.onChange =
     imageAlpha.onChange =
     inAlphaPremul.onChange =
+    inAlphaMask.onChange =
     invAlphaChannel.onChange =
     flipY.onChange =
     flipX.onChange =
@@ -153,6 +155,7 @@ updateDefines();
 function updateDefines()
 {
     shader.toggleDefine("REMOVE_ALPHA_SRC", removeAlphaSrc.get());
+    shader.toggleDefine("ALPHA_MASK", inAlphaMask.get());
 
     shader.toggleDefine("CLIP_REPEAT", inClipRepeat.get());
 

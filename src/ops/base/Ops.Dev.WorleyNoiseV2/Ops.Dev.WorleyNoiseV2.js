@@ -1,39 +1,36 @@
 const
     render = op.inTrigger("render"),
-    inTexMask = op.inTexture("Mask"),
-    blendMode = CGL.TextureEffect.AddBlendSelect(op),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-
     amount = op.inValueSlider("Amount", 1),
-    inMode = op.inSwitch("Color", ["Mono", "RGB", "R", "G", "B"], "Mono"),
-    scale = op.inValue("Scale", 8),
-    rangeMul = op.inValue("Multiply", 1),
-    inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
+    inTexMask = op.inTexture("Mask"),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
+    scale = op.inValue("Scale", 6),
+    inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
+    inv = op.inValueBool("Invert", true),
+    rangeA = op.inValueSlider("RangeA", 0.4),
+    rangeB = op.inValueSlider("RangeB", 0.5),
+    tile = op.inValueBool("Tileable", false),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, "perlinnoise");
+const shader = new CGL.Shader(cgl, op.name);
 
-op.setPortGroup("Position", [x, y, z]);
-
-shader.setSource(shader.getDefaultVertexShader(), attachments.perlinnoise3d_frag);
-
-const
-    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
+shader.setSource(shader.getDefaultVertexShader(), attachments.worleynoise_frag);
+const textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     textureUniformOffZ = new CGL.Uniform(shader, "t", "texOffsetZ", 1),
     textureUniformMask = new CGL.Uniform(shader, "t", "texMask", 2),
-
     uniZ = new CGL.Uniform(shader, "f", "z", z),
     uniX = new CGL.Uniform(shader, "f", "x", x),
     uniY = new CGL.Uniform(shader, "f", "y", y),
     uniScale = new CGL.Uniform(shader, "f", "scale", scale),
+    uniAspect = new CGL.Uniform(shader, "f", "aspect", 1),
+    uniharmonics = new CGL.Uniform(shader, "f", "harmonics", inHarmonics),
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
-    rangeMulUniform = new CGL.Uniform(shader, "f", "rangeMul", rangeMul);
-
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
+    rangeAUniform = new CGL.Uniform(shader, "f", "rangeA", rangeA),
+    rangeBUniform = new CGL.Uniform(shader, "f", "rangeB", rangeB);
 
 // offsetMap
 
@@ -48,29 +45,26 @@ op.setPortGroup("Offset Map", [inTexOffsetZ, offsetZ, offsetY, offsetX, inOffset
 
 const uniOffMul = new CGL.Uniform(shader, "f", "offMul", inOffsetMul);
 
-const uniAspect = new CGL.Uniform(shader, "f", "aspect", 1);
-const uniHarmonics = new CGL.Uniform(shader, "f", "harmonics", 0);
-inHarmonics.onChange = () =>
-{
-    uniHarmonics.setValue(parseFloat(inHarmonics.get()));
-};
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
-offsetX.onChange =
-offsetY.onChange =
-offsetZ.onChange =
-inTexMask.onChange =
-inMode.onChange =
-inTexOffsetZ.onChange = updateDefines;
+inv.onChange =
+    offsetX.onChange =
+    offsetY.onChange =
+    offsetZ.onChange =
+    inTexMask.onLinkChanged =
+    inTexOffsetZ.onLinkChanged =
+    tile.onChange = updateDefines;
+
 updateDefines();
 
 function updateDefines()
 {
-    shader.toggleDefine("NO_CHANNEL_R", inMode.get() == "G" || inMode.get() == "B");
-    shader.toggleDefine("NO_CHANNEL_G", inMode.get() == "R" || inMode.get() == "B");
-    shader.toggleDefine("NO_CHANNEL_B", inMode.get() == "R" || inMode.get() == "G");
+    console.log("updatedefines");
+    shader.toggleDefine("DO_INVERT", inv.get());
+    shader.toggleDefine("DO_TILEABLE", tile.get());
 
-    shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.get());
-    shader.toggleDefine("HAS_TEX_MASK", inTexMask.get());
+    shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.isLinked());
+    shader.toggleDefine("HAS_TEX_MASK", inTexMask.isLinked());
 
     shader.toggleDefine("OFFSET_X_R", offsetX.get() == "R");
     shader.toggleDefine("OFFSET_X_G", offsetX.get() == "G");
@@ -88,8 +82,6 @@ function updateDefines()
     offsetY.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     inOffsetMul.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
-
-    shader.toggleDefine("RGB", inMode.get() == "RGB");
 }
 
 render.onTriggered = function ()
@@ -99,11 +91,11 @@ render.onTriggered = function ()
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
-    uniAspect.setValue(cgl.currentTextureEffect.aspectRatio);
-
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     if (inTexOffsetZ.get()) cgl.setTexture(1, inTexOffsetZ.get().tex);
     if (inTexMask.get()) cgl.setTexture(2, inTexMask.get().tex);
+
+    uniAspect.setValue(cgl.currentTextureEffect.aspectRatio);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

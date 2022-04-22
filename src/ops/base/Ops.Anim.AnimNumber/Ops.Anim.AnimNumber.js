@@ -3,7 +3,7 @@ const
     inValue = op.inValue("Value"),
     duration = op.inValueFloat("duration"),
     next = op.outTrigger("Next"),
-    result = op.outValue("result"),
+    result = op.outNumber("result"),
     finished = op.outTrigger("Finished");
 
 const anim = new CABLES.Anim();

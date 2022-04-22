@@ -30,17 +30,22 @@
             },
             {
                 "type": 0,
-                "name": "Color index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Scale",
+                "name": "X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Multiply",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
                 "subType": "number"
             },
             {
@@ -50,21 +55,8 @@
             },
             {
                 "type": 0,
-                "name": "X",
-                "group": "Position",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Y",
-                "group": "Position",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Z",
-                "group": "Position",
-                "subType": "number"
+                "name": "Tileable",
+                "subType": "boolean"
             },
             {
                 "type": 2,
@@ -103,9 +95,8 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.PerlinNoiseV2"
+        "name": "Ops.User.pandur.CellularNoiseV2"
     },
-    "summary": "draw perlin noise into an image",
     "credits": [
         {
             "title": "GPU-Noise-Lib",
@@ -114,9 +105,13 @@
             "licence": "Public Domain"
         }
     ],
+    "summary": "cellular noise",
+    "docs": {
+        "ports": []
+    },
     "authorName": "pandur",
-    "id": "b4b238d3-db68-4206-8dc7-4b52433fc932",
-    "created": 1650439417750,
+    "id": "e0ce24fe-4ddb-4df4-a087-623cf4c711a7",
+    "created": 1650542058961,
     "issues": "",
     "collections": [
         "random",
@@ -124,30 +119,27 @@
     ],
     "relatedops": null,
     "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
     "changelog": [
         {
             "message": "added offset texture parameter",
             "author": "pandur",
-            "date": 1643616523852
+            "date": 1643616504006
         },
         {
             "message": "added harmonics parameter",
             "author": "pandur",
-            "date": 1643810362103
+            "date": 1643810369349
         },
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.PerlinNoise",
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.CellularNoise",
             "author": "pandur",
-            "date": 1650439417751
+            "date": 1650542058962
         },
         {
-            "message": "Ops.User.pandur.PerlinNoiseV2 renamed to Ops.Dev.PerlinNoiseV2",
+            "message": "Ops.User.pandur.CellularNoiseV2 renamed to Ops.Dev.CellularNoiseV2",
             "author": "pandur",
-            "date": 1650439572456
+            "date": 1650542346346
         }
     ],
-    "exampleProjectId": "zfzmT6"
+    "exampleProjectId": "9DZmT6"
 }
