@@ -8,6 +8,7 @@ UNI vec2 pos;
 UNI float mul;
 UNI float amount;
 UNI float time;
+UNI float aspect;
 
 #ifdef HAS_TEX_OFFSETMAP
     UNI sampler2D texOffsetZ;
@@ -24,7 +25,13 @@ UNI float time;
 void main()
 {
     float v = 0.0;
-    vec2 c = texCoord * size - size/2.0;
+
+    vec2 s=size;
+    #ifdef FIXASPECT
+        s.y=size.x/aspect;
+    #endif
+
+    vec2 c = texCoord * s - s/2.0;
 
     c+=pos;
 

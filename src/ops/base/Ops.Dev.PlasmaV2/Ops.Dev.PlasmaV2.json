@@ -38,6 +38,11 @@
             },
             {
                 "type": 0,
+                "name": "Aspect",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Mul",
                 "subType": "number"
             },

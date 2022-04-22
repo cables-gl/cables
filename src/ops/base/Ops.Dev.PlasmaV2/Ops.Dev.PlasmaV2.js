@@ -5,6 +5,7 @@ const
     amount = op.inValueSlider("Amount", 1),
     w = op.inValue("Width", 20),
     h = op.inValue("Height", 20),
+    inAspect = op.inBool("Aspect", true),
     mul = op.inValue("Mul", 1),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
@@ -34,6 +35,7 @@ const
     uniSize = new CGL.Uniform(shader, "2f", "size", w, h),
     uniTime = new CGL.Uniform(shader, "f", "time", time),
     uniMul = new CGL.Uniform(shader, "f", "mul", mul),
+    uniAspect = new CGL.Uniform(shader, "f", "aspect", 1),
     uniOffMul = new CGL.Uniform(shader, "f", "offMul", inOffsetMul),
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     textureUniformOffZ = new CGL.Uniform(shader, "t", "texOffsetZ", 1),
@@ -41,6 +43,7 @@ const
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
 offsetX.onChange =
+    inAspect.onChange =
     offsetY.onChange =
     offsetZ.onChange =
     inTexMask.onChange =
@@ -72,6 +75,9 @@ function updateDefines()
     offsetY.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     inOffsetMul.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
+
+    h.setUiAttribs({ "greyout": inAspect.get() });
+    shader.toggleDefine("FIXASPECT", inAspect.get());
 }
 
 render.onTriggered = function ()
@@ -80,6 +86,9 @@ render.onTriggered = function ()
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
+
+    if (inAspect.get()) uniAspect.setValue(cgl.currentTextureEffect.aspectRatio);
+    else uniAspect.setValue(1);
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     if (inTexOffsetZ.get()) cgl.setTexture(1, inTexOffsetZ.get().tex);
