@@ -3,7 +3,6 @@ const
     inTexMask = op.inTexture("Mask"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-
     amount = op.inValueSlider("Amount", 1),
     inMode = op.inSwitch("Color", ["Mono", "RGB", "R", "G", "B"], "Mono"),
     scale = op.inValue("Scale", 8),

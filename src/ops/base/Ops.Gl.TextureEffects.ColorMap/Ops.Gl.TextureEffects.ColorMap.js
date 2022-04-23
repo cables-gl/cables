@@ -12,6 +12,8 @@ let inMax = op.inFloatSlider("Max", 1);
 
 let inPos = op.inValueSlider("Position", 0.5);
 
+op.setPortGroup("Vertical Position", [inMin, inMax, inPos]);
+
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name);
 shader.define("METH_LUMI");

@@ -33,9 +33,12 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "gT1jXP5As9A"
+    ],
     "docs": {
         "ports": []
     },
+    "caniusequery": "",
     "exampleProjectId": "gOaDAH"
 }

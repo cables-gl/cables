@@ -13,6 +13,12 @@
             },
             {
                 "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
@@ -102,20 +108,32 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Gradient"
+        "name": "Ops.User.pandur.GradientV2"
     },
     "summary": "Draws a simple gradient between three colors",
     "docs": {
         "ports": []
     },
     "authorName": "pandur",
-    "id": "5ada9bd8-227a-4a1f-87ad-0f879c7aa84d",
-    "created": 1520431091087,
+    "id": "c8a9408a-75e5-481f-99a7-6aa7ca88bebc",
+    "created": 1650609143792,
     "issues": "",
     "collections": [
         "generator"
     ],
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "dlSpQ6"
+    "exampleProjectId": "dlSpQ6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Gradient",
+            "author": "pandur",
+            "date": 1650609143792
+        },
+        {
+            "message": "Ops.User.pandur.GradientV2 renamed to Ops.Dev.GradientV2",
+            "author": "pandur",
+            "date": 1650609538357
+        }
+    ]
 }
