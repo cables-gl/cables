@@ -4,6 +4,7 @@ UNI float radius;
 UNI float r;
 UNI float g;
 UNI float b;
+UNI float a;
 
 UNI float width;
 UNI float height;
@@ -17,9 +18,11 @@ float roundRect(in vec2 distFromCenter)
 
 void main()
 {
-    vec4 col=texture(tex,texCoord);
+    vec2 tc=texCoord;
+    vec4 col=texture(tex,tc);
     float c=0.0;
-    
+
     c=roundRect(vec2(0.5*width,0.5*height)-vec2(gl_FragCoord));
-    outColor=mix(col,vec4(r,g,b,1.0),c);
+    outColor=mix(col,vec4(r,g,b,a),c);
+
 }
