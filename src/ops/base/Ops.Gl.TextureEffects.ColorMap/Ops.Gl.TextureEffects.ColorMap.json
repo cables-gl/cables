@@ -13,13 +13,8 @@
             {
                 "type": 0,
                 "name": "Blend Mode index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Blend Mode",
                 "group": "Blending",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -38,22 +33,21 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Method"
-            },
-            {
                 "type": 0,
                 "name": "Min",
+                "group": "Vertical Position",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Max",
+                "group": "Vertical Position",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Position",
+                "group": "Vertical Position",
                 "subType": "number"
             }
         ],
