@@ -18,12 +18,19 @@ vec3 desaturate(vec3 color)
 
 void main()
 {
+    // vec4 col=vec4(1.0,0.0,0.0,1.0);
+
+    // float pixelX=0.27/texWidth;
+    // float pixelY=0.27/texHeight;
     float pixelX=(width+0.01)*4.0/texWidth;
     float pixelY=(width+0.01)*4.0/texHeight;
 
-    vec2 tc=texCoord;
+vec2 tc=texCoord;
+// #ifdef OFFSETPIXEL
     tc.x+=1.0/texWidth*0.5;
     tc.y+=1.0/texHeight*0.5;
+// #endif
+    // col=texture(tex,texCoord);
 
     float count=1.0;
     vec4 base=texture(tex,texCoord);
@@ -43,7 +50,11 @@ void main()
 	vertEdge += texture( tex, vec2( tc.x    , tc.y + pixelY ) ) * 2.0;
 	vertEdge += texture( tex, vec2( tc.x + pixelX, tc.y + pixelY ) ) * 1.0;
 
-	vec3 edge = sqrt(( (horizEdge.rgb*horizEdge.a)/count * (horizEdge.rgb*horizEdge.a)/count) + ((vertEdge.rgb*vertEdge.a)/count * (vertEdge.rgb*vertEdge.a)/count));
+	horizEdge*=base.a;
+	vertEdge*=base.a;
+
+
+	vec3 edge = sqrt((horizEdge.rgb/count * horizEdge.rgb/count) + (vertEdge.rgb/count * vertEdge.rgb/count));
 
     edge=desaturate(edge);
     edge*=strength;
@@ -51,8 +62,9 @@ void main()
     if(mulColor>0.0) edge*=texture( tex, texCoord ).rgb*mulColor*4.0;
     edge=max(min(edge,1.0),0.0);
 
-    vec4 col=vec4(edge,base.a+edge.r);
+    //blend section
+    vec4 col=vec4(edge,base.a);
 
-    outColor=cgl_blendPixel(base,col,amount);
+    outColor=cgl_blendPixel(base,col,amount*base.a);
 }
 

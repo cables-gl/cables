@@ -64,7 +64,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.EdgeDetectionV4"
+        "name": "Ops.Dev.EdgeDetectionV4"
     },
     "summary": "Draw only the edges of an image",
     "issues": "",

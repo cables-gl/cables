@@ -1,0 +1,88 @@
+{
+    "id": "665bbc0c-2fd7-4683-a1df-e57d8f17da93",
+    "authorName": "pandur",
+    "created": 1650966787899,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Invert",
+            "author": "pandur",
+            "date": 1602149722860
+        },
+        {
+            "message": "Ops.User.pandur.SkewStretch renamed to Ops.Gl.TextureEffects.SkewStretchImage",
+            "author": "pandur",
+            "date": 1605540786638
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.SkewStretchImage",
+            "author": "pandur",
+            "date": 1650966787900
+        },
+        {
+            "message": "Ops.User.pandur.SkewStretchImageV2 renamed to Ops.Dev.SkewStretchImageV2",
+            "author": "pandur",
+            "date": 1650966878279
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clamp",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Stretch Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stretch Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stretch Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stretch Right",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Dev.SkewStretchImageV2"
+    },
+    "summary": "skew / stretch an image by rendering scaled sides",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "M2UA7k"
+}
