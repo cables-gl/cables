@@ -9,7 +9,7 @@ Click the show structure button to see the way the GLB file is constructed with 
 - draco compression: https://cables.gl/p/WFva2K
 - vertex colors: https://cables.gl/edit/6MsLhR
 - multi uv channels: https://cables.gl/edit/LKhGaN
-- vertex anim: https://cables.gl/edit/k2kKaN 
+- vertex anim: https://dev.cables.gl/edit/2gX261
 - multiple animation tracks/actions: https://cables.gl/edit/sJYbXN
 - skinning: https://cables.gl/edit/TWBC-N
 - embedded texture: https://cables.gl/edit/LT4CVS
