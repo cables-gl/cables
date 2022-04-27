@@ -237,11 +237,7 @@ void main()
         offset*=offMul;
     #endif
 
-
-
     float aa=texture(tex,texCoord).r;
-    // float v=(Perlin3D(vec3(p.x,p.y,z)+offset));
-
 
     float v = 0.0;
     p.x*=aspect;

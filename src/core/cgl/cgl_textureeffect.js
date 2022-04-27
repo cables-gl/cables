@@ -2,7 +2,6 @@ import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
 import Logger from "../core_logger";
 
-
 const TextureEffect = function (cgl, options)
 {
     this._cgl = cgl;
@@ -489,5 +488,6 @@ TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alpha
 
     TextureEffect.onChangeBlendSelect(shader, blendPort.get(), maskAlpha);
 };
+
 
 export { TextureEffect };
