@@ -35,8 +35,6 @@ function updateDefines()
     shader.define("INVR", invertR.get() ? "1.0" : "0.0");
     shader.define("INVG", invertG.get() ? "1.0" : "0.0");
     shader.define("INVB", invertB.get() ? "1.0" : "0.0");
-
-    console.log(shader._defines);
 }
 
 render.onTriggered = function ()

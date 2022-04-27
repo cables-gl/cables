@@ -59,7 +59,6 @@ updateDefines();
 
 function updateDefines()
 {
-    console.log("updatedefines");
     shader.toggleDefine("DO_INVERT", inv.get());
     shader.toggleDefine("DO_TILEABLE", tile.get());
 
