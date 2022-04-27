@@ -233,7 +233,11 @@ function update()
     if (world != cgl.frameStore.ammoWorld) removeBody();
 
     world = cgl.frameStore.ammoWorld;
-    if (!world) return;
+    if (!world)
+    {
+        outRayHit.set(false);
+        return;
+    }
     if (!body)setup(world);
     if (!body) return;
     if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....

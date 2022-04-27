@@ -1,7 +1,7 @@
 // todo: warn if ele not dom object , e..g. texture!
 
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
 
     outResult = op.outObject("Result"),
     outFound = op.outNumber("Found Hands");
@@ -15,6 +15,9 @@ inEle.onChange = () =>
 {
     if (!inEle.get()) return;
 
+    // if(inEle.get())
+    // console.log(inEle.get().videoWidth,inEle.get().videoHeight);
+
     // op.log("init camera");
     camera = new Camera(inEle.get(), {
         "onFrame": async () =>
@@ -23,8 +26,8 @@ inEle.onChange = () =>
 
             if (ele) await hands.send({ "image": ele });
         },
-        "width": 640,
-        "height": 480
+        "width": inEle.get().videoWidth,
+        "height": inEle.get().videoHeight
     });
     camera.start();
 };
@@ -42,14 +45,14 @@ hands.onResults((r) =>
     // let lines = null;
     // let lines2 = null;
 
-    // if (r && r.multiHandedness)
-    // {
-    //     outFound.set(r.multiHandedness.length);
-    // }
-    // else
-    // {
-    //     outFound.set(0);
-    // }
+    if (r && r.multiHandedness)
+    {
+        outFound.set(r.multiHandedness.length);
+    }
+    else
+    {
+        outFound.set(0);
+    }
 
     // // console.log(r);
 
