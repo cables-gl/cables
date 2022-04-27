@@ -97,3 +97,12 @@ function loadBin(addCacheBuster)
         oReq.send(null);
     });
 }
+
+op.onFileChanged = function (fn)
+{
+    if (inFile.get() && inFile.get().indexOf(fn) > -1)
+    {
+        outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+        reloadSoon(true);
+    }
+};
