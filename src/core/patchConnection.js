@@ -10,11 +10,12 @@ const PatchConnectionReceiver = function (patch, options, connector)
 
 PatchConnectionReceiver.prototype._addOp = function (data)
 {
-    const op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
+    let uiAttribs = null;
+    if (data.vars.uiAttribs) uiAttribs = data.vars.uiAttribs;
+    const op = this._patch.addOp(data.vars.objName, uiAttribs, data.vars.opId);
     if (op)
     {
         op.id = data.vars.opId;
-        op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
         if (data.vars.portsIn)
         {
             data.vars.portsIn.forEach((portInfo) =>
@@ -241,11 +242,16 @@ const PatchConnectionSender = function (patch)
                 };
                 portsIn.push(port);
             });
-            op.uiAttribs.fromNetwork = true;
+            let newUiAttribs = { };
+            if (op.uiAttribs)
+            {
+                newUiAttribs = { ...op.uiAttribs };
+            }
+            newUiAttribs.fromNetwork = true;
             this.send(CABLES.PACO_OP_CREATE, {
                 "opId": op.id,
                 "objName": op.objName,
-                "uiAttribs": op.uiAttribs,
+                "uiAttribs": newUiAttribs,
                 "portsIn": portsIn
             });
         });

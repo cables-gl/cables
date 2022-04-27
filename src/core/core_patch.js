@@ -721,6 +721,7 @@ Patch.prototype.serialize = function (options)
 
     options = options || {};
     if (!options.hasOwnProperty("removeBlueprints"))options.removeBlueprints = true;
+    if (!options.hasOwnProperty("removeFromNetworkAttr"))options.removeFromNetworkAttr = true;
 
     obj.ops = [];
     obj.settings = this.settings;
@@ -729,6 +730,10 @@ Patch.prototype.serialize = function (options)
         const op = this.ops[i];
 
         if (options.removeBlueprints && op.storage && op.storage.blueprint) continue;
+        if (options.removeFromNetworkAttr && op.uiAttribs && op.uiAttribs.hasOwnProperty("fromNetwork"))
+        {
+            delete op.uiAttribs.fromNetwork;
+        }
 
         obj.ops.push(op.getSerialized());
     }
