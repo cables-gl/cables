@@ -12,7 +12,7 @@ PatchConnectionReceiver.prototype._addOp = function (data)
 {
     let uiAttribs = null;
     if (data.vars.uiAttribs) uiAttribs = data.vars.uiAttribs;
-    const op = this._patch.addOp(data.vars.objName, uiAttribs, data.vars.opId);
+    const op = this._patch.addOp(data.vars.objName, uiAttribs, data.vars.opId, true);
     if (op)
     {
         op.id = data.vars.opId;
@@ -247,7 +247,6 @@ const PatchConnectionSender = function (patch)
             {
                 newUiAttribs = { ...op.uiAttribs };
             }
-            newUiAttribs.fromNetwork = true;
             this.send(CABLES.PACO_OP_CREATE, {
                 "opId": op.id,
                 "objName": op.objName,
