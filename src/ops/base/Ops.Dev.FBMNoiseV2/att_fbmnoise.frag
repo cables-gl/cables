@@ -19,7 +19,7 @@ UNI float aspect;
 IN vec2 texCoord;
 
 
-{{CGL.BLENDMODES}}
+{{CGL.BLENDMODES3}}
 
 // csdcsdcds
 // adapted from warp shader by inigo quilez/iq
@@ -58,16 +58,12 @@ float fbm6( vec2 p )
 
 void main()
 {
-    // vec4 col=texture(tex,texCoord+2.0*fbm4(texCoord+2.0*fbm6(texCoord+anim)));
-
     vec2 tc=texCoord;
 	#ifdef DO_TILEABLE
 	    tc=abs(texCoord-0.5);
 	#endif
 
-
     vec2 p=(tc-0.5)*scale;
-
 
     p.y/=aspect;
     vec2 q = vec2( fbm4( p + vec2(0.3+scrollX,0.20+scrollY) ),
@@ -79,16 +75,11 @@ void main()
     vec2 q3 = vec2( fbm4( p + vec2(9.0+scrollX,4.0+scrollY) ),
                    fbm4( p + vec2(3.1+scrollX,4.3+scrollY) ) );
 
-
-
     float v= fbm4( ( p + 4.0*q +anim*0.1)*repeat);
     float v2= fbm4( (p + 4.0*q2 +anim*0.1)*repeat );
 
     float v3= fbm6( (p + 4.0*q3 +anim*0.1)*repeat );
     float v4= fbm6( (p + 4.0*q2 +anim*0.1)*repeat );
-
-
-
 
     vec4 base=texture(tex,texCoord);
 
@@ -122,5 +113,5 @@ void main()
 
     finalColor=vec4( color*vec3(colVal/numLayers),1.0);
 
-    outColor = cgl_blend(base,finalColor,amount);;
+    outColor = cgl_blendPixel(base,finalColor,amount);
 }

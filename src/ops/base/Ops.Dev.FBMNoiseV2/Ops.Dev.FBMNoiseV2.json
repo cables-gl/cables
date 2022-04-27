@@ -19,6 +19,12 @@
             },
             {
                 "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "r",
                 "subType": "number"
             },
@@ -94,7 +100,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.FBMNoise"
+        "name": "Ops.User.pandur.FBMNoiseV2"
     },
     "credits": [
         {
@@ -109,8 +115,8 @@
         "ports": []
     },
     "authorName": "pandur",
-    "id": "7073186c-b776-48c2-a01e-041df88ad88a",
-    "created": 1520431410269,
+    "id": "9422eeab-b6c5-47d1-8737-d5c43dc137a3",
+    "created": 1651051381505,
     "issues": "",
     "collections": [
         "random",
@@ -118,5 +124,17 @@
     ],
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "DmWmT6"
+    "exampleProjectId": "DmWmT6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.FBMNoise",
+            "author": "pandur",
+            "date": 1651051381506
+        },
+        {
+            "message": "Ops.User.pandur.FBMNoiseV2 renamed to Ops.Dev.FBMNoiseV2",
+            "author": "pandur",
+            "date": 1651051559947
+        }
+    ]
 }
