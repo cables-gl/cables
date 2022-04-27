@@ -80,5 +80,3 @@ void main() {
 
     outColor= cgl_blendPixel(base,vec4(color,1.0),amount);
 }
-
-

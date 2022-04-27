@@ -33,13 +33,12 @@ const
 const tile = op.inValueBool("Tileable", false);
 tile.onChange = updateTileable;
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount,maskAlpha);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 function updateTileable()
 {
-    shader.toggleDefine("DO_TILEABLE",tile.get());
+    shader.toggleDefine("DO_TILEABLE", tile.get());
 }
-
 
 render.onTriggered = function ()
 {
