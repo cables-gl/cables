@@ -1,7 +1,9 @@
 precision highp float;
 precision highp int;
-IN vec3  vPosition;
 
+UNI vec3 camPos;
+
+IN vec3  vPosition;
 IN vec2  attrTexCoord;
 IN vec3  attrVertNormal;
 IN vec3  attrTangent;
@@ -19,9 +21,15 @@ OUT mat3 TBN;
 OUT vec3 norm;
 OUT vec3 normM;
 #ifdef VERTEX_COLORS
-OUT vec4 vCol0;
+OUT vec4 vertCol;
 #endif
-
+#ifdef USE_HEIGHT_TEX
+#ifdef USE_OPTIMIZED_HEIGHT
+OUT vec3 fragTangentViewDir;
+#else
+OUT mat3 invTBN;
+#endif
+#endif
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
@@ -36,13 +44,19 @@ void main()
     norm = attrVertNormal;
     vec3 tangent = attrTangent;
     vec3 bitangent = attrBiTangent;
-    
+
     {{MODULE_VERTEX_POSITION}}
-    
+
     #ifndef INSTANCING
     FragPos = mMatrix * pos;
     #else
     FragPos = instModelMat * pos;
+    #endif
+
+    #ifdef USE_HEIGHT_TEX
+    #ifdef USE_OPTIMIZED_HEIGHT
+    mat3 invTBN = mat3(tangent, bitangent, norm);
+    #endif
     #endif
 
     #ifndef INSTANCING
@@ -53,23 +67,27 @@ void main()
     vec3 N = normalize(vec3(instMat * vec4(norm, 0.0)));
     #endif
 
-    #ifndef DONT_USE_GS
-    tangent      = normalize(tangent - dot(tangent, N) * N);
-    bitangent = cross(N, tangent);
-    #else
     #ifndef INSTANCING
     bitangent = normalize(vec3(mMatrix * vec4(bitangent,  0.0)));
     #else
     bitangent = normalize(vec3(instMat * vec4(bitangent,  0.0)));
     #endif
-    #endif
 
     #ifdef VERTEX_COLORS
-    vCol0 = attrVertColor;
+    vertCol = attrVertColor;
     #endif
 
     TBN = mat3(tangent, bitangent, N);
-    normM = N;
 
+    #ifdef USE_HEIGHT_TEX
+    #ifdef USE_OPTIMIZED_HEIGHT
+    // TODO find a way to remove this inverse here
+    fragTangentViewDir = normalize(inverse(TBN) * (camPos - FragPos.xyz));
+    #else
+    invTBN = inverse(TBN);
+    #endif
+    #endif
+
+    normM = N;
     gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;
 }
