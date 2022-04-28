@@ -11,7 +11,6 @@ inTex.onChange = () =>
     outTex.set(inTex.get());
 };
 
-// op.renderPreviewLayer = (ctx, pos, size) =>
 op.renderVizLayer = (ctx, layer) =>
 {
     const port = inTex;
