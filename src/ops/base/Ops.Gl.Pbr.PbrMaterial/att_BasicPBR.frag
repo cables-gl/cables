@@ -17,6 +17,9 @@ uniform sampler2D IBL_BRDF_LUT;
 #ifdef USE_NORMAL_TEX
     UNI sampler2D _NormalMap;
 #endif
+#ifdef USE_HEIGHT_TEX
+    UNI sampler2D _HeightMap;
+#endif
 #ifdef USE_AORM_TEX
     UNI sampler2D _AORMMap;
 #else
@@ -32,6 +35,12 @@ UNI float diffuseIntensity;
 UNI float specularIntensity;
 #endif
 UNI float tonemappingExposure;
+#ifdef USE_HEIGHT_TEX
+UNI float _HeightDepth;
+#ifndef USE_OPTIMIZED_HEIGHT
+UNI mat4 modelMatrix;
+#endif
+#endif
 
 IN vec2 texCoord;
 IN vec4 FragPos;
@@ -39,7 +48,14 @@ IN mat3 TBN;
 IN vec3 norm;
 IN vec3 normM;
 #ifdef VERTEX_COLORS
-IN vec4 vCol0;
+IN vec4 vertCol;
+#endif
+#ifdef USE_HEIGHT_TEX
+#ifdef USE_OPTIMIZED_HEIGHT
+IN vec3 fragTangentViewDir;
+#else
+IN mat3 invTBN;
+#endif
 #endif
 
 // structs
@@ -118,6 +134,52 @@ float Dither_InterleavedGradientNoise(float a) {
 }
 #endif
 
+#ifdef USE_HEIGHT_TEX
+// based on Jasper Flicks great tutorials (:
+float getSurfaceHeight(sampler2D surfaceHeightMap, vec2 UV)
+{
+	return texture2D(surfaceHeightMap, UV).r;
+}
+
+vec2 RaymarchedParallax(vec2 UV, sampler2D surfaceHeightMap, float strength, vec3 viewDir)
+{
+    #ifndef USE_OPTIMIZED_HEIGHT
+	#define PARALLAX_RAYMARCHING_STEPS 50
+    #else
+    #define PARALLAX_RAYMARCHING_STEPS 20
+    #endif
+	vec2 uvOffset = vec2(0.0);
+	float stepSize = 1.0 / float(PARALLAX_RAYMARCHING_STEPS);
+	vec2 uvDelta = vec2(viewDir * (stepSize * strength));
+	float stepHeight = 1.0;
+	float surfaceHeight = getSurfaceHeight(surfaceHeightMap, UV);
+
+	vec2 prevUVOffset = uvOffset;
+	float prevStepHeight = stepHeight;
+	float prevSurfaceHeight = surfaceHeight;
+
+    // doesnt work with webgl 1.0 as the && condition is not fixed length for loop
+    // TODO: use non raymarched parallax mapping here if webgl 1.0?
+	for (int i = 1; i < PARALLAX_RAYMARCHING_STEPS && stepHeight > surfaceHeight; ++i)
+	{
+		prevUVOffset = uvOffset;
+		prevStepHeight = stepHeight;
+		prevSurfaceHeight = surfaceHeight;
+
+		uvOffset -= uvDelta;
+		stepHeight -= stepSize;
+		surfaceHeight = getSurfaceHeight(surfaceHeightMap, UV + uvOffset);
+	}
+
+	float prevDifference = prevStepHeight - prevSurfaceHeight;
+	float difference = surfaceHeight - stepHeight;
+	float t = prevDifference / (prevDifference + difference);
+	uvOffset = mix(prevUVOffset, uvOffset, t);
+
+	return uvOffset;
+}
+#endif
+
 {{PBR_FRAGMENT_HEAD}}
 void main()
 {
@@ -126,6 +188,13 @@ void main()
     // set up interpolated vertex data
     vec2 UV0             = texCoord;
     vec3 V               = normalize(camPos - FragPos.xyz);
+
+    #ifdef USE_HEIGHT_TEX
+    #ifndef USE_OPTIMIZED_HEIGHT
+    vec3 fragTangentViewDir = normalize(invTBN * (camPos - FragPos.xyz));
+    #endif
+    UV0 += RaymarchedParallax(UV0, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
+    #endif
 
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
@@ -165,22 +234,22 @@ void main()
 
     #ifdef VERTEX_COLORS
     #ifdef VCOL_COLOUR
-        albedo.rgb *= pow(vCol0.rgb, vec3(2.2));
-        AlbedoMap.rgb *= pow(vCol0.rgb, vec3(2.2));
+        albedo.rgb *= pow(vertCol.rgb, vec3(2.2));
+        AlbedoMap.rgb *= pow(vertCol.rgb, vec3(2.2));
     #endif
     #ifdef VCOL_AORM
-        AO = vCol0.r;
-        specK = vCol0.g;
-        metalness = vCol0.b;
+        AO = vertCol.r;
+        specK = vertCol.g;
+        metalness = vertCol.b;
     #endif
     #ifdef VCOL_AO
-        AO = vCol0.r;
+        AO = vertCol.r;
     #endif
     #ifdef VCOL_R
-        specK = vCol0.g;
+        specK = vertCol.g;
     #endif
     #ifdef VCOL_M
-        metalness = vCol0.b;
+        metalness = vertCol.b;
     #endif
     #endif
 

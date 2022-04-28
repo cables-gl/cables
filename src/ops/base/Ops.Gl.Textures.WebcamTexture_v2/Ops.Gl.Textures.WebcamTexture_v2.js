@@ -53,6 +53,7 @@ window.addEventListener("focus", resetTimeout);
 document.addEventListener("visibilitychange", resetTimeout);
 
 updateStyle();
+startWebcam();
 
 function removeElement()
 {
@@ -102,6 +103,11 @@ function updateTexture()
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
+    outHeight.set(videoElement.videoHeight || width.get());
+    outWidth.set(videoElement.videoWidth || height.get());
+
+    tex.setSize(videoElement.videoWidth || width.get(), videoElement.videoHeight || height.get());
+
     outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
 
     if (!canceled) timeout = setTimeout(updateTexture, 1000 / fps.get());
@@ -121,11 +127,6 @@ function camInitComplete(stream)
         // videoElement.setAttribute("height", videoElement.videoHeight);
         // videoElement.setAttribute("width", videoElement.videoWidth);
 
-        outHeight.set(videoElement.videoHeight);
-        outWidth.set(videoElement.videoWidth);
-
-        tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
-
         outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
         outError.set("");
         videoElement.play();
@@ -135,6 +136,7 @@ function camInitComplete(stream)
 
 function startWebcam()
 {
+    console.log("startWebcam");
     // removeElement();
     const constraints = { "audio": false, "video": {} };
 
@@ -165,5 +167,3 @@ function startWebcam()
             });
     }
 }
-
-startWebcam();

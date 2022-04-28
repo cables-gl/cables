@@ -2,7 +2,6 @@ import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
 import Logger from "../core_logger";
 
-
 const TextureEffect = function (cgl, options)
 {
     this._cgl = cgl;
@@ -320,11 +319,9 @@ TextureEffect.getBlendCode = function (ver)
         + "       colNew=max(base + blend - vec3(1.0), vec3(0.0));".endl()
         + "   #endif".endl()
 
-
         + "   #ifdef BM_SUBTRACT".endl()
         + "       colNew=base - blend;".endl()
         + "   #endif".endl()
-
 
         + "   #ifdef BM_DIFFERENCE".endl()
         + "       colNew=abs(base - blend);".endl()
@@ -489,5 +486,6 @@ TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alpha
 
     TextureEffect.onChangeBlendSelect(shader, blendPort.get(), maskAlpha);
 };
+
 
 export { TextureEffect };
