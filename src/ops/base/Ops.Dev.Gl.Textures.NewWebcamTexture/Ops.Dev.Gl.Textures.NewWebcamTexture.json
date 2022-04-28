@@ -27,6 +27,21 @@
             "message": "Ops.Gl.Textures.WebcamTexture_v3 renamed to Ops.Dev.Gl.Textures.NewWebcamTexture",
             "author": "stephan",
             "date": 1627983328895
+        },
+        {
+            "message": " added core lib: cgl_copytexture",
+            "author": "pandur",
+            "date": 1651152292468
+        },
+        {
+            "message": "Ops.Dev.Gl.Textures.NewWebcamTexture renamed to Ops.Dev.NewWebcamTexture",
+            "author": "pandur",
+            "date": 1651158951165
+        },
+        {
+            "message": "Ops.Dev.NewWebcamTexture renamed to Ops.Dev.Gl.Textures.NewWebcamTexture",
+            "author": "pandur",
+            "date": 1651159008803
         }
     ],
     "layout": {
@@ -36,8 +51,9 @@
                 "name": "Render"
             },
             {
-                "type": 1,
-                "name": "Start webcam"
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -47,11 +63,13 @@
             {
                 "type": 0,
                 "name": "Webcam Input index",
+                "group": "Camera",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Facing index",
+                "group": "Camera",
                 "subType": "integer"
             },
             {
@@ -68,7 +86,13 @@
             },
             {
                 "type": 0,
-                "name": "Flip",
+                "name": "Flip X",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
                 "group": "Texture",
                 "subType": "boolean"
             },
@@ -85,18 +109,22 @@
             },
             {
                 "type": 0,
-                "name": "Flip X",
+                "name": "Element Flip X",
                 "group": "Video Element",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Flip Y",
+                "name": "Element Flip Y",
                 "group": "Video Element",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
             {
                 "type": 2,
                 "name": "Texture",
@@ -233,5 +261,8 @@
                 "text": "output trigger on updated texture"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl_copytexture"
+    ]
 }
