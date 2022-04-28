@@ -25,13 +25,14 @@ const
     outError = op.outString("Error"),
     outElement = op.outObject("HTML Element"),
     outDevices = op.outArray("Available devices"),
-    outSelectedDevice = op.outString("Select device"),
+    outSelectedDevice = op.outString("Active device"),
     outUpdate = op.outTrigger("Texture updated");
 
 op.setPortGroup("Camera", [inInputDevices, inFacing, inWidth, inHeight]);
 op.setPortGroup("Texture", [flipX, flipY]);
 op.setPortGroup("Video Element", [inAsDOM, inCss, htmlFlipX, htmlFlipY]);
 
+let tries = 0;
 const cgl = op.patch.cgl;
 const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
 const videoElement = document.createElement("video");
@@ -54,6 +55,7 @@ let currentStream = null;
 let camInputDevices = null;
 let active = false;
 let alreadyRetried = false;
+let constraints = null;
 
 textureOut.set(emptyTexture);
 
@@ -164,6 +166,13 @@ function camInitComplete(stream)
     videoElement.srcObject = stream;
     videoElement.onloadedmetadata = (e) =>
     {
+        outSelectedDevice.set(stream.getTracks()[0].label);
+        if (stream.getTracks()[0].label != inInputDevices.get() && tries < 3)
+        {
+            tries++;
+            return restartWebcam();
+        }
+
         restarting = false;
         outHeight.set(videoElement.videoHeight);
         outWidth.set(videoElement.videoWidth);
@@ -188,21 +197,19 @@ function isCorrectSize()
 
 function getCamConstraints()
 {
-    let constraints = { "audio": false, "video": {} };
+    let constr = { "audio": false, "video": {} };
 
     if (camLoaded)
     {
         let deviceLabel = inInputDevices.get();
         let deviceInfo = null;
+
         if (!deviceLabel || deviceLabel === "None")
         {
-            console.log("USE FIRST CAMERA");
-            deviceInfo = Object.values(camInputDevices)[0]; // get first camera
+            deviceInfo = Object.values(camInputDevices)[0];
         }
         else
         {
-            console.log("FIND BY LABEL", deviceInfo, camInputDevices, deviceLabel);
-            // Find by label
             deviceInfo = camInputDevices.filter((d) => d.label === deviceLabel);
             if (deviceInfo)
             {
@@ -214,22 +221,14 @@ function getCamConstraints()
             }
 
             if (!deviceInfo)
-            { // couldn't find, default
-                deviceInfo = Object.values(camInputDevices)[0]; // get first camera
-                // console.log('couldnt find camera, revert to cam 0',  deviceInfo);
+            {
+                deviceInfo = Object.values(camInputDevices)[0];
             }
         }
-        outSelectedDevice.set(deviceInfo.label);
-        constraints.video = { "deviceId": { "exact": deviceInfo.deviceId } };
-    }
-    else
-    {
-        console.log("NO CAM LOADED");
-        outSelectedDevice.set("");
+        constr.video = { "deviceId": { "exact": deviceInfo.deviceId } };
     }
 
-    console.log("supported", navigator.mediaDevices.getSupportedConstraints());
-    constraints.video.facingMode = inFacing.get();
+    constr.video.facingMode = inFacing.get();
     const w = inWidth.get();
     const h = inHeight.get();
     let width = {
@@ -249,10 +248,9 @@ function getCamConstraints()
         height.ideal = h;
     }
 
-    constraints.video.width = width;
-    constraints.video.height = height;
-    console.log("CONSTRAINTS", JSON.stringify(constraints));
-    return constraints;
+    constr.video.width = width;
+    constr.video.height = height;
+    return constr;
 }
 
 function restartWebcam()
@@ -260,13 +258,13 @@ function restartWebcam()
     stopStream();
     restarting = true;
 
-    const constraints = getCamConstraints();
+    const constr = getCamConstraints();
 
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     {
-        navigator.mediaDevices.getUserMedia(constraints)
+        navigator.mediaDevices.getUserMedia(constr)
             .then(camInitComplete)
             .catch((error) =>
             {
@@ -278,7 +276,7 @@ function restartWebcam()
     else if (navigator.getUserMedia)
     {
         restarting = false;
-        navigator.getUserMedia(constraints, camInitComplete, () => available.set(false));
+        navigator.getUserMedia(constr, camInitComplete, () => available.set(false));
     }
 }
 
@@ -296,7 +294,6 @@ function initDevices()
                 .filter((device) => device.kind === "videoinput");
 
             initingDevices = false;
-            console.log("AVAILABLE", camInputDevices);
             inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => d.label || idx);
             outDevices.set(inInputDevices.uiAttribs.values);
             cgl.patch.loading.finished(loadingId);
@@ -316,16 +313,14 @@ inTrigger.onTriggered = () =>
 {
     if (!initingDevices)
     {
-        // console.log( started,camLoaded, active);
         if (started && camLoaded && active)
         {
             updateTexture();
             outUpdate.trigger();
         }
 
-        if (!started && inActive.get() && restarting)
+        if (!started && inActive.get() && camLoaded)
         {
-            // console.log("restart!!!");
             restartWebcam();
         }
     }
