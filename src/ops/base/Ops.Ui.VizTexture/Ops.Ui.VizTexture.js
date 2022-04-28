@@ -11,7 +11,8 @@ inTex.onChange = () =>
     outTex.set(inTex.get());
 };
 
-op.renderPreviewLayer = (ctx, pos, size) =>
+// op.renderPreviewLayer = (ctx, pos, size) =>
+op.renderVizLayer = (ctx, layer) =>
 {
     const port = inTex;
     const texSlot = 5;
@@ -100,19 +101,19 @@ op.renderPreviewLayer = (ctx, pos, size) =>
     cgl.popPMatrix();
     cgl.resetViewPort();
 
-    const sizeImg = [size[0], size[1]];
+    const sizeImg = [layer.width, layer.height];
 
     const stretch = false;
     if (!stretch)
     {
-        if (portTex.width > portTex.height) sizeImg[1] = size[0] * sizeTex[1] / sizeTex[0];
+        if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
         else
         {
-            sizeImg[1] = size[0] * (sizeTex[1] / sizeTex[0]);
+            sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
 
-            if (sizeImg[1] > size[1])
+            if (sizeImg[1] > layer.height)
             {
-                const r = size[1] / sizeImg[1];
+                const r = layer.height / sizeImg[1];
                 sizeImg[0] *= r;
                 sizeImg[1] *= r;
             }
@@ -126,27 +127,27 @@ op.renderPreviewLayer = (ctx, pos, size) =>
     if (!ctx.imageSmoothingEnabled)
     {
         ctx.fillStyle = "#ffffff";
-        ctx.fillRect(pos[0], pos[1] - 10, 10, 10);
+        ctx.fillRect(layer.x, layer.y - 10, 10, 10);
         ctx.fillStyle = "#000000";
-        ctx.fillRect(pos[0], pos[1] - 10, 5, 5);
-        ctx.fillRect(pos[0] + 5, pos[1] - 10 + 5, 5, 5);
+        ctx.fillRect(layer.x, layer.y - 10, 5, 5);
+        ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
     }
 
-    let numX = (10 * size[0] / size[1]);
-    let stepY = (size[1] / 10);
-    let stepX = (size[0] / numX);
+    let numX = (10 * layer.width / layer.height);
+    let stepY = (layer.height / 10);
+    let stepX = (layer.width / numX);
     for (let x = 0; x < numX; x++)
         for (let y = 0; y < 10; y++)
         {
             if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
             else ctx.fillStyle = "#393939";
-            ctx.fillRect(pos[0] + stepX * x, pos[1] + stepY * y, stepX, stepY);
+            ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
         }
 
     ctx.drawImage(cgl.canvas,
         0, 0,
         s[0], s[1],
-        pos[0] + (size[0] - sizeImg[0]) / 2, pos[1] + (size[1] - sizeImg[1]) / 2,
+        layer.x + (layer.width - sizeImg[0]) / 2, layer.y + (layer.height - sizeImg[1]) / 2,
         sizeImg[0], sizeImg[1]);
 
     if (port.get() && port.get().getInfoOneLine) outInfo.set(port.get().getInfoOneLine());

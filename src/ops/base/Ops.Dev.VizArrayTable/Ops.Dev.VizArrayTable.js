@@ -2,20 +2,13 @@ const inArr = op.inArray("Array");
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
-op.renderPreviewLayer = (ctx, pos, size) =>
+op.renderVizLayer = (ctx, layer) =>
 {
     ctx.fillStyle = "#222";
-    ctx.fillRect(
-        pos[0],
-        pos[1],
-        size[0],
-        size[1]
-    );
-
-    const sc = 1000 / gui.patchView._patchRenderer.viewBox.zoom * 1.5;
+    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
     ctx.save();
-    ctx.scale(sc, sc);
+    ctx.scale(layer.scale, layer.scale);
 
     ctx.font = "normal 10px sourceCodePro";
     ctx.fillStyle = "#ccc";
@@ -34,7 +27,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
     if (inArr.links.length > 0 && inArr.links[0].getOtherPort(inArr))
         stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || 1;
 
-    let lines = Math.floor(size[1] / sc / 10 - 1);
+    let lines = Math.floor(layer.height / layer.scale / 10 - 1);
     let padding = 4;
 
     for (let i = 0; i < lines * stride; i += stride)
@@ -42,8 +35,8 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         ctx.fillStyle = "#666";
 
         ctx.fillText(i / stride,
-            pos[0] / sc + padding,
-            pos[1] / sc + 10 + i / stride * 10 + padding);
+            layer.x / layer.scale + padding,
+            layer.y / layer.scale + 10 + i / stride * 10 + padding);
 
         ctx.fillStyle = "#ccc";
 
@@ -64,7 +57,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
             }
             else if (typeof v == "object") str = "{}";
 
-            ctx.fillText(str, pos[0] / sc + s * 100 + 50, pos[1] / sc + 10 + i / stride * 10 + padding);
+            ctx.fillText(str, layer.x / layer.scale + s * 100 + 50, layer.y / layer.scale + 10 + i / stride * 10 + padding);
         }
     }
 
