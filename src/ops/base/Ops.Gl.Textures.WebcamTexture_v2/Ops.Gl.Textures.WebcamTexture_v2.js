@@ -136,8 +136,6 @@ function camInitComplete(stream)
 
 function startWebcam()
 {
-    console.log("startWebcam");
-    // removeElement();
     const constraints = { "audio": false, "video": {} };
 
     constraints.video.facingMode = inFacing.get();
