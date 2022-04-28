@@ -19,7 +19,7 @@ geometry.onChange = function ()
     let geom = geometry.get();
     if (geom)
     {
-        info = geom.getInfo();
+        const info = geom.getInfo();
         outFaces.set(info.Faces);
         outVertices.set(info.numVerts);
         outNormals.set(info.numNormals);
