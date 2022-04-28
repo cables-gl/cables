@@ -37,7 +37,7 @@ videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("style", inCss.get());
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
 
-const tex = new CGL.Texture(cgl);
+const tex = new CGL.Texture(cgl, { "name": "webcam" });
 tex.setSize(8, 8);
 textureOut.set(tex);
 

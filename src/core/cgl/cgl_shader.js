@@ -1529,9 +1529,6 @@ Shader.prototype.pushTexture = function (uniform, t, type)
         return;
     }
 
-
-    // this._cgl.setTexture(this._textureStackTex.length-1,this._textureStackTex[i],this._textureStackType[i]);
-
     this._textureStackUni.push(uniform);
 
     if (t.hasOwnProperty("tex"))
@@ -1573,6 +1570,18 @@ Shader.prototype.popTextures = function ()
     this._textureStackTexCgl.length =
     this._textureStackType.length =
     this._textureStackUni.length = 0;
+};
+
+Shader.prototype.getInfo = function ()
+{
+    const info = {};
+    info.name = this._name;
+    // info.modules = JSON.parse(JSON.stringify(this._modules));
+    // info.defines = JSON.parse(JSON.stringify(this._defines));
+    info.defines = this.getDefines();
+    info.hasErrors = this.hasErrors();
+
+    return info;
 };
 
 // --------------------------
@@ -1660,5 +1669,6 @@ Shader.createShader = function (cgl, str, type, cglShader)
     // cgl.printError("shader create2");
     return shader;
 };
+
 
 export { Shader };
