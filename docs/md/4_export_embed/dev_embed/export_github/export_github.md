@@ -42,6 +42,9 @@ This is a good way to have multiple patches in the same repository but in differ
 
 Enter your generated [access token](https://github.com/settings/tokens) that has at least "repo" permissions in github.
 
+## Video Tutorial
+<iframe width="384" height="216" src="https://www.youtube.com/watch?v=1TwP5DQoef4" title="Github Pages Export - Byte Size" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## WALKTHOUGH
 - enter the above information
 - click on button
