@@ -52,6 +52,16 @@
                 "type": 2,
                 "name": "RGBE Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -61,7 +71,7 @@
             },
             {
                 "type": 2,
-                "name": "HDR Textiure",
+                "name": "HDR Texture",
                 "objType": "texture"
             }
         ],
