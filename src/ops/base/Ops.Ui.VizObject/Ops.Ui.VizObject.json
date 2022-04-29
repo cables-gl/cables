@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.VizObject renamed to Ops.Dev.VizObject",
             "author": "pandur",
             "date": 1651131537480
+        },
+        {
+            "message": "Ops.Dev.VizObject renamed to Ops.Ui.VizObject",
+            "author": "pandur",
+            "date": 1651219336727
         }
     ],
     "authorName": "pandur",

@@ -25,6 +25,11 @@
             "message": "Ops.User.pandur.VizBool renamed to Ops.Dev.VizBool",
             "author": "pandur",
             "date": 1651126681345
+        },
+        {
+            "message": "Ops.Dev.VizBool renamed to Ops.Ui.VizBool",
+            "author": "pandur",
+            "date": 1651219287608
         }
     ],
     "layout": {
