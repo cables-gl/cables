@@ -18,7 +18,7 @@ const
 
     r3 = op.inValueSlider("r3", Math.random()),
     g3 = op.inValueSlider("g3", Math.random()),
-    b3 = op.inValueSlider("b3", Math.random());
+    b3 = op.inValueSlider("b3", Math.random()),
 
     randomize = op.inTriggerButton("Randomize"),
     next = op.outTrigger("Next");
@@ -56,14 +56,14 @@ smoothStep.onChange =
 
 function updateDefines()
 {
-    shader.toggleDefine("GRAD_SMOOTHSTEP",smoothStep.get());
-    shader.toggleDefine("GRAD_X",gType.get() == "X");
-    shader.toggleDefine("GRAD_XY",gType.get() == "XY");
-    shader.toggleDefine("GRAD_Y",gType.get() == "Y");
-    shader.toggleDefine("GRAD_RADIAL",gType.get() == "Radial");
+    shader.toggleDefine("GRAD_SMOOTHSTEP", smoothStep.get());
+    shader.toggleDefine("GRAD_X", gType.get() == "X");
+    shader.toggleDefine("GRAD_XY", gType.get() == "XY");
+    shader.toggleDefine("GRAD_Y", gType.get() == "Y");
+    shader.toggleDefine("GRAD_RADIAL", gType.get() == "Radial");
 }
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount,maskAlpha);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 randomize.onTriggered = function ()
 {
