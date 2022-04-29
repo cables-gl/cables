@@ -1,0 +1,32 @@
+{
+    "id": "d09bc53e-9f52-4872-94c7-4ef777512222",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647421046849
+        },
+        {
+            "message": "Ops.User.pandur.VizObject renamed to Ops.Dev.VizObject",
+            "author": "pandur",
+            "date": 1651131537480
+        },
+        {
+            "message": "Ops.Dev.VizObject renamed to Ops.Ui.VizObject",
+            "author": "pandur",
+            "date": 1651219336727
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1647421072154,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Dev.VizObject"
+    }
+}
