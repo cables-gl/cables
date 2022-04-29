@@ -144,11 +144,13 @@ const Op = function ()
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
+
         for (const p in newAttribs)
         {
             this.uiAttribs[p] = newAttribs[p];
         }
 
+        if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
         if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
         this.fireEvent("onUiAttribsChange", newAttribs);
         this.patch.emitEvent("onUiAttribsChange", this);
