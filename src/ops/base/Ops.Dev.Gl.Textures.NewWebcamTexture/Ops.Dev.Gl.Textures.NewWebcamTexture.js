@@ -311,7 +311,7 @@ function initDevices()
 
 inTrigger.onTriggered = () =>
 {
-    if (!initingDevices)
+    if (!initingDevices && inActive.get())
     {
         if (started && camLoaded && active)
         {
@@ -319,7 +319,7 @@ inTrigger.onTriggered = () =>
             outUpdate.trigger();
         }
 
-        if (!started && inActive.get() && camLoaded)
+        if (!started && camLoaded)
         {
             restartWebcam();
         }

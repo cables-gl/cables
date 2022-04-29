@@ -215,16 +215,13 @@ const Op = function ()
     Op.prototype.addInPort = function (p)
     {
         if (!(p instanceof Port))
-        {
             throw new Error("parameter is not a port!");
-        }
+
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p.parent = this;
+
         this.portsIn.push(p);
-
-        // if (this.onAddPort) this.onAddPort(p);
         this.fireEvent("onPortAdd", p);
-
 
         return p;
     };
@@ -284,9 +281,7 @@ const Op = function ()
      * @param {String} name
      * @param {Number} value
      * @return {Port} created port
-
      */
-
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
         // old // old
@@ -308,7 +303,6 @@ const Op = function ()
      * @param {Boolean} value
      * @return {Port} created port
      */
-
     Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
     {
         // old

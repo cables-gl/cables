@@ -84,7 +84,7 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    if (inTex.get()) isFloatTex = inTex.get().isFloatingPoint();
+    if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
     isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
     return isFloatTex;
 }
