@@ -1,22 +1,22 @@
-const DEFAULT_WIDTH = 640;
-const DEFAULT_HEIGHT = 480;
-
 const
     inTrigger = op.inTrigger("Render"),
-    inStart = op.inTriggerButton("Start webcam"),
-    inActive = op.inValueBool("Generate Texture", true),
+    inActive = op.inBool("Active", true),
+    inGenTex = op.inValueBool("Generate Texture", true),
     inInputDevices = op.inDropDown("Webcam Input", ["None"]),
     inFacing = op.inSwitch("Facing", ["environment", "user"], "environment"),
-    inWidth = op.inValueInt("Requested Width", 640),
-    inHeight = op.inValueInt("Requested Height", 480),
+    inWidth = op.inValueInt("Requested Width", 1280),
+    inHeight = op.inValueInt("Requested Height", 720),
 
-    flip = op.inValueBool("Flip", false),
+    flipX = op.inValueBool("Flip X", true),
+    flipY = op.inValueBool("Flip Y", false),
 
     inAsDOM = op.inValueBool("Show HTML Element", false),
-    textureOut = op.outTexture("Texture"),
     inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),
-    htmlFlipX = op.inValueBool("Flip X", false),
-    htmlFlipY = op.inValueBool("Flip Y", false),
+    htmlFlipX = op.inValueBool("Element Flip X", false),
+    htmlFlipY = op.inValueBool("Element Flip Y", false),
+
+    next = op.outTrigger("Next"),
+    textureOut = op.outTexture("Texture"),
 
     outRatio = op.outNumber("Ratio"),
     available = op.outBool("Available"),
@@ -25,21 +25,19 @@ const
     outError = op.outString("Error"),
     outElement = op.outObject("HTML Element"),
     outDevices = op.outArray("Available devices"),
-    outSelectedDevice = op.outString("Select device"),
+    outSelectedDevice = op.outString("Active device"),
     outUpdate = op.outTrigger("Texture updated");
 
 op.setPortGroup("Camera", [inInputDevices, inFacing, inWidth, inHeight]);
-op.setPortGroup("Texture", [flip]);
+op.setPortGroup("Texture", [flipX, flipY]);
 op.setPortGroup("Video Element", [inAsDOM, inCss, htmlFlipX, htmlFlipY]);
 
-inWidth.onChange = inHeight.onChange = restartWebcam;
-inFacing.onChange = inInputDevices.onChange = startWebcam;
-
-htmlFlipX.onChange = htmlFlipY.onChange = flipVideoElement;
-
+let tries = 0;
 const cgl = op.patch.cgl;
+const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
 const videoElement = document.createElement("video");
 const eleId = "webcam" + op.id;
+
 videoElement.setAttribute("id", eleId);
 videoElement.setAttribute("autoplay", "");
 videoElement.setAttribute("muted", "");
@@ -47,10 +45,9 @@ videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("style", inCss.get());
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
 
-const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
-let tex = emptyTexture;
-textureOut.set(tex);
-
+let tex = null;
+let initingDevices = false;
+let restarting = false;
 let started = false;
 let camLoaded = false;
 let loadingId = null;
@@ -58,11 +55,39 @@ let currentStream = null;
 let camInputDevices = null;
 let active = false;
 let alreadyRetried = false;
+let constraints = null;
 
+textureOut.set(emptyTexture);
+
+flipX.onChange =
+flipY.onChange = initCopyShader;
+
+inInputDevices.onChange =
+    inWidth.onChange =
+    inHeight.onChange = restartWebcam;
+htmlFlipX.onChange = htmlFlipY.onChange = flipVideoElement;
 op.onDelete = removeElement;
 inAsDOM.onChange = inCss.onChange = updateStyle;
 
+initTexture();
 updateStyle();
+initDevices();
+
+let tc = null;
+
+function initCopyShader()
+{
+    if (!tc)tc = new CGL.CopyTexture(cgl, "webcamFlippedTexture", { "shader": attachments.texcopy_frag });
+    tc.bgShader.toggleDefine("FLIPX", flipX.get());
+    tc.bgShader.toggleDefine("FLIPY", !flipY.get());
+}
+
+function initTexture()
+{
+    if (tex)tex.delete();
+    tex = new CGL.Texture(cgl, { "name": "webcam" });
+    if (videoElement) tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
+}
 
 function removeElement()
 {
@@ -71,30 +96,20 @@ function removeElement()
 
 function updateStyle()
 {
-    if (!inAsDOM.get())
-        videoElement.setAttribute("style", "display:none;");
-    else
-        videoElement.setAttribute("style", inCss.get());
+    if (!inAsDOM.get()) videoElement.setAttribute("style", "display:none;");
+    else videoElement.setAttribute("style", inCss.get());
+
+    inCss.setUiAttribs({ "greyout": !inAsDOM.get() });
+    htmlFlipX.setUiAttribs({ "greyout": !inAsDOM.get() });
+    htmlFlipY.setUiAttribs({ "greyout": !inAsDOM.get() });
 }
 
 function flipVideoElement()
 {
-    if (htmlFlipX.get() && !htmlFlipY.get())
-    {
-        videoElement.style.transform = "scaleX(-1)";
-    }
-    else if (!htmlFlipX.get() && htmlFlipY.get())
-    {
-        videoElement.style.transform = "scaleY(-1)";
-    }
-    else if (htmlFlipX.get() && htmlFlipY.get())
-    {
-        videoElement.style.transform = "scale(-1, -1)";
-    }
-    else
-    {
-        videoElement.style.transform = "unset";
-    }
+    if (htmlFlipX.get() && !htmlFlipY.get()) videoElement.style.transform = "scaleX(-1)";
+    else if (!htmlFlipX.get() && htmlFlipY.get()) videoElement.style.transform = "scaleY(-1)";
+    else if (htmlFlipX.get() && htmlFlipY.get()) videoElement.style.transform = "scale(-1, -1)";
+    else videoElement.style.transform = "unset";
 }
 
 function playCam(shouldPlay)
@@ -114,25 +129,26 @@ function playCam(shouldPlay)
     }
 }
 
-inActive.onChange = () =>
+inGenTex.onChange = () =>
 {
-    playCam(inActive.get());
+    playCam(inGenTex.get());
 };
 
 function updateTexture()
 {
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
-    cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, !flip.get());
 
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-    textureOut.set(tex);
+    textureOut.set(emptyTexture);
+
+    if (!tc)initCopyShader();
+    if (tc)textureOut.set(tc.copy(tex));
 }
 
 function stopStream()
 {
-    if (!currentStream)
-        return;
+    if (!currentStream) return;
 
     playCam(false);
     available.set(false);
@@ -150,6 +166,14 @@ function camInitComplete(stream)
     videoElement.srcObject = stream;
     videoElement.onloadedmetadata = (e) =>
     {
+        outSelectedDevice.set(stream.getTracks()[0].label);
+        if (stream.getTracks()[0].label != inInputDevices.get() && tries < 3)
+        {
+            tries++;
+            return restartWebcam();
+        }
+
+        restarting = false;
         outHeight.set(videoElement.videoHeight);
         outWidth.set(videoElement.videoWidth);
         outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
@@ -157,11 +181,10 @@ function camInitComplete(stream)
 
         outElement.set(videoElement);
 
-        tex.videoElement = videoElement;
         tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
 
         available.set(true);
-        playCam(inActive.get());
+        playCam(inGenTex.get());
     };
 }
 
@@ -174,22 +197,20 @@ function isCorrectSize()
 
 function getCamConstraints()
 {
-    let constraints = { "audio": false, "video": {} };
+    let constr = { "audio": false, "video": {} };
 
     if (camLoaded)
     {
         let deviceLabel = inInputDevices.get();
         let deviceInfo = null;
+
         if (!deviceLabel || deviceLabel === "None")
         {
-            console.log("USE FIRST CAMERA");
-            deviceInfo = Object.values(camInputDevices)[0]; // get first camera
+            deviceInfo = Object.values(camInputDevices)[0];
         }
         else
         {
-            console.log("FIND BY LABEL", deviceInfo, camInputDevices, deviceLabel);
-            // Find by label
-            deviceInfo = camInputDevices.filter((d) => { return d.label === deviceLabel; });
+            deviceInfo = camInputDevices.filter((d) => d.label === deviceLabel);
             if (deviceInfo)
             {
                 deviceInfo = deviceInfo[0];
@@ -200,29 +221,21 @@ function getCamConstraints()
             }
 
             if (!deviceInfo)
-            { // couldn't find, default
-                deviceInfo = Object.values(camInputDevices)[0]; // get first camera
-                // console.log('couldnt find camera, revert to cam 0',  deviceInfo);
+            {
+                deviceInfo = Object.values(camInputDevices)[0];
             }
         }
-        outSelectedDevice.set(deviceInfo.label);
-        constraints.video = { "deviceId": { "exact": deviceInfo.deviceId } };
-    }
-    else
-    {
-        console.log("NO CAM LOADED");
-        outSelectedDevice.set("");
+        constr.video = { "deviceId": { "exact": deviceInfo.deviceId } };
     }
 
-    console.log("supported", navigator.mediaDevices.getSupportedConstraints());
-    constraints.video.facingMode = inFacing.get();
+    constr.video.facingMode = inFacing.get();
     const w = inWidth.get();
     const h = inHeight.get();
     let width = {
-        "min": DEFAULT_WIDTH
+        "min": 640
     };
     let height = {
-        "min": DEFAULT_HEIGHT
+        "min": 480
     };
 
     if (w)
@@ -235,66 +248,60 @@ function getCamConstraints()
         height.ideal = h;
     }
 
-    constraints.video.width = width;
-    constraints.video.height = height;
-    console.log("CONSTRAINTS", JSON.stringify(constraints));
-    return constraints;
+    constr.video.width = width;
+    constr.video.height = height;
+    return constr;
 }
 
 function restartWebcam()
 {
     stopStream();
+    restarting = true;
 
-    const constraints = getCamConstraints();
+    const constr = getCamConstraints();
 
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     {
-        navigator.mediaDevices.getUserMedia(constraints)
+        navigator.mediaDevices.getUserMedia(constr)
             .then(camInitComplete)
             .catch((error) =>
             {
+                restarting = false;
                 op.logError(error.name + ": " + error.message, error);
                 outError.set(error.name + ": " + error.message);
             });
     }
     else if (navigator.getUserMedia)
     {
-        navigator.getUserMedia(constraints, camInitComplete, () => { return available.set(false); });
+        restarting = false;
+        navigator.getUserMedia(constr, camInitComplete, () => available.set(false));
     }
-}
-
-function startWebcam()
-{
-    if (!started || !camLoaded)
-    {
-        return;
-    }
-
-    restartWebcam();
 }
 
 function initDevices()
 {
+    initingDevices = true;
     loadingId = cgl.patch.loading.start("Webcam inputs", "");
     const constraints = getCamConstraints();
 
     navigator.mediaDevices.getUserMedia(constraints)
-        .then((res) => { return navigator.mediaDevices.enumerateDevices(); })
+        .then((res) => navigator.mediaDevices.enumerateDevices())
         .then((devices) =>
         {
             camInputDevices = devices
-                .filter((device) => { return device.kind === "videoinput"; });
+                .filter((device) => device.kind === "videoinput");
 
-            console.log("AVAILABLE", camInputDevices);
-            inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => { return d.label || idx; });
+            initingDevices = false;
+            inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => d.label || idx);
             outDevices.set(inInputDevices.uiAttribs.values);
             cgl.patch.loading.finished(loadingId);
             camLoaded = true;
-            startWebcam();
+            started = true;
         }).catch((e) =>
         {
+            initingDevices = false;
             console.log("error", e);
             outError.set(e.name + ": " + e.message);
             cgl.patch.loading.finished(loadingId);
@@ -302,23 +309,21 @@ function initDevices()
         });
 }
 
-inStart.onTriggered = () =>
-{
-    if (!started)
-    {
-        started = true;
-        if (!camLoaded)
-        {
-            initDevices();
-        }
-    }
-};
-
 inTrigger.onTriggered = () =>
 {
-    if (started && camLoaded && active)
+    if (!initingDevices)
     {
-        updateTexture();
-        outUpdate.trigger();
+        if (started && camLoaded && active)
+        {
+            updateTexture();
+            outUpdate.trigger();
+        }
+
+        if (!started && inActive.get() && camLoaded)
+        {
+            restartWebcam();
+        }
     }
+
+    next.trigger();
 };

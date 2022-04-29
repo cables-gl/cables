@@ -1593,6 +1593,22 @@ const Op = function ()
     {
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     };
+
+
+    /**
+     * Implement to render 2d canvas based graphics from in an op
+     * @function isCurrentUiOp
+     * @instance
+     * @memberof Op
+     * @param {ctx} context of canvas 2d
+     * @param {Object} layer info
+     * @param {number} layer.x x position on canvas
+     * @param {number} layer.y y position on canvas
+     * @param {number} layer.width width of canvas
+     * @param {number} layer.height height of canvas
+     * @param {number} layer.scale current scaling of patchfield view
+     */
+    Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
 
 /**

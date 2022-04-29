@@ -1,5 +1,5 @@
 {
-    "id": "22b731fe-bc97-42fe-a550-92cf0cedb133",
+    "id": "cf194306-175b-416a-b90e-31ff2192a190",
     "changelog": [
         {
             "message": "created op",
@@ -15,23 +15,29 @@
             "message": "Ops.Dev.Logger renamed to Ops.Dev.VizLogger",
             "author": "pandur",
             "date": 1645187932105
+        },
+        {
+            "message": "cloned op from Ops.Dev.VizLogger",
+            "author": "pandur",
+            "date": 1649238794135
+        },
+        {
+            "message": "Ops.User.pandur.VizBool renamed to Ops.Dev.VizBool",
+            "author": "pandur",
+            "date": 1651126681345
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 0,
-                "name": "Number",
-                "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "String"
+                "name": "Boolean",
+                "subType": "boolean"
             }
         ],
         "portsOut": [],
-        "name": "Ops.Dev.VizLogger"
+        "name": "Ops.Dev.VizBool"
     },
     "authorName": "pandur",
-    "created": 1645174874478
+    "created": 1649238794135
 }

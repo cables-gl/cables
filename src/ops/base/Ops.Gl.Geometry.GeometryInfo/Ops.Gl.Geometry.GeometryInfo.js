@@ -12,8 +12,6 @@ const
 
 geometry.onLinkChanged = () =>
 {
-    // console.log("link change!");
-    // console.log(geometry.get());
 };
 
 geometry.onChange = function ()
@@ -21,33 +19,16 @@ geometry.onChange = function ()
     let geom = geometry.get();
     if (geom)
     {
-        outFaces.set(geom.verticesIndices.length / 3);
-
-        if (geom.vertices) outVertices.set(geom.vertices.length / 3);
-        else outVertices.set(0);
-
-        if (geom.vertexNormals) outNormals.set(geom.vertexNormals.length / 3);
-        else outNormals.set(0);
-
-        if (geom.texCoords) outTexCoords.set(geom.texCoords.length / 2);
-        else outTexCoords.set(0);
-
-        if (geom.tangents) outTangents.set(geom.tangents.length / 3);
-        else outTangents.set(0);
-
-        if (geom.biTangents) outBiTangents.set(geom.biTangents.length / 3);
-        else outBiTangents.set(0);
-
-        if (geom.biTangents) outBiTangents.set(geom.biTangents.length / 3);
-        else outBiTangents.set(0);
-
-        if (geom.vertexColors) outVertexColors.set(geom.vertexColors.length / 4);
-        else outVertexColors.set(0);
-
-        if (geom.getAttributes()) outAttribs.set(Object.keys(geom.getAttributes()).length);
-        else outAttribs.set(0);
-
-        outIndexed.set(geom.isIndexed());
+        const info = geom.getInfo();
+        outFaces.set(info.Faces);
+        outVertices.set(info.numVerts);
+        outNormals.set(info.numNormals);
+        outTexCoords.set(info.numTexCoords);
+        outTangents.set(info.numTangents);
+        outBiTangents.set(info.numBiTangents);
+        outVertexColors.set(info.numVertexColors);
+        outAttribs.set(info.numAttribs);
+        outIndexed.set(info.isIndexed);
     }
     else
     {
