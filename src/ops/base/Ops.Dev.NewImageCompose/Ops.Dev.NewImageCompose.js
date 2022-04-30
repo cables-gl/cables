@@ -11,8 +11,8 @@ const
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
     outRatio = op.outNumber("Aspect Ratio"),
-    outWidth = op.outNumber("Width"),
-    outHeight = op.outNumber("Height");
+    outWidth = op.outNumber("Texture Width"),
+    outHeight = op.outNumber("Texture Height");
 
 const cgl = op.patch.cgl;
 op.setPortGroup("Texture Size", [inUseVPSize, width, height, inWrap, inFilter, inPixel]);
@@ -84,7 +84,7 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    if (inTex.get()) isFloatTex = inTex.get().isFloatingPoint();
+    if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
     isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
     return isFloatTex;
 }

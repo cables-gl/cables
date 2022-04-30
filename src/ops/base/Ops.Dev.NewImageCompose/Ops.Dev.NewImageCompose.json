@@ -64,12 +64,12 @@
             },
             {
                 "type": 0,
-                "name": "Width",
+                "name": "Texture Width",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Height",
+                "name": "Texture Height",
                 "subType": "number"
             }
         ],
