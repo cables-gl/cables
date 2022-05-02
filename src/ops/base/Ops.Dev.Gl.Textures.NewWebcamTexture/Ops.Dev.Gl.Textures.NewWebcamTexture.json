@@ -68,12 +68,6 @@
             },
             {
                 "type": 0,
-                "name": "Facing index",
-                "group": "Camera",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Requested Width",
                 "group": "Camera",
                 "subType": "integer"

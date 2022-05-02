@@ -2,12 +2,12 @@ const
     inTrigger = op.inTrigger("Render"),
     inActive = op.inBool("Active", true),
     inGenTex = op.inValueBool("Generate Texture", true),
-    inInputDevices = op.inDropDown("Webcam Input", ["None"]),
-    inFacing = op.inSwitch("Facing", ["environment", "user"], "environment"),
+    inInputDevices = op.inDropDown("Webcam Input", ["Default"], "Default"),
+    // inFacing = op.inSwitch("Facing", ["environment", "user"], "environment"),
     inWidth = op.inValueInt("Requested Width", 1280),
     inHeight = op.inValueInt("Requested Height", 720),
 
-    flipX = op.inValueBool("Flip X", true),
+    flipX = op.inValueBool("Flip X", false),
     flipY = op.inValueBool("Flip Y", false),
 
     inAsDOM = op.inValueBool("Show HTML Element", false),
@@ -28,7 +28,7 @@ const
     outSelectedDevice = op.outString("Active device"),
     outUpdate = op.outTrigger("Texture updated");
 
-op.setPortGroup("Camera", [inInputDevices, inFacing, inWidth, inHeight]);
+op.setPortGroup("Camera", [inInputDevices, inWidth, inHeight]);
 op.setPortGroup("Texture", [flipX, flipY]);
 op.setPortGroup("Video Element", [inAsDOM, inCss, htmlFlipX, htmlFlipY]);
 
@@ -49,7 +49,7 @@ let tex = null;
 let initingDevices = false;
 let restarting = false;
 let started = false;
-let camLoaded = false;
+let camsLoaded = false;
 let loadingId = null;
 let currentStream = null;
 let camInputDevices = null;
@@ -114,7 +114,7 @@ function flipVideoElement()
 
 function playCam(shouldPlay)
 {
-    if (started && camLoaded)
+    if (started && camsLoaded)
     {
         if (shouldPlay)
         {
@@ -166,24 +166,31 @@ function camInitComplete(stream)
     videoElement.srcObject = stream;
     videoElement.onloadedmetadata = (e) =>
     {
+        // console.log(stream.getTracks());
+
         outSelectedDevice.set(stream.getTracks()[0].label);
-        if (stream.getTracks()[0].label != inInputDevices.get() && tries < 3)
+        if (inInputDevices.get() != "Default" && stream.getTracks()[0].label != inInputDevices.get() && tries < 3)
         {
             tries++;
+            // console.log("try again...");
             return restartWebcam();
         }
 
+        // console.log(stream.getTracks()[0].getSettings());
+
+        const settings = stream.getTracks()[0].getSettings();
         restarting = false;
-        outHeight.set(videoElement.videoHeight);
-        outWidth.set(videoElement.videoWidth);
-        outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
+        outHeight.set(settings.height);
+        outWidth.set(settings.width);
+        outRatio.set(settings.aspectRatio || settings.width / settings.height);
         outError.set("");
 
         outElement.set(videoElement);
 
-        tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
+        tex.setSize(settings.width, settings.height);
 
         available.set(true);
+        // console.log("cam init complete");
         playCam(inGenTex.get());
     };
 }
@@ -199,12 +206,12 @@ function getCamConstraints()
 {
     let constr = { "audio": false, "video": {} };
 
-    if (camLoaded)
+    if (camsLoaded)
     {
         let deviceLabel = inInputDevices.get();
         let deviceInfo = null;
 
-        if (!deviceLabel || deviceLabel === "None")
+        if (!deviceLabel || deviceLabel === "Default" || deviceLabel === "...")
         {
             deviceInfo = Object.values(camInputDevices)[0];
         }
@@ -228,28 +235,24 @@ function getCamConstraints()
         constr.video = { "deviceId": { "exact": deviceInfo.deviceId } };
     }
 
-    constr.video.facingMode = inFacing.get();
+    // constr.video.facingMode = { "exact": inFacing.get() };
+
     const w = inWidth.get();
     const h = inHeight.get();
-    let width = {
-        "min": 640
-    };
-    let height = {
-        "min": 480
-    };
+    let width = { "min": 640 };
+    let height = { "min": 480 };
 
     if (w)
-    {
         width.ideal = w;
-    }
 
     if (h)
-    {
         height.ideal = h;
-    }
 
     constr.video.width = width;
     constr.video.height = height;
+
+    // console.log("constraints", constr);
+
     return constr;
 }
 
@@ -275,6 +278,7 @@ function restartWebcam()
     }
     else if (navigator.getUserMedia)
     {
+        // console.log("nope");
         restarting = false;
         navigator.getUserMedia(constr, camInitComplete, () => available.set(false));
     }
@@ -295,17 +299,21 @@ function initDevices()
 
             initingDevices = false;
             inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => d.label || idx);
+            inInputDevices.uiAttribs.values.unshift("Default");
             outDevices.set(inInputDevices.uiAttribs.values);
             cgl.patch.loading.finished(loadingId);
-            camLoaded = true;
+
+            camsLoaded = true;
+
+            restartWebcam();
             started = true;
         }).catch((e) =>
         {
             initingDevices = false;
-            console.log("error", e);
+            console.error("error", e);
             outError.set(e.name + ": " + e.message);
             cgl.patch.loading.finished(loadingId);
-            camLoaded = false;
+            camsLoaded = false;
         });
 }
 
@@ -313,13 +321,15 @@ inTrigger.onTriggered = () =>
 {
     if (!initingDevices && inActive.get())
     {
-        if (started && camLoaded && active)
+        if (started && camsLoaded && active)
         {
             updateTexture();
             outUpdate.trigger();
         }
 
-        if (!started && camLoaded)
+        // console.log(active, started, camsLoaded);
+
+        if (!started && camsLoaded)
         {
             restartWebcam();
         }
