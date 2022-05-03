@@ -63,10 +63,8 @@ function removeElement()
 
 function updateStyle()
 {
-    if (!inAsDOM.get())
-        videoElement.setAttribute("style", "display:none;");
-    else
-        videoElement.setAttribute("style", inCss.get());
+    if (!inAsDOM.get()) videoElement.setAttribute("style", "display:none;");
+    else videoElement.setAttribute("style", inCss.get());
 }
 
 inActive.onChange = function ()
@@ -109,6 +107,8 @@ function updateTexture()
     tex.setSize(videoElement.videoWidth || width.get(), videoElement.videoHeight || height.get());
 
     outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
+
+    cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 
     if (!canceled) timeout = setTimeout(updateTexture, 1000 / fps.get());
 }
