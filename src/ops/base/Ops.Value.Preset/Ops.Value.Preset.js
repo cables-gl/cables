@@ -368,6 +368,19 @@ function listenPortChange(port, varname)
     {
         op.patch.setVarValue(varname, port.get());
     };
+
+    port.addEventListener("onUiAttrChange", (attribs) =>
+    {
+        if (attribs.title)
+        {
+            const thePort = data.find((p) => { return p.varname === varname; });
+            if (thePort)
+            {
+                thePort.title = attribs.title;
+                saveData();
+            }
+        }
+    });
 }
 
 op.patch.addEventListener("onOpDelete", (optodelete) =>
