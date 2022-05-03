@@ -50,12 +50,16 @@
             "message": "Ops.Admin.Mediapipe.MpFace renamed to Ops.Dev.Mediapipe.MpFace",
             "author": "pandur",
             "date": 1623913587428
+        },
+        {
+            "message": " removed lib: mp_hands.js",
+            "author": "pandur",
+            "date": 1651570340371
         }
     ],
     "authorName": "cables",
     "created": 1608589845823,
     "libs": [
-        "mp_hands.js",
         "mp_camera_utils.js",
         "mp_face_mesh.js"
     ],
