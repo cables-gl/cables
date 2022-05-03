@@ -720,8 +720,7 @@ Patch.prototype.serialize = function (options)
     const obj = {};
 
     options = options || {};
-    const blueprintIds = [];
-    if (!options.hasOwnProperty("removeBlueprints")) options.removeBlueprints = true;
+    if (!options.hasOwnProperty("removeBlueprints"))options.removeBlueprints = true;
     if (!options.hasOwnProperty("removeFromNetworkAttr"))options.removeFromNetworkAttr = true;
 
     obj.ops = [];
@@ -730,33 +729,13 @@ Patch.prototype.serialize = function (options)
     {
         const op = this.ops[i];
 
-        if (options.removeBlueprints)
-        {
-            if (op.storage && op.storage.blueprint)
-            {
-                if (op.objName && op.objName.startsWith("Ops.Ui.SubPatch") && op.storage.blueprint.subpatchInstance)
-                {
-                    blueprintIds.push(op.storage.blueprint.subpatchInstance);
-                }
-                continue;
-            }
-        }
+        if (options.removeBlueprints && op.storage && op.storage.blueprint) continue;
         if (options.removeFromNetworkAttr && op.uiAttribs && op.uiAttribs.hasOwnProperty("fromNetwork"))
         {
             delete op.uiAttribs.fromNetwork;
         }
-        obj.ops.push(op.getSerialized());
-    }
 
-    if (blueprintIds.length > 0)
-    {
-        const noLostOps = [];
-        for (const i in obj.ops)
-        {
-            const op = obj.ops[i];
-            if (!(op.uiAttribs && op.uiAttribs.subPatch && blueprintIds.includes(op.uiAttribs.subPatch))) noLostOps.push(op);
-        }
-        obj.ops = noLostOps;
+        obj.ops.push(op.getSerialized());
     }
 
     if (options.asObject) return obj;
