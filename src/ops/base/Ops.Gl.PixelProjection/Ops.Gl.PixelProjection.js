@@ -6,6 +6,7 @@ const
     zNear = op.inValue("frustum near", -500),
     zFar = op.inValue("frustum far", 500),
     fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
+    inAlign = op.inSwitch("Position 0,0", ["Top Left", "Center"], "Top Left"),
 
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),
@@ -59,6 +60,14 @@ function exec()
         const temp = yb;
         yb = 0;
         yt = temp;
+    }
+
+    if (inAlign.get() == "Center")
+    {
+        xl -= width.get() / 2;
+        xr -= width.get() / 2;
+        yt -= height.get() / 2;
+        yb -= height.get() / 2;
     }
 
     cgl.pushPMatrix();

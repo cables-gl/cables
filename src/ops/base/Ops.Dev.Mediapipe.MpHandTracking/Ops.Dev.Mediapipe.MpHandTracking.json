@@ -54,6 +54,16 @@
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Min Confidence Detect",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min Confidence Tracking",
+                "subType": "number"
             }
         ],
         "portsOut": [

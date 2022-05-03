@@ -60,6 +60,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.FxHash"
+        "name": "Ops.Api.FxHash.FxHash"
     }
 }

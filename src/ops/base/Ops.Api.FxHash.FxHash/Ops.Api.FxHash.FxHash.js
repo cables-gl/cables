@@ -1,47 +1,54 @@
-if(CABLES.hasOwnProperty("fakefxhash") && !window.fxhash)
+if (!CABLES.fakefxhash && !window.fxhash || CABLES.fakefxhash)
 {
-    CABLES.fakefxhash=true;
+    CABLES.fakefxhash = true;
 }
 
 const
-    isReal = (!!window.fxhash && !CABLES.UI && !CABLES.FXHASH),
+    isReal = !CABLES.fakefxhash,
     alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
 const
     inHash = op.inString("Hash", ""),
-    inRandomizeHash=op.inTriggerButton("Randomize Hash"),
-    outHash = op.outString("fxhash", window.fxhash || CABLES.uuid()),
-    outRandom1=op.outNumber("fxrand 1"),
-    outRandom2=op.outNumber("fxrand 2"),
-    outRandom3=op.outNumber("fxrand 3"),
-    outRandom4=op.outNumber("fxrand 4"),
-    outArr=op.outArray("Random Numbers"),
+    inRandomizeHash = op.inTriggerButton("Randomize Hash"),
+    outHash = op.outString("fxhash"),
+    outRandom1 = op.outNumber("fxrand 1"),
+    outRandom2 = op.outNumber("fxrand 2"),
+    outRandom3 = op.outNumber("fxrand 3"),
+    outRandom4 = op.outNumber("fxrand 4"),
+    outArr = op.outArray("Random Numbers"),
     outEmbedded = op.outBoolNum("fxhash environment", isReal);
 
-inHash.onChange=init;
+inHash.onChange = init;
 
-let inited=false;
+let inited = false;
 
-inRandomizeHash.onTriggered=()=>
+init();
+
+inRandomizeHash.onTriggered = () =>
 {
-    let str="";
-    const all=alphabet.length-1;
-
-    for(let i=0;i<51;i++)
-    {
-        str+=alphabet[Math.round(Math.random()*all)];
-    }
-    inHash.set(str);
+    inHash.set(randomHash());
     op.refreshParams();
 };
 
+function randomHash()
+{
+    let str = "";
+    const all = alphabet.length - 1;
+
+    for (let i = 0; i < 51; i++)
+    {
+        str += alphabet[Math.round(Math.random() * all)];
+    }
+    return str;
+}
+
 function init()
 {
-    if(isReal && inited)return;
-    if(!isReal)
+    if (isReal && inited) return;
+    if (!isReal)
     {
-        CABLES.FXHASH=true; // fake fxhash env...
-        window.fxhash = inHash.get();
+        window.fxhash = inHash.get() || randomHash();
+
         let b58dec = (str) => str.split("").reduce((p, c, i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length - i - 1)), 0);
         let fxhashTrunc = fxhash.slice(2);
         let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", "g");
@@ -61,7 +68,7 @@ function init()
         window.fxrand = sfc32(...hashes);
     }
 
-    inited=true;
+    inited = true;
 
     outHash.set(window.fxhash);
 
@@ -75,9 +82,7 @@ function init()
     outRandom3.set(fxrand());
     outRandom4.set(fxrand());
 
-    const arr=[];
-    for(let i=0;i<1000;i++)arr.push(fxrand());
+    const arr = [];
+    for (let i = 0; i < 1000; i++)arr.push(fxrand());
     outArr.set(arr);
-
 }
-

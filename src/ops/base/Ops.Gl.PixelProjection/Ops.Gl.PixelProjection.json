@@ -51,8 +51,9 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Axis"
+                "type": 0,
+                "name": "Position 0,0 index",
+                "subType": "integer"
             },
             {
                 "type": 0,
