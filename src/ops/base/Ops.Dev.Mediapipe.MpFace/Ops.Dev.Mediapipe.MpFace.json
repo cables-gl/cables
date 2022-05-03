@@ -55,13 +55,23 @@
             "message": " removed lib: mp_hands.js",
             "author": "pandur",
             "date": 1651570340371
+        },
+        {
+            "message": " removed lib: mp_face_mesh.js",
+            "author": "pandur",
+            "date": 1651570491801
+        },
+        {
+            "message": " added lib: mp_face.js",
+            "author": "pandur",
+            "date": 1651570499544
         }
     ],
     "authorName": "cables",
     "created": 1608589845823,
     "libs": [
         "mp_camera_utils.js",
-        "mp_face_mesh.js"
+        "mp_face.js"
     ],
     "layout": {
         "portsIn": [
