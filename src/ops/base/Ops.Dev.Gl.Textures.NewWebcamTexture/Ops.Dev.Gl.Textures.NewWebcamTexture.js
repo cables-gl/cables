@@ -23,7 +23,7 @@ const
     outWidth = op.outNumber("Size Width"),
     outHeight = op.outNumber("Size Height"),
     outError = op.outString("Error"),
-    outElement = op.outObject("HTML Element"),
+    outElement = op.outObject("HTML Element", null, "element"),
     outDevices = op.outArray("Available devices"),
     outSelectedDevice = op.outString("Active device"),
     outUpdate = op.outTrigger("Texture updated");
@@ -184,6 +184,9 @@ function camInitComplete(stream)
         outWidth.set(settings.width);
         outRatio.set(settings.aspectRatio || settings.width / settings.height);
         outError.set("");
+
+        videoElement.setAttribute("width", settings.width);
+        videoElement.setAttribute("height", settings.height);
 
         outElement.set(videoElement);
 

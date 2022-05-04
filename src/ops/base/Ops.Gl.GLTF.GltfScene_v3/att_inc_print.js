@@ -21,12 +21,6 @@ function printNode(html, node, level)
         let identClass = "identBg";
         if (i == 1)identClass = "identBgLevel0";
         ident += "<td class=\"ident " + identClass + "\" ><div style=\"\"></div></td>";
-
-
-
-
-
-
     }
     let id = CABLES.uuid();
     html += ident;
@@ -34,17 +28,16 @@ function printNode(html, node, level)
     // html+='<div style="display:inline-block;border:0px solid red;height:10px;width:'+level*10+'px"></div>';
 
     if (node.mesh && node.mesh.meshes.length)html += "<span class=\"icon icon-cube\"></span>&nbsp;";
-    else html += "<span class=\"icon icon-circle\"></span> &nbsp;";
+    else html += "<span class=\"icon icon-box-select\"></span> &nbsp;";
 
     html += node.name + "</td><td></td>";
-
 
     if (node.mesh)
     {
         html += "<td>";
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
-            if(i>0)html+=", ";
+            if (i > 0)html += ", ";
             html += node.mesh.meshes[i].name;
         }
 
@@ -58,10 +51,9 @@ function printNode(html, node, level)
         let countMats = 0;
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
-            if(countMats>0)html+=", ";
+            if (countMats > 0)html += ", ";
             if (node.mesh.meshes[i].material)
             {
-
                 html += gltf.json.materials[node.mesh.meshes[i].material].name;
                 countMats++;
             }
@@ -73,7 +65,6 @@ function printNode(html, node, level)
     {
         html += "<td>-</td><td>-</td><td>-</td>";
     }
-
 
     html += "<td>";
     if (node._animRot || node._animScale || node._animTrans)
@@ -97,7 +88,6 @@ function printNode(html, node, level)
     if (node.hasSkin())
         html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "',false,{skin:true});\" class=\"treebutton\">Skin</a>";
 
-
     html += "</td><td>";
     html += "&nbsp;<span class=\"icon iconhover icon-eye " + hideclass + "\" onclick=\"gui.corePatch().getOpById('" + op.id + "').toggleNodeVisibility('" + node.name + "');this.classList.toggle('node-hidden');\"></span>";
     html += "</td>";
@@ -120,7 +110,6 @@ function printMaterial(mat, idx)
     html += " <td>" + mat.name + "</td>";
     // html+=' <td><a onclick="" class="treebutton">Assign</a><td>';
 
-
     html += " <td>";
     if (mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
     {
@@ -133,7 +122,6 @@ function printMaterial(mat, idx)
     }
     html += " <td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>") + "<td>";
     html += "<td>";
-
 
     html += "</tr>";
     return html;
@@ -149,31 +137,11 @@ function printInfo()
 
     html += "generator:" + gltf.json.asset.generator;
 
-    if (!gltf.json.materials || gltf.json.materials.length == 0)
-    {
-        html += "<h3>Materials</h3>";
-        html += "No materials";
-    }
-    else
-    {
-        html += "<h3>Materials (" + gltf.json.materials.length + ")</h3>";
-        html += "<table class=\"table treetable\">";
-        html += "<tr>";
-        html += " <th>Index</th>";
-        html += " <th>Name</th>";
-        html += " <th>Color</th>";
-        html += " <th>Function</th>";
-        html += " <th></th>";
-        html += "</tr>";
-        for (let i = 0; i < gltf.json.materials.length; i++)
-        {
-            html += printMaterial(gltf.json.materials[i], i);
-        }
-        html += "</table>";
-    }
+    let numNodes = 0;
+    if (gltf.json.nodes)numNodes = gltf.json.nodes.length;
+    html += "<div id=\"groupNodes\">Nodes (" + numNodes + ")</div>";
 
-    html += "<h3>Nodes (" + gltf.nodes.length + ")</h3>";
-    html += "<table class=\"table treetable\">";
+    html += "<table id=\"sectionNodes\" class=\"table treetable\">";
 
     html += "<tr>";
     html += " <th colspan=\"21\">Name</th>";
@@ -192,9 +160,38 @@ function printInfo()
     }
     html += "</table>";
 
-    html += "<h3>Meshes (" + gltf.json.meshes.length + ")</h3>";
+    /// //////////////////
 
-    html += "<table class=\"table treetable\">";
+    let numMaterials = 0;
+    if (gltf.json.materials)numMaterials = gltf.json.materials.length;
+    html += "<div id=\"groupMaterials\">Materials (" + numMaterials + ")</div>";
+
+    if (!gltf.json.materials || gltf.json.materials.length == 0)
+    {
+    }
+    else
+    {
+        html += "<table id=\"materialtable\"  class=\"table treetable\">";
+        html += "<tr>";
+        html += " <th>Index</th>";
+        html += " <th>Name</th>";
+        html += " <th>Color</th>";
+        html += " <th>Function</th>";
+        html += " <th></th>";
+        html += "</tr>";
+        for (let i = 0; i < gltf.json.materials.length; i++)
+        {
+            html += printMaterial(gltf.json.materials[i], i);
+        }
+        html += "</table>";
+    }
+
+    /// ///////////////////////
+
+    // html += "<h3>Meshes (" + gltf.json.meshes.length + ")</h3>";
+    html += "<div id=\"groupMeshes\">Meshes (" + gltf.json.meshes.length + ")</div>";
+
+    html += "<table id=\"meshestable\"  class=\"table treetable\">";
     html += "<tr>";
     html += " <th>Name</th>";
     html += " <th>Node</th>";
@@ -203,7 +200,6 @@ function printInfo()
     html += " <th>Attributes</th>";
     html += "</tr>";
 
-
     let sizeBufferViews = [];
     sizes.meshes = 0;
 
@@ -211,7 +207,6 @@ function printInfo()
     {
         html += "<tr>";
         html += "<td>" + gltf.json.meshes[i].name + "</td>";
-
 
         html += "<td>";
         let count = 0;
@@ -230,7 +225,6 @@ function printInfo()
         if (count > 1) html += (count) + " nodes (" + nodename + " ...)";
         else html += nodename;
         html += "</td>";
-
 
         html += "<td>";
         for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
@@ -266,11 +260,10 @@ function printInfo()
 
         html += "</tr>";
 
-
         for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            const accessor=gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices];
-            if(accessor)
+            const accessor = gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices];
+            if (accessor)
             {
                 let bufView = accessor.bufferView;
 
@@ -279,7 +272,6 @@ function printInfo()
                     sizeBufferViews.push(bufView);
                     if (gltf.json.bufferViews[bufView])sizes.meshes += gltf.json.bufferViews[bufView].byteLength;
                 }
-
             }
 
             for (let k in gltf.json.meshes[i].primitives[j].attributes)
@@ -297,11 +289,15 @@ function printInfo()
     }
     html += "</table>";
 
+    /// //////////////////////////////////
+
+    let numAnims = 0;
+    if (gltf.json.animations)numAnims = gltf.json.animations.length;
+    html += "<div id=\"groupAnims\">Animations (" + numAnims + ")</div>";
 
     if (gltf.json.animations)
     {
-        html += "<h3>Animations (" + gltf.json.animations.length + ")</h3>";
-        html += "<table class=\"table treetable\">";
+        html += "<table id=\"sectionAnim\" class=\"table treetable\">";
         html += "<tr>";
         html += "  <th>Name</th>";
         html += "  <th>Target node</th>";
@@ -331,11 +327,10 @@ function printInfo()
                 }
             }
 
-
             for (let j = 0; j < gltf.json.animations[i].channels.length; j++)
             {
                 html += "<tr>";
-                html += "  <td>" + gltf.json.animations[i].name + " (" + i + ")</td>";
+                html += "  <td> Anim " + i + ": " + gltf.json.animations[i].name + "</td>";
 
                 html += "  <td>" + gltf.nodes[gltf.json.animations[i].channels[j].target.node].name + "</td>";
                 html += "  <td>";
@@ -347,13 +342,11 @@ function printInfo()
 
                 html += "  <td>" + smplr.interpolation + "</td>";
 
-
                 html += "  <td>" + gltf.json.accessors[smplr.output].count;
 
                 html += "&nbsp;&nbsp;<a onclick=\"gui.corePatch().getOpById('" + op.id + "').showAnim('" + i + "','" + j + "')\" class=\"icon icon-search\"></a>";
 
                 html += "</td>";
-
 
                 html += "</tr>";
             }
@@ -362,13 +355,18 @@ function printInfo()
     }
     else
     {
-        html += "<h3>Animations (0)</h3>";
+
     }
+
+    /// ///////////////////
+
+    let numImages = 0;
+    if (gltf.json.images)numImages = gltf.json.images.length;
+    html += "<div id=\"groupImages\">Images (" + numImages + ")</div>";
 
     if (gltf.json.images)
     {
-        html += "<h3>Images (" + gltf.json.images.length + ")</h3>";
-        html += "<table class=\"table treetable\">";
+        html += "<table id=\"sectionImages\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>name</th>";
@@ -400,11 +398,15 @@ function printInfo()
         html += "</table>";
     }
 
+    /// ///////////////////////
+
+    let numCameras = 0;
+    if (gltf.json.cameras)numCameras = gltf.json.cameras.length;
+    html += "<div id=\"groupCameras\">Cameras (" + numCameras + ")</div>";
 
     if (gltf.json.cameras)
     {
-        html += "<h3>Cameras (" + gltf.json.cameras.length + ")</h3>";
-        html += "<table class=\"table treetable\">";
+        html += "<table id=\"sectionCameras\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>name</th>";
@@ -430,10 +432,16 @@ function printInfo()
         html += "</table>";
     }
 
+    /// ////////////////////////////////////
+
+    let numSkins = 0;
+    if (gltf.json.skins)numSkins = gltf.json.skins.length;
+    html += "<div id=\"groupSkins\">Skins (" + numSkins + ")</div>";
+
     if (gltf.json.skins)
     {
-        html += "<h3>Skins (" + gltf.json.skins.length + ")</h3>";
-        html += "<table class=\"table treetable\">";
+        // html += "<h3>Skins (" + gltf.json.skins.length + ")</h3>";
+        html += "<table id=\"sectionSkins\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>name</th>";
@@ -454,15 +462,15 @@ function printInfo()
         html += "</table>";
     }
 
+    /// //////////////////////////
 
     let sizeBin = 0;
-
     if (gltf.json.buffers)
         sizeBin = gltf.json.buffers[0].byteLength;
 
-    html += "<h3>Binary Data (" + readableSize(sizeBin) + ")</h3>";
+    html += "<div id=\"groupBinary\">File Size Allocation (" + Math.round(sizeBin / 1024) + "k )</div>";
 
-    html += "<table class=\"table treetable\">";
+    html += "<table id=\"sectionBinary\" class=\"table treetable\">";
     html += "<tr>";
     html += "  <th>name</th>";
     html += "  <th>size</th>";
@@ -497,6 +505,16 @@ function printInfo()
 
     tab.addEventListener("onClose", closeTab);
     tab.html(html);
+
+    CABLES.UI.Collapsable.setup(ele.byId("groupNodes"), ele.byId("sectionNodes"), false);
+    CABLES.UI.Collapsable.setup(ele.byId("groupMaterials"), ele.byId("materialtable"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupAnims"), ele.byId("sectionAnim"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupMeshes"), ele.byId("meshestable"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupCameras"), ele.byId("sectionCameras"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupImages"), ele.byId("sectionImages"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupSkins"), ele.byId("sectionSkins"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupBinary"), ele.byId("sectionBinary"), true);
+
     gui.maintabPanel.show(true);
 }
 

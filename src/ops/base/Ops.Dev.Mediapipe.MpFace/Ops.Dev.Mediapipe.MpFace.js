@@ -10,21 +10,23 @@ let camera = null;
 
 inEle.onChange = () =>
 {
-    if (!inEle.get()) return;
+    const el = inEle.get();
+    if (!el) return;
 
-    camera = new Camera(inEle.get(), {
+    camera = new Camera(el, {
         "onFrame": async () =>
         {
-            await faceMesh.send({ "image": inEle.get() });
+            await faceMesh.send({ "image": el });
         },
-        "width": 640,
-        "height": 480
+        "width": el.width,
+        "height": el.height
     });
     camera.start();
 };
 
 const faceMesh = new FaceMesh({ "locateFile": (file) =>
     `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}` });
+
 faceMesh.setOptions({
     "maxNumFaces": 1,
     "minDetectionConfidence": 0.5,
