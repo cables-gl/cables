@@ -2,6 +2,8 @@
 
 const
     inEle = op.inObject("Element", null, "element"),
+    inMinConfDetect = op.inFloatSlider("Min Confidence Detect", 0.5),
+    inMinConfTrack = op.inFloatSlider("Min Confidence Tracking", 0.5),
 
     outResult = op.outObject("Result"),
     outFound = op.outNumber("Found Hands");
@@ -10,6 +12,10 @@ const hands = new Hands({ "locateFile": (file) =>
     `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/${file}` });
 
 let camera = null;
+updateOptions();
+
+inMinConfTrack.onChange =
+    inMinConfDetect.onChange = updateOptions;
 
 inEle.onChange = () =>
 {
@@ -32,11 +38,14 @@ inEle.onChange = () =>
     camera.start();
 };
 
-hands.setOptions({
-    "maxNumHands": 2,
-    "minDetectionConfidence": 0.5,
-    "minTrackingConfidence": 0.5
-});
+function updateOptions()
+{
+    hands.setOptions({
+        "maxNumHands": 2,
+        "minDetectionConfidence": inMinConfDetect.get(),
+        "minTrackingConfidence": inMinConfTrack.get()
+    });
+}
 
 hands.onResults((r) =>
 {

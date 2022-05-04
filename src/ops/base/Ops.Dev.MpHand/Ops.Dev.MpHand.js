@@ -106,8 +106,8 @@ inMpResult.onChange = () =>
         {
             for (let i = 0; i < r.multiHandLandmarks[idx].length; i++)
             {
-                points[i * 3] = (r.multiHandLandmarks[idx][i].x - 0.5) * 2.0 * 1.5;
-                points[i * 3 + 1] = -1 * (r.multiHandLandmarks[idx][i].y - 0.5) * 2.1;
+                points[i * 3] = (r.multiHandLandmarks[idx][i].x - 0.5) * 2;
+                points[i * 3 + 1] = -1 * (r.multiHandLandmarks[idx][i].y - 0.5) * 2;
                 points[i * 3 + 2] = 0;
             }
             lines = getLines(points);

@@ -44,10 +44,10 @@ faceMesh.onResults((r) =>
     if (r && r.multiFaceLandmarks)
     {
         outFound.set(r.multiFaceLandmarks.length);
-        for (let i = 0; i < r.multiFaceLandmarks[0].length; i++)
+        if (r.multiFaceLandmarks[0]) for (let i = 0; i < r.multiFaceLandmarks[0].length; i++)
         {
             points.push(
-                (r.multiFaceLandmarks[0][i].x - 0.5) * 2 * 1.77777,
+                (r.multiFaceLandmarks[0][i].x - 0.5) * 2,
                 -1 * (r.multiFaceLandmarks[0][i].y - 0.5) * 2, 0);
         }
     }
