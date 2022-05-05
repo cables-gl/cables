@@ -41,7 +41,7 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.Dev.VizBool"
+        "name": "Ops.Ui.VizBool"
     },
     "authorName": "pandur",
     "created": 1649238794135

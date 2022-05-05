@@ -22,7 +22,9 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (isTrue)
     {
-        ctx.fillStyle = "#ccc";
+        if (op.uiAttribs.color)ctx.fillStyle = op.uiAttribs.color;
+        else ctx.fillStyle = "#ccc";
+
         let circle = new Path2D();
         circle.arc(layer.x + layer.width / 2, layer.y + layer.height / 2, radius - (ctx.lineWidth / 2), 0, 2 * Math.PI, false);
         ctx.fill(circle);
