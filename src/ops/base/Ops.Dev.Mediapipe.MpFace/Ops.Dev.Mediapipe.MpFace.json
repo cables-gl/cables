@@ -78,6 +78,11 @@
             {
                 "type": 2,
                 "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Refine LandMarks",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

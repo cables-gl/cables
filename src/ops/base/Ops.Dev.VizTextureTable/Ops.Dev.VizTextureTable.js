@@ -19,6 +19,8 @@ op.renderVizLayer = (ctx, layer) =>
         realTexture = inTex.get(),
         gl = op.patch.cgl.gl;
 
+    // var ext = gl.getExtension('EXT_color_buffer_float');
+
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
@@ -49,7 +51,7 @@ op.renderVizLayer = (ctx, layer) =>
             gl.TEXTURE_2D, realTexture.tex, 0
         );
 
-        let isFloatingPoint = realTexture.textureType == CGL.Texture.TYPE_FLOAT;
+        let isFloatingPoint = realTexture.isFloatingPoint();
         if (isFloatingPoint) channelType = gl.FLOAT;
 
         if (
@@ -117,8 +119,8 @@ op.renderVizLayer = (ctx, layer) =>
 
         for (let s = 0; s < stride; s++)
         {
-            let str = "?";
             let v = arr[i + s];
+            let str = "" + v;
 
             if (!isFp)v /= 255;
 

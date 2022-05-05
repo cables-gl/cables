@@ -1,5 +1,6 @@
 const
     inEle = op.inObject("Element"),
+    inRefineLand = op.inBool("Refine LandMarks", false),
     outPoints = op.outArray("Points"),
     outFound = op.outNumber("Found"),
     outResult = op.outObject("Result");
@@ -8,35 +9,45 @@ const
 
 let camera = null;
 
+inRefineLand.onChange = setOptions;
+
 inEle.onChange = () =>
 {
-    if (!inEle.get()) return;
+    const el = inEle.get();
+    if (!el) return;
 
-    camera = new Camera(inEle.get(), {
+    camera = new Camera(el, {
         "onFrame": async () =>
         {
-            await faceMesh.send({ "image": inEle.get() });
+            await faceMesh.send({ "image": el });
         },
-        "width": 640,
-        "height": 480
+        "width": el.width,
+        "height": el.height
     });
     camera.start();
 };
 
 const faceMesh = new FaceMesh({ "locateFile": (file) =>
     `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}` });
+
 faceMesh.setOptions({
     "maxNumFaces": 1,
     "minDetectionConfidence": 0.5,
     "minTrackingConfidence": 0.5
 });
-// faceMesh.onResults(onResults);
 
-// hands.setOptions({
-//   maxNumHands: 2,
-//   minDetectionConfidence: 0.5,
-//   minTrackingConfidence: 0.5
-// });
+setOptions();
+
+function setOptions()
+{
+    faceMesh.setOptions({
+        "maxNumFaces": 1,
+        "minDetectionConfidence": 0.5,
+        "minTrackingConfidence": 0.5,
+        "refineLandmarks": inRefineLand.get()
+    });
+}
+
 faceMesh.onResults((r) =>
 {
     let points = [];

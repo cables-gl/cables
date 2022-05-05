@@ -150,7 +150,8 @@
             },
             {
                 "type": 2,
-                "name": "HTML Element"
+                "name": "HTML Element",
+                "objType": "element"
             },
             {
                 "type": 3,

@@ -35,6 +35,11 @@
             "message": "Ops.User.pandur.HdrToRgbeTexture renamed to Ops.Gl.Textures.HdrToRgbeTexture",
             "author": "pandur",
             "date": 1646228514830
+        },
+        {
+            "message": "Ops.Gl.Textures.HdrToRgbeTexture renamed to Ops.Gl.Textures.Float32ToRgbeTexture",
+            "author": "pandur",
+            "date": 1651647772811
         }
     ],
     "coreLibs": [
@@ -50,7 +55,7 @@
             },
             {
                 "type": 2,
-                "name": "RGBE Texture",
+                "name": "Texture 32bit",
                 "objType": "texture"
             },
             {
@@ -71,13 +76,13 @@
             },
             {
                 "type": 2,
-                "name": "HDR Texture",
+                "name": "Texture RGBE",
                 "objType": "texture"
             }
         ],
         "name": "Ops.Gl.Textures.HdrToRgbeTexture"
     },
-    "summary": "convert a RGBE texture to HDR/floating point texture",
+    "summary": "convert a Float32 bit/HDR texture to RGBE format (only positive numbers)",
     "issues": "",
     "caniusequery": "",
     "collections": null,

@@ -1,7 +1,7 @@
 // todo: warn if ele not dom object , e..g. texture!
 
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
 
     inModelComplexity = op.inSwitch("Model Complexity", ["0", "1", "2"], "1"),
     inSmoothLandmarks = op.inBool("Smooth Landmarks", true),
@@ -47,19 +47,20 @@ function updateOptions()
 
 inEle.onChange = () =>
 {
-    if (!inEle.get())
+    const el = inEle.get();
+    if (!el)
     {
         return;
     }
-    // console.log(inEle.get())
+    // console.log(el)
     // op.log("init camera");
-    camera = new Camera(inEle.get(), {
+    camera = new Camera(el, {
         "onFrame": async () =>
         {
-            await pose.send({ "image": inEle.get() });
+            await pose.send({ "image": el });
         },
-        "width": 640,
-        "height": 480
+        "width": el.width,
+        "height": el.height
     });
     camera.start();
 };
@@ -70,8 +71,8 @@ pose.onResults((r) =>
     {
         for (let i = 0; i < r.poseLandmarks.length; i++)
         {
-            points[i * 3] = (r.poseLandmarks[i].x - 0.5) * 4.0 * 1.1;
-            points[i * 3 + 1] = (r.poseLandmarks[i].y - 0.5) * -4;
+            points[i * 3] = (r.poseLandmarks[i].x - 0.5) * 2.0;
+            points[i * 3 + 1] = (r.poseLandmarks[i].y - 0.5) * -2;
             points[i * 3 + 2] = r.poseLandmarks[i].z * 1.0;
         }
 
