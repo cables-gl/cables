@@ -1,5 +1,6 @@
 const
     inEle = op.inObject("Element"),
+    inRefineLand = op.inBool("Refine LandMarks", false),
     outPoints = op.outArray("Points"),
     outFound = op.outNumber("Found"),
     outResult = op.outObject("Result");
@@ -7,6 +8,8 @@ const
 // https://google.github.io/mediapipe/solutions/face_mesh.html
 
 let camera = null;
+
+inRefineLand.onChange = setOptions;
 
 inEle.onChange = () =>
 {
@@ -32,13 +35,19 @@ faceMesh.setOptions({
     "minDetectionConfidence": 0.5,
     "minTrackingConfidence": 0.5
 });
-// faceMesh.onResults(onResults);
 
-// hands.setOptions({
-//   maxNumHands: 2,
-//   minDetectionConfidence: 0.5,
-//   minTrackingConfidence: 0.5
-// });
+setOptions();
+
+function setOptions()
+{
+    faceMesh.setOptions({
+        "maxNumFaces": 1,
+        "minDetectionConfidence": 0.5,
+        "minTrackingConfidence": 0.5,
+        "refineLandmarks": inRefineLand.get()
+    });
+}
+
 faceMesh.onResults((r) =>
 {
     let points = [];

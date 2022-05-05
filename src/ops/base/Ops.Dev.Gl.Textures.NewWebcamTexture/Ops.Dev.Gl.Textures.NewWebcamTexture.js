@@ -180,9 +180,13 @@ function camInitComplete(stream)
 
         const settings = stream.getTracks()[0].getSettings();
         restarting = false;
-        outHeight.set(settings.height);
-        outWidth.set(settings.width);
-        outRatio.set(settings.aspectRatio || settings.width / settings.height);
+
+        const w = settings.width || inWidth.get();
+        const h = settings.height || inHeight.get();
+
+        outHeight.set(h);
+        outWidth.set(w);
+        outRatio.set(settings.aspectRatio || w / h);
         outError.set("");
 
         videoElement.setAttribute("width", settings.width);
@@ -190,7 +194,7 @@ function camInitComplete(stream)
 
         outElement.set(videoElement);
 
-        tex.setSize(settings.width, settings.height);
+        tex.setSize(w, h);
 
         available.set(true);
         // console.log("cam init complete");

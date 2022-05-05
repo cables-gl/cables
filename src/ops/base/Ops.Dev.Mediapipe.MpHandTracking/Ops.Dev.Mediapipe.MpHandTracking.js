@@ -32,8 +32,8 @@ inEle.onChange = () =>
 
             if (ele) await hands.send({ "image": ele });
         },
-        "width": inEle.get().videoWidth,
-        "height": inEle.get().videoHeight
+        "width": inEle.get().width,
+        "height": inEle.get().height
     });
     camera.start();
 };

@@ -1,8 +1,8 @@
 const
     exec = op.inTrigger("Execute"),
-    inTex = op.inTexture("RGBE Texture"),
+    inTex = op.inTexture("Texture 32bit"),
     next = op.outTrigger("Next"),
-    outFpTex = op.outTexture("HDR Texture"),
+    outFpTex = op.outTexture("Texture RGBE"),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat");
 
