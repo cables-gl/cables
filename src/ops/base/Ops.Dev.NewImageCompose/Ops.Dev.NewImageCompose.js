@@ -2,6 +2,7 @@ const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("Base Texture"),
     inUseVPSize = op.inBool("Use viewport size", true),
+    inSize = op.inSwitch("Size", ["Auto", "Manual"], "Viewport / Input"),
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
@@ -15,7 +16,7 @@ const
     outHeight = op.outNumber("Texture Height");
 
 const cgl = op.patch.cgl;
-op.setPortGroup("Texture Size", [inUseVPSize, width, height, inWrap, inFilter, inPixel]);
+op.setPortGroup("Texture Size", [inUseVPSize, inSize, width, height, inWrap, inFilter, inPixel]);
 
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
@@ -26,6 +27,7 @@ let reInitEffect = true;
 let isFloatTex = false;
 inWrap.onChange =
     inFilter.onChange =
+    inSize.onChange =
     inPixel.onChange = reInitLater;
 
 inTex.onLinkChanged =
@@ -84,7 +86,7 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
+    // if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
     isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
     return isFloatTex;
 }
@@ -123,6 +125,8 @@ function updateResolution()
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
     }
+
+    inSize.setUiAttribs({ "info": "hurzi!" });
 }
 
 function updateUi()
@@ -132,7 +136,7 @@ function updateUi()
     inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked() });
     inFilter.setUiAttribs({ "greyout": inTex.isLinked() });
     inWrap.setUiAttribs({ "greyout": inTex.isLinked() });
-    inPixel.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inPixel.setUiAttribs({ "greyout": inTex.isLinked() });
 
     if (tex)
         if (getFloatingPoint() && getFilter() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");

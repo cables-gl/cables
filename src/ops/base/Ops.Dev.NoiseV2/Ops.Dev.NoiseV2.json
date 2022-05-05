@@ -57,7 +57,36 @@
     "id": "b1d9aacc-dc52-43a6-a00f-414f08768800",
     "created": 1650541473701,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Blend Mode index",
+                "text": "index of blend mode in drop down"
+            },
+            {
+                "name": "Alpha Mask index",
+                "text": "use alpha channel of Image Compose"
+            },
+            {
+                "name": "Amount",
+                "text": "opacity of effect"
+            },
+            {
+                "name": "Animated",
+                "text": "randomize noise every frame/trigger"
+            },
+            {
+                "name": "RGB",
+                "text": "use colors"
+            },
+            {
+                "name": "Normalize",
+                "text": "offset values of colors into a -1.0 +1.0 range "
+            },
+            {
+                "name": "Multiply",
+                "text": "multiply values by input texture"
+            }
+        ]
     },
     "issues": "",
     "collections": [
@@ -78,5 +107,6 @@
             "author": "pandur",
             "date": 1650542073285
         }
-    ]
+    ],
+    "caniusequery": ""
 }

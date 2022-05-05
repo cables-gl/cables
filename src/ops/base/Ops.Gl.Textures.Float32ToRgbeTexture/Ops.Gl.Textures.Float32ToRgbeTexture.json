@@ -51,36 +51,16 @@
         "portsIn": [
             {
                 "type": 1,
-                "name": "Execute"
-            },
-            {
-                "type": 2,
-                "name": "Texture 32bit",
-                "objType": "texture"
-            },
-            {
-                "type": 0,
-                "name": "Filter index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Wrap index",
-                "subType": "integer"
+                "name": "render"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next"
-            },
-            {
-                "type": 2,
-                "name": "Texture RGBE",
-                "objType": "texture"
+                "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Textures.HdrToRgbeTexture"
+        "name": "Ops.Gl.Textures.Float32ToRgbeTexture"
     },
     "summary": "convert a Float32 bit/HDR texture to RGBE format (only positive numbers)",
     "issues": "",

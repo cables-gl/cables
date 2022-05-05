@@ -18,6 +18,12 @@
             },
             {
                 "type": 0,
+                "name": "Size index",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Width",
                 "group": "Texture Size",
                 "subType": "integer"
