@@ -154,8 +154,13 @@ function updateUi()
     width.setUiAttribs({ "greyout": inSize.get() == "Auto" });
     height.setUiAttribs({ "greyout": inSize.get() == "Auto" });
 
-    // width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
-    // height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+    width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+    height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+
+    // inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inFilter.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inWrap.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inPixel.setUiAttribs({ "greyout": inTex.isLinked() });
 
     if (tex)
         if (getFloatingPoint() && getFilter() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
