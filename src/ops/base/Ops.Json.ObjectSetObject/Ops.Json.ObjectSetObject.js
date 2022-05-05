@@ -1,41 +1,50 @@
-const inObject=op.inObject("Object");
-const inKey=op.inString("Key");
-const inValue=op.inObject("Object Value");
-const inUpdate=op.inTriggerButton("Set Object");
-const outObject=op.outObject("Result Object");
+const inObject = op.inObject("Object");
+const inKey = op.inString("Key");
+const inValue = op.inObject("Object Value");
+const inUpdate = op.inTriggerButton("Set Object");
+const outObject = op.outObject("Result Object");
 
 // inObject.onChange=update;
 // inKey.onChange=update;
-inUpdate.onTriggered=update;
+inUpdate.onTriggered = update;
+
+let obj = null;
+
+op.onDelete =
+inObject.onChange = () =>
+{
+    if (obj)
+        delete obj[inKey.get()];
+};
 
 function update()
 {
-    var obj=inObject.get();
-    if(!obj)
+    obj = inObject.get();
+    if (!obj)
     {
-        obj={};
+        obj = {};
     }
     else
     {
-        var changed=false;
+        let changed = false;
 
-        if(inKey.get().indexOf(",")>-1)
+        if (inKey.get().indexOf(",") > -1)
         {
-            const keys=inKey.get().split(',');
+            const keys = inKey.get().split(",");
 
-            for(var i in keys)
+            for (let i in keys)
             {
-                if(keys[i] && keys[i].length>0)
+                if (keys[i] && keys[i].length > 0)
                 {
-                    if(obj[keys[i]]!=inValue.get())changed=true;
-                    obj[keys[i]]=inValue.get();
+                    if (obj[keys[i]] != inValue.get())changed = true;
+                    obj[keys[i]] = inValue.get();
                 }
             }
         }
         else
         {
-            if(obj[inKey.get()]!=inValue.get())changed=true;
-            obj[inKey.get()]=inValue.get();
+            if (obj[inKey.get()] != inValue.get())changed = true;
+            obj[inKey.get()] = inValue.get();
         }
 
         outObject.set(null);
