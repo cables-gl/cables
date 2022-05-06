@@ -30,6 +30,11 @@
             },
             {
                 "type": 0,
+                "name": "Flip Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Falloff",
                 "subType": "number"
             },

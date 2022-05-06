@@ -27,3 +27,9 @@
     tangent=MOD_newTangent;
     bitangent=MOD_newBiTangent;
 #endif
+
+
+
+#ifdef MOD_FLIP_NORMALS
+    norm*=-1.0;
+#endif
