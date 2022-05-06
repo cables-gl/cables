@@ -7,6 +7,10 @@ const shader = new CGL.Shader(cgl, op.name);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.rgbe2fp_frag);
 
+// const highEdgeUniform = new CGL.Uniform(shader, "f", "highEdge", inHighEdge);
+
+// CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
+
 render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -24,10 +28,10 @@ render.onTriggered = function ()
 
 // const
 //     exec = op.inTrigger("Execute"),
-//     inTex = op.inTexture("Texture 32bit"),
+//     inTex = op.inTexture("RGBE Texture"),
 //     next = op.outTrigger("Next"),
-//     outFpTex = op.outTexture("Texture RGBE"),
-//     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
+//     outFpTex = op.outTexture("HDR Texture"),
+//     tfilter = op.inSwitch("Filter", ["nearest", "linear"], "linear"),
 //     twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat");
 
 // let tc = null;
@@ -44,13 +48,12 @@ render.onTriggered = function ()
 
 //     let filter = CGL.Texture.FILTER_NEAREST;
 //     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
-//     if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
 
 //     if (tc)tc.dispose();
 //     tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
 //         {
 //             "shader": attachments.rgbe2fp_frag,
-//             "isFloatingPointTexture": false,
+//             "isFloatingPointTexture": true,
 //             "filter": filter,
 //             "wrap": wrap
 //         });
@@ -63,12 +66,7 @@ render.onTriggered = function ()
 //     if (!inTex.get()) return;
 
 //     outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-
-//     op.patch.cgl.pushBlend(false);
-
 //     outFpTex.set(tc.copy(inTex.get()));
-
-//     op.patch.cgl.popBlend();
 
 //     next.trigger();
 // };

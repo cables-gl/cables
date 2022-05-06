@@ -12,38 +12,38 @@
             },
             {
                 "type": 0,
-                "name": "Use viewport size",
-                "group": "Texture Size",
-                "subType": "boolean"
+                "name": "Size index",
+                "group": "Texture Settings",
+                "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Width",
-                "group": "Texture Size",
+                "group": "Texture Settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Height",
-                "group": "Texture Size",
+                "group": "Texture Settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Filter index",
-                "group": "Texture Size",
+                "group": "Texture Settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Wrap index",
-                "group": "Texture Size",
+                "group": "Texture Settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Pixel Format index",
-                "group": "Texture Size",
+                "group": "Texture Settings",
                 "subType": "integer"
             }
         ],

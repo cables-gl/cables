@@ -39,7 +39,7 @@
                 "name": "Result Object"
             }
         ],
-        "name": "Ops.User.pandur.ObjectSetObject"
+        "name": "Ops.Json.ObjectSetObject"
     },
     "summary": "set object as value in an object",
     "issues": "",

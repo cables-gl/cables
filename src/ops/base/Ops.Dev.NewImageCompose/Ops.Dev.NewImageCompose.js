@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("Base Texture"),
-    inUseVPSize = op.inBool("Use viewport size", true),
+    inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
@@ -15,7 +15,7 @@ const
     outHeight = op.outNumber("Texture Height");
 
 const cgl = op.patch.cgl;
-op.setPortGroup("Texture Size", [inUseVPSize, width, height, inWrap, inFilter, inPixel]);
+op.setPortGroup("Texture Settings", [inSize, width, height, inWrap, inFilter, inPixel]);
 
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
@@ -29,7 +29,7 @@ inWrap.onChange =
     inPixel.onChange = reInitLater;
 
 inTex.onLinkChanged =
-inUseVPSize.onChange = updateUi;
+inSize.onChange = updateUi;
 
 render.onTriggered =
     op.preRender = doRender;
@@ -67,7 +67,7 @@ function initEffect()
 
 function getFilter()
 {
-    if (inTex.get()) return inTex.get().filter;
+    // if (inTex.get()) return inTex.get().filter;
 
     if (inFilter.get() == "nearest") return CGL.Texture.FILTER_NEAREST;
     if (inFilter.get() == "linear") return CGL.Texture.FILTER_LINEAR;
@@ -76,7 +76,7 @@ function getFilter()
 
 function getWrap()
 {
-    if (inTex.get()) return inTex.get().wrap;
+    // if (inTex.get()) return inTex.get().wrap;
     if (inWrap.get() == "repeat") return CGL.Texture.WRAP_REPEAT;
     if (inWrap.get() == "mirrored repeat") return CGL.Texture.WRAP_MIRRORED_REPEAT;
     if (inWrap.get() == "clamp to edge") return CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -84,7 +84,7 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
+    // if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
     isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
     return isFloatTex;
 }
@@ -92,14 +92,14 @@ function getFloatingPoint()
 function getWidth()
 {
     if (inTex.get()) return inTex.get().width;
-    if (inUseVPSize.get()) return cgl.getViewPort()[2];
+    if (inSize.get() == "Auto") return cgl.getViewPort()[2];
     return Math.ceil(width.get());
 }
 
 function getHeight()
 {
     if (inTex.get()) return inTex.get().height;
-    else if (inUseVPSize.get()) return cgl.getViewPort()[3];
+    else if (inSize.get() == "Auto") return cgl.getViewPort()[3];
     else return Math.ceil(height.get());
 }
 
@@ -123,20 +123,50 @@ function updateResolution()
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
     }
+
+    updateResolutionInfo();
+}
+
+function updateResolutionInfo()
+{
+    let info = null;
+
+    if (inSize.get() == "Manual")
+    {
+        info = null;
+    }
+    else if (inSize.get() == "Auto")
+    {
+        if (inTex.get()) info = "Input Texture";
+        else info = "Canvas Size";
+
+        info += ": " + getWidth() + " x " + getHeight();
+    }
+
+    let changed = false;
+    changed = inSize.uiAttribs.info != info;
+    inSize.setUiAttribs({ "info": info });
+    if (changed)op.refreshParams();
 }
 
 function updateUi()
 {
-    width.setUiAttribs({ "greyout": inUseVPSize.get() || inTex.isLinked() });
-    height.setUiAttribs({ "greyout": inUseVPSize.get() || inTex.isLinked() });
-    inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked() });
-    inFilter.setUiAttribs({ "greyout": inTex.isLinked() });
-    inWrap.setUiAttribs({ "greyout": inTex.isLinked() });
-    inPixel.setUiAttribs({ "greyout": inTex.isLinked() });
+    width.setUiAttribs({ "greyout": inSize.get() == "Auto" });
+    height.setUiAttribs({ "greyout": inSize.get() == "Auto" });
+
+    width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+    height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+
+    // inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inFilter.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inWrap.setUiAttribs({ "greyout": inTex.isLinked() });
+    // inPixel.setUiAttribs({ "greyout": inTex.isLinked() });
 
     if (tex)
         if (getFloatingPoint() && getFilter() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
+
+    updateResolutionInfo();
 }
 
 op.preRender = function ()

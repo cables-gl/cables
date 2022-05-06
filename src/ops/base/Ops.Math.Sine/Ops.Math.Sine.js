@@ -1,16 +1,15 @@
-// input
-let value = op.inValue("value");
-
-let phase = op.inValue("phase", 0.0);
-let mul = op.inValue("frequency", 1.0);
-let amplitude = op.inValue("amplitude", 1.0);
-let invert = op.inValueBool("asine", false);
-
-// output
-let result = op.outValue("result");
+const
+    value = op.inValue("value"),
+    phase = op.inValue("phase", 0.0),
+    mul = op.inValue("frequency", 1.0),
+    amplitude = op.inValue("amplitude", 1.0),
+    invert = op.inValueBool("asine", false),
+    result = op.outValue("result");
 
 let calculate = Math.sin;
 
+mul.onChange =
+amplitude.onChange =
 phase.onChange =
 value.onChange = function ()
 {
