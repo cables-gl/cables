@@ -35,16 +35,27 @@ void main()
 
     float sz=size*0.5*aspect;
     float v=0.0;
-    float fade=fadeOut+0.001;
+    float fade=fadeOut;
 
-    if(dist<sz && dist>inner*sz) v=(smoothstep(0.0,1.0,(dist-(inner*sz))/(fade)) );
 
-    #ifdef FALLOFF_SMOOTHSTEP
-        if(dist>sz && dist<sz+fade)v=1.0-(smoothstep(0.0,1.0,(dist-sz)/(fade)) );
-    #endif
-    #ifndef FALLOFF_SMOOTHSTEP
-        if(dist>sz && dist<sz+fade)v=1.0-((dist-sz)/(fade));
-    #endif
+    if(fade==0.0)
+    {
+        if(dist<sz && dist>inner*sz) v=(smoothstep(0.0,1.0,(dist-(inner*sz))/(fade)));
+    }
+
+
+
+    if(fade>=0.0)
+    {
+
+        #ifdef FALLOFF_SMOOTHSTEP
+            if(dist>inner*sz && dist<sz+fade)v=1.0-(smoothstep(0.0,1.0,(dist-sz)/(fade)));
+        #endif
+        #ifndef FALLOFF_SMOOTHSTEP
+            fade+=0.0001;
+            if(dist>inner*sz && dist<sz+fade)v=1.0-((dist-sz)/(fade));
+        #endif
+    }
 
     outColor=cgl_blendPixel(base,col,amount*v);
 

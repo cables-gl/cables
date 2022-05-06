@@ -5,7 +5,6 @@ const render = op.inTrigger("render"),
     inCenterMode = op.inBool("Center", true),
     inWidth = op.inValueSlider("Width", 0.25),
     inHeight = op.inValueSlider("Height", 0.25),
-    inAspect = op.inBool("Aspect Ratio", true),
     inPosX = op.inValueSlider("X", 0),
     inPosY = op.inValueSlider("Y", 0),
     inRot = op.inValue("Rotate", 0),
@@ -42,10 +41,14 @@ let textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
-inCenterMode.onChange = function ()
+inCenterMode.onChange = updateDefines;
+updateDefines();
+
+function updateDefines()
 {
     shader.toggleDefine("CENTER", inCenterMode.get());
-};
+}
+
 render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
@@ -54,9 +57,7 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     const texture = cgl.currentTextureEffect.getCurrentSourceTexture();
-    // if (inAspect.get())
     uniformAspect.set(cgl.currentTextureEffect.aspectRatio);
-    // else uniformAspect.set(1);
 
     cgl.setTexture(0, texture.tex);
 
