@@ -80,12 +80,14 @@ void main()
     TBN = mat3(tangent, bitangent, N);
 
     #ifdef USE_HEIGHT_TEX
+	#ifndef WEBGL1
     #ifdef USE_OPTIMIZED_HEIGHT
     // TODO find a way to remove this inverse here
     fragTangentViewDir = normalize(inverse(TBN) * (camPos - FragPos.xyz));
     #else
     invTBN = inverse(TBN);
     #endif
+	#endif
     #endif
 
     normM = N;
