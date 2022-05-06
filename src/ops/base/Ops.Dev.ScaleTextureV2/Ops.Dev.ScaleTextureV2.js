@@ -5,10 +5,10 @@ const
     amount = op.inValueSlider("Amount", 1),
     scaleX = op.inValue("Scale X", 1.5),
     scaleY = op.inValue("Scale Y", 1.5),
-    offsetX = op.inValueSlider("offset X", 0),
-    offsetY = op.inValueSlider("offset Y", 0),
-    centerX = op.inValueSlider("center X", 0.5),
-    centerY = op.inValueSlider("center Y", 0.5),
+    offsetX = op.inFloat("offset X", 0),
+    offsetY = op.inFloat("offset Y", 0),
+    centerX = op.inFloat("center X", 0.5),
+    centerY = op.inFloat("center Y", 0.5),
     inClear = op.inBool("Clear", true),
     trigger = op.outTrigger("trigger");
 

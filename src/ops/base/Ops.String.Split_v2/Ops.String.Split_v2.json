@@ -5,22 +5,27 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Input String"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Separator"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Split Lines",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Numbers",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Result"
             }
         ],

@@ -47,8 +47,8 @@ op.renderVizLayer = (ctx, layer) =>
             let str = "?";
             const v = arr[i + s];
 
-            if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
-            else if (typeof v == "string") str = v;
+            if (typeof v == "string") str = "\"" + v + "\"";
+            else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
             else if (Array.isArray(v))
             {
                 let preview = "...";

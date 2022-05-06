@@ -108,7 +108,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.GradientV2"
+        "name": "Ops.Dev.GradientV2"
     },
     "summary": "Draws a simple gradient between three colors",
     "docs": {

@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     strength = op.inValueSlider("strength", 0.5),
-    x = op.inValue("X", 0.5),
-    y = op.inValue("Y", 0.5),
+    x = op.inValue("X", 0),
+    y = op.inValue("Y", 0),
     mask = op.inTexture("mask"),
     trigger = op.outTrigger("trigger");
 
@@ -25,7 +25,7 @@ const
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op,3)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     if (strength.get() > 0)
     {

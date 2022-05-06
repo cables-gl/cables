@@ -91,14 +91,14 @@ function getFloatingPoint()
 
 function getWidth()
 {
-    if (inTex.get()) return inTex.get().width;
+    if (inTex.get() && inSize.get() == "Auto") return inTex.get().width;
     if (inSize.get() == "Auto") return cgl.getViewPort()[2];
     return Math.ceil(width.get());
 }
 
 function getHeight()
 {
-    if (inTex.get()) return inTex.get().height;
+    if (inTex.get() && inSize.get() == "Auto") return inTex.get().height;
     else if (inSize.get() == "Auto") return cgl.getViewPort()[3];
     else return Math.ceil(height.get());
 }
