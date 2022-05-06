@@ -1,0 +1,47 @@
+{
+    "id": "91fc24d6-ecba-4f35-8986-8d13087d2370",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1651571272967
+        },
+        {
+            "message": "Ops.User.pandur.Array3To4 renamed to Ops.Dev.Array3To4",
+            "author": "pandur",
+            "date": 1651571420963
+        },
+        {
+            "message": "Ops.Dev.Array3To4 renamed to Ops.Array.Array3To4",
+            "author": "pandur",
+            "date": 1651668059132
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1651571325549,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array3x"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array4x"
+            },
+            {
+                "type": 0,
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.Array3To4"
+    }
+}

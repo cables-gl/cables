@@ -2,7 +2,7 @@ const render = op.inTrigger("render"),
     amount = op.inValueSlider("Amount", 1),
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    inCenterMode = op.inBool("Center", false),
+    inCenterMode = op.inBool("Center", true),
     inWidth = op.inValueSlider("Width", 0.25),
     inHeight = op.inValueSlider("Height", 0.25),
     inAspect = op.inBool("Aspect Ratio", true),
@@ -48,14 +48,15 @@ inCenterMode.onChange = function ()
 };
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     const texture = cgl.currentTextureEffect.getCurrentSourceTexture();
-    if (inAspect.get()) uniformAspect.set(texture.height / texture.width);
-    else uniformAspect.set(1);
+    // if (inAspect.get())
+    uniformAspect.set(cgl.currentTextureEffect.aspectRatio);
+    // else uniformAspect.set(1);
 
     cgl.setTexture(0, texture.tex);
 

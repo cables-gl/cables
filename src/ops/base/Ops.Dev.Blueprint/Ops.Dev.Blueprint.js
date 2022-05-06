@@ -322,6 +322,9 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
             gui.serverOps.loadProjectLibs(data, () =>
             {
                 listenerId = op.patch.addEventListener("patchLoadEnd", cb);
+                data.settings = op.patch.settings;
+                data.namespace = op.patch.namespace;
+                data.name = op.patch.name;
                 op.patch.deSerialize(data, false);
                 const originalSubPatchId = gui.patchView.getCurrentSubPatch();
                 // gui.patchView.setCurrentSubPatch(subPatchId);

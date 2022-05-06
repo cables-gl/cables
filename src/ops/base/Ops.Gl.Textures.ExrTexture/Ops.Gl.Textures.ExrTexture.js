@@ -1,6 +1,7 @@
 const
     inFile = op.inUrl("EXR File", [".exr"]),
     inAlpha = op.inBool("Remove Alpha", false),
+    inFilter = op.inSwitch("Filter", ["Nearest", "Linear"], "Nearest"),
     outTex = op.outTexture("Texture"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
@@ -14,6 +15,7 @@ let
 
 const cgl = op.patch.cgl;
 
+inFilter.onChange =
 inAlpha.onChange =
 inFile.onChange = reloadSoon;
 
@@ -64,12 +66,14 @@ function loadBin(addCacheBuster)
 
                     outChannels.set(channels);
 
+                    let filter = CGL.Texture.FILTER_NEAREST;
+                    if (inFilter.get() === "Linear")filter = CGL.Texture.FILTER_LINEAR;
                     const tex = new CGL.Texture(cgl, {
-                        "filter": CGL.Texture.FILTER_NEAREST,
-                        "wrap": CGL.Texture.WRAP_REPEAT,
+                        "filter": filter,
+                        "wrap": filter,
                         "isFloatingPointTexture": true });
 
-                    tex.initFromData(arr, p.width, p.height, CGL.Texture.FILTER_NEAREST, CGL.Texture.WRAP_REPEAT);
+                    tex.initFromData(arr, p.width, p.height, filter, filter);
                     outTex.set(tex);
                     outWidth.set(p.width);
                     outHeight.set(p.height);
@@ -93,3 +97,12 @@ function loadBin(addCacheBuster)
         oReq.send(null);
     });
 }
+
+op.onFileChanged = function (fn)
+{
+    if (inFile.get() && inFile.get().indexOf(fn) > -1)
+    {
+        outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+        reloadSoon(true);
+    }
+};

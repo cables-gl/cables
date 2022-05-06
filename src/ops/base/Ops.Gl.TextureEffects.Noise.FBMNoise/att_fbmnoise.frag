@@ -122,7 +122,5 @@ void main()
 
     finalColor=vec4( color*vec3(colVal/numLayers),1.0);
 
-
     outColor = cgl_blend(base,finalColor,amount);;
-
 }

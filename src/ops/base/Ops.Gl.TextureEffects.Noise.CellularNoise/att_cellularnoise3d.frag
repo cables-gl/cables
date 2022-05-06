@@ -179,17 +179,13 @@ void main()
 
     float v=Cellular3D(vec3(p.x,p.y,z)+offset);
 
-
     if (harmonics >= 2.0) v += Cellular3D(vec3(p.x,p.y,z)*2.3+offset) * 0.5;
     if (harmonics >= 3.0) v += Cellular3D(vec3(p.x,p.y,z)*4.2+offset) * 0.25;
     if (harmonics >= 4.0) v += Cellular3D(vec3(p.x,p.y,z)*8.1+offset) * 0.125;
     if (harmonics >= 5.0) v += Cellular3D(vec3(p.x,p.y,z)*16.7+offset) * 0.0625;
 
-
     vec4 col=vec4(v,v,v,1.0);
-
     vec4 base=texture(tex,texCoord);
-
 
     float str=1.0;
     #ifdef HAS_TEX_MASK

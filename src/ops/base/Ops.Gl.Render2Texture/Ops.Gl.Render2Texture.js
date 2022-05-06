@@ -41,6 +41,8 @@ function initFbLater()
 
 const prevViewPort = [0, 0, 0, 0];
 
+fpTexture.setUiAttribs({ "title": "Pixelformat Float 32bit" });
+
 fpTexture.onChange =
     depth.onChange =
 clear.onChange =

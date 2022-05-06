@@ -101,5 +101,56 @@
             "date": 1632208806750
         }
     ],
-    "exampleProjectId": "4d2t4d"
+    "exampleProjectId": "4d2t4d",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cxFdQkoIbaM"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Blend Mode index",
+                "text": "Index of Blend Mode from the parameter dropdown"
+            },
+            {
+                "name": "Amount",
+                "text": "opacity of the effect in your composite"
+            },
+            {
+                "name": "depth texture",
+                "text": "depth texture input"
+            },
+            {
+                "name": "Frustum Near",
+                "text": "define the near point of your Frustum range to draw SSAO"
+            },
+            {
+                "name": "Frustum Far",
+                "text": "define the far point of your Frustum range to draw SSAO"
+            },
+            {
+                "name": "Samples",
+                "text": "number of samples, more looks more refined"
+            },
+            {
+                "name": "Ao Radius",
+                "text": "radius of the AO effect"
+            },
+            {
+                "name": "Ao Clamp",
+                "text": "tightness of the AO spread"
+            },
+            {
+                "name": "Enable noise",
+                "text": "disable or enable rough noise over the SSAO effect"
+            },
+            {
+                "name": "Noise amount",
+                "text": "amount of noise over the SSAO effect range"
+            }
+        ]
+    }
 }

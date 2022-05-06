@@ -22,11 +22,6 @@
                 "type": 0,
                 "name": "method index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "method",
-                "subType": "string"
             }
         ],
         "portsOut": [

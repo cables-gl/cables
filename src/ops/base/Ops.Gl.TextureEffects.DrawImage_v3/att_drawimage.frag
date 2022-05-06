@@ -55,7 +55,16 @@ void main()
         vec3 blend=blendRGBA.rgb;
         vec4 baseRGBA=texture(tex,texCoord);
         vec3 base=baseRGBA.rgb;
+
+
+        #ifdef PREMUL
+            blend.rgb = (blend.rgb) + (base.rgb * (1.0 - blendRGBA.a));
+        #endif
+
         vec3 colNew=_blend(base,blend);
+
+
+
 
         #ifdef REMOVE_ALPHA_SRC
             blendRGBA.a=1.0;
@@ -105,14 +114,32 @@ void main()
         #endif
     #endif
 
-    // blendRGBA.rgb=mix( colNew, base ,1.0-am);
-    // blendRGBA.a=clamp((blendRGBA.a*am),0.,1.);
-
-    blendRGBA.rgb=mix(colNew,base,1.0-(am*blendRGBA.a));
-    blendRGBA.a=clamp(baseRGBA.a+(blendRGBA.a*am),0.,1.);
 
 
-    outColor= blendRGBA;
+    #ifndef PREMUL
+        blendRGBA.rgb=mix(colNew,base,1.0-(am*blendRGBA.a));
+        blendRGBA.a=clamp(baseRGBA.a+(blendRGBA.a*am),0.,1.);
+    #endif
 
+    #ifdef PREMUL
+        // premultiply
+        // blendRGBA.rgb = (blendRGBA.rgb) + (baseRGBA.rgb * (1.0 - blendRGBA.a));
+        blendRGBA=vec4(
+            mix(colNew.rgb,base,1.0-(am*blendRGBA.a)),
+            blendRGBA.a*am+baseRGBA.a
+            );
+    #endif
+
+    #ifdef ALPHA_MASK
+    blendRGBA.a=baseRGBA.a;
+    #endif
+
+    outColor=blendRGBA;
 }
+
+
+
+
+
+
 

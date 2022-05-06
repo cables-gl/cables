@@ -1,0 +1,31 @@
+{
+    "id": "283c7eef-680b-45f2-880a-5d9f0762854b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1649944759651
+        },
+        {
+            "message": "Ops.User.pandur.CopyToClipboard renamed to Ops.String.CopyToClipboard",
+            "author": "pandur",
+            "date": 1649945032491
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1649944786277,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Copy"
+            },
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.User.pandur.CopyToClipboard"
+    }
+}

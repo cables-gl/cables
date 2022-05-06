@@ -808,6 +808,42 @@ Geometry.prototype.mapTexCoords2d = function ()
     }
 };
 
+Geometry.prototype.getInfo = function ()
+{
+    const info = {};
+
+    if (this.verticesIndices)info.numFaces = this.verticesIndices.length / 3;
+    else info.numFaces = 0;
+
+    if (this.vertices)info.numVerts = this.vertices.length / 3;
+    else info.numVerts = 0;
+
+    if (this.vertexNormals) info.numNormals = this.vertexNormals.length / 3;
+    else info.numNormals = 0;
+
+    if (this.texCoords) info.numTexCoords = this.texCoords.length / 2;
+    else info.numTexCoords = 0;
+
+    if (this.tangents) info.numTangents = this.tangents.length / 3;
+    else info.numTangents = 0;
+
+    if (this.biTangents) info.numBiTangents = this.biTangents.length / 3;
+    else info.numBiTangents = 0;
+
+    if (this.biTangents) info.numBiTangents = this.biTangents.length / 3;
+    else info.numBiTangents = 0;
+
+    if (this.vertexColors) info.numVertexColors = this.vertexColors.length / 4;
+    else info.numVertexColors = 0;
+
+    if (this.getAttributes()) info.numAttribs = Object.keys(this.getAttributes()).length;
+    else info.numAttribs = 0;
+
+    info.isIndexed = this.isIndexed();
+
+    return info;
+};
+
 // -----------------
 
 // TODO : move this into "old" circle op
@@ -898,5 +934,6 @@ Geometry.json2geom = function (jsonMesh)
 
     return geom;
 };
+
 
 export { Geometry };

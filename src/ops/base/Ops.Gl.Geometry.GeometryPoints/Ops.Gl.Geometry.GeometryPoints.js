@@ -22,5 +22,5 @@ geometry.onChange = function ()
     outNormals.set(geom.vertexNormals);
     outTangents.set(geom.tangents);
     outBiTangents.set(geom.biTangents);
-    outVertexColors.set(geom.vertexColors[0]);
+    outVertexColors.set(geom.vertexColors);
 };

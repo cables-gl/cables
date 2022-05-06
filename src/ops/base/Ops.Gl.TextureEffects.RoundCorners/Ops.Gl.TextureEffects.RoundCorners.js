@@ -1,9 +1,11 @@
-let render = op.inTrigger("render");
-let radius = op.inValueSlider("radius", 0.25);
-let r = op.inValueSlider("r");
-let g = op.inValueSlider("g");
-let b = op.inValueSlider("b");
-let next = op.outTrigger("next");
+const
+    render = op.inTrigger("render"),
+    radius = op.inValueSlider("radius", 0.25),
+    r = op.inValueSlider("r"),
+    g = op.inValueSlider("g"),
+    b = op.inValueSlider("b"),
+    a = op.inValueSlider("a", 1),
+    next = op.outTrigger("next");
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name);
@@ -13,9 +15,12 @@ radius.uniform = new CGL.Uniform(shader, "f", "radius", radius);
 r.uniform = new CGL.Uniform(shader, "f", "r", r);
 g.uniform = new CGL.Uniform(shader, "f", "g", g);
 b.uniform = new CGL.Uniform(shader, "f", "b", b);
+a.uniform = new CGL.Uniform(shader, "f", "a", a);
+r.setUiAttribs({ "colorPick": true });
 
 let uniWidth = new CGL.Uniform(shader, "f", "width", 512);
 let uniHeight = new CGL.Uniform(shader, "f", "height", 512);
+let uniAspect = new CGL.Uniform(shader, "f", "aspect", 1);
 
 render.onTriggered = function ()
 {
@@ -30,7 +35,6 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, texture.tex);
-    // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.tex );
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

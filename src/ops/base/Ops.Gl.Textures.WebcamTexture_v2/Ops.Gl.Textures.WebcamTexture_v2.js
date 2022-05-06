@@ -37,7 +37,7 @@ videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("style", inCss.get());
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
 
-const tex = new CGL.Texture(cgl);
+const tex = new CGL.Texture(cgl, { "name": "webcam" });
 tex.setSize(8, 8);
 textureOut.set(tex);
 
@@ -53,6 +53,7 @@ window.addEventListener("focus", resetTimeout);
 document.addEventListener("visibilitychange", resetTimeout);
 
 updateStyle();
+startWebcam();
 
 function removeElement()
 {
@@ -62,10 +63,8 @@ function removeElement()
 
 function updateStyle()
 {
-    if (!inAsDOM.get())
-        videoElement.setAttribute("style", "display:none;");
-    else
-        videoElement.setAttribute("style", inCss.get());
+    if (!inAsDOM.get()) videoElement.setAttribute("style", "display:none;");
+    else videoElement.setAttribute("style", inCss.get());
 }
 
 inActive.onChange = function ()
@@ -102,7 +101,14 @@ function updateTexture()
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
+    outHeight.set(videoElement.videoHeight || width.get());
+    outWidth.set(videoElement.videoWidth || height.get());
+
+    tex.setSize(videoElement.videoWidth || width.get(), videoElement.videoHeight || height.get());
+
     outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
+
+    cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 
     if (!canceled) timeout = setTimeout(updateTexture, 1000 / fps.get());
 }
@@ -121,11 +127,6 @@ function camInitComplete(stream)
         // videoElement.setAttribute("height", videoElement.videoHeight);
         // videoElement.setAttribute("width", videoElement.videoWidth);
 
-        outHeight.set(videoElement.videoHeight);
-        outWidth.set(videoElement.videoWidth);
-
-        tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
-
         outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
         outError.set("");
         videoElement.play();
@@ -135,7 +136,6 @@ function camInitComplete(stream)
 
 function startWebcam()
 {
-    // removeElement();
     const constraints = { "audio": false, "video": {} };
 
     constraints.video.facingMode = inFacing.get();
@@ -165,5 +165,3 @@ function startWebcam()
             });
     }
 }
-
-startWebcam();

@@ -2,7 +2,6 @@ import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
 import Logger from "../core_logger";
 
-
 const TextureEffect = function (cgl, options)
 {
     this._cgl = cgl;
@@ -21,6 +20,8 @@ const TextureEffect = function (cgl, options)
     //     };
     // if(options && options.fp)opts.isFloatingPointTexture=true;
 
+    this.imgCompVer = 0;
+    this.aspectRatio = 1;
     this._textureTarget = null; // new CGL.Texture(this._cgl,opts);
     this._frameBuf = this._cgl.gl.createFramebuffer();
     this._frameBuf2 = this._cgl.gl.createFramebuffer();
@@ -98,6 +99,8 @@ TextureEffect.prototype.setSourceTexture = function (tex)
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     }
+
+    this.aspectRatio = this._textureSource.width / this._textureSource.height;
 };
 TextureEffect.prototype.continueEffect = function ()
 {
@@ -258,14 +261,29 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
     return true;
 };
 
-TextureEffect.checkOpInEffect = function (op)
+TextureEffect.checkOpInEffect = function (op, minver)
 {
-    if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
+    minver = minver || 0;
+
+    if (op.patch.cgl.currentTextureEffect)
     {
-        op.setUiError("texeffect", null);
-        // op.uiAttr({ "error": null });
-        return true;
+        if (op.uiAttribs.uierrors && op.patch.cgl.currentTextureEffect.imgCompVer >= minver)
+        {
+            op.setUiError("texeffect", null);
+            return true;
+        }
+
+        if (minver && op.patch.cgl.currentTextureEffect.imgCompVer < minver)
+        {
+            op.setUiError("texeffect", "This op must be a child of an ImageCompose op with version >=" + minver, 1);
+        }
     }
+    // if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
+    // {
+    //     op.setUiError("texeffect", null);
+    //     // op.uiAttr({ "error": null });
+    //     return true;
+    // }
 
     if (op.patch.cgl.currentTextureEffect) return true;
 
@@ -279,10 +297,9 @@ TextureEffect.checkOpInEffect = function (op)
     return true;
 };
 
-TextureEffect.getBlendCode = function ()
+TextureEffect.getBlendCode = function (ver)
 {
-    return (
-        "".endl()
+    let src = "".endl()
         + "vec3 _blend(vec3 base,vec3 blend)".endl()
         + "{".endl()
         + "   vec3 colNew=blend;".endl()
@@ -301,9 +318,11 @@ TextureEffect.getBlendCode = function ()
         + "   #ifdef BM_SUBTRACT_ONE".endl()
         + "       colNew=max(base + blend - vec3(1.0), vec3(0.0));".endl()
         + "   #endif".endl()
+
         + "   #ifdef BM_SUBTRACT".endl()
         + "       colNew=base - blend;".endl()
         + "   #endif".endl()
+
         + "   #ifdef BM_DIFFERENCE".endl()
         + "       colNew=abs(base - blend);".endl()
         + "   #endif".endl()
@@ -360,31 +379,33 @@ TextureEffect.getBlendCode = function ()
         + "      colNew=vec3(BlendColorBurnf(base.r, blend.r),BlendColorBurnf(base.g, blend.g),BlendColorBurnf(base.b, blend.b));".endl()
         + "   #endif".endl()
         + "   return colNew;".endl()
-        + "}".endl()
-        + "vec4 cgl_blend(vec4 oldColor,vec4 newColor,float amount)".endl()
-        + "{".endl()
-            + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
-            + "col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
-            + "return col;".endl()
-        + "}" +
+        + "}".endl();
 
-        "vec4 cgl_blendPixel(vec4 base,vec4 col,float amount)".endl() +
-        "{".endl() +
-            "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
+    if (!ver)
+        src += "vec4 cgl_blend(vec4 oldColor,vec4 newColor,float amount)".endl()
+                + "{".endl()
+                    + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
+                    + "col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
+                    + "return col;".endl()
+                + "}".endl();
 
+    if (ver >= 3)
+        src += "vec4 cgl_blendPixel(vec4 base,vec4 col,float amount)".endl() +
+                "{".endl() +
+                    "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
 
-            "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
+                    "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
 
-            "#ifdef BM_ALPHAMASKED".endl() +
-                "newA=base.a;".endl() +
-            "#endif".endl() +
+                    "#ifdef BM_ALPHAMASKED".endl() +
+                        "newA=base.a;".endl() +
+                    "#endif".endl() +
 
-            "return vec4(".endl() +
-                "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
-                "newA);".endl() +
-        "}".endl()
+                    "return vec4(".endl() +
+                        "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
+                        "newA);".endl() +
+                "}".endl();
 
-    );
+    return src;
 };
 
 TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha)

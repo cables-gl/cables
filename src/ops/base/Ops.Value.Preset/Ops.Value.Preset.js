@@ -320,9 +320,10 @@ presetRename.onTriggered = function ()
             const current = presetNames.get();
             const idx = presetNames.uiAttribs.values.indexOf(current);
             presets[idx].name = str;
+            presetNames.set(str);
             saveData();
-            op.refreshParams();
             updateDropdown();
+            op.refreshParams();
         }
     });
 };
@@ -367,6 +368,19 @@ function listenPortChange(port, varname)
     {
         op.patch.setVarValue(varname, port.get());
     };
+
+    port.addEventListener("onUiAttrChange", (attribs) =>
+    {
+        if (attribs.title)
+        {
+            const thePort = data.find((p) => { return p.varname === varname; });
+            if (thePort)
+            {
+                thePort.title = attribs.title;
+                saveData();
+            }
+        }
+    });
 }
 
 op.patch.addEventListener("onOpDelete", (optodelete) =>

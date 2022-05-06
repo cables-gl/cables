@@ -144,11 +144,13 @@ const Op = function ()
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
+
         for (const p in newAttribs)
         {
             this.uiAttribs[p] = newAttribs[p];
         }
 
+        if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
         if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
         this.fireEvent("onUiAttribsChange", newAttribs);
         this.patch.emitEvent("onUiAttribsChange", this);
@@ -215,16 +217,13 @@ const Op = function ()
     Op.prototype.addInPort = function (p)
     {
         if (!(p instanceof Port))
-        {
             throw new Error("parameter is not a port!");
-        }
+
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p.parent = this;
+
         this.portsIn.push(p);
-
-        // if (this.onAddPort) this.onAddPort(p);
         this.fireEvent("onPortAdd", p);
-
 
         return p;
     };
@@ -284,9 +283,7 @@ const Op = function ()
      * @param {String} name
      * @param {Number} value
      * @return {Port} created port
-
      */
-
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
         // old // old
@@ -308,7 +305,6 @@ const Op = function ()
      * @param {Boolean} value
      * @return {Port} created port
      */
-
     Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
     {
         // old
@@ -1060,7 +1056,10 @@ const Op = function ()
 
         op.id = this.id;
         op.uiAttribs = this.uiAttribs;
-        op.storage = this.storage;
+        if (this.storage && Object.keys(this.storage).length > 0)
+        {
+            op.storage = this.storage;
+        }
 
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
@@ -1593,6 +1592,22 @@ const Op = function ()
     {
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     };
+
+
+    /**
+     * Implement to render 2d canvas based graphics from in an op
+     * @function isCurrentUiOp
+     * @instance
+     * @memberof Op
+     * @param {ctx} context of canvas 2d
+     * @param {Object} layer info
+     * @param {number} layer.x x position on canvas
+     * @param {number} layer.y y position on canvas
+     * @param {number} layer.width width of canvas
+     * @param {number} layer.height height of canvas
+     * @param {number} layer.scale current scaling of patchfield view
+     */
+    Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
 
 /**

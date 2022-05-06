@@ -18,13 +18,8 @@
             {
                 "type": 0,
                 "name": "FFT size index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "FFT size",
                 "group": "FFT Options",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,

@@ -39,6 +39,16 @@
             },
             {
                 "type": 0,
+                "name": "Premultiplied",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "removeAlphaSrc",
                 "subType": "boolean"
             },

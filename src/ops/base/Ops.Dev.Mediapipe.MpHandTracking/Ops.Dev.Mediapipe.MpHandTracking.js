@@ -1,7 +1,9 @@
 // todo: warn if ele not dom object , e..g. texture!
 
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
+    inMinConfDetect = op.inFloatSlider("Min Confidence Detect", 0.5),
+    inMinConfTrack = op.inFloatSlider("Min Confidence Tracking", 0.5),
 
     outResult = op.outObject("Result"),
     outFound = op.outNumber("Found Hands");
@@ -10,10 +12,17 @@ const hands = new Hands({ "locateFile": (file) =>
     `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/${file}` });
 
 let camera = null;
+updateOptions();
+
+inMinConfTrack.onChange =
+    inMinConfDetect.onChange = updateOptions;
 
 inEle.onChange = () =>
 {
     if (!inEle.get()) return;
+
+    // if(inEle.get())
+    // console.log(inEle.get().videoWidth,inEle.get().videoHeight);
 
     // op.log("init camera");
     camera = new Camera(inEle.get(), {
@@ -23,17 +32,20 @@ inEle.onChange = () =>
 
             if (ele) await hands.send({ "image": ele });
         },
-        "width": 640,
-        "height": 480
+        "width": inEle.get().width,
+        "height": inEle.get().height
     });
     camera.start();
 };
 
-hands.setOptions({
-    "maxNumHands": 2,
-    "minDetectionConfidence": 0.5,
-    "minTrackingConfidence": 0.5
-});
+function updateOptions()
+{
+    hands.setOptions({
+        "maxNumHands": 2,
+        "minDetectionConfidence": inMinConfDetect.get(),
+        "minTrackingConfidence": inMinConfTrack.get()
+    });
+}
 
 hands.onResults((r) =>
 {
@@ -42,14 +54,14 @@ hands.onResults((r) =>
     // let lines = null;
     // let lines2 = null;
 
-    // if (r && r.multiHandedness)
-    // {
-    //     outFound.set(r.multiHandedness.length);
-    // }
-    // else
-    // {
-    //     outFound.set(0);
-    // }
+    if (r && r.multiHandedness)
+    {
+        outFound.set(r.multiHandedness.length);
+    }
+    else
+    {
+        outFound.set(0);
+    }
 
     // // console.log(r);
 

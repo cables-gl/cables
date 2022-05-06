@@ -21,16 +21,20 @@ function getSupportedMimeTypes(media, types, codecs, codecsB)
     {
         const mimeType = `${media}/${type}`;
         codecs.forEach((codec) =>
-            [`${mimeType}; codecs=${codec}`].forEach((variation) =>
+        {
+            return [`${mimeType}; codecs=${codec}`].forEach((variation) =>
             {
                 if (isSupported(variation)) supported.push(variation);
 
                 codecsB.forEach((codecB) =>
-                    [`${mimeType}; codecs=${codec},${codecB}`].forEach((eachVariation) =>
+                {
+                    return [`${mimeType}; codecs=${codec},${codecB}`].forEach((eachVariation) =>
                     {
                         if (isSupported(eachVariation)) supported.push(eachVariation);
-                    }));
-            }));
+                    });
+                });
+            });
+        });
     });
     return supported;
 }
@@ -195,7 +199,7 @@ function stopRecording()
 {
     if (!mediaRecorder)
     {
-        op.warn("cant stop no mediarecorder");
+        // op.warn("cant stop no mediarecorder");
         return;
     }
     op.verbose("mediaRecorder.state", mediaRecorder.state);

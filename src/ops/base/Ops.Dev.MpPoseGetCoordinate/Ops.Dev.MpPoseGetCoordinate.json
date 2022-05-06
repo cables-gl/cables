@@ -43,7 +43,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.MpPoseGetCoordinate"
+        "name": "Ops.Dev.MpPoseGetCoordinate"
     },
     "summary": "",
     "issues": "",

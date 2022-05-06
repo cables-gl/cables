@@ -39,6 +39,11 @@
                 "type": 0,
                 "name": "Remove Alpha",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

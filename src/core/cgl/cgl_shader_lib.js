@@ -8,6 +8,11 @@ const ShaderLibMods = {
         this.name = "blendmodes";
         this.srcHeadFrag = TextureEffect.getBlendCode();
     },
+    "CGL.BLENDMODES3": function ()
+    {
+        this.name = "blendmodes3";
+        this.srcHeadFrag = TextureEffect.getBlendCode(3);
+    },
 
     // quite good random numbers, but somehow don't work in ANGLE
     "CGL.RANDOM_OLD": function ()

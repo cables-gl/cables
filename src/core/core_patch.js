@@ -277,11 +277,11 @@ Patch.prototype.getAssetPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
-    if (filename && filename.startsWith("data:")) return filename;
     if (this._isLocal && !this.config.allowLocalFileAccess) this.exitError("localAccess", "Browser security forbids loading files directly without a webserver. Upload files to a server to work. use allowLocalFileAccess:true to ignore this.");
     if (!filename) return filename;
     filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
+    if (filename.indexOf("data:") === 0) return filename;
 
     filename = filename.replace("//", "/");
     return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
@@ -721,6 +721,7 @@ Patch.prototype.serialize = function (options)
 
     options = options || {};
     if (!options.hasOwnProperty("removeBlueprints"))options.removeBlueprints = true;
+    if (!options.hasOwnProperty("removeFromNetworkAttr"))options.removeFromNetworkAttr = true;
 
     obj.ops = [];
     obj.settings = this.settings;
@@ -729,6 +730,10 @@ Patch.prototype.serialize = function (options)
         const op = this.ops[i];
 
         if (options.removeBlueprints && op.storage && op.storage.blueprint) continue;
+        if (options.removeFromNetworkAttr && op.uiAttribs && op.uiAttribs.hasOwnProperty("fromNetwork"))
+        {
+            delete op.uiAttribs.fromNetwork;
+        }
 
         obj.ops.push(op.getSerialized());
     }

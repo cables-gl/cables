@@ -13,27 +13,23 @@ inTex.onLinkChanged = () =>
     op.setUiAttrib({ "extendTitle": "" });
 };
 
-op.renderPreviewLayer = (ctx, pos, size) =>
+op.renderVizLayer = (ctx, layer) =>
 {
     const
         realTexture = inTex.get(),
         gl = op.patch.cgl.gl;
 
+    // var ext = gl.getExtension('EXT_color_buffer_float');
+
     ctx.fillStyle = "#222";
-    ctx.fillRect(
-        pos[0],
-        pos[1],
-        size[0],
-        size[1]
-    );
+    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
     if (!realTexture) return;
 
-    const sc = 1000 / gui.patchView._patchRenderer.viewBox.zoom * 1.5;
-    let lines = Math.floor(size[1] / sc / 10 - 1);
+    let lines = Math.floor(layer.height / layer.scale / 10 - 1);
 
     ctx.save();
-    ctx.scale(sc, sc);
+    ctx.scale(layer.scale, layer.scale);
 
     ctx.font = "normal 10px sourceCodePro";
     ctx.fillStyle = "#ccc";
@@ -55,7 +51,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
             gl.TEXTURE_2D, realTexture.tex, 0
         );
 
-        let isFloatingPoint = realTexture.textureType == CGL.Texture.TYPE_FLOAT;
+        let isFloatingPoint = realTexture.isFloatingPoint();
         if (isFloatingPoint) channelType = gl.FLOAT;
 
         if (
@@ -106,15 +102,15 @@ op.renderPreviewLayer = (ctx, pos, size) =>
         ctx.fillStyle = "#666";
 
         ctx.fillText(i / stride,
-            pos[0] / sc + padding,
-            pos[1] / sc + lineHeight + i / stride * lineHeight + padding);
+            layer.x / layer.scale + padding,
+            layer.y / layer.scale + lineHeight + i / stride * lineHeight + padding);
 
         if (inTex.get().isFloatingPoint()) ctx.fillStyle = "rgba(" + arr[i + 0] * 255 + "," + arr[i + 1] * 255 + "," + arr[i + 2] * 255 + "," + arr[i + 3] * 255 + ")";
         else ctx.fillStyle = "rgba(" + arr[i + 0] + "," + arr[i + 1] + "," + arr[i + 2] + "," + arr[i + 3] + ")";
 
         ctx.fillRect(
-            pos[0] / sc + padding + 25,
-            pos[1] / sc + lineHeight + i / stride * lineHeight + padding - 7,
+            layer.x / layer.scale + padding + 25,
+            layer.y / layer.scale + lineHeight + i / stride * lineHeight + padding - 7,
             15, 8);
 
         ctx.fillStyle = "#ccc";
@@ -123,8 +119,8 @@ op.renderPreviewLayer = (ctx, pos, size) =>
 
         for (let s = 0; s < stride; s++)
         {
-            let str = "?";
             let v = arr[i + s];
+            let str = "" + v;
 
             if (!isFp)v /= 255;
 
@@ -133,7 +129,7 @@ op.renderPreviewLayer = (ctx, pos, size) =>
             else if (typeof v == "array") str = "[]";
             else if (typeof v == "object") str = "{}";
 
-            ctx.fillText(str, pos[0] / sc + s * 60 + 70, pos[1] / sc + 10 + i / stride * 10 + padding);
+            ctx.fillText(str, layer.x / layer.scale + s * 60 + 70, layer.y / layer.scale + 10 + i / stride * 10 + padding);
         }
     }
 

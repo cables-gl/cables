@@ -1,0 +1,28 @@
+{
+    "id": "37575d2e-4ba6-4d2b-b00c-c503666867c5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1651689654181
+        },
+        {
+            "message": "Ops.User.pandur.VizNumberBar renamed to Ops.Ui.VizNumberBar",
+            "author": "pandur",
+            "date": 1651741113229
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1651689657343,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.User.pandur.VizNumberBar"
+    }
+}

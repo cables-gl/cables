@@ -5,8 +5,8 @@ const
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
     inSize = op.inValueSlider("Size", 0.25),
     inInner = op.inValueSlider("Inner"),
-    inStretchX = op.inValueSlider("Stretch X"),
-    inStretchY = op.inValueSlider("Stretch Y"),
+    inStretchX = op.inFloat("Stretch X"),
+    inStretchY = op.inFloat("Stretch Y"),
     inX = op.inValue("Pos X", 0),
     inY = op.inValue("Pos Y", 0),
     fallOff = op.inValueSelect("fallOff", ["Linear", "SmoothStep"], "Linear"),
@@ -59,7 +59,7 @@ function updateDefines()
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     let a = cgl.currentTextureEffect.getHeight() / cgl.currentTextureEffect.getWidth();
     aspect.set(a);

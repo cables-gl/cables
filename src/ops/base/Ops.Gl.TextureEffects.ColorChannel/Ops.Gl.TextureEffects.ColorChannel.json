@@ -3,38 +3,38 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "channelR",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "channelG",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "channelB",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mono",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Alpha",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

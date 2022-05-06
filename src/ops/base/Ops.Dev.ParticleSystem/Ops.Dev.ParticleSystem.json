@@ -152,7 +152,7 @@
         ],
         "name": "Ops.Dev.ParticleSystem"
     },
-    "summary": "convert a RGBE texture to HDR/floating point texture",
+    "summary": "",
     "issues": "",
     "caniusequery": "",
     "collections": null,
@@ -160,5 +160,6 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": ""
 }

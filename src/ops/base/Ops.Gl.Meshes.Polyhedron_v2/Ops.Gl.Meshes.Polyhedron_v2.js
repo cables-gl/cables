@@ -35,7 +35,7 @@ function addFace(verts)
 
             var index = vertices.length / 3 - 1;
             faces.push(index);
-            vertexColors.push(colR, colG, colB);
+            vertexColors.push(colR, colG, colB, 1);
         }
     }
     else
@@ -44,7 +44,7 @@ function addFace(verts)
         for (var i = 0; i < verts.length; i++)
         {
             vertices.push(verts[i][0], verts[i][1], verts[i][2]);
-            vertexColors.push(colR, colG, colB);
+            vertexColors.push(colR, colG, colB, 1);
         }
 
         var index = vertices.length / 3 - 4;
@@ -73,14 +73,14 @@ function addFace(verts)
         avgZ /= verts.length;
 
         vertices.push(avgX, avgY, avgZ);
-        vertexColors.push(colR, colG, colB);
+        vertexColors.push(colR, colG, colB, 1);
 
         var index = vertices.length / 3 - 1;
 
         for (var i = 0; i < verts.length; i++)
         {
             vertices.push(verts[i][0], verts[i][1], verts[i][2]);
-            vertexColors.push(colR, colG, colB);
+            vertexColors.push(colR, colG, colB, 1);
         }
 
         const indexEnd = vertices.length / 3 - 1;

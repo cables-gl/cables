@@ -30,7 +30,7 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.User.pandur.ValueLogger"
+        "name": "Ops.Dev.VizLogger"
     },
     "authorName": "pandur",
     "created": 1645174874478
