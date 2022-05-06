@@ -38,7 +38,7 @@ method.onChange = function ()
 render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
-    if (!image.get()) return next.trigger();
+    // if (!image.get()) return next.trigger();
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();

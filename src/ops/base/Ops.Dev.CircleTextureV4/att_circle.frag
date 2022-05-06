@@ -29,6 +29,7 @@ float dist(float x,float y,float x2,float y2)
 void main()
 {
     vec4 base=texture(tex,texCoord);
+
     vec4 col=vec4(r,g,b,1.0);
     float dist = dist(x,y*aspect,(texCoord.x-0.5)*2.0,(texCoord.y-0.5)*2.0*aspect);
 
@@ -46,6 +47,8 @@ void main()
     #endif
 
     outColor=cgl_blendPixel(base,col,amount*v);
+
+    outColor.a-=(1.0-a)*v;
 
     #ifdef WARN_OVERFLOW
         float width=0.01;
