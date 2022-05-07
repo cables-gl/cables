@@ -50,7 +50,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.InvertV2"
+        "name": "Ops.Dev.InvertV2"
     },
     "docs": {
         "ports": []

@@ -8,6 +8,7 @@ void main()
     vec4 col=vec4(0.0,0.0,0.0,1.0);
     col=texture(tex,texCoord);
 
+#ifdef USE_TEXTURE
     float newAlpha=0.0;
 
     #ifdef FROM_RED
@@ -48,7 +49,11 @@ void main()
         col.a*=newAlpha;
     #endif
 
-    // col.a*=amount;
+#endif
+#ifndef USE_TEXTURE
+    col.a*=amount;
+    // col.g=1.0;
+#endif
 
     outColor= col;
 }

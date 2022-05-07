@@ -12,6 +12,8 @@ const
     outDefaultTex = op.outNumber("Is Default Texture", false),
     outId = op.outNumber("Id");
 
+outFp.setUiAttribs({ "title": "Pixelformat Float 32bit" });
+
 const emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl);
 const defaultTex = CGL.Texture.getTempTexture(op.patch.cgl);
 

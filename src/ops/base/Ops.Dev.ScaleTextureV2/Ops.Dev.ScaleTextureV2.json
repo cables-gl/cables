@@ -67,7 +67,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.ScaleTextureV2"
+        "name": "Ops.Dev.ScaleTextureV2"
     },
     "summary": "Scales a texture",
     "docs": {

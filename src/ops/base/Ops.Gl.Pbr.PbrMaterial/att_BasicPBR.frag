@@ -135,6 +135,7 @@ float Dither_InterleavedGradientNoise(float a) {
 #endif
 
 #ifdef USE_HEIGHT_TEX
+#ifndef WEBGL1
 // based on Jasper Flicks great tutorials (:
 float getSurfaceHeight(sampler2D surfaceHeightMap, vec2 UV)
 {
@@ -179,6 +180,7 @@ vec2 RaymarchedParallax(vec2 UV, sampler2D surfaceHeightMap, float strength, vec
 	return uvOffset;
 }
 #endif
+#endif
 
 {{PBR_FRAGMENT_HEAD}}
 void main()
@@ -193,9 +195,11 @@ void main()
     #ifndef USE_OPTIMIZED_HEIGHT
     vec3 fragTangentViewDir = normalize(invTBN * (camPos - FragPos.xyz));
     #endif
+	#ifndef WEBGL1
     UV0 += RaymarchedParallax(UV0, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
     #endif
-
+	#endif
+	
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
         vec4 AlbedoMap   = texture2D(_AlbedoMap, UV0);

@@ -29,7 +29,7 @@ void main()
 
 
     vec3 m=vec3( INVR , INVG , INVB );
-    vec4 invert = vec4(col.rgb-m,col.a);
+    vec4 invert = vec4(clamp(m-col.rgb,0.0,1.0),col.a);
 
     outColor=cgl_blendPixel(col,invert,amount);
 
