@@ -21,12 +21,11 @@ const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 const inToggleGR            = op.inBool("Disable geometric roughness", false);
 const inToggleNMGR          = op.inBool("Use roughness from normal map", false);
 const inUseVertexColours    = op.inValueBool("Use Vertex Colours", false);
-const inVertexColourMode    = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "roughness", "metalness"], "colour");
+const inVertexColourMode    = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
 const inHeightDepth         = op.inFloat("Height Intensity", 1.0);
 const inUseOptimizedHeight  = op.inValueBool("Faster heightmapping", false);
 const inUseClearCoat        = op.inValueBool("Use Clear Coat", false);
 const inClearCoatRoughness  = op.inFloatSlider("Clear Coat Roughness", 0.5);
-const inLightmapRGBE        = op.inBool("Lightmap is RGBE", false);
 
 // texture inputs
 const inTexIBLLUT           = op.inTexture("IBL LUT");
@@ -41,6 +40,7 @@ const inTexHeight           = op.inTexture("Height");
 const inLightmap            = op.inTexture("Lightmap");
 const inDiffuseIntensity    = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity   = op.inFloat("Specular Intensity", 1.0);
+const inLightmapRGBE        = op.inBool("Lightmap is RGBE", false);
 const inLightmapIntensity   = op.inFloat("Lightmap Intensity", 1.0);
 
 // outputs
@@ -52,9 +52,9 @@ op.toWorkPortsNeedToBeLinked(inTrigger);
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
-op.setPortGroup("Advanced Shader Parameters", [inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inUseClearCoat, inClearCoatRoughness, inLightmapRGBE]);
+op.setPortGroup("Advanced Shader Parameters", [inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inUseClearCoat, inClearCoatRoughness]);
 op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexHeight, inLightmap]);
-op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
+op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 // globals
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
@@ -137,6 +137,18 @@ inLightmapRGBE.onChange = () =>
 inUseVertexColours.onChange = () =>
 {
     PBRShader.toggleDefine("VERTEX_COLORS", inUseVertexColours.get());
+    
+    if (!inUseVertexColours.get())
+    {
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    }
+    else
+    {
+        if (inVertexColourMode.get() === "lightmap")
+        {
+            PBRShader.define("USE_LIGHTMAP");
+        }
+    }
 };
 inUseClearCoat.onChange = () =>
 {
@@ -151,6 +163,8 @@ inVertexColourMode.onChange = function ()
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
     else if (inVertexColourMode.get() === "AORM")
     {
@@ -159,6 +173,8 @@ inVertexColourMode.onChange = function ()
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
     else if (inVertexColourMode.get() === "AO")
     {
@@ -167,22 +183,39 @@ inVertexColourMode.onChange = function ()
         PBRShader.removeDefine("VCOL_COLOUR");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
-    else if (inVertexColourMode.get() === "roughness")
+    else if (inVertexColourMode.get() === "R")
     {
         PBRShader.define("VCOL_R");
         PBRShader.removeDefine("VCOL_AORM");
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_COLOUR");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
-    else if (inVertexColourMode.get() === "metalness")
+    else if (inVertexColourMode.get() === "M")
     {
         PBRShader.define("VCOL_M");
         PBRShader.removeDefine("VCOL_AORM");
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_COLOUR");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    }
+    else if (inVertexColourMode.get() === "lightmap")
+    {
+        PBRShader.define("VCOL_LIGHTMAP");
+        PBRShader.removeDefine("VCOL_AORM");
+        PBRShader.removeDefine("VCOL_AO");
+        PBRShader.removeDefine("VCOL_R");
+        PBRShader.removeDefine("VCOL_COLOUR");
+        PBRShader.removeDefine("VCOL_M");
+
+        PBRShader.define("USE_LIGHTMAP");
     }
 };
 
@@ -222,7 +255,17 @@ inToggleGR.onChange = () =>
 };
 inLightmap.onChange = () =>
 {
-    PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    if (!inUseVertexColours.get())
+    {
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    }
+    else
+    {
+        if (inVertexColourMode.get() === "lightmap")
+        {
+            PBRShader.define("USE_LIGHTMAP");
+        }
+    }
 };
 inUseOptimizedHeight.onChange = () =>
 {
@@ -439,6 +482,13 @@ function doRender()
     {
         PBRShader.pushTexture(inLightmapUniform, inLightmap.get().tex);
         inLightmapIntensityUniform.setValue(inLightmapIntensity.get());
+    }
+    if (inUseVertexColours.get())
+    {
+        if (inVertexColourMode.get() === "lightmap")
+        {
+            inLightmapIntensityUniform.setValue(inLightmapIntensity.get());
+        }
     }
 
     if (!inTexAORM.get())
