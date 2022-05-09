@@ -66,6 +66,23 @@ float getDistanceAttenuation(vec3 posToLight, float falloff, vec3 V, float volum
     return attenuation / max(distanceSquare, max(1e-4, volume));
 }
 
+#ifdef USE_CLEAR_COAT
+// from https://github.com/google/filament/blob/73e339b05d67749e3b1d1d243650441162c10f8a/shaders/src/shading_model_standard.fs
+// modified to fit variable names / structure
+float clearCoatLobe(vec3 shading_clearCoatNormal, vec3 h, float LoH, float CCSpecK)
+{
+    float clearCoatNoH = clamp(dot(shading_clearCoatNormal, h), 0.0, 1.0);
+
+    // clear coat specular lobe
+    float D = D_GGX(CCSpecK, clearCoatNoH, h);
+    // from https://github.com/google/filament/blob/036bfa9b20d730bb8e5852ed449b024570167648/shaders/src/brdf.fs
+    float V = clamp(0.25 / (LoH * LoH), 0.0, 1.0);
+    float F = F_Schlick(0.04, 1.0, LoH); // fix IOR to 1.5
+
+    return D * V * F;
+}
+#endif
+
 #ifdef USE_ENVIRONMENT_LIGHTING
 vec3 evaluateLighting(Light light, vec3 L, vec4 FragPos, vec3 V, vec3 N, vec3 albedo, float specK, float NdotV, vec3 F0, float envBRDFY, float AO, bool hasFalloff)
 #else
@@ -103,6 +120,10 @@ vec3 evaluateLighting(Light light, vec3 L, vec4 FragPos, vec3 V, vec3 N, vec3 al
 
         directLightingResult = (directLighting * light.color) *
                           (light.lightProperties.INTENSITY * attenuation * NdotL * AO);
+
+        #ifdef USE_CLEAR_COAT
+        directLightingResult += clearCoatLobe(normM, H, LdotH, _ClearCoatRoughness);
+        #endif
     }
     return directLightingResult;
 }
