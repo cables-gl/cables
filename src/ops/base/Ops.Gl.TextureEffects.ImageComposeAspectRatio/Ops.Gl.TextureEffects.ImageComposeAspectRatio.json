@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.ImageComposeAspectRatio renamed to Ops.Dev.ImageComposeAspectRatio",
             "author": "pandur",
             "date": 1650439584193
+        },
+        {
+            "message": "Ops.Dev.ImageComposeAspectRatio renamed to Ops.Gl.TextureEffects.ImageComposeAspectRatio",
+            "author": "pandur",
+            "date": 1652106097502
         }
     ],
     "authorName": "pandur",
