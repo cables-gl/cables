@@ -34,10 +34,6 @@
                 "name": "Update"
             },
             {
-                "type": 1,
-                "name": "Reset"
-            },
-            {
                 "type": 0,
                 "name": "Simulate",
                 "subType": "boolean"
@@ -63,6 +59,10 @@
             {
                 "type": 1,
                 "name": "Activate All"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [

@@ -1,13 +1,13 @@
 const
     inExec = op.inTrigger("Update"),
-    inReset = op.inTriggerButton("Reset"),
     inSim = op.inBool("Simulate", true),
 
     inGravX = op.inFloat("Gravity X", 0),
-    inGravY = op.inFloat("Gravity Y", -9),
+    inGravY = op.inFloat("Gravity Y", -9.81),
     inGravZ = op.inFloat("Gravity Z", 0),
 
     inActivateAll = op.inTriggerButton("Activate All"),
+    inReset = op.inTriggerButton("Reset"),
 
     next = op.outTrigger("next"),
     outNumBodies = op.outNumber("Total Bodies"),
@@ -30,7 +30,7 @@ inReset.onTriggered = () =>
 
 inActivateAll.onTriggered = () =>
 {
-    ammoWorld.activateAllBodies();
+    if (ammoWorld) ammoWorld.activateAllBodies();
 };
 
 inGravX.onChange = inGravZ.onChange = inGravY.onChange = updateGravity;
