@@ -131,6 +131,16 @@
             "message": "Ops.User.pandur.PlasmaV2 renamed to Ops.Dev.PlasmaV2",
             "author": "pandur",
             "date": 1650606002349
+        },
+        {
+            "message": "Ops.Dev.PlasmaV2 renamed to Ops.TextureEffects.Plasma_v2",
+            "author": "pandur",
+            "date": 1652093240609
+        },
+        {
+            "message": "Ops.TextureEffects.Plasma_v2 renamed to Ops.Gl.TextureEffects.Plasma_v2",
+            "author": "pandur",
+            "date": 1652093329365
         }
     ]
 }

@@ -82,6 +82,16 @@
             "message": "Ops.User.pandur.CheckerBoard renamed to Ops.Dev.CheckerBoardV2",
             "author": "pandur",
             "date": 1650526330246
+        },
+        {
+            "message": "Ops.Dev.CheckerBoardV2 renamed to Ops.Gl.TextureEffects.CheckerBoardV2",
+            "author": "pandur",
+            "date": 1652092996515
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.CheckerBoardV2 renamed to Ops.Gl.TextureEffects.CheckerBoard_v2",
+            "author": "pandur",
+            "date": 1652093049579
         }
     ]
 }

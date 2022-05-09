@@ -17,7 +17,7 @@ const render = op.inTrigger("render"),
 
 r.setUiAttribs({ "colorPick": true });
 
-op.setPortGroup("Size", [inWidth, inHeight, inAspect]);
+op.setPortGroup("Size", [inWidth, inHeight]);
 op.setPortGroup("Position", [inPosX, inPosY]);
 op.setPortGroup("Color", [r, g, b, a]);
 

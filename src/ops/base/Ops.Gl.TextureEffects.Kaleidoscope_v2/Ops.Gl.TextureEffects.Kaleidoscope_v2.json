@@ -83,6 +83,11 @@
             "message": "Ops.User.pandur.KaleidoscopeV2 renamed to Ops.Dev.KaleidoscopeV2",
             "author": "pandur",
             "date": 1650886527357
+        },
+        {
+            "message": "Ops.Dev.KaleidoscopeV2 renamed to Ops.Gl.TextureEffects.Kaleidoscope_v2",
+            "author": "pandur",
+            "date": 1652093373646
         }
     ],
     "exampleProjectId": "n4DaW6"

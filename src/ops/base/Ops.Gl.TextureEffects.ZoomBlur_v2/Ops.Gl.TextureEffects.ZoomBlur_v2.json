@@ -52,6 +52,11 @@
             "message": "Ops.User.pandur.ZoomBlurV2 renamed to Ops.Dev.ZoomBlurV2",
             "author": "pandur",
             "date": 1650523471300
+        },
+        {
+            "message": "Ops.Dev.ZoomBlurV2 renamed to Ops.Gl.TextureEffects.ZoomBlur_v2",
+            "author": "pandur",
+            "date": 1652093307627
         }
     ]
 }

@@ -125,6 +125,11 @@
             "message": "Ops.User.pandur.NgImageCompose renamed to Ops.Dev.NewImageCompose",
             "author": "pandur",
             "date": 1645548214972
+        },
+        {
+            "message": "Ops.Dev.NewImageCompose renamed to Ops.Gl.TextureEffects.ImageCompose_v3",
+            "author": "pandur",
+            "date": 1652092883025
         }
     ],
     "issues": "",

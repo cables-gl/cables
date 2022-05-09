@@ -15,6 +15,16 @@
             "message": "Ops.User.pandur.Shapes2D renamed to Ops.Dev.Shapes2DV2",
             "author": "pandur",
             "date": 1650447632717
+        },
+        {
+            "message": "Ops.Dev.Shapes2DV2 renamed to Ops.Gl.TextureEffects.Shapes2D_v2",
+            "author": "pandur",
+            "date": 1652093186995
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Shapes2D_v2 renamed to Ops.Gl.TextureEffects.Shapes2d_v2",
+            "author": "pandur",
+            "date": 1652093281052
         }
     ],
     "authorName": "andro",

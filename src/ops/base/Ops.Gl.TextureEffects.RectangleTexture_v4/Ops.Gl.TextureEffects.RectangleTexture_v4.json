@@ -129,6 +129,21 @@
             "message": "Ops.User.pandur.RectangleTextureV4 renamed to Ops.Dev.RectangleTextureV4",
             "author": "pandur",
             "date": 1646847661838
+        },
+        {
+            "message": "Ops.Dev.RectangleTextureV4 renamed to Ops.Gl.TextureEffects.RectangleTextureV4",
+            "author": "pandur",
+            "date": 1652093088755
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RectangleTextureV4 renamed to Ops.Dev.RectangleTexture_v4",
+            "author": "pandur",
+            "date": 1652093107926
+        },
+        {
+            "message": "Ops.Dev.RectangleTexture_v4 renamed to Ops.Gl.TextureEffects.RectangleTexture_v4",
+            "author": "pandur",
+            "date": 1652093137359
         }
     ],
     "summary": "Draw a 2D rectangle with controllable parameters",
