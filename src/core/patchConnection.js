@@ -217,6 +217,17 @@ const PatchConnectionSender = function (patch)
             this.send(CABLES.PACO_OP_DELETE, { "op": op.id, "objName": op.objName });
         });
 
+    patch.addEventListener("patchClearStart", () =>
+    {
+        this.paused = true;
+    });
+
+    patch.addEventListener("patchClearEnd",
+        () =>
+        {
+            this.paused = false;
+        });
+
     patch.addEventListener("patchLoadStart", () =>
     {
         this.paused = true;

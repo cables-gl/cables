@@ -289,10 +289,12 @@ Patch.prototype.getFilePath = function (filename)
 
 Patch.prototype.clear = function ()
 {
+    this.emitEvent("patchClearStart");
     this.cgl.TextureEffectMesh = null;
     this.animFrameOps.length = 0;
     this.timer = new Timer();
     while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
+    this.emitEvent("patchClearEnd");
 };
 
 Patch.getOpClass = function (objName)
