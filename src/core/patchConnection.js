@@ -282,6 +282,7 @@ const PatchConnectionSender = function (patch)
 
         delete newAttribs.extendTitle;
         delete newAttribs.history;
+        delete newAttribs.translate;
         if (Object.keys(newAttribs).length > 0)
         {
             this.send(CABLES.PACO_UIATTRIBS, { "op": op.id, "uiAttribs": newAttribs });
