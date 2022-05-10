@@ -193,11 +193,11 @@
             },
             {
                 "name": "AORM",
-                "text": "linear rec.709, R: ambient occlusion, G: roughness, B: metalness"
+                "text": "linear bt.709, R: ambient occlusion, G: roughness, B: metalness"
             },
             {
                 "name": "Normal map",
-                "text": "linear rec.709, +Y, TS per vertex"
+                "text": "linear bt.709, +Y, TS per vertex"
             }
         ]
     },

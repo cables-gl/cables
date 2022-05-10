@@ -8,6 +8,11 @@
             },
             {
                 "type": 0,
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Geometry",
                 "subType": "integer"
             },
@@ -15,6 +20,16 @@
                 "type": 0,
                 "name": "Duration",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Easing index",
+                "subType": "integer"
             },
             {
                 "type": 2,

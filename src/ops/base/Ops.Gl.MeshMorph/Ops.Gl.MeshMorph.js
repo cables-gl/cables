@@ -1,14 +1,18 @@
 const
     render = op.inTrigger("render"),
+    inMethod = op.inSwitch("Method", ["Auto Anim", "Interpolate Index"], "Auto Anim"),
     nextGeom = op.inValueInt("Geometry"),
     duration = op.inValue("Duration", 1.0),
+    inIndex = op.inFloat("Index", 0),
     finished = op.outValue("Finished"),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
 let mesh = null;
 const inGeoms = [];
-nextGeom.onChange = updateGeom;
+
+inIndex.onChange =
+    nextGeom.onChange = updateGeom;
 
 let oldGeom = 0;
 const anim = new CABLES.Anim();
@@ -16,12 +20,12 @@ anim.clear();
 anim.createPort(op, "Easing", updateGeom);
 
 const geoms = [];
-// var mesh=null;
 window.meshsequencecounter = window.meshsequencecounter || 1;
 window.meshsequencecounter++;
 const prfx = String.fromCharCode(97 + window.meshsequencecounter);
 const needsUpdateFrame = false;
 render.onTriggered = doRender;
+inMethod.onChange = updateUi;
 
 const srcHeadVert = ""
     .endl() + "IN vec3 " + prfx + "attrMorphTargetA;"
@@ -31,7 +35,6 @@ const srcHeadVert = ""
     .endl();
 
 const srcBodyVert = ""
-    // .endl()+'   pos =vec4(vPosition,1.0);'
     .endl() + "if({{mod}}doMorph==1.0){"
     .endl() + "  pos = vec4( " + prfx + "attrMorphTargetA * {{mod}}fade + " + prfx + "attrMorphTargetB * (1.0 - {{mod}}fade ), 1. );"
     .endl() + "}"
@@ -41,12 +44,22 @@ let uniFade = null;
 let module = null;
 let shader = null;
 let uniDoMorph = null;
+let autoAnim = true;
 
 for (let i = 0; i < 8; i++)
 {
     const inGeom = op.inObject("Geometry " + (i));
     inGeom.onChange = updateMeshes;
     inGeoms.push(inGeom);
+}
+
+function updateUi()
+{
+    autoAnim = inMethod.get() == "Auto Anim";
+    duration.setUiAttribs({ "greyout": !autoAnim });
+    nextGeom.setUiAttribs({ "greyout": !autoAnim });
+
+    inIndex.setUiAttribs({ "greyout": autoAnim });
 }
 
 function checkLength()
@@ -90,29 +103,41 @@ function updateMeshes()
 
 function updateGeom()
 {
-    let getGeom = nextGeom.get();
-    if (getGeom < 0) getGeom = 0;
-    else if (getGeom >= 7) getGeom = 7;
-    let temp = 0;//= 0
+    let geom1;
+    let geom2;
 
-    if (oldGeom === getGeom) return;
+    if (autoAnim)
+    {
+        let getGeom = nextGeom.get();
+        if (getGeom < 0) getGeom = 0;
+        else if (getGeom >= 7) getGeom = 7;
+        let temp = 0;
 
-    anim.clear();
-    anim.setValue(op.patch.freeTimer.get(), 0);
-    anim.setValue(op.patch.freeTimer.get() + duration.get(), 1,
-        function ()
-        {
-            // op.log("finished");
-            oldGeom = getGeom;
-            finished.set(true);
-        });
-    finished.set(false);
+        if (oldGeom === getGeom) return;
 
-    const geom1 = inGeoms[oldGeom].get();
+        anim.clear();
+        anim.setValue(op.patch.freeTimer.get(), 0);
+        anim.setValue(op.patch.freeTimer.get() + duration.get(), 1,
+            function ()
+            {
+                oldGeom = getGeom;
+                finished.set(true);
+            });
+        finished.set(false);
 
-    temp = getGeom;
+        geom1 = inGeoms[oldGeom].get();
+        temp = getGeom;
+        geom2 = inGeoms[temp].get();
+    }
 
-    const geom2 = inGeoms[temp].get();
+    if (!autoAnim)
+    {
+        let a = Math.max(Math.floor(inIndex.get()), 0);
+        let b = Math.min(Math.ceil(inIndex.get()), 7);
+
+        geom1 = inGeoms[a].get();
+        geom2 = inGeoms[b].get();
+    }
 
     if (mesh && geom1 && geom2 && geom1._vertices && geom2._vertices)
     {
@@ -150,7 +175,15 @@ function doRender()
 
     if (uniDoMorph)
     {
-        uniFade.setValue(anim.getValue(op.patch.freeTimer.get()));
+        if (autoAnim)
+        {
+            uniFade.setValue(anim.getValue(op.patch.freeTimer.get()));
+        }
+        else
+        {
+            console.log(inIndex.get() % 1);
+            uniFade.setValue(inIndex.get() % 1);
+        }
 
         uniDoMorph.setValue(1.0);
         if (mesh !== null) mesh.render(cgl.getShader());
