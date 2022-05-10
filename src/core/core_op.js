@@ -153,7 +153,7 @@ const Op = function ()
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
         if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
         this.fireEvent("onUiAttribsChange", newAttribs);
-        this.patch.emitEvent("onUiAttribsChange", this);
+        this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
     };
     /**
      * setUiAttrib
