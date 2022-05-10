@@ -276,9 +276,16 @@ const PatchConnectionSender = function (patch)
         });
     });
 
-    patch.addEventListener("onUiAttribsChange", (op) =>
+    patch.addEventListener("onUiAttribsChange", (op, newAttribs) =>
     {
-        this.send(CABLES.PACO_UIATTRIBS, { "op": op.id, "uiAttribs": op.uiAttribs });
+        if (!newAttribs) return;
+
+        delete newAttribs.extendTitle;
+        delete newAttribs.history;
+        if (Object.keys(newAttribs).length > 0)
+        {
+            this.send(CABLES.PACO_UIATTRIBS, { "op": op.id, "uiAttribs": newAttribs });
+        }
     });
 
     patch.addEventListener("opVariableNameChanged", (op, varName) =>
@@ -305,7 +312,7 @@ const PatchConnectionSender = function (patch)
             "op1": p1.parent.id,
             "op2": p2.parent.id,
             "port1": p1.name,
-            "port2": p2.name,
+            "port2": p2.name
         });
     });
 
@@ -370,5 +377,5 @@ PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
 };
 
 export {
-    PatchConnectionReceiver, PatchConnectionSender, PatchConnectorBroadcastChannel,
+    PatchConnectionReceiver, PatchConnectionSender, PatchConnectorBroadcastChannel
 };
