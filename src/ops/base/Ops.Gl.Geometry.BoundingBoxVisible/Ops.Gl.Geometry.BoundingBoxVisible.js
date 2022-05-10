@@ -3,6 +3,11 @@ const
     inBB = op.inObject("Boundings"),
     inActive = op.inBool("Active", true),
     inDraw = op.inBool("Draw", true),
+
+    inWidth = op.inFloat("Width", 1),
+    inHeight = op.inFloat("Height", 1),
+    inLength = op.inFloat("Length", 1),
+
     next = op.outTrigger("Next"),
     result = op.outBool("Visible"),
 
@@ -15,7 +20,11 @@ const
 let
     vp = null,
     geom = null,
+    bb = null,
     mesh = null;
+
+inBB.onLinkChanged = updateUi;
+updateUi();
 
 function isVisible(posi)
 {
@@ -30,6 +39,16 @@ function isVisible(posi)
     return pos[2] < 0.0 && xp > 0 && xp < vp[2] && yp > 0 && yp < vp[3];
 }
 
+function updateUi()
+{
+    inWidth.setUiAttribs({ "greyout": inBB.isLinked() });
+    inHeight.setUiAttribs({ "greyout": inBB.isLinked() });
+    inLength.setUiAttribs({ "greyout": inBB.isLinked() });
+}
+
+inHeight.onChange =
+inLength.onChange =
+inWidth.onChange =
 inBB.onChange = function ()
 {
     mesh = null;
@@ -37,8 +56,19 @@ inBB.onChange = function ()
 
 function buildMesh()
 {
-    const bb = inBB.get();
-    if (!bb) return;
+    if (inBB.isLinked())
+    {
+        bb = inBB.get();
+        if (!bb || !bb._max || !bb._min) return;
+    }
+    else
+    {
+        bb = new CGL.BoundingBox();
+
+        bb.applyPos(inWidth.get() / 2, inHeight.get() / 2, inLength.get() / 2);
+        bb.applyPos(-inWidth.get() / 2, -inHeight.get() / 2, -inLength.get() / 2);
+    }
+
     geom = new CGL.Geometry(op.name);
     geom.vertices =
     [
@@ -146,8 +176,13 @@ function lineline(x1, y1, x2, y2, x3, y3, x4, y4)
 exec.onTriggered = () =>
 {
     if (!inActive.get()) return;
-    const bb = inBB.get();
-    if (!bb)
+
+    if (inBB.isLinked())
+    {
+        bb = inBB.get();
+    }
+
+    if (inBB.isLinked() && (!bb || !bb._center || !bb._max))
     {
         result.set(false);
         return;
@@ -156,7 +191,7 @@ exec.onTriggered = () =>
     if (inDraw.get())
     {
         if (!geom || !mesh) buildMesh();
-        mesh.render(cgl.getShader());
+        if (mesh)mesh.render(cgl.getShader());
     }
 
     vp = cgl.getViewPort();
