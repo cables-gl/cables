@@ -293,7 +293,11 @@ Patch.prototype.clear = function ()
     this.cgl.TextureEffectMesh = null;
     this.animFrameOps.length = 0;
     this.timer = new Timer();
-    while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
+    while (this.ops.length > 0)
+    {
+        this._log.info("LENGTH", this.ops.length);
+        this.deleteOp(this.ops[0].id);
+    }
     this.emitEvent("patchClearEnd");
 };
 
