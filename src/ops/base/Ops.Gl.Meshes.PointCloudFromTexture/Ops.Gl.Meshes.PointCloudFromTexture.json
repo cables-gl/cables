@@ -69,12 +69,22 @@
                 "type": 0,
                 "name": "Normalize",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Remove Point at 0",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Total Points",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Meshes.PointCloudFromTexture"

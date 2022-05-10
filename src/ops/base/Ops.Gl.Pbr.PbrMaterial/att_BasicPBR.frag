@@ -27,7 +27,13 @@ UNI float _Roughness;
 UNI float _Metalness;
 #endif
 #ifdef USE_LIGHTMAP
+#ifndef VERTEX_COLORS
 UNI sampler2D _Lightmap;
+#else
+#ifndef VCOL_LIGHTMAP
+UNI sampler2D _Lightmap;
+#endif 
+#endif
 #endif
 #ifdef USE_CLEAR_COAT
 UNI float _ClearCoatRoughness;
@@ -58,7 +64,13 @@ UNI vec3 _PCboxMax;
 
 IN vec2 texCoord;
 #ifdef USE_LIGHTMAP
+#ifndef VERTEX_COLORS
 IN vec2 texCoord1;
+#else
+#ifndef VCOL_LIGHTMAP
+IN vec2 texCoord1;
+#endif 
+#endif
 #endif
 IN vec4 FragPos;
 IN mat3 TBN;
@@ -219,7 +231,13 @@ void main()
     // set up interpolated vertex data
     vec2 UV0             = texCoord;
     #ifdef USE_LIGHTMAP
+    #ifndef VERTEX_COLORS
     vec2 UV1             = texCoord1;
+    #else
+    #ifndef VCOL_LIGHTMAP
+    vec2 UV1             = texCoord1;
+    #endif 
+    #endif
     #endif
     vec3 V               = normalize(camPos - FragPos.xyz);
 
@@ -229,9 +247,6 @@ void main()
     #endif
     #ifndef WEBGL1
     UV0 += RaymarchedParallax(UV0, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
-    #ifdef USE_LIGHTMAP
-    //UV1 += RaymarchedParallax(UV1, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
-    #endif
     #endif
     #endif
 
@@ -264,10 +279,22 @@ void main()
         vec3 internalNormals = normM;
     #endif
 	#ifdef USE_LIGHTMAP
+	#ifndef VERTEX_COLORS
 	#ifndef LIGHTMAP_IS_RGBE
     vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
     #else
     vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
+    #endif
+    #else
+    #ifdef VCOL_LIGHTMAP
+    vec3 Lightmap = pow(vertCol.rgb, vec3(2.2));
+    #else
+  	#ifndef LIGHTMAP_IS_RGBE
+    vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
+    #else
+    vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
+    #endif
+    #endif 
     #endif
     #endif
     // initialize texture values

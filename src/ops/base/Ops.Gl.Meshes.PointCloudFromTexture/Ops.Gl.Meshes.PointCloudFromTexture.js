@@ -5,11 +5,11 @@ const
     inTex = op.inTexture("Texture", null, "texture"),
     inTexPS = op.inTexture("Point Size", null, "texture"),
     inNorm = op.inBool("Normalize", false),
-    // inMode = op.inSwitch("Mode", ["Absolute", "Add"], "Absolute"),
-    trigger = op.outTrigger("Trigger");
+    inRemove0 = op.inBool("Remove Point at 0", false),
+    trigger = op.outTrigger("Trigger"),
+    outNumPoints = op.outNumber("Total Points", 0);
 
 const cgl = op.patch.cgl;
-// let inTexUniform = null;
 let mesh = null;
 let numVerts = 0;
 let currentNum = 0;
@@ -25,7 +25,6 @@ mod.addModule({
 
 mod.addUniformVert("t", "MOD_tex");
 mod.addUniformVert("t", "MOD_texPointSize");
-// inMode.onChange = updateDefines;
 render.onTriggered = doRender;
 updateDefines();
 
@@ -33,6 +32,7 @@ mod.addUniformVert("f", "MOD_texSize", 0);
 
 inNorm.onChange =
     inTexPS.onChange =
+    inRemove0.onChange =
     inAxis.onChange = updateDefines;
 
 let needsMeshSetup = true;
@@ -43,6 +43,7 @@ updateDefines();
 
 function updateDefines()
 {
+    mod.toggleDefine("MOD_REMOVEZERO", inRemove0);
     mod.toggleDefine("MOD_AXIS_XY", inAxis.get() == "XY");
     mod.toggleDefine("MOD_AXIS_XYZ", inAxis.get() == "XYZ");
     mod.toggleDefine("MOD_NORMALIZE", inNorm.get());
@@ -80,8 +81,13 @@ function doRender()
 
 function setupMesh()
 {
-    if (!inTex.get()) return;
+    if (!inTex.get())
+    {
+        outNumPoints.set(0);
+        return;
+    }
     const num = inTex.get().width * inTex.get().height;
+    outNumPoints.set(num);
 
     if (num == currentNum) return;
     currentNum = num;
