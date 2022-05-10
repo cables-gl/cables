@@ -1,0 +1,37 @@
+{
+    "id": "af2eeaaf-ff86-4bfb-9a27-42f05160a5d8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1644848363183
+        },
+        {
+            "message": "Ops.User.pandur.VizArraySheet renamed to Ops.Dev.VizArrayTable",
+            "author": "pandur",
+            "date": 1644873145035
+        },
+        {
+            "message": "Ops.Dev.VizArrayTable renamed to Ops.Viz.VizArrayTable",
+            "author": "pandur",
+            "date": 1652088789616
+        },
+        {
+            "message": "Ops.Viz.VizArrayTable renamed to Ops.Ui.VizArrayTable",
+            "author": "pandur",
+            "date": 1652088955403
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1644848370599,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Dev.VizArrayTable"
+    }
+}

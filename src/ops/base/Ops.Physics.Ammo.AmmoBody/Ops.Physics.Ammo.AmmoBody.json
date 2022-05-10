@@ -1,0 +1,142 @@
+{
+    "id": "d9c57405-9cc0-475f-b81d-21401a7ab326",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647107457096
+        },
+        {
+            "message": "Ops.User.pandur.AmmoBody renamed to Ops.Dev.AmmoBody",
+            "author": "pandur",
+            "date": 1647117199087
+        },
+        {
+            "message": "Ops.Dev.AmmoBody renamed to Ops.Physics.Ammo.AmmoBody",
+            "author": "pandur",
+            "date": 1652089858738
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1647107505781,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Friction",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rolling Friction",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Restitution",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Shape index",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "group": "Shape",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Simplify Max Triangles",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "group": "Shape",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "group": "Shape",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "group": "Shape",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "group": "Shape",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Never Deactivate",
+                "group": "Flags",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Ghost Object",
+                "group": "Flags",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "group": "Flags",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 1,
+                "name": "Activate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Ray Hit",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Transformed"
+            }
+        ],
+        "name": "Ops.Dev.AmmoBody"
+    }
+}
