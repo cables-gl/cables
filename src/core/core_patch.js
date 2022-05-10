@@ -295,7 +295,9 @@ Patch.prototype.clear = function ()
     this.timer = new Timer();
     while (this.ops.length > 0)
     {
-        this._log.info("LENGTH", this.ops.length);
+        let opName = "unknown";
+        if (this.ops[0]) opName = this.ops[0].name;
+        this._log.info("LENGTH", this.ops.length, opName);
         this.deleteOp(this.ops[0].id);
     }
     this.emitEvent("patchClearEnd");
