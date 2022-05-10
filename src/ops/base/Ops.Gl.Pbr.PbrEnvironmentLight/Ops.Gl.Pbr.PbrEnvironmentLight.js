@@ -2,6 +2,7 @@
 const cgl = op.patch.cgl;
 const IS_WEBGL_1 = cgl.glVersion == 1;
 
+const BB = new CGL.BoundingBox();
 const geometry = new CGL.Geometry("unit cube");
 geometry.vertices = new Float32Array([
     -1.0, 1.0, -1.0,
@@ -59,6 +60,22 @@ const inPrefilteredSize = op.inDropDown("Size pre-filtered environment", [64, 12
 const inIBLLUTSize = op.inDropDown("Size IBL LUT", [128, 256, 512, 1024], 256);
 const inToggleRGBE = op.inBool("Environment map does not contain RGBE data", false);
 const inRotation = op.inFloatSlider("Rotation", 0.0);
+const inUseParallaxCorrection = op.inValueBool("Use parallax correction", false);
+
+const inPCOriginX = op.inFloat("center X", 0);
+const inPCOriginY = op.inFloat("center Y", 1.8);
+const inPCOriginZ = op.inFloat("center Z", 0);
+const inPCOrigin = [inPCOriginX, inPCOriginY, inPCOriginZ];
+const inPCboxMinX = op.inFloat("Box min X", -1);
+const inPCboxMinY = op.inFloat("Box min Y", -1);
+const inPCboxMinZ = op.inFloat("Box min Z", -1);
+const inPCboxMin = [inPCboxMinX, inPCboxMinY, inPCboxMinZ];
+const inPCboxMaxX = op.inFloat("Box max X", 1);
+const inPCboxMaxY = op.inFloat("Box max Y", 1);
+const inPCboxMaxZ = op.inFloat("Box max Z", 1);
+const inPCboxMax = [inPCboxMaxX, inPCboxMaxY, inPCboxMaxZ];
+
+op.setPortGroup("parallax correction", [inUseParallaxCorrection, inPCOrigin, inPCboxMin, inPCboxMax]);
 
 let IrradianceSizeChanged = true;
 let PrefilteredSizeChanged = true;
@@ -213,6 +230,7 @@ function capturePrefilteredCubemap(size)
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
     }
+
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
@@ -301,6 +319,42 @@ inCubemap.onChange = () =>
     IrradianceSizeChanged = true;
 };
 
+function drawHelpers()
+{
+    gui.setTransformGizmo({
+        "posX": inPCOriginX,
+        "posY": inPCOriginY,
+        "posZ": inPCOriginZ,
+    });
+    gui.setTransformGizmo({
+        "posX": inPCboxMinX,
+        "posY": inPCboxMinY,
+        "posZ": inPCboxMinZ,
+    },1);
+    gui.setTransformGizmo({
+        "posX": inPCboxMaxX,
+        "posY": inPCboxMaxY,
+        "posZ": inPCboxMaxZ,
+    },2);
+    if (CABLES.UI.renderHelper)
+    {
+        cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+    }
+    else
+    {
+        cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+    }
+    cgl.pushModelMatrix();
+    // translate
+    mat4.translate(cgl.mMatrix, cgl.mMatrix, [(inPCboxMinX.get() + inPCboxMaxX.get()) / 2.0, (inPCboxMinY.get() + inPCboxMaxY.get()) / 2.0, (inPCboxMinZ.get() + inPCboxMaxZ.get()) / 2.0]);
+    // scale to bounds
+    mat4.scale(cgl.mMatrix, cgl.mMatrix, [(inPCboxMaxX.get() - inPCboxMinX.get()) / 2.0, (inPCboxMaxY.get() - inPCboxMinY.get()) / 2.0, (inPCboxMaxZ.get() - inPCboxMinZ.get()) / 2.0]);
+    // draw
+    BB.render(cgl);
+    cgl.popShader();
+    cgl.popModelMatrix();
+}
+
 // onTriggered
 inTrigger.onTriggered = function ()
 {
@@ -340,11 +394,18 @@ inTrigger.onTriggered = function ()
     pbrEnv.texPreFiltered = outTexPrefiltered.get();
     pbrEnv.texPreFilteredMipLevels = outMipLevels.get();
 
+
+    pbrEnv.UseParallaxCorrection = inUseParallaxCorrection.get();
+    pbrEnv.PCOrigin = [inPCOriginX.get(), inPCOriginY.get(), inPCOriginZ.get()];
+    pbrEnv.PCboxMin = [inPCboxMinX.get(), inPCboxMinY.get(), inPCboxMinZ.get()];
+    pbrEnv.PCboxMax = [inPCboxMaxX.get(), inPCboxMaxY.get(), inPCboxMaxZ.get()];
+
     cgl.frameStore.pbrEnvStack = cgl.frameStore.pbrEnvStack || [];
     cgl.frameStore.pbrEnvStack.push(pbrEnv);
 
-    outTrigger.trigger();
+    if (cgl.shouldDrawHelpers(op) && pbrEnv.UseParallaxCorrection && !cgl.frameStore.shadowPass) drawHelpers();
 
+    outTrigger.trigger();
     cgl.frameStore.pbrEnvStack.pop();
 };
 

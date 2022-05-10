@@ -49,9 +49,11 @@ const uniOffMul = new CGL.Uniform(shader, "f", "offMul", inOffsetMul);
 
 const uniAspect = new CGL.Uniform(shader, "f", "aspect", 1);
 const uniHarmonics = new CGL.Uniform(shader, "f", "harmonics", 0);
+
 inHarmonics.onChange = () =>
 {
     uniHarmonics.setValue(parseFloat(inHarmonics.get()));
+    shader.toggleDefine("HARMONICS", inHarmonics.get() > 1);
 };
 
 offsetX.onChange =

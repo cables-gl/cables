@@ -27,3 +27,6 @@ vec3 MOD_pos=col.xyz+pos.xyz;
     pos.w=1.0;
 #endif
 
+#ifdef MOD_REMOVEZERO
+    if(MOD_pos.x==0.0 && MOD_pos.y==0.0 && MOD_pos.z==0.0) psMul=0.0;
+#endif

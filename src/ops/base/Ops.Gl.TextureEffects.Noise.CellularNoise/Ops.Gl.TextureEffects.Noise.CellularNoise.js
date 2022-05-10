@@ -82,6 +82,7 @@ function updateDefines()
     shader.toggleDefine("OFFSET_Z_G", offsetZ.get() == "G");
     shader.toggleDefine("OFFSET_Z_B", offsetZ.get() == "B");
 
+    inOffsetMul.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });
     offsetX.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });
     offsetY.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetTex.isLinked() });

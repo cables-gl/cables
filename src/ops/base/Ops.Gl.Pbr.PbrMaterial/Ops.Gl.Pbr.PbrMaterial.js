@@ -1,41 +1,47 @@
 // utility
-const cgl = op.patch.cgl;
+const cgl             = op.patch.cgl;
 // inputs
-const inTrigger = op.inTrigger("render");
+const inTrigger       = op.inTrigger("render");
 inTrigger.onTriggered = doRender;
 
-const inDiffuseR = op.inFloat("R", Math.random());
-const inDiffuseG = op.inFloat("G", Math.random());
-const inDiffuseB = op.inFloat("B", Math.random());
-const inDiffuseA = op.inFloatSlider("A", 1);
-const diffuseColors = [inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA];
+const inDiffuseR      = op.inFloat("R", Math.random());
+const inDiffuseG      = op.inFloat("G", Math.random());
+const inDiffuseB      = op.inFloat("B", Math.random());
+const inDiffuseA      = op.inFloatSlider("A", 1);
+const diffuseColors   = [inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA];
 op.setPortGroup("Diffuse Color", diffuseColors);
 
-const inRoughness = op.inFloatSlider("Roughness", 0.5);
-const inMetalness = op.inFloatSlider("Metalness", 0.0);
-const inToggleGR = op.inBool("Disable geometric roughness", false);
-const inToggleNMGR = op.inBool("Use roughness from normal map", false);
-const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
-const inTonemapping = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
+const inRoughness           = op.inFloatSlider("Roughness", 0.5);
+const inMetalness           = op.inFloatSlider("Metalness", 0.0);
+const inAlphaMode           = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
+
+const inTonemapping         = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
 const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 
-const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
-const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "roughness", "metalness"], "colour");
-const inHeightDepth = op.inFloat("Height Intensity", 1.0);
-const inUseOptimizedHeight = op.inValueBool("Use faster less accurate heightmapping", false);
+const inToggleGR            = op.inBool("Disable geometric roughness", false);
+const inToggleNMGR          = op.inBool("Use roughness from normal map", false);
+const inUseVertexColours    = op.inValueBool("Use Vertex Colours", false);
+const inVertexColourMode    = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
+const inHeightDepth         = op.inFloat("Height Intensity", 1.0);
+const inUseOptimizedHeight  = op.inValueBool("Faster heightmapping", false);
+const inUseClearCoat        = op.inValueBool("Use Clear Coat", false);
+const inClearCoatRoughness  = op.inFloatSlider("Clear Coat Roughness", 0.5);
 
 // texture inputs
-const inTexIBLLUT = op.inTexture("IBL LUT");
-const inTexIrradiance = op.inTexture("Diffuse Irradiance");
-const inTexPrefiltered = op.inTexture("Pre-filtered envmap");
-const inMipLevels = op.inInt("Num mip levels");
+const inTexIBLLUT           = op.inTexture("IBL LUT");
+const inTexIrradiance       = op.inTexture("Diffuse Irradiance");
+const inTexPrefiltered      = op.inTexture("Pre-filtered envmap");
+const inMipLevels           = op.inInt("Num mip levels");
 
-const inTexAlbedo = op.inTexture("Albedo");
-const inTexAORM = op.inTexture("AORM");
-const inTexNormal = op.inTexture("Normal map");
-const inTexHeight = op.inTexture("Height");
-const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
-const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
+const inTexAlbedo           = op.inTexture("Albedo");
+const inTexAORM             = op.inTexture("AORM");
+const inTexNormal           = op.inTexture("Normal map");
+const inTexHeight           = op.inTexture("Height");
+const inLightmap            = op.inTexture("Lightmap");
+const inDiffuseIntensity    = op.inFloat("Diffuse Intensity", 1.0);
+const inSpecularIntensity   = op.inFloat("Specular Intensity", 1.0);
+const inLightmapRGBE        = op.inBool("Lightmap is RGBE", false);
+const inLightmapIntensity   = op.inFloat("Lightmap Intensity", 1.0);
 
 // outputs
 const outTrigger = op.outTrigger("Next");
@@ -43,15 +49,12 @@ const shaderOut = op.outObject("Shader");
 shaderOut.ignoreValueSerialize = true;
 // UI stuff
 op.toWorkPortsNeedToBeLinked(inTrigger);
-//op.toWorkPortsNeedToBeLinked(inTexIrradiance);
-//op.toWorkPortsNeedToBeLinked(inTexPrefiltered);
-//op.toWorkPortsNeedToBeLinked(inTexIBLLUT);
-//op.toWorkPortsNeedToBeLinked(inMipLevels);
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
-op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight]);
-op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexHeight]);
-op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
+op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
+op.setPortGroup("Advanced Shader Parameters", [inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inUseClearCoat, inClearCoatRoughness]);
+op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexHeight, inLightmap]);
+op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 // globals
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
@@ -108,11 +111,18 @@ const inTonemappingExposureUniform = new CGL.Uniform(PBRShader, "f", "tonemappin
 const inDiffuseIntensityUniform = new CGL.Uniform(PBRShader, "f", "diffuseIntensity", 1.0);
 const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularIntensity", 1.0);
 const inHeightUniform = new CGL.Uniform(PBRShader, "t", "_HeightMap", 0);
+const inLightmapUniform = new CGL.Uniform(PBRShader, "t", "_Lightmap", 0);
+const inLightmapIntensityUniform = new CGL.Uniform(PBRShader, "f", "lightmapIntensity", 1.0);
 
 const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const inRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", 0.5);
 const inMetalnessUniform = new CGL.Uniform(PBRShader, "f", "_Metalness", 0);
 const inHeightDepthUniform = new CGL.Uniform(PBRShader, "f", "_HeightDepth", 1.0);
+const inClearCoatRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_ClearCoatRoughness", 0.5);
+
+const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
+const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
+const inPCboxMax = new CGL.Uniform(PBRShader, "3f", "_PCboxMax", [1, 1, 1]);
 
 PBRShader.uniformColorDiffuse = inDiffuseColor;
 PBRShader.uniformPbrMetalness = inMetalnessUniform;
@@ -120,9 +130,29 @@ PBRShader.uniformPbrRoughness = inRoughnessUniform;
 
 inTexPrefiltered.onChange = updateIBLTexDefines;
 
+inLightmapRGBE.onChange = () =>
+{
+    PBRShader.toggleDefine("LIGHTMAP_IS_RGBE", inLightmapRGBE.get());
+};
 inUseVertexColours.onChange = () =>
 {
     PBRShader.toggleDefine("VERTEX_COLORS", inUseVertexColours.get());
+    
+    if (!inUseVertexColours.get())
+    {
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    }
+    else
+    {
+        if (inVertexColourMode.get() === "lightmap")
+        {
+            PBRShader.define("USE_LIGHTMAP");
+        }
+    }
+};
+inUseClearCoat.onChange = () =>
+{
+    PBRShader.toggleDefine("USE_CLEAR_COAT", inUseClearCoat.get());
 };
 inVertexColourMode.onChange = function ()
 {
@@ -133,6 +163,8 @@ inVertexColourMode.onChange = function ()
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
     else if (inVertexColourMode.get() === "AORM")
     {
@@ -141,6 +173,8 @@ inVertexColourMode.onChange = function ()
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
     else if (inVertexColourMode.get() === "AO")
     {
@@ -149,22 +183,39 @@ inVertexColourMode.onChange = function ()
         PBRShader.removeDefine("VCOL_COLOUR");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
-    else if (inVertexColourMode.get() === "roughness")
+    else if (inVertexColourMode.get() === "R")
     {
         PBRShader.define("VCOL_R");
         PBRShader.removeDefine("VCOL_AORM");
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_COLOUR");
         PBRShader.removeDefine("VCOL_M");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
     }
-    else if (inVertexColourMode.get() === "metalness")
+    else if (inVertexColourMode.get() === "M")
     {
         PBRShader.define("VCOL_M");
         PBRShader.removeDefine("VCOL_AORM");
         PBRShader.removeDefine("VCOL_AO");
         PBRShader.removeDefine("VCOL_R");
         PBRShader.removeDefine("VCOL_COLOUR");
+        PBRShader.removeDefine("VCOL_LIGHTMAP");
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    }
+    else if (inVertexColourMode.get() === "lightmap")
+    {
+        PBRShader.define("VCOL_LIGHTMAP");
+        PBRShader.removeDefine("VCOL_AORM");
+        PBRShader.removeDefine("VCOL_AO");
+        PBRShader.removeDefine("VCOL_R");
+        PBRShader.removeDefine("VCOL_COLOUR");
+        PBRShader.removeDefine("VCOL_M");
+
+        PBRShader.define("USE_LIGHTMAP");
     }
 };
 
@@ -196,15 +247,29 @@ inTexHeight.onChange = () =>
 };
 inToggleNMGR.onChange = () =>
 {
-    PBRShader.toggleDefine("DONT_USE_NMGR", inToggleNMGR);
+    PBRShader.toggleDefine("DONT_USE_NMGR", inToggleNMGR.get());
 };
 inToggleGR.onChange = () =>
 {
-    PBRShader.toggleDefine("DONT_USE_GR", inToggleGR);
+    PBRShader.toggleDefine("DONT_USE_GR", inToggleGR.get());
+};
+inLightmap.onChange = () =>
+{
+    if (!inUseVertexColours.get())
+    {
+        PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
+    }
+    else
+    {
+        if (inVertexColourMode.get() === "lightmap")
+        {
+            PBRShader.define("USE_LIGHTMAP");
+        }
+    }
 };
 inUseOptimizedHeight.onChange = () =>
 {
-    PBRShader.toggleDefine("USE_OPTIMIZED_HEIGHT", inUseOptimizedHeight);
+    PBRShader.toggleDefine("USE_OPTIMIZED_HEIGHT", inUseOptimizedHeight.get());
 };
 inAlphaMode.onChange = function ()
 {
@@ -384,22 +449,24 @@ function doRender()
         PBRShader.pushTexture(inIrradianceUniform, pbrEnv.texDiffIrr.tex, cgl.gl.TEXTURE_CUBE_MAP);
         PBRShader.pushTexture(inPrefilteredUniform, pbrEnv.texPreFiltered.tex, cgl.gl.TEXTURE_CUBE_MAP);
         inMipLevelsUniform.setValue(pbrEnv.texPreFilteredMipLevels || 7);
-        //op.setUiError("noPbrEnv", null);
+
+        PBRShader.toggleDefine("USE_PARALLAX_CORRECTION", pbrEnv.UseParallaxCorrection);
+        if(pbrEnv.UseParallaxCorrection)
+        {
+            inPCOrigin.setValue(pbrEnv.PCOrigin);
+            inPCboxMin.setValue(pbrEnv.PCboxMin);
+            inPCboxMax.setValue(pbrEnv.PCboxMax);
+        }
+
         setEnvironmentLighting(true);
     }
     else
     {
-        //op.setUiError("noPbrEnv", "No PBR precompute environment setup found in branch");
         setEnvironmentLighting(false);
-        //PBRShader.pushTexture(inIBLLUTUniform, CGL.Texture.getEmptyTexture(cgl).tex);
-        //PBRShader.pushTexture(inIrradianceUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
-        //PBRShader.pushTexture(inPrefilteredUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
-        //inMipLevelsUniform.setValue(7);
     }
 
     if (inTexIBLLUT.get())
     {
-        //op.setUiError("noPbrEnv", null);
         setEnvironmentLighting(true);
         PBRShader.pushTexture(inIBLLUTUniform, inTexIBLLUT.get().tex);
         inMipLevelsUniform.setValue(inMipLevels.get());
@@ -411,18 +478,32 @@ function doRender()
     if (inTexAORM.get()) PBRShader.pushTexture(inAORMUniform, inTexAORM.get().tex);
     if (inTexNormal.get()) PBRShader.pushTexture(inNormalUniform, inTexNormal.get().tex);
     if (inTexHeight.get()) PBRShader.pushTexture(inHeightUniform, inTexHeight.get().tex);
+    if (inLightmap.get())
+    {
+        PBRShader.pushTexture(inLightmapUniform, inLightmap.get().tex);
+        inLightmapIntensityUniform.setValue(inLightmapIntensity.get());
+    }
+    if (inUseVertexColours.get())
+    {
+        if (inVertexColourMode.get() === "lightmap")
+        {
+            inLightmapIntensityUniform.setValue(inLightmapIntensity.get());
+        }
+    }
 
     if (!inTexAORM.get())
     {
         inRoughnessUniform.setValue(inRoughness.get());
         inMetalnessUniform.setValue(inMetalness.get());
     }
-
     if (inTexHeight.get())
     {
         inHeightDepthUniform.setValue(inHeightDepth.get());
     }
-
+    if (inUseClearCoat.get())
+    {
+        inClearCoatRoughnessUniform.setValue(inClearCoatRoughness.get());
+    }
     if (inTonemappingExposure.get()) inTonemappingExposureUniform.setValue(inTonemappingExposure.get());
     if (inDiffuseIntensity.get()) inDiffuseIntensityUniform.setValue(inDiffuseIntensity.get());
     if (inSpecularIntensity.get()) inSpecularIntensityUniform.setValue(inSpecularIntensity.get());

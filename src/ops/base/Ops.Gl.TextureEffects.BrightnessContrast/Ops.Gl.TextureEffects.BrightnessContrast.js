@@ -1,27 +1,28 @@
-var render=op.inTrigger("render");
-var amount=op.inValueSlider('contrast',0.5);
-var amountBright=op.inValueSlider('brightness',0.5);
+const
+    render = op.inTrigger("render"),
+    amount = op.inValueSlider("contrast", 0.5),
+    amountBright = op.inValueSlider("brightness", 0.5),
+    trigger = op.outTrigger("trigger");
 
-var trigger=op.outTrigger('trigger');
-var cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-var shader=new CGL.Shader(cgl,'brightnesscontrast');
-shader.setSource(shader.getDefaultVertexShader(),attachments.brightness_contrast_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-var amountBrightUniform=new CGL.Uniform(shader,'f','amountbright',amountBright);
+const shader = new CGL.Shader(cgl, "brightnesscontrast");
+shader.setSource(shader.getDefaultVertexShader(), attachments.brightness_contrast_frag);
+const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
+const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
+const amountBrightUniform = new CGL.Uniform(shader, "f", "amountbright", amountBright);
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    if(!cgl.currentTextureEffect.getCurrentSourceTexture()) return;
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!cgl.currentTextureEffect.getCurrentSourceTexture()) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

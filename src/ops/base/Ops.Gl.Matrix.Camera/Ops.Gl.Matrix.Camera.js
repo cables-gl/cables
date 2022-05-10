@@ -157,11 +157,11 @@ const updateUI = function ()
 {
     if (!autoAspect.get())
     {
-        aspect.setUiAttribs({ "hidePort": false, "greyout": false });
+        aspect.setUiAttribs({ "greyout": false });
     }
     else
     {
-        aspect.setUiAttribs({ "hidePort": true, "greyout": true });
+        aspect.setUiAttribs({ "greyout": true });
     }
 };
 

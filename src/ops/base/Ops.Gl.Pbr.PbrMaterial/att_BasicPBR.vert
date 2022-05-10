@@ -5,6 +5,9 @@ UNI vec3 camPos;
 
 IN vec3  vPosition;
 IN vec2  attrTexCoord;
+#ifdef USE_LIGHTMAP
+IN vec2 attrTexCoord1;
+#endif
 IN vec3  attrVertNormal;
 IN vec3  attrTangent;
 IN vec3  attrBiTangent;
@@ -16,6 +19,9 @@ IN vec4 attrVertColor;
 {{MODULES_HEAD}}
 
 OUT vec2 texCoord;
+#ifdef USE_LIGHTMAP
+OUT vec2 texCoord1;
+#endif
 OUT vec4 FragPos;
 OUT mat3 TBN;
 OUT vec3 norm;
@@ -37,7 +43,9 @@ UNI mat4 modelMatrix;
 void main()
 {
     mat4 mMatrix = modelMatrix; // needed to make vertex effects work
-
+    #ifdef USE_LIGHTMAP
+    texCoord1 = attrTexCoord1;
+    #endif
     texCoord = attrTexCoord;
     texCoord.y = 1.0 - texCoord.y;
     vec4 pos = vec4(vPosition,  1.0);
@@ -51,12 +59,6 @@ void main()
     FragPos = mMatrix * pos;
     #else
     FragPos = instModelMat * pos;
-    #endif
-
-    #ifdef USE_HEIGHT_TEX
-    #ifdef USE_OPTIMIZED_HEIGHT
-    mat3 invTBN = mat3(tangent, bitangent, norm);
-    #endif
     #endif
 
     #ifndef INSTANCING
@@ -80,11 +82,12 @@ void main()
     TBN = mat3(tangent, bitangent, N);
 
     #ifdef USE_HEIGHT_TEX
+    #ifndef WEBGL1
     #ifdef USE_OPTIMIZED_HEIGHT
-    // TODO find a way to remove this inverse here
-    fragTangentViewDir = normalize(inverse(TBN) * (camPos - FragPos.xyz));
+    fragTangentViewDir = normalize(transpose(TBN) * (camPos - FragPos.xyz));
     #else
-    invTBN = inverse(TBN);
+    invTBN = transpose(TBN);
+    #endif
     #endif
     #endif
 

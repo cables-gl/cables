@@ -275,7 +275,7 @@ TextureEffect.checkOpInEffect = function (op, minver)
 
         if (minver && op.patch.cgl.currentTextureEffect.imgCompVer < minver)
         {
-            op.setUiError("texeffect", "This op must be a child of an ImageCompose op with version >=" + minver, 1);
+            op.setUiError("texeffect", "This op must be a child of an ImageCompose op with version >=" + minver + " <span class=\"button-small\" onclick=\"gui.patchView.downGradeOp('" + op.id + "','" + op.name + "')\">Downgrade</span> to previous version", 1);
         }
     }
     // if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
@@ -289,7 +289,7 @@ TextureEffect.checkOpInEffect = function (op, minver)
 
     if (!op.patch.cgl.currentTextureEffect && (!op.uiAttribs.uierrors || op.uiAttribs.uierrors.length == 0))
     {
-        op.setUiError("texeffect", "This op must be a child of an ImageCompose op! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>.", 1);
+        op.setUiError("texeffect", "This op must be a child of an ImageCompose op! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>. ", 1);
         return false;
     }
 
