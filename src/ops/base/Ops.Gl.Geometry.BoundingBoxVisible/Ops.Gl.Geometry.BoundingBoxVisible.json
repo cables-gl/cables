@@ -38,6 +38,21 @@
                 "type": 0,
                 "name": "Draw",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
             }
         ],
         "portsOut": [

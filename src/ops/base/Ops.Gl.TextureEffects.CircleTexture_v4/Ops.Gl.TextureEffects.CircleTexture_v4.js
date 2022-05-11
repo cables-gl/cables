@@ -61,8 +61,7 @@ render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
-    let a = cgl.currentTextureEffect.getHeight() / cgl.currentTextureEffect.getWidth();
-    aspect.set(a);
+    aspect.set(cgl.currentTextureEffect.aspectRatio);
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();

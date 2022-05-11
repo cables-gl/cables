@@ -31,19 +31,16 @@ void main()
     vec4 base=texture(tex,texCoord);
 
     vec4 col=vec4(r,g,b,1.0);
-    float dist = dist(x,y*aspect,(texCoord.x-0.5)*2.0,(texCoord.y-0.5)*2.0*aspect);
+    float dist = dist(x,y/aspect,(texCoord.x-0.5)*2.0,(texCoord.y-0.5)*2.0/aspect);
 
-    float sz=size*0.5*aspect;
+    float sz=size*0.5/aspect;
     float v=0.0;
     float fade=fadeOut;
-
 
     if(fade==0.0)
     {
         if(dist<sz && dist>inner*sz) v=(smoothstep(0.0,1.0,(dist-(inner*sz))/(fade)));
     }
-
-
 
     if(fade>=0.0)
     {
