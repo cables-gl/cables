@@ -59,7 +59,7 @@ const inIrradianceSize = op.inDropDown("Size Irradiance map", [16, 32, 64], 64);
 const inPrefilteredSize = op.inDropDown("Size pre-filtered environment", [64, 128], 128);
 const inIBLLUTSize = op.inDropDown("Size IBL LUT", [128, 256, 512, 1024], 256);
 const inToggleRGBE = op.inBool("Environment map does not contain RGBE data", false);
-const inRotation = op.inFloatSlider("Rotation", 0.0);
+const inRotation = op.inFloat("Rotation", 0.0);
 const inUseParallaxCorrection = op.inValueBool("Use parallax correction", false);
 
 const inPCOriginX = op.inFloat("center X", 0);
@@ -193,7 +193,7 @@ function captureIrradianceCubemap(size)
 
     IrradianceShader.popTextures();
     IrradianceShader.pushTexture(uniformIrradianceCubemap, inCubemap.get().tex);
-    uniformRotation.setValue(inRotation.get());
+    uniformRotation.setValue(inRotation.get() / 360.0);
 
     IrradianceFrameBuffer.renderStart(cgl);
     for (let i = 0; i < 6; i += 1)
@@ -244,7 +244,7 @@ function capturePrefilteredCubemap(size)
 
     PrefilteringShader.popTextures();
     PrefilteringShader.pushTexture(uniformPrefilteringCubemap, inCubemap.get().tex);
-    uniformPrefilteringRotation.setValue(inRotation.get());
+    uniformPrefilteringRotation.setValue(inRotation.get() / 360.0);
 
     for (let mip = 0; mip <= maxMipLevels; ++mip)
     {

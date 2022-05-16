@@ -9,13 +9,12 @@ const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const inTrigger = op.inTriggerButton("Play Sample");
 const inTriggerStop = op.inTriggerButton("Stop Playback");
-const startTimePort = op.inValue("Start Time", 0);
 const offsetPort = op.inValue("Offset", 0);
 const maxSamples = op.inInt("Buffer Size", 32);
 const playbackRatePort = op.inValue("Playback Rate", 1);
 const detunePort = op.inValue("Detune", 0);
 
-op.setPortGroup("Time Controls", [startTimePort, offsetPort]);
+op.setPortGroup("Time Controls", [offsetPort]);
 op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 // output ports
 const audioOutPort = op.outObject("Audio Out", null, "audioNode");
@@ -69,12 +68,13 @@ let isPlaying = false;
 const gainNode = audioCtx.createGain();
 
 let sourceSize = maxSamples.get() || 32;
-let SOURCES = new Array(sourceSize).fill(0).map(() => ({
-    "bufferSource": audioCtx.createBufferSource(),
-    "isPlaying": false,
-    "gainNode": audioCtx.createGain(),
-    "isGainNodeConnected": false
-}));
+let SOURCES = new Array(sourceSize).fill(0).map(() =>
+    ({
+        "bufferSource": audioCtx.createBufferSource(),
+        "isPlaying": false,
+        "gainNode": audioCtx.createGain(),
+        "isGainNodeConnected": false
+    }));
 let SOURCES_LENGTH = SOURCES.length;
 
 maxSamples.onChange = () =>
@@ -85,12 +85,13 @@ maxSamples.onChange = () =>
         op.setUiError("maxSamples", "Buffer Size needs to be a number (1-32)");
     }
     sourceSize = maxSamples.get() || 32;
-    SOURCES = new Array(sourceSize).fill(0).map(() => ({
-        "bufferSource": audioCtx.createBufferSource(),
-        "isPlaying": false,
-        "gainNode": audioCtx.createGain(),
-        "isGainNodeConnected": false
-    }));
+    SOURCES = new Array(sourceSize).fill(0).map(() =>
+        ({
+            "bufferSource": audioCtx.createBufferSource(),
+            "isPlaying": false,
+            "gainNode": audioCtx.createGain(),
+            "isGainNodeConnected": false
+        }));
     SOURCES_LENGTH = SOURCES.length;
     currentSample = 0;
     createAudioBufferSources();
@@ -210,7 +211,7 @@ inTrigger.onTriggered = () =>
     if (!audioBufferPort.get() || !(audioBufferPort.get() instanceof AudioBuffer)) return;
     try
     {
-        const time = Number(startTimePort.get());
+        const time = 0;
         const offset = Number(offsetPort.get());
 
         if (!SOURCES[currentSample].isPlaying)
