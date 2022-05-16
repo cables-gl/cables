@@ -1,17 +1,15 @@
 // input ports
 const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const playPort = op.inBool("Start / Stop", false);
-const autoPlayPort = op.inBool("Autoplay", false);
+
 const loopPort = op.inBool("Loop", false);
 const inResetStart = op.inTriggerButton("Restart");
-const startTimePort = op.inFloat("Start Time", 0);
-const stopTimePort = op.inFloat("Stop Time", 0);
 const offsetPort = op.inFloat("Offset", 0);
 const playbackRatePort = op.inFloat("Playback Rate", 1);
 const detunePort = op.inFloat("Detune", 0);
 
-op.setPortGroup("Playback Controls", [playPort, autoPlayPort, loopPort, inResetStart]);
-op.setPortGroup("Time Controls", [startTimePort, stopTimePort, offsetPort]);
+op.setPortGroup("Playback Controls", [playPort, loopPort, inResetStart]);
+op.setPortGroup("Time Controls", [offsetPort]);
 op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 
 // output ports
@@ -105,12 +103,12 @@ playPort.onChange = function ()
 
     if (playPort.get())
     {
-        const startTime = startTimePort.get() || 0;
+        const startTime = 0;
         start(startTime);
     }
     else
     {
-        const stopTime = stopTimePort.get() || 0;
+        const stopTime = 0;
         stop(stopTime);
     }
 };
@@ -169,12 +167,12 @@ inResetStart.onTriggered = function ()
     {
         if (isPlaying)
         {
-            stop(0);
             resetTriggered = true;
+            stop(0);
         }
         else
         {
-            start(startTimePort.get());
+            start(0);
         }
     }
 };
@@ -227,7 +225,7 @@ function createAudioBufferSource(dontStart = false)
 
     if (resetTriggered)
     {
-        start(startTimePort.get());
+        start(0);
         resetTriggered = false;
         return;
     }
@@ -235,7 +233,7 @@ function createAudioBufferSource(dontStart = false)
     if (playPort.get() && !dontStart)
     {
         // if (!isPlaying)
-        start(startTimePort.get());
+        start(0);
     }
 }
 
@@ -270,10 +268,10 @@ function start(time)
 {
     try
     {
-        let offset = 0;
         if (source)
         {
-            source.start(time, Math.max(0, offsetPort.get())); // 0 = now
+            let offset = Math.max(0, offsetPort.get());
+            source.start(time, offset); // 0 = now
 
             isPlaying = true;
             hasEnded = false;
@@ -306,7 +304,7 @@ function stop(time)
         if (source)
         {
             source.stop();
-            recreateBuffer();
+            if (!resetTriggered) recreateBuffer();
         }
 
         isPlaying = false;
@@ -321,12 +319,15 @@ function stop(time)
 
 function onPlaybackEnded()
 {
-    isPlaying = false;
-    hasEnded = true;
     if (loopPort.get())
     {
         isPlaying = true;
         hasEnded = false;
+    }
+    else
+    {
+        isPlaying = false;
+        hasEnded = true;
     }
     outPlaying.set(isPlaying);
 
