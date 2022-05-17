@@ -17,12 +17,6 @@
             },
             {
                 "type": 0,
-                "name": "Autoplay",
-                "group": "Playback Controls",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Loop",
                 "group": "Playback Controls",
                 "subType": "boolean"
@@ -31,18 +25,6 @@
                 "type": 1,
                 "name": "Restart",
                 "group": "Playback Controls"
-            },
-            {
-                "type": 0,
-                "name": "Start Time",
-                "group": "Time Controls",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Stop Time",
-                "group": "Time Controls",
-                "subType": "number"
             },
             {
                 "type": 0,

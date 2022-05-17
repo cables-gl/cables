@@ -36,12 +36,6 @@
             },
             {
                 "type": 0,
-                "name": "Start Time",
-                "group": "Time Controls",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "Offset",
                 "group": "Time Controls",
                 "subType": "number"
