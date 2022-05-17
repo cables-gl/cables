@@ -28,6 +28,16 @@
             },
             {
                 "type": 0,
+                "name": "Index 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Fade",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Easing index",
                 "subType": "integer"
             },
@@ -62,6 +72,38 @@
             {
                 "type": 2,
                 "name": "Geometry 7"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 8"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 9"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 10"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 11"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 12"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 13"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 14"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 15"
             }
         ],
         "portsOut": [
