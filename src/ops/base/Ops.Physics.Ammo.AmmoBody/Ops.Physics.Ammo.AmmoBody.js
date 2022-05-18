@@ -165,10 +165,13 @@ function setup()
 
     colShape.setMargin(0.05);
 
-    let localInertia = new Ammo.btVector3(0, 0, 0);
-    colShape.calculateLocalInertia(inMass.get(), localInertia);
+    let mass = inMass.get();
+    // if (inGhostObject.get())mass=0;
 
-    let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
+    let localInertia = new Ammo.btVector3(0, 0, 0);
+    colShape.calculateLocalInertia(mass, localInertia);
+
+    let rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
     world.addRigidBody(body);
 
