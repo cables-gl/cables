@@ -1,52 +1,59 @@
 const
+    NUMGEOMS = 16,
     render = op.inTrigger("render"),
-    inMethod = op.inSwitch("Method", ["Auto Anim", "Interpolate Index"], "Auto Anim"),
+    inMethod = op.inSwitch("Method", ["Auto Anim", "Manual Anim", "Interpolate Index", "Interpolate Indices"], "Auto Anim"),
     nextGeom = op.inValueInt("Geometry"),
     duration = op.inValue("Duration", 1.0),
     inIndex = op.inFloat("Index", 0),
+    inIndex2 = op.inFloat("Index 2", 0),
+    inFade = op.inFloatSlider("Fade", 0),
     finished = op.outValue("Finished"),
-    trigger = op.outTrigger("trigger");
+    next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-let mesh = null;
 const inGeoms = [];
-
-inIndex.onChange =
-    nextGeom.onChange = updateGeom;
-
+let mesh = null;
+let method_autoAnim = true;
+let method_manualFade = false;
+let method_interpolate = false;
+let method_interpolate2 = false;
 let oldGeom = 0;
+
 const anim = new CABLES.Anim();
 anim.clear();
 anim.createPort(op, "Easing", updateGeom);
 
-const geoms = [];
 window.meshsequencecounter = window.meshsequencecounter || 1;
 window.meshsequencecounter++;
 const prfx = String.fromCharCode(97 + window.meshsequencecounter);
-const needsUpdateFrame = false;
-render.onTriggered = doRender;
-inMethod.onChange = updateUi;
 
 const srcHeadVert = ""
     .endl() + "IN vec3 " + prfx + "attrMorphTargetA;"
     .endl() + "IN vec3 " + prfx + "attrMorphTargetB;"
-    .endl() + "UNI float {{mod}}fade;"
-    .endl() + "UNI float {{mod}}doMorph;"
     .endl();
 
 const srcBodyVert = ""
-    .endl() + "if({{mod}}doMorph==1.0){"
-    .endl() + "  pos = vec4( " + prfx + "attrMorphTargetA * {{mod}}fade + " + prfx + "attrMorphTargetB * (1.0 - {{mod}}fade ), 1. );"
-    .endl() + "}"
+    .endl() + "  pos = vec4( " + prfx + "attrMorphTargetA * MOD_fade + " + prfx + "attrMorphTargetB * (1.0 - MOD_fade ), 1. );"
     .endl();
 
-let uniFade = null;
-let module = null;
-let shader = null;
-let uniDoMorph = null;
-let autoAnim = true;
+const mod = new CGL.ShaderModifier(cgl, op.name);
+mod.addUniform("f", "MOD_fade", 1);
+mod.addUniform("f", "MOD_doMorph", 1);
+mod.addModule({
+    "title": op.objName,
+    "name": "MODULE_VERTEX_POSITION",
+    "srcHeadVert": srcHeadVert,
+    "srcBodyVert": srcBodyVert
+});
 
-for (let i = 0; i < 8; i++)
+inIndex2.onChange =
+    inIndex.onChange =
+    nextGeom.onChange = updateGeom;
+render.onTriggered = doRender;
+inMethod.onChange = updateUi;
+updateUi();
+
+for (let i = 0; i < NUMGEOMS; i++)
 {
     const inGeom = op.inObject("Geometry " + (i));
     inGeom.onChange = updateMeshes;
@@ -55,11 +62,17 @@ for (let i = 0; i < 8; i++)
 
 function updateUi()
 {
-    autoAnim = inMethod.get() == "Auto Anim";
-    duration.setUiAttribs({ "greyout": !autoAnim });
-    nextGeom.setUiAttribs({ "greyout": !autoAnim });
+    method_interpolate = inMethod.get() == "Interpolate Index";
+    method_autoAnim = inMethod.get() == "Auto Anim";
+    method_manualFade = inMethod.get() == "Manual Anim";
+    method_interpolate2 = inMethod.get() == "Interpolate Indices";
 
-    inIndex.setUiAttribs({ "greyout": autoAnim });
+    duration.setUiAttribs({ "greyout": !method_autoAnim });
+    nextGeom.setUiAttribs({ "greyout": !(method_autoAnim || method_manualFade) });
+    inIndex.setUiAttribs({ "greyout": !(method_interpolate || method_interpolate2) });
+    inIndex2.setUiAttribs({ "greyout": !method_interpolate2 });
+
+    inFade.setUiAttribs({ "greyout": !(method_manualFade || method_interpolate2) });
 }
 
 function checkLength()
@@ -94,7 +107,6 @@ function updateMeshes()
 
                 mesh.addAttribute(prfx + "attrMorphTargetA", geom._vertices, 3);
                 mesh.addAttribute(prfx + "attrMorphTargetB", geom._vertices, 3);
-                // op.log("MESH BUILD");
                 updateGeom();
             }
         }
@@ -106,11 +118,11 @@ function updateGeom()
     let geom1;
     let geom2;
 
-    if (autoAnim)
+    if (method_autoAnim || method_manualFade)
     {
         let getGeom = nextGeom.get();
         if (getGeom < 0) getGeom = 0;
-        else if (getGeom >= 7) getGeom = 7;
+        else if (getGeom >= NUMGEOMS) getGeom = NUMGEOMS;
         let temp = 0;
 
         if (oldGeom === getGeom) return;
@@ -126,17 +138,39 @@ function updateGeom()
         finished.set(false);
 
         geom1 = inGeoms[oldGeom].get();
-        temp = getGeom;
-        geom2 = inGeoms[temp].get();
+        geom2 = inGeoms[getGeom].get();
+
+        if (method_manualFade)
+        {
+            if (inFade.get() != 0) geom2 = inGeoms[oldGeom].get();
+            if (inFade.get() == 1) geom1 = inGeoms[getGeom].get();
+
+            oldGeom = getGeom;
+        }
     }
 
-    if (!autoAnim)
+    if (method_interpolate2)
     {
-        let a = Math.max(Math.floor(inIndex.get()), 0);
-        let b = Math.min(Math.ceil(inIndex.get()), 7);
+        const b = Math.max(Math.floor(inIndex.get()), 0);
+        const a = Math.min(Math.ceil(inIndex2.get()), NUMGEOMS);
 
-        geom1 = inGeoms[a].get();
-        geom2 = inGeoms[b].get();
+        if (inGeoms[a]) geom1 = inGeoms[a].get();
+        else geom1 = null;
+
+        if (inGeoms[b]) geom2 = inGeoms[b].get();
+        else geom2 = null;
+    }
+
+    if (method_interpolate)
+    {
+        const a = Math.max(Math.floor(inIndex.get()), 0);
+        const b = Math.min(Math.ceil(inIndex.get()), NUMGEOMS);
+
+        if (inGeoms[a]) geom1 = inGeoms[a].get();
+        else geom1 = null;
+
+        if (inGeoms[b]) geom2 = inGeoms[b].get();
+        else geom2 = null;
     }
 
     if (mesh && geom1 && geom2 && geom1._vertices && geom2._vertices)
@@ -146,48 +180,18 @@ function updateGeom()
     }
 }
 
-function removeModule()
-{
-    if (shader && module)
-    {
-        shader.removeModule(module);
-        shader = null;
-    }
-}
-
 function doRender()
 {
-    if (cgl.getShader() && cgl.getShader() != shader)
+    if (method_autoAnim) mod.setUniformValue("MOD_fade", anim.getValue(op.patch.freeTimer.get()));
+    else if (method_interpolate) mod.setUniformValue("MOD_fade", inIndex.get() % 1.00000);
+    else if (method_manualFade) mod.setUniformValue("MOD_fade", inFade.get());
+    else if (method_interpolate2) mod.setUniformValue("MOD_fade", inFade.get());
+
+    if (mesh)
     {
-        if (shader) removeModule();
-
-        shader = cgl.getShader();
-        module = shader.addModule(
-            {
-                "name": "MODULE_VERTEX_POSITION",
-                "srcHeadVert": srcHeadVert,
-                "srcBodyVert": srcBodyVert
-            });
-
-        uniFade = new CGL.Uniform(shader, "f", module.prefix + "fade", 0);
-        uniDoMorph = new CGL.Uniform(shader, "f", module.prefix + "doMorph", 1);
+        mod.bind();
+        mesh.render(cgl.getShader());
+        mod.unbind();
     }
-
-    if (uniDoMorph)
-    {
-        if (autoAnim)
-        {
-            uniFade.setValue(anim.getValue(op.patch.freeTimer.get()));
-        }
-        else
-        {
-            console.log(inIndex.get() % 1);
-            uniFade.setValue(inIndex.get() % 1);
-        }
-
-        uniDoMorph.setValue(1.0);
-        if (mesh !== null) mesh.render(cgl.getShader());
-        uniDoMorph.setValue(0);
-        trigger.trigger();
-    }
+    next.trigger();
 }
