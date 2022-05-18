@@ -31,6 +31,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._log = new Logger("cgl_mesh");
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
+    this._indexType = this._cgl.gl.UNSIGNED_SHORT;
     this._attributes = [];
     this._attribLocs = {};
     this._geom = null;
@@ -39,6 +40,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._glPrimitive = glPrimitive;
     this._preWireframeGeom = null;
     this.addVertexNumbers = false;
+
     this.feedBackAttributes = [];
     this.setGeom(__geom);
 
@@ -365,8 +367,21 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         // todo cache this ?
         // if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
 
+        // if (vertIndices.length > 65535)
+        // {
+        //     console.log("32bit vertex indices...");
+        //     this.vertIndicesTyped = new Uint32Array(vertIndices);
+        // }
+        if (vertIndices instanceof Uint32Array)
+        {
+            console.log("uint32arr....!!!!!");
+            this.vertIndicesTyped = vertIndices;
+            this._indexType = this._cgl.gl.UNSIGNED_INT;
+        }
+        else
         if (!(vertIndices instanceof Uint16Array)) this.vertIndicesTyped = new Uint16Array(vertIndices);
         else this.vertIndicesTyped = vertIndices;
+
 
         this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
@@ -730,8 +745,8 @@ Mesh.prototype.render = function (shader)
     }
     else
     {
-        if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
-        else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
+        if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
+        else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
     }
 
     if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)

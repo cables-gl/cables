@@ -121,11 +121,11 @@ function setup()
     motionState = new Ammo.btDefaultMotionState(transform);
 
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
-    if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inRadius.get());
-    if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
-    if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
-    if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
-    if (inShape.get() == "Geom Convex Hull")
+    else if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inRadius.get());
+    else if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
+    else if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
+    else if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
+    else if (inShape.get() == "Geom Convex Hull")
     {
         if (!inGeom.isLinked())
         {
@@ -153,12 +153,15 @@ function setup()
     }
     else
     {
-        inGeomSimplify.setUiAttribs({ "greyout": true });
-        inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
-        inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
-        inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
-        inRadius.setUiAttribs({ "greyout": inShape.get() == "Box" });
+        console.log("unknown shape type", inShape.get());
+        return;
     }
+
+    inGeomSimplify.setUiAttribs({ "greyout": true });
+    inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
+    inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
+    inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
+    inRadius.setUiAttribs({ "greyout": inShape.get() == "Box" });
 
     colShape.setMargin(0.05);
 
