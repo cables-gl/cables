@@ -1,0 +1,96 @@
+{
+    "authorName": "pandur",
+    "id": "54eeb750-1491-4fdf-bfd5-290e1b29bafd",
+    "created": 1652866606731,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Repeat X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Repeat Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.TransformTextureCoordinates"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Twist3 renamed to Ops.Gl.ShaderEffects.Twist_v3",
+            "author": "pandur",
+            "date": 1596029978529
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.Twist_v3",
+            "author": "pandur",
+            "date": 1615314888700
+        },
+        {
+            "message": "Ops.User.pandur.TransformVertex renamed to Ops.Gl.ShaderEffects.TransformVertex",
+            "author": "pandur",
+            "date": 1615315844236
+        },
+        {
+            "message": "fix: can be stacked now",
+            "author": "pandur",
+            "date": 1643617007326
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.TransformVertex",
+            "author": "pandur",
+            "date": 1652866606731
+        },
+        {
+            "message": "Ops.User.pandur.TransformTextureCoordinates renamed to Ops.Gl.ShaderEffects.TransformTextureCoordinates",
+            "author": "pandur",
+            "date": 1652867062756
+        }
+    ],
+    "summary": "transform vertices of a mesh via vertex shader",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "SaKWF6RnsyI"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "exampleProjectId": "u1iOhI"
+}
