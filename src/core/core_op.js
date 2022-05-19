@@ -75,7 +75,7 @@ const Op = function ()
             );
         }
 
-        this.uiAttribs.title = this._shortOpName;
+        // this.uiAttribs.title = this._shortOpName;
     }
 
     this.id = arguments[2] || uuid(); // instance id
@@ -116,8 +116,8 @@ const Op = function ()
 
     Op.prototype.getTitle = function ()
     {
-        if (!this.uiAttribs) return this.name;
-        return (this.uiAttribs.title || this.name);
+        if (!this.uiAttribs) return "nouiattribs" + this.name;
+        return (this.uiAttribs.title || this._shortOpName);
     };
 
     Op.prototype.setTitle = function (name)
