@@ -240,13 +240,9 @@ function printInfo()
         html += "<td>";
         let numVerts = 0;
         for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
-        {
-            // html+=gltf.json.meshes[i].primitives[j].indices;
-            if (gltf.json.meshes[i].primitives[j].attributes.POSITION)
-            {
+            if (gltf.json.meshes[i].primitives[j].attributes.POSITION != undefined)
                 numVerts += parseInt(gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count);
-            }
-        }
+
         html += numVerts;
         html += "</td>";
 

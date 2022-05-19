@@ -137,6 +137,6 @@
                 "name": "Transformed"
             }
         ],
-        "name": "Ops.Dev.AmmoBody"
+        "name": "Ops.Physics.Ammo.AmmoBody"
     }
 }
