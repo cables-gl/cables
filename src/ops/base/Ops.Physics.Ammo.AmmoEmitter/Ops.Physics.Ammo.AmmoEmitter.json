@@ -88,8 +88,16 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
+                "type": 3,
+                "name": "Rotations Quats"
             }
         ],
-        "name": "Ops.User.pandur.AmmoEmitter"
+        "name": "Ops.Physics.Ammo.AmmoEmitter"
     }
 }

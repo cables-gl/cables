@@ -100,6 +100,8 @@ Port.prototype.getValueForDisplay = function ()
         else str += "true";
     }
 
+    str = str.replace(/(<([^>]+)>)/ig, "");
+
     if (str.length > 100) str = str.substring(0, 100);
 
     return str;

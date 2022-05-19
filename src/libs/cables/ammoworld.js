@@ -34,6 +34,8 @@ const AmmoWorld = class extends CABLES.EventTarget
     {
         if (!this.world) return;
 
+        this.emitEvent("dispose");
+
         for (let i = 0; i < this.bodies.length; i++)
         {
             if (this.bodies[i])
@@ -106,7 +108,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         if (!this.world) return;
         let deltaTime = performance.now() - this.lastTime;
 
-        this.world.stepSimulation(deltaTime, 10);
+        this.world.stepSimulation(deltaTime, 5);
 
         this._checkCollisions();
 
