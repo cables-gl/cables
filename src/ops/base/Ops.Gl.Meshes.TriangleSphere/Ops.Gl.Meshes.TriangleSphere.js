@@ -155,8 +155,7 @@ function generate()
     if (!geom)geom = new CGL.Geometry(op.name);
     geom.clear();
 
-    verts = [].concat.apply([], f);
-    verts = [].concat.apply([], verts);
+    verts = f.flat(Infinity);
 
     if (!flat.get()) index(verts, geom);
     else
