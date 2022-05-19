@@ -1,5 +1,7 @@
-UNI float a;
+IN vec2 texCoord;
+UNI sampler2D tex;
+
 void main()
 {
-   outColor= vec4(0.0,0.0,0.0,a);
+    outColor=texture(tex,texCoord);
 }

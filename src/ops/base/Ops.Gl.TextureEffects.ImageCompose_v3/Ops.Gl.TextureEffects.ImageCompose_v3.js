@@ -1,4 +1,5 @@
 const
+    cgl = op.patch.cgl,
     render = op.inTrigger("Render"),
     inTex = op.inTexture("Base Texture"),
     inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
@@ -9,21 +10,19 @@ const
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     trigger = op.outTrigger("Next"),
-    texOut = op.outTexture("texture_out"),
+    texOut = op.outTexture("texture_out", CGL.Texture.getEmptyTexture(cgl)),
     outRatio = op.outNumber("Aspect Ratio"),
     outWidth = op.outNumber("Texture Width"),
     outHeight = op.outNumber("Texture Height");
 
-const cgl = op.patch.cgl;
 op.setPortGroup("Texture Settings", [inSize, width, height, inWrap, inFilter, inPixel]);
-
-texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
 const prevViewPort = [0, 0, 0, 0];
 let effect = null;
 let tex = null;
 let reInitEffect = true;
 let isFloatTex = false;
+
 inWrap.onChange =
     inFilter.onChange =
     inPixel.onChange = reInitLater;
@@ -67,8 +66,6 @@ function initEffect()
 
 function getFilter()
 {
-    // if (inTex.get()) return inTex.get().filter;
-
     if (inFilter.get() == "nearest") return CGL.Texture.FILTER_NEAREST;
     if (inFilter.get() == "linear") return CGL.Texture.FILTER_LINEAR;
     if (inFilter.get() == "mipmap") return CGL.Texture.FILTER_MIPMAP;
@@ -76,7 +73,6 @@ function getFilter()
 
 function getWrap()
 {
-    // if (inTex.get()) return inTex.get().wrap;
     if (inWrap.get() == "repeat") return CGL.Texture.WRAP_REPEAT;
     if (inWrap.get() == "mirrored repeat") return CGL.Texture.WRAP_MIRRORED_REPEAT;
     if (inWrap.get() == "clamp to edge") return CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -84,7 +80,6 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    // if (inTex.get() && inTex.get().isFloatingPoint) isFloatTex = inTex.get().isFloatingPoint();
     isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
     return isFloatTex;
 }
@@ -122,9 +117,8 @@ function updateResolution()
         effect.setSourceTexture(tex);
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
+        updateResolutionInfo();
     }
-
-    updateResolutionInfo();
 }
 
 function updateResolutionInfo()
@@ -157,11 +151,6 @@ function updateUi()
     width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
     height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
-    // inUseVPSize.setUiAttribs({ "greyout": inTex.isLinked() });
-    // inFilter.setUiAttribs({ "greyout": inTex.isLinked() });
-    // inWrap.setUiAttribs({ "greyout": inTex.isLinked() });
-    // inPixel.setUiAttribs({ "greyout": inTex.isLinked() });
-
     if (tex)
         if (getFloatingPoint() && getFilter() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
@@ -173,6 +162,29 @@ op.preRender = function ()
 {
     doRender();
 };
+
+let copyShader = null;
+let copyShaderTexUni = null;
+
+function copyTexture()
+{
+    if (!copyShader)
+    {
+        copyShader = new CGL.Shader(cgl, "copytextureshader");
+        copyShader.setSource(copyShader.getDefaultVertexShader(), attachments.imgcomp_frag);
+        copyShaderTexUni = new CGL.Uniform(copyShader, "t", "tex", 0);
+    }
+
+    cgl.pushShader(copyShader);
+    cgl.currentTextureEffect.bind();
+
+    cgl.setTexture(0, inTex.get().tex);
+
+    // uniAspect.set(cgl.currentTextureEffect.aspectRatio);
+
+    cgl.currentTextureEffect.finish();
+    cgl.popShader();
+}
 
 function doRender()
 {
@@ -200,6 +212,10 @@ function doRender()
     trigger.trigger();
 
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
+
+    if (inTex.get() && effect.getCurrentSourceTexture() == inTex.get())
+        copyTexture();
+
     texOut.set(effect.getCurrentSourceTexture());
 
     effect.endEffect();
