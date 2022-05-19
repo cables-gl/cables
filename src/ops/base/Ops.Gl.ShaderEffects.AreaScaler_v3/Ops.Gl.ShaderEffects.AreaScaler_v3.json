@@ -1,0 +1,161 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Area size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source index",
+                "group": "Influence",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "group": "Influence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smoothstep",
+                "group": "Influence",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Min Size Original",
+                "group": "Influence",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clamp size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clamp min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clamp max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Z",
+                "group": "Position",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.pandur.AreaScaler_v3"
+    },
+    "authorName": "pandur",
+    "id": "3b7c5601-881a-4748-91d1-aea4c7c1bf67",
+    "created": 1652965261715,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.AreaScaler_v2 renamed to Ops.Gl.ShaderEffects.AreaScaler_v2",
+            "author": "pandur",
+            "date": 1573743399666
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.AreaScaler_v2",
+            "author": "pandur",
+            "date": 1652965261715
+        },
+        {
+            "message": "Ops.User.pandur.AreaScaler_v3 renamed to Ops.Gl.ShaderEffects.AreaScaler_v3",
+            "author": "pandur",
+            "date": 1652966431210
+        }
+    ],
+    "summary": "Scales the size of meshes within the area of influence",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Area size",
+                "text": "Size of area to influence"
+            },
+            {
+                "name": "Source",
+                "text": "Vertex position or Object position"
+            },
+            {
+                "name": "Type index",
+                "text": "Distance or scalar. Scalar scales everything to one value."
+            },
+            {
+                "name": "Strength",
+                "text": "Strength of the effect"
+            },
+            {
+                "name": "Smoothstep",
+                "text": "Smoothstep mode to influence "
+            },
+            {
+                "name": "Clamp size",
+                "text": "Clamp the size to defined min max"
+            },
+            {
+                "name": "Clamp min",
+                "text": "Minimum size if clamp is enabled"
+            },
+            {
+                "name": "Clamp max",
+                "text": "Maximum size if clamp is enabled"
+            },
+            {
+                "name": "Pos X",
+                "text": "X position of the area"
+            },
+            {
+                "name": "Pos Y",
+                "text": "Y position of the area"
+            },
+            {
+                "name": "Pos Z",
+                "text": "Z position of the area"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "exampleProjectId": "LXN7D-"
+}
