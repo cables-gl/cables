@@ -1,8 +1,13 @@
 const onResize = op.outTrigger("Resized");
 
-op.patch.cgl.on("resize", resize);
+let listener = op.patch.cgl.on("resize", resize);
 
 function resize()
 {
     onResize.trigger();
 }
+
+op.onDelete = () =>
+{
+    op.patch.cgl.off(listener);
+};
