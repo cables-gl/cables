@@ -1,120 +1,88 @@
-let render = op.inTrigger("render");
-let trigger = op.outTrigger("trigger");
+const
+    render = op.inTrigger("render"),
 
-let x1 = op.inValue("x 1", -1);
-let y1 = op.inValue("y 1", 1);
-let z1 = op.inValue("z 1", 0);
+    x1 = op.inValue("x 1", -1),
+    y1 = op.inValue("y 1", 1),
+    z1 = op.inValue("z 1", 0),
 
-let x2 = op.inValue("x 2", 1);
-let y2 = op.inValue("y 2", 1);
-let z2 = op.inValue("z 2", 0);
+    x2 = op.inValue("x 2", 1),
+    y2 = op.inValue("y 2", 1),
+    z2 = op.inValue("z 2", 0),
 
-let x3 = op.inValue("x 3", -1);
-let y3 = op.inValue("y 3", -1);
-let z3 = op.inValue("z 3", 0);
+    x3 = op.inValue("x 3", -1),
+    y3 = op.inValue("y 3", -1),
+    z3 = op.inValue("z 3", 0),
 
-let x4 = op.inValue("x 4", 1);
-let y4 = op.inValue("y 4", -1);
-let z4 = op.inValue("z 4", 0);
+    x4 = op.inValue("x 4", 1),
+    y4 = op.inValue("y 4", -1),
+    z4 = op.inValue("z 4", 0),
 
-let tcx1 = op.inValue("tc x 1", 0);
-let tcy1 = op.inValue("tc y 1", 1);
+    tcx1 = op.inValue("tc x 1", 0),
+    tcy1 = op.inValue("tc y 1", 1),
 
-let tcx2 = op.inValue("tc x 2", 1);
-let tcy2 = op.inValue("tc y 2", 1);
+    tcx2 = op.inValue("tc x 2", 1),
+    tcy2 = op.inValue("tc y 2", 1),
 
-let tcx3 = op.inValue("tc x 3", 0);
-let tcy3 = op.inValue("tc y 3", 0);
+    tcx3 = op.inValue("tc x 3", 0),
+    tcy3 = op.inValue("tc y 3", 0),
 
-let tcx4 = op.inValue("tc x 4", 1);
-let tcy4 = op.inValue("tc y 4", 0);
+    tcx4 = op.inValue("tc x 4", 1),
+    tcy4 = op.inValue("tc y 4", 0),
+    trigger = op.outTrigger("trigger");
+
+let geom = new CGL.Geometry(op.name);
+let mesh = null;
+let cgl = op.patch.cgl;
 
 let arrverts = [];
 arrverts.length = 12;
 let verts = new Float32Array(arrverts);
-let indices = [0, 1, 2, 1, 2, 3];
+let indices = [2, 1, 0, 1, 2, 3];
 let tc = new Float32Array([0, 0, 0, 0, 0, 0, 0, 0]);
-// var tc=[];
-// tc.length=8;
 
 let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
 geomOut.ignoreValueSerialize = true;
 
-let cgl = op.patch.cgl;
-
-tcx1.onChange = rebuild;
-tcy1.onChange = rebuild;
-
-tcx2.onChange = rebuild;
-tcy2.onChange = rebuild;
-
-tcx3.onChange = rebuild;
-tcy3.onChange = rebuild;
-
-tcx4.onChange = rebuild;
-tcy4.onChange = rebuild;
-
-x1.onChange = rebuild;
-x2.onChange = rebuild;
-x3.onChange = rebuild;
-x4.onChange = rebuild;
-
-y1.onChange = rebuild;
-y2.onChange = rebuild;
-y3.onChange = rebuild;
-y4.onChange = rebuild;
-
-z1.onChange = rebuild;
-z2.onChange = rebuild;
-z3.onChange = rebuild;
-z4.onChange = rebuild;
-
-// axis.set('xy');
-// pivotX.set('center');
-// pivotY.set('center');
-let geom = new CGL.Geometry(op.name);
-let mesh = null;
+tcx1.onChange =
+    tcy1.onChange =
+    tcx2.onChange =
+    tcy2.onChange =
+    tcx3.onChange =
+    tcy3.onChange =
+    tcx4.onChange =
+    tcy4.onChange =
+    x1.onChange =
+    x2.onChange =
+    x3.onChange =
+    x4.onChange =
+    y1.onChange =
+    y2.onChange =
+    y3.onChange =
+    y4.onChange =
+    z1.onChange =
+    z2.onChange =
+    z3.onChange =
+    z4.onChange = rebuild;
 
 rebuild();
 
 render.onTriggered = function ()
 {
     mesh.render(cgl.getShader());
+
+    if (op.isCurrentUiOp())
+    {
+        gui.setTransformGizmo({ "posX": x1, "posY": y1, "posZ": z1 }, 0);
+        gui.setTransformGizmo({ "posX": x2, "posY": y2, "posZ": z2 }, 1);
+        gui.setTransformGizmo({ "posX": x3, "posY": y3, "posZ": z3 }, 2);
+        gui.setTransformGizmo({ "posX": x4, "posY": y4, "posZ": z4 }, 3);
+    }
+
     trigger.trigger();
 };
 
 function rebuild()
 {
-    // var w=width.get();
-    // var h=height.get();
-    // var x=0;
-    // var y=0;
-
-    // if(typeof w=='string')w=parseFloat(w);
-    // if(typeof h=='string')h=parseFloat(h);
-
-    // if(pivotX.get()=='center') x=0;
-    // if(pivotX.get()=='right') x=-w/2;
-    // if(pivotX.get()=='left') x=+w/2;
-
-    // if(pivotY.get()=='center') y=0;
-    // if(pivotY.get()=='top') y=-h/2;
-    // if(pivotY.get()=='bottom') y=+h/2;
-
-    // var verts=[];
-    // var tc=[];
-    // var norms=[];
-    // var indices=[];
-
-    // var numRows=Math.round(nRows.get());
-    // var numColumns=Math.round(nColumns.get());
-
-    // var stepColumn=w/numColumns;
-    // var stepRow=h/numRows;
-
-    // var c,r;
-
-    // var verts=[];
     verts[0] = x1.get();
     verts[1] = y1.get();
     verts[2] = z1.get();
@@ -148,10 +116,8 @@ function rebuild()
     geom.vertices = verts;
     geom.texCoords = tc;
     geom.verticesIndices = indices;
-    // geom.vertexNormals=norms;
-    // geom.calculateNormals({ "forceZUp": true });
-    // geom.calculateNormals();
-    // geom.calcTangentsBitangents();
+    geom.calcNormals(true);
+    geom.calcTangentsBitangents();
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);

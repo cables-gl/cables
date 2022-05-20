@@ -73,7 +73,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.NewImageCompose"
+        "name": "Ops.Gl.TextureEffects.ImageCompose_v3"
     },
     "summary": "Compose Images and effects as layers to generate new Images",
     "credits": [

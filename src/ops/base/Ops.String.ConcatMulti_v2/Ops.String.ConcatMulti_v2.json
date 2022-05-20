@@ -1,0 +1,121 @@
+{
+    "id": "bc110e48-812d-489d-b1b3-b09c644c6982",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1561018699762
+        },
+        {
+            "message": "cloned op from Ops.String.ConcatMulti",
+            "author": "pandur",
+            "date": 1652941595204
+        },
+        {
+            "message": "Ops.User.pandur.ConcatMulti_v2 renamed to Ops.String.ConcatMulti_v2",
+            "author": "pandur",
+            "date": 1652941626053
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1652941595204,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "string 0"
+            },
+            {
+                "type": 5,
+                "name": "string 1"
+            },
+            {
+                "type": 5,
+                "name": "string 2"
+            },
+            {
+                "type": 5,
+                "name": "string 3"
+            },
+            {
+                "type": 5,
+                "name": "string 4"
+            },
+            {
+                "type": 5,
+                "name": "string 5"
+            },
+            {
+                "type": 5,
+                "name": "string 6"
+            },
+            {
+                "type": 5,
+                "name": "string 7"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "concat string"
+            }
+        ],
+        "name": "Ops.User.pandur.ConcatMulti_v2"
+    },
+    "summary": "Joins multiple strings together",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.String.Concat_v2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "add spaces",
+                "text": "Adds a space to the end of each string"
+            },
+            {
+                "name": "new lines",
+                "text": "Adds a line break to the end of each string"
+            },
+            {
+                "name": "string 0",
+                "text": "String 0 in"
+            },
+            {
+                "name": "string 1",
+                "text": "String 1 in"
+            },
+            {
+                "name": "string 2",
+                "text": "String 2 in"
+            },
+            {
+                "name": "string 3",
+                "text": "String 3 in"
+            },
+            {
+                "name": "string 4",
+                "text": "String 4 in"
+            },
+            {
+                "name": "string 5",
+                "text": "String 5 in"
+            },
+            {
+                "name": "string 6",
+                "text": "String 6 in"
+            },
+            {
+                "name": "string 7",
+                "text": "String 7 in"
+            },
+            {
+                "name": "concat string",
+                "text": "Merged strings out"
+            }
+        ]
+    },
+    "exampleProjectId": "DNW-QJ"
+}

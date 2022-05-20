@@ -26,6 +26,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
                 "type": 5,
                 "name": "Character Name"
             },

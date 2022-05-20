@@ -4,6 +4,8 @@ const
     trigger = op.outTrigger("trigger"),
     isLocked = op.outBoolNum("isLocked", false),
 
+    inHeight = op.inFloat("Height", 2),
+
     // moveSpeed = op.inFloat("Speed", 1),
     inName = op.inString("Character Name", "player1"),
     mouseSpeed = op.inFloat("Mouse Speed", 1),
@@ -127,7 +129,7 @@ render.onTriggered = function ()
         let ms = body.getMotionState();
         ms.getWorldTransform(tmpTrans);
         let p = tmpTrans.getOrigin();
-        vec3.set(vPos, -p.x(), -p.y() - 2, -p.z());
+        vec3.set(vPos, -p.x(), -p.y() - inHeight.get(), -p.z());
     }
     else
     {

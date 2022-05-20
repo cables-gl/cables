@@ -78,6 +78,8 @@ randomize.onTriggered = function ()
     r3.set(Math.random());
     g3.set(Math.random());
     b3.set(Math.random());
+
+    op.refreshParams();
 };
 
 function updateCol()

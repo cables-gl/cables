@@ -1,7 +1,7 @@
 const
     NUMGEOMS = 16,
     render = op.inTrigger("render"),
-    inMethod = op.inSwitch("Method", ["Auto Anim", "Manual Anim", "Interpolate Index", "Interpolate Indices"], "Auto Anim"),
+    inMethod = op.inSwitch("Method", ["Auto Anim", "Interpolate Index", "Interpolate Indices"], "Auto Anim"),
     nextGeom = op.inValueInt("Geometry"),
     duration = op.inValue("Duration", 1.0),
     inIndex = op.inFloat("Index", 0),
@@ -21,7 +21,7 @@ let oldGeom = 0;
 
 const anim = new CABLES.Anim();
 anim.clear();
-anim.createPort(op, "Easing", updateGeom);
+const inEase = anim.createPort(op, "Easing", updateGeom);
 
 window.meshsequencecounter = window.meshsequencecounter || 1;
 window.meshsequencecounter++;
@@ -33,7 +33,8 @@ const srcHeadVert = ""
     .endl();
 
 const srcBodyVert = ""
-    .endl() + "  pos = vec4( " + prfx + "attrMorphTargetA * MOD_fade + " + prfx + "attrMorphTargetB * (1.0 - MOD_fade ), 1. );"
+    .endl() + "  pos = vec4(" + prfx + "attrMorphTargetA * MOD_fade + " + prfx + "attrMorphTargetB * (1.0 - MOD_fade), 1. );"
+
     .endl();
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -64,13 +65,14 @@ function updateUi()
 {
     method_interpolate = inMethod.get() == "Interpolate Index";
     method_autoAnim = inMethod.get() == "Auto Anim";
-    method_manualFade = inMethod.get() == "Manual Anim";
     method_interpolate2 = inMethod.get() == "Interpolate Indices";
 
     duration.setUiAttribs({ "greyout": !method_autoAnim });
     nextGeom.setUiAttribs({ "greyout": !(method_autoAnim || method_manualFade) });
     inIndex.setUiAttribs({ "greyout": !(method_interpolate || method_interpolate2) });
     inIndex2.setUiAttribs({ "greyout": !method_interpolate2 });
+    inIndex2.setUiAttribs({ "greyout": !method_interpolate2 });
+    inEase.setUiAttribs({ "greyout": !method_autoAnim });
 
     inFade.setUiAttribs({ "greyout": !(method_manualFade || method_interpolate2) });
 }
@@ -177,13 +179,19 @@ function updateGeom()
     {
         mesh.updateAttribute(prfx + "attrMorphTargetB", geom1._vertices);
         mesh.updateAttribute(prfx + "attrMorphTargetA", geom2._vertices);
+
+        if (geom1 == geom2)console.log("both same");
     }
 }
 
 function doRender()
 {
     if (method_autoAnim) mod.setUniformValue("MOD_fade", anim.getValue(op.patch.freeTimer.get()));
-    else if (method_interpolate) mod.setUniformValue("MOD_fade", inIndex.get() % 1.00000);
+    else if (method_interpolate)
+    {
+        let f = inIndex.get() % 1;
+        mod.setUniformValue("MOD_fade", f);
+    }
     else if (method_manualFade) mod.setUniformValue("MOD_fade", inFade.get());
     else if (method_interpolate2) mod.setUniformValue("MOD_fade", inFade.get());
 
@@ -191,7 +199,7 @@ function doRender()
     {
         mod.bind();
         mesh.render(cgl.getShader());
+        next.trigger();
         mod.unbind();
     }
-    next.trigger();
 }
