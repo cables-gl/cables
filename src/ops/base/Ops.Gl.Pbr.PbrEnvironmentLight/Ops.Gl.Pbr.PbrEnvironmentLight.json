@@ -55,6 +55,66 @@
                 "type": 0,
                 "name": "Rotation",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Use parallax correction",
+                "group": "parallax correction",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "center X",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "center Y",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "center Z",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Box min X",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Box min Y",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Box min Z",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Box max X",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Box max Y",
+                "group": "parallax correction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Box max Z",
+                "group": "parallax correction",
+                "subType": "number"
             }
         ],
         "portsOut": [
