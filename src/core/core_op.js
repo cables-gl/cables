@@ -27,18 +27,6 @@ import Logger from "./core_logger";
 
 const Ops = {};
 
-// var CABLES=CABLES || {};
-
-// export const OP_PORT_TYPE_VALUE = 0;
-// export const OP_PORT_TYPE_FUNCTION = 1;
-// export const OP_PORT_TYPE_OBJECT = 2;
-// export const OP_PORT_TYPE_TEXTURE = 2;
-// export const OP_PORT_TYPE_ARRAY = 3;
-// export const OP_PORT_TYPE_DYNAMIC = 4;
-// export const OP_PORT_TYPE_STRING = 5;
-
-// export const OP_VERSION_PREFIX = "_v";
-
 const Op = function ()
 {
     EventTarget.apply(this);
@@ -75,7 +63,8 @@ const Op = function ()
             );
         }
 
-        // this.uiAttribs.title = this._shortOpName;
+        if (!this.uiAttribs.title)
+            this.uiAttribs.title = this._shortOpName;
     }
 
     this.id = arguments[2] || uuid(); // instance id
