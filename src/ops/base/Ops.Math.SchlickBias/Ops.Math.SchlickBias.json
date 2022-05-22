@@ -1,0 +1,44 @@
+{
+    "id": "ea957aae-c9c7-4d2a-a227-c2a10042f554",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1653203279586
+        },
+        {
+            "message": "Ops.User.pandur.SchlickGain renamed to Ops.Math.SchlickBias",
+            "author": "pandur",
+            "date": 1653204668601
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1653203366131,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gain",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Bias",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.SchlickGain"
+    }
+}
