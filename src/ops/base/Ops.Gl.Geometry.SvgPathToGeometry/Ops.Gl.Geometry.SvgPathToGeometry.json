@@ -15,6 +15,11 @@
             "message": "Ops.User.pandur.SvgPathToMesh renamed to Ops.Dev.SvgPathToMesh",
             "author": "pandur",
             "date": 1647448101899
+        },
+        {
+            "message": "Ops.Dev.SvgPathToMesh renamed to Ops.Gl.Geometry.SvgPathToGeometry",
+            "author": "pandur",
+            "date": 1653287610699
         }
     ],
     "layout": {

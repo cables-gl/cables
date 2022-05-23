@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.OpenTypeToSvgPath renamed to Ops.Dev.OpentypeToSvgPath",
             "author": "pandur",
             "date": 1647541433414
+        },
+        {
+            "message": "Ops.Dev.OpentypeToSvgPath renamed to Ops.Libs.OpenType.OpentypeToSvgPath",
+            "author": "pandur",
+            "date": 1653287682153
         }
     ],
     "authorName": "pandur",

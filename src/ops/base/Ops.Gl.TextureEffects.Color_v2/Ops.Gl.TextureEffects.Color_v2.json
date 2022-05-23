@@ -85,6 +85,11 @@
             "message": "Ops.User.pandur.ColorV2 renamed to Ops.Dev.TextureEffects.ColorV2",
             "author": "pandur",
             "date": 1650374388166
+        },
+        {
+            "message": "Ops.Dev.TextureEffects.ColorV2 renamed to Ops.Gl.TextureEffects.Color_v2",
+            "author": "pandur",
+            "date": 1653287174827
         }
     ]
 }
