@@ -56,18 +56,6 @@
             },
             {
                 "type": 0,
-                "name": "Disable geometric roughness",
-                "group": "Shader Parameters",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Use roughness from normal map",
-                "group": "Shader Parameters",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Alpha Mode index",
                 "group": "Shader Parameters",
                 "subType": "integer"
@@ -86,15 +74,51 @@
             },
             {
                 "type": 0,
+                "name": "Disable geometric roughness",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Use roughness from normal map",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Use Vertex Colours",
-                "group": "Shader Parameters",
+                "group": "Advanced Shader Parameters",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Vertex Colour Mode index",
-                "group": "Shader Parameters",
+                "group": "Advanced Shader Parameters",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height Intensity",
+                "group": "Advanced Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Faster heightmapping",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Use Clear Coat",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear Coat Roughness",
+                "group": "Advanced Shader Parameters",
+                "subType": "number"
             },
             {
                 "type": 2,
@@ -139,6 +163,18 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "Height",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Lightmap",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Diffuse Intensity",
                 "group": "Lighting",
@@ -147,6 +183,18 @@
             {
                 "type": 0,
                 "name": "Specular Intensity",
+                "group": "Lighting",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Lightmap is RGBE",
+                "group": "Lighting",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Lightmap Intensity",
                 "group": "Lighting",
                 "subType": "number"
             }

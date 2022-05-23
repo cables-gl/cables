@@ -62,21 +62,21 @@ void main()
     #endif
 
     #ifndef INSTANCING
-    tangent = normalize(vec3(mMatrix * vec4(tangent,    0.0)));
-    vec3 N = normalize(vec3(mMatrix * vec4(norm, 0.0)));
+        tangent = normalize(vec3(mMatrix * vec4(tangent,    0.0)));
+        vec3 N = normalize(vec3(mMatrix * vec4(norm, 0.0)));
     #else
-    tangent = normalize(vec3(instMat * vec4(tangent,    0.0)));
-    vec3 N = normalize(vec3(instMat * vec4(norm, 0.0)));
+        tangent = normalize(vec3(mMatrix*instMat * vec4(tangent,    0.0)));
+        vec3 N = normalize(vec3(mMatrix*instMat * vec4(norm, 0.0)));
     #endif
 
     #ifndef INSTANCING
-    bitangent = normalize(vec3(mMatrix * vec4(bitangent,  0.0)));
+        bitangent = normalize(vec3(mMatrix * vec4(bitangent,  0.0)));
     #else
-    bitangent = normalize(vec3(instMat * vec4(bitangent,  0.0)));
+        bitangent = normalize(vec3(mMatrix*instMat * vec4(bitangent,  0.0)));
     #endif
 
     #ifdef VERTEX_COLORS
-    vertCol = attrVertColor;
+        vertCol = attrVertColor;
     #endif
 
     TBN = mat3(tangent, bitangent, N);
