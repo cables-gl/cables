@@ -91,6 +91,7 @@ let tmpTrans = null;
 
 render.onTriggered = function ()
 {
+    if (!Ammo) return;
     if (!inActive.get()) return trigger.trigger();
     if (!tmpTrans)
     {
