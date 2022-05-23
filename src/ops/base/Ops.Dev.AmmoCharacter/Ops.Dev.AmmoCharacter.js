@@ -111,7 +111,7 @@ function setup()
 
     let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
-    body.setDamping(0.7, 0.01);
+    // body.setDamping(0.7, 0.01);
 
     world.addRigidBody(body);
 

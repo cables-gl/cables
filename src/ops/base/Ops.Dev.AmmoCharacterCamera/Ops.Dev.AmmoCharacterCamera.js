@@ -132,6 +132,9 @@ render.onTriggered = function ()
         console.log("char body not found!");
     }
 
+    if (rotX < -90)rotX = -90;
+    if (rotX > 90)rotX = 90;
+
     mat4.identity(cgl.vMatrix);
 
     mat4.rotateX(cgl.vMatrix, cgl.vMatrix, DEG2RAD * rotX);
