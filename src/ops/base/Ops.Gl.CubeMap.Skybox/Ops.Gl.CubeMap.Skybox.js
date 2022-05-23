@@ -1,14 +1,15 @@
-const cgl = op.patch.cgl;
-const inTrigger = op.inTrigger("Trigger In");
-const inRender = op.inBool("Render", true);
-const inTexture = op.inObject("Skybox");
-const inRot = op.inFloat("Rotate", 0);
+const
+    cgl = op.patch.cgl,
+    inTrigger = op.inTrigger("Trigger In"),
+    inRender = op.inBool("Render", true),
+    inTexture = op.inObject("Skybox"),
+    inRot = op.inFloat("Rotate", 0),
 
-const inRGBE = op.inBool("RGBE Format", false);
-const inExposure = op.inFloat("Exposure", 1);
-const inGamma = op.inFloat("Gamma", 2.2);
+    inRGBE = op.inBool("RGBE Format", false),
+    inExposure = op.inFloat("Exposure", 1),
+    inGamma = op.inFloat("Gamma", 2.2),
 
-const outTrigger = op.outTrigger("Trigger Out");
+    outTrigger = op.outTrigger("Trigger Out");
 
 const geometry = new CGL.Geometry("unit cube");
 
@@ -69,22 +70,14 @@ skyboxShader.offScreenPass = true;
 inRGBE.onChange = () =>
 {
     skyboxShader.toggleDefine("RGBE", inRGBE.get());
-    inGamma.setUiAttribs({ "greyout": !inRGBE.get() });
-    inExposure.setUiAttribs({ "greyout": !inRGBE.get() });
 };
 
 inTexture.onChange = () =>
 {
-    if (inTexture.get() && inTexture.get().cubemap)
-    {
-        skyboxShader.define("TEX_FORMAT_CUBEMAP");
-        skyboxShader.removeDefine("TEX_FORMAT_EQUIRECT");
-    }
-    else
-    {
-        skyboxShader.removeDefine("TEX_FORMAT_CUBEMAP");
-        skyboxShader.define("TEX_FORMAT_EQUIRECT");
-    }
+    const b = inTexture.get() && inTexture.get().cubemap;
+
+    skyboxShader.toggleDefine("TEX_FORMAT_CUBEMAP", b);
+    skyboxShader.toggleDefine("TEX_FORMAT_EQUIRECT", !b);
 };
 
 inTrigger.onTriggered = () =>
@@ -98,27 +91,19 @@ inTrigger.onTriggered = () =>
     skyboxShader.popTextures();
 
     cgl.pushModelMatrix();
-    // cgl.pushDepthFunc(cgl.gl.LEQUAL);
 
     if (!inTexture.get().cubemap && inTexture.get().filter !== CGL.Texture.FILTER_LINEAR)
-    {
         op.setUiError("linearFilter", "If there is a seam in the skybox, try changing the texture filter to linear!", 0);
-    }
     else
-    {
         op.setUiError("linearFilter", null);
-    }
 
     mat4.rotateY(cgl.mMatrix, cgl.mMatrix, inRot.get() * CGL.DEG2RAD);
 
     if (inTexture.get().tex)
-    {
         skyboxShader.pushTexture(uniformSkybox, inTexture.get().tex);
-    }
     else if (inTexture.get().cubemap)
-    {
         skyboxShader.pushTexture(uniformSkybox, inTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    }
+
     mesh.render(skyboxShader);
 
     cgl.popModelMatrix();
