@@ -174,7 +174,9 @@ function setupArray()
             if (useQuats)
             {
                 const mq = mat4.create();
-                mat4.fromQuat(mq, [rotArr[i * 4 + 0], rotArr[i * 4 + 1], rotArr[i * 4 + 2], rotArr[i * 4 + 3]]);
+                const q = [rotArr[i * 4 + 0], rotArr[i * 4 + 1], rotArr[i * 4 + 2], rotArr[i * 4 + 3]];
+                quat.normalize(q, q);
+                mat4.fromQuat(mq, q);
                 mat4.mul(m, m, mq);
             }
             else
