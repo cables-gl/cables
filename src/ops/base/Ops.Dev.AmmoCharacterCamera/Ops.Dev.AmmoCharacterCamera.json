@@ -81,6 +81,16 @@
                 "type": 0,
                 "name": "Dir Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Y",
+                "subType": "number"
             }
         ],
         "name": "Ops.Dev.AmmoCharacterCamera"

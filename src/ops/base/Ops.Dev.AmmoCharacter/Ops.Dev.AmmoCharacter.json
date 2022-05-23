@@ -30,17 +30,7 @@
             },
             {
                 "type": 0,
-                "name": "Size X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Z",
+                "name": "Height",
                 "subType": "number"
             },
             {
@@ -115,6 +105,21 @@
             {
                 "type": 1,
                 "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
+                "subType": "number"
             },
             {
                 "type": 1,
