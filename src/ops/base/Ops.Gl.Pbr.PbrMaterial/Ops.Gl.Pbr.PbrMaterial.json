@@ -184,9 +184,79 @@
     "caniusequery": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "uwoj7R52yU8"
+    ],
     "docs": {
         "ports": [
+            {
+                "name": "R",
+                "text": "amount of red"
+            },
+            {
+                "name": "G",
+                "text": "amount of green"
+            },
+            {
+                "name": "B",
+                "text": "amount of blue"
+            },
+            {
+                "name": "A",
+                "text": "opacity of material. Use Alpha Mode to select a look"
+            },
+            {
+                "name": "Roughness",
+                "text": "reflective or not"
+            },
+            {
+                "name": "Metalness",
+                "text": "metallic properties of material"
+            },
+            {
+                "name": "Disable geometric roughness",
+                "text": "don't automatically introduce roughness calculated from your geometry complexity"
+            },
+            {
+                "name": "Use roughness from normal map",
+                "text": "calculate roughness from your normal map information"
+            },
+            {
+                "name": "Alpha Mode index",
+                "text": "material opacity look type"
+            },
+            {
+                "name": "Tonemapping index",
+                "text": "tone mapping modes"
+            },
+            {
+                "name": "Exposure",
+                "text": "exposure boost your tone map look"
+            },
+            {
+                "name": "Use Vertex Colours",
+                "text": "enable vertex colors then select their purpose"
+            },
+            {
+                "name": "Vertex Colour Mode index",
+                "text": "when using vertex colors, assign their purpose here"
+            },
+            {
+                "name": "IBL LUT",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Diffuse Irradiance",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Pre-filtered envmap",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Num mip levels",
+                "text": "generally auto set by PBR Environment"
+            },
             {
                 "name": "Albedo",
                 "text": "sRGB"
@@ -198,6 +268,14 @@
             {
                 "name": "Normal map",
                 "text": "linear bt.709, +Y, TS per vertex"
+            },
+            {
+                "name": "Diffuse Intensity",
+                "text": "albedo/diffuse intensity in the material"
+            },
+            {
+                "name": "Specular Intensity",
+                "text": "Specular boost adjustment"
             }
         ]
     },

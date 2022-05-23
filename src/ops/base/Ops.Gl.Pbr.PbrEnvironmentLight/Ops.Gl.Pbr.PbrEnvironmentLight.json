@@ -166,9 +166,92 @@
     "caniusequery": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "uwoj7R52yU8"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "RGBE Environment map",
+                "text": "RGBE format input, or RGB texture"
+            },
+            {
+                "name": "Size Irradiance map index",
+                "text": "large is more information"
+            },
+            {
+                "name": "Size pre-filtered environment index",
+                "text": "large is more information"
+            },
+            {
+                "name": "Size IBL LUT index",
+                "text": "large is more information"
+            },
+            {
+                "name": "Environment map does not contain RGBE data",
+                "text": "toggle ON if not using an RGB texture"
+            },
+            {
+                "name": "Rotation",
+                "text": "rotate the environment on the X axis in degrees"
+            },
+            {
+                "name": "Use parallax correction",
+                "text": "manually adjust your reflection area for your scene"
+            },
+            {
+                "name": "center X",
+                "text": "center of your scene on X axis"
+            },
+            {
+                "name": "center Y",
+                "text": "center of your scene on Y axis"
+            },
+            {
+                "name": "center Z",
+                "text": "center of your scene on Z axis"
+            },
+            {
+                "name": "Box min X",
+                "text": "minimum bounds on X axis"
+            },
+            {
+                "name": "Box min Y",
+                "text": "minimum bounds on Y axis"
+            },
+            {
+                "name": "Box min Z",
+                "text": "minimum bounds on Z axis"
+            },
+            {
+                "name": "Box max X",
+                "text": "maximum bounds on X axis"
+            },
+            {
+                "name": "Box max Y",
+                "text": "maximum bounds on Y axis"
+            },
+            {
+                "name": "Box max Z",
+                "text": "maximum bounds on Z axis"
+            },
+            {
+                "name": "IBL LUT",
+                "text": "for PBR Material (not required)"
+            },
+            {
+                "name": "cubemap (diffuse irradiance)",
+                "text": "for PBR Material (not required)"
+            },
+            {
+                "name": "cubemap (pre-filtered environment map)",
+                "text": "for PBR Material (not required)"
+            },
+            {
+                "name": "Number of Pre-filtered mip levels",
+                "text": "for PBR Material (not required)"
+            }
+        ]
     },
     "exampleProjectId": "RnUxjX"
 }

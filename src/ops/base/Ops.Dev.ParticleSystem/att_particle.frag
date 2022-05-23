@@ -7,11 +7,12 @@ UNI sampler2D texTiming;
 UNI sampler2D texFeedbackVel;
 UNI sampler2D texSpawnVel;
 
-
+UNI float mass;
 UNI float reset;
 
 UNI vec3 pos;
 UNI vec3 scale;
+UNI vec3 gravity;
 
 UNI vec2 lifeTime;
 UNI float time;
@@ -34,6 +35,7 @@ void main()
     vec4 oldVelocity=texture(texFeedbackVel,texCoord);
     vec4 newPos=oldPos;//vec4(1.0);
 
+    // respawn!!
     if( time>vtiming.g || reset==1.0 )
     {
         newPos.rgb =pos;
@@ -41,11 +43,6 @@ void main()
 
         rnd=texture(texSpawnPos,rnd.xy).rgb;
 
-        // if(rnd.x==0.0 && rnd.y==0. && rnd.z==0.0)rnd=vec3(time+9999.0);
-
-        // rnd.x*=scale.x;
-        // rnd.y*=scale.y;
-        // rnd.z*=scale.z;
         oldVelocity=texture(texSpawnVel,texCoord);
 
         newPos.rgb+=rnd;
@@ -62,8 +59,17 @@ void main()
 
     float lifeProgress=( (time-vtiming.r) / (vtiming.g-vtiming.r));
 
+    vec3 grav=gravity*mass*lifeProgress;
 
-    newPos.rgb+=timeDiff*velocity.rgb*3.0;
+
+
+    // newPos.rgb+=timeDiff*velocity.rgb*3.0;
+
+    newPos.rgb+=grav*timeDiff;
+    newPos.rgb+=velocity.xyz*timeDiff;
+
+    // newPos.g-=time*0.01;
+
 
     // newPos.rgb+=normalize(newPos.rgb-oldPos.rgb)*0.2;
 

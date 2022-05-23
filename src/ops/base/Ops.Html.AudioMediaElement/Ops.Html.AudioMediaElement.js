@@ -1,76 +1,74 @@
-var fileName=op.inFile("file","audio");
-var inPlay=op.inValueBool("Play");
-var volume=op.inValueSlider("Volume");
-var outPlaying=op.outValue("Playing");
-var outEnded=op.outTrigger("Has Ended");
+const
+    fileName = op.inUrl("file", "audio"),
+    inPlay = op.inValueBool("Play"),
+    volume = op.inValueSlider("Volume"),
 
-var doLoop=op.inValueBool("Loop");
-
+    doLoop = op.inValueBool("Loop"),
+    outPlaying = op.outValue("Playing"),
+    outEle = op.outObject("Element", null, "element"),
+    outEnded = op.outTrigger("Has Ended");
 
 volume.set(1.0);
-var audio=null;
-var playing=false;
+let audio = null;
+let playing = false;
 outPlaying.set(false);
-volume.onChange=updateVolume;
-
+volume.onChange = updateVolume;
 
 function play()
 {
-    if(audio)
+    if (audio)
     {
-        playing=true;
+        playing = true;
         audio.play();
     }
 }
 
-inPlay.onChange=function()
+inPlay.onChange = function ()
 {
-    if(inPlay.get())
+    if (inPlay.get())
     {
         play();
     }
     else
     {
-        playing=false;
+        playing = false;
         audio.pause();
     }
     outPlaying.set(playing);
 };
 
-this.onDelete=function()
+this.onDelete = function ()
 {
-    if(audio) audio.pause();
+    if (audio) audio.pause();
 };
 
-doLoop.onChange=function()
+doLoop.onChange = function ()
 {
-    if(audio) audio.loop=doLoop.get();
+    if (audio) audio.loop = doLoop.get();
 };
-
 
 function playPause()
 {
-    if(!audio)return;
+    if (!audio) return;
 
-    if(op.patch.timer.isPlaying()) audio.play();
-        else audio.pause();
+    if (op.patch.timer.isPlaying()) audio.play();
+    else audio.pause();
 }
 
 function updateVolume()
 {
-    if(audio)audio.volume=volume.get()*op.patch.config.masterVolume;
+    if (audio)audio.volume = volume.get() * op.patch.config.masterVolume;
 }
 
-op.onMasterVolumeChanged=updateVolume;
+op.onMasterVolumeChanged = updateVolume;
 
-
-fileName.onChange=function()
+fileName.onChange = function ()
 {
-    if(!fileName.get())return;
+    if (!fileName.get()) return;
 
-    var loadingId=op.patch.loading.start('audioplayer',fileName.get());
+    let loadingId = op.patch.loading.start("audioplayer", fileName.get());
 
-    if(audio)
+    if (audio)
     {
         audio.pause();
         outPlaying.set(false);
@@ -79,26 +77,25 @@ fileName.onChange=function()
     audio.crossOrigin = "anonymous";
     audio.src = op.patch.getFilePath(fileName.get());
     audio.loop = doLoop.get();
+    audio.controls = "true";
     audio.crossOrigin = "anonymous";
 
-    var canplaythrough=function()
+    outEle.set(audio);
+
+    var canplaythrough = function ()
     {
-        if(inPlay.get()) play();
+        if (inPlay.get()) play();
         op.patch.loading.finished(loadingId);
-        audio.removeEventListener('canplaythrough',canplaythrough, false);
+        audio.removeEventListener("canplaythrough", canplaythrough, false);
     };
 
-    audio.addEventListener('canplaythrough',canplaythrough, false);
+    audio.addEventListener("canplaythrough", canplaythrough, false);
 
-    audio.addEventListener('ended',function()
+    audio.addEventListener("ended", function ()
     {
         outPlaying.set(false);
-        playing=false;
+        playing = false;
         outEnded.trigger();
-        if(doLoop.get()) play();
+        if (doLoop.get()) play();
     }, false);
-
-
-
-
 };

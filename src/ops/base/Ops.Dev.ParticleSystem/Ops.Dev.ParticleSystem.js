@@ -8,6 +8,8 @@ const
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
     inLifeTimeMax = op.inFloat("Max Lifetime", 2),
 
+    inMass = op.inFloat("Mass", 0),
+
     posX = op.inFloatSlider("Position X", 0),
     posY = op.inFloatSlider("Position Y", 0),
     posZ = op.inFloatSlider("Position Z", 0),
@@ -15,6 +17,10 @@ const
     moveX = op.inFloatSlider("Velocity X", 0),
     moveY = op.inFloatSlider("Velocity Y", 1),
     moveZ = op.inFloatSlider("Velocity Z", 0),
+
+    gravX = op.inFloatSlider("Gravity X", 0),
+    gravY = op.inFloatSlider("Gravity Y", 1),
+    gravZ = op.inFloatSlider("Gravity Z", 0),
 
     inherVel = op.inFloatSlider("Inherit Velocity", 0),
 
@@ -66,6 +72,8 @@ const
 
     uniVel = new CGL.Uniform(tcPos.bgShader, "4f", "velocity", moveX, moveY, moveZ, inherVel),
     uniPos = new CGL.Uniform(tcPos.bgShader, "3f", "pos", posX, posY, posZ),
+    unigrav = new CGL.Uniform(tcPos.bgShader, "3f", "gravity", gravX, gravY, gravZ),
+    uniMass = new CGL.Uniform(tcPos.bgShader, "f", "mass", inMass),
 
     uniReset = new CGL.Uniform(tcPos.bgShader, "f", "reset", 0);
 
