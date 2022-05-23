@@ -127,10 +127,6 @@ const VarSetOpWrapper = class
 
         if (!name) return;// console.warn("[vargetset] no varnameport");
 
-        // if (CABLES.watchVars && CABLES.watchVars[name])
-        //     console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
-
-
         const v = this._valuePort.get();
 
         if (this._type == "array")
