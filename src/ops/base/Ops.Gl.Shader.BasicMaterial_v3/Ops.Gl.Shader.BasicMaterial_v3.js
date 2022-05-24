@@ -40,7 +40,7 @@ const vertexColors = op.inValueBool("Vertex Colors", false);
 const textureOpacity = op.inTexture("textureOpacity");
 let textureOpacityUniform = null;
 
-const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
+const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A", "1-A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 textureOpacity.onChange = updateOpacity;
 
@@ -162,6 +162,7 @@ function updateDefines()
     shader.toggleDefine("BILLBOARD", doBillboard.get());
 
     shader.toggleDefine("ALPHA_MASK_ALPHA", alphaMaskSource.get() == "A");
+    shader.toggleDefine("ALPHA_MASK_IALPHA", alphaMaskSource.get() == "1-A");
     shader.toggleDefine("ALPHA_MASK_LUMI", alphaMaskSource.get() == "Luminance");
     shader.toggleDefine("ALPHA_MASK_R", alphaMaskSource.get() == "R");
     shader.toggleDefine("ALPHA_MASK_G", alphaMaskSource.get() == "G");
