@@ -120,6 +120,8 @@ render.onTriggered = function ()
     // vec3.set(vPos, -posX, -posY, -posZ);
     const body = ammoWorld.getBodyByName(inName.get());
 
+    // console.log(body);
+
     if (body)
     {
         let ms = body.getMotionState();

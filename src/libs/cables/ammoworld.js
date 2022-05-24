@@ -30,6 +30,16 @@ const AmmoWorld = class extends CABLES.EventTarget
         this.world.setGravity(new Ammo.btVector3(0, -9, 0));
     }
 
+    getListBodies()
+    {
+        const arr = [];
+        for (let i in this._bodymeta)
+        {
+            arr.push(this._bodymeta[i]);
+        }
+        return arr;
+    }
+
     dispose()
     {
         if (!this.world) return;
@@ -56,12 +66,16 @@ const AmmoWorld = class extends CABLES.EventTarget
 
     removeRigidBody(b)
     {
+        const idx = this.bodies.indexOf(b);
+        const metaIdx = b.getUserIndex();
         if (this.world && b)
         {
             this.world.removeRigidBody(b);
         }
-        const idx = this.bodies.indexOf(b);
+        console.log("removerigidbody", idx);
         if (idx > -1) this.bodies.splice(idx, 1);
+
+        delete this._bodymeta[metaIdx];
     }
 
     createRigidBody()
@@ -95,7 +109,11 @@ const AmmoWorld = class extends CABLES.EventTarget
     {
         for (let i in this._bodymeta)
         {
-            if (this._bodymeta[i].name == n) return this._bodymeta[i].body;
+            if (this._bodymeta[i].name == n)
+            {
+                // console.log("found name", i);
+                return this._bodymeta[i].body;
+            }
         }
     }
 

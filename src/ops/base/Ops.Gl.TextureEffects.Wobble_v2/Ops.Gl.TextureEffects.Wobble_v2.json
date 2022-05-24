@@ -63,19 +63,19 @@
             {
                 "type": 2,
                 "name": "Amount Map",
-                "group": "Strength Map",
+                "group": "Amount Map",
                 "objType": "texture"
             },
             {
                 "type": 0,
-                "name": "Source Strength Map index",
-                "group": "Strength Map",
+                "name": "Source Amount Map index",
+                "group": "Amount Map",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Invert Strength Map",
-                "group": "Strength Map",
+                "name": "Invert Amount Map",
+                "group": "Amount Map",
                 "subType": "boolean"
             }
         ],
@@ -85,7 +85,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Wobble"
+        "name": "Ops.Gl.TextureEffects.Wobble_v2"
     },
     "summary": "waving wobble motion effect",
     "youtubeid": "",

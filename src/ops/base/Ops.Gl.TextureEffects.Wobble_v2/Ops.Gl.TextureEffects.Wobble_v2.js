@@ -9,12 +9,12 @@ const
     mul = op.inValue("Multiply", 0.01),
 
     inMaskTex = op.inTexture("Amount Map"),
-    inMaskSource = op.inSwitch("Source Strength Map", ["R", "G", "B", "A", "Lum"], "R"),
-    inMaskInv = op.inBool("Invert Strength Map", false),
+    inMaskSource = op.inSwitch("Source Amount Map", ["R", "G", "B", "A", "Lum"], "R"),
+    inMaskInv = op.inBool("Invert Amount Map", false),
 
     trigger = op.outTrigger("Trigger");
 
-op.setPortGroup("Strength Map", [inMaskTex, inMaskSource, inMaskInv]);
+op.setPortGroup("Amount Map", [inMaskTex, inMaskSource, inMaskInv]);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
