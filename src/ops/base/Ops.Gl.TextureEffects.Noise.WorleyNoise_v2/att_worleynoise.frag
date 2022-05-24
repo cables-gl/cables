@@ -24,10 +24,7 @@ UNI float harmonics;
 #endif
 
 {{CGL.BLENDMODES3}}
-
-#ifdef MASK_SRC_LUM
-    {{CGL.LUMINANCE}}
-#endif
+{{CGL.LUMINANCE}}
 
 // Cellular noise ("Worley noise") in 3D in GLSL.
 // Copyright (c) Stefan Gustavson 2011-04-19. All rights reserved.
