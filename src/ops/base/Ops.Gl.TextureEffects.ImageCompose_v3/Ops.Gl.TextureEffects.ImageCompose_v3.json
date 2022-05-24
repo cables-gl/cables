@@ -13,37 +13,37 @@
             {
                 "type": 0,
                 "name": "Size index",
-                "group": "Texture Settings",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Width",
-                "group": "Texture Settings",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Height",
-                "group": "Texture Settings",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Filter index",
-                "group": "Texture Settings",
+                "group": "Texture Parameters",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Wrap index",
-                "group": "Texture Settings",
+                "group": "Texture Parameters",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Pixel Format index",
-                "group": "Texture Settings",
+                "group": "Texture Parameters",
                 "subType": "integer"
             }
         ],
