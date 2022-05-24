@@ -355,8 +355,6 @@ let gltfMesh = class
                 {
                     this._matDiffuseColorOrig = [uniDiff.getValue()[0], uniDiff.getValue()[1], uniDiff.getValue()[2], uniDiff.getValue()[3]];
                     uniDiff.setValue(this._matDiffuseColor);
-
-                    // console.log("rough",this._matDiffuseColor)
                 }
 
                 if (uniPbrMetalness)
