@@ -4,16 +4,30 @@ const
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
 
-    mask = op.inTexture("mask"),
-    // maskSource = op.inSwitch("Mask Source", ["Lumi", "R", "G", "B", "A"], "Lumi"),
-    // maskInv = op.inBool("Mask Invert", false),
+    mask = op.inTexture("Strength Map"),
+    maskSource = op.inSwitch("Source Strength Map", ["R", "G", "B", "A", "Lum"], "R"),
+    maskInv = op.inBool("Invert Strength Map", false),
 
     trigger = op.outTrigger("trigger");
 
-// op.setPortGroup("Mask", [mask, maskSource, maskInv]);
+op.setPortGroup("Strengh Map", [mask, maskSource, maskInv]);
+
+maskSource.onChange =
+maskInv.onChange =
 mask.onChange = function ()
 {
     shader.toggleDefine("HAS_MASK", mask.get() && mask.get().tex);
+
+    shader.toggleDefine("MASK_SRC_R", maskSource.get() == "R");
+    shader.toggleDefine("MASK_SRC_G", maskSource.get() == "G");
+    shader.toggleDefine("MASK_SRC_B", maskSource.get() == "B");
+    shader.toggleDefine("MASK_SRC_A", maskSource.get() == "A");
+    shader.toggleDefine("MASK_SRC_LUM", maskSource.get() == "LUM");
+
+    shader.toggleDefine("MASK_INV", maskInv.get());
+
+    maskSource.setUiAttribs({ "greyout": !mask.isLinked() });
+    maskInv.setUiAttribs({ "greyout": !mask.isLinked() });
 };
 
 const cgl = op.patch.cgl;

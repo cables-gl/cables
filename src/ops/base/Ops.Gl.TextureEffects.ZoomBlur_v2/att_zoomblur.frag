@@ -13,6 +13,8 @@ float random(vec3 scale, float seed)
     return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);
 }
 
+{{CGL.LUMINANCE}}
+
 void main()
 {
     float total = 0.0;
@@ -28,7 +30,30 @@ void main()
     float am = strength;
 
     #ifdef HAS_MASK
-        am=am*texture(texMask,texCoord).r;
+
+        float mul=1.0;
+        #ifdef MASK_SRC_R
+            mul=texture(texMask,texCoord).r;
+        #endif
+        #ifdef MASK_SRC_G
+            mul=texture(texMask,texCoord).g;
+        #endif
+        #ifdef MASK_SRC_B
+            mul=texture(texMask,texCoord).b;
+        #endif
+        #ifdef MASK_SRC_A
+            mul=texture(texMask,texCoord).a;
+        #endif
+        #ifdef MASK_SRC_LUM
+            mul=texture(texMask,texCoord).r;
+        #endif
+
+        #ifdef MASK_INV
+            mul=1.0-mul;
+        #endif
+
+        am=am*mul;
+
         if(am<=0.02)
         {
             outColor=texture(tex, texCoord);

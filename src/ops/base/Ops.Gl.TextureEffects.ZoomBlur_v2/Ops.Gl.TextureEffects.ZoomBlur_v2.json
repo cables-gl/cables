@@ -22,8 +22,21 @@
             },
             {
                 "type": 2,
-                "name": "mask",
+                "name": "Strength Map",
+                "group": "Strengh Map",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Source Strength Map index",
+                "group": "Strengh Map",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Strength Map",
+                "group": "Strengh Map",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
