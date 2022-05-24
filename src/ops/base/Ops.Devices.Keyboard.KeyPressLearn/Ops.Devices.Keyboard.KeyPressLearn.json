@@ -60,10 +60,6 @@
     "docs": {
         "ports": [
             {
-                "name": "learn",
-                "text": "Press learn and directly afterwards (3 Seconds) press a key, this one will from now on trigger on the output port `On Press` once the key has been pressed."
-            },
-            {
                 "name": "key code",
                 "text": "In most cases you won’t have to use this directly, just use the `Learn` button. It contains the key code on which to respond. You can use [keycode.info](http://keycode.info/) to find out the key code you are looking for."
             },
@@ -74,6 +70,10 @@
             {
                 "name": "Prevent Default",
                 "text": "Prevent that other key listeners (parents) are informed on the key press"
+            },
+            {
+                "name": "learn",
+                "text": "Press learn and directly afterwards (3 Seconds) press a key, this one will from now on trigger on the output port `On Press` once the key has been pressed."
             },
             {
                 "name": "on press",
@@ -89,18 +89,19 @@
             }
         ]
     },
-    "youtubeid": "",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+    "relatedops": null,
     "changelog": [
         {
             "message": "added key-name to extended title and outport",
             "author": "stephan",
             "date": 1647444317354
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "ZRY-x3"
 }

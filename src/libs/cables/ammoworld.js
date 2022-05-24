@@ -71,6 +71,7 @@ const AmmoWorld = class extends CABLES.EventTarget
 
     addRigidBody(body)
     {
+        if (!this.world) return;
         body.setUserIndex(++this._countIndex);
         this.world.addRigidBody(body);
         this.bodies.push(body);

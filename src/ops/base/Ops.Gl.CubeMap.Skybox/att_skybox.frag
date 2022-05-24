@@ -3,9 +3,8 @@
 #define RECIPROCAL_PI 1./PI
 #define RECIPROCAL_PI2 RECIPROCAL_PI/2.
 
-#ifdef RGBE
-    UNI vec2 expGamma;
-#endif
+UNI vec2 expGamma;
+
 
 #ifdef TEX_FORMAT_CUBEMAP
     UNI samplerCube skybox;
@@ -55,18 +54,20 @@ void main() {
 
     vec3 newPos = worldPos;
 
+    vec4 finalColor;
     #ifndef RGBE
-        outColor = vec4(SAMPLETEX(skybox, newPos));
+        finalColor = vec4(SAMPLETEX(skybox, newPos));
     #endif
 
     #ifdef RGBE
-        vec3 hdrColor=DecodeRGBE8(SAMPLETEX(skybox, newPos));
-
-        float gamma=expGamma.x;
-        float exposure=expGamma.y;
-        hdrColor = vec3(1.0) - exp(-hdrColor * exposure);
-
-        hdrColor = pow(hdrColor, vec3(1.0 / gamma));
-        outColor=vec4(hdrColor,1.0);
+        finalColor.rgb=DecodeRGBE8(SAMPLETEX(skybox, newPos));
     #endif
+
+    float gamma=expGamma.x;
+    float exposure=expGamma.y;
+    finalColor.rgb = vec3(1.0) - exp(-finalColor.rgb * exposure);
+
+    finalColor.rgb = pow(finalColor.rgb, vec3(1.0 / gamma));
+    outColor=vec4(finalColor.rgb,1.0);
+
 }

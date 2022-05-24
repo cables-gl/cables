@@ -143,11 +143,18 @@ op.renderVizLayer = (ctx, layer) =>
             ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
         }
 
-    ctx.drawImage(cgl.canvas,
-        0, 0,
-        s[0], s[1],
-        layer.x + (layer.width - sizeImg[0]) / 2, layer.y + (layer.height - sizeImg[1]) / 2,
-        sizeImg[0], sizeImg[1]);
+    if (sizeTex[1] == 1 || sizeTex[0] == 1)
+        ctx.drawImage(cgl.canvas,
+            0, 0,
+            s[0], s[1],
+            layer.x, layer.y,
+            layer.width * 4, layer.height * 4);
+    else
+        ctx.drawImage(cgl.canvas,
+            0, 0,
+            s[0], s[1],
+            layer.x + (layer.width - sizeImg[0]) / 2, layer.y + (layer.height - sizeImg[1]) / 2,
+            sizeImg[0], sizeImg[1]);
 
     if (port.get() && port.get().getInfoOneLine) outInfo.set(port.get().getInfoOneLine());
     else outInfo.set("unknown");

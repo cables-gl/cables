@@ -27,8 +27,9 @@ const
     outMouseDownRight = op.outTrigger("Mouse Right"),
     outDirX = op.outValue("Dir X"),
     outDirY = op.outValue("Dir Y"),
-    outDirZ = op.outValue("Dir Z");
-
+    outDirZ = op.outValue("Dir Z"),
+    outRotX = op.outNumber("Rot X"),
+    outRotY = op.outNumber("Rot Y");
 const vPos = vec3.create();
 let speedx = 0, speedy = 0, speedz = 0;
 const movementSpeedFactor = 0.5;
@@ -91,6 +92,7 @@ let tmpTrans = null;
 
 render.onTriggered = function ()
 {
+    if (!Ammo) return;
     if (!inActive.get()) return trigger.trigger();
     if (!tmpTrans)
     {
@@ -100,15 +102,9 @@ render.onTriggered = function ()
     if (cgl.frameStore.shadowPass) return trigger.trigger();
 
     calcCameraMovement();
-    // move();
-
-    // if (!fly.get())posY = 0.0;
 
     if (speedx !== 0.0 || speedy !== 0.0 || speedz !== 0)
     {
-        // outPosX.set(posX);
-        // outPosY.set(posY);
-        // outPosZ.set(posZ);
     }
 
     cgl.pushViewMatrix();
@@ -136,6 +132,9 @@ render.onTriggered = function ()
         console.log("char body not found!");
     }
 
+    if (rotX < -90)rotX = -90;
+    if (rotX > 90)rotX = 90;
+
     mat4.identity(cgl.vMatrix);
 
     mat4.rotateX(cgl.vMatrix, cgl.vMatrix, DEG2RAD * rotX);
@@ -145,6 +144,9 @@ render.onTriggered = function ()
 
     trigger.trigger();
     cgl.popViewMatrix();
+
+    outRotX.set(rotX);
+    outRotY.set(rotY);
 
     // for dir vec
     mat4.identity(viewMatrix);
