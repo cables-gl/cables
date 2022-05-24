@@ -3,7 +3,6 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
     amount = op.inValueSlider("Amount", 1),
-    inTexMask = op.inTexture("Mask"),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
@@ -32,6 +31,15 @@ const textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     rangeAUniform = new CGL.Uniform(shader, "f", "rangeA", rangeA),
     rangeBUniform = new CGL.Uniform(shader, "f", "rangeB", rangeB);
 
+// amount Map
+
+const
+    inMaskTex = op.inTexture("Amount Map"),
+    inMaskSource = op.inSwitch("Source Strength Map", ["R", "G", "B", "A", "Lum"], "R"),
+    inMaskInv = op.inBool("Invert Strength Map", false);
+
+op.setPortGroup("Amount Map", [inMaskTex, inMaskSource, inMaskInv]);
+
 // offsetMap
 
 const
@@ -47,11 +55,14 @@ const uniOffMul = new CGL.Uniform(shader, "f", "offMul", inOffsetMul);
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
-inv.onChange =
+inMaskTex.onChange =
+    inMaskSource.onChange =
+    inMaskInv.onChange =
+    inv.onChange =
     offsetX.onChange =
     offsetY.onChange =
     offsetZ.onChange =
-    inTexMask.onLinkChanged =
+    inMaskTex.onLinkChanged =
     inTexOffsetZ.onLinkChanged =
     tile.onChange = updateDefines;
 
@@ -63,7 +74,7 @@ function updateDefines()
     shader.toggleDefine("DO_TILEABLE", tile.get());
 
     shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.isLinked());
-    shader.toggleDefine("HAS_TEX_MASK", inTexMask.isLinked());
+    shader.toggleDefine("HAS_TEX_MASK", inMaskTex.isLinked());
 
     shader.toggleDefine("OFFSET_X_R", offsetX.get() == "R");
     shader.toggleDefine("OFFSET_X_G", offsetX.get() == "G");
@@ -81,6 +92,16 @@ function updateDefines()
     offsetY.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     offsetZ.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     inOffsetMul.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
+
+    shader.toggleDefine("HAS_MASK", inMaskTex.isLinked());
+    shader.toggleDefine("MASK_SRC_R", inMaskSource.get() == "R");
+    shader.toggleDefine("MASK_SRC_G", inMaskSource.get() == "G");
+    shader.toggleDefine("MASK_SRC_B", inMaskSource.get() == "B");
+    shader.toggleDefine("MASK_SRC_A", inMaskSource.get() == "A");
+    shader.toggleDefine("MASK_SRC_LUM", inMaskSource.get() == "Lum");
+    shader.toggleDefine("MASK_INV", inMaskInv.get());
+    inMaskSource.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
+    inMaskInv.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
 }
 
 render.onTriggered = function ()
@@ -92,7 +113,7 @@ render.onTriggered = function ()
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     if (inTexOffsetZ.get()) cgl.setTexture(1, inTexOffsetZ.get().tex);
-    if (inTexMask.get()) cgl.setTexture(2, inTexMask.get().tex);
+    if (inMaskTex.get()) cgl.setTexture(2, inMaskTex.get().tex);
 
     uniAspect.setValue(cgl.currentTextureEffect.aspectRatio);
 

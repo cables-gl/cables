@@ -13,7 +13,9 @@ float random(vec3 scale, float seed)
     return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);
 }
 
-{{CGL.LUMINANCE}}
+#ifdef MASK_SRC_LUM
+    {{CGL.LUMINANCE}}
+#endif
 
 void main()
 {
@@ -45,7 +47,7 @@ void main()
             mul=texture(texMask,texCoord).a;
         #endif
         #ifdef MASK_SRC_LUM
-            mul=texture(texMask,texCoord).r;
+            mul=cgl_luminance(texture(texMask,texCoord).rgb);
         #endif
 
         #ifdef MASK_INV

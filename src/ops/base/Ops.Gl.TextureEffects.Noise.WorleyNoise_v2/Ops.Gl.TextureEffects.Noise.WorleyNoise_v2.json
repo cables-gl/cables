@@ -27,11 +27,6 @@
                 "subType": "number"
             },
             {
-                "type": 2,
-                "name": "Mask",
-                "objType": "texture"
-            },
-            {
                 "type": 0,
                 "name": "X",
                 "subType": "number"
@@ -78,6 +73,24 @@
             },
             {
                 "type": 2,
+                "name": "Amount Map",
+                "group": "Amount Map",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Source Strength Map index",
+                "group": "Amount Map",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Strength Map",
+                "group": "Amount Map",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
                 "name": "Offset",
                 "group": "Offset Map",
                 "objType": "texture"
@@ -113,7 +126,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.WorleyNoiseV2"
+        "name": "Ops.Gl.TextureEffects.Noise.WorleyNoise_v2"
     },
     "credits": [
         {
