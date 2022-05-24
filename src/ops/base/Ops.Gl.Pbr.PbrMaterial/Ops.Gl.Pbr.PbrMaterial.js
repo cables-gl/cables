@@ -60,7 +60,7 @@ op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
 PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 // light sources (except IBL)
-let PBRLightStack = {};
+let PBRLightStack = [];
 const lightUniforms = [];
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PBR_FRAGMENT_HEAD}}", "g");
@@ -315,6 +315,11 @@ function doRender()
     cgl.pushShader(PBRShader);
 
     PBRShader.popTextures();
+
+    if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) &&
+        !inLightmap.isLinked() &&
+        PBRLightStack.length == 0) op.setUiError("noPbrEnv", "No PBR lights found in branch, create a light to see something");
+    else op.setUiError("noPbrEnv", null);
 
     if (cgl.frameStore.pbrEnvStack && cgl.frameStore.pbrEnvStack.length > 0 &&
         cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texIBLLUT.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texDiffIrr.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texPreFiltered.tex)
