@@ -262,14 +262,6 @@
                 "text": "metallic properties of material"
             },
             {
-                "name": "Disable geometric roughness",
-                "text": "don't automatically introduce roughness calculated from your geometry complexity"
-            },
-            {
-                "name": "Use roughness from normal map",
-                "text": "calculate roughness from your normal map information"
-            },
-            {
                 "name": "Alpha Mode index",
                 "text": "material opacity look type"
             },
@@ -282,12 +274,36 @@
                 "text": "exposure boost your tone map look"
             },
             {
+                "name": "Disable geometric roughness",
+                "text": "don't automatically introduce roughness calculated from your geometry complexity"
+            },
+            {
+                "name": "Use roughness from normal map",
+                "text": "calculate roughness from your normal map information"
+            },
+            {
                 "name": "Use Vertex Colours",
                 "text": "enable vertex colors then select their purpose"
             },
             {
                 "name": "Vertex Colour Mode index",
                 "text": "when using vertex colors, assign their purpose here"
+            },
+            {
+                "name": "Height Intensity",
+                "text": "influence of heighmap texture"
+            },
+            {
+                "name": "Faster heightmapping",
+                "text": "toggle to use less precise method"
+            },
+            {
+                "name": "Use Clear Coat",
+                "text": "add a sheen to your material"
+            },
+            {
+                "name": "Clear Coat Roughness",
+                "text": "roughness amount"
             },
             {
                 "name": "IBL LUT",
@@ -318,12 +334,28 @@
                 "text": "linear bt.709, +Y, TS per vertex"
             },
             {
+                "name": "Height",
+                "text": "HeightMap input, mono color"
+            },
+            {
+                "name": "Lightmap",
+                "text": "Lightmap input, exr or rgbe for highest quality"
+            },
+            {
                 "name": "Diffuse Intensity",
                 "text": "albedo/diffuse intensity in the material"
             },
             {
                 "name": "Specular Intensity",
                 "text": "Specular boost adjustment"
+            },
+            {
+                "name": "Lightmap is RGBE",
+                "text": "toggle if your lightmap is an RGBE format texture"
+            },
+            {
+                "name": "Lightmap Intensity",
+                "text": "intensity of lightmap texture"
             }
         ]
     },

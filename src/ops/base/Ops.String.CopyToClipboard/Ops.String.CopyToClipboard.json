@@ -27,5 +27,15 @@
         ],
         "portsOut": [],
         "name": "Ops.User.pandur.CopyToClipboard"
+    },
+    "summary": "copy string to clipboard on trigger",
+    "issues": "",
+    "caniusequery": "writetext",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }

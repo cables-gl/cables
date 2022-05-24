@@ -6,85 +6,86 @@ precision highp int;
 UNI vec3 camPos;
 // utility maps
 #ifdef USE_ENVIRONMENT_LIGHTING
-uniform sampler2D IBL_BRDF_LUT;
+    uniform sampler2D IBL_BRDF_LUT;
 #endif
 // mesh maps
 #ifdef USE_ALBEDO_TEX
-UNI sampler2D _AlbedoMap;
+    UNI sampler2D _AlbedoMap;
 #else
-UNI vec4 _Albedo;
+    UNI vec4 _Albedo;
 #endif
 #ifdef USE_NORMAL_TEX
-UNI sampler2D _NormalMap;
+    UNI sampler2D _NormalMap;
 #endif
 #ifdef USE_HEIGHT_TEX
-UNI sampler2D _HeightMap;
+    UNI sampler2D _HeightMap;
 #endif
 #ifdef USE_AORM_TEX
-UNI sampler2D _AORMMap;
+    UNI sampler2D _AORMMap;
 #else
-UNI float _Roughness;
-UNI float _Metalness;
+    UNI float _Roughness;
+    UNI float _Metalness;
 #endif
+
 #ifdef USE_LIGHTMAP
-#ifndef VERTEX_COLORS
-UNI sampler2D _Lightmap;
-#else
-#ifndef VCOL_LIGHTMAP
-UNI sampler2D _Lightmap;
-#endif 
-#endif
+    #ifndef VERTEX_COLORS
+        UNI sampler2D _Lightmap;
+    #else
+        #ifndef VCOL_LIGHTMAP
+            UNI sampler2D _Lightmap;
+        #endif
+    #endif
 #endif
 #ifdef USE_CLEAR_COAT
-UNI float _ClearCoatRoughness;
+    UNI float _ClearCoatRoughness;
 #endif
 // IBL inputs
 #ifdef USE_ENVIRONMENT_LIGHTING
-UNI samplerCube _irradiance;
-UNI samplerCube _prefilteredEnvironmentColour;
-UNI float MAX_REFLECTION_LOD;
-UNI float diffuseIntensity;
-UNI float specularIntensity;
+    UNI samplerCube _irradiance;
+    UNI samplerCube _prefilteredEnvironmentColour;
+    UNI float MAX_REFLECTION_LOD;
+    UNI float diffuseIntensity;
+    UNI float specularIntensity;
 #endif
 #ifdef USE_LIGHTMAP
-UNI float lightmapIntensity;
+    UNI float lightmapIntensity;
 #endif
 UNI float tonemappingExposure;
 #ifdef USE_HEIGHT_TEX
-UNI float _HeightDepth;
-#ifndef USE_OPTIMIZED_HEIGHT
-UNI mat4 modelMatrix;
-#endif
+    UNI float _HeightDepth;
+    #ifndef USE_OPTIMIZED_HEIGHT
+        UNI mat4 modelMatrix;
+    #endif
 #endif
 #ifdef USE_PARALLAX_CORRECTION
-UNI vec3 _PCOrigin;
-UNI vec3 _PCboxMin;
-UNI vec3 _PCboxMax;
+    UNI vec3 _PCOrigin;
+    UNI vec3 _PCboxMin;
+    UNI vec3 _PCboxMax;
 #endif
 
 IN vec2 texCoord;
 #ifdef USE_LIGHTMAP
-#ifndef VERTEX_COLORS
-IN vec2 texCoord1;
-#else
-#ifndef VCOL_LIGHTMAP
-IN vec2 texCoord1;
-#endif 
-#endif
+    #ifndef VERTEX_COLORS
+        IN vec2 texCoord1;
+    #else
+        #ifndef VCOL_LIGHTMAP
+            IN vec2 texCoord1;
+        #endif
+    #endif
 #endif
 IN vec4 FragPos;
 IN mat3 TBN;
 IN vec3 norm;
 IN vec3 normM;
 #ifdef VERTEX_COLORS
-IN vec4 vertCol;
+    IN vec4 vertCol;
 #endif
 #ifdef USE_HEIGHT_TEX
-#ifdef USE_OPTIMIZED_HEIGHT
-IN vec3 fragTangentViewDir;
-#else
-IN mat3 invTBN;
-#endif
+    #ifdef USE_OPTIMIZED_HEIGHT
+        IN vec3 fragTangentViewDir;
+    #else
+        IN mat3 invTBN;
+    #endif
 #endif
 
 // structs
@@ -231,23 +232,23 @@ void main()
     // set up interpolated vertex data
     vec2 UV0             = texCoord;
     #ifdef USE_LIGHTMAP
-    #ifndef VERTEX_COLORS
-    vec2 UV1             = texCoord1;
-    #else
-    #ifndef VCOL_LIGHTMAP
-    vec2 UV1             = texCoord1;
-    #endif 
-    #endif
+        #ifndef VERTEX_COLORS
+            vec2 UV1             = texCoord1;
+        #else
+            #ifndef VCOL_LIGHTMAP
+                vec2 UV1             = texCoord1;
+            #endif
+        #endif
     #endif
     vec3 V               = normalize(camPos - FragPos.xyz);
 
     #ifdef USE_HEIGHT_TEX
-    #ifndef USE_OPTIMIZED_HEIGHT
-    vec3 fragTangentViewDir = normalize(invTBN * (camPos - FragPos.xyz));
-    #endif
-    #ifndef WEBGL1
-    UV0 += RaymarchedParallax(UV0, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
-    #endif
+        #ifndef USE_OPTIMIZED_HEIGHT
+            vec3 fragTangentViewDir = normalize(invTBN * (camPos - FragPos.xyz));
+        #endif
+        #ifndef WEBGL1
+            UV0 += RaymarchedParallax(UV0, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
+        #endif
     #endif
 
     // load relevant mesh maps
@@ -279,23 +280,23 @@ void main()
         vec3 internalNormals = normM;
     #endif
 	#ifdef USE_LIGHTMAP
-	#ifndef VERTEX_COLORS
-	#ifndef LIGHTMAP_IS_RGBE
-    vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
-    #else
-    vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
-    #endif
-    #else
-    #ifdef VCOL_LIGHTMAP
-    vec3 Lightmap = pow(vertCol.rgb, vec3(2.2));
-    #else
-  	#ifndef LIGHTMAP_IS_RGBE
-    vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
-    #else
-    vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
-    #endif
-    #endif 
-    #endif
+    	#ifndef VERTEX_COLORS
+	        #ifndef LIGHTMAP_IS_RGBE
+                vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
+            #else
+                vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
+            #endif
+        #else
+            #ifdef VCOL_LIGHTMAP
+                vec3 Lightmap = pow(vertCol.rgb, vec3(2.2));
+            #else
+  	            #ifndef LIGHTMAP_IS_RGBE
+                    vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
+                #else
+                    vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
+                #endif
+            #endif
+        #endif
     #endif
     // initialize texture values
     float AO             = AORM.r;
@@ -305,24 +306,24 @@ void main()
     vec3  albedo         = pow(AlbedoMap.rgb, vec3(2.2));
 
     #ifdef VERTEX_COLORS
-    #ifdef VCOL_COLOUR
-        albedo.rgb *= pow(vertCol.rgb, vec3(2.2));
-        AlbedoMap.rgb *= pow(vertCol.rgb, vec3(2.2));
-    #endif
-    #ifdef VCOL_AORM
-        AO = vertCol.r;
-        specK = vertCol.g;
-        metalness = vertCol.b;
-    #endif
-    #ifdef VCOL_AO
-        AO = vertCol.r;
-    #endif
-    #ifdef VCOL_R
-        specK = vertCol.g;
-    #endif
-    #ifdef VCOL_M
-        metalness = vertCol.b;
-    #endif
+        #ifdef VCOL_COLOUR
+            albedo.rgb *= pow(vertCol.rgb, vec3(2.2));
+            AlbedoMap.rgb *= pow(vertCol.rgb, vec3(2.2));
+        #endif
+        #ifdef VCOL_AORM
+            AO = vertCol.r;
+            specK = vertCol.g;
+            metalness = vertCol.b;
+        #endif
+        #ifdef VCOL_AO
+            AO = vertCol.r;
+        #endif
+        #ifdef VCOL_R
+            specK = vertCol.g;
+        #endif
+        #ifdef VCOL_M
+            metalness = vertCol.b;
+        #endif
     #endif
 
     // set up values for later calculations
@@ -330,56 +331,57 @@ void main()
     vec3  F0             = mix(vec3(0.04), AlbedoMap.rgb, metalness);
 
     #ifndef WEBGL1
-    #ifndef DONT_USE_GR
-    // from https://github.com/BabylonJS/Babylon.js/blob/5e6321d887637877d8b28b417410abbbeb651c6e/src/Shaders/ShadersInclude/pbrHelperFunctions.fx
-    // modified to fit variable names
-    #ifndef DONT_USE_NMGR
-    vec3 nDfdx = dFdx(normM.xyz);
-    vec3 nDfdy = dFdy(normM.xyz);
-    #else
-    vec3 nDfdx = dFdx(N.xyz) + dFdx(normM.xyz);
-    vec3 nDfdy = dFdy(N.xyz) + dFdy(normM.xyz);
-    #endif
-    float slopeSquare = max(dot(nDfdx, nDfdx), dot(nDfdy, nDfdy));
+        #ifndef DONT_USE_GR
+            // from https://github.com/BabylonJS/Babylon.js/blob/5e6321d887637877d8b28b417410abbbeb651c6e/src/Shaders/ShadersInclude/pbrHelperFunctions.fx
+            // modified to fit variable names
+            #ifndef DONT_USE_NMGR
+                vec3 nDfdx = dFdx(normM.xyz);
+                vec3 nDfdy = dFdy(normM.xyz);
+            #else
+                vec3 nDfdx = dFdx(N.xyz) + dFdx(normM.xyz);
+                vec3 nDfdy = dFdy(N.xyz) + dFdy(normM.xyz);
+            #endif
+            float slopeSquare = max(dot(nDfdx, nDfdx), dot(nDfdy, nDfdy));
 
-    // Vive analytical lights roughness factor.
-    float geometricRoughnessFactor = pow(clamp(slopeSquare, 0.0, 1.0), 0.333);
+            // Vive analytical lights roughness factor.
+            float geometricRoughnessFactor = pow(clamp(slopeSquare, 0.0, 1.0), 0.333);
 
-    specK = max(specK, geometricRoughnessFactor);
-    #endif
-    #endif
+            specK = max(specK, geometricRoughnessFactor);
+            #endif
+        #endif
 
-	// IBL
-	// from https://github.com/google/filament/blob/df6a100fcba66d9c99328a49d41fe3adecc0165d/shaders/src/light_indirect.fs
-	// and https://github.com/google/filament/blob/df6a100fcba66d9c99328a49d41fe3adecc0165d/shaders/src/shading_lit.fs
-	// modified to fit structure/variable names
-	#ifdef USE_ENVIRONMENT_LIGHTING
-	vec2 envBRDF = texture(IBL_BRDF_LUT, vec2(NdotV, specK)).xy;
-	vec3 E = mix(envBRDF.xxx, envBRDF.yyy, F0);
-    #endif
-    float specOcclusion    = environmentRadianceOcclusion(AO, NdotV);
-    float horizonOcclusion = environmentHorizonOcclusion(-V, N, normM);
+    	// IBL
+    	// from https://github.com/google/filament/blob/df6a100fcba66d9c99328a49d41fe3adecc0165d/shaders/src/light_indirect.fs
+    	// and https://github.com/google/filament/blob/df6a100fcba66d9c99328a49d41fe3adecc0165d/shaders/src/shading_lit.fs
+    	// modified to fit structure/variable names
+    	#ifdef USE_ENVIRONMENT_LIGHTING
+        	vec2 envBRDF = texture(IBL_BRDF_LUT, vec2(NdotV, specK)).xy;
+        	vec3 E = mix(envBRDF.xxx, envBRDF.yyy, F0);
+        #endif
 
-    #ifdef USE_ENVIRONMENT_LIGHTING
-    float envSampleSpecK = specK * MAX_REFLECTION_LOD;
-    vec3  R = reflect(-V, N);
+        float specOcclusion    = environmentRadianceOcclusion(AO, NdotV);
+        float horizonOcclusion = environmentHorizonOcclusion(-V, N, normM);
 
-    #ifdef USE_PARALLAX_CORRECTION
-    R = BoxProjection(R, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
-    #endif
+        #ifdef USE_ENVIRONMENT_LIGHTING
+            float envSampleSpecK = specK * MAX_REFLECTION_LOD;
+            vec3  R = reflect(-V, N);
 
-	vec3 prefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, R, envSampleSpecK)) * specularIntensity;
+            #ifdef USE_PARALLAX_CORRECTION
+                R = BoxProjection(R, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
+            #endif
 
-	vec3 Fr = E * prefilteredEnvColour;
-	Fr *= specOcclusion * horizonOcclusion * (1.0 + F0 * (1.0 / envBRDF.y - 1.0));
-	Fr *= 1.0 + F0; // TODO: this might be wrong, figure this out
+    	    vec3 prefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, R, envSampleSpecK)) * specularIntensity;
 
-	#ifdef USE_LIGHTMAP
-    vec3 IBLIrradiance = Lightmap * lightmapIntensity;
-    #else
-    vec3 IBLIrradiance = DecodeRGBE8(SAMPLETEX(_irradiance, N, 0.0)) * diffuseIntensity;
-    #endif
-	vec3 Fd = (1.0 - metalness) * albedo * IBLIrradiance * (1.0 - E) * AO;
+        	vec3 Fr = E * prefilteredEnvColour;
+        	Fr *= specOcclusion * horizonOcclusion * (1.0 + F0 * (1.0 / envBRDF.y - 1.0));
+        	Fr *= 1.0 + F0; // TODO: this might be wrong, figure this out
+
+        	#ifdef USE_LIGHTMAP
+                vec3 IBLIrradiance = Lightmap * lightmapIntensity;
+            #else
+                vec3 IBLIrradiance = DecodeRGBE8(SAMPLETEX(_irradiance, N, 0.0)) * diffuseIntensity;
+        #endif
+	    vec3 Fd = (1.0 - metalness) * albedo * IBLIrradiance * (1.0 - E) * AO;
     #endif
     vec3 directLighting = vec3(0.0);
 
@@ -388,30 +390,32 @@ void main()
     // combine IBL
     col.rgb = directLighting;
     #ifdef USE_ENVIRONMENT_LIGHTING
-    col.rgb += Fr + Fd;
-    #ifdef USE_CLEAR_COAT
-    float CCEnvSampleSpecK = _ClearCoatRoughness * MAX_REFLECTION_LOD;
-    vec3  CCR = reflect(-V, normM);
+        col.rgb += Fr + Fd;
+        #ifdef USE_CLEAR_COAT
+            float CCEnvSampleSpecK = _ClearCoatRoughness * MAX_REFLECTION_LOD;
+            vec3  CCR = reflect(-V, normM);
 
-    #ifdef USE_PARALLAX_CORRECTION
-    CCR = BoxProjection(CCR, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
-    #endif
-	vec3 CCPrefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, CCR, CCEnvSampleSpecK));
-	vec3 CCFr = E * CCPrefilteredEnvColour;
-	CCFr *= specOcclusion * horizonOcclusion * (0.96 + (0.04 / envBRDF.y));
-	CCFr *= 1.04;
-	col.rgb += CCFr;
-    #endif
+            #ifdef USE_PARALLAX_CORRECTION
+                CCR = BoxProjection(CCR, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
+            #endif
+
+        	vec3 CCPrefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, CCR, CCEnvSampleSpecK));
+        	vec3 CCFr = E * CCPrefilteredEnvColour;
+        	CCFr *= specOcclusion * horizonOcclusion * (0.96 + (0.04 / envBRDF.y));
+        	CCFr *= 1.04;
+        	col.rgb += CCFr;
+        #endif
     #else
-    #ifdef USE_LIGHTMAP
-    col.rgb += (1.0 - metalness) * albedo * Lightmap * lightmapIntensity;
-    #endif
+        #ifdef USE_LIGHTMAP
+            col.rgb += (1.0 - metalness) * albedo * Lightmap * lightmapIntensity;
+        #endif
     #endif
     col.a   = 1.0;
 
     #ifdef ALPHA_BLEND
-    col.a = AlbedoMap.a;
+        col.a = AlbedoMap.a;
     #endif
+
     // from https://github.com/BabylonJS/Babylon.js/blob/5e6321d887637877d8b28b417410abbbeb651c6e/src/Shaders/tonemap.fragment.fx
     // modified to fit variable names
     #ifdef TONEMAP_HejiDawson
