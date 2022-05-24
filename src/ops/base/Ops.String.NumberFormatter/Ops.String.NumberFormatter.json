@@ -92,7 +92,7 @@
     },
     "summary": "Format a number to a string in the given locale and format",
     "issues": "",
-    "caniusequery": "",
+    "caniusequery": "Date%20toLocaleString",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
@@ -119,12 +119,12 @@
                 "text": "The maximum number of fraction digits to use. Possible values are from 0 to 20"
             },
             {
-                "name": "Maximum Significant Digits",
-                "text": "The minimum number of significant digits to use. Possible values are from 1 to 21"
-            },
-            {
                 "name": "Minimum Significant Digits",
                 "text": "The maximum number of significant digits to use. Possible values are from 1 to 21"
+            },
+            {
+                "name": "Maximum Significant Digits",
+                "text": "The minimum number of significant digits to use. Possible values are from 1 to 21"
             },
             {
                 "name": "Use Grouping",
@@ -140,5 +140,5 @@
             }
         ]
     },
-    "exampleProjectId": ""
+    "exampleProjectId": "-h-Rx3"
 }

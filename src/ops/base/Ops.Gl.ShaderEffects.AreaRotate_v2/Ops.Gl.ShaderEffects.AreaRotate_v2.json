@@ -1,0 +1,78 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "ebfd3f0c-7a58-44d3-aba0-72d91fafd7ae",
+    "created": 1652966937221,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.AreaRotateV2"
+    },
+    "summary": "rotate vertices in an area around a center point",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "fixed - ports",
+            "author": "andro",
+            "date": 1559038475780
+        },
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.AreaRotate renamed to Ops.Gl.ShaderEffects.AreaRotate",
+            "author": "pandur",
+            "date": 1596093602153
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.AreaRotate",
+            "author": "pandur",
+            "date": 1652966937221
+        },
+        {
+            "message": "Ops.User.pandur.AreaRotateV2 renamed to Ops.Gl.ShaderEffects.AreaRotate_v2",
+            "author": "pandur",
+            "date": 1652967596784
+        }
+    ]
+}

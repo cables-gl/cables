@@ -32,6 +32,6 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.Dev.VizArrayTable"
+        "name": "Ops.Ui.VizArrayTable"
     }
 }

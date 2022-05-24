@@ -30,9 +30,8 @@ const
     shaderOut = op.outObject("shader", null, "shader");
 
 op.setPortGroup("Texture", [texture, textureMulColor, textureMask, texMaskChan, textureColorize, textureOpacity, colorizeRandom]);
-
 op.setPortGroup("Color", [r, g, b, a, vertCols]);
-op.setPortGroup("Size", [pointSize, randomSize, makeRound, makeRoundAA, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel]);
+op.setPortGroup("Size", [pointSize, randomSize, makeRound, makeRoundAA, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel, texturePointSizeMap]);
 r.setUiAttribs({ "colorPick": true });
 
 const shader = new CGL.Shader(cgl, "PointMaterial");
@@ -76,6 +75,8 @@ doScale.onChange =
     textureMulColor.onChange =
     vertCols.onChange = updateDefines;
 
+updateUi();
+
 op.preRender = function ()
 {
     if (shader)shader.bind();
@@ -98,6 +99,15 @@ function doRender()
     trigger.trigger();
 
     cgl.popShader();
+}
+
+function updateUi()
+{
+    texMaskChan.setUiAttribs({ "greyout": !textureMask.isLinked() });
+
+    texturePointSizeChannel.setUiAttribs({ "greyout": !texturePointSize.isLinked() });
+    texturePointSizeMul.setUiAttribs({ "greyout": !texturePointSize.isLinked() });
+    texturePointSizeMap.setUiAttribs({ "greyout": !texturePointSize.isLinked() });
 }
 
 function updateDefines()
@@ -127,4 +137,5 @@ function updateDefines()
     shader.toggleDefine("POINTSIZE_CHAN_B", texturePointSizeChannel.get() == "B");
 
     shader.toggleDefine("DOTSIZEREMAPABS", texturePointSizeMap.get() == "Grey");
+    updateUi();
 }

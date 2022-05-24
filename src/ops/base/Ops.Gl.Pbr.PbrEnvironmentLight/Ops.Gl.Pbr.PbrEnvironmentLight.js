@@ -65,17 +65,25 @@ const inUseParallaxCorrection = op.inValueBool("Use parallax correction", false)
 const inPCOriginX = op.inFloat("center X", 0);
 const inPCOriginY = op.inFloat("center Y", 1.8);
 const inPCOriginZ = op.inFloat("center Z", 0);
-const inPCOrigin = [inPCOriginX, inPCOriginY, inPCOriginZ];
 const inPCboxMinX = op.inFloat("Box min X", -1);
 const inPCboxMinY = op.inFloat("Box min Y", -1);
 const inPCboxMinZ = op.inFloat("Box min Z", -1);
-const inPCboxMin = [inPCboxMinX, inPCboxMinY, inPCboxMinZ];
 const inPCboxMaxX = op.inFloat("Box max X", 1);
 const inPCboxMaxY = op.inFloat("Box max Y", 1);
 const inPCboxMaxZ = op.inFloat("Box max Z", 1);
-const inPCboxMax = [inPCboxMaxX, inPCboxMaxY, inPCboxMaxZ];
 
-op.setPortGroup("parallax correction", [inUseParallaxCorrection, inPCOrigin, inPCboxMin, inPCboxMax]);
+op.setPortGroup("parallax correction", [
+    inUseParallaxCorrection,
+    inPCOriginX,
+    inPCOriginY,
+    inPCOriginZ,
+    inPCboxMinX,
+    inPCboxMinY,
+    inPCboxMinZ,
+    inPCboxMaxX,
+    inPCboxMaxY,
+    inPCboxMaxZ
+]);
 
 let IrradianceSizeChanged = true;
 let PrefilteredSizeChanged = true;
@@ -330,12 +338,12 @@ function drawHelpers()
         "posX": inPCboxMinX,
         "posY": inPCboxMinY,
         "posZ": inPCboxMinZ,
-    },1);
+    }, 1);
     gui.setTransformGizmo({
         "posX": inPCboxMaxX,
         "posY": inPCboxMaxY,
         "posZ": inPCboxMaxZ,
-    },2);
+    }, 2);
     if (CABLES.UI.renderHelper)
     {
         cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
@@ -368,7 +376,7 @@ inTrigger.onTriggered = function ()
     uniformFilteringInfo.setValue(filteringInfo);
     uniformPrefilteringInfo.setValue(prefilteringInfo);
 
-    if(!cgl.frameStore.shadowPass)
+    if (!cgl.frameStore.shadowPass)
     {
         if (IBLLUTSizeChanged)
         {
@@ -393,7 +401,6 @@ inTrigger.onTriggered = function ()
     pbrEnv.texDiffIrr = outTexIrradiance.get();
     pbrEnv.texPreFiltered = outTexPrefiltered.get();
     pbrEnv.texPreFilteredMipLevels = outMipLevels.get();
-
 
     pbrEnv.UseParallaxCorrection = inUseParallaxCorrection.get();
     pbrEnv.PCOrigin = [inPCOriginX.get(), inPCOriginY.get(), inPCOriginZ.get()];

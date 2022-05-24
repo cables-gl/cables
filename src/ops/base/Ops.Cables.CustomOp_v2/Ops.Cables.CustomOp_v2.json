@@ -35,6 +35,11 @@
             "message": "fix error when copy pasting",
             "author": "stephan",
             "date": 1643887895555
+        },
+        {
+            "message": "handle opening of error modal properly",
+            "author": "stephan",
+            "date": 1653382090247
         }
     ],
     "authorName": "stephan",

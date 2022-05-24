@@ -344,6 +344,13 @@ Mesh.prototype._setVertexNumbers = function (arr)
     }
 };
 
+/**
+ * @function setVertexIndices
+ * @description update vertex indices / faces
+ * @memberof Mesh
+ * @instance
+ * @param {array} vertIndices
+ */
 Mesh.prototype.setVertexIndices = function (vertIndices)
 {
     if (!this._bufVerticesIndizes)

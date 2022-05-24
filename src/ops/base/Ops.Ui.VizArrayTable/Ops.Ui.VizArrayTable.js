@@ -55,7 +55,17 @@ op.renderVizLayer = (ctx, layer) =>
                 if (v.length == 0) preview = "";
                 str = "[" + preview + "] (" + v.length + ")";
             }
-            else if (typeof v == "object") str = "{}";
+            else if (typeof v == "object")
+            {
+                try
+                {
+                    str = JSON.stringify(v, true, 1);
+                }
+                catch (e)
+                {
+                    str = "{???}";
+                }
+            }
 
             ctx.fillText(str, layer.x / layer.scale + s * 100 + 50, layer.y / layer.scale + 10 + i / stride * 10 + padding);
         }

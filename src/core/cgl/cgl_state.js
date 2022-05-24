@@ -98,28 +98,28 @@ const Context = function (_patch)
     this.aborted = false;
     const cbResize = [];
 
-    this.addEventListener = function (event, cb)
-    {
-        console.log("cgl state old addEventListener");
-        this._log.stack("cgl state old addEventListener");
+    // this.addEventListener = function (event, cb)
+    // {
+    //     console.log("cgl state old addEventListener");
+    //     this._log.stack("cgl state old addEventListener");
 
-        if (event == "resize") cbResize.push(cb);
-    };
+    //     if (event == "resize") cbResize.push(cb);
+    // };
 
-    this.removeEventListener = function (event, cb)
-    {
-        if (event == "resize")
-        {
-            for (const i in cbResize)
-            {
-                if (cbResize[i] == cb)
-                {
-                    cbResize.splice(i, 1);
-                    return;
-                }
-            }
-        }
-    };
+    // this.removeEventListener = function (event, cb)
+    // {
+    //     if (event == "resize")
+    //     {
+    //         for (const i in cbResize)
+    //         {
+    //             if (cbResize[i] == cb)
+    //             {
+    //                 cbResize.splice(i, 1);
+    //                 return;
+    //             }
+    //         }
+    //     }
+    // };
 
     this.exitError = function (msgId, msg)
     {

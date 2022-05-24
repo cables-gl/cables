@@ -1,47 +1,47 @@
 // utility
-const cgl             = op.patch.cgl;
+const cgl = op.patch.cgl;
 // inputs
-const inTrigger       = op.inTrigger("render");
+const inTrigger = op.inTrigger("render");
 inTrigger.onTriggered = doRender;
 
-const inDiffuseR      = op.inFloat("R", Math.random());
-const inDiffuseG      = op.inFloat("G", Math.random());
-const inDiffuseB      = op.inFloat("B", Math.random());
-const inDiffuseA      = op.inFloatSlider("A", 1);
-const diffuseColors   = [inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA];
+const inDiffuseR = op.inFloat("R", Math.random());
+const inDiffuseG = op.inFloat("G", Math.random());
+const inDiffuseB = op.inFloat("B", Math.random());
+const inDiffuseA = op.inFloatSlider("A", 1);
+const diffuseColors = [inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA];
 op.setPortGroup("Diffuse Color", diffuseColors);
 
-const inRoughness           = op.inFloatSlider("Roughness", 0.5);
-const inMetalness           = op.inFloatSlider("Metalness", 0.0);
-const inAlphaMode           = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
+const inRoughness = op.inFloatSlider("Roughness", 0.5);
+const inMetalness = op.inFloatSlider("Metalness", 0.0);
+const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
 
-const inTonemapping         = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
+const inTonemapping = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
 const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 
-const inToggleGR            = op.inBool("Disable geometric roughness", false);
-const inToggleNMGR          = op.inBool("Use roughness from normal map", false);
-const inUseVertexColours    = op.inValueBool("Use Vertex Colours", false);
-const inVertexColourMode    = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
-const inHeightDepth         = op.inFloat("Height Intensity", 1.0);
-const inUseOptimizedHeight  = op.inValueBool("Faster heightmapping", false);
-const inUseClearCoat        = op.inValueBool("Use Clear Coat", false);
-const inClearCoatRoughness  = op.inFloatSlider("Clear Coat Roughness", 0.5);
+const inToggleGR = op.inBool("Disable geometric roughness", false);
+const inToggleNMGR = op.inBool("Use roughness from normal map", false);
+const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
+const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
+const inHeightDepth = op.inFloat("Height Intensity", 1.0);
+const inUseOptimizedHeight = op.inValueBool("Faster heightmapping", false);
+const inUseClearCoat = op.inValueBool("Use Clear Coat", false);
+const inClearCoatRoughness = op.inFloatSlider("Clear Coat Roughness", 0.5);
 
 // texture inputs
-const inTexIBLLUT           = op.inTexture("IBL LUT");
-const inTexIrradiance       = op.inTexture("Diffuse Irradiance");
-const inTexPrefiltered      = op.inTexture("Pre-filtered envmap");
-const inMipLevels           = op.inInt("Num mip levels");
+const inTexIBLLUT = op.inTexture("IBL LUT");
+const inTexIrradiance = op.inTexture("Diffuse Irradiance");
+const inTexPrefiltered = op.inTexture("Pre-filtered envmap");
+const inMipLevels = op.inInt("Num mip levels");
 
-const inTexAlbedo           = op.inTexture("Albedo");
-const inTexAORM             = op.inTexture("AORM");
-const inTexNormal           = op.inTexture("Normal map");
-const inTexHeight           = op.inTexture("Height");
-const inLightmap            = op.inTexture("Lightmap");
-const inDiffuseIntensity    = op.inFloat("Diffuse Intensity", 1.0);
-const inSpecularIntensity   = op.inFloat("Specular Intensity", 1.0);
-const inLightmapRGBE        = op.inBool("Lightmap is RGBE", false);
-const inLightmapIntensity   = op.inFloat("Lightmap Intensity", 1.0);
+const inTexAlbedo = op.inTexture("Albedo");
+const inTexAORM = op.inTexture("AORM");
+const inTexNormal = op.inTexture("Normal map");
+const inTexHeight = op.inTexture("Height");
+const inLightmap = op.inTexture("Lightmap");
+const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
+const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
+const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
+const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
 // outputs
 const outTrigger = op.outTrigger("Next");
@@ -60,12 +60,12 @@ op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
 PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 // light sources (except IBL)
-var PBRLightStack         = {};
-const lightUniforms       = [];
-const LIGHT_INDEX_REGEX   = new RegExp("{{LIGHT_INDEX}}", "g");
+let PBRLightStack = {};
+const lightUniforms = [];
+const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PBR_FRAGMENT_HEAD}}", "g");
 const FRAGMENT_BODY_REGEX = new RegExp("{{PBR_FRAGMENT_BODY}}", "g");
-const lightFragmentHead   = attachments.light_head_frag;
+const lightFragmentHead = attachments.light_head_frag;
 const lightFragmentBodies = {
     "point": attachments.light_body_point_frag,
     "directional": attachments.light_body_directional_frag,
@@ -137,7 +137,7 @@ inLightmapRGBE.onChange = () =>
 inUseVertexColours.onChange = () =>
 {
     PBRShader.toggleDefine("VERTEX_COLORS", inUseVertexColours.get());
-    
+
     if (!inUseVertexColours.get())
     {
         PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.get());
@@ -325,7 +325,7 @@ inTonemapping.onChange = function ()
 };
 function setEnvironmentLighting(enabled)
 {
-    if(enabled)
+    if (enabled)
     {
         PBRShader.define("USE_ENVIRONMENT_LIGHTING");
     }
@@ -351,6 +351,7 @@ function updateLightUniforms()
     for (let i = 0; i < PBRLightStack.length; i += 1)
     {
         const light = PBRLightStack[i];
+        light.isUsed = true;
 
         lightUniforms[i].position.setValue(light.position);
         lightUniforms[i].color.setValue(light.color);
@@ -376,14 +377,14 @@ function updateLightUniforms()
 
 function buildShader()
 {
-    const vertexShader  = attachments.BasicPBR_vert;
+    const vertexShader = attachments.BasicPBR_vert;
     const lightIncludes = attachments.light_includes_frag;
-    let fragmentShader  = attachments.BasicPBR_frag;
+    let fragmentShader = attachments.BasicPBR_frag;
 
     let fragmentHead = "";
     let fragmentBody = "";
 
-    if(PBRLightStack.length > 0)
+    if (PBRLightStack.length > 0)
     {
         fragmentHead = fragmentHead.concat(lightIncludes);
     }
@@ -425,7 +426,7 @@ function buildShader()
 
 function updateLights()
 {
-    if(cgl.frameStore.lightStack && currentLightCount !== cgl.frameStore.lightStack.length)
+    if (cgl.frameStore.lightStack && currentLightCount !== cgl.frameStore.lightStack.length)
     {
         PBRLightStack = cgl.frameStore.lightStack;
         buildShader();
@@ -451,7 +452,7 @@ function doRender()
         inMipLevelsUniform.setValue(pbrEnv.texPreFilteredMipLevels || 7);
 
         PBRShader.toggleDefine("USE_PARALLAX_CORRECTION", pbrEnv.UseParallaxCorrection);
-        if(pbrEnv.UseParallaxCorrection)
+        if (pbrEnv.UseParallaxCorrection)
         {
             inPCOrigin.setValue(pbrEnv.PCOrigin);
             inPCboxMin.setValue(pbrEnv.PCboxMin);

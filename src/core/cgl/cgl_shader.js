@@ -1653,11 +1653,10 @@ Shader.createShader = function (cgl, str, type, cglShader)
         infoLog = infoLog.replace(/\n/g, "<br/>");
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
+        htmlWarning += "</div>";
 
         cgl.patch.emitEvent("criticalError", "Shader error " + this._name, htmlWarning);
         if (cgl.patch.isEditorMode())console.log("Shader error " + this._name, htmlWarning);
-
-        htmlWarning += "</div>";
 
         this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());

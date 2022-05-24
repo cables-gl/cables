@@ -27,7 +27,6 @@
         "name": "Ops.String.RandomString_v2"
     },
     "summary": "generate a random string of given characters",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -40,5 +39,8 @@
             "author": "stephan",
             "date": 1648808530498
         }
-    ]
+    ],
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "xtDYx3"
 }

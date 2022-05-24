@@ -69,6 +69,11 @@
             },
             {
                 "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Position X",
                 "group": "Position",
                 "subType": "number"
@@ -101,6 +106,21 @@
                 "type": 0,
                 "name": "Velocity Z",
                 "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
                 "subType": "number"
             },
             {

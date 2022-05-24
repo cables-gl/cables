@@ -88,6 +88,16 @@
             "message": "Ops.User.pandur.AreaScaler_v2 renamed to Ops.Gl.ShaderEffects.AreaScaler_v2",
             "author": "pandur",
             "date": 1573743399666
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.AreaScaler_v2 renamed to Ops.Gl.ShaderEffects.AreaScaler_v3",
+            "author": "pandur",
+            "date": 1652966364119
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.AreaScaler_v3 renamed to Ops.Gl.ShaderEffects.AreaScaler_v2",
+            "author": "pandur",
+            "date": 1652966406475
         }
     ],
     "summary": "Scales the size of meshes within the area of influence",

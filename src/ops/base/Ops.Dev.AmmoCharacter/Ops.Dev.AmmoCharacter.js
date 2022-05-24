@@ -2,9 +2,9 @@ const
     inExec = op.inTrigger("Update"),
     inRadius = op.inFloat("Radius", 1),
     inStyle = op.inSwitch("View", ["3rd Person", "1st Person"], "3rd Person"),
-    inSizeX = op.inFloat("Size X", 1),
-    inSizeY = op.inFloat("Size Y", 1),
-    inSizeZ = op.inFloat("Size Z", 1),
+    // inSizeX = op.inFloat("Size X", 1),
+    inSizeY = op.inFloat("Height", 2.04),
+    // inSizeZ = op.inFloat("Size Z", 1),
     inMass = op.inFloat("Mass", 0),
     inName = op.inString("Name", ""),
     inReset = op.inTriggerButton("Reset"),
@@ -24,6 +24,9 @@ const
     inSpeed = op.inFloat("Speed", 1),
 
     next = op.outTrigger("next"),
+    outX = op.outNumber("Position X"),
+    outY = op.outNumber("Position Y"),
+    outZ = op.outNumber("Position Z"),
     transformed = op.outTrigger("Transformed");
 
 inExec.onTriggered = update;
@@ -39,6 +42,8 @@ const tmpQuat = quat.create();
 const tmpScale = vec3.create();
 let transMat = mat4.create();
 
+let forceQuat = null;
+
 let btOrigin = null;
 let btQuat = null;
 let doResetPos = false;
@@ -48,9 +53,7 @@ inName.onChange = updateBodyMeta;
 op.onDelete =
     inMass.onChange =
     inRadius.onChange =
-    inSizeY.onChange =
-    inSizeZ.onChange =
-    inSizeX.onChange = () =>
+    inSizeY.onChange = () =>
     {
         removeBody();
     };
@@ -98,7 +101,8 @@ function setup()
 
     motionState = new Ammo.btDefaultMotionState(transform);
 
-    let colShape = new Ammo.btSphereShape(inRadius.get());
+    let colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get() - inRadius.get());
+    // let colShape = new Ammo.btSphereShape(inRadius.get());
 
     colShape.setMargin(0.05);
 
@@ -107,13 +111,13 @@ function setup()
 
     let rbInfo = new Ammo.btRigidBodyConstructionInfo(inMass.get(), motionState, colShape, localInertia);
     body = new Ammo.btRigidBody(rbInfo);
-    body.setDamping(0.7, 0.01);
+    // body.setDamping(0.7, 0.01);
 
     world.addRigidBody(body);
 
     updateBodyMeta();
     // updateDeactivation();
-    console.log("body added...", body);
+    // console.log("body added...", body);
 }
 
 function renderTransformed()
@@ -226,10 +230,7 @@ function update()
             doMove = true;
         }
 
-        if (inMoveYP.get())
-        {
-            vy = 3;
-        }
+        if (inMoveYP.get()) vy = 3;
         else vy = 0;
 
         doMove = true;
@@ -244,12 +245,25 @@ function update()
     if (inMass.get() == 0 || doResetPos)
     {
         copyCglTransform(transform);
-
         motionState.setWorldTransform(transform);
+
         body.setWorldTransform(transform);
 
         doResetPos = false;
     }
+
+    motionState.getWorldTransform(transform);
+
+    // force upright position
+    if (!forceQuat) forceQuat = new Ammo.btQuaternion();
+    forceQuat.setEulerZYX(0, 90, 0);
+    transform.setRotation(forceQuat);
+    body.setWorldTransform(transform);
+    let p = tmpTrans.getOrigin();
+
+    outX.set(p.x());
+    outY.set(p.y());
+    outZ.set(p.z());
 
     renderTransformed();
 

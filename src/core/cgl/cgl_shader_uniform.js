@@ -231,6 +231,7 @@ Uniform.prototype.copy = function (newShader)
 Uniform.prototype.getGlslTypeString = function ()
 {
     if (this._type == "f") return "float";
+    if (this._type == "b") return "bool";
     if (this._type == "i") return "int";
     if (this._type == "2i") return "ivec2";
     if (this._type == "2f") return "vec2";

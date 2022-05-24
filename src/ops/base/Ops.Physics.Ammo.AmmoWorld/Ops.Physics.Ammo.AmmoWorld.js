@@ -11,7 +11,8 @@ const
 
     next = op.outTrigger("next"),
     outNumBodies = op.outNumber("Total Bodies"),
-    outPoints = op.outArray("debug points");
+    outPoints = op.outArray("debug points"),
+    outBodiesMeta = op.outArray("Bodies Meta");
 
 op.setPortGroup("Gravity", [inGravX, inGravZ, inGravY]);
 
@@ -67,6 +68,7 @@ function update()
     cgl.frameStore.ammoWorld = ammoWorld;
 
     outNumBodies.set(ammoWorld.numBodies());
+    outBodiesMeta.set(ammoWorld.getListBodies());
 
     next.trigger();
 

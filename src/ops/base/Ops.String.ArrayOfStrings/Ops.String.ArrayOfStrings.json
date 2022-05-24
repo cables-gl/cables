@@ -38,5 +38,15 @@
         "name": "Ops.User.pandur.ArrayOfStrings"
     },
     "authorName": "pandur",
-    "created": 1647500932771
+    "created": 1647500932771,
+    "summary": "",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "haeXx3",
+    "docs": {
+        "ports": []
+    }
 }

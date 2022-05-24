@@ -30,9 +30,21 @@ const AmmoWorld = class extends CABLES.EventTarget
         this.world.setGravity(new Ammo.btVector3(0, -9, 0));
     }
 
+    getListBodies()
+    {
+        const arr = [];
+        for (let i in this._bodymeta)
+        {
+            arr.push(this._bodymeta[i]);
+        }
+        return arr;
+    }
+
     dispose()
     {
         if (!this.world) return;
+
+        this.emitEvent("dispose");
 
         for (let i = 0; i < this.bodies.length; i++)
         {
@@ -54,12 +66,14 @@ const AmmoWorld = class extends CABLES.EventTarget
 
     removeRigidBody(b)
     {
-        if (this.world && b)
-        {
-            this.world.removeRigidBody(b);
-        }
         const idx = this.bodies.indexOf(b);
+        const metaIdx = b.getUserIndex();
+        if (this.world && b)
+            this.world.removeRigidBody(b);
+
         if (idx > -1) this.bodies.splice(idx, 1);
+
+        delete this._bodymeta[metaIdx];
     }
 
     createRigidBody()
@@ -69,6 +83,7 @@ const AmmoWorld = class extends CABLES.EventTarget
 
     addRigidBody(body)
     {
+        if (!this.world) return;
         body.setUserIndex(++this._countIndex);
         this.world.addRigidBody(body);
         this.bodies.push(body);
@@ -92,7 +107,11 @@ const AmmoWorld = class extends CABLES.EventTarget
     {
         for (let i in this._bodymeta)
         {
-            if (this._bodymeta[i].name == n) return this._bodymeta[i].body;
+            if (this._bodymeta[i].name == n)
+            {
+                // console.log("found name", i);
+                return this._bodymeta[i].body;
+            }
         }
     }
 
@@ -106,7 +125,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         if (!this.world) return;
         let deltaTime = performance.now() - this.lastTime;
 
-        this.world.stepSimulation(deltaTime, 10);
+        this.world.stepSimulation(deltaTime, 5);
 
         this._checkCollisions();
 
