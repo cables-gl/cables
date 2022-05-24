@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.Preset renamed to Ops.Value.Preset",
             "author": "pandur",
             "date": 1562948747052
+        },
+        {
+            "message": "fix renaming of presets and parameters",
+            "author": "stephan",
+            "date": 1653382616471
         }
     ],
     "authorName": "pandur",

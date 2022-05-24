@@ -20,6 +20,11 @@
             "message": "Ops.Dev.Html.NewElementChilds renamed to Ops.Html.ElementChilds_v2",
             "author": "stephan",
             "date": 1649257968601
+        },
+        {
+            "message": "cleanup elements on connect disconnect / handle html content properly",
+            "author": "stephan",
+            "date": 1653382054793
         }
     ],
     "authorName": "stephan",

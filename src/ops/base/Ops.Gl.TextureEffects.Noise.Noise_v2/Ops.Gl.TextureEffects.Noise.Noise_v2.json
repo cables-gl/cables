@@ -50,7 +50,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.NoiseV2"
+        "name": "Ops.Gl.TextureEffects.Noise.Noise_v2"
     },
     "summary": "white noise pixel effect",
     "authorName": "pandur",

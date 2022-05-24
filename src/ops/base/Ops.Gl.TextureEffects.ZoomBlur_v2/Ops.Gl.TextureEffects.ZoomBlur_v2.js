@@ -1,11 +1,16 @@
 const
     render = op.inTrigger("render"),
-    strength = op.inValueSlider("strength", 0.5),
+    strength = op.inValueSlider("Strength", 0.5),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
+
     mask = op.inTexture("mask"),
+    // maskSource = op.inSwitch("Mask Source", ["Lumi", "R", "G", "B", "A"], "Lumi"),
+    // maskInv = op.inBool("Mask Invert", false),
+
     trigger = op.outTrigger("trigger");
 
+// op.setPortGroup("Mask", [mask, maskSource, maskInv]);
 mask.onChange = function ()
 {
     shader.toggleDefine("HAS_MASK", mask.get() && mask.get().tex);
