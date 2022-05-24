@@ -69,10 +69,8 @@ const AmmoWorld = class extends CABLES.EventTarget
         const idx = this.bodies.indexOf(b);
         const metaIdx = b.getUserIndex();
         if (this.world && b)
-        {
             this.world.removeRigidBody(b);
-        }
-        console.log("removerigidbody", idx);
+
         if (idx > -1) this.bodies.splice(idx, 1);
 
         delete this._bodymeta[metaIdx];
