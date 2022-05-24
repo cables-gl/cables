@@ -52,21 +52,8 @@
             },
             {
                 "type": 2,
-                "name": "Amount Map",
-                "group": "Strength Map",
+                "name": "Mask",
                 "objType": "texture"
-            },
-            {
-                "type": 0,
-                "name": "Source Strength Map index",
-                "group": "Strength Map",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Invert Strength Map",
-                "group": "Strength Map",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
