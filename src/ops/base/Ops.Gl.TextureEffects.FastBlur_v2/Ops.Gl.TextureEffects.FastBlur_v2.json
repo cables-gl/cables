@@ -10,7 +10,7 @@
             },
             {
                 "type": 0,
-                "name": "amount",
+                "name": "Passes",
                 "subType": "number"
             },
             {
@@ -20,18 +20,20 @@
             },
             {
                 "type": 0,
-                "name": "Mask Invert",
-                "subType": "boolean"
+                "name": "direction index",
+                "subType": "integer"
             },
             {
                 "type": 2,
                 "name": "Mask",
+                "group": "Mask",
                 "objType": "texture"
             },
             {
                 "type": 0,
-                "name": "direction index",
-                "subType": "integer"
+                "name": "Mask Invert",
+                "group": "Mask",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -40,7 +42,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.FastBlurV2"
+        "name": "Ops.Gl.TextureEffects.FastBlur_v2"
     },
     "changelog": [
         {

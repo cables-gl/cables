@@ -1,14 +1,31 @@
 const
     render = op.inTrigger("render"),
-    strength = op.inValueSlider("strength", 0.5),
+    strength = op.inValueSlider("Strength", 0.5),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
-    mask = op.inTexture("mask"),
+    inMaskTex = op.inTexture("Strength Map"),
+    inMaskSource = op.inSwitch("Source Strength Map", ["R", "G", "B", "A", "Lum"], "R"),
+    inMaskInv = op.inBool("Invert Strength Map", false),
     trigger = op.outTrigger("trigger");
 
-mask.onChange = function ()
+op.setPortGroup("Strengh Map", [inMaskTex, inMaskSource, inMaskInv]);
+
+inMaskSource.onChange =
+inMaskInv.onChange =
+inMaskTex.onChange = function ()
 {
-    shader.toggleDefine("HAS_MASK", mask.get() && mask.get().tex);
+    shader.toggleDefine("HAS_MASK", inMaskTex.isLinked());
+
+    shader.toggleDefine("MASK_SRC_R", inMaskSource.get() == "R");
+    shader.toggleDefine("MASK_SRC_G", inMaskSource.get() == "G");
+    shader.toggleDefine("MASK_SRC_B", inMaskSource.get() == "B");
+    shader.toggleDefine("MASK_SRC_A", inMaskSource.get() == "A");
+    shader.toggleDefine("MASK_SRC_LUM", inMaskSource.get() == "Lum");
+
+    shader.toggleDefine("MASK_INV", inMaskInv.get());
+
+    inMaskSource.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
+    inMaskInv.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
 };
 
 const cgl = op.patch.cgl;
@@ -34,7 +51,7 @@ render.onTriggered = function ()
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
-        if (mask.get() && mask.get().tex) cgl.setTexture(1, mask.get().tex);
+        if (inMaskTex.get() && inMaskTex.get().tex) cgl.setTexture(1, inMaskTex.get().tex);
 
         cgl.currentTextureEffect.finish();
         cgl.popShader();

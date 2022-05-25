@@ -14,12 +14,17 @@ UNI float rangeB;
 UNI float aspect;
 UNI float harmonics;
 
+#ifdef HAS_MASK
+    UNI sampler2D texMask;
+#endif
+
 #ifdef HAS_TEX_OFFSETMAP
     UNI sampler2D texOffsetZ;
     UNI float offMul;
 #endif
 
 {{CGL.BLENDMODES3}}
+{{CGL.LUMINANCE}}
 
 // Cellular noise ("Worley noise") in 3D in GLSL.
 // Copyright (c) Stefan Gustavson 2011-04-19. All rights reserved.
@@ -161,6 +166,29 @@ void main(void) {
     vec4 col=vec4(n,n,n,1.0);
     vec4 base=texture(tex,texCoord);
 
-    outColor=cgl_blendPixel(base,col,amount);
+    float am=amount;
+    #ifdef HAS_MASK
+        #ifdef MASK_SRC_R
+            float mul=texture(texMask,texCoord).r;
+        #endif
+        #ifdef MASK_SRC_G
+            float mul=texture(texMask,texCoord).g;
+        #endif
+        #ifdef MASK_SRC_B
+            float mul=texture(texMask,texCoord).b;
+        #endif
+        #ifdef MASK_SRC_A
+            float mul=texture(texMask,texCoord).a;
+        #endif
+        #ifdef MASK_SRC_LUM
+            float mul=cgl_luminance(texture(texMask,texCoord).rgb);
+        #endif
+        #ifdef MASK_INV
+            mul=1.0-mul;
+        #endif
+        am*=mul;
+    #endif
+
+    outColor=cgl_blendPixel(base,col,am);
 
 }

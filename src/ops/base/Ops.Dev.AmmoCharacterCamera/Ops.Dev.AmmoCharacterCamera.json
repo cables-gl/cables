@@ -43,10 +43,6 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
-            },
-            {
-                "type": 1,
-                "name": "Reset"
             }
         ],
         "portsOut": [

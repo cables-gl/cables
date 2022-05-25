@@ -42,7 +42,6 @@ render.onTriggered = function ()
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     if (textureMask.get()) cgl.setTexture(1, textureMask.get().tex);
 
-
     cgl.currentTextureEffect.finish();
     cgl.popShader();
 

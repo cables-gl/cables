@@ -4,13 +4,16 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    amount = op.inFloat("amount", 3),
+    inPasses = op.inFloat("Passes", 3),
     clamp = op.inBool("Clamp", false),
-    maskInvert = op.inBool("Mask Invert", false),
-    mask = op.inTexture("Mask");
+    direction = op.inDropDown("direction", ["both", "vertical", "horizontal"], "both"),
+    mask = op.inTexture("Mask"),
+    maskInvert = op.inBool("Mask Invert", false);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "fastblur");
+
+op.setPortGroup("Mask", [mask, maskInvert]);
 
 shader.setSource(attachments.blur_vert, attachments.blur_frag);
 const
@@ -20,29 +23,32 @@ const
     uniWidth = new CGL.Uniform(shader, "f", "width", 0),
     uniHeight = new CGL.Uniform(shader, "f", "height", 0),
     uniPass = new CGL.Uniform(shader, "f", "pass", 0),
-    uniAmount = new CGL.Uniform(shader, "f", "amount", amount.get()),
+    uniAmount = new CGL.Uniform(shader, "f", "amount", inPasses.get()),
     textureAlpha = new CGL.Uniform(shader, "t", "texMask", 1);
 
-amount.onChange = () => { uniAmount.setValue(amount.get()); };
+inPasses.onChange = () => { uniAmount.setValue(inPasses.get()); };
 
-const direction = op.inDropDown("direction", ["both", "vertical", "horizontal"]);
 let dir = 0;
-direction.set("both");
 direction.onChange = () =>
 {
-    if (direction.get() == "both")dir = 0;
-    if (direction.get() == "horizontal")dir = 1;
-    if (direction.get() == "vertical")dir = 2;
+    if (direction.get() == "both") dir = 0;
+    if (direction.get() == "horizontal") dir = 1;
+    if (direction.get() == "vertical") dir = 2;
 };
 
 clamp.onChange = () => { shader.toggleDefine("CLAMP", clamp.get()); };
 
 maskInvert.onChange =
-mask.onChange = () =>
+    mask.onChange = updateDefines;
+updateDefines();
+
+function updateDefines()
 {
     shader.toggleDefine("USE_MASK", mask.isLinked());
     shader.toggleDefine("MASK_INVERT", maskInvert.get());
-};
+
+    maskInvert.setUiAttribs({ "greyout": !mask.isLinked() });
+}
 
 render.onTriggered = function ()
 {
@@ -50,7 +56,7 @@ render.onTriggered = function ()
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
-    const numPasses = amount.get();
+    const numPasses = inPasses.get();
 
     if (mask.get())cgl.setTexture(1, mask.get().tex);
 

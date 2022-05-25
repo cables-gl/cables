@@ -7,7 +7,7 @@
             },
             {
                 "type": 0,
-                "name": "strength",
+                "name": "Strength",
                 "subType": "number"
             },
             {
@@ -22,8 +22,21 @@
             },
             {
                 "type": 2,
-                "name": "mask",
+                "name": "Strength Map",
+                "group": "Strengh Map",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Source Strength Map index",
+                "group": "Strengh Map",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Strength Map",
+                "group": "Strengh Map",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -32,7 +45,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.ZoomBlurV2"
+        "name": "Ops.Gl.TextureEffects.ZoomBlur_v2"
     },
     "authorName": "pandur",
     "id": "b720a2f5-5501-48ef-90de-94a280ba6fbd",

@@ -1,5 +1,5 @@
 {
-    "id": "c349f178-eb83-4753-829e-c9a50b7f459c",
+    "id": "04a8a8bc-feb9-4791-8724-ee24bbb150db",
     "changelog": [
         {
             "message": "created op",
@@ -10,10 +10,20 @@
             "message": "added mask texture input",
             "author": "pandur",
             "date": 1565603054167
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Wobble",
+            "author": "pandur",
+            "date": 1653386207162
+        },
+        {
+            "message": "Ops.User.pandur.WobbleV2 renamed to Ops.Gl.TextureEffects.Wobble_v2",
+            "author": "pandur",
+            "date": 1653386225612
         }
     ],
     "authorName": "pandur",
-    "created": 1552591458848,
+    "created": 1653386207162,
     "layout": {
         "portsIn": [
             {
@@ -52,8 +62,21 @@
             },
             {
                 "type": 2,
-                "name": "Mask",
+                "name": "Amount Map",
+                "group": "Amount Map",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Source Amount Map index",
+                "group": "Amount Map",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Amount Map",
+                "group": "Amount Map",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -62,7 +85,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Wobble"
+        "name": "Ops.Gl.TextureEffects.Wobble_v2"
     },
     "summary": "waving wobble motion effect",
     "youtubeid": "",

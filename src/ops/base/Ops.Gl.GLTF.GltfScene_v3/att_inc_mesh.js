@@ -349,14 +349,12 @@ let gltfMesh = class
             const uniPbrMetalness = cgl.getShader().uniformPbrMetalness;
             const uniPbrRoughness = cgl.getShader().uniformPbrRoughness;
 
-            if (inUseMatProps.get())
+            if (!gltf.shaders[this.material] && inUseMatProps.get())
             {
                 if (uniDiff && this._matDiffuseColor)
                 {
                     this._matDiffuseColorOrig = [uniDiff.getValue()[0], uniDiff.getValue()[1], uniDiff.getValue()[2], uniDiff.getValue()[3]];
                     uniDiff.setValue(this._matDiffuseColor);
-
-                    // console.log("rough",this._matDiffuseColor)
                 }
 
                 if (uniPbrMetalness)

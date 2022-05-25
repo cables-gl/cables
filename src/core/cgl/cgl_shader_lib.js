@@ -14,6 +14,17 @@ const ShaderLibMods = {
         this.srcHeadFrag = TextureEffect.getBlendCode(3);
     },
 
+    "CGL.LUMINANCE": function ()
+    {
+        this.name = "luminance";
+        this.srcHeadFrag = "".endl()
+            + "float cgl_luminance(vec3 c)".endl()
+            + "{".endl()
+            + "    return dot(vec3(0.2126,0.7152,0.0722),c);".endl()
+            + "}".endl();
+    },
+
+
     // quite good random numbers, but somehow don't work in ANGLE
     "CGL.RANDOM_OLD": function ()
     {
@@ -28,6 +39,7 @@ const ShaderLibMods = {
             + "    return vec3( cgl_random(co),cgl_random(co+0.5711),cgl_random(co+1.5711));".endl()
             + "}";
     },
+
 
     // low quality generative ranodm numbers
     "CGL.RANDOM_LOW": function ()

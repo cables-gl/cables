@@ -137,6 +137,7 @@
             {
                 "type": 0,
                 "name": "Map Size 0 index",
+                "group": "Size",
                 "subType": "integer"
             },
             {

@@ -3,8 +3,8 @@ UNI sampler2D tex;
 UNI float amountX;
 UNI float amountY;
 
-#ifdef MASK
-UNI sampler2D texMask;
+#ifdef HAS_MASK
+    UNI sampler2D texMask;
 #endif
 
 void main()
@@ -12,12 +12,12 @@ void main()
     float amX=amountX;
     float amY=amountY;
 
-    #ifdef MASK
+    #ifdef HAS_MASK
         vec4 m=texture(texMask,texCoord);
+
+
         amX*=(m.r-0.5)*2.0;
         amY*=(m.g-0.5)*2.0;
-        // amX*=m.r;
-        // amY*=m.g;
     #endif
 
     vec4 col=vec4(0.0,0.0,0.0,1.0);

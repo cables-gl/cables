@@ -2,8 +2,7 @@
 {{MODULES_HEAD}}
 
 UNI vec4 color;
-IN vec2 texCoord;
-IN vec2 pointCoord;
+// IN vec2 pointCoord;
 IN float ps;
 
 #ifdef HAS_TEXTURE_DIFFUSE

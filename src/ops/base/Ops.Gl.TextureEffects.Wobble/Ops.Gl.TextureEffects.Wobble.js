@@ -11,7 +11,6 @@ const
 
     trigger = op.outTrigger("Trigger");
 
-
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 
