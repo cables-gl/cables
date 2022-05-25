@@ -141,21 +141,19 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
-        // this.patch.config.canvas.antialias = false;
+        // safari stuff..........
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)))
+        {
+            this.patch.config.canvas.antialias = false;
+            this.patch.config.canvas.forceWebGl1 = true;
+            this.patch.config.canvas.forceTextureNearest = true;
+        }
 
-        if (!this.patch.config.canvas.forceWebGl1)
-            this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
+        if (!this.patch.config.canvas.forceWebGl1) this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
         if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
             this.glVersion = 2;
-
-
-            // safari
-            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)))
-            {
-                this.glUseHalfFloatTex = true;
-            }
         }
         else
         {

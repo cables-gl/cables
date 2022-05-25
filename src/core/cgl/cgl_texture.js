@@ -195,6 +195,8 @@ Texture.prototype.setSize = function (w, h)
 
     const uarr = null;
 
+    if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
+
     if (
         this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
         (!this._cgl.gl.getExtension("OES_texture_float_linear"))
