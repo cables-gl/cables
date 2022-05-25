@@ -233,7 +233,7 @@ function capturePrefilteredCubemap(size)
     else
     {
         PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-            "isFloatingPointTexture": true, // TODO
+            "isFloatingPointTexture": false, // should be true, but not possible :/
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
