@@ -149,6 +149,13 @@ const Context = function (_patch)
         if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
             this.glVersion = 2;
+
+
+            // safari
+            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)))
+            {
+                this.glUseHalfFloatTex = true;
+            }
         }
         else
         {
