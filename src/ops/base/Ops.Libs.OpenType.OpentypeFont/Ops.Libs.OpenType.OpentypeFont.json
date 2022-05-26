@@ -60,5 +60,15 @@
         "name": "Ops.Dev.Opentype"
     },
     "authorName": "pandur",
-    "created": 1642189494325
+    "created": 1642189494325,
+    "summary": "",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    }
 }
