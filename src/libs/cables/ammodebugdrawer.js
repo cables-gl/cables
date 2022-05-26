@@ -55,9 +55,6 @@ class AmmoDebugDrawer
         this.debugDrawer.enabled = true;
         this.world.setDebugDrawer(this.debugDrawer);
 
-        console.log("this.getDebugMode", this.getDebugMode(), this.enabled);
-
-
         this._lineShader = null;
         this._shaderFrag = ""
             .endl() + "precision highp float;"

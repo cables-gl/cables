@@ -22,10 +22,23 @@ tex.set(CGL.Texture.getEmptyTexture(cgl));
 
 op.setPortGroup("Size", [useVPSize, width, height, aspect]);
 
-// todo why does it only work when we render a mesh before>?>?????
-// only happens with matcap material with normal map....
+const prevViewPort = [0, 0, 0, 0];
+
+fpTexture.setUiAttribs({ "title": "Pixelformat Float 32bit" });
+
+fpTexture.onChange =
+    depth.onChange =
+    clear.onChange =
+    tfilter.onChange =
+    twrap.onChange =
+    msaa.onChange = initFbLater;
 
 useVPSize.onChange = updateVpSize;
+
+render.onTriggered =
+    op.preRender = doRender;
+
+updateVpSize();
 
 function updateVpSize()
 {
@@ -38,17 +51,6 @@ function initFbLater()
 {
     reInitFb = true;
 }
-
-const prevViewPort = [0, 0, 0, 0];
-
-fpTexture.setUiAttribs({ "title": "Pixelformat Float 32bit" });
-
-fpTexture.onChange =
-    depth.onChange =
-clear.onChange =
-    tfilter.onChange =
-twrap.onChange =
-    msaa.onChange = initFbLater;
 
 function doRender()
 {
@@ -65,6 +67,11 @@ function doRender()
         let selectedWrap = CGL.Texture.WRAP_REPEAT;
         if (twrap.get() == "Clamp") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
         else if (twrap.get() == "Mirror") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+
+        let selectFilter = CGL.Texture.FILTER_NEAREST;
+        if (tfilter.get() == "nearest") selectFilter = CGL.Texture.FILTER_NEAREST;
+        else if (tfilter.get() == "linear") selectFilter = CGL.Texture.FILTER_LINEAR;
+        else if (tfilter.get() == "mipmap") selectFilter = CGL.Texture.FILTER_MIPMAP;
 
         if (fpTexture.get() && tfilter.get() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and HDR at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
@@ -89,6 +96,7 @@ function doRender()
                     "isFloatingPointTexture": fpTexture.get(),
                     "multisampling": ms,
                     "wrap": selectedWrap,
+                    "filter": selectFilter,
                     "depth": depth.get(),
                     "multisamplingSamples": msSamples,
                     "clear": clear.get()
@@ -98,10 +106,6 @@ function doRender()
         {
             fb = new CGL.Framebuffer(cgl, 8, 8, { "isFloatingPointTexture": fpTexture.get(), "clear": clear.get() });
         }
-
-        if (tfilter.get() == "nearest") fb.setFilter(CGL.Texture.FILTER_NEAREST);
-        else if (tfilter.get() == "linear") fb.setFilter(CGL.Texture.FILTER_LINEAR);
-        else if (tfilter.get() == "mipmap") fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
         texDepth.set(fb.getTextureDepth());
         reInitFb = false;
@@ -133,8 +137,3 @@ function doRender()
     tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     tex.set(fb.getTextureColor());
 }
-
-render.onTriggered = doRender;
-op.preRender = doRender;
-
-updateVpSize();
