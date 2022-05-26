@@ -88,9 +88,9 @@ op.setPortGroup("parallax correction", [
 let IrradianceSizeChanged = true;
 let PrefilteredSizeChanged = true;
 let IBLLUTSizeChanged = true;
-inIrradianceSize.onChange = () => { return IrradianceSizeChanged = true; };
-inPrefilteredSize.onChange = () => { return PrefilteredSizeChanged = true; };
-inIBLLUTSize.onChange = () => { return IBLLUTSizeChanged = true; };
+inIrradianceSize.onChange = () => { IrradianceSizeChanged = true; };
+inPrefilteredSize.onChange = () => { PrefilteredSizeChanged = true; };
+inIBLLUTSize.onChange = () => { IBLLUTSizeChanged = true; };
 
 // outputs
 const outTrigger = op.outTrigger("next");
