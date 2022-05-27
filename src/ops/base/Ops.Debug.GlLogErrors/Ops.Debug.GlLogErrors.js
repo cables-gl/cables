@@ -1,5 +1,7 @@
-const exec = op.inTrigger("Exec");
-const next = op.outTrigger("Next");
+const
+    exec = op.inTrigger("Exec"),
+    inLimit = op.inInt("Limit Error Logs Num", 1),
+    next = op.outTrigger("Next");
 
 const gl = op.patch.cgl.gl;
 const cgl = op.patch.cgl;
@@ -7,6 +9,7 @@ const cgl = op.patch.cgl;
 const originals = {};
 let shouldStart = true;
 let count = 0;
+let errorCount = 0;
 
 exec.onLinkChanged =
 next.onLinkChanged = () =>
@@ -35,6 +38,7 @@ function profile(func, funcName)
 {
     return function ()
     {
+        if (errorCount >= inLimit.get()) return;
         count++;
         // const start = performance.now(),
         let returnVal = func.apply(this, arguments);
@@ -67,6 +71,9 @@ function profile(func, funcName)
 
             const error2 = glGetError();
             console.log("err after", error2);
+            errorCount++;
+
+            if (errorCount == inLimit.get()) console.log("gl Errors stopping after " + inLimit.get() + " errors");
         }
 
         return returnVal;

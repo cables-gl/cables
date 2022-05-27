@@ -167,7 +167,7 @@ function rebuild()
 
     geom.setTexCoords(tc);
 
-    geom.verticesIndices = new Float32Array([
+    geom.verticesIndices = new Uint16Array([
         2, 1, 0,
         3, 1, 2
     ]);

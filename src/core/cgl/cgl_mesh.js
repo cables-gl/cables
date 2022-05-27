@@ -353,9 +353,9 @@ Mesh.prototype._setVertexNumbers = function (arr)
  */
 Mesh.prototype.setVertexIndices = function (vertIndices)
 {
-    if (!this._bufVerticesIndizes)
+    if (!vertIndices)
     {
-        this._log.warn("no bufVerticesIndizes");
+        this._log.warn("no bufVerticesIndizes: " + this._name);
         return;
     }
     if (vertIndices.length > 0)
@@ -379,9 +379,14 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         //     console.log("32bit vertex indices...");
         //     this.vertIndicesTyped = new Uint32Array(vertIndices);
         // }
+
+        if (vertIndices instanceof Float32Array)
+        {
+            this._log.warn("vertIndices float32Array: " + this._name);
+        }
+
         if (vertIndices instanceof Uint32Array)
         {
-            console.log("uint32arr....!!!!!");
             this.vertIndicesTyped = vertIndices;
             this._indexType = this._cgl.gl.UNSIGNED_INT;
         }
