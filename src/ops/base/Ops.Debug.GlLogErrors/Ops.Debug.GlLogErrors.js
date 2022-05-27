@@ -31,6 +31,16 @@ inShowHistory.onTriggered = () =>
     showHistory = true;
 };
 
+let glConsts = {};
+
+for (let i in op.patch.cgl.gl)
+{
+    if (i == i.toUpperCase() && typeof op.patch.cgl.gl[i] == "number")
+    {
+        glConsts[op.patch.cgl.gl[i]] = i;
+    }
+}
+
 function showCodeModal(title, code, type)
 {
     if (!CABLES.UI || !CABLES.UI.ModalDialog)
@@ -101,7 +111,7 @@ function getHistoryString(i)
         {
             let argStr = history[i].a[j];
 
-            // if (glConsts[history[i].a[j]]) argStr = glConsts[history[i].a[j]];
+            if (glConsts[history[i].a[j]]) argStr = "gl." + glConsts[history[i].a[j]];
             str += argStr;
         }
         else if (typ == "string")
@@ -114,8 +124,11 @@ function getHistoryString(i)
         }
         else
         {
-            // console.log(typeof history[i].a[j],history[i].a[j]);
-            let argStr = JSON.stringify(history[i].a[j]) + "";
+            let argStr = "";
+            if (history[i].a[j] instanceof Float32Array) argStr = "{Float32Array(" + history[i].a[j].length + ")}";
+            else if (history[i].a[j] instanceof Uint16Array) argStr = "{Uint16Array(" + history[i].a[j].length + ")}";
+            else if (history[i].a[j] instanceof Uint8Array) argStr = "{Uint8Array(" + history[i].a[j].length + ")}";
+            else argStr = JSON.stringify(history[i].a[j]) + "";
 
             if (argStr == "{}") argStr = history[i].a[j];
 
