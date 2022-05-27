@@ -24,6 +24,11 @@
                 "type": 0,
                 "name": "Limit Error Logs Num",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Stop trigger after limit",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

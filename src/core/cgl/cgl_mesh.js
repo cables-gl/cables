@@ -353,7 +353,7 @@ Mesh.prototype._setVertexNumbers = function (arr)
  */
 Mesh.prototype.setVertexIndices = function (vertIndices)
 {
-    if (!vertIndices)
+    if (!this._bufVerticesIndizes)
     {
         this._log.warn("no bufVerticesIndizes: " + this._name);
         return;
@@ -820,6 +820,7 @@ Mesh.prototype.dispose = function ()
 {
     if (this._bufVertexAttrib && this._bufVertexAttrib.buffer) this._cgl.gl.deleteBuffer(this._bufVertexAttrib.buffer);
     if (this._bufVerticesIndizes) this._cgl.gl.deleteBuffer(this._bufVerticesIndizes);
+    this._bufVerticesIndizes = null;
 
     this._disposeAttributes();
 };

@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Exec"),
     inLimit = op.inInt("Limit Error Logs Num", 1),
+    inStop = op.inBool("Stop trigger after limit", false),
     next = op.outTrigger("Next");
 
 const gl = op.patch.cgl.gl;
@@ -10,6 +11,7 @@ const originals = {};
 let shouldStart = true;
 let count = 0;
 let errorCount = 0;
+let history = [];
 
 exec.onLinkChanged =
 next.onLinkChanged = () =>
@@ -18,10 +20,14 @@ next.onLinkChanged = () =>
     shouldStart = true;
 };
 
+console.log("[gl context info]", op.patch.cgl.getInfo());
+
 exec.onTriggered = function ()
 {
     count = 0;
     if (shouldStart) start();
+
+    if (errorCount >= inLimit.get() && inStop.get()) return;
 
     next.trigger();
 
@@ -39,9 +45,13 @@ function profile(func, funcName)
     return function ()
     {
         if (errorCount >= inLimit.get()) return;
+
         count++;
         // const start = performance.now(),
         let returnVal = func.apply(this, arguments);
+
+        history.push({ "f": funcName, "a": arguments });
+
         // op.patch.cgl.gl.getError();
         const error = glGetError();
 
@@ -68,6 +78,42 @@ function profile(func, funcName)
             console.log((new Error()).stack);
 
             op.patch.printTriggerStack();
+            if (errorCount == 0)
+            {
+                for (let i = 0; i < history.length; i++)
+                {
+                    let str = history[i].f + "(";
+                    for (let j in history[i].a)
+                    {
+                        if (j != 0)str += ", ";
+
+                        const typ = typeof history[i].a[j];
+
+                        if (typ == "number" || typ == "boolean")
+                        {
+                            str += history[i].a[j];
+                        }
+                        else if (typ == "string")
+                        {
+                            let argStr = history[i].a[j] + "";
+                            if (argStr.length > 20)argStr = argStr.substr(0, 20) + "...";
+                            argStr = argStr.replace(/(\r\n|\n|\r)/gm, "");
+
+                            str += "\"" + argStr + "\"";
+                        }
+                        else
+                        {
+                            // console.log(typeof history[i].a[j],history[i].a[j]);
+                            let argStr = JSON.stringify(history[i].a[j]) + "";
+
+                            if (argStr.length > 20)argStr = argStr.substr(0, 20) + "...";
+                            str += argStr;
+                        }
+                    }
+                    str += ")";
+                    console.log("[GL] " + i + ": gl." + str);
+                }
+            }
 
             const error2 = glGetError();
             console.log("err after", error2);

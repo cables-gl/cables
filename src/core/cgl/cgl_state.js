@@ -142,12 +142,13 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
         // safari stuff..........
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) // && (navigator.userAgent.match(/iPhone/i))
         {
             this._log.warn("safari detected, adjusting canvas settings...");
             this.patch.config.canvas.antialias = false;
             this.patch.config.canvas.forceWebGl1 = true;
             this.patch.config.canvas.forceTextureNearest = true;
+            this.glUseHalfFloatTex = true;
         }
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
@@ -183,8 +184,8 @@ const Context = function (_patch)
         const dbgRenderInfo = this.gl.getExtension("WEBGL_debug_renderer_info");
         if (dbgRenderInfo)
         {
-            const webGlRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
-            if (webGlRenderer === "Google SwiftShader") this.glSlowRenderer = true;
+            this.glRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
+            if (this.glRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 
         this.gl.getExtension("OES_standard_derivatives");
@@ -197,7 +198,6 @@ const Context = function (_patch)
             this.emitEvent("webglcontextlost");
             this.aborted = true;
         });
-
 
         this.maxVaryingVectors = this.gl.getParameter(this.gl.MAX_VARYING_VECTORS);
         this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
@@ -214,6 +214,22 @@ const Context = function (_patch)
         }
 
         this.updateSize();
+    };
+
+    this.getInfo = function ()
+    {
+        return {
+            "glVersion": this.glVersion,
+            "glRenderer": this.glRenderer,
+            "glUseHalfFloatTex": this.glUseHalfFloatTex,
+            "maxVaryingVectors": this.maxVaryingVectors,
+            "maxTextureUnits": this.maxTextureUnits,
+            "maxTexSize": this.maxTexSize,
+            "maxUniformsFrag": this.maxUniformsFrag,
+            "maxUniformsVert": this.maxUniformsVert,
+            "maxSamples": this.maxSamples
+
+        };
     };
 
     this.updateSize = function ()
