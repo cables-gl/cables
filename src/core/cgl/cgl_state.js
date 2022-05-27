@@ -922,6 +922,7 @@ Context.prototype.popDepthTest = function ()
 Context.prototype._stackDepthWrite = [];
 Context.prototype.pushDepthWrite = function (b)
 {
+    b = b || false;
     this._stackDepthWrite.push(b);
     this.gl.depthMask(b);
 };
@@ -947,7 +948,7 @@ Context.prototype.stateDepthWrite = function ()
 Context.prototype.popDepthWrite = function ()
 {
     this._stackDepthWrite.pop();
-    this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length - 1]);
+    this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length - 1] || false);
 };
 
 

@@ -29,6 +29,10 @@
                 "type": 0,
                 "name": "Stop trigger after limit",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "show gl history"
             }
         ],
         "portsOut": [
