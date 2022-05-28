@@ -2,21 +2,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "Strength"
+                "type": 0,
+                "name": "Strength",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.toNormalMap"
+        "name": "Ops.Gl.TextureEffects.ToNormalMap"
     },
     "credits": [
         {
