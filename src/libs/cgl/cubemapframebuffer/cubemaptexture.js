@@ -74,21 +74,25 @@ class CubemapTexture
         {
             if (this._cgl.glVersion == 1)
             {
-                if (this._cgl.glUseHalfFloatTex)
-                {
-                    const ext = this._cgl.gl.getExtension("OES_texture_half_float");
-                    if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
+                // if (this._cgl.glUseHalfFloatTex)
+                // {
+                //     const ext = this._cgl.gl.getExtension("OES_texture_half_float");
+                //     if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
 
-                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
-                }
-                else
-                {
-                    const ext = this._cgl.gl.getExtension("OES_texture_float");
+                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
+                // }
+                // else
+                // {
+                //     const ext = this._cgl.gl.getExtension("OES_texture_float");
 
-                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-                }
+                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+                // }
+                this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
             }
-            else this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+            else
+            {
+                this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+            }
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
 
