@@ -239,7 +239,11 @@ Texture.prototype.setSize = function (w, h)
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA16F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
             }
             else
+            {
+                const ext = this._cgl.gl.getExtension("OES_texture_float");
+
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            }
         }
     }
     else if (this.textureType == Texture.TYPE_DEPTH)

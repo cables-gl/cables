@@ -11,7 +11,7 @@ void main()
 {
    vec4 pos=vec4(vPosition,  1.0);
 
-   texCoord=attrTexCoord;
+   texCoord=vec2(attrTexCoord.x,(1.0-attrTexCoord.y));
 
    gl_Position = projMatrix * mvMatrix * pos;
 }

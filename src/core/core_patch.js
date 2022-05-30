@@ -151,6 +151,9 @@ const Patch = function (cfg)
     }
 
     console.log("made with https://cables.gl"); // eslint-disable-line
+
+    console.log("patch config", this.config.canvas);
+    console.log("cgl getInfo", this.cgl.getInfo());
 };
 
 Patch.prototype.isPlaying = function ()
