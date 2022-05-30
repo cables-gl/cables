@@ -7,9 +7,9 @@ let matrix = op.addOutPort(new CABLES.Port(this, "matrix", CABLES.OP_PORT_TYPE_A
 
 render.onTriggered = function ()
 {
-    mat4.copy(m, cgl.pMatrix);
+    // mat4.copy(m, cgl.pMatrix);
     matrix.set(null);
-    matrix.set(m);
+    matrix.set(cgl.pMatrix);
     trigger.trigger();
 };
 

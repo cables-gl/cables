@@ -50,6 +50,7 @@ function update()
         {
             node = cgl.frameStore.currentScene.nodes[i];
             outFound.set(true);
+            // console.log(node);
         }
     }
 
@@ -81,7 +82,9 @@ function update()
     if (!inSceneTime.get())
         for (let i = 0; i < gltf.nodes.length; i++)
             if (!gltf.nodes[i].isChild)
+            {
                 gltf.nodes[i].render(cgl, false, true, true, false, false, time);
+            }
 
     node.render(cgl, true, false, true, false, true, time);
 
