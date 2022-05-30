@@ -154,6 +154,17 @@ const Patch = function (cfg)
 
     console.log("patch config", this.config.canvas);
     console.log("cgl getInfo", this.cgl.getInfo());
+
+    // console.log("checking extention OES_texture_half_float", this.cgl.gl.getExtension("OES_texture_half_float"));
+    // console.log("checking extention OES_texture_half_float_linear", this.cgl.gl.getExtension("OES_texture_half_float_linear"));
+    // console.log("checking extention OES_texture_float_linear", this.cgl.gl.getExtension("OES_texture_float_linear"));
+
+    // console.log("checking extention EXT_color_buffer_float", this.cgl.gl.getExtension("EXT_color_buffer_float"));
+    // const cbhf = this.cgl.gl.getExtension("EXT_color_buffer_half_float");
+    // console.log("checking extention EXT_color_buffer_half_float", cbhf);
+
+    // console.log("RGBA16F_EXT", cbhf.RGBA16F_EXT);
+    // console.log("RGBA16F_EXT", this.cgl.gl.RGBA16F_EXT);
 };
 
 Patch.prototype.isPlaying = function ()
