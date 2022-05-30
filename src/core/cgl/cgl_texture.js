@@ -195,9 +195,11 @@ Texture.prototype.setSize = function (w, h)
 
     const uarr = null;
 
+    if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
+
     if (
         this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
-         (!this._cgl.gl.getExtension("OES_texture_float_linear"))
+        (!this._cgl.gl.getExtension("OES_texture_float_linear"))
     )
     {
         console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
@@ -226,7 +228,19 @@ Texture.prototype.setSize = function (w, h)
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
             }
         }
-        else this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+        else
+        {
+            if (this._cgl.glUseHalfFloatTex)
+            {
+                // const ext = this._cgl.gl.getExtension("OES_texture_half_float");
+                // if (!ext) throw new Error("no half float texture extension");
+
+                console.log("half float", this._cgl.gl.RGBA16F, this._cgl.gl.HALF_FLOAT);
+                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA16F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
+            }
+            else
+                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+        }
     }
     else if (this.textureType == Texture.TYPE_DEPTH)
     {

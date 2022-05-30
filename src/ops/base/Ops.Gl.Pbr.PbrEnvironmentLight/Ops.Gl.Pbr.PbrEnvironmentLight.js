@@ -88,9 +88,9 @@ op.setPortGroup("parallax correction", [
 let IrradianceSizeChanged = true;
 let PrefilteredSizeChanged = true;
 let IBLLUTSizeChanged = true;
-inIrradianceSize.onChange = () => IrradianceSizeChanged = true;
-inPrefilteredSize.onChange = () => PrefilteredSizeChanged = true;
-inIBLLUTSize.onChange = () => IBLLUTSizeChanged = true;
+inIrradianceSize.onChange = () => { IrradianceSizeChanged = true; };
+inPrefilteredSize.onChange = () => { PrefilteredSizeChanged = true; };
+inIBLLUTSize.onChange = () => { IBLLUTSizeChanged = true; };
 
 // outputs
 const outTrigger = op.outTrigger("next");
@@ -233,14 +233,18 @@ function capturePrefilteredCubemap(size)
     else
     {
         PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-            "isFloatingPointTexture": true, // TODO
+            "isFloatingPointTexture": false, // should be true, but not possible :/
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
     }
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
-    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
+
+    // console.log("cubemap", cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+    if (cgl.gl.TEXTURE_WRAP_R)cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
+
+
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP); // make sure memory is assigned for mips

@@ -55,5 +55,15 @@
         "name": "Ops.Dev.GeometryExtrude"
     },
     "authorName": "pandur",
-    "created": 1647367985009
+    "created": 1647367985009,
+    "summary": "",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    }
 }

@@ -181,7 +181,11 @@ class CubemapFramebuffer
 
         this.texture.setSize(this.width, this.height);
 
-        if (!this._cgl.gl.isFramebuffer(this._framebuffer)) throw new Error("Invalid framebuffer");
+        if (!this._cgl.gl.isFramebuffer(this._framebuffer))
+        {
+            console.log("invalid framebuffer...");
+            // throw new Error("Invalid framebuffer");
+        }
 
 
         // * NOTE: if we check for the error in Safari, we get error code 36059 aka 0x8CDB

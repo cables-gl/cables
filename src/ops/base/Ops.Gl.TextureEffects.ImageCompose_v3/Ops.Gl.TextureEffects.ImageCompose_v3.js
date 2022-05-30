@@ -15,7 +15,8 @@ const
     outWidth = op.outNumber("Texture Width"),
     outHeight = op.outNumber("Texture Height");
 
-op.setPortGroup("Texture Settings", [inSize, width, height, inWrap, inFilter, inPixel]);
+op.setPortGroup("Texture Size", [inSize, width, height]);
+op.setPortGroup("Texture Parameters", [inWrap, inFilter, inPixel]);
 
 const prevViewPort = [0, 0, 0, 0];
 let effect = null;
@@ -152,7 +153,7 @@ function updateUi()
     height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
     if (tex)
-        if (getFloatingPoint() && getFilter() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
+        if (getFloatingPoint() && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
 
     updateResolutionInfo();

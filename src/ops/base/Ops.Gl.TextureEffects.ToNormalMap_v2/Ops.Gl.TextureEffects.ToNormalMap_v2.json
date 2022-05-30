@@ -9,6 +9,11 @@
                 "type": 0,
                 "name": "Strength",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Step Multiplier",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -17,7 +22,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.ToNormalMap"
+        "name": "Ops.User.pandur.ToNormalMapV2"
     },
     "credits": [
         {
@@ -26,11 +31,10 @@
             "url": "https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11"
         }
     ],
-    "updated": 1510252742729,
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
-    "id": "a9aba612-dc72-4108-a6fb-f0292463a186",
-    "created": 1510252712035,
+    "id": "5dfb2856-b589-4bd9-8f4e-b518da115d11",
+    "created": 1653732124735,
     "summary": "Convert a black and white map to a normal map",
     "docs": {
         "ports": []
@@ -40,6 +44,16 @@
             "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
             "author": "pandur",
             "date": 1560333507524
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ToNormalMap",
+            "author": "pandur",
+            "date": 1653732124735
+        },
+        {
+            "message": "Ops.User.pandur.ToNormalMapV2 renamed to Ops.Gl.TextureEffects.ToNormalMap_v2",
+            "author": "pandur",
+            "date": 1653733124018
         }
     ],
     "todos": [
