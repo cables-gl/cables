@@ -225,7 +225,7 @@ Texture.prototype.setSize = function (w, h)
             }
             else
             {
-                const ext = this._cgl.gl.getExtension("OES_texture_float");
+                this._cgl.gl.getExtension("OES_texture_float");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
             }
@@ -246,7 +246,9 @@ Texture.prototype.setSize = function (w, h)
             }
             else
             {
-                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+                this._cgl.gl.getExtension("EXT_color_buffer_float");
+                this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
             }
