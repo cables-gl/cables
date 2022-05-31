@@ -929,7 +929,6 @@ Texture.FILTER_NEAREST = 0;
 Texture.FILTER_LINEAR = 1;
 Texture.FILTER_MIPMAP = 2;
 
-
 Texture.WRAP_REPEAT = 0;
 Texture.WRAP_MIRRORED_REPEAT = 1;
 Texture.WRAP_CLAMP_TO_EDGE = 2;

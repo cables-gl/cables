@@ -192,7 +192,7 @@ function captureIrradianceCubemap(size)
         IrradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
             "isFloatingPointTexture": true, // TODO
             "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
-            "wrap": CGL.Texture.WRAP_CLAMP
+            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
     }
 

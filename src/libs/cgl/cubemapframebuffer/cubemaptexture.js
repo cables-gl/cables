@@ -59,12 +59,12 @@ class CubemapTexture
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
 
-        console.log("this.textureType", this.textureType);
-        if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
-        {
-            console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
-            this.filter = CGL.Texture.FILTER_NEAREST;
-        }
+        // console.log("this.textureType", this.textureType);
+        // if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
+        // {
+        //     console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
+        //     this.filter = CGL.Texture.FILTER_NEAREST;
+        // }
 
         this._setFilter();
 
