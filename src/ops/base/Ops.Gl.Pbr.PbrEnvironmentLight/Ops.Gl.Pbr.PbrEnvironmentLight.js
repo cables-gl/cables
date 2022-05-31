@@ -278,7 +278,6 @@ function capturePrefilteredCubemap(size)
         captureFBO.renderEnd();
     }
     captureFBO.delete();
-    PrefilteredFrameBuffer.updateMipMap();
     cgl.setTexture(0, null);
 
     outTexPrefiltered.set(null);
