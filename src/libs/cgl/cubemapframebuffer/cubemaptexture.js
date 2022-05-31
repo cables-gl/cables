@@ -136,6 +136,10 @@ class CubemapTexture
                 this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.MIRRORED_REPEAT);
                 this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.MIRRORED_REPEAT);
             }
+            else
+            {
+                throw new Error("[CubemapTexture] unknown texture filter!" + this.filter);
+            }
 
             if (this.filter == CGL.Texture.FILTER_NEAREST)
             {
@@ -154,8 +158,7 @@ class CubemapTexture
             }
             else
             {
-                console.log("unknown texture filter!", this.filter);
-                throw new Error("unknown texture filter!" + this.filter);
+                throw new Error("[CubemapTexture] unknown texture filter!" + this.filter);
             }
         }
     }
