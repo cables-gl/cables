@@ -198,6 +198,7 @@ Texture.prototype.setSize = function (w, h)
     if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
 
     if (
+        this._cgl.glVersion == 1 &&
         this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
         (!this._cgl.gl.getExtension("OES_texture_float_linear"))
     )
@@ -217,13 +218,14 @@ Texture.prototype.setSize = function (w, h)
             if (this._cgl.glUseHalfFloatTex)
             {
                 const ext = this._cgl.gl.getExtension("OES_texture_half_float");
-                if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
+                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+                if (!ext) throw new Error("no half float texture extension");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
             }
             else
             {
-                const ext = this._cgl.gl.getExtension("OES_texture_float");
+                this._cgl.gl.getExtension("OES_texture_float");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
             }
@@ -232,14 +234,24 @@ Texture.prototype.setSize = function (w, h)
         {
             if (this._cgl.glUseHalfFloatTex)
             {
-                // const ext = this._cgl.gl.getExtension("OES_texture_half_float");
-                // if (!ext) throw new Error("no half float texture extension");
+                const ext = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+                if (!ext) throw new Error("no half float texture extension");
 
                 console.log("half float", this._cgl.gl.RGBA16F, this._cgl.gl.HALF_FLOAT);
-                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA16F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
+
+                console.log("half float", this._cgl.gl.HALF_FLOAT);
+                console.log("half float", this._cgl.gl.RGBA16F);
+
+                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
             }
             else
+            {
+                this._cgl.gl.getExtension("EXT_color_buffer_float");
+                this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            }
         }
     }
     else if (this.textureType == Texture.TYPE_DEPTH)
