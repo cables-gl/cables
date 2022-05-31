@@ -314,7 +314,7 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this._fromData = true;
     this.deleted = false;
 
-    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
+    if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
@@ -325,6 +325,8 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 
     this._setFilter();
     this.updateMipMap();
+
+    if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
     this._cgl.gl.bindTexture(this.texTarget, null);
