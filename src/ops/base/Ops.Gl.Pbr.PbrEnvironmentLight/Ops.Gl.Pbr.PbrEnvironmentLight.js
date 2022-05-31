@@ -161,7 +161,7 @@ const uniformPrefilteringInfo = new CGL.Uniform(PrefilteringShader, "2f", "filte
 PrefilteringShader.setSource(attachments.prefiltering_vert, attachments.prefiltering_frag);
 
 const IBLLUTShader = new CGL.Shader(cgl, "IBLLUTShader");
-// IBLLUTShader.offScreenPass = true;
+IBLLUTShader.offScreenPass = true;
 IBLLUTShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 IBLLUTShader.setSource(attachments.IBLLUT_vert, attachments.IBLLUT_frag);
 
