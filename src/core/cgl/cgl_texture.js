@@ -324,12 +324,9 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
 
     this._setFilter();
-
-
     this.updateMipMap();
 
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
-
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
@@ -352,6 +349,7 @@ Texture.prototype.updateMipMap = function ()
  */
 Texture.prototype.initTexture = function (img, filter)
 {
+    this._cgl.printError("before initTexture");
     this._cgl.checkFrameStarted("texture inittexture");
     this._fromData = false;
     // if(filter) this.unpackAlpha=filter.unpackAlpha||this.unpackAlpha;
@@ -385,6 +383,7 @@ Texture.prototype.initTexture = function (img, filter)
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
 
     this.getInfoOneLine();
+    this._cgl.printError("initTexture");
 };
 
 /**
@@ -497,6 +496,8 @@ Texture.prototype.getInfo = function ()
 
 Texture.prototype._setFilter = function ()
 {
+    this._cgl.printError("before _setFilter");
+
     if (!this._fromData)
     {
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
@@ -575,6 +576,7 @@ Texture.prototype._setFilter = function ()
         }
     }
     this.getInfoOneLine();
+    this._cgl.printError("_setFilter");
 };
 
 

@@ -26,12 +26,14 @@ const Context = function (_patch)
     this.clearCanvasDepth = true;
     this.patch = _patch;
     this.debugOneFrame = false;
+    this.checkGlErrors = true; // true is slow
 
     this.maxTextureUnits = 0;
     this.maxVaryingVectors = 0;
     this.currentProgram = null;
     this._hadStackError = false;
     this.glSlowRenderer = false;
+    this._isSafariCrap = false;
 
     this.temporaryTexture = null;
     this.frameStore = {};
@@ -144,14 +146,14 @@ const Context = function (_patch)
         // safari stuff..........
         if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) // && (navigator.userAgent.match(/iPhone/i))
         {
-            this._log.warn("safari detected, adjusting canvas settings...");
-            this.patch.config.canvas.antialias = false;
-            this.patch.config.glslPrecision = "highp";
+            this._isSafariCrap = true;
+            // this._log.warn("safari detected, adjusting canvas settings...");
+            // this.patch.config.canvas.antialias = false;
+            // this.patch.config.glslPrecision = "highp";
             // this.patch.config.canvas.forceWebGl1 = true;
             // this.patch.config.canvas.forceTextureNearest = true;
             // this.glUseHalfFloatTex = true;
         }
-
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
@@ -658,6 +660,7 @@ const Context = function (_patch)
 
     this.printError = function (str)
     {
+        if (!this.checkGlErrors) return;
         let found = false;
         let error = this.gl.getError();
 

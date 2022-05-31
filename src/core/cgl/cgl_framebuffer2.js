@@ -12,6 +12,8 @@ const Framebuffer2 = function (cgl, w, h, options)
     this.Framebuffer2FinalFramebuffer = null;
     this._cgl = cgl;
 
+    this._cgl.printError("before framebuffer2 constructor");
+
     this._width = 0;
     this._height = 0;
 
@@ -88,9 +90,9 @@ const Framebuffer2 = function (cgl, w, h, options)
 
     if (cgl.aborted) return;
 
-    // this._cgl.printError("fb2 before size");
-
     this.setSize(w || defaultTexSize, h || defaultTexSize);
+
+    this._cgl.printError("framebuffer2 constructor");
 };
 
 Framebuffer2.prototype.getWidth = function ()
@@ -203,9 +205,22 @@ Framebuffer2.prototype.setSize = function (w, h)
             // else
             {
                 const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+                const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
+                if (ext3)console.log("ext3", ext3);
+                if (extcbl)console.log("extcbl", extcbl);
+                if (extcb)console.log("extcb", extcb);
+
+                console.log("this._cgl.gl.RGBA32F", this._cgl.gl.RGBA32F);
                 if (this._options.multisampling && this._options.multisamplingSamples) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
-                else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
+                else
+                {
+                    let internFormat = this._cgl.gl.RGBA32F;
+                    if (this._cgl._isSafariCrap) internFormat = this._cgl.gl.RGBA16F;
+
+                    this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, internFormat, this._width, this._height);
+                }
             }
         }
         else if (this._options.multisampling && this._options.multisamplingSamples)

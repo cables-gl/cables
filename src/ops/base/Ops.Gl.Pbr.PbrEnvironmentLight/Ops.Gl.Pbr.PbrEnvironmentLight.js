@@ -161,7 +161,7 @@ const uniformPrefilteringInfo = new CGL.Uniform(PrefilteringShader, "2f", "filte
 PrefilteringShader.setSource(attachments.prefiltering_vert, attachments.prefiltering_frag);
 
 const IBLLUTShader = new CGL.Shader(cgl, "IBLLUTShader");
-IBLLUTShader.offScreenPass = true;
+// IBLLUTShader.offScreenPass = true;
 IBLLUTShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 IBLLUTShader.setSource(attachments.IBLLUT_vert, attachments.IBLLUT_frag);
 
@@ -221,18 +221,20 @@ function captureIrradianceCubemap(size)
 
 function capturePrefilteredCubemap(size)
 {
-    let captureFBO = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
+    size = Number(size);
+    let captureFBO = new CGL.CubemapFramebuffer(cgl, size, size, {
         // "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_LINEAR,
-        "wrap": CGL.Texture.WRAP_CLAMP
+        "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
+
     if (PrefilteredFrameBuffer)
     {
-        PrefilteredFrameBuffer.setSize(Number(size), Number(size));
+        PrefilteredFrameBuffer.setSize(size, size);
     }
     else
     {
-        PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
+        PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
             // "isFloatingPointTexture": false, // should be true, but not possible :/
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
@@ -240,16 +242,13 @@ function capturePrefilteredCubemap(size)
     }
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
-
-    console.log("cubemap TEXTURE_WRAP_R", cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
-
 
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP); // make sure memory is assigned for mips
 
-    maxMipLevels = 1.0 + Math.floor(Math.log(Number(size)) * 1.44269504088896340736);
+    maxMipLevels = 1.0 + Math.floor(Math.log(size) * 1.44269504088896340736);
     outMipLevels.set(maxMipLevels);
     prefilteringInfo[0] = size;
     prefilteringInfo[1] = maxMipLevels;
@@ -260,7 +259,7 @@ function capturePrefilteredCubemap(size)
 
     for (let mip = 0; mip <= maxMipLevels; ++mip)
     {
-        let currentMipSize = Number(size) * Math.pow(0.5, mip);
+        let currentMipSize = size * Math.pow(0.5, mip);
         let roughness = mip / (maxMipLevels - 1);
         uniformPrefilteringRoughness.setValue(roughness);
 
@@ -279,6 +278,7 @@ function capturePrefilteredCubemap(size)
         captureFBO.renderEnd();
     }
     captureFBO.delete();
+    PrefilteredFrameBuffer.updateMipMap();
     cgl.setTexture(0, null);
 
     outTexPrefiltered.set(null);
@@ -287,9 +287,10 @@ function capturePrefilteredCubemap(size)
 
 function computeIBLLUT(size)
 {
+    size = Number(size);
     if (IBLLUTFrameBuffer)
     {
-        IBLLUTFrameBuffer.setSize(Number(size), Number(size));
+        IBLLUTFrameBuffer.setSize(size, size);
     }
     else
     {
@@ -303,6 +304,7 @@ function computeIBLLUT(size)
         }
         else
         {
+            console.log("FB2");
             IBLLUTFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
                 "isFloatingPointTexture": true,
                 "filter": CGL.Texture.FILTER_LINEAR,
@@ -313,12 +315,9 @@ function computeIBLLUT(size)
 
     cgl.frameStore.renderOffscreen = true;
     IBLLUTFrameBuffer.renderStart(cgl);
-
     fullscreenRectangle.render(IBLLUTShader);
-
     IBLLUTFrameBuffer.renderEnd();
     cgl.frameStore.renderOffscreen = false;
-
     outTexIBLLUT.set(IBLLUTFrameBuffer.getTextureColor());
 }
 
