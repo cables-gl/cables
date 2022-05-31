@@ -233,6 +233,8 @@ function updateTexture(force)
         cgl.gl.texSubImage2D(cgl.gl.TEXTURE_2D, 0, 0, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     }
 
+    if (flip.get()) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
+
     firstTime = false;
 
     textureOut.set(tex);

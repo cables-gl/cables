@@ -77,6 +77,8 @@ function updateTexture()
     cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
 
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+
+    if (flip.get()) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
     if (!canceled) timeout = setTimeout(updateTexture, 1000 / fps.get());
