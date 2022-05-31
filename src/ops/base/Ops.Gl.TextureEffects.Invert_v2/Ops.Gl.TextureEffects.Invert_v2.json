@@ -1,5 +1,5 @@
 {
-    "summary": "invert image colors",
+    "summary": "Invert image colors",
     "layout": {
         "portsIn": [
             {
@@ -75,5 +75,10 @@
             "author": "pandur",
             "date": 1652093157669
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

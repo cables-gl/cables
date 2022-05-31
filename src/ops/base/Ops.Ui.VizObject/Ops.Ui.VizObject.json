@@ -28,5 +28,15 @@
         ],
         "portsOut": [],
         "name": "Ops.Dev.VizObject"
+    },
+    "summary": "Show information about any object for patch debugging",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "PKAmq4",
+    "docs": {
+        "ports": []
     }
 }

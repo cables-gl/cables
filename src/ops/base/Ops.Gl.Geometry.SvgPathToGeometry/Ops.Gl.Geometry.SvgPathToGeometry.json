@@ -53,7 +53,7 @@
     "libs": [
         "earcut.js"
     ],
-    "summary": "",
+    "summary": "Generate a SVG path string of a string using an opentype font",
     "issues": "",
     "caniusequery": "",
     "collections": null,

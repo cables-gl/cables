@@ -31,7 +31,7 @@
     },
     "authorName": "pandur",
     "created": 1637676964149,
-    "summary": "displays input string on the patchfield",
+    "summary": "Displays input string on the patchfield",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -41,5 +41,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gkySnR"
+    "exampleProjectId": "gkySnR",
+    "caniusequery": ""
 }

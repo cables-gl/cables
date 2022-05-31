@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.GeometryExtrude renamed to Ops.Dev.GeometryExtrude",
             "author": "pandur",
             "date": 1647418104010
+        },
+        {
+            "message": "Ops.Dev.GeometryExtrude renamed to Ops.Gl.Geometry.GeometryExtrude",
+            "author": "pandur",
+            "date": 1654009885331
         }
     ],
     "layout": {
@@ -56,7 +61,7 @@
     },
     "authorName": "pandur",
     "created": 1647367985009,
-    "summary": "",
+    "summary": "basic extrusion of flat geometry",
     "issues": "",
     "caniusequery": "",
     "collections": null,

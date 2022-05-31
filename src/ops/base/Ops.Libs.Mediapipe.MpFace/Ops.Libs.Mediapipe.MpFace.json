@@ -111,5 +111,15 @@
             }
         ],
         "name": "Ops.Dev.Mediapipe.MpFace"
+    },
+    "summary": "Get face mesh from webcam/video using mediapipe library",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "wznlp4",
+    "docs": {
+        "ports": []
     }
 }

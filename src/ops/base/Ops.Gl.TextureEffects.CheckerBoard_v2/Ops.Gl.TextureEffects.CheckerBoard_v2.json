@@ -57,7 +57,7 @@
         ],
         "name": "Ops.Dev.CheckerBoardV2"
     },
-    "summary": "draw a checkerboard pattern",
+    "summary": "Draw a checkerboard pattern",
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "7edfae81-f092-413f-a2a0-b109fdffa61d",
@@ -93,5 +93,6 @@
             "author": "pandur",
             "date": 1652093049579
         }
-    ]
+    ],
+    "caniusequery": ""
 }

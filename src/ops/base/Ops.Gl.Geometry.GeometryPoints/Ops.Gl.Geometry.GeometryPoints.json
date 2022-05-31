@@ -42,13 +42,16 @@
         ],
         "name": "Ops.Gl.Geometry.GeometryPoints"
     },
-    "summary": "get vertices of a geometry as array3x (vertex vertices)",
+    "summary": "Get vertices of a geometry as array3x (vertex vertices)",
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
     "collections": [
         "pointArrays"
     ],
-    "exampleProjectId": "4VpJz6"
+    "exampleProjectId": "4VpJz6",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": []
 }

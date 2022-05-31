@@ -46,5 +46,15 @@
             }
         ],
         "name": "Ops.User.pandur.ArrayPack3Simple"
+    },
+    "summary": "Packs 3 individual arrays into an array3 - without needing a trigger",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }

@@ -61,7 +61,7 @@
         ],
         "name": "Ops.User.pandur.KaleidoscopeV2"
     },
-    "summary": "kaleidoscope effect",
+    "summary": "Kaleidoscope effect",
     "docs": {
         "ports": []
     },
@@ -90,5 +90,10 @@
             "date": 1652093373646
         }
     ],
-    "exampleProjectId": "n4DaW6"
+    "exampleProjectId": "n4DaW6",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

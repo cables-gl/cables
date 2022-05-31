@@ -66,5 +66,15 @@
             }
         ],
         "name": "Ops.Dev.MpHand"
+    },
+    "summary": "Get points and lines for left/right hand from mediapipe",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "a5xfp4",
+    "docs": {
+        "ports": []
     }
 }

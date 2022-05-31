@@ -91,7 +91,7 @@
         ],
         "name": "Ops.Gl.MediaRecorder"
     },
-    "summary": "record the renderer-output to video",
+    "summary": "Record the renderer-output to video",
     "issues": "",
     "collections": null,
     "relatedops": null,

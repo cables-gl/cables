@@ -5,42 +5,42 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "old min",
                 "group": "Input Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "old max",
                 "group": "Input Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "new min",
                 "group": "Output Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "new max",
                 "group": "Output Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Easing index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "result"
             }
         ],

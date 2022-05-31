@@ -50,7 +50,7 @@
     "authorName": "pandur",
     "id": "b720a2f5-5501-48ef-90de-94a280ba6fbd",
     "created": 1650522070431,
-    "summary": "directional blur effect",
+    "summary": "Directional blur effect",
     "docs": {
         "ports": []
     },
@@ -71,5 +71,10 @@
             "author": "pandur",
             "date": 1652093307627
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

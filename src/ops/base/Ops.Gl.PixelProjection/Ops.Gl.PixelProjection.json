@@ -81,7 +81,7 @@
         ],
         "name": "Ops.Gl.PixelProjection"
     },
-    "summary": "remaps world co-ordinates to a pixel co-ordinate system",
+    "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -112,5 +112,6 @@
             }
         ]
     },
-    "exampleProjectId": "ND9kCU"
+    "exampleProjectId": "ND9kCU",
+    "caniusequery": ""
 }

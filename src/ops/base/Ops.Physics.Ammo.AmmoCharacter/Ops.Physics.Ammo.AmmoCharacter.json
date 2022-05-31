@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.AmmoCharacter renamed to Ops.Dev.AmmoCharacter",
             "author": "pandur",
             "date": 1647283153556
+        },
+        {
+            "message": "Ops.Dev.AmmoCharacter renamed to Ops.Physics.Ammo.AmmoCharacter",
+            "author": "pandur",
+            "date": 1654010327919
         }
     ],
     "layout": {
