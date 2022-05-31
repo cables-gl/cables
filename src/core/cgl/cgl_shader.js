@@ -508,6 +508,7 @@ Shader.prototype.compile = function ()
             .endl() + "// vertex shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " sampler2D;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
@@ -521,6 +522,7 @@ Shader.prototype.compile = function ()
             .endl() + "// fragment shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " sampler2D;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
@@ -1372,6 +1374,13 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
     {
         this._cgl.gl.validateProgram(program);
 
+        if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.VALIDATE_STATUS))
+        {
+            // validation failed
+            console.log("shaderprogram validation failed...");
+            console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
+        }
+
         if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
         {
             this._hasErrors = true;
@@ -1379,8 +1388,8 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
             this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
             this._log.error(this._name + " shader linking fail...");
 
-            console.log("srcFrag", fstr);
-            console.log("srcVert", vstr);
+            // console.log("srcFrag", fstr);
+            // console.log("srcVert", vstr);
             console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
 
             console.log("--------------------------------------");

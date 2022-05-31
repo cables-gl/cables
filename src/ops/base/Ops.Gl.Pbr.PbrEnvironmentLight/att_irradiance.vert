@@ -1,5 +1,8 @@
 precision highp float;
 precision highp int;
+precision highp sampler2D;
+
+
 {{MODULES_HEAD}}
 IN vec3 vPosition;
 IN float attrVertIndex;

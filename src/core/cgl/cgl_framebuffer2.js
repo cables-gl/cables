@@ -192,8 +192,21 @@ Framebuffer2.prototype.setSize = function (w, h)
 
         if (this._options.isFloatingPointTexture)
         {
-            if (this._options.multisampling && this._options.multisamplingSamples) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
-            else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
+            // if (this._cgl.glUseHalfFloatTex)
+            // {
+            //     // const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+            //     const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+            //     // const extcb2 = this._cgl.gl.getExtension("EXT_color_buffer_half_float_linear");
+
+            //     this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
+            // }
+            // else
+            {
+                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+
+                if (this._options.multisampling && this._options.multisamplingSamples) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
+                else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
+            }
         }
         else if (this._options.multisampling && this._options.multisamplingSamples)
         {
@@ -224,6 +237,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     // depth renderbuffer
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
+
 
     let depthType = this._cgl.gl.DEPTH_COMPONENT32F;
 

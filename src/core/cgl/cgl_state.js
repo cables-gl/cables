@@ -146,10 +146,12 @@ const Context = function (_patch)
         {
             this._log.warn("safari detected, adjusting canvas settings...");
             this.patch.config.canvas.antialias = false;
-            this.patch.config.canvas.forceWebGl1 = true;
-            this.patch.config.canvas.forceTextureNearest = true;
-            this.glUseHalfFloatTex = true;
+            this.patch.config.glslPrecision = "highp";
+            // this.patch.config.canvas.forceWebGl1 = true;
+            // this.patch.config.canvas.forceTextureNearest = true;
+            // this.glUseHalfFloatTex = true;
         }
+
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
