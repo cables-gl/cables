@@ -69,7 +69,7 @@
         "portsOut": [],
         "name": "Ops.Ui.VizGraph"
     },
-    "summary": "displays graphs for the numbers on the input port in the patchfield",
+    "summary": "Displays graphs for the numbers on the input port in the patchfield",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -79,5 +79,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "4D2DnR"
+    "exampleProjectId": "4D2DnR",
+    "caniusequery": ""
 }

@@ -173,7 +173,7 @@
         ],
         "name": "Ops.Dev.Gl.Textures.NewWebcamTexture"
     },
-    "summary": "use your webcam camera as a texture",
+    "summary": "Use your webcam camera as a texture",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -185,10 +185,6 @@
                 "text": "update the output texture with the current webcam picture"
             },
             {
-                "name": "Start webcam",
-                "text": "initially start the webcam"
-            },
-            {
                 "name": "Generate Texture",
                 "text": "activate / inactivate genration of the output texture"
             },
@@ -197,24 +193,12 @@
                 "text": "index of webcam to use from available cameras"
             },
             {
-                "name": "Facing index",
-                "text": "face user or environment"
-            },
-            {
-                "name": "Facing",
-                "text": "face user or environment"
-            },
-            {
                 "name": "Requested Width",
                 "text": "request width from webcam"
             },
             {
                 "name": "Requested Height",
                 "text": "request height from webcam"
-            },
-            {
-                "name": "Flip",
-                "text": "flip output vertically"
             },
             {
                 "name": "Show HTML Element",
@@ -253,10 +237,6 @@
                 "text": "array of available devices"
             },
             {
-                "name": "Select device",
-                "text": "name of selected device"
-            },
-            {
                 "name": "Texture updated",
                 "text": "output trigger on updated texture"
             }
@@ -264,5 +244,7 @@
     },
     "coreLibs": [
         "cgl_copytexture"
-    ]
+    ],
+    "caniusequery": "",
+    "exampleProjectId": "iwaEwm"
 }

@@ -79,7 +79,7 @@
             "date": 1652867062756
         }
     ],
-    "summary": "transform vertices of a mesh via vertex shader",
+    "summary": "Transform vertices of a mesh via vertex shader",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -92,5 +92,6 @@
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-    "exampleProjectId": "u1iOhI"
+    "exampleProjectId": "u1iOhI",
+    "caniusequery": ""
 }

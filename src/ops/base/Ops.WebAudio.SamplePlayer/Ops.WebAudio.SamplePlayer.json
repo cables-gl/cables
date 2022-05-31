@@ -77,7 +77,7 @@
         ],
         "name": "Ops.WebAudio.SamplePlayer"
     },
-    "summary": "plays back one shot samples on trigger (useful for interaction sound)",
+    "summary": "Plays back one shot samples on trigger (useful for interaction sound)",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -91,10 +91,6 @@
             {
                 "name": "Play Sample",
                 "text": "Trigger to play sample"
-            },
-            {
-                "name": "Start Time",
-                "text": "where the sample should start (in ms)"
             },
             {
                 "name": "Offset",
@@ -118,5 +114,6 @@
             }
         ]
     },
-    "exampleProjectId": "iWzlls"
+    "exampleProjectId": "iWzlls",
+    "caniusequery": ""
 }

@@ -50,12 +50,14 @@
         ],
         "name": "Ops.Dev.MpPoseGetCoordinate"
     },
-    "summary": "",
+    "summary": "Get coordinates of specific body parts from mediapipe data",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "caniusequery": "",
+    "exampleProjectId": "uepop4"
 }

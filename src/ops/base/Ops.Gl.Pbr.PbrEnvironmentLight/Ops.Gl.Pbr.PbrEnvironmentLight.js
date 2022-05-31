@@ -72,7 +72,7 @@ const inPCboxMaxX = op.inFloat("Box max X", 1);
 const inPCboxMaxY = op.inFloat("Box max Y", 1);
 const inPCboxMaxZ = op.inFloat("Box max Z", 1);
 
-op.setPortGroup("parallax correction", [
+op.setPortGroup("Parallax Correction", [
     inUseParallaxCorrection,
     inPCOriginX,
     inPCOriginY,
@@ -364,6 +364,20 @@ function drawHelpers()
     cgl.popShader();
     cgl.popModelMatrix();
 }
+
+inUseParallaxCorrection.onChange = () =>
+{
+    const active = inUseParallaxCorrection.get();
+    inPCOriginX.setUiAttribs({ "greyout": !active });
+    inPCOriginY.setUiAttribs({ "greyout": !active });
+    inPCOriginZ.setUiAttribs({ "greyout": !active });
+    inPCboxMinX.setUiAttribs({ "greyout": !active });
+    inPCboxMinY.setUiAttribs({ "greyout": !active });
+    inPCboxMinZ.setUiAttribs({ "greyout": !active });
+    inPCboxMaxX.setUiAttribs({ "greyout": !active });
+    inPCboxMaxY.setUiAttribs({ "greyout": !active });
+    inPCboxMaxZ.setUiAttribs({ "greyout": !active });
+};
 
 // onTriggered
 inTrigger.onTriggered = function ()

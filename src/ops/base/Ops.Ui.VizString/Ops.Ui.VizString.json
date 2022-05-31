@@ -29,7 +29,7 @@
     },
     "authorName": "pandur",
     "created": 1637913011187,
-    "summary": "displays input string on the patchfield",
+    "summary": "Displays input string on the patchfield",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -39,5 +39,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "_5PAIR"
+    "exampleProjectId": "_5PAIR",
+    "caniusequery": ""
 }

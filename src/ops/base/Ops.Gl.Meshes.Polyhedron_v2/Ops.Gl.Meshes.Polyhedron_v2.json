@@ -29,7 +29,7 @@
         ],
         "name": "Ops.Gl.Meshes.Polyhedron_v2"
     },
-    "summary": "generate polyhedron meshes ",
+    "summary": "Generate polyhedron meshes ",
     "docs": {
         "ports": []
     },
@@ -45,5 +45,10 @@
             "date": 1646674582145
         }
     ],
-    "exampleProjectId": "VRG6Q6"
+    "exampleProjectId": "VRG6Q6",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

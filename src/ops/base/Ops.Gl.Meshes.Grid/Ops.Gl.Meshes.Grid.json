@@ -1,5 +1,5 @@
 {
-    "summary": "draw a simple grid of lines",
+    "summary": "Draw a simple grid of lines",
     "layout": {
         "portsIn": [
             {
@@ -36,5 +36,10 @@
     "authorName": "pandur",
     "id": "677a7c03-6885-46b4-8a64-e4ea54ee5d7f",
     "created": 1535149946140,
-    "exampleProjectId": "VxPlQ6"
+    "exampleProjectId": "VxPlQ6",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
