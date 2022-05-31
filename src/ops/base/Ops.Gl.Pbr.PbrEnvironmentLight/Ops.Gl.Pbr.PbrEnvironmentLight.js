@@ -191,7 +191,7 @@ function captureIrradianceCubemap(size)
     {
         IrradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
             "isFloatingPointTexture": true, // TODO
-            "filter": CGL.Texture.FILTER_POINT, // due to banding with rgbe
+            "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
             "wrap": CGL.Texture.WRAP_CLAMP
         });
     }
@@ -222,7 +222,7 @@ function captureIrradianceCubemap(size)
 function capturePrefilteredCubemap(size)
 {
     let captureFBO = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-        "isFloatingPointTexture": true,
+        // "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_CLAMP
     });
@@ -233,7 +233,7 @@ function capturePrefilteredCubemap(size)
     else
     {
         PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-            "isFloatingPointTexture": false, // should be true, but not possible :/
+            // "isFloatingPointTexture": false, // should be true, but not possible :/
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
@@ -241,8 +241,8 @@ function capturePrefilteredCubemap(size)
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
 
-    // console.log("cubemap", cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
-    if (cgl.gl.TEXTURE_WRAP_R)cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
+    console.log("cubemap TEXTURE_WRAP_R", cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
 
 
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);

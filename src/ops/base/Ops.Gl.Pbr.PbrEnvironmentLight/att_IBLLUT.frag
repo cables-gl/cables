@@ -1,5 +1,8 @@
 precision highp float;
 precision highp int;
+precision highp sampler2D;
+
+
 #ifndef WEBGL1
 #define NUM_SAMPLES 1024u
 #else

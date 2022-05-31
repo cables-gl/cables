@@ -54,7 +54,7 @@ class CubemapFramebuffer
         this._textureDepth = null;
 
         this._options = options || {
-            "isFloatingPointTexture": false
+            // "isFloatingPointTexture": false
         };
 
         this.name = this._options.name || "unknown cubemapframebuffer";
@@ -82,7 +82,7 @@ class CubemapFramebuffer
         this.texture = new CubemapTexture(this._cgl, {
             "width": this.width,
             "height": this.height,
-            "isFloatingPointTexture": true,
+            // "isFloatingPointTexture": true,
             "filter": this._options.filter,
             "wrap": this._options.wrap,
             "name": this.name + " cubemaptexture"
