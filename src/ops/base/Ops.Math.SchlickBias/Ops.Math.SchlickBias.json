@@ -40,5 +40,15 @@
             }
         ],
         "name": "Ops.User.pandur.SchlickGain"
+    },
+    "summary": "Custom easing curve via schlick bias and gain",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "FO9IG3",
+    "docs": {
+        "ports": []
     }
 }

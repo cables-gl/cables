@@ -58,11 +58,13 @@
         ],
         "name": "Ops.Dev.Mediapipe.FaceMesh"
     },
-    "summary": "Generate an animated geometry from MpFace Point Coordinates",
+    "summary": "Generate an animated geometry from MpFaceTracking Point Coordinates",
     "issues": "",
     "caniusequery": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpFaceTracking"
+    ],
     "youtubeids": [],
     "exampleProjectId": "by9Tq4",
     "docs": {

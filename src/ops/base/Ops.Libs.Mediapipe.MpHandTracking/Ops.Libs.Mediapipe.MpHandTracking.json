@@ -89,7 +89,8 @@
     "caniusequery": "",
     "collections": null,
     "relatedops": [
-        "Ops.Libs.Mediapipe.MpHand"
+        "Ops.Libs.Mediapipe.MpHand",
+        "Ops.Libs.Mediapipe.MpHandCoordinate"
     ],
     "youtubeids": [],
     "exampleProjectId": "a5xfp4",
