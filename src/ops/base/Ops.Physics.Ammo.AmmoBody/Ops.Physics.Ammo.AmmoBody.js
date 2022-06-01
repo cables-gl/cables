@@ -112,6 +112,7 @@ function setup()
     if (!tmpTrans)tmpTrans = new Ammo.btTransform();
     if (!transform)transform = new Ammo.btTransform();
     if (colShape)Ammo.destroy(colShape);
+    colShape = null;
 
     transform.setIdentity();
 

@@ -292,9 +292,9 @@ AmmoWorld.createConvexHullFromGeom = function (geom, numTris, scale)
 
     colShape.initializePolyhedralFeatures();
 
-    Ammo.destroy(_vec3_1);
-    Ammo.destroy(_vec3_2);
-    Ammo.destroy(_vec3_3);
+    // Ammo.destroy(_vec3_1);
+    // Ammo.destroy(_vec3_2);
+    // Ammo.destroy(_vec3_3);
 
     return colShape;
 };
