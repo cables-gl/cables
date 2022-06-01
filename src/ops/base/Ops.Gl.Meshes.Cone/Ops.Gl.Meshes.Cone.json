@@ -1,5 +1,5 @@
 {
-    "summary": "draw a cone",
+    "summary": "Draw a cone",
     "layout": {
         "portsIn": [
             {
@@ -87,5 +87,6 @@
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "fGA7W6"
+    "exampleProjectId": "fGA7W6",
+    "caniusequery": ""
 }

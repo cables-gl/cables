@@ -58,7 +58,7 @@
         ],
         "name": "Ops.User.pandur.ColorMapRange"
     },
-    "summary": "adjust image brightness and contrast",
+    "summary": "Adjust image brightness and contrast",
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "a1452720-dc08-4195-983b-7949aac33055",
@@ -78,5 +78,10 @@
             "author": "pandur",
             "date": 1652080444151
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

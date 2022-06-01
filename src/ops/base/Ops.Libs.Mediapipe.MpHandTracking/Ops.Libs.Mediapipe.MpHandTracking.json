@@ -1,5 +1,5 @@
 {
-    "id": "279774b0-9897-4f36-840e-5f823cfc988a",
+    "id": "5251e50f-abaf-4ca3-a809-61f8ca58ec35",
     "changelog": [
         {
             "message": "created op",
@@ -37,25 +37,20 @@
             "date": 1623913601812
         },
         {
-            "message": "cloned op from Ops.Dev.Mediapipe.MpHands",
+            "message": "Ops.Dev.Mediapipe.MpHands renamed to Ops.Dev.Mediapipe.MpHandTracking",
             "author": "pandur",
-            "date": 1640184895627
+            "date": 1640255004460
         },
         {
-            "message": "Ops.User.pandur.MpPose renamed to Ops.Dev.MpPose",
-            "author": "pandur",
-            "date": 1640190458007
-        },
-        {
-            "message": "Ops.Dev.MpPose renamed to Ops.Libs.Mediapipe.MpPose",
-            "author": "pandur",
-            "date": 1652089143509
+            "message": "Ops.Dev.Mediapipe.MpHandTracking renamed to Ops.Libs.Mediapipe.MpHandTracking",
+            "author": "stephan",
+            "date": 1654013381206
         }
     ],
     "authorName": "pandur",
-    "created": 1640184895626,
+    "created": 1608577908279,
     "libs": [
-        "mp_pose.js",
+        "mp_hands.js",
         "mp_camera_utils.js"
     ],
     "layout": {
@@ -67,61 +62,37 @@
             },
             {
                 "type": 0,
-                "name": "Model Complexity index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Smooth Landmarks",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Enable Segmentation",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Smooth Segmentation",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Min Detection Confidence",
+                "name": "Min Confidence Detect",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Min Tracking Confidence",
+                "name": "Min Confidence Tracking",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": 3,
-                "name": "Points"
-            },
-            {
-                "type": 3,
-                "name": "Landmarks"
-            },
-            {
-                "type": 3,
-                "name": "Lines"
+                "type": 2,
+                "name": "Result"
             },
             {
                 "type": 0,
-                "name": "Found",
+                "name": "Found Hands",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.MpPose"
+        "name": "Ops.Dev.Mediapipe.MpHandTracking"
     },
-    "summary": "",
+    "summary": "Get hand data from mediapipe library, use with MpHand",
     "issues": "",
+    "caniusequery": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpHand"
+    ],
     "youtubeids": [],
+    "exampleProjectId": "a5xfp4",
     "docs": {
         "ports": []
     }

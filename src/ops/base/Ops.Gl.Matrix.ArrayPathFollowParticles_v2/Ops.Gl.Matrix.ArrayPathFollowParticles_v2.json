@@ -49,7 +49,7 @@
         "name": "Ops.User.cables.ArrayPathFollowParticles2"
     },
     "author": "55d744634cdc152216eb9aad",
-    "authorName": "cables",
+    "authorName": "pandur",
     "id": "12a48cb2-a528-4498-8cda-18535af08f4a",
     "created": 1610105755288,
     "summary": "render lots of particles following a path/spline/array3x",

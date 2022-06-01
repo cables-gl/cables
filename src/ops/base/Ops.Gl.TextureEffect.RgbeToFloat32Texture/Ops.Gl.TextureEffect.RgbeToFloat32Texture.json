@@ -79,7 +79,7 @@
         ],
         "name": "Ops.Gl.Textures.RgbeToHdrTexture"
     },
-    "summary": "convert a RGBE texture to HDR/floating point texture",
+    "summary": "Convert a RGBE texture to HDR/floating point texture",
     "issues": "",
     "caniusequery": "",
     "collections": null,

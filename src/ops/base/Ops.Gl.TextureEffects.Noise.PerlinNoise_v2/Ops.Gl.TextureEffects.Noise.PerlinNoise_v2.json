@@ -105,7 +105,7 @@
         ],
         "name": "Ops.Dev.PerlinNoiseV2"
     },
-    "summary": "draw perlin noise into an image",
+    "summary": "Draw perlin noise into an image",
     "credits": [
         {
             "title": "GPU-Noise-Lib",
@@ -154,5 +154,6 @@
             "date": 1653285891591
         }
     ],
-    "exampleProjectId": "zfzmT6"
+    "exampleProjectId": "zfzmT6",
+    "caniusequery": ""
 }

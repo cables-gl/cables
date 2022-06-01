@@ -65,7 +65,7 @@
         ],
         "name": "Ops.Audio.MidiJsonNote_v2"
     },
-    "summary": "filter midiJson for notes",
+    "summary": "Filter MidiJson for notes",
     "docs": {
         "ports": []
     },
@@ -80,5 +80,11 @@
             "author": "pandur",
             "date": 1648128219030
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": ""
 }

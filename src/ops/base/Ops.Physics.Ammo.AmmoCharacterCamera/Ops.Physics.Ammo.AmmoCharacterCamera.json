@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.AmmoCharacterCamera renamed to Ops.Dev.AmmoCharacterCamera",
             "author": "pandur",
             "date": 1647541639855
+        },
+        {
+            "message": "Ops.Dev.AmmoCharacterCamera renamed to Ops.Physics.Ammo.AmmoCharacterCamera",
+            "author": "pandur",
+            "date": 1654010351437
         }
     ],
     "authorName": "pandur",

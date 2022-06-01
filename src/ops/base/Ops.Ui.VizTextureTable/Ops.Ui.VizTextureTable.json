@@ -44,5 +44,15 @@
         ],
         "portsOut": [],
         "name": "Ops.Dev.VizTextureTable"
+    },
+    "summary": "Show pixel colors of connected texture as a table, useful for debugging",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "kp6oq4",
+    "docs": {
+        "ports": []
     }
 }

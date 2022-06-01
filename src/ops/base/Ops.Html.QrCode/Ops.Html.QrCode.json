@@ -26,7 +26,7 @@
         ],
         "name": "Ops.User.pandur.QrCodeV2"
     },
-    "summary": "generate a qr code as a texture",
+    "summary": "Generate a qr code as a texture",
     "exampleProjectId": "QjlEo-",
     "changelog": [
         {
@@ -39,5 +39,13 @@
             "author": "pandur",
             "date": 1652088487401
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

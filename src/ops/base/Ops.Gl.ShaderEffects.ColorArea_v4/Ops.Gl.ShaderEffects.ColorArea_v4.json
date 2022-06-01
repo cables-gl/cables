@@ -158,7 +158,7 @@
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-    "summary": "colorize all meshes around current position",
+    "summary": "Colorize all meshes around current position",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -168,5 +168,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "0Ti2gT"
+    "exampleProjectId": "0Ti2gT",
+    "caniusequery": ""
 }

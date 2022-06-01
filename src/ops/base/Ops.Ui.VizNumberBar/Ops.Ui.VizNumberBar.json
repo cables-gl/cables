@@ -24,5 +24,15 @@
         ],
         "portsOut": [],
         "name": "Ops.User.pandur.VizNumberBar"
+    },
+    "summary": "Visualize numbers as a bar in patch, useful for debugging",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "-yFlq4",
+    "docs": {
+        "ports": []
     }
 }

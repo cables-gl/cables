@@ -77,6 +77,8 @@ class CubemapFramebuffer
         if (!this._options.hasOwnProperty("filter")) this._options.filter = CGL.Texture.FILTER_LINEAR;
         if (!this._options.hasOwnProperty("wrap")) this._options.wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
+        // this._options.filter = CGL.Texture.FILTER_LINEAR;
+
         // console.log("cubemapframebuffer created");
 
         this.texture = new CubemapTexture(this._cgl, {
@@ -152,6 +154,8 @@ class CubemapFramebuffer
 
     setSize(width, height)
     {
+        this._cgl.printError("before cubemap setsize");
+
         this.width = Math.floor(width);
         this.height = Math.floor(height);
         this.width = Math.min(this.width, this._cgl.maxTexSize);
@@ -159,22 +163,22 @@ class CubemapFramebuffer
 
         this._cgl.profileData.profileFrameBuffercreate++;
 
-        if (this._framebuffer)
-        {
-            this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
-            this._cgl.gl.deleteFramebuffer(this._framebuffer);
-            // TODO: readd
-            // this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
-        }
+        // if (this._framebuffer)
+        // {
+        //     this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
+        //     this._cgl.gl.deleteFramebuffer(this._framebuffer);
+        //     // TODO: readd
+        //     // this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
+        // }
 
 
         this._framebuffer = this._cgl.gl.createFramebuffer();
         this._depthbuffer = this._cgl.gl.createRenderbuffer();
 
+        console.log("this._framebuffer", JSON.stringify(this._framebuffer));
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
-
 
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
@@ -183,7 +187,7 @@ class CubemapFramebuffer
 
         if (!this._cgl.gl.isFramebuffer(this._framebuffer))
         {
-            console.log("invalid framebuffer...");
+            console.warn("invalid framebuffer...");
             // throw new Error("Invalid framebuffer");
         }
 
@@ -201,6 +205,8 @@ class CubemapFramebuffer
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+
+        this._cgl.printError("cubemap setsize");
     }
 
     checkErrorsByStatus(status)
@@ -226,6 +232,7 @@ class CubemapFramebuffer
             break;
         default:
             console.error("incomplete framebuffer", status);
+            console.log(this);
             throw new Error("Incomplete framebuffer: " + status);
         }
     }
@@ -310,11 +317,16 @@ class CubemapFramebuffer
         this._cgl.popFrameBuffer();
 
         this._cgl.resetViewPort();
+        this.updateMipMap();
     }
 
     updateMipMap()
     {
-        if (this.texture) this.texture.updateMipMap();
+        if (!this.texture) return;
+
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex);
+        this.texture.updateMipMap();
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
     }
 }
 

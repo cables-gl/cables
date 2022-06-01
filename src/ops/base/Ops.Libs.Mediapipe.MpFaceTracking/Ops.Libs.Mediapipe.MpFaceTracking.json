@@ -75,9 +75,14 @@
             "message": "Ops.Libs.Mediapipe.Mediapipe.MpFace renamed to Ops.Libs.Mediapipe.MpFace",
             "author": "pandur",
             "date": 1652089519018
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpFace renamed to Ops.Libs.Mediapipe.MpFaceTracking",
+            "author": "stephan",
+            "date": 1654013238224
         }
     ],
-    "authorName": "cables",
+    "authorName": "pandur",
     "created": 1608589845823,
     "libs": [
         "mp_camera_utils.js",
@@ -111,5 +116,15 @@
             }
         ],
         "name": "Ops.Dev.Mediapipe.MpFace"
+    },
+    "summary": "Get face mesh from webcam/video using mediapipe library",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "wznlp4",
+    "docs": {
+        "ports": []
     }
 }

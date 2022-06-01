@@ -57,7 +57,7 @@
         ],
         "name": "Ops.Sidebar.Sidebar"
     },
-    "summary": "sidebar overlay to control values",
+    "summary": "Sidebar overlay to control values",
     "docs": {
         "ports": [
             {
@@ -91,10 +91,6 @@
             {
                 "name": "childs",
                 "text": "attach sidebar ops here"
-            },
-            {
-                "name": "Opened",
-                "text": "sidebar visible and not minimized"
             }
         ]
     },
@@ -127,5 +123,6 @@
             "date": 1647621496703
         }
     ],
-    "exampleProjectId": "aDgYX5"
+    "exampleProjectId": "aDgYX5",
+    "caniusequery": ""
 }

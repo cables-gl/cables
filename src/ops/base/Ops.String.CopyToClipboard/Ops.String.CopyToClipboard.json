@@ -28,13 +28,13 @@
         "portsOut": [],
         "name": "Ops.User.pandur.CopyToClipboard"
     },
-    "summary": "copy string to clipboard on trigger",
+    "summary": "Copy string to clipboard on trigger",
     "issues": "",
     "caniusequery": "writetext",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "",
+    "exampleProjectId": "Rquam4",
     "docs": {
         "ports": []
     }

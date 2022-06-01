@@ -54,7 +54,7 @@
         ],
         "name": "Ops.Gl.Meshes.GeometryToTexture"
     },
-    "summary": "convert vertices of a geometry to a data texture",
+    "summary": "Convert vertices of a geometry to a data texture",
     "docs": {
         "ports": [
             {
