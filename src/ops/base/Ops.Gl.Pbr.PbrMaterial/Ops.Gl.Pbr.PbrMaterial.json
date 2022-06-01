@@ -251,19 +251,19 @@
             },
             {
                 "name": "A",
-                "text": "opacity of material. Use Alpha Mode to select a look"
+                "text": "opacity of material. Use Alpha Mode to change how this value is used."
             },
             {
                 "name": "Roughness",
-                "text": "reflective or not"
+                "text": "roughness of the surface"
             },
             {
                 "name": "Metalness",
-                "text": "metallic properties of material"
+                "text": "blend F0 between 0.04 and albedo by this value"
             },
             {
                 "name": "Alpha Mode index",
-                "text": "material opacity look type"
+                "text": "material opacity mode"
             },
             {
                 "name": "Tonemapping index",
@@ -271,23 +271,23 @@
             },
             {
                 "name": "Exposure",
-                "text": "exposure boost your tone map look"
+                "text": "adjust exposure used for tonemapping"
             },
             {
                 "name": "Disable geometric roughness",
-                "text": "don't automatically introduce roughness calculated from your geometry complexity"
+                "text": "don't automatically introduce roughness calculated from screen-space geometry density"
             },
             {
                 "name": "Use roughness from normal map",
-                "text": "calculate roughness from your normal map information"
+                "text": "calculate screen-space roughness from normals on top of geometric roughness"
             },
             {
                 "name": "Use Vertex Colours",
-                "text": "enable vertex colors then select their purpose"
+                "text": "enable vertex colours then select their purpose"
             },
             {
                 "name": "Vertex Colour Mode index",
-                "text": "when using vertex colors, assign their purpose here"
+                "text": "when using vertex colours, assign their purpose here"
             },
             {
                 "name": "Height Intensity",
@@ -295,15 +295,15 @@
             },
             {
                 "name": "Faster heightmapping",
-                "text": "toggle to use less precise method"
+                "text": "toggle to use less precise but more efficient method"
             },
             {
                 "name": "Use Clear Coat",
-                "text": "add a sheen to your material"
+                "text": "add a thick dielectric layer to your material. This layer will ignore the normal map."
             },
             {
                 "name": "Clear Coat Roughness",
-                "text": "roughness amount"
+                "text": "dielectric layer roughness amount"
             },
             {
                 "name": "IBL LUT",
@@ -335,15 +335,15 @@
             },
             {
                 "name": "Height",
-                "text": "HeightMap input, mono color"
+                "text": "HeightMap input, uses the red channel for height information"
             },
             {
                 "name": "Lightmap",
-                "text": "Lightmap input, exr or rgbe for highest quality"
+                "text": "Lightmap input"
             },
             {
                 "name": "Diffuse Intensity",
-                "text": "albedo/diffuse intensity in the material"
+                "text": "diffuse intensity in the material"
             },
             {
                 "name": "Specular Intensity",

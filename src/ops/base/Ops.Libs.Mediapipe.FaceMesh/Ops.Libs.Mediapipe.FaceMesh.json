@@ -30,6 +30,11 @@
             "message": "Ops.Admin.Mediapipe.FaceMesh renamed to Ops.Dev.Mediapipe.FaceMesh",
             "author": "pandur",
             "date": 1623913682280
+        },
+        {
+            "message": "Ops.Dev.Mediapipe.FaceMesh renamed to Ops.Libs.Mediapipe.FaceMesh",
+            "author": "pandur",
+            "date": 1654015397252
         }
     ],
     "authorName": "pandur",
@@ -52,5 +57,15 @@
             }
         ],
         "name": "Ops.Dev.Mediapipe.FaceMesh"
+    },
+    "summary": "Generate an animated geometry from MpFace Point Coordinates",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "by9Tq4",
+    "docs": {
+        "ports": []
     }
 }
