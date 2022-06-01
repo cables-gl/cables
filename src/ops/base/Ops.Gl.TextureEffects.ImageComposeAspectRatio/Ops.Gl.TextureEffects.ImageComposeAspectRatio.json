@@ -38,5 +38,15 @@
             }
         ],
         "name": "Ops.User.pandur.ImageComposeAspectRatio"
+    },
+    "summary": "Adjust aspect ratio of an image compose branch",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "iwX7v4",
+    "docs": {
+        "ports": []
     }
 }

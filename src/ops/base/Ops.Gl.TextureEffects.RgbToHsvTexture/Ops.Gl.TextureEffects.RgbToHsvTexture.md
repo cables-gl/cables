@@ -1,1 +1,1 @@
- 
+ can be used for example to find colorfull areas in an image

@@ -17,7 +17,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.RgbToHsvTexture"
+        "name": "Ops.Gl.TextureEffects.RgbToHsvTexture"
     },
     "credits": [
         {
@@ -30,7 +30,7 @@
     "authorName": "pandur",
     "id": "147ed29e-f04e-4f7c-b9d7-133d7c6cbef9",
     "created": 1647697092030,
-    "summary": "Convert a black and white map to a normal map",
+    "summary": "Convert a RGB Texture to Hue/Saturation/Lightness values as RGB colors",
     "docs": {
         "ports": []
     },
@@ -62,8 +62,7 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [
-        "a56wk9Xm9dY"
-    ],
-    "exampleProjectId": "L62oT6"
+    "youtubeids": [],
+    "exampleProjectId": "V7z4v4",
+    "caniusequery": ""
 }
