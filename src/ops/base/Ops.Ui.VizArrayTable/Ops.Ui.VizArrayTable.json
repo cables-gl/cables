@@ -33,5 +33,15 @@
         ],
         "portsOut": [],
         "name": "Ops.Ui.VizArrayTable"
+    },
+    "summary": "Show the contents of the input array in a table in the patch, useful for debugging",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "g8Qfq4",
+    "docs": {
+        "ports": []
     }
 }

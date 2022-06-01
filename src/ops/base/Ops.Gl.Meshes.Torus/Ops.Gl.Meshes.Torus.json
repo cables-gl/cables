@@ -1,5 +1,5 @@
 {
-    "summary": "draw a torus (doughnut, donut, ring mesh)",
+    "summary": "Draw a torus (doughnut, donut, ring mesh)",
     "layout": {
         "portsIn": [
             {
@@ -50,5 +50,10 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ECMhQ6"
+    "exampleProjectId": "ECMhQ6",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

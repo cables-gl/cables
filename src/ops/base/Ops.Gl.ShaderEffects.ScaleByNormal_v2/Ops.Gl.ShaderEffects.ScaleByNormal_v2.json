@@ -23,11 +23,10 @@
         ],
         "name": "Ops.User.ratsnake.ScaleByNormalz"
     },
-    "summary": "scale vertices of an object in the direction of face normals",
+    "summary": "Scale vertices of an object in the direction of face normals",
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
     "collections": [
         "vertexDeformers"
     ],
@@ -46,5 +45,9 @@
             "author": "pandur",
             "date": 1650616094580
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "Ft2xm1"
 }

@@ -49,5 +49,15 @@
             }
         ],
         "name": "Ops.User.pandur.MpHandCoordinate"
+    },
+    "summary": "Get individual coordinates of fingers or wrist from an array of mediapipe data",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "a5xfp4",
+    "docs": {
+        "ports": []
     }
 }

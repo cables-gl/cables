@@ -16,7 +16,7 @@ MESH.lastMesh = null;
  * @param {Number} [glPrimitive]
  * @class
  * @example
- * const cgl=op.patch.cgl
+ * const cgl=this._cgl
  * const mesh=new CGL.Mesh(cgl, geometry);
  *
  * function render()
@@ -394,7 +394,6 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         if (!(vertIndices instanceof Uint16Array)) this.vertIndicesTyped = new Uint16Array(vertIndices);
         else this.vertIndicesTyped = vertIndices;
 
-
         this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
         this._bufVerticesIndizes.numItems = vertIndices.length;
@@ -681,6 +680,7 @@ Mesh.prototype.render = function (shader)
     this._bind(shader);
     if (this.addVertexNumbers) this._setVertexNumbers();
 
+
     MESH.lastMesh = this;
 
     let prim = this._cgl.gl.TRIANGLES;
@@ -705,8 +705,7 @@ Mesh.prototype.render = function (shader)
             this._cgl.profileData.glQueryData[id] = queryProfilerData;
         }
 
-        if (!this._queryExt) this._queryExt = this._cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2");
-
+        if (!this._queryExt && this._queryExt !== false) this._queryExt = this._cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2") || false;
         if (this._queryExt)
         {
             if (queryProfilerData._drawQuery)
@@ -734,6 +733,7 @@ Mesh.prototype.render = function (shader)
         }
     }
 
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
@@ -751,6 +751,7 @@ Mesh.prototype.render = function (shader)
         //     }
         // }
 
+
         if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
         if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
         else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
@@ -760,6 +761,7 @@ Mesh.prototype.render = function (shader)
         if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
     }
+
 
     if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
     {
@@ -784,6 +786,7 @@ Mesh.prototype.render = function (shader)
 
         // this._log.log("available", available);
     }
+
 
     this.unBind();
 };

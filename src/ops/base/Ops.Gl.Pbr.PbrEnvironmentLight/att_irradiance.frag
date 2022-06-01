@@ -1,5 +1,8 @@
 precision highp float;
 precision highp int;
+precision highp sampler2D;
+
+
 // from https://github.com/BabylonJS/Babylon.js/blob/5e6321d887637877d8b28b417410abbbeb651c6e/src/Shaders/ShadersInclude/hdrFilteringFunctions.fx
 // modified to use different syntax for a number of variables, equirectangular projection and rgbe encoding
 {{MODULES_HEAD}}

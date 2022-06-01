@@ -413,11 +413,8 @@ Shader.prototype.compile = function ()
 {
     const startTime = performance.now();
 
-    this._cgl.printError("shader.compile");
-
     this._cgl.profileData.profileShaderCompiles++;
     this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
-
 
     let extensionString = "";
     if (this._extensions)
@@ -430,8 +427,6 @@ Shader.prototype.compile = function ()
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
     const structStrings = this.createStructUniforms();
-    this._cgl.printError("createStructUniforms");
-
     this._cgl.profileData.addHeavyEvent("shader compile", this._name + " [" + this._compileReason + "]");
     this._compileReason = "";
 
@@ -1317,34 +1312,19 @@ Shader.prototype.hasUniform = function (name)
 
 Shader.prototype._createProgram = function (vstr, fstr)
 {
-    this._cgl.printError("_createprogram");
+    this._cgl.printError("before _createprogram");
 
     const program = this._cgl.gl.createProgram();
 
-    this._cgl.printError("gl.createprogram");
-
     this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
-
-    this._cgl.printError("createshader");
-
     this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
 
-    this._cgl.printError("createshader");
-
-
     this._cgl.gl.attachShader(program, this.vshader);
-
-    this._cgl.printError("attachshader ");
-
-
     this._cgl.gl.attachShader(program, this.fshader);
-
-    this._cgl.printError("attachshader ");
-
 
     this._linkProgram(program, vstr, fstr);
 
-    this._cgl.printError("shader linkprogram err");
+    this._cgl.printError("shader _createProgram");
     return program;
 };
 
@@ -1355,7 +1335,7 @@ Shader.prototype.hasErrors = function ()
 
 Shader.prototype._linkProgram = function (program, vstr, fstr)
 {
-    this._cgl.printError("_linkprogram");
+    this._cgl.printError("before _linkprogram");
 
     if (this._feedBackNames.length > 0)
     {

@@ -42,8 +42,7 @@
         ],
         "name": "Ops.Dev.AlphaMaskV2"
     },
-    "summary": "set alphachannel of current imagecompose via a texture mask",
-    "youtubeid": "",
+    "summary": "Set alphachannel of current imagecompose via a texture mask",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -66,5 +65,8 @@
             "author": "pandur",
             "date": 1652092964635
         }
-    ]
+    ],
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": ""
 }

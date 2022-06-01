@@ -73,8 +73,7 @@
         ],
         "name": "Ops.Sidebar.Slider_v3"
     },
-    "summary": "sidebar slider element (range)",
-    "youtubeid": "cpRVswVdvI0",
+    "summary": "Sidebar slider element (range)",
     "docs": {
         "ports": []
     },
@@ -85,5 +84,12 @@
             "date": 1643888139245
         }
     ],
-    "exampleProjectId": "aDgYX5"
+    "exampleProjectId": "aDgYX5",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cpRVswVdvI0"
+    ]
 }

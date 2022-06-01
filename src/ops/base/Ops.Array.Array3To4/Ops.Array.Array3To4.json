@@ -44,13 +44,13 @@
         ],
         "name": "Ops.User.pandur.Array3To4"
     },
-    "summary": "converts an array3 to an array4 by filling it up with 1",
+    "summary": "Converts an array3 to an array4 by filling it up with 1",
     "issues": "",
     "caniusequery": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "",
+    "exampleProjectId": "h_Dbm4",
     "docs": {
         "ports": []
     }

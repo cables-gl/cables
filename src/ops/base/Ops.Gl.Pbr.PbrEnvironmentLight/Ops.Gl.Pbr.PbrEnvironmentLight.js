@@ -72,7 +72,7 @@ const inPCboxMaxX = op.inFloat("Box max X", 1);
 const inPCboxMaxY = op.inFloat("Box max Y", 1);
 const inPCboxMaxZ = op.inFloat("Box max Z", 1);
 
-op.setPortGroup("parallax correction", [
+op.setPortGroup("Parallax Correction", [
     inUseParallaxCorrection,
     inPCOriginX,
     inPCOriginY,
@@ -191,8 +191,8 @@ function captureIrradianceCubemap(size)
     {
         IrradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
             "isFloatingPointTexture": true, // TODO
-            "filter": CGL.Texture.FILTER_POINT, // due to banding with rgbe
-            "wrap": CGL.Texture.WRAP_CLAMP
+            "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
+            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
     }
 
@@ -221,35 +221,34 @@ function captureIrradianceCubemap(size)
 
 function capturePrefilteredCubemap(size)
 {
-    let captureFBO = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-        "isFloatingPointTexture": true,
+    size = Number(size);
+    let captureFBO = new CGL.CubemapFramebuffer(cgl, size, size, {
+        // "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_LINEAR,
-        "wrap": CGL.Texture.WRAP_CLAMP
+        "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
+
     if (PrefilteredFrameBuffer)
     {
-        PrefilteredFrameBuffer.setSize(Number(size), Number(size));
+        PrefilteredFrameBuffer.setSize(size, size);
     }
     else
     {
-        PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-            "isFloatingPointTexture": false, // should be true, but not possible :/
+        PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
+            // "isFloatingPointTexture": false, // should be true, but not possible :/
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
     }
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
-
-    // console.log("cubemap", cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
-    if (cgl.gl.TEXTURE_WRAP_R)cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
-
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
 
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP); // make sure memory is assigned for mips
 
-    maxMipLevels = 1.0 + Math.floor(Math.log(Number(size)) * 1.44269504088896340736);
+    maxMipLevels = 1.0 + Math.floor(Math.log(size) * 1.44269504088896340736);
     outMipLevels.set(maxMipLevels);
     prefilteringInfo[0] = size;
     prefilteringInfo[1] = maxMipLevels;
@@ -260,7 +259,7 @@ function capturePrefilteredCubemap(size)
 
     for (let mip = 0; mip <= maxMipLevels; ++mip)
     {
-        let currentMipSize = Number(size) * Math.pow(0.5, mip);
+        let currentMipSize = size * Math.pow(0.5, mip);
         let roughness = mip / (maxMipLevels - 1);
         uniformPrefilteringRoughness.setValue(roughness);
 
@@ -287,9 +286,10 @@ function capturePrefilteredCubemap(size)
 
 function computeIBLLUT(size)
 {
+    size = Number(size);
     if (IBLLUTFrameBuffer)
     {
-        IBLLUTFrameBuffer.setSize(Number(size), Number(size));
+        IBLLUTFrameBuffer.setSize(size, size);
     }
     else
     {
@@ -303,6 +303,7 @@ function computeIBLLUT(size)
         }
         else
         {
+            console.log("FB2");
             IBLLUTFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
                 "isFloatingPointTexture": true,
                 "filter": CGL.Texture.FILTER_LINEAR,
@@ -313,12 +314,9 @@ function computeIBLLUT(size)
 
     cgl.frameStore.renderOffscreen = true;
     IBLLUTFrameBuffer.renderStart(cgl);
-
     fullscreenRectangle.render(IBLLUTShader);
-
     IBLLUTFrameBuffer.renderEnd();
     cgl.frameStore.renderOffscreen = false;
-
     outTexIBLLUT.set(IBLLUTFrameBuffer.getTextureColor());
 }
 
@@ -366,6 +364,20 @@ function drawHelpers()
     cgl.popShader();
     cgl.popModelMatrix();
 }
+
+inUseParallaxCorrection.onChange = () =>
+{
+    const active = inUseParallaxCorrection.get();
+    inPCOriginX.setUiAttribs({ "greyout": !active });
+    inPCOriginY.setUiAttribs({ "greyout": !active });
+    inPCOriginZ.setUiAttribs({ "greyout": !active });
+    inPCboxMinX.setUiAttribs({ "greyout": !active });
+    inPCboxMinY.setUiAttribs({ "greyout": !active });
+    inPCboxMinZ.setUiAttribs({ "greyout": !active });
+    inPCboxMaxX.setUiAttribs({ "greyout": !active });
+    inPCboxMaxY.setUiAttribs({ "greyout": !active });
+    inPCboxMaxZ.setUiAttribs({ "greyout": !active });
+};
 
 // onTriggered
 inTrigger.onTriggered = function ()

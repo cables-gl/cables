@@ -1,14 +1,13 @@
+import { Texture } from "../../../core/cgl/cgl_texture";
+
 const DEFAULT_TEXTURE_SIZE = 8;
 
 class CubemapTexture
 {
     constructor(cgl, options)
     {
-        if (!options) options = {
-            "width": DEFAULT_TEXTURE_SIZE,
-            "height": DEFAULT_TEXTURE_SIZE
-        };
-
+        this.id = CABLES.uuid();
+        this.name = options.name || "unknown cubemap texture";
         this._cgl = cgl;
 
         this._cubemapFaces = [
@@ -22,19 +21,17 @@ class CubemapTexture
 
         this.tex = this._cgl.gl.createTexture();
         this.cubemap = this.tex;
-        this.id = CABLES.uuid();
 
         this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
-        this.anisotropic = 0;
+
+        this.width = options.width || DEFAULT_TEXTURE_SIZE;
+        this.width = options.width || DEFAULT_TEXTURE_SIZE;
 
         this.filter = options.filter || CGL.Texture.FILTER_NEAREST;
         this.wrap = options.wrap || CGL.Texture.WRAP_CLAMP_TO_EDGE;
         this.unpackAlpha = options.unpackAlpha || true;
 
         this.flip = options.flip || true;
-        this.flipped = false;
-        this._fromData = true;
-        this.name = options.name || "unknown cubemap texture";
 
         this._cgl.profileData.profileTextureNew++;
 
@@ -62,11 +59,12 @@ class CubemapTexture
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
 
-        if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
-        {
-            console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
-            this.filter = CGL.Texture.FILTER_NEAREST;
-        }
+        // console.log("this.textureType", this.textureType);
+        // if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
+        // {
+        //     console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
+        //     this.filter = CGL.Texture.FILTER_NEAREST;
+        // }
 
         this._setFilter();
 
@@ -102,10 +100,7 @@ class CubemapTexture
 
     _setFilter()
     {
-        if (!this._fromData)
-        {
-            this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
-        }
+        this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
 
         if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_MIPMAP)
         {
@@ -113,7 +108,7 @@ class CubemapTexture
             this.filter = CGL.Texture.FILTER_LINEAR;
         }
 
-        if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
+        if (this._cgl.glVersion == 1 && !Texture.isPowerOfTwo())
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
@@ -141,6 +136,10 @@ class CubemapTexture
                 this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.MIRRORED_REPEAT);
                 this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.MIRRORED_REPEAT);
             }
+            else
+            {
+                throw new Error("[CubemapTexture] unknown texture filter!" + this.filter);
+            }
 
             if (this.filter == CGL.Texture.FILTER_NEAREST)
             {
@@ -159,34 +158,17 @@ class CubemapTexture
             }
             else
             {
-                console.log("unknown texture filter!", this.filter);
-                throw new Error("unknown texture filter!" + this.filter);
+                throw new Error("[CubemapTexture] unknown texture filter!" + this.filter);
             }
-
-            // if (this.anisotropic)
-            // {
-            //     const ext = this._cgl.gl.getExtension("EXT_texture_filter_anisotropic");
-            //     if (ext)
-            //     {
-            //         const max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-            //         this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max, this.anisotropic));
-            //     }
-            // }
         }
-    }
-
-    isPowerOfTwo(x)
-    {
-        return x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384;
     }
 
     updateMipMap()
     {
-        if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)
-        {
-            this._cgl.gl.generateMipmap(this.texTarget);
-            this._cgl.profileData.profileGenMipMap++;
-        }
+        if (!((this._cgl.glVersion == 2 || Texture.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)) return;
+
+        this._cgl.gl.generateMipmap(this.texTarget);
+        this._cgl.profileData.profileGenMipMap++;
     }
 }
 

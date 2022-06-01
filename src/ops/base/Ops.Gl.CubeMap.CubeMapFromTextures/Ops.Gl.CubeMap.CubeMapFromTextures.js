@@ -1,34 +1,34 @@
-//http://codeflow.org/entries/2011/apr/18/advanced-webgl-part-3-irradiance-environment-map/
+// http://codeflow.org/entries/2011/apr/18/advanced-webgl-part-3-irradiance-environment-map/
 
-var outTex=op.outObject("cubemap");
-var numImages=6;
+let outTex = op.outObject("cubemap");
+let numImages = 6;
 
-var inFilenames=[];
+let inFilenames = [];
 
-var titles=[
-        "posx", "negx",
-        "posy", "negy",
-        "posz", "negz"
-    ];
+let titles = [
+    "posx", "negx",
+    "posy", "negy",
+    "posz", "negz"
+];
 
-for(var i=0;i<numImages;i++)
+for (let i = 0; i < numImages; i++)
 {
-    var file=op.addInPort(new CABLES.Port(op,titles[i],CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
-    file.onChange=load;
+    let file = op.addInPort(new CABLES.Port(op, titles[i], CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "image" }));
+    file.onChange = load;
     inFilenames.push(file);
 }
 
-var loadingId=0;
-var skyboxCubemap=null;
-var gl=op.patch.cgl.gl;
-var cgl=op.patch.cgl;
-var texCount=0;
+let loadingId = 0;
+let skyboxCubemap = null;
+let gl = op.patch.cgl.gl;
+let cgl = op.patch.cgl;
+let texCount = 0;
 
 function loadCubemapTexture(target, texture, url)
 {
-    var image = new Image();
-    image.crossOrigin = '';
-    image.onload = function()
+    let image = new Image();
+    image.crossOrigin = "";
+    image.onload = function ()
     {
         cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, texture);
@@ -36,41 +36,42 @@ function loadCubemapTexture(target, texture, url)
         cgl.gl.texImage2D(target, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, image);
 
         texCount++;
-        if(texCount==6)
+        if (texCount == 6)
         {
             cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP);
-            outTex.set({"cubemap":skyboxCubemap});
+            outTex.set({ "cubemap": skyboxCubemap });
             cgl.patch.loading.finished(loadingId);
         }
 
+        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, null);
     };
-    image.onerror = function()
+    image.onerror = function ()
     {
-        console.log("error while loading cube texture...",url);
-        op.uiAttr({'error':'onerr could not load cubemap texture  '});
+        console.log("error while loading cube texture...", url);
+        op.uiAttr({ "error": "onerr could not load cubemap texture  " });
         cgl.patch.loading.finished(loadingId);
-
     };
+
 
     image.src = url;
 }
 
 function load()
 {
-    for(var i=0;i<numImages;i++)
+    for (let i = 0; i < numImages; i++)
     {
-        var fn=inFilenames[i].get();
-        if(fn.length===0 || fn=="0")
+        let fn = inFilenames[i].get();
+        if (fn.length === 0 || fn == "0")
         {
             console.log("filename error");
             return;
         }
     }
-    loadingId=cgl.patch.loading.start('cubemap texture','');
+    loadingId = cgl.patch.loading.start("cubemap texture", "");
 
 
-    texCount=0;
+    texCount = 0;
     skyboxCubemap = cgl.gl.createTexture();
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, skyboxCubemap);
 
@@ -88,5 +89,4 @@ function load()
 
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z, skyboxCubemap, op.patch.getFilePath(inFilenames[4].get()));
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, skyboxCubemap, op.patch.getFilePath(inFilenames[5].get()));
-
 }

@@ -62,7 +62,7 @@
         ],
         "name": "Ops.Api.FxHash.FxHash"
     },
-    "summary": "fx hash generation random numbers",
+    "summary": "FxHash simulator / generator of seeded random numbers",
     "issues": "",
     "caniusequery": "",
     "collections": null,
