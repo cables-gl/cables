@@ -15,6 +15,11 @@
             "message": "Ops.Dev.OpentypeToSvgPath renamed to Ops.Libs.OpenType.OpentypeToSvgPath",
             "author": "pandur",
             "date": 1653287682153
+        },
+        {
+            "message": " added lib: opentype.js",
+            "author": "stephan",
+            "date": 1654181081484
         }
     ],
     "authorName": "pandur",
@@ -43,14 +48,20 @@
         ],
         "name": "Ops.Dev.OpentypeToSvgPath"
     },
-    "summary": "",
+    "summary": "get svg path from OpentypeFont using the opentype library",
     "issues": "",
     "caniusequery": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Libs.OpenType.OpentypeFont",
+        "Ops.Gl.Geometry.SvgPathToGeometry"
+    ],
     "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
     "docs": {
         "ports": []
-    }
+    },
+    "libs": [
+        "opentype.js"
+    ]
 }
