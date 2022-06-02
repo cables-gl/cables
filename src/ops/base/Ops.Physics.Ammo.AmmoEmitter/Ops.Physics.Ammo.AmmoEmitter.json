@@ -79,6 +79,10 @@
                 "name": "Remove All"
             },
             {
+                "type": 1,
+                "name": "Activate All"
+            },
+            {
                 "type": 0,
                 "name": "Remove Y<-100",
                 "subType": "boolean"

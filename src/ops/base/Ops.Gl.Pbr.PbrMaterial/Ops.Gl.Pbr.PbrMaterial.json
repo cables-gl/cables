@@ -343,11 +343,11 @@
             },
             {
                 "name": "Diffuse Intensity",
-                "text": "diffuse intensity in the material"
+                "text": "diffuse intensity when using PBR Environment"
             },
             {
                 "name": "Specular Intensity",
-                "text": "Specular boost adjustment"
+                "text": "Specular intensity when using PBR Environment"
             },
             {
                 "name": "Lightmap is RGBE",
