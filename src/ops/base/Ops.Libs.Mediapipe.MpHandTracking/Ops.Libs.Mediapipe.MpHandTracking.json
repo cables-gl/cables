@@ -47,7 +47,7 @@
             "date": 1654013381206
         }
     ],
-    "authorName": "cables",
+    "authorName": "pandur",
     "created": 1608577908279,
     "libs": [
         "mp_hands.js",
@@ -89,7 +89,8 @@
     "caniusequery": "",
     "collections": null,
     "relatedops": [
-        "Ops.Libs.Mediapipe.MpHand"
+        "Ops.Libs.Mediapipe.MpHand",
+        "Ops.Libs.Mediapipe.MpHandCoordinate"
     ],
     "youtubeids": [],
     "exampleProjectId": "a5xfp4",

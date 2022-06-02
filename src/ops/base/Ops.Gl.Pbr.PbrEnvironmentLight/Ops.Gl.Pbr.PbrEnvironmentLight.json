@@ -193,7 +193,7 @@
             },
             {
                 "name": "Rotation",
-                "text": "rotate the environment on the X axis in degrees"
+                "text": "rotate the environment around the up axis in degrees"
             },
             {
                 "name": "Use parallax correction",

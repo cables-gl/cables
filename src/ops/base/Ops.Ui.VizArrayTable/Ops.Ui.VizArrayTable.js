@@ -1,4 +1,6 @@
-const inArr = op.inArray("Array");
+const
+    inArr = op.inArray("Array"),
+    inOffset = op.inInt("Start Row", 0);
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
@@ -29,22 +31,26 @@ op.renderVizLayer = (ctx, layer) =>
 
     let lines = Math.floor(layer.height / layer.scale / 10 - 1);
     let padding = 4;
+    let offset = inOffset.get() * stride;
 
-    for (let i = 0; i < lines * stride; i += stride)
+    for (let i = offset; i < offset + lines * stride; i += stride)
     {
+        if (i + stride > arr.length) continue;
+
         ctx.fillStyle = "#666";
 
-        ctx.fillText(i / stride,
-            layer.x / layer.scale + padding,
-            layer.y / layer.scale + 10 + i / stride * 10 + padding);
+        const lineNum = (i) / stride;
+
+        if (lineNum >= 0)
+            ctx.fillText(lineNum,
+                layer.x / layer.scale + padding,
+                layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
 
         ctx.fillStyle = "#ccc";
 
-        if (i + stride > arr.length) continue;
-
         for (let s = 0; s < stride; s++)
         {
-            let str = "?";
+            let str = "";
             const v = arr[i + s];
 
             if (typeof v == "string") str = "\"" + v + "\"";
@@ -67,7 +73,9 @@ op.renderVizLayer = (ctx, layer) =>
                 }
             }
 
-            ctx.fillText(str, layer.x / layer.scale + s * 100 + 50, layer.y / layer.scale + 10 + i / stride * 10 + padding);
+            ctx.fillText(str,
+                layer.x / layer.scale + s * 100 + 50,
+                layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
         }
     }
 
