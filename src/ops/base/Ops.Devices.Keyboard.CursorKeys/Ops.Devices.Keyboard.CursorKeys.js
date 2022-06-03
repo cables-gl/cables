@@ -60,6 +60,14 @@ function addListener()
     else addDocumentListener();
 }
 
+function onBlur()
+{
+    pressedUp.set(false);
+    pressedDown.set(false);
+    pressedLeft.set(false);
+    pressedRight.set(false);
+}
+
 inActive.onChange = () =>
 {
     pressedUp.set(false);
@@ -70,6 +78,7 @@ inActive.onChange = () =>
 
 function removeListeners()
 {
+    cgl.canvas.removeEventListener("blur", onBlur);
     document.removeEventListener("keydown", onKeyDown, false);
     document.removeEventListener("keyup", onKeyUp, false);
     cgl.canvas.removeEventListener("keydown", onKeyDown, false);
@@ -78,6 +87,8 @@ function removeListeners()
 
 function addCanvasListener()
 {
+    cgl.canvas.addEventListener("blur", onBlur);
+
     cgl.canvas.addEventListener("keydown", onKeyDown, false);
     cgl.canvas.addEventListener("keyup", onKeyUp, false);
 }
