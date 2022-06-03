@@ -55,7 +55,7 @@ All ops that work with 3D meshes should adhere to the following rules, to guaran
 - Optimize meshes to not always rebuild the whole geometry (e.g. scaling of rectangle)
 - Add a checkbox "force update" to disable and change the mesh again
 
-# Namespaces
+## Namespaces
 
 Every op has two short name, e.g. `KeyboardInput` and a namespace, e.g. `Ops.Devices.Keyboard.KeyboardInput`.
 
