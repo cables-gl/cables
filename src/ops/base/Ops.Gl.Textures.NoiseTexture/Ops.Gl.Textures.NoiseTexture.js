@@ -7,6 +7,7 @@ const
     inColor = op.inValueBool("Color", false),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
+    inSeed = op.inFloat("Seed", 0),
     inOutR = op.inBool("Channel R", true),
     inMinR = op.inFloat("Min R", 0),
     inMaxR = op.inFloat("Max R", 1),
@@ -20,7 +21,8 @@ const
 
 const cgl = op.patch.cgl;
 
-inWidth.onChange =
+inSeed.onChange =
+    inWidth.onChange =
     inHeight.onChange =
     inPixel.onChange =
     inMinR.onChange =
@@ -74,6 +76,8 @@ function update()
     const minB = inMinB.get();
     const diffB = inMaxB.get() - minB;
 
+    Math.randomSeed = inSeed.get();
+
     if (isFp)
     {
         pixels = new Float32Array(num);
@@ -82,9 +86,9 @@ function update()
         {
             for (let i = 0; i < num; i += 4)
             {
-                pixels[i + 0] = minR + Math.random() * diffR;
-                pixels[i + 1] = minG + Math.random() * diffG;
-                pixels[i + 2] = minB + Math.random() * diffB;
+                pixels[i + 0] = minR + Math.seededRandom() * diffR;
+                pixels[i + 1] = minG + Math.seededRandom() * diffG;
+                pixels[i + 2] = minB + Math.seededRandom() * diffB;
                 pixels[i + 3] = 1;
             }
         }
@@ -92,7 +96,7 @@ function update()
         {
             for (let i = 0; i < num; i += 4)
             {
-                let c = minR + Math.random() * diffR;
+                let c = minR + Math.seededRandom() * diffR;
                 pixels[i + 0] = pixels[i + 1] = pixels[i + 2] = c;
                 pixels[i + 3] = 1;
             }
@@ -106,9 +110,9 @@ function update()
         {
             for (let i = 0; i < num; i += 4)
             {
-                pixels[i + 0] = (minR + Math.random() * diffR) * 255;
-                pixels[i + 1] = (minG + Math.random() * diffG) * 255;
-                pixels[i + 2] = (minB + Math.random() * diffB) * 255;
+                pixels[i + 0] = (minR + Math.seededRandom() * diffR) * 255;
+                pixels[i + 1] = (minG + Math.seededRandom() * diffG) * 255;
+                pixels[i + 2] = (minB + Math.seededRandom() * diffB) * 255;
                 pixels[i + 3] = 255;
             }
         }
@@ -118,7 +122,7 @@ function update()
             {
                 pixels[i + 0] =
                 pixels[i + 1] =
-                pixels[i + 2] = (minR + Math.random() * diffR) * 255;
+                pixels[i + 2] = (minR + Math.seededRandom() * diffR) * 255;
                 pixels[i + 3] = 255;
             }
         }
