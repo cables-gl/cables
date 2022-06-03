@@ -16,6 +16,7 @@ const
 
     inSpawn = op.inTriggerButton("Spawn One"),
     inRemove = op.inTriggerButton("Remove All"),
+    inActivate = op.inTriggerButton("Activate All"),
     inRemoveFalling = op.inBool("Remove Y<-100", true),
     // inLifeTime=op.inFloat("Lifetime",0),
 
@@ -45,8 +46,16 @@ function removeAll()
         world.removeRigidBody(bodies[i].body);
     }
 
+    outPos.set(null);
+    outRot.set(null);
+
     bodies.length = 0;
 }
+
+inActivate.onTriggered = () =>
+{
+    for (let i = 0; i < bodies.length; i++) bodies[i].body.activate();
+};
 
 function setArrayTransformed(body, i, arrPos)
 {

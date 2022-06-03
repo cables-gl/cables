@@ -1,0 +1,74 @@
+{
+    "id": "6fe2bb0e-4bfc-42c1-8bc1-19fda052e091",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1612448018942
+        },
+        {
+            "message": "Ops.User.pandur.ArrayPack3Simple renamed to Ops.Array.ArrayPack3Simple",
+            "author": "pandur",
+            "date": 1653405047385
+        },
+        {
+            "message": "cloned op from Ops.Array.ArrayPack3Simple",
+            "author": "pandur",
+            "date": 1654169851126
+        },
+        {
+            "message": "Ops.User.pandur.ArrayPack4Simple renamed to Ops.Array.ArrayPack4Simple",
+            "author": "pandur",
+            "date": 1654171748794
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1654169851126,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array 1"
+            },
+            {
+                "type": 3,
+                "name": "Array 2"
+            },
+            {
+                "type": 3,
+                "name": "Array 3"
+            },
+            {
+                "type": 3,
+                "name": "Array 4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array out"
+            },
+            {
+                "type": 0,
+                "name": "Num Points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayPack4Simple"
+    },
+    "summary": "Packs 3 individual arrays into an array3 - without needing a trigger",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Hx09v4",
+    "docs": {
+        "ports": []
+    }
+}

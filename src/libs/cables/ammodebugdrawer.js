@@ -76,7 +76,7 @@ class AmmoDebugDrawer
             .endl() + "{"
             .endl() + "   vec4 pos=vec4(vPosition, 1.0);"
             .endl() + "   vertCol=attrVertColor;"
-            .endl() + "   gl_PointSize=10.0;"
+            .endl() + "   gl_PointSize=20.0;"
 
             .endl() + "   gl_Position = projMatrix * mvMatrix * pos;"
             .endl() + "}";
