@@ -17,67 +17,67 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mouse Is Down Left",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mouse Is Down Right",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Down Left"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Down Right"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Up Left"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Up Right"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mouse Over",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Enter"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Leave"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset Y",
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.ElementInteraction"
+        "name": "Ops.Html.ElementInteraction"
     },
     "summary": "Html element interaction events",
     "issues": "",
