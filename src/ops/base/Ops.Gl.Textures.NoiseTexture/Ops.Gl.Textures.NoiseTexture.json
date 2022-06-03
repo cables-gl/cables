@@ -36,6 +36,11 @@
             },
             {
                 "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Channel R",
                 "subType": "boolean"
             },

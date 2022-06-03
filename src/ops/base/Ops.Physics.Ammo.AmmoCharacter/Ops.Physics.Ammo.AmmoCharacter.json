@@ -131,7 +131,7 @@
                 "name": "Transformed"
             }
         ],
-        "name": "Ops.Dev.AmmoCharacter"
+        "name": "Ops.Physics.Ammo.AmmoCharacter"
     },
     "authorName": "pandur",
     "created": 1647282185058

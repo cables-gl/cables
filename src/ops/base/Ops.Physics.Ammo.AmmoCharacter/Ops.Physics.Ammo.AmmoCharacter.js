@@ -129,6 +129,9 @@ function renderTransformed()
         let p = tmpTrans.getOrigin();
         let q = tmpTrans.getRotation();
 
+        if (inStyle.get() == "3rd Person")
+            q.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);
+
         cgl.pushModelMatrix();
 
         mat4.identity(cgl.mMatrix);
@@ -183,21 +186,24 @@ function update()
 
     if (inStyle.get() == "3rd Person")
     {
-        if (inMoveXM.get()) vx = -speed;
-        if (inMoveXP.get()) vx = speed;
+    //     if (inMoveXM.get()) vx = -speed;
+    //     if (inMoveXP.get()) vx = speed;
 
-        if (inMoveZP.get()) vz = -speed;
-        if (inMoveZM.get()) vz = speed;
+        //     if (inMoveZP.get()) vz = -speed;
+        //     if (inMoveZM.get()) vz = speed;
 
-        if (inMoveYP.get()) vy = speed;
+        //     if (inMoveYP.get()) vy = speed;
 
-        if (vx != 0 || vy != 0 || vz != 0)
-        {
-            btVelocity.setValue(vx, vy, vz);
-            body.setLinearVelocity(btVelocity);
-        }
+    //     if (vx != 0 || vy != 0 || vz != 0)
+    //     {
+    //         btVelocity.setValue(vx, vy, vz);
+    //         body.setLinearVelocity(btVelocity);
+    //     }
+        // inDirX.set(1);
+        // inDirY.set(0);
+        // inDirZ.set(1);
     }
-    else
+    // else
     {
         let doMove = false;
         if (inMoveZP.get())
