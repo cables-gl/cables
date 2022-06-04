@@ -40,7 +40,13 @@
                 "subType": "boolean"
             }
         ],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Bool",
+                "subType": "number"
+            }
+        ],
         "name": "Ops.Ui.VizBool"
     },
     "authorName": "pandur",

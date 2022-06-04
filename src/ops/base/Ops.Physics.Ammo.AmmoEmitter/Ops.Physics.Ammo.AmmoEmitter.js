@@ -1,6 +1,6 @@
 const
     inExec = op.inTrigger("Exec"),
-    inNum = op.inInt("Maximum Number Bodies", 10),
+    inLimit = op.inInt("Limit Bodies", 10),
 
     inRadius = op.inFloat("Radius", 1),
     inMass = op.inFloat("Mass", 1),
@@ -21,6 +21,7 @@ const
     // inLifeTime=op.inFloat("Lifetime",0),
 
     next = op.outTrigger("Next"),
+    outNum = op.outNumber("Total Bodies"),
     outPos = op.outArray("Positions", 3),
     outRot = op.outArray("Rotations Quats", 4);
 
@@ -142,7 +143,15 @@ function spawn()
     motionState.setWorldTransform(transform);
     body.setWorldTransform(transform);
 
+    if (bodies.length >= inLimit.get())
+    {
+        world.removeRigidBody(bodies[0].body);
+        bodies.shift();
+    }
+
     bodies.push({ "body": body, "ms": motionState });
+
+    outNum.set(bodies.length);
 
     shouldspawnOne = false;
 }

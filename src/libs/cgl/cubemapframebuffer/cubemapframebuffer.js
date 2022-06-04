@@ -171,11 +171,8 @@ class CubemapFramebuffer
         //     // this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
         // }
 
-
         this._framebuffer = this._cgl.gl.createFramebuffer();
         this._depthbuffer = this._cgl.gl.createRenderbuffer();
-
-        console.log("this._framebuffer", JSON.stringify(this._framebuffer));
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
