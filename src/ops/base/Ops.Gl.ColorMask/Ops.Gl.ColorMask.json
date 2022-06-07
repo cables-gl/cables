@@ -1,5 +1,5 @@
 {
-    "summary": "enable/disable color channels RGBA",
+    "summary": "enable/disable RGBA color channels of your entire scene",
     "layout": {
         "portsIn": [
             {
@@ -38,7 +38,6 @@
     "authorName": "pandur",
     "id": "44433419-dcf4-46e6-8f40-d331598029ac",
     "created": 1542701267377,
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -69,5 +68,7 @@
                 "text": "Trigger out"
             }
         ]
-    }
+    },
+    "caniusequery": "",
+    "youtubeids": []
 }

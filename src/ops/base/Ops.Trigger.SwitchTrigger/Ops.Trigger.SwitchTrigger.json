@@ -1,1 +1,176 @@
-{"id":"aee29293-0c4f-404d-b724-484bbb57361e","changelog":[{"message":"created op","author":"andro","date":1600442920679}],"authorName":"andro","created":1600442978422,"layout":{"portsIn":[{"type":"0","name":"Trigger Index","subType":"integer"},{"type":"1","name":"Trigger in 0"},{"type":"1","name":"Trigger in 1"},{"type":"1","name":"Trigger in 2"},{"type":"1","name":"Trigger in 3"},{"type":"1","name":"Trigger in 4"},{"type":"1","name":"Trigger in 5"},{"type":"1","name":"Trigger in 6"},{"type":"1","name":"Trigger in 7"},{"type":"1","name":"Trigger in 8"},{"type":"1","name":"Trigger in 9"},{"type":"1","name":"Trigger in 10"},{"type":"1","name":"Trigger in 11"},{"type":"1","name":"Trigger in 12"},{"type":"1","name":"Trigger in 13"},{"type":"1","name":"Trigger in 14"},{"type":"1","name":"Trigger in 15"}],"portsOut":[{"type":"1","name":"Trigger out"}],"name":"Ops.Trigger.SwitchTrigger"},"summary":"route input triggers by index to one output","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"Trigger Index","text":"index to be used"},{"name":"Trigger in 0","text":"trigger input 0"},{"name":"Trigger in 1","text":"trigger input 1"},{"name":"Trigger in 2","text":"trigger input 2"},{"name":"Trigger in 3","text":"trigger input 3"},{"name":"Trigger in 4","text":"trigger input 4"},{"name":"Trigger in 5","text":"trigger input 5"},{"name":"Trigger in 6","text":"trigger input 6"},{"name":"Trigger in 7","text":"trigger input 7"},{"name":"Trigger in 8","text":"trigger input 8"},{"name":"Trigger in 9","text":"trigger input 9"},{"name":"Trigger in 10","text":"trigger input 10"},{"name":"Trigger in 11","text":"trigger input 11"},{"name":"Trigger in 12","text":"trigger input 12"},{"name":"Trigger in 13","text":"trigger input 13"},{"name":"Trigger in 14","text":"trigger input 14"},{"name":"Trigger in 15","text":"trigger input 15"},{"name":"Trigger out","text":"trigger output"}]}}
+{
+    "id": "aee29293-0c4f-404d-b724-484bbb57361e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1600442920679
+        }
+    ],
+    "authorName": "andro",
+    "created": 1600442978422,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Trigger Index",
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 0"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 1"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 2"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 3"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 4"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 5"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 6"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 7"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 8"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 9"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 10"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 11"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 12"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 13"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 14"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 15"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger out"
+            }
+        ],
+        "name": "Ops.Trigger.SwitchTrigger"
+    },
+    "summary": "route input triggers by index to one output",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "TdHgjqOLpnM"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger Index",
+                "text": "index to be used"
+            },
+            {
+                "name": "Trigger in 0",
+                "text": "trigger input 0"
+            },
+            {
+                "name": "Trigger in 1",
+                "text": "trigger input 1"
+            },
+            {
+                "name": "Trigger in 2",
+                "text": "trigger input 2"
+            },
+            {
+                "name": "Trigger in 3",
+                "text": "trigger input 3"
+            },
+            {
+                "name": "Trigger in 4",
+                "text": "trigger input 4"
+            },
+            {
+                "name": "Trigger in 5",
+                "text": "trigger input 5"
+            },
+            {
+                "name": "Trigger in 6",
+                "text": "trigger input 6"
+            },
+            {
+                "name": "Trigger in 7",
+                "text": "trigger input 7"
+            },
+            {
+                "name": "Trigger in 8",
+                "text": "trigger input 8"
+            },
+            {
+                "name": "Trigger in 9",
+                "text": "trigger input 9"
+            },
+            {
+                "name": "Trigger in 10",
+                "text": "trigger input 10"
+            },
+            {
+                "name": "Trigger in 11",
+                "text": "trigger input 11"
+            },
+            {
+                "name": "Trigger in 12",
+                "text": "trigger input 12"
+            },
+            {
+                "name": "Trigger in 13",
+                "text": "trigger input 13"
+            },
+            {
+                "name": "Trigger in 14",
+                "text": "trigger input 14"
+            },
+            {
+                "name": "Trigger in 15",
+                "text": "trigger input 15"
+            },
+            {
+                "name": "Trigger out",
+                "text": "trigger output"
+            }
+        ]
+    },
+    "caniusequery": ""
+}
