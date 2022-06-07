@@ -152,9 +152,6 @@ const Patch = function (cfg)
 
     console.log("made with https://cables.gl"); // eslint-disable-line
 
-    console.log("patch config", this.config.canvas);
-    console.log("cgl getInfo", this.cgl.getInfo());
-
     // console.log("checking extention OES_texture_half_float", this.cgl.gl.getExtension("OES_texture_half_float"));
     // console.log("checking extention OES_texture_half_float_linear", this.cgl.gl.getExtension("OES_texture_half_float_linear"));
     // console.log("checking extention OES_texture_float_linear", this.cgl.gl.getExtension("OES_texture_float_linear"));
