@@ -1,0 +1,1 @@
+Note this isn't a texture effect - use this op in your Scene layout to disable color channels to create special effects without using Render2Texture and ImageCompose workflows.
