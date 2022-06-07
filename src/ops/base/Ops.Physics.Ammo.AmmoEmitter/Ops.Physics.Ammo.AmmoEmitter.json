@@ -36,6 +36,10 @@
                 "subType": "number"
             },
             {
+                "type": 5,
+                "name": "Name"
+            },
+            {
                 "type": 0,
                 "name": "Friction",
                 "subType": "number"

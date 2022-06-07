@@ -104,6 +104,11 @@
                 "type": 0,
                 "name": "Speed",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Add Velocity Y",
+                "subType": "number"
             }
         ],
         "portsOut": [

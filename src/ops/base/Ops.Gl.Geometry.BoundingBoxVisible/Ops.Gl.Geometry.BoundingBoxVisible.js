@@ -53,6 +53,7 @@ inBB.onChange = function ()
 {
     mesh = null;
 };
+buildMesh();
 
 function buildMesh()
 {
@@ -198,34 +199,38 @@ exec.onTriggered = () =>
 
     mat4.multiply(m, cgl.vMatrix, cgl.mMatrix);
 
-    const isVis =
+    if (bb)
+    {
+        const isVis =
 
-        isVisible(bb._center) ||
+            isVisible(bb._center) ||
 
-        isVisible(bb._max) ||
-        isVisible(bb._min) ||
+            isVisible(bb._max) ||
+            isVisible(bb._min) ||
 
-        lineToScreen(bb._max, bb._min) ||
+            lineToScreen(bb._max, bb._min) ||
 
-        lineToScreen([bb._max[0], bb._max[1], bb._max[2]], [bb._min[0], bb._max[1], bb._max[2]]) ||
-        lineToScreen([bb._min[0], bb._max[1], bb._max[2]], [bb._min[0], bb._min[1], bb._max[2]]) ||
-        lineToScreen([bb._min[0], bb._min[1], bb._max[2]], [bb._max[0], bb._min[1], bb._max[2]]) ||
-        lineToScreen([bb._max[0], bb._min[1], bb._max[2]], [bb._max[0], bb._max[1], bb._max[2]]) ||
+            lineToScreen([bb._max[0], bb._max[1], bb._max[2]], [bb._min[0], bb._max[1], bb._max[2]]) ||
+            lineToScreen([bb._min[0], bb._max[1], bb._max[2]], [bb._min[0], bb._min[1], bb._max[2]]) ||
+            lineToScreen([bb._min[0], bb._min[1], bb._max[2]], [bb._max[0], bb._min[1], bb._max[2]]) ||
+            lineToScreen([bb._max[0], bb._min[1], bb._max[2]], [bb._max[0], bb._max[1], bb._max[2]]) ||
 
-        //
+            //
 
-        lineToScreen([bb._max[0], bb._max[1], bb._min[2]], [bb._min[0], bb._max[1], bb._min[2]]) ||
-        lineToScreen([bb._min[0], bb._max[1], bb._min[2]], [bb._min[0], bb._min[1], bb._min[2]]) ||
-        lineToScreen([bb._min[0], bb._min[1], bb._min[2]], [bb._max[0], bb._min[1], bb._min[2]]) ||
-        lineToScreen([bb._max[0], bb._min[1], bb._min[2]], [bb._max[0], bb._max[1], bb._min[2]]) ||
+            lineToScreen([bb._max[0], bb._max[1], bb._min[2]], [bb._min[0], bb._max[1], bb._min[2]]) ||
+            lineToScreen([bb._min[0], bb._max[1], bb._min[2]], [bb._min[0], bb._min[1], bb._min[2]]) ||
+            lineToScreen([bb._min[0], bb._min[1], bb._min[2]], [bb._max[0], bb._min[1], bb._min[2]]) ||
+            lineToScreen([bb._max[0], bb._min[1], bb._min[2]], [bb._max[0], bb._max[1], bb._min[2]]) ||
 
-        //
+            //
 
-        lineToScreen([bb._max[0], bb._max[1], bb._min[2]], [bb._max[0], bb._max[1], bb._max[2]]) ||
-        lineToScreen([bb._min[0], bb._max[1], bb._min[2]], [bb._min[0], bb._max[1], bb._max[2]]) ||
-        lineToScreen([bb._max[0], bb._min[1], bb._min[2]], [bb._max[0], bb._min[1], bb._max[2]]) ||
-        lineToScreen([bb._min[0], bb._min[1], bb._min[2]], [bb._min[0], bb._min[1], bb._max[2]]);
+            lineToScreen([bb._max[0], bb._max[1], bb._min[2]], [bb._max[0], bb._max[1], bb._max[2]]) ||
+            lineToScreen([bb._min[0], bb._max[1], bb._min[2]], [bb._min[0], bb._max[1], bb._max[2]]) ||
+            lineToScreen([bb._max[0], bb._min[1], bb._min[2]], [bb._max[0], bb._min[1], bb._max[2]]) ||
+            lineToScreen([bb._min[0], bb._min[1], bb._min[2]], [bb._min[0], bb._min[1], bb._max[2]]);
 
-    result.set(isVis);
+        result.set(isVis);
+    }
+
     next.trigger();
 };
