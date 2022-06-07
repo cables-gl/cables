@@ -46,5 +46,15 @@
             }
         ],
         "name": "Ops.Dev.AmmoBodyCollision"
+    },
+    "summary": "Check if two physic bodies are colliding",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }

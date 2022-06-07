@@ -104,6 +104,11 @@
                 "type": 0,
                 "name": "Speed",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Add Velocity Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -131,8 +136,18 @@
                 "name": "Transformed"
             }
         ],
-        "name": "Ops.Dev.AmmoCharacter"
+        "name": "Ops.Physics.Ammo.AmmoCharacter"
     },
     "authorName": "pandur",
-    "created": 1647282185058
+    "created": 1647282185058,
+    "summary": "Control and move a character in a physics environment",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
+    }
 }

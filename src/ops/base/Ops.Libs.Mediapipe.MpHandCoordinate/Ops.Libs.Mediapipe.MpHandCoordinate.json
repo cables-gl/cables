@@ -54,7 +54,9 @@
     "issues": "",
     "caniusequery": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpHandTracking"
+    ],
     "youtubeids": [],
     "exampleProjectId": "a5xfp4",
     "docs": {

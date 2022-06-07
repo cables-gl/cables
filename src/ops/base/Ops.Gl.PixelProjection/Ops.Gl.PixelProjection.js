@@ -1,10 +1,10 @@
 const
     render = op.inTrigger("render"),
     useVPSize = op.inBool("use viewport size", true),
-    width = op.inValue("Width", 500),
-    height = op.inValue("Height", 500),
-    zNear = op.inValue("frustum near", -500),
-    zFar = op.inValue("frustum far", 500),
+    width = op.inFloat("Width", 500),
+    height = op.inFloat("Height", 500),
+    zNear = op.inFloat("frustum near", -500),
+    zFar = op.inFloat("frustum far", 500),
     fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
     inAlign = op.inSwitch("Position 0,0", ["Top Left", "Center"], "Top Left"),
 

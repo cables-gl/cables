@@ -22,7 +22,7 @@
             },
             {
                 "type": 0,
-                "name": "Maximum Number Bodies",
+                "name": "Limit Bodies",
                 "subType": "integer"
             },
             {
@@ -34,6 +34,10 @@
                 "type": 0,
                 "name": "Mass",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Name"
             },
             {
                 "type": 0,
@@ -79,6 +83,10 @@
                 "name": "Remove All"
             },
             {
+                "type": 1,
+                "name": "Activate All"
+            },
+            {
                 "type": 0,
                 "name": "Remove Y<-100",
                 "subType": "boolean"
@@ -88,6 +96,11 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total Bodies",
+                "subType": "number"
             },
             {
                 "type": 3,

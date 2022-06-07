@@ -58,7 +58,7 @@
         ],
         "name": "Ops.User.pandur.ColorMapRange"
     },
-    "summary": "Adjust image brightness and contrast",
+    "summary": "Map the range of color number values to another",
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "a1452720-dc08-4195-983b-7949aac33055",

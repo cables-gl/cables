@@ -1,1 +1,2 @@
-https://ai.googleblog.com/2020/08/on-device-real-time-body-pose-tracking.html
+read more on the mediapipe project page:
+https://google.github.io/mediapipe/solutions/pose.html

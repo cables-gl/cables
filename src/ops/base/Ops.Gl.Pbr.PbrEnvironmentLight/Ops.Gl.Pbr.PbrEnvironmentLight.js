@@ -303,7 +303,6 @@ function computeIBLLUT(size)
         }
         else
         {
-            console.log("FB2");
             IBLLUTFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
                 "isFloatingPointTexture": true,
                 "filter": CGL.Texture.FILTER_LINEAR,

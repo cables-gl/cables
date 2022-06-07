@@ -23,7 +23,7 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.User.pandur.VizNumberBar"
+        "name": "Ops.Ui.VizNumberBar"
     },
     "summary": "Visualize numbers as a bar in patch, useful for debugging",
     "issues": "",

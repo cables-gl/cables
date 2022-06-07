@@ -112,6 +112,7 @@ function setup()
     if (!tmpTrans)tmpTrans = new Ammo.btTransform();
     if (!transform)transform = new Ammo.btTransform();
     if (colShape)Ammo.destroy(colShape);
+    colShape = null;
 
     transform.setIdentity();
 
@@ -153,11 +154,11 @@ function setup()
     }
     else
     {
+        inGeomSimplify.setUiAttribs({ "greyout": true });
         console.log("unknown shape type", inShape.get());
         return;
     }
 
-    inGeomSimplify.setUiAttribs({ "greyout": true });
     inSizeX.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });
     inSizeY.setUiAttribs({ "greyout": inShape.get() == "Sphere" });
     inSizeZ.setUiAttribs({ "greyout": inShape.get() == "Sphere" || inShape.get() == "Capsule" || inShape.get() == "Cone" });

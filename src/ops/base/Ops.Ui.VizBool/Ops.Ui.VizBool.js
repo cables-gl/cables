@@ -1,6 +1,13 @@
-const inNum = op.inBool("Boolean", 0);
+const
+    inNum = op.inBool("Boolean", 0),
+    outBool = op.outBoolNum("Bool");
 
 op.setUiAttrib({ "height": 100, "width": 100, "resizable": true });
+
+inNum.onChange = () =>
+{
+    outBool.set(inNum.get());
+};
 
 op.renderVizLayer = (ctx, layer) =>
 {

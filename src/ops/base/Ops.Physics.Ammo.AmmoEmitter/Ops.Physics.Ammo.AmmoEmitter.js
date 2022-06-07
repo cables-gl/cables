@@ -1,9 +1,11 @@
 const
     inExec = op.inTrigger("Exec"),
-    inNum = op.inInt("Maximum Number Bodies", 10),
+    inLimit = op.inInt("Limit Bodies", 10),
 
     inRadius = op.inFloat("Radius", 1),
     inMass = op.inFloat("Mass", 1),
+
+    inName = op.inString("Name", "emitterBody"),
 
     inFriction = op.inFloat("Friction", 0.5),
     inRollingFriction = op.inFloat("Rolling Friction", 0.5),
@@ -16,10 +18,12 @@ const
 
     inSpawn = op.inTriggerButton("Spawn One"),
     inRemove = op.inTriggerButton("Remove All"),
+    inActivate = op.inTriggerButton("Activate All"),
     inRemoveFalling = op.inBool("Remove Y<-100", true),
     // inLifeTime=op.inFloat("Lifetime",0),
 
     next = op.outTrigger("Next"),
+    outNum = op.outNumber("Total Bodies"),
     outPos = op.outArray("Positions", 3),
     outRot = op.outArray("Rotations Quats", 4);
 
@@ -29,6 +33,7 @@ inSpawn.onTriggered = () => { shouldspawnOne = true; };
 const bodies = [];
 const cgl = op.patch.cgl;
 
+let countAll = 0;
 let world = null;
 let tmpTrans = null;
 let btVelocity = null;
@@ -45,8 +50,16 @@ function removeAll()
         world.removeRigidBody(bodies[i].body);
     }
 
+    outPos.set(null);
+    outRot.set(null);
+
     bodies.length = 0;
 }
+
+inActivate.onTriggered = () =>
+{
+    for (let i = 0; i < bodies.length; i++) bodies[i].body.activate();
+};
 
 function setArrayTransformed(body, i, arrPos)
 {
@@ -129,11 +142,25 @@ function spawn()
     body.setLinearVelocity(btVelocity);
 
     world.addRigidBody(body);
+    world.setBodyMeta(body,
+        {
+            "name": inName.get() + "_" + countAll
+        });
 
     motionState.setWorldTransform(transform);
     body.setWorldTransform(transform);
 
+    if (bodies.length >= inLimit.get())
+    {
+        world.removeRigidBody(bodies[0].body);
+        bodies.shift();
+    }
+
     bodies.push({ "body": body, "ms": motionState });
+
+    countAll++;
+
+    outNum.set(bodies.length);
 
     shouldspawnOne = false;
 }

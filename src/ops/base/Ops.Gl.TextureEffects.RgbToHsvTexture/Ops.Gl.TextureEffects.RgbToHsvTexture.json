@@ -17,7 +17,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.RgbToHsvTexture"
+        "name": "Ops.Gl.TextureEffects.RgbToHsvTexture"
     },
     "credits": [
         {
@@ -30,7 +30,7 @@
     "authorName": "pandur",
     "id": "147ed29e-f04e-4f7c-b9d7-133d7c6cbef9",
     "created": 1647697092030,
-    "summary": "Convert a black and white map to a normal map",
+    "summary": "Convert a RGB Texture to Hue/Saturation/Lightness values as RGB colors",
     "docs": {
         "ports": []
     },
@@ -56,14 +56,16 @@
             "message": "Make texture size dynamic, right now fixed at 1024!",
             "author": "simod",
             "id": "20d29ae3-7a58-4ad2-9b24-4c7c2ba6f314",
-            "date": 1572519515040
+            "date": 1572519515040,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1654245403986
         }
     ],
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [
-        "a56wk9Xm9dY"
-    ],
-    "exampleProjectId": "L62oT6"
+    "youtubeids": [],
+    "exampleProjectId": "V7z4v4",
+    "caniusequery": ""
 }

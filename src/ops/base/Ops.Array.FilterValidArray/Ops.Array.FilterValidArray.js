@@ -1,25 +1,28 @@
 const
-    inArr=op.inArray("Array"),
-    inLength=op.inBool("Invalid when length is 0",true),
+    inArr = op.inArray("Array"),
+    inLength = op.inBool("Invalid when length is 0", true),
 
-    outArray=op.outArray("Last Valid Array"),
-    outValid=op.outBool("Is Valid");
+    outArray = op.outArray("Last Valid Array"),
+    outValid = op.outBool("Is Valid");
 
-inLength.onChange=
-inArr.onChange=
+inLength.onChange =
+inArr.onChange =
     update;
-
 
 function update()
 {
-    const arr=inArr.get();
+    const arr = inArr.get();
 
-    var r=true;
+    let r = true;
 
-    if(!arr || !arr.length) r=false;
-    else if(inLength.get() && arr.length==0) r=false;
+    if (!arr || !arr.length) r = false;
+    else if (inLength.get() && arr.length == 0) r = false;
 
-    if(r) outArray.set(arr);
+    if (r)
+    {
+        outArray.set([]);
+        outArray.set(arr);
+    }
 
     outValid.set(r);
 }

@@ -121,7 +121,9 @@
     "issues": "",
     "caniusequery": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Libs.Mediapipe.FaceMesh"
+    ],
     "youtubeids": [],
     "exampleProjectId": "wznlp4",
     "docs": {

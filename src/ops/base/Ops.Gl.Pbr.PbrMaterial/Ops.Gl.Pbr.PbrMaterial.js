@@ -132,7 +132,8 @@ PBRShader.uniformPbrRoughness = inRoughnessUniform;
 
 inTexPrefiltered.onChange = updateIBLTexDefines;
 
-inLightmapRGBE.onChange =
+inTexAORM.onChange =
+    inLightmapRGBE.onChange =
     inUseClearCoat.onChange =
     inTexAlbedo.onChange =
     inTexNormal.onChange =
