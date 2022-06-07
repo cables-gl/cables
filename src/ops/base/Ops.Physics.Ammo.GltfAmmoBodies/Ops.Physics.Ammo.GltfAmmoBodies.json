@@ -49,7 +49,7 @@
         ],
         "name": "Ops.Dev.GltfAmmoBodies"
     },
-    "summary": "",
+    "summary": "Create physic bodies from a GLTF File",
     "issues": "",
     "caniusequery": "",
     "collections": null,

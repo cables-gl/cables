@@ -139,5 +139,15 @@
         "name": "Ops.Physics.Ammo.AmmoCharacter"
     },
     "authorName": "pandur",
-    "created": 1647282185058
+    "created": 1647282185058,
+    "summary": "Control and move a character in a physics environment",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
+    }
 }

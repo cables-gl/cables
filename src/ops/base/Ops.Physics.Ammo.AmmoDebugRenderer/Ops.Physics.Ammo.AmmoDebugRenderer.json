@@ -70,5 +70,15 @@
     },
     "coreLibs": [
         "ammodebugdrawer"
-    ]
+    ],
+    "summary": "Visualize the physical bodies as lines and points",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
+    }
 }

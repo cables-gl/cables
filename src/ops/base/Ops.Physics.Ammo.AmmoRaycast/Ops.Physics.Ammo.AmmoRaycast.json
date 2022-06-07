@@ -62,5 +62,15 @@
         "name": "Ops.Dev.AmmoRaycast"
     },
     "authorName": "pandur",
-    "created": 1647160233425
+    "created": 1647160233425,
+    "summary": "Cast a ray and detect colliding bodies",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
+    }
 }

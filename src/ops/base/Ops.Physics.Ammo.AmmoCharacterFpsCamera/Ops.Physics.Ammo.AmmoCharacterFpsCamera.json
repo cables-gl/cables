@@ -15,6 +15,11 @@
             "message": "Ops.Dev.AmmoCharacterCamera renamed to Ops.Physics.Ammo.AmmoCharacterCamera",
             "author": "pandur",
             "date": 1654010351437
+        },
+        {
+            "message": "Ops.Physics.Ammo.AmmoCharacterCamera renamed to Ops.Physics.Ammo.AmmoCharacterFpsCamera",
+            "author": "pandur",
+            "date": 1654579909599
         }
     ],
     "authorName": "pandur",
@@ -95,5 +100,15 @@
             }
         ],
         "name": "Ops.Dev.AmmoCharacterCamera"
+    },
+    "summary": "First person camera to use with AmmoCharacter",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }
