@@ -60,13 +60,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.PixelDifference"
     },
-    "credits": [
-        {
-            "title": "NormalMap Shader",
-            "author": "moka",
-            "url": "https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11"
-        }
-    ],
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
     "id": "f4e53fd9-d4c3-4d0e-839a-78543c38b8db",
