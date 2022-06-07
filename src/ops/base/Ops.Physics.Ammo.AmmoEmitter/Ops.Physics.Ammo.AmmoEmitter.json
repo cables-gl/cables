@@ -112,5 +112,15 @@
             }
         ],
         "name": "Ops.Physics.Ammo.AmmoEmitter"
+    },
+    "summary": "Emit Ammo physics bodies by triggering",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }

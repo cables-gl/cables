@@ -43,14 +43,14 @@ void main()
 
     vec2 pp=p-pos;
     #ifndef CENTER
-        pp-=vec2(width/2.0,height/2.0*aspect);
+        pp-=vec2(width,height*aspect);
     #endif
 
     pp=pp*rot(rotate*DEG2RAD/45.0);
 
     float roundn=roundness*min(width,height);
 
-    vec2 size=max(vec2(width/2.0,height/2.0*aspect)-roundn,0.0);
+    vec2 size=max(vec2(width,height*aspect)-roundn,0.0);
     vec2 absPos=abs(pp)-size;
 
     d=max(absPos.x,absPos.y);

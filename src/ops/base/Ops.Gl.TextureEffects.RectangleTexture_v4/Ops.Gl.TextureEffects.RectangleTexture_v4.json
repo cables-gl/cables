@@ -42,12 +42,6 @@
             },
             {
                 "type": 0,
-                "name": "Aspect Ratio",
-                "group": "Size",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "X",
                 "group": "Position",
                 "subType": "number"
@@ -99,7 +93,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.RectangleTextureV4"
+        "name": "Ops.Gl.TextureEffects.RectangleTexture_v4"
     },
     "authorName": "pandur",
     "id": "268ad86e-1f6d-4099-b5c0-e1e0150adbfb",

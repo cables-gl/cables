@@ -38,7 +38,6 @@
     "authorName": "tim",
     "id": "0aecef8b-3bcb-44ac-ae62-38ce8cd4051e",
     "created": 1525706396391,
-    "youtubeid": "",
     "collections": [
         "hardware"
     ],
@@ -50,5 +49,8 @@
             "date": 1560414273881
         }
     ],
-    "exampleProjectId": "K0IGxF"
+    "exampleProjectId": "",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": []
 }
