@@ -1,13 +1,12 @@
-This op needs to be a child of an Image compose op. It is advised to turn off use Viewport size with the image compose and to make a smaller texture with user defined values.
+This op will take an incoming texture and convert each color pixel value to an Array 4 (RGBA). 
 
-Enable HDR on the image compose to get floating point outputs from the arrays.
-Otherwise the array out will have values of 0-255 instead of 0.0 to 1.0 
+When using 32bit textures your array values will be in the range of 0.0-1.0.
+8bit textures will have values of 0-255.
 
-Be careful with using high resolutions. Setting image compose to 100 x 100 will already result in an array length of 40,000
+Be careful with using high resolution textures. For example a texture of only 100x100 pixel will result in 40,000 values:
 Red 10,000
 Green 10,000
 Blue 10,000
 Alpha 10,000
 
-The array out will have the format of RGBA.
-To extract one color part of the array use the ArrayUnpack4 op.
+
