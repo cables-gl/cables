@@ -5,6 +5,8 @@ const
     inRadius = op.inFloat("Radius", 1),
     inMass = op.inFloat("Mass", 1),
 
+    inName = op.inString("Name", "emitterBody"),
+
     inFriction = op.inFloat("Friction", 0.5),
     inRollingFriction = op.inFloat("Rolling Friction", 0.5),
     inRestitution = op.inFloat("Restitution", 0.5),
@@ -31,6 +33,7 @@ inSpawn.onTriggered = () => { shouldspawnOne = true; };
 const bodies = [];
 const cgl = op.patch.cgl;
 
+let countAll = 0;
 let world = null;
 let tmpTrans = null;
 let btVelocity = null;
@@ -139,6 +142,10 @@ function spawn()
     body.setLinearVelocity(btVelocity);
 
     world.addRigidBody(body);
+    world.setBodyMeta(body,
+        {
+            "name": inName.get() + "_" + countAll
+        });
 
     motionState.setWorldTransform(transform);
     body.setWorldTransform(transform);
@@ -150,6 +157,8 @@ function spawn()
     }
 
     bodies.push({ "body": body, "ms": motionState });
+
+    countAll++;
 
     outNum.set(bodies.length);
 

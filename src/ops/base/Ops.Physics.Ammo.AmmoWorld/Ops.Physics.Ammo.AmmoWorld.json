@@ -98,5 +98,15 @@
     ],
     "coreLibs": [
         "ammoworld"
-    ]
+    ],
+    "summary": "Simulate physical world",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "psyNZ4",
+    "docs": {
+        "ports": []
+    }
 }

@@ -22,6 +22,7 @@ const
     inDirZ = op.inFloat("Dir Z"),
 
     inSpeed = op.inFloat("Speed", 1),
+    inFallVelocity = op.inFloat("Add Velocity Y", 0.5),
 
     next = op.outTrigger("next"),
     outX = op.outNumber("Position X"),
@@ -243,7 +244,7 @@ function update()
 
         if (doMove)
         {
-            btVelocity.setValue(vx, vy, vz);
+            btVelocity.setValue(vx, vy - inFallVelocity.get(), vz);
             body.setLinearVelocity(btVelocity);
         }
     }

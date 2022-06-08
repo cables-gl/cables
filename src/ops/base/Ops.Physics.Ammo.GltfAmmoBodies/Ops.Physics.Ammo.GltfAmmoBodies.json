@@ -49,13 +49,13 @@
         ],
         "name": "Ops.Dev.GltfAmmoBodies"
     },
-    "summary": "",
+    "summary": "Create physic bodies from a GLTF File",
     "issues": "",
     "caniusequery": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "",
+    "exampleProjectId": "Gh2f_4",
     "docs": {
         "ports": []
     }
