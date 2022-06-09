@@ -18,6 +18,7 @@ let gltfMesh = class
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
+        this.morphGeom = null;
         this.primitive = 4;
 
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
@@ -220,8 +221,6 @@ let gltfMesh = class
 
     setGeom(geom)
     {
-        this.morphGeom = geom.copy();
-
         if (inNormFormat.get() == "X-ZY")
         {
             for (let i = 0; i < geom.vertexNormals.length; i += 3)
@@ -325,6 +324,8 @@ let gltfMesh = class
 
                 if (mt && mt.vertices && mt2)
                 {
+                    if (!this.morphGeom) this.morphGeom = geom.copy();
+
                     if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
                         this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
 
