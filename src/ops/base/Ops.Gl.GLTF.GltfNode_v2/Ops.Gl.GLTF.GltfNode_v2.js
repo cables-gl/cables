@@ -5,6 +5,10 @@ const
     inDraw = op.inBool("Draw Mesh", true),
     inChilds = op.inBool("Draw Childs", true),
     inIgnMaterial = op.inBool("Ignore Material", true),
+
+    inSceneTime = op.inBool("Use Scene Time", true),
+    inTime = op.inFloat("Time", 0),
+
     next = op.outTrigger("Next"),
     outGeom = op.outObject("Geometry", null, "geometry"),
     outFound = op.outBool("Found");
@@ -20,6 +24,15 @@ inNodeName.onChange = function ()
     outFound.set(false);
     op.setUiAttrib({ "extendTitle": inNodeName.get() });
 };
+
+inSceneTime.onChange = updateTimeInputs;
+
+updateTimeInputs();
+
+function updateTimeInputs()
+{
+    inTime.setUiAttribs({ "greyout": inSceneTime.get() });
+}
 
 inExec.onTriggered = function ()
 {
@@ -59,7 +72,12 @@ inExec.onTriggered = function ()
             node.transform(cgl);
         }
 
-        node.render(cgl, !inTrans.get(), !inDraw.get(), inIgnMaterial.get(), !inChilds.get(), true);
+        // render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
+
+        let time;
+        if (!inSceneTime.get()) time = inTime.get();
+
+        node.render(cgl, !inTrans.get(), !inDraw.get(), inIgnMaterial.get(), !inChilds.get(), true, time);
     }
 
     next.trigger();
