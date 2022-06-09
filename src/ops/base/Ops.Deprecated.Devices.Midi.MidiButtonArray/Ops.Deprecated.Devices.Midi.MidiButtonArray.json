@@ -77,18 +77,21 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "x0mjo8XStzA",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+    "relatedops": null,
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiButtonArray renamed to Ops.Deprecated.Devices.Midi.MidiButtonArray",
             "author": "pandur",
             "date": 1560334381967
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [
+        "x0mjo8XStzA"
+    ],
+    "exampleProjectId": ""
 }

@@ -120,6 +120,12 @@
             }
         ]
     },
-    "youtubeid": "Ww04Cw9wArM",
-    "exampleProjectId": "k6ttde"
+    "exampleProjectId": "k6ttde",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "Ww04Cw9wArM"
+    ]
 }

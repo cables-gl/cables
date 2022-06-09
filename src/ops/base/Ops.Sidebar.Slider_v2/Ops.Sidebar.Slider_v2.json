@@ -76,9 +76,15 @@
         "name": "Ops.Sidebar.Slider_v2"
     },
     "summary": "sidebar slider element (range)",
-    "youtubeid": "cpRVswVdvI0",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "aDgYX5"
+    "exampleProjectId": "aDgYX5",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cpRVswVdvI0"
+    ]
 }

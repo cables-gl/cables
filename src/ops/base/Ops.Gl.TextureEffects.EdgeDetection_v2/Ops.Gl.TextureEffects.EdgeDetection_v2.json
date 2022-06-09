@@ -40,9 +40,13 @@
         "name": "Ops.Gl.TextureEffects.EdgeDetection2"
     },
     "summary": "Draw only the edges of an image",
-    "youtubeid": "",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "dK8td8"
+    "exampleProjectId": "dK8td8",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

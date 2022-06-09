@@ -60,9 +60,15 @@
         "name": "Ops.Gl.TextureEffects.PixelDisplacement_v3"
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
-    "youtubeid": "cc5Vlmvlq6A",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Qxb9W6"
+    "exampleProjectId": "Qxb9W6",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cc5Vlmvlq6A"
+    ]
 }

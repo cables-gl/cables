@@ -28,7 +28,6 @@
         ],
         "name": "Ops.Devices.Midi.MidiInput"
     },
-    "youtubeid": "eDlaFD_d5lc",
     "docs": {
         "ports": [
             {
@@ -41,5 +40,12 @@
             }
         ]
     },
-    "exampleProjectId": "dfF3DI"
+    "exampleProjectId": "dfF3DI",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "eDlaFD_d5lc"
+    ]
 }

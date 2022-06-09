@@ -40,9 +40,14 @@
             }
         ]
     },
-    "youtubeid": "5pucC-GuDcs",
     "collections": [
         "transform"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [
+        "5pucC-GuDcs"
+    ],
+    "exampleProjectId": ""
 }

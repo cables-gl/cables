@@ -76,10 +76,14 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "NjG85Qbbl0w",
     "collections": [
         "vertexDeformers"
     ],
     "relatedops": null,
-    "exampleProjectId": "aSWlLu"
+    "exampleProjectId": "aSWlLu",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [
+        "NjG85Qbbl0w"
+    ]
 }

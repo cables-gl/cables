@@ -47,13 +47,10 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "eDlaFD_d5lc",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+    "relatedops": null,
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiButton renamed to Ops.Dreprecated.Devices.Midi.MidiButton",
@@ -65,5 +62,11 @@
             "author": "pandur",
             "date": 1567675245254
         }
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [
+        "eDlaFD_d5lc"
+    ],
+    "exampleProjectId": ""
 }

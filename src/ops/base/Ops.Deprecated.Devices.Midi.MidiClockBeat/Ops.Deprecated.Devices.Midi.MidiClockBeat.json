@@ -45,7 +45,6 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "46MCfZRQiGU",
     "collections": [
         "hardware"
     ],
@@ -57,5 +56,10 @@
             "author": "pandur",
             "date": 1560334363067
         }
-    ]
+    ],
+    "caniusequery": "",
+    "youtubeids": [
+        "46MCfZRQiGU"
+    ],
+    "exampleProjectId": ""
 }

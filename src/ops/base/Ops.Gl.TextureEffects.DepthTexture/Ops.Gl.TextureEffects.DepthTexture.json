@@ -59,6 +59,12 @@
             }
         ]
     },
-    "youtubeid": "EzV5CRAMyTA",
-    "exampleProjectId": "tmLbW6"
+    "exampleProjectId": "tmLbW6",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "EzV5CRAMyTA"
+    ]
 }

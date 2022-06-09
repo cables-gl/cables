@@ -40,6 +40,12 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "cpRVswVdvI0",
-    "exampleProjectId": "aDgYX5"
+    "exampleProjectId": "aDgYX5",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cpRVswVdvI0"
+    ]
 }

@@ -41,7 +41,6 @@
     "authorName": "pandur",
     "id": "b250d606-f7f8-44d3-b099-c29efff2608a",
     "created": 1540919889895,
-    "youtubeid": "3dYztfuw4lA",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -52,5 +51,9 @@
             "date": 1560414065683
         }
     ],
-    "exampleProjectId": "pixllg"
+    "exampleProjectId": "pixllg",
+    "caniusequery": "",
+    "youtubeids": [
+        "3dYztfuw4lA"
+    ]
 }
