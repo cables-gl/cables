@@ -1,0 +1,51 @@
+{
+    "id": "e64b035c-133e-43b0-9ff8-fcd03ee5f26e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1654767782439
+        },
+        {
+            "message": "Ops.User.pandur.GltfVertexAnim renamed to Ops.Gl.GLTF.GltfVertexAnim",
+            "author": "pandur",
+            "date": 1654780045809
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1654767808711,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Scene Time",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Found Node",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.pandur.GltfVertexAnim"
+    }
+}
