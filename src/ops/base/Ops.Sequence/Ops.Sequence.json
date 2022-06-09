@@ -146,19 +146,12 @@
         ],
         "name": "Ops.Sequence"
     },
+    "youtubeid": "1PtJG-Plz4Y",
     "changelog": [
         {
             "message": "code cleanup - ports",
             "author": "andro",
             "date": 1559051315372
         }
-    ],
-    "issues": "",
-    "caniusequery": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": [
-        "1PtJG-Plz4Y"
-    ],
-    "exampleProjectId": ""
+    ]
 }

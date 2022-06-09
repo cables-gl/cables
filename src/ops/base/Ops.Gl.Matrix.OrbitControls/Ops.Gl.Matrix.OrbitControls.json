@@ -148,11 +148,16 @@
                 "text": "The starting point from where to look at the scene in the x-axis"
             },
             {
+                "name": "Pointerlock",
+                "text": "hides cursor and allows mouse to move further than the window boundaries"
+            },
+            {
                 "name": "trigger",
                 "text": "Triggers the next op"
             }
         ]
     },
+    "youtubeid": "vIeAMFGA96E",
     "collections": [
         "cameras"
     ],
@@ -174,10 +179,5 @@
             "date": 1643616228871
         }
     ],
-    "exampleProjectId": "wZbb_b",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [
-        "vIeAMFGA96E"
-    ]
+    "exampleProjectId": "wZbb_b"
 }

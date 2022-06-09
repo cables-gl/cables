@@ -61,6 +61,7 @@
         "name": "Ops.Gl.Matrix.TransformView"
     },
     "summary": "transform the viewmatrix",
+    "youtubeid": "vIeAMFGA96E",
     "collections": [
         "cameras",
         "transform"
@@ -68,11 +69,5 @@
     "docs": {
         "ports": []
     },
-    "relatedops": null,
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [
-        "vIeAMFGA96E"
-    ],
-    "exampleProjectId": ""
+    "relatedops": null
 }

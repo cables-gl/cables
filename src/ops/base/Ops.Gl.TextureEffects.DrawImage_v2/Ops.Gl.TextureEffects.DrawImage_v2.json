@@ -141,6 +141,7 @@
         "name": "Ops.Gl.TextureEffects.DrawImage_v2"
     },
     "summary": "Draws an image into a composition",
+    "youtubeid": "Ww04Cw9wArM",
     "docs": {
         "ports": [
             {
@@ -175,9 +176,5 @@
             "deletedDate": 1605511996751
         }
     ],
-    "exampleProjectId": "k6ttde",
-    "caniusequery": "",
-    "youtubeids": [
-        "Ww04Cw9wArM"
-    ]
+    "exampleProjectId": "k6ttde"
 }

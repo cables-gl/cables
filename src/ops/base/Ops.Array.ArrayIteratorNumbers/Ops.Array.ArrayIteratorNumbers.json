@@ -56,6 +56,7 @@
     "authorName": "pandur",
     "id": "ec280011-1190-4333-9a68-adb4904fca1a",
     "created": 1540826805478,
+    "youtubeid": "63UbYklOZ3c",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -68,9 +69,5 @@
             "date": 1613548255738
         }
     ],
-    "exampleProjectId": "Ubwk3u",
-    "caniusequery": "",
-    "youtubeids": [
-        "63UbYklOZ3c"
-    ]
+    "exampleProjectId": "Ubwk3u"
 }

@@ -39,10 +39,13 @@
     "docs": {
         "ports": []
     },
+    "youtubeid": "eDlaFD_d5lc",
     "collections": [
         "hardware"
     ],
-    "relatedops": null,
+    "relatedops": [
+        ""
+    ],
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiValue renamed to Ops.Dreprecated.Devices.Midi.MidiValue",
@@ -54,11 +57,5 @@
             "author": "pandur",
             "date": 1567675263840
         }
-    ],
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [
-        "eDlaFD_d5lc"
-    ],
-    "exampleProjectId": ""
+    ]
 }

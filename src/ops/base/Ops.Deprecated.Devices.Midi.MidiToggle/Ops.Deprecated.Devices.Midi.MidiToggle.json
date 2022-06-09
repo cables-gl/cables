@@ -38,24 +38,21 @@
     "id": "b2aed468-d249-4e30-ad26-7902b15fe21c",
     "created": 1516046806684,
     "summary": "toggle a bool value by pressing a midi button",
+    "youtubeid": "eDlaFD_d5lc",
     "docs": {
         "ports": []
     },
     "collections": [
         "hardware"
     ],
-    "relatedops": null,
+    "relatedops": [
+        ""
+    ],
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiToggle renamed to Ops.Deprecated.Devices.Midi.MidiToggle",
             "author": "pandur",
             "date": 1560334347582
         }
-    ],
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [
-        "eDlaFD_d5lc"
-    ],
-    "exampleProjectId": ""
+    ]
 }

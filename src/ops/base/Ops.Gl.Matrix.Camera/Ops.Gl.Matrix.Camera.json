@@ -120,6 +120,10 @@
     "docs": {
         "ports": [
             {
+                "name": "projection mode",
+                "text": "perspective | orthographic"
+            },
+            {
                 "name": "fov",
                 "text": "Field of view of the camera"
             },
@@ -181,6 +185,7 @@
             }
         ]
     },
+    "youtubeid": "vIeAMFGA96E",
     "collections": null,
     "relatedops": null,
     "issues": "",
@@ -192,9 +197,5 @@
             "date": 1599818244067
         }
     ],
-    "exampleProjectId": "PSw73e",
-    "caniusequery": "",
-    "youtubeids": [
-        "vIeAMFGA96E"
-    ]
+    "exampleProjectId": "PSw73e"
 }

@@ -64,6 +64,7 @@
         "name": "Ops.User.pandur.PixelDisplacementV4"
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
+    "youtubeid": "cc5Vlmvlq6A",
     "docs": {
         "ports": []
     },
@@ -84,12 +85,5 @@
             "author": "pandur",
             "date": 1653286556466
         }
-    ],
-    "issues": "",
-    "caniusequery": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": [
-        "cc5Vlmvlq6A"
     ]
 }

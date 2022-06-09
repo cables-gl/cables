@@ -79,6 +79,7 @@
     "authorName": "pandur",
     "id": "84a1d08e-c0c7-4f73-9e15-06dd86e854d3",
     "created": 1534259128310,
+    "youtubeid": "z1Qf9dE67-w",
     "docs": {
         "ports": []
     },
@@ -93,10 +94,5 @@
             "date": 1572942535115
         }
     ],
-    "exampleProjectId": "RZsPWU",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [
-        "z1Qf9dE67-w"
-    ]
+    "exampleProjectId": "RZsPWU"
 }

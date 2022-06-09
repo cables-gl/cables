@@ -46,6 +46,7 @@
         "name": "Ops.Sidebar.Toggle_v3"
     },
     "summary": "sidebar boolean toggle/switch element",
+    "youtubeid": "cpRVswVdvI0",
     "docs": {
         "ports": []
     },
@@ -66,12 +67,5 @@
             "date": 1643888170356
         }
     ],
-    "exampleProjectId": "aDgYX5",
-    "issues": "",
-    "caniusequery": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": [
-        "cpRVswVdvI0"
-    ]
+    "exampleProjectId": "aDgYX5"
 }
