@@ -10,17 +10,14 @@ let gltfMesh = class
         this.TRIANGLE_STRIP = 5;
         this.TRIANGLE_FAN = 6;
 
-        this._gltf = gltf;
-        this._prim = prim;
+        this.test = 0;
         this.name = name;
         this.material = prim.material;
         this.mesh = null;
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
-        this.morphGeom = null;
         this.primitive = 4;
-
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
 
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
@@ -128,12 +125,6 @@ let gltfMesh = class
             }
             if (finished)finished(this);
         }
-    }
-
-    copy()
-    {
-        let m = new gltfMesh(this.name, this._prim, this._gltf);
-        return m;
     }
 
     _linearToSrgb(x)
@@ -285,7 +276,7 @@ let gltfMesh = class
         this.bounds = geom.getBounds();
     }
 
-    render(cgl, ignoreMaterial, skinRenderer, _time)
+    render(cgl, ignoreMaterial, skinRenderer)
     {
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
@@ -314,22 +305,21 @@ let gltfMesh = class
             // update morphTargets
             if (this.geom && this.geom.morphTargets.length)
             {
-                let morphtime = _time;
-                if (morphtime === undefined) morphtime * 11.7;
+                this.morphGeom = this.geom.copy();
 
-                if (morphtime >= this.geom.morphTargets.length - 1) morphtime = 0;
+                this.test = time * 11.7;
 
-                const mt = this.geom.morphTargets[Math.floor(morphtime)];
-                const mt2 = this.geom.morphTargets[Math.floor(morphtime + 1)];
+                if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
+
+                const mt = this.geom.morphTargets[Math.floor(this.test)];
+                const mt2 = this.geom.morphTargets[Math.floor(this.test + 1)];
 
                 if (mt && mt.vertices && mt2)
                 {
-                    if (!this.morphGeom) this.morphGeom = geom.copy();
-
                     if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
                         this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
 
-                    const fract = morphtime % 1;
+                    const fract = this.test % 1;
                     for (let i = 0; i < this.morphGeom.vertices.length; i++)
                     {
                         this.morphGeom.vertices[i] =
