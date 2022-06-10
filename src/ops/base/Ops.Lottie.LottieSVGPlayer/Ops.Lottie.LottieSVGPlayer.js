@@ -1,10 +1,15 @@
 const
     inEle = op.inObject("HTML Element"),
     inData = op.inObject("JSON Data"),
+    inPlayMode = op.inSwitch("Play Mode", ["Auto", "Frame"], "Auto"),
+
     inPlay = op.inValueBool("Play", true),
+    inFrame = op.inFloat("Render Frame", 0),
+
     inLoop = op.inValueBool("Loop", true),
     inDir = op.inBool("Play Backward"),
     inRewind = op.inTriggerButton("Rewind"),
+
     outComplete = op.outBool("Completed", false),
     outProgress = op.outNumber("Progress");
     // anim.setDirection(-1) ;
@@ -14,8 +19,23 @@ inLoop.onChange = inEle.onChange = inData.onChange = updateData;
 
 let anim = null;
 
+inFrame.onChange = gotoFrame;
 inDir.onChange = updateDir;
 inRewind.onTriggered = updateData;
+
+inPlayMode.onChange = updateUi;
+
+let playmodeAuto = true;
+
+function updateUi()
+{
+    playmodeAuto = inPlayMode.get() === "Auto";
+
+    inPlay.setUiAttribs({ "greyout": !playmodeAuto });
+    inFrame.setUiAttribs({ "greyout": playmodeAuto });
+    if (playmodeAuto) play();
+    else gotoFrame();
+}
 
 function dispose()
 {
@@ -30,7 +50,14 @@ function play()
 {
     if (!anim) return;
     outComplete.set(false);
-    anim.play();
+    if (!inPlay.get())anim.pause();
+    else anim.play();
+}
+
+function gotoFrame()
+{
+    if (playmodeAuto) return;
+    anim.goToAndStop(inFrame.get(), false);
 }
 
 function updateDir()

@@ -43,6 +43,16 @@
                 "type": 0,
                 "name": "Ignore Material",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Use Scene Time",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
             }
         ],
         "portsOut": [

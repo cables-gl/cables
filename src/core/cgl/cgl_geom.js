@@ -323,14 +323,23 @@ Geometry.prototype.copy = function ()
         for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
     }
 
-    geom.texCoords = new Float32Array(this.texCoords.length);
-    for (i = 0; i < this.texCoords.length; i++) geom.texCoords[i] = this.texCoords[i];
+    if (this.texCoords)
+    {
+        geom.texCoords = new Float32Array(this.texCoords.length);
+        for (i = 0; i < this.texCoords.length; i++) geom.texCoords[i] = this.texCoords[i];
+    }
 
-    geom.texCoordsIndices.length = this.texCoordsIndices.length;
-    for (i = 0; i < this.texCoordsIndices.length; i++) geom.texCoordsIndices[i] = this.texCoordsIndices[i];
+    if (this.texCoordsIndices)
+    {
+        geom.texCoordsIndices.length = this.texCoordsIndices.length;
+        for (i = 0; i < this.texCoordsIndices.length; i++) geom.texCoordsIndices[i] = this.texCoordsIndices[i];
+    }
 
-    geom.vertexNormals = new Float32Array(this.vertexNormals.length);
-    for (i = 0; i < this.vertexNormals.length; i++) geom.vertexNormals[i] = this.vertexNormals[i];
+    if (this.vertexNormals)
+    {
+        geom.vertexNormals = new Float32Array(this.vertexNormals.length);
+        for (i = 0; i < this.vertexNormals.length; i++) geom.vertexNormals[i] = this.vertexNormals[i];
+    }
 
     if (this.tangents)
     {

@@ -30,13 +30,6 @@ inNodeName.onChange = () =>
     update();
 };
 
-inNodeName.onChange = () =>
-{
-    op.setUiAttrib({ "extendTitle": inNodeName.get() });
-    node = null;
-    update();
-};
-
 function update()
 {
     if (!cgl.frameStore.currentScene) return;
