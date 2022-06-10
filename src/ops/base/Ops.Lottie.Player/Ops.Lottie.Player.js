@@ -29,6 +29,7 @@ let canvas = null;
 let cgl_filter = CGL.Texture.FILTER_NEAREST;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let createTexture = false;
+let wasloaded = false;
 
 bmScale.set("fit");
 tfilter.set("linear");
@@ -92,6 +93,12 @@ let lastFrame = -2;
 exe.onTriggered = function ()
 {
     if (!canvasImage || !canvas) return;
+
+    if (!wasloaded && anim.isLoaded)
+    {
+        wasloaded = true;
+        lastFrame = -10000;
+    }
 
     if (lastFrame != frame.get())
     {
@@ -165,6 +172,7 @@ function reload(force)
         ctx = canvasImage.getContext("2d");
     }
 
+    wasloaded = false;
     const animData = {
         "animType": "canvas",
         "loop": false,

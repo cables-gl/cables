@@ -239,12 +239,12 @@ const gltfNode = class
             if (this.skinRenderer)
             {
                 this.skinRenderer.time = _time;
-                if (!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer);
+                if (!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time);
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, null);
+                    this.mesh.render(cgl, ignoreMaterial, null, _time);
             }
         }
 

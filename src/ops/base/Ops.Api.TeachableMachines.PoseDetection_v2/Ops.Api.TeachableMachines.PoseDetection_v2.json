@@ -43,7 +43,7 @@
             {
                 "type": 0,
                 "name": "Image flipped",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Api.TeachableMachines.PoseDetection_v2"

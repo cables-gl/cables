@@ -212,8 +212,6 @@ let gltfMesh = class
 
     setGeom(geom)
     {
-        this.morphGeom = geom.copy();
-
         if (inNormFormat.get() == "X-ZY")
         {
             for (let i = 0; i < geom.vertexNormals.length; i += 3)
@@ -307,6 +305,8 @@ let gltfMesh = class
             // update morphTargets
             if (this.geom && this.geom.morphTargets.length)
             {
+                this.morphGeom = this.geom.copy();
+
                 this.test = time * 11.7;
 
                 if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
