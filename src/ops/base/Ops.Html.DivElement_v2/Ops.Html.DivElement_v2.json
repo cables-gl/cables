@@ -45,7 +45,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "DOM Element"
+                "name": "DOM Element",
+                "objType": "element"
             },
             {
                 "type": 0,

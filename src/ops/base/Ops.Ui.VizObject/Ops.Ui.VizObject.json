@@ -27,7 +27,7 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.Dev.VizObject"
+        "name": "Ops.Ui.VizObject"
     },
     "summary": "Show information about any object for patch debugging",
     "issues": "",
