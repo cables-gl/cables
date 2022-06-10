@@ -4,6 +4,8 @@
  * @namespace Utils
  */
 
+import { CONSTANTS } from "./constants";
+
 const UTILS = {};
 /**
  * Merge two Float32Arrays.
@@ -25,6 +27,25 @@ UTILS.float32Concat = function (first, second)
     result.set(second, first.length);
 
     return result;
+};
+
+/**
+ * get op shortname: only last part of fullname and without version
+ * @function getShortOpName
+ * @memberof CABLES
+ * @param {String} full op name
+ * @static
+ */
+export const getShortOpName = function (fullname)
+{
+    let name = fullname.split(".")[fullname.split(".").length - 1];
+
+    if (name.indexOf(CONSTANTS.OP.OP_VERSION_PREFIX) > 0)
+    {
+        const n = name.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
+        name = name.substring(0, name.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);
+    }
+    return name;
 };
 
 /**

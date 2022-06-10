@@ -52,16 +52,7 @@ const Op = function ()
 
     if (arguments[1])
     {
-        this._shortOpName = arguments[1].split(".")[arguments[1].split(".").length - 1];
-
-        if (this._shortOpName.indexOf(CONSTANTS.OP.OP_VERSION_PREFIX) > 0)
-        {
-            const n = this._shortOpName.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
-            this._shortOpName = this._shortOpName.substring(
-                0,
-                this._shortOpName.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length
-            );
-        }
+        this._shortOpName = CABLES.getShortOpName(arguments[1]);
 
         if (!this.uiAttribs.title)
             this.uiAttribs.title = this._shortOpName;
@@ -112,7 +103,6 @@ const Op = function ()
     Op.prototype.setTitle = function (name)
     {
         const doFireEvent = this.name != name;
-
         this.name = name;
         this.uiAttr({ "title": name });
 
