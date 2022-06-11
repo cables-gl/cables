@@ -1,3 +1,5 @@
+{{MODULES_HEAD}}
+
 IN vec3 barycentric;
 UNI float width;
 UNI float opacity;
@@ -14,6 +16,8 @@ float edgeFactor()
 
 void main()
 {
+    {{MODULE_BEGIN_FRAG}}
+
     vec4 col;
 
     #ifdef WIREFRAME_FILL
@@ -25,10 +29,10 @@ void main()
     #endif
 
     #ifndef WIREFRAME_FILL
-       col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);
+        col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);
     #endif
 
-    // col=vec4(barycentric,1.0);
+    {{MODULE_COLOR}}
 
     outColor=col;
 

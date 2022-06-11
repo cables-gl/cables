@@ -212,6 +212,7 @@ Shader.prototype.copy = function ()
     shader.glPrimitive = this.glPrimitive;
     shader.offScreenPass = this.offScreenPass;
     shader._extensions = this._extensions;
+    shader.wireframe = this.wireframe;
 
     for (let i = 0; i < this._uniforms.length; i++)
     {

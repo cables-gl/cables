@@ -7,7 +7,7 @@ const
     inVisible = op.inValueBool("Visible", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
-    outElement = op.outObject("DOM Element"),
+    outElement = op.outObject("DOM Element", null, "element"),
     outHover = op.outValue("Hover"),
     outClicked = op.outTrigger("Clicked");
 

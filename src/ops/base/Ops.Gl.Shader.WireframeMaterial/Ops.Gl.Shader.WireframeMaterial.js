@@ -55,8 +55,8 @@ var uniformOpacity = new CGL.Uniform(shader, "f", "opacity", opacity.get());
 
 if (cgl.glVersion == 1)shader.enableExtension("OES_standard_derivatives");
 
-shader.setSource(attachments.wireframe_vert || "", attachments.wireframe_frag || "");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setSource(attachments.wireframe_vert || "", attachments.wireframe_frag || "");
 shader.wireframe = true;
 setDefines();
 
