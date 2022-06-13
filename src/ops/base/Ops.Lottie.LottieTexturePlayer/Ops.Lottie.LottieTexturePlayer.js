@@ -1,62 +1,40 @@
-const exe = op.inTrigger("exe");
-// var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-const filename = op.inUrl("File");
+const exe = op.inTrigger("exe"),
+    filename = op.inUrl("File"),
+    play = op.inBool("play"),
+    tfilter = op.inDropDown("filter", ["nearest", "linear", "mipmap"], "linear", "linear"),
+    wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    flip = op.inBool("flip"),
+    width = op.inInt("texture width", 1280),
+    height = op.inInt("texture height", 720),
+    bmScale = op.inSwitch("scale", ["fit", "nofit"], "fit"),
+    rewind = op.inTriggerButton("rewind"),
+    speed = op.inFloat("speed", 1),
+    frame = op.inFloat("frame"),
+    textureOut = op.outTexture("texture"),
+    outTotalFrames = op.outNumber("Total Frames");
 
-const play = op.addInPort(new CABLES.Port(op, "play", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-
-const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "linear");
-// const tfilter = op.addInPort(new CABLES.Port(op, "filter", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["nearest", "linear", "mipmap"] }));
-const wrap = op.addInPort(new CABLES.Port(op, "wrap", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["repeat", "mirrored repeat", "clamp to edge"] }));
-const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-
-const width = op.addInPort(new CABLES.Port(op, "texture width"));
-const height = op.addInPort(new CABLES.Port(op, "texture height"));
-
-const bmScale = op.addInPort(new CABLES.Port(op, "scale", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["fit", "nofit"] }));
-
-const rewind = op.addInPort(new CABLES.Port(op, "rewind", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-const speed = op.addInPort(new CABLES.Port(op, "speed"));
-const frame = op.addInPort(new CABLES.Port(op, "frame"));
-
-const textureOut = op.outTexture("texture");
-
-const canvasId = "bodymovin_" + CABLES.generateUUID();
-
-bmScale.set("fit");
-
-// tfilter.set("linear");
-
-let createTexture = false;
-
-tfilter.onChange = onLottieFilterChange;
-filename.onChange = reload;
-
-bmScale.onChange = reloadForce;
-width.onChange = reloadForce;
-height.onChange = reloadForce;
-
-let canvasImage = null;
 const cgl = op.patch.cgl;
-
-speed.set(1);
-
+const canvasId = "bodymovin_" + CABLES.generateUUID();
+let createTexture = false;
+let canvasImage = null;
 let anim = null;
 let ctx = null;
 let canvas = null;
 let cgl_filter = CGL.Texture.FILTER_NEAREST;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
-width.set(1280);
-height.set(720);
+let lastFrame = -2;
+
+tfilter.onChange = onLottieFilterChange;
+filename.onChange = reload;
+
+bmScale.onChange =
+    width.onChange =
+    height.onChange = reloadForce;
 
 play.onChange = function ()
 {
     if (anim)
-        if (play.get())
-        {
-            anim.play();
-
-        // updateTexture();
-        }
+        if (play.get()) anim.play();
         else anim.pause();
 };
 
@@ -77,7 +55,6 @@ flip.onChange = function ()
 
 wrap.onChange = function ()
 {
-    // op.log(wrap.get());
     if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
     if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -94,9 +71,10 @@ function onLottieFilterChange()
     createTexture = true;
 }
 
-let lastFrame = -2;
 exe.onTriggered = function ()
 {
+    if (anim)outTotalFrames.set(anim.totalFrames);
+
     if (!canvasImage || !canvas) return;
 
     if (lastFrame != frame.get())
@@ -128,7 +106,6 @@ exe.onTriggered = function ()
 
 op.onDelete = function ()
 {
-    op.log("delete bodymovin...");
     if (anim)anim.stop();
     anim = null;
 };
@@ -141,6 +118,7 @@ function reloadForce()
 
 function reload(force)
 {
+    outTotalFrames.set(0);
     if (anim)
     {
         anim.stop();
@@ -148,23 +126,14 @@ function reload(force)
 
     if (!canvasImage || force)
     {
-        // op.log("create canvas...");
-        if (canvas)
-        {
-            canvas.remove();
-        }
+        if (canvas) canvas.remove();
         canvas = document.createElement("canvas");
         canvas.id = canvasId;
-        // op.log('canvasId',canvasId);
 
         canvas.width = width.get();
         canvas.height = height.get();
         canvas.style.display = "none";
 
-        // op.log("canvas size",canvas.width,canvas.height);
-
-        // canvas.style.display   = "block";
-        // canvas.style['z-index']   = "99999";
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(canvas);
 

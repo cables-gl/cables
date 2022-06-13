@@ -3,35 +3,37 @@ const
     inData = op.inObject("JSON Data"),
     inPlayMode = op.inSwitch("Play Mode", ["Auto", "Frame"], "Auto"),
 
-    inPlay = op.inValueBool("Play", true),
     inFrame = op.inFloat("Render Frame", 0),
-
     inLoop = op.inValueBool("Loop", true),
+
+    inPlay = op.inValueBool("Play", true),
+
     inDir = op.inBool("Play Backward"),
     inRewind = op.inTriggerButton("Rewind"),
 
     outComplete = op.outBool("Completed", false),
-    outProgress = op.outNumber("Progress");
-    // anim.setDirection(-1) ;
+    outProgress = op.outNumber("Progress"),
+    outTotalFrames = op.outNumber("Total Frames");
 
-inPlay.onChange = play;
-inLoop.onChange = inEle.onChange = inData.onChange = updateData;
+op.setPortGroup("Timing", [inLoop, inPlayMode, inFrame, inPlay, inRewind, inDir]);
 
 let anim = null;
+let playmodeAuto = true;
 
+inPlay.onChange = play;
+inRewind.onTriggered = inLoop.onChange = inEle.onChange = inData.onChange = updateData;
 inFrame.onChange = gotoFrame;
 inDir.onChange = updateDir;
-inRewind.onTriggered = updateData;
-
 inPlayMode.onChange = updateUi;
-
-let playmodeAuto = true;
+updateUi();
 
 function updateUi()
 {
     playmodeAuto = inPlayMode.get() === "Auto";
 
     inPlay.setUiAttribs({ "greyout": !playmodeAuto });
+    inDir.setUiAttribs({ "greyout": !playmodeAuto });
+    inRewind.setUiAttribs({ "greyout": !playmodeAuto });
     inFrame.setUiAttribs({ "greyout": playmodeAuto });
     if (playmodeAuto) play();
     else gotoFrame();
@@ -43,12 +45,15 @@ function dispose()
     {
         anim.destroy();
         anim = null;
+        outTotalFrames.set(0);
     }
 }
 
 function play()
 {
     if (!anim) return;
+    if (!playmodeAuto) return gotoFrame();
+
     outComplete.set(false);
     if (!inPlay.get())anim.pause();
     else anim.play();
@@ -57,7 +62,12 @@ function play()
 function gotoFrame()
 {
     if (playmodeAuto) return;
-    anim.goToAndStop(inFrame.get(), false);
+    if (!anim) return;
+
+    let fr = inFrame.get();
+    if (inLoop.get())fr %= anim.totalFrames;
+
+    anim.goToAndStop(fr, true);
 }
 
 function updateDir()
@@ -66,25 +76,27 @@ function updateDir()
     if (!inDir.get()) anim.setDirection(1);
     else anim.setDirection(-1);
 
-    if (inPlay.get()) play();
+    if (inPlay.get() && playmodeAuto) play();
 }
 
 function updateData()
 {
     if (anim)dispose();
     if (!inEle.get() || !inData.get()) return;
+    if (Object.keys(inData.get()).length === 0) return;
 
-    if (Object.keys(inData.get()).length == 0) return;
+    updateUi();
 
     const params = {
         "container": inEle.get(),
         "renderer": "svg",
-        "loop": inLoop.get() == true,
-        "autoplay": inPlay.get() == true,
+        "loop": inLoop.get() === true,
+        "autoplay": (inPlay.get() === true && playmodeAuto),
         "animationData": inData.get()
     };
 
     anim = lottie.loadAnimation(params);
+
     anim.addEventListener("complete", () =>
     {
         outComplete.set(true);
@@ -94,6 +106,7 @@ function updateData()
     {
         outProgress.set(e.currentTime / (e.totalTime - 1));
     });
-
+    outTotalFrames.set(anim.totalFrames);
     updateDir();
+    gotoFrame();
 }
