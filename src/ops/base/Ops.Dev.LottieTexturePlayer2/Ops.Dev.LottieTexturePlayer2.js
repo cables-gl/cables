@@ -112,7 +112,7 @@ exe.onTriggered = function ()
         textureOut.set(tex);
         createTexture = false;
     }
-    if (updateTexture)
+    if (updateTexture && tex)
     {
         tex.initTexture(canvasImage);
         updateTexture = false;
@@ -149,8 +149,21 @@ function updateUi()
 
 function reload(force)
 {
-    if (!inData.get()) return;
-    if (Object.keys(inData.get()).length === 0) return;
+    if (!inData.get() || Object.keys(inData.get()).length === 0)
+    {
+        if (anim)anim.stop();
+
+        anim = null;
+        if (tex)tex.delete();
+        tex = null;
+
+        createTexture = true;
+        canvasImage = null;
+        lastFrame = -2;
+        updateTexture = true;
+
+        return;
+    }
 
     updateUi();
 
@@ -175,6 +188,8 @@ function reload(force)
         ctx = canvasImage.getContext("2d");
     }
 
+    console.log(222);
+
     const animData = {
         "animType": "canvas",
         "loop": false,
@@ -192,14 +207,14 @@ function reload(force)
     anim = bodymovin.loadAnimation(animData);
     anim.setSpeed(speed.get());
 
-    anim.addEventListener("DOMLoaded", function (e) // sometimes anim loadibng seems to be async ?
+    anim.addEventListener("DOMLoaded", function (e) // sometimes anim loading seems to be async ?
     {
-        finishedLoadinbg();
+        finishedLoading();
     });
 
-    finishedLoadinbg();
+    finishedLoading();
 }
-function finishedLoadinbg()
+function finishedLoading()
 {
     if (!playmodeAuto)
     {
