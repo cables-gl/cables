@@ -75,7 +75,9 @@ function onLottieFilterChange()
 
 exe.onTriggered = function ()
 {
-    if (anim)outTotalFrames.set(anim.totalFrames);
+    if (!anim) return;
+
+    outTotalFrames.set(anim.totalFrames);
 
     if (!canvasImage || !canvas) return;
 
@@ -189,5 +191,20 @@ function reload(force)
 
     anim = bodymovin.loadAnimation(animData);
     anim.setSpeed(speed.get());
+
+    anim.addEventListener("DOMLoaded", function (e) // sometimes anim loadibng seems to be async ?
+    {
+        finishedLoadinbg();
+    });
+
+    finishedLoadinbg();
+}
+function finishedLoadinbg()
+{
+    if (!playmodeAuto)
+    {
+        anim.goToAndPlay(0, true);
+        lastFrame = -2;
+    }
     if (playmodeAuto && inPlay.get()) anim.play();
 }
