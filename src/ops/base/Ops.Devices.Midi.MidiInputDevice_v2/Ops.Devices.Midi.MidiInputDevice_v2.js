@@ -2,7 +2,6 @@
 
 // https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
 
-op.requirements = [CABLES.Requirements.MIDI];
 
 /* INPUTS */
 
@@ -49,7 +48,7 @@ const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) =>
 op.setPortGroup("MIDI Event", [OUTPUTS.Event]);
 op.setPortGroup(
     "MIDI Event by Type",
-    Object.keys(OUTPUTS).map((key) => key !== "Event" && OUTPUTS[key]).filter(Boolean),
+    Object.keys(OUTPUTS).map((key) => { return key !== "Event" && OUTPUTS[key]; }).filter(Boolean),
 );
 
 /* CONSTANTS */
@@ -86,16 +85,19 @@ function getMIDIChannel(statusByte)
 {
     return statusByte & 0x0f;
 }
+
 function getMessageType(statusByte)
 {
     return MESSAGE_TYPES[statusByte >> 4] || "UNKNOWN";
 }
+
 function getMIDINote(dataByte1LSB)
 {
     return dataByte1LSB <= 126
         ? `${NOTE_VALUES[dataByte1LSB % 12]}${Math.floor(dataByte1LSB / 12) - 2} - ${dataByte1LSB}`
         : "NO NOTE";
 }
+
 const NRPN_CCS = [98, 99, 6, 38];
 const NRPN_VALUE_MSB = 6;
 const NRPN_VALUE_LSB = 38;
@@ -234,7 +236,7 @@ function onMIDIMessage(_event)
     const outputIndex = LSB;
     const outputValue = MSB;
 
-    const isNRPNByte = messageType === "CC" && NRPN_CCS.some((cc) => cc === LSB);
+    const isNRPNByte = messageType === "CC" && NRPN_CCS.some((cc) => { return cc === LSB; });
     let nrpnIndex;
     let nrpnValue;
 
