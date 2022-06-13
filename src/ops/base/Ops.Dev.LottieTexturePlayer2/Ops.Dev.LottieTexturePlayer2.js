@@ -188,8 +188,6 @@ function reload(force)
         ctx = canvasImage.getContext("2d");
     }
 
-    console.log(222);
-
     const animData = {
         "animType": "canvas",
         "loop": false,
