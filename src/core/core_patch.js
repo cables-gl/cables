@@ -944,7 +944,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    const reqs = new Requirements(this);
+    // const reqs = new Requirements(this);
 
     this.emitEvent("patchLoadStart");
 
@@ -967,7 +967,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             throw new Error("instancing error: " + opData.objName);
         }
 
-        reqs.checkOp(op);
+        // reqs.checkOp(op);
 
         if (op)
         {

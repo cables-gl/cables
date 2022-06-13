@@ -3,8 +3,6 @@
 
 // https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
 
-op.requirements = [CABLES.Requirements.MIDI];
-
 
 let normalize = op.addInPort(new CABLES.Port(op, "normalize", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 let deviceSelect = op.addInPort(new CABLES.Port(op, "device", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["none"] }));
