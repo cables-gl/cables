@@ -102,7 +102,8 @@ exe.onTriggered = function ()
         const texOpts =
         {
             "wrap": cgl_wrap,
-            "filter": cgl_filter
+            "filter": cgl_filter,
+            "unpackAlpha": false,
         };
         if (tex) tex.delete();
         tex = new CGL.Texture.createFromImage(cgl, canvasImage, texOpts);
