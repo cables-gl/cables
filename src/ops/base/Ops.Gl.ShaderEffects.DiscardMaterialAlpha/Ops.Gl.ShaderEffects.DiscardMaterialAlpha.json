@@ -1,0 +1,42 @@
+{
+    "id": "0cc7f41f-e933-4309-a63a-32a2446a5276",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655223615705
+        },
+        {
+            "message": "Ops.User.pandur.DiscardMaterialAlpha renamed to Ops.Gl.ShaderEffects.DiscardMaterialAlpha",
+            "author": "pandur",
+            "date": 1655224689601
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1655223630763,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Threshold",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Remove Alpha",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.DiscardMaterialAlpha"
+    }
+}

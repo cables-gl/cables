@@ -7,6 +7,7 @@ const
     smoothGraph = op.inBool("Smooth Graph", true),
     inScaleGraph = op.inFloat("Scale", 4),
     inSizeGraph = op.inFloat("Size", 128),
+    outCanv = op.outObject("Canvas"),
     outFPS = op.outValue("FPS");
 
 const cgl = op.patch.cgl;
@@ -236,7 +237,6 @@ function updateText()
 {
     if (!inShow.get()) return;
     let warn = "";
-
 
     if (op.patch.cgl.profileData.profileShaderCompiles > 0)warn += "Shader compile (" + op.patch.cgl.profileData.profileShaderCompileName + ") ";
     if (op.patch.cgl.profileData.profileShaderGetUniform > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
@@ -495,6 +495,9 @@ function render()
     lastTime = performance.now();
     selfTime = performance.now() - selfTimeStart;
     const startTimeChilds = performance.now();
+
+    outCanv.set(null);
+    outCanv.set(canvas);
 
     // startGlQuery();
     next.trigger();
