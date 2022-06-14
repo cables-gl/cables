@@ -15,14 +15,36 @@
     "authorName": "pandur",
     "created": 1655205808747,
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Stop"
+            }
+        ],
         "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Viewer Pose"
+            },
             {
                 "type": 0,
                 "name": "VR Support",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Matrix"
+            },
+            {
+                "type": 0,
+                "name": "In Session",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.WebXr"
+        "name": "Ops.Dev.WebXrVr"
     }
 }

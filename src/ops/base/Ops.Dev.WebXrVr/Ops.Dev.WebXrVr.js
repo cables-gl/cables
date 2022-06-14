@@ -4,17 +4,22 @@ https://web.dev/vr-comes-to-the-web-pt-ii/
 */
 
 const
-    outVr = op.outBoolNum("VR Support");
+    inStop = op.inTriggerButton("Stop"),
+    next = op.outTrigger("Next"),
+    outPose = op.outObject("Viewer Pose"),
+    outVr = op.outBoolNum("VR Support"),
+    outMat = op.outArray("Matrix"),
+    outSession = op.outBoolNum("In Session");
 
+const cgl = op.patch.cgl;
 let xr = navigator.xr;
 
 let hadError = false;
 let buttonEle = null;
+let glLayer = null;
 let xrSession = null;
 let webGLRenContext = null;
 let xrReferenceSpace = null;
-
-// let offsetTransform = new XRRigidTransform({ "x": 2, "y": 0, "z": 1 }, { "x": 0, "y": 1, "z": 0, "w": 1 });
 
 op.onDelete = removeButton;
 
@@ -23,11 +28,18 @@ const immersiveOK = navigator.xr.isSessionSupported("immersive-vr").then((r) =>
     if (r)initButton();
 });
 
+inStop.onTriggered = () =>
+{
+    if (xrSession)xrSession.end();
+    outSession.set(false);
+};
+
 function startVr()
 {
     xr.requestSession("immersive-vr").then((session) =>
     {
         xrSession = session;
+        outSession.set(true);
 
         xrSession.requestReferenceSpace("local").then((refSpace) =>
         {
@@ -36,16 +48,17 @@ function startVr()
 
         if (xrSession)
         {
-            let canvas = document.createElement("canvas");
+            outVr.set(true);
+
+            // let canvas = document.createElement("canvas");
+            let canvas = cgl.canvas;
             webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
 
             xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
 
-            console.log(xrSession);
+            // console.log(xrSession);
             xrSession.requestAnimationFrame(onXRFrame);
         }
-
-        outVr.set(true);
     });
 }
 
@@ -60,12 +73,25 @@ function onXRFrame(hrTime, xrFrame)
     {
         let xrViewerPose = xrFrame.getViewerPose(xrReferenceSpace);
 
-        // console.log(xrViewerPose);
+        // console.log(xrViewerPose.transform.matrix);
+        outMat.set(xrViewerPose.transform.matrix);
+
+        outPose.set(null);
+        outPose.set(xrViewerPose);
 
         if (xrViewerPose)
         {
-            let glLayer = xrSession.renderState.baseLayer;
+            glLayer = xrSession.renderState.baseLayer;
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
+        }
+
+        cgl.gl.clearColor(0, 0, 0, 1);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
+        for (let i = 0; i < xrViewerPose.views.length; i++)
+        {
+            renderPre();
+            renderEye(xrViewerPose.views[i]);
         }
     }
     catch (e)
@@ -73,6 +99,45 @@ function onXRFrame(hrTime, xrFrame)
         console.log(e);
         hadError = true;
     }
+}
+
+function renderPre()
+{
+    cgl.pushDepthTest(true);
+    cgl.pushDepthWrite(true);
+    cgl.pushDepthFunc(cgl.gl.LEQUAL);
+
+    CGL.MESH.lastShader = null;
+    CGL.MESH.lastMesh = null;
+}
+
+function renderPost()
+{
+    cgl.popViewMatrix();
+    cgl.popPMatrix();
+}
+
+function renderEye(view)
+{
+    cgl.pushBlend(true);
+    cgl.gl.blendEquationSeparate(cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD);
+    cgl.gl.blendFuncSeparate(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+    cgl.pushPMatrix();
+
+    cgl.pMatrix = view.projectionMatrix;
+
+    cgl.pushViewMatrix();
+
+    mat4.identity(cgl.vMatrix);
+
+    let viewport = glLayer.getViewport(view);
+    cgl.gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
+
+    next.trigger();
+
+    cgl.popViewMatrix();
+    cgl.popPMatrix();
 }
 
 function initButton()
