@@ -44,18 +44,8 @@
             },
             {
                 "type": 0,
-                "name": "filter index",
+                "name": "wrap index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "filter",
-                "subType": "string"
-            },
-            {
-                "type": 0,
-                "name": "wrap",
-                "subType": "select box"
             },
             {
                 "type": 0,
@@ -65,17 +55,17 @@
             {
                 "type": 0,
                 "name": "texture width",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "texture height",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "scale",
-                "subType": "select box"
+                "name": "scale index",
+                "subType": "integer"
             },
             {
                 "type": 1,
@@ -97,6 +87,11 @@
                 "type": 2,
                 "name": "texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Total Frames",
+                "subType": "number"
             }
         ],
         "name": "Ops.Lottie.LottieTexturePlayer"

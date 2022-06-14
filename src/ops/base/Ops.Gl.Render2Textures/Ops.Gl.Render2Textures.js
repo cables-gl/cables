@@ -18,8 +18,6 @@ const fpTexture = op.inValueBool("HDR");
 const depth = op.inValueBool("Depth", true);
 const clear = op.inValueBool("Clear", true);
 
-op.requirements = [CABLES.Requirements.WEBGL2];
-
 
 const cgl = op.patch.cgl;
 

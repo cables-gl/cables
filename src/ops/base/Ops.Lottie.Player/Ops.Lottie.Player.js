@@ -30,6 +30,7 @@ let cgl_filter = CGL.Texture.FILTER_NEAREST;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let createTexture = false;
 let wasloaded = false;
+let loadingId = null;
 
 bmScale.set("fit");
 tfilter.set("linear");
@@ -186,7 +187,16 @@ function reload(force)
             "scaleMode": bmScale.get()
         }
     };
+    cgl.patch.loading.finished(loadingId);
+    loadingId = cgl.patch.loading.start("textureOp", filename.get());
+
     anim = bodymovin.loadAnimation(animData);
+    anim.addEventListener("DOMLoaded", () =>
+    {
+        console.log("loaded!");
+        cgl.patch.loading.finished(loadingId);
+    });
+
     anim.setSpeed(speed.get());
     anim.play();
 }

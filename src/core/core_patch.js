@@ -8,7 +8,6 @@ import { Profiler } from "./core_profiler";
 import { Context } from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
-import { Requirements } from "./requirements";
 import Logger from "./core_logger";
 import PatchVariable from "./core_variable";
 
@@ -944,8 +943,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    const reqs = new Requirements(this);
-
     this.emitEvent("patchLoadStart");
 
     // add ops...
@@ -966,8 +963,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this._log.warn("[instancing error] op data:", opData, e);
             throw new Error("instancing error: " + opData.objName);
         }
-
-        reqs.checkOp(op);
 
         if (op)
         {

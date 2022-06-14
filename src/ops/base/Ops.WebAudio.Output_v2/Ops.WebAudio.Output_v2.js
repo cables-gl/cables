@@ -1,5 +1,3 @@
-op.requirements = [CABLES.Requirements.WEBAUDIO];
-
 let isSuspended = false;
 let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 let gainNode = audioCtx.createGain();

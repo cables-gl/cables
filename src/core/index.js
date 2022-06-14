@@ -9,7 +9,6 @@ import { Op } from "./core_op";
 import { EMBED } from "./embedding";
 import { Profiler } from "./core_profiler";
 import Patch from "./core_patch";
-import { Requirements } from "./requirements";
 import { Instancing } from "./instancing";
 import { LoadingStatus } from "./loadingstatus";
 import { WEBAUDIO } from "./webaudio";
@@ -26,7 +25,6 @@ const CABLES = Object.assign(
         Port,
         Op,
         Profiler,
-        Requirements,
         Patch,
         Instancing,
         Timer,

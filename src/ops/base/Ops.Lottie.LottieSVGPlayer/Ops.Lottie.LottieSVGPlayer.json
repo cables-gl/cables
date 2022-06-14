@@ -35,31 +35,37 @@
             {
                 "type": 0,
                 "name": "Play Mode index",
+                "group": "Timing",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Play",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Render Frame",
+                "group": "Timing",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Loop",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Play",
+                "group": "Timing",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Play Backward",
+                "group": "Timing",
                 "subType": "boolean"
             },
             {
                 "type": 1,
-                "name": "Rewind"
+                "name": "Rewind",
+                "group": "Timing"
             }
         ],
         "portsOut": [
@@ -71,6 +77,11 @@
             {
                 "type": 0,
                 "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Total Frames",
                 "subType": "number"
             }
         ],

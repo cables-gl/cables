@@ -1,60 +1,69 @@
-op.requirements=[CABLES.Requirements.WEBAUDIO];
 
-var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
+let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
-var VOLUME_DEFAULT = 1.0;
-var VOLUME_MIN = 0;
-var VOLUME_MAX = 1;
+let VOLUME_DEFAULT = 1.0;
+let VOLUME_MIN = 0;
+let VOLUME_MAX = 1;
 
 // vars
-var gainNode = audioCtx.createGain();
-var destinationNode = audioCtx.destination;
+let gainNode = audioCtx.createGain();
+let destinationNode = audioCtx.destination;
 gainNode.connect(destinationNode);
-var masterVolume = 1;
+let masterVolume = 1;
 
 // inputs
-var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", gainNode);
-var volumePort = op.inValueSlider("Volume", VOLUME_DEFAULT);
-var mutePort = op.inValueBool("Mute", false);
+let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", gainNode);
+let volumePort = op.inValueSlider("Volume", VOLUME_DEFAULT);
+let mutePort = op.inValueBool("Mute", false);
 
 // functions
 // sets the volume, multiplied by master volume
-function setVolume() {
-    var volume = volumePort.get() * masterVolume;
-    if(volume >= VOLUME_MIN && volume <= VOLUME_MAX) {
+function setVolume()
+{
+    let volume = volumePort.get() * masterVolume;
+    if (volume >= VOLUME_MIN && volume <= VOLUME_MAX)
+    {
         // gainNode.gain.value = volume;
         gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-    } else {
+    }
+    else
+    {
         // gainNode.gain.value = VOLUME_DEFAULT * masterVolume;
         gainNode.gain.setValueAtTime(VOLUME_DEFAULT * masterVolume, audioCtx.currentTime);
     }
 }
 
-function mute(b) {
-    if(b) {
+function mute(b)
+{
+    if (b)
+    {
         // gainNode.gain.value = 0;
         gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    } else {
+    }
+    else
+    {
         setVolume();
     }
 }
 
 // change listeners
-mutePort.onChange = function() {
+mutePort.onChange = function ()
+{
     mute(mutePort.get());
 };
 
-volumePort.onChange = function() {
-    if(mutePort.get()) {
+volumePort.onChange = function ()
+{
+    if (mutePort.get())
+    {
         return;
     }
     setVolume();
 };
 
-op.onMasterVolumeChanged = function(v) {
+op.onMasterVolumeChanged = function (v)
+{
     masterVolume = v;
     setVolume();
 };
-
-
