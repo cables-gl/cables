@@ -1,0 +1,47 @@
+{
+    "id": "3bda237e-819a-43d8-9fb8-0f32bd3f7cc8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655191326971
+        },
+        {
+            "message": "Ops.User.pandur.EaseArray renamed to Ops.Array.EaseArray",
+            "author": "pandur",
+            "date": 1655191703248
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1655191351855,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Easing index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result Array"
+            }
+        ],
+        "name": "Ops.User.pandur.EaseArray"
+    }
+}
