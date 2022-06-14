@@ -1,0 +1,28 @@
+{
+    "id": "884b3def-9bb3-422a-8e1c-c85dcc346f5e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655205733018
+        },
+        {
+            "message": "Ops.User.pandur.WebXr renamed to Ops.Dev.WebXrVr",
+            "author": "pandur",
+            "date": 1655208969779
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1655205808747,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "VR Support",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.WebXr"
+    }
+}
