@@ -17,10 +17,6 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Position"
-            },
-            {
                 "type": 0,
                 "name": "Open",
                 "subType": "boolean"
@@ -45,6 +41,10 @@
             {
                 "type": 1,
                 "name": "childs"
+            },
+            {
+                "type": 2,
+                "name": "Canvas"
             },
             {
                 "type": 0,

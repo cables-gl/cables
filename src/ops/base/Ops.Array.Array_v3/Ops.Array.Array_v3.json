@@ -1,7 +1,7 @@
 {
-    "authorName": "andro",
-    "id": "ca9219d2-9f06-4516-9cf2-98e61f84d4bb",
-    "created": 1558594939402,
+    "authorName": "pandur",
+    "id": "e4d31a46-bf64-42a8-be34-4cbb2bbc2600",
+    "created": 1655191858020,
     "layout": {
         "portsIn": [
             {
@@ -18,6 +18,11 @@
                 "type": 0,
                 "name": "Default Value",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reverse",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -31,7 +36,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Array.Array_v2"
+        "name": "Ops.User.pandur.Array3"
     },
     "summary": "Can generate 3 kinds of arrays. Number - 1,2,3,4 - Normalized - (ContinuousNumberArray)",
     "issues": "",
@@ -64,6 +69,16 @@
             "message": "Now has array length output port",
             "author": "andro",
             "date": 1565014902549
+        },
+        {
+            "message": "cloned op from Ops.Array.Array_v2",
+            "author": "pandur",
+            "date": 1655191858020
+        },
+        {
+            "message": "Ops.User.pandur.Array3 renamed to Ops.Array.Array_v3",
+            "author": "pandur",
+            "date": 1655192706745
         }
     ],
     "exampleProjectId": "P4qAz6"
