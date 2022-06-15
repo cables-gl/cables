@@ -4,7 +4,9 @@ https://web.dev/vr-comes-to-the-web-pt-ii/
 */
 
 const
+    inMainloop = op.inTrigger("Mainloop"),
     inStop = op.inTriggerButton("Stop"),
+    inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");"),
     next = op.outTrigger("Next"),
     outPose = op.outObject("Viewer Pose"),
     outVr = op.outBoolNum("VR Support"),
@@ -20,22 +22,38 @@ let glLayer = null;
 let xrSession = null;
 let webGLRenContext = null;
 let xrReferenceSpace = null;
+let vmat = mat4.create();
+let xrViewerPose = null;
 
 op.onDelete = removeButton;
+inStop.onTriggered = stopVr;
+
+inButtonStyle.onChange = () => { buttonEle.style = inButtonStyle.get(); };
 
 const immersiveOK = navigator.xr.isSessionSupported("immersive-vr").then((r) =>
 {
     if (r)initButton();
 });
 
-inStop.onTriggered = () =>
+function stopVr()
 {
     if (xrSession)xrSession.end();
+    xrSession = null;
     outSession.set(false);
-};
+
+    cgl.frameStore.xrSession = null;
+    cgl.frameStore.xrFrame = null;
+    cgl.frameStore.xrViewerPose = null;
+    cgl.frameStore.xrReferenceSpace = null;
+}
 
 function startVr()
 {
+    if (xrSession)
+    {
+        stopVr();
+        return;
+    }
     xr.requestSession("immersive-vr").then((session) =>
     {
         xrSession = session;
@@ -50,13 +68,11 @@ function startVr()
         {
             outVr.set(true);
 
-            // let canvas = document.createElement("canvas");
             let canvas = cgl.canvas;
-            webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+            webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": false });
 
             xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
 
-            // console.log(xrSession);
             xrSession.requestAnimationFrame(onXRFrame);
         }
     });
@@ -71,9 +87,13 @@ function onXRFrame(hrTime, xrFrame)
 
     try
     {
-        let xrViewerPose = xrFrame.getViewerPose(xrReferenceSpace);
+        xrViewerPose = xrFrame.getViewerPose(xrReferenceSpace);
 
-        // console.log(xrViewerPose.transform.matrix);
+        cgl.frameStore.xrSession = xrSession;
+        cgl.frameStore.xrFrame = xrFrame;
+        cgl.frameStore.xrViewerPose = xrViewerPose;
+        cgl.frameStore.xrReferenceSpace = xrReferenceSpace;
+
         outMat.set(xrViewerPose.transform.matrix);
 
         outPose.set(null);
@@ -101,6 +121,14 @@ function onXRFrame(hrTime, xrFrame)
     }
 }
 
+inMainloop.onTriggered = () =>
+{
+    if (!xrSession)
+    {
+        next.trigger();
+    }
+};
+
 function renderPre()
 {
     cgl.pushDepthTest(true);
@@ -109,12 +137,6 @@ function renderPre()
 
     CGL.MESH.lastShader = null;
     CGL.MESH.lastMesh = null;
-}
-
-function renderPost()
-{
-    cgl.popViewMatrix();
-    cgl.popPMatrix();
 }
 
 function renderEye(view)
@@ -129,7 +151,7 @@ function renderEye(view)
 
     cgl.pushViewMatrix();
 
-    mat4.identity(cgl.vMatrix);
+    mat4.invert(cgl.vMatrix, xrViewerPose.transform.matrix);
 
     let viewport = glLayer.getViewport(view);
     cgl.gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
@@ -153,21 +175,7 @@ function initButton()
     if (container)container.appendChild(buttonEle);
     buttonEle.addEventListener("click", startVr);
     buttonEle.addEventListener("touchstart", startVr);
-
-    buttonEle.style.padding = "10px";
-    buttonEle.style.position = "absolute";
-    buttonEle.style.left = "50%";
-    buttonEle.style.top = "50%";
-    buttonEle.style.width = "50px";
-    buttonEle.style.height = "50px";
-    buttonEle.style.cursor = "pointer";
-    buttonEle.style["border-radius"] = "40px";
-    buttonEle.style.background = "#444";
-    buttonEle.style["background-repeat"] = "no-repeat";
-    buttonEle.style["background-size"] = "70%";
-    buttonEle.style["background-position"] = "center center";
-    buttonEle.style["z-index"] = "9999";
-    buttonEle.style["background-image"] = "url(data:image/svg+xml," + attachments.icon_svg + ")";
+    buttonEle.style = inButtonStyle.get();
 }
 
 function removeButton()
