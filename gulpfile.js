@@ -46,7 +46,7 @@ function _append_build_info()
 {
     return gulp
         .src(["build/*.js"])
-        .pipe(footer("var CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"))
+        .pipe(footer("\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"))
         .pipe(gulp.dest("build/"));
 }
 
