@@ -18,7 +18,15 @@
         "portsIn": [
             {
                 "type": 1,
+                "name": "Mainloop"
+            },
+            {
+                "type": 1,
                 "name": "Stop"
+            },
+            {
+                "type": 5,
+                "name": "Button Style"
             }
         ],
         "portsOut": [
