@@ -1,7 +1,9 @@
 const
     inExec = op.inTrigger("Update"),
+    inCoords = op.inSwitch("Ray Coordinates", ["Screen XY", "Points 3d"], "Screen XY"),
     inX = op.inValueFloat("Screen X"),
     inY = op.inValueFloat("Screen Y"),
+    inRayPoints = op.inArray("Ray Points"),
     active = op.inBool("Active", true),
     inCursor = op.inBool("Change Cursor", true),
     next = op.outTrigger("next"),
@@ -14,8 +16,19 @@ inExec.onTriggered = update;
 const cgl = op.patch.cgl;
 let world = null;
 let didsetCursor = false;
-
 let mat = mat4.create();
+let isScreenCoords = true;
+
+inCoords.onChange = updateCoordsType;
+updateCoordsType();
+
+function updateCoordsType()
+{
+    isScreenCoords = inCoords.get() == "Screen XY";
+    inX.setUiAttribs({ "greyout": !isScreenCoords });
+    inY.setUiAttribs({ "greyout": !isScreenCoords });
+    inRayPoints.setUiAttribs({ "greyout": isScreenCoords });
+}
 
 function update()
 {
@@ -24,27 +37,38 @@ function update()
 
     if (active.get())
     {
-        const x = inX.get();
-        const y = inY.get();
+        let afrom;
+        let ato;
 
-        const origin = vec3.fromValues(x, y, -1);
-        mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
-        mat4.invert(mat, mat);
+        if (isScreenCoords)
+        {
+            const x = inX.get();
+            const y = inY.get();
 
-        vec3.transformMat4(origin, origin, mat);
+            const origin = vec3.fromValues(x, y, -1);
+            mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
+            mat4.invert(mat, mat);
 
-        // -----------
+            vec3.transformMat4(origin, origin, mat);
 
-        const to = vec3.fromValues(x, y, 1);
-        mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
-        mat4.invert(mat, mat);
+            // -----------
 
-        vec3.transformMat4(to, to, mat);
+            const to = vec3.fromValues(x, y, 1);
+            mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
+            mat4.invert(mat, mat);
 
-        const afrom = new Ammo.btVector3(origin[0], origin[1], origin[2]);
-        const ato = new Ammo.btVector3(to[0], to[1], to[2]);
+            vec3.transformMat4(to, to, mat);
 
-        // world.ClosestRayResultCallback(afrom,ato);
+            afrom = new Ammo.btVector3(origin[0], origin[1], origin[2]);
+            ato = new Ammo.btVector3(to[0], to[1], to[2]);
+        }
+        else
+        {
+            const arr = inRayPoints.get() || [0, 0, 0, 0, 0, 0];
+
+            afrom = new Ammo.btVector3(arr[0], arr[1], arr[2]);
+            ato = new Ammo.btVector3(arr[3], arr[4], arr[5]);
+        }
 
         const rayCallback = new Ammo.ClosestRayResultCallback(afrom, ato);
         world.world.rayTest(afrom, ato, rayCallback);
@@ -58,13 +82,6 @@ function update()
                 world.emitEvent("rayCastHit", meta.name);
                 outName.set(meta.name);
             }
-            // console.log();
-
-            // body = btRigidBody.prototype.upcast(rayCallback.m_collisionObject);
-            // if (body !== NULL)
-            // {
-            //     console.log("hit");
-            // }
         }
         else
         {
@@ -84,8 +101,6 @@ function update()
             op.patch.cgl.setCursor("auto");
             didsetCursor = false;
         }
-
-		 // closestResults(from, to);
     }
 
     next.trigger();
