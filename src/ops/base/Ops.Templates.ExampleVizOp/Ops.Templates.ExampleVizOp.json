@@ -1,0 +1,28 @@
+{
+    "id": "08f3a509-1cad-4dfc-961c-2bd925e066dd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655384307866
+        },
+        {
+            "message": "Ops.User.pandur.ExampleVizOp renamed to Ops.Templates.ExampleVizOp",
+            "author": "pandur",
+            "date": 1655384939013
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1655384346929,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.User.pandur.ExampleVizOp"
+    }
+}
