@@ -54,7 +54,7 @@ void main()
         #endif
     }
 
-    outColor=cgl_blendPixel(base,col,amount*v);
+    outColor=cgl_blendPixel(base,col,clamp(amount*v,0.0,1.0));
 
     outColor.a-=(1.0-a)*v;
 

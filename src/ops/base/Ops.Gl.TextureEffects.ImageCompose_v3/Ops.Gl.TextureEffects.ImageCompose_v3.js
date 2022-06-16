@@ -162,6 +162,11 @@ function updateDefines()
 
 function updateUi()
 {
+    r.setUiAttribs({ "greyout": inTex.isLinked() });
+    b.setUiAttribs({ "greyout": inTex.isLinked() });
+    g.setUiAttribs({ "greyout": inTex.isLinked() });
+    a.setUiAttribs({ "greyout": inTex.isLinked() });
+
     width.setUiAttribs({ "greyout": inSize.get() == "Auto" });
     height.setUiAttribs({ "greyout": inSize.get() == "Auto" });
 
