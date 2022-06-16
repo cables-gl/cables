@@ -7,6 +7,8 @@ const
     gType = op.inSwitch("Type", ["X", "Y", "XY", "Radial"], "X"),
     pos1 = op.inValueSlider("Pos", 0.5),
     smoothStep = op.inValueBool("Smoothstep", true),
+    inSrgb = op.inValueBool("sRGB", false),
+    inColSpace = op.inSwitch("color space", ["RGB", "Oklab", "OklabG"], "RGB"),
 
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
@@ -51,11 +53,19 @@ updateCol2();
 updateCol3();
 updateDefines();
 
+inSrgb.onChange =
+inColSpace.onChange =
 smoothStep.onChange =
     gType.onChange = updateDefines;
 
 function updateDefines()
 {
+    // shader.toggleDefine("OKLABGAIN", inoklabGain.get());
+    shader.toggleDefine("SRGB", inSrgb.get());
+
+    shader.define("MIXER", (inColSpace.get() + "").indexOf("Oklab") > -1 ? "oklab_mix" : "mix");
+    shader.toggleDefine("OKLABGAIN", (inColSpace.get() + "").indexOf("OklabG") > -1);
+
     shader.toggleDefine("GRAD_SMOOTHSTEP", smoothStep.get());
     shader.toggleDefine("GRAD_X", gType.get() == "X");
     shader.toggleDefine("GRAD_XY", gType.get() == "XY");
