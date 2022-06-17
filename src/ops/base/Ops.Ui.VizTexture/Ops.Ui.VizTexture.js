@@ -143,12 +143,18 @@ op.renderVizLayer = (ctx, layer) =>
             ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
         }
 
-    if (sizeTex[1] == 1 || sizeTex[0] == 1)
+    if (sizeTex[1] == 1)
         ctx.drawImage(cgl.canvas,
             0, 0,
             s[0], s[1],
             layer.x, layer.y,
-            layer.width * 4, layer.height * 4);
+            layer.width, layer.height * 5);// workaround filtering problems
+    if (sizeTex[0] == 1)
+        ctx.drawImage(cgl.canvas,
+            0, 0,
+            s[0], s[1],
+            layer.x, layer.y,
+            layer.width * 5, layer.height); // workaround filtering problems
     else
         ctx.drawImage(cgl.canvas,
             0, 0,

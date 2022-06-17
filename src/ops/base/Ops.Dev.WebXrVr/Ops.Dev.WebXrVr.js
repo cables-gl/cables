@@ -28,12 +28,14 @@ let xrViewerPose = null;
 op.onDelete = removeButton;
 inStop.onTriggered = stopVr;
 
-inButtonStyle.onChange = () => { buttonEle.style = inButtonStyle.get(); };
+inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
-const immersiveOK = navigator.xr.isSessionSupported("immersive-vr").then((r) =>
-{
-    if (r)initButton();
-});
+if (xr)
+    xr.isSessionSupported("immersive-vr").then((r) =>
+    {
+        console.log("xr detected", r);
+        if (r)initButton();
+    });
 
 function stopVr()
 {
@@ -105,6 +107,8 @@ function onXRFrame(hrTime, xrFrame)
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
         }
 
+        cgl.renderStart(cgl);
+
         cgl.gl.clearColor(0, 0, 0, 1);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
@@ -113,6 +117,13 @@ function onXRFrame(hrTime, xrFrame)
             renderPre();
             renderEye(xrViewerPose.views[i]);
         }
+
+        if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
+
+        cgl.renderEnd(cgl);
+
+        CGL.MESH.lastShader = null;
+        CGL.MESH.lastMesh = null;
     }
     catch (e)
     {
@@ -176,6 +187,7 @@ function initButton()
     buttonEle.addEventListener("click", startVr);
     buttonEle.addEventListener("touchstart", startVr);
     buttonEle.style = inButtonStyle.get();
+    console.log("button ele");
 }
 
 function removeButton()

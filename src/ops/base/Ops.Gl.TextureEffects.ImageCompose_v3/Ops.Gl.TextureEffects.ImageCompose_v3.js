@@ -9,6 +9,11 @@ const
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
+    r = op.inValueSlider("R", 0),
+    g = op.inValueSlider("G", 0),
+    b = op.inValueSlider("B", 0),
+    a = op.inValueSlider("A", 0),
+
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out", CGL.Texture.getEmptyTexture(cgl)),
     outRatio = op.outNumber("Aspect Ratio"),
@@ -18,11 +23,17 @@ const
 op.setPortGroup("Texture Size", [inSize, width, height]);
 op.setPortGroup("Texture Parameters", [inWrap, inFilter, inPixel]);
 
+r.setUiAttribs({ "colorPick": true });
+op.setPortGroup("Color", [r, g, b, a]);
+
 const prevViewPort = [0, 0, 0, 0];
 let effect = null;
 let tex = null;
 let reInitEffect = true;
 let isFloatTex = false;
+let copyShader = null;
+let copyShaderTexUni = null;
+let copyShaderRGBAUni = null;
 
 inWrap.onChange =
     inFilter.onChange =
@@ -68,15 +79,15 @@ function initEffect()
 function getFilter()
 {
     if (inFilter.get() == "nearest") return CGL.Texture.FILTER_NEAREST;
-    if (inFilter.get() == "linear") return CGL.Texture.FILTER_LINEAR;
-    if (inFilter.get() == "mipmap") return CGL.Texture.FILTER_MIPMAP;
+    else if (inFilter.get() == "linear") return CGL.Texture.FILTER_LINEAR;
+    else if (inFilter.get() == "mipmap") return CGL.Texture.FILTER_MIPMAP;
 }
 
 function getWrap()
 {
     if (inWrap.get() == "repeat") return CGL.Texture.WRAP_REPEAT;
-    if (inWrap.get() == "mirrored repeat") return CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (inWrap.get() == "clamp to edge") return CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    else if (inWrap.get() == "mirrored repeat") return CGL.Texture.WRAP_MIRRORED_REPEAT;
+    else if (inWrap.get() == "clamp to edge") return CGL.Texture.WRAP_CLAMP_TO_EDGE;
 }
 
 function getFloatingPoint()
@@ -144,8 +155,18 @@ function updateResolutionInfo()
     if (changed)op.refreshParams();
 }
 
+function updateDefines()
+{
+    if (copyShader)copyShader.toggleDefine("USE_TEX", inTex.isLinked());
+}
+
 function updateUi()
 {
+    r.setUiAttribs({ "greyout": inTex.isLinked() });
+    b.setUiAttribs({ "greyout": inTex.isLinked() });
+    g.setUiAttribs({ "greyout": inTex.isLinked() });
+    a.setUiAttribs({ "greyout": inTex.isLinked() });
+
     width.setUiAttribs({ "greyout": inSize.get() == "Auto" });
     height.setUiAttribs({ "greyout": inSize.get() == "Auto" });
 
@@ -157,15 +178,13 @@ function updateUi()
         else op.setUiError("fpmipmap", null);
 
     updateResolutionInfo();
+    updateDefines();
 }
 
-op.preRender = function ()
+op.preRender = () =>
 {
     doRender();
 };
-
-let copyShader = null;
-let copyShaderTexUni = null;
 
 function copyTexture()
 {
@@ -174,14 +193,14 @@ function copyTexture()
         copyShader = new CGL.Shader(cgl, "copytextureshader");
         copyShader.setSource(copyShader.getDefaultVertexShader(), attachments.imgcomp_frag);
         copyShaderTexUni = new CGL.Uniform(copyShader, "t", "tex", 0);
+        copyShaderRGBAUni = new CGL.Uniform(copyShader, "4f", "bgColor", r, g, b, a);
+        updateDefines();
     }
 
     cgl.pushShader(copyShader);
     cgl.currentTextureEffect.bind();
 
-    cgl.setTexture(0, inTex.get().tex);
-
-    // uniAspect.set(cgl.currentTextureEffect.aspectRatio);
+    if (inTex.get()) cgl.setTexture(0, inTex.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
@@ -209,13 +228,11 @@ function doRender()
     effect.setSourceTexture(tex);
 
     effect.startEffect(inTex.get() || CGL.Texture.getEmptyTexture(cgl, isFloatTex), true);
+    copyTexture();
 
     trigger.trigger();
 
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
-
-    if (inTex.get() && effect.getCurrentSourceTexture() == inTex.get())
-        copyTexture();
 
     texOut.set(effect.getCurrentSourceTexture());
 

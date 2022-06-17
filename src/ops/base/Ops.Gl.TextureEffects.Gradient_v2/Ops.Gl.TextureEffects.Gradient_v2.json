@@ -45,6 +45,16 @@
             },
             {
                 "type": 0,
+                "name": "sRGB",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "color space index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "r",
                 "group": "Color A",
                 "subType": "number"
@@ -108,7 +118,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Dev.GradientV2"
+        "name": "Ops.Gl.TextureEffects.Gradient_v2"
     },
     "summary": "Draws a simple gradient between three colors",
     "docs": {

@@ -146,6 +146,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.WebXrVrController"
+        "name": "Ops.Dev.WebXrVrController"
     }
 }
