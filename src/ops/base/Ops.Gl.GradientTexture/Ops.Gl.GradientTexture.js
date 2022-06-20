@@ -144,14 +144,14 @@ function update()
                 if (inOklab.get())
                 {
                     const klabA = rgbToOklab(keyA.r, keyA.g, keyA.b);
-                    labA_r = klabA[0];
-                    labA_g = klabA[1];
-                    labA_b = klabA[2];
+                    const labA_r = klabA[0];
+                    const labA_g = klabA[1];
+                    const labA_b = klabA[2];
 
                     const klabB = rgbToOklab(keyB.r, keyB.g, keyB.b);
-                    labB_r = klabB[0];
-                    labB_g = klabB[1];
-                    labB_b = klabB[2];
+                    const labB_r = klabB[0];
+                    const labB_g = klabB[1];
+                    const labB_b = klabB[2];
 
                     const l = ((p * labB_r + (1.0 - p) * labA_r));
                     const a = ((p * labB_g + (1.0 - p) * labA_g));
