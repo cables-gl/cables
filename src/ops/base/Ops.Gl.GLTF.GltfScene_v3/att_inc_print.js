@@ -188,7 +188,6 @@ function printInfo()
 
     /// ///////////////////////
 
-    // html += "<h3>Meshes (" + gltf.json.meshes.length + ")</h3>";
     html += "<div id=\"groupMeshes\">Meshes (" + gltf.json.meshes.length + ")</div>";
 
     html += "<table id=\"meshestable\"  class=\"table treetable\">";
@@ -202,6 +201,8 @@ function printInfo()
 
     let sizeBufferViews = [];
     sizes.meshes = 0;
+
+    console.log(gltf);
 
     for (let i = 0; i < gltf.json.meshes.length; i++)
     {
@@ -226,6 +227,8 @@ function printInfo()
         else html += nodename;
         html += "</td>";
 
+        // -------
+
         html += "<td>";
         for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
@@ -240,20 +243,28 @@ function printInfo()
         html += "<td>";
         let numVerts = 0;
         for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+        {
             if (gltf.json.meshes[i].primitives[j].attributes.POSITION != undefined)
-                numVerts += parseInt(gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count);
+            {
+                let v = parseInt(gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count);
+                numVerts += v;
+                html += "" + v + "<br/>";
+            }
+            else html += "-<br/>";
+        }
 
-        html += numVerts;
+        if (gltf.json.meshes[i].primitives.length > 0)
+            html += "=" + numVerts;
         html += "</td>";
 
-        html += "<td>";
+        html += "<td style=\"vertical-align:top;\">";
         for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            if (j > 0)html += ", ";
             html += Object.keys(gltf.json.meshes[i].primitives[j].attributes);
+            html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeGeom('" + gltf.json.meshes[i].name + "'," + j + ")\" class=\"treebutton\">Geometry</a>";
+            html += "<br/>";
         }
         html += "</td>";
-
         html += "</tr>";
 
         for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
