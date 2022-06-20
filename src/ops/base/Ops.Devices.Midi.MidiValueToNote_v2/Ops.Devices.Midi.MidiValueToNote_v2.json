@@ -1,0 +1,59 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "6f9cc2b3-8dba-44de-a677-a0706952a64c",
+    "created": 1655723386812,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Midi Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Note"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiValueToNote_v2"
+    },
+    "summary": "Converts a MIDI value to a note string",
+    "docs": {
+        "ports": [
+            {
+                "name": "Midi Value",
+                "text": "The MIDI Value you want to convert to a note-string, e.g. `80`"
+            }
+        ]
+    },
+    "credits": [
+        {
+            "title": "tonaljs",
+            "author": "tonaljs",
+            "url": "https://github.com/danigb/tonal",
+            "licence": "MIT"
+        }
+    ],
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": null,
+    "exampleProjectId": "",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Devices.Midi.MidiValueToNote",
+            "author": "stephan",
+            "date": 1655723386815
+        },
+        {
+            "message": "Ops.User.stephan.MidiValueToNote_v2 renamed to Ops.Devices.Midi.MidiValueToNote_v2",
+            "author": "stephan",
+            "date": 1655723524912
+        }
+    ]
+}
