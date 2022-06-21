@@ -361,8 +361,12 @@ Texture.prototype.initTexture = function (img, filter)
 
     if (img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize)
     {
+        const t = CGL.Texture.getTempTexture(this._cgl);
+        this.width = t.width;
+        this.height = t.height;
+        this.tex = t.tex;
         this._log.error("[cgl_texture] texture size to big!!!", img.width, img.height, this._cgl.maxTexSize);
-        return this.getTempTexture();
+        return;
     }
 
 
