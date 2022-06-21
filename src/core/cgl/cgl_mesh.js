@@ -2,6 +2,7 @@ import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
 import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
 import Logger from "../core_logger";
+import changelog from "../../../../cables_api/changelog.json";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -645,20 +646,52 @@ Mesh.prototype.render = function (shader)
 
     this._checkAttrLengths();
 
-
     if (this._geom)
     {
-        if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
-        if (shader.wireframe && this._geom.isIndexed())
+        if (this._preWireframeGeom && !shader.wireframe && !this._geom.isIndexed())
         {
-            this._preWireframeGeom = this._geom;
-            this._geom = this._geom.copy();
-            this._geom.unIndex();
-            this._geom.calcBarycentric();
-            this.setGeom(this._geom);
-            this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
+            this.setGeom(this._preWireframeGeom);
+            this._preWireframeGeom = null;
+            // console.log("remove prewireframe geom");
         }
+
+        if (shader.wireframe)
+        {
+            let changed = false;
+
+            if (this._geom.isIndexed())
+            {
+                if (!this._preWireframeGeom)
+                {
+                    this._preWireframeGeom = this._geom;
+                    this._geom = this._geom.copy();
+                }
+
+                // console.log("geom unindex");
+                this._geom.unIndex();
+                changed = true;
+
+                // this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
+            }
+
+            if (!this._geom.getAttribute("attrBarycentric"))
+            {
+                if (!this._preWireframeGeom)
+                {
+                    this._preWireframeGeom = this._geom;
+                    this._geom = this._geom.copy();
+                }
+                changed = true;
+
+                // console.log("geom calc bary");
+                this._geom.calcBarycentric();
+            }
+            if (changed) this.setGeom(this._geom);
+        }
+        // if (shader.wireframe)
+        // console.log(shader.wireframe, this._geom.isIndexed());
     }
+
     let needsBind = false;
     if (MESH.lastMesh != this)
     {
@@ -667,9 +700,9 @@ Mesh.prototype.render = function (shader)
     }
 
     // var needsBind=false;
-    //     {
+    // {
     //     needsBind=true;
-    //         }
+    // }
     if (needsBind) this._preBind(shader);
 
     shader.bind();
@@ -680,7 +713,6 @@ Mesh.prototype.render = function (shader)
     this._bind(shader);
     if (this.addVertexNumbers) this._setVertexNumbers();
 
-
     MESH.lastMesh = this;
 
     let prim = this._cgl.gl.TRIANGLES;
@@ -688,8 +720,6 @@ Mesh.prototype.render = function (shader)
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
     let elementDiv = 1;
-
-
     let doQuery = this._cgl.profileData.doProfileGlQuery;
     let queryStarted = false;
     if (doQuery)
@@ -733,7 +763,6 @@ Mesh.prototype.render = function (shader)
         }
     }
 
-
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
@@ -761,7 +790,6 @@ Mesh.prototype.render = function (shader)
         if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
     }
-
 
     if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
     {

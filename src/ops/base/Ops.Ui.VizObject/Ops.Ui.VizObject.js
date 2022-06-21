@@ -4,11 +4,9 @@ op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
 inArr.onLinkChanged = () =>
 {
-    console.log(1);
     if (inArr.isLinked())
     {
         const p = inArr.links[0].getOtherPort(inArr);
-        console.log(p);
 
         op.setUiAttrib({ "extendTitle": p.uiAttribs.objType });
     }

@@ -137,9 +137,10 @@ function setupArray()
     const colArr = inColor.get();
     const tcArr = inTexCoords.get();
     const scales = inScales.get();
+    const useQuats = inRotMeth.get() == "Quaternions";
 
     let stride = 3;
-    if (inRotMeth.get() == "Quaternions")stride = 4;
+    if (useQuats)stride = 4;
     inRot.setUiAttribs({ "stride": stride });
 
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
@@ -155,8 +156,6 @@ function setupArray()
     }
 
     const rotArr = inRot.get();
-
-    const useQuats = inRotMeth.get() == "Quaternions";
 
     for (let i = 0; i < num; i++)
     {
@@ -237,9 +236,11 @@ function doRender()
     if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
     else mesh.numInstances = num;
 
-    outNum.set(mesh.numInstances);
+    outNum.set(this.name, mesh.numInstances);
 
     if (mesh.numInstances > 0) mesh.render(cgl.getShader());
+
+    // console.log(mesh.name,mesh._attributes);
 
     outTrigger.trigger();
 

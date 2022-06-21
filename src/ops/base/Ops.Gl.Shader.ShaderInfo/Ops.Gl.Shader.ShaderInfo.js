@@ -8,6 +8,7 @@ const
     next = op.outTrigger("Next"),
     outName = op.outString("Name"),
     outId = op.outString("Id"),
+    outNeedsBarycentric = op.outBoolNum("needsBarycentric"),
     outNumUniforms = op.outNumber("Num Uniforms"),
     outNumAttributes = op.outNumber("Num Attributes"),
     outAttributeNames = op.outArray("Arributes Names"),
@@ -111,6 +112,7 @@ exec.onTriggered = function ()
         outAttributeNames.set(attribNames);
         outDefines.set(shader.getDefines());
         outName.set(shader.getName());
+        outNeedsBarycentric.set(shader.wireframe);
         outId.set(shader.id);
 
         op.setUiError("prognull", null);
@@ -208,3 +210,5 @@ showModules.onTriggered = function ()
 
     showCodeModal("vertex shader", JSON.stringify(mods, false, 4), "json");
 };
+
+//

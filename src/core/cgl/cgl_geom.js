@@ -55,7 +55,7 @@ const Geometry = function (name)
     this.vertexNormals = [];
     this.tangents = [];
     this.biTangents = [];
-    this.barycentrics = [];
+    // this.barycentrics = [];
     this.morphTargets = [];
     this.vertexColors = [];
     this._attributes = {};
@@ -355,8 +355,8 @@ Geometry.prototype.copy = function ()
         for (i = 0; i < this.biTangents.length; i++) geom.biTangents[i] = this.biTangents[i];
     }
 
-    geom.barycentrics.length = this.barycentrics.length;
-    for (i = 0; i < this.barycentrics.length; i++) geom.barycentrics[i] = this.barycentrics[i];
+    // geom.barycentrics.length = this.barycentrics.length;
+    // for (i = 0; i < this.barycentrics.length; i++) geom.barycentrics[i] = this.barycentrics[i];
 
     geom.morphTargets.length = this.morphTargets.length;
     for (i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];
@@ -758,16 +758,19 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 
 Geometry.prototype.calcBarycentric = function ()
 {
-    this.barycentrics.length = this.vertices.length;
-    for (let i = 0; i < this.vertices.length; i++) this.barycentrics[i] = 0;
+    let barycentrics = [];
+    barycentrics.length = this.vertices.length;
+    for (let i = 0; i < this.vertices.length; i++) barycentrics[i] = 0;
 
     let count = 0;
     for (let i = 0; i < this.vertices.length; i += 3)
     {
-        this.barycentrics[i + count] = 1;
+        barycentrics[i + count] = 1;
         count++;
         if (count == 3) count = 0;
     }
+
+    this.setAttribute("attrBarycentric", barycentrics, 3);
 };
 
 Geometry.prototype.getBounds = function ()

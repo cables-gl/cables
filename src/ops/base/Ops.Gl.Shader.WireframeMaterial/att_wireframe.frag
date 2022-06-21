@@ -34,6 +34,6 @@ void main()
 
     {{MODULE_COLOR}}
 
-
+// col=vec4(1.0);
     outColor=col;
 }

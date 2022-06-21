@@ -32,9 +32,7 @@ class ShaderModifier
         const shader = this._cgl.getShader();
         if (!shader) return;
 
-
         this._boundShader = this._origShaders[shader.id];
-
         let missingMod = false;
 
         if (this._boundShader && this._lastShader != this._boundShader.shader) // shader changed since last bind
@@ -47,11 +45,11 @@ class ShaderModifier
             if (this._boundShader) this._boundShader.shader.dispose();
             if (shader._needsRecompile) shader.compile();
             this._boundShader = this._origShaders[shader.id] =
-                {
-                    "lastCompile": shader.lastCompile,
-                    "orig": shader,
-                    "shader": shader.copy()
-                };
+            {
+                "lastCompile": shader.lastCompile,
+                "orig": shader,
+                "shader": shader.copy()
+            };
 
             if (this._cgl.glVersion == 1)
             {
@@ -68,6 +66,7 @@ class ShaderModifier
             this._updateUniformsShader(this._boundShader.shader);
         }
 
+        this._boundShader.wireframe = shader.wireframe;
         if (this._changedDefines) this._updateDefines();
         if (this._changedUniforms) this._updateUniforms();
 
@@ -183,7 +182,7 @@ class ShaderModifier
             let structName = structUniform.structName;
 
             const members = structUniform.members;
-            const structPropertyName = structUniform.propertyName;
+            // const structPropertyName = structUniform.propertyName;
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);
@@ -363,7 +362,6 @@ class ShaderModifier
     {
         this.addUniformStruct(structName, uniformName, members, "both");
     }
-
 
     pushTexture(uniformName, tex, texType)
     {
