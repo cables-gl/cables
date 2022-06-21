@@ -314,6 +314,16 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this._fromData = true;
     this.deleted = false;
 
+    if (this.height > this._cgl.maxTexSize || this.width > this._cgl.maxTexSize)
+    {
+        const t = CGL.Texture.getTempTexture(this._cgl);
+        this.width = t.width;
+        this.height = t.height;
+        this.tex = t.tex;
+        this._log.error("[cgl_texture] texture size to big!!!", this.width, this.height, this._cgl.maxTexSize);
+        return;
+    }
+
     if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
