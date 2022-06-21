@@ -566,6 +566,17 @@ op.exposeTexture = function (name)
     gui.patchView.testCollision(newop);
 };
 
+op.exposeGeom = function (name, idx)
+{
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfGeometry");
+    newop.getPort("Name").set(name);
+    newop.getPort("Submesh").set(idx);
+    setNewOpPosition(newop, 1);
+    op.patch.link(op, next.name, newop, "Update");
+    gui.patchView.centerSelectOp(newop.id, true);
+    gui.patchView.testCollision(newop);
+};
+
 function setNewOpPosition(newOp, num)
 {
     num = num || 1;

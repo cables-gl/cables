@@ -12,6 +12,7 @@ let gltfMesh = class
 
         this.test = 0;
         this.name = name;
+        this.submeshIndex = 0;
         this.material = prim.material;
         this.mesh = null;
         this.geom = new CGL.Geometry("gltf_" + this.name);

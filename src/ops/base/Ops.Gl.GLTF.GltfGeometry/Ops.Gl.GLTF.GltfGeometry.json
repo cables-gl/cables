@@ -1,0 +1,51 @@
+{
+    "id": "2e59da07-455a-457c-99d8-1c23a1ddeea2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655703351713
+        },
+        {
+            "message": "Ops.User.pandur.GltfGeometry renamed to Ops.Gl.GLTF.GltfGeometry",
+            "author": "pandur",
+            "date": 1655704524417
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1655703434519,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Submesh",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfGeometry"
+    }
+}

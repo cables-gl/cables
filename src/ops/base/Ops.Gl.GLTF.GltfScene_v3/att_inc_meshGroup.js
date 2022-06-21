@@ -15,10 +15,9 @@ const gltfMeshGroup = class
                     this.bounds.apply(mesh.bounds);
                 });
 
+            mesh.submeshIndex = i;
             this.meshes.push(mesh);
         }
-
-        // console.log("mesh group bounds:",this.bounds._maxAxis);
     }
 
     render(cgl, ignoreMat, skinRenderer, _time)
