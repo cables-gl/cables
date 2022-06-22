@@ -107,6 +107,39 @@
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Simulate",
+                "text": "stop/start simulation"
+            },
+            {
+                "name": "Gravity X",
+                "text": "gravity pull on X direction"
+            },
+            {
+                "name": "Gravity Y",
+                "text": "gravity pull on Y direction"
+            },
+            {
+                "name": "Gravity Z",
+                "text": "gravity pull on Z direction"
+            },
+            {
+                "name": "Activate All",
+                "text": "activate all sleeping objects"
+            },
+            {
+                "name": "Reset",
+                "text": "reset the entire simulation"
+            },
+            {
+                "name": "Total Bodies",
+                "text": "number of bodies inside physics world"
+            },
+            {
+                "name": "Bodies Meta",
+                "text": "array of objects in the scene"
+            }
+        ]
     }
 }

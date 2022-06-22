@@ -61,7 +61,7 @@
     },
     "authorName": "pandur",
     "created": 1642189494325,
-    "summary": "Load a font via opentype library",
+    "summary": "Load OTF font via OpenType library",
     "issues": "",
     "caniusequery": "",
     "collections": null,

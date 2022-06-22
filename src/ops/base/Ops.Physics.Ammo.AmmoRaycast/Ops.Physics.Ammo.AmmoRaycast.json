@@ -71,6 +71,23 @@
     "youtubeids": [],
     "exampleProjectId": "Gh2f_4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Screen X",
+                "text": "Normalize screencoordinates on X Axis (0-1)"
+            },
+            {
+                "name": "Screen Y",
+                "text": "Normalize screencoordinates on Y Axis (0-1)"
+            },
+            {
+                "name": "Has Hit",
+                "text": "Boolean value reporting if there is an object at coordinates"
+            },
+            {
+                "name": "Hit Body Name",
+                "text": "report name of object at coordinates"
+            }
+        ]
     }
 }
