@@ -345,10 +345,11 @@ let gltfMesh = class
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
-            const uniDiff = cgl.getShader().uniformColorDiffuse;
+            const currentShader = cgl.getShader() || {};
+            const uniDiff = currentShader.uniformColorDiffuse;
 
-            const uniPbrMetalness = cgl.getShader().uniformPbrMetalness;
-            const uniPbrRoughness = cgl.getShader().uniformPbrRoughness;
+            const uniPbrMetalness = currentShader.uniformPbrMetalness;
+            const uniPbrRoughness = currentShader.uniformPbrRoughness;
 
             if (!gltf.shaders[this.material] && inUseMatProps.get())
             {

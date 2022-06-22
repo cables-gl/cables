@@ -178,12 +178,22 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
+    let count = 1;
     for (let i = 0; i < texs.length; i++)
     {
-        if (texs[i].get()) cgl.setTexture(i * 2 + 1, texs[i].get().tex);
-        if (texMasks[i].get()) cgl.setTexture(i * 2 + 2, texMasks[i].get().tex);
+        if (texs[i].get())
+        {
+            cgl.setTexture(i * 2 + 1, texs[i].get().tex);
+            count++;
+        }
+        if (texMasks[i].get())
+        {
+            cgl.setTexture(i * 2 + 2, texMasks[i].get().tex);
+            count++;
+        }
     }
+    if (count > cgl.maxTextureUnits) op.setUiError("manytex", "Too many textures bound");
+    else op.setUiError("manytex", null);
 
     cgl.pushBlendMode(CGL.BLEND_NONE, true);
     cgl.currentTextureEffect.finish();

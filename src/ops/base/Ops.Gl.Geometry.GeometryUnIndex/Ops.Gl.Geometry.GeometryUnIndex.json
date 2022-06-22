@@ -6,13 +6,13 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result"
             }
         ],

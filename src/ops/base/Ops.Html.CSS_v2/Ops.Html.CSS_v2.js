@@ -1,6 +1,10 @@
 const code = op.inStringEditor("css code");
 
-code.setUiAttribs({ "editorSyntax": "css" });
+code.setUiAttribs(
+    {
+        "editorSyntax": "css",
+        "ignoreBigPort": true
+    });
 
 let styleEle = null;
 const eleId = "css_" + CABLES.uuid();

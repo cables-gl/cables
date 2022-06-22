@@ -54,8 +54,7 @@ const Op = function ()
     {
         this._shortOpName = CABLES.getShortOpName(arguments[1]);
 
-        if (!this.uiAttribs.title)
-            this.uiAttribs.title = this._shortOpName;
+        this.getTitle();
     }
 
     this.id = arguments[2] || uuid(); // instance id
@@ -97,7 +96,13 @@ const Op = function ()
     Op.prototype.getTitle = function ()
     {
         if (!this.uiAttribs) return "nouiattribs" + this.name;
-        return (this.uiAttribs.title || this._shortOpName);
+
+        if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
+            this.uiAttribs.title = this._shortOpName;
+
+        if (this.uiAttribs.title === undefined) this.uiAttribs.title = this._shortOpName;
+
+        return this.uiAttribs.title;
     };
 
     Op.prototype.setTitle = function (name)
