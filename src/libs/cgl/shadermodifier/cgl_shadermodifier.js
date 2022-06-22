@@ -61,7 +61,6 @@ class ShaderModifier
             }
 
             this._addModulesToShader(this._boundShader.shader);
-
             this._updateDefinesShader(this._boundShader.shader);
             this._updateUniformsShader(this._boundShader.shader);
         }
@@ -213,6 +212,7 @@ class ShaderModifier
     _setUniformValue(shader, uniformName, value)
     {
         const uniform = shader.getUniform(uniformName);
+
         if (uniform) uniform.setValue(value);
     }
 
