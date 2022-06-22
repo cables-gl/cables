@@ -1,8 +1,8 @@
-var midiValuePort = op.inValue("Midi Value");
-var notePort = op.outValue("Note");
+let midiValuePort = op.inValue("Midi Value");
+let notePort = op.outValue("Note");
 
-var FLATS = 'C Db D Eb E F Gb G Ab A Bb B'.split(' ');
-var SHARPS = 'C C# D D# E F F# G G# A A# B'.split(' ');
+let FLATS = "C Db D Eb E F Gb G Ab A Bb B".split(" ");
+let SHARPS = "C C# D D# E F F# G G# A A# B".split(" ");
 
 /**
  * MIT License, https://github.com/danigb/tonal
@@ -20,19 +20,22 @@ var SHARPS = 'C C# D D# E F F# G G# A A# B'.split(' ');
  * // it rounds to nearest note
  * midi.note(61.7) // => 'D4'
  */
-function note (num, sharps) {
-  if (num === true || num === false) return function (m) { return note(m, num); };
-  num = Math.round(num);
-  var pcs = sharps === true ? SHARPS : FLATS;
-  var pc = pcs[num % 12];
-  var o = Math.floor(num / 12) - 1;
-  return pc + o;
+function note(num, sharps)
+{
+    if (num === true || num === false) return function (m) { return note(m, num); };
+    num = Math.round(num);
+    let pcs = sharps === true ? SHARPS : FLATS;
+    let pc = pcs[num % 12];
+    let o = Math.floor(num / 12) - 1;
+    return pc + o;
 }
 
-midiValuePort.onChange=function(){
-  var val = midiValuePort.get();
-  if(val) {
-    var n = note(val, true);
-    notePort.set(n);
-  }
+midiValuePort.onChange = function ()
+{
+    let val = midiValuePort.get();
+    if (val)
+    {
+        let n = note(val, true);
+        notePort.set(n);
+    }
 };

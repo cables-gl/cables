@@ -17,11 +17,9 @@ let needsRebuild = true;
 let geom = null;
 let updateUniformPoints = false;
 
-
 let pointArray = null;
 
 pointArray = new Float32Array(99);
-
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -31,21 +29,17 @@ mod.addModule({
     "srcBodyVert": attachments.pathfollow_vert
 });
 
+mod.addUniform("f", "MOD_maxDistance", inMaxDistance);
 mod.addUniform("f", "MOD_offset", inOffset);
+mod.addUniform("3f[]", "MOD_pathPoints", new Float32Array([0, 0, 0, 0, 0, 0]));
 // mod.addUniform("f", "MOD_randomSpeed", 1.0);
 // mod.addUniform("i", "MOD_maxIndex", 0);
-mod.addUniform("f", "MOD_maxDistance", inMaxDistance);
-
-mod.addUniform("3f[]", "pathPoints", new Float32Array([0, 0, 0, 0, 0, 0]));
-
 
 inParticles.onChange =
     inLength.onChange =
     inSpread.onChange = resetLater;
 
-
 inMaxDistance.onChange = updateDefines;
-
 
 function resetLater()
 {
@@ -124,7 +118,6 @@ function rebuild()
 
     mesh.setAttribute("rndPos", rndArray, 3);
 
-
     // offset random
 
     var rndOffset = new Float32Array(num / 3);
@@ -152,7 +145,6 @@ function rebuild()
 //     }
 // }
 
-
 // function updateCheckDistance()
 // {
 //     if (shader)
@@ -173,7 +165,6 @@ function rebuild()
 // mod.define("SPLINE_POINTS", 1);
 mod.define("PATHFOLLOW_POINTS", 1);
 
-
 function updateDefines()
 {
     mod.define("PATHFOLLOW_POINTS", Math.floor(pointArray.length / 3));
@@ -182,7 +173,6 @@ function updateDefines()
     //     op.log(shader.getDefine("PATHFOLLOW_POINTS"));
     //     shader.define("PATHFOLLOW_POINTS", Math.floor(pointArray.length / 3));
     // }
-
 
     mod.toggleDefine("CHECK_DISTANCE", inMaxDistance.get() != 0);
     mod.toggleDefine("RANDOMSPEED", inRandomSpeed);
@@ -232,13 +222,14 @@ exec.onTriggered = function ()
         // shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
 
         // shaderModule.uniNumPoints.setValue(pointArray.length/3);
-        mod.setUniformValue("pathPoints", pointArray);
-        console.log("set mod points!~!!!");
+        mod.setUniformValue("MOD_pathPoints", pointArray);
+        // console.log("set mod points!~!!!");
         updateDefines();
         // uniPoints.setValue(pointArray);
         updateUniformPoints = false;
     }
 
+    console.log(mod._getUniform("MOD_pathPoints").v1);
 
     // mod.setUniformValue("MOD_maxIndex",pointArray.length);
 
@@ -249,9 +240,7 @@ exec.onTriggered = function ()
     // randomSpeed.setValue(inRandomSpeed.get());
     // shaderModule.offset.setValue(off);
 
-
     if (mesh) mesh.render(cgl.getShader());
-
 
     next.trigger();
     mod.unbind();

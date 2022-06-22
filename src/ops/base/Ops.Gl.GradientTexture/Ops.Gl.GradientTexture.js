@@ -157,12 +157,10 @@ function update()
                     const a = ((p * labB_g + (1.0 - p) * labA_g));
                     const b = ((p * labB_b + (1.0 - p) * labA_b));
 
-                    // console.log(l,a,b,p)
                     const pixCol = oklabToRGB(l, a, b);
                     pixels[xx * 4 + 0] = Math.round(pixCol[0] * 255);
                     pixels[xx * 4 + 1] = Math.round(pixCol[1] * 255);
                     pixels[xx * 4 + 2] = Math.round(pixCol[2] * 255);
-                    // console.log(pixels[xx * 4 + 0])
                 }
                 else
                 {
@@ -224,16 +222,17 @@ function update()
                 pixels[(x * 4) + (y * 4 * width) + 1] = animG.getValue(pos) * 255;
                 pixels[(x * 4) + (y * 4 * width) + 2] = animB.getValue(pos) * 255;
                 pixels[(x * 4) + (y * 4 * width) + 3] = Math.round(255);
-
-                if (inSRGB.get())
-                    for (let i = 0; i < pixels.length; i += 4)
-                    {
-                        pixels[i + 0] = lin2srgb(pixels[i + 0]);
-                        pixels[i + 1] = lin2srgb(pixels[i + 1]);
-                        pixels[i + 2] = lin2srgb(pixels[i + 2]);
-                    }
             }
         }
+
+        if (inSRGB.get())
+            for (let i = 0; i < pixels.length; i += 4)
+            {
+                pixels[i + 0] = lin2srgb(pixels[i + 0]);
+                pixels[i + 1] = lin2srgb(pixels[i + 1]);
+                pixels[i + 2] = lin2srgb(pixels[i + 2]);
+            }
+
         tex.initFromData(pixels, width, width, selectedFilter, selectedWrap);
     }
 

@@ -40,7 +40,7 @@
         "hardware"
     ],
     "relatedops": null,
-    "exampleProjectId": "",
+    "exampleProjectId": "PfZk-4",
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],
@@ -54,6 +54,11 @@
             "message": "Ops.User.stephan.MidiValueToNote_v2 renamed to Ops.Devices.Midi.MidiValueToNote_v2",
             "author": "stephan",
             "date": 1655723524912
+        },
+        {
+            "message": "convert to typed string output",
+            "author": "stephan",
+            "date": 1655724245593
         }
     ]
 }
