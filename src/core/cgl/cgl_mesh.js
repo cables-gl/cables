@@ -2,7 +2,6 @@ import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
 import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
 import Logger from "../core_logger";
-import changelog from "../../../../cables_api/changelog.json";
 
 const MESH = {};
 MESH.lastMesh = null;
