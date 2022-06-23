@@ -45,6 +45,11 @@
             "message": " added lib: teachablemachine_tf_speech_image_pose.js",
             "author": "mick",
             "date": 1605700987264
+        },
+        {
+            "message": "Ops.Api.TeachableMachines.ImageClassifier renamed to Ops.Libs.TeachableMachines.ImageClassifier",
+            "author": "pandur",
+            "date": 1655965865847
         }
     ],
     "libs": [

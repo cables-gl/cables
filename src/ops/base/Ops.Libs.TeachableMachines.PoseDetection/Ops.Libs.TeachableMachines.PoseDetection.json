@@ -15,7 +15,7 @@
             },
             {
                 "type": 2,
-                "name": "Webcam Element"
+                "name": "Webcam texture"
             },
             {
                 "type": 0,
@@ -43,16 +43,16 @@
             {
                 "type": 0,
                 "name": "Image flipped",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
-        "name": "Ops.Api.TeachableMachines.PoseDetection_v2"
+        "name": "Ops.Api.TeachableMachines.PoseDetection"
     },
     "summary": "Use the Teachable Machines pose detection with your webcam. Insert the uploaded model URL.",
     "author": "mickey",
-    "authorName": "stephan",
-    "id": "58b8510f-81a1-41aa-8638-6721ede199c5",
-    "created": 1654684469633,
+    "authorName": "mickey",
+    "id": "0391393f-c1cd-4cff-b580-bc5eddfa74c5",
+    "created": 1605703736459,
     "changelog": [
         {
             "message": " added lib: teachablemachine_tf_speech_image_pose.js",
@@ -60,19 +60,9 @@
             "date": 1605703409690
         },
         {
-            "message": "cloned op from Ops.Api.TeachableMachines.PoseDetection",
-            "author": "stephan",
-            "date": 1654684469636
-        },
-        {
-            "message": "Ops.User.stephan.PoseDetection_v2 renamed to Ops.Api.TeachableMachines.PoseDetection_v2",
-            "author": "stephan",
-            "date": 1654684503878
-        },
-        {
-            "message": "fix bug with new webcam operator",
-            "author": "stephan",
-            "date": 1654684942451
+            "message": "Ops.Api.TeachableMachines.PoseDetection renamed to Ops.Libs.TeachableMachines.PoseDetection",
+            "author": "pandur",
+            "date": 1655965852080
         }
     ],
     "libs": [

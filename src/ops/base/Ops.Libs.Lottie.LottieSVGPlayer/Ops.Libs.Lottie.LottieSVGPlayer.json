@@ -15,6 +15,11 @@
             "message": " added lib: lottie.js",
             "author": "stephan",
             "date": 1626104391335
+        },
+        {
+            "message": "Ops.Lottie.LottieSVGPlayer renamed to Ops.Libs.Lottie.LottieSVGPlayer",
+            "author": "pandur",
+            "date": 1655965703061
         }
     ],
     "authorName": "pandur",
