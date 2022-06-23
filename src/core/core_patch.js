@@ -915,6 +915,12 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     return false;
 };
 
+
+Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
+{
+    this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
+};
+
 Patch.prototype.deSerialize = function (obj, genIds)
 {
     if (this.aborted) return;
@@ -930,18 +936,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
     {
         obj = JSON.parse(obj);
     }
-    const self = this;
 
     this.settings = obj.settings;
-
-    function addLink(opinid, opoutid, inName, outName)
-    {
-        const found = false;
-        if (!found)
-        {
-            self.link(self.getOpById(opinid), inName, self.getOpById(opoutid), outName, false, true);
-        }
-    }
 
     this.emitEvent("patchLoadStart");
 
@@ -1023,7 +1019,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
                                 // const startTime = performance.now();
-                                addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+                                this._addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
                                 // const took = performance.now() - startTime;
                                 // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
@@ -1037,7 +1033,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
                     if (obj.ops[iop].portsOut[ipi2].links)
                         for (let ili = 0; ili < obj.ops[iop].portsOut[ipi2].links.length; ili++)
                             if (obj.ops[iop].portsOut[ipi2].links[ili])
-                                addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
         }
     }
 

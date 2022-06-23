@@ -65,6 +65,7 @@ let winVisible = true;
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
+testMultiMainloop();
 
 inUnit.onChange = () =>
 {
@@ -212,4 +213,18 @@ function render(time)
     rframes++;
 
     op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;
+}
+
+function testMultiMainloop()
+{
+    setTimeout(
+        () =>
+        {
+            if (op.patch.getOpsByObjName(op.name).length > 1)
+            {
+                op.setUiError("multimainloop", "there should only be one mainloop op!");
+                op.patch.addEventListener("onOpDelete", testMultiMainloop);
+            }
+            else op.setUiError("multimainloop", null, 1);
+        }, 500);
 }
