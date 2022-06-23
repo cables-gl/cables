@@ -18,7 +18,7 @@ const srcHeadVert = ""
     .endl();
 
 const srcBodyVert = ""
-    .endl() + "MOD_fogPos=viewMatrix*modelMatrix*pos;"
+    .endl() + "MOD_fogPos=viewMatrix*mMatrix*pos;"
     .endl();
 
 const srcHeadFrag = ""

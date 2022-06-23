@@ -11,10 +11,6 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Mode"
-            },
-            {
                 "type": 0,
                 "name": "Start",
                 "subType": "number"

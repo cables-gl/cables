@@ -223,7 +223,7 @@ function setupArray()
 
 function updateLimit()
 {
-    inLimit.setUiAttribs({ "hidePort": !doLimit.get(), "greyout": !doLimit.get() });
+    inLimit.setUiAttribs({ "greyout": !doLimit.get() });
 }
 
 function doRender()
