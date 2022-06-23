@@ -1,7 +1,4 @@
-
-
-
-UNI vec3 pathPoints[PATHFOLLOW_POINTS];
+UNI vec3 MOD_pathPoints[PATHFOLLOW_POINTS];
 
 IN vec3 rndPos;
 IN float rndOffset;

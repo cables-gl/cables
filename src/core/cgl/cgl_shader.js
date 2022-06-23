@@ -162,17 +162,22 @@ Shader.prototype.setWhyCompile = function (why)
  */
 Shader.prototype.copyUniformValues = function (origShader)
 {
+    // console.log(origShader._uniforms);
     for (let i = 0; i < origShader._uniforms.length; i++)
     {
         if (!this._uniforms[i])
         {
-            // this._log.log("unknown uniform?!");
+            this._log.log("unknown uniform?!");
             continue;
         }
 
         // this._log.log(origShader._uniforms[i].getName());
         // this.getUniform(origShader._uniforms[i].)
         // this._uniforms[i].set(origShader._uniforms[i].getValue());
+
+
+        if (origShader._uniforms[i].getName().indexOf("pathPoints") != -1)
+            console.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
 
         this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
     }

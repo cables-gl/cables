@@ -17,12 +17,6 @@ let needsRebuild = true;
 let geom = null;
 let updateUniformPoints = false;
 
-
-let pointArray = null;
-
-pointArray = new Float32Array(99);
-
-
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "title": op.objName,
@@ -31,35 +25,20 @@ mod.addModule({
     "srcBodyVert": attachments.pathfollow_vert
 });
 
-mod.addUniform("f", "MOD_offset", inOffset);
-// mod.addUniform("f", "MOD_randomSpeed", 1.0);
-// mod.addUniform("i", "MOD_maxIndex", 0);
 mod.addUniform("f", "MOD_maxDistance", inMaxDistance);
-
-mod.addUniform("3f[]", "pathPoints", new Float32Array([0, 0, 0, 0, 0, 0]));
-
+mod.addUniform("f", "MOD_offset", inOffset);
+mod.addUniform("3f[]", "MOD_pathPoints", inPoints);
 
 inParticles.onChange =
     inLength.onChange =
     inSpread.onChange = resetLater;
 
-
 inMaxDistance.onChange = updateDefines;
-
 
 function resetLater()
 {
     needsRebuild = true;
 }
-
-inPoints.onChange = function ()
-{
-    if (inPoints.get())
-    {
-        pointArray = inPoints.get();// new Float32Array(inPoints.get());
-        updateUniformPoints = true;
-    }
-};
 
 function getRandomVec(size)
 {
@@ -124,7 +103,6 @@ function rebuild()
 
     mesh.setAttribute("rndPos", rndArray, 3);
 
-
     // offset random
 
     var rndOffset = new Float32Array(num / 3);
@@ -143,115 +121,26 @@ function rebuild()
     updateDefines();
 }
 
-// function removeModule()
-// {
-//     if (shader && shaderModule)
-//     {
-//         shader.removeModule(shaderModule);
-//         shader = null;
-//     }
-// }
-
-
-// function updateCheckDistance()
-// {
-//     if (shader)
-//     {
-//         shaderModule.maxDistance.setValue(inMaxDistance.get());
-
-//         if (inMaxDistance.get() == 0)
-//         {
-//             shader.removeDefine("CHECK_DISTANCE");
-//         }
-//         else
-//         {
-//             shader.define("CHECK_DISTANCE");
-//         }
-//     }
-// }
-
-// mod.define("SPLINE_POINTS", 1);
 mod.define("PATHFOLLOW_POINTS", 1);
-
 
 function updateDefines()
 {
-    mod.define("PATHFOLLOW_POINTS", Math.floor(pointArray.length / 3));
-    // if (shader.getDefine("PATHFOLLOW_POINTS") < Math.floor(pointArray.length / 3))
-    // {
-    //     op.log(shader.getDefine("PATHFOLLOW_POINTS"));
-    //     shader.define("PATHFOLLOW_POINTS", Math.floor(pointArray.length / 3));
-    // }
-
-
     mod.toggleDefine("CHECK_DISTANCE", inMaxDistance.get() != 0);
     mod.toggleDefine("RANDOMSPEED", inRandomSpeed);
 }
 
 exec.onTriggered = function ()
 {
-    // if(op.instanced(exec))return;
     if (!inPoints.get() || inPoints.get().length === 0) return;
     if (needsRebuild)rebuild();
 
-    // if (cgl.getShader() != shader)
-    // {
-    //     if (shader)removeModule();
-
-    //     shader = cgl.getShader();
-
-    //     // shader.glslVersion=300;
-    //     shaderModule = shader.addModule(
-    //         {
-    //             "title": op.objName,
-    //             "name": "MODULE_VERTEX_POSITION",
-    //         "srcHeadVert": attachments.pathfollow_head_vert,
-    //             "srcBodyVert": attachments.pathfollow_vert,
-    //             "priority": -2
-    //         });
-
-    // shaderModule.offset = new CGL.Uniform(shader, "f", shaderModule.prefix + "offset", 0);
-    // shaderModule.point = new CGL.Uniform(shader, "i", shaderModule.prefix + "point", 0);
-    // shaderModule.uniPoints = new CGL.Uniform(shader, "3f[]", shaderModule.prefix + "points", new Float32Array([0, 0, 0, 0, 0, 0]));
-    // shaderModule.randomSpeed = new CGL.Uniform(shader, "b", shaderModule.prefix + "randomSpeed", false);
-    // shaderModule.maxIndex = new CGL.Uniform(shader, "i", shaderModule.prefix + "maxIndex", 0);
-    // shaderModule.maxDistance = new CGL.Uniform(shader, "f", shaderModule.prefix + "maxDistance", inMaxDistance.get());
-    // updateCheckDistance();
-    // }
-
     mod.bind();
 
-    if (updateUniformPoints && pointArray)
-    {
-        // if(!shader.hasDefine("PATHFOLLOW_POINTS"))shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
-        // if (shader.getDefine("PATHFOLLOW_POINTS") < Math.floor(pointArray.length / 3))
-        // {
-        //     op.log(shader.getDefine("PATHFOLLOW_POINTS"));
-        //     shader.define("PATHFOLLOW_POINTS", Math.floor(pointArray.length / 3));
-        // }
-        // shader.define('PATHFOLLOW_POINTS',pointArray.length/3);
-
-        // shaderModule.uniNumPoints.setValue(pointArray.length/3);
-        mod.setUniformValue("pathPoints", pointArray);
-        console.log("set mod points!~!!!");
-        updateDefines();
-        // uniPoints.setValue(pointArray);
-        updateUniformPoints = false;
-    }
-
-
-    // mod.setUniformValue("MOD_maxIndex",pointArray.length);
-
-    // uniMaxIndex.setValue(pointArray.length);
-    // var off=inOffset.get()%((pointArray.length-1)/3);
-    // const off = inOffset.get();
-
-    // randomSpeed.setValue(inRandomSpeed.get());
-    // shaderModule.offset.setValue(off);
-
+    if (inPoints.get())
+        mod.define("PATHFOLLOW_POINTS", Math.floor(inPoints.get().length / 3));
+    else mod.define("PATHFOLLOW_POINTS", 0);
 
     if (mesh) mesh.render(cgl.getShader());
-
 
     next.trigger();
     mod.unbind();

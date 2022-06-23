@@ -11,15 +11,15 @@ int index2=int(abs(mod(off+1.0+rndOffset,max(0.0,float(PATHFOLLOW_POINTS)))));
 
 if(index2!=0)
 {
-    pos.xyz = mix( pathPoints[index] ,pathPoints[index2] ,fr);
+    pos.xyz = mix( MOD_pathPoints[index] ,MOD_pathPoints[index2] ,fr);
 
     #ifdef CHECK_DISTANCE
-        if( distance(pathPoints[index] ,pathPoints[index2]) > MOD_maxDistance ) pos.xyz=vec3(9999999.0,9999999.0,9999999.0);
+        if( distance(MOD_pathPoints[index] ,MOD_pathPoints[index2]) > MOD_maxDistance ) pos.xyz=vec3(9999999.0,9999999.0,9999999.0);
     #endif
 }
 else
 {
-    pos.xyz=pathPoints[0];
+    pos.xyz=MOD_pathPoints[0];
 }
 
 pos.xyz+=rndPos;
