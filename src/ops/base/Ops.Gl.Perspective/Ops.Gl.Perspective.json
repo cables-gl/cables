@@ -3,38 +3,38 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "fov y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "frustum near",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "frustum far",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Auto Aspect Ratio",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

@@ -79,6 +79,23 @@
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Draw Wireframe",
+                "text": "Exact geometry wireframe of your collision mesh (cpu intensive)"
+            },
+            {
+                "name": "Draw AABB",
+                "text": "simplified view of your physics objects as cubes"
+            },
+            {
+                "name": "Draw Contact Points",
+                "text": "show collision locations"
+            },
+            {
+                "name": "Depth",
+                "text": "toggle seethrough"
+            }
+        ]
     }
 }

@@ -47,7 +47,7 @@
         ],
         "name": "Ops.Dev.AmmoBodyCollision"
     },
-    "summary": "Check if two physic bodies are colliding",
+    "summary": "Check if two physics bodies are colliding",
     "issues": "",
     "caniusequery": "",
     "collections": null,
@@ -55,6 +55,23 @@
     "youtubeids": [],
     "exampleProjectId": "S_jPZ4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "update",
+                "text": "execute operation"
+            },
+            {
+                "name": "Name 1",
+                "text": "name of physics object"
+            },
+            {
+                "name": "Name 2",
+                "text": "name of physics object (optional)"
+            },
+            {
+                "name": "Colliding",
+                "text": "collision detected (Boolean)"
+            }
+        ]
     }
 }

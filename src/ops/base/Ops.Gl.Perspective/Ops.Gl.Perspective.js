@@ -2,7 +2,7 @@
 
 const render = op.inTrigger("render");
 const fovY = op.inValueFloat("fov y", 45);
-const zNear = op.inValueFloat("frustum near", 0.01);
+const zNear = op.inValueFloat("frustum near", 0.1);
 const zFar = op.inValueFloat("frustum far", 20);
 const autoAspect = op.inValueBool("Auto Aspect Ratio", true);
 const aspect = op.inValue("Aspect Ratio");
@@ -34,7 +34,6 @@ render.onTriggered = function ()
         zFar.get());
 
     // mat4.translate(cgl.pMatrix,cgl.pMatrix,[-0.5,0,0]);
-
     trigger.trigger();
 
     cgl.popPMatrix();

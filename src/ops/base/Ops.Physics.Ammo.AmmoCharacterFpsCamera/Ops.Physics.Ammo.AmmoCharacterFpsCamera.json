@@ -109,6 +109,59 @@
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Enable pointer lock",
+                "text": "hide and lock mouse cursor on the canvas"
+            },
+            {
+                "name": "Height",
+                "text": "height of camera placement on Character body"
+            },
+            {
+                "name": "Character Name",
+                "text": "Character to attach camera to"
+            },
+            {
+                "name": "Mouse Speed",
+                "text": "mouse look speed"
+            },
+            {
+                "name": "Active",
+                "text": "activate camera view"
+            },
+            {
+                "name": "isLocked",
+                "text": "has the mouse cursor been locked (Boolean)"
+            },
+            {
+                "name": "Mouse Left",
+                "text": "mouse left click"
+            },
+            {
+                "name": "Mouse Right",
+                "text": "mouse right click"
+            },
+            {
+                "name": "Dir X",
+                "text": "direction of camera on X axis"
+            },
+            {
+                "name": "Dir Y",
+                "text": "direction of camera on Y axis"
+            },
+            {
+                "name": "Dir Z",
+                "text": "direction of camera on Z axis"
+            },
+            {
+                "name": "Rot X",
+                "text": "rotation amount on X axis"
+            },
+            {
+                "name": "Rot Y",
+                "text": "rotation amount on Y axis"
+            }
+        ]
     }
 }
