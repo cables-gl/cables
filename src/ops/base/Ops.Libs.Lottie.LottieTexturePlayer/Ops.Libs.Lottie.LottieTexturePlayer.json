@@ -19,6 +19,11 @@
             "message": " added lib: lottie.js",
             "author": "stephan",
             "date": 1626104402127
+        },
+        {
+            "message": "Ops.Lottie.LottieTexturePlayer renamed to Ops.Libs.Lottie.LottieTexturePlayer",
+            "author": "pandur",
+            "date": 1655965726685
         }
     ],
     "libs": [

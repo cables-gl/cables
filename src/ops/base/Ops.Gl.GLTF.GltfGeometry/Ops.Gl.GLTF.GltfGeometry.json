@@ -47,5 +47,15 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfGeometry"
+    },
+    "summary": "expose geometry from gltf meshes, also possible to expose submaterial geometries",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "XKXmf6",
+    "docs": {
+        "ports": []
     }
 }

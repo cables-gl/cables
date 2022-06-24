@@ -48,7 +48,7 @@
         ],
         "name": "Ops.Dev.OpentypeToSvgPath"
     },
-    "summary": "get svg path from OpentypeFont using the opentype library",
+    "summary": "get svg path from (OTF) OpentypeFont using the opentype library",
     "issues": "",
     "caniusequery": "",
     "collections": null,

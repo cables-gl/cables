@@ -72,6 +72,8 @@ op.renderVizLayer = (ctx, layer) =>
                     str = "{???}";
                 }
             }
+            else
+                str += String(v);
 
             ctx.fillText(str,
                 layer.x / layer.scale + s * 100 + 50,

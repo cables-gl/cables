@@ -121,6 +121,79 @@
     "youtubeids": [],
     "exampleProjectId": "",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Limit Bodies",
+                "text": "maximum number of bodies to create"
+            },
+            {
+                "name": "Radius",
+                "text": "radius of spherical emitted body"
+            },
+            {
+                "name": "Mass",
+                "text": "mass of emitted body"
+            },
+            {
+                "name": "Name",
+                "text": "name for your emitted bodies"
+            },
+            {
+                "name": "Friction",
+                "text": "friction of emitted object surface"
+            },
+            {
+                "name": "Rolling Friction",
+                "text": "influence roll of emitted object"
+            },
+            {
+                "name": "Restitution",
+                "text": "influence velocity of object after collision (springiness)"
+            },
+            {
+                "name": "Dir X",
+                "text": "initial velocity on X axis"
+            },
+            {
+                "name": "Dir Y",
+                "text": "initial velocity on Y axis"
+            },
+            {
+                "name": "Dir Z",
+                "text": "initial velocity on Z axis"
+            },
+            {
+                "name": "Speed",
+                "text": "speed multiplier"
+            },
+            {
+                "name": "Spawn One",
+                "text": "trigger to emit a physics body"
+            },
+            {
+                "name": "Remove All",
+                "text": "remove all bodies"
+            },
+            {
+                "name": "Activate All",
+                "text": "activate (wake up) physics simulation for all bodies"
+            },
+            {
+                "name": "Remove Y<-100",
+                "text": "if object is below 100 units, remove from array"
+            },
+            {
+                "name": "Total Bodies",
+                "text": "current count of emitted bodies"
+            },
+            {
+                "name": "Positions",
+                "text": "array of XYZ positions"
+            },
+            {
+                "name": "Rotations Quats",
+                "text": "array of quaternion rotations of each object"
+            }
+        ]
     }
 }

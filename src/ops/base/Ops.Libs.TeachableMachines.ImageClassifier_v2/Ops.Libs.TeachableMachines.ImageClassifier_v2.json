@@ -60,6 +60,11 @@
             "message": "fix bug with new webcam operator",
             "author": "stephan",
             "date": 1654684959363
+        },
+        {
+            "message": "Ops.Api.TeachableMachines.ImageClassifier_v2 renamed to Ops.Libs.TeachableMachines.ImageClassifier_v2",
+            "author": "pandur",
+            "date": 1655965797415
         }
     ],
     "libs": [

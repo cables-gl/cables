@@ -82,6 +82,11 @@
             "message": "Ops.Bodymovin.Player renamed to Ops.Lottie.Player",
             "author": "pandur",
             "date": 1560783174788
+        },
+        {
+            "message": "Ops.Lottie.Player renamed to Ops.Deprecated.Lottie.Player",
+            "author": "pandur",
+            "date": 1655965653433
         }
     ],
     "issues": "",

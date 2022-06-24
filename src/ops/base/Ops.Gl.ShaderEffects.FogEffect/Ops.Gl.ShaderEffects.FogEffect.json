@@ -11,10 +11,6 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Mode"
-            },
-            {
                 "type": 0,
                 "name": "Start",
                 "subType": "number"
@@ -74,5 +70,11 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "3L3of6"
 }

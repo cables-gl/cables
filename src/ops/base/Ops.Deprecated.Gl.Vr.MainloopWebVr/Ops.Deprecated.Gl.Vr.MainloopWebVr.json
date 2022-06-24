@@ -217,5 +217,12 @@
         }
     ],
     "youtubeids": [],
-    "exampleProjectId": "AYyvcG"
+    "exampleProjectId": "AYyvcG",
+    "changelog": [
+        {
+            "message": "Ops.Gl.Vr.MainloopWebVr renamed to Ops.Deprecated.Gl.Vr.MainloopWebVr",
+            "author": "pandur",
+            "date": 1655965617379
+        }
+    ]
 }
