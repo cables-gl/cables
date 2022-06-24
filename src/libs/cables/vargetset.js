@@ -27,6 +27,8 @@ const VarSetOpWrapper = class
 
         this._varNamePort.onChange = this._updateName.bind(this);
 
+        this._isTexture = this._valuePort.uiAttribs.objType === "texture";
+
         this._valuePort.changeAlways = true;
 
         if (this._triggerPort)
@@ -140,9 +142,12 @@ const VarSetOpWrapper = class
         {
             if (this._type == "object")
             {
-                this._op.patch.setVarValue(name, null);
+                if (this._isTexture)
+                    this._op.patch.setVarValue(name, CGL.Texture.getEmptyTexture(this._op.patch.cgl));
+                else
+                    this._op.patch.setVarValue(name, null);
 
-                if (v && v.tex && v._cgl && this._valuePort.uiAttribs.objType != "texture") this._op.setUiError("texobj", "Dont use object variables for textures, use varSetTexture");
+                if (v && v.tex && v._cgl && !this._isTexture) this._op.setUiError("texobj", "Dont use object variables for textures, use varSetTexture");
                 else this._op.setUiError("texobj", null);
             }
             this._op.patch.setVarValue(name, v);

@@ -171,8 +171,6 @@ function rebuild()
     {
         if (inCoords.isLinked()) texCoords = inCoords.get();
 
-        // console.log(texCoords,inCoords.isLinked());
-
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
         geom.verticesIndices = [];
