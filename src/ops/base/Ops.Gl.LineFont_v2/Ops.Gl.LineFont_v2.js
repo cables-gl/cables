@@ -2,11 +2,11 @@ const
     render = op.inTrigger("render"),
     string = op.inString("Text", "cables"),
     letterSpacing = op.inValue("Letter Spacing", 1),
-    align = op.inSwitch("align", ["left", "center", "right"],"left"),
-    inDraw=op.inBool("Render",true),
-    outArr=op.outArray("Lines");
+    align = op.inSwitch("align", ["left", "center", "right"], "left"),
+    inDraw = op.inBool("Render", true),
+    outArr = op.outArray("Lines", null, 3);
 
-let lineArray=[];
+let lineArray = [];
 let stringWidth = 0;
 const meshes = [];
 const vec = vec3.create();
@@ -391,8 +391,7 @@ const characters =
 
 function translateX(w)
 {
-
-    transX+=w;
+    transX += w;
 
     vec3.set(vec, w, 0, 0);
     mat4.translate(cgl.mMatrix, cgl.mMatrix, vec);
@@ -409,9 +408,7 @@ align.onChange = function ()
 let oldPrim = 0;
 let shader = null;
 
-let transX=0;
-
-
+let transX = 0;
 
 function renderChar(charIndex, simulate)
 {
@@ -425,22 +422,20 @@ function renderChar(charIndex, simulate)
 
     if (!simulate)
     {
-
-        for (let m = 0; m < characters[charIndex].linesArr.length; m+=3)
+        for (let m = 0; m < characters[charIndex].linesArr.length; m += 3)
         {
             lineArray.push(
-                characters[charIndex].linesArr[m+0]+transX,
-                characters[charIndex].linesArr[m+1],
-                characters[charIndex].linesArr[m+2]
-                );
+                characters[charIndex].linesArr[m + 0] + transX,
+                characters[charIndex].linesArr[m + 1],
+                characters[charIndex].linesArr[m + 2]
+            );
 
             // characters[charIndex].m[m].render(op.patch.cgl.getShader());
         }
 
-
         for (let m = 0; m < characters[charIndex].m.length; m++)
         {
-            if(inDraw.get())
+            if (inDraw.get())
                 characters[charIndex].m[m].render(op.patch.cgl.getShader());
         }
         translateX(characters[charIndex].w * letterSpacing.get());
@@ -467,13 +462,10 @@ render.onTriggered = function ()
 
     // cgl.gl.lineWidth(lineWidth.get());
 
-
-
-
     for (let sim = 0; sim < 2; sim++)
     {
-        transX=0;
-        lineArray.length=0;
+        transX = 0;
+        lineArray.length = 0;
         let simulate = sim === 0;
 
         if (!simulate)
@@ -587,13 +579,11 @@ let avg2 = avg(1);
 
 avgXY = [(avg1[0] + avg2[0]) / 2, (avg1[1] + avg2[1]) / 2];
 
-
-
 for (let i = 0; i < characters.length; i++)
 {
     characters[i].w = width(i) * (0.002);
     characters[i].m = [];
-    let lines=[];
+    let lines = [];
 
     for (let l = 0; l < characters[i].l.length; l++)
     {
@@ -601,20 +591,17 @@ for (let i = 0; i < characters.length; i++)
         let indices = [];
         let vertices = [];
 
-
         for (let j = 0; j < characters[i].l[l].length; j += 2)
         {
-
             lines.push(
                 (characters[i].l[l][j] - min(i)) * 0.005,
-                (characters[i].l[l][j+1]- avgXY[1]) * -0.005
-                ,0);
+                (characters[i].l[l][j + 1] - avgXY[1]) * -0.005,
+                0);
 
             lines.push(
-                (characters[i].l[l][j+2] - min(i)) * 0.005,
-                (characters[i].l[l][j+3]- avgXY[1]) * -0.005
-                ,0);
-
+                (characters[i].l[l][j + 2] - min(i)) * 0.005,
+                (characters[i].l[l][j + 3] - avgXY[1]) * -0.005,
+                0);
         }
 
         for (let j = 0; j < characters[i].l[l].length; j += 2)
@@ -627,7 +614,7 @@ for (let i = 0; i < characters.length; i++)
             count++;
         }
 
-        characters[i].linesArr=lines;
+        characters[i].linesArr = lines;
         let geom = new CGL.Geometry(op.name);
         geom.vertices = vertices;
         geom.verticesIndices = indices;
