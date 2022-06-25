@@ -46,12 +46,12 @@ op.renderVizLayer = (ctx, layer) =>
                 layer.x / layer.scale + padding,
                 layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
 
-        ctx.fillStyle = "#ccc";
-
         for (let s = 0; s < stride; s++)
         {
             let str = "";
             const v = arr[i + s];
+
+            ctx.fillStyle = "#ccc";
 
             if (typeof v == "string") str = "\"" + v + "\"";
             else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
@@ -72,8 +72,15 @@ op.renderVizLayer = (ctx, layer) =>
                     str = "{???}";
                 }
             }
-            else
+            else if (v != v || v === undefined)
+            {
+                ctx.fillStyle = "#f00";
                 str += String(v);
+            }
+            else
+            {
+                str += String(v);
+            }
 
             ctx.fillText(str,
                 layer.x / layer.scale + s * 100 + 50,

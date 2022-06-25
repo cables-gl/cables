@@ -71,7 +71,7 @@ let gltfMesh = class
                     if (attr.name === "position") geom.vertices = attr.array;
                     else if (attr.name === "normal") geom.vertexNormals = attr.array;
                     else if (attr.name === "uv") geom.texCoords = attr.array;
-                    else if (attr.name === "color") this.setGeomVertCols(geom, attr.array);
+                    else if (attr.name === "color") geom.vertexColors = this.calcVertexColors(attr.array);
                     else if (attr.name === "joints") geom.setAttribute("attrJoints", Array.from(attr.array), 4);
                     else if (attr.name === "weights")
                     {
@@ -140,8 +140,9 @@ let gltfMesh = class
             return Math.pow(x, 1 / 2.2) * 1.055 - 0.055;
     }
 
-    setGeomVertCols(tgeom, arr)
+    calcVertexColors(arr)
     {
+        let vertexColors = null;
         if (arr instanceof Float32Array)
         {
             let div = false;
@@ -157,7 +158,7 @@ let gltfMesh = class
             if (div)
                 for (let i = 0; i < arr.length; i++) arr[i] /= 65535;
 
-            tgeom.vertexColors = arr;
+            vertexColors = arr;
         }
 
         else if (arr instanceof Uint16Array)
@@ -165,24 +166,31 @@ let gltfMesh = class
             const fb = new Float32Array(arr.length);
             for (let i = 0; i < arr.length; i++) fb[i] = arr[i] / 65535;
 
-            tgeom.vertexColors = fb;
+            vertexColors = fb;
         }
-        else tgeom.vertexColors = arr;
+        else vertexColors = arr;
 
-        for (let i = 0; i < tgeom.vertexColors.length; i++)
+        for (let i = 0; i < vertexColors.length; i++)
         {
-            tgeom.vertexColors[i] = this._linearToSrgb(tgeom.vertexColors[i]);
+            vertexColors[i] = this._linearToSrgb(vertexColors[i]);
         }
+
+        return vertexColors;
     }
 
     fillGeomAttribs(gltf, tgeom, attribs, setGeom)
     {
-        if (attribs.hasOwnProperty("POSITION"))tgeom.vertices = gltf.accBuffers[attribs.POSITION];
-        if (attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
-        if (attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords = gltf.accBuffers[attribs.TEXCOORD_0];
-        if (attribs.hasOwnProperty("TANGENT"))tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
-        if (attribs.hasOwnProperty("COLOR_0")) this.setGeomVertCols(tgeom, gltf.accBuffers[attribs.COLOR_0]);
+        if (attribs.hasOwnProperty("POSITION")) tgeom.vertices = gltf.accBuffers[attribs.POSITION];
+        if (attribs.hasOwnProperty("NORMAL")) tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
+        if (attribs.hasOwnProperty("TANGENT")) tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
 
+        if (attribs.hasOwnProperty("COLOR_0")) tgeom.vertexColors = this.calcVertexColors(gltf.accBuffers[attribs.COLOR_0]);
+        if (attribs.hasOwnProperty("COLOR_1")) tgeom.setAttribute("attrVertColor1", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_1]), 4);
+        if (attribs.hasOwnProperty("COLOR_2")) tgeom.setAttribute("attrVertColor2", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_2]), 4);
+        if (attribs.hasOwnProperty("COLOR_3")) tgeom.setAttribute("attrVertColor3", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_3]), 4);
+        if (attribs.hasOwnProperty("COLOR_4")) tgeom.setAttribute("attrVertColor4", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_4]), 4);
+
+        if (attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords = gltf.accBuffers[attribs.TEXCOORD_0];
         if (attribs.hasOwnProperty("TEXCOORD_1"))tgeom.setAttribute("attrTexCoord1", gltf.accBuffers[attribs.TEXCOORD_1], 2);
         if (attribs.hasOwnProperty("TEXCOORD_2"))tgeom.setAttribute("attrTexCoord2", gltf.accBuffers[attribs.TEXCOORD_2], 2);
         if (attribs.hasOwnProperty("TEXCOORD_3"))tgeom.setAttribute("attrTexCoord3", gltf.accBuffers[attribs.TEXCOORD_3], 2);
@@ -203,6 +211,11 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("TEXCOORD_0")) gltf.accBuffersDelete.push(attribs.TEXCOORD_0);
         if (attribs.hasOwnProperty("TANGENT")) gltf.accBuffersDelete.push(attribs.TANGENT);
         if (attribs.hasOwnProperty("COLOR_0"))gltf.accBuffersDelete.push(attribs.COLOR_0);
+        if (attribs.hasOwnProperty("COLOR_0"))gltf.accBuffersDelete.push(attribs.COLOR_0);
+        if (attribs.hasOwnProperty("COLOR_1"))gltf.accBuffersDelete.push(attribs.COLOR_1);
+        if (attribs.hasOwnProperty("COLOR_2"))gltf.accBuffersDelete.push(attribs.COLOR_2);
+        if (attribs.hasOwnProperty("COLOR_3"))gltf.accBuffersDelete.push(attribs.COLOR_3);
+
         if (attribs.hasOwnProperty("TEXCOORD_1")) gltf.accBuffersDelete.push(attribs.TEXCOORD_1);
         if (attribs.hasOwnProperty("TEXCOORD_2")) gltf.accBuffersDelete.push(attribs.TEXCOORD_2);
         if (attribs.hasOwnProperty("TEXCOORD_3")) gltf.accBuffersDelete.push(attribs.TEXCOORD_3);
