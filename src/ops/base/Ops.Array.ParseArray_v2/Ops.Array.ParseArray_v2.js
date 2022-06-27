@@ -6,6 +6,8 @@ const text = op.inStringEditor("text", "1,2,3"),
     arr = op.outArray("array"),
     len = op.outValue("length");
 
+text.setUiAttribs({ "ignoreBigPort": true });
+
 text.onChange = separator.onChange = toNumber.onChange = trim.onChange = parse;
 
 parse();

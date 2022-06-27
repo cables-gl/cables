@@ -73,7 +73,7 @@ function update()
 
     if (newArr.length != arr.length)
     {
-        newArr.length = arr.length;
+        newArr.length = arr.length || 0;
         reset = true;
     }
 

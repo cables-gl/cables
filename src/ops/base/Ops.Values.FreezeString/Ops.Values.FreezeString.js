@@ -7,7 +7,7 @@ const
 inFreeze.onTriggered =
 inHidden.onTriggered = update;
 
-inHidden.setUiAttribs({ "hideParam": true, "hidePort": true });
+inHidden.setUiAttribs({ "hideParam": true, "hidePort": true, "ignoreBigPort": true });
 
 outString.onLinkChanged = () =>
 {
