@@ -811,6 +811,7 @@ const Op = function ()
         p.set = function (b)
         {
             this.setValue(b ? 1 : 0);
+            // console.log("bool set", b, this.get());
         }.bind(p);
 
         if (v !== undefined) p.set(v);
@@ -1358,6 +1359,8 @@ const Op = function ()
 
         this.uiAttr({ "uierrors": errorArr });
         this.hasUiErrors = Object.keys(this._uiErrors).length;
+
+        console.log(id, txt, this._uiErrors.hasOwnProperty(id));
     };
 
     // todo: remove
