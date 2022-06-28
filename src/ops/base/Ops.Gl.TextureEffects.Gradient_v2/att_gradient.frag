@@ -67,7 +67,7 @@ void main()
     #endif
 
     ax=((ax-0.5)*width)+0.5;
-
+ax=clamp(ax,0.0,1.0);
 
     #ifndef GRAD_SMOOTHSTEP
         if(ax<=pos) col = vec4(MIXER(colA, colB, ax*1.0/pos),1.0);
