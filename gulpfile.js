@@ -113,33 +113,6 @@ function _corejs_max(done)
         });
 }
 
-function _corejs_max_babel(done)
-{
-    return gulp.src(["src/core/index.js"])
-        .pipe(
-            webpack(
-                {
-                    "config": webpackConfig(false, true),
-                },
-                compiler,
-                (err, stats) =>
-                {
-                    if (err) throw err;
-                    if (stats.hasErrors())
-                    {
-                        done(new Error(stats.compilation.errors.join("\n")));
-                    }
-                    done();
-                }
-            )
-        )
-        .pipe(gulp.dest("build"))
-        .on("error", (err) =>
-        {
-            console.error("WEBPACK ERROR", err);
-        });
-}
-
 function _corejs_min(done)
 {
     return gulp.src(["src/core/index.js"])
@@ -147,34 +120,6 @@ function _corejs_min(done)
             webpack(
                 {
                     "config": webpackConfig(true, false),
-                },
-                compiler,
-                (err, stats) =>
-                {
-                    if (err) throw err;
-                    if (stats.hasErrors())
-                    {
-                        done(new Error(stats.compilation.errors.join("\n")));
-                    }
-                    done();
-                }
-            )
-        )
-
-        .pipe(gulp.dest("build"))
-        .on("error", (err) =>
-        {
-            console.error("WEBPACK ERROR", err);
-        });
-}
-
-function _corejs_min_babel(done)
-{
-    return gulp.src(["src/core/index.js"])
-        .pipe(
-            webpack(
-                {
-                    "config": webpackConfig(true, true),
                 },
                 compiler,
                 (err, stats) =>
@@ -260,9 +205,7 @@ gulp.task("default", gulp.series(
     gulp.parallel(
         _external_libs,
         _corejs_max,
-        _corejs_min,
-        _corejs_max_babel,
-        _corejs_min_babel
+        _corejs_min
     ),
     _core_libs_clean,
     gulp.parallel(
@@ -279,9 +222,7 @@ gulp.task("watch", gulp.series(
     gulp.parallel(
         _external_libs,
         _corejs_max,
-        _corejs_min,
-        _corejs_max_babel,
-        _corejs_min_babel
+        _corejs_min
     ),
     _core_libs_clean,
     gulp.parallel(
@@ -298,9 +239,7 @@ gulp.task("build", gulp.series(
     gulp.parallel(
         _external_libs,
         _corejs_max,
-        _corejs_min,
-        _corejs_max_babel,
-        _corejs_min_babel
+        _corejs_min
     ),
     _core_libs_clean,
     gulp.parallel(

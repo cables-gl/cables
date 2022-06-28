@@ -7,14 +7,14 @@ const
     outFound = op.outBoolNum("Found");
 
 const cgl = op.patch.cgl;
-let node = null;
+let mesh = null;
 let currentSceneLoaded = null;
 
 inSubmesh.onChange =
 inNodeName.onChange = function ()
 {
     outGeom.set(null);
-    node = null;
+    mesh = null;
     outFound.set(false);
     op.setUiAttrib({ "extendTitle": inNodeName.get() + "." + inSubmesh.get() });
 };
@@ -22,32 +22,32 @@ inNodeName.onChange = function ()
 exec.onTriggered = () =>
 {
     if (!cgl.frameStore.currentScene) return;
-    if (currentSceneLoaded != cgl.frameStore.currentScene.loaded) node = null;
+    if (currentSceneLoaded != cgl.frameStore.currentScene.loaded) mesh = null;
 
-    if (!node)
+    if (!mesh)
     {
         if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes || !cgl.frameStore.currentScene.loaded)
         {
             return;
         }
-
+        // console.log(cgl.frameStore.currentScene)
         outFound.set(false);
         outGeom.set(null);
         const name = inNodeName.get();
 
         currentSceneLoaded = cgl.frameStore.currentScene.loaded;
 
-        for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+        for (let i = 0; i < cgl.frameStore.currentScene.meshes.length; i++)
         {
-            if (cgl.frameStore.currentScene.nodes[i].name == name)
+            if (cgl.frameStore.currentScene.meshes[i].name == name)
             {
-                node = cgl.frameStore.currentScene.nodes[i];
+                mesh = cgl.frameStore.currentScene.meshes[i];
 
                 const idx = Math.abs(inSubmesh.get());
-                if (node.mesh.meshes[idx] && node.mesh.meshes[idx].geom)
+                if (mesh.meshes[idx] && mesh.meshes[idx].geom)
                 {
                     outFound.set(true);
-                    outGeom.set(node.mesh.meshes[idx].geom);
+                    outGeom.set(mesh.meshes[idx].geom);
                 }
             }
         }

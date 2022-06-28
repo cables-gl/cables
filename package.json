@@ -28,12 +28,7 @@
         "node": "16.7.0"
     },
     "devDependencies": {
-        "@babel/core": "7.11.4",
-        "@babel/plugin-proposal-object-rest-spread": "7.11.0",
-        "@babel/plugin-transform-object-assign": "7.10.4",
-        "@babel/preset-env": "7.11.0",
         "add-module-exports-webpack-plugin": "1.0.0",
-        "babel-loader": "8.1.0",
         "create-file-webpack": "1.0.2",
         "cross-env": "7.0.2",
         "error-overlay-webpack-plugin": "0.4.2",
