@@ -129,15 +129,21 @@ const Op = function ()
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
+        let changed = false;
         for (const p in newAttribs)
         {
+            if (this.uiAttribs[p] != newAttribs[p])changed = true;
             this.uiAttribs[p] = newAttribs[p];
         }
 
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
         if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
-        this.fireEvent("onUiAttribsChange", newAttribs);
-        this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
+
+        if (changed)
+        {
+            this.fireEvent("onUiAttribsChange", newAttribs);
+            this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
+        }
     };
     /**
      * setUiAttrib
@@ -805,7 +811,6 @@ const Op = function ()
         p.set = function (b)
         {
             this.setValue(b ? 1 : 0);
-            // console.log("bool set", b, this.get());
         }.bind(p);
 
         if (v !== undefined) p.set(v);
@@ -1351,7 +1356,6 @@ const Op = function ()
         const errorArr = [];
         for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
 
-        // this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
         this.hasUiErrors = Object.keys(this._uiErrors).length;
     };
@@ -1562,7 +1566,10 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) gui.opParams.show(this);
+        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp())
+        {
+            gui.opParams.show(this);
+        }
     };
 
     /**
