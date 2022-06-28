@@ -3,19 +3,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "number",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Decimal Places",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }

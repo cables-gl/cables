@@ -43,6 +43,7 @@ let btQuat = null;
 let doResetPos = false;
 let colShape = null;
 let doScale = true;
+let needsRemove = false;
 inName.onChange = updateBodyMeta;
 
 op.setPortGroup("Parameters", [inRestitution, inFriction, inRollingFriction, inMass]);
@@ -65,7 +66,7 @@ inExec.onLinkChanged =
     inSizeZ.onChange =
     inSizeX.onChange = () =>
     {
-        removeBody();
+        needsRemove = true;
     };
 
 inActivate.onTriggered = () =>
@@ -86,7 +87,8 @@ function removeBody()
 
 inReset.onTriggered = () =>
 {
-    removeBody();
+    needsRemove = true;
+    // removeBody();
 };
 
 function updateBodyMeta()
@@ -242,6 +244,11 @@ function renderTransformed()
 
 function update()
 {
+    if (needsRemove)
+    {
+        removeBody();
+        needsRemove = false;
+    }
     if (world != cgl.frameStore.ammoWorld) removeBody();
 
     world = cgl.frameStore.ammoWorld;
