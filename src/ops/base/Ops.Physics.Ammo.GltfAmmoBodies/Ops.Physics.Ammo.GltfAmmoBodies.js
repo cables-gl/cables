@@ -2,7 +2,7 @@ const
     inExec = op.inTrigger("Exec"),
     inNames = op.inString("Filter Meshes", ""),
     inMass = op.inFloat("Mass kg", 0),
-    inMulSize = op.inFloat("Size Multiply", 1),
+    // inMulSize = op.inFloat("Size Multiply", 1),
     outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
@@ -124,6 +124,8 @@ function addToWorld()
         world.setBodyMeta(body,
             {
                 "name": scene.nodes[i].name,
+                "mass": inMass.get(),
+
             });
 
         bodies.push(

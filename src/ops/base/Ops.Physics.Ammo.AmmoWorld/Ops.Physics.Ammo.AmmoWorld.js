@@ -22,11 +22,10 @@ const cgl = op.patch.cgl;
 let deltaTime, lastTime;
 let ammoWorld = null;// new CABLES.AmmoWorld();
 let loadingId = null;
-
+let needsReset = true;
 inReset.onTriggered = () =>
 {
-    if (ammoWorld)ammoWorld.dispose();
-    ammoWorld = null;
+    needsReset = true;
 };
 
 inActivateAll.onTriggered = () =>
@@ -44,6 +43,13 @@ function updateGravity()
 
 function update()
 {
+    if (needsReset)
+    {
+        if (ammoWorld)ammoWorld.dispose();
+        ammoWorld = null;
+        needsReset = false;
+    }
+
     if (!ammoWorld)
     {
         if (Ammo.cablesSetupDone)
@@ -60,6 +66,7 @@ function update()
         }
     }
     if (!ammoWorld.world) return;
+
     deltaTime = performance.now() - lastTime;
 
     if (inSim.get()) ammoWorld.frame();

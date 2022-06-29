@@ -13,11 +13,15 @@ inNum.onChange = () =>
         else if (n === undefined)str = "undefined";
         else
         {
-            str = Math.round(n * 10000) / 10000;
+            str = "" + Math.round(n * 10000) / 10000;
+
             if (str[0] != "-")str = " " + str;
         }
-        op.setTitle(str);
+
+        op.setUiAttribs({ "extendTitle": str });
+
+        // op.setTitle(str+" ");
     }
 
-    outNum.set(inNum.get());
+    outNum.set(n);
 };

@@ -1,13 +1,18 @@
 const
-    result=op.outValue("result"),
-    number1=op.inValueFloat("number"),
-    decPlaces=op.inInt("Decimal Places",0);
+    result = op.outValue("result"),
+    number1 = op.inValueFloat("number"),
+    decPlaces = op.inInt("Decimal Places", 0);
 
-number1.onChange=decPlaces.onChange=exec;
+number1.onChange = exec;
+let decm = 0;
+
+decPlaces.onChange = () =>
+{
+    decm = Math.pow(10, decPlaces.get());
+    exec();
+};
 
 function exec()
 {
-    var decm=Math.pow(10,decPlaces.get());
-    result.set(Math.round(number1.get()*decm)/decm);
+    result.set(Math.round(number1.get() * decm) / decm);
 }
-
