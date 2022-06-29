@@ -226,15 +226,15 @@ function drawHelpers()
             "posZ": inPosZ,
         });
 
-        CABLES.GL_MARKER.drawLineSourceDest({
+        CABLES.GL_MARKER.drawLineSourceDest(
             op,
-            "sourceX": newLight.position[0],
-            "sourceY": newLight.position[1],
-            "sourceZ": newLight.position[2],
-            "destX": newLight.conePointAt[0],
-            "destY": newLight.conePointAt[1],
-            "destZ": newLight.conePointAt[2],
-        });
+            newLight.position[0],
+            newLight.position[1],
+            newLight.position[2],
+            newLight.conePointAt[0],
+            newLight.conePointAt[1],
+            newLight.conePointAt[2],
+        );
     }
 }
 
