@@ -33,11 +33,6 @@
                 "type": 0,
                 "name": "Mass kg",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Multiply",
-                "subType": "number"
             }
         ],
         "portsOut": [
@@ -47,7 +42,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.GltfAmmoBodies"
+        "name": "Ops.Physics.Ammo.GltfAmmoBodies"
     },
     "summary": "Create physics bodies from a GLTF File",
     "issues": "",
