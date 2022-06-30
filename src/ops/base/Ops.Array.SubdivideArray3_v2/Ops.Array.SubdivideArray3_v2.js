@@ -1,24 +1,24 @@
-const inArr = op.inArray("Points");
-const subDivs = op.inValue("Num Subdivs", 5);
-const bezier = op.inValueBool("Smooth", true);
-const bezierEndPoints = op.inValueBool("Bezier Start/End Points", true);
-
-const result = op.outArray("Result");
+const
+    inArr = op.inArray("Points"),
+    subDivs = op.inValue("Num Subdivs", 5),
+    bezier = op.inValueBool("Smooth", true),
+    bezierEndPoints = op.inValueBool("Bezier Start/End Points", true),
+    result = op.outArray("Result");
 
 op.toWorkPortsNeedToBeLinked(inArr);
 
-subDivs.onChange = calc;
-bezier.onChange = calc;
-inArr.onChange = calc;
-bezierEndPoints.onChange = calc;
+let arr = [];
+
+subDivs.onChange =
+    bezier.onChange =
+    inArr.onChange =
+    bezierEndPoints.onChange = calc;
 
 function ip(x0, x1, x2, t)// Bezier
 {
     const r = (x0 * (1 - t) * (1 - t) + 2 * x1 * (1 - t) * t + x2 * t * t);
     return r;
 }
-
-const arr = [];
 
 function calc()
 {
@@ -104,6 +104,10 @@ function calc()
             arr[count + 1] = inPoints[inPoints.length - 2];
             arr[count + 2] = inPoints[inPoints.length - 1];
         }
+    }
+    if (subd == 0)
+    {
+        arr = Array.from(inPoints);
     }
 
     result.set(null);
