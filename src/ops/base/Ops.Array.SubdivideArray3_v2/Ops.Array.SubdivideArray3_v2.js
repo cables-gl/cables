@@ -84,15 +84,17 @@ function calc()
             count = 3;
         }
 
+        const doLoop = inLoop.get();
+
         function idx(i)
         {
-            if (inLoop.get())
-                return i % (inPoints.length - 3);
+            if (doLoop) return i % (inPoints.length - 3);
             else return i;
         }
 
         let endi = inPoints.length - 3;
-        if (inLoop.get())endi = inPoints.length + 3;
+        if (doLoop)endi = inPoints.length + 3;
+
         for (i = 3; i < endi; i += 3)
         {
             for (j = 0; j < subd; j++)
