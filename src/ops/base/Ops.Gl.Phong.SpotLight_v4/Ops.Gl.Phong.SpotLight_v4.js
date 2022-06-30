@@ -152,15 +152,15 @@ inTrigger.onTriggered = function ()
             "posY": inPosY,
             "posZ": inPosZ,
         });
-        CABLES.GL_MARKER.drawLineSourceDest({
-            "op": op,
-            "sourceX": light.position[0],
-            "sourceY": light.position[1],
-            "sourceZ": light.position[2],
-            "destX": light.conePointAt[0],
-            "destY": light.conePointAt[1],
-            "destZ": light.conePointAt[2],
-        });
+        CABLES.GL_MARKER.drawLineSourceDest(
+            op,
+            light.position[0],
+            light.position[1],
+            light.position[2],
+            light.conePointAt[0],
+            light.conePointAt[1],
+            light.conePointAt[2],
+        );
     }
 
     cgl.frameStore.lightStack.push(light);

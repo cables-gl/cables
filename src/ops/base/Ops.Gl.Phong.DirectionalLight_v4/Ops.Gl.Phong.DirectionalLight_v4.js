@@ -66,19 +66,19 @@ const inLight = {
 Object.keys(inLight).forEach(function (key)
 {
     if (inLight[key].length)
-{
+    {
         for (let i = 0; i < inLight[key].length; i += 1)
-{
+        {
             inLight[key][i].onChange = function ()
-{
+            {
                 light[key][i] = inLight[key][i].get();
             };
         }
     }
- else
-{
+    else
+    {
         inLight[key].onChange = function ()
-{
+        {
             light[key] = inLight[key].get();
         };
     }
@@ -99,16 +99,16 @@ inTrigger.onTriggered = function ()
 
     if (cgl.shouldDrawHelpers(op))
 
-{
-        CABLES.GL_MARKER.drawLineSourceDest({
+    {
+        CABLES.GL_MARKER.drawLineSourceDest(
             op,
-            "sourceX": -200 * light.position[0],
-            "sourceY": -200 * light.position[1],
-            "sourceZ": -200 * light.position[2],
-            "destX": 200 * light.position[0],
-            "destY": 200 * light.position[1],
-            "destZ": 200 * light.position[2],
-        });
+            -200 * light.position[0],
+            -200 * light.position[1],
+            -200 * light.position[2],
+            200 * light.position[0],
+            200 * light.position[1],
+            200 * light.position[2],
+        );
     }
 
 

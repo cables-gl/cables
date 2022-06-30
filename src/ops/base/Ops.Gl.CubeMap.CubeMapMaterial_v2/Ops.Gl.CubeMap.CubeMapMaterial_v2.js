@@ -77,6 +77,9 @@ function doRender()
     {
         if (inCubemap.get().cubemap) shader.pushTexture(inSkyboxUniform, inCubemap.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         else shader.pushTexture(inSkyboxUniform, inCubemap.get().tex);
+
+        if (inMiplevel.get() && inCubemap.get().filter != CGL.Texture.FILTER_MIPMAP) op.setUiError("texnomip", "blur needs to be mipmaped texture", 1);
+        else op.setUiError("texnomip", null);
     }
     else shader.pushTexture(inSkyboxUniform, CGL.Texture.getTempTexture(cgl).tex);
 
