@@ -11,6 +11,19 @@
             {
                 "type": 3,
                 "name": "Points"
+            },
+            {
+                "type": 3,
+                "name": "Vertex Colors"
+            },
+            {
+                "type": 3,
+                "name": "TexCoords"
+            },
+            {
+                "type": 0,
+                "name": "Render Mesh",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -50,5 +63,12 @@
             }
         ]
     },
-    "exampleProjectId": "0fnxrc"
+    "exampleProjectId": "0fnxrc",
+    "changelog": [
+        {
+            "message": "add vertexcolors/texturecoordinates and render-mesh boolean",
+            "author": "stephan",
+            "date": 1656588039534
+        }
+    ]
 }
