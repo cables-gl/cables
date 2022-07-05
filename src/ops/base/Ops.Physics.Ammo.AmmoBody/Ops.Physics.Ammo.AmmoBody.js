@@ -11,7 +11,7 @@ const
     inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone", "Geom Convex Hull"], "Box"),
     inGeom = op.inObject("Geometry", null, "geometry"),
     inGeomSimplify = op.inInt("Simplify Max Triangles", 50),
-    inRadius = op.inFloat("Radius", 1),
+    inRadius = op.inFloat("Radius", 0.5),
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
@@ -151,7 +151,7 @@ function setup()
     else
     {
         inGeomSimplify.setUiAttribs({ "greyout": true });
-        console.log("unknown shape type", inShape.get());
+        op.log("unknown shape type", inShape.get());
         return;
     }
 

@@ -15,6 +15,11 @@
             "message": "Ops.Dev.AmmoBody renamed to Ops.Physics.Ammo.AmmoBody",
             "author": "pandur",
             "date": 1652089858738
+        },
+        {
+            "message": "change default radius to 0.5 to reflect default of sphere",
+            "author": "stephan",
+            "date": 1657013240747
         }
     ],
     "authorName": "pandur",
