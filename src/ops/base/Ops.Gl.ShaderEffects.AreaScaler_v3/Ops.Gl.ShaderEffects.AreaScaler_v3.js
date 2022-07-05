@@ -30,11 +30,10 @@ let moduleVert = null;
 // op.onDelete = exec.onLinkChanged = removeModule;
 inToZero.onChange = inSrc.onChange = inClampBool.onChange = updateToZero;
 
-console.log(attachments)
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "priority": 2,
-    "title": "vert_"+op.name,
+    "title": "vert_" + op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.areascale_vert,
     "srcBodyVert": srcBodyVert
@@ -51,10 +50,6 @@ mod.addUniform("f", "MOD_clampMax", inClampMax);
 mod.addUniform("f", "MOD_x", x);
 mod.addUniform("f", "MOD_y", y);
 mod.addUniform("f", "MOD_z", z);
-
-
-
-
 
 
 // function removeModule()
@@ -135,5 +130,4 @@ exec.onTriggered = function ()
     mod.bind();
     next.trigger();
     mod.unbind();
-
 };
