@@ -21,7 +21,7 @@ hdpi.onChange = function ()
     op.patch.cgl.updateSize();
     if (CABLES.UI) gui.setLayout();
 
-    inUnit.setUiAttribs({ "greyout": !hdpi.get() });
+    // inUnit.setUiAttribs({ "greyout": !hdpi.get() });
 
     // if (!hdpi.get())inUnit.set("CSS");
     // else inUnit.set("Display");
