@@ -38,6 +38,9 @@ const
     inMaskSource = op.inSwitch("Source Strength Map", ["R", "G", "B", "A", "Lum"], "R"),
     inMaskInv = op.inBool("Invert Strength Map", false);
 
+inMaskSource.setUiAttribs({ "title": "Source Amount Map" });
+inMaskInv.setUiAttribs({ "title": "Invert Amount Map" });
+
 op.setPortGroup("Amount Map", [inMaskTex, inMaskSource, inMaskInv]);
 
 // offsetMap
