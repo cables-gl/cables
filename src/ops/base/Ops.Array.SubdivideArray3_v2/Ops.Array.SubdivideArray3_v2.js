@@ -93,7 +93,7 @@ function calc()
         }
 
         let endi = inPoints.length - 3;
-        if (doLoop)endi = inPoints.length + 3;
+        if (doLoop)endi = inPoints.length;
 
         for (i = 3; i < endi; i += 3)
         {
@@ -111,6 +111,14 @@ function calc()
                     count++;
                 }
             }
+        }
+
+        if (doLoop)
+        {
+            arr[count + 0] = arr[0];
+            arr[count + 1] = arr[1];
+            arr[count + 2] = arr[2];
+            count++; count++; count++;
         }
 
         if (bezierEndPoints.get())
