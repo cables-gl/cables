@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.GltfVertexAnim renamed to Ops.Gl.GLTF.GltfVertexAnim",
             "author": "pandur",
             "date": 1654780045809
+        },
+        {
+            "message": "fixed editor crash when entering unknow mesh name",
+            "author": "stephan",
+            "date": 1657277099733
         }
     ],
     "authorName": "pandur",
