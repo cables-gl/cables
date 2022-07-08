@@ -56,7 +56,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.ColorMapRange"
+        "name": "Ops.Gl.TextureEffects.ColorMapRange"
     },
     "summary": "Map the range of color number values to another",
     "author": "59db805b08bab26e1ab7a0f2",
@@ -77,6 +77,11 @@
             "message": "Ops.User.pandur.ColorMapRange renamed to Ops.Gl.TextureEffects.ColorMapRange",
             "author": "pandur",
             "date": 1652080444151
+        },
+        {
+            "message": "set shaderdefines on op load",
+            "author": "stephan",
+            "date": 1657276183967
         }
     ],
     "issues": "",
