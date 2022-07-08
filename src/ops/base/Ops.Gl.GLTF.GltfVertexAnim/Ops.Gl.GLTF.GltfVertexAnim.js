@@ -19,6 +19,9 @@ let origGeom = null;
 inSceneTime.onChange = updateTimeInputs;
 updateTimeInputs();
 
+let lastMorph1 = -1;
+let lastMorph2 = -1;
+let lastFract = -1;
 
 inNodeName.onChange = () =>
 {
@@ -97,10 +100,6 @@ function update()
         outFound.set(false);
     }
 }
-
-let lastMorph1 = -1;
-let lastMorph2 = -1;
-let lastFract = -1;
 
 function render()
 {
