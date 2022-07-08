@@ -22,6 +22,11 @@
             },
             {
                 "type": 0,
+                "name": "Flat",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Render Mesh",
                 "subType": "boolean"
             }
@@ -69,6 +74,11 @@
             "message": "add vertexcolors/texturecoordinates and render-mesh boolean",
             "author": "stephan",
             "date": 1656588039534
+        },
+        {
+            "message": "add option to have vertex indices and flat mode",
+            "author": "stephan",
+            "date": 1657191339105
         }
     ]
 }

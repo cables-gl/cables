@@ -3,11 +3,12 @@ const
     inArr = op.inArray("Points", 3),
     inVertCols = op.inArray("Vertex Colors", 4),
     inTexCoords = op.inArray("TexCoords", 2),
+    inFlat = op.inValueBool("Flat", false),
     inRenderMesh = op.inBool("Render Mesh", true),
     next = op.outTrigger("Next"),
     geomOut = op.outObject("Geometry");
 
-const geom = new CGL.Geometry("triangle array");
+let geom = new CGL.Geometry("triangle array");
 
 let mesh = null;
 let verts = null;
@@ -60,6 +61,12 @@ function update()
         geom.vertexColors = vertexColors;
     }
 
+    if (!inFlat.get()) index(verts, geom);
+    else
+    {
+        geom.vertices = verts;
+    }
+
     geom.calculateNormals();
     geomOut.set(null);
     geomOut.set(geom);
@@ -68,9 +75,53 @@ function update()
 inArr.onChange = update;
 inVertCols.onChange = update;
 inTexCoords.onChange = update;
+inFlat.onChange = () =>
+{
+    geom = new CGL.Geometry("triangle array");
+    update();
+};
 
 render.onTriggered = function ()
 {
     if (mesh && verts && inRenderMesh.get()) mesh.render(cgl.getShader());
     next.trigger();
 };
+
+function index(vertsToIndex, geometry)
+{
+    const num = vertsToIndex.length / 3;
+    const arr = [];
+    const ind = [];
+    let delta = 0.0001;
+
+    for (let i = 0; i < num; i++)
+    {
+        let found = false;
+
+        for (let j = 0; j < arr.length; j += 3)
+        {
+            if (
+                arr[j] < vertsToIndex[i * 3] + delta &&
+                arr[j + 1] < vertsToIndex[i * 3 + 1] + delta &&
+                arr[j + 2] < vertsToIndex[i * 3 + 2] + delta &&
+                arr[j] > vertsToIndex[i * 3] - delta &&
+                arr[j + 1] > vertsToIndex[i * 3 + 1] - delta &&
+                arr[j + 2] > vertsToIndex[i * 3 + 2] - delta)
+            {
+                ind.push(j / 3);
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            arr.push(vertsToIndex[i * 3]);
+            arr.push(vertsToIndex[i * 3 + 1]);
+            arr.push(vertsToIndex[i * 3 + 2]);
+            ind.push(arr.length / 3 - 1);
+        }
+    }
+
+    geometry.verticesIndices = ind;
+    geometry.vertices = arr;
+}
