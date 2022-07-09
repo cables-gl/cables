@@ -4,7 +4,7 @@ const
     decPlaces = op.inInt("Decimal Places", 0);
 
 number1.onChange = exec;
-let decm = 0;
+let decm = 1;
 
 decPlaces.onChange = () =>
 {
@@ -14,5 +14,6 @@ decPlaces.onChange = () =>
 
 function exec()
 {
+    if (decm < 1) decm = 1;
     result.set(Math.round(number1.get() * decm) / decm);
 }
