@@ -1,5 +1,11 @@
 OUT vec3 MOD_displHeightMapColor;
 
+#ifdef MOD_MODE_VERTCOL
+#ifndef VERTEX_COLORS
+IN vec4 attrVertColor;
+#endif
+#endif
+
 // mat4 rotationX( in float angle ) {
 // 	return mat4(	1.0,		0,			0,			0,
 // 			 		0, 	cos(angle),	-sin(angle),		0,
