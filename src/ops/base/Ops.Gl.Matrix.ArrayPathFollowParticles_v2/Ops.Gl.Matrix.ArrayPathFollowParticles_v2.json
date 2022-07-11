@@ -77,6 +77,11 @@
             "message": "Ops.User.cables.ArrayPathFollowParticles2 renamed to Ops.Gl.Matrix.ArrayPathFollowParticles_v2",
             "author": "cables",
             "date": 1610114417937
+        },
+        {
+            "message": "add warning if not below a pointmaterial",
+            "author": "stephan",
+            "date": 1657534188135
         }
     ],
     "coreLibs": [
