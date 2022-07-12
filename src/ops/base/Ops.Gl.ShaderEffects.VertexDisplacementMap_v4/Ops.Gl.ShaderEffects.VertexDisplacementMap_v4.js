@@ -3,7 +3,7 @@ const
 
     // meth = op.inValueSelect("Mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
     extrude = op.inValue("Extrude", 0.5),
-    meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "*", "+", "/"], "Norm"),
+    meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "VertCol", "*", "+", "/"], "Norm"),
     axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
     src = op.inSwitch("Coordinates", ["Tex Coords", "Mesh XY", "Mesh XZ"], "Tex Coords"),
 
@@ -114,6 +114,7 @@ function updateDefines()
     mod.toggleDefine("MOD_MODE_BITANGENT", meth.get() == "BiTang");
     mod.toggleDefine("MOD_MODE_TANGENT", meth.get() == "Tang");
     mod.toggleDefine("MOD_MODE_NORMAL", meth.get() == "Norm");
+    mod.toggleDefine("MOD_MODE_VERTCOL", meth.get() == "VertCol");
     mod.toggleDefine("MOD_MODE_MUL", meth.get() == "*");
     mod.toggleDefine("MOD_MODE_ADD", meth.get() == "+");
     mod.toggleDefine("MOD_MODE_DIV", meth.get() == "/");

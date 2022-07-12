@@ -157,6 +157,17 @@ vec3 MOD_mask=vec3(1.0);
 
 #endif
 
+#ifdef MOD_MODE_VERTCOL
+    vec3 MOD_t=attrVertColor.rgb*vec3(2.0)-vec3(1.0);
+
+    #ifdef MOD_SMOOTHSTEP
+        MOD_t=smoothstep(-1.,1.,MOD_t);
+    #endif
+
+    pos.xyz+=MOD_t*MOD_disp*MOD_mask;
+
+#endif
+
 
 // pos.y*=-1.0;
     // pos.xy+=vec2(MOD_texVal*MOD_extrude)*normalize(pos.xy);

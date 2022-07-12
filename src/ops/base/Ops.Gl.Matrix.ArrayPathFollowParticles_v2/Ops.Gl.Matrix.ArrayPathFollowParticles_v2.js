@@ -131,6 +131,12 @@ function updateDefines()
 
 exec.onTriggered = function ()
 {
+    if (op.patch.isEditorMode())
+    {
+        if (cgl.getShader().glPrimitive != cgl.gl.POINTS) op.setUiError("nopointmat", "Using a Material not made for point rendering. Try to use PointMaterial.");
+        else op.setUiError("nopointmat", null);
+    }
+
     if (!inPoints.get() || inPoints.get().length === 0) return;
     if (needsRebuild)rebuild();
 
