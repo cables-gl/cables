@@ -2,7 +2,7 @@ const
     cgl = op.patch.cgl,
     inTrigger = op.inTrigger("Trigger In"),
     inRender = op.inBool("Render", true),
-    inTexture = op.inObject("Skybox"),
+    inTexture = op.inTexture("Skybox"),
     inRot = op.inFloat("Rotate", 0),
 
     inRGBE = op.inBool("RGBE Format", false),
