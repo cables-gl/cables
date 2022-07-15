@@ -2,8 +2,7 @@
 
 ## Viz Ops can be used to easily visualize things in the patchfield.
 
-You can use the canvas drawing API to draw things in the patchfield
---> https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+You can use the [canvas drawing API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) to draw things in the patchfield.
 
 There is quite a variety of Viz Ops in cables already, take a [look](https://cables.gl/ops/Ops.Ui)
 
@@ -11,8 +10,7 @@ To make any of your ops a Viz Ops, you have to implement the function renderVizL
 
 Parameters:
 - `ctx` is the 2d drawing context
-- `Layer` contains information about the current op size, scale and positioning. For example:
-
+- `layer` contains information about the current op size, scale and positioning. For example:
 
 ```javascript
 op.renderVizLayer = (ctx, layer) =>
