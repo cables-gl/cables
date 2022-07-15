@@ -71,8 +71,8 @@ const lightFragmentBodies = {
     "directional": attachments.light_body_directional_frag,
     "spot": attachments.light_body_spot_frag,
 };
-const createLightFragmentHead = (n) => { return lightFragmentHead.replace("{{LIGHT_INDEX}}", n); };
-const createLightFragmentBody = (n, type) => { return lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n); };
+const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createLightFragmentBody = (n, type) => lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n);
 let currentLightCount = -1;
 
 if (cgl.glVersion == 1)
@@ -319,7 +319,7 @@ function doRender()
 
     if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) &&
         !inLightmap.isLinked() &&
-        PBRLightStack.length == 0) op.setUiError("noPbrEnv", "Default light is enabled. Please add lights to your patch to make this warning disappear.", 1);
+        PBRLightStack.length == 0) op.setUiError("noPbrEnv", "No PBR lights found in branch, create a light to see something");
     else op.setUiError("noPbrEnv", null);
 
     if (cgl.frameStore.pbrEnvStack && cgl.frameStore.pbrEnvStack.length > 0 &&
