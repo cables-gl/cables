@@ -232,7 +232,7 @@ function printInfo()
         html += "<td>";
         for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            if (gltf.json.meshes[i].primitives[j].material)
+            if (gltf.json.meshes[i].primitives[j].hasOwnProperty("material"))
             {
                 html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name + " ";
             }
