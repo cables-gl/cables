@@ -52,7 +52,7 @@ function printNode(html, node, level)
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
             if (countMats > 0)html += ", ";
-            if (node.mesh.meshes[i].material)
+            if (node.mesh.meshes[i].hasOwnProperty("material"))
             {
                 html += gltf.json.materials[node.mesh.meshes[i].material].name;
                 countMats++;
@@ -160,7 +160,7 @@ function printInfo()
     }
     html += "</table>";
 
-    /// //////////////////
+    // / //////////////////
 
     let numMaterials = 0;
     if (gltf.json.materials)numMaterials = gltf.json.materials.length;
@@ -186,7 +186,7 @@ function printInfo()
         html += "</table>";
     }
 
-    /// ///////////////////////
+    // / ///////////////////////
 
     html += "<div id=\"groupMeshes\">Meshes (" + gltf.json.meshes.length + ")</div>";
 
@@ -296,7 +296,7 @@ function printInfo()
     }
     html += "</table>";
 
-    /// //////////////////////////////////
+    // / //////////////////////////////////
 
     let numAnims = 0;
     if (gltf.json.animations)numAnims = gltf.json.animations.length;
@@ -365,7 +365,7 @@ function printInfo()
 
     }
 
-    /// ///////////////////
+    // / ///////////////////
 
     let numImages = 0;
     if (gltf.json.images)numImages = gltf.json.images.length;
@@ -405,7 +405,7 @@ function printInfo()
         html += "</table>";
     }
 
-    /// ///////////////////////
+    // / ///////////////////////
 
     let numCameras = 0;
     if (gltf.json.cameras)numCameras = gltf.json.cameras.length;
@@ -439,7 +439,7 @@ function printInfo()
         html += "</table>";
     }
 
-    /// ////////////////////////////////////
+    // / ////////////////////////////////////
 
     let numSkins = 0;
     if (gltf.json.skins)numSkins = gltf.json.skins.length;
@@ -469,7 +469,7 @@ function printInfo()
         html += "</table>";
     }
 
-    /// //////////////////////////
+    // / //////////////////////////
 
     let sizeBin = 0;
     if (gltf.json.buffers)
