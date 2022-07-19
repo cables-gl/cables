@@ -133,7 +133,16 @@
             "message": "code cleanup - ports and whitespace",
             "author": "andro",
             "date": 1559044991080
+        },
+        {
+            "message": "added missing corelib",
+            "author": "stephan",
+            "date": 1658228722037
         }
     ],
-    "exampleProjectId": "PdhglN"
+    "exampleProjectId": "PdhglN",
+    "
+    ": [
+        "cgl_shadermodifier"
+    ]
 }
