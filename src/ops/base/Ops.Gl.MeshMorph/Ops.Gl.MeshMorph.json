@@ -141,8 +141,7 @@
         }
     ],
     "exampleProjectId": "PdhglN",
-    "
-    ": [
+    "coreLibs": [
         "cgl_shadermodifier"
     ]
 }
