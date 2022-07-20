@@ -15,4 +15,3 @@ trig.onTriggered = function ()
 {
     meshRect.render();
 };
-csdcsd;

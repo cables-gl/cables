@@ -7,7 +7,7 @@ const
     inIndex = op.inFloat("Index", 0),
     inIndex2 = op.inFloat("Index 2", 0),
     inFade = op.inFloatSlider("Fade", 0),
-    finished = op.outValue("Finished"),
+    finished = op.outBoolNum("Finished"),
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
@@ -179,8 +179,6 @@ function updateGeom()
     {
         mesh.updateAttribute(prfx + "attrMorphTargetB", geom1._vertices);
         mesh.updateAttribute(prfx + "attrMorphTargetA", geom2._vertices);
-
-        if (geom1 == geom2)console.log("both same");
     }
 }
 
