@@ -54,8 +54,11 @@ function printNode(html, node, level)
             if (countMats > 0)html += ", ";
             if (node.mesh.meshes[i].hasOwnProperty("material"))
             {
-                html += gltf.json.materials[node.mesh.meshes[i].material].name;
-                countMats++;
+                if (gltf.json.materials[node.mesh.meshes[i].material])
+                {
+                    html += gltf.json.materials[node.mesh.meshes[i].material].name;
+                    countMats++;
+                }
             }
         }
         if (countMats == 0)html += "none";
@@ -234,7 +237,9 @@ function printInfo()
         {
             if (gltf.json.meshes[i].primitives[j].hasOwnProperty("material"))
             {
-                html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name + " ";
+                if(gltf.json.materials[gltf.json.meshes[i]) {
+                    html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name + " ";
+                }
             }
             else html += "None";
         }
