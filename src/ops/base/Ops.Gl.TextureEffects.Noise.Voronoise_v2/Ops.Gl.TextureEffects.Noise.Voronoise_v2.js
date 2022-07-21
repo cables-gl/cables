@@ -32,7 +32,7 @@ const
     uniDrawDistance = new CGL.Uniform(shader, "b", "drawDistance", drawDistance),
     uniCenterSize = new CGL.Uniform(shader, "f", "centerSize", centerSize);
 
-shader.define("NUM", 20.01);
+shader.define("NUM", 50.001);
 
 num.onChange = function ()
 {
