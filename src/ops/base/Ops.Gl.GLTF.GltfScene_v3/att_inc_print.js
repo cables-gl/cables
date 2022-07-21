@@ -237,7 +237,8 @@ function printInfo()
         {
             if (gltf.json.meshes[i].primitives[j].hasOwnProperty("material"))
             {
-                if(gltf.json.materials[gltf.json.meshes[i]) {
+                if (gltf.json.materials[gltf.json.meshes[i]])
+                {
                     html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name + " ";
                 }
             }
