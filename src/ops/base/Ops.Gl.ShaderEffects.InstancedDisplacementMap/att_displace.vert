@@ -92,6 +92,8 @@
 
     #ifdef MOD_MODE_ROT
         #define MOD_PI 3.14159265358
+        MOD_dis*=MOD_strength;
+        MOD_dis+=MOD_min;
 
         #ifdef MOD_AXIS_X
             pos*=MOD_rot(vec3(1.0,0.0,0.0), MOD_dis.x*3.14);
