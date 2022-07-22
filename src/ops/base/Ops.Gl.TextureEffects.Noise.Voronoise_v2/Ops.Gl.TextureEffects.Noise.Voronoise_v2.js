@@ -6,7 +6,7 @@ const
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
     time = op.inValue("Time", 0),
     movement = op.inValueSlider("Movement", 0),
-    num = op.inValue("Num", 50),
+    num = op.inValue("Num", 20),
     seed = op.inValue("seed", 0),
     fill = op.inValueSelect("Fill", ["None", "Random", "Gradient", "Gray"], "Random"),
     drawIsoLines = op.inValueBool("Draw Isolines", false),
@@ -32,7 +32,7 @@ const
     uniDrawDistance = new CGL.Uniform(shader, "b", "drawDistance", drawDistance),
     uniCenterSize = new CGL.Uniform(shader, "f", "centerSize", centerSize);
 
-shader.define("NUM", 20.01);
+shader.define("NUM", 20.001);
 
 num.onChange = function ()
 {

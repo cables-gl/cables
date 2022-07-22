@@ -71,7 +71,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Dev.VoronoiseV2"
+        "name": "Ops.Gl.TextureEffects.Noise.Voronoise_v2"
     },
     "credits": [
         {
@@ -108,6 +108,11 @@
             "message": "Ops.Dev.VoronoiseV2 renamed to Ops.Gl.TextureEffects.Noise.Voronoise_v2",
             "author": "pandur",
             "date": 1653286947406
+        },
+        {
+            "message": "sync default values between port and shader",
+            "author": "stephan",
+            "date": 1658399661808
         }
     ],
     "issues": "",
