@@ -11,7 +11,7 @@ const
     flipY = op.inValueBool("Flip Y", false),
 
     inAsDOM = op.inValueBool("Show HTML Element", false),
-    inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),
+    inCss = op.inStringEditor("CSS", "z-index:99999;\nposition:absolute;\n", "inline-css"),
     htmlFlipX = op.inValueBool("Element Flip X", false),
     htmlFlipY = op.inValueBool("Element Flip Y", false),
 
@@ -224,7 +224,7 @@ function getCamConstraints()
         }
         else
         {
-            deviceInfo = camInputDevices.filter((d) => d.label === deviceLabel);
+            deviceInfo = camInputDevices.filter((d) => { return d.label === deviceLabel; });
             if (deviceInfo)
             {
                 deviceInfo = deviceInfo[0];
@@ -287,7 +287,7 @@ function restartWebcam()
     {
         // console.log("nope");
         restarting = false;
-        navigator.getUserMedia(constr, camInitComplete, () => available.set(false));
+        navigator.getUserMedia(constr, camInitComplete, () => { return available.set(false); });
     }
 }
 
@@ -298,14 +298,14 @@ function initDevices()
     const constraints = getCamConstraints();
 
     navigator.mediaDevices.getUserMedia(constraints)
-        .then((res) => navigator.mediaDevices.enumerateDevices())
+        .then((res) => { return navigator.mediaDevices.enumerateDevices(); })
         .then((devices) =>
         {
             camInputDevices = devices
-                .filter((device) => device.kind === "videoinput");
+                .filter((device) => { return device.kind === "videoinput"; });
 
             initingDevices = false;
-            inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => d.label || idx);
+            inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => { return d.label || idx; });
             inInputDevices.uiAttribs.values.unshift("Default");
             outDevices.set(inInputDevices.uiAttribs.values);
             cgl.patch.loading.finished(loadingId);

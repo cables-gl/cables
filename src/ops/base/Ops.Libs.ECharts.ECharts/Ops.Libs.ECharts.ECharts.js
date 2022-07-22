@@ -11,7 +11,7 @@ const rendererSel = op.inSwitch("Renderer", ["canvas", "svg"], "canvas");
 const themeSelect = op.inSwitch("Theme", ["default", "light", "dark"], "dark");
 const customTheme = op.inObject("Custom theme obj");
 const inInitExtraOpts = op.inObject("Init extra Options");
-const inStyle = op.inValueEditor("Style", "position:absolute;z-index:100;background:white;", "css");
+const inStyle = op.inValueEditor("Style", "position:absolute;\nz-index:100;\nbackground:white;", "inline-css");
 const inVisible = op.inValueBool("Visible", true);
 
 const outElement = op.outObject("DOM Element");

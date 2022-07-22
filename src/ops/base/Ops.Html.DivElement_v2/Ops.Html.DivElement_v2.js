@@ -2,7 +2,7 @@ const
     inText = op.inString("Text", "Hello Div"),
     inId = op.inString("Id"),
     inClass = op.inString("Class"),
-    inStyle = op.inValueEditor("Style", "position:absolute;\nz-index:100;", "css"),
+    inStyle = op.inValueEditor("Style", "position:absolute;\nz-index:100;", "inline-css"),
     inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
