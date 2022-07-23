@@ -48,7 +48,10 @@ function update()
         if (
             inMinR.get() < 0.0 || inMinR.get() > 1.0 ||
             inMinG.get() < 0.0 || inMinG.get() > 1.0 ||
-            inMinB.get() < 0.0 || inMinB.get() > 1.0) op.setUiError("nonfprange", "non floating point textures have to be between 0 and 1");
+            inMinB.get() < 0.0 || inMinB.get() > 1.0 ||
+            inMaxR.get() < 0.0 || inMaxR.get() > 1.0 ||
+            inMaxG.get() < 0.0 || inMaxG.get() > 1.0 ||
+            inMaxB.get() < 0.0 || inMaxB.get() > 1.0) op.setUiError("nonfprange", "Non floating point textures have to be between 0 and 1");
         else op.setUiError("nonfprange", null);
     }
     else op.setUiError("nonfprange", null);
