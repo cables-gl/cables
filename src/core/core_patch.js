@@ -569,12 +569,9 @@ Patch.prototype.getFrameNum = function ()
     return this._frameNum;
 };
 
-Patch.prototype.renderFrame = function (e)
+Patch.prototype.emitOnAnimFrameEvent = function (time)
 {
-    this.timer.update();
-    this.freeTimer.update();
-    const time = this.timer.getTime();
-    const startTime = performance.now();
+    time = time || this.timer.getTime();
 
     for (let i = 0; i < this.animFrameCallbacks.length; ++i)
     {
@@ -588,7 +585,16 @@ Patch.prototype.renderFrame = function (e)
             this.animFrameOps[i].onAnimFrame(time);
         }
     }
+};
 
+Patch.prototype.renderFrame = function (e)
+{
+    this.timer.update();
+    this.freeTimer.update();
+    const time = this.timer.getTime();
+    const startTime = performance.now();
+
+    this.emitOnAnimFrameEvent(time);
 
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
