@@ -1,64 +1,82 @@
-let visible = op.inValueBool("visible", true);
+const
+    visible = op.inValueBool("visible", true),
+    inClear = op.inTriggerButton("Clear"),
+    outEle = op.outObject("Element", null, "element");
 
-
-visible.onChange = function ()
-{
-    if (visible.get()) logger.style.display = "block";
-    else logger.style.display = "none";
-};
-
-var logger = document.createElement("div");
-logger.style.padding = "0px";
-logger.style.position = "absolute";
-logger.style.overflow = "scroll";
-if (CABLES.UI)
-{
-    logger.style.width = "100%";
-    logger.style.height = "50%";
-}
-else
-{
-    logger.style.width = "100vw";
-    logger.style.height = "50vh";
-}
-logger.style["background-color"] = "rgba(0,0,0,0.74)";
-logger.style["box-sizing"] = "border-box";
-logger.style.padding = "5px";
-// logger.style['border-left']="1px solid grey";
-// logger.style['border-top']="1px solid grey";
-logger.style["z-index"] = "9999";
-logger.style.color = "#fff";
-
-
+let eleLog = null;
 let canvas = op.patch.cgl.canvas.parentElement;
-canvas.appendChild(logger);
-
 
 let oldLog = console.log;
 let oldLogError = console.error;
 let oldLogWarn = console.warn;
-// var logger = document.getElementById('log');
+
 console.log = thelog;
 console.error = thelog;
 console.warn = thelog;
 
-function thelog()
-{
-    oldLog(arguments);
-    let html = "<code style=\"display:block;overflow:hidden;margin-top:3px;border-bottom:1px solid #000;padding:3px;\">";
-    for (let i = 0; i < arguments.length; i++)
-    {
-        if (typeof arguments[i] == "object") html += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + "";
-        else html += arguments[i];
-    }
-    logger.innerHTML += html + "</code>";
-    logger.scrollTop = logger.scrollHeight;
-}
+addElement();
 
 op.onDelete = function ()
 {
-    logger.remove();
+    removeElement();
     console.log = oldLog;
     console.error = oldLogError;
     console.warn = oldLogWarn;
+};
+
+visible.onChange = function ()
+{
+    if (visible.get()) eleLog.style.display = "block";
+    else eleLog.style.display = "none";
+};
+
+function addElement()
+{
+    if (eleLog)removeElement();
+    eleLog = document.createElement("div");
+    eleLog.style.padding = "0px";
+    eleLog.style.position = "absolute";
+    eleLog.style.overflow = "scroll";
+    if (CABLES.UI)
+    {
+        eleLog.style.width = "100%";
+        eleLog.style.height = "50%";
+    }
+    else
+    {
+        eleLog.style.width = "100vw";
+        eleLog.style.height = "50vh";
+    }
+    eleLog.style["background-color"] = "rgba(0,0,0,0.74)";
+    eleLog.style["box-sizing"] = "border-box";
+    eleLog.style.padding = "5px";
+    eleLog.style["z-index"] = "9999";
+    eleLog.style.color = "#fff";
+
+    canvas.appendChild(eleLog);
+}
+
+function removeElement()
+{
+    canvas.removeChild(eleLog);
+    eleLog = null;
+}
+
+function thelog()
+{
+    if (!eleLog)addElement();
+    oldLog.apply(console, arguments);
+    let html = "<code style=\"display:block;overflow:hidden;margin-top:3px;border-bottom:1px solid #000;padding:3px;\">";
+    for (let i = 0; i < arguments.length; i++)
+    {
+        if (typeof arguments[i] == "object") html += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + " ";
+        else html += arguments[i] + " ";
+    }
+    eleLog.innerHTML += html + "</code>";
+    eleLog.scrollTop = eleLog.scrollHeight;
+}
+
+inClear.onTriggered = () =>
+{
+    eleLog.innerHTML = "";
 };
