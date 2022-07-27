@@ -257,7 +257,7 @@ function initVideo()
 
 function updateVolume()
 {
-    videoElement.volume = (volume.get() || 0) * op.patch.config.masterVolume;
+    videoElement.volume = Math.min(1, Math.max(0, (volume.get() || 0) * op.patch.config.masterVolume));
 }
 
 volume.onChange = updateVolume;

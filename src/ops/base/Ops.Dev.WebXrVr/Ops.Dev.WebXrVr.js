@@ -27,9 +27,7 @@ let webGLRenContext = null;
 let xrReferenceSpace = null;
 let vmat = mat4.create();
 let xrViewerPose = null;
-let div = null;
 
-createOverlayEle();
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
@@ -43,27 +41,7 @@ if (xr)
 op.onDelete = () =>
 {
     removeButton();
-    removeOverlayEle();
 };
-
-function createOverlayEle()
-{
-    div = document.createElement("div");
-    div.dataset.op = op.id;
-    div.classList.add("cablesEle");
-    // if (inId.get()) div.id = inId.get();
-    document.body.appendChild(div);
-    outElement.set(div);
-}
-
-function removeOverlayEle()
-{
-    // if (div) removeClasses();
-    if (div) document.body.removeChild(div);
-    // oldStr = null;
-    div = null;
-    outElement.set(null);
-}
 
 function stopVr()
 {
@@ -85,11 +63,7 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-vr",
-        {
-            "optionalFeatures": ["dom-overlay"],
-            "domOverlay": { "root": div }
-        }
+    xr.requestSession("immersive-vr", {}
     ).then(
         (session) =>
         {
@@ -107,9 +81,6 @@ function startVr()
                 outVr.set(true);
 
                 console.log("started vr session....");
-
-                if (xrSession.domOverlayState) console.log("dom overlay state type " + xrSession.domOverlayState.type);
-                else console.log("no dom overlay");
 
                 let canvas = cgl.canvas;
                 webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": false });
