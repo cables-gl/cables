@@ -22,40 +22,40 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger In"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "R",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "G",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "B",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel Intensity",
                 "group": "Fresnel Settings",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel Exponent",
                 "group": "Fresnel Settings",
                 "subType": "number"
@@ -63,7 +63,7 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             }
         ],

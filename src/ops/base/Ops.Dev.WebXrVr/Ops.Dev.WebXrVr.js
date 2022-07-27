@@ -11,9 +11,12 @@ const
     outPose = op.outObject("Viewer Pose"),
     outVr = op.outBoolNum("VR Support"),
     outMat = op.outArray("Matrix"),
+    outElement = op.outObject("DOM Overlay Ele", null, "element"),
     outSession = op.outBoolNum("In Session");
 
 const cgl = op.patch.cgl;
+const canvas = op.patch.cgl.canvas.parentElement;
+
 let xr = navigator.xr;
 
 let hadError = false;
@@ -24,18 +27,43 @@ let webGLRenContext = null;
 let xrReferenceSpace = null;
 let vmat = mat4.create();
 let xrViewerPose = null;
+let div = null;
 
-op.onDelete = removeButton;
+createOverlayEle();
 inStop.onTriggered = stopVr;
-
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
 if (xr)
     xr.isSessionSupported("immersive-vr").then((r) =>
     {
         console.log("xr detected", r);
-        if (r)initButton();
+        if (r) initButton();
     });
+
+op.onDelete = () =>
+{
+    removeButton();
+    removeOverlayEle();
+};
+
+function createOverlayEle()
+{
+    div = document.createElement("div");
+    div.dataset.op = op.id;
+    div.classList.add("cablesEle");
+    // if (inId.get()) div.id = inId.get();
+    document.body.appendChild(div);
+    outElement.set(div);
+}
+
+function removeOverlayEle()
+{
+    // if (div) removeClasses();
+    if (div) document.body.removeChild(div);
+    // oldStr = null;
+    div = null;
+    outElement.set(null);
+}
 
 function stopVr()
 {
@@ -56,28 +84,47 @@ function startVr()
         stopVr();
         return;
     }
-    xr.requestSession("immersive-vr").then((session) =>
-    {
-        xrSession = session;
-        outSession.set(true);
 
-        xrSession.requestReferenceSpace("local").then((refSpace) =>
+    xr.requestSession("immersive-vr",
         {
-            xrReferenceSpace = refSpace;
-        });
-
-        if (xrSession)
-        {
-            outVr.set(true);
-
-            let canvas = cgl.canvas;
-            webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": false });
-
-            xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
-
-            xrSession.requestAnimationFrame(onXRFrame);
+            "optionalFeatures": ["dom-overlay"],
+            "domOverlay": { "root": div }
         }
-    });
+    ).then(
+        (session) =>
+        {
+            xrSession = session;
+            outSession.set(true);
+
+            xrSession.requestReferenceSpace("local").then(
+                (refSpace) =>
+                {
+                    xrReferenceSpace = refSpace;
+                });
+
+            if (xrSession)
+            {
+                outVr.set(true);
+
+                console.log("started vr session....");
+
+                if (xrSession.domOverlayState) console.log("dom overlay state type " + xrSession.domOverlayState.type);
+                else console.log("no dom overlay");
+
+                let canvas = cgl.canvas;
+                webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": false });
+
+                xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+
+                xrSession.requestAnimationFrame(onXRFrame);
+            }
+        },
+        (err) =>
+        {
+            // error....
+            console.log("Failed to start immersive AR session.");
+            console.log(ex.message);
+        });
 }
 
 function onXRFrame(hrTime, xrFrame)
@@ -107,6 +154,7 @@ function onXRFrame(hrTime, xrFrame)
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
         }
 
+        CABLES.patch.emitOnAnimFrameEvent();
         cgl.renderStart(cgl);
 
         cgl.gl.clearColor(0, 0, 0, 1);

@@ -3,7 +3,7 @@ IN mat3 MOD_viewMatrix;
 IN vec3 MOD_norm;
 
 #ifdef ENABLE_FRESNEL_MOD
-    float CalculateFresnel(vec3 cameraSpace_pos, vec3 normal)
+    float MOD_CalculateFresnel(vec3 cameraSpace_pos, vec3 normal)
     {
 
         vec3 nDirection = normalize(cameraSpace_pos);
