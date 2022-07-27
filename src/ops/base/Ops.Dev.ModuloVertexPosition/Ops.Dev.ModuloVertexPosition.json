@@ -26,7 +26,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.ModuloVertexPosition"
+        "name": "Ops.Dev.ModuloVertexPosition"
     },
     "summary": "clamp/restrict the vertex position to min/max values per axis",
     "youtubeid": "",
