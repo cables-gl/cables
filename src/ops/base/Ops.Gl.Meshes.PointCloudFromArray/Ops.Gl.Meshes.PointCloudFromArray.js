@@ -165,8 +165,6 @@ function rebuild()
     }
     else geom.vertexColors = [];
 
-    console.log("changed", changed);
-
     if (changed)
     {
         if (inCoords.isLinked()) texCoords = inCoords.get();

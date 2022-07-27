@@ -1360,7 +1360,7 @@ const Op = function ()
         this.uiAttr({ "uierrors": errorArr });
         this.hasUiErrors = Object.keys(this._uiErrors).length;
 
-        console.log(id, txt, this._uiErrors.hasOwnProperty(id));
+        // console.log(id, txt, this._uiErrors.hasOwnProperty(id));
     };
 
     // todo: remove
