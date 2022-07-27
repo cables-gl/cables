@@ -66,13 +66,18 @@ function thelog()
 {
     if (!eleLog)addElement();
     oldLog.apply(console, arguments);
-    let html = "<code style=\"display:block;overflow:hidden;margin-top:3px;border-bottom:1px solid #000;padding:3px;\">";
-    for (let i = 0; i < arguments.length; i++)
+
+    try
     {
-        if (typeof arguments[i] == "object") html += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + " ";
-        else html += arguments[i] + " ";
+        let html = "<code style=\"display:block;overflow:hidden;margin-top:3px;border-bottom:1px solid #000;padding:3px;\">";
+        for (let i = 0; i < arguments.length; i++)
+        {
+            if (typeof arguments[i] == "object") html += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + " ";
+            else html += arguments[i] + " ";
+        }
+        eleLog.innerHTML += html + "</code>";
     }
-    eleLog.innerHTML += html + "</code>";
+    catch (e) {}
     eleLog.scrollTop = eleLog.scrollHeight;
 }
 
