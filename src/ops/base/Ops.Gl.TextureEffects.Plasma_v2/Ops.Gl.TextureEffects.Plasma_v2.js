@@ -56,8 +56,8 @@ function updateDefines()
 {
     shader.toggleDefine("GREY", greyscale.get());
 
-    shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.get());
-    shader.toggleDefine("HAS_TEX_MASK", inTexMask.get());
+    shader.toggleDefine("HAS_TEX_OFFSETMAP", inTexOffsetZ.isLinked());
+    shader.toggleDefine("HAS_TEX_MASK", inTexMask.isLinked());
 
     shader.toggleDefine("OFFSET_X_R", offsetX.get() == "R");
     shader.toggleDefine("OFFSET_X_G", offsetX.get() == "G");
