@@ -10,9 +10,25 @@ const
 
 op.setPortGroup("Strengh Map", [inMaskTex, inMaskSource, inMaskInv]);
 
+const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl, "zoomblur");
+
+shader.setSource(shader.getDefaultVertexShader(), attachments.zoomblur_frag);
+
+const
+    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
+    textureMask = new CGL.Uniform(shader, "t", "texMask", 1),
+    uniX = new CGL.Uniform(shader, "f", "x", x),
+    uniY = new CGL.Uniform(shader, "f", "y", y),
+    strengthUniform = new CGL.Uniform(shader, "f", "strength", strength);
+
 inMaskSource.onChange =
-inMaskInv.onChange =
-inMaskTex.onChange = function ()
+    inMaskInv.onChange =
+    inMaskTex.onChange = updateDefines;
+
+updateDefines();
+
+function updateDefines()
 {
     shader.toggleDefine("HAS_MASK", inMaskTex.isLinked());
 
@@ -26,19 +42,7 @@ inMaskTex.onChange = function ()
 
     inMaskSource.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
     inMaskInv.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
-};
-
-const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, "zoomblur");
-
-shader.setSource(shader.getDefaultVertexShader(), attachments.zoomblur_frag);
-
-const
-    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
-    textureMask = new CGL.Uniform(shader, "t", "texMask", 1),
-    uniX = new CGL.Uniform(shader, "f", "x", x),
-    uniY = new CGL.Uniform(shader, "f", "y", y),
-    strengthUniform = new CGL.Uniform(shader, "f", "strength", strength);
+}
 
 render.onTriggered = function ()
 {
