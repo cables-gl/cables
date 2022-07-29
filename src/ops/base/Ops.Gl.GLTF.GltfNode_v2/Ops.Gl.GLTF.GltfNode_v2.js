@@ -72,6 +72,8 @@ inExec.onTriggered = function ()
             node.transform(cgl);
         }
 
+        // node.updateMatrix();
+
         // render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
 
         let time;

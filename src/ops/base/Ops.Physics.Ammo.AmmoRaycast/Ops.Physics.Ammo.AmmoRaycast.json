@@ -66,6 +66,21 @@
             {
                 "type": 5,
                 "name": "Hit Body Name"
+            },
+            {
+                "type": 0,
+                "name": "Hit X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Physics.Ammo.AmmoRaycast"

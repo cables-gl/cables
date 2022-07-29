@@ -158,6 +158,8 @@ const gltfNode = class
 
         this._lastTimeTrans = _time;
 
+        // console.log(this._rot)
+
         if (!this._animTrans && !this._animRot && !this._animScale)
         {
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);

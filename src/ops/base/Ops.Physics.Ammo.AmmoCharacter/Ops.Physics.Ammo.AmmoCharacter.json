@@ -49,10 +49,6 @@
             },
             {
                 "type": 1,
-                "name": "Reset"
-            },
-            {
-                "type": 1,
                 "name": "Activate"
             },
             {
@@ -99,6 +95,29 @@
                 "type": 0,
                 "name": "Dir Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Pos X",
+                "group": "Reset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Pos Y",
+                "group": "Reset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Pos Z",
+                "group": "Reset",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset",
+                "group": "Reset"
             },
             {
                 "type": 0,
