@@ -1,0 +1,101 @@
+{
+    "id": "7ba04c59-5b31-44f9-bd15-865a6db67c81",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1659271130262
+        },
+        {
+            "message": "Ops.User.pandur.TriggerMathExpression renamed to Ops.Dev.Math.TriggerMathExpression",
+            "author": "pandur",
+            "date": 1659271414051
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1659271134423,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Calculate"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "W",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "C",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "D",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "I",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Expression",
+                "group": "Expression"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Expression Valid",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Dev.Math.TriggerMathExpression"
+    }
+}
