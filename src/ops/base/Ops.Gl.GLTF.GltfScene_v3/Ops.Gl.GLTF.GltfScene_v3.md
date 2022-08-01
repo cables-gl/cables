@@ -16,6 +16,7 @@ Click the show structure button to see the way the GLB file is constructed with 
 - multiple skins: https://cables.gl/edit/Vkp-WN
 - interpolation methods: https://cables.gl/edit/pmKMIV
 - assigned material skinned mesh: https://cables.gl/edit/KSoMZS
+- loose edges and points: https://cables.gl/p/-ev7V6
 
 
 ## convertes:

@@ -77,24 +77,12 @@
                 "text": "When set the playback is started"
             },
             {
-                "name": "Autoplay",
-                "text": "When set to `true` the sound will start to play as soon as the `AudioBuffer` is loaded."
-            },
-            {
                 "name": "Loop",
                 "text": "Weather or not the playback should start from the beginning once the end has been reached. Please note that some browsers have problems doing a perfect loop with certain file types. If you e.g. use an MP3-file as `AudioBuffer` Google Chrome might produce a slight gap between the loops. Ogg-files sometimes work better."
             },
             {
                 "name": "Restart",
                 "text": "trigger to restart the playback"
-            },
-            {
-                "name": "Start Time",
-                "text": "The time in seconds when the sound should begin to play (once `Start / Stop` has been set to `true`). A time of `0` means *play now*, `3` means at 3 seconds of the web audio time. "
-            },
-            {
-                "name": "Stop Time",
-                "text": "The time in seconds when the sound should stop to play (once `Start / Stop` has been set to `false`). A time of `0` means *stop now*."
             },
             {
                 "name": "Offset",
@@ -106,7 +94,7 @@
             },
             {
                 "name": "Detune",
-                "text": "How much the sound should be detuned in [cents](https://en.wikipedia.org/wiki/Cent_(music)). `-100` means one semitone lower, `100` one semitone higher, `12000` is one octave higher (`12 * 100`)."
+                "text": "How much the sound should be detuned in [cents](https://en.wikipedia.org/wiki/Cent_(music)). `-100` means one semitone lower, `100` one semitone higher, `1200` is one octave higher (`12 * 100`)."
             },
             {
                 "name": "Audio Out",
@@ -143,5 +131,6 @@
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "5PFIfu"
+    "exampleProjectId": "5PFIfu",
+    "caniusequery": ""
 }

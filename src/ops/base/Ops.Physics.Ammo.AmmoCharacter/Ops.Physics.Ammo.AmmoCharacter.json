@@ -148,6 +148,71 @@
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "radius  of the capsule  collision mesh"
+            },
+            {
+                "name": "View index",
+                "text": "1st person or 3rd person mode"
+            },
+            {
+                "name": "Height",
+                "text": "heigh of capsule collision mesh"
+            },
+            {
+                "name": "Mass",
+                "text": "weight of capsule"
+            },
+            {
+                "name": "Name",
+                "text": "name of this capsule to be used for collision checking"
+            },
+            {
+                "name": "Reset",
+                "text": "reset location"
+            },
+            {
+                "name": "Activate",
+                "text": "wake up this object"
+            },
+            {
+                "name": "Dir X",
+                "text": "X axis rotation value (from AmmoCharacterFpsCamera for example)"
+            },
+            {
+                "name": "Dir Y",
+                "text": "Y axis ratation value (from AmmoCharacterFpsCamera for example)"
+            },
+            {
+                "name": "Dir Z",
+                "text": "Z axis rotation value (from AmmoCharacterFpsCamera for example)"
+            },
+            {
+                "name": "Speed",
+                "text": "speed at which this object will travel on user input booleans"
+            },
+            {
+                "name": "Add Velocity Y",
+                "text": "Y axis velocity impulse, for a jump"
+            },
+            {
+                "name": "Position X",
+                "text": "current X location of capsule"
+            },
+            {
+                "name": "Position Y",
+                "text": "current Y location of capsule"
+            },
+            {
+                "name": "Position Z",
+                "text": "current Z location of capsule"
+            },
+            {
+                "name": "Transformed",
+                "text": "resize meshes underneath to dimensions of this object"
+            }
+        ]
     }
 }

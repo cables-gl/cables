@@ -147,6 +147,79 @@
     "youtubeids": [],
     "exampleProjectId": "S_jPZ4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Name",
+                "text": "name of this physics body"
+            },
+            {
+                "name": "Mass",
+                "text": "weight of object, 0 makes a static solid"
+            },
+            {
+                "name": "Friction",
+                "text": "friction of object surface"
+            },
+            {
+                "name": "Rolling Friction",
+                "text": "influence roll of object after collision"
+            },
+            {
+                "name": "Restitution",
+                "text": "influence velocity of object after collision (bounciness)"
+            },
+            {
+                "name": "Shape index",
+                "text": "select shape of collision cage"
+            },
+            {
+                "name": "Geometry",
+                "text": "required when using Convex Hull shape"
+            },
+            {
+                "name": "Simplify Max Triangles",
+                "text": "simplify generated convex hull "
+            },
+            {
+                "name": "Radius",
+                "text": "radius of spherical object"
+            },
+            {
+                "name": "Size X",
+                "text": "size on X axis"
+            },
+            {
+                "name": "Size Y",
+                "text": "size on Y axis"
+            },
+            {
+                "name": "Size Z",
+                "text": "size on Z axis"
+            },
+            {
+                "name": "Never Deactivate",
+                "text": "never put object to sleep"
+            },
+            {
+                "name": "Ghost Object",
+                "text": "object is not solid, reports collision when intersecting with other objects"
+            },
+            {
+                "name": "Reset",
+                "text": "reset entire object"
+            },
+            {
+                "name": "Activate",
+                "text": "wake up object"
+            },
+            {
+                "name": "Ray Hit",
+                "text": "is Cast Ray detected"
+            },
+            {
+                "name": "Transformed",
+                "text": "connect to geometry objects to automatically resize with cage"
+            }
+        ]
     }
 }

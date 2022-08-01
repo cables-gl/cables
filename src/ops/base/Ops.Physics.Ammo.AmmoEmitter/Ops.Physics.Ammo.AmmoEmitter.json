@@ -144,11 +144,11 @@
             },
             {
                 "name": "Rolling Friction",
-                "text": "influence roll of emitted object"
+                "text": "influence roll of emitted object after collision"
             },
             {
                 "name": "Restitution",
-                "text": "influence velocity of object after collision (springiness)"
+                "text": "influence velocity of object after collision (bounciness)"
             },
             {
                 "name": "Dir X",
