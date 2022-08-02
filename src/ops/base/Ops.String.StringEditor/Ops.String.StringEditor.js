@@ -1,6 +1,6 @@
 const
     v = op.inStringEditor("value", ""),
-    syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript", "inline-css"], "text"),
+    syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript", "inline-css", "sql"], "text"),
     result = op.outString("Result");
 
 syntax.onChange = updateSyntax;
