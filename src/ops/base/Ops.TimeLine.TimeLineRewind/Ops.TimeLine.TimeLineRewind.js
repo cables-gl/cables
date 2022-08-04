@@ -1,6 +1,9 @@
-var exe=op.inTriggerButton("exe");
+const
+    exe = op.inTriggerButton("exe"),
+    next = op.outTrigger("Next");
 
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
     op.patch.timer.setTime(0);
+    next.trigger();
 };

@@ -140,6 +140,8 @@ const Context = function (_patch)
         if (!this.patch.config.canvas.hasOwnProperty("premultipliedAlpha")) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty("alpha")) this.patch.config.canvas.alpha = false;
 
+        this.patch.config.canvas.stencil = true;
+
         if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
@@ -154,6 +156,7 @@ const Context = function (_patch)
             // this.patch.config.canvas.forceTextureNearest = true;
             // this.glUseHalfFloatTex = true;
         }
+
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
@@ -1090,6 +1093,8 @@ Context.prototype.popDepthFunc = function ()
     if (this._stackDepthFunc.length > 0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length - 1]);
 };
 
+// --------------------------------------
+// state blending
 
 Context.prototype._stackBlend = [];
 
@@ -1181,6 +1186,44 @@ Context.prototype.popBlendMode = function ()
 
     if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
 };
+
+
+// --------------------------------------
+// state stencil
+
+Context.prototype._stackStencil = [];
+
+/**
+ * enable / disable stencil testing
+
+* @function pushStencil
+ * @memberof Context
+ * @instance
+ * @param {Boolean} enable
+ */
+Context.prototype.pushStencil = function (b)
+{
+    this._stackStencil.push(b);
+    if (!b) this.gl.disable(this.gl.STENCIL_TEST);
+    else this.gl.enable(this.gl.STENCIL_TEST);
+};
+
+/**
+ * pop stencil test state and set the previous state
+ * @function popStencil
+ * @memberof Context
+ * @instance
+ */
+Context.prototype.popStencil = function ()
+{
+    this._stackStencil.pop();
+
+    if (!this._stackStencil[this._stackStencil.length - 1]) this.gl.disable(this.gl.STENCIL_TEST);
+    else this.gl.enable(this.gl.STENCIL_TEST);
+};
+
+// --------------------------------------
+
 
 Context.prototype.glGetAttribLocation = function (prog, name)
 {
