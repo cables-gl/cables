@@ -7,7 +7,6 @@ const
     // inSizeZ = op.inFloat("Size Z", 1),
     inMass = op.inFloat("Mass", 0),
     inName = op.inString("Name", ""),
-    inReset = op.inTriggerButton("Reset"),
     inActivate = op.inTriggerButton("Activate"),
 
     inMoveXP = op.inBool("Move X+", false),
@@ -21,6 +20,12 @@ const
     inDirY = op.inFloat("Dir Y"),
     inDirZ = op.inFloat("Dir Z"),
 
+    inResetX = op.inFloat("Set Pos X"),
+    inResetY = op.inFloat("Set Pos Y"),
+    inResetZ = op.inFloat("Set Pos Z"),
+    // inSetPos = op.inTriggerButton("Set Pos"),
+    inReset = op.inTriggerButton("Reset"),
+
     inSpeed = op.inFloat("Speed", 1),
     inFallVelocity = op.inFloat("Add Velocity Y", 0.5),
 
@@ -31,6 +36,8 @@ const
     transformed = op.outTrigger("Transformed");
 
 inExec.onTriggered = update;
+
+op.setPortGroup("Reset", [inResetX, inResetY, inResetZ, inReset]);
 
 const cgl = op.patch.cgl;
 let body = null;
@@ -44,6 +51,7 @@ const tmpScale = vec3.create();
 let transMat = mat4.create();
 
 let forceQuat = null;
+let initX = 0, initY = 0, initZ = 0;
 
 let btOrigin = null;
 let btQuat = null;
@@ -72,6 +80,10 @@ function removeBody()
 
 inReset.onTriggered = () =>
 {
+    initX = inResetX.get();
+    initY = inResetY.get();
+    initZ = inResetZ.get();
+
     removeBody();
 };
 
@@ -103,7 +115,6 @@ function setup()
     motionState = new Ammo.btDefaultMotionState(transform);
 
     let colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get() - inRadius.get());
-    // let colShape = new Ammo.btSphereShape(inRadius.get());
 
     colShape.setMargin(0.05);
 
@@ -117,8 +128,6 @@ function setup()
     world.addRigidBody(body);
 
     updateBodyMeta();
-    // updateDeactivation();
-    // console.log("body added...", body);
 }
 
 function renderTransformed()
@@ -139,7 +148,8 @@ function renderTransformed()
 
         let scale = [inRadius.get(), inRadius.get(), inRadius.get()];
 
-        mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
+        mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [
+            p.x(), p.y(), p.z()], scale);
         mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
 
         transformed.trigger();
@@ -161,6 +171,7 @@ function copyCglTransform(transform)
     let changed = false;
 
     btOrigin.setValue(tmpOrigin[0], tmpOrigin[1], tmpOrigin[2]);
+    btOrigin = new Ammo.btVector3(initX, initY, initZ);
     btQuat.setValue(tmpQuat[0], tmpQuat[1], tmpQuat[2], tmpQuat[3]);
 
     transform.setOrigin(btOrigin);
@@ -173,7 +184,7 @@ function update()
 
     world = cgl.frameStore.ammoWorld;
     if (!world) return;
-    if (!body)setup(world);
+    if (!body) setup(world);
     if (!body) return;
     body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
@@ -185,68 +196,46 @@ function update()
     let vx = 0, vy = 0, vz = 0.0;
     let speed = inSpeed.get();
 
-    if (inStyle.get() == "3rd Person")
+    let doMove = false;
+    if (inMoveZP.get())
     {
-    //     if (inMoveXM.get()) vx = -speed;
-    //     if (inMoveXP.get()) vx = speed;
-
-        //     if (inMoveZP.get()) vz = -speed;
-        //     if (inMoveZM.get()) vz = speed;
-
-        //     if (inMoveYP.get()) vy = speed;
-
-    //     if (vx != 0 || vy != 0 || vz != 0)
-    //     {
-    //         btVelocity.setValue(vx, vy, vz);
-    //         body.setLinearVelocity(btVelocity);
-    //     }
-        // inDirX.set(1);
-        // inDirY.set(0);
-        // inDirZ.set(1);
-    }
-    // else
-    {
-        let doMove = false;
-        if (inMoveZP.get())
-        {
-            vx = inDirX.get() * speed;
-            vy = inDirY.get() * speed;
-            vz = inDirZ.get() * speed;
-            doMove = true;
-        }
-        if (inMoveZM.get())
-        {
-            vx = -inDirX.get() * speed;
-            vy = -inDirY.get() * speed;
-            vz = -inDirZ.get() * speed;
-            doMove = true;
-        }
-
-        if (inMoveXP.get())
-        {
-            vx = -inDirZ.get() * speed;
-            vy = inDirY.get() * speed;
-            vz = inDirX.get() * speed;
-            doMove = true;
-        }
-        if (inMoveXM.get())
-        {
-            vx = inDirZ.get() * speed;
-            vy = inDirY.get() * speed;
-            vz = -inDirX.get() * speed;
-            doMove = true;
-        }
-
-        if (inMoveYP.get()) vy = 3;
-        else vy = 0;
-
+        vx = inDirX.get() * speed;
+        vy = inDirY.get() * speed;
+        vz = inDirZ.get() * speed;
         doMove = true;
+    }
+    if (inMoveZM.get())
+    {
+        vx = -inDirX.get() * speed;
+        vy = -inDirY.get() * speed;
+        vz = -inDirZ.get() * speed;
+        doMove = true;
+    }
 
-        if (doMove)
-        {
-            btVelocity.setValue(vx, vy - inFallVelocity.get(), vz);
-            body.setLinearVelocity(btVelocity);
-        }
+    if (inMoveXP.get())
+    {
+        vx = -inDirZ.get() * speed;
+        vy = inDirY.get() * speed;
+        vz = inDirX.get() * speed;
+        doMove = true;
+    }
+    if (inMoveXM.get())
+    {
+        vx = inDirZ.get() * speed;
+        vy = inDirY.get() * speed;
+        vz = -inDirX.get() * speed;
+        doMove = true;
+    }
+
+    if (inMoveYP.get()) vy = 3;
+    else vy = 0;
+
+    doMove = true;
+
+    if (doMove)
+    {
+        btVelocity.setValue(vx, vy - inFallVelocity.get(), vz);
+        body.setLinearVelocity(btVelocity);
     }
 
     if (inMass.get() == 0 || doResetPos)

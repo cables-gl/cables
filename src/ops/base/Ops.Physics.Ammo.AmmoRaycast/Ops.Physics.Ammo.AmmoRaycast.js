@@ -9,7 +9,10 @@ const
     next = op.outTrigger("next"),
 
     outHasHit = op.outBoolNum("Has Hit", false),
-    outName = op.outString("Hit Body Name", "");
+    outName = op.outString("Hit Body Name", ""),
+    outX = op.outNumber("Hit X"),
+    outY = op.outNumber("Hit Y"),
+    outZ = op.outNumber("Hit Z");
 
 inExec.onTriggered = update;
 
@@ -82,9 +85,17 @@ function update()
                 world.emitEvent("rayCastHit", meta.name);
                 outName.set(meta.name);
             }
+
+            outX.set(rayCallback.m_hitPointWorld.x());
+            outY.set(rayCallback.m_hitPointWorld.y());
+            outZ.set(rayCallback.m_hitPointWorld.z());
         }
         else
         {
+            outX.set(0);
+            outX.set(0);
+            outX.set(0);
+
             world.emitEvent("rayCastHit", null);
 
             outName.set("");
