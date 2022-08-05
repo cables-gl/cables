@@ -19,10 +19,10 @@ class PatchVariable
 
 
     /**
-  * @function Variable.getValue
-  * @memberof Variable
-  * @returns {String|Number|Boolean}
-  */
+     * @function Variable.getValue
+     * @memberof Variable
+     * @returns {String|Number|Boolean}
+     */
 
     getValue()
     {
@@ -30,24 +30,24 @@ class PatchVariable
     }
 
     /**
-   * @function getName
-   * @memberof Variable
-   * @instance
-   * @returns {String|Number|Boolean}
-   * @function
-   */
+     * @function getName
+     * @memberof Variable
+     * @instance
+     * @returns {String|Number|Boolean}
+     * @function
+     */
     getName()
     {
         return this._name;
     }
 
     /**
-   * @function setValue
-   * @memberof Variable
-   * @instance
-   * @returns {String|Number|Boolean}
-   * @function
-   */
+     * @function setValue
+     * @memberof Variable
+     * @instance
+     * @returns {String|Number|Boolean}
+     * @function
+     */
     setValue(v)
     {
         this._v = v;
@@ -58,12 +58,12 @@ class PatchVariable
     }
 
     /**
-   * function will be called when value of variable is changed
-   * @function addListener
-   * @memberof Variable
-   * @instance
-   * @param {Function} callback
-   */
+     * function will be called when value of variable is changed
+     * @function addListener
+     * @memberof Variable
+     * @instance
+     * @param {Function} callback
+     */
     addListener(cb)
     {
         const ind = this._changeListeners.indexOf(cb);
@@ -71,12 +71,12 @@ class PatchVariable
     }
 
     /**
-   * remove listener
-   * @function removeListener
-   * @memberof Variable
-   * @instance
-   * @param {Function} callback
-   */
+     * remove listener
+     * @function removeListener
+     * @memberof Variable
+     * @instance
+     * @param {Function} callback
+     */
     removeListener(cb)
     {
         const ind = this._changeListeners.indexOf(cb);

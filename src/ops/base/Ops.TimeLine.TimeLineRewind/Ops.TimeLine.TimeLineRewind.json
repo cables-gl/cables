@@ -1,5 +1,4 @@
 {
-    "updated": 1511161158444,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d3408604-858c-4226-8d4c-1ef669956f35",
@@ -7,8 +6,14 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
             }
         ],
         "name": "Ops.TimeLine.TimeLineRewind"

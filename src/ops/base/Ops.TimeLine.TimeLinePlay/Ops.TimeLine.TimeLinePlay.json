@@ -6,8 +6,14 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Play"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
             }
         ],
         "name": "Ops.TimeLine.TimeLinePlay"
