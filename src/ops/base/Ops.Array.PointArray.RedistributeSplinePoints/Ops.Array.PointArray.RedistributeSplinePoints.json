@@ -27,6 +27,11 @@
             {
                 "type": 3,
                 "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Spline Length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.PointArray.RedistributeSplinePoints"

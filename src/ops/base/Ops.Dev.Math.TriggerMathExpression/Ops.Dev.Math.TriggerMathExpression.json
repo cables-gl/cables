@@ -21,6 +21,10 @@
                 "name": "Calculate"
             },
             {
+                "type": 5,
+                "name": "Expression"
+            },
+            {
                 "type": 0,
                 "name": "X",
                 "group": "Parameters",
@@ -73,11 +77,6 @@
                 "name": "I",
                 "group": "Parameters",
                 "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "Expression",
-                "group": "Expression"
             }
         ],
         "portsOut": [

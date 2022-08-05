@@ -71,8 +71,8 @@ const lightFragmentBodies = {
     "directional": attachments.light_body_directional_frag,
     "spot": attachments.light_body_spot_frag,
 };
-const createLightFragmentHead = (n) => { return lightFragmentHead.replace("{{LIGHT_INDEX}}", n); };
-const createLightFragmentBody = (n, type) => { return lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n); };
+const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createLightFragmentBody = (n, type) => lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n);
 let currentLightCount = -1;
 
 if (cgl.glVersion == 1)
@@ -168,15 +168,15 @@ function updateDefines()
 
     // ALBEDO TEX
     PBRShader.toggleDefine("USE_ALBEDO_TEX", inTexAlbedo.get());
-    inDiffuseR.setUiAttribs({ "greyout": inTexAlbedo.get() });
-    inDiffuseG.setUiAttribs({ "greyout": inTexAlbedo.get() });
-    inDiffuseB.setUiAttribs({ "greyout": inTexAlbedo.get() });
-    inDiffuseA.setUiAttribs({ "greyout": inTexAlbedo.get() });
+    inDiffuseR.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    inDiffuseG.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    inDiffuseB.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    inDiffuseA.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
 
     // AORM
     PBRShader.toggleDefine("USE_AORM_TEX", inTexAORM.get());
-    inRoughness.setUiAttribs({ "greyout": inTexAORM.get() });
-    inMetalness.setUiAttribs({ "greyout": inTexAORM.get() });
+    inRoughness.setUiAttribs({ "greyout": inTexAORM.isLinked() });
+    inMetalness.setUiAttribs({ "greyout": inTexAORM.isLinked() });
 
     // lightmaps
     PBRShader.toggleDefine("VERTEX_COLORS", inUseVertexColours.get());

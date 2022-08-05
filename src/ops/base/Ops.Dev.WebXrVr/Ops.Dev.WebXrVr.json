@@ -35,6 +35,10 @@
                 "name": "Next"
             },
             {
+                "type": 1,
+                "name": "Render After Eyes"
+            },
+            {
                 "type": 2,
                 "name": "Viewer Pose"
             },
@@ -56,6 +60,10 @@
                 "type": 0,
                 "name": "In Session",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Ms per eye"
             }
         ],
         "name": "Ops.Dev.WebXrVr"

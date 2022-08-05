@@ -8,15 +8,18 @@ const
     inStop = op.inTriggerButton("Stop"),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");"),
     next = op.outTrigger("Next"),
+    nextPre = op.outTrigger("Render After Eyes"),
     outPose = op.outObject("Viewer Pose"),
     outVr = op.outBoolNum("VR Support"),
     outMat = op.outArray("Matrix"),
     outElement = op.outObject("DOM Overlay Ele", null, "element"),
-    outSession = op.outBoolNum("In Session");
+    outSession = op.outBoolNum("In Session"),
+    outMs = op.outArray("Ms per eye");
 
 const cgl = op.patch.cgl;
 const canvas = op.patch.cgl.canvas.parentElement;
 
+let msEyes = [0, 0];
 let xr = navigator.xr;
 
 let hadError = false;
@@ -65,7 +68,7 @@ function startVr()
 
     xr.requestSession("immersive-vr", {}
     ).then(
-        (session) =>
+        async (session) =>
         {
             xrSession = session;
             outSession.set(true);
@@ -82,6 +85,8 @@ function startVr()
 
                 console.log("started vr session....");
 
+                await cgl.gl.makeXRCompatible();
+
                 let canvas = cgl.canvas;
                 webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": false });
 
@@ -94,7 +99,7 @@ function startVr()
         {
             // error....
             console.log("Failed to start immersive AR session.");
-            console.log(ex.message);
+            console.log(err);
         });
 }
 
@@ -126,6 +131,7 @@ function onXRFrame(hrTime, xrFrame)
         }
 
         CABLES.patch.emitOnAnimFrameEvent();
+
         cgl.renderStart(cgl);
 
         cgl.gl.clearColor(0, 0, 0, 1);
@@ -133,20 +139,27 @@ function onXRFrame(hrTime, xrFrame)
 
         for (let i = 0; i < xrViewerPose.views.length; i++)
         {
+            let start = performance.now();
             renderPre();
             renderEye(xrViewerPose.views[i]);
+
+            msEyes[i] = performance.now() - start;
         }
 
         if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
+        nextPre.trigger();
+
         cgl.renderEnd(cgl);
+
+        outMs.set(msEyes);
 
         CGL.MESH.lastShader = null;
         CGL.MESH.lastMesh = null;
     }
     catch (e)
     {
-        console.log(e);
+        console.error(e);
         hadError = true;
     }
 }

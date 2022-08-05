@@ -77,6 +77,14 @@ textureOut.onLinkChanged = () =>
     if (textureOut.isLinked()) needsRefresh = true;
 };
 
+op.patch.on("fontLoaded", (fontName) =>
+{
+    if (fontName == font.get())
+    {
+        needsRefresh = true;
+    }
+});
+
 render.onTriggered = doRender;
 
 aniso.onChange =

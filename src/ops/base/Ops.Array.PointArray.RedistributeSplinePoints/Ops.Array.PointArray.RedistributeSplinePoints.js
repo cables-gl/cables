@@ -3,7 +3,8 @@ const
     num = op.inValueInt("Num Points", 100),
     inExec = op.inTriggerButton("Calculate"),
     inNormalized = op.inValueBool("Normalized"),
-    result = op.outArray("Result");
+    result = op.outArray("Result"),
+    outSplineLength = op.outNumber("Spline Length");
 
 const
     animX = new CABLES.Anim(),
@@ -45,7 +46,7 @@ function mapArrays()
         return;
     }
     totalSplineLength = splineLength(arr);
-    console.log("totalSplineLength", totalSplineLength);
+    outSplineLength.set(totalSplineLength);
 
     let distPos = 0;
 

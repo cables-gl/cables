@@ -26,6 +26,8 @@ const
     outY = op.outNumber("Position Y"),
     outZ = op.outNumber("Position Z"),
 
+    outGp = op.outObject("Gamepad Values"),
+
     outTransformed = op.outTrigger("Transformed Position"),
 
     outFound = op.outBoolNum("Found");
@@ -39,6 +41,8 @@ op.setPortGroup("Gamepad", [
 
 inUpdate.onTriggered = () =>
 {
+    outGp.set(null);
+
     if (op.patch.cgl.frameStore.xrSession)
     {
         let found = false;
@@ -88,4 +92,13 @@ function setGamepadValues(gp)
     outButton1Touch.set(gp.buttons[0].touched);
     outButton2Touch.set(gp.buttons[1].touched);
     outButton3Touch.set(gp.buttons[2].touched);
+
+    const g = { "buttons": gp.buttons,
+        "axes": gp.axes,
+        "connected": gp.connected,
+        "mapping": gp.mapping,
+        "axes": gp.axes
+    };
+
+    outGp.set(g);
 }

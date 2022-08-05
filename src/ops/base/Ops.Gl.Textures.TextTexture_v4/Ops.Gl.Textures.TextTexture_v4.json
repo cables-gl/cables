@@ -71,42 +71,26 @@
             {
                 "type": 0,
                 "name": "filter index",
+                "group": "Texture",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "filter",
-                "group": "Texture"
             },
             {
                 "type": 0,
                 "name": "Anisotropic index",
+                "group": "Texture",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Anisotropic",
-                "group": "Texture"
             },
             {
                 "type": 0,
                 "name": "align index",
+                "group": "Alignment",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "align",
-                "group": "Alignment"
             },
             {
                 "type": 0,
                 "name": "vertical align index",
+                "group": "Alignment",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "vertical align",
-                "group": "Alignment"
             },
             {
                 "type": 0,
