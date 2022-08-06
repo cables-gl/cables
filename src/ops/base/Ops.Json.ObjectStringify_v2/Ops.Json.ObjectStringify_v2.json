@@ -18,6 +18,11 @@
             {
                 "type": 5,
                 "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Error",
+                "subType": "number"
             }
         ],
         "name": "Ops.Json.ObjectStringify_v2"

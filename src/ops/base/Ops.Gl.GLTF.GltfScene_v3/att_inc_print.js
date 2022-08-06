@@ -52,7 +52,7 @@ function printNode(html, node, level)
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
             if (countMats > 0)html += ", ";
-            if (node.mesh.meshes[i].hasOwnProperty("material"))
+            if (gltf.json.materials && node.mesh.meshes[i].hasOwnProperty("material"))
             {
                 if (gltf.json.materials[node.mesh.meshes[i].material])
                 {

@@ -137,6 +137,10 @@
                 "subType": "number"
             },
             {
+                "type": 2,
+                "name": "Gamepad Values"
+            },
+            {
                 "type": 1,
                 "name": "Transformed Position"
             },
