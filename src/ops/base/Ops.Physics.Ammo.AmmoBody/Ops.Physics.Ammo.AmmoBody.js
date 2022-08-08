@@ -128,7 +128,6 @@ function setup()
     else if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
     else if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
     else if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
-
     else if (inShape.get() == "Triangle Shape")
     {
         const geom = inGeom.get();
@@ -163,12 +162,6 @@ function setup()
                 false);
         }
 
-        // mesh.addTriangle(
-        //     new Ammo.btVector3(0, 0, 0),
-        //     new Ammo.btVector3(1, 0, 0),
-        //     new Ammo.btVector3(0, 1, 0),
-        //     false
-        // );
         colShape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
     }
     else if (inShape.get() == "Geom Convex Hull")
