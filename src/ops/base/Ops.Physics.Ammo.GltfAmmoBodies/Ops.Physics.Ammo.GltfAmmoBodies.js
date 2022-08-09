@@ -1,8 +1,8 @@
 const
     inExec = op.inTrigger("Exec"),
+    inShape = op.inSwitch("Shape", ["Convex Hull", "Triangle Shape"], "Convex Hull"),
     inNames = op.inString("Filter Meshes", ""),
     inMass = op.inFloat("Mass kg", 0),
-    // inMulSize = op.inFloat("Size Multiply", 1),
     outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
@@ -29,6 +29,7 @@ const meshCube = new CGL.WireCube(cgl);
 let tmpTrans = null;
 
 inMass.onChange =
+inShape.onChange =
 inNames.onChange =
 inExec.onLinkChanged = () =>
 {
@@ -44,12 +45,9 @@ function update()
     {
         cgl.pushModelMatrix();
 
-        // const sc = vec3.create();
-        // mat4.getScaling(sc, cgl.mMatrix);
         mat4.identity(cgl.mMatrix);
 
         mat4.mul(cgl.mMatrix, cgl.mMatrix, bodies[i].node.modelMatAbs());
-        // mat4.scale(cgl.mMatrix, cgl.mMatrix, sc);
 
         if (!tmpTrans)tmpTrans = new Ammo.btTransform();
 
@@ -104,10 +102,41 @@ function addToWorld()
 
         scene.nodes[i].transform(cgl, 0);
         scene.nodes[i].updateMatrix();
-        const sc = vec3.create();
-        mat4.getScaling(sc, scene.nodes[i].modelMatAbs());
+        const sc = scene.nodes[i]._scale || [1, 1, 1];
 
-        colShape = CABLES.AmmoWorld.createConvexHullFromGeom(scene.nodes[i].mesh.meshes[0].geom, 100, scene.nodes[i]._scale);
+        const geom = scene.nodes[i].mesh.meshes[0].geom;
+
+        if (inShape.get() == "Convex Hull")
+        {
+            colShape = CABLES.AmmoWorld.createConvexHullFromGeom(geom, 100, sc);
+        }
+        else
+        {
+            let mesh = new Ammo.btTriangleMesh(true, true);
+
+            for (let i = 0; i < geom.verticesIndices.length / 3; i++)
+            {
+                mesh.addTriangle(
+                    new Ammo.btVector3(
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3] * 3 + 0],
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3] * 3 + 1],
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3] * 3 + 2]
+                    ),
+                    new Ammo.btVector3(
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3 + 1] * 3 + 0],
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3 + 1] * 3 + 1],
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3 + 1] * 3 + 2]
+                    ),
+                    new Ammo.btVector3(
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3 + 2] * 3 + 0],
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3 + 2] * 3 + 1],
+                        sc[0] * geom.vertices[geom.verticesIndices[i * 3 + 2] * 3 + 2]
+                    ),
+                    false);
+            }
+
+            colShape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
+        }
 
         colShape.setMargin(0.05);
 
