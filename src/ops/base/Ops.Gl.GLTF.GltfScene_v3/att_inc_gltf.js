@@ -321,14 +321,7 @@ function parseGltf(arrayBuffer)
         for (i = 0; i < accessors.length; i++)
         {
             const acc = accessors[i];
-
             const view = views[acc.bufferView];
-
-            // if(!view || !acc)
-            // {
-
-            //     continue;
-            // }
 
             let numComps = 0;
             if (acc.type == "SCALAR")numComps = 1;
@@ -465,10 +458,7 @@ function parseGltf(arrayBuffer)
 
     for (i = 0; i < gltf.nodes.length; i++)
     {
-        if (gltf.nodes[i].skin > -1)
-        {
-            gltf.nodes[i].skinRenderer = new GltfSkin(gltf.nodes[i]);
-        }
+        gltf.nodes[i].initSkin();
     }
 
     needsMatUpdate = true;

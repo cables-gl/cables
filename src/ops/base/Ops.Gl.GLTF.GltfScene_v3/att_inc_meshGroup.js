@@ -26,13 +26,13 @@ const gltfMeshGroup = class
         {
             const useMat = gltf.shaders[this.meshes[i].material];
 
-            if (useMat) cgl.pushShader(gltf.shaders[this.meshes[i].material]);
+            if (!ignoreMat && useMat) cgl.pushShader(gltf.shaders[this.meshes[i].material]);
             // console.log(gltf.shaders[this.meshes[i].material],this.meshes[i].material)
-            if (skinRenderer)skinRenderer.renderStart(cgl, skinRenderer._time);
+            if (skinRenderer)skinRenderer.renderStart(cgl, _time);
 
             this.meshes[i].render(cgl, ignoreMat, skinRenderer, _time);
             if (skinRenderer)skinRenderer.renderFinish(cgl);
-            if (useMat) cgl.popShader();
+            if (!ignoreMat && useMat) cgl.popShader();
         }
     }
 };

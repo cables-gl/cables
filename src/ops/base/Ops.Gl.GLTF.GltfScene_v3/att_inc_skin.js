@@ -8,6 +8,7 @@ const GltfSkin = class
         this._matArr = [];
         this._m = mat4.create();
         this._invBindMatrix = mat4.create();
+        this.identity = true;
     }
 
     renderFinish(cgl)
@@ -36,7 +37,7 @@ const GltfSkin = class
         const skinIdx = this._node.skin;
         const arrLength = gltf.json.skins[skinIdx].joints.length * 16;
 
-        // if(this._lastTime!=inTime.get())
+        // if (this._lastTime != time || !time)
         {
             // this._lastTime=inTime.get();
             if (this._matArr.length != arrLength) this._matArr.length = arrLength;
@@ -56,19 +57,14 @@ const GltfSkin = class
             }
 
             this._mod.setUniformValue("MOD_boneMats", this._matArr);
-            // this._lastTime = time;
+            this._lastTime = time;
         }
-        // else
-        // {
-        //     // console.log("skip")
-        // }
 
         this._mod.define("SKIN_NUM_BONES", gltf.json.skins[skinIdx].joints.length);
-
         this._mod.bind();
 
         // draw mesh...
         cgl.pushModelMatrix();
-        mat4.identity(cgl.mMatrix);
+        if (this.identity)mat4.identity(cgl.mMatrix);
     }
 };

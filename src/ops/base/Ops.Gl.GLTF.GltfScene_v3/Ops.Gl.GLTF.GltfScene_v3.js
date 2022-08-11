@@ -48,6 +48,7 @@ inFile.onChange =
     inCalcNormals.onChange =
     inNormFormat.onChange = reloadSoon;
 
+let gltfTransforms = 0;
 let finishedLoading = false;
 let cam = null;
 let boundingPoints = [];
@@ -142,6 +143,7 @@ inExec.onTriggered = function ()
     if (!finishedLoading) return;
     if (!inActive.get()) return;
 
+    gltfTransforms = 0;
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
 
@@ -228,6 +230,8 @@ inExec.onTriggered = function ()
     cgl.popModelMatrix();
 
     if (cam)cam.end();
+
+    // console.log(gltfTransforms);
 };
 
 function finishLoading()
