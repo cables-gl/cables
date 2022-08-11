@@ -4,6 +4,7 @@ UNI samplerCube cubeMap;
 UNI float width;
 UNI float height;
 UNI float type;
+UNI float time;
 
 float LinearizeDepth(float d,float zNear,float zFar)
 {
@@ -17,9 +18,17 @@ void main()
 
     vec4 colTex=texture2D(tex,texCoord);
 
-    if(type==0.0)
+    if(colTex.r>1.0||colTex.g>1.0||colTex.b>1.0)
     {
+        float r=mod( (time*2.0)+(texCoord.x+texCoord.y)*10.0,0.5)+0.5;
+        colTex=vec4( 1.0,r,r,1.0);
     }
+    if(colTex.r<0.0||colTex.g<0.0||colTex.b<0.0)
+    {
+        float r=mod( (time*2.0)+(texCoord.x+texCoord.y)*10.0,0.5);
+        colTex=vec4( r,0.0,0.0,1.0);
+    }
+
 
     if(type==1.0)
     {
