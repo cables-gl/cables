@@ -20,6 +20,8 @@ const gltfNode = class
         this.addMulMat = null;
         this.updateMatrix();
         this._animActions = {};
+        this.skinRenderer = null;
+        this.copies = [];
     }
 
     get skin()
@@ -28,10 +30,38 @@ const gltfNode = class
         else return -1;
     }
 
+    copy()
+    {
+        this.isCopy = true;
+        console.log(this);
+        const n = new gltfNode(this._node, this._gltf);
+        n.copyOf = this;
+
+        n._animActions = this._animActions;
+        n.children = this.children;
+        n.skinRenderer = new GltfSkin(n);
+
+        // console.log("COPY!!!");
+        // console.log((n._animActions));
+
+        // console.log(this._animActions);
+
+        this.updateMatrix();
+        return n;
+    }
+
     hasSkin()
     {
         if (this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name || "unknown";
         return false;
+    }
+
+    initSkin()
+    {
+        if (this.skin > -1)
+        {
+            this.skinRenderer = new GltfSkin(this);
+        }
     }
 
     updateMatrix()
@@ -57,6 +87,10 @@ const gltfNode = class
         if (this._node.hasOwnProperty("mesh"))
         {
             this.mesh = this._gltf.meshes[this._node.mesh];
+            if (this.isCopy)
+            {
+                console.log(this.mesh);
+            }
         }
 
         if (this._node.children)
@@ -114,7 +148,20 @@ const gltfNode = class
 
     setAnimAction(name)
     {
-        if (name && !this._animActions[name]) return;// console.log("no action found: ", name);
+        // console.log("setAnimAction:", name);
+        if (!name) return;
+
+        this._currentAnimaction = name;
+
+        if (name && !this._animActions[name])
+        {
+            console.log(this._animActions);
+            return console.log("no action found:", name);
+            return;
+        }
+
+        // else console.log("YES action found:", name);
+        // console.log(this._animActions);
 
         for (let path in this._animActions[name])
         {
@@ -127,14 +174,20 @@ const gltfNode = class
 
     setAnim(path, name, anims)
     {
+        if (!path || !name || !anims) return;
+
+        console.log("setanim", this._node.name, path, name, anims);
+
         this._animActions[name] = this._animActions[name] || {};
 
-        if (this._animActions[name][path])op.warn("animation action path already exists", name, path, this._animActions[name][path]);
+        console.log(this._animActions);
+        // debugger;
+
+        // for (let i = 0; i < this.copies.length; i++) this.copies[i]._animActions = this._animActions;
+
+        if (this._animActions[name][path]) op.warn("animation action path already exists", name, path, this._animActions[name][path]);
 
         this._animActions[name][path] = anims;
-
-        // console.log(name,path,this._animTrans);
-        // console.log(this._animActions);
 
         if (path == "translation") this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
@@ -159,6 +212,8 @@ const gltfNode = class
         this._lastTimeTrans = _time;
 
         // console.log(this._rot)
+
+        gltfTransforms++;
 
         if (!this._animTrans && !this._animRot && !this._animScale)
         {
@@ -218,7 +273,7 @@ const gltfNode = class
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
 
-        if (this.addTranslate)mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
+        if (this.addTranslate) mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
 
         if (this.addMulMat) mat4.mul(cgl.mMatrix, cgl.mMatrix, this.addMulMat);
 
@@ -229,7 +284,7 @@ const gltfNode = class
     {
         if (!dontTransform) cgl.pushModelMatrix();
 
-        if (_time === undefined)_time = gltf.time;
+        if (_time === undefined) _time = gltf.time;
 
         if (!dontTransform || this.skinRenderer) this.transform(cgl, _time);
 
@@ -241,7 +296,8 @@ const gltfNode = class
             if (this.skinRenderer)
             {
                 this.skinRenderer.time = _time;
-                if (!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time);
+                if (!dontDrawMesh)
+                    this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time);
             }
             else
             {
@@ -253,9 +309,7 @@ const gltfNode = class
         if (!ignoreChilds && !this.hidden)
             for (let i = 0; i < this.children.length; i++)
                 if (gltf.nodes[this.children[i]])
-                {
                     gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
-                }
 
         if (!dontTransform)cgl.popModelMatrix();
     }

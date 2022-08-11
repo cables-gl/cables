@@ -8,7 +8,7 @@ const
     inRollingFriction = op.inFloat("Rolling Friction", 0.5),
     inRestitution = op.inFloat("Restitution", 0.5),
 
-    inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone", "Geom Convex Hull"], "Box"),
+    inShape = op.inDropDown("Shape", ["Box", "Sphere", "Cylinder", "Capsule", "Cone", "Geom Convex Hull", "Triangle Shape"], "Box"),
     inGeom = op.inObject("Geometry", null, "geometry"),
     inGeomSimplify = op.inInt("Simplify Max Triangles", 50),
     inRadius = op.inFloat("Radius", 0.5),
@@ -128,6 +128,42 @@ function setup()
     else if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
     else if (inShape.get() == "Capsule") colShape = new Ammo.btCapsuleShape(inRadius.get(), inSizeY.get());
     else if (inShape.get() == "Cone") colShape = new Ammo.btConeShape(inRadius.get(), inSizeY.get());
+    else if (inShape.get() == "Triangle Shape")
+    {
+        const geom = inGeom.get();
+        if (!geom) return;
+        if (!inGeom.isLinked())
+        {
+            op.setUiError("nogeom", "Shape needs geometry connected");
+            return;
+        }
+        else op.setUiError("nogeom", null);
+
+        let mesh = new Ammo.btTriangleMesh(true, true);
+
+        for (let i = 0; i < geom.verticesIndices.length / 3; i++)
+        {
+            mesh.addTriangle(
+                new Ammo.btVector3(
+                    geom.vertices[geom.verticesIndices[i * 3] * 3 + 0],
+                    geom.vertices[geom.verticesIndices[i * 3] * 3 + 1],
+                    geom.vertices[geom.verticesIndices[i * 3] * 3 + 2]
+                ),
+                new Ammo.btVector3(
+                    geom.vertices[geom.verticesIndices[i * 3 + 1] * 3 + 0],
+                    geom.vertices[geom.verticesIndices[i * 3 + 1] * 3 + 1],
+                    geom.vertices[geom.verticesIndices[i * 3 + 1] * 3 + 2]
+                ),
+                new Ammo.btVector3(
+                    geom.vertices[geom.verticesIndices[i * 3 + 2] * 3 + 0],
+                    geom.vertices[geom.verticesIndices[i * 3 + 2] * 3 + 1],
+                    geom.vertices[geom.verticesIndices[i * 3 + 2] * 3 + 2]
+                ),
+                false);
+        }
+
+        colShape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
+    }
     else if (inShape.get() == "Geom Convex Hull")
     {
         const geom = inGeom.get();

@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.DiscardMaterialAlpha renamed to Ops.Gl.ShaderEffects.DiscardMaterialAlpha",
             "author": "pandur",
             "date": 1655224689601
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1659947830556
         }
     ],
     "authorName": "pandur",
@@ -22,13 +27,13 @@
             },
             {
                 "type": 0,
-                "name": "Threshold",
-                "subType": "number"
+                "name": "Method index",
+                "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Remove Alpha",
-                "subType": "boolean"
+                "name": "Threshold",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -37,7 +42,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.DiscardMaterialAlpha"
+        "name": "Ops.Gl.ShaderEffects.DiscardMaterialAlpha"
     },
     "summary": "discard transparent pixels in material textures",
     "issues": "",
@@ -48,5 +53,8 @@
     "exampleProjectId": "3r_lf6",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

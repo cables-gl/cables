@@ -354,8 +354,6 @@ let gltfMesh = class
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
             if (skinRenderer)useMat = false;
 
-            // console.log(gltf.shaders[this.material])
-
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
             const currentShader = cgl.getShader() || {};
