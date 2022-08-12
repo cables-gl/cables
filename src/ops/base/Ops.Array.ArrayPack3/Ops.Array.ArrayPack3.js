@@ -3,7 +3,7 @@ const exe = op.inTrigger("Trigger in"),
     inArr2 = op.inArray("Array 2"),
     inArr3 = op.inArray("Array 3"),
     exeOut = op.outTrigger("Trigger out"),
-    outArr = op.outArray("Array out"),
+    outArr = op.outArray("Array out", 3),
     outNum = op.outNumber("Num Points"),
     outArrayLength = op.outNumber("Array length");
 

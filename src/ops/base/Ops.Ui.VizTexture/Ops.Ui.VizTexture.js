@@ -5,6 +5,9 @@ const
 
 op.setUiAttrib({ "height": 150, "resizable": true });
 
+const timer = new CABLES.Timer();
+timer.play();
+
 inTex.onChange = () =>
 {
     outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
@@ -48,6 +51,7 @@ op.renderVizLayer = (ctx, layer) =>
         this._shaderTexUniformW = new CGL.Uniform(this._shader, "f", "width", portTex.width);
         this._shaderTexUniformH = new CGL.Uniform(this._shader, "f", "height", portTex.height);
         this._shaderTypeUniform = new CGL.Uniform(this._shader, "f", "type", 0);
+        this._shaderTimeUniform = new CGL.Uniform(this._shader, "f", "time", 0);
     }
 
     cgl.pushPMatrix();
@@ -77,6 +81,9 @@ op.renderVizLayer = (ctx, layer) =>
     {
         cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
     }
+
+    timer.update();
+    this._shaderTimeUniform.setValue(timer.get());
 
     this._shaderTypeUniform.setValue(texType);
     let s = [port.parent.patch.cgl.canvasWidth, port.parent.patch.cgl.canvasHeight];

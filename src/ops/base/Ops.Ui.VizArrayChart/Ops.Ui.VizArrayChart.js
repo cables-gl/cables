@@ -55,4 +55,9 @@ op.renderVizLayer = (ctx, layer) =>
 
         ctx.fillText(i + ": " + name + " " + Math.round(perc * 1000) / 10 + "%", layer.x + (size * 2) + padding * 2, layer.y + fontSize * (i + 1 + 1));
     }
+
+    ctx.beginPath();
+    ctx.fillStyle = "#222";
+    ctx.arc(layer.x + size, layer.y + size, size / 5, 0, 2 * Math.PI);
+    ctx.fill();
 };
