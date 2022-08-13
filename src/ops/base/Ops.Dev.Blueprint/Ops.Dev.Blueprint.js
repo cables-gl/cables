@@ -515,6 +515,10 @@ function setupPorts(parentSubPatch)
             {
                 newPort.setUiAttribs({ "title": subPatchPortsIn[i].title });
             }
+            else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
+            {
+                newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
+            }
         }
     }
 
@@ -587,6 +591,10 @@ function setupPorts(parentSubPatch)
                 if (subPatchPort.title)
                 {
                     newPort.setUiAttribs({ "title": subPatchPortsOut[i].title });
+                }
+                else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
+                {
+                    newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
                 }
             }
         }
