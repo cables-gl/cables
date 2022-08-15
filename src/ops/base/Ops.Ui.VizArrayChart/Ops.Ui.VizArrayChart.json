@@ -28,6 +28,11 @@
             {
                 "type": 3,
                 "name": "Titles"
+            },
+            {
+                "type": 0,
+                "name": "Style index",
+                "subType": "integer"
             }
         ],
         "portsOut": [],
