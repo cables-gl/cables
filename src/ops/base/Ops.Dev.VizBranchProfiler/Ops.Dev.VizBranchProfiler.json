@@ -26,6 +26,6 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.User.pandur.VizBranchProfiler"
+        "name": "Ops.Dev.VizBranchProfiler"
     }
 }

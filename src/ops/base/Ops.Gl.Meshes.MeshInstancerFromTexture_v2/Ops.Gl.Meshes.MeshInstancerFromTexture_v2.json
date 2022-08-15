@@ -91,6 +91,11 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "TexCoord Texture",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Color Texture Blendmode index",
                 "subType": "integer"
@@ -127,7 +132,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.Gl.Meshes.MeshInstancerFromTexture_v2"
+        "name": "Ops.Gl.Meshes.MeshInstancerFromTexture_v2"
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",

@@ -6,6 +6,7 @@ const
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
     inTex3 = op.inTexture("Scale Texture", null, "texture"),
     inTex4 = op.inTexture("Color Texture", null, "texture"),
+    inTex5 = op.inTexture("TexCoord Texture", null, "texture"),
     inBlendMode = op.inSwitch("Color Texture Blendmode", ["Multiply", "Add", "Normal"], "Multiply"),
     inScale = op.inValue("Scale", 1),
     inMulR = op.inValue("Multiply Pos X", 1),
@@ -52,6 +53,7 @@ mod.addUniformVert("f", "MOD_scale", inScale);
 mod.addUniformVert("t", "MOD_texTrans");
 mod.addUniformVert("t", "MOD_texRot");
 mod.addUniformVert("t", "MOD_texScale");
+mod.addUniformVert("t", "MOD_texCoords");
 mod.addUniformVert("t", "MOD_texColor");
 mod.addUniformVert("f", "MOD_texSizeX", 0);
 mod.addUniformVert("f", "MOD_texSizeY", 0);
@@ -61,6 +63,7 @@ inBlendMode.onChange =
 inTex.onChange =
 inTex3.onChange =
 inTex4.onChange =
+inTex5.onChange =
 inTex2.onChange = updateDefines;
 
 // inBlendMode.onChange = updateDefines;
@@ -94,6 +97,7 @@ function updateDefines()
     mod.toggleDefine("USE_TEX_ROT", inTex2.get());
     mod.toggleDefine("USE_TEX_SCALE", inTex3.get());
     mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
+    mod.toggleDefine("USE_TEX_TC", inTex5.get());
 }
 
 geom.onChange = function ()
@@ -145,6 +149,7 @@ function doRender()
     if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
     if (inTex3.get())mod.pushTexture("MOD_texScale", inTex3.get().tex);
     if (inTex4.get())mod.pushTexture("MOD_texColor", inTex4.get().tex);
+    if (inTex5.get())mod.pushTexture("MOD_texCoords", inTex5.get().tex);
 
     mod.bind();
     mod.setUniformValue("MOD_texSizeX", inTex.get().width);

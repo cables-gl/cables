@@ -20,7 +20,7 @@ inArr.onChange = function ()
     {
         if (!showingError)
         {
-            op.uiAttr({ "error": "Arrays length not divisible by 2e !" });
+            op.uiAttr({ "error": "Arrays length not divisible by 3 !" });
             showingError = true;
         }
         outArr.set(null);
@@ -41,9 +41,9 @@ inArr.onChange = function ()
 
     for (let i = 0; i < theArray.length / 3; i++)
     {
-        arr[i * 4 + 0] = theArray[i * 2 + 0];
-        arr[i * 4 + 1] = theArray[i * 2 + 1];
-        arr[i * 4 + 2] = theArray[i * 2 + 2];
+        arr[i * 4 + 0] = theArray[i * 3 + 0];
+        arr[i * 4 + 1] = theArray[i * 3 + 1];
+        arr[i * 4 + 2] = theArray[i * 3 + 2];
         arr[i * 4 + 3] = 1;
     }
 
