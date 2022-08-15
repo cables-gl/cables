@@ -1,0 +1,31 @@
+{
+    "id": "236fb6ea-4e98-4039-b831-98dc2ff2844b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1660311308650
+        },
+        {
+            "message": "Ops.User.pandur.VizBranchProfiler renamed to Ops.Dev.VizBranchProfiler",
+            "author": "pandur",
+            "date": 1660562134400
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1660311352788,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Profiler Data"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.User.pandur.VizBranchProfiler"
+    }
+}
