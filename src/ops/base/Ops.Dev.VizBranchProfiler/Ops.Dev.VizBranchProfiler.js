@@ -6,15 +6,14 @@ op.setUiAttrib({ "height": 100, "width": 500, "resizable": true });
 
 const colors = ["#D183BF", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#CF5D9D", "#66C984", "#D66AA6", "#515151", "#7AC4E0"];
 
-let colorCycle = [];
+let colorCycle = 0;
 let totalDur = 1;
 let root = null;
 let doUpdate = true;
 
 function getWidth(layer, d)
 {
-    if (d < 0.2)
-        d = 0.004;
+    if (d < 0.2) d = 0.004;
 
     return layer.width * (d / totalDur);
 }
@@ -52,7 +51,6 @@ function drawBranch(ctx, layer, b, level, posx)
     for (let i = 0; i < b.childs.length; i++)
     {
         drawBranch(ctx, layer, b.childs[i], level + 1, posx + xadd);
-
         xadd += getWidth(layer, b.childs[i].dur);
     }
 }
@@ -65,8 +63,9 @@ op.renderVizLayer = (ctx, layer) =>
         layer.x, layer.y,
         layer.width, layer.height);
 
-    colorCycle = [];
+    colorCycle = 0;
 
+    // console.log(totalDur);
     if (doUpdate)
     {
         doUpdate = false;

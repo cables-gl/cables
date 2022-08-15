@@ -40,6 +40,7 @@ class Branch
     }
 }
 
+// //////////////////////////////////////////
 
 class BranchStack
 {
@@ -63,6 +64,7 @@ class BranchStack
         this.current = this.current.push(name);
         this.current.prev = prev;
         this.current.start();
+        return this.current;
     }
 
     pop()

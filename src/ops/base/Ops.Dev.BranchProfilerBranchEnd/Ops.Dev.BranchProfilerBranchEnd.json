@@ -1,28 +1,24 @@
 {
-    "id": "2082b704-0283-4645-b741-1e1955f28b66",
+    "id": "2c5f3947-9962-49ee-b09b-084bf8717f00",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1659702982530
+            "date": 1660569960587
         },
         {
-            "message": "Ops.User.pandur.ProfileBranch renamed to Ops.Dev.BranchProfilerBranch",
+            "message": "Ops.User.pandur.BranchProfilerBranchEnd renamed to Ops.Dev.BranchProfilerBranchEnd",
             "author": "pandur",
-            "date": 1660556867093
+            "date": 1660576772529
         }
     ],
     "authorName": "pandur",
-    "created": 1659703012783,
+    "created": 1660569979365,
     "layout": {
         "portsIn": [
             {
                 "type": 1,
                 "name": "Exec"
-            },
-            {
-                "type": 5,
-                "name": "Branch Name"
             }
         ],
         "portsOut": [
@@ -31,6 +27,6 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Dev.BranchProfilerBranch"
+        "name": "Ops.User.pandur.BranchProfilerBranchEnd"
     }
 }

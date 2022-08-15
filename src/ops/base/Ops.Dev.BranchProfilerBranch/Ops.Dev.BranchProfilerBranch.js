@@ -1,28 +1,17 @@
 const
-    inExec=op.inTrigger("Exec"),
-    inName=op.inString("Branch Name","default"),
-    outNext=op.outTrigger("Next");
+    inExec = op.inTrigger("Exec"),
+    inName = op.inString("Branch Name", "default"),
+    outNext = op.outTrigger("Next");
 
-op.patch.cgl.frameStore.branchProfiler=op.patch.cgl.frameStore.branchProfiler||{};
+op.patch.cgl.frameStore.branchProfiler = op.patch.cgl.frameStore.branchProfiler || {};
 
-const name="";
-const bs=new CABLES.BranchStack();
-
-inName.onChange=()=>
+inExec.onTriggered = () =>
 {
+    op.patch.cgl.frameStore.branchStack = op.patch.cgl.frameStore.branchStack || new CABLES.BranchStack();
 
-
-};
-
-
-inExec.onTriggered=()=>
-{
-    op.patch.cgl.frameStore.branchStack=op.patch.cgl.frameStore.branchStack||new CABLES.BranchStack();
-
-    op.patch.cgl.frameStore.branchStack.push(inName.get());
+    const c = op.patch.cgl.frameStore.branchStack.push(inName.get());
 
     outNext.trigger();
 
-    op.patch.cgl.frameStore.branchStack.pop();
-
+    if (op.patch.cgl.frameStore.branchStack.current == c) op.patch.cgl.frameStore.branchStack.pop();
 };
