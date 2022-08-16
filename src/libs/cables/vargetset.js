@@ -63,7 +63,6 @@ const VarSetOpWrapper = class
             {
                 if (this._op.hasUiErrors)
                 {
-                    this._updateTitle();
                     this._op.setUiError("novarname", null);
                 }
             }
@@ -176,6 +175,8 @@ const VarGetOpWrapper = class
         this._valueOutPort = valueOutPort;
 
         this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
+        this._op.on("uiErrorChange", this._updateTitle.bind(this));
+
         this._op.patch.on("variableRename", this._renameVar.bind(this));
         this._op.patch.on("variableDeleted", (oldname) =>
         {
