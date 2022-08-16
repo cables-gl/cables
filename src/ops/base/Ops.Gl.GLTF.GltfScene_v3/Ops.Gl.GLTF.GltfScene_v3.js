@@ -352,7 +352,7 @@ function loadBin(addCacheBuster)
     let url = op.patch.getFilePath(String(inFile.get()));
     if (inFile.get() && !inFile.get().startsWith("data:"))
     {
-        if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
+        if (addCacheBuster === true)url += "?rnd=" + CABLES.generateUUID();
     }
     finishedLoading = false;
     outLoading.set(true);
@@ -386,11 +386,11 @@ function loadBin(addCacheBuster)
     });
 }
 
-op.onFileChanged = function (fn)
-{
-    gltf.accBuffersDelete[i];
-    if (fn && fn.length > 3 && inFile.get() && inFile.get().indexOf(fn) > -1) reloadSoon(true);
-};
+// op.onFileChanged = function (fn)
+// {
+//     gltf.accBuffersDelete[i];
+//     if (fn && fn.length > 3 && inFile.get() && inFile.get().indexOf(fn) > -1) reloadSoon(true);
+// };
 
 op.onFileChanged = function (fn)
 {
