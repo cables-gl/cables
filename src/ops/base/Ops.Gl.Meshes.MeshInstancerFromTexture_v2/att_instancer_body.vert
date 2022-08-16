@@ -41,6 +41,12 @@ mMatrix*=texInstMat;
     frag_instColor=instColor;
 #endif
 
+#ifdef USE_TEX_TC
+    vec4 instTexCoords=texture(MOD_texCoords,vec2(tx,ty));
+
+    texCoord=(texCoord*instTexCoords.zw)+instTexCoords.xy;
+#endif
+
 
 
 

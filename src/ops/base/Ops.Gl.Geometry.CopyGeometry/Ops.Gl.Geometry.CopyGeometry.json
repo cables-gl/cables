@@ -1,0 +1,41 @@
+{
+    "authorName": "pandur",
+    "id": "b15f57c2-4b0c-45de-962b-dd249779addf",
+    "created": 1660469559286,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.ScaleGeometry"
+    },
+    "summary": "uniform scaling of geometry vertices",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Geometry.ScaleGeometry",
+            "author": "pandur",
+            "date": 1660469559287
+        },
+        {
+            "message": "Ops.User.pandur.CopyGeometry renamed to Ops.Gl.Geometry.CopyGeometry",
+            "author": "pandur",
+            "date": 1660469637701
+        }
+    ]
+}

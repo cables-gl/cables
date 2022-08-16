@@ -16,6 +16,7 @@ import { Variable } from "./sessionvar";
 import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
+import { BranchStack, Branch } from "./banchprofiler";
 
 const CABLES = Object.assign(
     {
@@ -33,6 +34,8 @@ const CABLES = Object.assign(
         LoadingStatus,
         now,
         internalNow,
+        BranchStack,
+        Branch
     },
     base64,
     utils,

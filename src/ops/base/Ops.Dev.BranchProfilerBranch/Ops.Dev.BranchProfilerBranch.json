@@ -1,0 +1,36 @@
+{
+    "id": "2082b704-0283-4645-b741-1e1955f28b66",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1659702982530
+        },
+        {
+            "message": "Ops.User.pandur.ProfileBranch renamed to Ops.Dev.BranchProfilerBranch",
+            "author": "pandur",
+            "date": 1660556867093
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1659703012783,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 5,
+                "name": "Branch Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Dev.BranchProfilerBranch"
+    }
+}
