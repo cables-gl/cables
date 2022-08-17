@@ -33,7 +33,7 @@ const gltfNode = class
     copy()
     {
         this.isCopy = true;
-        console.log(this);
+        // console.log(this);
         const n = new gltfNode(this._node, this._gltf);
         n.copyOf = this;
 
@@ -157,7 +157,6 @@ const gltfNode = class
         {
             console.log(this._animActions);
             return console.log("no action found:", name);
-            return;
         }
 
         // else console.log("YES action found:", name);
@@ -176,11 +175,11 @@ const gltfNode = class
     {
         if (!path || !name || !anims) return;
 
-        console.log("setanim", this._node.name, path, name, anims);
+        // console.log("setanim", this._node.name, path, name, anims);
 
         this._animActions[name] = this._animActions[name] || {};
 
-        console.log(this._animActions);
+        // console.log(this._animActions);
         // debugger;
 
         // for (let i = 0; i < this.copies.length; i++) this.copies[i]._animActions = this._animActions;

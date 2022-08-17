@@ -1,3 +1,5 @@
+const { throws } = require("assert");
+
 const VarSetOpWrapper = class
 {
     constructor(op, type, valuePort, varNamePort, triggerPort, nextPort)
@@ -57,7 +59,13 @@ const VarSetOpWrapper = class
         if (CABLES.UI)
         {
             if (!this._varNamePort.get()) this._op.setUiError("novarname", "no variable selected");
-            else this._op.setUiError("novarname", null);
+            else
+            {
+                if (this._op.hasUiErrors)
+                {
+                    this._op.setUiError("novarname", null);
+                }
+            }
         }
     }
 
@@ -167,6 +175,8 @@ const VarGetOpWrapper = class
         this._valueOutPort = valueOutPort;
 
         this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
+        this._op.on("uiErrorChange", this._updateTitle.bind(this));
+
         this._op.patch.on("variableRename", this._renameVar.bind(this));
         this._op.patch.on("variableDeleted", (oldname) =>
         {
@@ -192,6 +202,7 @@ const VarGetOpWrapper = class
         if (oldname != this._varnamePort.get()) return;
         this._varnamePort.set(newname);
         this._updateVarNamesDropdown();
+        this._updateTitle();
     }
 
     _updateVarNamesDropdown()
@@ -216,14 +227,8 @@ const VarGetOpWrapper = class
         this._valueOutPort.set(v);
     }
 
-
-    _init()
+    _updateTitle()
     {
-        this._updateVarNamesDropdown();
-
-        if (this._variable) this._variable.removeListener(this._setValueOut.bind(this));
-        this._variable = this._op.patch.getVar(this._op.varName.get());
-
         if (this._variable)
         {
             this._variable.addListener(this._setValueOut.bind(this));
@@ -235,10 +240,20 @@ const VarGetOpWrapper = class
         else
         {
             this._op.setUiError("unknownvar", "unknown variable! - there is no setVariable with this name (" + this._varnamePort.get() + ")");
-            // this._op.setTitle("#invalid");
             this._op.setUiAttrib({ "extendTitle": "#invalid" });
             this._valueOutPort.set(0);
         }
+    }
+
+    _init()
+    {
+        this._updateVarNamesDropdown();
+
+        if (this._variable) this._variable.removeListener(this._setValueOut.bind(this));
+        this._variable = this._op.patch.getVar(this._op.varName.get());
+
+        this._updateTitle();
+
         this._op.patch.emitEvent("opVariableNameChanged", this._op, this._varnamePort.get());
     }
 };

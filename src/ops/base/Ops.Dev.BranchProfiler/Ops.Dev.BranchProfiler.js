@@ -17,6 +17,6 @@ inExec.onTriggered = () =>
     outNext.trigger();
 
     op.patch.cgl.frameStore.branchStack.finish();
-    console.log(op.patch.cgl.frameStore.branchStack);
+    // console.log(op.patch.cgl.frameStore.branchStack);
     outProfilerStack.set(op.patch.cgl.frameStore.branchStack);
 };

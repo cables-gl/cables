@@ -1360,6 +1360,8 @@ const Op = function ()
         this.uiAttr({ "uierrors": errorArr });
         this.hasUiErrors = Object.keys(this._uiErrors).length;
 
+        this.emitEvent("uiErrorChange");
+
         // console.log(id, txt, this._uiErrors.hasOwnProperty(id));
     };
 

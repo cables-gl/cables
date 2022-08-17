@@ -314,9 +314,11 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 setupPorts(parentSubPatch);
             }
             op.patch.removeEventListener(listenerId);
+            if (editorMode) CABLES.UI.undo.resume();
         };
 
 
+        if (editorMode) CABLES.UI.undo.pause();
         if (editorMode)
         {
             gui.serverOps.loadProjectLibs(data, () =>
@@ -351,7 +353,9 @@ function removeImportedOps()
     );
     if (parentSubPatch)
     {
+        if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
         op.patch.deleteOp(parentSubPatch.id, parentSubPatch.storage.blueprint.blueprintOpId);
+        if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
     }
 }
 

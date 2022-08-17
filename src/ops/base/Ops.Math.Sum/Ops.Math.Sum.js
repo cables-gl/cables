@@ -3,6 +3,8 @@ const
     number2 = op.inValueFloat("number2", 1),
     result = op.outValue("result");
 
+op.setTitle("+");
+
 number1.onChange =
 number2.onChange = exec;
 exec();
