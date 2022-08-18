@@ -49,6 +49,7 @@ inUpdate.onTriggered = () =>
         let xrSession = op.patch.cgl.frameStore.xrSession;
 
         const inputSources = xrSession.inputSources;
+
         for (let i = 0; i < inputSources.length; i++)
         {
             if (inputSources[i].handedness === inHand.get())
@@ -58,17 +59,20 @@ inUpdate.onTriggered = () =>
                 if (inputSources[i].gamepad)setGamepadValues(inputSources[i].gamepad);
 
                 let controlPose = cgl.frameStore.xrFrame.getPose(inputSources[i].gripSpace, cgl.frameStore.xrReferenceSpace);
+                if (controlPose && controlPose.transform)
+                {
+                    cgl.pushModelMatrix();
 
-                cgl.pushModelMatrix();
+                    mat4.multiply(cgl.mMatrix, cgl.mMatrix, controlPose.transform.matrix);
+                    outX.set(controlPose.transform.position.x);
+                    outY.set(controlPose.transform.position.y);
+                    outZ.set(controlPose.transform.position.z);
 
-                mat4.multiply(cgl.mMatrix, cgl.mMatrix, controlPose.transform.matrix);
-                outX.set(controlPose.transform.position.x);
-                outY.set(controlPose.transform.position.y);
-                outZ.set(controlPose.transform.position.z);
+                    outTransformed.trigger();
 
-                outTransformed.trigger();
-
-                cgl.popModelMatrix();
+                    cgl.popModelMatrix();
+                }
+                else console.log("vr controller: no controlpose transform?!");
 
                 break;
             }

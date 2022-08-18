@@ -29,5 +29,15 @@
             }
         ],
         "name": "Ops.User.pandur.Memory"
+    },
+    "summary": "browser js memory consumption",
+    "issues": "",
+    "caniusequery": "performance.memory",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }
