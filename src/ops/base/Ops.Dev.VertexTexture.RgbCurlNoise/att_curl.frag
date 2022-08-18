@@ -7,7 +7,7 @@ UNI sampler2D tex;
 
 // UNI float amount;
 UNI float timeDelta;
-UNI float offset;
+UNI vec3 offset;
 
 {{CGL.BLENDMODES}}
 {{CGL.RANDOM_TEX}}
@@ -162,13 +162,13 @@ void main()
             Perlin3D( ( (base.xyz+60.0) + vec3(x,y,z)) *scale )
         );
 
-
-    vec3 noise=(cgl_random3(texCoord.xy)-0.5)*offset;
+float seed=1.0;
+    vec3 noise=(cgl_random3(texCoord.xy)-0.5)*seed;
     rnd+=
         vec3(
-            Perlin3D( ( (base.xyz+20.0+noise.x) + vec3(x,y,z)) *scale ),
-            Perlin3D( ( (base.xyz-20.0+noise.y) + vec3(x,y,z)) *scale ),
-            Perlin3D( ( (base.xyz+60.0+noise.z) + vec3(x,y,z)) *scale )
+            Perlin3D( ( (base.xyz+20.0+noise.x+offset.x) + vec3(x,y,z)) *scale ),
+            Perlin3D( ( (base.xyz-20.0+noise.y+offset.y) + vec3(x,y,z)) *scale ),
+            Perlin3D( ( (base.xyz+60.0+noise.z+offset.z) + vec3(x,y,z)) *scale )
         );
 
 

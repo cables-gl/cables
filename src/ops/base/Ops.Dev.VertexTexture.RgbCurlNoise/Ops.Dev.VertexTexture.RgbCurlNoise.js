@@ -1,7 +1,10 @@
 const
     render = op.inTrigger("Render"),
-    scale = op.inValue("Scale", 1),
-    time = op.inValue("Time", 0),
+    scale = op.inFloat("Scale", 1),
+    time = op.inFloat("Time", 0),
+    posX = op.inFloat("Pos X", 0),
+    posY = op.inFloat("Pos Y", 0),
+    posZ = op.inFloat("Pos Z", 0),
 
     trigger = op.outTrigger("trigger");
 
@@ -13,6 +16,7 @@ const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     // textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 1),
 
+    uniSeed = new CGL.Uniform(shader, "3f", "offset", posX, posX, posX),
     uniTime = new CGL.Uniform(shader, "f", "time", time),
     uniScale = new CGL.Uniform(shader, "f", "scale", scale),
     uniTimeDelta = new CGL.Uniform(shader, "f", "timeDelta", 1);
