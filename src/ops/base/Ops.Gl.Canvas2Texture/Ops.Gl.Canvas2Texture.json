@@ -5,32 +5,33 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "canvas"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "filter index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "wrap index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "texture"
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "height",
                 "subType": "number"
             }

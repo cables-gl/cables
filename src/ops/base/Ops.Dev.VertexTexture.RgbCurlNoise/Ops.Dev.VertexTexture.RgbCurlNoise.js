@@ -1,4 +1,3 @@
-
 const
     render = op.inTrigger("Render"),
     scale = op.inValue("Scale", 1),
@@ -18,7 +17,6 @@ const
     uniScale = new CGL.Uniform(shader, "f", "scale", scale),
     uniTimeDelta = new CGL.Uniform(shader, "f", "timeDelta", 1);
 
-
 time.onChange =
     scale.onChange = updateDefines;
 
@@ -26,11 +24,10 @@ updateDefines();
 
 function updateDefines()
 {
-        shader.toggleDefine("MOD_NORM_SPEED", true);
-
+    shader.toggleDefine("MOD_NORM_SPEED", true);
 }
 
-let lastTime=0;
+let lastTime = 0;
 
 render.onTriggered = function ()
 {
@@ -43,7 +40,6 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    // if (inTexMask.get())cgl.setTexture(1, inTexMask.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

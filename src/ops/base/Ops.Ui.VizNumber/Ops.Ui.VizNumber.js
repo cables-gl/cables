@@ -19,8 +19,6 @@ inNum.onChange = () =>
         }
 
         op.setUiAttribs({ "extendTitle": str });
-
-        // op.setTitle(str+" ");
     }
 
     outNum.set(n);
