@@ -146,10 +146,6 @@ const restorePorts = () =>
                     }
                 }
             });
-            if (!newPort.isLinked())
-            {
-                newPort.set(oldPortOut.value);
-            }
             newPort.onLinkChanged = savePortData;
 
             if (oldPortOut.title)
@@ -542,6 +538,7 @@ function setupPorts(parentSubPatch)
             {
                 const subPatchPort = patchOutputOP.portsIn.find((port) => { return port.name == subPatchPortsOut[i].name; });
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
+                newPort.ignoreValueSerialize = true;
 
                 if (subPatchPort)
                 {
@@ -557,7 +554,6 @@ function setupPorts(parentSubPatch)
                         subPatchPort.onChange = () =>
                         {
                             newPort.set(subPatchPort.get());
-                            savePortData();
                         };
                     }
                     newPort.set(subPatchPort.get());
@@ -590,10 +586,6 @@ function setupPorts(parentSubPatch)
                                 }
                             }
                         });
-                    }
-                    if (!newPort.isLinked())
-                    {
-                        newPort.set(oldPorts.portsOut[newPort.name].value);
                     }
                 }
                 newPort.onLinkChanged = savePortData;
@@ -644,11 +636,20 @@ function savePortData()
     {
         if (!protectedPorts.includes(port.id))
         {
+            let portValue = port.get();
+            try
+            {
+                JSON.stringify(portValue);
+            }
+            catch (e)
+            {
+                portValue = null;
+            }
             const portData = {
                 "name": port.name,
                 "title": port.title,
-                "value": port.get(),
                 "type": port.type,
+                "value": portValue,
                 "links": []
             };
             port.links.forEach((link) =>
