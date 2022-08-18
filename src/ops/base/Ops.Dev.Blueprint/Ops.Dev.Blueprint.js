@@ -6,8 +6,8 @@ const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
 let loadingId = null;
-patchIdIn.setUiAttribs({ "hidePort": true });
-subPatchIdIn.setUiAttribs({ "hidePort": true });
+patchIdIn.setUiAttribs({ "hidePort": true, "greyout": true });
+subPatchIdIn.setUiAttribs({ "hidePort": true, "greyout": true });
 portsData.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hideParam": true });
 
@@ -71,6 +71,7 @@ const restorePorts = () =>
     const oldPorts = getOldPorts();
     const portInKeys = Object.keys(oldPorts.portsIn);
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+    const newPorts = [];
     for (let i = 0; i < portInKeys.length; i++)
     {
         const oldPortIn = oldPorts.portsIn[portInKeys[i]];
@@ -111,7 +112,9 @@ const restorePorts = () =>
         {
             newPort.setUiAttribs({ "title": oldPortIn.title });
         }
+        newPorts.push(newPort);
     }
+    op.setPortGroup("Blueprint Ports", newPorts);
 
     const portOutKeys = Object.keys(oldPorts.portsOut);
     for (let i = 0; i < portOutKeys.length; i++)
@@ -454,6 +457,7 @@ function setupPorts(parentSubPatch)
     let i = 0;
 
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+    const newPorts = [];
     for (i = 0; i < subPatchPortsIn.length; i++)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
@@ -523,8 +527,10 @@ function setupPorts(parentSubPatch)
             {
                 newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
             }
+            newPorts.push(newPort);
         }
     }
+    op.setPortGroup("Blueprint Ports", newPorts);
 
     for (i = 0; i < subPatchPortsOut.length; i++)
     {
