@@ -1,19 +1,19 @@
 const
-    inObject=op.inObject("Object"),
-    outObject=op.outObject("Result Object"),
-    inKey=op.inString("Key"),
-    inValue=op.inArray("Value");
+    inObject = op.inObject("Object"),
+    outObject = op.outObject("Result Object"),
+    inKey = op.inString("Key"),
+    inValue = op.inArray("Value");
 
-inObject.onChange=
-    inKey.onChange=
-    inValue.onChange=update;
+inObject.onChange =
+    inKey.onChange =
+    inValue.onChange = update;
 
 function update()
 {
-    var obj=inObject.get();
-    if(!obj)obj={};
+    let obj = inObject.get();
+    if (!obj)obj = {};
 
-    obj[inKey.get()]=inValue.get();
+    if (inKey.get()) obj[inKey.get()] = inValue.get();
 
     outObject.set(null);
     outObject.set(obj);

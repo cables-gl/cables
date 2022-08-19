@@ -1,11 +1,11 @@
-// ws://192.168.1.235
-
 const
     inUrl = op.inString("URL"),
+    outConnection = op.outObject("Connection", null, "Websocket"),
     outResult = op.outObject("Result"),
-    outConnected = op.outValue("Connected"),
-    outConnection = this.outObject("Connection"),
-    outReceived = op.outTrigger("Received Data");
+    outConnected = op.outBoolNum("Connected"),
+    outValidJson = op.outBoolNum("Valid JSON"),
+    outReceived = op.outTrigger("Received Data"),
+    outRaw = op.outString("Raw Data");
 
 let connection = null;
 let timeout = null;
@@ -38,8 +38,10 @@ op.onDelete = function ()
 
 function connect()
 {
+    op.setUiError("connection", null);
+    op.setUiError("jsonvalid", null);
+
     if (outConnected.get() && connectedTo == inUrl.get()) return;
-    // if(outConnected.get()===true)connection.close();
 
     if (!inUrl.get() || inUrl.get() === "")
     {
@@ -74,6 +76,7 @@ function connect()
             op.log("ws error");
             outConnected.set(false);
             outConnection.set(null);
+            op.setUiError("connection", "Error connecting to websocket server", 2);
         };
 
         connection.onclose = function (message)
@@ -94,18 +97,23 @@ function connect()
 
         connection.onmessage = function (message)
         {
+            op.setUiError("jsonvalid", null);
+            outRaw.set(message.data);
             try
             {
                 const json = JSON.parse(message.data);
                 outResult.set(null);
                 outResult.set(json);
-                outReceived.trigger();
+                outValidJson.set(true);
             }
             catch (e)
             {
                 op.log(e);
                 op.log("This doesn't look like a valid JSON: ", message.data);
+                op.setUiError("jsonvalid", "Received message was not valid JSON", 0);
+                outValidJson.set(false);
             }
+            outReceived.trigger();
         };
     }
 }

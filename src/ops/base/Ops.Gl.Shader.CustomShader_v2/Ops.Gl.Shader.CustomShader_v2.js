@@ -58,11 +58,25 @@ function doRender()
     setVectorValues();
     if (needsUpdate)updateShader();
     if (asMaterial.get()) cgl.pushShader(shader);
+    pushTextures();
     trigger.trigger();
+    shader.popTextures();
     if (asMaterial.get()) cgl.popShader();
 }
 
-function bindTextures()
+function pushTextures()
+{
+    for (let i = 0; i < uniformTextures.length; i++)
+        if (uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
+        {
+            // console.log(uniformTextures[i]);
+            shader.pushTexture(uniformTextures[i].uniform, uniformTextures[i].get().tex);
+        }
+        else
+            shader.pushTexture(uniformTextures[i], CGL.Texture.getEmptyTexture(cgl));
+}
+
+function bindTextures()// old - should be removed in next version ?
 {
     for (let i = 0; i < uniformTextures.length; i++)
         if (uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
@@ -77,7 +91,6 @@ function hasUniformInput(name)
 }
 
 const tempMat4 = mat4.create();
-// var lastm4;
 const uniformNameBlacklist = [
     "modelMatrix",
     "viewMatrix",

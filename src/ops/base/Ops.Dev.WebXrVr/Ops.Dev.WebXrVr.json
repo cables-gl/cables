@@ -44,6 +44,11 @@
             },
             {
                 "type": 0,
+                "name": "Eye Index",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "VR Support",
                 "subType": "number"
             },

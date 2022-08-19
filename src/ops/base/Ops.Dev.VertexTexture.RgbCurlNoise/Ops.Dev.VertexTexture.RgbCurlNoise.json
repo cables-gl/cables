@@ -15,6 +15,21 @@
                 "type": 0,
                 "name": "Time",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Z",
+                "subType": "number"
             }
         ],
         "portsOut": [

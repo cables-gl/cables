@@ -29,6 +29,11 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
             }
         ],
         "name": "Ops.Dev.BranchProfilerBranch"

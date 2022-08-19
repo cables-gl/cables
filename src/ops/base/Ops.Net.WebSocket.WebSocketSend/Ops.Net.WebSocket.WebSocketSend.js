@@ -1,5 +1,5 @@
 const
-    inConnection = op.inObject("Connection"),
+    inConnection = op.inObject("Connection", null, "Websocket"),
     inObject = op.inObject("Object"),
     inSend = op.inTriggerButton("Send"),
     inStringify = op.inBool("Send String", true),

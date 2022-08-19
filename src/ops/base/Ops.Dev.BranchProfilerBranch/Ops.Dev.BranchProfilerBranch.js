@@ -1,7 +1,8 @@
 const
     inExec = op.inTrigger("Exec"),
     inName = op.inString("Branch Name", "default"),
-    outNext = op.outTrigger("Next");
+    outNext = op.outTrigger("Next"),
+    outDur = op.outNumber("Duration");
 
 op.patch.cgl.frameStore.branchProfiler = op.patch.cgl.frameStore.branchProfiler || {};
 
@@ -14,4 +15,6 @@ inExec.onTriggered = () =>
     outNext.trigger();
 
     if (op.patch.cgl.frameStore.branchStack.current == c) op.patch.cgl.frameStore.branchStack.pop();
+
+    outDur.set(c.dur);
 };

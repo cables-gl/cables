@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1600247160967
+        },
+        {
+            "message": "output raw message, add uierrors on invalid json and connection error",
+            "author": "stephan",
+            "date": 1660809295216
         }
     ],
     "authorName": "pandur",
@@ -12,27 +17,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "URL"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
+                "name": "Connection",
+                "objType": "Websocket"
+            },
+            {
+                "type": 2,
                 "name": "Result"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Connected",
                 "subType": "number"
             },
             {
-                "type": "2",
-                "name": "Connection"
+                "type": 0,
+                "name": "Valid JSON",
+                "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Received Data"
+            },
+            {
+                "type": 5,
+                "name": "Raw Data"
             }
         ],
         "name": "Ops.Net.WebSocket.WebSocket_v2"

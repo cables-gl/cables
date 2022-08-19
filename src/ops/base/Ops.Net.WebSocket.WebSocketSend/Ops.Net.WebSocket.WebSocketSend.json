@@ -2,26 +2,27 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Connection"
+                "type": 2,
+                "name": "Connection",
+                "objType": "Websocket"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Send"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Send String",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Sent",
                 "subType": "boolean"
             }
@@ -39,5 +40,12 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gu7DBo"
+    "exampleProjectId": "gu7DBo",
+    "changelog": [
+        {
+            "message": "add type to connection input port",
+            "author": "stephan",
+            "date": 1660809267338
+        }
+    ]
 }
