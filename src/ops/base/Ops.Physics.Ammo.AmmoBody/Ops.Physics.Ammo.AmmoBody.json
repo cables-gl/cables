@@ -101,6 +101,10 @@
                 "subType": "number"
             },
             {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
                 "type": 0,
                 "name": "Never Deactivate",
                 "group": "Flags",

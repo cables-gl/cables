@@ -27,21 +27,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "name",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "aaaa",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             }
         ],
-        "name": "Ops.Admin.TestOp"
+        "portsOut": [],
+        "name": "Ops.Dev.TestOp"
     },
     "libs": [
         "cannon.js",
