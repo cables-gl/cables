@@ -36,6 +36,7 @@ const drawBuffArr = [true, true];
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
+    "priority": 200,
     "title": vertModTitle,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": "OUT vec3 MOD_pos;",
@@ -214,12 +215,12 @@ exec.onTriggered = function ()
 
         cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
+        next.trigger();
         mod.unbind();
     }
     else
     {
         outTex.set(CGL.Texture.getEmptyTexture(cgl));
+        next.trigger();
     }
-
-    next.trigger();
 };

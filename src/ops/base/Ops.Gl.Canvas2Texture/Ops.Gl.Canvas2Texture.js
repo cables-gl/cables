@@ -43,23 +43,8 @@ function reload()
     outWidth.set(canvasTexture.width);
     outHeight.set(canvasTexture.height);
 
-    outTexture.set(null);
+    outTexture.set(CGL.Texture.getEmptyTexture(cgl));
     outTexture.set(canvasTexture);
-
-    if (!canvasTexture.isPowerOfTwo())
-    {
-        op.uiAttr({
-            "hint": "texture dimensions not power of two! - texture filtering will not work.",
-            "warning": null
-        });
-    }
-    else
-    {
-        op.uiAttr({
-            "hint": null,
-            "warning": null
-        });
-    }
 }
 
 function onFilterChange()

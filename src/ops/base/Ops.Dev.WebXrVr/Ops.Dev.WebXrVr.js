@@ -10,6 +10,7 @@ const
     next = op.outTrigger("Next"),
     nextPre = op.outTrigger("Render After Eyes"),
     outPose = op.outObject("Viewer Pose"),
+    outEyeIndex = op.outNumber("Eye Index"),
     outVr = op.outBoolNum("VR Support"),
     outMat = op.outArray("Matrix"),
     outElement = op.outObject("DOM Overlay Ele", null, "element"),
@@ -140,6 +141,7 @@ function onXRFrame(hrTime, xrFrame)
         for (let i = 0; i < xrViewerPose.views.length; i++)
         {
             let start = performance.now();
+            outEyeIndex.set(i);
             renderPre();
             renderEye(xrViewerPose.views[i]);
 

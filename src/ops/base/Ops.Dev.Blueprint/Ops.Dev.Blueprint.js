@@ -6,8 +6,8 @@ const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
 let loadingId = null;
-patchIdIn.setUiAttribs({ "hidePort": true });
-subPatchIdIn.setUiAttribs({ "hidePort": true });
+patchIdIn.setUiAttribs({ "hidePort": true, "greyout": true });
+subPatchIdIn.setUiAttribs({ "hidePort": true, "greyout": true });
 portsData.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hideParam": true });
 
@@ -71,6 +71,7 @@ const restorePorts = () =>
     const oldPorts = getOldPorts();
     const portInKeys = Object.keys(oldPorts.portsIn);
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+    const newPorts = [];
     for (let i = 0; i < portInKeys.length; i++)
     {
         const oldPortIn = oldPorts.portsIn[portInKeys[i]];
@@ -111,7 +112,9 @@ const restorePorts = () =>
         {
             newPort.setUiAttribs({ "title": oldPortIn.title });
         }
+        newPorts.push(newPort);
     }
+    op.setPortGroup("Blueprint Ports", newPorts);
 
     const portOutKeys = Object.keys(oldPorts.portsOut);
     for (let i = 0; i < portOutKeys.length; i++)
@@ -143,10 +146,6 @@ const restorePorts = () =>
                     }
                 }
             });
-            if (!newPort.isLinked())
-            {
-                newPort.set(oldPortOut.value);
-            }
             newPort.onLinkChanged = savePortData;
 
             if (oldPortOut.title)
@@ -454,6 +453,7 @@ function setupPorts(parentSubPatch)
     let i = 0;
 
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+    const newPorts = [];
     for (i = 0; i < subPatchPortsIn.length; i++)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
@@ -523,8 +523,10 @@ function setupPorts(parentSubPatch)
             {
                 newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
             }
+            newPorts.push(newPort);
         }
     }
+    op.setPortGroup("Blueprint Ports", newPorts);
 
     for (i = 0; i < subPatchPortsOut.length; i++)
     {
@@ -536,6 +538,7 @@ function setupPorts(parentSubPatch)
             {
                 const subPatchPort = patchOutputOP.portsIn.find((port) => { return port.name == subPatchPortsOut[i].name; });
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
+                newPort.ignoreValueSerialize = true;
 
                 if (subPatchPort)
                 {
@@ -551,7 +554,6 @@ function setupPorts(parentSubPatch)
                         subPatchPort.onChange = () =>
                         {
                             newPort.set(subPatchPort.get());
-                            savePortData();
                         };
                     }
                     newPort.set(subPatchPort.get());
@@ -584,10 +586,6 @@ function setupPorts(parentSubPatch)
                                 }
                             }
                         });
-                    }
-                    if (!newPort.isLinked())
-                    {
-                        newPort.set(oldPorts.portsOut[newPort.name].value);
                     }
                 }
                 newPort.onLinkChanged = savePortData;
@@ -638,11 +636,20 @@ function savePortData()
     {
         if (!protectedPorts.includes(port.id))
         {
+            let portValue = port.get();
+            try
+            {
+                JSON.stringify(portValue);
+            }
+            catch (e)
+            {
+                portValue = null;
+            }
             const portData = {
                 "name": port.name,
                 "title": port.title,
-                "value": port.get(),
                 "type": port.type,
+                "value": portValue,
                 "links": []
             };
             port.links.forEach((link) =>

@@ -18,17 +18,13 @@
 
         MOD_ntc=(vec2(gl_FragCoord.x,gl_FragCoord.y)/vec2(MOD_viewPortW,MOD_viewPortH));
 
-
         // tc+=MOD_pos;
-    MOD_ntc-=vec2(0.5,0.5);
-    MOD_ntc*=1.0/MOD_scale;
-    MOD_ntc+=vec2(0.5,0.5);
-    MOD_ntc-=MOD_offset;
+        MOD_ntc-=vec2(0.5,0.5);
+        MOD_ntc*=1.0/MOD_scale;
+        MOD_ntc+=vec2(0.5,0.5);
+        MOD_ntc-=MOD_offset;
         // tc.y=1.0-tc.y-0.5;
-
     #endif
-
-
 
 
     #ifdef MOD_DISCARD

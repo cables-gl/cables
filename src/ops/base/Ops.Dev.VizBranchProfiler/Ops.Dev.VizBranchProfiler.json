@@ -21,11 +21,39 @@
                 "name": "Profiler Data"
             },
             {
+                "type": 0,
+                "name": "Render index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Canvas",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Canvas",
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Update"
             }
         ],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            }
+        ],
         "name": "Ops.Dev.VizBranchProfiler"
     }
 }
