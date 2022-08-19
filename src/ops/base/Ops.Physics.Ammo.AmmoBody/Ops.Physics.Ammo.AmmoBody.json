@@ -102,7 +102,14 @@
             },
             {
                 "type": 3,
-                "name": "Positions"
+                "name": "Positions",
+                "group": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Append Index to name",
+                "group": "Array",
+                "subType": "boolean"
             },
             {
                 "type": 0,

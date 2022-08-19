@@ -15,7 +15,10 @@ const
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
+
     inPositions = op.inArray("Positions", null, 3),
+    inPosIndex = op.inBool("Append Index to name", true),
+
     inNeverDeactivate = op.inBool("Never Deactivate"),
     inGhostObject = op.inBool("Ghost Object"),
     inActive = op.inBool("Active", true),
@@ -25,6 +28,8 @@ const
     next = op.outTrigger("next"),
     outRayHit = op.outBoolNum("Ray Hit"),
     transformed = op.outTrigger("Transformed");
+
+op.setPortGroup("Array", [inPositions, inPosIndex]);
 
 inExec.onTriggered = update;
 
@@ -71,6 +76,8 @@ inExec.onLinkChanged =
         needsRemove = true;
     };
 
+inPosIndex.onChange = updateBodyMeta;
+
 inActivate.onTriggered = () =>
 {
     for (let i = 0; i < bodies.length; i++)
@@ -95,13 +102,23 @@ inReset.onTriggered = () =>
 
 function updateBodyMeta()
 {
+    const n = inName.get();
+    const appendIndex = inPosIndex.get();
+
     if (world)
         for (let i = 0; i < bodies.length; i++)
-            world.setBodyMeta(bodies[i],
-                {
-                    "name": inName.get(),
-                    "mass": inMass.get(),
-                });
+        {
+            let name = n;
+            if (appendIndex)name = n + "." + i;
+
+            if (appendIndex)
+
+                world.setBodyMeta(bodies[i],
+                    {
+                        "name": name,
+                        "mass": inMass.get(),
+                    });
+        }
 
     op.setUiAttribs({ "extendTitle": inName.get() });
 }
