@@ -104,20 +104,19 @@ function updateBodyMeta()
 {
     const n = inName.get();
     const appendIndex = inPosIndex.get();
+    const posArr = inPositions.get();
 
     if (world)
         for (let i = 0; i < bodies.length; i++)
         {
             let name = n;
-            if (appendIndex)name = n + "." + i;
+            if (appendIndex && posArr)name = n + "." + i;
 
-            if (appendIndex)
-
-                world.setBodyMeta(bodies[i],
-                    {
-                        "name": name,
-                        "mass": inMass.get(),
-                    });
+            world.setBodyMeta(bodies[i],
+                {
+                    "name": name,
+                    "mass": inMass.get(),
+                });
         }
 
     op.setUiAttribs({ "extendTitle": inName.get() });
