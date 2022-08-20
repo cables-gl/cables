@@ -101,6 +101,17 @@
                 "subType": "number"
             },
             {
+                "type": 3,
+                "name": "Positions",
+                "group": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Append Index to name",
+                "group": "Array",
+                "subType": "boolean"
+            },
+            {
                 "type": 0,
                 "name": "Never Deactivate",
                 "group": "Flags",

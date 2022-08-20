@@ -15,6 +15,10 @@ const
     inSizeX = op.inFloat("Size X", 1),
     inSizeY = op.inFloat("Size Y", 1),
     inSizeZ = op.inFloat("Size Z", 1),
+
+    inPositions = op.inArray("Positions", null, 3),
+    inPosIndex = op.inBool("Append Index to name", true),
+
     inNeverDeactivate = op.inBool("Never Deactivate"),
     inGhostObject = op.inBool("Ghost Object"),
     inActive = op.inBool("Active", true),
@@ -25,14 +29,15 @@ const
     outRayHit = op.outBoolNum("Ray Hit"),
     transformed = op.outTrigger("Transformed");
 
+op.setPortGroup("Array", [inPositions, inPosIndex]);
+
 inExec.onTriggered = update;
 
 const cgl = op.patch.cgl;
-let body = null;
+let bodies = [];
 let world = null;
 let tmpTrans = null;
-let transform = null;
-let motionState = null;
+
 const tmpOrigin = vec3.create();
 const tmpQuat = quat.create();
 const tmpScale = vec3.create();
@@ -42,6 +47,7 @@ let btOrigin = null;
 let btQuat = null;
 let doResetPos = false;
 let colShape = null;
+
 let doScale = true;
 let needsRemove = false;
 inName.onChange = updateBodyMeta;
@@ -64,41 +70,54 @@ inExec.onLinkChanged =
     inRadius.onChange =
     inSizeY.onChange =
     inSizeZ.onChange =
+    inPositions.onChange =
     inSizeX.onChange = () =>
     {
         needsRemove = true;
     };
 
+inPosIndex.onChange = updateBodyMeta;
+
 inActivate.onTriggered = () =>
 {
-    if (body)body.activate();
+    for (let i = 0; i < bodies.length; i++)
+        bodies[i].activate();
 };
 
 function removeBody()
 {
-    if (world && body)
+    if (world)
     {
-        world.removeRigidBody(body);
-        // Ammo.destroy(body);
+        for (let i = 0; i < bodies.length; i++)
+            world.removeRigidBody(bodies[i]);
     }
 
-    body = null;
+    bodies.length = 0;
 }
 
 inReset.onTriggered = () =>
 {
     needsRemove = true;
-    // removeBody();
 };
 
 function updateBodyMeta()
 {
+    const n = inName.get();
+    const appendIndex = inPosIndex.get();
+    const posArr = inPositions.get();
+
     if (world)
-        world.setBodyMeta(body,
-            {
-                "name": inName.get(),
-                "mass": inMass.get(),
-            });
+        for (let i = 0; i < bodies.length; i++)
+        {
+            let name = n;
+            if (appendIndex && posArr)name = n + "." + i;
+
+            world.setBodyMeta(bodies[i],
+                {
+                    "name": name,
+                    "mass": inMass.get(),
+                });
+        }
 
     op.setUiAttribs({ "extendTitle": inName.get() });
 }
@@ -108,20 +127,16 @@ function setup()
     if (!inActive.get()) return;
     doScale = true;
 
-    if (world)
-        if (world && body) world.removeRigidBody(body);
+    removeBody();
 
     if (!tmpTrans)tmpTrans = new Ammo.btTransform();
-    if (!transform)transform = new Ammo.btTransform();
+    // if (!transform)transform = new Ammo.btTransform();
+
     if (colShape)Ammo.destroy(colShape);
     colShape = null;
+    // transform.setIdentity();
 
-    transform.setIdentity();
-
-    CABLES.AmmoWorld.copyCglTransform(cgl, transform);
-
-    if (motionState)Ammo.destroy(motionState);
-    motionState = new Ammo.btDefaultMotionState(transform);
+    // CABLES.AmmoWorld.copyCglTransform(cgl, transform);
 
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
     else if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inRadius.get());
@@ -177,11 +192,6 @@ function setup()
 
         colShape = CABLES.AmmoWorld.createConvexHullFromGeom(geom, inGeomSimplify.get());
 
-        // inRadius.set(1);
-        // inSizeX.set(1);
-        // inSizeY.set(1);
-        // inSizeZ.set(1);
-
         doScale = false;
     }
     else
@@ -210,24 +220,44 @@ function setup()
     colShape.setMargin(0.05);
 
     let mass = inMass.get();
-    // if (inGhostObject.get())mass=0;
-
     let localInertia = new Ammo.btVector3(0, 0, 0);
     colShape.calculateLocalInertia(mass, localInertia);
 
-    let rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
-    body = new Ammo.btRigidBody(rbInfo);
-    world.addRigidBody(body);
+    let num = 1;
+    let posArr = inPositions.get();
 
-    // 		CF_STATIC_OBJECT= 1,
-    // 		CF_KINEMATIC_OBJECT= 2,
-    // 		CF_NO_CONTACT_RESPONSE = 4,
-    // 		CF_CUSTOM_MATERIAL_CALLBACK = 8,//this allows per-triangle material (friction/restitution)
-    // 		CF_CHARACTER_OBJECT = 16,
-    // 		CF_DISABLE_VISUALIZE_OBJECT = 32, //disable debug drawing
-    // 		CF_DISABLE_SPU_COLLISION_PROCESSING = 64//disable parallel/SPU processing
-    if (inGhostObject.get())
-        body.setCollisionFlags(body.getCollisionFlags() | 4);
+    if (posArr && posArr.length)
+    {
+        num = Math.max(num, posArr.length / 3);
+    }
+
+    for (let i = 0; i < num; i++)
+    {
+        // if (motionState)Ammo.destroy(motionState);
+
+        // let transform = null;
+        let transform = new Ammo.btTransform();
+
+        const motionState = new Ammo.btDefaultMotionState(transform);
+
+        let rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
+        const body = new Ammo.btRigidBody(rbInfo);
+        world.addRigidBody(body);
+
+        // 		CF_STATIC_OBJECT= 1,
+        // 		CF_KINEMATIC_OBJECT= 2,
+        // 		CF_NO_CONTACT_RESPONSE = 4,
+        // 		CF_CUSTOM_MATERIAL_CALLBACK = 8,//this allows per-triangle material (friction/restitution)
+        // 		CF_CHARACTER_OBJECT = 16,
+        // 		CF_DISABLE_VISUALIZE_OBJECT = 32, //disable debug drawing
+        // 		CF_DISABLE_SPU_COLLISION_PROCESSING = 64//disable parallel/SPU processing
+        if (inGhostObject.get())
+            body.setCollisionFlags(body.getCollisionFlags() | 4);
+
+        bodies.push(body);
+        // motionStates.push(motionState);
+    }
+    setPositions();
 
     world.on("rayCastHit", (name) =>
     {
@@ -238,43 +268,80 @@ function setup()
     updateBodyMeta();
 }
 
+// let transform = new Ammo.btTransform();
+function setPositions()
+{
+    let posArr = inPositions.get();
+
+    for (let i = 0; i < bodies.length; i++)
+    {
+        // if (motionState)Ammo.destroy(motionState);
+
+        // let transform = null;
+        bodies[i].getMotionState().getWorldTransform(tmpTrans);
+
+        if (posArr)
+        {
+            cgl.pushModelMatrix();
+
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, [
+                // i * 0.1, 0, 0]);
+                posArr[i * 3 + 0], posArr[i * 3 + 1], posArr[i * 3 + 2]]);
+        }
+        CABLES.AmmoWorld.copyCglTransform(cgl, tmpTrans);
+        if (posArr)cgl.popModelMatrix();
+
+        bodies[i].getMotionState().setWorldTransform(tmpTrans);
+        bodies[i].setWorldTransform(tmpTrans);
+
+        // if (posArr)
+    }
+}
+
 function updateParams()
 {
-    if (!body) return;
-    body.setFriction(inFriction.get());
-    body.setRollingFriction(inRollingFriction.get());
-    body.setRestitution(inRestitution.get());
+    if (!world || bodies.length == 0) return;
+    for (let i = 0; i < bodies.length; i++)
+    {
+        bodies[i].setFriction(inFriction.get());
+        bodies[i].setRollingFriction(inRollingFriction.get());
+        bodies[i].setRestitution(inRestitution.get());
+    }
 }
 
 function renderTransformed()
 {
-    if (!body) return;
+    if (!bodies.length) return;
     if (!inActive.get()) return;
 
-    let ms = body.getMotionState();
-    if (ms)
+    for (let i = 0; i < bodies.length; i++)
     {
-        ms.getWorldTransform(tmpTrans);
-        let p = tmpTrans.getOrigin();
-        let q = tmpTrans.getRotation();
+        const body = bodies[i];
+        let ms = body.getMotionState();
+        if (ms)
+        {
+            ms.getWorldTransform(tmpTrans);
+            let p = tmpTrans.getOrigin();
+            let q = tmpTrans.getRotation();
 
-        cgl.pushModelMatrix();
+            cgl.pushModelMatrix();
 
-        mat4.identity(cgl.mMatrix);
+            mat4.identity(cgl.mMatrix);
 
-        let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
+            let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
 
-        if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
-        if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
-        // if (inShape.get() == "Cylinder") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
-        if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
+            if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
+            if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
+            // if (inShape.get() == "Cylinder") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
+            if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
-        mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
-        mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
+            mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
+            mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
 
-        transformed.trigger();
+            transformed.trigger();
 
-        cgl.popModelMatrix();
+            cgl.popModelMatrix();
+        }
     }
 }
 
@@ -293,17 +360,13 @@ function update()
         outRayHit.set(false);
         return;
     }
-    if (!body)setup(world);
-    if (!body) return;
+    if (!bodies.length)setup(world);
+    if (!bodies.length) return;
     if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
     if (inMass.get() == 0 || doResetPos)
     {
-        CABLES.AmmoWorld.copyCglTransform(cgl, transform);
-
-        motionState.setWorldTransform(transform);
-        body.setWorldTransform(transform);
-
+        setPositions();
         doResetPos = false;
     }
 

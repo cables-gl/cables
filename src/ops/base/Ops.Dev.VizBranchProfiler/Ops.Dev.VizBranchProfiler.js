@@ -53,7 +53,7 @@ function updateUi()
 
 function getWidth(layer, d)
 {
-    if (d < 0.2) d = 0.004;
+    // if (d < 0.2) d = 0.004;
     return layer.width * (d / totalDur);
 }
 
