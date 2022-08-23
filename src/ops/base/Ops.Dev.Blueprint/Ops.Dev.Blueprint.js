@@ -313,11 +313,26 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 setupPorts(parentSubPatch);
             }
             op.patch.removeEventListener(listenerId);
-            if (editorMode) CABLES.UI.undo.resume();
+            if (editorMode)
+            {
+                CABLES.UI.undo.resume();
+                if (originalSaveState === true)
+                {
+                    gui.setStateUnsaved();
+                }
+                else if (originalSaveState === false)
+                {
+                    gui.setStateSaved();
+                }
+            }
         };
 
-
-        if (editorMode) CABLES.UI.undo.pause();
+        let originalSaveState = null;
+        if (editorMode)
+        {
+            originalSaveState = gui.getSavedState();
+            CABLES.UI.undo.pause();
+        }
         if (editorMode)
         {
             gui.serverOps.loadProjectLibs(data, () =>
