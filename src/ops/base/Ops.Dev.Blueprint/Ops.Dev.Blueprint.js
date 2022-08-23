@@ -523,6 +523,10 @@ function setupPorts(parentSubPatch)
             {
                 newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
             }
+            if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
+            {
+                newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
+            }
             newPorts.push(newPort);
         }
     }
@@ -597,6 +601,11 @@ function setupPorts(parentSubPatch)
                 else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
                 {
                     newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
+                }
+
+                if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
+                {
+                    newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
                 }
             }
         }
