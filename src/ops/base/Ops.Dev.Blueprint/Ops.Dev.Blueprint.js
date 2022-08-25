@@ -318,10 +318,6 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 CABLES.UI.undo.resume();
                 if (originalSaveState === true)
                 {
-                    gui.setStateUnsaved();
-                }
-                else if (originalSaveState === false)
-                {
                     gui.setStateSaved();
                 }
             }
@@ -490,7 +486,10 @@ function setupPorts(parentSubPatch)
                     newPort.onChange = () =>
                     {
                         subPatchPort.set(newPort.get());
-                        savePortData();
+                        if (!newPort.isLinked())
+                        {
+                            savePortData();
+                        }
                     };
                 }
             }
@@ -639,10 +638,10 @@ function savePortData()
             const portData = {
                 "name": port.name,
                 "title": port.title,
-                "value": port.get(),
                 "type": port.type,
                 "links": []
             };
+            if (!port.links || port.links.length === 0) portData.value = port.get();
             port.links.forEach((link) =>
             {
                 link.ignoreInSerialize = true;
@@ -660,22 +659,25 @@ function savePortData()
     {
         if (!protectedPorts.includes(port.id))
         {
-            let portValue = port.get();
-            try
-            {
-                JSON.stringify(portValue);
-            }
-            catch (e)
-            {
-                portValue = null;
-            }
             const portData = {
                 "name": port.name,
                 "title": port.title,
                 "type": port.type,
-                "value": portValue,
                 "links": []
             };
+            if (!port.links || port.links.length === 0)
+            {
+                let portValue = port.get();
+                try
+                {
+                    JSON.stringify(portValue);
+                }
+                catch (e)
+                {
+                    portValue = null;
+                }
+                portData.value = portValue;
+            }
             port.links.forEach((link) =>
             {
                 link.ignoreInSerialize = true;
