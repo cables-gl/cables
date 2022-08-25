@@ -1333,6 +1333,55 @@ Patch.prototype.printTriggerStack = function ()
     console.groupEnd(); // eslint-disable-line
 };
 
+Patch.replaceOpIds = function (json)
+{
+    for (const i in json.ops)
+    {
+        const searchID = json.ops[i].id;
+        const newID = json.ops[i].id = CABLES.generateUUID();
+
+        for (const j in json.ops)
+        {
+            if (json.ops[j].portsIn)
+                for (const k in json.ops[j].portsIn)
+                {
+                    if (json.ops[j].portsIn[k].links)
+                    {
+                        let l = json.ops[j].portsIn[k].links.length;
+                        while (l--)
+                            if (json.ops[j].portsIn[k].links[l] === null)
+                                json.ops[j].portsIn[k].links.splice(l, 1);
+
+                        for (l in json.ops[j].portsIn[k].links)
+                        {
+                            if (json.ops[j].portsIn[k].links[l].objIn == searchID) json.ops[j].portsIn[k].links[l].objIn = newID;
+                            if (json.ops[j].portsIn[k].links[l].objOut == searchID) json.ops[j].portsIn[k].links[l].objOut = newID;
+                        }
+                    }
+                }
+
+            if (json.ops[j].portsOut)
+                for (const k in json.ops[j].portsOut)
+                {
+                    if (json.ops[j].portsOut[k].links)
+                    {
+                        let l = json.ops[j].portsOut[k].links.length;
+                        while (l--)
+                            if (json.ops[j].portsOut[k].links[l] === null)
+                                json.ops[j].portsOut[k].links.splice(l, 1);
+
+                        for (l in json.ops[j].portsOut[k].links)
+                        {
+                            if (json.ops[j].portsOut[k].links[l].objIn == searchID) json.ops[j].portsOut[k].links[l].objIn = newID;
+                            if (json.ops[j].portsOut[k].links[l].objOut == searchID) json.ops[j].portsOut[k].links[l].objOut = newID;
+                        }
+                    }
+                }
+        }
+    }
+    return json;
+};
+
 /**
  * remove an eventlistener
  * @instance
