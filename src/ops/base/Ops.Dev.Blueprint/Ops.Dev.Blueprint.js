@@ -313,11 +313,22 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 setupPorts(parentSubPatch);
             }
             op.patch.removeEventListener(listenerId);
-            if (editorMode) CABLES.UI.undo.resume();
+            if (editorMode)
+            {
+                CABLES.UI.undo.resume();
+                if (originalSaveState === true)
+                {
+                    gui.setStateSaved();
+                }
+            }
         };
 
-
-        if (editorMode) CABLES.UI.undo.pause();
+        let originalSaveState = null;
+        if (editorMode)
+        {
+            originalSaveState = gui.getSavedState();
+            CABLES.UI.undo.pause();
+        }
         if (editorMode)
         {
             gui.serverOps.loadProjectLibs(data, () =>
@@ -475,7 +486,10 @@ function setupPorts(parentSubPatch)
                     newPort.onChange = () =>
                     {
                         subPatchPort.set(newPort.get());
-                        savePortData();
+                        if (!newPort.isLinked())
+                        {
+                            savePortData();
+                        }
                     };
                 }
             }
@@ -522,6 +536,10 @@ function setupPorts(parentSubPatch)
             else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
             {
                 newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
+            }
+            if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
+            {
+                newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
             }
             newPorts.push(newPort);
         }
@@ -598,6 +616,11 @@ function setupPorts(parentSubPatch)
                 {
                     newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
                 }
+
+                if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
+                {
+                    newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
+                }
             }
         }
     }
@@ -615,10 +638,10 @@ function savePortData()
             const portData = {
                 "name": port.name,
                 "title": port.title,
-                "value": port.get(),
                 "type": port.type,
                 "links": []
             };
+            if (!port.links || port.links.length === 0) portData.value = port.get();
             port.links.forEach((link) =>
             {
                 link.ignoreInSerialize = true;
@@ -636,22 +659,25 @@ function savePortData()
     {
         if (!protectedPorts.includes(port.id))
         {
-            let portValue = port.get();
-            try
-            {
-                JSON.stringify(portValue);
-            }
-            catch (e)
-            {
-                portValue = null;
-            }
             const portData = {
                 "name": port.name,
                 "title": port.title,
                 "type": port.type,
-                "value": portValue,
                 "links": []
             };
+            if (!port.links || port.links.length === 0)
+            {
+                let portValue = port.get();
+                try
+                {
+                    JSON.stringify(portValue);
+                }
+                catch (e)
+                {
+                    portValue = null;
+                }
+                portData.value = portValue;
+            }
             port.links.forEach((link) =>
             {
                 link.ignoreInSerialize = true;
