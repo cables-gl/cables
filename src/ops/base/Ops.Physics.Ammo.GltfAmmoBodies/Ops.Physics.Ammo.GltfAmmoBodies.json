@@ -38,6 +38,11 @@
                 "type": 0,
                 "name": "Mass kg",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

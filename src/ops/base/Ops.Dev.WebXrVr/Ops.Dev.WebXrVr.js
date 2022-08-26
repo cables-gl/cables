@@ -1,11 +1,11 @@
 /*
 https://web.dev/vr-comes-to-the-web-pt-ii/
-
 */
 
 const
     inMainloop = op.inTrigger("Mainloop"),
     inStop = op.inTriggerButton("Stop"),
+    inShowButton = op.inBool("Show Button", true),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");"),
     next = op.outTrigger("Next"),
     nextPre = op.outTrigger("Render After Eyes"),
@@ -45,6 +45,12 @@ if (xr)
 op.onDelete = () =>
 {
     removeButton();
+};
+
+inShowButton.onChange = () =>
+{
+    if (!inShowButton.get())removeButton();
+    else initButton();
 };
 
 function stopVr()
@@ -110,6 +116,8 @@ function onXRFrame(hrTime, xrFrame)
 
     let xrSession = xrFrame.session;
     xrSession.requestAnimationFrame(onXRFrame);
+
+    console.log(xrSession);
 
     try
     {
@@ -221,7 +229,6 @@ function initButton()
     buttonEle.addEventListener("click", startVr);
     buttonEle.addEventListener("touchstart", startVr);
     buttonEle.style = inButtonStyle.get();
-    console.log("button ele");
 }
 
 function removeButton()

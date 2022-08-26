@@ -17,18 +17,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
                 "name": "Was Triggered",
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.pandur.IsTriggered"
+        "name": "Ops.Trigger.IsTriggered"
     },
     "summary": "outputs true if being triggered last frame",
     "issues": "",

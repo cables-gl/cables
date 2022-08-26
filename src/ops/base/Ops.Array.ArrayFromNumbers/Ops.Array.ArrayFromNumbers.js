@@ -1,6 +1,7 @@
 const
     inUpdate = op.inTrigger("Update"),
     inLimit = op.inInt("Limit", 30),
+    next = op.outTrigger("Next"),
     outArr = op.outArray("Array");
 
 const inPorts = [];
@@ -25,4 +26,5 @@ function update()
 
     outArr.set(null);
     outArr.set(arr);
+    next.trigger();
 }

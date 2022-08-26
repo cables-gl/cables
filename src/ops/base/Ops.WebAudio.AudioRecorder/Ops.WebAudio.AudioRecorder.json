@@ -98,6 +98,10 @@
                 "type": 2,
                 "name": "AudioBuffer Out",
                 "objType": "audioBuffer"
+            },
+            {
+                "type": 5,
+                "name": "Data URL"
             }
         ],
         "name": "Ops.WebAudio.AudioRecorder"
