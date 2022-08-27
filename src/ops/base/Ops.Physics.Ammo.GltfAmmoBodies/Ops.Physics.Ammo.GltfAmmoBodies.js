@@ -3,6 +3,7 @@ const
     inShape = op.inSwitch("Shape", ["Convex Hull", "Triangle Shape"], "Convex Hull"),
     inNames = op.inString("Filter Meshes", ""),
     inMass = op.inFloat("Mass kg", 0),
+    inActive = op.inBool("Active", true),
     outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
@@ -37,8 +38,15 @@ inExec.onLinkChanged = () =>
     added = false;
 };
 
+inActive.onChange = () =>
+{
+    if (!inActive.get())removeFromWorld();
+    update();
+};
+
 function update()
 {
+    if (!inActive.get()) return;
     if (!added || world != cgl.frameStore.ammoWorld) addToWorld();
 
     for (let i = 0; i < bodies.length; i++)

@@ -22,6 +22,7 @@ const outIsRecording = op.outBool("Is Recording");
 const outIsPlayingBack = op.outBool("Is Playing Back");
 const outState = op.outString("State");
 const outBuffer = op.outObject("AudioBuffer Out", null, "audioBuffer");
+const outDataUrl = op.outString("Data URL");
 
 inDownloadButton.setUiAttribs({ "greyout": true });
 
@@ -63,6 +64,12 @@ mediaRecorder.addEventListener("dataavailable", (e) =>
     if (blob)
     {
         inDownloadButton.setUiAttribs({ "greyout": !blob });
+        let reader = new FileReader();
+        reader.onload = function (e)
+        {
+            outDataUrl.set(e.target.result);
+        };
+        reader.readAsDataURL(blob);
     }
 
     if (!isIOS)
@@ -291,6 +298,7 @@ inClearBuffer.onTriggered = () =>
     outBuffer.set(audioBuffer);
     blob = null;
     inDownloadButton.setUiAttribs({ "greyout": true });
+    outDataUrl.set(null);
 };
 
 inDownloadButton.onTriggered = () =>

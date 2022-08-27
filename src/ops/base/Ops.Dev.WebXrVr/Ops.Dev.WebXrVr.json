@@ -25,6 +25,11 @@
                 "name": "Stop"
             },
             {
+                "type": 0,
+                "name": "Show Button",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "Button Style"
             }
