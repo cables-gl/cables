@@ -27,6 +27,11 @@
             },
             {
                 "type": 0,
+                "name": "32bit float tex",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Size index",
                 "subType": "integer"
             }
