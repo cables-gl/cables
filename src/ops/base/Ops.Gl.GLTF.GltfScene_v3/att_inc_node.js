@@ -155,8 +155,8 @@ const gltfNode = class
 
         if (name && !this._animActions[name])
         {
-            console.log(this._animActions);
-            return console.log("no action found:", name);
+            // console.log("no action found:", name,this._animActions);
+            return null;
         }
 
         // else console.log("YES action found:", name);
