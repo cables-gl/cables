@@ -14,6 +14,8 @@ const siblingsPort = op.outObject("Children");
 const valuePort = op.outString("Result", defaultValuePort.get());
 const outIndex = op.outNumber("Index");
 
+defaultValuePort.setUiAttribs({ "title": "Input" });
+
 // vars
 const el = document.createElement("div");
 el.addEventListener("dblclick", function ()
