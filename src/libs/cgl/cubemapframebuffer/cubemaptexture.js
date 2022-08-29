@@ -9,6 +9,7 @@ class CubemapTexture
         this.id = CABLES.uuid();
         this.name = options.name || "unknown cubemap texture";
         this._cgl = cgl;
+        this.textureType = Texture.TYPE_DEFAULT;
 
         this._cubemapFaces = [
             this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -32,6 +33,9 @@ class CubemapTexture
         this.unpackAlpha = options.unpackAlpha || true;
 
         this.flip = options.flip || true;
+
+
+        if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
 
         this._cgl.profileData.profileTextureNew++;
 
@@ -89,7 +93,19 @@ class CubemapTexture
             }
             else
             {
-                this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+                if (this.textureType == Texture.TYPE_FLOAT)
+                {
+                    console.log("cubemap FLOAT TEX");
+                    this._cgl.gl.getExtension("EXT_color_buffer_float");
+                    this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                    this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+
+                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+                }
+                else
+                {
+                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+                }
             }
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }

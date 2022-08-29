@@ -84,7 +84,7 @@ class CubemapFramebuffer
         this.texture = new CubemapTexture(this._cgl, {
             "width": this.width,
             "height": this.height,
-            // "isFloatingPointTexture": true,
+            "isFloatingPointTexture": options.isFloatingPointTexture,
             "filter": this._options.filter,
             "wrap": this._options.wrap,
             "name": this.name + " cubemaptexture"
