@@ -22,28 +22,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
-                "name": "Size index",
-                "subType": "integer"
+                "type": 0,
+                "name": "32bit float tex",
+                "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Size",
-                "subType": "string"
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "2",
-                "name": "cubemap"
+                "type": 2,
+                "name": "cubemap",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.CubeMap.CubeMapCamera_v2"

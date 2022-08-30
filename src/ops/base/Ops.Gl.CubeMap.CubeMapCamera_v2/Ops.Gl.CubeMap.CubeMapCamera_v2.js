@@ -1,16 +1,32 @@
-const cgl = op.patch.cgl;
+const
+    inTrigger = op.inTrigger("Render"),
+    inFp = op.inBool("32bit float tex", false),
+    outTrigger = op.outTrigger("Next"),
+    outTex = op.outTexture("cubemap");
 
-const inTrigger = op.inTrigger("Render");
-const outTrigger = op.outTrigger("Next");
-const outTex = op.outTexture("cubemap");
+const cgl = op.patch.cgl;
 
 const inSize = op.inDropDown("Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 let sizeChanged = true;
 inSize.onChange = () => sizeChanged = true;
 
-const fb = new CGL.CubemapFramebuffer(cgl, Number(inSize.get()), Number(inSize.get()), {
+let fb = null;
 
-});
+inFp.onChange = createFb;
+
+createFb();
+
+function createFb()
+{
+    if (fb)fb.delete();
+    fb = new CGL.CubemapFramebuffer(
+        cgl,
+        Number(inSize.get()),
+        Number(inSize.get()),
+        {
+            "isFloatingPointTexture": inFp.get()
+        });
+}
 
 inTrigger.onTriggered = function ()
 {
