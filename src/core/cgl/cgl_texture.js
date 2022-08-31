@@ -482,36 +482,9 @@ Texture.prototype.getInfoOneLine = function ()
 
 Texture.prototype.getInfo = function ()
 {
-    const obj = {};
-
-    obj.name = this.name;
-    obj["power of two"] = this.isPowerOfTwo();
-    obj.size = this.width + " x " + this.height;
-
-    let targetString = this.texTarget;
-    if (this.texTarget == this._cgl.gl.TEXTURE_2D) targetString = "TEXTURE_2D";
-    obj.target = targetString;
-
-    obj.unpackAlpha = this.unpackAlpha;
-
-    if (this.textureType == Texture.TYPE_FLOAT) obj.textureType = "TYPE_FLOAT";
-    else if (this.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
-    else if (this.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
-    else obj.textureType = "UNKNOWN";
-
-    if (this.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
-    else if (this.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";
-    else if (this.wrap == Texture.WRAP_MIRRORED_REPEAT) obj.wrap = "WRAP_MIRRORED_REPEAT";
-    else obj.wrap = "UNKNOWN";
-
-    if (this.filter == Texture.FILTER_NEAREST) obj.filter = "FILTER_NEAREST";
-    else if (this.filter == Texture.FILTER_LINEAR) obj.filter = "FILTER_LINEAR";
-    else if (this.filter == Texture.FILTER_MIPMAP) obj.filter = "FILTER_MIPMAP";
-    // else if (this.filter == Texture.FILTER_ANISOTROPIC) obj.filter = "FILTER_ANISOTROPIC";
-
-    else obj.filter = "UNKNOWN";
-    return obj;
+    Texture.getTexInfo(this);
 };
+
 
 Texture.prototype._setFilter = function ()
 {
@@ -945,6 +918,42 @@ Texture.isPowerOfTwo = function (x)
 {
     return x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384;
 };
+
+Texture.getTexInfo = function (tex)
+{
+    const obj = {};
+
+    obj.name = tex.name;
+    obj["power of two"] = Texture.isPowerOfTwo();
+    obj.size = tex.width + " x " + tex.height;
+
+    let targetString = tex.texTarget;
+    if (tex.texTarget == tex._cgl.gl.TEXTURE_2D) targetString = "TEXTURE_2D";
+    obj.target = targetString;
+
+    obj.unpackAlpha = tex.unpackAlpha;
+
+    if (tex.cubemap)obj.cubemap = true;
+
+    if (tex.textureType == Texture.TYPE_FLOAT) obj.textureType = "TYPE_FLOAT";
+    else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
+    else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
+    else obj.textureType = "UNKNOWN";
+
+    if (tex.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
+    else if (tex.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";
+    else if (tex.wrap == Texture.WRAP_MIRRORED_REPEAT) obj.wrap = "WRAP_MIRRORED_REPEAT";
+    else obj.wrap = "UNKNOWN";
+
+    if (tex.filter == Texture.FILTER_NEAREST) obj.filter = "FILTER_NEAREST";
+    else if (tex.filter == Texture.FILTER_LINEAR) obj.filter = "FILTER_LINEAR";
+    else if (tex.filter == Texture.FILTER_MIPMAP) obj.filter = "FILTER_MIPMAP";
+    // else if (this.filter == Texture.FILTER_ANISOTROPIC) obj.filter = "FILTER_ANISOTROPIC";
+
+    else obj.filter = "UNKNOWN";
+    return obj;
+};
+
 
 Texture.FILTER_NEAREST = 0;
 Texture.FILTER_LINEAR = 1;
