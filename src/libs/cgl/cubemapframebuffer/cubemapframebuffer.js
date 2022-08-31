@@ -273,7 +273,7 @@ class CubemapFramebuffer
 
         if (this._options.clear)
         {
-            this._cgl.gl.clearColor(1, 1, 1, 1);
+            this._cgl.gl.clearColor(0, 0, 0, 1);
             this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
         }
 
