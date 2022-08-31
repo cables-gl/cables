@@ -92,7 +92,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.TextureProjection2"
+        "name": "Ops.Gl.ShaderEffects.TextureProjection_v2"
     },
     "changelog": [
         {

@@ -14,16 +14,12 @@
     vec2 MOD_ntc=MOD_tc;
 
     #ifdef MOD_MAP_SCREEN
-        // MOD_ntc.y-=0.5;
-
         MOD_ntc=(vec2(gl_FragCoord.x,gl_FragCoord.y)/vec2(MOD_viewPortW,MOD_viewPortH));
 
-        // tc+=MOD_pos;
         MOD_ntc-=vec2(0.5,0.5);
         MOD_ntc*=1.0/MOD_scale;
         MOD_ntc+=vec2(0.5,0.5);
         MOD_ntc-=MOD_offset;
-        // tc.y=1.0-tc.y-0.5;
     #endif
 
 
@@ -40,18 +36,7 @@
             col.a=MOD_color.a;
         #endif
 
-        // #ifdef MOD_BLEND_NORMAL
-        //     col.rgb=mix(col.rgb,MOD_color.rgb,MOD_amount);
-        // #endif
-        // #ifdef MOD_BLEND_ADD
-        //     col.rgb+=MOD_color.rgb*MOD_amount;
-        // #endif
-        // #ifdef MOD_BLEND_MUL
-        //     col.rgb=mix(col.rgb,col.rgb*MOD_color.rgb,MOD_amount);
-        // #endif
-
         col=cgl_blendPixel(col,MOD_color,MOD_amount*col.a);
-
 
     #ifdef MOD_DISCARD
     }
