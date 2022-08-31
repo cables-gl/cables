@@ -101,7 +101,7 @@ class CubemapTexture
             {
                 if (this.textureType == Texture.TYPE_FLOAT)
                 {
-                    console.log("cubemap FLOAT TEX", this._options);
+                    // console.log("cubemap FLOAT TEX", this._options);
                     this._cgl.gl.getExtension("EXT_color_buffer_float");
                     this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
                     this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
