@@ -1,0 +1,172 @@
+{
+    "authorName": "pandur",
+    "id": "9be647c2-7afd-40ed-b669-9826ea6a50ca",
+    "created": 1661780124355,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Target index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "blendMode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Use Texture Alpha",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mapping index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Discard",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.TextureProjection2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.MapTextureLayer renamed to Ops.Gl.ShaderEffects.TextureProjection",
+            "author": "pandur",
+            "date": 1595755811366
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595755878412
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.TextureProjection",
+            "author": "pandur",
+            "date": 1661780124356
+        },
+        {
+            "message": "Ops.User.pandur.TextureProjection2 renamed to Ops.Gl.ShaderEffects.TextureProjection_v2",
+            "author": "pandur",
+            "date": 1661945948745
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "summary": "texture projection on meshes",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "0Xgj7wKl7Ko",
+        "DW9U5tv1GHM"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Scale",
+                "text": "rescale incoming texture"
+            },
+            {
+                "name": "Blendmode index",
+                "text": "normal, multiply, add"
+            },
+            {
+                "name": "Target index",
+                "text": "color or pointsize"
+            },
+            {
+                "name": "Amount",
+                "text": "strength of texture colors or pointsize values"
+            },
+            {
+                "name": "Use Texture Alpha",
+                "text": "applies alpha channel from incoming texture. "
+            },
+            {
+                "name": "Texture",
+                "text": "currently texture is auto sized to a square ratio"
+            },
+            {
+                "name": "Mapping index",
+                "text": "XY, XZ, YZ, or screenspace"
+            },
+            {
+                "name": "Discard",
+                "text": "limit repeat of texture"
+            },
+            {
+                "name": "WorldSpace",
+                "text": "use world position coordinates"
+            }
+        ]
+    },
+    "caniusequery": "",
+    "exampleProjectId": "fJHt0e"
+}
