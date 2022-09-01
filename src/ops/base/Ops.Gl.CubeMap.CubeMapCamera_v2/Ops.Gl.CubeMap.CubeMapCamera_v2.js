@@ -46,6 +46,7 @@ inTrigger.onTriggered = function ()
             fb.renderEndCubemapFace();
         }
         fb.renderEnd();
+        outTex.set(CGL.Texture.getEmptyCubemapTexture(cgl));
         outTex.set(fb.getTextureColor());
     }
     else outTrigger.trigger();

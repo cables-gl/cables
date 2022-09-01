@@ -190,7 +190,7 @@ function captureIrradianceCubemap(size)
     else
     {
         IrradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-            "isFloatingPointTexture": true, // TODO
+            "isFloatingPointTexture": false,
             "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
@@ -235,7 +235,7 @@ function capturePrefilteredCubemap(size)
     else
     {
         PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
-            // "isFloatingPointTexture": false, // should be true, but not possible :/
+            "isFloatingPointTexture": false,
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
@@ -430,9 +430,3 @@ inTrigger.onTriggered = function ()
     outTrigger.trigger();
     cgl.frameStore.pbrEnvStack.pop();
 };
-
-// inTriggerRecapture.onTriggered = function ()
-// {
-//     IrradianceSizeChanged = true;
-//     PrefilteredSizeChanged = true;
-// };

@@ -1,0 +1,124 @@
+{
+    "id": "5e5fa774-ecb1-44dd-8c47-ce4a592f68f1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1591784129764
+        },
+        {
+            "message": "Ops.User.cables.CubeMapProjection renamed to Ops.Gl.CubeMap.CubeMapProjection",
+            "author": "cables",
+            "date": 1591796266258
+        },
+        {
+            "message": "Ops.Gl.CubeMap.CubeMapProjection renamed to Ops.Gl.CubeMap.CubemapToEquirectangularTexture",
+            "author": "pandur",
+            "date": 1594815899510
+        },
+        {
+            "message": "cloned op from Ops.Gl.CubeMap.CubemapToEquirectangularTexture",
+            "author": "pandur",
+            "date": 1661925372393
+        },
+        {
+            "message": "Ops.User.pandur.CubemapToEquirectangularTextureV2 renamed to Ops.Gl.CubeMap.CubemapToEquirectangularTexture_v2",
+            "author": "pandur",
+            "date": 1661926925906
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1661925372392,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "In Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Cubemap"
+            },
+            {
+                "type": 0,
+                "name": "Projection index",
+                "group": "Options",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "group": "Options",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "group": "Options",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Options",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Options",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Out Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Gl.CubeMap.CubemapToEquirectangularTexture_v2"
+    },
+    "summary": "visualize cubemap as folded texture or equirectangular texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "In Trigger",
+                "text": "trigger input"
+            },
+            {
+                "name": "Cubemap",
+                "text": "cubemap to visualize"
+            },
+            {
+                "name": "Equirectangular",
+                "text": "visualisation mode: switch between folded cube and equirectangular"
+            },
+            {
+                "name": "Width",
+                "text": "width of the resulting texture"
+            },
+            {
+                "name": "Height",
+                "text": "height of the resulting texture"
+            },
+            {
+                "name": "Out Trigger",
+                "text": "trigger out"
+            },
+            {
+                "name": "Cubemap Projection",
+                "text": "texture output"
+            }
+        ]
+    },
+    "exampleProjectId": "pNZHYa"
+}

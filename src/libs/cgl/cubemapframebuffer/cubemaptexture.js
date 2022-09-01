@@ -10,6 +10,7 @@ class CubemapTexture
         this.name = options.name || "unknown cubemap texture";
         this._cgl = cgl;
         this.textureType = Texture.TYPE_DEFAULT;
+        this._options = options;
 
         this._cubemapFaces = [
             this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -40,6 +41,11 @@ class CubemapTexture
         this._cgl.profileData.profileTextureNew++;
 
         this.setSize(options.width, options.height);
+    }
+
+    getInfo()
+    {
+        return Texture.getTexInfo(this);
     }
 
     setSize(w, h)
@@ -95,7 +101,7 @@ class CubemapTexture
             {
                 if (this.textureType == Texture.TYPE_FLOAT)
                 {
-                    console.log("cubemap FLOAT TEX");
+                    // console.log("cubemap FLOAT TEX", this._options);
                     this._cgl.gl.getExtension("EXT_color_buffer_float");
                     this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
                     this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
