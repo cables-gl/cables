@@ -72,10 +72,8 @@ function update()
             mat4.getRotation(q, m);
             arrRot.push(q[0], q[1], q[2], q[3]);
 
-            // if (n.translation) arrPos.push(n.translation[0], n.translation[1], n.translation[2]);
-            // else arrPos.push(0, 0, 0);
-
-            if (n.scale) arrScale.push(n.scale[0], n.scale[1], n.scale[2]);
+            if (node._tempAnimScale) arrScale.push(node._tempAnimScale[0], node._tempAnimScale[1], node._tempAnimScale[2]);
+            else if (n.scale) arrScale.push(n.scale[0], n.scale[1], n.scale[2]);
             else arrScale.push(1, 1, 1);
         }
     }

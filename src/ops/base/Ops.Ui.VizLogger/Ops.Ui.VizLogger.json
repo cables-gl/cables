@@ -37,10 +37,14 @@
             {
                 "type": 5,
                 "name": "String"
+            },
+            {
+                "type": 1,
+                "name": "Clear"
             }
         ],
         "portsOut": [],
-        "name": "Ops.Dev.VizLogger"
+        "name": "Ops.Ui.VizLogger"
     },
     "authorName": "pandur",
     "created": 1645174874478,

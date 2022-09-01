@@ -25,6 +25,7 @@ const outBuffer = op.outObject("AudioBuffer Out", null, "audioBuffer");
 const outDataUrl = op.outString("Data URL");
 
 inDownloadButton.setUiAttribs({ "greyout": true });
+outDataUrl.ignoreValueSerialize = true;
 
 const inputGain = audioCtx.createGain();
 const outputGain = audioCtx.createGain();
