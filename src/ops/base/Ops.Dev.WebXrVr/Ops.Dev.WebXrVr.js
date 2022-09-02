@@ -9,6 +9,9 @@ const
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");"),
 
     inRender2Tex = op.inBool("Render to texture", false),
+
+    inShader = op.inObject("Shader", null, "shader"),
+
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
 
     next = op.outTrigger("Next"),
@@ -84,41 +87,40 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-vr", {}
-    ).then(
-        async (session) =>
-        {
-            xrSession = session;
-            outSession.set(true);
-
-            xrSession.requestReferenceSpace("local").then(
-                (refSpace) =>
-                {
-                    xrReferenceSpace = refSpace;
-                });
-
-            if (xrSession)
+    xr.requestSession("immersive-vr", {})
+        .then(
+            async (session) =>
             {
-                outVr.set(true);
+                xrSession = session;
+                outSession.set(true);
 
-                console.log("started vr session....");
+                xrSession.requestReferenceSpace("local").then(
+                    (refSpace) =>
+                    {
+                        xrReferenceSpace = refSpace;
+                    });
 
-                await cgl.gl.makeXRCompatible();
+                if (xrSession)
+                {
+                    outVr.set(true);
 
-                let canvas = cgl.canvas;
-                webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": false });
+                    console.log("started vr session....");
 
-                xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+                    await cgl.gl.makeXRCompatible();
 
-                xrSession.requestAnimationFrame(onXRFrame);
-            }
-        },
-        (err) =>
-        {
-            // error....
-            console.log("Failed to start immersive AR session.");
-            console.log(err);
-        });
+                    let canvas = cgl.canvas;
+                    webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+
+                    xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+                    xrSession.requestAnimationFrame(onXRFrame);
+                }
+            },
+            (err) =>
+            {
+                // error....
+                console.log("Failed to start immersive AR session.");
+                console.log(err);
+            });
 }
 
 function onXRFrame(hrTime, xrFrame)
@@ -156,7 +158,7 @@ function onXRFrame(hrTime, xrFrame)
 
         if (inRender2Tex.get()) r2texStart();
 
-        cgl.gl.clearColor(0, 1, 0, 1);
+        cgl.gl.clearColor(0, 0, 0, 1);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         for (let i = 0; i < xrViewerPose.views.length; i++)
@@ -168,11 +170,15 @@ function onXRFrame(hrTime, xrFrame)
 
             msEyes[i] = performance.now() - start;
             renderPost();
+
+            if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
         }
 
         if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
         if (inRender2Tex.get()) r2texEnd();
+
+        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, glLayer.framebuffer); // gllayer has a default framebuffer.... interferes with cables fb stack...
 
         nextPre.trigger();
 
@@ -182,18 +188,17 @@ function onXRFrame(hrTime, xrFrame)
             cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
             cgl.pushPMatrix();
-            mat4.identity(cgl.pMatrix);
-            mat4.ortho(cgl.pMatrix, 0, cgl.canvas.width, cgl.canvas.height, 0, -10, 10);
-
             cgl.pushViewMatrix();
 
-            cgl.gl.viewport(0, 0, cgl.canvas.width, cgl.canvas.height);
+            mat4.ortho(cgl.pMatrix, 0, glLayer.framebufferWidth, glLayer.framebufferHeight, 0, -10, 10);
+            cgl.gl.viewport(0, 0, glLayer.framebufferWidth, glLayer.framebufferHeight);
 
             if (!mesh)rebuildRectangle();
 
             cgl.setTexture(0, outTex.get().tex);
 
-            mesh.render(shader);
+            if (inShader.isLinked())mesh.render(inShader.get());
+            else mesh.render(shader);
 
             cgl.popPMatrix();
             cgl.popViewMatrix();
@@ -291,8 +296,8 @@ msaa.onChange = () =>
 
 function r2texStart()
 {
-    const w = cgl.canvas.width;
-    const h = cgl.canvas.height;
+    const w = glLayer.framebufferWidth;
+    const h = glLayer.framebufferHeight;
 
     if (!fb)
     {
@@ -345,7 +350,7 @@ let geom = new CGL.Geometry("webxr final texture draw rectangle");
 let mesh = null;
 const shader = new CGL.Shader(cgl, "fullscreenrectangle");
 shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
-shader.setSource(shader.getDefaultVertexShader(), attachments.present_frag);
+shader.setSource(attachments.present_vert, attachments.present_frag);
 
 function rebuildRectangle()
 {
@@ -355,16 +360,14 @@ function rebuildRectangle()
 
     let xx = 0, xy = 0;
 
-    const w = cgl.canvas.width;
-    const h = cgl.canvas.height;
-
-    console.log("mesh ", w, h);
+    const w = glLayer.framebufferWidth;
+    const h = glLayer.framebufferHeight;
 
     geom.vertices = new Float32Array([
-        xx + w, xy + h, 0.0,
-        xx, xy + h, 0.0,
-        xx + w, xy, 0.0,
-        xx, xy, 0.0
+        xx + w, xy + h, 0,
+        xx, xy + h, 0,
+        xx + w, xy, 0,
+        xx, xy, 0
     ]);
 
     let tc = null;
