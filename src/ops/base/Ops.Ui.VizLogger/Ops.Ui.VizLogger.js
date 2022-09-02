@@ -1,8 +1,14 @@
 const inNum = op.inFloat("Number", 0);
 const inString = op.inString("String", "");
+const inClear = op.inTriggerButton("Clear");
 
 let lines = 10;
 const arr = [];
+
+inClear.onTriggered = () =>
+{
+    arr.length = 0;
+};
 
 inString.onChange = () =>
 {

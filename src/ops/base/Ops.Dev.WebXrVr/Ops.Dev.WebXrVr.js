@@ -7,6 +7,10 @@ const
     inStop = op.inTriggerButton("Stop"),
     inShowButton = op.inBool("Show Button", true),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");"),
+
+    inRender2Tex = op.inBool("Render to texture", false),
+    msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
+
     next = op.outTrigger("Next"),
     nextPre = op.outTrigger("Render After Eyes"),
     outPose = op.outObject("Viewer Pose"),
@@ -15,13 +19,19 @@ const
     outMat = op.outArray("Matrix"),
     outElement = op.outObject("DOM Overlay Ele", null, "element"),
     outSession = op.outBoolNum("In Session"),
-    outMs = op.outArray("Ms per eye");
+    outMs = op.outArray("Ms per eye"),
+    outTex = op.outTexture("Texture"),
+    outDepth = op.outTexture("Texture Depth");
 
 const cgl = op.patch.cgl;
 const canvas = op.patch.cgl.canvas.parentElement;
 
+op.setPortGroup("Startbutton", [inButtonStyle, inShowButton]);
+op.setPortGroup("Texture", [inRender2Tex, msaa]);
+
 let msEyes = [0, 0];
 let xr = navigator.xr;
+let fb = null;
 
 let hadError = false;
 let buttonEle = null;
@@ -35,12 +45,13 @@ let xrViewerPose = null;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
-if (xr)
-    xr.isSessionSupported("immersive-vr").then((r) =>
-    {
-        console.log("xr detected", r);
-        if (r) initButton();
-    });
+if (xr) xr.isSessionSupported("immersive-vr").then((r) =>
+{
+    console.log("xr detected", r);
+    if (r) initButton();
+    else removeButton();
+});
+else removeButton();
 
 op.onDelete = () =>
 {
@@ -117,7 +128,7 @@ function onXRFrame(hrTime, xrFrame)
     let xrSession = xrFrame.session;
     xrSession.requestAnimationFrame(onXRFrame);
 
-    console.log(xrSession);
+    // console.log(xrSession);
 
     try
     {
@@ -143,7 +154,9 @@ function onXRFrame(hrTime, xrFrame)
 
         cgl.renderStart(cgl);
 
-        cgl.gl.clearColor(0, 0, 0, 1);
+        if (inRender2Tex.get()) r2texStart();
+
+        cgl.gl.clearColor(0, 1, 0, 1);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         for (let i = 0; i < xrViewerPose.views.length; i++)
@@ -154,11 +167,37 @@ function onXRFrame(hrTime, xrFrame)
             renderEye(xrViewerPose.views[i]);
 
             msEyes[i] = performance.now() - start;
+            renderPost();
         }
 
         if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
+        if (inRender2Tex.get()) r2texEnd();
+
         nextPre.trigger();
+
+        if (inRender2Tex.get())
+        {
+            cgl.gl.clearColor(0, 0, 1, 1);
+            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
+            cgl.pushPMatrix();
+            mat4.identity(cgl.pMatrix);
+            mat4.ortho(cgl.pMatrix, 0, cgl.canvas.width, cgl.canvas.height, 0, -10, 10);
+
+            cgl.pushViewMatrix();
+
+            cgl.gl.viewport(0, 0, cgl.canvas.width, cgl.canvas.height);
+
+            if (!mesh)rebuildRectangle();
+
+            cgl.setTexture(0, outTex.get().tex);
+
+            mesh.render(shader);
+
+            cgl.popPMatrix();
+            cgl.popViewMatrix();
+        }
 
         cgl.renderEnd(cgl);
 
@@ -192,6 +231,13 @@ function renderPre()
     CGL.MESH.lastMesh = null;
 }
 
+function renderPost()
+{
+    cgl.popDepthTest();
+    cgl.popDepthWrite();
+    cgl.popDepthFunc();
+}
+
 function renderEye(view)
 {
     cgl.pushBlend(true);
@@ -213,6 +259,7 @@ function renderEye(view)
 
     cgl.popViewMatrix();
     cgl.popPMatrix();
+    cgl.popBlend();
 }
 
 function initButton()
@@ -234,4 +281,124 @@ function initButton()
 function removeButton()
 {
     if (buttonEle)buttonEle.remove();
+}
+
+msaa.onChange = () =>
+{
+    if (fb) fb.delete();
+    fb = null;
+};
+
+function r2texStart()
+{
+    const w = cgl.canvas.width;
+    const h = cgl.canvas.height;
+
+    if (!fb)
+    {
+        if (fb) fb.delete();
+
+        let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+        let selectFilter = CGL.Texture.FILTER_NEAREST;
+
+        let ms = true;
+        let msSamples = 4;
+
+        if (msaa.get() == "none")
+        {
+            msSamples = 0;
+            ms = false;
+        }
+        if (msaa.get() == "2x") msSamples = 2;
+        if (msaa.get() == "4x") msSamples = 4;
+        if (msaa.get() == "8x") msSamples = 8;
+
+        fb = new CGL.Framebuffer2(cgl, w, h,
+            {
+                "name": "render2texture " + op.id,
+                "isFloatingPointTexture": false,
+                "multisampling": ms,
+                "wrap": selectedWrap,
+                "filter": selectFilter,
+                "depth": true,
+                "multisamplingSamples": msSamples,
+                "clear": true
+            });
+
+        outDepth.set(fb.getTextureDepth());
+    }
+
+    if (fb.getWidth() != Math.ceil(w) || fb.getHeight() != Math.ceil(h)) fb.setSize(w, h);
+
+    fb.renderStart(cgl);
+}
+
+function r2texEnd()
+{
+    fb.renderEnd(cgl);
+
+    outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+    outTex.set(fb.getTextureColor());
+}
+
+let geom = new CGL.Geometry("webxr final texture draw rectangle");
+let mesh = null;
+const shader = new CGL.Shader(cgl, "fullscreenrectangle");
+shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
+shader.setSource(shader.getDefaultVertexShader(), attachments.present_frag);
+
+function rebuildRectangle()
+{
+    // const currentViewPort = cgl.getViewPort();
+
+    // if (currentViewPort[2] == w && currentViewPort[3] == h && mesh) return;
+
+    let xx = 0, xy = 0;
+
+    const w = cgl.canvas.width;
+    const h = cgl.canvas.height;
+
+    console.log("mesh ", w, h);
+
+    geom.vertices = new Float32Array([
+        xx + w, xy + h, 0.0,
+        xx, xy + h, 0.0,
+        xx + w, xy, 0.0,
+        xx, xy, 0.0
+    ]);
+
+    let tc = null;
+
+    // if (flipY.get())
+    //     tc = new Float32Array([
+    //         1.0, 0.0,
+    //         0.0, 0.0,
+    //         1.0, 1.0,
+    //         0.0, 1.0
+    //     ]);
+    // else
+    tc = new Float32Array([
+        1.0, 1.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0
+    ]);
+
+    // if (flipX.get())
+    // {
+    //     tc[0] = 0.0;
+    //     tc[2] = 1.0;
+    //     tc[4] = 0.0;
+    //     tc[6] = 1.0;
+    // }
+
+    geom.setTexCoords(tc);
+
+    geom.verticesIndices = new Uint16Array([2, 1, 0, 3, 1, 2]);
+    geom.vertexNormals = new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,]);
+    geom.tangents = new Float32Array([-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0]);
+    geom.biTangents == new Float32Array([0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0]);
+
+    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
+    else mesh.setGeom(geom);
 }

@@ -5,26 +5,40 @@ const
 
     inModelComplexity = op.inSwitch("Model Complexity", ["0", "1", "2"], "1"),
     inSmoothLandmarks = op.inBool("Smooth Landmarks", true),
-    inEnableSegmentation = op.inBool("Enable Segmentation", true),
-    inSmoothSegmentation = op.inBool("Smooth Segmentation", true),
 
     inMinDetectionConfidence = op.inFloatSlider("Min Detection Confidence", 0.5),
     inMinTrackingConfidence = op.inFloatSlider("Min Tracking Confidence", 0.5),
 
+    inEnableSegmentation = op.inBool("Enable Segmentation", false),
+    inUpdateSeg = op.inTrigger("Update Texture"),
+    inSmoothSegmentation = op.inBool("Smooth Segmentation", false),
+    flipX = op.inValueBool("Flip X", false),
+    flipY = op.inValueBool("Flip Y", false),
+
     outPoints = op.outArray("Points"),
+    outTex = op.outTexture("Segmentation Mask"),
     outLandmarks = op.outArray("Landmarks"),
     outLines = op.outArray("Lines"),
     outFound = op.outNumber("Found");
 
+op.setPortGroup("Segmentation", [inEnableSegmentation, inSmoothSegmentation, flipX, flipY, inUpdateSeg]);
+
 const pose = new Pose({ "locateFile": (file) =>
     `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}` });
 
+const cgl = op.patch.cgl;
 let camera = null;
 let lines = [];
+let segMaskBitmap = null;
 let points = [];
 let points2 = [];
+let tc = null;
+let canvasTexture = null;
 
 updateOptions();
+
+flipX.onChange =
+flipY.onChange = initCopyShader;
 
 inSmoothLandmarks.onChange =
     inModelComplexity.onChange =
@@ -43,6 +57,17 @@ function updateOptions()
         "minDetectionConfidence": inMinDetectionConfidence.get(),
         "minTrackingConfidence": inMinTrackingConfidence.get()
     });
+
+    inSmoothSegmentation.setUiAttribs({ "greyout": !inEnableSegmentation.get() });
+    flipX.setUiAttribs({ "greyout": !inEnableSegmentation.get() });
+    flipY.setUiAttribs({ "greyout": !inEnableSegmentation.get() });
+}
+
+function initCopyShader()
+{
+    if (!tc)tc = new CGL.CopyTexture(cgl, "webcamFlippedTexture", { "shader": attachments.texcopy_frag });
+    tc.bgShader.toggleDefine("FLIPX", flipX.get());
+    tc.bgShader.toggleDefine("FLIPY", !flipY.get());
 }
 
 inEle.onChange = () =>
@@ -65,6 +90,26 @@ inEle.onChange = () =>
     camera.start();
 };
 
+inUpdateSeg.onTriggered = () =>
+{
+    outTex.set(CGL.Texture.getEmptyTexture(cgl));
+    if (!segMaskBitmap) return;
+
+    if (!canvasTexture)
+    {
+        canvasTexture = new CGL.Texture.createFromImage(cgl, segMaskBitmap);
+    }
+    else
+        canvasTexture.initTexture(segMaskBitmap, CGL.Texture.FILTER_LINEAR);
+
+    if (tc)
+    {
+        outTex.set(tc.copy(canvasTexture));
+    }
+    else
+        outTex.set(canvasTexture);
+};
+
 pose.onResults((r) =>
 {
     if (r && r.poseLandmarks)
@@ -74,6 +119,11 @@ pose.onResults((r) =>
             points[i * 3] = (r.poseLandmarks[i].x - 0.5) * 2.0;
             points[i * 3 + 1] = (r.poseLandmarks[i].y - 0.5) * -2;
             points[i * 3 + 2] = r.poseLandmarks[i].z * 1.0;
+        }
+
+        if (r.segmentationMask)
+        {
+            segMaskBitmap = r.segmentationMask;
         }
 
         outPoints.set(null);
