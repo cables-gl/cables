@@ -17,7 +17,7 @@ const gltfNode = class
         this._gltf = gltf;
         this.absMat = mat4.create();
         this.addTranslate = null;
-        this._tempAnimScale = [1, 1, 1];
+        this._tempAnimScale = null;
         this.addMulMat = null;
         this.updateMatrix();
         this._animActions = {};
@@ -263,6 +263,7 @@ const gltfNode = class
 
             if (playAnims && this._animScale)
             {
+                if (!this._tempAnimScale) this._tempAnimScale = [1, 1, 1];
                 this._tempAnimScale[0] = this._animScale[0].getValue(_time);
                 this._tempAnimScale[1] = this._animScale[1].getValue(_time);
                 this._tempAnimScale[2] = this._animScale[2].getValue(_time);

@@ -42,6 +42,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 2,
+                "name": "Shader",
+                "objType": "shader"
+            },
+            {
                 "type": 0,
                 "name": "MSAA index",
                 "group": "Texture",
