@@ -27,11 +27,30 @@
             {
                 "type": 0,
                 "name": "Show Button",
+                "group": "Startbutton",
                 "subType": "boolean"
             },
             {
                 "type": 5,
-                "name": "Button Style"
+                "name": "Button Style",
+                "group": "Startbutton"
+            },
+            {
+                "type": 0,
+                "name": "Render to texture",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Shader",
+                "objType": "shader"
+            },
+            {
+                "type": 0,
+                "name": "MSAA index",
+                "group": "Texture",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -74,6 +93,16 @@
             {
                 "type": 3,
                 "name": "Ms per eye"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Texture Depth",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Dev.WebXrVr"

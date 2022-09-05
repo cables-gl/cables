@@ -4,6 +4,7 @@ const
 
     inRadius = op.inFloat("Radius", 1),
     inMass = op.inFloat("Mass", 1),
+    inNameIndex = op.inBool("Add index to name", true),
 
     inName = op.inString("Name", "emitterBody"),
 
@@ -41,6 +42,7 @@ let btVelocity = null;
 inRemove.onTriggered = removeAll;
 
 inExec.onLinkChanged =
+inNameIndex.onChange =
     op.onDelete = removeAll;
 
 function removeAll()
@@ -129,8 +131,6 @@ function spawn()
     body.setRollingFriction(inRollingFriction.get());
     body.setRestitution(inRestitution.get());
 
-    // console.log(bodies.length);
-
     let speed = inSpeed.get();
     let vx = inDirX.get() * speed;
     let vy = inDirY.get() * speed;
@@ -142,9 +142,13 @@ function spawn()
     body.setLinearVelocity(btVelocity);
 
     world.addRigidBody(body);
+
+    let name = inName.get() + "_" + countAll;
+    if (!inNameIndex.get())name = inName.get();
+
     world.setBodyMeta(body,
         {
-            "name": inName.get() + "_" + countAll
+            "name": name
         });
 
     motionState.setWorldTransform(transform);

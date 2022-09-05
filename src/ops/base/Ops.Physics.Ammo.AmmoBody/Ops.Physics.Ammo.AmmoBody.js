@@ -135,7 +135,6 @@ function setup()
     if (colShape)Ammo.destroy(colShape);
     colShape = null;
     // transform.setIdentity();
-
     // CABLES.AmmoWorld.copyCglTransform(cgl, transform);
 
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
@@ -268,16 +267,12 @@ function setup()
     updateBodyMeta();
 }
 
-// let transform = new Ammo.btTransform();
 function setPositions()
 {
     let posArr = inPositions.get();
 
     for (let i = 0; i < bodies.length; i++)
     {
-        // if (motionState)Ammo.destroy(motionState);
-
-        // let transform = null;
         bodies[i].getMotionState().getWorldTransform(tmpTrans);
 
         if (posArr)
@@ -285,7 +280,6 @@ function setPositions()
             cgl.pushModelMatrix();
 
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [
-                // i * 0.1, 0, 0]);
                 posArr[i * 3 + 0], posArr[i * 3 + 1], posArr[i * 3 + 2]]);
         }
         CABLES.AmmoWorld.copyCglTransform(cgl, tmpTrans);
@@ -293,8 +287,6 @@ function setPositions()
 
         bodies[i].getMotionState().setWorldTransform(tmpTrans);
         bodies[i].setWorldTransform(tmpTrans);
-
-        // if (posArr)
     }
 }
 
