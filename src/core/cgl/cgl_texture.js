@@ -887,6 +887,7 @@ Texture.createFromImage = function (cgl, img, options)
     texture.image = img;
     texture.width = img.width;
     texture.height = img.height;
+    if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
     texture.initTexture(img, options.filter);
 
     return texture;

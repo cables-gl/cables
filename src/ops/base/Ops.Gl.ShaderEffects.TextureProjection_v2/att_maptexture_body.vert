@@ -1,7 +1,3 @@
-// OUT vec4 MOD_pos;
-// UNI vec2 MOD_offset;
-// UNI float MOD_scale;
-// UNI float MOD_amount;
 OUT vec2 MOD_tc;
 
 const float MOD_DEG2RAD = 0.017453292519943;
