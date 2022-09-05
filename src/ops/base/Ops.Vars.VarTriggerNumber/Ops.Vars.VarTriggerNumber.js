@@ -1,5 +1,6 @@
-const val = op.inValueFloat("Value", 0),
+const
     trigger = op.inTriggerButton("Trigger"),
+    val = op.inValueFloat("Value", 0),
     next = op.outTrigger("Next");
 
 op.varName = op.inDropDown("Variable", [], "", true);
