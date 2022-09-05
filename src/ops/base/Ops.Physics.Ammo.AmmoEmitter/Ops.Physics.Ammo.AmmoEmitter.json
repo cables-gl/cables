@@ -36,6 +36,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Add index to name",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "Name"
             },
