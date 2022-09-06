@@ -10,6 +10,6 @@ The easiest way to contribute this to cables - for now - is to [write your user-
 
 We will then take a look at it and get back to you. Thanks for contributing!
 
-Please make sure beforehand that your code adheres to the guidelines in this documentation and is free of any licences that would prohibit commercial use, or include some "copyleft" clauses. 
-We prefer the [MIT Licence](https://opensource.org/licenses/MIT). Should we accept you contribution your code will also be put under MIT Licence and you will be properly credited.
+Please make sure beforehand that your code adheres to the guidelines in this documentation and is free of any licenses that would prohibit commercial use, or include some "copyleft" clauses. 
+We prefer the [MIT License](https://opensource.org/licenses/MIT). Should we accept you contribution your code will also be put under MIT License and you will be properly credited.
 

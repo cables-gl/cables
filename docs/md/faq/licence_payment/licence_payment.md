@@ -1,4 +1,4 @@
-# Licences and payment
+# Licenses and payment
 
 all the legal fun!
 
