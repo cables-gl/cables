@@ -7,4 +7,4 @@ IN vec2 MOD_tc;
 #endif
 
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES3}}
