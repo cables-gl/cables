@@ -1031,7 +1031,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
                                 // const took = performance.now() - startTime;
                                 // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                             }
-                            if (!found)console.error("could not linkl", obj.ops[iop].portsIn[ipi2].links[ili]);
                         }
                     }
                 }
@@ -1048,7 +1047,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
                                 found = true;
                                 this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
                             }
-                            if (!found)console.error("could not linkl", obj.ops[iop].portsIn[ipi2].links[ili]);
                         }
                     }
         }
