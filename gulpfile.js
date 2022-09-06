@@ -53,7 +53,7 @@ function _append_build_info()
 
 function _watch(done)
 {
-    gulp.watch("src/core/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), _append_build_info, _copy_ui));
+    gulp.watch("src/core/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _copy_ui, _core_libs_copy));
     gulp.watch("libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _external_libs, _append_build_info, _copy_ui));
     gulp.watch("src/libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _core_libs_copy));
     done();
