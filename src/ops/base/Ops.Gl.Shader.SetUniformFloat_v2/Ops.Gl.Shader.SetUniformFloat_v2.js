@@ -1,7 +1,13 @@
+// should be called setuniformfloat ?
+
+
 const
     inRender = op.inTrigger("Render"),
     inSelect = op.inValueSelect("Uniform"),
-    inValue = op.inValue("Value"),
+    inX = op.inValue("X",1),
+    inY = op.inValue("Y",1),
+    inZ = op.inValue("Z",1),
+    inW = op.inValue("W",1),
     next = op.outTrigger("Next"),
     outType = op.outString("Type");
 
@@ -27,8 +33,9 @@ inRender.onTriggered = function ()
     {
         outType.set(uniform.getType());
         const oldValue = uniform.getValue();
-        uniform.setValue(inValue.get());
-        // console.log(uniform);
+        // uniform.setValue([inX.get(),inY.get(),inZ.get(),inW.get()]);
+        uniform.setValue([inX.get(),inY.get(),inZ.get(),inW.get()]);
+        // console.log(oldValue.get);
         next.trigger();
         uniform.setValue(oldValue);
     }
@@ -47,10 +54,17 @@ function setupUniform()
 {
     if (shader)
     {
-        uniform = shader.getUniform(inSelect.get());
+        uniform = shader.getUniform( (inSelect.get()||"").split(" ")[0]);
 
-        if (!uniform) op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
-        else op.uiAttr({ "error": null });
+        if(uniform)
+        {
+            inY.setUiAttribs({ "greyout": uniform.getType()=="f" });
+            inZ.setUiAttribs({ "greyout": uniform.getType()=="f"||uniform.getType()=="2f" });
+            inW.setUiAttribs({ "greyout": uniform.getType()=="f"||uniform.getType()=="2f"||uniform.getType()=="3f" });
+        }
+
+        if (!uniform) op.setUiError("nouni", "uniform unknown", 1);//op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+        else op.setUiError("nouni", null);
 
         doSetupUniform = false;
     }
@@ -61,12 +75,12 @@ function setupShader()
     unis = shader.getUniforms();
 
     shaderLastCompile = shader.lastCompile;
-    const names = ["none"];
+    const names = ["..."];
 
     for (let i = 0; i < unis.length; i++)
     {
-        names.push(unis[i].getName());
-        // console.log(unis[i]);
+        if(unis[i].getType()=="f" || unis[i].getType()=="2f" || unis[i].getType()=="3f" ||unis[i].getType()=="4f")
+            names.push(unis[i].getName() + " (" + unis[i].getType() + ")");
     }
 
     inSelect.setUiAttribs({ "values": names });

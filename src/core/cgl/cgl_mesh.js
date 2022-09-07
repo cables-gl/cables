@@ -706,7 +706,7 @@ Mesh.prototype.render = function (shader)
 
     shader.bind();
 
-    if (shader.bindTextures) shader.bindTextures();
+    // if (shader.bindTextures) shader.bindTextures();
 
     // if(needsBind)
     this._bind(shader);

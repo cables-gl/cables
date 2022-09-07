@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "0df4242f-57d1-4219-b889-a713787642b7",
-    "created": 1534243130579,
+    "id": "9e6328da-457d-4d80-a881-dcab25a0e0f8",
+    "created": 1662556221198,
     "layout": {
         "portsIn": [
             {
@@ -15,7 +15,22 @@
             },
             {
                 "type": 0,
-                "name": "Value",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "W",
                 "subType": "number"
             }
         ],
@@ -29,7 +44,7 @@
                 "name": "Type"
             }
         ],
-        "name": "Ops.Gl.Shader.SetUniformValue"
+        "name": "Ops.User.pandur.SetUniformValue2"
     },
     "summary": "set a uniform value of the current shader",
     "docs": {
@@ -40,6 +55,16 @@
             "message": "Ops.Exp.Gl.Shader.SetUniformValue renamed to Ops.Gl.Shader.SetUniformValue",
             "author": "pandur",
             "date": 1613548289481
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.SetUniformValue",
+            "author": "pandur",
+            "date": 1662556221199
+        },
+        {
+            "message": "Ops.User.pandur.SetUniformValue2 renamed to Ops.Gl.Shader.SetUniformFloat_v2",
+            "author": "pandur",
+            "date": 1662567079136
         }
     ]
 }

@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "0df4242f-57d1-4219-b889-a713787642b7",
-    "created": 1534243130579,
+    "id": "e43be3e0-b75b-4881-95c3-2c6ee81bff8c",
+    "created": 1662554294106,
     "layout": {
         "portsIn": [
             {
@@ -14,9 +14,9 @@
                 "subType": "integer"
             },
             {
-                "type": 0,
-                "name": "Value",
-                "subType": "number"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             }
         ],
         "portsOut": [
@@ -29,7 +29,7 @@
                 "name": "Type"
             }
         ],
-        "name": "Ops.Gl.Shader.SetUniformValue"
+        "name": "Ops.User.pandur.SetUniformTexture"
     },
     "summary": "set a uniform value of the current shader",
     "docs": {
@@ -40,6 +40,16 @@
             "message": "Ops.Exp.Gl.Shader.SetUniformValue renamed to Ops.Gl.Shader.SetUniformValue",
             "author": "pandur",
             "date": 1613548289481
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.SetUniformValue",
+            "author": "pandur",
+            "date": 1662554294106
+        },
+        {
+            "message": "Ops.User.pandur.SetUniformTexture renamed to Ops.Gl.Shader.SetUniformTexture",
+            "author": "pandur",
+            "date": 1662567063395
         }
     ]
 }
