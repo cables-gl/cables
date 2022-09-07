@@ -29,7 +29,7 @@
                 "name": "Type"
             }
         ],
-        "name": "Ops.User.pandur.SetUniformTexture"
+        "name": "Ops.Gl.Shader.SetUniformTexture"
     },
     "summary": "set a uniform value of the current shader",
     "docs": {
