@@ -3,6 +3,7 @@ const
     inShape = op.inSwitch("Shape", ["Convex Hull", "Triangle Shape"], "Convex Hull"),
     inNames = op.inString("Filter Meshes", ""),
     inMass = op.inFloat("Mass kg", 0),
+
     inActive = op.inBool("Active", true),
     outNum = op.outNumber("Meshes", 0);
 
@@ -49,6 +50,9 @@ function update()
     if (!inActive.get()) return;
     if (!added || world != cgl.frameStore.ammoWorld) addToWorld();
 
+    if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0].body) == undefined)removeFromWorld();
+
+    ping();
     for (let i = 0; i < bodies.length; i++)
     {
         cgl.pushModelMatrix();
@@ -83,6 +87,13 @@ function removeFromWorld()
     added = false;
 }
 
+function ping()
+{
+    if (world)
+        for (let i = 0; i < bodies.length; i++)
+            world.pingBody(bodies[i].body);
+}
+
 function addToWorld()
 {
     scene = cgl.frameStore.currentScene;
@@ -110,8 +121,8 @@ function addToWorld()
 
         scene.nodes[i].transform(cgl, 0);
         scene.nodes[i].updateMatrix();
-        const sc = scene.nodes[i]._scale || [1, 1, 1];
 
+        const sc = scene.nodes[i]._scale || [1, 1, 1];
         const geom = scene.nodes[i].mesh.meshes[0].geom;
 
         if (inShape.get() == "Convex Hull")
