@@ -63,7 +63,6 @@ inExec.onLinkChanged =
     op.onDelete =
     inGeomSimplify.onChange =
     inGhostObject.onChange =
-    inActive.onChange =
     inGeom.onChange =
     inShape.onChange =
     inMass.onChange =
@@ -77,6 +76,14 @@ inExec.onLinkChanged =
     };
 
 inPosIndex.onChange = updateBodyMeta;
+
+inActive.onChange = () =>
+{
+    if (!inActive.get())
+    {
+        removeBody();
+    }
+};
 
 inActivate.onTriggered = () =>
 {
@@ -223,11 +230,18 @@ function setup()
     colShape.calculateLocalInertia(mass, localInertia);
 
     let num = 1;
-    let posArr = inPositions.get();
-
-    if (posArr && posArr.length)
+    let posArr = null;
+    if (inPositions.isLinked())
     {
-        num = Math.max(num, posArr.length / 3);
+        num = 0;
+        posArr = inPositions.get();
+
+        if (posArr && posArr.length)
+        {
+            num = Math.max(num, posArr.length / 3);
+        }
+
+        // console.log(num,JSON.stringify(posArr));
     }
 
     for (let i = 0; i < num; i++)

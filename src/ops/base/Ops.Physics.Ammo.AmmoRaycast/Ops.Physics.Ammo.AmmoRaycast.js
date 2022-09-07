@@ -36,6 +36,10 @@ function updateCoordsType()
 function update()
 {
     world = cgl.frameStore.ammoWorld;
+
+    // for(let i=0;i<world.bodies.length;i++)
+    // console.log(world.bodies[i]);
+
     if (!world) return;
 
     if (active.get())
@@ -83,6 +87,7 @@ function update()
             if (meta)
             {
                 world.emitEvent("rayCastHit", meta.name);
+
                 outName.set(meta.name);
             }
 
