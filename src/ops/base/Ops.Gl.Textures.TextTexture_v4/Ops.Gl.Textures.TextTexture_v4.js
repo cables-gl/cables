@@ -24,6 +24,7 @@ const
     texWidth = op.inValueInt("texture width", 512),
     texHeight = op.inValueInt("texture height", 128),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
+    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
@@ -65,12 +66,17 @@ align.onChange =
     texHeight.onChange =
     maximize.onChange = function () { needsRefresh = true; };
 
+wrap.onChange = () =>
+{
+    if (tex)tex.delete();
+    tex = null;
+    needsRefresh = true;
+};
+
 r.onChange = g.onChange = b.onChange = inOpacity.onChange = function ()
 {
     if (!drawMesh.get() || textureOut.isLinked())
-    {
         needsRefresh = true;
-    }
 };
 textureOut.onLinkChanged = () =>
 {
@@ -355,13 +361,18 @@ function refresh()
     outLines.set(strings.length);
     textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
+    let cgl_wrap = CGL.Texture.WRAP_REPEAT;
+    if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
     let f = CGL.Texture.FILTER_LINEAR;
     if (tfilter.get() == "nearest") f = CGL.Texture.FILTER_NEAREST;
     else if (tfilter.get() == "mipmap") f = CGL.Texture.FILTER_MIPMAP;
 
     if (!cachetexture.get() || !tex || !textureOut.get() || tex.width != fontImage.width || tex.height != fontImage.height || tex.anisotropic != parseFloat(aniso.get()))
     {
-        tex = new CGL.Texture.createFromImage(cgl, fontImage, { "filter": f, "anisotropic": parseFloat(aniso.get()) });
+        if (tex)tex.delete();
+        tex = new CGL.Texture.createFromImage(cgl, fontImage, { "filter": f, "anisotropic": parseFloat(aniso.get()), "wrap": cgl_wrap });
     }
 
     tex.flip = false;

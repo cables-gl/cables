@@ -1456,6 +1456,7 @@ Shader.prototype._bindTextures = function ()
 
     for (let i = 0; i < this._textureStackTex.length; i++)
     {
+        // console.log(this._textureStackTex.length, i);
         if (!this._textureStackTex[i] && !this._textureStackTexCgl[i])
         {
             this._log.warn("no texture for pushtexture", this._name);
@@ -1467,7 +1468,6 @@ Shader.prototype._bindTextures = function ()
             {
                 t = this._textureStackTexCgl[i].tex || CGL.Texture.getEmptyTexture(this._cgl).tex;
             }
-
 
             let bindOk = true;
 
@@ -1489,11 +1489,22 @@ Shader.prototype._bindTextures = function ()
 
 Shader.prototype.setUniformTexture = function (uni, tex)
 {
-    for (let i = 0; i < this._textureStackTex.length; i++)
+    for (let i = 0; i < this._textureStackUni.length; i++)
         if (this._textureStackUni[i] == uni)
         {
-            const old = this._textureStackTex[i];
-            this._textureStackTex[i] = tex;
+            const old = this._textureStackTex[i] || this._textureStackTexCgl[i];
+            if (tex.hasOwnProperty("tex"))
+            {
+                this._textureStackTexCgl[i] = tex;
+                this._textureStackTex[i] = null;
+            }
+            else
+            {
+                this._textureStackTexCgl[i] = null;
+                this._textureStackTex[i] = tex;
+            }
+
+            // this._textureStackTex[i] = tex;
             // this._cgl.setTexture(i, tex, this._textureStackType[i]);
             return old;
         }
@@ -1550,6 +1561,7 @@ Shader.prototype.popTexture = function ()
 {
     this._textureStackUni.pop();
     this._textureStackTex.pop();
+    this._textureStackTexCgl.pop();
     this._textureStackType.pop();
 };
 

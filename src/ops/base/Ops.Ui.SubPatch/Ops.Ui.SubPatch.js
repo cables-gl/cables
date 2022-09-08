@@ -285,7 +285,7 @@ function getSubPatchOutputOp()
 
     if (!patchOutputOP)
     {
-        op.patch.addOp("Ops.Ui.PatchOutput", { "subPatch": op.patchId.get() });
+        op.patch.addOp("Ops.Ui.PatchOutput", { "subPatch": op.patchId.get(), "translate": { "x": 0, "y": 0 } });
         patchOutputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchOutput");
 
         if (!patchOutputOP) op.warn("no patchinput2!");
@@ -299,7 +299,7 @@ function getSubPatchInputOp()
 
     if (!patchInputOP)
     {
-        op.patch.addOp("Ops.Ui.PatchInput", { "subPatch": op.patchId.get() });
+        op.patch.addOp("Ops.Ui.PatchInput", { "subPatch": op.patchId.get(), "translate": { "x": 0, "y": 0 } });
         patchInputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchInput");
         if (!patchInputOP) op.warn("no patchinput2!");
     }
@@ -332,7 +332,7 @@ op.addSubLink = function (p, p2)
     }
 
     const bounds = gui.patchView.getSubPatchBounds(op.patchId.get());
-    op.log("subpatchbounds", bounds);
+
     getSubPatchInputOp().uiAttr(
         {
             "translate":

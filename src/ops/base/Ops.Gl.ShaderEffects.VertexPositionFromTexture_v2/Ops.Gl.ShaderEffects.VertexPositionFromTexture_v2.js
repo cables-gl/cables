@@ -5,7 +5,6 @@ const
     trigger = op.outTrigger("Trigger");
 
 const cgl = op.patch.cgl;
-// let inTexUniform = null;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({

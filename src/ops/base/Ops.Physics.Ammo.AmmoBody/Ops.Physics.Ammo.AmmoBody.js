@@ -60,10 +60,8 @@ inExec.onLinkChanged =
     inFriction.onChange =
     inRestitution.onChange =
     inRollingFriction.onChange =
-    op.onDelete =
     inGeomSimplify.onChange =
     inGhostObject.onChange =
-    inActive.onChange =
     inGeom.onChange =
     inShape.onChange =
     inMass.onChange =
@@ -77,6 +75,12 @@ inExec.onLinkChanged =
     };
 
 inPosIndex.onChange = updateBodyMeta;
+op.onDelete = removeBody;
+
+inActive.onChange = () =>
+{
+    if (!inActive.get()) removeBody();
+};
 
 inActivate.onTriggered = () =>
 {
@@ -223,18 +227,20 @@ function setup()
     colShape.calculateLocalInertia(mass, localInertia);
 
     let num = 1;
-    let posArr = inPositions.get();
-
-    if (posArr && posArr.length)
+    let posArr = null;
+    if (inPositions.isLinked())
     {
-        num = Math.max(num, posArr.length / 3);
+        num = 0;
+        posArr = inPositions.get();
+
+        if (posArr && posArr.length)
+        {
+            num = Math.max(num, posArr.length / 3);
+        }
     }
 
     for (let i = 0; i < num; i++)
     {
-        // if (motionState)Ammo.destroy(motionState);
-
-        // let transform = null;
         let transform = new Ammo.btTransform();
 
         const motionState = new Ammo.btDefaultMotionState(transform);
@@ -306,39 +312,50 @@ function renderTransformed()
     if (!bodies.length) return;
     if (!inActive.get()) return;
 
-    for (let i = 0; i < bodies.length; i++)
-    {
-        const body = bodies[i];
-        let ms = body.getMotionState();
-        if (ms)
+    ping();
+
+    if (transformed.isLinked())
+        for (let i = 0; i < bodies.length; i++)
         {
-            ms.getWorldTransform(tmpTrans);
-            let p = tmpTrans.getOrigin();
-            let q = tmpTrans.getRotation();
+            const body = bodies[i];
+            let ms = body.getMotionState();
+            if (ms)
+            {
+                ms.getWorldTransform(tmpTrans);
+                let p = tmpTrans.getOrigin();
+                let q = tmpTrans.getRotation();
 
-            cgl.pushModelMatrix();
+                cgl.pushModelMatrix();
 
-            mat4.identity(cgl.mMatrix);
+                mat4.identity(cgl.mMatrix);
 
-            let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
+                let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
 
-            if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
-            if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
-            // if (inShape.get() == "Cylinder") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
-            if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
+                if (inShape.get() == "Sphere") scale = [inRadius.get() * 2, inRadius.get() * 2, inRadius.get() * 2];
+                if (inShape.get() == "Cone") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
+                // if (inShape.get() == "Cylinder") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
+                if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
-            mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
-            mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
+                mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
+                mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
 
-            transformed.trigger();
+                transformed.trigger();
 
-            cgl.popModelMatrix();
+                cgl.popModelMatrix();
+            }
         }
-    }
+}
+
+function ping()
+{
+    if (world)
+        for (let i = 0; i < bodies.length; i++)
+            world.pingBody(bodies[i]);
 }
 
 function update()
 {
+    if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0]) == undefined)removeBody();
     if (needsRemove)
     {
         removeBody();
@@ -352,7 +369,7 @@ function update()
         outRayHit.set(false);
         return;
     }
-    if (!bodies.length)setup(world);
+    if (!bodies.length) setup(world);
     if (!bodies.length) return;
     if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 

@@ -100,7 +100,13 @@ const AmmoWorld = class extends CABLES.EventTarget
 
     getBodyMeta(body)
     {
-        return this._bodymeta[body.getUserIndex()];
+        if (body) return this._bodymeta[body.getUserIndex()];
+    }
+
+    pingBody(body)
+    {
+        const m = this._bodymeta[body.getUserIndex()];
+        if (m) m.ping = Math.round(performance.now());
     }
 
     getBodyByName(n)
@@ -120,6 +126,20 @@ const AmmoWorld = class extends CABLES.EventTarget
         return this.bodies.length;
     }
 
+    _pingTimeout()
+    {
+        for (let i in this._bodymeta)
+        {
+            const b = this._bodymeta[i];
+            if (b.ping && performance.now() - b.ping > 50)
+            {
+                b.removed = true;
+                this.removeRigidBody(b.body);
+                // console.log("ping timeout", b);
+            }
+        }
+    }
+
     frame()
     {
         if (!this.world) return;
@@ -127,6 +147,7 @@ const AmmoWorld = class extends CABLES.EventTarget
 
         this.world.stepSimulation(deltaTime, 5);
 
+        this._pingTimeout();
         this._checkCollisions();
 
         this.lastTime = performance.now();
