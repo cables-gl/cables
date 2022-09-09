@@ -1,67 +1,74 @@
 
 // default / min /max values
-var PITCH_DEFAULT = 1;
-var PITCH_MIN = 0;
-var PITCH_MAX = 2;
-var RATE_DEFAULT = 1;
-var RATE_MIN = 0.1;
-var RATE_MAX = 10;
-var VOLUME_DEFAULT = 1;
-var VOLUME_MIN = 0;
-var VOLUME_MAX = 1;
+let PITCH_DEFAULT = 1;
+let PITCH_MIN = 0;
+let PITCH_MAX = 2;
+let RATE_DEFAULT = 1;
+let RATE_MIN = 0.1;
+let RATE_MAX = 10;
+let VOLUME_DEFAULT = 1;
+let VOLUME_MIN = 0;
+let VOLUME_MAX = 1;
 
 // vars
-var synth = window.speechSynthesis;
-var voiceMap = getVoiceMap(synth.getVoices());
-var voiceMapKeys = Object.keys(voiceMap);
+let synth = window.speechSynthesis;
+let voiceMap = getVoiceMap(synth.getVoices());
+let voiceMapKeys = Object.keys(voiceMap);
 
 // inputs
-var updateStatePort = op.inTrigger("Update State");
-var textPort = op.inString("Text", "Wazzup");
-var triggerPort = op.inTriggerButton("Say");
-var voicePort = op.addInPort( new CABLES.Port( op, "Voice", CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: voiceMapKeys } ) );
-var pitchPort = op.addInPort( new CABLES.Port( op, "Pitch", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PITCH_MIN, 'max': PITCH_MAX } ));
-pitchPort.set(PITCH_DEFAULT);
-var ratePort = op.addInPort( new CABLES.Port( op, "Rate", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': RATE_MIN, 'max': RATE_MAX } ));
-ratePort.set(RATE_DEFAULT);
-var volumePort = op.addInPort( new CABLES.Port( op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
-volumePort.set(VOLUME_DEFAULT);
-var sayOnTextChangePort = op.inValueBool("Say on Text Change", false);
-var pausePort = op.inTriggerButton("Pause");
-var resumePort = op.inTriggerButton("Resume");
-var cancelPort = op.inTriggerButton("Cancel");
+let updateStatePort = op.inTrigger("Update State");
+let textPort = op.inString("Text", "Wazzup");
+let triggerPort = op.inTriggerButton("Say");
+let voicePort = op.inDropDown("Voice", voiceMapKeys);
+let pitchPort = op.inFloatSlider("Pitch", PITCH_DEFAULT, PITCH_MIN, PITCH_MAX);
+let ratePort = op.inFloatSlider("Rate", RATE_DEFAULT, RATE_MIN, RATE_MAX);
+let volumePort = op.inFloatSlider("Volume", VOLUME_DEFAULT, VOLUME_MIN, VOLUME_MAX);
+
+let sayOnTextChangePort = op.inBool("Say on Text Change", false);
+let pausePort = op.inTriggerButton("Pause");
+let resumePort = op.inTriggerButton("Resume");
+let cancelPort = op.inTriggerButton("Cancel");
 
 // outputs
-var nextPort = op.outTrigger("Next");
-var speakingPort = op.outValue("Speaking", false);
-var pendingPort = op.outValue("Pending", false);
-var pausedPort = op.outValue("Paused", false);
+let nextPort = op.outTrigger("Next");
+let speakingPort = op.outBoolNum("Speaking", false);
+let pendingPort = op.outBoolNum("Pending", false);
+let pausedPort = op.outBoolNum("Paused", false);
 
 // change listeners
 updateStatePort.onTriggered = updateState;
 triggerPort.onTriggered = say;
-sayOnTextChangePort.onChange = function() {
-    if(sayOnTextChangePort.get()) {
+sayOnTextChangePort.onChange = function ()
+{
+    if (sayOnTextChangePort.get())
+    {
         textPort.onChange = say;
-    } else {
-        textPort.onChange = function() {}; // don't do anything
     }
-}
-pausePort.onTriggered = function() {
+    else
+    {
+        textPort.onChange = function () {}; // don't do anything
+    }
+};
+pausePort.onTriggered = function ()
+{
     synth.pause();
 };
-resumePort.onTriggered = function() {
+resumePort.onTriggered = function ()
+{
     synth.resume();
 };
-cancelPort.onTriggered = function() {
+cancelPort.onTriggered = function ()
+{
     synth.cancel();
 };
 
 // voices loaded callback (async)
-window.speechSynthesis.onvoiceschanged = function() {
+window.speechSynthesis.onvoiceschanged = function ()
+{
     voiceMap = getVoiceMap(synth.getVoices());
     voiceMapKeys = Object.keys(voiceMap);
-    if(CABLES.UI) {
+    if (CABLES.UI)
+    {
         voicePort.uiAttribs.values = voiceMapKeys; // update dropdown values
         gui.opParams.show(op); // update visible dropdown menu
     }
@@ -70,7 +77,8 @@ window.speechSynthesis.onvoiceschanged = function() {
 /**
  * Updates the state output ports
  */
-function updateState() {
+function updateState()
+{
     speakingPort.set(synth.speaking);
     pendingPort.set(synth.pending);
     pausedPort.set(synth.paused);
@@ -80,28 +88,31 @@ function updateState() {
 /**
  * says the text from text-port using voice voice
  */
-function say() {
-    var text = textPort.get();
-    var voice;
-    var voiceDisplayName = voicePort.get();
-    if( voiceDisplayName && voiceMap.hasOwnProperty(voiceDisplayName)) { // voices are loaded async, at start it may not be there
+function say()
+{
+    let text = textPort.get();
+    let voice;
+    let voiceDisplayName = voicePort.get();
+    if (voiceDisplayName && voiceMap.hasOwnProperty(voiceDisplayName))
+    { // voices are loaded async, at start it may not be there
         voice = voiceMap[voiceDisplayName];
     }
-    var utterance = new SpeechSynthesisUtterance(text);
-    if(voice) {
+    let utterance = new SpeechSynthesisUtterance(text);
+    if (voice)
+    {
         utterance.voice = voice;
     }
-    var pitch = pitchPort.get();
-    if(pitch < PITCH_MIN) { pitch = PITCH_MIN; }
-    else if(pitch > PITCH_MAX) { pitch = PITCH_MAX; }
+    let pitch = pitchPort.get();
+    if (pitch < PITCH_MIN) { pitch = PITCH_MIN; }
+    else if (pitch > PITCH_MAX) { pitch = PITCH_MAX; }
     utterance.pitch = pitch;
-    var rate = ratePort.get();
-    if(rate < RATE_MIN) { rate = RATE_MIN; }
-    else if(rate > RATE_MAX) { rate = RATE_MAX; }
+    let rate = ratePort.get();
+    if (rate < RATE_MIN) { rate = RATE_MIN; }
+    else if (rate > RATE_MAX) { rate = RATE_MAX; }
     utterance.rate = rate;
-    var volume = volumePort.get();
-    if(volume < VOLUME_MIN) { volume = VOLUME_MIN; }
-    else if(volume > VOLUME_MAX) { volume = VOLUME_MAX; }
+    let volume = volumePort.get();
+    if (volume < VOLUME_MIN) { volume = VOLUME_MIN; }
+    else if (volume > VOLUME_MAX) { volume = VOLUME_MAX; }
     utterance.volume = volume;
     synth.speak(utterance);
 }
@@ -110,12 +121,14 @@ function say() {
  * Returns a map of voices
  * e.g. { "Alex (de-DE)": { voice object }, ...}
  */
-function getVoiceMap(voices) {
-    var ret = {};
-    if(!voices || voices.length === 0) { return ret; }
+function getVoiceMap(voices)
+{
+    let ret = {};
+    if (!voices || voices.length === 0) { return ret; }
 
-    voices.forEach(function (voice) {
-        var key = voice.name + " (" + voice.lang + ")"
+    voices.forEach(function (voice)
+    {
+        let key = voice.name + " (" + voice.lang + ")";
         ret[key] = voice;
     });
     return ret;
