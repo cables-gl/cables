@@ -714,8 +714,6 @@ Shader.prototype.compile = function ()
                 srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
                 srcFrag += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
 
-                console.log(mod.title, mod.attributes);
-
                 if (mod.attributes)
                     for (let k = 0; k < mod.attributes.length; k++)
                     {
