@@ -666,11 +666,8 @@ Mesh.prototype.render = function (shader)
                     this._geom = this._geom.copy();
                 }
 
-                // console.log("geom unindex");
                 this._geom.unIndex();
                 changed = true;
-
-                // this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
             }
 
             if (!this._geom.getAttribute("attrBarycentric"))
@@ -682,7 +679,6 @@ Mesh.prototype.render = function (shader)
                 }
                 changed = true;
 
-                // console.log("geom calc bary");
                 this._geom.calcBarycentric();
             }
             if (changed) this.setGeom(this._geom);
