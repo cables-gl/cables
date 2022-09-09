@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Execute"),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
+    inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     inTexR = op.inTexture("R"),
     inSrcR = op.inSwitch("R Source", ["R", "G", "B", "A"], "R"),
@@ -40,6 +41,7 @@ inSrcRDefault.onChange =
     inTexR.onChange =
     inTexG.onChange =
     inTexB.onChange =
+    inPixel.onChange =
     inTexA.onChange = () =>
     {
         needsUpdate = true;
@@ -75,7 +77,7 @@ function initShader()
     tc = new CGL.CopyTexture(cgl, "combinetextures",
         {
             "shader": attachments.rgbe2fp_frag,
-            "isFloatingPointTexture": false,
+            "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
             "filter": filter,
             "wrap": wrap
         });
