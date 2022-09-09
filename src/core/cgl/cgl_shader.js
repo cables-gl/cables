@@ -218,6 +218,7 @@ Shader.prototype.copy = function ()
     shader.offScreenPass = this.offScreenPass;
     shader._extensions = this._extensions;
     shader.wireframe = this.wireframe;
+    shader._attributes = this._attributes;
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
@@ -658,6 +659,41 @@ Shader.prototype.compile = function ()
         let srcVert = "";
         let srcFrag = "";
 
+        // if (!addedAttributes)
+        // {
+        // addedAttributes = true;
+        console.log("ATTRIBS!!", this._attributes);
+        for (let k = 0; k < this._attributes.length; k++)
+        {
+            if (this._attributes[k].name && this._attributes[k].type)
+            {
+                srcHeadVert += ""
+                    .endl() + "#ifndef ATTRIB_" + this._attributes[k].name
+                    .endl() + "  #define ATTRIB_" + this._attributes[k].name
+                    .endl() + "  IN " + this._attributes[k].type + " " + this._attributes[k].name + ";"
+                    .endl() + "#endif";
+
+                if (this._attributes[k].nameFrag)
+                {
+                    srcHeadVert += ""
+                        .endl() + "#ifndef ATTRIB_" + this._attributes[k].nameFrag
+                        .endl() + "  #define ATTRIB_" + this._attributes[k].nameFrag
+                        .endl() + "  OUT " + this._attributes[k].type + " " + this._attributes[k].nameFrag + ";"
+                        .endl() + "#endif";
+
+                    srcVert += ""
+                        .endl() + this._attributes[k].nameFrag + "=" + this._attributes[k].name + ";";
+
+                    srcHeadFrag += ""
+                        .endl() + "#ifndef ATTRIB_" + this._attributes[k].nameFrag
+                        .endl() + "  #define ATTRIB_" + this._attributes[k].nameFrag
+                        .endl() + "  IN " + this._attributes[k].type + " " + this._attributes[k].nameFrag + ";"
+                        .endl() + "#endif";
+                }
+            }
+        }
+        // }
+
         for (let j = 0; j < this._modules.length; j++)
         {
             if (this._modules[j].name == this._moduleNames[i])
@@ -668,41 +704,6 @@ Shader.prototype.compile = function ()
                 srcVert += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
                 srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
 
-
-                if (!addedAttributes)
-                {
-                    addedAttributes = true;
-
-                    for (let k = 0; k < this._attributes.length; k++)
-                    {
-                        if (this._attributes[k].name && this._attributes[k].type)
-                        {
-                            srcHeadVert += ""
-                                .endl() + "#ifndef ATTRIB_" + this._attributes[k].name
-                                .endl() + "  #define ATTRIB_" + this._attributes[k].name
-                                .endl() + "  IN " + this._attributes[k].type + " " + this._attributes[k].name + ";"
-                                .endl() + "#endif";
-
-                            if (this._attributes[k].nameFrag)
-                            {
-                                srcHeadVert += ""
-                                    .endl() + "#ifndef ATTRIB_" + this._attributes[k].nameFrag
-                                    .endl() + "  #define ATTRIB_" + this._attributes[k].nameFrag
-                                    .endl() + "  OUT " + this._attributes[k].type + " " + this._attributes[k].nameFrag + ";"
-                                    .endl() + "#endif";
-
-                                srcVert += ""
-                                    .endl() + this._attributes[k].nameFrag + "=" + this._attributes[k].name + ";";
-                            }
-
-                            srcHeadFrag += ""
-                                .endl() + "#ifndef ATTRIB_" + this._attributes[k].nameFrag
-                                .endl() + "  #define ATTRIB_" + this._attributes[k].nameFrag
-                                .endl() + "  IN " + this._attributes[k].type + " " + this._attributes[k].nameFrag + ";"
-                                .endl() + "#endif";
-                        }
-                    }
-                }
 
                 srcHeadVert += this._modules[j].srcHeadVert || "";
                 srcHeadFrag += this._modules[j].srcHeadFrag || "";

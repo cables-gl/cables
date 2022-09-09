@@ -22,6 +22,18 @@
         MOD_ntc-=MOD_offset;
     #endif
 
+    #ifdef MOD_MAP_TEXCOORD
+        MOD_ntc=texCoord;
+    #endif
+
+    #ifdef MOD_MAP_TEXCOORD1
+        MOD_ntc=texCoord1;
+    #endif
+
+    #ifdef MOD_MAP_TEXCOORD2
+        MOD_ntc=texCoord2;
+    #endif
+
 
     #ifdef MOD_DISCARD
     if(MOD_ntc.x>0.0 && MOD_ntc.x<1.0 && MOD_ntc.y>0.0 && MOD_ntc.y<1.0)

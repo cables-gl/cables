@@ -9,6 +9,11 @@
                 "name": "render"
             },
             {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Scale",
                 "subType": "number"
@@ -64,11 +69,6 @@
                 "name": "Rot Z",
                 "group": "Rotation",
                 "subType": "number"
-            },
-            {
-                "type": 2,
-                "name": "Texture",
-                "objType": "texture"
             },
             {
                 "type": 0,

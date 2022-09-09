@@ -1,8 +1,9 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    inScale = op.inValue("Scale", 10),
+    inTex = op.inTexture("Texture"),
 
+    inScale = op.inValue("Scale", 10),
 
     inTarget = op.inSwitch("Target", ["Color", "Pointsize"], "Color"),
 
@@ -18,8 +19,7 @@ const
     inRotY = op.inFloat("Rot Y", 0),
     inRotZ = op.inFloat("Rot Z", 0),
 
-    inTex = op.inTexture("Texture"),
-    inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen"], "XY"),
+    inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen", "TexCoords 1", "TexCoords 2", "TexCoords 3"], "XY"),
     inDiscard = op.inValueBool("Discard"),
     inWorldSpace = op.inValueBool("WorldSpace");
 
@@ -40,8 +40,8 @@ mod.addModule({
     "srcBodyVert": attachments.maptexture_vert
 });
 
-let head_frag=attachments.maptexture_frag;
-head_frag=head_frag.replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode(3));
+let head_frag = attachments.maptexture_frag;
+head_frag = head_frag.replace("{{BLENDCODE}}", CGL.TextureEffect.getBlendCode(3));
 
 mod.addModule({
     "title": op.name,
@@ -73,6 +73,9 @@ function updateDefines()
     mod.toggleDefine("MOD_MAP_XY", inMethod.get() == "XY");
     mod.toggleDefine("MOD_MAP_XZ", inMethod.get() == "XZ");
     mod.toggleDefine("MOD_MAP_YZ", inMethod.get() == "YZ");
+    mod.toggleDefine("MOD_MAP_TEXCOORD", inMethod.get() == "TexCoords 1");
+    mod.toggleDefine("MOD_MAP_TEXCOORD1", inMethod.get() == "TexCoords 2");
+    mod.toggleDefine("MOD_MAP_TEXCOORD2", inMethod.get() == "TexCoords 3");
     mod.toggleDefine("MOD_MAP_SCREEN", inMethod.get() == "Screen");
     mod.toggleDefine("MOD_MAP_TRIPLANAR", inMethod.get() == "Triplanar");
     mod.toggleDefine("MOD_DISCARD", inDiscard.get());
