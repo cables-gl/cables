@@ -416,6 +416,37 @@ Shader.prototype.createStructUniforms = function ()
     return [structStrVert, structStrFrag];
 };
 
+Shader.prototype._getAttrSrc = function (attr, firstLevel)
+{
+    const r = {};
+    if (attr.name && attr.type)
+    {
+        r.srcHeadVert = "";
+        if (!firstLevel) r.srcHeadVert += "#ifndef ATTRIB_" + attr.name.endl();
+        r.srcHeadVert += "#define ATTRIB_" + attr.name.endl();
+        r.srcHeadVert += "IN " + attr.type + " " + attr.name + ";".endl();
+        if (!firstLevel) r.srcHeadVert += "#endif".endl();
+
+        if (attr.nameFrag)
+        {
+            r.srcHeadVert += "";
+            if (!firstLevel) r.srcHeadVert += "#ifndef ATTRIB_" + attr.nameFrag.endl();
+            r.srcHeadVert += "#define ATTRIB_" + attr.nameFrag.endl();
+            r.srcHeadVert += "OUT " + attr.type + " " + attr.nameFrag + ";".endl();
+            if (!firstLevel) r.srcHeadVert += "#endif".endl();
+
+            r.srcVert = "".endl() + attr.nameFrag + "=" + attr.name + ";";
+
+            r.srcHeadFrag = "";
+            if (!firstLevel) r.srcHeadFrag += "#ifndef ATTRIB_" + attr.nameFrag.endl();
+            r.srcHeadFrag += "#define ATTRIB_" + attr.nameFrag.endl();
+            r.srcHeadFrag += "IN " + attr.type + " " + attr.nameFrag + ";".endl();
+            if (!firstLevel) r.srcHeadFrag += "#endif".endl();
+        }
+    }
+    return r;
+};
+
 Shader.prototype.compile = function ()
 {
     const startTime = performance.now();
@@ -592,7 +623,6 @@ Shader.prototype.compile = function ()
     fs += "\n";
     vs += "\n";
 
-
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
@@ -652,47 +682,26 @@ Shader.prototype.compile = function ()
         return a.priority || 0 - b.priority || 0;
     });
 
-    let addedAttributes = false;
+
+    let addedAttribs = false;
 
     for (let i = 0; i < this._moduleNames.length; i++)
     {
         let srcVert = "";
         let srcFrag = "";
 
-        // if (!addedAttributes)
-        // {
-        // addedAttributes = true;
-        console.log("ATTRIBS!!", this._attributes);
-        for (let k = 0; k < this._attributes.length; k++)
+        if (!addedAttribs)
         {
-            if (this._attributes[k].name && this._attributes[k].type)
+            addedAttribs = true;
+
+            for (let k = 0; k < this._attributes.length; k++)
             {
-                srcHeadVert += ""
-                    .endl() + "#ifndef ATTRIB_" + this._attributes[k].name
-                    .endl() + "  #define ATTRIB_" + this._attributes[k].name
-                    .endl() + "  IN " + this._attributes[k].type + " " + this._attributes[k].name + ";"
-                    .endl() + "#endif";
-
-                if (this._attributes[k].nameFrag)
-                {
-                    srcHeadVert += ""
-                        .endl() + "#ifndef ATTRIB_" + this._attributes[k].nameFrag
-                        .endl() + "  #define ATTRIB_" + this._attributes[k].nameFrag
-                        .endl() + "  OUT " + this._attributes[k].type + " " + this._attributes[k].nameFrag + ";"
-                        .endl() + "#endif";
-
-                    srcVert += ""
-                        .endl() + this._attributes[k].nameFrag + "=" + this._attributes[k].name + ";";
-
-                    srcHeadFrag += ""
-                        .endl() + "#ifndef ATTRIB_" + this._attributes[k].nameFrag
-                        .endl() + "  #define ATTRIB_" + this._attributes[k].nameFrag
-                        .endl() + "  IN " + this._attributes[k].type + " " + this._attributes[k].nameFrag + ";"
-                        .endl() + "#endif";
-                }
+                const r = this._getAttrSrc(this._attributes[k], true);
+                if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
+                if (r.srcVert)srcVert += r.srcVert;
+                if (r.srcHeadFrag)srcHeadFrag += r.srcHeadFrag;
             }
         }
-        // }
 
         for (let j = 0; j < this._modules.length; j++)
         {
