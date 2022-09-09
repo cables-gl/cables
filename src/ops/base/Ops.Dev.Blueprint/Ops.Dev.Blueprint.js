@@ -92,8 +92,10 @@ const restorePorts = () =>
                     {
                         return subOp.storage &&
                         subOp.storage.blueprint &&
-                            subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId &&
-                        subOp.storage.blueprint.originalOpId == link.objOut;
+                        subOp.storage.blueprint.originalOpId == link.objOut &&
+                        op.storage &&
+                        op.storage.blueprint &&
+                        subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId;
                     });
                     if (parent)
                     {
@@ -138,8 +140,10 @@ const restorePorts = () =>
                     {
                         return subOp.storage &&
                         subOp.storage.blueprint &&
-                            subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId &&
-                        subOp.storage.blueprint.originalOpId == link.objIn;
+                            subOp.storage.blueprint.originalOpId == link.objIn &&
+                            op.storage &&
+                            op.storage.blueprint &&
+                            subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId;
                     });
                     if (parent)
                     {
@@ -266,7 +270,6 @@ function update()
     else
     {
         let exportId = op.id;
-        // if (op.storage && op.storage.blueprint && op.storage.blueprint.originalOpId) exportId = op.storage.blueprint.originalOpId;
         const blueprintUrl = op.patch.config.prefixJsPath + "js/" + exportId + ".json";
         CABLES.ajax(
             blueprintUrl,
@@ -511,8 +514,10 @@ function setupPorts(parentSubPatch)
                             {
                                 return subOp.storage &&
                                 subOp.storage.blueprint &&
-                                    subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId &&
-                                subOp.storage.blueprint.originalOpId == link.objOut;
+                                subOp.storage.blueprint.originalOpId == link.objOut &&
+                                op.storage &&
+                                op.storage.blueprint &&
+                                subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId;
                             });
                             if (parent)
                             {
@@ -595,8 +600,10 @@ function setupPorts(parentSubPatch)
                                 {
                                     return subOp.storage &&
                                     subOp.storage.blueprint &&
-                                        subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId &&
-                                        subOp.storage.blueprint.originalOpId == link.objIn;
+                                    subOp.storage.blueprint.originalOpId == link.objIn &&
+                                    op.storage &&
+                                    op.storage.blueprint &&
+                                    subOp.storage.blueprint.blueprintOpId == op.storage.blueprint.blueprintOpId;
                                 });
                                 if (parent)
                                 {
