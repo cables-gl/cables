@@ -37,7 +37,10 @@ mod.addModule({
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.maptexture_body_vert,
-    "srcBodyVert": attachments.maptexture_vert
+    "srcBodyVert": attachments.maptexture_vert,
+    "attributes": [
+        { "type": "vec2", "name": "attrTexCoord1", "nameFrag": "texCoord1" },
+        { "type": "vec2", "name": "attrTexCoord2", "nameFrag": "texCoord2" }]
 });
 
 let head_frag = attachments.maptexture_frag;

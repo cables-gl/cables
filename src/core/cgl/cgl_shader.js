@@ -705,19 +705,30 @@ Shader.prototype.compile = function ()
 
         for (let j = 0; j < this._modules.length; j++)
         {
-            if (this._modules[j].name == this._moduleNames[i])
+            const mod = this._modules[j];
+            if (mod.name == this._moduleNames[i])
             {
-                srcHeadVert += "\n//---- MOD: group:" + this._modules[j].group + ": idx:" + j + " - prfx:" + this._modules[j].prefix + " - " + this._modules[j].title + " ------\n";
-                srcHeadFrag += "\n//---- MOD: group:" + this._modules[j].group + ": idx:" + j + " - prfx:" + this._modules[j].prefix + " - " + this._modules[j].title + " ------\n";
+                srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
+                srcHeadFrag += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
 
-                srcVert += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
-                srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
+                srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
+                srcFrag += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
 
+                console.log(mod.title, mod.attributes);
 
-                srcHeadVert += this._modules[j].srcHeadVert || "";
-                srcHeadFrag += this._modules[j].srcHeadFrag || "";
-                srcVert += this._modules[j].srcBodyVert || "";
-                srcFrag += this._modules[j].srcBodyFrag || "";
+                if (mod.attributes)
+                    for (let k = 0; k < mod.attributes.length; k++)
+                    {
+                        const r = this._getAttrSrc(mod.attributes[k], false);
+                        if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
+                        if (r.srcVert)srcVert += r.srcVert;
+                        if (r.srcHeadFrag)srcHeadFrag += r.srcHeadFrag;
+                    }
+
+                srcHeadVert += mod.srcHeadVert || "";
+                srcHeadFrag += mod.srcHeadFrag || "";
+                srcVert += mod.srcBodyVert || "";
+                srcFrag += mod.srcBodyFrag || "";
 
                 srcHeadVert += "\n//---- end mod ------\n";
                 srcHeadFrag += "\n//---- end mod ------\n";
@@ -725,15 +736,15 @@ Shader.prototype.compile = function ()
                 srcVert += "\n//---- end mod ------\n";
                 srcFrag += "\n//---- end mod ------\n";
 
-                srcVert = srcVert.replace(/{{mod}}/g, this._modules[j].prefix);
-                srcFrag = srcFrag.replace(/{{mod}}/g, this._modules[j].prefix);
-                srcHeadVert = srcHeadVert.replace(/{{mod}}/g, this._modules[j].prefix);
-                srcHeadFrag = srcHeadFrag.replace(/{{mod}}/g, this._modules[j].prefix);
+                srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
+                srcFrag = srcFrag.replace(/{{mod}}/g, mod.prefix);
+                srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
+                srcHeadFrag = srcHeadFrag.replace(/{{mod}}/g, mod.prefix);
 
-                srcVert = srcVert.replace(/MOD_/g, this._modules[j].prefix);
-                srcFrag = srcFrag.replace(/MOD_/g, this._modules[j].prefix);
-                srcHeadVert = srcHeadVert.replace(/MOD_/g, this._modules[j].prefix);
-                srcHeadFrag = srcHeadFrag.replace(/MOD_/g, this._modules[j].prefix);
+                srcVert = srcVert.replace(/MOD_/g, mod.prefix);
+                srcFrag = srcFrag.replace(/MOD_/g, mod.prefix);
+                srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
+                srcHeadFrag = srcHeadFrag.replace(/MOD_/g, mod.prefix);
             }
         }
 
