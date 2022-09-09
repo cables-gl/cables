@@ -65,12 +65,14 @@ UNI float tonemappingExposure;
 
 IN vec2 texCoord;
 #ifdef USE_LIGHTMAP
+    #ifndef ATTRIB_texCoord1
     #ifndef VERTEX_COLORS
         IN vec2 texCoord1;
     #else
         #ifndef VCOL_LIGHTMAP
             IN vec2 texCoord1;
         #endif
+    #endif
     #endif
 #endif
 IN vec4 FragPos;
