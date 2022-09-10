@@ -5,77 +5,77 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Update State"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Say"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Voice",
-                "subType": "string"
+                "subType": "select box"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pitch",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rate",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Volume",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Say on Text Change",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Pause"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Resume"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Cancel"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speaking",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pending",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Paused",
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.Say2"
+        "name": "Ops.WebAudio.TextToSpeech.Say_v2"
     },
     "changelog": [
         {

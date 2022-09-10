@@ -30,23 +30,11 @@ el.addEventListener("dblclick", function ()
     inputValuePort.set(defaultValuePort.get());
 });
 
-op.onLoaded = op.onInit = function ()
-{
-    inputValuePort.set(defaultValuePort.get());
-};
-
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
-// var value = document.createElement('div');
-// value.textContent = DEFAULT_VALUE_DEFAULT;
-// value.classList.add('sidebar__item-value-label');
-// el.appendChild(value);
-// var input = document.createElement('div');
-// input.classList.add('sidebar__toggle-input');
-// el.appendChild(input);
 
 const icon = document.createElement("div");
 icon.classList.add("icon_toggle");
@@ -61,11 +49,9 @@ greyOut.style.display = "none";
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
-defaultValuePort.onChange = onDefaultValueChanged;
 inputValuePort.onChange = onInputValuePortChanged;
 op.onDelete = onDelete;
 setDefaultValueButtonPort.onTriggered = setDefaultValue;
-// op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
 
 function setDefaultValue()
 {
@@ -83,7 +69,6 @@ function onInputClick()
     {
         valuePort.set(true);
         inputValuePort.set(true);
-        // value.textContent = 'true';
         icon.classList.add("icon_toggle_true");
         icon.classList.remove("icon_toggle_false");
     }
@@ -94,7 +79,6 @@ function onInputClick()
 
         valuePort.set(false);
         inputValuePort.set(false);
-        // value.textContent = 'false';
     }
     if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
 }
@@ -106,35 +90,19 @@ function onInputValuePortChanged()
     {
         el.classList.add("sidebar__toggle--active");
         valuePort.set(true);
-        // value.textContent = 'true';
     }
     else
     {
         el.classList.remove("sidebar__toggle--active");
         valuePort.set(false);
-        // value.textContent = 'false';
     }
-}
-
-function onDefaultValueChanged()
-{
-    /*
-    var defaultValue = defaultValuePort.get();
-    if(defaultValue) {
-        el.classList.add('sidebar__toggle--active');
-        valuePort.set(true);
-    } else {
-        el.classList.remove('sidebar__toggle--active');
-        valuePort.set(false);
-    }
-    */
 }
 
 function onLabelTextChanged()
 {
-    const labelText = labelPort.get();
-    label.textContent = labelText;
-    if (CABLES.UI) op.setTitle("Toggle: " + labelText);
+    const text = labelPort.get();
+    label.textContent = text;
+    if (CABLES.UI) op.setTitle("Toggle: " + text);
 }
 
 function onParentChanged()
@@ -149,14 +117,14 @@ function onParentChanged()
     else if (el.parentElement) el.parentElement.removeChild(el);
 }
 
-function showElement(el)
+function showElement(element)
 {
-    if (el) el.style.display = "block";
+    if (element) element.style.display = "block";
 }
 
-function hideElement(el)
+function hideElement(element)
 {
-    if (el) el.style.display = "none";
+    if (element) element.style.display = "none";
 }
 
 function onDelete()
@@ -164,9 +132,9 @@ function onDelete()
     removeElementFromDOM(el);
 }
 
-function removeElementFromDOM(el)
+function removeElementFromDOM(element)
 {
-    if (el && el.parentNode && el.parentNode.removeChild) el.parentNode.removeChild(el);
+    if (element && element.parentNode && element.parentNode.removeChild) element.parentNode.removeChild(el);
 }
 
 inGreyOut.onChange = function ()

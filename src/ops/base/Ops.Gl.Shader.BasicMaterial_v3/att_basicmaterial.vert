@@ -1,11 +1,7 @@
-IN vec3 vPosition;
-IN vec2 attrTexCoord;
-IN vec3 attrVertNormal;
-IN float attrVertIndex;
 
 {{MODULES_HEAD}}
 
-OUT vec3 norm;
+// OUT vec3 norm;
 OUT vec2 texCoord;
 OUT vec2 texCoordOrig;
 

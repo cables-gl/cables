@@ -17,6 +17,7 @@ class ShaderModifier
         this._modulesChanged = false;
         this.needsTexturePush = false;
         this._lastShader = null;
+        this._attributes = [];
 
         if (this._cgl.glVersion == 1)
         {
@@ -361,6 +362,15 @@ class ShaderModifier
     addUniformStructBoth(structName, uniformName, members)
     {
         this.addUniformStruct(structName, uniformName, members, "both");
+    }
+
+    addAttribute(attr)
+    {
+        for (let i = 0; i < this._attributes.length; i++)
+        {
+            if (this._attributes[i].name == attr.name && this._attributes[i].nameFrag == attr.nameFrag) return;
+        }
+        this._attributes.push(attr);
     }
 
     pushTexture(uniformName, tex, texType)

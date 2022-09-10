@@ -6,7 +6,12 @@ UNI vec3 camPos;
 IN vec3  vPosition;
 IN vec2  attrTexCoord;
 #ifdef USE_LIGHTMAP
-IN vec2 attrTexCoord1;
+    #ifndef ATTRIB_attrTexCoord1
+        IN vec2 attrTexCoord1;
+        OUT vec2 texCoord1;
+        #define ATTRIB_attrTexCoord1
+        #define ATTRIB_texCoord1
+    #endif
 #endif
 IN vec3  attrVertNormal;
 IN vec3  attrTangent;
@@ -19,9 +24,7 @@ IN vec4 attrVertColor;
 {{MODULES_HEAD}}
 
 OUT vec2 texCoord;
-#ifdef USE_LIGHTMAP
-OUT vec2 texCoord1;
-#endif
+
 OUT vec4 FragPos;
 OUT mat3 TBN;
 OUT vec3 norm;
@@ -44,7 +47,7 @@ void main()
 {
     mat4 mMatrix = modelMatrix; // needed to make vertex effects work
     #ifdef USE_LIGHTMAP
-    texCoord1 = attrTexCoord1;
+        texCoord1 = attrTexCoord1;
     #endif
     texCoord = attrTexCoord;
     texCoord.y = 1.0 - texCoord.y;
@@ -56,9 +59,9 @@ void main()
     {{MODULE_VERTEX_POSITION}}
 
     #ifndef INSTANCING
-    FragPos = mMatrix * pos;
+        FragPos = mMatrix * pos;
     #else
-    FragPos = instMat * pos;
+        FragPos = instMat * pos;
     #endif
 
     #ifndef INSTANCING

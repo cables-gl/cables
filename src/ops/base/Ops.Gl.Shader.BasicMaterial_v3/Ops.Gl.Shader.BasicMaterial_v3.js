@@ -9,8 +9,15 @@ op.toWorkPortsNeedToBeLinked(render);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "basicmaterialnew");
+shader.addAttribute({ "type": "vec3", "name": "vPosition" });
+shader.addAttribute({ "type": "vec2", "name": "attrTexCoord" });
+shader.addAttribute({ "type": "vec3", "name": "attrVertNormal", "nameFrag": "norm" });
+shader.addAttribute({ "type": "float", "name": "attrVertIndex" });
+
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+
 shader.setSource(attachments.basicmaterial_vert, attachments.basicmaterial_frag);
+
 shaderOut.set(shader);
 
 render.onTriggered = doRender;
@@ -48,7 +55,6 @@ const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
 const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 // texture coords
-
 const
     diffuseRepeatX = op.inValue("diffuseRepeatX", 1),
     diffuseRepeatY = op.inValue("diffuseRepeatY", 1),
