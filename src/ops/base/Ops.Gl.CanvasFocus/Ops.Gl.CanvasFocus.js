@@ -1,7 +1,14 @@
-const hasFocus = op.outBool("has focus");
+const
+    inFocus = op.inTriggerButton("Focus"),
+    hasFocus = op.outBool("has focus");
 
 op.onDelete = removeListeners;
 addListeners();
+
+inFocus.onTriggered = () =>
+{
+    op.patch.cgl.canvas.focus();
+};
 
 function onFocus()
 {
