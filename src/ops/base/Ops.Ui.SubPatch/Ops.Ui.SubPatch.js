@@ -118,6 +118,17 @@ function addPortListener(newPort, newPortInPatch)
             newPort.onChange = function ()
             {
                 newPortInPatch.set(newPort.get());
+                if (!newPort.isLinked())
+                {
+                    for (let i = 0; i < data.ports.length; i++)
+                    {
+                        if (data.ports[i].name === newPort.name)
+                        {
+                            data.ports[i].value = newPort.get();
+                        }
+                    }
+                    saveData();
+                }
             };
         }
     }
@@ -150,6 +161,11 @@ function setupPorts()
             {
                 newPort.setUiAttribs({ "objType": ports[i].objType });
                 newPortInPatch.setUiAttribs({ "objType": ports[i].objType });
+            }
+            if (ports[i].value)
+            {
+                newPort.set(ports[i].value);
+                newPortInPatch.set(ports[i].value);
             }
             addPortListener(newPort, newPortInPatch);
         }
