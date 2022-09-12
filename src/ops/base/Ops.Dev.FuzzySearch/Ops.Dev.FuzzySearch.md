@@ -1,1 +1,0 @@
-This Op uses the fuse.js library to provide their capabilities of doing a fuzzysearch over an array of objects.
