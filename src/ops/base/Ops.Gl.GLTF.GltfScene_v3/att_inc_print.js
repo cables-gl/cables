@@ -6,6 +6,17 @@ function closeTab()
     tab = null;
 }
 
+function formatVec(arr)
+{
+    const nums = [];
+    for (let i = 0; i < arr.length; i++)
+    {
+        nums.push(Math.round(arr[i] * 1000) / 1000);
+    }
+
+    return nums.join(",");
+}
+
 function printNode(html, node, level)
 {
     if (!gltf) return;
@@ -29,6 +40,17 @@ function printNode(html, node, level)
 
     if (node.mesh && node.mesh.meshes.length)html += "<span class=\"icon icon-cube\"></span>&nbsp;";
     else html += "<span class=\"icon icon-box-select\"></span> &nbsp;";
+
+    if (node._node.translation || node._node.rotation || node._node.scale)
+    {
+        let info = "";
+
+        if (node._node.translation)info += "Translate: `" + formatVec(node._node.translation) + "` || ";
+        if (node._node.rotation)info += "Rotation: `" + formatVec(node._node.rotation) + "` || ";
+        if (node._node.scale)info += "Scale: `" + formatVec(node._node.scale) + "` || ";
+
+        html += "<span class=\"icon icon-gizmo info\" data-info=\"" + info + "\"></span> &nbsp;";
+    }
 
     html += node.name + "</td><td></td>";
 
@@ -204,8 +226,6 @@ function printInfo()
 
     let sizeBufferViews = [];
     sizes.meshes = 0;
-
-    console.log(gltf);
 
     for (let i = 0; i < gltf.json.meshes.length; i++)
     {

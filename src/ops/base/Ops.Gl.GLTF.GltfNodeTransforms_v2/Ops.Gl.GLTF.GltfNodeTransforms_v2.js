@@ -51,14 +51,13 @@ function update()
 
             const tr = vec3.create();
 
-            const m = node.modelMatAbs();
+            let m = node.modelMatAbs();
             // const m=node.modelMatLocal();
             // console.log(node.modelMatLocal())
 
-            if (worldspace)
+            if (!worldspace)
             {
-                // mat4.sub(m,cgl.mMatrix,m);
-                // mat4.mul(m,m,cgl.mMatrix);
+                m = node.modelMatLocal();
             }
 
             mat4.getTranslation(tr, m);
