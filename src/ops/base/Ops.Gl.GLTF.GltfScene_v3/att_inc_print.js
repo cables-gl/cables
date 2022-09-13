@@ -41,17 +41,6 @@ function printNode(html, node, level)
     if (node.mesh && node.mesh.meshes.length)html += "<span class=\"icon icon-cube\"></span>&nbsp;";
     else html += "<span class=\"icon icon-box-select\"></span> &nbsp;";
 
-    if (node._node.translation || node._node.rotation || node._node.scale)
-    {
-        let info = "";
-
-        if (node._node.translation)info += "Translate: `" + formatVec(node._node.translation) + "` || ";
-        if (node._node.rotation)info += "Rotation: `" + formatVec(node._node.rotation) + "` || ";
-        if (node._node.scale)info += "Scale: `" + formatVec(node._node.scale) + "` || ";
-
-        html += "<span class=\"icon icon-gizmo info\" data-info=\"" + info + "\"></span> &nbsp;";
-    }
-
     html += node.name + "</td><td></td>";
 
     if (node.mesh)
@@ -92,13 +81,30 @@ function printNode(html, node, level)
     }
 
     html += "<td>";
+
+    if (node._node.translation || node._node.rotation || node._node.scale)
+    {
+        let info = "";
+
+        if (node._node.translation)info += "Translate: `" + formatVec(node._node.translation) + "` || ";
+        if (node._node.rotation)info += "Rotation: `" + formatVec(node._node.rotation) + "` || ";
+        if (node._node.scale)info += "Scale: `" + formatVec(node._node.scale) + "` || ";
+
+        html += "<span class=\"icon icon-gizmo info\" data-info=\"" + info + "\"></span> &nbsp;";
+    }
+
     if (node._animRot || node._animScale || node._animTrans)
     {
-        if (node._animRot) html += "Rot ";
-        if (node._animScale) html += "Scale ";
-        if (node._animTrans) html += "Trans ";
+        let info = "Animated: ";
+        if (node._animRot) info += "Rot ";
+        if (node._animScale) info += "Scale ";
+        if (node._animTrans) info += "Trans ";
+
+        html += "<span class=\"icon icon-clock info\" data-info=\"" + info + "\"></span>&nbsp;";
     }
-    else html += "None";
+
+    if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
+
     html += "</td>";
 
     html += "<td>";
@@ -173,7 +179,7 @@ function printInfo()
     html += " <th>Mesh</th>";
     html += " <th>Skin</th>";
     html += " <th>Material</th>";
-    html += " <th>Anim</th>";
+    html += " <th>Transform</th>";
     html += " <th>Expose</th>";
     html += " <th></th>";
     html += "</tr>";
