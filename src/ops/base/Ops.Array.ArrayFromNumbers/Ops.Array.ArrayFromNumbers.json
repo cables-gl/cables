@@ -27,6 +27,11 @@
             },
             {
                 "type": 0,
+                "name": "Slider",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Index 0",
                 "subType": "number"
             },
