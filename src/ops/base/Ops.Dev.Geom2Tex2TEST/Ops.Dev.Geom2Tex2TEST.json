@@ -1,0 +1,79 @@
+{
+    "id": "d3435879-6b19-460b-911c-87ae5a8d00ad",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663227442753
+        },
+        {
+            "message": "Ops.User.pandur.Geom2Tex2 renamed to Ops.Dve.Geom2Tex2TEST",
+            "author": "pandur",
+            "date": 1663256604502
+        },
+        {
+            "message": "Ops.Dve.Geom2Tex2TEST renamed to Ops.Dev.Geom2Tex2TEST",
+            "author": "pandur",
+            "date": 1663256622622
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663227445962,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Tex Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Randomize",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total Vertices",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.User.pandur.Geom2Tex2"
+    }
+}
