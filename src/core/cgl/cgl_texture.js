@@ -464,7 +464,7 @@ Texture.prototype.getInfoReadable = function ()
 
 Texture.prototype.getInfoOneLine = function ()
 {
-    let txt = "" + this.width + " x " + this.height;
+    let txt = "" + this.width + "x" + this.height;
     if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
 
     if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";

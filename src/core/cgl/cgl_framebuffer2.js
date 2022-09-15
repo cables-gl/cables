@@ -22,7 +22,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     this._textureFrameBuffer = null;
     this._colorRenderbuffers = [];
     this._drawTargetArray = [];
-
+    this._disposed = false;
 
     if (!this.Framebuffer2BlittingFramebuffer) this.Framebuffer2BlittingFramebuffer = cgl.gl.createFramebuffer();
     if (!this.Framebuffer2FinalFramebuffer) this.Framebuffer2FinalFramebuffer = cgl.gl.createFramebuffer();
@@ -140,6 +140,7 @@ Framebuffer2.prototype.setFilter = function (f)
 
 Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
 {
+    this._disposed = true;
     let i = 0;
     for (i = 0; i < this._numRenderBuffers; i++) this._colorTextures[i].delete();
     // this._texture.delete();
@@ -152,6 +153,7 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
 
 Framebuffer2.prototype.setSize = function (w, h)
 {
+    if (this._disposed) return this._log.warn("disposed framebuffer setsize...");
     this._cgl.profileData.addHeavyEvent("framebuffer resize", this.name);
 
     let i = 0;
@@ -285,7 +287,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
 
-    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) this._this._log.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
+    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) this._log.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
     const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
 
     if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
@@ -321,6 +323,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
 Framebuffer2.prototype.renderStart = function ()
 {
+    if (this._disposed) return this._log.warn("disposed framebuffer renderStart...");
     this._cgl.checkFrameStarted("fb2 renderstart");
     this._cgl.pushModelMatrix(); // needed ??
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
@@ -341,6 +344,7 @@ Framebuffer2.prototype.renderStart = function ()
 
 Framebuffer2.prototype.renderEnd = function ()
 {
+    if (this._disposed) return this._log.warn("disposed framebuffer renderEnd...");
     this._cgl.popPMatrix();
 
     this._cgl.profileData.profileFramebuffer++;
