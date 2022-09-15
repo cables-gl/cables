@@ -142,6 +142,11 @@ function printMaterial(mat, idx)
     // html+=' <td><a onclick="" class="treebutton">Assign</a><td>';
 
     html += " <td>";
+
+    const info = JSON.stringify(mat, null, 4).replaceAll("\"", "").replaceAll("\n", "<br/>");
+
+    html += "<span class=\"icon icon-info\" onclick=\"new CABLES.UI.ModalDialog({ 'html': '<pre>" + info + "</pre>', 'title': '" + mat.name + "' });\"></span>&nbsp;";
+
     if (mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
     {
         let rgb = "";
@@ -149,7 +154,7 @@ function printMaterial(mat, idx)
         rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[1] * 255);
         rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[2] * 255);
 
-        html += "<div style=\"width:15px;height:15px;;background-color:rgb(" + rgb + ")\">&nbsp;</a>";
+        html += "<div style=\"width:15px;height:15px;background-color:rgb(" + rgb + ");display:inline-block\">&nbsp;</a>";
     }
     html += " <td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>") + "<td>";
     html += "<td>";
