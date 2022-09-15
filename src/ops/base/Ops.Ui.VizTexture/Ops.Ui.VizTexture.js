@@ -1,5 +1,6 @@
 const
     inTex = op.inTexture("Texture In"),
+    inShowInfo = op.inBool("Show Info", false),
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
@@ -169,8 +170,21 @@ op.renderVizLayer = (ctx, layer) =>
             layer.x + (layer.width - sizeImg[0]) / 2, layer.y + (layer.height - sizeImg[1]) / 2,
             sizeImg[0], sizeImg[1]);
 
-    if (port.get() && port.get().getInfoOneLine) outInfo.set(port.get().getInfoOneLine());
-    else outInfo.set("unknown");
+    let info = "unknown";
+
+    if (port.get() && port.get().getInfoOneLine) info = port.get().getInfoOneLine();
+
+    if (inShowInfo.get())
+    {
+        ctx.save();
+        ctx.scale(layer.scale, layer.scale);
+        ctx.font = "normal 10px sourceCodePro";
+        ctx.fillStyle = "#aaa";
+        ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
+        ctx.restore();
+    }
+
+    outInfo.set(info);
 
     cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
