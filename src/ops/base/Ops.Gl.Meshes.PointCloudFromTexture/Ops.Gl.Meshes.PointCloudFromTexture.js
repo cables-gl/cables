@@ -60,8 +60,8 @@ function doRender()
     }
 
     if (needsMeshSetup)setupMesh();
-    mod.bind();
     if (!inTex.get() || !inTex.get().tex) return;
+    mod.bind();
     if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
     if (inTexPS.get())mod.pushTexture("MOD_texPointSize", inTexPS.get().tex);
 
