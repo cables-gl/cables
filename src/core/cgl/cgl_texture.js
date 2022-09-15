@@ -482,7 +482,7 @@ Texture.prototype.getInfoOneLine = function ()
 
 Texture.prototype.getInfo = function ()
 {
-    Texture.getTexInfo(this);
+    return Texture.getTexInfo(this);
 };
 
 
