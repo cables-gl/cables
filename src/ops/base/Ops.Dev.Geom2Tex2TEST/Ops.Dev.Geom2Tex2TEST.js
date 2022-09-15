@@ -1,3 +1,8 @@
+// added texture empty pixels now on bottom
+// added automatic size option
+// only recalculating when geometry was changed...
+// TODO sort ?
+
 const
     exec = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
@@ -13,31 +18,28 @@ const
 
 op.setPortGroup("Texture settings", [tfilter, twrap]);
 
-let numTextures = 1;
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
 
 let autoSize = true;
 let needsUpdate = true;
+let needsUpdateSize = true;
 let shader = null;
 let size = 0;
-const showingError = false;
-const tex = null;
 let fb = null;
-let needInit = true;
+let needInitFb = true;
 let mesh = null;
 let vertNums = new Float32Array(1);
+let numVerts = 1;
 
 tfilter.onChange =
     twrap.onChange = initFbLater;
 
 inWidth.onChange =
-inSize.onChange = updateSize;
+    inSize.onChange = updateSize;
 
 updateUI();
-
-const drawBuffArr = [true, true];
 
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -76,7 +78,7 @@ function shuffleArray(array)
 inRandomize.onChange =
 inGeom.onChange = function ()
 {
-    updateSize();
+    needsUpdateSize = true;
     needsUpdate = true;
 };
 
@@ -91,7 +93,7 @@ function updateUI()
 
 function initFbLater()
 {
-    needInit = true;
+    needInitFb = true;
     needsUpdate = true;
     warning();
     updateUI();
@@ -99,15 +101,17 @@ function initFbLater()
 
 function updateSize()
 {
+    const oldSize = size;
     size = inWidth.get();
 
     autoSize = inSize.get() == "Auto";
 
     const geo = inGeom.get();
 
-    if(autoSize&& !geo)
+    if (autoSize && !geo)
     {
-        size=-1;
+        needsUpdateSize = true;
+        size = -1;
         return;
     }
     if (autoSize && geo)
@@ -115,20 +119,19 @@ function updateSize()
         size = Math.ceil(Math.sqrt(geo.vertices.length / 3));
     }
 
-    size=Math.ceil(Math.max(1, size));
-
+    size = Math.ceil(Math.max(1, size));
 
     updateUI();
-    needsUpdate=true;
+    if (oldSize != size) needsUpdate = true;
+    needsUpdateSize = false;
     op.log("size", size);
 }
 
 function initFb()
 {
-    needInit = false;
     if (fb) fb = fb.delete();
     outTex.set(CGL.Texture.getEmptyTexture(cgl));
-    if(size<1) return;
+    if (size < 1) return;
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
@@ -139,7 +142,7 @@ function initFb()
 
     if (cgl.glVersion >= 2)
     {
-        console.log("new fb....",size);
+        console.log("new fb....", size);
 
         fb = new CGL.Framebuffer2(cgl, size, size,
             {
@@ -161,17 +164,18 @@ function initFb()
                 "wrap": selectedWrap
             });
     }
-    // outTex.set(fb.getTextureColor());
-
+    needInitFb = false;
 }
 
 exec.onTriggered = function ()
 {
-    if (!fb || needInit)initFb();
-    if(size ==-1 || (fb && fb.getWidth()!=size))updateSize();
+    updateSize();
+    if (!fb || needInitFb) initFb();
+
+    // if (needsUpdateSize || size == -1 || fb.getWidth() != size) updateSize();
 
     if (!needsUpdate) return next.trigger();
-    if (outTex.get() != CGL.Texture.getEmptyTexture(cgl))outTex.set(CGL.Texture.getEmptyTexture(cgl));
+    if (outTex.get() != CGL.Texture.getEmptyTexture(cgl)) outTex.set(CGL.Texture.getEmptyTexture(cgl));
 
     const geo = inGeom.get();
     if (!geo)
@@ -180,45 +184,42 @@ exec.onTriggered = function ()
         return;
     }
 
-    mod.setUniformValue("MOD_texSize", size);
-    if(size<1)
+    if (size < 1)
     {
-        needsUpdate=true;
+        needsUpdate = true;
         return;
     }
 
-    if(fb && fb.getWidth()!=size)
+    if (fb && fb.getWidth() != size)
     {
         console.log("fb setsize...");
-        fb.setSize(size,size);
+        fb.setSize(size, size);
     }
 
-    if (geo && geo.copy)
+    const g = geo.copy();
+
+    // if (mesh)mesh = mesh.dispose();
+    if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("a"), cgl.gl.POINTS);
+
+    mesh.setGeom(g);
+    // mesh.addVertexNumbers = true;
+
+    numVerts = g.vertices.length / 3;
+
+    if (vertNums.length != numVerts)
     {
-        const g = geo.copy();
-
-        if(!mesh)mesh = new CGL.Mesh(cgl, g, cgl.gl.POINTS);
-
-        mesh.setGeom(g);
-        mesh.addVertexNumbers = true;
-
-        let numVerts = g.vertices.length / 3;
-
-        if(vertNums.length!=numVerts)
-        {
-            vertNums = new Float32Array(numVerts);
-            for (let i = 0; i < numVerts; i++) vertNums[i] = i;
-        }
-
-        if (inRandomize.get())
-        {
-            shuffleArray(vertNums);
-        }
-
-        mesh._setVertexNumbers(vertNums);
-
-        outNumVerts.set(numVerts);
+        vertNums = new Float32Array(numVerts);
+        for (let i = 0; i < numVerts; i++) vertNums[i] = i;
     }
+
+    if (inRandomize.get())
+    {
+        shuffleArray(vertNums);
+    }
+
+    mesh._setVertexNumbers(vertNums);
+
+    outNumVerts.set(numVerts);
 
     render();
 
@@ -227,7 +228,6 @@ exec.onTriggered = function ()
     needsUpdate = false;
     next.trigger();
 };
-
 
 function render()
 {
@@ -243,12 +243,6 @@ function render()
     prevViewPort[1] = vp[1];
     prevViewPort[2] = vp[2];
     prevViewPort[3] = vp[3];
-
-    if(!fb)
-    {
-        needsUpdate=true;
-        return;
-    }
 
     fb.renderStart(cgl);
 
@@ -271,12 +265,10 @@ function render()
 
     mod.bind();
 
+    mod.setUniformValue("MOD_texSize", size);
+    mesh.render(cgl.getShader());
 
-    if (mesh)
-    {
-        cgl.getShader().setDrawBuffers(drawBuffArr);
-        mesh.render(cgl.getShader());
-    }
+    mod.unbind();
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -287,6 +279,7 @@ function render()
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
-    mod.unbind();
-}
+    let lastShader = cgl.getShader();
 
+    console.log("geom2tex yes fully", size * size, numVerts);
+}

@@ -151,6 +151,26 @@ op.renderVizLayer = (ctx, layer) =>
             ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
         }
 
+    ctx.fillStyle = "#222";
+    const borderLeft = (layer.width - sizeImg[0]) / 2;
+    const borderTop = (layer.height - sizeImg[1]) / 2;
+    ctx.fillRect(
+        layer.x, layer.y,
+        borderLeft, (layer.height)
+    );
+    ctx.fillRect(
+        layer.x + sizeImg[0] + borderLeft, layer.y,
+        borderLeft, (layer.height)
+    );
+    ctx.fillRect(
+        layer.x, layer.y,
+        layer.width, borderTop
+    );
+    ctx.fillRect(
+        layer.x, layer.y + sizeImg[1] + borderTop,
+        layer.width, borderTop
+    );
+
     if (sizeTex[1] == 1)
         ctx.drawImage(cgl.canvas,
             0, 0,

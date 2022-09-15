@@ -170,9 +170,6 @@ class ShaderModifier
                     un.comment = "mod: " + this._name;
                 }
             }
-            else
-            {
-            }
         }
 
         for (let j = 0; j < this._structUniforms.length; j += 1)
@@ -182,7 +179,6 @@ class ShaderModifier
             let structName = structUniform.structName;
 
             const members = structUniform.members;
-            // const structPropertyName = structUniform.propertyName;
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);
@@ -251,9 +247,7 @@ class ShaderModifier
     _getStructUniform(uniName)
     {
         for (let i = 0; i < this._structUniforms.length; i += 1)
-        {
             if (this._structUniforms[i].uniformName === uniName) return this._structUniforms[i];
-        }
 
         return null;
     }

@@ -1,7 +1,7 @@
 MOD_pos=pos.xyz;
 
-float tx=mod(attrVertIndex,MOD_texSize)+1.0/MOD_texSize;
-float ty=floor(attrVertIndex/MOD_texSize);
+float ty=mod(attrVertIndex,MOD_texSize)+1.0/MOD_texSize;
+float tx=floor(attrVertIndex/MOD_texSize);
 
 gl_PointSize=1.0;
 
