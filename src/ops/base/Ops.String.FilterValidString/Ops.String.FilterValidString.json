@@ -30,37 +30,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invalid if null",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invalid if undefined",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invalid if empty",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invalid if 0",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Last Valid String"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Is Valid",
                 "subType": "boolean"
             }

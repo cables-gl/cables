@@ -1,6 +1,7 @@
 const
     inUpdate = op.inTrigger("Update"),
     inLimit = op.inInt("Limit", 30),
+    inSlider = op.inBool("Slider", false),
     next = op.outTrigger("Next"),
     outArr = op.outArray("Array");
 
@@ -12,8 +13,34 @@ for (let i = 0; i < 30; i++)
 }
 
 const arr = [];
+let to = null;
 
 inUpdate.onTriggered = update;
+
+inSlider.onChange = () =>
+{
+    const l = inLimit.get();
+
+    for (let i = 0; i < inPorts.length; i++)
+        if (inSlider.get()) inPorts[i].setUiAttribs({ "display": "range" });
+        else inPorts[i].setUiAttribs({ "display": null });
+
+    op.refreshParams();
+};
+
+inLimit.onChange = () =>
+{
+    clearTimeout(to);
+
+    to = setTimeout(() =>
+    {
+        const l = inLimit.get();
+        for (let i = 0; i < inPorts.length; i++)
+        {
+            inPorts[i].setUiAttribs({ "greyout": i >= l });
+        }
+    }, 300);
+};
 
 function update()
 {

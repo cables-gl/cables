@@ -6,6 +6,17 @@ function closeTab()
     tab = null;
 }
 
+function formatVec(arr)
+{
+    const nums = [];
+    for (let i = 0; i < arr.length; i++)
+    {
+        nums.push(Math.round(arr[i] * 1000) / 1000);
+    }
+
+    return nums.join(",");
+}
+
 function printNode(html, node, level)
 {
     if (!gltf) return;
@@ -70,13 +81,30 @@ function printNode(html, node, level)
     }
 
     html += "<td>";
+
+    if (node._node.translation || node._node.rotation || node._node.scale)
+    {
+        let info = "";
+
+        if (node._node.translation)info += "Translate: `" + formatVec(node._node.translation) + "` || ";
+        if (node._node.rotation)info += "Rotation: `" + formatVec(node._node.rotation) + "` || ";
+        if (node._node.scale)info += "Scale: `" + formatVec(node._node.scale) + "` || ";
+
+        html += "<span class=\"icon icon-gizmo info\" data-info=\"" + info + "\"></span> &nbsp;";
+    }
+
     if (node._animRot || node._animScale || node._animTrans)
     {
-        if (node._animRot) html += "Rot ";
-        if (node._animScale) html += "Scale ";
-        if (node._animTrans) html += "Trans ";
+        let info = "Animated: ";
+        if (node._animRot) info += "Rot ";
+        if (node._animScale) info += "Scale ";
+        if (node._animTrans) info += "Trans ";
+
+        html += "<span class=\"icon icon-clock info\" data-info=\"" + info + "\"></span>&nbsp;";
     }
-    else html += "None";
+
+    if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
+
     html += "</td>";
 
     html += "<td>";
@@ -114,6 +142,11 @@ function printMaterial(mat, idx)
     // html+=' <td><a onclick="" class="treebutton">Assign</a><td>';
 
     html += " <td>";
+
+    const info = JSON.stringify(mat, null, 4).replaceAll("\"", "").replaceAll("\n", "<br/>");
+
+    html += "<span class=\"icon icon-info\" onclick=\"new CABLES.UI.ModalDialog({ 'html': '<pre>" + info + "</pre>', 'title': '" + mat.name + "' });\"></span>&nbsp;";
+
     if (mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
     {
         let rgb = "";
@@ -121,7 +154,7 @@ function printMaterial(mat, idx)
         rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[1] * 255);
         rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[2] * 255);
 
-        html += "<div style=\"width:15px;height:15px;;background-color:rgb(" + rgb + ")\">&nbsp;</a>";
+        html += "<div style=\"width:15px;height:15px;background-color:rgb(" + rgb + ");display:inline-block\">&nbsp;</a>";
     }
     html += " <td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>") + "<td>";
     html += "<td>";
@@ -151,7 +184,7 @@ function printInfo()
     html += " <th>Mesh</th>";
     html += " <th>Skin</th>";
     html += " <th>Material</th>";
-    html += " <th>Anim</th>";
+    html += " <th>Transform</th>";
     html += " <th>Expose</th>";
     html += " <th></th>";
     html += "</tr>";
@@ -204,8 +237,6 @@ function printInfo()
 
     let sizeBufferViews = [];
     sizes.meshes = 0;
-
-    console.log(gltf);
 
     for (let i = 0; i < gltf.json.meshes.length; i++)
     {

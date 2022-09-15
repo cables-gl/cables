@@ -1,1 +1,35 @@
-{"author":"55d744634cdc152216eb9aad","authorName":"pandur","id":"8b0a635c-83f0-4d95-9b9c-1b5ca55c6724","created":1511860038889,"layout":{"portsIn":[{"type":"2","name":"Geometry"},{"type":"0","name":"Sort index","subType":"integer"},{"type":"0","name":"Sort","subType":"string"},{"type":"0","name":"Reverse","subType":"boolean"}],"portsOut":[{"type":"2","name":"Result"}],"name":"Ops.Gl.Geometry.SortGeometryAxis"},"summary":"sort geometry triangles by position ","docs":{"ports":[]}}
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "8b0a635c-83f0-4d95-9b9c-1b5ca55c6724",
+    "created": 1511860038889,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 0,
+                "name": "Sort index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Reverse",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.SortGeometryAxis"
+    },
+    "summary": "sort geometry triangles by position ",
+    "docs": {
+        "ports": []
+    }
+}

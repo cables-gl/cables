@@ -8,6 +8,10 @@
             {
                 "type": 1,
                 "name": "Play"
+            },
+            {
+                "type": 1,
+                "name": "Pause"
             }
         ],
         "portsOut": [

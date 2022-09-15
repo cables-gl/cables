@@ -34,18 +34,12 @@ const gltfNode = class
     copy()
     {
         this.isCopy = true;
-        // console.log(this);
         const n = new gltfNode(this._node, this._gltf);
         n.copyOf = this;
 
         n._animActions = this._animActions;
         n.children = this.children;
         n.skinRenderer = new GltfSkin(n);
-
-        // console.log("COPY!!!");
-        // console.log((n._animActions));
-
-        // console.log(this._animActions);
 
         this.updateMatrix();
         return n;

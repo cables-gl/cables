@@ -1,6 +1,11 @@
 {
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Focus"
+            }
+        ],
         "portsOut": [
             {
                 "type": 0,

@@ -24,12 +24,11 @@ geom.ignoreValueSerialize = true;
 const cgl = op.patch.cgl;
 const m = mat4.create();
 let
-    matrixArray = new Float32Array(1),
-    instColorArray = new Float32Array(1),
+    // matrixArray = new Float32Array(1),
+    // instColorArray = new Float32Array(1),
     mesh = null,
     recalc = true,
     num = 0,
-    arrayChangedColor = true,
     arrayChangedTrans = true;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -83,7 +82,6 @@ inNum.onChange =
 
 function reset()
 {
-    arrayChangedColor = true,
     arrayChangedTrans = true;
     recalc = true;
 }
@@ -124,18 +122,17 @@ function setupArray()
 
     num = Math.max(0, Math.floor(inNum.get()));
 
-    if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
+    // if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
 
-    for (let i = 0; i < num; i++)
-    {
-        mat4.identity(m);
-        for (let a = 0; a < 16; a++) matrixArray[i * 16 + a] = m[a];
-    }
+    // for (let i = 0; i < num; i++)
+    // {
+    //     mat4.identity(m);
+    //     for (let a = 0; a < 16; a++) matrixArray[i * 16 + a] = m[a];
+    // }
 
     mesh.numInstances = num;
-    mesh.addAttribute("instMat", matrixArray, 16);
+    // mesh.addAttribute("instMat", matrixArray, 16);
 
-    arrayChangedColor = false;
     recalc = false;
 }
 
@@ -155,7 +152,7 @@ function doRender()
     mod.setUniformValue("MOD_texSizeX", inTex.get().width);
     mod.setUniformValue("MOD_texSizeY", inTex.get().height);
 
-    mesh.numInstances = num;
+    // mesh.numInstances = num;
 
     outNum.set(mesh.numInstances);
 

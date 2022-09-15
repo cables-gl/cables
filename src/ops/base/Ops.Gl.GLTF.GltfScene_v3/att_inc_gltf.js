@@ -215,6 +215,8 @@ function loadAnims(gltf)
         }
     }
 
+    gltf.uniqueAnimNames = uniqueAnimNames;
+
     outAnims.set(null);
     outAnims.set(Object.keys(uniqueAnimNames));
 }
