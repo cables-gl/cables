@@ -37,13 +37,34 @@ let gltfMesh = class
 
             if (this.materialJson && this.materialJson.pbrMetallicRoughness)
             {
-                if (this.materialJson.pbrMetallicRoughness.baseColorFactor)
+                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("baseColorFactor"))
+                {
+                    this._matDiffuseColor = [1, 1, 1, 1];
+                }
+                else
+                {
                     this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
+                }
 
                 this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
 
-                this._matPbrMetalness = this.materialJson.pbrMetallicRoughness.metallicFactor || null;
-                this._matPbrRoughness = this.materialJson.pbrMetallicRoughness.roughnessFactor || null;
+                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("metallicFactor"))
+                {
+                    this._matPbrMetalness = 1.0;
+                }
+                else
+                {
+                    this._matPbrMetalness = this.materialJson.pbrMetallicRoughness.metallicFactor || null;
+                }
+
+                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("roughnessFactor"))
+                {
+                    this._matPbrRoughness = 1.0;
+                }
+                else
+                {
+                    this._matPbrRoughness = this.materialJson.pbrMetallicRoughness.roughnessFactor || null;
+                }
             }
         }
 
@@ -385,7 +406,10 @@ let gltfMesh = class
                         this._matPbrRoughnessOrig = uniPbrRoughness.getValue();
                         uniPbrRoughness.setValue(this._matPbrRoughness);
                     }
-                    else uniPbrRoughness.setValue(0);
+                    else
+                    {
+                        uniPbrRoughness.setValue(0);
+                    }
             }
 
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
