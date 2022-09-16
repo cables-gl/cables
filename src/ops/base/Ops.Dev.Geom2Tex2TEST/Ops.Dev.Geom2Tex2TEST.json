@@ -32,12 +32,24 @@
             },
             {
                 "type": 0,
+                "name": "Order index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Content index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Size index",
+                "group": "Texture settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Tex Width",
+                "group": "Texture settings",
                 "subType": "integer"
             },
             {
@@ -51,11 +63,6 @@
                 "name": "wrap index",
                 "group": "Texture settings",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Randomize",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
