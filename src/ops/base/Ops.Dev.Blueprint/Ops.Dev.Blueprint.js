@@ -274,7 +274,9 @@ function update()
         {
             const blueprintData = CABLES.blueprints[exportId];
             blueprintData.settings = op.patch.settings;
-            setTimeout(function ()
+            // for some reason we have to do this in a 0ms timeout to make
+            // sure nested blueprints are not loaded before this one created all the ops...
+            setTimeout(() =>
             {
                 deSerializeBlueprint(blueprintData, subPatchId, false);
                 loadingOut.set(false);
@@ -283,7 +285,7 @@ function update()
                 {
                     wasPasted = false;
                 }
-            }, 1);
+            }, 0);
         }
         else
         {
