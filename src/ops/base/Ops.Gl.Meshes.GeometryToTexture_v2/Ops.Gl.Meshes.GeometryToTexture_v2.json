@@ -15,6 +15,11 @@
             "message": "Ops.Dve.Geom2Tex2TEST renamed to Ops.Dev.Geom2Tex2TEST",
             "author": "pandur",
             "date": 1663256622622
+        },
+        {
+            "message": "Ops.Dev.Geom2Tex2TEST renamed to Ops.Gl.Meshes.GeometryToTexture_v2",
+            "author": "pandur",
+            "date": 1663310966217
         }
     ],
     "authorName": "pandur",
