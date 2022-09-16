@@ -45,6 +45,10 @@ exe.onTriggered = () =>
             {
                 op.patch.timer.play();
             }
+            else
+            {
+                op.patch.timer.pause();
+            }
         }
         firstTime = false;
 
