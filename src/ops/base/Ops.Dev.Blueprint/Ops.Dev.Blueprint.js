@@ -270,29 +270,47 @@ function update()
     else
     {
         let exportId = op.id;
-        const blueprintUrl = op.patch.config.prefixJsPath + "js/" + exportId + ".json";
-        CABLES.ajax(
-            blueprintUrl,
-            function (err, data)
+        if (CABLES.blueprints && CABLES.blueprints[exportId])
+        {
+            const blueprintData = CABLES.blueprints[exportId];
+            blueprintData.settings = op.patch.settings;
+            setTimeout(function ()
             {
-                if (!err)
-                {
-                    const blueprintData = JSON.parse(data);
-                    blueprintData.settings = op.patch.settings;
-                    deSerializeBlueprint(blueprintData, subPatchId, false);
-                }
-                else
-                {
-                    op.logError("failed to load blueprint from", blueprintUrl, err);
-                }
+                deSerializeBlueprint(blueprintData, subPatchId, false);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
                 if (wasPasted)
                 {
                     wasPasted = false;
                 }
-            }
-        );
+            }, 1);
+        }
+        else
+        {
+            const blueprintUrl = op.patch.config.prefixJsPath + "js/" + exportId + ".json";
+            CABLES.ajax(
+                blueprintUrl,
+                function (err, data)
+                {
+                    if (!err)
+                    {
+                        const blueprintData = JSON.parse(data);
+                        blueprintData.settings = op.patch.settings;
+                        deSerializeBlueprint(blueprintData, subPatchId, false);
+                    }
+                    else
+                    {
+                        op.logError("failed to load blueprint from", blueprintUrl, err);
+                    }
+                    loadingOut.set(false);
+                    op.patch.loading.finished(loadingId);
+                    if (wasPasted)
+                    {
+                        wasPasted = false;
+                    }
+                }
+            );
+        }
     }
 }
 
@@ -341,7 +359,6 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 data.name = op.patch.name;
                 op.patch.deSerialize(data, false);
                 const originalSubPatchId = gui.patchView.getCurrentSubPatch();
-                // gui.patchView.setCurrentSubPatch(subPatchId);
                 gui.patchView.setCurrentSubPatch(originalSubPatchId);
             });
         }
