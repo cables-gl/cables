@@ -8,8 +8,8 @@ const inGrad = op.inGradient("Gradient"),
     inSize = op.inValueInt("Size", 256),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
-
     inGradArray = op.inArray("Gradient Array"),
+    inRandom = op.inTriggerButton("Randomize Colors"),
     outTex = op.outTexture("Texture"),
     outColors = op.outArray("Colors", null, 3),
     outColorPos = op.outArray("Colors Pos", null, 1);
@@ -27,6 +27,21 @@ twrap.onChange =
 inGrad.set("{\"keys\" : [{\"pos\":0,\"r\":0,\"g\":0,\"b\":0},{\"pos\":0.25,\"r\":0,\"g\":0,\"b\":0},{\"pos\":0.75,\"r\":1,\"g\":1,\"b\":1},{\"pos\":1,\"r\":1,\"g\":1,\"b\":1}]}");
 
 op.onLoaded = update;
+
+inRandom.onTriggered = () =>
+{
+    const keys = parseKeys();
+    if (keys)
+    {
+        keys.forEach((key) =>
+        {
+            key.r = Math.random();
+            key.g = Math.random();
+            key.b = Math.random();
+        });
+        updateGradient(keys);
+    }
+};
 
 function rgbToOklab(r, g, b)
 {
@@ -73,22 +88,15 @@ function lin2srgb(r, g, b)
 
 function update()
 {
-    let width = Math.round(inSize.get());
-    if (width < 4) width = 4;
-    let keys = null;
+    const keys = parseKeys();
+    if (keys) updateGradient(keys);
+}
 
+function parseKeys()
+{
+    let keys = null;
     op.setUiError("nodata", null);
     op.setUiError("parse", null);
-
-    let selectedWrap = 0;
-    let selectedFilter = 0;
-    if (twrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;
-    else if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    else if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
-
-    if (tfilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
-    else if (tfilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
-    else if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
 
     if (Array.isArray(inGradArray.get()))
     {
@@ -100,7 +108,7 @@ function update()
         if (!inGrad.get() || inGrad.get() === "")
         {
             op.setUiError("nodata", "gradient no data");
-            return;
+            return null;
         }
 
         try
@@ -115,10 +123,27 @@ function update()
         if (!grad || !grad.keys)
         {
             op.setUiError("nodata", "gradient no data");
-            return;
+            return null;
         }
         keys = grad.keys;
     }
+    return keys;
+}
+
+function updateGradient(keys)
+{
+    let width = Math.round(inSize.get());
+    if (width < 4) width = 4;
+
+    let selectedWrap = 0;
+    let selectedFilter = 0;
+    if (twrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;
+    else if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    else if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    if (tfilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
+    else if (tfilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
+    else if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
 
     const tex = new CGL.Texture(cgl);
 
