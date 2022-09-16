@@ -30,7 +30,7 @@ import PatchVariable from "./core_variable";
  *     glCanvasResizeToWindow:true,
  *     canvas:{powerPreference:"high-performance"},
  *     prefixAssetPath:'/assets/',
- *     prefixAssetPath:'/js/',
+ *     prefixJsPath:'/js/',
  *     onError:function(e){console.log(e);}
  *     glslPrecision:'highp'
  * });
@@ -274,6 +274,17 @@ Patch.prototype.getAssetPath = function ()
     {
         return "assets/";
     }
+};
+
+/**
+ * get js path
+ * @function getJsPath
+ * @memberof Patch
+ * @instance
+ */
+Patch.prototype.getJsPath = function ()
+{
+    return "js/";
 };
 
 /**

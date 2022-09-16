@@ -289,7 +289,7 @@ function update()
         }
         else
         {
-            const blueprintUrl = op.patch.config.prefixJsPath + "js/" + exportId + ".json";
+            const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
             CABLES.ajax(
                 blueprintUrl,
                 function (err, data)
