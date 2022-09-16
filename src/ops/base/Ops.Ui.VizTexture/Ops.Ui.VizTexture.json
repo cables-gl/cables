@@ -30,6 +30,11 @@
                 "type": 2,
                 "name": "Texture In",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Show Info",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

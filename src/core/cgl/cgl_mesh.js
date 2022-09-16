@@ -336,11 +336,14 @@ Mesh.prototype._setVertexNumbers = function (arr)
             for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
         }
 
-        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (attr, geom, shader) =>
-        {
-            if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
-            shader.uniformNumVertices.setValue(this._numVerts);
-        });
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1,
+            (attr, geom, shader) =>
+            {
+                if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
+                shader.uniformNumVertices.setValue(this._numVerts);
+
+                // console.log("this._numVerts", this._numVerts, attr, shader.uniformNumVertices);
+            });
     }
 };
 

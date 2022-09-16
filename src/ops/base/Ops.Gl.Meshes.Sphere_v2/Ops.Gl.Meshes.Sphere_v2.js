@@ -11,17 +11,19 @@ const
     outGeometry = op.outObject("geometry", null, "geometry"),
     UP = vec3.fromValues(0, 1, 0),
     RIGHT = vec3.fromValues(1, 0, 0);
+
 let
     geom = new CGL.Geometry("Sphere"),
     tmpNormal = vec3.create(),
     tmpVec = vec3.create(),
     needsRebuild = true,
     mesh;
+
 function buildMesh()
 {
     const
-        stacks = Math.max(inStacks.get(), 2),
-        slices = Math.max(inSlices.get(), 3),
+        stacks = Math.ceil(Math.max(inStacks.get(), 2)),
+        slices = Math.ceil(Math.max(inSlices.get(), 3)),
         stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks),
         radius = inRadius.get();
     let

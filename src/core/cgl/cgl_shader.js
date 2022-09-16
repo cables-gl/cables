@@ -1114,7 +1114,7 @@ Shader.prototype.setDrawBuffers = function (arr)
         this.setWhyCompile("setDrawBuffers");
         return;
     }
-    for (let i = 0; i < arr; i++)
+    for (let i = 0; i < arr.length; i++)
     {
         if (arr[i] !== this._drawBuffers[i])
         {
