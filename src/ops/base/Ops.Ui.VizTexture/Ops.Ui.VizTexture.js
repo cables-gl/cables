@@ -199,7 +199,9 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.save();
         ctx.scale(layer.scale, layer.scale);
         ctx.font = "normal 10px sourceCodePro";
-        ctx.fillStyle = "#aaa";
+        ctx.fillStyle = "#000";
+        ctx.fillText(info, layer.x / layer.scale + 5 + 0.75, (layer.y + layer.height) / layer.scale - 5 + 0.75);
+        ctx.fillStyle = "#fff";
         ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
         ctx.restore();
     }

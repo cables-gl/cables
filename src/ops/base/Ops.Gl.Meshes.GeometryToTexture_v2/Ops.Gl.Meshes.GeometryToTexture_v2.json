@@ -15,6 +15,11 @@
             "message": "Ops.Dve.Geom2Tex2TEST renamed to Ops.Dev.Geom2Tex2TEST",
             "author": "pandur",
             "date": 1663256622622
+        },
+        {
+            "message": "Ops.Dev.Geom2Tex2TEST renamed to Ops.Gl.Meshes.GeometryToTexture_v2",
+            "author": "pandur",
+            "date": 1663310966217
         }
     ],
     "authorName": "pandur",
@@ -32,12 +37,24 @@
             },
             {
                 "type": 0,
+                "name": "Order index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Content index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Size index",
+                "group": "Texture settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Tex Width",
+                "group": "Texture settings",
                 "subType": "integer"
             },
             {
@@ -51,11 +68,6 @@
                 "name": "wrap index",
                 "group": "Texture settings",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Randomize",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

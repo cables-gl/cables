@@ -1,22 +1,20 @@
-// added texture empty pixels now on bottom
-// added automatic size option
-// only recalculating when geometry was changed...
-// TODO sort ?
-
 const
     exec = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
+
+    inOrder = op.inDropDown("Order", ["Sequential", "Random", "Vertex X", "Vertex Y", "Vertex Z"], "Sequential"),
+    inAttrib = op.inSwitch("Content", ["Vertex Pos", "Normals", "TexCoords"], "Vertex Pos"),
+
     inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
     inWidth = op.inValueInt("Tex Width", 256),
-
     tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
-    inRandomize = op.inBool("Randomize", false),
+
     next = op.outTrigger("Next"),
     outNumVerts = op.outNumber("Total Vertices"),
     outTex = op.outTexture("Texture");
 
-op.setPortGroup("Texture settings", [tfilter, twrap]);
+op.setPortGroup("Texture settings", [tfilter, twrap, inWidth, inSize]);
 
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
@@ -39,6 +37,8 @@ tfilter.onChange =
 inWidth.onChange =
     inSize.onChange = updateSize;
 
+inAttrib.onChange = updateAttrib;
+
 updateUI();
 
 const vertModTitle = "vert_" + op.name;
@@ -57,8 +57,8 @@ mod.addModule({
     "srcHeadFrag": "IN vec3 MOD_pos;",
     "srcBodyFrag": attachments.fragpos_frag
 });
-
 mod.addUniformVert("f", "MOD_texSize", 0);
+updateAttrib();
 
 function shuffleArray(array)
 {
@@ -75,10 +75,29 @@ function shuffleArray(array)
     }
 }
 
-inRandomize.onChange =
 inGeom.onChange = function ()
 {
     needsUpdateSize = true;
+    needsUpdate = true;
+};
+
+function updateAttrib()
+{
+    mod.toggleDefine("MOD_ATTRIB_POS", inAttrib.get() == "Vertex Pos");
+    mod.toggleDefine("MOD_ATTRIB_TC", inAttrib.get() == "TexCoords");
+    mod.toggleDefine("MOD_ATTRIB_NORMAL", inAttrib.get() == "Normals");
+
+    console.log(
+
+        "MOD_ATTRIB_POS", inAttrib.get() == "Vertex Pos",
+        "MOD_ATTRIB_TC", inAttrib.get() == "TexCoords",
+        "MOD_ATTRIB_NORMAL", inAttrib.get() == "Normals",
+    );
+    needsUpdate = true;
+}
+
+inOrder.onChange = () =>
+{
     needsUpdate = true;
 };
 
@@ -142,8 +161,6 @@ function initFb()
 
     if (cgl.glVersion >= 2)
     {
-        console.log("new fb....", size);
-
         fb = new CGL.Framebuffer2(cgl, size, size,
             {
                 "isFloatingPointTexture": true,
@@ -170,19 +187,14 @@ function initFb()
 exec.onTriggered = function ()
 {
     updateSize();
+
     if (!fb || needInitFb) initFb();
-
-    // if (needsUpdateSize || size == -1 || fb.getWidth() != size) updateSize();
-
     if (!needsUpdate) return next.trigger();
     if (outTex.get() != CGL.Texture.getEmptyTexture(cgl)) outTex.set(CGL.Texture.getEmptyTexture(cgl));
 
     const geo = inGeom.get();
-    if (!geo)
-    {
-        next.trigger();
-        return;
-    }
+
+    if (!geo) return next.trigger();
 
     if (size < 1)
     {
@@ -190,40 +202,33 @@ exec.onTriggered = function ()
         return;
     }
 
-    if (fb && fb.getWidth() != size)
-    {
-        console.log("fb setsize...");
-        fb.setSize(size, size);
-    }
+    if (fb && fb.getWidth() != size) fb.setSize(size, size);
 
     const g = geo.copy();
 
-    // if (mesh)mesh = mesh.dispose();
     if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("a"), cgl.gl.POINTS);
 
+    g.glPrimitive = cgl.gl.POINTS;
     mesh.setGeom(g);
-    // mesh.addVertexNumbers = true;
-
     numVerts = g.vertices.length / 3;
 
-    if (vertNums.length != numVerts)
-    {
-        vertNums = new Float32Array(numVerts);
-        for (let i = 0; i < numVerts; i++) vertNums[i] = i;
-    }
+    if (vertNums.length != numVerts) vertNums = new Float32Array(numVerts);
 
-    if (inRandomize.get())
-    {
-        shuffleArray(vertNums);
-    }
+    for (let i = 0; i < numVerts; i++) vertNums[i] = i;
+
+    if (inOrder.get() == "Random") shuffleArray(vertNums);
+    if (inOrder.get() == "Vertex X")
+        vertNums.sort(function (a, b) { return g.vertices[a * 3 + 0] - g.vertices[b * 3 + 0]; });
+    if (inOrder.get() == "Vertex Y")
+        vertNums.sort(function (a, b) { return g.vertices[a * 3 + 1] - g.vertices[b * 3 + 1]; });
+    if (inOrder.get() == "Vertex Z")
+        vertNums.sort(function (a, b) { return g.vertices[a * 3 + 2] - g.vertices[b * 3 + 2]; });
 
     mesh._setVertexNumbers(vertNums);
 
     outNumVerts.set(numVerts);
 
     render();
-
-    op.log("?yep calced");
 
     needsUpdate = false;
     next.trigger();
@@ -278,8 +283,4 @@ function render()
     outTex.set(fb.getTextureColor());
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
-
-    let lastShader = cgl.getShader();
-
-    console.log("geom2tex yes fully", size * size, numVerts);
 }
