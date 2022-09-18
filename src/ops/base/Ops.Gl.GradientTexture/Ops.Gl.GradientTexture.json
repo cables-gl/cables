@@ -52,6 +52,10 @@
             {
                 "type": 3,
                 "name": "Gradient Array"
+            },
+            {
+                "type": 1,
+                "name": "Randomize Colors"
             }
         ],
         "portsOut": [
