@@ -7,18 +7,25 @@ inCompile.onTriggered =
 inFunc.onChange = compile;
 
 let opIdsHeadSrc = {};
+let opIdsFuncCallSrc = {};
 let headSrc = "";
+let callFuncStack = [];
 
 CABLES.shaderIdCounter = CABLES.shaderIdCounter || 1;
 
-function replaceId(op, txt)
+function setOpShaderId(op)
 {
-
     if (!op.shaderId)
     {
         op.shaderId = CABLES.shaderIdCounter;
         CABLES.shaderIdCounter++;
     }
+}
+
+function replaceId(op, txt)
+{
+    setOpShaderId(op);
+
     return txt.replaceAll("_ID", "_" + op.shaderId);
 }
 
@@ -33,7 +40,7 @@ function addOpShaderFuncCode(op)
 
     if (op.shaderSrc)
     {
-        let src = op.shaderSrc.endl();//+"/* "+op.id+" */".endl();;
+        let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
         src = replaceId(op, src);
 
         // console.log(src);
@@ -74,7 +81,7 @@ function getDefaultParameter(t)
     if (t == "sg_vec2") return "vec2(1., 1.)";
     if (t == "sg_float") return "1.";
     if (t == "sg_genType") return "1.";
-    return "/* no default: "+t+"*/";
+    return "/* no default: " + t + "*/";
 }
 
 function getPortParamStr(p, convertTo)
@@ -88,7 +95,7 @@ function getPortParamStr(p, convertTo)
 
     if (p.direction == CABLES.PORT_DIR_OUT)
     {
-        paramStr += callFunc(p.parent);
+        paramStr += callFunc(p.parent, p.uiAttribs.objType);
     }
 
     if (convertTo && convertTo != p.uiAttribs.objType)
@@ -100,9 +107,27 @@ function getPortParamStr(p, convertTo)
     return paramStr;
 }
 
+function typeConv(sgtype)
+{
+    return sgtype.substr(3);
+}
+
 function callFunc(op, convertTo)
 {
-    let callstr = " " + replaceId(op, op.shaderFunc) + "(";
+    setOpShaderId(op);
+    let callstr = "  ";
+
+    const varname = "var" + op.getTitle() + "_" + op.shaderId;
+    if (convertTo)callstr += typeConv(convertTo) + " " + varname + " = ";
+
+    if (opIdsFuncCallSrc[op.shaderId])
+    {
+        if (varname) return varname;
+        return;
+    }
+    opIdsFuncCallSrc[op.shaderId] = true;
+
+    callstr += replaceId(op, op.shaderFunc) + "(";
 
     addOpShaderFuncCode(op);
 
@@ -135,9 +160,11 @@ function callFunc(op, convertTo)
         }
     }
 
-    callstr += ") ";
+    callstr += ");";
 
-    return callstr;
+    callFuncStack.push(callstr);
+
+    return varname;
 }
 
 function compile()
@@ -145,6 +172,9 @@ function compile()
     const l = inFunc.links;
     console.log(l);
 
+    callFuncStack = [];
+
+    opIdsFuncCallSrc = {};
     opIdsHeadSrc = {};
     headSrc = "";
     let callSrc = "";
@@ -152,17 +182,19 @@ function compile()
     for (let i = 0; i < l.length; i++)
     {
         const lnk = l[i];
-        callSrc+= callFunc(lnk.getOtherPort(inFunc).parent) + ";".endl();
+        callSrc += callFunc(lnk.getOtherPort(inFunc).parent) + ";".endl();
     }
 
+    callSrc = callFuncStack.join("\n");
+
     const src = "".endl() +
-        "{{MODULES_HEAD}}".endl() +
+        "{{MODULES_HEAD}}".endl().endl() +
         "IN vec2 texCoord;".endl().endl() +
         headSrc.endl().endl() +
 
         "void main()".endl() +
         "{".endl() +
-        "{{MODULE_BEGIN_FRAG}}".endl()+
+        "  {{MODULE_BEGIN_FRAG}}".endl() +
 
         callSrc.endl() +
         "}".endl();
