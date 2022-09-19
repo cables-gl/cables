@@ -89,17 +89,32 @@ void main()
     }
 
 
+    // if(colTex.r>1.0)
+    // {
+    //     float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5)+0.5;
+    //     colTex.r=r;
+    // }
+    // if(colTex.g>1.0)
+    // {
+    //     float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5)+0.5;
+    //     colTex.g=r;
+    // }
+    // if(colTex.b>1.0)
+    // {
+    //     float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5)+0.5;
+    //     colTex.b=r;
+    // }
 
-    if(colTex.r>1.0||colTex.g>1.0||colTex.b>1.0)
-    {
-        float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5)+0.5;
-        colTex=vec4( 1.0,r,r,1.0);
-    }
-    if(colTex.r<0.0||colTex.g<0.0||colTex.b<0.0)
-    {
-        float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5);
-        colTex=vec4( r,0.0,0.0,1.0);
-    }
+    // if(colTex.r>1.0||colTex.g>1.0||colTex.b>1.0)
+    // {
+    //     float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5)+0.5;
+    //     colTex=vec4( 1.0,r,r,1.0);
+    // }
+    // if(colTex.r<0.0||colTex.g<0.0||colTex.b<0.0)
+    // {
+    //     float r=mod( (time*1.0)+(texCoord.x+texCoord.y)*2.1,0.5);
+    //     colTex=vec4( r,0.0,0.0,1.0);
+    // }
 
     outColor = mix(col,colTex,colTex.a);
 }
