@@ -265,10 +265,14 @@ Patch.prototype.getAssetPath = function ()
     {
         return "/assets/" + gui.project()._id + "/";
     }
-    else if (document.location.href.indexOf("cables.gl") > 0)
+    else if (document.location.href.indexOf("cables.gl") > 0 || document.location.href.indexOf("cables.local") > 0)
     {
         const parts = document.location.href.split("/");
         return "/assets/" + parts[parts.length - 1] + "/";
+    }
+    else if (this.config.hasOwnProperty("assetPath"))
+    {
+        return this.config.assetPath;
     }
     else
     {
@@ -284,7 +288,14 @@ Patch.prototype.getAssetPath = function ()
  */
 Patch.prototype.getJsPath = function ()
 {
-    return "js/";
+    if (this.config.hasOwnProperty("jsPath"))
+    {
+        return this.config.jsPath;
+    }
+    else
+    {
+        return "js/";
+    }
 };
 
 /**
@@ -1453,7 +1464,9 @@ Patch.replaceOpIds = function (json)
  * configuration object for loading a patch
  * @typedef {Object} PatchConfig
  * @hideconstructor
- * @property {String} [prefixAssetPath=''] path to assets
+ * @property {String} [prefixAssetPath=''] prefix for path to assets
+ * @property {String} [assetPath=''] path to assets
+ * @property {String} [jsPath=''] path to javascript files
  * @property {String} [glCanvasId='glcanvas'] dom element id of canvas element
  * @property {Function} [onError=null] called when an error occurs
  * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
