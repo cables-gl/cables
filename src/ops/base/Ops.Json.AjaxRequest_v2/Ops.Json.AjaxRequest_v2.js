@@ -68,6 +68,8 @@ function reload(addCachebuster, force = false)
             url,
             (err, _data, xhr) =>
             {
+                outData.set(null);
+                outString.set(null);
                 if (err)
                 {
                     op.patch.loading.finished(loadingId);
@@ -79,13 +81,11 @@ function reload(addCachebuster, force = false)
                 try
                 {
                     let data = _data;
-                    outData.set(null);
                     if (typeof data === "string" && inParseJson.get())
                     {
                         data = JSON.parse(_data);
                         outData.set(data);
                     }
-                    outString.set(null);
                     outString.set(_data);
                     op.uiAttr({ "error": null });
                     op.patch.loading.finished(loadingId);
