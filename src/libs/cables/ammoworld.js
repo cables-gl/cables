@@ -73,7 +73,6 @@ const AmmoWorld = class extends CABLES.EventTarget
 
         if (idx > -1) this.bodies.splice(idx, 1);
 
-        Ammo.destroy(b);
         delete this._bodymeta[metaIdx];
     }
 
