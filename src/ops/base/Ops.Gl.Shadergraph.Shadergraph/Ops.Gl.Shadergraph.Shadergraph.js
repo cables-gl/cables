@@ -86,13 +86,13 @@ function getDefaultParameter(t)
 
 function getPortParamStr(p, convertTo)
 {
-    if (p.parent.shaderVar)
-    {
-        return p.parent.shaderVar;
-    }
-
     let paramStr = "";
 
+    if (p.parent.shaderVar)
+    {
+        paramStr = p.parent.shaderVar;
+    }
+    else
     if (p.direction == CABLES.PORT_DIR_OUT)
     {
         paramStr += callFunc(p.parent, p.uiAttribs.objType);
@@ -136,6 +136,7 @@ function callFunc(op, convertTo)
         let paramStr = "";
         const p = op.portsIn[i];
         if (p.uiAttribs.objType == "sg_void") continue;
+        if (p.type != CABLES.OP_PORT_TYPE_OBJECT) continue;
 
         // parameters...
         if (p.isLinked())
@@ -144,6 +145,8 @@ function callFunc(op, convertTo)
             {
                 const otherPort = p.links[i].getOtherPort(p);
                 paramStr = getPortParamStr(otherPort, p.uiAttribs.objType);
+
+                console.log("objtype", p.uiAttribs.objType);
                 addOpShaderFuncCode(otherPort.parent);
             }
         }

@@ -1512,7 +1512,6 @@ const Op = function ()
      */
     Op.prototype.removePort = function (port)
     {
-        // for(var ipi in this.portsIn)
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             if (this.portsIn[ipi] == port)
