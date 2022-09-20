@@ -19,21 +19,21 @@
             {
                 "type": 2,
                 "name": "a",
-                "objType": "sg_genType"
+                "objType": "sg_float"
             },
             {
                 "type": 2,
                 "name": "b",
-                "objType": "sg_genType"
+                "objType": "sg_float"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_genType"
+                "objType": "sg_float"
             }
         ],
-        "name": "Ops.User.pandur.SG_Sum"
+        "name": "Ops.ShaderGraph.Sum"
     }
 }

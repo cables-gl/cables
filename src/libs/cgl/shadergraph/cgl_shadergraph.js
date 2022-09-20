@@ -1,4 +1,3 @@
-
 class ShaderGraphOp
 {
     constructor(op, srcFrag)
@@ -13,6 +12,7 @@ class ShaderGraphOp
             this.updatePorts(info);
         }
 
+        this._op.on("onLinkChanged", this.sendOutPing.bind(this));
         this.addPortWatcher();
     }
 
@@ -21,13 +21,14 @@ class ShaderGraphOp
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
             if (this._op.portsIn[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
-            this._op.portsIn[i].onLinkChanged = this.sendOutPing.bind(this);
-            this._op.portsIn[i].onChanged = this.sendOutPing.bind(this);
+            // this._op.portsIn[i].onLinkChanged = this.sendOutPing.bind(this);
+            this._op.portsIn[i].onChange = this.sendOutPing.bind(this);
         }
     }
 
     sendOutPing()
     {
+        // console.log("sendoutping", this._op.portsOut.length);
         for (let i = 0; i < this._op.portsOut.length; i++)
         {
             if (this._op.portsOut[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
@@ -101,7 +102,7 @@ class ShaderGraphOp
     updatePorts(info)
     {
         const foundPortInNames = {};
-        this._op.shaderSrc = info.src; //
+        this._op.shaderSrc = info.src;
 
         if (info.functions.length > 0)
         {
@@ -133,12 +134,13 @@ class ShaderGraphOp
 
         for (let i = 0; i < this._inPorts.length; i++) if (!foundPortInNames[this._inPorts[i].name]) this._inPorts[i].remove();
 
+        this.addPortWatcher();
         this._op.refreshParams();
     }
 }
 
 
-ShaderGraphOp.getMaxGenTypeFromPorts = (ports) =>
+ShaderGraphOp.getMaxGenTypeFromPorts = (ports, portsSetType) =>
 {
     const types = ["sg_float", "sg_vec2", "sg_vec3", "sg_vec4"];
     let typeIdx = 0;
@@ -150,7 +152,13 @@ ShaderGraphOp.getMaxGenTypeFromPorts = (ports) =>
             typeIdx = Math.max(typeIdx, t);
         }
 
-    return types[typeIdx];
+    const t = types[typeIdx];
+
+    if (portsSetType)
+        for (let i = 0; i < portsSetType.length; i++)
+            portsSetType[i].setUiAttribs({ "objType": t });
+
+    return t;
 };
 
 export { ShaderGraphOp };

@@ -3,6 +3,8 @@ const
     inputb = op.inObject("b", null, "sg_genType"),
     outvec = op.outObject("result", null, "sg_genType");
 
+new CGL.ShaderGraphOp(this);
+
 inputb.onLinkChanged =
 inputa.onLinkChanged = () =>
 {
