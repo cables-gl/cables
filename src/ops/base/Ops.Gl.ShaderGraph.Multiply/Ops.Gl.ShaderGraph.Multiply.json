@@ -1,0 +1,47 @@
+{
+    "id": "84316631-39d6-45f7-8b03-2499dc22f3bb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663505106203
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663603531827
+        },
+        {
+            "message": "Ops.User.pandur.SG_Mul renamed to Ops.Gl.ShaderGraph.Multiply",
+            "author": "pandur",
+            "date": 1663686227790
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663505136216,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "a",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "b",
+                "objType": "sg_vec2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec2"
+            }
+        ],
+        "name": "Ops.Gl.ShaderGraph.Multiply"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}

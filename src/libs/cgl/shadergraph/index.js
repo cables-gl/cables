@@ -1,3 +1,3 @@
-import { ShaderGraph } from "./cgl_shadergraph";
+import { ShaderGraphOp } from "./cgl_shadergraph";
 
-CGL.ShaderGraph = ShaderGraph;
+CGL.ShaderGraphOp = ShaderGraphOp;

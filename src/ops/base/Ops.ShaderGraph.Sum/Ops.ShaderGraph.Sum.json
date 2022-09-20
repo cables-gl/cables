@@ -1,0 +1,39 @@
+{
+    "id": "5bca04f9-bb17-4bd0-bcd1-0427ee3b2933",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663505945790
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sum renamed to Ops.ShaderGraph.Sum",
+            "author": "pandur",
+            "date": 1663686278309
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663505950570,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "a",
+                "objType": "sg_genType"
+            },
+            {
+                "type": 2,
+                "name": "b",
+                "objType": "sg_genType"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_genType"
+            }
+        ],
+        "name": "Ops.User.pandur.SG_Sum"
+    }
+}

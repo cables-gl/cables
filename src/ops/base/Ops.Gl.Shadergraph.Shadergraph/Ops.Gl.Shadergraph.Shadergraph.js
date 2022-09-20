@@ -29,25 +29,6 @@ function replaceId(op, txt)
     return txt.replaceAll("_ID", "_" + op.shaderId);
 }
 
-function addOpShaderFuncCode(op)
-{
-    if (opIdsHeadSrc[op.id])
-    {
-        // console.log("already exist",op.name,op.id);
-        return;
-    }
-    opIdsHeadSrc[op.id] = true;
-
-    if (op.shaderSrc)
-    {
-        let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
-        src = replaceId(op, src);
-
-        // console.log(src);
-        headSrc += src;
-    }
-}
-
 function convertTypes(typeTo, typeFrom, paramStr)
 {
     console.log(typeFrom, " to ", typeTo);
@@ -112,6 +93,25 @@ function typeConv(sgtype)
     return sgtype.substr(3);
 }
 
+function addOpShaderFuncCode(op)
+{
+    if (opIdsHeadSrc[op.id])
+    {
+        // console.log("already exist",op.name,op.id);
+        return;
+    }
+    opIdsHeadSrc[op.id] = true;
+
+    if (op.shaderSrc)
+    {
+        let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
+        src = replaceId(op, src);
+
+        // console.log(src);
+        headSrc += src;
+    }
+}
+
 function callFunc(op, convertTo)
 {
     setOpShaderId(op);
@@ -127,7 +127,7 @@ function callFunc(op, convertTo)
     }
     opIdsFuncCallSrc[op.shaderId] = true;
 
-    callstr += replaceId(op, op.shaderFunc) + "(";
+    callstr += replaceId(op, op.shaderFunc || "") + "(";
 
     addOpShaderFuncCode(op);
 
@@ -156,10 +156,16 @@ function callFunc(op, convertTo)
             paramStr = getDefaultParameter(p.uiAttribs.objType);
         }
 
+        if (p.parent.shaderCodeOperator)
+        {
+            callstr += paramStr;
+            if (i < op.portsIn.length - 1) callstr += " " + p.parent.shaderCodeOperator + " ";
+        }
+        else
         if (paramStr)
         {
             callstr += paramStr;
-            if (i < op.portsIn.length - 1)callstr += ", ";
+            if (i < op.portsIn.length - 1) callstr += ", ";
         }
     }
 

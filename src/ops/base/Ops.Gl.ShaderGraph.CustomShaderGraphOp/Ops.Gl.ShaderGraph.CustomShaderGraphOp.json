@@ -1,0 +1,48 @@
+{
+    "id": "a4145b55-6ef9-4084-b32f-7eb224a7661c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663652520672
+        },
+        {
+            "message": "Ops.User.pandur.SG_custom renamed to Ops.Gl.ShaderGraph.CustomShaderGraphOp",
+            "author": "pandur",
+            "date": 1663684220552
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663652578797,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Code"
+            },
+            {
+                "type": 2,
+                "name": "rgbaaaabbb",
+                "objType": "sg_vec3"
+            },
+            {
+                "type": 2,
+                "name": "abb",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "rgba",
+                "objType": "sg_vec2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_vec2"
+            }
+        ],
+        "name": "Ops.Gl.ShaderGraph.CustomShaderGraphOp"
+    }
+}
