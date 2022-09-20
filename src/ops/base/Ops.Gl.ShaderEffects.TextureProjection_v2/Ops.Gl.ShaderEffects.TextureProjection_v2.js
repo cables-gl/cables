@@ -5,7 +5,7 @@ const
 
     inScale = op.inValue("Scale", 10),
 
-    inTarget = op.inSwitch("Target", ["Color", "Pointsize"], "Color"),
+    inTarget = op.inSwitch("Target", ["Color", "Pointsize", "Alpha"], "Color"),
 
     inBlend = CGL.TextureEffect.AddBlendSelect(op, "blendMode"),
     inAmount = op.inValueSlider("Amount", 0.3),
@@ -88,6 +88,7 @@ function updateDefines()
     mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");
     mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");
 
+    mod.toggleDefine("MOD_TARGET_ALPHA", inTarget.get() == "Alpha");
     mod.toggleDefine("MOD_TARGET_COLOR", inTarget.get() == "Color");
     mod.toggleDefine("MOD_TARGET_POINTSIZE", inTarget.get() == "Pointsize");
 }

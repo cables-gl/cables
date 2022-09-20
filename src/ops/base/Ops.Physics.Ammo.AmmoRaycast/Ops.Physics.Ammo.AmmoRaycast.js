@@ -87,7 +87,6 @@ function update()
             if (meta)
             {
                 world.emitEvent("rayCastHit", meta.name);
-
                 outName.set(meta.name);
             }
 
@@ -117,6 +116,10 @@ function update()
             op.patch.cgl.setCursor("auto");
             didsetCursor = false;
         }
+
+        Ammo.destroy(rayCallback);
+        if (afrom)Ammo.destroy(afrom);
+        if (ato)Ammo.destroy(ato);
     }
 
     next.trigger();

@@ -1,4 +1,5 @@
-#ifdef MOD_TARGET_COLOR
+#ifndef MOD_TARGET_POINTSIZE
+
 
     vec4 MOD_color;
 
@@ -48,7 +49,12 @@
             col.a=MOD_color.a;
         #endif
 
+        #ifdef MOD_TARGET_COLOR
         col=cgl_blendPixel(col,MOD_color,MOD_amount*col.a);
+        #endif
+        #ifdef MOD_TARGET_ALPHA
+        col.a=1.0-MOD_color.r*MOD_amount;
+        #endif
 
     #ifdef MOD_DISCARD
     }
