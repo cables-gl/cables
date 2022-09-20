@@ -1,0 +1,27 @@
+{
+    "id": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663497260224
+        },
+        {
+            "message": "Ops.User.pandur.VizStringLong renamed to Ops.Ui.VizStringLong",
+            "author": "pandur",
+            "date": 1663497628560
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663497279735,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Ui.VizStringLong"
+    }
+}

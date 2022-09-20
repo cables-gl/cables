@@ -39,7 +39,8 @@ inRandom.onTriggered = () =>
             key.g = Math.random();
             key.b = Math.random();
         });
-        updateGradient(keys);
+        const newKeys = JSON.stringify({ "keys": keys });
+        inGrad.set(newKeys);
     }
 };
 

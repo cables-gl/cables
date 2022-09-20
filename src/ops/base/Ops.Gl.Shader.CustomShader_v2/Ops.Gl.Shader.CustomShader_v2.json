@@ -10,6 +10,11 @@
             "message": "Ops.Exp.Gl.Shader.CustomShader2 renamed to Ops.Gl.Shader.CustomShader_v2",
             "author": "pandur",
             "date": 1587375684964
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663603500747
         }
     ],
     "authorName": "pandur",
@@ -94,5 +99,8 @@
     "youtubeids": [
         "Zfhn8xSM0SE"
     ],
-    "exampleProjectId": "vWyGud"
+    "exampleProjectId": "vWyGud",
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
 }
