@@ -1,0 +1,42 @@
+{
+    "id": "38ad0d02-7973-437b-8372-7f3f77bfad48",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334784358
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663686975347
+        },
+        {
+            "message": "Ops.User.pandur.SG_fragColor renamed to Ops.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1663688573149
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663334861097,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "col",
+                "objType": "sg_vec4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_void"
+            }
+        ],
+        "name": "Ops.User.pandur.SG_fragColor"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}
