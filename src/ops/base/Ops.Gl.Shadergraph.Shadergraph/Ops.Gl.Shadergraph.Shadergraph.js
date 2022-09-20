@@ -63,13 +63,13 @@ function convertTypes(typeTo, typeFrom, paramStr)
 
     if (typeFrom == "sg_vec2" && typeTo == "sg_float") return paramStr + ".x";
 
-    if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return "vec4(" + paramStr + ",1.)";
+    if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 1.)";
 
-    if (typeFrom == "sg_vec2" && typeTo == "sg_vec4") return "vec4(" + paramStr + ",1.,1.)";
+    if (typeFrom == "sg_vec2" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 1., 1.)";
 
     if (typeFrom == "sg_float" && typeTo == "sg_vec2") return "vec2(" + paramStr + "," + paramStr + ")";
     if (typeFrom == "sg_float" && typeTo == "sg_vec3") return "vec3(" + paramStr + "," + paramStr + "," + paramStr + ")";
-    if (typeFrom == "sg_float" && typeTo == "sg_vec4") return "vec4(" + paramStr + "," + paramStr + "," + paramStr + ",1.0)";
+    if (typeFrom == "sg_float" && typeTo == "sg_vec4") return "vec4(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
 
     return "/* conversionfail: " + typeFrom + "->" + typeTo + " */";
 }
@@ -156,7 +156,7 @@ function callFunc(op, convertTo)
         if (paramStr)
         {
             callstr += paramStr;
-            if (i < op.portsIn.length - 1)callstr += ",";
+            if (i < op.portsIn.length - 1)callstr += ", ";
         }
     }
 
