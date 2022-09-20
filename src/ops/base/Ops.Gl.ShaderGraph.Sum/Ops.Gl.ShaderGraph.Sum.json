@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.SG_Sum renamed to Ops.ShaderGraph.Sum",
             "author": "pandur",
             "date": 1663686278309
+        },
+        {
+            "message": "Ops.ShaderGraph.Sum renamed to Ops.Gl.ShaderGraph.Sum",
+            "author": "pandur",
+            "date": 1663688885442
         }
     ],
     "authorName": "pandur",
