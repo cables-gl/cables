@@ -34,7 +34,7 @@
                 "objType": "sg_void"
             }
         ],
-        "name": "Ops.User.pandur.SG_fragColor"
+        "name": "Ops.Gl.ShaderGraph.FragColor"
     },
     "coreLibs": [
         "cgl_shadergraph"

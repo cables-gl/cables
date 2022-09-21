@@ -326,7 +326,7 @@ function updateShader()
 
     shader.compile();
 
-    if (CABLES.UI) gui.opParams.show(op);
+    op.refreshParams();
 
     outShader.set(null);
     outShader.set(shader);

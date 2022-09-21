@@ -20,6 +20,11 @@
             "message": "Ops.User.pandur.Shadergraph renamed to Ops.Gl.Shadergraph.Shadergraph",
             "author": "pandur",
             "date": 1663611643598
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663738085184
         }
     ],
     "libs": [],
@@ -28,16 +33,20 @@
     "layout": {
         "portsIn": [
             {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
                 "type": 2,
                 "name": "Fragment",
                 "objType": "sg_func"
-            },
-            {
-                "type": 1,
-                "name": "Compile"
             }
         ],
         "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
             {
                 "type": 2,
                 "name": "Shader"
@@ -48,5 +57,8 @@
             }
         ],
         "name": "Ops.Gl.Shadergraph.Shadergraph"
-    }
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
 }

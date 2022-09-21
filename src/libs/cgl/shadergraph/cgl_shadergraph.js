@@ -1,164 +1,232 @@
-class ShaderGraphOp
+const ShaderGraph = class extends CABLES.EventTarget
 {
-    constructor(op, srcFrag)
+    constructor(op, port)
     {
+        super();
         this._op = op;
-        this._inPorts = [];
-        this._outPorts = [];
+        this._port = port;
 
-        if (srcFrag)
+        this._opIdsHeadFuncSrc = {};
+        this._opIdsFuncCallSrc = {};
+        this._headFuncSrc = "";
+        this._headUniSrc = "";
+        this._callFuncStack = [];
+        this._finalSrcFrag = "";
+        this._finalSrcVert = "";
+
+        port.on("change", this.compile.bind(this));
+    }
+
+    getSrcFrag() { return this._finalSrcFrag; }
+
+    getSrcVert() { return this._finalSrcVert; }
+
+    setOpShaderId(op)
+    {
+        if (!op.shaderId) op.shaderId = CGL.ShaderGraph.getNewId();
+    }
+
+    replaceId(op, txt)
+    {
+        this.setOpShaderId(op);
+        return txt.replaceAll("_ID", "_" + op.shaderId);
+    }
+
+    addOpShaderFuncCode(op)
+    {
+        if (this._opIdsHeadFuncSrc[op.id])
         {
-            const info = this.parseCode(srcFrag);
-            this.updatePorts(info);
+        // console.log("already exist",op.name,op.id);
+            return;
+        }
+        this._opIdsHeadFuncSrc[op.id] = true;
+
+        if (op.shaderSrc)
+        {
+            let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
+            src = this.replaceId(op, src);
+
+            // console.log(src);
+            this._headFuncSrc += src;
         }
 
-        this._op.on("onLinkChanged", this.sendOutPing.bind(this));
-        this.addPortWatcher();
+        if (op.shaderSrcUniforms) this._headUniSrc += op.shaderSrcUniforms.endl();
     }
 
-    addPortWatcher()
+
+    callFunc(op, convertTo)
     {
-        for (let i = 0; i < this._op.portsIn.length; i++)
+        this.setOpShaderId(op);
+        let callstr = "  ";
+
+        const varname = "var" + op.getTitle() + "_" + op.shaderId;
+        if (convertTo)callstr += ShaderGraph.typeConv(convertTo) + " " + varname + " = ";
+
+        if (this._opIdsFuncCallSrc[op.shaderId])
         {
-            if (this._op.portsIn[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
-            // this._op.portsIn[i].onLinkChanged = this.sendOutPing.bind(this);
-            this._op.portsIn[i].onChange = this.sendOutPing.bind(this);
+            if (varname) return varname;
+            return;
         }
-    }
+        this._opIdsFuncCallSrc[op.shaderId] = true;
 
-    sendOutPing()
-    {
-        // console.log("sendoutping", this._op.portsOut.length);
-        for (let i = 0; i < this._op.portsOut.length; i++)
+        callstr += this.replaceId(op, op.shaderFunc || "") + "(";
+
+        this.addOpShaderFuncCode(op);
+
+        for (let i = 0; i < op.portsIn.length; i++)
         {
-            if (this._op.portsOut[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
-            this._op.portsOut[i].set(null);
-            this._op.portsOut[i].set({});
-        }
-    }
+            let paramStr = "";
+            const p = op.portsIn[i];
+            if (p.uiAttribs.objType == "sg_void") continue;
+            if (p.type != CABLES.OP_PORT_TYPE_OBJECT) continue;
 
-    isTypeDef(str)
-    {
-        return str == "void" || str == "float" || str == "vec2" || str == "vec3" || str == "vec4" || str == "void" || str == "mat4" || str == "mat3" || str == "mat2";
-    }
-
-    parseCode(_code)
-    {
-        let code = _code;
-
-        let info = { "functions": [], "uniforms": [] };
-
-        code = code.replaceAll("{{", ""); // remove spaces before brackets
-        code = code.replaceAll("}}", ""); // remove spaces before brackets
-
-        code = code.replaceAll(/\/\*[\s\S]*?\*\/|\/\/.*/g, ""); // remove comments
-        code = code.replaceAll(/{[^{}]*}/g, "{}"); // remove function content
-        code = code.replaceAll("\n{}", "{}");
-        code = code.replaceAll(";", " ;"); // add spaces for better splitting
-        code = code.replaceAll(" {", "{"); // remove spaces before brackets
-        code = code.replaceAll("(", " ( "); // add spaces for better splitting
-        code = code.replaceAll(")", " ) "); // add spaces for better splitting
-        code = code.replaceAll(",", " , "); // add spaces for better splitting
-        code = code.replace(/ +(?= )/g, ""); // remove double whitespaces
-
-        const lines = code.split("\n");
-
-        console.log(lines);
-
-        for (let i = 0; i < lines.length; i++)
-        {
-            if (lines[i].indexOf("{}") > 0 &&
-                lines[i].indexOf("(") > 0 &&
-                lines[i].indexOf(")") > 0)
+            // parameters...
+            if (p.isLinked())
             {
-                const words = lines[i].split(" ");
-
-                if (this.isTypeDef(words[0]))
+                for (let j = 0; j < p.links.length; j++)
                 {
-                    const infoFunc = { "name": words[1], "type": words[0], "params": [] };
-                    info.functions.push(infoFunc);
+                    const otherPort = p.links[j].getOtherPort(p);
+                    paramStr = this._getPortParamStr(otherPort, p.uiAttribs.objType);
 
-                    for (let j = 3; j < words.length - 2; j += 3)
-                        infoFunc.params.push({ "name": words[j + 1], "type": words[j] });
+                    console.log("objtype", p.uiAttribs.objType);
+                    this.addOpShaderFuncCode(otherPort.parent);
                 }
             }
-
-            if (lines[i].indexOf("UNI") == 0 || lines[i].indexOf("uniform") == 0)
+            else
             {
-                const words = lines[i].split(" ");
-                if (this.isTypeDef(words[1]))
-                {
-                    info.uniforms.push({ "name": words[2], "type": words[1] });
-                }
+                this.addOpShaderFuncCode(p.parent);
+                paramStr = ShaderGraph.getDefaultParameter(p.uiAttribs.objType);
+            }
+
+            if (p.parent.shaderCodeOperator)
+            {
+                callstr += paramStr;
+                if (i < op.portsIn.length - 1) callstr += " " + p.parent.shaderCodeOperator + " ";
+            }
+            else
+            if (paramStr)
+            {
+                callstr += paramStr;
+                if (i < op.portsIn.length - 1) callstr += ", ";
             }
         }
 
-        info.src = _code;
-        console.log(info);
-        return info;
+        callstr += ");";
+
+        this._callFuncStack.push(callstr);
+
+        return varname;
     }
 
 
-    updatePorts(info)
+    _getPortParamStr(p, convertTo)
     {
-        const foundPortInNames = {};
-        this._op.shaderSrc = info.src;
+        let paramStr = "";
 
-        if (info.functions.length > 0)
+        if (p.parent.shaderVar)
         {
-            const f = info.functions[0];
-            this._op.setTitle(f.name);
-            this._op.shaderFunc = f.name;
-
-            for (let p = 0; p < f.params.length; p++)
-            {
-                const port = this._op.getPort(f.params[p].name) || this._op.inObject(f.params[p].name);
-
-                port.setUiAttribs({ "objType": "sg_" + f.params[p].type });
-
-                this._inPorts.push(port);
-
-                foundPortInNames[f.params[p].name] = true;
-            }
-
-
-            let port = this._op.getPort("Result");
-            if (!port)
-            {
-                port = this._op.outObject("Result");
-                this._outPorts.push(port);
-            }
-            port.setUiAttribs({ "objType": "sg_" + f.type });
+            paramStr = p.parent.shaderVar;
+        }
+        else
+        if (p.direction == CABLES.PORT_DIR_OUT)
+        {
+            paramStr += this.callFunc(p.parent, p.uiAttribs.objType);
         }
 
+        if (convertTo && convertTo != p.uiAttribs.objType)
+        {
+            console.log("convertTo", convertTo, "from", p.uiAttribs.objType);
+            paramStr = ShaderGraph.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
+        }
 
-        for (let i = 0; i < this._inPorts.length; i++) if (!foundPortInNames[this._inPorts[i].name]) this._inPorts[i].remove();
-
-        this.addPortWatcher();
-        this._op.refreshParams();
+        return paramStr;
     }
-}
 
+    compile()
+    {
+        const l = this._port.links;
+        console.log(l);
 
-ShaderGraphOp.getMaxGenTypeFromPorts = (ports, portsSetType) =>
-{
-    const types = ["sg_float", "sg_vec2", "sg_vec3", "sg_vec4"];
-    let typeIdx = 0;
+        this._callFuncStack = [];
 
-    for (let j = 0; j < ports.length; j++)
-        for (let i = 0; i < ports[j].links.length; i++)
+        this._opIdsFuncCallSrc = {};
+        this._opIdsHeadFuncSrc = {};
+        this._headFuncSrc = "";
+        this._headUniSrc = "";
+        let callSrc = "";
+
+        for (let i = 0; i < l.length; i++)
         {
-            const t = types.indexOf(ports[j].links[i].getOtherPort(ports[j]).uiAttribs.objType);
-            typeIdx = Math.max(typeIdx, t);
+            const lnk = l[i];
+            callSrc += this.callFunc(lnk.getOtherPort(this._port).parent) + ";".endl();
         }
 
-    const t = types[typeIdx];
+        callSrc = this._callFuncStack.join("\n");
 
-    if (portsSetType)
-        for (let i = 0; i < portsSetType.length; i++)
-            portsSetType[i].setUiAttribs({ "objType": t });
+        const src = "".endl() +
+        "{{MODULES_HEAD}}".endl().endl() +
+        "IN vec2 texCoord;".endl().endl() +
+        this._headUniSrc.endl().endl() +
+        this._headFuncSrc.endl().endl() +
 
-    return t;
+        "void main()".endl() +
+        "{".endl() +
+        "  {{MODULE_BEGIN_FRAG}}".endl() +
+
+        callSrc.endl() +
+        "}".endl();
+
+        this._finalSrcFrag = src;
+        this.emitEvent("compiled");
+    }
 };
 
-export { ShaderGraphOp };
+ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
+{
+    console.log(typeFrom, " to ", typeTo);
+
+    if (typeTo == "sg_genType") return paramStr;
+
+    if (typeFrom == "sg_vec4" && typeTo == "sg_vec3") return paramStr + ".xyz";
+    if (typeFrom == "sg_vec4" && typeTo == "sg_vec2") return paramStr + ".xy";
+    if (typeFrom == "sg_vec4" && typeTo == "sg_float") return paramStr + ".x";
+
+    if (typeFrom == "sg_vec3" && typeTo == "sg_vec2") return paramStr + ".xy";
+    if (typeFrom == "sg_vec3" && typeTo == "sg_float") return paramStr + ".x";
+
+    if (typeFrom == "sg_vec2" && typeTo == "sg_float") return paramStr + ".x";
+
+    if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 1.)";
+
+    if (typeFrom == "sg_vec2" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 1., 1.)";
+
+    if (typeFrom == "sg_float" && typeTo == "sg_vec2") return "vec2(" + paramStr + "," + paramStr + ")";
+    if (typeFrom == "sg_float" && typeTo == "sg_vec3") return "vec3(" + paramStr + "," + paramStr + "," + paramStr + ")";
+    if (typeFrom == "sg_float" && typeTo == "sg_vec4") return "vec4(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
+
+    return "/* conversionfail: " + typeFrom + "->" + typeTo + " */";
+};
+
+ShaderGraph.getDefaultParameter = function (t)
+{
+    if (t == "sg_vec4") return "vec4(1., 1., 1., 1.)";
+    if (t == "sg_vec3") return "vec3(1., 1., 1.)";
+    if (t == "sg_vec2") return "vec2(1., 1.)";
+    if (t == "sg_float") return "1.";
+    if (t == "sg_genType") return "1.";
+    return "/* no default: " + t + "*/";
+};
+
+ShaderGraph.typeConv = function (sgtype)
+{
+    return sgtype.substr(3);
+};
+
+
+ShaderGraph.shaderIdCounter = ShaderGraph.shaderIdCounter || 1;
+ShaderGraph.getNewId = () =>
+{
+    return ++ShaderGraph.shaderIdCounter;
+};
+
+export { ShaderGraph };
