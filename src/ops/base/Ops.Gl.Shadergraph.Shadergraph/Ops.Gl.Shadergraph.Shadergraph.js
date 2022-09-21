@@ -43,11 +43,9 @@ inExec.onTriggered = () =>
         needsUpdate = false;
     }
 
-    console.log(uniformTextures.length);
     for (let i = 0; i < uniformTextures.length; i++)
         shader.pushTexture(uniformTextures[i].uni, uniformTextures[i].port.get());
 
-    // console.log(sg.uniforms);
     cgl.pushShader(shader);
 
     next.trigger();

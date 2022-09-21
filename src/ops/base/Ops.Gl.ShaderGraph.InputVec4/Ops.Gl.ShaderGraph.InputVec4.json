@@ -1,0 +1,68 @@
+{
+    "id": "4e089d60-006b-4879-9b45-b9616c7fc18d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334994692
+        },
+        {
+            "message": "Ops.User.pandur.SG_Uniform renamed to Ops.User.pandur.SG_UniformVec4",
+            "author": "pandur",
+            "date": 1663567314833
+        },
+        {
+            "message": "Ops.User.pandur.SG_UniformVec4 renamed to Ops.Gl.ShaderGraph.Vec4",
+            "author": "pandur",
+            "date": 1663743280774
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Vec4 renamed to Ops.Gl.ShaderGraph.InputVec4",
+            "author": "pandur",
+            "date": 1663763777482
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663335036343,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Number X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number W",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "vec4",
+                "objType": "sg_vec4"
+            }
+        ],
+        "name": "Ops.Gl.ShaderGraph.Vec4"
+    }
+}

@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.SG_UniformTexture renamed to Ops.Gl.ShaderGraph.Texture",
             "author": "pandur",
             "date": 1663763636855
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Texture renamed to Ops.Gl.ShaderGraph.InputTexture",
+            "author": "pandur",
+            "date": 1663763790899
         }
     ],
     "authorName": "pandur",
