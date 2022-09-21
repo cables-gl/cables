@@ -69,6 +69,7 @@ function updateStyle()
 function remove()
 {
     div.remove();
+    if (styleEle)styleEle.remove();
 }
 
 function updateVisible()

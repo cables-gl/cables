@@ -1,23 +1,34 @@
 const
-    exe=op.inTriggerButton('Generate'),
-    min=op.inValue("min",0),
-    max=op.inValue("max",1),
+    exe = op.inTriggerButton("Generate"),
+    min = op.inValue("min", 0),
+    max = op.inValue("max", 1),
     outTrig = op.outTrigger("next"),
-    result=op.outValue("result"),
-    inInteger=op.inValueBool("Integer",false);
+    result = op.outValue("result"),
+    inInteger = op.inValueBool("Integer", false),
+    noDupe = op.inValueBool("No consecutive duplicates", false);
 
-exe.onTriggered=genRandom;
-max.onChange=genRandom;
-min.onChange=genRandom;
-inInteger.onChange=genRandom;
+op.setPortGroup("Value Range", [min, max]);
 
-op.setPortGroup("Value Range",[min,max]);
+exe.onTriggered =
+    max.onChange =
+    min.onChange =
+    inInteger.onChange = genRandom;
+
 genRandom();
 
 function genRandom()
 {
-    var r=(Math.random()*(max.get()-min.get()))+min.get();
-    if(inInteger.get())r=Math.floor((Math.random()*((max.get()-min.get()+1)))+min.get());
+    let r = (Math.random() * (max.get() - min.get())) + min.get();
+
+    if (inInteger.get())r = randInt();
+
+    while (noDupe.get() && r == result.get()) r = randInt();
+
     result.set(r);
     outTrig.trigger();
+}
+
+function randInt()
+{
+    return Math.floor((Math.random() * ((max.get() - min.get() + 1))) + min.get());
 }
