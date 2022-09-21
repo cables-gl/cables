@@ -1139,6 +1139,13 @@ Shader.prototype.getUniform = function (name)
     return null;
 };
 
+Shader.prototype.removeAllUniforms = function ()
+{
+    this._uniforms = [];
+    // for (let i = 0; i < this._uniforms.length; i++)
+    //     this.removeUniform(this._uniforms[i].name);
+};
+
 Shader.prototype.removeUniform = function (name)
 {
     for (let i = 0; i < this._uniforms.length; i++)

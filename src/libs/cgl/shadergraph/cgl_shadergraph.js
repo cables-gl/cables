@@ -14,6 +14,8 @@ const ShaderGraph = class extends CABLES.EventTarget
         this._finalSrcFrag = "";
         this._finalSrcVert = "";
 
+        this.uniforms = [];
+
         port.on("change", this.compile.bind(this));
     }
 
@@ -50,14 +52,42 @@ const ShaderGraph = class extends CABLES.EventTarget
             this._headFuncSrc += src;
         }
 
-        if (op.shaderSrcUniforms) this._headUniSrc += op.shaderSrcUniforms.endl();
+        // if (op.shaderSrcUniforms) this._headUniSrc += op.shaderSrcUniforms.endl();
+
+        if (op.shaderUniforms)
+            for (let i = 0; i < op.shaderUniforms.length; i++)
+            {
+                const uni = op.shaderUniforms[i];
+                if (!uni.static)
+                {
+                    this._headUniSrc += "uniform " + CGL.Uniform.glslTypeString(uni.type) + " " + uni.name + ";";
+                    this.uniforms.push(uni);
+                }
+                else
+                    this._headUniSrc += this.uniformAsStaticVar(uni);
+            }
     }
 
+    uniformAsStaticVar(uni)
+    {
+        const typeStr = CGL.Uniform.glslTypeString(uni.type);
+        let str = typeStr + " " + uni.name + "= " + typeStr + "(";
+
+        for (let i = 0; i < uni.ports.length; i++)
+        {
+            str += uni.ports[i].get();
+            if (i != uni.ports.length - 1)str += ",";
+        }
+
+        str += ");";
+        return str;
+    }
 
     callFunc(op, convertTo)
     {
         this.setOpShaderId(op);
         let callstr = "  ";
+
 
         const varname = "var" + op.getTitle() + "_" + op.shaderId;
         if (convertTo)callstr += ShaderGraph.typeConv(convertTo) + " " + varname + " = ";
@@ -88,7 +118,7 @@ const ShaderGraph = class extends CABLES.EventTarget
                     const otherPort = p.links[j].getOtherPort(p);
                     paramStr = this._getPortParamStr(otherPort, p.uiAttribs.objType);
 
-                    console.log("objtype", p.uiAttribs.objType);
+                    // console.log("objtype", p.uiAttribs.objType);
                     this.addOpShaderFuncCode(otherPort.parent);
                 }
             }
@@ -135,7 +165,6 @@ const ShaderGraph = class extends CABLES.EventTarget
 
         if (convertTo && convertTo != p.uiAttribs.objType)
         {
-            console.log("convertTo", convertTo, "from", p.uiAttribs.objType);
             paramStr = ShaderGraph.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
         }
 
@@ -145,8 +174,8 @@ const ShaderGraph = class extends CABLES.EventTarget
     compile()
     {
         const l = this._port.links;
-        console.log(l);
 
+        this.uniforms = [];
         this._callFuncStack = [];
 
         this._opIdsFuncCallSrc = {};
@@ -183,7 +212,7 @@ const ShaderGraph = class extends CABLES.EventTarget
 
 ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
 {
-    console.log(typeFrom, " to ", typeTo);
+    // console.log(typeFrom, " to ", typeTo);
 
     if (typeTo == "sg_genType") return paramStr;
 

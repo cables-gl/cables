@@ -228,24 +228,29 @@ Uniform.prototype.copy = function (newShader)
  * @instance
  * @return {string} type as string
  */
+
 Uniform.prototype.getGlslTypeString = function ()
 {
-    if (this._type == "f") return "float";
-    if (this._type == "b") return "bool";
-    if (this._type == "i") return "int";
-    if (this._type == "2i") return "ivec2";
-    if (this._type == "2f") return "vec2";
-    if (this._type == "3f") return "vec3";
-    if (this._type == "4f") return "vec4";
-    if (this._type == "m4") return "mat4";
+    return Uniform.glslTypeString(this._type);
+};
+Uniform.glslTypeString = function (t)
+{
+    if (t == "f") return "float";
+    if (t == "b") return "bool";
+    if (t == "i") return "int";
+    if (t == "2i") return "ivec2";
+    if (t == "2f") return "vec2";
+    if (t == "3f") return "vec3";
+    if (t == "4f") return "vec4";
+    if (t == "m4") return "mat4";
 
-    if (this._type == "t") return "sampler2D";
-    if (this._type == "tc") return "samplerCube";
+    if (t == "t") return "sampler2D";
+    if (t == "tc") return "samplerCube";
 
-    if (this._type == "3f[]") return null; // ignore this for now...
-    if (this._type == "m4[]") return null; // ignore this for now...
+    if (t == "3f[]") return null; // ignore this for now...
+    if (t == "m4[]") return null; // ignore this for now...
 
-    this._log.warn("[CGL UNIFORM] unknown glsl type string ", this._type);
+    this._log.warn("[CGL UNIFORM] unknown glsl type string ", t);
 };
 
 Uniform.prototype._isValidLoc = function ()

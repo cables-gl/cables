@@ -49,7 +49,7 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.User.pandur.SG_Color"
+        "name": "Ops.Gl.ShaderGraph.Color"
     },
     "coreLibs": [
         "cgl_shadergraph"
