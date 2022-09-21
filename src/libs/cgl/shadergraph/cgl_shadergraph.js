@@ -43,7 +43,7 @@ const ShaderGraph = class extends CABLES.EventTarget
         }
         this._opIdsHeadFuncSrc[op.id] = true;
 
-        if (op.sgOp._defines)
+        if (op.sgOp && op.sgOp._defines)
             for (let i = 0; i < op.sgOp._defines.length; i++)
                 this._headFuncSrc += "#define " + op.sgOp._defines[i][0] + "\n";
 

@@ -6,7 +6,7 @@ import { MESH } from "./cgl_mesh";
 import { CONSTANTS } from "./constants";
 import { escapeHTML } from "./cgl_utils";
 import Logger from "../core_logger";
-import defaultShaderSrcFrag from "./cgl_shader_default_glsl.vert";
+import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
 // ---------------------------------------------------------------------------
 
 
@@ -1430,7 +1430,7 @@ Shader.prototype.setFeedbackNames = function (names)
 
 Shader.prototype.getDefaultVertexShader = Shader.getDefaultVertexShader = function ()
 {
-    return defaultShaderSrcFrag;
+    return defaultShaderSrcVert;
 };
 
 Shader.prototype.getDefaultFragmentShader = Shader.getDefaultFragmentShader = function (r, g, b)
