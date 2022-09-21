@@ -7,8 +7,10 @@ op.setUiAttrib({ "height": 150, "resizable": true });
 
 inTex.onChange = () =>
 {
+    const t = inTex.get();
+
     outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-    outTex.set(inTex.get());
+    outTex.set(t);
 };
 
 op.renderVizLayer = (ctx, layer) =>
