@@ -464,11 +464,15 @@ function printInfo()
             html += "<td>" + gltf.json.cameras[i].name + "</td>";
             html += "<td>" + gltf.json.cameras[i].type + "</td>";
             html += "<td>";
-            html += "yfov: " + Math.round(gltf.json.cameras[i].perspective.yfov * 100) / 100;
-            html += ", ";
-            html += "zfar: " + Math.round(gltf.json.cameras[i].perspective.zfar * 100) / 100;
-            html += ", ";
-            html += "znear: " + Math.round(gltf.json.cameras[i].perspective.znear * 100) / 100;
+
+            if (gltf.json.cameras[i].perspective)
+            {
+                html += "yfov: " + Math.round(gltf.json.cameras[i].perspective.yfov * 100) / 100;
+                html += ", ";
+                html += "zfar: " + Math.round(gltf.json.cameras[i].perspective.zfar * 100) / 100;
+                html += ", ";
+                html += "znear: " + Math.round(gltf.json.cameras[i].perspective.znear * 100) / 100;
+            }
             html += "</td>";
 
             html += "<tr>";
