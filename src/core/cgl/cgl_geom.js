@@ -910,7 +910,7 @@ Geometry.buildFromFaces = function (arr, name, optimize)
     return geom;
 };
 
-// TODO: not needed anymore ?!
+// TODO: not needed anymore ?! move to deprecated ops?
 Geometry.json2geom = function (jsonMesh)
 {
     const geom = new Geometry("jsonMeshGeom");
