@@ -1,6 +1,8 @@
 void setColor(vec4 col)
 {
-    {{MODULE_COLOR}}
+    #ifdef SETCOLOR_ALPHA
     col.a=1.0;
+    #endif
+    {{MODULE_COLOR}}
     outColor=col;
 }

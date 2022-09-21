@@ -25,6 +25,11 @@
                 "type": 2,
                 "name": "col",
                 "objType": "sg_vec4"
+            },
+            {
+                "type": 0,
+                "name": "Alpha always one",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -45,6 +45,10 @@
                 "type": 0,
                 "name": "Type index",
                 "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Name"
             }
         ],
         "portsOut": [

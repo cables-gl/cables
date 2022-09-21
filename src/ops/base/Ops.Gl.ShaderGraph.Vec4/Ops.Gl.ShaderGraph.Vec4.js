@@ -2,21 +2,30 @@ const
     uni1 = op.inFloat("Number X", 0),
     uni2 = op.inFloat("Number Y", 0),
     uni3 = op.inFloat("Number Z", 0),
-    uni4 = op.inFloat("Number W", 0),
+    uni4 = op.inFloat("Number W", 1),
     inType = op.inSwitch("Type", ["Uniform", "Static"], "Uniform"),
+    inName = op.inString("Name", "myVec4"),
     result = op.outObject("vec4", null, "sg_vec4");
 
 const sgOp = new CGL.ShaderGraphOp(this);
-const varname = "myVec4" + CGL.ShaderGraph.getNewId();
 
-op.shaderVar = varname;
+inName.onChange =
+inType.onChange = updateUniDefs;
 
-inType.onChange = updateUniforms;
+updateUniDefs();
 
-updateUniforms();
+uni1.onChange =
+    uni2.onChange =
+    uni3.onChange =
+    uni4.onChange = () =>
+    {
+        if (inType.get() == "Static")sgOp.sendOutPing();
+    };
 
-function updateUniforms()
+function updateUniDefs()
 {
+    const varname = (inName.get() || "myVec4") + "_" + CGL.ShaderGraph.getNewId();
+    op.shaderVar = varname;
     op.shaderUniforms =
         [{
             "type": "4f",

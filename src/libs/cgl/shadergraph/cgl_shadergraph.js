@@ -43,16 +43,16 @@ const ShaderGraph = class extends CABLES.EventTarget
         }
         this._opIdsHeadFuncSrc[op.id] = true;
 
+        if (op.sgOp._defines)
+            for (let i = 0; i < op.sgOp._defines.length; i++)
+                this._headFuncSrc += "#define " + op.sgOp._defines[i][0] + "\n";
+
         if (op.shaderSrc)
         {
             let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
             src = this.replaceId(op, src);
-
-            // console.log(src);
             this._headFuncSrc += src;
         }
-
-        // if (op.shaderSrcUniforms) this._headUniSrc += op.shaderSrcUniforms.endl();
 
         if (op.shaderUniforms)
             for (let i = 0; i < op.shaderUniforms.length; i++)
@@ -60,7 +60,7 @@ const ShaderGraph = class extends CABLES.EventTarget
                 const uni = op.shaderUniforms[i];
                 if (!uni.static)
                 {
-                    this._headUniSrc += "uniform " + CGL.Uniform.glslTypeString(uni.type) + " " + uni.name + ";";
+                    this._headUniSrc += "uniform " + CGL.Uniform.glslTypeString(uni.type) + " " + uni.name + ";".endl();
                     this.uniforms.push(uni);
                 }
                 else
@@ -71,7 +71,7 @@ const ShaderGraph = class extends CABLES.EventTarget
     uniformAsStaticVar(uni)
     {
         const typeStr = CGL.Uniform.glslTypeString(uni.type);
-        let str = typeStr + " " + uni.name + "= " + typeStr + "(";
+        let str = typeStr + " " + uni.name + "=" + typeStr + "(";
 
         for (let i = 0; i < uni.ports.length; i++)
         {
@@ -79,7 +79,7 @@ const ShaderGraph = class extends CABLES.EventTarget
             if (i != uni.ports.length - 1)str += ",";
         }
 
-        str += ");";
+        str += ");".endl();
         return str;
     }
 
@@ -103,6 +103,8 @@ const ShaderGraph = class extends CABLES.EventTarget
 
         this.addOpShaderFuncCode(op);
 
+        const numObjectPorts = this.countObjectInputPorts(op);
+        let count = 0;
         for (let i = 0; i < op.portsIn.length; i++)
         {
             let paramStr = "";
@@ -131,14 +133,15 @@ const ShaderGraph = class extends CABLES.EventTarget
             if (p.parent.shaderCodeOperator)
             {
                 callstr += paramStr;
-                if (i < op.portsIn.length - 1) callstr += " " + p.parent.shaderCodeOperator + " ";
+                if (count < numObjectPorts - 1) callstr += " " + p.parent.shaderCodeOperator + " ";
             }
             else
             if (paramStr)
             {
                 callstr += paramStr;
-                if (i < op.portsIn.length - 1) callstr += ", ";
+                if (count < numObjectPorts - 1) callstr += ", ";
             }
+            count++;
         }
 
         callstr += ");";
@@ -146,6 +149,15 @@ const ShaderGraph = class extends CABLES.EventTarget
         this._callFuncStack.push(callstr);
 
         return varname;
+    }
+
+    countObjectInputPorts(op)
+    {
+        let count = 0;
+        for (let i = 0; i < op.portsIn.length; i++)
+            if (op.portsIn[i].type == CABLES.OP_PORT_TYPE_OBJECT)
+                count++;
+        return count;
     }
 
 
@@ -225,24 +237,24 @@ ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
 
     if (typeFrom == "sg_vec2" && typeTo == "sg_float") return paramStr + ".x";
 
-    if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 1.)";
+    if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 0.)";
 
-    if (typeFrom == "sg_vec2" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 1., 1.)";
+    if (typeFrom == "sg_vec2" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 0., 0.)";
 
     if (typeFrom == "sg_float" && typeTo == "sg_vec2") return "vec2(" + paramStr + "," + paramStr + ")";
     if (typeFrom == "sg_float" && typeTo == "sg_vec3") return "vec3(" + paramStr + "," + paramStr + "," + paramStr + ")";
-    if (typeFrom == "sg_float" && typeTo == "sg_vec4") return "vec4(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
+    if (typeFrom == "sg_float" && typeTo == "sg_vec4") return "vec4(" + paramStr + "," + paramStr + "," + paramStr + ", 0.0)";
 
     return "/* conversionfail: " + typeFrom + "->" + typeTo + " */";
 };
 
 ShaderGraph.getDefaultParameter = function (t)
 {
-    if (t == "sg_vec4") return "vec4(1., 1., 1., 1.)";
-    if (t == "sg_vec3") return "vec3(1., 1., 1.)";
-    if (t == "sg_vec2") return "vec2(1., 1.)";
-    if (t == "sg_float") return "1.";
-    if (t == "sg_genType") return "1.";
+    if (t == "sg_vec4") return "vec4(0., 0., 0., 0.)";
+    if (t == "sg_vec3") return "vec3(0., 0., 0.)";
+    if (t == "sg_vec2") return "vec2(0., 0.)";
+    if (t == "sg_float") return "0.";
+    if (t == "sg_genType") return "0.";
     return "/* no default: " + t + "*/";
 };
 

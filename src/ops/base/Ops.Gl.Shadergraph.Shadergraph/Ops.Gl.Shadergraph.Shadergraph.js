@@ -33,6 +33,7 @@ inExec.onTriggered = () =>
             if (su.ports) shader.addUniformFrag(su.type, su.name, su.ports[0], su.ports[1], su.ports[2], su.ports[3]);
             else console.log("uni has no ports", su.ports);
         }
+        needsUpdate = false;
     }
 
     // console.log(sg.uniforms);
