@@ -15,6 +15,11 @@
             "message": " added core lib: cgl_shadergraph",
             "author": "pandur",
             "date": 1663603500747
+        },
+        {
+            "message": " removed core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663679379062
         }
     ],
     "authorName": "pandur",
@@ -100,7 +105,5 @@
         "Zfhn8xSM0SE"
     ],
     "exampleProjectId": "vWyGud",
-    "coreLibs": [
-        "cgl_shadergraph"
-    ]
+    "coreLibs": []
 }
