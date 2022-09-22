@@ -10,7 +10,7 @@ const ShaderGraph = class extends CABLES.EventTarget
 
         this._opIdsHeadFuncSrc = {};
         this._opIdsFuncCallSrc = {};
-        this._functionIds = {};
+        this._functionIdInHead = {};
 
         this._headFuncSrc = "";
         this._headUniSrc = "";
@@ -40,6 +40,14 @@ const ShaderGraph = class extends CABLES.EventTarget
 
     addOpShaderFuncCode(op)
     {
+        if (!op.sgOp)
+        {
+            console.warn("HAS NO SGOP!", op);
+            return;
+        }
+        // if (!op.sgOp.info) return;
+
+
         if (this._opIdsHeadFuncSrc[op.id])
         {
         // console.log("already exist",op.name,op.id);
@@ -51,11 +59,28 @@ const ShaderGraph = class extends CABLES.EventTarget
             for (let i = 0; i < op.sgOp._defines.length; i++)
                 this._headFuncSrc += "#define " + op.sgOp._defines[i][0] + "\n";
 
-        if (op.shaderSrc)
+        // if (op.shaderSrc)
+        // {
+        //     let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
+        //     src = this.replaceId(op, src);
+        //     this._headFuncSrc += src;
+        // }
+
+
+        if (op.sgOp.info)
         {
-            let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
-            src = this.replaceId(op, src);
-            this._headFuncSrc += src;
+            console.log(op.sgOp.info.name, op.sgOp.info.functions.length);
+            for (let i = 0; i < op.sgOp.info.functions.length; i++)
+            {
+                const f = op.sgOp.info.functions[i];
+                console.log("ADD FUNCTION CODE", f.name, this._functionIdInHead[f.name]);
+                if (this._functionIdInHead[f.name]) continue;
+                if (f.name.indexOf("_ID") == -1) this._functionIdInHead[f.name] = true;
+                let src = f.src;
+                console.log("src", src);
+                src = this.replaceId(op, src);
+                this._headFuncSrc += src;
+            }
         }
 
         if (op.shaderUniforms)
@@ -202,7 +227,7 @@ const ShaderGraph = class extends CABLES.EventTarget
 
         this.uniforms = [];
         this._callFuncStack = [];
-
+        this._functionIdInHead = {};
         this._opIdsFuncCallSrc = {};
         this._opIdsHeadFuncSrc = {};
         this._headFuncSrc = "";

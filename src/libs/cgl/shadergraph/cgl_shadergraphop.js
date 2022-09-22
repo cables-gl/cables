@@ -2,13 +2,13 @@ class ShaderGraphOp
 {
     constructor(op, srcFrag)
     {
-        this._op = op;
         op.sgOp = this;
-        this.info = null;
+        this._op = op;
         this._inPorts = [];
         this._outPorts = [];
         this._defines = [];
         this.enabled = true;
+        this.info = null;
 
         if (srcFrag)
         {
@@ -111,19 +111,29 @@ class ShaderGraphOp
                     // parse the first and last line numbers
                     let functioncode = remainingcode.substring(0, cc + 1);
                     const linenums = functioncode.split("###line:");
-                    const lineNumStart = parseInt(linenums[1].split(":")[0]);
-                    const lineNumEnd = parseInt(linenums[linenums.length - 1].split(":")[0]);
+
+                    console.log("linenums", linenums);
+                    let lineNumStart = 0, lineNumEnd = 0;
+                    if (linenums.length > 1)
+                    {
+                        lineNumStart = parseInt(linenums[1].split(":")[0]);
+                        lineNumEnd = parseInt(linenums[linenums.length - 1].split(":")[0]);
+                    }
                     functioncode = "";
 
                     // concat the whole function
                     for (let j = lineNumStart; j <= lineNumEnd + 1; j++)
-                        functioncode += origLines[j] + "\n";
+                        if (origLines[j])functioncode += origLines[j] + "\n";
 
                     const infoFunc = { "name": words[1], "type": words[0], "params": [], "src": functioncode };
 
                     // analyze function head and read all parameters
+                    words.length = words.indexOf(")") + 1;
+                    console.log("WORDZ", words);
                     for (let j = 3; j < words.length - 2; j += 3)
+                    {
                         infoFunc.params.push({ "name": words[j + 1], "type": words[j] });
+                    }
 
                     info.functions.push(infoFunc);
                 }

@@ -24,20 +24,25 @@
             {
                 "type": 2,
                 "name": "tex",
-                "objType": "sg_sampler2D"
+                "objType": "sg_("
             },
             {
                 "type": 2,
                 "name": "texCoord",
                 "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "return",
+                "objType": "sg_{"
+            },
+            {
+                "type": 2,
+                "name": ")",
+                "objType": "sg_texCoord"
             }
         ],
         "portsOut": [
-            {
-                "type": 2,
-                "name": "color",
-                "objType": "sg_vec4"
-            },
             {
                 "type": 2,
                 "name": "Result",
