@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.SG_SampleTexture renamed to Ops.Gl.ShaderGraph.SampleTexture",
             "author": "pandur",
             "date": 1663763655515
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663768016895
         }
     ],
     "authorName": "pandur",
@@ -32,8 +37,16 @@
                 "type": 2,
                 "name": "color",
                 "objType": "sg_vec4"
+            },
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.User.pandur.SG_SampleTexture"
-    }
+        "name": "Ops.Gl.ShaderGraph.SampleTexture"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
 }

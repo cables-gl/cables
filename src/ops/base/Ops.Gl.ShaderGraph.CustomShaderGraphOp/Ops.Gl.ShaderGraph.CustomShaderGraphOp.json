@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.SG_custom renamed to Ops.Gl.ShaderGraph.CustomShaderGraphOp",
             "author": "pandur",
             "date": 1663684220552
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663828875485
         }
     ],
     "authorName": "pandur",
@@ -19,30 +24,12 @@
             {
                 "type": 5,
                 "name": "Code"
-            },
-            {
-                "type": 2,
-                "name": "rgbaaaabbb",
-                "objType": "sg_vec3"
-            },
-            {
-                "type": 2,
-                "name": "abb",
-                "objType": "sg_float"
-            },
-            {
-                "type": 2,
-                "name": "rgba",
-                "objType": "sg_vec2"
             }
         ],
-        "portsOut": [
-            {
-                "type": 2,
-                "name": "Result",
-                "objType": "sg_vec2"
-            }
-        ],
+        "portsOut": [],
         "name": "Ops.Gl.ShaderGraph.CustomShaderGraphOp"
-    }
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
 }

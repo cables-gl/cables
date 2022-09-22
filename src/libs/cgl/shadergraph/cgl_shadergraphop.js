@@ -4,16 +4,19 @@ class ShaderGraphOp
     {
         this._op = op;
         op.sgOp = this;
+        this.info = null;
         this._inPorts = [];
         this._outPorts = [];
         this._defines = [];
+        this.enabled = true;
+
         if (srcFrag)
         {
-            const info = this.parseCode(srcFrag);
-            this.updatePorts(info);
+            this.info = this.parseCode(srcFrag);
+            this.updatePorts(this.info);
         }
 
-        this._op.on("onLinkChanged", this.sendOutPing.bind(this));
+        this._op.on("onLinkChanged", this.updateGraph.bind(this));
         this.addPortWatcher();
     }
 
@@ -22,14 +25,12 @@ class ShaderGraphOp
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
             if (this._op.portsIn[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
-            // this._op.portsIn[i].onLinkChanged = this.sendOutPing.bind(this);
-            this._op.portsIn[i].onChange = this.sendOutPing.bind(this);
+            this._op.portsIn[i].onChange = this.updateGraph.bind(this);
         }
     }
 
-    sendOutPing()
+    updateGraph()
     {
-        // console.log("sendoutping", this._op.portsOut.length);
         for (let i = 0; i < this._op.portsOut.length; i++)
         {
             if (this._op.portsOut[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
@@ -40,7 +41,7 @@ class ShaderGraphOp
 
     isTypeDef(str)
     {
-        return str == "void" || str == "float" || str == "vec2" || str == "vec3" || str == "vec4" || str == "void" || str == "mat4" || str == "mat3" || str == "mat2";
+        return str == "void" || str == "float" || str == "sampler2D" || str == "vec2" || str == "vec3" || str == "vec4" || str == "void" || str == "mat4" || str == "mat3" || str == "mat2";
     }
 
     parseCode(_code)
@@ -49,18 +50,30 @@ class ShaderGraphOp
 
         let info = { "functions": [], "uniforms": [] };
 
+        const origLines = code.split("\n");
+        const prelines = code.split("\n");
+
+        for (let i = 0; i < prelines.length; i++)
+        {
+            prelines[i] += "###line:" + i + ":###";
+        }
+        code = prelines.join("\n");
+
+
         code = code.replaceAll("{{", ""); // remove spaces before brackets
         code = code.replaceAll("}}", ""); // remove spaces before brackets
 
-        code = code.replaceAll(/\/\*[\s\S]*?\*\/|\/\/.*/g, ""); // remove comments
-        code = code.replaceAll(/{[^{}]*}/g, "{}"); // remove function content
-        code = code.replaceAll("\n{}", "{}");
+        // code = code.replaceAll(/\/\*[\s\S]*?\*\/|\/\/.*/g, ""); // remove comments
+        // code = code.replaceAll(/{[^{}]*}/g, "{}"); // remove function content
+        code = code.replaceAll("\n{", "{");
         code = code.replaceAll(";", " ;"); // add spaces for better splitting
-        code = code.replaceAll(" {", "{"); // remove spaces before brackets
+        // code = code.replaceAll("{", "{"); // remove spaces before brackets
         code = code.replaceAll("(", " ( "); // add spaces for better splitting
         code = code.replaceAll(")", " ) "); // add spaces for better splitting
         code = code.replaceAll(",", " , "); // add spaces for better splitting
         code = code.replace(/ +(?= )/g, ""); // remove double whitespaces
+
+        console.log(origLines);
 
         const lines = code.split("\n");
 
@@ -68,19 +81,51 @@ class ShaderGraphOp
 
         for (let i = 0; i < lines.length; i++)
         {
-            if (lines[i].indexOf("{}") > 0 &&
+            // identify function
+            if (lines[i].indexOf("{") > 0 &&
                 lines[i].indexOf("(") > 0 &&
                 lines[i].indexOf(")") > 0)
             {
                 const words = lines[i].split(" ");
 
-                if (this.isTypeDef(words[0]))
+                if (this.isTypeDef(words[0])) // function header start with return typedef
                 {
-                    const infoFunc = { "name": words[1], "type": words[0], "params": [] };
-                    info.functions.push(infoFunc);
+                    console.log("found functiun header!");
 
+                    // merge all the remaining lines to be able to search for the end of the function ...
+                    let remainingcode = "";
+                    for (let j = i; j < lines.length; j++)
+                        remainingcode += lines[j];
+
+                    // search for all {} and find the end of the function body...
+                    const startPos = remainingcode.indexOf("{");
+                    let count = 0;
+                    let cc = 0;
+                    for (cc = startPos; cc < remainingcode.length; cc++)
+                    {
+                        if (remainingcode.charAt(cc) == "{")count++;
+                        if (remainingcode.charAt(cc) == "}")count--;
+                        if (count == 0) break;
+                    }
+
+                    // parse the first and last line numbers
+                    let functioncode = remainingcode.substring(0, cc + 1);
+                    const linenums = functioncode.split("###line:");
+                    const lineNumStart = parseInt(linenums[1].split(":")[0]);
+                    const lineNumEnd = parseInt(linenums[linenums.length - 1].split(":")[0]);
+                    functioncode = "";
+
+                    // concat the whole function
+                    for (let j = lineNumStart; j <= lineNumEnd + 1; j++)
+                        functioncode += origLines[j] + "\n";
+
+                    const infoFunc = { "name": words[1], "type": words[0], "params": [], "src": functioncode };
+
+                    // analyze function head and read all parameters
                     for (let j = 3; j < words.length - 2; j += 3)
                         infoFunc.params.push({ "name": words[j + 1], "type": words[j] });
+
+                    info.functions.push(infoFunc);
                 }
             }
 
@@ -95,10 +140,9 @@ class ShaderGraphOp
         }
 
         info.src = _code;
-        console.log(info);
+        console.log("info", info);
         return info;
     }
-
 
     updatePorts(info)
     {
@@ -122,7 +166,6 @@ class ShaderGraphOp
                 foundPortInNames[f.params[p].name] = true;
             }
 
-
             let port = this._op.getPort("Result");
             if (!port)
             {
@@ -131,7 +174,6 @@ class ShaderGraphOp
             }
             port.setUiAttribs({ "objType": "sg_" + f.type });
         }
-
 
         for (let i = 0; i < this._inPorts.length; i++) if (!foundPortInNames[this._inPorts[i].name]) this._inPorts[i].remove();
 
@@ -180,7 +222,7 @@ class ShaderGraphOp
         // this.setWhyCompile("define " + name + " " + value);
         // this._needsRecompile = true;
         this._defines.push([name, value]);
-        this.sendOutPing();
+        this.updateGraph();
     }
 
     getDefines()
@@ -226,7 +268,7 @@ class ShaderGraphOp
                 // this._needsRecompile = true;
 
                 // this.setWhyCompile("define removed:" + name);
-                this.sendOutPing();
+                this.updateGraph();
                 return;
             }
         }
@@ -236,7 +278,7 @@ class ShaderGraphOp
     {
         if (enabled) this.define(name);
         else this.removeDefine(name);
-        this.sendOutPing();
+        this.updateGraph();
     }
 }
 

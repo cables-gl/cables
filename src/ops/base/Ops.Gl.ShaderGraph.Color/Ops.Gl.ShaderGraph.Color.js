@@ -14,5 +14,5 @@ function update()
     if (inColor.get() == "Pink") op.shaderVar = "vec4(1.,0.,1.,1.)";
     if (inColor.get() == "Yellow") op.shaderVar = "vec4(1.,1.,0.,1.)";
 
-    sg.sendOutPing();
+    sg.updateGraph();
 }

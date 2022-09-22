@@ -39,7 +39,7 @@
                 "objType": "sg_float"
             }
         ],
-        "name": "Ops.User.pandur.SG_Noise"
+        "name": "Ops.Gl.ShaderGraph.SG_Noise"
     },
     "coreLibs": [
         "cgl_shadergraph"

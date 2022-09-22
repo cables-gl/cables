@@ -19,7 +19,7 @@ uni1.onChange =
     uni3.onChange =
     uni4.onChange = () =>
     {
-        if (inType.get() == "Static")sgOp.sendOutPing();
+        if (inType.get() == "Static")sgOp.updateGraph();
     };
 
 function updateUniDefs()
@@ -36,5 +36,5 @@ function updateUniDefs()
 
     op.setUiAttrib({ "extendTitle": inName.get() });
 
-    sgOp.sendOutPing();
+    sgOp.updateGraph();
 }

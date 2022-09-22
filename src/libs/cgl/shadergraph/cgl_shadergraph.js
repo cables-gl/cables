@@ -1,3 +1,5 @@
+import paramsHelper from "../../../../../cables_ui/src/ui/components/opparampanel/params_helper";
+
 const ShaderGraph = class extends CABLES.EventTarget
 {
     constructor(op, port)
@@ -8,6 +10,8 @@ const ShaderGraph = class extends CABLES.EventTarget
 
         this._opIdsHeadFuncSrc = {};
         this._opIdsFuncCallSrc = {};
+        this._functionIds = {};
+
         this._headFuncSrc = "";
         this._headUniSrc = "";
         this._callFuncStack = [];
@@ -88,8 +92,7 @@ const ShaderGraph = class extends CABLES.EventTarget
         this.setOpShaderId(op);
         let callstr = "  ";
 
-
-        const varname = "var" + op.getTitle() + "_" + op.shaderId;
+        const varname = "var_" + op.getTitle() + "_" + op.shaderId;
         if (convertTo)callstr += ShaderGraph.typeConv(convertTo) + " " + varname + " = ";
 
         if (this._opIdsFuncCallSrc[op.shaderId])
@@ -127,7 +130,17 @@ const ShaderGraph = class extends CABLES.EventTarget
             else
             {
                 this.addOpShaderFuncCode(p.parent);
+                // if (p.uiAttribs.objType == "sg_sampler2D")
+                // {
+                //     // callstr = "vec4(1.0)";
+                //     // break;
+                //     // paramStr = "null";
+                //     // break;
+                // }
+                // else
+                // {
                 paramStr = ShaderGraph.getDefaultParameter(p.uiAttribs.objType);
+                // }
             }
 
             if (p.parent.shaderCodeOperator)
@@ -227,6 +240,8 @@ ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
     // console.log(typeFrom, " to ", typeTo);
 
     if (typeTo == "sg_genType") return paramStr;
+
+    if (typeFrom == "sg_texture" && typeTo == "sg_vec3") return paramStr + ".xyz";
 
     if (typeFrom == "sg_vec4" && typeTo == "sg_vec3") return paramStr + ".xyz";
     if (typeFrom == "sg_vec4" && typeTo == "sg_vec2") return paramStr + ".xy";

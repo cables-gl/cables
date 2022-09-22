@@ -7,7 +7,7 @@ const
     inType = op.inSwitch("Type", ["Uniform", "Static"], "Uniform"),
     result = op.outObject("vec4", null, "sg_vec4");
 
-uni1.setUiAttribs({ colorPick: true });
+uni1.setUiAttribs({ "colorPick": true });
 
 
 const sgOp = new CGL.ShaderGraphOp(this);
@@ -22,7 +22,7 @@ uni1.onChange =
     uni3.onChange =
     uni4.onChange = () =>
     {
-        if (inType.get() == "Static")sgOp.sendOutPing();
+        if (inType.get() == "Static")sgOp.updateGraph();
     };
 
 function updateUniDefs()
@@ -39,5 +39,5 @@ function updateUniDefs()
 
     op.setUiAttrib({ "extendTitle": inName.get() });
 
-    sgOp.sendOutPing();
+    sgOp.updateGraph();
 }
