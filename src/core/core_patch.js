@@ -315,8 +315,8 @@ Patch.prototype.getFilePath = function (filename)
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
     if (filename.indexOf("data:") === 0) return filename;
 
-    filename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
-    return filename.replaceAll("//", "/");
+    filename = filename.replace("//", "/");
+    return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
 };
 
 Patch.prototype.clear = function ()
