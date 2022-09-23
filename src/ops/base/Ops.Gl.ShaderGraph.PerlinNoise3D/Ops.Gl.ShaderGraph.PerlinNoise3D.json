@@ -1,0 +1,34 @@
+{
+    "id": "bba73873-2b81-419b-899f-323e7dc159ea",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663929595857
+        },
+        {
+            "message": "Ops.User.pandur.PerlinNoise3D renamed to Ops.Gl.ShaderGraph.PerlinNoise3D",
+            "author": "pandur",
+            "date": 1663937990290
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "P",
+                "objType": "sg_vec3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_float"
+            }
+        ],
+        "name": "Ops.User.pandur.PerlinNoise3D"
+    },
+    "authorName": "pandur",
+    "created": 1663929676175
+}
