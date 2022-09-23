@@ -30,11 +30,14 @@ inExec.onTriggered = () =>
     {
         uniformTextures = [];
         shader.removeAllUniforms();
+
+        console.log(sg.getSrcVert(), sg.getSrcFrag());
         shader.setSource(sg.getSrcVert(), sg.getSrcFrag());
 
-        for (let i = 0; i < sg.uniforms.length; i++)
+        const unis = sg.getUniforms();
+        for (let i = 0; i < unis.length; i++)
         {
-            const su = sg.uniforms[i];
+            const su = unis[i];
             shader.removeUniform(su.name);
 
             let uni = null;
