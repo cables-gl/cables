@@ -91,9 +91,9 @@ const ShaderGraph = class extends CABLES.EventTarget
             for (let i = 0; i < op.sgOp.info.functions.length; i++)
             {
                 const f = op.sgOp.info.functions[i];
-                console.log("ADD FUNCTION CODE", f.name, this._functionIdInHead[f.name]);
-                if (this._functionIdInHead[f.name]) continue;
-                if (f.name.indexOf("_ID") == -1) this._functionIdInHead[f.name] = true;
+                console.log("ADD FUNCTION CODE", f.name, f.uniqueName, this._functionIdInHead[f.uniqueName]);
+                if (this._functionIdInHead[f.uniqueName]) continue;
+                if (f.name.indexOf("_ID") == -1) this._functionIdInHead[f.uniqueName] = true;
                 let src = f.src;
                 console.log("src", src);
                 src = this.replaceId(op, src);
@@ -300,6 +300,7 @@ ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
 
     if (typeTo == "sg_genType") return paramStr;
 
+
     if (typeFrom == "sg_texture" && typeTo == "sg_vec3") return paramStr + ".xyz";
 
     if (typeFrom == "sg_vec4" && typeTo == "sg_vec3") return paramStr + ".xyz";
@@ -313,6 +314,7 @@ ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
 
     if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 0.)";
 
+    if (typeFrom == "sg_vec2" && typeTo == "sg_vec3") return "vec3(" + paramStr + ", 0.)";
     if (typeFrom == "sg_vec2" && typeTo == "sg_vec4") return "vec4(" + paramStr + ", 0., 0.)";
 
     if (typeFrom == "sg_float" && typeTo == "sg_vec2") return "vec2(" + paramStr + "," + paramStr + ")";

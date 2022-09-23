@@ -41,7 +41,7 @@ class ShaderGraphOp
 
     isTypeDef(str)
     {
-        return str == "void" || str == "float" || str == "sampler2D" || str == "vec2" || str == "vec3" || str == "vec4" || str == "void" || str == "mat4" || str == "mat3" || str == "mat2";
+        return str == "void" || str == "float" || str == "sampler2D" || str == "vec2" || str == "vec3" || str == "vec4" || str == "void" || str == "mat4" || str == "mat3" || str == "mat2" || str == "out";
     }
 
     parseCode(_code)
@@ -108,12 +108,16 @@ class ShaderGraphOp
                         if (count == 0) break;
                     }
 
+
+                    console.log("remainingcode", remainingcode);
                     // parse the first and last line numbers
                     let functioncode = remainingcode.substring(0, cc + 1);
                     const linenums = functioncode.split("###line:");
 
+                    console.log("functioncode", functioncode);
+
                     console.log("linenums", linenums);
-                    let lineNumStart = 0, lineNumEnd = 0;
+                    let lineNumStart = i, lineNumEnd = i - 1;
                     if (linenums.length > 1)
                     {
                         lineNumStart = parseInt(linenums[1].split(":")[0]);
@@ -126,13 +130,14 @@ class ShaderGraphOp
                         if (origLines[j])functioncode += origLines[j] + "\n";
 
                     const infoFunc = { "name": words[1], "type": words[0], "params": [], "src": functioncode };
+                    infoFunc.uniqueName = words[0] + "_" + words[1];
 
                     // analyze function head and read all parameters
                     words.length = words.indexOf(")") + 1;
-                    console.log("WORDZ", words);
                     for (let j = 3; j < words.length - 2; j += 3)
                     {
                         infoFunc.params.push({ "name": words[j + 1], "type": words[j] });
+                        infoFunc.uniqueName += "_" + words[j + 0] + "_" + words[j + 1];
                     }
 
                     info.functions.push(infoFunc);
@@ -149,6 +154,7 @@ class ShaderGraphOp
             }
         }
 
+
         info.src = _code;
         console.log("info", info);
         return info;
@@ -161,7 +167,7 @@ class ShaderGraphOp
 
         if (info.functions.length > 0)
         {
-            const f = info.functions[0];
+            const f = info.functions[info.functions.length - 1];
             this._op.setTitle(f.name);
             this._op.shaderFunc = f.name;
 
