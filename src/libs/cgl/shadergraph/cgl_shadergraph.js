@@ -2,11 +2,12 @@ import paramsHelper from "../../../../../cables_ui/src/ui/components/opparampane
 
 const ShaderGraph = class extends CABLES.EventTarget
 {
-    constructor(op, port)
+    constructor(op, portFrag, portVert)
     {
         super();
         this._op = op;
-        this._port = port;
+        this._portFrag = portFrag;
+        this._portVert = portVert;
 
         this._opIdsHeadFuncSrc = {};
         this._opIdsFuncCallSrc = {};
@@ -16,11 +17,28 @@ const ShaderGraph = class extends CABLES.EventTarget
         this._headUniSrc = "";
         this._callFuncStack = [];
         this._finalSrcFrag = "";
-        this._finalSrcVert = "";
+        this._finalSrcVert = CGL.Shader.getDefaultVertexShader();
 
         this.uniforms = [];
 
-        port.on("change", this.compile.bind(this));
+        portFrag.on("change", () =>
+        {
+            this.compile(this._portFrag, "frag");
+        });
+        portVert.on("change", this.updateVertex.bind(this));
+        portVert.on("onLinkChanged", this.updateVertex.bind(this));
+    }
+
+    updateVertex()
+    {
+        console.log("update vertex", this._portVert.isLinked());
+
+        if (this._portVert.isLinked()) this.compile(this._portVert, "vert");
+        else
+        {
+            this._finalSrcVert = CGL.Shader.getDefaultVertexShader();
+            this.emitEvent("compiled");
+        }
     }
 
     getSrcFrag() { return this._finalSrcFrag; }
@@ -221,9 +239,9 @@ const ShaderGraph = class extends CABLES.EventTarget
         return paramStr;
     }
 
-    compile()
+    compile(port, type)
     {
-        const l = this._port.links;
+        const l = port.links;
 
         this.uniforms = [];
         this._callFuncStack = [];
@@ -237,25 +255,41 @@ const ShaderGraph = class extends CABLES.EventTarget
         for (let i = 0; i < l.length; i++)
         {
             const lnk = l[i];
-            callSrc += this.callFunc(lnk.getOtherPort(this._port).parent) + ";".endl();
+            callSrc += this.callFunc(lnk.getOtherPort(port).parent) + ";".endl();
         }
 
         callSrc = this._callFuncStack.join("\n");
 
-        const src = "".endl() +
-        "{{MODULES_HEAD}}".endl().endl() +
-        "IN vec2 texCoord;".endl().endl() +
-        this._headUniSrc.endl().endl() +
-        this._headFuncSrc.endl().endl() +
+        let src = "".endl() +
+            "{{MODULES_HEAD}}".endl().endl();
 
-        "void main()".endl() +
-        "{".endl() +
-        "  {{MODULE_BEGIN_FRAG}}".endl() +
+        // todo use shader attrib system...
+        if (type == "frag") src += "IN vec2 texCoord;".endl().endl();
+        if (type == "vert") src += "IN vec3 vPosition;".endl() +
+                "IN vec2 attrTexCoord;".endl() +
+                "OUT vec2 texCoord;".endl().endl();
 
-        callSrc.endl() +
+        if (type == "vert")src += "".endl() +
+                "UNI mat4 projMatrix;".endl().endl() +
+                "UNI mat4 viewMatrix;".endl().endl() +
+                "UNI mat4 modelMatrix;".endl().endl();
+
+        src +=
+            this._headUniSrc.endl().endl() +
+            this._headFuncSrc.endl().endl() +
+
+            "void main()".endl() +
+            "{".endl();
+
+        if (type == "frag")src += "  {{MODULE_BEGIN_FRAG}}".endl();
+        if (type == "vert")src += "  {{MODULE_BEGIN_VERTEX}}".endl();
+
+        src += callSrc.endl() +
         "}".endl();
 
-        this._finalSrcFrag = src;
+        if (type == "frag") this._finalSrcFrag = src;
+        if (type == "vert") this._finalSrcVert = src;
+
         this.emitEvent("compiled");
     }
 };

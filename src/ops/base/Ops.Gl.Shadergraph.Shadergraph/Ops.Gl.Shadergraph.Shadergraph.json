@@ -39,7 +39,12 @@
             {
                 "type": 2,
                 "name": "Fragment",
-                "objType": "sg_func"
+                "objType": "sg_void"
+            },
+            {
+                "type": 2,
+                "name": "Vertex",
+                "objType": "sg_void"
             }
         ],
         "portsOut": [
@@ -54,6 +59,10 @@
             {
                 "type": 5,
                 "name": "Source Fragment"
+            },
+            {
+                "type": 5,
+                "name": "Source Vertex"
             }
         ],
         "name": "Ops.Gl.Shadergraph.Shadergraph"

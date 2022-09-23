@@ -40,5 +40,15 @@
             }
         ],
         "name": "Ops.ShaderGraph.Sum"
+    },
+    "summary": "sum",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
     }
 }

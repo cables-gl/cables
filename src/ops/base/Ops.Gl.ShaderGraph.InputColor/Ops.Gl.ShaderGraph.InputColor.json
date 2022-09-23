@@ -73,6 +73,6 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.User.pandur.SG_color"
+        "name": "Ops.Gl.ShaderGraph.InputColor"
     }
 }

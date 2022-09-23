@@ -9,7 +9,6 @@ const
 
 uni1.setUiAttribs({ "colorPick": true });
 
-
 const sgOp = new CGL.ShaderGraphOp(this);
 
 inName.onChange =

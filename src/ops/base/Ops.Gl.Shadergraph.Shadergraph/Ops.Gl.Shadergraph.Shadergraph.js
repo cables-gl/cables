@@ -1,16 +1,18 @@
 const
     inExec = op.inTrigger("Exec"),
-    inFunc = op.inObject("Fragment", null, "sg_func"),
+    inFrag = op.inObject("Fragment", null, "sg_void"),
+    inVertex = op.inObject("Vertex", null, "sg_void"),
     next = op.outTrigger("Next"),
     outshader = op.outObject("Shader"),
-    outSrcFrag = op.outString("Source Fragment");
+    outSrcFrag = op.outString("Source Fragment"),
+    outSrcVert = op.outString("Source Vertex");
 
 const cgl = op.patch.cgl;
-const sg = new CGL.ShaderGraph(this, inFunc);
+const sg = new CGL.ShaderGraph(this, inFrag, inVertex);
 const shader = new CGL.Shader(cgl, op.name);
 let needsUpdate = true;
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BEGIN_VERTEX"]);
 outshader.set(shader);
 
 let uniformTextures = [];
@@ -18,6 +20,7 @@ let uniformTextures = [];
 sg.on("compiled", () =>
 {
     outSrcFrag.set(sg.getSrcFrag());
+    outSrcVert.set(sg.getSrcVert());
     needsUpdate = true;
 });
 
@@ -27,7 +30,7 @@ inExec.onTriggered = () =>
     {
         uniformTextures = [];
         shader.removeAllUniforms();
-        shader.setSource(CGL.Shader.getDefaultVertexShader(), sg.getSrcFrag());
+        shader.setSource(sg.getSrcVert(), sg.getSrcFrag());
 
         for (let i = 0; i < sg.uniforms.length; i++)
         {
