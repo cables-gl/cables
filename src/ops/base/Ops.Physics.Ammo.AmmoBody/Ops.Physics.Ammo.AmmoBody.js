@@ -371,7 +371,7 @@ function update()
     }
     if (!bodies.length) setup(world);
     if (!bodies.length) return;
-    if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
+    if (bodies[0] && inNeverDeactivate.get()) bodies[0].activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
     if (inMass.get() == 0 || doResetPos)
     {
