@@ -45,6 +45,8 @@ inExec.onLinkChanged =
 inNameIndex.onChange =
     op.onDelete = removeAll;
 
+inName.onChange = () => { op.setUiAttribs({ "extendTitle": inName.get() }); };
+
 function removeAll()
 {
     for (let i = 0; i < bodies.length; i++)
