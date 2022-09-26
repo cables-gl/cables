@@ -80,13 +80,13 @@
         ],
         "name": "Ops.User.stephan.AmmoBodyCollisions"
     },
-    "summary": "Check if two physics bodies are colliding",
+    "summary": "",
     "issues": "",
     "caniusequery": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "S_jPZ4",
+    "exampleProjectId": "",
     "docs": {
         "ports": [
             {

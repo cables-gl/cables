@@ -49,14 +49,15 @@ const tcPos = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos",
     {
         "shader": attachments.particle_frag,
         "numRenderBuffers": 4,
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": true,
+        "filter": CGL.Texture.FILTER_NEAREST
     });
 
-const tcTiming = new CGL.CopyTexture(op.patch.cgl, "particlesys_timing", { "isFloatingPointTexture": true });
+const tcTiming = new CGL.CopyTexture(op.patch.cgl, "particlesys_timing", { "isFloatingPointTexture": true, "filter": CGL.Texture.FILTER_NEAREST });
 
 // only used when no input texture is given, just for simple systems...
-const tcFeedback = new CGL.CopyTexture(op.patch.cgl, "particlesys_feedback", { "isFloatingPointTexture": true });
-const tcFeedbackVel = new CGL.CopyTexture(op.patch.cgl, "particlesys_feedbackvel", { "isFloatingPointTexture": true });
+const tcFeedback = new CGL.CopyTexture(op.patch.cgl, "particlesys_feedback", { "isFloatingPointTexture": true, "filter": CGL.Texture.FILTER_NEAREST });
+const tcFeedbackVel = new CGL.CopyTexture(op.patch.cgl, "particlesys_feedbackvel", { "isFloatingPointTexture": true, "filter": CGL.Texture.FILTER_NEAREST });
 
 const
     cgl = op.patch.cgl,
@@ -98,10 +99,12 @@ function createTextures()
 
     texTiming = new CGL.Texture(cgl, {
         "isFloatingPointTexture": true,
+        "filter": CGL.Texture.FILTER_NEAREST,
         "width": size,
         "height": size });
     texPos = new CGL.Texture(cgl, {
         "isFloatingPointTexture": true,
+        "filter": CGL.Texture.FILTER_NEAREST,
         "width": size,
         "height": size });
 }
