@@ -30,6 +30,11 @@
             "message": "Ops.Dev.AmmoWorld renamed to Ops.Physics.Ammo.AmmoWorld",
             "author": "pandur",
             "date": 1652089841097
+        },
+        {
+            "message": "added collisions output array",
+            "author": "stephan",
+            "date": 1663933463416
         }
     ],
     "layout": {
@@ -87,6 +92,10 @@
             {
                 "type": 3,
                 "name": "Bodies Meta"
+            },
+            {
+                "type": 3,
+                "name": "Collisions"
             }
         ],
         "name": "Ops.Physics.Ammo.AmmoWorld"
@@ -139,6 +148,10 @@
             {
                 "name": "Bodies Meta",
                 "text": "array of objects in the scene"
+            },
+            {
+                "name": "Collisions",
+                "text": "array of all collisions in the scene"
             }
         ]
     }

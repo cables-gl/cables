@@ -1,5 +1,4 @@
 // https://stackoverflow.com/questions/12251199/re-positioning-a-rigid-body-in-bullet-physics
-
 // https://github.com/InfiniteLee/ammo-debug-drawer
 
 const AmmoWorld = class extends CABLES.EventTarget
@@ -12,8 +11,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         this._countIndex = 1;
         this._bodymeta = {};
         this.lastTime = performance.now();
-        this._collisionCb = [];
-        this.numCollisionsListeners = 0;
+        this._collisions = [];
 
         this.setupWorld();
     }
@@ -87,8 +85,6 @@ const AmmoWorld = class extends CABLES.EventTarget
         body.setUserIndex(++this._countIndex);
         this.world.addRigidBody(body);
         this.bodies.push(body);
-
-        // console.log(body);
     }
 
     setBodyMeta(body, meta)
@@ -161,47 +157,16 @@ const AmmoWorld = class extends CABLES.EventTarget
         }
     }
 
-    removeCollision(id)
+    getCollisions()
     {
-        let idx = -1;
-        for (let i = 0; i < this._collisionCb.length; i++)
-        {
-            if (this._collisionCb[i].id == id) idx = i;
-        }
-        this._collisionCb.splice(idx, 1);
-        this.numCollisionsListeners = this._collisionCb.length;
-    }
-
-    onCollision(name0, name1, cb)
-    {
-        const o = {
-            "name0": name0,
-            "name1": name1,
-            "cb": cb,
-            "id": CABLES.uuid()
-        };
-        this._collisionCb.push(o);
-        this.numCollisionsListeners = this._collisionCb.length;
-        return o.id;
-    }
-
-    _emitCollision(col, colliding, meta, contactManifold)
-    {
-        col._isColliding = true;
-        col.cb(colliding, meta, contactManifold);
+        return this._collisions;
     }
 
     _checkCollisions()
     {
         let numManifolds = this.dispatcher.getNumManifolds();
 
-
-        for (let i = 0; i < this._collisionCb.length; i++)
-        {
-            this._collisionCb[i]._wasColliding = this._collisionCb[i]._isColliding;
-            this._collisionCb[i]._isColliding = false;
-        }
-
+        this._collisions.length = 0;
         for (let i = 0; i < numManifolds; i++)
         {
             let contactManifold = this.dispatcher.getManifoldByIndexInternal(i);
@@ -214,41 +179,15 @@ const AmmoWorld = class extends CABLES.EventTarget
 
                 if (meta0 && meta1)
                 {
-                    for (let k = 0; k < this._collisionCb.length; k++)
-                    {
-                        if (meta0.name == this._collisionCb[k].name0)
-                        {
-                            if (this._collisionCb[k].name1)
-                            {
-                                if (meta1.name == this._collisionCb[k].name1) this._emitCollision(this._collisionCb[k], true, meta1, contactManifold);
-                            }
-                            else this._emitCollision(this._collisionCb[k], true, meta1, contactManifold);
-                        }
-                        if (meta1.name == this._collisionCb[k].name0)
-                        {
-                            if (this._collisionCb[k].name1)
-                            {
-                                if (meta0.name == this._collisionCb[k].name1) this._emitCollision(this._collisionCb[k], true, meta0, contactManifold);
-                            }
-                            else this._emitCollision(this._collisionCb[k], true, meta0, contactManifold);
-                        }
-                    }
+                    this._collisions.push({
+                        "name0": meta0.name,
+                        "name1": meta1.name
+                    });
                 }
-            }
-        }
-
-
-        for (let i = 0; i < this._collisionCb.length; i++)
-        {
-            if (!this._collisionCb[i]._isColliding && this._collisionCb[i]._wasColliding)
-            {
-                this._emitCollision(this._collisionCb[i], false, null, null);
-                this._collisionCb[i]._isColliding = this._collisionCb[i]._wasColliding = false;
             }
         }
     }
 };
-
 
 AmmoWorld._getGeomTriangle = function (geom, i)
 {

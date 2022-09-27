@@ -141,6 +141,7 @@ function setup()
     // transform.setIdentity();
     // CABLES.AmmoWorld.copyCglTransform(cgl, transform);
 
+    op.setUiError("nogeom", null);
     if (inShape.get() == "Box") colShape = new Ammo.btBoxShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
     else if (inShape.get() == "Sphere") colShape = new Ammo.btSphereShape(inRadius.get());
     else if (inShape.get() == "Cylinder") colShape = new Ammo.btCylinderShape(new Ammo.btVector3(inSizeX.get() / 2, inSizeY.get() / 2, inSizeZ.get() / 2));
@@ -149,13 +150,13 @@ function setup()
     else if (inShape.get() == "Triangle Shape")
     {
         const geom = inGeom.get();
-        if (!geom) return;
-        if (!inGeom.isLinked())
+        if (!geom || !inGeom.isLinked())
         {
             op.setUiError("nogeom", "Shape needs geometry connected");
             return;
         }
         else op.setUiError("nogeom", null);
+        if (!geom) return;
 
         let mesh = new Ammo.btTriangleMesh(true, true);
 
@@ -185,13 +186,13 @@ function setup()
     else if (inShape.get() == "Geom Convex Hull")
     {
         const geom = inGeom.get();
-        if (!geom) return;
-        if (!inGeom.isLinked())
+        if (!geom || !inGeom.isLinked())
         {
             op.setUiError("nogeom", "Shape needs geometry connected");
             return;
         }
         else op.setUiError("nogeom", null);
+        if (!geom) return;
 
         colShape = CABLES.AmmoWorld.createConvexHullFromGeom(geom, inGeomSimplify.get());
 
@@ -371,7 +372,7 @@ function update()
     }
     if (!bodies.length) setup(world);
     if (!bodies.length) return;
-    if (inNeverDeactivate.get()) body.activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
+    if (bodies[0] && inNeverDeactivate.get()) bodies[0].activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 
     if (inMass.get() == 0 || doResetPos)
     {
