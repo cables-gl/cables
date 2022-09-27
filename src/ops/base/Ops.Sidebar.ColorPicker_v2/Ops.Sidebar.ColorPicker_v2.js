@@ -93,11 +93,6 @@ function inputColorChanged()
     colorInput.value = hex;
     input.value = hex;
     setColorOutPorts(hex);
-    /*
-    if(CABLES.UI){
-        gui.opParams.show(op); // update DOM
-    }
-    */
 }
 
 /**
@@ -118,10 +113,7 @@ function setDefaultColor()
     const hex = getInputColorHex();
     defaultValuePort.set(hex);
     outHex.set(hex);
-    if (CABLES.UI)
-    {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 /*
@@ -182,10 +174,7 @@ function onColorPickerChange(event)
     // inputValuePort.set(hex)
     outHex.set(hex);
     setInputsByHex(hex);
-    if (CABLES.UI)
-    {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 /**
@@ -215,10 +204,7 @@ function onInput(ev)
         // inputValuePort.set(newValue)
         setInputsByHex(newValue);
         outHex.set(newValue);
-        if (CABLES.UI)
-        {
-            gui.opParams.show(op); /* update DOM */
-        }
+        op.refreshParams();
     }
 }
 

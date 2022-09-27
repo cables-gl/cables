@@ -75,7 +75,7 @@ function rebuildHtml()
 setDefaultValueButtonPort.onTriggered = () =>
 {
     inDefault.set(outIndex.get());
-    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+    op.refreshParams();
 };
 
 function updateStyle()

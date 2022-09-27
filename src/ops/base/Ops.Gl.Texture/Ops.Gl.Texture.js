@@ -153,6 +153,6 @@ op.onFileChanged = function (fn)
 
         realReload(true);
 
-        if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op);
+        op.refreshParams();
     }
 };

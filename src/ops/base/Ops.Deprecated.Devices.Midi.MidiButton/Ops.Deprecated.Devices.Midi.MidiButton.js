@@ -29,7 +29,7 @@ eventIn.onChange = function ()
         if (CABLES.UI)
         {
             op.uiAttr({ "info": "bound to note: " + note.get() });
-            gui.opParams.show(op);
+            op.refreshParams();
         }
     }
 

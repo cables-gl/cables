@@ -27,27 +27,27 @@ function handleChange()
     let maxDelayTime = maxDelayTimePort.get();
 
     if (!maxDelayTime || maxDelayTime < MAX_DELAY_TIME_MIN || maxDelayTime > MAX_DELAY_TIME_MAX)
-{
+    {
         op.log("Warning: Max Delay Time should be between 1 and 179!");
         return;
     }
 
     // check if maxDelayTime is valid and set it if so
     try
-{
+    {
 	    let time = new Tone.TimeBase(maxDelayTime);
 	    node.set("maxDelay", maxDelayTime);
     }
- catch (e)
-{
+    catch (e)
+    {
         // not valid
         op.uiAttr({ "error": "maxDelayTime not valid, Examples: \"4n\", \"1m\", 2" });
-        if (window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
+        op.refreshParams();
     	return;
     }
     // reset UI warning
     op.uiAttr({ "error": null });
-    if (window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
+    op.refreshParams();
 }
 
 handleChange();
