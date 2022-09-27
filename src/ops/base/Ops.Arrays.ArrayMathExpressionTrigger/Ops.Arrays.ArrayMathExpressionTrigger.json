@@ -1,0 +1,146 @@
+{
+    "id": "e0d5da32-8463-4dfb-89f5-0d755167cd49",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1595496753560
+        },
+        {
+            "message": "Ops.User.cables.ArrayMathExpression renamed to Ops.Array.ArrayMathExpression",
+            "author": "simod",
+            "date": 1595500253680
+        },
+        {
+            "message": "cloned op from Ops.Array.ArrayMathExpression",
+            "author": "pandur",
+            "date": 1664273671849
+        },
+        {
+            "message": "Ops.User.pandur.ArrayMathExpressionTrigger renamed to Ops.Arrays.ArrayMathExpressionTrigger",
+            "author": "pandur",
+            "date": 1664273875169
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1664273671849,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 3,
+                "name": "A",
+                "group": "Parameters"
+            },
+            {
+                "type": 3,
+                "name": "B",
+                "group": "Parameters"
+            },
+            {
+                "type": 3,
+                "name": "C",
+                "group": "Parameters"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Expression",
+                "group": "Expression"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result Array"
+            },
+            {
+                "type": 0,
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Expression Valid",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayMathExpressionTrigger"
+    },
+    "summary": "Calculates a user defined mathematical expression with up to 3 arrays and 3 numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Math.MathExpression"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "A",
+                "text": "first input array - use a in your expression"
+            },
+            {
+                "name": "B",
+                "text": "second input array - use b in your expression"
+            },
+            {
+                "name": "C",
+                "text": "third input array - use c in your expression"
+            },
+            {
+                "name": "X",
+                "text": "first number input - use x in your expression"
+            },
+            {
+                "name": "Y",
+                "text": "second number input - use y in your expression"
+            },
+            {
+                "name": "Z",
+                "text": "third number input - use z in your expression"
+            },
+            {
+                "name": "Expression",
+                "text": "the mathematical expression to be calculated"
+            },
+            {
+                "name": "Result Array",
+                "text": "the resulting array"
+            },
+            {
+                "name": "Array Length",
+                "text": "the resulting array's length"
+            },
+            {
+                "name": "Expression Valid",
+                "text": "true if the expression is valid, false otherwise"
+            }
+        ]
+    },
+    "exampleProjectId": "_o2Mue"
+}
