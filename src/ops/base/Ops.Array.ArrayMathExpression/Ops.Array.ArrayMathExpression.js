@@ -1,26 +1,33 @@
-const inA = op.inArray("A");
-const inB = op.inArray("B");
-const inC = op.inArray("C");
+const
+    inA = op.inArray("A"),
+    inB = op.inArray("B"),
+    inC = op.inArray("C"),
 
-const inX = op.inFloat("X", 1);
-const inY = op.inFloat("Y", 1);
-const inZ = op.inFloat("Z", 1);
+    inX = op.inFloat("X", 1),
+    inY = op.inFloat("Y", 1),
+    inZ = op.inFloat("Z", 1),
 
-op.setPortGroup("Parameters", [inA, inB, inC, inX, inY, inZ]);
-const inExpression = op.inString("Expression", "a*(b+c+d)");
+    inExpression = op.inString("Expression", "a*(b+c+d)"),
+
+    outResultArray = op.outArray("Result Array"),
+    outLength = op.outNumber("Array Length"),
+    outExpressionIsValid = op.outBool("Expression Valid");
+
 op.setPortGroup("Expression", [inExpression]);
+op.setPortGroup("Parameters", [inA, inB, inC, inX, inY, inZ]);
 
-const outResultArray = op.outArray("Result Array");
-const outLength = op.outNumber("Array Length");
-const outExpressionIsValid = op.outBool("Expression Valid");
-
-
-let currentFunction = inExpression.get();
-let functionValid = false;
 const functionChanged = false;
 const inputsChanged = false;
+const resultArray = [];
+let currentFunction = inExpression.get();
+let functionValid = false;
+let showingError = false;
 
-const createFunction = () =>
+inA.onChange = inB.onChange = inC.onChange
+    = inX.onChange = inY.onChange = inZ.onChange = evaluateFunction;
+inExpression.onChange = createFunction;
+
+function createFunction()
 {
     try
     {
@@ -39,12 +46,9 @@ const createFunction = () =>
 
         if (e instanceof ReferenceError || e instanceof SyntaxError) return;
     }
-};
+}
 
-const resultArray = [];
-let showingError = false;
-
-const evaluateFunction = () =>
+function evaluateFunction()
 {
     const arrayA = inA.get();
     const arrayB = inB.get();
@@ -74,15 +78,11 @@ const evaluateFunction = () =>
         if (sameLength)
         {
             op.setUiError("notsamelength", null);
-
-
             const firstValidArray = arrays.find(Boolean);
-
             validArrays = arrays.map((arr, index) =>
             {
                 // * map all undefined arrays to 0 values
-                if (!arr)
-                    arr = arrays.find(Boolean).map((x) => 0);
+                if (!arr) arr = arrays.find(Boolean).map((x) => 0);
 
                 return arr;
             });
@@ -95,12 +95,8 @@ const evaluateFunction = () =>
                 {
                     resultArray[i] = currentFunction(
                         Math,
-                        validArrays[0][i],
-                        validArrays[1][i],
-                        validArrays[2][i],
-                        x,
-                        y,
-                        z,
+                        validArrays[0][i], validArrays[1][i], validArrays[2][i],
+                        x, y, z,
                         i,
                         resultArray.length
                     );
@@ -121,10 +117,4 @@ const evaluateFunction = () =>
     }
 
     outExpressionIsValid.set(functionValid);
-};
-
-
-inA.onChange = inB.onChange = inC.onChange
-= inX.onChange = inY.onChange = inZ.onChange = evaluateFunction;
-// evaluateFunction;
-inExpression.onChange = createFunction;
+}
