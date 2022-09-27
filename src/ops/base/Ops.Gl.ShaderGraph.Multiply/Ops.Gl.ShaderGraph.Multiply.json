@@ -24,19 +24,19 @@
             {
                 "type": 2,
                 "name": "a",
-                "objType": "sg_vec2"
+                "objType": "sg_vec4"
             },
             {
                 "type": 2,
                 "name": "b",
-                "objType": "sg_vec2"
+                "objType": "sg_vec4"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_vec2"
+                "objType": "sg_vec4"
             }
         ],
         "name": "Ops.Gl.ShaderGraph.Multiply"

@@ -1,6 +1,6 @@
 class ShaderGraphOp
 {
-    constructor(op, srcFrag)
+    constructor(op, src)
     {
         op.sgOp = this;
         this._op = op;
@@ -10,10 +10,9 @@ class ShaderGraphOp
         this.enabled = true;
         this.info = null;
 
-        if (srcFrag)
+        if (src)
         {
-            this.info = this.parseCode(srcFrag);
-            this.updatePorts(this.info);
+            this.parseCode(src);
         }
 
         this._op.on("onLinkChanged", this.updateGraph.bind(this));
@@ -73,11 +72,11 @@ class ShaderGraphOp
         code = code.replaceAll(",", " , "); // add spaces for better splitting
         code = code.replace(/ +(?= )/g, ""); // remove double whitespaces
 
-        console.log(origLines);
+        // console.log(origLines);
 
         const lines = code.split("\n");
 
-        console.log(lines);
+        // console.log(lines);
 
         for (let i = 0; i < lines.length; i++)
         {
@@ -108,15 +107,14 @@ class ShaderGraphOp
                         if (count == 0) break;
                     }
 
-
-                    console.log("remainingcode", remainingcode);
+                    // console.log("remainingcode", remainingcode);
                     // parse the first and last line numbers
                     let functioncode = remainingcode.substring(0, cc + 1);
                     const linenums = functioncode.split("###line:");
 
-                    console.log("functioncode", functioncode);
+                    // console.log("functioncode", functioncode);
 
-                    console.log("linenums", linenums);
+                    // console.log("linenums", linenums);
                     let lineNumStart = i, lineNumEnd = i - 1;
                     if (linenums.length > 1)
                     {
@@ -156,7 +154,10 @@ class ShaderGraphOp
 
 
         info.src = _code;
-        console.log("info", info);
+
+        this.info = info;
+        this.updatePorts(this.info);
+        // console.log("info", info);
         return info;
     }
 

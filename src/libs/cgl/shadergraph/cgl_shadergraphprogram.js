@@ -62,7 +62,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
 
         if (op.sgOp.info)
         {
-            console.log(op.sgOp.info.name, op.sgOp.info.functions.length);
+            console.log(op.sgOp.info.name, op.sgOp.info.functions);
             for (let i = 0; i < op.sgOp.info.functions.length; i++)
             {
                 const f = op.sgOp.info.functions[i];

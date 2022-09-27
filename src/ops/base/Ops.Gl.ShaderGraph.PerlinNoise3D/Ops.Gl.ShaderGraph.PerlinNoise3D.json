@@ -27,7 +27,7 @@
                 "objType": "sg_float"
             }
         ],
-        "name": "Ops.User.pandur.PerlinNoise3D"
+        "name": "Ops.Gl.ShaderGraph.PerlinNoise3D"
     },
     "authorName": "pandur",
     "created": 1663929676175
