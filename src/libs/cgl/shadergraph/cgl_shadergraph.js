@@ -46,7 +46,7 @@ const ShaderGraph = class extends CABLES.EventTarget
 
     getSrcFrag() { return this.progFrag.finalSrc; }
 
-    getSrcVert() { return this.progVert.finalSrc; }
+    getSrcVert() { return this.progVert.finalSrc || CGL.Shader.getDefaultVertexShader(); }
 };
 
 ShaderGraph.convertTypes = function (typeTo, typeFrom, paramStr)
