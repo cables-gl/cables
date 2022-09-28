@@ -608,7 +608,7 @@ umax	:	-1.0
 let shouldRender = true;
 let shouldScale = true;
 
-const shapes = op.inDropDown("shapes", parametricBodies.map(bod => bod.title));
+const shapes = op.inDropDown("shapes", parametricBodies.map((bod) => { return bod.title; }));
 
 const render = op.inTrigger("render");
 const inSegmentsU = op.inValueInt("u Segments", 48);
@@ -683,14 +683,13 @@ shapes.set("Rectangle");
 
 shapes.onChange = ({ value }) =>
 {
-    const [shape] = parametricBodies.filter(s => s.title === value);
+    const [shape] = parametricBodies.filter((s) => { return s.title === value; });
     Object.keys(inObj).forEach((key) =>
     {
         inObj[key].set(shape[key]);
     });
 
-    if (CABLES.UI) gui.opParams.show(op);
-
+    op.refreshParams();
     create();
 };
 

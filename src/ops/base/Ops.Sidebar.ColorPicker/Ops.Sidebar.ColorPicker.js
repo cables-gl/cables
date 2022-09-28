@@ -72,11 +72,6 @@ function inputColorChanged()
     colorInput.value = hex;
     input.value = hex;
     setColorOutPorts(hex);
-    /*
-    if(CABLES.UI){
-        gui.opParams.show(op); // update DOM
-    }
-    */
 }
 
 /**
@@ -97,10 +92,7 @@ function setDefaultColor()
     const hex = getInputColorHex();
     defaultValuePort.set(hex);
     outHex.set(hex);
-    if (CABLES.UI)
- {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 /*
@@ -123,7 +115,7 @@ function hexToRgbNorm(hexColor)
     return hexColor
         .match(/[A-Za-z0-9]{2}/g)
         .map(function (v)
-{
+        {
             return parseInt(v, 16) / 255;
         });
 }
@@ -161,10 +153,7 @@ function onColorPickerChange(event)
     // inputValuePort.set(hex)
     outHex.set(hex);
     setInputsByHex(hex);
-    if (CABLES.UI)
- {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 /**
@@ -184,20 +173,17 @@ function onInput(ev)
 {
     let newValue = ev.target.value;
     if (newValue.length === 6 && newValue.charAt(0) !== "#")
-{
+    {
         newValue = "#" + newValue;
     }
     if (newValue.length === 7)
-{
+    {
         colorInput.value = newValue;
         setColorOutPorts(newValue);
         // inputValuePort.set(newValue)
         setInputsByHex(newValue);
         outHex.set(newValue);
-        if (CABLES.UI)
- {
-            gui.opParams.show(op); /* update DOM */
-        }
+        op.refreshParams();
     }
 }
 
@@ -216,13 +202,13 @@ function onDefaultValueChanged()
     let defaultValue = defaultValuePort.get();
     input.setAttribute("value", defaultValue);
     if (defaultValue)
-{
+    {
         if (defaultValue.length === 6 && defaultValue.charAt(0) !== "#")
-{
+        {
             defaultValue = "#" + defaultValue;
         }
         if (defaultValue.length === 7)
-{
+        {
             input.value = defaultValue;
             colorInput.value = defaultValue;
             setColorOutPorts(defaultValue);
@@ -236,7 +222,7 @@ function onLabelTextChanged()
     label.textContent = labelText;
 
     if (CABLES.UI)
-{
+    {
         op.setTitle("Color Picker: " + labelText);
     }
 }
@@ -245,15 +231,15 @@ function onParentChanged()
 {
     let parent = parentPort.get();
     if (parent && parent.parentElement)
-{
+    {
         parent.parentElement.appendChild(el);
         siblingsPort.set(null);
         siblingsPort.set(parent);
     }
- else
-{ // detach
+    else
+    { // detach
         if (el.parentElement)
-{
+        {
             el.parentElement.removeChild(el);
         }
     }
@@ -262,7 +248,7 @@ function onParentChanged()
 function showElement(el)
 {
     if (el)
-{
+    {
         el.style.display = "block";
     }
 }
@@ -270,7 +256,7 @@ function showElement(el)
 function hideElement(el)
 {
     if (el)
-{
+    {
         el.style.display = "none";
     }
 }
@@ -283,7 +269,7 @@ function onDelete()
 function removeElementFromDOM(el)
 {
     if (el && el.parentNode && el.parentNode.removeChild)
-{
+    {
         el.parentNode.removeChild(el);
     }
 }

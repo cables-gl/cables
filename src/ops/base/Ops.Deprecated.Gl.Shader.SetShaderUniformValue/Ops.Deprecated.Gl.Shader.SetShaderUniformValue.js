@@ -109,15 +109,13 @@ function updateShader(theShader)
     // }
 
     uniformNames.sort(function (a, b)
- {
+    {
         if (a < b) return -1;
         if (a > b) return 1;
         return 0;
     });
 
     uniformSelect.setUiAttribs({ "values": uniformNames });
-
-    // if(CABLES.UI) gui.opParams.show(op);
 
     // outShader.set(null);
     // outShader.set(shader);

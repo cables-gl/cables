@@ -43,11 +43,11 @@ triggerPort.onTriggered = say;
 sayOnTextChangePort.onChange = function ()
 {
     if (sayOnTextChangePort.get())
-{
+    {
         textPort.onChange = say;
     }
- else
-{
+    else
+    {
         textPort.onChange = function () {}; // don't do anything
     }
 };
@@ -70,9 +70,9 @@ window.speechSynthesis.onvoiceschanged = function ()
     voiceMap = getVoiceMap(synth.getVoices());
     voiceMapKeys = Object.keys(voiceMap);
     if (CABLES.UI)
-{
+    {
         voicePort.uiAttribs.values = voiceMapKeys; // update dropdown values
-        gui.opParams.show(op); // update visible dropdown menu
+        op.refreshParams();// update visible dropdown menu
     }
 };
 
@@ -96,12 +96,12 @@ function say()
     let voice;
     let voiceDisplayName = voicePort.get();
     if (voiceDisplayName && voiceMap.hasOwnProperty(voiceDisplayName))
-{ // voices are loaded async, at start it may not be there
+    { // voices are loaded async, at start it may not be there
         voice = voiceMap[voiceDisplayName];
     }
     let utterance = new SpeechSynthesisUtterance(text);
     if (voice)
-{
+    {
         utterance.voice = voice;
     }
     let pitch = pitchPort.get();
@@ -129,7 +129,7 @@ function getVoiceMap(voices)
     if (!voices || voices.length === 0) { return ret; }
 
     voices.forEach(function (voice)
-{
+    {
         let key = voice.name + " (" + voice.lang + ")";
         ret[key] = voice;
     });

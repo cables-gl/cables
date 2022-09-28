@@ -108,7 +108,8 @@ function updateShader()
         uniformInputs[i].uniform.needsUpdate = true;
     }
 
-    if (CABLES.UI) gui.opParams.show(op);
+    op.refreshParams();
+
     outShader.set(null);
     outShader.set(shader);
 }

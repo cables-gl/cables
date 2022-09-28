@@ -156,7 +156,7 @@ function onTextInputChanged(ev)
     valuePort.set(newValue);
     updateActiveTrack();
     inputValuePort.set(newValue);
-    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+    op.refreshParams();
 }
 
 function onInputValuePortChanged()
@@ -183,7 +183,7 @@ function onSetDefaultValueButtonPress()
     setInputFieldValue(newValue);
     valuePort.set(newValue);
     defaultValuePort.set(newValue);
-    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+    op.refreshParams();
 
     updateActiveTrack();
 }
@@ -196,7 +196,7 @@ function onSliderInput(ev)
     const inputFloat = parseFloat(ev.target.value);
     valuePort.set(inputFloat);
     inputValuePort.set(inputFloat);
-    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+    op.refreshParams();
 
     updateActiveTrack();
     return false;
@@ -282,6 +282,7 @@ function setInputFieldValue(v)
 {
     input.value = v;
 }
+
 function showElement(el)
 {
     if (el)el.style.display = "block";

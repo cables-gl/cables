@@ -27,7 +27,7 @@ function muteOnChange()
     let volume = volumePorts[i].get();
     volumeNodes[i].set("mute", !!mute);
     if (!mute && (soloChannel === i || soloChannel === NONE))
-{
+    {
         setVolume(volumeNodes[i], volume);
     }
 }
@@ -36,11 +36,11 @@ function setVolume(node, volume)
 {
     let volumeF;
     try
-{
+    {
         volumeF = parseFloat(volume);
     }
- catch (e)
-{
+    catch (e)
+    {
         op.log("Warning: volume is not a number");
         return;
     }
@@ -55,36 +55,36 @@ function soloOnChange()
     let solo = soloPorts[i].get();
     // if another channel was soloed before
     if (i !== soloChannel)
-{
+    {
         if (soloChannel !== NONE)
-{
+        {
             // uncheck previous solo UI toggle
             soloPorts[soloChannel].set(false);
-            if (gui) gui.opParams.show(op);
+            op.refreshParams();
         }
         soloChannel = i;
     }
     if (solo)
-{
+    {
         // set all volumes to VOLUME_MIN
         for (let j = 0; j < nPorts; j++)
-{
+        {
             setVolume(volumeNodes[j], VOLUME_MIN);
         }
         // set volume of soloed channel if not muted
         if (!mutePorts[soloChannel].get())
-{
+        {
             setVolume(volumeNodes[soloChannel], volumePorts[soloChannel].get());
         }
     }
- else
-{ // unsolo
+    else
+    { // unsolo
         // set all channels back to original volume if not muted
         for (let k = 0; k < nPorts; k++)
-{
+        {
             // set volume if not muted
             if (!mutePorts[k].get())
-{
+            {
                 setVolume(volumeNodes[k], volumePorts[k].get());
             }
         }
@@ -98,7 +98,7 @@ function volumeOnChange()
     let mute = mutePorts[i].get();
     let volume = volumePorts[i].get();
     if (!mute && (soloChannel === i || soloChannel === NONE))
-{
+    {
         setVolume(volumeNodes[i], volume);
     }
 }
@@ -107,7 +107,7 @@ function volumeOnChange()
 function createInputPorts()
 {
     for (let i = 0; i < nPorts; i++)
-{
+    {
         // label port
         let labelPort = op.inValueString("Channel " + (i + 1) + " Name", "Channel " + (i + 1) + " Name");
         labelPorts.push(labelPort);
@@ -147,7 +147,7 @@ let audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", gainNode)
 op.onDelete = function ()
 {
     for (let i = 0; i < nPorts; i++)
-{
+    {
         volumeNodes[i].dispose();
     }
     gainNode.dispose();

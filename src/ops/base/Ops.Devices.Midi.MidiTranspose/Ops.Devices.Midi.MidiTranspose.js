@@ -1,7 +1,7 @@
 
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-const MIDIChannels = Array.from(Array(16).keys()).map(i => i + 1);
+const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
 const CC_MSG = 0xb;
@@ -80,7 +80,7 @@ inEvent.onChange = () =>
         if (CABLES.UI)
         {
             op.uiAttr({ "info": `bound to MIDI Channel: ${midiChannelDropdown.get()}` });
-            gui.opParams.show(op);
+            op.refreshParams();
         }
     }
 

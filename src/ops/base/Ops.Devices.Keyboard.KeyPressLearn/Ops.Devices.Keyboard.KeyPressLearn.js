@@ -21,7 +21,7 @@ function onKeyDown(e)
         learnedKeyCode.set(e.keyCode);
         if (CABLES.UI)
         {
-            gui.opParams.show(op);
+            op.refreshParams();
         }
         // op.log("Learned key code: " + learnedKeyCode.get());
         learning = false;

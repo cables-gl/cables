@@ -2,18 +2,18 @@
 // TODO: Update UI when port is replaced
 
 // constants
-var FREQUENCY_DEFAULT = 440;
-var DETUNE_DEFAULT = 0;
-var VOLUME_DEFAULT = -6;
+let FREQUENCY_DEFAULT = 440;
+let DETUNE_DEFAULT = 0;
+let VOLUME_DEFAULT = -6;
 
 // vars
-var node = new Tone.MonoSynth();
+let node = new Tone.MonoSynth();
 
 // inputs
-var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
-var detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-var portamentoPort = op.inValueString("Portamento (Time)");
-var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
+let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
+let detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
+let portamentoPort = op.inValueString("Portamento (Time)");
+let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 
 // functions
 /*
@@ -43,28 +43,32 @@ function shouldLinkFilter(p1, p2) {
 */
 
 // change listeners
-portamentoPort.onChange = function() {
-    var portamento = portamentoPort.get();
-    if(CABLES.WEBAUDIO.isValidToneTime(portamento)) {
+portamentoPort.onChange = function ()
+{
+    let portamento = portamentoPort.get();
+    if (CABLES.WEBAUDIO.isValidToneTime(portamento))
+    {
         node.set("portamento", portamento);
-        op.uiAttr( { 'warning': null } );
-        gui.opParams.show(op); // update GUI
-    } else {
-        op.uiAttr( { 'warning': 'Portamento is not a valid tone time' } );
-        gui.opParams.show(op); // update GUI
+        op.uiAttr({ "warning": null });
+        op.refreshParams();
+    }
+    else
+    {
+        op.uiAttr({ "warning": "Portamento is not a valid tone time" });
+        op.refreshParams();
     }
 };
 
-//outputs
-var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
-//var oscillatorPort = op.outObject("OmniOscillator");
-//oscillatorPort.shouldLink = shouldLinkOmniOscillator;
-//var filterPort = op.outObject("Filter");
-//filterPort.shouldLink = shouldLinkFilter;
-//var envelopePort = op.outObject("Envelope (AmplitudeEnvelope)");
-//envelopePort.shouldLink = shouldLinkAmplitudeEnvelope;
-//var filterEnvelopePort = op.outObject("Filter Envelope (FrequencyEnvelope)");
-//filterEnvelopePort.shouldLink = shouldLinkFrequencyEnvelope;
+// outputs
+let audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
+// var oscillatorPort = op.outObject("OmniOscillator");
+// oscillatorPort.shouldLink = shouldLinkOmniOscillator;
+// var filterPort = op.outObject("Filter");
+// filterPort.shouldLink = shouldLinkFilter;
+// var envelopePort = op.outObject("Envelope (AmplitudeEnvelope)");
+// envelopePort.shouldLink = shouldLinkAmplitudeEnvelope;
+// var filterEnvelopePort = op.outObject("Filter Envelope (FrequencyEnvelope)");
+// filterEnvelopePort.shouldLink = shouldLinkFrequencyEnvelope;
 
 audioOutPort.set(node);
 /*
@@ -75,6 +79,7 @@ filterEnvelopePort.set(node.filterEnvelope);
 */
 
 // clean up
-op.onDelete = function() {
-    if(node) node.dispose();
+op.onDelete = function ()
+{
+    if (node) node.dispose();
 };

@@ -42,7 +42,7 @@ function updateName()
             return;
         }
 
-        if (op.isCurrentUiOp()) gui.opParams.show(op);
+        op.refreshParams();
     }
 
     if (!op.patch.namedTriggers[op.varName.get()])
@@ -53,7 +53,7 @@ function updateName()
 
     op.setTitle(">" + op.varName.get());
 
-    if (op.isCurrentUiOp()) gui.opParams.show(op);
+    op.refreshParams();
     op.patch.emitEvent("opTriggerNameChanged", op, op.varName.get());
 }
 
