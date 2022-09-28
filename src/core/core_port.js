@@ -28,7 +28,7 @@ const Port = function (__parent, name, type, uiAttribs)
      * @description direction of port (input(0) or output(1))
      */
     this.direction = CONSTANTS.PORT.PORT_DIR_IN;
-    this.id = generateUUID();
+    this.id = CABLES.simpleId();
     this.parent = __parent;
 
     /**
@@ -170,7 +170,7 @@ Port.prototype.setUiAttribs = function (newAttribs)
         if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
     }
 
-    if (changed) this.emitEvent("onUiAttrChange", newAttribs);
+    if (changed) this.emitEvent("onUiAttrChange", newAttribs, this);
 };
 
 /**

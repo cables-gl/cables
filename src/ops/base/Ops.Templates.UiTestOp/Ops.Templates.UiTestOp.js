@@ -6,15 +6,21 @@ const
     innum = op.inFloatSlider("Slider", 0),
     inResize = op.inBool("Resizable"),
     trig = op.inTrigger("trigger"),
+
+    inSwit = op.inBool("greyout"),
+    ingreyoutLine = op.inFloatSlider("this will greyout"),
+
     inLog = op.inTriggerButton("op.log()"),
     inLogWarn = op.inTriggerButton("op.logWarn()"),
     inLogErr = op.inTriggerButton("op.logError()"),
+
     inPrompt = op.inTriggerButton("Open Prompt"),
     inModal = op.inTriggerButton("Open Modal"),
     inTab = op.inTriggerButton("Open new Tab"),
     inExc = op.inTriggerButton("Throw Exception"),
     outBlah = op.outNumber("Something");
 
+op.setPortGroup("Greyout", [inSwit, ingreyoutLine]);
 op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
@@ -24,6 +30,11 @@ let loadingId = null;
 op.onDelete = () =>
 {
     if (loadingId) op.patch.loading.finished(loadingId);
+};
+
+inSwit.onChange = () =>
+{
+    ingreyoutLine.setUiAttribs({ "greyout": inSwit.get() });
 };
 
 inLoadingTask.onChange = () =>
