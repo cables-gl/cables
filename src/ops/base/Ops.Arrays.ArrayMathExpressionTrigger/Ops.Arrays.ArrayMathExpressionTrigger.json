@@ -1,5 +1,5 @@
 {
-    "id": "663e32a2-45a1-4141-a387-d8a44d4977d5",
+    "id": "e0d5da32-8463-4dfb-89f5-0d755167cd49",
     "changelog": [
         {
             "message": "created op",
@@ -10,12 +10,26 @@
             "message": "Ops.User.cables.ArrayMathExpression renamed to Ops.Array.ArrayMathExpression",
             "author": "simod",
             "date": 1595500253680
+        },
+        {
+            "message": "cloned op from Ops.Array.ArrayMathExpression",
+            "author": "pandur",
+            "date": 1664273671849
+        },
+        {
+            "message": "Ops.User.pandur.ArrayMathExpressionTrigger renamed to Ops.Arrays.ArrayMathExpressionTrigger",
+            "author": "pandur",
+            "date": 1664273875169
         }
     ],
-    "authorName": "simod",
-    "created": 1595496771056,
+    "authorName": "pandur",
+    "created": 1664273671849,
     "layout": {
         "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
             {
                 "type": 3,
                 "name": "A",
@@ -57,6 +71,10 @@
         ],
         "portsOut": [
             {
+                "type": 1,
+                "name": "Next"
+            },
+            {
                 "type": 3,
                 "name": "Result Array"
             },
@@ -71,7 +89,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Array.ArrayMathExpression"
+        "name": "Ops.User.pandur.ArrayMathExpressionTrigger"
     },
     "summary": "Calculates a user defined mathematical expression with up to 3 arrays and 3 numbers",
     "issues": "",

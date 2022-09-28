@@ -4,7 +4,7 @@ const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-const MIDIChannels = Array.from(Array(16).keys()).map(i => i + 1);
+const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 
 function getMIDINote(dataByte1LSB)
 {
@@ -20,7 +20,7 @@ function getNoteIndexFromMIDINote(midiNote)
     return Number(string);
 }
 
-const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
+const noteValues = Array.from(Array(128).keys()).map((key) => { return getMIDINote(key); });
 
 /* IN */
 // persistent array for learned notes
@@ -73,7 +73,7 @@ reset.onTriggered = () =>
     noteStartDropdown.set(0);
     noteEndDropdown.set(0);
     midiChannelDropdown.set(1);
-    if (op.isCurrentUiOp()) gui.opParams.show(op);
+    op.refreshParams();
 };
 
 noteStartDropdown.onChange = () =>
@@ -82,7 +82,7 @@ noteStartDropdown.onChange = () =>
     learnedNotes[0] = getNoteIndexFromMIDINote(noteStartDropdown.get());
     if (learnedNotes.length === 2)
     {
-        learnedNotes.sort((a, b) => a - b);
+        learnedNotes.sort((a, b) => { return a - b; });
         const [start, end] = learnedNotes;
         noteStartDropdown.set(getMIDINote(start));
         noteEndDropdown.set(getMIDINote(end));
@@ -96,7 +96,7 @@ noteEndDropdown.onChange = () =>
     learnedNotes[1] = getNoteIndexFromMIDINote(noteEndDropdown.get());
     if (learnedNotes.length === 2)
     {
-        learnedNotes.sort((a, b) => a - b);
+        learnedNotes.sort((a, b) => { return a - b; });
         const [start, end] = learnedNotes;
         noteStartDropdown.set(getMIDINote(start));
         noteEndDropdown.set(getMIDINote(end));
@@ -132,7 +132,7 @@ inEvent.onChange = () =>
         }
         if (learnedNotes.length === 2)
         {
-            learnedNotes.sort((a, b) => a - b);
+            learnedNotes.sort((a, b) => { return a - b; });
             learnedNotesIn.set(learnedNotes);
             const [start, end] = learnedNotes;
 
@@ -147,7 +147,7 @@ inEvent.onChange = () =>
         {
             op.uiAttr({ "info": `Start bound to Note: ${noteStartDropdown.get()}` });
             op.uiAttr({ "info": `End bound to Note: ${noteEndDropdown.get()}` });
-            gui.opParams.show(op);
+            op.refreshParams();
         }
         eventOut.set(event);
         return;

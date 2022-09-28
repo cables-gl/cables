@@ -7,16 +7,17 @@ const NOTE_OFF = 0x8;
 let midi = null;
 let outputDevice = null;
 
-const inDeviceSelect = op.inValueSelect('Device', ['none']);
+const inDeviceSelect = op.inValueSelect("Device", ["none"]);
 const inNote = op.inObject("Note");
 const inCC = op.inObject("CC");
 const inNRPN = op.inObject("NRPN");
 
-op.setPortGroup("Device",[inDeviceSelect]);
-op.setPortGroup("Midi Events",[inNote, inCC, inNRPN]);
+op.setPortGroup("Device", [inDeviceSelect]);
+op.setPortGroup("Midi Events", [inNote, inCC, inNRPN]);
 
 
-inNRPN.onChange = function(_event) {
+inNRPN.onChange = function (_event)
+{
     if (!outputDevice) return;
     if (!_event) return;
 
@@ -42,9 +43,10 @@ inNRPN.onChange = function(_event) {
     outputDevice.send(dataIndexMSB);
     outputDevice.send(dataValueLSB);
     outputDevice.send(dataValueMSB);
-}
+};
 
-inCC.onChange = function(_event) {
+inCC.onChange = function (_event)
+{
     if (!outputDevice) return;
     if (!_event) return;
 
@@ -55,29 +57,33 @@ inCC.onChange = function(_event) {
     if (event.messageType !== "CC") return;
     // TODO: Check for invalid status bytes
     outputDevice.send(event.data);
+};
 
-}
+let currentNote = null;
+let currentChannel = null;
 
-var currentNote = null;
-var currentChannel = null;
-
-const killLastNote = () => {
-  if (!outputDevice || !currentNote || !currentChannel) return;
+const killLastNote = () =>
+{
+    if (!outputDevice || !currentNote || !currentChannel) return;
     outputDevice.send([(NOTE_OFF << 4 | (currentChannel)), currentNote, 0]);
 };
 
-const killAllNotes = () => {
+const killAllNotes = () =>
+{
     if (!outputDevice) return;
-  for (let i = 0; i < 128; i += 1) {
-    for (let channel = 0; channel < 16; channel += 1) outputDevice.send([(NOTE_OFF << 4 | channel), i, 0]);
-  }
+    for (let i = 0; i < 128; i += 1)
+    {
+        for (let channel = 0; channel < 16; channel += 1) outputDevice.send([(NOTE_OFF << 4 | channel), i, 0]);
+    }
 };
 
-inNote.onLinkChanged = function() {
+inNote.onLinkChanged = function ()
+{
     if (!inNote.isLinked()) killAllNotes();
-}
+};
 
-inNote.onChange = function(_event) {
+inNote.onChange = function (_event)
+{
     if (!outputDevice) return;
     if (!_event) return;
 
@@ -86,73 +92,66 @@ inNote.onChange = function(_event) {
     if (!event) return;
     if (!event.data) return;
     // TODO: let CC all notes off message pass through
-    //if (event.messageType !== "Note") return;
+    // if (event.messageType !== "Note") return;
     // TODO: Check for invalid status bytes
 
-    setTimeout(function() {
+    setTimeout(function ()
+    {
         outputDevice.send(event.data);
         currentNote = event.index;
         currentChannel = event.channel;
     }, 20);
+};
 
-}
+function setDevice()
+{
+    if (!midi || !midi.inputs) return;
+    const name = inDeviceSelect.get();
 
-function setDevice() {
-  if (!midi || !midi.inputs) return;
-  const name = inDeviceSelect.get();
+    op.setTitle(`Midi ${name}`);
 
-  op.setTitle(`Midi ${name}`);
+    const inputs = midi.inputs.values();
+    const outputs = midi.outputs.values();
 
-  const inputs = midi.inputs.values();
-  const outputs = midi.outputs.values();
-
-  for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
-    if (output.value.name === name) {
-      outputDevice = midi.outputs.get(output.value.id);
+    for (let output = outputs.next(); output && !output.done; output = outputs.next())
+    {
+        if (output.value.name === name)
+        {
+            outputDevice = midi.outputs.get(output.value.id);
+        }
     }
-  }
 }
 
 
-function onMIDIFailure() {
-  op.uiAttr({ warning: 'No MIDI support in your browser.' });
+function onMIDIFailure()
+{
+    op.uiAttr({ "warning": "No MIDI support in your browser." });
 }
 
-function onMIDISuccess(midiAccess) {
-  midi = midiAccess;
-  const inputs = midi.inputs.values();
-  const outputs = midi.outputs.values();
-  op.uiAttr({ info: 'no midi devices found' });
+function onMIDISuccess(midiAccess)
+{
+    midi = midiAccess;
+    const inputs = midi.inputs.values();
+    const outputs = midi.outputs.values();
+    op.uiAttr({ "info": "no midi devices found" });
 
-  const deviceNames = [];
+    const deviceNames = [];
 
-  for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
-    deviceNames.push(output.value.name);
-  }
+    for (let output = outputs.next(); output && !output.done; output = outputs.next())
+    {
+        deviceNames.push(output.value.name);
+    }
 
-  inDeviceSelect.uiAttribs.values = deviceNames;
+    inDeviceSelect.uiAttribs.values = deviceNames;
 
-  if (CABLES.UI) gui.opParams.show(op);
-  setDevice();
+    op.refreshParams();
+    setDevice();
 }
 
 inDeviceSelect.onChange = setDevice;
 
-if (navigator.requestMIDIAccess) {
-  navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
-} else onMIDIFailure();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if (navigator.requestMIDIAccess)
+{
+    navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+}
+else onMIDIFailure();

@@ -79,6 +79,18 @@
                 "name": "trigger"
             },
             {
+                "type": 0,
+                "name": "greyout",
+                "group": "Greyout",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "this will greyout",
+                "group": "Greyout",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "op.log()",
                 "group": "Logging"

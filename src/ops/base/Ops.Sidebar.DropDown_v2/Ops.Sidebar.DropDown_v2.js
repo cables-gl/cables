@@ -235,8 +235,5 @@ function removeElementFromDOM(ele)
 function setDefault()
 {
     defaultValuePort.set(input.value);
-    if (CABLES.UI && op.isCurrentUiOp())
-    {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }

@@ -19,7 +19,7 @@ inMessage.onChange = function ()
         {
             inAddress.set(msg.a);
             learning = false;
-            if (op.isCurrentUiOp()) gui.opParams.show(op);
+            op.refreshParams();
             return;
         }
         return;

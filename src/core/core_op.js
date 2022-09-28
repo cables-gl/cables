@@ -1034,27 +1034,18 @@ const Op = function ()
         }
     };
 
-    Op.prototype.getSerialized = function (cleanUp)
+    Op.prototype.getSerialized = function ()
     {
         const op = {};
-        // op.name=this.getName();
-        // var nameParts=this.objName.split('.');
-        // if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
         if (this.opId) op.opId = this.opId;
         op.objName = this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
 
         op.id = this.id;
-        op.uiAttribs = this.uiAttribs;
-        if (this.storage && Object.keys(this.storage).length > 0)
-        {
-            op.storage = this.storage;
-        }
-
+        op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs));
+        if (this.storage && Object.keys(this.storage).length > 0) op.storage = this.storage;
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
-
-        if (cleanUp && this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
 
         op.portsIn = [];
         op.portsOut = [];
@@ -1369,37 +1360,7 @@ const Op = function ()
     Op.prototype.setError = function (id, txt)
     {
         this._log.warn("old error message op.error() - use op.setUiError()");
-
-        // if (txt === undefined)
-        // {
-        //     this.uiAttr({ "error": id });
-        // }
-        // else
-        // {
-        //     if (this._uiErrors[id] != txt)
-        //     {
-        //         this._uiErrors[id] = txt;
-        //         if (!txt) delete this._uiErrors[id];
-
-        //         const errorArr = [];
-        //         for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
-        //         this.uiAttr({ "errors": errorArr });
-        //         console.log(errorArr);
-        //     }
-        // }
     };
-
-    // // todo: remove
-    // Op.prototype.setHint = function (txt)
-    // {
-    //     if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
-    // };
-
-    // // todo: remove
-    // Op.prototype.setWarning = function (txt)
-    // {
-    //     if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
-    // };
 
     /**
      *  add an eventlistener ot op

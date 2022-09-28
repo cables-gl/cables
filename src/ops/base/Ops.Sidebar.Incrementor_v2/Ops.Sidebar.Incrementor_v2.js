@@ -78,10 +78,7 @@ op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 function setDefaultValue()
 {
     inDefault.set(outValue.get());
-    if (CABLES.UI && op.isCurrentUiOp())
-    {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 // events

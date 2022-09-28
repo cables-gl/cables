@@ -12,7 +12,8 @@ const
     next = op.outTrigger("next"),
     outNumBodies = op.outNumber("Total Bodies"),
     outPoints = op.outArray("debug points"),
-    outBodiesMeta = op.outArray("Bodies Meta");
+    outBodiesMeta = op.outArray("Bodies Meta"),
+    outCollisions = op.outArray("Collisions");
 
 op.setPortGroup("Gravity", [inGravX, inGravZ, inGravY]);
 
@@ -76,6 +77,7 @@ function update()
 
     outNumBodies.set(ammoWorld.numBodies());
     outBodiesMeta.set(ammoWorld.getListBodies());
+    outCollisions.set(ammoWorld.getCollisions());
 
     next.trigger();
 

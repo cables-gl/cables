@@ -93,7 +93,7 @@ colorInput.addEventListener("click", function ()
                 outHex.set(hex);
                 setInputsByHex(hex);
 
-                if (op.isCurrentUiOp()) gui.opParams.show(op);
+                op.refreshParams();
             }
         });
 });
@@ -141,10 +141,7 @@ function setDefaultColor()
     const hex = getInputColorHex();
     defaultValuePort.set(hex);
     outHex.set(hex);
-    if (CABLES.UI)
-    {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 /*
@@ -218,10 +215,7 @@ function onInput(ev)
         // inputValuePort.set(newValue)
         setInputsByHex(newValue);
         outHex.set(newValue);
-        if (CABLES.UI)
-        {
-            gui.opParams.show(op); /* update DOM */
-        }
+        op.refreshParams();
     }
 }
 

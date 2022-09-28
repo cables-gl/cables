@@ -65,7 +65,7 @@ function setDefaultValue()
     const defaultValue = inputValuePort.get();
     defaultValuePort.set(defaultValue);
     valuePort.set(defaultValue);
-    if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+    op.refreshParams();
 }
 
 function onInputClick()
@@ -88,7 +88,7 @@ function onInputClick()
         inputValuePort.set(false);
         // value.textContent = 'false';
     }
-    if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+    op.refreshParams();
 }
 
 function onInputValuePortChanged()

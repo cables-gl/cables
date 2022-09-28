@@ -24,26 +24,27 @@ function handleChange()
 
     // check if time is valid
     if (!CABLES.WEBAUDIO.isValidToneTime(time))
-{
+    {
         op.uiAttr({ "error": "Time not valid, Example: \"0:1:0" });
-        if (window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
+        op.refreshParams();
+
         return;
     }
- else
-{
+    else
+    {
         op.uiAttr({ "error": null });
-        if (window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
+        op.refreshParams();
     }
 
     // clear old schedule
     if (lastListenerId)
-{
+    {
         Tone.Transport.clear(lastListenerId);
         lastListenerId = undefined;
     }
     // create new schedule
     let cb = function (time)
-{
+    {
         timeOutPort.set(time);
 	    triggerPort.trigger();
     };

@@ -3,7 +3,7 @@ const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-const MIDIChannels = Array.from(Array(16).keys()).map((i) => i + 1);
+const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 
 function getMIDINote(dataByte1LSB)
 {
@@ -12,8 +12,8 @@ function getMIDINote(dataByte1LSB)
         : "NO NOTE";
 }
 
-const noteValues = Array.from(Array(128).keys(), (key) => getMIDINote(key));
-const velocityArray = Array.from(Array(128).keys(), (key) => 0);
+const noteValues = Array.from(Array(128).keys(), (key) => { return getMIDINote(key); });
+const velocityArray = Array.from(Array(128).keys(), (key) => { return 0; });
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
 const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
@@ -57,7 +57,7 @@ clear.onTriggered = () =>
     midiChannelDropdown.set(1);
     normalizeDropdown.set(normalizeDropdown.get("none"));
     gateType.set(false);
-    if (op.isCurrentUiOp()) gui.opParams.show(op);
+    op.refreshParams();
 };
 
 gateType.onChange = () =>
@@ -87,7 +87,7 @@ inEvent.onChange = () =>
         if (CABLES.UI)
         {
             op.uiAttr({ "info": `bound to Note: ${noteDropdown.get()}` });
-            gui.opParams.show(op);
+            op.refreshParams();
         }
     }
 

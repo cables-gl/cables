@@ -166,7 +166,7 @@ function move(e)
         setOutValue(x / size, y / size);
         inputX.set(x / size);
         inputY.set(y / size);
-        if (op.patch.isEditorMode() && op.isCurrentUiOp()) gui.opParams.show(op);
+        op.refreshParams();
     }
 }
 
@@ -233,7 +233,7 @@ function setDefaultValues()
     // outHex.set(hex);
 
     redraw();
-    if (op.patch.isEditorMode()) gui.opParams.show(op);
+    op.refreshParams();
 }
 
 function inputColorChanged()

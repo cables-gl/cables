@@ -278,12 +278,6 @@ TextureEffect.checkOpInEffect = function (op, minver)
             op.setUiError("texeffect", "This op must be a child of an ImageCompose op with version >=" + minver + " <span class=\"button-small\" onclick=\"gui.patchView.downGradeOp('" + op.id + "','" + op.name + "')\">Downgrade</span> to previous version", 1);
         }
     }
-    // if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
-    // {
-    //     op.setUiError("texeffect", null);
-    //     // op.uiAttr({ "error": null });
-    //     return true;
-    // }
 
     if (op.patch.cgl.currentTextureEffect) return true;
 

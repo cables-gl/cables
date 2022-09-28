@@ -210,7 +210,7 @@ function requestVrFullscreen()
 
         console.log("requestPresent ok.");
     }, function (e)
-{
+    {
         console.log("requestPresent failed.", e);
     });
 
@@ -258,7 +258,7 @@ if (navigator.getVRDisplays)
         info += " found input devices <br/>";
         op.uiAttr({ "info": info });
         op.uiAttr({ "warning": "" });
-        if (window.gui) gui.opParams.show(op);
+        if (window.gui) op.refreshParams();
 
         // document.getElementById("glcanvas").ondblclick = requestVrFullscreen;
         // onTouchstart = requestVrFullscreen;

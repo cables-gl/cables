@@ -299,29 +299,29 @@ function updateShader()
     parseUniforms(vertexShader.get());
     parseUniforms(fragmentShader.get());
 
-    for (var j = 0; j < uniformTextures.length; j++)
-        for (var i = 0; i < foundNames.length; i++)
+    for (let j = 0; j < uniformTextures.length; j++)
+        for (let i = 0; i < foundNames.length; i++)
             if (uniformTextures[j] && foundNames.indexOf(uniformTextures[j].name) == -1)
             {
                 uniformTextures[j].remove();
                 uniformTextures[j] = null;
             }
 
-    for (var j = 0; j < uniformInputs.length; j++)
-        for (var i = 0; i < foundNames.length; i++)
+    for (let j = 0; j < uniformInputs.length; j++)
+        for (let i = 0; i < foundNames.length; i++)
             if (uniformInputs[j] && foundNames.indexOf(uniformInputs[j].name) == -1)
             {
                 uniformInputs[j].remove();
                 uniformInputs[j] = null;
             }
 
-    for (var j = 0; j < vectors.length; j++)
+    for (let j = 0; j < vectors.length; j++)
     {
         initVectorUniform(vectors[j]);
         vectors[j].changed = true;
     }
 
-    for (i = 0; i < uniformInputs.length; i++)
+    for (let i = 0; i < uniformInputs.length; i++)
         if (uniformInputs[i] && uniformInputs[i].uniform)uniformInputs[i].uniform.needsUpdate = true;
 
     shader.compile();

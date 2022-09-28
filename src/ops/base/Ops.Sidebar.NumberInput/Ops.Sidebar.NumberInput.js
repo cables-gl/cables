@@ -43,10 +43,7 @@ setDefaultValueButtonPort.onTriggered = setDefaultValue;
 function setDefaultValue()
 {
     defaultValuePort.set(parseFloat(inputValuePort.get()));
-    if (CABLES.UI && op.isCurrentUiOp())
- {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 function onInputValuePortChanged()
@@ -63,10 +60,7 @@ function onInput(ev)
     if (isNaN(newVal)) { newVal = 0; }
     valuePort.set(newVal);
     inputValuePort.set(newVal);
-    if (CABLES.UI && op.isCurrentUiOp())
- {
-        gui.opParams.show(op); /* update DOM */
-    }
+    op.refreshParams();
 }
 
 function onDefaultValueChanged()
@@ -83,7 +77,7 @@ function onLabelTextChanged()
     let labelText = labelPort.get();
     label.textContent = labelText;
     if (CABLES.UI)
-{
+    {
         op.setTitle("Number Input: " + labelText);
     }
 }
@@ -92,15 +86,15 @@ function onParentChanged()
 {
     let parent = parentPort.get();
     if (parent && parent.parentElement)
-{
+    {
         parent.parentElement.appendChild(el);
         siblingsPort.set(null);
         siblingsPort.set(parent);
     }
- else
-{ // detach
+    else
+    { // detach
         if (el.parentElement)
-{
+        {
             el.parentElement.removeChild(el);
         }
     }
@@ -109,7 +103,7 @@ function onParentChanged()
 function showElement(el)
 {
     if (el)
-{
+    {
         el.style.display = "block";
     }
 }
@@ -117,7 +111,7 @@ function showElement(el)
 function hideElement(el)
 {
     if (el)
-{
+    {
         el.style.display = "none";
     }
 }
@@ -130,7 +124,7 @@ function onDelete()
 function removeElementFromDOM(el)
 {
     if (el && el.parentNode && el.parentNode.removeChild)
-{
+    {
         el.parentNode.removeChild(el);
     }
 }

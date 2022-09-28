@@ -1,20 +1,20 @@
 
 CABLES.WEBAUDIO.createAudioContext(op);
 
-var INFINITE = "Infinite";
-var START_TIME_DEFAULT = "0";
+let INFINITE = "Infinite";
+let START_TIME_DEFAULT = "0";
 
 // input ports
-var intervalPort = op.inValueString("Interval", "4n");
-var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-var durationPort = op.inValueString("Duration", INFINITE);
+let intervalPort = op.inValueString("Interval", "4n");
+let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
+let durationPort = op.inValueString("Duration", INFINITE);
 
 // output ports
-var triggerPort = op.outTrigger("Trigger");
-var timeOutPort = op.outValue("Event Time");
+let triggerPort = op.outTrigger("Trigger");
+let timeOutPort = op.outValue("Event Time");
 
 // vars
-var lastListenerId;
+let lastListenerId;
 
 // change listsners
 intervalPort.onChange = handleChange;
@@ -22,55 +22,68 @@ startTimePort.onChange = handleChange;
 durationPort.onChange = handleChange;
 
 // functions
-function handleChange() {
-    var duration = durationPort.get();
-    var interval =  intervalPort.get();
-    var startTime = startTimePort.get();
+function handleChange()
+{
+    let duration = durationPort.get();
+    let interval = intervalPort.get();
+    let startTime = startTimePort.get();
 
-    if(!interval || interval == 0) {
+    if (!interval || interval == 0)
+    {
         op.log("Warning: Interval should not be 0!");
         return;
     }
 
     // check if interval is valid
-    try{
-	    var time = new Tone.TimeBase(interval);
-    } catch(e) {
+    try
+    {
+        let time = new Tone.TimeBase(interval);
+    }
+    catch (e)
+    {
         // interval not valid
-        op.uiAttr( { 'error': 'Interval not valid, Examples: "4n", "1m", 2' } );
-        if(window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
-    	return;
+        op.uiAttr({ "error": "Interval not valid, Examples: \"4n\", \"1m\", 2" });
+        op.refreshParams();
+        return;
     }
     // reset UI warning
-    op.uiAttr( { 'error': null } );
-    if(window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
+    op.uiAttr({ "error": null });
+    op.refreshParams();
 
     // clear old schedule
-    if(lastListenerId) {
+    if (lastListenerId)
+    {
         Tone.Transport.clear(lastListenerId);
         lastListenerId = undefined;
     }
     // create new schedule
-    var cb = function(time) {
+    let cb = function (time)
+    {
         timeOutPort.set(time);
-	    triggerPort.trigger();
+        triggerPort.trigger();
     };
     op.log("Creating new interval with interval: " + interval);
-    if(isValidTime(startTime)) {
-        if(duration && duration !== INFINITE) {
-            lastListenerId = Tone.Transport.scheduleRepeat(
-                cb,
-                interval,
-                startTime
-            );
-        } else {
+    if (isValidTime(startTime))
+    {
+        if (duration && duration !== INFINITE)
+        {
             lastListenerId = Tone.Transport.scheduleRepeat(
                 cb,
                 interval,
                 startTime
             );
         }
-    } else {
+        else
+        {
+            lastListenerId = Tone.Transport.scheduleRepeat(
+                cb,
+                interval,
+                startTime
+            );
+        }
+    }
+    else
+    {
         lastListenerId = Tone.Transport.scheduleRepeat(
             cb,
             interval
@@ -81,13 +94,15 @@ function handleChange() {
 handleChange();
 
 // functions
-function isValidTime(time) {
-    try {
+function isValidTime(time)
+{
+    try
+    {
         new Tone.TimeBase(time);
         return true;
-    } catch(e) {
+    }
+    catch (e)
+    {
         return false;
     }
 }
-
-
