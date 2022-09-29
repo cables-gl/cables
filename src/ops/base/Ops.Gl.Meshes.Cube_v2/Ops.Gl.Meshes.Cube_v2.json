@@ -40,12 +40,8 @@
             {
                 "type": 0,
                 "name": "Mapping index",
+                "group": "Mapping",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mapping",
-                "group": "Mapping"
             },
             {
                 "type": 0,
