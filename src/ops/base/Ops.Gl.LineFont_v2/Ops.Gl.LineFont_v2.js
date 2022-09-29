@@ -613,7 +613,7 @@ for (let i = 0; i < characters.length; i++)
             indices.push(count);
             count++;
         }
-        console.log(lines);
+
         characters[i].linesArr = lines;
         let geom = new CGL.Geometry(op.name);
         geom.vertices = vertices;
