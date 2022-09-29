@@ -13,9 +13,11 @@ const cgl = op.patch.cgl;
 
 inCoords.onChange = updateTexCoordsPorts;
 pTexCoordRand.onChange = updateTexCoordsPorts;
-
-vertCols.onChange = seed.onChange = arr.onChange = reset;
+vertCols.onChange = updateVertCols;
+seed.onChange = arr.onChange = reset;
 numPoints.onChange = updateNumVerts;
+
+vertCols.onLinkChanged = reset;
 
 op.toWorkPortsNeedToBeLinked(arr, exe);
 
@@ -71,6 +73,14 @@ function updateTexCoordsPorts()
 
     mesh = null;
     needsRebuild = true;
+}
+
+function updateVertCols()
+{
+    if (!vertCols.get()) return;
+    if (!geom.vertexColors) reset();
+
+    if (mesh)mesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR, vertCols.get(), 4);
 }
 
 function updateNumVerts()
