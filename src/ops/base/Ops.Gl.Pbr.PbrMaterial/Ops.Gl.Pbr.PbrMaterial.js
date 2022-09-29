@@ -72,7 +72,10 @@ const lightFragmentBodies = {
     "spot": attachments.light_body_spot_frag,
 };
 const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}}", n);
-const createLightFragmentBody = (n, type) => lightFragmentBodies[type].replace(LIGHT_INDEX_REGEX, n);
+const createLightFragmentBody = (n, type) =>
+{
+    (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n);
+};
 let currentLightCount = -1;
 
 if (cgl.glVersion == 1)
@@ -270,12 +273,12 @@ function buildShader()
         const light = PBRLightStack[i];
         const type = light.type;
 
-        fragmentHead = fragmentHead.concat(createLightFragmentHead(i));
-        fragmentBody = fragmentBody.concat(createLightFragmentBody(i, light.type));
+        fragmentHead = fragmentHead.concat(createLightFragmentHead(i) || "");
+        fragmentBody = fragmentBody.concat(createLightFragmentBody(i, light.type) || "");
     }
 
-    fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead);
-    fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
+    fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead || "");
+    fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody || "");
 
     PBRShader.setSource(vertexShader, fragmentShader);
     shaderOut.set(PBRShader);
