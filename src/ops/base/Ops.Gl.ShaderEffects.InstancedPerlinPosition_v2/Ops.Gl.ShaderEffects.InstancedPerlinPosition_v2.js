@@ -42,6 +42,7 @@ mod.addUniform("3f", "MOD_mulAxis", mulx, muly, mulz);
 
 meth.onChange =
 inWorldSpace.onChange = updateDefines;
+updateDefines();
 
 function updateDefines()
 {
@@ -52,36 +53,6 @@ function updateDefines()
 
 render.onTriggered = function ()
 {
-    // if(!cgl.getShader())
-    // {
-    //      next.trigger();
-    //      return;
-    // }
-
-    // if(cgl.getShader()!=shader)
-    // {
-    //     // if(shader) removeModule();
-    //     shader=cgl.getShader();
-
-    //     moduleVert=shader.addModule(
-    //         {
-    //             title:op.objName,
-    //             name:'MODULE_VERTEX_POSITION',
-    //             srcHeadVert:srcHeadVert,
-    //             srcBodyVert:srcBodyVert
-    //         });
-
-    //     inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-
-    //     scrollx.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'scrollx',scrollx);
-    //     scrolly.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'scrolly',scrolly);
-    //     scrollz.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'scrollz',scrollz);
-
-    //     updateDefines();
-    // }
-
-    // if(!shader)return;
-
     mod.bind();
     next.trigger();
     mod.unbind();
