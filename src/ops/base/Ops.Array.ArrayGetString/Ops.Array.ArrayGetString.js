@@ -6,14 +6,15 @@ const
 array.ignoreValueSerialize = true;
 
 index.onChange = update;
+let arr = null;
 
 array.onChange = function ()
 {
+    arr = array.get();
     update();
 };
 
 function update()
 {
-    const arr = array.get();
     if (arr) result.set(arr[index.get()]);
 }

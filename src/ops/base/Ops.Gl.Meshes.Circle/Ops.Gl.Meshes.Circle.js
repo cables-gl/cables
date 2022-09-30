@@ -150,7 +150,7 @@ function calc()
             texCoords.push(posxTexCoord, posyTexCoord, oldPosXTexCoord, oldPosYTexCoord, posxTexCoordIn, posyTexCoordIn);
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
-            biTangents.push(0, -1, 0, 0, -1, 0, 0, -1, 0);
+            biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0);
 
             oldPosXTexCoord = posxTexCoord;
             oldPosYTexCoord = posyTexCoord;
