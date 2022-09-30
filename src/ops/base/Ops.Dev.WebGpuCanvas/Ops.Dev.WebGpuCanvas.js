@@ -27,7 +27,6 @@ if (navigator.gpu)
             console.log(adapter);
             console.log(device);
 
-            //   if (canvas.current === null) return;
             context = canvas.getContext("webgpu");
 
             const devicePixelRatio = window.devicePixelRatio || 1;
@@ -35,15 +34,17 @@ if (navigator.gpu)
                 canvas.clientWidth * devicePixelRatio,
                 canvas.clientHeight * devicePixelRatio,
             ];
-            const presentationFormat = context.getPreferredFormat(adapter);
+            const presentationFormat = navigator.gpu.getPreferredCanvasFormat(adapter);
 
             context.configure({
                 device,
                 "format": presentationFormat,
-                "size": presentationSize,
+                // "size": presentationSize,
             });
 
             pipeline = device.createRenderPipeline({
+                "layout": "auto",
+
                 "vertex": {
                     "module": device.createShaderModule({
                         "code": attachments.tri_wgsl_vert,
@@ -86,7 +87,8 @@ function frame()
         "colorAttachments": [
             {
                 "view": textureView,
-                "loadValue": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 1.0 },
+                "loadOp": "clear",
+                "cleaeValue": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 1.0 },
                 "storeOp": "store",
             },
         ],
@@ -95,7 +97,7 @@ function frame()
     const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
     passEncoder.setPipeline(pipeline);
     passEncoder.draw(3, 1, 0, 0);
-    passEncoder.endPass();
+    passEncoder.end();
 
     device.queue.submit([commandEncoder.finish()]);
     requestAnimationFrame(frame);
