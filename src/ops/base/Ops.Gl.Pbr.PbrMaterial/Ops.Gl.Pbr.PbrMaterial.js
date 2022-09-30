@@ -73,9 +73,7 @@ const lightFragmentBodies = {
 };
 const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createLightFragmentBody = (n, type) =>
-{
     (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n);
-};
 let currentLightCount = -1;
 
 if (cgl.glVersion == 1)
