@@ -23,6 +23,7 @@ op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
 
+
 const geom = new CGL.Geometry("rectangle");
 let mesh = null;
 let needsRebuild = false;
@@ -99,13 +100,13 @@ function rebuild()
             {
                 norms.push(0, 1, 0);
                 tangents.push(1, 0, 0);
-                biTangents.push(0, 1, 0);
+                biTangents.push(0, 0, 1);
             }
             else if (a == "xy")
             {
                 norms.push(0, 0, 1);
-                tangents.push(1, 0, 0);
-                biTangents.push(0, 1, 0);
+                tangents.push(-1, 0, 0);
+                biTangents.push(0, -1, 0);
             }
         }
     }

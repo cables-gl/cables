@@ -17,6 +17,6 @@
     "layout": {
         "portsIn": [],
         "portsOut": [],
-        "name": "Ops.User.pandur.WebGpuCanvas"
+        "name": "Ops.Dev.WebGpuCanvas"
     }
 }
