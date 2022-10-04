@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.WebGpuCanvas renamed to Ops.Dev.WebGpuCanvas",
             "author": "pandur",
             "date": 1664469519507
+        },
+        {
+            "message": "Ops.Dev.WebGpuCanvas renamed to Ops.Dev.WebGpu.WebGpuCanvas",
+            "author": "pandur",
+            "date": 1664915294498
         }
     ],
     "authorName": "pandur",
