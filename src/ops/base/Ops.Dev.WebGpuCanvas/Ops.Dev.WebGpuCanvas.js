@@ -1,4 +1,7 @@
-const next = op.outTrigger("Next");
+const
+    next = op.outTrigger("Next"),
+    supported = op.outBoolNum("Supported", false),
+    outLimits = op.outObject("Limits");
 
 let device = null;
 let context = null, pipeline = null;
@@ -24,7 +27,7 @@ if (!navigator.gpu)
 {
     const warn = "Your browser does not support webGPU";
     op.setUiError("nowebgpu", warn);
-    console.log(warn); s;
+    console.log(warn);
 }
 
 if (navigator.gpu)
@@ -32,7 +35,16 @@ if (navigator.gpu)
     {
         adapter.requestDevice().then((_device) =>
         {
+            supported.set(true);
             device = _device;
+
+            //
+
+            const limits = {};
+            for (let i in device.limits) limits[i] = device.limits[i];
+            outLimits.set(limits);
+
+            //
 
             op.patch.cgp.device = device;
             op.patch.cgp.adapter = adapter;
