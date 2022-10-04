@@ -59,10 +59,6 @@
                 "text": "How long it takes for the value to reach the current value"
             },
             {
-                "name": "easing",
-                "text": "Easing mode selector"
-            },
-            {
                 "name": "Next",
                 "text": "Trigger out"
             },
