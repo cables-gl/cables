@@ -1,4 +1,4 @@
-# intermediate
+# Intermediate
 
 __TOC__
 
