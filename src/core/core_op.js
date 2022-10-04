@@ -1324,7 +1324,7 @@ const Op = function ()
      * @instance
      * @memberof Op
      * @param {id} error id
-     * @returns {Boolean} - is current ui op
+     * @returns {Boolean} - has id
      */
     Op.prototype.hasUiError = function (id)
     {
