@@ -539,7 +539,7 @@ const Op = function ()
                     "display": "switch",
                     "hidePort": true,
                     "type": "string",
-                    values
+                    "values": values
                 }, n
             );
 
@@ -564,7 +564,7 @@ const Op = function ()
                 "display": "switch",
                 "hidePort": true,
                 "type": "string",
-                values
+                "values": values
             });
             p = this.addInPort(switchPort);
         }
@@ -1316,6 +1316,19 @@ const Op = function ()
             if (port) port.set(obj[i]);
             else this._log.warn("op.setValues: port not found:", i);
         }
+    };
+
+    /**
+     * return true if op has this error message id
+     * @function setUiError
+     * @instance
+     * @memberof Op
+     * @param {id} error id
+     * @returns {Boolean} - has id
+     */
+    Op.prototype.hasUiError = function (id)
+    {
+        return this._uiErrors.hasOwnProperty(id) && this._uiErrors[id];
     };
 
     /**

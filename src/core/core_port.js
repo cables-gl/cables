@@ -421,18 +421,16 @@ Port.prototype.removeLinks = function ()
 Port.prototype.removeLink = function (link)
 {
     for (const i in this.links)
-    {
         if (this.links[i] == link)
-        {
             this.links.splice(i, 1);
-        }
-    }
 
     if (this.direction == CONSTANTS.PORT.PORT_DIR_IN)
     {
         if (this.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
         else this.setValue(this._valueBeforeLink || null);
     }
+
+    if (CABLES.UI && this.parent.checkLinkTimeWarnings) this.parent.checkLinkTimeWarnings();
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
@@ -454,6 +452,8 @@ Port.prototype.addLink = function (l)
 {
     this._valueBeforeLink = this.value;
     this.links.push(l);
+    if (CABLES.UI && this.parent.checkLinkTimeWarnings) this.parent.checkLinkTimeWarnings();
+
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
     this.parent.emitEvent("onLinkChanged");
@@ -485,6 +485,8 @@ Port.prototype.removeLinkTo = function (p2)
         if (this.links[i].portIn == p2 || this.links[i].portOut == p2)
         {
             this.links[i].remove();
+            if (CABLES.UI && this.parent.checkLinkTimeWarnings) this.parent.checkLinkTimeWarnings();
+
             if (this.onLinkChanged) this.onLinkChanged();
             this.emitEvent("onLinkChanged");
             return;

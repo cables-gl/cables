@@ -591,7 +591,7 @@ for (let i = 0; i < characters.length; i++)
         let indices = [];
         let vertices = [];
 
-        for (let j = 0; j < characters[i].l[l].length; j += 2)
+        for (let j = 0; j < characters[i].l[l].length - 2; j += 2)
         {
             lines.push(
                 (characters[i].l[l][j] - min(i)) * 0.005,

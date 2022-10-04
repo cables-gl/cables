@@ -259,14 +259,14 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     let type = this._cgl.gl.FLOAT;
     if (options && options.type) type = options.type;
     const attr = {
-        buffer,
-        name,
-        cb,
-        itemSize,
-        numItems,
+        "buffer": buffer,
+        "name": name,
+        "cb": cb,
+        "itemSize": itemSize,
+        "numItems": numItems,
         "startItem": 0,
-        instanced,
-        type
+        "instanced": instanced,
+        "type": type
     };
 
     this._bufferArray(array, attr);
@@ -315,12 +315,12 @@ Mesh.prototype.updateNormals = function (geom)
 {
     if (geom.vertexNormals && geom.vertexNormals.length > 0)
     {
-        this.setAttribute("attrVertNormal", geom.vertexNormals, 3);
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NORMAL, geom.vertexNormals, 3);
     }
     else
     {
         const tcBuff = new Float32Array(Math.round((geom.vertices.length)));
-        this.setAttribute("attrVertNormal", tcBuff, 3);
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NORMAL, tcBuff, 3);
     }
 };
 
@@ -433,7 +433,7 @@ Mesh.prototype.setGeom = function (geom, removeRef)
     if (this._geom.vertexColors.length > 0)
     {
         if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
-        this.setAttribute("attrVertColor", this._geom.vertexColors, 4);
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR, this._geom.vertexColors, 4);
     }
 
     if (this.addVertexNumbers) this._setVertexNumbers();

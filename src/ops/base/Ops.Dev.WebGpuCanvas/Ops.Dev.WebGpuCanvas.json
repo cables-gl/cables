@@ -1,0 +1,27 @@
+{
+    "id": "95191541-a155-48b6-880f-e40b8be7a469",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1644421918197
+        },
+        {
+            "message": "Ops.User.pandur.WebGpuCanvas renamed to Ops.Dev.WebGpuCanvas",
+            "author": "pandur",
+            "date": 1664469519507
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1644422158794,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Dev.WebGpuCanvas"
+    }
+}
