@@ -12,13 +12,6 @@ we will build the executables on our servers for you to download once ready.
 
 Building executables for OSX is not that easy, so there is a few things to keep in mind (see CAVEATS).
 
-## Prerequisites
-
-- an account on [github](https://github.com/)
-- DO NOT create an empty repository
-- an [access token](https://github.com/settings/tokens) for your github-user with at least "repo" permissions
-- check that [github actions](https://github.com/features/actions) is enables in the repositories settings on github
-
 ## Parameters
 
 Exports can be done by all collaborators added to the patch.
