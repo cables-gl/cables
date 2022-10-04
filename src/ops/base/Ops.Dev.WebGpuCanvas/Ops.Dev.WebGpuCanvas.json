@@ -16,7 +16,12 @@
     "created": 1644422158794,
     "layout": {
         "portsIn": [],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
         "name": "Ops.Dev.WebGpuCanvas"
     }
 }

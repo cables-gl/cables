@@ -1,21 +1,30 @@
+const next = op.outTrigger("Next");
+
 let device = null;
 let context = null, pipeline = null;
-// const canvas=ele.byId("glcanvas");
+
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
 canvas.id = "webgpucanvas";
-canvas.style.width = 300 + "px";
-canvas.style.height = 200 + "px";
+canvas.style.width = 515 + "px";
+canvas.style.height = 300 + "px";
 canvas.style.right = 1 + "px";
 canvas.style["z-index"] = "22222";
 canvas.style.border = "3px solid red";
 canvas.style.position = "absolute";
 
+const cgp = op.patch.cgp;
+
+op.onDelete = () =>
+{
+    canvas.remove();
+};
+
 if (!navigator.gpu)
 {
     const warn = "Your browser does not support webGPU";
     op.setUiError("nowebgpu", warn);
-    console.log(warn);
+    console.log(warn); s;
 }
 
 if (navigator.gpu)
@@ -24,10 +33,16 @@ if (navigator.gpu)
         adapter.requestDevice().then((_device) =>
         {
             device = _device;
+
+            op.patch.cgp.device = device;
+            op.patch.cgp.adapter = adapter;
+            op.patch.cgp.canvas = canvas;
+
             console.log(adapter);
             console.log(device);
 
             context = canvas.getContext("webgpu");
+            cgp.context = context;
 
             const devicePixelRatio = window.devicePixelRatio || 1;
             const presentationSize = [
@@ -35,6 +50,7 @@ if (navigator.gpu)
                 canvas.clientHeight * devicePixelRatio,
             ];
             const presentationFormat = navigator.gpu.getPreferredCanvasFormat(adapter);
+            cgp.presentationFormat = presentationFormat;
 
             context.configure({
                 device,
@@ -66,6 +82,7 @@ if (navigator.gpu)
                     "topology": "triangle-list",
                 },
             });
+            cgp.pipeline = pipeline;
 
             requestAnimationFrame(frame);
         });
@@ -81,24 +98,28 @@ function frame()
     }
 
     const commandEncoder = device.createCommandEncoder();
-    const textureView = context.getCurrentTexture().createView();
-
+    cgp.textureView = context.getCurrentTexture().createView();
+    // cgp.textureView = textureView;
     const renderPassDescriptor = {
         "colorAttachments": [
             {
-                "view": textureView,
+                "view": cgp.textureView,
                 "loadOp": "clear",
-                "cleaeValue": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 1.0 },
+                "cleaeValue": { "r": 0.8, "g": 0.2, "b": 0.8, "a": 1.0 },
                 "storeOp": "store",
             },
         ],
     };
+    cgp.renderPassDescriptor = renderPassDescriptor;
 
-    const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
-    passEncoder.setPipeline(pipeline);
-    passEncoder.draw(3, 1, 0, 0);
-    passEncoder.end();
+    next.trigger();
 
-    device.queue.submit([commandEncoder.finish()]);
+    // const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
+    // passEncoder.setPipeline(pipeline);
+    // passEncoder.draw(3, 1, 0, 0);
+    // passEncoder.end();
+
+    // device.queue.submit([commandEncoder.finish()]);
+
     requestAnimationFrame(frame);
 }

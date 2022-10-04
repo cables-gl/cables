@@ -923,7 +923,7 @@ Geometry.json2geom = function (jsonMesh)
     geom.biTangents = jsonMesh.bitangents || [];
     if (jsonMesh.texturecoords) geom.setTexCoords(jsonMesh.texturecoords[0]);
 
-    if (jsonMesh.vertices_b64) geom.vertices = new Float32Array(b64decTypedArray(jsonMesh.vertices_b64));
+    if (jsonMesh.vertices_b64)geom.vertices = new Float32Array(b64decTypedArray(jsonMesh.vertices_b64));
     if (jsonMesh.normals_b64) geom.vertexNormals = new Float32Array(b64decTypedArray(jsonMesh.normals_b64));
     if (jsonMesh.tangents_b64) geom.tangents = new Float32Array(b64decTypedArray(jsonMesh.tangents_b64));
     if (jsonMesh.bitangents_b64) geom.biTangents = new Float32Array(b64decTypedArray(jsonMesh.bitangents_b64));

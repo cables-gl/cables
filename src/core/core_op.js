@@ -539,7 +539,7 @@ const Op = function ()
                     "display": "switch",
                     "hidePort": true,
                     "type": "string",
-                    values
+                    "values": values
                 }, n
             );
 
@@ -564,7 +564,7 @@ const Op = function ()
                 "display": "switch",
                 "hidePort": true,
                 "type": "string",
-                values
+                "values": values
             });
             p = this.addInPort(switchPort);
         }
