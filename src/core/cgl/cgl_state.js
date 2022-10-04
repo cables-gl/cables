@@ -4,6 +4,7 @@ import { MatrixStack } from "./cgl_matrixstack";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
+import { GAState } from "../ga_state";
 
 
 /**
@@ -15,7 +16,11 @@ import Logger from "../core_logger";
  */
 const Context = function (_patch)
 {
-    EventTarget.apply(this);
+    // EventTarget.apply(this);
+    GAState.apply(this);
+
+    this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
+    this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
     this.profileData = new ProfileData(this);
     this._log = new Logger("cgl_context");
@@ -43,33 +48,6 @@ const Context = function (_patch)
     this._cursor = "auto";
     this._currentCursor = "";
 
-
-    /**
-     * Current projection matrix
-     * @memberof Context
-     * @instance
-     * @type {mat4}
-     */
-    this.pMatrix = mat4.create();
-    /**
-     * Current model matrix
-     * @memberof Context
-     * @instance
-     * @type {mat4}
-     */
-    this.mMatrix = mat4.create();
-    /**
-     * Current view matrix
-     * @memberof Context
-     * @instance
-     * @type {mat4}
-     */
-    this.vMatrix = mat4.create();
-    this._textureslots = [];
-
-    this._pMatrixStack = new MatrixStack();
-    this._mMatrixStack = new MatrixStack();
-    this._vMatrixStack = new MatrixStack();
     this._glFrameBufferStack = [];
     this._frameBufferStack = [];
     this._shaderStack = [];
@@ -86,10 +64,6 @@ const Context = function (_patch)
         },
     }); // todo: deprecated
 
-    this.canvas = null;
-    this.pixelDensity = 1;
-    mat4.identity(this.mMatrix);
-    mat4.identity(this.vMatrix);
 
     const simpleShader = new Shader(this, "simpleshader");
 
@@ -235,19 +209,9 @@ const Context = function (_patch)
             "maxUniformsFrag": this.maxUniformsFrag,
             "maxUniformsVert": this.maxUniformsVert,
             "maxSamples": this.maxSamples
-
         };
     };
 
-    this.updateSize = function ()
-    {
-        this.canvas.width = this.canvasWidth = this.canvas.clientWidth * this.pixelDensity;
-        this.canvas.height = this.canvasHeight = this.canvas.clientHeight * this.pixelDensity;
-    };
-
-    this.canvasWidth = -1;
-    this.canvasHeight = -1;
-    this.canvasScale = 1;
     let oldCanvasWidth = -1;
     let oldCanvasHeight = -1;
 
@@ -286,7 +250,6 @@ const Context = function (_patch)
         viewPort[3] = Math.round(h);
         this.gl.viewport(viewPort[0], viewPort[1], viewPort[2], viewPort[3]);
     };
-
 
     this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
     {
@@ -610,56 +573,6 @@ const Context = function (_patch)
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
-    this.setSize = function (w, h, ignorestyle)
-    {
-        if (!ignorestyle)
-        {
-            this.canvas.style.width = w + "px";
-            this.canvas.style.height = h + "px";
-        }
-
-        this.canvas.width = w * this.pixelDensity;
-        this.canvas.height = h * this.pixelDensity;
-
-        this.updateSize();
-    };
-
-    this._resizeToWindowSize = function ()
-    {
-        this.setSize(window.innerWidth, window.innerHeight);
-        this.updateSize();
-    };
-
-    this._resizeToParentSize = function ()
-    {
-        const p = this.canvas.parentElement;
-        if (!p)
-        {
-            this._log.error("cables: can not resize to container element");
-            return;
-        }
-        this.setSize(p.clientWidth, p.clientHeight);
-
-        this.updateSize();
-    };
-
-    this.setAutoResize = function (parent)
-    {
-        window.removeEventListener("resize", this._resizeToWindowSize.bind(this));
-        window.removeEventListener("resize", this._resizeToParentSize.bind(this));
-
-        if (parent == "window")
-        {
-            window.addEventListener("resize", this._resizeToWindowSize.bind(this));
-            window.addEventListener("orientationchange", this._resizeToWindowSize.bind(this));
-            this._resizeToWindowSize();
-        }
-        if (parent == "parent")
-        {
-            window.addEventListener("resize", this._resizeToParentSize.bind(this));
-            this._resizeToParentSize();
-        }
-    };
 
     this.printError = function (str)
     {
@@ -766,113 +679,6 @@ const Context = function (_patch)
 Context.prototype.addNextFrameOnceCallback = function (cb)
 {
     if (cb) this._onetimeCallbacks.push(cb);
-};
-
-/**
- * push a matrix to the view matrix stack
- * @function pushviewMatrix
- * @memberof Context
- * @instance
- * @param {mat4} viewmatrix
- */
-Context.prototype.pushViewMatrix = function ()
-{
-    this.vMatrix = this._vMatrixStack.push(this.vMatrix);
-};
-
-/**
- * pop view matrix stack
- * @function popViewMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current viewmatrix
- * @function
- */
-Context.prototype.popViewMatrix = function ()
-{
-    this.vMatrix = this._vMatrixStack.pop();
-};
-
-Context.prototype.getViewMatrixStateCount = function ()
-{
-    return this._vMatrixStack.stateCounter;
-};
-
-/**
- * push a matrix to the projection matrix stack
- * @function pushPMatrix
- * @memberof Context
- * @instance
- * @param {mat4} projectionmatrix
- */
-Context.prototype.pushPMatrix = function ()
-{
-    this.pMatrix = this._pMatrixStack.push(this.pMatrix);
-};
-
-/**
- * pop projection matrix stack
- * @function popPMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current projectionmatrix
- */
-Context.prototype.popPMatrix = function ()
-{
-    this.pMatrix = this._pMatrixStack.pop();
-    return this.pMatrix;
-};
-
-Context.prototype.getProjectionMatrixStateCount = function ()
-{
-    return this._pMatrixStack.stateCounter;
-};
-
-/**
- * push a matrix to the model matrix stack
- * @function pushModelMatrix
- * @memberof Context
- * @instance
- * @param {mat4} modelmatrix
- * @example
- * // see source code of translate op:
- * cgl.pushModelMatrix();
- * mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
- * trigger.trigger();
- * cgl.popModelMatrix();
- */
-Context.prototype.pushMvMatrix = Context.prototype.pushModelMatrix = function ()
-{
-    // deprecated
-    // var copy = mat4.clone(this.mMatrix);
-    this.mMatrix = this._mMatrixStack.push(this.mMatrix);
-};
-
-/**
- * pop model matrix stack
- * @function popModelMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current modelmatrix
- */
-Context.prototype.popMvMatrix = Context.prototype.popmMatrix = Context.prototype.popModelMatrix = function ()
-{
-    // todo: DEPRECATE
-    // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
-    this.mMatrix = this._mMatrixStack.pop();
-    return this.mMatrix;
-};
-
-/**
- * get model matrix
- * @function modelMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current modelmatrix
- */
-Context.prototype.modelMatrix = function ()
-{
-    return this.mMatrix;
 };
 
 // state depthtest
