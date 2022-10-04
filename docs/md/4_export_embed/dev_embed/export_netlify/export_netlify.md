@@ -60,7 +60,11 @@ these files included in the export.
 - Single Javascript File: packages and minifies everything into one single javascript file to include
 - Multiple Files: will keep the patch configuration, your code, and core code in seperate files
 
-### Compatibility
+### Skip Backups
 
-- Modern browsers: exports your patch as is
-- Old browsers: uses [babel](https://babeljs.io/) to try make your patch run on older browsers, in general should not be needed anymore
+- When deselecting this option, the export will include JSON-files for all the versions of your patch that can be re-imported into cables later.
+
+### Export without subdirectories
+
+- Should you need the directory structure of your patch to be "flat" (no js/ or assets/ subdirectory) you can select this option.
+    - This will ususally not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.

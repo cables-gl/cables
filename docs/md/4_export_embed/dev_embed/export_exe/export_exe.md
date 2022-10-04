@@ -8,9 +8,9 @@ This export option allows you to create a standalone executable that will run on
 natively.
 
 We are using [electron](https://www.electronjs.org/) for the cross-platform running of cables patches and
-we will build the executables using server-resources given to us by you in using [github actions](https://github.com/features/actions).
+we will build the executables on our servers for you to download once ready.
 
-The executable will be build and downloadable on github after all is done (see CAVEATS)
+Building executables for OSX is not that easy, so there is a few things to keep in mind (see CAVEATS).
 
 ## Prerequisites
 
@@ -21,40 +21,26 @@ The executable will be build and downloadable on github after all is done (see C
 
 ## Parameters
 
-All these parameters can only be changed/entered by the owner of the patch. Exports can be done to configured deployments
-by all collaborators added to the patch.
+Exports can be done by all collaborators added to the patch.
 
-### Repository Owner
+### Architecture
 
-Put in the name of the repository owner, most of the time this is your github username.
-
-If your repository URL is `https://github.com/cables-gl/cables-cli/` your ownername will be `cables-gl`
-
-### Repository Name
-
-Put in the name of the repository. DO NOT PUT IN AN EXISTING repository. cables will create a new repository for you.
-
-### Branch
-
-This can be left blank or pick any branch you want the changes to be pushed to. ONLY pushes to `main` will trigger
-building the executables!
-
-### Access Token
-
-Enter your generated [access token](https://github.com/settings/tokens) that has at least "repo" permissions in github.
+Pick any of the available operating systems and cpu architectures you want your export to run on. Please
+take a look at the CAVEATS below if you are trying to export to OS X and especially OS X on ARM ("Apple Silicon"/"M1").
 
 ## WALKTHROUGH
 - enter the above information
 - click on button
-- wait for the two buttons to appear
-- click on "View progress" to see the progress of your build on github
-- click on "View finished builds" to jump to the download page on github (it might take a few minutes for build to show up here)
+- wait for the download button to appear
+- download executable, can take some time as electron might turn out to be quite big depending on your platform, even with smaller patches
 
 ## CAVEATS
-- IGNORE THE FIRST BUILD! this is mainly to create the "framework", there will be a second run that then builds your actual patch.
-- this will fail if the repository given already exists before the first run
-- any subsequent run will update (and replace) the current patch
-- old versions will still be available for download on the release page of your repository
+- Apple introduced some security features that make it next to impossible to build these kind of apps at the moment, so there is a few caveats when using this on OS X.
+- The executable is not signed, you will need to whitelist it on every machine you run it on (right click, "open" usually does that).
+  - We cannot sign this executable, as it's contents do change when downloading a patch, this is intended...sorry...
+  - The build for arm/m1-architecture is even harder to run, apple forbids running unsigned apps that are build for arm entirely, not even whitelisting is possible...you may sign it on your own, though.
+- Once you downloaded the app, USE THE FINDER to move it basically anywhere else (like your desktop) before opening it
+  - Apple puts downloaded apps into a random read-only directory UNTIL YOU MOVE IT USING FINDER, we need to write to the directory...sorry...
 
 ## Export Options
 
@@ -76,7 +62,12 @@ these files included in the export.
 - Single Javascript File: packages and minifies everything into one single javascript file to include
 - Multiple Files: will keep the patch configuration, your code, and core code in seperate files
 
-### Compatibility
+### Skip Backups
 
-- Modern browsers: exports your patch as is
-- Old browsers: uses [babel](https://babeljs.io/) to try make your patch run on older browsers, in general should not be needed anymoretry make your patch run on older browsers, in general should not be needed anymore
+- When deselecting this option, the export will include JSON-files for all the versions of your patch that can be re-imported into cables later.
+
+### Export without subdirectories
+
+- Should you need the directory structure of your patch to be "flat" (no js/ or assets/ subdirectory) you can select this option.
+  - This will ususally not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
+
