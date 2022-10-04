@@ -105,7 +105,11 @@ function frame()
             {
                 "view": cgp.textureView,
                 "loadOp": "clear",
+<<<<<<< HEAD
                 "cleaeValue": { "r": 0.8, "g": 0.2, "b": 0.8, "a": 1.0 },
+=======
+                "clearValue": { "r": 0.0, "g": 0.5, "b": 0.0, "a": 1.0 },
+>>>>>>> 7b7861ff3a4e584f1d1590295fdd6bcdaa193097
                 "storeOp": "store",
             },
         ],

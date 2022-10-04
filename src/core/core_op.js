@@ -1319,6 +1319,19 @@ const Op = function ()
     };
 
     /**
+     * return true if op has this error message id
+     * @function setUiError
+     * @instance
+     * @memberof Op
+     * @param {id} error id
+     * @returns {Boolean} - is current ui op
+     */
+    Op.prototype.hasUiError = function (id)
+    {
+        return this._uiErrors.hasOwnProperty(id) && this._uiErrors[id];
+    };
+
+    /**
      * show op error message - set message to null to remove error message
      * @function setUiError
      * @instance
