@@ -23,7 +23,7 @@ inTrigger.onTriggered = () =>
     cgp = op.patch.cgp;
     if (needsbuild)rebuild();
 
-    if (geom)
+    if (geom && renderPassDescriptor)
     {
         const colorTexture = cgp.context.getCurrentTexture();
         renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
@@ -32,7 +32,7 @@ inTrigger.onTriggered = () =>
         const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
 
         passEncoder.setPipeline(pipeline);
-        // passEncoder.setBindGroup(0, bindGroup);
+        passEncoder.setBindGroup(0, bindGroup);
         passEncoder.setVertexBuffer(0, positionBuffer);
         passEncoder.setVertexBuffer(1, normalBuffer);
         passEncoder.setVertexBuffer(2, texcoordBuffer);
@@ -49,8 +49,6 @@ inGeom.onChange = () =>
 {
     needsbuild = true;
 };
-
-const shaderSrc = attachments.mesh_wgsl;
 
 //   @group(0) @binding(2) var diffuseSampler: sampler;
 //   @group(0) @binding(3) var diffuseTexture: texture_2d<f32>;
@@ -114,7 +112,7 @@ function rebuild()
 
     mat4.multiply(viewProjection, projection, view);
 
-    const shaderModule = createShaderModule(cgp.device, shaderSrc);
+    const shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
     cgp.device.pushErrorScope("validation");
     pipeline = cgp.device.createRenderPipeline({
@@ -170,14 +168,14 @@ function rebuild()
     });
     const error = cgp.device.popErrorScope().then((error) =>
     {
-        console.log(error);
+        console.log("error", error);
     });
-    //   if (error) {
-    //     throw new Error('failed to create pipeline');
-    //   }
+        //   if (error) {
+        //     throw new Error('failed to create pipeline');
+        //   }
 
     const vUniformBufferSize = 2 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
-    const fUniformBufferSize = 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
+    const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
 
     const vsUniformBuffer = cgp.device.createBuffer({
         "size": vUniformBufferSize,
@@ -187,18 +185,23 @@ function rebuild()
         "size": fUniformBufferSize,
         "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
     });
-    const vsUniformValues = new Float32Array(2 * 16); // 2 mat4s
+    const vsUniformValues = new Float32Array(vUniformBufferSize / 4);
     const worldViewProjection = vsUniformValues.subarray(0, 16);
     const worldInverseTranspose = vsUniformValues.subarray(16, 32);
-    const fsUniformValues = new Float32Array(3); // 1 vec3
+
+    const fsUniformValues = new Float32Array(fUniformBufferSize / 4);
+    fsUniformValues[1] = 1.0;
+    fsUniformValues[0] = 1.0;
     const lightDirection = fsUniformValues.subarray(0, 3);
+
+    console.log("pipeline bindgrouplayout ", pipeline.getBindGroupLayout(0));
 
     bindGroup = cgp.device.createBindGroup(
         {
             "layout": pipeline.getBindGroupLayout(0),
             "entries": [
-                // { "binding": 0, "resource": { "buffer": vsUniformBuffer } },
-                // { "binding": 1, "resource": { "buffer": fsUniformBuffer } }
+                { "binding": 0, "resource": { "buffer": vsUniformBuffer } },
+                { "binding": 1, "resource": { "buffer": fsUniformBuffer } }
                 //   { binding: 2, resource: sampler },
                 //   { binding: 3, resource: tex.createView() },
             ],
@@ -239,12 +242,12 @@ function rebuild()
                 "storeOp": "store",
             },
         ],
-    // depthStencilAttachment: {
-    //   // view: undefined,  // Assigned later
-    //   depthClearValue: 1,
-    //   depthLoadOp: 'clear',
-    //   depthStoreOp: 'store',
-    // },
+        // depthStencilAttachment: {
+        //   // view: undefined,  // Assigned later
+        //   depthClearValue: 1,
+        //   depthLoadOp: 'clear',
+        //   depthStoreOp: 'store',
+        // },
     };
     // if (canvasInfo.sampleCount === 1) {
     // const colorTexture = context.getCurrentTexture();
