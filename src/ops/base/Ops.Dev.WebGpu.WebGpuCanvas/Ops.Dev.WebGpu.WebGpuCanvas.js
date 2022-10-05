@@ -133,31 +133,39 @@ function frame()
 
     const commandEncoder = device.createCommandEncoder();
     cgp.textureView = context.getCurrentTexture().createView();
+
     // cgp.textureView = textureView;
     const renderPassDescriptor = {
         "colorAttachments": [
             {
                 "view": cgp.textureView,
                 "loadOp": "clear",
-                "cleaeValue": { "r": 0.8, "g": 0.2, "b": 0.8, "a": 1.0 },
+                // "cleaarValue": { "r": 0.8, "g": 0.2, "b": 0.8, "a": 1.0 },
                 "storeOp": "store",
             },
         ],
     };
     cgp.renderPassDescriptor = renderPassDescriptor;
+    cgp.passEncoder = commandEncoder.beginRenderPass(cgp.renderPassDescriptor);
 
     op.patch.cg = cgp;
+    // cgp.passEncoders = [];
 
     next.trigger();
 
+    // for(let i=0;i<cgp.passEncoders.length;i++)
+
     op.patch.cg = null;
 
-    // const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
-    // passEncoder.setPipeline(pipeline);
-    // passEncoder.draw(3, 1, 0, 0);
-    // passEncoder.end();
+    //     const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
+    //     passEncoder.setPipeline(pipeline);
+    //     passEncoder.draw(3, 1, 0, 0);
+    cgp.passEncoder.end();
 
+    const passEncoders = [commandEncoder.finish()];
     // device.queue.submit([commandEncoder.finish()]);
+
+    cgp.device.queue.submit(passEncoders);
 
     if (!stopped)requestAnimationFrame(frame);
 }

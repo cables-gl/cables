@@ -31,7 +31,7 @@ inTrigger.onTriggered = () =>
     cgp = op.patch.cgp;
     if (needsbuild)rebuild();
 
-    if (geom && renderPassDescriptor)
+    if (geom && cgp.renderPassDescriptor)
     {
         mat4.copy(matModel, cgp.mMatrix);
         mat4.copy(matView, cgp.vMatrix);
@@ -46,20 +46,21 @@ inTrigger.onTriggered = () =>
         );
 
         const colorTexture = cgp.context.getCurrentTexture();
-        renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
+        // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
 
-        const commandEncoder = cgp.device.createCommandEncoder();
-        const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
+        // const commandEncoder = cgp.device.createCommandEncoder();
+        // const passEncoder = commandEncoder.beginRenderPass(cgp.renderPassDescriptor);
 
-        passEncoder.setPipeline(pipeline);
-        passEncoder.setBindGroup(0, bindGroup);
-        passEncoder.setVertexBuffer(0, positionBuffer);
-        passEncoder.setVertexBuffer(1, normalBuffer);
-        passEncoder.setVertexBuffer(2, texcoordBuffer);
-        passEncoder.setIndexBuffer(indicesBuffer, "uint16");
-        passEncoder.drawIndexed(geom.verticesIndices.length);
-        passEncoder.end();
-        cgp.device.queue.submit([commandEncoder.finish()]);
+        cgp.passEncoder.setPipeline(pipeline);
+        cgp.passEncoder.setBindGroup(0, bindGroup);
+        cgp.passEncoder.setVertexBuffer(0, positionBuffer);
+        cgp.passEncoder.setVertexBuffer(1, normalBuffer);
+        cgp.passEncoder.setVertexBuffer(2, texcoordBuffer);
+        cgp.passEncoder.setIndexBuffer(indicesBuffer, "uint16");
+        cgp.passEncoder.drawIndexed(geom.verticesIndices.length);
+        // passEncoder.end();
+
+        // cgp.passEncoders.push(commandEncoder.finish());
     }
 
     next.trigger();
@@ -116,21 +117,6 @@ function rebuild()
     console.log(geom.verticesIndices);
 
     indicesBuffer = createBuffer(cgp.device, new Uint16Array(geom.verticesIndices), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
-
-    // const projection = mat4.create();
-    // const camera = mat4.create();
-    // const view = mat4.create();
-    // const viewProjection = mat4.create();
-
-    // mat4.perspective(projection, 30 * Math.PI / 180, cgp.canvas.clientWidth / cgp.canvas.clientHeight, 0.5, 10);
-    // const eye = [1, 4, -6];
-    // const target = [0, 0, 0];
-    // const up = [0, 1, 0];
-
-    // mat4.lookAt(camera, eye, target, up);
-    // mat4.invert(view, camera);
-
-    // mat4.multiply(viewProjection, projection, view);
 
     const shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
@@ -261,7 +247,7 @@ function rebuild()
             {
                 "view": cgp.textureView, // Assigned later
                 // resolveTarget: undefined, // Assigned Later
-                "clearValue": { "r": 0.1, "g": 0.5, "b": 0.5, "a": 1.0 },
+                // "clearValue": { "r": 0.1, "g": 0.5, "b": 0.5, "a": 1.0 },
                 "loadOp": "clear",
                 "storeOp": "store",
             },
@@ -273,6 +259,7 @@ function rebuild()
         //   depthStoreOp: 'store',
         // },
     };
+
     // if (canvasInfo.sampleCount === 1) {
     // const colorTexture = context.getCurrentTexture();
     // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
