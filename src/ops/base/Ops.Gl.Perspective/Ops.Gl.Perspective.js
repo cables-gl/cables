@@ -33,7 +33,6 @@ render.onTriggered = function ()
         zNear.get(),
         zFar.get());
 
-    // mat4.translate(cgl.pMatrix,cgl.pMatrix,[-0.5,0,0]);
     trigger.trigger();
 
     cgl.popPMatrix();

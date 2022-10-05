@@ -16,6 +16,8 @@ canvas.style["z-index"] = "22222";
 canvas.style.border = "1px solid red";
 canvas.style.position = "absolute";
 
+const pm = mat4.create();
+
 console.log(op.patch.cgp);
 op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
 console.log(op.patch.cgp);
@@ -125,6 +127,9 @@ function frame()
 
         return;
     }
+
+    mat4.perspective(cgp.pMatrix, 45, canvas.clientWidth / canvas.clientHeight, 0.1, 1110.0);
+    // mat4.copy(cgp.pMatrix, pm);
 
     const commandEncoder = device.createCommandEncoder();
     cgp.textureView = context.getCurrentTexture().createView();

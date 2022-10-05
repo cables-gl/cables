@@ -37,10 +37,8 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
     var pos =vec4<f32>(v.position, 1.0);// vsUniforms.worldViewProjection * v.position;
     // vsOut.normal = (vsUniforms.worldInverseTranspose * vec4<f32>(v.normal, 0.0)).xyz;
 
-
     var mvMatrix=vsUniforms.viewMatrix * vsUniforms.modelMatrix;
     vsOut.position = vsUniforms.projMatrix * mvMatrix * pos;
-
 
     //vsOut.texcoord = v.texcoord;
     return vsOut;
