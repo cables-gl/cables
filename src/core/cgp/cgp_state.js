@@ -11,6 +11,11 @@ const Context = function (_patch)
 {
     // EventTarget.apply(this);
     CGState.apply(this);
+
+    this.getViewPort = function ()
+    {
+        return [0, 0, this.canvasWidth, this.canvasHeight];
+    };
 };
 
 export { Context };

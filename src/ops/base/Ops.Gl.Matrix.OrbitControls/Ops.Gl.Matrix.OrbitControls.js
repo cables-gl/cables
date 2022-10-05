@@ -39,7 +39,6 @@ maxDist.set(99999);
 
 inReset.onTriggered = reset;
 
-const cgl = op.patch.cgl;
 let eye = vec3.create();
 const vUp = vec3.create();
 const vCenter = vec3.create();
@@ -127,6 +126,7 @@ const lastPx = 0;
 
 render.onTriggered = function ()
 {
+    const cgl = op.patch.cg;
     cgl.pushViewMatrix();
 
     px = ip(px, percX);
@@ -373,7 +373,7 @@ function unbind()
 }
 
 eye = circlePos(0);
-setElement(cgl.canvas);
+setElement(op.patch.cgl.canvas);
 
 bind();
 

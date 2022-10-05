@@ -9,8 +9,6 @@ const aspect = op.inValue("Aspect Ratio");
 
 const trigger = op.outTrigger("trigger");
 
-const cgl = op.patch.cgl;
-
 fovY.onChange = zFar.onChange = zNear.onChange = changed;
 
 changed();
@@ -22,6 +20,8 @@ let asp = 0;
 
 render.onTriggered = function ()
 {
+    const cgl = op.patch.cg;
+
     asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
     if (!autoAspect.get())asp = aspect.get();
 
@@ -41,7 +41,7 @@ render.onTriggered = function ()
 
 function changed()
 {
-    cgl.frameStore.perspective =
+    op.patch.cgl.frameStore.perspective =
     {
         "fovy": fovY.get(),
         "zFar": zFar.get(),

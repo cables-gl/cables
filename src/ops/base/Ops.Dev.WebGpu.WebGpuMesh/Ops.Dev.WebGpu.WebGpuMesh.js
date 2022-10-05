@@ -18,6 +18,14 @@ let geom = null;
 let pipeline;
 let renderPassDescriptor;
 
+let vsUniformBuffer;
+let fsUniformBuffer;
+let vsUniformValues;
+let fsUniformValues;
+let matModel;
+let matView;
+let matProj;
+
 inTrigger.onTriggered = () =>
 {
     cgp = op.patch.cgp;
@@ -25,6 +33,18 @@ inTrigger.onTriggered = () =>
 
     if (geom && renderPassDescriptor)
     {
+        mat4.copy(matModel, cgp.mMatrix);
+        mat4.copy(matView, cgp.vMatrix);
+        mat4.copy(matProj, cgp.pMatrix);
+
+        cgp.device.queue.writeBuffer(
+            vsUniformBuffer,
+            0,
+            vsUniformValues.buffer,
+            vsUniformValues.byteOffset,
+            vsUniformValues.byteLength
+        );
+
         const colorTexture = cgp.context.getCurrentTexture();
         renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
 
@@ -95,22 +115,22 @@ function rebuild()
     texcoordBuffer = createBuffer(cgp.device, new Float32Array(geom.texcoords), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
     console.log(geom.verticesIndices);
 
-    indicesBuffer = createBuffer(cgp.device, new Uint32Array(geom.verticesIndices), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
+    indicesBuffer = createBuffer(cgp.device, new Uint16Array(geom.verticesIndices), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
 
-    const projection = mat4.create();
-    const camera = mat4.create();
-    const view = mat4.create();
-    const viewProjection = mat4.create();
+    // const projection = mat4.create();
+    // const camera = mat4.create();
+    // const view = mat4.create();
+    // const viewProjection = mat4.create();
 
-    mat4.perspective(projection, 30 * Math.PI / 180, cgp.canvas.clientWidth / cgp.canvas.clientHeight, 0.5, 10);
-    const eye = [1, 4, -6];
-    const target = [0, 0, 0];
-    const up = [0, 1, 0];
+    // mat4.perspective(projection, 30 * Math.PI / 180, cgp.canvas.clientWidth / cgp.canvas.clientHeight, 0.5, 10);
+    // const eye = [1, 4, -6];
+    // const target = [0, 0, 0];
+    // const up = [0, 1, 0];
 
-    mat4.lookAt(camera, eye, target, up);
-    mat4.invert(view, camera);
+    // mat4.lookAt(camera, eye, target, up);
+    // mat4.invert(view, camera);
 
-    mat4.multiply(viewProjection, projection, view);
+    // mat4.multiply(viewProjection, projection, view);
 
     const shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
@@ -153,7 +173,7 @@ function rebuild()
         },
         "primitive": {
             "topology": "triangle-list",
-            "cullMode": "back",
+            "cullMode": "none",
         },
         // "depthStencil": {
         //     "depthWriteEnabled": true,
@@ -174,22 +194,26 @@ function rebuild()
         //     throw new Error('failed to create pipeline');
         //   }
 
-    const vUniformBufferSize = 2 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
+    const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
     const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
 
-    const vsUniformBuffer = cgp.device.createBuffer({
+    vsUniformBuffer = cgp.device.createBuffer({
         "size": vUniformBufferSize,
         "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
     });
-    const fsUniformBuffer = cgp.device.createBuffer({
+
+    fsUniformBuffer = cgp.device.createBuffer({
         "size": fUniformBufferSize,
         "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
     });
-    const vsUniformValues = new Float32Array(vUniformBufferSize / 4);
-    const worldViewProjection = vsUniformValues.subarray(0, 16);
-    const worldInverseTranspose = vsUniformValues.subarray(16, 32);
 
-    const fsUniformValues = new Float32Array(fUniformBufferSize / 4);
+    vsUniformValues = new Float32Array(vUniformBufferSize / 4);
+    fsUniformValues = new Float32Array(fUniformBufferSize / 4);
+
+    matModel = vsUniformValues.subarray(0, 16);
+    matView = vsUniformValues.subarray(16, 32);
+    matProj = vsUniformValues.subarray(32, 48);
+
     fsUniformValues[1] = 1.0;
     fsUniformValues[0] = 1.0;
     const lightDirection = fsUniformValues.subarray(0, 3);

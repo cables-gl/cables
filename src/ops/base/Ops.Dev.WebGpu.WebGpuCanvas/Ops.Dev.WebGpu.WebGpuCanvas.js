@@ -141,7 +141,11 @@ function frame()
     };
     cgp.renderPassDescriptor = renderPassDescriptor;
 
+    op.patch.cg = cgp;
+
     next.trigger();
+
+    op.patch.cg = null;
 
     // const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
     // passEncoder.setPipeline(pipeline);
