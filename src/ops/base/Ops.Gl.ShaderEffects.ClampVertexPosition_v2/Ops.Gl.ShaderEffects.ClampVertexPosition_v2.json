@@ -1,0 +1,70 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "fa0b0f9a-bac9-4efa-85ef-c5d87aaa9356",
+    "created": 1664897906064,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Update Normals",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.ClampVertexPositionv2"
+    },
+    "summary": "clamp/restrict the vertex position to min/max values per axis",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "RP4O73",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.ClampVertexPosition",
+            "author": "pandur",
+            "date": 1664897906065
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1664898399735
+        },
+        {
+            "message": "Ops.User.pandur.ClampVertexPositionv2 renamed to Ops.Gl.ShaderEffects.ClampVertexPosition_v2",
+            "author": "pandur",
+            "date": 1664898643573
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}
