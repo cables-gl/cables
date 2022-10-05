@@ -109,7 +109,7 @@ const Patch = function (cfg)
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
     this.cgl = new Context(this);
-    this.cgp = {};
+    this.cgp = null;
 
     this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");

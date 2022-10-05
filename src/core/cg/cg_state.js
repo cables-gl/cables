@@ -1,6 +1,6 @@
-import { MatrixStack } from "./cgl/cgl_matrixstack";
+import { MatrixStack } from "../cgl/cgl_matrixstack";
 
-const GAState = function ()
+const CGState = function ()
 {
     CABLES.EventTarget.apply(this);
 
@@ -43,11 +43,22 @@ const GAState = function ()
     mat4.identity(this.vMatrix);
 
 
+    this.setCanvas = function (canv)
+    {
+        if (typeof canv === "string") this.canvas = document.getElementById(canv);
+        else this.canvas = canv;
+
+        if (this._setCanvas) this._setCanvas(canv);
+
+        this.updateSize();
+    };
+
     this.updateSize = function ()
     {
         this.canvas.width = this.canvasWidth = this.canvas.clientWidth * this.pixelDensity;
         this.canvas.height = this.canvasHeight = this.canvas.clientHeight * this.pixelDensity;
     };
+
     this.setSize = function (w, h, ignorestyle)
     {
         if (!ignorestyle)
@@ -208,4 +219,4 @@ const GAState = function ()
 };
 
 
-export { GAState };
+export { CGState };

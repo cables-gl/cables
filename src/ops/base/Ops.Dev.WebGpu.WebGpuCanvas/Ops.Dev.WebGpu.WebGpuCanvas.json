@@ -36,6 +36,6 @@
                 "name": "Limits"
             }
         ],
-        "name": "Ops.Dev.WebGpuCanvas"
+        "name": "Ops.Dev.WebGpu.WebGpuCanvas"
     }
 }

@@ -4,7 +4,7 @@ import { MatrixStack } from "./cgl_matrixstack";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
-import { GAState } from "../ga_state";
+import { CGState } from "../cg/cg_state";
 
 
 /**
@@ -17,7 +17,7 @@ import { GAState } from "../ga_state";
 const Context = function (_patch)
 {
     // EventTarget.apply(this);
-    GAState.apply(this);
+    CGState.apply(this);
 
     this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
     this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
@@ -103,11 +103,8 @@ const Context = function (_patch)
         this.aborted = true;
     };
 
-    this.setCanvas = function (canv)
+    this._setCanvas = function (canv)
     {
-        if (typeof canv === "string") this.canvas = document.getElementById(canv);
-        else this.canvas = canv;
-
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = false;
@@ -193,8 +190,6 @@ const Context = function (_patch)
             this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
             this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
         }
-
-        this.updateSize();
     };
 
     this.getInfo = function ()

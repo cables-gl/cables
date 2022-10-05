@@ -17,9 +17,11 @@ import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
 import { BranchStack, Branch } from "./banchprofiler";
+import { CGP } from "./cgp";
 
 const CABLES = Object.assign(
     {
+        CGP,
         EventTarget,
         EMBED,
         Link,

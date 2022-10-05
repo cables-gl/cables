@@ -9,18 +9,26 @@ let context = null, pipeline = null;
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
 canvas.id = "webgpucanvas";
-canvas.style.width = 515 + "px";
-canvas.style.height = 300 + "px";
-canvas.style.right = 1 + "px";
+canvas.style.width = 128 + "px";
+canvas.style.height = 128 + "px";
+canvas.style.right = 0 + "px";
 canvas.style["z-index"] = "22222";
-canvas.style.border = "3px solid red";
+canvas.style.border = "1px solid red";
 canvas.style.position = "absolute";
 
+console.log(op.patch.cgp);
+op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
+console.log(op.patch.cgp);
 const cgp = op.patch.cgp;
-
+let stopped = false;
 op.onDelete = () =>
 {
+    stopped = true;
     canvas.remove();
+    device =
+            op.patch.cgp.device =
+            op.patch.cgp.adapter =
+            op.patch.cgp.pipeline = null;
 };
 
 if (!navigator.gpu)
@@ -35,6 +43,9 @@ if (navigator.gpu)
     {
         adapter.requestDevice().then((_device) =>
         {
+            cgp.setCanvas(canvas);
+            cgp.setSize(512, 256);
+
             supported.set(true);
             device = _device;
 
@@ -46,9 +57,9 @@ if (navigator.gpu)
 
             //
 
-            op.patch.cgp.device = device;
-            op.patch.cgp.adapter = adapter;
-            op.patch.cgp.canvas = canvas;
+            cgp.device = device;
+            cgp.adapter = adapter;
+            cgp.canvas = canvas;
 
             console.log(adapter);
             console.log(device);
@@ -61,30 +72,35 @@ if (navigator.gpu)
                 canvas.clientWidth * devicePixelRatio,
                 canvas.clientHeight * devicePixelRatio,
             ];
+
+            console.log("presentationSize", presentationSize);
             const presentationFormat = navigator.gpu.getPreferredCanvasFormat(adapter);
             cgp.presentationFormat = presentationFormat;
 
             context.configure({
                 device,
-                "format": presentationFormat,
-                // "size": presentationSize,
+                "format": presentationFormat
             });
 
             pipeline = device.createRenderPipeline({
                 "layout": "auto",
-
-                "vertex": {
-                    "module": device.createShaderModule({
-                        "code": attachments.tri_wgsl_vert,
-                    }),
+                "vertex":
+                {
+                    "module": device.createShaderModule(
+                        {
+                            "code": attachments.tri_wgsl_vert,
+                        }),
                     "entryPoint": "main",
                 },
-                "fragment": {
-                    "module": device.createShaderModule({
-                        "code": attachments.tri_wgsl_frag,
-                    }),
+                "fragment":
+                {
+                    "module": device.createShaderModule(
+                        {
+                            "code": attachments.tri_wgsl_frag,
+                        }),
                     "entryPoint": "main",
-                    "targets": [
+                    "targets":
+                    [
                         {
                             "format": presentationFormat,
                         },
@@ -102,6 +118,7 @@ if (navigator.gpu)
 
 function frame()
 {
+    if (stopped) return;
     if (!device)
     {
         requestAnimationFrame(frame);
@@ -133,5 +150,5 @@ function frame()
 
     // device.queue.submit([commandEncoder.finish()]);
 
-    requestAnimationFrame(frame);
+    if (!stopped)requestAnimationFrame(frame);
 }
