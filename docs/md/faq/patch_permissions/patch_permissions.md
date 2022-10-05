@@ -50,3 +50,5 @@ the permission levels of other collaborators and invite new ones, as well as edi
 On top of all the other permissions that full access grants to collaborators, the owner can make other people owner
 of the patch. The owner is the person to be shown in all the [overviews for patches](/patches) on cables.gl and can configure some options
 for exports that need third-party credentials (i.e. [github-pages](../../4_export_embed/dev_embed/export_netlify/export_netlify) or [netlify](../../4_export_embed/dev_embed/export_github/export_github)).
+
+Also the owner of a patch will be in charge to manage all requests for access.
