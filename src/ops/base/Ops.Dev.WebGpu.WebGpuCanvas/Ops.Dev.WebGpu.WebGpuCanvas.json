@@ -25,6 +25,15 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Limits"
             }
         ],
         "name": "Ops.Dev.WebGpuCanvas"
