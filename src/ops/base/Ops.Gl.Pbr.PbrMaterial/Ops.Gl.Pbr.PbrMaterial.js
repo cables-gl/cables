@@ -2,7 +2,6 @@
 const cgl = op.patch.cgl;
 // inputs
 const inTrigger = op.inTrigger("render");
-inTrigger.onTriggered = doRender;
 
 const inDiffuseR = op.inFloat("R", Math.random());
 const inDiffuseG = op.inFloat("G", Math.random());
@@ -43,6 +42,8 @@ const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
+inTrigger.onTriggered = doRender;
+
 // outputs
 const outTrigger = op.outTrigger("Next");
 const shaderOut = op.outObject("Shader");
@@ -75,6 +76,17 @@ const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}
 const createLightFragmentBody = (n, type) =>
     (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n);
 let currentLightCount = -1;
+const defaultLightStack = [{
+    "type": "point",
+    "position": [5, 5, 5],
+    "color": [1, 1, 1],
+    "specular": [1, 1, 1],
+    "intensity": 100,
+    "attenuation": 0,
+    "falloff": 0.5,
+    "radius": 80,
+    "castLight": 1,
+}];
 
 if (cgl.glVersion == 1)
 {
@@ -371,20 +383,8 @@ function doRender()
         const iViewMatrix = mat4.create();
         mat4.invert(iViewMatrix, cgl.vMatrix);
 
-        const DEFAULT_LIGHTSTACK = [{
-            "type": "point",
-            "position": [5, 5, 5],
-            "color": [1, 1, 1],
-            "specular": [1, 1, 1],
-            "intensity": 100,
-            "attenuation": 0,
-            "falloff": 0.5,
-            "radius": 80,
-            "castLight": 1,
-        }];
-
-        DEFAULT_LIGHTSTACK[0].position = [iViewMatrix[12], iViewMatrix[13], iViewMatrix[14]];
-        cgl.frameStore.lightStack = DEFAULT_LIGHTSTACK;
+        defaultLightStack[0].position = [iViewMatrix[12], iViewMatrix[13], iViewMatrix[14]];
+        cgl.frameStore.lightStack = defaultLightStack;
         useDefaultLight = true;
     }
 
@@ -409,5 +409,5 @@ function doRender()
     outTrigger.trigger();
     cgl.popShader();
 
-    if (useDefaultLight) cgl.frameStore.lightStack.length = 0;
+    if (useDefaultLight) cgl.frameStore.lightStack = [];
 }
