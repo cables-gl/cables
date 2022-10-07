@@ -10,6 +10,14 @@
     height:30px;
     margin-left:50%;
     transform: translate(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.progressUI .buttonContainer {
+    display: flex;
+    align-content: center;
+    height: 100%;
 }
 
 .progressUI .progress
@@ -18,19 +26,20 @@
     float:left;
     color:white;
     width: auto;
-    margin-top:10px;
     margin-left:15px;
 }
 
 .progressUI .progressContainer
 {
     width:200px;
-    margin-bottom: 8px;
-    margin-top: 8px;
     overflow: hidden;
     background: rgba(0,0,0,0.4);
     border-radius: 4px;
     float:left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
 }
 
 .progressUI .button
@@ -38,13 +47,16 @@
     cursor: pointer;
     box-sizing: border-box;
     background: rgba(0,0,0,0.4);
-    display: inline-block;
+    display: flex;
+    align-content: center;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 5px;
     border-radius: 5px;
     float:left;
+    display: flex;
+    align-items: center;
 }
 
 .progressUIIcon
@@ -61,16 +73,6 @@
 .progressUI .progressContainer .progressbar {
     height: 100%;
     width: 97%;
-    /*margin:0;*/
-    /*padding:5px;*/
-    /*border:12px solid red;*/
-    /*background: rgba(110,110,110,0.7);*/
-    /*background-color: transparent !important;*/
-    float:left;
-}
-
-.progressUI .buttonContainer {
-    /*width: 100%;*/
 }
 
 .progressUI_icon-play {

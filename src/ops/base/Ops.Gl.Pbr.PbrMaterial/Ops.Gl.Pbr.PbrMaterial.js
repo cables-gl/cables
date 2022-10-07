@@ -2,7 +2,6 @@
 const cgl = op.patch.cgl;
 // inputs
 const inTrigger = op.inTrigger("render");
-inTrigger.onTriggered = doRender;
 
 const inDiffuseR = op.inFloat("R", Math.random());
 const inDiffuseG = op.inFloat("G", Math.random());
@@ -43,6 +42,8 @@ const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
+inTrigger.onTriggered = doRender;
+
 // outputs
 const outTrigger = op.outTrigger("Next");
 const shaderOut = op.outObject("Shader");
@@ -75,6 +76,17 @@ const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}
 const createLightFragmentBody = (n, type) =>
     (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n);
 let currentLightCount = -1;
+const defaultLightStack = [{
+    "type": "point",
+    "position": [5, 5, 5],
+    "color": [1, 1, 1],
+    "specular": [1, 1, 1],
+    "intensity": 100,
+    "attenuation": 0,
+    "falloff": 0.5,
+    "radius": 80,
+    "castLight": 1,
+}];
 
 if (cgl.glVersion == 1)
 {
@@ -303,12 +315,29 @@ function buildShader()
 
 function updateLights()
 {
-    if (cgl.frameStore.lightStack && currentLightCount !== cgl.frameStore.lightStack.length)
+    if (cgl.frameStore.lightStack)
     {
-        PBRLightStack = cgl.frameStore.lightStack;
-        buildShader();
+        let changed = currentLightCount !== cgl.frameStore.lightStack.length;
 
-        currentLightCount = cgl.frameStore.lightStack.length;
+        if (!changed)
+        {
+            for (let i = 0; i < cgl.frameStore.lightStack.length; i++)
+            {
+                if (PBRLightStack[i] != cgl.frameStore.lightStack[i])
+                {
+                    changed = true;
+                    break;
+                }
+            }
+        }
+
+        if (changed)
+        {
+            PBRLightStack = cgl.frameStore.lightStack;
+            buildShader();
+
+            currentLightCount = cgl.frameStore.lightStack.length;
+        }
     }
 }
 
@@ -320,8 +349,8 @@ function doRender()
 
     if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) &&
         !inLightmap.isLinked() &&
-        PBRLightStack.length == 0) op.setUiError("noPbrEnv", "No lights found above this op. Please add lights to your patch to see something");
-    else op.setUiError("noPbrEnv", null);
+        PBRLightStack.length == 0) op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 1);
+    else op.setUiError("deflight", null);
 
     if (cgl.frameStore.pbrEnvStack && cgl.frameStore.pbrEnvStack.length > 0 &&
         cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texIBLLUT.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texDiffIrr.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texPreFiltered.tex)
@@ -348,6 +377,17 @@ function doRender()
         setEnvironmentLighting(false);
     }
 
+    let useDefaultLight = false;
+    if ((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length))
+    {
+        const iViewMatrix = mat4.create();
+        mat4.invert(iViewMatrix, cgl.vMatrix);
+
+        defaultLightStack[0].position = [iViewMatrix[12], iViewMatrix[13], iViewMatrix[14]];
+        cgl.frameStore.lightStack = defaultLightStack;
+        useDefaultLight = true;
+    }
+
     if (inTexIBLLUT.get())
     {
         setEnvironmentLighting(true);
@@ -368,4 +408,6 @@ function doRender()
 
     outTrigger.trigger();
     cgl.popShader();
+
+    if (useDefaultLight) cgl.frameStore.lightStack = [];
 }
