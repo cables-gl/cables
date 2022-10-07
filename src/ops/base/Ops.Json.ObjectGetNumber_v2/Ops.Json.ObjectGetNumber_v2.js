@@ -11,7 +11,7 @@ data.onChange = exec;
 
 key.onChange = function ()
 {
-    op.setUiAttrib({ "extendTitle": key.get() });
+    if (!key.isLinked())op.setUiAttrib({ "extendTitle": key.get() });
     exec();
 };
 
