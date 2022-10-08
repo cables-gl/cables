@@ -22,7 +22,7 @@ inNodeName.onChange = function ()
     outGeom.set(null);
     node = null;
     outFound.set(false);
-    op.setUiAttrib({ "extendTitle": inNodeName.get() });
+    if (!inNodeName.isLinked())op.setUiAttrib({ "extendTitle": inNodeName.get() });
 };
 
 inSceneTime.onChange = updateTimeInputs;

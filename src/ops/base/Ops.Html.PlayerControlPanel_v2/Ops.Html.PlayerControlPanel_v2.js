@@ -1,4 +1,4 @@
-const inMax = op.inFloat("Length", 1);
+const inMax = op.inFloat("Length", 30);
 const inCurrent = op.inFloat("Current", 0);
 const inClamp = op.inBool("Clamp", false);
 const inShowValue = op.inBool("Show Time");
