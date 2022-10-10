@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.FreezeMeshes renamed to Ops.Dev.FreezeMeshes",
             "author": "pandur",
             "date": 1662738229061
+        },
+        {
+            "message": "Ops.Dev.FreezeMeshes renamed to Ops.Gl.Geometry.FreezeMeshes",
+            "author": "pandur",
+            "date": 1665427425515
         }
     ],
     "authorName": "pandur",
