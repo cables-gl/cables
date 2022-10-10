@@ -1,7 +1,7 @@
 const
     inArr = op.inArray("Array Numbers"),
-    inArrTitles = op.inArray("Titles"),
-    inStyle = op.inSwitch("Style", ["Pie", "Graph"], "Pie");
+    inArrTitles = op.inArray("Titles");
+    // inStyle = op.inSwitch("Style", ["Pie", "Graph"], "Pie");
 
 op.setUiAttrib({ "height": 100, "width": 200, "resizable": true });
 
@@ -35,7 +35,7 @@ op.renderVizLayer = (ctx, layer) =>
     }
 
     let style = 0;
-    if (inStyle.get() === "Graph")style = 1;
+    // if (inStyle.get() === "Graph")style = 1;
 
     if (style == 0) // PIE
     {

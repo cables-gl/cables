@@ -1,59 +1,60 @@
 const
-    inExec=op.inTrigger("Exec"),
-    inCapture=op.inTriggerButton("Capture"),
-    outGeom=op.outObject("Geometry",null,"geometry"),
+    inCapture = op.inTriggerButton("Capture"),
+    outGeom = op.outObject("Geometry", null, "geometry"),
+    next = op.outTrigger("Next");
 
-    next=op.outTrigger("Next");
+const cgl = op.patch.cgl;
+let shouldCapture = false;
+let geom = null;
 
-const cgl=op.patch.cgl;
-let shouldCapture=false;
-let geom=null;
-
-inCapture.onTriggered=()=>
+inCapture.onTriggered = () =>
 {
-    shouldCapture=true;
-};
-
-inExec.onTriggered=()=>
-{
-
-    if(shouldCapture)
+    shouldCapture = true;
+    if (shouldCapture)
     {
+        geom = new CGL.Geometry();
 
-        geom=new CGL.Geometry();
-
-        const old=CGL.Mesh.prototype.render;
-        CGL.Mesh.prototype.render=meshCapture;
+        const old = CGL.Mesh.prototype.render;
+        CGL.Mesh.prototype.render = meshCapture;
 
         next.trigger();
 
-        CGL.Mesh.prototype.render=old;
-        shouldCapture=false;
+        CGL.Mesh.prototype.render = old;
+        shouldCapture = false;
+
+        geom.unIndex(false, true);
 
         outGeom.set(null);
         outGeom.set(geom);
     }
-
-next.trigger();
 };
 
 function meshCapture()
 {
-    console.log("capy!",this._geom);
+    const g = this._geom.copy();
+    const normalMat = mat4.create();
+    mat4.invert(normalMat, cgl.mMatrix);
+    mat4.transpose(normalMat, normalMat);
 
-    const g=this._geom.copy();
-
-    for(let i=0;i<g.vertices.length;i+=3)
+    for (let i = 0; i < g.vertices.length; i += 3)
     {
-        const v=[g.vertices[i+0],g.vertices[i+1],g.vertices[i+2]];
+        const v = [g.vertices[i + 0], g.vertices[i + 1], g.vertices[i + 2]];
 
-        vec3.transformMat4(v,v,cgl.mMatrix);
+        vec3.transformMat4(v, v, cgl.mMatrix);
 
-        g.vertices[i+0]=v[0];
-        g.vertices[i+1]=v[1];
-        g.vertices[i+2]=v[2];
+        g.vertices[i + 0] = v[0];
+        g.vertices[i + 1] = v[1];
+        g.vertices[i + 2] = v[2];
+
+        // ----------
+
+        const vn = [g.vertexNormals[i + 0], g.vertexNormals[i + 1], g.vertexNormals[i + 2], 1];
+        vec4.transformMat4(vn, vn, normalMat);
+
+        g.vertexNormals[i + 0] = vn[0];
+        g.vertexNormals[i + 1] = vn[1];
+        g.vertexNormals[i + 2] = vn[2];
     }
 
-    console.log(g.vertices,this._geom.vertices);
     geom.merge(g);
 }

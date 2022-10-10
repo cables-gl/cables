@@ -18,5 +18,11 @@
         ],
         "name": "Ops.TimeLine.TimeLineRewind"
     },
-    "summary": "set time of timeline to 0 (rewind, restart)"
+    "summary": "set time of timeline to 0 (rewind, restart)",
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "3F6DOe",
+    "docs": {
+        "ports": []
+    }
 }

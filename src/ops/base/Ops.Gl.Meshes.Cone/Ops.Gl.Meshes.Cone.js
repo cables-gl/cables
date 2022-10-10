@@ -45,8 +45,8 @@ function updateMesh()
 {
     let nstacks = Math.round(stacks.get());
     let nslices = Math.round(slices.get());
-    if (nstacks < 2)nstacks = 2;
-    if (nslices < 2)nslices = 2;
+    if (nstacks < 1)nstacks = 1;
+    if (nslices < 3)nslices = 3;
     const r = radius.get();
     generateCone(r, Math.max(0.01, height.get()), nstacks, nslices);
     needsRebuild = false;

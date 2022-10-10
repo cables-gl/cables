@@ -6,7 +6,6 @@
     background-color: rgba(0,0,0,0.45);
     margin: 20px;
     bottom: 10px;
-    width:470px;
     height:30px;
     margin-left:50%;
     transform: translate(-50%);
@@ -27,6 +26,7 @@
     color:white;
     width: auto;
     margin-left:15px;
+    margin-right: 10px;
 }
 
 .progressUI .progressContainer

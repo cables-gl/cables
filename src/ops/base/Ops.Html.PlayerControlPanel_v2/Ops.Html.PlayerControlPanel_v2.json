@@ -24,6 +24,11 @@
                 "type": 0,
                 "name": "Show Time",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Skip Buttons",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -60,11 +65,11 @@
         ],
         "name": "Ops.Html.PlayerControlPanel_v2"
     },
-    "summary": "little ui for controlling the timeline",
+    "summary": "simple html ui for timeline/mediaplayers",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "",
+    "exampleProjectId": "3F6DOe",
     "changelog": [
         {
             "message": "cloned op from Ops.TimeLine.TimeLineUI",
