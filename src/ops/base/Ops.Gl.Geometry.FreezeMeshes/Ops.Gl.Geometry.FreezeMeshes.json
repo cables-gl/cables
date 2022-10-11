@@ -10,16 +10,17 @@
             "message": "Ops.User.pandur.FreezeMeshes renamed to Ops.Dev.FreezeMeshes",
             "author": "pandur",
             "date": 1662738229061
+        },
+        {
+            "message": "Ops.Dev.FreezeMeshes renamed to Ops.Gl.Geometry.FreezeMeshes",
+            "author": "pandur",
+            "date": 1665427425515
         }
     ],
     "authorName": "pandur",
     "created": 1662735215159,
     "layout": {
         "portsIn": [
-            {
-                "type": 1,
-                "name": "Exec"
-            },
             {
                 "type": 1,
                 "name": "Capture"
@@ -36,6 +37,13 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.FreezeMeshes"
+        "name": "Ops.Dev.FreezeMeshes"
+    },
+    "summary": "capture all following meshes into one geometry",
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "BwxY2f",
+    "docs": {
+        "ports": []
     }
 }

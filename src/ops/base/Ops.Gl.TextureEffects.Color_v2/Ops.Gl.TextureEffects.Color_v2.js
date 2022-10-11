@@ -31,7 +31,7 @@ const
 
 inMask.onChange = function ()
 {
-    if (inMask.get())shader.define("MASK");
+    if (inMask.isLinked())shader.define("MASK");
     else shader.removeDefine("MASK");
 };
 

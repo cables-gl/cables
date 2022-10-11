@@ -3,7 +3,7 @@ const
     playPause = op.inValueBool("Play", true),
     reset = op.inTriggerButton("Reset"),
     inSyncTimeline = op.inValueBool("Sync to timeline", false),
-    outTime = op.outValue("Time");
+    outTime = op.outNumber("Time");
 
 op.setPortGroup("Controls", [playPause, reset, inSpeed]);
 

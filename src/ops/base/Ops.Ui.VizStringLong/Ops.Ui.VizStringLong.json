@@ -23,5 +23,13 @@
         ],
         "portsOut": [],
         "name": "Ops.Ui.VizStringLong"
+    },
+    "summary": "Displays long input string on the patchfield",
+    "collections": null,
+    "relatedops": [
+        "Ops.Ui.VizString"
+    ],
+    "docs": {
+        "ports": []
     }
 }

@@ -58,7 +58,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Dev.TextureEffects.ColorV2"
+        "name": "Ops.Gl.TextureEffects.Color_v2"
     },
     "summary": "fill image using a color (overlay)",
     "author": "55d744634cdc152216eb9aad",
