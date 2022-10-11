@@ -20,6 +20,11 @@
             "message": "Ops.User.pandur.ArrayMathExpressionTrigger renamed to Ops.Arrays.ArrayMathExpressionTrigger",
             "author": "pandur",
             "date": 1664273875169
+        },
+        {
+            "message": "Ops.Arrays.ArrayMathExpressionTrigger renamed to Ops.Array.ArrayMathExpressionTrigger",
+            "author": "pandur",
+            "date": 1665428274696
         }
     ],
     "authorName": "pandur",

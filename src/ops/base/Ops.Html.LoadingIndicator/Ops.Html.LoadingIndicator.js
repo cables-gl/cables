@@ -37,7 +37,11 @@ styleEle.id = eleId;
 let head = document.getElementsByTagName("body")[0];
 head.appendChild(styleEle);
 
-op.onDelete = remove;
+op.onDelete = () =>
+{
+    remove();
+    if (styleEle)styleEle.remove();
+};
 
 updateStyle();
 
@@ -69,7 +73,7 @@ function updateStyle()
 function remove()
 {
     div.remove();
-    if (styleEle)styleEle.remove();
+    // if (styleEle)styleEle.remove();
 }
 
 function updateVisible()

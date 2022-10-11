@@ -28,14 +28,31 @@
             {
                 "type": 3,
                 "name": "Titles"
-            },
-            {
-                "type": 0,
-                "name": "Style index",
-                "subType": "integer"
             }
         ],
         "portsOut": [],
         "name": "Ops.Ui.VizArrayChart"
-    }
+    },
+    "summary": "Displays information of the distribution of numerical values in an array",
+    "collections": null,
+    "relatedops": [
+        "Ops.Ui.VizArrayTable"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array Numbers",
+                "text": "numerical array"
+            },
+            {
+                "name": "Titles",
+                "text": "titles for piechart and table"
+            },
+            {
+                "name": "Style index",
+                "text": "graph/piechart"
+            }
+        ]
+    },
+    "exampleProjectId": "bPWV2f"
 }

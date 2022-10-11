@@ -66,5 +66,10 @@
             "author": "pandur",
             "date": 1662567079136
         }
-    ]
+    ],
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Shader.SetUniformTexture"
+    ],
+    "exampleProjectId": "5W7X2f"
 }

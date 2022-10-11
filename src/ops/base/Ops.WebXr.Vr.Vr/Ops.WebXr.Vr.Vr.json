@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.WebXr renamed to Ops.Dev.WebXrVr",
             "author": "pandur",
             "date": 1655208969779
+        },
+        {
+            "message": "Ops.Dev.WebXrVr renamed to Ops.WebXr.Vr.Vr",
+            "author": "pandur",
+            "date": 1665427763309
         }
     ],
     "authorName": "pandur",
@@ -106,5 +111,11 @@
             }
         ],
         "name": "Ops.Dev.WebXrVr"
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "IzKYx5",
+    "docs": {
+        "ports": []
     }
 }

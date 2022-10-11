@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.WebXrVrController renamed to Ops.Dev.WebXrVrController",
             "author": "pandur",
             "date": 1655279100239
+        },
+        {
+            "message": "Ops.Dev.WebXrVrController renamed to Ops.WebXr.Vr.VrController",
+            "author": "pandur",
+            "date": 1665427740042
         }
     ],
     "authorName": "pandur",
@@ -151,5 +156,12 @@
             }
         ],
         "name": "Ops.Dev.WebXrVrController"
+    },
+    "summary": "tracking of vr hand controller",
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "IzKYx5",
+    "docs": {
+        "ports": []
     }
 }

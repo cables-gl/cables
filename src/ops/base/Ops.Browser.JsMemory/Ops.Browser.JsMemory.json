@@ -26,9 +26,14 @@
                 "type": 0,
                 "name": "Used Heap Size",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Total Heap Size",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.Memory"
+        "name": "Ops.Browser.JsMemory"
     },
     "summary": "browser js memory consumption",
     "issues": "",
@@ -36,7 +41,7 @@
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "",
+    "exampleProjectId": "_UyS0f",
     "docs": {
         "ports": []
     }

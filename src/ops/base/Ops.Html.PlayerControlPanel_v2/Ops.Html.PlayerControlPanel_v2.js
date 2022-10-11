@@ -1,7 +1,8 @@
-const inMax = op.inFloat("Length", 1);
+const inMax = op.inFloat("Length", 30);
 const inCurrent = op.inFloat("Current", 0);
 const inClamp = op.inBool("Clamp", false);
 const inShowValue = op.inBool("Show Time");
+const inShowSkip = op.inBool("Show Skip Buttons");
 
 const outPlay = op.outTrigger("Play clicked");
 const outPause = op.outTrigger("Pause clicked");
@@ -58,7 +59,11 @@ buttonContainer.classList.add("buttonContainer");
 let skipbackbutton = addButton("", "progressUI_icon-skip-back");
 buttonContainer.appendChild(skipbackbutton);
 
-let rewindButton = addButton("", "progressUI_icon-rewind");
+let rewindButton = addButton("", "progressUI_icon-rewind", "skip");
+if (!inShowSkip.get())
+{
+    rewindButton.style.display = "none";
+}
 buttonContainer.appendChild(rewindButton);
 rewindButton.addEventListener("pointerdown", () =>
 {
@@ -68,7 +73,11 @@ rewindButton.addEventListener("pointerdown", () =>
 let playButton = addButton("", "progressUI_icon-play");
 buttonContainer.appendChild(playButton);
 
-let forwardButton = addButton("", "progressUI_icon-fast-forward");
+let forwardButton = addButton("", "progressUI_icon-fast-forward", "skip");
+if (!inShowSkip.get())
+{
+    forwardButton.style.display = "none";
+}
 buttonContainer.appendChild(forwardButton);
 
 forwardButton.addEventListener("pointerdown", () =>
@@ -79,10 +88,11 @@ forwardButton.addEventListener("pointerdown", () =>
 progress.classList.add("progress");
 progress.innerHTML = "00:00:000";
 
-function addButton(title, icon)
+function addButton(title, icon, additionalClass)
 {
     let button = document.createElement("div");
     button.classList.add("button");
+    button.classList.add(additionalClass);
     button.innerHTML = title;
 
     if (icon)
@@ -104,11 +114,31 @@ inShowValue.onChange = () =>
 {
     if (inShowValue.get())
     {
+        div.classList.add("showValue");
         progress.style.display = "block";
     }
     else
     {
+        div.classList.remove("showValue");
         progress.style.display = "none";
+    }
+};
+
+inShowSkip.onChange = () =>
+{
+    if (inShowSkip.get())
+    {
+        div.querySelectorAll(".button.skip").forEach((skip) =>
+        {
+            skip.style.display = "block";
+        });
+    }
+    else
+    {
+        div.querySelectorAll(".button.skip").forEach((skip) =>
+        {
+            skip.style.display = "none";
+        });
     }
 };
 
@@ -237,6 +267,7 @@ function formatValue(t)
     const html = minutes + ":" + seconds + ":" + millis;
     return html;
 }
+
 inCurrent.onChange = currentValueChange;
 
 updateStyle();

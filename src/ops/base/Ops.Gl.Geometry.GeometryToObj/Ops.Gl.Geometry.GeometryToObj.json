@@ -29,5 +29,12 @@
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryToObj"
+    },
+    "summary": "Generate an .obj file as string from a geometry",
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "BwxY2f",
+    "docs": {
+        "ports": []
     }
 }
