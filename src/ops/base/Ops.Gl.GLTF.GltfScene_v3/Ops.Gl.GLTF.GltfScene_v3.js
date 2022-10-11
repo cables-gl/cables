@@ -1,8 +1,8 @@
 // https://raw.githubusercontent.com/KhronosGroup/glTF/master/specification/2.0/figures/gltfOverview-2.0.0b.png
 
 const
-    dataPort = op.inString("data"),
     inExec = op.inTrigger("Render"),
+    dataPort = op.inString("data"),
     inFile = op.inUrl("glb File", [".glb"]),
     inRender = op.inBool("Draw", true),
     inCamera = op.inDropDown("Camera", ["None"], "None"),
