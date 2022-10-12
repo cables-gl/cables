@@ -13,11 +13,11 @@ let pressedButton2 = op.outBoolNum("Button 2");
 let pressedButton3 = op.outBoolNum("Button 3");
 let pressedButton4 = op.outBoolNum("Button 4");
 
-let outLeftShoulder = op.outValue("Left Shoulder");
-let outLeftShoulderBottom = op.outValue("Left Shoulder Bottom");
+let outLeftShoulder = op.outNumber("Left Shoulder");
+let outLeftShoulderBottom = op.outNumber("Left Shoulder Bottom");
 
-let outRightShoulder = op.outValue("Right Shoulder");
-let outRightShoulderBottom = op.outValue("Right Shoulder Bottom");
+let outRightShoulder = op.outNumber("Right Shoulder");
+let outRightShoulderBottom = op.outNumber("Right Shoulder Bottom");
 
 data.onChange = function ()
 {

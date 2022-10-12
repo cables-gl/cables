@@ -2,19 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "degree",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "x",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "y",
                 "subType": "number"
             }

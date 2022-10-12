@@ -1,9 +1,10 @@
 {
     "summary": "Returns the current time of the timeline",
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "time",
                 "subType": "number"
             }

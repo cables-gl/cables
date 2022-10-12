@@ -2,7 +2,7 @@ const
     exe = op.inTriggerButton("exe"),
     reset = op.inTriggerButton("reset"),
     trigger = op.outTrigger("trigger"),
-    num = op.outValue("timesTriggered");
+    num = op.outNumber("timesTriggered");
 
 op.toWorkPortsNeedToBeLinked(exe);
 

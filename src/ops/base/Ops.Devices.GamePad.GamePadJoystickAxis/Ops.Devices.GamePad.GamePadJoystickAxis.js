@@ -4,7 +4,7 @@ const
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     inDeadZone = op.outNumber("DeadZone", 0.1),
-    outAngle = op.outValue("Angle");
+    outAngle = op.outNumber("Angle");
 
 inAxis.onChange = function ()
 {

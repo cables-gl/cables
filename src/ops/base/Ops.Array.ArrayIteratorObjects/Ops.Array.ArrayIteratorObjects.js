@@ -3,7 +3,7 @@ const
     arr = op.inArray("array"),
     trigger = op.outTrigger("trigger"),
     finished = op.outTrigger("finished"),
-    idx = op.outValue("index"),
+    idx = op.outNumber("index"),
     val = op.outObject("value");
 
 exe.onTriggered = function ()
