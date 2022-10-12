@@ -2,6 +2,7 @@ const patchIdIn = op.inString("externalPatchId", "");
 const subPatchIdIn = op.inString("subPatchId", "");
 const activeIn = op.inBool("active", false);
 const gotoIn = op.inTriggerButton("Open patch");
+const resolveIn = op.inTriggerButton("Convert to SubPatch");
 const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
@@ -13,6 +14,9 @@ portsData.setUiAttribs({ "hideParam": true });
 
 gotoIn.setUiAttribs({ "greyout": true });
 gotoIn.setUiAttribs({ "hidePort": true });
+
+resolveIn.setUiAttribs({ "greyout": true });
+resolveIn.setUiAttribs({ "hidePort": true });
 
 let wasPasted = false;
 
@@ -38,6 +42,14 @@ if (op.patch.isEditorMode())
         }
     };
 
+    resolveIn.onTriggered = () =>
+    {
+        if (CABLES && CABLES.CMD && CABLES.CMD.PATCH)
+        {
+            CABLES.CMD.PATCH.convertBlueprintToSubpatch(this);
+        }
+    };
+
     patchIdIn.onChange = function ()
     {
         if (patchIdIn.get())
@@ -59,7 +71,7 @@ if (op.patch.isEditorMode())
     };
 }
 
-const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id, gotoIn.id];
+const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id, gotoIn.id, resolveIn.id];
 
 if (!activeIn.get())
 {
@@ -318,6 +330,7 @@ function update()
 
 function deSerializeBlueprint(data, subPatchId, editorMode)
 {
+    resolveIn.setUiAttribs({ "greyout": true });
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
         let listenerId;
@@ -344,6 +357,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 {
                     gui.setStateSaved();
                 }
+                resolveIn.setUiAttribs({ "greyout": false });
             }
         };
 
