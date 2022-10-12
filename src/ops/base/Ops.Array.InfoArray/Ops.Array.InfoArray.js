@@ -1,26 +1,26 @@
 const
-    inArr=op.inArray("Array"),
-    outMin=op.outValue("Min"),
-    outMax=op.outValue("Max"),
-    outAvg=op.outValue("Average");
+    inArr = op.inArray("Array"),
+    outMin = op.outNumber("Min"),
+    outMax = op.outNumber("Max"),
+    outAvg = op.outNumber("Average");
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    var arr=inArr.get();
+    let arr = inArr.get();
 
-    var min=999999999;
-    var max=-999999999;
-    var avg=0;
+    let min = 999999999;
+    let max = -999999999;
+    let avg = 0;
 
-    if(arr)
+    if (arr)
     {
-        for(var i=0;i<arr.length;i++)
+        for (let i = 0; i < arr.length; i++)
         {
-            avg+=arr[i];
-            min=Math.min(min,arr[i]);
-            max=Math.max(max,arr[i]);
+            avg += arr[i];
+            min = Math.min(min, arr[i]);
+            max = Math.max(max, arr[i]);
         }
-        avg/=arr.length;
+        avg /= arr.length;
     }
     outMin.set(min);
     outMax.set(max);

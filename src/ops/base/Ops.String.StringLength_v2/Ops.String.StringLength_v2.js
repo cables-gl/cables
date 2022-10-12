@@ -1,6 +1,6 @@
 const
     inStr = op.inString("String"),
-    result = op.outValue("Result");
+    result = op.outNumber("Result");
 
 inStr.onChange = function ()
 {

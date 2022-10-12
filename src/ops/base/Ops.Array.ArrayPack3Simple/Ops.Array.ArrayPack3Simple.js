@@ -4,7 +4,7 @@ const
     inArr3 = op.inArray("Array 3"),
 
     outArr = op.outArray("Array out", 3),
-    outNum = op.outValue("Num Points"),
+    outNum = op.outNumber("Num Points"),
     outArrayLength = op.outNumber("Array length");
 
 let showingError = false;

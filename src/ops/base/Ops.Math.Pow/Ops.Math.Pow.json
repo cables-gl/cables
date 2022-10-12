@@ -2,19 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Base",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Exponent",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

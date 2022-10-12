@@ -1,7 +1,7 @@
 const
     filename = op.inUrl("file", [".otf", ".ttf", ".woff", ".woff2"]),
     fontname = op.inString("family"),
-    outLoaded = op.outValue("Loaded"),
+    outLoaded = op.outBoolNum("Loaded"),
     loadedTrigger = op.outTrigger("Loaded Trigger");
 
 let loadingId = null;

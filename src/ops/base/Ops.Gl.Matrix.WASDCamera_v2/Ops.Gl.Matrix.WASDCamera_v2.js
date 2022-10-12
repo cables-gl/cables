@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     enablePointerLock = op.inBool("Enable pointer lock", true),
     trigger = op.outTrigger("trigger"),
-    isLocked = op.outValue("isLocked", false),
+    isLocked = op.outBoolNum("isLocked", false),
 
     moveSpeed = op.inFloat("Speed", 1),
     mouseSpeed = op.inFloat("Mouse Speed", 1),
@@ -16,16 +16,16 @@ const
 
     inReset = op.inTriggerButton("Reset"),
 
-    outPosX = op.outValue("posX"),
-    outPosY = op.outValue("posY"),
-    outPosZ = op.outValue("posZ"),
+    outPosX = op.outNumber("posX"),
+    outPosY = op.outNumber("posY"),
+    outPosZ = op.outNumber("posZ"),
 
     outMouseDown = op.outTrigger("Mouse Left"),
     outMouseDownRight = op.outTrigger("Mouse Right"),
 
-    outDirX = op.outValue("Dir X"),
-    outDirY = op.outValue("Dir Y"),
-    outDirZ = op.outValue("Dir Z");
+    outDirX = op.outNumber("Dir X"),
+    outDirY = op.outNumber("Dir Y"),
+    outDirZ = op.outNumber("Dir Z");
 
 const vPos = vec3.create();
 let speedx = 0, speedy = 0, speedz = 0;

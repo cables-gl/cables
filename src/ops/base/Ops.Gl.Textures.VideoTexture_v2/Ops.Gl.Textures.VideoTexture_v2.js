@@ -28,7 +28,7 @@ const
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
     outAspect = op.outNumber("Aspect Ratio"),
-    outHasError = op.outBool("Has Error"),
+    outHasError = op.outBoolNum("Has Error"),
     outError = op.outString("Error Message");
 
 let videoElementPlaying = false;

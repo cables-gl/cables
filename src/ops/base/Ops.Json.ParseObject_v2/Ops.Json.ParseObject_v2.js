@@ -1,7 +1,7 @@
 const
     str = op.inStringEditor("JSON String", "{}", "json"),
     outObj = op.outObject("Result"),
-    isValid = op.outValue("Valid");
+    isValid = op.outBoolNum("Valid");
 
 str.onChange = parse;
 parse();

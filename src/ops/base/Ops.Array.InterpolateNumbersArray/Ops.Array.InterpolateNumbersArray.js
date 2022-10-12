@@ -1,6 +1,7 @@
-const inIndex = op.inValue("Index Position"),
+const
+    inIndex = op.inValue("Index Position"),
     inArr = op.inArray("Array"),
-    outX = op.outValue("result");
+    outX = op.outNumber("result");
 
 inIndex.onChange = inArr.onChange = function ()
 {

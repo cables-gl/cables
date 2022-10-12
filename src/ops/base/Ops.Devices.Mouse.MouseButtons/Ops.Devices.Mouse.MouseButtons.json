@@ -9,11 +9,6 @@
             },
             {
                 "type": 0,
-                "name": "Area",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }

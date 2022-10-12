@@ -2,19 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Boolean.isZero"
+        "name": "Ops.Boolean.IsZero"
     },
     "summary": "Returns `true` if input value is `0`",
     "docs": {
@@ -29,7 +29,6 @@
             }
         ]
     },
-    "updated": 1542699278983,
     "authorName": "pandur",
     "id": "76d37c73-3c32-47bd-8b4a-4229db7e57f1",
     "created": 1542699279469

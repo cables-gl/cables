@@ -3,10 +3,10 @@ const
     keysCursor = op.inValueBool("Cursor Keys", true),
     keysWasd = op.inValueBool("WASD", true),
     inActive = op.inBool("Active", true),
-    pressedUp = op.outValue("Up"),
-    pressedDown = op.outValue("Down"),
-    pressedLeft = op.outValue("Left"),
-    pressedRight = op.outValue("Right");
+    pressedUp = op.outBoolNum("Up"),
+    pressedDown = op.outBoolNum("Down"),
+    pressedLeft = op.outBoolNum("Left"),
+    pressedRight = op.outBoolNum("Right");
 
 const cgl = op.patch.cgl;
 

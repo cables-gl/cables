@@ -1,25 +1,26 @@
 const cgl = op.patch.cgl;
 
-const exec = op.inTrigger("Update");
-const next = op.outTrigger("Next");
+const
+    exec = op.inTrigger("Update"),
+    next = op.outTrigger("Next"),
 
-const outError = op.outValue("glGetError");
+    outError = op.outBoolNum("glGetError"),
 
-const depth = op.outValue("Depthtest");
-const depthStack = op.outValue("Stack Depthtest");
+    depth = op.outBoolNum("Depthtest"),
+    depthStack = op.outBoolNum("Stack Depthtest"),
 
-const depthWrite = op.outValue("Depth Writing");
-const depthWriteStack = op.outValue("Stack Depth Writing");
+    depthWrite = op.outBoolNum("Depth Writing"),
+    depthWriteStack = op.outBoolNum("Stack Depth Writing"),
 
-const depthFunc = op.outValue("DepthFunc");
-const depthFuncStack = op.outValue("Stack DepthFunc");
+    depthFunc = op.outBoolNum("DepthFunc"),
+    depthFuncStack = op.outBoolNum("Stack DepthFunc"),
 
-const blend = op.outValue("Blend");
-const blendStack = op.outValue("Blend Stack");
+    blend = op.outBoolNum("Blend"),
+    blendStack = op.outBoolNum("Blend Stack"),
 
-const cull = op.outValue("Cull Mode");
-const culling = op.outValue("Face Culling");
-const isShadowPass = op.outBool("Is Shadowpass");
+    cull = op.outBoolNum("Cull Mode"),
+    culling = op.outBoolNum("Face Culling"),
+    isShadowPass = op.outBool("Is Shadowpass");
 
 exec.onTriggered = function ()
 {
@@ -34,7 +35,6 @@ exec.onTriggered = function ()
 
     blend.set(cgl.gl.isEnabled(cgl.gl.BLEND));
     blendStack.set(cgl.stateBlend());
-
 
     culling.set(cgl.gl.isEnabled(cgl.gl.CULL_FACE));
 

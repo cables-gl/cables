@@ -10,7 +10,7 @@ const
     inScale = op.inValue("Scale", 1),
 
     outTrigger = op.outTrigger("Trigger Out"),
-    outNum = op.outValue("Num");
+    outNum = op.outNumber("Num");
 
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);

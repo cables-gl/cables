@@ -23,9 +23,9 @@ const
     restricted = op.inValueBool("restricted", true),
 
     trigger = op.outTrigger("trigger"),
-    outRadius = op.outValue("radius"),
-    outXDeg = op.outValue("Rot X"),
-    outYDeg = op.outValue("Rot Y"),
+    outRadius = op.outNumber("radius"),
+    outXDeg = op.outNumber("Rot X"),
+    outYDeg = op.outNumber("Rot Y"),
 
     inReset = op.inTriggerButton("Reset");
 

@@ -1,33 +1,33 @@
-var data=op.inObject("GamePad Data");
-var outID=op.outValue("ID");
-var digitalAnalog=op.inValueBool("Analog to Digital",true);
-var outAxes=op.outArray("Axes");
+let data = op.inObject("GamePad Data");
+let outID = op.outValue("ID");
+let digitalAnalog = op.inValueBool("Analog to Digital", true);
+let outAxes = op.outArray("Axes");
 
-var pressedLeft=op.outValueBool("Pad Left");
-var pressedRight=op.outValueBool("Pad Right");
-var pressedUp=op.outValueBool("Pad Up");
-var pressedDown=op.outValueBool("Pad Down");
+let pressedLeft = op.outBoolNum("Pad Left");
+let pressedRight = op.outBoolNum("Pad Right");
+let pressedUp = op.outBoolNum("Pad Up");
+let pressedDown = op.outBoolNum("Pad Down");
 
-var pressedButton1=op.outValueBool("Button 1");
-var pressedButton2=op.outValueBool("Button 2");
-var pressedButton3=op.outValueBool("Button 3");
-var pressedButton4=op.outValueBool("Button 4");
+let pressedButton1 = op.outBoolNum("Button 1");
+let pressedButton2 = op.outBoolNum("Button 2");
+let pressedButton3 = op.outBoolNum("Button 3");
+let pressedButton4 = op.outBoolNum("Button 4");
 
-var outLeftShoulder=op.outValue("Left Shoulder");
-var outLeftShoulderBottom=op.outValue("Left Shoulder Bottom");
+let outLeftShoulder = op.outValue("Left Shoulder");
+let outLeftShoulderBottom = op.outValue("Left Shoulder Bottom");
 
-var outRightShoulder=op.outValue("Right Shoulder");
-var outRightShoulderBottom=op.outValue("Right Shoulder Bottom");
+let outRightShoulder = op.outValue("Right Shoulder");
+let outRightShoulderBottom = op.outValue("Right Shoulder Bottom");
 
-data.onChange=function()
+data.onChange = function ()
 {
-    if(data.get())
+    if (data.get())
     {
         outID.set(data.get().id);
-        if(data.get().axes)outAxes.set(data.get().axes);
+        if (data.get().axes)outAxes.set(data.get().axes);
 
-        var buttons=data.get().buttons;
-        if(buttons)
+        let buttons = data.get().buttons;
+        if (buttons)
         {
             pressedButton1.set(buttons[0].pressed);
             pressedButton2.set(buttons[1].pressed);
@@ -35,20 +35,20 @@ data.onChange=function()
             pressedButton4.set(buttons[3].pressed);
         }
 
-        if(digitalAnalog.get())
+        if (digitalAnalog.get())
         {
-            var axes=data.get().axes;
-            if(axes)
+            let axes = data.get().axes;
+            if (axes)
             {
-                if(axes[0]<-0.5)pressedLeft.set(true);
-                    else pressedLeft.set(false||buttons[14].pressed);
-                if(axes[0]>0.5)pressedRight.set(true);
-                    else pressedRight.set(false||buttons[15].pressed);
+                if (axes[0] < -0.5)pressedLeft.set(true);
+                else pressedLeft.set(false || buttons[14].pressed);
+                if (axes[0] > 0.5)pressedRight.set(true);
+                else pressedRight.set(false || buttons[15].pressed);
 
-                if(axes[1]<-0.5)pressedUp.set(true);
-                    else pressedUp.set(false||buttons[12].pressed);
-                if(axes[1]>0.5)pressedDown.set(true);
-                    else pressedDown.set(false||buttons[13].pressed);
+                if (axes[1] < -0.5)pressedUp.set(true);
+                else pressedUp.set(false || buttons[12].pressed);
+                if (axes[1] > 0.5)pressedDown.set(true);
+                else pressedDown.set(false || buttons[13].pressed);
             }
         }
         else
@@ -65,7 +65,6 @@ data.onChange=function()
         outRightShoulder.set(buttons[5].value);
         outRightShoulderBottom.set(buttons[7].value);
     }
-
 };
 
 // gamepad.BUTTONS = {

@@ -17,7 +17,7 @@ const
     textureOut = op.outTexture("texture"),
     outLines = op.outNumber("Total Lines", 0),
     outWidth = op.outNumber("Width", 0),
-    loaded = op.outValue("Font Available", 0);
+    loaded = op.outBoolNum("Font Available", 0);
 
 const cgl = op.patch.cgl;
 

@@ -7,7 +7,7 @@ const
     flip = op.inBool("Flip", false),
     inRotate = op.inValueBool("Rotate"),
     trigger = op.outTrigger("trigger"),
-    index = op.outValue("index");
+    index = op.outNumber("index");
 
 const cgl = op.patch.cgl;
 
@@ -61,13 +61,11 @@ function calc()
     let num = Math.round(segs * percent.get());
     let step = (360 / Math.round(segs));
 
-
     if (!numAbs.get())
     {
         num = segs;
         step = (360 / Math.round(segs) * percent.get());
     }
-
 
     const doflip = flip.get();
 

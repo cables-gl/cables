@@ -10,19 +10,20 @@
     "authorName": "pandur",
     "created": 1554108323765,
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration Z",
                 "subType": "number"
             }

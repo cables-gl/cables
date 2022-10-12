@@ -6,82 +6,82 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "GamePad Data"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Analog to Digital",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "ID",
                 "subType": "number"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Axes"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pad Left",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pad Right",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pad Up",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pad Down",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Button 1",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Button 2",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Button 3",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Button 4",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Left Shoulder",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Left Shoulder Bottom",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right Shoulder",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Right Shoulder Bottom",
                 "subType": "number"
             }

@@ -122,7 +122,7 @@
             {
                 "type": 0,
                 "name": "Has Error",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
                 "type": 5,

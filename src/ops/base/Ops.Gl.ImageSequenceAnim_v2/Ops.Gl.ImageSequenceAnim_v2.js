@@ -6,13 +6,13 @@ const
     numY = op.inValueFloat("Num Y", 4),
     maxFrames = op.inInt("Max Frames", 0),
 
-    texRepeatX = op.outValue("Repeat X"),
-    texRepeatY = op.outValue("Repeat Y"),
-    texU = op.outValue("Offset X"),
-    texV = op.outValue("Offset Y"),
+    texRepeatX = op.outNumber("Repeat X"),
+    texRepeatY = op.outNumber("Repeat Y"),
+    texU = op.outNumber("Offset X"),
+    texV = op.outNumber("Offset Y"),
 
-    outFrame = op.outValue("Frame"),
-    outProgress = op.outValue("Progress");
+    outFrame = op.outNumber("Frame"),
+    outProgress = op.outNumber("Progress");
 
 numX.onChange = numY.onChange = setRepeat;
 

@@ -3,16 +3,16 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "in bool",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "out bool",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Boolean.ToggleBoolValue"
@@ -29,7 +29,6 @@
             }
         ]
     },
-    "updated": 1542042376038,
     "authorName": "pandur",
     "id": "7b1abd02-3aad-4106-9848-7f4c3cfab6a9",
     "created": 1520703662276

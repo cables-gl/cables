@@ -10,7 +10,7 @@ const
     valueTrue = op.inValue("value true", 1),
     next = op.outTrigger("trigger"),
     value = op.outNumber("value"),
-    finished = op.outValueBool("finished"),
+    finished = op.outBoolNum("finished"),
     finishedTrigger = op.outTrigger("Finished Trigger");
 
 const startTime = CABLES.now();

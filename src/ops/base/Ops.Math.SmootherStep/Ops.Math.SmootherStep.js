@@ -2,7 +2,7 @@ const
     val = op.inValueFloat("val", 0),
     min = op.inValueFloat("min", 0),
     max = op.inValueFloat("max", 1),
-    result = op.outValue("result");
+    result = op.outNumber("result");
 
 val.onChange = max.onChange = min.onChange = exec;
 exec();

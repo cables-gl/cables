@@ -1,11 +1,10 @@
 const
-    str=op.inString("String",5711),
-    outNum=op.outValue("Number");
+    str = op.inString("String", 5711),
+    outNum = op.outNumber("Number");
 
-str.onChange=function()
+str.onChange = function ()
 {
-    var num=parseFloat(str.get());
-    if(num!=num) num=0;
+    let num = parseFloat(str.get());
+    if (num != num) num = 0;
     outNum.set(num);
 };
-

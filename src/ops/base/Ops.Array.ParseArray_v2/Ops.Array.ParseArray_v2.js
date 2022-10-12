@@ -4,7 +4,7 @@ const text = op.inStringEditor("text", "1,2,3"),
     trim = op.inValueBool("Trim", true),
     parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),
-    len = op.outValue("length");
+    len = op.outNumber("length");
 
 text.setUiAttribs({ "ignoreBigPort": true });
 

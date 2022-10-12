@@ -1,23 +1,25 @@
 {
-    "updated": 1517958775254,
     "authorName": "pandur",
     "id": "4059e4ee-da93-490a-a00c-6fe0f0ee8efc",
     "created": 1515962918465,
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Number"
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Divisor"
+                "type": 0,
+                "name": "Divisor",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Result"
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.NumberDivisible"

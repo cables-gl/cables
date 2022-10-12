@@ -5,18 +5,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "In"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Result"
             }
         ],

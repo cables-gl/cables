@@ -10,19 +10,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Remove zero",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

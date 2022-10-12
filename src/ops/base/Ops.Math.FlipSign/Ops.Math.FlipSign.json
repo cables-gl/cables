@@ -5,14 +5,14 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }
