@@ -21,7 +21,7 @@ vec2 MOD_tc=texCoord;
 
 MOD_tc*=MOD_scale;
 
-vec4 MOD_sample=texture2D( MOD_texture, vec2(MOD_tc.x+MOD_offsetX,MOD_tc.y+MOD_offsetY) );
+vec4 MOD_sample=texture( MOD_texture, vec2(MOD_tc.x+MOD_offsetX,MOD_tc.y+MOD_offsetY) );
 vec3 MOD_disp;
 
 #ifdef MOD_INPUT_R
