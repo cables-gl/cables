@@ -43,6 +43,8 @@ let cgl_wrap = 0;
 
 const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
 
+op.toWorkPortsNeedToBeLinked(textureOut);
+
 let tex = null;
 textureOut.set(tex);
 let timeout = null;

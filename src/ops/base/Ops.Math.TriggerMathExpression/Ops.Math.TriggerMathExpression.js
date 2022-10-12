@@ -13,9 +13,9 @@ const inExec = op.inTrigger("Calculate"),
 
     inI = op.inFloat("I", 0),
 
+    next = op.outTrigger("Next"),
     outResult = op.outNumber("Result"),
-    outExpressionIsValid = op.outBool("Expression Valid"),
-    next = op.outTrigger("Next");
+    outExpressionIsValid = op.outBool("Expression Valid");
 
 op.setPortGroup("Parameters", [inA, inB, inC, inD, inX, inY, inZ, inW, inI]);
 
@@ -54,4 +54,5 @@ function evaluateFunction()
     }
 
     outExpressionIsValid.set(functionValid);
+    next.trigger();
 }

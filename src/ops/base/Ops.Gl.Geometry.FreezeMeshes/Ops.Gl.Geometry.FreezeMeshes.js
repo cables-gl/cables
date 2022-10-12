@@ -22,7 +22,7 @@ inCapture.onTriggered = () =>
         CGL.Mesh.prototype.render = old;
         shouldCapture = false;
 
-        geom.unIndex(false, true);
+        // geom.unIndex(false, true);
 
         outGeom.set(null);
         outGeom.set(geom);
@@ -56,5 +56,6 @@ function meshCapture()
         g.vertexNormals[i + 2] = vn[2];
     }
 
+    // g.unIndex();
     geom.merge(g);
 }

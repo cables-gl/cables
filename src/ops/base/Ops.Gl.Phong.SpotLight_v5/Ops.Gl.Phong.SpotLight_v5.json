@@ -274,7 +274,7 @@
             "date": 1596055767931
         }
     ],
-    "summary": "spot light for phong shading",
+    "summary": "spot light  that emits a cone of light",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -426,5 +426,6 @@
             }
         ]
     },
-    "exampleProjectId": "D5evXU"
+    "exampleProjectId": "D5evXU",
+    "caniusequery": ""
 }

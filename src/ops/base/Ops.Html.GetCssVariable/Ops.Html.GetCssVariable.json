@@ -23,8 +23,13 @@
         "name": "Ops.User.pandur.getCssVariable"
     },
     "summary": "gets current value of CSS Variable",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Zqkkt7"
 }

@@ -15,6 +15,11 @@
             "message": " added core lib: cgl_cubemapframebuffer",
             "author": "cables",
             "date": 1595947131060
+        },
+        {
+            "message": "Ops.Gl.CubeMap.CubeMapCamera_v2 renamed to Ops.Gl.CubeMap.RenderToCubemap_v2",
+            "author": "pandur",
+            "date": 1665557133848
         }
     ],
     "authorName": "simod",

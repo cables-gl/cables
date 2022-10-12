@@ -34,5 +34,12 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Z3KuUQ"
+    "exampleProjectId": "Z3KuUQ",
+    "changelog": [
+        {
+            "message": "Ops.Gl.CubeMap.CubeMapCamera renamed to Ops.Gl.CubeMap.RenderToCubemap",
+            "author": "pandur",
+            "date": 1665557163044
+        }
+    ]
 }

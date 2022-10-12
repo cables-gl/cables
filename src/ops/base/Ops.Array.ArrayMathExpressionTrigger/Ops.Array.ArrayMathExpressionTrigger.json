@@ -96,7 +96,7 @@
         ],
         "name": "Ops.User.pandur.ArrayMathExpressionTrigger"
     },
-    "summary": "Calculates a user defined mathematical expression with up to 3 arrays and 3 numbers",
+    "summary": "Calculates a user defined mathematical expression",
     "issues": "",
     "collections": null,
     "relatedops": [

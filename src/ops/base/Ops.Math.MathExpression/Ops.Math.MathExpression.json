@@ -60,10 +60,12 @@
         ],
         "name": "Ops.Math.MathExpression"
     },
-    "summary": "calculates a user defined mathematical expression with up to 4 variables",
+    "summary": "calculates a user defined mathematical expression",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Math.TriggerMathExpression"
+    ],
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -86,6 +86,10 @@
         ],
         "portsOut": [
             {
+                "type": 1,
+                "name": "Next"
+            },
+            {
                 "type": 0,
                 "name": "Result",
                 "subType": "number"
@@ -94,12 +98,17 @@
                 "type": 0,
                 "name": "Expression Valid",
                 "subType": "boolean"
-            },
-            {
-                "type": 1,
-                "name": "Next"
             }
         ],
-        "name": "Ops.Dev.Math.TriggerMathExpression"
+        "name": "Ops.Math.TriggerMathExpression"
+    },
+    "summary": "calculates a user defined mathematical expression",
+    "collections": null,
+    "relatedops": [
+        "Ops.Math.MathExpression"
+    ],
+    "exampleProjectId": "6K7A5f",
+    "docs": {
+        "ports": []
     }
 }

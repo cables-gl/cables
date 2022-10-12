@@ -31,6 +31,11 @@
             "message": "Ops.Json.ObjectToJSON renamed to Ops.Json.ObjectStringify_v0",
             "author": "pandur",
             "date": 1654583976568
+        },
+        {
+            "message": "Ops.Json.ObjectStringify_v0 renamed to Ops.Json.ObjectStringify_v1",
+            "author": "pandur",
+            "date": 1665557241345
         }
     ]
 }

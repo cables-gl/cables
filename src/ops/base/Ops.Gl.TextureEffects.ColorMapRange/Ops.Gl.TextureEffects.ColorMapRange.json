@@ -66,7 +66,7 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "8p4mT6",
+    "exampleProjectId": "TgoiV6",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureEffects.BrightnessContrast",
