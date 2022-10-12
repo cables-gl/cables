@@ -466,7 +466,6 @@ function render()
             if (glQueryData[i].time)
                 currentTimeGPU += glQueryData[i].time;
         }
-        // console.log("glquery count",currentTimeGPU)
     }
 
     if (inShow.get())

@@ -82,7 +82,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.Mediapipe.MpHandTracking"
+        "name": "Ops.Libs.Mediapipe.MpHandTracking"
     },
     "summary": "Get hand data from mediapipe library, use with MpHand",
     "issues": "",

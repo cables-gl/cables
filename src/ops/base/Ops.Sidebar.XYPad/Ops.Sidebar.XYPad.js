@@ -109,8 +109,6 @@ op.onDelete = onDelete;
 
 inRange.onChange = () =>
 {
-    // console.log("inRange");
-    // valueInputChanged();
     setOutValue(defaultValuePortX.get(), defaultValuePortY.get());
 
     redraw();

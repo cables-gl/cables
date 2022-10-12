@@ -56,7 +56,7 @@
                 "objType": "geometry"
             }
         ],
-        "name": "Ops.User.pandur.SvgPathToGeometry2"
+        "name": "Ops.Gl.Geometry.SvgPathToGeometry_v2"
     },
     "authorName": "pandur",
     "created": 1656063040878,
