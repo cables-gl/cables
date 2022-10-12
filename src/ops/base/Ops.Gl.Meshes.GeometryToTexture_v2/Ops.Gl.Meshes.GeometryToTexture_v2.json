@@ -95,5 +95,11 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "bhWkpX",
+    "docs": {
+        "ports": []
+    }
 }
