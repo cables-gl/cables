@@ -40,6 +40,10 @@
                 "type": 0,
                 "name": "active",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Convert to Subpatch"
             }
         ],
         "portsOut": [
