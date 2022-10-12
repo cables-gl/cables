@@ -3,22 +3,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "In Trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Milliseconds",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Out Trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Progress",
                 "subType": "number"
             }

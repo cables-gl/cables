@@ -1,5 +1,5 @@
 let data = op.inObject("GamePad Data");
-let outID = op.outValue("ID");
+let outID = op.outString("ID");
 let digitalAnalog = op.inValueBool("Analog to Digital", true);
 let outAxes = op.outArray("Axes");
 

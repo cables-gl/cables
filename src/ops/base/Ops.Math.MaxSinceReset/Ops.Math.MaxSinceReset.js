@@ -1,13 +1,9 @@
-// input
-var valuePort = op.inValue('Value');
-var resetPort = op.inTriggerButton('Reset');
+const valuePort = op.inValue("Value");
+const resetPort = op.inTriggerButton("Reset");
+const maxPort = op.outNumber("Maximum");
 
-// variables
-var first;
-var lastMax;
-
-// output
-var maxPort = op.outValue('Maximum');
+let first;
+let lastMax;
 
 // change listeners
 resetPort.onTriggered = reset;
@@ -19,12 +15,16 @@ reset();
 /**
  * On Value change
  */
-function update() {
-    var value = valuePort.get();
-    if(first) {
+function update()
+{
+    let value = valuePort.get();
+    if (first)
+    {
         maxPort.set(value);
         lastMax = value;
-    } else {
+    }
+    else
+    {
         lastMax = Math.max(lastMax, value);
         maxPort.set(lastMax);
     }
@@ -34,6 +34,7 @@ function update() {
 /**
  * On Reset
  */
-function reset() {
+function reset()
+{
     first = true;
 }

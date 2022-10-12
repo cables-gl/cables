@@ -12,22 +12,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Set"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Value",
                 "subType": "number"
             }

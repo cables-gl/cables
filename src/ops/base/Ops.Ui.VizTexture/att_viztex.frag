@@ -16,7 +16,7 @@ void main()
 {
     vec4 col=vec4(vec3(0.),0.0);
 
-    vec4 colTex=texture2D(tex,texCoord);
+    vec4 colTex=texture(tex,texCoord);
 
 
 

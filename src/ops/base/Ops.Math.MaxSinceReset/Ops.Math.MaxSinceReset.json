@@ -9,18 +9,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Maximum",
                 "subType": "number"
             }

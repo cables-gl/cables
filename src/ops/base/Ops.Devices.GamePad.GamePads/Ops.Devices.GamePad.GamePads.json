@@ -5,30 +5,30 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Gamepads",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Pad 0"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Pad 1"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Pad 2"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Pad 3"
             }
         ],

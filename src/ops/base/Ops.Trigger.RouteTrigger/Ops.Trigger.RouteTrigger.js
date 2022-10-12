@@ -1,13 +1,9 @@
-// constants
 const NUM_PORTS = 24;
 
-// inputs
 const exePort = op.inTriggerButton("Execute");
 const switchPort = op.inValueInt("Switch Value");
-
-// outputs
 const nextTriggerPort = op.outTrigger("Next Trigger");
-const valueOutPort = op.outValue("Switched Value");
+const valueOutPort = op.outNumber("Switched Value");
 const triggerPorts = [];
 for (let j = 0; j < NUM_PORTS; j++)
 {

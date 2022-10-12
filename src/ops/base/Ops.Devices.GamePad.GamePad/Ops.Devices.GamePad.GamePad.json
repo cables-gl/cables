@@ -17,9 +17,8 @@
         ],
         "portsOut": [
             {
-                "type": 0,
-                "name": "ID",
-                "subType": "number"
+                "type": 5,
+                "name": "ID"
             },
             {
                 "type": 3,

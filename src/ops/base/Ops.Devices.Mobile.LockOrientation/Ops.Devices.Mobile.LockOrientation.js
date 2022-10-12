@@ -1,26 +1,24 @@
-var inPortrait=op.inValueBool("Portrait");
-var inLandscape=op.inValueBool("Landscape");
+const inPortrait = op.inValueBool("Portrait");
+const inLandscape = op.inValueBool("Landscape");
 
 screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
 
+const support = op.outBoolNum("Supported", screen.lockOrientationUniversal !== undefined);
+const locked = op.outBoolNum("Locked");
 
-var support=op.outValue("Supported",screen.lockOrientationUniversal!==undefined);
-var locked=op.outValue("Locked");
-inPortrait.onChange=setup;
-inLandscape.onChange=setup;
+inPortrait.onChange = setup;
+inLandscape.onChange = setup;
 
 function setup()
 {
-    if(screen.lockOrientationUniversal)
+    if (screen.lockOrientationUniversal)
     {
-        var orientations=[];
-        if(inPortrait.get())orientations.push("portrait");
-        if(inLandscape.get())orientations.push("landscape");
+        let orientations = [];
+        if (inPortrait.get())orientations.push("portrait");
+        if (inLandscape.get())orientations.push("landscape");
 
-        if(screen.lockOrientationUniversal(orientations)) locked.set(true);
-            else locked.set(false);
+        if (screen.lockOrientationUniversal(orientations)) locked.set(true);
+        else locked.set(false);
     }
     locked.set(false);
 }
-
-

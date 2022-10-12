@@ -42,12 +42,8 @@
             {
                 "type": 0,
                 "name": "Texture Size index",
+                "group": "Texture Settings",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Texture Size",
-                "group": "Texture Settings"
             }
         ],
         "portsOut": [

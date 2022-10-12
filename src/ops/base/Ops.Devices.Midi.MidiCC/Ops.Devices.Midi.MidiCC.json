@@ -5,56 +5,58 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event In",
                 "group": "MIDI"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "MIDI Channel index",
+                "group": "MIDI",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "CC Index",
                 "group": "CC",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normalize index",
+                "group": "CC",
                 "subType": "integer"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "learn"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "clear"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "CC Index Out",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "CC Value Out",
                 "subType": "number"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Value Array"
             }
         ],
