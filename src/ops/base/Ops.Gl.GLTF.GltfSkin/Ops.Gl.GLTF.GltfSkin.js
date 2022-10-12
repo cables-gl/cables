@@ -94,7 +94,6 @@ function transformBlend(node, cgl, time)
     const animnames = Object.keys(cgl.frameStore.currentScene.uniqueAnimNames);
 
     const weights = inBlendAnims.get();
-    let _w = weights.reduce((partialSum, a) => { return partialSum + a; }, 0);
 
     // if ((!hasTrans && !hasRot && !hasScale) || _w === 0)
     // {
