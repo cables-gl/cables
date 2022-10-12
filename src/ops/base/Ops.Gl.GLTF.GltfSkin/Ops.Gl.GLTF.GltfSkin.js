@@ -92,10 +92,9 @@ function transformBlend(node, cgl, time)
     // hasScale = false;
 
     const animnames = Object.keys(cgl.frameStore.currentScene.uniqueAnimNames);
-    // console.log(animnames);
 
     const weights = inBlendAnims.get();
-    let _w = weights.reduce((partialSum, a) => partialSum + a, 0);
+    let _w = weights.reduce((partialSum, a) => { return partialSum + a; }, 0);
 
     // if ((!hasTrans && !hasRot && !hasScale) || _w === 0)
     // {
@@ -111,7 +110,6 @@ function transformBlend(node, cgl, time)
         mat4.identity(node._animMat);
 
         const playAnims = true;
-        // console.log("-");
 
         if (playAnims)
         {
@@ -125,10 +123,8 @@ function transformBlend(node, cgl, time)
                 let _time = time;// times[animnames[i]];
                 // let _anim = node._anims.trans[i];
 
-                console.log(node, node._animActions);
                 let _anim = node._animActions[animName].translation;
                 let weight = weights[i];
-                console.log("wheight", wheight);
 
                 if (_anim)
                 {

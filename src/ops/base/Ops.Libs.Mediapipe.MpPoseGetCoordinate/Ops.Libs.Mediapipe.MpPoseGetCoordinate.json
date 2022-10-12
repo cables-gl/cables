@@ -48,7 +48,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.MpPoseGetCoordinate"
+        "name": "Ops.Libs.Mediapipe.MpPoseGetCoordinate"
     },
     "summary": "Get coordinates of specific body parts from mediapipe data",
     "issues": "",

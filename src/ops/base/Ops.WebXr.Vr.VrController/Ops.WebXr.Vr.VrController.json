@@ -155,7 +155,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.WebXrVrController"
+        "name": "Ops.WebXr.Vr.VrController"
     },
     "summary": "tracking of vr hand controller",
     "collections": null,

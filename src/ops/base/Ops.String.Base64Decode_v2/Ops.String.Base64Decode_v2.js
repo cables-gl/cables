@@ -27,7 +27,7 @@ function b64DecodeUnicode(str)
     }
     catch (e)
     {
-        console.log(e);
+        op.error(e);
     }
 
     return r;

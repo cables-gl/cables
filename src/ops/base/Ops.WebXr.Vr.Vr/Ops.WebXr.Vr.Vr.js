@@ -50,7 +50,6 @@ inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.g
 
 if (xr) xr.isSessionSupported("immersive-vr").then((r) =>
 {
-    console.log("xr detected", r);
     outVr.set(true);
 
     if (r) initButton();
@@ -104,8 +103,6 @@ function startVr()
 
                 if (xrSession)
                 {
-                    console.log("started vr session....");
-
                     await cgl.gl.makeXRCompatible();
 
                     let canvas = cgl.canvas;
@@ -118,8 +115,7 @@ function startVr()
             (err) =>
             {
                 // error....
-                console.log("Failed to start immersive AR session.");
-                console.log(err);
+                op.error(err);
             });
 }
 
@@ -129,8 +125,6 @@ function onXRFrame(hrTime, xrFrame)
 
     let xrSession = xrFrame.session;
     xrSession.requestAnimationFrame(onXRFrame);
-
-    // console.log(xrSession);
 
     try
     {
@@ -213,7 +207,7 @@ function onXRFrame(hrTime, xrFrame)
     }
     catch (e)
     {
-        console.error(e);
+        op.error(e);
         hadError = true;
     }
 }

@@ -240,8 +240,6 @@ function doRender()
 
     if (mesh.numInstances > 0) mesh.render(cgl.getShader());
 
-    // console.log(mesh.name,mesh._attributes);
-
     outTrigger.trigger();
 
     mod.unbind();
