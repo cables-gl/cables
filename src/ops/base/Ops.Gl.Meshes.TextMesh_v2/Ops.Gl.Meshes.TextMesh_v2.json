@@ -120,7 +120,7 @@
         ],
         "name": "Ops.Gl.Meshes.TextMesh_v2"
     },
-    "summary": "Draws text in 3d space",
+    "summary": "Draws text in 3d space using one of the font ops",
     "docs": {
         "ports": [
             {
@@ -138,14 +138,6 @@
             {
                 "name": "Font",
                 "text": "Font to use"
-            },
-            {
-                "name": "align",
-                "text": "Horizontal alignment of text `left,center,right`"
-            },
-            {
-                "name": "vertical align",
-                "text": "Vertical alignment of text `top,middle,bottom`"
             },
             {
                 "name": "Line Height",
@@ -202,5 +194,6 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "LzDnH-"
+    "exampleProjectId": "LzDnH-",
+    "caniusequery": ""
 }

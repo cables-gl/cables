@@ -68,7 +68,7 @@
         ],
         "name": "Ops.Points.PointsPlane_v2"
     },
-    "summary": "Generate coordinates for a rectangular field of points (was Field)",
+    "summary": "Generate coordinates for a rectangular field / grid of points",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -76,5 +76,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "icchV5"
+    "exampleProjectId": "icchV5",
+    "caniusequery": ""
 }
