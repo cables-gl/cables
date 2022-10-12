@@ -6,10 +6,9 @@ const
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
-
     outTex = op.outTexture("Texture"),
-    width = op.outValue("Width"),
-    height = op.outValue("Height"),
+    width = op.outNumber("Width"),
+    height = op.outNumber("Height"),
     type = op.outString("Type"),
     outFound = op.outBool("Found");
 
