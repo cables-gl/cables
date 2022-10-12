@@ -37,7 +37,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Dev.FreezeMeshes"
+        "name": "Ops.Gl.Geometry.FreezeMeshes"
     },
     "summary": "capture all following meshes into one geometry",
     "collections": null,

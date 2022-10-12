@@ -82,5 +82,8 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "7mss1Q"
 }
