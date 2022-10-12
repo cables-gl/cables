@@ -42,5 +42,12 @@
         "ports": []
     },
     "youtubeids": [],
-    "exampleProjectId": "EeNqXV"
+    "exampleProjectId": "EeNqXV",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.CustomTextureEffectShader renamed to Ops.Deprecated.Gl.TextureEffects.CustomTextureEffectShader",
+            "author": "pandur",
+            "date": 1665557282781
+        }
+    ]
 }
