@@ -284,14 +284,13 @@ Geometry.prototype.setPointVertices = function (verts)
 Geometry.prototype.merge = function (geom)
 {
     if (!geom) return;
+
     const oldIndizesLength = this.verticesIndices.length;
     const vertLength = this.vertices.length / 3;
 
     this.verticesIndices.length = this.verticesIndices.length + geom.verticesIndices.length;
     for (let i = 0; i < geom.verticesIndices.length; i++)
-    {
         this.verticesIndices[oldIndizesLength + i] = geom.verticesIndices[i] + vertLength;
-    }
 
     this.vertices = UTILS.float32Concat(this.vertices, geom.vertices);
     this.texCoords = UTILS.float32Concat(this.texCoords, geom.texCoords);
