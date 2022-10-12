@@ -111,7 +111,6 @@ var rotChanged = function ()
     rotChanged = true;
 };
 
-
 rotX.onChange = rotChanged;
 rotY.onChange = rotChanged;
 rotZ.onChange = rotChanged;
