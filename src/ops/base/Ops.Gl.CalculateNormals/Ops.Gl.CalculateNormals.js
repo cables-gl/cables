@@ -1,35 +1,29 @@
+const
+    geometry = op.inObject("Geometry"),
+    smoothNormals = op.inValueBool("Smooth"),
+    forceZUp = op.inValueBool("Force Z Up"),
+    geomOut = op.outObject("Geometry Out");
 
-var geometry=op.inObject("Geometry");
-var smoothNormals=op.inValueBool("Smooth");
-var forceZUp=op.inValueBool("Force Z Up");
+geomOut.ignoreValueSerialize = true;
+geometry.ignoreValueSerialize = true;
 
-var geomOut=op.outObject("Geometry Out");
+geometry.onChange = calc;
+smoothNormals.onChange = calc;
+forceZUp.onChange = calc;
 
-geomOut.ignoreValueSerialize=true;
-geometry.ignoreValueSerialize=true;
-
-geometry.onChange=calc;
-smoothNormals.onChange=calc;
-forceZUp.onChange=calc;
-
-var geom=null;
-
-
-
+let geom = null;
 
 function calc()
 {
-    if(!geometry.get())return;
+    if (!geometry.get()) return;
 
-    var geom=geometry.get().copy();
+    let geom = geometry.get().copy();
 
-    if(!smoothNormals.get())geom.unIndex();
+    if (!smoothNormals.get())geom.unIndex();
 
     geom.calculateNormals({
-        "forceZUp":forceZUp.get()
+        "forceZUp": forceZUp.get()
     });
 
     geomOut.set(geom);
-
 }
-

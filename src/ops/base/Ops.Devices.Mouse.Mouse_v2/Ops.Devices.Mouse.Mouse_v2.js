@@ -64,8 +64,8 @@ normalize.onChange = function ()
     setValue(mouseX, mouseY);
 };
 
-var mouseX = cgl.canvas.width / 2;
-var mouseY = cgl.canvas.height / 2;
+let mouseX = cgl.canvas.width / 2;
+let mouseY = cgl.canvas.height / 2;
 
 lineX = mouseX;
 lineY = mouseY;

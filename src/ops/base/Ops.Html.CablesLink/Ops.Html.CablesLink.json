@@ -3,16 +3,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity",
                 "subType": "number"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Html.CablesLink"
     },
     "authorName": "pandur",

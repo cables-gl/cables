@@ -12,34 +12,35 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event In",
                 "group": "MIDI"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "MIDI Channel index",
+                "group": "MIDI",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Transpose Amount",
                 "group": "Transpose",
                 "subType": "integer"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "learn",
                 "group": "MIDI"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event Out"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             }
         ],

@@ -37,7 +37,7 @@ const
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
     next = op.outTrigger("Next"),
-    outRatio = op.outValue("Ratio"),
+    outRatio = op.outNumber("Ratio"),
     textureOut = op.outTexture("texture"),
     outAspect = op.outNumber("Aspect", 1),
     outLines = op.outNumber("Num Lines");
@@ -105,14 +105,14 @@ textureOut.ignoreValueSerialize = true;
 const cgl = op.patch.cgl;
 const body = document.getElementsByTagName("body")[0];
 
-var tex = new CGL.Texture(cgl);
+let tex = new CGL.Texture(cgl);
 const fontImage = document.createElement("canvas");
 fontImage.id = "texturetext_" + CABLES.generateUUID();
 fontImage.style.display = "none";
 body.appendChild(fontImage);
 
 const ctx = fontImage.getContext("2d");
-var needsRefresh = true;
+let needsRefresh = true;
 const mesh = CGL.MESHES.getSimpleRect(cgl, "texttexture rect");
 const vScale = vec3.create();
 

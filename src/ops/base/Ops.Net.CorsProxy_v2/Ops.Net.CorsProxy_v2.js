@@ -1,8 +1,8 @@
-var a=op.inString('URL','');
-var result=op.outString("CORS URL");
-var CORS_CABLES_PROXY = 'https://cors.cables.gl/';
+let a = op.inString("URL", "");
+let result = op.outString("CORS URL");
+let CORS_CABLES_PROXY = "https://cors.cables.gl/";
 
-a.onChange=update;
+a.onChange = update;
 
 update();
 

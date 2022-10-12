@@ -19,11 +19,9 @@ let shader = new CGL.Shader(cgl, op.name);
 shader.define("METH_LUMI");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.colormap_frag);
-var textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
-
-var textureUniform = new CGL.Uniform(shader, "t", "gradient", 1);
+let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
+let textureUniform2 = new CGL.Uniform(shader, "t", "gradient", 1);
 let uniPos = new CGL.Uniform(shader, "f", "pos", inPos);
-
 let uniMin = new CGL.Uniform(shader, "f", "vmin", inMin);
 let uniMax = new CGL.Uniform(shader, "f", "vmax", inMax);
 let uniAmount = new CGL.Uniform(shader, "f", "amount", amount);
@@ -38,7 +36,7 @@ inMethod.onChange = () =>
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op,3)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
     if (!inGradient.get()) return;
 
     cgl.pushShader(shader);

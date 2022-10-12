@@ -102,7 +102,7 @@
             {
                 "type": 0,
                 "name": "Can Play Through",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
                 "type": 0,

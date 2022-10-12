@@ -23,7 +23,7 @@ const
     outProgress = op.outValue("progress"),
     outTime = op.outValue("CurrentTime"),
     loading = op.outValue("Loading"),
-    canPlayThrough = op.outValueBool("Can Play Through", false),
+    canPlayThrough = op.outBoolNum("Can Play Through", false),
 
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),

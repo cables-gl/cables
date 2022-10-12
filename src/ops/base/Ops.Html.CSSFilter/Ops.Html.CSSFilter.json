@@ -5,20 +5,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "method index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Html.CSSFilter"
     },
     "summary": "set css filter to html element (blur/opacity/contrast)",

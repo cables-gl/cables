@@ -3,7 +3,7 @@ const
     trigger = op.inTriggerButton("trigger"),
     reset = op.inTriggerButton("reset"),
     next = op.outTrigger("next"),
-    time = op.outValue("time");
+    time = op.outNumber("time");
 
 let lastTrigger = op.patch.freeTimer.get();
 time.set(0);

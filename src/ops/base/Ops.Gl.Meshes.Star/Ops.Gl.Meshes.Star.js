@@ -31,7 +31,7 @@ render.onTriggered = function ()
 percent.set(1);
 
 let geom = new CGL.Geometry("circle");
-var mesh = null;
+let mesh = null;
 let lastSegs = -1;
 function calc()
 {

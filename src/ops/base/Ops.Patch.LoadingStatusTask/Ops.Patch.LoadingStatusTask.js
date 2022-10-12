@@ -1,29 +1,33 @@
 // vars
-var stack = [];
-var uuid = CABLES.uuid();
+let stack = [];
+let uuid = CABLES.uuid();
 
 // inputs
-var startPort = op.inTriggerButton('Start Task');
-var stopPort = op.inTriggerButton('End Task');
+let startPort = op.inTriggerButton("Start Task");
+let stopPort = op.inTriggerButton("End Task");
 
 // listeners
 startPort.onTriggered = startTask;
 stopPort.onTriggered = stopTask;
 
-function startTask() {
-    var id = uuid + ' (' + (stack.length + 1) + ')';
-    var loadingId = op.patch.loading.start('task', id);
-    if(CABLES.UI) {
-        gui.jobs().start({id: loadingId, title: 'loading task ' + id});    
+function startTask()
+{
+    let id = uuid + " (" + (stack.length + 1) + ")";
+    let loadingId = op.patch.loading.start("task", id);
+    if (CABLES.UI)
+    {
+        gui.jobs().start({ "id": loadingId, "title": "loading task " + id });
     }
-    
+
     stack.push(loadingId);
 }
 
-function stopTask() {
-    var loadingId = stack.pop();
+function stopTask()
+{
+    let loadingId = stack.pop();
     op.patch.loading.finished(loadingId);
-    if(CABLES.UI) {
+    if (CABLES.UI)
+    {
         gui.jobs().finish(loadingId);
     }
 }
