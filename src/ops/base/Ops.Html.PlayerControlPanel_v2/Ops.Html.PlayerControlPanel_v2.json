@@ -65,7 +65,7 @@
         ],
         "name": "Ops.Html.PlayerControlPanel_v2"
     },
-    "summary": "simple html ui for timeline/mediaplayers",
+    "summary": "simple html ui for timeline/mediaplayers (was: TimeLineUI)",
     "docs": {
         "ports": []
     },
