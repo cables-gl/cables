@@ -153,6 +153,8 @@ function render(time)
     if (!active.get()) return;
     if (cgl.aborted || cgl.canvas.clientWidth === 0 || cgl.canvas.clientHeight === 0) return;
 
+    op.patch.cg = cgl;
+
     const startTime = performance.now();
 
     op.patch.config.fpsLimit = getFpsLimit();
@@ -200,6 +202,8 @@ function render(time)
         CGL.Texture.texturePreviewer.render(CGL.Texture.previewTexture);
     }
     cgl.renderEnd(cgl);
+
+    op.patch.cg = null;
 
     if (clearAlpha.get())
     {
