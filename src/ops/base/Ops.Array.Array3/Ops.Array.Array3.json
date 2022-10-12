@@ -23,38 +23,38 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Triplets",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Total points",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Array length",
                 "subType": "number"
             }

@@ -1,22 +1,22 @@
-var inArray=op.inArray("In");
-var inValue=op.inValue("Value",1.0);
-var outArray=op.outArray("Result");
+let inArray = op.inArray("In");
+let inValue = op.inValue("Value", 1.0);
+let outArray = op.outArray("Result");
 
-var newArr=[];
+let newArr = [];
 outArray.set(newArr);
-inArray.onChange=
-inValue.onChange=inArray.onChange=function()
+inArray.onChange =
+inValue.onChange = inArray.onChange = function ()
 {
-    var arr=inArray.get();
-    if(!arr)return;
+    let arr = inArray.get();
+    if (!arr) return;
 
-    var mul=inValue.get();
+    let mul = inValue.get();
 
-    if(newArr.length!=arr.length)newArr.length=arr.length;
+    if (newArr.length != arr.length)newArr.length = arr.length;
 
-    for(var i=0;i<arr.length;i++)
+    for (let i = 0; i < arr.length; i++)
     {
-        newArr[i]=arr[i]*mul;
+        newArr[i] = arr[i] * mul;
     }
     outArray.set(null);
     outArray.set(newArr);

@@ -46,7 +46,6 @@ op.patch.cgl.on("heavyEvent", (e) =>
 {
     if (inRecord.get() && !isPrerendering && CABLES.uniqueArray)
     {
-        console.log("heavyEvent", op.patch.timer.getTime(), e);
         events.push(Math.round(op.patch.timer.getTime() * 60) / 60);
         events = CABLES.uniqueArray(events);
         inEvents.set(events);

@@ -1,23 +1,23 @@
 const inArray = op.inArray("Array In");
-const inValue = op.inValue("Value",1.0);
+const inValue = op.inValue("Value", 1.0);
 const outArray = op.outArray("Array Out");
 
-var newArr = [];
+let newArr = [];
 outArray.set(newArr);
 
-inValue.onChange = inArray.onChange = function()
+inValue.onChange = inArray.onChange = function ()
 {
-    var arr = inArray.get();
-    if(!arr)return;
+    let arr = inArray.get();
+    if (!arr) return;
 
-    var inMax = inValue.get();
+    let inMax = inValue.get();
 
-    if(newArr.length != arr.length)newArr.length = arr.length;
+    if (newArr.length != arr.length)newArr.length = arr.length;
 
-    var i = 0;
-    for(i = 0;i < arr.length;i++)
+    let i = 0;
+    for (i = 0; i < arr.length; i++)
     {
-        newArr[i] = Math.max(arr[i],inMax);
+        newArr[i] = Math.max(arr[i], inMax);
     }
     outArray.set(null);
     outArray.set(newArr);

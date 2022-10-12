@@ -12,28 +12,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Lines",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Reverse",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Force Num Lines",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
             }
         ],

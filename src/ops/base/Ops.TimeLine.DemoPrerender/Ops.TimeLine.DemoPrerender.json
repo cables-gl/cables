@@ -64,7 +64,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Timeline.DemoPrerender"
+        "name": "Ops.TimeLine.DemoPrerender"
     },
     "summary": "Prerenderer based on timeline progress",
     "issues": "",
