@@ -31,6 +31,13 @@ inCapture.onTriggered = () =>
 
 function meshCapture()
 {
+    if (!this._geom || !this._geom.copy)
+    {
+        console.log("nope...", this);
+        return;
+    }
+
+    console.log(this._geom.isIndexed(), this._geom.glPrimitive);
     const g = this._geom.copy();
     const normalMat = mat4.create();
     mat4.invert(normalMat, cgl.mMatrix);
