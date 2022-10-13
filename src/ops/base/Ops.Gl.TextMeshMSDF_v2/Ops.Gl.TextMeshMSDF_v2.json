@@ -174,7 +174,7 @@
         ],
         "name": "Ops.Gl.TextMeshMSDF_v2"
     },
-    "summary": "draw text ",
+    "summary": "draw text  using the FontMSDF operator",
     "issues": "",
     "collections": [
         "drawText"
@@ -186,5 +186,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "9COr26"
+    "exampleProjectId": "9COr26",
+    "caniusequery": ""
 }

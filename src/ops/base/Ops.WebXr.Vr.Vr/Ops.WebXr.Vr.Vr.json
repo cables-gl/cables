@@ -110,12 +110,13 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.WebXrVr"
+        "name": "Ops.WebXr.Vr.Vr"
     },
     "collections": null,
     "relatedops": null,
     "exampleProjectId": "IzKYx5",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "rendering on webxr virtual reality immersive devices"
 }

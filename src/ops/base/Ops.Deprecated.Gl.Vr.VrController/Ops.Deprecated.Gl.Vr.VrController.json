@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1558872106245
+        },
+        {
+            "message": "Ops.Gl.Vr.VrController renamed to Ops.Deprecated.Gl.Vr.VrController",
+            "author": "pandur",
+            "date": 1665557343854
         }
     ],
     "authorName": "pandur",

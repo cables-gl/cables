@@ -6,31 +6,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "update"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Bang"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invert",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }

@@ -91,9 +91,15 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.Geom2Tex2TEST"
+        "name": "Ops.Gl.Meshes.GeometryToTexture_v2"
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "bhWkpX",
+    "docs": {
+        "ports": []
+    }
 }

@@ -36,6 +36,11 @@
             "message": "Ops.User.pandur.CopyGeometry renamed to Ops.Gl.Geometry.CopyGeometry",
             "author": "pandur",
             "date": 1660469637701
+        },
+        {
+            "message": "Ops.Gl.Geometry.CopyGeometry renamed to Ops.Dev.Gl.Geometry.CopyGeometry",
+            "author": "pandur",
+            "date": 1665467727285
         }
     ],
     "collections": null,

@@ -14,7 +14,7 @@ inGeo.onChange = () =>
 
     let str = "# made with cables.gl".endl().endl();
 
-    str += "# " + JSON.stringify(geom.getInfo(), 4, true, 4);
+    str += "# " + JSON.stringify(geom.getInfo());
     str += "".endl();
     str += "".endl();
 
@@ -43,14 +43,24 @@ inGeo.onChange = () =>
     str += "".endl();
 
     // faces
-    for (let i = 0; i < geom.verticesIndices.length; i += 3)
+    if (geom.verticesIndices.length)
     {
-        str += "f ";
-        for (let j = 0; j < 3; j++)
+        for (let i = 0; i < geom.verticesIndices.length; i += 3)
         {
-            str += (geom.verticesIndices[i + j] + 1) + " ";
+            str += "f ";
+            for (let j = 0; j < 3; j++)
+            {
+                str += (geom.verticesIndices[i + j] + 1) + " ";
+            }
+            str += "".endl();
         }
-        str += "".endl();
+    }
+    else
+    {
+        for (let i = 0; i < geom.vertices.length / 3 - 1; i += 3)
+        {
+            str += "f " + i + " " + (i + 1) + " " + (i + 2) + " ".endl();
+        }
     }
 
     str += "".endl();

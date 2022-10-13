@@ -24,7 +24,7 @@ const
 op.setPortGroup("Segmentation", [inEnableSegmentation, inSmoothSegmentation, flipX, flipY, inUpdateSeg]);
 
 const pose = new Pose({ "locateFile": (file) =>
-    `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}` });
+{ return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`; } });
 
 const cgl = op.patch.cgl;
 let camera = null;
@@ -77,8 +77,6 @@ inEle.onChange = () =>
     {
         return;
     }
-    // console.log(el)
-    // op.log("init camera");
     camera = new Camera(el, {
         "onFrame": async () =>
         {

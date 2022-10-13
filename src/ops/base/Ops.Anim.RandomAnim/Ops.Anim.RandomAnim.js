@@ -8,7 +8,7 @@ const
     duration = op.inValue("duration", 0.5),
     pause = op.inValue("pause between", 0),
     next = op.outTrigger("Next"),
-    result = op.outValue("result"),
+    result = op.outNumber("result"),
     looped = op.outTrigger("Looped");
 
 const anim = new CABLES.Anim();

@@ -32,5 +32,8 @@
                 "text": "Set to `true` to display the console, set to `false` to hide it"
             }
         ]
-    }
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "TVIL7f"
 }

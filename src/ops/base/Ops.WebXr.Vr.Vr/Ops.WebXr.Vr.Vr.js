@@ -6,7 +6,7 @@ const
     inMainloop = op.inTrigger("Mainloop"),
     inStop = op.inTriggerButton("Stop"),
     inShowButton = op.inBool("Show Button", true),
-    inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");"),
+    inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\ntransform: translate(-50%,0);\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");", "inline-css"),
 
     inRender2Tex = op.inBool("Render to texture", false),
 
@@ -50,7 +50,8 @@ inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.g
 
 if (xr) xr.isSessionSupported("immersive-vr").then((r) =>
 {
-    console.log("xr detected", r);
+    outVr.set(true);
+
     if (r) initButton();
     else removeButton();
 });
@@ -102,10 +103,6 @@ function startVr()
 
                 if (xrSession)
                 {
-                    outVr.set(true);
-
-                    console.log("started vr session....");
-
                     await cgl.gl.makeXRCompatible();
 
                     let canvas = cgl.canvas;
@@ -118,8 +115,7 @@ function startVr()
             (err) =>
             {
                 // error....
-                console.log("Failed to start immersive AR session.");
-                console.log(err);
+                op.error(err);
             });
 }
 
@@ -129,8 +125,6 @@ function onXRFrame(hrTime, xrFrame)
 
     let xrSession = xrFrame.session;
     xrSession.requestAnimationFrame(onXRFrame);
-
-    // console.log(xrSession);
 
     try
     {
@@ -213,7 +207,7 @@ function onXRFrame(hrTime, xrFrame)
     }
     catch (e)
     {
-        console.error(e);
+        op.error(e);
         hadError = true;
     }
 }

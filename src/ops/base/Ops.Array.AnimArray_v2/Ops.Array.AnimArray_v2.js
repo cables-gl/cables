@@ -91,8 +91,6 @@ function ipMat(perc)
             result[i] = ip(arr1[i], arr2[i], perc);
         }
 
-        // console.log(Math.round(perc*100)/100);
-
         outArr.set(null);
         outArr.set(result);
     }

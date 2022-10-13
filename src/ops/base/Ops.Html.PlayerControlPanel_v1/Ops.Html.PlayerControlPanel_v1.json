@@ -10,5 +10,12 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "GbEqL-"
+    "exampleProjectId": "GbEqL-",
+    "changelog": [
+        {
+            "message": "Ops.TimeLine.TimeLineUI renamed to Ops.Html.PlayerControlPanel_v1",
+            "author": "pandur",
+            "date": 1665557071344
+        }
+    ]
 }

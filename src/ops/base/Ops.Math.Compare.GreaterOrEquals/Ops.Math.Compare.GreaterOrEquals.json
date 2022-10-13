@@ -31,8 +31,7 @@
         ],
         "name": "Ops.Math.Compare.GreaterOrEquals"
     },
-    "summary": "result is true if number 2 is greater or equals number 1",
-    "youtubeid": "",
+    "summary": "result is true if number 1 is greater or equals number 2",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -48,8 +47,11 @@
             },
             {
                 "name": "result",
-                "text": "True if number 2 is greater or equal to number 1"
+                "text": "True if number 1 is greater or equal to number 2"
             }
         ]
-    }
+    },
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": ""
 }
