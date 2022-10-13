@@ -101,5 +101,7 @@
     "exampleProjectId": "bhWkpX",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Convert vertices of a geometry to a data texture",
+    "youtubeid": "PrkdnENo8wQ,"
 }
