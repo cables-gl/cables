@@ -292,18 +292,14 @@ Geometry.prototype.merge = function (geom)
         if (this.isIndexed())
         {
             this.unIndex(false, true);
-            console.log("unindex myself");
         }
         if (geom.isIndexed())
         {
             const g = geom.copy();
             g.unIndex(false, true);
             geom = g;
-            console.log("unindex other...");
         }
     }
-
-    console.log("vertsverts", this._vertices.length, geom.vertices.length);
 
     const oldIndizesLength = this.verticesIndices.length;
     const vertLength = this._vertices.length / 3;
