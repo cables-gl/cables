@@ -147,13 +147,33 @@ function parse(str)
             const gVerts = [];
             const gNorms = [];
             const gTexCoords = [];
+            let isIndexed = true;
+
             for (let i = 0; i < o.indexVerts.length; i++)
             {
-                for (let j = 0; j < 3; j++)
+                if (isIndexed)
                 {
-                    gVerts.push(o.verts[o.indexVerts[i] * 3 + j]);
-                    if (o.indexNorms.length > 0)gNorms.push(o.vertNorms[o.indexNorms[i] * 3 + j]);
-                    if (o.indexTexcoords.length > 0 && j < 2)gTexCoords.push(o.texCoords[o.indexTexcoords[i] * 3 + j]);
+                    if (o.indexVerts[i] != o.indexNorms[i] != o.indexTexcoords[i])
+                    {
+                        isIndexed = false;
+                        break;
+                    }
+                }
+            }
+
+            for (let i = 0; i < o.indexVerts.length; i++)
+            {
+                if (isIndexed)
+                {
+                }
+                else
+                {
+                    for (let j = 0; j < 3; j++)
+                    {
+                        gVerts.push(o.verts[o.indexVerts[i] * 3 + j]);
+                        if (o.indexNorms.length > 0)gNorms.push(o.vertNorms[o.indexNorms[i] * 3 + j]);
+                        if (o.indexTexcoords.length > 0 && j < 2)gTexCoords.push(o.texCoords[o.indexTexcoords[i] * 3 + j]);
+                    }
                 }
             }
 
