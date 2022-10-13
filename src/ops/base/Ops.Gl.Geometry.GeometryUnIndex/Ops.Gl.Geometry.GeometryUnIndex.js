@@ -15,7 +15,7 @@ geometry.onChange = function ()
         }
 
         const newGeom = geom.copy();
-        newGeom.unIndex();
+        newGeom.unIndex(false, true);
         result.set(newGeom);
     }
     else result.set(null);
