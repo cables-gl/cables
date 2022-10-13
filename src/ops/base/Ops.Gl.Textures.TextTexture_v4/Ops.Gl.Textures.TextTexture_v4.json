@@ -192,7 +192,7 @@
     "coreLibs": [
         "cgl_wireframes"
     ],
-    "summary": "Generates a texture which reads Text",
+    "summary": "Generates a texture of Text using one of the font ops",
     "issues": "",
     "collections": [
         "drawText"
@@ -317,5 +317,6 @@
             }
         ]
     },
-    "exampleProjectId": "RZsPWU"
+    "exampleProjectId": "RZsPWU",
+    "caniusequery": ""
 }

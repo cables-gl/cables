@@ -40,6 +40,11 @@
             "message": "Ops.Exp.Gl.Shader.SetUniformValue renamed to Ops.Gl.Shader.SetUniformValue",
             "author": "pandur",
             "date": 1613548289481
+        },
+        {
+            "message": "Ops.Gl.Shader.SetUniformValue renamed to Ops.Gl.Shader.SetUniformFloat",
+            "author": "pandur",
+            "date": 1665557104603
         }
     ]
 }

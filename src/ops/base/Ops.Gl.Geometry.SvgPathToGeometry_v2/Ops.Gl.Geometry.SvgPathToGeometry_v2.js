@@ -46,7 +46,7 @@ inStr.onChange = () =>
     });
 
     // sort contours by descending area
-    polys.sort((a, b) => Math.abs(b.area) - Math.abs(a.area));
+    polys.sort((a, b) => { return Math.abs(b.area) - Math.abs(a.area); });
     // classify contours to find holes and their 'parents'
     const root = [];
     for (let i = 0; i < polys.length; ++i)
@@ -71,7 +71,7 @@ inStr.onChange = () =>
         }
     }
 
-    const totalPoints = polys.reduce((sum, p) => sum + p.points.length, 0);
+    const totalPoints = polys.reduce((sum, p) => { return sum + p.points.length; }, 0);
     const vertexData = new Float32Array(totalPoints * 2);
     let vertexCount = 0;
     const indices = [];
@@ -82,7 +82,7 @@ inStr.onChange = () =>
         const coords = [];
         const holes = [];
 
-        poly.points.forEach(({ x, y }) => coords.push(x, y));
+        poly.points.forEach(({ x, y }) => { return coords.push(x, y); });
 
         poly.children.forEach((child) =>
         {
@@ -90,15 +90,16 @@ inStr.onChange = () =>
             child.children.forEach(process);
 
             holes.push(coords.length / 2);
-            child.points.forEach(({ x, y }) => coords.push(x, y));
+            child.points.forEach(({ x, y }) => { return coords.push(x, y); });
         });
 
         // add vertex data
         vertexData.set(coords, vertexCount * 2);
         // add index data
-        earcut(coords, holes).forEach((i) => indices.push(i + vertexCount));
+        earcut(coords, holes).forEach((i) => { return indices.push(i + vertexCount); });
         vertexCount += coords.length / 2;
     }
+
     root.forEach(process);
 
     const finalVertexData = new Float32Array(totalPoints * 3);
@@ -123,23 +124,18 @@ inStr.onChange = () =>
     if (resc != 0)
     {
         const bounds = geom.getBounds();
-        console.log(bounds);
         for (let i = 0; i < finalVertexData.length / 3; i++)
         {
-            finalVertexData[i * 3 + 0] = (finalVertexData[i * 3 + 0] / (bounds.size[0]/2)) * resc;
-            finalVertexData[i * 3 + 1] = (finalVertexData[i * 3 + 1] / (bounds.size[0]/2)) * resc;
+            finalVertexData[i * 3 + 0] = (finalVertexData[i * 3 + 0] / (bounds.size[0] / 2)) * resc;
+            finalVertexData[i * 3 + 1] = (finalVertexData[i * 3 + 1] / (bounds.size[0] / 2)) * resc;
         }
         geom.setVertices(finalVertexData);
-
     }
 
     geom.mapTexCoords2d();
     geom.flipVertDir();
     geom.calculateNormals();
     geom.calcTangentsBitangents();
-
-    // console.log(vertexData);
-    // console.log(indices);
 
     outGeom.set(geom);
 };
@@ -174,7 +170,6 @@ function fromPathToArray(path)
         .trim()
         .split(/\s*,|\s+/);
 
-    // console.log(items);
     const segments = [];
     let currentCommand = "";
     let currentElement = {};
@@ -308,6 +303,3 @@ function cross(p1, p2)
 {
     return p1.x * p2.y - p1.y * p2.x;
 }
-
-
-

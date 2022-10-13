@@ -53,7 +53,6 @@ function update()
 
             let m = node.modelMatAbs();
             // const m=node.modelMatLocal();
-            // console.log(node.modelMatLocal())
 
             if (!worldspace)
             {

@@ -28,7 +28,7 @@
         ],
         "name": "Ops.Dev.ModuloVertexPosition"
     },
-    "summary": "clamp/restrict the vertex position to min/max values per axis",
+    "summary": "vertex shader modulo operation on vertex position ",
     "youtubeid": "",
     "issues": "",
     "collections": null,
@@ -36,7 +36,7 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RP4O73",
+    "exampleProjectId": "lMCl_8",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.ShaderEffects.ClampVertexPosition",
@@ -47,6 +47,11 @@
             "message": "Ops.User.pandur.ModuloVertexPosition renamed to Ops.Dev.ModuloVertexPosition",
             "author": "pandur",
             "date": 1658903801981
+        },
+        {
+            "message": "Ops.Dev.ModuloVertexPosition renamed to Ops.Gl.ShaderEffects.ModuloVertexPosition",
+            "author": "pandur",
+            "date": 1665471132819
         }
     ]
 }

@@ -126,8 +126,8 @@ function realReload(nocache)
                     height.set(newTex.height);
                     ratio.set(newTex.width / newTex.height);
 
-                    if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
-                    else op.setUiError("npot", null);
+                    // if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
+                    // else op.setUiError("npot", null);
 
                     if (tex)tex.delete();
                     tex = newTex;

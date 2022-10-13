@@ -22,7 +22,7 @@ inCapture.onTriggered = () =>
         CGL.Mesh.prototype.render = old;
         shouldCapture = false;
 
-        geom.unIndex(false, true);
+        // geom.unIndex(false, true);
 
         outGeom.set(null);
         outGeom.set(geom);
@@ -31,6 +31,13 @@ inCapture.onTriggered = () =>
 
 function meshCapture()
 {
+    if (!this._geom || !this._geom.copy)
+    {
+        console.log("nope...", this);
+        return;
+    }
+
+    console.log(this._geom.isIndexed(), this._geom.glPrimitive);
     const g = this._geom.copy();
     const normalMat = mat4.create();
     mat4.invert(normalMat, cgl.mMatrix);
@@ -56,5 +63,6 @@ function meshCapture()
         g.vertexNormals[i + 2] = vn[2];
     }
 
+    // g.unIndex();
     geom.merge(g);
 }

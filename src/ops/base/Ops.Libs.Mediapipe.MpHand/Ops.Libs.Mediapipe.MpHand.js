@@ -83,7 +83,6 @@ inMpResult.onChange = () =>
 
     let idx = 0;
 
-    // console.log(r);
     let found = false;
 
     if (r.multiHandedness)

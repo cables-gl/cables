@@ -9,10 +9,9 @@ const
     valueFalse = op.inValue("value false", 0),
     valueTrue = op.inValue("value true", 1),
     next = op.outTrigger("trigger"),
-    value = op.outValue("value"),
+    value = op.outNumber("value"),
     finished = op.outValueBool("finished"),
     finishedTrigger = op.outTrigger("Finished Trigger");
-
 
 const startTime = CABLES.now();
 op.toWorkPortsNeedToBeLinked(exe);
@@ -31,7 +30,6 @@ function setAnim()
 
     anim.setValue(now, oldValue);
 
-
     if (!bool.get())
     {
         if (dir.get() != "Only True") anim.setValue(now + duration.get(), valueFalse.get());
@@ -43,7 +41,6 @@ function setAnim()
         else anim.setValue(now, valueTrue.get());
     }
 }
-
 
 exe.onTriggered = function ()
 {

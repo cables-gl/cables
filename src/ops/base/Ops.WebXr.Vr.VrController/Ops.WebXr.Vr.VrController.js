@@ -72,7 +72,7 @@ inUpdate.onTriggered = () =>
 
                     cgl.popModelMatrix();
                 }
-                else console.log("vr controller: no controlpose transform?!");
+                else op.log("vr controller: no controlpose transform?!");
 
                 break;
             }

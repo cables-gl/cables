@@ -1,11 +1,10 @@
 const
-    inExec=op.inTrigger("Execute"),
-    inName=op.inString("Name"),
-    outNext=op.outTrigger("Childs"),
-    outUsed=op.outValue("Time Used")
-    ;
+    inExec = op.inTrigger("Execute"),
+    inName = op.inString("Name"),
+    outNext = op.outTrigger("Childs"),
+    outUsed = op.outNumber("Time Used");
 
-inExec.onTriggered=update;
+inExec.onTriggered = update;
 
 // var Measurement=function(_name)
 // {
@@ -17,7 +16,6 @@ inExec.onTriggered=update;
 //     this.colG=Math.floor(Math.random()*100)+128;
 //     this.colB=Math.floor(Math.random()*100)+128;
 // };
-
 
 // inExec.onLinkChanged=removeEle;
 // outNext.onLinkChanged=removeEle;
@@ -42,7 +40,6 @@ inExec.onTriggered=update;
 
 function update()
 {
-
     // if(!CGL.performanceMeasures||CGL.performanceMeasures.length===0)
     // {
 
@@ -58,9 +55,9 @@ function update()
 
     // CGL.currentPerfMeasurement.childs.push(theMeasure);
     // CGL.currentPerfMeasurement=theMeasure;
-    const startTime=performance.now();
+    const startTime = performance.now();
     outNext.trigger();
-    const used=performance.now()-startTime;
+    const used = performance.now() - startTime;
     // theMeasure.used=(theMeasure.used*0.8+used*0.2);
     // theMeasure.used=used;
     // theMeasure.lastTime=performance.now();
@@ -68,6 +65,3 @@ function update()
     // CGL.currentPerfMeasurement=prevMeasure;
     outUsed.set(used);
 }
-
-
-

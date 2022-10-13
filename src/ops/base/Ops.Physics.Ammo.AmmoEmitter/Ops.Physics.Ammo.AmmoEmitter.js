@@ -68,8 +68,6 @@ inActivate.onTriggered = () =>
 function setArrayTransformed(body, i, arrPos)
 {
     if (!body) return;
-    // if (!inActive.get()) return;
-    // console.log(body)
     let ms = body.ms;
     if (ms)
     {
@@ -209,7 +207,6 @@ inExec.onTriggered = () =>
     for (let i = 0; i < bodies.length; i++)
     {
         if (!bodies[i]) continue;
-        // console.log(bodies[i].ms);
         setArrayTransformed(bodies[i], i, arrPos);
     }
     outPos.set(null);
