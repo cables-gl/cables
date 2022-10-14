@@ -1,5 +1,6 @@
 const
-    inStr = op.inString("String");
+    inStr = op.inString("String"),
+    inPos = op.inFloatSlider("Scroll", 0);
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
@@ -17,25 +18,32 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.fillStyle = "#ccc";
 
     let padding = 4;
-    let offset = 0;
+
+    const lineHeight = 10;
 
     const lines = inStr.get().split("\n");
+    const numLines = Math.floor(layer.height / layer.scale / lineHeight);
 
-    for (let i = offset; i < offset + lines.length; i += 1)
+    let offset = Math.floor(inPos.get() * lines.length);
+
+    offset = Math.max(offset, 0);
+    offset = Math.min(offset, lines.length - numLines);
+
+    for (let i = offset; i < offset + numLines; i += 1)
     {
-        if (i > lines.length) continue;
+        if (i >= lines.length || i < 0) continue;
 
         ctx.fillStyle = "#888";
 
         ctx.fillText(i,
             layer.x / layer.scale + padding,
-            layer.y / layer.scale + 10 + (i - offset) * 10 + padding);
+            layer.y / layer.scale + lineHeight + (i - offset) * lineHeight + padding);
 
         ctx.fillStyle = "#ccc";
 
         ctx.fillText(lines[i],
             layer.x / layer.scale + padding + 30,
-            layer.y / layer.scale + 10 + (i - offset) * 10 + padding);
+            layer.y / layer.scale + lineHeight + (i - offset) * lineHeight + padding);
     }
 
     ctx.restore();

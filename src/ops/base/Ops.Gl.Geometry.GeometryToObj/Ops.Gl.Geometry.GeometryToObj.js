@@ -68,7 +68,7 @@ inGeo.onChange = () =>
         }
     }
 
-    str += "".endl();
+    // str += "".endl();
 
     outStr.set(str);
 };
