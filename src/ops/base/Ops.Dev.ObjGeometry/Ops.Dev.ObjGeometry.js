@@ -113,6 +113,10 @@ function parse(str)
             {
                 const parts = lines[i].split(" ");
                 parts.shift();
+                while (parts[parts.length - 1] == "")
+                {
+                    parts.pop();
+                }
 
                 if (o.prim == 0) o.prim = parts.length;
 
@@ -144,29 +148,36 @@ function parse(str)
 
         if (o.indexVerts.length > 0)
         {
-            const gVerts = [];
-            const gNorms = [];
-            const gTexCoords = [];
+            let gVerts = [];
+            let gNorms = [];
+            let gTexCoords = [];
             let isIndexed = true;
 
             for (let i = 0; i < o.indexVerts.length; i++)
             {
                 if (isIndexed)
                 {
-                    if (o.indexVerts[i] != o.indexNorms[i] != o.indexTexcoords[i])
+                    // console.log(o.indexVerts[i], o.indexNorms[i], o.indexTexcoords[i]);
+                    if (!(o.indexVerts[i] == o.indexNorms[i] && o.indexNorms[i] == o.indexTexcoords[i]))
                     {
+                        console.log("false");
+                        // console.log(o.indexVerts);
                         isIndexed = false;
                         break;
                     }
                 }
             }
 
-            for (let i = 0; i < o.indexVerts.length; i++)
+            console.log("isIndexed", isIndexed);
+            if (isIndexed)
             {
-                if (isIndexed)
-                {
-                }
-                else
+                geom.verticesIndices = o.indexVerts;
+                gNorms = o.vertNorms;
+                gTexCoords = o.texCoords;
+                gVerts = o.verts;
+            }
+            else
+                for (let i = 0; i < o.indexVerts.length; i++)
                 {
                     for (let j = 0; j < 3; j++)
                     {
@@ -175,7 +186,6 @@ function parse(str)
                         if (o.indexTexcoords.length > 0 && j < 2)gTexCoords.push(o.texCoords[o.indexTexcoords[i] * 3 + j]);
                     }
                 }
-            }
 
             geom.vertices = gVerts;
             geom.vertexNormals = gNorms;
