@@ -158,7 +158,7 @@ function setupMediaRecorder()
     {
         op.error(err);
         op.error("error mr constructor: ", err);
-        outError.set(err.msg);
+        outError.set(err.message);
         op.setUiError("contr", "MediaRecorder error: " + err.message);
     }
     if (mediaRecorder)

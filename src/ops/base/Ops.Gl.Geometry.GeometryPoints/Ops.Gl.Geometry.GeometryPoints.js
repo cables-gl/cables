@@ -1,10 +1,10 @@
 const
     geometry = op.inObject("Geometry"),
-    outVertices = op.outArray("Vertices", 3),
     outFaces = op.outArray("Faces", 3),
+    outVertices = op.outArray("Vertices", 3),
+    outNormals = op.outArray("Normals", 3),
     outTextcoords = op.outArray("TexCoords", 2),
     outVertexColors = op.outArray("Vertex Colors", 4),
-    outNormals = op.outArray("Normals", 3),
     outBiTangents = op.outArray("BiTangents", 3),
     outTangents = op.outArray("Tangents", 3);
 
