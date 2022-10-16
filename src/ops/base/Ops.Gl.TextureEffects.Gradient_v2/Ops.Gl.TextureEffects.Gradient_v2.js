@@ -48,6 +48,10 @@ r2.onChange = g2.onChange = b2.onChange = updateCol2;
 r3.onChange = g3.onChange = b3.onChange = updateCol3;
 r.onChange = g.onChange = b.onChange = updateCol;
 
+r2.onLinkChanged = g2.onLinkChanged = b2.onLinkChanged =
+r3.onLinkChanged = g3.onLinkChanged = b3.onLinkChanged =
+r.onLinkChanged = g.onLinkChanged = b.onLinkChanged = updateUi;
+
 updateCol();
 updateCol2();
 updateCol3();
@@ -57,6 +61,11 @@ inSrgb.onChange =
 inColSpace.onChange =
 smoothStep.onChange =
     gType.onChange = updateDefines;
+
+function updateUi()
+{
+    randomize.setUiAttribs({ "greyout": r2.isLinked() || g2.isLinked() || b2.isLinked() || r3.isLinked() || g3.isLinked() || b3.isLinked() || r.isLinked() || g.isLinked() || b.isLinked() });
+}
 
 function updateDefines()
 {
