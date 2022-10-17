@@ -20,14 +20,14 @@ let asp = 0;
 
 render.onTriggered = function ()
 {
-    const cgl = op.patch.cg;
+    const cg = op.patch.cg;
 
-    asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
+    asp = cg.getViewPort()[2] / cg.getViewPort()[3];
     if (!autoAspect.get())asp = aspect.get();
 
-    cgl.pushPMatrix();
+    cg.pushPMatrix();
     mat4.perspective(
-        cgl.pMatrix,
+        cg.pMatrix,
         fovY.get() * 0.0174533,
         asp,
         zNear.get(),
@@ -35,7 +35,7 @@ render.onTriggered = function ()
 
     trigger.trigger();
 
-    cgl.popPMatrix();
+    cg.popPMatrix();
 };
 
 function changed()

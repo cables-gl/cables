@@ -3,7 +3,6 @@ let trigger = op.outTrigger("trigger");
 let matrix = op.addOutPort(new CABLES.Port(op, "matrix", CABLES.OP_PORT_TYPE_ARRAY));
 
 let m = mat4.create();
-// let cgl = op.patch.cgl;
 
 render.onTriggered = function ()
 {

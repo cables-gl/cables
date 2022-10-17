@@ -13,7 +13,6 @@ op.setPortGroup("Position", [posX, posY, posZ]);
 op.setPortGroup("Scale", [scale]);
 op.setPortGroup("Rotation", [rotX, rotZ, rotY]);
 
-const cgl = op.patch.cgl;
 const vPos = vec3.create();
 const vScale = vec3.create();
 const transMatrix = mat4.create();
@@ -28,6 +27,8 @@ var rotChanged = true;
 
 render.onTriggered = function ()
 {
+    const cg = op.patch.cg;
+
     let updateMatrix = false;
     if (translationChanged)
     {
@@ -45,11 +46,11 @@ render.onTriggered = function ()
     }
     if (updateMatrix)doUpdateMatrix();
 
-    cgl.pushViewMatrix();
-    mat4.multiply(cgl.vMatrix, cgl.vMatrix, transMatrix);
+    cg.pushViewMatrix();
+    mat4.multiply(cg.vMatrix, cg.vMatrix, transMatrix);
 
     trigger.trigger();
-    cgl.popViewMatrix();
+    cg.popViewMatrix();
 
     if (op.isCurrentUiOp())
         gui.setTransformGizmo(
@@ -110,7 +111,6 @@ var rotChanged = function ()
 {
     rotChanged = true;
 };
-
 
 rotX.onChange = rotChanged;
 rotY.onChange = rotChanged;
