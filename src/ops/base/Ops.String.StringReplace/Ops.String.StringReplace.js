@@ -14,7 +14,6 @@ function update()
 {
     let str = "";
 
-    // if(inWhat.get()=="All") str=String(inStr.get()).replaceAll(inSearch.get(),inRepl.get());
     if (inWhat.get() == "All") str = String(inStr.get()).replace(new RegExp(inSearch.get(), "g"), inRepl.get());
     else str = String(inStr.get()).replace(inSearch.get(), inRepl.get());
 

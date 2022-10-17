@@ -81,11 +81,13 @@ const Geometry = function (name)
  */
 Geometry.prototype.clear = function ()
 {
-    this.vertices = new Float32Array([]);
+    this._vertices = new Float32Array([]);
     this.verticesIndices.length = 0;
     this.texCoords = new Float32Array([]);
     this.texCoordsIndices.length = 0;
     this.vertexNormals = new Float32Array([]);
+    this.tangents = [];
+    this.biTangents = [];
 };
 
 /**
@@ -285,14 +287,28 @@ Geometry.prototype.merge = function (geom)
 {
     if (!geom) return;
 
+    if (this.isIndexed() != geom.isIndexed())
+    {
+        if (this.isIndexed())
+        {
+            this.unIndex(false, true);
+        }
+        if (geom.isIndexed())
+        {
+            const g = geom.copy();
+            g.unIndex(false, true);
+            geom = g;
+        }
+    }
+
     const oldIndizesLength = this.verticesIndices.length;
-    const vertLength = this.vertices.length / 3;
+    const vertLength = this._vertices.length / 3;
 
     this.verticesIndices.length = this.verticesIndices.length + geom.verticesIndices.length;
     for (let i = 0; i < geom.verticesIndices.length; i++)
         this.verticesIndices[oldIndizesLength + i] = geom.verticesIndices[i] + vertLength;
 
-    this.vertices = UTILS.float32Concat(this.vertices, geom.vertices);
+    this.vertices = UTILS.float32Concat(this._vertices, geom.vertices);
     this.texCoords = UTILS.float32Concat(this.texCoords, geom.texCoords);
     this.vertexNormals = UTILS.float32Concat(this.vertexNormals, geom.vertexNormals);
     this.tangents = UTILS.float32Concat(this.tangents, geom.tangents);
@@ -612,6 +628,7 @@ Geometry.prototype.calcTangentsBitangents = function ()
 
 Geometry.prototype.isIndexed = function ()
 {
+    if (this._vertices.length == 0) return true;
     return this.verticesIndices.length != 0;
 };
 

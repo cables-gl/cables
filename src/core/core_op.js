@@ -1044,7 +1044,6 @@ const Op = function ()
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs));
         if (this.storage && Object.keys(this.storage).length > 0) op.storage = this.storage;
-        if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
 
         op.portsIn = [];

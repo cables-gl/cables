@@ -37,7 +37,6 @@ function meshCapture()
         return;
     }
 
-    console.log(this._geom.isIndexed(), this._geom.glPrimitive);
     const g = this._geom.copy();
     const normalMat = mat4.create();
     mat4.invert(normalMat, cgl.mMatrix);
