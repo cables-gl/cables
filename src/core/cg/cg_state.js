@@ -4,6 +4,13 @@ const CGState = function ()
 {
     CABLES.EventTarget.apply(this);
 
+
+    this._identView = vec3.create();
+    this._ident = vec3.create();
+    vec3.set(this._identView, 0, 0, -2);
+    vec3.set(this._ident, 0, 0, 0);
+
+
     /**
          * Current projection matrix
          * @memberof Context
@@ -215,6 +222,30 @@ const CGState = function ()
     this.getViewMatrixStateCount = function ()
     {
         return this._vMatrixStack.stateCounter;
+    };
+
+    this._startMatrixStacks = (identTranslate, identTranslateView) =>
+    {
+        identTranslate = identTranslate || this._ident;
+        identTranslateView = identTranslateView || this._identView;
+
+        mat4.perspective(this.pMatrix, 45, this.canvasWidth / this.canvasHeight, 0.1, 1000.0);
+
+        mat4.identity(this.mMatrix);
+        mat4.identity(this.vMatrix);
+        mat4.translate(this.mMatrix, this.mMatrix, identTranslate);
+        mat4.translate(this.vMatrix, this.vMatrix, identTranslateView);
+
+        this.pushPMatrix();
+        this.pushModelMatrix();
+        this.pushViewMatrix();
+    };
+
+    this._endMatrixStacks = () =>
+    {
+        this.popViewMatrix();
+        this.popModelMatrix();
+        this.popPMatrix();
     };
 };
 

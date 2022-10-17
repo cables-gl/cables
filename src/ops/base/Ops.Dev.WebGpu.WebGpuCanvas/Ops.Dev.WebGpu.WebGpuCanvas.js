@@ -43,8 +43,16 @@ if (!navigator.gpu)
 if (navigator.gpu)
     navigator.gpu.requestAdapter().then((adapter) =>
     {
+        if (!adapter)
+        {
+            op.warn("webgpu: could not get adapter...");
+            supported.set(false);
+            return;
+        }
         adapter.requestDevice().then((_device) =>
         {
+            canvas.style.border = "1px solid black";
+
             cgp.setCanvas(canvas);
             cgp.setSize(512, 256);
 
@@ -128,7 +136,7 @@ function frame()
         return;
     }
 
-    mat4.perspective(cgp.pMatrix, 45, canvas.clientWidth / canvas.clientHeight, 0.1, 1110.0);
+    // mat4.perspective(cgp.pMatrix, 45, canvas.clientWidth / canvas.clientHeight, 0.1, 1110.0);
     // mat4.copy(cgp.pMatrix, pm);
 
     const commandEncoder = device.createCommandEncoder();
@@ -150,8 +158,11 @@ function frame()
 
     op.patch.cg = cgp;
     // cgp.passEncoders = [];
+    cgp.renderStart();
 
     next.trigger();
+
+    cgp.renderEnd();
 
     // for(let i=0;i<cgp.passEncoders.length;i++)
 

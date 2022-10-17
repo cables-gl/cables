@@ -127,6 +127,13 @@ const lastPx = 0;
 render.onTriggered = function ()
 {
     const cgl = op.patch.cg;
+
+    if (!element)
+    {
+        setElement(cgl.canvas);
+        bind();
+    }
+
     cgl.pushViewMatrix();
 
     px = ip(px, percX);
@@ -280,7 +287,7 @@ function onMouseUp(e)
 
 function lockChange()
 {
-    const el = op.patch.cgl.canvas;
+    const el = op.patch.cg.canvas;
 
     if (document.pointerLockElement === el || document.mozPointerLockElement === el || document.webkitPointerLockElement === el)
     {
@@ -373,9 +380,6 @@ function unbind()
 }
 
 eye = circlePos(0);
-setElement(op.patch.cgl.canvas);
-
-bind();
 
 initialX.set(0.25);
 initialRadius.set(0.05);

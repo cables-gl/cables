@@ -435,16 +435,9 @@ const Context = function (_patch)
         return this._frameBufferStack[this._frameBufferStack.length - 1];
     };
 
-    const identView = vec3.create();
-    vec3.set(identView, 0, 0, 2);
-    const ident = vec3.create();
-    vec3.set(ident, 0, 0, 0);
 
     this.renderStart = function (cgl, identTranslate, identTranslateView)
     {
-        if (!identTranslate) identTranslate = ident;
-        if (!identTranslateView) identTranslateView = identView;
-
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
@@ -460,17 +453,9 @@ const Context = function (_patch)
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
-        mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
-        // mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
 
-        mat4.identity(cgl.mMatrix);
-        mat4.identity(cgl.vMatrix);
-        mat4.translate(cgl.mMatrix, cgl.mMatrix, identTranslate);
-        mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
+        this._startMatrixStacks(identTranslate, identTranslateView);
 
-        cgl.pushPMatrix();
-        cgl.pushModelMatrix();
-        cgl.pushViewMatrix();
 
         cgl.pushBlendMode(CONSTANTS.BLEND_MODES.BLEND_NORMAL, false);
 
@@ -491,9 +476,7 @@ const Context = function (_patch)
 
     this.renderEnd = function (cgl)
     {
-        cgl.popViewMatrix();
-        cgl.popModelMatrix();
-        cgl.popPMatrix();
+        this._endMatrixStacks();
 
         this.popDepthTest();
         this.popDepthWrite();

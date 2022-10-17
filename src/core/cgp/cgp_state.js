@@ -16,6 +16,21 @@ const Context = function (_patch)
     {
         return [0, 0, this.canvasWidth, this.canvasHeight];
     };
+
+
+    this.renderStart = function (cgl, identTranslate, identTranslateView)
+    {
+        this._startMatrixStacks(identTranslate, identTranslateView);
+
+        this.emitEvent("beginFrame");
+    };
+
+    this.renderEnd = function (cgl)
+    {
+        this._endMatrixStacks();
+
+        this.emitEvent("endFrame");
+    };
 };
 
 export { Context };
