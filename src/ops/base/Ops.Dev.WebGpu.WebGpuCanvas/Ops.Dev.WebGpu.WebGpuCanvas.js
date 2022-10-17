@@ -160,7 +160,11 @@ function frame()
     // cgp.passEncoders = [];
     cgp.renderStart();
 
+    const oldCgl = op.patch.cgl;
+    op.patch.cgl = null; // force crash if something tries to use it
     next.trigger();
+
+    op.patch.cgl = oldCgl;
 
     cgp.renderEnd();
 
