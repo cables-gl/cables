@@ -49,12 +49,12 @@ render.onTriggered = function ()
 
     if (updateMatrix) doUpdateMatrix();
 
-    const cgl = op.patch.cg;
-    cgl.pushModelMatrix();
-    mat4.multiply(cgl.mMatrix, cgl.mMatrix, transMatrix);
+    const cg = op.patch.cg;
+    cg.pushModelMatrix();
+    mat4.multiply(cg.mMatrix, cg.mMatrix, transMatrix);
 
     trigger.trigger();
-    cgl.popModelMatrix();
+    cg.popModelMatrix();
 
     if (CABLES.UI && CABLES.UI.showCanvasTransforms) gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
 

@@ -1,5 +1,4 @@
 const
-    cgl = op.patch.cgl,
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     matrix = op.outArray("matrix");
@@ -8,7 +7,7 @@ const m = mat4.create();
 
 render.onTriggered = function ()
 {
-    mat4.copy(m, cgl.mMatrix);
+    mat4.copy(m, op.patch.cg.mMatrix);
     matrix.set(null);
     matrix.set(m);
     trigger.trigger();
