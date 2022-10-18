@@ -17,6 +17,7 @@ let indicesBuffer;
 let geom = null;
 let pipeline;
 let renderPassDescriptor;
+let numIndices = 0;
 
 let vsUniformBuffer;
 let fsUniformBuffer;
@@ -56,8 +57,11 @@ inTrigger.onTriggered = () =>
         cgp.passEncoder.setVertexBuffer(0, positionBuffer);
         cgp.passEncoder.setVertexBuffer(1, normalBuffer);
         cgp.passEncoder.setVertexBuffer(2, texcoordBuffer);
-        cgp.passEncoder.setIndexBuffer(indicesBuffer, "uint16");
-        cgp.passEncoder.drawIndexed(geom.verticesIndices.length);
+        cgp.passEncoder.setIndexBuffer(indicesBuffer, "uint32");
+
+        cgp.passEncoder.drawIndexed(numIndices);
+        // else cgp.passEncoder.draw(geom.vertices.length );
+
         // passEncoder.end();
 
         // cgp.passEncoders.push(commandEncoder.finish());
@@ -93,7 +97,6 @@ function createShaderModule(device, code)
 
 function createBuffer(device, data, usage)
 {
-    console.log("createbuffer", data.byteLength, usage, data);
     const buffer = device.createBuffer({
         "size": data.byteLength,
         "usage": usage,
@@ -109,19 +112,27 @@ function rebuild()
 {
     geom = inGeom.get();
     if (!geom) return;
-    console.log(geom);
 
     positionBuffer = createBuffer(cgp.device, new Float32Array(geom.vertices), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
     normalBuffer = createBuffer(cgp.device, new Float32Array(geom.vertexNormals), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
     texcoordBuffer = createBuffer(cgp.device, new Float32Array(geom.texcoords), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
-    console.log(geom.verticesIndices);
 
-    indicesBuffer = createBuffer(cgp.device, new Uint16Array(geom.verticesIndices), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
+    let vi = geom.verticesIndices;
+    if (!geom.isIndexed())
+    {
+        vi = Array.from(Array(geom.vertices.length / 3).keys());
+    }
+
+    numIndices = vi.length;
+    indicesBuffer = createBuffer(cgp.device, new Uint32Array(vi), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
 
     const shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
     cgp.device.pushErrorScope("validation");
-    pipeline = cgp.device.createRenderPipeline({
+
+    console.log(geom.vertices.length / 3);
+
+    const pipelineCfg = {
         "layout": "auto",
         "vertex": {
             "module": shaderModule,
@@ -160,6 +171,12 @@ function rebuild()
         "primitive": {
             "topology": "triangle-list",
             "cullMode": "none",
+
+            // "point-list",
+            // "line-list",
+            // "line-strip",
+            // "triangle-list",
+            // "triangle-strip"
         },
         // "depthStencil": {
         //     "depthWriteEnabled": true,
@@ -171,7 +188,9 @@ function rebuild()
     //       count: canvasInfo.sampleCount,
     //     },
     // }),
-    });
+    };
+
+    pipeline = cgp.device.createRenderPipeline(pipelineCfg);
     const error = cgp.device.popErrorScope().then((error) =>
     {
         console.log("error", error);
