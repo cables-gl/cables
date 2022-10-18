@@ -18,6 +18,9 @@ canvas.style.position = "absolute";
 
 const pm = mat4.create();
 
+let depthTexture = null;
+let canvasInfo = {};
+
 console.log(op.patch.cgp);
 op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
 console.log(op.patch.cgp);
@@ -122,6 +125,17 @@ if (navigator.gpu)
             });
             cgp.pipeline = pipeline;
 
+            const sampleCount = 1;
+            const newDepthTexture = device.createTexture({
+                "size": [presentationSize[0], presentationSize[1]],
+                "format": "depth24plus",
+                "sampleCount": sampleCount,
+                "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+            });
+            depthTexture = newDepthTexture;
+            // canvasInfo.depthTextureView = depthTexture.createView();
+            cgp.canvasInfo = canvasInfo;
+
             requestAnimationFrame(frame);
         });
     });
@@ -142,6 +156,8 @@ function frame()
     const commandEncoder = device.createCommandEncoder();
     cgp.textureView = context.getCurrentTexture().createView();
 
+    cgp.canvasInfo.depthTextureView = depthTexture.createView();
+
     // cgp.textureView = textureView;
     const renderPassDescriptor = {
         "colorAttachments": [
@@ -152,6 +168,14 @@ function frame()
                 "storeOp": "store",
             },
         ],
+        "depthStencilAttachment": {
+            "view": cgp.canvasInfo.depthTextureView,
+            // "depthTexture": cgp.canvasInfo.depthTexture,
+
+            "depthClearValue": 1,
+            "depthLoadOp": "clear",
+            "depthStoreOp": "store",
+        },
     };
     cgp.renderPassDescriptor = renderPassDescriptor;
     cgp.passEncoder = commandEncoder.beginRenderPass(cgp.renderPassDescriptor);

@@ -19,6 +19,8 @@ let pipeline;
 let renderPassDescriptor;
 let numIndices = 0;
 
+let depthTexture, depthTextureView;
+
 let vsUniformBuffer;
 let fsUniformBuffer;
 let vsUniformValues;
@@ -46,7 +48,7 @@ inTrigger.onTriggered = () =>
             vsUniformValues.byteLength
         );
 
-        const colorTexture = cgp.context.getCurrentTexture();
+        // const colorTexture = cgp.context.getCurrentTexture();
         // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
 
         // const commandEncoder = cgp.device.createCommandEncoder();
@@ -87,9 +89,9 @@ function createShaderModule(device, code)
     //   throw new Error(error.message);
     // }
 
-    const error = cgp.device.popErrorScope().then((error) =>
+    device.popErrorScope().then((error) =>
     {
-        console.log(error);
+        if (error)console.log(error);
     });
 
     return shader;
@@ -130,8 +132,6 @@ function rebuild()
 
     cgp.device.pushErrorScope("validation");
 
-    console.log(geom.vertices.length / 3);
-
     const pipelineCfg = {
         "layout": "auto",
         "vertex": {
@@ -170,7 +170,7 @@ function rebuild()
         },
         "primitive": {
             "topology": "triangle-list",
-            "cullMode": "none",
+            "cullMode": "none", // back/none
 
             // "point-list",
             // "line-list",
@@ -178,11 +178,12 @@ function rebuild()
             // "triangle-list",
             // "triangle-strip"
         },
-        // "depthStencil": {
-        //     "depthWriteEnabled": true,
-        //     "depthCompare": "less",
-        //     "format": "depth24plus",
-        // },
+        "depthStencil": {
+            "depthWriteEnabled": true,
+            "depthCompare": "less",
+            "format": "depth24plus",
+        },
+
     // ...(canvasInfo.sampleCount > 1 && {
     //     multisample: {
     //       count: canvasInfo.sampleCount,
@@ -191,13 +192,13 @@ function rebuild()
     };
 
     pipeline = cgp.device.createRenderPipeline(pipelineCfg);
-    const error = cgp.device.popErrorScope().then((error) =>
+    cgp.device.popErrorScope().then((error) =>
     {
-        console.log("error", error);
+        if (error)console.log("error", error);
     });
-        //   if (error) {
-        //     throw new Error('failed to create pipeline');
-        //   }
+    //   if (error) {
+    //     throw new Error('failed to create pipeline');
+    //   }
 
     const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
     const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
@@ -223,7 +224,7 @@ function rebuild()
     fsUniformValues[0] = 1.0;
     const lightDirection = fsUniformValues.subarray(0, 3);
 
-    console.log("pipeline bindgrouplayout ", pipeline.getBindGroupLayout(0));
+    // console.log("pipeline bindgrouplayout ", pipeline.getBindGroupLayout(0));
 
     bindGroup = cgp.device.createBindGroup(
         {
@@ -261,32 +262,38 @@ function rebuild()
 
     const textureView = cgp.context.getCurrentTexture().createView();
 
-    renderPassDescriptor = {
-        "colorAttachments": [
-            {
-                "view": cgp.textureView, // Assigned later
-                // resolveTarget: undefined, // Assigned Later
-                // "clearValue": { "r": 0.1, "g": 0.5, "b": 0.5, "a": 1.0 },
-                "loadOp": "clear",
-                "storeOp": "store",
-            },
-        ],
-        // depthStencilAttachment: {
-        //   // view: undefined,  // Assigned later
-        //   depthClearValue: 1,
-        //   depthLoadOp: 'clear',
-        //   depthStoreOp: 'store',
-        // },
-    };
+    // renderPassDescriptor = {
+    //     "colorAttachments": [
+    //         {
+    //             "view": cgp.textureView, // Assigned later
+    //             "resolveTarget": undefined, // Assigned Later
+    //             // "clearValue": { "r": 0.1, "g": 0.5, "b": 0.5, "a": 1.0 },
+    //             "loadOp": "clear",
+    //             "storeOp": "store",
+    //         },
+    //     ],
+    //     // "depthStencilAttachment": {
+    //     //     "view": cgp.canvasInfo.depthTextureView,
+    //     //     // "depthTexture": cgp.canvasInfo.depthTexture,
+
+    //     //     "depthClearValue": 1,
+    //     //     "depthLoadOp": "clear",
+    //     //     "depthStoreOp": "store",
+    //     // },
+    // };
+    // console.log(cgp.canvasInfo.depthTextureView);
+
+    // const colorTexture = cgp.context.getCurrentTexture();
+    // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
 
     // if (canvasInfo.sampleCount === 1) {
     // const colorTexture = context.getCurrentTexture();
     // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
     // } else {
     //   renderPassDescriptor.colorAttachments[0].view = canvasInfo.renderTargetView;
-    //   renderPassDescriptor.colorAttachments[0].resolveTarget = context.getCurrentTexture().createView();
+    //   renderPassDescriptor.colorAttachments[0].resolveTarget = cgp.context.getCurrentTexture().createView();
     // }
-    // renderPassDescriptor.depthStencilAttachment.view = canvasInfo.depthTextureView;
+    // renderPassDescriptor.depthStencilAttachment.view = cgp.canvasInfo.depthTextureView;
 
     needsbuild = false;
 }

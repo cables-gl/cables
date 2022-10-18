@@ -40,7 +40,8 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
     var mvMatrix=vsUniforms.viewMatrix * vsUniforms.modelMatrix;
     vsOut.position = vsUniforms.projMatrix * mvMatrix * pos;
 
-    //vsOut.texcoord = v.texcoord;
+    vsOut.normal = v.normal;
+    vsOut.texcoord = v.texcoord;
     return vsOut;
 }
 
@@ -58,5 +59,7 @@ fn myFSMain(v: MyVSOutput) -> @location(0) vec4<f32>
     // var a_normal = normalize(v.normal);
     // var l = dot(a_normal, fsUniforms.lightDirection) * 0.5 + 0.5;
     // return vec4<f32>(diffuseColor.rgb * l, diffuseColor.a);
-    return vec4<f32>(fsUniforms.color, 1.0);
+    // return vec4<f32>(fsUniforms.color, 1.0);
+    return vec4<f32>(v.normal.xyz+fsUniforms.color , 1.0);
 }
+
