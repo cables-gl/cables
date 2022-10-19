@@ -348,10 +348,11 @@ function doRender()
 
     PBRShader.popTextures();
 
-    // console.log(PBRLightStack.length)
+    let numLights = 0;
+    if (cgl.frameStore.lightStack)numLights = cgl.frameStore.lightStack.length;
 
     if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) &&
-        !inLightmap.isLinked())
+        !inLightmap.isLinked() && numLights == 0)
 
     {
         useDefaultLight = true;
@@ -384,7 +385,6 @@ function doRender()
         setEnvironmentLighting(false);
     }
 
-    // if ((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length) )
     if (useDefaultLight)
     {
         const iViewMatrix = mat4.create();
