@@ -173,7 +173,12 @@ function parse(str)
             {
                 geom.verticesIndices = o.indexVerts;
                 gNorms = o.vertNorms;
-                gTexCoords = o.texCoords;
+
+                gTexCoords = [];
+                for (let i = 0; i < o.texCoords.length; i += 3)
+                {
+                    gTexCoords.push(o.texCoords[i + 0], o.texCoords[i + 1]);
+                }
                 gVerts = o.verts;
             }
             else
@@ -199,6 +204,8 @@ function parse(str)
         finalgeom.merge(geom);
         // finalgeom = geom;
     }
+
+    finalgeom.calcTangentsBitangents();
 
     outGeom.set(null);
     outGeom.set(finalgeom);
