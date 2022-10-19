@@ -9,7 +9,6 @@ import { CGState } from "../cg/cg_state";
  */
 const Context = function (_patch)
 {
-    // EventTarget.apply(this);
     CGState.apply(this);
 
     this.getViewPort = function ()

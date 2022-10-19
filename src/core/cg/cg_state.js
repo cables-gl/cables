@@ -1,15 +1,14 @@
 import { MatrixStack } from "../cgl/cgl_matrixstack";
+import { EventTarget } from "../eventtarget";
 
 const CGState = function ()
 {
-    CABLES.EventTarget.apply(this);
-
+    EventTarget.apply(this);
 
     this._identView = vec3.create();
     this._ident = vec3.create();
     vec3.set(this._identView, 0, 0, -2);
     vec3.set(this._ident, 0, 0, 0);
-
 
     /**
          * Current projection matrix
