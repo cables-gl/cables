@@ -29,6 +29,10 @@ let matModel;
 let matView;
 let matProj;
 
+let mesh = null;
+let shader = null;
+let pipe = null;
+
 inTrigger.onTriggered = () =>
 {
     cgp = op.patch.cgp;
@@ -54,7 +58,9 @@ inTrigger.onTriggered = () =>
         // const commandEncoder = cgp.device.createCommandEncoder();
         // const passEncoder = commandEncoder.beginRenderPass(cgp.renderPassDescriptor);
 
+        // cgp.passEncoder.setPipeline(pipeline);
         cgp.passEncoder.setPipeline(pipeline);
+
         cgp.passEncoder.setBindGroup(0, bindGroup);
         cgp.passEncoder.setVertexBuffer(0, positionBuffer);
         cgp.passEncoder.setVertexBuffer(1, normalBuffer);
@@ -128,77 +134,22 @@ function rebuild()
     numIndices = vi.length;
     indicesBuffer = createBuffer(cgp.device, new Uint32Array(vi), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
 
-    const shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
+    if (!shader)shader = new CGP.Shader(cgp, "testshad0r");
+
+    shader.shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
     cgp.device.pushErrorScope("validation");
 
-    const pipelineCfg = {
-        "layout": "auto",
-        "vertex": {
-            "module": shaderModule,
-            "entryPoint": "myVSMain",
-            "buffers": [
-                // position
-                {
-                    "arrayStride": 3 * 4, // 3 floats, 4 bytes each
-                    "attributes": [
-                        { "shaderLocation": 0, "offset": 0, "format": "float32x3" },
-                    ],
-                },
-                // normals
-                {
-                    "arrayStride": 3 * 4, // 3 floats, 4 bytes each
-                    "attributes": [
-                        { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
-                    ],
-                },
-                // texcoords
-                {
-                    "arrayStride": 2 * 4, // 2 floats, 4 bytes each
-                    "attributes": [
-                        { "shaderLocation": 2, "offset": 0, "format": "float32x2", },
-                    ],
-                },
-            ],
-        },
-        "fragment": {
-            "module": shaderModule,
-            "entryPoint": "myFSMain",
-            "targets": [
-                { "format": cgp.presentationFormat },
-            ],
-        },
-        "primitive": {
-            "topology": "triangle-list",
-            "cullMode": "none", // back/none
+    if (!pipe)pipe = new CGP.Pipeline(cgp);
 
-            // "point-list",
-            // "line-list",
-            // "line-strip",
-            // "triangle-list",
-            // "triangle-strip"
-        },
-        "depthStencil": {
-            "depthWriteEnabled": true,
-            "depthCompare": "less",
-            "format": "depth24plus",
-        },
+    const pipeCfg = pipe.getPiplelineObject(shader, mesh);
+    console.log(pipeCfg);
+    pipeline = cgp.device.createRenderPipeline(pipeCfg);
 
-    // ...(canvasInfo.sampleCount > 1 && {
-    //     multisample: {
-    //       count: canvasInfo.sampleCount,
-    //     },
-    // }),
-    };
-
-    pipeline = cgp.device.createRenderPipeline(pipelineCfg);
     cgp.device.popErrorScope().then((error) =>
     {
         if (error)console.log("error", error);
     });
-    //   if (error) {
-    //     throw new Error('failed to create pipeline');
-    //   }
 
     const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
     const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
@@ -237,11 +188,6 @@ function rebuild()
             ],
         });
 
-    // const world = mat4.rotationY(time);
-    // mat4.transpose(mat4.inverse(world), worldInverseTranspose);
-    // mat4.multiply(viewProjection, world, worldViewProjection);
-
-    // vec3.normalize([1, 8, -10], lightDirection);
     cgp.device.queue.writeBuffer(
         vsUniformBuffer,
         0,
@@ -257,43 +203,7 @@ function rebuild()
         fsUniformValues.byteLength
     );
 
-    // const textureView = context.getCurrentTexture().createView();
-    // cgp.textureView = textureView;
-
     const textureView = cgp.context.getCurrentTexture().createView();
-
-    // renderPassDescriptor = {
-    //     "colorAttachments": [
-    //         {
-    //             "view": cgp.textureView, // Assigned later
-    //             "resolveTarget": undefined, // Assigned Later
-    //             // "clearValue": { "r": 0.1, "g": 0.5, "b": 0.5, "a": 1.0 },
-    //             "loadOp": "clear",
-    //             "storeOp": "store",
-    //         },
-    //     ],
-    //     // "depthStencilAttachment": {
-    //     //     "view": cgp.canvasInfo.depthTextureView,
-    //     //     // "depthTexture": cgp.canvasInfo.depthTexture,
-
-    //     //     "depthClearValue": 1,
-    //     //     "depthLoadOp": "clear",
-    //     //     "depthStoreOp": "store",
-    //     // },
-    // };
-    // console.log(cgp.canvasInfo.depthTextureView);
-
-    // const colorTexture = cgp.context.getCurrentTexture();
-    // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
-
-    // if (canvasInfo.sampleCount === 1) {
-    // const colorTexture = context.getCurrentTexture();
-    // renderPassDescriptor.colorAttachments[0].view = colorTexture.createView();
-    // } else {
-    //   renderPassDescriptor.colorAttachments[0].view = canvasInfo.renderTargetView;
-    //   renderPassDescriptor.colorAttachments[0].resolveTarget = cgp.context.getCurrentTexture().createView();
-    // }
-    // renderPassDescriptor.depthStencilAttachment.view = cgp.canvasInfo.depthTextureView;
 
     needsbuild = false;
 }

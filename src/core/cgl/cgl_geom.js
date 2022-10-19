@@ -47,19 +47,15 @@ const Geometry = function (name)
 {
     this.name = name || "unknown";
     this._log = new Logger("cgl_geometry");
+
     this.faceVertCount = 3;
+    this.glPrimitive = null;
+    this._attributes = {};
+
     this._vertices = [];
     this.verticesIndices = [];
-    this.texCoords = new Float32Array();
-    this.texCoordsIndices = [];
-    this.vertexNormals = [];
-    this.tangents = [];
-    this.biTangents = [];
-    // this.barycentrics = [];
+
     this.morphTargets = [];
-    this.vertexColors = [];
-    this._attributes = {};
-    this.glPrimitive = null;
 
     Object.defineProperty(this, "vertices", {
         get()
@@ -69,6 +65,71 @@ const Geometry = function (name)
         set(v)
         {
             this.setVertices(v);
+        },
+    });
+
+    Object.defineProperty(this, "texCoords", {
+        get()
+        {
+            const att = this.getAttribute("texCoords");
+            if (!att) return [];
+            return att.data;
+        },
+        set(v)
+        {
+            this.setAttribute("texCoords", v, 2);
+        },
+    });
+
+    Object.defineProperty(this, "vertexNormals", {
+        get()
+        {
+            const att = this.getAttribute("vertexNormals");
+            if (!att) return [];
+            return att.data;
+        },
+        set(v)
+        {
+            this.setAttribute("vertexNormals", v, 3);
+        },
+    });
+
+    Object.defineProperty(this, "tangents", {
+        get()
+        {
+            const att = this.getAttribute("tangents");
+            if (!att) return [];
+            return att.data;
+        },
+        set(v)
+        {
+            this.setAttribute("tangents", v, 3);
+        },
+    });
+
+    Object.defineProperty(this, "bitangents", {
+        get()
+        {
+            const att = this.getAttribute("bitangents");
+            if (!att) return [];
+            return att.data;
+        },
+        set(v)
+        {
+            this.setAttribute("bitangents", v, 3);
+        },
+    });
+
+    Object.defineProperty(this, "vertexColors", {
+        get()
+        {
+            const att = this.getAttribute("vertexColors");
+            if (!att) return [];
+            return att.data;
+        },
+        set(v)
+        {
+            this.setAttribute("vertexColors", v, 3);
         },
     });
 };
@@ -84,7 +145,6 @@ Geometry.prototype.clear = function ()
     this._vertices = new Float32Array([]);
     this.verticesIndices.length = 0;
     this.texCoords = new Float32Array([]);
-    this.texCoordsIndices.length = 0;
     this.vertexNormals = new Float32Array([]);
     this.tangents = [];
     this.biTangents = [];
@@ -135,14 +195,25 @@ Geometry.prototype.setAttribute = function (name, arr, itemSize)
     else if (itemSize == 4) attrType = "vec4";
 
     const attr = {
-        name,
+        "name": name,
         "data": arr,
-        itemSize,
+        "itemSize": itemSize,
         "type": attrType,
     };
 
     this._attributes[name] = attr;
 };
+
+Geometry.prototype.copyAttribute = function (name, newgeom)
+{
+    const attr = this.getAttribute(name);
+
+    newgeom.setAttribute(name, new Float32Array(attr.data), attr.itemsize);
+
+    // console.log("copyattr", attr);
+    // return JSON.parse(JSON.stringify(attr));
+};
+
 
 /**
  * @function setVertices
@@ -338,40 +409,8 @@ Geometry.prototype.copy = function ()
         for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
     }
 
-    if (this.texCoords)
-    {
-        geom.texCoords = new Float32Array(this.texCoords.length);
-        for (i = 0; i < this.texCoords.length; i++) geom.texCoords[i] = this.texCoords[i];
-    }
+    for (i in this._attributes) this.copyAttribute(i, geom);
 
-    if (this.texCoordsIndices)
-    {
-        geom.texCoordsIndices.length = this.texCoordsIndices.length;
-        for (i = 0; i < this.texCoordsIndices.length; i++) geom.texCoordsIndices[i] = this.texCoordsIndices[i];
-    }
-
-    if (this.vertexNormals)
-    {
-        geom.vertexNormals = new Float32Array(this.vertexNormals.length);
-        for (i = 0; i < this.vertexNormals.length; i++) geom.vertexNormals[i] = this.vertexNormals[i];
-    }
-
-    if (this.tangents)
-    {
-        geom.tangents = [];
-        geom.tangents.length = this.tangents.length;
-        for (i = 0; i < this.tangents.length; i++) geom.tangents[i] = this.tangents[i];
-    }
-
-    if (this.biTangents)
-    {
-        geom.biTangents = [];
-        geom.biTangents.length = this.biTangents.length;
-        for (i = 0; i < this.biTangents.length; i++) geom.biTangents[i] = this.biTangents[i];
-    }
-
-    // geom.barycentrics.length = this.barycentrics.length;
-    // for (i = 0; i < this.barycentrics.length; i++) geom.barycentrics[i] = this.barycentrics[i];
 
     geom.morphTargets.length = this.morphTargets.length;
     for (i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];

@@ -7,8 +7,8 @@ let device = null;
 let context = null, pipeline = null;
 
 const canvas = document.createElement("canvas");
-document.body.appendChild(canvas);
 canvas.id = "webgpucanvas";
+canvas.setAttribute("tabindex", 4);
 canvas.style.width = 128 + "px";
 canvas.style.height = 128 + "px";
 canvas.style.right = 0 + "px";
@@ -16,14 +16,19 @@ canvas.style["z-index"] = "22222";
 canvas.style.border = "1px solid red";
 canvas.style.position = "absolute";
 
+const container = document.getElementById("cablescanvas");
+container.appendChild(canvas);
+
+canvas.addEventListener("blur", () => { if (supported.get())canvas.style.border = "1px solid black"; });
+canvas.addEventListener("focus", () => { if (supported.get())canvas.style.border = "1px solid white"; });
+
 const pm = mat4.create();
 
 let depthTexture = null;
 let canvasInfo = {};
 
-console.log(op.patch.cgp);
 op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
-console.log(op.patch.cgp);
+
 const cgp = op.patch.cgp;
 let stopped = false;
 op.onDelete = () =>
@@ -95,35 +100,35 @@ if (navigator.gpu)
                 "format": presentationFormat
             });
 
-            pipeline = device.createRenderPipeline({
-                "layout": "auto",
-                "vertex":
-                {
-                    "module": device.createShaderModule(
-                        {
-                            "code": attachments.tri_wgsl_vert,
-                        }),
-                    "entryPoint": "main",
-                },
-                "fragment":
-                {
-                    "module": device.createShaderModule(
-                        {
-                            "code": attachments.tri_wgsl_frag,
-                        }),
-                    "entryPoint": "main",
-                    "targets":
-                    [
-                        {
-                            "format": presentationFormat,
-                        },
-                    ],
-                },
-                "primitive": {
-                    "topology": "triangle-list",
-                },
-            });
-            cgp.pipeline = pipeline;
+            // pipeline = device.createRenderPipeline({
+            //     "layout": "auto",
+            //     "vertex":
+            //     {
+            //         "module": device.createShaderModule(
+            //             {
+            //                 "code": attachments.tri_wgsl_vert,
+            //             }),
+            //         "entryPoint": "main",
+            //     },
+            //     "fragment":
+            //     {
+            //         "module": device.createShaderModule(
+            //             {
+            //                 "code": attachments.tri_wgsl_frag,
+            //             }),
+            //         "entryPoint": "main",
+            //         "targets":
+            //         [
+            //             {
+            //                 "format": presentationFormat,
+            //             },
+            //         ],
+            //     },
+            //     "primitive": {
+            //         "topology": "triangle-list",
+            //     },
+            // });
+            // cgp.pipeline = pipeline;
 
             const sampleCount = 1;
             const newDepthTexture = device.createTexture({
