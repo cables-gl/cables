@@ -129,7 +129,7 @@ const Geometry = function (name)
         },
         set(v)
         {
-            this.setAttribute("vertexColors", v, 3);
+            this.setAttribute("vertexColors", v, 4);
         },
     });
 };

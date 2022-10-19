@@ -428,9 +428,9 @@ Mesh.prototype.setGeom = function (geom, removeRef)
     // this.updateTexCoords(this._geom);
     // this.updateNormals(this._geom);
 
-    // if (this._geom.vertexColors.length > 0)
+    // if (this._geom.vertexColors && this._geom.vertexColors.length > 0)
     // {
-    //     if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
+    //     // if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
     //     this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR, this._geom.vertexColors, 4);
     // }
 
