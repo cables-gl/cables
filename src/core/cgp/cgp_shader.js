@@ -1,4 +1,4 @@
-import Logger from "../../../../cables_ui/src/ui/utils/logger";
+import Logger from "../core_logger";
 import { simpleId } from "../utils";
 
 export default class Shader

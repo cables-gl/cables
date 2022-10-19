@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+// core logger
+
 export default class Logger
 {
     constructor(initiator)
