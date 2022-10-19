@@ -399,8 +399,6 @@ Geometry.prototype.copy = function ()
     geom.faceVertCount = this.faceVertCount;
     geom.glPrimitive = this.glPrimitive;
 
-    // geom.vertices.length=this.vertices.length;
-    // for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
     geom.setVertices(this._vertices.slice(0));
 
     if (this.verticesIndices)
@@ -411,12 +409,8 @@ Geometry.prototype.copy = function ()
 
     for (i in this._attributes) this.copyAttribute(i, geom);
 
-
     geom.morphTargets.length = this.morphTargets.length;
     for (i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];
-
-    geom.vertexColors.length = this.vertexColors.length;
-    for (i = 0; i < this.vertexColors.length; i++) geom.vertexColors[i] = this.vertexColors[i];
 
     return geom;
 };
