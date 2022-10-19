@@ -189,10 +189,19 @@ Geometry.prototype.getAttribute = function (name)
 Geometry.prototype.setAttribute = function (name, arr, itemSize)
 {
     let attrType = "";
+    if (!itemSize || itemSize > 4)
+    {
+        console.log("itemsize wrong?", itemSize, name);
+        this._log.stack("itemsize");
+
+        itemSize = 3;
+    }
+
     if (itemSize == 1) attrType = "float";
     else if (itemSize == 2) attrType = "vec2";
     else if (itemSize == 3) attrType = "vec3";
     else if (itemSize == 4) attrType = "vec4";
+
 
     const attr = {
         "name": name,
@@ -207,11 +216,7 @@ Geometry.prototype.setAttribute = function (name, arr, itemSize)
 Geometry.prototype.copyAttribute = function (name, newgeom)
 {
     const attr = this.getAttribute(name);
-
-    newgeom.setAttribute(name, new Float32Array(attr.data), attr.itemsize);
-
-    // console.log("copyattr", attr);
-    // return JSON.parse(JSON.stringify(attr));
+    newgeom.setAttribute(name, new Float32Array(attr.data), attr.itemSize);
 };
 
 
@@ -394,7 +399,6 @@ Geometry.prototype.merge = function (geom)
  */
 Geometry.prototype.copy = function ()
 {
-    let i = 0;
     const geom = new Geometry(this.name + " copy");
     geom.faceVertCount = this.faceVertCount;
     geom.glPrimitive = this.glPrimitive;
@@ -404,13 +408,13 @@ Geometry.prototype.copy = function ()
     if (this.verticesIndices)
     {
         geom.verticesIndices.length = this.verticesIndices.length;
-        for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
+        for (let i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
     }
 
-    for (i in this._attributes) this.copyAttribute(i, geom);
+    for (let i in this._attributes) this.copyAttribute(i, geom);
 
     geom.morphTargets.length = this.morphTargets.length;
-    for (i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];
+    for (let i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];
 
     return geom;
 };
