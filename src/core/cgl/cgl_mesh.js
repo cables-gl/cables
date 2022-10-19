@@ -425,21 +425,29 @@ Mesh.prototype.setGeom = function (geom, removeRef)
     this.updateVertices(this._geom);
     this.setVertexIndices(this._geom.verticesIndices);
 
-    this.updateTexCoords(this._geom);
-    this.updateNormals(this._geom);
+    // this.updateTexCoords(this._geom);
+    // this.updateNormals(this._geom);
 
-    if (this._geom.hasOwnProperty("tangents") && this._geom.tangents && this._geom.tangents.length > 0) this.setAttribute("attrTangent", this._geom.tangents, 3);
-    if (this._geom.hasOwnProperty("biTangents") && this._geom.biTangents && this._geom.biTangents.length > 0) this.setAttribute("attrBiTangent", this._geom.biTangents, 3);
-    if (this._geom.vertexColors.length > 0)
-    {
-        if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
-        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR, this._geom.vertexColors, 4);
-    }
+    // if (this._geom.vertexColors.length > 0)
+    // {
+    //     if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
+    //     this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR, this._geom.vertexColors, 4);
+    // }
 
     if (this.addVertexNumbers) this._setVertexNumbers();
 
     const geomAttribs = this._geom.getAttributes();
-    for (const index in geomAttribs) this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
+
+    const attribAssoc = {
+        "texCoords": CONSTANTS.SHADER.SHADERVAR_VERTEX_TEXCOORD,
+        "vertexNormals": CONSTANTS.SHADER.SHADERVAR_VERTEX_NORMAL,
+        "vertexColors": CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR,
+        "tangents": "attrTangent",
+        "biTangents": "attrBiTangent",
+    };
+
+    for (const index in geomAttribs)
+        this.setAttribute(attribAssoc[index] || index, geomAttribs[index].data, geomAttribs[index].itemSize);
 
     if (removeRef)
     {
@@ -450,12 +458,8 @@ Mesh.prototype.setGeom = function (geom, removeRef)
 Mesh.prototype._preBind = function (shader)
 {
     for (let i = 0; i < this._attributes.length; i++)
-    {
         if (this._attributes[i].cb)
-        {
             this._attributes[i].cb(this._attributes[i], this._geom, shader);
-        }
-    }
 };
 
 Mesh.prototype._checkAttrLengths = function ()

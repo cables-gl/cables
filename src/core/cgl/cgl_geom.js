@@ -107,16 +107,16 @@ const Geometry = function (name)
         },
     });
 
-    Object.defineProperty(this, "bitangents", {
+    Object.defineProperty(this, "biTangents", {
         get()
         {
-            const att = this.getAttribute("bitangents");
+            const att = this.getAttribute("biTangents");
             if (!att) return [];
             return att.data;
         },
         set(v)
         {
-            this.setAttribute("bitangents", v, 3);
+            this.setAttribute("biTangents", v, 3);
         },
     });
 
