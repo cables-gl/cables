@@ -99,7 +99,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Lottie.LottieTexturePlayer"
+        "name": "Ops.Libs.Lottie.LottieTexturePlayer"
     },
     "summary": "Play a Lottie animation in a texture",
     "issues": "",
