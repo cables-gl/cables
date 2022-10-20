@@ -2,24 +2,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Request Fullscreen"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exit Fullscreen"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Element index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Is Fullscreen",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Html.FullscreenMode"

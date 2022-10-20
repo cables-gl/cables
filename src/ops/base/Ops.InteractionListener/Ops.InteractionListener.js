@@ -3,7 +3,7 @@ const
     events = op.outValue("Events");
 
 let timeout = 0;
-letlistenerElement = null;
+let listenerElement = null;
 
 addListeners();
 

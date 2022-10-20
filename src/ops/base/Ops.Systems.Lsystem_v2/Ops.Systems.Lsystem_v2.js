@@ -29,7 +29,7 @@ const outTrigger = op.outTrigger("Out trigger geometry");
 const lineTrigger = op.outTrigger("Line/point trigger");
 // const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
-const outMax = op.outValue("Max Size");
+const outMax = op.outNumber("Max Size");
 const stringOut = op.outString("Final generated string");
 
 const seed = op.inValue("random seed");
@@ -166,7 +166,6 @@ const empty = vec3.create();
 function extract(str, pos)
 {
     const slicedSentence = str.slice(pos);
-
 
     let output = "";
     let parsedNumber = "";
