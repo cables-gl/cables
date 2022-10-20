@@ -1,6 +1,7 @@
-let interval = op.inValue("interval");
-let trigger = op.outTrigger("trigger");
-let active = op.inValueBool("Active", true);
+const
+    interval = op.inValue("interval"),
+    trigger = op.outTrigger("trigger"),
+    active = op.inValueBool("Active", true);
 
 active.onChange = function ()
 {
@@ -13,7 +14,7 @@ active.onChange = function ()
 };
 
 interval.set(1000);
-var timeOutId = -1;
+let timeOutId = -1;
 
 function exec()
 {
