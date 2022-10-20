@@ -463,8 +463,9 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
 
     if (op)
     {
-        if (uiAttribs && uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
-        if (uiAttribs && uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
+        uiAttribs = uiAttribs || {};
+        if (uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
+        if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
         uiAttribs.subPatch = uiAttribs.subPatch || 0;
 
         op.uiAttr(uiAttribs);
