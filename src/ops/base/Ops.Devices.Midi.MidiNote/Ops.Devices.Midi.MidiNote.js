@@ -34,8 +34,8 @@ op.setPortGroup("Note", [noteDropdown, normalizeDropdown, gateType]);
 /* OUT */
 const eventOut = op.outObject("MIDI Event Out");
 const triggerOut = op.outTrigger("Trigger Out");
-const currentNoteOut = op.outValue("Current Note");
-const velocityOut = op.outValue("Velocity");
+const currentNoteOut = op.outNumber("Current Note");
+const velocityOut = op.outNumber("Velocity");
 const gateOut = op.outValueBool("Gate");
 const arrayOut = op.outArray("Velocity Array");
 arrayOut.set(velocityArray);

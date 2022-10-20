@@ -1,20 +1,19 @@
+const
+    number = op.inValue("Number"),
+    doAdd = op.inTriggerButton("Add"),
+    doReset = op.inTriggerButton("Reset"),
+    result = op.outNumber("Result");
 
-var number=op.inValue("Number");
-var doAdd=op.inTriggerButton("Add");
-var doReset=op.inTriggerButton("Reset");
+let value = 0;
 
-var result=op.outValue("Result");
-
-var value=0;
-
-doAdd.onTriggered=function()
+doAdd.onTriggered = function ()
 {
-    value+=number.get();
+    value += number.get();
     result.set(value);
 };
 
-doReset.onTriggered=function()
+doReset.onTriggered = function ()
 {
-    value=0;
+    value = 0;
     result.set(value);
 };

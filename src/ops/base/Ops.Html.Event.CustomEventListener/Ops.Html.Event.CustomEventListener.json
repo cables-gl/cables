@@ -1,38 +1,41 @@
 {
-    "updated": 1517604659933,
     "authorName": "tim",
     "id": "0e299bb2-d9e8-4b95-9dd5-ad730c26a791",
     "created": 1517603369892,
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             },
             {
-                "type": "0",
-                "name": "Event Name"
+                "type": 0,
+                "name": "Event Name",
+                "subType": "string"
             },
             {
-                "type": "0",
-                "name": "Use Capture"
+                "type": 0,
+                "name": "Use Capture",
+                "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Prevent Default"
+                "type": 0,
+                "name": "Prevent Default",
+                "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Stop Propagation"
+                "type": 0,
+                "name": "Stop Propagation",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Event Trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event Object"
             }
         ],

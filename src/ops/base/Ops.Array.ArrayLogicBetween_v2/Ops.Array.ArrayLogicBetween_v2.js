@@ -1,47 +1,46 @@
 const
-    inArray=op.inArray("Array"),
-    inMin=op.inFloat("Min",0),
-    inMax=op.inFloat("Max",0.5),
-    inPass=op.inBool("pass value when true",false),
-    outArray=op.outArray("Result");
+    inArray = op.inArray("Array"),
+    inMin = op.inFloat("Min", 0),
+    inMax = op.inFloat("Max", 0.5),
+    inPass = op.inBool("pass value when true", false),
+    outArray = op.outArray("Result");
 
-inArray.onChange=
-inMin.onChange=
-inMax.onChange=
-inPass.onChange=
+inArray.onChange =
+inMin.onChange =
+inMax.onChange =
+inPass.onChange =
 function update()
 {
-    var arr=inArray.get();
-    if(!arr)return;
+    let arr = inArray.get();
+    if (!arr) return;
 
-var pass=inPass.get();
+    let pass = inPass.get();
+    const min = inMin.get();
+    const max = inMax.get();
 
-    const min=inMin.get();
-    const max=inMax.get();
+    let newArr = [];
+    newArr.length = arr.length;
 
-    var newArr=[];
-    newArr.length=arr.length;
-
-    if(!pass)
+    if (!pass)
     {
-        for(var i=0;i<arr.length;i++)
+        for (var i = 0; i < arr.length; i++)
         {
-            if(arr[i]>min && arr[i]<max)
+            if (arr[i] > min && arr[i] < max)
             {
-                newArr[i]=1.0;
+                newArr[i] = 1.0;
             }
-            else newArr[i]=0.0;
+            else newArr[i] = 0.0;
         }
     }
     else
     {
-        for(var i=0;i<arr.length;i++)
+        for (var i = 0; i < arr.length; i++)
         {
-            if(arr[i]>min && arr[i]<max)
+            if (arr[i] > min && arr[i] < max)
             {
-                newArr[i]=arr[i];
+                newArr[i] = arr[i];
             }
-            else newArr[i]=0.0;
+            else newArr[i] = 0.0;
         }
     }
     outArray.set(null);

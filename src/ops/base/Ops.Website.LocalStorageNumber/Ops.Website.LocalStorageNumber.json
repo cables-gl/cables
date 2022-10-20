@@ -34,7 +34,7 @@
             {
                 "type": 0,
                 "name": "Storage Support",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Website.LocalStorageNumber"

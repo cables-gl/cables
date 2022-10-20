@@ -1,12 +1,14 @@
-const exe0 = op.inTriggerButton("0");
-const exe1 = op.inTriggerButton("1");
-const exe2 = op.inTriggerButton("2");
-const exe3 = op.inTriggerButton("3");
-const exe4 = op.inTriggerButton("4");
-const exe5 = op.inTriggerButton("5");
-const exe6 = op.inTriggerButton("6");
-const exe7 = op.inTriggerButton("7");
-const number = op.outValue("number");
+const
+    exe0 = op.inTriggerButton("0"),
+    exe1 = op.inTriggerButton("1"),
+    exe2 = op.inTriggerButton("2"),
+    exe3 = op.inTriggerButton("3"),
+    exe4 = op.inTriggerButton("4"),
+    exe5 = op.inTriggerButton("5"),
+    exe6 = op.inTriggerButton("6"),
+    exe7 = op.inTriggerButton("7"),
+    number = op.outNumber("number");
+
 number.changeAlways = true;
 const outTrig = op.outTrigger("Triggered");
 

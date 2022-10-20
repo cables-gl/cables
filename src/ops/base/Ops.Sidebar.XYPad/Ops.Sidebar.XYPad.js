@@ -19,8 +19,8 @@ const siblingsPort = op.outObject("Children");
 defaultValuePortX.setUiAttribs({ "hidePort": true, "greyout": true });
 defaultValuePortY.setUiAttribs({ "hidePort": true, "greyout": true });
 
-const outX = op.outValue("X", 0.0);
-const outY = op.outValue("Y", 0.0);
+const outX = op.outNumber("X", 0.0);
+const outY = op.outNumber("Y", 0.0);
 
 const el = document.createElement("div");
 el.dataset.op = op.id;

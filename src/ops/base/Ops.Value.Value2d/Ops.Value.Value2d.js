@@ -1,14 +1,14 @@
 const
-    exe=op.inTrigger("exe"),
-    x=op.inValueFloat("value x"),
-    y=op.inValueFloat("value y"),
-    resultX=op.outValue("result x"),
-    resultY=op.outValue("result y");
+    exe = op.inTrigger("exe"),
+    x = op.inValueFloat("value x"),
+    y = op.inValueFloat("value y"),
+    resultX = op.outNumber("result x"),
+    resultY = op.outNumber("result y");
 
-exe.onTriggered=exec;
+exe.onTriggered = exec;
 
-x.onChange=exec;
-y.onChange=exec;
+x.onChange = exec;
+y.onChange = exec;
 
 function frame(time)
 {
@@ -18,7 +18,6 @@ function frame(time)
 
 function exec()
 {
-    if(resultX.get()!=x.get()) resultX.set(x.get());
-    if(resultY.get()!=y.get()) resultY.set(y.get());
+    if (resultX.get() != x.get()) resultX.set(x.get());
+    if (resultY.get() != y.get()) resultY.set(y.get());
 }
-

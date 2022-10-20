@@ -1,8 +1,8 @@
 const
-    val=op.inValue("Value"),
-    result=op.outValue("Result",false);
+    val = op.inValue("Value"),
+    result = op.outBoolNum("Result", false);
 
-val.onChange=function()
+val.onChange = function ()
 {
-    result.set(val.get()==1);
+    result.set(val.get() == 1);
 };

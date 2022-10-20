@@ -1,22 +1,22 @@
 const
     inArray = op.inArray("Array In"),
-    inValue = op.inValue("Value",2.0),
+    inValue = op.inValue("Value", 2.0),
     outArray = op.outArray("Array Out");
 
-var newArr = [];
+let newArr = [];
 outArray.set(newArr);
 inArray.onChange =
-inValue.onChange = inArray.onChange = function()
+inValue.onChange = inArray.onChange = function ()
 {
-    var arr = inArray.get();
-    if(!arr)return;
+    let arr = inArray.get();
+    if (!arr) return;
 
-    var modulo = inValue.get();
+    let modulo = inValue.get();
 
-    if(newArr.length != arr.length) newArr.length = arr.length;
+    if (newArr.length != arr.length) newArr.length = arr.length;
 
-    var i = 0;
-    for(i = 0;i < arr.length;i++)
+    let i = 0;
+    for (i = 0; i < arr.length; i++)
     {
         newArr[i] = arr[i] % modulo;
     }

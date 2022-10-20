@@ -5,16 +5,16 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Boolean in",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Boolean out",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Templates.PortsBooleanExample"

@@ -3,24 +3,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "number1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "number2",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Math.Compare.Smaller"
+        "name": "Ops.Math.Compare.LessThan"
     },
     "docs": {
         "ports": [
@@ -38,7 +38,6 @@
             }
         ]
     },
-    "updated": 1540919866847,
     "authorName": "pandur",
     "id": "04fd113f-ade1-43fb-99fa-f8825f8814c0",
     "created": 1540919866860,

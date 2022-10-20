@@ -8,56 +8,56 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vertical Swipe",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vertical Pan",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Press"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Press Up"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Pan Left"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Pan Right"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Swipe Left"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Swipe Right"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Swipe Up"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Swipe Down"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event"
             }
         ],

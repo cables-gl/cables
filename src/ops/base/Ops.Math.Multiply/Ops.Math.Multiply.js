@@ -1,6 +1,7 @@
-const number1 = op.inValueFloat("number1", 1);
-const number2 = op.inValueFloat("number2", 2);
-const result = op.outValue("result");
+const
+    number1 = op.inValueFloat("number1", 1),
+    number2 = op.inValueFloat("number2", 2),
+    result = op.outNumber("result");
 
 op.setTitle("*");
 

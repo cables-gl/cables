@@ -17,24 +17,25 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "wrap index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "filter index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.Array3ToTexture"

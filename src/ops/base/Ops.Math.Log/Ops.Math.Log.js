@@ -1,9 +1,9 @@
-const number=op.inValueFloat("number");
-const result=op.outValue("result");
+const number = op.inValueFloat("number");
+const result = op.outNumber("result");
 
-number.onChange=function()
+number.onChange = function ()
 {
-    var r=Math.log( number.get() );
-    if(isNaN(r))r=0;
+    let r = Math.log(number.get());
+    if (isNaN(r))r = 0;
     result.set(r);
 };

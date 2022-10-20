@@ -1,25 +1,22 @@
-// input
-var value = op.inValue('Value');
+const
+    value = op.inValue("Value");
+phase = op.inValue("Phase", 0.0);
+mul = op.inValue("Frequency", 1.0);
+amplitude = op.inValue("Amplitude", 1.0);
+invert = op.inValueBool("asine", false);
+result = op.outNumber("Result");
 
-var phase = op.inValue('Phase', 0.0);
-var mul = op.inValue('Frequency', 1.0);
-var amplitude = op.inValue('Amplitude', 1.0);
-var invert = op.inValueBool("asine", false);
+let calculate = Math.tan;
 
-// output
-var result = op.outValue('Result');
-
-var calculate = Math.tan;
-
-value.onChange=function()
+value.onChange = function ()
 {
     result.set(
-        amplitude.get() * calculate( ( value.get()*mul.get() ) + phase.get() )
+        amplitude.get() * calculate((value.get() * mul.get()) + phase.get())
     );
 };
 
-invert.onChange = function()
+invert.onChange = function ()
 {
-    if(invert.get()) calculate = Math.atan;
+    if (invert.get()) calculate = Math.atan;
     else calculate = Math.tan;
-}
+};

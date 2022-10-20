@@ -1,19 +1,19 @@
 {
     "summary": "Triggers next only after value has changed to `true`",
-    "updated": 1518604076462,
     "authorName": "pandur",
     "id": "385197e1-8b34-4d1c-897f-d1386d99e3b3",
     "created": 1518604076114,
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Value"
+                "type": 0,
+                "name": "Value",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],

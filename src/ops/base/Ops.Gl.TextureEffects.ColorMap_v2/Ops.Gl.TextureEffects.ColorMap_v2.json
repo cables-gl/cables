@@ -57,7 +57,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.ColorMapV2"
+        "name": "Ops.Gl.TextureEffects.ColorMap_v2"
     },
     "docs": {
         "ports": []

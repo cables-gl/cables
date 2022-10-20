@@ -12,53 +12,53 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Play"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Pause"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "rewind"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Set current time",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "play trigger"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "pause trigger"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "rewind trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "is Playing",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "set time (seconds)",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "current time",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "current frame",
                 "subType": "number"
             }

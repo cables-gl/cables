@@ -5,7 +5,7 @@ const
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     tfilter = op.inValueSelect("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
     textureOut = op.outTexture("Texture"),
-    outLoaded = op.outValueBool("Loaded");
+    outLoaded = op.outBoolNum("Loaded");
 
 tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;

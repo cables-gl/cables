@@ -46,7 +46,7 @@
                 "name": "Path String"
             }
         ],
-        "name": "Ops.Dev.OpentypeToSvgPath"
+        "name": "Ops.Libs.OpenType.OpentypeToSvgPath"
     },
     "summary": "get svg path from (OTF) OpentypeFont using the opentype library",
     "issues": "",

@@ -9,7 +9,7 @@ const
     bool7 = op.inValueBool("bool 8"),
     bool8 = op.inValueBool("bool 9"),
     bool9 = op.inValueBool("bool 10"),
-    result = op.outValueBool("result");
+    result = op.outBoolNum("result");
 
 bool0.onChange =
     bool1.onChange =

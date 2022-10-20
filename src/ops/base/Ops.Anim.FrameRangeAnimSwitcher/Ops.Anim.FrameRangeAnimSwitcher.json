@@ -5,84 +5,84 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "easing",
-                "subType": "string"
+                "type": 0,
+                "name": "easing index",
+                "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 0",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 3",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 4",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 5",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 6",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 7",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 8",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 9",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time Fade",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time 2",
                 "subType": "number"
             }

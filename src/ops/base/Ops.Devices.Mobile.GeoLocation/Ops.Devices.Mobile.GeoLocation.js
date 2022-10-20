@@ -1,7 +1,7 @@
 const
-    outSupported = op.outValue("Browser Support", navigator.geolocation != false),
-    outLat = op.outValue("Latitude"),
-    outLon = op.outValue("Longitude"),
+    outSupported = op.outBoolNum("Browser Support", navigator.geolocation != false),
+    outLat = op.outNumber("Latitude"),
+    outLon = op.outNumber("Longitude"),
     outData = op.outObject("Data");
 
 if (navigator.geolocation && navigator.geolocation.watchPosition)

@@ -22,19 +22,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value In",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pass Through",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value Out",
                 "subType": "number"
             }

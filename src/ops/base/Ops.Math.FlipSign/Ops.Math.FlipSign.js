@@ -1,12 +1,11 @@
-
 const
-    inval=op.inValueFloat("Value",1),
-    result=op.outValue("Result");
+    inval = op.inValueFloat("Value", 1),
+    result = op.outNumber("Result");
 
-inval.onChange=update;
+inval.onChange = update;
 update();
 
 function update()
 {
-    result.set(inval.get()*-1);
+    result.set(inval.get() * -1);
 }

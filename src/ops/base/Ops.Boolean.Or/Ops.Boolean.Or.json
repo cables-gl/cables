@@ -57,7 +57,7 @@
             {
                 "type": 0,
                 "name": "result",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Boolean.Or"

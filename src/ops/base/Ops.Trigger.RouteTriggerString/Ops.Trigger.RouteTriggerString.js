@@ -2,7 +2,7 @@ const NUM_PORTS = 24;
 const exePort = op.inTriggerButton("Execute");
 const switchPort = op.inString("Switch Value");
 const nextTriggerPort = op.outTrigger("Next Trigger");
-const valueOutPort = op.outValue("Switched Index");
+const valueOutPort = op.outNumber("Switched Index");
 
 let index = -1;
 

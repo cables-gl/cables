@@ -1,17 +1,17 @@
-var inVal=op.inValue("Value");
+const
+    inVal = op.inValue("Value"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y");
 
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-
-inVal.onChange=update;
+inVal.onChange = update;
 
 function update()
 {
-    var t=inVal.get();
+    let t = inVal.get();
 
-    var x = Math.cos(t) * Math.pow(Math.exp(Math.cos(t)) - 2 * Math.cos(4 * t) - Math.sin(t / 12) , 2);
-    var y = Math.sin(t) * Math.pow(Math.exp(Math.cos(t)) - 2 * Math.cos(4 * t) - Math.sin(t / 12) , 2);
-    
+    let x = Math.cos(t) * Math.pow(Math.exp(Math.cos(t)) - 2 * Math.cos(4 * t) - Math.sin(t / 12), 2);
+    let y = Math.sin(t) * Math.pow(Math.exp(Math.cos(t)) - 2 * Math.cos(4 * t) - Math.sin(t / 12), 2);
+
     outX.set(x);
     outY.set(y);
 }

@@ -59,7 +59,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.ArrayPack4Simple"
+        "name": "Ops.Array.ArrayPack4Simple"
     },
     "summary": "Packs 3 individual arrays into an array3 - without needing a trigger",
     "issues": "",

@@ -5,9 +5,9 @@ const
     zNear = op.inValue("frustum near", -100),
     zFar = op.inValue("frustum far", 100),
     trigger = op.outTrigger("trigger"),
-    outRatio = op.outValue("Ratio"),
-    outWidth = op.outValue("Width"),
-    outHeight = op.outValue("Height");
+    outRatio = op.outNumber("Ratio"),
+    outWidth = op.outNumber("Width"),
+    outHeight = op.outNumber("Height");
 const cgl = op.patch.cgl;
 
 render.onTriggered = function ()

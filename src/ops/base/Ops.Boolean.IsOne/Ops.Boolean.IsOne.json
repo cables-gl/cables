@@ -2,19 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Boolean.isOne"
+        "name": "Ops.Boolean.IsOne"
     },
     "summary": "Returns `true` if input value is `1`",
     "docs": {
@@ -29,7 +29,6 @@
             }
         ]
     },
-    "updated": 1542699252373,
     "authorName": "pandur",
     "id": "695d35e2-ffe6-498d-9242-12dc4bcb3c2d",
     "created": 1542699231847

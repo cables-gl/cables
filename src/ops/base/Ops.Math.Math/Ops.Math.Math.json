@@ -12,24 +12,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "number 0",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "number 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "math mode index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }

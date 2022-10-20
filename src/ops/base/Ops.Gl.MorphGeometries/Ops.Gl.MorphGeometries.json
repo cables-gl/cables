@@ -6,31 +6,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 1"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 2"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fade",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normals",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],

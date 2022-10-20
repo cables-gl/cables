@@ -2,12 +2,12 @@ let inTime = op.inValue("Time");
 let inStr = op.inString("Frames");
 let inLoop = op.inValueBool("Loop");
 let inRewind = op.inTriggerButton("Rewind");
-let outValue = op.outValue("result time");
+let outValue = op.outNumber("result time");
 let outArr = op.outArray("Expanded Frames");
-let finished = op.outValue("Finished", false);
+let finished = op.outBoolNum("Finished", false);
 let finishedTrigger = op.outTrigger("Finished Trigger");
-let outAnimLength = op.outValue("Anim Length");
-let outProgress = op.outValue("Progress");
+let outAnimLength = op.outNumber("Anim Length");
+let outProgress = op.outNumber("Progress");
 
 let anim = new CABLES.Anim();
 let FPS = 30;

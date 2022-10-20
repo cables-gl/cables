@@ -42,7 +42,7 @@
                 "name": "Result Array"
             }
         ],
-        "name": "Ops.User.pandur.EaseArray"
+        "name": "Ops.Array.EaseArray"
     },
     "summary": "apply easing curve to numbers in an array",
     "issues": "",

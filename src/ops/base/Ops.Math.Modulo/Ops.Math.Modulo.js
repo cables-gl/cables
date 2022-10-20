@@ -1,18 +1,17 @@
-const result = op.outValue("result");
-const number1 = op.inValueFloat("number1");
-const number2 = op.inValueFloat("number2");
-const pingpong = op.inValueBool("pingpong");
+const
+    number1 = op.inValueFloat("number1", 1),
+    number2 = op.inValueFloat("number2", 2),
+    pingpong = op.inValueBool("pingpong"),
+    result = op.outNumber("result");
 
-// pointer to function
 let calculateFunction = calculateModule;
 
-number1.onChange = exec;
+number1.onChange =
 number2.onChange = exec;
 
-number1.set(1);
-number2.set(2);
-
 pingpong.onChange = updatePingPong;
+
+exec();
 
 function exec()
 {
@@ -35,10 +34,6 @@ function calculatePingPong(i, n)
     i %= cycle;
     if (i >= n) return cycle - i;
     else return i;
-
-    // let r = ((n1 % n2) + n2) % n2 * 2;
-    // if (r > n2) return n2 * 2.0 - r;
-    // else return r;
 }
 
 function updatePingPong()

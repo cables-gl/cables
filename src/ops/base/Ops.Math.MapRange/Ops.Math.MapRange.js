@@ -5,7 +5,7 @@ const
     new_min = op.inValueFloat("new min", -1),
     new_max = op.inValueFloat("new max", 1),
     easing = op.inValueSelect("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear"),
-    result = op.outValue("result", 0);
+    result = op.outNumber("result", 0);
 
 op.setPortGroup("Input Range", [old_min, old_max]);
 op.setPortGroup("Output Range", [new_min, new_max]);

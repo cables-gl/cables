@@ -2,8 +2,8 @@ const
     inKey = op.inString("Key"),
     inValue = op.inFloat("Number"),
     inStore = op.inTriggerButton("Store"),
-    outValue = op.outValue("Stored Number"),
-    outSupported = op.outBool("Storage Support", true);
+    outValue = op.outNumber("Stored Number"),
+    outSupported = op.outBoolNum("Storage Support", true);
 
 inKey.onChange = updateOutput;
 inStore.onTriggered = storeValue;

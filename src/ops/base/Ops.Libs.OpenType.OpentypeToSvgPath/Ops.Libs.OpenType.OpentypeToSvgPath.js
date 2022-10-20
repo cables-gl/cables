@@ -22,8 +22,6 @@ inFont.onChange = async function ()
 
     for (let i = 0; i < paths.length; i++)
     {
-        // console.log(paths[i]);
-
         for (let j = 0; j < paths[i].commands.length; j++)
         {
             if (paths[i].commands[j].hasOwnProperty("x"))
@@ -34,8 +32,5 @@ inFont.onChange = async function ()
         str += paths[i].toPathData();
     }
 
-    // console.log(str);
-
-    // const pathStr = path.toPathData(8);
     outPathStr.set(str);
 };

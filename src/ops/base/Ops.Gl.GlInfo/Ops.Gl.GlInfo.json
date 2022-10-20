@@ -50,14 +50,12 @@
                 "name": "Extensions"
             },
             {
-                "type": 0,
-                "name": "Vendor",
-                "subType": "number"
+                "type": 5,
+                "name": "Vendor"
             },
             {
-                "type": 0,
-                "name": "Renderer",
-                "subType": "number"
+                "type": 5,
+                "name": "Renderer"
             }
         ],
         "name": "Ops.Gl.GlInfo"

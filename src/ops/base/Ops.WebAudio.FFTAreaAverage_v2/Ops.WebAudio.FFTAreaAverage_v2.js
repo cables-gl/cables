@@ -10,7 +10,7 @@ const
     drawTex = op.inValueBool("Create Texture", true),
     inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, 128),
     texOut = op.outTexture("Texture Out", null, "texture"),
-    value = op.outValue("Area Average Volume");
+    value = op.outNumber("Area Average Volume");
 
 op.setPortGroup("Area Settings", [x, y, w, h]);
 op.setPortGroup("Texture Settings", [drawTex, inCanvasSize]);

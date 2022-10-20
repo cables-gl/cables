@@ -1,23 +1,22 @@
+const
+    inVal = op.inValue("Delta"),
 
-let inVal = op.inValue("Delta");
+    snapVals = op.inArray("Snap at Values"),
+    snapDist = op.inValue("Snap Distance"),
+    snapDistRelease = op.inValue("Snap Distance Release"),
+    inSlow = op.inValue("Slowdown", 0.4),
+    inBlock = op.inValue("Block Input after snap"),
+    inReset = op.inTriggerButton("Reset"),
+    inMin = op.inValue("Min", 0),
+    inMax = op.inValue("Max", 0),
 
-let snapVals = op.inArray("Snap at Values");
-let snapDist = op.inValue("Snap Distance");
-let snapDistRelease = op.inValue("Snap Distance Release");
-let inSlow = op.inValue("Slowdown", 0.4);
-let inBlock = op.inValue("Block Input after snap");
-let inReset = op.inTriggerButton("Reset");
-let inMin = op.inValue("Min", 0);
-let inMax = op.inValue("Max", 0);
+    inMul = op.inValue("Value Mul", 1),
+    inEnabled = op.inValueBool("Enabled", true),
 
-let inMul = op.inValue("Value Mul", 1);
-let inEnabled = op.inValueBool("Enabled", true);
-
-let outVal = op.outValue("Result");
-let outDist = op.outValue("Distance");
-let outSnapped = op.outValue("Snapped");
-let outWasSnapped = op.outValue("was snapped");
-
+    outVal = op.outNumber("Result"),
+    outDist = op.outNumber("Distance"),
+    outSnapped = op.outBoolNum("Snapped"),
+    outWasSnapped = op.outBoolNum("was snapped");
 
 inVal.onChange = update;
 inVal.changeAlways = true;
@@ -31,7 +30,6 @@ let lastValue = -1;
 let snappedArr = [];
 
 snapVals.onChange = checkError;
-
 
 inReset.onTriggered = function ()
 {
@@ -57,7 +55,6 @@ function checkError()
         setTimeout(update, 500);
     }
 
-
     snappedArr = [];
     for (let i = 0; i < snapVals.length; i++)
     {
@@ -73,7 +70,6 @@ function update()
     let d = 999999999;
     let snapvalue = 0;
     let currentIndex = -1;
-
 
     for (let i = 0; i < snaps.length; i++)
     {
@@ -164,7 +160,6 @@ function update()
         if (val > inMax.get())val = inMax.get();
         else if (val < inMin.get())val = inMin.get();
     }
-
 
     outVal.set(val);
     lastValue = val;

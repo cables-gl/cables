@@ -1,5 +1,4 @@
 {
-    "updated": 1511653358404,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f1c76976-4c8f-43a5-a9c7-6e4c7d21c749",
@@ -7,22 +6,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Number"
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Add"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Result"
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.AddUp"

@@ -4,7 +4,7 @@ const
     mul = op.inValue("frequency", 1.0),
     amplitude = op.inValue("amplitude", 1.0),
     invert = op.inValueBool("asine", false),
-    result = op.outValue("result");
+    result = op.outNumber("result");
 
 let calculate = Math.sin;
 

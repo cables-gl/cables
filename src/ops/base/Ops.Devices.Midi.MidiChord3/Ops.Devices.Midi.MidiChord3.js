@@ -39,8 +39,8 @@ op.setPortGroup("", [learn, reset]);
 const eventOut = op.outObject("MIDI Event Out");
 const triggerOut = op.outTrigger("Trigger Out");
 
-const noteIndexOut1 = op.outValue("Note Out 1");
-const velocityOut1 = op.outValue("Velocity 1");
+const noteIndexOut1 = op.outNumber("Note Out 1");
+const velocityOut1 = op.outNumber("Velocity 1");
 const gateOut1 = op.outValueBool("Gate 1");
 
 const out1 = {
