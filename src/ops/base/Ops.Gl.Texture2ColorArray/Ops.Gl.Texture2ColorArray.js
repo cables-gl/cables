@@ -5,7 +5,8 @@ const
     inNormalize = op.inSwitch("Normalize", ["0-255", "0-1", "-1-1"], "0-255"),
     outTrigger = op.outTrigger("trigger"),
     outColors = op.outArray("Colors"),
-    outIsFloatingPoint = op.outValue("Floating Point");
+    outIsFloatingPoint = op.outBoolNum("Floating Point");
+
 let
     fb = null,
     pixelData = null,

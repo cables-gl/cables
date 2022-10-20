@@ -10,7 +10,7 @@ const
     width = op.outNumber("width"),
     height = op.outNumber("height"),
     loading = op.outBoolNum("loading"),
-    ratio = op.outValue("Aspect Ratio");
+    ratio = op.outNumber("Aspect Ratio");
 
 flip.set(false);
 unpackAlpha.set(false);
