@@ -1,5 +1,7 @@
 import { MatrixStack } from "../cgl/cgl_matrixstack";
+import { CGP } from "../cgp";
 import { EventTarget } from "../eventtarget";
+import { CG } from "./cg_constants";
 
 const CGState = function ()
 {
@@ -246,7 +248,12 @@ const CGState = function ()
         this.popModelMatrix();
         this.popPMatrix();
     };
-};
 
+    this.createMesh = function (geom, glPrimitive)
+    {
+        if (this.gApi === CG.GAPI_WEBGL) return new CGL.Mesh(this, geom, glPrimitive);
+        else if (this.gApi === CG.GAPI_WEBGPU) return new CGP.Mesh(this, geom, glPrimitive);
+    };
+};
 
 export { CGState };

@@ -11,6 +11,8 @@ const Context = function (_patch)
 {
     CGState.apply(this);
 
+    this.gApi = CGL.GAPI_WEBGPU;
+
     this.getViewPort = function ()
     {
         return [0, 0, this.canvasWidth, this.canvasHeight];

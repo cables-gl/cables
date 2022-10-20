@@ -42,6 +42,7 @@ const CABLES = Object.assign(
     base64,
     utils,
     anim,
+    CONSTANTS.CG,
     CONSTANTS.ANIM,
     PatchConnections,
     CONSTANTS.PORT,

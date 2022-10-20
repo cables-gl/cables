@@ -1,19 +1,29 @@
 {
-    "id": "fc5718d6-11a5-496e-8f16-1c78b1a2824c",
+    "id": "82bb2f8a-77f4-4218-a3ae-8f158f1b7fb1",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
             "date": 1587023107369
+        },
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Rectangle_v2",
+            "author": "pandur",
+            "date": 1666259954804
+        },
+        {
+            "message": "Ops.User.pandur.Rectangle_v3 renamed to Ops.Dev.Graphics.Meshes.Rectangle_v3",
+            "author": "pandur",
+            "date": 1666261275845
         }
     ],
     "authorName": "pandur",
-    "created": 1587023114851,
+    "created": 1666259954804,
     "layout": {
         "portsIn": [
             {
                 "type": 1,
-                "name": "render"
+                "name": "Trigger"
             },
             {
                 "type": 0,
@@ -41,6 +51,12 @@
             },
             {
                 "type": 0,
+                "name": "axis index",
+                "group": "Pivot",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "num columns",
                 "group": "Structure",
                 "subType": "integer"
@@ -53,19 +69,14 @@
             },
             {
                 "type": 0,
-                "name": "axis index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Active",
+                "name": "render",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
-                "name": "trigger"
+                "name": "next"
             },
             {
                 "type": 2,
@@ -73,7 +84,7 @@
                 "objType": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Rectangle_v2"
+        "name": "Ops.Dev.Graphics.Meshes.Rectangle_v3"
     },
     "summary": "draw a rectangle (plane, square)",
     "issues": "",

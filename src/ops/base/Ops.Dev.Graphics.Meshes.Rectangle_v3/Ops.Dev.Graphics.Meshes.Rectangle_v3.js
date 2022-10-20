@@ -1,29 +1,25 @@
 const
-    render = op.inTrigger("render"),
-    trigger = op.outTrigger("trigger"),
+    render = op.inTrigger("Trigger"),
+    trigger = op.outTrigger("next"),
     width = op.inValue("width", 1),
     height = op.inValue("height", 1),
-    pivotX = op.inSwitch("pivot x", ["left", "center", "right"]),
-    pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"]),
+    pivotX = op.inSwitch("pivot x", ["left", "center", "right"], "center"),
+    pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"], "center"),
+    axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
     nColumns = op.inValueInt("num columns", 1),
     nRows = op.inValueInt("num rows", 1),
-    axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
-    active = op.inValueBool("Active", true),
+    doRender = op.inValueBool("render", true),
     geomOut = op.outObject("geometry", null, "geometry");
 
 geomOut.ignoreValueSerialize = true;
 
-const cgl = op.patch.cgl;
-axis.set("xy");
-pivotX.set("center");
-pivotY.set("center");
+const geom = new CGL.Geometry("rectangle");
 
-op.setPortGroup("Pivot", [pivotX, pivotY]);
+op.setPortGroup("Pivot", [pivotX, pivotY, axis]);
 op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
 
-const geom = new CGL.Geometry("rectangle");
 let mesh = null;
 let needsRebuild = false;
 
@@ -34,20 +30,33 @@ axis.onChange =
     height.onChange =
     nRows.onChange =
     nColumns.onChange = rebuildLater;
-rebuild();
 
 function rebuildLater()
 {
     needsRebuild = true;
 }
 
+render.onLinkChanged = () =>
+{
+    if (!trigger.isLinked())
+    {
+        if (mesh) mesh.dispose();
+        mesh = null;
+        geomOut.set(null);
+    }
+};
+
 op.preRender =
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
     if (needsRebuild)rebuild();
-    if (active.get() && mesh) mesh.render(cgl.getShader());
+    if (doRender.get() && mesh) mesh.render(op.patch.cg.getShader());
     trigger.trigger();
+};
+
+op.onDelete = function ()
+{
+    if (mesh)mesh.dispose();
 };
 
 function rebuild()
@@ -99,13 +108,13 @@ function rebuild()
             {
                 norms.push(0, 1, 0);
                 tangents.push(1, 0, 0);
-                biTangents.push(0, 0, 1);
+                biTangents.push(0, 1, 0);
             }
             else if (a == "xy")
             {
                 norms.push(0, 0, 1);
-                tangents.push(-1, 0, 0);
-                biTangents.push(0, -1, 0);
+                tangents.push(1, 0, 0);
+                biTangents.push(0, 1, 0);
             }
         }
     }
@@ -140,15 +149,12 @@ function rebuild()
 
     if (numColumns * numRows > 64000)geom.unIndex();
 
-    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
+    const cgl = op.patch.cgl;
+
+    if (!mesh) mesh = op.patch.cgl.createMesh(geom);
     else mesh.setGeom(geom);
 
     geomOut.set(null);
     geomOut.set(geom);
     needsRebuild = false;
 }
-
-op.onDelete = function ()
-{
-    if (mesh)mesh.dispose();
-};

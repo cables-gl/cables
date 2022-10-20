@@ -19,6 +19,8 @@ const Context = function (_patch)
     // EventTarget.apply(this);
     CGState.apply(this);
 
+    this.gApi = CGL.GAPI_WEBGL;
+
     this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
     this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 

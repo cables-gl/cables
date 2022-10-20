@@ -1,21 +1,19 @@
 const
-    render = op.inTrigger("render"),
+    render = op.inTrigger("Trigger"),
     radius = op.inValue("radius", 0.5),
     innerRadius = op.inValueSlider("innerRadius", 0),
     segments = op.inValueInt("segments", 40),
     percent = op.inValueSlider("percent", 1),
     steps = op.inValue("steps", 0),
     invertSteps = op.inValueBool("invertSteps", false),
-    mapping = op.inSwitch("mapping", ["flat", "round"]),
+    mapping = op.inSwitch("mapping", ["flat", "round"], "flat"),
     drawSpline = op.inValueBool("Spline", false),
-    inDraw = op.inValueBool("Draw", true),
-    trigger = op.outTrigger("trigger"),
+    doRender = op.inValueBool("Render", true),
+    trigger = op.outTrigger("next"),
     geomOut = op.outObject("geometry", null, "geometry");
 
 op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);
-
-mapping.set("flat");
 
 mapping.onChange =
     segments.onChange =
@@ -27,7 +25,6 @@ mapping.onChange =
     drawSpline.onChange = calcLater;
 
 geomOut.ignoreValueSerialize = true;
-const cgl = op.patch.cgl;
 
 let geom = new CGL.Geometry("circle");
 let mesh = null;
@@ -44,8 +41,19 @@ op.preRender = () =>
     renderMesh();
 };
 
+render.onLinkChanged = () =>
+{
+    if (!trigger.isLinked())
+    {
+        if (mesh) mesh.dispose();
+        mesh = null;
+        geomOut.set(null);
+    }
+};
+
 function renderMesh()
 {
+    const cgl = op.patch.cg;
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
     if (needsCalc)calc();
@@ -55,7 +63,7 @@ function renderMesh()
 
     if (drawSpline.get()) shader.glPrimitive = cgl.gl.LINE_STRIP;
 
-    if (inDraw.get())mesh.render(shader);
+    if (mesh && doRender.get())mesh.render(shader);
     trigger.trigger();
 
     shader.glPrimitive = oldPrim;
@@ -151,7 +159,7 @@ function calc()
             texCoords.push(posxTexCoord, posyTexCoord, oldPosXTexCoord, oldPosYTexCoord, posxTexCoordIn, posyTexCoordIn);
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
-            biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0);
+            biTangents.push(0, -1, 0, 0, -1, 0, 0, -1, 0);
 
             oldPosXTexCoord = posxTexCoord;
             oldPosYTexCoord = posyTexCoord;
@@ -225,9 +233,8 @@ function calc()
                     1, 0, 0, 1, 0, 0, 1, 0, 0
                 );
                 biTangents.push(
-                    0, 1, 0, 0, 1, 0, 0, 1, 0,
-                    0, 1, 0, 0, 1, 0, 0, 1, 0
-                );
+                    0, -1, 0, 0, -1, 0, 0, -1, 0,
+                    0, -1, 0, 0, -1, 0, 0, -1, 0);
             }
 
             oldPosXTexCoordIn = posxTexCoordIn;
@@ -257,8 +264,7 @@ function calc()
 
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();
-    mesh = null;
-    mesh = new CGL.Mesh(cgl, geom);
+    mesh = op.patch.cg.createMesh(geom);
     needsCalc = false;
 }
 
