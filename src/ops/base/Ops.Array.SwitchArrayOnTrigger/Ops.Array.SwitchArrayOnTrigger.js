@@ -55,19 +55,3 @@ inTrigger8.onTriggered = function ()
 {
     outArray.set(inArray8.get());
 };
-
-// input ports
-/*
-var inTriggers = [];
-var inArrays = [];
-for(var i=0; i<N_PORTS; i++) {
-    var triggerPort = op.inTrigger("Trigger " + i);
-    inTriggers.push(triggerPort);
-    var arrPort = op.inArray("Array " + i);
-    inArrays.push(arrPort);
-    triggerPort.onTriggered = function() {
-        outArray.set(arrPort.get() || [] );
-        op.log("Array set to ", arrPort.get());
-    };
-}
-*/

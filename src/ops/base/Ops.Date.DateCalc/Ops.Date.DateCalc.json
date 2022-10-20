@@ -22,37 +22,32 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "timestamp",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "difference",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "type index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "type",
-                "subType": "string"
-            },
-            {
-                "type": "1",
+                "type": 1,
                 "name": "update"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Date"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Timestamp",
                 "subType": "number"
             }

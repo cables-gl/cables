@@ -1,1 +1,42 @@
-{"author":"55d744634cdc152216eb9aad","authorName":"pandur","id":"52f368ee-303b-4d84-919d-450b0c002e39","created":1506612473389,"layout":{"portsIn":[{"type":"1","name":"render"},{"type":"0","name":"Absolute","subType":"boolean"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"3","name":"Points"}],"name":"Ops.Gl.PointCollector"},"summary":"save points/coordinates in an array","docs":{"ports":[]},"collections":["pointArrays"],"relatedops":["Ops.Gl.PointCollectorCollect"],"issues":"","youtubeids":[]}
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "52f368ee-303b-4d84-919d-450b0c002e39",
+    "created": 1506612473389,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Absolute",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 3,
+                "name": "Points"
+            }
+        ],
+        "name": "Ops.Gl.PointCollector"
+    },
+    "summary": "save points/coordinates in an array",
+    "docs": {
+        "ports": []
+    },
+    "collections": [
+        "pointArrays"
+    ],
+    "relatedops": [
+        "Ops.Gl.PointCollectorCollect"
+    ],
+    "issues": "",
+    "youtubeids": []
+}

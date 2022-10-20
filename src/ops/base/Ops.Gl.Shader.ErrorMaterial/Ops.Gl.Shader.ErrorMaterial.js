@@ -1,11 +1,12 @@
-const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger");
+const
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger");
 
-const cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'errormaterial');
+const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl, "errormaterial");
 
 shader.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getErrorFragmentShader());
-render.onTriggered=doRender;
+render.onTriggered = doRender;
 
 function doRender()
 {
@@ -13,4 +14,3 @@ function doRender()
     trigger.trigger();
     cgl.popShader();
 }
-
