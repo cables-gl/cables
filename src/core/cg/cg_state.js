@@ -248,12 +248,6 @@ const CGState = function ()
         this.popModelMatrix();
         this.popPMatrix();
     };
-
-    this.createMesh = function (geom, glPrimitive)
-    {
-        if (this.gApi === CG.GAPI_WEBGL) return new CGL.Mesh(this, geom, glPrimitive);
-        else if (this.gApi === CG.GAPI_WEBGPU) return new CGP.Mesh(this, geom, glPrimitive);
-    };
 };
 
 export { CGState };

@@ -21,7 +21,7 @@ op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
 
 let mesh = null;
-let needsRebuild = false;
+let needsRebuild = true;
 
 axis.onChange =
     pivotX.onChange =
@@ -90,6 +90,8 @@ function rebuild()
     const stepColumn = w / numColumns;
     const stepRow = h / numRows;
 
+    console.log("rect build");
+
     let c, r, a;
     a = axis.get();
     for (r = 0; r <= numRows; r++)
@@ -151,8 +153,10 @@ function rebuild()
 
     const cgl = op.patch.cgl;
 
-    if (!mesh) mesh = op.patch.cgl.createMesh(geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
+
+    console.log("create mesh rect3");
 
     geomOut.set(null);
     geomOut.set(geom);

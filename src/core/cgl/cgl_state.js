@@ -1105,6 +1105,11 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     }
 };
 
+Context.prototype.createMesh = function (geom, glPrimitive)
+{
+    return new CGL.Mesh(this, geom, glPrimitive);
+};
+
 
 /**
  * set cursor

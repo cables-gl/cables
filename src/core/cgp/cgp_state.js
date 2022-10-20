@@ -1,8 +1,8 @@
 import { CGState } from "../cg/cg_state";
 
 /**
- * cables gl context/state manager
- * @external CGL
+ * cables webgpu context/state manager
+ * @external CGP
  * @namespace Context
  * @class
  * @hideconstructor
@@ -18,7 +18,6 @@ const Context = function (_patch)
         return [0, 0, this.canvasWidth, this.canvasHeight];
     };
 
-
     this.renderStart = function (cgl, identTranslate, identTranslateView)
     {
         this._startMatrixStacks(identTranslate, identTranslateView);
@@ -32,6 +31,15 @@ const Context = function (_patch)
 
         this.emitEvent("endFrame");
     };
+};
+
+Context.prototype.createMesh = function (geom, glPrimitive)
+{
+    return new CGP.Mesh(this, geom, glPrimitive);
+};
+Context.prototype.getShader = function ()
+{
+    return {};
 };
 
 export { Context };
