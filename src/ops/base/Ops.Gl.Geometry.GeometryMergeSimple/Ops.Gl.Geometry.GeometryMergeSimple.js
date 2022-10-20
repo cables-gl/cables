@@ -16,8 +16,6 @@ function ()
         if (inGeom.get())
         {
             geom = inGeom.get().copy();
-            console.log(geom);
-            // geom.merge(inGeom.get());
         }
         if (inGeom2.get())geom.merge(inGeom2.get());
         outGeom.set(null);

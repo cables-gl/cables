@@ -29,6 +29,8 @@ fileInputEle.name = "file";
 fileInputEle.style.width = "95%";
 el.appendChild(fileInputEle);
 
+outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+
 const imgEl = document.createElement("img");
 
 tfilter.onChange = wrap.onChange = () =>
@@ -51,6 +53,7 @@ function handleFileSelect(evt)
         let image = new Image();
         image.onerror = function (e)
         {
+            outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
             op.log("image error", e);
         };
         image.onload = function (e)
@@ -117,18 +120,12 @@ function onParentChanged()
 
 function showElement(el)
 {
-    if (el)
-    {
-        el.style.display = "block";
-    }
+    if (el) el.style.display = "block";
 }
 
 function hideElement(el)
 {
-    if (el)
-    {
-        el.style.display = "none";
-    }
+    if (el) el.style.display = "none";
 }
 
 function onDelete()

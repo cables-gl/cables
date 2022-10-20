@@ -162,7 +162,7 @@ progressbar.addEventListener("pointermove", () =>
     const currentProgress = progressbar.value;
     if (isDragging)
     {
-        updateProgressDisplay();
+        updateProgressDisplay(currentProgress);
         outValue.set(currentProgress);
     }
 });
@@ -247,10 +247,10 @@ function currentValueChange()
 }
 
 let lasttime = 0;
-function updateProgressDisplay()
+function updateProgressDisplay(currentValue = null)
 {
-    let currentValue = inCurrent.get();
-    let t = currentValue;
+    let displayValue = currentValue || inCurrent.get();
+    let t = displayValue;
     if (t != lasttime)
     {
         progress.innerHTML = formatValue(t);

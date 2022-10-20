@@ -72,19 +72,19 @@ const lightFragmentBodies = {
     "directional": attachments.light_body_directional_frag,
     "spot": attachments.light_body_spot_frag,
 };
-const createLightFragmentHead = (n) => lightFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createLightFragmentHead = (n) => { return lightFragmentHead.replace("{{LIGHT_INDEX}}", n); };
 const createLightFragmentBody = (n, type) =>
-    (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n);
+{ return (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n); };
 let currentLightCount = -1;
 const defaultLightStack = [{
     "type": "point",
     "position": [5, 5, 5],
     "color": [1, 1, 1],
     "specular": [1, 1, 1],
-    "intensity": 100,
+    "intensity": 120,
     "attenuation": 0,
     "falloff": 0.5,
-    "radius": 80,
+    "radius": 60,
     "castLight": 1,
 }];
 
@@ -344,12 +344,20 @@ function updateLights()
 function doRender()
 {
     cgl.pushShader(PBRShader);
+    let useDefaultLight = false;
 
     PBRShader.popTextures();
 
+    let numLights = 0;
+    if (cgl.frameStore.lightStack)numLights = cgl.frameStore.lightStack.length;
+
     if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) &&
-        !inLightmap.isLinked() &&
-        PBRLightStack.length == 0) op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 1);
+        !inLightmap.isLinked() && numLights == 0)
+
+    {
+        useDefaultLight = true;
+        op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 1);
+    }
     else op.setUiError("deflight", null);
 
     if (cgl.frameStore.pbrEnvStack && cgl.frameStore.pbrEnvStack.length > 0 &&
@@ -377,15 +385,13 @@ function doRender()
         setEnvironmentLighting(false);
     }
 
-    let useDefaultLight = false;
-    if ((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length))
+    if (useDefaultLight)
     {
         const iViewMatrix = mat4.create();
         mat4.invert(iViewMatrix, cgl.vMatrix);
 
         defaultLightStack[0].position = [iViewMatrix[12], iViewMatrix[13], iViewMatrix[14]];
         cgl.frameStore.lightStack = defaultLightStack;
-        useDefaultLight = true;
     }
 
     if (inTexIBLLUT.get())

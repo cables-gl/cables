@@ -52,7 +52,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Gl.CubeMap.CubeMapCamera_v2"
+        "name": "Ops.Gl.CubeMap.RenderToCubemap_v2"
     },
     "summary": "render a scene into a cubemap",
     "issues": "",

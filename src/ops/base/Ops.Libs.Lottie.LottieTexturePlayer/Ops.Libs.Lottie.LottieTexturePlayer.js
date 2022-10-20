@@ -79,7 +79,6 @@ exe.onTriggered = function ()
 
     if (lastFrame != frame.get())
     {
-        lastFrame = frame.get();
         if (frame.get() != -1.0)
         {
             anim.goToAndStop(frame.get(), true);
@@ -101,6 +100,7 @@ exe.onTriggered = function ()
         {
             textureOut.get().initTexture(canvasImage);
         }
+        lastFrame = frame.get();
     }
 };
 
@@ -154,7 +154,13 @@ function reload(force)
             "scaleMode": bmScale.get()
         }
     };
+
     anim = bodymovin.loadAnimation(animData);
     anim.setSpeed(speed.get());
     anim.play();
+
+    anim.addEventListener("DOMLoaded", function (e)
+    {
+        lastFrame = -1;
+    });
 }
