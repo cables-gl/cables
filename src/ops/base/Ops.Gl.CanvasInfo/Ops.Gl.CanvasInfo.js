@@ -7,7 +7,6 @@ const
     landscape = op.outBool("Landscape");
 
 let cgl = op.patch.cgl;
-console.log(cgl);
 
 cgl.on("resize", update);
 

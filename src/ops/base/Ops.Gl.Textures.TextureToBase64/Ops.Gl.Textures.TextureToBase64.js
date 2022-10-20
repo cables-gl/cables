@@ -4,7 +4,7 @@ const
     jpeg = op.inBool("Use JPEG", false),
     dataUrl = op.inBool("Output dataUrl", false),
     outString = op.outString("Base64 string"),
-    outLoading = op.outValueBool("Loading");
+    outLoading = op.outBoolNum("Loading");
 
 const gl = op.patch.cgl.gl;
 let fb = null;
@@ -59,8 +59,8 @@ function update()
     const data2 = imageData.data;
 
     // flip image
-    Array.from({ "length": height }, (val, i) => data2.slice(i * width * 4, (i + 1) * width * 4))
-        .forEach((val, i) => data2.set(val, (height - i - 1) * width * 4));
+    Array.from({ "length": height }, (val, i) => { return data2.slice(i * width * 4, (i + 1) * width * 4); })
+        .forEach((val, i) => { return data2.set(val, (height - i - 1) * width * 4); });
 
     context.putImageData(imageData, 0, 0);
     let dataString = "";

@@ -22,8 +22,8 @@ let doScale = false;
 let doTranslate = false;
 
 let translationChanged = true;
-var scaleChanged = true;
-var rotChanged = true;
+let didScaleChanged = true;
+let didRotChanged = true;
 
 render.onTriggered = function ()
 {
@@ -35,12 +35,12 @@ render.onTriggered = function ()
         updateTranslation();
         updateMatrix = true;
     }
-    if (scaleChanged)
+    if (didScaleChanged)
     {
         updateScale();
         updateMatrix = true;
     }
-    if (rotChanged)
+    if (didRotChanged)
     {
         updateMatrix = true;
     }
@@ -68,7 +68,7 @@ op.transform3d = function ()
     };
 };
 
-var doUpdateMatrix = function ()
+function doUpdateMatrix()
 {
     mat4.identity(transMatrix);
     if (doTranslate)mat4.translate(transMatrix, transMatrix, vPos);
@@ -79,7 +79,7 @@ var doUpdateMatrix = function ()
 
     if (doScale)mat4.scale(transMatrix, transMatrix, vScale);
     rotChanged = false;
-};
+}
 
 function updateTranslation()
 {
@@ -97,29 +97,29 @@ function updateScale()
     scaleChanged = false;
 }
 
-const translateChanged = function ()
+function translateChanged()
 {
     translationChanged = true;
-};
+}
 
-var scaleChanged = function ()
+function scaleChanged()
 {
-    scaleChanged = true;
-};
+    didScaleChanged = true;
+}
 
-var rotChanged = function ()
+function rotChanged()
 {
-    rotChanged = true;
-};
+    didRotChanged = true;
+}
 
-rotX.onChange = rotChanged;
-rotY.onChange = rotChanged;
+rotX.onChange =
+rotY.onChange =
 rotZ.onChange = rotChanged;
 
 scale.onChange = scaleChanged;
 
-posX.onChange = translateChanged;
-posY.onChange = translateChanged;
+posX.onChange =
+posY.onChange =
 posZ.onChange = translateChanged;
 
 rotX.set(0.0);

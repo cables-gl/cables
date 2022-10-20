@@ -16,7 +16,7 @@ function update()
     }
     catch (e)
     {
-        console.error(e);
+        op.error(e);
         outString.set("error");
         outError.set(1);
     }

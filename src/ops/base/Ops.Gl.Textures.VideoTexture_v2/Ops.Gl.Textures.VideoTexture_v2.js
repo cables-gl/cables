@@ -19,10 +19,10 @@ const
     inPreload = op.inValueBool("Preload", true),
 
     textureOut = op.outTexture("texture"),
-    outDuration = op.outValue("duration"),
-    outProgress = op.outValue("progress"),
-    outTime = op.outValue("CurrentTime"),
-    loading = op.outValue("Loading"),
+    outDuration = op.outNumber("duration"),
+    outProgress = op.outNumber("progress"),
+    outTime = op.outNumber("CurrentTime"),
+    loading = op.outBoolNum("Loading"),
     canPlayThrough = op.outBoolNum("Can Play Through", false),
 
     outWidth = op.outNumber("Width"),

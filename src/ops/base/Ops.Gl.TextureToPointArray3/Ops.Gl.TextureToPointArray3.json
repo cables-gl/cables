@@ -17,36 +17,36 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "update"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Center",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Threshold Remove",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z Multiply",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "group": "Size",
                 "subType": "number"
@@ -54,30 +54,30 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Points"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Total Points",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Min Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max Z",
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.Texture2Array3"
+        "name": "Ops.Gl.TextureToPointArray3"
     },
     "summary": "generate an array3 of grid positions from a texture",
     "issues": "",

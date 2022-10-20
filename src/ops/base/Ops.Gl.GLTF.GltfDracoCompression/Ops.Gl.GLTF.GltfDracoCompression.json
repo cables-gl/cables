@@ -29,20 +29,8 @@
         "draco_decoder_wasm.js"
     ],
     "layout": {
-        "portsIn": [
-            {
-                "type": 0,
-                "name": "Hund",
-                "subType": "number"
-            }
-        ],
-        "portsOut": [
-            {
-                "type": 0,
-                "name": "Katze",
-                "subType": "number"
-            }
-        ],
+        "portsIn": [],
+        "portsOut": [],
         "name": "Ops.Gl.GLTF.GltfDracoCompression"
     },
     "summary": "gltf draco compression library",

@@ -8,7 +8,7 @@ defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
 const siblingsPort = op.outObject("Children");
-const valuePort = op.outValue("Result", defaultValuePort.get());
+const valuePort = op.outNumber("Result", defaultValuePort.get());
 
 // vars
 const el = document.createElement("div");

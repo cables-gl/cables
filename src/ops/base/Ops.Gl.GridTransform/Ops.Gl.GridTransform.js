@@ -1,45 +1,46 @@
-const render=op.inTrigger("Render");
-const numX=op.inValueInt("Num X",5);
-const numY=op.inValueInt("Num Y",5);
-const spaceX=op.inValue("Space X",1);
-const spaceY=op.inValue("Space Y",1);
-const next=op.outTrigger("Next");
-const outIndex=op.outValue("Index");
-const outX=op.outValue("x index");
-const outY=op.outValue("y index");
-var matOrig=mat4.create();
-var vec=vec3.create();
+const
+    render = op.inTrigger("Render"),
+    numX = op.inValueInt("Num X", 5),
+    numY = op.inValueInt("Num Y", 5),
+    spaceX = op.inValue("Space X", 1),
+    spaceY = op.inValue("Space Y", 1),
+    next = op.outTrigger("Next"),
+    outIndex = op.outValue("Index"),
+    outX = op.outValue("x index"),
+    outY = op.outValue("y index");
+let matOrig = mat4.create();
+let vec = vec3.create();
 
-var cgl=op.patch.cgl;
+let cgl = op.patch.cgl;
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
     cgl.pushModelMatrix();
 
     mat4.copy(matOrig, cgl.modelMatrix());
 
-    var mx=spaceX.get();
-    var my=spaceY.get();
+    let mx = spaceX.get();
+    let my = spaceY.get();
 
-    var maxX=Math.floor(numX.get());
-    var maxY=Math.floor(numY.get());
+    let maxX = Math.floor(numX.get());
+    let maxY = Math.floor(numY.get());
 
-    var alX=((maxX-1)*mx)/2;
-    var alY=((maxY-1)*my)/2;
+    let alX = ((maxX - 1) * mx) / 2;
+    let alY = ((maxY - 1) * my) / 2;
 
-    var i=0;
-    for(var y=0;y<maxY;y++)
+    let i = 0;
+    for (let y = 0; y < maxY; y++)
     {
         outY.set(y);
 
-        for(var x=0;x<maxX;x++)
+        for (let x = 0; x < maxX; x++)
         {
             vec3.set(vec,
-                x*mx-alX,
-                y*my-alY,
+                x * mx - alX,
+                y * my - alY,
                 0);
             outX.set(x);
-            mat4.translate(cgl.mMatrix,matOrig, vec);
+            mat4.translate(cgl.mMatrix, matOrig, vec);
             outIndex.set(i);
             i++;
             next.trigger();
@@ -47,5 +48,4 @@ render.onTriggered=function()
     }
 
     cgl.popModelMatrix();
-
 };

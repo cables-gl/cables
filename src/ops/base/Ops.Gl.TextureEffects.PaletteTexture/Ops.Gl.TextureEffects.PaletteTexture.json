@@ -12,23 +12,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Palette array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Smooth",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Color Array"
             },
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.TextureEffects.PaletteTexture"

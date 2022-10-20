@@ -12,28 +12,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result"
             }
         ],

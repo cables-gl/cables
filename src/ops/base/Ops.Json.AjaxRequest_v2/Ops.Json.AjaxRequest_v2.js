@@ -9,7 +9,7 @@ const filename = op.inUrl("file"),
     reloadTrigger = op.inTriggerButton("reload"),
     outData = op.outObject("data"),
     outString = op.outString("response"),
-    isLoading = op.outValue("Is Loading", false),
+    isLoading = op.outBoolNum("Is Loading", false),
     outTrigger = op.outTrigger("Loaded");
 
 filename.setUiAttribs({ "title": "URL" });

@@ -16,7 +16,6 @@ start.onTriggered = function ()
     const width = inTex.get().width;
     const height = inTex.get().height;
 
-    console.log(inTex.get().textureType);
     if (inTex.get().textureType == CGL.Texture.TYPE_FLOAT) op.setUiError("fptex", "Texture is more than 8 bit, not possible to create files with high precision");
     else op.setUiError("fptex", null);
 
