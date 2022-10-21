@@ -1,12 +1,11 @@
+const
+    inStr = op.inValueString("HashId"),
+    result = op.outArray("Result");
 
-var inStr=op.inValueString("HashId");
-var result=op.outArray("Result");
+let hashids = new Hashids("cablesalt");
 
-var hashids = new Hashids("cablesalt");
-
-inStr.onChange=function()
+inStr.onChange = function ()
 {
-    var arr = hashids.decode(inStr.get());
+    let arr = hashids.decode(inStr.get());
     result.set(arr);
-
 };

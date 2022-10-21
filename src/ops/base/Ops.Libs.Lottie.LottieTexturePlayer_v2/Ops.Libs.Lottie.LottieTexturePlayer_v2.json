@@ -25,6 +25,11 @@
             "message": " added lib: lottie_canvas.min.js",
             "author": "pandur",
             "date": 1655133339478
+        },
+        {
+            "message": "Ops.Dev.LottieTexturePlayer2 renamed to Ops.Libs.Lottie.LottieTexturePlayer_v2",
+            "author": "pandur",
+            "date": 1666274900697
         }
     ],
     "authorName": "pandur",
