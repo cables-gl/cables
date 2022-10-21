@@ -14,6 +14,7 @@ const Context = function (_patch)
 
     this.gApi = CG.GAPI_WEBGPU;
     this._viewport=[0,0,256,256];
+    this._shaderStack=[];
 
     this.getViewPort = function ()
     {
@@ -59,6 +60,41 @@ Context.prototype.createMesh = function (geom, glPrimitive)
 Context.prototype.getShader = function ()
 {
     return {};
+};
+
+/**
+ * push a shader to the shader stack
+ * @function pushShader
+ * @memberof Context
+ * @instance
+ * @param {Object} shader
+ * @function
+*/
+Context.prototype.pushShader =function (shader)
+{
+    this._shaderStack.push(shader);
+    // currentShader = shader;
+};
+
+/**
+ * pop current used shader from shader stack
+ * @function popShader
+ * @memberof Context
+ * @instance
+ * @function
+ */
+Context.prototype.popShader = function ()
+{
+    if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
+    this._shaderStack.pop();
+    // currentShader = this._shaderStack[this._shaderStack.length - 1];
+};
+
+Context.prototype.getShader = function ()
+{
+    return this._shaderStack[this._shaderStack.length - 1];
+    // if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
+    // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
 };
 
 export { Context };

@@ -54,9 +54,8 @@ render.onTriggered = function ()
     if (doRender.get() && mesh)
     {
         mesh.render(op.patch.cg.getShader());
-        console.log("render");
+        trigger.trigger();
     }
-    trigger.trigger();
 };
 
 op.onDelete = function ()

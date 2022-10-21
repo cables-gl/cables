@@ -75,7 +75,9 @@ inTrigger.onTriggered = () =>
         // cgp.passEncoders.push(commandEncoder.finish());
     }
 
+    cgp.pushShader(shader);
     next.trigger();
+    cgp.popShader();
 };
 
 inGeom.onChange = () =>

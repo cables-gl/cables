@@ -1,4 +1,5 @@
 import Logger from "../core_logger";
+import Pipeline from "./cgp_pipeline";
 
 export default class Mesh
 {
@@ -8,11 +9,14 @@ export default class Mesh
         this._cgp = _cgp;
         this._geom = null;
 
+        this._pipe=new Pipeline(this._cgp);
 
         this._numIndices=0;
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
         this._attributes = [];
+
+        this._needsPipelineUpdate=false;
 
         if(__geom)this.setGeom(__geom);
     }
@@ -39,6 +43,7 @@ export default class Mesh
      */
     setGeom (geom, removeRef)
     {
+        this._needsPipelineUpdate=true;
         this._geom = geom;
         this._disposeAttributes();
 
@@ -56,6 +61,7 @@ export default class Mesh
 
     _disposeAttributes()
     {
+        this._needsPipelineUpdate=true;
         for (let i = 0; i < this._attributes.length; i++)
         {
             this._attributes[i].buffer.destroy();
@@ -126,10 +132,20 @@ export default class Mesh
         return attr;
     }
 
+    // setPipeline()
+    // {
+
+    //     this._cgp.passEncoder.setPipeline(this._pipe.getPiplelineObject(this._cgp.getShader(),this));
+
+
+    // }
 
     render()
     {
-        if( ! this._positionBuffer )return;
+        if(!this._positionBuffer)return;
+
+        // this.setPipeline();
+        this._pipe.setPipeline(this._cgp.getShader(),this)
 
         this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
         for(let i=0;i<this._attributes.length;i++)
