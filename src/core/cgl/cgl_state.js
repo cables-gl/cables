@@ -5,6 +5,7 @@ import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
 import { CGState } from "../cg/cg_state";
+import { CG } from "../cg/cg_constants";
 
 
 /**
@@ -19,7 +20,7 @@ const Context = function (_patch)
     // EventTarget.apply(this);
     CGState.apply(this);
 
-    this.gApi = CGL.GAPI_WEBGL;
+    this.gApi = CG.GAPI_WEBGL;
 
     this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
     this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
@@ -34,7 +35,6 @@ const Context = function (_patch)
     this.patch = _patch;
     this.debugOneFrame = false;
     this.checkGlErrors = true; // true is slow
-
     this.maxTextureUnits = 0;
     this.maxVaryingVectors = 0;
     this.currentProgram = null;

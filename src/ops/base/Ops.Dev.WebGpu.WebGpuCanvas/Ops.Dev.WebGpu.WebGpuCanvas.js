@@ -19,17 +19,29 @@ canvas.style.position = "absolute";
 const container = document.getElementById("cablescanvas");
 container.appendChild(canvas);
 
-canvas.addEventListener("blur", () => { if (supported.get())canvas.style.border = "1px solid black"; });
-canvas.addEventListener("focus", () => { if (supported.get())canvas.style.border = "1px solid white"; });
+// canvas.addEventListener("blur", () => { if (supported.get())canvas.style.border = "1px solid black"; });
+// canvas.addEventListener("focus", () => { if (supported.get())canvas.style.border = "1px solid white"; });
 
 const pm = mat4.create();
 
+let renderTarget = null;
 let depthTexture = null;
 let canvasInfo = {};
 
-op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
+let sizeWidth = 0;
+let sizeHeight = 0;
 
+op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
 const cgp = op.patch.cgp;
+const sampleCount = 1;
+
+cgp.canvas = canvas;
+
+if (CABLES.UI)
+{
+    gui.canvasManager.addContext(cgp);
+}
+
 let stopped = false;
 op.onDelete = () =>
 {
@@ -85,21 +97,7 @@ if (navigator.gpu)
             context = canvas.getContext("webgpu");
             cgp.context = context;
 
-            const devicePixelRatio = window.devicePixelRatio || 1;
-            const presentationSize = [
-                canvas.clientWidth * devicePixelRatio,
-                canvas.clientHeight * devicePixelRatio,
-            ];
-
-            console.log("presentationSize", presentationSize);
-            const presentationFormat = navigator.gpu.getPreferredCanvasFormat(adapter);
-            cgp.presentationFormat = presentationFormat;
-
-            context.configure({
-                device,
-                "format": presentationFormat
-            });
-
+            createTargets(cgp);
             // pipeline = device.createRenderPipeline({
             //     "layout": "auto",
             //     "vertex":
@@ -130,20 +128,58 @@ if (navigator.gpu)
             // });
             // cgp.pipeline = pipeline;
 
-            const sampleCount = 1;
-            const newDepthTexture = device.createTexture({
-                "size": [presentationSize[0], presentationSize[1]],
-                "format": "depth24plus",
-                "sampleCount": sampleCount,
-                "usage": GPUTextureUsage.RENDER_ATTACHMENT,
-            });
-            depthTexture = newDepthTexture;
             // canvasInfo.depthTextureView = depthTexture.createView();
             cgp.canvasInfo = canvasInfo;
 
             requestAnimationFrame(frame);
         });
     });
+
+function createTargets(cgp)
+{
+    const devicePixelRatio = window.devicePixelRatio || 1;
+
+    sizeWidth = canvas.clientWidth * devicePixelRatio;
+    sizeHeight = canvas.clientHeight * devicePixelRatio;
+
+    cgp.setSize(sizeWidth, sizeHeight);
+
+    console.log("re create targets");
+    // const presentationSize = [
+    //     canvas.clientWidth * devicePixelRatio,
+    //     canvas.clientHeight * devicePixelRatio,
+    // ];
+
+    console.log("presentationSize", sizeWidth, sizeHeight);
+    const presentationFormat = navigator.gpu.getPreferredCanvasFormat(cgp.adapter);
+    cgp.presentationFormat = presentationFormat;
+
+    context.configure({
+        device,
+        "format": presentationFormat
+    });
+
+    if (renderTarget)renderTarget.destroy();
+    if (depthTexture)depthTexture.destroy();
+
+    renderTarget = device.createTexture(
+        {
+            "size": [sizeWidth, sizeHeight],
+            "format": presentationFormat,
+            "sampleCount": sampleCount,
+            "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+        });
+    // canvasInfo.renderTarget = newRenderTarget;
+    // canvasInfo.renderTargetView = newRenderTarget.createView();
+    //   });
+
+    depthTexture = device.createTexture({
+        "size": [sizeWidth, sizeHeight],
+        "format": "depth24plus",
+        "sampleCount": sampleCount,
+        "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+    });
+}
 
 function frame()
 {
@@ -155,21 +191,28 @@ function frame()
         return;
     }
 
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    if (sizeWidth != canvas.clientWidth * devicePixelRatio || sizeHeight != canvas.clientHeight * devicePixelRatio)
+    {
+        createTargets(cgp);
+    }
+
     // mat4.perspective(cgp.pMatrix, 45, canvas.clientWidth / canvas.clientHeight, 0.1, 1110.0);
     // mat4.copy(cgp.pMatrix, pm);
 
     const commandEncoder = device.createCommandEncoder();
-    cgp.textureView = context.getCurrentTexture().createView();
 
+    cgp.textureView = renderTarget.createView();
     cgp.canvasInfo.depthTextureView = depthTexture.createView();
 
     // cgp.textureView = textureView;
     const renderPassDescriptor = {
         "colorAttachments": [
             {
-                "view": cgp.textureView,
+                "view": context.getCurrentTexture().createView(),
                 "loadOp": "clear",
-                // "cleaarValue": { "r": 0.8, "g": 0.2, "b": 0.8, "a": 1.0 },
+                // "resolveTarget": context.getCurrentTexture().createView(),
+                // "clearValue": { "r": 0.8, "g": 0.2, "b": 0.8, "a": 1.0 },
                 "storeOp": "store",
             },
         ],

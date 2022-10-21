@@ -7,6 +7,8 @@ const CGState = function ()
 {
     EventTarget.apply(this);
 
+    this.canvas = null;
+
     this._identView = vec3.create();
     this._ident = vec3.create();
     vec3.set(this._identView, 0, 0, -2);
@@ -50,6 +52,10 @@ const CGState = function ()
     mat4.identity(this.mMatrix);
     mat4.identity(this.vMatrix);
 
+    this.getGApiName = () =>
+    {
+        return ["WebGL", "WebGPU"][this.gApi];
+    };
 
     this.setCanvas = function (canv)
     {

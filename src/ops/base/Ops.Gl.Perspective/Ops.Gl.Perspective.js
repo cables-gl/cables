@@ -1,13 +1,14 @@
 // http://stackoverflow.com/questions/5504635/computing-fovx-opengl
 
-const render = op.inTrigger("render");
-const fovY = op.inValueFloat("fov y", 45);
-const zNear = op.inValueFloat("frustum near", 0.1);
-const zFar = op.inValueFloat("frustum far", 20);
-const autoAspect = op.inValueBool("Auto Aspect Ratio", true);
-const aspect = op.inValue("Aspect Ratio");
-
-const trigger = op.outTrigger("trigger");
+const
+    render = op.inTrigger("render"),
+    fovY = op.inValueFloat("fov y", 45),
+    zNear = op.inValueFloat("frustum near", 0.1),
+    zFar = op.inValueFloat("frustum far", 20),
+    autoAspect = op.inValueBool("Auto Aspect Ratio", true),
+    aspect = op.inValue("Aspect Ratio"),
+    trigger = op.outTrigger("trigger"),
+    outAsp = op.outNumber("Aspect");
 
 fovY.onChange = zFar.onChange = zNear.onChange = changed;
 
@@ -24,6 +25,7 @@ render.onTriggered = function ()
 
     asp = cg.getViewPort()[2] / cg.getViewPort()[3];
     if (!autoAspect.get())asp = aspect.get();
+    outAsp.set(asp);
 
     cg.pushPMatrix();
     mat4.perspective(

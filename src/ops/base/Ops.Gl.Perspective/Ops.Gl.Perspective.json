@@ -36,6 +36,11 @@
             {
                 "type": 1,
                 "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Perspective"
