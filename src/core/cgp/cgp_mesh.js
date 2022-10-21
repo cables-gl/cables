@@ -53,6 +53,22 @@ export default class Mesh
         if(geom.vertexNormals && geom.vertexNormals.length)this.setAttribute("normals", geom.vertexNormals, 3);
     }
 
+
+    _disposeAttributes()
+    {
+        for (let i = 0; i < this._attributes.length; i++)
+        {
+            this._attributes[i].buffer.destroy();
+        }
+        this._attributes.length=0;
+    }
+
+    dispose()
+    {
+        this._disposeAttributes();
+
+    }
+
     /**
      * @function setAttribute
      * @description update attribute
@@ -110,10 +126,6 @@ export default class Mesh
         return attr;
     }
 
-    _disposeAttributes()
-    {
-
-    }
 
     render()
     {

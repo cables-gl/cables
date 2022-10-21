@@ -43,6 +43,7 @@ render.onLinkChanged = () =>
         if (mesh) mesh.dispose();
         mesh = null;
         geomOut.set(null);
+        rebuildLater();
     }
 };
 
@@ -50,13 +51,18 @@ op.preRender =
 render.onTriggered = function ()
 {
     if (needsRebuild)rebuild();
-    if (doRender.get() && mesh) mesh.render(op.patch.cg.getShader());
+    if (doRender.get() && mesh)
+    {
+        mesh.render(op.patch.cg.getShader());
+        console.log("render");
+    }
     trigger.trigger();
 };
 
 op.onDelete = function ()
 {
     if (mesh)mesh.dispose();
+    rebuildLater();
 };
 
 function rebuild()
