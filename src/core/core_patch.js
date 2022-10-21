@@ -464,6 +464,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
     if (op)
     {
         uiAttribs = uiAttribs || {};
+        if (!uiAttribs.translate)uiAttribs.translate = { "x": 0, "y": 0 };
         if (uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
         if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
         uiAttribs.subPatch = uiAttribs.subPatch || 0;
