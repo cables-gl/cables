@@ -72,26 +72,29 @@ function create()
         x - th, y + h + th, 0
     );
 
-    if (geom.vertexNormals.length === 0) geom.vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-    if (geom.tangents.length === 0) geom.tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0);
-    if (geom.biTangents.length === 0) geom.biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0);
+    if (geom.vertexNormals.length === 0) geom.vertexNormals = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
+    if (geom.tangents.length === 0) geom.tangents = [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0];
+    if (geom.biTangents.length === 0) geom.biTangents = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0];
 
     if (geom.verticesIndices)geom.verticesIndices.length = 0;
     else geom.verticesIndices = [];
 
-    if (drawBottom.get()) geom.verticesIndices.push(0, 1, 4, 1, 5, 4);
-    if (drawRight.get())geom.verticesIndices.push(1, 2, 5, 5, 2, 6);
-    if (drawTop.get())geom.verticesIndices.push(7, 6, 3, 6, 2, 3);
-    if (drawLeft.get())geom.verticesIndices.push(0, 4, 3, 4, 7, 3);
+    const vertInd = [];
+    if (drawBottom.get()) vertInd.push(0, 1, 4, 1, 5, 4);
+    if (drawRight.get()) vertInd.push(1, 2, 5, 5, 2, 6);
+    if (drawTop.get()) vertInd.push(7, 6, 3, 6, 2, 3);
+    if (drawLeft.get()) vertInd.push(0, 4, 3, 4, 7, 3);
+    geom.verticesIndices = vertInd;
 
     if (geom.texCoords.length === 0)
     {
-        geom.texCoords = new Float32Array();
+        const tc = [];
         for (let i = 0, j = 0; i < geom.vertices.length; i += 3, j += 2)
         {
-            geom.texCoords[j] = geom.vertices[i + 0] / w - 0.5;
-            geom.texCoords[j] = geom.vertices[i + 1] / h - 0.5;
+            tc[j] = geom.vertices[i + 0] / w - 0.5;
+            tc[j + 1] = geom.vertices[i + 1] / h - 0.5;
         }
+        geom.texCoords = tc;
     }
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
