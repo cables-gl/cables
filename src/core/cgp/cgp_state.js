@@ -97,4 +97,20 @@ Context.prototype.getShader = function ()
     // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
 };
 
+Context.prototype.pushErrorScope = function (name)
+{
+    this.device.pushErrorScope(name);
+}
+
+Context.prototype.popErrorScope = function ()
+{
+    this.device.popErrorScope().then((error) =>
+    {
+        if (error)console.warn("[cgp]", error);
+    });
+};
+
+
+
+
 export { Context };

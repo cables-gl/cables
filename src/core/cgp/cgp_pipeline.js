@@ -12,6 +12,8 @@ export default class Pipeline
 
         this._fsUniformBuffer = null;
         this._vsUniformBuffer = null;
+
+        this._old = {};
     }
 
     setPipeline(shader, mesh)
@@ -21,8 +23,20 @@ export default class Pipeline
             console.log("pipeline unknown shader/mesh");
             return;
         }
-        if (!this._renderPipeline || !this._pipeCfg || mesh.needsPipelineUpdate || shader.needsPipelineUpdate)
+
+        const needsRebuild =
+            !this._renderPipeline ||
+            !this._pipeCfg ||
+            mesh.needsPipelineUpdate ||
+            shader.needsPipelineUpdate ||
+            this._old.mesh != mesh ||
+            this._old.shader != shader;
+
+        if (needsRebuild)
         {
+            this._old.shader = shader;
+            this._old.mesh = mesh;
+
             this._pipeCfg = this.getPiplelineObject(shader, mesh);
             console.log(this._pipeCfg);
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);

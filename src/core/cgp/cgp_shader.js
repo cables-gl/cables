@@ -14,8 +14,11 @@ export default class Shader
         this._name = _name || "unknown";
         this.id = simpleId();
         this._isValid = true;
-
+        this._compileReason = "";
         this.shaderModule = null;
+        this._needsRecompile = true;
+
+        this._src = "";
     }
 
     isValid()
@@ -26,5 +29,31 @@ export default class Shader
     getName()
     {
         return this._name;
+    }
+
+    setWhyCompile(why)
+    {
+        this._compileReason = why;
+    }
+
+    setSource(src)
+    {
+        this._src = src;
+        this.setWhyCompile("Source changed");
+        this._needsRecompile = true;
+    }
+
+    compile()
+    {
+        console.log("compile shader");
+        this._cgp.pushErrorScope("validation");
+        this.shaderModule = this._cgp.device.createShaderModule({ "code": this._src });
+        this._cgp.popErrorScope();
+        this._needsRecompile = false;
+    }
+
+    bind()
+    {
+        if (this._needsRecompile) this.compile();
     }
 }

@@ -549,7 +549,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 {
                     if (op.portsIn.length > 0 && op.portsIn[0].isLinked() && (op.portsOut.length > 0 && op.portsOut[0].isLinked()))
                     {
-                        if (op.portsIn[0].getType() == op.portsOut[0].getType())
+                        if (op.portsIn[0].getType() == op.portsOut[0].getType() && op.portsIn[0].links[0])
                         {
                             reLinkP1 = op.portsIn[0].links[0].getOtherPort(op.portsIn[0]);
                             reLinkP2 = op.portsOut[0].links[0].getOtherPort(op.portsOut[0]);

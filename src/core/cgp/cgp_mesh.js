@@ -145,6 +145,9 @@ export default class Mesh
         if(!this._positionBuffer)return;
 
         // this.setPipeline();
+
+        this._cgp.getShader().bind();
+
         this._pipe.setPipeline(this._cgp.getShader(),this)
 
         this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
