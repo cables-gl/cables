@@ -50,7 +50,6 @@ class Uniform extends CgUniform
         this._cgl = __shader._cgl;
     }
 
-
     copy(newShader)
     {
         const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);

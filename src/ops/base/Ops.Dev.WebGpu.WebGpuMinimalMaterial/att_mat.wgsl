@@ -7,7 +7,7 @@ struct VSUniforms
 
 struct FSUniforms
 {
-    color:vec3<f32>//,
+    color:vec4<f32>//,
     // lightDirection: vec3<f32>,
 };
 
@@ -60,6 +60,6 @@ fn myFSMain(v: MyVSOutput) -> @location(0) vec4<f32>
     // var l = dot(a_normal, fsUniforms.lightDirection) * 0.5 + 0.5;
     // return vec4<f32>(diffuseColor.rgb * l, diffuseColor.a);
     // return vec4<f32>(fsUniforms.color, 1.0);
-    return vec4<f32>(fsUniforms.color , 1.0);
+    return vec4<f32>(fsUniforms.color.xyz , 1.0);
 }
 

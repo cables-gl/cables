@@ -42,7 +42,7 @@ export default class Pipeline
             console.log(this._pipeCfg);
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
 
-            this._bindUniforms();
+            this._bindUniforms(shader);
         }
 
         if (this._renderPipeline)
@@ -59,6 +59,7 @@ export default class Pipeline
                 this._vsUniformValues.byteLength
             );
 
+            this.updateFragUniforms(shader);
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
             this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
@@ -126,7 +127,7 @@ export default class Pipeline
     }
 
 
-    _bindUniforms()
+    _bindUniforms(shader)
     {
         this._cgp.device.popErrorScope().then((error) =>
         {
@@ -134,8 +135,23 @@ export default class Pipeline
         });
 
 
+        const counts = { };
+
+
+        for (let i = 0; i < shader.uniforms.length; i++)
+        {
+            const uni = shader.uniforms[i];
+            const type = uni.shaderType;
+            counts[type] = counts[type] || 0;
+
+
+            counts[type] += uni.getSizeBytes();
+        }
+        console.log(counts, counts.frag);
+
+
         const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
-        const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
+        const fUniformBufferSize = counts.frag;// 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
 
         this._vsUniformBuffer = this._cgp.device.createBuffer({
             "size": vUniformBufferSize,
@@ -148,16 +164,16 @@ export default class Pipeline
         });
 
         this._vsUniformValues = new Float32Array(vUniformBufferSize / 4);
-        this._fsUniformValues = new Float32Array(fUniformBufferSize / 4);
+        this._fsUniformValues = new Float32Array(counts.frag / 4);
 
         this._matModel = this._vsUniformValues.subarray(0, 16);
         this._matView = this._vsUniformValues.subarray(16, 32);
         this._matProj = this._vsUniformValues.subarray(32, 48);
 
 
-        this._fsUniformValues[1] = 1.0;
-        this._fsUniformValues[0] = 1.0;
-        const lightDirection = this._fsUniformValues.subarray(0, 3);
+        // this._fsUniformValues[1] = 1.0;
+        // this._fsUniformValues[0] = 1.0;
+        // const lightDirection = this._fsUniformValues.subarray(0, 3);
 
         // console.log("pipeline bindgrouplayout ", pipeline.getBindGroupLayout(0));
 
@@ -179,6 +195,42 @@ export default class Pipeline
             this._vsUniformValues.byteOffset,
             this._vsUniformValues.byteLength
         );
+
+        this.updateFragUniforms(shader);
+        this._cgp.device.popErrorScope().then((error) =>
+        {
+            if (error)console.log("error", error);
+        });
+    }
+
+
+    updateFragUniforms(shader)
+    {
+        let count = 0;
+        for (let i = 0; i < shader.uniforms.length; i++)
+        {
+            const uni = shader.uniforms[i];
+            if (uni.shaderType == "frag")
+            {
+                if (uni.getSizeBytes() / 4 > 1)
+                {
+                    for (let j = 0; j < uni.getValue().length; j++)
+                    {
+                        this._fsUniformValues[count] = uni.getValue()[j];
+                        count++;
+                    }
+                }
+                else
+                {
+                    // single value
+                    console.log("single value?!?!?");
+                }
+            }
+
+            count += uni.getSizeBytes() / 4;
+        }
+
+
         this._cgp.device.queue.writeBuffer(
             this._fsUniformBuffer,
             0,
@@ -186,10 +238,5 @@ export default class Pipeline
             this._fsUniformValues.byteOffset,
             this._fsUniformValues.byteLength
         );
-
-        this._cgp.device.popErrorScope().then((error) =>
-        {
-            if (error)console.log("error", error);
-        });
     }
 }

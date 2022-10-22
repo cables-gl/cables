@@ -1,5 +1,6 @@
 import Logger from "../core_logger";
 import { simpleId } from "../utils";
+import Uniform from "./cgp_uniform";
 
 export default class Shader
 {
@@ -9,6 +10,7 @@ export default class Shader
         this._log = new Logger("cgp_shader");
         this._cgp = _cgp;
         this._name = _name;
+        this._uniforms = [];
 
         if (!_name) this._log.stack("no shader name given");
         this._name = _name || "unknown";
@@ -19,6 +21,11 @@ export default class Shader
         this._needsRecompile = true;
 
         this._src = "";
+    }
+
+    get uniforms()
+    {
+        return this._uniforms;
     }
 
     isValid()
@@ -54,6 +61,71 @@ export default class Shader
 
     bind()
     {
+        let sizes = {};
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            // console.log(this._uniforms[i]);
+        }
+
         if (this._needsRecompile) this.compile();
+    }
+
+    /**
+     * add a uniform to the fragment shader
+     * @param {String} type ['f','t', etc]
+     * @param {String} name
+     * @param {any} value or port
+     * @memberof Shader
+     * @instance
+     * @function addUniformFrag
+     * @returns {Uniform}
+     */
+    addUniformFrag(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
+        uni.shaderType = "frag";
+        return uni;
+    }
+
+    /**
+     * add a uniform to the vertex shader
+     * @param {String} type ['f','t', etc]
+     * @param {String} name
+     * @param {any} value or port
+     * @memberof Shader
+     * @instance
+     * @function addUniformVert
+     * @returns {Uniform}
+     */
+    addUniformVert(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
+        uni.shaderType = "vert";
+        return uni;
+    }
+
+    /**
+     * add a uniform to all shader programs
+     * @param {String} type ['f','t', etc]
+     * @param {String} name
+     * @param {any} value or port
+     * @memberof Shader
+     * @instance
+     * @function addUniform
+     * @returns {Uniform}
+     */
+    addUniform(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
+        uni.shaderType = "both";
+        return uni;
+    }
+
+
+    _addUniform(uni)
+    {
+        this._uniforms.push(uni);
+        this.setWhyCompile("add uniform " + name);
+        this._needsRecompile = true;
     }
 }
