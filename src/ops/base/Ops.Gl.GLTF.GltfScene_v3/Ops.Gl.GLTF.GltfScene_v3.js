@@ -256,7 +256,7 @@ function finishLoading()
     // op.refreshParams();
     outAnimLength.set(maxTime);
 
-    gltf.bounds = new CGL.BoundingBox();
+    gltf.bounds = new CABLES.CG.BoundingBox();
     // gltf.bounds.applyPos(0, 0, 0);
 
     if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
@@ -358,7 +358,7 @@ function loadBin(addCacheBuster)
     finishedLoading = false;
     outLoading.set(true);
     fetch(url)
-        .then((res) => res.arrayBuffer())
+        .then((res) => { return res.arrayBuffer(); })
         .then((arrayBuffer) =>
         {
             if (inFile.get() != fileToLoad)

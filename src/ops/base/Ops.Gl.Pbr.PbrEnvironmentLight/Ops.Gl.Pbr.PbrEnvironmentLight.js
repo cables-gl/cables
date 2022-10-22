@@ -2,7 +2,7 @@
 const cgl = op.patch.cgl;
 const IS_WEBGL_1 = cgl.glVersion == 1;
 
-const BB = new CGL.BoundingBox();
+const BB = new CABLES.CG.BoundingBox();
 const geometry = new CGL.Geometry("unit cube");
 geometry.vertices = new Float32Array([
     -1.0, 1.0, -1.0,

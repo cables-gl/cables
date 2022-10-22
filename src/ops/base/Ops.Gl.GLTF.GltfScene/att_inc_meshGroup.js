@@ -1,15 +1,15 @@
-var gltfMeshGroup=class
+let gltfMeshGroup = class
 {
-    constructor(gltf,m)
+    constructor(gltf, m)
     {
-        this.bounds=new CGL.BoundingBox();
-        this.meshes=[];
-        this.name=m.name;
-        const prims=m.primitives;
+        this.bounds = new CABLES.CG.BoundingBox();
+        this.meshes = [];
+        this.name = m.name;
+        const prims = m.primitives;
 
-        for(var i=0;i<prims.length;i++)
+        for (let i = 0; i < prims.length; i++)
         {
-            var mesh=new gltfMesh(this.name,prims[i],gltf);
+            let mesh = new gltfMesh(this.name, prims[i], gltf);
             this.meshes.push(mesh);
             this.bounds.apply(mesh.bounds);
         }
@@ -19,9 +19,9 @@ var gltfMeshGroup=class
 
     render(cgl, ignoreMat)
     {
-        for(var i=0;i<this.meshes.length;i++)
+        for (let i = 0; i < this.meshes.length; i++)
         {
-            this.meshes[i].render(cgl,ignoreMat);
+            this.meshes[i].render(cgl, ignoreMat);
         }
     }
 };

@@ -18,9 +18,11 @@ import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
 import { BranchStack, Branch } from "./banchprofiler";
 import { CGP } from "./cgp";
+import { CG } from "./cg/cg_constants";
 
 const CABLES = Object.assign(
     {
+        CG,
         CGP,
         EventTarget,
         EMBED,
