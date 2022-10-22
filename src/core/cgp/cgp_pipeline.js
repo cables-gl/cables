@@ -8,7 +8,6 @@ export default class Pipeline
         if (!_cgp) throw new Error("Pipeline constructed without cgp " + _name);
         this._cgp = _cgp;
 
-
         this._pipeCfg = null;
         this._renderPipeline = null;
 

@@ -40,6 +40,11 @@ cgp.canvas = canvas;
 if (CABLES.UI)
 {
     gui.canvasManager.addContext(cgp);
+    // setTimeout(() =>
+    // {
+    //     gui.emitEvent("resizecanvas");
+    //     gui.setLayout();
+    // }, 200);
 }
 
 let stopped = false;
@@ -74,7 +79,7 @@ if (navigator.gpu)
             canvas.style.border = "1px solid black";
 
             cgp.setCanvas(canvas);
-            cgp.setSize(512, 256);
+            cgp.setSize(container.clientWidth, container.clientHeight);
 
             supported.set(true);
             device = _device;
