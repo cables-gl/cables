@@ -13,8 +13,8 @@ const Context = function (_patch)
     CGState.apply(this);
 
     this.gApi = CG.GAPI_WEBGPU;
-    this._viewport=[0,0,256,256];
-    this._shaderStack=[];
+    this._viewport = [0, 0, 256, 256];
+    this._shaderStack = [];
 
     this.getViewPort = function ()
     {
@@ -35,10 +35,10 @@ const Context = function (_patch)
         this.emitEvent("endFrame");
     };
 };
-Context.prototype.setViewPort = function (x,y,w,h)
+Context.prototype.setViewPort = function (x, y, w, h)
 {
-    this._viewport=[x,y,w,h];
-}
+    this._viewport = [x, y, w, h];
+};
 
 /**
  * @function getViewPort
@@ -70,7 +70,7 @@ Context.prototype.getShader = function ()
  * @param {Object} shader
  * @function
 */
-Context.prototype.pushShader =function (shader)
+Context.prototype.pushShader = function (shader)
 {
     this._shaderStack.push(shader);
     // currentShader = shader;
@@ -97,10 +97,10 @@ Context.prototype.getShader = function ()
     // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
 };
 
-Context.prototype.pushErrorScope = function (name)
+Context.prototype.pushErrorScope = function ()
 {
-    this.device.pushErrorScope(name);
-}
+    this.device.pushErrorScope("validation");
+};
 
 Context.prototype.popErrorScope = function ()
 {
@@ -109,8 +109,6 @@ Context.prototype.popErrorScope = function ()
         if (error)console.warn("[cgp]", error);
     });
 };
-
-
 
 
 export { Context };

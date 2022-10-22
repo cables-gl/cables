@@ -129,10 +129,7 @@ export default class Pipeline
 
     _bindUniforms(shader)
     {
-        this._cgp.device.popErrorScope().then((error) =>
-        {
-            if (error)console.log("error", error);
-        });
+        this._cgp.pushErrorScope();
 
 
         const counts = { };
@@ -197,10 +194,7 @@ export default class Pipeline
         );
 
         this.updateFragUniforms(shader);
-        this._cgp.device.popErrorScope().then((error) =>
-        {
-            if (error)console.log("error", error);
-        });
+        this._cgp.popErrorScope();
     }
 
 

@@ -53,7 +53,7 @@ export default class Shader
     compile()
     {
         console.log("compile shader");
-        this._cgp.pushErrorScope("validation");
+        this._cgp.pushErrorScope();
         this.shaderModule = this._cgp.device.createShaderModule({ "code": this._src });
         this._cgp.popErrorScope();
         this._needsRecompile = false;

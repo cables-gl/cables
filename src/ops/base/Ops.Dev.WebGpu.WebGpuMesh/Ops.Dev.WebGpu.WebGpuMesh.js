@@ -90,19 +90,17 @@ inGeom.onChange = () =>
 
 function createShaderModule(device, code)
 {
-    device.pushErrorScope("validation");
-    const shader = device.createShaderModule({ code });
+    cgp.pushErrorScope("validation");
+
+    const shaderModule = device.createShaderModule({ code });
     // const error = await device.popErrorScope();
     // if (error) {
     //   throw new Error(error.message);
     // }
 
-    device.popErrorScope().then((error) =>
-    {
-        if (error)console.log(error);
-    });
+    cgp.popErrorScope();
 
-    return shader;
+    return shaderModule;
 }
 
 function createBuffer(device, data, usage)
@@ -140,7 +138,7 @@ function rebuild()
 
     shader.shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
-    cgp.device.pushErrorScope("validation");
+    cgp.pushErrorScope();
 
     if (!pipe)pipe = new CGP.Pipeline(cgp);
 
@@ -148,10 +146,7 @@ function rebuild()
     console.log(pipeCfg);
     pipeline = cgp.device.createRenderPipeline(pipeCfg);
 
-    cgp.device.popErrorScope().then((error) =>
-    {
-        if (error)console.log("error", error);
-    });
+    cgp.popErrorScope();
 
     const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
     const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
