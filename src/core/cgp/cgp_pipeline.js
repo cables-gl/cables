@@ -27,10 +27,11 @@ export default class Pipeline
         const needsRebuild =
             !this._renderPipeline ||
             !this._pipeCfg ||
-            mesh.needsPipelineUpdate ||
-            shader.needsPipelineUpdate ||
             this._old.mesh != mesh ||
-            this._old.shader != shader;
+            this._old.shader != shader ||
+            mesh.needsPipelineUpdate ||
+            shader.needsPipelineUpdate;
+
 
         if (needsRebuild)
         {
