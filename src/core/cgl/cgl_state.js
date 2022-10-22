@@ -1,6 +1,5 @@
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
-import { MatrixStack } from "./cgl_matrixstack";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";

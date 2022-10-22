@@ -1,7 +1,7 @@
 // import { vec2, vec3 } from "gl-matrix";
 import { UTILS } from "../utils";
 import { b64decTypedArray } from "../base64";
-import { BoundingBox } from "./cgl_boundingbox";
+import { BoundingBox } from "./cg_boundingbox";
 import Logger from "../core_logger";
 
 /**

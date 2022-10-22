@@ -1,7 +1,7 @@
-import { MatrixStack } from "../cgl/cgl_matrixstack";
 import { CGP } from "../cgp";
 import { EventTarget } from "../eventtarget";
 import { CG } from "./cg_constants";
+import { MatrixStack } from "./cg_matrixstack";
 
 const CGState = function ()
 {

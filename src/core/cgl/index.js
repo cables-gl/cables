@@ -1,9 +1,6 @@
 import { Framebuffer } from "./cgl_framebuffer";
 import { Framebuffer2 } from "./cgl_framebuffer2";
-import { Geometry } from "./cgl_geom";
-import { BoundingBox } from "./cgl_boundingbox";
 import { Marker, WireCube, WirePoint } from "./cgl_marker";
-import { MatrixStack } from "./cgl_matrixstack";
 import { Mesh, MESH } from "./cgl_mesh";
 import { Uniform } from "./cgl_shader_uniform";
 import { ShaderLibMods } from "./cgl_shader_lib";
@@ -22,7 +19,10 @@ import {
 
 import { TextureEffect } from "./cgl_textureeffect";
 import { CONSTANTS } from "./constants";
-import { profileData } from "./cgl_profiledata";
+import { ProfileData } from "./cgl_profiledata";
+import { MatrixStack } from "../cg/cg_matrixstack";
+import { Geometry } from "../cg/cg_geom";
+import { BoundingBox } from "../cg/cg_boundingbox";
 
 const CGL = Object.assign(
     {
@@ -47,7 +47,7 @@ const CGL = Object.assign(
         getWheelSpeed,
         getWheelDelta,
         onLoadingAssetsFinished,
-        profileData,
+        ProfileData,
         UniColorShader
     },
     CONSTANTS.BLEND_MODES,
