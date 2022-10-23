@@ -2,6 +2,7 @@ import { CGP } from "../cgp";
 import { EventTarget } from "../eventtarget";
 import { CG } from "./cg_constants";
 import { MatrixStack } from "./cg_matrixstack";
+import Preprocessor from "./preproc";
 
 const CGState = function ()
 {
@@ -9,10 +10,12 @@ const CGState = function ()
 
     this.canvas = null;
 
+    this.fpsCounter = new CABLES.CG.FpsCounter();
     this._identView = vec3.create();
     this._ident = vec3.create();
     vec3.set(this._identView, 0, 0, -2);
     vec3.set(this._ident, 0, 0, 0);
+
 
     /**
          * Current projection matrix
@@ -257,3 +260,9 @@ const CGState = function ()
 };
 
 export { CGState };
+
+
+const pp = new Preprocessor("// #define AAAA\nhallo AAAA!\n// #ifdef AAAA\njaja is defined!\n// #else\n hurziburzi\n// #endif\nhuhu", ".", true);
+// debugger;
+const r = pp.process({ "a": 1 });
+console.log(r);

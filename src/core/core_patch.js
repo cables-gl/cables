@@ -71,14 +71,6 @@ const Patch = function (cfg)
 
     this.loading = new LoadingStatus(this);
 
-    this._perf = {
-        "fps": 0,
-        "ms": 0,
-        "_fpsFrameCount": 0,
-        "_fpsMsCount": 0,
-        "_fpsStart": 0,
-    };
-
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
@@ -192,7 +184,8 @@ Patch.prototype.renderOneFrame = function ()
  */
 Patch.prototype.getFPS = function ()
 {
-    return this._perf.fps;
+    console.log("deprecated getfps");
+    return 0;
 };
 
 /**
@@ -665,11 +658,6 @@ Patch.prototype.exec = function (e)
         const startFrameTime = CABLES.now();
         this.renderFrame();
 
-        this._perf._lastFrameTime = CABLES.now();
-        this._perf._fpsFrameCount++;
-
-        this._perf._fpsMsCount += CABLES.now() - startFrameTime;
-
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }
 
@@ -685,22 +673,6 @@ Patch.prototype.exec = function (e)
         this.emitEvent("renderedOneFrame");
         this._renderOneFrame = false;
     }
-
-    if (CABLES.now() - this._perf._fpsStart >= 1000)
-    {
-        if (this._perf.fps != this._perf._fpsFrameCount)
-        {
-            this._perf.fps = this._perf._fpsFrameCount;
-            this._perf.ms = Math.round(this._perf._fpsMsCount / this._perf._fpsFrameCount);
-
-            this.emitEvent("performance", this._perf);
-
-            this._perf._fpsFrameCount = 0;
-            this._perf._fpsMsCount = 0;
-            this._perf._fpsStart = CABLES.now();
-        }
-    }
-
 
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };

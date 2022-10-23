@@ -80,10 +80,10 @@ export default class GpuCompute
 
 
         // Read buffer.
-        gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
-        {
-            const arrayBuffer = gpuReadBuffer.getMappedRange();
-            console.log(new Float32Array(arrayBuffer));
-        });
+        // gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
+        // {
+        //     const arrayBuffer = gpuReadBuffer.getMappedRange();
+        //     console.log(new Float32Array(arrayBuffer));
+        // });
     }
 }

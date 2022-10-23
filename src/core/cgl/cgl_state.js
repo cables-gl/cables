@@ -288,6 +288,7 @@ const Context = function (_patch)
 
         this._frameStarted = false;
 
+
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
             oldCanvasWidth = this.canvasWidth;
@@ -303,6 +304,7 @@ const Context = function (_patch)
         {
             this._currentCursor = this.canvas.style.cursor = this._cursor;
         }
+        this.fpsCounter.endFrame();
     };
 
     this.logStackError = function (str)
@@ -439,6 +441,7 @@ const Context = function (_patch)
 
     this.renderStart = function (cgl, identTranslate, identTranslateView)
     {
+        this.fpsCounter.startFrame();
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);

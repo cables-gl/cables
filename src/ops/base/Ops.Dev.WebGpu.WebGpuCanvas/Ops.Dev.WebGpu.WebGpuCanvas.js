@@ -142,7 +142,7 @@ if (navigator.gpu)
 
 function createTargets(cgp)
 {
-    const devicePixelRatio = window.devicePixelRatio || 1;
+    const devicePixelRatio = 1;// window.devicePixelRatio || 1;
 
     sizeWidth = canvas.clientWidth * devicePixelRatio;
     sizeHeight = canvas.clientHeight * devicePixelRatio;
@@ -196,7 +196,7 @@ function frame()
         return;
     }
 
-    const devicePixelRatio = window.devicePixelRatio || 1;
+    const devicePixelRatio = 1;// window.devicePixelRatio || 1;
     if (sizeWidth != canvas.clientWidth * devicePixelRatio || sizeHeight != canvas.clientHeight * devicePixelRatio)
     {
         createTargets(cgp);

@@ -8,17 +8,18 @@ export default class Mesh
         this._log = new Logger("cgl_mesh");
         this._cgp = _cgp;
         this._geom = null;
+        this.numIndex = 0;
 
-        this._pipe=new Pipeline(this._cgp);
+        this._pipe = new Pipeline(this._cgp);
 
-        this._numIndices=0;
+        this._numNonIndexed = 0;
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
         this._attributes = [];
 
-        this._needsPipelineUpdate=false;
+        this._needsPipelineUpdate = false;
 
-        if(__geom)this.setGeom(__geom);
+        if (__geom) this.setGeom(__geom);
     }
 
     _createBuffer(device, data, usage)
@@ -41,9 +42,9 @@ export default class Mesh
      * @description set geometry for mesh
      * @param {Geometry} geometry
      */
-    setGeom (geom, removeRef)
+    setGeom(geom, removeRef)
     {
-        this._needsPipelineUpdate=true;
+        this._needsPipelineUpdate = true;
         this._geom = geom;
         this._disposeAttributes();
 
@@ -54,25 +55,24 @@ export default class Mesh
         this._numIndices = vi.length;
         this._indicesBuffer = this._createBuffer(this._cgp.device, new Uint32Array(vi), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
 
-        if(geom.texCoords && geom.texCoords.length)this.setAttribute("texCoords", geom.texCoords, 2);
-        if(geom.vertexNormals && geom.vertexNormals.length)this.setAttribute("normals", geom.vertexNormals, 3);
+        if (geom.texCoords && geom.texCoords.length) this.setAttribute("texCoords", geom.texCoords, 2);
+        if (geom.vertexNormals && geom.vertexNormals.length) this.setAttribute("normals", geom.vertexNormals, 3);
     }
 
 
     _disposeAttributes()
     {
-        this._needsPipelineUpdate=true;
+        this._needsPipelineUpdate = true;
         for (let i = 0; i < this._attributes.length; i++)
         {
             this._attributes[i].buffer.destroy();
         }
-        this._attributes.length=0;
+        this._attributes.length = 0;
     }
 
     dispose()
     {
         this._disposeAttributes();
-
     }
 
     /**
@@ -142,23 +142,25 @@ export default class Mesh
 
     render()
     {
-        if(!this._positionBuffer)return;
+        if (!this._positionBuffer) return;
 
         // this.setPipeline();
 
         this._cgp.getShader().bind();
 
-        this._pipe.setPipeline(this._cgp.getShader(),this)
+        this._pipe.setPipeline(this._cgp.getShader(), this);
 
         this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
-        for(let i=0;i<this._attributes.length;i++)
+        for (let i = 0; i < this._attributes.length; i++)
         {
-            this._cgp.passEncoder.setVertexBuffer(i+1, this._attributes[i].buffer);
+            this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);
         }
 
         this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
 
-        this._cgp.passEncoder.drawIndexed(this._numIndices);
-
+        if (this._numNonIndexed)
+            this._cgp.passEncoder.draw(this._numIndices);
+        else
+            this._cgp.passEncoder.drawIndexed(this._numIndices);
     }
 }

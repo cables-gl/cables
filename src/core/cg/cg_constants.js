@@ -1,5 +1,6 @@
 import { BoundingBox } from "./cg_boundingbox";
 import { Geometry } from "./cg_geom";
+import FpsCounter from "./sg_fpscounter";
 
 const CG = {
 
@@ -7,7 +8,8 @@ const CG = {
     "GAPI_WEBGPU": 1,
 
     "Geometry": Geometry,
-    "BoundingBox": BoundingBox
+    "BoundingBox": BoundingBox,
+    "FpsCounter": FpsCounter
 };
 
 

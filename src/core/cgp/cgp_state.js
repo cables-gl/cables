@@ -23,6 +23,8 @@ const Context = function (_patch)
 
     this.renderStart = function (cgp, identTranslate, identTranslateView)
     {
+        this.fpsCounter.startFrame();
+
         this._startMatrixStacks(identTranslate, identTranslateView);
         this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
         this.emitEvent("beginFrame");
@@ -33,6 +35,7 @@ const Context = function (_patch)
         this._endMatrixStacks();
 
         this.emitEvent("endFrame");
+        this.fpsCounter.endFrame();
     };
 };
 Context.prototype.setViewPort = function (x, y, w, h)
