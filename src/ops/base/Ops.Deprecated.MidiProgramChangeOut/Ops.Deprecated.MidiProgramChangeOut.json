@@ -15,6 +15,11 @@
             "message": "Ops.Dev.MidiProgrammChangeOut renamed to Ops.Dev.MidiProgramChangeOut",
             "author": "pandur",
             "date": 1638460808293
+        },
+        {
+            "message": "Ops.Dev.MidiProgramChangeOut renamed to Ops.Deprecated.MidiProgramChangeOut",
+            "author": "pandur",
+            "date": 1666623293899
         }
     ],
     "authorName": "lofiddler",

@@ -18,14 +18,14 @@ const geomOut = op.outObject("geometry");
 geomOut.ignoreValueSerialize = true;
 
 const
-    mouseOver = op.outValue("Pointer Hover", false),
-    mouseDown = op.outValue("Pointer Down", false),
-    outX = op.outValue("Pointer X"),
-    outY = op.outValue("Pointer Y"),
-    outTop = op.outValue("Top"),
-    outLeft = op.outValue("Left"),
-    outRight = op.outValue("Right"),
-    outBottom = op.outValue("Bottom"),
+    mouseOver = op.outBoolNum("Pointer Hover", false),
+    mouseDown = op.outBoolNum("Pointer Down", false),
+    outX = op.outNumber("Pointer X"),
+    outY = op.outNumber("Pointer Y"),
+    outTop = op.outNumber("Top"),
+    outLeft = op.outNumber("Left"),
+    outRight = op.outNumber("Right"),
+    outBottom = op.outNumber("Bottom"),
     mouseClick = op.outTrigger("Left Click");
 
 const elementPort = op.outObject("Dom Element");

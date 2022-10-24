@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.Midiprogramchange renamed to Ops.Dev.MidiProgramChange",
             "author": "pandur",
             "date": 1638459816708
+        },
+        {
+            "message": "Ops.Dev.MidiProgramChange renamed to Ops.Deprecated.MidiProgramChange",
+            "author": "pandur",
+            "date": 1666623257193
         }
     ],
     "authorName": "lofiddler",

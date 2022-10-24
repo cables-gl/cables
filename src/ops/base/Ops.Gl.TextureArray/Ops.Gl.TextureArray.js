@@ -1,6 +1,6 @@
 const
     outArr = op.outArray("Array"),
-    outCount = op.outValue("Count");
+    outCount = op.outNumber("Count");
 
 outArr.ignoreValueSerialize = true;
 

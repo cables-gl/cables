@@ -5,9 +5,10 @@ const
     spaceX = op.inValue("Space X", 1),
     spaceY = op.inValue("Space Y", 1),
     next = op.outTrigger("Next"),
-    outIndex = op.outValue("Index"),
-    outX = op.outValue("x index"),
-    outY = op.outValue("y index");
+    outIndex = op.outNumber("Index"),
+    outX = op.outNumber("x index"),
+    outY = op.outNumber("y index");
+
 let matOrig = mat4.create();
 let vec = vec3.create();
 

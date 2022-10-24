@@ -2,18 +2,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Update"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fully Visible",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Partly Visible",
                 "subType": "number"
             }

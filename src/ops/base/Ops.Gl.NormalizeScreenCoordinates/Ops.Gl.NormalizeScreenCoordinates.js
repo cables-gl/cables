@@ -1,13 +1,13 @@
 const
     inX = op.inValue("X"),
     inY = op.inValue("Y"),
-    outX = op.outValue("Result X"),
-    outY = op.outValue("Result Y"),
+    outX = op.outNumber("Result X"),
+    outY = op.outNumber("Result Y"),
     range = op.inValueBool("-1 to 1");
 
-inX.onChange = update;
-inY.onChange = update;
-range.onChange = update;
+inX.onChange =
+    inY.onChange =
+    range.onChange = update;
 
 function update()
 {

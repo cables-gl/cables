@@ -102,6 +102,17 @@
             "message": "code cleanup",
             "author": "pandur",
             "date": 1548415252635
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1666622715677
         }
+    ],
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "4DbKrt",
+    "coreLibs": [
+        "cgl_shadergraph"
     ]
 }

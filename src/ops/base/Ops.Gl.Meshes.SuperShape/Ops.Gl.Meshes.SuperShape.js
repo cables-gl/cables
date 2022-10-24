@@ -21,7 +21,7 @@ let n22 = op.inValue("n22", 1);
 let n32 = op.inValue("n32", 3);
 
 let trigger = op.outTrigger("Trigger");
-let outNumVerts = op.outValue("Num Vertices");
+let outNumVerts = op.outNumber("Num Vertices");
 let outGeom = op.outObject("geom");
 
 let needsUpdate = true;
@@ -120,7 +120,6 @@ function update()
     }
 
     if (resize && max > 1) for (let i = 0; i < verts.length; i++) verts[i] /= max;
-
 
     if (asPointCloud.get())
     {

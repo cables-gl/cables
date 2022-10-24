@@ -231,8 +231,6 @@ inExec.onTriggered = function ()
     cgl.popModelMatrix();
 
     if (cam)cam.end();
-
-    // console.log(gltfTransforms);
 };
 
 function finishLoading()
@@ -323,8 +321,6 @@ function finishLoading()
     cgl.patch.loading.finished(loadingId);
     loadingId = null;
 
-    // console.log(gltf.accBuffersDelete);
-
     // if (gltf.chunks.length > 1) gltf.chunks[1] = null;
     // if (gltf.chunks.length > 2) gltf.chunks[2] = null;
 
@@ -335,11 +331,9 @@ function finishLoading()
         for (let i = 0; i < gltf.accBuffersDelete.length; i++)
         {
             gltf.accBuffers[gltf.accBuffersDelete[i]] = null;
-            // console.log("delete",i,gltf.accBuffersDelete[i]);
         }
     }
 
-    // console.log("gltf timing", gltf.timing);
     finishedLoading = true;
 }
 
@@ -431,18 +425,14 @@ function updateMaterials()
         const portShader = op.getPort("Shader");
         const portName = op.getPort("Material Name");
 
-        // console.log(inMaterials.get());
-
         if (!portShader && !portName)
         {
             const inMats = inMaterials.get();
             for (let matname in inMats)
             {
-                console.log("matname", matname);
                 if (inMats[matname] && gltf.json.materials)
                     for (let i = 0; i < gltf.json.materials.length; i++)
                     {
-                        console.log("gltf.json.materials[i].name", gltf.json.materials[i].name);
                         if (gltf.json.materials[i].name == matname)
                         {
                             if (gltf.shaders[i])
@@ -450,7 +440,6 @@ function updateMaterials()
                                 op.warn("double material assignment:", name);
                             }
                             gltf.shaders[i] = inMats[matname];
-                            console.log("shader found!", gltf.shaders[i]);
                         }
                     }
             }
@@ -686,10 +675,6 @@ op.toggleNodeVisibility = function (name)
 
 op.showAnim = function (anim, channel)
 {
-    console.log("showanim", channel);
-
-    console.log(gltf.json.animations[anim].channels[channel]);
-
     const an = gltf.json.animations[anim];
     const chan = gltf.json.animations[anim].channels[channel];
 
@@ -701,13 +686,6 @@ op.showAnim = function (anim, channel)
 
     const accOut = gltf.json.accessors[sampler.output];
     const bufferOut = gltf.accBuffers[sampler.output];
-
-    console.log({
-        "channel": chan,
-        "sampler": sampler,
-        "bufferIn": bufferIn,
-        "bufferOut": bufferOut,
-    });
 };
 
 function uniqueArray(arr)
