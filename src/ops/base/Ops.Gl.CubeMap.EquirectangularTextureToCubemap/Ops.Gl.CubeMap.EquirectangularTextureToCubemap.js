@@ -13,7 +13,7 @@ const outCubemap = op.outTexture("Cubemap Projection");
 
 inTextureFilter.setUiAttribs({ "greyout": !inAdvanced.get() });
 
-inAdvanced.onChange = () => inTextureFilter.setUiAttribs({ "greyout": !inAdvanced.get() });
+inAdvanced.onChange = () => { return inTextureFilter.setUiAttribs({ "greyout": !inAdvanced.get() }); };
 geometry.vertices = new Float32Array([
     // * NOTE: tex coords not needed for cubemapping
     -1.0, 1.0, -1.0,
