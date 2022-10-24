@@ -1,5 +1,5 @@
 {
-    "id": "ad57d840-4fc7-43cf-9095-35e52fde5c14",
+    "id": "4e089d60-006b-4879-9b45-b9616c7fc18d",
     "changelog": [
         {
             "message": "created op",
@@ -22,18 +22,13 @@
             "date": 1663763777482
         },
         {
-            "message": "cloned op from Ops.Gl.ShaderGraph.InputVec4",
+            "message": "Ops.Gl.ShaderGraph.InputVec4 renamed to Ops.Dev.Gl.ShaderGraph.InputVec4",
             "author": "pandur",
-            "date": 1663763806217
-        },
-        {
-            "message": "Ops.User.pandur.SG_color renamed to Ops.Gl.ShaderGraph.InputColor",
-            "author": "pandur",
-            "date": 1663763910019
+            "date": 1666621323487
         }
     ],
     "authorName": "pandur",
-    "created": 1663763806216,
+    "created": 1663335036343,
     "layout": {
         "portsIn": [
             {
@@ -42,22 +37,22 @@
             },
             {
                 "type": 0,
-                "name": "R",
+                "name": "Number X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "G",
+                "name": "Number Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "B",
+                "name": "Number Z",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "A",
+                "name": "Number W",
                 "subType": "number"
             },
             {
@@ -73,6 +68,6 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.Gl.ShaderGraph.InputColor"
+        "name": "Ops.Gl.ShaderGraph.Vec4"
     }
 }

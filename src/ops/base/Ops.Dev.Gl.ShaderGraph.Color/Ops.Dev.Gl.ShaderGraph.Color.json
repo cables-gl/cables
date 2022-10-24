@@ -30,6 +30,11 @@
             "message": "Ops.User.pandur.SG_Color renamed to Ops.Gl.ShaderGraph.Color",
             "author": "pandur",
             "date": 1663740999523
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Color renamed to Ops.Dev.Gl.ShaderGraph.Color",
+            "author": "pandur",
+            "date": 1666621269715
         }
     ],
     "authorName": "pandur",

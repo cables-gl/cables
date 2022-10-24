@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.PerlinNoise3D renamed to Ops.Gl.ShaderGraph.PerlinNoise3D",
             "author": "pandur",
             "date": 1663937990290
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.PerlinNoise3D renamed to Ops.Dev.Gl.ShaderGraph.PerlinNoise3D",
+            "author": "pandur",
+            "date": 1666621342449
         }
     ],
     "layout": {

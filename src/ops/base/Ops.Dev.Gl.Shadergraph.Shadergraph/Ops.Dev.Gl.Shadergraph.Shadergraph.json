@@ -25,6 +25,11 @@
             "message": " added core lib: cgl_shadergraph",
             "author": "pandur",
             "date": 1663738085184
+        },
+        {
+            "message": "Ops.Gl.Shadergraph.Shadergraph renamed to Ops.Dev.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1666621218308
         }
     ],
     "libs": [],

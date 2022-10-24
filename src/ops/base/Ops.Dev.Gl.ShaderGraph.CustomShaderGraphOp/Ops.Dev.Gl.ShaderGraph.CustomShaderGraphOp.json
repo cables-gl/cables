@@ -15,6 +15,11 @@
             "message": " added core lib: cgl_shadergraph",
             "author": "pandur",
             "date": 1663828875485
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.CustomShaderGraphOp renamed to Ops.Dev.Gl.ShaderGraph.CustomShaderGraphOp",
+            "author": "pandur",
+            "date": 1666621287407
         }
     ],
     "authorName": "pandur",

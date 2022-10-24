@@ -15,6 +15,11 @@
             "message": " added core lib: cgl_shadergraph",
             "author": "pandur",
             "date": 1663768016895
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.SampleTexture renamed to Ops.Dev.Gl.ShaderGraph.SampleTexture",
+            "author": "pandur",
+            "date": 1666621396157
         }
     ],
     "authorName": "pandur",

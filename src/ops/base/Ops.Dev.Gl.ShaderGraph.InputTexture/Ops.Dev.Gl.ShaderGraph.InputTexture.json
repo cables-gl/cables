@@ -15,6 +15,11 @@
             "message": "Ops.Gl.ShaderGraph.Texture renamed to Ops.Gl.ShaderGraph.InputTexture",
             "author": "pandur",
             "date": 1663763790899
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.InputTexture renamed to Ops.Dev.Gl.ShaderGraph.InputTexture",
+            "author": "pandur",
+            "date": 1666621331689
         }
     ],
     "authorName": "pandur",

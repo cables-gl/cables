@@ -1,5 +1,5 @@
 {
-    "id": "4e089d60-006b-4879-9b45-b9616c7fc18d",
+    "id": "ad57d840-4fc7-43cf-9095-35e52fde5c14",
     "changelog": [
         {
             "message": "created op",
@@ -20,10 +20,25 @@
             "message": "Ops.Gl.ShaderGraph.Vec4 renamed to Ops.Gl.ShaderGraph.InputVec4",
             "author": "pandur",
             "date": 1663763777482
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderGraph.InputVec4",
+            "author": "pandur",
+            "date": 1663763806217
+        },
+        {
+            "message": "Ops.User.pandur.SG_color renamed to Ops.Gl.ShaderGraph.InputColor",
+            "author": "pandur",
+            "date": 1663763910019
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.InputColor renamed to Ops.Dev.Gl.ShaderGraph.InputColor",
+            "author": "pandur",
+            "date": 1666621302913
         }
     ],
     "authorName": "pandur",
-    "created": 1663335036343,
+    "created": 1663763806216,
     "layout": {
         "portsIn": [
             {
@@ -32,22 +47,22 @@
             },
             {
                 "type": 0,
-                "name": "Number X",
+                "name": "R",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Number Y",
+                "name": "G",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Number Z",
+                "name": "B",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Number W",
+                "name": "A",
                 "subType": "number"
             },
             {
@@ -63,6 +78,6 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.Gl.ShaderGraph.Vec4"
+        "name": "Ops.Gl.ShaderGraph.InputColor"
     }
 }

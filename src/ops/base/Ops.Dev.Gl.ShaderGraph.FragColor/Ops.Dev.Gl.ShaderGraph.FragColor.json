@@ -15,6 +15,11 @@
             "message": "Ops.User.pandur.SG_fragColor renamed to Ops.Gl.ShaderGraph.FragColor",
             "author": "pandur",
             "date": 1663688573149
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.FragColor renamed to Ops.Dev.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1666621294745
         }
     ],
     "authorName": "pandur",

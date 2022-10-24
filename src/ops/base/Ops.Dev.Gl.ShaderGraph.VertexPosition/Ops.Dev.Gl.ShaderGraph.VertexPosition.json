@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.VertexPosition renamed to Ops.Gl.ShaderGraph.VertexPosition",
             "author": "pandur",
             "date": 1663929491489
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.VertexPosition renamed to Ops.Dev.Gl.ShaderGraph.VertexPosition",
+            "author": "pandur",
+            "date": 1666621384857
         }
     ],
     "authorName": "pandur",

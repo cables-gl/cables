@@ -1,5 +1,5 @@
 {
-    "id": "b4b9f9d3-10c1-4a8e-8282-d05df9e92801",
+    "id": "19e60bc9-4ddf-4c24-a6e6-ca48a3856676",
     "changelog": [
         {
             "message": "created op",
@@ -17,33 +17,18 @@
             "date": 1663688593576
         },
         {
-            "message": "cloned op from Ops.Gl.ShaderGraph.Sin",
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
             "author": "pandur",
-            "date": 1663736902910
-        },
-        {
-            "message": "Ops.User.pandur.Mix renamed to Ops.Gl.ShaderGraph.Mix",
-            "author": "pandur",
-            "date": 1663741014904
+            "date": 1666621359755
         }
     ],
     "authorName": "pandur",
-    "created": 1663736902910,
+    "created": 1663503083687,
     "layout": {
         "portsIn": [
             {
                 "type": 2,
-                "name": "x",
-                "objType": "sg_vec4"
-            },
-            {
-                "type": 2,
-                "name": "y",
-                "objType": "sg_vec4"
-            },
-            {
-                "type": 2,
-                "name": "a",
+                "name": "input",
                 "objType": "sg_float"
             }
         ],
@@ -51,10 +36,10 @@
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_vec4"
+                "objType": "sg_float"
             }
         ],
-        "name": "Ops.User.pandur.Mix"
+        "name": "Ops.User.pandur.SG_Sin"
     },
     "coreLibs": [
         "cgl_shadergraph"

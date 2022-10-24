@@ -20,6 +20,11 @@
             "message": "Ops.User.pandur.SG_Noise renamed to Ops.Gl.ShaderGraph.SG_Noise",
             "author": "pandur",
             "date": 1663688870461
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.SG_Noise renamed to Ops.Dev.Gl.ShaderGraph.SG_Noise",
+            "author": "pandur",
+            "date": 1666621351792
         }
     ],
     "authorName": "pandur",
