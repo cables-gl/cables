@@ -18,7 +18,6 @@ op.setPortGroup("Field of View", fovY);
 op.setPortGroup("Frustrum", zNear, zFar);
 
 let asp = 0;
-
 render.onTriggered = function ()
 {
     const cg = op.patch.cg;

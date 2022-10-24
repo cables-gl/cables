@@ -29,7 +29,7 @@ const Texture = function (__cgl, options)
     this._log = new Logger("cgl_texture");
     this._cgl = __cgl;
     this.tex = this._cgl.gl.createTexture();
-    this.id = uuid();
+    this.id = CABLES.uuid();
     this.width = 0;
     this.height = 0;
     this.loading = false;
@@ -795,7 +795,7 @@ Texture.getEmptyCubemapTexture = function (cgl)
 
     return {
         "id": CABLES.uuid(),
-        tex,
+        "tex": tex,
         "cubemap": tex,
         width,
         height,
