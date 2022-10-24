@@ -15,10 +15,10 @@ inTrigger.onTriggered = () =>
     const cgp = op.patch.cg;
     if (!shader)
     {
-        shader = new CGP.Shader(cgp, "testshad0r");
+        shader = new CGP.Shader(cgp, op.name);
         shader.setSource(attachments.mat_wgsl);
 
-        shader.addUniformFrag("4f", "color", r, g, b, a);
+        shader.addUniformFrag("3f", "color", r, g, b);
     }
 
     cgp.pushShader(shader);

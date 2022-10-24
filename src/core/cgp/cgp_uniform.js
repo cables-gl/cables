@@ -10,6 +10,30 @@ export default class Uniform extends CgUniform
     }
 
 
+    updateValueF() { }
+
+    setValueF(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
+
+    updateValue2F() { }
+
+    setValue2F(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
+
+    updateValue3F() { }
+
+    setValue3F(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
+
     updateValue4F() { }
 
     setValue4F(v)

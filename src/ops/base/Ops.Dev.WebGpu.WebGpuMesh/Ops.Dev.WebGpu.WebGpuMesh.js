@@ -98,7 +98,7 @@ function createShaderModule(device, code)
     //   throw new Error(error.message);
     // }
 
-    cgp.popErrorScope();
+    cgp.popErrorScope("cgp_pipeline createshadermodule");
 
     return shaderModule;
 }
@@ -146,7 +146,7 @@ function rebuild()
     console.log(pipeCfg);
     pipeline = cgp.device.createRenderPipeline(pipeCfg);
 
-    cgp.popErrorScope();
+    cgp.popErrorScope(op.name);
 
     const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
     const fUniformBufferSize = 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float

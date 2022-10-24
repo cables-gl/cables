@@ -23,14 +23,14 @@ export default class Shader
         this._src = "";
     }
 
+    get isValid()
+    {
+        return this._isValid;
+    }
+
     get uniforms()
     {
         return this._uniforms;
-    }
-
-    isValid()
-    {
-        return this._isValid;
     }
 
     getName()
@@ -52,12 +52,19 @@ export default class Shader
 
     compile()
     {
-        console.log("compile shader");
+        this._isValid = true;
+        console.log("compiling shader...", this._compileReason);
         this._cgp.pushErrorScope();
         this.shaderModule = this._cgp.device.createShaderModule({ "code": this._src });
-        this._cgp.popErrorScope();
+        this._cgp.popErrorScope("cgp_shader " + this._name, this.error.bind(this));
         this._needsRecompile = false;
     }
+
+    error(e)
+    {
+        this._isValid = false;
+    }
+
 
     bind()
     {

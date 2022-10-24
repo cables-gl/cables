@@ -12,6 +12,8 @@ const Context = function (_patch)
 {
     CGState.apply(this);
 
+    this.patch = _patch;
+
     this.gApi = CG.GAPI_WEBGPU;
     this._viewport = [0, 0, 256, 256];
     this._shaderStack = [];
@@ -105,11 +107,18 @@ Context.prototype.pushErrorScope = function ()
     this.device.pushErrorScope("validation");
 };
 
-Context.prototype.popErrorScope = function ()
+Context.prototype.popErrorScope = function (name, cb)
 {
     this.device.popErrorScope().then((error) =>
     {
-        if (error)console.warn("[cgp]", error);
+        if (error)
+        {
+            this.patch.emitEvent("criticalError", { "title": "WebGPU error \"" + name + "\"", "codeText": error.message });
+            // if (this.patch.isEditorMode())console.log("WebGPU error " + this._name, error.message);
+
+            console.warn("[cgp]", name, error.message, error, cb);
+            if (cb)cb(error);
+        }
     });
 };
 

@@ -148,7 +148,20 @@ export default class Mesh
 
         this._cgp.getShader().bind();
 
+        if (!this._cgp.getShader().isValid)
+        {
+            // console.log("invalid");
+            return;
+        }
+
         this._pipe.setPipeline(this._cgp.getShader(), this);
+
+        if (!this._pipe.isValid)
+        {
+            // console.log("invalid");
+            return;
+        }
+
 
         this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
         for (let i = 0; i < this._attributes.length; i++)

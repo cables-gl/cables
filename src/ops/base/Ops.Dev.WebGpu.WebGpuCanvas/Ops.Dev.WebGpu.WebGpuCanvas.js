@@ -31,7 +31,7 @@ let canvasInfo = {};
 let sizeWidth = 0;
 let sizeHeight = 0;
 
-op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context();
+op.patch.cgp = op.patch.cgp || new CABLES.CGP.Context(op.patch);
 const cgp = op.patch.cgp;
 const sampleCount = 1;
 

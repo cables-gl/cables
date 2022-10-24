@@ -7,6 +7,7 @@ export default class Pipeline
     {
         if (!_cgp) throw new Error("Pipeline constructed without cgp " + _name);
         this._cgp = _cgp;
+        this._isValid = true;
 
         this._pipeCfg = null;
         this._renderPipeline = null;
@@ -16,6 +17,8 @@ export default class Pipeline
 
         this._old = {};
     }
+
+    get isValid() { return this._isValid; }
 
     setPipeline(shader, mesh)
     {
@@ -46,7 +49,7 @@ export default class Pipeline
             this._bindUniforms(shader);
         }
 
-        if (this._renderPipeline)
+        if (this._renderPipeline && this._isValid)
         {
             mat4.copy(this._matModel, this._cgp.mMatrix);
             mat4.copy(this._matView, this._cgp.vMatrix);
@@ -197,6 +200,9 @@ export default class Pipeline
         );
 
         this._uniBufFrag.updateUniformValues();
-        this._cgp.popErrorScope();
+        this._cgp.popErrorScope("cgp_pipeline end", (e) =>
+        {
+            this._isValid = false;
+        });
     }
 }
