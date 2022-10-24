@@ -27,6 +27,8 @@ function onKeyDown(e)
         learning = false;
         removeListeners();
         addListener();
+
+        if (CABLES.UI)gui.emitEvent("portValueEdited", op, learnedKeyCode, learnedKeyCode.get());
     }
     else
     {

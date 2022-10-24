@@ -60,6 +60,9 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
+            gui.emitEvent("portValueEdited", op, ccIndexDropdown, ccIndexDropdown.get());
+            gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
+
             op.uiAttr({ "info": `bound to CC: ${ccIndexDropdown.get()}` });
             op.refreshParams();
         }

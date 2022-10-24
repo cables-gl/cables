@@ -86,6 +86,9 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
+            gui.emitEvent("portValueEdited", op, noteDropdown, noteDropdown.get());
+            gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
+
             op.uiAttr({ "info": `bound to Note: ${noteDropdown.get()}` });
             op.refreshParams();
         }
