@@ -64,7 +64,7 @@ function buildMesh()
     }
     else
     {
-        bb = new CGL.BoundingBox();
+        bb = new CABLES.CG.BoundingBox();
 
         bb.applyPos(inWidth.get() / 2, inHeight.get() / 2, inLength.get() / 2);
         bb.applyPos(-inWidth.get() / 2, -inHeight.get() / 2, -inLength.get() / 2);

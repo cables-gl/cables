@@ -17,7 +17,7 @@ const
     textureOut = op.outTexture("texture"),
     outLines = op.outNumber("Total Lines", 0),
     outWidth = op.outNumber("Width", 0),
-    loaded = op.outValue("Font Available", 0);
+    loaded = op.outBoolNum("Font Available", 0);
 
 const cgl = op.patch.cgl;
 
@@ -136,7 +136,7 @@ op.onDelete = function ()
         CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
 };
 
-var shader = new CGL.Shader(cgl, "TextMesh");
+const shader = new CGL.Shader(cgl, "TextMesh");
 shader.setSource(attachments.textmesh_vert, attachments.textmesh_frag);
 const uniTex = new CGL.Uniform(shader, "t", "tex", 0);
 const uniTexMul = new CGL.Uniform(shader, "t", "texMul", 1);
@@ -183,7 +183,7 @@ render.onTriggered = function ()
     if (mesh && mesh.numInstances > 0)
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.setTexture(0, textureOut.get().tex);
 
         const mulTex = inMulTex.get();
@@ -204,7 +204,7 @@ render.onTriggered = function ()
         cgl.popModelMatrix();
 
         cgl.setTexture(0, null);
-        cgl.setPreviousShader();
+        cgl.popShader();
         cgl.popBlendMode();
     }
 
@@ -270,7 +270,7 @@ function generateMesh()
         let offX = 0;
         let width = 0;
 
-        for (var i = 0; i < numChars; i++)
+        for (let i = 0; i < numChars; i++)
         {
             const chStr = txt.substring(i, i + 1);
             const char = font.chars[String(chStr)];
@@ -291,7 +291,7 @@ function generateMesh()
 
         height = (s + 1) * lineHeight.get();
 
-        for (var i = 0; i < numChars; i++)
+        for (let i = 0; i < numChars; i++)
         {
             const chStr = txt.substring(i, i + 1);
             const char = font.chars[String(chStr)];
@@ -354,7 +354,7 @@ function printChars(fontSize, simulate)
     ctx.font = fontSize + "px " + inFont.get();
     ctx.textAlign = "left";
 
-    var posy = 0, i = 0;
+    let posy = 0;
     let posx = 0;
     const lineHeight = fontSize * 1.4;
     const result =
@@ -362,7 +362,7 @@ function printChars(fontSize, simulate)
             "fits": true
         };
 
-    for (var i = 0; i < font.characters.length; i++)
+    for (let i = 0; i < font.characters.length; i++)
     {
         const chStr = String(font.characters.substring(i, i + 1));
         const chWidth = (ctx.measureText(chStr).width);

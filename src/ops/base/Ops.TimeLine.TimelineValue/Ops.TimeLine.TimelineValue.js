@@ -1,11 +1,10 @@
-const inTime = op.inValue("Time");
-const animVal = op.inValue("Value");
-
-const timeUnit = op.inValueSelect("Unit", ["Seconds", "Frames"], "Seconds");
-
-const outVal = op.outValue("Result");
-const outArr = op.outArray("Anim Array");
-const outEnded = op.outValue("Anim Finished");
+const
+    inTime = op.inValue("Time"),
+    animVal = op.inValue("Value"),
+    timeUnit = op.inValueSelect("Unit", ["Seconds", "Frames"], "Seconds"),
+    outVal = op.outNumber("Result"),
+    outArr = op.outArray("Anim Array"),
+    outEnded = op.outBoolNum("Anim Finished");
 
 inTime.onChange = update;
 let hasError = false;

@@ -5,18 +5,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Execute"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Primitive index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],

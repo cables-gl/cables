@@ -21,7 +21,7 @@ function showCodeModal(title, code, type)
 {
     if (!CABLES.UI || !CABLES.UI.ModalDialog)
     {
-        console.log(title, code);
+        op.log(title, code);
     }
 
     let html = "";

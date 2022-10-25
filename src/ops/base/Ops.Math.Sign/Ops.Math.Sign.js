@@ -1,22 +1,21 @@
 const
-    value = op.inValue('Value'),
-    noZeroIn = op.inBool("Remove zero",false),
-    result = op.outValue('Result');
+    value = op.inValue("Value"),
+    noZeroIn = op.inBool("Remove zero", false),
+    result = op.outNumber("Result");
 
-value.onChange = function()
+value.onChange = function ()
 {
-    var direction=0;
-    var val = value.get() * 999;
-    var noZero = noZeroIn.get();
+    let direction = 0;
+    let val = value.get() * 999;
+    let noZero = noZeroIn.get();
 
-    if(!noZero)
+    if (!noZero)
     {
-        direction = Math.round( Math.max(Math.min(val, 1), -1) );
+        direction = Math.round(Math.max(Math.min(val, 1), -1));
     }
     else
     {
-        direction = (val<0)?-1:1;
+        direction = (val < 0) ? -1 : 1;
     }
-    result.set( direction );
+    result.set(direction);
 };
-

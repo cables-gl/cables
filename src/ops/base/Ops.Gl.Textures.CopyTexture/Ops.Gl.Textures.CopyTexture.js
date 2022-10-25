@@ -17,7 +17,7 @@ const
 
     trigger = op.outTrigger("trigger"),
     texOut = op.outTexture("texture_out", null),
-    outRatio = op.outValue("Aspect Ratio");
+    outRatio = op.outNumber("Aspect Ratio");
 
 alphaMaskMethod.setUiAttribs({ "hidePort": true });
 greyscale.setUiAttribs({ "hidePort": true });

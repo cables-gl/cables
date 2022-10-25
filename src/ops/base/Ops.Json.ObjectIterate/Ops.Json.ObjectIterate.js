@@ -1,13 +1,14 @@
-var inObj=op.inObject("Object");
-var outKey=op.outValue("Key");
+const
+    inObj = op.inObject("Object"),
+    outKey = op.outNumber("Key");
 
-inObj.onChange=function()
+inObj.onChange = function ()
 {
-    var obj=inObj.get();
-    
-    if(obj)
+    let obj = inObj.get();
+
+    if (obj)
     {
-        for(var i in obj)
+        for (let i in obj)
         {
             outKey.set(i);
         }

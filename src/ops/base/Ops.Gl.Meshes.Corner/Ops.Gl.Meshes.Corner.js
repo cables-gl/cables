@@ -1,4 +1,3 @@
-
 let render = op.inTrigger("Render");
 let width = op.inValueFloat("Width", 1);
 let height = op.inValueFloat("Height", 1);
@@ -38,7 +37,6 @@ render.onTriggered = function ()
     trigger.trigger();
 };
 
-
 function create()
 {
     let w = width.get();
@@ -67,29 +65,21 @@ function create()
         x - th, y + h + th, 0
     );
 
-    if (geom.vertexNormals.length === 0)
-        geom.vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-    if (geom.tangents.length === 0)
-        geom.tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0);
-    if (geom.biTangents.length === 0)
-        geom.biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0);
+    if (geom.vertexNormals.length === 0) geom.vertexNormals = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
+    if (geom.tangents.length === 0) geom.tangents = [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0];
+    if (geom.biTangents.length === 0) geom.biTangents = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0];
 
-
-    if (geom.verticesIndices)geom.verticesIndices.length = 0;
-    else geom.verticesIndices = [];
-
-    geom.verticesIndices.push(7, 6, 3, 6, 2, 3);
-    geom.verticesIndices.push(0, 4, 3, 4, 7, 3);
-
+    geom.verticesIndices = [7, 6, 3, 6, 2, 3, 0, 4, 3, 4, 7, 3];
 
     if (geom.texCoords.length === 0)
     {
-        geom.texCoords = new Float32Array();
+        const tc = [];
         for (let i = 0; i < geom.vertices.length; i += 3)
         {
-            geom.texCoords[i / 3 * 2] = geom.vertices[i + 0] / w - 0.5;
-            geom.texCoords[i / 3 * 2] = geom.vertices[i + 1] / h - 0.5;
+            tc[i / 3 * 2] = geom.vertices[i + 0] / w - 0.5;
+            tc[i / 3 * 2 + 1] = geom.vertices[i + 1] / h - 0.5;
         }
+        geom.texCoords = tc;
     }
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);

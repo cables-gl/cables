@@ -1,26 +1,26 @@
 const
-    exe=op.inTrigger("exe"),
-    trigger=op.inTriggerButton("trigger"),
-    reset=op.inTriggerButton("reset"),
-    next=op.outTrigger("next"),
-    time=op.outValue("time");
+    exe = op.inTrigger("exe"),
+    trigger = op.inTriggerButton("trigger"),
+    reset = op.inTriggerButton("reset"),
+    next = op.outTrigger("next"),
+    time = op.outNumber("time");
 
-var lastTrigger=op.patch.freeTimer.get();
+let lastTrigger = op.patch.freeTimer.get();
 time.set(0);
 
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    time.set( op.patch.freeTimer.get()-lastTrigger);
+    time.set(op.patch.freeTimer.get() - lastTrigger);
     next.trigger();
 };
 
-reset.onTriggered=function()
+reset.onTriggered = function ()
 {
     time.set(0);
 };
 
-trigger.onTriggered=function()
+trigger.onTriggered = function ()
 {
-    lastTrigger=op.patch.freeTimer.get();
+    lastTrigger = op.patch.freeTimer.get();
     time.set(0);
 };

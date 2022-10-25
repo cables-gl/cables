@@ -1,0 +1,78 @@
+{
+    "id": "aef36334-477a-4173-af03-d4e162d31bfb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663331908565
+        },
+        {
+            "message": " added lib: shadergraph.js",
+            "author": "pandur",
+            "date": 1663331955754
+        },
+        {
+            "message": " removed lib: shadergraph.js",
+            "author": "pandur",
+            "date": 1663334648482
+        },
+        {
+            "message": "Ops.User.pandur.Shadergraph renamed to Ops.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1663611643598
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663738085184
+        },
+        {
+            "message": "Ops.Gl.Shadergraph.Shadergraph renamed to Ops.Dev.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1666621218308
+        }
+    ],
+    "libs": [],
+    "authorName": "pandur",
+    "created": 1663334732841,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 2,
+                "name": "Fragment",
+                "objType": "sg_void"
+            },
+            {
+                "type": 2,
+                "name": "Vertex",
+                "objType": "sg_void"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            },
+            {
+                "type": 5,
+                "name": "Source Fragment"
+            },
+            {
+                "type": 5,
+                "name": "Source Vertex"
+            }
+        ],
+        "name": "Ops.Gl.Shadergraph.Shadergraph"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}

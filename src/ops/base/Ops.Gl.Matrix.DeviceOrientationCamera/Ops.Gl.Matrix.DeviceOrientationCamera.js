@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     next = op.outTrigger("Next"),
-    winOrient = op.outValue("Window Orientation"),
+    winOrient = op.outNumber("Window Orientation"),
     cgl = op.patch.cgl,
     vCenter = vec3.create(),
     transMatrix = mat4.create(),

@@ -7,25 +7,25 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "reset"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "time",
                 "subType": "number"
             }

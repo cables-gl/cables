@@ -1,14 +1,16 @@
-var valueBefore = -1;
+let valueBefore = -1;
 
 // input
-var valuePort = op.inValue('Value', -1);
+let valuePort = op.inValue("Value", -1);
 
 // output
-var outTrigger = op.outTrigger('Became Zero Trigger'); 
+let outTrigger = op.outTrigger("Became Zero Trigger");
 
-valuePort.onChange = function() {
-    var value = valuePort.get();
-    if(valueBefore != 0 & value == 0) {
+valuePort.onChange = function ()
+{
+    let value = valuePort.get();
+    if (valueBefore != 0 & value == 0)
+    {
         outTrigger.trigger();
     }
     valueBefore = value;

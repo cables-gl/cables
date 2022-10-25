@@ -1,7 +1,7 @@
 const
     inNum = op.inValueFloat("Number"),
     inMode = op.inSwitch("Mode", ["Ceil", "Floor"], "Ceil"),
-    result = op.outValue("Result");
+    result = op.outNumber("Result");
 
 inMode.onChange = inNum.onChange = function ()
 {

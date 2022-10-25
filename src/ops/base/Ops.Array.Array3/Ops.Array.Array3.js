@@ -1,40 +1,40 @@
 const
-    inNum=op.inValueInt("Num Triplets",100),
-    inX=op.inValueFloat("X",0),
-    inY=op.inValueFloat("Y",0),
-    inZ=op.inValueFloat("Z",0),
-    outArr=op.outArray("Array"),
+    inNum = op.inValueInt("Num Triplets", 100),
+    inX = op.inValueFloat("X", 0),
+    inY = op.inValueFloat("Y", 0),
+    inZ = op.inValueFloat("Z", 0),
+    outArr = op.outArray("Array"),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");
 
-inNum.onChange=
-    inX.onChange=
-    inY.onChange=
-    inZ.onChange=update;
+inNum.onChange =
+    inX.onChange =
+    inY.onChange =
+    inZ.onChange = update;
 
-var arr=[];
+let arr = [];
 update();
 
 function update()
 {
-    var num=inNum.get()*3;
+    let num = inNum.get() * 3;
 
-    if(num<0)num=0;
-    if(arr.length!=num) arr.length=num;
+    if (num < 0)num = 0;
+    if (arr.length != num) arr.length = num;
 
-    const x=inX.get();
-    const y=inY.get();
-    const z=inZ.get();
+    const x = inX.get();
+    const y = inY.get();
+    const z = inZ.get();
 
-    for(var i=0;i<num;i+=3)
+    for (let i = 0; i < num; i += 3)
     {
-        arr[i]=x;
-        arr[i+1]=y;
-        arr[i+2]=z;
+        arr[i] = x;
+        arr[i + 1] = y;
+        arr[i + 2] = z;
     }
 
     outArr.set(null);
     outArr.set(arr);
-    outTotalPoints.set(num/3);
+    outTotalPoints.set(num / 3);
     outArrayLength.set(num);
 }

@@ -1394,14 +1394,8 @@ let tc = [0.499977, 0.652534, 0.500026, 0.5474870000000001, 0.499974, 0.602372, 
 
 for (let i = 0; i < faces.length; i++)
 {
-    // if(faces[i]>467)
-    {
-        faces[i]--;
-        // console.log("oops",i,faces[i]);
-    }
+    faces[i]--;
 }
-
-console.log("verts", verts.length, verts.length / 3);
 
 const geom = new CGL.Geometry("fratze");
 geom.clear();

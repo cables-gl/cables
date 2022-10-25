@@ -1,6 +1,7 @@
-let inUpdate = op.inTriggerButton("Update");
-let outResult = op.outValue("Fully Visible");
-let outResultPartly = op.outValue("Partly Visible");
+const
+    inUpdate = op.inTriggerButton("Update"),
+    outResult = op.outBoolNum("Fully Visible"),
+    outResultPartly = op.outBoolNum("Partly Visible");
 
 inUpdate.onTriggered = update;
 

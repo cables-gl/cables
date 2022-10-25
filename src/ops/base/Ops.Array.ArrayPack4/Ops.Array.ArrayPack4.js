@@ -8,7 +8,6 @@ const exe = op.inTrigger("Trigger in"),
     outArrayLength = op.outNumber("Array length");
 
 let showingError = false;
-
 let arr = [];
 let emptyArray = [];
 let needsCalc = true;

@@ -1,7 +1,3 @@
-/**
- * canvas2texture op for cables
- * @author Jan <LJ> Scheurer - Xe-Development UG
- */
 const
     cgl = op.patch.cgl,
     inCanvas = op.inObject("canvas"),
@@ -9,11 +5,11 @@ const
     inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     inTextureFlip = op.inValueBool("flip"),
     inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
-
     outTexture = op.outTexture("texture"),
-    outWidth = op.outValue("width"),
-    outHeight = op.outValue("height"),
+    outWidth = op.outNumber("width"),
+    outHeight = op.outNumber("height"),
     canvasTexture = new CGL.Texture(cgl);
+
 let cgl_filter = null;
 let cgl_wrap = null;
 
@@ -75,11 +71,3 @@ inTextureFilter.set("linear");
 inTextureWrap.set("repeat");
 
 outTexture.set(CGL.Texture.getEmptyTexture(cgl));
-
-/*
-//Test Code
-var ctx = document.createElement('canvas').getContext('2d');
-ctx.fillStyle = "#FFF";
-ctx.fillRect(50,0,50,1000);
-//CABLES.patch.getOpsByName("canvas2texture")[0].getPortByName('canvas').set(ctx.canvas);
-*/

@@ -8,7 +8,7 @@ const
     inBreaks = op.inValueBool("Convert Line Breaks", false),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
     outElement = op.outObject("DOM Element", null, "element"),
-    outHover = op.outValue("Hover"),
+    outHover = op.outBoolNum("Hover"),
     outClicked = op.outTrigger("Clicked");
 
 let listenerElement = null;

@@ -29,7 +29,7 @@
             {
                 "type": 0,
                 "name": "Found",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Json.ObjectGetNumber_v2"

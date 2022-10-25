@@ -1,8 +1,9 @@
-const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger");
-const inRed=op.inValueSlider("Red");
+const
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger"),
+    inRed = op.inValueSlider("Red");
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
 function doRender()
 {
@@ -11,14 +12,10 @@ function doRender()
     cgl.popShader();
 }
 
-var shader=new CGL.Shader(cgl,'MinimalMaterial');
-shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-shader.setSource(attachments.shader_vert,attachments.shader_frag);
+const shader = new CGL.Shader(cgl, "MinimalMaterial");
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setSource(attachments.shader_vert, attachments.shader_frag);
 
-// const uni=new CGL.Uniform(shader,'f','red',inRed);
-shader.addUniformFrag("f","red",inRed);
+shader.addUniformFrag("f", "red", inRed);
 
-
-
-
-render.onTriggered=doRender;
+render.onTriggered = doRender;

@@ -48,8 +48,6 @@ inExec.onTriggered = function ()
 
             mat4.getTranslation(oldTrans, node.mat);
 
-            // console.log(oldTrans);
-
             // const v = Math.sin(time + (Math.seededRandom() * offs)) * ampl;
             // node.addTranslate = [v * ax, v * ay, v * az];
             node.addTranslate = [oldTrans[0] * axisX.get(), oldTrans[1] * axisY.get(), oldTrans[2] * axisZ.get()];

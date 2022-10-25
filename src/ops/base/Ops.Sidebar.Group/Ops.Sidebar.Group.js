@@ -15,7 +15,7 @@ inVisible.onChange = function ()
 };
 
 // vars
-var el = document.createElement("div");
+let el = document.createElement("div");
 el.dataset.op = op.id;
 el.classList.add("sidebar__group");
 onDefaultMinimizedPortChanged();

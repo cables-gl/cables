@@ -23,9 +23,9 @@ const
     restricted = op.inValueBool("restricted", true),
 
     trigger = op.outTrigger("trigger"),
-    outRadius = op.outValue("radius"),
-    outXDeg = op.outValue("Rot X"),
-    outYDeg = op.outValue("Rot Y"),
+    outRadius = op.outNumber("radius"),
+    outXDeg = op.outNumber("Rot X"),
+    outYDeg = op.outNumber("Rot Y"),
 
     inReset = op.inTriggerButton("Reset");
 
@@ -39,7 +39,6 @@ maxDist.set(99999);
 
 inReset.onTriggered = reset;
 
-const cgl = op.patch.cgl;
 let eye = vec3.create();
 const vUp = vec3.create();
 const vCenter = vec3.create();
@@ -127,6 +126,14 @@ const lastPx = 0;
 
 render.onTriggered = function ()
 {
+    const cgl = op.patch.cg;
+
+    if (!element)
+    {
+        setElement(cgl.canvas);
+        bind();
+    }
+
     cgl.pushViewMatrix();
 
     px = ip(px, percX);
@@ -280,7 +287,7 @@ function onMouseUp(e)
 
 function lockChange()
 {
-    const el = op.patch.cgl.canvas;
+    const el = op.patch.cg.canvas;
 
     if (document.pointerLockElement === el || document.mozPointerLockElement === el || document.webkitPointerLockElement === el)
     {
@@ -373,9 +380,6 @@ function unbind()
 }
 
 eye = circlePos(0);
-setElement(cgl.canvas);
-
-bind();
 
 initialX.set(0.25);
 initialRadius.set(0.05);

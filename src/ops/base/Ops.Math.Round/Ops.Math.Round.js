@@ -1,7 +1,7 @@
 const
-    result = op.outValue("result"),
     number1 = op.inValueFloat("number"),
-    decPlaces = op.inInt("Decimal Places", 0);
+    decPlaces = op.inInt("Decimal Places", 0),
+    result = op.outNumber("result");
 
 let decm = 0;
 

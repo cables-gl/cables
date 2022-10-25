@@ -42,55 +42,13 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "filter"
-            },
-            {
                 "type": 0,
                 "name": "wrap index",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "wrap",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "HDR",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Alpha Mask Source index",
-                "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Alpha Mask Source"
-            },
-            {
-                "type": 0,
-                "name": "Convert Greyscale index",
-                "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Convert Greyscale"
-            },
-            {
-                "type": 0,
-                "name": "Invert R",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Invert G",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Invert B",
                 "subType": "boolean"
             },
             {

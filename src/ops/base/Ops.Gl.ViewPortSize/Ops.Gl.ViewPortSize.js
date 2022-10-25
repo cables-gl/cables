@@ -1,14 +1,14 @@
 const
-    exec=op.inTrigger("Exec"),
-    next=op.outTrigger("Next"),
-    outX=op.outValue("X"),
-    outY=op.outValue("Y"),
-    outW=op.outValue("Width"),
-    outH=op.outValue("Height");
+    exec = op.inTrigger("Exec"),
+    next = op.outTrigger("Next"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outW = op.outNumber("Width"),
+    outH = op.outNumber("Height");
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-    const vp=op.patch.cgl.getViewPort();
+    const vp = op.patch.cgl.getViewPort();
 
     outX.set(vp[0]);
     outY.set(vp[1]);

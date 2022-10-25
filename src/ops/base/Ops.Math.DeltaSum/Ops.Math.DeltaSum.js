@@ -7,7 +7,7 @@ const
     inMin = op.inValue("Min", 0),
     inMax = op.inValue("Max", 100),
     inRubber = op.inValue("Rubberband", 0),
-    outVal = op.outValue("Absolute Value");
+    outVal = op.outNumber("Absolute Value");
 
 inVal.changeAlways = true;
 

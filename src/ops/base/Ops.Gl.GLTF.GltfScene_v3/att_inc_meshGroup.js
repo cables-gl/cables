@@ -2,7 +2,7 @@ const gltfMeshGroup = class
 {
     constructor(gltf, m)
     {
-        this.bounds = new CGL.BoundingBox();
+        this.bounds = new CABLES.CG.BoundingBox();
         this.meshes = [];
         this.name = m.name;
         const prims = m.primitives;

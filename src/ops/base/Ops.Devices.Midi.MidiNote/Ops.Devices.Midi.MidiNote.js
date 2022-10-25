@@ -34,8 +34,8 @@ op.setPortGroup("Note", [noteDropdown, normalizeDropdown, gateType]);
 /* OUT */
 const eventOut = op.outObject("MIDI Event Out");
 const triggerOut = op.outTrigger("Trigger Out");
-const currentNoteOut = op.outValue("Current Note");
-const velocityOut = op.outValue("Velocity");
+const currentNoteOut = op.outNumber("Current Note");
+const velocityOut = op.outNumber("Velocity");
 const gateOut = op.outValueBool("Gate");
 const arrayOut = op.outArray("Velocity Array");
 arrayOut.set(velocityArray);
@@ -86,6 +86,9 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
+            gui.emitEvent("portValueEdited", op, noteDropdown, noteDropdown.get());
+            gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
+
             op.uiAttr({ "info": `bound to Note: ${noteDropdown.get()}` });
             op.refreshParams();
         }

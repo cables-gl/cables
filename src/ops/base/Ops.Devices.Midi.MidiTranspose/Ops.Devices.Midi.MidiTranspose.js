@@ -1,4 +1,3 @@
-
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
@@ -17,7 +16,6 @@ const inEvent = op.inObject("MIDI Event In");
 const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
 const inTranspose = op.inInt("Transpose Amount", 0);
 const learn = op.inTriggerButton("learn");
-
 
 op.setPortGroup("MIDI", [inEvent, midiChannelDropdown, learn]);
 op.setPortGroup("Transpose", [inTranspose]);
@@ -57,7 +55,7 @@ inTranspose.onChange = function ()
         // eventOut.set({ data: [(NOTE_OFF << 4 | lastTransposedNote.channel), lastTransposedNote.index, 0] });
     }
 };
-var lastTransposedNote = null;
+let lastTransposedNote = null;
 
 let learning = false;
 learn.onTriggered = () =>
@@ -86,7 +84,7 @@ inEvent.onChange = () =>
 
     if (event.channel === midiChannelDropdown.get() - 1)
     {
-        const newEvent = Object.assign({}, event);
+        const newEvent = { ...event };
 
         const note = event.index;
         const transposeAmount = inTranspose.get();
@@ -95,13 +93,12 @@ inEvent.onChange = () =>
         if (event.data[0] === (NOTE_ON << 4 | (event.channel)))
         {
             eventOut.set(null);
-            eventOut.set(Object.assign({}, newEvent, {
+            eventOut.set({ ...newEvent,
                 "data": [(NOTE_OFF << 4 | (event.channel)), note, 0],
                 "note": note,
                 "index": note,
                 "velocity": 0,
-                "newNote": [note, getMIDINote(note)],
-            }));
+                "newNote": [note, getMIDINote(note)], });
         }
 
         newEvent.note = newNoteIndex;

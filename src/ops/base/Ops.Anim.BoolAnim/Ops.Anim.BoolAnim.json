@@ -53,7 +53,7 @@
             {
                 "type": 0,
                 "name": "finished",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
                 "type": 1,

@@ -2,11 +2,10 @@ const
     doRequest = op.inTriggerButton("Request Fullscreen"),
     doExit = op.inTriggerButton("Exit Fullscreen"),
     inEle = op.inSwitch("Element", ["Canvas", "Document"], "Canvas"),
-    isFullscreen = op.outValueBool("Is Fullscreen");
+    isFullscreen = op.outBoolNum("Is Fullscreen");
 
 doExit.onTriggered = exitFs;
 doRequest.onTriggered = startFs;
-
 
 let countStarts = 0;
 
@@ -39,7 +38,6 @@ function startFs()
     setTimeout(setState, 500);
     setTimeout(setState, 1000);
 }
-
 
 function exitFs()
 {

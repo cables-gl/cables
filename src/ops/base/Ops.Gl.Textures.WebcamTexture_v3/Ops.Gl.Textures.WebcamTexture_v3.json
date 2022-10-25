@@ -137,7 +137,7 @@
             {
                 "type": 0,
                 "name": "Available",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
                 "type": 0,
@@ -171,7 +171,7 @@
                 "name": "Texture updated"
             }
         ],
-        "name": "Ops.Dev.Gl.Textures.NewWebcamTexture"
+        "name": "Ops.Gl.Textures.WebcamTexture_v3"
     },
     "summary": "Use your webcam camera as a texture",
     "issues": "",

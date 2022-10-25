@@ -5,11 +5,11 @@ const
     inUrlPort = op.inUrl("URL", "audio"),
     inLoadingTask = op.inBool("Create Loading Task", true),
     audioBufferPort = op.outObject("Audio Buffer", null, "audioBuffer"),
-    finishedLoadingPort = op.outValue("Finished Loading", false),
-    sampleRatePort = op.outValue("Sample Rate", 0),
-    lengthPort = op.outValue("Length", 0),
-    durationPort = op.outValue("Duration", 0),
-    numberOfChannelsPort = op.outValue("Number of Channels", 0),
+    finishedLoadingPort = op.outBoolNum("Finished Loading", false),
+    sampleRatePort = op.outNumber("Sample Rate", 0),
+    lengthPort = op.outNumber("Length", 0),
+    durationPort = op.outNumber("Duration", 0),
+    numberOfChannelsPort = op.outNumber("Number of Channels", 0),
     outLoading = op.outBool("isLoading", 0);
 
 let currentBuffer = null;

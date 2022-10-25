@@ -1130,7 +1130,6 @@ const Op = function ()
 
     Op.prototype.error = Op.prototype.logError = function ()
     {
-        // if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
@@ -1485,7 +1484,6 @@ const Op = function ()
      */
     Op.prototype.removePort = function (port)
     {
-        // for(var ipi in this.portsIn)
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             if (this.portsIn[ipi] == port)

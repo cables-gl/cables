@@ -1,8 +1,8 @@
 const
     inArr = op.inArray("Array"),
     inValue = op.inString("SearchValue"),
-    outFound = op.outValue("Found", false),
-    outIndex = op.outValue("Index", -1);
+    outFound = op.outBoolNum("Found", false),
+    outIndex = op.outNumber("Index", -1);
 
 inValue.onChange =
     inArr.onChange = exec;

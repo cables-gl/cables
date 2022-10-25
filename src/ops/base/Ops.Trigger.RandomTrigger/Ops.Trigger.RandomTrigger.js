@@ -3,7 +3,7 @@ const
     inNum = op.inValue("Num Times", 3),
     inSeed = op.inValue("Seed", 1),
     inOnlyOnce = op.inValueBool("Only Once"),
-    outIndex = op.outValue("Index");
+    outIndex = op.outNumber("Index");
 
 const linked = [];
 const triggers = [];

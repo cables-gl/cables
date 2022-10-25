@@ -58,11 +58,11 @@ const srcVert = attachments.pick_vert;
 
 const srcFrag = attachments.pick_frag;
 
-var shader = new CGL.Shader(cgl, "PickingMaterial");
+const shader = new CGL.Shader(cgl, "PickingMaterial");
 shader.offScreenPass = true;
 shader.setSource(srcVert, srcFrag);
 
-var pickColorUniformR = new CGL.Uniform(shader, "f", "r", 0);
+const pickColorUniformR = new CGL.Uniform(shader, "f", "r", 0);
 
 render.onTriggered = doRender;
 doRender();

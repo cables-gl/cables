@@ -5,15 +5,15 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Json.ObjectIsNull"

@@ -1,7 +1,8 @@
-const number=op.inValue("number");
-const result=op.outValue("result");
+const
+    number = op.inValue("number"),
+    result = op.outNumber("result");
 
-number.onChange=function()
+number.onChange = function ()
 {
-    result.set( Math.abs(number.get()) );
+    result.set(Math.abs(number.get()));
 };

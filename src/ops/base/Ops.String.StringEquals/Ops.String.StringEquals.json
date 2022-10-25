@@ -24,7 +24,7 @@
             {
                 "type": 0,
                 "name": "Result",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.String.StringEquals"

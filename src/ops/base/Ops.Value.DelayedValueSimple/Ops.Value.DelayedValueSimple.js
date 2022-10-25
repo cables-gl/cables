@@ -1,7 +1,7 @@
-let val = op.inValue("Value");
-let de = op.inValue("Delay", 1);
-
-let outVal = op.outValue("Out Value");
+const
+    val = op.inValue("Value"),
+    de = op.inValue("Delay", 1),
+    outVal = op.outNumber("Out Value");
 
 let timeout = -1;
 

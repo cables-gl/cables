@@ -4,13 +4,14 @@ const
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outZ = op.outNumber("Z"),
-    cgl = op.patch.cgl,
     pos = vec3.create(),
     empty = vec3.create();
 
 render.onTriggered = function ()
 {
-    vec3.transformMat4(pos, empty, cgl.mMatrix);
+    const cg = op.patch.cg;
+
+    vec3.transformMat4(pos, empty, cg.mMatrix);
 
     outX.set(pos[0]);
     outY.set(pos[1]);

@@ -11,7 +11,7 @@ const
     value2 = op.inValue("Value In", 1),
     trigger = op.inTriggerButton("Start"),
     next = op.outTrigger("Next"),
-    outVal = op.outValue("Result", 0),
+    outVal = op.outNumber("Result", 0),
     started = op.outTrigger("Started"),
     middle = op.outTrigger("Middle"),
     finished = op.outTrigger("finished");

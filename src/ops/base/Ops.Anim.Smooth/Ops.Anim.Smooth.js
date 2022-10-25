@@ -5,7 +5,7 @@ const
     next = op.outTrigger("Next"),
     inDivisorUp = op.inValue("Inc factor", 4),
     inDivisorDown = op.inValue("Dec factor", 4),
-    result = op.outValue("Result", 0);
+    result = op.outNumber("Result", 0);
 
 let val = 0;
 let goal = 0;

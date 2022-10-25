@@ -52,7 +52,7 @@ class DracoDecoderClass
                     break;
 
                 default:
-                    console.error("THREE.DRACOLoader: Unexpected message, \"" + message.type + "\"");
+                    op.error("THREE.DRACOLoader: Unexpected message, \"" + message.type + "\"");
                 }
                 this._releaseTask(worker, message.taskID);
             };
@@ -177,7 +177,7 @@ class DracoDecoderClass
             }
 
             if (geometryType === draco.TRIANGULAR_MESH) geometry.index = decodeIndex(draco, decoder, dracoGeometry);
-            else console.warn("unknown draco geometryType", geometryType);
+            else op.warn("unknown draco geometryType", geometryType);
 
             draco.destroy(dracoGeometry);
             return geometry;
@@ -206,7 +206,7 @@ class DracoDecoderClass
             let bytesPerElement = 4;
             if (attributeType === "Float32Array") bytesPerElement = 4;
             else if (attributeType === "Uint8Array") bytesPerElement = 1;
-            else console.warn("unknown attrtype bytesPerElement", attributeType);
+            else op.warn("unknown attrtype bytesPerElement", attributeType);
 
             const numComponents = attribute.num_components();
             const numPoints = dracoGeometry.num_points();
@@ -220,7 +220,7 @@ class DracoDecoderClass
 
             if (attributeType === "Float32Array") array = new Float32Array(draco.HEAPF32.buffer, ptr, numValues).slice();
             else if (attributeType === "Uint8Array") array = new Uint8Array(draco.HEAPF32.buffer, ptr, numValues).slice();
-            else console.warn("unknown attrtype", attributeType);
+            else op.warn("unknown attrtype", attributeType);
 
             draco._free(ptr);
 

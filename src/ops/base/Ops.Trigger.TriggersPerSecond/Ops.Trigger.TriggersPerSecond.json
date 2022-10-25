@@ -2,18 +2,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "cps",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Debug.CallsPerSecond"
+        "name": "Ops.Trigger.TriggersPerSecond"
     },
     "summary": "Counts how often the port is triggered per second",
     "docs": {
@@ -28,7 +28,6 @@
             }
         ]
     },
-    "updated": 1542699414242,
     "authorName": "pandur",
     "id": "ece2f153-eb31-4268-b0e5-8143ad2fdd81",
     "created": 1542699364197,

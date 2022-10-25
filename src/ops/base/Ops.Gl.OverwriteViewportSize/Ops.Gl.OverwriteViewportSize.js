@@ -1,14 +1,14 @@
+const
+    render = op.inTrigger("Exec");
+next = op.outTrigger("next");
+w = op.inValueInt("Width", 1920);
+h = op.inValueInt("Height", 1080);
 
-var render=op.inTrigger("Exec");
-var next=op.outTrigger("next");
-var w=op.inValueInt("Width",1920);
-var h=op.inValueInt("Height",1080);
+render.onTriggered = doit;
 
-render.onTriggered=doit;
-
-var oldFunc=null;
-var cgl=op.patch.cgl;
-var vp=[0,0,0,0];
+let oldFunc = null;
+let cgl = op.patch.cgl;
+let vp = [0, 0, 0, 0];
 
 function newGetViewPort()
 {
@@ -17,14 +17,14 @@ function newGetViewPort()
 
 function doit()
 {
-    var oldWidth=cgl.getViewPort()[2];
-    var oldHeight=cgl.getViewPort()[3];
+    let oldWidth = cgl.getViewPort()[2];
+    let oldHeight = cgl.getViewPort()[3];
 
     // cgl.forceViewPortSize(0,0,w.get(),h.get());
 
-    cgl.setViewPort(0,0,w.get(),h.get());
+    cgl.setViewPort(0, 0, w.get(), h.get());
 
     next.trigger();
-    
-    cgl.setViewPort(0,0,oldWidth,oldHeight);
+
+    cgl.setViewPort(0, 0, oldWidth, oldHeight);
 }

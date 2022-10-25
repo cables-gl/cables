@@ -1,18 +1,16 @@
-const filenames = op.inArray("urls");
-
-const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
-const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
-const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-const unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-const inCaching = op.inBool("Caching", false);
-const inPatchAsset = op.inBool("Asset in patch", false);
-const arrOut = op.outArray("TextureArray");
-
-// var textureOut=op.outTexture("texture");
-const width = op.addOutPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE));
-const height = op.addOutPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
-const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.OP_PORT_TYPE_VALUE));
-const ratio = op.outValue("Aspect Ratio");
+const
+    filenames = op.inArray("urls"),
+    tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
+    wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" })),
+    unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" })),
+    inCaching = op.inBool("Caching", false),
+    inPatchAsset = op.inBool("Asset in patch", false),
+    arrOut = op.outArray("TextureArray"),
+    width = op.outNumber("width"),
+    height = op.outNumber("height"),
+    loading = op.outBoolNum("loading"),
+    ratio = op.outNumber("Aspect Ratio");
 
 flip.set(false);
 unpackAlpha.set(false);
@@ -67,7 +65,7 @@ function loadImage(_i, _url, nocache, cb)
     {
         loading.set(true);
 
-        var tex = CGL.Texture.load(cgl, url,
+        let tex = CGL.Texture.load(cgl, url,
             function (err)
             {
                 if (err)

@@ -1,6 +1,6 @@
 let inArr = op.inArray("Array"),
 
-    outNum = op.outValue("Num Items"),
+    outNum = op.outNumber("Num Items"),
 
     outMinX = op.outNumber("Min X"),
     outMaxX = op.outNumber("Max X"),

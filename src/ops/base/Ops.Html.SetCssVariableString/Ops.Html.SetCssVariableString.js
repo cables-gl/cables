@@ -1,6 +1,7 @@
-const varname = op.inString("Var Name");
-const val = op.inString("Value");
-const quoted = op.inBool("Output quoted string", false);
+const
+    varname = op.inString("Var Name"),
+    val = op.inString("Value"),
+    quoted = op.inBool("Output quoted string", false);
 
 const root = document.documentElement;
 

@@ -5,114 +5,117 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "c note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "c note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "cis note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "cis note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "d note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "d note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "dis note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "dis note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "e note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "e note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "f note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "f note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "fis note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "fis note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "g note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "g note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "gis note ons"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "gis note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "a note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "a note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "ais note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "ais note off"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "b note on"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "b note off"
             },
             {
-                "type": "0",
-                "name": "octave"
+                "type": 0,
+                "name": "octave",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "frequency"
+                "type": 0,
+                "name": "frequency",
+                "subType": "number"
             },
             {
-                "type": "0",
-                "name": "is pressed"
+                "type": 0,
+                "name": "is pressed",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.KeyPiano"
@@ -133,5 +136,6 @@
                 "text": "If one of the keys is currently pressed: `1.0`, if no key is pressed: `0.0`.   Can e.g. be connected to a `Gain` node, to control the volume of a Web Audio op."
             }
         ]
-    }
+    },
+    "created": 1666259306772
 }

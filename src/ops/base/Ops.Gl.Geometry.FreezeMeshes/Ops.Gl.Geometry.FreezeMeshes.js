@@ -33,7 +33,6 @@ function meshCapture()
 {
     if (!this._geom || !this._geom.copy)
     {
-        console.log("nope...", this);
         return;
     }
 

@@ -7,9 +7,9 @@ const
     inStartBeat = op.inValueInt("Beat Start", 0),
     inEndBeat = op.inValueInt("Beat End", 0),
 
-    outCount = op.outValue("Count"),
-    outProgress = op.outValue("Progress"),
-    outTimeSince = op.outValue("Time since last"),
+    outCount = op.outNumber("Count"),
+    outProgress = op.outNumber("Progress"),
+    outTimeSince = op.outNumber("Time since last"),
     outTrigger = op.outTrigger("Trigger"),
     outReset = op.outTrigger("Reseted");
 

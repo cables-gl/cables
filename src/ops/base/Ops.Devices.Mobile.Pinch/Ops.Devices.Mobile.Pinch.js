@@ -20,14 +20,14 @@ const hammertime = new Hammer(el);
 hammertime.get("pinch").set({ "enable": true });
 
 // outputs
-const scalePort = op.outValue("Scale", 1);
+const scalePort = op.outNumber("Scale", 1);
 const eventPort = op.outObject("Event Details");
 const outDelta = op.outNumber("Delta");
 
 // change listeners
-window.addEventListener("gesturestart", (e) => e.preventDefault());
-window.addEventListener("gesturechange", (e) => e.preventDefault());
-window.addEventListener("gestureend", (e) => e.preventDefault());
+window.addEventListener("gesturestart", (e) => { return e.preventDefault(); });
+window.addEventListener("gesturechange", (e) => { return e.preventDefault(); });
+window.addEventListener("gestureend", (e) => { return e.preventDefault(); });
 
 hammertime.on("pinch", function (ev)
 {

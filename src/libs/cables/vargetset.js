@@ -1,4 +1,3 @@
-const { throws } = require("assert");
 
 const VarSetOpWrapper = class
 {

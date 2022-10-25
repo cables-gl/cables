@@ -12,7 +12,7 @@ const
     inColor = op.inArray("Colors", 4),
     inTexCoords = op.inArray("TexCoords", 2),
     outTrigger = op.outTrigger("Trigger Out"),
-    outNum = op.outValue("Num");
+    outNum = op.outNumber("Num");
 
 op.setPortGroup("Limit Number of Instances", [inLimit, doLimit]);
 op.setPortGroup("Parameters", [inScales, inRot, inTranslates, inRotMeth]);

@@ -1,44 +1,47 @@
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
-var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
-outPoints.ignoreValueSerialize=true;
+const
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger"),
+    outPoints = op.outArray("Points");
+    // outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY)),
 
-var inAbsolute=op.inValueBool("Absolute",true);
+outPoints.ignoreValueSerialize = true;
 
-var points=[];
-var cgl=op.patch.cgl;
+let inAbsolute = op.inValueBool("Absolute", true);
 
-var oldSplinePoints=null;
+let points = [];
+let cgl = op.patch.cgl;
 
-var pos=vec3.create();
-var empty=vec3.create();
-var m=mat4.create();
+let oldSplinePoints = null;
 
-var mySplinePoints=[];
+let pos = vec3.create();
+let empty = vec3.create();
+let m = mat4.create();
 
-render.onTriggered=function()
+let mySplinePoints = [];
+
+render.onTriggered = function ()
 {
-    if(cgl.frameStore.SplinePoints)
+    if (cgl.frameStore.SplinePoints)
     {
-        oldSplinePoints=cgl.frameStore.SplinePoints;
-        cgl.frameStore.SplinePoints=[];
+        oldSplinePoints = cgl.frameStore.SplinePoints;
+        cgl.frameStore.SplinePoints = [];
     }
 
-    cgl.frameStore.SplinePointCounter=0;
+    cgl.frameStore.SplinePointCounter = 0;
 
-    cgl.frameStore.SplinePoints=mySplinePoints;//cgl.frameStore.SplinePoints||[];
+    cgl.frameStore.SplinePoints = mySplinePoints;// cgl.frameStore.SplinePoints||[];
 
-    if(cgl.frameStore.SplinePointCounter!=cgl.frameStore.SplinePoints.length)
-    cgl.frameStore.SplinePoints.length=cgl.frameStore.SplinePointCounter;
+    if (cgl.frameStore.SplinePointCounter != cgl.frameStore.SplinePoints.length)
+        cgl.frameStore.SplinePoints.length = cgl.frameStore.SplinePointCounter;
 
-    if(!inAbsolute.get())
+    if (!inAbsolute.get())
     {
-        mat4.invert(m,cgl.mMatrix);
-        cgl.frameStore.SplinePointsInverseOriginalMatrix=m;
+        mat4.invert(m, cgl.mMatrix);
+        cgl.frameStore.SplinePointsInverseOriginalMatrix = m;
     }
     else
     {
-        cgl.frameStore.SplinePointsInverseOriginalMatrix=null;
+        cgl.frameStore.SplinePointsInverseOriginalMatrix = null;
     }
 
     trigger.trigger();
@@ -46,5 +49,5 @@ render.onTriggered=function()
     outPoints.set(null);
     outPoints.set(cgl.frameStore.SplinePoints);
 
-    if(oldSplinePoints) cgl.frameStore.SplinePoints=oldSplinePoints;
+    if (oldSplinePoints) cgl.frameStore.SplinePoints = oldSplinePoints;
 };

@@ -2,18 +2,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Scale"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Base Note",
                 "subType": "string"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Chord"
             }
         ],
@@ -36,7 +36,6 @@
             }
         ]
     },
-    "updated": 1542058146953,
     "authorName": "pandur",
     "id": "846fd784-6367-4380-a68d-6a6a33f4171d",
     "created": 1542058146958

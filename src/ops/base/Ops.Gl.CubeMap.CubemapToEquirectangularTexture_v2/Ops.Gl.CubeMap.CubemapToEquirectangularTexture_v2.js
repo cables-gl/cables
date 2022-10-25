@@ -3,7 +3,7 @@ const
     inCubemap = op.inObject("Cubemap"),
     inProj = op.inSwitch("Projection", ["Equirectangular", "Cube unwrap"], "Equirectangular"),
     inFormat = op.inSwitch("Format", ["8bit", "32bit", "RGBE"], "8bit"),
-    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"]),
+    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWidth = op.inInt("Width", 1024),
     inHeight = op.inInt("Height", 512),
     outTrigger = op.outTrigger("Out Trigger"),

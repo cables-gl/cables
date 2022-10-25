@@ -13,7 +13,6 @@ op.setPortGroup("Position", [posX, posY, posZ]);
 op.setPortGroup("Scale", [scale]);
 op.setPortGroup("Rotation", [rotX, rotZ, rotY]);
 
-const cgl = op.patch.cgl;
 const vPos = vec3.create();
 const vScale = vec3.create();
 const transMatrix = mat4.create();
@@ -23,33 +22,35 @@ let doScale = false;
 let doTranslate = false;
 
 let translationChanged = true;
-var scaleChanged = true;
-var rotChanged = true;
+let didScaleChanged = true;
+let didRotChanged = true;
 
 render.onTriggered = function ()
 {
+    const cg = op.patch.cg;
+
     let updateMatrix = false;
     if (translationChanged)
     {
         updateTranslation();
         updateMatrix = true;
     }
-    if (scaleChanged)
+    if (didScaleChanged)
     {
         updateScale();
         updateMatrix = true;
     }
-    if (rotChanged)
+    if (didRotChanged)
     {
         updateMatrix = true;
     }
     if (updateMatrix)doUpdateMatrix();
 
-    cgl.pushViewMatrix();
-    mat4.multiply(cgl.vMatrix, cgl.vMatrix, transMatrix);
+    cg.pushViewMatrix();
+    mat4.multiply(cg.vMatrix, cg.vMatrix, transMatrix);
 
     trigger.trigger();
-    cgl.popViewMatrix();
+    cg.popViewMatrix();
 
     if (op.isCurrentUiOp())
         gui.setTransformGizmo(
@@ -67,7 +68,7 @@ op.transform3d = function ()
     };
 };
 
-var doUpdateMatrix = function ()
+function doUpdateMatrix()
 {
     mat4.identity(transMatrix);
     if (doTranslate)mat4.translate(transMatrix, transMatrix, vPos);
@@ -78,7 +79,7 @@ var doUpdateMatrix = function ()
 
     if (doScale)mat4.scale(transMatrix, transMatrix, vScale);
     rotChanged = false;
-};
+}
 
 function updateTranslation()
 {
@@ -96,30 +97,29 @@ function updateScale()
     scaleChanged = false;
 }
 
-const translateChanged = function ()
+function translateChanged()
 {
     translationChanged = true;
-};
+}
 
-var scaleChanged = function ()
+function scaleChanged()
 {
-    scaleChanged = true;
-};
+    didScaleChanged = true;
+}
 
-var rotChanged = function ()
+function rotChanged()
 {
-    rotChanged = true;
-};
+    didRotChanged = true;
+}
 
-
-rotX.onChange = rotChanged;
-rotY.onChange = rotChanged;
+rotX.onChange =
+rotY.onChange =
 rotZ.onChange = rotChanged;
 
 scale.onChange = scaleChanged;
 
-posX.onChange = translateChanged;
-posY.onChange = translateChanged;
+posX.onChange =
+posY.onChange =
 posZ.onChange = translateChanged;
 
 rotX.set(0.0);

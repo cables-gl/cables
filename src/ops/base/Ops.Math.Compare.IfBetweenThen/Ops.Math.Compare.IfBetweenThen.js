@@ -1,16 +1,15 @@
-var exe=op.inTrigger("exe");
+const
+    exe = op.inTrigger("exe"),
+    number = op.inValue("number", 0),
+    min = op.inValue("min", 0),
+    max = op.inValue("max", 1),
+    triggerThen = op.outTrigger("then"),
+    triggerElse = op.outTrigger("else"),
+    outBetween = op.outBoolNum("bs between");
 
-var number=op.inValue("number",0);
-var min=op.inValue("min",0);
-var max=op.inValue("max",1);
-
-var triggerThen=op.outTrigger('then');
-var triggerElse=op.outTrigger('else');
-var outBetween=op.outValue("bs between");
-
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    if(number.get()>=min.get() && number.get()<max.get())
+    if (number.get() >= min.get() && number.get() < max.get())
     {
         outBetween.set(true);
         triggerThen.trigger();

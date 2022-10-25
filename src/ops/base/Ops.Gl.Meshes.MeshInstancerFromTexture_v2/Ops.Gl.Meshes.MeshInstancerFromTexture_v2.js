@@ -12,9 +12,8 @@ const
     inMulR = op.inValue("Multiply Pos X", 1),
     inMulG = op.inValue("Multiply Pos Y", 1),
     inMulB = op.inValue("Multiply Pos Z", 1),
-
     outTrigger = op.outTrigger("Trigger Out"),
-    outNum = op.outValue("Num");
+    outNum = op.outNumber("Num");
 
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);

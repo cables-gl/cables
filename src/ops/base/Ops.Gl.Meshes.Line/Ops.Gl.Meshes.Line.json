@@ -3,49 +3,48 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z 2",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],
         "name": "Ops.Gl.Meshes.Line"
     },
-    "updated": 1541225050373,
     "authorName": "pandur",
     "id": "c6a0d570-a0ac-4655-b17d-74d0870b0799",
     "created": 1541225050374,

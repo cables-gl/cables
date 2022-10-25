@@ -1,1 +1,88 @@
-{"authorName":"pandur","id":"3e2bc72c-8af4-4fdb-a998-555aaf62cc9d","created":1518855898265,"layout":{"portsIn":[{"type":"1","name":"Update"}],"portsOut":[{"type":"1","name":"Next"},{"type":"0","name":"glGetError","subType":"number"},{"type":"0","name":"Depthtest","subType":"number"},{"type":"0","name":"Stack Depthtest","subType":"number"},{"type":"0","name":"Depth Writing","subType":"number"},{"type":"0","name":"Stack Depth Writing","subType":"number"},{"type":"0","name":"DepthFunc","subType":"number"},{"type":"0","name":"Stack DepthFunc","subType":"number"},{"type":"0","name":"Blend","subType":"number"},{"type":"0","name":"Blend Stack","subType":"number"},{"type":"0","name":"Cull Mode","subType":"number"},{"type":"0","name":"Face Culling","subType":"number"},{"type":"0","name":"Is Shadowpass","subType":"boolean"}],"name":"Ops.Debug.GlDebug"},"summary":"see current gl states and error message","changelog":[{"message":"Ops.Debug.GlDebug renamed to Ops.Debug.GlStates","author":"pandur","date":1628150314826}]}
+{
+    "authorName": "pandur",
+    "id": "3e2bc72c-8af4-4fdb-a998-555aaf62cc9d",
+    "created": 1518855898265,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "glGetError",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Depthtest",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stack Depthtest",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Depth Writing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stack Depth Writing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "DepthFunc",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stack DepthFunc",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blend",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blend Stack",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Cull Mode",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Face Culling",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Is Shadowpass",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Debug.GlStates"
+    },
+    "summary": "see current gl states and error message",
+    "changelog": [
+        {
+            "message": "Ops.Debug.GlDebug renamed to Ops.Debug.GlStates",
+            "author": "pandur",
+            "date": 1628150314826
+        }
+    ]
+}

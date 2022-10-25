@@ -12,29 +12,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Comparison mode index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value in",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Condition value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

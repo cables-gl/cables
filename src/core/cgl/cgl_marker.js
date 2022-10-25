@@ -1,5 +1,5 @@
 // import { vec3, mat4 } from "gl-matrix";
-import { Geometry } from "./cgl_geom";
+import { Geometry } from "../cg/cg_geom";
 import { Mesh } from "./cgl_mesh";
 import { Shader } from "./cgl_shader";
 import { DEG2RAD } from "./cgl_utils";

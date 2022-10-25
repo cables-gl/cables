@@ -17,8 +17,8 @@ const ccArray = Array.from(Array(128).keys(), (key) => { return 0; });
 /* OUT */
 const eventOut = op.outObject("Event");
 const triggerOut = op.outTrigger("Trigger Out");
-const ccIndexOut = op.outValue("CC Index Out");
-const ccValueOut = op.outValue("CC Value Out");
+const ccIndexOut = op.outNumber("CC Index Out");
+const ccValueOut = op.outNumber("CC Value Out");
 const arrayOut = op.outArray("Value Array");
 
 op.setPortGroup("MIDI/Trigger Out", [eventOut, triggerOut]);
@@ -60,6 +60,9 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
+            gui.emitEvent("portValueEdited", op, ccIndexDropdown, ccIndexDropdown.get());
+            gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
+
             op.uiAttr({ "info": `bound to CC: ${ccIndexDropdown.get()}` });
             op.refreshParams();
         }

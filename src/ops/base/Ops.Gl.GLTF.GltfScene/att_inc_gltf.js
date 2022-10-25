@@ -12,7 +12,7 @@ const Gltf = class
         this.shaders = [];
         this.timing = [];
         this.startTime = performance.now();
-        this.bounds = new CGL.BoundingBox();
+        this.bounds = new CABLES.CG.BoundingBox();
     }
 
     getNode(n)

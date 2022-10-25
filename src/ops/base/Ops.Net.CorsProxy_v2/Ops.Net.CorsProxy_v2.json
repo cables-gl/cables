@@ -12,13 +12,13 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "URL"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "CORS URL"
             }
         ],

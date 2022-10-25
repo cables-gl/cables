@@ -1,6 +1,6 @@
 const
     inObj = op.inObject("Object"),
-    outNumValues = op.outValue("Num values"),
+    outNumValues = op.outNumber("Num values"),
     outValues = op.outArray("Values");
 
 inObj.onChange = () =>

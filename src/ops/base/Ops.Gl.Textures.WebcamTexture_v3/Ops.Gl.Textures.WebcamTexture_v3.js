@@ -19,7 +19,7 @@ const
     textureOut = op.outTexture("Texture"),
 
     outRatio = op.outNumber("Ratio"),
-    available = op.outBool("Available"),
+    available = op.outBoolNum("Available"),
     outWidth = op.outNumber("Size Width"),
     outHeight = op.outNumber("Size Height"),
     outError = op.outString("Error"),
@@ -166,17 +166,12 @@ function camInitComplete(stream)
     videoElement.srcObject = stream;
     videoElement.onloadedmetadata = (e) =>
     {
-        // console.log(stream.getTracks());
-
         outSelectedDevice.set(stream.getTracks()[0].label);
         if (inInputDevices.get() != "Default" && stream.getTracks()[0].label != inInputDevices.get() && tries < 3)
         {
             tries++;
-            // console.log("try again...");
             return restartWebcam();
         }
-
-        // console.log(stream.getTracks()[0].getSettings());
 
         const settings = stream.getTracks()[0].getSettings();
         restarting = false;
@@ -197,7 +192,6 @@ function camInitComplete(stream)
         tex.setSize(w, h);
 
         available.set(true);
-        // console.log("cam init complete");
         playCam(inGenTex.get());
     };
 }
@@ -258,8 +252,6 @@ function getCamConstraints()
     constr.video.width = width;
     constr.video.height = height;
 
-    // console.log("constraints", constr);
-
     return constr;
 }
 
@@ -285,7 +277,6 @@ function restartWebcam()
     }
     else if (navigator.getUserMedia)
     {
-        // console.log("nope");
         restarting = false;
         navigator.getUserMedia(constr, camInitComplete, () => { return available.set(false); });
     }
@@ -317,7 +308,7 @@ function initDevices()
         }).catch((e) =>
         {
             initingDevices = false;
-            console.error("error", e);
+            op.error("error", e);
             outError.set(e.name + ": " + e.message);
             cgl.patch.loading.finished(loadingId);
             camsLoaded = false;
@@ -333,8 +324,6 @@ inTrigger.onTriggered = () =>
             updateTexture();
             outUpdate.trigger();
         }
-
-        // console.log(active, started, camsLoaded);
 
         if (!started && camsLoaded)
         {

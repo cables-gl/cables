@@ -1,5 +1,4 @@
 {
-    "updated": 1537353419785,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "f34d019d-59ae-40d6-a55d-a7691bbc40e0",
@@ -7,14 +6,14 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

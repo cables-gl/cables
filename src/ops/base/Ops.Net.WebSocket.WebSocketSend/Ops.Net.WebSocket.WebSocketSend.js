@@ -3,7 +3,8 @@ const
     inObject = op.inObject("Object"),
     inSend = op.inTriggerButton("Send"),
     inStringify = op.inBool("Send String", true),
-    outSent = op.outValueBool("Sent");
+    outSent = op.outBoolNum("Sent");
+
 let connection = null;
 
 inConnection.onChange = function ()

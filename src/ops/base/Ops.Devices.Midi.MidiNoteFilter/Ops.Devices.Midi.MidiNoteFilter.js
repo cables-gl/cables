@@ -1,4 +1,3 @@
-
 /* UTIL */
 const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
@@ -45,8 +44,8 @@ op.setPortGroup("Notes", [noteStartDropdown, noteEndDropdown, normalizeDropdown]
 /* OUT */
 const eventOut = op.outObject("Event");
 const triggerOut = op.outTrigger("Trigger Out");
-const noteIndexOut = op.outValue("Current Note");
-const velocityOut = op.outValue("Velocity");
+const noteIndexOut = op.outNumber("Current Note");
+const velocityOut = op.outNumber("Velocity");
 const gateOut = op.outValueBool("Gate");
 
 op.setPortGroup("MIDI/Trigger Out", [eventOut, triggerOut]);

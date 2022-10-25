@@ -3,14 +3,14 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "number",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }
@@ -29,7 +29,6 @@
             }
         ]
     },
-    "updated": 1540919817043,
     "authorName": "pandur",
     "id": "6b5af21d-065f-44d2-9442-8b7a254753f6",
     "created": 1540919817048

@@ -1,5 +1,5 @@
 let inVibrate = op.inTriggerButton("Vibrate");
-let outSupported = op.outValue("Supported");
+let outSupported = op.outBoolNum("Supported");
 
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate ||
 navigator.mozVibrate || navigator.msVibrate;

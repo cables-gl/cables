@@ -1,23 +1,22 @@
-const render=op.inTrigger("render");
-const inArr=op.inArray('Matrix');
-const trigger=op.outTrigger("trigger");
+const
+    render = op.inTrigger("render"),
+    inArr = op.inArray("Matrix"),
+    trigger = op.outTrigger("trigger"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outZ = op.outNumber("Z");
 
-const outX=op.outValue("X");
-const outY=op.outValue("Y");
-const outZ=op.outValue("Z");
+const cgl = op.patch.cgl;
+const pos = vec3.create();
+const identVec = vec3.create();
+const iViewMatrix = mat4.create();
 
-const cgl=op.patch.cgl;
-const pos=vec3.create();
-const identVec=vec3.create();
-const iViewMatrix=mat4.create();
-
-
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!inArr.get())return;
+    if (!inArr.get()) return;
 
-    mat4.invert(iViewMatrix,inArr.get());
-    vec3.transformMat4(pos, identVec,iViewMatrix );
+    mat4.invert(iViewMatrix, inArr.get());
+    vec3.transformMat4(pos, identVec, iViewMatrix);
 
     outX.set(pos[0]);
     outY.set(pos[1]);

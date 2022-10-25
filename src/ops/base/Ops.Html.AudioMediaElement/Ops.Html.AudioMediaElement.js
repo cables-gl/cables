@@ -4,7 +4,7 @@ const
     volume = op.inValueSlider("Volume"),
 
     doLoop = op.inValueBool("Loop"),
-    outPlaying = op.outValue("Playing"),
+    outPlaying = op.outNumber("Playing"),
     outEle = op.outObject("Element", null, "element"),
     outEnded = op.outTrigger("Has Ended");
 

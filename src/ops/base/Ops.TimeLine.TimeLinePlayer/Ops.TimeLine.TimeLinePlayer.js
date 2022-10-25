@@ -2,17 +2,17 @@ const
     play = op.inTriggerButton("Play"),
     pause = op.inTriggerButton("Pause"),
     rewind = op.inTriggerButton("rewind"),
-    setTime = op.inFloat("Set current time",0),
+    setTime = op.inFloat("Set current time", 0),
 
     outPlayTrigger = op.outTrigger("play trigger"),
-    outPauseTrigger= op.outTrigger("pause trigger"),
+    outPauseTrigger = op.outTrigger("pause trigger"),
     outrewindTrigger = op.outTrigger("rewind trigger"),
     isPlaying = op.outBool("is Playing"),
     outSetTimeTrigger = op.outNumber("set time (seconds)"),
-    currentTime = op.outValue("current time"),
-    currentFrame = op.outValue("current frame");
+    currentTime = op.outNumber("current time"),
+    currentFrame = op.outNumber("current frame");
 
-play.onTriggered=function()
+play.onTriggered = function ()
 {
     op.patch.timer.play();
 
@@ -21,24 +21,21 @@ play.onTriggered=function()
     outPlayTrigger.trigger();
 };
 
-pause.onTriggered=function()
+pause.onTriggered = function ()
 {
     op.patch.timer.pause();
     outPauseTrigger.trigger();
 };
 
-
-op.onAnimFrame=function(time)
+op.onAnimFrame = function (time)
 {
-    currentFrame.set(Math.round(time*30.0));
+    currentFrame.set(Math.round(time * 30.0));
     currentTime.set(time);
     isPlaying.set(op.patch.timer.isPlaying());
 };
 
-rewind.onTriggered=function()
+rewind.onTriggered = function ()
 {
     op.patch.timer.setTime(0);
     outrewindTrigger.trigger();
 };
-
-

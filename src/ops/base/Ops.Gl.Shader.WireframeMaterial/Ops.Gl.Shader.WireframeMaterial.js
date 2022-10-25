@@ -13,6 +13,7 @@ function setDefines()
         if (fill.get()) shader.define("WIREFRAME_FILL");
         else shader.removeDefine("WIREFRAME_FILL");
 }
+
 fill.onChange = function ()
 {
     setDefines();
@@ -47,11 +48,11 @@ let doRender = function ()
     cgl.popDepthTest();
 };
 
-var shader = new CGL.Shader(cgl, "Wireframe Material");
+const shader = new CGL.Shader(cgl, "Wireframe Material");
 
 if (cgl.glVersion > 1)shader.glslVersion = 300;
-var uniformWidth = new CGL.Uniform(shader, "f", "width", w.get());
-var uniformOpacity = new CGL.Uniform(shader, "f", "opacity", opacity.get());
+const uniformWidth = new CGL.Uniform(shader, "f", "width", w.get());
+const uniformOpacity = new CGL.Uniform(shader, "f", "opacity", opacity.get());
 
 if (cgl.glVersion == 1)shader.enableExtension("OES_standard_derivatives");
 
@@ -60,14 +61,12 @@ shader.setSource(attachments.wireframe_vert || "", attachments.wireframe_frag ||
 shader.wireframe = true;
 setDefines();
 
-{
-    // diffuse color
-    var r = op.inValueSlider("diffuse r", Math.random());
-    var g = op.inValueSlider("diffuse g", Math.random());
-    var b = op.inValueSlider("diffuse b", Math.random());
+// diffuse color
+let r = op.inValueSlider("diffuse r", Math.random());
+let g = op.inValueSlider("diffuse g", Math.random());
+let b = op.inValueSlider("diffuse b", Math.random());
 
-    r.setUiAttribs({ "colorPick": true });
-}
+r.setUiAttribs({ "colorPick": true });
 
 g.uniform = new CGL.Uniform(shader, "f", "g", g);
 r.uniform = new CGL.Uniform(shader, "f", "r", r);

@@ -1,85 +1,83 @@
 const
-    inUpdate=op.inTriggerButton("Update"),
-    inReset=op.inTriggerButton("Reset"),
-    inText=op.inString("Text"),
-    inSeed=op.inFloat("Random Seed",0),
-    inChars=op.inString("Characters","abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 -_+!"),
-    result=op.outString("Result");
+    inUpdate = op.inTriggerButton("Update"),
+    inReset = op.inTriggerButton("Reset"),
+    inText = op.inString("Text"),
+    inSeed = op.inFloat("Random Seed", 0),
+    inChars = op.inString("Characters", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 -_+!"),
+    result = op.outString("Result");
 
-var positions=[];
-var position=0;
-var resultString="";
+let positions = [];
+let position = 0;
+let resultString = "";
 
-inSeed.onChange=init;
-inText.onChange=init;
-inReset.onTriggered=init;
+inSeed.onChange = init;
+inText.onChange = init;
+inReset.onTriggered = init;
 
 function init()
 {
     position++;
-    var txt=inText.get();
-    if(!txt)
+    let txt = inText.get();
+    if (!txt)
     {
         result.set("");
         return;
     }
-    var alphab=inChars.get();
+    let alphab = inChars.get();
 
-    resultString="";
+    resultString = "";
 
-    Math.randomSeed=inSeed.get();
+    Math.randomSeed = inSeed.get();
 
-    for(var i=0;i<txt.length;i++)
+    for (let i = 0; i < txt.length; i++)
     {
-        if(inSeed.get()==0)
+        if (inSeed.get() == 0)
         {
-            resultString+=alphab[0];
+            resultString += alphab[0];
         }
         else
         {
-            resultString+=alphab[Math.floor(Math.seededRandom()*alphab.length)];
+            resultString += alphab[Math.floor(Math.seededRandom() * alphab.length)];
         }
     }
 
     result.set(resultString);
 }
 
-inUpdate.onTriggered=function()
+inUpdate.onTriggered = function ()
 {
-    var txt=inText.get();
-    var alphab=inChars.get();
+    let txt = inText.get();
+    let alphab = inChars.get();
 
-    if(!txt)
+    if (!txt)
     {
         result.set("");
         return;
     }
 
-    if(!resultString) init();
-    var newStr="";
+    if (!resultString) init();
+    let newStr = "";
 
-    for(var i=0;i<txt.length;i++)
+    for (let i = 0; i < txt.length; i++)
     {
-        if(txt[i]=='\n')
+        if (txt[i] == "\n")
         {
-            newStr+='\n';
+            newStr += "\n";
         }
         else
-        if(txt[i]!=resultString[i])
+        if (txt[i] != resultString[i])
         {
-            var newindex=alphab.indexOf(resultString[i])+1;
+            let newindex = alphab.indexOf(resultString[i]) + 1;
 
-            if(newindex>alphab.length-1)newindex=0;
-            newStr+=alphab[newindex];
+            if (newindex > alphab.length - 1)newindex = 0;
+            newStr += alphab[newindex];
         }
         else
         {
-            newStr+=txt[i];
+            newStr += txt[i];
         }
     }
-    resultString=newStr;
+    resultString = newStr;
 
     result.set(resultString);
-
-
 };

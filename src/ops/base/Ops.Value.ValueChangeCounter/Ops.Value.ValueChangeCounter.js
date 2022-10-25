@@ -1,17 +1,17 @@
+const
+    inVal = op.inValue("Value"),
+    inReset = op.inTriggerButton("Reset"),
+    outResult = op.outNumber("Result");
 
-var inVal=op.inValue("Value");
-var inReset=op.inTriggerButton("Reset");
-var outResult=op.outValue("Result");
+let count = 0;
 
-var count=0;
-
-inReset.onTriggered=function()
+inReset.onTriggered = function ()
 {
-    count=0;
-}
+    count = 0;
+};
 
-inVal.onChange=function()
+inVal.onChange = function ()
 {
     count++;
     outResult.set(count);
-}
+};

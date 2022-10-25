@@ -27,18 +27,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array in"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pow factor",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array out"
             }
         ],

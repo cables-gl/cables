@@ -40,28 +40,13 @@
             },
             {
                 "type": 0,
-                "name": "Pivot x",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Pivot y index",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Pivot y",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Axis index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Axis",
-                "subType": "string"
             },
             {
                 "type": 0,
@@ -82,11 +67,6 @@
                 "type": 0,
                 "name": "Cursor index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Cursor",
-                "subType": "string"
             },
             {
                 "type": 0,

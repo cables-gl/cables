@@ -5,31 +5,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger in"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "reset"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loop min",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loop max",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "current count",
                 "subType": "number"
             }

@@ -46,7 +46,6 @@ op.patch.cgl.on("heavyEvent", (e) =>
 {
     if (inRecord.get() && !isPrerendering && CABLES.uniqueArray)
     {
-        console.log("heavyEvent", op.patch.timer.getTime(), e);
         events.push(Math.round(op.patch.timer.getTime() * 60) / 60);
         events = CABLES.uniqueArray(events);
         inEvents.set(events);
@@ -93,13 +92,13 @@ function render()
             curTime = events[prerenderCount];
             op.patch._frameNum = prerenderCount + 22;
 
-            // console.log("isPrerendering at ", curTime);
+            // op.log("isPrerendering at ", curTime);
 
             CABLES.overwriteTime = curTime;
             op.patch.timer.setTime(curTime);
             op.patch.freeTimer.setTime(curTime);
 
-            // console.log("the time",op.patch.timer.getTime());
+            // op.log("the time",op.patch.timer.getTime());
 
             CABLES.overwriteTime = undefined;
             CABLES.internalNow = oldInternalNow;
@@ -115,7 +114,7 @@ function render()
         {
             const t = (numExtraFrames - (prerenderCount - events.length)) / numExtraFrames;
 
-            // console.log("empty prerender...", t);
+            // op.log("empty prerender...", t);
             op.patch.timer.setTime(t);
             op.patch.freeTimer.setTime(t);
         }
@@ -125,7 +124,7 @@ function render()
         // next.trigger();
         // next.trigger();
         outProgress.set(Math.min(1, prerenderCount / (events.length + numExtraFrames)));
-        // console.log("progress...", outProgress.get());
+        // op.log("progress...", outProgress.get());
 
         nextPrerendered.trigger();
 

@@ -24,7 +24,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.SmoothStepV2"
+        "name": "Ops.Math.SmoothStep_v2"
     },
     "summary": "Interpolate smoothly between two input values",
     "authorName": "pandur",

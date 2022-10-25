@@ -1,23 +1,23 @@
-//returns the fractional remainder from array values
-const inArray=op.inArray("In"),
-    outArray=op.outArray("Result");
+// returns the fractional remainder from array values
+const inArray = op.inArray("In"),
+    outArray = op.outArray("Result");
 
-var newArr=[];
+let newArr = [];
 outArray.set(newArr);
 
-inArray.onChange=function()
+inArray.onChange = function ()
 {
-    var arr=inArray.get();
+    let arr = inArray.get();
 
-    if(!arr)
+    if (!arr)
     {
         outArray.set(null);
         return;
     }
 
-    if(newArr.length != arr.length) newArr.length=arr.length;
+    if (newArr.length != arr.length) newArr.length = arr.length;
 
-    for(var i=0;i<arr.length;i++)
+    for (let i = 0; i < arr.length; i++)
     {
         newArr[i] = Math.abs(arr[i]) % 1;
     }
