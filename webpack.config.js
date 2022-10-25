@@ -2,8 +2,6 @@ const path = require("path");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const glMatrix = require("gl-matrix");
 
-const glMatrixClasses = ["glMatrix", "mat2", "mat2d", "mat3", "mat4", "quat", "quat2", "vec2", "vec3", "vec4"];
-
 module.exports = (isProduction) =>
 {
     return {
