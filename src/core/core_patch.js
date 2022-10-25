@@ -948,7 +948,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
         catch (e)
         {
-            // this._log.warn("something gone wrong");
             this._log.warn("[instancing error] op data:", opData, e);
             throw new Error("instancing error: " + opData.objName);
         }
