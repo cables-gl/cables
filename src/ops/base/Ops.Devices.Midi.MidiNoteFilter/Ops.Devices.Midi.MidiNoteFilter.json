@@ -5,88 +5,64 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
-                "name": "Note Values"
-            },
-            {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event",
                 "group": "MIDI"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "MIDI Channel index",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "MIDI Channel",
                 "group": "MIDI",
-                "subType": "string"
+                "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Note Start index",
+                "group": "Notes",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Note Start",
-                "group": "Notes",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Note End index",
+                "group": "Notes",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Note End",
-                "group": "Notes",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Normalize Velocity index",
+                "group": "Notes",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Normalize Velocity",
-                "group": "Notes",
-                "subType": "string"
-            },
-            {
-                "type": "1",
+                "type": 1,
                 "name": "learn"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "reset"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Current Note",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Velocity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Gate",
                 "subType": "boolean"
             }

@@ -6,32 +6,32 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Matrix.ViewMatrixTranslation"
+        "name": "Ops.Gl.Matrix.CameraPosition"
     },
     "summary": "get the current position of viewmatrix/camera eye",
     "changelog": [

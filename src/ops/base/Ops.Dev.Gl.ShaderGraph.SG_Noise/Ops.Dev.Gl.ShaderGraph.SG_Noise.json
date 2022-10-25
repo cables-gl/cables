@@ -1,0 +1,52 @@
+{
+    "id": "7400ed85-8931-4669-b0bc-620623860864",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663505106203
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.SG_Mul",
+            "author": "pandur",
+            "date": 1663567446198
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687950612
+        },
+        {
+            "message": "Ops.User.pandur.SG_Noise renamed to Ops.Gl.ShaderGraph.SG_Noise",
+            "author": "pandur",
+            "date": 1663688870461
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.SG_Noise renamed to Ops.Dev.Gl.ShaderGraph.SG_Noise",
+            "author": "pandur",
+            "date": 1666621351792
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663567446195,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "a",
+                "objType": "sg_vec2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_float"
+            }
+        ],
+        "name": "Ops.Gl.ShaderGraph.SG_Noise"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}

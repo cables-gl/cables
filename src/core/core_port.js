@@ -434,6 +434,7 @@ Port.prototype.removeLink = function (link)
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
+    this.parent.emitEvent("onLinkChanged");
 };
 
 /**
@@ -455,6 +456,7 @@ Port.prototype.addLink = function (l)
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
+    this.parent.emitEvent("onLinkChanged");
 };
 
 /**

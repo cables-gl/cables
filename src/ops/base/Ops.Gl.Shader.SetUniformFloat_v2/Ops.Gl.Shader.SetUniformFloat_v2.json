@@ -44,7 +44,7 @@
                 "name": "Type"
             }
         ],
-        "name": "Ops.User.pandur.SetUniformValue2"
+        "name": "Ops.Gl.Shader.SetUniformFloat_v2"
     },
     "summary": "set a uniform value of the current shader",
     "docs": {

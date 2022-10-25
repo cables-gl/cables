@@ -6,23 +6,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Smooth",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Force Z Up",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry Out"
             }
         ],

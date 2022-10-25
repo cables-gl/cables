@@ -1,6 +1,6 @@
-const render=op.inTrigger('render');
-const trigger=op.outTrigger('trigger');
-const cgl=op.patch.cgl;
+const render = op.inTrigger("render");
+const trigger = op.outTrigger("trigger");
+const cgl = op.patch.cgl;
 
 function doRender()
 {
@@ -9,9 +9,9 @@ function doRender()
     cgl.popShader();
 }
 
-var shader=new CGL.Shader(cgl,'showtexcoords material');
+const shader = new CGL.Shader(cgl, "showtexcoords material");
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.showtexcoord_frag);
+shader.setSource(shader.getDefaultVertexShader(), attachments.showtexcoord_frag);
 
-render.onTriggered=doRender;
+render.onTriggered = doRender;
 doRender();

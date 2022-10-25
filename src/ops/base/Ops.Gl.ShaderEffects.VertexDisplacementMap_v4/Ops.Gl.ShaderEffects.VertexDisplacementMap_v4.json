@@ -37,16 +37,19 @@
             {
                 "type": 0,
                 "name": "Channel index",
+                "group": "Input",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Flip index",
+                "group": "Input",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Range index",
+                "group": "Input",
                 "subType": "integer"
             },
             {

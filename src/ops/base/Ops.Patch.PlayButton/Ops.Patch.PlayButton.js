@@ -9,7 +9,7 @@ const
     notClickedNext = op.outTrigger("Not Clicked"),
     outState = op.outString("Audiocontext State"),
     outEle = op.outObject("Element"),
-    outClicked = op.outValueBool("Clicked", false),
+    outClicked = op.outBoolNum("Clicked", false),
     outClickedTrigger = op.outTrigger("Clicked Trigger");
 
 op.toWorkPortsNeedToBeLinked(inExec);

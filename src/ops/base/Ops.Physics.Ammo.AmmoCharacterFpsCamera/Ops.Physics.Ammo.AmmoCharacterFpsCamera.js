@@ -9,9 +9,9 @@ const
     inActive = op.inBool("Active", true),
     outMouseDown = op.outTrigger("Mouse Left"),
     outMouseDownRight = op.outTrigger("Mouse Right"),
-    outDirX = op.outValue("Dir X"),
-    outDirY = op.outValue("Dir Y"),
-    outDirZ = op.outValue("Dir Z"),
+    outDirX = op.outNumber("Dir X"),
+    outDirY = op.outNumber("Dir Y"),
+    outDirZ = op.outNumber("Dir Z"),
     outRotX = op.outNumber("Rot X"),
     outRotY = op.outNumber("Rot Y");
 
@@ -62,7 +62,7 @@ render.onTriggered = function ()
 
     if (!ammoWorld)
     {
-        console.log("char no ammoworld");
+        op.log("char no ammoworld");
         return;
     }
 
@@ -77,7 +77,7 @@ render.onTriggered = function ()
     }
     else
     {
-        console.log("char body not found!");
+        op.log("char body not found!");
     }
 
     if (rotX < -90)rotX = -90;

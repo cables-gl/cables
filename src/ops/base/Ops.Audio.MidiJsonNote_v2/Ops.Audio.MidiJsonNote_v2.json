@@ -9,18 +9,8 @@
                 "name": "Data"
             },
             {
-                "type": 0,
-                "name": "Filter index",
-                "subType": "integer"
-            },
-            {
                 "type": 5,
                 "name": "Note"
-            },
-            {
-                "type": 0,
-                "name": "Midi",
-                "subType": "integer"
             },
             {
                 "type": 0,

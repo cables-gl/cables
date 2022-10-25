@@ -1,14 +1,14 @@
 const
     geometry = op.inObject("Geometry", null, "geometry"),
-    outIndexed = op.outValue("Indexed", false),
-    outFaces = op.outValue("Faces"),
-    outVertices = op.outValue("Vertices"),
-    outNormals = op.outValue("Normals"),
-    outTexCoords = op.outValue("TexCoords"),
-    outTangents = op.outValue("Tangents"),
-    outBiTangents = op.outValue("BiTangents"),
-    outVertexColors = op.outValue("VertexColors"),
-    outAttribs = op.outValue("Other Attributes");
+    outIndexed = op.outBoolNum("Indexed", false),
+    outFaces = op.outNumber("Faces"),
+    outVertices = op.outNumber("Vertices"),
+    outNormals = op.outNumber("Normals"),
+    outTexCoords = op.outNumber("TexCoords"),
+    outTangents = op.outNumber("Tangents"),
+    outBiTangents = op.outNumber("BiTangents"),
+    outVertexColors = op.outNumber("VertexColors"),
+    outAttribs = op.outNumber("Other Attributes");
 
 geometry.onLinkChanged = () =>
 {

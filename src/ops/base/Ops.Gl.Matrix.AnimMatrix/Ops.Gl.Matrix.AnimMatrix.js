@@ -74,13 +74,10 @@ function init()
     startTime = performance.now();
     anim.clear(CABLES.now() / 1000.0);
 
-    // if(firsttime)
     anim.setValue(CABLES.now() / 1000.0, cycle);
 
     if (cycle == 1) cycle = 0;
     else cycle = 1;
-
-    // console.log("animating to:",cycle);
 
     if (cycle == 0)
     {
@@ -94,8 +91,6 @@ function init()
         arr2 = inMat.get();
         mat4.copy(arr1, result);
     }
-
-    // console.log(arr1,arr2);
 
     anim.setValue(inDur.get() + CABLES.now() / 1000.0, cycle, () =>
     {

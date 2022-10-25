@@ -12,7 +12,7 @@ const Gltf = class
         this.timing = [];
         this.cams = [];
         this.startTime = performance.now();
-        this.bounds = new CGL.BoundingBox();
+        this.bounds = new CABLES.CG.BoundingBox();
         this.loaded = Date.now();
         this.accBuffersDelete = [];
     }

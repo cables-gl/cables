@@ -1044,7 +1044,6 @@ const Op = function ()
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs));
         if (this.storage && Object.keys(this.storage).length > 0) op.storage = this.storage;
-        if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
 
         op.portsIn = [];
@@ -1131,7 +1130,6 @@ const Op = function ()
 
     Op.prototype.error = Op.prototype.logError = function ()
     {
-        // if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
@@ -1486,7 +1484,6 @@ const Op = function ()
      */
     Op.prototype.removePort = function (port)
     {
-        // for(var ipi in this.portsIn)
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             if (this.portsIn[ipi] == port)

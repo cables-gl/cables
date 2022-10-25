@@ -1,31 +1,31 @@
 const inArray = op.inArray("Array in");
-const count = op.inValueInt("Rotate amount",0);
+const count = op.inValueInt("Rotate amount", 0);
 const outArray = op.outArray("ArrayOut");
 
-var newArr=[];
+let newArr = [];
 outArray.set(newArr);
 
 count.onChange =
-inArray.onChange = function()
+inArray.onChange = function ()
 {
-    var arr=inArray.get();
-    if(!arr)return;
+    let arr = inArray.get();
+    if (!arr) return;
 
-    var rotateIndex = -count.get();
+    let rotateIndex = -count.get();
 
-    newArr = rotate(inArray.get(),rotateIndex,0);
+    newArr = rotate(inArray.get(), rotateIndex, 0);
     outArray.set(null);
     outArray.set(newArr);
-}
+};
 
-//https://gist.github.com/aubergene/7ecfe624199e68f60258
+// https://gist.github.com/aubergene/7ecfe624199e68f60258
 function rotate(array, n, guard)
 {
-	var head, tail;
-        n = (n === null) || guard ? 1 : n;
-        n = n % array.length;
-        tail = array.slice(n);
+    let head, tail;
+    n = (n === null) || guard ? 1 : n;
+    n %= array.length;
+    tail = array.slice(n);
 
-	head = array.slice(0, n);
-	return tail.concat(head);
+    head = array.slice(0, n);
+    return tail.concat(head);
 }

@@ -46,13 +46,8 @@
             {
                 "type": 0,
                 "name": "Cubemap Size index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Cubemap Size",
                 "group": "Cubemap Options",
-                "subType": "string"
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -63,12 +58,8 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "group": "Cubemap Options",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Filter",
-                "group": "Cubemap Options"
             }
         ],
         "portsOut": [

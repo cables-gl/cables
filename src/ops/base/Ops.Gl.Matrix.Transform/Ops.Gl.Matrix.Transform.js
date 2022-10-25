@@ -14,7 +14,6 @@ op.setPortGroup("Position", [posX, posY, posZ]);
 op.setPortGroup("Scale", [scale]);
 op.setUiAxisPorts(posX, posY, posZ);
 
-const cgl = op.patch.cgl;
 const vPos = vec3.create();
 const vScale = vec3.create();
 const transMatrix = mat4.create();
@@ -50,11 +49,12 @@ render.onTriggered = function ()
 
     if (updateMatrix) doUpdateMatrix();
 
-    cgl.pushModelMatrix();
-    mat4.multiply(cgl.mMatrix, cgl.mMatrix, transMatrix);
+    const cg = op.patch.cg;
+    cg.pushModelMatrix();
+    mat4.multiply(cg.mMatrix, cg.mMatrix, transMatrix);
 
     trigger.trigger();
-    cgl.popModelMatrix();
+    cg.popModelMatrix();
 
     if (CABLES.UI && CABLES.UI.showCanvasTransforms) gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
 

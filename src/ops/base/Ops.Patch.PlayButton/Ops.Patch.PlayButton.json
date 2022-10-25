@@ -51,7 +51,7 @@
             {
                 "type": 0,
                 "name": "Clicked",
-                "subType": "boolean"
+                "subType": "number"
             },
             {
                 "type": 1,

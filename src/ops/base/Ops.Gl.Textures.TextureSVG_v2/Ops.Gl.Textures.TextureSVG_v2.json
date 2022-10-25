@@ -45,7 +45,7 @@
             {
                 "type": 0,
                 "name": "Loaded",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.TextureSVG_v2"

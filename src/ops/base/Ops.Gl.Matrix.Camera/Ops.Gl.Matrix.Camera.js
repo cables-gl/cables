@@ -30,7 +30,7 @@ const rotY = op.inValue("pan", 0);
 const rotZ = op.inValue("roll", 0);
 
 /* Outputs */
-const outAsp = op.outValue("Aspect");
+const outAsp = op.outNumber("Aspect");
 const outArr = op.outArray("Look At Array");
 
 /* logic */

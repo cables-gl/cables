@@ -31,6 +31,11 @@ inCapture.onTriggered = () =>
 
 function meshCapture()
 {
+    if (!this._geom || !this._geom.copy)
+    {
+        return;
+    }
+
     const g = this._geom.copy();
     const normalMat = mat4.create();
     mat4.invert(normalMat, cgl.mMatrix);

@@ -21,7 +21,7 @@ function showCodeModal(title, code, type)
 {
     if (!CABLES.UI || !CABLES.UI.ModalDialog)
     {
-        console.log(title, code);
+        op.log(title, code);
     }
 
     let html = "";
@@ -71,16 +71,6 @@ showUniforms.onTriggered = function ()
     if (!CABLES.UI || !shader) return;
     doUniformDump = true;
 };
-
-// createCustom.onTriggered = () =>
-// {
-//     console.log(shader);
-
-//     const custOp = op.patch.addOp("Ops.Gl.Shader.CustomShader_v2");
-//     custOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + 50 } });
-//     custOp.getPort("Fragment Code").set(shader.finalShaderFrag);
-//     custOp.getPort("Vertex Code").set(shader.finalShaderVert);
-// };
 
 exec.onTriggered = function ()
 {

@@ -2,29 +2,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "val",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "min",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "max",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "ignore outside values",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }

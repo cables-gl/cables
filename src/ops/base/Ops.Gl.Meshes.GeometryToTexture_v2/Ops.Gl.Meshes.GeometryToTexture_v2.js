@@ -87,12 +87,6 @@ function updateAttrib()
     mod.toggleDefine("MOD_ATTRIB_TC", inAttrib.get() == "TexCoords");
     mod.toggleDefine("MOD_ATTRIB_NORMAL", inAttrib.get() == "Normals");
 
-    console.log(
-
-        "MOD_ATTRIB_POS", inAttrib.get() == "Vertex Pos",
-        "MOD_ATTRIB_TC", inAttrib.get() == "TexCoords",
-        "MOD_ATTRIB_NORMAL", inAttrib.get() == "Normals",
-    );
     needsUpdate = true;
 }
 

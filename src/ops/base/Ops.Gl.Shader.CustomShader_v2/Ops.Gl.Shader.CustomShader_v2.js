@@ -31,13 +31,13 @@ fragmentShader.onChange = vertexShader.onChange = function () { needsUpdate = tr
 
 render.onTriggered = doRender;
 
-var needsUpdate = true;
+let needsUpdate = true;
 op.onLoadedValueSet = initDataOnLoad;
 
 function initDataOnLoad(data)
 {
     updateShader();
-    // console.log(data);
+
     // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
     for (let i = 0; i < uniformInputs.length; i++)
         for (let j = 0; j < data.portsIn.length; j++)
@@ -68,10 +68,7 @@ function pushTextures()
 {
     for (let i = 0; i < uniformTextures.length; i++)
         if (uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
-        {
-            // console.log(uniformTextures[i]);
             shader.pushTexture(uniformTextures[i].uniform, uniformTextures[i].get().tex);
-        }
         else
             shader.pushTexture(uniformTextures[i], CGL.Texture.getEmptyTexture(cgl));
 }
@@ -117,12 +114,12 @@ function parseUniforms(src)
         {
             let words = lines[i].split(" ");
 
-            for (var j = 0; j < words.length; j++) words[j] = (words[j] + "").trim();
+            for (let j = 0; j < words.length; j++) words[j] = (words[j] + "").trim();
 
             if (words[0] === "UNI" || words[0] === "uniform")
             {
                 let varnames = words[2];
-                if (words.length > 4) for (var j = 3; j < words.length; j++)varnames += words[j];
+                if (words.length > 4) for (let j = 3; j < words.length; j++)varnames += words[j];
 
                 words = words.filter(function (el) { return el !== ""; });
                 const type = words[1];
@@ -359,7 +356,6 @@ function setVectorValues()
             else if (v.num > 4)
             {
                 v.uni.setValue(v.port.get());
-                // console.log(v.port.get());
             }
 
             v.changed = false;

@@ -5,37 +5,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "x1",
                 "group": "Point 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "y1",
                 "group": "Point 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "z1",
                 "group": "Point 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "x2",
                 "group": "Point 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "y2",
                 "group": "Point 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "z2",
                 "group": "Point 2",
                 "subType": "number"
@@ -43,7 +43,7 @@
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "distance",
                 "subType": "number"
             }

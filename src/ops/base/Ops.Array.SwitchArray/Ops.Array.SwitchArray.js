@@ -1,20 +1,20 @@
-var idx=op.inValueInt("Index");
-var valuePorts=[];
-var result=op.outArray("Result");
+let idx = op.inValueInt("Index");
+let valuePorts = [];
+let result = op.outArray("Result");
 
-idx.onChange=update;
+idx.onChange = update;
 
-for(var i=0;i<10;i++)
+for (let i = 0; i < 10; i++)
 {
-    var p=op.inArray("Array "+i);
-    valuePorts.push( p );
-    p.onChange=update;
+    let p = op.inArray("Array " + i);
+    valuePorts.push(p);
+    p.onChange = update;
 }
 
 function update()
 {
-    if(idx.get()>=0 && valuePorts[idx.get()])
+    if (idx.get() >= 0 && valuePorts[idx.get()])
     {
-        result.set( valuePorts[idx.get()].get() );
+        result.set(valuePorts[idx.get()].get());
     }
 }

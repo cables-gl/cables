@@ -1,7 +1,7 @@
 const exe = op.inTriggerButton("trigger in"),
     reset = op.inTriggerButton("reset"),
     trigger = op.outTrigger("trigger out"),
-    num = op.outValue("current count"),
+    num = op.outNumber("current count"),
 
     inMinLoopValue = op.inValueInt("Loop min", 0.0),
     inMaxLoopValue = op.inValueInt("Loop max", 4.0);

@@ -5,22 +5,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "string1"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "string2"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "New Line",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "result"
             }
         ],

@@ -1,7 +1,7 @@
 const
     number1 = op.inValueFloat("number1", 1),
     number2 = op.inValueFloat("number2", 1),
-    result = op.outValue("result");
+    result = op.outNumber("result");
 
 op.setTitle("+");
 

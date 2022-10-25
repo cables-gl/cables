@@ -1,10 +1,10 @@
-var inArr=op.inArray("Numbers");
-var result=op.outValue("Result");
-var hashids = new Hashids("cablesalt");
+const
+    inArr = op.inArray("Numbers"),
+    result = op.outValue("Result"),
+    hashids = new Hashids("cablesalt");
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    var id = hashids.encode(inArr.get());
+    const id = hashids.encode(inArr.get());
     result.set(id);
-
 };

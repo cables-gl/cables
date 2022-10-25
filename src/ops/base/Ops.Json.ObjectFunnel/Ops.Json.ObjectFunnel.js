@@ -1,37 +1,37 @@
+const
+    inObj1 = op.inObject("Object1"),
+    inObj2 = op.inObject("Object2"),
+    inObj3 = op.inObject("Object3"),
+    inObj4 = op.inObject("Object4"),
+    inObj5 = op.inObject("Object5");
 
-var inObj1=op.inObject("Object1");
-var inObj2=op.inObject("Object2");
-var inObj3=op.inObject("Object3");
-var inObj4=op.inObject("Object4");
-var inObj5=op.inObject("Object5");
+let outObj = op.outObject("Out Object");
 
-var outObj=op.outObject("Out Object");
-
-inObj1.onChange=function()
+inObj1.onChange = function ()
 {
     outObj.set(null);
     outObj.set(inObj1.get());
 };
 
-inObj2.onChange=function()
+inObj2.onChange = function ()
 {
     outObj.set(null);
     outObj.set(inObj2.get());
 };
 
-inObj3.onChange=function()
+inObj3.onChange = function ()
 {
     outObj.set(null);
     outObj.set(inObj3.get());
 };
 
-inObj4.onChange=function()
+inObj4.onChange = function ()
 {
     outObj.set(null);
     outObj.set(inObj4.get());
 };
 
-inObj5.onChange=function()
+inObj5.onChange = function ()
 {
     outObj.set(null);
     outObj.set(inObj5.get());

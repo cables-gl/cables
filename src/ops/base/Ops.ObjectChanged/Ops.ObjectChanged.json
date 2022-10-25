@@ -3,19 +3,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],
         "name": "Ops.ObjectChanged"
     },
-    "updated": 1538643612627,
     "authorName": "andro",
     "id": "d1985c9e-b537-4c71-b75f-d634ade4b970",
     "created": 1538643612629

@@ -3,7 +3,7 @@ const
     min = op.inValue("min", 0),
     max = op.inValue("max", 1),
     outTrig = op.outTrigger("next"),
-    result = op.outValue("result"),
+    result = op.outNumber("result"),
     inInteger = op.inValueBool("Integer", false),
     noDupe = op.inValueBool("No consecutive duplicates", false);
 

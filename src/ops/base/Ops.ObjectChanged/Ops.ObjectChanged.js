@@ -1,15 +1,13 @@
+let inObj = op.inObject("Object");
+let next = op.outTrigger("Next");
 
-var inObj=op.inObject("Object");
+let obj = null;
 
-var next=op.outTrigger("Next");
-
-var obj=null;
-
-inObj.onChange=function()
+inObj.onChange = function ()
 {
-    if(inObj.get()!=obj)
+    if (inObj.get() != obj)
     {
-        obj=inObj.get();
+        obj = inObj.get();
         next.trigger();
     }
 };

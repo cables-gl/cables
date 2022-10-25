@@ -1,54 +1,53 @@
 {
-    "updated": 1541173639997,
     "authorName": "pandur",
     "id": "7b08dea1-a05b-422e-a1de-7832058bee51",
     "created": 1519816303489,
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "North",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "East",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "South",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "West",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Dir",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "North",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "East",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "South",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "West",
                 "subType": "number"
             }
         ],

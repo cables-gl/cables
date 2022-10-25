@@ -8,7 +8,7 @@ const
     inScaleGraph = op.inFloat("Scale", 4),
     inSizeGraph = op.inFloat("Size", 128),
     outCanv = op.outObject("Canvas"),
-    outFPS = op.outValue("FPS");
+    outFPS = op.outNumber("FPS");
 
 const cgl = op.patch.cgl;
 const element = document.createElement("div");
@@ -466,7 +466,6 @@ function render()
             if (glQueryData[i].time)
                 currentTimeGPU += glQueryData[i].time;
         }
-        // console.log("glquery count",currentTimeGPU)
     }
 
     if (inShow.get())

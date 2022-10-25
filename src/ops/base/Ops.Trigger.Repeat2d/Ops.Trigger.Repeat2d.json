@@ -2,52 +2,52 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "num x",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "num y",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mul",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "center",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "x",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "index",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "total iterations",
                 "subType": "number"
             }

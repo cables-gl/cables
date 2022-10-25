@@ -251,6 +251,7 @@ function compareLights(lightStack)
         setUniforms(lightStack);
     }
 }
+
 const iViewMatrix = mat4.create();
 
 function updateLights()

@@ -8,16 +8,16 @@ const
     totalPointsOut = op.outNumber("Total points"),
     arrayLengthOut = op.outNumber("Array length");
 
-var newArr = [];
+let newArr = [];
 outArray.set(newArr);
 
-var newArr = [];
-
 seed.onChange =
-num.onChange =
-size.onChange =
-distrib.onChange =
-distRand.onChange = outArray.onLinkChanged = generate;
+    num.onChange =
+    size.onChange =
+    distrib.onChange =
+    distRand.onChange =
+    outArray.onLinkChanged = generate;
+
 generate();
 
 function generate()

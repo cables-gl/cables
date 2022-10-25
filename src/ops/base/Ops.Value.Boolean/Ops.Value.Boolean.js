@@ -1,11 +1,11 @@
-const v=op.inValueBool("value",false);
-const result=op.outValueBool("result");
+const
+    v = op.inValueBool("value", false),
+    result = op.outBoolNum("result");
 
 result.set(false);
-v.onChange=exec;
+v.onChange = exec;
 
 function exec()
 {
-    if(result.get()!=v.get()) result.set(v.get());
+    if (result.get() != v.get()) result.set(v.get());
 }
-

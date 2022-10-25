@@ -1,33 +1,29 @@
-var angle=op.outValue("Angle");
-var str=op.outValue("Description");
+const
+    angle = op.outNumber("Angle"),
+    str = op.outString("Description");
 
-var count=0;
+let count = 0;
 window.addEventListener("resize", onOrientationChange, false);
-window.addEventListener("orientationchange", onOrientationChange,false);
+window.addEventListener("orientationchange", onOrientationChange, false);
 
 onOrientationChange();
 
-if(screen && screen.orientation) 
+if (screen && screen.orientation)
 {
-    screen.orientation.addEventListener('change', onOrientationChange);
+    screen.orientation.addEventListener("change", onOrientationChange);
 }
-
-
 
 function onOrientationChange()
 {
     count++;
-    if(!screen.orientation)return;
-    if(screen.orientation.hasOwnProperty("angle"))angle.set(screen.orientation.angle);
-    var s=screen.orientation.type+" #"+count+" WINORIENT:"+window.orientation;
+    if (!screen.orientation) return;
+    if (screen.orientation.hasOwnProperty("angle"))angle.set(screen.orientation.angle);
+    let s = screen.orientation.type + " #" + count + " WINORIENT:" + window.orientation;
     str.set(s);
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
     window.removeEventListener("resize", onOrientationChange);
     window.removeEventListener("orientationchange", onOrientationChange);
 };
-
-
-

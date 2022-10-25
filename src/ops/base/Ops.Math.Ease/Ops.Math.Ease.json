@@ -5,29 +5,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Min",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Easing",
-                "subType": "string"
+                "type": 0,
+                "name": "Easing index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

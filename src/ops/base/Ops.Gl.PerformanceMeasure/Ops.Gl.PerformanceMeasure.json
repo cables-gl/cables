@@ -12,21 +12,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Execute"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Name"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Childs"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time Used",
                 "subType": "number"
             }

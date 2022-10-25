@@ -8,11 +8,13 @@ const cgl = op.patch.cgl;
 
 const inSize = op.inDropDown("Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 let sizeChanged = true;
-inSize.onChange = () => sizeChanged = true;
+inSize.onChange = () => { return sizeChanged = true; };
 
 let fb = null;
 
 inFp.onChange = createFb;
+
+let emptyCubemap = null;
 
 createFb();
 
@@ -46,7 +48,8 @@ inTrigger.onTriggered = function ()
             fb.renderEndCubemapFace();
         }
         fb.renderEnd();
-        outTex.set(CGL.Texture.getEmptyCubemapTexture(cgl));
+        if (!emptyCubemap)emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
+        outTex.set(emptyCubemap);
         outTex.set(fb.getTextureColor());
     }
     else outTrigger.trigger();

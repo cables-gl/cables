@@ -1,16 +1,17 @@
-// DateCalc
+const
+    inTimestamp = op.inValue("timestamp"),
+    inDiff = op.inInt("difference"),
+    diffType = op.inDropDown("type", ["years", "months", "days", "hours", "minutes", "seconds"]),
+    inTrigger = op.inTrigger("update"),
 
-const inTimestamp = op.inValue("timestamp");
-const inDiff = op.inInt("difference");
-const diffType = op.inDropDown("type", ["years", "months", "days", "hours", "minutes", "seconds"]);
-const inTrigger = op.inTrigger("update");
+    outDate = op.outObject("Date"),
+    outResult = op.outNumber("Timestamp");
 
-const outDate = op.outObject("Date");
-const outResult = op.outValue("Timestamp");
-inTimestamp.onChange = update;
-inDiff.onChange = update;
-diffType.onChange = update;
-inTrigger.onChange = update;
+inTimestamp.onChange =
+    inDiff.onChange =
+    diffType.onChange =
+    inTrigger.onChange = update;
+
 function update()
 {
     let ts = inTimestamp.get();

@@ -1,10 +1,10 @@
 const
-    bool=op.inValueBool("in bool"),
-    outbool=op.outValueBool("out bool");
+    bool = op.inValueBool("in bool"),
+    outbool = op.outBoolNum("out bool");
 
-bool.changeAlways=true;
+bool.changeAlways = true;
 
-bool.onChange=function()
+bool.onChange = function ()
 {
-    outbool.set( ! (true==bool.get()) );
+    outbool.set(!(bool.get() == true));
 };

@@ -1,0 +1,47 @@
+{
+    "id": "8cebb27b-2a6e-4580-a543-b36a91f14879",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1665654164307
+        },
+        {
+            "message": "Ops.User.pandur.ParseJson renamed to Ops.User.pandur.ParseObj",
+            "author": "pandur",
+            "date": 1665654314488
+        },
+        {
+            "message": "Ops.User.pandur.ParseObj renamed to Ops.Dev.ParseObj",
+            "author": "pandur",
+            "date": 1665667450068
+        },
+        {
+            "message": "Ops.Dev.ParseObj renamed to Ops.Dev.ObjGeometry",
+            "author": "pandur",
+            "date": 1665667473768
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1665654212950,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Obj"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 5,
+                "name": "Status"
+            }
+        ],
+        "name": "Ops.Dev.ObjGeometry"
+    }
+}

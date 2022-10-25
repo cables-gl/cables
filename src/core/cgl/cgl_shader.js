@@ -6,7 +6,7 @@ import { MESH } from "./cgl_mesh";
 import { CONSTANTS } from "./constants";
 import { escapeHTML } from "./cgl_utils";
 import Logger from "../core_logger";
-import defaultShaderSrcFrag from "./cgl_shader_default_glsl.vert";
+import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
 // ---------------------------------------------------------------------------
 
 
@@ -1139,6 +1139,13 @@ Shader.prototype.getUniform = function (name)
     return null;
 };
 
+Shader.prototype.removeAllUniforms = function ()
+{
+    this._uniforms = [];
+    // for (let i = 0; i < this._uniforms.length; i++)
+    //     this.removeUniform(this._uniforms[i].name);
+};
+
 Shader.prototype.removeUniform = function (name)
 {
     for (let i = 0; i < this._uniforms.length; i++)
@@ -1423,7 +1430,7 @@ Shader.prototype.setFeedbackNames = function (names)
 
 Shader.prototype.getDefaultVertexShader = Shader.getDefaultVertexShader = function ()
 {
-    return defaultShaderSrcFrag;
+    return defaultShaderSrcVert;
 };
 
 Shader.prototype.getDefaultFragmentShader = Shader.getDefaultFragmentShader = function (r, g, b)

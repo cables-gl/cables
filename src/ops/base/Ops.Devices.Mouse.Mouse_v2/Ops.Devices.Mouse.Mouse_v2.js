@@ -13,11 +13,11 @@ const
     multiply = op.inValueFloat("multiply", 1),
     outMouseX = op.outNumber("x", 0),
     outMouseY = op.outNumber("y", 0),
-    mouseDown = op.outValueBool("button down"),
+    mouseDown = op.outBoolNum("button down"),
     mouseClick = op.outTrigger("click"),
     mouseUp = op.outTrigger("Button Up"),
     mouseClickRight = op.outTrigger("click right"),
-    mouseOver = op.outValueBool("mouseOver"),
+    mouseOver = op.outBoolNum("mouseOver"),
     outButton = op.outNumber("button");
 
 op.setPortGroup("Behavior", [relative, normalize, flipY, area, rightClickPrevDef, touchscreen]);
@@ -64,8 +64,8 @@ normalize.onChange = function ()
     setValue(mouseX, mouseY);
 };
 
-var mouseX = cgl.canvas.width / 2;
-var mouseY = cgl.canvas.height / 2;
+let mouseX = cgl.canvas.width / 2;
+let mouseY = cgl.canvas.height / 2;
 
 lineX = mouseX;
 lineY = mouseY;

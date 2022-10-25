@@ -1,48 +1,45 @@
+const
+    accX = op.outNumber("Acceleration X"),
+    accY = op.outNumber("Acceleration Y"),
+    accZ = op.outNumber("Acceleration Z");
 
-var accX=op.outValue("Acceleration X");
-var accY=op.outValue("Acceleration Y");
-var accZ=op.outValue("Acceleration Z");
+let lastTime = 0;
+let lastTimeAcc = 0;
 
-var lastTime=0;
-var lastTimeAcc=0;
-
-var obj={};
+let obj = {};
 
 registerEvents();
 
-var lastX=0;
-var lastY=0;
-var lastZ=0;
+let lastX = 0;
+let lastY = 0;
+let lastZ = 0;
 
 function moved(event)
 {
-    if(CABLES.now()-lastTimeAcc>30)
+    if (CABLES.now() - lastTimeAcc > 30)
     {
-        lastTimeAcc=CABLES.now();
+        lastTimeAcc = CABLES.now();
 
-        var deltaX=lastX-event.accelerationIncludingGravity.x;
-        var deltaY=lastY-event.accelerationIncludingGravity.y;
-        var deltaZ=lastZ-event.accelerationIncludingGravity.z;
+        let deltaX = lastX - event.accelerationIncludingGravity.x;
+        let deltaY = lastY - event.accelerationIncludingGravity.y;
+        let deltaZ = lastZ - event.accelerationIncludingGravity.z;
 
         accX.set(Math.abs(deltaX));
         accY.set(Math.abs(deltaY));
         accZ.set(Math.abs(deltaZ));
 
-
-        lastX=event.accelerationIncludingGravity.x;
-        lastY=event.accelerationIncludingGravity.y;
-        lastZ=event.accelerationIncludingGravity.z;
-
+        lastX = event.accelerationIncludingGravity.x;
+        lastY = event.accelerationIncludingGravity.y;
+        lastZ = event.accelerationIncludingGravity.z;
     }
 }
 
-
 function registerEvents()
 {
-    window.addEventListener("devicemotion", moved,true);
+    window.addEventListener("devicemotion", moved, true);
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
     window.removeEventListener("devicemotion", moved);
-}
+};

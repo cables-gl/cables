@@ -1,6 +1,6 @@
 const
     exe = op.inTrigger("exe"),
-    cps = op.outValue("cps");
+    cps = op.outNumber("cps");
 
 let timeStart = 0;
 let cpsCount = 0;

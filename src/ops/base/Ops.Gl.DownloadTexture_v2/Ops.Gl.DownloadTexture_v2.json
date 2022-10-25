@@ -29,7 +29,7 @@
             {
                 "type": 0,
                 "name": "Finished",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.DownloadTexture_v2"

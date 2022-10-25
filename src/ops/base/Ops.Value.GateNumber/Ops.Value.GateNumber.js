@@ -1,11 +1,7 @@
-// input
 const valueInPort = op.inValue("Value In", 0);
 const passThroughPort = op.inValueBool("Pass Through");
+const valueOutPort = op.outNumber("Value Out");
 
-// output
-const valueOutPort = op.outValue("Value Out");
-
-// change listeners
 valueInPort.onChange = update;
 passThroughPort.onChange = update;
 

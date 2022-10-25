@@ -23,7 +23,6 @@ op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
 
-
 const geom = new CGL.Geometry("rectangle");
 let mesh = null;
 let needsRebuild = false;

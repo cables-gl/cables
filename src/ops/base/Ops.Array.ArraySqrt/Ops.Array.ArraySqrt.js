@@ -1,20 +1,20 @@
 const
-    inArray=op.inArray("In"),
-    outArray=op.outArray("Result");
+    inArray = op.inArray("In"),
+    outArray = op.outArray("Result");
 
-var newArr=[];
+let newArr = [];
 outArray.set(newArr);
 
-inArray.onChange=function()
+inArray.onChange = function ()
 {
-    var arr=inArray.get();
-    if(!arr)return;
+    let arr = inArray.get();
+    if (!arr) return;
 
-    if(newArr.length!=arr.length)newArr.length=arr.length;
+    if (newArr.length != arr.length)newArr.length = arr.length;
 
-    for(var i=0;i<arr.length;i++)
+    for (let i = 0; i < arr.length; i++)
     {
-        newArr[i]=Math.sqrt(arr[i]);
+        newArr[i] = Math.sqrt(arr[i]);
     }
     outArray.set(null);
     outArray.set(newArr);

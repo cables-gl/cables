@@ -12,19 +12,20 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "HTML Element"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Classname"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Html.ToggleClass"
     },
     "summary": "add or remove css class to/from a HTML element",

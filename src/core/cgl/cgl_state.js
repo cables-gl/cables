@@ -1,9 +1,10 @@
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
-import { MatrixStack } from "./cgl_matrixstack";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
+import { CGState } from "../cg/cg_state";
+import { CG } from "../cg/cg_constants";
 
 
 /**
@@ -15,7 +16,13 @@ import Logger from "../core_logger";
  */
 const Context = function (_patch)
 {
-    EventTarget.apply(this);
+    // EventTarget.apply(this);
+    CGState.apply(this);
+
+    this.gApi = CG.GAPI_WEBGL;
+
+    this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
+    this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
     this.profileData = new ProfileData(this);
     this._log = new Logger("cgl_context");
@@ -27,7 +34,6 @@ const Context = function (_patch)
     this.patch = _patch;
     this.debugOneFrame = false;
     this.checkGlErrors = true; // true is slow
-
     this.maxTextureUnits = 0;
     this.maxVaryingVectors = 0;
     this.currentProgram = null;
@@ -43,33 +49,6 @@ const Context = function (_patch)
     this._cursor = "auto";
     this._currentCursor = "";
 
-
-    /**
-     * Current projection matrix
-     * @memberof Context
-     * @instance
-     * @type {mat4}
-     */
-    this.pMatrix = mat4.create();
-    /**
-     * Current model matrix
-     * @memberof Context
-     * @instance
-     * @type {mat4}
-     */
-    this.mMatrix = mat4.create();
-    /**
-     * Current view matrix
-     * @memberof Context
-     * @instance
-     * @type {mat4}
-     */
-    this.vMatrix = mat4.create();
-    this._textureslots = [];
-
-    this._pMatrixStack = new MatrixStack();
-    this._mMatrixStack = new MatrixStack();
-    this._vMatrixStack = new MatrixStack();
     this._glFrameBufferStack = [];
     this._frameBufferStack = [];
     this._shaderStack = [];
@@ -86,10 +65,6 @@ const Context = function (_patch)
         },
     }); // todo: deprecated
 
-    this.canvas = null;
-    this.pixelDensity = 1;
-    mat4.identity(this.mMatrix);
-    mat4.identity(this.vMatrix);
 
     const simpleShader = new Shader(this, "simpleshader");
 
@@ -129,11 +104,8 @@ const Context = function (_patch)
         this.aborted = true;
     };
 
-    this.setCanvas = function (canv)
+    this._setCanvas = function (canv)
     {
-        if (typeof canv === "string") this.canvas = document.getElementById(canv);
-        else this.canvas = canv;
-
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = false;
@@ -219,8 +191,6 @@ const Context = function (_patch)
             this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
             this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
         }
-
-        this.updateSize();
     };
 
     this.getInfo = function ()
@@ -235,19 +205,9 @@ const Context = function (_patch)
             "maxUniformsFrag": this.maxUniformsFrag,
             "maxUniformsVert": this.maxUniformsVert,
             "maxSamples": this.maxSamples
-
         };
     };
 
-    this.updateSize = function ()
-    {
-        this.canvas.width = this.canvasWidth = this.canvas.clientWidth * this.pixelDensity;
-        this.canvas.height = this.canvasHeight = this.canvas.clientHeight * this.pixelDensity;
-    };
-
-    this.canvasWidth = -1;
-    this.canvasHeight = -1;
-    this.canvasScale = 1;
     let oldCanvasWidth = -1;
     let oldCanvasHeight = -1;
 
@@ -286,7 +246,6 @@ const Context = function (_patch)
         viewPort[3] = Math.round(h);
         this.gl.viewport(viewPort[0], viewPort[1], viewPort[2], viewPort[3]);
     };
-
 
     this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
     {
@@ -329,6 +288,7 @@ const Context = function (_patch)
 
         this._frameStarted = false;
 
+
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
             oldCanvasWidth = this.canvasWidth;
@@ -344,6 +304,7 @@ const Context = function (_patch)
         {
             this._currentCursor = this.canvas.style.cursor = this._cursor;
         }
+        this.fpsCounter.endFrame();
     };
 
     this.logStackError = function (str)
@@ -477,16 +438,10 @@ const Context = function (_patch)
         return this._frameBufferStack[this._frameBufferStack.length - 1];
     };
 
-    const identView = vec3.create();
-    vec3.set(identView, 0, 0, 2);
-    const ident = vec3.create();
-    vec3.set(ident, 0, 0, 0);
 
     this.renderStart = function (cgl, identTranslate, identTranslateView)
     {
-        if (!identTranslate) identTranslate = ident;
-        if (!identTranslateView) identTranslateView = identView;
-
+        this.fpsCounter.startFrame();
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
@@ -502,17 +457,9 @@ const Context = function (_patch)
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
-        mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
-        // mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
 
-        mat4.identity(cgl.mMatrix);
-        mat4.identity(cgl.vMatrix);
-        mat4.translate(cgl.mMatrix, cgl.mMatrix, identTranslate);
-        mat4.translate(cgl.vMatrix, cgl.vMatrix, identTranslateView);
+        this._startMatrixStacks(identTranslate, identTranslateView);
 
-        cgl.pushPMatrix();
-        cgl.pushModelMatrix();
-        cgl.pushViewMatrix();
 
         cgl.pushBlendMode(CONSTANTS.BLEND_MODES.BLEND_NORMAL, false);
 
@@ -533,9 +480,7 @@ const Context = function (_patch)
 
     this.renderEnd = function (cgl)
     {
-        cgl.popViewMatrix();
-        cgl.popModelMatrix();
-        cgl.popPMatrix();
+        this._endMatrixStacks();
 
         this.popDepthTest();
         this.popDepthWrite();
@@ -574,11 +519,7 @@ const Context = function (_patch)
     {
         this.checkFrameStarted("cgl setTexture");
 
-
-        if (t === null)
-        {
-            t = CGL.Texture.getEmptyTexture(this).tex;
-        }
+        if (t === null) t = CGL.Texture.getEmptyTexture(this).tex;
 
         // if (!this.gl.isTexture(t))
         // {
@@ -610,56 +551,6 @@ const Context = function (_patch)
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
-    this.setSize = function (w, h, ignorestyle)
-    {
-        if (!ignorestyle)
-        {
-            this.canvas.style.width = w + "px";
-            this.canvas.style.height = h + "px";
-        }
-
-        this.canvas.width = w * this.pixelDensity;
-        this.canvas.height = h * this.pixelDensity;
-
-        this.updateSize();
-    };
-
-    this._resizeToWindowSize = function ()
-    {
-        this.setSize(window.innerWidth, window.innerHeight);
-        this.updateSize();
-    };
-
-    this._resizeToParentSize = function ()
-    {
-        const p = this.canvas.parentElement;
-        if (!p)
-        {
-            this._log.error("cables: can not resize to container element");
-            return;
-        }
-        this.setSize(p.clientWidth, p.clientHeight);
-
-        this.updateSize();
-    };
-
-    this.setAutoResize = function (parent)
-    {
-        window.removeEventListener("resize", this._resizeToWindowSize.bind(this));
-        window.removeEventListener("resize", this._resizeToParentSize.bind(this));
-
-        if (parent == "window")
-        {
-            window.addEventListener("resize", this._resizeToWindowSize.bind(this));
-            window.addEventListener("orientationchange", this._resizeToWindowSize.bind(this));
-            this._resizeToWindowSize();
-        }
-        if (parent == "parent")
-        {
-            window.addEventListener("resize", this._resizeToParentSize.bind(this));
-            this._resizeToParentSize();
-        }
-    };
 
     this.printError = function (str)
     {
@@ -766,113 +657,6 @@ const Context = function (_patch)
 Context.prototype.addNextFrameOnceCallback = function (cb)
 {
     if (cb) this._onetimeCallbacks.push(cb);
-};
-
-/**
- * push a matrix to the view matrix stack
- * @function pushviewMatrix
- * @memberof Context
- * @instance
- * @param {mat4} viewmatrix
- */
-Context.prototype.pushViewMatrix = function ()
-{
-    this.vMatrix = this._vMatrixStack.push(this.vMatrix);
-};
-
-/**
- * pop view matrix stack
- * @function popViewMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current viewmatrix
- * @function
- */
-Context.prototype.popViewMatrix = function ()
-{
-    this.vMatrix = this._vMatrixStack.pop();
-};
-
-Context.prototype.getViewMatrixStateCount = function ()
-{
-    return this._vMatrixStack.stateCounter;
-};
-
-/**
- * push a matrix to the projection matrix stack
- * @function pushPMatrix
- * @memberof Context
- * @instance
- * @param {mat4} projectionmatrix
- */
-Context.prototype.pushPMatrix = function ()
-{
-    this.pMatrix = this._pMatrixStack.push(this.pMatrix);
-};
-
-/**
- * pop projection matrix stack
- * @function popPMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current projectionmatrix
- */
-Context.prototype.popPMatrix = function ()
-{
-    this.pMatrix = this._pMatrixStack.pop();
-    return this.pMatrix;
-};
-
-Context.prototype.getProjectionMatrixStateCount = function ()
-{
-    return this._pMatrixStack.stateCounter;
-};
-
-/**
- * push a matrix to the model matrix stack
- * @function pushModelMatrix
- * @memberof Context
- * @instance
- * @param {mat4} modelmatrix
- * @example
- * // see source code of translate op:
- * cgl.pushModelMatrix();
- * mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
- * trigger.trigger();
- * cgl.popModelMatrix();
- */
-Context.prototype.pushMvMatrix = Context.prototype.pushModelMatrix = function ()
-{
-    // deprecated
-    // var copy = mat4.clone(this.mMatrix);
-    this.mMatrix = this._mMatrixStack.push(this.mMatrix);
-};
-
-/**
- * pop model matrix stack
- * @function popModelMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current modelmatrix
- */
-Context.prototype.popMvMatrix = Context.prototype.popmMatrix = Context.prototype.popModelMatrix = function ()
-{
-    // todo: DEPRECATE
-    // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
-    this.mMatrix = this._mMatrixStack.pop();
-    return this.mMatrix;
-};
-
-/**
- * get model matrix
- * @function modelMatrix
- * @memberof Context
- * @instance
- * @returns {mat4} current modelmatrix
- */
-Context.prototype.modelMatrix = function ()
-{
-    return this.mMatrix;
 };
 
 // state depthtest
@@ -1321,6 +1105,11 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     {
         this._log.log("setblendmode: unknown blendmode");
     }
+};
+
+Context.prototype.createMesh = function (geom, glPrimitive)
+{
+    return new CGL.Mesh(this, geom, glPrimitive);
 };
 
 

@@ -1,10 +1,10 @@
 const
-    inVal=op.inString("String"),
-    result=op.outValueBool("Result");
+    inVal = op.inString("String"),
+    result = op.outBoolNum("Result");
 
-inVal.onChange=function()
+inVal.onChange = function ()
 {
-    var v=inVal.get();
-    if( v==="false" || v==false || v===0 || v==null || v==undefined)result.set(false);
+    let v = inVal.get();
+    if (v === "false" || v == false || v === 0 || v == null || v == undefined)result.set(false);
     else result.set(true);
 };

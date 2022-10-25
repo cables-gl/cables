@@ -5,7 +5,7 @@ const
     inArr4 = op.inArray("Array 4"),
 
     outArr = op.outArray("Array out", 4),
-    outNum = op.outValue("Num Points"),
+    outNum = op.outNumber("Num Points"),
     outArrayLength = op.outNumber("Array length");
 
 let showingError = false;
@@ -39,7 +39,7 @@ function update()
         else if (array4) arrlen = array4.length;
 
         if (emptyArray.length != arrlen)
-            for (var i = 0; i < arrlen; i++) emptyArray[i] = 0;
+            for (let i = 0; i < arrlen; i++) emptyArray[i] = 0;
 
         if (!array1)array1 = emptyArray;
         if (!array2)array2 = emptyArray;
@@ -55,7 +55,7 @@ function update()
     }
     op.setUiError("arraylen", null);
 
-    arr.length = array1.length*4;
+    arr.length = array1.length * 4;
     for (let i = 0; i < array1.length; i++)
     {
         arr[i * 4 + 0] = array1[i];

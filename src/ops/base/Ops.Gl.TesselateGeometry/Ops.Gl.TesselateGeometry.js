@@ -1,7 +1,7 @@
 const inGeom = op.inObject("Geometry");
 const inTimes = op.inValueInt("Iterations", 1);
 const outGeom = op.outObject("Result");
-const outVertices = op.outValue("Num Vertices");
+const outVertices = op.outNumber("Num Vertices");
 
 inGeom.onChange = update;
 inTimes.onChange = update;

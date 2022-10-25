@@ -45,19 +45,16 @@
             {
                 "type": 5,
                 "name": "Font File"
-            },
-            {
-                "type": 5,
-                "name": "Text"
             }
         ],
         "portsOut": [
             {
-                "type": 5,
-                "name": "Path String"
+                "type": 2,
+                "name": "Opentype Font",
+                "objType": "opentype"
             }
         ],
-        "name": "Ops.Dev.Opentype"
+        "name": "Ops.Libs.OpenType.OpentypeFont"
     },
     "authorName": "pandur",
     "created": 1642189494325,

@@ -5,47 +5,49 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "MIDI Channel index",
+                "group": "General",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Note index",
+                "group": "General",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Note Number",
                 "group": "Note",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Velocity",
                 "group": "Note",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Min In Velocity",
                 "group": "Velocity Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max In Velocity",
                 "group": "Velocity Range",
                 "subType": "number"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Velocity Array In"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event Out"
             }
         ],

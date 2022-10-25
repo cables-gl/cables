@@ -17,29 +17,34 @@ import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
 import { BranchStack, Branch } from "./banchprofiler";
+import { CGP } from "./cgp";
+import { CG } from "./cg/cg_constants";
 
 const CABLES = Object.assign(
     {
-        EventTarget,
-        EMBED,
-        Link,
-        Port,
-        Op,
-        Profiler,
-        Patch,
-        Instancing,
-        Timer,
-        WEBAUDIO,
-        Variable,
-        LoadingStatus,
-        now,
-        internalNow,
-        BranchStack,
-        Branch
+        "CG": CG,
+        "CGP": CGP,
+        "EventTarget": EventTarget,
+        "EMBED": EMBED,
+        "Link": Link,
+        "Port": Port,
+        "Op": Op,
+        "Profiler": Profiler,
+        "Patch": Patch,
+        "Instancing": Instancing,
+        "Timer": Timer,
+        "WEBAUDIO": WEBAUDIO,
+        "Variable": Variable,
+        "LoadingStatus": LoadingStatus,
+        "now": now,
+        "internalNow": internalNow,
+        "BranchStack": BranchStack,
+        "Branch": Branch
     },
     base64,
     utils,
     anim,
+    CONSTANTS.CG,
     CONSTANTS.ANIM,
     PatchConnections,
     CONSTANTS.PORT,

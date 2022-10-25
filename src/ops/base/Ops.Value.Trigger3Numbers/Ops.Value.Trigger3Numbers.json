@@ -5,43 +5,43 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "value x",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "value y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "value z",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result x",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "result y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "result z",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Value.Value3x"
+        "name": "Ops.Value.Trigger3Numbers"
     },
     "summary": "Stores a 3D coordinate (was Value3)",
     "docs": {

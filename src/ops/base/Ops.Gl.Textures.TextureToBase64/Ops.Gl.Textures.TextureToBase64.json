@@ -31,7 +31,7 @@
             {
                 "type": 0,
                 "name": "Loading",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.TextureToBase64"

@@ -5,52 +5,52 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "max Depth",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Possibility",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Seed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Index",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "depth",
                 "subType": "number"
             }

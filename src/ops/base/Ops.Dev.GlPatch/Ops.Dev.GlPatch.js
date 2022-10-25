@@ -31,8 +31,6 @@ render.onTriggered = function ()
 
 debug.onTriggered = () =>
 {
-    console.log(p);
-
     let count = 0;
     for (const i in p._glOpz)
     {
@@ -49,7 +47,4 @@ debug.onTriggered = () =>
             p._glOpz[i]._links[k]._cable._updateLinePos();
         }
     }
-
-    console.log(p._splineDrawers[0]);
-    console.log("num splines ", count);
 };

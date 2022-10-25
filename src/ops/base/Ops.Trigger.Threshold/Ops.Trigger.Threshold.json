@@ -5,19 +5,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Threshold",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Output"
             }
         ],

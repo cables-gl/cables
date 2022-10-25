@@ -5,29 +5,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Strategy index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width Result",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height Result",
                 "subType": "number"
             }

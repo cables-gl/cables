@@ -1,18 +1,19 @@
 // inputs
-var executePort = op.inTriggerButton('Execute');
+let executePort = op.inTriggerButton("Execute");
 executePort.onTriggered = update;
-var eventInPort = op.inObject('Event In');
+let eventInPort = op.inObject("Event In");
 
-//outputs
-var nextPort = op.outTrigger('Next');
-var eventOutPort = op.outObject('Event Out');
+// outputs
+let nextPort = op.outTrigger("Next");
+let eventOutPort = op.outObject("Event Out");
 
-function update() {
-    var event = eventInPort.get();
-    if(event && event.preventDefault) {
+function update()
+{
+    let event = eventInPort.get();
+    if (event && event.preventDefault)
+    {
         event.preventDefault();
     }
     eventOutPort.set(event);
     nextPort.trigger();
 }
-

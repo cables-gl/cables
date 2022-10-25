@@ -99,7 +99,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.AmmoCharacterCamera"
+        "name": "Ops.Physics.Ammo.AmmoCharacterFpsCamera"
     },
     "summary": "First person camera to use with AmmoCharacter",
     "issues": "",

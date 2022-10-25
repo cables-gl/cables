@@ -1,13 +1,13 @@
 const
     inObj = op.inObject("MidiJson"),
     inTime = op.inValue("Time"),
-    outBeat = op.outValue("Beat"),
+    outBeat = op.outNumber("Beat"),
     outTrackNames = op.outArray("Track Names"),
     outNames = op.outArray("Names"),
     outProgress = op.outArray("Progress"),
     outVelocity = op.outArray("Velocity"),
-    outNumTracks = op.outValue("Num Tracks"),
-    outBPM = op.outValue("BPM"),
+    outNumTracks = op.outNumber("Num Tracks"),
+    outBPM = op.outNumber("BPM"),
     outData = op.outObject("Data");
 
 let midi = null;

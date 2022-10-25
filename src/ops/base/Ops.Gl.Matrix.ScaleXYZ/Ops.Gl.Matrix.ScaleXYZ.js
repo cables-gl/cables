@@ -1,37 +1,37 @@
 const
-    render=op.inTrigger("render"),
-    scaleX=op.inValueFloat("x",1),
-    scaleY=op.inValueFloat("y",1),
-    scaleZ=op.inValueFloat("z",1),
-    trigger=op.outTrigger("trigger");
+    render = op.inTrigger("render"),
+    scaleX = op.inValueFloat("x", 1),
+    scaleY = op.inValueFloat("y", 1),
+    scaleZ = op.inValueFloat("z", 1),
+    trigger = op.outTrigger("trigger");
 
-const cgl=op.patch.cgl;
-const vScale=vec3.create();
+const vScale = vec3.create();
 
-var hasChanged=true;
+let hasChanged = true;
 
-scaleX.onChange=scaleY.onChange=scaleZ.onChange=scaleChanged;
+scaleX.onChange = scaleY.onChange = scaleZ.onChange = scaleChanged;
 
 scaleChanged();
 
-render.onTriggered=execrender;
+render.onTriggered = execrender;
 
 function execrender()
 {
-    if(hasChanged)
+    const cgl = op.patch.cg;
+
+    if (hasChanged)
     {
-        vec3.set(vScale, scaleX.get(),scaleY.get(),scaleZ.get());
-        hasChanged=false;
+        vec3.set(vScale, scaleX.get(), scaleY.get(), scaleZ.get());
+        hasChanged = false;
     }
 
     cgl.pushModelMatrix();
-    mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
+    mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
     trigger.trigger();
     cgl.popModelMatrix();
 }
 
 function scaleChanged()
 {
-    hasChanged=true;
+    hasChanged = true;
 }
-

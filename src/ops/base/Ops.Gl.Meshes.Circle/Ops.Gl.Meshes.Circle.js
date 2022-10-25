@@ -1,15 +1,16 @@
-const render = op.inTrigger("render");
-const radius = op.inValue("radius", 0.5);
-const innerRadius = op.inValueSlider("innerRadius", 0);
-const segments = op.inValueInt("segments", 40);
-const percent = op.inValueSlider("percent", 1);
-const steps = op.inValue("steps", 0);
-const invertSteps = op.inValueBool("invertSteps", false);
-const mapping = op.inSwitch("mapping", ["flat", "round"]);
-const drawSpline = op.inValueBool("Spline", false);
-const inDraw = op.inValueBool("Draw", true);
-const trigger = op.outTrigger("trigger");
-const geomOut = op.outObject("geometry", null, "geometry");
+const
+    render = op.inTrigger("render"),
+    radius = op.inValue("radius", 0.5),
+    innerRadius = op.inValueSlider("innerRadius", 0),
+    segments = op.inValueInt("segments", 40),
+    percent = op.inValueSlider("percent", 1),
+    steps = op.inValue("steps", 0),
+    invertSteps = op.inValueBool("invertSteps", false),
+    mapping = op.inSwitch("mapping", ["flat", "round"]),
+    drawSpline = op.inValueBool("Spline", false),
+    inDraw = op.inValueBool("Draw", true),
+    trigger = op.outTrigger("trigger"),
+    geomOut = op.outObject("geometry", null, "geometry");
 
 op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);

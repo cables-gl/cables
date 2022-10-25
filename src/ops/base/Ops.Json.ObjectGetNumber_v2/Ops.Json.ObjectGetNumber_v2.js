@@ -1,8 +1,8 @@
 const
     data = op.inObject("Data"),
     key = op.inString("Key"),
-    result = op.outValue("Result"),
-    outFound = op.outBool("Found");
+    result = op.outNumber("Result"),
+    outFound = op.outBoolNum("Found");
 
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;

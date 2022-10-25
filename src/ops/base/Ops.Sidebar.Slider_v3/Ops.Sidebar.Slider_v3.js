@@ -23,7 +23,7 @@ defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
 const siblingsPort = op.outObject("childs");
-const valuePort = op.outValue("Result", defaultValuePort.get());
+const valuePort = op.outNumber("Result", defaultValuePort.get());
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 op.setPortGroup("Range", [minPort, maxPort, stepPort]);

@@ -24,7 +24,7 @@
             {
                 "type": 0,
                 "name": "Sent",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Net.WebSocket.WebSocketSend"

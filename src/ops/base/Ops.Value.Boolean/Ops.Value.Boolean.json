@@ -2,19 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "value",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
-        "name": "Ops.Value.ValueBoolean"
+        "name": "Ops.Value.Boolean"
     },
     "summary": "Stores a boolean value",
     "docs": {

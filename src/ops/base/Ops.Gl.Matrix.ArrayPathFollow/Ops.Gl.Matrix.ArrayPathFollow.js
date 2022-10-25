@@ -87,7 +87,7 @@ function setup()
 
 arrayIn.onChange = duration.onChange = setup;
 
-var q = quat.create();
+let q = quat.create();
 const qMat = mat4.create();
 
 function render()

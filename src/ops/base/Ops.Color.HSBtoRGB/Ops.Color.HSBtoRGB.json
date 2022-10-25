@@ -3,34 +3,34 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Hue",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Saturation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Brightness",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "R",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "G",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "B",
                 "subType": "number"
             }
@@ -65,7 +65,6 @@
             }
         ]
     },
-    "updated": 1543831555565,
     "authorName": "pandur",
     "id": "909ee871-b0f3-477f-bee2-d0ab40bb5804",
     "created": 1519751015581,

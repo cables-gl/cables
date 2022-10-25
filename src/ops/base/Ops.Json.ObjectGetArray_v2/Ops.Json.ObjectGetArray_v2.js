@@ -2,7 +2,7 @@ const
     data = op.inObject("data"),
     key = op.inString("key"),
     result = op.outArray("result"),
-    arrLength = op.outValue("Length");
+    arrLength = op.outNumber("Length");
 
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;

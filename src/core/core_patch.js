@@ -71,14 +71,6 @@ const Patch = function (cfg)
 
     this.loading = new LoadingStatus(this);
 
-    this._perf = {
-        "fps": 0,
-        "ms": 0,
-        "_fpsFrameCount": 0,
-        "_fpsMsCount": 0,
-        "_fpsStart": 0,
-    };
-
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
@@ -109,7 +101,7 @@ const Patch = function (cfg)
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
     this.cgl = new Context(this);
-    this.cgp = {};
+    this.cgp = null;
 
     this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
@@ -192,7 +184,8 @@ Patch.prototype.renderOneFrame = function ()
  */
 Patch.prototype.getFPS = function ()
 {
-    return this._perf.fps;
+    console.log("deprecated getfps");
+    return 0;
 };
 
 /**
@@ -463,8 +456,10 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
 
     if (op)
     {
-        if (uiAttribs && uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
-        if (uiAttribs && uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
+        uiAttribs = uiAttribs || {};
+        if (uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
+        if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
+        uiAttribs.subPatch = uiAttribs.subPatch || 0;
 
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
@@ -547,7 +542,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 {
                     if (op.portsIn.length > 0 && op.portsIn[0].isLinked() && (op.portsOut.length > 0 && op.portsOut[0].isLinked()))
                     {
-                        if (op.portsIn[0].getType() == op.portsOut[0].getType())
+                        if (op.portsIn[0].getType() == op.portsOut[0].getType() && op.portsIn[0].links[0])
                         {
                             reLinkP1 = op.portsIn[0].links[0].getOtherPort(op.portsIn[0]);
                             reLinkP2 = op.portsOut[0].links[0].getOtherPort(op.portsOut[0]);
@@ -663,11 +658,6 @@ Patch.prototype.exec = function (e)
         const startFrameTime = CABLES.now();
         this.renderFrame();
 
-        this._perf._lastFrameTime = CABLES.now();
-        this._perf._fpsFrameCount++;
-
-        this._perf._fpsMsCount += CABLES.now() - startFrameTime;
-
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }
 
@@ -683,22 +673,6 @@ Patch.prototype.exec = function (e)
         this.emitEvent("renderedOneFrame");
         this._renderOneFrame = false;
     }
-
-    if (CABLES.now() - this._perf._fpsStart >= 1000)
-    {
-        if (this._perf.fps != this._perf._fpsFrameCount)
-        {
-            this._perf.fps = this._perf._fpsFrameCount;
-            this._perf.ms = Math.round(this._perf._fpsMsCount / this._perf._fpsFrameCount);
-
-            this.emitEvent("performance", this._perf);
-
-            this._perf._fpsFrameCount = 0;
-            this._perf._fpsMsCount = 0;
-            this._perf._fpsStart = CABLES.now();
-        }
-    }
-
 
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
@@ -761,21 +735,11 @@ Patch.prototype.serialize = function (options)
     const obj = {};
 
     options = options || {};
-    if (!options.hasOwnProperty("removeBlueprints"))options.removeBlueprints = true;
-    if (!options.hasOwnProperty("removeFromNetworkAttr"))options.removeFromNetworkAttr = true;
-
     obj.ops = [];
     obj.settings = this.settings;
     for (const i in this.ops)
     {
         const op = this.ops[i];
-
-        if (options.removeBlueprints && op.storage && op.storage.blueprint) continue;
-        if (options.removeFromNetworkAttr && op.uiAttribs && op.uiAttribs.hasOwnProperty("fromNetwork"))
-        {
-            delete op.uiAttribs.fromNetwork;
-        }
-
         obj.ops.push(op.getSerialized());
     }
 

@@ -1,21 +1,26 @@
 {
     "summary": "tries to get the geo coordinates from the mobile device/browser",
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Browser Support",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Latitude",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Longitude",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Data"
             }
         ],
         "name": "Ops.Devices.Mobile.GeoLocation"

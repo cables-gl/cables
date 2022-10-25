@@ -1,14 +1,14 @@
-const increment = op.inTriggerButton("Increment");
-const decrement = op.inTriggerButton("Decrement");
-const inLength = op.inValueInt("Length");
-const inLimit = op.inBool("Limit", true);
-const reset = op.inTriggerButton("Reset");
-const inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind");
-const inDefault = op.inValueInt("Default", 0);
-const outChanged = op.outTrigger("Changed");
-const value = op.outValue("Value");
-
-const outRestarted = op.outTrigger("Restarted");
+const
+    increment = op.inTriggerButton("Increment"),
+    decrement = op.inTriggerButton("Decrement"),
+    inLength = op.inValueInt("Length"),
+    inLimit = op.inBool("Limit", true),
+    reset = op.inTriggerButton("Reset"),
+    inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind"),
+    inDefault = op.inValueInt("Default", 0),
+    outChanged = op.outTrigger("Changed"),
+    value = op.outNumber("Value"),
+    outRestarted = op.outTrigger("Restarted");
 
 value.ignoreValueSerialize = true;
 inLength.set(10);

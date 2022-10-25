@@ -1,17 +1,15 @@
 const
-    result=op.outValue("result"),
-    value=op.inValueFloat("value"),
-    max=op.inValueFloat("Maximum");
+    value = op.inValueFloat("value", 1),
+    max = op.inValueFloat("Maximum", 1),
+    result = op.outNumber("result");
 
-max.onChange=exec;
-value.onChange=exec;
+max.onChange =
+    value.onChange = exec;
 
-value.set(1);
-max.set(1);
+exec();
 
 function exec()
 {
-    var v=Math.max(value.get(),max.get());
-    if(v==v) result.set( v );
+    let v = Math.max(value.get(), max.get());
+    if (v == v) result.set(v);
 }
-

@@ -118,7 +118,7 @@ function addToWorld()
 
         let shape = null;
 
-        const bounds = new CGL.BoundingBox();
+        const bounds = new CABLES.CG.BoundingBox();
         scene.nodes[i].calcBounds(scene, null, bounds);
 
         const size = vec3.create();

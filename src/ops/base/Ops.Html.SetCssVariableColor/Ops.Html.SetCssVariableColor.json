@@ -5,25 +5,26 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Var Name"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "subType": "number"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Html.SetCssVariableColor"
     },
     "summary": "set color value of a CSS variable",

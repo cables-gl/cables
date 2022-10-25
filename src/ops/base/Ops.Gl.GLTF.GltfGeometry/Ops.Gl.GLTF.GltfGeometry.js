@@ -30,7 +30,6 @@ exec.onTriggered = () =>
         {
             return;
         }
-        // console.log(cgl.frameStore.currentScene)
         outFound.set(false);
         outGeom.set(null);
         const name = inNodeName.get();

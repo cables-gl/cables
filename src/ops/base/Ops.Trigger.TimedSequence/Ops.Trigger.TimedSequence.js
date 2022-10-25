@@ -4,8 +4,8 @@ const overwriteTime = op.inValueBool("overwriteTime");
 const ignoreInSubPatch = op.inValueBool("ignoreInSubPatch", false);
 const triggerAlways = op.outTrigger("triggerAlways");
 const outNames = op.outArray("Names", []);
-const currentKeyTime = op.outValue("currentKeyTime");
-const outCurrent = op.outValue("Current");
+const currentKeyTime = op.outNumber("currentKeyTime");
+const outCurrent = op.outNumber("Current");
 let triggers = [];
 
 for (let i = 0; i < 32; i++)
