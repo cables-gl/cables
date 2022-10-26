@@ -9,8 +9,14 @@
                 "name": "render"
             },
             {
+                "type": 0,
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
                 "type": 2,
-                "name": "geometry"
+                "name": "geometry",
+                "objType": "geometry"
             },
             {
                 "type": 0,
@@ -52,6 +58,11 @@
             {
                 "type": 1,
                 "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Line Geom",
+                "objType": "geometry"
             }
         ],
         "name": "Ops.Gl.ShowNormals_v2"

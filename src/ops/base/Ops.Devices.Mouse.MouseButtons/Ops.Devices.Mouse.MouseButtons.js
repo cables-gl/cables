@@ -19,11 +19,9 @@ let listenerElement = null;
 area.onChange = updateListeners;
 op.onDelete = removeListeners;
 updateListeners();
-let mouseDownTime = 0;
 
 function onMouseDown(e)
 {
-    mouseDownTime = CABLES.now();
     if (e.which == 1)
     {
         mouseDownLeft.set(true);
@@ -73,8 +71,7 @@ function onDoubleClick(e)
 
 function onmouseclick(e)
 {
-    if (CABLES.now() - mouseDownTime < 200)
-        mouseClickLeft.trigger();
+    mouseClickLeft.trigger();
 }
 
 function ontouchstart(event)

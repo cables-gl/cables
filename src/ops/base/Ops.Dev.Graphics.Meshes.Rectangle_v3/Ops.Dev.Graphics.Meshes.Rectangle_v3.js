@@ -111,17 +111,17 @@ function rebuild()
             tc.push(c / numColumns);
             tc.push(1.0 - r / numRows);
 
-            if (a == "xz")
-            {
-                norms.push(0, 1, 0);
-                tangents.push(1, 0, 0);
-                biTangents.push(0, 1, 0);
-            }
-            else if (a == "xy")
+            if (a == "xy") // default
             {
                 norms.push(0, 0, 1);
                 tangents.push(1, 0, 0);
                 biTangents.push(0, 1, 0);
+            }
+            else if (a == "xz")
+            {
+                norms.push(0, 0, 1);
+                tangents.push(1, 0, 0);
+                biTangents.push(0, 0, -1);
             }
         }
     }
@@ -136,13 +136,27 @@ function rebuild()
             const v3 = ind + numColumns + 1;
             const v4 = ind + 1 + numColumns + 1;
 
-            indices.push(v1);
-            indices.push(v3);
-            indices.push(v2);
+            if (a == "xy") // default
+            {
+                indices.push(v1);
+                indices.push(v2);
+                indices.push(v3);
 
-            indices.push(v2);
-            indices.push(v3);
-            indices.push(v4);
+                indices.push(v3);
+                indices.push(v2);
+                indices.push(v4);
+            }
+            else
+            if (a == "xz")
+            {
+                indices.push(v1);
+                indices.push(v3);
+                indices.push(v2);
+
+                indices.push(v2);
+                indices.push(v3);
+                indices.push(v4);
+            }
         }
     }
 
@@ -160,8 +174,6 @@ function rebuild()
 
     if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
-
-    console.log("create mesh rect3");
 
     geomOut.set(null);
     geomOut.set(geom);

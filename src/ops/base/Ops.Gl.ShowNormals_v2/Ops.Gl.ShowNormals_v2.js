@@ -1,21 +1,42 @@
-const render = op.inTrigger("render");
-const geometry = op.inObject("geometry");
-const dropdown = op.inSwitch("Vectors", ["Normals", "Tangents", "Bitangents"], "Normals");
-const mul = op.inValueFloat("Length", 0.1);
-const inColorize = op.inBool("Colorize", true);
-const inR = op.inFloat("R", 0);
-const inG = op.inFloat("G", 0.8);
-const inB = op.inFloat("B", 0);
-const inA = op.inFloatSlider("A", 1);
+const
+    render = op.inTrigger("render"),
+    inDoRender = op.inBool("Draw", true),
+    geometry = op.inObject("geometry", null, "geometry"),
+    dropdown = op.inSwitch("Vectors", ["Normals", "Tangents", "Bitangents"], "Normals"),
+    mul = op.inValueFloat("Length", 0.1),
+    inColorize = op.inBool("Colorize", true),
+    inR = op.inFloat("R", 0),
+    inG = op.inFloat("G", 0.8),
+    inB = op.inFloat("B", 0),
+    inA = op.inFloatSlider("A", 1),
+    trigger = op.outTrigger("trigger"),
+    outGeom = op.outObject("Line Geom", null, "geometry");
+
 inR.setUiAttribs({ "colorPick": true, "greyout": true });
 inG.setUiAttribs({ "greyout": true });
 inB.setUiAttribs({ "greyout": true });
 inA.setUiAttribs({ "greyout": true });
 
-const trigger = op.outTrigger("trigger");
 geometry.ignoreValueSerialize = true;
 
-const handleColorizeChange = function ()
+const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl, "colorizeNormals");
+shader.setSource(shader.getDefaultVertexShader(), attachments.colorize_normals_frag);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.glPrimitive = cgl.gl.LINES;
+
+const inColorUniform = new CGL.Uniform(shader, "4f", "inColor", inR, inG, inB, inA);
+
+geometry.onChange = mul.onChange = dropdown.onChange = buildMesh;
+inColorize.onChange = handleColorizeChange;
+handleColorizeChange();
+
+let mesh = null;
+const position = vec3.create();
+
+buildMesh();
+
+function handleColorizeChange()
 {
     inR.setUiAttribs({ "greyout": !inColorize.get() });
     inG.setUiAttribs({ "greyout": !inColorize.get() });
@@ -30,29 +51,11 @@ const handleColorizeChange = function ()
     {
         shader.setSource(shader.getDefaultVertexShader(), shader.getDefaultFragmentShader());
     }
-};
-const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, "colorizeNormals");
-shader.setSource(shader.getDefaultVertexShader(), attachments.colorize_normals_frag);
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-shader.glPrimitive = cgl.gl.LINES;
-
-const inColorUniform = new CGL.Uniform(shader, "4f", "inColor", inR, inG, inB, inA);
-
-geometry.onChange = mul.onChange = dropdown.onChange = buildMesh;
-inColorize.onChange = handleColorizeChange;
-handleColorizeChange();
-
-let geom = null;
-let mesh = null;
-const position = vec3.create();
-
-buildMesh();
+}
 
 function buildMesh()
 {
-    if (!geom) geom = new CGL.Geometry("shownormals");
-    geom.clear();
+    const geom = new CGL.Geometry("shownormals");
 
     const points = [];
     const tc = [];
@@ -115,19 +118,27 @@ function buildMesh()
         }
 
         geom.vertices = points;
+        geom.texCoords = tc;
+        geom.glPrimitive = cgl.gl.LINES;
 
         if (mesh) mesh.dispose();
         mesh = new CGL.Mesh(cgl, geom);
+
+        outGeom.set(null);
+        outGeom.set(geom);
     }
     else
     {
+        outGeom.set(null);
+        if (mesh) mesh.dispose();
+        mesh = null;
         op.setUiError("noVertices", "There is no input geometry or input geometry has no vertices!", 0);
     }
 }
 
 render.onTriggered = function ()
 {
-    if (geometry.get())
+    if (geometry.get() && inDoRender.get())
     {
         if (!shader) return;
         if (mesh) mesh.render(shader);

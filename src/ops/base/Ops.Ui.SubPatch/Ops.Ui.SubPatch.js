@@ -340,11 +340,12 @@ op.addSubLink = function (p, p2)
     }
     else
     {
+        const numOut = data.portsOut.length;
         gui.scene().link(
             p.parent,
             p.getName(),
             getSubPatchOutputOp(),
-            "out" + (num) + " " + p2.parent.name + " " + p2.name
+            "out" + (numOut - 1) + " " + p2.parent.name + " " + p2.name
         );
     }
 
