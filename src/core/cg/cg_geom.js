@@ -143,7 +143,7 @@ const Geometry = function (name)
 Geometry.prototype.clear = function ()
 {
     this._vertices = new Float32Array([]);
-    this.verticesIndices.length = 0;
+    this.verticesIndices = [];
     this.texCoords = new Float32Array([]);
     this.vertexNormals = new Float32Array([]);
     this.tangents = [];
@@ -503,6 +503,7 @@ Geometry.prototype.calculateNormals = function (options)
             this.vertexNormals[this.verticesIndices[i + 2] * 3 + 1] += faceNormals[i / 3][1];
             this.vertexNormals[this.verticesIndices[i + 2] * 3 + 2] += faceNormals[i / 3][2];
         }
+
 
         for (let i = 0; i < this.verticesIndices.length; i += 3) // faces
         {
@@ -877,8 +878,10 @@ Geometry.prototype.getInfo = function ()
 {
     const info = {};
 
-    if (this.verticesIndices)info.numFaces = this.verticesIndices.length / 3;
+    if (this.faceVertCount == 3 && this.verticesIndices)info.numFaces = this.verticesIndices.length / 3;
     else info.numFaces = 0;
+
+    if (this.verticesIndices && this.verticesIndices.length)info.indices = this.verticesIndices.length;
 
     if (this.vertices)info.numVerts = this.vertices.length / 3;
     else info.numVerts = 0;
