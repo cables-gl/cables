@@ -55,9 +55,7 @@ function handleColorizeChange()
 
 function buildMesh()
 {
-    // if (!geom)
     const geom = new CGL.Geometry("shownormals");
-    // geom.clear();
 
     const points = [];
     const tc = [];

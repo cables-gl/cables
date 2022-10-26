@@ -12,9 +12,22 @@ let geom = new CGL.Geometry("triangle array");
 
 let mesh = null;
 let verts = null;
+let needsUpdate = true;
 const cgl = op.patch.cgl;
 
 op.toWorkPortsNeedToBeLinked(inArr, render);
+
+inArr.onChange =
+inVertCols.onChange =
+inTexCoords.onChange = () =>
+{
+    needsUpdate = true;
+};
+inFlat.onChange = () =>
+{
+    geom = new CGL.Geometry("triangle array");
+    update();
+};
 
 function update()
 {
@@ -70,19 +83,12 @@ function update()
     geom.calculateNormals();
     geomOut.set(null);
     geomOut.set(geom);
+    needsUpdate = false;
 }
-
-inArr.onChange = update;
-inVertCols.onChange = update;
-inTexCoords.onChange = update;
-inFlat.onChange = () =>
-{
-    geom = new CGL.Geometry("triangle array");
-    update();
-};
 
 render.onTriggered = function ()
 {
+    if (needsUpdate)update();
     if (mesh && verts && inRenderMesh.get()) mesh.render(cgl.getShader());
     next.trigger();
 };
