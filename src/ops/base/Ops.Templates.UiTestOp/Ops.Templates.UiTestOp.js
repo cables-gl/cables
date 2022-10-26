@@ -126,7 +126,7 @@ inModal.onTriggered = () =>
 
 inExc.onTriggered = () =>
 {
-    throw new Error();
+    throw new Error("crash0r");
 };
 
 inTab.onTriggered = () =>

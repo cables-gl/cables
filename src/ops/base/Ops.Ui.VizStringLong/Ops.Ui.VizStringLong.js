@@ -29,6 +29,11 @@ op.renderVizLayer = (ctx, layer) =>
     offset = Math.max(offset, 0);
     offset = Math.min(offset, lines.length - numLines);
 
+    const offsetLeft = ((offset + numLines + " ").length - 1) * 9.5;
+
+    let indent = "";
+    for (let i = 0; i < (offset + numLines + " ").length; i++) indent += " ";
+
     for (let i = offset; i < offset + numLines; i += 1)
     {
         if (i >= lines.length || i < 0) continue;
@@ -41,8 +46,8 @@ op.renderVizLayer = (ctx, layer) =>
 
         ctx.fillStyle = "#ccc";
 
-        ctx.fillText(lines[i],
-            layer.x / layer.scale + padding + 30,
+        ctx.fillText(indent + lines[i],
+            layer.x / layer.scale + padding,
             layer.y / layer.scale + lineHeight + (i - offset) * lineHeight + padding);
     }
 

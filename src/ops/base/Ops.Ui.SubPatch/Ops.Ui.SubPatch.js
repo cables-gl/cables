@@ -16,8 +16,14 @@ dataStr.setUiAttribs({ "hideParam": true });
 op.patchId.setUiAttribs({ "hideParam": true });
 
 let data = { "ports": [], "portsOut": [] };
+let oldPatchId = CABLES.generateUUID();
+op.patchId.set(oldPatchId);
+getSubPatchInputOp();
+getSubPatchOutputOp();
 
-// Ops.Ui.Patch.maxPatchId=CABLES.generateUUID();
+let dataLoaded = false;
+
+op.saveData = saveData;
 
 op.patchId.onChange = function ()
 {
@@ -35,12 +41,8 @@ op.patchId.onChange = function ()
     }
 };
 
-var oldPatchId = CABLES.generateUUID();
-op.patchId.set(oldPatchId);
-
 op.onLoaded = function ()
 {
-    // op.patchId.set(CABLES.generateUUID());
 };
 
 op.onLoadedValueSet = function ()
@@ -57,10 +59,6 @@ function loadData()
 {
 }
 
-getSubPatchInputOp();
-getSubPatchOutputOp();
-
-let dataLoaded = false;
 dataStr.onChange = function ()
 {
     if (dataLoaded) return;
@@ -82,26 +80,29 @@ function saveData()
     dataStr.set(JSON.stringify(data));
 }
 
-op.saveData = saveData;
-
+op.addPortListener = addPortListener;
 function addPortListener(newPort, newPortInPatch)
 {
-    newPort.addEventListener("onUiAttrChange", function (attribs)
+    if (!newPort.hasSubpatchLstener)
     {
-        if (attribs.title)
+        newPort.hasSubpatchLstener = true;
+        newPort.addEventListener("onUiAttrChange", function (attribs)
         {
-            let i = 0;
-            for (i = 0; i < data.portsOut.length; i++)
-                if (data.portsOut[i].name == newPort.name)
-                    data.portsOut[i].title = attribs.title;
+            if (attribs.title)
+            {
+                let i = 0;
+                for (i = 0; i < data.portsOut.length; i++)
+                    if (data.portsOut[i].name == newPort.name)
+                        data.portsOut[i].title = attribs.title;
 
-            for (i = 0; i < data.ports.length; i++)
-                if (data.ports[i].name == newPort.name)
-                    data.ports[i].title = attribs.title;
+                for (i = 0; i < data.ports.length; i++)
+                    if (data.ports[i].name == newPort.name)
+                        data.ports[i].title = attribs.title;
 
-            saveData();
-        }
-    });
+                saveData();
+            }
+        });
+    }
 
     if (newPort.direction == CABLES.PORT_DIR_IN)
     {
@@ -134,6 +135,7 @@ function addPortListener(newPort, newPortInPatch)
     }
 }
 
+op.setupPorts = setupPorts;
 function setupPorts()
 {
     if (!op.patchId.get()) return;
@@ -303,8 +305,7 @@ function getSubPatchOutputOp()
     {
         op.patch.addOp("Ops.Ui.PatchOutput", { "subPatch": op.patchId.get(), "translate": { "x": 0, "y": 0 } });
         patchOutputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchOutput");
-
-        if (!patchOutputOP) op.warn("no patchinput2!");
+        if (!patchOutputOP) op.warn("no patchoutput!");
     }
     return patchOutputOP;
 }
@@ -398,3 +399,21 @@ function makeBlueprint()
             }
         });
 }
+
+op.rebuildListeners = () =>
+{
+    console.log("rebuild listeners...");
+
+    const outop = getSubPatchOutputOp();
+    for (let i = 0; i < outop.portsIn.length; i++)
+    {
+        if (outop.portsIn[i].isLinked())
+        {
+            addPortListener(outop.portsIn[i], this.portsOut[i]);
+        }
+    }
+
+    //     CABLES.patch.getOpById("be7febce-b4fa-416a-892a-c1c555feffe4").addPortListener(
+    //     CABLES.patch.getOpById("fecce1d5-e08a-5263-af71-f521c41f88e5").portsIn[1],
+    //     CABLES.patch.getOpById("be7febce-b4fa-416a-892a-c1c555feffe4").portsOut[1]
+};

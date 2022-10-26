@@ -75,16 +75,22 @@ reset.onTriggered = () =>
     op.refreshParams();
 };
 
+let selfRef = false;
 noteStartDropdown.onChange = () =>
 {
     const learnedNotes = learnedNotesIn.get();
     learnedNotes[0] = getNoteIndexFromMIDINote(noteStartDropdown.get());
+    op.refreshParams();
+
+    if (selfRef) return;
     if (learnedNotes.length === 2)
     {
+        selfRef = true;
         learnedNotes.sort((a, b) => { return a - b; });
         const [start, end] = learnedNotes;
         noteStartDropdown.set(getMIDINote(start));
         noteEndDropdown.set(getMIDINote(end));
+        selfRef = false;
     }
     learnedNotesIn.set(learnedNotes);
 };
@@ -93,12 +99,17 @@ noteEndDropdown.onChange = () =>
 {
     const learnedNotes = learnedNotesIn.get();
     learnedNotes[1] = getNoteIndexFromMIDINote(noteEndDropdown.get());
+    op.refreshParams();
+
+    if (selfRef) return;
     if (learnedNotes.length === 2)
     {
+        selfRef = true;
         learnedNotes.sort((a, b) => { return a - b; });
         const [start, end] = learnedNotes;
         noteStartDropdown.set(getMIDINote(start));
         noteEndDropdown.set(getMIDINote(end));
+        selfRef = false;
     }
     learnedNotesIn.set(learnedNotes);
 };
@@ -144,6 +155,12 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
+            gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
+            gui.emitEvent("portValueEdited", op, learnedNotes, learnedNotes.get());
+            gui.emitEvent("portValueEdited", op, learnedNotesIn, learnedNotesIn.get());
+            gui.emitEvent("portValueEdited", op, noteEndDropdown, noteEndDropdown.get());
+            gui.emitEvent("portValueEdited", op, noteStartDropdown, noteStartDropdown.get());
+
             op.uiAttr({ "info": `Start bound to Note: ${noteStartDropdown.get()}` });
             op.uiAttr({ "info": `End bound to Note: ${noteEndDropdown.get()}` });
             op.refreshParams();
