@@ -4,7 +4,7 @@
     "id": "7e27a058-8162-4fd3-b08d-eba16f0fb551",
     "created": 1652087190354,
     "libs": [
-        "qrcode.min.js"
+        "qrcode.js"
     ],
     "layout": {
         "portsIn": [
