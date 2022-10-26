@@ -93,7 +93,8 @@
             },
             {
                 "type": 2,
-                "name": "geom"
+                "name": "geom",
+                "objType": "geometry"
             }
         ],
         "name": "Ops.Gl.Meshes.SuperShape"

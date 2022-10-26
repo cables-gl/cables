@@ -4,30 +4,45 @@ const render = op.inTrigger("render");
 
 let pNormalizeSize = op.inValueBool("Normalize Size", true);
 let asPointCloud = op.inValueBool("Point Cloud", false);
-let pStep = op.inValue("Step", 0.05);
+let pStep = op.inFloat("Step", 0.05);
 
-let a1 = op.inValue("a1", 1);
-let b1 = op.inValue("b1", 1);
-let m1 = op.inValue("m1", 5);
-let n11 = op.inValue("n11", 1);
-let n21 = op.inValue("n21", 1);
-let n31 = op.inValue("n31", 2);
+let a1 = op.inFloat("a1", 1);
+let b1 = op.inFloat("b1", 1);
+let m1 = op.inFloat("m1", 5);
+let n11 = op.inFloat("n11", 1);
+let n21 = op.inFloat("n21", 1);
+let n31 = op.inFloat("n31", 2);
 
-let a2 = op.inValue("a2", 1);
-let b2 = op.inValue("b2", 1);
-let m2 = op.inValue("m2", 5);
-let n12 = op.inValue("n12", 1);
-let n22 = op.inValue("n22", 1);
-let n32 = op.inValue("n32", 3);
+let a2 = op.inFloat("a2", 1);
+let b2 = op.inFloat("b2", 1);
+let m2 = op.inFloat("m2", 5);
+let n12 = op.inFloat("n12", 1);
+let n22 = op.inFloat("n22", 1);
+let n32 = op.inFloat("n32", 3);
 
 let trigger = op.outTrigger("Trigger");
 let outNumVerts = op.outNumber("Num Vertices");
-let outGeom = op.outObject("geom");
+let outGeom = op.outObject("geom", null, "geometry");
 
 let needsUpdate = true;
 let geometry = new CGL.Geometry(op.name);
 let mesh = null;
 let verts = [];
+
+pNormalizeSize.onChange =
+    pStep.onChange =
+    a1.onChange =
+    b1.onChange =
+    m1.onChange =
+    n11.onChange =
+    n21.onChange =
+    n31.onChange =
+    a2.onChange =
+    b2.onChange =
+    m2.onChange =
+    n12.onChange =
+    n22.onChange =
+    n32.onChange = doUpdate;
 
 function doUpdate()
 {
@@ -39,20 +54,6 @@ asPointCloud.onChange = function ()
     mesh = null;
     needsUpdate = true;
 };
-pNormalizeSize.onChange = doUpdate;
-pStep.onChange = doUpdate;
-a1.onChange = doUpdate;
-b1.onChange = doUpdate;
-m1.onChange = doUpdate;
-n11.onChange = doUpdate;
-n21.onChange = doUpdate;
-n31.onChange = doUpdate;
-a2.onChange = doUpdate;
-b2.onChange = doUpdate;
-m2.onChange = doUpdate;
-n12.onChange = doUpdate;
-n22.onChange = doUpdate;
-n32.onChange = doUpdate;
 
 render.onTriggered = function ()
 {
@@ -124,6 +125,8 @@ function update()
     if (asPointCloud.get())
     {
         geometry.setPointVertices(verts);
+        geometry.mapTexCoords2d();
+
         mesh = new CGL.Mesh(op.patch.cgl, geometry, op.patch.cgl.gl.POINTS);
         mesh.addVertexNumbers = true;
         mesh.setGeom(geometry);
@@ -149,6 +152,8 @@ function update()
             }
         }
         geometry.vertices = verts;
+        geometry.mapTexCoords2d();
+
         outNumVerts.set(verts.length);
 
         geometry.calculateNormals({ "forceZUp": true });
