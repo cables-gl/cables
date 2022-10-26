@@ -447,7 +447,9 @@ Mesh.prototype.setGeom = function (geom, removeRef)
     };
 
     for (const index in geomAttribs)
-        this.setAttribute(attribAssoc[index] || index, geomAttribs[index].data, geomAttribs[index].itemSize);
+        if (geomAttribs[index].data && geomAttribs[index].data.length)
+            this.setAttribute(attribAssoc[index] || index, geomAttribs[index].data, geomAttribs[index].itemSize);
+
 
     if (removeRef)
     {

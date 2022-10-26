@@ -2,6 +2,7 @@ const
     geometry = op.inObject("Geometry", null, "geometry"),
     outIndexed = op.outBoolNum("Indexed", false),
     outFaces = op.outNumber("Faces"),
+    outIndices = op.outNumber("Indices"),
     outVertices = op.outNumber("Vertices"),
     outNormals = op.outNumber("Normals"),
     outTexCoords = op.outNumber("TexCoords"),
@@ -20,7 +21,8 @@ geometry.onChange = function ()
     if (geom)
     {
         const info = geom.getInfo();
-        outFaces.set(info.Faces);
+        outFaces.set(info.numFaces);
+        outIndices.set(info.indices || info.indices);
         outVertices.set(info.numVerts);
         outNormals.set(info.numNormals);
         outTexCoords.set(info.numTexCoords);
