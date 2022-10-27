@@ -20,37 +20,37 @@ import { BranchStack, Branch } from "./banchprofiler";
 import { CGP } from "./cgp";
 import { CG } from "./cg/cg_constants";
 
-const CABLES = Object.assign(
-    {
-        "CG": CG,
-        "CGP": CGP,
-        "EventTarget": EventTarget,
-        "EMBED": EMBED,
-        "Link": Link,
-        "Port": Port,
-        "Op": Op,
-        "Profiler": Profiler,
-        "Patch": Patch,
-        "Instancing": Instancing,
-        "Timer": Timer,
-        "WEBAUDIO": WEBAUDIO,
-        "Variable": Variable,
-        "LoadingStatus": LoadingStatus,
-        "now": now,
-        "internalNow": internalNow,
-        "BranchStack": BranchStack,
-        "Branch": Branch
-    },
+window.CABLES = window.CABLES || {};
+
+CABLES.CG = CG;
+CABLES.CGP = CGP;
+CABLES.EventTarget = EventTarget;
+CABLES.EMBED = EMBED;
+CABLES.Link = Link;
+CABLES.Port = Port;
+CABLES.Op = Op;
+CABLES.Profiler = Profiler;
+CABLES.Patch = Patch;
+CABLES.Instancing = Instancing;
+CABLES.Timer = Timer;
+CABLES.WEBAUDIO = WEBAUDIO;
+CABLES.Variable = Variable;
+CABLES.LoadingStatus = LoadingStatus;
+CABLES.now = now;
+CABLES.internalNow = internalNow;
+CABLES.BranchStack = BranchStack;
+CABLES.Branch = Branch;
+
+CABLES = Object.assign(CABLES,
     base64,
     utils,
     anim,
-    CONSTANTS.CG,
     CONSTANTS.ANIM,
     PatchConnections,
     CONSTANTS.PORT,
     CONSTANTS.PACO,
     CONSTANTS.ANIM,
-    CONSTANTS.OP,
+    CONSTANTS.OP
 );
 
 export default CABLES;
