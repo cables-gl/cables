@@ -124,6 +124,7 @@ function rebuildGeom()
     geom.verticesIndices = indices;
     if (flat.get())geom.unIndex();
     geom.calculateNormals({ "forceZUp": true });
+
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     mesh.setGeom(geom);
     outGeom.set(null);

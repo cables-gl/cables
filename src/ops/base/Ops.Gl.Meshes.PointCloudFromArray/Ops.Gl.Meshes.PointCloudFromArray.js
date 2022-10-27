@@ -9,30 +9,24 @@ const
     inCoords = op.inArray("Coordinates", 2),
     vertCols = op.inArray("Vertex Colors", 4);
 
+op.toWorkPortsNeedToBeLinked(arr, exe);
+op.setPortGroup("Texture Coordinates", [pTexCoordRand, seed, inCoords]);
+
 const cgl = op.patch.cgl;
+const geom = new CGL.Geometry("pointcloudfromarray");
+let deactivated = false;
+let mesh = null;
+let texCoords = [];
+let needsRebuild = true;
+let showingError = false;
 
 inCoords.onChange = updateTexCoordsPorts;
 pTexCoordRand.onChange = updateTexCoordsPorts;
 vertCols.onChange = updateVertCols;
 seed.onChange = arr.onChange = reset;
 numPoints.onChange = updateNumVerts;
-
 vertCols.onLinkChanged = reset;
-
-op.toWorkPortsNeedToBeLinked(arr, exe);
-
-op.setPortGroup("Texture Coordinates", [pTexCoordRand, seed, inCoords]);
-
-let deactivated = false;
-
 exe.onTriggered = doRender;
-
-let mesh = null;
-const geom = new CGL.Geometry("pointcloudfromarray");
-let texCoords = [];
-let needsRebuild = true;
-
-let showingError = false;
 
 function doRender()
 {
@@ -44,7 +38,7 @@ function doRender()
         else op.setUiError("nopointmat", null);
     }
 
-    if (needsRebuild || !mesh)rebuild();
+    if (needsRebuild || !mesh) rebuild();
     if (!deactivated && mesh) mesh.render(cgl.getShader());
 }
 
@@ -120,6 +114,9 @@ function rebuild()
         mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, verts, 3);
         geom.vertices = verts;
         needsRebuild = false;
+
+        console.log(mesh);
+
         return;
     }
 
@@ -181,13 +178,17 @@ function rebuild()
 
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
-        geom.verticesIndices = [];
+        // geom.verticesIndices = [];
 
         if (mesh)mesh.dispose();
         mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
 
         mesh.addVertexNumbers = true;
         mesh.setGeom(geom);
+
+        console.log(mesh);
+
+        outGeom.set(null);
         outGeom.set(geom);
     }
 

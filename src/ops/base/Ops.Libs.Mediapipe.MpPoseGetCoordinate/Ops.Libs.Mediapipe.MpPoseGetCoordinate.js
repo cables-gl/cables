@@ -18,7 +18,7 @@ inArr.onChange = () =>
 {
     const arr = inArr.get();
 
-    if (arr)
+    if (arr && arr[index])
     {
         outX.set((arr[index].x - 0.5) * 2.0);
         outY.set((arr[index].y - 0.5) * -2.0);

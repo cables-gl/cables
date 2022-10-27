@@ -33,11 +33,11 @@
             },
             {
                 "type": 3,
-                "name": "BiTangents"
+                "name": "Tangents"
             },
             {
                 "type": 3,
-                "name": "Tangents"
+                "name": "BiTangents"
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryPoints"

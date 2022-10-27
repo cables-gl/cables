@@ -5,8 +5,8 @@ const
     outNormals = op.outArray("Normals", 3),
     outTextcoords = op.outArray("TexCoords", 2),
     outVertexColors = op.outArray("Vertex Colors", 4),
-    outBiTangents = op.outArray("BiTangents", 3),
-    outTangents = op.outArray("Tangents", 3);
+    outTangents = op.outArray("Tangents", 3),
+    outBiTangents = op.outArray("BiTangents", 3);
 
 geometry.onChange = function ()
 {
