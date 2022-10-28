@@ -1,7 +1,7 @@
 const inMax = op.inFloat("Length", 30);
 const inCurrent = op.inFloat("Current", 0);
 const inClamp = op.inBool("Clamp", false);
-const inVisible = op.inBool("Visible");
+const inVisible = op.inBool("Visible", true);
 const inShowValue = op.inBool("Show Time");
 const inShowSkip = op.inBool("Show Skip Buttons");
 
@@ -24,7 +24,7 @@ let canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(div);
 
 let progressContainer = document.createElement("div");
-if (inVisible.get())
+if (!inVisible.get())
 {
     div.style.display = "none";
 }
