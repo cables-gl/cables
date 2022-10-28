@@ -179,7 +179,7 @@ progressbar.addEventListener("pointermove", () =>
     const currentProgress = progressbar.value;
     if (isDragging)
     {
-        updateProgressDisplay();
+        updateProgressDisplay(currentProgress);
         outValue.set(currentProgress);
     }
 });
@@ -268,20 +268,28 @@ function currentValueChange()
 }
 
 let lasttime = 0;
-function updateProgressDisplay()
+function updateProgressDisplay(currentValue = null)
 {
-    let currentValue = inCurrent.get();
-    let t = currentValue;
+    let displayValue = currentValue || inCurrent.get();
+    let t = displayValue;
+    if (t <= lasttime)
+    {
+        isPlaying = false;
+    }
+    else
+    {
+        isPlaying = true;
+    }
     if (t != lasttime)
     {
         progress.innerHTML = formatValue(t);
         lasttime = t;
     }
+    updatePlayButton();
 }
 
 function formatValue(t)
 {
-    // const hours = String(new Date(t * 1000).getUTCHours()).padStart(2, "0");
     const minutes = String(new Date(t * 1000).getUTCMinutes()).padStart(2, "0");
     const seconds = String(new Date(t * 1000).getUTCSeconds()).padStart(2, "0");
     const millis = String(new Date(t * 1000).getUTCMilliseconds()).padStart(2, "0").padEnd(3, "0");
@@ -289,7 +297,7 @@ function formatValue(t)
     return html;
 }
 
-inCurrent.onChange = currentValueChange;
-
 updateStyle();
 updatePlayButton();
+
+inCurrent.onChange = currentValueChange;
