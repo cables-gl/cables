@@ -1,8 +1,26 @@
 const
-    inStr = op.inString("String"),
+    inStr = op.inStringEditor("String"),
     inPos = op.inFloatSlider("Scroll", 0);
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
+inStr.ignoreValueSerialize = true;
+
+let lines = [];
+
+inStr.onLinkChanged = () =>
+{
+    if (!inStr.isLinked())
+    {
+        lines = [];
+        inStr.set(null);
+    }
+};
+
+inStr.onChange = () =>
+{
+    if (inStr.get()) lines = inStr.get().split("\n");
+    else lines = [];
+};
 
 op.renderVizLayer = (ctx, layer) =>
 {
@@ -21,7 +39,6 @@ op.renderVizLayer = (ctx, layer) =>
 
     const lineHeight = 10;
 
-    const lines = inStr.get().split("\n");
     const numLines = Math.floor(layer.height / layer.scale / lineHeight);
 
     let offset = Math.floor(inPos.get() * lines.length);

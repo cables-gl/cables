@@ -1688,7 +1688,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</div>";
 
-        cgl.patch.emitEvent("criticalError", "Shader error " + this._name, htmlWarning);
+        cgl.patch.emitEvent("criticalError", { "title": "Shader error " + this._name, "text": htmlWarning });
         if (cgl.patch.isEditorMode())console.log("Shader error " + this._name, htmlWarning);
 
         this._name = "errorshader";
