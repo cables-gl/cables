@@ -178,7 +178,7 @@ function rebuild()
 
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
-        geom.verticesIndices = [];
+        // geom.verticesIndices = [];
 
         if (mesh)mesh.dispose();
         mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);

@@ -1,8 +1,10 @@
 const
-    exe=op.inTriggerButton("Update"),
-    inTime=op.inFloat("Time",0);
+    exe = op.inTriggerButton("Update"),
+    inTime = op.inFloat("Time", 0),
+    next = op.outTrigger("Next");
 
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    op.patch.timer.setTime(inTime.get());
+    op.patch.timer.setTime(parseFloat(inTime.get()));
+    next.trigger();
 };
