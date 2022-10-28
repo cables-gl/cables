@@ -1,6 +1,7 @@
 const inMax = op.inFloat("Length", 30);
 const inCurrent = op.inFloat("Current", 0);
 const inClamp = op.inBool("Clamp", false);
+const inVisible = op.inBool("Visible");
 const inShowValue = op.inBool("Show Time");
 const inShowSkip = op.inBool("Show Skip Buttons");
 
@@ -23,6 +24,10 @@ let canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(div);
 
 let progressContainer = document.createElement("div");
+if (inVisible.get())
+{
+    div.style.display = "none";
+}
 let progressbar = document.createElement("input");
 let progress = document.createElement("div");
 const buttonContainer = document.createElement("div");
@@ -110,6 +115,18 @@ inMax.onChange = () =>
     progressbar.setAttribute("max", inMax.get());
 };
 
+inVisible.onChange = () =>
+{
+    if (inVisible.get())
+    {
+        div.style.removeProperty("display");
+    }
+    else
+    {
+        div.style.display = "none";
+    }
+};
+
 inShowValue.onChange = () =>
 {
     if (inShowValue.get())
@@ -169,6 +186,10 @@ progressbar.addEventListener("pointermove", () =>
 
 progressbar.addEventListener("pointerup", () =>
 {
+    const currentProgress = progressbar.value;
+    updateProgressDisplay(currentProgress);
+    outValue.set(currentProgress);
+
     isDragging = false;
     if (wasPlaying)
     {

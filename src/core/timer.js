@@ -1,4 +1,3 @@
-
 /** @namespace CABLES */
 
 export const internalNow = function ()
@@ -136,11 +135,11 @@ Timer.prototype.togglePlay = function ()
  * @function
  * @memberof Timer
  * @instance
- * @param {Number} time
+ * @param {Number} t
  */
 Timer.prototype.setTime = function (t)
 {
-    if (t < 0) t = 0;
+    if (isNaN(t) || t < 0) t = 0;
     this._timeStart = internalNow();
     this._timeOffset = t;
     this._currentTime = t;
