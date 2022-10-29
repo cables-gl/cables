@@ -1,6 +1,7 @@
 const inMax = op.inFloat("Length", 30);
 const inCurrent = op.inFloat("Current", 0);
 const inClamp = op.inBool("Clamp", false);
+const inVisible = op.inBool("Visible", true);
 const inShowValue = op.inBool("Show Time");
 const inShowSkip = op.inBool("Show Skip Buttons");
 
@@ -23,6 +24,10 @@ let canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(div);
 
 let progressContainer = document.createElement("div");
+if (!inVisible.get())
+{
+    div.style.display = "none";
+}
 let progressbar = document.createElement("input");
 let progress = document.createElement("div");
 const buttonContainer = document.createElement("div");
@@ -110,6 +115,18 @@ inMax.onChange = () =>
     progressbar.setAttribute("max", inMax.get());
 };
 
+inVisible.onChange = () =>
+{
+    if (inVisible.get())
+    {
+        div.style.removeProperty("display");
+    }
+    else
+    {
+        div.style.display = "none";
+    }
+};
+
 inShowValue.onChange = () =>
 {
     if (inShowValue.get())
@@ -169,6 +186,10 @@ progressbar.addEventListener("pointermove", () =>
 
 progressbar.addEventListener("pointerup", () =>
 {
+    const currentProgress = progressbar.value;
+    updateProgressDisplay(currentProgress);
+    outValue.set(currentProgress);
+
     isDragging = false;
     if (wasPlaying)
     {
@@ -251,16 +272,24 @@ function updateProgressDisplay(currentValue = null)
 {
     let displayValue = currentValue || inCurrent.get();
     let t = displayValue;
+    if (t <= lasttime)
+    {
+        isPlaying = false;
+    }
+    else
+    {
+        isPlaying = true;
+    }
     if (t != lasttime)
     {
         progress.innerHTML = formatValue(t);
         lasttime = t;
     }
+    updatePlayButton();
 }
 
 function formatValue(t)
 {
-    // const hours = String(new Date(t * 1000).getUTCHours()).padStart(2, "0");
     const minutes = String(new Date(t * 1000).getUTCMinutes()).padStart(2, "0");
     const seconds = String(new Date(t * 1000).getUTCSeconds()).padStart(2, "0");
     const millis = String(new Date(t * 1000).getUTCMilliseconds()).padStart(2, "0").padEnd(3, "0");
@@ -268,7 +297,7 @@ function formatValue(t)
     return html;
 }
 
-inCurrent.onChange = currentValueChange;
-
 updateStyle();
 updatePlayButton();
+
+inCurrent.onChange = currentValueChange;

@@ -241,11 +241,15 @@ function update()
             {
                 if (err.code === 403)
                 {
-                    op.setUiError("fetchOps", "you do not have permission to use this blueprint");
+                    op.setUiError("fetchOps", "You do not have permission to use this Blueprint");
+                }
+                else if (err.code === 404 && (gui.patchId === patchId))
+                {
+                    op.setUiError("fetchOps", "Save the patch and reload before using this Blueprint");
                 }
                 else
                 {
-                    op.setUiError("fetchOps", "error fetching blueprint, code: " + err.code + " (" + err.msg + ")");
+                    op.setUiError("fetchOps", "Error fetching Blueprint, code: " + err.code + " (" + err.msg + ")");
                 }
             }
             loadingOut.set(false);
