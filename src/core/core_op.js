@@ -1132,12 +1132,7 @@ const Op = function ()
     {
         // if (this.patch.silent) return;
 
-        if (!this)
-        {
-            args.push.apply(args, arguments);
-            Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
-            return;
-        }
+        if (!this) return console.log("no this...");
 
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
