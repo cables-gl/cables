@@ -1132,6 +1132,14 @@ const Op = function ()
     Op.prototype.error = Op.prototype.logError = function ()
     {
         // if (this.patch.silent) return;
+
+        if (!this)
+        {
+            args.push.apply(args, arguments);
+            Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
+            return;
+        }
+
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
@@ -1148,7 +1156,7 @@ const Op = function ()
 
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
     {
-        const initiator = "op " + this.CABLES.getShortOpName(this.objName);
+        const initiator = "op " + CABLES.getShortOpName(this.objName);
         if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, ...arguments)) return;
 
         if (!CABLES.UI && this.patch.silent) return;
