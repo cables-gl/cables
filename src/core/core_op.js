@@ -1130,15 +1130,14 @@ const Op = function ()
 
     Op.prototype.error = Op.prototype.logError = function ()
     {
-        // if (this.patch.silent) return;
-
         if (!this)
         {
-            console.log("no this...");
+            console.log("no this...!!!");
             debugger;
             return;
         }
 
+        // if (this.patch.silent) return;
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
