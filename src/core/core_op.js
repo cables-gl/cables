@@ -1132,7 +1132,12 @@ const Op = function ()
     {
         // if (this.patch.silent) return;
 
-        if (!this) return console.log("no this...");
+        if (!this)
+        {
+            console.log("no this...");
+            debugger;
+            return;
+        }
 
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
