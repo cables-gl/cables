@@ -1123,14 +1123,15 @@ const Op = function ()
         if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, ...arguments)) return;
         if (!CABLES.UI && this.patch.silent) return;
 
-        const args = ["[op " + this._shortOpName + "]"];
+        const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.log, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.error = Op.prototype.logError = function ()
     {
-        const args = ["[op " + this._shortOpName + "]"];
+        // if (this.patch.silent) return;
+        const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
         if (window.gui) window.gui.emitEvent("opLogEvent", this.objName, "error", arguments);
@@ -1139,14 +1140,14 @@ const Op = function ()
     Op.prototype.warn = Op.prototype.logWarn = function ()
     {
         // if (this.patch.silent) return;
-        const args = ["[op " + this._shortOpName + "]"];
+        const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.warn, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
     {
-        const initiator = "op " + this._shortOpName;
+        const initiator = "op " + this.CABLES.getShortOpName(this.objName);
         if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, ...arguments)) return;
 
         if (!CABLES.UI && this.patch.silent) return;
