@@ -77,8 +77,13 @@ req.onTriggered = function ()
                 {
                     window.addEventListener("devicemotion", handleDeviceMotion, true);
                 }
+                else
+                    console.log(response);
             })
-            .catch(op.error);
+            .catch((e) =>
+            {
+                console.log(e);
+            });
 
         window.DeviceOrientationEvent.requestPermission()
             .then((response) =>
@@ -87,8 +92,13 @@ req.onTriggered = function ()
                 {
                     window.addEventListener("deviceorientation", handleDeviceOrientation, true);
                 }
+                else
+                    console.log(response);
             })
-            .catch(op.error);
+            .catch((e) =>
+            {
+                console.log(e);
+            });
     }
     else
     {
