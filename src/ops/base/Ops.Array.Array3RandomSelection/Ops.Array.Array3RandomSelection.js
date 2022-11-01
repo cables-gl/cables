@@ -23,19 +23,16 @@ function update()
 
     arr.length = Math.floor(inNum.get() * 3);
 
-    // if(arr.length>oldArr.length)arr.length=oldArr.length;
     let nums = [];
     for (var i = 0; i < Math.max(arr.length / 3, oldArr.length / 3); i++)
         nums[i] = i % (oldArr.length / 3);
 
-    nums = CABLES.shuffleArray(nums);
-
     Math.randomSeed = inSeed.get();
+    nums = CABLES.shuffleArray(nums);
 
     for (var i = 0; i < inNum.get(); i++)
     {
         let index = nums[i] * 3;
-        // var index=Math.floor((Math.seededRandom()*oldArr.length/3))*3;
         arr[i * 3 + 0] = oldArr[index + 0];
         arr[i * 3 + 1] = oldArr[index + 1];
         arr[i * 3 + 2] = oldArr[index + 2];

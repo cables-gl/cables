@@ -18,15 +18,21 @@
         "ports": []
     },
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "clientWidth",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "clientHeight",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "body scroll Height",
                 "subType": "number"
             }
         ],
