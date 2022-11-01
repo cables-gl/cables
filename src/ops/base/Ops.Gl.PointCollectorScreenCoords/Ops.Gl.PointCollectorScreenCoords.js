@@ -1,32 +1,29 @@
+let render = op.inTrigger("render");
+let trigger = op.outTrigger("trigger");
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+let cgl = op.patch.cgl;
 
-var cgl=op.patch.cgl;
+let m = mat4.create();
+let pos = [0, 0, 0];
+let trans = vec3.create();
 
-var m=mat4.create();
-var pos=[0,0,0];
-var trans=vec3.create();
-
-
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!cgl.frameStore.SplinePoints)return;
+    if (!cgl.frameStore.SplinePoints) return;
 
     // vec3.transformMat4(pos, [0,0,0], cgl.mMatrix);
 
-    mat4.multiply(m,cgl.vMatrix,cgl.mMatrix);
-    vec3.transformMat4(pos, [0,0,0], m);
+    mat4.multiply(m, cgl.vMatrix, cgl.mMatrix);
+    vec3.transformMat4(pos, [0, 0, 0], m);
 
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var vp=cgl.getViewPort();
+    let vp = cgl.getViewPort();
 
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter+0]= vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] );
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter+1]= vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] );
+    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 0] = vp[2] - (vp[2] * 0.5 - trans[0] * vp[2] * 0.5 / trans[2]);
+    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 1] = vp[3] - (vp[3] * 0.5 + trans[1] * vp[3] * 0.5 / trans[2]);
 
-
-    cgl.frameStore.SplinePointCounter+=2;
+    cgl.frameStore.SplinePointCounter += 2;
 
     trigger.trigger();
 };

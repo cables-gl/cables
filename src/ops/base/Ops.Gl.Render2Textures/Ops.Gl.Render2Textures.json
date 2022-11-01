@@ -5,84 +5,69 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "MSAA index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "MSAA",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "use viewport size",
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "texture width",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "texture height",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Filter index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Filter",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "HDR",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Depth",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Clear",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "2",
-                "name": "texture 0"
+                "type": 2,
+                "name": "texture 0",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture 1"
+                "type": 2,
+                "name": "texture 1",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture 2"
+                "type": 2,
+                "name": "texture 2",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture 3"
+                "type": 2,
+                "name": "texture 3",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "textureDepth"
+                "type": 2,
+                "name": "textureDepth",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.Render2Textures"

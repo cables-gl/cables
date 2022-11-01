@@ -10,8 +10,8 @@ const
     flipTcY = op.inBool("Flip TexCoord Y", true),
     nColumns = op.inValueInt("num columns", 1),
     nRows = op.inValueInt("num rows", 1),
-    trigger = op.outTrigger("next");
-geomOut = op.outObject("geometry", null, "geometry");
+    trigger = op.outTrigger("next"),
+    geomOut = op.outObject("geometry", null, "geometry");
 
 geomOut.ignoreValueSerialize = true;
 

@@ -18,7 +18,6 @@ const fpTexture = op.inValueBool("HDR");
 const depth = op.inValueBool("Depth", true);
 const clear = op.inValueBool("Clear", true);
 
-
 const cgl = op.patch.cgl;
 
 let fb = null;
@@ -29,14 +28,13 @@ tfilter.set("linear");
 let reInitFb = true;
 
 render.onTriggered = doRender;
-tfilter.onChange = onFilterChange;
 useVPSize.onChange = updateVpSize;
 
-fpTexture.onChange = reInitLater;
-depth.onChange = reInitLater();
-clear.onChange = reInitLater();
-var onFilterChange = reInitLater();
-msaa.onChange = reInitLater();
+tfilter.onChange =
+    fpTexture.onChange =
+    depth.onChange =
+    clear.onChange =
+    msaa.onChange = reInitLater;
 
 updateVpSize();
 
