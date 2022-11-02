@@ -15,6 +15,11 @@
             "message": "Ops.User.pandur.SG_Mul renamed to Ops.Gl.ShaderGraph.Multiply",
             "author": "pandur",
             "date": 1663686227790
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Multiply renamed to Ops.Dev.Gl.ShaderGraph.Multiply",
+            "author": "pandur",
+            "date": 1667289301376
         }
     ],
     "authorName": "pandur",

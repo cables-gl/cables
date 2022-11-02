@@ -1,0 +1,92 @@
+{
+    "id": "09c33c7e-e282-468d-93e1-b8a7a0a4c4d2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1667301245645
+        },
+        {
+            "message": "Ops.User.pandur.Layer renamed to Ops.Dev.LayerSequence",
+            "author": "pandur",
+            "date": 1667301519955
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1667301289657,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger 0"
+            },
+            {
+                "type": 1,
+                "name": "trigger 1"
+            },
+            {
+                "type": 1,
+                "name": "trigger 2"
+            },
+            {
+                "type": 1,
+                "name": "trigger 3"
+            },
+            {
+                "type": 1,
+                "name": "trigger 4"
+            },
+            {
+                "type": 1,
+                "name": "trigger 5"
+            },
+            {
+                "type": 1,
+                "name": "trigger 6"
+            },
+            {
+                "type": 1,
+                "name": "trigger 7"
+            },
+            {
+                "type": 1,
+                "name": "trigger 8"
+            },
+            {
+                "type": 1,
+                "name": "trigger 9"
+            },
+            {
+                "type": 1,
+                "name": "trigger 10"
+            },
+            {
+                "type": 1,
+                "name": "trigger 11"
+            },
+            {
+                "type": 1,
+                "name": "trigger 12"
+            },
+            {
+                "type": 1,
+                "name": "trigger 13"
+            },
+            {
+                "type": 1,
+                "name": "trigger 14"
+            },
+            {
+                "type": 1,
+                "name": "trigger 15"
+            }
+        ],
+        "name": "Ops.User.pandur.Layer"
+    }
+}

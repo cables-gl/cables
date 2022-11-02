@@ -27,6 +27,11 @@
             },
             {
                 "type": 0,
+                "name": "render",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "width",
                 "group": "Size",
                 "subType": "number"
@@ -57,6 +62,16 @@
             },
             {
                 "type": 0,
+                "name": "Flip TexCoord X",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip TexCoord Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "num columns",
                 "group": "Structure",
                 "subType": "integer"
@@ -66,11 +81,6 @@
                 "name": "num rows",
                 "group": "Structure",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "render",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

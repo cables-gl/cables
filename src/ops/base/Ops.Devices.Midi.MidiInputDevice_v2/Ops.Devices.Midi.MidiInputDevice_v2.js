@@ -2,7 +2,6 @@
 
 // https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
 
-
 /* INPUTS */
 
 const deviceSelect = op.inValueSelect("Device", ["none"]);

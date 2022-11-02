@@ -118,7 +118,7 @@ function sendMessage(e, command)
 }
 
 // MIDIKeys api object, to be exposed as window.Keys
-var api = {
+let api = {
 
     // Expose the onmessage parameter like on a MIDIInput object
     "onmessage": null
