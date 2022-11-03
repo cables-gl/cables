@@ -5,14 +5,12 @@ import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
 import Logger from "./core_logger";
 
-
 /**
  * op the class of all operators
  * @external CABLES
  * @namespace Op
  * @hideconstructor
  */
-
 
 /**
  * @type {Object}
@@ -53,7 +51,6 @@ const Op = function ()
     if (arguments[1])
     {
         this._shortOpName = CABLES.getShortOpName(arguments[1]);
-
         this.getTitle();
     }
 
@@ -65,7 +62,7 @@ const Op = function ()
     this.onDelete = null;
     this.onUiAttrChange = null;
     this.onError = null;
-    this._eventCallbacks = {};
+    // this._eventCallbacks = {};
     this._instances = null;
 
     /**
@@ -107,11 +104,11 @@ const Op = function ()
 
     Op.prototype.setTitle = function (name)
     {
-        const doFireEvent = this.name != name;
+        const doEmitEvent = this.name != name;
         this.name = name;
         this.uiAttr({ "title": name });
 
-        if (doFireEvent) this.fireEvent("onTitleChange", name);
+        if (doEmitEvent) this.emitEvent("onTitleChange", name);
     };
 
     const _setUiAttrib = function (newAttribs)
@@ -141,7 +138,7 @@ const Op = function ()
 
         if (changed)
         {
-            this.fireEvent("onUiAttribsChange", newAttribs);
+            this.emitEvent("onUiAttribsChange", newAttribs);
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
     };
@@ -176,8 +173,7 @@ const Op = function ()
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
         p.parent = this;
         this.portsOut.push(p);
-        // if (this.onAddPort) this.onAddPort(p);
-        this.fireEvent("onPortAdd", p);
+        this.emitEvent("onPortAdd", p);
         return p;
     };
 
@@ -213,7 +209,7 @@ const Op = function ()
         p.parent = this;
 
         this.portsIn.push(p);
-        this.fireEvent("onPortAdd", p);
+        this.emitEvent("onPortAdd", p);
 
         return p;
     };
@@ -1371,8 +1367,6 @@ const Op = function ()
         this.hasUiErrors = Object.keys(this._uiErrors).length;
 
         this.emitEvent("uiErrorChange");
-
-        // console.log(id, txt, this._uiErrors.hasOwnProperty(id));
     };
 
     // todo: remove
@@ -1381,65 +1375,6 @@ const Op = function ()
         this._log.warn("old error message op.error() - use op.setUiError()");
     };
 
-    /**
-     *  add an eventlistener ot op
-     * currently implemented:  "onEnabledChange", "onTitleChange", "onUiAttribsChange"
-     * @function addEventListener
-     * @instance
-     * @memberof Op
-     * @description
-     * @param {which} name of event
-     * @param {function} callback
-     */
-    Op.prototype.addListener = Op.prototype.addEventListener = function (which, cb)
-    {
-        if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [cb];
-        else this._eventCallbacks[which].push(cb);
-    };
-
-    Op.prototype.hasEventListener = function (which, cb)
-    {
-        if (which && cb)
-        {
-            if (this._eventCallbacks[which])
-            {
-                const idx = this._eventCallbacks[which].indexOf(cb);
-                if (idx == -1) return false;
-                return true;
-            }
-        }
-        else
-        {
-            this._log.warn("hasListener: missing parameters");
-        }
-    };
-
-    /**
-     * remove an eventlistener
-     * @function removeEventListener
-     * @instance
-     * @memberof Op
-     * @param {which} name of event
-     * @param {function} callback
-     */
-    Op.prototype.removeEventListener = function (which, cb)
-    {
-        if (this._eventCallbacks[which])
-        {
-            const idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) this._log.warn("eventlistener " + which + " not found...");
-            else this._eventCallbacks[which].slice(idx);
-        }
-    };
-
-    Op.prototype.fireEvent = function (which, params)
-    {
-        if (this._eventCallbacks[which])
-            for (let i = 0; i < this._eventCallbacks[which].length; i++)
-                if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i].cb(params);
-
-        if (this.onUiAttrChange && which == "onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
-    };
 
     /**
      * enable/disable op
@@ -1451,8 +1386,7 @@ const Op = function ()
     Op.prototype.setEnabled = function (b)
     {
         this.enabled = b;
-        this.fireEvent("onEnabledChange", b);
-        // if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
+        this.emitEvent("onEnabledChange", b);
     };
 
     /**
@@ -1497,8 +1431,8 @@ const Op = function ()
             if (this.portsIn[ipi] == port)
             {
                 this.portsIn.splice(ipi, 1);
-                this.fireEvent("onUiAttribsChange", {});
-                this.fireEvent("onPortRemoved", {});
+                this.emitEvent("onUiAttribsChange", {});
+                this.emitEvent("onPortRemoved", {});
                 return;
             }
         }
