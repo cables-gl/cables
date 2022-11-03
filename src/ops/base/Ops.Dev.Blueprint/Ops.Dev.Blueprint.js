@@ -447,18 +447,18 @@ const cleanupPorts = () =>
     removeInPorts.forEach((port) =>
     {
         removeInPort(port);
-        op.fireEvent("onPortRemoved", {});
+        op.emitEvent("onPortRemoved", {});
     });
 
     removeOutPorts.forEach((port) =>
     {
         removeOutPort(port);
-        op.fireEvent("onPortRemoved", {});
+        op.emitEvent("onPortRemoved", {});
     });
 
     if (removeOutPorts.length > 0 || removeInPorts.length > 0)
     {
-        op.fireEvent("onUiAttribsChange", {});
+        op.emitEvent("onUiAttribsChange", {});
     }
 };
 

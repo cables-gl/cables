@@ -88,7 +88,7 @@ inCastShadow.onChange = function ()
 };
 
 const outTrigger = op.outTrigger("Trigger Out");
-const outCubemap = op.outObject("Cubemap");
+const outCubemap = op.outObject("Cubemap", null, "texture");
 const outWorldPosX = op.outNumber("World Position X");
 const outWorldPosY = op.outNumber("World Position Y");
 const outWorldPosZ = op.outNumber("World Position Z");
