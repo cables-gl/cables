@@ -1390,6 +1390,15 @@ const Op = function ()
         }
     };
 
+    /**
+     * visually indicate ports that they are coordinate inputs
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {Port} portX
+     * @param {Port} portY
+     * @param {Port} portZ
+     */
     Op.prototype.setUiAxisPorts = function (px, py, pz)
     {
         if (px) px.setUiAttribs({ "axis": "X" });
@@ -1481,7 +1490,6 @@ const Op = function ()
     {
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     };
-
 
     /**
      * Implement to render 2d canvas based graphics from in an op

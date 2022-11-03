@@ -49,7 +49,6 @@ const Port = function (__parent, name, type, uiAttribs)
 
     this._uiActiveState = true;
     this.ignoreValueSerialize = false;
-    // this.onLink=null;
     this.onLinkChanged = null;
     this.crashed = false;
 
@@ -67,7 +66,6 @@ const Port = function (__parent, name, type, uiAttribs)
     this.activityCounter = 0;
 
     this._tempLastUiValue = null;
-    // this.onUiAttrChange=null;
 
     Object.defineProperty(this, "val", {
         get()
@@ -811,6 +809,7 @@ Port.portTypeNumberToString = function (type)
     if (type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "dynamic";
     return "unknown";
 };
+
 class SwitchPort extends Port
 {
     constructor(__parent, name, type, uiAttribs, indexPort)
