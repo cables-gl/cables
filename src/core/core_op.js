@@ -272,7 +272,6 @@ const Op = function ()
      */
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
-        // old // old
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined)
         {
@@ -934,34 +933,34 @@ const Op = function ()
         for (const ipo in this.portsOut) console.log("out: " + this.portsOut[ipo].getName());// eslint-disable-line
     };
 
-    Op.prototype.getOutChilds = function ()
-    {
-        const childs = [];
-        for (const ipo in this.portsOut)
-        {
-            for (const l in this.portsOut[ipo].links)
-            {
-                if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-                    childs.push(this.portsOut[ipo].links[l].portIn.parent);
-            }
-        }
-        return childs;
-    };
+    // Op.prototype.getOutChilds = function ()
+    // {
+    //     const childs = [];
+    //     for (const ipo in this.portsOut)
+    //     {
+    //         for (const l in this.portsOut[ipo].links)
+    //         {
+    //             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+    //                 childs.push(this.portsOut[ipo].links[l].portIn.parent);
+    //         }
+    //     }
+    //     return childs;
+    // };
 
     // todo deprecate ?!
-    Op.prototype.markChilds = function ()
-    {
-        this.marked = true;
-        for (const ipo in this.portsOut)
-        {
-            for (const l in this.portsOut[ipo].links)
-            {
-                this.portsOut[ipo].parent.marked = true;
-                if (this.portsOut[ipo].links[l].portIn.parent != this)
-                    this.portsOut[ipo].links[l].portIn.parent.markChilds();
-            }
-        }
-    };
+    // Op.prototype.markChilds = function ()
+    // {
+    //     this.marked = true;
+    //     for (const ipo in this.portsOut)
+    //     {
+    //         for (const l in this.portsOut[ipo].links)
+    //         {
+    //             this.portsOut[ipo].parent.marked = true;
+    //             if (this.portsOut[ipo].links[l].portIn.parent != this)
+    //                 this.portsOut[ipo].links[l].portIn.parent.markChilds();
+    //         }
+    //     }
+    // };
 
     Op.prototype.selectChilds = function ()
     {
@@ -978,27 +977,27 @@ const Op = function ()
     };
 
 
-    Op.prototype.deleteChilds = function ()
-    {
-        const opsToDelete = [];
-        for (const ipo in this.portsOut)
-        {
-            for (const l in this.portsOut[ipo].links)
-            {
-                if (this.portsOut[ipo].links[l].portIn.parent != this)
-                {
-                    if (this.portsOut[ipo].parent != this) opsToDelete.push(this.portsOut[ipo].parent);
-                    opsToDelete.push(this.portsOut[ipo].links[l].portIn.parent);
-                    this.portsOut[ipo].links[l].portIn.parent.deleteChilds();
-                }
-            }
-        }
+    // Op.prototype.deleteChilds = function ()
+    // {
+    //     const opsToDelete = [];
+    //     for (const ipo in this.portsOut)
+    //     {
+    //         for (const l in this.portsOut[ipo].links)
+    //         {
+    //             if (this.portsOut[ipo].links[l].portIn.parent != this)
+    //             {
+    //                 if (this.portsOut[ipo].parent != this) opsToDelete.push(this.portsOut[ipo].parent);
+    //                 opsToDelete.push(this.portsOut[ipo].links[l].portIn.parent);
+    //                 this.portsOut[ipo].links[l].portIn.parent.deleteChilds();
+    //             }
+    //         }
+    //     }
 
-        for (const i in opsToDelete)
-        {
-            this.patch.deleteOp(opsToDelete[i].id);
-        }
-    };
+    //     for (const i in opsToDelete)
+    //     {
+    //         this.patch.deleteOp(opsToDelete[i].id);
+    //     }
+    // };
 
     Op.prototype.removeLinks = function ()
     {
@@ -1006,29 +1005,6 @@ const Op = function ()
         for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
     };
 
-    Op.prototype.countFittingPorts = function (otherPort)
-    {
-        let count = 0;
-        for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) count++;
-
-        for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) count++;
-
-        return count;
-    };
-
-    Op.prototype.findFittingPort = function (otherPort, inPortsFirst = false)
-    {
-        if (inPortsFirst)
-        {
-            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
-            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
-        }
-        else
-        {
-            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
-            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
-        }
-    };
 
     Op.prototype.getSerialized = function ()
     {
@@ -1198,6 +1174,8 @@ const Op = function ()
         return null;
     };
 
+
+    // todo: check instancing stuff?
     Op.prototype.cleanUp = function ()
     {
         if (this._instances)
@@ -1211,6 +1189,7 @@ const Op = function ()
         }
     };
 
+    // todo: check instancing stuff?
     Op.prototype.instanced = function (triggerPort)
     {
         console.log("instanced", this.patch.instancing.numCycles());
@@ -1280,6 +1259,7 @@ const Op = function ()
         return true;
     };
 
+    // todo: check instancing stuff?
     Op.prototype.initInstancable = function ()
     {
         //         if(this.isInstanced)
