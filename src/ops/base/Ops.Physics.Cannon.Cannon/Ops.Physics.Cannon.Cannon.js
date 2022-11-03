@@ -55,7 +55,7 @@ inReset.onTriggered = function ()
     bodies.length = 0;
 };
 
-var bodies = [];
+let bodies = [];
 
 function spawn()
 {

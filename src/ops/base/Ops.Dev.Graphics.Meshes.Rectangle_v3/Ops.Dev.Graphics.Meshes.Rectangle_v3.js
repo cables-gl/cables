@@ -1,14 +1,16 @@
 const
     render = op.inTrigger("Trigger"),
-    trigger = op.outTrigger("next"),
+    doRender = op.inValueBool("render", true),
     width = op.inValue("width", 1),
     height = op.inValue("height", 1),
     pivotX = op.inSwitch("pivot x", ["left", "center", "right"], "center"),
     pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"], "center"),
     axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
+    flipTcX = op.inBool("Flip TexCoord X", false),
+    flipTcY = op.inBool("Flip TexCoord Y", true),
     nColumns = op.inValueInt("num columns", 1),
     nRows = op.inValueInt("num rows", 1),
-    doRender = op.inValueBool("render", true),
+    trigger = op.outTrigger("next"),
     geomOut = op.outObject("geometry", null, "geometry");
 
 geomOut.ignoreValueSerialize = true;
@@ -26,6 +28,8 @@ let needsRebuild = true;
 axis.onChange =
     pivotX.onChange =
     pivotY.onChange =
+    flipTcX.onChange =
+    flipTcY.onChange =
     width.onChange =
     height.onChange =
     nRows.onChange =
@@ -109,7 +113,7 @@ function rebuild()
             if (a == "xy") verts.push(0.0);
 
             tc.push(c / numColumns);
-            tc.push(1.0 - r / numRows);
+            tc.push(r / numRows);
 
             if (a == "xy") // default
             {
@@ -159,6 +163,9 @@ function rebuild()
             }
         }
     }
+
+    if (flipTcY.get()) for (let i = 0; i < tc.length; i += 2)tc[i + 1] = 1.0 - tc[i + 1];
+    if (flipTcX.get()) for (let i = 0; i < tc.length; i += 2)tc[i] = 1.0 - tc[i];
 
     geom.clear();
     geom.vertices = verts;

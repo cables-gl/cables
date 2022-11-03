@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.Swizzle renamed to Ops.Dev.ShaderGraph.Swizzle",
             "author": "pandur",
             "date": 1666778542274
+        },
+        {
+            "message": "Ops.Dev.ShaderGraph.Swizzle renamed to Ops.Dev.Gl.ShaderGraph.Swizzle",
+            "author": "pandur",
+            "date": 1667289329202
         }
     ],
     "layout": {

@@ -1,6 +1,6 @@
 const render = op.inTrigger("Render");
 const trigger = op.outTrigger("Trigger");
-const amount = op.inValueSlider("amount", 0.5);
+const amount = op.inFloat("amount", 0.5);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
@@ -17,7 +17,6 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

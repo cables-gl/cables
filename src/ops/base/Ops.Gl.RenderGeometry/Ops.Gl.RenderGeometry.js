@@ -15,6 +15,8 @@ vertNums.onChange =
 
 let mesh = null;
 
+op.toWorkPortsNeedToBeLinked(geometry, render);
+
 render.onTriggered = function ()
 {
     if (mesh) mesh.render(op.patch.cgl.getShader());

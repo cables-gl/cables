@@ -23,7 +23,7 @@ function doRender()
     cgl.popShader();
 }
 
-var shader = new CGL.Shader(cgl, "TextureLookupColorMaterial");
+const shader = new CGL.Shader(cgl, "TextureLookupColorMaterial");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.bindTextures = op.bindTextures;
 shaderOut.set(shader);
@@ -63,12 +63,6 @@ op.texture.onChange = function ()
 op.textureOpacity = op.inTexture("textureOpacity");
 op.textureOpacityUniform = null;
 
-// op.textureOpacity.onPreviewChanged = function ()
-// {
-//     if (op.textureOpacity.showPreview) render.onTriggered = op.textureOpacity.get().preview;
-//     else render.onTriggered = doRender;
-// };
-
 op.textureOpacity.onChange = function ()
 {
     if (op.textureOpacity.get())
@@ -92,4 +86,4 @@ op.doBillboard.onChange = function ()
     shader.toggleDefine("BILLBOARD", op.doBillboard.get());
 };
 
-var preMultipliedAlpha = op.inValueBool("preMultiplied alpha");
+const preMultipliedAlpha = op.inValueBool("preMultiplied alpha");
