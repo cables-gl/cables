@@ -1519,27 +1519,6 @@ const Op = function ()
     Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
 
-/**
- * Returns an op category for the op.
- * @function getNamespaceClassName
- * @instance
- * @memberof Op
- * @param {String} opName - The (full) name of the op, e.g. "Ops.Value"
- * @returns {String} - The op category
- */
-Op.getNamespaceClassName = function (opName)
-{
-    if (!opName) return "default";
-    if (opName.startsWith("Ops.Gl")) return "gl";
-    if (opName.startsWith("Ops.WebAudio")) return "audio";
-    if (opName.startsWith("Ops.Devices")) return "devices";
-    if (opName.startsWith("Ops.Html")) return "html";
-    if (opName.startsWith("Ops.Sidebar")) return "html";
-    if (opName.startsWith("Ops.Math")) return "math";
-    if (opName.startsWith("Ops.User")) return "user";
-    return "default";
-};
-
 Op.isSubpatchOp = function (name)
 {
     return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
