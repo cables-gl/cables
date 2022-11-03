@@ -99,6 +99,7 @@ inTime.onChange = function ()
     }
 
     outNames.set(arrNames);
+    outNames.setUiAttribs({ "stride": arrNames.length });
     outProgress.set(arrProgress);
     outVelocity.set(arrVelocity);
 

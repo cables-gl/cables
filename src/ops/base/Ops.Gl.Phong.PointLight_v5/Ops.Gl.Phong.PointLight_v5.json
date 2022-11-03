@@ -144,7 +144,8 @@
             },
             {
                 "type": 2,
-                "name": "Cubemap"
+                "name": "Cubemap",
+                "objType": "texture"
             },
             {
                 "type": 0,

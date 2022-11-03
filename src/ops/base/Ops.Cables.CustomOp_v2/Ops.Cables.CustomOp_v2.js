@@ -231,8 +231,8 @@ const execute = () =>
             });
             if (removeOutPorts.length > 0 || removeInPorts.length > 0)
             {
-                this.fireEvent("onUiAttribsChange", {});
-                this.fireEvent("onPortRemoved", {});
+                this.emitEvent("onUiAttribsChange", {});
+                this.emitEvent("onPortRemoved", {});
             }
             evalFunction(this);
 
