@@ -1,6 +1,7 @@
 const inMax = op.inFloat("Length", 30);
 const inCurrent = op.inFloat("Current", 0);
 const inClamp = op.inBool("Clamp", false);
+const inIsPlaying = op.inBool("Is Playing", false);
 const inVisible = op.inBool("Visible", true);
 const inShowValue = op.inBool("Show Time");
 const inShowSkip = op.inBool("Show Skip Buttons");
@@ -11,7 +12,9 @@ const outRewind = op.outTrigger("Rewind clicked");
 const outBack = op.outTrigger("Skip Back clicked");
 const outForward = op.outTrigger("Skip Forward clicked");
 
+const outDragged = op.outTrigger("Dragged");
 const outValue = op.outNumber("Current Value");
+const outDragging = op.outBoolNum("Dragging", false);
 const outElement = op.outObject("DOM Element", null, "element");
 
 let div = document.createElement("div");
@@ -166,9 +169,8 @@ if (!inShowValue.get())
 progressbar.addEventListener("pointerdown", () =>
 {
     isDragging = true;
-    if (isPlaying)
+    if (inIsPlaying.get())
     {
-        isPlaying = false;
         wasPlaying = true;
         outPause.trigger();
         updatePlayButton();
@@ -179,8 +181,10 @@ progressbar.addEventListener("pointermove", () =>
     const currentProgress = progressbar.value;
     if (isDragging)
     {
+        outDragging.set(isDragging);
         updateProgressDisplay(currentProgress);
         outValue.set(currentProgress);
+        outDragged.trigger();
     }
 });
 
@@ -190,10 +194,15 @@ progressbar.addEventListener("pointerup", () =>
     updateProgressDisplay(currentProgress);
     outValue.set(currentProgress);
 
+    if (isDragging)
+    {
+        outDragged.trigger();
+    }
+
     isDragging = false;
+    outDragging.set(isDragging);
     if (wasPlaying)
     {
-        isPlaying = true;
         wasPlaying = false;
         outPlay.trigger();
         updatePlayButton();
@@ -205,12 +214,11 @@ function updateStyle()
     styleEle.textContent = attachments.css_progressui_css;
 }
 
-let isPlaying = false;
 function updatePlayButton()
 {
     playButton.querySelector(".progressUIIcon").classList.remove("progressUI_icon-play");
     playButton.querySelector(".progressUIIcon").classList.remove("progressUI_icon-pause");
-    if (isPlaying)
+    if (inIsPlaying.get())
     {
         playButton.querySelector(".progressUIIcon").classList.add("progressUI_icon-pause");
     }
@@ -222,14 +230,12 @@ function updatePlayButton()
 
 playButton.addEventListener("pointerdown", function ()
 {
-    if (isPlaying)
+    if (inIsPlaying.get())
     {
-        isPlaying = false;
         outPause.trigger();
     }
     else
     {
-        isPlaying = true;
         outPlay.trigger();
     }
     updatePlayButton();
@@ -272,20 +278,11 @@ function updateProgressDisplay(currentValue = null)
 {
     let displayValue = currentValue || inCurrent.get();
     let t = displayValue;
-    if (t <= lasttime)
-    {
-        isPlaying = false;
-    }
-    else
-    {
-        isPlaying = true;
-    }
     if (t != lasttime)
     {
         progress.innerHTML = formatValue(t);
         lasttime = t;
     }
-    updatePlayButton();
 }
 
 function formatValue(t)
@@ -301,3 +298,4 @@ updateStyle();
 updatePlayButton();
 
 inCurrent.onChange = currentValueChange;
+inIsPlaying.onChange = updatePlayButton;

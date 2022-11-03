@@ -22,6 +22,11 @@
             },
             {
                 "type": 0,
+                "name": "Is Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             },
@@ -58,8 +63,17 @@
                 "name": "Skip Forward clicked"
             },
             {
+                "type": 1,
+                "name": "Dragged"
+            },
+            {
                 "type": 0,
                 "name": "Current Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dragging",
                 "subType": "number"
             },
             {
