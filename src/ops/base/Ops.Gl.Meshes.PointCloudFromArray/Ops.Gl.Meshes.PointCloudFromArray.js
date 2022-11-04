@@ -115,8 +115,6 @@ function rebuild()
         geom.vertices = verts;
         needsRebuild = false;
 
-        console.log(mesh);
-
         return;
     }
 
