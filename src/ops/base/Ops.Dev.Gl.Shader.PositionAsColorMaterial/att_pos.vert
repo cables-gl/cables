@@ -1,17 +1,11 @@
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal,attrTangent,attrBiTangent;
-OUT vec2 texCoord;
-OUT vec3 normal;
-OUT vec3 tangent;
-OUT vec3 bitangent;
-OUT vec3 outTangent,outBiTangent;
 OUT mat4 mMatrix;
 OUT vec3 vert;
 OUT mat4 mvMatrix;
 UNI mat4 projMatrix;
 
-// UNI mat4 mvMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
@@ -20,10 +14,6 @@ UNI mat4 viewMatrix;
 
 void main()
 {
-    texCoord=attrTexCoord;
-    vec3 norm=attrVertNormal;
-    tangent=attrTangent;
-    bitangent=attrBiTangent;
 
     vec4 pos=vec4(vPosition,1.0);
     mMatrix=modelMatrix;
@@ -32,10 +22,9 @@ void main()
 
     mat4 mvMatrix=viewMatrix*mMatrix;
 
-    vert=pos.xyz;
-    normal=norm;
-    outTangent=tangent;
-    outBiTangent=bitangent;
+
+    vert=(modelMatrix*pos).xyz;
+
 
     gl_Position = projMatrix * mvMatrix * pos;
 }
