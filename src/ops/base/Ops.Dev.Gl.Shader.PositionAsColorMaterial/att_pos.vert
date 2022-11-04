@@ -23,7 +23,7 @@ void main()
     mat4 mvMatrix=viewMatrix*mMatrix;
 
 
-    vert=(modelMatrix*pos).xyz;
+    vert=(mMatrix*pos).xyz;
 
 
     gl_Position = projMatrix * mvMatrix * pos;

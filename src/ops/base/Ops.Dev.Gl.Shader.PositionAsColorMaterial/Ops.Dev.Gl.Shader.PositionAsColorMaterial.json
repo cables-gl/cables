@@ -16,7 +16,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.PositionAdColorMaterial"
+        "name": "Ops.Dev.Gl.Shader.PositionAsColorMaterial"
     },
     "summary": "visualize texturecoordinates/UV mapping of a mesh ",
     "docs": {
