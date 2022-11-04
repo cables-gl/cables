@@ -5,14 +5,12 @@ import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
 import Logger from "./core_logger";
 
-
 /**
  * op the class of all operators
  * @external CABLES
  * @namespace Op
  * @hideconstructor
  */
-
 
 /**
  * @type {Object}
@@ -53,7 +51,6 @@ const Op = function ()
     if (arguments[1])
     {
         this._shortOpName = CABLES.getShortOpName(arguments[1]);
-
         this.getTitle();
     }
 
@@ -65,7 +62,7 @@ const Op = function ()
     this.onDelete = null;
     this.onUiAttrChange = null;
     this.onError = null;
-    this._eventCallbacks = {};
+    // this._eventCallbacks = {};
     this._instances = null;
 
     /**
@@ -107,11 +104,11 @@ const Op = function ()
 
     Op.prototype.setTitle = function (name)
     {
-        const doFireEvent = this.name != name;
+        const doEmitEvent = this.name != name;
         this.name = name;
         this.uiAttr({ "title": name });
 
-        if (doFireEvent) this.fireEvent("onTitleChange", name);
+        if (doEmitEvent) this.emitEvent("onTitleChange", name);
     };
 
     const _setUiAttrib = function (newAttribs)
@@ -141,7 +138,7 @@ const Op = function ()
 
         if (changed)
         {
-            this.fireEvent("onUiAttribsChange", newAttribs);
+            this.emitEvent("onUiAttribsChange", newAttribs);
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
     };
@@ -176,8 +173,7 @@ const Op = function ()
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
         p.parent = this;
         this.portsOut.push(p);
-        // if (this.onAddPort) this.onAddPort(p);
-        this.fireEvent("onPortAdd", p);
+        this.emitEvent("onPortAdd", p);
         return p;
     };
 
@@ -213,7 +209,7 @@ const Op = function ()
         p.parent = this;
 
         this.portsIn.push(p);
-        this.fireEvent("onPortAdd", p);
+        this.emitEvent("onPortAdd", p);
 
         return p;
     };
@@ -276,7 +272,6 @@ const Op = function ()
      */
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
-        // old // old
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined)
         {
@@ -938,34 +933,34 @@ const Op = function ()
         for (const ipo in this.portsOut) console.log("out: " + this.portsOut[ipo].getName());// eslint-disable-line
     };
 
-    Op.prototype.getOutChilds = function ()
-    {
-        const childs = [];
-        for (const ipo in this.portsOut)
-        {
-            for (const l in this.portsOut[ipo].links)
-            {
-                if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-                    childs.push(this.portsOut[ipo].links[l].portIn.parent);
-            }
-        }
-        return childs;
-    };
+    // Op.prototype.getOutChilds = function ()
+    // {
+    //     const childs = [];
+    //     for (const ipo in this.portsOut)
+    //     {
+    //         for (const l in this.portsOut[ipo].links)
+    //         {
+    //             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+    //                 childs.push(this.portsOut[ipo].links[l].portIn.parent);
+    //         }
+    //     }
+    //     return childs;
+    // };
 
     // todo deprecate ?!
-    Op.prototype.markChilds = function ()
-    {
-        this.marked = true;
-        for (const ipo in this.portsOut)
-        {
-            for (const l in this.portsOut[ipo].links)
-            {
-                this.portsOut[ipo].parent.marked = true;
-                if (this.portsOut[ipo].links[l].portIn.parent != this)
-                    this.portsOut[ipo].links[l].portIn.parent.markChilds();
-            }
-        }
-    };
+    // Op.prototype.markChilds = function ()
+    // {
+    //     this.marked = true;
+    //     for (const ipo in this.portsOut)
+    //     {
+    //         for (const l in this.portsOut[ipo].links)
+    //         {
+    //             this.portsOut[ipo].parent.marked = true;
+    //             if (this.portsOut[ipo].links[l].portIn.parent != this)
+    //                 this.portsOut[ipo].links[l].portIn.parent.markChilds();
+    //         }
+    //     }
+    // };
 
     Op.prototype.selectChilds = function ()
     {
@@ -982,27 +977,27 @@ const Op = function ()
     };
 
 
-    Op.prototype.deleteChilds = function ()
-    {
-        const opsToDelete = [];
-        for (const ipo in this.portsOut)
-        {
-            for (const l in this.portsOut[ipo].links)
-            {
-                if (this.portsOut[ipo].links[l].portIn.parent != this)
-                {
-                    if (this.portsOut[ipo].parent != this) opsToDelete.push(this.portsOut[ipo].parent);
-                    opsToDelete.push(this.portsOut[ipo].links[l].portIn.parent);
-                    this.portsOut[ipo].links[l].portIn.parent.deleteChilds();
-                }
-            }
-        }
+    // Op.prototype.deleteChilds = function ()
+    // {
+    //     const opsToDelete = [];
+    //     for (const ipo in this.portsOut)
+    //     {
+    //         for (const l in this.portsOut[ipo].links)
+    //         {
+    //             if (this.portsOut[ipo].links[l].portIn.parent != this)
+    //             {
+    //                 if (this.portsOut[ipo].parent != this) opsToDelete.push(this.portsOut[ipo].parent);
+    //                 opsToDelete.push(this.portsOut[ipo].links[l].portIn.parent);
+    //                 this.portsOut[ipo].links[l].portIn.parent.deleteChilds();
+    //             }
+    //         }
+    //     }
 
-        for (const i in opsToDelete)
-        {
-            this.patch.deleteOp(opsToDelete[i].id);
-        }
-    };
+    //     for (const i in opsToDelete)
+    //     {
+    //         this.patch.deleteOp(opsToDelete[i].id);
+    //     }
+    // };
 
     Op.prototype.removeLinks = function ()
     {
@@ -1010,29 +1005,6 @@ const Op = function ()
         for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
     };
 
-    Op.prototype.countFittingPorts = function (otherPort)
-    {
-        let count = 0;
-        for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) count++;
-
-        for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) count++;
-
-        return count;
-    };
-
-    Op.prototype.findFittingPort = function (otherPort, inPortsFirst = false)
-    {
-        if (inPortsFirst)
-        {
-            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
-            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
-        }
-        else
-        {
-            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
-            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
-        }
-    };
 
     Op.prototype.getSerialized = function ()
     {
@@ -1202,6 +1174,8 @@ const Op = function ()
         return null;
     };
 
+
+    // todo: check instancing stuff?
     Op.prototype.cleanUp = function ()
     {
         if (this._instances)
@@ -1215,6 +1189,7 @@ const Op = function ()
         }
     };
 
+    // todo: check instancing stuff?
     Op.prototype.instanced = function (triggerPort)
     {
         console.log("instanced", this.patch.instancing.numCycles());
@@ -1284,6 +1259,7 @@ const Op = function ()
         return true;
     };
 
+    // todo: check instancing stuff?
     Op.prototype.initInstancable = function ()
     {
         //         if(this.isInstanced)
@@ -1371,8 +1347,6 @@ const Op = function ()
         this.hasUiErrors = Object.keys(this._uiErrors).length;
 
         this.emitEvent("uiErrorChange");
-
-        // console.log(id, txt, this._uiErrors.hasOwnProperty(id));
     };
 
     // todo: remove
@@ -1381,65 +1355,6 @@ const Op = function ()
         this._log.warn("old error message op.error() - use op.setUiError()");
     };
 
-    /**
-     *  add an eventlistener ot op
-     * currently implemented:  "onEnabledChange", "onTitleChange", "onUiAttribsChange"
-     * @function addEventListener
-     * @instance
-     * @memberof Op
-     * @description
-     * @param {which} name of event
-     * @param {function} callback
-     */
-    Op.prototype.addListener = Op.prototype.addEventListener = function (which, cb)
-    {
-        if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [cb];
-        else this._eventCallbacks[which].push(cb);
-    };
-
-    Op.prototype.hasEventListener = function (which, cb)
-    {
-        if (which && cb)
-        {
-            if (this._eventCallbacks[which])
-            {
-                const idx = this._eventCallbacks[which].indexOf(cb);
-                if (idx == -1) return false;
-                return true;
-            }
-        }
-        else
-        {
-            this._log.warn("hasListener: missing parameters");
-        }
-    };
-
-    /**
-     * remove an eventlistener
-     * @function removeEventListener
-     * @instance
-     * @memberof Op
-     * @param {which} name of event
-     * @param {function} callback
-     */
-    Op.prototype.removeEventListener = function (which, cb)
-    {
-        if (this._eventCallbacks[which])
-        {
-            const idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) this._log.warn("eventlistener " + which + " not found...");
-            else this._eventCallbacks[which].slice(idx);
-        }
-    };
-
-    Op.prototype.fireEvent = function (which, params)
-    {
-        if (this._eventCallbacks[which])
-            for (let i = 0; i < this._eventCallbacks[which].length; i++)
-                if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i].cb(params);
-
-        if (this.onUiAttrChange && which == "onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
-    };
 
     /**
      * enable/disable op
@@ -1451,8 +1366,7 @@ const Op = function ()
     Op.prototype.setEnabled = function (b)
     {
         this.enabled = b;
-        this.fireEvent("onEnabledChange", b);
-        // if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
+        this.emitEvent("onEnabledChange", b);
     };
 
     /**
@@ -1476,6 +1390,15 @@ const Op = function ()
         }
     };
 
+    /**
+     * visually indicate ports that they are coordinate inputs
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {Port} portX
+     * @param {Port} portY
+     * @param {Port} portZ
+     */
     Op.prototype.setUiAxisPorts = function (px, py, pz)
     {
         if (px) px.setUiAttribs({ "axis": "X" });
@@ -1497,8 +1420,8 @@ const Op = function ()
             if (this.portsIn[ipi] == port)
             {
                 this.portsIn.splice(ipi, 1);
-                this.fireEvent("onUiAttribsChange", {});
-                this.fireEvent("onPortRemoved", {});
+                this.emitEvent("onUiAttribsChange", {});
+                this.emitEvent("onPortRemoved", {});
                 return;
             }
         }
@@ -1568,7 +1491,6 @@ const Op = function ()
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     };
 
-
     /**
      * Implement to render 2d canvas based graphics from in an op
      * @function isCurrentUiOp
@@ -1584,27 +1506,6 @@ const Op = function ()
      */
     Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
-
-/**
- * Returns an op category for the op.
- * @function getNamespaceClassName
- * @instance
- * @memberof Op
- * @param {String} opName - The (full) name of the op, e.g. "Ops.Value"
- * @returns {String} - The op category
- */
-Op.getNamespaceClassName = function (opName)
-{
-    if (!opName) return "default";
-    if (opName.startsWith("Ops.Gl")) return "gl";
-    if (opName.startsWith("Ops.WebAudio")) return "audio";
-    if (opName.startsWith("Ops.Devices")) return "devices";
-    if (opName.startsWith("Ops.Html")) return "html";
-    if (opName.startsWith("Ops.Sidebar")) return "html";
-    if (opName.startsWith("Ops.Math")) return "math";
-    if (opName.startsWith("Ops.User")) return "user";
-    return "default";
-};
 
 Op.isSubpatchOp = function (name)
 {

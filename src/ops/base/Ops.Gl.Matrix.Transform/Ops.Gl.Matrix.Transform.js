@@ -49,7 +49,7 @@ render.onTriggered = function ()
 
     if (updateMatrix) doUpdateMatrix();
 
-    const cg = op.patch.cg;
+    const cg = op.patch.cgl;
     cg.pushModelMatrix();
     mat4.multiply(cg.mMatrix, cg.mMatrix, transMatrix);
 
