@@ -1,0 +1,44 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "a654bbb7-bbde-4178-9fef-3209d0c352a4",
+    "created": 1667555233416,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Dev.Gl.Shader.PositionAsColorMaterial"
+    },
+    "summary": "visualize texturecoordinates/UV mapping of a mesh ",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "d5Aq_o",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Shader.ShowTexCoordsMaterial",
+            "author": "pandur",
+            "date": 1667555233417
+        },
+        {
+            "message": "Ops.User.pandur.PositionAdColorMaterial renamed to Ops.Dev.Gl.Shader.PositionAsColorMaterial",
+            "author": "pandur",
+            "date": 1667556078944
+        }
+    ]
+}

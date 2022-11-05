@@ -3,6 +3,9 @@ IN vec3 outTangent;
 IN vec3 outBiTangent;
 IN mat4 mMatrix;
 IN vec2 texCoord;
+IN vec3 vert;
+IN mat4 mvMatrix;
+
 
 {{MODULES_HEAD}}
 
@@ -10,6 +13,7 @@ void main()
 {
     #ifdef MULMODEL
         vec4 attr;
+        attr.w=1.0;
     #endif
     #ifndef MULMODEL
         vec3 attr;
@@ -23,6 +27,12 @@ void main()
     #endif
     #ifdef SHOW_TANGENTS
         attr.xyz=outTangent;
+    #endif
+    #ifdef SHOW_TEXCOORDS
+        attr.xy=texCoord;
+    #endif
+    #ifdef SHOW_POSITION
+        attr.xyz=vert;
     #endif
 
     #ifdef MULMODEL

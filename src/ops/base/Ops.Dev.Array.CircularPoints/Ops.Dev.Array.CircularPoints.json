@@ -1,0 +1,73 @@
+{
+    "id": "5d2de367-c2b8-4702-abf0-b16bbeb22f37",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1667504160840
+        },
+        {
+            "message": "Ops.User.pandur.CircularPoints renamed to Ops.Dev.Array.CircularPoints",
+            "author": "pandur",
+            "date": 1667549245819
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1667504163826,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Rounds",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius Add Round",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius Add Point",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Point Offset XY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Point Offset Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Round Segments",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 0,
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array lengths",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.CircularPoints"
+    }
+}

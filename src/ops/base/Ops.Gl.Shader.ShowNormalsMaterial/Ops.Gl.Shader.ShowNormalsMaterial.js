@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    inAttr = op.inSwitch("Attribute", ["Normals", "Tangents", "BiTangents"], "Normals"),
+    inAttr = op.inSwitch("Attribute", ["TexCoords", "Normals", "Tangents", "BiTangents"], "Normals"),
     inAbs = op.inBool("Absolute", false),
     inMulModel = op.inBool("World Space", false),
     trigger = op.outTrigger("trigger"),
@@ -20,6 +20,7 @@ function updateAttr()
     shader.toggleDefine("SHOW_NORMALS", inAttr.get() == "Normals");
     shader.toggleDefine("SHOW_TANGENTS", inAttr.get() == "Tangents");
     shader.toggleDefine("SHOW_BITANGENTS", inAttr.get() == "BiTangents");
+    shader.toggleDefine("SHOW_TEXCOORDS", inAttr.get() == "TexCoords");
 
     shader.toggleDefine("ABS", inAbs.get());
     shader.toggleDefine("MULMODEL", inMulModel.get());
