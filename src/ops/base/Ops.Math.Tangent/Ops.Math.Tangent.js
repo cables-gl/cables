@@ -1,10 +1,10 @@
 const
-    value = op.inValue("Value");
-phase = op.inValue("Phase", 0.0);
-mul = op.inValue("Frequency", 1.0);
-amplitude = op.inValue("Amplitude", 1.0);
-invert = op.inValueBool("asine", false);
-result = op.outNumber("Result");
+    value = op.inValue("Value"),
+    phase = op.inValue("Phase", 0.0),
+    mul = op.inValue("Frequency", 1.0),
+    amplitude = op.inValue("Amplitude", 1.0),
+    invert = op.inValueBool("asine", false),
+    result = op.outNumber("Result");
 
 let calculate = Math.tan;
 
