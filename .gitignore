@@ -1,6 +1,8 @@
 .DS_Store
 doc/ops_base
 src/ops/users
+src/ops/teams
+src/ops/extensions
 /doc/SUMMARY.md
 .idea/
 /doc/api_*
