@@ -4,8 +4,13 @@ const
     outFound = op.outBoolNum("Found", false),
     outIndex = op.outNumber("Index", -1);
 
-inValue.onChange =
-    inArr.onChange = exec;
+inValue.onChange = () =>
+{
+    op.setUiAttrib({ "extendTitle": inValue.get() });
+    exec();
+};
+
+inArr.onChange = exec;
 
 function exec()
 {

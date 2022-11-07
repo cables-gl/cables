@@ -30,6 +30,11 @@
             },
             {
                 "type": 0,
+                "name": "Peak Z Pos",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "percent",
                 "subType": "number"
             },
