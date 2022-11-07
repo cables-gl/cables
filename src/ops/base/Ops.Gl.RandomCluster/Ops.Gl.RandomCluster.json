@@ -98,7 +98,12 @@
     ],
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "random seed",
+                "text": "`0`: different every time"
+            }
+        ]
     },
     "issues": "",
     "youtubeids": [

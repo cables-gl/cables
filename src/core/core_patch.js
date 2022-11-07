@@ -924,6 +924,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
+    console.log("core patch name was set.... why?");
 
     if (typeof obj === "string")
     {
