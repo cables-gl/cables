@@ -1,7 +1,8 @@
-# How to make demos with cables.gl
+# How to make demoscene demos with cables.gl
 
 - A youtube video: https://www.youtube.com/watch?v=v4rYqHuT-0E&t=5972s
 
+- plase tag your demo with "demoscene" !
 
 ## Demo Templates
 
@@ -17,4 +18,7 @@ there are published demo patches on cables.gl, e.g. check the demoscene tag:
 https://cables.gl/tag/demoscene
 
 
-## tag your demo with "demoscene"
+
+- cables demos on pouet: https://www.pouet.net/lists.php?which=107
+
+
