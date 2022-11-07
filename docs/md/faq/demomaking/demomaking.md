@@ -20,5 +20,5 @@ There are published demo patches on cables.gl
 ## links
 
 - cables demos on pouet: https://www.pouet.net/lists.php?which=107
-
+- cables demos youtube playlist: https://www.youtube.com/playlist?list=PLYimpE2xWgBuyCiSTlyhMpC4to9uXrmYe
 
