@@ -1,0 +1,1 @@
+e.g. stride of 2: `[a,b,c,d,e,f]` becomes `[[a,b],[c,d],[e,f]]`

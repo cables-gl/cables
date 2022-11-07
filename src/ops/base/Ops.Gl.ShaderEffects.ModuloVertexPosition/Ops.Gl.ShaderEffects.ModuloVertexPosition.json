@@ -26,7 +26,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Dev.ModuloVertexPosition"
+        "name": "Ops.Gl.ShaderEffects.ModuloVertexPosition"
     },
     "summary": "vertex shader modulo operation on vertex position ",
     "youtubeid": "",
