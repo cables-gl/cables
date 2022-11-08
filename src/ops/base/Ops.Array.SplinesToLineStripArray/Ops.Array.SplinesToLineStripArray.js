@@ -1,34 +1,30 @@
 const
-    inArrays=op.inArray("Array"),
-    outArr=op.outArray("Result");
+    inArrays = op.inArray("Array"),
+    outArr = op.outArray("Result");
 
-
-
-inArrays.onChange=function()
+inArrays.onChange = function ()
 {
-    var inArr=inArrays.get();
+    let inArr = inArrays.get();
 
-    var arr=[];
+    let arr = [];
 
-    if(!inArr )return;
+    if (!inArr) return;
 
-    for(var i=0;i<inArr.length;i++)
+    for (let i = 0; i < inArr.length; i++)
     {
+        let pointArray = inArr[i];
 
-        var pointArray=inArr[i];
-
-        for(var j=3;j<pointArray.length-3;j+=3)
+        for (let j = 3; j < pointArray.length - 3; j += 3)
         {
-            arr.push(pointArray[j-3]);
-            arr.push(pointArray[j-2]);
-            arr.push(pointArray[j-1]);
-            arr.push(pointArray[j+0]);
-            arr.push(pointArray[j+1]);
-            arr.push(pointArray[j+2]);
+            arr.push(pointArray[j - 3]);
+            arr.push(pointArray[j - 2]);
+            arr.push(pointArray[j - 1]);
+            arr.push(pointArray[j + 0]);
+            arr.push(pointArray[j + 1]);
+            arr.push(pointArray[j + 2]);
         }
     }
 
     outArr.set(null);
     outArr.set(arr);
 };
-

@@ -261,7 +261,7 @@ Patch.prototype.getAssetPath = function ()
     }
     else if (document.location.href.indexOf("cables.gl") > 0 || document.location.href.indexOf("cables.local") > 0)
     {
-        const parts = document.location.href.split("/");
+        const parts = document.location.pathname.split("/");
         return "/assets/" + parts[parts.length - 1] + "/";
     }
     else if (this.config.hasOwnProperty("assetPath"))
@@ -924,6 +924,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
+    console.log("core patch name was set.... why?");
 
     if (typeof obj === "string")
     {

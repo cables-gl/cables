@@ -4,6 +4,7 @@ const
     radius = op.inValue("radius", 1),
     shape = op.inValueSelect("Shape", ["Star", "Saw", "Gear"], "Star"),
     outerRadius = op.inValue("Length", 1.5),
+    zDiff = op.inFloat("Peak Z Pos", 0),
     percent = op.inValueSlider("percent"),
     fill = op.inValueBool("Fill"),
     trigger = op.outTrigger("trigger"),
@@ -14,6 +15,21 @@ let cgl = op.patch.cgl;
 
 let oldPrim = 0;
 let shader = null;
+percent.set(1);
+
+let geom = new CGL.Geometry("circle");
+let mesh = null;
+let lastSegs = -1;
+
+zDiff.onChange =
+    segments.onChange =
+    radius.onChange =
+    percent.onChange =
+    shape.onChange =
+    fill.onChange =
+    outerRadius.onChange = calc;
+calc();
+
 render.onTriggered = function ()
 {
     if (op.instanced(render)) return;
@@ -28,11 +44,6 @@ render.onTriggered = function ()
     shader.glPrimitive = oldPrim;
 };
 
-percent.set(1);
-
-let geom = new CGL.Geometry("circle");
-let mesh = null;
-let lastSegs = -1;
 function calc()
 {
     let segs = Math.max(3, Math.floor(segments.get()));
@@ -128,7 +139,7 @@ function calc()
             faces.push(
                 [posx, posy, 0],
                 [oldPosX, oldPosY, 0],
-                [outX, outY, 0]
+                [outX, outY, zDiff.get()]
             );
             normals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
@@ -152,11 +163,3 @@ function calc()
     if (!mesh)mesh = new CGL.Mesh(cgl, geom);
     mesh.setGeom(geom);
 }
-
-segments.onChange = calc;
-radius.onChange = calc;
-percent.onChange = calc;
-shape.onChange = calc;
-fill.onChange = calc;
-outerRadius.onChange = calc;
-calc();

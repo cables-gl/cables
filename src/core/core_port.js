@@ -661,7 +661,7 @@ Port.prototype.setAnimated = function (a)
     this.setUiAttribs({ "isAnimated": this._animated });
 };
 
-Port.prototype.toggleAnim = function (val)
+Port.prototype.toggleAnim = function ()
 {
     this._animated = !this._animated;
     if (this._animated && !this.anim)

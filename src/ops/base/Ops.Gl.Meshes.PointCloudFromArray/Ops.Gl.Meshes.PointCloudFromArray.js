@@ -184,8 +184,6 @@ function rebuild()
         mesh.addVertexNumbers = true;
         mesh.setGeom(geom);
 
-        console.log(mesh);
-
         outGeom.set(null);
         outGeom.set(geom);
     }
