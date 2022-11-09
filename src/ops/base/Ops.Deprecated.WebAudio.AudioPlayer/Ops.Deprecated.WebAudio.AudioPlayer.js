@@ -246,7 +246,7 @@ this.file.onChange = function ()
 
         request.send();
 
-        self.patch.timer.onPlayPause(seek);
-        self.patch.timer.onTimeChange(seek);
+        self.patch.timer.on("playPause", seek);
+        self.patch.timer.on("timeChange", seek);
     }
 };
