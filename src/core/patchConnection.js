@@ -56,7 +56,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
         {
             if (window.gui)
             {
-                gui.serverOps.loadProjectLibs(data.vars.json, () =>
+                gui.serverOps.loadProjectDependencies(data.vars.json, () =>
                 {
                     this._patch.deSerialize(data.vars.json, data.vars.genIds);
                 });
@@ -73,7 +73,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
         this._patch.clear();
         if (window.gui)
         {
-            gui.serverOps.loadProjectLibs(JSON.parse(data.vars.patch), () =>
+            gui.serverOps.loadProjectDependencies(JSON.parse(data.vars.patch), () =>
             {
                 this._patch.deSerialize(data.vars.patch);
             });

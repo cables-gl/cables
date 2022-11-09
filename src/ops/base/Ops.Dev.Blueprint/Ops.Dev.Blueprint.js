@@ -371,7 +371,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
             originalSaveState = gui.getSavedState();
             CABLES.UI.undo.pause();
 
-            gui.serverOps.loadProjectLibs(data, () =>
+            gui.serverOps.loadProjectDependencies(data, () =>
             {
                 listenerId = op.patch.addEventListener("patchLoadEnd", cb);
                 data.settings = op.patch.settings;
