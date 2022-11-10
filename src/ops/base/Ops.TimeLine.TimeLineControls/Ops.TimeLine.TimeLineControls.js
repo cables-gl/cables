@@ -1,8 +1,8 @@
 const plauPause = op.outBoolNum("Play/Stop");
 const time = op.outNumber("time");
 
-op.patch.timer.onPlayPause(seek);
-op.patch.timer.onTimeChange(seek);
+op.patch.timer.on("playPause", seek);
+op.patch.timer.on("timeChange", seek);
 
 function seek()
 {

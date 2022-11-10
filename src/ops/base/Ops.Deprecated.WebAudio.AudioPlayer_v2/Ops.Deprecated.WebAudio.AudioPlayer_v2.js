@@ -216,7 +216,7 @@ file.onChange = function ()
 
         request.send();
 
-        patch.timer.onPlayPause(seek);
-        patch.timer.onTimeChange(seek);
+        patch.timer.on("playPause", seek);
+        patch.timer.on("timeChange", seek);
     }
 };

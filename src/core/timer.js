@@ -36,11 +36,7 @@ const Timer = function ()
     this._lastTime = 0;
     this._paused = true;
     this._delay = 0;
-    this._eventsPaused = false;
     this.overwriteTime = -1;
-
-    this.cbPlayPause = [];
-    this.cbTimeChange = [];
 };
 
 Timer.prototype._getTime = function ()
@@ -49,23 +45,10 @@ Timer.prototype._getTime = function ()
     return this._lastTime + this._timeOffset;
 };
 
-Timer.prototype._eventPlayPause = function ()
-{
-    this.emitEvent("playPause");
-    if (this._eventsPaused) return;
-    for (const i in this.cbPlayPause) this.cbPlayPause[i]();
-};
-
-Timer.prototype._eventTimeChange = function ()
-{
-    if (this._eventsPaused) return;
-    for (const i in this.cbTimeChange) this.cbTimeChange[i]();
-};
-
 Timer.prototype.setDelay = function (d)
 {
     this._delay = d;
-    this._eventTimeChange();
+    this.emitEvent("timeChange");
 };
 
 /**
@@ -143,7 +126,7 @@ Timer.prototype.setTime = function (t)
     this._timeStart = internalNow();
     this._timeOffset = t;
     this._currentTime = t;
-    this._eventTimeChange();
+    this.emitEvent("timeChange");
 };
 
 Timer.prototype.setOffset = function (val)
@@ -159,7 +142,7 @@ Timer.prototype.setOffset = function (val)
         this._timeOffset += val;
         this._currentTime = this._lastTime + this._timeOffset;
     }
-    this._eventTimeChange();
+    this.emitEvent("timeChange");
 };
 
 /**
@@ -172,7 +155,7 @@ Timer.prototype.play = function ()
 {
     this._timeStart = internalNow();
     this._paused = false;
-    this._eventPlayPause();
+    this.emitEvent("playPause");
 };
 
 /**
@@ -185,36 +168,7 @@ Timer.prototype.pause = function ()
 {
     this._timeOffset = this._currentTime;
     this._paused = true;
-    this._eventPlayPause();
-};
-
-Timer.prototype.pauseEvents = function (onoff)
-{
-    this._eventsPaused = onoff;
-};
-
-/**
- * @callback
- * @description adds callback, which will be executed it playing state changed
- * @memberof Timer
- * @param {Function} callback
- * @instance
- */
-Timer.prototype.onPlayPause = function (cb)
-{
-    if (cb && typeof cb == "function") this.cbPlayPause.push(cb);
-};
-
-/**
- * @callback
- * @description adds callback, which will be executed when the current time changes
- * @memberof Timer
- * @param {Function} callback
- * @instance
- */
-Timer.prototype.onTimeChange = function (cb)
-{
-    if (cb && typeof cb == "function") this.cbTimeChange.push(cb);
+    this.emitEvent("playPause");
 };
 
 export { Timer };
