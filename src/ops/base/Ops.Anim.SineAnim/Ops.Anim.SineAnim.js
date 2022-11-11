@@ -26,7 +26,6 @@ function onModeChange()
     if (modeSelectValue === "Sine") selectIndex = SINE;
     else if (modeSelectValue === "Cosine") selectIndex = COSINE;
 
-    op.setUiAttrib({ "extendTitle": modeSelectValue });
     exec();
 }
 

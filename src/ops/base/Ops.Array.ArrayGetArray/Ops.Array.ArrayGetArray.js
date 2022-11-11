@@ -1,9 +1,9 @@
-let inArrays = op.inArray("Array of Arrays");
-let index = op.inValueInt("Index");
+const
+    inArrays = op.inArray("Array of Arrays"),
+    index = op.inValueInt("Index"),
+    result = op.outArray("Result Array");
 
-let result = op.outArray("Result Array");
-
-inArrays.onChange = update;
+inArrays.onChange =
 index.onChange = update;
 
 function update()
@@ -12,7 +12,6 @@ function update()
     if (!theArray)
     {
         result.set(null);
-        // op.log('no array');
         return;
     }
 

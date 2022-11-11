@@ -6,12 +6,13 @@ const
     outArrayLength = op.outNumber("Array length out");
 
 let arr = [];
-
 let selectIndex = 0;
 const MODE_NUMBER = 0;
 const MODE_1_TO_4 = 1;
 const MODE_0_TO_1 = 2;
 const MODE_1_TO_0 = 3;
+
+op.setUiAttrib({ "extendTitlePort": modeSelect.name });
 
 modeSelect.onChange = onFilterChange;
 
@@ -48,7 +49,6 @@ function onFilterChange()
     {
         inDefaultValue.setUiAttribs({ "greyout": true });
     }
-    op.setUiAttrib({ "extendTitle": modeSelect.get() });
 
     reset();
 }
