@@ -1,15 +1,14 @@
-let data = op.inObject("data");
-let key = op.inString("Key");
-const result = op.outString("Result");
+const
+    data = op.inObject("data"),
+    key = op.inString("Key"),
+    result = op.outString("Result");
 
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
 
-key.onChange = function ()
-{
-    if (!key.isLinked())op.setUiAttrib({ "extendTitle": key.get() });
-    exec();
-};
+op.setUiAttrib({ "extendTitlePort": key.name });
+
+key.onChange =
 data.onChange = exec;
 
 function exec()

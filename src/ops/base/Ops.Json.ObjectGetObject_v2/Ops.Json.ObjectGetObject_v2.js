@@ -6,12 +6,10 @@ const
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
 
-key.onChange = function ()
-{
-    if (!key.isLinked())op.setUiAttrib({ "extendTitle": key.get() });
-    update();
-};
+op.setUiAttrib({ "extendTitlePort": key.name });
 
+
+key.onChange =
 data.onChange = update;
 
 function update()

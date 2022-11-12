@@ -920,11 +920,9 @@ Patch.prototype.deSerialize = function (obj, genIds)
     const newOps = [];
 
     const loadingId = this.loading.start("core", "deserialize");
-    // if (this.onLoadStart) this.onLoadStart();
 
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
-    console.log("core patch name was set.... why?");
 
     if (typeof obj === "string")
     {
