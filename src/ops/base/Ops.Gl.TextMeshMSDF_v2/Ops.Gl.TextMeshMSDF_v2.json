@@ -33,11 +33,13 @@
             {
                 "type": 0,
                 "name": "Align index",
+                "group": "Alignment",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Vertical Align index",
+                "group": "Alignment",
                 "subType": "integer"
             },
             {

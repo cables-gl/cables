@@ -18,6 +18,7 @@ const
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 
+op.toWorkPortsNeedToBeLinked(depth, render);
 op.setPortGroup("Noise", [noise, noiseamount]);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.ssao_frag);

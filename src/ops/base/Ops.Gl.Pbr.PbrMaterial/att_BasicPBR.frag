@@ -6,7 +6,7 @@ precision highp int;
 UNI vec3 camPos;
 // utility maps
 #ifdef USE_ENVIRONMENT_LIGHTING
-    uniform sampler2D IBL_BRDF_LUT;
+    UNI sampler2D IBL_BRDF_LUT;
 #endif
 // mesh maps
 #ifdef USE_ALBEDO_TEX
@@ -171,7 +171,7 @@ float Dither_InterleavedGradientNoise(float a) {
 // based on Jasper Flicks great tutorials (:
 float getSurfaceHeight(sampler2D surfaceHeightMap, vec2 UV)
 {
-	return texture2D(surfaceHeightMap, UV).r;
+	return texture(surfaceHeightMap, UV).r;
 }
 
 vec2 RaymarchedParallax(vec2 UV, sampler2D surfaceHeightMap, float strength, vec3 viewDir)
@@ -255,7 +255,7 @@ void main()
 
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
-        vec4 AlbedoMap   = texture2D(_AlbedoMap, UV0);
+        vec4 AlbedoMap   = texture(_AlbedoMap, UV0);
     #else
         vec4 AlbedoMap   = _Albedo;
     #endif
@@ -270,12 +270,12 @@ void main()
 	#endif
 
     #ifdef USE_AORM_TEX
-        vec4 AORM        = texture2D(_AORMMap, UV0);
+        vec4 AORM        = texture(_AORMMap, UV0);
     #else
         vec4 AORM        = vec4(1.0, _Roughness, _Metalness, 1.0);
     #endif
     #ifdef USE_NORMAL_TEX
-        vec3 internalNormals = texture2D(_NormalMap, UV0).rgb;
+        vec3 internalNormals = texture(_NormalMap, UV0).rgb;
         internalNormals      = internalNormals * 2.0 - 1.0;
         internalNormals      = normalize(TBN * internalNormals);
     #else
@@ -284,18 +284,18 @@ void main()
 	#ifdef USE_LIGHTMAP
     	#ifndef VERTEX_COLORS
 	        #ifndef LIGHTMAP_IS_RGBE
-                vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
+                vec3 Lightmap = texture(_Lightmap, UV1).rgb;
             #else
-                vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
+                vec3 Lightmap = DecodeRGBE8(texture(_Lightmap, UV1));
             #endif
         #else
             #ifdef VCOL_LIGHTMAP
                 vec3 Lightmap = pow(vertCol.rgb, vec3(2.2));
             #else
   	            #ifndef LIGHTMAP_IS_RGBE
-                    vec3 Lightmap = texture2D(_Lightmap, UV1).rgb;
+                    vec3 Lightmap = texture(_Lightmap, UV1).rgb;
                 #else
-                    vec3 Lightmap = DecodeRGBE8(texture2D(_Lightmap, UV1));
+                    vec3 Lightmap = DecodeRGBE8(texture(_Lightmap, UV1));
                 #endif
             #endif
         #endif
@@ -436,5 +436,6 @@ void main()
 
     col.rgb = pow(col.rgb, vec3(1.0/2.2));
     {{MODULE_COLOR}}
+
     outColor = col;
 }

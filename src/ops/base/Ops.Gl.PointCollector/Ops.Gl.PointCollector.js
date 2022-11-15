@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    outPoints = op.outArray("Points");
+    outPoints = op.outArray("Points", null, 3);
     // outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY)),
 
 outPoints.ignoreValueSerialize = true;

@@ -3,7 +3,7 @@ const
     inX = op.inValueFloat("X", 0),
     inY = op.inValueFloat("Y", 0),
     inZ = op.inValueFloat("Z", 0),
-    outArr = op.outArray("Array"),
+    outArr = op.outArray("Array", null, 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");
 

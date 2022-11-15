@@ -1,11 +1,9 @@
-
-let inArr = op.inArray("Array3x", 3);
-
-let mulX = op.inValue("Mul X", 1);
-let mulY = op.inValue("Mul Y", 1);
-let mulZ = op.inValue("Mul Z", 1);
-
-let outArr = op.outArray("Result");
+const
+    inArr = op.inArray("Array3x", 3),
+    mulX = op.inValue("Mul X", 1),
+    mulY = op.inValue("Mul Y", 1),
+    mulZ = op.inValue("Mul Z", 1),
+    outArr = op.outArray("Result");
 
 let arr = [];
 

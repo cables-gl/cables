@@ -138,6 +138,7 @@ function setupArray()
     const tcArr = inTexCoords.get();
     const scales = inScales.get();
     const useQuats = inRotMeth.get() == "Quaternions";
+    const useNormals = inRotMeth.get() == "Normals";
 
     let stride = 3;
     if (useQuats)stride = 4;
@@ -177,6 +178,32 @@ function setupArray()
                 quat.normalize(q, q);
                 mat4.fromQuat(mq, q);
                 mat4.mul(m, m, mq);
+            }
+            if (useNormals)
+            {
+                // let q = quat.create();
+                // if (rotArr[i + 1] > 0.99999)
+                // {
+                //     q.set(0, 0, 0, 1);
+                // }
+                // else if (rotArr[i + 1] < -0.99999)
+                // {
+                //     q.set(1, 0, 0, 0);
+                // }
+                // else
+                // {
+                //     let axis = vec3.create();
+                //     vec3.set(axis, rotArr[i + 2], 0, -rotArr[i + 0]);
+                //     vec3.normalize(axis, axis);
+                //     let radians = Math.acos(rotArr[i + 1]);
+                //     quat.setAxisAngle(q, axis, radians);
+                // }
+
+                // const mq = mat4.create();
+
+                // quat.normalize(q, q);
+                // mat4.fromQuat(mq, q);
+                // mat4.mul(m, m, mq);
             }
             else
             {
