@@ -1,0 +1,17 @@
+{
+    "id": "69cc5915-fd7f-4c6c-9a8c-8553c6bab0c5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1668508251853
+        },
+        {
+            "message": "Ops.User.pandur.MulMatrixXyz renamed to Ops.Math.MulMatrixXyz",
+            "author": "pandur",
+            "date": 1668527595714
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1668508312343
+}
