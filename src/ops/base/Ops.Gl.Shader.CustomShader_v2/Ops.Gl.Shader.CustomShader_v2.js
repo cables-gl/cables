@@ -27,7 +27,12 @@ op.setPortGroup("Options", [asMaterial]);
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
 
-fragmentShader.onChange = vertexShader.onChange = function () { needsUpdate = true; };
+fragmentShader.onChange = vertexShader.onChange =
+    function ()
+    {
+        if (fragmentShader.isLinked() && !fragmentShader.get()) return;
+        needsUpdate = true;
+    };
 
 render.onTriggered = doRender;
 
@@ -271,6 +276,8 @@ function parseUniforms(src)
 function updateShader()
 {
     if (!shader) return;
+
+    console.log("frag.,..", fragmentShader.isLinked(), fragmentShader.get());
 
     shader.bindTextures = bindTextures.bind(this);
     shader.setSource(vertexShader.get(), fragmentShader.get());

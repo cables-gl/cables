@@ -38,7 +38,7 @@ const
     inRotArr = op.inArray("Rotations"),
 
     next = op.outTrigger("Next"),
-    outArr = op.outArray("Positions Original"),
+    outArr = op.outArray("Positions Original", null, 3),
     outLines = op.outNumber("Num Lines"),
 
     outWidth = op.outNumber("Width"),

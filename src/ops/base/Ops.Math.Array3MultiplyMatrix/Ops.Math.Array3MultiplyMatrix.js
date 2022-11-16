@@ -1,8 +1,8 @@
-let exec = op.inTrigger("Update");
-let inArr = op.inArray("Array");
-let inMat = op.inArray("Matrix");
-
-let outArr = op.outArray("Result");
+const
+    exec = op.inTrigger("Update"),
+    inArr = op.inArray("Array", null, 3),
+    inMat = op.inArray("Matrix", null, 16),
+    outArr = op.outArray("Result", null, 3);
 
 let theArr = [];
 exec.onTriggered = function ()

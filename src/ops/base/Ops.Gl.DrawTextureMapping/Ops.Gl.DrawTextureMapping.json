@@ -11,7 +11,8 @@
             },
             {
                 "type": 2,
-                "name": "Geometry"
+                "name": "Geometry",
+                "objType": "geometry"
             },
             {
                 "type": 0,

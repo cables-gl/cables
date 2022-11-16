@@ -1,6 +1,6 @@
-const inArray1 = op.inArray("Array in 1"),
-    inArray2 = op.inArray("Array in 2"),
-    outArray = op.outArray("Array out"),
+const inArray1 = op.inArray("Array in 1", null, 3),
+    inArray2 = op.inArray("Array in 2", null, 3),
+    outArray = op.outArray("Array out", null, 3),
     newArr = [];
 
 outArray.set(newArr);

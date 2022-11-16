@@ -22,7 +22,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.ToNormalMapV2"
+        "name": "Ops.Gl.TextureEffects.ToNormalMap_v2"
     },
     "credits": [
         {

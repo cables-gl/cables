@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
-    size = op.inValue("Size"),
-    thick = op.inValue("Thickness"),
+    size = op.inValue("Size", 1),
+    thick = op.inValue("Thickness", 0.25),
     target = op.inValueBool("Crosshair"),
     active = op.inValueBool("Active", true),
 
@@ -12,8 +12,9 @@ const cgl = op.patch.cgl;
 let geom = null;
 let mesh = null;
 
-size.set(1.0);
-thick.set(0.25);
+size.onChange =
+    thick.onChange =
+    target.onChange = buildMeshLater;
 
 render.onTriggered = function ()
 {
@@ -24,11 +25,11 @@ render.onTriggered = function ()
 
 function buildMesh()
 {
-    if (!geom)geom = new CGL.Geometry("cubemesh");
+    if (!geom)geom = new CGL.Geometry("crossmesh");
     geom.clear();
 
-    const ext = size.get() / 2.0;
-    const thi = thick.get();
+    let ext = size.get() / 2.0;
+    let thi = thick.get();
 
     if (thi < 0.0)
     {
@@ -173,7 +174,3 @@ function buildMeshLater()
     if (mesh)mesh.dispose();
     mesh = null;
 }
-
-size.onChange = buildMeshLater;
-thick.onChange = buildMeshLater;
-target.onChange = buildMeshLater;

@@ -6,3 +6,4 @@ OUT mat4 instModelMat;
 OUT vec4 frag_instColor;
 
 #define INSTANCING
+

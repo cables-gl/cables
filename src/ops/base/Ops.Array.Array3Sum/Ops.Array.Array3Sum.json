@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "a1e4d85f-0955-4ada-819c-c597cec40365",
-    "created": 1515878597720,
+    "id": "5120ca09-6ce3-457a-afc1-79b15a06137c",
+    "created": 1668507350444,
     "layout": {
         "portsIn": [
             {
@@ -10,17 +10,17 @@
             },
             {
                 "type": 0,
-                "name": "Mul X",
+                "name": "Add X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Mul Y",
+                "name": "Add Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Mul Z",
+                "name": "Add Z",
                 "subType": "number"
             }
         ],
@@ -30,26 +30,14 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.Array3Multiply"
+        "name": "Ops.User.pandur.Array3Sum"
     },
-    "summary": "multiply every XYZ member of array3x",
+    "summary": "",
     "docs": {
         "ports": [
             {
                 "name": "Array3x",
                 "text": "3x array in"
-            },
-            {
-                "name": "Mul X",
-                "text": "Multiply x component by this number"
-            },
-            {
-                "name": "Mul Y",
-                "text": "Multiply y component by this number"
-            },
-            {
-                "name": "Mul Z",
-                "text": "Multiply z component by this number"
             },
             {
                 "name": "Result",
@@ -58,15 +46,23 @@
         ]
     },
     "youtubeid": "",
-    "collections": [
-        "pointArrays"
-    ],
+    "collections": null,
     "relatedops": null,
     "changelog": [
         {
             "message": "Ops.Array.Array3xMultiply renamed to Ops.Array.Array3Multiply",
             "author": "pandur",
             "date": 1560412001933
+        },
+        {
+            "message": "cloned op from Ops.Array.Array3Multiply",
+            "author": "pandur",
+            "date": 1668507350445
+        },
+        {
+            "message": "Ops.User.pandur.Array3Sum renamed to Ops.Array.Array3Sum",
+            "author": "pandur",
+            "date": 1668507552676
         }
     ],
     "exampleProjectId": "8FxmVJ"
