@@ -2,7 +2,7 @@ const
     exe = op.inTrigger("Exe"),
     maxDepth = op.inValue("max Depth", 4),
     deeper = op.inValueSlider("Possibility"),
-    seed = op.inValue("Seed", 5711),
+    seed = op.inValue("Seed", 1),
     inScale = op.inValueSlider("Scale", 1),
     width = op.inValue("Width", 4),
     height = op.inValue("Height", 3),

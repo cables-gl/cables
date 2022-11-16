@@ -5,7 +5,7 @@ const
     outTrigger = op.outTrigger("Trigger out"),
     outGeom = op.outObject("Geometry"),
     pTexCoordRand = op.inValueBool("Scramble Texcoords", true),
-    seed = op.inValue("Seed"),
+    seed = op.inValue("Seed", 1),
     inCoords = op.inArray("Coordinates", 2),
     vertCols = op.inArray("Vertex Colors", 4);
 

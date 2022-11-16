@@ -2,19 +2,19 @@ const
     inExec = op.inTrigger("Update"),
     inFilter = op.inString("Filter", ""),
 
-    inSeed = op.inFloat("Seed", 5711.0),
+    inSeed = op.inFloat("Seed", 1),
 
-    axisX = op.inFloat("Axis X", 0.0),
-    axisY = op.inFloat("Axis Y", 0.0),
-    axisZ = op.inFloat("Axis Z", 0.0),
+    axisX = op.inFloat("Axis X", 0),
+    axisY = op.inFloat("Axis Y", 0),
+    axisZ = op.inFloat("Axis Z", 0),
 
-    rotationX = op.inFloat("Rotation X", 0.0),
-    rotationY = op.inFloat("Rotation Y", 0.0),
-    rotationZ = op.inFloat("Rotation Z", 0.0),
+    rotationX = op.inFloat("Rotation X", 0),
+    rotationY = op.inFloat("Rotation Y", 0),
+    rotationZ = op.inFloat("Rotation Z", 0),
 
-    pivotOffsetX = op.inFloat("Random Pivot Offset X", 0.0),
-    pivotOffsetY = op.inFloat("Random Pivot Offset Y", 0.0),
-    pivotOffsetZ = op.inFloat("Random Pivot Offset Z", 0.0),
+    pivotOffsetX = op.inFloat("Random Pivot Offset X", 0),
+    pivotOffsetY = op.inFloat("Random Pivot Offset Y", 0),
+    pivotOffsetZ = op.inFloat("Random Pivot Offset Z", 0),
 
     next = op.outTrigger("Next"),
     outNum = op.outNumber("Found");

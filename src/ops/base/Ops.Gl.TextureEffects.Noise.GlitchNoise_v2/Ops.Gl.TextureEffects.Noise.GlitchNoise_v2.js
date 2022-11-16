@@ -4,7 +4,7 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
 
-    time = op.inValue("Seed", 0.5),
+    time = op.inValue("Seed", 0),
     inFrequency = op.inValue("frequency", 1),
     inStrength = op.inValue("strength", 8.0),
     inBlockSizeA = op.inValue("Block size small x", 24.0),
