@@ -40,11 +40,6 @@ function showCodeModal(title, code, type)
         "title": title,
         "html": html
     });
-
-    Array.from(document.querySelectorAll("pre code")).forEach(function (block)
-    {
-        hljs.highlightBlock(block);
-    });
 }
 
 showFrag.onTriggered = function ()

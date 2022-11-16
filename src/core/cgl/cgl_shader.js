@@ -1663,7 +1663,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
         let infoLog = cgl.gl.getShaderInfoLog(shader) || "empty shader info log";
         const badLines = getBadLines(infoLog);
-        let htmlWarning = "<div class=\"shaderErrorCode\">";
+        let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
         for (const i in lines)
@@ -1676,9 +1676,19 @@ Shader.createShader = function (cgl, str, type, cglShader)
             for (const bj in badLines)
                 if (badLines[bj] == j) isBadLine = true;
 
-            if (isBadLine) htmlWarning += "<span class=\"error\">";
+            if (isBadLine)
+            {
+                htmlWarning += "</code></pre>";
+                // htmlWarning += "<span class=\"shaderErrorCode error\">";
+                htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\"background-color:#660000;padding-top:0px;padding-bottom:0px\">";
+            }
             htmlWarning += escapeHTML(line);
-            if (isBadLine) htmlWarning += "</span>";
+
+            if (isBadLine)
+            {
+                htmlWarning += "</code></pre>";
+                htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\";padding-top:0px;padding-bottom:0px\">";
+            }
         }
 
         console.warn(infoLog);
@@ -1686,7 +1696,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         infoLog = infoLog.replace(/\n/g, "<br/>");
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
-        htmlWarning += "</div>";
+        htmlWarning += "</code></pre>";
 
         cgl.patch.emitEvent("criticalError", { "title": "Shader error " + this._name, "text": htmlWarning });
         if (cgl.patch.isEditorMode())console.log("Shader error " + this._name, htmlWarning);
