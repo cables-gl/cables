@@ -84,16 +84,6 @@ function loadImage(_i, _url, nocache, cb)
                 ratio.set(tex.width / tex.height);
 
                 arr[i] = tex;
-                if (!tex.isPowerOfTwo()) op.uiAttr(
-                    {
-                        "hint": "texture dimensions not power of two! - texture filtering will not work.",
-                        "warning": null
-                    });
-                else op.uiAttr(
-                    {
-                        "hint": null,
-                        "warning": null
-                    });
 
                 arrOut.set(null);
                 arrOut.set(arr);
@@ -105,12 +95,6 @@ function loadImage(_i, _url, nocache, cb)
                 "filter": cgl_filter
             });
 
-        // textureOut.set(null);
-        // textureOut.set(tex);
-
-        // if(!textureOut.get() && nocache)
-        // {
-        // }
         loading.set(false);
     }
 }
@@ -123,8 +107,6 @@ function realReload(nocache)
 
     if (loadingId)cgl.patch.loading.finished(loadingId);
     loadingId = cgl.patch.loading.start("texturearray", CABLES.uuid());
-
-    // arr.length=files.length;
 
     for (let i = 0; i < files.length; i++)
     {
@@ -160,13 +142,7 @@ function onWrapChange()
 
 op.onFileChanged = function (fn)
 {
-    // if(filename.get() && filename.get().indexOf(fn)>-1)
-    // {
-    //     textureOut.set(null);
-    //     textureOut.set(CGL.Texture.getTempTexture(cgl));
 
-    //     realReload(true);
-    // }
 };
 
 tfilter.set("linear");

@@ -1,5 +1,5 @@
 const inArr = op.inArray("Array1x"),
-    outArr = op.outArray("Array3x"),
+    outArr = op.outArray("Array3x", null, 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");
 

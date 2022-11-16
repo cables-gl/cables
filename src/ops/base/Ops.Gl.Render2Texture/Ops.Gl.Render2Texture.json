@@ -1,5 +1,5 @@
 {
-    "summary": "Render something into an Image",
+    "summary": "Render into an Image",
     "layout": {
         "portsIn": [
             {

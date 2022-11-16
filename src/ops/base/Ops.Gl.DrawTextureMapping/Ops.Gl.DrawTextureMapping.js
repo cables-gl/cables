@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    inGeom = op.inObject("Geometry"),
+    inGeom = op.inObject("Geometry", null, "geometry"),
     numPoints = op.inValue("Num Points"),
     next = op.outTrigger("Next");
 
@@ -14,7 +14,7 @@ inGeom.onChange = function ()
 {
     let geom = inGeom.get();
 
-    if (!geom) return;
+    if (!geom || !geom.verticesIndices) return;
 
     points.length = 0;
     let newgeom = new CGL.Geometry("texturemapping");
