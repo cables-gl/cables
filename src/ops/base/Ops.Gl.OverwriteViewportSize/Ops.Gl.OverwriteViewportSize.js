@@ -1,8 +1,8 @@
 const
-    render = op.inTrigger("Exec");
-next = op.outTrigger("next");
-w = op.inValueInt("Width", 1920);
-h = op.inValueInt("Height", 1080);
+    render = op.inTrigger("Exec"),
+    next = op.outTrigger("next"),
+    w = op.inValueInt("Width", 1920),
+    h = op.inValueInt("Height", 1080);
 
 render.onTriggered = doit;
 
