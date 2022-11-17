@@ -7,7 +7,7 @@ const
     offsetY = op.inFloat("Offset Y", 0),
     zoom = op.inFloat("Zoom", 5),
     iterations = op.inInt("Iterations", 50),
-    randomSeed = op.inInt("Seed", 5711),
+    randomSeed = op.inInt("Seed", 1),
     spotEdge = op.inFloatSlider("Spot edge", 0.5),
     gamma = op.inFloat("Gamma", 0.75),
     trigger = op.outTrigger("trigger");
@@ -30,7 +30,7 @@ const
 
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount,maskAlpha);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
 iterations.onChange = updateIterations;
 updateIterations();
@@ -44,7 +44,7 @@ function updateIterations()
 
 render.onTriggered = function ()
 {
-    if (!CGL.TextureEffect.checkOpInEffect(op,3)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op, 3)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();

@@ -1,6 +1,6 @@
 const
     inArr = op.inArray("Array3"),
-    inSeed = op.inFloat("Seed", 5711),
+    inSeed = op.inFloat("Seed", 1),
     outArr = op.outArray("Result");
 
 const newArr = [];

@@ -705,7 +705,7 @@ Port.prototype.getType = function ()
  */
 Port.prototype.isLinked = function ()
 {
-    return this.links.length > 0 || this._animated || this._useVariableName;
+    return this.links.length > 0 || this._animated || this._useVariableName != null;
 };
 
 Port.prototype.isBoundToVar = function ()

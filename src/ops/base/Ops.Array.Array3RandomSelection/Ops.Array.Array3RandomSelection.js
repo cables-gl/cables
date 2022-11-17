@@ -1,7 +1,7 @@
 const
     inArray = op.inArray("Array", 3),
     inNum = op.inValueInt("Elements", 10),
-    inSeed = op.inValue("Seed", 0),
+    inSeed = op.inValue("Seed", 1),
     result = op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");
