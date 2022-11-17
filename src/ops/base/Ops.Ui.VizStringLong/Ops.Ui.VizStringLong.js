@@ -74,7 +74,7 @@ op.renderVizLayer = (ctx, layer) =>
     {
         const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + 5, 0, layer.y / layer.scale + gradHeight);
         radGrad.addColorStop(0, "#222");
-        radGrad.addColorStop(1, "rgba(22,22,22,0.0)");
+        radGrad.addColorStop(1, "rgba(34,34,34,0.0)");
         ctx.fillStyle = radGrad;
         ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale, 200000, gradHeight);
     }
@@ -83,7 +83,7 @@ op.renderVizLayer = (ctx, layer) =>
     {
         const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + 5, 0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + gradHeight);
         radGrad.addColorStop(1, "#222");
-        radGrad.addColorStop(0, "rgba(22,22,22,0.0)");
+        radGrad.addColorStop(0, "rgba(34,34,34,0.0)");
         ctx.fillStyle = radGrad;
         ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale + layer.height / layer.scale - gradHeight, 200000, gradHeight);
     }

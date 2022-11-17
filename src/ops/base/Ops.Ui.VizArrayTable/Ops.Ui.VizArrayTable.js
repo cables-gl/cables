@@ -35,6 +35,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     for (let i = offset; i < offset + lines * stride; i += stride)
     {
+        if (i < 0) continue;
         if (i + stride > arr.length) continue;
 
         ctx.fillStyle = "#666";
@@ -86,6 +87,26 @@ op.renderVizLayer = (ctx, layer) =>
                 layer.x / layer.scale + s * 100 + 50,
                 layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
         }
+    }
+
+    const gradHeight = 30;
+
+    if (offset > 0)
+    {
+        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + 5, 0, layer.y / layer.scale + gradHeight);
+        radGrad.addColorStop(0, "#222");
+        radGrad.addColorStop(1, "rgba(34,34,34,0.0)");
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale, 200000, gradHeight);
+    }
+
+    if (offset + lines * stride < arr.length)
+    {
+        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + 5, 0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + gradHeight);
+        radGrad.addColorStop(1, "#222");
+        radGrad.addColorStop(0, "rgba(34,34,34,0.0)");
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale + layer.height / layer.scale - gradHeight, 200000, gradHeight);
     }
 
     ctx.restore();
