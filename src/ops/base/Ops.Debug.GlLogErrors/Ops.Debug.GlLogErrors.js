@@ -22,7 +22,6 @@ next.onLinkChanged = () =>
     shouldStart = true;
 };
 
-console.log("[gl context info]", op.patch.cgl.getInfo());
 
 let showHistory = false;
 

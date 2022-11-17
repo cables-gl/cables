@@ -94,7 +94,6 @@ function camInitComplete(stream)
     videoElement.onloadedmetadata = function (e)
     {
         available.set(true);
-        console.log(videoElement);
 
         outHeight.set(videoElement.videoHeight);
         outWidth.set(videoElement.videoWidth);

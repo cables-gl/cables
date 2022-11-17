@@ -71,9 +71,18 @@ inAsDOM.onChange = inCss.onChange = updateStyle;
 
 initTexture();
 updateStyle();
-initDevices();
 
 let tc = null;
+
+op.on("loadedValueSet", () =>
+{
+    if (inActive.get()) initDevices();
+});
+
+inActive.onChange = () =>
+{
+    if (inActive.get()) initDevices();
+};
 
 function initCopyShader()
 {
@@ -257,6 +266,7 @@ function getCamConstraints()
 
 function restartWebcam()
 {
+    if (!inActive.get()) return;
     stopStream();
     restarting = true;
 
@@ -284,6 +294,7 @@ function restartWebcam()
 
 function initDevices()
 {
+    if (!inActive.get()) return;
     initingDevices = true;
     loadingId = cgl.patch.loading.start("Webcam inputs", "");
     const constraints = getCamConstraints();
