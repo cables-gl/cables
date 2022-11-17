@@ -6,7 +6,7 @@ const
     trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.objName);
+const shader = new CGL.Shader(cgl, "Alpha");
 const TEX_SLOT = 0;
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.clearAlpha_frag || "");
