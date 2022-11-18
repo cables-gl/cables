@@ -1,0 +1,82 @@
+{
+    "id": "6d1edbc0-088a-43d7-9156-918fb3d7f24b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1668760304023
+        },
+        {
+            "message": "Ops.User.pandur.MouseV3 renamed to Ops.Devices.Mouse.Mouse_v3",
+            "author": "pandur",
+            "date": 1668766229733
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Coordinates index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "flip y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "right click prevent default",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Touch support",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "click"
+            },
+            {
+                "type": 1,
+                "name": "click right"
+            },
+            {
+                "type": 0,
+                "name": "Button is down",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mouse is hovering",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.MouseV3"
+    },
+    "authorName": "pandur",
+    "created": 1668760408364
+}
