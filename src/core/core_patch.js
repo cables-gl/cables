@@ -992,6 +992,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i].onLoadedValueSet = null;
             this.ops[i]._origData = null;
         }
+        this.ops[i].emitEvent("loadedValueSet");
     }
 
     // create links...

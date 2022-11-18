@@ -3,7 +3,6 @@ const
     inActive = op.inBool("Active", true),
     inGenTex = op.inValueBool("Generate Texture", true),
     inInputDevices = op.inDropDown("Webcam Input", ["Default"], "Default"),
-    // inFacing = op.inSwitch("Facing", ["environment", "user"], "environment"),
     inWidth = op.inValueInt("Requested Width", 1280),
     inHeight = op.inValueInt("Requested Height", 720),
 
@@ -71,9 +70,18 @@ inAsDOM.onChange = inCss.onChange = updateStyle;
 
 initTexture();
 updateStyle();
-initDevices();
 
 let tc = null;
+
+op.on("loadedValueSet", () =>
+{
+    if (inActive.get()) initDevices();
+});
+
+inActive.onChange = () =>
+{
+    if (inActive.get()) initDevices();
+};
 
 function initCopyShader()
 {
@@ -257,6 +265,7 @@ function getCamConstraints()
 
 function restartWebcam()
 {
+    if (!inActive.get()) return;
     stopStream();
     restarting = true;
 
@@ -284,6 +293,7 @@ function restartWebcam()
 
 function initDevices()
 {
+    if (!inActive.get()) return;
     initingDevices = true;
     loadingId = cgl.patch.loading.start("Webcam inputs", "");
     const constraints = getCamConstraints();

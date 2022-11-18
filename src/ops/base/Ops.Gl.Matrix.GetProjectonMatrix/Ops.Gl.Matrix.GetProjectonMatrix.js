@@ -1,16 +1,17 @@
-let cgl = op.patch.cgl;
-let render = op.inTrigger("render");
-let trigger = op.outTrigger("trigger");
+const
+    cgl = op.patch.cgl,
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger"),
+    matrix = op.outArray("matrix", null, 16);
 
 let m = mat4.create();
-let matrix = op.addOutPort(new CABLES.Port(this, "matrix", CABLES.OP_PORT_TYPE_ARRAY));
+mat4.identity(m);
+matrix.set(m);
 
 render.onTriggered = function ()
 {
-    // mat4.copy(m, cgl.pMatrix);
+    mat4.copy(m, cgl.pMatrix);
     matrix.set(null);
-    matrix.set(cgl.pMatrix);
+    matrix.set(m);
     trigger.trigger();
 };
-
-matrix.set([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);

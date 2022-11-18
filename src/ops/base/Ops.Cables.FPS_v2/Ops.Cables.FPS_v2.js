@@ -3,9 +3,11 @@ const
     outFPS = op.outNumber("FPS"),
     outMS = op.outNumber("MS");
 
+const listener = op.patch.addEventListener("performance", update);
+
 op.onDelete = function ()
 {
-    op.patch.removeEventListener("performance", update);
+    op.patch.removeEventListener(listener);
 };
 
 function update(p)
@@ -16,5 +18,3 @@ function update(p)
         outMS.set(p.ms);
     }
 }
-
-op.patch.addEventListener("performance", update);

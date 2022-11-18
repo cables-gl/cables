@@ -7,13 +7,9 @@ const
     inStop = op.inTriggerButton("Stop"),
     inShowButton = op.inBool("Show Button", true),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\ntransform: translate(-50%,-50%);\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");", "inline-css"),
-
     inRender2Tex = op.inBool("Render to texture", false),
-
     inShader = op.inObject("Shader", null, "shader"),
-
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
-
     next = op.outTrigger("Next"),
     nextPre = op.outTrigger("Render After Eyes"),
     outPose = op.outObject("Viewer Pose"),
@@ -48,13 +44,14 @@ let xrViewerPose = null;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
-if (xr) xr.isSessionSupported("immersive-vr").then((r) =>
-{
-    outVr.set(true);
+if (xr) xr.isSessionSupported("immersive-vr").then(
+    (r) =>
+    {
+        outVr.set(true);
 
-    if (r) initButton();
-    else removeButton();
-});
+        if (r) initButton();
+        else removeButton();
+    });
 else removeButton();
 
 op.onDelete = () =>

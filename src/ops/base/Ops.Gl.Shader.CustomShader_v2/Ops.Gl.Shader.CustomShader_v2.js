@@ -277,8 +277,6 @@ function updateShader()
 {
     if (!shader) return;
 
-    console.log("frag.,..", fragmentShader.isLinked(), fragmentShader.get());
-
     shader.bindTextures = bindTextures.bind(this);
     shader.setSource(vertexShader.get(), fragmentShader.get());
 

@@ -68,5 +68,25 @@ op.renderVizLayer = (ctx, layer) =>
             layer.y / layer.scale + lineHeight + (i - offset) * lineHeight + padding);
     }
 
+    const gradHeight = 30;
+
+    if (offset > 0)
+    {
+        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + 5, 0, layer.y / layer.scale + gradHeight);
+        radGrad.addColorStop(0, "#222");
+        radGrad.addColorStop(1, "rgba(34,34,34,0.0)");
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale, 200000, gradHeight);
+    }
+
+    if (offset + numLines < lines.length)
+    {
+        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + 5, 0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + gradHeight);
+        radGrad.addColorStop(1, "#222");
+        radGrad.addColorStop(0, "rgba(34,34,34,0.0)");
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale + layer.height / layer.scale - gradHeight, 200000, gradHeight);
+    }
+
     ctx.restore();
 };
