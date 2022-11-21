@@ -354,15 +354,14 @@ Patch.getOpClass = function (objName)
     }
 };
 
-Patch.prototype.createOp = function (identifier, id)
+Patch.prototype.createOp = function (identifier, id, opName = null)
 {
-    const parts = identifier.split(".");
     let op = null;
     let objName = "";
 
     try
     {
-        if (identifier.indexOf("Ops.") == -1)
+        if (identifier.indexOf("Ops.") === -1)
         {
             // this should be a uuid, not a namespace
             // creating ops by id should be the default way from now on!
@@ -376,7 +375,15 @@ Patch.prototype.createOp = function (identifier, id)
             }
             else
             {
-                throw new Error("could not find op by id: " + opId);
+                if (opName)
+                {
+                    identifier = opName;
+                    this._log.warn("could not find op by id: " + opId);
+                }
+                else
+                {
+                    throw new Error("could not find op by id: " + opId);
+                }
             }
         }
 
@@ -384,6 +391,7 @@ Patch.prototype.createOp = function (identifier, id)
         {
             // fallback: create by objname!
             objName = identifier;
+            const parts = identifier.split(".");
             const opObj = Patch.getOpClass(objName);
 
             if (!opObj)
@@ -451,15 +459,18 @@ Patch.prototype.createOp = function (identifier, id)
  * @function addOp
  * @memberof Patch
  * @instance
- * @param {String} objName, e.g. Ops.Math.Sum
- * @param {Object} UI Attributes
+ * @param {String} opIdentifier, uuid or name, e.g. Ops.Math.Sum
+ * @param {Object} uiAttribs Attributes
+ * @param {String} id
+ * @param {boolean} fromDeserialize
+ * @param {String} opName, e.g. Ops.Math.Sum
  * @example
  * // add invisible op
  * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
  */
-Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
+Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, opName)
 {
-    const op = this.createOp(opIdentifier, id);
+    const op = this.createOp(opIdentifier, id, opName);
 
     if (op)
     {
@@ -981,7 +992,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
         try
         {
-            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true);
+            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true, opData.objName);
             else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true);
         }
         catch (e)
