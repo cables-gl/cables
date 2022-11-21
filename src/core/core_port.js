@@ -67,6 +67,13 @@ const Port = function (__parent, name, type, uiAttribs)
 
     this._tempLastUiValue = null;
 
+    Object.defineProperty(this, "title", {
+        get()
+        {
+            return this.uiAttribs.title || this.name;
+        } });
+
+
     Object.defineProperty(this, "val", {
         get()
         {

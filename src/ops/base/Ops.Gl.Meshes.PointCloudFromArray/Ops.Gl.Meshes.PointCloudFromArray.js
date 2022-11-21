@@ -20,8 +20,11 @@ let texCoords = [];
 let needsRebuild = true;
 let showingError = false;
 
-inCoords.onChange = updateTexCoordsPorts;
-pTexCoordRand.onChange = updateTexCoordsPorts;
+arr.setUiAttribs({ "title": "Positions" });
+inCoords.setUiAttribs({ "title": "Texture Coordinates" });
+
+inCoords.onChange =
+    pTexCoordRand.onChange = updateTexCoordsPorts;
 vertCols.onChange = updateVertCols;
 seed.onChange = arr.onChange = reset;
 numPoints.onChange = updateNumVerts;
