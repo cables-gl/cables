@@ -2,7 +2,7 @@ const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, op.name);
 
 const srcFrag = ""
 
@@ -33,7 +33,6 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
