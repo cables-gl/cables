@@ -3,7 +3,7 @@ const
     inArr1 = op.inArray("Array 1"),
     inArr2 = op.inArray("Array 2"),
     exeOut = op.outTrigger("Trigger out"),
-    outArr = op.outArray("Array out"),
+    outArr = op.outArray("Array out", null, 2),
     outArrayLength = op.outNumber("Array length");
 
 let showingError = false;
