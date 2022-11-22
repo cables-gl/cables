@@ -10,7 +10,7 @@ const
     inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions"], "Euler"),
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
     inColor = op.inArray("Colors", 4),
-    inTexCoords = op.inArray("TexCoords", 2),
+    inTexCoords = op.inArray("TexCoords", 4),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outNumber("Num");
 

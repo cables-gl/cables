@@ -1,0 +1,28 @@
+{
+    "id": "c8aee7f4-ad53-406d-b7fe-527bf271c088",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1668774374332
+        },
+        {
+            "message": "Ops.User.pandur.timelinelength renamed to Ops.TimeLine.TimeLineLength",
+            "author": "pandur",
+            "date": 1668775132272
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1668774377580,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLineLength"
+    }
+}
