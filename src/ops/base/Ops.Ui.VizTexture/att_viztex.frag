@@ -77,7 +77,8 @@ void main()
                 depth = texCube(cubeMap, dir);
             }
         }
-        colTex = vec4(vec3(depth),1.);
+        // colTex = vec4(vec3(depth),1.);
+        colTex = vec4(depth);
     }
 
     if(type==2.0)

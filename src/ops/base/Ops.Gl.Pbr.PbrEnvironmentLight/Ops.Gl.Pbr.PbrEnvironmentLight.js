@@ -191,6 +191,7 @@ function captureIrradianceCubemap(size)
     {
         IrradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
             "isFloatingPointTexture": false,
+            "clear": false,
             "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
@@ -208,8 +209,8 @@ function captureIrradianceCubemap(size)
     {
         IrradianceFrameBuffer.renderStartCubemapFace(i);
 
-        cgl.gl.clearColor(0, 0, 0, 0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        //  cgl.gl.clearColor(0, 0, 0, 0);
+        // if(i==0) cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
         mesh.render(IrradianceShader);
         IrradianceFrameBuffer.renderEndCubemapFace();
     }
@@ -224,6 +225,7 @@ function capturePrefilteredCubemap(size)
     size = Number(size);
     let captureFBO = new CGL.CubemapFramebuffer(cgl, size, size, {
         // "isFloatingPointTexture": true,
+        "clear": false,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
@@ -236,6 +238,7 @@ function capturePrefilteredCubemap(size)
     {
         PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
             "isFloatingPointTexture": false,
+            "clear": false,
             "filter": CGL.Texture.FILTER_MIPMAP,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
         });
@@ -268,8 +271,10 @@ function capturePrefilteredCubemap(size)
         for (let i = 0; i < 6; i += 1)
         {
             captureFBO.renderStartCubemapFace(i);
-            cgl.gl.clearColor(0, 0, 0, 0);
-            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
+            // if(i==0)cgl.gl.clearColor(0, 0.1, 0.2, 0);
+            // if(i==0)cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
             mesh.render(PrefilteringShader);
             cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
             cgl.gl.copyTexImage2D(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X + i, mip, cgl.gl.RGBA, 0, 0, Number(currentMipSize), Number(currentMipSize), null);
