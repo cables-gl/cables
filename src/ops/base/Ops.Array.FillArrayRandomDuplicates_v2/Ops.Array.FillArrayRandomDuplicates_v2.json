@@ -1,0 +1,74 @@
+{
+    "id": "cbf5f595-9fbe-45a9-a324-5089665e8e51",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1548778701055
+        },
+        {
+            "message": "added random seed input port",
+            "author": "andro",
+            "date": 1549628305371
+        },
+        {
+            "message": "cloned op from Ops.Array.FillArrayRandomDuplicates",
+            "author": "pandur",
+            "date": 1669208812092
+        },
+        {
+            "message": "Ops.User.pandur.FillArrayRandomDuplicatesV2 renamed to Ops.Array.FillArrayRandomDuplicates_v2",
+            "author": "pandur",
+            "date": 1669209275470
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1669208812091,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Num Elements",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Random seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.FillArrayRandomDuplicatesV2"
+    },
+    "summary": "Fill an array with random duplicates",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array used to get random values from"
+            },
+            {
+                "name": "Num Elements",
+                "text": "The length of the new array"
+            },
+            {
+                "name": "Result",
+                "text": "The generated array with the new values."
+            }
+        ]
+    },
+    "exampleProjectId": "z4S3dz"
+}
