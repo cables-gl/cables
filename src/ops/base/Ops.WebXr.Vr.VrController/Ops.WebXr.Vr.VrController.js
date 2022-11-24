@@ -92,10 +92,18 @@ function setGamepadValues(gp)
     outButton1.set(gp.buttons[0].pressed);
     outButton2.set(gp.buttons[1].pressed);
     outButton3.set(gp.buttons[2].pressed);
+    outButton4.set(gp.buttons[3].pressed);
+    outButton5.set(gp.buttons[4].pressed);
+    outButton6.set(gp.buttons[5].pressed);
+    outButton7.set(gp.buttons[6].pressed);
 
     outButton1Touch.set(gp.buttons[0].touched);
     outButton2Touch.set(gp.buttons[1].touched);
     outButton3Touch.set(gp.buttons[2].touched);
+    outButton4Touch.set(gp.buttons[3].touched);
+    outButton5Touch.set(gp.buttons[4].touched);
+    outButton6Touch.set(gp.buttons[5].touched);
+    outButton7Touch.set(gp.buttons[6].touched);
 
     const g = { "buttons": gp.buttons,
         "axes": gp.axes,

@@ -152,6 +152,8 @@ function onXRFrame(hrTime, xrFrame)
         cgl.gl.clearColor(0, 0, 0, 1);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
+        op.patch.cg = cgl;
+
         for (let i = 0; i < xrViewerPose.views.length; i++)
         {
             let start = performance.now();
@@ -201,6 +203,7 @@ function onXRFrame(hrTime, xrFrame)
 
         CGL.MESH.lastShader = null;
         CGL.MESH.lastMesh = null;
+        op.patch.cg = null;
     }
     catch (e)
     {
