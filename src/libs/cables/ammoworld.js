@@ -12,6 +12,7 @@ const AmmoWorld = class extends CABLES.EventTarget
         this._bodymeta = {};
         this.lastTime = performance.now();
         this._collisions = [];
+        this.autoRemove = true;
 
         this.setupWorld();
     }
@@ -143,7 +144,7 @@ const AmmoWorld = class extends CABLES.EventTarget
 
         this.world.stepSimulation(deltaTime, 5);
 
-        this._pingTimeout();
+        if (this.autoRemove) this._pingTimeout();
         this._checkCollisions();
 
         this.lastTime = performance.now();
