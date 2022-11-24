@@ -3,6 +3,9 @@ const
     inputb = op.inObject("b", null, "sg_genType"),
     outvec = op.outObject("result", null, "sg_genType");
 
+inputa.setUiAttribs({ "ignoreObjTypeErrors": true });
+inputb.setUiAttribs({ "ignoreObjTypeErrors": true });
+
 new CGL.ShaderGraphOp(this);
 
 inputb.onLinkChanged =
