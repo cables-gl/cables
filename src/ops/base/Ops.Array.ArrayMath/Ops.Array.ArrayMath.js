@@ -15,6 +15,11 @@ mathSelect.onChange = onFilterChange;
 
 onFilterChange();
 
+inArray_0.onLinkChanged = () =>
+{
+    if (inArray_0) inArray_0.copyLinkedUiAttrib("stride", outArray);
+};
+
 function onFilterChange()
 {
     let mathSelectValue = mathSelect.get();

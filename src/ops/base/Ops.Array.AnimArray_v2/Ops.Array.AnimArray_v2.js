@@ -28,6 +28,11 @@ inTrigger.onTriggered = () =>
     if (arr1 && arr2) ipMat(perc);
 };
 
+inArr.onLinkChanged = () =>
+{
+    if (inArr) inArr.copyLinkedUiAttrib("stride", outArr);
+};
+
 function copyArray(a)
 {
     let b = [];
