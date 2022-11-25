@@ -13,7 +13,7 @@ data.onChange = update;
 
 function update()
 {
-    if (data.get() && data.get().hasOwnProperty(key.get()))
+    if (data.get())
     {
         result.set(data.get()[key.get()]);
     }
