@@ -7,6 +7,7 @@ let lastWidth;
 let lastHeight;
 let fb;
 let lastFloatingPoint;
+let lastRead = 0;
 const arr = [];
 
 inTex.onLinkChanged = () =>
@@ -35,8 +36,6 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (!fb) fb = gl.createFramebuffer();
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-
     let channels = gl.RGBA;
     let numChannels = 4;
 
@@ -45,10 +44,14 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (texChanged)
     {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+
         gl.framebufferTexture2D(
             gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
             gl.TEXTURE_2D, realTexture.tex, 0
         );
+
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
         let isFloatingPoint = realTexture.isFloatingPoint();
         if (isFloatingPoint) channelType = gl.FLOAT;
@@ -70,25 +73,32 @@ op.renderVizLayer = (ctx, layer) =>
         texChanged = false;
     }
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-
     let texRows = Math.max(1, Math.ceil(lines / realTexture.width));
     texRows = Math.min(texRows, realTexture.height);
-
-    const readW = realTexture.width;
+    let readW = realTexture.width;
+    if (lines / realTexture.width < 1)readW = realTexture.width * lines / realTexture.width;
     const readH = texRows;
+    let readPixels = false;
 
-    gl.readPixels(
-        0,
-        realTexture.height - texRows,
-        readW,
-        readH,
-        channels,
-        channelType,
-        pixelData
-    );
+    if (performance.now() - lastRead > 100)readPixels = true;
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    if (readPixels)
+    {
+        lastRead = performance.now();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+
+        gl.readPixels(
+            0,
+            realTexture.height - texRows,
+            readW,
+            readH,
+            channels,
+            channelType,
+            pixelData
+        );
+
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    }
 
     arr.length = pixelData.length;
     let stride = 4;
@@ -129,8 +139,6 @@ op.renderVizLayer = (ctx, layer) =>
 
             ctx.fillStyle = "#ccc";
 
-            // if (i + stride > arr.length) continue;
-
             for (let s = 0; s < stride; s++)
             {
                 let v = arr[i + s];
@@ -142,6 +150,17 @@ op.renderVizLayer = (ctx, layer) =>
                 ctx.fillText(str, layer.x / layer.scale + s * 60 + 70, layer.y / layer.scale + 10 + (i / stride) * 10 + padding);
             }
         }
+
+    const gradHeight = 30;
+
+    if (lines < readH * readW)
+    {
+        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + 5, 0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + gradHeight);
+        radGrad.addColorStop(1, "#222");
+        radGrad.addColorStop(0, "rgba(34,34,34,0.0)");
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale + layer.height / layer.scale - gradHeight, 200000, gradHeight);
+    }
 
     ctx.restore();
 };
