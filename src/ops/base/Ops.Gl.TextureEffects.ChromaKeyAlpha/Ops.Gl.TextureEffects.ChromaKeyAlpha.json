@@ -1,0 +1,55 @@
+{
+    "id": "5614f8a5-7267-4ed6-9cf9-b4a3c7531f7d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1669366604638
+        },
+        {
+            "message": "Ops.User.pandur.ChromaKeyTexEff renamed to Ops.Gl.TextureEffects.ChromaKeyAlpha",
+            "author": "pandur",
+            "date": 1669374777256
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1669366610877,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "WeightMul",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.pandur.ChromaKeyTexEff"
+    }
+}
