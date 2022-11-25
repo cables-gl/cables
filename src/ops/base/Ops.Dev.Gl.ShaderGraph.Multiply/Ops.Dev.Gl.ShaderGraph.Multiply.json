@@ -44,7 +44,7 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.Gl.ShaderGraph.Multiply"
+        "name": "Ops.Dev.Gl.ShaderGraph.Multiply"
     },
     "coreLibs": [
         "cgl_shadergraph"

@@ -53,6 +53,11 @@ function getDivisors()
     if (divisorDown <= 1.0) divisorDown = 1.0;
 }
 
+inArray.onLinkChanged = () =>
+{
+    if (inArray) inArray.copyLinkedUiAttrib("stride", outArray);
+};
+
 inArray.onChange = function ()
 {
     let arr = inArray.get();

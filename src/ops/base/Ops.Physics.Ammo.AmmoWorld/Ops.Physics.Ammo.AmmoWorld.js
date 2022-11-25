@@ -1,6 +1,7 @@
 const
     inExec = op.inTrigger("Update"),
     inSim = op.inBool("Simulate", true),
+    inAutoRemove = op.inBool("Auto Remove Inactive", true),
 
     inGravX = op.inFloat("Gravity X", 0),
     inGravY = op.inFloat("Gravity Y", -9.81),
@@ -78,6 +79,8 @@ function update()
     outNumBodies.set(ammoWorld.numBodies());
     outBodiesMeta.set(ammoWorld.getListBodies());
     outCollisions.set(ammoWorld.getCollisions());
+
+    ammoWorld.autoRemove = inAutoRemove.get();
 
     next.trigger();
 

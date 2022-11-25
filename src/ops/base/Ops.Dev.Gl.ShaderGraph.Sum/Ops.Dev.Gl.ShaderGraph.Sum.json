@@ -29,22 +29,22 @@
             {
                 "type": 2,
                 "name": "a",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             },
             {
                 "type": 2,
                 "name": "b",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.ShaderGraph.Sum"
+        "name": "Ops.Dev.Gl.ShaderGraph.Sum"
     },
     "summary": "sum",
     "issues": "",

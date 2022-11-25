@@ -18,6 +18,12 @@ inValue.onChange = inArray.onChange = function ()
     {
         newArr[i] = arr[i] * mul;
     }
+
     outArray.set(null);
     outArray.set(newArr);
+};
+
+inArray.onLinkChanged = () =>
+{
+    if (inArray) inArray.copyLinkedUiAttrib("stride", outArray);
 };

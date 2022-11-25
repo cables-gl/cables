@@ -6,6 +6,9 @@ const
 new CGL.ShaderGraphOp(this);
 op.shaderCodeOperator = "+";
 
+inputa.setUiAttribs({ "ignoreObjTypeErrors": true });
+inputb.setUiAttribs({ "ignoreObjTypeErrors": true });
+
 inputb.onLinkChanged =
 inputa.onLinkChanged = () =>
 {

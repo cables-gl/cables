@@ -93,6 +93,32 @@ const Port = function (__parent, name, type, uiAttribs)
     });
 };
 
+
+/**
+ * copy over a uiattrib from an external connected port to another port
+ * @function copyLinkedUiAttrib
+ * @memberof Port
+ * @param {which} attrib name
+ * @param {Port} source port
+ * @instance
+ * @example
+
+inArray.onLinkChanged=()=>
+{
+    if(inArray) inArray.copyLinkedUiAttrib("stride", outArray);
+};
+
+ */
+Port.prototype.copyLinkedUiAttrib = function (which, port)
+{
+    if (!CABLES.UI) return;
+    if (!this.isLinked()) return;
+
+    const attr = {};
+    attr[which] = this.links[0].getOtherPort(this).getUiAttrib(which);
+    port.setUiAttribs(attr);
+};
+
 Port.prototype.getValueForDisplay = function ()
 {
     let str = String(this.value);
@@ -159,6 +185,7 @@ Port.prototype.remove = function ()
  * hideParam - port params will be hidden from parameter panel
  * showIndex - only for dropdowns - show value index (e.g. `0 - normal` )
  * editorSyntax - set syntax highlighting theme for editor port
+ * ignoreObjTypeErrors - do not auto check object types
  * </pre>
  * @example
  * myPort.setUiAttribs({greyout:true});

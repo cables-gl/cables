@@ -48,6 +48,11 @@ op.renderVizLayer = (ctx, layer) =>
     try
     {
         str = JSON.stringify(obj, false, 4);
+
+        if (str == "{}" && obj.constructor && obj.constructor.name != "Object")
+        {
+            str = obj.constructor.name + "()\n" + str;
+        }
     }
     catch (e)
     {

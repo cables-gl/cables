@@ -176,7 +176,7 @@ class ShaderGraphOp
             {
                 const port = this._op.getPort(f.params[p].name) || this._op.inObject(f.params[p].name);
 
-                port.setUiAttribs({ "objType": "sg_" + f.params[p].type });
+                port.setUiAttribs({ "objType": "sg_" + f.params[p].type, "ignoreObjTypeErrors": true });
 
                 this._inPorts.push(port);
 

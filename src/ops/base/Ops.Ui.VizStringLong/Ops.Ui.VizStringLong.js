@@ -45,6 +45,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     offset = Math.max(offset, 0);
     offset = Math.min(offset, lines.length - numLines);
+    if (lines.length < numLines)offset = 0;
 
     const offsetLeft = ((offset + numLines + " ").length - 1) * 9.5;
 

@@ -50,6 +50,11 @@
             },
             {
                 "type": 0,
+                "name": "Auto Remove Inactive",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Gravity X",
                 "group": "Gravity",
                 "subType": "number"
