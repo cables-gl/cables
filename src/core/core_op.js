@@ -855,7 +855,7 @@ const Op = function ()
     Op.prototype.outObject = function (name, v, objType)
     {
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType || null }));
-        if (v !== undefined) p.set(v);
+        p.set(v || null);
         p.ignoreValueSerialize = true;
         return p;
     };
@@ -1136,17 +1136,6 @@ const Op = function ()
         Function.prototype.apply.apply(console.info, [console, args]);// eslint-disable-line
     };
 
-    /**
-     * disconnect all links
-     * @function
-     * @instance
-     * @memberof Op
-     */
-    Op.prototype.unLink = function ()
-    {
-        for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
-        for (let ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi].removeLinks();
-    };
 
     Op.prototype.profile = function (enable)
     {

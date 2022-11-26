@@ -1,15 +1,24 @@
-const inArr = op.inObject("Object");
+const
+    inObj = op.inObject("Object"),
+    inConsole = op.inTriggerButton("console log");
+
+inConsole.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
-inArr.onLinkChanged = () =>
+inObj.onLinkChanged = () =>
 {
-    if (inArr.isLinked())
+    if (inObj.isLinked())
     {
-        const p = inArr.links[0].getOtherPort(inArr);
+        const p = inObj.links[0].getOtherPort(inObj);
 
         op.setUiAttrib({ "extendTitle": p.uiAttribs.objType });
     }
+};
+
+inConsole.onTriggered = () =>
+{
+    console.log(inObj.get());
 };
 
 op.renderVizLayer = (ctx, layer) =>
@@ -22,9 +31,9 @@ op.renderVizLayer = (ctx, layer) =>
 
     ctx.font = "normal 10px sourceCodePro";
     ctx.fillStyle = "#ccc";
-
-    let obj = inArr.get();
     const padding = 10;
+
+    let obj = inObj.get();
 
     let str = "???";
 
@@ -45,13 +54,25 @@ op.renderVizLayer = (ctx, layer) =>
         obj = o;
     }
 
+    if (obj && obj.constructor && obj.constructor.name != "Object")
+    {
+        // str =  + "()\n" + str;
+        op.setUiAttribs({ "extendTitle": obj.constructor.name });
+    }
+
     try
     {
         str = JSON.stringify(obj, false, 4);
 
-        if (str == "{}" && obj.constructor && obj.constructor.name != "Object")
+        if (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object")
         {
-            str = obj.constructor.name + "()\n" + str;
+            str = "could not stringify object: " + obj.constructor.name + "\n";
+
+            if (obj) for (let i in obj)
+            {
+                str += "\n" + i + " (" + typeof obj[i] + ")";
+                // console.log(i)
+            }
         }
     }
     catch (e)
