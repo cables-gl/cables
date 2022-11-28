@@ -67,7 +67,15 @@
             "message": "Ops.User.cables.Output_v2 renamed to Ops.WebAudio.Output_v2",
             "author": "cables",
             "date": 1606756509626
+        },
+        {
+            "message": " added core lib: interactionneededbutton",
+            "author": "pandur",
+            "date": 1669644919920
         }
     ],
-    "exampleProjectId": "teZhCp"
+    "exampleProjectId": "teZhCp",
+    "coreLibs": [
+        "interactionneededbutton"
+    ]
 }

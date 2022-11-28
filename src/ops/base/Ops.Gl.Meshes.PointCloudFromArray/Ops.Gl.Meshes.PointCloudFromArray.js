@@ -26,8 +26,9 @@ inCoords.setUiAttribs({ "title": "Texture Coordinates" });
 inCoords.onChange =
     pTexCoordRand.onChange = updateTexCoordsPorts;
 vertCols.onChange = updateVertCols;
-seed.onChange = arr.onChange = reset;
 numPoints.onChange = updateNumVerts;
+seed.onChange =
+    arr.onChange;
 vertCols.onLinkChanged = reset;
 exe.onTriggered = doRender;
 
