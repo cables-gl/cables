@@ -1,6 +1,7 @@
-let inArray = op.inArray("In");
-let inValue = op.inValue("Value", 1.0);
-let outArray = op.outArray("Result");
+const
+    inArray = op.inArray("In"),
+    inValue = op.inValue("Value", 1.0),
+    outArray = op.outArray("Result");
 
 let newArr = [];
 outArray.set(newArr);

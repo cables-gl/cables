@@ -11,9 +11,11 @@ let mesh = null;
 let geom = new CGL.Geometry("fullscreen rectangle");
 let x = 0, y = 0, z = 0, w = 0, h = 0;
 
-// inScale.onChange = rebuild;
 flipX.onChange = rebuildFlip;
 flipY.onChange = rebuildFlip;
+render.onTriggered = doRender;
+inTexture.onLinkChanged = updateUi;
+op.toWorkPortsNeedToBeLinked(render);
 
 const shader = new CGL.Shader(cgl, "fullscreenrectangle");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -26,14 +28,21 @@ let useShader = false;
 let updateShaderLater = true;
 let fitImageAspect = false;
 let oldVp = [];
-render.onTriggered = doRender;
 
-op.toWorkPortsNeedToBeLinked(render);
+updateUi();
 
 inTexture.onChange = function ()
 {
     updateShaderLater = true;
 };
+
+function updateUi()
+{
+    if (!CABLES.UI) return;
+    flipY.setUiAttribs({ "greyout": !inTexture.isLinked() });
+    flipX.setUiAttribs({ "greyout": !inTexture.isLinked() });
+    inScale.setUiAttribs({ "greyout": !inTexture.isLinked() });
+}
 
 function updateShader()
 {
