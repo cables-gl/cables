@@ -1,6 +1,6 @@
 const
-    parentPort = op.inObject("Parent"),
-    outParent = op.outObject("Parent Out");
+    parentPort = op.inObject("Parent", null, "element"),
+    outParent = op.outObject("Parent Out", null, "element");
 
 const canvas = op.patch.cgl.canvas.parentElement;
 

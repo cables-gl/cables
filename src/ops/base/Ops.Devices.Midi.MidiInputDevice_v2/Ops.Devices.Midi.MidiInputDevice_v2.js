@@ -118,10 +118,6 @@ let FIRST_CC = null;
 let ROUTINE_TYPE = null;
 /* the state of the current NRPN construction cycle */
 
-/* eslint-disable */
-var lastLSB = null;
-var lastMSB = null;
-/* eslint-enable */
 
 const LSBRoutine = (ccIndex, ccValue) =>
 {
@@ -137,7 +133,7 @@ const LSBRoutine = (ccIndex, ccValue) =>
         {
             nrpnValueMSB = ccValue << 7;
 
-            lastMSB = ccValue;
+
             if (typeof nrpnValueLSB === "number")
             {
                 nrpnValue_ = nrpnValueMSB | nrpnValueLSB;
@@ -147,7 +143,7 @@ const LSBRoutine = (ccIndex, ccValue) =>
         else if (ccIndex === NRPN_VALUE_LSB)
         {
             nrpnValueLSB = ccValue;
-            lastLSB = ccValue;
+
             nrpnValue_ = nrpnValueMSB | nrpnValueLSB;
             return [nrpnIndex_, nrpnValue_];
         }

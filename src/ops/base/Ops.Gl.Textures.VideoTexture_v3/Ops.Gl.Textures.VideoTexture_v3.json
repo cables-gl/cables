@@ -1,0 +1,272 @@
+{
+    "authorName": "pandur",
+    "id": "9d66516f-d234-4114-b1d3-67b8e60f5dc6",
+    "created": 1669641033925,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "file"
+            },
+            {
+                "type": 0,
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "loop",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "auto play",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Volume",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "mute",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "fps",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "set time",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "rewind"
+            },
+            {
+                "type": 0,
+                "name": "Preload",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Interaction needed Button",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "duration",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "progress",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Interaction Needed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "CurrentTime",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Playing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Can Play Through",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Error Message"
+            }
+        ],
+        "name": "Ops.User.pandur.VideoTextureV3"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.VideoTexture2 renamed to Ops.Gl.Textures.VideoTexture_v2",
+            "author": "pandur",
+            "date": 1600088689393
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.VideoTexture_v2",
+            "author": "pandur",
+            "date": 1669641033926
+        },
+        {
+            "message": " added core lib: interactionneededbutton",
+            "author": "pandur",
+            "date": 1669646398470
+        },
+        {
+            "message": "Ops.User.pandur.VideoTextureV3 renamed to Ops.Gl.Textures.VideoTexture_v3",
+            "author": "pandur",
+            "date": 1669650714332
+        }
+    ],
+    "summary": "Play a video file and use it as a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "File to play"
+            },
+            {
+                "name": "play",
+                "text": "Start playback"
+            },
+            {
+                "name": "loop",
+                "text": "Loop file when it reaches the end"
+            },
+            {
+                "name": "auto play",
+                "text": "Automatically plays when the patch opens"
+            },
+            {
+                "name": "Volume",
+                "text": "Audio volume"
+            },
+            {
+                "name": "mute",
+                "text": "mute audio"
+            },
+            {
+                "name": "speed",
+                "text": "Speed of playback"
+            },
+            {
+                "name": "filter index",
+                "text": "Texture filter type - pick with index or dropdown"
+            },
+            {
+                "name": "filter",
+                "text": "Selected texture filter type "
+            },
+            {
+                "name": "wrap index",
+                "text": "Texture wrap type - pick with index or dropdown"
+            },
+            {
+                "name": "wrap",
+                "text": "Selected wrap mode"
+            },
+            {
+                "name": "flip",
+                "text": "Flip the texture"
+            },
+            {
+                "name": "set time",
+                "text": "Set time to trigger playback from"
+            },
+            {
+                "name": "rewind",
+                "text": "rewind to start of file"
+            },
+            {
+                "name": "Preload",
+                "text": "Load into memory - useful when loading from a URL"
+            },
+            {
+                "name": "texture",
+                "text": "Texture out"
+            },
+            {
+                "name": "duration",
+                "text": "Duration of loaded media"
+            },
+            {
+                "name": "progress",
+                "text": "Playback progress"
+            },
+            {
+                "name": "Width",
+                "text": "Width of texture"
+            },
+            {
+                "name": "Height",
+                "text": "height of texture"
+            }
+        ]
+    },
+    "exampleProjectId": "E0hWmi",
+    "coreLibs": [
+        "interactionneededbutton"
+    ]
+}

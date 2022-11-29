@@ -33,7 +33,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Parent"
+                "name": "Parent",
+                "objType": "element"
             },
             {
                 "type": 2,
@@ -79,10 +80,11 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Parent Out"
+                "name": "Parent Out",
+                "objType": "element"
             }
         ],
-        "name": "Ops.Html.ElementChilds"
+        "name": "Ops.Html.ElementChilds_v2"
     },
     "summary": "Set childs of a HTML Element",
     "youtubeid": "",

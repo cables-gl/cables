@@ -7,7 +7,8 @@
             },
             {
                 "type": 3,
-                "name": "Array"
+                "name": "Array",
+                "uititle": "Positions"
             },
             {
                 "type": 0,
@@ -29,6 +30,7 @@
             {
                 "type": 3,
                 "name": "Coordinates",
+                "uititle": "Texture Coordinates",
                 "group": "Texture Coordinates"
             },
             {
