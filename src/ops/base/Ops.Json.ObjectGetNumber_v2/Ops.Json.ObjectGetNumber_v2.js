@@ -19,8 +19,10 @@ function exec()
 {
     if (data.get())
     {
-        result.set(data.get()[key.get()]);
-        outFound.set(1);
+        const val = data.get()[key.get()];
+        result.set(val);
+        if (val === undefined) outFound.set(0);
+        else outFound.set(1);
     }
     else
     {
