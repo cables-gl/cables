@@ -55,7 +55,14 @@ function loadImage(_i, _url, nocache, cb)
     // url=url.replace("XXX",i);
 
     if (inPatchAsset.get())
-        url = op.patch.getAssetPath() + url;
+    {
+        let patchId = null;
+        if (op.storage && op.storage.blueprint && op.storage.blueprint.patchId)
+        {
+            patchId = op.storage.blueprint.patchId;
+        }
+        url = op.patch.getAssetPath(patchId) + url;
+    }
 
     url = op.patch.getFilePath(url);
     if (!inCaching.get())

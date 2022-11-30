@@ -17,7 +17,12 @@ function getCssContent()
     let css = code.get();
     if (css)
     {
-        css = css.replace(new RegExp("{{ASSETPATH}}", "g"), op.patch.getAssetPath());
+        let patchId = null;
+        if (op.storage && op.storage.blueprint && op.storage.blueprint.patchId)
+        {
+            patchId = op.storage.blueprint.patchId;
+        }
+        css = css.replace(new RegExp("{{ASSETPATH}}", "g"), op.patch.getAssetPath(patchId));
     }
     return css;
 }
