@@ -90,6 +90,13 @@ function rebuild()
         return;
     }
 
+
+    if (!parent.querySelector)
+    {
+        outParent.set(null);
+        return;
+    }
+
     for (let i = 0; i < inPorts.length; i++)
     {
         const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
