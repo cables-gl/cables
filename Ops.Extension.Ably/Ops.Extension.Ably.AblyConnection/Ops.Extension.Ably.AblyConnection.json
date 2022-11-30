@@ -12,34 +12,13 @@
             "date": 1658320805796
         },
         {
-            "message": " added lib: /assets/635807cd314820c4e982068f/ably.min-1.js",
-            "author": "stephan",
-            "date": 1667834625811
-        },
-        {
-            "message": " removed lib: /assets/62d7f56442286a59847aa504/ably.min-1.js",
-            "author": "stephan",
-            "date": 1667834653781
-        },
-        {
             "message": "Ops.User.stephan.AblyConnection renamed to Ops.Extension.Ably.AblyConnection",
             "author": "stephan",
             "date": 1667834685949
-        },
-        {
-            "message": " added lib: ammo.js",
-            "author": "stephan",
-            "date": 1667834863897
-        },
-        {
-            "message": " added lib: /assets/635807cd314820c4e982068f/ably.min-1.js",
-            "author": "stephan",
-            "date": 1667923287643
         }
     ],
     "libs": [
-        "/assets/635807cd314820c4e982068f/ably.min-1.js",
-        "ammo.js"
+        "/assets/62d7f56442286a59847aa504/ably.min-1.js"
     ],
     "layout": {
         "portsIn": [
