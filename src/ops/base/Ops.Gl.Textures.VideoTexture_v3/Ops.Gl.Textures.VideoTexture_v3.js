@@ -2,26 +2,25 @@ const
     inExec = op.inTrigger("Update"),
     filename = op.inUrl("file", "video"),
     play = op.inValueBool("play"),
-    loop = op.inValueBool("loop"),
-    autoPlay = op.inValueBool("auto play", false),
+    loop = op.inValueBool("loop", true),
 
     volume = op.inValueSlider("Volume", 1),
     muted = op.inValueBool("mute", true),
-    speed = op.inValueFloat("speed", 1),
 
-    tfilter = op.inValueSelect("filter", ["nearest", "linear"], "linear"),
-    wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
-
+    fps = op.inValueFloat("Update FPS", 30),
+    tfilter = op.inSwitch("Filter", ["nearest", "linear"], "linear"),
+    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     flip = op.inValueBool("flip", true),
-    fps = op.inValueFloat("fps", 30),
+
+    speed = op.inValueFloat("speed", 1),
     time = op.inValueFloat("set time"),
-    rewind = op.inTriggerButton("rewind"),
+    rewind = op.inTriggerButton("Rewind"),
 
     inPreload = op.inValueBool("Preload", true),
     inShowSusp = op.inBool("Show Interaction needed Button", true),
 
     outNext = op.outTrigger("Next"),
-    textureOut = op.outTexture("texture"),
+    textureOut = op.outTexture("texture", null, "texture"),
     outDuration = op.outNumber("duration"),
     outProgress = op.outNumber("progress"),
     outInteractionNeeded = op.outBoolNum("Interaction Needed"),
@@ -36,35 +35,45 @@ const
     outHasError = op.outBoolNum("Has Error"),
     outError = op.outString("Error Message");
 
+op.setPortGroup("Texture", [tfilter, wrap, flip, fps]);
+op.setPortGroup("Audio", [muted, volume]);
+op.setPortGroup("Timing", [time, rewind, speed]);
+
 let videoElementPlaying = false;
 let embedded = false;
-const cgl = op.patch.cgl;
-const videoElement = document.createElement("video");
-videoElement.setAttribute("playsinline", "");
-videoElement.setAttribute("webkit-playsinline", "");
 let interActionNeededButton = false;
 let addedListeners = false;
 let cgl_filter = 0;
 let cgl_wrap = 0;
-
-const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
-
-op.toWorkPortsNeedToBeLinked(textureOut);
-
 let tex = null;
-textureOut.set(tex);
 let timeout = null;
 let firstTime = true;
-textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 let needsUpdate = true;
 let lastTime = 0;
+
+const cgl = op.patch.cgl;
+const videoElement = document.createElement("video");
+videoElement.setAttribute("playsinline", "");
+videoElement.setAttribute("webkit-playsinline", "");
+videoElement.setAttribute("autoplay", "autoplay");
+
+const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
+op.toWorkPortsNeedToBeLinked(textureOut);
+textureOut.set(tex);
+textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 play.onChange = updatePlayState;
 filename.onChange = reload;
 volume.onChange = updateVolume;
 op.onMasterVolumeChanged = updateVolume;
 
+tfilter.onChange = wrap.onChange = () =>
+{
+    tex = null;
+};
+
 op.onDelete = () =>
 {
+    if (tex)tex.delete();
     videoElement.remove();
 };
 
@@ -83,6 +92,7 @@ inExec.onTriggered = () =>
     if (interActionNeededButton && !videoElement.paused && play.get())
     {
         // remove button after player says no but plays anyhow after some time...
+        console.log("weirdness...");
         interActionNeededButton = false;
         CABLES.interActionNeededButton.remove("videoplayer");
     }
@@ -94,27 +104,20 @@ inExec.onTriggered = () =>
 function reInitTexture()
 {
     if (tex)tex.delete();
+
+    if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
+
+    if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
+    if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
     tex = new CGL.Texture(cgl,
         {
             "wrap": cgl_wrap,
             "filter": cgl_filter
         });
 }
-
-autoPlay.onChange = function ()
-{
-    if (videoElement)
-    {
-        if (autoPlay.get())
-        {
-            videoElement.setAttribute("autoplay", "");
-        }
-        else
-        {
-            videoElement.removeAttribute("autoplay");
-        }
-    }
-};
 
 rewind.onTriggered = function ()
 {
@@ -156,7 +159,6 @@ function updatePlayState()
             promise.then(function ()
             {
                 doPlay();
-                // Automatic playback started!
             }).catch(function (error)
             {
                 op.warn("exc", error);
@@ -196,24 +198,6 @@ muted.onChange = function ()
     videoElement.muted = muted.get();
 };
 
-tfilter.onChange = function ()
-{
-    if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
-    if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
-    // if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
-    loadVideo();
-    tex = null;
-};
-
-wrap.onChange = function ()
-{
-    if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
-    if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
-    loadVideo();
-    tex = null;
-};
-
 function updateTexture()
 {
     const force = needsUpdate;
@@ -224,10 +208,17 @@ function updateTexture()
         return;
     }
 
-    if (!tex) reInitTexture();
     if (!videoElementPlaying) return;
 
-    tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
+    if (!tex)reInitTexture();
+    if (tex.width != videoElement.videoWidth || tex.height != videoElement.videoHeight)
+    {
+        console.log("video size", videoElement.videoWidth, videoElement.videoHeight);
+        tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
+    }
+
+    // console.log("size", videoElement.videoWidth, videoElement.videoHeight);
+    //
     // tex.height = videoElement.videoHeight;
     // tex.width = videoElement.videoWidth;
 
@@ -235,7 +226,6 @@ function updateTexture()
     outHeight.set(tex.height);
     outAspect.set(tex.width / tex.height);
 
-    if (!tex)reInitTexture();
     if (!canPlayThrough.get()) return;
     if (!videoElementPlaying) return;
     if (!videoElement) return;
@@ -261,8 +251,8 @@ function updateTexture()
 
     if (firstTime)
     {
-        cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
         cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
+        cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
         tex._setFilter();
     }
     else
@@ -301,6 +291,7 @@ function updateVolume()
 function loadedMetaData()
 {
     outDuration.set(videoElement.duration);
+    updatePlayState();
 }
 
 function embedVideo(force)

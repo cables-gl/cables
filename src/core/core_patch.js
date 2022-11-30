@@ -253,16 +253,18 @@ Patch.prototype.setVolume = function (v)
  * @memberof Patch
  * @instance
  */
-Patch.prototype.getAssetPath = function ()
+Patch.prototype.getAssetPath = function (patchId = null)
 {
     if (this.isEditorMode())
     {
-        return "/assets/" + gui.project()._id + "/";
+        let id = patchId || gui.project()._id;
+        return "/assets/" + id + "/";
     }
     else if (document.location.href.indexOf("cables.gl") > 0 || document.location.href.indexOf("cables.local") > 0)
     {
         const parts = document.location.pathname.split("/");
-        return "/assets/" + parts[parts.length - 1] + "/";
+        let id = patchId || parts[parts.length - 1];
+        return "/assets/" + id + "/";
     }
     else if (this.config.hasOwnProperty("assetPath"))
     {

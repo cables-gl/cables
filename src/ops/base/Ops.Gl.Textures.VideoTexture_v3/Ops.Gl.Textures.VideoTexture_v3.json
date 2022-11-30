@@ -24,52 +24,56 @@
             },
             {
                 "type": 0,
-                "name": "auto play",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Volume",
+                "group": "Audio",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "mute",
+                "group": "Audio",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "speed",
+                "name": "Update FPS",
+                "group": "Texture",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "filter index",
+                "name": "Filter index",
+                "group": "Texture",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "wrap index",
+                "name": "Wrap index",
+                "group": "Texture",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "flip",
+                "group": "Texture",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "fps",
+                "name": "speed",
+                "group": "Timing",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "set time",
+                "group": "Timing",
                 "subType": "number"
             },
             {
                 "type": 1,
-                "name": "rewind"
+                "name": "Rewind",
+                "group": "Timing"
             },
             {
                 "type": 0,
@@ -152,7 +156,7 @@
                 "name": "Error Message"
             }
         ],
-        "name": "Ops.User.pandur.VideoTextureV3"
+        "name": "Ops.Gl.Textures.VideoTexture_v3"
     },
     "changelog": [
         {
