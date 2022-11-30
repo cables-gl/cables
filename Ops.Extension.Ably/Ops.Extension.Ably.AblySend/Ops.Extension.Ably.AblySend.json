@@ -1,0 +1,66 @@
+{
+    "id": "37ab7bc9-c2fc-4a77-8e98-283315bddfcd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1658321252212
+        },
+        {
+            "message": "Ops.User.stephan.AblySend renamed to Ops.Extension.Ably.AblySend",
+            "author": "stephan",
+            "date": 1667840236365
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1658322037565,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Connection",
+                "objType": "Ably"
+            },
+            {
+                "type": 5,
+                "name": "Channel"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Send"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Extension.Ably.AblySend"
+    }
+}

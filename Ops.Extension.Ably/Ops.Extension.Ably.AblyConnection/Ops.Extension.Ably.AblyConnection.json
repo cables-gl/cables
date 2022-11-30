@@ -1,0 +1,89 @@
+{
+    "id": "0c0df214-81d9-499e-a5d9-9a5477c5a36d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1658320729019
+        },
+        {
+            "message": " added lib: /assets/62d7f56442286a59847aa504/ably.min-1.js",
+            "author": "stephan",
+            "date": 1658320805796
+        },
+        {
+            "message": " added lib: /assets/635807cd314820c4e982068f/ably.min-1.js",
+            "author": "stephan",
+            "date": 1667834625811
+        },
+        {
+            "message": " removed lib: /assets/62d7f56442286a59847aa504/ably.min-1.js",
+            "author": "stephan",
+            "date": 1667834653781
+        },
+        {
+            "message": "Ops.User.stephan.AblyConnection renamed to Ops.Extension.Ably.AblyConnection",
+            "author": "stephan",
+            "date": 1667834685949
+        },
+        {
+            "message": " added lib: ammo.js",
+            "author": "stephan",
+            "date": 1667834863897
+        },
+        {
+            "message": " added lib: /assets/635807cd314820c4e982068f/ably.min-1.js",
+            "author": "stephan",
+            "date": 1667923287643
+        }
+    ],
+    "libs": [
+        "/assets/635807cd314820c4e982068f/ably.min-1.js",
+        "ammo.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "API-Key"
+            },
+            {
+                "type": 5,
+                "name": "Auth URL"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Ping Interval",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Connection",
+                "objType": "Ably"
+            },
+            {
+                "type": 0,
+                "name": "Connected",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Connection Id"
+            },
+            {
+                "type": 5,
+                "name": "Client Id"
+            }
+        ],
+        "name": "Ops.User.stephan.AblyConnection"
+    },
+    "authorName": "stephan",
+    "created": 1658321061575
+}
