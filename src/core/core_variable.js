@@ -1,3 +1,4 @@
+import { EventTarget } from "./eventtarget";
 
 /**
  * @type {Object}
@@ -7,12 +8,12 @@
  * @memberof Patch
  * @constructor
  */
-class PatchVariable
+class PatchVariable extends EventTarget
 {
     constructor(name, val, type)
     {
+        super();
         this._name = name;
-        this._changeListeners = [];
         this.type = type;
         this.setValue(val);
     }
@@ -51,10 +52,7 @@ class PatchVariable
     setValue(v)
     {
         this._v = v;
-        for (let i = 0; i < this._changeListeners.length; i++)
-        {
-            this._changeListeners[i](v, this);
-        }
+        this.emitEvent("change", v, this);
     }
 
     /**
@@ -62,12 +60,12 @@ class PatchVariable
      * @function addListener
      * @memberof Variable
      * @instance
-     * @param {Function} callback
+     * @param {Function} cb
+     * @return {string} id
      */
     addListener(cb)
     {
-        const ind = this._changeListeners.indexOf(cb);
-        if (ind == -1) this._changeListeners.push(cb);
+        return this.on("change", cb, "var");
     }
 
     /**
@@ -75,12 +73,11 @@ class PatchVariable
      * @function removeListener
      * @memberof Variable
      * @instance
-     * @param {Function} callback
+     * @param {string} id
      */
-    removeListener(cb)
+    removeListener(id)
     {
-        const ind = this._changeListeners.indexOf(cb);
-        this._changeListeners.splice(ind, 1);
+        this.off(id);
     }
 }
 

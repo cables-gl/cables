@@ -2,6 +2,7 @@ op.varName = op.inValueSelect("Variable", [], "", true);
 const val = op.outArray("Array");
 
 let variable = null;
+let changeListenerId = null;
 // op.patch.addVariableListener(init);
 op.patch.addEventListener("variablesChanged", init);
 
@@ -41,16 +42,16 @@ function init()
     //     }
     // }
 
-    if (variable)
+    if (variable && changeListenerId)
     {
-        variable.removeListener(onChange);
+        variable.removeListener(changeListenerId);
     }
 
     variable = op.patch.getVar(op.varName.get());
 
     if (variable)
     {
-        variable.addListener(onChange);
+        changeListenerId = variable.addListener(onChange);
         op.uiAttr({ "error": null, });
         op.setTitle("#" + op.varName.get());
         onChange(variable.getValue());
@@ -71,6 +72,6 @@ function onChange(v)
 
 op.onDelete = function ()
 {
-    if (variable)
-        variable.removeListener(onChange);
+    if (variable && changeListenerId)
+        variable.removeListener(changeListenerId);
 };

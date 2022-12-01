@@ -616,9 +616,9 @@ Port.prototype.setVariable = function (v)
     this.setAnimated(false);
     const attr = { "useVariable": false };
 
-    if (this._variableIn)
+    if (this._variableIn && this._varChangeListenerId)
     {
-        this._variableIn.removeListener(this.set.bind(this));
+        this._variableIn.removeListener(this._varChangeListenerId);
         this._variableIn = null;
     }
 
@@ -632,8 +632,14 @@ Port.prototype.setVariable = function (v)
         }
         else
         {
-            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) this._variableIn.addListener(() => { this.set(null); this.set(this._variableIn.getValue()); });
-            else this._variableIn.addListener(this.set.bind(this));
+            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+            {
+                this._varChangeListenerId = this._variableIn.addListener(() => { this.set(null); this.set(this._variableIn.getValue()); });
+            }
+            else
+            {
+                this._varChangeListenerId = this._variableIn.addListener(this.set.bind(this));
+            }
             this.set(this._variableIn.getValue());
         }
         this._useVariableName = v;
