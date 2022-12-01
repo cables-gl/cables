@@ -12,18 +12,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Email"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Subject"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Execute"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Html.MailtoLink"
     },
     "summary": "creates a mailto: link to open the default email app",

@@ -1,5 +1,5 @@
 const
-    inVisible = op.inBool("Visible", false),
+    inVisible = op.inBool("Visible", true),
     inStyle = op.inSwitch("Style", ["Spinner", "Ring", "Ellipsis"], "Ring");
 
 const div = document.createElement("div");

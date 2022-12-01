@@ -19,17 +19,17 @@ splitNewLines.onChange = () =>
 
 function exec()
 {
-    let s = inString.get();
-    if (s)
-    {
-        let arr;
-        if (splitNewLines.get())arr = s.split("\n");
-        else arr = s.split(separator.get());
+    let s = inString.get() || "";
+    // if (s)
+    // {
+    let arr;
+    if (splitNewLines.get())arr = s.split("\n");
+    else arr = s.split(separator.get());
 
-        if (forceNumbers.get())
-        {
-            for (let i = 0; i < arr.length; i++) arr[i] = parseFloat(arr[i]);
-        }
-        outArray.set(arr);
+    if (forceNumbers.get())
+    {
+        for (let i = 0; i < arr.length; i++) arr[i] = parseFloat(arr[i]);
     }
+    outArray.set(arr);
+    // }
 }

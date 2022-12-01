@@ -34,6 +34,11 @@
                 "type": 0,
                 "name": "body scroll Height",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Iframe Parent",
+                "subType": "number"
             }
         ],
         "name": "Ops.Html.WindowInfo"

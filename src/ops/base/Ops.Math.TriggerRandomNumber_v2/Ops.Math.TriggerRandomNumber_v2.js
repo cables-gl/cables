@@ -22,7 +22,8 @@ function genRandom()
 
     if (inInteger.get())r = randInt();
 
-    while (noDupe.get() && r == result.get()) r = randInt();
+    if (min.get() != max.get())
+        while (noDupe.get() && r == result.get()) r = randInt();
 
     result.set(r);
     outTrig.trigger();
