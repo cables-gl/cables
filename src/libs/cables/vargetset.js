@@ -230,7 +230,6 @@ const VarGetOpWrapper = class
     {
         if (this._variable)
         {
-            this._variable.removeListener(this._setValueOut.bind(this));
             this._variable.addListener(this._setValueOut.bind(this));
             this._op.setUiError("unknownvar", null);
             this._op.setTitle("var get ");
