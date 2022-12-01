@@ -62,7 +62,7 @@
             {
                 "type": 0,
                 "name": "Is Valid",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.String.FilterValidString"

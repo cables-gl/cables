@@ -4,6 +4,7 @@ const
     inY = op.inFloat("Y", 0),
     inZ = op.inFloat("Z", 0),
     inMat = op.inArray("Matrix"),
+    outNext = op.outTrigger("Next"),
     outX = op.outNumber("Result X"),
     outY = op.outNumber("Result Y"),
     outZ = op.outNumber("Result Z");
@@ -15,22 +16,15 @@ exec.onTriggered = function ()
 {
     const mMat = inMat.get();
 
+    if (!mMat) return;
+
     vec4.set(vec, inX.get(), inY.get(), inZ.get(), 1);
 
-    // for (let i = 0; i < arr.length / 3; i++)
-    // {
-    //     vec[0] = arr[i * 3 + 0];
-    //     vec[1] = arr[i * 3 + 1];
-    //     vec[2] = arr[i * 3 + 2];
-
     vec3.transformMat4(vec, vec, mMat);
-
-    //     theArr[i * 3 + 0] = vec[0];
-    //     theArr[i * 3 + 1] = vec[1];
-    //     theArr[i * 3 + 2] = vec[2];
-    // }
 
     outX.set(vec[0]);
     outY.set(vec[1]);
     outZ.set(vec[2]);
+
+    outNext.trigger();
 };

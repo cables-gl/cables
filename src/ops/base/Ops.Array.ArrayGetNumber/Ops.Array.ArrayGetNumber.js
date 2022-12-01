@@ -17,6 +17,6 @@ function update()
             value.set(0);
             return;
         }
-        value.set(input);
+        value.set(parseFloat(input));
     }
 }

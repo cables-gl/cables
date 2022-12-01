@@ -5,7 +5,7 @@ const
     checkEmpty = op.inBool("Invalid if empty", true),
     checkZero = op.inBool("Invalid if 0", true),
     outStr = op.outString("Last Valid String"),
-    result = op.outBool("Is Valid");
+    result = op.outBoolNum("Is Valid");
 
 inStr.onChange =
 checkNull.onChange =
