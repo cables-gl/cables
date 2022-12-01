@@ -21,7 +21,7 @@ const InterActionNeededButton = class
 
         if (Object.keys(this.callbacks).length == 0)
         {
-            this.fsElement.remove();
+            if (this.fsElement) this.fsElement.remove();
             this.fsElement = null;
         }
     }
@@ -37,10 +37,7 @@ const InterActionNeededButton = class
 
             this.fsElement.addEventListener("pointerdown", (e) =>
             {
-                for (const i in this.callbacks)
-                {
-                    this.callbacks[i]();
-                }
+                for (const i in this.callbacks) this.callbacks[i]();
             });
         }
 
