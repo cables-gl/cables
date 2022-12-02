@@ -1,0 +1,60 @@
+{
+    "summary": "Toggle a boolean value by triggering",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 1,
+                "name": "reset"
+            },
+            {
+                "type": 0,
+                "name": "Default",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.ToggleBoolV2"
+    },
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "4313d9bb-96b6-43bc-9190-6068cfb2593c",
+    "created": 1669884037218,
+    "docs": {
+        "ports": [
+            {
+                "name": "trigger",
+                "text": "When triggered the output value will be toggled from true to false and the other way around."
+            },
+            {
+                "name": "reset",
+                "text": "Resets the `Result` to `false`"
+            },
+            {
+                "name": "result",
+                "text": "Either `true` or `false`"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Boolean.ToggleBool",
+            "author": "pandur",
+            "date": 1669884037219
+        },
+        {
+            "message": "Ops.User.pandur.ToggleBoolV2 renamed to Ops.Boolean.ToggleBool_v2",
+            "author": "pandur",
+            "date": 1669884155792
+        }
+    ]
+}

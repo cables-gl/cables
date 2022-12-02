@@ -1,8 +1,3 @@
-let isSuspended = false;
-let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
-let gainNode = audioCtx.createGain();
-const destinationNode = audioCtx.destination;
-
 const
     inAudio = op.inObject("Audio In", null, "audioNode"),
     inGain = op.inFloatSlider("Volume", 1),
@@ -13,9 +8,13 @@ const
 
 op.setPortGroup("Volume Settings", [inMute, inGain]);
 
+let isSuspended = false;
+let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
+let gainNode = audioCtx.createGain();
+const destinationNode = audioCtx.destination;
 let oldAudioIn = null;
 let connectedToOut = false;
-let fsElement = null;
+// let fsElement = null;
 
 inMute.onChange = () =>
 {
@@ -38,7 +37,7 @@ op.onDelete = () =>
 {
     if (gainNode) gainNode.disconnect();
     gainNode = null;
-    if (fsElement) fsElement.remove();
+    CABLES.interActionNeededButton.remove("audiosuspended");
     if (pauseId) op.patch.off(pauseId);
     if (resumeId) op.patch.off(resumeId);
 };
@@ -150,12 +149,6 @@ function updateStateError()
 
 function updateAudioStateButton()
 {
-    if (!inShowSusp.get() && fsElement)
-    {
-        fsElement.remove();
-        fsElement = null;
-    }
-
     if (audioCtx.state == "suspended")
     {
         mute(true);
@@ -171,42 +164,15 @@ function updateAudioStateButton()
                     CABLES.interActionNeededButton.remove("audiosuspended");
                 }
             });
-
-            // if (!fsElement)
-            // {
-            //     fsElement = document.createElement("div");
-
-            //     const container = op.patch.cgl.canvas.parentElement;
-            //     if (container)container.appendChild(fsElement);
-
-            //     fsElement.addEventListener("pointerdown", function (e)
-            //     {
-            //         if (audioCtx && audioCtx.state == "suspended")
-            //         {
-            //             audioCtx.resume();
-            //         }
-            //     });
-            // }
-
-            // fsElement.style.padding = "10px";
-            // fsElement.style.position = "absolute";
-            // fsElement.style.right = "20px";
-            // fsElement.style.bottom = "20px";
-            // fsElement.style.width = "24px";
-            // fsElement.style.height = "24px";
-            // fsElement.style.cursor = "pointer";
-            // fsElement.style["border-radius"] = "40px";
-            // fsElement.style.background = "#444";
-            // fsElement.style["z-index"] = "9999";
-            // fsElement.style.display = "block";
-            // fsElement.dataset.opid = op.id;
-            // fsElement.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-volume-2\"><polygon points=\"11 5 6 9 2 9 2 15 6 15 11 19 11 5\"></polygon><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07\"></path></svg>";
+        }
+        else
+        {
+            CABLES.interActionNeededButton.remove("audiosuspended");
         }
     }
     else
     {
-        if (fsElement) fsElement.remove();
-        fsElement = null;
+        CABLES.interActionNeededButton.remove("audiosuspended");
 
         if (isSuspended)
         {

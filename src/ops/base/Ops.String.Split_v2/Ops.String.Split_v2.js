@@ -19,17 +19,37 @@ splitNewLines.onChange = () =>
 
 function exec()
 {
-    let s = inString.get();
-    if (s)
-    {
-        let arr;
-        if (splitNewLines.get())arr = s.split("\n");
-        else arr = s.split(separator.get());
+    op.setUiError("notnum", null);
 
-        if (forceNumbers.get())
+    let s = inString.get() || "";
+    let arr;
+    if (splitNewLines.get())arr = s.split("\n");
+    else arr = s.split(separator.get());
+
+    if (forceNumbers.get())
+    {
+        let hasStrings = false;
+        const numbersArray = [];
+        for (let i = 0; i < arr.length; i++)
         {
-            for (let i = 0; i < arr.length; i++) arr[i] = parseFloat(arr[i]);
+            const num = arr[i];
+            if (num)
+            {
+                if (!CABLES.UTILS.isNumeric(num))
+                {
+                    hasStrings = true;
+                }
+                else
+                {
+                    numbersArray.push(parseFloat(num));
+                }
+            }
         }
-        outArray.set(arr);
+        arr = numbersArray;
+        if (hasStrings)
+        {
+            op.setUiError("notnum", "Parse Error / Not all values numerical!");
+        }
     }
+    outArray.set(arr);
 }

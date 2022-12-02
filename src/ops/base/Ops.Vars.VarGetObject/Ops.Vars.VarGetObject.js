@@ -1,8 +1,10 @@
-op.varName=op.inValueSelect("Variable",[],"",true);
-var val=op.outObject("Object");
+op.varName = op.inValueSelect("Variable", [], "", true);
+let val = op.outObject("Object");
 
-var variable=null;
-op.patch.addEventListener("variablesChanged",init);
+let variable = null;
+let changeListenerId = null;
+
+op.patch.addEventListener("variablesChanged", init);
 
 init();
 
@@ -10,18 +12,18 @@ updateVarNamesDropdown();
 
 function updateVarNamesDropdown()
 {
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        var varnames=[];
-        var vars=op.patch.getVars();
+        let varnames = [];
+        let vars = op.patch.getVars();
 
-        for(var i in vars) if(i!="0" && vars[i].type=="object") varnames.push(i);
+        for (let i in vars) if (i != "0" && vars[i].type == "object") varnames.push(i);
 
-        op.varName.uiAttribs.values=varnames;
+        op.varName.uiAttribs.values = varnames;
     }
 }
 
-op.varName.onChange=function()
+op.varName.onChange = function ()
 {
     init();
 };
@@ -30,21 +32,23 @@ function init()
 {
     updateVarNamesDropdown();
 
-    if(variable) variable.removeListener(onChange);
-
-    variable=op.patch.getVar(op.varName.get());
-
-    if(variable)
+    if (variable && changeListenerId)
     {
-        variable.addListener(onChange);
-        op.uiAttr({error:null,});
-        op.setTitle('#'+op.varName.get());
+        variable.removeListener(changeListenerId);
+    }
+    variable = op.patch.getVar(op.varName.get());
+
+    if (variable)
+    {
+        changeListenerId = variable.addListener(onChange);
+        op.uiAttr({ "error": null, });
+        op.setTitle("#" + op.varName.get());
         onChange(variable.getValue());
     }
     else
     {
-        op.uiAttr({error:"unknown variable! - there is no setVariable with this name"});
-        op.setTitle('#invalid');
+        op.uiAttr({ "error": "unknown variable! - there is no setVariable with this name" });
+        op.setTitle("#invalid");
     }
 }
 
@@ -55,7 +59,7 @@ function onChange(v)
     val.set(v);
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    if(variable) variable.removeListener(onChange);
+    if (variable && changeListenerId) variable.removeListener(changeListenerId);
 };

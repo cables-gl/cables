@@ -81,8 +81,6 @@ const VarSetOpWrapper = class
 
         if (!this._op.patch.hasVar(varname) && varname != 0 && !this._triggerPort)
         {
-            // console.log("var does not exist", varname);
-
             this._setVarValue(); // this should not be done!!!, its kept because of compatibility anxiety
         }
         if (!this._op.patch.hasVar(varname) && varname != 0 && this._triggerPort)
@@ -134,7 +132,7 @@ const VarSetOpWrapper = class
     {
         const name = this._varNamePort.get();
 
-        if (!name) return;// console.warn("[vargetset] no varnameport");
+        if (!name) return;
 
         const v = this._valuePort.get();
 
@@ -172,6 +170,7 @@ const VarGetOpWrapper = class
         this._varnamePort = varnamePort;
         this._variable = null;
         this._valueOutPort = valueOutPort;
+        this._listenerId = null;
 
         this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
         this._op.on("uiErrorChange", this._updateTitle.bind(this));
@@ -182,12 +181,12 @@ const VarGetOpWrapper = class
             if (this._op.isCurrentUiOp()) this._op.refreshParams();
         });
 
-        this._varnamePort.onChange = this._init.bind(this);
+        this._varnamePort.onChange = this._changeVar.bind(this);
         this._op.patch.addEventListener("variablesChanged", this._init.bind(this));
 
-        this._op.onDelete = function ()
+        this._op.onDelete = () =>
         {
-            if (this._variable) this._variable.removeListener(this._setValueOut.bind(this));
+            if (this._variable && this._listenerId) this._variable.removeListener(this._listenerId);
         };
 
         this._op.init = () =>
@@ -196,12 +195,22 @@ const VarGetOpWrapper = class
         };
     }
 
+    _changeVar()
+    {
+        if (this._variable && this._listenerId)
+        {
+            this._variable.removeListener(this._listenerId);
+        }
+        this._init();
+    }
+
     _renameVar(oldname, newname)
     {
         if (oldname != this._varnamePort.get()) return;
         this._varnamePort.set(newname);
         this._updateVarNamesDropdown();
         this._updateTitle();
+        this._listenerId = this._variable.addListener(this._setValueOut.bind(this));
     }
 
     _updateVarNamesDropdown()
@@ -230,7 +239,6 @@ const VarGetOpWrapper = class
     {
         if (this._variable)
         {
-            this._variable.addListener(this._setValueOut.bind(this));
             this._op.setUiError("unknownvar", null);
             this._op.setTitle("var get ");
             this._op.setUiAttrib({ "extendTitle": "#" + this._varnamePort.get() });
@@ -248,8 +256,9 @@ const VarGetOpWrapper = class
     {
         this._updateVarNamesDropdown();
 
-        if (this._variable) this._variable.removeListener(this._setValueOut.bind(this));
+        if (this._variable && this._listenerId) this._variable.removeListener(this._listenerId);
         this._variable = this._op.patch.getVar(this._op.varName.get());
+        if (this._variable) this._listenerId = this._variable.addListener(this._setValueOut.bind(this));
 
         this._updateTitle();
 
