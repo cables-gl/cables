@@ -17,6 +17,11 @@
                 "type": 0,
                 "name": "Y",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Input Type index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

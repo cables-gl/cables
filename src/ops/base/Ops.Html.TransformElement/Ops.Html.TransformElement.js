@@ -21,7 +21,15 @@ const trans = vec3.create();
 let cachedTop = -1;
 let cachedLeft = -1;
 
-exec.onTriggered = setProperties;
+exec.onTriggered =
+() =>
+{
+    if (!inActive.get()) return next.trigger();
+
+    setProperties();
+    next.trigger();
+};
+
 op.onDelete = removeProperties;
 
 let oldEle = null;
@@ -116,12 +124,6 @@ function getScreenCoord()
 
 function setProperties()
 {
-    if (!inActive.get())
-    {
-        next.trigger();
-        return;
-    }
-
     const ele = inEle.get();
     oldEle = ele;
     if (ele && ele.style)
@@ -147,8 +149,6 @@ function setProperties()
             else ele.style.display = "none";
         }
     }
-
-    next.trigger();
 }
 
 function removeProperties(ele)
