@@ -8,17 +8,26 @@
             },
             {
                 "type": 0,
+                "name": "Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "fov y",
+                "uititle": "FOV Degrees",
+                "group": "Field of View",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "frustum near",
+                "group": "Frustrum",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "frustum far",
+                "group": "Frustrum",
                 "subType": "number"
             },
             {
