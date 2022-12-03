@@ -266,6 +266,7 @@ function updateTexture()
     firstTime = false;
 
     textureOut.set(tex);
+    needsUpdate = false;
 
     op.patch.cgl.profileData.profileVideosPlaying++;
 

@@ -1,7 +1,6 @@
-// http://stackoverflow.com/questions/5504635/computing-fovx-opengl
-
 const
     render = op.inTrigger("render"),
+    inAxis = op.inSwitch("Axis", ["Vertical", "Horizontal"], "Vertical"),
     fovY = op.inValueFloat("fov y", 45),
     zNear = op.inValueFloat("frustum near", 0.1),
     zFar = op.inValueFloat("frustum far", 20),
@@ -11,13 +10,22 @@ const
     outAsp = op.outNumber("Aspect");
 
 fovY.onChange = zFar.onChange = zNear.onChange = changed;
+fovY.setUiAttribs({ "title": "FOV Degrees" });
+
+op.setPortGroup("Field of View", [fovY]);
+op.setPortGroup("Frustrum", [zNear, zFar]);
+
+let asp = 0;
+let axis = 0;
 
 changed();
 
-op.setPortGroup("Field of View", fovY);
-op.setPortGroup("Frustrum", zNear, zFar);
+inAxis.onChange = () =>
+{
+    axis = 0;
+    if (inAxis.get() == "Horizontal")axis = 1;
+};
 
-let asp = 0;
 render.onTriggered = function ()
 {
     const cg = op.patch.cg;
@@ -27,12 +35,11 @@ render.onTriggered = function ()
     outAsp.set(asp);
 
     cg.pushPMatrix();
-    mat4.perspective(
-        cg.pMatrix,
-        fovY.get() * 0.0174533,
-        asp,
-        zNear.get(),
-        zFar.get());
+
+    if (axis == 0)
+        mat4.perspective(cg.pMatrix, fovY.get() * 0.0174533, asp, zNear.get(), zFar.get());
+    else
+        perspectiveFovX(cg.pMatrix, fovY.get() * 0.0174533, asp, zNear.get(), zFar.get());
 
     trigger.trigger();
 
@@ -47,4 +54,35 @@ function changed()
         "zFar": zFar.get(),
         "zNear": zNear.get(),
     };
+}
+
+function perspectiveFovX(out, fovx, aspect, near, far)
+{
+    let f = Math.tan(1 / fovx * 2), nf;
+    out[0] = f;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = f / (1.0 / aspect);
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[11] = -1;
+    out[12] = 0;
+    out[13] = 0;
+    out[15] = 0;
+    if (far != null && far !== Infinity)
+    {
+        nf = 1 / (near - far);
+        out[10] = (far + near) * nf;
+        out[14] = 2 * far * near * nf;
+    }
+    else
+    {
+        out[10] = -1;
+        out[14] = -2 * near;
+    }
+    return out;
 }
