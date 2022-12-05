@@ -1,0 +1,47 @@
+{
+    "id": "26c97760-6e6b-4ff7-9715-dc510d23ab22",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1669976272478
+        },
+        {
+            "message": " added lib: marked.js",
+            "author": "pandur",
+            "date": 1669976686533
+        },
+        {
+            "message": "Ops.User.pandur.MarkdownToHtml renamed to Ops.Html.MarkdownToHtml",
+            "author": "pandur",
+            "date": 1669976943884
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Markdown"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Html"
+            }
+        ],
+        "name": "Ops.Html.MarkdownToHtml"
+    },
+    "created": 1669976600784,
+    "libs": [
+        "marked.js"
+    ],
+    "summary": "markdown markup language to html parser",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "52Zlij",
+    "authorName": "stephan"
+}

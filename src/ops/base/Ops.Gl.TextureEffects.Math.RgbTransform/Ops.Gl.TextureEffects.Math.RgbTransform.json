@@ -115,6 +115,11 @@
             "message": "Ops.User.pandur.VertTexTransform renamed to Ops.Dev.VertexTexture.VertTexTransform",
             "author": "pandur",
             "date": 1645192511723
+        },
+        {
+            "message": "Ops.Dev.VertexTexture.VertTexTransform renamed to Ops.Gl.TextureEffects.Math.RgbTransform",
+            "author": "pandur",
+            "date": 1670234605102
         }
     ],
     "issues": "",

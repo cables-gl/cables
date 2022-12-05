@@ -6,7 +6,7 @@ const
     zNear = op.inFloat("frustum near", -500),
     zFar = op.inFloat("frustum far", 500),
     fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
-    inAlign = op.inSwitch("Position 0,0", ["Top Left", "Center"], "Top Left"),
+    inAlign = op.inSwitch("Position 0,0", ["Top Left", "Top Right", "Center", "Bottom Right", "Bottom Left"], "Top Left"),
 
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),
@@ -32,10 +32,17 @@ function updateSizeUI()
 
 function exec()
 {
+    let m = 1;
     let xl = 0;
     let yt = 0;
     let xr = 0;
     let yb = 0;
+
+    let w = width.get() * m;
+    let h = height.get() * m;
+
+    let x0 = width.get() * (1.0 - m);
+    let y0 = height.get() * (1.0 - m);
 
     if (useVPSize.get())
     {
@@ -44,30 +51,53 @@ function exec()
     }
     else
     {
-        xr = width.get();
-        yb = height.get();
+        xr = w;
+        yb = h;
     }
 
     if (flipX.get())
     {
         const temp = xr;
-        xr = 0;
+        xr = x0;
         xl = temp;
     }
 
     if (flipY.get())
     {
         const temp = yb;
-        yb = 0;
+        yb = y0;
         yt = temp;
     }
 
-    if (inAlign.get() == "Center")
+    if (inAlign.get() === "Center")
     {
-        xl -= width.get() / 2;
-        xr -= width.get() / 2;
-        yt -= height.get() / 2;
-        yb -= height.get() / 2;
+        xl -= w / 2;
+        xr -= w / 2;
+        yt -= h / 2;
+        yb -= h / 2;
+    }
+    else
+    if (inAlign.get() === "Bottom Right")
+    {
+        xl -= w;
+        xr = x0;
+        yt = y0;
+        yb = -h;
+    }
+    else
+    if (inAlign.get() === "Top Right")
+    {
+        xl -= w;
+        xr = x0;
+        yt -= h;
+        yb = y0;
+    }
+    if (inAlign.get() === "Top Left")
+    {
+        xl = x0;
+        xr = w;
+        yt = -h;
+        yb = y0;
     }
 
     cgl.pushPMatrix();

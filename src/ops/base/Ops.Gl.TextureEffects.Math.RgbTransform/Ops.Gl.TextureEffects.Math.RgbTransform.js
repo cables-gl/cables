@@ -1,18 +1,17 @@
 const
     render = op.inTrigger("Render"),
 
-
-    inDoTrans=op.inBool("Translate",true),
+    inDoTrans = op.inBool("Translate", true),
     posx = op.inValue("Pos X", 0),
     posy = op.inValue("Pos Y", 0),
     posz = op.inValue("Pos Z", 0),
 
-    inDoScale=op.inBool("Scale",true),
+    inDoScale = op.inBool("Scale", true),
     scalex = op.inValue("Scale X", 1),
     scaley = op.inValue("Scale Y", 1),
     scalez = op.inValue("Scale Z", 1),
 
-    inDoRot=op.inBool("Rotate",true),
+    inDoRot = op.inBool("Rotate", true),
     rotx = op.inValue("Rotation X", 1),
     roty = op.inValue("Rotation Y", 1),
     rotz = op.inValue("Rotation Z", 1),
@@ -20,9 +19,9 @@ const
     inTexMask = op.inTexture("Mask"),
     trigger = op.outTrigger("trigger");
 
-op.setPortGroup("Rotation", [inDoRot,rotx, roty, rotz]);
-op.setPortGroup("Position", [inDoTrans,posx, posy, posz]);
-op.setPortGroup("Scale", [inDoScale,scalex,scaley,scalez]);
+op.setPortGroup("Rotation", [inDoRot, rotx, roty, rotz]);
+op.setPortGroup("Position", [inDoTrans, posx, posy, posz]);
+op.setPortGroup("Scale", [inDoScale, scalex, scaley, scalez]);
 op.setUiAxisPorts(posx, posz, posy);
 
 const cgl = op.patch.cgl;
@@ -32,14 +31,14 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.rgbmul_frag);
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 1),
-    uniformTransl = new CGL.Uniform(shader, "3f", "translate", posx,posy,posz),
-    uniformScale = new CGL.Uniform(shader, "3f", "scale", scalex,scaley,scalez),
-    uniformRot = new CGL.Uniform(shader, "3f", "rot", rotx,roty,rotz);
+    uniformTransl = new CGL.Uniform(shader, "3f", "translate", posx, posy, posz),
+    uniformScale = new CGL.Uniform(shader, "3f", "scale", scalex, scaley, scalez),
+    uniformRot = new CGL.Uniform(shader, "3f", "rot", rotx, roty, rotz);
 
 inTexMask.onChange =
-    inDoTrans.onChange=
-    inDoRot.onChange=
-    inDoScale.onChange= updateDefines;
+    inDoTrans.onChange =
+    inDoRot.onChange =
+    inDoScale.onChange = updateDefines;
 
 updateDefines();
 
@@ -62,7 +61,6 @@ function updateDefines()
     scalex.setUiAttribs({ "greyout": !inDoScale.get() });
     scaley.setUiAttribs({ "greyout": !inDoScale.get() });
     scalez.setUiAttribs({ "greyout": !inDoScale.get() });
-
 }
 
 render.onTriggered = function ()

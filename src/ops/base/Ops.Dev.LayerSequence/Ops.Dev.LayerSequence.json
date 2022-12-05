@@ -88,5 +88,11 @@
             }
         ],
         "name": "Ops.User.pandur.Layer"
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "VH4Oxj",
+    "docs": {
+        "ports": []
     }
 }
