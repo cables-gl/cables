@@ -3,7 +3,7 @@ const
     preventScroll = op.inValueBool("prevent scroll", true),
     flip = op.inValueBool("Flip Direction"),
     inSimpleIncrement = op.inBool("Simple Delta", true),
-    area = op.inSwitch("Area", ["Canvas", "Document"], "Document"),
+    area = op.inSwitch("Area", ["Canvas", "Document", "Parent"], "Document"),
     active = op.inValueBool("active", true),
     delta = op.outNumber("delta", 0),
     deltaX = op.outNumber("delta X", 0),
@@ -114,6 +114,7 @@ function updateArea()
     removeListener();
 
     if (area.get() == "Document") listenerElement = document;
+    if (area.get() == "Parent") listenerElement = cgl.canvas.parentElement;
     else listenerElement = cgl.canvas;
 
     if (active.get())addListener();
