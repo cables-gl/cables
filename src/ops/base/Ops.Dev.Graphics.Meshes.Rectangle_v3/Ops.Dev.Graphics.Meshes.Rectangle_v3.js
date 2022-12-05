@@ -119,13 +119,13 @@ function rebuild()
             {
                 norms.push(0, 0, 1);
                 tangents.push(1, 0, 0);
-                biTangents.push(0, -1, 0);
+                biTangents.push(0, 1, 0);
             }
             else if (a == "xz")
             {
                 norms.push(0, 1, 0);
                 tangents.push(1, 0, 0);
-                biTangents.push(0, 0, -1);
+                biTangents.push(0, 0, 1);
             }
         }
     }
