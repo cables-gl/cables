@@ -1,0 +1,2 @@
+This OP enables you to use precise values to modify the pixels in your texture.
+For example adjusting texture values that are modifying your geometry or array values, or even your post processing compositions.

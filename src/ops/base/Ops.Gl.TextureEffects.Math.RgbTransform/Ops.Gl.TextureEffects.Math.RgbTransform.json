@@ -1,0 +1,137 @@
+{
+    "summary": "apply simple mathematical functions on pixels color values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Translate",
+                "group": "Position",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "group": "Scale",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "group": "Rotation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.VertTexTransform"
+    },
+    "authorName": "pandur",
+    "id": "0a069281-e7a1-43a4-a74a-101026df6a29",
+    "created": 1645190583290,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1645190583290
+        },
+        {
+            "message": "Ops.User.pandur.VertTexTransform renamed to Ops.Dev.VertexTexture.VertTexTransform",
+            "author": "pandur",
+            "date": 1645192511723
+        },
+        {
+            "message": "Ops.Dev.VertexTexture.VertTexTransform renamed to Ops.Gl.TextureEffects.Math.RgbTransform",
+            "author": "pandur",
+            "date": 1670234605102
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Operation index",
+                "text": "c-x: subtraction x from color value, x-c: subtract color value from x value, c*x: multiply color value by x, x/c: divide x value by color value, c/x: divide color value by x value, c%x: modulo operation on color value by modulus x of which the remainder is the result for your selected color channel"
+            }
+        ]
+    }
+}
