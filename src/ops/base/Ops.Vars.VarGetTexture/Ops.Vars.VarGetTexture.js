@@ -34,13 +34,13 @@ function init()
 {
     updateVarNamesDropdown();
 
-    if (variable && changeListenerId) variable.removeListener(changeListenerId);
+    if (variable && changeListenerId) variable.off(changeListenerId);
 
     variable = op.patch.getVar(op.varName.get());
 
     if (variable)
     {
-        changeListenerId = variable.addListener(onChange);
+        changeListenerId = variable.on("change", onChange);
         op.uiAttr({ "error": null, });
         op.setTitle("#" + op.varName.get());
         onChange(variable.getValue());
@@ -61,5 +61,5 @@ function onChange(v)
 
 op.onDelete = function ()
 {
-    if (variable && changeListenerId) variable.removeListener(changeListenerId);
+    if (variable && changeListenerId) variable.off(changeListenerId);
 };

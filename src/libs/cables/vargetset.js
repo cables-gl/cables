@@ -186,7 +186,7 @@ const VarGetOpWrapper = class
 
         this._op.onDelete = () =>
         {
-            if (this._variable && this._listenerId) this._variable.removeListener(this._listenerId);
+            if (this._variable && this._listenerId) this._variable.off(this._listenerId);
         };
 
         this._op.init = () =>
@@ -199,7 +199,7 @@ const VarGetOpWrapper = class
     {
         if (this._variable && this._listenerId)
         {
-            this._variable.removeListener(this._listenerId);
+            this._variable.off(this._listenerId);
         }
         this._init();
     }
@@ -210,7 +210,7 @@ const VarGetOpWrapper = class
         this._varnamePort.set(newname);
         this._updateVarNamesDropdown();
         this._updateTitle();
-        this._listenerId = this._variable.addListener(this._setValueOut.bind(this));
+        this._listenerId = this._variable.on("change", this._setValueOut.bind(this));
     }
 
     _updateVarNamesDropdown()
@@ -255,9 +255,9 @@ const VarGetOpWrapper = class
     {
         this._updateVarNamesDropdown();
 
-        if (this._variable && this._listenerId) this._variable.removeListener(this._listenerId);
+        if (this._variable && this._listenerId) this._variable.off(this._listenerId);
         this._variable = this._op.patch.getVar(this._op.varName.get());
-        if (this._variable) this._listenerId = this._variable.addListener(this._setValueOut.bind(this));
+        if (this._variable) this._listenerId = this._variable.on("change", this._setValueOut.bind(this));
 
         this._updateTitle();
 
