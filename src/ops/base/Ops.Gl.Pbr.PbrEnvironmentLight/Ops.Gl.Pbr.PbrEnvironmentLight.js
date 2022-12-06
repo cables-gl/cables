@@ -103,10 +103,10 @@ const outMipLevels = op.outNumber("Number of Pre-filtered mip levels");
 op.toWorkPortsNeedToBeLinked(inCubemap);
 
 // globals
-let IrradianceFrameBuffer = null;
+let irradianceFrameBuffer = null;
 let PrefilteredTexture = null;
-let PrefilteredFrameBuffer = null;
-let IBLLUTFrameBuffer = null;
+let prefilteredFrameBuffer = null;
+let iblLutFrameBuffer = null;
 let maxMipLevels = null;
 const pbrEnv = {};
 const IrradianceShader = new CGL.Shader(cgl, "IrradianceShader");
@@ -183,19 +183,14 @@ inRotation.onChange = () =>
 // utility functions
 function captureIrradianceCubemap(size)
 {
-    if (IrradianceFrameBuffer)
-    {
-        IrradianceFrameBuffer.setSize(Number(size), Number(size));
-    }
-    else
-    {
-        IrradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-            "isFloatingPointTexture": false,
-            "clear": false,
-            "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
-            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
-        });
-    }
+    if (irradianceFrameBuffer) irradianceFrameBuffer.dispose();
+
+    irradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
+        "isFloatingPointTexture": false,
+        "clear": false,
+        "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
+        "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+    });
 
     filteringInfo[0] = size;
     filteringInfo[1] = 1.0 + Math.floor(Math.log(size) * 1.44269504088896340736);
@@ -204,20 +199,20 @@ function captureIrradianceCubemap(size)
     IrradianceShader.pushTexture(uniformIrradianceCubemap, inCubemap.get().tex);
     uniformRotation.setValue(inRotation.get() / 360.0);
 
-    IrradianceFrameBuffer.renderStart(cgl);
+    irradianceFrameBuffer.renderStart(cgl);
     for (let i = 0; i < 6; i += 1)
     {
-        IrradianceFrameBuffer.renderStartCubemapFace(i);
+        irradianceFrameBuffer.renderStartCubemapFace(i);
 
         //  cgl.gl.clearColor(0, 0, 0, 0);
         // if(i==0) cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
         mesh.render(IrradianceShader);
-        IrradianceFrameBuffer.renderEndCubemapFace();
+        irradianceFrameBuffer.renderEndCubemapFace();
     }
-    IrradianceFrameBuffer.renderEnd();
+    irradianceFrameBuffer.renderEnd();
 
     outTexIrradiance.set(null); // pandur
-    outTexIrradiance.set(IrradianceFrameBuffer.getTextureColor());
+    outTexIrradiance.set(irradianceFrameBuffer.getTextureColor());
 }
 
 function capturePrefilteredCubemap(size)
@@ -230,21 +225,16 @@ function capturePrefilteredCubemap(size)
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
 
-    if (PrefilteredFrameBuffer)
-    {
-        PrefilteredFrameBuffer.setSize(size, size);
-    }
-    else
-    {
-        PrefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
-            "isFloatingPointTexture": false,
-            "clear": false,
-            "filter": CGL.Texture.FILTER_MIPMAP,
-            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
-        });
-    }
+    if (prefilteredFrameBuffer) prefilteredFrameBuffer.dispose();
 
-    cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
+    prefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
+        "isFloatingPointTexture": false,
+        "clear": false,
+        "filter": CGL.Texture.FILTER_MIPMAP,
+        "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+    });
+
+    cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
 
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
@@ -276,7 +266,7 @@ function capturePrefilteredCubemap(size)
             // if(i==0)cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
             mesh.render(PrefilteringShader);
-            cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, PrefilteredFrameBuffer.getTextureColor().tex);
+            cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
             cgl.gl.copyTexImage2D(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X + i, mip, cgl.gl.RGBA, 0, 0, Number(currentMipSize), Number(currentMipSize), null);
             captureFBO.renderEndCubemapFace();
         }
@@ -286,42 +276,37 @@ function capturePrefilteredCubemap(size)
     cgl.setTexture(0, null);
 
     outTexPrefiltered.set(null);
-    outTexPrefiltered.set(PrefilteredFrameBuffer.getTextureColor());
+    outTexPrefiltered.set(prefilteredFrameBuffer.getTextureColor());
 }
 
 function computeIBLLUT(size)
 {
     size = Number(size);
-    if (IBLLUTFrameBuffer)
+    if (iblLutFrameBuffer) iblLutFrameBuffer.dispose();
+
+    if (IS_WEBGL_1)
     {
-        IBLLUTFrameBuffer.setSize(size, size);
+        iblLutFrameBuffer = new CGL.Framebuffer(cgl, size, size, {
+            "isFloatingPointTexture": true,
+            "filter": CGL.Texture.FILTER_LINEAR,
+            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+        });
     }
     else
     {
-        if (IS_WEBGL_1)
-        {
-            IBLLUTFrameBuffer = new CGL.Framebuffer(cgl, size, size, {
-                "isFloatingPointTexture": true,
-                "filter": CGL.Texture.FILTER_LINEAR,
-                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
-            });
-        }
-        else
-        {
-            IBLLUTFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
-                "isFloatingPointTexture": true,
-                "filter": CGL.Texture.FILTER_LINEAR,
-                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-            });
-        }
+        iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
+            "isFloatingPointTexture": true,
+            "filter": CGL.Texture.FILTER_LINEAR,
+            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+        });
     }
 
     cgl.frameStore.renderOffscreen = true;
-    IBLLUTFrameBuffer.renderStart(cgl);
+    iblLutFrameBuffer.renderStart(cgl);
     fullscreenRectangle.render(IBLLUTShader);
-    IBLLUTFrameBuffer.renderEnd();
+    iblLutFrameBuffer.renderEnd();
     cgl.frameStore.renderOffscreen = false;
-    outTexIBLLUT.set(IBLLUTFrameBuffer.getTextureColor());
+    outTexIBLLUT.set(iblLutFrameBuffer.getTextureColor());
 }
 
 inCubemap.onChange = () =>

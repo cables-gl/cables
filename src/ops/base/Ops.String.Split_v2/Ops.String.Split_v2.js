@@ -38,6 +38,7 @@ function exec()
                 if (!CABLES.UTILS.isNumeric(num))
                 {
                     hasStrings = true;
+                    numbersArray.push(0);
                 }
                 else
                 {

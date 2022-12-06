@@ -83,5 +83,11 @@
             }
         ],
         "name": "Ops.Dev.Array.CircularPoints"
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "V34dYh",
+    "docs": {
+        "ports": []
     }
 }

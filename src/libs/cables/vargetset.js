@@ -228,7 +228,6 @@ const VarGetOpWrapper = class
         }
     }
 
-
     _setValueOut(v)
     {
         this._updateVarNamesDropdown();
