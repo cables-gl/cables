@@ -54,31 +54,6 @@ class PatchVariable extends EventTarget
         this._v = v;
         this.emitEvent("change", v, this);
     }
-
-    /**
-     * function will be called when value of variable is changed
-     * @function addListener
-     * @memberof Variable
-     * @instance
-     * @param {Function} cb
-     * @return {string} id
-     */
-    addListener(cb)
-    {
-        return this.on("change", cb, "var");
-    }
-
-    /**
-     * remove listener
-     * @function removeListener
-     * @memberof Variable
-     * @instance
-     * @param {string} id
-     */
-    removeListener(id)
-    {
-        this.off(id);
-    }
 }
 
 export default PatchVariable;

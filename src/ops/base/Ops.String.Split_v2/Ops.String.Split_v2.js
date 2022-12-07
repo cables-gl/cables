@@ -29,24 +29,15 @@ function exec()
     if (forceNumbers.get())
     {
         let hasStrings = false;
-        const numbersArray = [];
         for (let i = 0; i < arr.length; i++)
         {
-            const num = arr[i];
-            if (num)
+            arr[i] = Number(arr[i]);
+            if (!CABLES.UTILS.isNumeric(arr[i]))
             {
-                if (!CABLES.UTILS.isNumeric(num))
-                {
-                    hasStrings = true;
-                    numbersArray.push(0);
-                }
-                else
-                {
-                    numbersArray.push(parseFloat(num));
-                }
+                hasStrings = true;
             }
         }
-        arr = numbersArray;
+
         if (hasStrings)
         {
             op.setUiError("notnum", "Parse Error / Not all values numerical!");
