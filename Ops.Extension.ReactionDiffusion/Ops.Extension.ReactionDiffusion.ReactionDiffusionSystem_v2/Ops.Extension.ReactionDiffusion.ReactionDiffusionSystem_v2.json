@@ -1,0 +1,144 @@
+{
+    "summary": "Cellular automata system as feedback loop texture.",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "authorName": "stephan",
+    "id": "8344870d-a76c-4a67-87a5-6e8cddc5108f",
+    "created": 1670509802843,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 1,
+                "name": "reset"
+            },
+            {
+                "type": 0,
+                "name": "Use Viewport Size",
+                "group": "Texture Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Texture In",
+                "group": "Input Reaction",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "speed",
+                "group": "Simulation",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "group": "Simulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Presets index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "feed",
+                "group": "Feed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "feed variation",
+                "group": "Feed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "kill",
+                "group": "Kill",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "kill variation",
+                "group": "Kill",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffusion scale",
+                "group": "Diffusion Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffusion scale variation",
+                "group": "Diffusion Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "anisotropy",
+                "group": "Environment",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Noise Scale",
+                "group": "Environment",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "separate Fields",
+                "group": "Environment",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Texture Out",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.User.stephan.ReactionDiffusionSystem_v2"
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ReactionDiffusionSystem",
+            "author": "stephan",
+            "date": 1670509802843
+        },
+        {
+            "message": "Ops.User.stephan.ReactionDiffusionSystem_v2 renamed to Ops.Extension.ReactionDiffusion.ReactionDiffusionSystem_v2",
+            "author": "stephan",
+            "date": 1670509889355
+        }
+    ]
+}
