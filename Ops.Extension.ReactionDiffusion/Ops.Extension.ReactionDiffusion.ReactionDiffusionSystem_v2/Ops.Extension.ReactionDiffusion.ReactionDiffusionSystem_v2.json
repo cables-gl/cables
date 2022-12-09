@@ -7,7 +7,7 @@
     "docs": {
         "ports": []
     },
-    "authorName": "stephan",
+    "authorName": "action",
     "id": "8344870d-a76c-4a67-87a5-6e8cddc5108f",
     "created": 1670509802843,
     "layout": {
@@ -127,7 +127,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.User.stephan.ReactionDiffusionSystem_v2"
+        "name": "Ops.Extension.ReactionDiffusion.ReactionDiffusionSystem_v2"
     },
     "changelog": [
         {
