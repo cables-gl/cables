@@ -15,6 +15,11 @@
             "message": "Ops.User.pandur.Rectangle_v3 renamed to Ops.Dev.Graphics.Meshes.Rectangle_v3",
             "author": "pandur",
             "date": 1666261275845
+        },
+        {
+            "message": "Ops.Dev.Graphics.Meshes.Rectangle_v3 renamed to Ops.Gl.Meshes.Rectangle_v3",
+            "author": "pandur",
+            "date": 1670258506267
         }
     ],
     "authorName": "pandur",
@@ -23,11 +28,13 @@
         "portsIn": [
             {
                 "type": 1,
-                "name": "Trigger"
+                "name": "render",
+                "uititle": "Trigger"
             },
             {
                 "type": 0,
-                "name": "render",
+                "name": "dorender",
+                "uititle": "Render",
                 "subType": "boolean"
             },
             {
@@ -86,7 +93,8 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "next"
+                "name": "trigger",
+                "uititle": "Next"
             },
             {
                 "type": 2,
