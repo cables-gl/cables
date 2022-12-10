@@ -32,7 +32,7 @@
         ],
         "name": "Ops.Array.Array3Sum"
     },
-    "summary": "",
+    "summary": "add number to every XYZ member of array3x",
     "docs": {
         "ports": [
             {
@@ -45,7 +45,6 @@
             }
         ]
     },
-    "youtubeid": "",
     "collections": null,
     "relatedops": null,
     "changelog": [
@@ -65,5 +64,5 @@
             "date": 1668507552676
         }
     ],
-    "exampleProjectId": "8FxmVJ"
+    "exampleProjectId": "D-pQHj"
 }
