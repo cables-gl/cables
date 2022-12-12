@@ -27,9 +27,8 @@ inCoords.onChange =
     pTexCoordRand.onChange = updateTexCoordsPorts;
 vertCols.onChange = updateVertCols;
 numPoints.onChange = updateNumVerts;
-seed.onChange =
-    arr.onChange;
-vertCols.onLinkChanged = reset;
+seed.onChange = arr.onChange = vertCols.onLinkChanged = reset;
+
 exe.onTriggered = doRender;
 
 function doRender()
