@@ -1,6 +1,19 @@
+// const
+//     render = op.inTrigger("render"),
+//     trigger = op.outTrigger("trigger"),
+//     width = op.inValue("width", 1),
+//     height = op.inValue("height", 1),
+//     pivotX = op.inSwitch("pivot x", ["left", "center", "right"]),
+//     pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"]),
+//     nColumns = op.inValueInt("num columns", 1),
+//     nRows = op.inValueInt("num rows", 1),
+//     axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
+//     active = op.inValueBool("Active", true),
+//     geomOut = op.outObject("geometry", null, "geometry");
+
 const
-    render = op.inTrigger("Trigger"),
-    doRender = op.inValueBool("render", true),
+    render = op.inTrigger("render"),
+    doRender = op.inValueBool("dorender", true),
     width = op.inValue("width", 1),
     height = op.inValue("height", 1),
     pivotX = op.inSwitch("pivot x", ["left", "center", "right"], "center"),
@@ -10,13 +23,16 @@ const
     flipTcY = op.inBool("Flip TexCoord Y", true),
     nColumns = op.inValueInt("num columns", 1),
     nRows = op.inValueInt("num rows", 1),
-    trigger = op.outTrigger("next"),
+    trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry", null, "geometry");
 
 geomOut.ignoreValueSerialize = true;
 
 const geom = new CGL.Geometry("rectangle");
 
+doRender.setUiAttribs({ "title": "Render" });
+render.setUiAttribs({ "title": "Trigger" });
+trigger.setUiAttribs({ "title": "Next" });
 op.setPortGroup("Pivot", [pivotX, pivotY, axis]);
 op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);

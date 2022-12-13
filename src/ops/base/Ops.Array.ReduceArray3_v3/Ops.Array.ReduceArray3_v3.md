@@ -1,4 +1,3 @@
-
 Xth Mode: Copies only every x point from an array
 
 Creates a new array which contains every xth value triplet of the source array, e.g. when your source array is [x1, y1, z1, x2, y2, z2, x3, y3, z3] and Every Xth Item is set to 2, the resulting array will be [x1, y1, z1, x3, y3, z3]

@@ -618,7 +618,7 @@ Port.prototype.setVariable = function (v)
 
     if (this._variableIn && this._varChangeListenerId)
     {
-        this._variableIn.removeListener(this._varChangeListenerId);
+        this._variableIn.off(this._varChangeListenerId);
         this._variableIn = null;
     }
 
@@ -634,11 +634,11 @@ Port.prototype.setVariable = function (v)
         {
             if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
             {
-                this._varChangeListenerId = this._variableIn.addListener(() => { this.set(null); this.set(this._variableIn.getValue()); });
+                this._varChangeListenerId = this._variableIn.on("change", () => { this.set(null); this.set(this._variableIn.getValue()); });
             }
             else
             {
-                this._varChangeListenerId = this._variableIn.addListener(this.set.bind(this));
+                this._varChangeListenerId = this._variableIn.on("change", this.set.bind(this));
             }
             this.set(this._variableIn.getValue());
         }
