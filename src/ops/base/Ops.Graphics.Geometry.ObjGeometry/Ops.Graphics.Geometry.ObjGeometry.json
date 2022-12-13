@@ -47,6 +47,12 @@
                 "name": "Status"
             }
         ],
-        "name": "Ops.Dev.ObjGeometry"
+        "name": "Ops.Graphics.Geometry.ObjGeometry"
+    },
+    "summary": "parse an obj string to a geometry object",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

@@ -92,7 +92,7 @@ inExec.onTriggered = () =>
     if (interActionNeededButton && !videoElement.paused && play.get())
     {
         // remove button after player says no but plays anyhow after some time...
-        console.log("weirdness...");
+        op.log("weirdness...");
         interActionNeededButton = false;
         CABLES.interActionNeededButton.remove("videoplayer");
     }
@@ -162,8 +162,8 @@ function updatePlayState()
             }).catch(function (error)
             {
                 op.warn("exc", error);
-                console.log(error);
-                console.log(videoElement);
+                op.log(error);
+                op.log(videoElement);
 
                 if (videoElement.paused && inShowSusp.get())
                 {
@@ -213,12 +213,10 @@ function updateTexture()
     if (!tex)reInitTexture();
     if (tex.width != videoElement.videoWidth || tex.height != videoElement.videoHeight)
     {
-        console.log("video size", videoElement.videoWidth, videoElement.videoHeight);
+        op.log("video size", videoElement.videoWidth, videoElement.videoHeight);
         tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
     }
 
-    // console.log("size", videoElement.videoWidth, videoElement.videoHeight);
-    //
     // tex.height = videoElement.videoHeight;
     // tex.width = videoElement.videoWidth;
 

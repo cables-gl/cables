@@ -4,7 +4,7 @@ const
     inSize = op.inValue("Size", 1),
     roundNess = op.inFloatSlider("Roundness", 0),
     inAmount = op.inValueSlider("Amount", 0.5),
-    inFalloff = op.inValueSlider("Falloff", 0),
+    inFalloff = op.inFloat("Falloff", 0),
     inInvert = op.inValueBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),

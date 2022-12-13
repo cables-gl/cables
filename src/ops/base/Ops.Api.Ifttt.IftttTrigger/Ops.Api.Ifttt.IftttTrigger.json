@@ -1,23 +1,25 @@
 {
-    "updated": 1519663276566,
     "authorName": "tim",
     "id": "b840be39-cb3f-4d58-8a70-51e7936e9f88",
     "created": 1519663276569,
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Key"
+                "type": 0,
+                "name": "Key",
+                "subType": "string"
             },
             {
-                "type": "0",
-                "name": "Event Name"
+                "type": 0,
+                "name": "Event Name",
+                "subType": "string"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Api.Ifttt.IftttTrigger"
     },
     "summary": "Triggers a custom event in the maker channel of IFTTT",
