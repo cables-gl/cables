@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.Layer renamed to Ops.Dev.LayerSequence",
             "author": "pandur",
             "date": 1667301519955
+        },
+        {
+            "message": "Ops.Dev.LayerSequence renamed to Ops.Gl.LayerSequence",
+            "author": "pandur",
+            "date": 1670921177552
         }
     ],
     "authorName": "pandur",

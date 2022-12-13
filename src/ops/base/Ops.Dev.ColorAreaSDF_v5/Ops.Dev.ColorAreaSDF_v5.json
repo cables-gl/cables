@@ -20,6 +20,11 @@
             },
             {
                 "type": 0,
+                "name": "Roundness",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Amount",
                 "subType": "number"
             },
@@ -77,11 +82,6 @@
             },
             {
                 "type": 0,
-                "name": "Roundness",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "Change Size",
                 "group": "Scale",
                 "subType": "boolean"
@@ -126,7 +126,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.ColorArea_v5"
+        "name": "Ops.Dev.ColorAreaSDF_v5"
     },
     "changelog": [
         {

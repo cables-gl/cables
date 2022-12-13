@@ -20,6 +20,11 @@
             "message": "Ops.Dev.ParseObj renamed to Ops.Dev.ObjGeometry",
             "author": "pandur",
             "date": 1665667473768
+        },
+        {
+            "message": "Ops.Dev.ObjGeometry renamed to Ops.Graphics.Geometry.ObjGeometry",
+            "author": "pandur",
+            "date": 1670921247823
         }
     ],
     "authorName": "pandur",

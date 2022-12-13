@@ -2,6 +2,7 @@ const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
     inSize = op.inValue("Size", 1),
+    roundNess = op.inFloatSlider("Roundness", 0),
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inValueSlider("Falloff", 0),
     inInvert = op.inValueBool("Invert"),
@@ -12,7 +13,6 @@ const
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    roundNess = op.inFloatSlider("Roundness", 0),
     doScale = op.inBool("Change Size", false),
     sizeX = op.inFloat("Size X", 1),
     sizeY = op.inFloat("Size Y", 1),
@@ -128,6 +128,8 @@ function updateDefines()
     sizeX.setUiAttribs({ "greyout": !doScale.get() });
     sizeY.setUiAttribs({ "greyout": !doScale.get() });
     sizeZ.setUiAttribs({ "greyout": !doScale.get() });
+
+    roundNess.setUiAttribs({ "greyout": inArea.get() != "Box" });
 
     mod.toggleDefine("MOD_USE_TEX", inTex.isLinked());
 }
