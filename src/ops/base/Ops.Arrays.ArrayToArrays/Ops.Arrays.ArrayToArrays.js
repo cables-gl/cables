@@ -16,7 +16,7 @@ inArr.onChange = () =>
         const newArr = [];
         for (let j = 0; j < stride; j++)
         {
-            newArr[j] = arr[i + j];
+            newArr[j] = arr[i + j] || 0;
         }
         result[count] = newArr;
         count++;

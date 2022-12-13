@@ -37,12 +37,13 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.User.pandur.ArrayToArrays"
+        "name": "Ops.Arrays.ArrayToArrays"
     },
     "summary": "splits an array up into an array of arrays",
     "collections": null,
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Bpx7ck"
 }
