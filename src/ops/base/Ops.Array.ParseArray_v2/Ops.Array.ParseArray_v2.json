@@ -2,7 +2,7 @@
     "id": "c974de41-4ce4-4432-b94d-724741109c71",
     "authorName": "pandur",
     "created": 1548108515570,
-    "summary": "Parse a string into an array (create)",
+    "summary": "Parse a string into an array (create, split string, stringToArray)",
     "collections": [
         "converter"
     ],
