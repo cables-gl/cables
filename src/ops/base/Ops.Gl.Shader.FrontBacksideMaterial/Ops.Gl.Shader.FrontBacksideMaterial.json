@@ -19,7 +19,7 @@
         ],
         "name": "Ops.Gl.Shader.FrontBacksideMaterial"
     },
-    "summary": "see which faces are facing the camera",
+    "summary": "visualize which faces are facing the camera",
     "docs": {
         "ports": []
     },
