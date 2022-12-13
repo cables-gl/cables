@@ -50,7 +50,7 @@ const myVar = CABLES.patch.getVar("IsInteracting");
 
 if(myVar) {
 	// will be called every time value changes
-    myVar.addListener(function(newValue) {
+    myVar.on("change", (function(newValue) {
         console.log(newValue);
     });
 }
