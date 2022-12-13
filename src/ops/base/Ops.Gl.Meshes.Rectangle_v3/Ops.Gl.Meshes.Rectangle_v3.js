@@ -115,7 +115,7 @@ function rebuild()
     const stepColumn = w / numColumns;
     const stepRow = h / numRows;
 
-    console.log("rect build");
+    op.log("rect build");
 
     let c, r, a;
     a = axis.get();

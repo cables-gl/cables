@@ -24,5 +24,11 @@
             }
         ],
         "name": "Ops.TimeLine.TimeLineLength"
+    },
+    "summary": "current set length of the timeline",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

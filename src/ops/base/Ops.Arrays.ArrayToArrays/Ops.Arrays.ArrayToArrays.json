@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.ArrayToArrays renamed to Ops.Dev.Arrays.ArrayToArrays",
             "author": "pandur",
             "date": 1667806165063
+        },
+        {
+            "message": "Ops.Dev.Arrays.ArrayToArrays renamed to Ops.Arrays.ArrayToArrays",
+            "author": "pandur",
+            "date": 1670921364982
         }
     ],
     "authorName": "pandur",

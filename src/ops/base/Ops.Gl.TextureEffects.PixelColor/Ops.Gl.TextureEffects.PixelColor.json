@@ -45,11 +45,11 @@
     "authorName": "pandur",
     "id": "114e250c-f569-4963-a3b3-fcdce816406f",
     "created": 1667556326780,
-    "summary": "",
+    "summary": "fill image with one color picked at a position",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "",
+    "exampleProjectId": "qbiIbk",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Pixelate",
