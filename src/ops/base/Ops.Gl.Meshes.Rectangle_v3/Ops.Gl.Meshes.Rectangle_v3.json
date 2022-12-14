@@ -20,6 +20,30 @@
             "message": "Ops.Dev.Graphics.Meshes.Rectangle_v3 renamed to Ops.Gl.Meshes.Rectangle_v3",
             "author": "pandur",
             "date": 1670258506267
+        },
+        {
+            "message": "tangents/bitangents fixed",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034487213
+        },
+        {
+            "message": "geometry not output if not linked",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034505537
+        },
+        {
+            "message": "renamed active to \"render\" etc",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034525407
+        },
+        {
+            "message": "fixed tangents/bitangents - works now with pbrmaterial+heightmaps etc. as expected",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034996588
         }
     ],
     "authorName": "pandur",

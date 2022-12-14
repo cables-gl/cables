@@ -10,6 +10,24 @@
             "message": "Ops.User.pandur.MouseV3 renamed to Ops.Devices.Mouse.Mouse_v3",
             "author": "pandur",
             "date": 1668766229733
+        },
+        {
+            "message": "add normalization switch: more normalizing options",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034156799
+        },
+        {
+            "message": "cleanup op ports and remove stuff thats mostly not used",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034844588
+        },
+        {
+            "message": "better default values",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034850149
         }
     ],
     "layout": {

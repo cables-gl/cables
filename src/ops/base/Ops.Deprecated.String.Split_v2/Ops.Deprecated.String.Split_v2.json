@@ -60,6 +60,12 @@
             "message": "Ops.String.Split_v2 renamed to Ops.Deprecated.String.Split_v2",
             "author": "pandur",
             "date": 1671004276574
+        },
+        {
+            "message": "use Ops.Array.ParseArray_v2",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035516126
         }
     ]
 }

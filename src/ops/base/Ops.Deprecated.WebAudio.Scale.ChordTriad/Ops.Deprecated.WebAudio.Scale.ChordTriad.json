@@ -44,6 +44,12 @@
             "message": "Ops.WebAudio.Scale.ChordTriad renamed to Ops.Deprecated.WebAudio.Scale.ChordTriad",
             "author": "pandur",
             "date": 1671008144360
+        },
+        {
+            "message": "",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035532111
         }
     ]
 }

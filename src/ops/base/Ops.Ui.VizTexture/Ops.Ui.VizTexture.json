@@ -20,6 +20,12 @@
             "message": "Ops.Dev.VizTexture renamed to Ops.Ui.VizTexture",
             "author": "pandur",
             "date": 1637834150633
+        },
+        {
+            "message": "now also uses cubemaps alpha channel",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034575804
         }
     ],
     "authorName": "pandur",

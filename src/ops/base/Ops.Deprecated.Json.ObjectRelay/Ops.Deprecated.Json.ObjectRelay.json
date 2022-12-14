@@ -31,6 +31,12 @@
             "message": "Ops.Json.ObjectRelay renamed to Ops.Deprecated.Json.ObjectRelay",
             "author": "pandur",
             "date": 1671005931432
+        },
+        {
+            "message": "use Ops.Json.GateObject",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035441964
         }
     ]
 }

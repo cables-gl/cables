@@ -34,5 +34,13 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "fix non-connected ports to PatchOutput when creating subpatches",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671035063910
+        }
+    ]
 }

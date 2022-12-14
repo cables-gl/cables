@@ -108,8 +108,14 @@
             "message": "Ops.Gl.Matrix.CircleTransform renamed to Ops.Deprecated.Gl.Matrix.CircleTransform",
             "author": "pandur",
             "date": 1671004752128
+        },
+        {
+            "message": "deprecated, use Ops.Array.PointArray.CircularPoints",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671033974564
         }
-    ],
+        ],
     "issues": "",
     "youtubeids": [
         "1BtgdAfBLlY"

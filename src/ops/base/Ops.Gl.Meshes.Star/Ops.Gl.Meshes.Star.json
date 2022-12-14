@@ -57,5 +57,13 @@
         "name": "Ops.Gl.Meshes.Star"
     },
     "summary": "draw a star mesh (saw,gear)",
-    "exampleProjectId": "eXhAY4"
+    "exampleProjectId": "eXhAY4",
+    "changelog": [
+        {
+            "message": "z position for peaks",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034457153
+        }
+    ]
 }

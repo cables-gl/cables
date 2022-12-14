@@ -54,6 +54,12 @@
             "message": "Ops.Anim.RelativeTime renamed to Ops.Deprecated.Anim.RelativeTime",
             "author": "pandur",
             "date": 1671006089393
+        },
+        {
+            "message": "use  Ops.Anim.Timer_v2",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671035222544
         }
     ]
 }

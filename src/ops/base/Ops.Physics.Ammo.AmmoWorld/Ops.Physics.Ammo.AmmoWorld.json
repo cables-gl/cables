@@ -35,6 +35,12 @@
             "message": "added collisions output array",
             "author": "stephan",
             "date": 1663933463416
+        },
+        {
+            "message": "option to turn off automatic removal of bodies from inactive cables nodes",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034919435
         }
     ],
     "layout": {

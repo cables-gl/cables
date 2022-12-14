@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1579793372912
+        },
+        {
+            "message": "fix infinite loop bug, when activated no dupes and min max is the same number",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034348389
         }
     ],
     "authorName": "pandur",

@@ -136,5 +136,25 @@
             }
         ]
     },
-    "exampleProjectId": "dfF3DI"
+    "exampleProjectId": "dfF3DI",
+    "changelog": [
+        {
+            "message": "learned input parameter are transfered to remote viewer",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034735622
+        },
+        {
+            "message": "refresh parameter when changing notes etc.",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034753335
+        },
+        {
+            "message": "fixed an infitnite loop problem",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034758646
+        }
+    ]
 }

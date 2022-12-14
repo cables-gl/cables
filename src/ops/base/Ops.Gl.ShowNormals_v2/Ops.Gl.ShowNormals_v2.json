@@ -72,6 +72,12 @@
             "message": "Ops.User.cables.ShowNormals_v2 renamed to Ops.Gl.ShowNormals_v2",
             "author": "simod",
             "date": 1582120711810
+        },
+        {
+            "message": "output geometry/toggle if it is rendering itself",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034687120
         }
     ],
     "summary": "visualize normals, tangents or bitangents",

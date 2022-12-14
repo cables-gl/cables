@@ -44,6 +44,12 @@
             "message": "Ops.Api.Ifttt.IftttTrigger renamed to Ops.Deprecated.Api.Ifttt.IftttTrigger",
             "author": "pandur",
             "date": 1671005339267
+        },
+        {
+            "message": "outdated",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035244290
         }
     ]
 }

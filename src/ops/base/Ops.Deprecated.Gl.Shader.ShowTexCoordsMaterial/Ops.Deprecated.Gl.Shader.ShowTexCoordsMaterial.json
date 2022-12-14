@@ -34,6 +34,12 @@
             "message": "Ops.Gl.Shader.ShowTexCoordsMaterial renamed to Ops.Deprecated.Gl.Shader.ShowTexCoordsMaterial",
             "author": "pandur",
             "date": 1671005178763
+        },
+        {
+            "message": "use new  Ops.Gl.Shader.AttributeAsColorMaterial",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035486539
         }
     ]
 }

@@ -33,6 +33,12 @@
             "message": "Ops.InteractionListener renamed to Ops.Deprecated.InteractionListener",
             "author": "pandur",
             "date": 1671005715640
+        },
+        {
+            "message": "",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035420600
         }
     ]
 }

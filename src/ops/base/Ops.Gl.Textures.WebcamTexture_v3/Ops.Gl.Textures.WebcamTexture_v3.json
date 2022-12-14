@@ -47,6 +47,12 @@
             "message": "Ops.Dev.Gl.Textures.NewWebcamTexture renamed to Ops.Gl.Textures.WebcamTexture_v3",
             "author": "pandur",
             "date": 1652090146155
+        },
+        {
+            "message": "now only asks for permission if \"active\"-port is enables",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034796647
         }
     ],
     "layout": {
