@@ -15,6 +15,18 @@
             "message": "Ops.Dev.VizObject renamed to Ops.Ui.VizObject",
             "author": "pandur",
             "date": 1651219336727
+        },
+        {
+            "message": "now shows if it can not stringify an object, has more alternative ways to show them",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034940666
+        },
+        {
+            "message": "show class name in op extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034952752
         }
     ],
     "authorName": "pandur",

@@ -46,6 +46,12 @@
             "message": "Ops.Math.Max2 renamed to Ops.Deprecated.Math.Max2",
             "author": "pandur",
             "date": 1671006045575
+        },
+        {
+            "message": "se Ops.Math.Max",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035342912
         }
     ]
 }

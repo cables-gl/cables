@@ -42,6 +42,12 @@
             "message": "Ops.User.pandur.ReduceArray32 renamed to Ops.Array.ReduceArray3_v3",
             "author": "pandur",
             "date": 1634661015906
+        },
+        {
+            "message": "add methods to remove random points by threshold and duplicate points",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034630588
         }
     ],
     "summary": "Remove Points from an array, e.g. xth points, random, duplicates",

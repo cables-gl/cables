@@ -109,6 +109,18 @@
             "message": "Ops.Html.PlayerControlPanel renamed to Ops.Html.PlayerControlPanel_v2",
             "author": "pandur",
             "date": 1663320232017
+        },
+        {
+            "message": "fix states and add visible boolean",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671035035307
+        },
+        {
+            "message": "add \"is playing\" in-port, add outports for dragging",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671035042639
         }
     ],
     "issues": "",

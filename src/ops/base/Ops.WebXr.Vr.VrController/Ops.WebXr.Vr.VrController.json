@@ -15,6 +15,12 @@
             "message": "Ops.Dev.WebXrVrController renamed to Ops.WebXr.Vr.VrController",
             "author": "pandur",
             "date": 1665427740042
+        },
+        {
+            "message": "now correctly registers all button interactions",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034929002
         }
     ],
     "authorName": "pandur",

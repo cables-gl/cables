@@ -20,6 +20,12 @@
             "message": "remove autoDownload option",
             "author": "stephan",
             "date": 1644588080538
+        },
+        {
+            "message": "write correct error message to output port",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671035015041
         }
     ],
     "authorName": "pandur",

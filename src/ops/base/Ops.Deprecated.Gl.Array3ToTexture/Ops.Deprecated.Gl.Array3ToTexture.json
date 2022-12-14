@@ -15,6 +15,12 @@
             "message": "Ops.Gl.Array3ToTexture renamed to Ops.Deprecated.Gl.Array3ToTexture",
             "author": "pandur",
             "date": 1671008177841
+        },
+        {
+            "message": "use:  Ops.Gl.TextureFromColorArray",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035368651
         }
     ],
     "authorName": "pandur",

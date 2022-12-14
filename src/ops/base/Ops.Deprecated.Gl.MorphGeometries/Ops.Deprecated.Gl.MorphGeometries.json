@@ -101,6 +101,12 @@
             "message": "Ops.Gl.MorphGeometries renamed to Ops.Deprecated.Gl.MorphGeometries",
             "author": "pandur",
             "date": 1671005404571
+        },
+        {
+            "message": "use  Ops.Gl.MeshMorph",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035197667
         }
     ],
     "coreLibs": [

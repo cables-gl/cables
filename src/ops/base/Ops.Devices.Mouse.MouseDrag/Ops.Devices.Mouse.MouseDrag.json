@@ -57,14 +57,10 @@
     ],
     "changelog": [
         {
-            "message": "added input type selection",
+            "message": "added area option for canvas \"parent\" element",
+            "type": "feature",
             "author": "pandur",
-            "date": 1570700646501
-        },
-        {
-            "message": "added area parameter",
-            "author": "pandur",
-            "date": 1573030808834
+            "date": 1671033321511
         }
     ],
     "exampleProjectId": "hH8f_6"

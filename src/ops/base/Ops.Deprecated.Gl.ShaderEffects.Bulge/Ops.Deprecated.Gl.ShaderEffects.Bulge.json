@@ -52,6 +52,12 @@
             "message": "Ops.Gl.ShaderEffects.Bulge renamed to Ops.Deprecated.Gl.ShaderEffects.Bulge",
             "author": "pandur",
             "date": 1671005370381
+        },
+        {
+            "message": "",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035393353
         }
     ]
 }

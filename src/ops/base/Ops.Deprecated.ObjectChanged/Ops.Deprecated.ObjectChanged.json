@@ -23,6 +23,12 @@
             "message": "Ops.ObjectChanged renamed to Ops.Deprecated.ObjectChanged",
             "author": "pandur",
             "date": 1671005801047
+        },
+        {
+            "message": "use Ops.Trigger.TriggerOnChangeObject",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035467551
         }
     ]
 }

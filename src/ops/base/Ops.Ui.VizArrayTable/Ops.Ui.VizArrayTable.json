@@ -20,6 +20,12 @@
             "message": "Ops.Viz.VizArrayTable renamed to Ops.Ui.VizArrayTable",
             "author": "pandur",
             "date": 1652088955403
+        },
+        {
+            "message": "visualize there is more content to scroll to by fading out the first/last line",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034824349
         }
     ],
     "authorName": "pandur",
