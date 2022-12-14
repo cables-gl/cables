@@ -17,7 +17,7 @@ render.onTriggered = execrender;
 
 function execrender()
 {
-    const cgl = op.patch.cg;
+    const cgl = op.patch.cg || op.patch.cgl;
 
     if (hasChanged)
     {

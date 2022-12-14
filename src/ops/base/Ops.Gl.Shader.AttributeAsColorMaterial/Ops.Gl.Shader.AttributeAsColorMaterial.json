@@ -55,6 +55,11 @@
             "message": "Ops.Gl.Shader.ShowNormalsMaterial renamed to Ops.Gl.Shader.AttributeAsColorMaterial",
             "author": "pandur",
             "date": 1671005111866
+        },
+        {
+            "message": "added texture coordinate input toggle",
+            "author": "pandur",
+            "date": 1671032859102
         }
     ],
     "issues": "",
