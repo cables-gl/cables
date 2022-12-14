@@ -4,10 +4,10 @@ const
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outDir = op.outNumber("Dir"),
-    goNorth = op.outBoolNum("North"),
-    goEast = op.outBoolNum("East"),
-    goSouth = op.outBoolNum("South"),
-    goWest = op.outBoolNum("West");
+    goNorth = op.inBool("North"),
+    goEast = op.inBool("East"),
+    goSouth = op.inBool("South"),
+    goWest = op.inBool("West");
 
 let lastTime = performance.now();
 let dir = 0;
