@@ -1,3 +1,4 @@
 {
-    "name": "Ops.Extension.ReactionDiffusion"
+    "name": "Ops.Extension.ReactionDiffusion",
+    "summary": "Cellular automata system as feedback loop texture"
 }

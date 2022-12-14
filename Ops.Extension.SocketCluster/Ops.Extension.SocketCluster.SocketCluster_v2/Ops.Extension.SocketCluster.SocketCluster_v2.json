@@ -1,0 +1,181 @@
+{
+    "id": "1ec869b2-9a89-45ec-8fe5-ae2e039379cc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1584534300415
+        },
+        {
+            "message": " added lib: socketcluster-client.js",
+            "author": "stephan",
+            "date": 1584534406220
+        },
+        {
+            "message": "cloned op from Ops.Net.SocketCluster.SocketCluster",
+            "author": "stephan",
+            "date": 1620731073038
+        },
+        {
+            "message": "Ops.User.stephan.SocketCluster_v2 renamed to Ops.Net.SocketCluster.SocketCluster_v2",
+            "author": "stephan",
+            "date": 1620731129156
+        },
+        {
+            "message": "Ops.Net.SocketCluster.SocketCluster_v2 renamed to Ops.Extension.SocketCluster.SocketCluster_v2",
+            "author": "stephan",
+            "date": 1671003339954
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1620731073037,
+    "libs": [
+        "socketcluster-client.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Server hostname"
+            },
+            {
+                "type": 5,
+                "name": "Server path"
+            },
+            {
+                "type": 0,
+                "name": "Server port",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Use SSL",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Allow send",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Allow multiple senders",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Channel"
+            },
+            {
+                "type": 0,
+                "name": "Delay send (ms)",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Additional serverdata"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Ready",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Socket",
+                "objType": "socketcluster"
+            },
+            {
+                "type": 5,
+                "name": "Own client id"
+            },
+            {
+                "type": 0,
+                "name": "Can send",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Error"
+            }
+        ],
+        "name": "Ops.Net.SocketCluster.SocketCluster_v2"
+    },
+    "summary": "connect to a socketcluster server and manage the connection",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Active",
+                "text": "toggle connected/disconnected state"
+            },
+            {
+                "name": "Server hostname",
+                "text": "hostname"
+            },
+            {
+                "name": "Server path",
+                "text": "path of url"
+            },
+            {
+                "name": "Server port",
+                "text": "server port"
+            },
+            {
+                "name": "Use SSL",
+                "text": "enable encryption (needs to be supported by server)"
+            },
+            {
+                "name": "Allow send",
+                "text": "allow sending from this client"
+            },
+            {
+                "name": "Allow multiple senders",
+                "text": "allow multiple senders"
+            },
+            {
+                "name": "Channel",
+                "text": "name of the socketcluster channel"
+            },
+            {
+                "name": "Delay send (ms)",
+                "text": "delay sending messages by x ms"
+            },
+            {
+                "name": "Additional serverdata",
+                "text": "additional data send with every message (can be used for auth-token)"
+            },
+            {
+                "name": "Ready",
+                "text": "connection is ready"
+            },
+            {
+                "name": "Socket",
+                "text": "socket object to connect to other socketcluster ops"
+            },
+            {
+                "name": "Own client id",
+                "text": "my own client id"
+            },
+            {
+                "name": "Can send",
+                "text": "wether or not this client is able/allowed to send messages"
+            },
+            {
+                "name": "Error",
+                "text": "error object"
+            }
+        ]
+    },
+    "exampleProjectId": "mecjP3"
+}

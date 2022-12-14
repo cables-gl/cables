@@ -1,0 +1,95 @@
+{
+    "id": "441207d6-f3d5-444e-ac12-32bee2c33651",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1570544585161
+        },
+        {
+            "message": "Ops.Devices.OSC.OscArray renamed to Ops.Extension.Osc.OscArray",
+            "author": "stephan",
+            "date": 1671009436589
+        }
+    ],
+    "authorName": "andro",
+    "created": 1570544607041,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Message"
+            },
+            {
+                "type": "5",
+                "name": "Address"
+            },
+            {
+                "type": "1",
+                "name": "Learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Message"
+            },
+            {
+                "type": "3",
+                "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Received"
+            }
+        ],
+        "name": "Ops.Devices.OSC.OscArray"
+    },
+    "summary": "Outputs an array of data from a user defined OSC address",
+    "issues": "",
+    "collections": [
+        "Osc"
+    ],
+    "relatedops": [
+        "Ops.Net.WebSocket.WebSocket"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Address",
+                "text": "Address to filter data from"
+            },
+            {
+                "name": "Learn",
+                "text": "Click to learn. Op automatically listens to the next Osc message that comes in"
+            },
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Array out",
+                "text": "Array out "
+            },
+            {
+                "name": "Array length",
+                "text": "Length of array"
+            },
+            {
+                "name": "Received",
+                "text": "Triggers when a message change occurs"
+            }
+        ]
+    },
+    "exampleProjectId": "F77YvQ"
+}

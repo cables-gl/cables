@@ -1,0 +1,100 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "1",
+                "name": "Initialize"
+            },
+            {
+                "type": "5",
+                "name": "Model URL"
+            },
+            {
+                "type": "2",
+                "name": "Webcam texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "1",
+                "name": "Initialized"
+            },
+            {
+                "type": "3",
+                "name": "Classifier"
+            }
+        ],
+        "name": "Ops.Api.TeachableMachines.ImageClassifier"
+    },
+    "summary": "Use the Teachable Machines image classifier. Insert the uploaded model URL.",
+    "updated": 0,
+    "author": "mickey",
+    "authorName": "mickey",
+    "id": "611cf58e-d3c7-41b0-a492-394bc99732fc",
+    "created": 1605703797525,
+    "changelog": [
+        {
+            "message": " added lib: teachablemachine_tf_speech_image_pose.js",
+            "author": "mick",
+            "date": 1605700987264
+        },
+        {
+            "message": "Ops.Api.TeachableMachines.ImageClassifier renamed to Ops.Libs.TeachableMachines.ImageClassifier",
+            "author": "pandur",
+            "date": 1655965865847
+        },
+        {
+            "message": "Ops.Libs.TeachableMachines.ImageClassifier renamed to Ops.Extension.TeachableMachines.ImageClassifier",
+            "author": "stephan",
+            "date": 1671009230089
+        }
+    ],
+    "libs": [
+        "teachablemachine_tf_speech_image_pose.js"
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "trigger prediction"
+            },
+            {
+                "name": "Initialize",
+                "text": "trigger inizialization of model"
+            },
+            {
+                "name": "Model URL",
+                "text": "model base url"
+            },
+            {
+                "name": "Webcam texture",
+                "text": "webcam"
+            },
+            {
+                "name": "Trigger",
+                "text": "trigger out"
+            },
+            {
+                "name": "Initialized",
+                "text": "init done"
+            },
+            {
+                "name": "Classifier",
+                "text": "prediction classes and scores"
+            }
+        ]
+    },
+    "exampleProjectId": "raewrn"
+}
