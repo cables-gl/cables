@@ -6,7 +6,7 @@ const
     zNear = op.inFloat("frustum near", -500),
     zFar = op.inFloat("frustum far", 500),
     fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
-    inAlign = op.inSwitch("Position 0,0", ["Top Left", "Top Right", "Center", "Bottom Right", "Bottom Left"], "Top Left"),
+    inAlign = op.inSwitch("Position 0,0", ["Top Left ", "Top Right", "Center", "Bottom Right", "Bottom Left"], "Bottom Left"),
 
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),
@@ -92,7 +92,7 @@ function exec()
         yt -= h;
         yb = y0;
     }
-    if (inAlign.get() === "Top Left")
+    if (inAlign.get() === "Top Left ")
     {
         xl = x0;
         xr = w;
