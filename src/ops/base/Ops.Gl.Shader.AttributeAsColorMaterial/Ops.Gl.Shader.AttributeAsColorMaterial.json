@@ -1,0 +1,67 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Attribute index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Absolute",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "World Space",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ShowNormalsMaterial"
+    },
+    "authorName": "pandur",
+    "id": "2963fd23-a860-461a-a3cf-394b8261159f",
+    "created": 1525434279614,
+    "summary": "render mesh normals as colors",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "added worldspace option ",
+            "author": "pandur",
+            "date": 1565466494033
+        },
+        {
+            "message": "added absolute number option",
+            "author": "pandur",
+            "date": 1565466507120
+        },
+        {
+            "message": "Ops.Gl.Shader.ShowNormalsMaterial renamed to Ops.Gl.Shader.AttributeAsColorMaterial",
+            "author": "pandur",
+            "date": 1671005111866
+        }
+    ],
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "bZEZGc"
+}

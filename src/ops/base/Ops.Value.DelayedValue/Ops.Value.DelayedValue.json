@@ -41,5 +41,27 @@
     "summary": "delay a value by seconds",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.DelayedValue renamed to Ops.Value.DelayeNumber",
+            "author": "pandur",
+            "date": 1671006201676
+        },
+        {
+            "message": "Ops.Value.DelayeNumber renamed to Ops.Value.DelayedValue",
+            "author": "pandur",
+            "date": 1671006664065
+        },
+        {
+            "message": "Ops.Value.DelayedValue renamed to Ops.Value.DelayNumber",
+            "author": "pandur",
+            "date": 1671006720066
+        },
+        {
+            "message": "Ops.Value.DelayNumber renamed to Ops.Value.DelayedValue",
+            "author": "pandur",
+            "date": 1671006976084
+        }
+    ]
 }
