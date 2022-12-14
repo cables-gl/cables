@@ -27,12 +27,11 @@ op.setPortGroup("Options", [asMaterial]);
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
 
-fragmentShader.onChange = vertexShader.onChange =
-    function ()
-    {
-        if (fragmentShader.isLinked() && !fragmentShader.get()) return;
-        needsUpdate = true;
-    };
+fragmentShader.onChange = vertexShader.onChange = function ()
+{
+    if (fragmentShader.isLinked() && !fragmentShader.get()) return;
+    needsUpdate = true;
+};
 
 render.onTriggered = doRender;
 

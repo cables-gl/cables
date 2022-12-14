@@ -18,6 +18,16 @@ class PatchVariable extends EventTarget
         this.setValue(val);
     }
 
+    /**
+     * keeping this for backwards compatibility in older
+     * exports before using eventtarget
+     *
+     * @param cb
+     */
+    addListener(cb)
+    {
+        this.on("change", cb, "var");
+    }
 
     /**
      * @function Variable.getValue

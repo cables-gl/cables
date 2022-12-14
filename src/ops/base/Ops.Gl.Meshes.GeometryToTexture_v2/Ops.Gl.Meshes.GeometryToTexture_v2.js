@@ -127,7 +127,7 @@ function updateSize()
         size = -1;
         return;
     }
-    if (autoSize && geo)
+    if (autoSize && geo && geo.vertices)
     {
         size = Math.ceil(Math.sqrt(geo.vertices.length / 3));
     }
@@ -188,7 +188,7 @@ exec.onTriggered = function ()
 
     const geo = inGeom.get();
 
-    if (!geo) return next.trigger();
+    if (!geo || !geo.copy || !geo.vertices) return next.trigger();
 
     if (size < 1)
     {

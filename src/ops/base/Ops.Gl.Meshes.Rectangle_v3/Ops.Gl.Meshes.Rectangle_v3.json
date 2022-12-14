@@ -102,7 +102,7 @@
                 "objType": "geometry"
             }
         ],
-        "name": "Ops.Dev.Graphics.Meshes.Rectangle_v3"
+        "name": "Ops.Gl.Meshes.Rectangle_v3"
     },
     "summary": "draw a rectangle (plane, square)",
     "issues": "",

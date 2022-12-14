@@ -403,7 +403,7 @@ function makeBlueprint()
 
 op.rebuildListeners = () =>
 {
-    console.log("rebuild listeners...");
+    op.log("rebuild listeners...");
 
     const outop = getSubPatchOutputOp();
     for (let i = 0; i < outop.portsIn.length; i++)
@@ -413,8 +413,4 @@ op.rebuildListeners = () =>
             addPortListener(outop.portsIn[i], this.portsOut[i]);
         }
     }
-
-    //     CABLES.patch.getOpById("be7febce-b4fa-416a-892a-c1c555feffe4").addPortListener(
-    //     CABLES.patch.getOpById("fecce1d5-e08a-5263-af71-f521c41f88e5").portsIn[1],
-    //     CABLES.patch.getOpById("be7febce-b4fa-416a-892a-c1c555feffe4").portsOut[1]
 };

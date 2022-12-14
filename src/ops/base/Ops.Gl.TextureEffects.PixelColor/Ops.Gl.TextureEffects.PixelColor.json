@@ -45,11 +45,11 @@
     "authorName": "pandur",
     "id": "114e250c-f569-4963-a3b3-fcdce816406f",
     "created": 1667556326780,
-    "summary": "Pixelate an image",
+    "summary": "fill image with one color picked at a position",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "1w_9W6",
+    "exampleProjectId": "qbiIbk",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Pixelate",
@@ -75,6 +75,13 @@
             "message": "Ops.User.pandur.PixelColor renamed to Ops.Dev.Gl.TextureEffects.PixelColor",
             "author": "pandur",
             "date": 1667557786473
+        },
+        {
+            "message": "Ops.Dev.Gl.TextureEffects.PixelColor renamed to Ops.Gl.TextureEffects.PixelColor",
+            "author": "pandur",
+            "date": 1670920968058
         }
-    ]
+    ],
+    "collections": null,
+    "relatedops": null
 }

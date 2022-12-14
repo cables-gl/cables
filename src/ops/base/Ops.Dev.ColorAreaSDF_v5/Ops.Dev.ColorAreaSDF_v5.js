@@ -1,9 +1,10 @@
 const
     render = op.inTrigger("Render"),
-    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
+    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
     inSize = op.inValue("Size", 1),
+    roundNess = op.inFloatSlider("Roundness", 0),
     inAmount = op.inValueSlider("Amount", 0.5),
-    inFalloff = op.inValueSlider("Falloff", 0),
+    inFalloff = op.inFloat("Falloff", 0),
     inInvert = op.inValueBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
@@ -72,7 +73,7 @@ mod.addModule({
 mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, 0);
 mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
-mod.addUniform("3f", "MOD_scale", sizeX, sizeY, sizeZ);
+mod.addUniform("4f", "MOD_scale", sizeX, sizeY, sizeZ, roundNess);
 mod.addUniform("t", "MOD_tex");
 
 updateDefines();
@@ -118,6 +119,8 @@ function updateDefines()
     mod.toggleDefine("MOD_AREA_AXIS_Z_INFINITE", inArea.get() == "Axis Z Infinite");
     mod.toggleDefine("MOD_AREA_SPHERE", inArea.get() == "Sphere");
     mod.toggleDefine("MOD_AREA_BOX", inArea.get() == "Box");
+    mod.toggleDefine("MOD_AREA_TRIPRISM", inArea.get() == "Tri Prism");
+    mod.toggleDefine("MOD_AREA_HEXPRISM", inArea.get() == "Hex Prism");
 
     mod.toggleDefine("MOD_DOSCALE", doScale.get());
 
@@ -125,6 +128,8 @@ function updateDefines()
     sizeX.setUiAttribs({ "greyout": !doScale.get() });
     sizeY.setUiAttribs({ "greyout": !doScale.get() });
     sizeZ.setUiAttribs({ "greyout": !doScale.get() });
+
+    roundNess.setUiAttribs({ "greyout": inArea.get() != "Box" });
 
     mod.toggleDefine("MOD_USE_TEX", inTex.isLinked());
 }
@@ -140,15 +145,12 @@ function doRender()
     // if(doScale.get()) mod.setUniformValue("MOD_scale",[sizeX.get(),sizeY.get(),sizeZ.get()]);
     mod.bind();
 
-    if (inTex.isLinked())
-    {
-        let tex = inTex.get();
+    let tex = inTex.get();
 
-        if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
-        else tex = tex.tex;
+    if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
+    else tex = tex.tex;
 
-        mod.pushTexture("MOD_tex", tex);
-    }
+    mod.pushTexture("MOD_tex", tex);
 
     drawHelpers();
     next.trigger();

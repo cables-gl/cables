@@ -37,12 +37,14 @@
             },
             {
                 "name": "reset",
-                "text": "Resets the `Result` to `false`"
+                "text": "Resets the `Result` to default value."
             },
             {
                 "name": "result",
                 "text": "Either `true` or `false`"
             }
         ]
-    }
+    },
+    "collections": null,
+    "relatedops": null
 }

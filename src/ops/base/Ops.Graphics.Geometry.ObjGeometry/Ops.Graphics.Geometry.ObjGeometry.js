@@ -135,7 +135,7 @@ function parse(str)
         objects.push(o);
     }
 
-    console.log("objects", objects);
+    op.log("objects", objects);
 
     let finalgeom = new CGL.Geometry("objfile");
     for (let io = 0; io < objects.length; io++)
@@ -144,7 +144,7 @@ function parse(str)
         geom.clear();
 
         let o = objects[io];
-        console.log(o);
+        op.log(o);
 
         if (o.indexVerts.length > 0)
         {
@@ -157,18 +157,16 @@ function parse(str)
             {
                 if (isIndexed)
                 {
-                    // console.log(o.indexVerts[i], o.indexNorms[i], o.indexTexcoords[i]);
                     if (!(o.indexVerts[i] == o.indexNorms[i] && o.indexNorms[i] == o.indexTexcoords[i]))
                     {
-                        console.log("false");
-                        // console.log(o.indexVerts);
+                        op.log("false");
                         isIndexed = false;
                         break;
                     }
                 }
             }
 
-            console.log("isIndexed", isIndexed);
+            op.log("isIndexed", isIndexed);
             if (isIndexed)
             {
                 geom.verticesIndices = o.indexVerts;

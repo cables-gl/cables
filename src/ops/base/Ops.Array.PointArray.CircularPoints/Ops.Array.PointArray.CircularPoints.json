@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.CircularPoints renamed to Ops.Dev.Array.CircularPoints",
             "author": "pandur",
             "date": 1667549245819
+        },
+        {
+            "message": "Ops.Dev.Array.CircularPoints renamed to Ops.Array.PointArray.CircularPoints",
+            "author": "pandur",
+            "date": 1670921131566
         }
     ],
     "authorName": "pandur",
@@ -89,5 +94,6 @@
     "exampleProjectId": "V34dYh",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "create arrays for circular shapes, helix,circle etc"
 }

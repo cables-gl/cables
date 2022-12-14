@@ -18,7 +18,7 @@
         ],
         "name": "Ops.Dev.Gl.Shader.PositionAsColorMaterial"
     },
-    "summary": "visualize texturecoordinates/UV mapping of a mesh ",
+    "summary": "draw mehes using XYZ position coordinates as RGB color ",
     "docs": {
         "ports": []
     },
@@ -28,7 +28,7 @@
     ],
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "d5Aq_o",
+    "exampleProjectId": "qbiIbk",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.Shader.ShowTexCoordsMaterial",
@@ -39,6 +39,11 @@
             "message": "Ops.User.pandur.PositionAdColorMaterial renamed to Ops.Dev.Gl.Shader.PositionAsColorMaterial",
             "author": "pandur",
             "date": 1667556078944
+        },
+        {
+            "message": "Ops.Dev.Gl.Shader.PositionAsColorMaterial renamed to Ops.Gl.Shader.PositionAsColorMaterial",
+            "author": "pandur",
+            "date": 1670921051508
         }
     ]
 }

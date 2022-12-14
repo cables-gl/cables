@@ -14,7 +14,8 @@ op.setPortGroup("", [seed, closed]);
 
 values.ignoreValueSerialize = true;
 
-closed.onChange = max.onChange =
+closed.onChange =
+    max.onChange =
     min.onChange =
     numValues.onChange =
     seed.onChange =

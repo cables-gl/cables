@@ -20,6 +20,11 @@
             "message": "Ops.Dev.ParseObj renamed to Ops.Dev.ObjGeometry",
             "author": "pandur",
             "date": 1665667473768
+        },
+        {
+            "message": "Ops.Dev.ObjGeometry renamed to Ops.Graphics.Geometry.ObjGeometry",
+            "author": "pandur",
+            "date": 1670921247823
         }
     ],
     "authorName": "pandur",
@@ -42,6 +47,14 @@
                 "name": "Status"
             }
         ],
-        "name": "Ops.Dev.ObjGeometry"
-    }
+        "name": "Ops.Graphics.Geometry.ObjGeometry"
+    },
+    "summary": "parse an obj string to a geometry object",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "",
+    "exampleProjectId": "JeA8ck"
 }
