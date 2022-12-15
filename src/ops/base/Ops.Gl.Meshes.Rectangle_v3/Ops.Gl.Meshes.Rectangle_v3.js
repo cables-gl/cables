@@ -1,16 +1,3 @@
-// const
-//     render = op.inTrigger("render"),
-//     trigger = op.outTrigger("trigger"),
-//     width = op.inValue("width", 1),
-//     height = op.inValue("height", 1),
-//     pivotX = op.inSwitch("pivot x", ["left", "center", "right"]),
-//     pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"]),
-//     nColumns = op.inValueInt("num columns", 1),
-//     nRows = op.inValueInt("num rows", 1),
-//     axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
-//     active = op.inValueBool("Active", true),
-//     geomOut = op.outObject("geometry", null, "geometry");
-
 const
     render = op.inTrigger("render"),
     doRender = op.inValueBool("dorender", true),
@@ -70,12 +57,9 @@ render.onLinkChanged = () =>
 op.preRender =
 render.onTriggered = function ()
 {
-    if (needsRebuild)rebuild();
-    if (doRender.get() && mesh)
-    {
-        mesh.render(op.patch.cg.getShader());
-        trigger.trigger();
-    }
+    if (needsRebuild) rebuild();
+    if (mesh) mesh.render(op.patch.cg.getShader());
+    trigger.trigger();
 };
 
 op.onDelete = function ()

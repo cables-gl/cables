@@ -1,4 +1,5 @@
 const
+    radius = op.inValue("Radius", 1),
     segments = op.inValue("Round Segments", 40),
     percent = op.inFloat("Rounds", 1),
     inRoundOffset = op.inFloat("Radius Add Round", 0.1),
@@ -6,7 +7,6 @@ const
     inOffset = op.inFloat("Offset", 0),
     inPointOffset = op.inFloat("Point Offset XY", 0.1),
     inPointOffsetZ = op.inFloat("Point Offset Z", 0.1),
-    radius = op.inValue("Radius", 1),
     inOffsetRot = op.inFloat("Offset Rotation"),
     outArr = op.outArray("Points", 3),
     outRotArr = op.outArray("Rotation", 3),
