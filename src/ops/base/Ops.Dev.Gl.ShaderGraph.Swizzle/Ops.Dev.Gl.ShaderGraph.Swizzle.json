@@ -22,7 +22,7 @@
             {
                 "type": 2,
                 "name": "vec",
-                "objType": "sg_vec4"
+                "objType": "sg_vec3"
             },
             {
                 "type": 0,
@@ -54,10 +54,10 @@
             {
                 "type": 2,
                 "name": "Result",
-                "objType": "sg_vec4"
+                "objType": "sg_vec3"
             }
         ],
-        "name": "Ops.User.pandur.Swizzle"
+        "name": "Ops.Dev.Gl.ShaderGraph.Swizzle"
     },
     "authorName": "pandur",
     "created": 1663946795809

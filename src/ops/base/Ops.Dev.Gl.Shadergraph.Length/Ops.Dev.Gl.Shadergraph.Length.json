@@ -1,0 +1,58 @@
+{
+    "id": "27f420c0-aecc-447c-927c-3536abc8849a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671100478399
+        },
+        {
+            "message": "Ops.User.pandur.Length renamed to Ops.Dev.Gl.Shadergraph.Length",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671100824011
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671100478399,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "input",
+                "objType": "sg_vec4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ],
+        "name": "Ops.User.pandur.Length"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}

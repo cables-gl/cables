@@ -29,7 +29,7 @@ function updateUi()
     if (inType.get() == "vec3" || inType.get() == "vec4")swizzStr += zChannel.get().toLowerCase();
     if (inType.get() == "vec4")swizzStr += wChannel.get().toLowerCase();
 
-    const str = "vec4 swizzle(vec4 vec){return vec." + swizzStr + "; }";
+    const str = inType.get() + " swizzle(" + inType.get() + " vec){return vec." + swizzStr + "; }";
 
     console.log(str);
     sgOp.parseCode(str);
