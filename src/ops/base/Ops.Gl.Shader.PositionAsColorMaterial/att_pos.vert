@@ -9,7 +9,6 @@ UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
-
 {{MODULES_HEAD}}
 
 void main()
@@ -17,6 +16,8 @@ void main()
 
     vec4 pos=vec4(vPosition,1.0);
     mMatrix=modelMatrix;
+
+
 
     {{MODULE_VERTEX_POSITION}}
 
