@@ -22,7 +22,7 @@
             {
                 "type": 2,
                 "name": "vec",
-                "objType": "sg_vec3"
+                "objType": "sg_vec4"
             },
             {
                 "type": 0,
@@ -54,7 +54,7 @@
             {
                 "type": 2,
                 "name": "Result",
-                "objType": "sg_vec3"
+                "objType": "sg_vec4"
             }
         ],
         "name": "Ops.Dev.Gl.ShaderGraph.Swizzle"
