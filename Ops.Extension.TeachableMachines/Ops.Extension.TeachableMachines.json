@@ -1,3 +1,4 @@
 {
-    "name": "Ops.Extension.TeachableMachines"
+    "name": "Ops.Extension.TeachableMachines",
+    "summary": "Teachable Machines library by Google"
 }

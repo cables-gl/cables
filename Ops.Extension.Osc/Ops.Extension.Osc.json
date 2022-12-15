@@ -1,3 +1,4 @@
 {
-    "name": "Ops.Extension.Osc"
+    "name": "Ops.Extension.Osc",
+    "summary": "Use a WebSocket-Connection to receive OSC"
 }
