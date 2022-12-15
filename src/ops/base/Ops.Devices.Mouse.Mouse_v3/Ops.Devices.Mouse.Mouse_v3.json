@@ -102,5 +102,6 @@
     "exampleProjectId": "mDiCq6",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Get mouse coordinates and events"
 }
