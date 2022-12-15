@@ -82,5 +82,13 @@
         }
     ],
     "youtubeids": [],
-    "exampleProjectId": "mDiCq6"
+    "exampleProjectId": "mDiCq6",
+    "changelog": [
+        {
+            "message": "switch for normalized input values",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034247170
+        }
+    ]
 }

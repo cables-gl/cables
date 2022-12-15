@@ -12,6 +12,26 @@
                 "type": 0,
                 "name": "Speed",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "North",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "East",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "South",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "West",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -28,26 +48,6 @@
             {
                 "type": 0,
                 "name": "Dir",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "North",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "East",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "South",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "West",
                 "subType": "number"
             }
         ],

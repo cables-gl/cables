@@ -15,6 +15,12 @@
             "message": "Ops.Dev.PbrEnvironmentLight renamed to Ops.Gl.Pbr.PbrEnvironmentLight",
             "author": "pandur",
             "date": 1644228824618
+        },
+        {
+            "message": "added workaround for amd cards where cubemaps were rendered wrong, because of clearColor",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034875636
         }
     ],
     "coreLibs": [

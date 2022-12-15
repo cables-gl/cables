@@ -25,5 +25,13 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "573_4S"
+    "exampleProjectId": "573_4S",
+    "changelog": [
+        {
+            "message": "was using a reference, not a copy of the projectionmatrix",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034782212
+        }
+    ]
 }

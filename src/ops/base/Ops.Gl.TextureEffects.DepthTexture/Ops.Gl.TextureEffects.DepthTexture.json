@@ -2,46 +2,47 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "2",
-                "name": "image"
+                "type": 2,
+                "name": "image",
+                "objType": "texture"
             },
             {
-                "type": "0",
-                "name": "Blend Mode",
+                "type": 0,
+                "name": "Blend Mode index",
                 "group": "Blending",
-                "subType": "string"
+                "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "farplane",
                 "group": "Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "nearplane",
                 "group": "Frustum",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invert",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

@@ -21,5 +21,4 @@ void main()
     vec4 base=texture(texBase,texCoord);
 
     outColor=cgl_blend(base,col,amount);
-
 }

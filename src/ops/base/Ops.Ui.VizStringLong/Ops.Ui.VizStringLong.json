@@ -10,6 +10,18 @@
             "message": "Ops.User.pandur.VizStringLong renamed to Ops.Ui.VizStringLong",
             "author": "pandur",
             "date": 1663497628560
+        },
+        {
+            "message": "added scroll slider / performance optimization for very long strings",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034698050
+        },
+        {
+            "message": "visualize there is more content to scroll to by fading out the first/last line",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034812499
         }
     ],
     "authorName": "pandur",

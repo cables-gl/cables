@@ -178,6 +178,24 @@
             "message": "Ops.User.pandur.VideoTextureV3 renamed to Ops.Gl.Textures.VideoTexture_v3",
             "author": "pandur",
             "date": 1669650714332
+        },
+        {
+            "message": "new output port: shows if user interaction is needed to start",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034423872
+        },
+        {
+            "message": "now needs to be triggered to update",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034433444
+        },
+        {
+            "message": "show user interaction button to start like audio output op",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034441701
         }
     ],
     "summary": "Play a video file and use it as a texture",

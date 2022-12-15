@@ -115,7 +115,7 @@ function realReload(nocache)
                     if (err)
                     {
                         setTempTexture();
-                        op.setUiError("urlerror", "could not load texture:<br/>\"" + filename.get() + "\"", 2);
+                        op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
                         cgl.patch.loading.finished(loadingId);
                         return;
                     }

@@ -20,6 +20,18 @@
             "message": "Ops.User.pandur.FillArrayRandomDuplicatesV2 renamed to Ops.Array.FillArrayRandomDuplicates_v2",
             "author": "pandur",
             "date": 1669209275470
+        },
+        {
+            "message": "array now has the correct length",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034893386
+        },
+        {
+            "message": "no trigger required anymore to generate",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034898341
         }
     ],
     "authorName": "pandur",

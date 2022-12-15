@@ -55,6 +55,12 @@
             "message": "Ops.User.pandur.ToggleBoolV2 renamed to Ops.Boolean.ToggleBool_v2",
             "author": "pandur",
             "date": 1669884155792
+        },
+        {
+            "message": "output default value on patch load",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034318241
         }
     ],
     "collections": null,

@@ -79,6 +79,12 @@
             "message": "add option to have vertex indices and flat mode",
             "author": "stephan",
             "date": 1657191339105
+        },
+        {
+            "message": "fix bug with not updating in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034661587
         }
     ]
 }

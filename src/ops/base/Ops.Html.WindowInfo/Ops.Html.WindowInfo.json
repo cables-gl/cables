@@ -5,6 +5,18 @@
             "message": "created op",
             "author": "pandur",
             "date": 1566822587767
+        },
+        {
+            "message": "added boolean output: patch is opened in an iframe or not",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034399556
+        },
+        {
+            "message": "add output: absolute scroll-height of body",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034591994
         }
     ],
     "authorName": "pandur",

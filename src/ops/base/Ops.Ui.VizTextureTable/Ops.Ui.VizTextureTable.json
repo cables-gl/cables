@@ -30,6 +30,18 @@
             "message": "Ops.Viz.VizTextureTable renamed to Ops.Ui.VizTextureTable",
             "author": "pandur",
             "date": 1652088990439
+        },
+        {
+            "message": "performance optimized: only read pixels that will be shown / update less often",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034973117
+        },
+        {
+            "message": "start at top left pixel of texture",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034980836
         }
     ],
     "authorName": "pandur",

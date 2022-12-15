@@ -69,6 +69,12 @@
             "message": "Ops.Array.Array3xRandomSelection renamed to Ops.Array.Array3RandomSelection",
             "author": "pandur",
             "date": 1561119598200
+        },
+        {
+            "message": "fixed random seed behaviour",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034608797
         }
     ],
     "exampleProjectId": "1qNz98"
