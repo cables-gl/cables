@@ -23,6 +23,11 @@
         "portsIn": [
             {
                 "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Round Segments",
                 "subType": "number"
             },
@@ -58,11 +63,6 @@
             },
             {
                 "type": 0,
-                "name": "Radius",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "Offset Rotation",
                 "subType": "number"
             }
@@ -87,7 +87,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.Array.CircularPoints"
+        "name": "Ops.Array.PointArray.CircularPoints"
     },
     "collections": null,
     "relatedops": null,

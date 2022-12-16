@@ -32,22 +32,23 @@ function updateSizeUI()
 
 function exec()
 {
-    let m = 1;
     let xl = 0;
     let yt = 0;
     let xr = 0;
     let yb = 0;
 
-    let w = width.get() * m;
-    let h = height.get() * m;
+    let w = width.get();
+    let h = height.get();
 
-    let x0 = width.get() * (1.0 - m);
-    let y0 = height.get() * (1.0 - m);
+    let x0 = 0;
+    let y0 = 0;
 
     if (useVPSize.get())
     {
         xr = cgl.getViewPort()[2] / cgl.pixelDensity;
         yb = cgl.getViewPort()[3] / cgl.pixelDensity;
+        w = cgl.getViewPort()[2] / cgl.pixelDensity;
+        h = cgl.getViewPort()[3] / cgl.pixelDensity;
     }
     else
     {

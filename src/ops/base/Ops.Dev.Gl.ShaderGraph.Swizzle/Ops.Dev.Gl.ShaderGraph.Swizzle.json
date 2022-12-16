@@ -57,7 +57,7 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.User.pandur.Swizzle"
+        "name": "Ops.Dev.Gl.ShaderGraph.Swizzle"
     },
     "authorName": "pandur",
     "created": 1663946795809

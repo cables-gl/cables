@@ -1,0 +1,63 @@
+{
+    "id": "eab198bd-b8e9-467e-ad05-8175b41a9732",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671101455606
+        },
+        {
+            "message": "Ops.User.pandur.Pow renamed to Ops.Dev.Gl.ShaderGraph.Pow",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671103407513
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671101455605,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "input",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "power",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ],
+        "name": "Ops.User.pandur.Pow"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}

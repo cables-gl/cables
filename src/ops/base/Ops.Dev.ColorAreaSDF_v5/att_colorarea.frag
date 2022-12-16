@@ -17,9 +17,9 @@ vec3 MOD_col=MOD_color;
 #endif
 
 #ifdef MOD_AREA_BOX
-    float r=MOD_scale.w;
-    r*=MOD_inSizeAmountFalloffSizeX.x;
-    float MOD_de=MOD_sdRoundBox(MOD_pos.xyz-MOD_vertPos.xyz,MOD_size-r,r);
+    float MOD_r=MOD_scale.w;
+    MOD_r*=MOD_inSizeAmountFalloffSizeX.x;
+    float MOD_de=MOD_sdRoundBox(MOD_pos.xyz-MOD_vertPos.xyz,MOD_size-MOD_r,MOD_r);
 #endif
 
 #ifdef MOD_AREA_TRIPRISM

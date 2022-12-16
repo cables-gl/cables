@@ -1,0 +1,68 @@
+{
+    "id": "6c041b4c-2692-4068-b86e-47476f3ad261",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671100933952
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.Dot",
+            "author": "pandur",
+            "date": 1671101250449
+        },
+        {
+            "message": "Ops.User.pandur.Cross renamed to Ops.Dev.Gl.ShaderGraph.Cross",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671101407258
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671101250449,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "value a",
+                "objType": "sg_vec3"
+            },
+            {
+                "type": 2,
+                "name": "value b",
+                "objType": "sg_vec3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec3"
+            }
+        ],
+        "name": "Ops.User.pandur.Cross"
+    },
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
+}
