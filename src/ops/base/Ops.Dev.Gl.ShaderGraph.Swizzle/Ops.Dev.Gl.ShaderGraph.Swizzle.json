@@ -15,6 +15,12 @@
             "message": "Ops.Dev.ShaderGraph.Swizzle renamed to Ops.Dev.Gl.ShaderGraph.Swizzle",
             "author": "pandur",
             "date": 1667289329202
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "type": "",
+            "author": "pandur",
+            "date": 1671096977349
         }
     ],
     "layout": {
@@ -57,8 +63,11 @@
                 "objType": "sg_vec4"
             }
         ],
-        "name": "Ops.User.pandur.Swizzle"
+        "name": "Ops.Dev.Gl.ShaderGraph.Swizzle"
     },
     "authorName": "pandur",
-    "created": 1663946795809
+    "created": 1663946795809,
+    "coreLibs": [
+        "cgl_shadergraph"
+    ]
 }

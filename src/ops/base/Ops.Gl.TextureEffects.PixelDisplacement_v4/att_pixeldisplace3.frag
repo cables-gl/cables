@@ -31,7 +31,8 @@ float getOffset(float offset)
 
 void main()
 {
-    vec3 offset=texture(displaceTex,texCoord).rgb;
+    vec4 rgba=texture(displaceTex,texCoord);
+    vec3 offset=rgba.rgb*rgba.a;
     float x,y;
 
     #ifdef INPUT_REDGREEN

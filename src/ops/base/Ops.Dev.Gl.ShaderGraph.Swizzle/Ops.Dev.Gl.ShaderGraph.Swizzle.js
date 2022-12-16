@@ -31,8 +31,8 @@ function updateUi()
 
     const str = "vec4 swizzle(vec4 vec){return vec." + swizzStr + "; }";
 
-    console.log(str);
+    // console.log(str);
     sgOp.parseCode(str);
-    console.log(sgOp.info);
+    // console.log(sgOp.info);
     sgOp.updateGraph();
 }
