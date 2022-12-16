@@ -25,11 +25,22 @@ function updateUi()
     result.setUiAttribs({ "objType": "sg_" + inType.get() });
 
     let swizzStr = xChannel.get().toLowerCase();
-    if (inType.get() == "vec2" || inType.get() == "vec3" || inType.get() == "vec4")swizzStr += yChannel.get().toLowerCase();
-    if (inType.get() == "vec3" || inType.get() == "vec4")swizzStr += zChannel.get().toLowerCase();
-    if (inType.get() == "vec4")swizzStr += wChannel.get().toLowerCase();
+    let str = "";
 
-    const str = "vec4 swizzle(vec4 vec){return vec." + swizzStr + "; }";
+    // if (inType.get() == "float")
+    // {
+    //     str = swizzStr;
+    //     str = inType.get() + " swizzle(" + inType.get() + " vec){return " + vec + "; }";
+    // }
+    // else
+    {
+        if (inType.get() == "float") swizzStr = "vec";
+        if (inType.get() == "vec2" || inType.get() == "vec3" || inType.get() == "vec4") swizzStr += "vec." + yChannel.get().toLowerCase();
+        if (inType.get() == "vec3" || inType.get() == "vec4") swizzStr += "vec." + zChannel.get().toLowerCase();
+        if (inType.get() == "vec4") swizzStr += "vec." + wChannel.get().toLowerCase();
+
+        str = inType.get() + " swizzle(" + inType.get() + " vec){return " + swizzStr + "; }";
+    }
 
     // console.log(str);
     sgOp.parseCode(str);
