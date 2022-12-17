@@ -90,7 +90,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Lottie.LottieSVGPlayer"
+        "name": "Ops.Libs.Lottie.LottieSVGPlayer"
     },
     "summary": "Play Bodymovin/Lottie animations as SVG in a HTML element",
     "issues": "",

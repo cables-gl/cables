@@ -90,8 +90,8 @@ function updateData()
     const params = {
         "container": inEle.get(),
         "renderer": "svg",
-        "loop": inLoop.get() === true,
-        "autoplay": (inPlay.get() === true && playmodeAuto),
+        "loop": inLoop.get() == true,
+        "autoplay": (inPlay.get() == true && playmodeAuto),
         "animationData": inData.get()
     };
 

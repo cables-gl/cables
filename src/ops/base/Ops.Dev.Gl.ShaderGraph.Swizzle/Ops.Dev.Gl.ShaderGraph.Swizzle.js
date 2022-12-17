@@ -42,8 +42,8 @@ function updateUi()
         str = inType.get() + " swizzle(" + inType.get() + " vec){return " + swizzStr + "; }";
     }
 
-    console.log(str);
+    // console.log(str);
     sgOp.parseCode(str);
-    console.log(sgOp.info);
+    // console.log(sgOp.info);
     sgOp.updateGraph();
 }
