@@ -60,13 +60,12 @@ render.onLinkChanged =
 inTexture.onLinkChanged =
 inTexture.onChange = () =>
 {
-    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    // if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) texOut.set(CGL.Texture.getEmptyTexture(cgl));
     updateSoon();
 };
 
 render.onTriggered = doRender;
 updateSizePorts();
-// updateParams();
 
 function initEffect()
 {
@@ -194,6 +193,9 @@ function doRender()
 {
     // op.patch.removeOnAnimCallback(doRender);
     // if (!inTexture.get())
+
+    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+
     if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl))
     {
         lastTex = null;// CGL.Texture.getEmptyTexture(cgl);
