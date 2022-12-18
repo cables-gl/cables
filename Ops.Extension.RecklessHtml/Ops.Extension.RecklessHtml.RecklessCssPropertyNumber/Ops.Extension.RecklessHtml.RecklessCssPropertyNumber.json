@@ -1,0 +1,69 @@
+{
+    "id": "0c7a7ef2-e084-4045-81f8-20d5c43ebb1b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582125423781
+        },
+        {
+            "message": "cloned op from Ops.Html.CSSProperty_v2",
+            "author": "pandur",
+            "date": 1612371594171
+        },
+        {
+            "message": "Ops.User.pandur.CSSPropertyReckless renamed to Ops.Extension.RecklessHtml.RecklessCssPropertyNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671291904817
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1612371594170,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "group": "Attributes",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Value Suffix",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ],
+        "name": "Ops.User.pandur.CSSPropertyReckless"
+    },
+    "summary": "Set css style properties of a html element",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Html.CSSPropertyString"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
