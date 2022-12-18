@@ -6,6 +6,10 @@ const
     showUniforms = op.inTriggerButton("Show Uniforms"),
     showState = op.inTriggerButton("State Info"),
     next = op.outTrigger("Next"),
+
+    outSrcFrag = op.outString("Source Frag"),
+    outSrcVert = op.outString("Source Vert"),
+
     outName = op.outString("Name"),
     outId = op.outString("Id"),
     outNeedsBarycentric = op.outBoolNum("needsBarycentric"),
@@ -134,6 +138,9 @@ exec.onTriggered = function ()
         doStateDump = false;
         stateDump();
     }
+
+    outSrcFrag.set(shader.finalShaderFrag);
+    outSrcVert.set(shader.finalShaderVert);
 };
 
 function stateDump()

@@ -33,6 +33,14 @@
             },
             {
                 "type": 5,
+                "name": "Source Frag"
+            },
+            {
+                "type": 5,
+                "name": "Source Vert"
+            },
+            {
+                "type": 5,
                 "name": "Name"
             },
             {

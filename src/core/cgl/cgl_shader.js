@@ -103,6 +103,7 @@ const Shader = function (_cgl, _name)
     this._tempNormalMatrix = mat4.create();
     this._tempCamPosMatrix = mat4.create();
     this._tempInverseViewMatrix = mat4.create();
+    this._tempInverseProjMatrix = mat4.create();
 
     this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 };
@@ -509,33 +510,6 @@ Shader.prototype.compile = function ()
 
     if (this.glslVersion == 300)
     {
-        let drawBufferStr = "";
-
-        if (this.srcFrag.indexOf("outColor0") > -1) this._drawBuffers[0] = true;
-        if (this.srcFrag.indexOf("outColor1") > -1) this._drawBuffers[1] = true;
-        if (this.srcFrag.indexOf("outColor2") > -1) this._drawBuffers[2] = true;
-        if (this.srcFrag.indexOf("outColor3") > -1) this._drawBuffers[3] = true;
-
-        if (this._drawBuffers.length == 1)
-        {
-            // drawBufferStr+='#define gl_FragColor outColor'+i+''.endl();
-            drawBufferStr = "out vec4 outColor;".endl();
-            drawBufferStr += "#define gl_FragColor outColor".endl();
-        }
-        else
-        {
-            let count = 0;
-            drawBufferStr += "#define MULTI_COLORTARGETS".endl();
-            drawBufferStr += "vec4 outColor;".endl();
-
-            for (let i = 0; i < this._drawBuffers.length; i++)
-            {
-                if (count == 0) drawBufferStr += "#define gl_FragColor outColor" + i + "".endl();
-                drawBufferStr += "layout(location = " + i + ") out vec4 outColor" + i + ";".endl();
-                count++;
-            }
-        }
-
         vs = "#version 300 es"
             .endl() + "// "
             .endl() + "// vertex shader " + this._name
@@ -561,7 +535,7 @@ Shader.prototype.compile = function ()
             .endl() + "#define texture2D texture"
             .endl() + "#define IN in"
             .endl() + "#define UNI uniform"
-            .endl() + drawBufferStr
+            .endl() + "{{DRAWBUFFER}}"
 
             .endl();
     }
@@ -753,8 +727,42 @@ Shader.prototype.compile = function ()
     vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
     fs = fs.replace("{{MODULES_HEAD}}", srcHeadFrag);
 
+
     vs = this._addLibs(vs);
     fs = this._addLibs(fs);
+
+
+    // SETUP draw buffers / multi texture render targets
+
+    let drawBufferStr = "";
+
+    if (fs.indexOf("outColor0") > -1) this._drawBuffers[0] = true;
+    if (fs.indexOf("outColor1") > -1) this._drawBuffers[1] = true;
+    if (fs.indexOf("outColor2") > -1) this._drawBuffers[2] = true;
+    if (fs.indexOf("outColor3") > -1) this._drawBuffers[3] = true;
+
+    if (this._drawBuffers.length == 1)
+    {
+        drawBufferStr = "out vec4 outColor;".endl();
+        drawBufferStr += "#define gl_FragColor outColor".endl();
+    }
+    else
+    {
+        drawBufferStr += "#define MULTI_COLORTARGETS".endl();
+        drawBufferStr += "vec4 outColor;".endl();
+
+        let count = 0;
+        for (let i = 0; i < this._drawBuffers.length; i++)
+        {
+            if (count == 0) drawBufferStr += "#define gl_FragColor outColor" + i + "".endl();
+            drawBufferStr += "layout(location = " + i + ") out vec4 outColor" + i + ";".endl();
+            count++;
+        }
+    }
+
+    fs = fs.replace("{{DRAWBUFFER}}", drawBufferStr);
+    // //////
+
 
     if (!this._program)
     {
@@ -810,6 +818,9 @@ Shader.prototype.bind = function ()
         this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWPOS);
         this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_NORMALMAT);
         this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
+        this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
+
+
         for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
     }
 
@@ -842,6 +853,12 @@ Shader.prototype.bind = function ()
             {
                 mat4.invert(this._tempInverseViewMatrix, this._cgl.vMatrix);
                 this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, this._tempInverseViewMatrix);
+                this._cgl.profileData.profileMVPMatrixCount++;
+            }
+            if (this._inverseProjMatrixUniform)
+            {
+                mat4.invert(this._tempInverseProjMatrix, this._cgl.pMatrix);
+                this._cgl.gl.uniformMatrix4fv(this._inverseProjMatrixUniform, false, this._tempInverseProjMatrix);
                 this._cgl.profileData.profileMVPMatrixCount++;
             }
         }

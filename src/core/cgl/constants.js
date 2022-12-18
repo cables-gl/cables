@@ -13,6 +13,9 @@ const SHADER = {
     "SHADERVAR_UNI_MODELMAT": "modelMatrix",
     "SHADERVAR_UNI_NORMALMAT": "normalMatrix",
     "SHADERVAR_UNI_INVVIEWMAT": "inverseViewMatrix",
+    "SHADERVAR_UNI_INVPROJMAT": "invProjMatrix",
+
+
     "SHADERVAR_UNI_VIEWPOS": "camPos",
 };
 
