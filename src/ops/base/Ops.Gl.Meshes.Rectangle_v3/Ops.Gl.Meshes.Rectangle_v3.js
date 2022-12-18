@@ -58,7 +58,7 @@ op.preRender =
 render.onTriggered = function ()
 {
     if (needsRebuild) rebuild();
-    if (mesh) mesh.render(op.patch.cg.getShader());
+    if (mesh && doRender.get()) mesh.render(op.patch.cg.getShader());
     trigger.trigger();
 };
 
