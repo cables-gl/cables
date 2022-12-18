@@ -1,18 +1,16 @@
-// inputs
-const parentPort = op.inObject("Link");
-const labelPort = op.inString("Text", "Text");
-const defaultValuePort = op.inString("Default", "");
-const inPlaceholder = op.inString("Placeholder", "");
-const inTextArea = op.inBool("TextArea", false);
-const inGreyOut = op.inBool("Grey Out", false);
-const inVisible = op.inBool("Visible", true);
+const
+    parentPort = op.inObject("Link"),
+    labelPort = op.inString("Text", "Text"),
+    defaultValuePort = op.inString("Default", ""),
+    inPlaceholder = op.inString("Placeholder", ""),
+    inTextArea = op.inBool("TextArea", false),
+    inGreyOut = op.inBool("Grey Out", false),
+    inVisible = op.inBool("Visible", true),
+    inClear = op.inTriggerButton("Clear"),
+    siblingsPort = op.outObject("Children"),
+    valuePort = op.outString("Result", defaultValuePort.get()),
+    outFocus = op.outBool("Focus");
 
-// outputs
-const siblingsPort = op.outObject("Children");
-const valuePort = op.outString("Result", defaultValuePort.get());
-const outFocus = op.outBool("Focus");
-
-// vars
 const el = document.createElement("div");
 el.dataset.op = op.id;
 el.classList.add("cablesEle");
@@ -67,6 +65,11 @@ const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
+
+inClear.onTriggered = () =>
+{
+    input.value = "";
+};
 
 function onFocus()
 {
