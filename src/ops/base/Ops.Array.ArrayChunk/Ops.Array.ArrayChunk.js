@@ -12,8 +12,8 @@ let newArr = [];
 function setOutarray()
 {
     let inArr = inArrayPort.get();
-    let begin = beginPort.get();
-    let size = sizePort.get();
+    let begin = Math.floor(beginPort.get());
+    let size = Math.floor(sizePort.get());
     let circular = circularPort.get();
 
     if (!inArr)
