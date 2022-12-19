@@ -3,6 +3,7 @@ const
     labelPort = op.inString("Text", "Text"),
     defaultValuePort = op.inString("Default", ""),
     inPlaceholder = op.inString("Placeholder", ""),
+    inType = op.inSwitch("Type", ["text", "password"], "text"),
     inTextArea = op.inBool("TextArea", false),
     inGreyOut = op.inBool("Grey Out", false),
     inVisible = op.inBool("Visible", true),
@@ -36,6 +37,14 @@ creatElement();
 op.toWorkPortsNeedToBeLinked(parentPort);
 
 inTextArea.onChange = creatElement;
+inType.onChange = setAttribs;
+
+function setAttribs()
+{
+    input.setAttribute("type", inType.get());
+    input.setAttribute("value", defaultValuePort.get());
+    input.setAttribute("placeholder", inPlaceholder.get());
+}
 
 function creatElement()
 {
@@ -51,9 +60,8 @@ function creatElement()
     }
 
     input.classList.add("sidebar__text-input-input");
-    input.setAttribute("type", "text");
-    input.setAttribute("value", defaultValuePort.get());
-    input.setAttribute("placeholder", inPlaceholder.get());
+
+    setAttribs();
 
     el.appendChild(input);
     input.addEventListener("input", onInput);

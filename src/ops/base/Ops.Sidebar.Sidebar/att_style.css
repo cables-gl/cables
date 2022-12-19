@@ -556,7 +556,9 @@
 /*    background-color: #EEEEEE;*/
 /*}*/
 
-.sidebar__slider input[type=text] {
+.sidebar__slider input[type=text],
+.sidebar__slider input[type=paddword]
+{
     box-sizing: border-box;
     /*background-color: #333333;*/
     text-align: right;
@@ -575,7 +577,11 @@
 
 .sidebar__slider input[type=text]:active,
 .sidebar__slider input[type=text]:focus,
-.sidebar__slider input[type=text]:hover {
+.sidebar__slider input[type=text]:hover
+.sidebar__slider input[type=password]:active,
+.sidebar__slider input[type=password]:focus,
+.sidebar__slider input[type=password]:hover
+{
 
     color: #EEEEEE;
 }
@@ -596,7 +602,8 @@
  * SIDEBAR INPUT
  */
 .sidebar__text-input textarea,
-.sidebar__text-input input[type=text] {
+.sidebar__text-input input[type=text],
+.sidebar__text-input input[type=password] {
     box-sizing: border-box;
     background-color: #333333;
     color: #BBBBBB;
@@ -623,7 +630,10 @@
 .sidebar__text-input textarea,
 .sidebar__text-input input[type=text]:active,
 .sidebar__text-input input[type=text]:focus,
-.sidebar__text-input input[type=text]:hover {
+.sidebar__text-input input[type=text]:hover,
+.sidebar__text-input input[type=password]:active,
+.sidebar__text-input input[type=password]:focus,
+.sidebar__text-input input[type=password]:hover {
     background-color: transparent;
     color: #EEEEEE;
 }
