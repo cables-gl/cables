@@ -5,33 +5,33 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture 0",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture 1",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture 2",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture 3",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],
@@ -41,5 +41,16 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "INQQgo"
+    "exampleProjectId": "INQQgo",
+    "changelog": [
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1671353485675
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

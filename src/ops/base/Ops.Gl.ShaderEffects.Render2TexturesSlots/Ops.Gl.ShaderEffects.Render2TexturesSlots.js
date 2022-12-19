@@ -26,7 +26,6 @@ let moduleFrag = null;
 
 let uniBool1, uniBool2, uniBool3, uniBool4;
 
-
 function removeModule()
 {
     if (shader && moduleFrag) shader.removeModule(moduleFrag);
@@ -42,7 +41,6 @@ render.onTriggered = function ()
         shader = currentShader;
 
         let srcFrag = "";
-
 
         for (let i = 0; i < NUM_BUFFERS; i++)
         {
@@ -71,7 +69,6 @@ render.onTriggered = function ()
 
         needsReset = false;
     }
-
 
     next.trigger();
 };
