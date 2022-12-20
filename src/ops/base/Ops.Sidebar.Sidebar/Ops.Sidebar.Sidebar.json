@@ -47,11 +47,13 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "childs"
+                "name": "childs",
+                "uititle": "Children"
             },
             {
                 "type": 0,
                 "name": "Opfened",
+                "uititle": "Opened",
                 "subType": "boolean"
             }
         ],

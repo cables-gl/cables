@@ -2,6 +2,7 @@ const text = op.inStringEditor("text", "1,2,3"),
     separator = op.inString("separator", ","),
     toNumber = op.inValueBool("Numbers", true),
     trim = op.inValueBool("Trim", true),
+    splitNewLines = op.inBool("Split Lines", false),
     parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),
     len = op.outNumber("length");
@@ -9,6 +10,12 @@ const text = op.inStringEditor("text", "1,2,3"),
 text.setUiAttribs({ "ignoreBigPort": true });
 
 text.onChange = separator.onChange = toNumber.onChange = trim.onChange = parse;
+
+splitNewLines.onChange = () =>
+{
+    separator.setUiAttribs({ "greyout": splitNewLines.get() });
+    parse();
+};
 
 parse();
 
@@ -29,9 +36,11 @@ function parse()
         textInput = textInput.trim();
     }
 
-    const sep = separator.get();
-    if (separator.get() == "\\n")sep == "\n";
-    const r = textInput.split(sep);
+    let r;
+    let sep = separator.get();
+    if (separator.get() === "\\n") sep = "\n";
+    if (splitNewLines.get()) r = textInput.split("\n");
+    else r = textInput.split(sep);
 
     if (r[r.length - 1] === "") r.length -= 1;
 
