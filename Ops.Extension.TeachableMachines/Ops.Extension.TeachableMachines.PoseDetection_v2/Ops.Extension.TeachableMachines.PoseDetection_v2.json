@@ -49,8 +49,8 @@
         "name": "Ops.Api.TeachableMachines.PoseDetection_v2"
     },
     "summary": "Use the Teachable Machines pose detection with your webcam. Insert the uploaded model URL.",
-    "author": "mickey",
-    "authorName": "stephan",
+    "author": "mick",
+    "authorName": "mick",
     "id": "58b8510f-81a1-41aa-8638-6721ede199c5",
     "created": 1654684469633,
     "changelog": [
