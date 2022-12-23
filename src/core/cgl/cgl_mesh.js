@@ -151,7 +151,7 @@ Mesh.prototype._resizeAttr = function (array, attr)
 
 Mesh.prototype._bufferArray = function (array, attr)
 {
-    let floatArray = null;
+    let floatArray = attr.floatArray || null;
     if (!array) return;
 
 
@@ -185,7 +185,7 @@ Mesh.prototype._bufferArray = function (array, attr)
     // if (attr && floatArray) attr.floatArray = floatArray;
 
     attr.arrayLength = floatArray.length;
-
+    attr.floatArray = floatArray;
 
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
