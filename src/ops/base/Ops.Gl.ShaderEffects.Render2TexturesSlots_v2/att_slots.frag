@@ -1,4 +1,6 @@
 
+// default
+
 #ifdef SLOT_TEX_0_COLOR
     outColor0=col;
 #endif
@@ -12,6 +14,7 @@
     outColor3=col;
 #endif
 
+// normals
 
 #ifdef SLOT_TEX_0_NORMAL
     outColor0=vec4(norm,1.);
@@ -26,7 +29,22 @@
     outColor3=vec4(norm,1.);
 #endif
 
+// texcoord
 
+#ifdef SLOT_TEX_0_TEXCOORD
+    outColor0=vec4(texCoord, 0., 1.);
+#endif
+#ifdef SLOT_TEX_1_TEXCOORD
+    outColor1=vec4(texCoord, 0., 1.);
+#endif
+#ifdef SLOT_TEX_2_TEXCOORD
+    outColor2=vec4(texCoord, 0., 1.);
+#endif
+#ifdef SLOT_TEX_3_TEXCOORD
+    outColor3=vec4(texCoord, 0., 1.);
+#endif
+
+// black
 
 #ifdef SLOT_TEX_0_BLACK
     outColor0=vec4(0.,0.,0.,1.);
@@ -41,6 +59,7 @@
     outColor3=vec4(0.,0.,0.,1.);
 #endif
 
+// 1
 
 #ifdef SLOT_TEX_0_1
     outColor0=vec4(1.);
@@ -55,6 +74,8 @@
     outColor3=vec4(1.);
 #endif
 
+// 0
+
 #ifdef SLOT_TEX_0_0
     outColor0=vec4(0.);
 #endif
@@ -67,3 +88,53 @@
 #ifdef SLOT_TEX_3_0
     outColor3=vec4(0.);
 #endif
+
+
+
+#ifdef SLOT_TEX_0_POS_LOCAL
+    outColor0=vec4(MOD_pos_local,1.);
+#endif
+#ifdef SLOT_TEX_1_POS_LOCAL
+    outColor1=vec4(MOD_pos_local,1.);
+#endif
+#ifdef SLOT_TEX_2_POS_LOCAL
+    outColor2=vec4(MOD_pos_local,1.);
+#endif
+#ifdef SLOT_TEX_3_POS_LOCAL
+    outColor3=vec4(MOD_pos_local,1.);
+#endif
+
+
+
+
+#ifdef SLOT_TEX_0_POS_WORLD
+    outColor0=vec4(MOD_pos_world,1.);
+#endif
+#ifdef SLOT_TEX_1_POS_WORLD
+    outColor1=vec4(MOD_pos_world,1.);
+#endif
+#ifdef SLOT_TEX_2_POS_WORLD
+    outColor2=vec4(MOD_pos_world,1.);
+#endif
+#ifdef SLOT_TEX_3_POS_WORLD
+    outColor3=vec4(MOD_pos_world,1.);
+#endif
+
+
+
+
+
+#ifdef SLOT_TEX_0_NORMAL_MV
+    outColor0=vec4(MOD_normal_mv,1.);
+#endif
+#ifdef SLOT_TEX_1_NORMAL_MV
+    outColor1=vec4(MOD_normal_mv,1.);
+#endif
+#ifdef SLOT_TEX_2_NORMAL_MV
+    outColor2=vec4(MOD_normal_mv,1.);
+#endif
+#ifdef SLOT_TEX_3_NORMAL_MV
+    outColor3=vec4(MOD_normal_mv,1.);
+#endif
+
+

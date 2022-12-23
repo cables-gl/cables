@@ -12,6 +12,16 @@
                 "type": 0,
                 "name": "Remote Viewer",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Canvas Mode",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Patch Field Visible",
+                "subType": "number"
             }
         ],
         "name": "Ops.Cables.UIMode"
