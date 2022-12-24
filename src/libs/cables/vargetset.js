@@ -1,3 +1,4 @@
+import { CONSTANTS } from "../../core/constants";
 
 const VarSetOpWrapper = class
 {
@@ -7,6 +8,7 @@ const VarSetOpWrapper = class
         this._varNamePort = varNamePort;
         this._op = op;
         this._type = type;
+        this._typeId = -1;
         this._triggerPort = triggerPort;
         this._nextPort = nextPort;
 
@@ -51,6 +53,12 @@ const VarSetOpWrapper = class
             if (!this._triggerPort) this._setVarValue();
             this._updateErrorUi();
         };
+
+        if (type == "array") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_ARRAY;
+        else if (type == "object") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_OBJECT;
+        else if (type == "string") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_STRING;
+        else if (type == "texture") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_TEXTURE;
+        else this._typeId = CONSTANTS.OP.OP_PORT_TYPE_VALUE;
     }
 
     _updateErrorUi()
@@ -136,7 +144,12 @@ const VarSetOpWrapper = class
 
         const v = this._valuePort.get();
 
-        if (this._type == "array")
+        if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_VALUE || this._typeId == CONSTANTS.OP.OP_PORT_TYPE_STRING)
+        {
+            this._op.patch.setVarValue(name, v);
+        }
+        else
+        if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_ARRAY)
         {
             this._arr = [];
             CABLES.copyArray(v, this._arr);
@@ -145,7 +158,7 @@ const VarSetOpWrapper = class
         }
         else
         {
-            if (this._type == "object")
+            if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
             {
                 if (this._isTexture)
                     this._op.patch.setVarValue(name, CGL.Texture.getEmptyTexture(this._op.patch.cgl));
@@ -157,6 +170,7 @@ const VarSetOpWrapper = class
             }
             this._op.patch.setVarValue(name, v);
         }
+
         if (triggered && this._nextPort) this._nextPort.trigger();
     }
 };

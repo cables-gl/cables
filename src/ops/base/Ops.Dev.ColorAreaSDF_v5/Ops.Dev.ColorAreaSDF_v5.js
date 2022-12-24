@@ -142,15 +142,17 @@ function drawHelpers()
 
 function doRender()
 {
-    // if(doScale.get()) mod.setUniformValue("MOD_scale",[sizeX.get(),sizeY.get(),sizeZ.get()]);
     mod.bind();
 
-    let tex = inTex.get();
+    if (inTex.isLinked())
+    {
+        let tex = inTex.get();
 
-    if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
-    else tex = tex.tex;
+        if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
+        else tex = tex.tex;
 
-    mod.pushTexture("MOD_tex", tex);
+        mod.pushTexture("MOD_tex", tex);
+    }
 
     drawHelpers();
     next.trigger();
