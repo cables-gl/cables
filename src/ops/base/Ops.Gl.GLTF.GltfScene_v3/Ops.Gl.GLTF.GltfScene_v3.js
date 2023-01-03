@@ -248,7 +248,7 @@ function finishLoading()
         return;
     }
 
-    gltf.timing.push("finishLoading()", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["finishLoading()", Math.round((performance.now() - gltf.startTime))]);
 
     needsMatUpdate = true;
     // op.refreshParams();
@@ -260,7 +260,7 @@ function finishLoading()
     if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
     else op.setUiError("urlerror", null);
 
-    gltf.timing.push("start calc bounds", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["start calc bounds", Math.round((performance.now() - gltf.startTime))]);
 
     for (let i = 0; i < gltf.nodes.length; i++)
     {
@@ -271,15 +271,15 @@ function finishLoading()
 
     if (gltf.bounds)outBounds.set(gltf.bounds);
 
-    gltf.timing.push("calced bounds", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["calced bounds", Math.round((performance.now() - gltf.startTime))]);
 
     hideNodesFromData();
 
-    gltf.timing.push("hideNodesFromData", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["hideNodesFromData", Math.round((performance.now() - gltf.startTime))]);
 
     if (tab)printInfo();
 
-    gltf.timing.push("printinfo", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["printinfo", Math.round((performance.now() - gltf.startTime))]);
 
     updateCamera();
     setCam();
