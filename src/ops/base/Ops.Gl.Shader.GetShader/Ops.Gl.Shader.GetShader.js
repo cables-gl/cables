@@ -5,6 +5,7 @@ const
 
 inTrigger.onTriggered = () =>
 {
+    if (op.patch.cgl.frameStore.shadowPass) return;
     outShader.set(op.patch.cgl.getShader());
     next.trigger();
 };
