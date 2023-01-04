@@ -137,4 +137,20 @@
     outColor3=vec4(MOD_normal_mv,1.);
 #endif
 
+#ifdef SLOT_TEX_0_FRAGZ
+    outColor0=vec4(vec3(gl_FragCoord.z),1.);
+#endif
+#ifdef SLOT_TEX_1_FRAGZ
+    outColor1=vec4(vec3(gl_FragCoord.z),1.);
+#endif
+#ifdef SLOT_TEX_2_FRAGZ
+    outColor2=vec4(vec3(gl_FragCoord.z),1.);
+#endif
+#ifdef SLOT_TEX_3_FRAGZ
+    outColor3=vec4(vec3(gl_FragCoord.z),1.);
+#endif
+
+
+
+
 

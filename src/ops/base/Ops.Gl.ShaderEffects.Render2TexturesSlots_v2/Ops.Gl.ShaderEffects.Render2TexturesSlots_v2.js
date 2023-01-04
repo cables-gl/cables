@@ -28,14 +28,16 @@ for (let i = 0; i < NUM_BUFFERS; i++)
     let slot = "Default";
     if (i != 0)slot = "0";
     const p = op.inDropDown("Texture " + i, [
-        "0", "1",
+        "Default",
         "Position World",
         "Position Local",
-        "TexCoord",
-        "Default",
         "Normal",
         "Normal * ModelView",
-        "Black",], slot);
+        "FragCoord.z",
+        "TexCoord",
+        "Black",
+        "0", "1",
+    ], slot);
     p.onChange = updateDefines;
     ports.push(p);
 }
@@ -66,6 +68,7 @@ function updateDefines()
         mod.toggleDefine("SLOT_TEX_" + i + "_TEXCOORD", ports[i].get() == "TexCoord");
 
         mod.toggleDefine("SLOT_TEX_" + i + "_NORMAL_MV", ports[i].get() == "Normal * ModelView");
+        mod.toggleDefine("SLOT_TEX_" + i + "_FRAGZ", ports[i].get() == "FragCoord.z");
 
         strExt += ports[i].get();
         if (i != NUM_BUFFERS - 1)strExt += " | ";

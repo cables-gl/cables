@@ -510,6 +510,32 @@ function printInfo()
         html += "</table>";
     }
 
+    // / ////////////////////////////////////
+
+    if (gltf.timing)
+    {
+        html += "<div id=\"groupTiming\">Debug Loading Timing </div>";
+
+        html += "<table id=\"sectionTiming\" class=\"table treetable\">";
+
+        html += "<tr>";
+        html += "  <th>task</th>";
+        html += "  <th>time used</th>";
+        html += "</tr>";
+
+        console.log(gltf.timing);
+        let lt = 0;
+        for (let i = 0; i < gltf.timing.length; i++)
+        {
+            html += "<tr>";
+            html += "  <td>" + gltf.timing[i][0] + "</td>";
+            html += "  <td>" + (gltf.timing[i][1] - lt) + " ms</td>";
+            html += "</tr>";
+            lt = gltf.timing[i][1];
+        }
+        html += "</table>";
+    }
+
     // / //////////////////////////
 
     let sizeBin = 0;
@@ -562,6 +588,7 @@ function printInfo()
     CABLES.UI.Collapsable.setup(ele.byId("groupImages"), ele.byId("sectionImages"), true);
     CABLES.UI.Collapsable.setup(ele.byId("groupSkins"), ele.byId("sectionSkins"), true);
     CABLES.UI.Collapsable.setup(ele.byId("groupBinary"), ele.byId("sectionBinary"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupTiming"), ele.byId("sectionTiming"), true);
 
     gui.maintabPanel.show(true);
 }

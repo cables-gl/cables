@@ -255,7 +255,7 @@ function parseGltf(arrayBuffer)
     let j = 0, i = 0;
 
     const gltf = new Gltf();
-    gltf.timing.push("Start parsing", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["Start parsing", Math.round((performance.now() - gltf.startTime))]);
 
     if (!arrayBuffer) return;
     const byteArray = new Uint8Array(arrayBuffer);
@@ -266,7 +266,7 @@ function parseGltf(arrayBuffer)
     pos += 4;
     if (string != "glTF") return;
 
-    gltf.timing.push("dataview", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["dataview", Math.round((performance.now() - gltf.startTime))]);
 
     const dv = new DataView(arrayBuffer);
     const version = dv.getUint32(pos, le);
@@ -298,7 +298,7 @@ function parseGltf(arrayBuffer)
     const views = chunks[0].data.bufferViews;
     const accessors = chunks[0].data.accessors;
 
-    gltf.timing.push("Parse buffers", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["Parse buffers", Math.round((performance.now() - gltf.startTime))]);
 
     if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_draco_mesh_compression") > -1)
     {
@@ -417,7 +417,7 @@ function parseGltf(arrayBuffer)
         }
     }
 
-    gltf.timing.push("Parse mesh groups", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["Parse mesh groups", Math.round((performance.now() - gltf.startTime))]);
 
     gltf.json.meshes = gltf.json.meshes || [];
 
@@ -430,7 +430,7 @@ function parseGltf(arrayBuffer)
         }
     }
 
-    gltf.timing.push("Parse nodes", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["Parse nodes", Math.round((performance.now() - gltf.startTime))]);
 
     for (i = 0; i < gltf.json.nodes.length; i++)
     {
@@ -465,15 +465,15 @@ function parseGltf(arrayBuffer)
 
     needsMatUpdate = true;
 
-    gltf.timing.push("load anims", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["load anims", Math.round((performance.now() - gltf.startTime))]);
 
     if (gltf.json.animations) loadAnims(gltf);
 
-    gltf.timing.push("load cameras", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["load cameras", Math.round((performance.now() - gltf.startTime))]);
 
     if (gltf.json.cameras) loadCams(gltf);
 
-    gltf.timing.push("finished", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push(["finished", Math.round((performance.now() - gltf.startTime))]);
 
     return gltf;
 }
