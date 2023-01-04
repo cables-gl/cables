@@ -1,7 +1,6 @@
 const
     parentPort = op.inObject("link"),
-    labelPort = op.inString("Text", "Value"),
-    inId = op.inValueString("Id", ""),
+    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     siblingsPort = op.outObject("childs");
 
 const el = document.createElement("div");
@@ -11,26 +10,24 @@ el.classList.add("sidebar__item");
 el.classList.add("sidebar__text");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
-const labelText = document.createElement("div");// document.createTextNode(labelPort.get());
+const labelText = document.createElement("div");// document.createTextNode(filename.get());
 label.appendChild(labelText);
 el.appendChild(label);
 
 parentPort.onChange = onParentChanged;
-labelPort.onChange = onLabelTextChanged;
-inId.onChange = onIdChanged;
+filename.onChange = onFilenameChanged;
 op.onDelete = onDelete;
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
-function onIdChanged()
+function onFilenameChanged()
 {
-    el.id = inId.get();
-}
-
-function onLabelTextChanged()
-{
-    const labelText = labelPort.get();
-    label.innerHTML = "<img src=\"data:image/jpeg;base64," + labelText + "\" style=\"max-width:100%\">";
+    const fileUrl = filename.get();
+    if (!fileUrl) return;
+    if (fileUrl.indexOf("/") == 0 || fileUrl.indexOf("http") == 0)
+        label.innerHTML = "<img src=\"" + fileUrl + "\" style=\"max-width:100%\">";
+    else
+        label.innerHTML = "<img src=\"data:image;base64," + fileUrl + "\" style=\"max-width:100%\">";
 }
 
 function onParentChanged()

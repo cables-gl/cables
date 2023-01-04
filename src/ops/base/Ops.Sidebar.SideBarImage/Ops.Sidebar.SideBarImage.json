@@ -23,12 +23,7 @@
             },
             {
                 "type": 5,
-                "name": "Text"
-            },
-            {
-                "type": 0,
-                "name": "Id",
-                "subType": "string"
+                "name": "File"
             }
         ],
         "portsOut": [
@@ -37,6 +32,6 @@
                 "name": "childs"
             }
         ],
-        "name": "Ops.User.pandur.SideBarImage"
+        "name": "Ops.Sidebar.SideBarImage"
     }
 }
