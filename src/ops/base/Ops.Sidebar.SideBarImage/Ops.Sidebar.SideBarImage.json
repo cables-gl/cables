@@ -1,0 +1,42 @@
+{
+    "id": "5ab7b4b8-ae22-4694-9bbd-9c8bffcc98c4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1672827991381
+        },
+        {
+            "message": "Ops.User.pandur.SideBarImage renamed to Ops.Sidebar.SideBarImage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1672828372250
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1672827995772,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Id",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.User.pandur.SideBarImage"
+    }
+}
