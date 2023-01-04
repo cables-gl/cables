@@ -23,11 +23,19 @@ op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 function onFilenameChanged()
 {
     const fileUrl = filename.get();
-    if (!fileUrl) return;
-    if (fileUrl.indexOf("/") == 0 || fileUrl.indexOf("http") == 0)
-        label.innerHTML = "<img src=\"" + fileUrl + "\" style=\"max-width:100%\">";
-    else
+    if (!fileUrl)
+    {
+        label.innerHTML = "";
+        return;
+    }
+
+    let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+
+    if (base64regex.test(fileUrl))
         label.innerHTML = "<img src=\"data:image;base64," + fileUrl + "\" style=\"max-width:100%\">";
+    else
+    // if (fileUrl.indexOf("/") == 0 || fileUrl.indexOf("http") == 0)
+        label.innerHTML = "<img src=\"" + fileUrl + "\" style=\"max-width:100%\">";
 }
 
 function onParentChanged()
