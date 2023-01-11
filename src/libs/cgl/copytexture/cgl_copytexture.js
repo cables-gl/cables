@@ -1,6 +1,5 @@
 import { MESHES } from "../../../core/cgl/cgl_simplerect";
 
-
 class CopyTexture
 {
     constructor(cgl, name, options)
