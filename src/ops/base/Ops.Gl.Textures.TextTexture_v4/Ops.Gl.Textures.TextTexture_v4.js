@@ -21,6 +21,8 @@ const
     // letterSpacing = op.inValueFloat("Spacing", 0),
     drawDebug = op.inBool("Show Debug", false),
     limitLines = op.inValueInt("Limit Lines", 0),
+    inSize = op.inSwitch("Size", ["Auto", "Manual"], "Manual"),
+
     texWidth = op.inValueInt("texture width", 512),
     texHeight = op.inValueInt("texture height", 128),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
@@ -45,7 +47,7 @@ const
 r.setUiAttribs({ "colorPick": true });
 
 op.setPortGroup("Color", [r, g, b]);
-op.setPortGroup("Size", [font, weight, maximize, inFontSize, lineDistance, lineOffset]);
+op.setPortGroup("Size", [font, inSize, weight, maximize, inFontSize, lineDistance, lineOffset]);
 op.setPortGroup("Texture", [texWidth, texHeight, tfilter, aniso]);
 op.setPortGroup("Alignment", [valign, align]);
 op.setPortGroup("Rendering", [drawMesh, renderHard, meshScale]);
@@ -138,9 +140,21 @@ renderHard.onChange = function ()
     shader.toggleDefine("HARD_EDGE", renderHard.get());
 };
 
+function getWidth()
+{
+    if (inSize.get() == "Auto") return cgl.getViewPort()[2];
+    return Math.ceil(texWidth.get());
+}
+
+function getHeight()
+{
+    if (inSize.get() == "Auto") return cgl.getViewPort()[3];
+    else return Math.ceil(texHeight.get());
+}
+
 function doRender()
 {
-    if (ctx.canvas.width != texWidth.get())needsRefresh = true;
+    if (ctx.canvas.width != getWidth()) needsRefresh = true;
     if (needsRefresh)
     {
         reSize();
@@ -175,15 +189,21 @@ function doRender()
 function reSize()
 {
     if (!tex) return;
-    tex.setSize(texWidth.get(), texHeight.get());
+    tex.setSize(getWidth(), getHeight());
 
-    ctx.canvas.width = fontImage.width = texWidth.get();
-    ctx.canvas.height = fontImage.height = texHeight.get();
+    ctx.canvas.width = fontImage.width = getWidth();
+    ctx.canvas.height = fontImage.height = getHeight();
 
     outAspect.set(fontImage.width / fontImage.height);
 
     needsRefresh = true;
 }
+
+inSize.onChange = () =>
+{
+    texWidth.setUiAttribs({ "greyout": inSize.get() != "Manual" });
+    texHeight.setUiAttribs({ "greyout": inSize.get() != "Manual" });
+};
 
 maximize.onChange = function ()
 {
@@ -238,7 +258,7 @@ function refresh()
 
     if (maximize.get())
     {
-        fontSize = texWidth.get();
+        fontSize = getWidth();
         let count = 0;
         let maxWidth = 0;
         let maxHeight = 0;
@@ -246,7 +266,7 @@ function refresh()
         do
         {
             count++;
-            if (count > (texHeight.get() + texWidth.get()) / 2)
+            if (count > (getHeight() + getWidth()) / 2)
             {
                 op.log("too many iterations - maximize size");
                 break;
@@ -264,7 +284,7 @@ function refresh()
     {
         let found = true;
 
-        if (texWidth.get() > 128)
+        if (getWidth() > 128)
         {
             found = false;
             let newString = "";
@@ -284,7 +304,7 @@ function refresh()
                     if (!words[j]) continue;
                     sumWidth += ctx.measureText(words[j] + " ").width;
 
-                    if (sumWidth > texWidth.get())
+                    if (sumWidth > getWidth())
                     {
                         found = true;
                         newString += "\n" + words[j] + " ";

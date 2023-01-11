@@ -791,6 +791,7 @@ Patch.prototype.getOpById = function (opid)
 
 Patch.prototype.getOpsByName = function (name)
 {
+    // TODO: is this still needed ? unclear behaviour....
     const arr = [];
     for (const i in this.ops)
         if (this.ops[i].name == name) arr.push(this.ops[i]);
