@@ -74,6 +74,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Finger 2 Force",
+                "subType": "number"
+            },
+            {
                 "type": 3,
                 "name": "Events"
             },

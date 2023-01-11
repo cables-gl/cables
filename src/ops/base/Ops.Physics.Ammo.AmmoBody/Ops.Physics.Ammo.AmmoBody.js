@@ -338,6 +338,7 @@ function renderTransformed()
                 if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
                 mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
+
                 mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
 
                 transformed.trigger();
