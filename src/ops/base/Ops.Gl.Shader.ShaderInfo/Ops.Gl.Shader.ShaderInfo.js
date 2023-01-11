@@ -74,7 +74,11 @@ showUniforms.onTriggered = function ()
 exec.onTriggered = function ()
 {
     if (cgl.frameStore.shadowPass) return;
-    shader = cgl.getShader();
+    const theShader = cgl.getShader();
+
+    if (theShader && shader && (theShader == shader || shader.lastCompile == theShader.lastCompile)) return next.trigger();
+
+    shader = theShader;
     next.trigger();
 
     shader.bind();
@@ -202,5 +206,3 @@ showModules.onTriggered = function ()
 
     showCodeModal("vertex shader", JSON.stringify(mods, false, 4), "json");
 };
-
-//
