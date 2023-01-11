@@ -1,11 +1,13 @@
-const render = op.inTrigger("render");
-const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
+const
+    render = op.inTrigger("render"),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
 
-const maskInvert = op.inBool("Mask Invert", false);
-const mask = op.inTexture("Mask");
+    maskInvert = op.inBool("Mask Invert", false),
+    mask = op.inTexture("Mask"),
 
-const amount = op.inValueSlider("Amount", 1);
-const trigger = op.outTrigger("trigger");
+    amount = op.inValueSlider("Amount", 1),
+    modulo = op.inValueSlider("modulo", 1),
+    trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "texmodulo");
@@ -14,6 +16,7 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.invert_frag);
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
+    moduloUniform = new CGL.Uniform(shader, "f", "modulo", modulo),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 1);
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);

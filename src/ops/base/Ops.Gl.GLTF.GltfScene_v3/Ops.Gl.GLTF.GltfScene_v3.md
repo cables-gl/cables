@@ -17,6 +17,7 @@ Click the show structure button to see the way the GLB file is constructed with 
 - interpolation methods: https://cables.gl/edit/pmKMIV
 - assigned material skinned mesh: https://cables.gl/edit/KSoMZS
 - loose edges and points: https://cables.gl/edit/-ev7V6
+- overwriting a material using a shader with applied shadereffects: https://cables.gl/p/BweOVl
 
 ## converters:
 - https://glb-packer.glitch.me/
