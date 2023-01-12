@@ -71,5 +71,11 @@
             }
         ],
         "name": "Ops.User.pandur.DivElements"
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "lYLMwk",
+    "docs": {
+        "ports": []
     }
 }
