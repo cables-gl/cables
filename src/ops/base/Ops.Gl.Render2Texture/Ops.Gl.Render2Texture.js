@@ -134,6 +134,9 @@ function doRender()
     // cgl.resetViewPort();
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
+    texDepth.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+    texDepth.set(fb.getTextureDepth());
+
     tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     tex.set(fb.getTextureColor());
 }

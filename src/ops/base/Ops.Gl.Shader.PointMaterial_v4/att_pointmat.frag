@@ -58,7 +58,6 @@ void main()
     #endif
     col.a*=color.a;
 
-    {{MODULE_COLOR}}
 
     #ifdef MAKE_ROUND
 
@@ -101,6 +100,8 @@ void main()
     #ifdef HAS_TEXTURE_COLORIZE
         col*=colorize;
     #endif
+
+    {{MODULE_COLOR}}
 
     outColor = col;
 }

@@ -134,17 +134,41 @@ function parseUniforms(src)
                 for (let l = 0; l < names.length; l++)
                 {
                     if (uniformNameBlacklist.indexOf(names[l]) > -1) continue;
-                    const uniName = names[l].trim();
+                    const uniName = names[l].trim().replace(/\[\d+\]$/, "");
 
                     if (type === "float")
                     {
                         foundNames.push(uniName);
                         if (!hasUniformInput(uniName))
                         {
-                            const newInput = op.inFloat(uniName, 0);
-                            newInput.uniform = new CGL.Uniform(shader, "f", uniName, newInput);
-                            uniformInputs.push(newInput);
-                            groupUniforms.push(newInput);
+                            const arrayMatch = names[l].trim().match(/\[\d+\]$/);
+                            if (arrayMatch)
+                            {
+                                const arrayLength = parseInt(arrayMatch[0].trim().slice(1, -1));
+
+                                const newInput = op.inArray(uniName, []);
+                                newInput.uniform = new CGL.Uniform(shader, "f[]", uniName, new Float32Array(arrayLength));
+                                uniformInputs.push(newInput);
+                                groupUniforms.push(newInput);
+
+                                const vec = {
+                                    "name": uniName,
+                                    "num": arrayLength,
+                                    "port": newInput,
+                                    "uni": newInput.uniform,
+                                    "changed": false
+                                };
+                                newInput.onChange = function () { this.changed = true; }.bind(vec);
+
+                                vectors.push(vec);
+                            }
+                            else
+                            {
+                                const newInput = op.inFloat(uniName, 0);
+                                newInput.uniform = new CGL.Uniform(shader, "f", uniName, newInput);
+                                uniformInputs.push(newInput);
+                                groupUniforms.push(newInput);
+                            }
                         }
                     }
                     else if (type === "int")

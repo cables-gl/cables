@@ -13,6 +13,7 @@ const
 
     f2x = op.outNumber("Finger 2 X", 0),
     f2y = op.outNumber("Finger 2 Y", 0),
+    f2f = op.outNumber("Finger 2 Force", 0),
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
 
     outEvents = op.outArray("Events"),
@@ -63,8 +64,16 @@ function setPos(event)
             y *= (op.patch.cgl.pixelDensity || 1);
         }
 
+        if (normalize.get())
+        {
+            x = (x / rect.width * 2.0 - 1.0);
+            y = (y / rect.height * 2.0 - 1.0);
+        }
+
         f2x.set(x);
         f2y.set(y);
+
+        if (event.touches[1].force)f2f.set(event.touches[1].force);
     }
     outEvents.set(event.touches);
 }
@@ -81,6 +90,7 @@ const ontouchend = function (event)
 {
     outTouched.set(false);
     f1f.set(0);
+    f2f.set(0);
     setPos(event);
 
     numFingers.set(event.touches.length);

@@ -77,6 +77,7 @@ greyOut.style.display = "none";
 inClear.onTriggered = () =>
 {
     input.value = "";
+    valuePort.set(input.value);
 };
 
 function onFocus()
