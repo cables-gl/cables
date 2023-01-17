@@ -33,6 +33,10 @@
                 "type": 0,
                 "name": "Landscape",
                 "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Canvas"
             }
         ],
         "name": "Ops.Gl.CanvasInfo"

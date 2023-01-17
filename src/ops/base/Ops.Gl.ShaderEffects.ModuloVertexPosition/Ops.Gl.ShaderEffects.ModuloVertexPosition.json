@@ -52,6 +52,15 @@
             "message": "Ops.Dev.ModuloVertexPosition renamed to Ops.Gl.ShaderEffects.ModuloVertexPosition",
             "author": "pandur",
             "date": 1665471132819
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1673450564714
         }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
     ]
 }
