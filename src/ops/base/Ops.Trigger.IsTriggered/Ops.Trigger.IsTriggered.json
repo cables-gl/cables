@@ -29,7 +29,7 @@
             {
                 "type": 0,
                 "name": "Was Triggered",
-                "subType": "boolean"
+                "subType": "number"
             }
         ],
         "name": "Ops.Trigger.IsTriggered"

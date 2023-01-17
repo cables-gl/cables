@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     next = op.outTrigger("Next"),
-    result = op.outBool("Was Triggered", false);
+    result = op.outBoolNum("Was Triggered", false);
 
 let frameCount = 0;
 
