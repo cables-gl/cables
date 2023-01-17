@@ -77,7 +77,14 @@ dataStr.onChange = function ()
 
 function saveData()
 {
-    dataStr.set(JSON.stringify(data));
+    try
+    {
+        dataStr.set(JSON.stringify(data));
+    }
+    catch (e)
+    {
+        op.log(e);
+    }
 }
 
 op.addPortListener = addPortListener;

@@ -7,7 +7,7 @@ update();
 
 function update()
 {
-    let str = inStr.get();
+    let str = inStr.get() + "";
 
     str = marked.parse(str);
     outStr.set(str);
