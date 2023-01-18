@@ -4,9 +4,11 @@ const
     inUnit = op.inSwitch("Pixel Unit", ["Display", "CSS"], "Display"),
     pixelRatio = op.outNumber("Pixel Ratio"),
     aspect = op.outNumber("Aspect Ratio"),
-    landscape = op.outBool("Landscape");
+    landscape = op.outBool("Landscape"),
+    outCanvasEle = op.outObject("Canvas", "element");
 
 let cgl = op.patch.cgl;
+outCanvasEle.set(op.patch.cgl.canvas);
 
 cgl.on("resize", update);
 
