@@ -130,6 +130,11 @@
             },
             {
                 "type": 2,
+                "name": "Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
                 "name": "Feedback Positions",
                 "objType": "texture"
             },

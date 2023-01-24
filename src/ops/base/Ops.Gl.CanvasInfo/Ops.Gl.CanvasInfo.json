@@ -37,6 +37,10 @@
             {
                 "type": 2,
                 "name": "Canvas"
+            },
+            {
+                "type": 2,
+                "name": "Canvas Parent"
             }
         ],
         "name": "Ops.Gl.CanvasInfo"

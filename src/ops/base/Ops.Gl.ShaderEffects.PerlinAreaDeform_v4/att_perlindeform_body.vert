@@ -1,13 +1,15 @@
 
-    vec4 MOD_p=pos;
+vec4 MOD_p=pos;
 
-    #ifdef POS_ATTR
-        MOD_p=vec4(vPosition,1.0);
-    #endif
+#ifdef POS_ATTR
+    MOD_p=vec4(vPosition,1.0);
+#endif
+
+#ifdef POS_MMATRIX
+    MOD_p=vec4(mMatrix[3][0],mMatrix[3][1],mMatrix[3][2],1.0);
+#endif
 
 #ifndef MOD_WORLDSPACE
-
-
     pos.xyz=MOD_deform(MOD_p.xyz,norm.xyz);
 
     #ifdef MOD_CALC_NORMALS

@@ -9,7 +9,7 @@ const
 
     inFalloff = op.inValueSlider("Falloff", 0.5),
     output = op.inValueSelect("Output", ["Mul Normal", "Mul Z", "Mul XYZ",, "Mul Norm Y", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
-    inPos = op.inSwitch("Source", ["Pos", "Orig Pos"], "Pos"),
+    inPos = op.inSwitch("Source", ["Pos", "Orig Pos", "Model"], "Pos"),
     // inInstancer = op.inBool("For Instancing", false),
     x = op.inValueFloat("x"),
     y = op.inValueFloat("y"),
@@ -92,6 +92,7 @@ function updateWorldspace()
 function updateOutput()
 {
     mod.toggleDefine("POS_ATTR", inPos.get() == "Orig Pos");
+    mod.toggleDefine("POS_MMATRIX", inPos.get() == "Model");
 
     mod.toggleDefine("MOD_METH_MUL_XYZ", output.get() == "Mul XYZ");
     mod.toggleDefine("MOD_METH_ADD_XYZ", output.get() == "Add XYZ");

@@ -1,12 +1,14 @@
 float tx=mod(instanceIndex,(MOD_texSizeX))/MOD_texSizeX+(1.0/MOD_texSizeX*0.5);
 float ty=float(int((instanceIndex/(MOD_texSizeX))))/MOD_texSizeY+(1.0/MOD_texSizeY*0.5);
 
-vec3 MOD_texPos=texture(MOD_texTrans,vec2(tx,ty)).rgb*MOD_mulRGB;
+vec2 tc=vec2(tx,ty);
+
+vec3 MOD_texPos=texture(MOD_texTrans,tc).rgb*MOD_mulRGB;
 mat4 texInstMat;
 vec3 scale=vec3(1.0);
 
 #ifdef USE_TEX_SCALE
-    scale*=texture(MOD_texScale,vec2(tx,ty)).rgb;
+    scale*=texture(MOD_texScale,tc).rgb;
 #endif
 
 texInstMat[0][0]=
@@ -15,7 +17,7 @@ texInstMat[2][2]=
 texInstMat[3][3]=1.0;
 
 #ifdef USE_TEX_ROT
-    vec3 MOD_texRota=texture(MOD_texRot,vec2(tx,ty)).rgb;
+    vec3 MOD_texRota=texture(MOD_texRot,tc).rgb;
     texInstMat*=rotationMatrix(vec3(1.0,0.0,0.0),MOD_texRota.r*PI*2.0);
     texInstMat*=rotationMatrix(vec3(0.0,1.0,0.0),MOD_texRota.g*PI*2.0);
     texInstMat*=rotationMatrix(vec3(0.0,0.0,1.0),MOD_texRota.b*PI*2.0);
@@ -36,13 +38,13 @@ mMatrix*=texInstMat;
 
 #ifdef USE_TEX_COLOR
 
-    vec4 instColor=texture(MOD_texColor,vec2(tx,ty));
+    vec4 instColor=texture(MOD_texColor,tc);
 
     frag_instColor=instColor;
 #endif
 
 #ifdef USE_TEX_TC
-    vec4 instTexCoords=texture(MOD_texCoords,vec2(tx,ty));
+    vec4 instTexCoords=texture(MOD_texCoords,tc);
 
     texCoord=(texCoord*instTexCoords.zw)+instTexCoords.xy;
 #endif

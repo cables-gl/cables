@@ -7,7 +7,7 @@ highp vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
 // vec4 col=texture(MOD_tex,texCoord);
 
 #ifdef MOD_HAS_PS_TEX
-    psMul*=texture(MOD_texPointSize,texCoord).r;
+    psMul*=abs(texture(MOD_texPointSize,texCoord).r);
     // psMul*=attrVertIndex/21000.0;
 #endif
 
