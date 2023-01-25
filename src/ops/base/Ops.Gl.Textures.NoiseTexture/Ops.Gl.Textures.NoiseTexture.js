@@ -17,7 +17,8 @@ const
     inOutB = op.inBool("Channel B", true),
     inMinB = op.inFloat("Min B", 0),
     inMaxB = op.inFloat("Max B", 1),
-    outTex = op.outTexture("Texture");
+    outTex = op.outTexture("Texture"),
+    outNumPixel = op.outNumber("Total Pixel");
 
 const cgl = op.patch.cgl;
 
@@ -149,5 +150,6 @@ function update()
     tex.initFromData(pixels, width, height, cgl_filter, cgl_wrap);
 
     outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl, isFp));
+    outNumPixel.set(width * height);
     outTex.set(tex);
 }

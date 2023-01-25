@@ -10,20 +10,21 @@ const
 
     inMass = op.inFloat("Mass", 0),
 
-    posX = op.inFloatSlider("Position X", 0),
-    posY = op.inFloatSlider("Position Y", 0),
-    posZ = op.inFloatSlider("Position Z", 0),
+    posX = op.inFloat("Position X", 0),
+    posY = op.inFloat("Position Y", 0),
+    posZ = op.inFloat("Position Z", 0),
 
-    moveX = op.inFloatSlider("Velocity X", 0),
-    moveY = op.inFloatSlider("Velocity Y", 1),
-    moveZ = op.inFloatSlider("Velocity Z", 0),
+    moveX = op.inFloat("Velocity X", 0),
+    moveY = op.inFloat("Velocity Y", 1),
+    moveZ = op.inFloat("Velocity Z", 0),
 
-    gravX = op.inFloatSlider("Gravity X", 0),
-    gravY = op.inFloatSlider("Gravity Y", 1),
-    gravZ = op.inFloatSlider("Gravity Z", 0),
+    gravX = op.inFloat("Gravity X", 0),
+    gravY = op.inFloat("Gravity Y", 1),
+    gravZ = op.inFloat("Gravity Z", 0),
 
     inherVel = op.inFloatSlider("Inherit Velocity", 0),
 
+    inTexVelocity = op.inTexture("Velocity"),
     inTexOldPos = op.inTexture("Feedback Positions"),
     inTexSpawn = op.inTexture("Spawn Positions"),
     inTexSpawnVel = op.inTexture("Spawn Velocity"),
@@ -66,6 +67,7 @@ const
     uniTexTiming = new CGL.Uniform(tcPos.bgShader, "t", "texTiming", 2),
     uniTexSpawnVel = new CGL.Uniform(tcPos.bgShader, "t", "texSpawnVel", 3),
     uniTexFeedbackVel = new CGL.Uniform(tcPos.bgShader, "t", "texFeedbackVel", 4),
+    uniTexVel = new CGL.Uniform(tcPos.bgShader, "t", "texVelocity", 5),
 
     uniTime = new CGL.Uniform(tcPos.bgShader, "f", "time", 0),
     uniLifeTime = new CGL.Uniform(tcPos.bgShader, "2f", "lifeTime", inLifeTimeMin, inLifeTimeMax),
@@ -142,6 +144,8 @@ exec.onTriggered = () =>
     else tcPos.bgShader.pushTexture(uniTexSpawn, texBlack.tex);
 
     if (inTexSpawnVel.get()) tcPos.bgShader.pushTexture(uniTexSpawnVel, inTexSpawnVel.get().tex);
+
+    if (inTexVelocity.get()) tcPos.bgShader.pushTexture(uniTexVel, inTexVelocity.get().tex);
 
     if (tcPos.fb) tcPos.bgShader.pushTexture(uniTexFeedbackVel, tcFeedbackVel.copy(tcPos.fb.getTextureColorNum(3)));
 

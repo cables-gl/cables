@@ -6,6 +6,7 @@ UNI sampler2D texTiming;
 
 UNI sampler2D texFeedbackVel;
 UNI sampler2D texSpawnVel;
+UNI sampler2D texVelocity;
 
 UNI float mass;
 UNI float reset;
@@ -17,8 +18,6 @@ UNI vec3 gravity;
 UNI vec2 lifeTime;
 UNI float time;
 UNI float timeDiff;
-
-
 
 UNI vec4 velocity; // xyz: xyz  / w: inherit velocity
 
@@ -32,6 +31,7 @@ void main()
 {
     vec4 oldPos=texture(texOldPos,texCoord);
     vec4 vtiming=texture(texTiming,texCoord);
+    vec4 velocityTex=texture(texVelocity,texCoord);
     vec4 oldVelocity=texture(texFeedbackVel,texCoord);
     vec4 newPos=oldPos;//vec4(1.0);
 
@@ -66,7 +66,7 @@ void main()
     // newPos.rgb+=timeDiff*velocity.rgb*3.0;
 
     newPos.rgb+=grav*timeDiff;
-    newPos.rgb+=velocity.xyz*timeDiff;
+    newPos.rgb+=(velocity.xyz+velocityTex.xyz)*timeDiff;
 
     // newPos.g-=time*0.01;
 

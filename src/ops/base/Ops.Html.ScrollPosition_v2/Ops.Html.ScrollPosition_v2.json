@@ -1,0 +1,60 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Scroll to top"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Percentage X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Percentage Y",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.ScrollPosition_v2"
+    },
+    "summary": "the current x y  top left scrolling position of html page or element",
+    "authorName": "pandur",
+    "id": "16e3f40e-62dd-4a49-b2c4-e20eda508d5e",
+    "created": 1674471286214,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Html.ScrollPosition",
+            "author": "pandur",
+            "date": 1674471286214
+        },
+        {
+            "message": "Ops.User.pandur.ScrollPositionElement renamed to Ops.Html.ScrollPosition_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1674559544003
+        }
+    ],
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

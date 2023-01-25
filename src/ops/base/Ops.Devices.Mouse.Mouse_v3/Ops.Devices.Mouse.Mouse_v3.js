@@ -15,17 +15,32 @@ const
 const cgl = op.patch.cgl;
 let normalize = 1;
 let listenerElement = null;
-let mouseX = cgl.canvas.width / 2;
-let mouseY = cgl.canvas.height / 2;
 area.onChange = addListeners;
-
-outMouseX.set(mouseX);
-outMouseY.set(mouseY);
 
 inCoords.onChange = updateCoordNormalizing;
 op.onDelete = removeListeners;
 
 addListeners();
+
+op.on("loadedValueSet",
+    () =>
+    {
+        if (normalize == 0)
+        {
+            outMouseX.set(cgl.canvas.width / 2);
+            outMouseY.set(cgl.canvas.height / 2);
+        }
+        if (normalize == 1)
+        {
+            outMouseX.set(0);
+            outMouseY.set(0);
+        }
+        if (normalize == 2)
+        {
+            outMouseX.set(0.5);
+            outMouseY.set(0.5);
+        }
+    });
 
 function setValue(x, y)
 {
@@ -80,10 +95,6 @@ active.onChange = function ()
 
 function updateCoordNormalizing()
 {
-    mouseX = 0;
-    mouseY = 0;
-    setValue(mouseX, mouseY);
-
     if (inCoords.get() == "Pixel")normalize = 0;
     else if (inCoords.get() == "-1 to 1")normalize = 1;
     else if (inCoords.get() == "0 to 1")normalize = 2;
