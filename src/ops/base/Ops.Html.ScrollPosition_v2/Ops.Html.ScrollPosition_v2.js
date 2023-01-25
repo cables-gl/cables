@@ -5,9 +5,10 @@ const
     scrollPercentageX = op.outNumber("Percentage X"),
     scrollPercentageY = op.outNumber("Percentage Y");
 
-updateScroll();
-
+let el = null;
 let oldEle = null;
+
+updateScroll();
 
 inEle.onChange = () =>
 {
@@ -20,7 +21,7 @@ inEle.onChange = () =>
 
 function updateScroll()
 {
-    let el = inEle.get();
+    el = inEle.get();
 
     if (!el)
     {
@@ -35,6 +36,12 @@ function updateScroll()
 
     let py = el.scrollTop / (el.scrollHeight - rCanv.height);
     let px = el.scrollLeft / (el.scrollWidth - rCanv.width);
-    scrollPercentageY.set(py);
-    scrollPercentageX.set(px);
+    scrollPercentageY.set(py || 0);
+    scrollPercentageX.set(px || 0);
 }
+
+const inScrollTop = op.inTriggerButton("Scroll to top");
+inScrollTop.onTriggered = () =>
+{
+    if (el)el.scrollTo({ "top": 0, "behaviour": "auto" });
+};
