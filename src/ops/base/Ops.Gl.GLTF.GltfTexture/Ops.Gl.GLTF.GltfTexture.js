@@ -44,7 +44,9 @@ inExec.onTriggered = function ()
 
     for (let i = 0; i < cgl.frameStore.currentScene.json.images.length; i++)
     {
-        if (cgl.frameStore.currentScene.json.images[i].name == imgName.get() || cgl.frameStore.currentScene.json.images[i].bufferView == parseFloat(imgName.get()))
+        if (
+            cgl.frameStore.currentScene.json.images[i].name == imgName.get() ||
+            cgl.frameStore.currentScene.json.images[i].bufferView == parseFloat(imgName.get()))
         {
             img = cgl.frameStore.currentScene.json.images[i];
         }
@@ -83,7 +85,8 @@ inExec.onTriggered = function ()
         {
             if (err)
             {
-                outFound.set(false);
+                // outFound.set(false);
+                console.error("img load error", err);
             }
 
             outTex.set(tex);
