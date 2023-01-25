@@ -90,6 +90,11 @@
                 "type": 2,
                 "name": "Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Total Pixel",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.NoiseTexture"

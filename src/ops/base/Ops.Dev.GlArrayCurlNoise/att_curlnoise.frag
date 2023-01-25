@@ -221,8 +221,8 @@ void main()
     // rnd.x=clamp(rnd.x,-cl,cl);
     // rnd.y=clamp(rnd.y,-cl,cl);
     // rnd.z=clamp(rnd.z,-cl,cl);
-
-    rnd*=timeDelta;
+    rnd+=0.00001;
+    rnd*=timeDelta*1.0;
 
     vec3 coord=base.xyz+rnd;
     // coord.x+=( Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale )*timeDelta);

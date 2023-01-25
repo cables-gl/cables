@@ -1,5 +1,6 @@
 const
     render = op.inTrigger("Render"),
+    inFade = op.inFloatSlider("Fade", 1),
     inTex = op.inTexture("GlArray"),
 
     trigger = op.outTrigger("trigger"),
@@ -13,8 +14,7 @@ const texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "texturePort": inTe
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.rgbMath_frag);
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
-
-
+const fadeUnif = new CGL.Uniform(shader, "f", "fade", inFade);
 
 function dorender()
 {

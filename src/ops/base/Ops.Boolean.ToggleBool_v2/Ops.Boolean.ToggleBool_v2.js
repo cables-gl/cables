@@ -1,8 +1,8 @@
 const
     trigger = op.inTriggerButton("trigger"),
     reset = op.inTriggerButton("reset"),
-    outBool = op.outBool("result"),
-    inDefault = op.inBool("Default", false);
+    inDefault = op.inBool("Default", false),
+    outBool = op.outBoolNum("result");
 
 let theBool = false;
 

@@ -1,15 +1,13 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
+UNI float fade;
 
-UNI float modX;
-UNI float modY;
-UNI float modZ;
 
 void main()
 {
     vec4 col=texture(tex,texCoord);
 
-col.xyz=normalize(col.xyz);
+col.xyz=normalize(col.xyz)*fade + (col.xyz*(1.0-fade));
 
    outColor= col;
 }

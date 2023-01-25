@@ -5,10 +5,12 @@ const
     pixelRatio = op.outNumber("Pixel Ratio"),
     aspect = op.outNumber("Aspect Ratio"),
     landscape = op.outBool("Landscape"),
-    outCanvasEle = op.outObject("Canvas", "element");
+    outCanvasEle = op.outObject("Canvas", "element"),
+    outCanvasParentEle = op.outObject("Canvas Parent", "element");
 
 let cgl = op.patch.cgl;
 outCanvasEle.set(op.patch.cgl.canvas);
+outCanvasParentEle.set(op.patch.cgl.canvas.parentElement);
 
 cgl.on("resize", update);
 
