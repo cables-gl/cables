@@ -177,6 +177,14 @@ Link.canLinkText = function (p1, p2)
         if (p1.type != p2.type) return "can not link: different type";
     }
 
+    if (CABLES.UI && p1.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && p2.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+    {
+        if (p1.uiAttribs.objType && p2.uiAttribs.objType)
+            if (p1.uiAttribs.objType != p2.uiAttribs.objType)
+                return "incompatible objects";
+    }
+
+
     if (!p1) return "can not link: port 1 invalid";
     if (!p2) return "can not link: port 2 invalid";
 
@@ -211,6 +219,15 @@ Link.canLink = function (p1, p2)
     if (p1.isHidden() || p2.isHidden()) return false;
 
     if (p1.isLinkedTo(p2)) return false;
+
+
+    if (CABLES.UI && p1.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && p2.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+    {
+        if (p1.uiAttribs.objType && p2.uiAttribs.objType)
+            if (p1.uiAttribs.objType != p2.uiAttribs.objType)
+                return false;
+    }
+
 
     if (p1.direction == p2.direction) return false;
 

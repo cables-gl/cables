@@ -480,6 +480,17 @@ Texture.prototype.getInfoOneLine = function ()
     return txt;
 };
 
+Texture.prototype.getInfoOneLineShort = function ()
+{
+    let txt = "" + this.width + "x" + this.height;
+    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
+
+    this.shortInfoString = txt;
+
+    return txt;
+};
+
+
 Texture.prototype.getInfo = function ()
 {
     return Texture.getTexInfo(this);

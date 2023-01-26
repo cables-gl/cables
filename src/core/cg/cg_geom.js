@@ -874,6 +874,23 @@ Geometry.prototype.mapTexCoords2d = function ()
     }
 };
 
+
+Geometry.prototype.getInfoOneLine = function ()
+{
+    let txt = "";
+    if (this.faceVertCount == 3 && this.verticesIndices)txt += this.verticesIndices.length / 3;
+    else txt += 0;
+
+    txt += " tris ";
+
+    if (this.vertices)txt += this.vertices.length / 3;
+    else txt += 0;
+
+    txt += " verts";
+
+    return txt;
+};
+
 Geometry.prototype.getInfo = function ()
 {
     const info = {};
