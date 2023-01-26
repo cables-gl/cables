@@ -16,6 +16,7 @@ flipY.onChange = rebuildFlip;
 render.onTriggered = doRender;
 inTexture.onLinkChanged = updateUi;
 op.toWorkPortsNeedToBeLinked(render);
+inScale.onChange = updateScale;
 
 const shader = new CGL.Shader(cgl, "fullscreenrectangle");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -30,6 +31,7 @@ let fitImageAspect = false;
 let oldVp = [];
 
 updateUi();
+updateScale();
 
 inTexture.onChange = function ()
 {
@@ -59,10 +61,10 @@ op.preRender = function ()
     doRender();
 };
 
-inScale.onChange = () =>
+function updateScale()
 {
     fitImageAspect = inScale.get() == "Fit";
-};
+}
 
 function doRender()
 {

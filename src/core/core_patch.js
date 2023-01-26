@@ -991,6 +991,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
             }
             newOps.push(op);
         }
+        else
+        {
+            console.log("could not create op:", opData.objName, opData.id);
+        }
 
         // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
 
