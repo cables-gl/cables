@@ -130,12 +130,12 @@
     "docs": {
         "ports": [
             {
-                "name": "Scale",
-                "text": "rescale incoming texture"
+                "name": "Texture",
+                "text": "currently texture is auto sized to a square ratio"
             },
             {
-                "name": "Blendmode index",
-                "text": "normal, multiply, add"
+                "name": "Scale",
+                "text": "rescale incoming texture"
             },
             {
                 "name": "Target index",
@@ -148,10 +148,6 @@
             {
                 "name": "Use Texture Alpha",
                 "text": "applies alpha channel from incoming texture. "
-            },
-            {
-                "name": "Texture",
-                "text": "currently texture is auto sized to a square ratio"
             },
             {
                 "name": "Mapping index",

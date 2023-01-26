@@ -63,7 +63,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.RGBMath"
+        "name": "Ops.Gl.TextureEffects.Math.RgbMath"
     },
     "authorName": "pandur",
     "id": "dc858e71-1f12-4de5-89f5-67fb41ebfa39",

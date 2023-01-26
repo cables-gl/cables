@@ -27,7 +27,7 @@ MOD_tc.xy+=MOD_offset;
 
 #ifdef MOD_TARGET_POINTSIZE
 
-    gl_PointSize+=texture(MOD_tex,MOD_tc).x*MOD_amount;
+    gl_PointSize+=(texture(MOD_tex,MOD_tc).x*MOD_amount);
 
 #endif
 

@@ -5,6 +5,8 @@ const
     min2 = op.inValueSlider("New Min", 0),
     max2 = op.inValueSlider("New Max", 1),
 
+    inClamp = op.inBool("Clamp", true),
+
     inR = op.inBool("R", true),
     inG = op.inBool("G", true),
     inB = op.inBool("B", true),
@@ -13,7 +15,7 @@ const
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Input Range", [min1, max1]);
-op.setPortGroup("Output Range", [min2, max2]);
+op.setPortGroup("Output Range", [min2, max2, inClamp]);
 
 const cgl = op.patch.cgl;
 
@@ -31,7 +33,8 @@ const
 inR.onChange =
     inG.onChange =
     inB.onChange =
-    inA.onChange = () =>
+    inA.onChange =
+    inClamp.onChange = () =>
     {
         toggleChannels(shader);
     };
@@ -59,4 +62,5 @@ function toggleChannels(shader)
     shader.toggleDefine("CH_G", inG.get());
     shader.toggleDefine("CH_B", inB.get());
     shader.toggleDefine("CH_A", inA.get());
+    shader.toggleDefine("CLAMP", inClamp.get());
 }
