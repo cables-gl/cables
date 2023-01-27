@@ -618,24 +618,26 @@ Anim.prototype.getKeyIndex = function (time)
 Anim.prototype.setValue = function (time, value, cb)
 {
     let found = null;
-    for (const i in this.keys)
-    {
-        if (this.keys[i].time == time)
+
+    if (this.keys.length == 0 || time < this.keys[this.keys.length - 1].time)
+        for (let i = 0; i < this.keys.length; i++)
         {
-            found = this.keys[i];
-            this.keys[i].setValue(value);
-            this.keys[i].cb = cb;
-            break;
+            if (this.keys[i].time == time)
+            {
+                found = this.keys[i];
+                this.keys[i].setValue(value);
+                this.keys[i].cb = cb;
+                break;
+            }
         }
-    }
 
     if (!found)
     {
         found = new ANIM.Key({
-            time,
-            value,
+            "time": time,
+            "value": value,
             "e": this.defaultEasing,
-            cb,
+            "cb": cb,
         });
         this.keys.push(found);
     }
@@ -661,7 +663,7 @@ Anim.prototype.getSerialized = function ()
     obj.keys = [];
     obj.loop = this.loop;
 
-    for (const i in this.keys)
+    for (let i = 0; i < this.keys.length; i++)
     {
         obj.keys.push(this.keys[i].getSerialized());
     }
