@@ -29,6 +29,11 @@
             },
             {
                 "type": 0,
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Multiplier",
                 "subType": "number"
             },

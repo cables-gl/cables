@@ -525,13 +525,13 @@ function printInfo()
 
         console.log(gltf.timing);
         let lt = 0;
-        for (let i = 0; i < gltf.timing.length; i++)
+        for (let i = 0; i < gltf.timing.length - 1; i++)
         {
             html += "<tr>";
             html += "  <td>" + gltf.timing[i][0] + "</td>";
-            html += "  <td>" + (gltf.timing[i][1] - lt) + " ms</td>";
+            html += "  <td>" + (gltf.timing[i + 1][1] - gltf.timing[i][1]) + " ms</td>";
             html += "</tr>";
-            lt = gltf.timing[i][1];
+            // lt = gltf.timing[i][1];
         }
         html += "</table>";
     }

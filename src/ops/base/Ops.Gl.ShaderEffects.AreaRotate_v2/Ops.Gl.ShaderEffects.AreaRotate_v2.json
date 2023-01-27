@@ -46,7 +46,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.AreaRotateV2"
+        "name": "Ops.Gl.ShaderEffects.AreaRotate_v2"
     },
     "summary": "rotate vertices in an area around a center point",
     "youtubeid": "",
