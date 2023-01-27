@@ -7,6 +7,7 @@
 const a = op.inFloat("name", 0);
 const aa = op.inFloat("aaaa", 0);
 const trig = op.inTrigger("Render");
+const lala = op.outObject("Test");
 
 const cgl = op.patch.cgl;
 const meshRect = new CGL.WireframeRect(cgl);

@@ -110,9 +110,19 @@ void main()
     #endif
 
     #ifdef MOD_OP_MODULO
-        col=mod(col,v);
+        #ifdef MOD_CHAN_R
+            col.r=mod(col.r,v.r);
+        #endif
+        #ifdef MOD_CHAN_G
+            col.g=mod(col.g,v.g);
+        #endif
+        #ifdef MOD_CHAN_B
+            col.b=mod(col.b,v.b);
+        #endif
+        #ifdef MOD_CHAN_A
+            col.a=mod(col.a,v.a);
+        #endif
     #endif
 
-// csdcsd
    outColor= col;
 }
