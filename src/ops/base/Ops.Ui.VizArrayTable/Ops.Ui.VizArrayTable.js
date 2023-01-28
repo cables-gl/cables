@@ -91,6 +91,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     const gradHeight = 30;
 
+    if (layer.scale <= 0) return;
     if (offset > 0)
     {
         const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + 5, 0, layer.y / layer.scale + gradHeight);

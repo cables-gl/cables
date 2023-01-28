@@ -46,9 +46,10 @@ let currentTimeGPU = 0;
 let currentTimeMainloop = 0;
 let currentTimeOnFrame = 0;
 
+op.toWorkPortsNeedToBeLinked(exe, next);
+
 const gl = op.patch.cgl.gl;
 const glQueryExt = gl.getExtension("EXT_disjoint_timer_query_webgl2");
-// let query = null;
 
 exe.onLinkChanged =
     inShow.onChange = () =>
