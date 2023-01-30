@@ -78,6 +78,7 @@ const Shader = function (_cgl, _name)
     this._pMatrixState = -1;
     this._vMatrixState = -1;
 
+    this._countMissingUniforms = 0;
     this._modGroupCount = 0; // not needed anymore...
     this._feedBackNames = [];
     this._attributes = [];
@@ -811,19 +812,22 @@ Shader.prototype.bind = function ()
 
     if (!this._projMatrixUniform && !this.ignoreMissingUniforms)
     {
-        console.log("get projmat...", this._name);
-        this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
-        this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
-        this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");
-        this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWMAT);
-        this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MODELMAT);
-        this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWPOS);
-        this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_NORMALMAT);
-        this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
-        this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
+        this._countMissingUniforms++;
+        if (this._countMissingUniforms == 10)console.log("stopping getlocation of missing uniforms...", this._name);
+        if (this._countMissingUniforms < 10)
+        {
+            this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
+            this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
+            this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");
+            this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWMAT);
+            this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MODELMAT);
+            this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWPOS);
+            this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_NORMALMAT);
+            this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
+            this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
 
-
-        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
+            for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
+        }
     }
 
     if (this._cgl.currentProgram != this._program)
