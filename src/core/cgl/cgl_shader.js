@@ -810,6 +810,7 @@ Shader.prototype.bind = function ()
 
     if (!this._projMatrixUniform)
     {
+        console.log("get projmat...");
         this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
         this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
         this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");

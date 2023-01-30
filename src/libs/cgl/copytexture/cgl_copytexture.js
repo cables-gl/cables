@@ -18,7 +18,7 @@ class CopyTexture
             .endl() + "    outColor= col;"
             .endl() + "}";
 
-        const verts = ""
+        const verts = options.vertexShader || ""
             .endl() + "IN vec3 vPosition;"
             .endl() + "IN vec2 attrTexCoord;"
 

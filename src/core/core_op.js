@@ -126,10 +126,22 @@ const Op = function ()
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
+
+        let emitMove = false;
+        if (
+            CABLES.UI &&
+            newAttribs.hasOwnProperty("translate") &&
+            (
+                !this.uiAttribs.translate ||
+                this.uiAttribs.translate.x != newAttribs.translate.x ||
+                this.uiAttribs.translate.y != newAttribs.translate.y
+            )) emitMove = true;
+
+
         let changed = false;
         for (const p in newAttribs)
         {
-            if (this.uiAttribs[p] != newAttribs[p])changed = true;
+            if (this.uiAttribs[p] != newAttribs[p]) changed = true;
             this.uiAttribs[p] = newAttribs[p];
         }
 
@@ -141,6 +153,8 @@ const Op = function ()
             this.emitEvent("onUiAttribsChange", newAttribs);
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
+
+        if (emitMove) this.emitEvent("move");
     };
     /**
      * setUiAttrib
