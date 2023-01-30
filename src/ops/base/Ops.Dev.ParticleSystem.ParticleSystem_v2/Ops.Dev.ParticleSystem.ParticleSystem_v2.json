@@ -35,6 +35,12 @@
             "message": "Ops.User.pandur.ParticleSystem renamed to Ops.Dev.ParticleSystem",
             "author": "pandur",
             "date": 1645116302648
+        },
+        {
+            "message": "Ops.Dev.ParticleSystem renamed to Ops.Dev.ParticleSystem.ParticleSystem_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675092965650
         }
     ],
     "coreLibs": [

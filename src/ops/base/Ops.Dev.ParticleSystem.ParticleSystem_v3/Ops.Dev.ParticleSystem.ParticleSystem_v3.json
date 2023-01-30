@@ -85,7 +85,12 @@
             },
             {
                 "type": 0,
-                "name": "Mass",
+                "name": "Mass Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass Max",
                 "subType": "number"
             },
             {
@@ -183,7 +188,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.ParticleSystem3"
+        "name": "Ops.Dev.ParticleSystem.ParticleSystem_v3"
     },
     "summary": "",
     "issues": "",

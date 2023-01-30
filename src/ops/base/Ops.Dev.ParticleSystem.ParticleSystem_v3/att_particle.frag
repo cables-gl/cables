@@ -9,7 +9,7 @@ UNI sampler2D texFeedbackVel;
 UNI sampler2D texSpawnVel;
 UNI sampler2D texVelocity;
 
-UNI float mass;
+UNI vec2 mass;
 UNI float reset;
 
 UNI vec3 scale;
@@ -38,11 +38,16 @@ void main()
     vec4 oldVelocity=texture(texFeedbackVel,texCoord);
     vec4 newPos=oldPos;
 
+
+
+
     // respawn!!
     if(
         #ifdef RESPAWN
         time>vtiming.g ||
         #endif
+
+        // isnan(oldPos.x)||
         isnan(vtiming.r) ||
         isnan(vtiming.g) ||
 
@@ -74,10 +79,13 @@ void main()
 
     float lifeProgress=( (time-vtiming.r) / (vtiming.g-vtiming.r));
 
-    vec3 grav=gravity*mass*lifeProgress;
+    float m=mass.x+mass.y*cgl_random(texCoord);
+
+    vec3 grav=gravity*m*(time-vtiming.r);
 
     newPos.rgb+=grav*timeDiff;
     newPos.rgb+=(velocity.xyz+velocityTex.xyz)*timeDiff;
+
     newPos.rgb-=((1.0-lifeProgress)*timeDiff*velocity.w)*oldVelocity.rgb;
 
 

@@ -8,7 +8,8 @@ const
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
     inLifeTimeMax = op.inFloat("Max Lifetime", 2),
 
-    inMass = op.inFloat("Mass", 0),
+    inMass = op.inFloat("Mass Min", 0),
+    inMassMax = op.inFloat("Mass Max", 0),
 
     inSpeed = op.inFloat("Speed", 1),
 
@@ -76,7 +77,7 @@ const
 
     uniVel = new CGL.Uniform(tcPos.bgShader, "4f", "velocity", moveX, moveY, moveZ, inherVel),
     unigrav = new CGL.Uniform(tcPos.bgShader, "3f", "gravity", gravX, gravY, gravZ),
-    uniMass = new CGL.Uniform(tcPos.bgShader, "f", "mass", inMass),
+    uniMass = new CGL.Uniform(tcPos.bgShader, "2f", "mass", inMass, inMassMax),
 
     uniReset = new CGL.Uniform(tcPos.bgShader, "f", "reset", 0);
 

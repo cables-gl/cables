@@ -14,9 +14,12 @@ const
     dir_y = op.inValue("Velocity Y", 1),
     dir_z = op.inValue("Velocity Z", 0),
 
-    scale_x = op.inValue("Scale X", 1),
-    scale_y = op.inValue("Scale Y", 1),
-    scale_z = op.inValue("Scale Z", 1),
+    scale_x = op.inValue("Size X", 1),
+    scale_y = op.inValue("Size Y", 1),
+    scale_z = op.inValue("Size Z", 1),
+
+    noiseStr = op.inFloatSlider("Noise Strength", 0),
+    noiseScale = op.inFloat("Scale", 1),
 
     inPositions = op.inTexture("Positions"),
     trigger = op.outTrigger("trigger");
@@ -25,7 +28,7 @@ const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 op.setPortGroup("Position", [x, y, z]);
 op.toWorkPortsNeedToBeLinked(inPositions);
-shader.setSource(shader.getDefaultVertexShader(), attachments.velocityarea_frag);
+shader.setSource(shader.getDefaultVertexShader(), attachments.perlin_frag + attachments.velocityarea_frag);
 
 inMethod.onChange =
     inArea.onChange = updateDefines;
@@ -39,6 +42,7 @@ const
     uniAreaPos = new CGL.Uniform(shader, "3f", "areaPos", x, y, z),
     uniScale = new CGL.Uniform(shader, "3f", "scale", scale_x, scale_y, scale_z),
     uniDir = new CGL.Uniform(shader, "3f", "direction", dir_x, dir_y, dir_z),
+    uniNoise = new CGL.Uniform(shader, "4f", "noise", noiseStr, noiseScale, noiseScale, noiseScale),
     uniformMul = new CGL.Uniform(shader, "f", "size", inMul);
 
 function drawHelpers()

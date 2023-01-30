@@ -8,6 +8,9 @@ UNI vec3 areaPos;
 UNI vec3 scale;
 UNI vec3 direction;
 
+UNI float noiseStrength;
+UNI vec4 noise;
+
 float MOD_sdSphere( vec3 p, float s )
 {
     return length(p)-s;
@@ -56,7 +59,8 @@ MOD_de=1.0-MOD_map(
     // mul=clamp(mul,0.0,1.0);
 
     #ifdef METHOD_DIR
-        col.xyz+=normalize(direction)*strength*MOD_de;
+        if(length(direction)>0.0)
+            col.xyz+=normalize(direction)*strength*MOD_de;
     #endif
 
     #ifdef METHOD_POINT
@@ -65,5 +69,26 @@ MOD_de=1.0-MOD_map(
 
 
 
+    // vec4 noise
+    // x: strngth
+    // y: scale
+
+    float noiseStrength=noise.x;
+    float noiseScale=noise.y/10.0;
+
+    col.xyz+=
+        noiseStrength*
+        vec3(
+            Perlin3D( ( (pos.xyz+20.0) + pos.xyz) *noiseScale ),
+            Perlin3D( ( (pos.xyz-20.0) + pos.xyz) *noiseScale ),
+            Perlin3D( ( (pos.xyz+60.0) + pos.xyz) *noiseScale )
+        );
+
+// col.xyz=noise.rgb;
+
     outColor=col;
 }
+
+
+
+//

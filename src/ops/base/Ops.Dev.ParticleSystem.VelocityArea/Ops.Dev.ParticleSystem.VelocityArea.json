@@ -81,17 +81,27 @@
             },
             {
                 "type": 0,
-                "name": "Scale X",
+                "name": "Size X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Scale Y",
+                "name": "Size Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Scale Z",
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Noise Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
                 "subType": "number"
             },
             {
@@ -106,6 +116,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.ParticleSystemVelocityArea"
+        "name": "Ops.Dev.ParticleSystem.VelocityArea"
     }
 }
