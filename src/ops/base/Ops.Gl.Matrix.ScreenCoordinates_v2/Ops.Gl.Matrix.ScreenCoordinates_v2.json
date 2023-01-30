@@ -1,0 +1,84 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "adbf5273-3275-490d-9002-e735b81cbb9a",
+    "created": 1674816211146,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Unit index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.ScreenCoordinates2"
+    },
+    "summary": "screen/pixel coordinates of the current transform",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "X",
+                "text": "X coordinate"
+            },
+            {
+                "name": "Y",
+                "text": "Y coordinate"
+            },
+            {
+                "name": "Visible",
+                "text": "Boolean - is the shape on the screen"
+            }
+        ]
+    },
+    "exampleProjectId": "-GNBD-",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Matrix.ScreenCoordinates",
+            "author": "pandur",
+            "date": 1674816211146
+        },
+        {
+            "message": "Ops.User.pandur.ScreenCoordinates2 renamed to Ops.Gl.Matrix.ScreenCoordinates_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1674816359877
+        }
+    ]
+}
