@@ -63,6 +63,7 @@ const Shader = function (_cgl, _name)
     this._needsRecompile = true;
     this._compileReason = "initial";
 
+    this.ignoreMissingUniforms = false;
     this._projMatrixUniform = null;
     this._mvMatrixUniform = null;
     this._mMatrixUniform = null;
@@ -808,11 +809,11 @@ Shader.prototype.bind = function ()
     if (!this._program || this._needsRecompile) this.compile();
     if (!this._isValid) return;
 
-    if (!this._projMatrixUniform)
+    if (!this._projMatrixUniform && !this.ignoreMissingUniforms)
     {
         console.log("get projmat...", this._name);
-        this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
         this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
+        this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
         this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");
         this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWMAT);
         this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MODELMAT);
