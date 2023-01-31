@@ -18,7 +18,8 @@ class CopyTexture
             .endl() + "    outColor= col;"
             .endl() + "}";
 
-        const verts = ""
+
+        const verts = options.vertexShader || ""
             .endl() + "IN vec3 vPosition;"
             .endl() + "IN vec2 attrTexCoord;"
 
@@ -33,6 +34,9 @@ class CopyTexture
 
         this.bgShader = new CGL.Shader(cgl, "corelib copytexture " + name);
         this.bgShader.setSource(verts, shader);
+
+        if (!options.vertexShader)
+            this.bgShader.ignoreMissingUniforms = true;
 
         const textureUniform = new CGL.Uniform(this.bgShader, "t", "tex", 0);
 

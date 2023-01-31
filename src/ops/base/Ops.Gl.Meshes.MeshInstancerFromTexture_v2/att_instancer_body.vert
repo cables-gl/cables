@@ -39,8 +39,7 @@ mMatrix*=texInstMat;
 #ifdef USE_TEX_COLOR
 
     vec4 instColor=texture(MOD_texColor,tc);
-
-    frag_instColor=instColor;
+    frag_instColor=abs(instColor);
 #endif
 
 #ifdef USE_TEX_TC
