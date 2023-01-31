@@ -1,6 +1,7 @@
 const
     emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl),
     exec = op.inTrigger("Execute"),
+    inPlay = op.inBool("Play", true),
     inNumParticles = op.inInt("Num Particles", 10000),
     inReset = op.inTriggerButton("Reset"),
 
@@ -12,6 +13,8 @@ const
     inMassMax = op.inFloat("Mass Max", 0),
 
     inSpeed = op.inFloat("Speed", 1),
+
+    inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
 
     moveX = op.inFloat("Velocity X", 0),
     moveY = op.inFloat("Velocity Y", 1),
@@ -38,6 +41,7 @@ const
 
 op.setPortGroup("Constant Velocity", [moveX, moveY, moveZ]);
 
+let timer = new CABLES.Timer();
 let lastX = 0;
 let lastY = 0;
 let lastZ = 0;
@@ -45,6 +49,8 @@ let lastZ = 0;
 let texTiming = null;
 let texPos = null;
 let lastTime = CABLES.now();
+
+timer.play();
 
 const tcPos = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos",
     {
@@ -70,14 +76,17 @@ const
     uniTexFeedbackVel = new CGL.Uniform(tcPos.bgShader, "t", "texFeedbackVel", 4),
     uniTexVel = new CGL.Uniform(tcPos.bgShader, "t", "texVelocity", 5),
 
-    uniTime = new CGL.Uniform(tcPos.bgShader, "f", "time", 0),
+    uniTimeParams = new CGL.Uniform(tcPos.bgShader, "4f", "paramsTime", 0, 0, 0, 0),
+    // uniTime = new CGL.Uniform(tcPos.bgShader, "f", "time", 0),
+    // uniTimeDiff = new CGL.Uniform(tcPos.bgShader, "f", "timeDiff", 0),
+
     uniModelMatrix = new CGL.Uniform(tcPos.bgShader, "m4", "outModelMatrix", []),
     uniLifeTime = new CGL.Uniform(tcPos.bgShader, "2f", "lifeTime", inLifeTimeMin, inLifeTimeMax),
-    uniTimeDiff = new CGL.Uniform(tcPos.bgShader, "f", "timeDiff", 0),
+
+    uniMass = new CGL.Uniform(tcPos.bgShader, "2f", "mass", inMass, inMassMax),
 
     uniVel = new CGL.Uniform(tcPos.bgShader, "4f", "velocity", moveX, moveY, moveZ, inherVel),
     unigrav = new CGL.Uniform(tcPos.bgShader, "3f", "gravity", gravX, gravY, gravZ),
-    uniMass = new CGL.Uniform(tcPos.bgShader, "2f", "mass", inMass, inMassMax),
 
     uniReset = new CGL.Uniform(tcPos.bgShader, "f", "reset", 0);
 
@@ -118,6 +127,12 @@ function createTextures()
         "height": size });
 }
 
+inPlay.onChange = () =>
+{
+    if (inPlay.get()) timer.play();
+    else timer.pause();
+};
+
 exec.onTriggered = () =>
 {
     let firsttime = false;
@@ -134,7 +149,11 @@ exec.onTriggered = () =>
 
     tcPos.bgShader.popTextures();
 
-    uniTime.setValue(op.patch.freeTimer.get() * inSpeed.get());
+    timer.update();
+    const time = timer.get() * inSpeed.get();
+    // const timeDiff = (CABLES.now() - lastTime) / 1000 * inSpeed.get();
+    const timeDiff = time - lastTime;
+    uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), 0]);
 
     if (firsttime)tcPos.bgShader.pushTexture(uniTexOldPos, texPos.tex);
     else
@@ -163,9 +182,6 @@ exec.onTriggered = () =>
 
     uniReset.setValue(0);
 
-    uniTimeDiff.setValue((CABLES.now() - lastTime) / 1000 * inSpeed.get());
-    lastTime = CABLES.now();
-
     lastX = moveX.get();
     lastY = moveY.get();
     lastZ = moveZ.get();
@@ -179,6 +195,7 @@ exec.onTriggered = () =>
     outVelocity.set(texPos);
     outVelocity.set(tcPos.fb.getTextureColorNum(3));
 
+    lastTime = timer.get() * inSpeed.get();// CABLES.now();
     next.trigger();
 };
 
