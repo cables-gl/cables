@@ -1,6 +1,7 @@
 const
     exe = op.inTrigger("exe"),
     geom = op.inObject("Geometry", null, "geometry"),
+    inLimit = op.inBool("Limit Instances", true),
     inNum = op.inInt("Num Instances", 1000),
     inTex = op.inTexture("Position Texture", null, "texture"),
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
@@ -17,6 +18,7 @@ const
 
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);
+op.toWorkPortsNeedToBeLinked(inTex);
 
 geom.ignoreValueSerialize = true;
 
@@ -72,6 +74,7 @@ exe.onLinkChanged = function ()
     if (!exe.isLinked()) removeModule();
 };
 
+inLimit.onChange =
 inNum.onChange =
     function ()
     {
@@ -95,6 +98,8 @@ function updateDefines()
     mod.toggleDefine("USE_TEX_SCALE", inTex3.get());
     mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
     mod.toggleDefine("USE_TEX_TC", inTex5.get());
+
+    inNum.setUiAttribs({ "greyout": !inLimit.get() });
 }
 
 geom.onChange = function ()
@@ -118,19 +123,12 @@ function removeModule()
 function setupArray()
 {
     if (!mesh) return;
+    if (!inTex.get()) return;
 
-    num = Math.max(0, Math.floor(inNum.get()));
-
-    // if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
-
-    // for (let i = 0; i < num; i++)
-    // {
-    //     mat4.identity(m);
-    //     for (let a = 0; a < 16; a++) matrixArray[i * 16 + a] = m[a];
-    // }
+    if (inLimit.get()) num = Math.max(0, Math.floor(inNum.get()));
+    else num = inTex.get().width * inTex.get().height;
 
     mesh.numInstances = num;
-    // mesh.addAttribute("instMat", matrixArray, 16);
 
     recalc = false;
 }
@@ -151,7 +149,7 @@ function doRender()
     mod.setUniformValue("MOD_texSizeX", inTex.get().width);
     mod.setUniformValue("MOD_texSizeY", inTex.get().height);
 
-    // mesh.numInstances = num;
+    if (mesh.numInstances != inTex.get().width * inTex.get().height)reset();
 
     outNum.set(mesh.numInstances);
 

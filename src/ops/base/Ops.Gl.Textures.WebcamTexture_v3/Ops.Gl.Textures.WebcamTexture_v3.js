@@ -55,6 +55,7 @@ let camInputDevices = null;
 let active = false;
 let alreadyRetried = false;
 let constraints = null;
+let tc = null;
 
 textureOut.set(emptyTexture);
 
@@ -71,17 +72,16 @@ inAsDOM.onChange = inCss.onChange = updateStyle;
 initTexture();
 updateStyle();
 
-let tc = null;
+op.on("loadedValueSet", delayedInitDevices);
+inActive.onChange = delayedInitDevices;
 
-op.on("loadedValueSet", () =>
+function delayedInitDevices()
 {
-    if (inActive.get()) initDevices();
-});
-
-inActive.onChange = () =>
-{
-    if (inActive.get()) initDevices();
-};
+    setTimeout(() =>
+    {
+        if (inActive.get()) initDevices();
+    }, 50);
+}
 
 function initCopyShader()
 {
