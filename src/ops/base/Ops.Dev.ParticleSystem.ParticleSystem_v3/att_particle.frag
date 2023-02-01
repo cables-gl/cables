@@ -4,7 +4,6 @@ IN vec4 posi;
 UNI sampler2D texOldPos;
 UNI sampler2D texSpawnPos;
 UNI sampler2D texTiming;
-
 UNI sampler2D texFeedbackVel;
 UNI sampler2D texSpawnVel;
 UNI sampler2D texVelocity;
@@ -15,16 +14,11 @@ UNI vec4 paramsTime;
 
 UNI vec3 scale;
 UNI vec3 gravity;
-
 UNI vec2 lifeTime;
-
-
 UNI vec4 velocity; // xyz: xyz  / w: inherit velocity
 
 
-UNI float spread;
-
-vec3 outOfScreenPos=vec3(999999.0);
+const vec3 outOfScreenPos=vec3(999999.0);
 
 {{MODULES_HEAD}}
 {{CGL.RANDOM_LOW}}
@@ -41,21 +35,19 @@ void main()
     float time=paramsTime.x;
     float timeDiff=paramsTime.y;
     float spawnRate=paramsTime.z;
-
-
-
+    float speed=paramsTime.w;
 
     // respawn!!
     if(
             #ifdef RESPAWN
-                time>vtiming.g
+                time>vtiming.g  ||
             #endif
 
-            || isnan(vtiming.r)
-            || isnan(vtiming.g)
-            || reset==1.0 )
+            isnan(vtiming.r) ||
+            isnan(vtiming.g) ||
+            reset==1.0 )
     {
-        if(cgl_random(texCoord*23.123)>spawnRate )
+        if(cgl_random(texCoord*23.123) > spawnRate || reset==1.0 ) //
         {
             timeDiff=0.001;
             newPos.rgb=outOfScreenPos;
@@ -91,17 +83,17 @@ void main()
 
     float m=mass.x+mass.y*cgl_random(texCoord);
 
-    vec3 grav=gravity*m*(time-vtiming.r);
+    vec3 grav=gravity*m*(time-vtiming.r)*speed;
 
     newPos.rgb+=grav*timeDiff;
-    newPos.rgb+=(velocity.xyz+velocityTex.xyz)*timeDiff;
+    newPos.rgb+=(velocity.xyz+velocityTex.xyz)*timeDiff*speed;
 
-    newPos.rgb-=((1.0-lifeProgress)*timeDiff*velocity.w)*oldVelocity.rgb;
+    // newPos.rgb-=((1.0-lifeProgress)*timeDiff*velocity.w)*oldVelocity.rgb;
 
 
     // if(isinf(newPos.r))vtiming.r=57.1;
     // if(isnan(newPos.g))newPos.g=57.2;
-    if(isnan(newPos.r))newPos.rgb=outOfScreenPos;
+    if(isnan(newPos.r)) newPos.rgb=outOfScreenPos;
 
 
     // gl_Position

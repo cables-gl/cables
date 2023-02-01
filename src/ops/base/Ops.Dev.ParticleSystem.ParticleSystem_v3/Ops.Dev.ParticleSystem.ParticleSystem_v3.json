@@ -70,33 +70,13 @@
                 "subType": "boolean"
             },
             {
-                "type": 0,
-                "name": "Num Particles",
-                "subType": "integer"
-            },
-            {
                 "type": 1,
                 "name": "Reset"
             },
             {
                 "type": 0,
-                "name": "Min Lifetime",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Max Lifetime",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Mass Min",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Mass Max",
-                "subType": "number"
+                "name": "Num Particles",
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -106,6 +86,31 @@
             {
                 "type": 0,
                 "name": "Spawn Rate",
+                "group": "Life",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min Lifetime",
+                "group": "Life",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Lifetime",
+                "group": "Life",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass Min",
+                "group": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass Max",
+                "group": "Mass",
                 "subType": "number"
             },
             {
@@ -129,16 +134,19 @@
             {
                 "type": 0,
                 "name": "Gravity X",
+                "group": "Gravity",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Gravity Y",
+                "group": "Gravity",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Gravity Z",
+                "group": "Gravity",
                 "subType": "number"
             },
             {

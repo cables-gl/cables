@@ -39,7 +39,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.SchlickGain"
+        "name": "Ops.Math.SchlickBias"
     },
     "summary": "Custom easing curve via schlick bias and gain",
     "issues": "",
