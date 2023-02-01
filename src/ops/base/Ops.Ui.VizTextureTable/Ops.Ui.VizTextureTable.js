@@ -112,7 +112,7 @@ op.renderVizLayer = (ctx, layer) =>
                 arr[(x + (y * readW)) * stride + s] = pixelData[((x) + ((readH - y - 1) * readW)) * stride + s];
 
     if (realTexture && realTexture.getInfoOneLine)
-        op.setUiAttrib({ "extendTitle": realTexture.getInfoOneLine() });
+        op.setUiAttrib({ "extendTitle": inTex.links[0].getOtherPort(inTex).name + ": " + realTexture.getInfoOneLine() });
 
     for (let y = 0; y < readH; y++)
         for (let x = 0; x < readW; x++)

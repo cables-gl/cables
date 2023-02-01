@@ -789,6 +789,7 @@ Shader.prototype.compile = function ()
     MESH.lastMesh = null;
     MESH.lastShader = null;
 
+    this._countMissingUniforms = 0;
     this._needsRecompile = false;
     this.lastCompile = now();
 

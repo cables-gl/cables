@@ -15,6 +15,12 @@ inTex.onChange = () =>
 
     outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outTex.set(t);
+
+    let title = "";
+
+    if (inTex.get()) title = inTex.links[0].getOtherPort(inTex).name;
+
+    op.setUiAttrib({ "extendTitle": title });
 };
 
 op.renderVizLayer = (ctx, layer) =>

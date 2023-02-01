@@ -66,6 +66,11 @@
             },
             {
                 "type": 0,
+                "name": "Play",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Num Particles",
                 "subType": "integer"
             },
@@ -96,6 +101,11 @@
             {
                 "type": 0,
                 "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Spawn Rate",
                 "subType": "number"
             },
             {

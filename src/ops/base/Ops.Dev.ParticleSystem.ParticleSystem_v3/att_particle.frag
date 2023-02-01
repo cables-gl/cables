@@ -11,24 +11,23 @@ UNI sampler2D texVelocity;
 
 UNI vec2 mass;
 UNI float reset;
+UNI vec4 paramsTime;
 
 UNI vec3 scale;
 UNI vec3 gravity;
 
 UNI vec2 lifeTime;
-UNI float time;
-UNI float timeDiff;
+
 
 UNI vec4 velocity; // xyz: xyz  / w: inherit velocity
 
 
 UNI float spread;
 
+vec3 outOfScreenPos=vec3(999999.0);
+
 {{MODULES_HEAD}}
 {{CGL.RANDOM_LOW}}
-
-
-// vec4 posi=vec4(0.0);
 
 void main()
 {
@@ -39,39 +38,50 @@ void main()
     vec4 newPos=oldPos;
 
 
+    float time=paramsTime.x;
+    float timeDiff=paramsTime.y;
+    float spawnRate=paramsTime.z;
+
+
 
 
     // respawn!!
     if(
-        #ifdef RESPAWN
-        time>vtiming.g ||
-        #endif
+            #ifdef RESPAWN
+                time>vtiming.g
+            #endif
 
-        // isnan(oldPos.x)||
-        isnan(vtiming.r) ||
-        isnan(vtiming.g) ||
-
-        reset==1.0 )
+            || isnan(vtiming.r)
+            || isnan(vtiming.g)
+            || reset==1.0 )
     {
+        if(cgl_random(texCoord*23.123)>spawnRate )
+        {
+            timeDiff=0.001;
+            newPos.rgb=outOfScreenPos;
+        }
+        else
+        {
+            velocityTex.rgb=vec3(0.0);
 
-        velocityTex.rgb=vec3(0.0);
 
+            newPos.rgb=posi.rgb;
+            vec3 rnd=(cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time));
 
-        newPos.rgb=posi.rgb;
-        vec3 rnd=(cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time));
+            rnd=texture(texSpawnPos,rnd.xy).rgb;
 
-        rnd=texture(texSpawnPos,rnd.xy).rgb;
+            oldVelocity=texture(texSpawnVel,texCoord);
 
-        oldVelocity=texture(texSpawnVel,texCoord);
+            newPos.rgb+=rnd;
 
-        newPos.rgb+=rnd;
+            vtiming.r=time;
 
-        vtiming.r=time;
+            vtiming.g=(cgl_random(time*texCoord)*(lifeTime.y-lifeTime.x))+lifeTime.x+time;
 
-        vtiming.g=(cgl_random(time*texCoord)*(lifeTime.y-lifeTime.x))+lifeTime.x+time;
+            if(reset==1.0)
+                vtiming.g=time+cgl_random(time*texCoord)*lifeTime.y;
 
-        if(reset==1.0)
-            vtiming.g=time+cgl_random(time*texCoord)*lifeTime.y;
+        }
     }
 
 
@@ -91,7 +101,7 @@ void main()
 
     // if(isinf(newPos.r))vtiming.r=57.1;
     // if(isnan(newPos.g))newPos.g=57.2;
-    // if(isnan(newPos.r))newPos.rgb=vec3(0.);
+    if(isnan(newPos.r))newPos.rgb=outOfScreenPos;
 
 
     // gl_Position

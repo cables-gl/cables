@@ -67,6 +67,11 @@
             },
             {
                 "type": 0,
+                "name": "Limit Instances",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Num Instances",
                 "subType": "integer"
             },
