@@ -26,8 +26,11 @@ const
 const cgl = op.patch.cgl;
 
 inUseTexAlpha.onChange =
-inTarget.onChange =
-inBlend.onChange = inDiscard.onChange = inWorldSpace.onChange = inMethod.onChange = updateDefines;
+    inTarget.onChange =
+    inBlend.onChange =
+    inDiscard.onChange =
+    inWorldSpace.onChange =
+    inMethod.onChange = updateDefines;
 
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
 op.setPortGroup("Position", [inPosX, inPosY]);
