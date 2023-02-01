@@ -98,7 +98,6 @@ const VarSetOpWrapper = class
             else this._op.patch.setVarValue(varname, null);
         }
 
-
         if (this._op.isCurrentUiOp())
         {
             this._updateVarNamesDropdown();
