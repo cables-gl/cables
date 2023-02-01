@@ -153,8 +153,28 @@ exec.onTriggered = () =>
 
     timer.update();
     const time = timer.get();
-    // const timeDiff = (CABLES.now() - lastTime) / 1000 * inSpeed.get();
     const timeDiff = (time - lastTime);
+
+    if (CABLES.UI)
+    {
+        op.setUiError("wrongtexsize", null);
+        if (inTexVelocity.get() && inTexVelocity.get() && (
+            inTexVelocity.get().width != outTexSize.get() ||
+            inTexVelocity.get().height != outTexSize.get() ||
+            inTexVelocity.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexVelocity has wrong size or format!");
+        if (inTexOldPos.get() && inTexOldPos.get() && (
+            inTexOldPos.get().width != outTexSize.get() ||
+            inTexOldPos.get().height != outTexSize.get() ||
+            inTexOldPos.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexOldPos has wrong size or format!");
+        // if(inTexSpawn.get() && inTexSpawn.get() && (
+        //     inTexSpawn.get().width!=outTexSize.get() ||
+        //     inTexSpawn.get().height!=outTexSize.get() ||
+        //     inTexSpawn.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexSpawn has wrong size or format!",0);
+        if (inTexSpawnVel.get() && inTexSpawnVel.get() && (
+            inTexSpawnVel.get().width != outTexSize.get() ||
+            inTexSpawnVel.get().height != outTexSize.get() ||
+            inTexSpawnVel.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexSpawnVel has wrong size or format!");
+    }
 
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpeed.get()]);
     lastTime = timer.get();// CABLES.now();
