@@ -2,19 +2,18 @@ const
     emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl),
     exec = op.inTrigger("Execute"),
     inPlay = op.inBool("Play", true),
-    inNumParticles = op.inInt("Num Particles", 10000),
     inReset = op.inTriggerButton("Reset"),
 
+    inNumParticles = op.inInt("Num Particles", 10000),
+    inSpeed = op.inFloat("Speed", 1),
+
     // inTime=op.inFloat("Time",0),
+    inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
     inLifeTimeMax = op.inFloat("Max Lifetime", 2),
 
     inMass = op.inFloat("Mass Min", 0),
     inMassMax = op.inFloat("Mass Max", 0),
-
-    inSpeed = op.inFloat("Speed", 1),
-
-    inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
 
     moveX = op.inFloat("Velocity X", 0),
     moveY = op.inFloat("Velocity Y", 1),
@@ -39,7 +38,10 @@ const
     outVelocity = op.outTexture("Current Velocity", emptyTex),
     outTexSize = op.outNumber("Tex Size");
 
+op.setPortGroup("Life", [inLifeTimeMax, inLifeTimeMin, inSpawnRate]);
+op.setPortGroup("Mass", [inMassMax, inMass]);
 op.setPortGroup("Constant Velocity", [moveX, moveY, moveZ]);
+op.setPortGroup("Gravity", [gravX, gravY, gravZ]);
 
 let timer = new CABLES.Timer();
 let lastX = 0;
@@ -150,10 +152,12 @@ exec.onTriggered = () =>
     tcPos.bgShader.popTextures();
 
     timer.update();
-    const time = timer.get() * inSpeed.get();
+    const time = timer.get();
     // const timeDiff = (CABLES.now() - lastTime) / 1000 * inSpeed.get();
-    const timeDiff = time - lastTime;
-    uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), 0]);
+    const timeDiff = (time - lastTime);
+
+    uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpeed.get()]);
+    lastTime = timer.get();// CABLES.now();
 
     if (firsttime)tcPos.bgShader.pushTexture(uniTexOldPos, texPos.tex);
     else
@@ -195,7 +199,6 @@ exec.onTriggered = () =>
     outVelocity.set(texPos);
     outVelocity.set(tcPos.fb.getTextureColorNum(3));
 
-    lastTime = timer.get() * inSpeed.get();// CABLES.now();
     next.trigger();
 };
 

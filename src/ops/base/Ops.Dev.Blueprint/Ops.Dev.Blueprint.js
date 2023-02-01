@@ -7,7 +7,7 @@ const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
 let loadingId = null;
-patchIdIn.setUiAttribs({ "hidePort": true, "greyout": true });
+patchIdIn.setUiAttribs({ "hidePort": true, "greyout": false });
 subPatchIdIn.setUiAttribs({ "hidePort": true, "greyout": true });
 portsData.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hideParam": true });

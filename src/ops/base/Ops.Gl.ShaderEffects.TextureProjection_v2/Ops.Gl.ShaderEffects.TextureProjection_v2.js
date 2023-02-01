@@ -91,6 +91,9 @@ function updateDefines()
     mod.toggleDefine("MOD_TARGET_ALPHA", inTarget.get() == "Alpha");
     mod.toggleDefine("MOD_TARGET_COLOR", inTarget.get() == "Color");
     mod.toggleDefine("MOD_TARGET_POINTSIZE", inTarget.get() == "Pointsize");
+
+    if (inTarget.get() == "Pointsize" && inMethod.get() == "Screen")op.setUiError("pointscreen", "This combination of Mapping and Target is not possible", 1);
+    else op.setUiError("pointscreen", null);
 }
 
 render.onTriggered = function ()
