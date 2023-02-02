@@ -32,6 +32,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "r",
                 "subType": "number"

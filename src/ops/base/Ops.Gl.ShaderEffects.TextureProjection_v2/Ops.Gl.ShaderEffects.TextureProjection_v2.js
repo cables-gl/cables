@@ -26,8 +26,11 @@ const
 const cgl = op.patch.cgl;
 
 inUseTexAlpha.onChange =
-inTarget.onChange =
-inBlend.onChange = inDiscard.onChange = inWorldSpace.onChange = inMethod.onChange = updateDefines;
+    inTarget.onChange =
+    inBlend.onChange =
+    inDiscard.onChange =
+    inWorldSpace.onChange =
+    inMethod.onChange = updateDefines;
 
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
 op.setPortGroup("Position", [inPosX, inPosY]);
@@ -91,6 +94,9 @@ function updateDefines()
     mod.toggleDefine("MOD_TARGET_ALPHA", inTarget.get() == "Alpha");
     mod.toggleDefine("MOD_TARGET_COLOR", inTarget.get() == "Color");
     mod.toggleDefine("MOD_TARGET_POINTSIZE", inTarget.get() == "Pointsize");
+
+    if (inTarget.get() == "Pointsize" && inMethod.get() == "Screen")op.setUiError("pointscreen", "This combination of Mapping and Target is not possible", 1);
+    else op.setUiError("pointscreen", null);
 }
 
 render.onTriggered = function ()

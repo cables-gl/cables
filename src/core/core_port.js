@@ -604,6 +604,13 @@ Port.prototype.execute = function ()
 Port.prototype.setVariableName = function (n)
 {
     this._useVariableName = n;
+
+
+    this.parent.patch.on("variableRename", (oldname, newname) =>
+    {
+        if (oldname != this._useVariableName) return;
+        this._useVariableName = newname;
+    });
 };
 
 Port.prototype.getVariableName = function ()

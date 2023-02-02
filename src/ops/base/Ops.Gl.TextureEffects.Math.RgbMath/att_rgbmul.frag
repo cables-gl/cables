@@ -3,6 +3,9 @@ UNI sampler2D tex;
 #ifdef MOD_MASK
     UNI sampler2D texMask;
 #endif
+#ifdef MOD_USE_VALUETEX
+    UNI sampler2D texValues;
+#endif
 UNI float r;
 UNI float g;
 UNI float b;
@@ -14,6 +17,10 @@ void main()
 {
     vec4 col=texture(tex,texCoord);
     vec4 v=vec4(r,g,b,a);
+
+    #ifdef MOD_USE_VALUETEX
+        v=texture(texValues,texCoord);
+    #endif
 
     #ifdef MOD_MASK
         v*=texture(texMask,texCoord);

@@ -2,19 +2,18 @@ const
     emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl),
     exec = op.inTrigger("Execute"),
     inPlay = op.inBool("Play", true),
-    inNumParticles = op.inInt("Num Particles", 10000),
     inReset = op.inTriggerButton("Reset"),
 
+    inNumParticles = op.inInt("Num Particles", 10000),
+    inSpeed = op.inFloat("Speed", 1),
+
     // inTime=op.inFloat("Time",0),
+    inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
     inLifeTimeMax = op.inFloat("Max Lifetime", 2),
 
     inMass = op.inFloat("Mass Min", 0),
     inMassMax = op.inFloat("Mass Max", 0),
-
-    inSpeed = op.inFloat("Speed", 1),
-
-    inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
 
     moveX = op.inFloat("Velocity X", 0),
     moveY = op.inFloat("Velocity Y", 1),
@@ -39,7 +38,10 @@ const
     outVelocity = op.outTexture("Current Velocity", emptyTex),
     outTexSize = op.outNumber("Tex Size");
 
+op.setPortGroup("Life", [inLifeTimeMax, inLifeTimeMin, inSpawnRate]);
+op.setPortGroup("Mass", [inMassMax, inMass]);
 op.setPortGroup("Constant Velocity", [moveX, moveY, moveZ]);
+op.setPortGroup("Gravity", [gravX, gravY, gravZ]);
 
 let timer = new CABLES.Timer();
 let lastX = 0;
@@ -150,10 +152,32 @@ exec.onTriggered = () =>
     tcPos.bgShader.popTextures();
 
     timer.update();
-    const time = timer.get() * inSpeed.get();
-    // const timeDiff = (CABLES.now() - lastTime) / 1000 * inSpeed.get();
-    const timeDiff = time - lastTime;
-    uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), 0]);
+    const time = timer.get();
+    const timeDiff = (time - lastTime);
+
+    if (CABLES.UI)
+    {
+        op.setUiError("wrongtexsize", null);
+        if (inTexVelocity.get() && inTexVelocity.get() && (
+            inTexVelocity.get().width != outTexSize.get() ||
+            inTexVelocity.get().height != outTexSize.get() ||
+            inTexVelocity.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexVelocity has wrong size or format!");
+        if (inTexOldPos.get() && inTexOldPos.get() && (
+            inTexOldPos.get().width != outTexSize.get() ||
+            inTexOldPos.get().height != outTexSize.get() ||
+            inTexOldPos.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexOldPos has wrong size or format!");
+        // if(inTexSpawn.get() && inTexSpawn.get() && (
+        //     inTexSpawn.get().width!=outTexSize.get() ||
+        //     inTexSpawn.get().height!=outTexSize.get() ||
+        //     inTexSpawn.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexSpawn has wrong size or format!",0);
+        if (inTexSpawnVel.get() && inTexSpawnVel.get() && (
+            inTexSpawnVel.get().width != outTexSize.get() ||
+            inTexSpawnVel.get().height != outTexSize.get() ||
+            inTexSpawnVel.get().textureType != outTexPos.get().width)) op.setUiError("wrongtexsize", "inTexSpawnVel has wrong size or format!");
+    }
+
+    uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpeed.get()]);
+    lastTime = timer.get();// CABLES.now();
 
     if (firsttime)tcPos.bgShader.pushTexture(uniTexOldPos, texPos.tex);
     else
@@ -195,7 +219,6 @@ exec.onTriggered = () =>
     outVelocity.set(texPos);
     outVelocity.set(tcPos.fb.getTextureColorNum(3));
 
-    lastTime = timer.get() * inSpeed.get();// CABLES.now();
     next.trigger();
 };
 
