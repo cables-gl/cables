@@ -4,7 +4,7 @@ const
     // inNormalize = op.inSwitch("Coordinate", ["Pixel", "Normalized"], "Pixel"),
     inX = op.inInt("X", 0),
     inY = op.inInt("Y", 0),
-    tex = op.inObject("texture"),
+    tex = op.inTexture("texture"),
     outTrigger = op.outTrigger("trigger"),
     outR = op.outNumber("Red"),
     outG = op.outNumber("Green"),
@@ -14,6 +14,7 @@ const
 let
     fb = null,
     pixelData = null,
+    wasTriggered = true,
     texChanged = false;
 
 tex.onChange = function () { texChanged = true; };
@@ -21,8 +22,27 @@ tex.onChange = function () { texChanged = true; };
 let isFloatingPoint = false;
 let channelType = op.patch.cgl.gl.UNSIGNED_BYTE;
 
+op.patch.cgl.on("endframe", () =>
+{
+    if (!wasTriggered) return;
+    wasTriggered = false;
+    const gl = cgl.gl;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+
+    gl.readPixels(
+        inX.get(), inY.get(),
+        1, 1,
+        gl.RGBA,
+        channelType,
+        pixelData
+    );
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+});
+
 pUpdate.onTriggered = function ()
 {
+    wasTriggered = true;
     const realTexture = tex.get(), gl = cgl.gl;
 
     if (!realTexture) return;
@@ -49,17 +69,17 @@ pUpdate.onTriggered = function ()
         texChanged = false;
     }
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
-    gl.readPixels(
-        inX.get(), inY.get(),
-        1, 1,
-        gl.RGBA,
-        channelType,
-        pixelData
-    );
+    // gl.readPixels(
+    //     inX.get(), inY.get(),
+    //     1, 1,
+    //     gl.RGBA,
+    //     channelType,
+    //     pixelData
+    // );
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     if (isFloatingPoint)
     {
