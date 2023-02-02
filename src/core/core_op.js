@@ -419,8 +419,9 @@ const Op = function ()
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "type": "string",
                 "display": "editor",
+                "editShortcut": true,
                 "editorSyntax": syntax,
-                hideFormatButton
+                "hideFormatButton": hideFormatButton
             }));
 
         p.value = "";
@@ -440,7 +441,7 @@ const Op = function ()
                 "type": "string",
                 "display": "editor",
                 "editorSyntax": syntax,
-                hideFormatButton
+                "hideFormatButton": hideFormatButton
             })
         );
         p.value = "";

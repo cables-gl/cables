@@ -16,6 +16,8 @@ const inGrad = op.inGradient("Gradient"),
 
 const cgl = op.patch.cgl;
 
+inGrad.setUiAttribs({ "editShortcut": true });
+
 twrap.onChange =
     tfilter.onChange =
     inStep.onChange =
