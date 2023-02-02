@@ -66,10 +66,9 @@ pUpdate.onTriggered = function ()
     if (!realTexture) return;
     if (!fb) fb = gl.createFramebuffer();
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-
     if (texChanged)
     {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
         gl.framebufferTexture2D(
             gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
             gl.TEXTURE_2D, realTexture.tex, 0
@@ -85,8 +84,8 @@ pUpdate.onTriggered = function ()
         else pixelData = new Uint8Array(size);
 
         texChanged = false;
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
