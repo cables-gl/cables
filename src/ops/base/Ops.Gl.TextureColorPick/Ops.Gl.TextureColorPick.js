@@ -25,8 +25,11 @@ let channelType = op.patch.cgl.gl.UNSIGNED_BYTE;
 op.patch.cgl.on("endframe", () =>
 {
     if (!wasTriggered) return;
+
+    let starttime = performance.now();
     wasTriggered = false;
     const gl = cgl.gl;
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
     gl.readPixels(
@@ -38,6 +41,21 @@ op.patch.cgl.on("endframe", () =>
     );
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    if (isFloatingPoint)
+    {
+        outR.set(pixelData[0]);
+        outG.set(pixelData[1]);
+        outB.set(pixelData[2]);
+        outA.set(pixelData[3]);
+    }
+    else
+    {
+        outR.set(pixelData[0] / 255);
+        outG.set(pixelData[1] / 255);
+        outB.set(pixelData[2] / 255);
+        outA.set(pixelData[3] / 255);
+    }
 });
 
 pUpdate.onTriggered = function ()
@@ -68,6 +86,7 @@ pUpdate.onTriggered = function ()
 
         texChanged = false;
     }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
@@ -80,21 +99,6 @@ pUpdate.onTriggered = function ()
     // );
 
     // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-
-    if (isFloatingPoint)
-    {
-        outR.set(pixelData[0]);
-        outG.set(pixelData[1]);
-        outB.set(pixelData[2]);
-        outA.set(pixelData[3]);
-    }
-    else
-    {
-        outR.set(pixelData[0] / 255);
-        outG.set(pixelData[1] / 255);
-        outB.set(pixelData[2] / 255);
-        outA.set(pixelData[3] / 255);
-    }
 
     outTrigger.trigger();
 };
