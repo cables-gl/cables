@@ -41,6 +41,11 @@
                 "type": 0,
                 "name": "Show Info",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visualize outside 0-1 index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
