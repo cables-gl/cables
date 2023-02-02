@@ -1,6 +1,7 @@
 const
     inTex = op.inTexture("Texture In"),
     inShowInfo = op.inBool("Show Info", false),
+    inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim", "Mask"], "Anim"),
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
@@ -8,6 +9,10 @@ op.setUiAttrib({ "height": 150, "resizable": true });
 
 const timer = new CABLES.Timer();
 timer.play();
+
+let shader = null;
+
+inVizRange.onChange = updateDefines;
 
 inTex.onChange = () =>
 {
@@ -22,6 +27,14 @@ inTex.onChange = () =>
 
     op.setUiAttrib({ "extendTitle": title });
 };
+
+function updateDefines()
+{
+    if (!shader) return;
+    shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
+    shader.toggleDefine("ANIM_BLINK", inVizRange.get() == "Blink");
+    // shader.toggleDefine("ANIM_RANGE", inVizRange.get()=="Anim");
+}
 
 op.renderVizLayer = (ctx, layer) =>
 {
@@ -56,6 +69,8 @@ op.renderVizLayer = (ctx, layer) =>
         this._shader.setSource(attachments.viztex_vert, attachments.viztex_frag);
         this._shaderTexUniform = new CGL.Uniform(this._shader, "t", "tex", texSlot);
         this._shaderTexCubemapUniform = new CGL.Uniform(this._shader, "tc", "cubeMap", texSlotCubemap);
+        shader = this._shader;
+        updateDefines();
 
         this._shaderTexUniformW = new CGL.Uniform(this._shader, "f", "width", portTex.width);
         this._shaderTexUniformH = new CGL.Uniform(this._shader, "f", "height", portTex.height);

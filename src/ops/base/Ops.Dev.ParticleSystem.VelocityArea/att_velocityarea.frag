@@ -50,11 +50,11 @@ void main()
         float MOD_de=MOD_sdRoundBox(p,scale,0.0);
     #endif
 
-MOD_de=1.0-MOD_map(
-    MOD_de,
-    0.0, falloff,
-    0.0,1.0
-    );
+    MOD_de=1.0-MOD_map(
+        MOD_de,
+        0.0, falloff,
+        0.0,1.0
+        );
 
     // mul=clamp(mul,0.0,1.0);
 
@@ -64,7 +64,11 @@ MOD_de=1.0-MOD_map(
     #endif
 
     #ifdef METHOD_POINT
-        col.xyz+=normalize( pos.xyz-areaPos )*strength*MOD_de;
+
+        // col.xyz+=normalize( pos.xyz-areaPos )*strength*MOD_de;
+
+        if(MOD_de>0.0)
+            col.xyz+=normalize( pos.xyz-areaPos )*strength*10.0*MOD_de;
     #endif
 
 
