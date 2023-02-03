@@ -5,6 +5,7 @@ class PixelReader
     {
         this.pixelData = null;
         this._finishedFence = true;
+        this._size = 0;
         this._pbo = null;
     }
 
@@ -55,16 +56,20 @@ class PixelReader
 
         const size = 4 * w * h;
 
-        if (!this._pixelData)
+        if (!this._pixelData || this._size != size)
+        {
             if (isFloatingPoint) this._pixelData = new Float32Array(size);
             else this._pixelData = new Uint8Array(size);
+
+            this._size = size;
+        }
 
 
         if (this._finishedFence)
         {
             this._pbo = gl.createBuffer();
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-            gl.bufferData(gl.PIXEL_PACK_BUFFER, 4 * 4, gl.DYNAMIC_READ);
+            gl.bufferData(gl.PIXEL_PACK_BUFFER, size, gl.DYNAMIC_READ);
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
 
@@ -83,9 +88,8 @@ class PixelReader
         if (this._finishedFence)
             this._fence(gl).then(() =>
             {
-                let starttime = performance.now();
+                // let starttime = performance.now();
                 this._wasTriggered = false;
-                // texChanged = false;
 
                 gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
                 gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
