@@ -452,6 +452,7 @@ Shader.prototype._getAttrSrc = function (attr, firstLevel)
 
 Shader.prototype.compile = function ()
 {
+    if (this._cgl.aborted) return;
     const startTime = performance.now();
 
     this._cgl.profileData.profileShaderCompiles++;
@@ -805,7 +806,7 @@ Shader.hasChanged = function ()
 
 Shader.prototype.bind = function ()
 {
-    if (!this._isValid) return;
+    if (!this._isValid || this._cgl.aborted) return;
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();

@@ -53,6 +53,7 @@ class PixelReader
         let channelType = gl.UNSIGNED_BYTE;
         let bytesPerItem = 1;
 
+        if (cgl.aborted) return;
         if (!fb) return;
 
         const isFloatingPoint = textureType == CGL.Texture.TYPE_FLOAT;

@@ -484,7 +484,7 @@ Mesh.prototype._checkAttrLengths = function ()
 
 Mesh.prototype._bind = function (shader)
 {
-    if (!shader.isValid()) return;
+    if (!shader.isValid() || this._cgl.aborted) return;
     // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];

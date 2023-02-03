@@ -153,6 +153,7 @@ function profile(func, funcName)
 {
     return function ()
     {
+        if (op.patch.cgl.aborted) return;
         if (errorCount >= inLimit.get()) return;
 
         count++;
