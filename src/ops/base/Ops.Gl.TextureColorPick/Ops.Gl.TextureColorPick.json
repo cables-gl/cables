@@ -10,6 +10,18 @@
             "message": "Ops.User.pandur.TexturePickColor renamed to Ops.Gl.TextureColorPick",
             "author": "pandur",
             "date": 1605276409800
+        },
+        {
+            "message": " added core lib: cgl_readpixels",
+            "type": "",
+            "author": "pandur",
+            "date": 1675433055976
+        },
+        {
+            "message": " added core lib: cgl_pixelreader",
+            "type": "",
+            "author": "pandur",
+            "date": 1675433872295
         }
     ],
     "authorName": "pandur",
@@ -72,5 +84,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "bzVSwn"
+    "exampleProjectId": "bzVSwn",
+    "coreLibs": [
+        "cgl_pixelreader"
+    ]
 }
