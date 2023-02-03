@@ -304,6 +304,10 @@ const Context = function (_patch)
         {
             this._currentCursor = this.canvas.style.cursor = this._cursor;
         }
+
+
+        this.emitEvent("endframe");
+
         this.fpsCounter.endFrame();
     };
 

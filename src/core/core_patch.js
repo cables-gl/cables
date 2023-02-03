@@ -687,6 +687,7 @@ Patch.prototype.exec = function (e)
         this._renderOneFrame = false;
     }
 
+
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
 

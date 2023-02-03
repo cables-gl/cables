@@ -89,22 +89,36 @@ void main()
        colTex.rgb = vec3(depth);
     }
 
-    if(colTex.r>1.0 || colTex.r<0.0)
-    {
-        float r=mod( time+colTex.r,1.0)*0.5+0.5;
-        colTex.r=r;
-    }
-    if(colTex.g>1.0 || colTex.g<0.0)
-    {
-        float r=mod( time+colTex.g,1.0)*0.5+0.5;
-        colTex.g=r;
-    }
-    if(colTex.b>1.0 || colTex.b<0.0)
-    {
-        float r=mod( time+colTex.b,1.0)*0.5+0.5;
-        colTex.b=r;
-    }
 
+    #ifdef ANIM_RANGE
+
+        if(colTex.r>1.0 || colTex.r<0.0)
+            colTex.r=mod(colTex.r,1.0)*0.5+(sin(colTex.r+mod(colTex.r*3.0,1.0)+time*5.0)*0.5+0.5)*0.5;
+        if(colTex.g>1.0 || colTex.g<0.0)
+            colTex.g=mod(colTex.g,1.0)*0.5+(sin(colTex.g+mod(colTex.g*3.0,1.0)+time*5.0)*0.5+0.5)*0.5;
+        if(colTex.b>1.0 || colTex.b<0.0)
+            colTex.b=mod(colTex.b,1.0)*0.5+(sin(colTex.b+mod(colTex.b*3.0,1.0)+time*5.0)*0.5+0.5)*0.5;
+
+    #endif
+
+
+    // #ifdef ANIM_RANGE
+    //     if(colTex.r>1.0 || colTex.r<0.0)
+    //     {
+    //         float r=mod( time+colTex.r,1.0)*0.5+0.5;
+    //         colTex.r=r;
+    //     }
+    //     if(colTex.g>1.0 || colTex.g<0.0)
+    //     {
+    //         float r=mod( time+colTex.g,1.0)*0.5+0.5;
+    //         colTex.g=r;
+    //     }
+    //     if(colTex.b>1.0 || colTex.b<0.0)
+    //     {
+    //         float r=mod( time+colTex.b,1.0)*0.5+0.5;
+    //         colTex.b=r;
+    //     }
+    // #endif
 
     outColor = mix(col,colTex,colTex.a);
 }
