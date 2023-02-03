@@ -310,6 +310,7 @@ Framebuffer2.prototype.setSize = function (w, h)
         default:
             this._log.warn("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);
+            debugger;
         // throw("Incomplete framebuffer: " + status);
         }
     }

@@ -64,6 +64,11 @@ class PixelReader
             this._size = size;
         }
 
+        if (this._size == 0)
+        {
+            console.error("readpixel size 0");
+            return;
+        }
 
         if (this._finishedFence)
         {
