@@ -51,17 +51,23 @@ class PixelReader
     {
         const gl = cgl.gl;
         let channelType = gl.UNSIGNED_BYTE;
+        let bytesPerItem = 1;
+
         const isFloatingPoint = textureType == CGL.Texture.TYPE_FLOAT;
-        if (isFloatingPoint) channelType = gl.FLOAT;
+        const numItems = 4 * w * h;
 
-        const size = 4 * w * h;
-
-        if (!this._pixelData || this._size != size)
+        if (isFloatingPoint)
         {
-            if (isFloatingPoint) this._pixelData = new Float32Array(size);
-            else this._pixelData = new Uint8Array(size);
+            channelType = gl.FLOAT;
+            bytesPerItem = 4;
+        }
 
-            this._size = size;
+        if (!this._pixelData || this._size != numItems * bytesPerItem)
+        {
+            if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
+            else this._pixelData = new Uint8Array(numItems);
+
+            this._size = numItems * bytesPerItem;
         }
 
         if (this._size == 0)
@@ -74,7 +80,7 @@ class PixelReader
         {
             this._pbo = gl.createBuffer();
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-            gl.bufferData(gl.PIXEL_PACK_BUFFER, size, gl.DYNAMIC_READ);
+            gl.bufferData(gl.PIXEL_PACK_BUFFER, this._size, gl.DYNAMIC_READ);
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
 
@@ -93,7 +99,6 @@ class PixelReader
         if (this._finishedFence)
             this._fence(gl).then(() =>
             {
-                // let starttime = performance.now();
                 this._wasTriggered = false;
 
                 gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
