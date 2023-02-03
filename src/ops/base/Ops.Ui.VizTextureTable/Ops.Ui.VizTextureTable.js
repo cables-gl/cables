@@ -2,12 +2,14 @@ const inTex = op.inTexture("Texture");
 
 op.setUiAttrib({ "height": 200, "width": 380, "resizable": true });
 
+let pixelReader = new CGL.PixelReader();
 let pixelData = null;
 let lastWidth;
 let lastHeight;
 let fb;
 let lastFloatingPoint;
 let lastRead = 0;
+
 const arr = [];
 
 inTex.onLinkChanged = () =>
@@ -80,24 +82,30 @@ op.renderVizLayer = (ctx, layer) =>
     const readH = texRows;
     let readPixels = false;
 
-    if (performance.now() - lastRead > 100)readPixels = true;
+    if (performance.now() - lastRead >= 50)readPixels = true;
 
     if (readPixels)
     {
         lastRead = performance.now();
-        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
-        gl.readPixels(
-            0,
-            realTexture.height - texRows,
-            readW,
-            readH,
-            channels,
-            channelType,
-            pixelData
-        );
+        pixelReader.read(op.patch.cgl, fb, realTexture.textureType, 0, realTexture.height - texRows, readW, readH,
+            (pixel) =>
+            {
+                pixelData = pixel;
+            });
+        // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        // gl.readPixels(
+        //     0,
+        //     realTexture.height - texRows,
+        //     readW,
+        //     readH,
+        //     channels,
+        //     channelType,
+        //     pixelData
+        // );
+
+        // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
 
     arr.length = pixelData.length;
