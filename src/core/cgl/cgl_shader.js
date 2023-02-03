@@ -1690,7 +1690,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
-        if (!cgl.aborted)
+        if (!cgl.aborted && infoLog)
             for (const i in lines)
             {
                 const j = parseInt(i, 10) + 1;

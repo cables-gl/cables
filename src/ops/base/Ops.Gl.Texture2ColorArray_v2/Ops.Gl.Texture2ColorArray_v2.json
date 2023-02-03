@@ -14,7 +14,7 @@
             },
             {
                 "type": 0,
-                "name": "Normalize index",
+                "name": "Format index",
                 "subType": "integer"
             }
         ],
@@ -33,7 +33,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.Texture2ColorArray2"
+        "name": "Ops.Gl.Texture2ColorArray_v2"
     },
     "summary": "extract colors from a texture",
     "docs": {
