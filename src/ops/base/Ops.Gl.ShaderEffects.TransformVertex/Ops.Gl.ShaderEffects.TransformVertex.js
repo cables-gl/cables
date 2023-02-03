@@ -19,6 +19,7 @@ const mod = new CGL.ShaderModifier(cgl, op.name);
 
 mod.addModule({
     "priority": -2,
+    "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.trans_head_vert || "",
     "srcBodyVert": attachments.trans_vert || ""

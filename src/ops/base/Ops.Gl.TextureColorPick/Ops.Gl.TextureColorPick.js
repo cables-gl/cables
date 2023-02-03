@@ -35,32 +35,26 @@ function fence()
         gl.flush(); // Ensure the fence is submitted.
         function check()
         {
-            // let status = gl.getSyncParameter(sync, gl.SYNC_STATUS);
             const status = gl.clientWaitSync(sync, 0, 0);
 
             if (status == gl.WAIT_FAILED)
             {
-                // gl.deleteSync(sync);
-                reject();
-                console.log("wait failed");
+                if (reject) reject();
             }
             else
             if (status == gl.TIMEOUT_EXPIRED)
             {
-                // gl.deleteSync(sync);
-                // console.log("timeout expired");
                 setTimeout(check, 0);
             }
             else
             if (status == gl.CONDITION_SATISFIED)
             {
-                // console.log("RESOLVE", status);
                 resolve();
                 gl.deleteSync(sync);
             }
             else
             {
-                console.log("WRTF", status);
+                console.log("unknown fence status", status);
             }
         }
 
@@ -70,7 +64,6 @@ function fence()
 
 pUpdate.onTriggered = function ()
 {
-    // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
     const realTexture = tex.get();
     const gl = cgl.gl;
 
@@ -92,29 +85,13 @@ pUpdate.onTriggered = function ()
         gl.TEXTURE_2D, realTexture.tex, 0
     );
 
-    // gl.readPixels(
-    //     inX.get(), inY.get(),
-    //     1, 1,
-    //     gl.RGBA,
-    //     channelType,
-    //     pixelData
-    // );
-
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     if (finishedFence)
     {
-    // if (!pbo)
-        // {
         pbo = gl.createBuffer();
         gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
-
-        // gl.bufferData(gl.PIXEL_PACK_BUFFER, buffer.byteLength, gl.STREAM_READ);
-
         gl.bufferData(gl.PIXEL_PACK_BUFFER, 4 * 4, gl.DYNAMIC_READ);
-        // gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
-        // }
-
         gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
         gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
 
@@ -133,27 +110,15 @@ pUpdate.onTriggered = function ()
     if (finishedFence)
         fence().then(function ()
         {
-        // console.log("yeap...");
             let starttime = performance.now();
             wasTriggered = false;
-
             texChanged = false;
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-            // }
-
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-
-            // gl.bindFramebuffer(gl.GL_PIXEL_PACK_BUFFER, fb);
 
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
             gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, pixelData);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
             finishedFence = true;
             gl.deleteBuffer(pbo);
-            // pbo = null;
-
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-            // gl.bindFramebuffer(gl.GL_PIXEL_PACK_BUFFER, null);
 
             if (isFloatingPoint)
             {
@@ -169,8 +134,6 @@ pUpdate.onTriggered = function ()
                 outB.set(pixelData[2] / 255);
                 outA.set(pixelData[3] / 255);
             }
-
-            // console.log(Math.round(performance.now() - starttime));
         });
 
     outTrigger.trigger();
