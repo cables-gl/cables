@@ -9,16 +9,19 @@ class PixelReader
         this._pbo = null;
     }
 
-    _fence(gl)
+    _fence(cgl)
     {
+        const gl = cgl.gl;
         this._finishedFence = false;
         return new Promise(function (resolve, reject)
         {
+            if (cgl.aborted) return;
             let sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
             if (!sync) return;
             gl.flush(); // Ensure the fence is submitted.
             function check()
             {
+                if (cgl.aborted) return;
                 const status = gl.clientWaitSync(sync, 0, 0);
 
                 if (status == gl.WAIT_FAILED)
@@ -100,7 +103,7 @@ class PixelReader
         }
 
         if (this._finishedFence)
-            this._fence(gl).then(() =>
+            this._fence(cgl).then(() =>
             {
                 this._wasTriggered = false;
 
