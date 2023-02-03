@@ -266,7 +266,7 @@ Port.prototype.get = function ()
  */
 Port.prototype.set = Port.prototype.setValue = function (v)
 {
-    if (v === undefined) return;
+    if (v === undefined) v = null;
 
     if (this.parent.enabled && !this.crashed)
     {
