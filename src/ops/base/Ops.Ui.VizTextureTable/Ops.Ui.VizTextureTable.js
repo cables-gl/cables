@@ -88,11 +88,12 @@ op.renderVizLayer = (ctx, layer) =>
     {
         lastRead = performance.now();
 
-        pixelReader.read(op.patch.cgl, fb, realTexture.textureType, 0, realTexture.height - texRows, readW, readH,
-            (pixel) =>
-            {
-                pixelData = pixel;
-            });
+        if (!texChanged)
+            pixelReader.read(op.patch.cgl, fb, realTexture.textureType, 0, realTexture.height - texRows, readW, readH,
+                (pixel) =>
+                {
+                    pixelData = pixel;
+                });
         // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
         // gl.readPixels(
