@@ -452,6 +452,7 @@ Shader.prototype._getAttrSrc = function (attr, firstLevel)
 
 Shader.prototype.compile = function ()
 {
+    if (this._cgl.aborted) return;
     const startTime = performance.now();
 
     this._cgl.profileData.profileShaderCompiles++;
@@ -805,7 +806,7 @@ Shader.hasChanged = function ()
 
 Shader.prototype.bind = function ()
 {
-    if (!this._isValid) return;
+    if (!this._isValid || this._cgl.aborted) return;
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
@@ -1685,37 +1686,38 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
         // this._log.warn(cgl.gl.getShaderInfoLog(shader));
 
-        let infoLog = cgl.gl.getShaderInfoLog(shader) || "empty shader info log";
+        let infoLog = cgl.gl.getShaderInfoLog(shader);
         const badLines = getBadLines(infoLog);
         let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
-        for (const i in lines)
-        {
-            const j = parseInt(i, 10) + 1;
-            const line = j + ": " + lines[i];
-            console.log(line);
-
-            let isBadLine = false;
-            for (const bj in badLines)
-                if (badLines[bj] == j) isBadLine = true;
-
-            if (isBadLine)
+        if (!cgl.aborted && infoLog)
+            for (const i in lines)
             {
-                htmlWarning += "</code></pre>";
-                // htmlWarning += "<span class=\"shaderErrorCode error\">";
-                htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\"background-color:#660000;padding-top:0px;padding-bottom:0px\">";
-            }
-            htmlWarning += escapeHTML(line);
+                const j = parseInt(i, 10) + 1;
+                const line = j + ": " + lines[i];
+                console.log(line);
 
-            if (isBadLine)
-            {
-                htmlWarning += "</code></pre>";
-                htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\";padding-top:0px;padding-bottom:0px\">";
-            }
-        }
+                let isBadLine = false;
+                for (const bj in badLines)
+                    if (badLines[bj] == j) isBadLine = true;
 
-        console.warn(infoLog);
+                if (isBadLine)
+                {
+                    htmlWarning += "</code></pre>";
+                    // htmlWarning += "<span class=\"shaderErrorCode error\">";
+                    htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\"background-color:#660000;padding-top:0px;padding-bottom:0px\">";
+                }
+                htmlWarning += escapeHTML(line);
+
+                if (isBadLine)
+                {
+                    htmlWarning += "</code></pre>";
+                    htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\";padding-top:0px;padding-bottom:0px\">";
+                }
+            }
+
+        console.warn(infoLog || "empty shader info log");
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
 

@@ -34,6 +34,24 @@ mat4 rotationMatrix(vec3 axis, float angle)
                 0.0,                                0.0,                                0.0,                                1.0);
 }
 
+mat4 rotateMatrixDir(vec3 direction) {
+        vec4 addition = vec4(0,0,0,1);
+        mat4 transform= mat4(vec4(1.0, 0., 0.,0.),vec4( 0., 1.0,0.,0.),vec4( 0.,0.,1.0,0.), addition);
+
+        //zero case
+        if (direction.x == 0. && direction.z == 0. && direction.y>=0.) return transform;
+        if (direction.x == 0. && direction.z == 0. && direction.y<0.) return mat4(vec4(-1.0, 0.,  0.,0.),vec4( 0., -1.0, 0.,0.),vec4( 0.,  0., -1.0,0.), addition);
+
+        direction = normalize(direction);
+
+        vec3 new_z = normalize(direction);
+        vec3 new_y = normalize(cross(new_z, vec3(0.0, -1.0, 0.0)));
+        vec3 new_x = normalize(cross(new_z, new_y));
+
+        return mat4(vec4(new_y,0.), vec4(new_z,0.), vec4(new_x,0.),addition);
+}
+
+
 // vec4 MOD_rot(vec4 pos, vec3 rot, mat4 modelMatrix)
 // {
 //     // pos=pos*rotationX(rot.x)*rotationY(rot.y)*rotationZ(rot.z);

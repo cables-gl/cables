@@ -1,7 +1,6 @@
 const
     cgl = op.patch.cgl,
     pUpdate = op.inTrigger("update"),
-    // inNormalize = op.inSwitch("Coordinate", ["Pixel", "Normalized"], "Pixel"),
     inX = op.inInt("X", 0),
     inY = op.inInt("Y", 0),
     tex = op.inTexture("texture"),
@@ -23,54 +22,10 @@ tex.onChange = function () { texChanged = true; };
 
 let isFloatingPoint = false;
 let channelType = op.patch.cgl.gl.UNSIGNED_BYTE;
-
-function fence()
-{
-    finishedFence = false;
-    return new Promise(function (resolve, reject)
-    {
-        const gl = op.patch.cgl.gl;
-        let sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
-        if (!sync) return;
-        gl.flush(); // Ensure the fence is submitted.
-        function check()
-        {
-            // let status = gl.getSyncParameter(sync, gl.SYNC_STATUS);
-            const status = gl.clientWaitSync(sync, 0, 0);
-
-            if (status == gl.WAIT_FAILED)
-            {
-                // gl.deleteSync(sync);
-                reject();
-                console.log("wait failed");
-            }
-            else
-            if (status == gl.TIMEOUT_EXPIRED)
-            {
-                // gl.deleteSync(sync);
-                // console.log("timeout expired");
-                setTimeout(check, 0);
-            }
-            else
-            if (status == gl.CONDITION_SATISFIED)
-            {
-                // console.log("RESOLVE", status);
-                resolve();
-                gl.deleteSync(sync);
-            }
-            else
-            {
-                console.log("WRTF", status);
-            }
-        }
-
-        check();
-    });
-}
+let pixelReader = new CGL.PixelReader();
 
 pUpdate.onTriggered = function ()
 {
-    // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
     const realTexture = tex.get();
     const gl = cgl.gl;
 
@@ -92,85 +47,28 @@ pUpdate.onTriggered = function ()
         gl.TEXTURE_2D, realTexture.tex, 0
     );
 
-    // gl.readPixels(
-    //     inX.get(), inY.get(),
-    //     1, 1,
-    //     gl.RGBA,
-    //     channelType,
-    //     pixelData
-    // );
-
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    if (finishedFence)
-    {
-    // if (!pbo)
-        // {
-        pbo = gl.createBuffer();
-        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
-
-        // gl.bufferData(gl.PIXEL_PACK_BUFFER, buffer.byteLength, gl.STREAM_READ);
-
-        gl.bufferData(gl.PIXEL_PACK_BUFFER, 4 * 4, gl.DYNAMIC_READ);
-        // gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
-        // }
-
-        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
-
-        gl.readPixels(
-            inX.get(), inY.get(),
-            1, 1,
-            gl.RGBA,
-            channelType,
-            0
-        );
-
-        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    }
-
-    if (finishedFence)
-        fence().then(function ()
+    pixelReader.read(cgl, fb, realTexture.textureType, inX.get(), inY.get(), 1, 1,
+        (pixel) =>
         {
-        // console.log("yeap...");
-            let starttime = performance.now();
             wasTriggered = false;
-
             texChanged = false;
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-            // }
-
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-
-            // gl.bindFramebuffer(gl.GL_PIXEL_PACK_BUFFER, fb);
-
-            gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
-            gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, pixelData);
-            gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
-            finishedFence = true;
-            gl.deleteBuffer(pbo);
-            // pbo = null;
-
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-            // gl.bindFramebuffer(gl.GL_PIXEL_PACK_BUFFER, null);
 
             if (isFloatingPoint)
             {
-                outR.set(pixelData[0]);
-                outG.set(pixelData[1]);
-                outB.set(pixelData[2]);
-                outA.set(pixelData[3]);
+                outR.set(pixel[0]);
+                outG.set(pixel[1]);
+                outB.set(pixel[2]);
+                outA.set(pixel[3]);
             }
             else
             {
-                outR.set(pixelData[0] / 255);
-                outG.set(pixelData[1] / 255);
-                outB.set(pixelData[2] / 255);
-                outA.set(pixelData[3] / 255);
+                outR.set(pixel[0] / 255);
+                outG.set(pixel[1] / 255);
+                outB.set(pixel[2] / 255);
+                outA.set(pixel[3] / 255);
             }
-
-            // console.log(Math.round(performance.now() - starttime));
         });
 
     outTrigger.trigger();

@@ -650,7 +650,7 @@ Mesh.prototype.render = function (shader)
 {
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
-    if (!shader || !shader.isValid()) return;
+    if (!shader || !shader.isValid() || this._cgl.aborted) return;
 
     this._checkAttrLengths();
 

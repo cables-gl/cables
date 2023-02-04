@@ -42,6 +42,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1671034980836
+        },
+        {
+            "message": " added core lib: cgl_pixelreader",
+            "type": "",
+            "author": "pandur",
+            "date": 1675437510282
         }
     ],
     "authorName": "pandur",
@@ -66,5 +72,8 @@
     "exampleProjectId": "kp6oq4",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_pixelreader"
+    ]
 }

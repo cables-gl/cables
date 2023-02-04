@@ -3,6 +3,7 @@ const
     geom = op.inObject("Geometry", null, "geometry"),
     inLimit = op.inBool("Limit Instances", true),
     inNum = op.inInt("Num Instances", 1000),
+    inRotMode = op.inSwitch("Rotation", ["Euler", "Normal"], "Euler"),
     inTex = op.inTexture("Position Texture", null, "texture"),
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
     inTex3 = op.inTexture("Scale Texture", null, "texture"),
@@ -60,6 +61,7 @@ mod.addUniformVert("f", "MOD_texSizeY", 0);
 mod.addUniformVert("3f", "MOD_mulRGB", inMulR, inMulG, inMulB);
 
 inBlendMode.onChange =
+inRotMode.onChange =
 inTex.onChange =
 inTex3.onChange =
 inTex4.onChange =
@@ -80,6 +82,7 @@ inNum.onChange =
     {
         arrayChangedTrans = true;
         recalc = true;
+        inNum.setUiAttribs({ "greyout": !inLimit.get() });
     };
 
 function reset()
@@ -90,6 +93,9 @@ function reset()
 
 function updateDefines()
 {
+    mod.toggleDefine("ROT_EULER", inRotMode.get() === "Euler");
+    mod.toggleDefine("ROT_NORMAL", inRotMode.get() === "Normal");
+
     mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
     mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
     mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
@@ -98,8 +104,6 @@ function updateDefines()
     mod.toggleDefine("USE_TEX_SCALE", inTex3.get());
     mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
     mod.toggleDefine("USE_TEX_TC", inTex5.get());
-
-    inNum.setUiAttribs({ "greyout": !inLimit.get() });
 }
 
 geom.onChange = function ()

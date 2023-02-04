@@ -18,9 +18,16 @@ texInstMat[3][3]=1.0;
 
 #ifdef USE_TEX_ROT
     vec3 MOD_texRota=texture(MOD_texRot,tc).rgb;
-    texInstMat*=rotationMatrix(vec3(1.0,0.0,0.0),MOD_texRota.r*PI*2.0);
-    texInstMat*=rotationMatrix(vec3(0.0,1.0,0.0),MOD_texRota.g*PI*2.0);
-    texInstMat*=rotationMatrix(vec3(0.0,0.0,1.0),MOD_texRota.b*PI*2.0);
+
+    #ifdef ROT_EULER
+        texInstMat*=rotationMatrix(vec3(1.0,0.0,0.0),MOD_texRota.r*PI*2.0);
+        texInstMat*=rotationMatrix(vec3(0.0,1.0,0.0),MOD_texRota.g*PI*2.0);
+        texInstMat*=rotationMatrix(vec3(0.0,0.0,1.0),MOD_texRota.b*PI*2.0);
+    #endif
+    #ifdef ROT_NORMAL
+        texInstMat*=rotateMatrixDir(MOD_texRota);
+    #endif
+
 #endif
 
 texInstMat[3][0]=MOD_texPos.x;

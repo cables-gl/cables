@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
+    inUpdateAlways = op.inBool("Continously Update", true),
 
     inOrder = op.inDropDown("Order", ["Sequential", "Random", "Vertex X", "Vertex Y", "Vertex Z"], "Sequential"),
     inAttrib = op.inSwitch("Content", ["Vertex Pos", "Normals", "TexCoords"], "Vertex Pos"),
@@ -183,7 +184,7 @@ exec.onTriggered = function ()
     updateSize();
 
     if (!fb || needInitFb) initFb();
-    if (!needsUpdate) return next.trigger();
+    if (!needsUpdate && !inUpdateAlways.get()) return next.trigger();
     if (outTex.get() != CGL.Texture.getEmptyTexture(cgl)) outTex.set(CGL.Texture.getEmptyTexture(cgl));
 
     const geo = inGeom.get();
@@ -274,6 +275,7 @@ function render()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
+    // outTex.set(null);
     outTex.set(fb.getTextureColor());
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);

@@ -16,6 +16,7 @@ const Framebuffer2 = function (cgl, w, h, options)
 
     this._width = 0;
     this._height = 0;
+    this.valid = true;
 
     this._depthRenderbuffer = null;
     this._frameBuffer = null;
@@ -308,7 +309,13 @@ Framebuffer2.prototype.setSize = function (w, h)
             this._log.warn("FRAMEBUFFER_UNSUPPORTED");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
-            this._log.warn("incomplete framebuffer", status);
+            this.valid = false;
+            this._log.warn("incomplete framebuffer", status, this._frameBuffer);
+            this._cgl.printError();
+            this._cgl.exitError("Framebuffer incomplete...");
+
+            this._frameBuffer = null;
+            // debugger;
             throw new Error("Incomplete framebuffer: " + status);
         // throw("Incomplete framebuffer: " + status);
         }
