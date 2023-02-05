@@ -9,6 +9,11 @@ let lastHeight;
 let fb;
 let lastFloatingPoint;
 let lastRead = 0;
+let readPixels = true;
+let realTexture = null;
+let texRows = 0;
+let lines = 0;
+let readW = 0, readH = 0;
 
 const arr = [];
 
@@ -17,35 +22,27 @@ inTex.onLinkChanged = () =>
     op.setUiAttrib({ "extendTitle": "" });
 };
 
-op.renderVizLayer = (ctx, layer) =>
+inTex.onChange = () =>
 {
-    const
-        realTexture = inTex.get(),
-        gl = op.patch.cgl.gl;
+    const gl = op.patch.cgl.gl;
+    const cgl = op.patch.cgl;
 
-    ctx.fillStyle = "#222";
-    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
+    realTexture = inTex.get();
 
     if (!realTexture) return;
-
-    let lines = Math.floor(layer.height / layer.scale / 10 - 1);
-
-    ctx.save();
-    ctx.scale(layer.scale, layer.scale);
-
-    ctx.font = "normal 10px sourceCodePro";
-    ctx.fillStyle = "#ccc";
-
-    if (!fb) fb = gl.createFramebuffer();
 
     let channels = gl.RGBA;
     let numChannels = 4;
 
-    let texChanged = true;
     let channelType = gl.UNSIGNED_BYTE;
 
-    if (texChanged)
+    if (performance.now() - lastRead >= 50)readPixels = true;
+    let texChanged = true;
+
+    if (readPixels)
     {
+        if (!fb) fb = gl.createFramebuffer();
+
         gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
         gl.framebufferTexture2D(
@@ -75,14 +72,11 @@ op.renderVizLayer = (ctx, layer) =>
         texChanged = false;
     }
 
-    let texRows = Math.max(1, Math.ceil(lines / realTexture.width));
+    texRows = Math.max(1, Math.ceil(lines / realTexture.width));
     texRows = Math.min(texRows, realTexture.height);
-    let readW = realTexture.width;
+    readW = realTexture.width;
     if (lines / realTexture.width < 1)readW = realTexture.width * lines / realTexture.width;
-    const readH = texRows;
-    let readPixels = false;
-
-    if (performance.now() - lastRead >= 50)readPixels = true;
+    readH = texRows;
 
     if (readPixels)
     {
@@ -108,6 +102,26 @@ op.renderVizLayer = (ctx, layer) =>
 
         // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
+};
+
+op.renderVizLayer = (ctx, layer) =>
+{
+    const
+        gl = op.patch.cgl.gl;
+
+    ctx.fillStyle = "#222";
+    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
+
+    lines = Math.floor(layer.height / layer.scale / 10 - 1);
+
+    ctx.save();
+    ctx.scale(layer.scale, layer.scale);
+
+    ctx.font = "normal 10px sourceCodePro";
+    ctx.fillStyle = "#ccc";
+
+    if (!pixelData) return;
+    if (!realTexture) return;
 
     arr.length = pixelData.length;
     let stride = 4;

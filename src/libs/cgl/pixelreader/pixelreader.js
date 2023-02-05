@@ -19,6 +19,7 @@ class PixelReader
             let sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
             if (!sync) return;
             gl.flush(); // Ensure the fence is submitted.
+
             function check()
             {
                 if (cgl.aborted) return;
@@ -26,16 +27,28 @@ class PixelReader
 
                 if (status == gl.WAIT_FAILED)
                 {
+                    console.log("wait failed");
                     if (reject) reject();
                 }
                 else
                 if (status == gl.TIMEOUT_EXPIRED)
                 {
-                    setTimeout(check, 0);
+                    // gl.deleteSync(sync);
+                    // resolve(true);
+                    // console.log("TIMEOUT_EXPIRED");
+                    return setTimeout(check, 0);
                 }
                 else
                 if (status == gl.CONDITION_SATISFIED)
                 {
+                    console.log("CONDITION_SATISFIED");
+                    resolve();
+                    gl.deleteSync(sync);
+                }
+                else if (status == gl.ALREADY_SIGNALED)
+                {
+                    // console.log("already signaled");
+                    // this._finishedFence = true;
                     resolve();
                     gl.deleteSync(sync);
                 }
@@ -45,6 +58,7 @@ class PixelReader
                 }
             }
 
+            // setTimeout(check, 3);
             check();
         });
     }
@@ -52,6 +66,7 @@ class PixelReader
 
     read(cgl, fb, textureType, x, y, w, h, finishedcb)
     {
+        if (CABLES.UI && !CABLES.UI.loaded) return;
         const gl = cgl.gl;
         let channelType = gl.UNSIGNED_BYTE;
         let bytesPerItem = 1;
@@ -103,17 +118,20 @@ class PixelReader
         }
 
         if (this._finishedFence)
-            this._fence(cgl).then(() =>
+            this._fence(cgl).then((error) =>
             {
                 this._wasTriggered = false;
-
-                gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-                gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
-                gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
                 this._finishedFence = true;
-                gl.deleteBuffer(this._pbo);
 
-                if (finishedcb) finishedcb(this._pixelData);
+                if (!error)
+                {
+                    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
+                    gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
+                    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+
+                    if (finishedcb) finishedcb(this._pixelData);
+                }
+                gl.deleteBuffer(this._pbo);
             });
     }
 }
