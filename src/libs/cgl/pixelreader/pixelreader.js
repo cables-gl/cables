@@ -63,7 +63,11 @@ class PixelReader
 
     read(cgl, fb, textureType, x, y, w, h, finishedcb)
     {
-        if (CABLES.UI && !CABLES.UI.loaded) return;
+        if (CABLES.UI)
+            if (!CABLES.UI.loaded || performance.now() - CABLES.UI.loadedTime < 1000) return;
+
+        if (!this._finishedFence) return;
+
         const gl = cgl.gl;
         let channelType = gl.UNSIGNED_BYTE;
         let bytesPerItem = 1;
@@ -80,6 +84,8 @@ class PixelReader
             bytesPerItem = 4;
         }
 
+        if (w == 0 || h == 0 || numItems == 0) return;
+
         if (!this._pixelData || this._size != numItems * bytesPerItem)
         {
             if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
@@ -88,9 +94,9 @@ class PixelReader
             this._size = numItems * bytesPerItem;
         }
 
-        if (this._size == 0)
+        if (this._size == 0 || !this._pixelData)
         {
-            // console.error("readpixel size 0");
+            console.error("readpixel size 0", this._size, w, h);
             return;
         }
 
@@ -98,7 +104,7 @@ class PixelReader
         {
             this._pbo = gl.createBuffer();
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-            gl.bufferData(gl.PIXEL_PACK_BUFFER, this._size, gl.DYNAMIC_READ);
+            gl.bufferData(gl.PIXEL_PACK_BUFFER, this._pixelData.byteLength, gl.DYNAMIC_READ);
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
 
@@ -113,14 +119,15 @@ class PixelReader
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
             gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         }
+        let startLength = this._pixelData.byteLength;
 
-        if (this._finishedFence)
+        if (this._finishedFence && this._pbo)
             this._fence(cgl).then((error) =>
             {
                 this._wasTriggered = false;
                 this._finishedFence = true;
 
-                if (!error)
+                if (!error && this._pixelData && this._pixelData.byteLength == startLength)
                 {
                     gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
                     gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
@@ -129,6 +136,7 @@ class PixelReader
                     if (finishedcb) finishedcb(this._pixelData);
                 }
                 gl.deleteBuffer(this._pbo);
+                this._pbo = null;
             });
     }
 }
