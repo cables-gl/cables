@@ -27,28 +27,25 @@ class PixelReader
 
                 if (status == gl.WAIT_FAILED)
                 {
-                    console.log("wait failed");
+                    console.error("fence wait failed");
                     if (reject) reject();
                 }
                 else
                 if (status == gl.TIMEOUT_EXPIRED)
                 {
-                    // gl.deleteSync(sync);
-                    // resolve(true);
                     // console.log("TIMEOUT_EXPIRED");
                     return setTimeout(check, 0);
                 }
                 else
                 if (status == gl.CONDITION_SATISFIED)
                 {
-                    console.log("CONDITION_SATISFIED");
+                    // console.log("CONDITION_SATISFIED");
                     resolve();
                     gl.deleteSync(sync);
                 }
                 else if (status == gl.ALREADY_SIGNALED)
                 {
                     // console.log("already signaled");
-                    // this._finishedFence = true;
                     resolve();
                     gl.deleteSync(sync);
                 }
@@ -93,7 +90,7 @@ class PixelReader
 
         if (this._size == 0)
         {
-            console.error("readpixel size 0");
+            // console.error("readpixel size 0");
             return;
         }
 
