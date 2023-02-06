@@ -115,7 +115,7 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
-    if (!pixelData || !realTexture) return;
+    if (!pixelData || !realTexture || !inTex.get()) return;
 
     lines = Math.floor(layer.height / layer.scale / 10 - 1);
 
