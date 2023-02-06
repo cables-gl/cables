@@ -22,7 +22,6 @@ next.onLinkChanged = () =>
     shouldStart = true;
 };
 
-
 let showHistory = false;
 
 inShowHistory.onTriggered = () =>
@@ -39,6 +38,11 @@ for (let i in op.patch.cgl.gl)
         glConsts[op.patch.cgl.gl[i]] = i;
     }
 }
+
+op.patch.cgl.on("webglcontextlost", () =>
+{
+    console.log(getHistoryAsString());
+});
 
 function showCodeModal(title, code, type)
 {

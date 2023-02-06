@@ -906,6 +906,7 @@ Shader.prototype.bind = function ()
     }
 
     this._bindTextures();
+    return this._isValid;
 };
 
 
@@ -1376,10 +1377,21 @@ Shader.prototype._createProgram = function (vstr, fstr)
     this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
     this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
 
-    this._cgl.gl.attachShader(program, this.vshader);
-    this._cgl.gl.attachShader(program, this.fshader);
 
-    this._linkProgram(program, vstr, fstr);
+    if (this.vshader && this.fshader)
+    {
+        this._cgl.gl.attachShader(program, this.vshader);
+        this._cgl.gl.attachShader(program, this.fshader);
+
+        this._linkProgram(program, vstr, fstr);
+    }
+    else
+    {
+        this._isValid = false;
+        this._cgl.printError("shader _createProgram");
+        console.log("could not link shaderprogram");
+        return null;
+    }
 
     this._cgl.printError("shader _createProgram");
     return program;
@@ -1679,19 +1691,24 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
     if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
     {
+        let infoLog = cgl.gl.getShaderInfoLog(shader);
+        if (!infoLog)
+        {
+            console.warn("empty shader info log", this._name);
+            return;
+        }
+
         console.log("compile status: ");
 
-        if (type == cgl.gl.VERTEX_SHADER) console.log("VERTEX_SHADER");
-        if (type == cgl.gl.FRAGMENT_SHADER) console.log("FRAGMENT_SHADER");
-
-        // this._log.warn(cgl.gl.getShaderInfoLog(shader));
-
-        let infoLog = cgl.gl.getShaderInfoLog(shader);
         const badLines = getBadLines(infoLog);
         let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
         if (!cgl.aborted && infoLog)
+        {
+            if (type == cgl.gl.VERTEX_SHADER) console.log("VERTEX_SHADER");
+            if (type == cgl.gl.FRAGMENT_SHADER) console.log("FRAGMENT_SHADER");
+
             for (const i in lines)
             {
                 const j = parseInt(i, 10) + 1;
@@ -1716,16 +1733,17 @@ Shader.createShader = function (cgl, str, type, cglShader)
                     htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\";padding-top:0px;padding-bottom:0px\">";
                 }
             }
+        }
 
-        console.warn(infoLog || "empty shader info log");
+        console.warn(infoLog);
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
+        if (cgl.patch.isEditorMode())console.log("Shader error ", this._name, infoLog);
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
 
         cgl.patch.emitEvent("criticalError", { "title": "Shader error " + this._name, "text": htmlWarning });
-        if (cgl.patch.isEditorMode())console.log("Shader error " + this._name, htmlWarning);
 
         this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());

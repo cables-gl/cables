@@ -709,7 +709,7 @@ Mesh.prototype.render = function (shader)
     // }
     if (needsBind) this._preBind(shader);
 
-    shader.bind();
+    if (!shader.bind()) return;
 
     // if (shader.bindTextures) shader.bindTextures();
 
@@ -819,6 +819,7 @@ Mesh.prototype.render = function (shader)
         // this._log.log("available", available);
     }
 
+    this._cgl.printError("mesh render " + this._name);
 
     this.unBind();
 };

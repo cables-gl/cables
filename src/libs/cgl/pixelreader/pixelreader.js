@@ -19,6 +19,7 @@ class PixelReader
             let sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
             if (!sync) return;
             gl.flush(); // Ensure the fence is submitted.
+
             function check()
             {
                 if (cgl.aborted) return;
@@ -26,16 +27,25 @@ class PixelReader
 
                 if (status == gl.WAIT_FAILED)
                 {
+                    console.error("fence wait failed");
                     if (reject) reject();
                 }
                 else
                 if (status == gl.TIMEOUT_EXPIRED)
                 {
-                    setTimeout(check, 0);
+                    // console.log("TIMEOUT_EXPIRED");
+                    return setTimeout(check, 0);
                 }
                 else
                 if (status == gl.CONDITION_SATISFIED)
                 {
+                    // console.log("CONDITION_SATISFIED");
+                    resolve();
+                    gl.deleteSync(sync);
+                }
+                else if (status == gl.ALREADY_SIGNALED)
+                {
+                    // console.log("already signaled");
                     resolve();
                     gl.deleteSync(sync);
                 }
@@ -45,6 +55,7 @@ class PixelReader
                 }
             }
 
+            // setTimeout(check, 3);
             check();
         });
     }
@@ -52,6 +63,11 @@ class PixelReader
 
     read(cgl, fb, textureType, x, y, w, h, finishedcb)
     {
+        if (CABLES.UI)
+            if (!CABLES.UI.loaded || performance.now() - CABLES.UI.loadedTime < 1000) return;
+
+        if (!this._finishedFence) return;
+
         const gl = cgl.gl;
         let channelType = gl.UNSIGNED_BYTE;
         let bytesPerItem = 1;
@@ -68,6 +84,8 @@ class PixelReader
             bytesPerItem = 4;
         }
 
+        if (w == 0 || h == 0 || numItems == 0) return;
+
         if (!this._pixelData || this._size != numItems * bytesPerItem)
         {
             if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
@@ -76,9 +94,9 @@ class PixelReader
             this._size = numItems * bytesPerItem;
         }
 
-        if (this._size == 0)
+        if (this._size == 0 || !this._pixelData)
         {
-            console.error("readpixel size 0");
+            console.error("readpixel size 0", this._size, w, h);
             return;
         }
 
@@ -86,7 +104,7 @@ class PixelReader
         {
             this._pbo = gl.createBuffer();
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-            gl.bufferData(gl.PIXEL_PACK_BUFFER, this._size, gl.DYNAMIC_READ);
+            gl.bufferData(gl.PIXEL_PACK_BUFFER, this._pixelData.byteLength, gl.DYNAMIC_READ);
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
 
@@ -101,19 +119,24 @@ class PixelReader
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
             gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         }
+        let startLength = this._pixelData.byteLength;
 
-        if (this._finishedFence)
-            this._fence(cgl).then(() =>
+        if (this._finishedFence && this._pbo)
+            this._fence(cgl).then((error) =>
             {
                 this._wasTriggered = false;
-
-                gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-                gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
-                gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
                 this._finishedFence = true;
-                gl.deleteBuffer(this._pbo);
 
-                if (finishedcb) finishedcb(this._pixelData);
+                if (!error && this._pixelData && this._pixelData.byteLength == startLength)
+                {
+                    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
+                    gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
+                    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+
+                    if (finishedcb) finishedcb(this._pixelData);
+                }
+                gl.deleteBuffer(this._pbo);
+                this._pbo = null;
             });
     }
 }
