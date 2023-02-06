@@ -29,6 +29,7 @@ for (let i = 0; i < NUM_BUFFERS; i++)
     if (i != 0)slot = "0";
     const p = op.inDropDown("Texture " + i, [
         "Default",
+        "Material Id",
         "Position World",
         "Position Local",
         "Normal",
@@ -66,6 +67,7 @@ function updateDefines()
         mod.toggleDefine("SLOT_TEX_" + i + "_POS_WORLD", ports[i].get() == "Position World");
         mod.toggleDefine("SLOT_TEX_" + i + "_POS_LOCAL", ports[i].get() == "Position Local");
         mod.toggleDefine("SLOT_TEX_" + i + "_TEXCOORD", ports[i].get() == "TexCoord");
+        mod.toggleDefine("SLOT_TEX_" + i + "_MATERIALID", ports[i].get() == "Material Id");
 
         mod.toggleDefine("SLOT_TEX_" + i + "_NORMAL_MV", ports[i].get() == "Normal * ModelView");
         mod.toggleDefine("SLOT_TEX_" + i + "_FRAGZ", ports[i].get() == "FragCoord.z");

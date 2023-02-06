@@ -18,6 +18,7 @@ IN vec3 mvTangent;
 IN vec3 mvBiTangent;
 
 UNI vec4 materialColor;//r,g,b,a;
+UNI float materialId;
 
 struct Light {
     vec3 position;
