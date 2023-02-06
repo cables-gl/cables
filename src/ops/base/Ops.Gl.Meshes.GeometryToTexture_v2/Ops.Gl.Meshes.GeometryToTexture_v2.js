@@ -158,6 +158,7 @@ function initFb()
     {
         fb = new CGL.Framebuffer2(cgl, size, size,
             {
+                "name": "geom2tex",
                 "isFloatingPointTexture": true,
                 "multisampling": false,
                 "wrap": selectedWrap,
@@ -171,6 +172,7 @@ function initFb()
     {
         fb = new CGL.Framebuffer(cgl, size, size,
             {
+                "name": "geom2tex",
                 "isFloatingPointTexture": true,
                 "filter": filter,
                 "wrap": selectedWrap
@@ -196,12 +198,13 @@ exec.onTriggered = function ()
         needsUpdate = true;
         return;
     }
+    // if(inUpdateAlways.get()) needsUpdate = true;
 
     if (fb && fb.getWidth() != size) fb.setSize(size, size);
 
     const g = geo.copy();
 
-    if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("a"), cgl.gl.POINTS);
+    if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("geom2tex"), cgl.gl.POINTS);
 
     g.glPrimitive = cgl.gl.POINTS;
     mesh.setGeom(g);
@@ -223,7 +226,12 @@ exec.onTriggered = function ()
 
     outNumVerts.set(numVerts);
 
+    const effect = cgl.currentTextureEffect;
+    if (effect)effect.endEffect();
+
     render();
+
+    if (effect)effect.continueEffect();
 
     needsUpdate = false;
     next.trigger();
@@ -255,7 +263,7 @@ function render()
     cgl.pushModelMatrix();
     mat4.identity(cgl.mMatrix);
 
-    cgl.gl.viewport(0, 0, size, size);
+    cgl.setViewPort(0, 0, size, size);
 
     mat4.ortho(
         cgl.pMatrix,
@@ -275,8 +283,7 @@ function render()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
-    // outTex.set(null);
     outTex.set(fb.getTextureColor());
 
-    cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
+    cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 }
