@@ -32,6 +32,7 @@ uCamPosition - currently: camPos
 
 // ---------------------------------------------------------------------------
 
+let materialIdCounter = 0;
 
 /**
  * @class
@@ -53,6 +54,8 @@ const Shader = function (_cgl, _name)
     this._name = _name || "unknown";
     this.glslVersion = 0;
     if (_cgl.glVersion > 1) this.glslVersion = 300;
+
+    this._materialId = ++materialIdCounter;
 
     this.id = simpleId();
     this._isValid = true;
@@ -827,10 +830,12 @@ Shader.prototype.bind = function ()
             this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_NORMALMAT);
             this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
             this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
+            this._materialIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MATERIALID);
 
             for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
         }
     }
+
 
     if (this._cgl.currentProgram != this._program)
     {
@@ -847,6 +852,11 @@ Shader.prototype.bind = function ()
         this._pMatrixState = this._cgl.getProjectionMatrixStateCount();
         this._cgl.gl.uniformMatrix4fv(this._projMatrixUniform, false, this._cgl.pMatrix);
         this._cgl.profileData.profileMVPMatrixCount++;
+    }
+
+    if (this._materialIdUniform)
+    {
+        this._cgl.gl.uniform1f(this._materialIdUniform, this._materialId);
     }
 
     if (this._vMatrixUniform)
@@ -1640,6 +1650,11 @@ Shader.prototype.popTextures = function ()
     this._textureStackTexCgl.length =
     this._textureStackType.length =
     this._textureStackUni.length = 0;
+};
+
+Shader.prototype.getMaterialId = function ()
+{
+    return this._materialId;
 };
 
 Shader.prototype.getInfo = function ()

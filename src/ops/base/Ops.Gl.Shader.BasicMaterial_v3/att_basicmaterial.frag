@@ -16,6 +16,8 @@ IN vec4 vertCol;
    #endif
 #endif
 
+UNI float materialId;
+
 void main()
 {
     {{MODULE_BEGIN_FRAG}}

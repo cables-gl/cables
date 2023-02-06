@@ -139,16 +139,16 @@
 
 
 #ifdef SLOT_TEX_0_MATERIALID
-    outColor0=vec4(materialId,0.,0.,1.);
+    outColor0=vec4(materialId,materialId,materialId,1.);
 #endif
 #ifdef SLOT_TEX_1_MATERIALID
-    outColor1=vec4(materialId,0.,0.,1.);
+    outColor1=vec4(materialId,materialId,materialId,1.);
 #endif
 #ifdef SLOT_TEX_2_MATERIALID
-    outColor2=vec4(materialId,0.,0.,1.);
+    outColor2=vec4(materialId,materialId,materialId,1.);
 #endif
 #ifdef SLOT_TEX_3_MATERIALID
-    outColor3=vec4(materialId,0.,0.,1.);
+    outColor3=vec4(materialId,materialId,materialId,1.);
 #endif
 
 
