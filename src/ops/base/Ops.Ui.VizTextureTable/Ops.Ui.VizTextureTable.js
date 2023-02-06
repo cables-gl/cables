@@ -22,7 +22,6 @@ inTex.onLinkChanged = () =>
     op.setUiAttrib({ "extendTitle": "" });
 };
 
-// inTex.onChange =
 op.patch.cgl.on("beginFrame",
     () =>
     {
@@ -116,6 +115,8 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
+    if (!pixelData || !realTexture) return;
+
     lines = Math.floor(layer.height / layer.scale / 10 - 1);
 
     ctx.save();
@@ -123,9 +124,6 @@ op.renderVizLayer = (ctx, layer) =>
 
     ctx.font = "normal 10px sourceCodePro";
     ctx.fillStyle = "#ccc";
-
-    if (!pixelData) return;
-    if (!realTexture) return;
 
     arr.length = pixelData.length;
     let stride = 4;
