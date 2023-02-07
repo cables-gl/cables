@@ -144,6 +144,9 @@ function setupArray()
     if (useQuats)stride = 4;
     inRot.setUiAttribs({ "stride": stride });
 
+    if (scales && scales.length != transforms.length) op.setUiError("lengthScales", "Scales array has wrong length");
+    else op.setUiError("lengthScales", null);
+
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
     if (instColorArray.length != num * 4)
     {

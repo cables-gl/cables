@@ -30,6 +30,8 @@ easing.onChange = function ()
     exec();
 };
 
+let outArray = Array(1);
+
 function exec()
 {
     const inArray = v.get();
@@ -38,7 +40,8 @@ function exec()
         result.set([]);
         return;
     }
-    const outArray = Array(inArray.length);
+    // const outArray = Array(inArray.length);
+    outArray.length = inArray.length;
     for (let i = 0; i < inArray.length; i++)
     {
         let x = inArray[i];
