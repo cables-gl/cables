@@ -129,9 +129,6 @@ inColors.onChange = () =>
         mesh.setAttribute("attrColors", new Float32Array(inColors.get()), 4, { "instanced": true });
 };
 
-updateDefines();
-updateScale();
-
 align.onChange =
     str.onChange =
     letterSpace.onChange =
@@ -148,6 +145,8 @@ op.patch.addEventListener("FontLoadedMSDF", updateFontList);
 
 inFont.onChange = updateFontData;
 
+updateDefines();
+updateScale();
 updateFontList();
 
 function updateDefines()

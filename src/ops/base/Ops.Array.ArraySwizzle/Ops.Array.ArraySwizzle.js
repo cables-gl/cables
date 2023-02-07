@@ -1,14 +1,12 @@
-const contents = ["X", "Y", "Z", "W", 0, 1];
+const contents = ["X", "Y", "Z", "W", "0", "1"];
 const
     inArr = op.inArray("Array"),
     inStride = op.inSwitch("Array Stride", ["1", "2", "3", "4"], "3"),
     inResultStride = op.inSwitch("Result Stride", ["1", "2", "3", "4"], "2"),
-
     in1 = op.inSwitch("X", contents, "X"),
     in2 = op.inSwitch("Y", contents, "Y"),
-    in3 = op.inSwitch("Z", contents, "0"),
+    in3 = op.inSwitch("Z", contents, "Z"),
     in4 = op.inSwitch("W", contents, "1"),
-
     outArr = op.outArray("Result");
 
 op.setPortGroup("Content Result", [in1, in2, in3, in4]);
@@ -82,6 +80,11 @@ function convert(updateUi)
 
     result.length = newLength;
 
+    const index1 = contents.indexOf(in1.get());
+    const index2 = contents.indexOf(in2.get());
+    const index3 = contents.indexOf(in3.get());
+    const index4 = contents.indexOf(in4.get());
+
     let idx = 0;
 
     for (let i = 0; i < arr.length; i += step)
@@ -90,44 +93,45 @@ function convert(updateUi)
 
         if (targetStride >= 1)
         {
-            if (in1.get() == "X")result[idx++] = arr[i + 0];
-            else if (in1.get() == "Y")result[idx++] = arr[i + 1];
-            else if (in1.get() == "Z")result[idx++] = arr[i + 2];
-            else if (in1.get() == "W")result[idx++] = arr[i + 3];
-            else if (in1.get() == "0")result[idx++] = 0;
-            else if (in1.get() == "1")result[idx++] = 1;
+            if (index1 === 0)result[idx++] = arr[i + 0];
+            else if (index1 === 1)result[idx++] = arr[i + 1];
+            else if (index1 === 2)result[idx++] = arr[i + 2];
+            else if (index1 === 3)result[idx++] = arr[i + 3];
+            else if (index1 === 4)result[idx++] = 0;
+            else if (index1 === 5)result[idx++] = 1;
         }
 
         if (targetStride >= 2)
         {
-            if (in2.get() == "X")result[idx++] = arr[i + 0];
-            else if (in2.get() == "Y")result[idx++] = arr[i + 1];
-            else if (in2.get() == "Z")result[idx++] = arr[i + 2];
-            else if (in2.get() == "W")result[idx++] = arr[i + 3];
-            else if (in2.get() == "0")result[idx++] = 0;
-            else if (in2.get() == "1")result[idx++] = 1;
+            if (index2 === 0)result[idx++] = arr[i + 0];
+            else if (index2 === 1)result[idx++] = arr[i + 1];
+            else if (index2 === 2)result[idx++] = arr[i + 2];
+            else if (index2 === 3)result[idx++] = arr[i + 3];
+            else if (index2 === 4)result[idx++] = 0;
+            else if (index2 === 5)result[idx++] = 1;
         }
 
         if (targetStride >= 3)
         {
-            if (in3.get() == "X")result[idx++] = arr[i + 0];
-            else if (in3.get() == "Y")result[idx++] = arr[i + 1];
-            else if (in3.get() == "Z")result[idx++] = arr[i + 2];
-            else if (in3.get() == "W")result[idx++] = arr[i + 3];
-            else if (in3.get() == "0")result[idx++] = 0;
-            else if (in3.get() == "1")result[idx++] = 1;
+            if (index3 === 0)result[idx++] = arr[i + 0];
+            else if (index3 === 1)result[idx++] = arr[i + 1];
+            else if (index3 === 2)result[idx++] = arr[i + 2];
+            else if (index3 === 3)result[idx++] = arr[i + 3];
+            else if (index3 === 4)result[idx++] = 0;
+            else if (index3 === 5)result[idx++] = 1;
         }
 
         if (targetStride >= 4)
         {
-            if (in4.get() == "X")result[idx++] = arr[i + 0];
-            else if (in4.get() == "Y")result[idx++] = arr[i + 1];
-            else if (in4.get() == "Z")result[idx++] = arr[i + 2];
-            else if (in4.get() == "W")result[idx++] = arr[i + 3];
-            else if (in4.get() == "0")result[idx++] = 0;
-            else if (in4.get() == "1")result[idx++] = 1;
+            if (index4 === 0)result[idx++] = arr[i + 0];
+            else if (index4 === 1)result[idx++] = arr[i + 1];
+            else if (index4 === 2)result[idx++] = arr[i + 2];
+            else if (index4 === 3)result[idx++] = arr[i + 3];
+            else if (index4 === 4)result[idx++] = 0;
+            else if (index4 === 5)result[idx++] = 1;
         }
     }
 
+    outArr.set(null);
     outArr.set(result);
 }

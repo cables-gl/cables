@@ -95,13 +95,10 @@ void main()
 
     if(color.a==0.0)discard;
 
-
-
-
     outColor = mix(outColor, fgColor, opacity*color.a);
 
 #ifdef HAS_ATTR_COLORS
-    outColor.rgb*=fragAttrColors.rgb;
+    outColor*=fragAttrColors;
 #endif
 }
 
