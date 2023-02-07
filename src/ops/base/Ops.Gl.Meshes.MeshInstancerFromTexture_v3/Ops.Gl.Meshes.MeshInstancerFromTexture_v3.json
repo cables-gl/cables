@@ -1,0 +1,199 @@
+{
+    "id": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1573749960932
+        },
+        {
+            "message": "Ops.User.cables.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v3",
+            "author": "cables",
+            "date": 1573754593215
+        },
+        {
+            "message": "Ops.Gl.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v4",
+            "author": "pandur",
+            "date": 1595496283122
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595510032968
+        },
+        {
+            "message": "cloned op from Ops.Gl.MeshInstancer_v4",
+            "author": "pandur",
+            "date": 1614580916143
+        },
+        {
+            "message": "Ops.User.pandur.MeshInstancerFromTexture renamed to Ops.Gl.Meshes.MeshInstancerFromTexture",
+            "author": "pandur",
+            "date": 1614583095180
+        },
+        {
+            "message": "Ops.Gl.Meshes.MeshInstancerFromTexture renamed to Ops.Dev.Gl.Meshes.MeshInstancerFromTexture",
+            "author": "pandur",
+            "date": 1628066474823
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.Meshes.MeshInstancerFromTexture",
+            "author": "pandur",
+            "date": 1635875723902
+        },
+        {
+            "message": "Ops.User.pandur.MeshInstancerFromTexture2 renamed to Ops.Dev.Gl.Meshes.MeshInstancerFromTexture_v2",
+            "author": "pandur",
+            "date": 1635878441688
+        },
+        {
+            "message": "Ops.Dev.Gl.Meshes.MeshInstancerFromTexture_v2 renamed to Ops.Gl.Meshes.MeshInstancerFromTexture_v2",
+            "author": "pandur",
+            "date": 1644228890076
+        },
+        {
+            "message": "cloned op from Ops.Gl.Meshes.MeshInstancerFromTexture_v2",
+            "author": "pandur",
+            "date": 1675785124584
+        },
+        {
+            "message": "Ops.User.pandur.MeshInstancerFromTexture3 renamed to Ops.Gl.Meshes.MeshInstancerFromTexture_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675785973179
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1675785124583,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Limit Instances",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Num Instances",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Position Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Rotation Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Rotation index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Scale Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Color Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "TexCoord Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Color Texture Blendmode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Ignore Alpha Less Than",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Pos X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Pos Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger Out"
+            },
+            {
+                "type": 0,
+                "name": "Num",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.MeshInstancerFromTexture3"
+    },
+    "summary": "Draw the same mesh multiple times on the GPU",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.RandomArrays",
+        "Ops.Array.RandomNumbersArray3",
+        "Ops.Array.RandomNumbersArray4"
+    ],
+    "youtubeids": [
+        "PrkdnENo8wQ"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger In"
+            },
+            {
+                "name": "Scale",
+                "text": "Global scale for all instances, disabled if scale array is used"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger Out"
+            },
+            {
+                "name": "Num",
+                "text": "Total number of instances/shapes"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "exampleProjectId": "H3cEpX",
+    "caniusequery": ""
+}
