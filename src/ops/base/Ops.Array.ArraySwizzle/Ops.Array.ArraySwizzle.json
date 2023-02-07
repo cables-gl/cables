@@ -1,0 +1,67 @@
+{
+    "id": "888b76dd-40ee-4d79-9a1b-410612b4eb06",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675766579171
+        },
+        {
+            "message": "Ops.User.pandur.ArrayStrideConvert renamed to Ops.Array.ArraySwizzle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675769601855
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1675766658011,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Array Stride index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Result Stride index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "X index",
+                "group": "Content Result",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Y index",
+                "group": "Content Result",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Z index",
+                "group": "Content Result",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "W index",
+                "group": "Content Result",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArraySwizzle"
+    }
+}

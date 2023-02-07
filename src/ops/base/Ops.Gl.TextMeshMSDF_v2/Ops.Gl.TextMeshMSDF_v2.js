@@ -39,6 +39,8 @@ const
 
     next = op.outTrigger("Next"),
     outArr = op.outArray("Positions Original", null, 3),
+
+    outScales = op.outArray("Scales", null, 2),
     outLines = op.outNumber("Num Lines"),
 
     outWidth = op.outNumber("Width"),
@@ -510,6 +512,7 @@ function generateMesh()
     mesh.setAttribute("attrSize", new Float32Array(sizes), 2, { "instanced": true });
     mesh.setAttribute("attrPage", new Float32Array(pages), 1, { "instanced": true });
 
+    outScales.set(sizes);
     // updateAlign();
     updateAlign();
     needsUpdateTransmats = true;
