@@ -5,6 +5,7 @@ UNI sampler2D tex2;
 UNI sampler2D tex3;
 
 IN vec2 texCoord;
+IN vec4 fragAttrColors;
 
 UNI vec4 color;
 UNI vec2 texSize;
@@ -93,7 +94,14 @@ void main()
     #endif
 
     if(color.a==0.0)discard;
+
+
+
+
     outColor = mix(outColor, fgColor, opacity*color.a);
 
+#ifdef HAS_ATTR_COLORS
+    outColor.rgb*=fragAttrColors.rgb;
+#endif
 }
 

@@ -137,6 +137,10 @@
                 "type": 3,
                 "name": "Rotations",
                 "group": "Character Transformations"
+            },
+            {
+                "type": 3,
+                "name": "Colors"
             }
         ],
         "portsOut": [
