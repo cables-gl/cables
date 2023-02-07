@@ -7,6 +7,8 @@ const SHADER = {
     "SHADERVAR_INSTANCE_MMATRIX": "instMat",
     "SHADERVAR_VERTEX_COLOR": "attrVertColor",
 
+    "SHADERVAR_INSTANCE_INDEX": "instanceIndex",
+
     // default uniforms
     "SHADERVAR_UNI_PROJMAT": "projMatrix",
     "SHADERVAR_UNI_VIEWMAT": "viewMatrix",
@@ -15,7 +17,6 @@ const SHADER = {
     "SHADERVAR_UNI_INVVIEWMAT": "inverseViewMatrix",
     "SHADERVAR_UNI_INVPROJMAT": "invProjMatrix",
     "SHADERVAR_UNI_MATERIALID": "materialId",
-
 
     "SHADERVAR_UNI_VIEWPOS": "camPos",
 };
