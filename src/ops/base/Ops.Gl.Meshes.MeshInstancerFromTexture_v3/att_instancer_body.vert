@@ -3,13 +3,17 @@ float ty=float(int((instanceIndex/(MOD_texSizeX))))/MOD_texSizeY+(1.0/MOD_texSiz
 
 vec2 tc=vec2(tx,ty);
 
-vec3 MOD_texPos=texture(MOD_texTrans,tc).rgb*MOD_mulRGB;
+vec4 posCol=texture(MOD_texTrans,tc);
+vec3 MOD_texPos=posCol.rgb*MOD_mulRGB;
 mat4 texInstMat;
 vec3 scale=vec3(1.0);
 
 #ifdef USE_TEX_SCALE
     scale*=texture(MOD_texScale,tc).rgb;
 #endif
+
+if(posCol.a<MOD_alphaThresh)scale=vec3(0.0); // use step ?
+
 
 texInstMat[0][0]=
 texInstMat[1][1]=

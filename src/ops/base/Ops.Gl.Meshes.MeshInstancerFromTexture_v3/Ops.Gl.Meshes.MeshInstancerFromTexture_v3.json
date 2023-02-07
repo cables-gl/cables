@@ -158,7 +158,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.MeshInstancerFromTexture3"
+        "name": "Ops.Gl.Meshes.MeshInstancerFromTexture_v3"
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",
