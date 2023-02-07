@@ -31,7 +31,7 @@ render.onTriggered = () =>
     const tx = cgl.currentTextureEffect.getCurrentSourceTexture();
     outTex.set(tc.copy(tx));
 
-    effect.continueEffect(tx);
+    effect.continueEffect();
 
     trigger.trigger();
 };

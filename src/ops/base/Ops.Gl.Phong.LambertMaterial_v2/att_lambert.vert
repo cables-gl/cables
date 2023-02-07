@@ -14,6 +14,7 @@ IN float attrVertIndex;
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
+UNI float materialId;
 
 OUT vec3 norm;
 OUT mat4 mvMatrix;
