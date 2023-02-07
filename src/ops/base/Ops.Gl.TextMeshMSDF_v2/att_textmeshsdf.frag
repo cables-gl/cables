@@ -3,7 +3,9 @@ UNI sampler2D tex0;
 UNI sampler2D tex1;
 UNI sampler2D tex2;
 UNI sampler2D tex3;
+
 IN vec2 texCoord;
+
 UNI vec4 color;
 UNI vec2 texSize;
 
