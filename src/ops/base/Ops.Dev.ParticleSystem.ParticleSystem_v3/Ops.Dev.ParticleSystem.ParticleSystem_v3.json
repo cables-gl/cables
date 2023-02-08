@@ -175,6 +175,11 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "Pass Through 1",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Respawn",
                 "subType": "boolean"
@@ -198,6 +203,11 @@
             {
                 "type": 2,
                 "name": "Current Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Result Pass Through 1",
                 "objType": "texture"
             },
             {

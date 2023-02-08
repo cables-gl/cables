@@ -46,6 +46,7 @@ scalem[3][3]=1.0;
 texInstMat*=scalem;
 
 mMatrix*=texInstMat;
+#define TEXINSTMAT
 
 #ifdef USE_TEX_COLOR
 
@@ -58,6 +59,8 @@ mMatrix*=texInstMat;
 
     texCoord=(texCoord*instTexCoords.zw)+instTexCoords.xy;
 #endif
+
+
 
 
 
