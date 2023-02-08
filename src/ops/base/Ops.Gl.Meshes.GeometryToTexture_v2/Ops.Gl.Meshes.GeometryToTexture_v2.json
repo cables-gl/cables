@@ -78,6 +78,11 @@
                 "name": "wrap index",
                 "group": "Texture settings",
                 "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Color Texture",
+                "objType": "texture"
             }
         ],
         "portsOut": [

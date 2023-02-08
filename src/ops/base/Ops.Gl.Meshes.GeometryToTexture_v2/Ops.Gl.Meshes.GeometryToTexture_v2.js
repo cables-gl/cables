@@ -4,14 +4,17 @@ const
     inUpdateAlways = op.inBool("Continously Update", true),
 
     inOrder = op.inDropDown("Order", ["Sequential", "Random", "Vertex X", "Vertex Y", "Vertex Z"], "Sequential"),
-    inAttrib = op.inSwitch("Content", ["Vertex Pos", "Normals", "TexCoords"], "Vertex Pos"),
+    inAttrib = op.inDropDown("Content", ["Vertex Pos", "Normals", "TexCoords", "Texture Color"], "Vertex Pos"),
 
     inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
     inWidth = op.inValueInt("Tex Width", 256),
     tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
 
+    inTexColor = op.inTexture("Color Texture", null, "Texture"),
+
     next = op.outTrigger("Next"),
+
     outNumVerts = op.outNumber("Total Vertices"),
     outTex = op.outTexture("Texture");
 
@@ -59,6 +62,7 @@ mod.addModule({
     "srcBodyFrag": attachments.fragpos_frag
 });
 mod.addUniformVert("f", "MOD_texSize", 0);
+mod.addUniformVert("t", "MOD_texColor", 0);
 updateAttrib();
 
 function shuffleArray(array)
@@ -84,9 +88,12 @@ inGeom.onChange = function ()
 
 function updateAttrib()
 {
+    op.setUiAttrib({ "extendTitle": inAttrib.get() });
+
     mod.toggleDefine("MOD_ATTRIB_POS", inAttrib.get() == "Vertex Pos");
     mod.toggleDefine("MOD_ATTRIB_TC", inAttrib.get() == "TexCoords");
     mod.toggleDefine("MOD_ATTRIB_NORMAL", inAttrib.get() == "Normals");
+    mod.toggleDefine("MOD_ATTRIB_TEXTURECOLOR", inAttrib.get() == "Texture Color");
 
     needsUpdate = true;
 }
@@ -228,6 +235,8 @@ exec.onTriggered = function ()
 
     const effect = cgl.currentTextureEffect;
     if (effect)effect.endEffect();
+
+    if (inTexColor.get())mod.pushTexture("MOD_texColor", inTexColor.get().tex);
 
     render();
 

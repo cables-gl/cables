@@ -50,7 +50,8 @@ void main()
         if(cgl_random(texCoord*23.123) > spawnRate || reset==1.0 ) //
         {
             timeDiff=0.001;
-            newPos.rgb=outOfScreenPos;
+            // newPos.rgb=outOfScreenPos;
+            newPos.a=0.0;
         }
         else
         {
@@ -58,13 +59,15 @@ void main()
 
 
             newPos.rgb=posi.rgb;
-            vec3 rnd=(cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time));
+            vec3 rnd=cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time);
 
-            rnd=texture(texSpawnPos,rnd.xy).rgb;
+            vec4 posCol=texture(texSpawnPos,rnd.xy);
+            rnd=posCol.rgb;
 
             oldVelocity=texture(texSpawnVel,texCoord);
 
             newPos.rgb+=rnd;
+            newPos.a=posCol.a;
 
             vtiming.r=time;
 
@@ -80,6 +83,7 @@ void main()
     vtiming.a=1.0;
 
     float lifeProgress=( (time-vtiming.r) / (vtiming.g-vtiming.r));
+    if(lifeProgress>1.0)newPos.a=0.0;
 
     float m=mass.x+mass.y*cgl_random(texCoord);
 
@@ -100,7 +104,7 @@ void main()
     // r:x
     // g:y
     // b:z
-    outColor0=vec4(newPos.rgb,1.0);
+    outColor0=newPos;
 
     // timing
     // r: starttime
