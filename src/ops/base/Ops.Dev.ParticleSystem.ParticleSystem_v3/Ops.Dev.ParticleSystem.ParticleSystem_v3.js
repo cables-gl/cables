@@ -29,6 +29,7 @@ const
     inTexOldPos = op.inTexture("Feedback Positions"),
     inTexSpawn = op.inTexture("Spawn Positions"),
     inTexSpawnVel = op.inTexture("Spawn Velocity"),
+    inTexPassThrough1 = op.inTexture("Pass Through 1"),
 
     inRespawn = op.inBool("Respawn", true),
 
@@ -36,6 +37,7 @@ const
     outTexPos = op.outTexture("Positions", emptyTex),
     outTexTiming = op.outTexture("Timing", emptyTex),
     outVelocity = op.outTexture("Current Velocity", emptyTex),
+    outPassThrough1 = op.outTexture("Result Pass Through 1", emptyTex),
     outTexSize = op.outNumber("Tex Size");
 
 op.setPortGroup("Life", [inLifeTimeMax, inLifeTimeMin, inSpawnRate]);
@@ -58,7 +60,7 @@ const tcPos = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos",
     {
         "shader": attachments.particle_frag,
         "vertexShader": attachments.particle_vert,
-        "numRenderBuffers": 4,
+        "numRenderBuffers": 5,
         "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_NEAREST
     });
@@ -77,6 +79,7 @@ const
     uniTexSpawnVel = new CGL.Uniform(tcPos.bgShader, "t", "texSpawnVel", 3),
     uniTexFeedbackVel = new CGL.Uniform(tcPos.bgShader, "t", "texFeedbackVel", 4),
     uniTexVel = new CGL.Uniform(tcPos.bgShader, "t", "texVelocity", 5),
+    uniPass1 = new CGL.Uniform(tcPos.bgShader, "t", "texPassThrough1", 6),
 
     uniTimeParams = new CGL.Uniform(tcPos.bgShader, "4f", "paramsTime", 0, 0, 0, 0),
     // uniTime = new CGL.Uniform(tcPos.bgShader, "f", "time", 0),
@@ -188,6 +191,9 @@ exec.onTriggered = () =>
             tcPos.bgShader.pushTexture(uniTexOldPos, tcFeedback.copy(outTexPos.get()));
     }
 
+    if (inTexPassThrough1.get()) tcPos.bgShader.pushTexture(uniPass1, inTexPassThrough1.get().tex || texBlack.tex);
+    else tcPos.bgShader.pushTexture(uniPass1, texBlack.tex);
+
     if (inTexSpawn.get()) tcPos.bgShader.pushTexture(uniTexSpawn, inTexSpawn.get().tex || texBlack.tex);
     else tcPos.bgShader.pushTexture(uniTexSpawn, texBlack.tex);
 
@@ -218,6 +224,8 @@ exec.onTriggered = () =>
 
     outVelocity.set(texPos);
     outVelocity.set(tcPos.fb.getTextureColorNum(3));
+
+    outPassThrough1.set(tcPos.fb.getTextureColorNum(4));
 
     next.trigger();
 };
