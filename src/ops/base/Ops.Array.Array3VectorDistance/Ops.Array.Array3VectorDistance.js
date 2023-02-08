@@ -57,6 +57,5 @@ function update()
         newArr[i] = vec3.distance(vec1, vec2);
     }
 
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 }

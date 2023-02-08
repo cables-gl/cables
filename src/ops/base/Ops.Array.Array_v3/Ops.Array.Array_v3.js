@@ -2,7 +2,7 @@ const
     inLength = op.inValueInt("Array length", 10),
     modeSelect = op.inSwitch("Mode select", ["Number", "1,2,3,4", "0-1"], "Number"),
     inDefaultValue = op.inValueFloat("Default Value"),
-    inReverse=op.inBool("Reverse",false),
+    inReverse = op.inBool("Reverse", false),
     outArr = op.outArray("Array"),
     outArrayLength = op.outNumber("Array length out");
 
@@ -64,13 +64,12 @@ function reset()
     {
         for (i = 0; i < arrLength; i++)
         {
-            arr[i] = i / (arrLength-1);
+            arr[i] = i / (arrLength - 1);
         }
     }
 
-    if(inReverse.get())arr=arr.reverse();
+    if (inReverse.get())arr = arr.reverse();
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     outArrayLength.set(arr.length);
 }

@@ -73,7 +73,6 @@ function update()
         mathArray[i] = logicFunc(array0[i], mathNumberIn, valueTrue, valueFalse);
     }
 
-    outArray.set(null);
-    outArray.set(mathArray);
+    outArray.setRef(mathArray);
     outArrayLength.set(mathArray.length);
 }

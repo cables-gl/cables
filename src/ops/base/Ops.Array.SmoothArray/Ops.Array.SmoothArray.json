@@ -37,6 +37,7 @@
             {
                 "type": 0,
                 "name": "Inc factor",
+                "uititle": "Inc factor",
                 "subType": "number"
             },
             {

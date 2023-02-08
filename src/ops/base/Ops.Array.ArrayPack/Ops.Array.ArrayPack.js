@@ -54,6 +54,5 @@ function update()
         for (i = 0; i < inArrays.length; i++)
             arr.push(inArrays[i][j]);
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
 }

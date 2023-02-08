@@ -116,8 +116,8 @@ function update()
             oldVal = val;
         }
     }
-    outArray.set(null);
-    outArray.set(newArr);
+    // outArray.set(null);
+    outArray.setRef(newArr);
 
     next.trigger();
 }

@@ -26,8 +26,7 @@ inArr.onChange = function ()
             arr[i + 2] = newArr[i + 2] + addZ.get();
         }
 
-        outArr.set(null);
-        outArr.set(arr);
+        outArr.setRef(arr);
     }
     else
     {

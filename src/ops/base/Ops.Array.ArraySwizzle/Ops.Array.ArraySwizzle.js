@@ -132,6 +132,5 @@ function convert(updateUi)
         }
     }
 
-    outArr.set(null);
-    outArr.set(result);
+    outArr.setRef(result);
 }

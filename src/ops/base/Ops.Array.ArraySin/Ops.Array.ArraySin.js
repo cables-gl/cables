@@ -14,7 +14,6 @@ let selectIndex = 0;
 const MATH_FUNC_SIN = 0;
 const MATH_FUNC_COS = 1;
 
-
 inArray.onChange = update;
 multiply.onChange = update;
 amplitude.onChange = update;
@@ -32,7 +31,6 @@ function onFilterChange()
 function update()
 {
     const arrayIn = inArray.get();
-
 
     if (!arrayIn)
     {
@@ -57,6 +55,6 @@ function update()
         for (i = 0; i < arrayIn.length; i++)
             mathArray[i] = amp * (Math.cos(arrayIn[i] * mul + pha));
     }
-    outArray.set(null);
-    outArray.set(mathArray);
+    // outArray.set(null);
+    outArray.setRef(mathArray);
 }

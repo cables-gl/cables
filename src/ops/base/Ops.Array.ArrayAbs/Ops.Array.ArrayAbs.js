@@ -16,6 +16,5 @@ inArray.onChange = function ()
     {
         newArr[i] = Math.abs(arr[i]);
     }
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 };

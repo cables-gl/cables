@@ -1,4 +1,3 @@
-// inputs
 const inArrayPort = op.inArray("Input Array"),
     beginPort = op.inValueInt("Begin Index", 0),
     sizePort = op.inValueInt("Chunk Size", 1),
@@ -7,8 +6,11 @@ const inArrayPort = op.inArray("Input Array"),
     outArrayLength = op.outNumber("Array length");
 
 let newArr = [];
+inArrayPort.onChange = setOutarray;
+beginPort.onChange = setOutarray;
+sizePort.onChange = setOutarray;
+circularPort.onChange = setOutarray;
 
-// functions
 function setOutarray()
 {
     let inArr = inArrayPort.get();
@@ -53,13 +55,6 @@ function setOutarray()
         newArr[i - begin] = inArr[i];
     }
 
-    outArrayPort.set(null);
     outArrayLength.set(newLen);
-    outArrayPort.set(newArr);
+    outArrayPort.setRef(newArr);
 }
-
-// change listeners
-inArrayPort.onChange = setOutarray;
-beginPort.onChange = setOutarray;
-sizePort.onChange = setOutarray;
-circularPort.onChange = setOutarray;

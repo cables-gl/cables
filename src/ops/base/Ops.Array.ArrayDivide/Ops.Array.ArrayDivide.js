@@ -18,6 +18,5 @@ inArray.onChange = inValue.onChange = inArray.onChange = function ()
     {
         newArr[i] = arr[i] / divide;
     }
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 };
