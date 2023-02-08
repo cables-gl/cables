@@ -60,6 +60,7 @@ const Port = function (__parent, name, type, uiAttribs)
     this.onTriggered = null;
     this.onUiActiveStateChange = null;
     this.changeAlways = false;
+    this.forceRefChange = false;
 
     this._warnedDeprecated = false;
     this._useVariableName = null;
@@ -256,6 +257,12 @@ Port.prototype.get = function ()
     }
 
     return this.value;
+};
+
+Port.prototype.setRef = function (v)
+{
+    this.forceRefChange = true;
+    this.set(v);
 };
 
 /**
