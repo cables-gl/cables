@@ -141,6 +141,7 @@ inPlay.onChange = () =>
 exec.onTriggered = () =>
 {
     let firsttime = false;
+    cgl.pushBlend(false);
 
     uniModelMatrix.setValue(cgl.mMatrix);
 
@@ -227,6 +228,7 @@ exec.onTriggered = () =>
 
     outPassThrough1.set(tcPos.fb.getTextureColorNum(4));
 
+    cgl.popBlend();
     next.trigger();
 };
 

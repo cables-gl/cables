@@ -1,9 +1,8 @@
 const
-    active = op.inBool("Active", true),
     outFPS = op.outNumber("FPS"),
     outMS = op.outNumber("MS");
 
-const listener = op.patch.addEventListener("performance", update);
+const listener = op.patch.cgl.fpsCounter.addEventListener("performance", update);
 
 op.onDelete = function ()
 {
@@ -12,9 +11,6 @@ op.onDelete = function ()
 
 function update(p)
 {
-    if (active.get())
-    {
-        outFPS.set(p.fps);
-        outMS.set(p.ms);
-    }
+    outFPS.set(p.fps);
+    outMS.set(p.ms);
 }
