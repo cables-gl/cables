@@ -67,22 +67,9 @@ function update()
         return;
     }
 
-    if (array0.length !== array1.length)
-    {
-        outArray.set(null);
-        outArrayLength.set(0);
-        if (!showingError)
-        {
-            op.uiAttr({ "error": "Arrays do not have the same length !" });
-            showingError = true;
-        }
-        return;
-    }
-    if (showingError)
-    {
-        showingError = false;
-        op.uiAttr({ "error": null });
-    }
+    if (CABLES.UI)
+        if (array0.length !== array1.length) return op.setUiError("lengtherr", "Arrays do not have the same length !");
+        else op.setUiError("lengtherr", null);
 
     mathArray.length = array0.length;
 

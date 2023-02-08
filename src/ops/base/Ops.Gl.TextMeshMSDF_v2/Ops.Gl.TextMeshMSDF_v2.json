@@ -137,6 +137,10 @@
                 "type": 3,
                 "name": "Rotations",
                 "group": "Character Transformations"
+            },
+            {
+                "type": 3,
+                "name": "Colors"
             }
         ],
         "portsOut": [
@@ -147,6 +151,10 @@
             {
                 "type": 3,
                 "name": "Positions Original"
+            },
+            {
+                "type": 3,
+                "name": "Scales"
             },
             {
                 "type": 0,

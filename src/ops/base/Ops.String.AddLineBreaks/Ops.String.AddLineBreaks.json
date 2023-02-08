@@ -12,18 +12,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max Characters per Line",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
             }
         ],

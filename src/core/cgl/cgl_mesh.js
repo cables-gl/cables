@@ -833,7 +833,7 @@ Mesh.prototype.setNumInstances = function (n)
         // if (n <= 0)return;
         const indexArr = new Float32Array(n);
         for (let i = 0; i < n; i++) indexArr[i] = i;
-        this.setAttribute("instanceIndex", indexArr, 1, { "instanced": true });
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_INSTANCE_INDEX, indexArr, 1, { "instanced": true });
     }
 };
 

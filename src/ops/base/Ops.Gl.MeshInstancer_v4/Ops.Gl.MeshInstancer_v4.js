@@ -144,6 +144,9 @@ function setupArray()
     if (useQuats)stride = 4;
     inRot.setUiAttribs({ "stride": stride });
 
+    if (scales && scales.length != transforms.length) op.setUiError("lengthScales", "Scales array has wrong length");
+    else op.setUiError("lengthScales", null);
+
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
     if (instColorArray.length != num * 4)
     {
@@ -235,7 +238,8 @@ function setupArray()
         for (let a = 0; a < 16; a++) matrixArray[i * 16 + a] = m[a];
     }
 
-    mesh.numInstances = num;
+    // mesh.numInstances = num;
+    mesh.setNumInstances(num);
 
     if (arrayChangedTrans) mesh.addAttribute("instMat", matrixArray, 16);
     if (arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { "instanced": true });
@@ -260,8 +264,8 @@ function doRender()
 
     mod.bind();
 
-    if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
-    else mesh.numInstances = num;
+    if (doLimit.get()) mesh.setNumInstances(Math.min(num, inLimit.get()));
+    else mesh.setNumInstances(num);
 
     outNum.set(this.name, mesh.numInstances);
 

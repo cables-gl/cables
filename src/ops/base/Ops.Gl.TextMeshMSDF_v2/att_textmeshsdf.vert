@@ -14,25 +14,32 @@ IN vec2 attrTexOffsets;
 IN vec2 attrSize;
 IN vec2 attrTcSize;
 IN float attrPage;
+IN vec4 attrColors;
 
 OUT vec2 texCoord;
 OUT float texIndex;
+OUT vec4 fragAttrColors;
+
+
+
 
 const float mulSize=0.01;
 
 void main()
 {
-   texCoord=(attrTexOffsets+attrTexCoord*attrTcSize);
-   texCoord.y=1.0-texCoord.y;
+    texCoord=(attrTexOffsets+attrTexCoord*attrTcSize);
+    texCoord.y=1.0-texCoord.y;
 
-   mat4 instMVMat=instMat;
-   vec4 vert=vec4( vPosition, 1. );
-   vert.x*=attrSize.x*mulSize;
-   vert.y*=attrSize.y*mulSize;
+    mat4 instMVMat=instMat;
+    vec4 vert=vec4( vPosition, 1. );
+    vert.x*=attrSize.x*mulSize;
+    vert.y*=attrSize.y*mulSize;
 
-   texIndex=attrPage+0.4; // strange ios rounding errors?!
+    fragAttrColors=attrColors;
 
-   mat4 mvMatrix=viewMatrix * modelMatrix * instMVMat;
+    texIndex=attrPage+0.4; // strange ios rounding errors?!
 
-   gl_Position = projMatrix * mvMatrix * vert;
+    mat4 mvMatrix=viewMatrix * modelMatrix * instMVMat;
+
+    gl_Position = projMatrix * mvMatrix * vert;
 }

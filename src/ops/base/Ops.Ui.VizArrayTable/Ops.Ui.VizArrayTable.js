@@ -84,7 +84,7 @@ op.renderVizLayer = (ctx, layer) =>
             }
 
             ctx.fillText(str,
-                layer.x / layer.scale + s * 100 + 50,
+                layer.x / layer.scale + s * 60 + 50,
                 layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
         }
     }

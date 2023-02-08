@@ -48,10 +48,12 @@ exe.onTriggered = function ()
     if (needsUpdate)
         if (!arr1 || !arr2 || arr2.length < arr1.length)
         {
+            op.setUiError("arraylength", "array length is not the same!");
             outArr.set(null);
         }
         else
         {
+            op.setUiError("arraylength", null);
             if (resultArr.length != arr1.length) resultArr.length = arr1.length;
             const distNum = inWidth.get() * (resultArr.length * 4);
             const pos = inPos.get() * (arr1.length + distNum);

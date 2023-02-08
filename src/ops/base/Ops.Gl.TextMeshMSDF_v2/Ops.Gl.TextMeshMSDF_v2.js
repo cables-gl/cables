@@ -36,9 +36,12 @@ const
     inPosArr = op.inArray("Positions"),
     inScaleArr = op.inArray("Scalings"),
     inRotArr = op.inArray("Rotations"),
+    inColors = op.inArray("Colors"),
 
     next = op.outTrigger("Next"),
     outArr = op.outArray("Positions Original", null, 3),
+
+    outScales = op.outArray("Scales", null, 2),
     outLines = op.outNumber("Num Lines"),
 
     outWidth = op.outNumber("Width"),
@@ -112,8 +115,19 @@ inBorder.onChange =
 doSDF.onChange =
     updateDefines;
 
-updateDefines();
-updateScale();
+inColors.onLinkChanged = () =>
+{
+    updateDefines();
+    needsUpdateTransmats = true;
+    needUpdate = true;
+};
+
+inColors.onChange = () =>
+{
+    needUpdate = true;
+    if (mesh && inColors.get() && inColors.isLinked())
+        mesh.setAttribute("attrColors", new Float32Array(inColors.get()), 4, { "instanced": true });
+};
 
 align.onChange =
     str.onChange =
@@ -131,6 +145,8 @@ op.patch.addEventListener("FontLoadedMSDF", updateFontList);
 
 inFont.onChange = updateFontData;
 
+updateDefines();
+updateScale();
 updateFontList();
 
 function updateDefines()
@@ -140,6 +156,7 @@ function updateDefines()
     shader.toggleDefine("BORDER", inBorder.get());
     shader.toggleDefine("TEXTURE_COLOR", inTexColor.isLinked());
     shader.toggleDefine("TEXTURE_MASK", inTexMask.isLinked());
+    shader.toggleDefine("HAS_ATTR_COLORS", inColors.isLinked());
 
     br.setUiAttribs({ "greyout": !inBorder.get() });
     bg.setUiAttribs({ "greyout": !inBorder.get() });
@@ -206,7 +223,6 @@ function updateScale()
 {
     const s = scale.get();
     vec3.set(vScale, s, s, s);
-
     vec3.set(alignVec, 0, offY * s, 0);
 
     outWidth.set(widthAll * s);
@@ -510,7 +526,10 @@ function generateMesh()
     mesh.setAttribute("attrSize", new Float32Array(sizes), 2, { "instanced": true });
     mesh.setAttribute("attrPage", new Float32Array(pages), 1, { "instanced": true });
 
-    // updateAlign();
+    if (inColors.isLinked())
+        mesh.setAttribute("attrColors", new Float32Array(inColors.get()), 4, { "instanced": true });
+
+    outScales.set(sizes);
     updateAlign();
     needsUpdateTransmats = true;
     outArr.set(arrPositions);
