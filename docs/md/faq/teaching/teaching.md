@@ -1,9 +1,11 @@
-# cables at schools and universities
+# teaching cables
+
+## cables at schools and universities
 
 cables is used at more and more universities completly for free.
 if you want to teach cables at yours and have any questions don't hesitate to contact us
 
-# cables was used at those schools:
+## cables was used at those schools:
 
 - Akademie für Theater und Digitalität, Dortmund, Germany
 - Ecole Supérieure d'Ingénieurs Léonard de Vinci, France
