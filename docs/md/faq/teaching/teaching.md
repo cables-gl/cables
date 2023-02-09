@@ -1,6 +1,6 @@
-# Teaching cables
+# Cables at schools and universities
 
-## Cables at schools and universities
+## Teaching cables
 
 Cables is used at more and more universities completly for free.
 if you want to teach cables at yours and have any questions don't hesitate to contact us
