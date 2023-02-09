@@ -279,6 +279,6 @@ function updateGradient(keys)
     outColors.set(colorArr);
     outColorPos.set(colorPosArr);
 
-    outTex.set(null);
-    outTex.set(tex);
+    // outTex.set(null);
+    outTex.setRef(tex);
 }

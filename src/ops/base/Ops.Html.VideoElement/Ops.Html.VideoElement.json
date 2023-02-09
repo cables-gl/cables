@@ -28,6 +28,11 @@
             },
             {
                 "type": 0,
+                "name": "Autoplay",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Controls",
                 "subType": "boolean"
             },

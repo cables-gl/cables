@@ -148,10 +148,10 @@ function updateTexture()
 
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
-    textureOut.set(emptyTexture);
+    // textureOut.set(emptyTexture);
 
     if (!tc)initCopyShader();
-    if (tc)textureOut.set(tc.copy(tex));
+    if (tc)textureOut.setRef(tc.copy(tex));
 }
 
 function stopStream()

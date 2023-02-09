@@ -28,5 +28,5 @@ inStr.onChange = () =>
         arr.push(line);
     }
 
-    outArr.set(arr);
+    outArr.setRef(arr);
 };

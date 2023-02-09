@@ -10,18 +10,21 @@ const inLookup = op.inTexture("Lookup Texture");
 let shader = null;
 
 let srcBodyVert = ""
+    .endl() + "#ifdef INSTANCING"
     .endl() + "instanceIndexFrag=instanceIndex;"
+    .endl() + "#endif"
     .endl();
 
 let srcHeadVert = ""
-    .endl() + "#ifndef ATTRIB_instanceIndex"
-    .endl() + "  #define ATTRIB_instanceIndex"
-    .endl() + "  IN float instanceIndex;"
-    .endl() + "#endif"
-    .endl() + "#ifndef ATTRIB_instanceIndexFrag"
-    .endl() + "  #define ATTRIB_instanceIndexFrag"
+// .endl() + "#ifndef ATTRIB_instanceIndex"
+// .endl() + "  #define ATTRIB_instanceIndex"
+
+    // .endl() + "  IN float instanceIndex;"
+    // .endl() + "#endif"
+    // .endl() + "#ifndef ATTRIB_instanceIndexFrag"
+    // .endl() + "  #define ATTRIB_instanceIndexFrag"
     .endl() + "  OUT float instanceIndexFrag;"
-    .endl() + "#endif"
+    // .endl() + "#endif"
     .endl();
 
 let srcHeadFrag = ""
@@ -30,10 +33,10 @@ let srcHeadFrag = ""
     .endl() + "#ifdef LOOKUPTEX"
     .endl() + "   UNI sampler2D MOD_lut;"
     .endl() + "#endif"
-    .endl() + "#ifndef ATTRIB_instanceIndexFrag"
-    .endl() + "  #define ATTRIB_instanceIndexFrag"
+    // .endl() + "#ifndef ATTRIB_instanceIndexFrag"
+    // .endl() + "  #define ATTRIB_instanceIndexFrag"
     .endl() + "  IN float instanceIndexFrag;"
-    .endl() + "#endif"
+    // .endl() + "#endif"
     .endl() + "float MOD_random(vec2 co)"
     .endl() + "{"
     .endl() + "   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 437511.5453);"
