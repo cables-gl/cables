@@ -51,7 +51,6 @@ function update()
         mathArray[i] = mathFunc(array0[i], array1[i]);
     }
 
-    outArray.set(null);
     outArrayLength.set(mathArray.length);
-    outArray.set(mathArray);
+    outArray.setRef(mathArray);
 }

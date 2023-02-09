@@ -8,6 +8,9 @@ MOD_pos=norm.xyz;
 #ifdef MOD_ATTRIB_TC
 MOD_pos=vec3(attrTexCoord,1.0);
 #endif
+#ifdef MOD_ATTRIB_TEXTURECOLOR
+MOD_pos=texture(MOD_texColor,attrTexCoord).rgb;
+#endif
 
 float tx=mod(attrVertIndex,MOD_texSize)+1.0/MOD_texSize;
 float ty=floor(attrVertIndex/MOD_texSize);

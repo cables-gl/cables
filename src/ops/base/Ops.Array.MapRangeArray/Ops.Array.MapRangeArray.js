@@ -1,11 +1,11 @@
 const
-    result = op.outArray("result"),
     v = op.inArray("array"),
     old_min = op.inValueFloat("old min"),
     old_max = op.inValueFloat("old max"),
     new_min = op.inValueFloat("new min"),
     new_max = op.inValueFloat("new max"),
-    easing = op.inValueSelect("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear");
+    easing = op.inValueSelect("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear"),
+    result = op.outArray("result");
 
 op.setPortGroup("Input Range", [old_min, old_max]);
 op.setPortGroup("Output Range", [new_min, new_max]);
@@ -107,7 +107,7 @@ function exec()
             }
         }
     }
-    result.set(outArray);
+    result.setRef(outArray);
 }
 
 v.set(null);

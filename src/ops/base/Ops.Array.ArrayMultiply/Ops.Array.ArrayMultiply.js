@@ -15,13 +15,9 @@ inValue.onChange = inArray.onChange = function ()
 
     if (newArr.length != arr.length)newArr.length = arr.length;
 
-    for (let i = 0; i < arr.length; i++)
-    {
-        newArr[i] = arr[i] * mul;
-    }
+    for (let i = 0; i < arr.length; i++) newArr[i] = arr[i] * mul;
 
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 };
 
 inArray.onLinkChanged = () =>

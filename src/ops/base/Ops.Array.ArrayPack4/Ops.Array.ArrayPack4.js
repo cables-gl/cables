@@ -82,8 +82,7 @@ function update()
             arr[i * 4 + 3] = array4[i];
         }
         needsCalc = false;
-        outArr.set(null);
-        outArr.set(arr);
+        outArr.setRef(arr);
         outArrayLength.set(arr.length);
     }
 }

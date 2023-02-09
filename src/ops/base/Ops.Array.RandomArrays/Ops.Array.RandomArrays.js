@@ -3,8 +3,11 @@ const inModeSwitch = op.inSwitch("Mode", ["A", "AB", "ABC", "ABCD"], "A");
 const inSeed = op.inValueFloat("Random Seed ", 0);
 const inInteger = op.inBool("Integer", false);
 const outValues = op.outArray("Array Out");
+const outTotalPoints = op.outNumber("Chunks Amount");
+const outArrayLength = op.outNumber("Array length");
 
 const letters = ["A", "B", "C", "D"];
+const arr = [];
 
 const inArray = letters.map(function (value)
 {
@@ -23,7 +26,6 @@ for (let i = 0; i < inArray.length; i += 1)
 
     if (i > 0) keys.forEach(function (key) { portObj[key].setUiAttribs({ "greyout": true }); });
 }
-
 
 inModeSwitch.onChange = function ()
 {
@@ -46,9 +48,6 @@ inModeSwitch.onChange = function ()
     init();
 };
 
-const outTotalPoints = op.outNumber("Chunks Amount");
-const outArrayLength = op.outNumber("Array length");
-
 outValues.ignoreValueSerialize = true;
 
 numValues.onChange = inSeed.onChange = inInteger.onChange = init;
@@ -59,7 +58,6 @@ init();
 
 function init()
 {
-    const arr = [];
     const mode = inModeSwitch.get();
     const modes = inModeSwitch.uiAttribs.values;
     const index = modes.indexOf(mode);
@@ -95,9 +93,7 @@ function init()
         }
     }
 
-    outValues.set(null);
-
-    outValues.set(arr);
+    outValues.setRef(arr);
     outTotalPoints.set(arr.length / dimension);
     outArrayLength.set(arr.length);
 }

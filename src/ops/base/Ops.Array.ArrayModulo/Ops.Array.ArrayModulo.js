@@ -20,6 +20,5 @@ inValue.onChange = inArray.onChange = function ()
     {
         newArr[i] = arr[i] % modulo;
     }
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 };

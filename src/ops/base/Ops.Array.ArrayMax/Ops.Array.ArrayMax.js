@@ -19,6 +19,5 @@ inValue.onChange = inArray.onChange = function ()
     {
         newArr[i] = Math.max(arr[i], inMax);
     }
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 };

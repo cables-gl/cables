@@ -742,10 +742,8 @@ Shader.prototype.compile = function ()
 
     let drawBufferStr = "";
 
-    if (fs.indexOf("outColor0") > -1) this._drawBuffers[0] = true;
-    if (fs.indexOf("outColor1") > -1) this._drawBuffers[1] = true;
-    if (fs.indexOf("outColor2") > -1) this._drawBuffers[2] = true;
-    if (fs.indexOf("outColor3") > -1) this._drawBuffers[3] = true;
+    for (let i = 0; i < 16; i++)
+        if (fs.indexOf("outColor" + i) > -1) this._drawBuffers[i] = true;
 
     if (this._drawBuffers.length == 1)
     {

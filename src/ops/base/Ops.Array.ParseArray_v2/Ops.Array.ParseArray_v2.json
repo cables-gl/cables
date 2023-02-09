@@ -54,6 +54,11 @@
                 "type": 0,
                 "name": "Trim",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Split Lines",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

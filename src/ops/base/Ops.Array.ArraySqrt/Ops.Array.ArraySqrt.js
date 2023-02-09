@@ -16,6 +16,6 @@ inArray.onChange = function ()
     {
         newArr[i] = Math.sqrt(arr[i]);
     }
-    outArray.set(null);
-    outArray.set(newArr);
+
+    outArray.setRef(newArr);
 };

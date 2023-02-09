@@ -73,7 +73,7 @@ function parse()
         }
     }
 
-    arr.set(null);
-    arr.set(r);
+    // arr.set(null);
+    arr.setRef(r);
     parsed.trigger();
 }

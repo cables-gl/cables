@@ -52,9 +52,9 @@ function update()
         arr2[i] = array1[i * 2 + 1];
     }
 
-    outArray1.set(null);
-    outArray2.set(null);
-    outArray1.set(arr1);
-    outArray2.set(arr2);
+    // outArray1.set(null);
+    // outArray2.set(null);
+    outArray1.setRef(arr1);
+    outArray2.setRef(arr2);
     outArrayLength.set(arr1.length);
 }

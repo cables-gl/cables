@@ -367,8 +367,6 @@ function getChar(chStr)
 
 function generateMesh()
 {
-    outArr.set(null);
-
     if (!fontData || !fontChars)
     {
         outNumChars.set(0);
@@ -532,5 +530,5 @@ function generateMesh()
     outScales.set(sizes);
     updateAlign();
     needsUpdateTransmats = true;
-    outArr.set(arrPositions);
+    outArr.setRef(arrPositions);
 }

@@ -47,16 +47,19 @@ Link.prototype._setValue = function ()
     }
     const v = this.portOut.get();
 
-    if (v == v)
+    if (v == v) // NaN is the only JavaScript value that is treated as unequal to itself
     {
-        // NaN is the only JavaScript value that is treated as unequal to itself
         if (this.portIn.type != CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) this.activity();
 
         if (this.portIn.get() !== v)
         {
             this.portIn.set(v);
         }
-        else if (this.portIn.changeAlways) this.portIn.set(v);
+        else
+        {
+            if (this.portIn.changeAlways) this.portIn.set(v);
+            if (this.portOut.forceRefChange) this.portIn.forceChange();
+        }
     }
 };
 

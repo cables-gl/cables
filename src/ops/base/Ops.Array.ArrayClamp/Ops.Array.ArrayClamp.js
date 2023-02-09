@@ -20,6 +20,6 @@ inArray.onChange = inMinValue.onChange = inMaxValue.onChange = function ()
     {
         newArr[i] = Math.min(Math.max(arr[i], inMin), inMax);
     }
-    outArray.set(null);
-    outArray.set(newArr);
+
+    outArray.setRef(newArr);
 };

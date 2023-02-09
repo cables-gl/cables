@@ -21,6 +21,5 @@ inArray.onChange = function ()
         newArr[i] = arr[i] + add;
     }
 
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 };

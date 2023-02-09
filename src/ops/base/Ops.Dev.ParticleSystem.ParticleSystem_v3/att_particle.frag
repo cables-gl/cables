@@ -7,6 +7,7 @@ UNI sampler2D texTiming;
 UNI sampler2D texFeedbackVel;
 UNI sampler2D texSpawnVel;
 UNI sampler2D texVelocity;
+UNI sampler2D texPassThrough1;
 
 UNI vec2 mass;
 UNI float reset;
@@ -50,7 +51,8 @@ void main()
         if(cgl_random(texCoord*23.123) > spawnRate || reset==1.0 ) //
         {
             timeDiff=0.001;
-            newPos.rgb=outOfScreenPos;
+            // newPos.rgb=outOfScreenPos;
+            newPos.a=0.0;
         }
         else
         {
@@ -58,17 +60,20 @@ void main()
 
 
             newPos.rgb=posi.rgb;
-            vec3 rnd=(cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time));
+            vec3 rnd=cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time);
 
-            rnd=texture(texSpawnPos,rnd.xy).rgb;
+            vec4 posCol=texture(texSpawnPos,rnd.xy);
+            vtiming.ba=rnd.xy;// tex coords of particle
 
             oldVelocity=texture(texSpawnVel,texCoord);
 
+            rnd=posCol.rgb;
             newPos.rgb+=rnd;
+            newPos.a=posCol.a;
 
             vtiming.r=time;
-
             vtiming.g=(cgl_random(time*texCoord)*(lifeTime.y-lifeTime.x))+lifeTime.x+time;
+
 
             if(reset==1.0)
                 vtiming.g=time+cgl_random(time*texCoord)*lifeTime.y;
@@ -77,9 +82,9 @@ void main()
     }
 
 
-    vtiming.a=1.0;
 
     float lifeProgress=( (time-vtiming.r) / (vtiming.g-vtiming.r));
+    if(lifeProgress>1.0)newPos.a=0.0;
 
     float m=mass.x+mass.y*cgl_random(texCoord);
 
@@ -100,11 +105,12 @@ void main()
     // r:x
     // g:y
     // b:z
-    outColor0=vec4(newPos.rgb,1.0);
+    outColor0=newPos;
 
-    // timing
+    // timing internally
     // r: starttime
     // g: endtime
+    // ba: tex coords of particle
     outColor1=vtiming;
 
     // timing output
@@ -114,6 +120,9 @@ void main()
     // velocity
     // oldVelocity.rgb*=1.995;
     outColor3=velocityTex+velocity;
+
+
+    outColor4=texture(texPassThrough1,vtiming.ba);
 
 
 }

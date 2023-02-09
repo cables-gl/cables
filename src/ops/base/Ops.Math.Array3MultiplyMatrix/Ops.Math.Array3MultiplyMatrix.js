@@ -31,6 +31,5 @@ exec.onTriggered = function ()
         theArr[i * 3 + 2] = vec[2];
     }
 
-    outArr.set(null);
-    outArr.set(theArr);
+    outArr.setRef(theArr);
 };

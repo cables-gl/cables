@@ -55,13 +55,13 @@ function update()
         arr4[i] = array1[i * 4 + 3];
     }
 
-    outArray1.set(null);
-    outArray2.set(null);
-    outArray3.set(null);
-    outArray4.set(null);
-    outArray1.set(arr1);
-    outArray2.set(arr2);
-    outArray3.set(arr3);
-    outArray4.set(arr4);
+    // outArray1.set(null);
+    // outArray2.set(null);
+    // outArray3.set(null);
+    // outArray4.set(null);
+    outArray1.setRef(arr1);
+    outArray2.setRef(arr2);
+    outArray3.setRef(arr3);
+    outArray4.setRef(arr4);
     outArrayLength.set(arr1.length);
 }

@@ -77,8 +77,7 @@ exe.onTriggered = function ()
                 }
             }
 
-            outArr.set(null);
-            outArr.set(resultArr);
+            outArr.setRef(resultArr);
         }
 
     next.trigger();

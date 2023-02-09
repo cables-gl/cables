@@ -58,25 +58,22 @@ void main()
 
     {{MODULE_VERTEX_POSITION}}
 
-    #ifndef INSTANCING
-        FragPos = mMatrix * pos;
-    #else
-        FragPos = instMat * pos;
+
+    mat4 theMMat=mMatrix;
+    #ifdef INSTANCING
+        #ifdef TEXINSTMAT
+            theMMat = texInstMat;
+        #endif
+        #ifndef TEXINSTMAT
+            theMMat = instMat;
+        #endif
     #endif
 
-    #ifndef INSTANCING
-        tangent = normalize(vec3(mMatrix * vec4(tangent,    0.0)));
-        vec3 N = normalize(vec3(mMatrix * vec4(norm, 0.0)));
-    #else
-        tangent = normalize(vec3(instMat * vec4(tangent,    0.0)));
-        vec3 N = normalize(vec3(instMat * vec4(norm, 0.0)));
-    #endif
+    FragPos = theMMat * pos;
 
-    #ifndef INSTANCING
-        bitangent = normalize(vec3(mMatrix * vec4(bitangent,  0.0)));
-    #else
-        bitangent = normalize(vec3(instMat * vec4(bitangent,  0.0)));
-    #endif
+    tangent = normalize(vec3(theMMat * vec4(tangent,    0.0)));
+    vec3 N = normalize(vec3(theMMat * vec4(norm, 0.0)));
+    bitangent = normalize(vec3(theMMat * vec4(bitangent,  0.0)));
 
     #ifdef VERTEX_COLORS
         vertCol = attrVertColor;
