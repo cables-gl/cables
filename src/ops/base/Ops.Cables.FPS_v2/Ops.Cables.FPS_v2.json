@@ -18,13 +18,7 @@
         "ports": []
     },
     "layout": {
-        "portsIn": [
-            {
-                "type": 0,
-                "name": "Active",
-                "subType": "boolean"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,

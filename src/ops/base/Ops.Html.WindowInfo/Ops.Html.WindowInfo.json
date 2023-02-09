@@ -49,6 +49,11 @@
             },
             {
                 "type": 0,
+                "name": "Device Pixel Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Iframe Parent",
                 "subType": "number"
             }
