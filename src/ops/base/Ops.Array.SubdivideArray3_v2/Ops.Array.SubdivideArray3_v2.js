@@ -133,6 +133,6 @@ function calc()
         arr = Array.from(inPoints);
     }
 
-    result.set(null);
-    result.set(arr);
+    // result.set(null);
+    result.setRef(arr);
 }
