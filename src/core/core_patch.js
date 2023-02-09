@@ -902,14 +902,28 @@ Patch.prototype.reloadOp = function (objName, cb)
     cb(count, ops);
 };
 
-Patch.prototype.getSubPatchOps = function (patchId)
+Patch.prototype.getSubPatchOps = function (patchId, recursive = false)
 {
-    const ops = [];
+    let ops = [];
     for (const i in this.ops)
     {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
         {
             ops.push(this.ops[i]);
+        }
+    }
+    if (recursive)
+    {
+        for (const i in ops)
+        {
+            if (CABLES.Op.isSubpatchOp(ops[i].objName))
+            {
+                const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
+                if (subPatchPort)
+                {
+                    ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
+                }
+            }
         }
     }
     return ops;
@@ -1336,7 +1350,7 @@ Patch.prototype.printTriggerStack = function ()
     console.groupEnd(); // eslint-disable-line
 };
 
-Patch.replaceOpIds = function (json)
+Patch.replaceOpIds = function (json, parentSubPatchId = 0)
 {
     for (const i in json.ops)
     {
@@ -1380,6 +1394,59 @@ Patch.replaceOpIds = function (json)
                         }
                     }
                 }
+        }
+    }
+
+    // set correct subpatch and remove blueprint info
+    const subpatchIds = [];
+    const fixedSubPatches = [];
+    for (let i = 0; i < json.ops.length; i++)
+    {
+        /*
+        if (json.ops[i].storage && json.ops[i].storage.blueprint)
+        {
+            delete json.ops[i].storage.blueprint;
+        }
+         */
+
+        if (CABLES.Op.isSubpatchOp(json.ops[i].objName))
+        {
+            for (const k in json.ops[i].portsIn)
+            {
+                if (json.ops[i].portsIn[k].name == "patchId")
+                {
+
+                    const oldSubPatchId = json.ops[i].portsIn[k].value;
+                    const newSubPatchId = json.ops[i].portsIn[k].value = CABLES.generateUUID();
+
+                    subpatchIds.push(newSubPatchId);
+
+                    for (let j = 0; j < json.ops.length; j++)
+                    {
+                        if (json.ops[j].uiAttribs.subPatch == oldSubPatchId)
+                        {
+                            json.ops[j].uiAttribs.subPatch = newSubPatchId;
+                            fixedSubPatches.push(json.ops[j].id);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (const kk in json.ops)
+    {
+        let found = false;
+        for (let j = 0; j < fixedSubPatches.length; j++)
+        {
+            if (json.ops[kk].id == fixedSubPatches[j])
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            json.ops[kk].uiAttribs.subPatch = parentSubPatchId;
         }
     }
     return json;
