@@ -189,7 +189,25 @@ function update()
 
     loadingId = op.patch.loading.start("blueprint", blueprintId);
 
-    if (patch.isEditorMode())
+    if (CABLES.blueprints && CABLES.blueprints[blueprintId])
+    {
+        console.log("FROM LOCAL CACHE", blueprintId);
+        const blueprintData = CABLES.blueprints[blueprintId];
+        blueprintData.settings = op.patch.settings;
+        // for some reason we have to do this in a 0ms timeout to make
+        // sure nested blueprints are not loaded before this one created all the ops...
+        setTimeout(() =>
+        {
+            deSerializeBlueprint(blueprintData, subPatchId, false);
+            loadingOut.set(false);
+            op.patch.loading.finished(loadingId);
+            if (wasPasted)
+            {
+                wasPasted = false;
+            }
+        }, 0);
+    }
+    else if (patch.isEditorMode())
     {
         const options = {
             "blueprintId": blueprintId
@@ -204,6 +222,7 @@ function update()
                 const blueprintData = {};
                 blueprintData.ops = response.data.ops;
                 blueprintData.settings = op.patch.settings;
+                CABLES.blueprints[blueprintId] = blueprintData;
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
             else
@@ -255,49 +274,29 @@ function update()
     else
     {
         let exportId = blueprintId;
-        if (CABLES.blueprints && CABLES.blueprints[exportId])
-        {
-            const blueprintData = CABLES.blueprints[exportId];
-            blueprintData.settings = op.patch.settings;
-            // for some reason we have to do this in a 0ms timeout to make
-            // sure nested blueprints are not loaded before this one created all the ops...
-            setTimeout(() =>
+        const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
+        CABLES.ajax(
+            blueprintUrl,
+            function (err, data)
             {
-                deSerializeBlueprint(blueprintData, subPatchId, false);
+                if (!err)
+                {
+                    const blueprintData = JSON.parse(data);
+                    blueprintData.settings = op.patch.settings;
+                    deSerializeBlueprint(blueprintData, subPatchId, false);
+                }
+                else
+                {
+                    op.logError("failed to load blueprint from", blueprintUrl, err);
+                }
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
                 if (wasPasted)
                 {
                     wasPasted = false;
                 }
-            }, 0);
-        }
-        else
-        {
-            const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
-            CABLES.ajax(
-                blueprintUrl,
-                function (err, data)
-                {
-                    if (!err)
-                    {
-                        const blueprintData = JSON.parse(data);
-                        blueprintData.settings = op.patch.settings;
-                        deSerializeBlueprint(blueprintData, subPatchId, false);
-                    }
-                    else
-                    {
-                        op.logError("failed to load blueprint from", blueprintUrl, err);
-                    }
-                    loadingOut.set(false);
-                    op.patch.loading.finished(loadingId);
-                    if (wasPasted)
-                    {
-                        wasPasted = false;
-                    }
-                }
-            );
-        }
+            }
+        );
     }
 }
 
