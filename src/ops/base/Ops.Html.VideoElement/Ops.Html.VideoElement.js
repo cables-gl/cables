@@ -3,6 +3,7 @@ const
     src = op.inUrl("File", null, ""),
     elId = op.inString("ID"),
     play = op.inBool("Play"),
+    inautoplay = op.inBool("Autoplay", false),
     controls = op.inBool("Controls", true),
     active = op.inBool("Active", true),
     loop = op.inBool("Loop", false),
@@ -32,6 +33,8 @@ function init()
 
     inStyle.onChange =
     src.onChange =
+    inautoplay.onChange =
+    updateAttribs.onChange =
     elId.onChange = updateSoon;
 
     active.onChange = updateActive;
@@ -156,6 +159,9 @@ function updateAttribs()
     element.setAttribute("style", inStyle.get());
     element.setAttribute("src", src.get());
     element.setAttribute("id", elId.get());
+
+    if (inautoplay.get())element.setAttribute("autoplay", "");
+    else element.removeAttribute("autoplay");
 }
 
 function removeEle()

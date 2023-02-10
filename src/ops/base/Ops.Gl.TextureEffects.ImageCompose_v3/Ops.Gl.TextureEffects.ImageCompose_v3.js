@@ -242,9 +242,9 @@ function doRender()
 
     trigger.trigger();
 
-    texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    // texOut.set(CGL.Texture.getEmptyTexture(cgl));
 
-    texOut.set(effect.getCurrentSourceTexture());
+    texOut.setRef(effect.getCurrentSourceTexture());
 
     effect.endEffect();
 

@@ -18,8 +18,8 @@ inTex.onChange = () =>
 {
     const t = inTex.get();
 
-    outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-    outTex.set(t);
+    // outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
+    outTex.setRef(t);
 
     let title = "";
 

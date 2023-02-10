@@ -1,0 +1,33 @@
+{
+    "id": "d008270a-6375-4fbc-9a2b-7b6d71239071",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675783842815
+        },
+        {
+            "message": "Ops.User.pandur.StringToLineNumberArray renamed to Ops.Array.StringToLineNumberArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675953496095
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1675783933584,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.StringToLineNumberArray"
+    }
+}
