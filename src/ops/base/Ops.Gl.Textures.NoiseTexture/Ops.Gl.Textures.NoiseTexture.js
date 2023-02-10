@@ -145,7 +145,7 @@ function update()
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
     if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    let tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp });
+    let tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp, "name": "noisetexture" });
 
     tex.initFromData(pixels, width, height, cgl_filter, cgl_wrap);
 
