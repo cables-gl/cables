@@ -45,6 +45,15 @@ function doTransform()
         outArr.set(null);
         return;
     }
+
+    if (arr.length / 3 % 1 != 0.0)
+    {
+        op.setUiError("invalidelength", "invalid array length!");
+        outArr.set(null);
+        return;
+    }
+    else op.setUiError("invalidelength", null);
+
     if (needsCalc)
     {
         resultArr.length = arr.length;
@@ -88,8 +97,7 @@ function doTransform()
         }
 
         needsCalc = false;
-        outArr.set(null);
-        outArr.set(resultArr);
+        outArr.setRef(resultArr);
     }
     next.trigger();
 }
