@@ -35,18 +35,9 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Filter"
-            },
-            {
                 "type": 0,
                 "name": "Wrap index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Wrap",
-                "subType": "string"
             }
         ],
         "portsOut": [

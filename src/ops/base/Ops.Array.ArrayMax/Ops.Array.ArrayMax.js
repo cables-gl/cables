@@ -4,6 +4,7 @@ const outArray = op.outArray("Array Out");
 
 let newArr = [];
 outArray.set(newArr);
+op.toWorkPortsNeedToBeLinked(inArray);
 
 inValue.onChange = inArray.onChange = function ()
 {
