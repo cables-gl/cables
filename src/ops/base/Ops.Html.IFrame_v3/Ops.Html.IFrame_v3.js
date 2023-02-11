@@ -47,6 +47,7 @@ function updateAttribs()
     element.setAttribute("style", inStyle.get());
     element.setAttribute("src", src.get());
     element.setAttribute("id", elId.get());
+    element.setAttribute("allowfullscreen", "allowfullscreen");
 }
 
 function removeEle()

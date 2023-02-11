@@ -14,5 +14,20 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1675886251547
+    "created": 1675886251547,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Audiocontext State"
+            }
+        ],
+        "name": "Ops.Dev.WebAudioContextStart"
+    }
 }
