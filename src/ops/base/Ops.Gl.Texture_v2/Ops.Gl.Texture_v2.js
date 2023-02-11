@@ -132,8 +132,8 @@ function realReload(nocache)
 
                     if (tex)tex.delete();
                     tex = newTex;
-                    textureOut.set(null);
-                    textureOut.set(tex);
+                    // textureOut.set(null);
+                    textureOut.setRef(tex);
 
                     loading.set(false);
                     loaded.set(true);

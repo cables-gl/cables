@@ -217,14 +217,14 @@ exec.onTriggered = () =>
     lastY = moveY.get();
     lastZ = moveZ.get();
 
-    outTexPos.set(emptyTex);
-    outTexPos.set(tcPos.fb.getTextureColorNum(0));
+    // outTexPos.set(emptyTex);
+    outTexPos.setRef(tcPos.fb.getTextureColorNum(0));
 
-    outTexTiming.set(emptyTex);
-    outTexTiming.set(tcPos.fb.getTextureColorNum(2));
+    // outTexTiming.set(emptyTex);
+    outTexTiming.setRef(tcPos.fb.getTextureColorNum(2));
 
-    outVelocity.set(texPos);
-    outVelocity.set(tcPos.fb.getTextureColorNum(3));
+    // outVelocity.set(texPos);
+    outVelocity.setRef(tcPos.fb.getTextureColorNum(3));
 
     outPassThrough1.set(tcPos.fb.getTextureColorNum(4));
 

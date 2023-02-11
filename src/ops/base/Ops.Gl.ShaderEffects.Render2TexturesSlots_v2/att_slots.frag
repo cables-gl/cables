@@ -145,7 +145,6 @@
 #endif
 
 #ifdef SLOT_TEX_0_MATERIALID
-
     outColor0=vec4(materialId,instIdx,0.0,1.);
 #endif
 #ifdef SLOT_TEX_1_MATERIALID

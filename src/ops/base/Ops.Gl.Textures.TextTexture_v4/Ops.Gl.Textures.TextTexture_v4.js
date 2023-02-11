@@ -379,7 +379,7 @@ function refresh()
 
     outRatio.set(ctx.canvas.height / ctx.canvas.width);
     outLines.set(strings.length);
-    textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+    // textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
     let cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
@@ -397,6 +397,6 @@ function refresh()
 
     tex.flip = false;
     tex.initTexture(fontImage, f);
-    textureOut.set(tex);
+    textureOut.setRef(tex);
     tex.unpackAlpha = true;
 }

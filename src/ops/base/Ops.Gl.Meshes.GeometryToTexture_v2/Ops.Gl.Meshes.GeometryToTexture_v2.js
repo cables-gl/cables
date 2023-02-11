@@ -19,6 +19,7 @@ const
     outTex = op.outTexture("Texture");
 
 op.setPortGroup("Texture settings", [tfilter, twrap, inWidth, inSize]);
+op.toWorkPortsNeedToBeLinked(inGeom, exec);
 
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
@@ -151,8 +152,8 @@ function updateSize()
 function initFb()
 {
     if (fb) fb = fb.delete();
-    outTex.set(CGL.Texture.getEmptyTexture(cgl));
-    if (size < 1) return;
+
+    if (size < 1) return outTex.set(CGL.Texture.getEmptyTexture(cgl));
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
@@ -194,7 +195,7 @@ exec.onTriggered = function ()
 
     if (!fb || needInitFb) initFb();
     if (!needsUpdate && !inUpdateAlways.get()) return next.trigger();
-    if (outTex.get() != CGL.Texture.getEmptyTexture(cgl)) outTex.set(CGL.Texture.getEmptyTexture(cgl));
+    // if (outTex.get() != CGL.Texture.getEmptyTexture(cgl)) outTex.set(CGL.Texture.getEmptyTexture(cgl));
 
     const geo = inGeom.get();
 
@@ -292,7 +293,7 @@ function render()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
-    outTex.set(fb.getTextureColor());
+    outTex.setRef(fb.getTextureColor());
 
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 }

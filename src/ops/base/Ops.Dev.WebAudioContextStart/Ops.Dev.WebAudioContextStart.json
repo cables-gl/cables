@@ -1,0 +1,33 @@
+{
+    "id": "0a4741d4-92d7-4ac6-a5c4-05af73b050f2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675886218867
+        },
+        {
+            "message": "Ops.User.pandur.WebAudioContextStart renamed to Ops.Dev.WebAudioContextStart",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675886529716
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1675886251547,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Audiocontext State"
+            }
+        ],
+        "name": "Ops.Dev.WebAudioContextStart"
+    }
+}
