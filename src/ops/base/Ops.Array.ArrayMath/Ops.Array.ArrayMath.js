@@ -4,10 +4,10 @@ const inArray_0 = op.inArray("array 0"),
     outArray = op.outArray("Array result"),
     outArrayLength = op.outNumber("Array length");
 
+op.toWorkPortsNeedToBeLinked(inArray_0);
+
 let mathFunc;
-
 let showingError = false;
-
 let mathArray = [];
 
 inArray_0.onChange = NumberIn.onChange = update;
@@ -58,7 +58,6 @@ function update()
         mathArray[i] = mathFunc(array0[i], num);
     }
 
-    outArray.set(null);
-    outArray.set(mathArray);
+    outArray.setRef(mathArray);
     outArrayLength.set(mathArray.length);
 }

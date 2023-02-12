@@ -18,13 +18,9 @@ op.renderVizLayer = (ctx, layer) =>
     const arr = inArr.get() || [];
     let stride = 1;
 
-    if (!arr)
-    {
-        op.setUiAttrib({ "extendTitle": "" });
-        return;
-    }
-
-    op.setUiAttrib({ "extendTitle": "length: " + arr.length });
+    if (inArr.get() === null) op.setUiAttrib({ "extendTitle": "null" });
+    else if (inArr.get() === undefined) op.setUiAttrib({ "extendTitle": "undefined" });
+    else op.setUiAttrib({ "extendTitle": "length: " + arr.length });
 
     if (inArr.links.length > 0 && inArr.links[0].getOtherPort(inArr))
         stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || 1;
@@ -88,6 +84,9 @@ op.renderVizLayer = (ctx, layer) =>
                 layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
         }
     }
+
+    if (inArr.get() === null) ctx.fillText("null", layer.x / layer.scale + 10, layer.y / layer.scale + 10 + padding);
+    else if (inArr.get() === undefined) ctx.fillText("undefined", layer.x / layer.scale + 10, layer.y / layer.scale + 10 + padding);
 
     const gradHeight = 30;
 

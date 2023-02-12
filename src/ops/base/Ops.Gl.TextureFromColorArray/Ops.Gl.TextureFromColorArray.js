@@ -19,6 +19,8 @@ let pixels = new Uint8Array(8);
 let cgl_filter = CGL.Texture.FILTER_NEAREST;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 
+op.toWorkPortsNeedToBeLinked(inExe, inArr);
+
 tfilter.onChange =
     wrap.onChange =
     inWidth.onChange =
