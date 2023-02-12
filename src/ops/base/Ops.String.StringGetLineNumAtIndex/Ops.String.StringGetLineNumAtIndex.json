@@ -1,0 +1,50 @@
+{
+    "id": "20e3a5aa-c75e-4300-ba5a-7200e4845c83",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675780486501
+        },
+        {
+            "message": "Ops.User.pandur.StringGetIndexLineNum renamed to Ops.User.pandur.StringGetLineNumAtIndex",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675780763855
+        },
+        {
+            "message": "Ops.User.pandur.StringGetLineNumAtIndex renamed to Ops.String.StringGetLineNumAtIndex",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1676210493233
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1675780546477,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Line",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.StringGetLineNumAtIndex"
+    }
+}
