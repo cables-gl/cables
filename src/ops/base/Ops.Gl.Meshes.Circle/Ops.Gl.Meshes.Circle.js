@@ -148,7 +148,11 @@ function calc()
                 [posx, posy, 0]
             );
 
-            texCoords.push(posxTexCoord, posyTexCoord, oldPosXTexCoord, oldPosYTexCoord, posxTexCoordIn, posyTexCoordIn);
+            texCoords.push(
+                posxTexCoordIn, posyTexCoordIn,
+                oldPosXTexCoord, oldPosYTexCoord,
+                posxTexCoord, posyTexCoord
+            );
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
             biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0);
