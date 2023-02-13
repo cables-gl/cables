@@ -18,7 +18,7 @@ inStr.onChange = inIdx.onChange = () =>
 
     for (let i = 0; i < str.length; i++)
     {
-        if (i - off == idx)
+        if (i == idx)
         {
             found = true;
             break;
@@ -26,7 +26,7 @@ inStr.onChange = inIdx.onChange = () =>
         if (str.charAt(i) == "\n")
         {
             line++;
-            off++;
+            // off++;
         }
     }
 
