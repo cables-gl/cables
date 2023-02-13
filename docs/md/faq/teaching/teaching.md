@@ -19,7 +19,7 @@ We're always looking for educational institutions who would like to use cables i
 
 Please send us an [email](mailto:hi@undev.de) or contact us on (discord)[https://discord.gg/AGTarWv] if you'd like us to help you getting started.
 
-## Cables was used in the classrooms of these insitutions:
+## Cables was used in the classrooms of these institutions:
 
 - [Akademie für Theater und Digitalität](https://theater.digital/), Dortmund, Germany
 - [Ecole Supérieure d'Ingénieurs Léonard de Vinci](https://www.esilv.fr/), France
