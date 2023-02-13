@@ -97,6 +97,7 @@ function generateCone(base, height, stacks, slices)
     geom.glPrimitive = cgl.gl.TRIANGLE_STRIP;
     geom.tangents = [];
     geom.biTangents = [];
+    geom.vertexNormals = [];
 
     const table = circleTable(-slices + 1, false);
 

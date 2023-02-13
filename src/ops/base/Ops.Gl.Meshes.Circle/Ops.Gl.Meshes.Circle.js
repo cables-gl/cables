@@ -143,9 +143,9 @@ function calc()
             }
 
             faces.push(
-                [posx, posy, 0],
+                [0, 0, 0],
                 [oldPosX, oldPosY, 0],
-                [0, 0, 0]
+                [posx, posy, 0]
             );
 
             texCoords.push(posxTexCoord, posyTexCoord, oldPosXTexCoord, oldPosYTexCoord, posxTexCoordIn, posyTexCoordIn);

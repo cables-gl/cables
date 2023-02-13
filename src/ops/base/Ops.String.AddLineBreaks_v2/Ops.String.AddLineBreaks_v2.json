@@ -1,0 +1,53 @@
+{
+    "id": "a9a23551-fabb-4014-8d25-4278d729ea5a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1585122285914
+        },
+        {
+            "message": "cloned op from Ops.String.AddLineBreaks",
+            "author": "pandur",
+            "date": 1676113556748
+        },
+        {
+            "message": "Ops.User.pandur.AddLineBreaks2 renamed to Ops.String.AddLineBreaks_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1676113605687
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1676113556748,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Max Characters per Line",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.AddLineBreaks"
+    },
+    "summary": "Insert a line break in a string of words",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "4f-D16",
+    "caniusequery": ""
+}

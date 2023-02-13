@@ -1,5 +1,5 @@
 // inputs
-const parentPort = op.inObject("link");
+const parentPort = op.inObject("link", "element");
 const labelPort = op.inString("Text", "Select File:");
 const inId = op.inValueString("Id", "");
 const inVisible = op.inBool("Visible", true);

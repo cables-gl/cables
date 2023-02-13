@@ -1,14 +1,25 @@
 {
-    "id": "7984c105-5b33-471a-833c-0fb310916e30",
+    "id": "62dcb5c0-7036-4318-803e-a8117ce70691",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
             "date": 1553685665389
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureFromColorArray",
+            "author": "pandur",
+            "date": 1676027271197
+        },
+        {
+            "message": "Ops.User.pandur.TextureFromColorArray2 renamed to Ops.Gl.TextureFromColorArray_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1676029150176
         }
     ],
     "authorName": "pandur",
-    "created": 1553685673981,
+    "created": 1676027271196,
     "layout": {
         "portsIn": [
             {
@@ -31,6 +42,11 @@
             },
             {
                 "type": 0,
+                "name": "Pixel Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Filter index",
                 "subType": "integer"
             },
@@ -38,6 +54,11 @@
                 "type": 0,
                 "name": "Wrap index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Fill Up",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -51,7 +72,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Gl.TextureFromColorArray"
+        "name": "Ops.User.pandur.TextureFromColorArray2"
     },
     "summary": "create a texture from an array of number values",
     "youtubeid": "",

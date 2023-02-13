@@ -19,6 +19,7 @@ const
     outTex = op.outTexture("Texture");
 
 op.setPortGroup("Texture settings", [tfilter, twrap, inWidth, inSize]);
+op.toWorkPortsNeedToBeLinked(inGeom, exec);
 
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
