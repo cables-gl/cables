@@ -16,6 +16,11 @@
                 "type": 0,
                 "name": "New Line",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

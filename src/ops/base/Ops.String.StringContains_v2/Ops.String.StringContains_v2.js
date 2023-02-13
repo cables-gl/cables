@@ -11,7 +11,7 @@ exec();
 
 function exec()
 {
-    if (inStr.get() && inValue.get().length > 0)
+    if (inStr.get() && inValue.get() && inValue.get().length > 0)
     {
         const index = inStr.get().indexOf(inValue.get());
         outIndex.set(index);

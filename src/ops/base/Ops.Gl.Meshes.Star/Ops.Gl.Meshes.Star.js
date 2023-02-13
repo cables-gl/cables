@@ -125,9 +125,9 @@ function calc()
         if (fill.get())
         {
             faces.push(
-                [posx, posy, 0],
+                [0, 0, 0],
                 [oldPosX, oldPosY, 0],
-                [0, 0, 0]
+                [posx, posy, 0]
             );
             normals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);

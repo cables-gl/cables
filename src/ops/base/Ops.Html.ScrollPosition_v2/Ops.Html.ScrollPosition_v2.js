@@ -1,5 +1,8 @@
 const
     inEle = op.inObject("Element", null, "element"),
+    inScrollTop = op.inTriggerButton("Scroll to top"),
+    inUpdate = op.inTriggerButton("Update"),
+
     sleft = op.addOutPort(new CABLES.Port(op, "left")),
     stop = op.addOutPort(new CABLES.Port(op, "top")),
     scrollPercentageX = op.outNumber("Percentage X"),
@@ -9,6 +12,8 @@ let el = null;
 let oldEle = null;
 
 updateScroll();
+
+inUpdate.onTriggered = updateScroll;
 
 inEle.onChange = () =>
 {
@@ -28,7 +33,7 @@ function updateScroll()
         el = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body);
     }
 
-    if (!el) return;
+    if (!el) return console.log("no ele scrollpos!");
     sleft.set(el.scrollLeft);
     stop.set(el.scrollTop);
 
@@ -40,8 +45,9 @@ function updateScroll()
     scrollPercentageX.set(px || 0);
 }
 
-const inScrollTop = op.inTriggerButton("Scroll to top");
 inScrollTop.onTriggered = () =>
 {
-    if (el)el.scrollTo({ "top": 0, "behaviour": "auto" });
+    if (el)el.scrollTo({ "top": Math.random() * 2, "behaviour": "smooth" });
+    // else console.log("scrollpos no element");
+    updateScroll();
 };
