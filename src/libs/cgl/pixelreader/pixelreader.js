@@ -133,7 +133,7 @@ class PixelReader
                     gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
                     gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
 
-                    this._cgl.profileData.profileFencedPixelRead++;
+                    cgl.profileData.profileFencedPixelRead++;
 
                     if (finishedcb) finishedcb(this._pixelData);
                 }
