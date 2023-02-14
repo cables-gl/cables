@@ -45,6 +45,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.StringGetLineNumAtIndex"
+        "name": "Ops.String.StringGetLineNumAtIndex"
     }
 }

@@ -9,6 +9,10 @@
             {
                 "type": 1,
                 "name": "Scroll to top"
+            },
+            {
+                "type": 1,
+                "name": "Update"
             }
         ],
         "portsOut": [
