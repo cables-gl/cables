@@ -40,7 +40,6 @@ CABLES.now = now;
 CABLES.internalNow = internalNow;
 CABLES.BranchStack = BranchStack;
 CABLES.Branch = Branch;
-CABLES.blueprints = {};
 
 CABLES = Object.assign(CABLES,
     base64,

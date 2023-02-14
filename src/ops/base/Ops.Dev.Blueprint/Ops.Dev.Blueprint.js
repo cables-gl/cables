@@ -155,7 +155,7 @@ activeIn.onChange = () =>
         if (activeIn.get())
         {
             op.setUiError("inactive", null);
-            update();
+            // update();
         }
         else
         {
@@ -167,7 +167,7 @@ activeIn.onChange = () =>
     }
 };
 
-op.onLoaded = () =>
+op.init = () =>
 {
     if (op.uiAttribs)
     {
@@ -175,6 +175,7 @@ op.onLoaded = () =>
     }
     cleanupPorts();
     restorePorts();
+    // update();
 };
 
 op.onDelete = removeImportedOps;
@@ -189,40 +190,15 @@ function update()
 
     loadingId = op.patch.loading.start("blueprint", blueprintId);
 
-    if (CABLES.blueprints && CABLES.blueprints[blueprintId])
+    if (patch.isEditorMode())
     {
-        console.log("FROM LOCAL CACHE", blueprintId);
-        const blueprintData = CABLES.blueprints[blueprintId];
-        blueprintData.settings = op.patch.settings;
-        // for some reason we have to do this in a 0ms timeout to make
-        // sure nested blueprints are not loaded before this one created all the ops...
-        setTimeout(() =>
+        const doneCb = (err, serializedOps) =>
         {
-            deSerializeBlueprint(blueprintData, subPatchId, false);
-            loadingOut.set(false);
-            op.patch.loading.finished(loadingId);
-            if (wasPasted)
-            {
-                wasPasted = false;
-            }
-        }, 0);
-    }
-    else if (patch.isEditorMode())
-    {
-        const options = {
-            "blueprintId": blueprintId
-        };
-
-        CABLES.sandbox.getBlueprintOps(options, (err, response) =>
-        {
-            op.setUiError("fetchOps", null);
             if (!err)
             {
                 removeImportedOps();
                 const blueprintData = {};
-                blueprintData.ops = response.data.ops;
-                blueprintData.settings = op.patch.settings;
-                CABLES.blueprints[blueprintId] = blueprintData;
+                blueprintData.ops = serializedOps;
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
             else
@@ -246,7 +222,54 @@ function update()
             {
                 wasPasted = false;
             }
-        });
+        };
+
+        if (patchId === gui.patchId)
+        {
+            const subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
+            subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
+
+            const serializedOps = [];
+            subPatchOps.forEach((subPatchOp) =>
+            {
+                serializedOps.push(subPatchOp.getSerialized());
+            });
+            serializedOps.forEach((serializedOp) =>
+            {
+                if (!serializedOp.storage) serializedOp.storage = {};
+                if (!serializedOp.storage.blueprint) serializedOp.storage.blueprint = {};
+                serializedOp.storage.blueprint.patchId = patchId;
+
+                if (CABLES.Op.isSubpatchOp(serializedOp.objName))
+                {
+                    const subPatchPort = serializedOp.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
+                    if (subPatchPort)
+                    {
+                        serializedOp.storage.blueprint.id = blueprintId;
+                        serializedOp.storage.blueprint.subpatchId = subPatchId;
+                        serializedOp.storage.blueprint.isParentSubPatch = true;
+
+                        serializedOp.uiAttribs.hidden = true;
+                        if (!serializedOp.uiAttribs.translate) serializedOp.uiAttribs.translate = {};
+                        serializedOp.uiAttribs.translate.x = -9999999;
+                        serializedOp.uiAttribs.translate.y = -9999999;
+                    }
+                }
+            });
+            doneCb(null, serializedOps);
+        }
+        else
+        {
+            const options = {
+                "blueprintId": blueprintId
+            };
+
+            CABLES.sandbox.getBlueprintOps(options, (err, response) =>
+            {
+                op.setUiError("fetchOps", null);
+                doneCb(err, err ? [] : response.data.ops);
+            });
+        }
     }
     else if (CABLES.talkerAPI)
     {
@@ -256,7 +279,6 @@ function update()
             if (options.blueprint && options.blueprint.data.blueprintOpId === op.id)
             {
                 const blueprintData = options.blueprint;
-                blueprintData.settings = op.patch.settings;
                 blueprintData.ops = blueprintData.data.ops;
                 deSerializeBlueprint(blueprintData, subPatchId, false);
                 loadingOut.set(false);
@@ -265,10 +287,10 @@ function update()
                 {
                     wasPasted = false;
                 }
-                CABLES.talkerAPI.removeEventListener(callbackTalkerApi);
+                CABLES.talkerAPI.off(callbackTalkerApi);
             }
         };
-        CABLES.talkerAPI.addEventListener("blueprint", callbackTalkerApi);
+        CABLES.talkerAPI.on("blueprint", callbackTalkerApi);
         CABLES.talkerAPI.send("sendBlueprint", { "url": "/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch });
     }
     else
@@ -282,7 +304,6 @@ function update()
                 if (!err)
                 {
                     const blueprintData = JSON.parse(data);
-                    blueprintData.settings = op.patch.settings;
                     deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else
@@ -313,9 +334,6 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 
             gui.serverOps.loadProjectDependencies(data, () =>
             {
-                data.settings = op.patch.settings;
-                data.namespace = op.patch.namespace;
-                data.name = op.patch.name;
                 data = CABLES.Patch.replaceOpIds(data, op.uiAttribs.subPatch);
                 const parentSubPatch = data.ops.find((op) =>
                 {
@@ -330,6 +348,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                     const patchIdPort = parentSubPatch.portsIn.find((port) => { return port.name === "patchId"; });
                     if (patchIdPort) subpatchInstance = patchIdPort.value;
                 }
+
                 op.uiAttribs.subpatchInstance = subpatchInstance;
                 op.patch.deSerialize(data, false);
                 const originalSubPatchId = gui.patchView.getCurrentSubPatch();
@@ -660,7 +679,8 @@ function savePortData()
                 try
                 {
                     JSON.stringify(portValue);
-                } catch (e)
+                }
+                catch (e)
                 {
                     portValue = null;
                 }
@@ -681,3 +701,24 @@ function savePortData()
     const serializedPortsData = JSON.stringify(newPortsData);
     portsData.set(serializedPortsData);
 }
+
+function getLocalParentSubPatchOp(subPatchId)
+{
+    if (!subPatchId) return null;
+    return op.patch.ops.find((op) =>
+    {
+        if (CABLES.Op.isSubpatchOp(op.objName))
+        {
+            const subPatchPort = op.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
+            if (subPatchPort) return true;
+        }
+    });
+}
+
+
+let patchLoadListener = op.patch.on("patchLoadEnd", () =>
+{
+    op.patch.off(patchLoadListener);
+    patchLoadListener = null;
+    update();
+});
