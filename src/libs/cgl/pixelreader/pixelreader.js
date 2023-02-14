@@ -107,6 +107,7 @@ class PixelReader
             gl.bufferData(gl.PIXEL_PACK_BUFFER, this._pixelData.byteLength, gl.DYNAMIC_READ);
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
+            cgl.profileData.profileFencedPixelRead++;
 
             gl.readPixels(
                 x, y,
@@ -133,7 +134,6 @@ class PixelReader
                     gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, this._pixelData);
                     gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
 
-                    cgl.profileData.profileFencedPixelRead++;
 
                     if (finishedcb) finishedcb(this._pixelData);
                 }
