@@ -19,6 +19,7 @@ class ProfileData
         this.profileGenMipMap = 0;
         this.profileOnAnimFrameOps = 0;
 
+        this.profileFencedPixelRead = 0;
         this.profileMainloopMs = 0;
         this.profileMeshDraw = 0;
         this.profileTextureEffect = 0;
