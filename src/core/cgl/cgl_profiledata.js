@@ -58,6 +58,7 @@ class ProfileData
         this.profileTextureEffect = 0;
         this.profileTexPreviews = 0;
         this.profileMeshNumElements = 0;
+        this.profileFencedPixelRead = 0;
     }
 
     clearGlQuery()
