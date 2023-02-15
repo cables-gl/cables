@@ -53,9 +53,7 @@ render.onLinkChanged = function ()
     if (!render.isLinked())
     {
         geomOut.set(null);
-        return;
     }
-    buildMesh();
 };
 
 render.onTriggered = function ()
@@ -114,7 +112,8 @@ function buildMesh()
     else meshvalid = true;
 
     if (mesh)mesh.dispose();
-    mesh = new CGL.Mesh(cgl, geom);
+    mesh = op.patch.cg.createMesh(geom);
+
     geomOut.set(null);
     geomOut.set(geom);
 
@@ -128,38 +127,7 @@ op.onDelete = function ()
 
 function sideMappedCube(geom, x, y, z, nx, ny, nz)
 {
-    geom.vertices = [
-        // Front face
-        nx, ny, z,
-        x, ny, z,
-        x, y, z,
-        nx, y, z,
-        // Back face
-        nx, ny, nz,
-        nx, y, nz,
-        x, y, nz,
-        x, ny, nz,
-        // Top face
-        nx, y, nz,
-        nx, y, z,
-        x, y, z,
-        x, y, nz,
-        // Bottom face
-        nx, ny, nz,
-        x, ny, nz,
-        x, ny, z,
-        nx, ny, z,
-        // Right face
-        x, ny, nz,
-        x, y, nz,
-        x, y, z,
-        x, ny, z,
-        // zeft face
-        nx, ny, nz,
-        nx, ny, z,
-        nx, y, z,
-        nx, y, nz
-    ];
+    addAttribs(geom, x, y, z, nx, ny, nz);
 
     const bias = mappingBias.get();
 
@@ -203,109 +171,11 @@ function sideMappedCube(geom, x, y, z, nx, ny, nz)
         fone - bias, 0 + bias,
         fzero + bias, 0 + bias,
     ]);
-
-    geom.vertexNormals = new Float32Array([
-        // Front face
-        0.0, 0.0, 1.0,
-        0.0, 0.0, 1.0,
-        0.0, 0.0, 1.0,
-        0.0, 0.0, 1.0,
-
-        // Back face
-        0.0, 0.0, -1.0,
-        0.0, 0.0, -1.0,
-        0.0, 0.0, -1.0,
-        0.0, 0.0, -1.0,
-
-        // Top face
-        0.0, 1.0, 0.0,
-        0.0, 1.0, 0.0,
-        0.0, 1.0, 0.0,
-        0.0, 1.0, 0.0,
-
-        // Bottom face
-        0.0, -1.0, 0.0,
-        0.0, -1.0, 0.0,
-        0.0, -1.0, 0.0,
-        0.0, -1.0, 0.0,
-
-        // Right face
-        1.0, 0.0, 0.0,
-        1.0, 0.0, 0.0,
-        1.0, 0.0, 0.0,
-        1.0, 0.0, 0.0,
-
-        // Left face
-        -1.0, 0.0, 0.0,
-        -1.0, 0.0, 0.0,
-        -1.0, 0.0, 0.0,
-        -1.0, 0.0, 0.0
-    ]);
-    geom.tangents = new Float32Array([
-
-        // front face
-        -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
-        // back face
-        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
-        // top face
-        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
-        // bottom face
-        -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
-        // right face
-        0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
-        // left face
-        0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1
-    ]);
-    geom.biTangents = new Float32Array([
-        // front face
-        0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
-        // back face
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
-        // top face
-        0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
-        // bottom face
-        0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
-        // right face
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
-        // left face
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0
-    ]);
 }
 
 function cubeMappedCube(geom, x, y, z, nx, ny, nz)
 {
-    geom.vertices = [
-        // Front face
-        nx, ny, z,
-        x, ny, z,
-        x, y, z,
-        nx, y, z,
-        // Back face
-        nx, ny, nz,
-        nx, y, nz,
-        x, y, nz,
-        x, ny, nz,
-        // Top face
-        nx, y, nz,
-        nx, y, z,
-        x, y, z,
-        x, y, nz,
-        // Bottom face
-        nx, ny, nz,
-        x, ny, nz,
-        x, ny, z,
-        nx, ny, z,
-        // Right face
-        x, ny, nz,
-        x, y, nz,
-        x, y, z,
-        x, ny, z,
-        // zeft face
-        nx, ny, nz,
-        nx, ny, z,
-        nx, y, z,
-        nx, y, nz
-    ];
+    addAttribs(geom, x, y, z, nx, ny, nz);
 
     const sx = 0.25;
     const sy = 1 / 3;
@@ -367,8 +237,44 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
         flipx + sx * 0 + bias, 1.0 - sy * 2 + bias);
 
     geom.setTexCoords(tc);
+}
 
-    geom.vertexNormals = [
+function addAttribs(geom, x, y, z, nx, ny, nz)
+{
+    geom.vertices = [
+        // Front face
+        nx, ny, z,
+        x, ny, z,
+        x, y, z,
+        nx, y, z,
+        // Back face
+        nx, ny, nz,
+        nx, y, nz,
+        x, y, nz,
+        x, ny, nz,
+        // Top face
+        nx, y, nz,
+        nx, y, z,
+        x, y, z,
+        x, y, nz,
+        // Bottom face
+        nx, ny, nz,
+        x, ny, nz,
+        x, ny, z,
+        nx, ny, z,
+        // Right face
+        x, ny, nz,
+        x, y, nz,
+        x, y, z,
+        x, ny, z,
+        // zeft face
+        nx, ny, nz,
+        nx, ny, z,
+        nx, y, z,
+        nx, y, nz
+    ];
+
+    geom.vertexNormals = new Float32Array([
         // Front face
         0.0, 0.0, 1.0,
         0.0, 0.0, 1.0,
@@ -404,16 +310,16 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
         -1.0, 0.0, 0.0,
         -1.0, 0.0, 0.0,
         -1.0, 0.0, 0.0
-    ];
+    ]);
     geom.tangents = new Float32Array([
         // front face
-        -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
+        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
         // back face
         1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         // top face
-        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         // bottom face
-        -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
+        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         // right face
         0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
         // left face
@@ -421,16 +327,16 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
     ]);
     geom.biTangents = new Float32Array([
         // front face
-        0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
+        -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
         // back face
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
+        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         // top face
-        0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         // bottom face
-        0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
+        0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
         // right face
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
+        0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
         // left face
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0
+        0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1
     ]);
 }

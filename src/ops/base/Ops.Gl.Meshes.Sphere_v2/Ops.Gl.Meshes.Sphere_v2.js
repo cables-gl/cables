@@ -86,6 +86,13 @@ function buildMesh()
     geom.biTangents = biTangents;
     geom.verticesIndices = indices;
 
+    for (let i = 0; i < tangents.length; i += 3)
+    {
+        tangents[i + 0] = -tangents[i + 0];
+        tangents[i + 1] = tangents[i + 1];
+        tangents[i + 2] = -tangents[i + 2];
+    }
+
     outGeometry.set(null);
     outGeometry.set(geom);
 
