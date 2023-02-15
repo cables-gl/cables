@@ -80,6 +80,11 @@
             },
             {
                 "type": 0,
+                "name": "Ignore Infinity",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "nearplane",
                 "group": "Frustum",
                 "subType": "number"
@@ -121,7 +126,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.Fog_v4"
+        "name": "Ops.Gl.TextureEffects.Fog_v4"
     },
     "summary": "add post processing fog (nebula) to a scene",
     "issues": "",
