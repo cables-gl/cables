@@ -398,14 +398,18 @@ function makeBlueprint()
     bpOp.getPortByName("subPatchId").set(op.patchId.get());
     bpOp.getPortByName("active").set(true);
 
-    bpOp.uiAttr(
+    let attribs =
         {
             "translate":
             {
                 "x": op.uiAttribs.translate.x - 150,
                 "y": op.uiAttribs.translate.y
             }
-        });
+        };
+
+    if (CABLES.UI)attribs.subPatch = gui.patchView.getCurrentSubPatch();
+
+    bpOp.uiAttr(attribs);
 }
 
 op.rebuildListeners = () =>
