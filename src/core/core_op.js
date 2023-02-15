@@ -1503,4 +1503,9 @@ Op.isSubpatchOp = function (name)
     return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
 };
 
+Op.isBlueprintOp = function (name)
+{
+    return name && (name == "Ops.Dev.Blueprint" || name.startsWith("Ops.Dev.Blueprint_v"));
+};
+
 export { Op };
