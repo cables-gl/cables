@@ -4,7 +4,7 @@ const
     // inStart=op.inTriggerButton("Start Anim"),
     inDur = op.inFloat("Duration", 1),
     next = op.outTrigger("Next"),
-    outArr = op.outArray("Matrix");
+    outArr = op.outArray("Matrix", 4);
 
 let lastTime = 0;
 let startTime = 0;

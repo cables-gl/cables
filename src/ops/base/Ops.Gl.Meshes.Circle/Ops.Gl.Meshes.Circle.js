@@ -155,7 +155,7 @@ function calc()
             );
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
-            biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0);
+            biTangents.push(0, -1, 0, 0, -1, 0, 0, -1, 0);
 
             oldPosXTexCoord = posxTexCoord;
             oldPosYTexCoord = posyTexCoord;
@@ -229,8 +229,8 @@ function calc()
                     1, 0, 0, 1, 0, 0, 1, 0, 0
                 );
                 biTangents.push(
-                    0, 1, 0, 0, 1, 0, 0, 1, 0,
-                    0, 1, 0, 0, 1, 0, 0, 1, 0
+                    0, 0, -1, 0, 0, -1, 0, 0, -1,
+                    0, 0, -1, 0, 0, -1, 0, 0, -1
                 );
             }
 
@@ -262,7 +262,7 @@ function calc()
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();
     mesh = null;
-    mesh = new CGL.Mesh(cgl, geom);
+    mesh = op.patch.cg.createMesh(geom);
     needsCalc = false;
 }
 
