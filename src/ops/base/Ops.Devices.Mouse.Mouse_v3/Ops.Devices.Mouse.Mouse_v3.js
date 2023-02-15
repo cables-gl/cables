@@ -65,8 +65,11 @@ function setValue(x, y)
         if (listenerElement == document.body)
         {
             w = listenerElement.clientWidth / cgl.pixelDensity;
-            h = listenerElement.clientHeight / cgl.pixelDensity;
+            h = Math.max(window.innerHeight, document.body.clientHeight) / cgl.pixelDensity;
         }
+
+        w = w || 1;
+        h = h || 1;
 
         if (normalize == 1)
         {

@@ -4,6 +4,7 @@ const
     inX = op.inInt("X", 0),
     inY = op.inInt("Y", 0),
     tex = op.inTexture("texture"),
+    inAct = op.inBool("Active", true),
     outTrigger = op.outTrigger("trigger"),
     outR = op.outNumber("Red"),
     outG = op.outNumber("Green"),
@@ -26,6 +27,7 @@ let pixelReader = new CGL.PixelReader();
 
 pUpdate.onTriggered = function ()
 {
+    if (!inAct.get()) return;
     const realTexture = tex.get();
     const gl = cgl.gl;
 

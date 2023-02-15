@@ -46,6 +46,11 @@
                 "type": 2,
                 "name": "texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

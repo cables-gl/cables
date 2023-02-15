@@ -19,6 +19,7 @@ class ProfileData
         this.profileGenMipMap = 0;
         this.profileOnAnimFrameOps = 0;
 
+        this.profileFencedPixelRead = 0;
         this.profileMainloopMs = 0;
         this.profileMeshDraw = 0;
         this.profileTextureEffect = 0;
@@ -57,6 +58,7 @@ class ProfileData
         this.profileTextureEffect = 0;
         this.profileTexPreviews = 0;
         this.profileMeshNumElements = 0;
+        this.profileFencedPixelRead = 0;
     }
 
     clearGlQuery()
