@@ -23,6 +23,7 @@ UNI sampler2D texMulColor;
 UNI sampler2D texMulMask;
 #endif
 
+UNI float smoothing;
 IN float texIndex;
 
 #ifdef SHADOW
@@ -83,7 +84,7 @@ void main()
 
 
     float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
-    sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));
+    sigDist *= dot(msdfUnit, (0.5+(smoothing-0.5))/fwidth(texCoord));
     opacity *= clamp(sigDist + 0.5, 0.0, 1.0);
 
     #ifdef BORDER

@@ -25,13 +25,15 @@ float map(float value, float min1, float max1, float min2, float max2) {
 }
 
 float CalcFogDensity(float depth) {
-    float newDepth = map(depth, nearPlane, farPlane, 0., 1.);
     float fogAmount = 1.0 - clamp((inFogEnd - depth) / (inFogEnd - inFogStart), 0.0, 1.0);
 
+    // float newDepth = map(depth, nearPlane, farPlane, 0., 1.);
     // EXPONENTIAL: fogAmount = 1. - exp(MAGIC_NUMBER * -inFogDensity * newDepth); // smoothstep(fogStart, fogEnd, newDepth));
     // EXP2: fogAmount = 1. - exp(-pow(MAGIC_NUMBER * inFogDensity * smoothstep(fogStart, fogEnd, newDepth), 2.0));
 
     fogAmount *= inFogDensity;
+
+
 
     return fogAmount;
 }
@@ -63,6 +65,13 @@ void main()
     // fogColor = mix(color, fogColor, fogAmount);
 
 
-    outColor = cgl_blendPixel(color, fogColor, inAmount);
+    #ifdef IGNORE_INF
+        if(depthFromTexture>0.99999) outColor=color;
+        else outColor = cgl_blendPixel(color, fogColor, inAmount);
+    #endif
+
+    #ifndef IGNORE_INF
+        outColor = cgl_blendPixel(color, fogColor, inAmount);
+    #endif
 
 }
