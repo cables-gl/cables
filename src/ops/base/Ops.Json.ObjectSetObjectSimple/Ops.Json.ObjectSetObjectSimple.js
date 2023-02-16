@@ -7,12 +7,6 @@ op.onDelete = removeKey;
 
 inObject.onLinkChanged =
 inValue.onChange =
-inKey.onChange = () =>
-{
-    removeKey();
-    update();
-    op.setUiAttrib({ "extendTitle": inKey.get() });
-};
 
 outObject.onLinkChanged =
 inObject.onChange = update;
@@ -24,11 +18,6 @@ let obj = {};
 function removeKey()
 {
     delete obj[currentKey];
-}
-
-function copyObject()
-{
-
 }
 
 function update()
@@ -44,3 +33,18 @@ function update()
     outObject.set(null);
     outObject.set(obj);
 }
+
+let oldKey = "";
+
+inKey.onChange = () =>
+{
+    if (!inKey.isLinked())
+    {
+        let obj = inObject.get();
+
+        if (obj) delete obj[oldKey];
+        op.setUiAttrib({ "extendTitle": inKey.get() });
+    }
+    oldKey = inKey.get();
+    update();
+};
