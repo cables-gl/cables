@@ -20,21 +20,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Key"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Value"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result Object"
             }
         ],

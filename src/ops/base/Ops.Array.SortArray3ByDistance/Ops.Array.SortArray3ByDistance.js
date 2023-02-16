@@ -1,6 +1,7 @@
 const
     inArr = op.inArray("Array"),
-    outArr = op.outArray("Result");
+    outArr = op.outArray("Result", null, 3),
+    outArrIdx = op.outArray("Result Index");
 
 function dist(x1, y1, z1, x2, y2, z2)
 {
@@ -27,7 +28,8 @@ inArr.onChange = function ()
             "y": arr[i + 1],
             "z": arr[i + 2],
             "found": false,
-            "pos": 0
+            "pos": 0,
+            "idx": i / 3
         };
     }
 
@@ -67,11 +69,16 @@ inArr.onChange = function ()
     });
 
     let outArray = [];
+    let indexArray = [];
     for (i = 0; i < data.length; i++)
     {
         outArray[i * 3 + 0] = data[i].x;
         outArray[i * 3 + 1] = data[i].y;
         outArray[i * 3 + 2] = data[i].z;
+
+        indexArray[i] = data[i].idx;
     }
     outArr.set(outArray);
+
+    outArrIdx.set(indexArray);
 };
