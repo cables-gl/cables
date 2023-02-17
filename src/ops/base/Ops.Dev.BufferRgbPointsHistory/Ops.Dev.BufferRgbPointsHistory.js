@@ -33,16 +33,14 @@ const
     uniCoords = new CGL.Uniform(tc.bgShader, "t", "texCoords", 1),
     uniRandoms = new CGL.Uniform(tc.bgShader, "t", "texRandoms", 2),
     uniOldTex = new CGL.Uniform(tc.bgShader, "t", "texOld", 3);
-    // uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect),
-    // uni2 = new CGL.Uniform(tc.bgShader, "f", "threshold", inThreshold);
 
 inWidth.onChange =
 inLines.onChange = () => { needsSetSize = true; };
 
 function setSize()
 {
-    numLines = inLines.get();
-    width = inWidth.get();
+    numLines = Math.max(1, inLines.get());
+    width = Math.max(1, inWidth.get());
 
     if (last)last.delete();
     last = new CGL.Texture(cgl, { "width": width, "height": numLines });
@@ -66,7 +64,7 @@ function genRandomTex()
         randomCoords[i * 4 + 3] = 1;
     }
 
-    texRandoms.initFromData(randomCoords, 1, numLines, CGL.Texture.FILTER_LINES, CGL.Texture.WRAP_REPEAT);
+    texRandoms.initFromData(randomCoords, 1, numLines, CGL.Texture.FILTER_NEAREST, CGL.Texture.WRAP_REPEAT);
 }
 
 exec.onTriggered = () =>
