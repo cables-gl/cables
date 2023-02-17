@@ -72,6 +72,10 @@ void main()
     #endif
 
 
+    #ifdef METHOD_COLLISION
+        col.xyz+=(( pos.xyz-areaPos )*strength*10.0*MOD_de);
+    #endif
+
 
     // vec4 noise
     // x: strngth

@@ -5,7 +5,6 @@ const
     inValue = op.inArray("Value");
 
 inObject.onChange =
-    inKey.onChange =
     inValue.onChange = update;
 
 function update()
@@ -18,3 +17,17 @@ function update()
     outObject.set(null);
     outObject.set(obj);
 }
+
+let oldKey = "";
+
+inKey.onChange = () =>
+{
+    if (!inKey.isLinked())
+    {
+        let obj = inObject.get();
+
+        if (obj) delete obj[oldKey];
+    }
+    oldKey = inKey.get();
+    update();
+};

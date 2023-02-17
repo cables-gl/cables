@@ -28,7 +28,7 @@ function update()
 {
     if (CABLES.UI)
     {
-        gui.setStateUnsaved();
+        gui.setStateUnsaved({ "op": op });
         op.uiAttr(
             {
                 "comment_title": inTitle.get() || " "

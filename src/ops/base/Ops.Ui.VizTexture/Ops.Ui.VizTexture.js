@@ -1,7 +1,7 @@
 const
     inTex = op.inTexture("Texture In"),
     inShowInfo = op.inBool("Show Info", false),
-    inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim", "Mask"], "Anim"),
+    inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim"], "Anim"),
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
@@ -32,7 +32,7 @@ function updateDefines()
 {
     if (!shader) return;
     shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
-    shader.toggleDefine("ANIM_BLINK", inVizRange.get() == "Blink");
+    // shader.toggleDefine("ANIM_BLINK", inVizRange.get() == "Blink");
     // shader.toggleDefine("ANIM_RANGE", inVizRange.get()=="Anim");
 }
 

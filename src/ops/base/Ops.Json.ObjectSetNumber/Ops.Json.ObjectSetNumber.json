@@ -12,26 +12,26 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Key"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result Object"
             }
         ],
-        "name": "Ops.Json.ObjectKeyNumber"
+        "name": "Ops.Json.ObjectSetNumber"
     },
     "summary": "set number at key in an object",
     "issues": "",

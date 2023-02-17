@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Sphere", "Box"], "Sphere"),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction"], "Point"),
+    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision"], "Point"),
     // , "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"
     inStrength = op.inFloat("Strength", 1),
     inMul = op.inFloat("Size", 1),
@@ -87,6 +87,7 @@ function updateDefines()
 
     shader.toggleDefine("METHOD_POINT", inMethod.get() == "Point");
     shader.toggleDefine("METHOD_DIR", inMethod.get() == "Direction");
+    shader.toggleDefine("METHOD_COLLISION", inMethod.get() == "Collision");
 
     scale_x.setUiAttribs({ "greyout": inArea.get() != "Box" });
     scale_y.setUiAttribs({ "greyout": inArea.get() != "Box" });
