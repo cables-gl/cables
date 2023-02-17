@@ -42,10 +42,10 @@ function setSize()
     numLines = Math.max(1, inLines.get());
     width = Math.max(1, inWidth.get());
 
-    if (last)last.delete();
+    // if (last)last.delete();
     last = new CGL.Texture(cgl, { "width": width, "height": numLines });
 
-    if (texRandoms)texRandoms.delete();
+    // if (texRandoms)texRandoms.delete();
     texRandoms = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "noisetexture" });
 
     randomCoords = new Float32Array(numLines * 4);
@@ -79,8 +79,8 @@ exec.onTriggered = () =>
     uniWidth.set(width);
 
     tc.bgShader.pushTexture(uniCoords, inTex.get().tex);
-    if (last) tc.bgShader.pushTexture(uniOldTex, last.tex);
-    if (texRandoms) tc.bgShader.pushTexture(uniRandoms, texRandoms.tex);
+    if (last.tex) tc.bgShader.pushTexture(uniOldTex, last.tex);
+    if (texRandoms.tex) tc.bgShader.pushTexture(uniRandoms, texRandoms.tex);
 
     const newTex = tc.copy(last);
 
@@ -91,3 +91,5 @@ exec.onTriggered = () =>
     outFpTex.setRef(newTex);
     next.trigger();
 };
+
+//
