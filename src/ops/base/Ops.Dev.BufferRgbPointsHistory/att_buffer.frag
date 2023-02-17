@@ -1,6 +1,7 @@
 
 UNI sampler2D texCoords;
 UNI sampler2D texOld;
+UNI sampler2D texRandoms;
 IN vec2 texCoord;
 
 UNI float column;
@@ -14,7 +15,9 @@ void main()
     if(column>=floor(texCoord.x*width) && column<=ceil(texCoord.x*width)+2.0)
     {
         // col=vec4(1., 0., 0., 1.0);
-        col=texture(texCoords,vec2(0.0,texCoord.y));
+        vec4 theTexCoords = texture(texRandoms, vec2(texCoord.x,texCoord.y));
+
+        col=texture(texCoords,theTexCoords.xy);
     }
 
     outColor= col;

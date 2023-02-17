@@ -61,12 +61,17 @@
             },
             {
                 "type": 0,
-                "name": "Aspect",
-                "subType": "number"
+                "name": "Num Frames",
+                "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Threshold",
+                "name": "Num Lines",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
                 "subType": "number"
             }
         ],
@@ -81,7 +86,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.User.pandur.BufferRgbPointsHistory"
+        "name": "Ops.Dev.BufferRgbPointsHistory"
     },
     "summary": "Convert a RGBE texture to HDR/floating point texture",
     "issues": "",

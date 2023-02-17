@@ -1,8 +1,9 @@
 const
     exec = op.inTrigger("Execute"),
     inTex = op.inTexture("RGBE Texture"),
-    inAspect = op.inFloat("Aspect", 1),
-    inThreshold = op.inFloatSlider("Threshold", 0.2),
+    inWidth = op.inInt("Num Frames", 200),
+    inLines = op.inInt("Num Lines", 100),
+    inSeed = op.inFloat("Seed", 0),
     next = op.outTrigger("Next"),
     outFpTex = op.outTexture("HDR Texture");
 
@@ -17,39 +18,71 @@ const feedback = new CGL.CopyTexture(op.patch.cgl, "rgbpointsfeedback",
         "isFloatingPointTexture": true
     });
 
+const cgl = op.patch.cgl;
+let pixelPos = 0;
+let width = 200;
+let numLines = 100;
+let texRandoms = null;
+let last = null;
+let randomCoords = null;
+let needsSetSize = true;
+
 const
     uniColumn = new CGL.Uniform(tc.bgShader, "f", "column", 0),
     uniWidth = new CGL.Uniform(tc.bgShader, "f", "width", 0),
     uniCoords = new CGL.Uniform(tc.bgShader, "t", "texCoords", 1),
-    uniOldTex = new CGL.Uniform(tc.bgShader, "t", "texOld", 2),
-    uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect),
-    uni2 = new CGL.Uniform(tc.bgShader, "f", "threshold", inThreshold);
+    uniRandoms = new CGL.Uniform(tc.bgShader, "t", "texRandoms", 2),
+    uniOldTex = new CGL.Uniform(tc.bgShader, "t", "texOld", 3);
+    // uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect),
+    // uni2 = new CGL.Uniform(tc.bgShader, "f", "threshold", inThreshold);
 
-let pixel = 0;
-let width = 200;
-let numLines = 100;
+inWidth.onChange =
+inLines.onChange = () => { needsSetSize = true; };
 
-const cgl = op.patch.cgl;
+function setSize()
+{
+    numLines = inLines.get();
+    width = inWidth.get();
 
-let tex = new CGL.Texture(cgl, { "width": width, "height": numLines });
-let last = new CGL.Texture(cgl, { "width": width, "height": numLines });
+    if (last)last.delete();
+    last = new CGL.Texture(cgl, { "width": width, "height": numLines });
+
+    if (texRandoms)texRandoms.delete();
+    texRandoms = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "noisetexture" });
+
+    randomCoords = new Float32Array(numLines * 4);
+    genRandomTex();
+    needsSetSize = false;
+}
+
+function genRandomTex()
+{
+    Math.randomSeed = inSeed.get();
+    for (let i = 0; i < numLines; i++)
+    {
+        randomCoords[i * 4] = Math.seededRandom();
+        randomCoords[i * 4 + 1] = Math.seededRandom();
+        randomCoords[i * 4 + 2] = 0;
+        randomCoords[i * 4 + 3] = 1;
+    }
+
+    texRandoms.initFromData(randomCoords, 1, numLines, CGL.Texture.FILTER_LINES, CGL.Texture.WRAP_REPEAT);
+}
 
 exec.onTriggered = () =>
 {
-    pixel++;
-    pixel %= width;
+    if (needsSetSize)setSize();
+    pixelPos++;
+    pixelPos %= width;
 
     if (!inTex.get()) return;
 
-    uniColumn.set(pixel);
+    uniColumn.set(pixelPos);
     uniWidth.set(width);
-
-    if (last)
-    {
-    }
 
     tc.bgShader.pushTexture(uniCoords, inTex.get().tex);
     if (last) tc.bgShader.pushTexture(uniOldTex, last.tex);
+    if (texRandoms) tc.bgShader.pushTexture(uniRandoms, texRandoms.tex);
 
     const newTex = tc.copy(last);
 
