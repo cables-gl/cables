@@ -1,0 +1,101 @@
+{
+    "id": "3a4b7f4f-0653-448e-be9a-c75634ca241b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642868426174
+        },
+        {
+            "message": " added core lib: cgl_texturecopy",
+            "author": "pandur",
+            "date": 1642868439042
+        },
+        {
+            "message": " added core lib: cgl_copytexture",
+            "author": "pandur",
+            "date": 1642869069922
+        },
+        {
+            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
+            "author": "pandur",
+            "date": 1642869809458
+        },
+        {
+            "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
+            "author": "pandur",
+            "date": 1644228758190
+        },
+        {
+            "message": "Ops.Gl.Textures.RgbeToHdrTexture renamed to Ops.Gl.TextureEffect.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1651753455812
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffect.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1676638090626
+        },
+        {
+            "message": "Ops.User.pandur.BufferRgbPointsHistory renamed to Ops.Dev.BufferRgbPointsHistory",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1676645126395
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture"
+    ],
+    "authorName": "pandur",
+    "created": 1676638090625,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 2,
+                "name": "RGBE Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Num Frames",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Num Lines",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "HDR Texture",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.BufferRgbPointsHistory"
+    },
+    "summary": "Convert a RGBE texture to HDR/floating point texture",
+    "issues": "",
+    "caniusequery": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "adsLpX"
+}

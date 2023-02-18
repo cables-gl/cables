@@ -20,6 +20,8 @@ resolveIn.setUiAttribs({ "hidePort": true });
 
 let wasPasted = false;
 
+activeIn.setUiAttribs({ "order": 200 });
+
 subPatchIdIn.onChange = () =>
 {
     if (!activeIn.get())

@@ -1,0 +1,61 @@
+{
+    "id": "bcf8b4f9-d830-4210-9890-908a2d664bf9",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1626355751871
+        },
+        {
+            "message": "Ops.User.pandur.SimplesplineFromTexture renamed to Ops.User.pandur.LinesArrayFromTexture",
+            "author": "pandur",
+            "date": 1626861621101
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1628609180741
+        },
+        {
+            "message": "Ops.User.pandur.LinesArrayFromTexture renamed to Ops.Dev.LinesArrayFromTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1676647683814
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1626355776170,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Normalize",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Dev.LinesArrayFromTexture"
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}
