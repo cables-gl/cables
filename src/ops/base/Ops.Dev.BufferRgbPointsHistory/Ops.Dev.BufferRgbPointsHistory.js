@@ -7,12 +7,14 @@ const
     inLines = op.inInt("Num Lines", 100),
     inSeed = op.inFloat("Seed", 0),
     next = op.outTrigger("Next"),
-    outFpTex = op.outTexture("Spline Rows Texture");
+    outFpTex = op.outTexture("Spline Rows Texture"),
+    outPass1 = op.outTexture("Result Pass Through 1");
 
 const tc = new CGL.CopyTexture(op.patch.cgl, "bufferrgbpoints",
     {
         "shader": attachments.buffer_frag,
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": true,
+        "numRenderBuffers": 2,
     });
 
 const feedback = new CGL.CopyTexture(op.patch.cgl, "rgbpointsfeedback",
@@ -100,6 +102,8 @@ exec.onTriggered = () =>
     last = feedback.copy(newTex);
 
     outFpTex.setRef(newTex);
+    outPass1.setRef(tc.fb.getTextureColorNum(1));
+
     next.trigger();
 };
 

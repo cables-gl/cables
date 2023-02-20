@@ -94,6 +94,11 @@
                 "type": 2,
                 "name": "Spline Rows Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Result Pass Through 1",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Dev.BufferRgbPointsHistory"

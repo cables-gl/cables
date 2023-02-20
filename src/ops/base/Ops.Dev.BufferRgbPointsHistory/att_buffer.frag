@@ -32,6 +32,8 @@ void main()
         col=texture(texCoords,theTexCoords.xy);
 
 
+outColor1=texture(texPassThrough1,theTexCoords.xy);
+
         #ifdef USE_MASK
             // if(texture(texMask,texCoord.xy).r>0.00)col.a=1.0;
             // else col.a=0.0;
@@ -43,5 +45,6 @@ void main()
     }
 
 
-    outColor= col;
+    outColor0=col;
+
 }
