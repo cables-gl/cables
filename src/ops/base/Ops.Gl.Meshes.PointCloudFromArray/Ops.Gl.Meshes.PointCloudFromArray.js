@@ -29,7 +29,9 @@ inCoords.onChange =
 vertCols.onChange = updateVertCols;
 numPoints.onChange = updateNumVerts;
 inPointSizes.onChange = updatePointSizes;
-seed.onChange = arr.onChange = vertCols.onLinkChanged = reset;
+
+seed.onChange = arr.onChange = vertCols.onLinkChanged =
+inPointSizes.onLinkChanged = reset;
 
 exe.onTriggered = doRender;
 
@@ -117,18 +119,13 @@ function rebuild()
 
     if (verts.length % 3 !== 0)
     {
-        // if (!showingError)
-        // {
         op.setUiError("div3", "Array length not multiple of 3");
 
-        // op.uiAttr({ "error": "Array length not divisible by 3!" });
-        // showingError = true;
-        // }
         return;
     }
     else op.setUiError("div3", null);
 
-    if (geom.vertices.length == verts.length && mesh && !inCoords.isLinked() && !vertCols.isLinked())
+    if (geom.vertices.length == verts.length && mesh && !inCoords.isLinked() && !vertCols.isLinked() && !geom.getAttribute("attrPointSize"))
     {
         mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, verts, 3);
         geom.vertices = verts;
@@ -136,6 +133,8 @@ function rebuild()
 
         return;
     }
+
+    // if (geom.getAttribute("attrPointSize" && inPointSizes.isLinked())) changed = true;
 
     geom.clear();
     let num = verts.length / 3;
