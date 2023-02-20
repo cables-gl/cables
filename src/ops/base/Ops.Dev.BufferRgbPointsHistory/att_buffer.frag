@@ -1,9 +1,11 @@
-
-UNI sampler2D texCoords;
-UNI sampler2D texOld;
 UNI sampler2D texRandoms;
 
-UNI sampler2D texPassThrough1;
+UNI sampler2D texInput0;
+UNI sampler2D texFeedback0;
+
+UNI sampler2D texInput1;
+UNI sampler2D texFeedback1;
+
 
 #ifdef USE_MASK
 UNI sampler2D texMask;
@@ -18,7 +20,8 @@ void main()
 {
     #define SCROLLING
 
-    vec4 col=texture(texOld,vec2(texCoord.x-(1.0/width),texCoord.y));
+    vec4 col=texture(texFeedback0,vec2(texCoord.x-(1.0/width),texCoord.y));
+    vec4 col1=texture(texFeedback1,vec2(texCoord.x-(1.0/width),texCoord.y));
 
     #ifdef SCROLLING
         if(texCoord.x*width<2.0)
@@ -29,22 +32,14 @@ void main()
     {
         vec4 theTexCoords = texture(texRandoms, vec2(texCoord.x,texCoord.y));
 
-        col=texture(texCoords,theTexCoords.xy);
+        col=texture(texInput0,theTexCoords.xy);
+        col1=texture(texInput1,theTexCoords.xy);
 
-
-outColor1=texture(texPassThrough1,theTexCoords.xy);
-
-        #ifdef USE_MASK
-            // if(texture(texMask,texCoord.xy).r>0.00)col.a=1.0;
-            // else col.a=0.0;
-                // col.a=texture(texMask,texCoord.xy).r;
-
-        #endif
 
 
     }
 
-
     outColor0=col;
+    outColor1=col1;
 
 }
