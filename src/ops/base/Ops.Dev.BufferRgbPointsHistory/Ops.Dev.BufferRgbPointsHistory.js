@@ -1,11 +1,13 @@
 const
     exec = op.inTrigger("Execute"),
-    inTex = op.inTexture("RGBE Texture"),
+    inTex = op.inTexture("Position Texture"),
+    inPassthrough1 = op.inTexture("Pass Through 1"),
+    inTexMask = op.inTexture("Mask"),
     inWidth = op.inInt("Num Frames", 200),
     inLines = op.inInt("Num Lines", 100),
     inSeed = op.inFloat("Seed", 0),
     next = op.outTrigger("Next"),
-    outFpTex = op.outTexture("HDR Texture");
+    outFpTex = op.outTexture("Spline Rows Texture");
 
 const tc = new CGL.CopyTexture(op.patch.cgl, "bufferrgbpoints",
     {
@@ -32,10 +34,18 @@ const
     uniWidth = new CGL.Uniform(tc.bgShader, "f", "width", 0),
     uniCoords = new CGL.Uniform(tc.bgShader, "t", "texCoords", 1),
     uniRandoms = new CGL.Uniform(tc.bgShader, "t", "texRandoms", 2),
-    uniOldTex = new CGL.Uniform(tc.bgShader, "t", "texOld", 3);
+    uniOldTex = new CGL.Uniform(tc.bgShader, "t", "texOld", 3),
+    uniTexMask = new CGL.Uniform(tc.bgShader, "t", "texMask", 4);
 
 inWidth.onChange =
 inLines.onChange = () => { needsSetSize = true; };
+
+inTexMask.onLinkChanged = updateDefines;
+
+function updateDefines()
+{
+    tc.bgShader.toggleDefine("USE_MASK", inTexMask.isLinked());
+}
 
 function setSize()
 {
@@ -81,6 +91,7 @@ exec.onTriggered = () =>
     tc.bgShader.pushTexture(uniCoords, inTex.get().tex);
     if (last.tex) tc.bgShader.pushTexture(uniOldTex, last.tex);
     if (texRandoms.tex) tc.bgShader.pushTexture(uniRandoms, texRandoms.tex);
+    if (inTexMask.get()) tc.bgShader.pushTexture(uniTexMask, inTexMask.get().tex);
 
     const newTex = tc.copy(last);
 

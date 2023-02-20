@@ -12,19 +12,23 @@ mod.addModule({
     "priority": 0,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": "",
+    "srcHeadVert": attachments.splinetex_head_vert,
     "srcBodyVert": attachments.splinetex_vert
+});
+
+mod.addModule({
+    "title": op.name,
+    "name": "MODULE_COLOR",
+    "srcHeadFrag": attachments.spline_head_frag,
+    "srcBodyFrag": attachments.spline_frag
 });
 
 mod.addUniformVert("t", "MOD_tex");
 mod.addUniformVert("t", "MOD_texPointSize");
+mod.addUniformVert("f", "MOD_texSize", 0);
 
 render.onTriggered = doRender;
 updateDefines();
-
-mod.addUniformVert("f", "MOD_texSize", 0);
-
-// inAxis.onChange = updateDefines;
 
 inTex.onChange = setupMesh;
 setupMesh();

@@ -54,7 +54,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.LinesArrayFromTexture2"
+        "name": "Ops.Dev.LinesArrayFromTexture_v2"
     },
     "coreLibs": [
         "cgl_shadermodifier"

@@ -56,7 +56,17 @@
             },
             {
                 "type": 2,
-                "name": "RGBE Texture",
+                "name": "Position Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Pass Through 1",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
                 "objType": "texture"
             },
             {
@@ -82,7 +92,7 @@
             },
             {
                 "type": 2,
-                "name": "HDR Texture",
+                "name": "Spline Rows Texture",
                 "objType": "texture"
             }
         ],
