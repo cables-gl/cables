@@ -1,21 +1,25 @@
 const
     exec = op.inTrigger("Execute"),
-    inTex = op.inTexture("RGBE Texture"),
+    inTex0 = op.inTexture("Position Texture"),
+    inTex1 = op.inTexture("Pass Through 1"),
     inWidth = op.inInt("Num Frames", 200),
     inLines = op.inInt("Num Lines", 100),
     inSeed = op.inFloat("Seed", 0),
     next = op.outTrigger("Next"),
-    outFpTex = op.outTexture("HDR Texture");
+    outFpTex = op.outTexture("Spline Rows Texture"),
+    outPass1 = op.outTexture("Result Pass Through 1");
 
 const tc = new CGL.CopyTexture(op.patch.cgl, "bufferrgbpoints",
     {
         "shader": attachments.buffer_frag,
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": true,
+        "numRenderBuffers": 2,
     });
 
 const feedback = new CGL.CopyTexture(op.patch.cgl, "rgbpointsfeedback",
     {
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": true,
+        "numRenderBuffers": 2,
     });
 
 const cgl = op.patch.cgl;
@@ -30,9 +34,14 @@ let needsSetSize = true;
 const
     uniColumn = new CGL.Uniform(tc.bgShader, "f", "column", 0),
     uniWidth = new CGL.Uniform(tc.bgShader, "f", "width", 0),
-    uniCoords = new CGL.Uniform(tc.bgShader, "t", "texCoords", 1),
-    uniRandoms = new CGL.Uniform(tc.bgShader, "t", "texRandoms", 2),
-    uniOldTex = new CGL.Uniform(tc.bgShader, "t", "texOld", 3);
+
+    uniRandoms = new CGL.Uniform(tc.bgShader, "t", "texRandoms", 1),
+
+    uniTex0 = new CGL.Uniform(tc.bgShader, "t", "texInput0", 2),
+    uniTexFb0 = new CGL.Uniform(tc.bgShader, "t", "texFeedback0", 3),
+
+    uniTex1 = new CGL.Uniform(tc.bgShader, "t", "texInput1", 4),
+    uniTexFb1 = new CGL.Uniform(tc.bgShader, "t", "texFeedback1", 5);
 
 inWidth.onChange =
 inLines.onChange = () => { needsSetSize = true; };
@@ -42,10 +51,8 @@ function setSize()
     numLines = Math.max(1, inLines.get());
     width = Math.max(1, inWidth.get());
 
-    if (last)last.delete();
     last = new CGL.Texture(cgl, { "width": width, "height": numLines });
 
-    if (texRandoms)texRandoms.delete();
     texRandoms = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "noisetexture" });
 
     randomCoords = new Float32Array(numLines * 4);
@@ -73,21 +80,37 @@ exec.onTriggered = () =>
     pixelPos++;
     pixelPos %= width;
 
-    if (!inTex.get()) return;
+    if (!inTex0.get()) return;
 
     uniColumn.set(pixelPos);
     uniWidth.set(width);
 
-    tc.bgShader.pushTexture(uniCoords, inTex.get().tex);
-    if (last) tc.bgShader.pushTexture(uniOldTex, last.tex);
-    if (texRandoms) tc.bgShader.pushTexture(uniRandoms, texRandoms.tex);
+    const shader = tc.bgShader;
+
+    if (texRandoms.tex) shader.pushTexture(uniRandoms, texRandoms.tex);
+
+    shader.pushTexture(uniTex0, inTex0.get().tex);
+    if (last.tex) shader.pushTexture(uniTexFb0, last.tex);
+
+    if (inTex1.isLinked() && inTex1.get())
+    {
+        shader.pushTexture(uniTex1, inTex1.get());
+        if (feedback.fb) shader.pushTexture(uniTexFb1, feedback.fb.getTextureColorNum(1));
+        else console.log("no fb fb");
+    }
 
     const newTex = tc.copy(last);
 
     tc.bgShader.popTextures();
 
-    last = feedback.copy(newTex);
+    last = feedback.copy(newTex, tc.fb.getTextureColorNum(1));
 
-    outFpTex.setRef(newTex);
+    outFpTex.setRef(feedback.fb.getTextureColorNum(0));
+    outPass1.setRef(feedback.fb.getTextureColorNum(1));
+    // outPass1.setRef(inTex1.get());
+
+    // console.log(tc.bgShader)
     next.trigger();
 };
+
+//

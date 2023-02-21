@@ -9,15 +9,42 @@ class CopyTexture
         this._options = options;
         this.fb = null;
 
-        const shader = options.shader || ""
-            .endl() + "UNI sampler2D tex;"
-            .endl() + "IN vec2 texCoord;"
-            .endl() + "void main()"
-            .endl() + "{"
-            .endl() + "    vec4 col=texture(tex,texCoord);"
-            .endl() + "    outColor= col;"
-            .endl() + "}";
+        let shader = options.shader;
 
+        this._useDefaultShader = true;
+        if (options.shader) this._useDefaultShader = false;
+
+        options.numRenderBuffers = options.numRenderBuffers || 1;
+
+        if (!shader)
+        {
+            shader = ""
+                .endl() + "IN vec2 texCoord;";
+
+            for (let i = 0; i < options.numRenderBuffers; i++)
+            {
+                shader = shader.endl() + "UNI sampler2D tex" + i + ";".endl();
+            }
+
+            shader = shader
+                .endl() + "void main()"
+                .endl() + "{";
+
+            if (options.numRenderBuffers == 1)
+            {
+                shader = shader.endl() + "    outColor= texture(tex0,texCoord);;".endl();
+            }
+
+            else
+                for (let i = 0; i < options.numRenderBuffers; i++)
+                {
+                    shader = shader.endl() + "outColor" + i + " = texture(tex" + i + ",texCoord);".endl();
+                }
+
+            shader = shader.endl() + "}";
+        }
+
+        if (options.numRenderBuffers != 1)console.log(shader);
 
         const verts = options.vertexShader || ""
             .endl() + "IN vec3 vPosition;"
@@ -38,14 +65,17 @@ class CopyTexture
         if (!options.vertexShader)
             this.bgShader.ignoreMissingUniforms = true;
 
-        const textureUniform = new CGL.Uniform(this.bgShader, "t", "tex", 0);
+        new CGL.Uniform(this.bgShader, "t", "tex", 0);
+        new CGL.Uniform(this.bgShader, "t", "tex1", 1);
+        new CGL.Uniform(this.bgShader, "t", "tex2", 2);
+        new CGL.Uniform(this.bgShader, "t", "tex3", 3);
 
         this.mesh = MESHES.getSimpleRect(this.cgl, "texEffectRect");
     }
 
-    copy(tex)
+    copy(tex, tex1, tex2, tex3, tex4)
     {
-        if (!tex) return CGL.Texture.getEmptyTexture(this.cgl);
+        if (!tex) tex = CGL.Texture.getEmptyTexture(this.cgl);
         const
             w = this._options.width || tex.width,
             h = this._options.height || tex.height,
@@ -78,6 +108,10 @@ class CopyTexture
         this.fb.renderStart(cgl);
 
         cgl.setTexture(0, tex.tex);
+        if (tex1) cgl.setTexture(1, tex1.tex);
+        if (tex2) cgl.setTexture(2, tex2.tex);
+        if (tex3) cgl.setTexture(3, tex3.tex);
+        if (tex4) cgl.setTexture(4, tex4.tex);
 
         cgl.pushShader(this.bgShader);
         this.mesh.render(this.bgShader);

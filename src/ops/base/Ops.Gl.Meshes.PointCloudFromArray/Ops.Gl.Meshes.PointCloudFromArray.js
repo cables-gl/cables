@@ -7,6 +7,7 @@ const
     pTexCoordRand = op.inValueBool("Scramble Texcoords", true),
     seed = op.inValue("Seed", 1),
     inCoords = op.inArray("Coordinates", 2),
+    inPointSizes = op.inArray("Point sizes", 1),
     vertCols = op.inArray("Vertex Colors", 4);
 
 op.toWorkPortsNeedToBeLinked(arr, exe);
@@ -27,7 +28,10 @@ inCoords.onChange =
     pTexCoordRand.onChange = updateTexCoordsPorts;
 vertCols.onChange = updateVertCols;
 numPoints.onChange = updateNumVerts;
-seed.onChange = arr.onChange = vertCols.onLinkChanged = reset;
+inPointSizes.onChange = updatePointSizes;
+
+seed.onChange = arr.onChange = vertCols.onLinkChanged =
+inPointSizes.onLinkChanged = reset;
 
 exe.onTriggered = doRender;
 
@@ -72,6 +76,20 @@ function updateTexCoordsPorts()
     needsRebuild = true;
 }
 
+function updatePointSizes()
+{
+    // if(!inPointSizes.isLinked())
+    // {
+    //     geom.setAttribute("attrPointSize",[],1);
+    // }
+
+    if (!inPointSizes.get()) return;
+
+    if (!geom.getAttribute("attrPointSize")) reset();
+
+    if (mesh)mesh.setAttribute("attrPointSize", inPointSizes.get(), 1);
+}
+
 function updateVertCols()
 {
     if (!vertCols.get()) return;
@@ -101,18 +119,13 @@ function rebuild()
 
     if (verts.length % 3 !== 0)
     {
-        // if (!showingError)
-        // {
         op.setUiError("div3", "Array length not multiple of 3");
 
-        // op.uiAttr({ "error": "Array length not divisible by 3!" });
-        // showingError = true;
-        // }
         return;
     }
     else op.setUiError("div3", null);
 
-    if (geom.vertices.length == verts.length && mesh && !inCoords.isLinked() && !vertCols.isLinked())
+    if (geom.vertices.length == verts.length && mesh && !inCoords.isLinked() && !vertCols.isLinked() && !geom.getAttribute("attrPointSize"))
     {
         mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, verts, 3);
         geom.vertices = verts;
@@ -120,6 +133,8 @@ function rebuild()
 
         return;
     }
+
+    // if (geom.getAttribute("attrPointSize" && inPointSizes.isLinked())) changed = true;
 
     geom.clear();
     let num = verts.length / 3;
@@ -136,7 +151,6 @@ function rebuild()
     {
         Math.randomSeed = seed.get();
         texCoords = []; // needed otherwise its using the reference to input incoords port
-        // let genCoords = !inCoords.isLinked();
 
         for (let i = 0; i < num; i++)
         {
@@ -144,7 +158,6 @@ function rebuild()
                 geom.vertices[i * 3 + 1] != verts[i * 3 + 1] ||
                 geom.vertices[i * 3 + 2] != verts[i * 3 + 2])
             {
-                // if (genCoords)
                 if (rndTc)
                 {
                     texCoords[i * 2] = Math.seededRandom();
@@ -161,17 +174,37 @@ function rebuild()
 
     if (vertCols.get())
     {
-        if (!showingError && vertCols.get().length != num * 4)
+        if (vertCols.get().length != num * 4)
         {
-            op.uiAttr({ "error": "Color array does not have the correct length! (should be " + num * 4 + ")" });
-            showingError = true;
+            op.setUiError("vertColWrongLength", "Color array does not have the correct length! (should be " + num * 4 + ")");
             mesh = null;
             return;
         }
 
         geom.vertexColors = vertCols.get();
     }
-    else geom.vertexColors = [];
+    else
+    {
+        op.setUiError("vertColWrongLength", null);
+        geom.vertexColors = [];
+    }
+
+    if (inPointSizes.get())
+    {
+        if (inPointSizes.get().length != num)
+        {
+            op.setUiError("pointsizeWrongLength", "Color array does not have the correct length! (should be " + num + ")");
+            mesh = null;
+            return;
+        }
+
+        geom.setAttribute("attrPointSize", inPointSizes.get(), 1);
+    }
+    else
+    {
+        op.setUiError("pointsizeWrongLength", null);
+        geom.setAttribute("attrPointSize", [], 1);
+    }
 
     if (changed)
     {
