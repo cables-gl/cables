@@ -30,6 +30,7 @@ let texRandoms = null;
 let last = null;
 let randomCoords = null;
 let needsSetSize = true;
+let firstTime = true;
 
 const
     uniColumn = new CGL.Uniform(tc.bgShader, "f", "column", 0),
@@ -51,12 +52,15 @@ function setSize()
     numLines = Math.max(1, inLines.get());
     width = Math.max(1, inWidth.get());
 
-    last = new CGL.Texture(cgl, { "width": width, "height": numLines });
-
     texRandoms = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "noisetexture" });
+    last = new CGL.Texture(cgl, { "width": width, "height": numLines });
 
     randomCoords = new Float32Array(numLines * 4);
     genRandomTex();
+
+    tc.copy(CGL.Texture.getEmptyTextureFloat(cgl), CGL.Texture.getEmptyTextureFloat(cgl));
+    feedback.copy(CGL.Texture.getEmptyTextureFloat(cgl), CGL.Texture.getEmptyTextureFloat(cgl));
+
     needsSetSize = false;
 }
 
@@ -89,14 +93,20 @@ exec.onTriggered = () =>
 
     if (texRandoms.tex) shader.pushTexture(uniRandoms, texRandoms.tex);
 
-    shader.pushTexture(uniTex0, inTex0.get().tex);
-    if (last.tex) shader.pushTexture(uniTexFb0, last.tex);
+    shader.pushTexture(uniTex0, inTex0.get() || CGL.Texture.getEmptyTextureFloat(cgl));
+    if (last.tex) shader.pushTexture(uniTexFb0, last);
+    else shader.pushTexture(uniTexFb0, CGL.Texture.getEmptyTextureFloat(cgl));
 
     if (inTex1.isLinked() && inTex1.get())
     {
-        shader.pushTexture(uniTex1, inTex1.get());
+        shader.pushTexture(uniTex1, inTex1.get() || CGL.Texture.getEmptyTextureFloat(cgl));
         if (feedback.fb) shader.pushTexture(uniTexFb1, feedback.fb.getTextureColorNum(1));
-        else console.log("no fb fb");
+        else shader.pushTexture(uniTexFb1, CGL.Texture.getEmptyTextureFloat(cgl));
+    }
+    else
+    {
+        shader.pushTexture(uniTex1, CGL.Texture.getEmptyTextureFloat(cgl));
+        shader.pushTexture(uniTexFb1, CGL.Texture.getEmptyTextureFloat(cgl));
     }
 
     const newTex = tc.copy(last);
@@ -107,9 +117,7 @@ exec.onTriggered = () =>
 
     outFpTex.setRef(feedback.fb.getTextureColorNum(0));
     outPass1.setRef(feedback.fb.getTextureColorNum(1));
-    // outPass1.setRef(inTex1.get());
 
-    // console.log(tc.bgShader)
     next.trigger();
 };
 
