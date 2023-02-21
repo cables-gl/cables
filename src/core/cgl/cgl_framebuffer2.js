@@ -345,7 +345,11 @@ Framebuffer2.prototype.renderStart = function ()
     this._cgl.gl.drawBuffers(this._drawTargetArray);
 
 
-    for (let i = 0; i <= this._numRenderBuffers; i++) this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [0.0, 0.0, 0.0, 0.0]);
+    for (let i = 0; i <= this._numRenderBuffers; i++)
+    {
+        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
+        this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [1.0, 0.0, 0.0, 0.0]);
+    }
 
     // this.clear();
     // if (this._options.clear)
