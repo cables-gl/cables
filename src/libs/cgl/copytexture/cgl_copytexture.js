@@ -73,6 +73,12 @@ class CopyTexture
         this.mesh = MESHES.getSimpleRect(this.cgl, "texEffectRect");
     }
 
+    setSize(w, h)
+    {
+        this._options.width = w;
+        this._options.height = h;
+    }
+
     copy(tex, tex1, tex2, tex3, tex4)
     {
         if (!tex) tex = CGL.Texture.getEmptyTexture(this.cgl);
