@@ -44,8 +44,6 @@ class CopyTexture
             shader = shader.endl() + "}";
         }
 
-        if (options.numRenderBuffers != 1)console.log(shader);
-
         const verts = options.vertexShader || ""
             .endl() + "IN vec3 vPosition;"
             .endl() + "IN vec2 attrTexCoord;"
