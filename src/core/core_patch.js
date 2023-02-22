@@ -1400,6 +1400,8 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0)
     // set correct subpatch and remove blueprint info
     const subpatchIds = [];
     const fixedSubPatches = [];
+    const fixedBlueprints = [];
+
     for (let i = 0; i < json.ops.length; i++)
     {
         /*
@@ -1415,7 +1417,6 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0)
             {
                 if (json.ops[i].portsIn[k].name == "patchId")
                 {
-
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
                     const newSubPatchId = json.ops[i].portsIn[k].value = CABLES.generateUUID();
 

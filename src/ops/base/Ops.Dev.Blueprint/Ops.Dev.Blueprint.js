@@ -338,7 +338,6 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
     {
         let originalSaveState = null;
         data = CABLES.Patch.replaceOpIds(data, op.uiAttribs.subPatch);
-        console.log("REPLACE BECAUSE BLUEPRINT", op.id, data.newIds);
         if (editorMode)
         {
             originalSaveState = gui.getSavedState();
@@ -741,12 +740,10 @@ function getLocalParentSubPatchOp(subPatchId)
     });
 }
 
-console.log("UPDATE REGISTER", op.id);
 let patchLoadListener = op.patch.on("patchLoadEnd", (newOps, obj, genIds) =>
 {
     op.patch.off(patchLoadListener);
     const isRelevant = newOps.some((newOp) => { return newOp.id === op.id || (newOp.uiAttribs && newOp.uiAttribs.subPatch === subPatchIdIn.get()); });
-    console.log("UPDATE LISTENER", op.id, subPatchIdIn.get(), newOps);
     if (isRelevant && !loadingOut.get())
     {
         console.log("UPDATE RELEVANT", op.id);
