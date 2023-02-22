@@ -46,6 +46,11 @@
                 "type": 2,
                 "name": "Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Particle Timing",
+                "objType": "texture"
             }
         ],
         "portsOut": [

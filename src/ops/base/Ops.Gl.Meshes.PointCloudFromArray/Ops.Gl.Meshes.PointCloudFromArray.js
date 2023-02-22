@@ -180,6 +180,7 @@ function rebuild()
             mesh = null;
             return;
         }
+        else op.setUiError("vertColWrongLength", null);
 
         geom.vertexColors = vertCols.get();
     }
@@ -197,6 +198,7 @@ function rebuild()
             mesh = null;
             return;
         }
+        else op.setUiError("pointsizeWrongLength", null);
 
         geom.setAttribute("attrPointSize", inPointSizes.get(), 1);
     }

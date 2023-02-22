@@ -116,7 +116,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.LottieTexturePlayer2"
+        "name": "Ops.Libs.Lottie.LottieTexturePlayer_v2"
     },
     "libs": [
         "lottie_canvas.min.js"
@@ -126,5 +126,6 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "zW0RFn"
 }
