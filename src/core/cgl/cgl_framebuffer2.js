@@ -345,18 +345,18 @@ Framebuffer2.prototype.renderStart = function ()
     this._cgl.gl.drawBuffers(this._drawTargetArray);
 
 
-    for (let i = 0; i <= this._numRenderBuffers; i++)
-    {
-        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
-        this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [1.0, 0.0, 0.0, 0.0]);
-    }
-
-    // this.clear();
-    // if (this._options.clear)
+    // for (let i = 0; i <= this._numRenderBuffers; i++)
     // {
-    //     this._cgl.gl.clearColor(0, 0, 0, 0);
-    //     this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+    //     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
+    //     this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [1.0, 0.0, 0.0, 0.0]);
     // }
+
+    this.clear();
+    if (this._options.clear)
+    {
+        this._cgl.gl.clearColor(0, 0, 0, 0);
+        this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+    }
 };
 
 Framebuffer2.prototype.clear = function ()

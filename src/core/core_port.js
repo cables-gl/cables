@@ -774,7 +774,9 @@ Port.prototype.isLinked = function ()
 
 Port.prototype.isBoundToVar = function ()
 {
-    return this._useVariableName != null;
+    const b = this._useVariableName != null;
+    this.uiAttribs.boundToVar = b;
+    return b;
 };
 /**
  * @function isAnimated
