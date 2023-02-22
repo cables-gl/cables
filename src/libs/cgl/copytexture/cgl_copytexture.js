@@ -44,8 +44,6 @@ class CopyTexture
             shader = shader.endl() + "}";
         }
 
-        if (options.numRenderBuffers != 1)console.log(shader);
-
         const verts = options.vertexShader || ""
             .endl() + "IN vec3 vPosition;"
             .endl() + "IN vec2 attrTexCoord;"
@@ -71,6 +69,12 @@ class CopyTexture
         new CGL.Uniform(this.bgShader, "t", "tex3", 3);
 
         this.mesh = MESHES.getSimpleRect(this.cgl, "texEffectRect");
+    }
+
+    setSize(w, h)
+    {
+        this._options.width = w;
+        this._options.height = h;
     }
 
     copy(tex, tex1, tex2, tex3, tex4)
