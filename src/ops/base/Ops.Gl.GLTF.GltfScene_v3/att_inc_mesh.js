@@ -116,6 +116,8 @@ let gltfMesh = class
 
                 this.mesh = null;
                 gltf.loadingMeshes--;
+                gltf.timing.push(["draco decode", Math.round((performance.now() - gltf.startTime))]);
+
                 if (finished)finished(this);
             }, (error) => { op.logError(error); });
         }

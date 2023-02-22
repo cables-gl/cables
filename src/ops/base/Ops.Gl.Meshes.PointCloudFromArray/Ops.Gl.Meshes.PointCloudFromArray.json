@@ -35,6 +35,10 @@
             },
             {
                 "type": 3,
+                "name": "Point sizes"
+            },
+            {
+                "type": 3,
                 "name": "Vertex Colors"
             }
         ],

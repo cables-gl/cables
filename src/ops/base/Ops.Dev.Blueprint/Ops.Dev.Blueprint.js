@@ -27,6 +27,8 @@ convertIn.setUiAttribs({ "hidePort": true });
 let wasPasted = false;
 let parentSubPatchId = null;
 
+activeIn.setUiAttribs({ "order": 200 });
+
 subPatchIdIn.onChange = () =>
 {
     if (!activeIn.get())

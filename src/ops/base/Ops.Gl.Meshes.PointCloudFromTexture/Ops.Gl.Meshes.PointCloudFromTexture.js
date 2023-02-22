@@ -14,6 +14,8 @@ let mesh = null;
 let numVerts = 0;
 let currentNum = 0;
 
+op.toWorkPortsNeedToBeLinked(render, inTex);
+
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "priority": -10,

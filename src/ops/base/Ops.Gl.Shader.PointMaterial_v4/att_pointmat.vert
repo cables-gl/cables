@@ -4,6 +4,7 @@ IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
 IN vec3 attrTangent;
 IN vec3 attrBiTangent;
+IN float attrPointSize;
 
 #ifdef VERTEX_COLORS
     IN vec4 attrVertColor;
@@ -139,11 +140,11 @@ void main()
 
     ps=0.0;
     #ifndef SCALE_BY_DISTANCE
-        ps = (pointSize+addPointSize) * psMul;
+        ps = (pointSize+addPointSize+attrPointSize) * psMul;
     #endif
     #ifdef SCALE_BY_DISTANCE
         float cameraDist = distance(model.xyz, camPos);
-        ps = ( (pointSize+addPointSize) / cameraDist) * psMul;
+        ps = ( (pointSize+addPointSize+attrPointSize) / cameraDist) * psMul;
     #endif
 
     gl_PointSize += ps;

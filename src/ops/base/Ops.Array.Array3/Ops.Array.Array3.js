@@ -17,7 +17,7 @@ update();
 
 function update()
 {
-    let num = inNum.get() * 3;
+    let num = Math.floor(inNum.get() * 3);
 
     if (num < 0)num = 0;
     if (arr.length != num) arr.length = num;
@@ -33,8 +33,7 @@ function update()
         arr[i + 2] = z;
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     outTotalPoints.set(num / 3);
     outArrayLength.set(num);
 }

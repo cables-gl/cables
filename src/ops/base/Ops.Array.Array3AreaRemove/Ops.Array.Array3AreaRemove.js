@@ -15,7 +15,6 @@ const inMode = op.inDropDown("Mode", [
 const inSize = op.inFloat("Size", 0);
 const inInvert = op.inBool("Invert", false);
 
-
 op.setPortGroup("Settings", [inMode, inSize, inInvert]);
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 0);
@@ -201,7 +200,6 @@ inTrigger.onTriggered = () =>
     const inArr = inArray.get();
     drawHelpers();
 
-
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(rootVec, transVec, cgl.mMatrix);
 
@@ -222,7 +220,6 @@ inTrigger.onTriggered = () =>
 
         parametersChanged = false;
     }
-
 
     outX.set(rootVec[0]);
     outY.set(rootVec[1]);

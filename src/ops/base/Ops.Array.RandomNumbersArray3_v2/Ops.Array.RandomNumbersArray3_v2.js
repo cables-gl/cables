@@ -66,8 +66,7 @@ function init()
         arr[arrLength - 3 + 2] = arr[2];
     }
 
-    values.set(null);
-    values.set(arr);
+    values.setRef(arr);
     outTotalPoints.set(arrLength / 3);
     outArrayLength.set(arrLength);
 }
