@@ -16,7 +16,7 @@ subPatchIdIn.setUiAttribs({
     "greyout": true
 });
 portsData.setUiAttribs({ "hidePort": true });
-portsData.setUiAttribs({ "hideParam": true });
+// portsData.setUiAttribs({ "hideParam": true });
 
 gotoIn.setUiAttribs({ "greyout": true });
 gotoIn.setUiAttribs({ "hidePort": true });
@@ -90,7 +90,6 @@ if (!activeIn.get())
 const restorePorts = () =>
 {
     const oldPorts = getOldPorts();
-    console.log("PORT RESTORE", oldPorts);
     const portInKeys = Object.keys(oldPorts.portsIn);
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
     const newPorts = [];
@@ -102,7 +101,8 @@ const restorePorts = () =>
         {
             oldPortIn.links.forEach((link) =>
             {
-                let parent = op.patch.getOpById(link.objOut);
+                let opId = CABLES.seededUUID(op.id + link.objOut);
+                let parent = op.patch.getOpById(opId);
                 if (parent)
                 {
                     const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
@@ -133,7 +133,8 @@ const restorePorts = () =>
         {
             oldPortOut.links.forEach((link) =>
             {
-                let parent = op.patch.getOpById(link.objIn);
+                let opId = CABLES.seededUUID(op.id + link.objIn);
+                let parent = op.patch.getOpById(opId);
                 if (parent)
                 {
                     const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
@@ -173,17 +174,16 @@ activeIn.onChange = () =>
     }
 };
 
-op.init = () =>
+op.onLoadedValueSet = () =>
 {
     if (op.uiAttribs)
     {
         wasPasted = op.uiAttribs.pasted;
     }
     cleanupPorts();
-    console.log("UPDATE INIT", op.id, loadingOut.get(), wasPasted);
     if (!loadingOut.get() && wasPasted)
     {
-        // restorePorts();
+        restorePorts();
         update();
     }
 };
@@ -200,7 +200,6 @@ function update()
     op.patch.off(patchLoadListener);
     patchLoadListener = null;
 
-    console.log("UPDATE", op.id, patchId, subPatchId);
     if (!patchId || !subPatchId) return;
 
     loadingOut.set(true);
@@ -337,7 +336,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
         let originalSaveState = null;
-        data = CABLES.Patch.replaceOpIds(data, op.uiAttribs.subPatch);
+        data = CABLES.Patch.replaceOpIds(data, op.uiAttribs.subPatch, op.id);
         if (editorMode)
         {
             originalSaveState = gui.getSavedState();
@@ -513,7 +512,6 @@ function setupPorts(subPatch)
     if (!subPatchDataPort.get()) return;
 
     const oldPorts = getOldPorts();
-    console.log("PORT SETUP", op.id, oldPorts);
     cleanupPorts();
 
     const subPatchData = JSON.parse(subPatchDataPort.get());
@@ -522,6 +520,7 @@ function setupPorts(subPatch)
     let i = 0;
 
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+
     const newPorts = [];
     for (i = 0; i < subPatchPortsIn.length; i++)
     {
@@ -554,11 +553,13 @@ function setupPorts(subPatch)
 
             if (oldPorts.portsIn.hasOwnProperty(newPort.name))
             {
-                if (!wasPasted && Array.isArray(oldPorts.portsIn[newPort.name].links))
+                if (Array.isArray(oldPorts.portsIn[newPort.name].links))
                 {
                     oldPorts.portsIn[newPort.name].links.forEach((link) =>
                     {
-                        let parent = op.patch.getOpById(link.objOut);
+                        const bpId = op.uiAttribs.blueprintOpId || op.id;
+                        let opId = CABLES.seededUUID(bpId + link.objOut);
+                        let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objOut);
                         if (parent)
                         {
                             const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
@@ -627,7 +628,8 @@ function setupPorts(subPatch)
                     {
                         oldPorts.portsOut[newPort.name].links.forEach((link) =>
                         {
-                            let parent = op.patch.getOpById(link.objIn);
+                            let opId = CABLES.seededUUID(op.id + link.objIn);
+                            let parent = op.patch.getOpById(opId);
                             if (parent)
                             {
                                 const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
@@ -746,7 +748,6 @@ let patchLoadListener = op.patch.on("patchLoadEnd", (newOps, obj, genIds) =>
     const isRelevant = newOps.some((newOp) => { return newOp.id === op.id || (newOp.uiAttribs && newOp.uiAttribs.subPatch === subPatchIdIn.get()); });
     if (isRelevant && !loadingOut.get())
     {
-        console.log("UPDATE RELEVANT", op.id);
         update();
     }
 });

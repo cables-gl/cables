@@ -4,6 +4,7 @@
  * @namespace Utils
  */
 
+import { v5 as uuidv5 } from "uuid";
 import { CONSTANTS } from "./constants";
 
 const UTILS = {};
@@ -109,6 +110,12 @@ const _uuid = function ()
 };
 export const uuid = _uuid;
 export const generateUUID = _uuid;
+
+const _seededUUID = function (seed, namespace = "18d64fb0-ddd0-4fa4-b165-0c738a7847df")
+{
+    return uuidv5(seed, namespace);
+};
+export const seededUUID = _seededUUID;
 
 
 /**

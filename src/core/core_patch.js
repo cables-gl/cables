@@ -1,5 +1,5 @@
 import { EventTarget } from "./eventtarget";
-import { ajax, uuid, ajaxSync } from "./utils";
+import { ajax, uuid, ajaxSync, seededUUID } from "./utils";
 import { LoadingStatus } from "./loadingstatus";
 import { Instancing } from "./instancing";
 import { Timer } from "./timer";
@@ -1350,12 +1350,14 @@ Patch.prototype.printTriggerStack = function ()
     console.groupEnd(); // eslint-disable-line
 };
 
-Patch.replaceOpIds = function (json, parentSubPatchId = 0)
+Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 {
+    if (!randomSeed) randomSeed = CABLES.generateUUID();
     for (const i in json.ops)
     {
         const searchID = json.ops[i].id;
-        const newID = json.ops[i].id = CABLES.generateUUID();
+        const newSeededId = CABLES.seededUUID(randomSeed + json.ops[i].id);
+        const newID = json.ops[i].id = newSeededId;
 
         for (const j in json.ops)
         {
@@ -1400,17 +1402,9 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0)
     // set correct subpatch and remove blueprint info
     const subpatchIds = [];
     const fixedSubPatches = [];
-    const fixedBlueprints = [];
 
     for (let i = 0; i < json.ops.length; i++)
     {
-        /*
-        if (json.ops[i].storage && json.ops[i].storage.blueprint)
-        {
-            delete json.ops[i].storage.blueprint;
-        }
-         */
-
         if (CABLES.Op.isSubpatchOp(json.ops[i].objName))
         {
             for (const k in json.ops[i].portsIn)
@@ -1418,7 +1412,8 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0)
                 if (json.ops[i].portsIn[k].name == "patchId")
                 {
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
-                    const newSubPatchId = json.ops[i].portsIn[k].value = CABLES.generateUUID();
+                    const newSeededId = CABLES.seededUUID(randomSeed + json.ops[i].portsIn[k].value);
+                    const newSubPatchId = json.ops[i].portsIn[k].value = newSeededId;
 
                     subpatchIds.push(newSubPatchId);
 
