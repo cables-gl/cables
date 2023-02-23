@@ -232,7 +232,6 @@ function update()
     else
     {
         let exportId = blueprintId;
-        console.log("CHECKING", exportId, CABLES.blueprints);
         if (CABLES.blueprints && CABLES.blueprints.hasOwnProperty(exportId))
         {
             const blueprintData = CABLES.blueprints[exportId];
