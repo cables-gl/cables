@@ -53,9 +53,7 @@ if (op.patch.isEditorMode())
     convertIn.onTriggered = () =>
     {
         if (CABLES && CABLES.CMD && CABLES.CMD.PATCH)
-        {
             CABLES.CMD.PATCH.convertBlueprintToSubpatch(this);
-        }
     };
 
     patchIdIn.onChange = function ()

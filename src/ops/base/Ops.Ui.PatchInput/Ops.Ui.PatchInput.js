@@ -18,7 +18,8 @@ dyn.onLinkChanged = () =>
 {
     const mySubPatchOp = getPatchOp();
 
-    if (!dyn.links.length) return;
+    if (!dyn.links.length || !mySubPatchOp || !mySubPatchOp.addNewInPort) return;
+
 
     const otherPort = dyn.links[0].getOtherPort(dyn);
     dyn.removeLinks();
