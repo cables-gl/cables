@@ -112,7 +112,9 @@ op.onLoadedValueSet = () =>
     cleanupPorts();
     if (!loadingOut.get() && op.uiAttribs.pasted)
     {
-        setupPorts(gui.patchView.getCurrentSubPatch());
+        let currentSubpatchId = 0;
+        if (op.patch.isEditorMode()) currentSubpatchId = gui.patchView.getCurrentSubPatch();
+        setupPorts(currentSubpatchId);
         update();
     }
 };
@@ -159,7 +161,7 @@ function update()
             removeImportedOps();
             const blueprintData = {};
             blueprintData.ops = serializedOps;
-            deSerializeBlueprint(blueprintData, subPatchId, true);
+            deSerializeBlueprint(blueprintData, subPatchId);
         }
         else
         {
@@ -180,33 +182,37 @@ function update()
         op.patch.loading.finished(loadingId);
     };
 
-    if (patchId === gui.patchId)
+    if (op.patch.isEditorMode())
     {
-        let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
-        subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
-        subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
-        const serializedOps = [];
-        subPatchOps.forEach((subPatchOp) =>
+        if (patchId === gui.patchId)
         {
-            serializedOps.push(subPatchOp.getSerialized());
-        });
-
-        doneCb(null, serializedOps);
-    }
-    else if (op.patch.isEditorMode())
-    {
-        const options = {
-            "blueprintId": blueprintId
-        };
-
-        CABLES.sandbox.getBlueprintOps(options, (err, response) =>
-        {
-            op.setUiError("fetchOps", null);
-            let subPatchOps = err ? [] : response.data.ops;
+            let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
             subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
             subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
-            doneCb(null, subPatchOps);
-        });
+            const serializedOps = [];
+            subPatchOps.forEach((subPatchOp) =>
+            {
+                serializedOps.push(subPatchOp.getSerialized());
+            });
+
+            doneCb(null, serializedOps);
+        }
+        else
+        {
+            const options = {
+                "blueprintId": blueprintId
+            };
+
+            CABLES.sandbox.getBlueprintOps(options, (err, response) =>
+            {
+                op.setUiError("fetchOps", null);
+                let subPatchOps = err ? [] : response.data.ops;
+                subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
+                const localSubpatch = getLocalParentSubPatchOp(subPatchId);
+                if (localSubpatch) subPatchOps.push(localSubpatch);
+                doneCb(null, subPatchOps);
+            });
+        }
     }
     else if (CABLES.talkerAPI)
     {
@@ -215,7 +221,7 @@ function update()
         {
             const blueprintData = options.blueprint;
             blueprintData.ops = blueprintData.data.ops;
-            deSerializeBlueprint(blueprintData, subPatchId, false);
+            doneCb(null, blueprintData.ops);
             loadingOut.set(false);
             op.patch.loading.finished(loadingId);
             CABLES.talkerAPI.off(callbackTalkerApi);
@@ -271,9 +277,39 @@ function addBlueprintInfoToOp(serializedOp)
     }
 }
 
-function deSerializeBlueprint(data, subPatchId, editorMode)
+function deSerializeBlueprint(data)
 {
+    const editorMode = op.patch.isEditorMode();
     convertIn.setUiAttribs({ "greyout": true });
+
+    const doneCb = (patchData) =>
+    {
+        patchData.ops.forEach((replacedOp) =>
+        {
+            if (!replacedOp.uiAttribs) replacedOp.uiAttribs = {};
+            replacedOp.uiAttribs.blueprintOpId = op.id;
+            if (CABLES.Op.isBlueprintOp(replacedOp.objName))
+            {
+                replacedOp.uiAttribs.pasted = true;
+            }
+        });
+        const parentSubPatch = patchData.ops.find((op) =>
+        {
+            let isParent = false;
+            if (op.storage && op.storage.blueprint && op.storage.blueprint.isParentSubPatch) isParent = true;
+            return isParent;
+        });
+        let blueprintSubpatch = null;
+        if (parentSubPatch)
+        {
+            parentSubPatchId = parentSubPatch.id;
+            const patchIdPort = parentSubPatch.portsIn.find((port) => { return port.name === "patchId"; });
+            if (patchIdPort) blueprintSubpatch = patchIdPort.value;
+            op.uiAttribs.blueprintSubpatch = blueprintSubpatch;
+            op.patch.deSerialize(patchData, false);
+        }
+    };
+
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
         let originalSaveState = null;
@@ -285,31 +321,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 
             gui.serverOps.loadProjectDependencies(data, () =>
             {
-                data.ops.forEach((replacedOp) =>
-                {
-                    if (!replacedOp.uiAttribs) replacedOp.uiAttribs = {};
-                    replacedOp.uiAttribs.blueprintOpId = op.id;
-                    if (CABLES.Op.isBlueprintOp(replacedOp.objName))
-                    {
-                        replacedOp.uiAttribs.pasted = true;
-                    }
-                });
-                const parentSubPatch = data.ops.find((op) =>
-                {
-                    let isParent = false;
-                    if (op.storage && op.storage.blueprint && op.storage.blueprint.isParentSubPatch) isParent = true;
-                    return isParent;
-                });
-                let blueprintSubpatch = null;
-                if (parentSubPatch)
-                {
-                    parentSubPatchId = parentSubPatch.id;
-                    const patchIdPort = parentSubPatch.portsIn.find((port) => { return port.name === "patchId"; });
-                    if (patchIdPort) blueprintSubpatch = patchIdPort.value;
-                }
-
-                op.uiAttribs.blueprintSubpatch = blueprintSubpatch;
-                op.patch.deSerialize(data, false);
+                doneCb(data);
                 const originalSubPatchId = gui.patchView.getCurrentSubPatch();
                 gui.patchView.setCurrentSubPatch(originalSubPatchId);
 
@@ -342,8 +354,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 const patchIdPort = parentSubPatchData.portsIn.find((port) => { return port.name === "patchId"; });
                 if (patchIdPort) blueprintSubpatch = patchIdPort.value;
             }
-            op.uiAttribs.blueprintSubpatch = blueprintSubpatch;
-            op.patch.deSerialize(data, false);
+            doneCb(data);
             setupPorts(parentSubPatchData.id);
         }
     }
