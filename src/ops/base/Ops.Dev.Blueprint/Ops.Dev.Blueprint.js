@@ -147,73 +147,66 @@ function update()
 
     loadingId = op.patch.loading.start("blueprint", op.id);
 
-    if (op.patch.isEditorMode())
+    const doneCb = (err, serializedOps) =>
     {
-        const doneCb = (err, serializedOps) =>
+        if (!err)
         {
-            if (!err)
-            {
-                removeImportedOps();
-                const blueprintData = {};
-                blueprintData.ops = serializedOps;
-                deSerializeBlueprint(blueprintData, subPatchId, true);
-            }
-            else
-            {
-                if (err.code === 403)
-                {
-                    op.setUiError("fetchOps", "You do not have permission to use this Blueprint");
-                }
-                else if (err.code === 404 && (gui.patchId === patchId))
-                {
-                    op.setUiError("fetchOps", "Save the patch and reload before using this Blueprint");
-                }
-                else
-                {
-                    op.setUiError("fetchOps", "Error fetching Blueprint, code: " + err.code + " (" + err.msg + ")");
-                }
-            }
-            loadingOut.set(false);
-            op.patch.loading.finished(loadingId);
-        };
-
-        if (patchId === gui.patchId)
-        {
-            let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
-            subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
-            subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
-            const serializedOps = [];
-            subPatchOps.forEach((subPatchOp) =>
-            {
-                serializedOps.push(subPatchOp.getSerialized());
-            });
-
             serializedOps.forEach((serializedOp) =>
             {
                 addBlueprintInfoToOp(serializedOp);
             });
-            doneCb(null, serializedOps);
+
+            removeImportedOps();
+            const blueprintData = {};
+            blueprintData.ops = serializedOps;
+            deSerializeBlueprint(blueprintData, subPatchId, true);
         }
         else
         {
-            const options = {
-                "blueprintId": blueprintId
-            };
-
-            CABLES.sandbox.getBlueprintOps(options, (err, response) =>
+            if (err.code === 403)
             {
-                op.setUiError("fetchOps", null);
-                let subPatchOps = err ? [] : response.data.ops;
-                subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
-                // subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
-                const serializedOps = subPatchOps;
-                serializedOps.forEach((serializedOp) =>
-                {
-                    addBlueprintInfoToOp(serializedOp);
-                });
-                doneCb(null, serializedOps);
-            });
+                op.setUiError("fetchOps", "You do not have permission to use this Blueprint");
+            }
+            else if (err.code === 404 && (gui.patchId === patchId))
+            {
+                op.setUiError("fetchOps", "Save the patch and reload before using this Blueprint");
+            }
+            else
+            {
+                op.setUiError("fetchOps", "Error fetching Blueprint, code: " + err.code + " (" + err.msg + ")");
+            }
         }
+        loadingOut.set(false);
+        op.patch.loading.finished(loadingId);
+    };
+
+    if (patchId === gui.patchId)
+    {
+        let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
+        subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
+        subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
+        const serializedOps = [];
+        subPatchOps.forEach((subPatchOp) =>
+        {
+            serializedOps.push(subPatchOp.getSerialized());
+        });
+
+        doneCb(null, serializedOps);
+    }
+    else if (op.patch.isEditorMode())
+    {
+        const options = {
+            "blueprintId": blueprintId
+        };
+
+        CABLES.sandbox.getBlueprintOps(options, (err, response) =>
+        {
+            op.setUiError("fetchOps", null);
+            let subPatchOps = err ? [] : response.data.ops;
+            subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
+            subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
+            doneCb(null, subPatchOps);
+        });
     }
     else if (CABLES.talkerAPI)
     {
@@ -228,7 +221,7 @@ function update()
             CABLES.talkerAPI.off(callbackTalkerApi);
         };
         CABLES.talkerAPI.on("blueprint", callbackTalkerApi);
-        CABLES.talkerAPI.send("sendBlueprint", { "url": "/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch });
+        CABLES.talkerAPI.send("sendBlueprint", { "url": "/" + blueprintId });
     }
     else
     {
