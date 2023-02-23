@@ -394,20 +394,16 @@ function makeBlueprint()
 {
     let attribs = {
         "pasted": true,
-        "translate":
-                    {
-                        "x": op.uiAttribs.translate.x - 150,
-                        "y": op.uiAttribs.translate.y
-                    }
+        "translate": {
+            "x": op.uiAttribs.translate.x - 150,
+            "y": op.uiAttribs.translate.y
+        }
     };
 
-    if (CABLES.UI)attribs.subPatch = gui.patchView.getCurrentSubPatch();
+    if (CABLES.UI) attribs.subPatch = gui.patchView.getCurrentSubPatch();
 
     const bpOp = op.patch.addOp(CABLES.UI.DEFAULTOPNAMES.blueprint, attribs);
-
-    bpOp.getPortByName("externalPatchId").set(gui.patchId);
-    bpOp.getPortByName("subPatchId").set(op.patchId.get());
-    bpOp.getPortByName("active").set(true);
+    bpOp.createBlueprint(gui.patchId, op.patchId.get(), true);
 }
 
 op.rebuildListeners = () =>
