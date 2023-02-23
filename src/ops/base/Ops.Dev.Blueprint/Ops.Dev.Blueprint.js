@@ -146,6 +146,7 @@ function update()
     loadingOut.set(true);
 
     loadingId = op.patch.loading.start("blueprint", op.id);
+    const isLocalSubpatch = ((patchId === gui.patchId) || (patchId === gui.project().shortId));
 
     const doneCb = (err, serializedOps) =>
     {
@@ -167,7 +168,7 @@ function update()
             {
                 op.setUiError("fetchOps", "You do not have permission to use this Blueprint");
             }
-            else if (err.code === 404 && (gui.patchId === patchId))
+            else if (err.code === 404 && isLocalSubpatch)
             {
                 op.setUiError("fetchOps", "Save the patch and reload before using this Blueprint");
             }
@@ -182,7 +183,7 @@ function update()
 
     if (op.patch.isEditorMode())
     {
-        if (patchId === gui.patchId)
+        if (isLocalSubpatch)
         {
             let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
             subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
@@ -261,7 +262,7 @@ function addBlueprintInfoToOp(serializedOp)
 
     serializedOp.storage.blueprint.patchId = patchId;
 
-    if (CABLES.Op.isSubpatchOp(serializedOp.objName))
+    if (CABLES.Op.isSubPatchOpName(serializedOp.objName))
     {
         const subPatchPort = serializedOp.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
         if (subPatchPort)
@@ -689,7 +690,7 @@ function getLocalParentSubPatchOp(subPatchId)
     if (!subPatchId) return null;
     return op.patch.ops.find((op) =>
     {
-        if (CABLES.Op.isSubpatchOp(op.objName))
+        if (CABLES.Op.isSubPatchOpName(op.objName))
         {
             const subPatchPort = op.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
             if (subPatchPort) return true;

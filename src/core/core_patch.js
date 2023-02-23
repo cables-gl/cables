@@ -916,7 +916,7 @@ Patch.prototype.getSubPatchOps = function (patchId, recursive = false)
     {
         for (const i in ops)
         {
-            if (CABLES.Op.isSubpatchOp(ops[i].objName))
+            if (CABLES.Op.isSubPatchOpName(ops[i].objName))
             {
                 const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
                 if (subPatchPort)
@@ -1408,7 +1408,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 
     for (let i = 0; i < json.ops.length; i++)
     {
-        if (CABLES.Op.isSubpatchOp(json.ops[i].objName))
+        if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
         {
             for (const k in json.ops[i].portsIn)
             {
