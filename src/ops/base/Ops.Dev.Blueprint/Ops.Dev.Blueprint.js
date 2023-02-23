@@ -146,7 +146,6 @@ function update()
     loadingOut.set(true);
 
     loadingId = op.patch.loading.start("blueprint", op.id);
-    const isLocalSubpatch = ((patchId === gui.patchId) || (patchId === gui.project().shortId));
 
     const doneCb = (err, serializedOps) =>
     {
@@ -168,7 +167,7 @@ function update()
             {
                 op.setUiError("fetchOps", "You do not have permission to use this Blueprint");
             }
-            else if (err.code === 404 && isLocalSubpatch)
+            else if (err.code === 404)
             {
                 op.setUiError("fetchOps", "Save the patch and reload before using this Blueprint");
             }
@@ -183,6 +182,7 @@ function update()
 
     if (op.patch.isEditorMode())
     {
+        const isLocalSubpatch = ((patchId === gui.patchId) || (patchId === gui.project().shortId));
         if (isLocalSubpatch)
         {
             let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
