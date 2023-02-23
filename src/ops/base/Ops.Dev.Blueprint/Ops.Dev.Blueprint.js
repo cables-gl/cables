@@ -532,6 +532,7 @@ function setupPorts(subPatchId)
                         let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objOut);
                         if (parent)
                         {
+                            console.log("OUTPORT LINK", parent, link.portOut, op, newPort.name);
                             const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
                             if (newLink) newLink.ignoreInSerialize = true;
                         }
@@ -604,6 +605,7 @@ function setupPorts(subPatchId)
                             let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objIn);
                             if (parent)
                             {
+                                console.log("INPORT LINK", parent, link.portIn, op, newPort.name);
                                 const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
                                 if (newLink) newLink.ignoreInSerialize = true;
                             }
