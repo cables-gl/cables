@@ -127,8 +127,8 @@ op.createBlueprint = (externalPatchId, subPatchId, active = true) =>
     cleanupPorts();
     if (!loadingOut.get())
     {
-        setupPorts(gui.patchView.getCurrentSubPatch());
         update();
+        setupPorts(gui.patchView.getCurrentSubPatch());
     }
 };
 
@@ -190,25 +190,7 @@ function update()
 
             serializedOps.forEach((serializedOp) =>
             {
-                if (!serializedOp.storage) serializedOp.storage = {};
-                if (!serializedOp.storage.blueprint) serializedOp.storage.blueprint = {};
-                serializedOp.storage.blueprint.patchId = patchId;
-
-                if (CABLES.Op.isSubpatchOp(serializedOp.objName))
-                {
-                    const subPatchPort = serializedOp.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
-                    if (subPatchPort)
-                    {
-                        serializedOp.storage.blueprint.id = blueprintId;
-                        serializedOp.storage.blueprint.subpatchId = subPatchId;
-                        serializedOp.storage.blueprint.isParentSubPatch = true;
-
-                        serializedOp.uiAttribs.hidden = true;
-                        if (!serializedOp.uiAttribs.translate) serializedOp.uiAttribs.translate = {};
-                        serializedOp.uiAttribs.translate.x = -9999999;
-                        serializedOp.uiAttribs.translate.y = -9999999;
-                    }
-                }
+                addBlueprintInfoToOp(serializedOp);
             });
             doneCb(null, serializedOps);
         }
@@ -221,7 +203,15 @@ function update()
             CABLES.sandbox.getBlueprintOps(options, (err, response) =>
             {
                 op.setUiError("fetchOps", null);
-                doneCb(err, err ? [] : response.data.ops);
+                let subPatchOps = err ? [] : response.data.ops;
+                subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
+                // subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
+                const serializedOps = subPatchOps;
+                serializedOps.forEach((serializedOp) =>
+                {
+                    addBlueprintInfoToOp(serializedOp);
+                });
+                doneCb(null, serializedOps);
             });
         }
     }
@@ -261,6 +251,30 @@ function update()
                 op.patch.loading.finished(loadingId);
             }
         );
+    }
+}
+
+function addBlueprintInfoToOp(serializedOp)
+{
+    const patchId = patchIdIn.get();
+    const subPatchId = subPatchIdIn.get();
+
+    if (!serializedOp.storage) serializedOp.storage = {};
+    if (!serializedOp.storage.blueprint) serializedOp.storage.blueprint = {};
+
+    serializedOp.storage.blueprint.patchId = patchId;
+
+    if (CABLES.Op.isSubpatchOp(serializedOp.objName))
+    {
+        const subPatchPort = serializedOp.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
+        if (subPatchPort)
+        {
+            serializedOp.storage.blueprint.isParentSubPatch = true;
+            serializedOp.uiAttribs.hidden = true;
+            if (!serializedOp.uiAttribs.translate) serializedOp.uiAttribs.translate = {};
+            serializedOp.uiAttribs.translate.x = -9999999;
+            serializedOp.uiAttribs.translate.y = -9999999;
+        }
     }
 }
 
