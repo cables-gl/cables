@@ -187,7 +187,8 @@ function update()
         {
             let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
             subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
-            subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
+            const localParent = getLocalParentSubPatchOp(subPatchId);
+            if (localParent) subPatchOps.push(localParent);
             const serializedOps = [];
             subPatchOps.forEach((subPatchOp) =>
             {
