@@ -232,24 +232,41 @@ function update()
     else
     {
         let exportId = blueprintId;
-        const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
-        CABLES.ajax(
-            blueprintUrl,
-            function (err, data)
+        console.log("CHECKING", exportId, CABLES.blueprints);
+        if (CABLES.blueprints && CABLES.blueprints.hasOwnProperty(exportId))
+        {
+            const blueprintData = CABLES.blueprints[exportId];
+            blueprintData.settings = op.patch.settings;
+            // for some reason we have to do this in a 0ms timeout to make
+            // sure nested blueprints are not loaded before this one created all the ops...
+            setTimeout(() =>
             {
-                if (!err)
-                {
-                    const blueprintData = JSON.parse(data);
-                    deSerializeBlueprint(blueprintData, subPatchId, false);
-                }
-                else
-                {
-                    op.logError("failed to load blueprint from", blueprintUrl, err);
-                }
+                deSerializeBlueprint(blueprintData, subPatchId, false);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
-            }
-        );
+            }, 0);
+        }
+        else
+        {
+            const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
+            CABLES.ajax(
+                blueprintUrl,
+                function (err, data)
+                {
+                    if (!err)
+                    {
+                        const blueprintData = JSON.parse(data);
+                        deSerializeBlueprint(blueprintData, subPatchId, false);
+                    }
+                    else
+                    {
+                        op.logError("failed to load blueprint from", blueprintUrl, err);
+                    }
+                    loadingOut.set(false);
+                    op.patch.loading.finished(loadingId);
+                }
+            );
+        }
     }
 }
 
