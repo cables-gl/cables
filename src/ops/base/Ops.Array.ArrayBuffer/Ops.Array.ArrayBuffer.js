@@ -28,7 +28,7 @@ exec.onTriggered = function ()
     for (let i = 1; i < arr.length; i++)arr[i - 1] = arr[i];
     arr[arr.length - 1] = val.get();
     // arrOut.set(null);
-    arrOutRef.set(arr);
+    arrOut.setRef(arr);
     outArrayLength.set(arr.length);
     outTrigger.trigger();
 };

@@ -22,6 +22,7 @@ void main()
 
     vec4 col=texture(texFeedback0,vec2(texCoord.x-(1.0/width),texCoord.y));
     vec4 col1=texture(texFeedback1,vec2(texCoord.x-(1.0/width),texCoord.y));
+    col1.a=col.a;
 
     #ifdef SCROLLING
         if(texCoord.x*width<2.0)
@@ -32,12 +33,19 @@ void main()
     {
         vec4 theTexCoords = texture(texRandoms, vec2(texCoord.x,texCoord.y));
 
-        col=texture(texInput0,theTexCoords.xy);
+        vec4 ncol=texture(texInput0,theTexCoords.xy);
+
+        // if( ncol.xyz!=vec3(0.0) && abs( distance(col.xyz, ncol.xyz) ) > 3.1) ncol.a=0.0;
+        // else ncol.a=1.0;
+
+        // if(ncol.xyz==vec3(0.0))ncol.a=0.0;
+
+        col=ncol;
         col1=texture(texInput1,theTexCoords.xy);
 
 
-
     }
+
 
     outColor0=col;
     outColor1=col1;

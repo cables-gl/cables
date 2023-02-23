@@ -1,6 +1,7 @@
 const
     render = op.inTrigger("render"),
     inTex = op.inTexture("Texture", null, "texture"),
+    inTexParticleTiming = op.inTexture("Particle Timing", null, "texture"),
     trigger = op.outTrigger("Trigger");
 
 const cgl = op.patch.cgl;
@@ -25,6 +26,8 @@ mod.addModule({
 
 mod.addUniformVert("t", "MOD_tex");
 mod.addUniformVert("t", "MOD_texPointSize");
+mod.addUniformBoth("t", "MOD_particleMask");
+
 mod.addUniformVert("f", "MOD_texSize", 0);
 
 render.onTriggered = doRender;
@@ -34,15 +37,19 @@ inTex.onChange = setupMesh;
 setupMesh();
 updateDefines();
 
+inTexParticleTiming.onLinkChanged = updateDefines;
+
 function updateDefines()
 {
+    mod.toggleDefine("MASK_PARTICLES", inTexParticleTiming.isLinked());
 }
 
 function doRender()
 {
     mod.bind();
     if (!inTex.get() || !inTex.get().tex) return;
-    if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
+    if (inTex.get()) mod.pushTexture("MOD_tex", inTex.get().tex);
+    if (inTexParticleTiming.get()) mod.pushTexture("MOD_particleMask", inTexParticleTiming.get().tex);
 
     mod.setUniformValue("MOD_texSize", inTex.get().width + 1);
 
