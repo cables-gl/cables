@@ -16,7 +16,7 @@ subPatchIdIn.setUiAttribs({
     "greyout": true
 });
 portsData.setUiAttribs({ "hidePort": true });
-// portsData.setUiAttribs({ "hideParam": true });
+portsData.setUiAttribs({ "hideParam": true });
 
 gotoIn.setUiAttribs({ "greyout": true });
 gotoIn.setUiAttribs({ "hidePort": true });
@@ -109,7 +109,6 @@ activeIn.onChange = () =>
 
 op.onLoadedValueSet = () =>
 {
-    console.log("LOADED", JSON.stringify(portsData.get()));
     cleanupPorts();
     if (!loadingOut.get() && op.uiAttribs.pasted)
     {
@@ -180,14 +179,15 @@ function update()
 
         if (patchId === gui.patchId)
         {
-            const subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
+            let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
+            subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
             subPatchOps.push(getLocalParentSubPatchOp(subPatchId));
-
             const serializedOps = [];
             subPatchOps.forEach((subPatchOp) =>
             {
                 serializedOps.push(subPatchOp.getSerialized());
             });
+
             serializedOps.forEach((serializedOp) =>
             {
                 if (!serializedOp.storage) serializedOp.storage = {};
@@ -538,7 +538,6 @@ function setupPorts(subPatchId)
             {
                 const subPatchPort = patchOutputOP.portsIn.find((port) => { return port.name == subPatchPortsOut[i].name; });
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-                console.log("ADDING", subPatchPortsOut[i]);
                 newPort.ignoreValueSerialize = true;
 
                 if (subPatchPort)
@@ -562,8 +561,6 @@ function setupPorts(subPatchId)
 
                 if (oldPorts.portsOut.hasOwnProperty(newPort.name))
                 {
-                    console.log("SUBPATACH", oldPorts.portsOut[newPort.name]);
-
                     if (Array.isArray(oldPorts.portsOut[newPort.name].links))
                     {
                         oldPorts.portsOut[newPort.name].links.forEach((link) =>
@@ -669,7 +666,6 @@ function savePortData()
 
     const serializedPortsData = JSON.stringify(newPortsData);
     portsData.set(serializedPortsData);
-    console.log("SAVED PORTS DATA", newPortsData);
 }
 
 function getLocalParentSubPatchOp(subPatchId)
