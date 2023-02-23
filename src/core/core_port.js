@@ -195,6 +195,8 @@ Port.prototype.setUiAttribs = function (newAttribs)
 {
     let changed = false;
     if (!this.uiAttribs) this.uiAttribs = {};
+
+
     for (const p in newAttribs)
     {
         if (this.uiAttribs[p] != newAttribs[p]) changed = true;
@@ -202,6 +204,9 @@ Port.prototype.setUiAttribs = function (newAttribs)
 
         if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
     }
+
+    if (newAttribs.hasOwnProperty("expose"))
+        this.parent.patch.emitEvent("subpatchExpose", this.parent.uiAttribs.subPatch);
 
     if (changed) this.emitEvent("onUiAttrChange", newAttribs, this);
 };
@@ -769,7 +774,9 @@ Port.prototype.isLinked = function ()
 
 Port.prototype.isBoundToVar = function ()
 {
-    return this._useVariableName != null;
+    const b = this._useVariableName != null;
+    this.uiAttribs.boundToVar = b;
+    return b;
 };
 /**
  * @function isAnimated
