@@ -8,10 +8,10 @@
     },
     "private": true,
     "scripts": {
-        "build": "gulp build",
-        "build:live": "gulp build",
-        "watch": "gulp watch",
-        "start": "gulp"
+        "build": "gulp --openssl-legacy-provider build",
+        "build:live": "gulp --openssl-legacy-provider build",
+        "watch": "gulp --openssl-legacy-provider watch",
+        "start": "gulp --openssl-legacy-provider"
     },
     "repository": {
         "type": "git",
