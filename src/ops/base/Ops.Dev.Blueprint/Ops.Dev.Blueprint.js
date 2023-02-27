@@ -159,7 +159,7 @@ function update()
             removeImportedOps();
             const blueprintData = {};
             blueprintData.ops = serializedOps;
-            deSerializeBlueprint(blueprintData, subPatchId);
+            deSerializeBlueprint(blueprintData);
         }
         else
         {
@@ -225,7 +225,7 @@ function update()
             // sure nested blueprints are not loaded before this one created all the ops...
             setTimeout(() =>
             {
-                deSerializeBlueprint(blueprintData, subPatchId, false);
+                deSerializeBlueprint(blueprintData);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
             }, 0);
@@ -240,7 +240,7 @@ function update()
                     if (!err)
                     {
                         const blueprintData = JSON.parse(data);
-                        deSerializeBlueprint(blueprintData, subPatchId, false);
+                        deSerializeBlueprint(blueprintData);
                     }
                     else
                     {
@@ -270,10 +270,10 @@ function addBlueprintInfoToOp(serializedOp)
         if (subPatchPort)
         {
             serializedOp.storage.blueprint.isParentSubPatch = true;
-            serializedOp.uiAttribs.hidden = true;
+            // serializedOp.uiAttribs.hidden = true;
             if (!serializedOp.uiAttribs.translate) serializedOp.uiAttribs.translate = {};
-            serializedOp.uiAttribs.translate.x = -9999999;
-            serializedOp.uiAttribs.translate.y = -9999999;
+            serializedOp.uiAttribs.translate.x = -100;
+            serializedOp.uiAttribs.translate.y = -200;
         }
     }
 }
@@ -364,7 +364,7 @@ function deSerializeBlueprint(data)
 function removeImportedOps()
 {
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
-    const importedOps = op.patch.ops.forEach((theOp) =>
+    op.patch.ops.forEach((theOp) =>
     {
         if (theOp.uiAttribs && theOp.uiAttribs.blueprintOpId === op.id)
         {
