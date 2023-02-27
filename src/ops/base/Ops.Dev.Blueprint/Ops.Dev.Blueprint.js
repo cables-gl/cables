@@ -203,9 +203,6 @@ function update(ignoreLinks = false)
             {
                 op.setUiError("fetchOps", null);
                 let subPatchOps = err ? [] : response.data.ops;
-                subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
-                const localSubpatch = getLocalParentSubPatchOp(subPatchId);
-                if (localSubpatch) subPatchOps.push(localSubpatch);
                 doneCb(null, subPatchOps);
             });
         }
