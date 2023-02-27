@@ -214,21 +214,6 @@ function update()
             });
         }
     }
-    else if (CABLES.talkerAPI)
-    {
-        // use this to workaround /viewer/ and /p/ not being "isEditorMode" but also not having exported assets
-        const callbackTalkerApi = (options, next) =>
-        {
-            const blueprintData = options.blueprint;
-            blueprintData.ops = blueprintData.data.ops;
-            doneCb(null, blueprintData.ops);
-            loadingOut.set(false);
-            op.patch.loading.finished(loadingId);
-            CABLES.talkerAPI.off(callbackTalkerApi);
-        };
-        CABLES.talkerAPI.on("blueprint", callbackTalkerApi);
-        CABLES.talkerAPI.send("sendBlueprint", { "url": "/" + blueprintId });
-    }
     else
     {
         let exportId = blueprintId;
