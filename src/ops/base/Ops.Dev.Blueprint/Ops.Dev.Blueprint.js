@@ -515,9 +515,8 @@ function setupPorts(subPatchId)
                         const bpId = op.uiAttribs.blueprintOpId || op.id;
                         let opId = CABLES.seededUUID(bpId + link.objOut);
                         let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objOut);
-                        if (parent)
+                        if (parent && parent.getPortByName(link.portOut))
                         {
-                            console.log("OUTPORT LINK", parent, link.portOut, op, newPort.name);
                             const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
                             if (newLink) newLink.ignoreInSerialize = true;
                         }
@@ -588,9 +587,8 @@ function setupPorts(subPatchId)
                             const bpId = op.uiAttribs.blueprintOpId || op.id;
                             let opId = CABLES.seededUUID(bpId + link.objIn);
                             let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objIn);
-                            if (parent)
+                            if (parent && parent.getPortByName(link.portIn))
                             {
-                                console.log("INPORT LINK", parent, link.portIn, op, newPort.name);
                                 const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
                                 if (newLink) newLink.ignoreInSerialize = true;
                             }
