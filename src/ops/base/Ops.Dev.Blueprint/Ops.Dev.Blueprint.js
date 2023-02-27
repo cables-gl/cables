@@ -270,10 +270,10 @@ function addBlueprintInfoToOp(serializedOp)
         if (subPatchPort)
         {
             serializedOp.storage.blueprint.isParentSubPatch = true;
-            // serializedOp.uiAttribs.hidden = true;
+            serializedOp.uiAttribs.hidden = true;
             if (!serializedOp.uiAttribs.translate) serializedOp.uiAttribs.translate = {};
-            serializedOp.uiAttribs.translate.x = -100;
-            serializedOp.uiAttribs.translate.y = -200;
+            serializedOp.uiAttribs.translate.x = -9999999;
+            serializedOp.uiAttribs.translate.y = -9999999;
         }
     }
 }
@@ -364,12 +364,10 @@ function deSerializeBlueprint(data)
 function removeImportedOps()
 {
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
-    op.patch.ops.forEach((theOp) =>
+    const toDelete = op.patch.ops.filter((theOp) => { return theOp.uiAttribs && theOp.uiAttribs.blueprintOpId === op.id; });
+    toDelete.forEach((theOp) =>
     {
-        if (theOp.uiAttribs && theOp.uiAttribs.blueprintOpId === op.id)
-        {
-            op.patch.deleteOp(theOp.id);
-        }
+        op.patch.deleteOp(theOp.id);
     });
     if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 }
