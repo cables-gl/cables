@@ -481,11 +481,10 @@ function setupPorts(subPatchId)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
         {
-            const subPatchPort = subPatch.portsIn.find((port) => { return port.name == subPatchPortsIn[i].name; });
-            const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-
+            const subPatchPort = subPatch.portsIn.find((port) => { return port.name === subPatchPortsIn[i].name; });
             if (subPatchPort)
             {
+                const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
                 switch (subPatchPort.type)
                 {
                 case CABLES.OP_PORT_TYPE_FUNCTION:
@@ -504,44 +503,44 @@ function setupPorts(subPatchId)
                         }
                     };
                 }
-            }
 
-            if (oldPorts.portsIn.hasOwnProperty(newPort.name))
-            {
-                if (Array.isArray(oldPorts.portsIn[newPort.name].links))
+                if (oldPorts.portsIn.hasOwnProperty(newPort.name))
                 {
-                    oldPorts.portsIn[newPort.name].links.forEach((link) =>
+                    if (Array.isArray(oldPorts.portsIn[newPort.name].links))
                     {
-                        const bpId = op.uiAttribs.blueprintOpId || op.id;
-                        let opId = CABLES.seededUUID(bpId + link.objOut);
-                        let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objOut);
-                        if (parent && parent.getPortByName(link.portOut))
+                        oldPorts.portsIn[newPort.name].links.forEach((link) =>
                         {
-                            const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
-                            if (newLink) newLink.ignoreInSerialize = true;
-                        }
-                    });
+                            const bpId = op.uiAttribs.blueprintOpId || op.id;
+                            let opId = CABLES.seededUUID(bpId + link.objOut);
+                            let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objOut);
+                            if (parent && parent.getPortByName(link.portOut))
+                            {
+                                const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                                if (newLink) newLink.ignoreInSerialize = true;
+                            }
+                        });
+                    }
+                    if (!newPort.isLinked())
+                    {
+                        newPort.set(oldPorts.portsIn[newPort.name].value);
+                    }
                 }
-                if (!newPort.isLinked())
-                {
-                    newPort.set(oldPorts.portsIn[newPort.name].value);
-                }
-            }
-            newPort.onLinkChanged = savePortData;
+                newPort.onLinkChanged = savePortData;
 
-            if (subPatchPort.title)
-            {
-                newPort.setUiAttribs({ "title": subPatchPortsIn[i].title });
+                if (subPatchPort.title)
+                {
+                    newPort.setUiAttribs({ "title": subPatchPortsIn[i].title });
+                }
+                else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
+                {
+                    newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
+                }
+                if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
+                {
+                    newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
+                }
+                newPorts.push(newPort);
             }
-            else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
-            {
-                newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
-            }
-            if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
-            {
-                newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
-            }
-            newPorts.push(newPort);
         }
     }
     op.setPortGroup("Blueprint Ports", newPorts);
@@ -556,11 +555,11 @@ function setupPorts(subPatchId)
             if (patchOutputOP.portsIn)
             {
                 const subPatchPort = patchOutputOP.portsIn.find((port) => { return port.name == subPatchPortsOut[i].name; });
-                const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-                newPort.ignoreValueSerialize = true;
-
                 if (subPatchPort)
                 {
+                    const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
+                    newPort.ignoreValueSerialize = true;
+
                     switch (subPatchPort.type)
                     {
                     case CABLES.OP_PORT_TYPE_FUNCTION:
@@ -576,39 +575,39 @@ function setupPorts(subPatchId)
                         };
                     }
                     newPort.set(subPatchPort.get());
-                }
 
-                if (oldPorts.portsOut.hasOwnProperty(newPort.name))
-                {
-                    if (Array.isArray(oldPorts.portsOut[newPort.name].links))
+                    if (oldPorts.portsOut.hasOwnProperty(newPort.name))
                     {
-                        oldPorts.portsOut[newPort.name].links.forEach((link) =>
+                        if (Array.isArray(oldPorts.portsOut[newPort.name].links))
                         {
-                            const bpId = op.uiAttribs.blueprintOpId || op.id;
-                            let opId = CABLES.seededUUID(bpId + link.objIn);
-                            let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objIn);
-                            if (parent && parent.getPortByName(link.portIn))
+                            oldPorts.portsOut[newPort.name].links.forEach((link) =>
                             {
-                                const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
-                                if (newLink) newLink.ignoreInSerialize = true;
-                            }
-                        });
+                                const bpId = op.uiAttribs.blueprintOpId || op.id;
+                                let opId = CABLES.seededUUID(bpId + link.objIn);
+                                let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objIn);
+                                if (parent && parent.getPortByName(link.portIn))
+                                {
+                                    const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                                    if (newLink) newLink.ignoreInSerialize = true;
+                                }
+                            });
+                        }
                     }
-                }
-                newPort.onLinkChanged = savePortData;
+                    newPort.onLinkChanged = savePortData;
 
-                if (subPatchPort.title)
-                {
-                    newPort.setUiAttribs({ "title": subPatchPortsOut[i].title });
-                }
-                else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
-                {
-                    newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
-                }
+                    if (subPatchPort.title)
+                    {
+                        newPort.setUiAttribs({ "title": subPatchPortsOut[i].title });
+                    }
+                    else if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.title)
+                    {
+                        newPort.setUiAttribs({ "title": subPatchPort.uiAttribs.title });
+                    }
 
-                if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
-                {
-                    newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
+                    if (subPatchPort.uiAttribs && subPatchPort.uiAttribs.objType)
+                    {
+                        newPort.setUiAttribs({ "objType": subPatchPort.uiAttribs.objType });
+                    }
                 }
             }
         }
