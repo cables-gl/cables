@@ -21,6 +21,8 @@ const
     a = op.inValueSlider("a", 1),
     doSDF = op.inBool("SDF", true),
 
+    smoothing = op.inValueSlider("Smoothing", 0.3),
+
     inBorder = op.inBool("Border", false),
     inBorderWidth = op.inFloatSlider("Border Width", 0.5),
     inBorderSmooth = op.inFloatSlider("Smoothness", 0.25),
@@ -99,6 +101,8 @@ const
     uniColorBorder = new CGL.Uniform(shader, "3f", "colorBorder", br, bg, bb),
 
     uniTexSize = new CGL.Uniform(shader, "2f", "texSize", 0, 0),
+
+    uniSmoothing = new CGL.Uniform(shader, "f", "smoothing", smoothing),
     uniborderSmooth = new CGL.Uniform(shader, "f", "borderSmooth", inBorderSmooth),
     uniborderWidth = new CGL.Uniform(shader, "f", "borderWidth", inBorderWidth);
 

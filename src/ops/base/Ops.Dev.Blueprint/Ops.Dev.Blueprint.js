@@ -20,6 +20,8 @@ resolveIn.setUiAttribs({ "hidePort": true });
 
 let wasPasted = false;
 
+activeIn.setUiAttribs({ "order": 200 });
+
 subPatchIdIn.onChange = () =>
 {
     if (!activeIn.get())
@@ -45,9 +47,7 @@ if (op.patch.isEditorMode())
     resolveIn.onTriggered = () =>
     {
         if (CABLES && CABLES.CMD && CABLES.CMD.PATCH)
-        {
             CABLES.CMD.PATCH.convertBlueprintToSubpatch(this);
-        }
     };
 
     patchIdIn.onChange = function ()

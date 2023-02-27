@@ -27,6 +27,8 @@ let playmodeAuto = true;
 let updateTexture = true;
 let tex = null;
 
+op.toWorkPortsNeedToBeLinked(exe, inData);
+
 op.setPortGroup("Player Timing", [inPlayMode, inFrame, inPlay, inRewind, speed]);
 op.setPortGroup("Texture Settings", [tfilter, wrap, width, height, bmScale]);
 
@@ -212,6 +214,7 @@ function reload(force)
 
     finishedLoading();
 }
+
 function finishedLoading()
 {
     if (!playmodeAuto)

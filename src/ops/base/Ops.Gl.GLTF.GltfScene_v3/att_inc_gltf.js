@@ -475,6 +475,5 @@ function parseGltf(arrayBuffer)
     if (gltf.json.cameras) loadCams(gltf);
 
     gltf.timing.push(["finished", Math.round((performance.now() - gltf.startTime))]);
-
     return gltf;
 }

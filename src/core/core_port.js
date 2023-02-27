@@ -195,6 +195,8 @@ Port.prototype.setUiAttribs = function (newAttribs)
 {
     let changed = false;
     if (!this.uiAttribs) this.uiAttribs = {};
+
+
     for (const p in newAttribs)
     {
         if (this.uiAttribs[p] != newAttribs[p]) changed = true;
@@ -202,6 +204,9 @@ Port.prototype.setUiAttribs = function (newAttribs)
 
         if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
     }
+
+    if (newAttribs.hasOwnProperty("expose"))
+        this.parent.patch.emitEvent("subpatchExpose", this.parent.uiAttribs.subPatch);
 
     if (changed) this.emitEvent("onUiAttrChange", newAttribs, this);
 };
@@ -381,6 +386,8 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.animated) this.setAnimated(objPort.animated);
     if (objPort.useVariable) this.setVariableName(objPort.useVariable);
 
+    if (objPort.expose) this.setUiAttribs({ "expose": true });
+
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim();
@@ -412,6 +419,7 @@ Port.prototype.getSerialized = function ()
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
+    if (this.uiAttribs.expose) obj.expose = true;
     if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
     {
         obj.links = [];
@@ -420,6 +428,8 @@ Port.prototype.getSerialized = function ()
             if (!this.links[i].ignoreInSerialize && (this.links[i].portIn && this.links[i].portOut)) obj.links.push(this.links[i].getSerialized());
         }
     }
+
+    // obj.uiAttribs = this.uiAttribs;
     return obj;
 };
 
@@ -764,7 +774,9 @@ Port.prototype.isLinked = function ()
 
 Port.prototype.isBoundToVar = function ()
 {
-    return this._useVariableName != null;
+    const b = this._useVariableName != null;
+    this.uiAttribs.boundToVar = b;
+    return b;
 };
 /**
  * @function isAnimated

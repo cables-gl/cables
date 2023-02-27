@@ -148,6 +148,7 @@ Geometry.prototype.clear = function ()
     this.vertexNormals = new Float32Array([]);
     this.tangents = [];
     this.biTangents = [];
+    this._attributes = {};
 };
 
 /**

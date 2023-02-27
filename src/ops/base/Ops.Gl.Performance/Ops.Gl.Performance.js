@@ -306,6 +306,8 @@ function updateText()
             " mvp_uni_mat4: " + Math.ceil(op.patch.cgl.profileData.profileMVPMatrixCount / fps) +
             " num glPrimitives: " + Math.ceil(op.patch.cgl.profileData.profileMeshNumElements / (fps)) +
 
+            " fenced pixelread: " + Math.ceil(op.patch.cgl.profileData.profileFencedPixelRead) +
+
             " mesh.setGeom: " + op.patch.cgl.profileData.profileMeshSetGeom +
             " videos: " + op.patch.cgl.profileData.profileVideosPlaying +
             " tex preview: " + op.patch.cgl.profileData.profileTexPreviews;

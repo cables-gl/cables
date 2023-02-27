@@ -148,6 +148,7 @@
             {
                 "type": 0,
                 "name": "Alpha Mask Source index",
+                "group": "Texture Opacity",
                 "subType": "integer"
             }
         ],

@@ -7,7 +7,7 @@ let router = null;
 let lastHref = null;
 let hashChangeListener = null;
 
-op.onLoaded, op.onCreate = init;
+op.onLoadedValueSet = init;
 
 function init()
 {
