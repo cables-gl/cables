@@ -110,10 +110,6 @@ op.onLoadedValueSet = () =>
     cleanupPorts();
     if (!loadingOut.get() && op.uiAttribs.pasted)
     {
-        // let currentSubpatchId = 0;
-        // if (op.patch.isEditorMode()) currentSubpatchId = gui.patchView.getCurrentSubPatch();
-        // setupPorts(currentSubpatchId, true);
-        // console.log("HERE", op.uiAttribs.pasted);
         update(op.uiAttribs.pasted);
     }
 };
@@ -129,7 +125,6 @@ op.createBlueprint = (externalPatchId, subPatchId, active = true) =>
     if (!loadingOut.get())
     {
         update();
-        // setupPorts(gui.patchView.getCurrentSubPatch(), true);
     }
 };
 
@@ -455,7 +450,6 @@ const removeOutPort = (port) =>
 
 function setupPorts(subPatchId, ignoreLinks = false)
 {
-    console.log("SETUP", ignoreLinks);
     if (!subPatchId) return;
     const subPatch = op.patch.getOpById(subPatchId);
     if (!subPatch) return;
