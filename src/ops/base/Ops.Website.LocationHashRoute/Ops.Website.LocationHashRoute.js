@@ -81,7 +81,16 @@ function hashChange(event, forceUpdate)
                 let route = routeIn.get();
                 let match = fields[i];
                 hash += "#" + fields[i];
-                const matched = router.matchLocation(route, match);
+                let matched = false;
+                op.setUiError("regex", null);
+                try
+                {
+                    matched = router.matchLocation(route, match);
+                }
+                catch (e)
+                {
+                    op.setUiError("regex", "Failed to parse route string, check documentation. <br>- " + e.message);
+                }
                 if (matched)
                 {
                     if (matched.data)
