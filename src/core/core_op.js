@@ -1498,9 +1498,14 @@ const Op = function ()
     Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
 
-// Op.isSubpatchOp = function (name)
-// {
-//     return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
-// };
+Op.isSubPatchOpName = function (name)
+{
+    return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
+};
+
+Op.isBlueprintOpName = function (name)
+{
+    return name && (name == "Ops.Dev.Blueprint" || name.startsWith("Ops.Dev.Blueprint_v"));
+};
 
 export { Op };
