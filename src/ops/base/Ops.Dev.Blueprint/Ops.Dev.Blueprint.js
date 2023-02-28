@@ -292,7 +292,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
         {
             if (!replacedOp.uiAttribs) replacedOp.uiAttribs = {};
             replacedOp.uiAttribs.blueprintOpId = op.id;
-            if (CABLES.Op.isBlueprintOp(replacedOp.objName))
+            if (CABLES.Op.isBlueprintOpName(replacedOp.objName))
             {
                 replacedOp.uiAttribs.pasted = true;
             }

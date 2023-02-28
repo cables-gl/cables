@@ -725,7 +725,7 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port2)
     {
-        this._log.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + " - " + op2.id + ")");
+        this._log.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
         return;
     }
 
@@ -1402,7 +1402,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
         }
     }
 
-    // set correct subpatch and remove blueprint info
+    // set correct subpatch
     const subpatchIds = [];
     const fixedSubPatches = [];
 
