@@ -619,7 +619,7 @@ Anim.prototype.setValue = function (time, value, cb)
 {
     let found = null;
 
-    if (this.keys.length == 0 || time < this.keys[this.keys.length - 1].time)
+    if (this.keys.length == 0 || time <= this.keys[this.keys.length - 1].time)
         for (let i = 0; i < this.keys.length; i++)
         {
             if (this.keys[i].time == time)
