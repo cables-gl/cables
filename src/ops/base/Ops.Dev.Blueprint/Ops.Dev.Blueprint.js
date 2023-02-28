@@ -509,7 +509,7 @@ function setupPorts(subPatchId, ignoreLinks = false)
                         oldPorts.portsIn[newPort.name].links.forEach((link) =>
                         {
                             const bpId = op.uiAttribs.blueprintOpId || op.id;
-                            let opId = CABLES.generateUUID(bpId + link.objOut);
+                            let opId = CABLES.prefixedHash(bpId + link.objOut);
                             let parent = op.patch.getOpById(opId) || op.patch.getOpById(link.objOut);
                             if (parent && parent.getPortByName(link.portOut))
                             {

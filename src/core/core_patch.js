@@ -1,12 +1,11 @@
 import { EventTarget } from "./eventtarget";
-import { ajax, uuid, ajaxSync } from "./utils";
+import { ajax, uuid, ajaxSync, prefixedHash } from "./utils";
 import { LoadingStatus } from "./loadingstatus";
 import { Instancing } from "./instancing";
 import { Timer } from "./timer";
 import { Link } from "./core_link";
 import { Profiler } from "./core_profiler";
 import { Context } from "./cgl/cgl_state";
-import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
 import PatchVariable from "./core_variable";
@@ -1355,13 +1354,12 @@ Patch.prototype.printTriggerStack = function ()
 
 Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 {
-    let seed = null;
     for (const i in json.ops)
     {
         const searchID = json.ops[i].id;
-        if (randomSeed) seed = randomSeed + json.ops[i].id;
-        const newSeededId = uuid(seed);
-        const newID = json.ops[i].id = newSeededId;
+        let newId = uuid();
+        if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].id);
+        const newID = json.ops[i].id = newId;
 
         for (const j in json.ops)
         {
@@ -1407,7 +1405,6 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
     const subpatchIds = [];
     const fixedSubPatches = [];
 
-    seed = null;
     for (let i = 0; i < json.ops.length; i++)
     {
         if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
@@ -1416,11 +1413,11 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
             {
                 if (json.ops[i].portsIn[k].name == "patchId")
                 {
-                    if (randomSeed) seed = randomSeed + json.ops[i].portsIn[k].value;
-                    const newSeededId = uuid(seed);
+                    let newId = uuid();
+                    if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].portsIn[k].value);
 
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
-                    const newSubPatchId = json.ops[i].portsIn[k].value = newSeededId;
+                    const newSubPatchId = json.ops[i].portsIn[k].value = newId;
 
                     subpatchIds.push(newSubPatchId);
 

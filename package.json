@@ -47,7 +47,6 @@
         "webpack-stream": "5.2.1"
     },
     "dependencies": {
-        "uuid": "9.0.0",
         "git-repo-info": "2.1.1",
         "gl-matrix": "3.0.0"
     }
