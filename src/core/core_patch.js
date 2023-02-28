@@ -1,5 +1,5 @@
 import { EventTarget } from "./eventtarget";
-import { ajax, uuid, ajaxSync, seededUUID } from "./utils";
+import { ajax, uuid, ajaxSync } from "./utils";
 import { LoadingStatus } from "./loadingstatus";
 import { Instancing } from "./instancing";
 import { Timer } from "./timer";
@@ -1355,11 +1355,12 @@ Patch.prototype.printTriggerStack = function ()
 
 Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 {
-    if (!randomSeed) randomSeed = CABLES.generateUUID();
+    let seed = null;
     for (const i in json.ops)
     {
         const searchID = json.ops[i].id;
-        const newSeededId = CABLES.seededUUID(randomSeed + json.ops[i].id);
+        if (randomSeed) seed = randomSeed + json.ops[i].id;
+        const newSeededId = uuid(seed);
         const newID = json.ops[i].id = newSeededId;
 
         for (const j in json.ops)
@@ -1406,6 +1407,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
     const subpatchIds = [];
     const fixedSubPatches = [];
 
+    seed = null;
     for (let i = 0; i < json.ops.length; i++)
     {
         if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
@@ -1414,8 +1416,10 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
             {
                 if (json.ops[i].portsIn[k].name == "patchId")
                 {
+                    if (randomSeed) seed = randomSeed + json.ops[i].portsIn[k].value;
+                    const newSeededId = uuid(seed);
+
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
-                    const newSeededId = CABLES.seededUUID(randomSeed + json.ops[i].portsIn[k].value);
                     const newSubPatchId = json.ops[i].portsIn[k].value = newSeededId;
 
                     subpatchIds.push(newSubPatchId);

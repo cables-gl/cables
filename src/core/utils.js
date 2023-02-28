@@ -94,28 +94,31 @@ export const shortId = _shortId;
  * generate a UUID
  * @function uuid
  * @memberof Utils
+ * @param {?String} seed if set, create same ranom uuid for same seed
  * @return {String} generated UUID
  * @static
  */
-const _uuid = function ()
+const _uuid = function (seed = null)
 {
-    let d = new Date().getTime();
-    const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
+    if (seed)
     {
-        const r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    });
-    return uuid;
+        // random uuid as private namespace, as per RFC
+        return uuidv5(seed, "18d64fb0-ddd0-4fa4-b165-0c738a7847df");
+    }
+    else
+    {
+        let d = new Date().getTime();
+        const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
+        {
+            const r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+        });
+        return uuid;
+    }
 };
 export const uuid = _uuid;
 export const generateUUID = _uuid;
-
-const _seededUUID = function (seed, namespace = "18d64fb0-ddd0-4fa4-b165-0c738a7847df")
-{
-    return uuidv5(seed, namespace);
-};
-export const seededUUID = _seededUUID;
 
 
 /**
