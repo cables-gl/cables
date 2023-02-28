@@ -213,7 +213,7 @@ function update(ignoreLinks = false)
             {
                 op.setUiError("fetchOps", null);
                 let subPatchOps = err ? [] : response.data.ops;
-                doneCb(null, subPatchOps);
+                doneCb(err, subPatchOps);
             });
         }
     }
