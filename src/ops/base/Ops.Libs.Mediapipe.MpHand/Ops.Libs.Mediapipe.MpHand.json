@@ -70,7 +70,7 @@
     "summary": "Get points and lines for left/right hand from mediapipe",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.Mediapipe.MpHandTracking"
     ],

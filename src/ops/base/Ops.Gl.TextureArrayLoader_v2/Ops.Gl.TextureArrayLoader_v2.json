@@ -98,7 +98,7 @@
         ]
     },
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Texture",
         "Ops.Gl.TextureArrayLoaderFromArray"

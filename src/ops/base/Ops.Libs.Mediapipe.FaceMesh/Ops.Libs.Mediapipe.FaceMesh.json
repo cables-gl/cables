@@ -61,7 +61,7 @@
     "summary": "Generate an animated geometry from MpFaceTracking Point Coordinates",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.Mediapipe.MpFaceTracking"
     ],

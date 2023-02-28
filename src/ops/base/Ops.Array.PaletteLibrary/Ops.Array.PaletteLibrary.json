@@ -20,7 +20,7 @@
     },
     "summary": "Contains a collection of color palettes in groups of 5 in an array",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.TextureEffects.PaletteTexture",
         "Ops.Array.ArrayChunk"

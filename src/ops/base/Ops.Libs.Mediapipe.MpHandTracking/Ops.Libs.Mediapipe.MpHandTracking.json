@@ -87,7 +87,7 @@
     "summary": "Get hand data from mediapipe library, use with MpHand",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.Mediapipe.MpHand",
         "Ops.Libs.Mediapipe.MpHandCoordinate"

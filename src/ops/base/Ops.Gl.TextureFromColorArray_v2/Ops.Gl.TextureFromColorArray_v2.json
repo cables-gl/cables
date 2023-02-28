@@ -77,7 +77,7 @@
     "summary": "create a texture from an array of number values",
     "youtubeid": "",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Shader.BasicMaterial"
     ],

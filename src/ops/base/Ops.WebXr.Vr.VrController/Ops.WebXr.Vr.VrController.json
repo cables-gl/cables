@@ -164,7 +164,7 @@
         "name": "Ops.WebXr.Vr.VrController"
     },
     "summary": "tracking of vr hand controller",
-    "collections": null,
+
     "relatedops": null,
     "exampleProjectId": "IzKYx5",
     "docs": {

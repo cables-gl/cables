@@ -34,7 +34,7 @@
         "name": "Ops.Ui.VizArrayChart"
     },
     "summary": "Displays information of the distribution of numerical values in an array",
-    "collections": null,
+
     "relatedops": [
         "Ops.Ui.VizArrayTable"
     ],

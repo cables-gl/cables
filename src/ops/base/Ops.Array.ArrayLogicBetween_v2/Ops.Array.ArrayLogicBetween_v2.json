@@ -41,7 +41,7 @@
     },
     "summary": "If value of array is between min and max then the value is 1 else 0",
     "issues": "",
-    "collections": null,
+
     "relatedops": null,
     "youtubeids": [],
     "docs": {

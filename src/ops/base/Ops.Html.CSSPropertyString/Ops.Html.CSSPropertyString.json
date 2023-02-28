@@ -37,7 +37,7 @@
     },
     "summary": "Modify a css property of an element with a string",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Html.CSSProperty_v2"
     ],

@@ -56,7 +56,7 @@
     },
     "summary": "generate a cubemap from 6 textures",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.CubeMap.CubeMapMaterial_v2",
         "Ops.Gl.CubeMap.CubeMapCamera_v2"

@@ -67,7 +67,7 @@
     },
     "summary": "Player controls for the timeline",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.WebAudio.MediaPlayer"
     ],

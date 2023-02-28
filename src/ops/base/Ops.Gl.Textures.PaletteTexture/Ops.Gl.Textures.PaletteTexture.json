@@ -41,7 +41,7 @@
     },
     "summary": "Create a RGB color palette using an array",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.TextureEffects.PaletteTexture"
     ],

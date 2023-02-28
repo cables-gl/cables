@@ -52,7 +52,7 @@
             "date": 1662567063395
         }
     ],
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Shader.SetUniformFloat_v2"
     ],

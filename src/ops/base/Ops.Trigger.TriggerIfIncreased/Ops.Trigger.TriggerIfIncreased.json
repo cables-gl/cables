@@ -27,7 +27,7 @@
     },
     "summary": "Outputs a trigger if the value of a number increases",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Trigger.TriggerIfDecreased"
     ],

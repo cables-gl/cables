@@ -41,7 +41,7 @@
     },
     "summary": "align a geometry / change its pivot / center / origin point",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.RenderGeometry"
     ],

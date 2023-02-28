@@ -77,16 +77,8 @@
                 "text": "Required to trigger an animation"
             },
             {
-                "name": "easing",
-                "text": "Easing mode for animation"
-            },
-            {
                 "name": "duration",
                 "text": "How long it takes for the animation to occur"
-            },
-            {
-                "name": "Direction",
-                "text": "Can be set to trigger on `true and false`, only `true` or only `false`"
             },
             {
                 "name": "value false",
@@ -110,9 +102,8 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Boolean.ToggleBool"
     ],

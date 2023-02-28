@@ -102,7 +102,7 @@
     ],
     "summary": "point light for phong shading",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v4",
         "Ops.Gl.Phong.AmbientLight_v4",

@@ -45,7 +45,7 @@
     },
     "summary": "insert/add/unshift a string to the beginning of an array",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Array.ArrayPushString"
     ],

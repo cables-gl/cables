@@ -56,7 +56,7 @@
     },
     "summary": "send midi NRPN data to a midi output",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiCCOut",
         "Ops.Devices.Midi.MidiOutputDevice",

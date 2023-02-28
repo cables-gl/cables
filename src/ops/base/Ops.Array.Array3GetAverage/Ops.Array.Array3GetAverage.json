@@ -31,7 +31,7 @@
     },
     "summary": "average x,y,z values of an array3x",
     "youtubeid": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Array.ArrayAnalyze",
         "Ops.Array.Array3xAnalyze"

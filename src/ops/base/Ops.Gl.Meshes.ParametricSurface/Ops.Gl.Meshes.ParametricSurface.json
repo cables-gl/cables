@@ -143,7 +143,7 @@
     },
     "summary": "Creates a 3d mesh from a 2d area expressions",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Meshes.SuperShape",
         "Ops.Gl.Meshes.Polyhedron",
