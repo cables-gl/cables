@@ -159,13 +159,14 @@ function update(ignoreLinks = false)
         }
         else
         {
+            op.uiAttribs.blueprintSubpatch = null;
             if (err.code === 403)
             {
                 op.setUiError("fetchOps", "You do not have permission to use this Blueprint");
             }
             else if (err.code === 404)
             {
-                op.setUiError("fetchOps", "Save the patch and reload before using this Blueprint");
+                op.setUiError("fetchOps", "Blueprint not found. Check that SubPatch exists in patch.");
             }
             else
             {
@@ -181,17 +182,26 @@ function update(ignoreLinks = false)
         const isLocalSubpatch = ((patchId === gui.patchId) || (patchId === gui.project().shortId));
         if (isLocalSubpatch)
         {
+            let err = null;
+            const serializedOps = [];
+
             let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
             subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
             const localParent = getLocalParentSubPatchOp(subPatchId);
-            if (localParent) subPatchOps.push(localParent);
-            const serializedOps = [];
-            subPatchOps.forEach((subPatchOp) =>
+            if (localParent)
             {
-                serializedOps.push(subPatchOp.getSerialized());
-            });
+                subPatchOps.push(localParent);
+                subPatchOps.forEach((subPatchOp) =>
+                {
+                    serializedOps.push(subPatchOp.getSerialized());
+                });
+            }
+            else
+            {
+                err = { "code": 404 };
+            }
 
-            doneCb(null, serializedOps);
+            doneCb(err, serializedOps);
         }
         else
         {
