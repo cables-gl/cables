@@ -46,6 +46,8 @@ const
 
 r.setUiAttribs({ "colorPick": true });
 
+op.toWorkPortsNeedToBeLinked(render, textureOut);
+
 op.setPortGroup("Color", [r, g, b]);
 op.setPortGroup("Size", [font, inSize, weight, maximize, inFontSize, lineDistance, lineOffset]);
 op.setPortGroup("Texture", [texWidth, texHeight, tfilter, aniso]);

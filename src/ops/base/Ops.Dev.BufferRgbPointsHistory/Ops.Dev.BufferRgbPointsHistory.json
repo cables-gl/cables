@@ -51,5 +51,16 @@
     },
     "authorName": "pandur",
     "id": "aaa09e1f-7607-45ea-a03a-689019dd4dce",
-    "created": 1676895401612
+    "created": 1676895401612,
+    "changelog": [
+        {
+            "message": " added core lib: cgl_copytexture",
+            "type": "",
+            "author": "pandur",
+            "date": 1677260664298
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture"
+    ]
 }
