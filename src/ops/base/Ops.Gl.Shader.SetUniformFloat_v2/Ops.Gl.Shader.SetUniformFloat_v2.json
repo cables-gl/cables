@@ -67,7 +67,7 @@
             "date": 1662567079136
         }
     ],
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Shader.SetUniformTexture"
     ],

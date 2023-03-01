@@ -38,7 +38,7 @@
     "summary": "browser js memory consumption",
     "issues": "",
     "caniusequery": "performance.memory",
-    "collections": null,
+
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "_UyS0f",

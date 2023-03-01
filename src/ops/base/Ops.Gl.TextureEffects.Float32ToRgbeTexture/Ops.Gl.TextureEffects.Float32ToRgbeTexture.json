@@ -70,7 +70,7 @@
     "summary": "Convert a Float32 bit/HDR texture to RGBE format (only positive numbers)",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -39,7 +39,7 @@
     "summary": "morph between two geometries and render it",
     "youtubeid": "",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.RenderGeometry"
     ],

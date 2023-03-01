@@ -86,7 +86,7 @@
     },
     "summary": "detailed information about Midi events being sent",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice2",
         "Ops.Devices.Midi.MidiClock",

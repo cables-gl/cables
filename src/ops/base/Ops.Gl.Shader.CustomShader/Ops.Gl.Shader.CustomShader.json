@@ -45,7 +45,7 @@
         }
     ],
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Shader.Shader2Texture"
     ],

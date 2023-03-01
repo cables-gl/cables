@@ -64,7 +64,7 @@
     },
     "summary": "read CC value from Midi controller",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice_v2",
         "Ops.Devices.Midi.MidiClock",

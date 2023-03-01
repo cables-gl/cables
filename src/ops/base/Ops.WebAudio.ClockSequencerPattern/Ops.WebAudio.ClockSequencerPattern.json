@@ -64,7 +64,7 @@
     },
     "summary": "sequence triggers by defining a pattern (like a drum machine)",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Array.ParseArray"
     ],

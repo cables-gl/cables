@@ -122,7 +122,7 @@ function reInitTexture()
 rewind.onTriggered = function ()
 {
     videoElement.currentTime = 0;
-    textureOut.set(emptyTexture);
+    textureOut.setRef(emptyTexture);
     needsUpdate = true;
 };
 
@@ -263,7 +263,7 @@ function updateTexture()
 
     firstTime = false;
 
-    textureOut.set(tex);
+    textureOut.setRef(tex);
     needsUpdate = false;
 
     op.patch.cgl.profileData.profileVideosPlaying++;

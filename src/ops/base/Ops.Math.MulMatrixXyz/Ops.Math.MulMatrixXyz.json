@@ -64,7 +64,7 @@
         "name": "Ops.Math.MulMatrixXyz"
     },
     "summary": "multiply XYZ values with a gl matrix vec3 x mat4",
-    "collections": null,
+
     "relatedops": null,
     "docs": {
         "ports": []

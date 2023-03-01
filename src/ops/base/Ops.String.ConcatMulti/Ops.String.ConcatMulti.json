@@ -54,7 +54,7 @@
     },
     "summary": "Joins multiple strings together",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.String.Concat_v2"
     ],

@@ -53,7 +53,7 @@
     "summary": "Get individual coordinates of fingers or wrist from an array of mediapipe data",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.Mediapipe.MpHandTracking"
     ],

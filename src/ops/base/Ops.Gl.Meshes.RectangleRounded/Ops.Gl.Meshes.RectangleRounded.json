@@ -77,7 +77,7 @@
     },
     "summary": "Draws a rectangle with rounded corners",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Meshes.Rectangle"
     ],

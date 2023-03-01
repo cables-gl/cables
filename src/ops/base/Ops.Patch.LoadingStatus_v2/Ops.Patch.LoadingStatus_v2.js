@@ -40,6 +40,7 @@ exe.onTriggered = () =>
         if (firstTime)
         {
             if (preRenderOps.get()) op.patch.preRenderOps();
+
             op.patch.timer.setTime(0);
             if (startTimeLine.get())
             {
@@ -59,7 +60,6 @@ exe.onTriggered = () =>
     {
         finishedOnce = true;
         outList.set(op.patch.loading.getListJobs());
-
         if (patch.loading.getProgress() < 1.0)
         {
             op.patch.timer.setTime(0);

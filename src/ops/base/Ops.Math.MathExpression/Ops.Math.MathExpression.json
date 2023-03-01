@@ -62,7 +62,7 @@
     },
     "summary": "calculates a user defined mathematical expression",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Math.TriggerMathExpression"
     ],

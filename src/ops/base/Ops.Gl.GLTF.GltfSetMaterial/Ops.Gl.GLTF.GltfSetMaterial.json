@@ -36,7 +36,7 @@
     },
     "summary": "Assigns a material to a node inside of the gltfScene op",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.GLTF.GltfScene"
     ],

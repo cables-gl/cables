@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    inOp = op.inSwitch("Operation", ["c-x", "x-c", "c+x", "c*x", "x/c", "c/x", "c%x"], "c*x"),
+    inOp = op.inSwitch("Operation", ["c-x", "x-c", "c+x", "c*x", "x/c", "c/x", "c%x", "dist"], "c*x"),
     chanR = op.inBool("R Active", true),
     chanG = op.inBool("G Active", true),
     chanB = op.inBool("B Active", true),
@@ -50,6 +50,7 @@ function updateDefines()
     shader.toggleDefine("MOD_OP_DIV_CX", inOp.get() === "c/x");
 
     shader.toggleDefine("MOD_OP_MODULO", inOp.get() === "c%x");
+    shader.toggleDefine("MOD_OP_DISTANCE", inOp.get() === "dist");
 
     shader.toggleDefine("MOD_CHAN_R", chanR.get());
     r.setUiAttribs({ "greyout": !chanR.get() || inTexValues.isLinked() });

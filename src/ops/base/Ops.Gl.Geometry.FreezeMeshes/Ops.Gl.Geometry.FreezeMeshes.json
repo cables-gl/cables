@@ -40,7 +40,7 @@
         "name": "Ops.Gl.Geometry.FreezeMeshes"
     },
     "summary": "capture all following meshes into one geometry",
-    "collections": null,
+
     "relatedops": null,
     "exampleProjectId": "BwxY2f",
     "docs": {

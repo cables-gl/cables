@@ -120,7 +120,7 @@
     "summary": "Get face mesh from webcam/video using mediapipe library",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.Mediapipe.FaceMesh"
     ],

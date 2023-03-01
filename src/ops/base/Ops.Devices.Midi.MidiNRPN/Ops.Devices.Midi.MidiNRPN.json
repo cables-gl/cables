@@ -58,7 +58,7 @@
     },
     "summary": "read NRPN value from controller",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice",
         "Ops.Devices.Midi.MidiClock",

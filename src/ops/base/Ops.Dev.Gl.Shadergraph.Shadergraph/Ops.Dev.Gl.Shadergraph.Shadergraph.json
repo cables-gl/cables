@@ -75,7 +75,7 @@
     "coreLibs": [
         "cgl_shadergraph"
     ],
-    "collections": null,
+
     "relatedops": null,
     "exampleProjectId": "V9AD9l",
     "docs": {

@@ -50,7 +50,7 @@
     },
     "summary": "Performs logical comparison operations on two arrays",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Array.ArrayLogic"
     ],

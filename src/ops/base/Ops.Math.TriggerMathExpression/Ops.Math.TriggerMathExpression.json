@@ -103,7 +103,7 @@
         "name": "Ops.Math.TriggerMathExpression"
     },
     "summary": "calculates a user defined mathematical expression",
-    "collections": null,
+
     "relatedops": [
         "Ops.Math.MathExpression"
     ],

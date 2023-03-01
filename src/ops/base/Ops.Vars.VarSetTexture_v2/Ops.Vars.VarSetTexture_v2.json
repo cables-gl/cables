@@ -44,7 +44,7 @@
     },
     "summary": "set a texture variable",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Vars.VarGetTexture"
     ],

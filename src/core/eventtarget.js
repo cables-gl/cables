@@ -111,11 +111,21 @@ const EventTarget = function ()
 
         if (this._eventCallbacks[which])
         {
+            const execCallbacks = [];
             for (let i = 0; i < this._eventCallbacks[which].length; i++)
             {
-                if (this._eventCallbacks[which][i])
+                if (!execCallbacks[which]) execCallbacks[which] = [];
+                execCallbacks[which].push(this._eventCallbacks[which][i]);
+            }
+
+            if (execCallbacks[which])
+            {
+                for (let i = 0; i < execCallbacks[which].length; i++)
                 {
-                    this._eventCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
+                    if (execCallbacks[which][i])
+                    {
+                        execCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
+                    }
                 }
             }
         }

@@ -35,7 +35,7 @@
     },
     "summary": "receives all named trigges and relays them, optionally using a filter-prefix on the name",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Trigger.TriggerSend",
         "Ops.Trigger.TriggerReceive"

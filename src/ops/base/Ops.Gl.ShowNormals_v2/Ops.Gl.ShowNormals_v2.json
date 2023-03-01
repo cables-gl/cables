@@ -82,7 +82,7 @@
     ],
     "summary": "visualize normals, tangents or bitangents",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Shader.ShowNormalsMaterial"
     ],

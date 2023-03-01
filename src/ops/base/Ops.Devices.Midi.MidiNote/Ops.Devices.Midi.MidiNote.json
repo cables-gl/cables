@@ -75,7 +75,7 @@
     },
     "summary": "Read a single midi note",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiChord3",

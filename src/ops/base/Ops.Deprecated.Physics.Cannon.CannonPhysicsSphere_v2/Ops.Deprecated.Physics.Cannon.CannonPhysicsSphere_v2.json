@@ -104,7 +104,7 @@
     "summary": "Physical Sphere Body",
     "youtubeid": "",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Exp.Gl.Physics.World",
         "Ops.Exp.Gl.Physics.CastRay"
