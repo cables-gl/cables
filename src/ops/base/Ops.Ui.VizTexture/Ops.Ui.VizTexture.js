@@ -45,6 +45,8 @@ op.renderVizLayer = (ctx, layer) =>
     const perf = CABLES.UI.uiProfiler.start("previewlayer texture");
     const cgl = port.parent.patch.cgl;
 
+    if (!layer.useGl) return;
+
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
     port.parent.patch.cgl.profileData.profileTexPreviews++;
 

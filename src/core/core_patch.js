@@ -640,6 +640,7 @@ Patch.prototype.renderFrame = function (e)
 Patch.prototype.exec = function (e)
 {
     if (!this._renderOneFrame && (this._paused || this.aborted)) return;
+    this.emitEvent("reqAnimFrame");
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
     if (this.config.fpsLimit)
