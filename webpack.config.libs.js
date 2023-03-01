@@ -107,7 +107,7 @@ module.exports = (isProduction = false) =>
     const entryAndOutputObjects = readLibraryFiles(isProduction);
     const defaultConfig = {
         "mode": "production",
-        "devtool": "none",
+        "devtool": false,
         "optimization": {
             "minimize": isProduction // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
         },
