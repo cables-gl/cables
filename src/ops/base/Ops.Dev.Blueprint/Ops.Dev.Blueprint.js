@@ -6,6 +6,7 @@ const convertIn = op.inTriggerButton("Convert to SubPatch");
 const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
+
 let loadingId = null;
 patchIdIn.setUiAttribs({
     "hidePort": true,
@@ -304,6 +305,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
             return isParent;
         });
         let blueprintSubpatch = null;
+
         if (parentSubPatch)
         {
             parentSubPatchId = parentSubPatch.id;
@@ -701,7 +703,7 @@ let patchLoadListener = op.patch.on("patchLoadEnd", (newOps, obj, genIds) =>
 {
     op.patch.off(patchLoadListener);
     const isRelevant = newOps.some((newOp) => { return newOp.id === op.id || (newOp.uiAttribs && newOp.uiAttribs.subPatch === subPatchIdIn.get()); });
-    if (isRelevant && !loadingOut.get())
+    if (isRelevant)
     {
         update();
     }
