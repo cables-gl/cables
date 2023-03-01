@@ -37,7 +37,7 @@
     },
     "youtubeid": "",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.String.StringSwitchBoolean"
     ],

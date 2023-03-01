@@ -33,7 +33,7 @@
     "id": "1b9c4504-d69a-43c2-b747-8ca795a8950f",
     "created": 1548885174898,
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Vars.SetVariable"
     ],

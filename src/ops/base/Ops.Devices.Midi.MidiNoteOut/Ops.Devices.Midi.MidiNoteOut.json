@@ -62,7 +62,7 @@
     ],
     "summary": "send midi note data to a midi output",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiCCOut",
         "Ops.Devices.Midi.MidiOutputDevice",

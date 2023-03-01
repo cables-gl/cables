@@ -209,7 +209,7 @@
     ],
     "summary": "Directional light for phong shading",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v5",
         "Ops.Gl.Phong.AmbientLight_v4",

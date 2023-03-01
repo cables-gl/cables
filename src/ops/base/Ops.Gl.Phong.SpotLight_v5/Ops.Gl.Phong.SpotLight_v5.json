@@ -276,7 +276,7 @@
     ],
     "summary": "spot light  that emits a cone of light",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v5",
         "Ops.Gl.Phong.LambertMaterial_v2",

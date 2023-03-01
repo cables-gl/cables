@@ -120,7 +120,7 @@
     ],
     "summary": "add shadow capabilities to any material",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v5",
         "Ops.Gl.Phong.AmbientLight_v4",

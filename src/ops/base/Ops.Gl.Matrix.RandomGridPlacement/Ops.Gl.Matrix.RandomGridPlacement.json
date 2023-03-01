@@ -67,7 +67,7 @@
         ]
     },
     "issues": "this is slow, you should try the new version:  Ops.Gl.Matrix.RandomGridPlacementArrays",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Matrix.RandomGridPlacementArrays"
     ],

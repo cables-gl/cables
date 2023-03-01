@@ -191,7 +191,7 @@
         "webvr-polyfill.js"
     ],
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Boolean.IfTrueThen",
         "Ops.Devices.Mobile.ScreenOrientation"

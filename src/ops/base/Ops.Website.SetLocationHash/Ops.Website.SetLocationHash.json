@@ -51,7 +51,7 @@
     "libs": [],
     "summary": "sets window.location.hash to the specified value(s)",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Website.LocationHash"
     ],

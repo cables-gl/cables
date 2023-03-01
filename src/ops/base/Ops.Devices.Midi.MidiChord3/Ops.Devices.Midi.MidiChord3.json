@@ -107,7 +107,7 @@
     },
     "summary": "Map 3 midi notes to values",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice2",
         "Ops.Devices.Midi.MidiClock",

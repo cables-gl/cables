@@ -22,7 +22,7 @@
     "id": "b0190d08-82f6-45b2-bc0c-b70a3257ea92",
     "created": 1519228504479,
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Vars.VarGetNumber"
     ],

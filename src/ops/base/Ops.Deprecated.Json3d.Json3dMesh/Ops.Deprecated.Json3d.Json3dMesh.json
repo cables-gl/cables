@@ -78,7 +78,7 @@
         }
     ],
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Json3d.Mesh3d"
     ],

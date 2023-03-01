@@ -91,7 +91,7 @@
     },
     "summary": "create an array of physics bodies and add them to current world",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Physics.CastRay"
     ],

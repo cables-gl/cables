@@ -51,7 +51,7 @@
     "summary": "get svg path from (OTF) OpentypeFont using the opentype library",
     "issues": "",
     "caniusequery": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.OpenType.OpentypeFont",
         "Ops.Gl.Geometry.SvgPathToGeometry"

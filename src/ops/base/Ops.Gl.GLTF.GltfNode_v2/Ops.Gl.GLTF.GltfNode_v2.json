@@ -75,7 +75,7 @@
     },
     "summary": "Control a single node from the GLTFscene op",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.GLTF.GltfScene"
     ],

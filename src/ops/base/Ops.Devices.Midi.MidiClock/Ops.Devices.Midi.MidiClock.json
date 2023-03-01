@@ -75,7 +75,7 @@
     },
     "summary": "sends out midi clock signals as triggers",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice2",
         "Ops.Devices.Midi.MidiCC",

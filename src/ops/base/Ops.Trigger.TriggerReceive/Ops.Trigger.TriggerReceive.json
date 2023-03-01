@@ -21,7 +21,7 @@
     },
     "summary": "Receives triggers from a TriggerSend op with the same variable name",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Trigger.TriggerSend"
     ],

@@ -48,7 +48,7 @@
     },
     "summary": "transpose incoming midi notes",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiChord3",

@@ -1,12 +1,11 @@
 import { EventTarget } from "./eventtarget";
-import { ajax, uuid, ajaxSync } from "./utils";
+import { ajax, uuid, ajaxSync, prefixedHash } from "./utils";
 import { LoadingStatus } from "./loadingstatus";
 import { Instancing } from "./instancing";
 import { Timer } from "./timer";
 import { Link } from "./core_link";
 import { Profiler } from "./core_profiler";
 import { Context } from "./cgl/cgl_state";
-import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
 import PatchVariable from "./core_variable";
@@ -902,14 +901,28 @@ Patch.prototype.reloadOp = function (objName, cb)
     cb(count, ops);
 };
 
-Patch.prototype.getSubPatchOps = function (patchId)
+Patch.prototype.getSubPatchOps = function (patchId, recursive = false)
 {
-    const ops = [];
+    let ops = [];
     for (const i in this.ops)
     {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
         {
             ops.push(this.ops[i]);
+        }
+    }
+    if (recursive)
+    {
+        for (const i in ops)
+        {
+            if (CABLES.Op.isSubPatchOpName(ops[i].objName))
+            {
+                const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
+                if (subPatchPort)
+                {
+                    ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
+                }
+            }
         }
     }
     return ops;
@@ -1339,12 +1352,14 @@ Patch.prototype.printTriggerStack = function ()
     console.groupEnd(); // eslint-disable-line
 };
 
-Patch.replaceOpIds = function (json)
+Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 {
     for (const i in json.ops)
     {
         const searchID = json.ops[i].id;
-        const newID = json.ops[i].id = CABLES.generateUUID();
+        let newId = uuid();
+        if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].id);
+        const newID = json.ops[i].id = newId;
 
         for (const j in json.ops)
         {
@@ -1383,6 +1398,55 @@ Patch.replaceOpIds = function (json)
                         }
                     }
                 }
+        }
+    }
+
+    // set correct subpatch
+    const subpatchIds = [];
+    const fixedSubPatches = [];
+
+    for (let i = 0; i < json.ops.length; i++)
+    {
+        if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
+        {
+            for (const k in json.ops[i].portsIn)
+            {
+                if (json.ops[i].portsIn[k].name == "patchId")
+                {
+                    let newId = uuid();
+                    if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].portsIn[k].value);
+
+                    const oldSubPatchId = json.ops[i].portsIn[k].value;
+                    const newSubPatchId = json.ops[i].portsIn[k].value = newId;
+
+                    subpatchIds.push(newSubPatchId);
+
+                    for (let j = 0; j < json.ops.length; j++)
+                    {
+                        if (json.ops[j].uiAttribs.subPatch == oldSubPatchId)
+                        {
+                            json.ops[j].uiAttribs.subPatch = newSubPatchId;
+                            fixedSubPatches.push(json.ops[j].id);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (const kk in json.ops)
+    {
+        let found = false;
+        for (let j = 0; j < fixedSubPatches.length; j++)
+        {
+            if (json.ops[kk].id == fixedSubPatches[j])
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            json.ops[kk].uiAttribs.subPatch = parentSubPatchId;
         }
     }
     return json;

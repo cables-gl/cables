@@ -41,7 +41,7 @@
     },
     "summary": "Connect to MIDI device input port",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiCCOut",
         "Ops.Devices.Midi.MidiNoteOut",

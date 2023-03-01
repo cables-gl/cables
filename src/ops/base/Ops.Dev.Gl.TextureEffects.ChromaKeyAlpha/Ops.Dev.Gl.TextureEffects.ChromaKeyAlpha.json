@@ -58,7 +58,7 @@
         "name": "Ops.User.pandur.ChromaKeyTexEff"
     },
     "summary": "replace a color with transparency",
-    "collections": null,
+
     "relatedops": null,
     "docs": {
         "ports": []

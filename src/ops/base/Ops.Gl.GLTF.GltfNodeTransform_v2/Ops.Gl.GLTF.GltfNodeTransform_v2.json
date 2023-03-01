@@ -59,7 +59,7 @@
     },
     "summary": "Get the transform from the GLTFscene op",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.GLTF.GltfScene"
     ],

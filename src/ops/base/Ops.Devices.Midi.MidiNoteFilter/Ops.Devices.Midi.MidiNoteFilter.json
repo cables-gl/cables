@@ -71,7 +71,7 @@
     },
     "summary": "Only read a range of notes (e.g. C1 to C2)",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiNote",

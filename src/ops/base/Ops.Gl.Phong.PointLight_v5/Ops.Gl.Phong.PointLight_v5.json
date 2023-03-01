@@ -184,7 +184,7 @@
     ],
     "summary": "Point light for phong shading",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v5",
         "Ops.Gl.Phong.LambertMaterial_v2",
