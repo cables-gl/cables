@@ -25,7 +25,7 @@
     },
     "homepage": "https://github.com/pandrr/cables#readme",
     "engines": {
-        "node": "16.7.0"
+        "node": "18.14.2"
     },
     "devDependencies": {
         "add-module-exports-webpack-plugin": "1.0.0",
