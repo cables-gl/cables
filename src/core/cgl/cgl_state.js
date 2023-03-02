@@ -504,6 +504,11 @@ const Context = function (_patch)
         return this._textureslots[slot];
     };
 
+    this.hasFrameStarted = function ()
+    {
+        return this._frameStarted;
+    };
+
     /**
      * log warning to console if the rendering of one frame has not been started / handy to check for async problems
      * @function checkFrameStarted

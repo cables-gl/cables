@@ -14,6 +14,8 @@ op.setPortGroup("Position", [posX, posY, posZ]);
 op.setPortGroup("Scale", [scale]);
 op.setUiAxisPorts(posX, posY, posZ);
 
+op.toWorkPortsNeedToBeLinked(render, trigger);
+
 const vPos = vec3.create();
 const vScale = vec3.create();
 const transMatrix = mat4.create();
