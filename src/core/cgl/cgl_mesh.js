@@ -367,7 +367,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         {
             if (vertIndices[i] >= this._numVerts)
             {
-                this._log.warn("invalid index in " + this._name);
+                this._log.warn("invalid index in " + this._name,i,vertIndices[i]);
                 return;
             }
         }
