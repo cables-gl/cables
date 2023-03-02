@@ -132,7 +132,7 @@ op.onLoadedValueSet = () =>
     cleanupPorts();
     if (!loadingOut.get() && op.uiAttribs.pasted)
     {
-        update(op.uiAttribs.pasted);
+        op.updateBlueprint(op.uiAttribs.pasted);
     }
 };
 
