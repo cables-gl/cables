@@ -1,5 +1,5 @@
 #ifdef SLOT_POS_WORLD
-    MOD_pos_world=(mMatrix*pos).xyz;
+    MOD_pos_world=(mMatrix*vec4(1.0)).xyz;
 #endif
 
 #ifdef SLOT_POS_LOCAL
