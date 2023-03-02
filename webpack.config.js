@@ -9,7 +9,7 @@ module.exports = (isProduction) =>
         "entry": [
             path.join(__dirname, "src", "core", "index.js"),
         ],
-        "devtool": isProduction ? "source-map" : "cheap-module-eval-source-map",
+        "devtool": isProduction ? "source-map" : "eval-cheap-module-source-map",
         "output": {
             "path": path.join(__dirname, "build"),
             "filename": isProduction ? "cables.min.js" : "cables.max.js",
