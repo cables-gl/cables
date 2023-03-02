@@ -1,6 +1,7 @@
 const patchIdIn = op.inString("externalPatchId", "");
 const subPatchIdIn = op.inString("subPatchId", "");
 const activeIn = op.inBool("active", false);
+const updateIn = op.inTriggerButton("Update");
 const gotoIn = op.inTriggerButton("Open patch");
 const convertIn = op.inTriggerButton("Convert to SubPatch");
 const portsData = op.inString("portsData", "{}");
@@ -18,6 +19,9 @@ subPatchIdIn.setUiAttribs({
 });
 portsData.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hideParam": true });
+
+updateIn.setUiAttribs({ "greyout": true });
+updateIn.setUiAttribs({ "hidePort": true });
 
 gotoIn.setUiAttribs({ "greyout": true });
 gotoIn.setUiAttribs({ "hidePort": true });
@@ -43,11 +47,28 @@ subPatchIdIn.onChange = () =>
 
 if (op.patch.isEditorMode())
 {
-    gotoIn.onTriggered = function ()
+    updateIn.onTriggered = () =>
+    {
+        update();
+    };
+
+    gotoIn.onTriggered = () =>
     {
         if (CABLES && CABLES.sandbox && CABLES.sandbox.getCablesUrl())
         {
-            window.open(CABLES.sandbox.getCablesUrl() + "/edit/" + patchIdIn.get(), "_blank");
+            const patchId = patchIdIn.get();
+            const subpatchId = subPatchIdIn.get();
+            const isLocalSubpatch = ((patchId === gui.patchId) || (patchId === gui.project().shortId));
+            if (isLocalSubpatch)
+            {
+                gui.patchView.setCurrentSubPatch(subpatchId);
+                CABLES.CMD.UI.centerPatchOps();
+                gui.patchView.showBookmarkParamsPanel();
+            }
+            else
+            {
+                window.open(CABLES.sandbox.getCablesUrl() + "/edit/" + patchIdIn.get(), "_blank");
+            }
         }
     };
 
@@ -57,7 +78,7 @@ if (op.patch.isEditorMode())
             CABLES.CMD.PATCH.convertBlueprintToSubpatch(this);
     };
 
-    patchIdIn.onChange = function ()
+    patchIdIn.onChange = () =>
     {
         if (patchIdIn.get())
         {
@@ -78,7 +99,7 @@ if (op.patch.isEditorMode())
     };
 }
 
-const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id, gotoIn.id, convertIn.id];
+const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id, updateIn.id, gotoIn.id, convertIn.id];
 
 if (!activeIn.get())
 {
@@ -131,6 +152,8 @@ op.createBlueprint = (externalPatchId, subPatchId, active = true) =>
 
 function update(ignoreLinks = false)
 {
+    op.setUiError("fetchOps", null);
+
     const patchId = patchIdIn.get();
     const subPatchId = subPatchIdIn.get();
     const blueprintId = patchId + "-" + subPatchId;
@@ -343,6 +366,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
                     gui.setStateSaved();
                 }
                 convertIn.setUiAttribs({ "greyout": false });
+                updateIn.setUiAttribs({ "greyout": false });
             });
         }
         else
