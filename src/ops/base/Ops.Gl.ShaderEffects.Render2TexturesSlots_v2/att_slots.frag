@@ -106,6 +106,21 @@
 
 
 
+#ifdef SLOT_TEX_0_POS_OBJECT
+    outColor0=vec4(MOD_pos_object, 1.);
+#endif
+#ifdef SLOT_TEX_1_POS_OBJECT
+    outColor1=vec4(MOD_pos_object, 1.);
+#endif
+#ifdef SLOT_TEX_2_POS_OBJECT
+    outColor2=vec4(MOD_pos_object, 1.);
+#endif
+#ifdef SLOT_TEX_3_POS_OBJECT
+    outColor3=vec4(MOD_pos_object, 1.);
+#endif
+
+
+
 
 #ifdef SLOT_TEX_0_POS_WORLD
     outColor0=vec4(MOD_pos_world,1.);
