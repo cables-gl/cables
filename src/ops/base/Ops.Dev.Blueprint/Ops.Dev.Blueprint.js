@@ -41,7 +41,7 @@ subPatchIdIn.onChange = () =>
     }
     if (!loadingOut.get() && activeIn.get() && patchIdIn.get() && subPatchIdIn.get())
     {
-        update();
+        op.updateBlueprint();
     }
 };
 
@@ -49,7 +49,7 @@ if (op.patch.isEditorMode())
 {
     updateIn.onTriggered = () =>
     {
-        update();
+        op.updateBlueprint();
     };
 
     gotoIn.onTriggered = () =>
@@ -89,7 +89,7 @@ if (op.patch.isEditorMode())
             }
             if (!loadingOut.get() && activeIn.get() && subPatchIdIn.get())
             {
-                update();
+                op.updateBlueprint();
             }
         }
         else
@@ -115,7 +115,7 @@ activeIn.onChange = () =>
             op.setUiError("inactive", null);
             if (!patchLoadListener)
             {
-                update();
+                op.updateBlueprint();
             }
         }
         else
@@ -146,11 +146,11 @@ op.createBlueprint = (externalPatchId, subPatchId, active = true) =>
     cleanupPorts();
     if (!loadingOut.get())
     {
-        update();
+        op.updateBlueprint();
     }
 };
 
-function update(ignoreLinks = false)
+op.updateBlueprint = (ignoreLinks = false) =>
 {
     op.setUiError("fetchOps", null);
 
@@ -279,7 +279,7 @@ function update(ignoreLinks = false)
             );
         }
     }
-}
+};
 
 function addBlueprintInfoToOp(serializedOp)
 {
@@ -729,6 +729,6 @@ let patchLoadListener = op.patch.on("patchLoadEnd", (newOps, obj, genIds) =>
     const isRelevant = newOps.some((newOp) => { return newOp.id === op.id || (newOp.uiAttribs && newOp.uiAttribs.subPatch === subPatchIdIn.get()); });
     if (isRelevant)
     {
-        update();
+        op.updateBlueprint();
     }
 });
