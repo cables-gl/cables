@@ -26,6 +26,8 @@ op.setPortGroup("Texture Parameters", [inWrap, inFilter, inPixel]);
 r.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Color", [r, g, b, a]);
 
+op.toWorkPortsNeedToBeLinked(render);
+
 const prevViewPort = [0, 0, 0, 0];
 let effect = null;
 let tex = null;

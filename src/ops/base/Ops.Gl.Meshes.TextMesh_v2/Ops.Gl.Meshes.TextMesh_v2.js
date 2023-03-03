@@ -21,6 +21,8 @@ const
 
 const cgl = op.patch.cgl;
 
+op.toWorkPortsNeedToBeLinked(render);
+
 op.setPortGroup("Masking", [inMulTex, inMulTexMask]);
 
 const textureSize = 1024;

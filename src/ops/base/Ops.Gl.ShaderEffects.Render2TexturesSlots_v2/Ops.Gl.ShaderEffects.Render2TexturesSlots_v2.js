@@ -32,6 +32,7 @@ for (let i = 0; i < NUM_BUFFERS; i++)
         "Material Id",
         "Position World",
         "Position Local",
+        "Position Object",
         "Normal",
         "Normal * ModelView",
         "FragCoord.z",
@@ -50,6 +51,7 @@ function updateDefines()
     let strExt = "";
     let hasPosWorld = false;
     let hasPosLocal = false;
+    let hasPosObject = false;
     let hasNormalModelView = false;
 
     for (let i = 0; i < NUM_BUFFERS; i++)
@@ -63,9 +65,11 @@ function updateDefines()
         hasPosWorld = (ports[i].get() == "Position World") || hasPosWorld;
         hasNormalModelView = (ports[i].get() == "Normal * ModelView") || hasNormalModelView;
         hasPosLocal = (ports[i].get() == "Position Local") || hasPosLocal;
+        hasPosObject = (ports[i].get() == "Position Object") || hasPosObject;
 
         mod.toggleDefine("SLOT_TEX_" + i + "_POS_WORLD", ports[i].get() == "Position World");
         mod.toggleDefine("SLOT_TEX_" + i + "_POS_LOCAL", ports[i].get() == "Position Local");
+        mod.toggleDefine("SLOT_TEX_" + i + "_POS_OBJECT", ports[i].get() == "Position Object");
         mod.toggleDefine("SLOT_TEX_" + i + "_TEXCOORD", ports[i].get() == "TexCoord");
         mod.toggleDefine("SLOT_TEX_" + i + "_MATERIALID", ports[i].get() == "Material Id");
 
@@ -78,6 +82,7 @@ function updateDefines()
 
     mod.toggleDefine("SLOT_POS_WORLD", hasPosWorld);
     mod.toggleDefine("SLOT_POS_LOCAL", hasPosLocal);
+    mod.toggleDefine("SLOT_POS_OBJECT", hasPosObject);
     mod.toggleDefine("SLOT_POS_NORMAL_MV", hasNormalModelView);
 
     op.setUiAttrib({ "extendTitle": strExt });

@@ -15,17 +15,17 @@
     // vec3 MOD_dis
 
     #ifdef MOD_CHAN_R
-        vec3 MOD_dis=vec3( texture(MOD_texture,MOD_coord).r );
+        vec3 MOD_dis=vec3( texture(MOD_texture,mod(MOD_coord,1.0)).r );
     #endif
     #ifdef MOD_CHAN_G
-        vec3 MOD_dis=vec3( texture(MOD_texture,MOD_coord).g );
+        vec3 MOD_dis=vec3( texture(MOD_texture,mod(MOD_coord,1.0)).g );
     #endif
     #ifdef MOD_CHAN_B
-        vec3 MOD_dis=vec3( texture(MOD_texture,MOD_coord).b );
+        vec3 MOD_dis=vec3( texture(MOD_texture,mod(MOD_coord,1.0)).b );
     #endif
 
     #ifdef MOD_CHAN_RGB
-        vec3 MOD_dis=vec3( texture(MOD_texture,MOD_coord).rgb );
+        vec3 MOD_dis=vec3( texture(MOD_texture,mod(MOD_coord,1.0)).rgb );
     #endif
 
     #ifdef MOD_COLORIZE

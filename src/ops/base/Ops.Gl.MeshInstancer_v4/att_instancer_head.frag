@@ -1,2 +1,2 @@
 IN vec4 frag_instColor;
-IN float frag_instIndex;
+flat IN float frag_instIndex;
