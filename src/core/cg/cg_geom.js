@@ -714,20 +714,19 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
                         attr.data[this.verticesIndices[i + s] * 3 + 1],
                         attr.data[this.verticesIndices[i + s] * 3 + 2]);
                 else if(attr.itemSize==4)
-                    na.push(
+                    na.push( 
                         attr.data[this.verticesIndices[i + s] * 4 + 0],
                         attr.data[this.verticesIndices[i + s] * 4 + 1],
                         attr.data[this.verticesIndices[i + s] * 4 + 2],
                         attr.data[this.verticesIndices[i + s] * 4 + 3]);
-                    else 
-                    if(attr.itemSize==2)
-                        na.push(
-                            attr.data[this.verticesIndices[i + s] * 2 + 0],
-                            attr.data[this.verticesIndices[i + s] * 2 + 1]);
-                    if(attr.itemSize==1)
-                        na.push(
-                            attr.data[this.verticesIndices[i + s]]);
-                    else console.log("unknown attr",attr)
+                else if(attr.itemSize==2)
+                    na.push(
+                        attr.data[this.verticesIndices[i + s] * 2 + 0],
+                        attr.data[this.verticesIndices[i + s] * 2 + 1]);
+                else if(attr.itemSize==1)
+                    na.push(
+                        attr.data[this.verticesIndices[i + s]]);
+                else console.log("unknown attr",attr)
             }
         }
         this.setAttribute(attr.name, na, attr.itemSize);
