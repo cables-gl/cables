@@ -152,7 +152,7 @@ const VarSetOpWrapper = class
         {
             this._arr = [];
             CABLES.copyArray(v, this._arr);
-            this._op.patch.setVarValue(name, null);
+            // this._op.patch.setVarValue(name, null);
             this._op.patch.setVarValue(name, this._arr);
         }
         else

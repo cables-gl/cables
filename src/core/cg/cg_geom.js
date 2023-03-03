@@ -701,13 +701,12 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     {
         const attr=this._attributes[j];
         let na=[];
-        
         console.log(attr.name)
+        
         for (let i = 0; i < this.verticesIndices.length; i += 3)
         {
             for (let s = 0; s < 3; s ++)
             {
-
                 if(attr.itemSize==3)
                     na.push(
                         attr.data[this.verticesIndices[i + s] * 3 + 0],
@@ -732,8 +731,6 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
         this.setAttribute(attr.name, na, attr.itemSize);
 
     }
-
-
 
     for (let i = 0; i < this.verticesIndices.length; i += 3)
     {
@@ -770,10 +767,11 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     //             this.texCoords[this.verticesIndices[i + 0] * 2 + 1]);
     //     }
 
-    //     newIndizes.push(count);
-    //     count++;
+        newIndizes.push(count);
+        count++;
 
-        newVerts.push(this.vertices[this.verticesIndices[i + 1] * 3 + 0],
+        newVerts.push(
+            this.vertices[this.verticesIndices[i + 1] * 3 + 0],
             this.vertices[this.verticesIndices[i + 1] * 3 + 1],
             this.vertices[this.verticesIndices[i + 1] * 3 + 2]);
 
@@ -805,8 +803,8 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     //             this.texCoords[this.verticesIndices[i + 1] * 2 + 1]);
     //     }
 
-    //     newIndizes.push(count);
-    //     count++;
+        newIndizes.push(count);
+        count++;
 
         newVerts.push(
             this.vertices[this.verticesIndices[i + 2] * 3 + 0],
@@ -847,13 +845,17 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     }
 
 
+    for(let i=0;i<120;i+=3)
+        console.log(
+            Math.round(newVerts[i] ));
+
     this.vertices = newVerts;
     // this.texCoords = newTexCoords;
     // this.vertexNormals = newNormals;
     // if (newTangents.length > 0) this.tangents = newTangents;
     // if (newBiTangents.length > 0) this.biTangents = newBiTangents;
-    this.verticesIndices.length = 0;
-    // if (reIndex) this.verticesIndices = newIndizes;
+    this.verticesIndices = [];
+    if (reIndex) this.verticesIndices = newIndizes;
 
     if (!dontCalcNormals) this.calculateNormals();
 };
