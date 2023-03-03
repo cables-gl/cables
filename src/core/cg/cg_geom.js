@@ -713,7 +713,7 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
                         attr.data[this.verticesIndices[i + s] * 3 + 0],
                         attr.data[this.verticesIndices[i + s] * 3 + 1],
                         attr.data[this.verticesIndices[i + s] * 3 + 2]);
-                if(attr.itemSize==4)
+                else if(attr.itemSize==4)
                     na.push(
                         attr.data[this.verticesIndices[i + s] * 4 + 0],
                         attr.data[this.verticesIndices[i + s] * 4 + 1],
