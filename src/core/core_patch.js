@@ -1376,8 +1376,8 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 
                         for (l in json.ops[j].portsIn[k].links)
                         {
-                            if (json.ops[j].portsIn[k].links[l].objIn == searchID) json.ops[j].portsIn[k].links[l].objIn = newID;
-                            if (json.ops[j].portsIn[k].links[l].objOut == searchID) json.ops[j].portsIn[k].links[l].objOut = newID;
+                            if (json.ops[j].portsIn[k].links[l].objIn === searchID) json.ops[j].portsIn[k].links[l].objIn = newID;
+                            if (json.ops[j].portsIn[k].links[l].objOut === searchID) json.ops[j].portsIn[k].links[l].objOut = newID;
                         }
                     }
                 }
@@ -1394,8 +1394,8 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 
                         for (l in json.ops[j].portsOut[k].links)
                         {
-                            if (json.ops[j].portsOut[k].links[l].objIn == searchID) json.ops[j].portsOut[k].links[l].objIn = newID;
-                            if (json.ops[j].portsOut[k].links[l].objOut == searchID) json.ops[j].portsOut[k].links[l].objOut = newID;
+                            if (json.ops[j].portsOut[k].links[l].objIn === searchID) json.ops[j].portsOut[k].links[l].objIn = newID;
+                            if (json.ops[j].portsOut[k].links[l].objOut === searchID) json.ops[j].portsOut[k].links[l].objOut = newID;
                         }
                     }
                 }
@@ -1412,7 +1412,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
         {
             for (const k in json.ops[i].portsIn)
             {
-                if (json.ops[i].portsIn[k].name == "patchId")
+                if (json.ops[i].portsIn[k].name === "patchId")
                 {
                     let newId = uuid();
                     if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].portsIn[k].value);
@@ -1424,10 +1424,14 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 
                     for (let j = 0; j < json.ops.length; j++)
                     {
-                        if (json.ops[j].uiAttribs.subPatch == oldSubPatchId)
+                        // op has no uiAttribs in export, we don't care about subpatches in export though
+                        if (json.ops[j].uiAttribs)
                         {
-                            json.ops[j].uiAttribs.subPatch = newSubPatchId;
-                            fixedSubPatches.push(json.ops[j].id);
+                            if (json.ops[j].uiAttribs.subPatch === oldSubPatchId)
+                            {
+                                json.ops[j].uiAttribs.subPatch = newSubPatchId;
+                                fixedSubPatches.push(json.ops[j].id);
+                            }
                         }
                     }
                 }
@@ -1439,13 +1443,14 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
         let found = false;
         for (let j = 0; j < fixedSubPatches.length; j++)
         {
-            if (json.ops[kk].id == fixedSubPatches[j])
+            if (json.ops[kk].id === fixedSubPatches[j])
             {
                 found = true;
                 break;
             }
         }
-        if (!found)
+        // op has no uiAttribs in export, we don't care about subpatches in export though
+        if (!found && json.ops[kk].uiAttribs)
         {
             json.ops[kk].uiAttribs.subPatch = parentSubPatchId;
         }

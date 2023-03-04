@@ -682,83 +682,126 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 {
     const newVerts = [];
     const newIndizes = [];
-    const newTexCoords = [];
-    const newNormals = [];
-    const newTangents = [];
-    const newBiTangents = [];
+    // const newTexCoords = [];
+    // const newNormals = [];
+    // const newTangents = [];
+    // const newBiTangents = [];
 
     let count = 0;
-    let i = 0;
 
-    for (i = 0; i < this.verticesIndices.length; i += 3)
+
+    // const attr = {
+    //     "name": name,
+    //     "data": arr,
+    //     "itemSize": itemSize,
+    //     "type": attrType,
+    // };
+    
+    for (let j in this._attributes) 
+    {
+        const attr=this._attributes[j];
+        let na=[];
+        console.log(attr.name)
+        
+        for (let i = 0; i < this.verticesIndices.length; i += 3)
+        {
+            for (let s = 0; s < 3; s ++)
+            {
+                if(attr.itemSize==3)
+                    na.push(
+                        attr.data[this.verticesIndices[i + s] * 3 + 0],
+                        attr.data[this.verticesIndices[i + s] * 3 + 1],
+                        attr.data[this.verticesIndices[i + s] * 3 + 2]);
+                else if(attr.itemSize==4)
+                    na.push( 
+                        attr.data[this.verticesIndices[i + s] * 4 + 0],
+                        attr.data[this.verticesIndices[i + s] * 4 + 1],
+                        attr.data[this.verticesIndices[i + s] * 4 + 2],
+                        attr.data[this.verticesIndices[i + s] * 4 + 3]);
+                else if(attr.itemSize==2)
+                    na.push(
+                        attr.data[this.verticesIndices[i + s] * 2 + 0],
+                        attr.data[this.verticesIndices[i + s] * 2 + 1]);
+                else if(attr.itemSize==1)
+                    na.push(
+                        attr.data[this.verticesIndices[i + s]]);
+                else console.log("unknown attr",attr)
+            }
+        }
+        this.setAttribute(attr.name, na, attr.itemSize);
+
+    }
+
+    for (let i = 0; i < this.verticesIndices.length; i += 3)
     {
         newVerts.push(
             this.vertices[this.verticesIndices[i + 0] * 3 + 0],
             this.vertices[this.verticesIndices[i + 0] * 3 + 1],
             this.vertices[this.verticesIndices[i + 0] * 3 + 2]);
 
-        newNormals.push(
-            this.vertexNormals[this.verticesIndices[i + 0] * 3 + 0],
-            this.vertexNormals[this.verticesIndices[i + 0] * 3 + 1],
-            this.vertexNormals[this.verticesIndices[i + 0] * 3 + 2]);
+    //     newNormals.push(
+    //         this.vertexNormals[this.verticesIndices[i + 0] * 3 + 0],
+    //         this.vertexNormals[this.verticesIndices[i + 0] * 3 + 1],
+    //         this.vertexNormals[this.verticesIndices[i + 0] * 3 + 2]);
 
-        if (this.tangents.length > 0)
-            newTangents.push(
-                this.tangents[this.verticesIndices[i + 0] * 3 + 0],
-                this.tangents[this.verticesIndices[i + 0] * 3 + 1],
-                this.tangents[this.verticesIndices[i + 0] * 3 + 2]);
+    //     if (this.tangents.length > 0)
+    //         newTangents.push(
+    //             this.tangents[this.verticesIndices[i + 0] * 3 + 0],
+    //             this.tangents[this.verticesIndices[i + 0] * 3 + 1],
+    //             this.tangents[this.verticesIndices[i + 0] * 3 + 2]);
 
-        if (this.biTangents.length > 0)
-            newBiTangents.push(
-                this.biTangents[this.verticesIndices[i + 0] * 3 + 0],
-                this.biTangents[this.verticesIndices[i + 0] * 3 + 1],
-                this.biTangents[this.verticesIndices[i + 0] * 3 + 2]);
+    //     if (this.biTangents.length > 0)
+    //         newBiTangents.push(
+    //             this.biTangents[this.verticesIndices[i + 0] * 3 + 0],
+    //             this.biTangents[this.verticesIndices[i + 0] * 3 + 1],
+    //             this.biTangents[this.verticesIndices[i + 0] * 3 + 2]);
 
-        if (!this.texCoords)
-        {
-            newTexCoords.push(0, 0);
-        }
-        else
-        {
-            newTexCoords.push(
-                this.texCoords[this.verticesIndices[i + 0] * 2 + 0],
-                this.texCoords[this.verticesIndices[i + 0] * 2 + 1]);
-        }
+    //     if (!this.texCoords)
+    //     {
+    //         newTexCoords.push(0, 0);
+    //     }
+    //     else
+    //     {
+    //         newTexCoords.push(
+    //             this.texCoords[this.verticesIndices[i + 0] * 2 + 0],
+    //             this.texCoords[this.verticesIndices[i + 0] * 2 + 1]);
+    //     }
 
         newIndizes.push(count);
         count++;
 
-        newVerts.push(this.vertices[this.verticesIndices[i + 1] * 3 + 0],
+        newVerts.push(
+            this.vertices[this.verticesIndices[i + 1] * 3 + 0],
             this.vertices[this.verticesIndices[i + 1] * 3 + 1],
             this.vertices[this.verticesIndices[i + 1] * 3 + 2]);
 
-        newNormals.push(this.vertexNormals[this.verticesIndices[i + 1] * 3 + 0],
-            this.vertexNormals[this.verticesIndices[i + 1] * 3 + 1],
-            this.vertexNormals[this.verticesIndices[i + 1] * 3 + 2]);
+    //     newNormals.push(this.vertexNormals[this.verticesIndices[i + 1] * 3 + 0],
+    //         this.vertexNormals[this.verticesIndices[i + 1] * 3 + 1],
+    //         this.vertexNormals[this.verticesIndices[i + 1] * 3 + 2]);
 
 
-        if (this.tangents.length > 0)
-            newTangents.push(
-                this.tangents[this.verticesIndices[i + 1] * 3 + 0],
-                this.tangents[this.verticesIndices[i + 1] * 3 + 1],
-                this.tangents[this.verticesIndices[i + 1] * 3 + 2]);
+    //     if (this.tangents.length > 0)
+    //         newTangents.push(
+    //             this.tangents[this.verticesIndices[i + 1] * 3 + 0],
+    //             this.tangents[this.verticesIndices[i + 1] * 3 + 1],
+    //             this.tangents[this.verticesIndices[i + 1] * 3 + 2]);
 
-        if (this.biTangents.length > 0)
-            newBiTangents.push(
-                this.biTangents[this.verticesIndices[i + 1] * 3 + 0],
-                this.biTangents[this.verticesIndices[i + 1] * 3 + 1],
-                this.biTangents[this.verticesIndices[i + 1] * 3 + 2]);
+    //     if (this.biTangents.length > 0)
+    //         newBiTangents.push(
+    //             this.biTangents[this.verticesIndices[i + 1] * 3 + 0],
+    //             this.biTangents[this.verticesIndices[i + 1] * 3 + 1],
+    //             this.biTangents[this.verticesIndices[i + 1] * 3 + 2]);
 
-        if (!this.texCoords)
-        {
-            newTexCoords.push(0, 0);
-        }
-        else
-        {
-            newTexCoords.push(
-                this.texCoords[this.verticesIndices[i + 1] * 2 + 0],
-                this.texCoords[this.verticesIndices[i + 1] * 2 + 1]);
-        }
+    //     if (!this.texCoords)
+    //     {
+    //         newTexCoords.push(0, 0);
+    //     }
+    //     else
+    //     {
+    //         newTexCoords.push(
+    //             this.texCoords[this.verticesIndices[i + 1] * 2 + 0],
+    //             this.texCoords[this.verticesIndices[i + 1] * 2 + 1]);
+    //     }
 
         newIndizes.push(count);
         count++;
@@ -768,44 +811,50 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
             this.vertices[this.verticesIndices[i + 2] * 3 + 1],
             this.vertices[this.verticesIndices[i + 2] * 3 + 2]);
 
-        newNormals.push(
-            this.vertexNormals[this.verticesIndices[i + 2] * 3 + 0],
-            this.vertexNormals[this.verticesIndices[i + 2] * 3 + 1],
-            this.vertexNormals[this.verticesIndices[i + 2] * 3 + 2]);
+    //     newNormals.push(
+    //         this.vertexNormals[this.verticesIndices[i + 2] * 3 + 0],
+    //         this.vertexNormals[this.verticesIndices[i + 2] * 3 + 1],
+    //         this.vertexNormals[this.verticesIndices[i + 2] * 3 + 2]);
 
-        if (this.tangents.length > 0)
-            newTangents.push(
-                this.tangents[this.verticesIndices[i + 2] * 3 + 0],
-                this.tangents[this.verticesIndices[i + 2] * 3 + 1],
-                this.tangents[this.verticesIndices[i + 2] * 3 + 2]);
+    //     if (this.tangents.length > 0)
+    //         newTangents.push(
+    //             this.tangents[this.verticesIndices[i + 2] * 3 + 0],
+    //             this.tangents[this.verticesIndices[i + 2] * 3 + 1],
+    //             this.tangents[this.verticesIndices[i + 2] * 3 + 2]);
 
-        if (this.biTangents.length > 0)
-            newBiTangents.push(
-                this.biTangents[this.verticesIndices[i + 2] * 3 + 0],
-                this.biTangents[this.verticesIndices[i + 2] * 3 + 1],
-                this.biTangents[this.verticesIndices[i + 2] * 3 + 2]);
+    //     if (this.biTangents.length > 0)
+    //         newBiTangents.push(
+    //             this.biTangents[this.verticesIndices[i + 2] * 3 + 0],
+    //             this.biTangents[this.verticesIndices[i + 2] * 3 + 1],
+    //             this.biTangents[this.verticesIndices[i + 2] * 3 + 2]);
 
-        if (!this.texCoords)
-        {
-            newTexCoords.push(0, 0);
-        }
-        else
-        {
-            newTexCoords.push(
-                this.texCoords[this.verticesIndices[i + 2] * 2 + 0],
-                this.texCoords[this.verticesIndices[i + 2] * 2 + 1]);
-        }
+
+    //     if (!this.texCoords)
+    //     {
+    //         newTexCoords.push(0, 0);
+    //     }
+    //     else
+    //     {
+    //         newTexCoords.push(
+    //             this.texCoords[this.verticesIndices[i + 2] * 2 + 0],
+    //             this.texCoords[this.verticesIndices[i + 2] * 2 + 1]);
+    //     }
 
         newIndizes.push(count);
         count++;
     }
 
+
+    for(let i=0;i<120;i+=3)
+        console.log(
+            Math.round(newVerts[i] ));
+
     this.vertices = newVerts;
-    this.texCoords = newTexCoords;
-    this.vertexNormals = newNormals;
-    if (newTangents.length > 0) this.tangents = newTangents;
-    if (newBiTangents.length > 0) this.biTangents = newBiTangents;
-    this.verticesIndices.length = 0;
+    // this.texCoords = newTexCoords;
+    // this.vertexNormals = newNormals;
+    // if (newTangents.length > 0) this.tangents = newTangents;
+    // if (newBiTangents.length > 0) this.biTangents = newBiTangents;
+    this.verticesIndices = [];
     if (reIndex) this.verticesIndices = newIndizes;
 
     if (!dontCalcNormals) this.calculateNormals();

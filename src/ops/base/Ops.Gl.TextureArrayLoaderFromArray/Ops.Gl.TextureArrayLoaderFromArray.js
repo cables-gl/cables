@@ -79,12 +79,12 @@ function loadImage(_i, _url, nocache, cb)
                 {
                     setTempTexture();
                     const errMsg = "could not load texture \"" + url + "\"";
-                    op.uiAttr({ "error": errMsg });
+                    op.setUiError("error", errMsg);
                     op.warn("[TextureArrayLoader] " + errMsg);
                     if (cb)cb();
                     return;
                 }
-                else op.uiAttr({ "error": null });
+                else op.setUiError("error", null);
                 // textureOut.set(tex);
                 width.set(tex.width);
                 height.set(tex.height);
