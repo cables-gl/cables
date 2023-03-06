@@ -38,6 +38,8 @@ const shader = new CGL.Shader(cgl, "PointMaterial");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.define("MAKE_ROUND");
 
+op.toWorkPortsNeedToBeLinked(render);
+
 const
     uniPointSize = new CGL.Uniform(shader, "f", "pointSize", pointSize),
     texturePointSizeMulUniform = new CGL.Uniform(shader, "f", "texPointSizeMul", texturePointSizeMul),
