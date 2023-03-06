@@ -105,7 +105,6 @@
     },
     "summary": "create a random array of 1 to 4 dimensions",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.RandomNumbersArray4_v2",
         "Ops.Array.RandomNumbersArray3",
