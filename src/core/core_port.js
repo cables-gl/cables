@@ -883,7 +883,22 @@ class SwitchPort extends Port
 
         this.get=()=>
         {
-            return super.get()||"";
+            
+            const s=super.get()||"";
+
+            if(CABLES.UI)
+            {
+                console.log("SWITCHY",s)
+                if(!s || uiAttribs.values.indexOf(s)==-1)
+                {
+                    this.parent.setUiError("invalidswitch","Invalid Switch Value \""+this.name+"\": "+s);
+                }
+                else this.parent.setUiError("invalidswitch",null);
+                
+
+            }
+
+            return s;
         }
 
         this.indexPort = indexPort;

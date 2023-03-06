@@ -1293,7 +1293,7 @@ const Op = function ()
 
     /**
      * return true if op has this error message id
-     * @function setUiError
+     * @function hasUiError
      * @instance
      * @memberof Op
      * @param {id} error id
