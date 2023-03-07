@@ -3,6 +3,7 @@ const
     inModeSwitch = op.inSwitch("Mode", ["A", "AB", "ABC", "ABCD"], "A"),
     inSeed = op.inValueFloat("Random Seed ", 0),
     inInteger = op.inBool("Integer", false),
+    inClosed = op.inValueBool("Last == First"),
     outValues = op.outArray("Array Out"),
     outTotalPoints = op.outNumber("Chunks Amount"),
     outArrayLength = op.outNumber("Array length");
@@ -51,7 +52,10 @@ inModeSwitch.onChange = function ()
 
 outValues.ignoreValueSerialize = true;
 
-numValues.onChange = inSeed.onChange = inInteger.onChange = init;
+inClosed.onChange =
+    numValues.onChange =
+    inSeed.onChange =
+    inInteger.onChange = init;
 
 const minMaxArray = [];
 
@@ -95,6 +99,12 @@ function init()
             if (isInteger) arr[index] = Math.floor(Math.seededRandom() * ((max + 1) - min) + min);
             else arr[index] = Math.seededRandom() * (max - min) + min;
         }
+    }
+
+    if (inClosed.get() && arr.length > dimension)
+    {
+        for (let i = 0; i < dimension; i++)
+            arr[arr.length - 3 + i] = arr[i];
     }
 
     outValues.setRef(arr);
