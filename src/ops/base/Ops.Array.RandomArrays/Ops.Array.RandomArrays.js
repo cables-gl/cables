@@ -1,10 +1,11 @@
-const numValues = op.inValueInt("Num Values", 100);
-const inModeSwitch = op.inSwitch("Mode", ["A", "AB", "ABC", "ABCD"], "A");
-const inSeed = op.inValueFloat("Random Seed ", 0);
-const inInteger = op.inBool("Integer", false);
-const outValues = op.outArray("Array Out");
-const outTotalPoints = op.outNumber("Chunks Amount");
-const outArrayLength = op.outNumber("Array length");
+const
+    numValues = op.inValueInt("Num Values", 100),
+    inModeSwitch = op.inSwitch("Mode", ["A", "AB", "ABC", "ABCD"], "A"),
+    inSeed = op.inValueFloat("Random Seed ", 0),
+    inInteger = op.inBool("Integer", false),
+    outValues = op.outArray("Array Out"),
+    outTotalPoints = op.outNumber("Chunks Amount"),
+    outArrayLength = op.outNumber("Array length");
 
 const letters = ["A", "B", "C", "D"];
 const arr = [];
@@ -62,10 +63,13 @@ function init()
     const modes = inModeSwitch.uiAttribs.values;
     const index = modes.indexOf(mode);
 
+    const n = Math.floor(Math.abs(numValues.get()));
     Math.randomSeed = inSeed.get();
 
+    op.setUiAttrib({ "extendTitle": n + "*" + mode.length });
+
     const dimension = index + 1;
-    const length = Math.floor(Math.abs(numValues.get() * dimension));
+    const length = n * dimension;
 
     arr.length = length;
     const tupleLength = length / dimension;

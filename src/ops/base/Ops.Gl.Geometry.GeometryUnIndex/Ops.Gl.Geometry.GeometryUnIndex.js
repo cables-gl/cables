@@ -1,12 +1,12 @@
 const
-    geometry = op.inObject("Geometry"),
-    result = op.outObject("Result");
+    geometry = op.inObject("Geometry", null, "geometry"),
+    result = op.outObject("Result", null, "geometry");
 
 geometry.onChange = function ()
 {
     let geom = geometry.get();
 
-    if (geom)
+    if (geom && geom.isGeometry)
     {
         if (!geom.isIndexed())
         {

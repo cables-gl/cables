@@ -55,6 +55,8 @@ const Geometry = function (name)
     this._vertices = [];
     this.verticesIndices = [];
 
+    this.isGeometry=true;
+
     this.morphTargets = [];
 
     Object.defineProperty(this, "vertices", {

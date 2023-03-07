@@ -880,13 +880,28 @@ class SwitchPort extends Port
     {
         super(__parent, name, type, uiAttribs);
 
+
+        this.get=()=>
+        {
+            
+            const s=super.get()||"";
+
+            if(CABLES.UI)
+            {
+                if(!s || uiAttribs.values.indexOf(s)==-1) this.parent.setUiError("invalidswitch","Invalid Switch Value \""+this.name+"\": "+s);
+                else this.parent.setUiError("invalidswitch",null);
+            }
+
+            return s;
+        }
+
         this.indexPort = indexPort;
         this.indexPort.set = (value) =>
         {
             const values = uiAttribs.values;
             if (!values)
             {
-                // console.log("has no values");
+                console.log("has no values");
                 return;
             }
 

@@ -7,13 +7,15 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Geometry"
+                "name": "Geometry",
+                "objType": "geometry"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "Result"
+                "name": "Result",
+                "objType": "geometry"
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryUnIndex"

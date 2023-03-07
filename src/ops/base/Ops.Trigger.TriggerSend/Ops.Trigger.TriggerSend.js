@@ -30,7 +30,7 @@ function updateName()
             new CABLES.UI.ModalDialog({
                 "prompt": true,
                 "title": "New Trigger",
-                "text": "enter a name for the new trigger",
+                "text": "Enter a name for the new trigger",
                 "promptValue": "",
                 "promptOk": (str) =>
                 {

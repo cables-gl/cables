@@ -18,7 +18,7 @@ geometry.onLinkChanged = () =>
 geometry.onChange = function ()
 {
     let geom = geometry.get();
-    if (geom)
+    if (geom && geom.isGeometry)
     {
         const info = geom.getInfo();
         outFaces.set(info.numFaces);

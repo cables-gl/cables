@@ -348,7 +348,7 @@ String.prototype.startsWith = function (prefix)
  * @param {String} suffix
  * @return {Boolean}
  */
-String.prototype.endsWith = function (suffix)
+String.prototype.endsWith = String.prototype.endsWith || function (suffix)
 {
     return this.match(suffix + "$") == suffix;
 };
