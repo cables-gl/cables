@@ -884,13 +884,15 @@ class SwitchPort extends Port
         this.get=()=>
         {
             
-            const s=super.get()||"";
+            const s=super.get();
 
             if(CABLES.UI)
             {
-                if(!s || uiAttribs.values.indexOf(s)==-1) this.parent.setUiError("invalidswitch","Invalid Switch Value \""+this.name+"\": "+s);
+                if(s===""||s===null||s===undefined || uiAttribs.values.indexOf(s)===-1) this.parent.setUiError("invalidswitch","Invalid Switch Value \""+this.name+"\": "+s);
                 else this.parent.setUiError("invalidswitch",null);
             }
+
+            if(s===null||s===undefined)s="";
 
             return s;
         }
