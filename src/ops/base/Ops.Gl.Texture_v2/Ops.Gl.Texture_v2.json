@@ -82,7 +82,6 @@
     ],
     "summary": "Load an image as a texture",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.TextureArrayLoader",
         "Ops.Gl.TextureArrayLoaderFromArray",
