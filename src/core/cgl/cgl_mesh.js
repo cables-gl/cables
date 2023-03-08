@@ -363,6 +363,8 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
     }
     if (vertIndices.length > 0)
     {
+        if (vertIndices instanceof Float32Array) this._log.warn("vertIndices float32Array: " + this._name);
+
         for (let i = 0; i < vertIndices.length; i++)
         {
             if (vertIndices[i] >= this._numVerts)
@@ -377,17 +379,13 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         // todo cache this ?
         // if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
 
-        // if (vertIndices.length > 65535)
-        // {
-        //     console.log("32bit vertex indices...");
-        //     this.vertIndicesTyped = new Uint32Array(vertIndices);
-        // }
-
-        if (vertIndices instanceof Float32Array)
+        if (vertIndices.length > 65535)
         {
-            this._log.warn("vertIndices float32Array: " + this._name);
+            // console.log("32bit vertex indices...");
+            this.vertIndicesTyped = new Uint32Array(vertIndices);
+            this._indexType = this._cgl.gl.UNSIGNED_INT;
         }
-
+        else
         if (vertIndices instanceof Uint32Array)
         {
             this.vertIndicesTyped = vertIndices;
@@ -791,6 +789,7 @@ Mesh.prototype.render = function (shader)
     }
     else
     {
+        if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
         if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
     }

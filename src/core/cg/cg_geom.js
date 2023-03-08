@@ -691,7 +691,6 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 
     let count = 0;
 
-
     // const attr = {
     //     "name": name,
     //     "data": arr,
