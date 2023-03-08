@@ -38,6 +38,11 @@
             },
             {
                 "type": 0,
+                "name": "Last == First",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Min A",
                 "group": "Value Range A",
                 "subType": "number"

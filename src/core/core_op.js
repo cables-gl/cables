@@ -474,6 +474,8 @@ const Op = function ()
             });
             const n = this.addInPort(indexPort);
 
+            for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
+
             const valuePort = new ValueSelectPort(
                 this,
                 name,
@@ -540,6 +542,8 @@ const Op = function ()
                 "hideParam": true
             });
             const n = this.addInPort(indexPort);
+
+            for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
 
             const switchPort = new SwitchPort(
                 this,
