@@ -45,5 +45,13 @@
             "id": "334b6761-9e53-4547-8e6b-cb668e3b6dea",
             "date": 1560257368945
         }
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Patch.Function renamed to Ops.Cables.Function",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678265589989
+        }
     ]
 }
