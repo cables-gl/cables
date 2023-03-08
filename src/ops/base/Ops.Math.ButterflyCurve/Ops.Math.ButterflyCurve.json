@@ -27,5 +27,7 @@
     "summary": "generate coordinates of a butterfly curve",
     "docs": {
         "ports": []
-    }
+    },
+    "collections": null,
+    "relatedops": null
 }
