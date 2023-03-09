@@ -175,7 +175,7 @@ function rebuild()
     geom.tangents = tangents;
     geom.biTangents = biTangents;
 
-    if (numColumns * numRows > 64000)geom.unIndex();
+    // if (numColumns * numRows > 64000)geom.unIndex();
 
     const cgl = op.patch.cgl;
 

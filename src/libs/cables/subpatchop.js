@@ -22,15 +22,28 @@ const SubPatchOp = class
 
         op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
         op.on("loadedValueSet", () => { this.createInOutOps(); });
+
+        op.on("delete", ()=>
+        {
+            for (let i = op.patch.ops.length - 1; i >= 0; i--)
+                if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == this.patchId)
+                    op.patch.deleteOp(op.patch.ops[i].id);
+        });
+        
+    }
+
+    get patchId()
+    {
+        return this._op.patchId.get();
     }
 
     createInOutOps()
     {
-        let patchInputOP = this._op.patch.getSubPatchOp(this._op.patchId.get(), subpatchInputOpName);
-        let patchOutputOP = this._op.patch.getSubPatchOp(this._op.patchId.get(), subpatchOutputOpName);
+        let patchInputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchInputOpName);
+        let patchOutputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchOutputOpName);
 
-        if (!patchInputOP) this._op.patch.addOp(subpatchInputOpName, { "subPatch": this._op.patchId.get(), "translate": { "x": 0, "y": 0 } });
-        if (!patchOutputOP) this._op.patch.addOp(subpatchOutputOpName, { "subPatch": this._op.patchId.get(), "translate": { "x": 0, "y": 0 } });
+        if (!patchInputOP) this._op.patch.addOp(subpatchInputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
+        if (!patchOutputOP) this._op.patch.addOp(subpatchOutputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
 
         // todo: move to correct positions...
     }

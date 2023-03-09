@@ -41,16 +41,16 @@
     "docs": {
         "ports": [
             {
+                "name": "Write",
+                "text": "Writes the `Texture` to the buffer"
+            },
+            {
                 "name": "Texture",
                 "text": "The texture to add to the buffer"
             },
             {
                 "name": "Num",
                 "text": "The size of the ring buffer (how many textures it can hold)"
-            },
-            {
-                "name": "Write",
-                "text": "Writes the `Texture` to the buffer"
             },
             {
                 "name": "Result",
@@ -69,5 +69,7 @@
             "author": "pandur",
             "date": 1645516714215
         }
-    ]
+    ],
+    "collections": null,
+    "relatedops": null
 }

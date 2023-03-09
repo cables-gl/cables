@@ -1,1 +1,1 @@
-[wikipedia]("https://en.wikipedia.org/wiki/Butterfly_curve_(transcendental)")
+[wikipedia](https://en.wikipedia.org/wiki/Butterfly_curve_(transcendental)

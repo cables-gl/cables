@@ -1,0 +1,127 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Function Name"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Default Parameter 1"
+            },
+            {
+                "type": 5,
+                "name": "Default Parameter 2"
+            },
+            {
+                "type": 5,
+                "name": "Default Parameter 3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Parameter 1"
+            },
+            {
+                "type": 5,
+                "name": "Parameter 2"
+            },
+            {
+                "type": 5,
+                "name": "Parameter 3"
+            }
+        ],
+        "name": "Ops.Patch.Function_v2"
+    },
+    "summary": "trigger from external function when embedded into a website",
+    "docs": {
+        "ports": [
+            {
+                "name": "Function Name",
+                "text": "The name of the function you want to define, e.g. when you name the function `myFunction` you can trigger it from your JavaScript-Code using `CABLES.patch.config.myFunction();`"
+            },
+            {
+                "name": "Trigger",
+                "text": "run the function from inside the cables patch"
+            },
+            {
+                "name": "Default Parameter 1",
+                "text": "parameter default value if external function does not define it"
+            },
+            {
+                "name": "Default Parameter 2",
+                "text": "parameter default value if external function does not define it"
+            },
+            {
+                "name": "Default Parameter 3",
+                "text": "parameter default value if external function does not define it"
+            },
+            {
+                "name": "Next",
+                "text": "triggered when function has been called"
+            },
+            {
+                "name": "Parameter 1",
+                "text": "first parameter of the called function, or default"
+            },
+            {
+                "name": "Parameter 2",
+                "text": "second parameter of the called function, or default"
+            },
+            {
+                "name": "Parameter 3",
+                "text": "third parameter of the called function, or default"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "39043a11-1ae0-4568-93a7-ec1493df2662",
+    "created": 1616137341833,
+    "collections": null,
+    "relatedops": null,
+    "todos": [
+        {
+            "message": "needs new version with new string type input",
+            "author": "pandur",
+            "id": "334b6761-9e53-4547-8e6b-cb668e3b6dea",
+            "date": 1560257368945,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1625485633132
+        }
+    ],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Patch.Function",
+            "author": "pandur",
+            "date": 1616137341833
+        },
+        {
+            "message": "Ops.User.pandur.Function2 renamed to Ops.Patch.Function_v2",
+            "author": "pandur",
+            "date": 1616137435220
+        },
+        {
+            "message": "added parameter ports",
+            "author": "stephan",
+            "date": 1625485653120
+        },
+        {
+            "message": "Ops.Patch.Function_v2 renamed to Ops.Cables.Function_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678265578263
+        }
+    ],
+    "issues": "",
+    "youtubeids": []
+}
