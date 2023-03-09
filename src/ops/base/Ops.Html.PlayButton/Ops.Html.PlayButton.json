@@ -88,6 +88,12 @@
             "message": "added: option to not show up when audiocontext is already running",
             "author": "pandur",
             "date": 1553781428839
+        },
+        {
+            "message": "Ops.Patch.PlayButton renamed to Ops.Html.PlayButton",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678265423594
         }
     ],
     "exampleProjectId": "WoGy8s"

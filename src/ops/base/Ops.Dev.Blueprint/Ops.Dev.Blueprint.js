@@ -88,7 +88,7 @@ op.onLoadedValueSet = () =>
     }
 };
 
-op.on("onDelete", removeImportedOps);
+op.on("delete", removeImportedOps);
 
 op.createBlueprint = (externalPatchId, subPatchId, active = true) =>
 {

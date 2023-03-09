@@ -97,6 +97,7 @@ function removeBody()
     }
 
     bodies.length = 0;
+    doResetPos = true;
 }
 
 inReset.onTriggered = () =>
@@ -129,7 +130,9 @@ function updateBodyMeta()
 function setup()
 {
     if (!inActive.get()) return;
+    if (needsRemove) return;
     doScale = true;
+    doResetPos = true;
 
     removeBody();
 
@@ -261,6 +264,7 @@ function setup()
             body.setCollisionFlags(body.getCollisionFlags() | 4);
 
         bodies.push(body);
+        // body.activate();
         // motionStates.push(motionState);
     }
     setPositions();
@@ -272,6 +276,8 @@ function setup()
 
     updateParams();
     updateBodyMeta();
+
+    // console.log("add ammobody",inName.get());
 }
 
 function setPositions()
@@ -285,7 +291,6 @@ function setPositions()
         if (posArr)
         {
             cgl.pushModelMatrix();
-
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [
                 posArr[i * 3 + 0], posArr[i * 3 + 1], posArr[i * 3 + 2]]);
         }
@@ -312,6 +317,7 @@ function renderTransformed()
 {
     if (!bodies.length) return;
     if (!inActive.get()) return;
+    if (!tmpTrans) return;
 
     ping();
 
@@ -323,12 +329,10 @@ function renderTransformed()
             if (ms)
             {
                 ms.getWorldTransform(tmpTrans);
+
+                if (!tmpTrans)console.log("no tmpTrans");
                 let p = tmpTrans.getOrigin();
                 let q = tmpTrans.getRotation();
-
-                cgl.pushModelMatrix();
-
-                mat4.identity(cgl.mMatrix);
 
                 let scale = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
 
@@ -337,7 +341,21 @@ function renderTransformed()
                 // if (inShape.get() == "Cylinder") scale = [inRadius.get() * 2, inSizeY.get(), inRadius.get() * 2];
                 if (inShape.get() == "Capsule") scale = [inRadius.get() * 2, inSizeY.get() * 2, inRadius.get() * 2];
 
-                mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
+                if (isNaN(p.x()) || isNaN(q.x()))
+                {
+                    console.log("ammobody: rot/pos is nan... ", inName.get());
+                    // mat4.fromRotationTranslationScale(transMat, [0, 0, 0, 1], [1, 2, 3], scale);
+                    // doResetPos=true;
+                    // setPositions();
+                    return;
+                }
+                else
+                {
+                    mat4.fromRotationTranslationScale(transMat, [q.x(), q.y(), q.z(), q.w()], [p.x(), p.y(), p.z()], scale);
+                }
+
+                cgl.pushModelMatrix();
+                mat4.identity(cgl.mMatrix);
 
                 mat4.mul(cgl.mMatrix, cgl.mMatrix, transMat);
 
@@ -358,12 +376,12 @@ function ping()
 function update()
 {
     if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0]) == undefined)removeBody();
+    if (world != cgl.frameStore.ammoWorld) removeBody();
     if (needsRemove)
     {
         removeBody();
         needsRemove = false;
     }
-    if (world != cgl.frameStore.ammoWorld) removeBody();
 
     world = cgl.frameStore.ammoWorld;
     if (!world)
@@ -371,7 +389,7 @@ function update()
         outRayHit.set(false);
         return;
     }
-    if (!bodies.length) setup(world);
+    if (!bodies.length) setup();
     if (!bodies.length) return;
     if (bodies[0] && inNeverDeactivate.get()) bodies[0].activate(); // body.setActivationState(Ammo.DISABLE_DEACTIVATION); did not work.....
 

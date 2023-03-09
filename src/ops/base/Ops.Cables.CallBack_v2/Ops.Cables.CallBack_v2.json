@@ -38,6 +38,12 @@
             "message": "Ops.Patch.CallBackString renamed to Ops.Patch.CallBack_v2",
             "author": "pandur",
             "date": 1587362629023
+        },
+        {
+            "message": "Ops.Patch.CallBack_v2 renamed to Ops.Cables.CallBack_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678265305998
         }
     ],
     "summary": "Executes an external function (external javascript)",

@@ -90,5 +90,13 @@
             }
         ]
     },
-    "exampleProjectId": "5FQ08W"
+    "exampleProjectId": "5FQ08W",
+    "changelog": [
+        {
+            "message": "Ops.Patch.LoadingStatus renamed to Ops.Cables.LoadingStatus",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678266015307
+        }
+    ]
 }

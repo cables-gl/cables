@@ -565,16 +565,16 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
 
-                opToDelete.emitEvent("onDelete", this.ops[i]);
-
+                
                 if (this.onDelete)
                 {
                     // todo: remove
                     this._log.warn("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
-
+                
                 this.ops.splice(i, 1);
+                opToDelete.emitEvent("delete", this.ops[i]);
                 this.emitEvent("onOpDelete", opToDelete, reloadingOp);
 
                 if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
