@@ -2,6 +2,8 @@ const
     inGeo = op.inObject("Geometry", null, "geometry"),
     outStr = op.outString("Obj");
 
+op.toWorkPortsNeedToBeLinked(inGeo);
+
 function decimal(n)
 {
     return Math.round(n * 10000000) / 10000000;

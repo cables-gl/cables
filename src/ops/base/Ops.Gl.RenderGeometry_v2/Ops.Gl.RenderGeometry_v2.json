@@ -1,0 +1,65 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.RenderGeometry2"
+    },
+    "summary": "Render a geometry as mesh",
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "0a9bdb39-8250-460e-8d99-50fe6825d956",
+    "created": 1678359531644,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Geometry",
+                "text": "Geometry object in to render"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "relatedops": null,
+    "exampleProjectId": "w6QYlH",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.RenderGeometry",
+            "author": "pandur",
+            "date": 1678359531644
+        },
+        {
+            "message": "Ops.User.pandur.RenderGeometry2 renamed to Ops.Gl.RenderGeometry_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678359694277
+        }
+    ]
+}

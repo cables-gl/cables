@@ -4,12 +4,13 @@ const
     forceZUp = op.inValueBool("Force Z Up"),
     geomOut = op.outObject("Geometry Out");
 
+op.toWorkPortsNeedToBeLinked(geometry);
 geomOut.ignoreValueSerialize = true;
 geometry.ignoreValueSerialize = true;
 
-geometry.onChange = calc;
-smoothNormals.onChange = calc;
-forceZUp.onChange = calc;
+geometry.onChange =
+    smoothNormals.onChange =
+    forceZUp.onChange = calc;
 
 let geom = null;
 
