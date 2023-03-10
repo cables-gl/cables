@@ -690,7 +690,6 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     {
         const attr=this._attributes[j];
         let na=[];
-        console.log(attr.name)
         
         for (let i = 0; i < this.verticesIndices.length; i += 3)
         {
@@ -746,11 +745,6 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
         newIndizes.push(count);
         count++;
     }
-
-
-    for(let i=0;i<120;i+=3)
-        console.log(
-            Math.round(newVerts[i] ));
 
     this.vertices = newVerts;
 

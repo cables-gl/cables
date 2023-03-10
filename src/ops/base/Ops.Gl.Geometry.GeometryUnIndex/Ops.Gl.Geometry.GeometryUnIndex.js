@@ -4,20 +4,20 @@ const
 
 geometry.onChange = function ()
 {
-    let geom = geometry.get();
+    const geom = geometry.get();
 
     if (geom && geom.isGeometry)
     {
         if (!geom.isIndexed())
         {
-            result.set(geom);
+            result.setRef(geom);
             return;
         }
 
         const newGeom = geom.copy();
         newGeom.unIndex(false, true);
 
-        result.set(newGeom);
+        result.setRef(newGeom);
     }
     else result.set(null);
 };

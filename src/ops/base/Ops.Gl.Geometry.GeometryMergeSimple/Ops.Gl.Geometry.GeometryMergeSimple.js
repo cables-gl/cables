@@ -3,6 +3,8 @@ const
     inGeom2 = op.inObject("Geometry 2"),
     outGeom = op.outObject("Geometry Result");
 
+op.toWorkPortsNeedToBeLinked(inGeom);
+
 let geom = new CGL.Geometry(op.name);
 outGeom.set(geom);
 
