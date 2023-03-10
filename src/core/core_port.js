@@ -384,6 +384,7 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.animated) this.setAnimated(objPort.animated);
     if (objPort.useVariable) this.setVariableName(objPort.useVariable);
 
+    if (objPort.title) this.setUiAttribs({ "title": objPort.title });
     if (objPort.expose) this.setUiAttribs({ "expose": true });
 
     if (objPort.anim)
@@ -418,6 +419,7 @@ Port.prototype.getSerialized = function ()
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
     if (this.uiAttribs.expose) obj.expose = true;
+    if (this.uiAttribs.title) obj.title = this.uiAttribs.title;
     if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
     {
         obj.links = [];
