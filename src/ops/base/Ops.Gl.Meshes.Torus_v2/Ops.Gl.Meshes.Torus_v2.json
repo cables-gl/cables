@@ -1,0 +1,71 @@
+{
+    "summary": "Draw a torus (doughnut, donut, ring mesh)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "sides",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "rings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "innerRadius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "outerRadius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Torus_v2"
+    },
+    "authorName": "pandur",
+    "id": "1455e193-f8fc-4d93-b7f2-33fa57ee2cf5",
+    "created": 1678450297663,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ECMhQ6",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Torus",
+            "author": "pandur",
+            "date": 1678450297664
+        },
+        {
+            "message": "Ops.User.pandur.Torus2 renamed to Ops.Gl.Meshes.Torus_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678451589034
+        }
+    ]
+}
