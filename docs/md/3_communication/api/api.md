@@ -5,7 +5,7 @@ you can access cables functionality via an API
 
 to access the API you need to create an API key.
 
-to create an API key goto your settings, select the tab "apikey" and click "create".
+manage your API keys in [settings](https://dev.cables.gl/settings#apikey)
 
 #### API endpoints
 
