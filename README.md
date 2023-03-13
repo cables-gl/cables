@@ -1,13 +1,9 @@
 # cables
-something something cables
-.
 
+* the preferred way of developing cables locally is using the cables_dev repository: https://github.com/undev-studio/cables_dev
+* that repo contains scripts that do the described work for you
 
 how to behave: https://github.com/pandrr/cables/wiki/Checklist---Creating-new-ops---A-new-op-version---how-to-changelog
-
-how to don't get binary merge conflicts:
-`git config --global merge.ours.driver true`
-
 
 ### docs
 
