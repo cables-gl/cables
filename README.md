@@ -1,13 +1,9 @@
 # cables
-something something cables
-.
 
+* the preferred way of developing cables locally is using the cables_dev repository: https://github.com/undev-studio/cables_dev
+* that repo contains scripts that do the described work for you
 
 how to behave: https://github.com/pandrr/cables/wiki/Checklist---Creating-new-ops---A-new-op-version---how-to-changelog
-
-how to don't get binary merge conflicts:
-`git config --global merge.ours.driver true`
-
 
 ### docs
 
@@ -25,13 +21,13 @@ If you want to create a library, there are some steps you need to consider:
 1. Libraries can be found in `src/core/libs`
 2. Files sould be in folders that (by convention) are named after the namespace they export to
 3. Files in subfolders of these will not be built unless they are named `index.js`
-6. Files control their own namespaces, no exports are used (see below)
-7. The resulting filename will have the structure `folder_subfolder.min/max.js`.
-8. If a file is in the `cables/` namespace, the resulting filename will be `filename.js`
-9. Every library in a subfolder (see 3.) needs an `index.js` as the main entry point.
-10. Webpack builds minified and non-minified versions to `build/libs/`
-11. use `npm run build` to build the libraries
-12. libraries are coped to `../cables_api/public/libs_core/`
+4. Files control their own namespaces, no exports are used (see below)
+5. The resulting filename will have the structure `folder_subfolder.min/max.js`.
+6. If a file is in the `cables/` namespace, the resulting filename will be `filename.js`
+7. Every library in a subfolder (see 3.) needs an `index.js` as the main entry point. 
+8. Webpack builds minified and non-minified versions to `build/libs/`
+9. use `npm run build` to build the libraries 
+10. libraries are coped to `../cables_api/public/libs_core/`
 
 #### Example:
 
