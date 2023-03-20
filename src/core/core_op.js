@@ -670,6 +670,7 @@ const Op = function ()
                 "preview": true
             })
         );
+        p.ignoreValueSerialize = true;
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -686,6 +687,8 @@ const Op = function ()
     Op.prototype.inObject = function (name, v, objType)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType }));
+        p.ignoreValueSerialize = true;
+
         if (v !== undefined) p.set(v);
         return p;
     };

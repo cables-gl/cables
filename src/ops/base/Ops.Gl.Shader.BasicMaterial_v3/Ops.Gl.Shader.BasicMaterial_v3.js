@@ -18,7 +18,7 @@ shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"
 
 shader.setSource(attachments.basicmaterial_vert, attachments.basicmaterial_frag);
 
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 
 render.onTriggered = doRender;
 
