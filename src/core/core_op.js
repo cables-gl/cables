@@ -1427,10 +1427,30 @@ const Op = function ()
 
     Op.prototype._checkLinksNeededToWork = function () {};
 
+    /**
+     * show a warning of this op is not a child of parentOpName
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {String} parentOpName
+     */
     Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
         if (!this.patch.isEditorMode()) return;
         this._needsParentOp = parentOpName;
+    };
+
+    /**
+     * show a warning of this op is a child of parentOpName
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {String} parentOpName
+     */
+    Op.prototype.toWorkShouldNotBeChild = function (parentOpName)
+    {
+        if (!this.patch.isEditorMode()) return;
+        this._needsNotChildOfOp = parentOpName;
     };
 
     /**

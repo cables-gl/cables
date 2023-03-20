@@ -11,6 +11,8 @@ let mesh = null;
 let geom = new CGL.Geometry("fullscreen rectangle");
 let x = 0, y = 0, z = 0, w = 0, h = 0;
 
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
+
 flipX.onChange = rebuildFlip;
 flipY.onChange = rebuildFlip;
 render.onTriggered = doRender;
