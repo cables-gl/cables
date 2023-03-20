@@ -474,7 +474,7 @@ const Op = function ()
             });
             const n = this.addInPort(indexPort);
 
-            if(values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
+            if (values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
 
             const valuePort = new ValueSelectPort(
                 this,
@@ -543,7 +543,7 @@ const Op = function ()
             });
             const n = this.addInPort(indexPort);
 
-            if(values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
+            if (values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
 
             const switchPort = new SwitchPort(
                 this,

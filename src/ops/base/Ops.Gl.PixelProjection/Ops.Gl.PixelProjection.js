@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("render"),
-    useVPSize = op.inBool("use viewport size", true),
+    useVPSize = op.inBool("use viewport size", true), // call "canvas resolution" in next version..."
     width = op.inFloat("Width", 500),
     height = op.inFloat("Height", 500),
     zNear = op.inFloat("frustum near", -500),
     zFar = op.inFloat("frustum far", 500),
-    fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
+    // fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
     inAlign = op.inSwitch("Position 0,0", ["Top Left ", "Top Right", "Center", "Bottom Right", "Bottom Left"], "Bottom Left"),
 
     flipX = op.inBool("Flip X", false),
