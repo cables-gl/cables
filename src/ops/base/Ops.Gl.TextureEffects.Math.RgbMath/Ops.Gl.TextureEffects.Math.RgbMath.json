@@ -57,6 +57,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Multiply Texture",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "Mask",
                 "objType": "texture"
@@ -91,7 +96,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

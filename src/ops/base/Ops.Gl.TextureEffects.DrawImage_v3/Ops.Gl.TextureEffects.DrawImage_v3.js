@@ -186,7 +186,7 @@ function doRender()
 
         if (imgTex && tex)
         {
-            if (tex.textureType != imgTex.textureType && (tex.textureType != CGL.Texture.TYPE_FLOAT || imgTex.textureType != CGL.Texture.TYPE_FLOAT))
+            if (tex.textureType != imgTex.textureType && (tex.textureType == CGL.Texture.TYPE_FLOAT))
                 op.setUiError("textypediff", "Drawing 32bit texture into an 8 bit can result in data/precision loss", 1);
             else
                 op.setUiError("textypediff", null);

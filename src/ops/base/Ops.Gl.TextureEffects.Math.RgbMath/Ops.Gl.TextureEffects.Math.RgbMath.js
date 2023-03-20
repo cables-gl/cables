@@ -10,6 +10,8 @@ const
     g = op.inValue("g", 1),
     b = op.inValue("b", 1),
     a = op.inValue("a", 1),
+    mulTex = op.inValue("Multiply Texture", 1),
+
     inTexMask = op.inTexture("Mask"),
     trigger = op.outTrigger("trigger");
 
@@ -21,6 +23,7 @@ const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 1),
     tex2 = new CGL.Uniform(shader, "t", "texValues", 2),
+    uniformMulTex = new CGL.Uniform(shader, "f", "mulTex", mulTex),
     uniformR = new CGL.Uniform(shader, "f", "r", r),
     uniformG = new CGL.Uniform(shader, "f", "g", g),
     uniformB = new CGL.Uniform(shader, "f", "b", b),
@@ -63,6 +66,8 @@ function updateDefines()
 
     shader.toggleDefine("MOD_CHAN_A", chanA.get());
     a.setUiAttribs({ "greyout": !chanA.get() || inTexValues.isLinked() });
+
+    mulTex.setUiAttribs({ "greyout": !inTexValues.isLinked() });
 
     shader.toggleDefine("MOD_USE_VALUETEX", inTexValues.isLinked());
 }

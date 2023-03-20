@@ -22,3 +22,8 @@ inValue.onChange = inArray.onChange = function ()
     }
     outArray.setRef(newArr);
 };
+
+inArray.onLinkChanged = () =>
+{
+    if (inArray) inArray.copyLinkedUiAttrib("stride", outArray);
+};
