@@ -52,6 +52,7 @@ inAlbedo.setUiAttribs({ "greyout": true });
 inRoughness.setUiAttribs({ "greyout": true });
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Oren-Nayar Diffuse", [inToggleOrenNayar, inAlbedo, inRoughness]);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
 
 inToggleOrenNayar.onChange = function ()
 {

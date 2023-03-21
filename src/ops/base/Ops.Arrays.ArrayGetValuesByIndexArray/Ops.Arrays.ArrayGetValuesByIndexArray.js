@@ -4,6 +4,8 @@ const inIdx = op.inArray("Indices");
 
 const outArr = op.outArray("Results");
 
+op.toWorkPortsNeedToBeLinked(inArr, inIdx);
+
 inArr.onChange = inStride.onChange = inIdx.onChange = () =>
 {
     const arr = inArr.get();

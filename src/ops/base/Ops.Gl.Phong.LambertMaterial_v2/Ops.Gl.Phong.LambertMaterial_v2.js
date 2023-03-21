@@ -1,9 +1,11 @@
 const LIGHT_TYPES = { "ambient": 0, "point": 1, "directional": 2, "spot": 3 };
-const execute = op.inTrigger("Execute");
-const r = op.inValueSlider("Diffuse R", Math.random());
-const g = op.inValueSlider("Diffuse G", Math.random());
-const b = op.inValueSlider("Diffuse B", Math.random());
-const a = op.inValueSlider("Diffuse A", 1.0);
+const
+    execute = op.inTrigger("Execute"),
+    r = op.inValueSlider("Diffuse R", Math.random()),
+    g = op.inValueSlider("Diffuse G", Math.random()),
+    b = op.inValueSlider("Diffuse B", Math.random()),
+    a = op.inValueSlider("Diffuse A", 1.0);
+
 r.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Diffuse Color", [r, g, b, a]);
 const inToggleDoubleSided = op.inBool("Double Sided", false);
@@ -13,6 +15,9 @@ inToggleDoubleSided.onChange = function ()
     shader.toggleDefine("DOUBLE_SIDED", inToggleDoubleSided.get());
 };
 op.setPortGroup("Material Properties", [inToggleDoubleSided]);
+
+op.toWorkPortsNeedToBeLinked(execute);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
 
 const inDiffuseTexture = op.inTexture("Diffuse Texture");
 let diffuseTextureUniform = null;
@@ -67,15 +72,16 @@ const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.setSource(attachments.lambert_vert, attachments.lambert_frag);
 
-const DEFAULT_LIGHTSTACK = [{
-    "type": "point",
-    "position": [0, 2, 1],
-    "intensity": 1,
-    "attenuation": 0,
-    "falloff": 0.5,
-    "radius": 80,
-    "castLight": 1,
-}];
+const DEFAULT_LIGHTSTACK = [
+    {
+        "type": "point",
+        "position": [0, 2, 1],
+        "intensity": 1,
+        "attenuation": 0,
+        "falloff": 0.5,
+        "radius": 80,
+        "castLight": 1,
+    }];
 
 shader.define("MAX_LIGHTS", MAX_LIGHTS.toString());
 

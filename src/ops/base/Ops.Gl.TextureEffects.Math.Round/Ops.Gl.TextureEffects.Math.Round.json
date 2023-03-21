@@ -17,6 +17,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1674725926551
+        },
+        {
+            "message": "Ops.Dev.TexMathRound renamed to Ops.Gl.TextureEffects.Math.Round",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678367178418
         }
     ],
     "authorName": "pandur",

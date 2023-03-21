@@ -47,11 +47,6 @@
             },
             {
                 "type": 0,
-                "name": "Axis index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Position 0,0 index",
                 "subType": "integer"
             },
@@ -83,7 +78,6 @@
     },
     "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "xkIrVtSU4FU"
