@@ -11,6 +11,6 @@ valueInPort.changeAlways = true;
 function update()
 {
     if (!valueInPort.get() && onlyValid.get()) return;
-    if (passThroughPort.get()) valueOutPort.set(valueInPort.get());
+    if (passThroughPort.get()) valueOutPort.setRef(valueInPort.get());
     // else valueOutPort.set(null);
 }

@@ -86,12 +86,12 @@ function update()
             }
             if (foundOut.get())
             {
-                resultOut.set(result);
+                resultOut.setRef(result);
             }
             else
             {
                 op.setUiError("path", "given path seems to be invalid!", 1);
-                resultOut.set([]);
+                resultOut.setRef([]);
             }
         }
     }
@@ -104,5 +104,5 @@ function update()
 function resolve(path, obj = self, separator = ".")
 {
     const properties = Array.isArray(path) ? path : path.split(separator);
-    return properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return properties.reduce((prev, curr) => { return prev && prev[curr]; }, obj);
 }

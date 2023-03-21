@@ -13,7 +13,7 @@ exe.onTriggered = function ()
 
     for (let i = 0; i < theArr.length; i++)
     {
-        val.set(theArr[i]);
+        val.setRef(theArr[i]);
         idx.set(i);
 
         trigger.trigger();

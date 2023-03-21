@@ -5,21 +5,20 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
-                "name": "In"
+                "type": 3,
+                "name": "array"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
-                "name": "Result"
+                "type": 2,
+                "name": "objectOut"
             }
         ],
         "name": "Ops.Array.ArrayUniqueItemInfo"
     },
     "summary": "will give you information about the count of \"duplicates\" in an array, as an object",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
