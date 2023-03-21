@@ -22,7 +22,7 @@ function update()
     const k = key.get();
     if (dat && (dat.hasOwnProperty(k) || dat[k]))
     {
-        result.set(dat[k]);
+        result.setRef(dat[k]);
         if (!result.get())
         {
             arrLength.set(0);

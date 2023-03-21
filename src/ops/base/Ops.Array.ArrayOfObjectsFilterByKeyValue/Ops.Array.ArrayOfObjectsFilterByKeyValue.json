@@ -22,34 +22,33 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Filter Key"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Filter Value"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invert Filter",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "arrayOut"
             }
         ],
-        "name": "Ops.User.simod.ArrayOfObjectsFilterByKeyValue"
+        "name": "Ops.Array.ArrayOfObjectsFilterByKeyValue"
     },
     "summary": "filter key value pairs in objects in an array of objects",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

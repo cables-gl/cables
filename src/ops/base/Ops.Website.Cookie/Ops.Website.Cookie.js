@@ -19,6 +19,6 @@ function str_obj(str)
 
 function update()
 {
-    outCookie.set(str_obj(document.cookie));
+    outCookie.setRef(str_obj(document.cookie));
     outString.set(document.cookie);
 }
