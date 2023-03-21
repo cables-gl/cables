@@ -438,7 +438,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
     if (op)
     {
-        op.objName = objName;
+        op._objName = objName;
         op.patch = this;
     }
     else
@@ -565,14 +565,14 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
 
-                
+
                 if (this.onDelete)
                 {
                     // todo: remove
                     this._log.warn("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
-                
+
                 this.ops.splice(i, 1);
                 opToDelete.emitEvent("delete", this.ops[i]);
                 this.emitEvent("onOpDelete", opToDelete, reloadingOp);

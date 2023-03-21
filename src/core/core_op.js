@@ -32,7 +32,7 @@ const Op = function ()
     this._log = new Logger("core_op");
     this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
     this.storage = {}; // op-specific data to be included in export
-    this.objName = "";
+    this._objName = "";
     this.portsOut = [];
     this.portsIn = [];
     this.portsInData = []; // original loaded patch data
@@ -86,6 +86,14 @@ const Op = function ()
      * @instance
      */
     this.init = null;
+
+
+    Object.defineProperty(this, "objName", {
+        get()
+        {
+            return this._objName;
+        }
+    });
 };
 
 {
@@ -1025,7 +1033,7 @@ const Op = function ()
         const op = {};
 
         if (this.opId) op.opId = this.opId;
-        op.objName = this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
+        // op.objName = this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
 
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs));
