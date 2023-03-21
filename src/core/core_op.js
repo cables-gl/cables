@@ -41,10 +41,16 @@ const Op = function ()
     this.enabled = true;
     this.patch = arguments[0];
     this.name = arguments[1];
-    this._needsLinkedToWork = [];
-    this._needsParentOp = null;
+    // this._needsLinkedToWork = [];
+    // this._needsParentOp = null;
     this._shortOpName = "";
 
+    this._linkTimeRules = {
+        "needsLinkedToWork": [],
+        "needsParentOp": null
+    };
+
+    this.shouldWork = {};
     this.hasUiErrors = false;
     this._uiErrors = {};
 
@@ -1437,21 +1443,24 @@ const Op = function ()
     Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
         if (!this.patch.isEditorMode()) return;
-        this._needsParentOp = parentOpName;
+
+        this._linkTimeRules.needsParentOp = parentOpName;
     };
 
-    /**
-     * show a warning of this op is a child of parentOpName
-     * @function
-     * @instance
-     * @memberof Op
-     * @param {String} parentOpName
-     */
-    Op.prototype.toWorkShouldNotBeChild = function (parentOpName)
+    // /**
+    //  * show a warning of this op is a child of parentOpName
+    //  * @function
+    //  * @instance
+    //  * @memberof Op
+    //  * @param {String} parentOpName
+    //  */
+    Op.prototype.toWorkShouldNotBeChild = function (parentOpName, type)
     {
         if (!this.patch.isEditorMode()) return;
-        this._needsNotChildOfOp = parentOpName;
+        this._linkTimeRules.forbiddenParent = parentOpName;
+        if (type != undefined) this._linkTimeRules.forbiddenParentType = type;
     };
+
 
     /**
      * show a small X to indicate op is not working when given ports are not linked
@@ -1466,12 +1475,12 @@ const Op = function ()
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
-            if (this._needsLinkedToWork.indexOf(arguments[i]) == -1) this._needsLinkedToWork.push(arguments[i]);
+            if (this._linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsLinkedToWork.push(arguments[i]);
     };
     Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
     {
         if (!this.patch.isEditorMode()) return;
-        this._needsLinkedToWork.length = 0;
+        this._linkTimeRules.needsLinkedToWork.length = 0;
         if (this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
     };
 
