@@ -10,7 +10,7 @@ UNI float r;
 UNI float g;
 UNI float b;
 UNI float a;
-
+UNI float mulTex;
 
 
 void main()
@@ -19,7 +19,7 @@ void main()
     vec4 v=vec4(r,g,b,a);
 
     #ifdef MOD_USE_VALUETEX
-        v=texture(texValues,texCoord);
+        v=texture(texValues,texCoord)*mulTex;
     #endif
 
     #ifdef MOD_MASK

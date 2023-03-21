@@ -474,7 +474,7 @@ const Op = function ()
             });
             const n = this.addInPort(indexPort);
 
-            if(values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
+            if (values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
 
             const valuePort = new ValueSelectPort(
                 this,
@@ -543,7 +543,7 @@ const Op = function ()
             });
             const n = this.addInPort(indexPort);
 
-            if(values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
+            if (values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
 
             const switchPort = new SwitchPort(
                 this,
@@ -670,6 +670,7 @@ const Op = function ()
                 "preview": true
             })
         );
+        p.ignoreValueSerialize = true;
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -686,6 +687,8 @@ const Op = function ()
     Op.prototype.inObject = function (name, v, objType)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType }));
+        p.ignoreValueSerialize = true;
+
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -1424,10 +1427,30 @@ const Op = function ()
 
     Op.prototype._checkLinksNeededToWork = function () {};
 
+    /**
+     * show a warning of this op is not a child of parentOpName
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {String} parentOpName
+     */
     Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
         if (!this.patch.isEditorMode()) return;
         this._needsParentOp = parentOpName;
+    };
+
+    /**
+     * show a warning of this op is a child of parentOpName
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {String} parentOpName
+     */
+    Op.prototype.toWorkShouldNotBeChild = function (parentOpName)
+    {
+        if (!this.patch.isEditorMode()) return;
+        this._needsNotChildOfOp = parentOpName;
     };
 
     /**

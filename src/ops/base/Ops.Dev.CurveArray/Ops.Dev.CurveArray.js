@@ -46,9 +46,7 @@ function init()
 
     for (let i = 0; i < arrLength; i++)
     {
-        arr[i * 3] = i / arrLength;
-        arr[i * 3 + 1] = anim.getValue(i / arrLength) * (maxIn - minIn) + minIn;
-        arr[i * 3 + 2] = 0;
+        arr[i] = anim.getValue(i / arrLength) * (maxIn - minIn) + minIn;
     }
 
     values.setRef(arr);

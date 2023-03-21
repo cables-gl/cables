@@ -81,6 +81,7 @@ function shuffleArray(array)
     }
 }
 
+inTexColor.onChange =
 inGeom.onChange = function ()
 {
     needsUpdateSize = true;

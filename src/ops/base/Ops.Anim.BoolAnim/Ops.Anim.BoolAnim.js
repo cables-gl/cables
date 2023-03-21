@@ -5,7 +5,11 @@ const
     bool = op.inValueBool("bool"),
     pease = anim.createPort(op, "easing"),
     duration = op.inValue("duration", 0.5),
+<<<<<<< HEAD
     dir = op.inValueSelect("Direction", ["Animate Both", "Only True", "Only False"], "Animate Both"),
+=======
+    dir = op.inValueSelect("Direction", ["Both", "Only True", "Only False"], "Both"),
+>>>>>>> 05aa44bc3557a5e6c69ffbdd5d2fd79758457f7b
     valueFalse = op.inValue("value false", 0),
     valueTrue = op.inValue("value true", 1),
     next = op.outTrigger("trigger"),
@@ -21,8 +25,10 @@ op.setPortGroup("Values", [valueFalse, valueTrue]);
 dir.onChange = bool.onChange = valueFalse.onChange = valueTrue.onChange = duration.onChange = setAnim;
 setAnim();
 
+
 function setAnim()
 {
+    if (dir.get() == "Animate Both")dir.set("Both");
     finished.set(false);
     const now = (CABLES.now() - startTime) / 1000;
     const oldValue = anim.getValue(now);

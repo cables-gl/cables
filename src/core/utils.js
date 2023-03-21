@@ -114,22 +114,26 @@ export const generateUUID = _uuid;
  * @see http://stackoverflow.com/q/7616461/940217
  * @return {string}
  */
-const _prefixedHash = function (str, prefix = "rnd-")
+const _prefixedHash = function (str, prefix = "id")
 {
+    let hash = 0;
     if (Array.prototype.reduce)
     {
-        return prefix + String(str.split("").reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0));
+        hash = str.split("").reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0);
     }
-    let hash = 0;
-    if (str.length === 0) return prefix + String(hash);
-    for (let i = 0; i < str.length; i++)
+    else
     {
-        let character = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + character;
-        hash &= hash; // Convert to 32bit integer
+        if (str.length > 0)
+        {
+            for (let i = 0; i < str.length; i++)
+            {
+                let character = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + character;
+                hash &= hash; // Convert to 32bit integer
+            }
+        }
     }
-
-    return prefix + String(hash);
+    return prefix + "" + hash;
 };
 export const prefixedHash = _prefixedHash;
 
