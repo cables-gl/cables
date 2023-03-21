@@ -68,7 +68,7 @@ inTex4.onChange =
 inTex5.onChange =
 inTex2.onChange = updateDefines;
 updateUi();
-
+// let needsNewMesh = false;
 exe.onTriggered = doRender;
 exe.onLinkChanged = function ()
 {
@@ -120,7 +120,7 @@ geom.onChange = function ()
         mesh = null;
         return;
     }
-    mesh = new CGL.Mesh(cgl, geom.get());
+    // needsNewMesh = true;
     reset();
 };
 
@@ -144,6 +144,7 @@ function setupArray()
 
 function doRender()
 {
+    if (!mesh && geom.get()) mesh = new CGL.Mesh(cgl, geom.get());
     if (!mesh) return;
     if (recalc) setupArray();
 
