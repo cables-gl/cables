@@ -2,21 +2,36 @@
 
 ## Teaching cables
 
-Cables is used at more and more universities completly for free.
-if you want to teach cables at yours and have any questions don't hesitate to contact us
+Cables is used at more and more universities, being completely free and [MIT-licenced](../licence_payment/licence/licence).
 
-## Cables was used at those schools:
+It's easy to get started, has a vast amount of examples and documentation and it does not need more than a browser and an internet connection. All of this makes it perfectly suited for classrooms or workshops.
 
-- Akademie für Theater und Digitalität, Dortmund, Germany
-- Ecole Supérieure d'Ingénieurs Léonard de Vinci, France
-- Hochschule Ostfalia, Salzgitter, Germany
-- Hyper Island, Karlskrona, Sweden
-- Hyper Island, Stockholm, Sweden
-- Kunsthochschule für Medien, Köln, Germany
-- L'École de design Nantes Atlantique, France
-- Muthesius Kunsthochschule, Kiel, Germany
-- Royal Academy Antwerpen, Netherlands
-- Tokyo Kasei University, Japan
-- Universidad Nacional Autónoma de México, Mexico
-- Uniwersytet Marii Curie-Skłodowskiej, Lublin, Poland
-- École Polytechnique Fédérale de Lausanne, Switzerland
+## Need help?
+
+Do you want to introduce cables to your classroom to teach visual coding, arts, data visualisation?
+
+We have held some workshops and seminars at universities and other educational institutions.
+
+Many people in the cables community did the same, at their institutions, in their home countries, in their languages. 
+There is plenty of know-how to get you going.
+
+We're always looking for educational institutions who would like to use cables in the classroom. 
+
+Please send us an [email](mailto:hi@undev.de) or contact us on (discord)[https://discord.gg/AGTarWv] if you'd like us to help you getting started.
+
+## Cables was used in the classrooms of these institutions:
+
+- [Akademie für Theater und Digitalität](https://theater.digital/), Dortmund, Germany
+- [Ecole Supérieure d'Ingénieurs Léonard de Vinci](https://www.esilv.fr/), France
+- [Hochschule Ostfalia](https://www.ostfalia.de), Salzgitter, Germany
+- [Hyper Island](https://www.hyperisland.com/locations/karlskrona), Karlskrona, Sweden
+- [Hyper Island](https://www.hyperisland.com/locations/stockholm), Stockholm, Sweden
+- [Kunsthochschule für Medien](https://www.khm.de/), Köln, Germany
+- [L'École de design Nantes Atlantique](https://lecolededesign.com), France
+- [Muthesius Kunsthochschule](https://muthesius-kunsthochschule.de/), Kiel, Germany
+- [Royal Academy Antwerpen](https://www.ap-arts.be/en/academy), Netherlands
+- [Tokyo Kasei University](https://www.tokyo-kasei.ac.jp), Japan
+- [Universidad Nacional Autónoma de México](https://www.unam.mx/), Mexico
+- [Uniwersytet Marii Curie-Skłodowskiej](https://www.umcs.pl/), Lublin, Poland
+- [École Polytechnique Fédérale de Lausanne](https://www.epfl.ch), Switzerland
+- [Kunstuniversität Linz](https://kunstuni-linz.at/), Austria
