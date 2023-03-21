@@ -103,7 +103,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Boolean.ToggleBool"
     ],

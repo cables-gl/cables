@@ -10,6 +10,9 @@ const SubPatchOp = class
 
         op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_STRING, { "display": "readonly", "isSubPatchOpExposable": true }));
 
+        op.setUiAttribs({ "subPatchOp": { "version": 2 } });
+
+
         if (op.uiAttribs.parentOfSubpatch)
         {
             op.patchId.set(op.uiAttribs.parentOfSubpatch);
@@ -23,13 +26,17 @@ const SubPatchOp = class
         op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
         op.on("loadedValueSet", () => { this.createInOutOps(); });
 
-        op.on("delete", ()=>
+        op.on("delete", () =>
         {
             for (let i = op.patch.ops.length - 1; i >= 0; i--)
                 if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == this.patchId)
                     op.patch.deleteOp(op.patch.ops[i].id);
         });
-        
+
+        this._op.isExposableSubpatchOp = () =>
+        {
+            return true;
+        };
     }
 
     get patchId()

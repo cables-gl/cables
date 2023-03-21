@@ -5,7 +5,7 @@ const
     bool = op.inValueBool("bool"),
     pease = anim.createPort(op, "easing"),
     duration = op.inValue("duration", 0.5),
-    dir = op.inValueSelect("Direction", ["Animate Both", "Only True", "Only False"], "Both"),
+    dir = op.inValueSelect("Direction", ["Animate Both", "Only True", "Only False"], "Animate Both"),
     valueFalse = op.inValue("value false", 0),
     valueTrue = op.inValue("value true", 1),
     next = op.outTrigger("trigger"),
