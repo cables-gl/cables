@@ -10,6 +10,9 @@ const SubPatchOp = class
 
         op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_STRING, { "display": "readonly" }));
 
+        op.setUiAttribs({ "subPatchOp": { "version": 2 } });
+
+
         if (op.uiAttribs.parentOfSubpatch)
         {
             op.patchId.set(op.uiAttribs.parentOfSubpatch);
@@ -29,6 +32,11 @@ const SubPatchOp = class
                 if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == this.patchId)
                     op.patch.deleteOp(op.patch.ops[i].id);
         });
+
+        this._op.isExposableSubpatchOp = () =>
+        {
+            return true;
+        };
     }
 
     get patchId()

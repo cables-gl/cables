@@ -5,41 +5,41 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 1"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 2"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 3"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 4"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 5"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 6"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 7"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object 8"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result"
             }
         ],

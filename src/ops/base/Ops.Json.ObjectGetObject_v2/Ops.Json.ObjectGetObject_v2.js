@@ -15,7 +15,7 @@ function update()
 {
     if (data.get())
     {
-        result.set(data.get()[key.get()]);
+        result.setRef(data.get()[key.get()]);
     }
     else
     {

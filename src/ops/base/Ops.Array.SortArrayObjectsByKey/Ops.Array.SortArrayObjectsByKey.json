@@ -5,22 +5,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array to sort"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Sort property"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Sorting mode index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Sorted array"
             }
         ],
@@ -28,7 +28,6 @@
     },
     "summary": "sort an array of objects by value of object keys",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

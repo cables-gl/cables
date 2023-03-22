@@ -42,7 +42,7 @@ function update()
             {
                 foundOut.set(true);
             }
-            resultOut.set(result);
+            resultOut.setRef(result);
         }
     }
     else
@@ -54,5 +54,5 @@ function update()
 function resolve(path, obj = self, separator = ".")
 {
     const properties = Array.isArray(path) ? path : path.split(separator);
-    return properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return properties.reduce((prev, curr) => { return prev && prev[curr]; }, obj);
 }

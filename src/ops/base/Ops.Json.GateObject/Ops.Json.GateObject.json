@@ -12,23 +12,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object In"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pass Through",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Only Valid Objects",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object Out"
             }
         ],
@@ -36,7 +36,6 @@
     },
     "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

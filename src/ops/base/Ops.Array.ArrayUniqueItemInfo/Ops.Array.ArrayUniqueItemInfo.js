@@ -19,10 +19,10 @@ inArray.onChange = function ()
                 counts[value] = 1;
             }
         }
-        outObject.set(counts);
+        outObject.setRef(counts);
     }
     else
     {
-        outObject.set(inValue);
+        outObject.setRef(inValue);
     }
 };
