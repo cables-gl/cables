@@ -5,6 +5,6 @@ const
 
 inval.onChange = function ()
 {
-    outArr.set(inval.get());
+    outArr.setRef(inval.get());
     next.trigger();
 };

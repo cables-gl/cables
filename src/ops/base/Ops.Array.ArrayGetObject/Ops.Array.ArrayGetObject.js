@@ -36,8 +36,7 @@ function update()
     }
     if (arr[ind])
     {
-        value.set(null);
-        value.set(arr[ind]);
+        value.setRef(arr[ind]);
         last = arr[ind];
     }
 }

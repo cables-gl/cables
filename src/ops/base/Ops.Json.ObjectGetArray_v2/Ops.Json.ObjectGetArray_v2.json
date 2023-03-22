@@ -40,7 +40,6 @@
     },
     "summary": "Returns an array from a JSON-object",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

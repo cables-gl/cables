@@ -22,9 +22,12 @@ function updateUi()
 
 function update()
 {
-    result.set(null);
+    if (!spread.get())
+    {
+        result.set(null);
 
-    if (!spread.get()) return;
+        return;
+    }
 
     const data = spread.get();
     data.cells = data.cells || [];
@@ -58,7 +61,7 @@ function update()
             }
         }
     }
-    result.set(obj);
+    result.setRef(obj);
 }
 
 function getColName(data, c)

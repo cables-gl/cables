@@ -58,6 +58,5 @@ function exec()
         }
     }
 
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
 }
