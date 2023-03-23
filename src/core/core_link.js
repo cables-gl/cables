@@ -226,6 +226,7 @@ Link.canLink = function (p1, p2)
 
     if (CABLES.UI && p1.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && p2.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
     {
+        if (p1.uiAttribs.objType.indexOf("sg_") == 0 && p2.uiAttribs.objType.indexOf("sg_") == 0) return true;
         if (p1.uiAttribs.objType && p2.uiAttribs.objType)
             if (p1.uiAttribs.objType != p2.uiAttribs.objType)
                 return false;
