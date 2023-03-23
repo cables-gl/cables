@@ -1,20 +1,20 @@
 
 #ifdef MOD_ATTRIB_POS
-MOD_pos=pos.xyz;
+    MOD_pos=pos.xyz;
 #endif
 #ifdef MOD_ATTRIB_NORMAL
-MOD_pos=norm.xyz;
+    MOD_pos=norm.xyz;
 #endif
 #ifdef MOD_ATTRIB_TC
-MOD_pos=vec3(attrTexCoord,1.0);
+    MOD_pos=vec3(attrTexCoord,1.0);
 #endif
 #ifdef MOD_ATTRIB_TEXTURECOLOR
-MOD_pos=texture(MOD_texColor,attrTexCoord).rgb;
+    MOD_pos=texture(MOD_texColor,attrTexCoord).rgb;
 #endif
 
-float tx=mod(attrVertIndex,MOD_texSize)+1.0/MOD_texSize;
-float ty=floor(attrVertIndex/MOD_texSize);
+float tx = mod(attrVertIndex,MOD_texSize)+(1.0/MOD_texSize);
+float ty = ((attrVertIndex)/MOD_texSize);
 
 gl_PointSize=1.0;
 
-pos=vec4(tx,ty+1.0,0.0,1.0);
+pos=vec4(tx,ty,0.0,1.0);
