@@ -4,6 +4,9 @@
 
 highp vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
 
+
+
+
 // vec4 col=texture(MOD_tex,texCoord);
 
 #ifdef MOD_HAS_PS_TEX
@@ -26,6 +29,8 @@ vec3 MOD_pos=col.xyz+pos.xyz;
     pos.z=0.0+pos.z;
     pos.w=1.0;
 #endif
+
+if(col.a==0.0)psMul=0.0;
 
 #ifdef MOD_REMOVEZERO
     if(MOD_pos.x==0.0 && MOD_pos.y==0.0 && MOD_pos.z==0.0) psMul=0.0;

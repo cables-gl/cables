@@ -3,7 +3,7 @@ const
     inArr = op.inArray("array", null, 4),
     inWidth = op.inValueInt("width", 32),
     inHeight = op.inValueInt("height", 32),
-    inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
+    inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "nearest"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     fillUp = op.inBool("Fill Up", true),

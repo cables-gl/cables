@@ -344,6 +344,7 @@ function renderTransformed()
                 if (isNaN(p.x()) || isNaN(q.x()))
                 {
                     console.log("ammobody: rot/pos is nan... ", inName.get());
+                    needsRemove = true;
                     // mat4.fromRotationTranslationScale(transMat, [0, 0, 0, 1], [1, 2, 3], scale);
                     // doResetPos=true;
                     // setPositions();

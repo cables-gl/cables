@@ -7,7 +7,7 @@ const
     inColor = op.inValueBool("Color", false),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
-    inSeed = op.inFloat("Seed", 0),
+    inSeed = op.inFloat("Seed", 1),
     inOutR = op.inBool("Channel R", true),
     inMinR = op.inFloat("Min R", 0),
     inMaxR = op.inFloat("Max R", 1),
