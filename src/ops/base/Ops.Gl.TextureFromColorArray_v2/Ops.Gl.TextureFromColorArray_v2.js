@@ -1,7 +1,7 @@
 const
     inExe = op.inTrigger("Update"),
     inArr = op.inArray("array", null, 4),
-    inStride = op.inSwitch("Source Structure", ["RGB", "RGBA"], "RGBA"),
+    inStride = op.inSwitch("Source Structure", ["MONO", "RGB", "RGBA"], "RGBA"),
     inSizeType = op.inSwitch("Size", ["Manual", "Square", "Row", "Column"], "Manual"),
     inWidth = op.inValueInt("width", 32),
     inHeight = op.inValueInt("height", 32),
@@ -68,6 +68,7 @@ function update()
     let h = inHeight.get();
     let stride = 3;
     if (inStride.get() == "RGBA")stride = 4;
+    if (inStride.get() == "MONO")stride = 1;
 
     let data = inArr.get();
     const isFp = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
@@ -114,6 +115,13 @@ function update()
             if (!isFp)v *= 255;
 
             pixels[i * 4 + j] = v;
+        }
+        if (stride == 1)
+        {
+            const v = pixels[i * 4 + 0];
+            pixels[i * 4 + 1] = v;
+            pixels[i * 4 + 2] = v;
+            pixels[i * 4 + 3] = 1;
         }
 
         if (stride == 3)
