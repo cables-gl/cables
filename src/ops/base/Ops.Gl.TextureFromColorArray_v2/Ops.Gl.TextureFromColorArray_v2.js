@@ -1,14 +1,18 @@
 const
     inExe = op.inTrigger("Update"),
     inArr = op.inArray("array", null, 4),
+    inStride = op.inSwitch("Source Structure", ["RGB", "RGBA"], "RGBA"),
+    inSizeType = op.inSwitch("Size", ["Manual", "Square", "Row", "Column"], "Manual"),
     inWidth = op.inValueInt("width", 32),
     inHeight = op.inValueInt("height", 32),
+    fillUp = op.inBool("Fill Up", true),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "nearest"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
-    fillUp = op.inBool("Fill Up", true),
     outNext = op.outTrigger("Next"),
-    outTex = op.outTexture("Texture out");
+    outTex = op.outTexture("Texture out"),
+    outWidth = op.outNumber("Tex Width"),
+    outHeight = op.outNumber("Tex Height");
 
 const cgl = op.patch.cgl;
 const emptyTex = CGL.Texture.getEmptyTexture(cgl);
@@ -21,10 +25,13 @@ let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let needsUpdate = true;
 inExe.onTriggered = update;
 
-inArr.onChange = () =>
-{
-    needsUpdate = true;
-};
+inStride.onChange =
+inSizeType.onChange =
+    inArr.onChange =
+    () =>
+    {
+        needsUpdate = true;
+    };
 
 tfilter.onChange =
     inPixel.onChange =
@@ -51,9 +58,17 @@ tfilter.onChange =
 function update()
 {
     if (!needsUpdate) return;
+
+    // fillUp.setUiAttribs({greyout:inSizeType.get()!="Manual"});
+    inWidth.setUiAttribs({ "greyout": inSizeType.get() != "Manual" });
+    inHeight.setUiAttribs({ "greyout": inSizeType.get() != "Manual" });
+
     let error = false;
     let w = inWidth.get();
     let h = inHeight.get();
+    let stride = 3;
+    if (inStride.get() == "RGBA")stride = 4;
+
     let data = inArr.get();
     const isFp = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
 
@@ -65,6 +80,21 @@ function update()
         return;
     }
 
+    if (inSizeType.get() == "Square")
+    {
+        w = h = Math.ceil(Math.sqrt(data.length / stride));
+    }
+    else if (inSizeType.get() == "Row")
+    {
+        w = data.length / stride;
+        h = 1;
+    }
+    else if (inSizeType.get() == "Column")
+    {
+        h = data.length / stride;
+        w = 1;
+    }
+
     if (arrayResized)
     {
         if (isFp) pixels = new Float32Array(w * h * 4);
@@ -73,34 +103,30 @@ function update()
         arrayResized = false;
     }
 
-    if (isFp)
-    {
-        for (let i = 0; i < data.length; i++) pixels[i] = data[i];
+    let num = data.length / stride;
+    if (fillUp.get())num = w * h;
 
-        if (fillUp.get())
+    for (let i = 0; i < num; i++)
+    {
+        for (let j = 0; j < stride; j++)
         {
-            for (let i = data.length; i < w * h * 4; i += 4)
-            {
-                const idx = i;
-                const rndIdx = i % data.length;
+            let v = data[(i * stride + j) % data.length];
+            if (!isFp)v *= 255;
 
-                pixels[idx + 0] = data[rndIdx + 0];
-                pixels[idx + 1] = data[rndIdx + 1];
-                pixels[idx + 2] = data[rndIdx + 2];
-                pixels[idx + 3] = data[rndIdx + 3];
-            }
+            pixels[i * 4 + j] = v;
         }
-        else for (let i = data.length; i < w * h * 4; i++) pixels[i] = 0;
-    }
-    else
-    {
-        for (let i = 0; i < data.length; i++) pixels[i] = data[i] * 255;
-        for (let i = data.length; i < w * h * 4; i++) pixels[i] = 0;
+
+        if (stride == 3)
+            if (isFp) pixels[i * 4 + 3] = 1.0;
+            else pixels[i * 4 + 3] = 255;
     }
 
     if (!tex)tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp, "name": "array2texture" });
 
     tex.initFromData(pixels, w, h, cgl_filter, cgl_wrap);
+
+    outWidth.set(w);
+    outHeight.set(h);
 
     outTex.setRef(tex);
 
