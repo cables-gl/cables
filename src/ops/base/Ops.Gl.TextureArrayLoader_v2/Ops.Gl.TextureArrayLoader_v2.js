@@ -97,34 +97,17 @@ function loadImage(i, nocache)
             {
                 if (err)
                 {
+                    console.warn("error loading texture", url, err);
                     setTempTexture();
-                    op.uiAttr({ "error": "could not load texture \"" + filename.get() + "\"" });
                     return;
                 }
-                else op.uiAttr({ "error": null });
-                // textureOut.set(tex);
                 width.set(tex.width);
                 height.set(tex.height);
                 ratio.set(tex.width / tex.height);
 
                 arr[i - parseInt(indexStart.get())] = tex;
-                if (!tex.isPowerOfTwo()) op.uiAttr(
-                    {
-                        "hint": "texture dimensions not power of two! - texture filtering will not work.",
-                        "warning": null
-                    });
-                else op.uiAttr(
-                    {
-                        "hint": null,
-                        "warning": null
-                    });
 
-                // textureOut.set(null);
-                // textureOut.set(tex);
-
-                // tex.printInfo();
-                arrOut.set(null);
-                arrOut.set(arr);
+                arrOut.setRef(arr);
             }, {
                 "wrap": cgl_wrap,
                 "flip": flip.get(),
@@ -132,12 +115,6 @@ function loadImage(i, nocache)
                 "filter": cgl_filter
             });
 
-        // textureOut.set(null);
-        // textureOut.set(tex);
-
-        // if(!textureOut.get() && nocache)
-        // {
-        // }
         loading.set(0);
     }
     else
@@ -182,13 +159,6 @@ function onWrapChange()
 
 op.onFileChanged = function (fn)
 {
-    // if(filename.get() && filename.get().indexOf(fn)>-1)
-    // {
-    //     textureOut.set(null);
-    //     textureOut.set(CGL.Texture.getTempTexture(cgl));
-
-    //     realReload(true);
-    // }
 };
 
 tfilter.set("linear");

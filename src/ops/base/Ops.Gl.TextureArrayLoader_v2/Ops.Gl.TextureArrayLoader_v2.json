@@ -98,7 +98,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Texture",
         "Ops.Gl.TextureArrayLoaderFromArray"
