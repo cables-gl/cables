@@ -8,6 +8,7 @@ const
 r.setUiAttribs({ "colorPick": true });
 const cgl = op.patch.cgl;
 let fb = null;
+let wasFp = false;
 
 r.onChange =
     g.onChange =
@@ -18,11 +19,15 @@ cgl.addNextFrameOnceCallback(render);
 
 function render()
 {
-    if (!fb)
+    const fp = wasFp || r.get() < 0.0 || r.get() > 1.0 || g.get() < 0.0 || g.get() > 1.0 || b.get() < 0.0 || b.get() > 1.0;
+
+    if (!fb || wasFp != fp)
     {
+        if (fb)fb.dispose();
         if (cgl.glVersion == 1) fb = new CGL.Framebuffer(cgl, 8, 8, { "name": "colorTexture" });
-        else fb = new CGL.Framebuffer2(cgl, 8, 8, { "name": "colorTexture", "depth": false });
-        fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+        else fb = new CGL.Framebuffer2(cgl, 8, 8, { "name": "colorTexture", "depth": false, "isFloatingPointTexture": fp });
+        fb.setFilter(CGL.Texture.FILTER_LINEAR);
+        wasFp = fp;
     }
 
     fb.renderStart();
@@ -31,3 +36,8 @@ function render()
     fb.renderEnd();
     texOut.set(fb.getTextureColor());
 }
+
+op.onDelete = () =>
+{
+    fb.dispose();
+};

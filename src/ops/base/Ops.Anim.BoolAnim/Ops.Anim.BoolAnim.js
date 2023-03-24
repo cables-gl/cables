@@ -21,7 +21,6 @@ op.setPortGroup("Values", [valueFalse, valueTrue]);
 dir.onChange = bool.onChange = valueFalse.onChange = valueTrue.onChange = duration.onChange = setAnim;
 setAnim();
 
-
 function setAnim()
 {
     if (dir.get() == "Animate Both")dir.set("Both");
