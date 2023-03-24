@@ -1,4 +1,7 @@
 {
     "name": "Ops.Extension.Osc",
-    "summary": "Use a WebSocket-Connection to receive OSC"
+    "summary": "Use a WebSocket-Connection to receive OSC",
+    "licence": {
+        "name": "MIT"
+    }
 }

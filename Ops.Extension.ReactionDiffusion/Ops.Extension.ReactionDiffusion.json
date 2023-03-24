@@ -1,4 +1,7 @@
 {
     "name": "Ops.Extension.ReactionDiffusion",
-    "summary": "Cellular automata system as feedback loop texture"
+    "summary": "Cellular automata system as feedback loop texture",
+    "licence": {
+        "name": "MIT"
+    }
 }

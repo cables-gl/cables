@@ -1,3 +1,6 @@
 {
-    "name": "Ops.Extension.RecklessHtml"
+    "name": "Ops.Extension.RecklessHtml",
+    "licence": {
+        "name": "MIT"
+    }
 }

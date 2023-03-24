@@ -1,4 +1,7 @@
 {
     "name": "Ops.Extension.TeachableMachines",
-    "summary": "Teachable Machines library by Google"
+    "summary": "Teachable Machines library by Google",
+    "licence": {
+        "name": "Apache License 2.0"
+    }
 }
