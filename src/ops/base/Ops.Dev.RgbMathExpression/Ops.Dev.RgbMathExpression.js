@@ -46,7 +46,7 @@ inG.onChange =
 inB.onChange = () =>
 {
     op.setUiAttrib({ "extendTitle": "changed" });
-    inExec.setUiAttribs({ "greyout": false });
+    // inExec.setUiAttribs({ "greyout": false });
 };
 
 function updateDefines()
@@ -56,7 +56,7 @@ function updateDefines()
 
 function updateSource()
 {
-    inExec.setUiAttribs({ "greyout": true });
+    // inExec.setUiAttribs({ "greyout": true });
     op.setUiAttrib({ "extendTitle": "" });
     let src = "";
     src += "IN vec2 texCoord;".endl();
@@ -69,23 +69,24 @@ function updateSource()
 
     src += "void main()".endl();
     src += "{".endl().endl();
+    src += "vec4 col=vec4(1.0);".endl();
     src += "vec4 color=texture(tex,texCoord);".endl();
     src += "vec4 texA=texture(utexA,texCoord);".endl();
     src += "vec4 texB=texture(utexB,texCoord);".endl().endl();
 
     src += "// R src".endl();
-    src += "color.r=" + inR.get() + ";".endl();
+    src += "col.r=" + inR.get() + ";".endl();
     src += "".endl();
 
     src += "// G src".endl();
-    src += "color.g=" + inG.get() + ";".endl();
+    src += "col.g=" + inG.get() + ";".endl();
     src += "".endl();
 
     src += "// B src".endl();
-    src += "color.b=" + inB.get() + ";".endl();
+    src += "col.b=" + inB.get() + ";".endl();
     src += "".endl();
 
-    src += "outColor=color;".endl().endl();
+    src += "outColor=col;".endl().endl();
     src += "}".endl();
 
     shader.setSource(shader.getDefaultVertexShader(), src);

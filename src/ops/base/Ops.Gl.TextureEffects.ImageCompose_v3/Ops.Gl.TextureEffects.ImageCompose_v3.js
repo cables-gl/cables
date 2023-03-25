@@ -187,10 +187,11 @@ function updateUi()
 
 function checkTypes()
 {
-    if (inTex.isLinked() && inTex.get() && tex.textureType != inTex.get().textureType && (tex.textureType != CGL.Texture.TYPE_FLOAT || inTex.get().textureType == CGL.Texture.TYPE_FLOAT))
-        op.setUiError("textypediff", "Drawing 32bit texture into an 8 bit can result in data/precision loss", 1);
-    else
-        op.setUiError("textypediff", null);
+    if (tex)
+        if (inTex.isLinked() && inTex.get() && tex.textureType != inTex.get().textureType && (tex.textureType != CGL.Texture.TYPE_FLOAT || inTex.get().textureType == CGL.Texture.TYPE_FLOAT))
+            op.setUiError("textypediff", "Drawing 32bit texture into an 8 bit can result in data/precision loss", 1);
+        else
+            op.setUiError("textypediff", null);
 }
 
 op.preRender = () =>
