@@ -5,6 +5,7 @@ const
     roundNess = op.inFloatSlider("Roundness", 0),
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inFloat("Falloff", 0),
+    inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear", "Smoothstep", "pow2", "pow3"], "Linear"),
     inInvert = op.inValueBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
@@ -49,6 +50,7 @@ inWorldSpace.onChange =
     inArea.onChange =
     inInvert.onChange =
     doScale.onChange =
+    inFalloffCurve.onChange =
     inBlend.onChange = updateDefines;
 
 render.onTriggered = doRender;
@@ -100,6 +102,12 @@ function updatePrio()
 
 function updateDefines()
 {
+    // inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear","Smoothstep"],"Linear"),
+
+    mod.toggleDefine("MOD_FALLOFF_SMOOTH", inFalloffCurve.get() == "Smoothstep");
+    mod.toggleDefine("MOD_FALLOFF_POW2", inFalloffCurve.get() == "pow2");
+    mod.toggleDefine("MOD_FALLOFF_POW3", inFalloffCurve.get() == "pow3");
+
     mod.toggleDefine("MOD_BLEND_NORMAL", inBlend.get() == "Normal");
     mod.toggleDefine("MOD_BLEND_OPACITY", inBlend.get() == "Opacity");
     mod.toggleDefine("MOD_BLEND_MULTIPLY", inBlend.get() == "Multiply");
