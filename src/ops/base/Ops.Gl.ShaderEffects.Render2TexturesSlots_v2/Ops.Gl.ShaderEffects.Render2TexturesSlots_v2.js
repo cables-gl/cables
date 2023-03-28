@@ -6,41 +6,15 @@ const ports = [];
 const cgl = op.patch.cgl;
 const NUM_BUFFERS = 4;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
-mod.addModule({
-    "priority": 2,
-    "title": op.name,
-    "name": "MODULE_COLOR",
-    "srcHeadFrag": attachments.slots_head_frag,
-    "srcBodyFrag": attachments.slots_frag,
-});
+const rt = new CGL.RenderTargets(cgl);
 
-mod.addModule({
-    "priority": 2,
-    "title": op.name,
-    "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": attachments.slots_head_vert,
-    "srcBodyVert": attachments.slots_vert
-});
+const mod = rt.mod;// new CGL.ShaderModifier(cgl, op.name);
 
 for (let i = 0; i < NUM_BUFFERS; i++)
 {
     let slot = "Default";
     if (i != 0)slot = "0";
-    const p = op.inDropDown("Texture " + i, [
-        "Default",
-        "Material Id",
-        "Position World",
-        "Position Local",
-        "Position Object",
-        "Normal",
-        "Normal * ModelView",
-        "FragCoord.z",
-        "TexCoord",
-        "Black",
-        "Alpha 0",
-        "0", "1",
-    ], slot);
+    const p = op.inDropDown("Texture " + i, rt.getTypes(), slot);
     p.onChange = updateDefines;
     ports.push(p);
 }
@@ -49,45 +23,13 @@ updateDefines();
 
 function updateDefines()
 {
-    let strExt = "";
-    let hasPosWorld = false;
-    let hasPosLocal = false;
-    let hasPosObject = false;
-    let hasNormalModelView = false;
-
+    let types = [];
     for (let i = 0; i < NUM_BUFFERS; i++)
-    {
-        mod.toggleDefine("SLOT_TEX_" + i + "_NORMAL", ports[i].get() == "Normal");
-        mod.toggleDefine("SLOT_TEX_" + i + "_COLOR", ports[i].get() == "Color" || ports[i].get() == "Default");
-        mod.toggleDefine("SLOT_TEX_" + i + "_BLACK", ports[i].get() == "Black");
-        mod.toggleDefine("SLOT_TEX_" + i + "_1", ports[i].get() == "1");
-        mod.toggleDefine("SLOT_TEX_" + i + "_0", ports[i].get() == "0");
-        mod.toggleDefine("SLOT_TEX_" + i + "_ALPHA0", ports[i].get() == "Alpha 0");
+        types.push(ports[i].get());
 
-        hasPosWorld = (ports[i].get() == "Position World") || hasPosWorld;
-        hasNormalModelView = (ports[i].get() == "Normal * ModelView") || hasNormalModelView;
-        hasPosLocal = (ports[i].get() == "Position Local") || hasPosLocal;
-        hasPosObject = (ports[i].get() == "Position Object") || hasPosObject;
+    rt.update(types);
 
-        mod.toggleDefine("SLOT_TEX_" + i + "_POS_WORLD", ports[i].get() == "Position World");
-        mod.toggleDefine("SLOT_TEX_" + i + "_POS_LOCAL", ports[i].get() == "Position Local");
-        mod.toggleDefine("SLOT_TEX_" + i + "_POS_OBJECT", ports[i].get() == "Position Object");
-        mod.toggleDefine("SLOT_TEX_" + i + "_TEXCOORD", ports[i].get() == "TexCoord");
-        mod.toggleDefine("SLOT_TEX_" + i + "_MATERIALID", ports[i].get() == "Material Id");
-
-        mod.toggleDefine("SLOT_TEX_" + i + "_NORMAL_MV", ports[i].get() == "Normal * ModelView");
-        mod.toggleDefine("SLOT_TEX_" + i + "_FRAGZ", ports[i].get() == "FragCoord.z");
-
-        strExt += ports[i].get();
-        if (i != NUM_BUFFERS - 1)strExt += " | ";
-    }
-
-    mod.toggleDefine("SLOT_POS_WORLD", hasPosWorld);
-    mod.toggleDefine("SLOT_POS_LOCAL", hasPosLocal);
-    mod.toggleDefine("SLOT_POS_OBJECT", hasPosObject);
-    mod.toggleDefine("SLOT_POS_NORMAL_MV", hasNormalModelView);
-
-    op.setUiAttrib({ "extendTitle": strExt });
+    op.setUiAttrib({ "extendTitle": rt.asString });
 }
 
 render.onTriggered = function ()

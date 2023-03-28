@@ -59,9 +59,16 @@
             "type": "rename",
             "author": "pandur",
             "date": 1671354909903
+        },
+        {
+            "message": " added core lib: cgl_rendertargets",
+            "type": "",
+            "author": "pandur",
+            "date": 1680018924776
         }
     ],
     "coreLibs": [
+        "cgl_rendertargets",
         "cgl_shadermodifier"
     ]
 }
