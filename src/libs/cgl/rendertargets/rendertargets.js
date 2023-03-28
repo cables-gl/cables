@@ -43,6 +43,7 @@ class RenderTargets
             "FragCoord.z",
             "TexCoord",
             "Black",
+            "Alpha 0",
             "0", "1"];
     }
 
@@ -66,6 +67,7 @@ class RenderTargets
             this.mod.toggleDefine("SLOT_TEX_" + i + "_BLACK", slots[i] == "Black");
             this.mod.toggleDefine("SLOT_TEX_" + i + "_1", slots[i] == "1");
             this.mod.toggleDefine("SLOT_TEX_" + i + "_0", slots[i] == "0");
+            this.mod.toggleDefine("SLOT_TEX_" + i + "_ALPHA0", slots[i] == "Alpha 0");
 
             hasPosWorld = (slots[i] == "Position World") || hasPosWorld;
             hasNormalModelView = (slots[i] == "Normal * ModelView") || hasNormalModelView;
