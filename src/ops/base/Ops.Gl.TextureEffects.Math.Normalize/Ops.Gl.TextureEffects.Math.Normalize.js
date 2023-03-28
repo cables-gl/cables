@@ -2,6 +2,7 @@ const
     render = op.inTrigger("Render"),
     inFade = op.inFloatSlider("Fade", 1),
     inMul = op.inFloat("Size", 1),
+    inSafe = op.inBool("Safe", false),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
@@ -12,6 +13,10 @@ const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniformMorph = new CGL.Uniform(shader, "f", "fade", inFade),
     uniformMul = new CGL.Uniform(shader, "f", "mul", inMul);
+inSafe.onChange = function ()
+{
+    shader.toggleDefine("SAFE", inSafe.get());
+};
 
 render.onTriggered = function ()
 {
