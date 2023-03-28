@@ -189,5 +189,20 @@
 
 
 
+#ifdef SLOT_TEX_0_ALPHA0
+    outColor0=vec4(0.);
+#endif
+#ifdef SLOT_TEX_1_ALPHA0
+    outColor1=vec4(0.);
+#endif
+#ifdef SLOT_TEX_2_ALPHA0
+    outColor2=vec4(0.);
+#endif
+#ifdef SLOT_TEX_3_ALPHA0
+    outColor3=vec4(0.);
+#endif
+
+
+
 
 
