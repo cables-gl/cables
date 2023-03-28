@@ -38,6 +38,7 @@ for (let i = 0; i < NUM_BUFFERS; i++)
         "FragCoord.z",
         "TexCoord",
         "Black",
+        "Alpha 0",
         "0", "1",
     ], slot);
     p.onChange = updateDefines;
@@ -61,6 +62,7 @@ function updateDefines()
         mod.toggleDefine("SLOT_TEX_" + i + "_BLACK", ports[i].get() == "Black");
         mod.toggleDefine("SLOT_TEX_" + i + "_1", ports[i].get() == "1");
         mod.toggleDefine("SLOT_TEX_" + i + "_0", ports[i].get() == "0");
+        mod.toggleDefine("SLOT_TEX_" + i + "_ALPHA0", ports[i].get() == "Alpha 0");
 
         hasPosWorld = (ports[i].get() == "Position World") || hasPosWorld;
         hasNormalModelView = (ports[i].get() == "Normal * ModelView") || hasNormalModelView;

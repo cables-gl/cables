@@ -70,6 +70,8 @@ function update()
     if (inStride.get() == "RGBA")stride = 4;
     if (inStride.get() == "MONO")stride = 1;
 
+    inArr.setUiAttribs({ "stride": stride });
+
     let data = inArr.get();
     const isFp = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
 
@@ -129,7 +131,7 @@ function update()
             else pixels[i * 4 + 3] = 255;
     }
 
-    if (!tex)tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp, "name": "array2texture" });
+    if (!tex) tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp, "name": "array2texture" });
 
     tex.initFromData(pixels, w, h, cgl_filter, cgl_wrap);
 

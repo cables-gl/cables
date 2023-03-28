@@ -18,7 +18,7 @@ const lifetimeMin = op.inValue("Lifetime Minimum", 5);
 
 const
     outTrigger = op.outTrigger("Trigger Out"),
-    outPositions = op.outArray("Positions"),
+    outPositions = op.outArray("Positions", null, 3),
     outLifetimes = op.outArray("Lifetime");
 inReset.onTriggered = reset;
 const cgl = op.patch.cgl;
