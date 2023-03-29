@@ -65,6 +65,18 @@ MOD_de=1.0-MOD_map(
     0.0,1.0
     );
 
+#ifdef MOD_FALLOFF_SMOOTH
+    MOD_de=smoothstep(0.0,1.0,MOD_de);
+#endif
+#ifdef MOD_FALLOFF_POW2
+    MOD_de=pow(MOD_de,2.0);
+    // MOD_de=smoothstep(0.0,1.0,MOD_de);
+#endif
+#ifdef MOD_FALLOFF_POW3
+    MOD_de=pow(MOD_de,3.0);
+    // MOD_de=smoothstep(0.0,1.0,MOD_de);
+#endif
+
 
 #ifdef MOD_AREA_INVERT
     MOD_de=1.0-MOD_de;
@@ -94,3 +106,5 @@ MOD_de=1.0-MOD_map(
 
 // col.rgb=vec3(distance(MOD_vertPos.xyz,MOD_pos.xyz))*0.1
 // col.rgb=MOD_pos.xyz;
+
+//

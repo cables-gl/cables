@@ -369,7 +369,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         {
             if (vertIndices[i] >= this._numVerts)
             {
-                this._log.warn("invalid index in " + this._name,i,vertIndices[i]);
+                this._log.warn("invalid index in " + this._name, i, vertIndices[i]);
                 return;
             }
         }
@@ -571,7 +571,7 @@ Mesh.prototype._bind = function (shader)
         }
     }
 
-    if (this._bufVerticesIndizes.numItems !== 0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
+    if (this._bufVerticesIndizes && this._bufVerticesIndizes.numItems !== 0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 };
 
 Mesh.prototype.unBind = function ()
