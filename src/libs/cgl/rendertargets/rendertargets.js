@@ -25,9 +25,8 @@ class RenderTargets
 
     updateModules()
     {
-        // this.mod = new CGL.ShaderModifier(cgl, this._name);
-
         this.mod.removeModule(this._name + "_frag");
+
         this.mod.addModule(
             {
                 "priority": 2,
@@ -38,6 +37,7 @@ class RenderTargets
             });
 
         this.mod.removeModule(this._name + "_vert");
+
         this.mod.addModule(
             {
                 "priority": 2,
@@ -60,7 +60,6 @@ class RenderTargets
             "FragCoord.z",
             "TexCoord",
             "Black",
-            "Alpha 0",
             "0", "1"];
     }
 
@@ -69,25 +68,40 @@ class RenderTargets
         this._numBuffers = n;
     }
 
+    getSrcString(type, i)
+    {
+        let outcolor = "outColor";
+        if (i === "")outcolor = "col";
+        if (type == "Normal") return "    " + outcolor + i + " = vec4(norm,1.);".endl();
+        else if (type == "Default" || type == "Color") return "    " + outcolor + i + " = col;".endl();
+        else if (type == "1") return "    " + outcolor + i + " = vec4(1.,1.,1.,1.);".endl();
+        else if (type == "0") return "    " + outcolor + i + " = vec4(0.,0.,0.,0.);".endl();
+        else if (type == "Black") return "    " + outcolor + i + " = vec4(0.,0.,0.,1.);".endl();
+        else if (type == "TexCoord") return "    " + outcolor + i + " = vec4(texCoord,0.,1.);".endl();
+        else if (type == "Position Local") return "    " + outcolor + i + " = vec4(MOD_pos_local,1.);".endl();
+        else if (type == "Position World") return "    " + outcolor + i + " = vec4(MOD_pos_world,1.);".endl();
+        else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
+        else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
+        else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
+        else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
+        // else return "    outColor" + i + " = vec4(1.,0.,0.,1.);".endl();
+    }
+
     getSrcFrag()
     {
         let src = slots_frag;
 
-        for (let i = 0; i < this._numBuffers; i++)
+
+        if (this._slots.length == 1)
         {
-            if (this._slots[i] == "Normal") src += "outColor" + i + " = vec4(norm,1.);".endl();
-            else if (this._slots[i] == "Default" || this._slots[i] == "Color") src += "outColor" + i + " = col;".endl();
-            else if (this._slots[i] == "1") src += "outColor" + i + " = vec4(1.,1.,1.,1.);".endl();
-            else if (this._slots[i] == "0") src += "outColor" + i + " = vec4(0.,0.,0.,0.);".endl();
-            else if (this._slots[i] == "Black") src += "outColor" + i + " = vec4(0.,0.,0.,1.);".endl();
-            else if (this._slots[i] == "TexCoord") src += "outColor" + i + " = vec4(texCoord,0.,1.);".endl();
-            else if (this._slots[i] == "Position Local") src += "outColor" + i + " = vec4(MOD_pos_local,1.);".endl();
-            else if (this._slots[i] == "Position World") src += "outColor" + i + " = vec4(MOD_pos_world,1.);".endl();
-            else if (this._slots[i] == "Position Object") src += "outColor" + i + " = vec4(MOD_pos_object,1.);".endl();
-            else if (this._slots[i] == "Normal * ModelView") src += "outColor" + i + " = vec4(MOD_normal_mv,1.);".endl();
-            else if (this._slots[i] == "Material Id") src += "outColor" + i + " = vec4(materialId,instIdx,0.,1.);".endl();
-            else if (this._slots[i] == "FragCoord.z") src += "outColor" + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
+            console.log(this._slots[0], this.getSrcString(this._slots[0], ""));
+            src += this.getSrcString(this._slots[0], "");
         }
+        else
+            for (let i = 0; i < this._numBuffers; i++)
+            {
+                src += this.getSrcString(this._slots[i], i);
+            }
 
         // console.log(src);
         return src;
@@ -96,6 +110,7 @@ class RenderTargets
     update(slots)
     {
         this._slots = slots;
+
         this.asString = "";
         let hasPosWorld = false;
         let hasPosLocal = false;
@@ -113,6 +128,7 @@ class RenderTargets
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
         }
+
 
         this.updateModules();
         // this.updateModules();
