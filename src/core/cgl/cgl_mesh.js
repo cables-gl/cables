@@ -483,6 +483,8 @@ Mesh.prototype._checkAttrLengths = function ()
 Mesh.prototype._bind = function (shader)
 {
     if (!shader.isValid()) return;
+
+
     // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
@@ -701,6 +703,18 @@ Mesh.prototype.render = function (shader)
         needsBind = true;
     }
 
+
+    if (this._cgl.frameStore.forceShaderMods)
+    {
+        // console.log(this._drawBuffers);
+
+        for (let i = 0; i < this._cgl.frameStore.forceShaderMods.length; i++)
+        {
+            shader = this._cgl.frameStore.forceShaderMods[i].bind(shader);
+        }
+    }
+
+
     // var needsBind=false;
     // {
     //     needsBind=true;
@@ -710,6 +724,7 @@ Mesh.prototype.render = function (shader)
     if (!shader.bind()) return;
 
     // if (shader.bindTextures) shader.bindTextures();
+
 
     // if(needsBind)
     this._bind(shader);
@@ -821,6 +836,17 @@ Mesh.prototype.render = function (shader)
     this._cgl.printError("mesh render " + this._name);
 
     this.unBind();
+
+
+    if (this._cgl.frameStore.forceShaderMods)
+    {
+        // console.log(this._drawBuffers);
+
+        for (let i = 0; i < this._cgl.frameStore.forceShaderMods.length; i++)
+        {
+            shader = this._cgl.frameStore.forceShaderMods[i].unbind();
+        }
+    }
 };
 
 Mesh.prototype.setNumInstances = function (n)

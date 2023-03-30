@@ -28,9 +28,9 @@ class ShaderModifier
         }
     }
 
-    bind()
+    bind(curShader)
     {
-        const shader = this._cgl.getShader();
+        const shader = curShader || this._cgl.getShader();
         if (!shader) return;
 
         this._boundShader = this._origShaders[shader.id];
@@ -96,6 +96,10 @@ class ShaderModifier
         }
 
         this._modulesChanged = false;
+
+        if (this.onBind) this.onBind(this._boundShader.shader);
+
+        return this._boundShader.shader;
     }
 
     unbind()

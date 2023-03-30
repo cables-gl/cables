@@ -401,6 +401,7 @@ Framebuffer2.prototype.renderEnd = function ()
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.TEXTURE_2D, this._textureDepth.tex, 0);
 
+        // console.log("fb this._numRenderBuffers", this._numRenderBuffers);
         for (let i = 0; i < this._numRenderBuffers; i++)
         {
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2BlittingFramebuffer);
@@ -414,7 +415,7 @@ Framebuffer2.prototype.renderEnd = function ()
             this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this.Framebuffer2BlittingFramebuffer);
             this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
 
-            this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [0.0, 0.0, 0.0, 1.0]);
+            // this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [0.0, 0.0, 0.0, 1.0]);
 
             let flags = this._cgl.gl.COLOR_BUFFER_BIT;
             if (i == 0) flags |= this._cgl.gl.DEPTH_BUFFER_BIT;

@@ -741,7 +741,6 @@ Shader.prototype.compile = function ()
     // SETUP draw buffers / multi texture render targets
 
     let drawBufferStr = "";
-
     for (let i = 0; i < 16; i++)
         if (fs.indexOf("outColor" + i) > -1) this._drawBuffers[i] = true;
 
@@ -808,7 +807,9 @@ Shader.hasChanged = function ()
 Shader.prototype.bind = function ()
 {
     if (!this._isValid || this._cgl.aborted) return;
+
     MESH.lastShader = this;
+
 
     if (!this._program || this._needsRecompile) this.compile();
     if (!this._isValid) return;
@@ -914,6 +915,8 @@ Shader.prototype.bind = function ()
     }
 
     this._bindTextures();
+
+
     return this._isValid;
 };
 
@@ -1141,23 +1144,24 @@ Shader.prototype.needsRecompile = function ()
 
 Shader.prototype.setDrawBuffers = function (arr)
 {
-    if (this._drawBuffers.length !== arr.length)
-    {
-        this._drawBuffers = arr;
-        this._needsRecompile = true;
-        this.setWhyCompile("setDrawBuffers");
-        return;
-    }
-    for (let i = 0; i < arr.length; i++)
-    {
-        if (arr[i] !== this._drawBuffers[i])
-        {
-            this._drawBuffers = arr;
-            this._needsRecompile = true;
-            this.setWhyCompile("setDrawBuffers");
-            return;
-        }
-    }
+    console.log("useless drawbuffers...?!");
+    // if (this._drawBuffers.length !== arr.length)
+    // {
+    //     this._drawBuffers = arr;
+    //     this._needsRecompile = true;
+    //     this.setWhyCompile("setDrawBuffers");
+    //     return;
+    // }
+    // for (let i = 0; i < arr.length; i++)
+    // {
+    //     if (arr[i] !== this._drawBuffers[i])
+    //     {
+    //         this._drawBuffers = arr;
+    //         this._needsRecompile = true;
+    //         this.setWhyCompile("setDrawBuffers");
+    //         return;
+    //     }
+    // }
 };
 
 Shader.prototype.getUniforms = function ()
