@@ -10,10 +10,10 @@ class RenderTargets
     {
         this._numBuffers = 4;
         this.asString = "";
-        this._slots = [];
-        this._name = "rendertargets";
+        this._slots = ["Default", "Normal"];
+        this._name = "rendertargets" + CABLES.uuid();
         this.mod = new CGL.ShaderModifier(cgl, this._name);
-        this.updateModules();
+        // this.updateModules();
 
         this.mod.onBind = (currentShader) =>
         {
@@ -25,6 +25,8 @@ class RenderTargets
 
     updateModules()
     {
+        // this.mod = new CGL.ShaderModifier(cgl, this._name);
+
         this.mod.removeModule(this._name + "_frag");
         this.mod.addModule(
             {
@@ -113,6 +115,7 @@ class RenderTargets
         }
 
         this.updateModules();
+        // this.updateModules();
 
         this.mod.toggleDefine("MOD_SLOT_POS_WORLD", hasPosWorld);
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);

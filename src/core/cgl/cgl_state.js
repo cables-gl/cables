@@ -344,14 +344,19 @@ const Context = function (_patch)
     this.pushShader =
     this.setShader = function (shader)
     {
-        // if (this.frameStore.forceShaderMods)
-        // {
-        //     for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
-        //     {
-        //         // if (shader == this.frameStore.forceShaderMods[i].currentShader())
-        //         this.frameStore.forceShaderMods[i].bind(shader);
-        //     }
-        // }
+        if (this.frameStore.forceShaderMods)
+        {
+            for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
+            {
+                // if (!currentShader.forcedMod && currentShader != this.frameStore.forceShaderMods[i])
+                // {
+                //     currentShader.forcedMod = this.frameStore.forceShaderMods[i];
+                shader = this.frameStore.forceShaderMods[i].bind(shader, false);
+                // }
+                // return currentShader;
+                // if (this.frameStore.forceShaderMods[i].currentShader() && shader != this.frameStore.forceShaderMods[i].currentShader().shader)
+            }
+        }
 
         this._shaderStack.push(shader);
         currentShader = shader;
@@ -367,14 +372,16 @@ const Context = function (_patch)
     this.popShader =
     this.setPreviousShader = function ()
     {
-        // if (this.frameStore.forceShaderMods)
-        // {
-        //     for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
-        //     {
-        //         this.frameStore.forceShaderMods[i].unbind();
-        //         // this.popShader();
-        //     }
-        // }
+        if (this.frameStore.forceShaderMods)
+        {
+            for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
+            {
+                // const a =
+                this.frameStore.forceShaderMods[i].unbind(false);
+                // if (a) return;
+                // this.popShader();
+            }
+        }
 
         if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
         this._shaderStack.pop();
