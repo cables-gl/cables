@@ -471,6 +471,7 @@ class ShaderModifier
         }
     }
 
+
     _updateDefines()
     {
         for (const j in this._origShaders) this._updateDefinesShader(this._origShaders[j].shader);

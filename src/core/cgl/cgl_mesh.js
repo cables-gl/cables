@@ -840,8 +840,6 @@ Mesh.prototype.render = function (shader)
 
     if (this._cgl.frameStore.forceShaderMods)
     {
-        // console.log(this._drawBuffers);
-
         for (let i = 0; i < this._cgl.frameStore.forceShaderMods.length; i++)
         {
             shader = this._cgl.frameStore.forceShaderMods[i].unbind();

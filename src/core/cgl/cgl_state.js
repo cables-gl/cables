@@ -344,6 +344,15 @@ const Context = function (_patch)
     this.pushShader =
     this.setShader = function (shader)
     {
+        // if (this.frameStore.forceShaderMods)
+        // {
+        //     for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
+        //     {
+        //         // if (shader == this.frameStore.forceShaderMods[i].currentShader())
+        //         this.frameStore.forceShaderMods[i].bind(shader);
+        //     }
+        // }
+
         this._shaderStack.push(shader);
         currentShader = shader;
     };
@@ -358,6 +367,15 @@ const Context = function (_patch)
     this.popShader =
     this.setPreviousShader = function ()
     {
+        // if (this.frameStore.forceShaderMods)
+        // {
+        //     for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
+        //     {
+        //         this.frameStore.forceShaderMods[i].unbind();
+        //         // this.popShader();
+        //     }
+        // }
+
         if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
         this._shaderStack.pop();
         currentShader = this._shaderStack[this._shaderStack.length - 1];

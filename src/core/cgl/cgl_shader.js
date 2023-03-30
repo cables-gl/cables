@@ -804,6 +804,11 @@ Shader.hasChanged = function ()
     return this._needsRecompile;
 };
 
+Shader.prototype.unBind = function ()
+{
+
+};
+
 Shader.prototype.bind = function ()
 {
     if (!this._isValid || this._cgl.aborted) return;
