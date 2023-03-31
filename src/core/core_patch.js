@@ -304,7 +304,6 @@ Patch.prototype.getJsPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
-    if (this._isLocal && !this.config.allowLocalFileAccess) this.exitError("localAccess", "Browser security forbids loading files directly without a webserver. Upload files to a server to work. use allowLocalFileAccess:true to ignore this.");
     if (!filename) return filename;
     filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
@@ -565,14 +564,14 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
 
-                
+
                 if (this.onDelete)
                 {
                     // todo: remove
                     this._log.warn("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
-                
+
                 this.ops.splice(i, 1);
                 opToDelete.emitEvent("delete", this.ops[i]);
                 this.emitEvent("onOpDelete", opToDelete, reloadingOp);
