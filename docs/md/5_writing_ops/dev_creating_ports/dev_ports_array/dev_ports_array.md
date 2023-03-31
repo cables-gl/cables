@@ -12,6 +12,8 @@ Arrays are used to store multiple values in a single variable.
 
 E.g. `[1, 2, 3]`, `[[1, 2], [3, 4]]`, `[{"one": 2}, {"three": 4}]`
 
+For Objects and Arrays you should use `port.setRef()` instead of just `port.set()`. This way cables will always register a change of value and the updated Array is outputed.
+
 If you click the op and then the inspect icon ![Button](../img/creating_ports_array_inspect_icon_zoomed.png) you can see the array contents
 <br>
 ![Button](../img/creating_ports_array_inspect_icon.png)
@@ -55,7 +57,7 @@ function update()
         }
     }
     // set outArray to tempArray
-    outArray.set(tempArray);
+    outArray.setRef(tempArray);
 }
 ```
 

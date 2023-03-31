@@ -34,3 +34,4 @@ Please send us an [email](mailto:hi@undev.de) or contact us on (discord)[https:/
 - [Universidad Nacional Autónoma de México](https://www.unam.mx/), Mexico
 - [Uniwersytet Marii Curie-Skłodowskiej](https://www.umcs.pl/), Lublin, Poland
 - [École Polytechnique Fédérale de Lausanne](https://www.epfl.ch), Switzerland
+- [Kunstuniversität Linz](https://kunstuni-linz.at/), Austria

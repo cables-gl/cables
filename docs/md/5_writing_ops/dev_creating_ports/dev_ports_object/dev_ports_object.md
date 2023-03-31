@@ -58,3 +58,6 @@ function update()
 ```
 
 Follow this [link](../../dev_callbacks/dev_callbacks) for more information on Callbacks
+
+
+For Outputting Objects, you should use `port.setRef()` instead of just `port.set()`. This way cables will always register a change of value and the updated Object is outputed.
