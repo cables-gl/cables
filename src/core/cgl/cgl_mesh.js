@@ -704,17 +704,6 @@ Mesh.prototype.render = function (shader)
     }
 
 
-    if (this._cgl.frameStore.forceShaderMods)
-    {
-        // console.log(this._drawBuffers);
-
-        for (let i = 0; i < this._cgl.frameStore.forceShaderMods.length; i++)
-        {
-            shader = this._cgl.frameStore.forceShaderMods[i].bind(shader);
-        }
-    }
-
-
     // var needsBind=false;
     // {
     //     needsBind=true;
@@ -829,24 +818,11 @@ Mesh.prototype.render = function (shader)
     if (doQuery && queryStarted)
     {
         this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
-
-        // this._log.log("available", available);
     }
 
     this._cgl.printError("mesh render " + this._name);
 
     this.unBind();
-
-
-    if (this._cgl.frameStore.forceShaderMods)
-    {
-        // console.log(this._drawBuffers);
-
-        for (let i = 0; i < this._cgl.frameStore.forceShaderMods.length; i++)
-        {
-            shader = this._cgl.frameStore.forceShaderMods[i].unbind();
-        }
-    }
 };
 
 Mesh.prototype.setNumInstances = function (n)

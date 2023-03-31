@@ -28,7 +28,7 @@ class ShaderModifier
         }
     }
 
-    bind(curShader)
+    bind(curShader, pushShader)
     {
         const shader = curShader || this._cgl.getShader();
         if (!shader) return;
@@ -70,7 +70,7 @@ class ShaderModifier
         if (this._changedDefines) this._updateDefines();
         if (this._changedUniforms) this._updateUniforms();
 
-        this._cgl.pushShader(this._boundShader.shader);
+        if (pushShader !== false) this._cgl.pushShader(this._boundShader.shader);
 
         this._boundShader.shader.copyUniformValues(this._boundShader.orig);
 
@@ -97,14 +97,21 @@ class ShaderModifier
 
         this._modulesChanged = false;
 
+        this._boundShader.shader.fromMod = this;
+
         if (this.onBind) this.onBind(this._boundShader.shader);
 
         return this._boundShader.shader;
     }
 
-    unbind()
+    unbind(popShader)
     {
-        if (this._boundShader) this._cgl.popShader();
+        if (this._boundShader)
+        {
+            if (popShader !== false) this._cgl.popShader();
+            // this._boundShader = null;
+            // return true;
+        }
         this._boundShader = null;
     }
 
@@ -132,10 +139,12 @@ class ShaderModifier
     {
         const indicesToRemove = [];
 
+        let found = false;
         for (let i = 0; i < this._mods.length; i++)
         {
             if (this._mods[i].title == title)
             {
+                found = true;
                 this._removeModulesFromShader(this._mods[i]);
                 indicesToRemove.push(i);
             }
@@ -471,6 +480,7 @@ class ShaderModifier
         }
     }
 
+
     _updateDefines()
     {
         for (const j in this._origShaders) this._updateDefinesShader(this._origShaders[j].shader);
@@ -504,6 +514,7 @@ class ShaderModifier
 
     currentShader()
     {
+        if (!this._boundShader) return null;
         return this._boundShader.shader;
     }
 

@@ -804,6 +804,7 @@ Shader.hasChanged = function ()
     return this._needsRecompile;
 };
 
+
 Shader.prototype.bind = function ()
 {
     if (!this._isValid || this._cgl.aborted) return;
@@ -916,8 +917,10 @@ Shader.prototype.bind = function ()
 
     this._bindTextures();
 
-
     return this._isValid;
+};
+Shader.prototype.unBind = function ()
+{
 };
 
 
@@ -1098,10 +1101,10 @@ Shader.prototype.getCurrentModules = function () { return this._modules; };
  */
 Shader.prototype.addModule = function (mod, sibling)
 {
+    if (this.hasModule(mod.id)) return;
     if (!mod.id) mod.id = generateUUID();
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
-
     if (sibling && !sibling.group) sibling.group = simpleId();
 
     if (!mod.group)
