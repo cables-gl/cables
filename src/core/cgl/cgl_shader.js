@@ -1532,7 +1532,7 @@ Shader.prototype._bindTextures = function ()
         this._log.warn("[shader._bindTextures] too many textures bound", this._textureStackTex.length + "/" + this._cgl.maxTextureUnits);
     }
 
-    for (let i = this._textureStackTex.length - 1; i < this._cgl.maxTextureUnits; i++) this._cgl.setTexture(i, null);
+    for (let i = this._textureStackTex.length + 1; i < this._cgl.maxTextureUnits; i++) this._cgl.setTexture(i, null);
 
     for (let i = 0; i < this._textureStackTex.length; i++)
     {
