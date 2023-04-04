@@ -423,6 +423,8 @@ Mesh.prototype.setGeom = function (geom, removeRef)
     this.updateVertices(this._geom);
     this.setVertexIndices(this._geom.verticesIndices);
 
+    console.log("setgeom", this._name, geom);
+
     // this.updateTexCoords(this._geom);
     // this.updateNormals(this._geom);
 
