@@ -888,7 +888,17 @@ class SwitchPort extends Port
 
             if (CABLES.UI)
             {
-                if (s === "" || s === null || s === undefined || uiAttribs.values.indexOf(String(s)) === -1) this.parent.setUiError("invalidswitch", "Invalid Switch Value \"" + this.name + "\": " + s);
+                if (
+                    s === "" ||
+                    s === null ||
+                    s === undefined ||
+                    uiAttribs.values.indexOf(String(s)) === -1
+                )
+                {
+                    this.parent.setUiError("invalidswitch", "Invalid Switch Value [" + this.name + "]: \"" + s + "\"");
+                    console.log(uiAttribs.values, String(s), s);
+                }
+
                 else this.parent.setUiError("invalidswitch", null);
             }
 
