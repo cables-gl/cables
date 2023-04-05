@@ -423,6 +423,8 @@ Mesh.prototype.setGeom = function (geom, removeRef)
     this.updateVertices(this._geom);
     this.setVertexIndices(this._geom.verticesIndices);
 
+    console.log("setgeom", this._name, geom);
+
     // this.updateTexCoords(this._geom);
     // this.updateNormals(this._geom);
 
@@ -769,11 +771,12 @@ Mesh.prototype.render = function (shader)
         }
     }
 
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
     }
-    else if (this._bufVerticesIndizes.numItems === 0)
+    else if (!this._bufVerticesIndizes || this._bufVerticesIndizes.numItems === 0)
     {
         // for (let i = 0; i < this._attributes.length; i++)
         // {

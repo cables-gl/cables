@@ -82,6 +82,7 @@ const Patch = function (cfg)
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
+    this.frameStore = {};
 
     if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
 
