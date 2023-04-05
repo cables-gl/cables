@@ -57,7 +57,7 @@ tfilter.onChange =
 
 function update()
 {
-    if (!needsUpdate) return;
+    if (!needsUpdate) return outNext.trigger();
 
     // fillUp.setUiAttribs({greyout:inSizeType.get()!="Manual"});
     inWidth.setUiAttribs({ "greyout": inSizeType.get() != "Manual" });

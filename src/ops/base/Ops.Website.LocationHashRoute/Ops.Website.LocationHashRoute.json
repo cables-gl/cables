@@ -15,6 +15,18 @@
             "message": "Ops.Website.LocationHash renamed to Ops.Website.LocationHashRoute",
             "author": "pandur",
             "date": 1619518741622
+        },
+        {
+            "message": "fix crash when using misformed route, show error",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1680075922063
+        },
+        {
+            "message": "properly set port value when loading patch",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1680075941188
         }
     ],
     "authorName": "stephan",
@@ -45,7 +57,6 @@
     },
     "summary": "gives updated information about window.location.hash",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "hUdHnFtBTNU"

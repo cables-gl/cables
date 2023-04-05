@@ -7,7 +7,7 @@ const
     inActive = op.inBool("Active", true),
     outNext = op.outTrigger("Next"),
     notClickedNext = op.outTrigger("Not Clicked"),
-    outState = op.outString("Audiocontext State"),
+    outState = op.outString("Audiocontext State", "unknown"),
     outEle = op.outObject("Element"),
     outClicked = op.outBoolNum("Clicked", false),
     outClickedTrigger = op.outTrigger("Clicked Trigger");
@@ -25,6 +25,7 @@ inStyleOuter.onChange =
     inStyleInner.onChange = createElements;
 
 audioCtx.addEventListener("statechange", updateState);
+updateState();
 
 inActive.onChange = () =>
 {
@@ -34,6 +35,7 @@ inActive.onChange = () =>
 
 function createElements()
 {
+    updateState();
     if (elePlay) elePlay.remove();
     if (ele) ele.remove();
 

@@ -61,13 +61,11 @@ let doUniformDump = false;
 
 showState.onTriggered = function ()
 {
-    if (!CABLES.UI || !shader) return;
     doStateDump = true;
 };
 
 showUniforms.onTriggered = function ()
 {
-    if (!CABLES.UI || !shader) return;
     doUniformDump = true;
 };
 
@@ -76,7 +74,7 @@ exec.onTriggered = function ()
     if (cgl.frameStore.shadowPass) return;
     const theShader = cgl.getShader();
 
-    if (theShader && shader && (theShader == shader || shader.lastCompile == theShader.lastCompile)) return next.trigger();
+    // if (theShader && shader && (theShader == shader || shader.lastCompile == theShader.lastCompile)) return next.trigger();
 
     shader = theShader;
     next.trigger();
@@ -132,6 +130,9 @@ exec.onTriggered = function ()
                 "structUniformName": shader._uniforms[i]._structUniformName
             });
         }
+
+        console.log(json);
+
         showCodeModal("shader uniforms", JSON.stringify(json, false, 2), "json");
 
         doUniformDump = false;
