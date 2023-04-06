@@ -51,14 +51,14 @@
             {
                 "type": 0,
                 "name": "Clicked",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
                 "name": "Clicked Trigger"
             }
         ],
-        "name": "Ops.Patch.PlayButton"
+        "name": "Ops.Html.PlayButton"
     },
     "summary": "shows a playbutton for forcing a simple user interaction",
     "youtubeid": "",
@@ -71,7 +71,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

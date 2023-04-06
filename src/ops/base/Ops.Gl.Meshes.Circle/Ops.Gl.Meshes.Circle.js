@@ -45,6 +45,12 @@ op.preRender = () =>
     renderMesh();
 };
 
+render.onLinkChanged = function ()
+{
+    if (!render.isLinked()) geomOut.set(null);
+    else geomOut.setRef(geom);
+};
+
 function renderMesh()
 {
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;

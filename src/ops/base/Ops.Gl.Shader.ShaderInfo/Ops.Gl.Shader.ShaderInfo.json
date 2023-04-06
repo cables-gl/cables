@@ -50,7 +50,7 @@
             {
                 "type": 0,
                 "name": "needsBarycentric",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,

@@ -149,13 +149,15 @@ function doRender()
     if (recalc) setupArray();
 
     if (!inTex.get()) return;
+
+    mod.bind();
+
     if (inTex.get())mod.pushTexture("MOD_texTrans", inTex.get().tex);
     if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
     if (inTex3.get())mod.pushTexture("MOD_texScale", inTex3.get().tex);
     if (inTex4.get())mod.pushTexture("MOD_texColor", inTex4.get().tex);
     if (inTex5.get())mod.pushTexture("MOD_texCoords", inTex5.get().tex);
 
-    mod.bind();
     mod.setUniformValue("MOD_texSizeX", inTex.get().width);
     mod.setUniformValue("MOD_texSizeY", inTex.get().height);
 

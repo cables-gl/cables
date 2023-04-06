@@ -104,6 +104,7 @@ MOD_de=1.0-MOD_map(
     if(MOD_de*MOD_inSizeAmountFalloffSizeX.y>=0.999)discard;
 #endif
 
+
 // col.rgb=vec3(distance(MOD_vertPos.xyz,MOD_pos.xyz))*0.1
 // col.rgb=MOD_pos.xyz;
 

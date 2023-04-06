@@ -26,6 +26,10 @@
                 "name": "Render"
             },
             {
+                "type": 3,
+                "name": "Manual Timestamps"
+            },
+            {
                 "type": 0,
                 "name": "Record Events",
                 "subType": "boolean"
@@ -68,7 +72,6 @@
     },
     "summary": "Prerenderer based on timeline progress",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

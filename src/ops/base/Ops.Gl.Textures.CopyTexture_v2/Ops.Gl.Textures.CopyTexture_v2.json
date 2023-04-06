@@ -1,0 +1,96 @@
+{
+    "authorName": "pandur",
+    "id": "7a86fd19-571a-48ab-9e37-dd84e9f428e7",
+    "created": 1680705685916,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Alpha Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "use original size",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "HDR",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Invert A",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "texture_out",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Textures.CopyTexture_v2"
+    },
+    "summary": "copy a texture and optionally resize it",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "G2_my7",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Textures.CopyTexture",
+            "author": "pandur",
+            "date": 1680705685916
+        },
+        {
+            "message": "Ops.Patch.P3A7tct.CopyTexture renamed to Ops.Gl.Textures.CopyTexture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680706100814
+        }
+    ]
+}
