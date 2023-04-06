@@ -88,8 +88,6 @@ function updateAspectRatio()
     }
 }
 
-alphaSrc.set("alpha channel");
-
 //
 // texture flip
 //

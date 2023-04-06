@@ -8,7 +8,7 @@ const
     inGrad = op.inGradient("Ramp"),
     min = op.inValueFloat("Min", 0),
     max = op.inValueFloat("Max", 1),
-    values = op.outArray("Array", 3);
+    values = op.outArray("Array", 1);
 
 op.setPortGroup("Value Range", [min, max]);
 inGrad.setUiAttribs({ "gradientType": "curve", "editShortcut": true });

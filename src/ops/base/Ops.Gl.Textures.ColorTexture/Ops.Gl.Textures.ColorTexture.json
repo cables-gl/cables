@@ -3,30 +3,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "a",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "texture_out"
+                "type": 2,
+                "name": "texture_out",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.Textures.ColorTexture"

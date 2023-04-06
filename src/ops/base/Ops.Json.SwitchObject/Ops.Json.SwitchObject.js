@@ -1,8 +1,8 @@
-const NUM_PORTS = 8;
-
 const inIndex = op.inValueInt("Object Index", 0);
-const objectPorts = [];
 const outObject = op.outObject("object out");
+
+const NUM_PORTS = 8;
+const objectPorts = [];
 
 op.onLoaded = function () { indexChanged(); };
 inIndex.onChange = indexChanged;
@@ -21,14 +21,12 @@ function indexChanged()
     if (index < 0) index = 0;
     else if (index > NUM_PORTS - 1) index = NUM_PORTS - 1;
 
-    outObject.set(null);
-    outObject.set(objectPorts[index].get());
+    outObject.setRef(objectPorts[index].get());
 }
 
 function onPortChange()
 {
     if (this.inputNum != inIndex.get()) return;
 
-    outObject.set(null);
-    outObject.set(this.get());
+    outObject.setRef(this.get());
 }

@@ -369,7 +369,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         {
             if (vertIndices[i] >= this._numVerts)
             {
-                this._log.warn("invalid index in " + this._name,i,vertIndices[i]);
+                this._log.warn("invalid index in " + this._name, i, vertIndices[i]);
                 return;
             }
         }
@@ -483,6 +483,8 @@ Mesh.prototype._checkAttrLengths = function ()
 Mesh.prototype._bind = function (shader)
 {
     if (!shader.isValid()) return;
+
+
     // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
@@ -571,7 +573,7 @@ Mesh.prototype._bind = function (shader)
         }
     }
 
-    if (this._bufVerticesIndizes.numItems !== 0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
+    if (this._bufVerticesIndizes && this._bufVerticesIndizes.numItems !== 0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 };
 
 Mesh.prototype.unBind = function ()
@@ -701,6 +703,7 @@ Mesh.prototype.render = function (shader)
         needsBind = true;
     }
 
+
     // var needsBind=false;
     // {
     //     needsBind=true;
@@ -710,6 +713,7 @@ Mesh.prototype.render = function (shader)
     if (!shader.bind()) return;
 
     // if (shader.bindTextures) shader.bindTextures();
+
 
     // if(needsBind)
     this._bind(shader);
@@ -765,11 +769,12 @@ Mesh.prototype.render = function (shader)
         }
     }
 
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
     }
-    else if (this._bufVerticesIndizes.numItems === 0)
+    else if (!this._bufVerticesIndizes || this._bufVerticesIndizes.numItems === 0)
     {
         // for (let i = 0; i < this._attributes.length; i++)
         // {
@@ -814,8 +819,6 @@ Mesh.prototype.render = function (shader)
     if (doQuery && queryStarted)
     {
         this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
-
-        // this._log.log("available", available);
     }
 
     this._cgl.printError("mesh render " + this._name);

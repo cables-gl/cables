@@ -51,10 +51,8 @@ function buildMeshLater()
 
 render.onLinkChanged = function ()
 {
-    if (!render.isLinked())
-    {
-        geomOut.set(null);
-    }
+    if (!render.isLinked()) geomOut.set(null);
+    else geomOut.setRef(geom);
 };
 
 render.onTriggered = function ()
@@ -115,8 +113,7 @@ function buildMesh()
     if (mesh)mesh.dispose();
     mesh = op.patch.cg.createMesh(geom);
 
-    geomOut.set(null);
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 
     needsRebuild = false;
 }

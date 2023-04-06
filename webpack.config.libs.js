@@ -30,8 +30,8 @@ const getJsFiles = function (arr)
     return names;
 };
 
-const raiseFirstChar = str => str.charAt(0).toUpperCase() + str.substring(1);
-const flattenArray = arr => [].concat.apply([], arr); // .flat() only availible in Node 11+
+const raiseFirstChar = (str) => { return str.charAt(0).toUpperCase() + str.substring(1); };
+const flattenArray = (arr) => { return [].concat.apply([], arr); }; // .flat() only availible in Node 11+
 
 const createOutputEntryObjectsNamespace = (namespace, isProduction) =>
 {
@@ -110,6 +110,18 @@ module.exports = (isProduction = false) =>
         "devtool": false,
         "optimization": {
             "minimize": isProduction // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+        },
+        "module": {
+            "rules": [
+                {
+                    "test": /\.frag/,
+                    "use": "raw-loader",
+                },
+                {
+                    "test": /\.vert/,
+                    "use": "raw-loader",
+                }
+            ].filter(Boolean),
         },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],

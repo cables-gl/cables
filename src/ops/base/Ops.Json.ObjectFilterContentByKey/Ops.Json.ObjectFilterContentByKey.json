@@ -41,11 +41,10 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.User.pandur.ObjectFilterContent"
+        "name": "Ops.Json.ObjectFilterContentByKey"
     },
     "summary": "filter values from an object if key starts with input string ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

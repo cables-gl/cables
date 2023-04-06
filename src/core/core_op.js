@@ -53,6 +53,7 @@ const Op = function ()
     this.shouldWork = {};
     this.hasUiErrors = false;
     this._uiErrors = {};
+    this._hasAnimPort = false;
 
     if (arguments[1])
     {
@@ -1109,7 +1110,8 @@ const Op = function ()
 
     Op.prototype.updateAnims = function ()
     {
-        for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
+        if (this._hasAnimPort)
+            for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
     };
 
     Op.prototype.log = function ()

@@ -1,1 +1,1 @@
-Merges two arrays together. Array 2 is placed behind Array 1
+Merge multiple arrays - in consecutive order

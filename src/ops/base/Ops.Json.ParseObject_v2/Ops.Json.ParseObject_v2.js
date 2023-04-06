@@ -17,8 +17,7 @@ function parse()
     try
     {
         const obj = JSON.parse(str.get());
-        outObj.set(null);
-        outObj.set(obj);
+        outObj.setRef(obj);
         isValid.set(true);
         op.setUiError("invalidjson", null);
     }

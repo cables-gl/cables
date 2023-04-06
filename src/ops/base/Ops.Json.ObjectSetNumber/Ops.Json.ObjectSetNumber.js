@@ -14,8 +14,7 @@ function update()
 
     obj[inKey.get()] = inValue.get();
 
-    outObject.set(null);
-    outObject.set(obj);
+    outObject.setRef(obj);
 }
 
 let oldKey = "";
