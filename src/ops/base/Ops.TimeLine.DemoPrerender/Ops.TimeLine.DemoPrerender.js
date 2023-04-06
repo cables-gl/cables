@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Render"),
     inEvents = op.inArray("Times"),
+    inAddTimes = op.inArray("Manual Timestamps"),
     inRecord = op.inBool("Record Events", false),
     inReset = op.inTriggerButton("Reset"),
     inClear = op.inTriggerButton("Clear"),
@@ -11,7 +12,7 @@ const
     numEvents = op.outNumber("Num Events");
 
 exec.onTriggered = render;
-inEvents.setUiAttribs({ "hidePort": true });
+inEvents.setUiAttribs({ "hidePort": true, "hideParam": true });
 
 let isPrerendering = true;
 
@@ -36,9 +37,10 @@ op.patch.cgl.on("resize", () =>
     }
 });
 
+inAddTimes.onChange =
 inEvents.onChange = () =>
 {
-    numEvents.set(events.length);
+    numEvents.set(getAllTimes().length);
     events = inEvents.get() || [0];
 };
 
@@ -70,6 +72,16 @@ function fakeNow()
     return curTime * 1000;
 }
 
+function getAllTimes()
+{
+    let arr = [];
+
+    arr = arr.concat(inEvents.get() || [0]);
+    if (inAddTimes.get())arr = arr.concat(inAddTimes.get());
+
+    return arr;
+}
+
 function render()
 {
     if (inRecord.get())
@@ -82,37 +94,29 @@ function render()
     }
     if (isPrerendering)
     {
-        // for(let i=0;i<events.length;i++)
-        // {
-        if (prerenderCount < events.length)
+        let times = getAllTimes();
+        if (prerenderCount < times.length)
         {
             const oldInternalNow = CABLES.internalNow;
             CABLES.internalNow = fakeNow;
 
-            curTime = events[prerenderCount];
-            op.patch._frameNum = prerenderCount + 22;
+            curTime = times[prerenderCount];
 
-            // op.log("isPrerendering at ", curTime);
+            // console.log("curTime", curTime);
+            op.patch._frameNum = prerenderCount + 22;
 
             CABLES.overwriteTime = curTime;
             op.patch.timer.setTime(curTime);
             op.patch.freeTimer.setTime(curTime);
 
-            // op.log("the time",op.patch.timer.getTime());
-
             CABLES.overwriteTime = undefined;
             CABLES.internalNow = oldInternalNow;
-
-            // op.patch.timer.setTime(0);
-            // op.patch.freeTimer.setTime(0);
-
-            // }
         }
 
         const numExtraFrames = 30;
-        if (prerenderCount >= events.length)
+        if (prerenderCount >= times.length)
         {
-            const t = (numExtraFrames - (prerenderCount - events.length)) / numExtraFrames;
+            const t = (numExtraFrames - (prerenderCount - times.length)) / numExtraFrames;
 
             // op.log("empty prerender...", t);
             op.patch.timer.setTime(t);
@@ -123,12 +127,12 @@ function render()
         next.trigger();
         // next.trigger();
         // next.trigger();
-        outProgress.set(Math.min(1, prerenderCount / (events.length + numExtraFrames)));
+        outProgress.set(Math.min(1, prerenderCount / (times.length + numExtraFrames)));
         // op.log("progress...", outProgress.get());
 
         nextPrerendered.trigger();
 
-        if (prerenderCount >= events.length + numExtraFrames)
+        if (prerenderCount >= times.length + numExtraFrames)
         {
             op.patch.timer.setTime(restartTime);
             op.patch.freeTimer.setTime(restartTimeFreeTimer);

@@ -107,5 +107,13 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "respect \"normalize\" setting for finger 2, add \"force\" output for finger 2",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1680075893549
+        }
+    ]
 }

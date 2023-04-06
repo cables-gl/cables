@@ -114,6 +114,7 @@ if (cgl.glVersion == 1)
 
 buildShader();
 // uniforms
+
 const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", 0);
 const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", 0);
 const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap", 0);

@@ -46,7 +46,7 @@ const
 
 r.setUiAttribs({ "colorPick": true });
 
-op.toWorkPortsNeedToBeLinked(render, textureOut);
+op.toWorkPortsNeedToBeLinked(render);
 
 op.setPortGroup("Color", [r, g, b]);
 op.setPortGroup("Size", [font, inSize, weight, maximize, inFontSize, lineDistance, lineOffset]);
@@ -112,7 +112,7 @@ const body = document.getElementsByTagName("body")[0];
 let tex = new CGL.Texture(cgl);
 const fontImage = document.createElement("canvas");
 fontImage.id = "texturetext_" + CABLES.generateUUID();
-fontImage.style.display = "none";
+// fontImage.style.display = "none";
 body.appendChild(fontImage);
 
 const ctx = fontImage.getContext("2d");
@@ -235,12 +235,26 @@ function refresh()
     // const num=String(parseInt(letterSpacing.get()));
     //     fontImage.style["letter-spacing"] = num+"px";
     // fontImage.style["font-kerning"]="normal";
+    const rgbStringClear = "rgba(255,"
+        + Math.floor(0 * 255) + "," + Math.floor(b.get() * 255) + ","
+        + 0.8 + ")";
 
-    ctx.clearRect(0, 0, fontImage.width, fontImage.height);
+    ctx.fillStyle = rgbStringClear;
+    ctx.fillRect(0, 0, getWidth() / 2, getHeight());
+
+    const rgbStringClear2 = "rgba(255,"
+        + Math.floor(0 * 255) + "," + Math.floor(b.get() * 255) + ","
+        + 0.0 + ")";
+
+    ctx.fillStyle = rgbStringClear2;
+    ctx.clearRect(0, 0, getWidth() / 2, getHeight());
+
+    // ctx.fillStyle = "white";
+
     const rgbString = "rgba(" + Math.floor(r.get() * 255) + ","
         + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + ","
         + inOpacity.get() + ")";
-    // ctx.fillStyle = "white";
+
     ctx.fillStyle = rgbString;
     // op.log("rgbstring", rgbString);
     let fontSize = parseFloat(inFontSize.get());
@@ -400,5 +414,5 @@ function refresh()
     tex.flip = false;
     tex.initTexture(fontImage, f);
     textureOut.setRef(tex);
-    tex.unpackAlpha = true;
+    tex.unpackAlpha = false;
 }
