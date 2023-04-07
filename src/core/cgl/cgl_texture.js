@@ -72,7 +72,6 @@ const Texture = function (__cgl, options)
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
     this._cgl.profileData.profileTextureNew++;
-    console.log("new tex", this);
 
     this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
@@ -314,8 +313,6 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this.height = h;
     this._fromData = true;
     this.deleted = false;
-
-    console.log("new tex", this);
 
     if (this.height > this._cgl.maxTexSize || this.width > this._cgl.maxTexSize)
     {
@@ -733,34 +730,6 @@ Texture.getRandomTexture = function (cgl)
     return cgl.randomTexture;
 };
 
-/**
- * @function getRandomFloatTexture
- * @memberof Texture
- * @static
- * @description returns a reference to a texture containing random numbers between -1 and 1
- * @return {Texture}
- */
-Texture.getRandomFloatTexture = function (cgl)
-{
-    if (!cgl) console.error("[getRandomTexture] no cgl!");
-    if (cgl.getRandomFloatTexture) return cgl.getRandomFloatTexture;
-
-    const size = 256;
-    const data = new Float32Array(size * size * 4);
-
-    for (let x = 0; x < size * size; x++)
-    {
-        data[x * 4 + 0] = (Math.random() - 0.5) * 2.0;
-        data[x * 4 + 1] = (Math.random() - 0.5) * 2.0;
-        data[x * 4 + 2] = (Math.random() - 0.5) * 2.0;
-        data[x * 4 + 3] = 1;
-    }
-
-    cgl.getRandomFloatTexture = new Texture(cgl, { "isFloatingPointTexture": true });
-    cgl.getRandomFloatTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
-
-    return cgl.getRandomFloatTexture;
-};
 
 /**
  * @function getBlackTexture
@@ -816,8 +785,6 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const height = 8;
 
     cgl.profileData.profileTextureNew++;
-    console.log("new tex", this);
-
 
     cgl.gl.bindTexture(target, tex);
     cgl.profileData.profileTextureResize++;
