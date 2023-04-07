@@ -72,6 +72,7 @@ const Texture = function (__cgl, options)
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
     this._cgl.profileData.profileTextureNew++;
+    console.log("new tex", this);
 
     this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
@@ -813,6 +814,8 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const height = 8;
 
     cgl.profileData.profileTextureNew++;
+    console.log("new tex", this);
+    console.log("new tex", this);
 
 
     cgl.gl.bindTexture(target, tex);
