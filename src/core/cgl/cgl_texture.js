@@ -315,6 +315,8 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this._fromData = true;
     this.deleted = false;
 
+    console.log("new tex", this);
+
     if (this.height > this._cgl.maxTexSize || this.width > this._cgl.maxTexSize)
     {
         const t = CGL.Texture.getTempTexture(this._cgl);
@@ -814,7 +816,6 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const height = 8;
 
     cgl.profileData.profileTextureNew++;
-    console.log("new tex", this);
     console.log("new tex", this);
 
 
