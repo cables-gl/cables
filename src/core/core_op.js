@@ -1191,8 +1191,14 @@ const Op = function ()
                 if (this._instances[i].onDelete) this._instances[i].onDelete();
             }
 
+
             this._instances.length = 0;
         }
+        for (let i = 0; i < this.portsIn.length; i++)
+        {
+            this.portsIn[i].setAnimated(false);
+        }
+        console.log("cleanup op!");
     };
 
     // todo: check instancing stuff?

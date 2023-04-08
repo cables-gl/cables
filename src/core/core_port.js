@@ -724,6 +724,10 @@ Port.prototype.setAnimated = function (a)
     }
 
     this._handleNoTriggerOpAnimUpdates(a);
+    if (!a)
+    {
+        this.anim = null;
+    }
 
     this.setUiAttribs({ "isAnimated": this._animated });
 };
