@@ -67,9 +67,7 @@ export const Marker = function (_cgl)
 
         // cgl.gl.enable(cgl.gl.DEPTH_TEST);
         cgl.popDepthTest();
-
         cgl.popShader();
-
 
         cgl.popModelMatrix();
     };
@@ -118,7 +116,6 @@ export const WirePoint = function (cgl)
         buffer.numItems = points.length / buffer.itemSize;
     }
 
-
     this.render = function (_cgl, _size)
     {
         _cgl.pushModelMatrix();
@@ -126,7 +123,6 @@ export const WirePoint = function (cgl)
         vec3.set(vScale, _size, _size, _size);
         mat4.scale(_cgl.mvMatrix, _cgl.mvMatrix, vScale);
 
-        // var shader=cgl.getDefaultShader();
         const shader = _cgl.getShader();
 
         if (shader)
