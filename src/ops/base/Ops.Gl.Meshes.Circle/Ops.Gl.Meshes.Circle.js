@@ -53,9 +53,10 @@ render.onLinkChanged = function ()
 
 function renderMesh()
 {
+    if (needsCalc)calc();
+
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
-    if (needsCalc)calc();
     shader = cgl.getShader();
     if (!shader) return;
     oldPrim = shader.glPrimitive;
@@ -263,8 +264,7 @@ function calc()
         else geom.texCoords = texCoords;
     }
 
-    geomOut.set(null);
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();

@@ -29,6 +29,19 @@ const randomsFloats = [];
 const transVec = vec3.create();
 const mat = mat4.create();
 
+seed.onChange =
+    num.onChange =
+    size.onChange =
+    scaleX.onChange =
+    scaleZ.onChange =
+    scaleY.onChange =
+    round.onChange =
+    rotX.onChange =
+    rotY.onChange =
+    rotZ.onChange = reset;
+
+num.set(100);
+
 function doRender()
 {
     if (cgl.shouldDrawHelpers(op))
@@ -111,16 +124,3 @@ function reset()
         ));
     }
 }
-
-seed.onChange = reset;
-num.onChange = reset;
-size.onChange = reset;
-scaleX.onChange = reset;
-scaleZ.onChange = reset;
-scaleY.onChange = reset;
-round.onChange = reset;
-rotX.onChange = reset;
-rotY.onChange = reset;
-rotZ.onChange = reset;
-
-num.set(100);
