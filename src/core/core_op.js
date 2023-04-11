@@ -1198,7 +1198,6 @@ const Op = function ()
         {
             this.portsIn[i].setAnimated(false);
         }
-        console.log("cleanup op!");
     };
 
     // todo: check instancing stuff?
