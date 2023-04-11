@@ -1,5 +1,5 @@
 const cgl = op.patch.cgl;
-const TEX_SIZES = [128, 256, 512, 1024, 2048];
+const TEX_SIZES = ["128", "256", "512", "1024", "2048"];
 const
     refresh = op.inTriggerButton("Refresh"),
     fftArr = op.inArray("FFT Array"),
@@ -58,7 +58,7 @@ refresh.onTriggered = function ()
         size = Number(inCanvasSize.get());
         canvas.width = canvas.height = size;
 
-        const indexOfSize = TEX_SIZES.indexOf(Number(inCanvasSize.get()));
+        const indexOfSize = TEX_SIZES.indexOf(inCanvasSize.get());
         multiplier = MULTIPLIERS[indexOfSize];
 
         updateTexture = false;
@@ -73,7 +73,10 @@ refresh.onTriggered = function ()
 
         ctx.fillStyle = "#888";
         for (let i = 0; i < arr.length; i++)
+        {
+            // console.log(size, i, multiplier);
             ctx.fillRect(i, size - arr[i] * multiplier, 1, arr[i] * multiplier);
+        }
     }
 
     areaX = x.get() * canvas.width;

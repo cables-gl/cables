@@ -1,6 +1,7 @@
 const
     exe = op.inTrigger("exe"),
     geom = op.inObject("Geometry", null, "geometry"),
+    inScale = op.inValue("Scale", 1),
     inLimit = op.inBool("Limit Instances", false),
     inNum = op.inInt("Num Instances", 1000),
     inTex = op.inTexture("Position Texture", null, "texture"),
@@ -10,7 +11,6 @@ const
     inTex4 = op.inTexture("Color Texture", null, "texture"),
     inTex5 = op.inTexture("TexCoord Texture", null, "texture"),
     inBlendMode = op.inSwitch("Color Texture Blendmode", ["Multiply", "Add", "Normal"], "Multiply"),
-    inScale = op.inValue("Scale", 1),
     inAlphaThresh = op.inFloatSlider("Ignore Alpha Less Than", 0.5),
     inMulR = op.inValue("Multiply Pos X", 1),
     inMulG = op.inValue("Multiply Pos Y", 1),

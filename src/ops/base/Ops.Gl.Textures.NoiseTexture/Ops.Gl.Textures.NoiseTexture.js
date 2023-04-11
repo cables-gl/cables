@@ -149,7 +149,7 @@ function update()
 
     tex.initFromData(pixels, width, height, cgl_filter, cgl_wrap);
 
-    outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl, isFp));
+    // outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl, isFp));
     outNumPixel.set(width * height);
-    outTex.set(tex);
+    outTex.setRef(tex);
 }

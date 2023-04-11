@@ -112,7 +112,7 @@ const body = document.getElementsByTagName("body")[0];
 let tex = new CGL.Texture(cgl);
 const fontImage = document.createElement("canvas");
 fontImage.id = "texturetext_" + CABLES.generateUUID();
-// fontImage.style.display = "none";
+fontImage.style.display = "none";
 body.appendChild(fontImage);
 
 const ctx = fontImage.getContext("2d");
