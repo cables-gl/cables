@@ -1,0 +1,49 @@
+{
+    "id": "e19a04ba-fa78-4156-a9a8-7fa60f66b38c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675708263362
+        },
+        {
+            "message": "Ops.User.pandur.GerMaterialId renamed to Ops.Dev.GetMaterialId",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675710081603
+        },
+        {
+            "message": "cloned op from Ops.Dev.GetMaterialId",
+            "author": "pandur",
+            "date": 1681239759058
+        },
+        {
+            "message": "Ops.Patch.P5DptNt.GetObjectId renamed to Ops.Dev.Gl.GetObjectId",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1681240057498
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1681239759058,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Material Id",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Dev.Gl.GetObjectId"
+    }
+}
