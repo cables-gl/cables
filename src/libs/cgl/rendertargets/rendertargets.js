@@ -15,6 +15,9 @@ class RenderTargets
         this.mod = new CGL.ShaderModifier(cgl, this._name);
         // this.updateModules();
 
+        this.mod.toggleDefine("MOD_UNI_OBJECT_ID", true);
+        this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", true);
+
         this.mod.onBind = (currentShader) =>
         {
             // console.log(currentShader);
@@ -52,6 +55,7 @@ class RenderTargets
     {
         return ["Default",
             "Material Id",
+            "Object Id",
             "Position World",
             "Position Local",
             "Position Object",
@@ -72,6 +76,7 @@ class RenderTargets
     {
         let outcolor = "outColor";
         if (i === "")outcolor = "col";
+
         if (type == "Normal") return "    " + outcolor + i + " = vec4(norm,1.);".endl();
         else if (type == "Default" || type == "Color") return "    " + outcolor + i + " = col;".endl();
         else if (type == "1") return "    " + outcolor + i + " = vec4(1.,1.,1.,1.);".endl();
@@ -83,6 +88,7 @@ class RenderTargets
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
         else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
+        else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
         // else return "    outColor" + i + " = vec4(1.,0.,0.,1.);".endl();
     }

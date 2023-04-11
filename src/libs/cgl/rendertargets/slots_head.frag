@@ -14,3 +14,12 @@
 #ifdef MOD_SLOT_POS_NORMAL_MV
     in vec3 MOD_normal_mv;
 #endif
+
+#ifdef MOD_UNI_OBJECT_ID
+    UNI float objectId;
+#endif
+
+#ifdef MOD_UNI_MATERIAL_ID
+    UNI float materialId;
+#endif
+

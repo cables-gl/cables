@@ -811,7 +811,6 @@ Shader.prototype.bind = function ()
 
     MESH.lastShader = this;
 
-
     if (!this._program || this._needsRecompile) this.compile();
     if (!this._isValid) return;
 
@@ -831,6 +830,7 @@ Shader.prototype.bind = function ()
             this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
             this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
             this._materialIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MATERIALID);
+            this._objectIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_OBJECTID);
 
             for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
         }
@@ -854,10 +854,11 @@ Shader.prototype.bind = function ()
         this._cgl.profileData.profileMVPMatrixCount++;
     }
 
+    if (this._objectIdUniform)
+        this._cgl.gl.uniform1f(this._objectIdUniform, ++this._cgl.frameStore.objectIdCounter);
+
     if (this._materialIdUniform)
-    {
         this._cgl.gl.uniform1f(this._materialIdUniform, this._materialId);
-    }
 
     if (this._vMatrixUniform)
     {
@@ -919,10 +920,10 @@ Shader.prototype.bind = function ()
 
     return this._isValid;
 };
+
 Shader.prototype.unBind = function ()
 {
 };
-
 
 /**
  * easily enable/disable a define without a value
