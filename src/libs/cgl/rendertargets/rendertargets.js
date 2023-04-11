@@ -15,8 +15,6 @@ class RenderTargets
         this.mod = new CGL.ShaderModifier(cgl, this._name);
         // this.updateModules();
 
-        this.mod.toggleDefine("MOD_UNI_OBJECT_ID", true);
-        this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", true);
 
         this.mod.onBind = (currentShader) =>
         {
@@ -100,7 +98,6 @@ class RenderTargets
 
         if (this._slots.length == 1)
         {
-            console.log(this._slots[0], this.getSrcString(this._slots[0], ""));
             src += this.getSrcString(this._slots[0], "");
         }
         else
@@ -121,6 +118,8 @@ class RenderTargets
         let hasPosWorld = false;
         let hasPosLocal = false;
         let hasPosObject = false;
+        let hasMaterialId = false;
+        let hasObjectId = false;
         let hasNormalModelView = false;
         this._numBuffers = slots.length;
 
@@ -130,6 +129,8 @@ class RenderTargets
             hasNormalModelView = (slots[i] == "Normal * ModelView") || hasNormalModelView;
             hasPosLocal = (slots[i] == "Position Local") || hasPosLocal;
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
+            hasMaterialId = (slots[i] == "Material Id") || hasMaterialId;
+            hasObjectId = (slots[i] == "Object Id") || hasObjectId;
 
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
@@ -138,6 +139,9 @@ class RenderTargets
 
         this.updateModules();
         // this.updateModules();
+
+        this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
+        this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", hasMaterialId);
 
         this.mod.toggleDefine("MOD_SLOT_POS_WORLD", hasPosWorld);
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);
