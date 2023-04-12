@@ -231,7 +231,6 @@ function loadCams(gltf)
     {
         if (gltf.nodes[i].hasOwnProperty("camera"))
         {
-            console.log("cam!");
             const cam = new gltfCamera(gltf, gltf.nodes[i]);
             gltf.cameras.push(cam);
         }

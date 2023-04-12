@@ -712,9 +712,6 @@ Mesh.prototype.render = function (shader)
 
     if (!shader.bind()) return;
 
-    // if (shader.bindTextures) shader.bindTextures();
-
-
     // if(needsBind)
     this._bind(shader);
     if (this.addVertexNumbers) this._setVertexNumbers();

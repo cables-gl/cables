@@ -15,6 +15,7 @@ class RenderTargets
         this.mod = new CGL.ShaderModifier(cgl, this._name);
         // this.updateModules();
 
+
         this.mod.onBind = (currentShader) =>
         {
             // console.log(currentShader);
@@ -52,6 +53,7 @@ class RenderTargets
     {
         return ["Default",
             "Material Id",
+            "Object Id",
             "Position World",
             "Position Local",
             "Position Object",
@@ -72,6 +74,7 @@ class RenderTargets
     {
         let outcolor = "outColor";
         if (i === "")outcolor = "col";
+
         if (type == "Normal") return "    " + outcolor + i + " = vec4(norm,1.);".endl();
         else if (type == "Default" || type == "Color") return "    " + outcolor + i + " = col;".endl();
         else if (type == "1") return "    " + outcolor + i + " = vec4(1.,1.,1.,1.);".endl();
@@ -83,6 +86,7 @@ class RenderTargets
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
         else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
+        else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
         // else return "    outColor" + i + " = vec4(1.,0.,0.,1.);".endl();
     }
@@ -94,7 +98,6 @@ class RenderTargets
 
         if (this._slots.length == 1)
         {
-            console.log(this._slots[0], this.getSrcString(this._slots[0], ""));
             src += this.getSrcString(this._slots[0], "");
         }
         else
@@ -115,6 +118,8 @@ class RenderTargets
         let hasPosWorld = false;
         let hasPosLocal = false;
         let hasPosObject = false;
+        let hasMaterialId = false;
+        let hasObjectId = false;
         let hasNormalModelView = false;
         this._numBuffers = slots.length;
 
@@ -124,6 +129,8 @@ class RenderTargets
             hasNormalModelView = (slots[i] == "Normal * ModelView") || hasNormalModelView;
             hasPosLocal = (slots[i] == "Position Local") || hasPosLocal;
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
+            hasMaterialId = (slots[i] == "Material Id") || hasMaterialId;
+            hasObjectId = (slots[i] == "Object Id") || hasObjectId;
 
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
@@ -132,6 +139,9 @@ class RenderTargets
 
         this.updateModules();
         // this.updateModules();
+
+        this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
+        this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", hasMaterialId);
 
         this.mod.toggleDefine("MOD_SLOT_POS_WORLD", hasPosWorld);
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);

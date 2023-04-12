@@ -164,6 +164,8 @@ function doRender()
     cgl.frameStore.forceShaderMods = cgl.frameStore.forceShaderMods || [];
     cgl.frameStore.forceShaderMods.push(mod);
 
+    cgl.frameStore.objectIdCounter = 0;
+
     trigger.trigger();
 
     cgl.frameStore.forceShaderMods.pop();

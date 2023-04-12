@@ -162,10 +162,26 @@
             "type": "rename",
             "author": "pandur",
             "date": 1680110539327
+        },
+        {
+            "message": " added core lib: cgl_rendertargets",
+            "type": "",
+            "author": "pandur",
+            "date": 1681236029664
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1681236071666
         }
     ],
     "youtubeid": "",
     "issues": "requires WebGL2",
     "relatedops": null,
-    "exampleProjectId": "INQQgo"
+    "exampleProjectId": "INQQgo",
+    "coreLibs": [
+        "cgl_rendertargets",
+        "cgl_shadermodifier"
+    ]
 }

@@ -166,7 +166,7 @@ function onInputValuePortChanged()
     const maxValue = maxPort.get();
     if (newValue > maxValue) { newValue = maxValue; }
     else if (newValue < minValue) { newValue = minValue; }
-    setValueFieldValue(newValue);
+    // setValueFieldValue(newValue);
     setInputFieldValue(newValue);
     valuePort.set(newValue);
     updateActiveTrack();

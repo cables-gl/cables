@@ -456,8 +456,6 @@ TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alpha
         else if (str == "subtract") str = "sub";
         else if (str == "difference") str = "diff";
         else if (str == "negation") str = "neg";
-        else if (str == "negation") str = "neg";
-        else if (str == "negation") str = "neg";
         else if (str == "exclusion") str = "exc";
         else if (str == "overlay") str = "ovl";
         else if (str == "color dodge") str = "dodge";
