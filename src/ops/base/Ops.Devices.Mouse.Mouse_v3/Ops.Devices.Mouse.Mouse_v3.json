@@ -85,19 +85,18 @@
             {
                 "type": 0,
                 "name": "Button is down",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Mouse is hovering",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Devices.Mouse.Mouse_v3"
     },
     "authorName": "pandur",
     "created": 1668760408364,
-
     "relatedops": null,
     "exampleProjectId": "mDiCq6",
     "docs": {

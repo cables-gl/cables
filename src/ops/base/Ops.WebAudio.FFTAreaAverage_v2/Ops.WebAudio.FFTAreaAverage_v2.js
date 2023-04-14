@@ -8,7 +8,7 @@ const
     w = op.inValueSlider("Width", 0.2),
     h = op.inValueSlider("Height", 0.2),
     drawTex = op.inValueBool("Create Texture", true),
-    inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, 128),
+    inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, "128"),
     texOut = op.outTexture("Texture Out", null, "texture"),
     value = op.outNumber("Area Average Volume");
 
@@ -58,7 +58,7 @@ refresh.onTriggered = function ()
         size = Number(inCanvasSize.get());
         canvas.width = canvas.height = size;
 
-        const indexOfSize = TEX_SIZES.indexOf(inCanvasSize.get());
+        const indexOfSize = TEX_SIZES.indexOf(String(inCanvasSize.get()));
         multiplier = MULTIPLIERS[indexOfSize];
 
         updateTexture = false;
