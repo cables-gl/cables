@@ -13,6 +13,8 @@ const
 
 geomOut.ignoreValueSerialize = true;
 
+active.setUiAttribs({ "title": "Render mesh" });
+
 const cgl = op.patch.cgl;
 axis.set("xy");
 pivotX.set("center");

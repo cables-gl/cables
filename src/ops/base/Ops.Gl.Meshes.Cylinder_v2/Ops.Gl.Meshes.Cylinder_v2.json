@@ -13,6 +13,7 @@
             {
                 "type": 0,
                 "name": "Draw",
+                "uititle": "Render mesh",
                 "subType": "boolean"
             },
             {
@@ -39,16 +40,6 @@
                 "type": 0,
                 "name": "inner radius",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "UV mode index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "UV mode",
-                "subType": "string"
             },
             {
                 "type": 0,
@@ -135,7 +126,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "GxagQ6"
 }

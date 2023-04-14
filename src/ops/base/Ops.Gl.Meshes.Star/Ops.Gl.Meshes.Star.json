@@ -42,6 +42,11 @@
                 "type": 0,
                 "name": "Fill",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Render Mesh",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
