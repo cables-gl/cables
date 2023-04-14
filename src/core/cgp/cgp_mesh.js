@@ -146,7 +146,8 @@ export default class Mesh
 
         // this.setPipeline();
 
-        this._cgp.getShader().bind();
+        const shader = this._cgp.getShader();
+        if (shader)shader.bind();
 
         if (!this._cgp.getShader().isValid)
         {
@@ -175,5 +176,7 @@ export default class Mesh
             this._cgp.passEncoder.draw(this._numIndices);
         else
             this._cgp.passEncoder.drawIndexed(this._numIndices);
+
+        // if (shader)shader.unbind();
     }
 }
