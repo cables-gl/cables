@@ -28,7 +28,7 @@ const outCollision = op.outTrigger("Collision");
 
 const cgl = op.patch.cgl;
 
-const m = new CGL.WirePoint(cgl, 1);
+const m = new CGL.WirePoint(cgl);
 
 exec.onTriggered = render;
 

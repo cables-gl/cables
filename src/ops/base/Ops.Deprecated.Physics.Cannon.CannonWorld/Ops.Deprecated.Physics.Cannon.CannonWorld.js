@@ -36,7 +36,7 @@ const maxSubSteps = 11;
 let lastTime;
 
 const meshCube = new CGL.WireframeCube(cgl);
-const wireSphere = new CGL.WirePoint(cgl);
+// const wireSphere = new CGL.WirePoint(cgl);
 const marker = new CGL.Marker(cgl);
 
 reset.onTriggered = function ()
