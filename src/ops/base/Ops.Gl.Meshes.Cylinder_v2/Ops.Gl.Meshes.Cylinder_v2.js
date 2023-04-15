@@ -14,6 +14,8 @@ const
     outGeometry = op.outObject("geometry"),
     geom = new CGL.Geometry("cylinder");
 
+inDraw.setUiAttribs({ "title": "Render mesh" });
+
 const
     TAU = Math.PI * 2,
     cgl = op.patch.cgl;
@@ -22,7 +24,6 @@ let needsRebuild = true;
 let mesh = null;
 
 inUVMode.setUiAttribs({ "hidePort": true });
-
 
 op.preRender = buildMesh;
 
@@ -289,7 +290,7 @@ function buildMesh()
     outGeometry.set(null);
     outGeometry.set(geom);
 
-    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
 
     needsRebuild = false;

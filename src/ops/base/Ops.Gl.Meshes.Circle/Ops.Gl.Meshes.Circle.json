@@ -54,6 +54,7 @@
             {
                 "type": 0,
                 "name": "Draw",
+                "uititle": "Render mesh",
                 "subType": "boolean"
             }
         ],

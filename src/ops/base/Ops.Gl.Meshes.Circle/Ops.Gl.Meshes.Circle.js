@@ -16,6 +16,8 @@ op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
 
+inDraw.setUiAttribs({ "title": "Render mesh" });
+
 mapping.set("flat");
 
 mapping.onChange =
