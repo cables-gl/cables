@@ -1,6 +1,6 @@
 const
     inCoords = op.inSwitch("Coordinates", ["Pixel", "Pixel Display", "-1 to 1", "0 to 1"], "-1 to 1"),
-    area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element"], "Canvas"),
+    area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element", "Canvas Area"], "Canvas"),
     flipY = op.inValueBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
     touchscreen = op.inValueBool("Touch support", true),
@@ -15,6 +15,7 @@ const
 const cgl = op.patch.cgl;
 let normalize = 1;
 let listenerElement = null;
+let sizeElement = null;
 area.onChange = addListeners;
 
 inCoords.onChange = updateCoordNormalizing;
@@ -27,8 +28,8 @@ op.on("loadedValueSet",
     {
         if (normalize == 0)
         {
-            outMouseX.set(cgl.canvas.width / 2);
-            outMouseY.set(cgl.canvas.height / 2);
+            outMouseX.set(sizeElement.clientWidth / 2);
+            outMouseY.set(sizeElement.clientHeight / 2);
         }
         if (normalize == 1)
         {
@@ -47,41 +48,58 @@ function setValue(x, y)
     x = x || 0;
     y = y || 0;
 
-    if (normalize == 0)
+    if (normalize == 0) // pixel
     {
         outMouseX.set(x);
         outMouseY.set(y);
     }
     else
-    if (normalize == 3)
+    if (normalize == 3) // pixel css
     {
         outMouseX.set(x * cgl.pixelDensity);
         outMouseY.set(y * cgl.pixelDensity);
     }
     else
     {
-        let w = cgl.canvas.width / cgl.pixelDensity;
-        let h = cgl.canvas.height / cgl.pixelDensity;
-        if (listenerElement == document.body)
-        {
-            w = listenerElement.clientWidth / cgl.pixelDensity;
-            h = Math.max(window.innerHeight, document.body.clientHeight) / cgl.pixelDensity;
-        }
+        let w = sizeElement.clientWidth / cgl.pixelDensity;
+        let h = sizeElement.clientHeight / cgl.pixelDensity;
 
         w = w || 1;
         h = h || 1;
 
-        if (normalize == 1)
+        if (normalize == 1) // -1 to 1
         {
-            outMouseX.set(x / w * 2.0 - 1.0);
-            outMouseY.set(y / h * 2.0 - 1.0);
+            let xx = (x / w * 2.0 - 1.0);
+            let yy = (y / h * 2.0 - 1.0);
+
+            outMouseX.set(xx);
+            outMouseY.set(yy);
         }
-        if (normalize == 2)
+        else if (normalize == 2) // 0 to 1
         {
-            outMouseX.set(x / w);
-            outMouseY.set(y / h);
+            let xx = x / w;
+            let yy = y / h;
+
+            outMouseX.set(xx);
+            outMouseY.set(yy);
         }
     }
+}
+
+function checkHovering(e)
+{
+    if (area.get() === "Canvas Area")
+    {
+        const r = sizeElement.getBoundingClientRect();
+
+        return (
+            e.clientX > r.left &&
+            e.clientX < r.left + r.width &&
+            e.clientY > r.top &&
+            e.clientY < r.top + r.height
+        );
+    }
+    return true;
 }
 
 touchscreen.onChange = function ()
@@ -112,6 +130,7 @@ function onMouseEnter(e)
 
 function onMouseDown(e)
 {
+    if (!checkHovering(e)) return;
     mouseDown.set(true);
 }
 
@@ -122,12 +141,14 @@ function onMouseUp(e)
 
 function onClickRight(e)
 {
+    if (!checkHovering(e)) return;
     mouseClickRight.trigger();
     if (rightClickPrevDef.get()) e.preventDefault();
 }
 
 function onmouseclick(e)
 {
+    if (!checkHovering(e)) return;
     mouseClick.trigger();
 }
 
@@ -147,9 +168,16 @@ function setCoords(e)
         x = e.offsetX;
         y = e.offsetY;
     }
+    if (area.get() === "Canvas Area")
+    {
+        const r = sizeElement.getBoundingClientRect();
+        x = e.clientX - r.left;
+        y = e.clientY - r.top;
+    }
 
-    if (flipY.get()) setValue(x, listenerElement.clientHeight - y);
-    else setValue(x, y);
+    if (flipY.get()) y = sizeElement.clientHeight - y;
+
+    setValue(x, y);
 }
 
 function onmousemove(e)
@@ -198,9 +226,14 @@ function addListeners()
     if (listenerElement || !active.get())removeListeners();
     if (!active.get()) return;
 
-    listenerElement = cgl.canvas;
-    if (area.get() == "Document") listenerElement = document.body;
-    if (area.get() == "Parent Element") listenerElement = cgl.canvas.parentElement;
+    listenerElement = sizeElement = cgl.canvas;
+    if (area.get() == "Canvas Area")
+    {
+        sizeElement = cgl.canvas.parentElement;
+        listenerElement = document.body;
+    }
+    if (area.get() == "Document") sizeElement = listenerElement = document.body;
+    if (area.get() == "Parent Element") listenerElement = sizeElement = cgl.canvas.parentElement;
 
     if (touchscreen.get())
     {
