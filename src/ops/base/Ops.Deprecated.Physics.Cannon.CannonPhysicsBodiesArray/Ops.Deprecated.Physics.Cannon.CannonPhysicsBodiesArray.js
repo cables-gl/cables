@@ -13,7 +13,7 @@ const
     outNum = op.outNumber("Total Bodies");
 
 const cgl = op.patch.cgl;
-const wire = new CGL.WirePoint(cgl, 1);
+const wire = new CGL.WirePoint(cgl);
 const vec = vec3.create();
 const q = quat.create();
 const empty = vec3.create();
