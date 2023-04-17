@@ -490,6 +490,7 @@ class ShaderModifier
 
     define(what, value)
     {
+        if (value === undefined)value = true;
         this._defines[what] = value;
         this._changedDefines = true;
     }
