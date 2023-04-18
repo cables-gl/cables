@@ -4,7 +4,7 @@ const
     useVPSize = op.inValueBool("use viewport size", true),
     width = op.inValueInt("texture width"),
     height = op.inValueInt("texture height"),
-    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
+    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
@@ -54,7 +54,10 @@ updateVpSize();
 function updateDefines()
 {
     let types = [];
-    for (let i = 0; i < numSlots; i++) types.push(slotPorts[i].get());
+    for (let i = 0; i < numSlots; i++)
+    {
+        types.push(slotPorts[i].get());
+    }
 
     rt.update(types);
 
@@ -96,6 +99,11 @@ function getWrap()
     else if (inWrap.get() == "clamp to edge") return CGL.Texture.WRAP_CLAMP_TO_EDGE;
 }
 
+function isFloatingPoint()
+{
+    return inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+}
+
 function doRender()
 {
     if (!fb || reInitFb)
@@ -107,7 +115,7 @@ function doRender()
 
         if (fb) fb.delete();
 
-        floatingPoint = inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+        floatingPoint = isFloatingPoint();
 
         if (cgl.glVersion >= 2)
         {
