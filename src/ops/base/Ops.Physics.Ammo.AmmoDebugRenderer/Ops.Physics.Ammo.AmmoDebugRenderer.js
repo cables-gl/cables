@@ -3,6 +3,8 @@ const
     inDrawWireframe = op.inBool("Draw Wireframe", true),
     inDrawAABB = op.inBool("Draw AABB", false),
     inDrawContacts = op.inBool("Draw Contact Points", true),
+    inDrawConstraints = op.inBool("Draw Constraints", false),
+
     inIgnClear = op.inBool("Depth", true),
 
     inActive = op.inBool("Active", true),
@@ -42,6 +44,16 @@ inRender.onTriggered = () =>
     if (inDrawWireframe.get())debugmode |= 1;
     if (inDrawAABB.get())debugmode |= 2;
     if (inDrawContacts.get())debugmode |= 8;
+    if (inDrawConstraints.get())
+    {
+        debugmode |= 2048;
+        debugmode |= 4096;
+    }
+
+    //       DrawConstraints: 1 << 11, //2048
+    //   DrawConstraintLimits: 1 << 12, //4096
+    //   FastWireframe: 1 << 13, //8192
+    //   DrawNormals: 1 << 14, //16384
 
     outNext.trigger();
 

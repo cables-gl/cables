@@ -19,6 +19,8 @@ let
     needsRebuild = true,
     mesh;
 
+inDraw.setUiAttribs({ "title": "Render mesh" });
+
 function buildMesh()
 {
     const
