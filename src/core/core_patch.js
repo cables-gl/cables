@@ -691,6 +691,11 @@ Patch.prototype.exec = function (e)
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
 
+// Patch.prototype.linkPorts = function (port1, port2)
+// {
+//     this.link(port1.parent, port1.id, port2.parent, port2.id);
+// };
+
 /**
  * link two ops/ports
  * @function link
