@@ -67,6 +67,7 @@ const Patch = function (cfg)
     this._animReq = null;
     this._opIdCache = {};
     this._triggerStack = [];
+    this.storeObjNames = true; // remove after mai release
 
     this.loading = new LoadingStatus(this);
 

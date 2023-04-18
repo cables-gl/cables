@@ -1034,7 +1034,8 @@ const Op = function ()
         const op = {};
 
         if (this.opId) op.opId = this.opId;
-        // op.objName = this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
+
+        if (this.patch.storeObjNames) op.objName = this.objName;
 
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs));
