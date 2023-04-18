@@ -20,14 +20,71 @@ let
     mesh;
 
 inDraw.setUiAttribs({ "title": "Render mesh" });
+let doscale = true;
+
+const vScale = vec3.create();
+vec3.set(vScale, 1, 1, 1);
+
+// set event handlers
+inTrigger.onTriggered = function ()
+{
+    if (needsRebuild) buildMesh();
+
+    if (inDraw.get())
+    {
+        if (doscale)
+        {
+            cgl.pushModelMatrix();
+            mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
+        }
+        mesh.render(cgl.getShader());
+        if (doscale) cgl.popModelMatrix();
+    }
+    outTrigger.trigger();
+};
+
+inStacks.onChange =
+inSlices.onChange =
+inStacklimit.onChange = function ()
+{
+    needsRebuild = true;
+};
+
+outGeometry.onLinkChanged = () =>
+{
+    needsRebuild = true;
+    updateRadius();
+};
+
+inRadius.onChange = updateRadius;
+
+function updateRadius()
+{
+    doscale = !outGeometry.isLinked();
+
+    if (!doscale)
+    {
+        needsRebuild = true;
+    }
+    else
+    {
+        vec3.set(vScale, inRadius.get(), inRadius.get(), inRadius.get());
+    }
+}
+
+// set lifecycle handlers
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+>>>>>>> b420737a76930cc45f20298a0bbf21891ed84425
 
 function buildMesh()
 {
     const
         stacks = Math.ceil(Math.max(inStacks.get(), 2)),
         slices = Math.ceil(Math.max(inSlices.get(), 3)),
-        stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks),
-        radius = inRadius.get();
+        stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks);
+    let radius = inRadius.get();
+
+    if (doscale)radius = 1;
     let
         positions = [],
         texcoords = [],
@@ -103,23 +160,3 @@ function buildMesh()
 
     needsRebuild = false;
 }
-
-// set event handlers
-inTrigger.onTriggered = function ()
-{
-    if (needsRebuild) buildMesh();
-    if (inDraw.get()) mesh.render(cgl.getShader());
-    outTrigger.trigger();
-};
-
-inStacks.onChange =
-inSlices.onChange =
-inStacklimit.onChange =
-inRadius.onChange = function ()
-{
-    // only calculate once, even after multiple settings could were changed
-    needsRebuild = true;
-};
-
-// set lifecycle handlers
-op.onDelete = function () { if (mesh)mesh.dispose(); };
