@@ -74,7 +74,6 @@ function updateRadius()
 
 // set lifecycle handlers
 op.onDelete = function () { if (mesh)mesh.dispose(); };
->>>>>>> b420737a76930cc45f20298a0bbf21891ed84425
 
 function buildMesh()
 {
