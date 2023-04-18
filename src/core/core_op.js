@@ -1063,11 +1063,11 @@ const Op = function ()
         if (lowerCase)
         {
             for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-                if (this.portsIn[ipi].getName().toLowerCase() == name || this.portsIn[ipi].id == name)
+                if (this.portsIn[ipi].getName().toLowerCase() == name || this.portsIn[ipi].id.toLowerCase() == name)
                     return this.portsIn[ipi];
 
             for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-                if (this.portsOut[ipo].getName().toLowerCase() == name || this.portsOut[ipo].id == name)
+                if (this.portsOut[ipo].getName().toLowerCase() == name || this.portsOut[ipo].id.toLowerCase() == name)
                     return this.portsOut[ipo];
         }
         else
