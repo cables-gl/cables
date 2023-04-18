@@ -741,7 +741,6 @@ Shader.prototype.compile = function ()
     // SETUP draw buffers / multi texture render targets
 
     let drawBufferStr = "";
-
     for (let i = 0; i < 16; i++)
         if (fs.indexOf("outColor" + i) > -1) this._drawBuffers[i] = true;
 
@@ -805,9 +804,11 @@ Shader.hasChanged = function ()
     return this._needsRecompile;
 };
 
+
 Shader.prototype.bind = function ()
 {
     if (!this._isValid || this._cgl.aborted) return;
+
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
@@ -829,6 +830,7 @@ Shader.prototype.bind = function ()
             this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
             this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
             this._materialIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MATERIALID);
+            this._objectIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_OBJECTID);
 
             for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
         }
@@ -852,10 +854,11 @@ Shader.prototype.bind = function ()
         this._cgl.profileData.profileMVPMatrixCount++;
     }
 
+    if (this._objectIdUniform)
+        this._cgl.gl.uniform1f(this._objectIdUniform, ++this._cgl.frameStore.objectIdCounter);
+
     if (this._materialIdUniform)
-    {
         this._cgl.gl.uniform1f(this._materialIdUniform, this._materialId);
-    }
 
     if (this._vMatrixUniform)
     {
@@ -914,9 +917,13 @@ Shader.prototype.bind = function ()
     }
 
     this._bindTextures();
+
     return this._isValid;
 };
 
+Shader.prototype.unBind = function ()
+{
+};
 
 /**
  * easily enable/disable a define without a value
@@ -1095,10 +1102,10 @@ Shader.prototype.getCurrentModules = function () { return this._modules; };
  */
 Shader.prototype.addModule = function (mod, sibling)
 {
+    if (this.hasModule(mod.id)) return;
     if (!mod.id) mod.id = generateUUID();
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
-
     if (sibling && !sibling.group) sibling.group = simpleId();
 
     if (!mod.group)
@@ -1141,23 +1148,24 @@ Shader.prototype.needsRecompile = function ()
 
 Shader.prototype.setDrawBuffers = function (arr)
 {
-    if (this._drawBuffers.length !== arr.length)
-    {
-        this._drawBuffers = arr;
-        this._needsRecompile = true;
-        this.setWhyCompile("setDrawBuffers");
-        return;
-    }
-    for (let i = 0; i < arr.length; i++)
-    {
-        if (arr[i] !== this._drawBuffers[i])
-        {
-            this._drawBuffers = arr;
-            this._needsRecompile = true;
-            this.setWhyCompile("setDrawBuffers");
-            return;
-        }
-    }
+    console.log("useless drawbuffers...?!");
+    // if (this._drawBuffers.length !== arr.length)
+    // {
+    //     this._drawBuffers = arr;
+    //     this._needsRecompile = true;
+    //     this.setWhyCompile("setDrawBuffers");
+    //     return;
+    // }
+    // for (let i = 0; i < arr.length; i++)
+    // {
+    //     if (arr[i] !== this._drawBuffers[i])
+    //     {
+    //         this._drawBuffers = arr;
+    //         this._needsRecompile = true;
+    //         this.setWhyCompile("setDrawBuffers");
+    //         return;
+    //     }
+    // }
 };
 
 Shader.prototype.getUniforms = function ()
@@ -1524,6 +1532,8 @@ Shader.prototype._bindTextures = function ()
     {
         this._log.warn("[shader._bindTextures] too many textures bound", this._textureStackTex.length + "/" + this._cgl.maxTextureUnits);
     }
+
+    // for (let i = this._textureStackTex.length + 1; i < this._cgl.maxTextureUnits; i++) this._cgl.setTexture(i, null);
 
     for (let i = 0; i < this._textureStackTex.length; i++)
     {

@@ -242,12 +242,12 @@ TextureEffect.prototype.createMesh = function ()
 
 TextureEffect.checkOpNotInTextureEffect = function (op)
 {
+    if (!op.patch.cgl) return false;
     if (op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
         op.setUiError("textureeffect", null);
         return true;
     }
-
     if (!op.patch.cgl.currentTextureEffect) return true;
 
     if (op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
@@ -455,8 +455,6 @@ TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alpha
         else if (str == "subtract one") str = "sub one";
         else if (str == "subtract") str = "sub";
         else if (str == "difference") str = "diff";
-        else if (str == "negation") str = "neg";
-        else if (str == "negation") str = "neg";
         else if (str == "negation") str = "neg";
         else if (str == "exclusion") str = "exc";
         else if (str == "overlay") str = "ovl";

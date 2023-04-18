@@ -51,11 +51,8 @@ function buildMeshLater()
 
 render.onLinkChanged = function ()
 {
-    if (!render.isLinked())
-    {
-        geomOut.set(null);
-    }
-    geomOut.setRef(geom);
+    if (!render.isLinked()) geomOut.set(null);
+    else geomOut.setRef(geom);
 };
 
 render.onTriggered = function ()

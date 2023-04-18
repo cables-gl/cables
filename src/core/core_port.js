@@ -390,6 +390,7 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim();
+        this.parent._hasAnimPort = true;
         this.anim.addEventListener("onChange", () =>
         {
             this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
@@ -709,6 +710,8 @@ Port.prototype.setAnimated = function (a)
     if (this._animated != a)
     {
         this._animated = a;
+        this.parent._hasAnimPort = true;
+
         if (this._animated && !this.anim)
         {
             this.anim = new Anim();
@@ -721,6 +724,10 @@ Port.prototype.setAnimated = function (a)
     }
 
     this._handleNoTriggerOpAnimUpdates(a);
+    if (!a)
+    {
+        this.anim = null;
+    }
 
     this.setUiAttribs({ "isAnimated": this._animated });
 };
@@ -888,7 +895,16 @@ class SwitchPort extends Port
 
             if (CABLES.UI)
             {
-                if (s === "" || s === null || s === undefined || uiAttribs.values.indexOf(String(s)) === -1) this.parent.setUiError("invalidswitch", "Invalid Switch Value \"" + this.name + "\": " + s);
+                if (
+                    s === "" ||
+                    s === null ||
+                    s === undefined ||
+                    (uiAttribs.values && uiAttribs.values.indexOf(String(s)) === -1)
+                )
+                {
+                    this.parent.setUiError("invalidswitch", "Invalid Switch Value [" + this.name + "]: \"" + s + "\"");
+                }
+
                 else this.parent.setUiError("invalidswitch", null);
             }
 

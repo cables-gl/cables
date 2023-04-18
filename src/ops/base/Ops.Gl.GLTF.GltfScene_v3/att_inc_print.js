@@ -523,7 +523,6 @@ function printInfo()
         html += "  <th>time used</th>";
         html += "</tr>";
 
-        console.log(gltf.timing);
         let lt = 0;
         for (let i = 0; i < gltf.timing.length - 1; i++)
         {

@@ -30,7 +30,7 @@ class AmmoDebugDrawer
         this.verts = [];
         this._lineGeom = null;
         this._lineMesh = null;
-        this.debugDrawMode = options.debugDrawMode || AmmoDebugConstants.DrawWireframe;
+        this.debugDrawMode = options.debugDrawMode || AmmoDebugConstants.DrawWireframe + AmmoDebugConstants.DrawConstraints;
 
         this.index = 0;
         // if (this.indexArray)

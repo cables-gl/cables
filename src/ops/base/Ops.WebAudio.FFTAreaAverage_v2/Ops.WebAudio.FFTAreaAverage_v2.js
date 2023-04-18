@@ -1,5 +1,5 @@
 const cgl = op.patch.cgl;
-const TEX_SIZES = [128, 256, 512, 1024, 2048];
+const TEX_SIZES = ["128", "256", "512", "1024", "2048"];
 const
     refresh = op.inTriggerButton("Refresh"),
     fftArr = op.inArray("FFT Array"),
@@ -8,7 +8,7 @@ const
     w = op.inValueSlider("Width", 0.2),
     h = op.inValueSlider("Height", 0.2),
     drawTex = op.inValueBool("Create Texture", true),
-    inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, 128),
+    inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, "128"),
     texOut = op.outTexture("Texture Out", null, "texture"),
     value = op.outNumber("Area Average Volume");
 
@@ -58,7 +58,7 @@ refresh.onTriggered = function ()
         size = Number(inCanvasSize.get());
         canvas.width = canvas.height = size;
 
-        const indexOfSize = TEX_SIZES.indexOf(Number(inCanvasSize.get()));
+        const indexOfSize = TEX_SIZES.indexOf(String(inCanvasSize.get()));
         multiplier = MULTIPLIERS[indexOfSize];
 
         updateTexture = false;
@@ -73,7 +73,10 @@ refresh.onTriggered = function ()
 
         ctx.fillStyle = "#888";
         for (let i = 0; i < arr.length; i++)
+        {
+            // console.log(size, i, multiplier);
             ctx.fillRect(i, size - arr[i] * multiplier, 1, arr[i] * multiplier);
+        }
     }
 
     areaX = x.get() * canvas.width;

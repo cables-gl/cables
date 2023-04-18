@@ -7,6 +7,7 @@ const
     zDiff = op.inFloat("Peak Z Pos", 0),
     percent = op.inValueSlider("percent"),
     fill = op.inValueBool("Fill"),
+    renderMesh = op.inValueBool("Render Mesh", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
 
@@ -35,10 +36,9 @@ render.onTriggered = function ()
     if (op.instanced(render)) return;
 
     shader = cgl.getShader();
-    if (!shader) return;
     oldPrim = shader.glPrimitive;
 
-    mesh.render(shader);
+    if (renderMesh.get() && mesh) mesh.render(shader);
     trigger.trigger();
 
     shader.glPrimitive = oldPrim;

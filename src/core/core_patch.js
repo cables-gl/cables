@@ -82,6 +82,7 @@ const Patch = function (cfg)
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
+    this.frameStore = {};
 
     if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
 
@@ -304,7 +305,6 @@ Patch.prototype.getJsPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
-    if (this._isLocal && !this.config.allowLocalFileAccess) this.exitError("localAccess", "Browser security forbids loading files directly without a webserver. Upload files to a server to work. use allowLocalFileAccess:true to ignore this.");
     if (!filename) return filename;
     filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;

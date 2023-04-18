@@ -3,9 +3,10 @@ IN vec4 instColor;
 IN float instanceIndex;
 OUT mat4 instModelMat;
 OUT vec4 frag_instColor;
+OUT float frag_instIndex;
 
-#define INSTANCING
 #define PI 3.14159265358
+#define INSTANCING
 
 mat3 ntorot(vec3 r)
 {

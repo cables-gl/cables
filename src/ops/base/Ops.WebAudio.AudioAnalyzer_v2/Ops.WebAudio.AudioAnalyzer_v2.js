@@ -1,4 +1,4 @@
-const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+const clamp = (val, min, max) => { return Math.min(Math.max(val, min), max); };
 const MAX_DBFS_RANGE_24_BIT = -144;
 const MAX_DBFS_RANGE_26_BIT = -96;
 
@@ -178,11 +178,11 @@ inTrigger.onTriggered = function ()
     }
     catch (e) { op.log(e); }
 
-    fftOut.set(null);
-    fftOut.set(fftDataArray);
+    // fftOut.set(null);
+    fftOut.setRef(fftDataArray);
 
-    ampOut.set(null);
-    ampOut.set(ampDataArray);
+    // ampOut.set(null);
+    ampOut.setRef(ampDataArray);
 
     fftLength.set(fftDataArray.length);
     outTrigger.trigger();

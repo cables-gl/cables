@@ -23,7 +23,7 @@ let outCollision = op.outTrigger("Collision");
 
 let cgl = op.patch.cgl;
 
-let m = new CGL.WirePoint(cgl, 1);
+let m = new CGL.WirePoint(cgl);
 
 exec.onTriggered = render;
 

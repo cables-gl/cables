@@ -1,0 +1,103 @@
+{
+    "summary": "",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "R ="
+            },
+            {
+                "type": 5,
+                "name": "G ="
+            },
+            {
+                "type": 5,
+                "name": "B ="
+            },
+            {
+                "type": 1,
+                "name": "Update Shader"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "w",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "texA",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "texB",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Dev.RgbMathExpression"
+    },
+    "authorName": "pandur",
+    "id": "ffce294c-be45-493b-96cb-05ce35af3588",
+    "created": 1678981059161,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RGBMath renamed to Ops.Gl.TextureEffects.Math.RgbMath",
+            "author": "pandur",
+            "date": 1671004402345
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Math.RgbMath",
+            "author": "pandur",
+            "date": 1678981059161
+        },
+        {
+            "message": "Ops.User.pandur.RgbExponentialMath renamed to Ops.Dev.RgbMathExpression",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678983298849
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "tG4xFs",
+    "collections": null
+}

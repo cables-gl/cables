@@ -6,7 +6,7 @@ const
     inValueY = op.inFloat("Y", 1),
     inValueZ = op.inFloat("Z", 1),
     inReset = op.inTriggerButton("Reset"),
-    outArray = op.outArray("Result");
+    outArray = op.outArray("Result", null, 3);
 
 const newArr = [];
 

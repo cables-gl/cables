@@ -62,13 +62,13 @@
         ],
         "name": "Ops.Array.ArrayMerge_v3"
     },
-    "summary": "Merge two arrays - Array 2 is placed behind array 1",
+    "summary": "Merge multiple arrays - in consecutive order",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "P7siGA"
+    "exampleProjectId": "P7siGA",
+    "collections": null
 }

@@ -13,6 +13,8 @@ const
 
 geomOut.ignoreValueSerialize = true;
 
+active.setUiAttribs({ "title": "Render mesh" });
+
 const cgl = op.patch.cgl;
 axis.set("xy");
 pivotX.set("center");
@@ -143,8 +145,8 @@ function rebuild()
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);
 
-    geomOut.set(null);
-    geomOut.set(geom);
+    // geomOut.set(null);
+    geomOut.setRef(geom);
     needsRebuild = false;
 }
 

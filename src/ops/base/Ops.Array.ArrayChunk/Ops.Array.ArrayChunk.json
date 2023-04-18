@@ -62,5 +62,13 @@
             }
         ]
     },
-    "exampleProjectId": "yGR5GA"
+    "exampleProjectId": "yGR5GA",
+    "changelog": [
+        {
+            "message": "do not crash when setting floats as begin/size, round down to next int",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1680075853075
+        }
+    ]
 }
