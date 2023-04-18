@@ -1066,21 +1066,21 @@ const Op = function ()
         if (lowerCase)
         {
             for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-                if (this.portsIn[ipi].getName().toLowerCase() == name)
+                if (this.portsIn[ipi].getName().toLowerCase() == name || this.portsIn[ipi].id == name)
                     return this.portsIn[ipi];
 
             for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-                if (this.portsOut[ipo].getName().toLowerCase() == name)
+                if (this.portsOut[ipo].getName().toLowerCase() == name || this.portsOut[ipo].id == name)
                     return this.portsOut[ipo];
         }
         else
         {
             for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-                if (this.portsIn[ipi].getName() == name)
+                if (this.portsIn[ipi].getName() == name || this.portsIn[ipi].id == name)
                     return this.portsIn[ipi];
 
             for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-                if (this.portsOut[ipo].getName() == name)
+                if (this.portsOut[ipo].getName() == name || this.portsOut[ipo].id == name)
                     return this.portsOut[ipo];
         }
     };
