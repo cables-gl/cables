@@ -60,8 +60,4 @@ mMatrix*=texInstMat;
     texCoord=(texCoord*instTexCoords.zw)+instTexCoords.xy;
 #endif
 
-
-
-
-
-
+frag_instIndex=instanceIndex;

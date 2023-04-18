@@ -108,7 +108,7 @@ function updateDefines()
     mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
     mod.toggleDefine("USE_TEX_TC", inTex5.get());
 
-    mod.define("INSTANCING");
+    // mod.define("INSTANCING");
 }
 
 geom.onChange = function ()
