@@ -41,9 +41,6 @@ const Op = function ()
     this.enabled = true;
     this.patch = arguments[0];
     this.name = arguments[1];
-    // this._needsLinkedToWork = [];
-    // this._needsParentOp = null;
-    this._shortOpName = "";
 
     this._linkTimeRules = {
         "needsLinkedToWork": [],
@@ -69,7 +66,7 @@ const Op = function ()
     this.onDelete = null;
     this.onUiAttrChange = null;
     this.onError = null;
-    // this._eventCallbacks = {};
+
     this._instances = null;
 
     /**
