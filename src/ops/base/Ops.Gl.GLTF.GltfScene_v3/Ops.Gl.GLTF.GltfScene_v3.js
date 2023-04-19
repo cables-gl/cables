@@ -28,6 +28,7 @@ const
     nextBefore = op.outTrigger("Render Before"),
     next = op.outTrigger("Next"),
     outGenerator = op.outString("Generator"),
+
     outVersion = op.outNumber("GLTF Version"),
     outExtensions = op.outArray("GLTF Extensions Used"),
     outAnimLength = op.outNumber("Anim Length", 0),
