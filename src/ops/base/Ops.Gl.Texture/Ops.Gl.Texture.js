@@ -54,7 +54,7 @@ function reloadSoon(nocache)
 
 function realReload(nocache)
 {
-    if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
     if (nocache)url += "?rnd=" + CABLES.generateUUID();
@@ -72,6 +72,7 @@ function realReload(nocache)
                     setTempTexture();
                     op.setUiError("errorload", "could not load texture \"" + filename.get() + "\"", 2);
                     cgl.patch.loading.finished(loadingId);
+                    loadingId = null;
                     return;
                 }
                 else op.setUiError("errorload", null);

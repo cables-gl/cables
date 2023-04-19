@@ -126,10 +126,14 @@ LoadingStatus.prototype.print = function ()
 
 LoadingStatus.prototype.finished = function (id)
 {
-    if (this._loadingAssets[id])
+    const l = this._loadingAssets[id];
+    if (l)
     {
-        this._loadingAssets[id].finished = true;
-        this._loadingAssets[id].timeEnd = Date.now();
+        if (l.finished) this._log.warn("loading job was already finished", l);
+
+        if (l.op) l.op.setUiAttribs({ "loading": false });
+        l.finished = true;
+        l.timeEnd = Date.now();
     }
 
     this.checkStatus();
@@ -176,13 +180,16 @@ LoadingStatus.prototype.existByName = function (name)
     }
 };
 
-LoadingStatus.prototype.start = function (type, name)
+LoadingStatus.prototype.start = function (type, name, op)
 {
     if (this._startTime == 0) this._startTime = Date.now();
     const id = generateUUID();
 
+    if (op)op.setUiAttribs({ "loading": true });
+
     this._loadingAssets[id] = {
         "id": id,
+        "op": op,
         "type": type,
         "name": name,
         "finished": false,

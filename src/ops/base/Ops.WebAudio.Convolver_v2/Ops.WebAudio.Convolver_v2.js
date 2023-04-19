@@ -52,7 +52,7 @@ let loadingId = null;
 
 impulseResponse.onChange = () =>
 {
-    loadingId = cgl.patch.loading.start("IR convolver", "");
+    loadingId = cgl.patch.loading.start("IR convolver", "", op);
     const impulseUrl = impulseResponse.get();
 
     const ajaxRequest = new XMLHttpRequest();

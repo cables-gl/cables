@@ -136,7 +136,7 @@ function reload()
     image.crossOrigin = "";
     let url = op.patch.getFilePath(filename.get());
 
-    let loadingId = op.patch.loading.start("heightmapImage", url);
+    let loadingId = op.patch.loading.start("heightmapImage", url, op);
 
     image.onabort = image.onerror = function (e)
     {

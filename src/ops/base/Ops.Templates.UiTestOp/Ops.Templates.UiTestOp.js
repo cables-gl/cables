@@ -3,6 +3,7 @@ const
     inWarning1 = op.inBool("Warning", false),
     inUiError = op.inBool("Error", false),
     inUiHint = op.inBool("Hint", false),
+    inUiLoading = op.inBool("Loading", false),
     innum = op.inFloatSlider("Slider", 0),
     inResize = op.inBool("Resizable"),
     trig = op.inTrigger("trigger"),
@@ -21,7 +22,7 @@ const
     outBlah = op.outNumber("Something");
 
 op.setPortGroup("Greyout", [inSwit, ingreyoutLine]);
-op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError]);
+op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError, inUiLoading]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
 
@@ -30,6 +31,11 @@ let loadingId = null;
 op.onDelete = () =>
 {
     if (loadingId) op.patch.loading.finished(loadingId);
+};
+
+inUiLoading.onChange = () =>
+{
+    op.setUiAttribs({ "loading": inUiLoading.get() });
 };
 
 inSwit.onChange = () =>

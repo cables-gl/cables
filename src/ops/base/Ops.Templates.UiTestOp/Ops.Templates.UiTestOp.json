@@ -66,6 +66,12 @@
             },
             {
                 "type": 0,
+                "name": "Loading",
+                "group": "Warnings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Slider",
                 "subType": "number"
             },
@@ -135,7 +141,6 @@
     },
     "summary": "UI indicators example op",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

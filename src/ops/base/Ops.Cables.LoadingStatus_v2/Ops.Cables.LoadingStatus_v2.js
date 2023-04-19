@@ -19,7 +19,7 @@ let firstTime = true;
 
 document.body.classList.add("cables-loading");
 
-let loadingId = cgl.patch.loading.start("loadingStatusInit", "loadingStatusInit");
+let loadingId = cgl.patch.loading.start("loadingStatusInit", "loadingStatusInit", op);
 
 exe.onTriggered = () =>
 {
@@ -72,6 +72,7 @@ exe.onTriggered = () =>
     if (outLoading.get() && hasFinished) loadingFinished.trigger();
 
     outLoading.set(notFinished);
+    op.setUiAttribs({ "loading": notFinished });
 
     next.trigger();
 
