@@ -117,7 +117,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
 
     loadingOut.set(true);
 
-    loadingId = op.patch.loading.start("blueprint", op.id);
+    loadingId = op.patch.loading.start("blueprint", op.id, op);
 
     const doneCb = (err, serializedOps) =>
     {

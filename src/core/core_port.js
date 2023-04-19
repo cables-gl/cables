@@ -28,7 +28,7 @@ const Port = function (__parent, name, type, uiAttribs)
      * @description direction of port (input(0) or output(1))
      */
     this.direction = CONSTANTS.PORT.PORT_DIR_IN;
-    this.id = CABLES.simpleId();
+    this.id = String(CABLES.simpleId());
     this.parent = __parent;
 
     /**

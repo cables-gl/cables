@@ -67,7 +67,7 @@ function load()
     updateLoaded();
 
     op.patch.loading.finished(loadingId);
-    loadingId = op.patch.loading.start("jsonFile", "" + urlData.get());
+    loadingId = op.patch.loading.start("jsonFile", "" + urlData.get(), op);
 
     op.setUiError("invaliddata", null);
     op.setUiError("jsonerr", null);
@@ -140,7 +140,7 @@ function load()
 
         if (!texPort.get()) continue;
 
-        const loadingIdTex = cgl.patch.loading.start("textureOp", texPort.get());
+        const loadingIdTex = cgl.patch.loading.start("textureOp", texPort.get(), op);
         const urlTexstr = op.patch.getFilePath(String(texPort.get()));
 
         CGL.Texture.load(cgl, urlTexstr,

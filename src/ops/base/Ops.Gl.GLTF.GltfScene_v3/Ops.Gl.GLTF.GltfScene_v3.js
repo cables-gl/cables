@@ -342,7 +342,7 @@ function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
 
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
     let fileToLoad = inFile.get();
     let url = op.patch.getFilePath(String(inFile.get()));

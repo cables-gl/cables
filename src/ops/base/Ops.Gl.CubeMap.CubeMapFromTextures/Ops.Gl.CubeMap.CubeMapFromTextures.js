@@ -68,7 +68,7 @@ function load()
             return;
         }
     }
-    loadingId = cgl.patch.loading.start("cubemap texture", "");
+    loadingId = cgl.patch.loading.start("cubemap texture", inFilenames[0].get(), op);
 
 
     texCount = 0;

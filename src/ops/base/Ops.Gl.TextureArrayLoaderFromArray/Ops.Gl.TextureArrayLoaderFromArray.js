@@ -113,7 +113,7 @@ function realReload(nocache)
     if (!files || files.length == 0) return;
 
     if (loadingId)cgl.patch.loading.finished(loadingId);
-    loadingId = cgl.patch.loading.start("texturearray", CABLES.uuid());
+    loadingId = cgl.patch.loading.start("texturearray", CABLES.uuid(), op);
 
     for (let i = 0; i < files.length; i++)
     {

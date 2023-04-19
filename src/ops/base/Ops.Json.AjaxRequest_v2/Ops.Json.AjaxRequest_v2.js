@@ -49,7 +49,7 @@ function reload(addCachebuster, force = false)
 
     op.patch.loading.finished(loadingId);
 
-    loadingId = op.patch.loading.start("jsonFile", "" + filename.get());
+    loadingId = op.patch.loading.start("jsonFile", "" + filename.get(), op);
     isLoading.set(true);
 
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
