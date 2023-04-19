@@ -41,9 +41,6 @@ const Op = function ()
     this.enabled = true;
     this.patch = arguments[0];
     this.name = arguments[1];
-    // this._needsLinkedToWork = [];
-    // this._needsParentOp = null;
-    this._shortOpName = "";
 
     this._linkTimeRules = {
         "needsLinkedToWork": [],
@@ -69,7 +66,7 @@ const Op = function ()
     this.onDelete = null;
     this.onUiAttrChange = null;
     this.onError = null;
-    // this._eventCallbacks = {};
+
     this._instances = null;
 
     /**
@@ -1066,21 +1063,21 @@ const Op = function ()
         if (lowerCase)
         {
             for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-                if (this.portsIn[ipi].getName().toLowerCase() == name)
+                if (this.portsIn[ipi].getName().toLowerCase() == name || this.portsIn[ipi].id.toLowerCase() == name)
                     return this.portsIn[ipi];
 
             for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-                if (this.portsOut[ipo].getName().toLowerCase() == name)
+                if (this.portsOut[ipo].getName().toLowerCase() == name || this.portsOut[ipo].id.toLowerCase() == name)
                     return this.portsOut[ipo];
         }
         else
         {
             for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-                if (this.portsIn[ipi].getName() == name)
+                if (this.portsIn[ipi].getName() == name || this.portsIn[ipi].id == name)
                     return this.portsIn[ipi];
 
             for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-                if (this.portsOut[ipo].getName() == name)
+                if (this.portsOut[ipo].getName() == name || this.portsOut[ipo].id == name)
                     return this.portsOut[ipo];
         }
     };

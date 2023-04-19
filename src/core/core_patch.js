@@ -691,6 +691,11 @@ Patch.prototype.exec = function (e)
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
 
+// Patch.prototype.linkPorts = function (port1, port2)
+// {
+//     this.link(port1.parent, port1.id, port2.parent, port2.id);
+// };
+
 /**
  * link two ops/ports
  * @function link
@@ -845,7 +850,6 @@ Patch.prototype.reloadOp = function (objName, cb)
         count++;
         const oldOp = oldOps[i];
         oldOp.deleted = true;
-        const self = this;
         const op = this.addOp(objName, oldOp.uiAttribs);
         if (!op) continue;
         if (oldOp && oldOp.storage) op.storage = oldOp.storage;
@@ -875,7 +879,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                     const oldOutOp = oldOp.portsIn[j].links[0].portOut.parent;
                     oldOp.portsIn[j].links[0].remove();
 
-                    l = self.link(op, oldName, oldOutOp, oldOutName);
+                    l = this.link(op, oldName, oldOutOp, oldOutName);
                     if (!l) this._log.warn("[reloadOp] relink after op reload not successfull for port " + oldOutName);
                     else l.setValue();
                 }
@@ -891,7 +895,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 const oldInOp = oldOp.portsOut[j].links[0].portIn.parent;
                 oldOp.portsOut[j].links[0].remove();
 
-                l = self.link(op, oldNewName, oldInOp, oldInName);
+                l = this.link(op, oldNewName, oldInOp, oldInName);
                 if (!l) this._log.warn("relink after op reload not successfull for port " + oldInName);
                 else l.setValue();
             }

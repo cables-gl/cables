@@ -77,5 +77,16 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": " added core lib: ammoworld",
+            "type": "",
+            "author": "pandur",
+            "date": 1681561925970
+        }
+    ],
+    "coreLibs": [
+        "ammoworld"
+    ]
 }
