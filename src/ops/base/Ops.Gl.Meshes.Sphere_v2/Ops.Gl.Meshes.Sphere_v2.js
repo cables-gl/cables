@@ -19,6 +19,7 @@ let
     needsRebuild = true,
     mesh;
 
+inDraw.setUiAttribs({ "title": "Render mesh" });
 let doscale = true;
 
 const vScale = vec3.create();
@@ -91,8 +92,9 @@ function buildMesh()
         biTangents = [],
         indices = [],
         x, y, z, d, t, a,
-        o, u, v, i, j;
-    for (i = o = 0; i < stacks + 1; i++)
+        o, u, v, j;
+
+    for (let i = o = 0; i < stacks + 1; i++)
     {
         v = (i / stacks - 0.5) * Math.PI;
         y = Math.sin(v);

@@ -146,7 +146,7 @@
             {
                 "type": 0,
                 "name": "Ray Hit",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,

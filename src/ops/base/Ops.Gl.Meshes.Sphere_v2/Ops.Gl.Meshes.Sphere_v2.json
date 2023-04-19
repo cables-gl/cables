@@ -33,6 +33,7 @@
             {
                 "type": 0,
                 "name": "Render",
+                "uititle": "Render mesh",
                 "subType": "boolean"
             }
         ],

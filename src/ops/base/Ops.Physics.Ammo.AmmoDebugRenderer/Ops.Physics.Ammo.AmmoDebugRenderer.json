@@ -50,6 +50,11 @@
             },
             {
                 "type": 0,
+                "name": "Draw Constraints",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Depth",
                 "group": "Options",
                 "subType": "boolean"
@@ -66,7 +71,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Dev.AmmoDebugRenderer"
+        "name": "Ops.Physics.Ammo.AmmoDebugRenderer"
     },
     "coreLibs": [
         "ammodebugdrawer"
@@ -74,7 +79,6 @@
     "summary": "Visualize the physical bodies as lines and points",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
