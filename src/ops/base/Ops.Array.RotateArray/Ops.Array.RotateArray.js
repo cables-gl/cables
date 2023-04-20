@@ -24,8 +24,9 @@ function rotate(array, n, guard)
     let head, tail;
     n = (n === null) || guard ? 1 : n;
     n %= array.length;
-    tail = array.slice(n);
+    tail = array.slice(n) || [];
 
-    head = array.slice(0, n);
+
+    head = array.slice(0, n) || [];
     return tail.concat(head);
 }

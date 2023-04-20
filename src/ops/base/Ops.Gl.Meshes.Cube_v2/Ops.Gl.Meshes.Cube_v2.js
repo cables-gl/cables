@@ -19,7 +19,7 @@ const
 
 const cgl = op.patch.cgl;
 op.toWorkPortsNeedToBeLinked(render);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 op.setPortGroup("Mapping", [mapping, mappingBias, inFlipX]);
 op.setPortGroup("Geometry", [width, height, len, center]);

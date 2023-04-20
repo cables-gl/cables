@@ -24,7 +24,7 @@ op.setPortGroup("Pivot", [pivotX, pivotY, axis]);
 op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 let mesh = null;
 let needsRebuild = true;

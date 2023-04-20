@@ -14,7 +14,7 @@ const
 
 op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 inDraw.setUiAttribs({ "title": "Render mesh" });
 
