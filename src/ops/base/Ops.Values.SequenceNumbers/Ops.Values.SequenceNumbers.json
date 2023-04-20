@@ -22,173 +22,172 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 0",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 3",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 4",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 5",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 6",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 7",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 8",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 9",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 10",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 11",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 12",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 13",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 14",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number 15",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 0",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 3",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 4",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 5",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 6",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 7",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 8",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 9",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 10",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 11",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 12",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 13",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 14",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Output 15",
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.SequenceNumbers"
+        "name": "Ops.Values.SequenceNumbers"
     },
     "summary": "control order and flow of numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

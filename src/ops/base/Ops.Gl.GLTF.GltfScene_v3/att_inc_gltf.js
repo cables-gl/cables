@@ -282,6 +282,12 @@ function parseGltf(arrayBuffer)
     chunks.push(readChunk(dv, byteArray, arrayBuffer, pos));
     pos += chunks[0].size + CHUNK_HEADER_SIZE;
     gltf.json = chunks[0].data;
+
+    gltf.cables = {
+        "fileUrl": inFile.get(),
+        "shortFileName": CABLES.basename(inFile.get())
+    };
+
     outJson.set(gltf.json);
     outExtensions.set(gltf.json.extensionsUsed || []);
 
