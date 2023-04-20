@@ -112,7 +112,7 @@ function realReload(nocache)
 
     if (!files || files.length == 0) return;
 
-    if (loadingId)cgl.patch.loading.finished(loadingId);
+    // if (loadingId)cgl.patch.loading.finished(loadingId);
     loadingId = cgl.patch.loading.start("texturearray", CABLES.uuid(), op);
 
     for (let i = 0; i < files.length; i++)
@@ -121,7 +121,7 @@ function realReload(nocache)
         let cb = null;
         if (i == files.length - 1)cb = function ()
         {
-            cgl.patch.loading.finished(loadingId);
+            loadingId = cgl.patch.loading.finished(loadingId);
         };
 
         if (!files[i]) { if (cb) cb(); }
