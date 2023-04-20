@@ -63,7 +63,7 @@ function load()
 
 
     op.patch.loading.finished(loadingId);
-    loadingId = op.patch.loading.start("jsonFile", "" + urlData.get());
+    loadingId = op.patch.loading.start("jsonFile", "" + urlData.get(), op);
 
     op.setUiError("invaliddata", null);
     op.setUiError("jsonerr", null);

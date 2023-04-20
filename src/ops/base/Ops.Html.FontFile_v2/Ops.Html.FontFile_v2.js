@@ -24,7 +24,7 @@ function addStyle()
         {
             fontFaceObj = new FontFace(fontname.get(), "url(" + op.patch.getFilePath(String(filename.get())) + ")");
 
-            loadingId = op.patch.cgl.patch.loading.start("FontFile", filename.get());
+            loadingId = op.patch.cgl.patch.loading.start("FontFile", filename.get(), op);
 
             // Add the FontFace to the FontFaceSet
             document.fonts.add(fontFaceObj);

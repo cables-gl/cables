@@ -28,6 +28,7 @@ const
     nextBefore = op.outTrigger("Render Before"),
     next = op.outTrigger("Next"),
     outGenerator = op.outString("Generator"),
+
     outVersion = op.outNumber("GLTF Version"),
     outExtensions = op.outArray("GLTF Extensions Used"),
     outAnimLength = op.outNumber("Anim Length", 0),
@@ -341,7 +342,7 @@ function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
 
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
     let fileToLoad = inFile.get();
     let url = op.patch.getFilePath(String(inFile.get()));

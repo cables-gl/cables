@@ -82,7 +82,7 @@ function onWrapChange()
 
 function reload()
 {
-    const loadingId = op.patch.loading.start("svg file", filename.get());
+    const loadingId = op.patch.loading.start("svg file", filename.get(), op);
     CABLES.ajax(
         op.patch.getFilePath(filename.get()),
         function (err, _data, xhr)
@@ -102,7 +102,7 @@ let startTime = 0;
 function update()
 {
     const img = new Image();
-    const loadingId = op.patch.loading.start("svg2texture", filename.get());
+    const loadingId = op.patch.loading.start("svg2texture", filename.get(), op);
 
     img.onerror = function (e)
     {

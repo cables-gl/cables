@@ -121,15 +121,15 @@ inInit.onTriggered = function ()
 };
 
 /* INIT FUNCTION */
-loadingId = cgl.patch.loading.start("MIC inputs", "");
+loadingId = cgl.patch.loading.start("MIC inputs", "", op);
 navigator.mediaDevices.getUserMedia({ "audio": true })
     .then((res) =>
-        navigator.mediaDevices.enumerateDevices())
+    { return navigator.mediaDevices.enumerateDevices(); })
     .then((devices) =>
     {
         const audioInputDevices = devices
-            .filter((device) => device.kind === "audioinput")
-            .map((deviceInfo, index) => deviceInfo.label || `microphone ${index + 1}`);
+            .filter((device) => { return device.kind === "audioinput"; })
+            .map((deviceInfo, index) => { return deviceInfo.label || `microphone ${index + 1}`; });
 
         inInputDevices.uiAttribs.values = audioInputDevices;
         op.setUiError("devicesLoaded", "Input devices have been loaded. Please choose a device from the dropdown menu and click the \"Start\" button to activate the microphone input.", 0);

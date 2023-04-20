@@ -77,7 +77,7 @@ function realReload(nocache)
 {
     if (!active.get()) return;
     // if (filename.get() === null) return;
-    if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
 
@@ -118,6 +118,7 @@ function realReload(nocache)
                         setTempTexture();
                         op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
                         cgl.patch.loading.finished(loadingId);
+                        loadingId = null;
                         return;
                     }
 
@@ -141,6 +142,7 @@ function realReload(nocache)
                     if (inFreeMemory.get()) tex.image = null;
 
                     cgl.patch.loading.finished(loadingId);
+                    loadingId = null;
                 }, {
                     "anisotropic": cgl_aniso,
                     "wrap": cgl_wrap,

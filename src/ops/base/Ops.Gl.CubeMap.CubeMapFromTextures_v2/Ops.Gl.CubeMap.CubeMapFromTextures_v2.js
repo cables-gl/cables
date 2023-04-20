@@ -49,7 +49,7 @@ function loadImages()
     op.setUiError("loading", "Loading images...", 0);
 
     skyboxCubemap = null;
-    loadingId = cgl.patch.loading.start("cubemap texture", "");
+    loadingId = cgl.patch.loading.start("cubemap texture", "", op);
 
     const images = Promise.all(
         inFilenames.map((inFile) => { return inFile.get(); }) // get file address

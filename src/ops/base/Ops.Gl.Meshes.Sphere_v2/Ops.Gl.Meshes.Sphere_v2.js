@@ -25,6 +25,8 @@ let doscale = true;
 const vScale = vec3.create();
 vec3.set(vScale, 1, 1, 1);
 
+op.toWorkPortsNeedToBeLinked(inTrigger);
+
 // set event handlers
 inTrigger.onTriggered = function ()
 {

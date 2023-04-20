@@ -63,7 +63,7 @@ function update()
         }
         else
         {
-            if (!loadingId) loadingId = cgl.patch.loading.start("ammoWorld", "ammoWASM");
+            if (!loadingId) loadingId = cgl.patch.loading.start("ammoWorld", "ammoWASM", op);
             return;
         }
     }

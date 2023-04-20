@@ -29,7 +29,7 @@ function loadBin(addCacheBuster)
 {
     // if (!inActive.get()) return;
 
-    if (!loadingId)loadingId = op.patch.loading.start("gltf" + inFile.get(), inFile.get());
+    if (!loadingId)loadingId = op.patch.loading.start("gltf" + inFile.get(), inFile.get(), op);
 
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
