@@ -1,0 +1,47 @@
+{
+    "id": "525e57e5-9373-4cf2-a7f5-2887872a3e86",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1681833881060
+        },
+        {
+            "message": "Ops.Patch.PwAzPku.GltfInfo renamed to Ops.Gl.GLTF.GltfInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1681834365181
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Num Nodes",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Cams",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "FileUrl"
+            },
+            {
+                "type": 5,
+                "name": "FileName"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfInfo"
+    },
+    "authorName": "pandur",
+    "created": 1681833901074
+}

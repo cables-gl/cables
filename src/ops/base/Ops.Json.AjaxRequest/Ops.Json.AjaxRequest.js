@@ -1,57 +1,55 @@
-const filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
-const jsonp=op.inValueBool("JsonP",false);
-const outData=op.addOutPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT));
-const isLoading=op.outValue("Is Loading",false);
+const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
+const jsonp = op.inValueBool("JsonP", false);
+const outData = op.addOutPort(new CABLES.Port(op, "data", CABLES.OP_PORT_TYPE_OBJECT));
+const isLoading = op.outValue("Is Loading", false);
 
-outData.ignoreValueSerialize=true;
+outData.ignoreValueSerialize = true;
 
-filename.onChange=delayedReload;
-jsonp.onChange=delayedReload;
+filename.onChange = delayedReload;
+jsonp.onChange = delayedReload;
 
-var loadingId=0;
-var reloadTimeout=0;
+let loadingId = 0;
+let reloadTimeout = 0;
 
 function delayedReload()
 {
     clearTimeout(reloadTimeout);
-    reloadTimeout=setTimeout(reload,100);
+    reloadTimeout = setTimeout(reload, 100);
 }
 
 function reload()
 {
-    if(!filename.get())return;
-    
+    if (!filename.get()) return;
+
     op.patch.loading.finished(loadingId);
-    
-    loadingId=op.patch.loading.start('jsonFile',''+filename.get());
+
+    loadingId = op.patch.loading.start("jsonFile", "" + filename.get(), op);
     isLoading.set(true);
 
-    var f=CABLES.ajax;
-    if(jsonp.get())f=CABLES.jsonp;
+    let f = CABLES.ajax;
+    if (jsonp.get())f = CABLES.jsonp;
 
     f(
         op.patch.getFilePath(filename.get()),
-        function(err,_data,xhr)
+        function (err, _data, xhr)
         {
             try
             {
-                var data=_data;
-                if(typeof data === 'string') data=JSON.parse(_data);
+                let data = _data;
+                if (typeof data === "string") data = JSON.parse(_data);
 
-                if(outData.get())outData.set(null);
+                if (outData.get())outData.set(null);
                 outData.set(data);
-                op.uiAttr({'error':''});
+                op.uiAttr({ "error": "" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
-            catch(e)
+            catch (e)
             {
-                console.error('ajaxrequest: exception while loading ',filename.get());
-                op.uiAttr({'error':'error loading json'});
+                console.error("ajaxrequest: exception while loading ", filename.get());
+                op.uiAttr({ "error": "error loading json" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
         });
-    
 }
-

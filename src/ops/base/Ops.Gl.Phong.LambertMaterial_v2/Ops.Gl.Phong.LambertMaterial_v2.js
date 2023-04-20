@@ -17,7 +17,7 @@ inToggleDoubleSided.onChange = function ()
 op.setPortGroup("Material Properties", [inToggleDoubleSided]);
 
 op.toWorkPortsNeedToBeLinked(execute);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 const inDiffuseTexture = op.inTexture("Diffuse Texture");
 let diffuseTextureUniform = null;

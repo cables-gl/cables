@@ -113,7 +113,7 @@ inExec.onTriggered = function ()
 
 function loadBin()
 {
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltf", inFile.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("gltf", inFile.get(), op);
 
     const url = op.patch.getFilePath(String(inFile.get()));
     const oReq = new XMLHttpRequest();
@@ -132,6 +132,7 @@ function loadBin()
         const arrayBuffer = oReq.response;
         gltf = parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
+        loadingId = null;
         needsMatUpdate = true;
         op.refreshParams();
         outAnimLength.set(maxTime);

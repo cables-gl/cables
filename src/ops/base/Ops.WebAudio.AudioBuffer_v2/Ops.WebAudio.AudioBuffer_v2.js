@@ -79,7 +79,7 @@ function loadAudioFile(url, loadFromData)
 
         if (inLoadingTask.get())
         {
-            loadingIdDataURL = cgl.patch.loading.start("audiobuffer from data-url " + op.id, "");
+            loadingIdDataURL = cgl.patch.loading.start("audiobuffer from data-url " + op.id, url, op);
             if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingIdDataURL, "title": " loading audio data url (" + op.id + ")" });
         }
 

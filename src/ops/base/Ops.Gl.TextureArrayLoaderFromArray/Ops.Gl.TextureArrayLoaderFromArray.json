@@ -58,7 +58,7 @@
             {
                 "type": 0,
                 "name": "loading",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -73,7 +73,6 @@
         "ports": []
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.TextureArrayLoader",
         "Ops.Gl.Texture"

@@ -66,7 +66,7 @@ fileName.onChange = function ()
 {
     if (!fileName.get()) return;
 
-    let loadingId = op.patch.loading.start("audioplayer", fileName.get());
+    let loadingId = op.patch.loading.start("audioplayer", fileName.get(), op);
 
     if (audio)
     {

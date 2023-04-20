@@ -5,32 +5,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Start",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "End",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
             }
         ],
-        "name": "Ops.String.SubString2"
+        "name": "Ops.String.SubString_v2"
     },
     "summary": "Subset of a string between one index and another",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

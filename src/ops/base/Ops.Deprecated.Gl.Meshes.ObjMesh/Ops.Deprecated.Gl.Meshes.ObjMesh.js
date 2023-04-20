@@ -37,7 +37,7 @@ function ajaxRequest(url, callback)
 
 let reloadObj = function ()
 {
-    let loadingId = cgl.patch.loading.start("obj mesh", self.filename.get());
+    let loadingId = cgl.patch.loading.start("obj mesh", self.filename.get(), op);
 
     if (self.filename.val === 0)
     {

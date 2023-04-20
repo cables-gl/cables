@@ -66,11 +66,10 @@
                 "name": "Trigger Loading Finished "
             }
         ],
-        "name": "Ops.Patch.LoadingStatus_v2"
+        "name": "Ops.Cables.LoadingStatus_v2"
     },
     "summary": "trigger events / get information about asset-loading status",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
