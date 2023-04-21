@@ -6,7 +6,7 @@ const shaderOut = op.outObject("shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 
 op.toWorkPortsNeedToBeLinked(render);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose");
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "basicmaterialnew");

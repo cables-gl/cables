@@ -902,7 +902,7 @@ class SwitchPort extends Port
                     (uiAttribs.values && uiAttribs.values.indexOf(String(s)) === -1)
                 )
                 {
-                    this.parent.setUiError("invalidswitch", "Invalid Switch Value [" + this.name + "]: \"" + s + "\"");
+                    this.parent.setUiError("invalidswitch", "Invalid Value [" + this.name + "]: \"" + s + "\"");
                 }
 
                 else this.parent.setUiError("invalidswitch", null);

@@ -1,20 +1,29 @@
 const
     inLang = op.inString("Language", "us-US"),
     active = op.inBool("Active", true),
+    inTrigger = op.inTriggerButton("Start"),
     result = op.outString("Result"),
     confidence = op.outNumber("Confidence"),
     outSupported = op.outBool("Supported", false),
     outResult = op.outTrigger("New Result", ""),
     outActive = op.outBool("Started", false);
 
-
-active.onChange = startStop;
-
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition;
-
 let recognition = null;
-
+active.onChange = startStop;
 inLang.onChange = changeLang;
+
+startAPI();
+
+op.init = function ()
+{
+    startStop();
+};
+
+inTrigger.onTriggered = () =>
+{
+    if (active.get() && !outActive.get()) recognition.start();
+};
 
 function startStop()
 {
@@ -34,12 +43,6 @@ function startStop()
     }
 }
 
-
-op.init = function ()
-{
-    startStop();
-};
-
 function changeLang()
 {
     if (!recognition) return;
@@ -53,8 +56,6 @@ function changeLang()
         catch (e) {}
     }, 500);
 }
-
-startAPI();
 
 function startAPI()
 {
@@ -72,13 +73,12 @@ function startAPI()
         recognition.continuous = true;
         SpeechRecognition.interimResults = true;
 
-
         recognition.onstart = function () { outActive.set(true); };
         recognition.onstop = function (event) { outActive.set(false); };
+        recognition.onend = function (event) { outActive.set(false); };
 
         recognition.onresult = function (event) { op.log("recognition result"); };
         recognition.onerror = function (event) { op.log("recognition error", result); };
-
 
         recognition.onresult = function (event)
         {

@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    doRender = op.inValueBool("dorender", true),
+    doRender = op.inValueBool("Render Mesh", true),
     width = op.inValue("width", 1),
     height = op.inValue("height", 1),
     pivotX = op.inSwitch("pivot x", ["left", "center", "right"], "center"),
@@ -15,6 +15,7 @@ const
 
 geomOut.ignoreValueSerialize = true;
 
+const cgl = op.patch.cgl;
 const geom = new CGL.Geometry("rectangle");
 
 doRender.setUiAttribs({ "title": "Render" });
@@ -24,20 +25,45 @@ op.setPortGroup("Pivot", [pivotX, pivotY, axis]);
 op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_TRIGGER);
 
 let mesh = null;
 let needsRebuild = true;
+
+let doScale = true;
+const vScale = vec3.create();
+vec3.set(vScale, 1, 1, 1);
 
 axis.onChange =
     pivotX.onChange =
     pivotY.onChange =
     flipTcX.onChange =
     flipTcY.onChange =
-    width.onChange =
-    height.onChange =
     nRows.onChange =
     nColumns.onChange = rebuildLater;
+
+width.onChange =
+    height.onChange =
+    () =>
+    {
+        if (doScale) updateScale();
+        else needsRebuild = true;
+    };
+
+function updateScale()
+{
+    if (axis.get() == "xy")
+        vec3.set(vScale, width.get(), height.get(), 1);
+    if (axis.get() == "xz")
+        vec3.set(vScale, width.get(), 1, height.get());
+}
+
+geomOut.onLinkChanged = () =>
+{
+    doScale = !geomOut.isLinked();
+    updateScale();
+    needsRebuild = true;
+};
 
 function rebuildLater()
 {
@@ -56,28 +82,44 @@ render.onLinkChanged = () =>
 };
 
 op.preRender =
-render.onTriggered = function ()
+render.onTriggered = () =>
 {
     if (needsRebuild) rebuild();
-    if (mesh && doRender.get()) mesh.render(op.patch.cg.getShader());
+
+    if (mesh && doRender.get())
+    {
+        if (doScale)
+        {
+            cgl.pushModelMatrix();
+            mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
+        }
+
+        mesh.render(op.patch.cg.getShader());
+
+        if (doScale)
+        {
+            cgl.popModelMatrix();
+        }
+    }
+
     trigger.trigger();
 };
 
-op.onDelete = function ()
+op.onDelete = () =>
 {
-    if (mesh)mesh.dispose();
+    if (mesh) mesh.dispose();
     rebuildLater();
 };
 
 function rebuild()
 {
     let w = width.get();
-    let h = parseFloat(height.get());
+    let h = height.get();
+
+    if (doScale) w = h = 1;
+
     let x = 0;
     let y = 0;
-
-    if (typeof w == "string")w = parseFloat(w);
-    if (typeof h == "string")h = parseFloat(h);
 
     if (pivotX.get() == "center") x = 0;
     else if (pivotX.get() == "right") x = -w / 2;
@@ -94,23 +136,21 @@ function rebuild()
     const biTangents = [];
     const indices = [];
 
-    const numRows = Math.round(nRows.get());
-    const numColumns = Math.round(nColumns.get());
+    const numRows = Math.max(1, Math.round(nRows.get()));
+    const numColumns = Math.max(1, Math.round(nColumns.get()));
 
     const stepColumn = w / numColumns;
     const stepRow = h / numRows;
 
-    op.log("rect build");
+    let a = axis.get();
 
-    let c, r, a;
-    a = axis.get();
-    for (r = 0; r <= numRows; r++)
+    for (let r = 0; r <= numRows; r++)
     {
-        for (c = 0; c <= numColumns; c++)
+        for (let c = 0; c <= numColumns; c++)
         {
-            verts.push(c * stepColumn - width.get() / 2 + x);
+            verts.push(c * stepColumn - w / 2 + x);
             if (a == "xz") verts.push(0.0);
-            verts.push(r * stepRow - height.get() / 2 + y);
+            verts.push(r * stepRow - h / 2 + y);
             if (a == "xy") verts.push(0.0);
 
             tc.push(c / numColumns);
@@ -131,9 +171,9 @@ function rebuild()
         }
     }
 
-    for (c = 0; c < numColumns; c++)
+    for (let c = 0; c < numColumns; c++)
     {
-        for (r = 0; r < numRows; r++)
+        for (let r = 0; r < numRows; r++)
         {
             const ind = c + (numColumns + 1) * r;
             const v1 = ind;
@@ -176,14 +216,9 @@ function rebuild()
     geom.tangents = tangents;
     geom.biTangents = biTangents;
 
-    // if (numColumns * numRows > 64000)geom.unIndex();
-
-    const cgl = op.patch.cgl;
-
     if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
 
-    geomOut.set(null);
-    geomOut.set(geom);
+    geomOut.setRef(geom);
     needsRebuild = false;
 }
