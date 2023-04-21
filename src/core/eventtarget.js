@@ -12,7 +12,7 @@ const EventTarget = function ()
     {
         const event =
         {
-            "id": (idPrefix || "") + CABLES.uuid(),
+            "id": (idPrefix || "") + CABLES.simpleId(),
             "name": which,
             "cb": cb,
         };

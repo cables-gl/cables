@@ -47,6 +47,7 @@ const Port = function (__parent, name, type, uiAttribs)
     this._oldAnimVal = -5711;
     this.defaultValue = null;
 
+
     this._uiActiveState = true;
     this.ignoreValueSerialize = false;
     this.onLinkChanged = null;
@@ -430,7 +431,6 @@ Port.prototype.getSerialized = function ()
         }
     }
 
-    // obj.uiAttribs = this.uiAttribs;
     return obj;
 };
 

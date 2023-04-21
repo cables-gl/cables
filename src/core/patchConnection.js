@@ -236,6 +236,7 @@ const PatchConnectionSender = function (patch)
     patch.addEventListener("patchLoadEnd",
         (newOps, json, genIds) =>
         {
+            console.log("paco?!");
             this.paused = false;
             this.send(CABLES.PACO_DESERIALIZE, { "json": json, "genIds": genIds });
         });
