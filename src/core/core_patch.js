@@ -966,6 +966,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     this.emitEvent("patchLoadStart");
 
+    if (window.logStartup)logStartup("add " + obj.ops.length + " ops... ");
     // add ops...
     for (const iop in obj.ops)
     {
@@ -983,6 +984,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this._log.warn("[instancing error] op data:", opData, e);
             throw new Error("instancing error: " + opData.objName);
         }
+
 
         if (op)
         {
@@ -1021,8 +1023,9 @@ Patch.prototype.deSerialize = function (obj, genIds)
         // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
 
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        if (!this.silent && timeused > 200) this._log.warn("long op init ", obj.ops[iop].objName, timeused);
+        if (!this.silent && timeused > 5) this._log.warn("long op init ", obj.ops[iop].objName, timeused);
     }
+    if (window.logStartup)logStartup("add ops done");
 
     for (const i in this.ops)
     {
@@ -1034,6 +1037,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
         this.ops[i].emitEvent("loadedValueSet");
     }
+
+    if (window.logStartup)logStartup("creating links");
 
     // create links...
     if (obj.ops)
@@ -1078,6 +1083,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
+    if (window.logStartup)logStartup("calling ops onloaded");
+
     for (const i in this.ops)
     {
         if (this.ops[i].onLoaded)
@@ -1088,6 +1095,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
+    if (window.logStartup)logStartup("initializing ops...");
     for (const i in this.ops)
     {
         if (this.ops[i].init)
@@ -1097,9 +1105,13 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
+    if (window.logStartup)logStartup("initializing vars...");
+
     if (this.config.variables)
         for (const varName in this.config.variables)
             this.setVarValue(varName, this.config.variables[varName]);
+
+    if (window.logStartup)logStartup("initializing var ports");
 
     for (const i in this.ops)
     {
@@ -1109,6 +1121,9 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
 
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
+
+    if (window.logStartup)logStartup("calling onPatchLoaded/patchLoadEnd");
+
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
 
