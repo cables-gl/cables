@@ -3,35 +3,32 @@
 // http://paulbourke.net/geometry/circlesphere/csource3.c
 //! !!! http://paulbourke.net/geometry/circlesphere/csource2.c
 
-const render = op.inTrigger("render");
-const next = op.outTrigger("next");
+const
+    render = op.inTrigger("render"),
+    next = op.outTrigger("next"),
+    inIterations = op.inValue("Iterations", 4),
+    geomOut = op.outObject("Geometry"),
+    flat = op.inValueBool("Flat", false),
+    inDraw = op.inValueBool("Draw", true);
 
-const inIterations = op.inValue("Iterations", 4);
-const geomOut = op.outObject("Geometry");
-
-const flat = op.inValueBool("Flat", false);
-const inDraw = op.inValueBool("Draw", true);
-
+const cgl = op.patch.cgl;
 let verts = [];
 let geom = null;
 let mesh = null;
-const cgl = op.patch.cgl;
+let needsUpdate = true;
 
-inIterations.onChange = generate;
-
-generate();
-
-flat.onChange = generate;
+flat.onChange =
+inIterations.onChange = () =>
+{
+    needsUpdate = true;
+};
 
 render.onTriggered = function ()
 {
-    // cgl.gl.cullFace(cgl.gl.BACK);
-    // cgl.gl.enable(cgl.gl.CULL_FACE);
+    if (needsUpdate) generate();
 
     if (inDraw.get() && mesh) mesh.render(cgl.getShader());
     next.trigger();
-
-    // cgl.gl.disable(cgl.gl.CULL_FACE);
 };
 
 function normalize(v)
@@ -85,6 +82,7 @@ function index(verts, geom)
 
 function generate()
 {
+    let startTime = performance.now();
     let iterations = Math.max(1, Math.floor(inIterations.get()));
     iterations = Math.min(6, iterations);
     const f = [];
@@ -171,6 +169,9 @@ function generate()
     geom.calcTangentsBitangents();
 
     mesh = new CGL.Mesh(cgl, geom);
-    geomOut.set(null);
-    geomOut.set(geom);
+
+    geomOut.setRef(geom);
+    needsUpdate = false;
+
+    console.log("trianglesphere took", performance.now() - startTime);
 }

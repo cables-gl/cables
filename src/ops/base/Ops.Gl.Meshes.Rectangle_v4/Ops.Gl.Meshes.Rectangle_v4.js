@@ -27,6 +27,10 @@ op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_TRIGGER);
 
+const AXIS_XY = 0;
+const AXIS_XZ = 1;
+
+let curAxis = AXIS_XY;
 let mesh = null;
 let needsRebuild = true;
 
@@ -52,10 +56,8 @@ width.onChange =
 
 function updateScale()
 {
-    if (axis.get() == "xy")
-        vec3.set(vScale, width.get(), height.get(), 1);
-    if (axis.get() == "xz")
-        vec3.set(vScale, width.get(), 1, height.get());
+    if (curAxis === AXIS_XY) vec3.set(vScale, width.get(), height.get(), 1);
+    if (curAxis === AXIS_XZ) vec3.set(vScale, width.get(), 1, height.get());
 }
 
 geomOut.onLinkChanged = () =>
@@ -96,10 +98,7 @@ render.onTriggered = () =>
 
         mesh.render(op.patch.cg.getShader());
 
-        if (doScale)
-        {
-            cgl.popModelMatrix();
-        }
+        if (doScale) cgl.popModelMatrix();
     }
 
     trigger.trigger();
@@ -129,11 +128,11 @@ function rebuild()
     else if (pivotY.get() == "top") y = -h / 2;
     else if (pivotY.get() == "bottom") y = +h / 2;
 
-    const verts = [];
-    const tc = [];
-    const norms = [];
-    const tangents = [];
-    const biTangents = [];
+    // const verts = [];
+    // const tc = [];
+    // const norms = [];
+    // const tangents = [];
+    // const biTangents = [];
     const indices = [];
 
     const numRows = Math.max(1, Math.round(nRows.get()));
@@ -142,34 +141,67 @@ function rebuild()
     const stepColumn = w / numColumns;
     const stepRow = h / numRows;
 
-    let a = axis.get();
+    if (axis.get() == "xy") curAxis = AXIS_XY;
+    if (axis.get() == "xz") curAxis = AXIS_XZ;
+
+    const tc = new Float32Array(numColumns * numRows * 2);
+    const verts = new Float32Array(numColumns * numRows * 3);
+    const norms = new Float32Array(numColumns * numRows * 3);
+    const tangents = new Float32Array(numColumns * numRows * 3);
+    const biTangents = new Float32Array(numColumns * numRows * 3);
+
+    let idxTc = 0;
+    let idxVert = 0;
+    let idxNorms = 0;
+    let idxTangent = 0;
+    let idxBiTangent = 0;
 
     for (let r = 0; r <= numRows; r++)
     {
         for (let c = 0; c <= numColumns; c++)
         {
-            verts.push(c * stepColumn - w / 2 + x);
-            if (a == "xz") verts.push(0.0);
-            verts.push(r * stepRow - h / 2 + y);
-            if (a == "xy") verts.push(0.0);
+            verts[idxVert++] = c * stepColumn - w / 2 + x;
+            if (curAxis == AXIS_XZ) verts[idxVert++] = 0;
+            verts[idxVert++] = r * stepRow - h / 2 + y;
 
-            tc.push(c / numColumns);
-            tc.push(r / numRows);
+            if (curAxis == AXIS_XY)verts[idxVert++] = 0;
 
-            if (a == "xy") // default
+            tc[idxTc++] = c / numColumns;
+            tc[idxTc++] = r / numRows;
+
+            if (curAxis == AXIS_XY)// default
             {
-                norms.push(0, 0, 1);
-                tangents.push(1, 0, 0);
-                biTangents.push(0, 1, 0);
+                norms[idxNorms++] = 0;
+                norms[idxNorms++] = 0;
+                norms[idxNorms++] = 1;
+
+                tangents[idxTangent++] = 1;
+                tangents[idxTangent++] = 0;
+                tangents[idxTangent++] = 0;
+
+                biTangents[idxBiTangent++] = 0;
+                biTangents[idxBiTangent++] = 1;
+                biTangents[idxBiTangent++] = 0;
+
+                // biTangents.push(0, 1, 0);
             }
-            else if (a == "xz")
+            else if (curAxis == AXIS_XZ)
             {
-                norms.push(0, 1, 0);
-                tangents.push(1, 0, 0);
-                biTangents.push(0, 0, 1);
+                norms[idxNorms++] = 0;
+                norms[idxNorms++] = 1;
+                norms[idxNorms++] = 0;
+
+                biTangents[idxBiTangent++] = 0;
+                biTangents[idxBiTangent++] = 0;
+                biTangents[idxBiTangent++] = 1;
+
+                // biTangents.push(0, 0, 1);
             }
         }
     }
+
+    indices.length = numColumns * numRows * 6;
+    let idx = 0;
 
     for (let c = 0; c < numColumns; c++)
     {
@@ -181,26 +213,26 @@ function rebuild()
             const v3 = ind + numColumns + 1;
             const v4 = ind + 1 + numColumns + 1;
 
-            if (a == "xy") // default
+            if (curAxis == AXIS_XY)// default
             {
-                indices.push(v1);
-                indices.push(v2);
-                indices.push(v3);
+                indices[idx++] = v1;
+                indices[idx++] = v2;
+                indices[idx++] = v3;
 
-                indices.push(v3);
-                indices.push(v2);
-                indices.push(v4);
+                indices[idx++] = v3;
+                indices[idx++] = v2;
+                indices[idx++] = v4;
             }
             else
-            if (a == "xz")
+            if (curAxis == AXIS_XZ)
             {
-                indices.push(v1);
-                indices.push(v3);
-                indices.push(v2);
+                indices[idx++] = v1;
+                indices[idx++] = v3;
+                indices[idx++] = v2;
 
-                indices.push(v2);
-                indices.push(v3);
-                indices.push(v4);
+                indices[idx++] = v2;
+                indices[idx++] = v3;
+                indices[idx++] = v4;
             }
         }
     }
