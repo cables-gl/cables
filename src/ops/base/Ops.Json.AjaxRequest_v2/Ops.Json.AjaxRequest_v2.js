@@ -47,7 +47,7 @@ function reload(addCachebuster, force = false)
     if (!inAutoRequest.get() && !force) return;
     if (!filename.get()) return;
 
-    op.patch.loading.finished(loadingId);
+    // op.patch.loading.finished(loadingId);
 
     loadingId = op.patch.loading.start("jsonFile", "" + filename.get(), op);
     isLoading.set(true);
