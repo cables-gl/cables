@@ -157,5 +157,6 @@
                 "text": "The current progress in the loop, `0` = *at the beginning*, `1` = *at the end*. For this value to update you need to connect `Update State Ports` e.g. to ´MainLoop´."
             }
         ]
-    }
+    },
+    "id": "b0dc0d12-702b-474d-a2e7-add74fa37e50"
 }
