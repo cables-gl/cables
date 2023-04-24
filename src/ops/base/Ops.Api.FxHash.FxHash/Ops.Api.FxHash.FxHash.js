@@ -48,13 +48,14 @@ function init()
     if (!isReal)
     {
         window.fxhash = inHash.get() || randomHash();
-        let b58dec = (str) => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0);
+        let b58dec = (str) => { return [...str].reduce((p, c) => { return p * alphabet.length + alphabet.indexOf(c) | 0; }, 0); };
         let fxhashTrunc = fxhash.slice(2);
         let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", "g");
-        let hashes = fxhashTrunc.match(regex).map((h) => b58dec(h));
+        let hashes = fxhashTrunc.match(regex).map((h) => { return b58dec(h); });
 
         let sfc32 = (a, b, c, d) =>
-            () =>
+        {
+            return () =>
             {
                 a |= 0; b |= 0; c |= 0; d |= 0;
                 let t = (a + b | 0) + d | 0;
@@ -65,6 +66,7 @@ function init()
                 c = c + t | 0;
                 return (t >>> 0) / 4294967296;
             };
+        };
 
         window.fxrand = sfc32(...hashes);
     }
