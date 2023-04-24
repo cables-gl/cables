@@ -243,7 +243,7 @@ const VarGetOpWrapper = class
 
     _setValueOut(v)
     {
-        this._updateVarNamesDropdown();
+        // this._updateVarNamesDropdown();
         this._valueOutPort.set(v);
     }
 
