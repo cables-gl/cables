@@ -13,7 +13,8 @@
         "portsIn": [
             {
                 "type": 5,
-                "name": "file"
+                "name": "file",
+                "uititle": "URL"
             },
             {
                 "type": 0,
@@ -64,7 +65,7 @@
             {
                 "type": 0,
                 "name": "Is Loading",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -75,7 +76,6 @@
     },
     "summary": "Request a json file and output an object (ajax, url, json)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
