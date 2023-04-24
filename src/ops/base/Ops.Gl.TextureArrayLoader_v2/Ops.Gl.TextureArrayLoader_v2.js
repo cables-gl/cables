@@ -108,16 +108,16 @@ function loadImage(i, nocache)
                 ratio.set(tex.width / tex.height);
 
                 arr[i - parseInt(indexStart.get())] = tex;
-                if (!tex.isPowerOfTwo()) op.uiAttr(
-                    {
-                        "hint": "texture dimensions not power of two! - texture filtering will not work.",
-                        "warning": null
-                    });
-                else op.uiAttr(
-                    {
-                        "hint": null,
-                        "warning": null
-                    });
+                // if (!tex.isPowerOfTwo()) op.uiAttr(
+                //     {
+                //         "hint": "texture dimensions not power of two! - texture filtering will not work.",
+                //         "warning": null
+                //     });
+                // else op.uiAttr(
+                //     {
+                //         "hint": null,
+                //         "warning": null
+                //     });
 
                 // textureOut.set(null);
                 // textureOut.set(tex);
