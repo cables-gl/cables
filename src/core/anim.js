@@ -13,7 +13,6 @@ ANIM.Key = function (obj)
     this._easing = 0;
     this.bezTangIn = 0;
     this.bezTangOut = 0;
-    this._lastKeyIndex = 0;
     // this.bezTime = 0.5;
     // this.bezValue = 0;
     // this.bezTimeIn = -0.5;
@@ -495,6 +494,7 @@ const Anim = function (cfg)
     this.stayInTimeline = false;
     this.loop = false;
     this._log = new Logger("Anim");
+    this._lastKeyIndex = 0;
 
     /**
      * @member defaultEasing
