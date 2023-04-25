@@ -132,7 +132,9 @@ inModal.onTriggered = () =>
 
 inExc.onTriggered = () =>
 {
-    throw new Error("crash0r");
+    // throw new Error("crash0r");
+    const arr = [];
+    arr.length = 1.2;
 };
 
 inTab.onTriggered = () =>
