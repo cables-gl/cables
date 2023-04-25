@@ -571,14 +571,16 @@ Port.prototype._activity = function ()
  */
 Port.prototype.trigger = function ()
 {
+    const linksLength = this.links.length;
+
     this._activity();
-    if (this.links.length === 0) return;
+    if (linksLength === 0) return;
     if (!this.parent.enabled) return;
 
     let portTriggered = null;
     try
     {
-        for (let i = 0; i < this.links.length; ++i)
+        for (let i = 0; i < linksLength; ++i)
         {
             if (this.links[i].portIn)
             {
@@ -602,7 +604,7 @@ Port.prototype.trigger = function ()
             if (portTriggered.parent.onError) portTriggered.parent.onError(ex);
         }
         this._log.warn("exception!");
-        this._log.error("ontriggered exception cought", ex);
+        this._log.error("ontriggered exception caught", ex);
         this._log.error(ex.stack);
         this._log.warn("exception in: " + portTriggered.parent.name);
     }
