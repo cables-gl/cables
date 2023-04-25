@@ -10,34 +10,41 @@ const
     outRot = op.outArray("Rotation");
 
 const cgl = op.patch.cgl;
+const arrPos = [];
+const arrRot = [];
+const arrScale = [];
+const arrNames = [];
 let needsupdate = true;
-outPos.onChange = function () { needsupdate = true; };
+let oldScene = null;
+
+inSpace.onChange =
+    inSort.onChange =
+    inStr.onChange =
+    outPos.onChange = () => { needsupdate = true; };
+
 inExec.onTriggered = exec;
 
-inStr.onChange = function ()
-{
-    needsupdate = true;
-};
 function exec()
 {
-    // if (needsupdate)
-    update();
+    if (cgl.frameStore.currentScene != oldScene)needsupdate = true;
+    if (needsupdate) update();
     next.trigger();
 }
 
 function update()
 {
-    // outPos.set(null);
-    // outScale.set(null);
-    // outNames.set(null);
-    // outRot.set(null);
-
     if (!cgl.frameStore.currentScene) return;
 
-    const arrPos = [];
-    const arrRot = [];
-    const arrScale = [];
-    const arrNames = [];
+    oldScene = cgl.frameStore.currentScene;
+
+    arrPos.length = 0;
+    arrRot.length = 0;
+    arrScale.length = 0;
+    arrNames.length = 0;
+
+    const tr = vec3.create();
+    const q = quat.create();
+    let m = null;
 
     const worldspace = inSpace.get() == "World";
 
@@ -49,24 +56,15 @@ function update()
             const node = cgl.frameStore.currentScene.nodes[i];
             arrNames.push(n.name);
 
-            const tr = vec3.create();
-
-            let m = node.modelMatAbs();
-            // const m=node.modelMatLocal();
-
             if (!worldspace)
-            {
                 m = node.modelMatLocal();
-            }
+            else
+                m = node.modelMatAbs();
 
             mat4.getTranslation(tr, m);
 
-            // const empty=vec3.create();
-            // vec3.transformMat4(tr, empty, m);
-
             arrPos.push(tr[0], tr[1], tr[2]);
 
-            const q = quat.create();
             mat4.getRotation(q, m);
             arrRot.push(q[0], q[1], q[2], q[3]);
 
