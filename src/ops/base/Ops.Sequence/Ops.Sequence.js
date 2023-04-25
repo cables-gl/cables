@@ -7,12 +7,13 @@ const
     triggers = [],
     num = 16;
 
-let updateTimeout = null;
+let
+    updateTimeout = null,
+    connectedOuts = [];
 
 exe.onTriggered = triggerAll;
 cleanup.onTriggered = clean;
-cleanup.setUiAttribs({ "hidePort": true });
-cleanup.setUiAttribs({ "hideParam": true });
+cleanup.setUiAttribs({ "hideParam": true, "hidePort": true });
 
 for (let i = 0; i < num; i++)
 {
@@ -28,8 +29,18 @@ for (let i = 0; i < num; i++)
     }
 }
 
+updateConnected();
+
+function updateConnected()
+{
+    connectedOuts.length = 0;
+    for (let i = 0; i < triggers.length; i++)
+        if (triggers[i].links.length > 0) connectedOuts.push(triggers[i]);
+}
+
 function updateButton()
 {
+    updateConnected();
     clearTimeout(updateTimeout);
     updateTimeout = setTimeout(() =>
     {
@@ -45,7 +56,8 @@ function updateButton()
 
 function triggerAll()
 {
-    for (let i = 0; i < triggers.length; i++) triggers[i].trigger();
+    // for (let i = 0; i < triggers.length; i++) triggers[i].trigger();
+    for (let i = 0; i < connectedOuts.length; i++) connectedOuts[i].trigger();
 }
 
 function clean()
@@ -69,4 +81,5 @@ function clean()
         for (let j = 0; j < removeLinks.length; j++) removeLinks[j].remove();
     }
     updateButton();
+    updateConnected();
 }
