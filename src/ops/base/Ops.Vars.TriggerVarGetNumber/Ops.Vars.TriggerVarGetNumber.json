@@ -1,0 +1,51 @@
+{
+    "authorName": "pandur",
+    "id": "e3a43bad-3a48-4f2a-af68-3c92420a76d6",
+    "created": 1682433539531,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Vars.TriggerVarGetNumber"
+    },
+    "summary": "read a variable number",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "coreLibs": [
+        "vargetset"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "1tfFT6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Vars.VarGetNumber_v2",
+            "author": "pandur",
+            "date": 1682433539531
+        },
+        {
+            "message": "Ops.Patch.P2dk___Nu.TriggerVarGetNumber renamed to Ops.Vars.TriggerVarGetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1682434069596
+        }
+    ]
+}

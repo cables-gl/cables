@@ -208,6 +208,11 @@ const VarGetOpWrapper = class
         };
     }
 
+    get variable()
+    {
+        return this._variable;
+    }
+
     _changeVar()
     {
         if (this._variable && this._listenerId)
@@ -244,7 +249,7 @@ const VarGetOpWrapper = class
     _setValueOut(v)
     {
         // this._updateVarNamesDropdown();
-        this._valueOutPort.set(v);
+        if (this._valueOutPort) this._valueOutPort.set(v);
     }
 
     _updateTitle()
@@ -254,13 +259,13 @@ const VarGetOpWrapper = class
             this._op.setUiError("unknownvar", null);
             this._op.setTitle("var get ");
             this._op.setUiAttrib({ "extendTitle": "#" + this._varnamePort.get() });
-            this._valueOutPort.set(this._variable.getValue());
+            if (this._valueOutPort) this._valueOutPort.set(this._variable.getValue());
         }
         else
         {
             this._op.setUiError("unknownvar", "unknown variable! - there is no setVariable with this name (" + this._varnamePort.get() + ")");
             this._op.setUiAttrib({ "extendTitle": "#invalid" });
-            this._valueOutPort.set(0);
+            if (this._valueOutPort) this._valueOutPort.set(0);
         }
     }
 
