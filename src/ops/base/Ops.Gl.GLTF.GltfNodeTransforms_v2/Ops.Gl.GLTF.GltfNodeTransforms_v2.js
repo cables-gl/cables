@@ -27,9 +27,9 @@ function exec()
 
 function update()
 {
-    outPos.set(null);
-    outScale.set(null);
-    outNames.set(null);
+    // outPos.set(null);
+    // outScale.set(null);
+    // outNames.set(null);
     // outRot.set(null);
 
     if (!cgl.frameStore.currentScene) return;
@@ -106,10 +106,10 @@ function update()
         }
     }
 
-    outPos.set(arrPos);
-    outScale.set(arrScale);
-    outNames.set(arrNames);
-    outRot.set(arrRot);
+    outPos.setRef(arrPos);
+    outScale.setRef(arrScale);
+    outNames.setRef(arrNames);
+    outRot.setRef(arrRot);
 
     needsupdate = false;
 }
