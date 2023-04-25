@@ -13,6 +13,7 @@ ANIM.Key = function (obj)
     this._easing = 0;
     this.bezTangIn = 0;
     this.bezTangOut = 0;
+    this._lastKeyIndex = 0;
     // this.bezTime = 0.5;
     // this.bezValue = 0;
     // this.bezTimeIn = -0.5;
@@ -537,7 +538,7 @@ Anim.prototype.setLoop = function (target)
 Anim.prototype.hasEnded = function (time)
 {
     if (this.keys.length === 0) return true;
-    if (this.keys[this.keys.length - 1].time <= time) return true;
+    if (this.keys[this._lastKeyIndex].time <= time) return true;
     return false;
 };
 
@@ -564,6 +565,7 @@ Anim.prototype.clearBefore = function (time)
     this.setValue(time, v);
 
     if (ki > 1) this.keys.splice(0, ki);
+    this._updateLastIndex();
 };
 /**
  * remove all keys from animation
@@ -577,7 +579,7 @@ Anim.prototype.clear = function (time)
     let v = 0;
     if (time) v = this.getValue(time);
     this.keys.length = 0;
-
+    this._updateLastIndex();
     if (time) this.setValue(time, v);
     if (this.onChange !== null) this.onChange();
     this.emitEvent("onChange", this);
@@ -586,6 +588,7 @@ Anim.prototype.clear = function (time)
 Anim.prototype.sortKeys = function ()
 {
     this.keys.sort((a, b) => { return parseFloat(a.time) - parseFloat(b.time); });
+    this._updateLastIndex();
     this._needsSort = false;
 };
 
@@ -640,6 +643,7 @@ Anim.prototype.setValue = function (time, value, cb)
             "cb": cb,
         });
         this.keys.push(found);
+        this._updateLastIndex();
     }
 
     if (this.onChange) this.onChange();
@@ -710,27 +714,27 @@ Anim.prototype.getValue = function (time)
     if (this.keys.length === 0) return 0;
     if (this._needsSort) this.sortKeys();
 
+    if (!this.loop && time > this.keys[this._lastKeyIndex].time) return this.keys[this._lastKeyIndex].value;
     if (time < this.keys[0].time) return this.keys[0].value;
 
-    const lastKeyIndex = this.keys.length - 1;
-    if (this.loop && time > this.keys[lastKeyIndex].time)
+    if (this.loop && time > this.keys[this._lastKeyIndex].time)
     {
-        const currentLoop = time / this.keys[lastKeyIndex].time;
+        const currentLoop = time / this.keys[this._lastKeyIndex].time;
         if (currentLoop > this._timesLooped)
         {
             this._timesLooped++;
             if (this.onLooped) this.onLooped();
         }
-        time = (time - this.keys[0].time) % (this.keys[lastKeyIndex].time - this.keys[0].time);
+        time = (time - this.keys[0].time) % (this.keys[this._lastKeyIndex].time - this.keys[0].time);
         time += this.keys[0].time;
     }
 
     const index = this.getKeyIndex(time);
-    if (index >= lastKeyIndex)
+    if (index >= this._lastKeyIndex)
     {
-        if (this.keys[lastKeyIndex].cb && !this.keys[lastKeyIndex].cbTriggered) this.keys[lastKeyIndex].trigger();
+        if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
 
-        return this.keys[lastKeyIndex].value;
+        return this.keys[this._lastKeyIndex].value;
     }
     const index2 = parseInt(index, 10) + 1;
     const key1 = this.keys[index];
@@ -747,6 +751,11 @@ Anim.prototype.getValue = function (time)
     return key1.ease(perc, key2);
 };
 
+Anim.prototype._updateLastIndex = function ()
+{
+    this._lastKeyIndex = this.keys.length - 1;
+};
+
 Anim.prototype.addKey = function (k)
 {
     if (k.time === undefined)
@@ -759,6 +768,7 @@ Anim.prototype.addKey = function (k)
         if (this.onChange !== null) this.onChange();
         this.emitEvent("onChange", this);
     }
+    this._updateLastIndex();
 };
 
 Anim.prototype.easingFromString = function (str)

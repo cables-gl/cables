@@ -43,6 +43,7 @@ class ShaderModifier
 
         if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
+            console.log("rebind shader mod");
             if (this._boundShader) this._boundShader.shader.dispose();
             if (shader._needsRecompile) shader.compile();
             this._boundShader = this._origShaders[shader.id] =
