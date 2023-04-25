@@ -67,6 +67,7 @@ const Patch = function (cfg)
     this._animReq = null;
     this._opIdCache = {};
     this._triggerStack = [];
+    this.storeObjNames = true; // remove after mai release
 
     this.loading = new LoadingStatus(this);
 
@@ -438,7 +439,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
     if (op)
     {
-        op.objName = objName;
+        op._objName = objName;
         op.patch = this;
     }
     else
