@@ -3,11 +3,11 @@ const
     inStr = op.inString("Search", ""),
     inSort = op.inSwitch("Order", ["None", "AlphaNumerical"], "None"),
     inSpace = op.inSwitch("Space", ["GLTF", "World"], "GLTF"),
-    outPos = op.outArray("Positions"),
     next = op.outTrigger("Next"),
+    outPos = op.outArray("Positions"),
     outScale = op.outArray("Scale"),
-    outNames = op.outArray("Names"),
-    outRot = op.outArray("Rotation");
+    outRot = op.outArray("Rotation"),
+    outNames = op.outArray("Names");
 
 const cgl = op.patch.cgl;
 const arrPos = [];
