@@ -159,7 +159,7 @@ function loadAnims(gltf)
 
                 for (let k = 0; k < numComps; k++)
                 {
-                    const newAnim = new CABLES.TL.Anim();
+                    const newAnim = new CABLES.Anim();
                     // newAnim.name=an.name;
                     anims.push(newAnim);
                 }

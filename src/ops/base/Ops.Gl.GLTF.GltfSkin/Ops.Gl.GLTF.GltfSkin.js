@@ -166,7 +166,7 @@ function transformBlend(node, cgl, time)
 
                 if (_anim)
                 {
-                    CABLES.TL.Anim.slerpQuaternion(_time, _tempQuat2, _anim[0], _anim[1], _anim[2], _anim[3]);
+                    CABLES.Anim.slerpQuaternion(_time, _tempQuat2, _anim[0], _anim[1], _anim[2], _anim[3]);
                 }
                 node._tempQuats[i] = (_tempQuat2);
             }

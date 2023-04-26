@@ -65,7 +65,7 @@ render.onTriggered=function()
     if(animX)
     {
         var time=op.patch.timer.getTime();
-        CABLES.TL.Anim.slerpQuaternion(time,q,animX,animY,animZ,animW);
+        CABLES.Anim.slerpQuaternion(time,q,animX,animY,animZ,animW);
         mat4.fromQuat(qMat, q);
 
     }

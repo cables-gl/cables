@@ -138,7 +138,7 @@ function findBoneChilds(n, parent, foundBone)
 
         if (n.quatAnimX)
         {
-            CABLES.TL.Anim.slerpQuaternion(time, q,
+            CABLES.Anim.slerpQuaternion(time, q,
                 n.quatAnimX,
                 n.quatAnimY,
                 n.quatAnimZ,
@@ -146,7 +146,7 @@ function findBoneChilds(n, parent, foundBone)
 
             if (inFade.get() != 0)
             {
-                CABLES.TL.Anim.slerpQuaternion(time2, q2,
+                CABLES.Anim.slerpQuaternion(time2, q2,
                     n.quatAnimX,
                     n.quatAnimY,
                     n.quatAnimZ,

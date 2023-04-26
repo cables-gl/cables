@@ -1,4 +1,3 @@
-
 const CHUNK_HEADER_SIZE = 8;
 
 const Gltf = class
@@ -87,7 +86,7 @@ function loadAnims(gltf)
 
             const anims = [];
 
-            for (k = 0; k < numComps; k++) anims.push(new CABLES.TL.Anim());
+            for (k = 0; k < numComps; k++) anims.push(CABLES.Anim());
 
             if (sampler.interpolation == "LINEAR") {}
             else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = CONSTANTS.ANIM.EASING_ABSOLUTE;
