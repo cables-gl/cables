@@ -3,9 +3,6 @@ import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
 import { EventTarget } from "./eventtarget";
 
-
-// ------------------------------------------------------------------------------------------------------
-
 /**
  * Keyframed interpolated animation.
  *
@@ -56,8 +53,8 @@ import { EventTarget } from "./eventtarget";
  * anim.setValue(0,0);  // set value 0 at 0 seconds
  * anim.setValue(10,1); // set value 1 at 10 seconds
  * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
-
  */
+
 const Anim = function (cfg)
 {
     EventTarget.apply(this);
@@ -69,6 +66,7 @@ const Anim = function (cfg)
     this.loop = false;
     this._log = new Logger("Anim");
     this._lastKeyIndex = 0;
+    this._cachedIndex = 0;
 
     /**
      * @member defaultEasing
@@ -175,11 +173,18 @@ Anim.prototype.getLength = function ()
 Anim.prototype.getKeyIndex = function (time)
 {
     let index = 0;
-    for (let i = 0; i < this.keys.length; i++)
+    let start = 0;
+    if (this._cachedIndex && time >= this.keys[this._cachedIndex].time) start = this._cachedIndex;
+    for (let i = start; i < this.keys.length; i++)
     {
         if (time >= this.keys[i].time) index = i;
-        if (this.keys[i].time > time) return index;
+        if (this.keys[i].time > time)
+        {
+            if (time != 0) this._cachedIndex = index;
+            return index;
+        }
     }
+
     return index;
 };
 
@@ -439,15 +444,7 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     return q;
 };
 
-// ANIM = ANIM || {};
-// const TL = ANIM;
-// TL.Anim = Anim;
-
 const ANIM = { "Key": Key };
 
-
 export { ANIM };
-
-
 export { Anim };
-// export { TL };
