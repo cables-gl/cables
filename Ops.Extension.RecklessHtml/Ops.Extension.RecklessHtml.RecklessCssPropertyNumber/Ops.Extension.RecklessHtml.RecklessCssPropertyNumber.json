@@ -54,7 +54,7 @@
                 "name": "HTML Element"
             }
         ],
-        "name": "Ops.User.pandur.CSSPropertyReckless"
+        "name": "Ops.Extension.RecklessHtml.RecklessCssPropertyNumber"
     },
     "summary": "Set css style properties of a html element",
     "issues": "",
