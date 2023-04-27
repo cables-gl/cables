@@ -9,6 +9,7 @@ const w = new CABLES.VarGetOpWrapper(op, "number", op.varName, null);
 
 exec.onTriggered = () =>
 {
-    val.set(w.variable.getValue());
+    if (w && w.variable)
+        val.set(w.variable.getValue());
     next.trigger();
 };

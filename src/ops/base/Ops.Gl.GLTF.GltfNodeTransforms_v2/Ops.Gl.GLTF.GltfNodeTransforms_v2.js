@@ -28,6 +28,12 @@ function exec()
 {
     if (cgl.frameStore.currentScene != oldScene)needsupdate = true;
     if (needsupdate) update();
+
+    outPos.setRef(arrPos);
+    outScale.setRef(arrScale);
+    outNames.setRef(arrNames);
+    outRot.setRef(arrRot);
+
     next.trigger();
 }
 

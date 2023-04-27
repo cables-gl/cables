@@ -1,5 +1,6 @@
-const passThrough = op.inValueBool("Pass Through", true),
+const
     arrayIn = op.inArray("Array in"),
+    passThrough = op.inValueBool("Pass Through", true),
     arrayOut = op.outArray("Array Out");
 
 let oldArr = null;
