@@ -14,7 +14,7 @@ render.onTriggered = function ()
     if (x.isAnimated())
     {
         let time = op.patch.timer.getTime();
-        CABLES.TL.Anim.slerpQuaternion(time, q, x.anim, y.anim, z.anim, w.anim);
+        CABLES.Anim.slerpQuaternion(time, q, x.anim, y.anim, z.anim, w.anim);
     }
     else
     {

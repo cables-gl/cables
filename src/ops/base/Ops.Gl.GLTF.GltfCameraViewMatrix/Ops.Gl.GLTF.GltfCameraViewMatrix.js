@@ -14,7 +14,7 @@ inExec.onTriggered = () =>
     {
         camNode.start(0);
         camNode.end();
-        outArr.set(camNode.vMat);
+        outArr.setRef(camNode.vMat);
     }
 };
 

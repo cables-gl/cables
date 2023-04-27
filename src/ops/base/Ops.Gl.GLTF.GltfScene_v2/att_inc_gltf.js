@@ -144,7 +144,7 @@ function loadAnims(gltf)
 
             const anims = [];
 
-            for (k = 0; k < numComps; k++) anims.push(new CABLES.TL.Anim());
+            for (k = 0; k < numComps; k++) anims.push(new CABLES.Anim());
 
             if (sampler.interpolation == "LINEAR") {}
             else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = 0;// CONSTANTS.ANIM.EASING_ABSOLUTE;

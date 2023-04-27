@@ -5,7 +5,7 @@ const gltfNode = class
     {
         this.isChild = node.isChild || false;
         this.name = node.name;
-        if(node.camera)this.camera = node.camera;
+        if (node.camera) this.camera = node.camera;
         this.hidden = false;
         this.mat = mat4.create();
         this._animMat = mat4.create();
@@ -17,7 +17,7 @@ const gltfNode = class
         this._node = node;
         this._gltf = gltf;
         this.absMat = mat4.create();
-        this.addTranslate=null;
+        this.addTranslate = null;
 
         this.updateMatrix();
     }
@@ -119,6 +119,8 @@ const gltfNode = class
     {
         if (!_time)_time = time;
 
+        console.log(_time);
+
         if (!this._animTrans)
         {
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);
@@ -141,7 +143,7 @@ const gltfNode = class
 
             if (playAnims && this._animRot)
             {
-                CABLES.TL.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                CABLES.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
 
                 mat4.fromQuat(this._tempMat, this._tempQuat);
                 mat4.mul(this._animMat, this._animMat, this._tempMat);
@@ -164,7 +166,7 @@ const gltfNode = class
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
 
-        if(this.addTranslate)mat4.translate(cgl.mMatrix,cgl.mMatrix,this.addTranslate);
+        if (this.addTranslate)mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
 
         mat4.copy(this.absMat, cgl.mMatrix);
     }

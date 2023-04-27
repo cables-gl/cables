@@ -47,12 +47,12 @@
         ],
         "portsOut": [
             {
-                "type": 3,
-                "name": "Positions"
-            },
-            {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Positions"
             },
             {
                 "type": 3,
@@ -60,11 +60,11 @@
             },
             {
                 "type": 3,
-                "name": "Names"
+                "name": "Rotation"
             },
             {
                 "type": 3,
-                "name": "Rotation"
+                "name": "Names"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfNodeTransforms_v2"

@@ -122,7 +122,7 @@ function render()
     cgl.pushModelMatrix();
     mat4.translate(cgl.mMatrix, cgl.mMatrix, vec);
 
-    CABLES.TL.Anim.slerpQuaternion(t, q, animQX, animQY, animQZ, animQW);
+    CABLES.Anim.slerpQuaternion(t, q, animQX, animQY, animQZ, animQW);
     mat4.fromQuat(qMat, q);
     mat4.multiply(cgl.mMatrix, cgl.mMatrix, qMat);
 
