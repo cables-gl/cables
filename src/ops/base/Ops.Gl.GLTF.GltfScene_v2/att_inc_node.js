@@ -1,4 +1,3 @@
-
 const gltfNode = class
 {
     constructor(node, gltf)
@@ -117,9 +116,7 @@ const gltfNode = class
 
     transform(cgl, _time)
     {
-        if (!_time)_time = time;
-
-        console.log(_time);
+        if (!_time)_time = time || 0;
 
         if (!this._animTrans)
         {
@@ -174,7 +171,6 @@ const gltfNode = class
     render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
     {
         // dontTransform,drawMesh,ignoreMaterial,
-
 
         if (!dontTransform) cgl.pushModelMatrix();
         if (!dontTransform) this.transform(cgl, _time || time);
