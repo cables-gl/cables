@@ -1,0 +1,97 @@
+{
+    "id": "0679f203-3332-4dae-9676-9eeee4399088",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587737466134
+        },
+        {
+            "message": "Ops.User.pandur.GltfNodeTransforms renamed to Ops.Gl.GLTF.GltfNodeTransforms",
+            "author": "pandur",
+            "date": 1587794804783
+        },
+        {
+            "message": "cloned op from Ops.Gl.GLTF.GltfNodeTransforms",
+            "author": "pandur",
+            "date": 1617902808681
+        },
+        {
+            "message": "Ops.User.pandur.GltfNodeTransforms2 renamed to Ops.Gl.GLTF.GltfNodeTransforms_v2",
+            "author": "pandur",
+            "date": 1617903101851
+        },
+        {
+            "message": "cloned op from Ops.Gl.GLTF.GltfNodeTransforms_v2",
+            "author": "pandur",
+            "date": 1682493073710
+        },
+        {
+            "message": "Ops.Patch.PoYAmYu.GltfNodeTransforms3 renamed to Ops.Gl.GLTF.GltfNodeTransforms_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1682601539920
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1682493073710,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Search"
+            },
+            {
+                "type": 0,
+                "name": "Order index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Space index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
+                "type": 3,
+                "name": "Scale"
+            },
+            {
+                "type": 3,
+                "name": "Rotation"
+            },
+            {
+                "type": 3,
+                "name": "Names"
+            }
+        ],
+        "name": "Ops.Patch.PoYAmYu.GltfNodeTransforms3"
+    },
+    "summary": "output all transformations of nodes starting with [search]",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [
+        "I_eD5nml_5A"
+    ],
+    "docs": {
+        "ports": []
+    }
+}

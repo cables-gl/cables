@@ -117,9 +117,8 @@ const gltfNode = class
 
     transform(cgl, _time)
     {
-        if (!_time)_time = time;
+        if (!_time)_time = time || 0;
 
-        console.log(_time);
 
         if (!this._animTrans)
         {
