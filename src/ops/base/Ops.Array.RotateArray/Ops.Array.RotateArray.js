@@ -26,6 +26,7 @@ function rotate(array, n, guard)
     n %= array.length;
     tail = array.slice(n) || [];
 
+    if (!tail || !tail.concat) return [];
 
     head = array.slice(0, n) || [];
     return tail.concat(head);

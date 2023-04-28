@@ -1,0 +1,46 @@
+{
+    "id": "84b52ab7-3a2f-40a0-9ccd-6d529c251d84",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675932619232
+        },
+        {
+            "message": "Ops.User.pandur.CurveArray renamed to Ops.Dev.CurveArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678374434693
+        },
+        {
+            "message": "cloned op from Ops.Dev.CurveArray",
+            "author": "pandur",
+            "date": 1682584179082
+        },
+        {
+            "message": "Ops.Patch.PpcZ87r.CurveEase renamed to Ops.Math.CurveEase",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1682584839970
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1682584179081,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Patch.PpcZ87r.CurveEase"
+    }
+}

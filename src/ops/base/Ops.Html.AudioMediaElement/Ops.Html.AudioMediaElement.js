@@ -32,7 +32,7 @@ inPlay.onChange = function ()
     else
     {
         playing = false;
-        audio.pause();
+        if (audio) audio.pause();
     }
     outPlaying.set(playing);
 };

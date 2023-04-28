@@ -20,6 +20,7 @@ const trans = vec3.create();
 
 let cachedTop = -1;
 let cachedLeft = -1;
+let currTransformStr = 0;
 
 exec.onTriggered =
 () =>
@@ -60,7 +61,12 @@ function updateTransform()
 
     const str = "translate(" + translateStr + ") scale(" + inScale.get() + ") rotate(" + inRotate.get() + "deg)";
 
-    if (ele.style.transform != str) ele.style.transform = str;
+    // if (currTransformStr != str || oldEle != ele)
+    if (ele.style.transform != str)
+    {
+        currTransformStr = str;
+        ele.style.transform = str;
+    }
 }
 
 inEle.onChange = function ()

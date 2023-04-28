@@ -20,8 +20,8 @@ function update()
 
     if (r)
     {
-        outArray.set([]);
-        outArray.set(arr);
+        // outArray.set([]);
+        outArray.setRef(arr);
     }
 
     outValid.set(r);
