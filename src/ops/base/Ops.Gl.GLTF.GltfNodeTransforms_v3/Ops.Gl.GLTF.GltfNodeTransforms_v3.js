@@ -73,6 +73,11 @@ function update()
             arrPos[posCounter++] = tr[1];
             arrPos[posCounter++] = tr[2];
 
+            if (node._rot)
+            {
+                arrRot.push(node._rot[0], node._rot[1], node._rot[2], node._rot[3]);
+            }
+            else
             if (node._tempQuat)
             {
                 arrRot.push(node._tempQuat[0], node._tempQuat[1], node._tempQuat[2], node._tempQuat[3]);

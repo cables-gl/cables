@@ -83,7 +83,7 @@
                 "name": "Names"
             }
         ],
-        "name": "Ops.Patch.PoYAmYu.GltfNodeTransforms3"
+        "name": "Ops.Gl.GLTF.GltfNodeTransforms_v3"
     },
     "summary": "output all transformations of nodes starting with [search]",
     "issues": "",
