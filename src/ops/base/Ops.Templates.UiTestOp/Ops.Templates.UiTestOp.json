@@ -127,7 +127,14 @@
             },
             {
                 "type": 1,
-                "name": "Throw Exception"
+                "name": "Throw Exception",
+                "group": "Crash"
+            },
+            {
+                "type": 0,
+                "name": "Array Exception",
+                "group": "Crash",
+                "subType": "number"
             }
         ],
         "portsOut": [
