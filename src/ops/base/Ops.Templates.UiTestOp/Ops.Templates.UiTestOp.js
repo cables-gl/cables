@@ -18,13 +18,17 @@ const
     inPrompt = op.inTriggerButton("Open Prompt"),
     inModal = op.inTriggerButton("Open Modal"),
     inTab = op.inTriggerButton("Open new Tab"),
+
     inExc = op.inTriggerButton("Throw Exception"),
+    inErrorFloat = op.inFloat("Array Exception", 0),
+
     outBlah = op.outNumber("Something");
 
 op.setPortGroup("Greyout", [inSwit, ingreyoutLine]);
 op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError, inUiLoading]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
+op.setPortGroup("Crash", [inExc, inErrorFloat]);
 
 let loadingId = null;
 
@@ -130,11 +134,15 @@ inModal.onTriggered = () =>
     });
 };
 
-inExc.onTriggered = () =>
+inErrorFloat.onChange = () =>
 {
-    // throw new Error("crash0r");
     const arr = [];
     arr.length = 1.2;
+};
+
+inExc.onTriggered = () =>
+{
+    throw new Error("crash0r");
 };
 
 inTab.onTriggered = () =>
