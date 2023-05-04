@@ -174,7 +174,7 @@ Anim.prototype.getKeyIndex = function (time)
 {
     let index = 0;
     let start = 0;
-    if (this._cachedIndex && time >= this.keys[this._cachedIndex].time) start = this._cachedIndex;
+    if (this._cachedIndex && this.keys.length > this._cachedIndex && time >= this.keys[this._cachedIndex].time) start = this._cachedIndex;
     for (let i = start; i < this.keys.length; i++)
     {
         if (time >= this.keys[i].time) index = i;
