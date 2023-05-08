@@ -94,7 +94,7 @@ function update()
         }
     }
 
-    if (inSort.get())
+    if (inSort.get() === "AlphaNumerical")
     {
         let list = [];
         for (let j = 0; j < arrNames.length; j++)

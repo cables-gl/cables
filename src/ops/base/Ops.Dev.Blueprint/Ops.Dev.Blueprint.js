@@ -6,6 +6,8 @@ const portsData = op.inString("portsData", "{}");
 const loadingOut = op.outBool("loading", false);
 
 let loadingId = null;
+let initialLoadingId = op.patch.loading.start("blueprint_initial", op.id, op);
+
 patchIdIn.setUiAttribs({
     "hidePort": true,
     "greyout": false
@@ -118,6 +120,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
     loadingOut.set(true);
 
     loadingId = op.patch.loading.start("blueprint", op.id, op);
+    op.patch.loading.finished(initialLoadingId);
 
     const doneCb = (err, serializedOps) =>
     {
@@ -517,7 +520,6 @@ function setupPorts(subPatchId, ignoreLinks = false)
         }
     }
     op.setPortGroup("Blueprint Ports", newPorts);
-
 
     for (i = 0; i < subPatchPortsOut.length; i++)
     {
