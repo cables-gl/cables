@@ -116,8 +116,8 @@
             },
             {
                 "type": 0,
-                "name": "WorldSpace",
-                "subType": "boolean"
+                "name": "Space index",
+                "subType": "integer"
             },
             {
                 "type": 0,
