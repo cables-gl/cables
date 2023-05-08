@@ -35,16 +35,12 @@ function update()
     if (sortMode.get() === "Sort ascending")
     {
         indices.sort(function (a, b) { return arrOut[a] < arrOut[b] ? -1 : arrOut[a] > arrOut[b] ? 1 : 0; });
-
-        // arrOut.sort(function (a, b) { return a - b; });
     }
     else
     {
         indices.sort(function (a, b) { return arrOut[a] > arrOut[b] ? -1 : arrOut[a] < arrOut[b] ? 1 : 0; });
     }
 
-    arrayOut.set(null);
-    arrayOut.set(arrOut);
-    arrayOutIdx.set(null);
-    arrayOutIdx.set(indices);
+    arrayOut.setRef(arrOut);
+    arrayOutIdx.setRef(indices);
 }

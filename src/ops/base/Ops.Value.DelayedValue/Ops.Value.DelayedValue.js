@@ -24,8 +24,7 @@ v.onChange = function ()
 
     let lastKey = 0;
     for (let i = 0; i < anim.keys.length; i++)
-    {
-        if (anim.keys[i].time < t)lastKey = i;
-    }
+        if (anim.keys[i] && anim.keys[i].time < t)lastKey = i;
+
     if (lastKey > 2) anim.keys.splice(0, lastKey);
 };

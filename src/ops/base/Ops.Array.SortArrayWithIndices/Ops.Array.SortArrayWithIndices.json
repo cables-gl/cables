@@ -29,10 +29,6 @@
                 "type": 0,
                 "name": "Sorting mode index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Sorting mode"
             }
         ],
         "portsOut": [
