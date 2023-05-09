@@ -38,6 +38,10 @@
             {
                 "type": 5,
                 "name": "FileName"
+            },
+            {
+                "type": 3,
+                "name": "Camera Names"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfInfo"

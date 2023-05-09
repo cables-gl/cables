@@ -10,24 +10,30 @@ vec3 MOD_col=MOD_color;
     MOD_col=texture(MOD_tex,gl_FragCoord.xy/float(textureSize(MOD_tex,0).xy)).rgb;
 #endif
 
+vec4 MOD_vp=MOD_vertPos;
+
+#ifdef MOD_SPACE_SCREEN
+   MOD_vp=vec4(gl_FragCoord.x,gl_FragCoord.y,0.0,1.0);
+#endif
+
 
 
 #ifdef MOD_AREA_SPHERE
-    float MOD_de=MOD_sdSphere(MOD_pos.xyz-MOD_vertPos.xyz,MOD_size.x);
+    float MOD_de=MOD_sdSphere(MOD_pos.xyz-MOD_vp.xyz,MOD_size.x);
 #endif
 
 #ifdef MOD_AREA_BOX
     float MOD_r=MOD_scale.w;
     MOD_r*=MOD_inSizeAmountFalloffSizeX.x;
-    float MOD_de=MOD_sdRoundBox(MOD_pos.xyz-MOD_vertPos.xyz,MOD_size-MOD_r,MOD_r);
+    float MOD_de=MOD_sdRoundBox(MOD_pos.xyz-MOD_vp.xyz,MOD_size-MOD_r,MOD_r);
 #endif
 
 #ifdef MOD_AREA_TRIPRISM
-    float MOD_de=MOD_sdTriPrism(MOD_pos.xyz-MOD_vertPos.xyz,vec2(MOD_size.x,MOD_size.z));
+    float MOD_de=MOD_sdTriPrism(MOD_pos.xyz-MOD_vp.xyz,vec2(MOD_size.x,MOD_size.z));
 #endif
 
 #ifdef MOD_AREA_HEXPRISM
-    float MOD_de=MOD_sdHexPrism(MOD_pos.xyz-MOD_vertPos.xyz,vec2(MOD_size.x,MOD_size.z));
+    float MOD_de=MOD_sdHexPrism(MOD_pos.xyz-MOD_vp.xyz,vec2(MOD_size.x,MOD_size.z));
 #endif
 
 
@@ -39,23 +45,23 @@ vec3 MOD_col=MOD_color;
 // #endif
 
 #ifdef MOD_AREA_AXIS_X
-    float MOD_de=abs(MOD_pos.x-MOD_vertPos.x);
+    float MOD_de=abs(MOD_pos.x-MOD_vp.x);
 #endif
 #ifdef MOD_AREA_AXIS_Y
-    float MOD_de=abs(MOD_pos.y-MOD_vertPos.y);
+    float MOD_de=abs(MOD_pos.y-MOD_vp.y);
 #endif
 #ifdef MOD_AREA_AXIS_Z
-    float MOD_de=abs(MOD_pos.z-MOD_vertPos.z);
+    float MOD_de=abs(MOD_pos.z-MOD_vp.z);
 #endif
 
 #ifdef MOD_AREA_AXIS_X_INFINITE
-    float MOD_de=MOD_pos.x-MOD_vertPos.x;
+    float MOD_de=MOD_pos.x-MOD_vp.x;
 #endif
 #ifdef MOD_AREA_AXIS_Y_INFINITE
-    float MOD_de=MOD_pos.y-MOD_vertPos.y;
+    float MOD_de=MOD_pos.y-MOD_vp.y;
 #endif
 #ifdef MOD_AREA_AXIS_Z_INFINITE
-    float MOD_de=MOD_pos.z-MOD_vertPos.z;
+    float MOD_de=MOD_pos.z-MOD_vp.z;
 #endif
 
 
@@ -105,7 +111,7 @@ MOD_de=1.0-MOD_map(
 #endif
 
 
-// col.rgb=vec3(distance(MOD_vertPos.xyz,MOD_pos.xyz))*0.1
+// col.rgb=vec3(distance(MOD_vp.xyz,MOD_pos.xyz))*0.1
 // col.rgb=MOD_pos.xyz;
 
 //

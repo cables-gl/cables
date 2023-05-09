@@ -20,7 +20,8 @@ const
     sizeZ = op.inFloat("Size Z", 1),
     inTex = op.inTexture("Texture"),
 
-    inWorldSpace = op.inValueBool("WorldSpace", true),
+    // inWorldSpace = op.inValueBool("WorldSpace", true),
+    inSpace = op.inSwitch("Space", ["World", "Model", "UV", "Screen"], "World"),
     inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");
 
@@ -36,16 +37,21 @@ const srcHeadVert = ""
     .endl();
 
 const srcBodyVert = ""
-    .endl() + "#ifndef MOD_WORLDSPACE"
+    .endl() + "#ifdef MOD_SPACE_MODEL"
     .endl() + "   MOD_vertPos=vec4(vPosition,1.0);"
     .endl() + "#endif"
 
-    .endl() + "#ifdef MOD_WORLDSPACE"
+    .endl() + "#ifdef MOD_SPACE_WORLD"
     .endl() + "   MOD_vertPos=mMatrix*pos;"
     .endl() + "#endif"
+
+    .endl() + "#ifdef MOD_SPACE_UV"
+    .endl() + "   MOD_vertPos=vec4(attrTexCoord.x,attrTexCoord.y,0.0,1.0);"
+    .endl() + "#endif"
+
     .endl();
 
-inWorldSpace.onChange =
+inSpace.onChange =
     inTex.onLinkChanged =
     inArea.onChange =
     inInvert.onChange =
@@ -117,7 +123,11 @@ function updateDefines()
     mod.toggleDefine("MOD_AREA_SIZE", doScale.get());
 
     mod.toggleDefine("MOD_AREA_INVERT", inInvert.get());
-    mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
+
+    mod.toggleDefine("MOD_SPACE_WORLD", inSpace.get() == "World");
+    mod.toggleDefine("MOD_SPACE_MODEL", inSpace.get() == "Model");
+    mod.toggleDefine("MOD_SPACE_UV", inSpace.get() == "UV");
+    mod.toggleDefine("MOD_SPACE_SCREEN", inSpace.get() == "Screen");
 
     mod.toggleDefine("MOD_AREA_AXIS_X", inArea.get() == "Axis X");
     mod.toggleDefine("MOD_AREA_AXIS_Y", inArea.get() == "Axis Y");
