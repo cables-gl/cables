@@ -91,7 +91,7 @@ class CopyTexture
         }
         else
         {
-            let filter = CGL.Texture.FILTER_LINEAR;
+            let filter = CGL.Texture.FILTER_NEAREST;
             let wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
             if (this._options.hasOwnProperty("filter"))filter = this._options.filter;
