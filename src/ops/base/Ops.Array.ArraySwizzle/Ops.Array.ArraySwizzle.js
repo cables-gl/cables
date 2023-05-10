@@ -40,15 +40,15 @@ function convert(updateUi)
         in4.setUiAttribs({ "greyout": targetStride < 4 });
 
         let str = "";
-        if (srcStride == "1")str += "X";
-        if (srcStride == "2")str += "XY";
-        if (srcStride == "3")str += "XYZ";
-        if (srcStride == "4")str += "XYZW";
+        if (srcStride == "1")str += "X ";
+        if (srcStride == "2")str += "XY ";
+        if (srcStride == "3")str += "XYZ ";
+        if (srcStride == "4")str += "XYZW ";
         str += " > ";
         str += in1.get();
-        if (targetStride >= 2)str += in2.get();
-        if (targetStride >= 3)str += in3.get();
-        if (targetStride >= 4)str += in4.get();
+        if (targetStride >= 2)str += in2.get() + " ";
+        if (targetStride >= 3)str += in3.get() + " ";
+        if (targetStride >= 4)str += in4.get() + " ";
         op.setUiAttrib({ "extendTitle": str });
     }
 
