@@ -9,7 +9,8 @@ const
 const tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
     {
         "shader": attachments.rgbe2fp_frag,
-        "isFloatingPointTexture": true
+        "isFloatingPointTexture": true,
+        "filter": CGL.Texture.FILTER_NEAREST
     });
 
 const uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect);

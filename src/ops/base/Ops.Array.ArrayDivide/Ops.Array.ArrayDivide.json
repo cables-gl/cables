@@ -29,6 +29,11 @@
                 "type": 0,
                 "name": "Value",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -25,9 +25,10 @@ function update()
         else
         {
             op.setUiError("notiterable", null);
+            let result = data[path];
             const parts = path.split(".");
             op.setUiAttrib({ "extendTitle": parts[parts.length - 1] + "" });
-            let result = resolve(path, data);
+            if (!result) result = resolve(path, data);
             if (result === undefined)
             {
                 const errorMsg = "could not find element at path " + path;
@@ -62,5 +63,5 @@ function update()
 function resolve(path, obj = self, separator = ".")
 {
     const properties = Array.isArray(path) ? path : path.split(separator);
-    return properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return properties.reduce((prev, curr) => { return prev && prev[curr]; }, obj);
 }
