@@ -1,4 +1,4 @@
-const contents = ["X", "Y", "Z", "W", "0", "1"];
+const contents = ["X", "Y", "Z", "W", "0", "1", "0,1,2..", "0-1"];
 const
     inArr = op.inArray("Array"),
     inStride = op.inSwitch("Array Stride", ["1", "2", "3", "4"], "3"),
@@ -64,10 +64,10 @@ function convert(updateUi)
     op.setUiError("invalidlength", null);
 
     if (
-        (!CABLES.UTILS.isNumeric(in1.get()) && contents.indexOf(in1.get()) > srcStride - 1) ||
-        (!CABLES.UTILS.isNumeric(in2.get()) && contents.indexOf(in2.get()) > srcStride - 1) ||
-        (!CABLES.UTILS.isNumeric(in3.get()) && contents.indexOf(in3.get()) > srcStride - 1) ||
-        (!CABLES.UTILS.isNumeric(in4.get()) && contents.indexOf(in4.get()) > srcStride - 1)
+        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in1.get()) > srcStride - 1) ||
+        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in2.get()) > srcStride - 1) ||
+        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in3.get()) > srcStride - 1) ||
+        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in4.get()) > srcStride - 1)
     )
     {
         outArr.set(null);
@@ -99,6 +99,8 @@ function convert(updateUi)
             else if (index1 === 3)result[idx++] = arr[i + 3];
             else if (index1 === 4)result[idx++] = 0;
             else if (index1 === 5)result[idx++] = 1;
+            else if (index1 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index1 === 7)result[idx++] = i / arr.length;
         }
 
         if (targetStride >= 2)
@@ -109,6 +111,8 @@ function convert(updateUi)
             else if (index2 === 3)result[idx++] = arr[i + 3];
             else if (index2 === 4)result[idx++] = 0;
             else if (index2 === 5)result[idx++] = 1;
+            else if (index2 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index2 === 7)result[idx++] = i / arr.length;
         }
 
         if (targetStride >= 3)
@@ -119,6 +123,8 @@ function convert(updateUi)
             else if (index3 === 3)result[idx++] = arr[i + 3];
             else if (index3 === 4)result[idx++] = 0;
             else if (index3 === 5)result[idx++] = 1;
+            else if (index3 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index3 === 7)result[idx++] = i / arr.length;
         }
 
         if (targetStride >= 4)
@@ -129,6 +135,8 @@ function convert(updateUi)
             else if (index4 === 3)result[idx++] = arr[i + 3];
             else if (index4 === 4)result[idx++] = 0;
             else if (index4 === 5)result[idx++] = 1;
+            else if (index4 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index4 === 7)result[idx++] = i / arr.length;
         }
     }
 
