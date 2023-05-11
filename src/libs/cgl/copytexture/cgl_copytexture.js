@@ -94,15 +94,18 @@ class CopyTexture
             let filter = CGL.Texture.FILTER_LINEAR;
             let wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
+            if (this._options.isFloatingPointTexture)filter = CGL.Texture.FILTER_NEAREST;
+
             if (this._options.hasOwnProperty("filter"))filter = this._options.filter;
             if (this._options.hasOwnProperty("wrap"))wrap = this._options.wrap;
 
-            const options = {
-                "isFloatingPointTexture": this._options.isFloatingPointTexture,
-                "numRenderBuffers": this._options.numRenderBuffers || 1,
-                "filter": filter,
-                "wrap": wrap,
-            };
+            const options =
+                {
+                    "isFloatingPointTexture": this._options.isFloatingPointTexture,
+                    "numRenderBuffers": this._options.numRenderBuffers || 1,
+                    "filter": filter,
+                    "wrap": wrap,
+                };
 
             if (cgl.glVersion == 1) this.fb = new CGL.Framebuffer(cgl, w, h, options);
             else this.fb = new CGL.Framebuffer2(cgl, w, h, options);
