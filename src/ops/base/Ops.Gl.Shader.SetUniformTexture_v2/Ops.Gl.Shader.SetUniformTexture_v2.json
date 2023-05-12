@@ -1,0 +1,71 @@
+{
+    "authorName": "pandur",
+    "id": "26b6acbf-7c34-4552-8419-f1146ae3225f",
+    "created": 1683904593935,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Uniform index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Patch.PP_wigw.SetUniformTexture2"
+    },
+    "summary": "set a uniform value of the current shader",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.Shader.SetUniformValue renamed to Ops.Gl.Shader.SetUniformValue",
+            "author": "pandur",
+            "date": 1613548289481
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.SetUniformValue",
+            "author": "pandur",
+            "date": 1662554294106
+        },
+        {
+            "message": "Ops.User.pandur.SetUniformTexture renamed to Ops.Gl.Shader.SetUniformTexture",
+            "author": "pandur",
+            "date": 1662567063395
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.SetUniformTexture",
+            "author": "pandur",
+            "date": 1683904593935
+        },
+        {
+            "message": "Ops.Patch.PP_wigw.SetUniformTexture2 renamed to Ops.Gl.Shader.SetUniformTexture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1683907451187
+        }
+    ],
+    "relatedops": [
+        "Ops.Gl.Shader.SetUniformFloat_v2"
+    ],
+    "exampleProjectId": "5W7X2f"
+}
