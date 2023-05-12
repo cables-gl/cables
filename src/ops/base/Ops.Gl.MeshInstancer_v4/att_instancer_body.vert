@@ -14,4 +14,5 @@ frag_instColor=instColor;
 frag_instColor=vec4(1.0);
 #endif
 
+
 frag_instIndex=instanceIndex;

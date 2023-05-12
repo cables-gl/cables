@@ -218,6 +218,7 @@ const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
 const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
+const inAoChannel = op.inSwitch("AO UV Channel", ["1", "2"], 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
 const inEmissiveMaskIntensity = op.inFloatSlider("Emissive Mask Intensity", 1);
 const inEnvMapIntensity = op.inFloatSlider("Env Map Intensity", 1);
@@ -234,6 +235,10 @@ const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 discardTransPxl.setUiAttribs({ "hidePort": true });
 
 op.setPortGroup("Opacity Texture", [alphaMaskSource, discardTransPxl]);
+
+inAoChannel.onChange =
+    inEnvMapBlend.onChange =
+    alphaMaskSource.onChange = updateDefines;
 
 const outTrigger = op.outTrigger("Trigger Out");
 const shaderOut = op.outObject("Shader", null, "shader");
@@ -588,10 +593,10 @@ function updateDefines()
     shader.toggleDefine("ALPHA_MASK_R", alphaMaskSource.get() == "R");
     shader.toggleDefine("ALPHA_MASK_G", alphaMaskSource.get() == "G");
     shader.toggleDefine("ALPHA_MASK_B", alphaMaskSource.get() == "B");
-}
 
-inEnvMapBlend.onChange = updateDefines;
-alphaMaskSource.onChange = updateDefines;
+    shader.toggleDefine("AO_CHAN_0", inAoChannel.get() == "1");
+    shader.toggleDefine("AO_CHAN_1", inAoChannel.get() == "2");
+}
 
 function updateAlphaTexture()
 {
