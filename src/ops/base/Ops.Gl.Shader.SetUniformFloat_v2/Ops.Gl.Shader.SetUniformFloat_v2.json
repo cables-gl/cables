@@ -42,6 +42,11 @@
             {
                 "type": 5,
                 "name": "Type"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.Shader.SetUniformFloat_v2"

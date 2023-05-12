@@ -13,7 +13,7 @@ const Link = function (scene)
 {
     EventTarget.apply(this);
 
-    this.id = CABLES.uuid();
+    this.id = CABLES.simpleId();
     this.portIn = null;
     this.portOut = null;
     this.scene = scene; // todo: make private and rename to patch

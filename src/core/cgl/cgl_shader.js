@@ -1,6 +1,6 @@
 import { ShaderLibMods } from "./cgl_shader_lib";
 import { now } from "../timer";
-import { simpleId, generateUUID } from "../utils";
+import { simpleId } from "../utils";
 import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
 import { CONSTANTS } from "./constants";
@@ -1103,7 +1103,7 @@ Shader.prototype.getCurrentModules = function () { return this._modules; };
 Shader.prototype.addModule = function (mod, sibling)
 {
     if (this.hasModule(mod.id)) return;
-    if (!mod.id) mod.id = generateUUID();
+    if (!mod.id) mod.id = CABLES.simpleId();
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
     if (sibling && !sibling.group) sibling.group = simpleId();
@@ -1562,8 +1562,10 @@ Shader.prototype._bindTextures = function ()
             {
                 this._textureStackUni[i].setValue(i);
                 bindOk = this._cgl.setTexture(i, t, this._textureStackType[i]);
+
+                // console.log(bindOk, i, t, this._textureStackType[i]);
             }
-            if (!bindOk) this._log.warn("tex bind failed", this.getName(), this._textureStackUni[i]);
+            if (!bindOk) console.warn("tex bind failed", this.getName(), this._textureStackUni[i]);
         }
     }
 };
