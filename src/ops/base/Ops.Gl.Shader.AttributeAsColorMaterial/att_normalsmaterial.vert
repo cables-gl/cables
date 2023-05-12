@@ -1,7 +1,9 @@
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
+IN vec2 attrTexCoord1;
 IN vec3 attrVertNormal,attrTangent,attrBiTangent;
 OUT vec2 texCoord;
+OUT vec2 texCoord1;
 OUT vec3 normal;
 OUT vec3 tangent;
 OUT vec3 bitangent;
@@ -21,6 +23,7 @@ UNI mat4 viewMatrix;
 void main()
 {
     texCoord=attrTexCoord;
+    texCoord1=attrTexCoord1;
     vec3 norm=attrVertNormal;
     tangent=attrTangent;
     bitangent=attrBiTangent;

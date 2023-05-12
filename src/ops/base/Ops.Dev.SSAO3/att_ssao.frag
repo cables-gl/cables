@@ -73,7 +73,7 @@ vec3 mynormal()
     float size=1.0;
     float pixelSize=3.0*(1.0/float(textureSize(depthTex,0).x));
 
-    float strength=55.0;
+    float strength=12.0;
 
     float tl = abs(texture(depthTex, texCoord + (size*pixelSize) * vec2(-1.0, -1.0)).x);   // top left
     float  l = abs(texture(depthTex, texCoord + (size*pixelSize) * vec2(-1.0,  0.0)).x);   // left
@@ -149,6 +149,7 @@ void main()
     col.rgb = vec3(saturate(ao + base));
 
     {{MODULE_COLOR}}
+    // col.rgb=normal.rgb;
     outColor = col;
 }
 

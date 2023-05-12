@@ -220,6 +220,11 @@
             },
             {
                 "type": 0,
+                "name": "AO UV Channel index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Emissive Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"

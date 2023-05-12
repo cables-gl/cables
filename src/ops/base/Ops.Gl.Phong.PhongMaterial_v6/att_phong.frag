@@ -2,6 +2,18 @@ IN vec3 viewDirection;
 IN vec3 normInterpolated;
 IN vec2 texCoord;
 
+#ifdef AO_CHAN_1
+    #ifndef ATTRIB_texCoord1
+        IN vec2 texCoord1;
+    #endif
+#endif
+
+#ifdef HAS_TEXTURE_AO
+vec2 tcAo;
+#endif
+
+
+
 #ifdef ENABLE_FRESNEL
     IN vec4 cameraSpace_pos;
 #endif
@@ -389,6 +401,15 @@ void main()
     {{MODULE_BASE_COLOR}}
 
 
+
+    #ifdef AO_CHAN_0
+        vec2 tcAo=texCoord;
+    #endif
+    #ifdef AO_CHAN_1
+        vec2 tcAo=texCoord1;
+    #endif
+
+
     vec3 viewDirection = normalize(v_viewDirection);
 
     #ifdef DOUBLE_SIDED
@@ -492,8 +513,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTURE_AO
-            // luminanceColor *= mix(vec3(1.), texture(texAO, texCoord).rgb, inTextureIntensities.AO);
-            luminanceColor *= texture(texAO, texCoord).g*inTextureIntensities.AO;
+            luminanceColor *= texture(texAO, tcAo).g*inTextureIntensities.AO;
         #endif
 
         #ifdef ENV_BLEND_ADD
@@ -534,4 +554,5 @@ void main()
     {{MODULE_COLOR}}
 
     outColor = col;
+
 }

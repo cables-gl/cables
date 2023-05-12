@@ -1,7 +1,6 @@
 const
     inRender = op.inTrigger("Render"),
     inSelect = op.inValueSelect("Uniform"),
-    // inValue = op.inValue("Value"),
     inValue = op.inTexture("Texture"),
     next = op.outTrigger("Next"),
     outType = op.outString("Type");
@@ -26,9 +25,8 @@ inRender.onTriggered = function ()
     if (doSetupUniform) setupUniform();
 
     if (uniform)
-    {
         old = shader.setUniformTexture(uniform, inValue.get());
-    }
+
     CGL.MESH.lastShader = null;
     CGL.MESH.lastMesh = null;
 
@@ -51,7 +49,7 @@ function setupUniform()
     {
         uniform = shader.getUniform((inSelect.get() || "").split(" ")[0]);
 
-        if (!uniform) op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+        if (!uniform) op.setUiError("nouni", "uniform unknown", 1);
         else op.setUiError("nouni", null);
 
         doSetupUniform = false;
