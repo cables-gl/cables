@@ -1570,6 +1570,7 @@ Shader.prototype._bindTextures = function ()
 
 Shader.prototype.setUniformTexture = function (uni, tex)
 {
+    tex = tex || CGL.Texture.getTempTexture(this._cgl);
     for (let i = 0; i < this._textureStackUni.length; i++)
         if (this._textureStackUni[i] == uni)
         {

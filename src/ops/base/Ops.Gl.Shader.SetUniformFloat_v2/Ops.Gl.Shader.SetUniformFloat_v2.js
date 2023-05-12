@@ -47,6 +47,7 @@ inRender.onTriggered = function ()
 inSelect.onChange = function ()
 {
     doSetupUniform = true;
+    op.setUiAttrib({ "extendTitle": inSelect.get() });
 };
 
 function setupUniform()

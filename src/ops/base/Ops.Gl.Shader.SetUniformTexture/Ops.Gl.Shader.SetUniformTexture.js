@@ -27,11 +27,6 @@ inRender.onTriggered = function ()
 
     if (uniform)
     {
-        // outType.set(uniform.getType());
-        // const oldValue = uniform.getValue();
-
-        // shader.pushTexture(uniform, inValue.get());
-
         old = shader.setUniformTexture(uniform, inValue.get());
     }
     CGL.MESH.lastShader = null;
@@ -47,6 +42,7 @@ inRender.onTriggered = function ()
 inSelect.onChange = function ()
 {
     doSetupUniform = true;
+    op.setUiAttrib({ "extendTitle": inSelect.get() });
 };
 
 function setupUniform()
