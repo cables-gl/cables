@@ -50,6 +50,11 @@ class Uniform extends CgUniform
         this._cgl = __shader._cgl;
     }
 
+    get name()
+    {
+        return this._name;
+    }
+
     copy(newShader)
     {
         const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);
@@ -456,7 +461,6 @@ class Uniform extends CgUniform
         this._value = v || mat4.create();
     }
 
-
     updateValueArrayT()
     {
         if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
@@ -474,6 +478,7 @@ class Uniform extends CgUniform
             this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
             this._cgl.profileData.profileShaderGetUniform++;
             this._cgl.profileData.profileShaderGetUniformName = this._name;
+            console.log(this._loc, this._name);
         }
         this._cgl.profileData.profileUniformCount++;
 

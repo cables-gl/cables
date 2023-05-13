@@ -42,6 +42,11 @@
             {
                 "type": 5,
                 "name": "Type"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.Shader.SetUniformFloat_v2"
@@ -67,7 +72,6 @@
             "date": 1662567079136
         }
     ],
-
     "relatedops": [
         "Ops.Gl.Shader.SetUniformTexture"
     ],

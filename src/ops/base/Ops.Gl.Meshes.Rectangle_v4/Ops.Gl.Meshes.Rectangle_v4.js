@@ -144,11 +144,11 @@ function rebuild()
     if (axis.get() == "xy") curAxis = AXIS_XY;
     if (axis.get() == "xz") curAxis = AXIS_XZ;
 
-    const tc = new Float32Array(numColumns * numRows * 2);
-    const verts = new Float32Array(numColumns * numRows * 3);
-    const norms = new Float32Array(numColumns * numRows * 3);
-    const tangents = new Float32Array(numColumns * numRows * 3);
-    const biTangents = new Float32Array(numColumns * numRows * 3);
+    const tc = new Float32Array((numColumns + 1) * (numRows + 1) * 2);
+    const verts = new Float32Array((numColumns + 1) * (numRows + 1) * 3);
+    const norms = new Float32Array((numColumns + 1) * (numRows + 1) * 3);
+    const tangents = new Float32Array((numColumns + 1) * (numRows + 1) * 3);
+    const biTangents = new Float32Array((numColumns + 1) * (numRows + 1) * 3);
 
     let idxTc = 0;
     let idxVert = 0;
@@ -213,7 +213,7 @@ function rebuild()
             const v3 = ind + numColumns + 1;
             const v4 = ind + 1 + numColumns + 1;
 
-            if (curAxis == AXIS_XY)// default
+            if (curAxis == AXIS_XY) // default
             {
                 indices[idx++] = v1;
                 indices[idx++] = v2;

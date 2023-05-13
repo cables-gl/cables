@@ -23,6 +23,15 @@ OUT vec2 texCoord;
 OUT vec3 normInterpolated;
 OUT vec3 fragPos;
 
+#ifdef AO_CHAN_1
+    #ifndef ATTRIB_attrTexCoord1
+        IN vec2 attrTexCoord1;
+        OUT vec2 texCoord1;
+        #define ATTRIB_attrTexCoord1
+        #define ATTRIB_texCoord1
+    #endif
+#endif
+
 #ifdef HAS_TEXTURE_NORMAL
     OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 #endif
@@ -81,8 +90,12 @@ void main()
 
     texCoord=attrTexCoord;
     texCoord.y = 1. - texCoord.y;
-    vec3 norm=attrVertNormal;
 
+    #ifdef ATTRIB_texCoord1
+        texCoord1=attrTexCoord1;
+    #endif
+
+    vec3 norm=attrVertNormal;
     vec3 tangent = attrTangent;
     vec3 bitangent = attrBiTangent;
 

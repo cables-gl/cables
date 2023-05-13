@@ -1,5 +1,4 @@
 import { EventTarget } from "./eventtarget";
-import { generateUUID } from "./utils";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";

@@ -127,7 +127,6 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
         this._resizeAttr(array, attr);
     }
 
-
     if (end >= array.length - 1)
     {
         this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
@@ -181,8 +180,6 @@ Mesh.prototype._bufferArray = function (array, attr)
         }
     }
     else floatArray = array;
-
-    // if (attr && floatArray) attr.floatArray = floatArray;
 
     attr.arrayLength = floatArray.length;
     attr.floatArray = floatArray;

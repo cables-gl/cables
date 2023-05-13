@@ -8,7 +8,8 @@ const
     inZ = op.inValue("Z", 1),
     inW = op.inValue("W", 1),
     next = op.outTrigger("Next"),
-    outType = op.outString("Type");
+    outType = op.outString("Type"),
+    outFound = op.outBoolNum("Found");
 
 let shader = null;
 const cgl = op.patch.cgl;
@@ -47,6 +48,7 @@ inRender.onTriggered = function ()
 inSelect.onChange = function ()
 {
     doSetupUniform = true;
+    op.setUiAttrib({ "extendTitle": inSelect.get() });
 };
 
 function setupUniform()
@@ -62,10 +64,18 @@ function setupUniform()
             inW.setUiAttribs({ "greyout": uniform.getType() == "f" || uniform.getType() == "2f" || uniform.getType() == "3f" });
         }
 
-        if (!uniform) op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
-        else op.setUiError("nouni", null);
-
         doSetupUniform = false;
+
+        if (!uniform)
+        {
+            op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+            outFound.set(false);
+        }
+        else
+        {
+            op.setUiError("nouni", null);
+            outFound.set(true);
+        }
     }
 }
 

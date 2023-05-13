@@ -1,7 +1,7 @@
 const
     inRender = op.inTrigger("Render"),
-    inSelect = op.inValueSelect("Uniform"),
-    inValue = op.inTexture("Texture"),
+    inUniName = op.inValueSelect("Uniform"),
+    inTex = op.inTexture("Texture"),
     next = op.outTrigger("Next"),
     outFound = op.outBoolNum("Found");
 
@@ -28,29 +28,48 @@ inRender.onTriggered = function ()
 
     if (uniform)
     {
-        old = shader.setUniformTexture(uniform, inValue.get());
+        // old = shader.setUniformTexture(uniform, inTex.get());
     }
     CGL.MESH.lastShader = null;
     CGL.MESH.lastMesh = null;
 
+    // console.log("uniformtexture");
+
+    let oldIdx = -1;
+    for (let i = 0; i < cgl.getShader()._textureStackUni.length; i++)
+    {
+        // console.log(i)
+        const uni = cgl.getShader()._textureStackUni[i];
+
+        // console.log(uni.name, uniform.name);
+        if (uni.name == uniform.name)
+        {
+            oldIdx = i;
+            old = cgl.getShader()._textureStackTexCgl[i];
+            cgl.getShader()._textureStackTexCgl[i] = inTex.get();
+        }
+
+        // console.log(cgl.getShader()._textureStackTexCgl[i],cgl.getShader()._textureStackUni[i]);
+    }
+
     next.trigger();
 
-    if (uniform && old) shader.setUniformTexture(uniform, old);
+    if (uniform && old && oldIdx != -1) cgl.getShader()._textureStackTexCgl[oldIdx] = old;// shader.setUniformTexture(uniform, old);
     CGL.MESH.lastShader = null;
     CGL.MESH.lastMesh = null;
 };
 
-inSelect.onChange = function ()
+inUniName.onChange = function ()
 {
     doSetupUniform = true;
-    op.setUiAttrib({ "extendTitle": inSelect.get() });
+    op.setUiAttrib({ "extendTitle": inUniName.get() });
 };
 
 function setupUniform()
 {
     if (shader)
     {
-        uniform = shader.getUniform((inSelect.get() || "").split(" ")[0]);
+        uniform = shader.getUniform((inUniName.get() || "").split(" ")[0]);
         doSetupUniform = false;
 
         if (!uniform)
@@ -79,6 +98,6 @@ function setupShader()
 
     if (names.length === 0) names = ["none"];
 
-    inSelect.setUiAttribs({ "values": names });
+    inUniName.setUiAttribs({ "values": names });
     op.refreshParams();
 }

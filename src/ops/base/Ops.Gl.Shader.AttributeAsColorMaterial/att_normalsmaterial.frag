@@ -3,6 +3,7 @@ IN vec3 outTangent;
 IN vec3 outBiTangent;
 IN mat4 mMatrix;
 IN vec2 texCoord;
+IN vec2 texCoord1;
 IN vec3 vert;
 IN mat4 mvMatrix;
 
@@ -30,6 +31,9 @@ void main()
     #endif
     #ifdef SHOW_TEXCOORDS
         attr.xy=texCoord;
+    #endif
+    #ifdef SHOW_TEXCOORDS1
+        attr.xy=texCoord1;
     #endif
     #ifdef SHOW_POSITION
         attr.xyz=vert;

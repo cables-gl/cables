@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "e43be3e0-b75b-4881-95c3-2c6ee81bff8c",
-    "created": 1662554294106,
+    "id": "26b6acbf-7c34-4552-8419-f1146ae3225f",
+    "created": 1683904593935,
     "layout": {
         "portsIn": [
             {
@@ -30,7 +30,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Gl.Shader.SetUniformTexture"
+        "name": "Ops.Gl.Shader.SetUniformTexture_v2"
     },
     "summary": "set a uniform value of the current shader",
     "docs": {
@@ -51,6 +51,17 @@
             "message": "Ops.User.pandur.SetUniformTexture renamed to Ops.Gl.Shader.SetUniformTexture",
             "author": "pandur",
             "date": 1662567063395
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.SetUniformTexture",
+            "author": "pandur",
+            "date": 1683904593935
+        },
+        {
+            "message": "Ops.Patch.PP_wigw.SetUniformTexture2 renamed to Ops.Gl.Shader.SetUniformTexture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1683907451187
         }
     ],
     "relatedops": [
