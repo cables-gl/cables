@@ -108,7 +108,8 @@ function rebuild()
         const p = inPorts[i].get();
         if (p && parent)
         {
-            p.dataset.cablesChildId = op.id + "_" + i;
+            if (!p.dataset)console.log("p no dataset ?!");
+            else p.dataset.cablesChildId = op.id + "_" + i;
             parent.appendChild(p);
         }
     }
