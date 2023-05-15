@@ -144,7 +144,7 @@ const Context = function (_patch)
             // safari
             if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
             {
-                this.glUseHalfFloatTex = true;
+                // this.glUseHalfFloatTex = true;
             }
 
             // ios

@@ -7,7 +7,6 @@ inName.onChange =
 inShader.onChange = function ()
 {
     op.setTitle("Material " + inName.get());
-    // outMat.set(null);
 
     outMat.setRef(inShader.get() || op.patch.cgl.getDefaultShader());
 };
