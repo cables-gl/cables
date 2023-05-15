@@ -35,6 +35,7 @@ inRender.onTriggered = function ()
 
     // console.log("uniformtexture");
 
+    let oldIdx = -1;
     for (let i = 0; i < cgl.getShader()._textureStackUni.length; i++)
     {
         // console.log(i)
@@ -42,14 +43,18 @@ inRender.onTriggered = function ()
 
         // console.log(uni.name, uniform.name);
         if (uni.name == uniform.name)
+        {
+            oldIdx = i;
+            old = cgl.getShader()._textureStackTexCgl[i];
             cgl.getShader()._textureStackTexCgl[i] = inTex.get();
+        }
 
         // console.log(cgl.getShader()._textureStackTexCgl[i],cgl.getShader()._textureStackUni[i]);
     }
 
     next.trigger();
 
-    // if (uniform && old) shader.setUniformTexture(uniform, old);
+    if (uniform && old && oldIdx != -1) cgl.getShader()._textureStackTexCgl[oldIdx] = old;// shader.setUniformTexture(uniform, old);
     CGL.MESH.lastShader = null;
     CGL.MESH.lastMesh = null;
 };

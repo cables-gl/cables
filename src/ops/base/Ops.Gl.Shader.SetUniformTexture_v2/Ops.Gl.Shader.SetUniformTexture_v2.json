@@ -30,7 +30,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Patch.PP_wigw.SetUniformTexture2"
+        "name": "Ops.Gl.Shader.SetUniformTexture_v2"
     },
     "summary": "set a uniform value of the current shader",
     "docs": {
