@@ -14,11 +14,11 @@ let gainNode = audioCtx.createGain();
 const destinationNode = audioCtx.destination;
 let oldAudioIn = null;
 let connectedToOut = false;
-// let fsElement = null;
 
 inMute.onChange = () =>
 {
     mute(inMute.get());
+    updateStateError();
 };
 
 inGain.onChange = setVolume;
@@ -141,8 +141,14 @@ function updateStateError()
     outState.set(audioCtx.state);
     op.logVerbose("audioCtx.state change", audioCtx.state);
 
-    if (audioCtx.state == "suspended") op.setUiError("ctxSusp", "Your Browser suspended audio context, use playButton op to play audio after a user interaction");
-    else op.setUiError("ctxSusp", null);
+    op.setUiError("ctxSusp", null);
+    if (audioCtx.state == "suspended")
+    {
+        const errorText = "Your Browser suspended audio context, use playButton op to play audio after a user interaction";
+        let level = 2;
+        if (inMute.get()) level = 0;
+        op.setUiError("ctxSusp", errorText, level);
+    }
 
     updateAudioStateButton();
 }
