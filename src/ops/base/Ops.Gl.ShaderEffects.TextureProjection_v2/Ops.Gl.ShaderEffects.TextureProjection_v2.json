@@ -15,7 +15,14 @@
             },
             {
                 "type": 0,
-                "name": "Scale",
+                "name": "blendMode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -25,14 +32,7 @@
             },
             {
                 "type": 0,
-                "name": "blendMode index",
-                "group": "Blending",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Amount",
-                "group": "Blending",
+                "name": "Scale",
                 "subType": "number"
             },
             {
@@ -121,7 +121,6 @@
     ],
     "summary": "texture projection on meshes",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "0Xgj7wKl7Ko",

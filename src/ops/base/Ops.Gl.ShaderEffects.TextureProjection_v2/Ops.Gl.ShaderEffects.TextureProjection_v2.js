@@ -3,12 +3,11 @@ const
     next = op.outTrigger("trigger"),
     inTex = op.inTexture("Texture"),
 
-    inScale = op.inValue("Scale", 10),
-
-    inTarget = op.inSwitch("Target", ["Color", "Pointsize", "Alpha"], "Color"),
-
     inBlend = CGL.TextureEffect.AddBlendSelect(op, "blendMode"),
     inAmount = op.inValueSlider("Amount", 0.3),
+
+    inTarget = op.inSwitch("Target", ["Color", "Pointsize", "Alpha"], "Color"),
+    inScale = op.inValue("Scale", 10),
 
     inUseTexAlpha = op.inBool("Use Texture Alpha", false),
 

@@ -19,73 +19,13 @@ let
     needsRebuild = true,
     mesh;
 
-inDraw.setUiAttribs({ "title": "Render mesh" });
-let doscale = true;
-
-const vScale = vec3.create();
-vec3.set(vScale, 1, 1, 1);
-
-op.toWorkPortsNeedToBeLinked(inTrigger);
-
-// set event handlers
-inTrigger.onTriggered = function ()
-{
-    if (needsRebuild) buildMesh();
-
-    if (inDraw.get())
-    {
-        if (doscale)
-        {
-            cgl.pushModelMatrix();
-            mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
-        }
-        mesh.render(cgl.getShader());
-        if (doscale) cgl.popModelMatrix();
-    }
-    outTrigger.trigger();
-};
-
-inStacks.onChange =
-inSlices.onChange =
-inStacklimit.onChange = function ()
-{
-    needsRebuild = true;
-};
-
-outGeometry.onLinkChanged = () =>
-{
-    needsRebuild = true;
-    updateRadius();
-};
-
-inRadius.onChange = updateRadius;
-
-function updateRadius()
-{
-    doscale = !outGeometry.isLinked();
-
-    if (!doscale)
-    {
-        needsRebuild = true;
-    }
-    else
-    {
-        vec3.set(vScale, inRadius.get(), inRadius.get(), inRadius.get());
-    }
-}
-
-// set lifecycle handlers
-op.onDelete = function () { if (mesh)mesh.dispose(); };
-
 function buildMesh()
 {
     const
         stacks = Math.ceil(Math.max(inStacks.get(), 2)),
         slices = Math.ceil(Math.max(inSlices.get(), 3)),
-        stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks);
-    let radius = inRadius.get();
-
-    if (doscale)radius = 1;
+        stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks),
+        radius = inRadius.get();
     let
         positions = [],
         texcoords = [],
@@ -94,9 +34,8 @@ function buildMesh()
         biTangents = [],
         indices = [],
         x, y, z, d, t, a,
-        o, u, v, j;
-
-    for (let i = o = 0; i < stacks + 1; i++)
+        o, u, v, i, j;
+    for (i = o = 0; i < stacks + 1; i++)
     {
         v = (i / stacks - 0.5) * Math.PI;
         y = Math.sin(v);
@@ -147,13 +86,6 @@ function buildMesh()
     geom.biTangents = biTangents;
     geom.verticesIndices = indices;
 
-    for (let i = 0; i < tangents.length; i += 3)
-    {
-        tangents[i + 0] = -tangents[i + 0];
-        tangents[i + 1] = tangents[i + 1];
-        tangents[i + 2] = -tangents[i + 2];
-    }
-
     outGeometry.set(null);
     outGeometry.set(geom);
 
@@ -162,3 +94,23 @@ function buildMesh()
 
     needsRebuild = false;
 }
+
+// set event handlers
+inTrigger.onTriggered = function ()
+{
+    if (needsRebuild) buildMesh();
+    if (inDraw.get()) mesh.render(cgl.getShader());
+    outTrigger.trigger();
+};
+
+inStacks.onChange =
+inSlices.onChange =
+inStacklimit.onChange =
+inRadius.onChange = function ()
+{
+    // only calculate once, even after multiple settings could were changed
+    needsRebuild = true;
+};
+
+// set lifecycle handlers
+op.onDelete = function () { if (mesh)mesh.dispose(); };
