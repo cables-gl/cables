@@ -120,7 +120,8 @@ op.updateBlueprint = (ignoreLinks = false) =>
     loadingOut.set(true);
 
     loadingId = op.patch.loading.start("blueprint", op.id, op);
-    op.patch.loading.finished(initialLoadingId);
+    if (initialLoadingId) op.patch.loading.finished(initialLoadingId);
+    initialLoadingId = null;
 
     const doneCb = (err, serializedOps) =>
     {

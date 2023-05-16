@@ -592,7 +592,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found) this._log.warn("core patch deleteop: not found...");
+    if (!found) this._log.warn("core patch deleteop: not found...", opid);
 };
 
 Patch.prototype.getFrameNum = function ()
