@@ -246,6 +246,7 @@ function addBlueprintInfoToOp(serializedOp)
     if (!serializedOp.storage) serializedOp.storage = {};
     if (!serializedOp.storage.blueprint) serializedOp.storage.blueprint = {};
 
+    if (!serializedOp.objName && CABLES.OPS.hasOwnProperty(serializedOp.opId)) serializedOp.objName = CABLES.OPS[serializedOp.opId].objName;
     serializedOp.storage.blueprint.patchId = patchId;
 
     if (CABLES.Op.isSubPatchOpName(serializedOp.objName))
