@@ -478,10 +478,9 @@ class Uniform extends CgUniform
             this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
             this._cgl.profileData.profileShaderGetUniform++;
             this._cgl.profileData.profileShaderGetUniformName = this._name;
-            console.log(this._loc, this._name);
         }
-        this._cgl.profileData.profileUniformCount++;
 
+        this._cgl.profileData.profileUniformCount++;
         this._shader.getCgl().gl.uniform1i(this._loc, this._value);
         this.needsUpdate = false;
     }
