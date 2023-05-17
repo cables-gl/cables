@@ -5,6 +5,8 @@ There are a few special namespaces that are bound to permission or op visibility
 
 ## Renaming ops
 
+![Button](./img/rename_op.png)
+
 You can access the op rename page via the op page ("view documentation" from the editor). If you have the proper permissions,
 you will see a "manage op" section a bit down the page and a "rename" button. This will take you to a page with a form that
 will guide you through the renaming process.

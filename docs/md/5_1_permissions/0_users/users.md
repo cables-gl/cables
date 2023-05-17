@@ -11,6 +11,8 @@ These users may:
 - view any private patch with a secret url, but not open them in the editor
 - see the user-profile of any cables-user (like [this](/user/cables))
 
+---
+
 ## Registered users
 
 Registered users have an account on [cables.gl](https://cables.gl) and are currently logged in.

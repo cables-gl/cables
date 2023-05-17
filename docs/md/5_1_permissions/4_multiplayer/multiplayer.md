@@ -6,6 +6,8 @@ Users that have at least "Read Only" access to the patch, through [collaboration
 
 There are currently three levels of access in a multiplayer session, only the "Pilot" can make changes seen by all other "Participants"
 
+---
+
 ## Non-Participant
 
 If you are in a patch and there is a multiplayer-session going on, you can continue editing the patch (given you have the proper permissions) or you can:
@@ -15,7 +17,12 @@ If you are in a patch and there is a multiplayer-session going on, you can conti
 - start a multiplayer-session if none exists, yet
 - chat with other people in the patch (i.e. to start a multiplayer-session)
 
+---
+
 ## Participant
+
+![join](./img/join.png)
+
 
 Once you join a multiplayer session, you will become a "Participant". As such you can:
 
@@ -26,7 +33,12 @@ Once you join a multiplayer session, you will become a "Participant". As such yo
 - re-sync your patch with the state of the pilot, if it went out of sync
 - leave the session
 
+---
+
 ## Pilot
+
+![join](./img/multiplayer.png)
+
 
 Starting a multiplayer-session will make you the "Pilot". If you join a session later, you can request the pilot-seat to make changes
 to the patch.

@@ -4,6 +4,10 @@ Cables allows to create teams to share [ops](../3_ops/ops) and [patches](../1_pa
 
 Users can join a team by either being invited to it by other members, requesting access to the team or simply joining public teams on their own.
 
+![Button](./img/teamlogos.png)
+
+---
+
 ## Access-Level
 
 ### Non-Member
@@ -18,7 +22,7 @@ Any user that is not a member of a team already, can:
 
 ### Read-Only
 
-Any team member with "Read Only" permissions adittionaly can:
+Any team member with "Read Only" permissions additionally can:
 
 - View the teams page with all public and private patches
 - Use the [ops](../3_ops/ops) provided by the team in ALL their patches
@@ -43,6 +47,8 @@ As a team-owner you can:
 
 - Delegate ownership of the team to some other member
 
+---
+
 ## Visibility
 
 Teams itself have three levels of visibility: "public", "unlisted" and "private".
@@ -65,10 +71,14 @@ Private teams will be:
 - Accessible only by members, invite people to add them to the team
 - Linked on the patch page for patches that added the team only for members
 
+---
+
 ## Sharing patches
 
 To share [patches](../1_patches/patches) with a team, you need both "Full Access" on the patch and on the team.
 Add the team on the "Collaboration" tab in the settings of the patch in question.
+
+---
 
 ## Sharing ops
 

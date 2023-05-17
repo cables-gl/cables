@@ -3,6 +3,8 @@
 Patches on [cables.gl](https://cables.gl) cables.gl can be private or public, pick one of the two for the level of permission
 and collaboration you deem appropriate. We strongly encourage making your patch public to share your work with the community!
 
+---
+
 ## Public patches
 
 You can share patches with the whole community by making them public in the settings of the patch. There is a few restrictions on which
@@ -16,6 +18,8 @@ Public patches can be:
 - Voted on by any registered user to appear in the "Top Patches"
 - We sometimes pick social media posts from the "Top Patches" to publish on the cables accounts, you will be properly credited
 
+---
+
 ## Private patches
 
 Once you create or clone a patch on [cables.gl](https://cables.gl) it is marked as private. This means:
@@ -27,17 +31,22 @@ Once you create or clone a patch on [cables.gl](https://cables.gl) it is marked 
 
 ### Secret URL
 
-Cables allows you to create a secret url for any private patch. This URL can then be shared with people that are not collaborators to 
-the patch or have no account on [cables.gl](https://cables.gl). Whith this URL these users can:
+Cables allows you to create a secret url for any private patch. This URL can then be shared with people that are not collaborators to the patch or have no account on [cables.gl](https://cables.gl). 
+
+With this URL users can:
 
 - View the patch on the patchpage (like [this](/p/RnUxjX))
 - NOT open it in the editor
+
+---
 
 ## Shared patches
 
 There are several ways to share patches on [cables.gl](https://cables.gl). Depending on your usecase or audience, pick any of the following:
 
 ### Collaborators
+
+![Button](./img/collaboration.png)
 
 By adding other users to your patch, you grant them "read only" or "full access" to your patch. Use this to work on patches with other people.
 
@@ -62,6 +71,8 @@ Users with "Full Access" can do all of the above, and:
 - Delegate ownership of a patch to some other collaborator
 
 ### Teams
+
+![Button](./img/teams.png)
 
 Using the "Collaboration" tab in the patch settings you can add one or multiple [teams](../2_teams/teams) to the patch (if you have "Full Access").
 

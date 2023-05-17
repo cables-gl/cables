@@ -10,6 +10,8 @@ There are a few special namespaces that are bound to permission. To move ops aro
 
 Sorted by level of visibility to other users, these are the different types of ops and their namespaces in cables:
 
+---
+
 ## Patch Ops - `Ops.Patch.`
 
 Ops in this namespace are visible and usable by any collaborator to the patch and only available to this patch.
@@ -28,6 +30,8 @@ Use these ops for custom-code that you do not want to share or reuse in any othe
 
 ### Publishing patches
 - Publishing patches with patch ops is fine and the preferred way to publish patches with custom code
+
+---
 
 ## User Ops - `Ops.User.`
 
@@ -48,14 +52,15 @@ better to create a team and use their ops (will "pollute" your op selection less
 - Convert your userops to patchops (use "clone op code") to publish patches
 - This will also let you sleep better, as you can make changes to your userops without the fear of breaking patches that were cloned at one point
 
+---
+
 ## Team Ops - `Ops.Team.`
 
-With a team that you have "Full Access" to (or during creation) you can decide to claim a unique namespace for the team. This will be the place
-that any teammember with "Full Access" can create ops in.
+With a team that you have "Full Access" to (or during creation) you can decide to claim a unique namespace for the team. 
+This will be the place that any teammember with "Full Access" can create ops in.
 
-There are two major usecases for teamops. First, you can obviously use them to work on a project spanning across multiple (versions of) patches, or
-having multiple people work on the code of these ops. Secondly you can group ops together that share a common theme, implement the same library functionality,
-offer some simple solutions to common problems or just have all your custom "ops using arrays" in one place.
+There are two major usecases for teamops. First, you can obviously use them to work on a project spanning across multiple (versions of) patches, or  having multiple people work on the code of these ops. 
+Secondly you can group ops together that share a common theme, implement the same library functionality, offer some simple solutions to common problems or just have all your custom "ops using arrays" in one place.
 
 ### Visibility
 - The ops will be shown on the team page and can be [seen accordingly](../2_teams/teams)
@@ -76,11 +81,12 @@ offer some simple solutions to common problems or just have all your custom "ops
 - If your team is listed as "public", you WILL be able to publish a patch using teamops, people will have to join the team before opening the patch in the editor or cloning, though
 - You are now own your own regarding not breaking clones of patches using your teamop by changing the code!
 
+---
+
 ## Extension Ops - `Ops.Extension.`
 
-Extensions are a way to add code to cables and make it available to ALL users of [cables.gl](https://cables.gl). They can be understood as packages of ops
-that are mature and stable. If you feel your ops fall into this categoy [contact us on Discord](https://discord.gg/AGTarWv) and we will provide you with an
-appropriate namespace.
+Extensions are a way to add code to cables and make it available to ALL users of [cables.gl](https://cables.gl). They can be understood as packages of ops that are mature and stable. 
+If you feel your ops fall into this categoy [contact us on Discord](https://discord.gg/AGTarWv) and we will provide you with an appropriate namespace.
 
 Extensions are bound to [teams](../2_teams/teams) and responsibility of the code, it's quality and stability is entirely on the owner and the members of the
 team. So before applying for an extension namespace, create a team, make it public, and [move](../../5_writing_ops/dev_renaming) your ops to the teams namespace.
