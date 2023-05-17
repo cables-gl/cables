@@ -67,7 +67,7 @@ const Patch = function (cfg)
     this._animReq = null;
     this._opIdCache = {};
     this._triggerStack = [];
-    this.storeObjNames = true; // remove after mai release
+    this.storeObjNames = true; // remove after may release
 
     this.loading = new LoadingStatus(this);
 
@@ -592,7 +592,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found) this._log.warn("core patch deleteop: not found...");
+    if (!found) this._log.warn("core patch deleteop: not found...", opid);
 };
 
 Patch.prototype.getFrameNum = function ()
