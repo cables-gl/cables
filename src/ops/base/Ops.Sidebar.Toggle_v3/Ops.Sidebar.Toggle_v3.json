@@ -40,7 +40,7 @@
             {
                 "type": 0,
                 "name": "Value",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Sidebar.Toggle_v3"
