@@ -42,17 +42,18 @@ const Patch = function (cfg)
     this._log = new Logger("core_patch");
     this.ops = [];
     this.settings = {};
-    this.config = cfg || {
-        "glCanvasResizeToWindow": false,
-        "prefixAssetPath": "",
-        "prefixJsPath": "",
-        "silent": true,
-        "onError": null,
-        "onFinishedLoading": null,
-        "onFirstFrameRendered": null,
-        "onPatchLoaded": null,
-        "fpsLimit": 0,
-    };
+    this.config = cfg ||
+        {
+            "glCanvasResizeToWindow": false,
+            "prefixAssetPath": "",
+            "prefixJsPath": "",
+            "silent": true,
+            "onError": null,
+            "onFinishedLoading": null,
+            "onFirstFrameRendered": null,
+            "onPatchLoaded": null,
+            "fpsLimit": 0,
+        };
     this.timer = new Timer();
     this.freeTimer = new Timer();
     this.animFrameOps = [];
@@ -60,14 +61,13 @@ const Patch = function (cfg)
     this.gui = false;
     CABLES.logSilent = this.silent = true;
     this.profiler = null;
-    // this.onLoadStart = null;
     this.aborted = false;
     this._crashedOps = [];
     this._renderOneFrame = false;
     this._animReq = null;
     this._opIdCache = {};
     this._triggerStack = [];
-    this.storeObjNames = true; // remove after may release
+    this.storeObjNames = false; // remove after may release
 
     this.loading = new LoadingStatus(this);
 
@@ -592,7 +592,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found) this._log.warn("core patch deleteop: not found...");
+    if (!found) this._log.warn("core patch deleteop: not found...", opid);
 };
 
 Patch.prototype.getFrameNum = function ()

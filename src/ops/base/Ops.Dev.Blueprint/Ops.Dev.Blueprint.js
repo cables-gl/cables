@@ -120,7 +120,8 @@ op.updateBlueprint = (ignoreLinks = false) =>
     loadingOut.set(true);
 
     loadingId = op.patch.loading.start("blueprint", op.id, op);
-    op.patch.loading.finished(initialLoadingId);
+    if (initialLoadingId) op.patch.loading.finished(initialLoadingId);
+    initialLoadingId = null;
 
     const doneCb = (err, serializedOps) =>
     {
@@ -246,6 +247,7 @@ function addBlueprintInfoToOp(serializedOp)
     if (!serializedOp.storage) serializedOp.storage = {};
     if (!serializedOp.storage.blueprint) serializedOp.storage.blueprint = {};
 
+    if (!serializedOp.objName && CABLES.OPS.hasOwnProperty(serializedOp.opId)) serializedOp.objName = CABLES.OPS[serializedOp.opId].objName;
     serializedOp.storage.blueprint.patchId = patchId;
 
     if (CABLES.Op.isSubPatchOpName(serializedOp.objName))
