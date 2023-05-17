@@ -1,0 +1,95 @@
+{
+    "id": "a5b09430-df1d-4e76-9a85-e34bfb7f934d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1684237582917
+        },
+        {
+            "message": "Ops.Patch.PXjBmPu.TransformMatrix renamed to Ops.Gl.Matrix.TransformMatrix",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684343699652
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Transform"
+            },
+            {
+                "type": 3,
+                "name": "Matrix"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Z",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "group": "Rotation",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.TransformMatrix"
+    },
+    "authorName": "pandur",
+    "created": 1684237592389
+}
