@@ -320,6 +320,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
                     op.setUiAttrib({ "extendTitle": pSubPatch.uiAttribs.title });
                 }
                 setupPorts(parentSubPatchId, ignoreLinks);
+                op.patch.emitEvent("subpatchesChanged");
                 CABLES.UI.undo.resume();
                 if (originalSaveState === true)
                 {
@@ -341,6 +342,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
             }
             doneCb(data);
             setupPorts(parentSubPatchId);
+            op.patch.emitEvent("subpatchesChanged");
         }
     }
 }
