@@ -24,15 +24,15 @@
     #endif
 
     #ifdef MOD_MAP_TEXCOORD
-        MOD_ntc=texCoord;
+        MOD_ntc=texCoord*1.0/MOD_scale-MOD_offset;
     #endif
 
     #ifdef MOD_MAP_TEXCOORD1
-        MOD_ntc=texCoord1;
+        MOD_ntc=texCoord1*1.0/MOD_scale-MOD_offset;
     #endif
 
     #ifdef MOD_MAP_TEXCOORD2
-        MOD_ntc=texCoord2;
+        MOD_ntc=texCoord2*1.0/MOD_scale-MOD_offset;
     #endif
 
 

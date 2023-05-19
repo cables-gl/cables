@@ -14,9 +14,6 @@ const
 
 op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
-
-inDraw.setUiAttribs({ "title": "Render mesh" });
 
 mapping.set("flat");
 
@@ -47,18 +44,11 @@ op.preRender = () =>
     renderMesh();
 };
 
-render.onLinkChanged = function ()
-{
-    if (!render.isLinked()) geomOut.set(null);
-    else geomOut.setRef(geom);
-};
-
 function renderMesh()
 {
-    if (needsCalc)calc();
-
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
+    if (needsCalc)calc();
     shader = cgl.getShader();
     if (!shader) return;
     oldPrim = shader.glPrimitive;
@@ -153,19 +143,15 @@ function calc()
             }
 
             faces.push(
-                [0, 0, 0],
+                [posx, posy, 0],
                 [oldPosX, oldPosY, 0],
-                [posx, posy, 0]
+                [0, 0, 0]
             );
 
-            texCoords.push(
-                posxTexCoordIn, posyTexCoordIn,
-                oldPosXTexCoord, oldPosYTexCoord,
-                posxTexCoord, posyTexCoord
-            );
+            texCoords.push(posxTexCoord, posyTexCoord, oldPosXTexCoord, oldPosYTexCoord, posxTexCoordIn, posyTexCoordIn);
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
-            biTangents.push(0, -1, 0, 0, -1, 0, 0, -1, 0);
+            biTangents.push(0, 1, 0, 0, 1, 0, 0, 1, 0);
 
             oldPosXTexCoord = posxTexCoord;
             oldPosYTexCoord = posyTexCoord;
@@ -239,8 +225,8 @@ function calc()
                     1, 0, 0, 1, 0, 0, 1, 0, 0
                 );
                 biTangents.push(
-                    0, 0, -1, 0, 0, -1, 0, 0, -1,
-                    0, 0, -1, 0, 0, -1, 0, 0, -1
+                    0, 1, 0, 0, 1, 0, 0, 1, 0,
+                    0, 1, 0, 0, 1, 0, 0, 1, 0
                 );
             }
 
@@ -266,12 +252,13 @@ function calc()
         else geom.texCoords = texCoords;
     }
 
-    geomOut.setRef(geom);
+    geomOut.set(null);
+    geomOut.set(geom);
 
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();
     mesh = null;
-    mesh = op.patch.cg.createMesh(geom);
+    mesh = new CGL.Mesh(cgl, geom);
     needsCalc = false;
 }
 
