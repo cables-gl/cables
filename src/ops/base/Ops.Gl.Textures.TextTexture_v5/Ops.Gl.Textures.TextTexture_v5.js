@@ -1,3 +1,118 @@
+const
+    render = op.inTriggerButton("Render"),
+
+    drawMesh = op.inValueBool("Draw Mesh", true),
+    meshScale = op.inValueFloat("Scale Mesh", 1.0),
+
+    text = op.inString("text", "cables"),
+    font = op.inString("font", "Arial"),
+    weight = op.inString("weight", "normal"),
+    maximize = op.inValueBool("Maximize Size", true),
+    inFontSize = op.inValueFloat("fontSize", 300),
+    lineDistance = op.inValueFloat("Line Height", 1),
+    lineOffset = op.inValueFloat("Vertical Offset", 0),
+    drawDebug = op.inBool("Show Debug", false),
+    inSize = op.inSwitch("Size", ["Auto", "Canvas", "Manual"], "Auto"),
+
+    texWidth = op.inValueInt("texture width", 512),
+    texHeight = op.inValueInt("texture height", 128),
+    tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
+    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
+    align = op.inSwitch("align", ["left", "center", "right"], "center"),
+    valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
+    cachetexture = op.inValueBool("Reuse Texture", true),
+
+    r = op.inValueSlider("r", 1),
+    g = op.inValueSlider("g", 1),
+    b = op.inValueSlider("b", 1),
+    inOpacity = op.inFloatSlider("Opacity", 1),
+
+    bgR = op.inValueSlider("background R", 0),
+    bgG = op.inValueSlider("background G", 0),
+    bgB = op.inValueSlider("background B", 0),
+    bgA = op.inValueSlider("background A", 1),
+
+    next = op.outTrigger("Next"),
+    outRatio = op.outNumber("Ratio"),
+    textureOut = op.outTexture("texture"),
+    outAspect = op.outNumber("Aspect", 1),
+    outLines = op.outNumber("Num Lines");
+
+r.setUiAttribs({ "colorPick": true });
+bgR.setUiAttribs({ "colorPick": true });
+
+op.toWorkPortsNeedToBeLinked(render);
+
+op.setPortGroup("Text Color", [r, g, b, inOpacity]);
+op.setPortGroup("Background", [bgR, bgG, bgB, bgA]);
+op.setPortGroup("Size", [font, , weight, maximize, inFontSize, lineDistance, lineOffset]);
+op.setPortGroup("Texture", [inSize, wrap, texWidth, texHeight, tfilter, aniso]);
+op.setPortGroup("Alignment", [valign, align]);
+op.setPortGroup("Rendering", [drawMesh, meshScale]);
+
+render.onLinkChanged = () =>
+{
+    if (!render.isLinked())textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
+    else textureOut.setRef(tex);
+};
+
+align.onChange =
+    valign.onChange =
+    text.onChange =
+    inFontSize.onChange =
+    weight.onChange =
+    aniso.onChange =
+    font.onChange =
+    lineOffset.onChange =
+    lineDistance.onChange =
+    cachetexture.onChange =
+    texWidth.onChange =
+    texHeight.onChange =
+    maximize.onChange = function () { needsRefresh = true; };
+
+textureOut.ignoreValueSerialize = true;
+
+const cgl = op.patch.cgl;
+let tex = new CGL.Texture(cgl);
+let autoHeight = 0;
+let autoWidth = 0;
+
+const fontImage = document.createElement("canvas");
+fontImage.id = "texturetext_" + CABLES.generateUUID();
+fontImage.style.display = "none";
+document.body.appendChild(fontImage);
+
+let ctx = fontImage.getContext("2d");
+let needsRefresh = true;
+const mesh = CGL.MESHES.getSimpleRect(cgl, "texttexture rect");
+const vScale = vec3.create();
+const shader = new CGL.Shader(cgl, "texttexture");
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setSource(attachments.text_vert, attachments.text_frag);
+const texUni = new CGL.Uniform(shader, "t", "tex");
+const aspectUni = new CGL.Uniform(shader, "f", "aspect", 0);
+const opacityUni = new CGL.Uniform(shader, "f", "a", inOpacity);
+const uniColor = new CGL.Uniform(shader, "3f", "color", r, g, b);
+
+render.onTriggered = doRender;
+inSize.onChange = () =>
+{
+    needsRefresh = true;
+    updateUi();
+};
+
+drawMesh.onChange = updateUi;
+
+op.on("delete", () =>
+{
+    ctx = null;
+    console.log("delete...");
+    fontImage.remove();
+});
+
+updateUi();
+
 function componentToHex(c)
 {
     const hex = c.toString(16);
@@ -9,66 +124,6 @@ function rgbToHex(r, g, b)
     return "#" + componentToHex(Math.floor(r * 255)) + componentToHex(Math.floor(g * 255)) + componentToHex(Math.floor(b * 255));
 }
 
-const
-    render = op.inTriggerButton("Render"),
-    text = op.inString("text", "cables"),
-    font = op.inString("font", "Arial"),
-    weight = op.inString("weight", "normal"),
-    maximize = op.inValueBool("Maximize Size", true),
-    inFontSize = op.inValueFloat("fontSize", 30),
-    lineDistance = op.inValueFloat("Line Height", 1),
-    lineOffset = op.inValueFloat("Vertical Offset", 0),
-    // letterSpacing = op.inValueFloat("Spacing", 0),
-    drawDebug = op.inBool("Show Debug", false),
-    limitLines = op.inValueInt("Limit Lines", 0),
-    inSize = op.inSwitch("Size", ["Auto", "Manual"], "Manual"),
-
-    texWidth = op.inValueInt("texture width", 512),
-    texHeight = op.inValueInt("texture height", 128),
-    tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
-    aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
-    align = op.inSwitch("align", ["left", "center", "right"], "center"),
-    valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
-    cachetexture = op.inValueBool("Reuse Texture", true),
-    drawMesh = op.inValueBool("Draw Mesh", true),
-    meshScale = op.inValueFloat("Scale Mesh", 1.0),
-    renderHard = op.inValueBool("Hard Edges", false),
-    inOpacity = op.inFloatSlider("Opacity", 1),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    next = op.outTrigger("Next"),
-    outRatio = op.outNumber("Ratio"),
-    textureOut = op.outTexture("texture"),
-    outAspect = op.outNumber("Aspect", 1),
-    outLines = op.outNumber("Num Lines");
-
-r.setUiAttribs({ "colorPick": true });
-
-op.toWorkPortsNeedToBeLinked(render);
-
-op.setPortGroup("Color", [r, g, b]);
-op.setPortGroup("Size", [font, inSize, weight, maximize, inFontSize, lineDistance, lineOffset]);
-op.setPortGroup("Texture", [texWidth, texHeight, tfilter, aniso]);
-op.setPortGroup("Alignment", [valign, align]);
-op.setPortGroup("Rendering", [drawMesh, renderHard, meshScale]);
-
-align.onChange =
-    valign.onChange =
-    text.onChange =
-    inFontSize.onChange =
-    weight.onChange =
-    font.onChange =
-    lineOffset.onChange =
-    lineDistance.onChange =
-    cachetexture.onChange =
-    // letterSpacing.onChange =
-    limitLines.onChange =
-    texWidth.onChange =
-    texHeight.onChange =
-    maximize.onChange = function () { needsRefresh = true; };
-
 wrap.onChange = () =>
 {
     if (tex)tex.delete();
@@ -76,11 +131,11 @@ wrap.onChange = () =>
     needsRefresh = true;
 };
 
-r.onChange = g.onChange = b.onChange = inOpacity.onChange = function ()
+bgR.onChange = bgG.onChange = bgB.onChange = bgA.onChange = r.onChange = g.onChange = b.onChange = inOpacity.onChange = () =>
 {
-    if (!drawMesh.get() || textureOut.isLinked())
-        needsRefresh = true;
+    if (!drawMesh.get() || textureOut.isLinked()) needsRefresh = true;
 };
+
 textureOut.onLinkChanged = () =>
 {
     if (textureOut.isLinked()) needsRefresh = true;
@@ -88,45 +143,14 @@ textureOut.onLinkChanged = () =>
 
 op.patch.on("fontLoaded", (fontName) =>
 {
-    if (fontName == font.get())
-    {
-        needsRefresh = true;
-    }
+    if (fontName == font.get()) needsRefresh = true;
 });
 
-render.onTriggered = doRender;
-
-aniso.onChange =
-tfilter.onChange = () =>
+aniso.onChange = tfilter.onChange = () =>
 {
     tex = null;
     needsRefresh = true;
 };
-
-textureOut.ignoreValueSerialize = true;
-
-const cgl = op.patch.cgl;
-const body = document.getElementsByTagName("body")[0];
-
-let tex = new CGL.Texture(cgl, { "name": "TextTexture" });
-const fontImage = document.createElement("canvas");
-fontImage.id = "texturetext_" + CABLES.generateUUID();
-fontImage.style.display = "none";
-body.appendChild(fontImage);
-
-const ctx = fontImage.getContext("2d");
-let needsRefresh = true;
-const mesh = CGL.MESHES.getSimpleRect(cgl, "texttexture rect");
-const vScale = vec3.create();
-
-const shader = new CGL.Shader(cgl, "texttexture");
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-shader.setSource(attachments.text_vert, attachments.text_frag);
-const texUni = new CGL.Uniform(shader, "t", "tex");
-const aspectUni = new CGL.Uniform(shader, "f", "aspect", 0);
-const opacityUni = new CGL.Uniform(shader, "f", "a", inOpacity);
-const uniColor = new CGL.Uniform(shader, "3f", "color", r, g, b);
-// const uniformColor = new CGL.Uniform(shader, "4f", "")
 
 if (op.patch.isEditorMode()) CABLES.UI.SIMPLEWIREFRAMERECT = CABLES.UI.SIMPLEWIREFRAMERECT || new CGL.WireframeRect(cgl);
 
@@ -136,20 +160,17 @@ if (cgl.glVersion < 2)
     shader.enableExtension("GL_OES_standard_derivatives");
 }
 
-renderHard.onChange = function ()
-{
-    shader.toggleDefine("HARD_EDGE", renderHard.get());
-};
-
 function getWidth()
 {
-    if (inSize.get() == "Auto") return cgl.getViewPort()[2];
+    if (inSize.get() == "Auto") return autoWidth;
+    if (inSize.get() == "Canvas") return cgl.getViewPort()[2];
     return Math.ceil(texWidth.get());
 }
 
 function getHeight()
 {
-    if (inSize.get() == "Auto") return cgl.getViewPort()[3];
+    if (inSize.get() == "Auto") return autoHeight;
+    if (inSize.get() == "Canvas") return cgl.getViewPort()[3];
     else return Math.ceil(texHeight.get());
 }
 
@@ -200,15 +221,20 @@ function reSize()
     needsRefresh = true;
 }
 
-inSize.onChange = () =>
+function updateUi()
 {
     texWidth.setUiAttribs({ "greyout": inSize.get() != "Manual" });
     texHeight.setUiAttribs({ "greyout": inSize.get() != "Manual" });
-};
+    maximize.setUiAttribs({ "greyout": inSize.get() == "Auto" });
+    inFontSize.setUiAttribs({ "greyout": maximize.get() && inSize.get() != "Auto" });
+
+    meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
+}
 
 maximize.onChange = function ()
 {
-    inFontSize.setUiAttribs({ "greyout": maximize.get() });
+    updateUi();
+
     needsRefresh = true;
 };
 
@@ -231,36 +257,19 @@ function refresh()
 {
     cgl.checkFrameStarted("texttrexture refresh");
 
-    // const num=String(parseInt(letterSpacing.get()));
-    //     fontImage.style["letter-spacing"] = num+"px";
-    // fontImage.style["font-kerning"]="normal";
-    const rgbStringClear = "rgba(255,"
-        + Math.floor(0 * 255) + "," + Math.floor(b.get() * 255) + ","
-        + 0.8 + ")";
-
+    const rgbStringClear = "rgba(" + Math.floor(bgR.get() * 255) + "," + Math.floor(bgG.get() * 255) + "," + Math.floor(bgB.get() * 255) + "," + bgA.get() + ")";
     ctx.fillStyle = rgbStringClear;
-    ctx.fillRect(0, 0, getWidth() / 2, getHeight());
-
-    const rgbStringClear2 = "rgba(255,"
-        + Math.floor(0 * 255) + "," + Math.floor(b.get() * 255) + ","
-        + 0.0 + ")";
-
-    ctx.fillStyle = rgbStringClear2;
-    ctx.clearRect(0, 0, getWidth() / 2, getHeight());
-
-    // ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     const rgbString = "rgba(" + Math.floor(r.get() * 255) + ","
         + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + ","
         + inOpacity.get() + ")";
 
     ctx.fillStyle = rgbString;
-    // op.log("rgbstring", rgbString);
     let fontSize = parseFloat(inFontSize.get());
     let fontname = font.get();
     if (fontname.indexOf(" ") > -1) fontname = "\"" + fontname + "\"";
     ctx.font = weight.get() + " " + fontSize + "px " + fontname + "";
-    // ctx["font-weight"] = 300;
 
     ctx.textAlign = align.get();
 
@@ -271,7 +280,34 @@ function refresh()
 
     strings = removeEmptyLines(strings);
 
-    if (maximize.get())
+    let descent = 0;
+
+    if (inSize.get() == "Auto")
+    {
+        autoWidth = 0;
+        autoHeight = 0;
+
+        for (let i = 0; i < strings.length; i++)
+        {
+            const measure = ctx.measureText(strings[i]);
+            autoWidth = Math.max(autoWidth, measure.width);
+            autoHeight += measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent;
+            descent = measure.fontBoundingBoxDescent;
+        }
+
+        autoHeight = Math.ceil(autoHeight);
+        autoWidth = Math.ceil(autoWidth);
+
+        if (autoWidth > cgl.maxTexSize || autoHeight > cgl.maxTexSize) op.setUiError("textoobig", "Texture too big!");
+        else op.setUiError("textoobig", null);
+
+        autoHeight = Math.min(cgl.maxTexSize, autoHeight);
+        autoWidth = Math.min(cgl.maxTexSize, autoWidth);
+
+        if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
+    }
+
+    if (maximize.get() && inSize.get() != "Auto")
     {
         fontSize = getWidth();
         let count = 0;
@@ -317,17 +353,19 @@ function refresh()
                 for (let j = 0; j < words.length; j++)
                 {
                     if (!words[j]) continue;
-                    sumWidth += ctx.measureText(words[j] + " ").width;
+                    let append = " ";
+                    if (j == words.length - 1)append = "";
+                    sumWidth += ctx.measureText(words[j] + append).width;
 
-                    if (sumWidth > getWidth())
+                    if (sumWidth > getWidth() && inSize.get() != "Auto")
                     {
                         found = true;
-                        newString += "\n" + words[j] + " ";
-                        sumWidth = ctx.measureText(words[j] + " ").width;
+                        newString += "\n" + words[j] + append;
+                        sumWidth = ctx.measureText(words[j] + append).width;
                     }
                     else
                     {
-                        newString += words[j] + " ";
+                        newString += words[j] + append;
                     }
                 }
                 newString += "\n";
@@ -336,19 +374,13 @@ function refresh()
             strings = txt.split("\n");
         }
         strings = removeEmptyLines(strings);
-
-        if (limitLines.get() > 0 && strings.length > limitLines.get())
-        {
-            strings.length = limitLines.get();
-            strings[strings.length - 1] += "...";
-        }
     }
 
     strings = removeEmptyLines(strings);
     const firstLineHeight = fontSize;
     const textHeight = firstLineHeight + (strings.length - 1) * getLineHeight(fontSize);
 
-    let posy = lineOffset.get() * fontSize;
+    let posy = (lineOffset.get() * fontSize) - descent;
 
     if (valign.get() == "top") posy += firstLineHeight;
     else if (valign.get() == "center") posy += (ctx.canvas.height / 2) - (textHeight / 2) + firstLineHeight;
@@ -394,7 +426,6 @@ function refresh()
 
     outRatio.set(ctx.canvas.height / ctx.canvas.width);
     outLines.set(strings.length);
-    // textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
     let cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
