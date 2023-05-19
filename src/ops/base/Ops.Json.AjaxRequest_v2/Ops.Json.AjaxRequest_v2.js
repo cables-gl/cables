@@ -28,7 +28,6 @@ reloadTrigger.onTriggered = function ()
     delayedReload(true);
 };
 
-let loadingId = 0;
 let reloadTimeout = 0;
 
 function delayedReload(force = false)
@@ -49,7 +48,7 @@ function reload(addCachebuster, force = false)
 
     // op.patch.loading.finished(loadingId);
 
-    loadingId = op.patch.loading.start("jsonFile", "" + filename.get(), op);
+    const loadingId = op.patch.loading.start("jsonFile", "" + filename.get(), op);
     isLoading.set(true);
 
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
