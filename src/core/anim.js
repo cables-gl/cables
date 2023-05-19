@@ -67,6 +67,7 @@ const Anim = function (cfg)
     this._log = new Logger("Anim");
     this._lastKeyIndex = 0;
     this._cachedIndex = 0;
+    this.name = cfg.name || null;
 
     /**
      * @member defaultEasing
@@ -203,7 +204,6 @@ Anim.prototype.setValue = function (time, value, cb)
 
     if (this.keys.length == 0 || time <= this.keys[this.keys.length - 1].time)
         for (let i = 0; i < this.keys.length; i++)
-        {
             if (this.keys[i].time == time)
             {
                 found = this.keys[i];
@@ -211,16 +211,16 @@ Anim.prototype.setValue = function (time, value, cb)
                 this.keys[i].cb = cb;
                 break;
             }
-        }
 
     if (!found)
     {
-        found = new Key({
-            "time": time,
-            "value": value,
-            "e": this.defaultEasing,
-            "cb": cb,
-        });
+        found = new Key(
+            {
+                "time": time,
+                "value": value,
+                "e": this.defaultEasing,
+                "cb": cb,
+            });
         this.keys.push(found);
         this._updateLastIndex();
     }
@@ -247,9 +247,7 @@ Anim.prototype.getSerialized = function ()
     obj.loop = this.loop;
 
     for (let i = 0; i < this.keys.length; i++)
-    {
         obj.keys.push(this.keys[i].getSerialized());
-    }
 
     return obj;
 };
@@ -290,11 +288,25 @@ Anim.prototype.isStarted = function (time)
  */
 Anim.prototype.getValue = function (time)
 {
-    if (this.keys.length === 0) return 0;
+    if (this.keys.length === 0)
+    {
+        return 0;
+    }
     if (this._needsSort) this.sortKeys();
 
-    if (!this.loop && time > this.keys[this._lastKeyIndex].time) return this.keys[this._lastKeyIndex].value;
-    if (time < this.keys[0].time) return this.keys[0].value;
+    if (!this.loop && time > this.keys[this._lastKeyIndex].time)
+    {
+        // if (this.name)console.log("lastkey", this.name, this._lastKeyIndex, this.keys.length, this.keys[this._lastKeyIndex].time);
+
+        return this.keys[this._lastKeyIndex].value;
+    }
+
+    if (time < this.keys[0].time)
+    {
+        // if (this.name)console.log("A");
+
+        return this.keys[0].value;
+    }
 
     if (this.loop && time > this.keys[this._lastKeyIndex].time)
     {
@@ -313,9 +325,13 @@ Anim.prototype.getValue = function (time)
     {
         if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
 
+        // if (this.name)console.log("B");
+
         return this.keys[this._lastKeyIndex].value;
     }
-    const index2 = parseInt(index, 10) + 1;
+
+
+    const index2 = index + 1;
     const key1 = this.keys[index];
     const key2 = this.keys[index2];
 

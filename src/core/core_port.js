@@ -389,7 +389,7 @@ Port.prototype.deSerializeSettings = function (objPort)
 
     if (objPort.anim)
     {
-        if (!this.anim) this.anim = new Anim();
+        if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
         this.parent._hasAnimPort = true;
         this.anim.addEventListener("onChange", () =>
         {
@@ -400,6 +400,7 @@ Port.prototype.deSerializeSettings = function (objPort)
         {
             this.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
         }
+        this.anim.sortKeys();
     }
 };
 
@@ -699,7 +700,6 @@ Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
         if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame",
             () =>
             {
-                // console.log("updateanim notrigger");
                 this.updateAnim();
             });
         else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
@@ -715,7 +715,7 @@ Port.prototype.setAnimated = function (a)
 
         if (this._animated && !this.anim)
         {
-            this.anim = new Anim();
+            this.anim = new Anim({ "name": "port " + this.name });
             this.anim.addEventListener("onChange", () =>
             {
                 this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
@@ -738,7 +738,7 @@ Port.prototype.toggleAnim = function ()
     this._animated = !this._animated;
     if (this._animated && !this.anim)
     {
-        this.anim = new Anim();
+        this.anim = new Anim({ "name": "port " + this.name });
         this.anim.addEventListener("onChange", () =>
         {
             this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
