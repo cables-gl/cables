@@ -54,6 +54,11 @@
             },
             {
                 "type": 0,
+                "name": "Force 8bit IBL",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Environment map does not contain RGBE data",
                 "subType": "boolean"
             },
@@ -170,7 +175,6 @@
     "summary": "PBR image based lighting setup",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [
         "uwoj7R52yU8"

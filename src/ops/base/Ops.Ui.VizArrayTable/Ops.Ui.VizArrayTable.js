@@ -4,6 +4,45 @@ const
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
+function getCellValue(v)
+{
+    let str = "";
+
+    if (typeof v == "string")
+    {
+        if (CABLES.UTILS.isNumeric(v)) str = "\"" + v + "\"";
+        else str = v;
+    }
+    else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
+    else if (Array.isArray(v))
+    {
+        let preview = "...";
+        if (v.length == 0) preview = "";
+        str = "[" + preview + "] (" + v.length + ")";
+    }
+    else if (typeof v == "object")
+    {
+        try
+        {
+            str = JSON.stringify(v, true, 1);
+        }
+        catch (e)
+        {
+            str = "{???}";
+        }
+    }
+    else if (v != v || v === undefined)
+    {
+        str += String(v);
+    }
+    else
+    {
+        str += String(v);
+    }
+
+    return str;
+}
+
 op.renderVizLayer = (ctx, layer) =>
 {
     ctx.fillStyle = "#222";
@@ -28,6 +67,27 @@ op.renderVizLayer = (ctx, layer) =>
     let lines = Math.floor(layer.height / layer.scale / 10 - 1);
     let padding = 4;
     let offset = inOffset.get() * stride;
+    let columnsWidth = [];
+
+    for (let i = 0; i < stride; i++)columnsWidth[i] = 0;
+
+    for (let i = offset; i < offset + lines * stride; i += stride)
+    {
+        for (let s = 0; s < stride; s++)
+        {
+            const v = arr[i + s];
+
+            columnsWidth[s] = Math.max(columnsWidth[s], getCellValue(v).length);
+        }
+    }
+
+    let columsPos = [];
+    let addUpPos = 30;
+    for (let i = 0; i < stride; i++)
+    {
+        columsPos[i] = addUpPos;
+        addUpPos += (columnsWidth[i] + 1) * 7;
+    }
 
     for (let i = offset; i < offset + lines * stride; i += stride)
     {
@@ -45,42 +105,28 @@ op.renderVizLayer = (ctx, layer) =>
 
         for (let s = 0; s < stride; s++)
         {
-            let str = "";
             const v = arr[i + s];
+            let str = getCellValue(v);
 
             ctx.fillStyle = "#ccc";
 
-            if (typeof v == "string") str = "\"" + v + "\"";
+            if (typeof v == "string")
+            {
+            }
             else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
             else if (Array.isArray(v))
             {
-                let preview = "...";
-                if (v.length == 0) preview = "";
-                str = "[" + preview + "] (" + v.length + ")";
             }
             else if (typeof v == "object")
             {
-                try
-                {
-                    str = JSON.stringify(v, true, 1);
-                }
-                catch (e)
-                {
-                    str = "{???}";
-                }
             }
             else if (v != v || v === undefined)
             {
                 ctx.fillStyle = "#f00";
-                str += String(v);
-            }
-            else
-            {
-                str += String(v);
             }
 
             ctx.fillText(str,
-                layer.x / layer.scale + s * 60 + 50,
+                layer.x / layer.scale + columsPos[s],
                 layer.y / layer.scale + 10 + (i - offset) / stride * 10 + padding);
         }
     }

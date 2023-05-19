@@ -33,8 +33,8 @@ const AXIS_XZ = 1;
 let curAxis = AXIS_XY;
 let mesh = null;
 let needsRebuild = true;
-
 let doScale = true;
+
 const vScale = vec3.create();
 vec3.set(vScale, 1, 1, 1);
 
@@ -45,6 +45,7 @@ axis.onChange =
     flipTcY.onChange =
     nRows.onChange =
     nColumns.onChange = rebuildLater;
+updateScale();
 
 width.onChange =
     height.onChange =
@@ -72,18 +73,17 @@ function rebuildLater()
     needsRebuild = true;
 }
 
-render.onLinkChanged = () =>
-{
-    if (!trigger.isLinked())
-    {
-        if (mesh) mesh.dispose();
-        mesh = null;
-        geomOut.set(null);
-        rebuildLater();
-    }
-};
+// render.onLinkChanged = () =>
+// {
+//     if (!trigger.isLinked())
+//     {
+//         if (mesh) mesh.dispose();
+//         mesh = null;
+//         geomOut.set(null);
+//         rebuildLater();
+//     }
+// };
 
-op.preRender =
 render.onTriggered = () =>
 {
     if (needsRebuild) rebuild();
@@ -112,6 +112,10 @@ op.onDelete = () =>
 
 function rebuild()
 {
+    if (axis.get() == "xy") curAxis = AXIS_XY;
+    if (axis.get() == "xz") curAxis = AXIS_XZ;
+
+    updateScale();
     let w = width.get();
     let h = height.get();
 
@@ -140,9 +144,6 @@ function rebuild()
 
     const stepColumn = w / numColumns;
     const stepRow = h / numRows;
-
-    if (axis.get() == "xy") curAxis = AXIS_XY;
-    if (axis.get() == "xz") curAxis = AXIS_XZ;
 
     const tc = new Float32Array((numColumns + 1) * (numRows + 1) * 2);
     const verts = new Float32Array((numColumns + 1) * (numRows + 1) * 3);

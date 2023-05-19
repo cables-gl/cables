@@ -90,7 +90,7 @@ function setupShader()
     unis = shader.getUniforms();
 
     shaderLastCompile = shader.lastCompile;
-    const names = [];
+    let names = [];
 
     for (let i = 0; i < unis.length; i++)
         if (unis[i].getType() == "t")
