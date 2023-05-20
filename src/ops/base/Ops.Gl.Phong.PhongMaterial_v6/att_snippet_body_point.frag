@@ -12,7 +12,7 @@
 
         #ifdef HAS_TEXTURES
             #ifdef HAS_TEXTURE_AO
-                lightColor{{LIGHT_INDEX}} *= texture(texAO, tcAo).g, inTextureIntensities.AO;
+                lightColor{{LIGHT_INDEX}} -= (1.0-texture(texAO, tcAo).g)* (inTextureIntensities.AO);
             #endif
 
             #ifdef HAS_TEXTURE_SPECULAR

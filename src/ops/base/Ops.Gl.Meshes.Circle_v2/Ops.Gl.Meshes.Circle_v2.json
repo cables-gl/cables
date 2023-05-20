@@ -54,6 +54,7 @@
             {
                 "type": 0,
                 "name": "Draw",
+                "uititle": "Render mesh",
                 "subType": "boolean"
             }
         ],
@@ -68,12 +69,12 @@
                 "objType": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Circle"
+        "name": "Ops.Patch.PnqjtQw.Circle2"
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "4db917cc-2cef-43f4-83d5-38c4572fe943",
-    "created": 1506436917186,
+    "id": "641eaae4-37cc-4e80-b8db-4be283ed5573",
+    "created": 1684507299088,
     "docs": {
         "ports": [
             {
@@ -89,5 +90,18 @@
     "issues": "",
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "DAAkQ6"
+    "exampleProjectId": "DAAkQ6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Circle",
+            "author": "pandur",
+            "date": 1684507299088
+        },
+        {
+            "message": "Ops.Patch.PnqjtQw.Circle2 renamed to Ops.Gl.Meshes.Circle_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684507565222
+        }
+    ]
 }
