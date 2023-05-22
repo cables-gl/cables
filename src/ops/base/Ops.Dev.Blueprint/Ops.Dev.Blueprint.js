@@ -211,7 +211,6 @@ op.updateBlueprint = (ignoreLinks = false) =>
                 deSerializeBlueprint(blueprintData, false);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
-                op.patch.emitEvent("subpatchesChanged");
             }, 0);
         }
         else
@@ -232,7 +231,6 @@ op.updateBlueprint = (ignoreLinks = false) =>
                     }
                     loadingOut.set(false);
                     op.patch.loading.finished(loadingId);
-                    op.patch.emitEvent("subpatchesChanged");
                 }
             );
         }
@@ -295,8 +293,6 @@ function deSerializeBlueprint(data, ignoreLinks = false)
             op.uiAttribs.blueprintSubpatch = blueprintSubpatch;
             op.patch.deSerialize(patchData, false);
         }
-
-        op.patch.emitEvent("subpatchesChanged");
     };
 
     if (Array.isArray(data.ops) && data.ops.length > 0)
