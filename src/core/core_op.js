@@ -118,8 +118,8 @@ const Op = function ()
     {
         const doEmitEvent = this.name != name;
         this.name = name;
-        this.uiAttr({ "title": name });
 
+        if (this.uiAttribs.title != name) this.uiAttr({ "title": name });
         if (doEmitEvent) this.emitEvent("onTitleChange", name);
     };
 
@@ -566,7 +566,8 @@ const Op = function ()
                     "hidePort": true,
                     "type": "string",
                     "values": values
-                }, n
+                },
+                n
             );
 
             indexPort.onLinkChanged = function ()

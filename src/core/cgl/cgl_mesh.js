@@ -40,6 +40,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._glPrimitive = glPrimitive;
     this._preWireframeGeom = null;
     this.addVertexNumbers = false;
+    this._name = "unknown";
 
     this.feedBackAttributes = [];
     this.setGeom(__geom);
@@ -48,7 +49,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._feedBacksChanged = false;
     this._transformFeedBackLoc = -1;
     this._lastAttrUpdate = 0;
-    this._name = "unknown";
+
 
     this._cgl.profileData.addHeavyEvent("mesh constructed", this._name);
 
@@ -419,15 +420,6 @@ Mesh.prototype.setGeom = function (geom, removeRef)
 
     this.updateVertices(this._geom);
     this.setVertexIndices(this._geom.verticesIndices);
-
-    // this.updateTexCoords(this._geom);
-    // this.updateNormals(this._geom);
-
-    // if (this._geom.vertexColors && this._geom.vertexColors.length > 0)
-    // {
-    //     // if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
-    //     this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR, this._geom.vertexColors, 4);
-    // }
 
     if (this.addVertexNumbers) this._setVertexNumbers();
 
