@@ -22,74 +22,74 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Distance",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Absolute",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "add x",
                 "group": "Add",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "add y",
                 "group": "Add",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "add z",
                 "group": "Add",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mul x",
                 "group": "Multiply",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mul y",
                 "group": "Multiply",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mul z",
                 "group": "Multiply",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "x",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "y",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "z",
                 "group": "Position",
                 "subType": "number"
@@ -97,18 +97,17 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.ExplodeDivided2"
+        "name": "Ops.Gl.ShaderEffects.ExplodeDividedMesh_v2"
     },
     "coreLibs": [
         "cgl_shadermodifier"
     ],
     "summary": "explode a (divided) mesh in the direction of faces normals",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

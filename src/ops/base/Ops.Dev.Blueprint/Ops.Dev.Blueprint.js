@@ -211,7 +211,6 @@ op.updateBlueprint = (ignoreLinks = false) =>
                 deSerializeBlueprint(blueprintData, false);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
-                op.patch.emitEvent("subpatchesChanged");
             }, 0);
         }
         else
@@ -232,7 +231,6 @@ op.updateBlueprint = (ignoreLinks = false) =>
                     }
                     loadingOut.set(false);
                     op.patch.loading.finished(loadingId);
-                    op.patch.emitEvent("subpatchesChanged");
                 }
             );
         }
@@ -295,8 +293,6 @@ function deSerializeBlueprint(data, ignoreLinks = false)
             op.uiAttribs.blueprintSubpatch = blueprintSubpatch;
             op.patch.deSerialize(patchData, false);
         }
-
-        op.patch.emitEvent("subpatchesChanged");
     };
 
     if (Array.isArray(data.ops) && data.ops.length > 0)
@@ -320,7 +316,6 @@ function deSerializeBlueprint(data, ignoreLinks = false)
                     op.setUiAttrib({ "extendTitle": pSubPatch.uiAttribs.title });
                 }
                 setupPorts(parentSubPatchId, ignoreLinks);
-                op.patch.emitEvent("subpatchesChanged");
                 CABLES.UI.undo.resume();
                 if (originalSaveState === true)
                 {
@@ -342,7 +337,6 @@ function deSerializeBlueprint(data, ignoreLinks = false)
             }
             doneCb(data);
             setupPorts(parentSubPatchId);
-            op.patch.emitEvent("subpatchesChanged");
         }
     }
 }

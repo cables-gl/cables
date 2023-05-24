@@ -11,6 +11,7 @@ const
     inFontSize = op.inValueFloat("fontSize", 300),
     lineDistance = op.inValueFloat("Line Height", 1),
     lineOffset = op.inValueFloat("Vertical Offset", 0),
+    lineOffsetHor = op.inValueFloat("Horizontal Offset", 0),
     drawDebug = op.inBool("Show Debug", false),
     inSize = op.inSwitch("Size", ["Auto", "Canvas", "Manual"], "Auto"),
 
@@ -46,7 +47,7 @@ op.toWorkPortsNeedToBeLinked(render);
 
 op.setPortGroup("Text Color", [r, g, b, inOpacity]);
 op.setPortGroup("Background", [bgR, bgG, bgB, bgA]);
-op.setPortGroup("Size", [font, , weight, maximize, inFontSize, lineDistance, lineOffset]);
+op.setPortGroup("Size", [font, , weight, maximize, inFontSize, lineDistance, lineOffset, lineOffsetHor]);
 op.setPortGroup("Texture", [inSize, wrap, texWidth, texHeight, tfilter, aniso]);
 op.setPortGroup("Alignment", [valign, align]);
 op.setPortGroup("Rendering", [drawMesh, meshScale]);
@@ -65,6 +66,7 @@ align.onChange =
     aniso.onChange =
     font.onChange =
     lineOffset.onChange =
+    lineOffsetHor.onChange =
     lineDistance.onChange =
     cachetexture.onChange =
     texWidth.onChange =
@@ -290,12 +292,12 @@ function refresh()
         for (let i = 0; i < strings.length; i++)
         {
             const measure = ctx.measureText(strings[i]);
-            autoWidth = Math.max(autoWidth, measure.width);
+            autoWidth = Math.max(autoWidth, measure.width) + lineOffsetHor.get();
             autoHeight += measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent;
             descent = measure.fontBoundingBoxDescent;
         }
 
-        autoHeight = Math.ceil(autoHeight);
+        autoHeight = Math.ceil(autoHeight * lineDistance.get());
         autoWidth = Math.ceil(autoWidth);
 
         if (autoWidth > cgl.maxTexSize || autoHeight > cgl.maxTexSize) op.setUiError("textoobig", "Texture too big!");
@@ -393,7 +395,7 @@ function refresh()
 
     for (let i = 0; i < strings.length; i++)
     {
-        let posx = 0;
+        let posx = lineOffsetHor.get();
         if (align.get() == "center") posx = ctx.canvas.width / 2;
         if (align.get() == "right") posx = ctx.canvas.width;
 
