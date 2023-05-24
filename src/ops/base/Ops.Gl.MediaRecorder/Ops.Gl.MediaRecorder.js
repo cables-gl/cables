@@ -152,7 +152,6 @@ function setupMediaRecorder()
             else stream = streamAudio.stream ? streamAudio.stream : streamAudio;
         }
 
-        console.log("STREAM", stream);
         mediaRecorder = new MediaRecorder(stream, options);
     }
     catch (err)
