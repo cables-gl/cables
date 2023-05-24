@@ -4,6 +4,8 @@ IN vec2 texCoord;
 
 #ifdef AO_CHAN_1
     #ifndef ATTRIB_texCoord1
+        #define ATTRIB_texCoord1
+
         IN vec2 texCoord1;
     #endif
 #endif
