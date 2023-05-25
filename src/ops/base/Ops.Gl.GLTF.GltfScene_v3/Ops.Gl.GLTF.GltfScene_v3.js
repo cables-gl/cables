@@ -557,8 +557,8 @@ op.exposeTexture = function (name)
     newop.getPort("Name").set(name);
     setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Render");
-    gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
 };
 
 op.exposeGeom = function (name, idx)
@@ -568,8 +568,8 @@ op.exposeGeom = function (name, idx)
     newop.getPort("Submesh").set(idx);
     setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Update");
-    gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
 };
 
 function setNewOpPosition(newOp, num)
@@ -646,8 +646,8 @@ op.exposeNode = function (name, type, options)
             newop.getPort("Node Name").set(name);
             setNewOpPosition(newop);
             op.patch.link(op, next.name, newop, "Render");
-            gui.patchView.centerSelectOp(newop.id, true);
             gui.patchView.testCollision(newop);
+            gui.patchView.centerSelectOp(newop.id, true);
         });
     }
     gui.closeModal();
@@ -658,9 +658,9 @@ op.assignMaterial = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
-    gui.patchView.centerSelectOp(newop.id, true);
     setNewOpPosition(newop);
     gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
 
     gui.closeModal();
 };
