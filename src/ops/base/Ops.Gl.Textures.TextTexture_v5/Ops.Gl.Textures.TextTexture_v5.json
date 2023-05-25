@@ -60,6 +60,12 @@
             },
             {
                 "type": 0,
+                "name": "Horizontal Offset",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Show Debug",
                 "subType": "boolean"
             },

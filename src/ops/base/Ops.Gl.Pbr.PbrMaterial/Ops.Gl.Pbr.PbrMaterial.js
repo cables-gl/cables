@@ -327,6 +327,8 @@ function updateLights()
             {
                 if (PBRLightStack[i] != cgl.frameStore.lightStack[i])
                 {
+                    console.log(PBRLightStack[i], cgl.frameStore.lightStack[i]);
+
                     changed = true;
                     break;
                 }
@@ -335,7 +337,10 @@ function updateLights()
 
         if (changed)
         {
-            PBRLightStack = cgl.frameStore.lightStack;
+            PBRLightStack.length = 0;
+            for (let i = 0; i < cgl.frameStore.lightStack.length; i++)
+
+                PBRLightStack[i] = cgl.frameStore.lightStack[i];
             buildShader();
 
             currentLightCount = cgl.frameStore.lightStack.length;

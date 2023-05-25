@@ -149,7 +149,7 @@ function setupMediaRecorder()
             inAudio.get().connect(streamAudio);
 
             if (inMedia.get() === "Audio+Video")stream = new MediaStream([...streamVid.getTracks(), ...streamAudio.stream.getTracks()]);
-            else stream = streamAudio;
+            else stream = streamAudio.stream ? streamAudio.stream : streamAudio;
         }
 
         mediaRecorder = new MediaRecorder(stream, options);

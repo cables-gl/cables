@@ -119,7 +119,7 @@ const VarSetOpWrapper = class
 
     _updateVarNamesDropdown()
     {
-        if (CABLES.UI)
+        if (CABLES.UI && CABLES.UI.loaded && CABLES.UI.loaded)
         {
             const varnames = [];
             const vars = this._op.patch.getVars();
@@ -233,7 +233,7 @@ const VarGetOpWrapper = class
 
     _updateVarNamesDropdown()
     {
-        if (CABLES.UI)
+        if (CABLES.UI && CABLES.UI.loaded)
         {
             const varnames = [];
             const vars = this._op.patch.getVars();
