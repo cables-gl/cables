@@ -10,6 +10,9 @@ natively.
 We are using [electron](https://www.electronjs.org/) for the cross-platform running of cables patches and
 we will build the executables on our servers for you to download once ready.
 
+The "Windows (webDemoExe)" option is using [webDemoExe](https://github.com/pandrr/WebDemoExe/) to use your local browser (Edge)
+and hence has a massively reduced filesize. Check the linked documentation on how and when to use.
+
 Building executables for OSX is not that easy, so there is a few things to keep in mind (see CAVEATS).
 
 ## Parameters
