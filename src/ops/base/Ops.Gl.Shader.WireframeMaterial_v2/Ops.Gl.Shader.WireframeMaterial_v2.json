@@ -1,0 +1,135 @@
+{
+    "authorName": "pandur",
+    "id": "a8dfa4ef-8d81-4408-91e2-76b997bd7bd9",
+    "created": 1684839527813,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "enable depth testing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "AntiAlias",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffuse r",
+                "group": "Color Wire",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffuse g",
+                "group": "Color Wire",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffuse b",
+                "group": "Color Wire",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffuse A",
+                "group": "Color Wire",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "fill",
+                "group": "Color Fill",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Fill R",
+                "group": "Color Fill",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Fill G",
+                "group": "Color Fill",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Fill B",
+                "group": "Color Fill",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Fill A",
+                "group": "Color Fill",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Patch.PP7cg8x.WireframeMaterial2"
+    },
+    "summary": "Renders following meshes as wireframes",
+    "docs": {
+        "ports": [
+            {
+                "name": "fill",
+                "text": "If set, background will be drawn (currently the color cannot be chosen)."
+            },
+            {
+                "name": "width",
+                "text": "Line thickness"
+            },
+            {
+                "name": "opacity",
+                "text": "Opacity, used for stroke and fill. `0` = invisible, `1` = fully visible"
+            },
+            {
+                "name": "trigger",
+                "text": "Executes the next op"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "code cleanup - ports ",
+            "author": "andro",
+            "date": 1559050588755
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.WireframeMaterial",
+            "author": "pandur",
+            "date": 1684839527813
+        },
+        {
+            "message": "Ops.Patch.PP7cg8x.WireframeMaterial2 renamed to Ops.Gl.Shader.WireframeMaterial_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684910434601
+        }
+    ],
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "bRlSDe"
+}

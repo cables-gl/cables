@@ -2,6 +2,7 @@ const
     cgl = op.patch.cgl,
     render = op.inTrigger("Render"),
     inTex = op.inTexture("Base Texture"),
+    inUVTex = op.inTexture("UV Texture"),
     inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
@@ -35,6 +36,7 @@ let reInitEffect = true;
 let isFloatTex = false;
 let copyShader = null;
 let copyShaderTexUni = null;
+let copyShaderUVTexUni = null;
 let copyShaderRGBAUni = null;
 
 inWrap.onChange =
@@ -42,7 +44,8 @@ inWrap.onChange =
     inPixel.onChange = reInitLater;
 
 inTex.onLinkChanged =
-inSize.onChange = updateUi;
+inSize.onChange =
+inUVTex.onChange = updateUi;
 
 render.onTriggered =
     op.preRender = doRender;
@@ -161,6 +164,7 @@ function updateResolutionInfo()
 function updateDefines()
 {
     if (copyShader)copyShader.toggleDefine("USE_TEX", inTex.isLinked());
+    if (copyShader)copyShader.toggleDefine("USE_UVTEX", inUVTex.isLinked());
 }
 
 function updateUi()
@@ -206,6 +210,7 @@ function copyTexture()
         copyShader = new CGL.Shader(cgl, "copytextureshader");
         copyShader.setSource(copyShader.getDefaultVertexShader(), attachments.imgcomp_frag);
         copyShaderTexUni = new CGL.Uniform(copyShader, "t", "tex", 0);
+        copyShaderUVTexUni = new CGL.Uniform(copyShader, "t", "UVTex", 1);
         copyShaderRGBAUni = new CGL.Uniform(copyShader, "4f", "bgColor", r, g, b, a);
         updateDefines();
     }
@@ -214,6 +219,7 @@ function copyTexture()
     cgl.currentTextureEffect.bind();
 
     if (inTex.get()) cgl.setTexture(0, inTex.get().tex);
+    if (inUVTex.get()) cgl.setTexture(1, inUVTex.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
