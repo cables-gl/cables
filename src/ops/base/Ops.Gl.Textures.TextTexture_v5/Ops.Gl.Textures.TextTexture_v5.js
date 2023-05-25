@@ -293,8 +293,13 @@ function refresh()
         {
             const measure = ctx.measureText(strings[i]);
             autoWidth = Math.max(autoWidth, measure.width) + lineOffsetHor.get();
-            autoHeight += measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent;
-            descent = measure.fontBoundingBoxDescent;
+            // autoHeight += measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent;
+            // descent = measure.fontBoundingBoxDescent;
+
+            autoHeight += (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.2;
+            descent = measure.actualBoundingBoxDescent * 1.2;
+
+            console.log(measure);
         }
 
         autoHeight = Math.ceil(autoHeight * lineDistance.get());

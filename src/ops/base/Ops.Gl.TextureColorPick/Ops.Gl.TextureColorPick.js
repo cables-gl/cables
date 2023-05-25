@@ -25,6 +25,8 @@ let isFloatingPoint = false;
 let channelType = op.patch.cgl.gl.UNSIGNED_BYTE;
 let pixelReader = new CGL.PixelReader();
 
+op.toWorkPortsNeedToBeLinked(tex, pUpdate);
+
 pUpdate.onTriggered = function ()
 {
     if (!inAct.get()) return;
