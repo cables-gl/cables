@@ -398,7 +398,7 @@ function printInfo()
 
                 html += "  <td>" + gltf.json.accessors[smplr.output].count;
 
-                html += "&nbsp;&nbsp;<a onclick=\"gui.corePatch().getOpById('" + op.id + "').showAnim('" + i + "','" + j + "')\" class=\"icon icon-search\"></a>";
+                // html += "&nbsp;&nbsp;<a onclick=\"gui.corePatch().getOpById('" + op.id + "').showAnim('" + i + "','" + j + "')\" class=\"icon icon-search\"></a>";
 
                 html += "</td>";
 

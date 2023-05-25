@@ -107,18 +107,15 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     else if (data.event == CONSTANTS.PACO.PACO_UIATTRIBS)
     {
         const op = this._patch.getOpById(data.vars.op);
-        if (op) op.setUiAttrib(data.vars.uiAttribs);
+        op?.setUiAttrib(data.vars.uiAttribs);
     }
     else if (data.event == CONSTANTS.PACO.PACO_UNLINK)
     {
         const op1 = this._patch.getOpById(data.vars.op1);
         const op2 = this._patch.getOpById(data.vars.op2);
-        if (!op1 || !op2)
-        {
-            return;
-        }
-        const port1 = op1.getPort(data.vars.port1);
-        const port2 = op2.getPort(data.vars.port2);
+        // if (!op1 || !op2) return;
+        const port1 = op1?.getPort(data.vars.port1);
+        const port2 = op2?.getPort(data.vars.port2);
 
         if (port1 && port2) port1.removeLinkTo(port2);
         else this._log.warn("paco unlink could not find port...");
