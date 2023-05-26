@@ -171,7 +171,9 @@ function printInfo()
     const sizes = {};
     let html = "<div style=\"overflow:scroll;width:100%;height:100%\">";
 
-    html += "generator:" + gltf.json.asset.generator;
+    html += "File: <a href=\"" + CABLES.sandbox.getCablesUrl() + "/asset/patches/?filename=" + inFile.get() + "\" target=\"_blank\">" + CABLES.basename(inFile.get()) + "</a><br/>";
+
+    html += "Generator:" + gltf.json.asset.generator;
 
     let numNodes = 0;
     if (gltf.json.nodes)numNodes = gltf.json.nodes.length;
@@ -335,9 +337,17 @@ function printInfo()
 
     // / //////////////////////////////////
 
+    let numSamplers = 0;
     let numAnims = 0;
-    if (gltf.json.animations)numAnims = gltf.json.animations.length;
-    html += "<div id=\"groupAnims\">Animations (" + numAnims + ")</div>";
+
+    if (gltf.json.animations)
+    {
+        numAnims = gltf.json.animations.length;
+        for (let i = 0; i < gltf.json.animations.length; i++)
+            numSamplers += gltf.json.animations[i].samplers.length;
+    }
+
+    html += "<div id=\"groupAnims\">Animations (" + numAnims + "/" + numSamplers + ")</div>";
 
     if (gltf.json.animations)
     {
@@ -388,7 +398,7 @@ function printInfo()
 
                 html += "  <td>" + gltf.json.accessors[smplr.output].count;
 
-                html += "&nbsp;&nbsp;<a onclick=\"gui.corePatch().getOpById('" + op.id + "').showAnim('" + i + "','" + j + "')\" class=\"icon icon-search\"></a>";
+                // html += "&nbsp;&nbsp;<a onclick=\"gui.corePatch().getOpById('" + op.id + "').showAnim('" + i + "','" + j + "')\" class=\"icon icon-search\"></a>";
 
                 html += "</td>";
 
@@ -573,7 +583,7 @@ function printInfo()
     html += "</table>";
     html += "</div>";
 
-    tab = new CABLES.UI.Tab("GLTF", { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
+    tab = new CABLES.UI.Tab("GLTF " + CABLES.basename(inFile.get()), { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
     gui.mainTabs.addTab(tab, true);
 
     tab.addEventListener("onClose", closeTab);

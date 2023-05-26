@@ -2,12 +2,13 @@ const
     active = op.inValueBool("Active", true),
     speed = op.inValue("Speed", 0.01),
     inputType = op.inSwitch("Input Type", ["All", "Mouse", "Touch"], "All"),
-    area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
+    area = op.inSwitch("Area", ["Canvas Area", "Canvas", "Document"], "Canvas Area"),
     outDeltaX = op.outNumber("Delta X"),
     outDeltaY = op.outNumber("Delta Y"),
     outDragging = op.outNumber("Is Dragging");
 
 let listenerElement = null;
+let sizeElement = null;
 const absoluteX = 0;
 const absoluteY = 0;
 let pressed = false;
@@ -19,11 +20,27 @@ area.onChange = updateArea;
 
 updateArea();
 
+function isHovering(e)
+{
+    if (area.get() === "Canvas Area")
+    {
+        const r = sizeElement.getBoundingClientRect();
+
+        return (
+            e.clientX > r.left &&
+            e.clientX < r.left + r.width &&
+            e.clientY > r.top &&
+            e.clientY < r.top + r.height
+        );
+    }
+    return true;
+}
+
 function onMouseMove(e)
 {
     if (e.touches) e = e.touches[0];
 
-    if (pressed && e)
+    if (pressed && e && isHovering(e))
     {
         if (!firstMove)
         {
@@ -68,8 +85,13 @@ function updateArea()
 {
     removeListener();
 
-    if (area.get() == "Document") listenerElement = document;
-    else listenerElement = op.patch.cgl.canvas;
+    if (area.get() == "Canvas Area")
+    {
+        listenerElement = document;
+        sizeElement = op.patch.cgl.canvas;
+    }
+    else if (area.get() == "Document") listenerElement = sizeElement = document;
+    else listenerElement = sizeElement = op.patch.cgl.canvas;
 
     if (active.get())addListener();
 }

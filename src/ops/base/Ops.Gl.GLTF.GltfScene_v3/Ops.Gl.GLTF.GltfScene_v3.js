@@ -557,8 +557,8 @@ op.exposeTexture = function (name)
     newop.getPort("Name").set(name);
     setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Render");
-    gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
 };
 
 op.exposeGeom = function (name, idx)
@@ -568,8 +568,8 @@ op.exposeGeom = function (name, idx)
     newop.getPort("Submesh").set(idx);
     setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Update");
-    gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
 };
 
 function setNewOpPosition(newOp, num)
@@ -646,8 +646,8 @@ op.exposeNode = function (name, type, options)
             newop.getPort("Node Name").set(name);
             setNewOpPosition(newop);
             op.patch.link(op, next.name, newop, "Render");
-            gui.patchView.centerSelectOp(newop.id, true);
             gui.patchView.testCollision(newop);
+            gui.patchView.centerSelectOp(newop.id, true);
         });
     }
     gui.closeModal();
@@ -658,9 +658,9 @@ op.assignMaterial = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
-    gui.patchView.centerSelectOp(newop.id, true);
     setNewOpPosition(newop);
     gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
 
     gui.closeModal();
 };
@@ -678,20 +678,20 @@ op.toggleNodeVisibility = function (name)
     saveData();
 };
 
-op.showAnim = function (anim, channel)
-{
-    const an = gltf.json.animations[anim];
-    const chan = gltf.json.animations[anim].channels[channel];
+// op.showAnim = function (anim, channel)
+// {
+//     const an = gltf.json.animations[anim];
+//     const chan = gltf.json.animations[anim].channels[channel];
 
-    const node = gltf.nodes[chan.target.node];
-    const sampler = an.samplers[chan.sampler];
+//     const node = gltf.nodes[chan.target.node];
+//     const sampler = an.samplers[chan.sampler];
 
-    const acc = gltf.json.accessors[sampler.input];
-    const bufferIn = gltf.accBuffers[sampler.input];
+//     const acc = gltf.json.accessors[sampler.input];
+//     const bufferIn = gltf.accBuffers[sampler.input];
 
-    const accOut = gltf.json.accessors[sampler.output];
-    const bufferOut = gltf.accBuffers[sampler.output];
-};
+//     const accOut = gltf.json.accessors[sampler.output];
+//     const bufferOut = gltf.accBuffers[sampler.output];
+// };
 
 function uniqueArray(arr)
 {

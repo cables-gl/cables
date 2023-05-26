@@ -5,7 +5,7 @@ const
     shape = op.inValueSelect("Shape", ["Star", "Saw", "Gear"], "Star"),
     outerRadius = op.inValue("Length", 1.5),
     zDiff = op.inFloat("Peak Z Pos", 0),
-    percent = op.inValueSlider("percent"),
+    percent = op.inValueSlider("percent", 1),
     fill = op.inValueBool("Fill"),
     renderMesh = op.inValueBool("Render Mesh", true),
     trigger = op.outTrigger("trigger"),
@@ -16,7 +16,6 @@ let cgl = op.patch.cgl;
 
 let oldPrim = 0;
 let shader = null;
-percent.set(1);
 
 let geom = new CGL.Geometry("circle");
 let mesh = null;
