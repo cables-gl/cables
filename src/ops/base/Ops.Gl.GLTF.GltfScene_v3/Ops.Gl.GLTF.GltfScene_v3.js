@@ -678,20 +678,20 @@ op.toggleNodeVisibility = function (name)
     saveData();
 };
 
-op.showAnim = function (anim, channel)
-{
-    const an = gltf.json.animations[anim];
-    const chan = gltf.json.animations[anim].channels[channel];
+// op.showAnim = function (anim, channel)
+// {
+//     const an = gltf.json.animations[anim];
+//     const chan = gltf.json.animations[anim].channels[channel];
 
-    const node = gltf.nodes[chan.target.node];
-    const sampler = an.samplers[chan.sampler];
+//     const node = gltf.nodes[chan.target.node];
+//     const sampler = an.samplers[chan.sampler];
 
-    const acc = gltf.json.accessors[sampler.input];
-    const bufferIn = gltf.accBuffers[sampler.input];
+//     const acc = gltf.json.accessors[sampler.input];
+//     const bufferIn = gltf.accBuffers[sampler.input];
 
-    const accOut = gltf.json.accessors[sampler.output];
-    const bufferOut = gltf.accBuffers[sampler.output];
-};
+//     const accOut = gltf.json.accessors[sampler.output];
+//     const bufferOut = gltf.accBuffers[sampler.output];
+// };
 
 function uniqueArray(arr)
 {
