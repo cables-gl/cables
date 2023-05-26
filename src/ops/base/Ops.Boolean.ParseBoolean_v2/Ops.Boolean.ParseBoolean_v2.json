@@ -13,7 +13,7 @@
             {
                 "type": 0,
                 "name": "Result",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Boolean.ParseBoolean_v2"
@@ -27,7 +27,6 @@
     ],
     "summary": "parse boolean from string/number",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
