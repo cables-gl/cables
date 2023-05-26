@@ -314,6 +314,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
                 if (pSubPatch)
                 {
                     op.setUiAttrib({ "extendTitle": pSubPatch.uiAttribs.title });
+                    gui.corePatch().emitEvent("subpatchesChanged");
                 }
                 setupPorts(parentSubPatchId, ignoreLinks);
                 CABLES.UI.undo.resume();
