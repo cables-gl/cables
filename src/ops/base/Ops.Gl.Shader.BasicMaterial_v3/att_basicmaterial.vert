@@ -1,7 +1,6 @@
 
 {{MODULES_HEAD}}
 
-// OUT vec3 norm;
 OUT vec2 texCoord;
 OUT vec2 texCoordOrig;
 

@@ -110,11 +110,7 @@ class PixelReader
             cgl.profileData.profileFencedPixelRead++;
 
             gl.readPixels(
-                x, y,
-                w, h,
-                gl.RGBA,
-                channelType,
-                0
+                x, y, w, h, gl.RGBA, channelType, 0
             );
 
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
