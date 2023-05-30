@@ -212,16 +212,16 @@ exec.onTriggered = function ()
     // if(inUpdateAlways.get()) needsUpdate = true;
 
     if (fb && fb.getWidth() != size) fb.setSize(size, size);
-    if (oldGeom != geo)
-    {
-        oldGeom = geo;
-        g = geo.copy();
+    // if (oldGeom != geo)
+    // {
+    oldGeom = geo;
+    g = geo.copy();
 
-        if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("geom2tex"), cgl.gl.POINTS);
+    if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("geom2tex"), cgl.gl.POINTS);
 
-        g.glPrimitive = cgl.gl.POINTS;
-        mesh.setGeom(g);
-    }
+    g.glPrimitive = cgl.gl.POINTS;
+    mesh.setGeom(g);
+    // }
     numVerts = g.vertices.length / 3;
 
     if (vertNums.length != numVerts) vertNums = new Float32Array(numVerts);

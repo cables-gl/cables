@@ -11,7 +11,6 @@ start.onTriggered = function ()
 {
     if (!inTex.get() || !inTex.get().tex) return;
     outFinished.set(false);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
     const width = inTex.get().width;
     const height = inTex.get().height;

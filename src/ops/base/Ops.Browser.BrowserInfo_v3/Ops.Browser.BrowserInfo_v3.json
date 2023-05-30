@@ -133,14 +133,13 @@
                 "name": "User Agent"
             }
         ],
-        "name": "Ops.Html.BrowserInfo_v3"
+        "name": "Ops.Browser.BrowserInfo_v3"
     },
     "libs": [
         "platform.js"
     ],
     "summary": "Reports the browser being used",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -104,6 +104,8 @@ MOD_de=1.0-MOD_map(
 
 #ifdef MOD_BLEND_OPACITY
     col.a*=(1.0-MOD_de*MOD_inSizeAmountFalloffSizeX.y);
+
+    if(col.a==0.0)discard;
 #endif
 
 #ifdef MOD_BLEND_DISCARD

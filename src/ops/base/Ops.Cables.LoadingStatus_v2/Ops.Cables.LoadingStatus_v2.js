@@ -2,10 +2,9 @@ const
     exe = op.inTrigger("exe"),
     preRenderOps = op.inValueBool("PreRender Ops"),
     startTimeLine = op.inBool("Play Timeline", true),
-
     next = op.outTrigger("Next"),
-    outInitialFinished = op.outBool("Finished Initial Loading", false),
-    outLoading = op.outBool("Loading"),
+    outInitialFinished = op.outBoolNum("Finished Initial Loading", false),
+    outLoading = op.outBoolNum("Loading"),
     outProgress = op.outNumber("Progress"),
     outList = op.outArray("Jobs"),
     loadingFinished = op.outTrigger("Trigger Loading Finished ");

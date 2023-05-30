@@ -231,6 +231,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1684491765597
+        },
+        {
+            "message": "Ops.Gl.Textures.TextTexture_v5 renamed to Ops.Dev.Gl.Textures.TextTexture5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685461228449
         }
     ],
     "coreLibs": [

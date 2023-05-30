@@ -15,7 +15,7 @@ function createOutPorts()
     let arr = [];
     for (let i = 0; i < NUM_PORTS; i++)
     {
-        let port = op.outBool("Index " + i + " boolean");
+        let port = op.outBoolNum("Index " + i + " boolean");
         arr.push(port);
     }
     return arr;
@@ -24,7 +24,7 @@ function createOutPorts()
 function setDefaultValues()
 {
     let defaultValue = defaultBoolPort.get();
-    valuePorts.forEach(port => port.set(defaultValue));
+    valuePorts.forEach((port) => { return port.set(defaultValue); });
 }
 
 function update()

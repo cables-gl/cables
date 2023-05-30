@@ -19,6 +19,25 @@ let
     needsRebuild = true,
     mesh;
 
+inTrigger.onTriggered = function ()
+{
+    if (needsRebuild) buildMesh();
+    if (inDraw.get()) mesh.render(cgl.getShader());
+    outTrigger.trigger();
+};
+
+inStacks.onChange =
+inSlices.onChange =
+inStacklimit.onChange =
+inRadius.onChange = function ()
+{
+    // only calculate once, even after multiple settings could were changed
+    needsRebuild = true;
+};
+
+// set lifecycle handlers
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+
 function buildMesh()
 {
     const
@@ -86,31 +105,10 @@ function buildMesh()
     geom.biTangents = biTangents;
     geom.verticesIndices = indices;
 
-    outGeometry.set(null);
-    outGeometry.set(geom);
+    outGeometry.setRef(geom);
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);
 
     needsRebuild = false;
 }
-
-// set event handlers
-inTrigger.onTriggered = function ()
-{
-    if (needsRebuild) buildMesh();
-    if (inDraw.get()) mesh.render(cgl.getShader());
-    outTrigger.trigger();
-};
-
-inStacks.onChange =
-inSlices.onChange =
-inStacklimit.onChange =
-inRadius.onChange = function ()
-{
-    // only calculate once, even after multiple settings could were changed
-    needsRebuild = true;
-};
-
-// set lifecycle handlers
-op.onDelete = function () { if (mesh)mesh.dispose(); };

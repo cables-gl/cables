@@ -109,7 +109,7 @@ drawMesh.onChange = updateUi;
 op.on("delete", () =>
 {
     ctx = null;
-    console.log("delete...");
+    // console.log("delete...");
     fontImage.remove();
 });
 
@@ -299,7 +299,7 @@ function refresh()
             autoHeight += (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.2;
             descent = measure.actualBoundingBoxDescent * 1.2;
 
-            console.log(measure);
+            // console.log(measure);
         }
 
         autoHeight = Math.ceil(autoHeight * lineDistance.get());
