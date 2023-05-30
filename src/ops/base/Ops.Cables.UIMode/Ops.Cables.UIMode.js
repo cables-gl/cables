@@ -1,6 +1,6 @@
 const
-    outUI = op.outBool("UI", op.patch.isEditorMode()),
-    outRemoteViewer = op.outBool("Remote Viewer", window.gui ? window.gui.isRemoteClient : false),
+    outUI = op.outBoolNum("UI", op.patch.isEditorMode()),
+    outRemoteViewer = op.outBoolNum("Remote Viewer", window.gui ? window.gui.isRemoteClient : false),
     outCanvasMode = op.outNumber("Canvas Mode"),
     outPatchVisible = op.outBoolNum("Patch Field Visible");
 
