@@ -26,7 +26,7 @@ const Context = function (_patch)
 
     this.profileData = new ProfileData(this);
     this._log = new Logger("cgl_context");
-    const viewPort = [0, 0, 0, 0];
+    this._viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;
     this.clearCanvasTransparent = true;
@@ -220,12 +220,12 @@ const Context = function (_patch)
      */
     this.getViewPort = function ()
     {
-        return viewPort;
+        return this._viewPort;
     };
 
     this.resetViewPort = function ()
     {
-        this.gl.viewport(viewPort[0], viewPort[1], viewPort[2], viewPort[3]);
+        this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     };
 
     /**
@@ -240,11 +240,11 @@ const Context = function (_patch)
      */
     this.setViewPort = function (x, y, w, h)
     {
-        viewPort[0] = Math.round(x);
-        viewPort[1] = Math.round(y);
-        viewPort[2] = Math.round(w);
-        viewPort[3] = Math.round(h);
-        this.gl.viewport(viewPort[0], viewPort[1], viewPort[2], viewPort[3]);
+        this._viewPort[0] = Math.round(x);
+        this._viewPort[1] = Math.round(y);
+        this._viewPort[2] = Math.round(w);
+        this._viewPort[3] = Math.round(h);
+        this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     };
 
     this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
