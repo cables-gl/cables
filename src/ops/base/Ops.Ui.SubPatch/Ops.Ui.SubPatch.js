@@ -4,6 +4,8 @@ op.dynOut = op.addOutPort(new CABLES.Port(op, "create port out", CABLES.OP_PORT_
 const dataStr = op.addInPort(new CABLES.Port(op, "dataStr", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
 op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
 
+op.setStorage({ "subPatchVer": 1 });
+
 if (CABLES.UI && CABLES.sandbox.isDevEnv())
 {
     const inMakeBp = op.inTriggerButton("Create Blueprint");

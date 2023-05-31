@@ -123,6 +123,31 @@ const Op = function ()
         if (doEmitEvent) this.emitEvent("onTitleChange", name);
     };
 
+    Op.prototype.setStorage = function (newAttribs)
+    {
+        if (!newAttribs) return;
+        this.storage = this.storage || {};
+
+        let changed = false;
+        for (const p in newAttribs)
+        {
+            if (this.storage[p] != newAttribs[p]) changed = true;
+            this.storage[p] = newAttribs[p];
+
+            console.log(p, newAttribs[p]);
+        }
+
+        console.log(this.storage);
+
+        if (changed) this.emitEvent("onStorageChange", newAttribs);
+    };
+
+    Op.prototype.isSubPatchOp = function ()
+    {
+        if (this.storage) return (this.storage?.subPatchVer || 0) > 0;
+    };
+
+
     const _setUiAttrib = function (newAttribs)
     {
         if (!newAttribs) return;
