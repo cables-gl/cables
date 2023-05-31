@@ -1,5 +1,6 @@
 // * see framebuffer1
 
+
 import { Texture } from "./cgl_texture";
 import Logger from "../core_logger";
 
@@ -198,27 +199,21 @@ Framebuffer2.prototype.setSize = function (w, h)
 
         if (this._options.isFloatingPointTexture)
         {
-            // if (this._cgl.glUseHalfFloatTex)
-            // {
-            const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
-            // const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
-            const extcb2 = this._cgl.gl.getExtension("EXT_color_buffer_half_float_linear");
+            if (this._cgl.glUseHalfFloatTex)
+            {
+                // const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+                const extcb2 = this._cgl.gl.getExtension("EXT_color_buffer_half_float_linear");
+                internFormat = this._cgl.gl.RGBA16F;
+            }
+            else
+            {
+                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+                const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
-            //     this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
-            // }
-            // else
-            // {
-            // const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
-            // const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
-            // const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
-
-            // internFormat = this._cgl.gl.RGBA32F;
-            internFormat = this._cgl.gl.RGBA16F;
-
-            // if (this._options.multisampling && this._options.multisamplingSamples)
-            //     this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, internFormat, this._width, this._height);
-            // else
-            //     this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, internFormat, this._width, this._height);
+                internFormat = this._cgl.gl.RGBA32F;
+            }
         }
 
         if (this._options.multisampling && this._options.multisamplingSamples)
