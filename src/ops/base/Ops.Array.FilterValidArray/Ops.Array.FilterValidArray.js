@@ -3,7 +3,7 @@ const
     inLength = op.inBool("Invalid when length is 0", true),
 
     outArray = op.outArray("Last Valid Array"),
-    outValid = op.outBool("Is Valid");
+    outValid = op.outBoolNum("Is Valid");
 
 inLength.onChange =
 inArr.onChange =
@@ -18,11 +18,7 @@ function update()
     if (!arr || !arr.length) r = false;
     else if (inLength.get() && arr.length == 0) r = false;
 
-    if (r)
-    {
-        // outArray.set([]);
-        outArray.setRef(arr);
-    }
+    if (r) outArray.setRef(arr);
 
     outValid.set(r);
 }

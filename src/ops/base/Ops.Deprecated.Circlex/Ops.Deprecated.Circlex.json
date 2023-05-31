@@ -87,7 +87,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "DAAkQ6",
@@ -101,6 +100,12 @@
             "message": "Ops.User.pandur.Circle_v2 renamed to Ops.Dev.Graphics.Meshes.Circle_v2",
             "author": "pandur",
             "date": 1666262100280
+        },
+        {
+            "message": "Ops.Dev.Graphics.Meshes.Circle_v2 renamed to Ops.Deprecated.Circlex",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685439213047
         }
     ]
 }

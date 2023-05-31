@@ -178,6 +178,12 @@
             "message": "Ops.Dev.ColorArea_v5 renamed to Ops.Dev.ColorAreaSDF_v5",
             "author": "pandur",
             "date": 1670920228741
+        },
+        {
+            "message": "Ops.Dev.ColorAreaSDF_v5 renamed to Ops.Gl.ShaderEffects.ColorArea_v5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685439604919
         }
     ],
     "coreLibs": [

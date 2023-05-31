@@ -11,7 +11,7 @@ const
 
     outResultArray = op.outArray("Result Array"),
     outLength = op.outNumber("Array Length"),
-    outExpressionIsValid = op.outBool("Expression Valid");
+    outExpressionIsValid = op.outBoolNum("Expression Valid");
 
 op.setPortGroup("Expression", [inExpression]);
 op.setPortGroup("Parameters", [inA, inB, inC, inX, inY, inZ]);
@@ -69,9 +69,9 @@ function evaluateFunction()
     }
     else
     {
-        const arrayLengths = arrays.map((arr) => (arr ? arr.length : undefined));
+        const arrayLengths = arrays.map((arr) => { return (arr ? arr.length : undefined); });
         const firstValidArrayLength = arrayLengths.find(Boolean);
-        const sameLength = arrayLengths.filter(Boolean).every((length) => length === firstValidArrayLength);
+        const sameLength = arrayLengths.filter(Boolean).every((length) => { return length === firstValidArrayLength; });
 
         let validArrays = [];
 
@@ -82,7 +82,7 @@ function evaluateFunction()
             validArrays = arrays.map((arr, index) =>
             {
                 // * map all undefined arrays to 0 values
-                if (!arr) arr = arrays.find(Boolean).map((x) => 0);
+                if (!arr) arr = arrays.find(Boolean).map((x) => { return 0; });
 
                 return arr;
             });

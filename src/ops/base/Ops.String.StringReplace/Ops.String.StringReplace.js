@@ -12,10 +12,18 @@ inSearch.onChange = update;
 
 function update()
 {
-    let str = "";
+    op.setUiError("exception", null);
 
-    if (inWhat.get() == "All") str = String(inStr.get()).replace(new RegExp(inSearch.get(), "g"), inRepl.get());
-    else str = String(inStr.get()).replace(inSearch.get(), inRepl.get());
+    let str = "";
+    try
+    {
+        if (inWhat.get() == "All") str = String(inStr.get()).replace(new RegExp(inSearch.get(), "g"), inRepl.get());
+        else str = String(inStr.get()).replace(inSearch.get(), inRepl.get());
+    }
+    catch (e)
+    {
+        op.setUiError("exception", "exception " + e.message);
+    }
 
     outStr.set(str);
 }

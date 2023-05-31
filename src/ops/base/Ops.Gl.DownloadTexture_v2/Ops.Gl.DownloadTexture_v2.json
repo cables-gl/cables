@@ -29,14 +29,13 @@
             {
                 "type": 0,
                 "name": "Finished",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.DownloadTexture_v2"
     },
     "summary": "Download a texture as png file",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "YFvVsEPirRc"

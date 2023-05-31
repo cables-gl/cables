@@ -21,7 +21,7 @@
             {
                 "type": 0,
                 "name": "Patch Field Visible",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Cables.UIMode"
