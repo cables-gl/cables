@@ -208,7 +208,7 @@ Framebuffer2.prototype.setSize = function (w, h)
             // else
             {
                 const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
-                const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                // const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
                 const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 if (this._options.multisampling && this._options.multisamplingSamples) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
