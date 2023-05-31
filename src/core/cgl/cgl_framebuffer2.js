@@ -215,7 +215,8 @@ Framebuffer2.prototype.setSize = function (w, h)
                 else
                 {
                     let internFormat = this._cgl.gl.RGBA32F;
-                    if (this._cgl._isSafariCrap) internFormat = this._cgl.gl.RGBA16F;
+                    // if (this._cgl._isSafariCrap)
+                    internFormat = this._cgl.gl.RGBA16F;
 
                     this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, internFormat, this._width, this._height);
                 }
