@@ -25,6 +25,11 @@ let dataLoaded = false;
 
 op.saveData = saveData;
 
+op.init = () =>
+{
+    op.setStorage({ "subPatchVer": 1 });
+};
+
 op.patchId.onChange = function ()
 {
     const oldPatchOps = op.patch.getSubPatchOps(oldPatchId);

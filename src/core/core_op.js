@@ -123,6 +123,33 @@ const Op = function ()
         if (doEmitEvent) this.emitEvent("onTitleChange", name);
     };
 
+    Op.prototype.setStorage = function (newAttribs)
+    {
+        if (!newAttribs) return;
+        this.storage = this.storage || {};
+
+        let changed = false;
+        for (const p in newAttribs)
+        {
+            if (this.storage[p] != newAttribs[p]) changed = true;
+            this.storage[p] = newAttribs[p];
+        }
+
+        if (changed) this.emitEvent("onStorageChange", newAttribs);
+    };
+
+    Op.prototype.isSubPatchOp = function ()
+    {
+        if (this.storage) return (this.storage.subPatchVer || 0);
+    };
+
+
+    // Op.isSubPatchOpName = function (name)
+    // {
+    //     return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
+    // };
+
+
     const _setUiAttrib = function (newAttribs)
     {
         if (!newAttribs) return;
@@ -961,71 +988,11 @@ const Op = function ()
         return p;
     };
 
-    Op.prototype.printInfo = function ()
-    {
-        for (let i = 0; i < this.portsIn.length; i++) console.log("in: " + this.portsIn[i].getName());// eslint-disable-line
-
-        for (const ipo in this.portsOut) console.log("out: " + this.portsOut[ipo].getName());// eslint-disable-line
-    };
-
-    // Op.prototype.getOutChilds = function ()
-    // {
-    //     const childs = [];
-    //     for (const ipo in this.portsOut)
-    //     {
-    //         for (const l in this.portsOut[ipo].links)
-    //         {
-    //             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-    //                 childs.push(this.portsOut[ipo].links[l].portIn.parent);
-    //         }
-    //     }
-    //     return childs;
-    // };
-
-    // todo deprecate ?!
-    // Op.prototype.markChilds = function ()
-    // {
-    //     this.marked = true;
-    //     for (const ipo in this.portsOut)
-    //     {
-    //         for (const l in this.portsOut[ipo].links)
-    //         {
-    //             this.portsOut[ipo].parent.marked = true;
-    //             if (this.portsOut[ipo].links[l].portIn.parent != this)
-    //                 this.portsOut[ipo].links[l].portIn.parent.markChilds();
-    //         }
-    //     }
-    // };
-
-
-    // Op.prototype.deleteChilds = function ()
-    // {
-    //     const opsToDelete = [];
-    //     for (const ipo in this.portsOut)
-    //     {
-    //         for (const l in this.portsOut[ipo].links)
-    //         {
-    //             if (this.portsOut[ipo].links[l].portIn.parent != this)
-    //             {
-    //                 if (this.portsOut[ipo].parent != this) opsToDelete.push(this.portsOut[ipo].parent);
-    //                 opsToDelete.push(this.portsOut[ipo].links[l].portIn.parent);
-    //                 this.portsOut[ipo].links[l].portIn.parent.deleteChilds();
-    //             }
-    //         }
-    //     }
-
-    //     for (const i in opsToDelete)
-    //     {
-    //         this.patch.deleteOp(opsToDelete[i].id);
-    //     }
-    // };
-
     Op.prototype.removeLinks = function ()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
         for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
     };
-
 
     Op.prototype.getSerialized = function ()
     {
@@ -1035,9 +1002,11 @@ const Op = function ()
 
         if (this.patch.storeObjNames) op.objName = this.objName;
 
+
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
-        if (this.storage && Object.keys(this.storage).length > 0) op.storage = this.storage;
+
+        if (this.storage && Object.keys(this.storage).length > 0) op.storage = JSON.parse(JSON.stringify(this.storage));
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (op.uiAttribs.hasOwnProperty("uierrors")) delete op.uiAttribs.uierrors;
 
@@ -1548,11 +1517,6 @@ const Op = function ()
      */
     Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
-
-Op.isSubPatchOpName = function (name)
-{
-    return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
-};
 
 Op.isBlueprintOpName = function (name)
 {

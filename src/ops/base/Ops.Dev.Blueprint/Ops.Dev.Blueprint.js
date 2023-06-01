@@ -248,7 +248,7 @@ function addBlueprintInfoToOp(serializedOp)
     if (!serializedOp.objName && CABLES.OPS.hasOwnProperty(serializedOp.opId)) serializedOp.objName = CABLES.OPS[serializedOp.opId].objName;
     serializedOp.storage.blueprint.patchId = patchId;
 
-    if (CABLES.Op.isSubPatchOpName(serializedOp.objName))
+    if (serializedOp.storage && serializedOp.storage.subPatchVer)
     {
         const subPatchPort = serializedOp.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
         if (subPatchPort)
@@ -669,7 +669,8 @@ function getLocalParentSubPatchOp(subPatchId)
     if (!subPatchId) return null;
     return op.patch.ops.find((op) =>
     {
-        if (CABLES.Op.isSubPatchOpName(op.objName))
+        // if (CABLES.Op.isSubPatchOpName(op.objName))
+        if (op.storage && op.storage.subPatchVer)
         {
             const subPatchPort = op.portsIn.find((port) => { return port.name === "patchId" && port.value === subPatchId; });
             if (subPatchPort) return true;
