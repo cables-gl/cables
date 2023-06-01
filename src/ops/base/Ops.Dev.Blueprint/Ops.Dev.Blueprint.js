@@ -345,7 +345,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
 function removeImportedOps()
 {
     if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
-    const toDelete = op.patch.ops.filter((theOp) => { return theOp.uiAttribs && theOp.uiAttribs.blueprintOpId === op.id; });
+    const toDelete = op.patch.ops.filter((theOp) => { return theOp.uiAttribs && theOp.uiAttribs.blueprintOpId === op.id; }).reverse();
     toDelete.forEach((theOp) =>
     {
         op.patch.deleteOp(theOp.id);
