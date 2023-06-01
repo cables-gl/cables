@@ -27,10 +27,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 5,
-                "name": "patchId"
-            },
-            {
                 "type": 0,
                 "name": "name",
                 "subType": "number"

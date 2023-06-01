@@ -354,6 +354,14 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
     let op = null;
     let objName = "";
 
+
+    // console.log("id", id, identifier);
+    if (this._opIdCache[id])
+    {
+        console.log("gibts schon!!!", this._opIdCache[id]);
+    }
+
+
     try
     {
         if (identifier.indexOf("Ops.") === -1)
@@ -361,6 +369,8 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
             // this should be a uuid, not a namespace
             // creating ops by id should be the default way from now on!
             const opId = identifier;
+
+
 
             if (CABLES.OPS[opId])
             {
@@ -853,7 +863,7 @@ Patch.prototype.reloadOp = function (objName, cb)
         oldOp.deleted = true;
         const op = this.addOp(objName, oldOp.uiAttribs);
         if (!op) continue;
-        if (oldOp && oldOp.storage) op.storage = oldOp.storage;
+        if (oldOp && oldOp.storage) op.storage = JSON.parse(JSON.stringify(oldOp.storage));
         ops.push(op);
 
         let j, k, l;
@@ -921,7 +931,8 @@ Patch.prototype.getSubPatchOps = function (patchId, recursive = false)
     {
         for (const i in ops)
         {
-            if (CABLES.Op.isSubPatchOpName(ops[i].objName))
+            // if (CABLES.Op.isSubPatchOpName(ops[i].objName))
+            if (ops[i].storage && ops[i].storage.subPatchVer)
             {
                 const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
                 if (subPatchPort)
@@ -952,7 +963,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
 {
     if (this.aborted) return;
     const newOps = [];
-
     const loadingId = this.loading.start("core", "deserialize");
 
     this.namespace = obj.namespace || "";
@@ -1229,15 +1239,9 @@ Patch.prototype.getVar = function (name)
 Patch.prototype.deleteVar = function (name)
 {
     for (let i = 0; i < this.ops.length; i++)
-    {
         for (let j = 0; j < this.ops[i].portsIn.length; j++)
-        {
             if (this.ops[i].portsIn[j].getVariableName() == name)
-            {
                 this.ops[i].portsIn[j].setVariable(null);
-            }
-        }
-    }
 
     delete this._variables[name];
     this.emitEvent("variableDeleted", name);
@@ -1341,7 +1345,6 @@ Patch.prototype.dispose = function ()
     this.clear();
 };
 
-
 Patch.prototype.pushTriggerStack = function (p)
 {
     this._triggerStack.push(p);
@@ -1428,7 +1431,8 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
 
     for (let i = 0; i < json.ops.length; i++)
     {
-        if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
+        // if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
+        if (json.ops[i].storage && json.ops[i].storage.subPatchVer)
         {
             for (const k in json.ops[i].portsIn)
             {
@@ -1458,6 +1462,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
             }
         }
     }
+
     for (const kk in json.ops)
     {
         let found = false;
