@@ -354,14 +354,6 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
     let op = null;
     let objName = "";
 
-
-    // console.log("id", id, identifier);
-    if (this._opIdCache[id])
-    {
-        console.log("gibts schon!!!", this._opIdCache[id]);
-    }
-
-
     try
     {
         if (identifier.indexOf("Ops.") === -1)
@@ -1025,10 +1017,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 if (port2 && opData.portsOut[ipo].expose) port2.setUiAttribs({ "expose": true });
             }
             newOps.push(op);
-        }
-        else
-        {
-            console.log("could not create op:", opData.objName, opData.id);
         }
 
         // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
