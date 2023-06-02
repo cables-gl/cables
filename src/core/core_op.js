@@ -1518,9 +1518,4 @@ const Op = function ()
     Op.prototype.renderVizLayer = null; // optionaly defined in op instance
 }
 
-Op.isBlueprintOpName = function (name)
-{
-    return name && (name == "Ops.Dev.Blueprint" || name.startsWith("Ops.Dev.Blueprint_v"));
-};
-
 export { Op };

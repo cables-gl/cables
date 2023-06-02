@@ -23,6 +23,11 @@ let parentSubPatchId = null;
 
 activeIn.setUiAttribs({ "order": 200 });
 
+op.init = () =>
+{
+    op.setStorage({ "blueprintVer": 1 });
+};
+
 subPatchIdIn.onChange = () =>
 {
     if (!activeIn.get())
@@ -272,7 +277,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
         {
             if (!replacedOp.uiAttribs) replacedOp.uiAttribs = {};
             replacedOp.uiAttribs.blueprintOpId = op.id;
-            if (CABLES.Op.isBlueprintOpName(replacedOp.objName))
+            if (replacedOp.storage && replacedOp.storage.blueprintVer)
             {
                 replacedOp.uiAttribs.pasted = true;
             }
