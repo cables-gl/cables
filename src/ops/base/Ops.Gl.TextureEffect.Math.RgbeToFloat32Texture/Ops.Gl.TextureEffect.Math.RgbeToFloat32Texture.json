@@ -30,6 +30,12 @@
             "message": "Ops.Gl.Textures.RgbeToHdrTexture renamed to Ops.Gl.TextureEffect.RgbeToFloat32Texture",
             "author": "pandur",
             "date": 1651753455812
+        },
+        {
+            "message": "Ops.Gl.TextureEffect.RgbeToFloat32Texture renamed to Ops.Gl.TextureEffect.Math.RgbeToFloat32Texture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959553283
         }
     ],
     "coreLibs": [
@@ -82,7 +88,6 @@
     "summary": "Convert a RGBE texture to HDR/floating point texture",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

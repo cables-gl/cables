@@ -15,6 +15,12 @@
             "message": "Ops.Mesh.Triangulate2dPath renamed to Ops.Geometry.Triangulate2dPath",
             "author": "pandur",
             "date": 1671005295649
+        },
+        {
+            "message": "Ops.Geometry.Triangulate2dPath renamed to Ops.Graphics.Geometry.Triangulate2dPath",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685951650738
         }
     ],
     "authorName": "pandur",
@@ -60,7 +66,6 @@
     },
     "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

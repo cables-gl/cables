@@ -10,6 +10,12 @@
             "message": "Ops.User.cables.RandomArraysXX renamed to Ops.Array.RandomArrays",
             "author": "simod",
             "date": 1574160284263
+        },
+        {
+            "message": "Ops.Array.RandomArrays renamed to Ops.Array.RandomNumbersArray_v4",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685958985605
         }
     ],
     "authorName": "simod",

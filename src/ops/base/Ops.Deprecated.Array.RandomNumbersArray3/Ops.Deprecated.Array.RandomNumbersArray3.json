@@ -112,6 +112,12 @@
             "message": "Outputs total points and array length",
             "author": "andro",
             "date": 1565014968027
+        },
+        {
+            "message": "Ops.Array.RandomNumbersArray3 renamed to Ops.Deprecated.Array.RandomNumbersArray3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959082121
         }
     ],
     "issues": "",

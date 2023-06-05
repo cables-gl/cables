@@ -21,5 +21,13 @@
     "summary": "iterate keys of an object",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectIterate renamed to Ops.Deprecated.Json.ObjectIterate",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959190959
+        }
+    ]
 }
