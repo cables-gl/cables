@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     geometry = op.inObject("Geometry", null, "geometry"),
-    inActive = op.inBool("Render", true),
+    inActive = op.inBool("Render Mesh", true),
     trigger = op.outTrigger("trigger");
 
 op.toWorkPortsNeedToBeLinked(geometry, render);
