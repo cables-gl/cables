@@ -20,7 +20,7 @@ let
     doScale = true,
     vScale = vec3.create(),
     mesh = null;
-
+updateScale();
 op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 inTrigger.onTriggered = function ()
@@ -64,7 +64,7 @@ outGeometry.onLinkChanged =
 
 function updateScale()
 {
-    vec3.set(vScale, inRadius.get(), inRadius.get(), inRadius.get());
+    vec3.set(vScale, inRadius.get() * 2.0, inRadius.get() * 2.0, inRadius.get() * 2.0);
 }
 
 function buildMesh()
