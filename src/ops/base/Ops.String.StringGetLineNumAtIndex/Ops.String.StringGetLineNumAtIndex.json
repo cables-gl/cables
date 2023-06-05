@@ -46,5 +46,11 @@
             }
         ],
         "name": "Ops.String.StringGetLineNumAtIndex"
+    },
+    "summary": "output the line number at the character index",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

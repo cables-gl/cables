@@ -1,5 +1,5 @@
 {
-    "summary": "transform RGB values interpreted as XYZ coordinates",
+    "summary": "normalize texture rgb values",
     "layout": {
         "portsIn": [
             {

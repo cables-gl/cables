@@ -22,7 +22,7 @@
         ],
         "name": "Ops.Vars.TriggerVarGetNumber"
     },
-    "summary": "read a variable number",
+    "summary": "read a variable number when triggering",
     "issues": "",
     "relatedops": null,
     "youtubeids": [
@@ -34,7 +34,7 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "1tfFT6",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": "cloned op from Ops.Vars.VarGetNumber_v2",
@@ -47,5 +47,6 @@
             "author": "pandur",
             "date": 1682434069596
         }
-    ]
+    ],
+    "collections": null
 }

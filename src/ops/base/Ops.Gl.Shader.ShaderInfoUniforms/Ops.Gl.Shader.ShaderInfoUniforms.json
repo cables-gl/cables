@@ -11,6 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1684326717623
+        },
+        {
+            "message": "Ops.Gl.Shader.ShaderInfoUnitorms renamed to Ops.Gl.Shader.ShaderInfoUniforms",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685963113304
         }
     ],
     "authorName": "pandur",
@@ -33,5 +39,11 @@
             }
         ],
         "name": "Ops.Gl.Shader.ShaderInfoUnitorms"
+    },
+    "summary": "read back all uniforms values of the current bound shader",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
