@@ -17,6 +17,11 @@
                 "type": 0,
                 "name": "End",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "End of string",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

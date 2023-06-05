@@ -6,7 +6,7 @@ let m = mat4.create();
 
 render.onTriggered = function ()
 {
-    mat4.copy(m, op.patch.cg.vMatrix);
+    mat4.copy(m, op.patch.cgl.vMatrix);
     matrix.set(null);
     matrix.set(m);
     trigger.trigger();

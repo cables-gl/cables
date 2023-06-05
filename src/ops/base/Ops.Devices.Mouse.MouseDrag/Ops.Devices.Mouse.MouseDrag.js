@@ -16,6 +16,7 @@ let lastX = 0;
 let lastY = 0;
 let firstMove = true;
 
+inputType.onChange =
 area.onChange = updateArea;
 
 updateArea();

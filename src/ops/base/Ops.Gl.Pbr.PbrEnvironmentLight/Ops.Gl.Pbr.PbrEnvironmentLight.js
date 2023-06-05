@@ -91,8 +91,8 @@ let PrefilteredSizeChanged = true;
 let IBLLUTSettingsChanged = true;
 inIrradianceSize.onChange = () => { IrradianceSizeChanged = true; };
 inPrefilteredSize.onChange = () => { PrefilteredSizeChanged = true; };
-inIBLLUTSize.onChange = () => { IBLLUTSettingsChanged = true; };
-inForce8bitIbl.onChange = () => { IBLLUTSettingsChanged = true; };
+inIBLLUTSize.onChange =
+    inForce8bitIbl.onChange = () => { IBLLUTSettingsChanged = true; };
 
 // outputs
 const outTrigger = op.outTrigger("next");
