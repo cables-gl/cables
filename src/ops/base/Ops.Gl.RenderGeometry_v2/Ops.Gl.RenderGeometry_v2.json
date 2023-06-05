@@ -12,6 +12,11 @@
             },
             {
                 "type": 0,
+                "name": "Add Vertex Numbers",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Render Mesh",
                 "subType": "boolean"
             }
