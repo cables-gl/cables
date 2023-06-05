@@ -1,0 +1,36 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "ab0c768e-e684-47ba-b11f-f95d86532df2",
+    "created": 1511815465623,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.DivideGeometry"
+    },
+    "summary": "disconnect faces/polygons of a mesh ",
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559038994367
+        },
+        {
+            "message": "Ops.Gl.Geometry.DivideGeometry renamed to Ops.Graphics.Geometry.DivideGeometry",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685950724698
+        }
+    ],
+    "exampleProjectId": "sYIxm1"
+}

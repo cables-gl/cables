@@ -1,0 +1,79 @@
+{
+    "id": "64a34a29-000d-4350-875f-5b72b97a314f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647367948957
+        },
+        {
+            "message": "Ops.User.pandur.GeometryExtrude renamed to Ops.Dev.GeometryExtrude",
+            "author": "pandur",
+            "date": 1647418104010
+        },
+        {
+            "message": "Ops.Dev.GeometryExtrude renamed to Ops.Gl.Geometry.GeometryExtrude",
+            "author": "pandur",
+            "date": 1654009885331
+        },
+        {
+            "message": "Ops.Gl.Geometry.GeometryExtrude renamed to Ops.Graphics.Geometry.GeometryExtrude",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685950781817
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Walls",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Geometry",
+                "objType": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryExtrude"
+    },
+    "authorName": "pandur",
+    "created": 1647367985009,
+    "summary": "basic extrusion of flat geometry",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    }
+}
