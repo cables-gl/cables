@@ -87,6 +87,12 @@
             "message": "enhancement: ignore comma after last value",
             "author": "pandur",
             "date": 1566813445790
+        },
+        {
+            "message": "Ops.Array.ParseArray_v2 renamed to Ops.Array.StringToArray_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959273973
         }
     ],
     "exampleProjectId": "U4M4J5"

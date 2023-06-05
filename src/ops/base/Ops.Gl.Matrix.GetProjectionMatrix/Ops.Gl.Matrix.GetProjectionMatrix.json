@@ -32,6 +32,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1671034782212
+        },
+        {
+            "message": "Ops.Gl.Matrix.GetProjectonMatrix renamed to Ops.Gl.Matrix.GetProjectionMatrix",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959225398
         }
     ]
 }

@@ -148,6 +148,12 @@
             "message": "code cleanup - ports",
             "author": "andro",
             "date": 1559051315372
+        },
+        {
+            "message": "Ops.Sequence renamed to Ops.Trigger.Sequence",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959336768
         }
     ]
 }

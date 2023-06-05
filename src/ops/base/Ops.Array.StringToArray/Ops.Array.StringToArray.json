@@ -80,6 +80,12 @@
             "message": "optimized by default \"isNumbers\" is set to true when op is created",
             "author": "andro",
             "date": 1556286001300
+        },
+        {
+            "message": "Ops.Array.ParseArray renamed to Ops.Array.StringToArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685959291136
         }
     ],
     "exampleProjectId": "U4M4J5"
