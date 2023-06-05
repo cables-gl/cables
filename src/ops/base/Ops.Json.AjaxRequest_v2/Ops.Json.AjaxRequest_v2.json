@@ -70,6 +70,11 @@
             },
             {
                 "type": 0,
+                "name": "Duration MS",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Is Loading",
                 "subType": "boolean"
             },

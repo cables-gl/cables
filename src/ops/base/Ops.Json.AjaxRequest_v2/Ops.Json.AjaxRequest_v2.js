@@ -9,6 +9,7 @@ const filename = op.inUrl("file"),
     reloadTrigger = op.inTriggerButton("reload"),
     outData = op.outObject("data"),
     outString = op.outString("response"),
+    outDuration = op.outNumber("Duration MS", 0),
     isLoading = op.outBoolNum("Is Loading", false),
     outTrigger = op.outTrigger("Loaded");
 
@@ -63,10 +64,12 @@ function reload(addCachebuster, force = false)
     op.patch.loading.addAssetLoadingTask(() =>
     {
         const body = inBody.get();
+        const startTime = performance.now();
         httpClient(
             url,
             (err, _data, xhr) =>
             {
+                outDuration.set(Math.round(performance.now() - startTime));
                 outData.set(null);
                 outString.set(null);
                 if (err)
