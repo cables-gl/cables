@@ -122,6 +122,9 @@ class CubemapTexture
 
     _setFilter()
     {
+        this._cgl.checkFrameStarted("cubemap corelib");
+
+
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
 
         if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_MIPMAP)
