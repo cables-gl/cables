@@ -1,0 +1,85 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "a9208e84-e957-43ac-9a79-9c719eff95eb",
+    "created": 1511863096901,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Indexed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Faces",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Indices",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Vertices",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Normals",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "TexCoords",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tangents",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "BiTangents",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "VertexColors",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Other Attributes",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryInfo"
+    },
+    "summary": "information about a geometry",
+    "youtubeid": "",
+    "collections": [
+        "dataInfo"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Geometry.GeometryInfo renamed to Ops.Graphics.Geometry.GeometryInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685950745162
+        }
+    ]
+}

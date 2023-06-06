@@ -17,10 +17,11 @@ let
     tmpNormal = vec3.create(),
     tmpVec = vec3.create(),
     needsRebuild = true,
+    lastRadius = 0.0,
     doScale = true,
     vScale = vec3.create(),
     mesh = null;
-
+updateScale();
 op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 inTrigger.onTriggered = function ()
@@ -64,6 +65,7 @@ outGeometry.onLinkChanged =
 
 function updateScale()
 {
+    if (doScale && lastRadius != 1.0)needsRebuild = true;
     vec3.set(vScale, inRadius.get(), inRadius.get(), inRadius.get());
 }
 
@@ -72,8 +74,11 @@ function buildMesh()
     const
         stacks = Math.ceil(Math.max(inStacks.get(), 2)),
         slices = Math.ceil(Math.max(inSlices.get(), 3)),
-        stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks),
-        radius = inRadius.get();
+        stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks);
+    let radius = inRadius.get();
+
+    if (doScale)radius = 1.0;
+    lastRadius = radius;
     let
         positions = [],
         texcoords = [],

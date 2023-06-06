@@ -1,0 +1,51 @@
+{
+    "id": "3890b676-9ba6-42c1-9a57-659b74958e20",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1662735327505
+        },
+        {
+            "message": "Ops.User.pandur.GeometryToObj renamed to Ops.Gl.Geometry.GeometryToObj",
+            "author": "pandur",
+            "date": 1662737594529
+        },
+        {
+            "message": "Ops.Gl.Geometry.GeometryToObj renamed to Ops.Graphics.Geometry.GeometryAttributes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685950860569
+        },
+        {
+            "message": "Ops.Graphics.Geometry.GeometryAttributes renamed to Ops.Graphics.Geometry.GeometryToObj",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685950980889
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1662735362236,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Obj"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryToObj"
+    },
+    "summary": "Generate an .obj file as string from a geometry",
+    "relatedops": null,
+    "exampleProjectId": "BwxY2f",
+    "docs": {
+        "ports": []
+    }
+}

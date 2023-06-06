@@ -1,0 +1,71 @@
+{
+    "id": "47ac6cff-af76-4ba0-b2e3-4334109f96cd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647416911262
+        },
+        {
+            "message": " added lib: earcut.js",
+            "author": "pandur",
+            "date": 1647417096569
+        },
+        {
+            "message": "Ops.User.pandur.SvgPathToMesh renamed to Ops.Dev.SvgPathToMesh",
+            "author": "pandur",
+            "date": 1647448101899
+        },
+        {
+            "message": "Ops.Dev.SvgPathToMesh renamed to Ops.Gl.Geometry.SvgPathToGeometry",
+            "author": "pandur",
+            "date": 1653287610699
+        },
+        {
+            "message": "Ops.Gl.Geometry.SvgPathToGeometry renamed to Ops.Graphics.Geometry.SvgPathToGeometry",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685951197694
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "SVG Path"
+            },
+            {
+                "type": 0,
+                "name": "Bezier Stepsize",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rescale",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            }
+        ],
+        "name": "Ops.Dev.SvgPathToMesh"
+    },
+    "authorName": "pandur",
+    "created": 1647416958593,
+    "libs": [
+        "earcut.js"
+    ],
+    "summary": "Generate a SVG path string of a string using an opentype font",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    }
+}

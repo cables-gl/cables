@@ -1,0 +1,165 @@
+{
+    "id": "ee0459bd-3dc1-4b32-b6c1-01f98d06eebd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1595235270070
+        },
+        {
+            "message": "Ops.User.pandur.SequenceStrings renamed to Ops.Values.SequenceStrings",
+            "author": "pandur",
+            "date": 1595235484143
+        },
+        {
+            "message": "Ops.Values.SequenceStrings renamed to Ops.String.SequenceStrings",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685949326486
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1595235285099,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String 0"
+            },
+            {
+                "type": "5",
+                "name": "String 1"
+            },
+            {
+                "type": "5",
+                "name": "String 2"
+            },
+            {
+                "type": "5",
+                "name": "String 3"
+            },
+            {
+                "type": "5",
+                "name": "String 4"
+            },
+            {
+                "type": "5",
+                "name": "String 5"
+            },
+            {
+                "type": "5",
+                "name": "String 6"
+            },
+            {
+                "type": "5",
+                "name": "String 7"
+            },
+            {
+                "type": "5",
+                "name": "String 8"
+            },
+            {
+                "type": "5",
+                "name": "String 9"
+            },
+            {
+                "type": "5",
+                "name": "String 10"
+            },
+            {
+                "type": "5",
+                "name": "String 11"
+            },
+            {
+                "type": "5",
+                "name": "String 12"
+            },
+            {
+                "type": "5",
+                "name": "String 13"
+            },
+            {
+                "type": "5",
+                "name": "String 14"
+            },
+            {
+                "type": "5",
+                "name": "String 15"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Output 0"
+            },
+            {
+                "type": "5",
+                "name": "Output 1"
+            },
+            {
+                "type": "5",
+                "name": "Output 2"
+            },
+            {
+                "type": "5",
+                "name": "Output 3"
+            },
+            {
+                "type": "5",
+                "name": "Output 4"
+            },
+            {
+                "type": "5",
+                "name": "Output 5"
+            },
+            {
+                "type": "5",
+                "name": "Output 6"
+            },
+            {
+                "type": "5",
+                "name": "Output 7"
+            },
+            {
+                "type": "5",
+                "name": "Output 8"
+            },
+            {
+                "type": "5",
+                "name": "Output 9"
+            },
+            {
+                "type": "5",
+                "name": "Output 10"
+            },
+            {
+                "type": "5",
+                "name": "Output 11"
+            },
+            {
+                "type": "5",
+                "name": "Output 12"
+            },
+            {
+                "type": "5",
+                "name": "Output 13"
+            },
+            {
+                "type": "5",
+                "name": "Output 14"
+            },
+            {
+                "type": "5",
+                "name": "Output 15"
+            }
+        ],
+        "name": "Ops.Values.SequenceStrings"
+    },
+    "summary": "control order and flow of strings",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

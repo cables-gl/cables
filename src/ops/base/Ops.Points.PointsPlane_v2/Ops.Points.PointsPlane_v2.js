@@ -27,8 +27,8 @@ generate();
 function generate()
 {
     arr.length = 0;
-    const numX = Math.max(0, inNumX.get());
-    const numY = Math.max(0, inNumY.get());
+    const numX = Math.floor(Math.max(0, inNumX.get()));
+    const numY = Math.floor(Math.max(0, inNumY.get()));
 
     let stepX = 0;
     let stepY = 0;
@@ -87,14 +87,9 @@ function generate()
         }
     }
 
-    outRowNums.set(null);
-    outRowNums.set(arrRowNums);
-
-    outColNums.set(null);
-    outColNums.set(arrColNums);
-
-    outArr.set(null);
-    outArr.set(arr);
+    outRowNums.setRef(arrRowNums);
+    outColNums.setRef(arrColNums);
+    outArr.setRef(arr);
     outTotalPoints.set(arr.length / 3);
     outArrayLength.set(arr.length);
 }

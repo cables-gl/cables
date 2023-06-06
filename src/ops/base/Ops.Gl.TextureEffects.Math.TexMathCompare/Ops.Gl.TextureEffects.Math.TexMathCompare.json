@@ -1,5 +1,5 @@
 {
-    "summary": "",
+    "summary": "compare and pass through of color channel values",
     "layout": {
         "portsIn": [
             {

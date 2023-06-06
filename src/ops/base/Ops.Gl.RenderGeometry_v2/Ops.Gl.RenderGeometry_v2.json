@@ -12,6 +12,11 @@
             },
             {
                 "type": 0,
+                "name": "Add Vertex Numbers",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Render",
                 "subType": "boolean"
             }
@@ -22,7 +27,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.RenderGeometry2"
+        "name": "Ops.Gl.RenderGeometry_v2"
     },
     "summary": "Render a geometry as mesh",
     "author": "55d744634cdc152216eb9aad",
