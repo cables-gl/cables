@@ -17,7 +17,7 @@
             },
             {
                 "type": 0,
-                "name": "Render",
+                "name": "Render Mesh",
                 "subType": "boolean"
             }
         ],

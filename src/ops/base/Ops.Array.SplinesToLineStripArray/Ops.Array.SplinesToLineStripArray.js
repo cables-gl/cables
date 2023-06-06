@@ -2,13 +2,18 @@ const
     inArrays = op.inArray("Array"),
     outArr = op.outArray("Result");
 
+inArrays.onLinkChanged =
 inArrays.onChange = function ()
 {
     let inArr = inArrays.get();
 
     let arr = [];
 
-    if (!inArr) return;
+    if (!inArr)
+    {
+        outArr.setRef([]);
+        return;
+    }
 
     for (let i = 0; i < inArr.length; i++)
     {
@@ -25,6 +30,5 @@ inArrays.onChange = function ()
         }
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
 };

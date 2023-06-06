@@ -84,7 +84,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Patch.PP7cg8x.WireframeMaterial2"
+        "name": "Ops.Gl.Shader.WireframeMaterial_v2"
     },
     "summary": "Renders following meshes as wireframes",
     "docs": {

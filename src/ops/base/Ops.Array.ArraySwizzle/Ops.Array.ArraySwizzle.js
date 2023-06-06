@@ -46,9 +46,9 @@ function convert(updateUi)
         if (srcStride == "4")str += "XYZW ";
         str += " > ";
         str += in1.get();
-        if (targetStride >= 2)str += in2.get() + " ";
-        if (targetStride >= 3)str += in3.get() + " ";
-        if (targetStride >= 4)str += in4.get() + " ";
+        if (targetStride >= 2) str += in2.get() + " ";
+        if (targetStride >= 3) str += in3.get() + " ";
+        if (targetStride >= 4) str += in4.get() + " ";
         op.setUiAttrib({ "extendTitle": str });
     }
 
@@ -63,18 +63,18 @@ function convert(updateUi)
     }
     op.setUiError("invalidlength", null);
 
-    if (
-        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in1.get()) > srcStride - 1) ||
-        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in2.get()) > srcStride - 1) ||
-        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in3.get()) > srcStride - 1) ||
-        (contents.indexOf(in4.get()) < 3 && contents.indexOf(in4.get()) > srcStride - 1)
-    )
-    {
-        outArr.set(null);
-        op.setUiError("outofbounds", "out of bounds access");
-        return;
-    }
-    op.setUiError("outofbounds", null);
+    // if (
+    //     (contents.indexOf(in1.get()) < 3 && contents.indexOf(in1.get()) > srcStride - 1) ||
+    //     (contents.indexOf(in2.get()) < 3 && contents.indexOf(in2.get()) > srcStride - 2) ||
+    //     (contents.indexOf(in3.get()) < 3 && contents.indexOf(in3.get()) > srcStride - 3) ||
+    //     (contents.indexOf(in4.get()) < 3 && contents.indexOf(in4.get()) > srcStride - 1)
+    // )
+    // {
+    //     outArr.set(null);
+    //     op.setUiError("outofbounds", "out of bounds access");
+    //     return;
+    // }
+    // op.setUiError("outofbounds", null);
 
     const step = parseInt(inStride.get());
 
@@ -99,7 +99,7 @@ function convert(updateUi)
             else if (index1 === 3)result[idx++] = arr[i + 3];
             else if (index1 === 4)result[idx++] = 0;
             else if (index1 === 5)result[idx++] = 1;
-            else if (index1 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index1 === 6)result[idx++] = (idx - 1) / (targetStride);
             else if (index1 === 7)result[idx++] = i / arr.length;
         }
 
@@ -111,7 +111,7 @@ function convert(updateUi)
             else if (index2 === 3)result[idx++] = arr[i + 3];
             else if (index2 === 4)result[idx++] = 0;
             else if (index2 === 5)result[idx++] = 1;
-            else if (index2 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index2 === 6)result[idx++] = (idx - 2) / (targetStride);
             else if (index2 === 7)result[idx++] = i / arr.length;
         }
 
@@ -123,7 +123,7 @@ function convert(updateUi)
             else if (index3 === 3)result[idx++] = arr[i + 3];
             else if (index3 === 4)result[idx++] = 0;
             else if (index3 === 5)result[idx++] = 1;
-            else if (index3 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index3 === 6)result[idx++] = (idx - 3) / (targetStride);
             else if (index3 === 7)result[idx++] = i / arr.length;
         }
 
@@ -135,7 +135,7 @@ function convert(updateUi)
             else if (index4 === 3)result[idx++] = arr[i + 3];
             else if (index4 === 4)result[idx++] = 0;
             else if (index4 === 5)result[idx++] = 1;
-            else if (index4 === 6)result[idx++] = (idx + 1) / (targetStride) - 1;
+            else if (index4 === 6)result[idx++] = (idx - 4) / (targetStride);
             else if (index4 === 7)result[idx++] = i / arr.length;
         }
     }
