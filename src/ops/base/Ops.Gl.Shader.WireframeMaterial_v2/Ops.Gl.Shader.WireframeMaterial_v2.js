@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     enableDepth = op.inValueBool("enable depth testing", true),
-    w = op.inFloat("width", 0.25),
+    w = op.inFloat("width", 1),
     aa = op.inValueSlider("AntiAlias", 0.95),
     r = op.inValueSlider("diffuse r", 1),
     g = op.inValueSlider("diffuse g", 1),
