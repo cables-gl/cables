@@ -30,9 +30,9 @@ function loadCubemapTexture(target, texture, url)
     image.crossOrigin = "";
     image.onload = function ()
     {
-        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
+        // cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, texture);
-        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
+        // cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, true);
         cgl.gl.texImage2D(target, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, image);
 
         texCount++;
@@ -43,7 +43,7 @@ function loadCubemapTexture(target, texture, url)
             cgl.patch.loading.finished(loadingId);
         }
 
-        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
+        // cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, null);
     };
     image.onerror = function ()
