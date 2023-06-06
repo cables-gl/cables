@@ -324,7 +324,7 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
         return;
     }
 
-    if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
+    // if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
@@ -336,7 +336,7 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this._setFilter();
     this.updateMipMap();
 
-    if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
+    // if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
@@ -386,7 +386,7 @@ Texture.prototype.initTexture = function (img, filter)
 
     this.deleted = false;
     this.flipped = !this.flip;
-    if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
+    // if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
@@ -399,7 +399,7 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
-    if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
+    // if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 
     this.getInfoOneLine();
     this._cgl.printError("initTexture");
@@ -531,52 +531,52 @@ Texture.prototype._setFilter = function ()
     }
     else
     {
-        // if (this.wrap == Texture.WRAP_CLAMP_TO_EDGE)
-        // {
-        //     this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
-        //     this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
-        // }
-        // else if (this.wrap == Texture.WRAP_REPEAT)
-        // {
-        //     this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.REPEAT);
-        //     this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.REPEAT);
-        // }
-        // else if (this.wrap == Texture.WRAP_MIRRORED_REPEAT)
+        if (this.wrap == Texture.WRAP_CLAMP_TO_EDGE)
         {
-            // this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.MIRRORED_REPEAT);
-            // this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.MIRRORED_REPEAT);
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
+        }
+        else if (this.wrap == Texture.WRAP_REPEAT)
+        {
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.REPEAT);
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.REPEAT);
+        }
+        else if (this.wrap == Texture.WRAP_MIRRORED_REPEAT)
+        {
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.MIRRORED_REPEAT);
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.MIRRORED_REPEAT);
         }
 
-        // if (this.filter == Texture.FILTER_NEAREST)
-        // {
-        //     this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
-        //     this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
-        // }
-        // else if (this.filter == Texture.FILTER_LINEAR)
+        if (this.filter == Texture.FILTER_NEAREST)
+        {
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
+        }
+        else if (this.filter == Texture.FILTER_LINEAR)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
         }
-        // else if (this.filter == Texture.FILTER_MIPMAP)
-        // {
-        // this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
-        // this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR_MIPMAP_LINEAR);
-        // }
-        // else
-        // {
-        //     this._log.log("unknown texture filter!", this.filter);
-        //     throw new Error("unknown texture filter!" + this.filter);
-        // }
+        else if (this.filter == Texture.FILTER_MIPMAP)
+        {
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
+            this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR_MIPMAP_LINEAR);
+        }
+        else
+        {
+            this._log.log("unknown texture filter!", this.filter);
+            throw new Error("unknown texture filter!" + this.filter);
+        }
 
-        // if (this.anisotropic && this.filter == Texture.FILTER_MIPMAP)
-        // {
-        //     const ext = this._cgl.gl.getExtension("EXT_texture_filter_anisotropic");
-        //     if (ext)
-        //     {
-        //         const max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-        //         this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max, this.anisotropic));
-        //     }
-        // }
+        if (this.anisotropic)
+        {
+            const ext = this._cgl.gl.getExtension("EXT_texture_filter_anisotropic");
+            if (ext)
+            {
+                const max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+                this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max, this.anisotropic));
+            }
+        }
     }
     this.getInfoOneLine();
     this._cgl.printError("_setFilter");
