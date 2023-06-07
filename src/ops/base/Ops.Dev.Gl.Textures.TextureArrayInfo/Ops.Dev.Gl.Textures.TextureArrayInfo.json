@@ -11,6 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1686132163340
+        },
+        {
+            "message": "Ops.Gl.Textures.TextureArrayInfo renamed to Ops.Dev.Gl.Textures.TextureArrayInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686146553112
         }
     ],
     "layout": {
