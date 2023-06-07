@@ -81,6 +81,8 @@ class CubemapFramebuffer
 
         // console.log("cubemapframebuffer created");
 
+        this._cgl.checkFrameStarted("cubemap framebuffer");
+
         this.texture = new CubemapTexture(this._cgl, {
             "width": this.width,
             "height": this.height,

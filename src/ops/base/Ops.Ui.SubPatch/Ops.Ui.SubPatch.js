@@ -34,6 +34,7 @@ op.patchId.onChange = function ()
 {
     const oldPatchOps = op.patch.getSubPatchOps(oldPatchId);
 
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
     if (oldPatchOps.length == 2)
     {
         for (let i = 0; i < oldPatchOps.length; i++)
@@ -41,9 +42,7 @@ op.patchId.onChange = function ()
             op.patch.deleteOp(oldPatchOps[i].id);
         }
     }
-    else
-    {
-    }
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 };
 
 op.onLoaded = function ()

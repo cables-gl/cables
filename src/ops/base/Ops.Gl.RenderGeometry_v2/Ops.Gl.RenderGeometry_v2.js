@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
     geometry = op.inObject("Geometry", null, "geometry"),
+    inActive = op.inBool("Render Mesh", true),
 
     inVertNums = op.inBool("Add Vertex Numbers", true),
-    inActive = op.inBool("Render", true),
     trigger = op.outTrigger("trigger");
 
 op.toWorkPortsNeedToBeLinked(geometry, render);

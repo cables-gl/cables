@@ -9,7 +9,7 @@ const MAX_DELAY_TIME = 179.999;
 
 for (let i = 0; i < 7 * 3; i += 1)
 {
-    const noteValue = Math.pow(2, i % 7);
+    const noteValue = 2 ** (i % 7);
     let string = "1/" + noteValue;
     if (i > 6 && i < 14)
     {
@@ -58,7 +58,7 @@ const MULTIPLIERS = [
 
 const MIN_BPM = 20;
 let QUARTER_NOTE_S = 60 / Math.max(20, inBPM.get());
-let NOTES_IN_S = MULTIPLIERS.map((multiplier) => multiplier * QUARTER_NOTE_S);
+let NOTES_IN_S = MULTIPLIERS.map((multiplier) => { return multiplier * QUARTER_NOTE_S; });
 
 const calculateDelayTime = () =>
 {
@@ -161,10 +161,18 @@ inUseModulation.onChange = () =>
     }
     else
     {
-        lfoGainNode.disconnect(delayNode.delayTime);
+        try
+        {
+            // not possible to check isConnected, but if it isn't this will throw
+            lfoGainNode.disconnect(delayNode.delayTime);
 
-        inputNode.disconnect(filterHighpassNode);
-        filterLowpassNode.disconnect(delayNode);
+            inputNode.disconnect(filterHighpassNode);
+            filterLowpassNode.disconnect(delayNode);
+        }
+        catch (e)
+        {
+            op.log("failed to disconnect audionodes", e);
+        }
 
         inputNode.connect(delayNode);
     }
@@ -195,7 +203,7 @@ inDelayMS.onChange = inDelayShift.onChange = inDelayNotes.onChange = () =>
 inBPM.onChange = () =>
 {
     QUARTER_NOTE_S = 60 / Math.max(MIN_BPM, inBPM.get());
-    NOTES_IN_S = MULTIPLIERS.map((multiplier) => multiplier * QUARTER_NOTE_S);
+    NOTES_IN_S = MULTIPLIERS.map((multiplier) => { return multiplier * QUARTER_NOTE_S; });
 
     delayNode.delayTime.linearRampToValueAtTime(calculateDelayTime(), audioCtx.currentTime + 0.1);
 
@@ -320,21 +328,29 @@ audioIn.onChange = function ()
 
 op.onDelete = () =>
 {
-    lfoNode.disconnect();
-    delayNode.disconnect();
-    feedbackNode.disconnect();
-
-    inputNode.disconnect();
-
-    dryNode.disconnect();
-    delayNode.disconnect();
-
-    wetNode.disconnect();
-    filterHighpassNode.disconnect();
-
-    if (inUseModulation.get())
+    try
     {
-        lfoGainNode.disconnect();
-        filterLowpassNode.disconnect();
+        // not possible to check isConnected, but if it isn't this will throw
+        lfoNode.disconnect();
+        delayNode.disconnect();
+        feedbackNode.disconnect();
+
+        inputNode.disconnect();
+
+        dryNode.disconnect();
+        delayNode.disconnect();
+
+        wetNode.disconnect();
+        filterHighpassNode.disconnect();
+
+        if (inUseModulation.get())
+        {
+            lfoGainNode.disconnect();
+            filterLowpassNode.disconnect();
+        }
+    }
+    catch (e)
+    {
+        op.log("failed to disconnect audionodes", e);
     }
 };

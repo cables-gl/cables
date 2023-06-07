@@ -568,7 +568,7 @@ Texture.prototype._setFilter = function ()
             throw new Error("unknown texture filter!" + this.filter);
         }
 
-        if (this.anisotropic && this.filter == Texture.FILTER_MIPMAP)
+        if (this.anisotropic)
         {
             const ext = this._cgl.gl.getExtension("EXT_texture_filter_anisotropic");
             if (ext)

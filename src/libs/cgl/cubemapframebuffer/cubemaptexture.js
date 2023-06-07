@@ -50,6 +50,8 @@ class CubemapTexture
 
     setSize(w, h)
     {
+        this._cgl.checkFrameStarted("cubemap corelib setsize");
+
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
         if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
@@ -122,6 +124,9 @@ class CubemapTexture
 
     _setFilter()
     {
+        this._cgl.checkFrameStarted("cubemap corelib");
+
+
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
 
         if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_MIPMAP)
