@@ -14,13 +14,10 @@ const
     loaded = op.outNumber("Loaded", false),
     loading = op.outNumber("Loading", false);
 
-op.setPortGroup("Size", [width, height]);
-
-unpackAlpha.setUiAttribs({ "hidePort": true });
+const cgl = op.patch.cgl;
 
 op.toWorkPortsNeedToBeLinked(textureOut);
-
-const cgl = op.patch.cgl;
+op.setPortGroup("Size", [width, height]);
 
 let loadedFilename = null;
 let loadingId = null;
@@ -30,10 +27,12 @@ let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let cgl_aniso = 0;
 let timedLoader = 0;
 
-filename.onChange = flip.onChange = function () { reloadSoon(); };
+unpackAlpha.setUiAttribs({ "hidePort": true });
+unpackAlpha.onChange =
+    filename.onChange =
+    flip.onChange = reloadSoon;
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
-unpackAlpha.onChange = function () { reloadSoon(); };
 
 tfilter.set("mipmap");
 wrap.set("repeat");
@@ -107,6 +106,8 @@ function realReload(nocache)
             CGL.Texture.load(cgl, url,
                 function (err, newTex)
                 {
+                    cgl.checkFrameStarted("texture inittexture");
+
                     if (filename.get() != fileToLoad)
                     {
                         cgl.patch.loading.finished(loadingId);
@@ -147,6 +148,7 @@ function realReload(nocache)
                         cgl.patch.loading.finished(loadingId);
                         loadingId = null;
                     }
+                    // testTexture();
                 }, {
                     "anisotropic": cgl_aniso,
                     "wrap": cgl_wrap,
@@ -199,3 +201,19 @@ op.onFileChanged = function (fn)
         realReload(true);
     }
 };
+
+// function testTexture()
+// {
+//     cgl.setTexture(0, tex.tex);
+
+//     const filter = cgl.gl.getTexParameter(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_MIN_FILTER);
+//     const wrap = cgl.gl.getTexParameter(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_WRAP_S);
+
+//     if (cgl_filter === CGL.Texture.FILTER_MIPMAP && filter != cgl.gl.LINEAR_MIPMAP_LINEAR) console.log("wrong texture filter!", filename.get());
+//     if (cgl_filter === CGL.Texture.FILTER_NEAREST && filter != cgl.gl.NEAREST) console.log("wrong texture filter!", filename.get());
+//     if (cgl_filter === CGL.Texture.FILTER_LINEAR && filter != cgl.gl.LINEAR) console.log("wrong texture filter!", filename.get());
+
+//     if (cgl_wrap === CGL.Texture.WRAP_REPEAT && wrap != cgl.gl.REPEAT) console.log("wrong texture wrap1!", filename.get());
+//     if (cgl_wrap === CGL.Texture.WRAP_MIRRORED_REPEAT && wrap != cgl.gl.MIRRORED_REPEAT) console.log("wrong texture wrap2!", filename.get());
+//     if (cgl_wrap === CGL.Texture.WRAP_CLAMP_TO_EDGE && wrap != cgl.gl.CLAMP_TO_EDGE) console.log("wrong texture wrap3!", filename.get());
+// }

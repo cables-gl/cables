@@ -33,16 +33,15 @@ op.init = () =>
 op.patchId.onChange = function ()
 {
     const oldPatchOps = op.patch.getSubPatchOps(oldPatchId);
-
-    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
-    if (oldPatchOps.length == 2)
+    if (oldPatchOps.length === 2)
     {
+        if (op.patch.isEditorMode() && CABLES.UI.DEFAULTOPS.isInBlueprint(op)) CABLES.UI.undo.pause();
         for (let i = 0; i < oldPatchOps.length; i++)
         {
             op.patch.deleteOp(oldPatchOps[i].id);
         }
+        if (op.patch.isEditorMode() && CABLES.UI.DEFAULTOPS.isInBlueprint(op)) CABLES.UI.undo.resume();
     }
-    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 };
 
 op.onLoaded = function ()

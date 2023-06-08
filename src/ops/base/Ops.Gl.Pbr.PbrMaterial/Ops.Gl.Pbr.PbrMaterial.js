@@ -228,8 +228,8 @@ function setEnvironmentLighting(enabled)
 
 op.preRender = function ()
 {
-    PBRShader.bind();
-    doRender();
+    // PBRShader.bind();
+    // doRender();
 };
 
 function updateIBLTexDefines()
