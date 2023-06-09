@@ -22,7 +22,7 @@
             {
                 "type": 0,
                 "name": "Error",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Json.ObjectStringify_v2"
@@ -33,7 +33,6 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "7X58nR"

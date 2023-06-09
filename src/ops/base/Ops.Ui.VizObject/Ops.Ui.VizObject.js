@@ -1,40 +1,19 @@
 const
     inObj = op.inObject("Object"),
-    inConsole = op.inTriggerButton("console log");
+    inConsole = op.inTriggerButton("console log"),
+    inZoomText = op.inBool("ZoomText", false),
+    inLineNums = op.inBool("Line Numbers", true),
+    inFontSize = op.inFloat("Font Size", 10),
+    inPos = op.inFloatSlider("Scroll", 0);
 
+let lines = [];
 inConsole.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
 
-inObj.onLinkChanged = () =>
+inObj.onChange = () =>
 {
-    if (inObj.isLinked())
-    {
-        const p = inObj.links[0].getOtherPort(inObj);
-
-        op.setUiAttrib({ "extendTitle": p.uiAttribs.objType });
-    }
-};
-
-inConsole.onTriggered = () =>
-{
-    console.log(inObj.get());
-};
-
-op.renderVizLayer = (ctx, layer) =>
-{
-    ctx.fillStyle = "#222";
-    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
-
-    ctx.save();
-    ctx.scale(layer.scale, layer.scale);
-
-    ctx.font = "normal 10px sourceCodePro";
-    ctx.fillStyle = "#ccc";
-    const padding = 10;
-
     let obj = inObj.get();
-
     let str = "???";
 
     if (obj && obj.getInfo)
@@ -71,7 +50,6 @@ op.renderVizLayer = (ctx, layer) =>
             if (obj) for (let i in obj)
             {
                 str += "\n" + i + " (" + typeof obj[i] + ")";
-                // console.log(i)
             }
         }
     }
@@ -83,10 +61,42 @@ op.renderVizLayer = (ctx, layer) =>
     if (str === undefined)str = "undefined";
     if (str === null)str = "null";
     str = String(str);
-    let lines = str.split("\n");
+    lines = str.split("\n");
+};
 
-    for (let j = 0; j < lines.length; j++)
-        ctx.fillText(lines[j], layer.x / layer.scale + padding, layer.y / layer.scale + ((j + 1) * 12));
+inObj.onLinkChanged = () =>
+{
+    if (inObj.isLinked())
+    {
+        const p = inObj.links[0].getOtherPort(inObj);
+
+        op.setUiAttrib({ "extendTitle": p.uiAttribs.objType });
+    }
+};
+
+inConsole.onTriggered = () =>
+{
+    console.log(inObj.get());
+};
+
+op.renderVizLayer = (ctx, layer, viz) =>
+{
+    ctx.fillStyle = "#222";
+    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
+
+    ctx.save();
+    ctx.scale(layer.scale, layer.scale);
+
+    // ctx.font = "normal 10px sourceCodePro";
+    // ctx.fillStyle = "#ccc";
+    // const padding = 10;
+
+    viz.renderText(ctx, layer, lines, {
+        "zoomText": inZoomText.get(),
+        "showLineNum": true,
+        "fontSize": inFontSize.get(),
+        "scroll": inPos.get()
+    });
 
     ctx.restore();
 };

@@ -32,7 +32,6 @@ function addListeners(el)
     ele.addEventListener("pointermove", onMove);
     ele.addEventListener("pointerdown", onDown);
     ele.addEventListener("pointerup", onUp);
-    // ele.addEventListener("touchstart",onDown);
 }
 
 function removeListeners()
@@ -43,15 +42,14 @@ function removeListeners()
     ele.removeEventListener("pointermove", onMove);
     ele.removeEventListener("pointerdown", onDown);
     ele.removeEventListener("pointerup", onUp);
-    // ele.removeEventListener("touchstart",onDown);
 }
 
 function onMove(e)
 {
     outPosX.set(e.offsetX);
     outPosY.set(e.offsetY);
-    outIsDownLeft.set(e.buttons == 1);
-    outIsDownRight.set(e.buttons == 2);
+    outIsDownLeft.set(e.which == 1);
+    outIsDownRight.set(e.which == 2);
 }
 
 function onDown(e)
@@ -59,13 +57,13 @@ function onDown(e)
     outPosX.set(e.offsetX);
     outPosY.set(e.offsetY);
 
-    if (e.buttons == 1)outDownLeft.trigger();
-    if (e.buttons == 2)outDownRight.trigger();
+    if (e.which == 1)outDownLeft.trigger();
+    if (e.which == 2)outDownRight.trigger();
 
     ele.setPointerCapture(e.pointerId);
 
-    outIsDownLeft.set(e.buttons == 1);
-    outIsDownRight.set(e.buttons == 2);
+    outIsDownLeft.set(e.which == 1);
+    outIsDownRight.set(e.which == 2);
 }
 
 function onUp(e)
@@ -75,8 +73,8 @@ function onUp(e)
 
     ele.releasePointerCapture(e.pointerId);
 
-    if (e.buttons == 1)outUpLeft.trigger();
-    if (e.buttons == 2)outUpRight.trigger();
+    if (e.which == 1)outUpLeft.trigger();
+    if (e.which == 2)outUpRight.trigger();
     outIsDownRight.set(false);
     outIsDownLeft.set(false);
 }
