@@ -23,7 +23,7 @@ function ()
         for (let i = 0, len = inValue.length; i < len; i += 1)
         {
             const obj = inValue[i];
-            const objKeys = Object.keys(obj);
+            const objKeys = obj ? Object.keys(obj) : [];
             const newObj = {};
 
             for (let j = 0, len2 = objKeys.length; j < len2; j += 1)

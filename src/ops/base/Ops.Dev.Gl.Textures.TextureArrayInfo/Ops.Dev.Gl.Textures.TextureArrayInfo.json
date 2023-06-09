@@ -1,0 +1,47 @@
+{
+    "id": "afaa2e73-4f97-4e4a-bf23-c17e1dd1c0ad",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1686128968053
+        },
+        {
+            "message": "Ops.Patch.P_xdU1v.TextureArrayInfo renamed to Ops.Gl.Textures.TextureArrayInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686132163340
+        },
+        {
+            "message": "Ops.Gl.Textures.TextureArrayInfo renamed to Ops.Dev.Gl.Textures.TextureArrayInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686146553112
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Texture Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "names"
+            },
+            {
+                "type": 3,
+                "name": "Widths"
+            },
+            {
+                "type": 3,
+                "name": "Heights"
+            }
+        ],
+        "name": "Ops.Patch.P_xdU1v.TextureArrayInfo"
+    },
+    "authorName": "pandur",
+    "created": 1686129047736
+}

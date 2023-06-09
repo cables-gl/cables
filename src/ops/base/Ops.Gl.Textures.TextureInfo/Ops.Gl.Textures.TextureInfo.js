@@ -6,10 +6,11 @@ const
     outRatio = op.outNumber("Ratio"),
     outFilter = op.outNumber("Filter"),
     outWrap = op.outNumber("Wrap"),
-    outFlipped = op.outNumber("Flipped"),
-    outFp = op.outNumber("HDR"),
-    outDefaultEmpty = op.outNumber("Is Empty Default Texture", false),
-    outDefaultTex = op.outNumber("Is Default Texture", false),
+    outFlipped = op.outBoolNum("Flipped"),
+    outFp = op.outBoolNum("HDR"),
+    outDefaultEmpty = op.outBoolNum("Is Empty Default Texture", false),
+    outDefaultTex = op.outBoolNum("Is Default Texture", false),
+    outCubemap = op.outBoolNum("Is Cubemap"),
     outId = op.outNumber("Id");
 
 outFp.setUiAttribs({ "title": "Pixelformat Float 32bit" });
@@ -44,6 +45,8 @@ inTex.onChange = function ()
         outId.set(inTex.get().id);
         outFlipped.set(inTex.get().flipped);
         outFp.set(inTex.get().textureType == CGL.Texture.TYPE_FLOAT);
+
+        outCubemap.set(inTex.get().cubemap);
     }
     else
     {
@@ -56,6 +59,7 @@ inTex.onChange = function ()
         outId.set(null);
         outFlipped.set(false);
         outFp.set(false);
+        outCubemap.set(false);
     }
 
     outDefaultEmpty.set(inTex.get() == emptyTex);

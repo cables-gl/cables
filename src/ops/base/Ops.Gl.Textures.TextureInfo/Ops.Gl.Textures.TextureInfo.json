@@ -40,22 +40,28 @@
             {
                 "type": 0,
                 "name": "Flipped",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "HDR",
-                "subType": "number"
+                "uititle": "Pixelformat Float 32bit",
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Is Empty Default Texture",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Is Default Texture",
-                "subType": "number"
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Cubemap",
+                "subType": "boolean"
             },
             {
                 "type": 0,
