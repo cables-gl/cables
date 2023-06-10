@@ -10,6 +10,8 @@ const filename = op.inUrl("file"),
     outData = op.outObject("data"),
     outString = op.outString("response"),
     outDuration = op.outNumber("Duration MS", 0),
+    outStatus = op.outNumber("Status Code", 0),
+
     isLoading = op.outBoolNum("Is Loading", false),
     outTrigger = op.outTrigger("Loaded");
 
@@ -72,14 +74,15 @@ function reload(addCachebuster, force = false)
                 outDuration.set(Math.round(performance.now() - startTime));
                 outData.set(null);
                 outString.set(null);
-                if (err)
-                {
-                    op.patch.loading.finished(loadingId);
-                    isLoading.set(false);
+                outStatus.set(xhr.status);
 
-                    op.logError(err);
-                    return;
-                }
+                // if (err)
+                // {
+                //     op.logError(err);
+                //     // op.patch.loading.finished(loadingId);
+                //     // isLoading.set(false);
+                //     // return;
+                // }
                 try
                 {
                     let data = _data;

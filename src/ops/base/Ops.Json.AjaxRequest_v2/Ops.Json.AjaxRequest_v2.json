@@ -75,6 +75,11 @@
             },
             {
                 "type": 0,
+                "name": "Status Code",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Is Loading",
                 "subType": "boolean"
             },

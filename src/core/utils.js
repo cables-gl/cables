@@ -467,14 +467,14 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
 export const ajax = function (url, cb, method, post, contenttype, jsonP, headers = {})
 {
     request({
-        url,
-        cb,
-        method,
+        "url": url,
+        "cb": cb,
+        "method": method,
         "data": post,
-        contenttype,
+        "contenttype": contenttype,
         "sync": false,
-        jsonP,
-        headers,
+        "jsonP": jsonP,
+        "headers": headers,
     });
 };
 

@@ -1,5 +1,8 @@
 const
     inStr = op.inStringEditor("String"),
+    inZoomText = op.inBool("ZoomText", false),
+    inLineNums = op.inBool("Line Numbers", true),
+    inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0);
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
@@ -22,7 +25,7 @@ inStr.onChange = () =>
     else lines = [];
 };
 
-op.renderVizLayer = (ctx, layer) =>
+op.renderVizLayer = (ctx, layer, viz) =>
 {
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
@@ -32,62 +35,12 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.save();
     ctx.scale(layer.scale, layer.scale);
 
-    ctx.font = "normal 10px sourceCodePro";
-    ctx.fillStyle = "#ccc";
-
-    let padding = 4;
-
-    const lineHeight = 10;
-
-    const numLines = Math.floor(layer.height / layer.scale / lineHeight);
-
-    let offset = Math.floor(inPos.get() * lines.length);
-
-    offset = Math.max(offset, 0);
-    offset = Math.min(offset, lines.length - numLines);
-    if (lines.length < numLines)offset = 0;
-
-    const offsetLeft = ((offset + numLines + " ").length - 1) * 9.5;
-
-    let indent = "";
-    for (let i = 0; i < (offset + numLines + " ").length; i++) indent += " ";
-
-    for (let i = offset; i < offset + numLines; i += 1)
-    {
-        if (i >= lines.length || i < 0) continue;
-
-        ctx.fillStyle = "#888";
-
-        ctx.fillText(i,
-            layer.x / layer.scale + padding,
-            layer.y / layer.scale + lineHeight + (i - offset) * lineHeight + padding);
-
-        ctx.fillStyle = "#ccc";
-
-        ctx.fillText(indent + lines[i],
-            layer.x / layer.scale + padding,
-            layer.y / layer.scale + lineHeight + (i - offset) * lineHeight + padding);
-    }
-
-    const gradHeight = 30;
-
-    if (offset > 0)
-    {
-        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + 5, 0, layer.y / layer.scale + gradHeight);
-        radGrad.addColorStop(0, "#222");
-        radGrad.addColorStop(1, "rgba(34,34,34,0.0)");
-        ctx.fillStyle = radGrad;
-        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale, 200000, gradHeight);
-    }
-
-    if (offset + numLines < lines.length)
-    {
-        const radGrad = ctx.createLinearGradient(0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + 5, 0, layer.y / layer.scale + layer.height / layer.scale - gradHeight + gradHeight);
-        radGrad.addColorStop(1, "#222");
-        radGrad.addColorStop(0, "rgba(34,34,34,0.0)");
-        ctx.fillStyle = radGrad;
-        ctx.fillRect(layer.x / layer.scale, layer.y / layer.scale + layer.height / layer.scale - gradHeight, 200000, gradHeight);
-    }
+    viz.renderText(ctx, layer, lines, {
+        "zoomText": inZoomText.get(),
+        "showLineNum": inLineNums.get(),
+        "fontSize": inFontSize.get(),
+        "scroll": inPos.get()
+    });
 
     ctx.restore();
 };
