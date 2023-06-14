@@ -923,7 +923,6 @@ Patch.prototype.getSubPatchOps = function (patchId, recursive = false)
     {
         for (const i in ops)
         {
-            // if (CABLES.Op.isSubPatchOpName(ops[i].objName))
             if (ops[i].storage && ops[i].storage.subPatchVer)
             {
                 const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
