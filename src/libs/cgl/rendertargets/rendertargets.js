@@ -52,6 +52,7 @@ class RenderTargets
     getTypes()
     {
         return ["Default",
+            "Material Id, Object Id, Instance Id",
             "Material Id",
             "Object Id",
             "Position World",
@@ -76,6 +77,7 @@ class RenderTargets
         if (i === "")outcolor = "col";
 
         if (type == "Normal") return "    " + outcolor + i + " = vec4(norm,1.);".endl();
+        else if (type == "Material Id, Object Id, Instance Id") return "    " + outcolor + i + " = vec4(materialId,objectId,instIdx,1.0);".endl();
         else if (type == "Default" || type == "Color") return "    " + outcolor + i + " = col;".endl();
         else if (type == "1") return "    " + outcolor + i + " = vec4(1.,1.,1.,1.);".endl();
         else if (type == "0") return "    " + outcolor + i + " = vec4(0.,0.,0.,0.);".endl();
@@ -88,7 +90,6 @@ class RenderTargets
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
-        // else return "    outColor" + i + " = vec4(1.,0.,0.,1.);".endl();
     }
 
     getSrcFrag()
@@ -129,8 +130,8 @@ class RenderTargets
             hasNormalModelView = (slots[i] == "Normal * ModelView") || hasNormalModelView;
             hasPosLocal = (slots[i] == "Position Local") || hasPosLocal;
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
-            hasMaterialId = (slots[i] == "Material Id") || hasMaterialId;
-            hasObjectId = (slots[i] == "Object Id") || hasObjectId;
+            hasMaterialId = (slots[i].indexOf("Material Id") > -1) || hasMaterialId;
+            hasObjectId = (slots[i].indexOf("Object Id") > -1) || hasObjectId;
 
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";

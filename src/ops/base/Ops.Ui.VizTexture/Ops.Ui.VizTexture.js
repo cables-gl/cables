@@ -2,6 +2,11 @@ const
     inTex = op.inTexture("Texture In"),
     inShowInfo = op.inBool("Show Info", false),
     inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim"], "Anim"),
+
+    inPickColor = op.inBool("Show Color", false),
+    inX = op.inFloatSlider("X", 0.5),
+    inY = op.inFloatSlider("Y", 0.5),
+
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
@@ -11,14 +16,25 @@ const timer = new CABLES.Timer();
 timer.play();
 
 let shader = null;
+let fb = null;
+let pixelReader = null;
+let colorString = "";
 
 inVizRange.onChange = updateDefines;
+
+inPickColor.onChange = updateUi;
+updateUi();
+
+function updateUi()
+{
+    inX.setUiAttribs({ "greyout": !inPickColor.get() });
+    inY.setUiAttribs({ "greyout": !inPickColor.get() });
+}
 
 inTex.onChange = () =>
 {
     const t = inTex.get();
 
-    // outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     outTex.setRef(t);
 
     let title = "";
@@ -32,8 +48,6 @@ function updateDefines()
 {
     if (!shader) return;
     shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
-    // shader.toggleDefine("ANIM_BLINK", inVizRange.get() == "Blink");
-    // shader.toggleDefine("ANIM_RANGE", inVizRange.get()=="Anim");
 }
 
 op.renderVizLayer = (ctx, layer) =>
@@ -225,13 +239,77 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.scale(layer.scale, layer.scale);
         ctx.font = "normal 10px sourceCodePro";
         ctx.fillStyle = "#000";
-        ctx.fillText(info, layer.x / layer.scale + 5 + 0.75, (layer.y + layer.height) / layer.scale - 5 + 0.75);
+        ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
         ctx.fillStyle = "#fff";
         ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
         ctx.restore();
     }
 
+    if (inPickColor.get())
+    {
+        ctx.save();
+        ctx.scale(layer.scale, layer.scale);
+        ctx.font = "normal 10px sourceCodePro";
+        ctx.fillStyle = "#000";
+        ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
+        ctx.fillStyle = "#fff";
+        ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
+
+        ctx.restore();
+
+        ctx.fillStyle = "#000";
+        ctx.fillRect(
+            layer.x + layer.width * inX.get() - 1,
+            layer.y + sizeImg[1] * inY.get() - 10 + borderTop,
+            3, 20);
+
+        ctx.fillRect(
+            layer.x + layer.width * inX.get() - 10,
+            layer.y + sizeImg[1] * inY.get() - 1 + borderTop,
+            20, 3);
+
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(
+            layer.x + layer.width * inX.get() - 1,
+            layer.y + sizeImg[1] * inY.get() - 10 + borderTop,
+            1, 20);
+
+        ctx.fillRect(
+            layer.x + layer.width * inX.get() - 10,
+            layer.y + sizeImg[1] * inY.get() - 1 + borderTop,
+            20, 1);
+    }
+
     outInfo.set(info);
+
+    if (inPickColor.get())
+    {
+        const gl = cgl.gl;
+
+        const realTexture = inTex.get();
+        if (!realTexture)
+        {
+            colorString = "";
+            return;
+        }
+        if (!fb) fb = gl.createFramebuffer();
+        if (!pixelReader) pixelReader = new CGL.PixelReader();
+
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+        gl.framebufferTexture2D(
+            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
+            gl.TEXTURE_2D, realTexture.tex, 0
+        );
+
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+        pixelReader.read(cgl, fb, realTexture.textureType, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1,
+            (pixel) =>
+            {
+                if (realTexture.textureType != CGL.Texture.TYPE_FLOAT)colorString = Math.floor(pixel[0] / 255 * 100) / 100 + "," + Math.floor(pixel[1] / 255 * 100) / 100 + "," + Math.floor(pixel[2] / 255 * 100) / 100 + "," + Math.floor(pixel[3] / 255 * 100) / 100;
+                else colorString = Math.round(pixel[0] * 100) / 100 + "," + Math.round(pixel[1] * 100) / 100 + "," + Math.round(pixel[2] * 100) / 100 + "," + Math.round(pixel[3] * 100) / 100;
+            });
+    }
 
     cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
