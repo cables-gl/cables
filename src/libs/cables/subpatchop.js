@@ -26,6 +26,12 @@ const SubPatchOp = class
         op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
         op.on("loadedValueSet", () => { this.createInOutOps(); });
 
+
+        op.init = () =>
+        {
+            op.setStorage({ "subPatchVer": 1 });
+        };
+
         op.on("delete", () =>
         {
             for (let i = op.patch.ops.length - 1; i >= 0; i--)
