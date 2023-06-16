@@ -1,0 +1,109 @@
+{
+    "id": "c4ed075b-c897-4788-9cc0-2df638671f67",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1555057855316
+        },
+        {
+            "message": "Ops.Bodymovin.LottieSVGPlayer renamed to Ops.Lottie.LottieSVGPlayer",
+            "author": "pandur",
+            "date": 1560783156915
+        },
+        {
+            "message": " added lib: lottie.js",
+            "author": "stephan",
+            "date": 1626104391335
+        },
+        {
+            "message": "Ops.Lottie.LottieSVGPlayer renamed to Ops.Libs.Lottie.LottieSVGPlayer",
+            "author": "pandur",
+            "date": 1655965703061
+        },
+        {
+            "message": "Ops.Libs.Lottie.LottieSVGPlayer renamed to Ops.Extension.Lottie.LottieSVGPlayer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915348039
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1555057857873,
+    "libs": [
+        "lottie.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            },
+            {
+                "type": 2,
+                "name": "JSON Data"
+            },
+            {
+                "type": 0,
+                "name": "Play Mode index",
+                "group": "Timing",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Render Frame",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Play",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Play Backward",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Rewind",
+                "group": "Timing"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Completed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Total Frames",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Libs.Lottie.LottieSVGPlayer"
+    },
+    "summary": "Play Bodymovin/Lottie animations as SVG in a HTML element",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "3ezRZH"
+}

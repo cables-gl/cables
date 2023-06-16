@@ -1,0 +1,72 @@
+{
+    "id": "4d901c72-b8dc-45dc-ac2e-608e5da40677",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647541367044
+        },
+        {
+            "message": "Ops.User.pandur.OpenTypeToSvgPath renamed to Ops.Dev.OpentypeToSvgPath",
+            "author": "pandur",
+            "date": 1647541433414
+        },
+        {
+            "message": "Ops.Dev.OpentypeToSvgPath renamed to Ops.Libs.OpenType.OpentypeToSvgPath",
+            "author": "pandur",
+            "date": 1653287682153
+        },
+        {
+            "message": " added lib: opentype.js",
+            "author": "stephan",
+            "date": 1654181081484
+        },
+        {
+            "message": "Ops.Libs.OpenType.OpentypeToSvgPath renamed to Ops.Extension.OpenType.OpentypeToSvgPath",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915895840
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1647541416783,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Opentype Font"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Path String"
+            }
+        ],
+        "name": "Ops.Libs.OpenType.OpentypeToSvgPath"
+    },
+    "summary": "get svg path from (OTF) OpentypeFont using the opentype library",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": [
+        "Ops.Libs.OpenType.OpentypeFont",
+        "Ops.Gl.Geometry.SvgPathToGeometry"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    },
+    "libs": [
+        "opentype.js"
+    ]
+}

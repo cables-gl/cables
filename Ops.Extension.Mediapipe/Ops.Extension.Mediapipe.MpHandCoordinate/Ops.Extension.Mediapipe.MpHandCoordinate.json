@@ -1,0 +1,70 @@
+{
+    "id": "d3adef3d-5c99-48fd-86f0-48ec4a290afb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1640253751768
+        },
+        {
+            "message": "Ops.User.pandur.MpHandCoordinate renamed to Ops.Dev.MpHandCoordinate",
+            "author": "pandur",
+            "date": 1640254863039
+        },
+        {
+            "message": "Ops.Dev.MpHandCoordinate renamed to Ops.Libs.Mediapipe.MpHandCoordinate",
+            "author": "pandur",
+            "date": 1652089107528
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpHandCoordinate renamed to Ops.Extension.Mediapipe.MpHandCoordinate",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915647196
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1640253782846,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Hand Points"
+            },
+            {
+                "type": 0,
+                "name": "Joint index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.MpHandCoordinate"
+    },
+    "summary": "Get individual coordinates of fingers or wrist from an array of mediapipe data",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpHandTracking"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "a5xfp4",
+    "docs": {
+        "ports": []
+    }
+}

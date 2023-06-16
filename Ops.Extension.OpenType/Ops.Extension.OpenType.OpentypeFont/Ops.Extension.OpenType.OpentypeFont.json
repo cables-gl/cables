@@ -1,0 +1,76 @@
+{
+    "id": "f85574bb-3869-4a14-8dcc-70414bd8cfcd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642189439092
+        },
+        {
+            "message": " added lib: opentype.js",
+            "author": "pandur",
+            "date": 1642189461231
+        },
+        {
+            "message": "Ops.User.pandur.Opentype renamed to Ops.Dev.Opentype",
+            "author": "pandur",
+            "date": 1642927521851
+        },
+        {
+            "message": "Ops.Dev.Opentype renamed to Ops.Dev.OpentypeFont",
+            "author": "pandur",
+            "date": 1647541530515
+        },
+        {
+            "message": "Ops.Dev.OpentypeFont renamed to Ops.Dev.Opentype",
+            "author": "pandur",
+            "date": 1647541547697
+        },
+        {
+            "message": "Ops.Dev.Opentype renamed to Ops.Dev.OpentypeFont",
+            "author": "pandur",
+            "date": 1647543302442
+        },
+        {
+            "message": "Ops.Dev.OpentypeFont renamed to Ops.Libs.OpenType.OpentypeFont",
+            "author": "pandur",
+            "date": 1653287660357
+        },
+        {
+            "message": "Ops.Libs.OpenType.OpentypeFont renamed to Ops.Extension.OpenType.OpentypeFont",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915904547
+        }
+    ],
+    "libs": [
+        "opentype.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Font File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Opentype Font",
+                "objType": "opentype"
+            }
+        ],
+        "name": "Ops.Libs.OpenType.OpentypeFont"
+    },
+    "authorName": "pandur",
+    "created": 1642189494325,
+    "summary": "Load OTF & TTF fonts via OpenType library",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    }
+}

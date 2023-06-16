@@ -1,0 +1,78 @@
+{
+    "id": "7e13efda-330f-4c5e-bc84-e14e5af99cd4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1608756495961
+        },
+        {
+            "message": "Ops.User.pandur.GeomSetPoints renamed to Ops.User.pandur.FaceMesh",
+            "author": "pandur",
+            "date": 1608765703425
+        },
+        {
+            "message": "Ops.User.pandur.FaceMesh renamed to Ops.Admin.Mediapipe.FaceMesh",
+            "author": "pandur",
+            "date": 1608907343872
+        },
+        {
+            "message": "Ops.Admin.Mediapipe.FaceMesh renamed to Ops.Libs.Mediapipe.FaceMesh",
+            "author": "pandur",
+            "date": 1611052556325
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.FaceMesh renamed to Ops.Admin.Mediapipe.FaceMesh",
+            "author": "stephan",
+            "date": 1613553545365
+        },
+        {
+            "message": "Ops.Admin.Mediapipe.FaceMesh renamed to Ops.Dev.Mediapipe.FaceMesh",
+            "author": "pandur",
+            "date": 1623913682280
+        },
+        {
+            "message": "Ops.Dev.Mediapipe.FaceMesh renamed to Ops.Libs.Mediapipe.FaceMesh",
+            "author": "pandur",
+            "date": 1654015397252
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.FaceMesh renamed to Ops.Extension.Mediapipe.FaceMesh",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915687444
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1608756708552,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geom"
+            },
+            {
+                "type": 3,
+                "name": "Points"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result geom"
+            }
+        ],
+        "name": "Ops.Libs.Mediapipe.FaceMesh"
+    },
+    "summary": "Generate an animated geometry from MpFaceTracking Point Coordinates",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpFaceTracking"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "by9Tq4",
+    "docs": {
+        "ports": []
+    }
+}

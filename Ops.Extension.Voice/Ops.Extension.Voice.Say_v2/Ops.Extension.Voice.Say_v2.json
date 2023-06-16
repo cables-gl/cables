@@ -1,0 +1,158 @@
+{
+    "authorName": "pandur",
+    "id": "eb71ad36-9756-449b-89e6-54bf5c944d81",
+    "created": 1590127346240,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update State"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 1,
+                "name": "Say"
+            },
+            {
+                "type": 0,
+                "name": "Voice",
+                "subType": "select box"
+            },
+            {
+                "type": 0,
+                "name": "Pitch",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Volume",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Say on Text Change",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Pause"
+            },
+            {
+                "type": 1,
+                "name": "Resume"
+            },
+            {
+                "type": 1,
+                "name": "Cancel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Speaking",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Paused",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.TextToSpeech.Say_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Say2 renamed to Ops.WebAudio.TextToSpeech.Say_v2",
+            "author": "pandur",
+            "date": 1590127371156
+        },
+        {
+            "message": "Ops.WebAudio.TextToSpeech.Say_v2 renamed to Ops.Extension.Voice.Say_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686916515965
+        }
+    ],
+    "summary": "Text-to-Speech, speaks different languages (speech synthesis)",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Update State",
+                "text": "Updates the output-parameters (`Speaking`, `Pending`, `Paused`). There is no need to connect this if you don’t use them."
+            },
+            {
+                "name": "Text",
+                "text": "The text which should be said. If `Say On Text Change` is set to `true`, every time you change the text it will be said."
+            },
+            {
+                "name": "Say",
+                "text": "Says text, the most important port of this op."
+            },
+            {
+                "name": "Voice",
+                "text": "There are multiple voices to choose from. These may vary depending on your browser."
+            },
+            {
+                "name": "Pitch",
+                "text": "The pitch (how high / low), in range `[0..2]`, will be actived the next time you call `Say`."
+            },
+            {
+                "name": "Volume",
+                "text": "How loud, in range `[0..1]`"
+            },
+            {
+                "name": "Say on Text Change",
+                "text": "If set every time you change the text it will be said"
+            },
+            {
+                "name": "Pause",
+                "text": "Paused saying things"
+            },
+            {
+                "name": "Resume",
+                "text": "Resumes saying things after a pause"
+            },
+            {
+                "name": "Cancel",
+                "text": "Cancels the queue, if you trigger `Say` too often, this might come in handy."
+            },
+            {
+                "name": "Next",
+                "text": "Triggers the next op."
+            },
+            {
+                "name": "Speaking",
+                "text": "`true` when the voice is currently speaking. You need to connect `Update State` for this to be updated."
+            },
+            {
+                "name": "Pending",
+                "text": "`true` when the last say command (the last text) is waiting in line. You need to connect `Update State` to e.g. `MainLoop` for this to be updated."
+            },
+            {
+                "name": "Paused",
+                "text": "`true` when the voice is currently paused. You need to connect `Update State` to e.g. `MainLoop` for this to be updated."
+            }
+        ]
+    },
+    "exampleProjectId": "WubOWc"
+}

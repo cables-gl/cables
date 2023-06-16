@@ -1,0 +1,68 @@
+{
+    "id": "725c90f3-3526-420f-b921-4d214c281e25",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1640187337834
+        },
+        {
+            "message": "Ops.User.pandur.MpPoseGetCoordinate renamed to Ops.Dev.MpPoseGetCoordinate",
+            "author": "pandur",
+            "date": 1640190467900
+        },
+        {
+            "message": "Ops.Dev.MpPoseGetCoordinate renamed to Ops.Libs.Mediapipe.MpPoseGetCoordinate",
+            "author": "pandur",
+            "date": 1652089166324
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpPoseGetCoordinate renamed to Ops.Extension.Mediapipe.MpPoseGetCoordinate",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915662313
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1640187379901,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Landmarks"
+            },
+            {
+                "type": 0,
+                "name": "Landmark index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Libs.Mediapipe.MpPoseGetCoordinate"
+    },
+    "summary": "Get coordinates of specific body parts from mediapipe data",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "",
+    "exampleProjectId": "uepop4"
+}
