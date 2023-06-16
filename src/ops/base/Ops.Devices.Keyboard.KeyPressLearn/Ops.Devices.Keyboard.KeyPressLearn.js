@@ -102,6 +102,8 @@ function removeListeners()
 
 function addCanvasListener()
 {
+    if (!CABLES.UTILS.isNumeric(cgl.canvas.getAttribute("tabindex"))) cgl.canvas.setAttribute("tabindex", 1);
+
     cgl.canvas.addEventListener("keydown", onKeyDown, false);
     cgl.canvas.addEventListener("keyup", onKeyUp, false);
 }

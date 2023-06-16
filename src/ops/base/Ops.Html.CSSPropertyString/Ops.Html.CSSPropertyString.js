@@ -11,12 +11,11 @@ inProperty.onChange = updateProperty;
 inValue.onChange = update;
 let ele = null;
 
-inEle.onChange = inEle.onLinkChanged = function ()
+inEle.onChange =
+outEle.onLinkChanged =
+inEle.onLinkChanged = function ()
 {
-    if (ele && ele.style)
-    {
-        ele.style[inProperty.get()] = "initial";
-    }
+    if (ele && ele.style) ele.style[inProperty.get()] = "initial";
     update();
 };
 

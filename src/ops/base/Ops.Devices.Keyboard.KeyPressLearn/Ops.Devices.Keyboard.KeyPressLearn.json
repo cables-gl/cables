@@ -43,7 +43,7 @@
             {
                 "type": 0,
                 "name": "Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 5,
