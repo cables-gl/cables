@@ -1,0 +1,102 @@
+{
+    "summary": "Draws a rectangle frame",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thickness",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "pivot x index",
+                "group": "Transform",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "pivot y index",
+                "group": "Transform",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Draw Top",
+                "group": "Sections",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Bottom",
+                "group": "Sections",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Left",
+                "group": "Sections",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Right",
+                "group": "Sections",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Patch.P18Mg4z.RectangleFrame2"
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "34e4535e-a784-4474-9b6f-a7e54e26f09e",
+    "created": 1686920342537,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "HLViQ6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.RectangleFrame",
+            "author": "pandur",
+            "date": 1686920342537
+        },
+        {
+            "message": "Ops.Patch.P18Mg4z.RectangleFrame2 renamed to Ops.Gl.Meshes.RectangleFrame_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686920989282
+        }
+    ]
+}

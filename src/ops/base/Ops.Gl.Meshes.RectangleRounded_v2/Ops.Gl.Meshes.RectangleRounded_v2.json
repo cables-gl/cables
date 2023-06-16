@@ -5,59 +5,59 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Segments",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "width",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "height",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "border radius",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Top Left",
                 "group": "Round Corner",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Top Right",
                 "group": "Round Corner",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Bottom Left",
                 "group": "Round Corner",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Bottom Right",
                 "group": "Round Corner",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Draw",
                 "group": "Draw",
                 "subType": "boolean"
@@ -65,11 +65,11 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "geometry"
             }
         ],
@@ -77,7 +77,6 @@
     },
     "summary": "Draws a rectangle with rounded corners",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Meshes.Rectangle"
     ],
@@ -122,5 +121,13 @@
             }
         ]
     },
-    "exampleProjectId": "1la6mJ"
+    "exampleProjectId": "1la6mJ",
+    "changelog": [
+        {
+            "message": "Ops.Gl.Meshes.RectangleRounded renamed to Ops.Gl.Meshes.RectangleRounded_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686921980489
+        }
+    ]
 }

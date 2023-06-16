@@ -1,9 +1,7 @@
 const notation = op.inString("Receipt", "djmeD");
-
 const outGeom = op.outObject("Geometry");
 
 let obj = {};
-
 let faces = [];
 let vertices = [];
 let vertexColors = [];
@@ -29,11 +27,11 @@ function addFace(verts)
 
     if (verts.length == 3)
     {
-        for (var i = 0; i < verts.length; i++)
+        for (let i = 0; i < verts.length; i++)
         {
             vertices.push(verts[i][0], verts[i][1], verts[i][2]);
 
-            var index = vertices.length / 3 - 1;
+            let index = vertices.length / 3 - 1;
             faces.push(index);
             vertexColors.push(colR, colG, colB, 1);
         }
@@ -41,13 +39,13 @@ function addFace(verts)
     else
     if (verts.length == 4)
     {
-        for (var i = 0; i < verts.length; i++)
+        for (let i = 0; i < verts.length; i++)
         {
             vertices.push(verts[i][0], verts[i][1], verts[i][2]);
             vertexColors.push(colR, colG, colB, 1);
         }
 
-        var index = vertices.length / 3 - 4;
+        let index = vertices.length / 3 - 4;
         faces.push(index);
         faces.push(index + 1);
         faces.push(index + 2);
@@ -62,7 +60,7 @@ function addFace(verts)
         let avgY = 0;
         let avgZ = 0;
 
-        for (var i = 0; i < verts.length; i++)
+        for (let i = 0; i < verts.length; i++)
         {
             avgX += verts[i][0];
             avgY += verts[i][1];
@@ -75,9 +73,9 @@ function addFace(verts)
         vertices.push(avgX, avgY, avgZ);
         vertexColors.push(colR, colG, colB, 1);
 
-        var index = vertices.length / 3 - 1;
+        let index = vertices.length / 3 - 1;
 
-        for (var i = 0; i < verts.length; i++)
+        for (let i = 0; i < verts.length; i++)
         {
             vertices.push(verts[i][0], verts[i][1], verts[i][2]);
             vertexColors.push(colR, colG, colB, 1);
@@ -85,7 +83,7 @@ function addFace(verts)
 
         const indexEnd = vertices.length / 3 - 1;
 
-        for (var i = index; i < indexEnd; i++)
+        for (let i = index; i < indexEnd; i++)
         {
             faces.push(index);
             faces.push(i);
