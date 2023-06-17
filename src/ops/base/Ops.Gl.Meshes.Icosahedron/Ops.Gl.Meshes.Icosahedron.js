@@ -1,21 +1,24 @@
 // from: http://blog.andreaskahler.com/search/label/3D
 
-let render = op.inTrigger("render");
-let smooth = op.inValueBool("smooth");
-let trigger = op.outTrigger("trigger");
-let geomOut = op.outObject("geometry");
+const
+    render = op.inTrigger("render"),
+    smooth = op.inValueBool("smooth"),
+    trigger = op.outTrigger("trigger"),
+    geomOut = op.outObject("geometry");
 
 geomOut.ignoreValueSerialize = true;
 
 smooth.onChange = generate;
 
+const cgl = op.patch.cgl;
+let geom = new CGL.Geometry(op.name);
 let mesh = null;
-let cgl = op.patch.cgl;
 smooth.set(false);
 generate();
 
 render.onTriggered = function ()
 {
+    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     if (mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
@@ -40,8 +43,7 @@ function generate()
     verts.push(-t, 0, -1);
     verts.push(-t, 0, 1);
 
-    let geom = new CGL.Geometry(op.name);
-
+    geom = new CGL.Geometry(op.name);
     geom.vertices = verts;
     geom.verticesIndices = [];
 
@@ -76,6 +78,6 @@ function generate()
     geom.texCoords = tc;
 
     geom.calcNormals(smooth.get());
-    mesh = new CGL.Mesh(cgl, geom);
+
     geomOut.set(geom);
 }
