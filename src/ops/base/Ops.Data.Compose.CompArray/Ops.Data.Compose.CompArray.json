@@ -1,0 +1,55 @@
+{
+    "id": "16f1ce37-9e0d-4632-a9ba-dfd42c4eb254",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680617318226
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateArray renamed to Ops.Team.CompOps.Dev.CompArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626217405
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompArray renamed to Ops.Team.CompOps.CompArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661493612
+        },
+        {
+            "message": "Ops.Team.CompOps.CompArray renamed to Ops.Data.Compose.CompArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167158993
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Team.CompOps.Dev.CompArray"
+    },
+    "authorName": "pandur",
+    "created": 1680617369758,
+    "summary": "Compose an Array",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}
