@@ -16,9 +16,19 @@
                 "type": 0,
                 "name": "origin index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Backface",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
             {
                 "type": 1,
                 "name": "next"

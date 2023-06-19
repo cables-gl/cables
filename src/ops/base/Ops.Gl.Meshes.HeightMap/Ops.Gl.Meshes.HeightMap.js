@@ -12,6 +12,8 @@ const render = op.inTrigger("render"),
 let outGeom = op.outObject("geometry");
 outGeom.ignoreValueSerialize = true;
 
+op.toWorkPortsNeedToBeLinked(render);
+
 let geom = new CGL.Geometry(op.name);
 let mesh = null;
 let cgl = op.patch.cgl;
@@ -19,12 +21,13 @@ let image = new Image();
 
 render.onTriggered = function ()
 {
+    if (!mesh)rebuildGeom();
     if (mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
 extrude.onChange = mHeight.onChange = mWidth.onChange =
-    nRows.onChange = nColumns.onChange = flat.onChange = rebuildGeom;
+    nRows.onChange = nColumns.onChange = flat.onChange = () => { mesh = null; };
 
 filename.onChange = reload;
 

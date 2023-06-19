@@ -267,7 +267,7 @@ function doRender()
     if (doLimit.get()) mesh.setNumInstances(Math.min(num, inLimit.get()));
     else mesh.setNumInstances(num);
 
-    outNum.set(this.name, mesh.numInstances);
+    outNum.set(mesh.numInstances);
 
     if (mesh.numInstances > 0) mesh.render(cgl.getShader());
 

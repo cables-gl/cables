@@ -1,28 +1,25 @@
-let render = op.inTrigger("Render");
+const
+    render = op.inTrigger("Render"),
+    sizeW = op.inValue("Width", 1),
+    sizeL = op.inValue("Length", 1),
+    sizeH = op.inValue("Height", 2),
+    inSmooth = op.inValueBool("Smooth", false),
+    inDraw = op.inValueBool("Draw", true),
+    trigger = op.outTrigger("trigger"),
+    geomOut = op.outObject("geometry");
 
-let sizeW = op.inValue("Width", 1);
-let sizeL = op.inValue("Length", 1);
-let sizeH = op.inValue("Height", 2);
-
-let inSmooth = op.inValueBool("Smooth", false);
-
-let inDraw = op.inValueBool("Draw", true);
-
-let trigger = op.outTrigger("trigger");
-let geomOut = op.outObject("geometry");
-
+const cgl = op.patch.cgl;
 let geom = null;
-let cgl = op.patch.cgl;
 let mesh = null;
 
-sizeW.onChange = create;
-sizeH.onChange = create;
-sizeL.onChange = create;
-inSmooth.onChange = create;
-create();
+sizeW.onChange =
+    sizeH.onChange =
+    sizeL.onChange =
+    inSmooth.onChange = () => { mesh = null; };
 
 render.onTriggered = function ()
 {
+    if (!mesh)create();
     if (inDraw.get())mesh.render(cgl.getShader());
     trigger.trigger();
 };

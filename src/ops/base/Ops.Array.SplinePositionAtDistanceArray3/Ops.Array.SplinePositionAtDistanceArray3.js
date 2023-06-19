@@ -43,6 +43,7 @@ function mapArrays()
     animY.clear();
     animZ.clear();
     let arr = inArr.get();
+    if (!arr) return;
     let sl = splineLength(arr);
 
     let distPos = 0;
