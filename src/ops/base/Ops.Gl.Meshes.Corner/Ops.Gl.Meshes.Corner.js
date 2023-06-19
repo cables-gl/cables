@@ -1,13 +1,14 @@
-let render = op.inTrigger("Render");
-let width = op.inValueFloat("Width", 1);
-let height = op.inValueFloat("Height", 1);
-let thickness = op.inValueFloat("Thickness", -0.1);
-let dodraw = op.inValueBool("Draw", true);
-let pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]);
-let pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]);
+const
+    render = op.inTrigger("Render"),
+    width = op.inValueFloat("Width", 1),
+    height = op.inValueFloat("Height", 1),
+    thickness = op.inValueFloat("Thickness", -0.1),
+    dodraw = op.inValueBool("Draw", true),
+    pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]),
+    pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]),
 
-let trigger = op.outTrigger("trigger");
-let geomOut = op.outObject("Geometry");
+    trigger = op.outTrigger("trigger"),
+    geomOut = op.outObject("Geometry");
 
 op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Align", [pivotX, pivotY]);
@@ -27,12 +28,13 @@ width.onChange =
     pivotX.onChange =
     pivotY.onChange =
     height.onChange =
-    thickness.onChange = create;
+    thickness.onChange = () => { mesh = null; };
 
-create();
+// create();
 
 render.onTriggered = function ()
 {
+    if (!mesh)create();
     if (dodraw.get()) mesh.render(cgl.getShader());
     trigger.trigger();
 };

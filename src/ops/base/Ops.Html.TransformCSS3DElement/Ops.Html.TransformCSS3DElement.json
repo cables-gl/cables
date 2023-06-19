@@ -5,22 +5,32 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "DOMElement"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "origin index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Backface",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
                 "name": "next"
             }
         ],

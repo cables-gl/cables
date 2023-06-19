@@ -6,7 +6,7 @@ const
 
 inValue.onChange = () =>
 {
-    op.setUiAttrib({ "extendTitle": inValue.get() });
+    if (!inValue.isLinked()) op.setUiAttrib({ "extendTitle": inValue.get() });
     exec();
 };
 
