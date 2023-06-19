@@ -1,0 +1,65 @@
+{
+    "id": "3ef72802-f192-4955-b93f-800e642cb610",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "lorenzomf",
+            "date": 1685887622147
+        },
+        {
+            "message": "cloned op from Ops.User.lorenzomf.Spring",
+            "author": "lorenzomf",
+            "date": 1686335791917
+        },
+        {
+            "message": "Ops.Patch.PbsbM2y.Spring renamed to Ops.Anim.Spring",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686584818597
+        }
+    ],
+    "authorName": "lorenzomf",
+    "created": 1686335791917,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 0,
+                "name": "value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "damping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "stiffness",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.lorenzomf.Spring"
+    },
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "bsbM2y",
+    "summary": "Spring simulation based on input target value."
+}
