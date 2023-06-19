@@ -125,7 +125,7 @@ function updateCoordNormalizing()
 function onMouseEnter(e)
 {
     mouseDown.set(false);
-    mouseOver.set(true);
+    mouseOver.set(checkHovering(e));
 }
 
 function onMouseDown(e)
@@ -154,8 +154,8 @@ function onmouseclick(e)
 
 function onMouseLeave(e)
 {
-    mouseOver.set(false);
     mouseDown.set(false);
+    mouseOver.set(checkHovering(e));
 }
 
 function setCoords(e)
@@ -182,7 +182,7 @@ function setCoords(e)
 
 function onmousemove(e)
 {
-    mouseOver.set(true);
+    mouseOver.set(checkHovering(e));
     setCoords(e);
 }
 
