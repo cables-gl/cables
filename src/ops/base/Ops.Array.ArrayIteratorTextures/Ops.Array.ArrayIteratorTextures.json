@@ -1,0 +1,81 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "dc000b9e-74c4-4284-851d-55cc79d7f76b",
+    "created": 1686309644983,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 3,
+                "name": "array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 1,
+                "name": "finished"
+            },
+            {
+                "type": 0,
+                "name": "index",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "value",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Patch.P9HJUvy.ArrayIteratorTexture"
+    },
+    "summary": "iterate over an array of objects",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "array",
+                "text": "Array in containing objects"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "index",
+                "text": "Index out of current object"
+            },
+            {
+                "name": "value",
+                "text": "The object out"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "relatedops": null,
+    "exampleProjectId": "UlL2G1",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Array.ArrayIteratorObjects",
+            "author": "pandur",
+            "date": 1686309644984
+        },
+        {
+            "message": "Ops.Patch.P9HJUvy.ArrayIteratorTexture renamed to Ops.Array.ArrayIteratorTextures",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686309822148
+        }
+    ]
+}
