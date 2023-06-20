@@ -1,0 +1,59 @@
+{
+    "id": "6ebdec23-6e10-48c9-87cf-43d488e4290f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1686148927736
+        },
+        {
+            "message": "Ops.Patch.PgJmjmy.CollisionWorld renamed to Ops.Team.CollisionOps.CollisionWorld",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686155480998
+        },
+        {
+            "message": "Ops.Team.CollisionOps.CollisionWorld renamed to Ops.Graphics.Intersection.IntersectWorld",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687166338186
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total Bodies",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Collisions"
+            }
+        ],
+        "name": "Ops.Team.CollisionOps.CollisionWorld"
+    },
+    "authorName": "pandur",
+    "created": 1686149045279,
+    "summary": "Define a world to check for intersections and collisions",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

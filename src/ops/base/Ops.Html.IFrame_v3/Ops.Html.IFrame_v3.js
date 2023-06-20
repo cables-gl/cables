@@ -27,6 +27,7 @@ function addElement()
     if (!active.get()) return;
     if (element) removeEle();
     element = document.createElement("iframe");
+    element.classList.add("cablesEle");
     updateAttribs();
     const parent = op.patch.cgl.canvas.parentElement;
     parent.appendChild(element);

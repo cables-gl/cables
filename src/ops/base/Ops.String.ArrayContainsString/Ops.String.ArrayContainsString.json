@@ -16,7 +16,6 @@
     "created": 1591695070465,
     "summary": "Check if an array contains a string which can also be a number (find,search,indexOf)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -54,7 +53,7 @@
             {
                 "type": 0,
                 "name": "Found",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,

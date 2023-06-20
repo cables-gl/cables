@@ -96,7 +96,7 @@ render.onTriggered = () =>
             mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
         }
 
-        mesh.render(op.patch.cg.getShader());
+        mesh.render(op.patch.cgl.getShader());
 
         if (doScale) cgl.popModelMatrix();
     }

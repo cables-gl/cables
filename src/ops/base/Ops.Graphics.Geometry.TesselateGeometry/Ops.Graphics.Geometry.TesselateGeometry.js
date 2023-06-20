@@ -1,10 +1,11 @@
-const inGeom = op.inObject("Geometry");
-const inTimes = op.inValueInt("Iterations", 1);
-const outGeom = op.outObject("Result");
-const outVertices = op.outNumber("Num Vertices");
+const
+    inGeom = op.inObject("Geometry"),
+    inTimes = op.inValueInt("Iterations", 1),
+    outGeom = op.outObject("Result"),
+    outVertices = op.outNumber("Num Vertices");
 
-inGeom.onChange = update;
-inTimes.onChange = update;
+inGeom.onChange =
+    inTimes.onChange = update;
 
 function tesselateTC(tc, x1, y1, x2, y2, x3, y3)
 {
@@ -243,6 +244,5 @@ function update()
 
     outVertices.set(geom.vertices.length / 3);
 
-    outGeom.set(null);
-    outGeom.set(geom);
+    outGeom.setRef(geom);
 }

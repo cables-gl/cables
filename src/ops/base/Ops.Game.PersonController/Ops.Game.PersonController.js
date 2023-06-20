@@ -7,7 +7,8 @@ const
     goNorth = op.inBool("North"),
     goEast = op.inBool("East"),
     goSouth = op.inBool("South"),
-    goWest = op.inBool("West");
+    goWest = op.inBool("West"),
+    inReset = op.inTriggerButton("Reset");
 
 let lastTime = performance.now();
 let dir = 0;
@@ -31,4 +32,12 @@ exe.onTriggered = function ()
     outX.set(outX.get() + x);
     outY.set(outY.get() + y);
     lastTime = performance.now();
+};
+
+inReset.onTriggered = () =>
+{
+    outX.set(0);
+    outY.set(0);
+    dir = 0;
+    outDir.set(dir);
 };

@@ -61,7 +61,7 @@
             {
                 "type": 0,
                 "name": "Has Hit",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 5,
@@ -90,7 +90,6 @@
     "summary": "Cast a ray and detect colliding bodies",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "Gh2f_4",

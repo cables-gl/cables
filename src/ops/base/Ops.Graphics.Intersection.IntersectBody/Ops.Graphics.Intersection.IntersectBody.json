@@ -1,0 +1,85 @@
+{
+    "id": "b2e39096-8a02-4a50-b2f5-3e68f2c16ad7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1686148942926
+        },
+        {
+            "message": "Ops.Patch.PgJmjmy.CollisionBody renamed to Ops.Team.CollisionOps.CollisionBody",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686155492388
+        },
+        {
+            "message": "Ops.Team.CollisionOps.CollisionBody renamed to Ops.Graphics.Intersection.IntersectBody",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687166259353
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Shape index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Positions",
+                "group": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Append Index to name",
+                "group": "Array",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Team.CollisionOps.CollisionBody"
+    },
+    "authorName": "pandur",
+    "created": 1686149050119,
+    "summary": "Add Bodies and check if they intersect/collide with each other",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}
