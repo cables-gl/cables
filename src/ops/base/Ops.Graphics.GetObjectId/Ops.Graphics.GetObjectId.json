@@ -51,5 +51,11 @@
             }
         ],
         "name": "Ops.Dev.Gl.GetObjectId"
+    },
+    "summary": "get the id/index of the current object/mesh",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
