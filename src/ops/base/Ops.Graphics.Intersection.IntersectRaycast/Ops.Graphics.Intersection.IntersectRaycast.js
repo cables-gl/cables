@@ -19,6 +19,8 @@ const dir = vec3.create();
 let didsetCursor = false;
 let isScreenCoords = true;
 
+op.toWorkPortsNeedToBeLinked(trigger);
+
 trigger.onTriggered = doRender;
 
 function doRender()

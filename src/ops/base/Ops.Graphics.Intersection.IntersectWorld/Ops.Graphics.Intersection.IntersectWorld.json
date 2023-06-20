@@ -46,7 +46,7 @@
                 "name": "Collisions"
             }
         ],
-        "name": "Ops.Team.CollisionOps.CollisionWorld"
+        "name": "Ops.Graphics.Intersection.IntersectWorld"
     },
     "authorName": "pandur",
     "created": 1686149045279,
@@ -55,5 +55,6 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "ffRjjz"
 }

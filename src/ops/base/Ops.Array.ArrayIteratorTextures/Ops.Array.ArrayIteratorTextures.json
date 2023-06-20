@@ -61,10 +61,9 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "relatedops": null,
-    "exampleProjectId": "UlL2G1",
+    "exampleProjectId": "vS5fjz",
     "changelog": [
         {
             "message": "cloned op from Ops.Array.ArrayIteratorObjects",
@@ -77,5 +76,6 @@
             "author": "pandur",
             "date": 1686309822148
         }
-    ]
+    ],
+    "collections": null
 }
