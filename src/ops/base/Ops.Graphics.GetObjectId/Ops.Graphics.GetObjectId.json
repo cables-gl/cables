@@ -22,6 +22,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1681240057498
+        },
+        {
+            "message": "Ops.Dev.Gl.GetObjectId renamed to Ops.Graphics.GetObjectId",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687272524763
         }
     ],
     "authorName": "pandur",
