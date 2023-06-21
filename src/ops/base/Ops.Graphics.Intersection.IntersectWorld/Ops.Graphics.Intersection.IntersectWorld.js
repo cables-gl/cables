@@ -23,6 +23,7 @@ function doRender()
 
 function renderBodies()
 {
+    if (!CABLES.UI) return;
     const collisions = [];
     const bodies = cgl.frameStore.collisionWorld.bodies;
 

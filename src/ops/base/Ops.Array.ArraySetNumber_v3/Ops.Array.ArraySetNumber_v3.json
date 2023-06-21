@@ -1,0 +1,91 @@
+{
+    "id": "1a71327d-fe88-4796-9ebd-5a1c1cd083af",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1584365937229
+        },
+        {
+            "message": "cloned op from Ops.Array.ArraySetNumber",
+            "author": "pandur",
+            "date": 1623915562880
+        },
+        {
+            "message": "Ops.User.pandur.ArraySetNumber2 renamed to Ops.Array.ArraySetNumber_v2",
+            "author": "pandur",
+            "date": 1623915599231
+        },
+        {
+            "message": "cloned op from Ops.Array.ArraySetNumber_v2",
+            "author": "pandur",
+            "date": 1687272676383
+        },
+        {
+            "message": "Ops.Patch.PNSRgpz.ArraySetNumber_v2 renamed to Ops.Array.ArraySetNumber_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687273072994
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1687272676383,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Patch.PNSRgpz.ArraySetNumber_v2"
+    },
+    "summary": "set a number at index in an array",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger to set the value at the index"
+            },
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Index",
+                "text": "index to update with the value"
+            },
+            {
+                "name": "Number",
+                "text": "number that will be set to the selected index"
+            },
+            {
+                "name": "Reset",
+                "text": "Reverts array to it's original state"
+            },
+            {
+                "name": "Result",
+                "text": "Modified array out"
+            }
+        ]
+    },
+    "exampleProjectId": "bJrH16"
+}

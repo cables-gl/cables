@@ -1,60 +1,60 @@
 {
-  "id": "0a349745-20c8-44c4-8a70-214c7ccf87e9",
-  "changelog": [
-    {
-      "message": "created op",
-      "author": "pandur",
-      "date": 1593869457023
+    "id": "0a349745-20c8-44c4-8a70-214c7ccf87e9",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593869457023
+        },
+        {
+            "message": "Ops.User.pandur.FilenameSuffix renamed to Ops.Website.FilenameInfo",
+            "author": "pandur",
+            "date": 1607066249739
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593869652925,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Protocol"
+            },
+            {
+                "type": 5,
+                "name": "Host"
+            },
+            {
+                "type": 5,
+                "name": "Full Path"
+            },
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 5,
+                "name": "Is URL"
+            },
+            {
+                "type": 5,
+                "name": "Suffix"
+            }
+        ],
+        "name": "Ops.Website.FilenameInfo"
     },
-    {
-      "message": "Ops.User.pandur.FilenameSuffix renamed to Ops.Website.FilenameInfo",
-      "author": "pandur",
-      "date": 1607066249739
+    "summary": "information about a filename, like url protocol, suffix etc",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
-  ],
-  "authorName": "pandur",
-  "created": 1593869652925,
-  "layout": {
-    "portsIn": [
-      {
-        "type": "5",
-        "name": "URL"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": "5",
-        "name": "Protocol"
-      },
-      {
-        "type": "5",
-        "name": "Host"
-      },
-      {
-        "type": "5",
-        "name": "Full Path"
-      },
-      {
-        "type": "5",
-        "name": "Filename"
-      },
-      {
-        "type": "5",
-        "name": "Is URL"
-      },
-      {
-        "type": "5",
-        "name": "Suffix"
-      }
-    ],
-    "name": "Ops.User.pandur.FilenameSuffix"
-  },
-  "summary": "information about a filename, like url protocol, suffix etc",
-  "issues": "",
-  "collections": null,
-  "relatedops": null,
-  "youtubeids": [],
-  "docs": {
-    "ports": []
-  }
 }
