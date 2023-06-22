@@ -40,11 +40,19 @@
             },
             {
                 "type": 5,
+                "name": "basename"
+            },
+            {
+                "type": 5,
                 "name": "Is URL"
             },
             {
                 "type": 5,
                 "name": "Suffix"
+            },
+            {
+                "type": 5,
+                "name": "queryParams"
             }
         ],
         "name": "Ops.Website.FilenameInfo"
