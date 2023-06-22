@@ -63,6 +63,13 @@ const Framebuffer2 = function (cgl, w, h, options)
     this._numRenderBuffers = this._options.numRenderBuffers;
     this._colorTextures = [];
 
+    if (!options.pixelFormat)
+    {
+        if (!options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
+        if (options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+    }
+
+
     for (let i = 0; i < this._numRenderBuffers; i++)
     {
         this._colorTextures[i] = new Texture(cgl, {
@@ -73,6 +80,8 @@ const Framebuffer2 = function (cgl, w, h, options)
             "wrap": this._options.wrap,
         });
     }
+
+
 
     let fil = Texture.FILTER_NEAREST;
     if (this._options.shadowMap) fil = Texture.FILTER_LINEAR;
