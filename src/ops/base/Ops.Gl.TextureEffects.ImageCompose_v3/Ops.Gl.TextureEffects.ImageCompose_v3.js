@@ -63,6 +63,7 @@ function initEffect()
         {
             "name": "image_compose_v2_" + op.id,
             "isFloatingPointTexture": getFloatingPoint(),
+            "pixelFormat": inPixel.get(),
             "filter": getFilter(),
             "wrap": getWrap(),
             "width": getWidth(),
@@ -97,8 +98,7 @@ function getWrap()
 
 function getFloatingPoint()
 {
-    isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
-    return isFloatTex;
+    return inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F || inPixel.get() == CGL.Texture.PFORMATSTR_RGBA16HF;
 }
 
 function getWidth()
@@ -126,6 +126,7 @@ function updateResolution()
         getWidth() != tex.width ||
         getHeight() != tex.height ||
         tex.isFloatingPoint() != getFloatingPoint() ||
+        tex.pixelFormat != inPixel.get() ||
         tex.filter != getFilter() ||
         tex.wrap != getWrap()
     ) && (getWidth() !== 0 && getHeight() !== 0))

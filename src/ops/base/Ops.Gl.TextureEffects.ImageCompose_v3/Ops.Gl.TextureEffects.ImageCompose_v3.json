@@ -11,6 +11,11 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "UV Texture",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Size index",
                 "group": "Texture Size",

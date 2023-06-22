@@ -43,7 +43,8 @@ TextureEffect.prototype.getHeight = function ()
 
 TextureEffect.prototype.setSourceTexture = function (tex)
 {
-    if (tex.textureType == Texture.TYPE_FLOAT) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    if (tex.pixelFormat == Texture.PFORMATSTR_RGBA32F) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    if (tex.pixelFormat == Texture.PFORMATSTR_RGBA16HF) this._cgl.gl.getExtension("EXT_color_buffer_half_float");
 
     if (tex === null)
     {
