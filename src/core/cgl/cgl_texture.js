@@ -204,8 +204,8 @@ Texture.prototype.setSize = function (w, h)
 
     const uarr = null;
 
-    let internalFormat = this._cgl.gl.RGBA32F;
     let dataType = this._cgl.gl.UNSIGNED_BYTE;
+    let internalFormat = this._cgl.gl.RGBA;
     let dataFormat = this._cgl.gl.RGBA;
 
     if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
@@ -263,14 +263,23 @@ Texture.prototype.setSize = function (w, h)
             this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
             this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
-            internalFormat = this._cgl.gl.RGBA32F;
-            dataType = this._cgl.gl.FLOAT;
-            dataFormat = this._cgl.gl.RGBA;
+            if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F)
+            {
+                internalFormat = this._cgl.gl.RGBA32F;
+                dataType = this._cgl.gl.FLOAT;
+            }
 
-            if (this.pixelFormat == Texture.PFORMATSTR_RGBA16HF)
+            if (this.pixelFormat == Texture.PFORMATSTR_RGBA16F)
             {
                 internalFormat = this._cgl.gl.RGBA16F;
-                dataType = this._cgl.gl.HALF_FLOAT;
+                dataType = this._cgl.gl.FLOAT;
+            }
+
+            if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+            {
+                internalFormat = this._cgl.gl.R11F_G11F_B10F;
+                dataType = this._cgl.gl.FLOAT;
+                dataFormat = this._cgl.gl.RGB;
             }
 
             // this._cgl.gl.texImage2D(this.texTarget, 0, internalFormat, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
@@ -1046,9 +1055,17 @@ Texture.TYPE_DEFAULT = 0;
 Texture.TYPE_DEPTH = 1;
 Texture.TYPE_FLOAT = 2;
 
-Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
-Texture.PFORMATSTR_RGBA16HF = "RGBA 16bit half float";
 Texture.PFORMATSTR_RGBA8UB = "RGBA 8bit ubyte";
-Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_RGBA16HF, Texture.PFORMATSTR_RGBA32F];
+Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
+Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
+Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
+
+Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
+
+Texture.isPixelFormatFloat = (pxlfrmt) =>
+{
+    return (pxlfrmt == Texture.PFORMATSTR_RGBA32F || pxlfrmt == Texture.PFORMATSTR_R11FG11FB10F || pxlfrmt == Texture.PFORMATSTR_RGBA16F);
+};
+
 
 export { Texture };
