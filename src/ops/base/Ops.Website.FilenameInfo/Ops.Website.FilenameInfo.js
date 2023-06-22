@@ -4,8 +4,10 @@ const
     outHost = op.outString("Host"),
     outFullPath = op.outString("Full Path"),
     outFilename = op.outString("Filename"),
+    outBasename = op.outString("basename"),
     outIsURL = op.outString("Is URL"),
-    outExt = op.outString("Suffix");
+    outExt = op.outString("Suffix"),
+    outQuery = op.outString("queryParams");
 
 function isValidUrl(string)
 {
@@ -34,17 +36,33 @@ inUrl.onChange = () =>
         outHost.set(hostArr[2]);
     }
 
+    const hostArr = url.split("/");
+
+    let filePart = hostArr[hostArr.length - 1];
+    if (filePart.indexOf("?") > -1)
+    {
+        const parts = filePart.split("?");
+        filePart = parts[0];
+
+        outQuery.set(parts[1]);
+    }
+    else
+    {
+        outQuery.set("");
+    }
+
     if (url.indexOf(".") > -1)
     {
-        const fnArray = url.split(".");
+        const fnArray = filePart.split(".");
         outExt.set(fnArray[fnArray.length - 1]);
     }
     else outExt.set("");
 
     if (url.indexOf("/") > -1)
     {
-        const hostArr = url.split("/");
-        outFilename.set(hostArr[hostArr.length - 1]);
+        outFilename.set(filePart);
+
+        outBasename.set(CABLES.basename(filePart));
 
         hostArr.length -= 1;
         const fullPath = hostArr.join("/");
