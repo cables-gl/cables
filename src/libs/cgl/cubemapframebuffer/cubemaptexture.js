@@ -72,7 +72,7 @@ class CubemapTexture
         this._cgl.profileData.profileTextureResize++;
 
         // console.log("this.textureType", this.textureType);
-        // if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
+        // if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.enableExtension("OES_texture_float_linear"))
         // {
         //     console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
         //     this.filter = CGL.Texture.FILTER_NEAREST;
@@ -86,14 +86,14 @@ class CubemapTexture
             {
                 // if (this._cgl.glUseHalfFloatTex)
                 // {
-                //     const ext = this._cgl.gl.getExtension("OES_texture_half_float");
+                //     const ext = this._cgl.enableExtension("OES_texture_half_float");
                 //     if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
 
                 //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
                 // }
                 // else
                 // {
-                //     const ext = this._cgl.gl.getExtension("OES_texture_float");
+                //     const ext = this._cgl.enableExtension("OES_texture_float");
 
                 //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
                 // }
@@ -104,9 +104,9 @@ class CubemapTexture
                 if (this.textureType == Texture.TYPE_FLOAT)
                 {
                     // console.log("cubemap FLOAT TEX", this._options);
-                    this._cgl.gl.getExtension("EXT_color_buffer_float");
-                    this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
-                    this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+                    this._cgl.enableExtension("EXT_color_buffer_float");
+                    this._cgl.enableExtension("EXT_color_buffer_float_linear");
+                    this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
                 }

@@ -160,16 +160,16 @@ const Context = function (_patch)
             return;
         }
 
-        const dbgRenderInfo = this.gl.getExtension("WEBGL_debug_renderer_info");
+        const dbgRenderInfo = this.enableExtension("WEBGL_debug_renderer_info");
         if (dbgRenderInfo)
         {
             this.glRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
             if (this.glRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 
-        this.gl.getExtension("OES_standard_derivatives");
-        // this.gl.getExtension("GL_OES_standard_derivatives");
-        const instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
+        this.enableExtension("OES_standard_derivatives");
+        // this.enableExtension("GL_OES_standard_derivatives");
+        const instancingExt = this.enableExtension("ANGLE_instanced_arrays") || this.gl;
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
@@ -1158,5 +1158,24 @@ Context.prototype.setCursor = function (str)
 {
     this._cursor = str;
 };
+
+
+/**
+ * enable a webgl extension
+ * @function enableExtension
+ * @memberof Context
+ * @instance
+ * @param {String} extension name
+ * @returns {Object} extension object or null
+ */
+Context.prototype.enableExtension = function (name)
+{
+    console.log("extension", name);
+    const start = performance.now();
+    const o = this.gl.getExtension(name);
+    console.log(performance.now() - start);
+    return o;
+};
+
 
 export { Context };

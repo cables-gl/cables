@@ -19,9 +19,9 @@ const Framebuffer = function (_cgl, _w, _h, options)
     this._log = new Logger("Framebuffer");
 
     const depthTextureExt =
-        cgl.gl.getExtension("WEBGL_depth_texture") ||
-        cgl.gl.getExtension("WEBKIT_WEBGL_depth_texture") ||
-        cgl.gl.getExtension("MOZ_WEBGL_depth_texture") ||
+        cgl.enableExtension("WEBGL_depth_texture") ||
+        cgl.enableExtension("WEBKIT_WEBGL_depth_texture") ||
+        cgl.enableExtension("MOZ_WEBGL_depth_texture") ||
         cgl.gl.DEPTH_TEXTURE;
 
     if (!depthTextureExt)

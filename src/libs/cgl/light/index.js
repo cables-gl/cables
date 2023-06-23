@@ -189,14 +189,12 @@ Light.prototype.createFramebuffer = function (width, height, options)
             this._cgl,
             fbWidth,
             fbHeight,
-            Object.assign(
-                {
-                    "isFloatingPointTexture": true,
-                    "filter": CGL.Texture.FILTER_LINEAR,
-                    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-                },
-                options,
-            ),
+            ({
+                "isFloatingPointTexture": true,
+                "filter": CGL.Texture.FILTER_LINEAR,
+                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+                ...options,
+            }),
         );
     }
     else
@@ -205,14 +203,12 @@ Light.prototype.createFramebuffer = function (width, height, options)
             this._cgl,
             fbWidth,
             fbHeight,
-            Object.assign(
-                {
-                    "isFloatingPointTexture": true,
-                    "filter": CGL.Texture.FILTER_LINEAR,
-                    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-                },
-                options,
-            ),
+            ({
+                "isFloatingPointTexture": true,
+                "filter": CGL.Texture.FILTER_LINEAR,
+                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+                ...options,
+            }),
         );
     }
 
@@ -253,10 +249,10 @@ Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 
     if (this._cgl.glVersion == 1)
     {
-        this._cgl.gl.getExtension("OES_texture_float");
-        this._cgl.gl.getExtension("OES_texture_float_linear");
-        this._cgl.gl.getExtension("OES_texture_half_float");
-        this._cgl.gl.getExtension("OES_texture_half_float_linear");
+        this._cgl.enableExtension("OES_texture_float");
+        this._cgl.enableExtension("OES_texture_float_linear");
+        this._cgl.enableExtension("OES_texture_half_float");
+        this._cgl.enableExtension("OES_texture_half_float_linear");
 
         this._shaderShadowMap.shader.enableExtension("GL_OES_standard_derivatives");
         this._shaderShadowMap.shader.enableExtension("GL_OES_texture_float");
@@ -276,14 +272,12 @@ Light.prototype.createBlurEffect = function (options)
 
     this._effectBlur = new CGL.TextureEffect(
         this._cgl,
-        Object.assign(
-            {
-                "isFloatingPointTexture": true,
-                "filter": CGL.Texture.FILTER_LINEAR,
-                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-            },
-            options,
-        ),
+        ({
+            "isFloatingPointTexture": true,
+            "filter": CGL.Texture.FILTER_LINEAR,
+            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+            ...options,
+        }),
     );
     this.state.isUpdating = false;
 };

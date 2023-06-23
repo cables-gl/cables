@@ -305,11 +305,11 @@ function updateShader()
 
     if (cgl.glVersion == 1)
     {
-        cgl.gl.getExtension("OES_standard_derivatives");
-        // cgl.gl.getExtension('OES_texture_float');
-        // cgl.gl.getExtension('OES_texture_float_linear');
-        // cgl.gl.getExtension('OES_texture_half_float');
-        // cgl.gl.getExtension('OES_texture_half_float_linear');
+        cgl.enableExtension("OES_standard_derivatives");
+        // cgl.enableExtension('OES_texture_float');
+        // cgl.enableExtension('OES_texture_float_linear');
+        // cgl.enableExtension('OES_texture_half_float');
+        // cgl.enableExtension('OES_texture_half_float_linear');
 
         shader.enableExtension("GL_OES_standard_derivatives");
     // shader.enableExtension("GL_OES_texture_float");

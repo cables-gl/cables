@@ -254,16 +254,16 @@ if (cgl.glVersion < 2)
 {
     shader.enableExtension("GL_OES_standard_derivatives");
 
-    if (cgl.gl.getExtension("OES_texture_float")) shader.enableExtension("GL_OES_texture_float");
+    if (cgl.enableExtension("OES_texture_float")) shader.enableExtension("GL_OES_texture_float");
     else op.log("error loading extension OES_texture_float");
 
-    if (cgl.gl.getExtension("OES_texture_float_linear")) shader.enableExtension("GL_OES_texture_float_linear");
+    if (cgl.enableExtension("OES_texture_float_linear")) shader.enableExtension("GL_OES_texture_float_linear");
     else op.log("error loading extention OES_texture_float_linear");
 
-    if (cgl.gl.getExtension("GL_OES_texture_half_float")) shader.enableExtension("GL_OES_texture_half_float");
+    if (cgl.enableExtension("GL_OES_texture_half_float")) shader.enableExtension("GL_OES_texture_half_float");
     else op.log("error loading extention GL_OES_texture_half_float");
 
-    if (cgl.gl.getExtension("GL_OES_texture_half_float_linear")) shader.enableExtension("GL_OES_texture_half_float_linear");
+    if (cgl.enableExtension("GL_OES_texture_half_float_linear")) shader.enableExtension("GL_OES_texture_half_float_linear");
     else op.log("error loading extention GL_OES_texture_half_float_linear");
 }
 
@@ -937,7 +937,7 @@ inTrigger.onTriggered = function ()
 
 if (cgl.glVersion == 1)
 {
-    if (!cgl.gl.getExtension("EXT_shader_texture_lod"))
+    if (!cgl.enableExtension("EXT_shader_texture_lod"))
     {
         op.log("no EXT_shader_texture_lod texture extension");
         // throw "no EXT_shader_texture_lod texture extension";
@@ -945,10 +945,10 @@ if (cgl.glVersion == 1)
     else
     {
         shader.enableExtension("GL_EXT_shader_texture_lod");
-        cgl.gl.getExtension("OES_texture_float");
-        cgl.gl.getExtension("OES_texture_float_linear");
-        cgl.gl.getExtension("OES_texture_half_float");
-        cgl.gl.getExtension("OES_texture_half_float_linear");
+        cgl.enableExtension("OES_texture_float");
+        cgl.enableExtension("OES_texture_float_linear");
+        cgl.enableExtension("OES_texture_half_float");
+        cgl.enableExtension("OES_texture_half_float_linear");
 
         shader.enableExtension("GL_OES_standard_derivatives");
         shader.enableExtension("GL_OES_texture_float");
