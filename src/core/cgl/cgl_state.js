@@ -249,6 +249,14 @@ const Context = function (_patch)
 
 
 
+    /**
+     * @function popViewPort
+     * @memberof Context
+     * @instance
+     * @description pop viewPort stack
+     */
+
+
     this.popViewPort = function ()
     {
         this._viewPortStack.pop();
@@ -269,6 +277,16 @@ const Context = function (_patch)
         }
     };
 
+    /**
+     * @function pushViewPort
+     * @memberof Context
+     * @instance
+     * @description push a new viewport onto stack
+     * @param {Number} x
+     * @param {Number} y
+     * @param {Number} w
+     * @param {Number} h
+     */
 
     this.pushViewPort = function (x, y, w, h)
     {
@@ -277,37 +295,19 @@ const Context = function (_patch)
     };
 
 
-
-
-
-
-    /**
-     * @function getViewPort
-     * @memberof Context
-     * @instance
-     * @description get current gl viewport
-     * @returns {Array} array [x,y,w,h]
-     */
+    // old
     this.getViewPort = function ()
     {
         return this._viewPort;
     };
 
+    // old
     this.resetViewPort = function ()
     {
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     };
 
-    /**
-     * @function setViewPort
-     * @memberof Context
-     * @instance
-     * @description set current gl viewport
-     * @param {Number} x
-     * @param {Number} y
-     * @param {Number} w
-     * @param {Number} h
-     */
+    // old
     this.setViewPort = function (x, y, w, h)
     {
         this._viewPort[0] = Math.round(x);
@@ -316,6 +316,7 @@ const Context = function (_patch)
         this._viewPort[3] = Math.round(h);
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     };
+
 
     this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
     {
