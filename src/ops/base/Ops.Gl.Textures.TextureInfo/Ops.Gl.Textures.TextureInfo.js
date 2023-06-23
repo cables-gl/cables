@@ -1,6 +1,7 @@
 const
     inTex = op.inObject("Texture"),
     outName = op.outNumber("Name"),
+    outPixelFormat = op.outString("PixelFormat"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
     outRatio = op.outNumber("Ratio"),
@@ -13,7 +14,7 @@ const
     outCubemap = op.outBoolNum("Is Cubemap"),
     outId = op.outNumber("Id");
 
-outFp.setUiAttribs({ "title": "Pixelformat Float 32bit" });
+outFp.setUiAttribs({ "title": "Float" });
 
 const emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl);
 const defaultTex = CGL.Texture.getTempTexture(op.patch.cgl);
@@ -42,6 +43,7 @@ inTex.onChange = function ()
 
         outWrap.set(inTex.get().wrap + " " + strWrap);
 
+        outPixelFormat.set(inTex.get().pixelFormat);
         outId.set(inTex.get().id);
         outFlipped.set(inTex.get().flipped);
         outFp.set(inTex.get().textureType == CGL.Texture.TYPE_FLOAT);

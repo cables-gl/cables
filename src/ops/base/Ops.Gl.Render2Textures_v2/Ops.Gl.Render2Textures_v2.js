@@ -101,7 +101,7 @@ function getWrap()
 
 function isFloatingPoint()
 {
-    return inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    return inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA32F || inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA16HF;
 }
 
 function doRender()
@@ -137,6 +137,7 @@ function doRender()
                 {
                     "numRenderBuffers": numSlots,
                     "isFloatingPointTexture": floatingPoint,
+                    "pixelFormat": inPixelFormat.get(),
                     "multisampling": ms,
                     "depth": true,
                     "multisamplingSamples": msSamples,

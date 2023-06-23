@@ -167,9 +167,7 @@ const Context = function (_patch)
             if (this.glRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 
-        this.enableExtension("OES_standard_derivatives");
-        // this.enableExtension("GL_OES_standard_derivatives");
-        const instancingExt = this.enableExtension("ANGLE_instanced_arrays") || this.gl;
+
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
@@ -186,10 +184,16 @@ const Context = function (_patch)
         this.maxSamples = 0;
         if (this.gl.MAX_SAMPLES) this.maxSamples = this.gl.getParameter(this.gl.MAX_SAMPLES);
 
-        if (instancingExt.vertexAttribDivisorANGLE)
+        if (this.glVersion == 1)
         {
-            this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
-            this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
+            this.enableExtension("OES_standard_derivatives");
+            const instancingExt = this.enableExtension("ANGLE_instanced_arrays") || this.gl;
+
+            if (instancingExt.vertexAttribDivisorANGLE)
+            {
+                this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
+                this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
+            }
         }
     };
 
