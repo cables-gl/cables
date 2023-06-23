@@ -5,14 +5,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Changed Trigger"
+            },
+            {
+                "type": 3,
+                "name": "New Array"
             }
         ],
         "name": "Ops.Array.ArrayChangedTrigger"
@@ -20,7 +24,6 @@
     "summary": "Triggers when any array values or the array length has changed",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

@@ -18,6 +18,8 @@ const cgl = op.patch.cgl;
 const rt = new CGL.RenderTargets(cgl);
 const mod = rt.mod;
 
+op.toWorkPortsNeedToBeLinked(render);
+
 for (let i = 0; i < NUM_BUFFERS; i++)
 {
     let slot = "Default";
