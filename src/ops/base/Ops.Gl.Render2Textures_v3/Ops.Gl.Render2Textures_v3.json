@@ -1,0 +1,148 @@
+{
+    "authorName": "pandur",
+    "id": "fb4f44d8-e255-4e81-b96e-38e870bc3238",
+    "created": 1687516278322,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Auto Aspect",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "MSAA index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "textureDepth",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Patch.P4SCBDz.Render2Textures_v3"
+    },
+    "summary": "render to multiple textures at the same time",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "added webgl2 requirement",
+            "author": "pandur",
+            "date": 1549608962401
+        },
+        {
+            "message": "code cleanup - ports , onChange",
+            "author": "andro",
+            "date": 1559049206585
+        },
+        {
+            "message": "cloned op from Ops.Gl.Render2Textures",
+            "author": "pandur",
+            "date": 1680014424477
+        },
+        {
+            "message": "Ops.Patch.PncOFEs.Render2Textures renamed to Ops.Dev.Gl.Render2Textures2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680110539327
+        },
+        {
+            "message": " added core lib: cgl_rendertargets",
+            "type": "",
+            "author": "pandur",
+            "date": 1681236029664
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1681236071666
+        },
+        {
+            "message": "Ops.Dev.Gl.Render2Textures2 renamed to Ops.Gl.Render2Textures_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684505522013
+        },
+        {
+            "message": "cloned op from Ops.Gl.Render2Textures_v2",
+            "author": "pandur",
+            "date": 1687516278323
+        },
+        {
+            "message": "Ops.Patch.P4SCBDz.Render2Textures_v3 renamed to Ops.Gl.Render2Textures_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687527380346
+        }
+    ],
+    "youtubeid": "",
+    "issues": "requires WebGL2",
+    "relatedops": null,
+    "exampleProjectId": "INQQgo",
+    "coreLibs": [
+        "cgl_rendertargets",
+        "cgl_shadermodifier"
+    ]
+}
