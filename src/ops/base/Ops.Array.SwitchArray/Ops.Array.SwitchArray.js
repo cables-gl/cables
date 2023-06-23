@@ -15,6 +15,6 @@ function update()
 {
     if (idx.get() >= 0 && valuePorts[idx.get()])
     {
-        result.set(valuePorts[idx.get()].get());
+        result.setRef(valuePorts[idx.get()].get());
     }
 }

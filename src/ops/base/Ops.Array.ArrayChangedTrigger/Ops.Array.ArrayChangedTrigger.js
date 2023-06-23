@@ -1,11 +1,10 @@
 const
-    inArr=op.inArray("Array"),
-    next=op.outTrigger("Changed Trigger"),
-    outArr=op.outArray("New Array");
+    inArr = op.inArray("Array"),
+    next = op.outTrigger("Changed Trigger"),
+    outArr = op.outArray("New Array");
 
-inArr.onChange=function()
+inArr.onChange = function ()
 {
-    outArr.set(inArr.get());
+    outArr.setRef(inArr.get());
     next.trigger();
-
 };
