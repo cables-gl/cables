@@ -8,7 +8,7 @@ const
 
 exec.onTriggered = function ()
 {
-    const vp = op.patch.cgl.getViewPort();
+    const vp = op.patch.cgl.viewPort;
 
     outX.set(vp[0]);
     outY.set(vp[1]);

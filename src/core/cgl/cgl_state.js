@@ -54,6 +54,34 @@ const Context = function (_patch)
     this._shaderStack = [];
     this._stackDepthTest = [];
 
+
+
+    Object.defineProperty(this, "viewPort", {
+        get()
+        {
+            if (this._viewPortStack.length > 3)
+            {
+                const l = this._viewPortStack.length;
+                return [
+                    this._viewPortStack[l - 4],
+                    this._viewPortStack[l - 3],
+                    this._viewPortStack[l - 2],
+                    this._viewPortStack[l - 1]
+                ];
+            }
+            else
+            {
+                // workaround pre viewport stack times / or+and initial value...
+                return this._viewPort;
+            }
+        }
+        // set()
+        // {
+        //     // this.mMatrix = m;
+        // },
+    });
+
+
     Object.defineProperty(this, "mvMatrix", {
         get()
         {
@@ -215,6 +243,40 @@ const Context = function (_patch)
     let oldCanvasWidth = -1;
     let oldCanvasHeight = -1;
 
+
+
+    this._viewPortStack = [];
+    this.popViewPort = function ()
+    {
+        this._viewPortStack.pop();
+        this._viewPortStack.pop();
+        this._viewPortStack.pop();
+        this._viewPortStack.pop();
+
+        if (this._viewPort.length == 0)
+        {
+            this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
+        }
+        else
+        {
+            // this.viewPort = [this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]];
+            this.gl.viewport(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
+        }
+    };
+
+
+    this.pushViewPort = function (x, y, w, h)
+    {
+        this._viewPortStack.push(x, y, w, h);
+        this.gl.viewport(x, y, w, h);
+        // this.viewPort = [x, y, w, h];
+    };
+
+
+
+
+
+
     /**
      * @function getViewPort
      * @memberof Context
@@ -291,7 +353,6 @@ const Context = function (_patch)
         if (this._stackCullFaceFacing.length > 0) this.logStackError("this._stackCullFaceFacing length !=0 at end of rendering...");
 
         this._frameStarted = false;
-
 
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {

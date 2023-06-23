@@ -8,9 +8,9 @@
             },
             {
                 "type": 0,
-                "name": "use viewport size",
+                "name": "Size index",
                 "group": "Size",
-                "subType": "boolean"
+                "subType": "integer"
             },
             {
                 "type": 0,

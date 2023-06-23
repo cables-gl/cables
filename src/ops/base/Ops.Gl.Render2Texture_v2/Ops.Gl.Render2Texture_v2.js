@@ -2,10 +2,11 @@ const cgl = op.patch.cgl;
 
 const
     render = op.inTrigger("render"),
-    useVPSize = op.inValueBool("use viewport size", true),
+    // useVPSize = op.inValueBool("use viewport size", true),
+    inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Canvas"),
     width = op.inValueInt("texture width", 512),
     height = op.inValueInt("texture height", 512),
-    aspect = op.inBool("Auto Aspect", false),
+    aspect = op.inBool("Auto Aspect", true),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inSwitch("Wrap", ["Clamp", "Repeat", "Mirror"], "Repeat"),
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
@@ -22,7 +23,7 @@ let fb = null;
 let reInitFb = true;
 tex.set(CGL.Texture.getEmptyTexture(cgl));
 
-op.setPortGroup("Size", [useVPSize, width, height, aspect]);
+op.setPortGroup("Size", [inSize, width, height, aspect]);
 
 const prevViewPort = [0, 0, 0, 0];
 
@@ -35,18 +36,18 @@ inPixelFormat.onChange =
     twrap.onChange =
     msaa.onChange = initFbLater;
 
-useVPSize.onChange = updateVpSize;
+inSize.onChange = updateUi;
 
 render.onTriggered =
     op.preRender = doRender;
 
-updateVpSize();
+updateUi();
 
-function updateVpSize()
+function updateUi()
 {
-    width.setUiAttribs({ "greyout": useVPSize.get() });
-    height.setUiAttribs({ "greyout": useVPSize.get() });
-    aspect.setUiAttribs({ "greyout": useVPSize.get() });
+    width.setUiAttribs({ "greyout": inSize.get() == "Canvas" });
+    height.setUiAttribs({ "greyout": inSize.get() == "Canvas" });
+    aspect.setUiAttribs({ "greyout": inSize.get() == "Canvas" });
 }
 
 function initFbLater()
@@ -56,11 +57,13 @@ function initFbLater()
 
 function doRender()
 {
-    const vp = cgl.getViewPort();
-    prevViewPort[0] = vp[0];
-    prevViewPort[1] = vp[1];
-    prevViewPort[2] = vp[2];
-    prevViewPort[3] = vp[3];
+    CGL.TextureEffect.checkOpNotInTextureEffect(op);
+
+    // const vp = cgl.getViewPort();
+    // prevViewPort[0] = vp[0];
+    // prevViewPort[1] = vp[1];
+    // prevViewPort[2] = vp[2];
+    // prevViewPort[3] = vp[3];
 
     if (!fb || reInitFb)
     {
@@ -122,10 +125,13 @@ function doRender()
         }
     }
 
-    if (useVPSize.get())
+    let setAspect = aspect.get();
+
+    if (inSize.get() == "Canvas")
     {
-        width.set(cgl.getViewPort()[2]);
-        height.set(cgl.getViewPort()[3]);
+        setAspect = true;
+        width.set(cgl.canvasWidth);
+        height.set(cgl.canvasHeight);
     }
 
     if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get()))
@@ -137,13 +143,18 @@ function doRender()
 
     fb.renderStart(cgl);
 
-    if (aspect.get()) mat4.perspective(cgl.pMatrix, 45, width.get() / height.get(), 0.1, 1000.0);
+    // console.log(prevViewPort);
+    // cgl.setViewPort(0,0,width.get(),height.get());
+    cgl.pushViewPort(0, 0, width.get(), height.get());
+
+    if (setAspect) mat4.perspective(cgl.pMatrix, 45, width.get() / height.get(), 0.1, 1000.0);
 
     trigger.trigger();
     fb.renderEnd(cgl);
 
     // cgl.resetViewPort();
-    cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
+    // cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
+    cgl.popViewPort();
 
     // texDepth.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     texDepth.setRef(fb.getTextureDepth());
@@ -151,3 +162,5 @@ function doRender()
     // tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     tex.setRef(fb.getTextureColor());
 }
+
+//

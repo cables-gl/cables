@@ -111,7 +111,9 @@ TextureEffect.prototype.continueEffect = function ()
     this._cgl.pushModelMatrix();
 
     this._cgl.pushPMatrix();
-    this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
+
+    this._cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
+    // this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
     mat4.perspective(this._cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0);
 
     this._cgl.pushPMatrix();
@@ -121,7 +123,7 @@ TextureEffect.prototype.continueEffect = function ()
     mat4.identity(this._cgl.vMatrix);
 
     this._cgl.pushModelMatrix();
-    mat4.identity(this._cgl.mvMatrix);
+    mat4.identity(this._cgl.mMatrix);
 };
 
 
@@ -154,7 +156,7 @@ TextureEffect.prototype.endEffect = function ()
     this._cgl.popViewMatrix();
 
     this._cgl.popPMatrix();
-    this._cgl.resetViewPort();
+    this._cgl.popViewPort();
 };
 
 TextureEffect.prototype.bind = function ()
