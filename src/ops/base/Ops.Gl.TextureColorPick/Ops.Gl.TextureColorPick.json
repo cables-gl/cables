@@ -34,6 +34,11 @@
             },
             {
                 "type": 0,
+                "name": "Coordinates index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "integer"
             },
