@@ -49,5 +49,12 @@
         "name": "Ops.Patch.P_xdU1v.TextureArrayInfo"
     },
     "authorName": "pandur",
-    "created": 1686129047736
+    "created": 1686129047736,
+    "summary": "Information about Textures in an array",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "vS5fjz"
 }

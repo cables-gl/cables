@@ -22,6 +22,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1681240057498
+        },
+        {
+            "message": "Ops.Dev.Gl.GetObjectId renamed to Ops.Graphics.GetObjectId",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687272524763
         }
     ],
     "authorName": "pandur",
@@ -45,5 +51,11 @@
             }
         ],
         "name": "Ops.Dev.Gl.GetObjectId"
+    },
+    "summary": "get the id/index of the current object/mesh",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }
