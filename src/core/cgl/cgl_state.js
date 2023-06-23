@@ -1174,11 +1174,11 @@ Context.prototype.setCursor = function (str)
  */
 Context.prototype.enableExtension = function (name)
 {
-    console.log("extension", name);
+    // console.log("extension", name);
     // const start = performance.now();
     const o = this.gl.getExtension(name);
     // console.log(performance.now() - start);
-    if (!o)console.error("extension not available", name);
+    if (!o) console.error("extension not available", name);
     return o;
 };
 
