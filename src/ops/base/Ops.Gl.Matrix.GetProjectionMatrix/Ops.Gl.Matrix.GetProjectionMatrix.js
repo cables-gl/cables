@@ -2,7 +2,7 @@ const
     cgl = op.patch.cgl,
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    matrix = op.outArray("matrix", null, 16);
+    matrix = op.outArray("matrix", null, 4);
 
 let m = mat4.create();
 mat4.identity(m);

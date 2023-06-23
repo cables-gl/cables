@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    matrix = op.outArray("matrix");
+    matrix = op.outArray("matrix", 4);
 
 const m = mat4.create();
 
