@@ -13,8 +13,6 @@ let dumpFrame = false;
 
 const started = false;
 
-// const query = null;
-// const ext = gl.getExtension("EXT_disjoint_timer_query_webgl2");
 
 exec.onTriggered = function ()
 {
