@@ -63,15 +63,25 @@ const Framebuffer2 = function (cgl, w, h, options)
     this._numRenderBuffers = this._options.numRenderBuffers;
     this._colorTextures = [];
 
+    if (!options.pixelFormat)
+    {
+        if (!options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
+        if (options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+    }
+
+
     for (let i = 0; i < this._numRenderBuffers; i++)
     {
         this._colorTextures[i] = new Texture(cgl, {
             "name": "fb2 " + this.name + " " + i,
             "isFloatingPointTexture": this._options.isFloatingPointTexture,
+            "pixelFormat": this._options.pixelFormat,
             "filter": this._options.filter,
             "wrap": this._options.wrap,
         });
     }
+
+
 
     let fil = Texture.FILTER_NEAREST;
     if (this._options.shadowMap) fil = Texture.FILTER_LINEAR;
@@ -202,17 +212,32 @@ Framebuffer2.prototype.setSize = function (w, h)
             if (this._cgl.glUseHalfFloatTex)
             {
                 // const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+            }
+            else
+            {
+            }
+
+            if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA16HF)
+            {
                 const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
                 const extcb2 = this._cgl.gl.getExtension("EXT_color_buffer_half_float_linear");
                 internFormat = this._cgl.gl.RGBA16F;
             }
-            else
+            if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
             {
                 const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
                 const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
                 const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 internFormat = this._cgl.gl.RGBA32F;
+            }
+            if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+            {
+                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+                const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+
+                internFormat = this._cgl.gl.R11F_G11F_B10F;
             }
         }
 

@@ -135,7 +135,7 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.Gl.Render2Textures2"
+        "name": "Ops.Gl.Render2Textures_v2"
     },
     "summary": "render to multiple textures at the same time",
     "docs": {

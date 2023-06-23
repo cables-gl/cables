@@ -1,6 +1,7 @@
 const
     cgl = op.patch.cgl,
     pUpdate = op.inTrigger("update"),
+    inCoordFormat = op.inSwitch("Coordinates", ["Pixel"], "Pixel"),
     inX = op.inInt("X", 0),
     inY = op.inInt("Y", 0),
     tex = op.inTexture("texture"),

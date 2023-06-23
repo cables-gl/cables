@@ -54,6 +54,8 @@ function doRender()
         const bodies = cgl.frameStore.collisionWorld.bodies;
         for (let i = 0; i < bodies.length; i++)
         {
+            if (found) break;
+
             const body = bodies[i];
             if (body.type == 1) // sphere
             {
