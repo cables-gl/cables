@@ -448,7 +448,7 @@ Framebuffer2.prototype.renderEnd = function ()
     this._cgl.popFrameBuffer();
 
     this._cgl.popModelMatrix();
-    this._cgl.resetViewPort();
+    // this._cgl.resetViewPort();
 
     if (this._colorTextures[0].filter == Texture.FILTER_MIPMAP)
     {
