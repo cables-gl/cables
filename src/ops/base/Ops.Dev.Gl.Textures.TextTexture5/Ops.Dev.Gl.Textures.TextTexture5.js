@@ -158,7 +158,7 @@ if (op.patch.isEditorMode()) CABLES.UI.SIMPLEWIREFRAMERECT = CABLES.UI.SIMPLEWIR
 
 if (cgl.glVersion < 2)
 {
-    cgl.gl.getExtension("OES_standard_derivatives");
+    cgl.enableExtension("OES_standard_derivatives");
     shader.enableExtension("GL_OES_standard_derivatives");
 }
 

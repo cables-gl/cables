@@ -211,7 +211,7 @@ Framebuffer2.prototype.setSize = function (w, h)
         {
             if (this._cgl.glUseHalfFloatTex)
             {
-                // const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
+                // const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
             }
             else
             {
@@ -219,23 +219,23 @@ Framebuffer2.prototype.setSize = function (w, h)
 
             if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA16HF)
             {
-                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
-                const extcb2 = this._cgl.gl.getExtension("EXT_color_buffer_half_float_linear");
+                const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
+                const extcb2 = this._cgl.enableExtension("EXT_color_buffer_half_float_linear");
                 internFormat = this._cgl.gl.RGBA16F;
             }
             if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
             {
-                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
-                const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
-                const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+                const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+                // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
+                const ext3 = this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 internFormat = this._cgl.gl.RGBA32F;
             }
             if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
-                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_float");
-                const extcbl = this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
-                const ext3 = this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+                const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+                // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
+                const ext3 = this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 internFormat = this._cgl.gl.R11F_G11F_B10F;
             }
@@ -448,7 +448,7 @@ Framebuffer2.prototype.renderEnd = function ()
     this._cgl.popFrameBuffer();
 
     this._cgl.popModelMatrix();
-    this._cgl.resetViewPort();
+    // this._cgl.resetViewPort();
 
     if (this._colorTextures[0].filter == Texture.FILTER_MIPMAP)
     {

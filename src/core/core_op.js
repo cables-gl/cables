@@ -956,7 +956,8 @@ const Op = function ()
                 "objType": "texture"
             })
         );
-        if (v !== undefined) p.set(v);
+        if (v !== undefined) p.set(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
+
         p.ignoreValueSerialize = true;
         return p;
     };

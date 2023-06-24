@@ -334,14 +334,13 @@ Mesh.prototype._setVertexNumbers = function (arr)
             for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
         }
 
-        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1,
-            (attr, geom, shader) =>
-            {
-                if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
-                shader.uniformNumVertices.setValue(this._numVerts);
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (attr, geom, shader) =>
+        {
+            if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
+            shader.uniformNumVertices.setValue(this._numVerts);
 
-                // console.log("this._numVerts", this._numVerts, attr, shader.uniformNumVertices);
-            });
+            // console.log("this._numVerts", this._numVerts, attr, shader.uniformNumVertices);
+        });
     }
 };
 
@@ -727,7 +726,7 @@ Mesh.prototype.render = function (shader)
             this._cgl.profileData.glQueryData[id] = queryProfilerData;
         }
 
-        if (!this._queryExt && this._queryExt !== false) this._queryExt = this._cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2") || false;
+        if (!this._queryExt && this._queryExt !== false) this._queryExt = this._cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
         if (this._queryExt)
         {
             if (queryProfilerData._drawQuery)

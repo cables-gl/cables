@@ -1,5 +1,7 @@
 {
-    "summary": "Render into an Image",
+    "authorName": "pandur",
+    "id": "fb4f44d8-e255-4e81-b96e-38e870bc3238",
+    "created": 1687516278322,
     "layout": {
         "portsIn": [
             {
@@ -77,30 +79,70 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Gl.Render2Texture_v2"
+        "name": "Ops.Patch.P4SCBDz.Render2Textures_v3"
     },
-    "authorName": "pandur",
-    "id": "c4b5893e-bdfe-4f2d-a274-8a2b486492eb",
-    "created": 1687444885322,
+    "summary": "render to multiple textures at the same time",
     "docs": {
         "ports": []
     },
-    "issues": "",
-    "relatedops": null,
-    "youtubeids": [
-        "XmOk70epdf0"
-    ],
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.Render2Texture",
+            "message": "added webgl2 requirement",
             "author": "pandur",
-            "date": 1687444885322
+            "date": 1549608962401
         },
         {
-            "message": "Ops.Patch.PheLezz.Render2Texture2 renamed to Ops.Gl.Render2Texture_v2",
+            "message": "code cleanup - ports , onChange",
+            "author": "andro",
+            "date": 1559049206585
+        },
+        {
+            "message": "cloned op from Ops.Gl.Render2Textures",
+            "author": "pandur",
+            "date": 1680014424477
+        },
+        {
+            "message": "Ops.Patch.PncOFEs.Render2Textures renamed to Ops.Dev.Gl.Render2Textures2",
             "type": "rename",
             "author": "pandur",
-            "date": 1687445363475
+            "date": 1680110539327
+        },
+        {
+            "message": " added core lib: cgl_rendertargets",
+            "type": "",
+            "author": "pandur",
+            "date": 1681236029664
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1681236071666
+        },
+        {
+            "message": "Ops.Dev.Gl.Render2Textures2 renamed to Ops.Gl.Render2Textures_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684505522013
+        },
+        {
+            "message": "cloned op from Ops.Gl.Render2Textures_v2",
+            "author": "pandur",
+            "date": 1687516278323
+        },
+        {
+            "message": "Ops.Patch.P4SCBDz.Render2Textures_v3 renamed to Ops.Gl.Render2Textures_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687527380346
         }
+    ],
+    "youtubeid": "",
+    "issues": "requires WebGL2",
+    "relatedops": null,
+    "exampleProjectId": "INQQgo",
+    "coreLibs": [
+        "cgl_rendertargets",
+        "cgl_shadermodifier"
     ]
 }

@@ -213,7 +213,7 @@ Texture.prototype.setSize = function (w, h)
     if (
         this._cgl.glVersion == 1 &&
         this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
-        (!this._cgl.gl.getExtension("OES_texture_float_linear"))
+        (!this._cgl.enableExtension("OES_texture_float_linear"))
     )
     {
         console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
@@ -223,28 +223,32 @@ Texture.prototype.setSize = function (w, h)
 
     if (this.textureType == Texture.TYPE_FLOAT)
     {
-        // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
+        // if(this._cgl.glVersion==1 && !this._cgl.enableExtension('OES_texture_float')) throw "no float texture extension";
         // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
 
         if (this._cgl.glVersion == 1)
         {
             if (this._cgl.glUseHalfFloatTex)
             {
-                const ext = this._cgl.gl.getExtension("OES_texture_half_float");
-                const extcb = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+                const ext = this._cgl.enableExtension("OES_texture_half_float");
+                const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
                 if (!ext) throw new Error("no half float texture extension");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
             }
             else
             {
-                this._cgl.gl.getExtension("OES_texture_float");
+                this._cgl.enableExtension("OES_texture_float");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
             }
         }
         else
         {
+            // if (this._cgl.glUseHalfFloatTex)
+            // {
+            //     const ext = this._cgl.enableExtension("EXT_color_buffer_half_float");
+            //     if (!ext) throw new Error("no half float texture extension");
             // if (this._cgl.glUseHalfFloatTex)
             // {
             //     const ext = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
@@ -259,9 +263,6 @@ Texture.prototype.setSize = function (w, h)
             // }
             // else
             // {
-            this._cgl.gl.getExtension("EXT_color_buffer_float");
-            this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
-            this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
             if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F)
             {
@@ -282,6 +283,13 @@ Texture.prototype.setSize = function (w, h)
                 dataFormat = this._cgl.gl.RGB;
             }
 
+            if (dataType === this._cgl.gl.FLOAT)
+            {
+                this._cgl.gl.getExtension("EXT_color_buffer_float");
+                // this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
+                this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            }
+
             // this._cgl.gl.texImage2D(this.texTarget, 0, internalFormat, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
             // }
         }
@@ -290,7 +298,7 @@ Texture.prototype.setSize = function (w, h)
     {
         if (this._cgl.glVersion == 1)
         {
-            // if(this._cgl.gl.getExtension('OES_texture_half_float'))
+            // if(this._cgl.enableExtension('OES_texture_half_float'))
             // {
             //     console.log("is half float");
             //     var tcomp=this._cgl.gl.DEPTH_COMPONENT;
@@ -616,7 +624,7 @@ Texture.prototype._setFilter = function ()
 
         if (this.anisotropic)
         {
-            const ext = this._cgl.gl.getExtension("EXT_texture_filter_anisotropic");
+            const ext = this._cgl.enableExtension("EXT_texture_filter_anisotropic");
             if (ext)
             {
                 const max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);

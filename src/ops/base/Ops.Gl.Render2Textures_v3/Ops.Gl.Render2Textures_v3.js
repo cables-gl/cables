@@ -2,7 +2,6 @@ const cgl = op.patch.cgl;
 
 const
     render = op.inTrigger("render"),
-    // useVPSize = op.inValueBool("use viewport size", true),
     inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Canvas"),
     width = op.inValueInt("texture width", 512),
     height = op.inValueInt("texture height", 512),
@@ -13,7 +12,6 @@ const
     trigger = op.outTrigger("trigger"),
     tex = op.outTexture("texture"),
     texDepth = op.outTexture("textureDepth"),
-    // fpTexture = op.inValueBool("HDR"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     depth = op.inValueBool("Depth", true),
@@ -21,13 +19,10 @@ const
 
 let fb = null;
 let reInitFb = true;
+
 tex.set(CGL.Texture.getEmptyTexture(cgl));
 
 op.setPortGroup("Size", [inSize, width, height, aspect]);
-
-const prevViewPort = [0, 0, 0, 0];
-
-// fpTexture.setUiAttribs({ "title": "Pixelformat Float 32bit" });
 
 inPixelFormat.onChange =
     depth.onChange =
@@ -58,12 +53,6 @@ function initFbLater()
 function doRender()
 {
     CGL.TextureEffect.checkOpNotInTextureEffect(op);
-
-    // const vp = cgl.getViewPort();
-    // prevViewPort[0] = vp[0];
-    // prevViewPort[1] = vp[1];
-    // prevViewPort[2] = vp[2];
-    // prevViewPort[3] = vp[3];
 
     if (!fb || reInitFb)
     {
@@ -143,8 +132,6 @@ function doRender()
 
     fb.renderStart(cgl);
 
-    // console.log(prevViewPort);
-    // cgl.setViewPort(0,0,width.get(),height.get());
     cgl.pushViewPort(0, 0, width.get(), height.get());
 
     if (setAspect) mat4.perspective(cgl.pMatrix, 45, width.get() / height.get(), 0.1, 1000.0);
@@ -152,14 +139,10 @@ function doRender()
     trigger.trigger();
     fb.renderEnd(cgl);
 
-    // cgl.resetViewPort();
-    // cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
     cgl.popViewPort();
 
-    // texDepth.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     texDepth.setRef(fb.getTextureDepth());
 
-    // tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     tex.setRef(fb.getTextureColor());
 }
 

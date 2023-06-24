@@ -21,10 +21,10 @@ class ShaderModifier
 
         if (this._cgl.glVersion == 1)
         {
-            this._cgl.gl.getExtension("OES_texture_float");
-            this._cgl.gl.getExtension("OES_texture_float_linear");
-            this._cgl.gl.getExtension("OES_texture_half_float");
-            this._cgl.gl.getExtension("OES_texture_half_float_linear");
+            this._cgl.enableExtension("OES_texture_float");
+            this._cgl.enableExtension("OES_texture_float_linear");
+            this._cgl.enableExtension("OES_texture_half_float");
+            this._cgl.enableExtension("OES_texture_half_float_linear");
         }
     }
 
