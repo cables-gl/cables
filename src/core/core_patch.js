@@ -84,6 +84,7 @@ const Patch = function (cfg)
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
     this.frameStore = {};
+    this.deSerialized = false;
 
     if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
 
@@ -483,6 +484,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
         if (op.init) op.init();
+        op.emitEvent("init", fromDeserialize);
     }
     else
     {
@@ -1113,6 +1115,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
+    this.deSerialized = true;
 
     this.emitEvent("patchLoadEnd", newOps, obj, genIds);
     // if (this.onLoadEnd) this.onLoadEnd();
