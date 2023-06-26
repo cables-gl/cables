@@ -59,12 +59,6 @@ function doRender()
 {
     CGL.TextureEffect.checkOpNotInTextureEffect(op);
 
-    // const vp = cgl.getViewPort();
-    // prevViewPort[0] = vp[0];
-    // prevViewPort[1] = vp[1];
-    // prevViewPort[2] = vp[2];
-    // prevViewPort[3] = vp[3];
-
     if (!fb || reInitFb)
     {
         if (fb) fb.delete();
@@ -150,11 +144,13 @@ function doRender()
     if (setAspect) mat4.perspective(cgl.pMatrix, 45, width.get() / height.get(), 0.1, 1000.0);
 
     trigger.trigger();
+
+    cgl.popViewPort();
+
     fb.renderEnd(cgl);
 
     // cgl.resetViewPort();
     // cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
-    cgl.popViewPort();
 
     // texDepth.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     texDepth.setRef(fb.getTextureDepth());

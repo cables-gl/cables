@@ -176,6 +176,6 @@ vec3 MOD_mask=vec3(1.0);
 MOD_displHeightMapColor=MOD_disp;
 
 
-#ifdef CALC_NORMALS
+#ifdef MOD_CALC_NORMALS
     norm+=MOD_calcNormal(MOD_texture,MOD_tc);
 #endif

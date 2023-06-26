@@ -1,7 +1,5 @@
 const
     render = op.inTrigger("Render"),
-
-    // meth = op.inValueSelect("Mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
     extrude = op.inValue("Extrude", 0.5),
     meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "VertCol", "*", "+", "/"], "Norm"),
     axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
@@ -16,6 +14,7 @@ const
     scale = op.inValueFloat("Scale", 1),
 
     calcNormals = op.inValueBool("Calc Normals", false),
+    calcNormalsAxis = op.inSwitch("Normal Axis", ["X", "Y", "Z"], "Z"),
     removeZero = op.inValueBool("Discard Zero Values"),
     colorize = op.inValueBool("colorize", false),
     colorizeMin = op.inValueSlider("Colorize Min", 0),
@@ -25,21 +24,22 @@ const
 const cgl = op.patch.cgl;
 
 op.setPortGroup("Input", [texture, flip, channel, range, offsetX, offsetY, scale]);
-op.setPortGroup("Colorize", [colorize, colorizeMin, colorizeMax]);
+op.setPortGroup("Colorize", [colorize, colorizeMin, colorizeMax, removeZero]);
 
 op.toWorkPortsNeedToBeLinked(texture, next, render);
 
 render.onTriggered = dorender;
 
 channel.onChange =
-colorize.onChange =
-axis.onChange =
-    range.onChange =
-    removeZero.onChange =
-    flip.onChange =
-    calcNormals.onChange =
     src.onChange =
-    meth.onChange = updateDefines;
+    axis.onChange =
+    flip.onChange =
+    meth.onChange =
+    range.onChange =
+    colorize.onChange =
+    removeZero.onChange =
+    calcNormals.onChange =
+    calcNormalsAxis.onChange = updateDefines;
 
 const srcHeadVert = attachments.vertdisplace_head_vert;
 const srcBodyVert = attachments.vertdisplace_body_vert;
@@ -124,7 +124,12 @@ function updateDefines()
     mod.toggleDefine("MOD_COORD_MESHXY", src.get() == "Mesh XY");
     mod.toggleDefine("MOD_COORD_MESHXZ", src.get() == "Mesh XZ");
 
-    mod.toggleDefine("CALC_NORMALS", calcNormals.get());
+    mod.toggleDefine("MOD_CALC_NORMALS", calcNormals.get());
+    mod.toggleDefine("MOD_NORMALS_X", calcNormalsAxis.get() == "X");
+    mod.toggleDefine("MOD_NORMALS_Y", calcNormalsAxis.get() == "Y");
+    mod.toggleDefine("MOD_NORMALS_Z", calcNormalsAxis.get() == "Z");
+
+    calcNormalsAxis.setUiAttribs({ "greyout": !calcNormals.get() });
 }
 
 function dorender()
