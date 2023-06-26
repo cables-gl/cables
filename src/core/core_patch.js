@@ -846,7 +846,7 @@ Patch.prototype.reloadOp = function (objName, cb)
         oldOp.deleted = true;
         const op = this.addOp(objName, oldOp.uiAttribs);
         if (!op) continue;
-        if (oldOp && oldOp.storage) op.storage = JSON.parse(JSON.stringify(oldOp.storage));
+        if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
         ops.push(op);
 
         let j, k, l;
@@ -941,7 +941,7 @@ Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
     this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
 };
 
-Patch.prototype.deSerialize = function (obj, genIds)
+Patch.prototype.deSerialize = function (obj, genIds, cb)
 {
     if (this.aborted) return;
     const newOps = [];

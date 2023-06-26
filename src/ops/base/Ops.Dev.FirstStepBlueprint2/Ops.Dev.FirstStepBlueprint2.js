@@ -3,18 +3,22 @@ new CABLES.SubPatchOp(op);
 let oldPatchId = op.patchId.get();
 let initialized = false;
 
-console.log(oldPatchId);
-
-op.setStorage({ "blueprintVer": 2 });
-
-console.log("deSerialized", op.patch.deSerialized);
-
 initializeSubpatch();
+
+function bp2init()
+{
+    console.log("blueprint2 init!!!");
+    if (oldPatchId != op.patchId.get()) moveOpsSubpatches(oldPatchId, op.patchId.get());
+    oldPatchId = op.patchId.get();
+
+    op.setStorage({ "blueprintVer": 2 });
+
+    op.patch.emitEvent("subpatchExpose", oldPatchId);
+}
 
 op.on("loadedValueSet", () =>
 {
-    if (oldPatchId != op.patchId.get()) moveOpsSubpatches(oldPatchId, op.patchId.get());
-    oldPatchId = op.patchId.get();
+    bp2init();
 });
 
 op.on("init", (fromDeserialize) =>
@@ -22,7 +26,10 @@ op.on("init", (fromDeserialize) =>
     if (!fromDeserialize)
     {
         console.log("init!", fromDeserialize);
+
         initializeSubpatch();
+
+        bp2init();
     }
 });
 
@@ -42,7 +49,11 @@ function initializeSubpatch()
     oldPatchId = p.ops[0].uiAttribs.subPatch;
     console.log("op.patchId.get()", op.patchId.get());
 
-    op.patch.deSerialize(p);
+    op.patch.deSerialize(p, false,
+        () =>
+        {
+            op.patch.emitEvent("subpatchExpose", oldPatchId);
+        });
 }
 
 function moveOpsSubpatches(src, dst)
