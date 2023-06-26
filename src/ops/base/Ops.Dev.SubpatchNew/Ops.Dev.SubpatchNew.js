@@ -4,10 +4,10 @@ console.log("isExposableSubpatchOp", op.isExposableSubpatchOp());
 
 if (CABLES.UI && CABLES.sandbox.isDevEnv())
 {
-    const inMakeBp = op.inTriggerButton("Create Blueprint");
-    inMakeBp.setUiAttribs({ "hidePort": true });
+    // const inMakeBp = op.inTriggerButton("Create Blueprint");
+    // inMakeBp.setUiAttribs({ "hidePort": true });
 
-    inMakeBp.onTriggered = makeBlueprint;
+    // inMakeBp.onTriggered = makeBlueprint;
 }
 
 function makeBlueprint()
@@ -31,3 +31,9 @@ function makeBlueprint()
 
     bpOp.uiAttr(attribs);
 }
+
+op.on("loadedValueSet",
+    () =>
+    {
+        op.patch.emitEvent("subpatchExpose", op.patchId.get());
+    });

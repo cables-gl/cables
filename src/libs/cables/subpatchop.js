@@ -29,7 +29,7 @@ const SubPatchOp = class
 
         op.init = () =>
         {
-            op.setStorage({ "subPatchVer": 1 });
+            op.setStorage({ "subPatchVer": 2 });
         };
 
         op.on("delete", () =>
