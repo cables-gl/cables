@@ -1,14 +1,83 @@
 new CABLES.SubPatchOp(op);
 
-op.setStorage({ "blueprintVer": 2 });
+let oldPatchId = op.patchId.get();
+let initialized = false;
 
-const p = JSON.parse(attachments.subpatch_json);
+initializeSubpatch();
 
-for (let i = 0; i < p.ops.length; i++)
+function bp2init()
 {
-    p.ops[i].uiAttribs.blueprintSubpatch = true;
+    console.log("blueprint2 init!!!");
+    if (oldPatchId != op.patchId.get()) moveOpsSubpatches(oldPatchId, op.patchId.get());
+    oldPatchId = op.patchId.get();
+
+    op.setStorage({ "blueprintVer": 2 });
+
+    op.patch.emitEvent("subpatchExpose", oldPatchId);
 }
 
-CABLES.Patch.replaceOpIds(p, op.patchId.get());
+op.on("loadedValueSet", () =>
+{
+    bp2init();
+});
 
-op.patch.deSerialize(p);
+op.on("init", (fromDeserialize) =>
+{
+    if (!fromDeserialize)
+    {
+        console.log("init!", fromDeserialize);
+
+        initializeSubpatch();
+
+        bp2init();
+    }
+});
+
+function initializeSubpatch()
+{
+    if (initialized) return;
+    initialized = true;
+    console.log("bp2 initializeSubpatch");
+    const p = JSON.parse(attachments.subpatch_json);
+
+    for (let i = 0; i < p.ops.length; i++)
+    {
+        // p.ops[i].uiAttribs.blueprintSubpatch = true;
+        p.ops[i].uiAttribs.blueprintSubpatch2 = true;
+    }
+
+    oldPatchId = p.ops[0].uiAttribs.subPatch;
+    console.log("op.patchId.get()", op.patchId.get());
+
+    op.patch.deSerialize(p, false,
+        () =>
+        {
+            op.patch.emitEvent("subpatchExpose", oldPatchId);
+        });
+}
+
+function moveOpsSubpatches(src, dst)
+{
+    const ops = op.patch.ops;
+    const deleteOps = [];
+
+    for (let i = 0; i < ops.length; i++)
+    {
+        if (ops[i].uiAttribs.subPatch == src)
+        {
+            if (ops[i].objName.indexOf("PatchOutput") > -1 || ops[i].objName.indexOf("PatchInput") > -1)
+                deleteOps.push(ops[i].id);
+
+            ops[i].setUiAttrib({ "subPatch": dst });
+        }
+        console.log(i, ops[i].uiAttribs.subPatch);
+    }
+
+    deleteOps.forEach((opid) =>
+    {
+        console.log(op);
+        op.patch.deleteOp(opid);
+    });
+
+    op.patch.emitEvent("subpatchExpose", dst);
+}

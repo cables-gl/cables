@@ -84,6 +84,7 @@ const Patch = function (cfg)
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
     this.frameStore = {};
+    this.deSerialized = false;
 
     if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
 
@@ -483,6 +484,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
         if (op.init) op.init();
+        op.emitEvent("init", fromDeserialize);
     }
     else
     {
@@ -844,7 +846,7 @@ Patch.prototype.reloadOp = function (objName, cb)
         oldOp.deleted = true;
         const op = this.addOp(objName, oldOp.uiAttribs);
         if (!op) continue;
-        if (oldOp && oldOp.storage) op.storage = JSON.parse(JSON.stringify(oldOp.storage));
+        if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
         ops.push(op);
 
         let j, k, l;
@@ -939,7 +941,7 @@ Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
     this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
 };
 
-Patch.prototype.deSerialize = function (obj, genIds)
+Patch.prototype.deSerialize = function (obj, genIds, cb)
 {
     if (this.aborted) return;
     const newOps = [];
@@ -1113,6 +1115,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
+    this.deSerialized = true;
 
     this.emitEvent("patchLoadEnd", newOps, obj, genIds);
     // if (this.onLoadEnd) this.onLoadEnd();

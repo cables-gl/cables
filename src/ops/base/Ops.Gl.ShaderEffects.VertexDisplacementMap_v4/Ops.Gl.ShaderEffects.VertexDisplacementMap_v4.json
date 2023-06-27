@@ -77,7 +77,13 @@
             },
             {
                 "type": 0,
+                "name": "Normal Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Discard Zero Values",
+                "group": "Colorize",
                 "subType": "boolean"
             },
             {
@@ -129,7 +135,6 @@
     ],
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "a56wk9Xm9dY"
