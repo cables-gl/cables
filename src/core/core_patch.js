@@ -1454,7 +1454,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
             }
         }
         // op has no uiAttribs in export, we don't care about subpatches in export though
-        if (!found && json.ops[kk].uiAttribs)
+        if (!found && json.ops[kk].uiAttribs && parentSubPatchId != null)
         {
             json.ops[kk].uiAttribs.subPatch = parentSubPatchId;
         }

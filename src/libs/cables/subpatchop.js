@@ -4,8 +4,9 @@ const subpatchOutputOpName = "Ops.Dev.Ui.PatchOutput";
 
 const SubPatchOp = class
 {
-    constructor(op)
+    constructor(op, options)
     {
+        options = options || {};
         this._op = op;
 
         op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_STRING, { "display": "readonly" }));
@@ -19,9 +20,17 @@ const SubPatchOp = class
         }
         else
         {
-            let newPatchId = CABLES.generateUUID();
-            op.patchId.set(newPatchId);
+            if (options.subId) op.patchId.set(options.subId);
+            else op.patchId.set(CABLES.generateUUID());
         }
+
+        op.patchId.onChange = () =>
+        {
+            console.log("patchid change.nope...");
+
+            if (options.subId) op.patchId.value = options.subId;
+            // else op.patchId.value=CABLES.uuid();
+        };
 
         op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
         op.on("loadedValueSet", () => { this.createInOutOps(); });
@@ -35,7 +44,7 @@ const SubPatchOp = class
         op.on("delete", () =>
         {
             for (let i = op.patch.ops.length - 1; i >= 0; i--)
-                if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == this.patchId)
+                if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == op.patchId.get())
                     op.patch.deleteOp(op.patch.ops[i].id);
         });
 
