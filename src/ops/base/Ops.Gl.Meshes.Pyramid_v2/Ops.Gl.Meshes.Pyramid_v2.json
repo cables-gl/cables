@@ -1,0 +1,68 @@
+{
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "f5443b2c-cd07-4361-8b7b-99ddf83e62ec",
+    "created": 1687960465209,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Patch.PXTqV___8.Pyramid_v2"
+    },
+    "summary": "render a pyramid mesh",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Y09mQ6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Pyramid",
+            "author": "pandur",
+            "date": 1687960465210
+        },
+        {
+            "message": "Ops.Patch.PXTqV___8.Pyramid_v2 renamed to Ops.Gl.Meshes.Pyramid_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687960524531
+        }
+    ]
+}

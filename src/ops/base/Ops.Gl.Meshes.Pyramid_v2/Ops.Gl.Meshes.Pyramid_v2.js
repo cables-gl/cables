@@ -11,11 +11,11 @@ const
 const cgl = op.patch.cgl;
 let geom = null;
 let mesh = null;
-create();
+
 sizeW.onChange =
     sizeH.onChange =
     sizeL.onChange =
-    inSmooth.onChange = create;// () => { mesh = null; };
+    inSmooth.onChange = () => { mesh = null; };
 
 render.onTriggered = function ()
 {
