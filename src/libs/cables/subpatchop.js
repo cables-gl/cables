@@ -43,9 +43,10 @@ const SubPatchOp = class
 
         op.on("delete", () =>
         {
-            for (let i = op.patch.ops.length - 1; i >= 0; i--)
-                if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == op.patchId.get())
-                    op.patch.deleteOp(op.patch.ops[i].id);
+            const ops = op.patch.ops;
+            for (let i = ops.length - 1; i >= 0; i--)
+                if (ops[i] && ops[i].uiAttribs && ops[i].uiAttribs.subPatch == op.patchId.get())
+                    op.patch.deleteOp(ops[i].id);
         });
 
         this._op.isExposableSubpatchOp = () =>

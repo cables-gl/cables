@@ -475,6 +475,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (this._opIdCache[op.id])
         {
             this._log.warn("opid with id " + op.id + " already exists in patch!");
+            // op.id += "_double";
             return;
         }
 
@@ -558,7 +559,6 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
 
                 const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
-
 
                 if (this.onDelete)
                 {
@@ -849,8 +849,8 @@ Patch.prototype.reloadOp = function (objName, cb)
         if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
         ops.push(op);
 
-        let j, k, l;
-        for (j in oldOp.portsIn)
+        let l;
+        for (let j in oldOp.portsIn)
         {
             if (oldOp.portsIn[j].links.length === 0)
             {
@@ -880,7 +880,7 @@ Patch.prototype.reloadOp = function (objName, cb)
             }
         }
 
-        for (j in oldOp.portsOut)
+        for (let j in oldOp.portsOut)
         {
             while (oldOp.portsOut[j].links.length)
             {
