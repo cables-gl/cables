@@ -85,13 +85,8 @@ const Op = function ()
      */
     this.init = null;
 
-
-    Object.defineProperty(this, "objName", {
-        get()
-        {
-            return this._objName;
-        }
-    });
+    Object.defineProperty(this, "objName", { get() { return this._objName; } });
+    Object.defineProperty(this, "shortName", { get() { return this._shortOpName; } });
 };
 
 {
