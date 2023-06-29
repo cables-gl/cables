@@ -58,12 +58,12 @@ PatchConnectionReceiver.prototype._receive = function (ev)
             {
                 gui.serverOps.loadProjectDependencies(data.vars.json, () =>
                 {
-                    this._patch.deSerialize(data.vars.json, data.vars.genIds);
+                    this._patch.deSerialize(data.vars.json, { "genIds": data.vars.genIds });
                 });
             }
             else
             {
-                this._patch.deSerialize(data.vars.json, data.vars.genIds);
+                this._patch.deSerialize(data.vars.json, { "genIds": data.vars.genIds });
             }
         }
     }

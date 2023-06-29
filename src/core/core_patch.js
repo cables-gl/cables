@@ -941,8 +941,9 @@ Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
     this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
 };
 
-Patch.prototype.deSerialize = function (obj, genIds, cb)
+Patch.prototype.deSerialize = function (obj, options)
 {
+    options = options || { "genIds": false, "createRef": false };
     if (this.aborted) return;
     const newOps = [];
     const loadingId = this.loading.start("core", "deserialize");
@@ -981,7 +982,7 @@ Patch.prototype.deSerialize = function (obj, genIds, cb)
 
         if (op)
         {
-            if (genIds) op.id = uuid();
+            if (options.genIds) op.id = uuid();
             op.portsInData = opData.portsIn;
             op._origData = opData;
             op.storage = opData.storage;
@@ -1117,7 +1118,7 @@ Patch.prototype.deSerialize = function (obj, genIds, cb)
 
     this.deSerialized = true;
 
-    this.emitEvent("patchLoadEnd", newOps, obj, genIds);
+    this.emitEvent("patchLoadEnd", newOps, obj, options.genIds);
     // if (this.onLoadEnd) this.onLoadEnd();
 };
 
@@ -1359,10 +1360,32 @@ Patch.replaceOpIds = function (json, options)
 {
     for (const i in json.ops)
     {
-        const searchID = json.ops[i].id;
+        const op = json.ops[i];
+        const oldId = op.id;
         let newId = uuid();
-        if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].id);
-        const newID = json.ops[i].id = newId;
+        if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
+        else if (options.prefixId) newId = options.prefixId + oldId;
+        else if (options.refAsId)
+        {
+            if (op.storage && op.storage.ref)
+            {
+                newId = op.storage.ref;
+                delete op.storage.ref;
+            }
+            else
+            {
+                newId = uuid();
+            }
+        }
+
+        const newID = op.id = newId;
+
+        if (options.oldIdAsRef)
+        {
+            op.storage = op.storage || {};
+            op.storage.ref = oldId;
+        }
+
 
         for (const j in json.ops)
         {
@@ -1378,8 +1401,8 @@ Patch.replaceOpIds = function (json, options)
 
                         for (l in json.ops[j].portsIn[k].links)
                         {
-                            if (json.ops[j].portsIn[k].links[l].objIn === searchID) json.ops[j].portsIn[k].links[l].objIn = newID;
-                            if (json.ops[j].portsIn[k].links[l].objOut === searchID) json.ops[j].portsIn[k].links[l].objOut = newID;
+                            if (json.ops[j].portsIn[k].links[l].objIn === oldId) json.ops[j].portsIn[k].links[l].objIn = newID;
+                            if (json.ops[j].portsIn[k].links[l].objOut === oldId) json.ops[j].portsIn[k].links[l].objOut = newID;
                         }
                     }
                 }
@@ -1396,8 +1419,8 @@ Patch.replaceOpIds = function (json, options)
 
                         for (l in json.ops[j].portsOut[k].links)
                         {
-                            if (json.ops[j].portsOut[k].links[l].objIn === searchID) json.ops[j].portsOut[k].links[l].objIn = newID;
-                            if (json.ops[j].portsOut[k].links[l].objOut === searchID) json.ops[j].portsOut[k].links[l].objOut = newID;
+                            if (json.ops[j].portsOut[k].links[l].objIn === oldId) json.ops[j].portsOut[k].links[l].objIn = newID;
+                            if (json.ops[j].portsOut[k].links[l].objOut === oldId) json.ops[j].portsOut[k].links[l].objOut = newID;
                         }
                     }
                 }
