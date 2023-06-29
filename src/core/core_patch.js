@@ -1355,13 +1355,13 @@ Patch.prototype.printTriggerStack = function ()
     console.groupEnd(); // eslint-disable-line
 };
 
-Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
+Patch.replaceOpIds = function (json, options)
 {
     for (const i in json.ops)
     {
         const searchID = json.ops[i].id;
         let newId = uuid();
-        if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].id);
+        if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].id);
         const newID = json.ops[i].id = newId;
 
         for (const j in json.ops)
@@ -1418,7 +1418,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
                 if (json.ops[i].portsIn[k].name === "patchId")
                 {
                     let newId = uuid();
-                    if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].portsIn[k].value);
+                    if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
 
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
                     const newSubPatchId = json.ops[i].portsIn[k].value = newId;
@@ -1454,9 +1454,9 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
             }
         }
         // op has no uiAttribs in export, we don't care about subpatches in export though
-        if (!found && json.ops[kk].uiAttribs && parentSubPatchId != null)
+        if (!found && json.ops[kk].uiAttribs && options.parentSubPatchId != null)
         {
-            json.ops[kk].uiAttribs.subPatch = parentSubPatchId;
+            json.ops[kk].uiAttribs.subPatch = options.parentSubPatchId;
         }
     }
     return json;
