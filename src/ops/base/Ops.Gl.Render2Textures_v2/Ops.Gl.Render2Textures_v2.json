@@ -182,12 +182,15 @@
             "date": 1684505522013
         }
     ],
-    "youtubeid": "",
     "issues": "requires WebGL2",
     "relatedops": null,
     "exampleProjectId": "INQQgo",
     "coreLibs": [
         "cgl_rendertargets",
         "cgl_shadermodifier"
+    ],
+    "collections": null,
+    "youtubeids": [
+        "WQM37Jr_NHI"
     ]
 }
