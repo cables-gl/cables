@@ -9,11 +9,6 @@ function bp2init()
     op.patch.emitEvent("subpatchExpose", patchId);
 }
 
-op.on("loadedValueSet", () =>
-{
-    bp2init();
-});
-
 function initializeSubpatch()
 {
     console.log("initializeSubpatch");
@@ -30,4 +25,5 @@ function initializeSubpatch()
     op.patch.deSerialize(p);
 
     op.patch.emitEvent("subpatchExpose", patchId);
+    bp2init();
 }
