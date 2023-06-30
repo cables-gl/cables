@@ -303,7 +303,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
         let originalSaveState = null;
-        data = CABLES.Patch.replaceOpIds(data, op.uiAttribs.subPatch, op.id);
+        data = CABLES.Patch.replaceOpIds(data, { "parentSubPatchId": op.uiAttribs.subPatch, "prefixhash": op.id });
         if (editorMode)
         {
             originalSaveState = gui.getSavedState();
