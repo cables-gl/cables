@@ -360,7 +360,8 @@ Framebuffer2.prototype.renderStart = function ()
     this._cgl.pushFrameBuffer(this);
 
     this._cgl.pushPMatrix();
-    this._cgl.gl.viewport(0, 0, this._width, this._height);
+    // this._cgl.gl.viewport(0, 0, this._width, this._height);
+    this._cgl.pushViewPort(0, 0, this._width, this._height);
 
     this._cgl.gl.drawBuffers(this._drawTargetArray);
 
@@ -449,6 +450,8 @@ Framebuffer2.prototype.renderEnd = function ()
 
     this._cgl.popModelMatrix();
     // this._cgl.resetViewPort();
+    this._cgl.popViewPort();
+
 
     if (this._colorTextures[0].filter == Texture.FILTER_MIPMAP)
     {
