@@ -86,7 +86,8 @@ class RenderTargets
         else if (type == "Position Local") return "    " + outcolor + i + " = vec4(MOD_pos_local,1.);".endl();
         else if (type == "Position World") return "    " + outcolor + i + " = vec4(MOD_pos_world,1.);".endl();
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
-        else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
+        else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
+        else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
@@ -122,6 +123,7 @@ class RenderTargets
         let hasMaterialId = false;
         let hasObjectId = false;
         let hasNormalModelView = false;
+        let hasNormalWorld = false;
         this._numBuffers = slots.length;
 
         for (let i = 0; i < this._numBuffers; i++)
@@ -132,7 +134,7 @@ class RenderTargets
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
             hasMaterialId = (slots[i].indexOf("Material Id") > -1) || hasMaterialId;
             hasObjectId = (slots[i].indexOf("Object Id") > -1) || hasObjectId;
-
+            hasNormalWorld = (slots[i].indexOf("Normal World") > -1) || hasObjectId;
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
         }
@@ -148,6 +150,8 @@ class RenderTargets
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);
         this.mod.toggleDefine("MOD_SLOT_POS_OBJECT", hasPosObject);
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_MV", hasNormalModelView);
+
+        this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_WORLD", hasNormalWorld);
     }
 }
 
