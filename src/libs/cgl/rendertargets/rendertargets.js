@@ -141,7 +141,6 @@ class RenderTargets
         }
 
 
-        this.updateModules();
         // this.updateModules();
 
         this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
@@ -153,6 +152,8 @@ class RenderTargets
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_MV", hasNormalModelView);
 
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_WORLD", hasNormalWorld);
+
+        this.updateModules();
     }
 }
 
