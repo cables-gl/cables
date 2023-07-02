@@ -59,6 +59,7 @@ class RenderTargets
             "Position Local",
             "Position Object",
             "Normal",
+            "Normal World",
             "Normal * ModelView",
             "FragCoord.z",
             "TexCoord",
@@ -86,8 +87,8 @@ class RenderTargets
         else if (type == "Position Local") return "    " + outcolor + i + " = vec4(MOD_pos_local,1.);".endl();
         else if (type == "Position World") return "    " + outcolor + i + " = vec4(MOD_pos_world,1.);".endl();
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
-        else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
-        else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
+        else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
+        else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
