@@ -116,8 +116,9 @@ class RenderTargets
     update(slots)
     {
         this._slots = slots;
-
+        this._numBuffers = slots.length;
         this.asString = "";
+
         let hasPosWorld = false;
         let hasPosLocal = false;
         let hasPosObject = false;
@@ -125,7 +126,7 @@ class RenderTargets
         let hasObjectId = false;
         let hasNormalModelView = false;
         let hasNormalWorld = false;
-        this._numBuffers = slots.length;
+
 
         for (let i = 0; i < this._numBuffers; i++)
         {
@@ -135,13 +136,15 @@ class RenderTargets
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
             hasMaterialId = (slots[i].indexOf("Material Id") > -1) || hasMaterialId;
             hasObjectId = (slots[i].indexOf("Object Id") > -1) || hasObjectId;
-            hasNormalWorld = (slots[i].indexOf("Normal World") > -1) || hasObjectId;
+            hasNormalWorld = (slots[i].indexOf("Normal World") > -1) || hasNormalWorld;
+
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
         }
 
 
         // this.updateModules();
+        this.updateModules();
 
         this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
         this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", hasMaterialId);
@@ -150,10 +153,7 @@ class RenderTargets
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);
         this.mod.toggleDefine("MOD_SLOT_POS_OBJECT", hasPosObject);
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_MV", hasNormalModelView);
-
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_WORLD", hasNormalWorld);
-
-        this.updateModules();
     }
 }
 
