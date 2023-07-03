@@ -177,7 +177,7 @@ function setCoords(e)
 
     if (flipY.get()) y = sizeElement.clientHeight - y;
 
-    setValue(x, y);
+    setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
 }
 
 function onmousemove(e)
