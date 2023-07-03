@@ -4,7 +4,7 @@ const
     inScale = op.inValue("Scale", 1),
     inLimit = op.inBool("Limit Instances", false),
     inNum = op.inInt("Num Instances", 1000),
-    inTex = op.inTexture("Position Texture", null, "texture"),
+    inTex1 = op.inTexture("Position Texture", null, "texture"),
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
     inRotMode = op.inSwitch("Rotation", ["Euler", "Normal"], "Euler"),
     inTex3 = op.inTexture("Scale Texture", null, "texture"),
@@ -20,7 +20,7 @@ const
 
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);
-op.toWorkPortsNeedToBeLinked(inTex);
+op.toWorkPortsNeedToBeLinked(inTex1);
 
 geom.ignoreValueSerialize = true;
 
@@ -62,7 +62,7 @@ mod.addUniformVert("3f", "MOD_mulRGB", inMulR, inMulG, inMulB);
 
 inBlendMode.onChange =
 inRotMode.onChange =
-inTex.onChange =
+inTex1.onChange =
 inTex3.onChange =
 inTex4.onChange =
 inTex5.onChange =
@@ -113,13 +113,15 @@ function updateDefines()
 
 geom.onChange = function ()
 {
+    console.log("geom upd");
     if (mesh)mesh.dispose();
+    mesh = null;
 
-    if (!geom.get() || !geom.get().vertices)
-    {
-        mesh = null;
-        return;
-    }
+    // if (!geom.get() || !geom.get().vertices)
+    // {
+
+    //     return;
+    // }
     // needsNewMesh = true;
     reset();
 };
@@ -132,10 +134,10 @@ function removeModule()
 function setupArray()
 {
     if (!mesh) return;
-    if (!inTex.get()) return;
+    if (!inTex1.get()) return;
 
     if (inLimit.get()) num = Math.max(0, Math.floor(inNum.get()));
-    else num = inTex.get().width * inTex.get().height;
+    else num = inTex1.get().width * inTex1.get().height;
 
     mesh.numInstances = num;
 
@@ -144,24 +146,27 @@ function setupArray()
 
 function doRender()
 {
-    if (!mesh && geom.get()) mesh = new CGL.Mesh(cgl, geom.get());
+    if (!mesh && geom.get())
+    {
+        mesh = new CGL.Mesh(cgl, geom.get());
+    }
     if (!mesh) return;
     if (recalc) setupArray();
 
-    if (!inTex.get()) return;
+    if (!inTex1.get()) return;
 
     mod.bind();
 
-    if (inTex.get())mod.pushTexture("MOD_texTrans", inTex.get().tex);
+    if (inTex1.get())mod.pushTexture("MOD_texTrans", inTex1.get().tex);
     if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
     if (inTex3.get())mod.pushTexture("MOD_texScale", inTex3.get().tex);
     if (inTex4.get())mod.pushTexture("MOD_texColor", inTex4.get().tex);
     if (inTex5.get())mod.pushTexture("MOD_texCoords", inTex5.get().tex);
 
-    mod.setUniformValue("MOD_texSizeX", inTex.get().width);
-    mod.setUniformValue("MOD_texSizeY", inTex.get().height);
+    mod.setUniformValue("MOD_texSizeX", inTex1.get().width);
+    mod.setUniformValue("MOD_texSizeY", inTex1.get().height);
 
-    if (mesh.numInstances != inTex.get().width * inTex.get().height)reset();
+    if (mesh.numInstances != inTex1.get().width * inTex1.get().height) reset();
 
     outNum.set(mesh.numInstances);
 
