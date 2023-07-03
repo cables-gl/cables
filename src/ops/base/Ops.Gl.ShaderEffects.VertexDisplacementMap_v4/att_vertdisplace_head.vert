@@ -31,7 +31,8 @@ IN vec4 attrVertColor;
 vec3 MOD_calcNormal(sampler2D tex,vec2 uv)
 {
     float strength=13.0;
-    float texelSize=1.0/float(textureSize(tex,0).x);
+    // float texelSize=1.0/float(textureSize(tex,0).x); // not on linux intel?!
+    float texelSize=1.0/512.0;
 
     float tl = abs(texture(tex, uv + texelSize * vec2(-1.0, -1.0)).x);   // top left
     float  l = abs(texture(tex, uv + texelSize * vec2(-1.0,  0.0)).x);   // left

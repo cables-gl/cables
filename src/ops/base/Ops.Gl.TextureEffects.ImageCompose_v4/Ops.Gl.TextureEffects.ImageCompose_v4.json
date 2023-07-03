@@ -102,7 +102,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Patch.P4SCBDz.ImageCompose_v4"
+        "name": "Ops.Gl.TextureEffects.ImageCompose_v4"
     },
     "summary": "Compose Images and effects as layers to generate new Images",
     "credits": [
