@@ -18,6 +18,7 @@ const NUM_BUFFERS = 8;
 const cgl = op.patch.cgl;
 const rt = new CGL.RenderTargets(cgl);
 const mod = rt.mod;
+const defaultShader = new CGL.Shader(cgl, "MinimalMaterial");
 
 op.toWorkPortsNeedToBeLinked(render);
 
@@ -179,7 +180,11 @@ function doRender()
 
     cgl.frameStore.objectIdCounter = 0;
 
+    cgl.pushShader(defaultShader);
+
     trigger.trigger();
+
+    cgl.popShader();
 
     cgl.frameStore.forceShaderMods.pop();
     // mod.unbind();
