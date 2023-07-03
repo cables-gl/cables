@@ -107,7 +107,7 @@ function getWidth()
 function getHeight()
 {
     if (inTex.get() && inSize.get() == "Auto") return inTex.get().height;
-    else if (inSize.get() == "Auto" || inSize.get() == "Canvas") return cgl.canvasWidth;
+    else if (inSize.get() == "Auto" || inSize.get() == "Canvas") return cgl.canvasHeight;
     else if (inSize.get() == "ViewPort") return cgl.getViewPort()[3];
     else return Math.ceil(height.get());
 }
