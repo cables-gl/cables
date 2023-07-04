@@ -995,9 +995,7 @@ const Op = function ()
         const op = {};
 
         if (this.opId) op.opId = this.opId;
-
         if (this.patch.storeObjNames) op.objName = this.objName;
-
 
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
