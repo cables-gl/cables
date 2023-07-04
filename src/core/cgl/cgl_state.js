@@ -75,6 +75,7 @@ const Context = function (_patch)
             {
                 // workaround pre viewport stack times / or+and initial value...
 
+                console.log("_viewport", this._viewPort);
                 return this._viewPort;
             }
         }
@@ -266,7 +267,8 @@ const Context = function (_patch)
 
         if (this._viewPortStack.length == 0)
         {
-            this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
+            this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
+            // this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
             // this.setViewPort(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
         }
         else

@@ -11,9 +11,7 @@ class ShaderGraphOp
         this.info = null;
 
         if (src)
-        {
             this.parseCode(src);
-        }
 
         this._op.on("onLinkChanged", this.updateGraph.bind(this));
         this.addPortWatcher();
@@ -46,18 +44,15 @@ class ShaderGraphOp
     parseCode(_code)
     {
         let code = _code;
-
         let info = { "functions": [], "uniforms": [] };
 
         const origLines = code.split("\n");
         const prelines = code.split("\n");
 
         for (let i = 0; i < prelines.length; i++)
-        {
             prelines[i] += "###line:" + i + ":###";
-        }
-        code = prelines.join("\n");
 
+        code = prelines.join("\n");
 
         code = code.replaceAll("{{", ""); // remove spaces before brackets
         code = code.replaceAll("}}", ""); // remove spaces before brackets
@@ -93,8 +88,7 @@ class ShaderGraphOp
 
                     // merge all the remaining lines to be able to search for the end of the function ...
                     let remainingcode = "";
-                    for (let j = i; j < lines.length; j++)
-                        remainingcode += lines[j];
+                    for (let j = i; j < lines.length; j++) remainingcode += lines[j];
 
                     // search for all {} and find the end of the function body...
                     const startPos = remainingcode.indexOf("{");
@@ -102,8 +96,8 @@ class ShaderGraphOp
                     let cc = 0;
                     for (cc = startPos; cc < remainingcode.length; cc++)
                     {
-                        if (remainingcode.charAt(cc) == "{")count++;
-                        if (remainingcode.charAt(cc) == "}")count--;
+                        if (remainingcode.charAt(cc) == "{") count++;
+                        if (remainingcode.charAt(cc) == "}") count--;
                         if (count == 0) break;
                     }
 
@@ -113,8 +107,8 @@ class ShaderGraphOp
                     const linenums = functioncode.split("###line:");
 
                     // console.log("functioncode", functioncode);
-
                     // console.log("linenums", linenums);
+
                     let lineNumStart = i, lineNumEnd = i - 1;
                     if (linenums.length > 1)
                     {
@@ -145,19 +139,15 @@ class ShaderGraphOp
             if (lines[i].indexOf("UNI") == 0 || lines[i].indexOf("uniform") == 0)
             {
                 const words = lines[i].split(" ");
-                if (this.isTypeDef(words[1]))
-                {
-                    info.uniforms.push({ "name": words[2], "type": words[1] });
-                }
+                if (this.isTypeDef(words[1])) info.uniforms.push({ "name": words[2], "type": words[1] });
             }
         }
-
 
         info.src = _code;
 
         this.info = info;
         this.updatePorts(this.info);
-        // console.log("info", info);
+
         return info;
     }
 

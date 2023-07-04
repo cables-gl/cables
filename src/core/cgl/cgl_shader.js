@@ -252,6 +252,7 @@ Shader.prototype.setSource = function (srcVert, srcFrag)
     this.srcFrag = srcFrag;
     this.setWhyCompile("Source changed");
     this._needsRecompile = true;
+    this._isValid = true;
 };
 
 Shader.prototype._addLibs = function (src)
@@ -458,6 +459,8 @@ Shader.prototype.compile = function ()
     if (this._cgl.aborted) return;
     const startTime = performance.now();
 
+
+
     this._cgl.profileData.profileShaderCompiles++;
     this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
@@ -474,6 +477,8 @@ Shader.prototype.compile = function ()
     const structStrings = this.createStructUniforms();
     this._cgl.profileData.addHeavyEvent("shader compile", this._name + " [" + this._compileReason + "]");
     this._compileReason = "";
+
+
 
     if (this._uniforms)
     {

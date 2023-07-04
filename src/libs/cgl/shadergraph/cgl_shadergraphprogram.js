@@ -77,6 +77,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
         }
 
         if (op.shaderUniforms)
+        {
             for (let i = 0; i < op.shaderUniforms.length; i++)
             {
                 const uni = op.shaderUniforms[i];
@@ -88,20 +89,32 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                 else
                     this._headUniSrc += this.uniformAsStaticVar(uni);
             }
+        }
     }
 
     uniformAsStaticVar(uni)
     {
         const typeStr = CGL.Uniform.glslTypeString(uni.type);
-        let str = typeStr + " " + uni.name + "=" + typeStr + "(";
+        let str = "";
 
-        for (let i = 0; i < uni.ports.length; i++)
+        if (typeStr == "float")
         {
-            str += uni.ports[i].get();
-            if (i != uni.ports.length - 1)str += ",";
+            let floatStr = String(uni.ports[0].get());
+            if (floatStr.indexOf(".") == -1)floatStr += ".";
+            str = typeStr + " " + uni.name + " = " + floatStr + ";";
         }
+        else
+        {
+            str = typeStr + " " + uni.name + "=" + typeStr + "(";
 
-        str += ");".endl();
+            for (let i = 0; i < uni.ports.length; i++)
+            {
+                str += uni.ports[i].get();
+                if (i != uni.ports.length - 1)str += ",";
+            }
+
+            str += ");".endl();
+        }
         return str;
     }
 
@@ -236,10 +249,11 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
 
         callSrc = this._callFuncStack.join("\n");
 
-        let src = "".endl() +
-            "{{MODULES_HEAD}}".endl().endl();
-        console.log("COMPILE", this._type);
+        let src = "".endl() + "{{MODULES_HEAD}}".endl().endl();
+
+        // console.log("COMPILE", this._type);
         // todo use shader attrib system...
+
         if (this._type == "frag") src += "IN vec2 texCoord;".endl().endl();
         if (this._type == "vert") src += "IN vec3 vPosition;".endl() +
                 "IN vec2 attrTexCoord;".endl() +
