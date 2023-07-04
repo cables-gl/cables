@@ -26,8 +26,6 @@ const SubPatchOp = class
 
         op.patchId.onChange = () =>
         {
-            console.log("patchid change.nope...");
-
             if (options.subId) op.patchId.value = options.subId;
             // else op.patchId.value=CABLES.uuid();
         };

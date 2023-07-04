@@ -1,7 +1,5 @@
 new CABLES.SubPatchOp(op);
 
-console.log("isExposableSubpatchOp", op.isExposableSubpatchOp());
-
 if (CABLES.UI && CABLES.sandbox.isDevEnv())
 {
     // const inMakeBp = op.inTriggerButton("Create Blueprint");
