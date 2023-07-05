@@ -101,7 +101,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
         {
             let floatStr = String(uni.ports[0].get());
             if (floatStr.indexOf(".") == -1)floatStr += ".";
-            str = typeStr + " " + uni.name + " = " + floatStr + ";";
+            str = typeStr + " " + uni.name + " = " + floatStr + ";".endl();
         }
         else
         {
