@@ -84,8 +84,6 @@ class ShaderGraphOp
 
                 if (this.isTypeDef(words[0])) // function header start with return typedef
                 {
-                    console.log("found functiun header!");
-
                     // merge all the remaining lines to be able to search for the end of the function ...
                     let remainingcode = "";
                     for (let j = i; j < lines.length; j++) remainingcode += lines[j];
