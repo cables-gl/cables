@@ -17,6 +17,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1686739873768
+        },
+        {
+            "message": "Ops.Dev.FirstStepBlueprint2 renamed to Ops.Templates.Blueprint2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1688457299899
         }
     ],
     "layout": {

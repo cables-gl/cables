@@ -951,18 +951,16 @@ Patch.prototype.deSerialize = function (obj, options)
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
 
-    if (typeof obj === "string")
-    {
-        obj = JSON.parse(obj);
-    }
+    if (typeof obj === "string") obj = JSON.parse(obj);
 
     this.settings = obj.settings;
 
     this.emitEvent("patchLoadStart");
 
     if (window.logStartup)logStartup("add " + obj.ops.length + " ops... ");
+
     // add ops...
-    for (const iop in obj.ops)
+    for (let iop = 0; iop < obj.ops.length; iop++)
     {
         const start = CABLES.now();
         const opData = obj.ops[iop];
@@ -979,7 +977,6 @@ Patch.prototype.deSerialize = function (obj, options)
             throw new Error("instancing error: " + opData.objName);
         }
 
-
         if (op)
         {
             if (options.genIds) op.id = uuid();
@@ -995,7 +992,7 @@ Patch.prototype.deSerialize = function (obj, options)
                 if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
-                if (port)port.deSerializeSettings(objPort);
+                if (port) port.deSerializeSettings(objPort);
             }
 
             for (const ipo in opData.portsOut)
@@ -1009,8 +1006,6 @@ Patch.prototype.deSerialize = function (obj, options)
             }
             newOps.push(op);
         }
-
-        // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
 
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
         if (!this.silent && timeused > 5) this._log.warn("long op init ", obj.ops[iop].objName, timeused);

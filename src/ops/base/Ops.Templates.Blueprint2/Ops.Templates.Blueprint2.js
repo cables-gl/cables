@@ -11,7 +11,6 @@ function bp2init()
 
 function initializeSubpatch()
 {
-    console.log("initializeSubpatch");
     const p = JSON.parse(attachments.subpatch_json);
 
     CABLES.Patch.replaceOpIds(p, { "parentSubPatchId": patchId, "prefixHash": patchId, "oldIdAsRef": true });
