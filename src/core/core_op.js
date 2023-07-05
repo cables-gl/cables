@@ -211,9 +211,10 @@ const Op = function ()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
 
-        return this.objName.split(".");
 
-        // return this.name;
+        // return this.objName.split(".");
+
+        return this.name;
     };
 
     Op.prototype.addOutPort = function (p)
