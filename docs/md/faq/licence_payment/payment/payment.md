@@ -11,5 +11,6 @@ that the free version of cables.gl will be abolutely usable at all times.
 
 First of all: spread the word. Use it! Give feedback! Join our [Discord](https://discordapp.com/invite/AGTarWv) and [Github Discussions](https://github.com/cables-gl/cables_docs/discussions)!
 
-If you want to financially support us, currently your best option would be to contact us and fund the development of a feature. We have a very long list
-of stuff that WE want to do, but maybe you need something specific for your project or would like to hire us to develop project specific features. Simply [contact us](mailto:hi@undev.de)!
+If you are looking for more options, [this FAQ](../../features/support/support) might help you.
+
+
