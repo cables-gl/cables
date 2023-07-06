@@ -22,7 +22,7 @@ class ShaderGraphOp
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
             if (this._op.portsIn[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
-            this._op.portsIn[i].onChange = this.updateGraph.bind(this);
+            this._op.portsIn[i].on("change", this.updateGraph.bind(this));
         }
     }
 
@@ -84,8 +84,6 @@ class ShaderGraphOp
 
                 if (this.isTypeDef(words[0])) // function header start with return typedef
                 {
-                    console.log("found functiun header!");
-
                     // merge all the remaining lines to be able to search for the end of the function ...
                     let remainingcode = "";
                     for (let j = i; j < lines.length; j++) remainingcode += lines[j];
@@ -117,6 +115,7 @@ class ShaderGraphOp
                     }
                     functioncode = "";
 
+
                     // concat the whole function
                     for (let j = lineNumStart; j <= lineNumEnd + 1; j++)
                         if (origLines[j])functioncode += origLines[j] + "\n";
@@ -144,6 +143,8 @@ class ShaderGraphOp
         }
 
         info.src = _code;
+        // if (this._op.uiAttribs.comment)_code = "//" + this._op.uiAttribs.comment + "\n" + _code;
+
 
         this.info = info;
         this.updatePorts(this.info);
@@ -166,7 +167,10 @@ class ShaderGraphOp
             {
                 const port = this._op.getPort(f.params[p].name) || this._op.inObject(f.params[p].name);
 
+                // let changed = false;
+                // if (port.uiAttribs.objType != f.params[p].type) changed = true;
                 port.setUiAttribs({ "objType": "sg_" + f.params[p].type, "ignoreObjTypeErrors": true });
+                // if (changed) port.setRef(port.get());
 
                 this._inPorts.push(port);
 
@@ -179,7 +183,11 @@ class ShaderGraphOp
                 port = this._op.outObject("Result");
                 this._outPorts.push(port);
             }
+
+            // let changed = false;
+            // if (port.uiAttribs.objType != f.type) changed = true;
             port.setUiAttribs({ "objType": "sg_" + f.type });
+            // if (changed) port.setRef(port.get());
         }
 
         for (let i = 0; i < this._inPorts.length; i++) if (!foundPortInNames[this._inPorts[i].name]) this._inPorts[i].remove();

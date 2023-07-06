@@ -71,6 +71,8 @@ function setValue(x, y)
         {
             let xx = (x / w * 2.0 - 1.0);
             let yy = (y / h * 2.0 - 1.0);
+            xx = CABLES.clamp(xx, -1, 1);
+            yy = CABLES.clamp(yy, -1, 1);
 
             outMouseX.set(xx);
             outMouseY.set(yy);
@@ -79,6 +81,9 @@ function setValue(x, y)
         {
             let xx = x / w;
             let yy = y / h;
+
+            xx = CABLES.clamp(xx, 0, 1);
+            yy = CABLES.clamp(yy, 0, 1);
 
             outMouseX.set(xx);
             outMouseY.set(yy);
