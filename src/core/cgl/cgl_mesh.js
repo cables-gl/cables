@@ -378,7 +378,6 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
 
         if (vertIndices.length > 65535)
         {
-            // console.log("32bit vertex indices...");
             this.vertIndicesTyped = new Uint32Array(vertIndices);
             this._indexType = this._cgl.gl.UNSIGNED_INT;
         }
@@ -389,8 +388,14 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
             this._indexType = this._cgl.gl.UNSIGNED_INT;
         }
         else
-        if (!(vertIndices instanceof Uint16Array)) this.vertIndicesTyped = new Uint16Array(vertIndices);
+        if (!(vertIndices instanceof Uint16Array))
+        {
+            this.vertIndicesTyped = new Uint16Array(vertIndices);
+            this._indexType = this._cgl.gl.UNSIGNED_SHORT;
+        }
         else this.vertIndicesTyped = vertIndices;
+
+
 
         this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
@@ -780,8 +785,16 @@ Mesh.prototype.render = function (shader)
     else
     {
         if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
-        if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
-        else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
+        if (this._numInstances === 0)
+        {
+            // console.log("la", this._bufVerticesIndizes.numItems);
+
+            this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
+        }
+        else
+        {
+            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
+        }
     }
 
     if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
