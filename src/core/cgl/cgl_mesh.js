@@ -395,8 +395,6 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         }
         else this.vertIndicesTyped = vertIndices;
 
-
-
         this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
         this._bufVerticesIndizes.itemSize = 1;
         this._bufVerticesIndizes.numItems = vertIndices.length;
