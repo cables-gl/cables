@@ -257,12 +257,7 @@ function removeEmptyLines(lines)
 
 function refresh()
 {
-<<<<<<< HEAD
-    cgl.checkFrameStarted("texttexture refresh");
-=======
     cgl.checkFrameStarted("texttrexture refresh");
->>>>>>> c24f1447b (rename new texttexture to dev)
-
     const rgbStringClear = "rgba(" + Math.floor(bgR.get() * 255) + "," + Math.floor(bgG.get() * 255) + "," + Math.floor(bgB.get() * 255) + "," + bgA.get() + ")";
     ctx.fillStyle = rgbStringClear;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
