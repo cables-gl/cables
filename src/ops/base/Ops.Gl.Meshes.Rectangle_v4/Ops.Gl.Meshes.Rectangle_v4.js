@@ -249,6 +249,11 @@ function rebuild()
     geom.tangents = tangents;
     geom.biTangents = biTangents;
 
+    // ktajksd
+
+
+
+
     if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
 
