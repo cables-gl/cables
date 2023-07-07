@@ -74,6 +74,7 @@ const Context = function (_patch)
             else
             {
                 // workaround pre viewport stack times / or+and initial value...
+
                 return this._viewPort;
             }
         }
