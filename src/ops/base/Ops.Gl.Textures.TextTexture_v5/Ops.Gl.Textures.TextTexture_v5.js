@@ -158,7 +158,7 @@ if (op.patch.isEditorMode()) CABLES.UI.SIMPLEWIREFRAMERECT = CABLES.UI.SIMPLEWIR
 
 if (cgl.glVersion < 2)
 {
-    cgl.enableExtension("OES_standard_derivatives");
+    cgl.gl.getExtension("OES_standard_derivatives");
     shader.enableExtension("GL_OES_standard_derivatives");
 }
 
@@ -257,8 +257,7 @@ function removeEmptyLines(lines)
 
 function refresh()
 {
-    cgl.checkFrameStarted("texttexture refresh");
-
+    cgl.checkFrameStarted("texttrexture refresh");
     const rgbStringClear = "rgba(" + Math.floor(bgR.get() * 255) + "," + Math.floor(bgG.get() * 255) + "," + Math.floor(bgB.get() * 255) + "," + bgA.get() + ")";
     ctx.fillStyle = rgbStringClear;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);

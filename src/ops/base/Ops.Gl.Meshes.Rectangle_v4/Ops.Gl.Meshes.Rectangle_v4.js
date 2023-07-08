@@ -243,6 +243,8 @@ function rebuild()
     geom.tangents = tangents;
     geom.biTangents = biTangents;
 
+    console.log(indices.length);
+
     if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
 
