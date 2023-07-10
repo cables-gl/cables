@@ -27,64 +27,23 @@
             {
                 "type": 5,
                 "name": "font",
-                "group": "Size"
+                "group": "Font"
             },
             {
                 "type": 5,
                 "name": "weight",
-                "group": "Size"
-            },
-            {
-                "type": 0,
-                "name": "Maximize Size",
-                "group": "Size",
-                "subType": "boolean"
+                "group": "Font"
             },
             {
                 "type": 0,
                 "name": "fontSize",
-                "group": "Size",
+                "group": "Font",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Line Height",
-                "group": "Size",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Vertical Offset",
-                "group": "Size",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Horizontal Offset",
-                "group": "Size",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Show Debug",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Size index",
-                "group": "Texture",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "texture width",
-                "group": "Texture",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "texture height",
-                "group": "Texture",
+                "name": "align index",
+                "group": "Font",
                 "subType": "integer"
             },
             {
@@ -107,19 +66,14 @@
             },
             {
                 "type": 0,
-                "name": "align index",
-                "group": "Alignment",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "vertical align index",
-                "group": "Alignment",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Reuse Texture",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Debug",
+                "group": "Texture",
                 "subType": "boolean"
             },
             {
