@@ -15,6 +15,16 @@
             },
             {
                 "type": 0,
+                "name": "texture width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Pixel Format index",
                 "subType": "integer"
             },
