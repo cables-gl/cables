@@ -34,7 +34,7 @@ for (let i = 0; i < NUM_BUFFERS; i++)
 
 const texDepth = op.outTexture("textureDepth");
 
-/// ////////////////////////////////////////
+/// //////////////////////////////////////
 
 let reInitFb = true;
 let floatingPoint = false;

@@ -22,6 +22,10 @@ class ShaderGraphOp
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
             if (this._op.portsIn[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
+
+
+            if (this._op.portsIn[i].uiAttribs.objType && this._op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0) this._op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
+
             this._op.portsIn[i].on("change", this.updateGraph.bind(this));
         }
     }
@@ -31,8 +35,8 @@ class ShaderGraphOp
         for (let i = 0; i < this._op.portsOut.length; i++)
         {
             if (this._op.portsOut[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
-            this._op.portsOut[i].set(null);
-            this._op.portsOut[i].set({});
+            // this._op.portsOut[i].setRef(null);
+            this._op.portsOut[i].setRef({});
         }
     }
 
@@ -76,9 +80,7 @@ class ShaderGraphOp
         for (let i = 0; i < lines.length; i++)
         {
             // identify function
-            if (lines[i].indexOf("{") > 0 &&
-                lines[i].indexOf("(") > 0 &&
-                lines[i].indexOf(")") > 0)
+            if (lines[i].indexOf("{") > 0 && lines[i].indexOf("(") > 0 && lines[i].indexOf(")") > 0)
             {
                 const words = lines[i].split(" ");
 
@@ -113,8 +115,8 @@ class ShaderGraphOp
                         lineNumStart = parseInt(linenums[1].split(":")[0]);
                         lineNumEnd = parseInt(linenums[linenums.length - 1].split(":")[0]);
                     }
-                    functioncode = "";
 
+                    functioncode = "";
 
                     // concat the whole function
                     for (let j = lineNumStart; j <= lineNumEnd + 1; j++)
@@ -144,7 +146,6 @@ class ShaderGraphOp
 
         info.src = _code;
         // if (this._op.uiAttribs.comment)_code = "//" + this._op.uiAttribs.comment + "\n" + _code;
-
 
         this.info = info;
         this.updatePorts(this.info);
