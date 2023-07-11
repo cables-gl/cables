@@ -169,7 +169,10 @@ function doRender()
         height.set(cgl.getViewPort()[3]);
     }
 
-    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get())) fb.setSize(width.get(), height.get());
+    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get()))
+    {
+        fb.setSize(Math.max(1, width.get()), Math.max(1, height.get()));
+    }
 
     fb.renderStart(cgl);
     cgl.frameStore.forceShaderMods = cgl.frameStore.forceShaderMods || [];
