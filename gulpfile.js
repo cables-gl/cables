@@ -212,6 +212,7 @@ gulp.task("default", gulp.series(
         _core_libs_min
     ),
     _append_build_info,
+    _copy_ui,
     _core_libs_copy,
     _watch
 ));
@@ -229,6 +230,7 @@ gulp.task("watch", gulp.series(
         _core_libs_min
     ),
     _append_build_info,
+    _copy_ui,
     _core_libs_copy,
     _watch
 ));
@@ -246,5 +248,6 @@ gulp.task("build", gulp.series(
         _core_libs_min
     ),
     _append_build_info,
+    _copy_ui,
     _core_libs_copy
 ));

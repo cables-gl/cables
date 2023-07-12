@@ -545,6 +545,7 @@ Shader.prototype.compile = function ()
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
             .endl() + "#define IN in"
+            .endl() + "#define OUT out"
             .endl() + "#define UNI uniform"
             .endl() + "{{DRAWBUFFER}}"
 

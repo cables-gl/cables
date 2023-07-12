@@ -36,7 +36,6 @@ function printNode(html, node, level)
     let id = CABLES.uuid();
     html += ident;
     html += "<td colspan=\"" + (21 - level) + "\">";
-    // html+='<div style="display:inline-block;border:0px solid red;height:10px;width:'+level*10+'px"></div>';
 
     if (node.mesh && node.mesh.meshes.length)html += "<span class=\"icon icon-cube\"></span>&nbsp;";
     else html += "<span class=\"icon icon-box-select\"></span> &nbsp;";

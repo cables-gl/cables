@@ -34,7 +34,7 @@ for (let i = 0; i < NUM_BUFFERS; i++)
 
 const texDepth = op.outTexture("textureDepth");
 
-/// ////////////////////////////////////////
+/// //////////////////////////////////////
 
 let reInitFb = true;
 let floatingPoint = false;
@@ -72,13 +72,13 @@ function updateVpSize()
 {
     if (useVPSize.get())
     {
-        width.setUiAttribs({ "hidePort": true, "greyout": true });
-        height.setUiAttribs({ "hidePort": true, "greyout": true });
+        width.setUiAttribs({ "greyout": true });
+        height.setUiAttribs({ "greyout": true });
     }
     else
     {
-        width.setUiAttribs({ "hidePort": false, "greyout": false });
-        height.setUiAttribs({ "hidePort": false, "greyout": false });
+        width.setUiAttribs({ "greyout": false });
+        height.setUiAttribs({ "greyout": false });
     }
 }
 
@@ -169,7 +169,10 @@ function doRender()
         height.set(cgl.getViewPort()[3]);
     }
 
-    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get())) fb.setSize(width.get(), height.get());
+    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get()))
+    {
+        fb.setSize(Math.max(1, width.get()), Math.max(1, height.get()));
+    }
 
     fb.renderStart(cgl);
     cgl.frameStore.forceShaderMods = cgl.frameStore.forceShaderMods || [];

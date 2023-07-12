@@ -949,6 +949,7 @@ class SwitchPort extends Port
     }
 }
 
+
 class ValueSelectPort extends SwitchPort
 {
     setUiAttribs(newAttribs)
@@ -964,6 +965,7 @@ class ValueSelectPort extends SwitchPort
         super.setUiAttribs(newAttribs);
     }
 }
+
 
 
 export { Port, SwitchPort, ValueSelectPort };
