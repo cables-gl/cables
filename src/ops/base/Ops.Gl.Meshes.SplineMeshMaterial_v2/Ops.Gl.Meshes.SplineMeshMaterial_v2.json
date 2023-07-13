@@ -15,6 +15,11 @@
             "message": "Ops.Admin.SplineMeshNewMaterial renamed to Ops.Gl.Meshes.SplineMeshMaterial_v2",
             "author": "pandur",
             "date": 1596102602453
+        },
+        {
+            "message": "Fixed aspect ratio dependency",
+            "author": "dojoe",
+            "date": 1689275381519
         }
     ],
     "authorName": "pandur",
