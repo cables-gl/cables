@@ -48,7 +48,11 @@ UNI float randomSize;
 
 IN float attrVertIndex;
 
+UNI float atlasNumX;
 
+#ifdef ATLAS_NUMX
+    OUT float randAtlas;
+#endif
 
 float rand(float n){return fract(sin(n) * 5711.5711123);}
 
@@ -64,6 +68,10 @@ void main()
     #ifndef PIXELSIZE
         float psMul=sqrt(canvasWidth/canvasHeight)+0.00000000001;
     #endif
+
+#ifdef ATLAS_NUMX
+randAtlas=floor(atlasNumX*rand(attrVertIndex));
+#endif
 
     // float sizeMultiply=1.0;
 

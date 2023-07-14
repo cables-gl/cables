@@ -26,6 +26,9 @@ const
     texturePointSizeMap = op.inSwitch("Map Size 0", ["Black", "Grey"], "Black"),
     flipTex = op.inValueBool("Flip Texture", false),
 
+    inRandAtlas = op.inBool("Random Atlas"),
+    inRandAtlasX = op.inFloat("Atlas Repeat X", 4),
+
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader", null, "shader");
 
@@ -45,6 +48,8 @@ const
     texturePointSizeMulUniform = new CGL.Uniform(shader, "f", "texPointSizeMul", texturePointSizeMul),
     uniRandomSize = new CGL.Uniform(shader, "f", "randomSize", randomSize),
     uniColor = new CGL.Uniform(shader, "4f", "color", r, g, b, a),
+    uniRandAtlasX = new CGL.Uniform(shader, "f", "atlasNumX", inRandAtlasX),
+
     uniWidth = new CGL.Uniform(shader, "f", "canvasWidth", cgl.canvasWidth),
     uniHeight = new CGL.Uniform(shader, "f", "canvasHeight", cgl.canvasHeight),
     textureUniform = new CGL.Uniform(shader, "t", "diffTex"),
@@ -61,6 +66,7 @@ shaderOut.ignoreValueSerialize = true;
 
 render.onTriggered = doRender;
 doScale.onChange =
+inRandAtlas.onChange =
     makeRound.onChange =
     makeRoundAA.onChange =
     texture.onChange =
@@ -105,6 +111,7 @@ function doRender()
 
 function updateUi()
 {
+    inRandAtlasX.setUiAttribs({ "greyout": !inRandAtlas.get() });
     texMaskChan.setUiAttribs({ "greyout": !textureMask.isLinked() });
 
     texturePointSizeChannel.setUiAttribs({ "greyout": !texturePointSize.isLinked() });
@@ -114,6 +121,8 @@ function updateUi()
 
 function updateDefines()
 {
+    shader.toggleDefine("ATLAS_NUMX", inRandAtlas.get());
+
     shader.toggleDefine("SCALE_BY_DISTANCE", doScale.get());
     shader.toggleDefine("MAKE_ROUND", makeRound.get());
     shader.toggleDefine("MAKE_ROUNDAA", makeRoundAA.get());
