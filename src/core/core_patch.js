@@ -1371,7 +1371,7 @@ Patch.replaceOpIds = function (json, options)
 
                 while (l--)
                 {
-                    if (!opids[links[l].objIn] || !opids[links[l].objOut])
+                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
                     {
                         links.splice(l, 1);
                     }
