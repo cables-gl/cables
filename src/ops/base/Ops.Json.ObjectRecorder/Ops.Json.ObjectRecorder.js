@@ -3,8 +3,8 @@ const
     reset = op.inTriggerButton("reset"),
     download = op.inTriggerButton("download"),
     inObj = op.inObject("Object"),
+    outArr = op.outArray("Result"),
     numObjects = op.outValue("Num Objects");
-
 let data = [];
 
 reset.onTriggered = function ()
@@ -17,6 +17,7 @@ exec.onTriggered = function ()
 {
     if (inObj.get()) data.push(JSON.parse(JSON.stringify(inObj.get())));
     numObjects.set(data.length);
+    outArr.setRef(data);
 };
 download.onTriggered = function ()
 {

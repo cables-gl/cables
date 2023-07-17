@@ -37,6 +37,11 @@
             },
             {
                 "type": 0,
+                "name": "Smoothing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Stretch",
                 "subType": "boolean"
             },
@@ -60,7 +65,7 @@
                 "objType": "element"
             }
         ],
-        "name": "Ops.Team.Vj.CanvasCopyWindow"
+        "name": "Ops.Gl.ExternalCanvas"
     },
     "authorName": "pandur",
     "created": 1689248551446
