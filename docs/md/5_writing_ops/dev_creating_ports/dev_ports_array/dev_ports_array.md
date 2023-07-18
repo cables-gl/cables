@@ -23,10 +23,10 @@ If you click the op and then the inspect icon ![Button](../img/creating_ports_ar
 "use strict";
 
 // Create a input port of the type Array
-const inArr   = op.inArray("Array in");
+const inArr = op.inArray("Array in");
 
 // Create a output port of the type Array
-const outArray  = op.outArray("Array out");
+const outArray = op.outArray("Array out");
 
 // cache for errors
 const showingError = false;
@@ -43,18 +43,13 @@ function update()
     // error checking section
     // check if arrays come in correctly on startup
     // if no array comes in just return to avoid errors
-    if(!inArr)
+    if(!tempArray) return;
+
+    if(showingError)
     {
-        return;
-    }
-    else
-    {
-        if(showingError)
-        {
-            showingError = false;
-            //set ui to null if the input is not an array
-            op.uiAttr({error:null});
-        }
+        showingError = false;
+        //set ui to null if the input is not an array
+        op.uiAttr({error:null});
     }
     // set outArray to tempArray
     outArray.setRef(tempArray);
