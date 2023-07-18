@@ -7,6 +7,7 @@ const EventTarget = function ()
     this._logName = "";
     this._logEvents = false;
     this._listeners = {};
+    CABLES.eventTargetProfile = CABLES.eventTargetProfile || {};
 
     this.addEventListener = this.on = function (which, cb, idPrefix)
     {
@@ -108,6 +109,11 @@ const EventTarget = function ()
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
         if (this._logEvents) console.log("[event] ", this._logName, which, this._eventCallbacks); // eslint-disable-line
+
+        const evName = this.constructor.name + " " + which;
+        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": evName, "count": 0 });
+        CABLES.eventTargetProfile[evName].count++;
+
 
         if (this._eventCallbacks[which])
         {
