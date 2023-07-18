@@ -3,6 +3,7 @@ const
     next = op.outTrigger("Next"),
     inPosX = op.inInt("Pos X", 0),
     inPosY = op.inInt("Pos Y", 0),
+    inSmoothing = op.inBool("Smoothing", true),
     inStretch = op.inBool("Stretch", false),
     inOpen = op.inTriggerButton("Open Window"),
     outEle = op.outObject("Element", null, "element"),
@@ -22,7 +23,7 @@ inClose.onTriggered = close;
 op.onDelete = close;
 window.addEventListener("beforeunload", close, false);
 
-if (CABLES.UI)gui.on("resizecanvas", () => { setTimeout(resize, 50); });
+if (CABLES.UI)gui.on("resizecanvas", () => { resize(); setTimeout(resize, 150); });
 
 inStretch.onChange = resize;
 
@@ -43,6 +44,8 @@ inUpdate.onTriggered = () =>
     {
         canvas.style.top = y + "px";
         canvas.style.left = x + "px";
+
+        ctx.imageSmoothingEnabled = inSmoothing.get();
         ctx.drawImage(op.patch.cgl.canvas, 0, 0, canvas.width, canvas.height);
     }
 };
@@ -117,7 +120,6 @@ inOpen.onTriggered = () =>
     body.appendChild(canvas);
 
     ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = false;
 
     outEle.setRef(body);
 
