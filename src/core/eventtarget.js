@@ -127,8 +127,8 @@ const EventTarget = function ()
                 {
                     if (execCallbacks[which][i])
                     {
-                        const evName = this.constructor.name + " " + which;
-                        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": evName, "count": 0 });
+                        const evName = this.constructor.name;
+                        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": evName, "event": which, "count": 0 });
                         CABLES.eventTargetProfile[evName].count++;
 
                         execCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
