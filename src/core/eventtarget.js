@@ -110,9 +110,6 @@ const EventTarget = function ()
     {
         if (this._logEvents) console.log("[event] ", this._logName, which, this._eventCallbacks); // eslint-disable-line
 
-        const evName = this.constructor.name + " " + which;
-        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": evName, "count": 0 });
-        CABLES.eventTargetProfile[evName].count++;
 
 
         if (this._eventCallbacks[which])
@@ -130,6 +127,10 @@ const EventTarget = function ()
                 {
                     if (execCallbacks[which][i])
                     {
+                        const evName = this.constructor.name + " " + which;
+                        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": evName, "count": 0 });
+                        CABLES.eventTargetProfile[evName].count++;
+
                         execCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
                     }
                 }
