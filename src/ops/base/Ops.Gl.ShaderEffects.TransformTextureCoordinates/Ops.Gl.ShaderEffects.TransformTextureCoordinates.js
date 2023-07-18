@@ -8,10 +8,10 @@ const
     scaleX = op.inValue("Repeat X", 1),
     scaleY = op.inValue("Repeat Y", 1),
 
-    inFlipX=op.inBool("Flip X",false),
-    inFlipY=op.inBool("Flip Y",false)
-    ;
+    inFlipX = op.inBool("Flip X", false),
+    inFlipY = op.inBool("Flip Y", false),
 
+    rot = op.inFloat("Rotation", 0);
 const cgl = op.patch.cgl;
 const mod = new CGL.ShaderModifier(cgl, op.name);
 
@@ -23,17 +23,17 @@ mod.addModule({
 
 mod.addUniformVert("2f", "MOD_trans", transX, transY);
 mod.addUniformVert("2f", "MOD_scale", scaleX, scaleY);
+mod.addUniformVert("f", "MOD_rot", rot);
 
-
-inFlipX.onChange=
-    inFlipY.onChange=updateDefines;
+inFlipX.onChange =
+    inFlipY.onChange = updateDefines;
 
 updateDefines();
 
 function updateDefines()
 {
-    mod.toggleDefine("MOD_FLIPX",inFlipX.get());
-    mod.toggleDefine("MOD_FLIPY",inFlipY.get());
+    mod.toggleDefine("MOD_FLIPX", inFlipX.get());
+    mod.toggleDefine("MOD_FLIPY", inFlipY.get());
 }
 
 render.onTriggered = function ()
