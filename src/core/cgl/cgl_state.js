@@ -731,6 +731,7 @@ const Context = function (_patch)
         {
             this.canvas.width = w;
             this.canvas.height = h;
+
             if (blob)
             {
                 const anchor = document.createElement("a");
