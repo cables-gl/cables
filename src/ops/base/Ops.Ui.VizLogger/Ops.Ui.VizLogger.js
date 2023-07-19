@@ -12,7 +12,10 @@ inClear.onTriggered = () =>
 
 inString.onChange = () =>
 {
-    arr.push("" + inString.get());
+    if (typeof inString.get() == "string")
+        arr.push("\"" + inString.get() + "\"");
+    else
+        arr.push("" + inString.get());
 };
 
 inNum.onChange = () =>
