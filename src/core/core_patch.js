@@ -662,7 +662,6 @@ Patch.prototype.exec = function (e)
 
     if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
     {
-        const startFrameTime = CABLES.now();
         this.renderFrame();
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);

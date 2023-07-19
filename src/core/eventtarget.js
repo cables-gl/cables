@@ -7,6 +7,7 @@ const EventTarget = function ()
     this._logName = "";
     this._logEvents = false;
     this._listeners = {};
+    CABLES.eventTargetProfile = CABLES.eventTargetProfile || {};
 
     this.addEventListener = this.on = function (which, cb, idPrefix)
     {
@@ -124,6 +125,16 @@ const EventTarget = function ()
                 {
                     if (execCallbacks[which][i])
                     {
+                        const evName = this.constructor.name + " " + which;
+                        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": this.constructor.name, "event": which, "count": 0 });
+                        CABLES.eventTargetProfile[evName].count++;
+
+                        if (which == "resize" && CABLES.eventTargetProfile[evName].count > 1000)
+                        {
+                            console.log(1111);
+                        }
+
+
                         execCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
                     }
                 }

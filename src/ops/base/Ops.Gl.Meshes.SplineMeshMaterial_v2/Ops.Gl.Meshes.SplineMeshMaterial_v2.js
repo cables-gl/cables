@@ -31,9 +31,12 @@ shaderOut.set(shader);
 const uniTex = shader.addUniformFrag("t", "tex");
 const uniTexMask = shader.addUniformFrag("t", "texMask");
 
+let aspect = 1.7777;
+
 shader.addUniformFrag("4f", "color", r, g, b, a);
 shader.addUniformFrag("f", "width", inWidth);
 shader.addUniformFrag("f", "texOffset", inTexOffset);
+shader.addUniformFrag("f", "aspect", aspect);
 shader.toggleDefine("PERSPWIDTH", inPerspective);
 shader.toggleDefine("USE_TEXTURE", inTexture);
 shader.toggleDefine("TEX_COLORIZE", inTexColorize);
@@ -47,6 +50,14 @@ updateMapping();
 function doRender()
 {
     if (!shader) return;
+
+    const vp = op.patch.cgl.getViewPort();
+    const newAspect = vp[2] / vp[3];
+    if (newAspect != aspect)
+    {
+        aspect = newAspect;
+        shader.addUniformFrag("f", "aspect", aspect);
+    }
 
     cgl.pushShader(shader);
     shader.popTextures();

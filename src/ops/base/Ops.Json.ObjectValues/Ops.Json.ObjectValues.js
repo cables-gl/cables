@@ -1,7 +1,7 @@
 const
     inObj = op.inObject("Object"),
-    outNumValues = op.outNumber("Num values"),
-    outValues = op.outArray("Values");
+    outValues = op.outArray("Values"),
+    outNumValues = op.outNumber("Num values");
 
 inObj.onChange = () =>
 {
