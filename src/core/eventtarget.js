@@ -57,7 +57,7 @@ const EventTarget = function ()
             const event = this._listeners[which];
             if (!event)
             {
-                // console.log("could not find event...");
+                console.log("could not find event...");
                 return;
             }
 
@@ -127,13 +127,8 @@ const EventTarget = function ()
                     {
                         const evName = this.constructor.name + " " + which;
                         CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": this.constructor.name, "event": which, "count": 0 });
+                        CABLES.eventTargetProfile[evName].active = this._eventCallbacks[which].length;
                         CABLES.eventTargetProfile[evName].count++;
-
-                        if (which == "resize" && CABLES.eventTargetProfile[evName].count > 1000)
-                        {
-                            console.log(1111);
-                        }
-
 
                         execCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
                     }
