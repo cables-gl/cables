@@ -108,6 +108,7 @@ function fullscreen()
 
 inOpen.onTriggered = () =>
 {
+    if (subWindow)close();
     let id = 1;
     subWindow = window.open("", "view#" + id, "width=" + 800 + ",height=" + 480 + ",directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=yes,popup=true");
     let document = subWindow.document;
