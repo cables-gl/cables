@@ -34,7 +34,7 @@ function render()
     cgl.gl.clearColor(r.get(), g.get(), b.get(), a.get());
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
     fb.renderEnd();
-    texOut.set(fb.getTextureColor());
+    texOut.setRef(fb.getTextureColor());
 }
 
 op.onDelete = () =>
