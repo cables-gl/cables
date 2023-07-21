@@ -701,8 +701,8 @@ const Context = function (_patch)
     {
         this.patch.renderOneFrame();
 
-        let w = this.canvas.clientWidth;
-        let h = this.canvas.clientHeight;
+        let w = this.canvas.clientWidth * this.pixelDensity;
+        let h = this.canvas.clientHeight * this.pixelDensity;
 
         if (pw)
         {
