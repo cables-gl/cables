@@ -71,6 +71,7 @@ const fontImage = document.createElement("canvas");
 fontImage.id = "texturetext_" + CABLES.generateUUID();
 fontImage.style.display = "none";
 document.body.appendChild(fontImage);
+fontImage.style.letterSpacing = "0px";
 
 let ctx = fontImage.getContext("2d");
 let needsRefresh = true;
@@ -197,7 +198,7 @@ function refresh()
     if (fontname.indexOf(" ") > -1) fontname = "\"" + fontname + "\"";
     ctx.font = weight.get() + " " + fontSize + "px " + fontname + "";
 
-    ctx.textBaseline = "hanging";
+    ctx.textBaseline = "top";
     ctx.textAlign = align.get();
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
@@ -214,7 +215,7 @@ function refresh()
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        oneLineHeight = Math.max(oneLineHeight, Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent);
+        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent));
     }
 
     for (let i = 0; i < strings.length; i++)
@@ -259,7 +260,6 @@ function refresh()
         }
 
         posy += oneLineHeight + padding;
-        1;
     }
 
     ctx.restore();

@@ -15,7 +15,7 @@ function exec()
 {
     if (data.get())
     {
-        result.set(data.get()[key.get()]);
+        result.set(String(data.get()[key.get()]));
     }
     else
     {

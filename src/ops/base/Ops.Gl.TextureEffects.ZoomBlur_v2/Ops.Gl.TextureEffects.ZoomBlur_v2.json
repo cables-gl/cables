@@ -12,6 +12,11 @@
             },
             {
                 "type": 0,
+                "name": "Samples",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
@@ -74,7 +79,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": []
 }
