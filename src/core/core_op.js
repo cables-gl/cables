@@ -1169,6 +1169,8 @@ const Op = function ()
         {
             this.portsIn[i].setAnimated(false);
         }
+
+        if (this.onAnimFrame)op.patch.removeOnAnimFrame(this);
     };
 
     // todo: check instancing stuff?
