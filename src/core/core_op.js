@@ -1172,7 +1172,7 @@ const Op = function ()
             this.portsIn[i].setAnimated(false);
         }
 
-        if (this.onAnimFrame)op.patch.removeOnAnimFrame(this);
+        if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
     };
 
     // todo: check instancing stuff?
