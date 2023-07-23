@@ -1,5 +1,5 @@
 const
-    inCoords = op.inSwitch("Coordinates", ["Pixel", "Pixel Display", "-1 to 1", "0 to 1"], "-1 to 1"),
+    inCoords = op.inSwitch("Coordinates", ["-1 to 1", "Pixel Display", "Pixel", "0 to 1"], "-1 to 1"),
     area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element", "Canvas Area"], "Canvas"),
     flipY = op.inValueBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
@@ -124,7 +124,7 @@ function updateCoordNormalizing()
     if (inCoords.get() == "Pixel")normalize = 0;
     else if (inCoords.get() == "-1 to 1")normalize = 1;
     else if (inCoords.get() == "0 to 1")normalize = 2;
-    else if (inCoords.get() == "Pixel CSS")normalize = 3;
+    else if (inCoords.get() == "Pixel Display")normalize = 3;
 }
 
 function onMouseEnter(e)

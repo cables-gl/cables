@@ -63,9 +63,9 @@ void main()
         }
     #endif
 
-    for (float t = 0.0; t <= 40.0; t++)
+    for (float t = 0.0; t <= NUM_SAMPLES; t++)
     {
-        float percent = (t + offset) / 40.0;
+        float percent = (t + offset) / NUM_SAMPLES;
         float weight = 4.0 * (percent - percent * percent);
         vec4 smpl = texture(tex, texCoord + toCenter * percent * am / texSize);
 

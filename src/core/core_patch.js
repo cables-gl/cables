@@ -662,7 +662,6 @@ Patch.prototype.exec = function (e)
 
     if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
     {
-        const startFrameTime = CABLES.now();
         this.renderFrame();
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
@@ -1353,6 +1352,33 @@ Patch.prototype.printTriggerStack = function ()
 
 Patch.replaceOpIds = function (json, options)
 {
+    const opids = {};
+    for (const i in json.ops)
+    {
+        opids[json.ops[i].id] = json.ops[i];
+    }
+
+
+    for (const j in json.ops)
+    {
+        for (const k in json.ops[j].portsOut)
+        {
+            const links = json.ops[j].portsOut[k].links;
+            if (links)
+            {
+                let l = links.length;
+
+                while (l--)
+                {
+                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                    {
+                        links.splice(l, 1);
+                    }
+                }
+            }
+        }
+    }
+
     for (const i in json.ops)
     {
         const op = json.ops[i];
@@ -1389,6 +1415,7 @@ Patch.replaceOpIds = function (json, options)
                 {
                     if (json.ops[j].portsIn[k].links)
                     {
+                        // console.log(json.ops[j].portsIn[k].links);
                         let l = json.ops[j].portsIn[k].links.length;
                         while (l--)
                             if (json.ops[j].portsIn[k].links[l] === null)
@@ -1408,6 +1435,8 @@ Patch.replaceOpIds = function (json, options)
                     if (json.ops[j].portsOut[k].links)
                     {
                         let l = json.ops[j].portsOut[k].links.length;
+
+
                         while (l--)
                             if (json.ops[j].portsOut[k].links[l] === null)
                                 json.ops[j].portsOut[k].links.splice(l, 1);
