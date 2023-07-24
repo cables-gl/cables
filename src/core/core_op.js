@@ -1,9 +1,11 @@
 import { EventTarget } from "./eventtarget";
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
-import { Port, SwitchPort, ValueSelectPort } from "./core_port";
+import { Port } from "./core_port";
 import { Link } from "./core_link";
 import Logger from "./core_logger";
+import { SwitchPort } from "./core_port_switch";
+import { ValueSelectPort } from "./core_port_select";
 
 /**
  * op the class of all operators
@@ -1169,6 +1171,8 @@ const Op = function ()
         {
             this.portsIn[i].setAnimated(false);
         }
+
+        if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
     };
 
     // todo: check instancing stuff?
