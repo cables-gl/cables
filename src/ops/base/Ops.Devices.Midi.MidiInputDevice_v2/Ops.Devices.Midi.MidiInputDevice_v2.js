@@ -118,7 +118,6 @@ let FIRST_CC = null;
 let ROUTINE_TYPE = null;
 /* the state of the current NRPN construction cycle */
 
-
 const LSBRoutine = (ccIndex, ccValue) =>
 {
     // NOTE: this is still the MSBRoutine
@@ -132,7 +131,6 @@ const LSBRoutine = (ccIndex, ccValue) =>
         if (ccIndex === NRPN_VALUE_MSB)
         {
             nrpnValueMSB = ccValue << 7;
-
 
             if (typeof nrpnValueLSB === "number")
             {
@@ -341,7 +339,7 @@ function setDevice()
         }
         else if (input.value.onmidimessage === onMIDIMessage) input.value.onmidimessage = null;
     }
-
+    op.setUiError("invalidswitch", null);
     /* for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
     if (output.value.name === name) {
       outputDevice = midi.outputs.get(output.value.id);
@@ -358,7 +356,8 @@ function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
     const inputs = midi.inputs.values();
-    op.uiAttr({ "info": "no midi devices found" });
+    console.log(inputs);
+    // op.uiAttr({ "info": "no midi devices found" });
 
     const deviceNames = [];
 
@@ -368,6 +367,7 @@ function onMIDISuccess(midiAccess)
     }
 
     deviceSelect.uiAttribs.values = deviceNames;
+    op.setUiError("invalidswitch", null);
 
     op.refreshParams();
     setDevice();

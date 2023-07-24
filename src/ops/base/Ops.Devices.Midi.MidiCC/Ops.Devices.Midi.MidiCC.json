@@ -28,6 +28,11 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Trigger On index",
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "learn"
             },
@@ -64,7 +69,6 @@
     },
     "summary": "read CC value from Midi controller",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice_v2",
         "Ops.Devices.Midi.MidiClock",
