@@ -9,8 +9,14 @@ export default class FpsCounter extends EventTarget
         this._timeStartSecond = 0;
         this._fpsCounter = 0;
         this._msCounter = 0;
+        this._frameCount = 0;
 
         this.stats = { "ms": 0, "fps": 0 };
+    }
+
+    get frameCount()
+    {
+        return this._frameCount;
     }
 
     startFrame()
@@ -20,6 +26,7 @@ export default class FpsCounter extends EventTarget
 
     endFrame()
     {
+        this._frameCount++;
         this._fpsCounter++;
 
         const timeFrame = CABLES.now() - this._timeStartFrame;

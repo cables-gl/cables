@@ -64,7 +64,10 @@ const Port = function (__parent, name, type, uiAttribs)
 
     this._warnedDeprecated = false;
     this._useVariableName = null;
+
     this.activityCounter = 0;
+    this.apf = 0;
+    this.activityCounterStartFrame = 0;
 
     this._tempLastUiValue = null;
 
@@ -594,6 +597,7 @@ Port.prototype.trigger = function ()
 
                 portTriggered.parent.patch.pushTriggerStack(portTriggered);
                 portTriggered._onTriggered();
+
                 portTriggered.parent.patch.popTriggerStack();
             }
             if (this.links[i]) this.links[i].activity();
