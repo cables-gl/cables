@@ -740,6 +740,7 @@ Mesh.prototype.render = function (shader)
                     const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
                     const currentTimeGPU = elapsedNanos / 1000000;
 
+                    queryProfilerData._times = queryProfilerData._times || 0;
                     queryProfilerData._times += currentTimeGPU;
                     queryProfilerData._numcount++;
                     queryProfilerData.when = performance.now();
