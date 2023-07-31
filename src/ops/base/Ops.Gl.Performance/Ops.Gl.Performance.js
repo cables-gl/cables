@@ -33,7 +33,7 @@ let loadingCounter = 0;
 const loadingChars = ["|", "/", "-", "\\"];
 let initMeasures = true;
 
-const colorRAFSlow = "#ffffff";
+const colorRAFSlow = "#007f9c";
 const colorBg = "#222222";
 const colorRAF = "#003f5c"; // color: https://learnui.design/tools/data-color-picker.html
 const colorMainloop = "#7a5195";
@@ -191,7 +191,8 @@ function updateCanvas()
 
     for (k = numBars; k >= 0; k--)
     {
-        if (queue[k] > 30)ctx.fillStyle = colorRAFSlow;
+        if (queue[k] > 30)
+            ctx.fillStyle = colorRAFSlow;
         ctx.fillRect(numBars - k, height - queue[k] * hmul, 1, queue[k] * hmul);
         if (queue[k] > 30)ctx.fillStyle = colorRAF;
     }
