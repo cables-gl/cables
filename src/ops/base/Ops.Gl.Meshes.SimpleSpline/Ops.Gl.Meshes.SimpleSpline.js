@@ -62,16 +62,23 @@ function rebuild()
 
     attr = mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, buff, 3);
 
+    op.setUiError("wrongvcnum", null);
+
     if (inVertCols.get())
     {
-        const attrTc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", inVertCols.get(), 4);
+        if (inVertCols.get().length / 4 != buff.length / 3) op.setUiError("wrongvcnum", "vertex color array length is wrong. should be " + buff.length / 3 * 4);
+        const attrVc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR, inVertCols.get(), 4);
     }
 
     const numTc = (newLength / 3) * 2;
 
+    op.setUiError("wrongtcnum", null);
+
     if (inTexCoords.get())
     {
         const intc = inTexCoords.get();
+        if (intc.length / 2 != buff.length / 3) op.setUiError("wrongtcnum", "texcoord array length is wrong. should be " + buff.length / 3 * 2);
+
         const attrTc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD, intc, 2);
     }
     else

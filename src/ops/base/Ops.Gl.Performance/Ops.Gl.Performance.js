@@ -502,12 +502,9 @@ function render()
     selfTime = performance.now() - selfTimeStart;
     const startTimeChilds = performance.now();
 
-    outCanv.set(null);
-    outCanv.set(canvas);
+    outCanv.setRef(canvas);
 
-    // startGlQuery();
     next.trigger();
-    // endGlQuery();
 
     const nChildsTime = performance.now() - startTimeChilds;
     const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
