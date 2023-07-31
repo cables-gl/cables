@@ -621,7 +621,6 @@ Patch.prototype.renderFrame = function (timestamp)
 
     this.emitOnAnimFrameEvent(time);
 
-
     this.cgl.profileData.profileFrameDelta = timestamp - this._lastReqAnimTimeStamp || timestamp;
     this._lastReqAnimTimeStamp = timestamp;
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
