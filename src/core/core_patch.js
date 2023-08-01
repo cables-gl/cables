@@ -85,6 +85,7 @@ const Patch = function (cfg)
     this._frameWasdelayed = true;
     this.frameStore = {};
     this.deSerialized = false;
+    this._lastReqAnimTimeStamp = 0;
 
     if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
 
@@ -611,7 +612,7 @@ Patch.prototype.emitOnAnimFrameEvent = function (time)
     }
 };
 
-Patch.prototype.renderFrame = function (e)
+Patch.prototype.renderFrame = function (timestamp)
 {
     this.timer.update();
     this.freeTimer.update();
@@ -620,6 +621,8 @@ Patch.prototype.renderFrame = function (e)
 
     this.emitOnAnimFrameEvent(time);
 
+    this.cgl.profileData.profileFrameDelta = timestamp - this._lastReqAnimTimeStamp || timestamp;
+    this._lastReqAnimTimeStamp = timestamp;
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
     this.emitEvent("onRenderFrame", time);
@@ -631,7 +634,7 @@ Patch.prototype.renderFrame = function (e)
     }
 };
 
-Patch.prototype.exec = function (e)
+Patch.prototype.exec = function (timestamp)
 {
     if (!this._renderOneFrame && (this._paused || this.aborted)) return;
     this.emitEvent("reqAnimFrame");
@@ -662,7 +665,7 @@ Patch.prototype.exec = function (e)
 
     if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
     {
-        this.renderFrame();
+        this.renderFrame(timestamp);
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }

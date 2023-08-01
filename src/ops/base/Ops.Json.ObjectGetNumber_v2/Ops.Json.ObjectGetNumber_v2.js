@@ -17,16 +17,17 @@ key.onChange = function ()
 
 function exec()
 {
-    if (data.get())
+    const d = data.get();
+    if (d)
     {
-        const val = data.get()[key.get()];
-        result.set(val);
+        const val = d[key.get()];
+        result.set(parseFloat(val));
         if (val === undefined) outFound.set(0);
         else outFound.set(1);
     }
     else
     {
-        result.set(null);
+        result.set(0);
         outFound.set(0);
     }
 }

@@ -6,15 +6,15 @@ const
 
 exe.onTriggered = exec;
 
-let b = false;
+// let b = false;
 
-boolean.onChange = () =>
-{
-    b = boolean.get();
-};
+// boolean.onChange = () =>
+// {
+//     b = boolean.get();
+// };
 
 function exec()
 {
-    if (b) triggerThen.trigger();
+    if (boolean.get()) triggerThen.trigger();
     else triggerElse.trigger();
 }
