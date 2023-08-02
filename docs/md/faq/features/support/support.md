@@ -12,6 +12,9 @@ Don't forget to link your Patreon account in [your profile settings](https://cab
 We also have a very long list of stuff that WE want to do, but maybe you need something specific for your project
 or would like to hire us to develop project specific features. Simply [contact us](mailto:hi@undev.de)!
 
+If you publish your work on a platform like `fxhash` or `objkt`, you might consider giving a share of your sales to our wallet.
+Use `cables.tez` or `tz1ixVhzF6uBTYo6vPZ44RoZfcypC5dyvPc6`. Thanks!
+
 ## Like, Share, Comment!
 
 Tag #cablesgl when sharing your projects and artwork and throw us a mention on [twitter](https://twitter.com/cables_gl), [instagram](https://www.instagram.com/cables_gl), [facebook](https://www.facebook.com/cablesgl).
