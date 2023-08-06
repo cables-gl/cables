@@ -33,3 +33,9 @@ It is not recommended to plug multiple audio streams (such as two SamplePlayers)
 If you want to connect multiple audio sources, use the [Mixer](https://cables.gl/op/Ops.WebAudio.Mixer) op before your output and connect the two. The Mixer op features volume and pan controls for up to eight channels. If you need more input channels, cascade multiple Mixers.
 
 ![output](img/0_3_mixer.png)
+
+## Connecting the timeline and audio playback
+
+Timeline can be easily connected with audio playback by using [TimeLinecontrols](https://cables.gl/op/Ops.TimeLine.TimeLineControls).
+
+![output](img/0_4_timelinecontrols.png)
