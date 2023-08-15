@@ -48,6 +48,7 @@ function updateAttribs()
     element.setAttribute("style", inStyle.get());
     element.setAttribute("src", src.get());
     element.setAttribute("id", elId.get());
+    element.setAttribute("allowtransparency", "true");
     element.setAttribute("allowfullscreen", "allowfullscreen");
 }
 
