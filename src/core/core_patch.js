@@ -594,20 +594,20 @@ Patch.prototype.getFrameNum = function ()
     return this._frameNum;
 };
 
-Patch.prototype.emitOnAnimFrameEvent = function (time)
+Patch.prototype.emitOnAnimFrameEvent = function (time, delta)
 {
     time = time || this.timer.getTime();
 
     for (let i = 0; i < this.animFrameCallbacks.length; ++i)
     {
-        if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
+        if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum, delta);
     }
 
     for (let i = 0; i < this.animFrameOps.length; ++i)
     {
         if (this.animFrameOps[i].onAnimFrame)
         {
-            this.animFrameOps[i].onAnimFrame(time);
+            this.animFrameOps[i].onAnimFrame(time, this._frameNum, delta);
         }
     }
 };
@@ -619,9 +619,11 @@ Patch.prototype.renderFrame = function (timestamp)
     const time = this.timer.getTime();
     const startTime = performance.now();
 
-    this.emitOnAnimFrameEvent(time);
+    const delta = timestamp - this._lastReqAnimTimeStamp || timestamp;
 
-    this.cgl.profileData.profileFrameDelta = timestamp - this._lastReqAnimTimeStamp || timestamp;
+    this.emitOnAnimFrameEvent(null, delta);
+
+    this.cgl.profileData.profileFrameDelta = delta;
     this._lastReqAnimTimeStamp = timestamp;
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
