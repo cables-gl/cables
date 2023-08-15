@@ -285,6 +285,10 @@ void main()
         str=texture(texMask,texCoord).r;
     #endif
 
+    #ifdef RANGE_MIN1
+        col=col*2.0-1.0;
+    #endif
+
     col=cgl_blendPixel(base,col,amount*str);
 
 

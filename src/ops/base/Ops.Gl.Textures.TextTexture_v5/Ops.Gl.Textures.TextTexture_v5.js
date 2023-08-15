@@ -2,7 +2,7 @@ const
     render = op.inTriggerButton("Render"),
 
     drawMesh = op.inValueBool("Draw Mesh", true),
-    meshScale = op.inValueFloat("Scale Mesh", 1.0),
+    meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
