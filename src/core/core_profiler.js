@@ -18,8 +18,16 @@ const Profiler = function (patch)
         items = {};
     };
 
+    this.togglePause=()=>
+    {
+        this.paused=!this.paused;
+        if(!this.paused)currentStart=performance.now();
+    }
+
     this.add = function (type, object)
     {
+        if(this.paused)return;
+
         if (currentId !== null)
         {
             if (!object || object.id != currentId)
@@ -49,15 +57,13 @@ const Profiler = function (patch)
             }
 
             // this.startFrame = patch.getFrameNum();
-            if (items[object.id].lastFrame != patch.getFrameNum())
-            {
-                items[object.id].numTriggers = 0;
-            }
+            if (items[object.id].lastFrame != patch.getFrameNum()) items[object.id].numTriggers = 0;
+
             items[object.id].lastFrame = patch.getFrameNum();
             items[object.id].numTriggers++;
-            items[object.id].opid = object.parent.id;
-            items[object.id].title = object.parent.name + "." + object.name;
-            items[object.id].subPatch = object.parent.uiAttribs.subPatch;
+            items[object.id].opid = object.op.id;
+            items[object.id].title = object.op.name + "." + object.name;
+            items[object.id].subPatch = object.op.uiAttribs.subPatch;
 
             currentId = object.id;
             currentStart = performance.now();
