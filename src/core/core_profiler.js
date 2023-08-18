@@ -1,87 +1,95 @@
 import { now } from "./timer";
 
-const Profiler = function (patch)
+class Profiler
 {
-    this.startFrame = patch.getFrameNum();
-
-    let items = {};
-    let currentId = null;
-    let currentStart = 0;
-
-    this.getItems = function ()
+    constructor (patch)
     {
-        return items;
-    };
-
-    this.clear = function ()
-    {
-        items = {};
-    };
-
-    this.togglePause=()=>
-    {
-        this.paused=!this.paused;
-        if(!this.paused)currentStart=performance.now();
+        this.startFrame = patch.getFrameNum();
+        this.items = {};
+        this.currentId = null;
+        this.currentStart = 0;
+        this._patch=patch;
     }
 
-    this.add = function (type, object)
+    getItems()
+    {
+        return this.items;
+    };
+
+    clear()
+    {
+        if(this.paused)return;
+        this.items = {};
+    };
+
+    togglePause()
+    {
+        this.paused=!this.paused;
+        if(!this.paused)
+        {
+            this.items={};
+            this.currentStart=performance.now();
+        }
+    }
+
+    add(type, object)
     {
         if(this.paused)return;
 
-        if (currentId !== null)
+        if (this.currentId !== null)
         {
-            if (!object || object.id != currentId)
+            if (!object || object.id != this.currentId)
             {
-                if (items[currentId])
+                if (this.items[this.currentId])
                 {
-                    items[currentId].timeUsed += performance.now() - currentStart;
+                    this.items[this.currentId].timeUsed += performance.now() - this.currentStart;
 
-                    if (!items[currentId].peakTime || now() - items[currentId].peakTime > 5000)
+                    if (!this.items[this.currentId].peakTime || now() - this.items[this.currentId].peakTime > 5000)
                     {
-                        items[currentId].peak = 0;
-                        items[currentId].peakTime = now();
+                        this.items[this.currentId].peak = 0;
+                        this.items[this.currentId].peakTime = now();
                     }
-                    items[currentId].peak = Math.max(items[currentId].peak, performance.now() - currentStart);
+                    this.items[this.currentId].peak = Math.max(this.items[this.currentId].peak, performance.now() - this.currentStart);
                 }
             }
         }
 
         if (object !== null)
         {
-            if (!items[object.id])
+            if (!this.items[object.id])
             {
-                items[object.id] = {
+                this.items[object.id] = {
                     "numTriggers": 0,
                     "timeUsed": 0,
                 };
             }
 
-            // this.startFrame = patch.getFrameNum();
-            if (items[object.id].lastFrame != patch.getFrameNum()) items[object.id].numTriggers = 0;
+            if (this.items[object.id].lastFrame != this._patch.getFrameNum()) this.items[object.id].numTriggers = 0;
 
-            items[object.id].lastFrame = patch.getFrameNum();
-            items[object.id].numTriggers++;
-            items[object.id].opid = object.op.id;
-            items[object.id].title = object.op.name + "." + object.name;
-            items[object.id].subPatch = object.op.uiAttribs.subPatch;
+            this.items[object.id].lastFrame = this._patch.getFrameNum();
+            this.items[object.id].numTriggers++;
+            this.items[object.id].opid = object.op.id;
+            this.items[object.id].title = object.op.name + "." + object.name;
+            this.items[object.id].subPatch = object.op.uiAttribs.subPatch;
 
-            currentId = object.id;
-            currentStart = performance.now();
+            this.currentId = object.id;
+            this.currentStart = performance.now();
         }
         else
         {
-            currentId = null;
+            this.currentId = null;
         }
     };
 
-    this.print = function ()
+    print()
     {
         console.log("--------");
-        for (const i in items)
+        for (const i in this.items)
         {
-            console.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
+            console.log(items[i].title + ": " + this.items[i].numTriggers + " / " + this.items[i].timeUsed);
         }
     };
+
 };
 
 export { Profiler };
