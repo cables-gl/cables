@@ -66,5 +66,13 @@
     "summary": "distance between two 3d points, calculated when triggered",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Math.Distance3dNew renamed to Ops.Math.Distance3d_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692359726579
+        }
+    ]
 }
