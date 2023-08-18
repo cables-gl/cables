@@ -3,7 +3,7 @@ const
     inActive = op.inBool("Active", true),
     inWhat = op.inSwitch("Force", ["Resolution", "Aspect Ratio"], "Resolution"),
     inCenter = op.inBool("Center In Parent", true),
-    inScaleFit = op.inBool("Scale to fit Parent", false),
+    inScaleFit = op.inBool("Scale to fit Parent", true),
     inWidth = op.inInt("Set Width", 300),
     inHeight = op.inInt("Set Height", 200),
     inPresets = op.inDropDown("Aspect Ratio", ["Custom", "21:9", "2:1", "16:9", "16:10", "4:3", "1:1", "9:16", "1:2", "iPhoneXr Vert"], "16:9"),
@@ -67,6 +67,12 @@ function updateRatioPreset()
     else if (pr == "iPhoneXr Vert")inRatio.set(9 / 19.5);
 }
 
+op.on("delete", () =>
+{
+    console.log("delete!");
+    removeStyles();
+});
+
 inRatio.onChange = () =>
 {
     removeStyles();
@@ -108,7 +114,12 @@ function removeStyles()
     outMarginTop.set(0);
 
     const rect = cgl.canvas.parentNode.getBoundingClientRect();
+
     cgl.setSize(rect.width, rect.height);
+
+    cgl.canvas.style.transform = "scale(1)";
+
+    cgl.updateSize();
 }
 
 inTrigger.onTriggered = function ()
