@@ -25,5 +25,24 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1692282851977
+    "created": 1692282851977,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Object Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectDeleteKey"
+    }
 }

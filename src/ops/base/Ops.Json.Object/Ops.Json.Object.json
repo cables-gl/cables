@@ -14,5 +14,15 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1692304956642
+    "created": 1692304956642,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.Object"
+    }
 }
