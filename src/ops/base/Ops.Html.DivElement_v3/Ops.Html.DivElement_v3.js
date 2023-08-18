@@ -229,7 +229,7 @@ function warning()
 {
     if (inClass.get() && inStyle.get())
     {
-        op.setUiError("error", "DIV uses external and inline CSS", 1);
+        op.setUiError("error", "Element uses external and inline CSS", 1);
     }
     else
     {

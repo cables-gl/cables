@@ -3,17 +3,21 @@ const
     inType = op.inSwitch("Type", ["Text", "Number", "Password", "Date"], "Text"),
     inText = op.inString("Default Value", ""),
     inPlaceHolder = op.inString("Placeholder", "Type here..."),
-
-    inAutoComplete = op.inBool("Autocomplete", false),
-    inMaxLength = op.inInt("Max Length", 0),
-    inSpellcheck = op.inValueBool("Spellcheck", false),
-
     inId = op.inString("Id"),
     inClass = op.inString("Class"),
     inStyle = op.inStringEditor("Style", "color:#ccc;\nbackground-color:#222;\nborder:none;\npadding:4px;\n", "inline-css"),
 
+    inAutoComplete = op.inBool("Autocomplete", false),
+    inMaxLength = op.inInt("Max Length", 0),
+
     inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
+
+    inFocus = op.inTriggerButton("Focus"),
+    inBlur = op.inTriggerButton("Blur"),
+    inClear = op.inTriggerButton("Clear"),
+    inSelect = op.inTriggerButton("Select"),
+
     outElement = op.outObject("DOM Element", null, "element"),
     outString = op.outString("Value"),
     outHover = op.outBoolNum("Hover");
@@ -21,11 +25,30 @@ const
 let listenerElement = null;
 let prevDisplay = "block";
 let div = null;
+
 const canvas = op.patch.cgl.canvas.parentElement;
 
-op.setPortGroup("Element", [inElType, inType, inText, inPlaceHolder, inSpellcheck, inMaxLength, inAutoComplete]);
-
 createElement();
+
+inSelect.onTriggered = () =>
+{
+    div.select();
+};
+
+inClear.onTriggered = () =>
+{
+    div.value = "";
+};
+
+inFocus.onTriggered = () =>
+{
+    div.focus();
+};
+
+inBlur.onTriggered = () =>
+{
+    div.blur();
+};
 
 inElType.onChange = () =>
 {
@@ -33,18 +56,14 @@ inElType.onChange = () =>
     updateStyle();
 };
 
-inSpellcheck.onChange =
-    inMaxLength.onChange =
+inMaxLength.onChange =
     inType.onChange =
     inAutoComplete.onChange =
     inClass.onChange = updateClass;
 
-inPlaceHolder.onChange =
-    inText.onChange = updateText;
+inPlaceHolder.onChange = inText.onChange = updateText;
 
-inStyle.onChange =
-    outElement.onLinkChanged = updateStyle;
-
+inStyle.onChange = updateStyle;
 inInteractive.onChange = updateInteractive;
 inVisible.onChange = updateVisibility;
 
@@ -54,6 +73,8 @@ warning();
 updateInteractive();
 
 op.onDelete = removeElement;
+
+outElement.onLinkChanged = updateStyle;
 
 function createElement()
 {
@@ -147,8 +168,7 @@ function removeClasses()
 
 function updateClass()
 {
-    div.setAttribute("spellcheck", String(inSpellcheck.get() || false));
-
+    div.setAttribute("tabindex", 0);
     div.setAttribute("maxlength", inMaxLength.get() || null);
     div.setAttribute("type", inType.get().toLowerCase());
 
@@ -238,15 +258,13 @@ op.addEventListener("onEnabledChange", function (enabled)
         updateText();
         updateInteractive();
     }
-    // if(enabled) updateVisibility();
-    // else setCSSVisible(false);
 });
 
 function warning()
 {
     if (inClass.get() && inStyle.get())
     {
-        op.setUiError("error", "DIV uses external and inline CSS", 1);
+        op.setUiError("error", "Element uses external and inline CSS", 1);
     }
     else
     {

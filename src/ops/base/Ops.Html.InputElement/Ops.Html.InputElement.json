@@ -20,42 +20,20 @@
             {
                 "type": 0,
                 "name": "Element index",
-                "group": "Element",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Type index",
-                "group": "Element",
                 "subType": "integer"
             },
             {
                 "type": 5,
-                "name": "Default Value",
-                "group": "Element"
+                "name": "Default Value"
             },
             {
                 "type": 5,
-                "name": "Placeholder",
-                "group": "Element"
-            },
-            {
-                "type": 0,
-                "name": "Autocomplete",
-                "group": "Element",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Max Length",
-                "group": "Element",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Spellcheck",
-                "group": "Element",
-                "subType": "boolean"
+                "name": "Placeholder"
             },
             {
                 "type": 5,
@@ -71,6 +49,16 @@
             },
             {
                 "type": 0,
+                "name": "Autocomplete",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Max Length",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Interactive",
                 "subType": "boolean"
             },
@@ -78,6 +66,22 @@
                 "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Focus"
+            },
+            {
+                "type": 1,
+                "name": "Blur"
+            },
+            {
+                "type": 1,
+                "name": "Clear"
+            },
+            {
+                "type": 1,
+                "name": "Select"
             }
         ],
         "portsOut": [
