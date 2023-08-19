@@ -97,8 +97,8 @@ Link.prototype.remove = function ()
         if (this.portIn.links.length > 0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());
     }
 
-    if (this.portIn) this.portIn.parent._checkLinksNeededToWork();
-    if (this.portOut) this.portOut.parent._checkLinksNeededToWork();
+    if (this.portIn) this.portIn.op._checkLinksNeededToWork();
+    if (this.portOut) this.portOut.op._checkLinksNeededToWork();
 
     this.portIn = null;
     this.portOut = null;
@@ -140,8 +140,8 @@ Link.prototype.link = function (p1, p2)
     if (p1.onLink) p1.onLink(this);
     if (p2.onLink) p2.onLink(this);
 
-    p1.parent._checkLinksNeededToWork();
-    p2.parent._checkLinksNeededToWork();
+    p1.op._checkLinksNeededToWork();
+    p2.op._checkLinksNeededToWork();
 };
 
 Link.prototype.getSerialized = function ()
@@ -150,8 +150,8 @@ Link.prototype.getSerialized = function ()
 
     obj.portIn = this.portIn.getName();
     obj.portOut = this.portOut.getName();
-    obj.objIn = this.portIn.parent.id;
-    obj.objOut = this.portOut.parent.id;
+    obj.objIn = this.portIn.op.id;
+    obj.objOut = this.portOut.op.id;
 
     return obj;
 };
@@ -174,7 +174,7 @@ Link.canLinkText = function (p1, p2)
         if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN) txt = "(in)";
         return "can not link: same direction " + txt;
     }
-    if (p1.parent == p2.parent) return "can not link: same op";
+    if (p1.op == p2.op) return "can not link: same op";
     if (p1.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC && p2.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC)
     {
         if (p1.type != p2.type) return "can not link: different type";
@@ -238,7 +238,7 @@ Link.canLink = function (p1, p2)
     if (p1.type != p2.type && (p1.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC && p2.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC)) return false;
     if (p1.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC || p2.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
 
-    if (p1.parent == p2.parent) return false;
+    if (p1.op == p2.op) return false;
 
     if (p1.canLink && !p1.canLink(p2)) return false;
     if (p2.canLink && !p2.canLink(p1)) return false;

@@ -577,7 +577,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
 
                 if (reLinkP1 !== null && reLinkP2 !== null)
                 {
-                    this.link(reLinkP1.parent, reLinkP1.getName(), reLinkP2.parent, reLinkP2.getName());
+                    this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                 }
 
                 delete this._opIdCache[opid];
@@ -874,7 +874,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 {
                     const oldName = oldOp.portsIn[j].links[0].portIn.name;
                     const oldOutName = oldOp.portsIn[j].links[0].portOut.name;
-                    const oldOutOp = oldOp.portsIn[j].links[0].portOut.parent;
+                    const oldOutOp = oldOp.portsIn[j].links[0].portOut.op;
                     oldOp.portsIn[j].links[0].remove();
 
                     l = this.link(op, oldName, oldOutOp, oldOutName);
@@ -890,7 +890,7 @@ Patch.prototype.reloadOp = function (objName, cb)
             {
                 const oldNewName = oldOp.portsOut[j].links[0].portOut.name;
                 const oldInName = oldOp.portsOut[j].links[0].portIn.name;
-                const oldInOp = oldOp.portsOut[j].links[0].portIn.parent;
+                const oldInOp = oldOp.portsOut[j].links[0].portIn.op;
                 oldOp.portsOut[j].links[0].remove();
 
                 l = this.link(op, oldNewName, oldInOp, oldInName);
@@ -1342,13 +1342,13 @@ Patch.prototype.printTriggerStack = function ()
         return;
     }
     console.groupCollapsed( // eslint-disable-line
-        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].op.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
     );
 
     const rows = [];
     for (let i = 0; i < this._triggerStack.length; i++)
     {
-        rows.push(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
+        rows.push(i + ". " + this._triggerStack[i].op.name + " " + this._triggerStack[i].name);
     }
 
     console.table(rows); // eslint-disable-line

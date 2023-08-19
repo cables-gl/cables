@@ -1,18 +1,28 @@
 const
-    inText = op.inString("Text", "Hello Div"),
+    inElType = op.inSwitch("Element", ["Input", "Textarea"], "Input"),
+    inType = op.inSwitch("Type", ["Text", "Number", "Password", "Date"], "Text"),
+    inText = op.inString("Default Value", ""),
+    inPlaceHolder = op.inString("Placeholder", "Type here..."),
     inId = op.inString("Id"),
     inClass = op.inString("Class"),
-    inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:100;", "inline-css"),
+    inStyle = op.inStringEditor("Style", "color:#ccc;\nbackground-color:#222;\nborder:none;\npadding:4px;\n", "inline-css"),
+
+    inAutoComplete = op.inBool("Autocomplete", false),
+    inMaxLength = op.inInt("Max Length", 0),
+
     inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
-    inBreaks = op.inValueBool("Convert Line Breaks", false),
-    inPropagation = op.inValueBool("Propagate Click-Events", true),
+
+    inFocus = op.inTriggerButton("Focus"),
+    inBlur = op.inTriggerButton("Blur"),
+    inClear = op.inTriggerButton("Clear"),
+    inSelect = op.inTriggerButton("Select"),
+
     outElement = op.outObject("DOM Element", null, "element"),
-    outHover = op.outBoolNum("Hover"),
-    outClicked = op.outTrigger("Clicked");
+    outString = op.outString("Value"),
+    outHover = op.outBoolNum("Hover");
 
 let listenerElement = null;
-let oldStr = null;
 let prevDisplay = "block";
 let div = null;
 
@@ -20,8 +30,39 @@ const canvas = op.patch.cgl.canvas.parentElement;
 
 createElement();
 
-inClass.onChange = updateClass;
-inBreaks.onChange = inText.onChange = updateText;
+inSelect.onTriggered = () =>
+{
+    div.select();
+};
+
+inClear.onTriggered = () =>
+{
+    div.value = "";
+};
+
+inFocus.onTriggered = () =>
+{
+    div.focus();
+};
+
+inBlur.onTriggered = () =>
+{
+    div.blur();
+};
+
+inElType.onChange = () =>
+{
+    createElement();
+    updateStyle();
+};
+
+inMaxLength.onChange =
+    inType.onChange =
+    inAutoComplete.onChange =
+    inClass.onChange = updateClass;
+
+inPlaceHolder.onChange = inText.onChange = updateText;
+
 inStyle.onChange = updateStyle;
 inInteractive.onChange = updateInteractive;
 inVisible.onChange = updateVisibility;
@@ -37,7 +78,14 @@ outElement.onLinkChanged = updateStyle;
 
 function createElement()
 {
-    div = document.createElement("div");
+    removeElement();
+    div = document.createElement(inElType.get().toLowerCase());
+
+    div.addEventListener("input", () =>
+    {
+        outString.set(div.value);
+    });
+
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 
@@ -51,7 +99,6 @@ function removeElement()
 {
     if (div) removeClasses();
     if (div && div.parentNode) div.parentNode.removeChild(div);
-    oldStr = null;
     div = null;
 }
 
@@ -65,7 +112,6 @@ function setCSSVisible(visible)
     }
     else
     {
-        // prevDisplay=div.style.display||'block';
         if (prevDisplay == "none") prevDisplay = "block";
         div.style.visibility = "visible";
         div.style.display = prevDisplay;
@@ -81,27 +127,22 @@ function updateText()
 {
     let str = inText.get();
 
-    if (oldStr === str) return;
-    oldStr = str;
+    div.setAttribute("placeholder", inPlaceHolder.get());
+    div.value = str;
 
-    if (str && inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, "<br>");
+    outString.set(str);
 
-    if (div.innerHTML != str) div.innerHTML = str;
-    outElement.set(null);
-    outElement.set(div);
+    outElement.setRef(div);
 }
 
-// inline css inisde div
 function updateStyle()
 {
     if (!div) return;
-    // if (inStyle.get() != div.style)
-    // {
+
     div.setAttribute("style", inStyle.get());
     updateVisibility();
     outElement.set(null);
     outElement.set(div);
-    // }
 
     if (!div.parentElement)
     {
@@ -127,6 +168,13 @@ function removeClasses()
 
 function updateClass()
 {
+    div.setAttribute("tabindex", 0);
+    div.setAttribute("maxlength", inMaxLength.get() || null);
+    div.setAttribute("type", inType.get().toLowerCase());
+
+    if (inAutoComplete.get()) div.setAttribute("autocomplete", "on");
+    else div.setAttribute("autocomplete", "off");
+
     const classes = (inClass.get() || "").split(" ");
     const oldClasses = (oldClassesStr || "").split(" ");
 
@@ -165,15 +213,6 @@ function onMouseLeave(e)
     outHover.set(false);
 }
 
-function onMouseClick(e)
-{
-    if (!inPropagation.get())
-    {
-        e.stopPropagation();
-    }
-    outClicked.trigger();
-}
-
 function updateInteractive()
 {
     removeListeners();
@@ -189,7 +228,6 @@ function removeListeners()
 {
     if (listenerElement)
     {
-        listenerElement.removeEventListener("pointerdown", onMouseClick);
         listenerElement.removeEventListener("pointerleave", onMouseLeave);
         listenerElement.removeEventListener("pointerenter", onMouseEnter);
         listenerElement = null;
@@ -204,7 +242,6 @@ function addListeners()
 
     if (listenerElement)
     {
-        listenerElement.addEventListener("pointerdown", onMouseClick);
         listenerElement.addEventListener("pointerleave", onMouseLeave);
         listenerElement.addEventListener("pointerenter", onMouseEnter);
     }
@@ -221,8 +258,6 @@ op.addEventListener("onEnabledChange", function (enabled)
         updateText();
         updateInteractive();
     }
-    // if(enabled) updateVisibility();
-    // else setCSSVisible(false);
 });
 
 function warning()

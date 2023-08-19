@@ -266,8 +266,8 @@ const PatchConnectionSender = function (patch)
     patch.addEventListener("onUnLink", (p1, p2) =>
     {
         this.send(CABLES.PACO_UNLINK, {
-            "op1": p1.parent.id,
-            "op2": p2.parent.id,
+            "op1": p1.op.id,
+            "op2": p2.op.id,
             "port1": p1.getName(),
             "port2": p2.getName()
         });
@@ -307,8 +307,8 @@ const PatchConnectionSender = function (patch)
     patch.addEventListener("onLink", (p1, p2) =>
     {
         this.send(CABLES.PACO_LINK, {
-            "op1": p1.parent.id,
-            "op2": p2.parent.id,
+            "op1": p1.op.id,
+            "op2": p2.op.id,
             "port1": p1.name,
             "port2": p2.name
         });

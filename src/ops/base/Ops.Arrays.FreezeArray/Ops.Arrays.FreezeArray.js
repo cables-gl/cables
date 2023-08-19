@@ -9,27 +9,38 @@ inHidden.onTriggered = update;
 
 inHidden.setUiAttribs({ "hideParam": true, "hidePort": true, "ignoreBigPort": true });
 
+let changed = false;
+
+inArr.onChange = () =>
+{
+    changed = true;
+};
+
 function update()
 {
-    if (inArr.get())
-        inHidden.set(JSON.stringify(inArr.get()));
-    else
-        inHidden.set("");
+    if (changed)
+    {
+        changed = false;
+        if (inArr.get())
+            inHidden.set(JSON.stringify(inArr.get()));
+        else
+            inHidden.set("");
+    }
 }
 
 outArr.onLinkChanged = () =>
 {
     if (inHidden.get())
-        outArr.set(JSON.parse(inHidden.get()));
+        outArr.setRef(JSON.parse(inHidden.get()));
 };
 
 inHidden.onChange = () =>
 {
     inHidden.get();
-    outArr.set(null);
+    // outArr.set(null);
     try
     {
-        outArr.set(JSON.parse(inHidden.get()));
+        outArr.setRef(JSON.parse(inHidden.get()));
     }
     catch (e) {}
 };

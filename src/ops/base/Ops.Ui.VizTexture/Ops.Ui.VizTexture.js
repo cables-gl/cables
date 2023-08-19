@@ -57,12 +57,12 @@ op.renderVizLayer = (ctx, layer) =>
     const texSlotCubemap = texSlot + 1;
 
     const perf = CABLES.UI.uiProfiler.start("previewlayer texture");
-    const cgl = port.parent.patch.cgl;
+    const cgl = port.op.patch.cgl;
 
     if (!layer.useGl) return;
 
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
-    port.parent.patch.cgl.profileData.profileTexPreviews++;
+    port.op.patch.cgl.profileData.profileTexPreviews++;
 
     const portTex = port.get() || CGL.Texture.getEmptyTexture(cgl);
 
@@ -96,11 +96,11 @@ op.renderVizLayer = (ctx, layer) =>
 
     cgl.pushPMatrix();
     const sizeTex = [portTex.width, portTex.height];
-    const small = port.parent.patch.cgl.canvasWidth > sizeTex[0] && port.parent.patch.cgl.canvasHeight > sizeTex[1];
+    const small = port.op.patch.cgl.canvasWidth > sizeTex[0] && port.op.patch.cgl.canvasHeight > sizeTex[1];
 
     if (small)
     {
-        mat4.ortho(cgl.pMatrix, 0, port.parent.patch.cgl.canvasWidth, port.parent.patch.cgl.canvasHeight, 0, 0.001, 11);
+        mat4.ortho(cgl.pMatrix, 0, port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight, 0, 0.001, 11);
     }
     else mat4.ortho(cgl.pMatrix, -1, 1, 1, -1, 0.001, 11);
 
@@ -126,7 +126,7 @@ op.renderVizLayer = (ctx, layer) =>
     this._shaderTimeUniform.setValue(timer.get());
 
     this._shaderTypeUniform.setValue(texType);
-    let s = [port.parent.patch.cgl.canvasWidth, port.parent.patch.cgl.canvasHeight];
+    let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
 
     cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);

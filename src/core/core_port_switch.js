@@ -21,9 +21,9 @@ class SwitchPort extends Port
                     (uiAttribs.values && uiAttribs.values.indexOf(String(s)) === -1)
                 )
                 {
-                    this.parent.setUiError("invalidswitch", "Invalid Value [" + this.name + "]: \"" + s + "\"");
+                    this.op.setUiError("invalidswitch", "Invalid Value [" + this.name + "]: \"" + s + "\"");
                 }
-                else this.parent.setUiError("invalidswitch", null);
+                else this.op.setUiError("invalidswitch", null);
             }
 
             if (s === null || s === undefined)s = "";
@@ -50,7 +50,7 @@ class SwitchPort extends Port
             this.indexPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if (this.parent.patch.isEditorMode() && window.gui && gui.patchView.isCurrentOp(this.parent)) gui.opParams.show(this.parent);
+            if (this.op.patch.isEditorMode() && window.gui && gui.patchView.isCurrentOp(this.op)) gui.opParams.show(this.op);
         };
     }
 

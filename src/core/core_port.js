@@ -13,7 +13,7 @@ import Logger from "./core_logger";
  * @example
  * const myPort=op.inString("String Port");
  */
-const Port = function (__parent, name, type, uiAttribs)
+const Port = function (___op, name, type, uiAttribs)
 {
     EventTarget.apply(this);
 
@@ -28,7 +28,7 @@ const Port = function (__parent, name, type, uiAttribs)
      */
     this.direction = CONSTANTS.PORT.PORT_DIR_IN;
     this.id = String(CABLES.simpleId());
-    this.parent = __parent;
+    this._op = ___op;
 
     /**
      * @type {Array<Link>}
@@ -78,7 +78,23 @@ const Port = function (__parent, name, type, uiAttribs)
         } });
 
 
-    Object.defineProperty(this, "val", {
+        Object.defineProperty(this, "parent", {
+            get()
+            {
+                this._log.stack("use port.op, not .parent");
+                return this._op;
+            } });
+    
+
+
+        Object.defineProperty(this, "op", {
+            get()
+            {
+                return this._op;
+            } });
+    
+    
+        Object.defineProperty(this, "val", {
         get()
         {
             this._log.warn("val getter deprecated!", this);
@@ -91,7 +107,7 @@ const Port = function (__parent, name, type, uiAttribs)
             this._log.warn("val setter deprecated!", this);
             this._log.stack("val setter deprecated");
             this.setValue(v);
-            // if(!this._warnedDeprecated)console.warn('deprecated .val set used',this.parent.name);
+            // if(!this._warnedDeprecated)console.warn('deprecated .val set used',this._op.name);
             this._warnedDeprecated = true;
         }
     });
@@ -179,7 +195,7 @@ Port.prototype.remove = function ()
 {
     // this.setUiAttribs({hidePort:true});
     this.removeLinks();
-    this.parent.removePort(this);
+    this._op.removePort(this);
 };
 
 /**
@@ -213,7 +229,7 @@ Port.prototype.setUiAttribs = function (newAttribs)
         if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
     }
 
-    if (newAttribs.hasOwnProperty("expose")) this.parent.patch.emitEvent("subpatchExpose", this.parent.uiAttribs.subPatch);
+    if (newAttribs.hasOwnProperty("expose")) this._op.patch.emitEvent("subpatchExpose", this._op.uiAttribs.subPatch);
 
     if (changed) this.emitEvent("onUiAttrChange", newAttribs, this);
 };
@@ -259,10 +275,10 @@ Port.prototype.getUiAttrib = function (attribName)
  */
 Port.prototype.get = function ()
 {
-    if (this._animated && this._lastAnimFrame != this.parent.patch.getFrameNum())
+    if (this._animated && this._lastAnimFrame != this._op.patch.getFrameNum())
     {
-        this._lastAnimFrame = this.parent.patch.getFrameNum();
-        this.value = this.anim.getValue(this.parent.patch.timer.getTime());
+        this._lastAnimFrame = this._op.patch.getFrameNum();
+        this.value = this.anim.getValue(this._op.patch.timer.getTime());
 
         this._oldAnimVal = this.value;
         this.forceChange();
@@ -287,13 +303,13 @@ Port.prototype.set = Port.prototype.setValue = function (v)
 {
     if (v === undefined) v = null;
 
-    if (this.parent.enabled && !this.crashed)
+    if (this._op.enabled && !this.crashed)
     {
         if (v !== this.value || this.changeAlways || this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE || this.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY)
         {
             if (this._animated)
             {
-                this.anim.setValue(this.parent.patch.timer.getTime(), v);
+                this.anim.setValue(this._op.patch.timer.getTime(), v);
             }
             else
             {
@@ -310,15 +326,15 @@ Port.prototype.set = Port.prototype.setValue = function (v)
 
                     this._log.error("onvaluechanged exception cought", ex);
                     this._log.error(ex.stack);
-                    this._log.warn("exception in: " + this.parent.name);
+                    this._log.warn("exception in: " + this._op.name);
 
-                    if (this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
+                    if (this._op.patch.isEditorMode()) gui.showOpCrash(this._op);
 
-                    this.parent.patch.emitEvent("exception", ex, this.parent);
-                    if (this.parent.onError) this.parent.onError(ex);
+                    this._op.patch.emitEvent("exception", ex, this._op);
+                    if (this._op.onError) this._op.onError(ex);
                 }
 
-                if (this.parent && this.parent.patch && this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
+                if (this._op && this._op.patch && this._op.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
             }
 
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
@@ -360,7 +376,7 @@ Port.prototype.forceChange = function ()
     {
         // very temporary: deprecated warning!!!!!!!!!
         // var params=Port.args(this.onValueChanged||this.onChange)
-        // if(params.length>0) this._log.warn('TOM: port has onchange params!',this.parent.objName,this.name);
+        // if(params.length>0) this._log.warn('TOM: port has onchange params!',this._op.objName,this.name);
     }
     this._activity();
     this.emitEvent("change", this.value, this);
@@ -399,10 +415,10 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
-        this.parent._hasAnimPort = true;
+        this._op._hasAnimPort = true;
         this.anim.addEventListener("onChange", () =>
         {
-            this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
+            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
         });
         if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
         for (const ani in objPort.anim.keys)
@@ -489,11 +505,11 @@ Port.prototype.removeLink = function (link)
         else this.setValue(this._valueBeforeLink || null);
     }
 
-    if (CABLES.UI && this.parent.checkLinkTimeWarnings) this.parent.checkLinkTimeWarnings();
+    if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
-    this.parent.emitEvent("onLinkChanged");
+    this._op.emitEvent("onLinkChanged");
 };
 
 /**
@@ -511,11 +527,11 @@ Port.prototype.addLink = function (l)
 {
     this._valueBeforeLink = this.value;
     this.links.push(l);
-    if (CABLES.UI && this.parent.checkLinkTimeWarnings) this.parent.checkLinkTimeWarnings();
+    if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
-    this.parent.emitEvent("onLinkChanged");
+    this._op.emitEvent("onLinkChanged");
 };
 
 /**
@@ -544,7 +560,7 @@ Port.prototype.removeLinkTo = function (p2)
         if (this.links[i].portIn == p2 || this.links[i].portOut == p2)
         {
             this.links[i].remove();
-            if (CABLES.UI && this.parent.checkLinkTimeWarnings) this.parent.checkLinkTimeWarnings();
+            if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
 
             if (this.onLinkChanged) this.onLinkChanged();
             this.emitEvent("onLinkChanged");
@@ -584,7 +600,7 @@ Port.prototype.trigger = function ()
 
     this._activity();
     if (linksLength === 0) return;
-    if (!this.parent.enabled) return;
+    if (!this._op.enabled) return;
 
     let portTriggered = null;
     try
@@ -595,28 +611,28 @@ Port.prototype.trigger = function ()
             {
                 portTriggered = this.links[i].portIn;
 
-                portTriggered.parent.patch.pushTriggerStack(portTriggered);
+                portTriggered.op.patch.pushTriggerStack(portTriggered);
                 portTriggered._onTriggered();
 
-                portTriggered.parent.patch.popTriggerStack();
+                portTriggered.op.patch.popTriggerStack();
             }
             if (this.links[i]) this.links[i].activity();
         }
     }
     catch (ex)
     {
-        this.parent.enabled = false;
+        this._op.enabled = false;
 
-        if (this.parent.patch.isEditorMode())
+        if (this._op.patch.isEditorMode())
         {
-            this.parent.patch.emitEvent("exception", ex, portTriggered.parent);
-            this.parent.patch.emitEvent("opcrash", portTriggered);
-            if (portTriggered.parent.onError) portTriggered.parent.onError(ex);
+            this._op.patch.emitEvent("exception", ex, portTriggered.op);
+            this._op.patch.emitEvent("opcrash", portTriggered);
+            if (portTriggered.op.onError) portTriggered.op.onError(ex);
         }
         this._log.warn("exception!");
         this._log.error("ontriggered exception caught", ex);
         this._log.error(ex.stack);
-        this._log.warn("exception in: " + portTriggered.parent.name);
+        this._log.warn("exception in: " + portTriggered.op.name);
     }
 };
 
@@ -636,7 +652,7 @@ Port.prototype.setVariableName = function (n)
     this._useVariableName = n;
 
 
-    this.parent.patch.on("variableRename", (oldname, newname) =>
+    this._op.patch.on("variableRename", (oldname, newname) =>
     {
         if (oldname != this._useVariableName) return;
         this._useVariableName = newname;
@@ -661,7 +677,7 @@ Port.prototype.setVariable = function (v)
 
     if (v)
     {
-        this._variableIn = this.parent.patch.getVar(v);
+        this._variableIn = this._op.patch.getVar(v);
 
         if (!this._variableIn)
         {
@@ -690,15 +706,15 @@ Port.prototype.setVariable = function (v)
     }
 
     this.setUiAttribs(attr);
-    this.parent.patch.emitEvent("portSetVariable", this.parent, this, v);
+    this._op.patch.emitEvent("portSetVariable", this._op, this, v);
 };
 
 Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
 {
     let hasTriggerPort = false;
-    for (let i = 0; i < this.parent.portsIn.length; i++)
+    for (let i = 0; i < this._op.portsIn.length; i++)
     {
-        if (this.parent.portsIn.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        if (this._op.portsIn.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
         {
             hasTriggerPort = true;
             break;
@@ -707,12 +723,12 @@ Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
 
     if (!hasTriggerPort)
     {
-        if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame",
+        if (a) this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame",
             () =>
             {
                 this.updateAnim();
             });
-        else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
+        else this._op.patch.removeEventListener(this._notriggerAnimUpdate);
     }
 };
 
@@ -721,14 +737,14 @@ Port.prototype.setAnimated = function (a)
     if (this._animated != a)
     {
         this._animated = a;
-        this.parent._hasAnimPort = true;
+        this._op._hasAnimPort = true;
 
         if (this._animated && !this.anim)
         {
             this.anim = new Anim({ "name": "port " + this.name });
             this.anim.addEventListener("onChange", () =>
             {
-                this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
+                this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
             });
         }
         this._onAnimToggle();
@@ -751,7 +767,7 @@ Port.prototype.toggleAnim = function ()
         this.anim = new Anim({ "name": "port " + this.name });
         this.anim.addEventListener("onChange", () =>
         {
-            this.parent.patch.emitEvent("portAnimUpdated", this.parent, this, this.anim);
+            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
         });
     }
     this.setAnimated(this._animated);
@@ -828,27 +844,27 @@ Port.prototype.isHidden = function ()
 Port.prototype._onTriggered = function (a)
 {
     this._activity();
-    this.parent.updateAnims();
-    if (this.parent.enabled && this.onTriggered) this.onTriggered(a);
+    this._op.updateAnims();
+    if (this._op.enabled && this.onTriggered) this.onTriggered(a);
 };
 
 Port.prototype._onSetProfiling = function (v)
 {
-    this.parent.patch.profiler.add("port", this);
+    this._op.patch.profiler.add("port", this);
     this.setValue(v);
-    // if (this.parent.enabled && this.onTriggered) this.onTriggered();
-    this.parent.patch.profiler.add("port", null);
+    // if (this._op.enabled && this.onTriggered) this.onTriggered();
+    this._op.patch.profiler.add("port", null);
 };
 
 Port.prototype._onTriggeredProfiling = function ()
 {
-    // this.parent.updateAnims();
+    // this._op.updateAnims();
 
-    if (this.parent.enabled && this.onTriggered)
+    if (this._op.enabled && this.onTriggered)
     {
-        this.parent.patch.profiler.add("port", this);
+        this._op.patch.profiler.add("port", this);
         this.onTriggered();
-        this.parent.patch.profiler.add("port", null);
+        this._op.patch.profiler.add("port", null);
     }
 };
 

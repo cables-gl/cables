@@ -14,5 +14,24 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1692282588865
+    "created": 1692282588865,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object 1"
+            },
+            {
+                "type": 2,
+                "name": "Object 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Object Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectMerge"
+    }
 }

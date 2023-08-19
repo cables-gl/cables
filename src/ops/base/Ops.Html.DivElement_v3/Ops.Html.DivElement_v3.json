@@ -50,7 +50,7 @@
             {
                 "type": 0,
                 "name": "Hover",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -61,7 +61,6 @@
     },
     "summary": "Create a html DIV element",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

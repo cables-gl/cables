@@ -3,7 +3,7 @@ const
     inActive = op.inBool("Active", true),
     inWhat = op.inSwitch("Force", ["Resolution", "Aspect Ratio"], "Resolution"),
     inCenter = op.inBool("Center In Parent", true),
-    inScaleFit = op.inBool("Scale to fit Parent", false),
+    inScaleFit = op.inBool("Scale to fit Parent", true),
     inWidth = op.inInt("Set Width", 300),
     inHeight = op.inInt("Set Height", 200),
     inPresets = op.inDropDown("Aspect Ratio", ["Custom", "21:9", "2:1", "16:9", "16:10", "4:3", "1:1", "9:16", "1:2", "iPhoneXr Vert"], "16:9"),
@@ -34,11 +34,11 @@ inPresets.onChange = updateRatioPreset;
 
 const cgl = op.patch.cgl;
 
-if (window.getComputedStyle(cgl.canvas).position === "absolute")
-{
-    cgl.canvas.style.position = "initial";
-    op.warn("[cables forceCanvasSize] - canvas was positioned absolute, not compatible with Ops.Gl.ForceCanvasSize");
-}
+// if (window.getComputedStyle(cgl.canvas).position === "absolute")
+// {
+//     cgl.canvas.style.position = "initial";
+//     op.warn("[cables forceCanvasSize] - canvas was positioned absolute, not compatible with Ops.Gl.ForceCanvasSize");
+// }
 
 updateUi();
 
@@ -66,6 +66,11 @@ function updateRatioPreset()
     else if (pr == "1:2")inRatio.set(0.5);
     else if (pr == "iPhoneXr Vert")inRatio.set(9 / 19.5);
 }
+
+op.on("delete", () =>
+{
+    removeStyles();
+});
 
 inRatio.onChange = () =>
 {
@@ -108,7 +113,14 @@ function removeStyles()
     outMarginTop.set(0);
 
     const rect = cgl.canvas.parentNode.getBoundingClientRect();
+
     cgl.setSize(rect.width, rect.height);
+
+    cgl.canvas.style.transform = "scale(1)";
+
+    cgl.canvas.style.position = "absolute";
+
+    cgl.updateSize();
 }
 
 inTrigger.onTriggered = function ()

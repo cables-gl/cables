@@ -222,7 +222,7 @@ const Op = function ()
     Op.prototype.addOutPort = function (p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
-        p.parent = this;
+        p._op = this;
         this.portsOut.push(p);
         this.emitEvent("onPortAdd", p);
         return p;
@@ -257,7 +257,7 @@ const Op = function ()
             throw new Error("parameter is not a port!");
 
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
-        p.parent = this;
+        p._op = this;
 
         this.portsIn.push(p);
         this.emitEvent("onPortAdd", p);
