@@ -139,28 +139,36 @@ Port.prototype.copyLinkedUiAttrib = function (which, port)
     port.setUiAttribs(attr);
 };
 
+
+// TODO make extend class for ports, like for ops only for ui
 Port.prototype.getValueForDisplay = function ()
 {
-    let str = String(this.value);
-
-    if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
+    let str = this.value;
+    
+    if (typeof this.value === 'string' || this.value instanceof String)
     {
-        str += " - ";
-
-        if (!this.value) str += "false";
-        else str += "true";
+        if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
+        {
+            str += " - ";
+    
+            if (!this.value) str += "false";
+            else str += "true";
+        }
+    
+        // str = str.replace(/(<([^>]+)>)/ig, "");
+    
+        str = str.replace(/[\u00A0-\u9999<>\&]/g, function (i)
+        {
+            return "&#" + i.charCodeAt(0) + ";";
+        });
+    
+    
+        if (str.length > 100) str = str.substring(0, 100);
     }
-
-    // str = str.replace(/(<([^>]+)>)/ig, "");
-
-    str = str.replace(/[\u00A0-\u9999<>\&]/g, function (i)
+    else
     {
-        return "&#" + i.charCodeAt(0) + ";";
-    });
-
-
-    if (str.length > 100) str = str.substring(0, 100);
-
+        str=this.value;
+    }
     return str;
 };
 
