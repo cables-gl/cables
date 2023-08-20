@@ -155,12 +155,12 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                     paramStr = this._getPortParamStr(otherPort, p.uiAttribs.objType);
 
                     // console.log("objtype", p.uiAttribs.objType);
-                    this.addOpShaderFuncCode(otherPort.parent);
+                    this.addOpShaderFuncCode(otherPort.op);
                 }
             }
             else
             {
-                this.addOpShaderFuncCode(p.parent);
+                this.addOpShaderFuncCode(p.op);
                 // if (p.uiAttribs.objType == "sg_sampler2D")
                 // {
                 //     // callstr = "vec4(1.0)";
@@ -174,10 +174,10 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                 // }
             }
 
-            if (p.parent.shaderCodeOperator)
+            if (p.op.shaderCodeOperator)
             {
                 callstr += paramStr;
-                if (count < numObjectPorts - 1) callstr += " " + p.parent.shaderCodeOperator + " ";
+                if (count < numObjectPorts - 1) callstr += " " + p.op.shaderCodeOperator + " ";
             }
             else
             if (paramStr)
@@ -209,14 +209,14 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
     {
         let paramStr = "";
 
-        if (p.parent.shaderVar)
+        if (p.op.shaderVar)
         {
-            paramStr = p.parent.shaderVar;
+            paramStr = p.op.shaderVar;
         }
         else
         if (p.direction == CABLES.PORT_DIR_OUT)
         {
-            paramStr += this.callFunc(p.parent, p.uiAttribs.objType);
+            paramStr += this.callFunc(p.op, p.uiAttribs.objType);
         }
 
         if (convertTo && convertTo != p.uiAttribs.objType)
@@ -244,7 +244,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
         for (let i = 0; i < l.length; i++)
         {
             const lnk = l[i];
-            callSrc += this.callFunc(lnk.getOtherPort(port).parent) + ";".endl();
+            callSrc += this.callFunc(lnk.getOtherPort(port).op) + ";".endl();
         }
 
         callSrc = this._callFuncStack.join("\n");
