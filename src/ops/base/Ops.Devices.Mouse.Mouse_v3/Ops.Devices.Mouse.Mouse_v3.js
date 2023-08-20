@@ -93,18 +93,14 @@ function setValue(x, y)
 
 function checkHovering(e)
 {
-    if (area.get() === "Canvas Area")
-    {
-        const r = sizeElement.getBoundingClientRect();
+    const r = sizeElement.getBoundingClientRect();
 
-        return (
-            e.clientX > r.left &&
-            e.clientX < r.left + r.width &&
-            e.clientY > r.top &&
-            e.clientY < r.top + r.height
-        );
-    }
-    return true;
+    return (
+        e.clientX > r.left &&
+        e.clientX < r.left + r.width &&
+        e.clientY > r.top &&
+        e.clientY < r.top + r.height
+    );
 }
 
 touchscreen.onChange = function ()

@@ -118,6 +118,8 @@ function removeStyles()
 
     cgl.canvas.style.transform = "scale(1)";
 
+    cgl.canvas.style.position = "absolute";
+
     cgl.updateSize();
 }
 
