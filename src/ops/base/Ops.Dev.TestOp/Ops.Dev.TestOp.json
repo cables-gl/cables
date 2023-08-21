@@ -59,5 +59,11 @@
     ],
     "coreLibs": [
         "cgl_wireframes"
-    ]
+    ],
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "aXRDhE",
+    "docs": {
+        "ports": []
+    }
 }

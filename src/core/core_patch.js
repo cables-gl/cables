@@ -425,8 +425,8 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
             this._log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
-            this.exitError("INSTANCE_ERR", "Instancing Error " + objName, e);
-            throw new Error("instancing error " + objName);
+            this.exitError("INSTANCE_ERR", "Instancing Error 1"  + objName, e);
+            throw new Error("instancing error 1" + objName);
         }
     }
 
@@ -977,8 +977,8 @@ Patch.prototype.deSerialize = function (obj, options)
         }
         catch (e)
         {
-            this._log.warn("[instancing error] op data:", opData, e);
-            throw new Error("instancing error: " + opData.objName);
+            console.log("[instancing error] op data:", opData, e);
+            throw new Error("could not create op by id: <b>" + (opData.objName||opData.opId)+"</b> ("+opData.id+")");
         }
 
         if (op)
