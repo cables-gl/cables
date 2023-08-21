@@ -50,5 +50,13 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "LQQEy7"
+    "exampleProjectId": "LQQEy7",
+    "changelog": [
+        {
+            "message": "Ops.Html.TextArea renamed to Ops.Deprecated.Html.TextArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692633542559
+        }
+    ]
 }
