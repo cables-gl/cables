@@ -21,7 +21,17 @@ function initializeSubpatch()
         p.ops[i].uiAttribs.blueprintSubpatch2 = true;
     }
 
-    op.patch.deSerialize(p);
+    if (window.gui)
+    {
+        gui.serverOps.loadProjectDependencies(p, () =>
+        {
+            op.patch.deSerialize(p);
+        });
+    }
+    else
+    {
+        op.patch.deSerialize(p);
+    }
 
     op.patch.emitEvent("subpatchExpose", patchId);
     bp2init();
