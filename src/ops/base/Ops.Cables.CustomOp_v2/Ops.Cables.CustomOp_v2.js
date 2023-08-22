@@ -200,7 +200,7 @@ const execute = () =>
                     port.links.forEach((link) =>
                     {
                         const linkInfo = {
-                            "op": link.portOut.parent,
+                            "op": link.portOut.op,
                             "portName": link.portOut.name
                         };
                         oldLinksIn[port.name].push(linkInfo);
@@ -214,7 +214,7 @@ const execute = () =>
                 port.links.forEach((link) =>
                 {
                     const linkInfo = {
-                        "op": link.portIn.parent,
+                        "op": link.portIn.op,
                         "portName": link.portIn.name
                     };
                     oldLinksOut[port.name].push(linkInfo);
@@ -348,7 +348,7 @@ function savePortData()
             port.links.forEach((link) =>
             {
                 const linkData = {
-                    "objOut": link.portOut.parent.id,
+                    "objOut": link.portOut.op.id,
                     "portOut": link.portOut.name
                 };
                 portData.links.push(linkData);
@@ -374,7 +374,7 @@ function savePortData()
             port.links.forEach((link) =>
             {
                 const linkData = {
-                    "objIn": link.portIn.parent.id,
+                    "objIn": link.portIn.op.id,
                     "portIn": link.portIn.name
                 };
                 portData.links.push(linkData);
