@@ -21,19 +21,8 @@ function initializeSubpatch()
         p.ops[i].uiAttribs.blueprintSubpatch2 = true;
     }
 
-    if (window.gui)
-    {
-        gui.serverOps.loadProjectDependencies(p, () =>
-        {
-            op.patch.deSerialize(p);
-            finish();
-        });
-    }
-    else
-    {
-        op.patch.deSerialize(p);
-        finish();
-    }
+    op.patch.deSerialize(p);
+    finish();
 }
 
 function finish()
