@@ -26,13 +26,18 @@ function initializeSubpatch()
         gui.serverOps.loadProjectDependencies(p, () =>
         {
             op.patch.deSerialize(p);
+            finish();
         });
     }
     else
     {
         op.patch.deSerialize(p);
+        finish();
     }
+}
 
+function finish()
+{
     op.patch.emitEvent("subpatchExpose", patchId);
     bp2init();
 }
