@@ -277,17 +277,17 @@ function deSerializeBlueprint(data, ignoreLinks = false)
         {
             if (!replacedOp.uiAttribs) replacedOp.uiAttribs = {};
             replacedOp.uiAttribs.blueprintOpId = op.id;
-            if (replacedOp.storage && replacedOp.storage.blueprintVer)
-            {
-                replacedOp.uiAttribs.pasted = true;
-            }
+            
+            if (replacedOp.storage && replacedOp.storage.blueprintVer) replacedOp.uiAttribs.pasted = true;
         });
+
         const parentSubPatch = patchData.ops.find((op) =>
         {
             let isParent = false;
             if (op.storage && op.storage.blueprint && op.storage.blueprint.isParentSubPatch) isParent = true;
             return isParent;
         });
+
         let blueprintSubpatch = null;
 
         if (parentSubPatch)
@@ -321,6 +321,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
                     op.setUiAttrib({ "extendTitle": pSubPatch.uiAttribs.title });
                     gui.corePatch().emitEvent("subpatchesChanged");
                 }
+
                 setupPorts(parentSubPatchId, ignoreLinks);
                 CABLES.UI.undo.resume();
                 if (originalSaveState === true)
