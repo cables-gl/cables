@@ -620,7 +620,7 @@ function savePortData()
             {
                 link.ignoreInSerialize = true;
                 const linkData = {
-                    "objOut": link.portOut.parent.id,
+                    "objOut": link.portOut.op.id,
                     "portOut": link.portOut.name
                 };
                 portData.links.push(linkData);
@@ -656,7 +656,7 @@ function savePortData()
             {
                 link.ignoreInSerialize = true;
                 const linkData = {
-                    "objIn": link.portIn.parent.id,
+                    "objIn": link.portIn.op.id,
                     "portIn": link.portIn.name
                 };
                 portData.links.push(linkData);

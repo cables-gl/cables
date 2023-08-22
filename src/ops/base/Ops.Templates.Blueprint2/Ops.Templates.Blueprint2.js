@@ -17,7 +17,7 @@ function initializeSubpatch()
 
     for (let i = 0; i < p.ops.length; i++)
     {
-        p.ops[i].uiAttribs.subPatch = patchId;
+        // p.ops[i].uiAttribs.subPatch = patchId;
         p.ops[i].uiAttribs.blueprintSubpatch2 = true;
     }
 
