@@ -451,7 +451,7 @@ function updateMaterials()
     {
         for (let j = 0; j < inMaterials.links.length; j++)
         {
-            const op = inMaterials.links[j].portOut.parent;
+            const op = inMaterials.links[j].portOut.op;
             const portShader = op.getPort("Shader");
             const portName = op.getPort("Material Name");
 
