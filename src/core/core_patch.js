@@ -1383,6 +1383,7 @@ Patch.replaceOpIds = function (json, options)
                     {
                         if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
                         {
+                            console.log("replaceOpIds remove link");
                             links.splice(l, 1);
                         }
                     }
