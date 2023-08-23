@@ -13,7 +13,6 @@ const SubPatchOp = class
 
         op.setUiAttribs({ "subPatchOp": { "version": 2 } });
 
-
         if (op.uiAttribs.parentOfSubpatch)
         {
             op.patchId.set(op.uiAttribs.parentOfSubpatch);
