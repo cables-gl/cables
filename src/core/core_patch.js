@@ -1368,20 +1368,23 @@ Patch.replaceOpIds = function (json, options)
     }
 
 
-    for (const j in json.ops)
+    if (!options.doNotUnlinkLostLinks)
     {
-        for (const k in json.ops[j].portsOut)
+        for (const j in json.ops)
         {
-            const links = json.ops[j].portsOut[k].links;
-            if (links)
+            for (const k in json.ops[j].portsOut)
             {
-                let l = links.length;
-
-                while (l--)
+                const links = json.ops[j].portsOut[k].links;
+                if (links)
                 {
-                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                    let l = links.length;
+
+                    while (l--)
                     {
-                        links.splice(l, 1);
+                        if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                        {
+                            links.splice(l, 1);
+                        }
                     }
                 }
             }
