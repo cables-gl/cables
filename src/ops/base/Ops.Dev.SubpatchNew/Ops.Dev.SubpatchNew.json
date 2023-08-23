@@ -17,6 +17,18 @@
             "type": "",
             "author": "pandur",
             "date": 1677162450837
+        },
+        {
+            "message": "Ops.Dev.SubpatchNew renamed to Ops.Team.GrozBeckert.EmployeeBubbles",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692693954869
+        },
+        {
+            "message": "Ops.Team.GrozBeckert.EmployeeBubbles renamed to Ops.Dev.SubpatchNew",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692694149694
         }
     ],
     "authorName": "pandur",

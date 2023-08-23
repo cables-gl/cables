@@ -87,7 +87,7 @@ const Patch = function (cfg)
     this.deSerialized = false;
     this._lastReqAnimTimeStamp = 0;
 
-    if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
+    if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
     this._isLocal = document.location.href.indexOf("file:") === 0;
 
@@ -366,7 +366,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 if (opName)
                 {
                     identifier = opName;
-                    this._log.warn("could not find op by id: " + opId);
+                    console.log("could not find op by id: " + opId);
                 }
                 else
                 {
@@ -400,7 +400,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
                 else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
                 else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-                else this._log.warn("parts.length", parts.length);
+                else console.log("parts.length", parts.length);
             }
 
             if (op)
@@ -475,7 +475,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         if (this._opIdCache[op.id])
         {
-            this._log.warn("opid with id " + op.id + " already exists in patch!");
+            console.log("opid with id " + op.id + " already exists in patch!");
             // op.id += "_double";
             return;
         }
@@ -564,7 +564,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 if (this.onDelete)
                 {
                     // todo: remove
-                    this._log.warn("deprecated this.onDelete", this.onDelete);
+                    console.log("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
 
@@ -586,7 +586,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found) this._log.warn("core patch deleteop: not found...", opid);
+    if (!found) console.log("core patch deleteop: not found...", opid);
 };
 
 Patch.prototype.getFrameNum = function ()
@@ -708,12 +708,12 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 {
     if (!op1)
     {
-        this._log.warn("link: op1 is null ");
+        console.log("link: op1 is null ");
         return;
     }
     if (!op2)
     {
-        this._log.warn("link: op2 is null");
+        console.log("link: op2 is null");
         return;
     }
 
@@ -722,13 +722,13 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port1)
     {
-        this._log.warn("port not found! " + port1Name + "(" + op1.objName + ")");
+        console.log("port not found! " + port1Name + "(" + op1.objName + ")");
         return;
     }
 
     if (!port2)
     {
-        this._log.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
+        console.log("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
         return;
     }
 
@@ -878,7 +878,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                     oldOp.portsIn[j].links[0].remove();
 
                     l = this.link(op, oldName, oldOutOp, oldOutName);
-                    if (!l) this._log.warn("[reloadOp] relink after op reload not successfull for port " + oldOutName);
+                    if (!l) console.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
                     else l.setValue();
                 }
             }
@@ -894,7 +894,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 oldOp.portsOut[j].links[0].remove();
 
                 l = this.link(op, oldNewName, oldInOp, oldInName);
-                if (!l) this._log.warn("relink after op reload not successfull for port " + oldInName);
+                if (!l) console.log("relink after op reload not successfull for port " + oldInName);
                 else l.setValue();
             }
         }
@@ -1012,7 +1012,7 @@ Patch.prototype.deSerialize = function (obj, options)
         }
 
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        if (!this.silent && timeused > 5) this._log.warn("long op init ", obj.ops[iop].objName, timeused);
+        if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused);
     }
     if (window.logStartup)logStartup("add ops done");
 
@@ -1046,7 +1046,9 @@ Patch.prototype.deSerialize = function (obj, options)
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
                                 // const startTime = performance.now();
-                                this._addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+                                this._addLink(
+                                    obj.ops[iop].portsIn[ipi2].links[ili].objIn, 
+                                    obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
                                 // const took = performance.now() - startTime;
                                 // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
@@ -1149,7 +1151,7 @@ Patch.prototype.setVariable = function (name, val)
     }
     else
     {
-        this._log.warn("variable " + name + " not found!");
+        console.log("variable " + name + " not found!");
     }
 };
 
