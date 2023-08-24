@@ -823,7 +823,7 @@ Shader.prototype.bind = function ()
     if (!this._projMatrixUniform && !this.ignoreMissingUniforms)
     {
         this._countMissingUniforms++;
-        if (this._countMissingUniforms == 10)console.log("stopping getlocation of missing uniforms...", this._name);
+        // if (this._countMissingUniforms == 10)console.log("stopping getlocation of missing uniforms...", this._name);
         if (this._countMissingUniforms < 10)
         {
             this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);

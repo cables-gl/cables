@@ -78,23 +78,23 @@ const Port = function (___op, name, type, uiAttribs)
         } });
 
 
-        Object.defineProperty(this, "parent", {
-            get()
-            {
-                this._log.stack("use port.op, not .parent");
-                return this._op;
-            } });
-    
+    Object.defineProperty(this, "parent", {
+        get()
+        {
+            this._log.stack("use port.op, not .parent");
+            return this._op;
+        } });
 
 
-        Object.defineProperty(this, "op", {
-            get()
-            {
-                return this._op;
-            } });
-    
-    
-        Object.defineProperty(this, "val", {
+
+    Object.defineProperty(this, "op", {
+        get()
+        {
+            return this._op;
+        } });
+
+
+    Object.defineProperty(this, "val", {
         get()
         {
             this._log.warn("val getter deprecated!", this);
@@ -144,30 +144,30 @@ Port.prototype.copyLinkedUiAttrib = function (which, port)
 Port.prototype.getValueForDisplay = function ()
 {
     let str = this.value;
-    
-    if (typeof this.value === 'string' || this.value instanceof String)
+
+    if (typeof this.value === "string" || this.value instanceof String)
     {
         if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
         {
             str += " - ";
-    
+
             if (!this.value) str += "false";
             else str += "true";
         }
-    
+
         // str = str.replace(/(<([^>]+)>)/ig, "");
-    
+
         str = str.replace(/[\u00A0-\u9999<>\&]/g, function (i)
         {
             return "&#" + i.charCodeAt(0) + ";";
         });
-    
-    
+
+
         if (str.length > 100) str = str.substring(0, 100);
     }
     else
     {
-        str=this.value;
+        str = this.value;
     }
     return str;
 };
@@ -461,6 +461,23 @@ Port.prototype.getSerialized = function ()
         for (const i in this.links)
         {
             if (!this.links[i].ignoreInSerialize && (this.links[i].portIn && this.links[i].portOut)) obj.links.push(this.links[i].getSerialized());
+        }
+    }
+
+    if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
+    {
+        const serLinks = [];
+
+        for (const i in this.links)
+        {
+            if (!this.links[i].portIn || !this.links[i].portOut) continue;
+
+            const otherp = this.links[i].getOtherPort(this);
+            if (otherp.op.isInBlueprint2())
+            {
+                obj.links = obj.links || [];
+                obj.links.push(this.links[i].getSerialized());
+            }
         }
     }
 

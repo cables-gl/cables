@@ -425,7 +425,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
             this._log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
-            this.exitError("INSTANCE_ERR", "Instancing Error 1"  + objName, e);
+            this.exitError("INSTANCE_ERR", "Instancing Error 1" + objName, e);
             throw new Error("instancing error 1" + objName);
         }
     }
@@ -978,7 +978,7 @@ Patch.prototype.deSerialize = function (obj, options)
         catch (e)
         {
             console.log("[instancing error] op data:", opData, e);
-            throw new Error("could not create op by id: <b>" + (opData.objName||opData.opId)+"</b> ("+opData.id+")");
+            throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
         }
 
         if (op)
@@ -1047,8 +1047,10 @@ Patch.prototype.deSerialize = function (obj, options)
                             {
                                 // const startTime = performance.now();
                                 this._addLink(
-                                    obj.ops[iop].portsIn[ipi2].links[ili].objIn, 
-                                    obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+                                    obj.ops[iop].portsIn[ipi2].links[ili].objIn,
+                                    obj.ops[iop].portsIn[ipi2].links[ili].objOut,
+                                    obj.ops[iop].portsIn[ipi2].links[ili].portIn,
+                                    obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
                                 // const took = performance.now() - startTime;
                                 // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
@@ -1366,20 +1368,24 @@ Patch.replaceOpIds = function (json, options)
     }
 
 
-    for (const j in json.ops)
+    if (!options.doNotUnlinkLostLinks)
     {
-        for (const k in json.ops[j].portsOut)
+        for (const j in json.ops)
         {
-            const links = json.ops[j].portsOut[k].links;
-            if (links)
+            for (const k in json.ops[j].portsOut)
             {
-                let l = links.length;
-
-                while (l--)
+                const links = json.ops[j].portsOut[k].links;
+                if (links)
                 {
-                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                    let l = links.length;
+
+                    while (l--)
                     {
-                        links.splice(l, 1);
+                        if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                        {
+                            console.log("replaceOpIds remove link");
+                            links.splice(l, 1);
+                        }
                     }
                 }
             }
