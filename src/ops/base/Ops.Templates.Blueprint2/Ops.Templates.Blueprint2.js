@@ -14,6 +14,39 @@ function initializeSubpatch()
         p.ops[i].uiAttribs.blueprintSubpatch2 = true;
     }
 
+    if (CABLES.UI)
+    {
+        let allLoaded = true;
+        for (let i = 0; i < p.ops.length; i++)
+        {
+            const op = p.ops[i];
+            if (!gui.serverOps.isLoaded(op))
+            {
+                allLoaded = false;
+                break;
+            }
+        }
+
+        if (allLoaded)
+        {
+            finish(p);
+        }
+        else
+        {
+            gui.serverOps.loadProjectDependencies(p, () =>
+            {
+                finish(p);
+            });
+        }
+    }
+    else
+    {
+        finish(p);
+    }
+}
+
+function finish(p)
+{
     op.patch.deSerialize(p);
     op.patch.emitEvent("subpatchExpose", patchId);
     op.setStorage({ "blueprintVer": 2 });
