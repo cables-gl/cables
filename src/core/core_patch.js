@@ -1442,9 +1442,13 @@ Patch.replaceOpIds = function (json, options)
                                 else
                                 {
                                     const outerOp = gui.patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
-                                    op.storage.ref = op.storage.ref || CABLES.uuid();
-                                    links[l].refOp = op.storage.ref;
-                                    links[l].subOpRef = outerOp.storage.ref;
+                                    if (outerOp)
+                                    {
+                                        op.storage = op.storage || {};
+                                        op.storage.ref = op.storage.ref || CABLES.uuid();
+                                        links[l].refOp = op.storage.ref;
+                                        links[l].subOpRef = outerOp.storage.ref;
+                                    }
                                 }
                             }
                         }
