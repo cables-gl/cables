@@ -86,7 +86,7 @@ Secondly you can group ops together that share a common theme, implement the sam
 ## Extension Ops - `Ops.Extension.`
 
 Extensions are a way to add code to cables and make it available to ALL users of [cables.gl](https://cables.gl). They can be understood as packages of ops that are mature and stable. 
-If you feel your ops fall into this categoy [contact us on Discord](https://discord.gg/AGTarWv) and we will provide you with an appropriate namespace.
+If you feel your ops fall into this categoy [contact us on Discord](https://discord.gg/cablesgl) and we will provide you with an appropriate namespace.
 
 Extensions are bound to [teams](../2_teams/teams) and responsibility of the code, it's quality and stability is entirely on the owner and the members of the
 team. So before applying for an extension namespace, create a team, make it public, and [move](../../5_writing_ops/dev_renaming) your ops to the teams namespace.

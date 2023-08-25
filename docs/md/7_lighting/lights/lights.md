@@ -1,6 +1,6 @@
 # Lights
 
-In this section of the documentation, we will explore how the system works and how to use it efficiently. We will also look into common problems that can occur with adding shadows to a scene. Please keep in mind that the operators are subject to change in the future. We will try to keep the documentation as up to date as possible but if you find outdated parts or explanations that don't hold true anymore, do not hesitate to [contact us on Discord](https://discord.gg/AGTarWv).
+In this section of the documentation, we will explore how the system works and how to use it efficiently. We will also look into common problems that can occur with adding shadows to a scene. Please keep in mind that the operators are subject to change in the future. We will try to keep the documentation as up to date as possible but if you find outdated parts or explanations that don't hold true anymore, do not hesitate to [contact us on Discord](https://discord.gg/cablesgl).
 
 ## Introduction
 

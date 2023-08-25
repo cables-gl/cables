@@ -564,6 +564,6 @@ Have a look at this [example](https://cables.gl/edit/NPCCdA). Disconnect the Fre
 
 If you want to port [shadertoy](https://www.shadertoy.com) shaders to cables, have a look at [this section of our documentation](https://cables.gl/docs/faq/shadertoy/shadertoy).
 
-If you still need help, feel free to [contact us on Discord](https://discord.gg/AGTarWv). We are happy to help!
+If you still need help, feel free to [contact us on Discord](https://discord.gg/cablesgl). We are happy to help!
 
 Happy shader coding!

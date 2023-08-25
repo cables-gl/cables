@@ -9,7 +9,7 @@ that the free version of cables.gl will be abolutely usable at all times.
 
 ### Is there a way to support cables development somehow?
 
-First of all: spread the word. Use it! Give feedback! Join our [Discord](https://discordapp.com/invite/AGTarWv) and [Github Discussions](https://github.com/cables-gl/cables_docs/discussions)!
+First of all: spread the word. Use it! Give feedback! Join our [Discord](https://discord.gg/cablesgl) and [Github Discussions](https://github.com/cables-gl/cables_docs/discussions)!
 
 If you are looking for more options, [this FAQ](../../features/support/support) might help you.
 
