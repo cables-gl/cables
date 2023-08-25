@@ -1368,24 +1368,20 @@ Patch.replaceOpIds = function (json, options)
     }
 
 
-    if (!options.doNotUnlinkLostLinks)
+    for (const j in json.ops)
     {
-        for (const j in json.ops)
+        for (const k in json.ops[j].portsOut)
         {
-            for (const k in json.ops[j].portsOut)
+            const links = json.ops[j].portsOut[k].links;
+            if (links)
             {
-                const links = json.ops[j].portsOut[k].links;
-                if (links)
-                {
-                    let l = links.length;
+                let l = links.length;
 
-                    while (l--)
+                while (l--)
+                {
+                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
                     {
-                        if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
-                        {
-                            console.log("replaceOpIds remove link");
-                            links.splice(l, 1);
-                        }
+                        links.splice(l, 1);
                     }
                 }
             }
