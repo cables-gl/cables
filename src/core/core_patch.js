@@ -1072,30 +1072,15 @@ Patch.prototype.deSerialize = function (obj, options)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsOut[ipi2].links.length; ili++)
                         {
-                            // let found = false;
                             if (obj.ops[iop].portsOut[ipi2].links[ili])
                             {
-                                // if (obj.ops[iop].portsIn[ipi2].links[ili])
-                                // {
-                                // const startTime = performance.now();
-
                                 console.log(1, obj.ops[iop].portsOut[ipi2].links[ili]);
                                 if (obj.ops[iop].portsOut[ipi2].links[ili].subOpRef)
                                 {
                                     // lost link
-
-                                    console.log("deser lost link!");
-
                                     const outOp = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
-
-
-                                    // if(!subop)console.log("no sub op ?!");
-                                    // this.getSubPatchOuterOp());
-
                                     let dstOp = null;
                                     let theSubPatch = 0;
-
-                                    console.log(obj.ops[iop].portsOut[ipi2].links[ili].subOpRef);
 
                                     for (let i = 0; i < this.ops.length; i++)
                                     {
@@ -1106,13 +1091,10 @@ Patch.prototype.deSerialize = function (obj, options)
 
                                         )
                                         {
-                                            console.log("found subopref!");
                                             theSubPatch = this.ops[i].patchId.get();
                                             break;
                                         }
                                     }
-
-
 
                                     for (let i = 0; i < this.ops.length; i++)
                                     {
@@ -1126,10 +1108,7 @@ Patch.prototype.deSerialize = function (obj, options)
                                         }
                                     }
 
-                                    console.log(dstOp, theSubPatch);
-
-                                    if (!dstOp)
-                                        console.warn("could not find op for lost link");
+                                    if (!dstOp) this._log.warn("could not find op for lost link");
                                     else
                                         this._addLink(
                                             dstOp.id,
@@ -1139,9 +1118,9 @@ Patch.prototype.deSerialize = function (obj, options)
                                             obj.ops[iop].portsOut[ipi2].links[ili].portOut);
                                 }
                                 else
-
-                                // found = true;
+                                {
                                     this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                }
                             }
                         }
                     }
@@ -1184,7 +1163,6 @@ Patch.prototype.deSerialize = function (obj, options)
         delete this.ops[i].uiAttribs.pasted;
     }
 
-
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
     if (window.logStartup)logStartup("calling onPatchLoaded/patchLoadEnd");
@@ -1192,9 +1170,7 @@ Patch.prototype.deSerialize = function (obj, options)
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
     this.deSerialized = true;
-
     this.emitEvent("patchLoadEnd", newOps, obj, options.genIds);
-    // if (this.onLoadEnd) this.onLoadEnd();
 };
 
 Patch.prototype.profile = function (enable)
@@ -1454,34 +1430,21 @@ Patch.replaceOpIds = function (json, options)
                     {
                         if (!options.doNotUnlinkLostLinks)
                         {
-                            console.log("delete link...");
                             links.splice(l, 1);
                         }
                         else
                         {
                             if (options.fixLostLinks)
                             {
-                                console.log("lost link...?", links[l]);
-
+                                // console.log("lost link...?", links[l]);
                                 const op = gui.corePatch().getOpById(links[l].objIn);
-
-                                if (!op)
-                                {
-                                    console.log("op not found!");
-                                }
+                                if (!op) console.log("op not found!");
                                 else
                                 {
                                     const outerOp = gui.patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
-                                    console.log("op.uiAttr.subPatch", op.uiAttribs.subPatch, outerOp);
                                     op.storage.ref = op.storage.ref || CABLES.uuid();
                                     links[l].refOp = op.storage.ref;
                                     links[l].subOpRef = outerOp.storage.ref;
-                                    // if (outerOp.uiAttribs.subPatch != gui.corePatch().getOpById(links[l].objOut).uiAttr.subPatch)
-                                    // {
-                                    //     console.log("impossible link?!");
-                                    // }
-
-                                    console.log(links[l]);
                                 }
                             }
                         }
@@ -1623,7 +1586,6 @@ Patch.replaceOpIds = function (json, options)
         }
     }
 
-    console.log(json);
     return json;
 };
 
