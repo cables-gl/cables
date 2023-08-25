@@ -6,7 +6,7 @@ The easiest way to contribute this to cables - for now - is to [write your user-
 
 - post your code on the [public issue tracker](https://github.com/cables-gl/cables_docs/issues)
 - post your code to the [forums](https://github.com/cables-gl/cables_docs/discussions/categories/show-and-tell)
-- contact us on [discord](https://discord.gg/AGTarWv)
+- contact us on [discord](https://discord.gg/cablesgl)
 
 We will then take a look at it and get back to you. Thanks for contributing!
 

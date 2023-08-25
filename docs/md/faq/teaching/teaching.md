@@ -17,7 +17,7 @@ There is plenty of know-how to get you going.
 
 We're always looking for educational institutions who would like to use cables in the classroom. 
 
-Please send us an [email](mailto:hi@undev.de) or contact us on (discord)[https://discord.gg/AGTarWv] if you'd like us to help you getting started.
+Please send us an [email](mailto:hi@undev.de) or contact us on (discord)[https://discord.gg/cablesgl] if you'd like us to help you getting started.
 
 ## Cables was used in the classrooms of these institutions:
 

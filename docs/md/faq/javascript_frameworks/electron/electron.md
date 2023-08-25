@@ -5,4 +5,4 @@ over all the steps in building, you might want to check out "da playa":
 
 https://github.com/cables-gl/cables-daplaya
 
-Please [let us know](https://discord.gg/AGTarWv) if/once this needs an update or does not work anymore.
+Please [let us know](https://discord.gg/cablesgl) if/once this needs an update or does not work anymore.

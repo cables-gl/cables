@@ -5,4 +5,4 @@ To get you started running your patches natively on mobile phones, we created a 
 
 https://github.com/cables-gl/cables-phonegap-skeleton
 
-Please [let us know](https://discord.gg/AGTarWv) if/once this needs an update or does not work anymore.
+Please [let us know](https://discord.gg/cablesgl) if/once this needs an update or does not work anymore.
