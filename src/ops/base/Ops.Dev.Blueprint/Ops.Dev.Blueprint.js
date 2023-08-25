@@ -277,7 +277,7 @@ function deSerializeBlueprint(data, ignoreLinks = false)
         {
             if (!replacedOp.uiAttribs) replacedOp.uiAttribs = {};
             replacedOp.uiAttribs.blueprintOpId = op.id;
-            
+
             if (replacedOp.storage && replacedOp.storage.blueprintVer) replacedOp.uiAttribs.pasted = true;
         });
 
@@ -686,10 +686,10 @@ function getLocalParentSubPatchOp(subPatchId)
 
 let patchLoadListener = op.patch.on("patchLoadEnd", (newOps, obj, genIds) =>
 {
-    op.patch.off(patchLoadListener);
     const isRelevant = newOps.some((newOp) => { return newOp.id === op.id || (newOp.uiAttribs && newOp.uiAttribs.subPatch === subPatchIdIn.get()); });
     if (isRelevant)
     {
+        op.patch.off(patchLoadListener);
         op.updateBlueprint();
     }
 });
