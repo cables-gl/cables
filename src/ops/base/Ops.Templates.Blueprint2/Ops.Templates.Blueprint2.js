@@ -7,7 +7,7 @@ function initializeSubpatch()
 {
     const p = JSON.parse(attachments.subpatch_json);
 
-    CABLES.Patch.replaceOpIds(p, { "parentSubPatchId": patchId, "prefixHash": patchId, "oldIdAsRef": true, "doNotUnlinkLostLinks": true });
+    CABLES.Patch.replaceOpIds(p, { "parentSubPatchId": patchId, "prefixHash": patchId, "oldIdAsRef": true });
 
     for (let i = 0; i < p.ops.length; i++)
     {
