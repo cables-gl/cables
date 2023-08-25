@@ -1445,7 +1445,7 @@ Patch.replaceOpIds = function (json, options)
                                     if (outerOp)
                                     {
                                         op.storage = op.storage || {};
-                                        op.storage.ref = op.storage.ref || CABLES.uuid();
+                                        op.storage.ref = op.storage.ref || CABLES.shortId();
                                         links[l].refOp = op.storage.ref;
                                         links[l].subOpRef = outerOp.storage.ref;
                                     }
@@ -1464,7 +1464,7 @@ Patch.replaceOpIds = function (json, options)
     {
         const op = json.ops[i];
         const oldId = op.id;
-        let newId = uuid();
+        let newId = CABLES.shortId();
         if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
         else if (options.prefixId) newId = options.prefixId + oldId;
         else if (options.refAsId) // when saving json
@@ -1477,7 +1477,7 @@ Patch.replaceOpIds = function (json, options)
             else
             {
                 op.storage = op.storage || {};
-                op.storage.ref = newId = uuid();
+                op.storage.ref = newId = CABLES.shortId();
             }
         }
 
@@ -1488,7 +1488,6 @@ Patch.replaceOpIds = function (json, options)
             op.storage = op.storage || {};
             op.storage.ref = oldId;
         }
-
 
         for (const j in json.ops)
         {
@@ -1520,12 +1519,6 @@ Patch.replaceOpIds = function (json, options)
 
                         for (l in json.ops[j].portsOut[k].links)
                         {
-                            if (json.ops[j].portsOut[k].links[l].lost)
-                            {
-                                json.ops[j].portsOut[k].links[l].refOp = "lalala";
-                            }
-
-
                             if (json.ops[j].portsOut[k].links[l].objIn === oldId) json.ops[j].portsOut[k].links[l].objIn = newID;
                             if (json.ops[j].portsOut[k].links[l].objOut === oldId) json.ops[j].portsOut[k].links[l].objOut = newID;
                         }
@@ -1585,9 +1578,7 @@ Patch.replaceOpIds = function (json, options)
         }
         // op has no uiAttribs in export, we don't care about subpatches in export though
         if (!found && json.ops[kk].uiAttribs && options.parentSubPatchId != null)
-        {
             json.ops[kk].uiAttribs.subPatch = options.parentSubPatchId;
-        }
     }
 
     return json;
