@@ -939,6 +939,16 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     return false;
 };
 
+Patch.prototype.getSubPatchOuterOp = function (subPatchId)
+{
+    const ops = this.ops;
+    for (let i = 0; i < ops.length; i++)
+    {
+        const op = ops[i];
+        if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
+    }
+};
+
 
 Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
 {
@@ -1043,18 +1053,15 @@ Patch.prototype.deSerialize = function (obj, options)
                         for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                         {
                             let found = false;
-                            if (obj.ops[iop].portsIn[ipi2].links[ili])
-                            {
-                                // const startTime = performance.now();
-                                this._addLink(
-                                    obj.ops[iop].portsIn[ipi2].links[ili].objIn,
-                                    obj.ops[iop].portsIn[ipi2].links[ili].objOut,
-                                    obj.ops[iop].portsIn[ipi2].links[ili].portIn,
-                                    obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
-                                // const took = performance.now() - startTime;
-                                // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
-                            }
+                            this._addLink(
+                                obj.ops[iop].portsIn[ipi2].links[ili].objIn,
+                                obj.ops[iop].portsIn[ipi2].links[ili].objOut,
+                                obj.ops[iop].portsIn[ipi2].links[ili].portIn,
+                                obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+                            // const took = performance.now() - startTime;
+                            // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                         }
                     }
                 }
@@ -1065,11 +1072,55 @@ Patch.prototype.deSerialize = function (obj, options)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsOut[ipi2].links.length; ili++)
                         {
-                            let found = false;
                             if (obj.ops[iop].portsOut[ipi2].links[ili])
                             {
-                                found = true;
-                                this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                console.log(1, obj.ops[iop].portsOut[ipi2].links[ili]);
+                                if (obj.ops[iop].portsOut[ipi2].links[ili].subOpRef)
+                                {
+                                    // lost link
+                                    const outOp = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
+                                    let dstOp = null;
+                                    let theSubPatch = 0;
+
+                                    for (let i = 0; i < this.ops.length; i++)
+                                    {
+                                        if (
+                                            this.ops[i].storage &&
+                                            this.ops[i].storage.ref == obj.ops[iop].portsOut[ipi2].links[ili].subOpRef &&
+                                            outOp.uiAttribs.subPatch == this.ops[i].uiAttribs.subPatch
+
+                                        )
+                                        {
+                                            theSubPatch = this.ops[i].patchId.get();
+                                            break;
+                                        }
+                                    }
+
+                                    for (let i = 0; i < this.ops.length; i++)
+                                    {
+                                        if (
+                                            this.ops[i].storage &&
+                                            this.ops[i].storage.ref == obj.ops[iop].portsOut[ipi2].links[ili].refOp &&
+                                            this.ops[i].uiAttribs.subPatch == theSubPatch)
+                                        {
+                                            dstOp = this.ops[i];
+                                            break;
+                                        }
+                                    }
+
+                                    if (!dstOp) this._log.warn("could not find op for lost link");
+                                    else
+                                        this._addLink(
+                                            dstOp.id,
+                                            obj.ops[iop].portsOut[ipi2].links[ili].objOut,
+
+                                            obj.ops[iop].portsOut[ipi2].links[ili].portIn,
+                                            obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                }
+                                else
+                                {
+                                    this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                }
                             }
                         }
                     }
@@ -1112,7 +1163,6 @@ Patch.prototype.deSerialize = function (obj, options)
         delete this.ops[i].uiAttribs.pasted;
     }
 
-
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
     if (window.logStartup)logStartup("calling onPatchLoaded/patchLoadEnd");
@@ -1120,9 +1170,7 @@ Patch.prototype.deSerialize = function (obj, options)
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
     this.deSerialized = true;
-
     this.emitEvent("patchLoadEnd", newOps, obj, options.genIds);
-    // if (this.onLoadEnd) this.onLoadEnd();
 };
 
 Patch.prototype.profile = function (enable)
@@ -1367,24 +1415,42 @@ Patch.replaceOpIds = function (json, options)
         opids[json.ops[i].id] = json.ops[i];
     }
 
-
-    if (!options.doNotUnlinkLostLinks)
+    for (const j in json.ops)
     {
-        for (const j in json.ops)
+        for (const k in json.ops[j].portsOut)
         {
-            for (const k in json.ops[j].portsOut)
+            const links = json.ops[j].portsOut[k].links;
+            if (links)
             {
-                const links = json.ops[j].portsOut[k].links;
-                if (links)
-                {
-                    let l = links.length;
+                let l = links.length;
 
-                    while (l--)
+                while (l--)
+                {
+                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
                     {
-                        if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                        if (!options.doNotUnlinkLostLinks)
                         {
-                            console.log("replaceOpIds remove link");
                             links.splice(l, 1);
+                        }
+                        else
+                        {
+                            if (options.fixLostLinks)
+                            {
+                                // console.log("lost link...?", links[l]);
+                                const op = gui.corePatch().getOpById(links[l].objIn);
+                                if (!op) console.log("op not found!");
+                                else
+                                {
+                                    const outerOp = gui.patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
+                                    if (outerOp)
+                                    {
+                                        op.storage = op.storage || {};
+                                        op.storage.ref = op.storage.ref || CABLES.shortId();
+                                        links[l].refOp = op.storage.ref;
+                                        links[l].subOpRef = outerOp.storage.ref;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -1392,14 +1458,16 @@ Patch.replaceOpIds = function (json, options)
         }
     }
 
+
+
     for (const i in json.ops)
     {
         const op = json.ops[i];
         const oldId = op.id;
-        let newId = uuid();
+        let newId = CABLES.shortId();
         if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
         else if (options.prefixId) newId = options.prefixId + oldId;
-        else if (options.refAsId)
+        else if (options.refAsId) // when saving json
         {
             if (op.storage && op.storage.ref)
             {
@@ -1408,18 +1476,18 @@ Patch.replaceOpIds = function (json, options)
             }
             else
             {
-                newId = uuid();
+                op.storage = op.storage || {};
+                op.storage.ref = newId = CABLES.shortId();
             }
         }
 
         const newID = op.id = newId;
 
-        if (options.oldIdAsRef)
+        if (options.oldIdAsRef) // when loading json
         {
             op.storage = op.storage || {};
             op.storage.ref = oldId;
         }
-
 
         for (const j in json.ops)
         {
@@ -1428,11 +1496,9 @@ Patch.replaceOpIds = function (json, options)
                 {
                     if (json.ops[j].portsIn[k].links)
                     {
-                        // console.log(json.ops[j].portsIn[k].links);
                         let l = json.ops[j].portsIn[k].links.length;
-                        while (l--)
-                            if (json.ops[j].portsIn[k].links[l] === null)
-                                json.ops[j].portsIn[k].links.splice(l, 1);
+
+                        while (l--) if (json.ops[j].portsIn[k].links[l] === null) json.ops[j].portsIn[k].links.splice(l, 1);
 
                         for (l in json.ops[j].portsIn[k].links)
                         {
@@ -1449,10 +1515,7 @@ Patch.replaceOpIds = function (json, options)
                     {
                         let l = json.ops[j].portsOut[k].links.length;
 
-
-                        while (l--)
-                            if (json.ops[j].portsOut[k].links[l] === null)
-                                json.ops[j].portsOut[k].links.splice(l, 1);
+                        while (l--) if (json.ops[j].portsOut[k].links[l] === null) json.ops[j].portsOut[k].links.splice(l, 1);
 
                         for (l in json.ops[j].portsOut[k].links)
                         {
@@ -1515,10 +1578,9 @@ Patch.replaceOpIds = function (json, options)
         }
         // op has no uiAttribs in export, we don't care about subpatches in export though
         if (!found && json.ops[kk].uiAttribs && options.parentSubPatchId != null)
-        {
             json.ops[kk].uiAttribs.subPatch = options.parentSubPatchId;
-        }
     }
+
     return json;
 };
 
