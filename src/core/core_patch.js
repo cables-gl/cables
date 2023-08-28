@@ -1074,7 +1074,6 @@ Patch.prototype.deSerialize = function (obj, options)
                         {
                             if (obj.ops[iop].portsOut[ipi2].links[ili])
                             {
-                                console.log(1, obj.ops[iop].portsOut[ipi2].links[ili]);
                                 if (obj.ops[iop].portsOut[ipi2].links[ili].subOpRef)
                                 {
                                     // lost link
@@ -1088,7 +1087,6 @@ Patch.prototype.deSerialize = function (obj, options)
                                             this.ops[i].storage &&
                                             this.ops[i].storage.ref == obj.ops[iop].portsOut[ipi2].links[ili].subOpRef &&
                                             outOp.uiAttribs.subPatch == this.ops[i].uiAttribs.subPatch
-
                                         )
                                         {
                                             theSubPatch = this.ops[i].patchId.get();

@@ -5,7 +5,7 @@
             "id": "1fcbe505-e47d-4781-9ec7-2ed35bbed3b9",
             "uiAttribs": {
                 "title": "Sequence",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 12,
                     "y": -460
@@ -161,10 +161,10 @@
             "id": "4c791d17-7e95-4fb8-b309-e1ec6fa2c135",
             "uiAttribs": {
                 "title": "PatchInput",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
-                    "x": -216,
-                    "y": -820
+                    "x": -60,
+                    "y": -660
                 },
                 "blueprintSubpatch2": true
             },
@@ -177,7 +177,7 @@
             "id": "a5303620-69d2-44a2-9a0f-fb7c6c5b3ebb",
             "uiAttribs": {
                 "title": "PatchOutput",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 96,
                     "y": 540
@@ -193,7 +193,7 @@
             "id": "3dfd09eb-fb70-4c60-b560-6a440a1528bd",
             "uiAttribs": {
                 "title": "TransformView",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 24,
                     "y": 220
@@ -236,15 +236,8 @@
             "portsOut": [
                 {
                     "name": "trigger",
-                    "expose": true,
-                    "links": [
-                        {
-                            "portIn": "exe",
-                            "portOut": "trigger",
-                            "objIn": "95067f74-cbf8-4631-87a3-75d27c7ee9ea",
-                            "objOut": "3dfd09eb-fb70-4c60-b560-6a440a1528bd"
-                        }
-                    ]
+                    "value": 0,
+                    "expose": true
                 }
             ]
         },
@@ -253,7 +246,7 @@
             "id": "00cd0325-2ef4-4e03-ac92-3287bec6d837",
             "uiAttribs": {
                 "title": "ResetTransform",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -12,
                     "y": -560
@@ -298,7 +291,7 @@
             "id": "9cc85e85-1ed2-40ed-9b48-e4472ab6fc04",
             "uiAttribs": {
                 "title": "DeltaSum",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -264,
                     "y": -360
@@ -357,7 +350,7 @@
             "id": "948e77c7-ac73-44f1-8e38-e34b924c812f",
             "uiAttribs": {
                 "title": "MouseDrag",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -264,
                     "y": -460
@@ -424,7 +417,7 @@
             "id": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46",
             "uiAttribs": {
                 "title": "Smooth",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 48,
                     "y": 120
@@ -482,7 +475,7 @@
             "id": "bf3b685a-70af-4901-8b59-3c5b2b546c91",
             "uiAttribs": {
                 "title": "DeltaSum",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -132,
                     "y": -340
@@ -542,7 +535,7 @@
             "id": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065",
             "uiAttribs": {
                 "title": "Smooth",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 48,
                     "y": -220
@@ -593,7 +586,7 @@
             "id": "318dfbd0-74a8-4a6a-b209-a336e0d8de50",
             "uiAttribs": {
                 "title": "SMOOTHNESS",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -492,
                     "y": -180
@@ -638,7 +631,7 @@
             "id": "9a4bb8db-55eb-47ba-ac62-9df629047fe9",
             "uiAttribs": {
                 "title": "DeltaSum",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 384,
                     "y": -320
@@ -697,7 +690,7 @@
             "id": "d9978929-51f5-41b1-9a39-3388435be95c",
             "uiAttribs": {
                 "title": "MouseDrag",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 324,
                     "y": -460
@@ -764,7 +757,7 @@
             "id": "6d0c501c-645a-4950-89a8-19fcfa489a1e",
             "uiAttribs": {
                 "title": "DeltaSum",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 516,
                     "y": -340
@@ -823,7 +816,7 @@
             "id": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
             "uiAttribs": {
                 "title": "TransformView",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 276,
                     "y": 0
@@ -880,7 +873,7 @@
             "id": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba",
             "uiAttribs": {
                 "title": "Sequence",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 36,
                     "y": -1020
@@ -1056,7 +1049,7 @@
             "id": "a57cb411-606e-4b7e-a431-c6292c93b1aa",
             "uiAttribs": {
                 "title": "TriggerButton",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 36,
                     "y": -1120
@@ -1091,7 +1084,7 @@
             "id": "ead26bfe-c323-4a80-b216-2fc49b9a722a",
             "uiAttribs": {
                 "title": "FlipSign",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 516,
                     "y": -420
@@ -1123,7 +1116,7 @@
             "id": "a6cf7e5c-277a-47e2-87b2-fd6d18b89d80",
             "uiAttribs": {
                 "title": "MouseWheel",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 768,
                     "y": -360
@@ -1192,7 +1185,7 @@
             "id": "09d8b512-3f03-4531-859a-dd8da2ddebcb",
             "uiAttribs": {
                 "title": "DeltaSum",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 768,
                     "y": -300
@@ -1251,7 +1244,7 @@
             "id": "bc309321-267a-4e89-9343-7b289cb8075e",
             "uiAttribs": {
                 "title": "Smooth",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 60,
                     "y": -300
@@ -1309,7 +1302,7 @@
             "id": "fd09f979-8a25-471d-ba70-86976d788e9f",
             "uiAttribs": {
                 "title": "OrbitControls",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 624,
                     "y": -20
@@ -1415,7 +1408,7 @@
             "id": "bd1e1931-0026-4a80-a6a9-c8d784ee8b92",
             "uiAttribs": {
                 "title": "MouseButtons",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 252,
                     "y": -680
@@ -1500,7 +1493,7 @@
             "id": "da32f08a-8ccc-4b77-83be-1bf982852851",
             "uiAttribs": {
                 "title": "MouseButtons",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -288,
                     "y": -600
@@ -1585,7 +1578,7 @@
             "id": "2f4c4fc0-2c3f-4e28-8153-ab233735596f",
             "uiAttribs": {
                 "title": "*",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": 324,
                     "y": -600
@@ -1621,7 +1614,7 @@
             "id": "b02732c6-2545-4e83-9bca-62ebaebc0328",
             "uiAttribs": {
                 "title": "*",
-                "subPatch": "55rrcrvda",
+                "subPatch": "zvmmvuixs",
                 "translate": {
                     "x": -252,
                     "y": -520
@@ -1651,66 +1644,7 @@
                     ]
                 }
             ]
-        },
-        {
-            "opId": "3e5e6eb2-756a-4e5e-b157-29526cefeb7a",
-            "id": "4p4sxvv6g",
-            "uiAttribs": {
-                "title": "SubpatchNew",
-                "subPatchOp": {
-                    "version": 2
-                },
-                "translate": {
-                    "x": 674,
-                    "y": -20
-                },
-                "subPatch": "55rrcrvda"
-            },
-            "storage": {
-                "subPatchVer": 2,
-                "ref": "4p4sxvv6g"
-            },
-            "portsIn": [
-                {
-                    "name": "patchId",
-                    "value": "d615d759-85b9-49b7-8308-f251538f5a1d"
-                }
-            ],
-            "portsOut": []
-        },
-        {
-            "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
-            "id": "x8235o4ji",
-            "uiAttribs": {
-                "title": "PatchInput",
-                "subPatch": "55rrcrvda",
-                "translate": {
-                    "x": 624,
-                    "y": -100
-                }
-            },
-            "portsIn": [],
-            "portsOut": [],
-            "storage": {
-                "ref": "x8235o4ji"
-            }
-        },
-        {
-            "opId": "02d45073-7936-4830-81ad-59a162febf1f",
-            "id": "4nl1i9zas",
-            "uiAttribs": {
-                "title": "PatchOutput",
-                "subPatch": "55rrcrvda",
-                "translate": {
-                    "x": 624,
-                    "y": 60
-                }
-            },
-            "portsIn": [],
-            "portsOut": [],
-            "storage": {
-                "ref": "4nl1i9zas"
-            }
         }
     ]
 }
+
