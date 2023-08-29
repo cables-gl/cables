@@ -6,8 +6,8 @@ const
     inText = op.inArray("Text"),
     inResetHover = op.inTriggerButton("Reset Hover"),
     outArr = op.outArray("Elements", null, "element"),
-    outClicked = op.outTrigger("Element Clicked"),
     outIndex = op.outNumber("Index Clicked"),
+    outClicked = op.outTrigger("Element Clicked"),
     outHover = op.outNumber("Index Hovered");
 
 const elements = [];
