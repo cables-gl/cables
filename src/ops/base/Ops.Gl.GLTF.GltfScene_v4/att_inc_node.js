@@ -251,8 +251,8 @@ const gltfNode = class
             }
             else if (this._rot)
             {
-                // mat4.fromQuat(this._tempRotmat, this._rot);
-                // mat4.mul(this._animMat, this._animMat, this._tempRotmat);
+                mat4.fromQuat(this._tempRotmat, this._rot);
+                mat4.mul(this._animMat, this._animMat, this._tempRotmat);
             }
 
             if (playAnims && this._animScale)
