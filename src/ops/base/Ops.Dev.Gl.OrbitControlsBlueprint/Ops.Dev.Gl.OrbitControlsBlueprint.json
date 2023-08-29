@@ -30,7 +30,7 @@
             }
         ],
         "portsOut": [],
-        "name": "Ops.Patch.P_PJ_IE.OrbContBp"
+        "name": "Ops.Dev.Gl.OrbitControlsBlueprint"
     },
     "authorName": "pandur",
     "created": 1692972799843
