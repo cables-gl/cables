@@ -15,6 +15,7 @@ function initializeSubpatch()
     }
 
     op.patch.deSerialize(p);
+    if (CABLES.UI)gui.savedState.setSaved("blueprintloaded", patchId);
     op.patch.emitEvent("subpatchExpose", patchId);
     op.setStorage({ "blueprintVer": 2 });
     op.patch.emitEvent("subpatchExpose", patchId);

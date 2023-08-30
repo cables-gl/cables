@@ -326,7 +326,8 @@ function deSerializeBlueprint(data, ignoreLinks = false)
                 CABLES.UI.undo.resume();
                 if (originalSaveState === true)
                 {
-                    gui.setStateSaved();
+                    // gui.setStateSaved();
+                    gui.savedState.setSaved("blueprintOp", op.uiAttribs.blueprintSubpatch);
                 }
             });
         }
