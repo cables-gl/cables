@@ -8,6 +8,6 @@ inArr.onChange = function ()
     if (arr)
     {
         let arrCopy = arr.slice();
-        outArr.set(arrCopy.reverse());
+        outArr.setRef(arrCopy.reverse());
     }
 };
