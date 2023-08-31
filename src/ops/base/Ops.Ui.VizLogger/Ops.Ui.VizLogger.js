@@ -5,6 +5,9 @@ const inClear = op.inTriggerButton("Clear");
 let lines = 10;
 const arr = [];
 
+inNum.changeAlways =
+    inString.changeAlways = true;
+
 inClear.onTriggered = () =>
 {
     arr.length = 0;

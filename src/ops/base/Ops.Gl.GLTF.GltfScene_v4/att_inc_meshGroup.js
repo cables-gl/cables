@@ -12,6 +12,7 @@ const gltfMeshGroup = class
             const mesh = new gltfMesh(this.name, prims[i], gltf,
                 (mesh) =>
                 {
+                    mesh.extras = m.extras;
                     this.bounds.apply(mesh.bounds);
                 });
 
