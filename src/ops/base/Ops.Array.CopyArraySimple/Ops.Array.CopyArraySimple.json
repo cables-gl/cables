@@ -1,0 +1,35 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "06b6e567-a9c6-4da2-b853-cb13be66505c",
+    "created": 1693484923412,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.CopyArraySimple"
+    },
+    "summary": "Reverses an array (creates a copy of the array before), shallow copy",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Array.ArrayReverse",
+            "author": "pandur",
+            "date": 1693484923412
+        },
+        {
+            "message": "Ops.Patch.PU7byNy.CopyArraySimple renamed to Ops.Array.CopyArraySimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1693484960111
+        }
+    ]
+}
