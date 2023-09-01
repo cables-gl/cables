@@ -1,6 +1,6 @@
 const
     inArr = op.inArray("Input"),
-    outArr = op.outArray("Result");
+    outArr = op.outArray("Result", []);
 
 inArr.onChange = function ()
 {
@@ -8,6 +8,6 @@ inArr.onChange = function ()
     if (arr)
     {
         let arrCopy = arr.slice();
-        outArr.setRef(arrCopy.reverse());
+        outArr.setRef(arrCopy);
     }
 };

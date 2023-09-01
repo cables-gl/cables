@@ -238,6 +238,7 @@ function printInfo()
 
     let sizeBufferViews = [];
     sizes.meshes = 0;
+    sizes.meshTargets = 0;
 
     for (let i = 0; i < gltf.json.meshes.length; i++)
     {
@@ -247,7 +248,7 @@ function printInfo()
         html += "<td>";
         let count = 0;
         let nodename = "";
-        for (var j = 0; j < gltf.json.nodes.length; j++)
+        for (let j = 0; j < gltf.json.nodes.length; j++)
         {
             if (gltf.json.nodes[j].mesh == i)
             {
@@ -265,7 +266,7 @@ function printInfo()
         // -------
 
         html += "<td>";
-        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+        for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
             if (gltf.json.meshes[i].primitives[j].hasOwnProperty("material"))
             {
@@ -280,7 +281,7 @@ function printInfo()
 
         html += "<td>";
         let numVerts = 0;
-        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+        for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
             if (gltf.json.meshes[i].primitives[j].attributes.POSITION != undefined)
             {
@@ -301,7 +302,14 @@ function printInfo()
             html += Object.keys(gltf.json.meshes[i].primitives[j].attributes);
             html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeGeom('" + gltf.json.meshes[i].name + "'," + j + ")\" class=\"treebutton\">Geometry</a>";
             html += "<br/>";
+
+            if (gltf.json.meshes[i].primitives[j].targets)
+            {
+                html += gltf.json.meshes[i].primitives[j].targets.length + " targets";
+                html += "<br/>";
+            }
         }
+
         html += "</td>";
         html += "</tr>";
 
@@ -330,6 +338,27 @@ function printInfo()
                     if (gltf.json.bufferViews[bufView2])sizes.meshes += gltf.json.bufferViews[bufView2].byteLength;
                 }
             }
+
+            if (gltf.json.meshes[i].primitives[j].targets)
+                for (let k = 0; k < gltf.json.meshes[i].primitives[j].targets.length; k++)
+                {
+                    for (let l in gltf.json.meshes[i].primitives[j].targets[k])
+                    {
+                        const accessorIdx = gltf.json.meshes[i].primitives[j].targets[k][l];
+                        const accessor = gltf.json.accessors[accessorIdx];
+                        const bufView2 = accessor.bufferView;
+                        // console.log("bufView2", bufView2);
+                        if (sizeBufferViews.indexOf(bufView2) == -1)
+                        {
+                            sizeBufferViews.push(bufView2);
+                            if (gltf.json.bufferViews[bufView2])
+                            {
+                                console.log(i, j, bufView2, gltf.json.bufferViews[bufView2].byteLength);
+                                sizes.meshTargets += gltf.json.bufferViews[bufView2].byteLength;
+                            }
+                        }
+                    }
+                }
         }
     }
     html += "</table>";
@@ -431,8 +460,13 @@ function printInfo()
 
         for (let i = 0; i < gltf.json.images.length; i++)
         {
-            if (gltf.json.images[i].bufferView)
+            if (gltf.json.images[i].hasOwnProperty("bufferView"))
+            {
+                // if (sizeBufferViews.indexOf(gltf.json.images[i].hasOwnProperty("bufferView")) == -1)console.log("image bufferview already there?!");
+                // else
                 sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
+            }
+            else console.log("image has no bufferview?!");
 
             html += "<tr>";
             html += "<td>" + gltf.json.images[i].name + "</td>";

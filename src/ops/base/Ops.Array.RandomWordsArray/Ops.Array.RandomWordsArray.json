@@ -12,7 +12,18 @@
         ]
     },
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Random Seed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Content index",
+                "subType": "integer"
+            }
+        ],
         "portsOut": [
             {
                 "type": 3,

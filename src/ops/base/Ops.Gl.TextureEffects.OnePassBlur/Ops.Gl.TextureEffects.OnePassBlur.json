@@ -1,0 +1,116 @@
+{
+    "authorName": "pandur",
+    "id": "79dd13e7-755d-4f17-bbbf-9bda70126974",
+    "created": 1693496692225,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "group": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Invert",
+                "group": "Mask",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Patch.PkiBOaF.OnePassBlur"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Deprecated.Gl.TextureEffects.FastBlur renamed to Ops.Gl.TextureEffects.FastBlur",
+            "author": "pandur",
+            "date": 1573490089072
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.FastBlur",
+            "author": "pandur",
+            "date": 1650882627103
+        },
+        {
+            "message": "Ops.User.pandur.FastBlurV2 renamed to Ops.Dev.FastBlurV2",
+            "author": "pandur",
+            "date": 1650882706355
+        },
+        {
+            "message": "Ops.Dev.FastBlurV2 renamed to Ops.Gl.TextureEffects.FastBlur_v2",
+            "author": "pandur",
+            "date": 1653286483194
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.FastBlur_v2",
+            "author": "pandur",
+            "date": 1693496692226
+        },
+        {
+            "message": "Ops.Patch.PkiBOaF.OnePassBlur renamed to Ops.Gl.TextureEffects.OnePassBlur",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1693498067290
+        }
+    ],
+    "summary": "Blurs a texture  - cheap and fast",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "amount",
+                "text": "Amount of blur"
+            },
+            {
+                "name": "Clamp",
+                "text": "Clamp texture output"
+            },
+            {
+                "name": "direction",
+                "text": "Both , vertical or horizontal"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
+}
