@@ -14,7 +14,7 @@ let gltfMesh = class
         this.name = name;
         this.submeshIndex = 0;
         this.material = prim.material;
-        console.log(prim);
+        // console.log(prim);
         this.mesh = null;
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
@@ -141,7 +141,7 @@ let gltfMesh = class
 
                     { // calculate normals for final position of morphtarget for later...
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
-                        tgeom.calculateNormals();
+                        // tgeom.calculateNormals();
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] -= this.geom.vertices[i];
                     }
 
@@ -273,7 +273,7 @@ let gltfMesh = class
         if (this.primitive == this.TRIANGLES)
         {
             if (inCalcNormals.get() == "Force Smooth") geom.calculateNormals();
-            else if (!geom.vertexNormals.length) geom.calculateNormals({ "smooth": false });
+            else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
 
             if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
             {
