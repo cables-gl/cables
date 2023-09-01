@@ -14,6 +14,7 @@ let gltfMesh = class
         this.name = name;
         this.submeshIndex = 0;
         this.material = prim.material;
+        console.log(prim);
         this.mesh = null;
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
@@ -347,7 +348,7 @@ let gltfMesh = class
 
                 this.test = time;
 
-                if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
+                // if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
 
                 const mt = this.geom.morphTargets[Math.floor(this.test)];
                 const mt2 = this.geom.morphTargets[Math.floor(this.test + 1)];
@@ -357,7 +358,7 @@ let gltfMesh = class
                     if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
                         this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
 
-                    const fract = this.test % 1;
+                    const fract = 0.0;// this.test % 1;
                     for (let i = 0; i < this.morphGeom.vertices.length; i++)
                     {
                         this.morphGeom.vertices[i] =

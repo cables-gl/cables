@@ -5,7 +5,7 @@ const
     len = op.inValue("Length", 1),
     height = op.inValue("Height", 1),
     center = op.inValueBool("Center", true),
-    mapping = op.inSwitch("Mapping", ["Side", "Cube +-"], "Side"),
+    mapping = op.inSwitch("Mapping", ["Side", "Cube +-", "SideWrap"], "Side"),
     mappingBias = op.inValue("Bias", 0),
     inFlipX = op.inValueBool("Flip X", true),
     sideTop = op.inValueBool("Top", true),
@@ -96,8 +96,10 @@ function buildMesh()
         nz *= 0.5;
     }
 
-    if (mapping.get() == "Side") sideMappedCube(geom, x, y, z, nx, ny, nz);
-    else cubeMappedCube(geom, x, y, z, nx, ny, nz);
+    addAttribs(geom, x, y, z, nx, ny, nz);
+    if (mapping.get() == "Side") sideMappedCube(geom,1,1,1);
+    else if (mapping.get() == "SideWrap") sideMappedCube(geom,x,y,z);
+    else cubeMappedCube(geom);
 
     geom.verticesIndices = [];
     if (sideTop.get()) geom.verticesIndices.push(8, 9, 10, 8, 10, 11); // Top face
@@ -123,58 +125,56 @@ op.onDelete = function ()
     if (mesh)mesh.dispose();
 };
 
-function sideMappedCube(geom, x, y, z, nx, ny, nz)
+function sideMappedCube(geom,x,y,z)
 {
-    addAttribs(geom, x, y, z, nx, ny, nz);
-
     const bias = mappingBias.get();
 
-    let fone = 1.0;
-    let fzero = 0.0;
+    let u1 = 1.0 - bias;
+    let u0 = 0.0 + bias;
     if (inFlipX.get())
     {
-        fone = 0.0;
-        fzero = 1.0;
+        [u1, u0] = [u0,u1]
     }
+
+    let v1 = 1.0 - bias;
+    let v0 = 0.0 + bias;
 
     geom.setTexCoords([
         // Front face
-        fzero + bias, 1 - bias,
-        fone - bias, 1 - bias,
-        fone - bias, 0 + bias,
-        fzero + bias, 0 + bias,
+        x*u0, y*v1,
+        x*u1, y*v1,
+        x*u1, y*v0,
+        x*u0, y*v0,
         // Back face
-        fone - bias, 1 - bias,
-        fone - bias, 0 + bias,
-        fzero + bias, 0 + bias,
-        fzero + bias, 1 - bias,
+        x*u1, y*v1,
+        x*u1, y*v0,
+        x*u0, y*v0,
+        x*u0, y*v1,
         // Top face
-        fzero + bias, 0 + bias,
-        fzero + bias, 1 - bias,
-        fone - bias, 1 - bias,
-        fone - bias, 0 + bias,
+        x*u0, z*v0,
+        x*u0, z*v1,
+        x*u1, z*v1,
+        x*u1, z*v0,
         // Bottom face
-        fone - bias, 0 + bias,
-        fzero + bias, 0 + bias,
-        fzero + bias, 1 - bias,
-        fone - bias, 1 - bias,
+        x*u1, y*v0,
+        x*u0, y*v0,
+        x*u0, y*v1,
+        x*u1, y*v1,
         // Right face
-        fone - bias, 1 - bias,
-        fone - bias, 0 + bias,
-        fzero + bias, 0 + bias,
-        fzero + bias, 1 - bias,
+        z*u1, y*v1,
+        z*u1, y*v0,
+        z*u0, y*v0,
+        z*u0, y*v1,
         // Left face
-        fzero + bias, 1 - bias,
-        fone - bias, 1 - bias,
-        fone - bias, 0 + bias,
-        fzero + bias, 0 + bias,
+        z*u0, y*v1,
+        z*u1, y*v1,
+        z*u1, y*v0,
+        z*u0, y*v0,
     ]);
 }
 
 function cubeMappedCube(geom, x, y, z, nx, ny, nz)
 {
-    addAttribs(geom, x, y, z, nx, ny, nz);
-
     const sx = 0.25;
     const sy = 1 / 3;
     const bias = mappingBias.get();
@@ -315,7 +315,7 @@ function addAttribs(geom, x, y, z, nx, ny, nz)
         // back face
         1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         // top face
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
         // bottom face
         1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         // right face
@@ -329,7 +329,7 @@ function addAttribs(geom, x, y, z, nx, ny, nz)
         // back face
         1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         // top face
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
         // bottom face
         0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
         // right face
