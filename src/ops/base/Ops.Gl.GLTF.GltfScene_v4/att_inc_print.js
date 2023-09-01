@@ -296,7 +296,7 @@ function printInfo()
             html += "=" + numVerts;
         html += "</td>";
 
-        html += "<td style=\"vertical-align:top;\">";
+        html += "<td>";
         for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
             html += Object.keys(gltf.json.meshes[i].primitives[j].attributes);
@@ -305,7 +305,11 @@ function printInfo()
 
             if (gltf.json.meshes[i].primitives[j].targets)
             {
-                html += gltf.json.meshes[i].primitives[j].targets.length + " targets";
+                html += gltf.json.meshes[i].primitives[j].targets.length + " targets<br/>";
+
+                if (gltf.json.meshes[i].extras && gltf.json.meshes[i].extras.targetNames)
+                    html += "Targetnames:<br/>" + gltf.json.meshes[i].extras.targetNames.join("<br/>");
+
                 html += "<br/>";
             }
         }
@@ -347,16 +351,13 @@ function printInfo()
                         const accessorIdx = gltf.json.meshes[i].primitives[j].targets[k][l];
                         const accessor = gltf.json.accessors[accessorIdx];
                         const bufView2 = accessor.bufferView;
-                        // console.log("bufView2", bufView2);
+                        console.log("accessor", accessor);
                         if (sizeBufferViews.indexOf(bufView2) == -1)
-                        {
-                            sizeBufferViews.push(bufView2);
                             if (gltf.json.bufferViews[bufView2])
                             {
-                                console.log(i, j, bufView2, gltf.json.bufferViews[bufView2].byteLength);
+                                sizeBufferViews.push(bufView2);
                                 sizes.meshTargets += gltf.json.bufferViews[bufView2].byteLength;
                             }
-                        }
                     }
                 }
         }

@@ -20,6 +20,9 @@ let gltfMesh = class
         this.geom.verticesIndices = [];
         this.bounds = null;
         this.primitive = 4;
+
+        this.weights = prim.weights;
+
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
 
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
@@ -132,7 +135,6 @@ let gltfMesh = class
                 console.log("prim.targets", prim.targets.length);
                 for (let j = 0; j < prim.targets.length; j++)
                 {
-                    // var tgeom=new CGL.Geometry("gltf_"+this.name);
                     let tgeom = this.geom.copy();
 
                     if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
@@ -141,7 +143,7 @@ let gltfMesh = class
 
                     { // calculate normals for final position of morphtarget for later...
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
-                        // tgeom.calculateNormals();
+                        tgeom.calculateNormals();
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] -= this.geom.vertices[i];
                     }
 
