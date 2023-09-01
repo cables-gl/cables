@@ -4,7 +4,8 @@
             "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
             "id": "1fcbe505-e47d-4781-9ec7-2ed35bbed3b9",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "Sequence",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 12,
                     "y": -460
@@ -159,7 +160,8 @@
             "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
             "id": "4c791d17-7e95-4fb8-b309-e1ec6fa2c135",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "PatchInput",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -60,
                     "y": -660
@@ -174,7 +176,8 @@
             "opId": "02d45073-7936-4830-81ad-59a162febf1f",
             "id": "a5303620-69d2-44a2-9a0f-fb7c6c5b3ebb",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "PatchOutput",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 96,
                     "y": 540
@@ -189,7 +192,8 @@
             "opId": "0b3e04f7-323e-4ac8-8a22-a21e2f36e0e9",
             "id": "3dfd09eb-fb70-4c60-b560-6a440a1528bd",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "TransformView",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 24,
                     "y": 220
@@ -241,7 +245,8 @@
             "opId": "1bf7c63e-e2c2-42e2-abb3-42235e7e24f0",
             "id": "00cd0325-2ef4-4e03-ac92-3287bec6d837",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "ResetTransform",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -12,
                     "y": -560
@@ -285,7 +290,8 @@
             "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
             "id": "9cc85e85-1ed2-40ed-9b48-e4472ab6fc04",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -264,
                     "y": -360
@@ -343,7 +349,8 @@
             "opId": "5103d14e-2f21-4f43-ae91-c1b55a944226",
             "id": "948e77c7-ac73-44f1-8e38-e34b924c812f",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "MouseDrag",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -264,
                     "y": -460
@@ -409,7 +416,8 @@
             "opId": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
             "id": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "Smooth",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 48,
                     "y": 120
@@ -466,7 +474,8 @@
             "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
             "id": "bf3b685a-70af-4901-8b59-3c5b2b546c91",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -132,
                     "y": -340
@@ -484,7 +493,7 @@
                 },
                 {
                     "name": "Multiply",
-                    "value": 11
+                    "value": 11.32
                 },
                 {
                     "name": "Reset",
@@ -525,7 +534,8 @@
             "opId": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
             "id": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "Smooth",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 48,
                     "y": -220
@@ -576,7 +586,7 @@
             "id": "318dfbd0-74a8-4a6a-b209-a336e0d8de50",
             "uiAttribs": {
                 "title": "SMOOTHNESS",
-                "subPatch": "wi6njy9jk",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -492,
                     "y": -180
@@ -620,7 +630,8 @@
             "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
             "id": "9a4bb8db-55eb-47ba-ac62-9df629047fe9",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 384,
                     "y": -320
@@ -678,7 +689,8 @@
             "opId": "5103d14e-2f21-4f43-ae91-c1b55a944226",
             "id": "d9978929-51f5-41b1-9a39-3388435be95c",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "MouseDrag",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 324,
                     "y": -460
@@ -744,7 +756,8 @@
             "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
             "id": "6d0c501c-645a-4950-89a8-19fcfa489a1e",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 516,
                     "y": -340
@@ -802,7 +815,8 @@
             "opId": "0b3e04f7-323e-4ac8-8a22-a21e2f36e0e9",
             "id": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "TransformView",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 276,
                     "y": 0
@@ -858,7 +872,8 @@
             "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
             "id": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "Sequence",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 36,
                     "y": -1020
@@ -1033,7 +1048,8 @@
             "opId": "21630924-39e4-4df5-9965-b9136510d156",
             "id": "a57cb411-606e-4b7e-a431-c6292c93b1aa",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "TriggerButton",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 36,
                     "y": -1120
@@ -1067,7 +1083,8 @@
             "opId": "f5c858a2-2654-4108-86fe-319efa70ecec",
             "id": "ead26bfe-c323-4a80-b216-2fc49b9a722a",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "FlipSign",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 516,
                     "y": -420
@@ -1098,7 +1115,8 @@
             "opId": "7b9626db-536b-4bb4-85c3-95401bc60d1b",
             "id": "a6cf7e5c-277a-47e2-87b2-fd6d18b89d80",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "MouseWheel",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 768,
                     "y": -360
@@ -1166,7 +1184,8 @@
             "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
             "id": "09d8b512-3f03-4531-859a-dd8da2ddebcb",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 768,
                     "y": -300
@@ -1224,7 +1243,8 @@
             "opId": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
             "id": "bc309321-267a-4e89-9343-7b289cb8075e",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "Smooth",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 60,
                     "y": -300
@@ -1281,7 +1301,8 @@
             "opId": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",
             "id": "fd09f979-8a25-471d-ba70-86976d788e9f",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "OrbitControls",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 624,
                     "y": -20
@@ -1386,7 +1407,8 @@
             "opId": "c7e5e545-c8a1-4fef-85c2-45422b947f0d",
             "id": "bd1e1931-0026-4a80-a6a9-c8d784ee8b92",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "MouseButtons",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 252,
                     "y": -680
@@ -1470,7 +1492,8 @@
             "opId": "c7e5e545-c8a1-4fef-85c2-45422b947f0d",
             "id": "da32f08a-8ccc-4b77-83be-1bf982852851",
             "uiAttribs": {
-                "subPatch": "wi6njy9jk",
+                "title": "MouseButtons",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -372,
                     "y": -680
@@ -1555,7 +1578,7 @@
             "id": "2f4c4fc0-2c3f-4e28-8153-ab233735596f",
             "uiAttribs": {
                 "title": "*",
-                "subPatch": "wi6njy9jk",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": 324,
                     "y": -600
@@ -1591,7 +1614,7 @@
             "id": "b02732c6-2545-4e83-9bca-62ebaebc0328",
             "uiAttribs": {
                 "title": "*",
-                "subPatch": "wi6njy9jk",
+                "subPatch": "hqzw4dh2d",
                 "translate": {
                     "x": -264,
                     "y": -520
@@ -1605,7 +1628,7 @@
                 },
                 {
                     "name": "number2",
-                    "value": 2.15
+                    "value": 2.68
                 }
             ],
             "portsOut": [
@@ -1624,4 +1647,3 @@
         }
     ]
 }
-

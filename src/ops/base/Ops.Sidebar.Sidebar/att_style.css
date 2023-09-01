@@ -678,10 +678,23 @@
 
 .sidebar__select-select:hover,
 .sidebar__select-select:active,
-.sidebar__select-select:active {
+.sidebar__select-select:inactive {
     background-color: #444444;
     color: #EEEEEE;
 }
+
+/*.sidebar__select-select option*/
+/*{*/
+/*    background-color: #444444;*/
+/*    color: #bbb;*/
+/*}*/
+
+.sidebar__select-select option:checked
+{
+    background-color: #000;
+    color: #FFF;
+}
+
 
 /*
  * COLOR PICKER
@@ -871,3 +884,4 @@ div.sidebar__color-picker-color-input,
 {
     color:white;
 }
+

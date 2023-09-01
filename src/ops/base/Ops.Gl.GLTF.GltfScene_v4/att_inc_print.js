@@ -425,7 +425,6 @@ function printInfo()
         html += "  <th>name</th>";
         html += "  <th>type</th>";
         html += "  <th>func</th>";
-
         html += "</tr>";
 
         sizes.images = 0;
