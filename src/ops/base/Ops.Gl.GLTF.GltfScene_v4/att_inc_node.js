@@ -40,7 +40,7 @@ const gltfNode = class
 
         n._animActions = this._animActions;
         n.children = this.children;
-        n.skinRenderer = new GltfSkin(n);
+        if (this.skin) n.skinRenderer = new GltfSkin(this);
 
         this.updateMatrix();
         return n;
@@ -188,6 +188,11 @@ const gltfNode = class
         if (path == "translation") this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
+        else if (path == "weights")
+        {
+            this._animWeights = this._animActions[name][path];
+            console.log(this._animWeights);
+        }
         else console.warn("unknown anim path", path, anims);
     }
 

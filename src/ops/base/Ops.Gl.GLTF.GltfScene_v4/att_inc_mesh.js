@@ -20,6 +20,7 @@ let gltfMesh = class
         this.geom.verticesIndices = [];
         this.bounds = null;
         this.primitive = 4;
+        this.morphTargetsRenderMod = null;
 
         this.weights = prim.weights;
 
@@ -135,17 +136,17 @@ let gltfMesh = class
                 console.log("prim.targets", prim.targets.length);
                 for (let j = 0; j < prim.targets.length; j++)
                 {
-                    let tgeom = this.geom.copy();
+                    const tgeom = new CGL.Geometry("gltf_target_" + j);
 
-                    if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
+                    // if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
 
                     this.fillGeomAttribs(gltf, tgeom, prim.targets[j], false);
 
-                    { // calculate normals for final position of morphtarget for later...
-                        for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
-                        tgeom.calculateNormals();
-                        for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] -= this.geom.vertices[i];
-                    }
+                    // { // calculate normals for final position of morphtarget for later...
+                    //     for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
+                    //     tgeom.calculateNormals();
+                    //     for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] -= this.geom.vertices[i];
+                    // }
 
                     this.geom.morphTargets.push(tgeom);
                 }
@@ -339,44 +340,47 @@ let gltfMesh = class
             }
 
             this.mesh = new CGL.Mesh(cgl, g, glprim);
+            this.mesh.addVertexNumbers = true;
             // this.mesh._geom = null;
         }
         else
         {
             // update morphTargets
-            if (this.geom && this.geom.morphTargets.length)
+            if (this.geom && this.geom.morphTargets.length && !this.morphTargetsRenderMod)
             {
-                this.morphGeom = this.geom.copy();
-
-                this.test = time;
-
-                // if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
-
-                const mt = this.geom.morphTargets[Math.floor(this.test)];
-                const mt2 = this.geom.morphTargets[Math.floor(this.test + 1)];
-
-                if (mt && mt.vertices && mt2)
-                {
-                    if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
-                        this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
-
-                    const fract = 0.0;// this.test % 1;
-                    for (let i = 0; i < this.morphGeom.vertices.length; i++)
-                    {
-                        this.morphGeom.vertices[i] =
-                            this.geom.vertices[i] +
-                            (1.0 - fract) * mt.vertices[i] +
-                            fract * mt2.vertices[i];
-
-                        this.morphGeom.vertexNormals[i] =
-                            (1.0 - fract) * mt.vertexNormals[i] +
-                            fract * mt2.vertexNormals[i];
-                    }
-
-                    this.mesh.updateNormals(this.morphGeom);
-                    this.mesh.updateVertices(this.morphGeom);
-                }
+                this.morphTargetsRenderMod = new GltfTargetsRenderer(this);
             }
+            //     this.morphGeom = this.geom.copy();
+
+            //     this.test = time;
+
+            //     // if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
+
+            //     const mt = this.geom.morphTargets[Math.floor(this.test)];
+            //     const mt2 = this.geom.morphTargets[Math.floor(this.test + 1)];
+
+            //     if (mt && mt.vertices && mt2)
+            //     {
+            //         if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
+            //             this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
+
+            //         const fract = 0.0;// this.test % 1;
+            //         for (let i = 0; i < this.morphGeom.vertices.length; i++)
+            //         {
+            //             this.morphGeom.vertices[i] =
+            //                 this.geom.vertices[i] +
+            //                 (1.0 - fract) * mt.vertices[i] +
+            //                 fract * mt2.vertices[i];
+
+            //             this.morphGeom.vertexNormals[i] =
+            //                 (1.0 - fract) * mt.vertexNormals[i] +
+            //                 fract * mt2.vertexNormals[i];
+            //         }
+
+            //         this.mesh.updateNormals(this.morphGeom);
+            //         this.mesh.updateVertices(this.morphGeom);
+            //     }
+            // }
 
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
             if (skinRenderer)useMat = false;
@@ -418,7 +422,9 @@ let gltfMesh = class
                     }
             }
 
+            if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
+            if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 
             if (inUseMatProps.get())
             {
