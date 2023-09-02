@@ -7,6 +7,8 @@ const gltfNode = class
         if (node.hasOwnProperty("camera")) this.camera = node.camera;
         this.hidden = false;
         this.mat = mat4.create();
+        this._animActions = {};
+        this._animWeights = [];
         this._animMat = mat4.create();
         this._tempMat = mat4.create();
         this._tempQuat = quat.create();
@@ -20,7 +22,6 @@ const gltfNode = class
         this._tempAnimScale = null;
         this.addMulMat = null;
         this.updateMatrix();
-        this._animActions = {};
         this.skinRenderer = null;
         this.copies = [];
     }
@@ -39,7 +40,7 @@ const gltfNode = class
 
         n._animActions = this._animActions;
         n.children = this.children;
-        n.skinRenderer = new GltfSkin(n);
+        if (this.skin) n.skinRenderer = new GltfSkin(this);
 
         this.updateMatrix();
         return n;
@@ -162,7 +163,8 @@ const gltfNode = class
             if (path == "translation") this._animTrans = this._animActions[name][path];
             else if (path == "rotation") this._animRot = this._animActions[name][path];
             else if (path == "scale") this._animScale = this._animActions[name][path];
-            else console.warn("unknown anim path", path, this._animActions[name][path]);
+            else if (path == "weights") this._animWeights = this._animActions[name][path];
+            else console.log("[gltfNode] unknown anim path", path, this._animActions[name][path]);
         }
     }
 
@@ -179,13 +181,18 @@ const gltfNode = class
 
         // for (let i = 0; i < this.copies.length; i++) this.copies[i]._animActions = this._animActions;
 
-        if (this._animActions[name][path]) op.warn("animation action path already exists", name, path, this._animActions[name][path]);
+        if (this._animActions[name][path]) op.log("[gltfNode] animation action path already exists", name, path, this._animActions[name][path]);
 
         this._animActions[name][path] = anims;
 
         if (path == "translation") this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
+        else if (path == "weights")
+        {
+            this._animWeights = this._animActions[name][path];
+            console.log(this._animWeights);
+        }
         else console.warn("unknown anim path", path, anims);
     }
 

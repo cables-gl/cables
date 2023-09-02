@@ -18,7 +18,7 @@ const
 
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
-    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth"]),
+    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Never"]),
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
@@ -151,12 +151,13 @@ inExec.onTriggered = function ()
     if (inLoop.get())
     {
         time %= maxTime;
-        if (time < lastTime)outAnimFinished.trigger();
+        if (time < lastTime) outAnimFinished.trigger();
     }
     else
     {
-        if (maxTime > 0 && time >= maxTime)outAnimFinished.trigger();
+        if (maxTime > 0 && time >= maxTime) outAnimFinished.trigger();
     }
+
     lastTime = time;
 
     cgl.pushModelMatrix();
