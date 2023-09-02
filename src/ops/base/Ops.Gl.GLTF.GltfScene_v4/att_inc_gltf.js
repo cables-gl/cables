@@ -150,10 +150,10 @@ function loadAnims(gltf)
             if (bufferIn && bufferOut)
             {
                 let numComps = 1;
-                if (accOut.type == "VEC2")numComps = 2;
-                else if (accOut.type == "VEC3")numComps = 3;
-                else if (accOut.type == "VEC4")numComps = 4;
-                else if (accOut.type == "SCALAR")numComps = 19;
+                if (accOut.type === "VEC2")numComps = 2;
+                else if (accOut.type === "VEC3")numComps = 3;
+                else if (accOut.type === "VEC4")numComps = 4;
+                else if (accOut.type === "SCALAR")numComps = 19;
                 else op.log("[] UNKNOWN accOut.type", accOut.type);
 
                 const anims = [];
@@ -167,9 +167,9 @@ function loadAnims(gltf)
                     anims.push(newAnim);
                 }
 
-                if (sampler.interpolation == "LINEAR") {}
-                else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
-                else if (sampler.interpolation == "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
+                if (sampler.interpolation === "LINEAR") {}
+                else if (sampler.interpolation === "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
+                else if (sampler.interpolation === "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
                 // console.log(bufferOut)

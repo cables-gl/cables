@@ -61,9 +61,9 @@ const GltfTargetsRenderer = class
         //     this._lastTime = time;
         // }
 
-        if (this.tex)
+        if (this.tex && this.mesh.weights)
         {
-            this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, 0]);
+            this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
 
             this._mod.pushTexture("MOD_targetTex", this.tex);
 
