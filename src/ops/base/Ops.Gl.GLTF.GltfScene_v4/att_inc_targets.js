@@ -2,9 +2,11 @@ const GltfTargetsRenderer = class
 {
     constructor(mesh)
     {
-        // this.mesh=mesh;
+        this.mesh = mesh;
         this.makeTex(mesh.geom);
         this.numRowsPerTarget = 0;
+
+        console.log(this.mesh);
     }
 
     renderFinish(cgl)
@@ -28,6 +30,9 @@ const GltfTargetsRenderer = class
 
             this._mod.addUniformVert("4f", "MOD_targetTexInfo", [0, 0, 0, 0]);
             this._mod.addUniformVert("t", "MOD_targetTex", 1);
+
+            this._mod.addUniformVert("f[]", "MOD_weights", []);
+
             const tr = vec3.create();
         }
 
@@ -61,9 +66,12 @@ const GltfTargetsRenderer = class
             this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, 0]);
 
             this._mod.pushTexture("MOD_targetTex", this.tex);
+
+            // console.log(this.mesh.weights);
+            this._mod.setUniformValue("MOD_weights", this.mesh.weights);
         }
 
-        // this._mod.define("SKIN_NUM_BONES", gltf.json.skins[skinIdx].joints.length);
+        this._mod.define("MOD_NUM_WEIGHTS", this.mesh.weights.length);
         this._mod.bind();
 
         // draw mesh...
@@ -93,54 +101,55 @@ const GltfTargetsRenderer = class
 
         for (let i = 0; i < geom.morphTargets.length; i++)
         {
-            if (geom.morphTargets[i].vertices && geom.morphTargets[i].vertices.length)
-            {
-                for (let j = 0; j < geom.morphTargets[i].vertices.length; j += 3)
+            for (let ss = 0; ss < 3; ss++)
+                if (geom.morphTargets[i].vertices && geom.morphTargets[i].vertices.length)
                 {
-                    pixels[((row * w) + (j / 3)) * 4 + 0] = geom.morphTargets[i].vertices[j + 0];
-                    pixels[((row * w) + (j / 3)) * 4 + 1] = geom.morphTargets[i].vertices[j + 1];
-                    pixels[((row * w) + (j / 3)) * 4 + 2] = geom.morphTargets[i].vertices[j + 2];
-                    pixels[((row * w) + (j / 3)) * 4 + 3] = 1;
+                    for (let j = 0; j < geom.morphTargets[i].vertices.length; j += 3)
+                    {
+                        pixels[((row * w) + (j / 3)) * 4 + 0] = geom.morphTargets[i].vertices[j + 0];
+                        pixels[((row * w) + (j / 3)) * 4 + 1] = geom.morphTargets[i].vertices[j + 1];
+                        pixels[((row * w) + (j / 3)) * 4 + 2] = geom.morphTargets[i].vertices[j + 2];
+                        pixels[((row * w) + (j / 3)) * 4 + 3] = 1;
+                    }
+                    row++;
                 }
-                row++;
-            }
 
-            if (geom.morphTargets[i].vertexNormals && geom.morphTargets[i].vertexNormals.length)
-            {
-                /*                for (let j = 0; j < geom.morphTargets[i].vertexNormals.length; j += 3)
-                {
-                    pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].vertexNormals[j + 0];
-                    pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].vertexNormals[j + 1];
-                    pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].vertexNormals[j + 2];
-                    pixels[(row * w + j / 3) * 4 + 3] = 1;
-                }
-                */
-                row++;
-            }
+            // if (geom.morphTargets[i].vertexNormals && geom.morphTargets[i].vertexNormals.length)
+            // {
+            //     for (let j = 0; j < geom.morphTargets[i].vertexNormals.length; j += 3)
+            //     {
+            //         pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].vertexNormals[j + 0];
+            //         pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].vertexNormals[j + 1];
+            //         pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].vertexNormals[j + 2];
+            //         pixels[(row * w + j / 3) * 4 + 3] = 1;
+            //     }
 
-            if (geom.morphTargets[i].tangents && geom.morphTargets[i].tangents.length)
-            {
-                // for (let j = 0; j < geom.morphTargets[i].tangents.length; j += 3)
-                // {
-                //     pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].tangents[j + 0];
-                //     pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].tangents[j + 1];
-                //     pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].tangents[j + 2];
-                //     pixels[(row * w + j / 3) * 4 + 3] = 1;
-                // }
-                row++;
-            }
+            //     row++;
+            // }
 
-            if (geom.morphTargets[i].bitangents && geom.morphTargets[i].bitangents.length)
-            {
-                // for (let j = 0; j < geom.morphTargets[i].bitangents.length; j += 3)
-                // {
-                //     pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].bitangents[j + 0];
-                //     pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].bitangents[j + 1];
-                //     pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].bitangents[j + 2];
-                //     pixels[(row * w + j / 3) * 4 + 3] = 1;
-                // }
-                row++;
-            }
+            // if (geom.morphTargets[i].tangents && geom.morphTargets[i].tangents.length)
+            // {
+            //     for (let j = 0; j < geom.morphTargets[i].tangents.length; j += 3)
+            //     {
+            //         pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].tangents[j + 0];
+            //         pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].tangents[j + 1];
+            //         pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].tangents[j + 2];
+            //         pixels[(row * w + j / 3) * 4 + 3] = 1;
+            //     }
+            //     row++;
+            // }
+
+            // if (geom.morphTargets[i].bitangents && geom.morphTargets[i].bitangents.length)
+            // {
+            //     for (let j = 0; j < geom.morphTargets[i].bitangents.length; j += 3)
+            //     {
+            //         pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].bitangents[j + 0];
+            //         pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].bitangents[j + 1];
+            //         pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].bitangents[j + 2];
+            //         pixels[(row * w + j / 3) * 4 + 3] = 1;
+            //     }
+            //     row++;
+            // }
         }
 
         this.tex = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "targetsTexture" });

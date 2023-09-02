@@ -153,7 +153,8 @@ function loadAnims(gltf)
                 if (accOut.type == "VEC2")numComps = 2;
                 else if (accOut.type == "VEC3")numComps = 3;
                 else if (accOut.type == "VEC4")numComps = 4;
-                else op.warn("unknown accOut.type", accOut.type);
+                else if (accOut.type == "SCALAR")numComps = 19;
+                else op.log("[] UNKNOWN accOut.type", accOut.type);
 
                 const anims = [];
 
@@ -178,7 +179,7 @@ function loadAnims(gltf)
                     for (let k = 0; k < numComps; k++)
                         anims[k].setValue(0, bufferOut[0 * numComps + k]);
 
-                // console.log(sampler.interpolation,bufferOut.length/numComps)
+                console.log("/////", sampler.interpolation, numComps);
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {

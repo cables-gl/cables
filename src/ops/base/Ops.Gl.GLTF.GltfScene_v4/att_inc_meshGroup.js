@@ -21,7 +21,7 @@ const gltfMeshGroup = class
         }
     }
 
-    render(cgl, ignoreMat, skinRenderer, _time)
+    render(cgl, ignoreMat, skinRenderer, _time, weights)
     {
         for (let i = 0; i < this.meshes.length; i++)
         {
@@ -30,7 +30,7 @@ const gltfMeshGroup = class
             if (!ignoreMat && useMat) cgl.pushShader(gltf.shaders[this.meshes[i].material]);
             // console.log(gltf.shaders[this.meshes[i].material],this.meshes[i].material)
             if (skinRenderer)skinRenderer.renderStart(cgl, _time);
-
+            if (weights) this.meshes[i].weights = weights;
             this.meshes[i].render(cgl, ignoreMat, skinRenderer, _time);
             if (skinRenderer)skinRenderer.renderFinish(cgl);
             if (!ignoreMat && useMat) cgl.popShader();

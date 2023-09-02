@@ -8,7 +8,7 @@ const gltfNode = class
         this.hidden = false;
         this.mat = mat4.create();
         this._animActions = {};
-        this._animWeights = [];
+        this.animWeights = [];
         this._animMat = mat4.create();
         this._tempMat = mat4.create();
         this._tempQuat = quat.create();
@@ -85,7 +85,7 @@ const gltfNode = class
             this.mesh = this._gltf.meshes[this._node.mesh];
             if (this.isCopy)
             {
-                console.log(this.mesh);
+                // console.log(this.mesh);
             }
         }
 
@@ -163,7 +163,7 @@ const gltfNode = class
             if (path == "translation") this._animTrans = this._animActions[name][path];
             else if (path == "rotation") this._animRot = this._animActions[name][path];
             else if (path == "scale") this._animScale = this._animActions[name][path];
-            else if (path == "weights") this._animWeights = this._animActions[name][path];
+            else if (path == "weights") this.animWeights = this._animActions[name][path];
             else console.log("[gltfNode] unknown anim path", path, this._animActions[name][path]);
         }
     }
@@ -190,8 +190,9 @@ const gltfNode = class
         else if (path == "scale") this._animScale = anims;
         else if (path == "weights")
         {
-            this._animWeights = this._animActions[name][path];
-            console.log(this._animWeights);
+            // console.log("weights",name,path,anims)
+            this.animWeights = this._animActions[name][path];
+            // console.log(this.animWeights);
         }
         else console.warn("unknown anim path", path, anims);
     }
@@ -275,6 +276,22 @@ const gltfNode = class
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
 
+        if (this.animWeights)
+        {
+            this.weights = this.weights || [];
+
+            let str = "";
+            for (let i = 0; i < this.animWeights.length; i++)
+            {
+                this.weights[i] = this.animWeights[i].getValue(_time);
+                str += this.weights[i] + "/";
+            }
+
+            // console.log(str);
+            // this.mesh.weights=this.animWeights.get(_time);
+            // console.log(this.animWeights);
+        }
+
         if (this.addTranslate) mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
 
         if (this.addMulMat) mat4.mul(cgl.mMatrix, cgl.mMatrix, this.addMulMat);
@@ -299,12 +316,12 @@ const gltfNode = class
             {
                 this.skinRenderer.time = _time;
                 if (!dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time);
+                    this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time, this.weights);
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, null, _time);
+                    this.mesh.render(cgl, ignoreMaterial, null, _time, this.weights);
             }
         }
 
