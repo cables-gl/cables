@@ -30,44 +30,15 @@ const GltfTargetsRenderer = class
 
             this._mod.addUniformVert("4f", "MOD_targetTexInfo", [0, 0, 0, 0]);
             this._mod.addUniformVert("t", "MOD_targetTex", 1);
-
             this._mod.addUniformVert("f[]", "MOD_weights", []);
 
             const tr = vec3.create();
         }
 
-        // const skinIdx = this._node.skin;
-        // const arrLength = gltf.json.skins[skinIdx].joints.length * 16;
-
-        // // if (this._lastTime != time || !time)
-        // {
-        //     // this._lastTime=inTime.get();
-        //     if (this._matArr.length != arrLength) this._matArr.length = arrLength;
-
-        //     for (let i = 0; i < gltf.json.skins[skinIdx].joints.length; i++)
-        //     {
-        //         const i16 = i * 16;
-        //         const jointIdx = gltf.json.skins[skinIdx].joints[i];
-        //         const nodeJoint = gltf.nodes[jointIdx];
-
-        //         for (let j = 0; j < 16; j++)
-        //             this._invBindMatrix[j] = gltf.accBuffers[gltf.json.skins[skinIdx].inverseBindMatrices][i16 + j];
-
-        //         mat4.mul(this._m, nodeJoint.modelMatAbs(), this._invBindMatrix);
-
-        //         for (let j = 0; j < this._m.length; j++) this._matArr[i16 + j] = this._m[j];
-        //     }
-
-        //     this._lastTime = time;
-        // }
-
         if (this.tex && this.mesh.weights)
         {
             this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
-
             this._mod.pushTexture("MOD_targetTex", this.tex);
-
-            // console.log(this.mesh.weights);
             this._mod.setUniformValue("MOD_weights", this.mesh.weights);
         }
 

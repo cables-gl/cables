@@ -153,7 +153,10 @@ function loadAnims(gltf)
                 if (accOut.type === "VEC2")numComps = 2;
                 else if (accOut.type === "VEC3")numComps = 3;
                 else if (accOut.type === "VEC4")numComps = 4;
-                else if (accOut.type === "SCALAR")numComps = 19;
+                else if (accOut.type === "SCALAR")
+                {
+                    numComps = bufferOut.length / bufferIn.length; // is this really the way to find out ? cant find any other way,except number of morph targets, but not really connected...
+                }
                 else op.log("[] UNKNOWN accOut.type", accOut.type);
 
                 const anims = [];
