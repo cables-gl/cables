@@ -1,2 +1,2 @@
 
-// UNI sampler2D MOD_targetTex;
+UNI float MOD_weights[MOD_NUM_WEIGHTS];

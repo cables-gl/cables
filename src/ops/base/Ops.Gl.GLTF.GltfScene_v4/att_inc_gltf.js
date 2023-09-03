@@ -150,10 +150,14 @@ function loadAnims(gltf)
             if (bufferIn && bufferOut)
             {
                 let numComps = 1;
-                if (accOut.type == "VEC2")numComps = 2;
-                else if (accOut.type == "VEC3")numComps = 3;
-                else if (accOut.type == "VEC4")numComps = 4;
-                else op.warn("unknown accOut.type", accOut.type);
+                if (accOut.type === "VEC2")numComps = 2;
+                else if (accOut.type === "VEC3")numComps = 3;
+                else if (accOut.type === "VEC4")numComps = 4;
+                else if (accOut.type === "SCALAR")
+                {
+                    numComps = bufferOut.length / bufferIn.length; // is this really the way to find out ? cant find any other way,except number of morph targets, but not really connected...
+                }
+                else op.log("[] UNKNOWN accOut.type", accOut.type);
 
                 const anims = [];
 
@@ -166,9 +170,9 @@ function loadAnims(gltf)
                     anims.push(newAnim);
                 }
 
-                if (sampler.interpolation == "LINEAR") {}
-                else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
-                else if (sampler.interpolation == "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
+                if (sampler.interpolation === "LINEAR") {}
+                else if (sampler.interpolation === "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
+                else if (sampler.interpolation === "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
                 // console.log(bufferOut)
@@ -178,7 +182,7 @@ function loadAnims(gltf)
                     for (let k = 0; k < numComps; k++)
                         anims[k].setValue(0, bufferOut[0 * numComps + k]);
 
-                // console.log(sampler.interpolation,bufferOut.length/numComps)
+                console.log("/////", sampler.interpolation, numComps);
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {
