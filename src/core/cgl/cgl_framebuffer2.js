@@ -215,17 +215,17 @@ Framebuffer2.prototype.setSize = function (w, h)
                 const extcb2 = this._cgl.enableExtension("EXT_color_buffer_half_float_linear");
                 internFormat = this._cgl.gl.RGBA16F;
             }
-            if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
+            else if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
                 // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
 
                 if (this._cgl.glVersion == 1) this._cgl.enableExtension("OES_texture_float");
-                else this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+                const ext3 = this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 internFormat = this._cgl.gl.RGBA32F;
             }
-            if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+            else if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
                 // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
