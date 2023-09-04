@@ -228,25 +228,22 @@ Framebuffer2.prototype.setSize = function (w, h)
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
                 // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
 
-                if (!this._cgl.enableExtension("OES_texture_float_linear"))
+                if (!this._cgl.enableExtension("EXT_color_buffer_float_linear"))
                 {
                     console.log("no linear pixelformat,using nearest");
                     this._options.filter = Texture.FILTER_NEAREST;
                     this.setFilter(this._options.filter);
                 }
 
-
-
                 internFormat = this._cgl.gl.RGBA32F;
             }
             else if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
-                // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
 
                 if (!this._cgl.enableExtension("OES_texture_float_linear"))
                 {
-                    console.log("no linear pixelformat,using nearest");
+                    console.log("no linear pixelformat,switching to nearest");
                     this._options.filter = Texture.FILTER_NEAREST;
                     this.setFilter(this._options.filter);
                 }
