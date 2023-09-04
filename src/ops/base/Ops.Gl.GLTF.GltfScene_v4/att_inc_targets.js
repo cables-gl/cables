@@ -3,10 +3,10 @@ const GltfTargetsRenderer = class
     constructor(mesh)
     {
         this.mesh = mesh;
-        this.makeTex(mesh.geom);
+        this.tex = null;
         this.numRowsPerTarget = 0;
 
-        console.log(this.mesh);
+        this.makeTex(mesh.geom);
     }
 
     renderFinish(cgl)
@@ -35,13 +35,14 @@ const GltfTargetsRenderer = class
             const tr = vec3.create();
         }
 
-        if (this.tex && this.mesh.weights)
-        {
-            this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
-            this._mod.pushTexture("MOD_targetTex", this.tex);
-            this._mod.setUniformValue("MOD_weights", this.mesh.weights);
-        }
+        // if (this.tex && this.mesh.weights)
+        // {
+        // }
+        this._mod.pushTexture("MOD_targetTex", this.tex);
+        this._mod.setUniformValue("MOD_weights", this.mesh.weights);
+        this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
 
+        // console.log(this.mesh.weights)
         this._mod.define("MOD_NUM_WEIGHTS", this.mesh.weights.length);
         this._mod.bind();
 
@@ -65,14 +66,14 @@ const GltfTargetsRenderer = class
 
         h = geom.morphTargets.length * this.numRowsPerTarget;
 
-        console.log("this.numRowsPerTarget", this.numRowsPerTarget);
+        // console.log("this.numRowsPerTarget", this.numRowsPerTarget);
 
         const pixels = new Float32Array(w * h * 4);
         let row = 0;
 
         for (let i = 0; i < geom.morphTargets.length; i++)
         {
-            for (let ss = 0; ss < 3; ss++)
+            for (let ss = 0; ss < this.numRowsPerTarget; ss++)
                 if (geom.morphTargets[i].vertices && geom.morphTargets[i].vertices.length)
                 {
                     for (let j = 0; j < geom.morphTargets[i].vertices.length; j += 3)
@@ -85,13 +86,14 @@ const GltfTargetsRenderer = class
                     row++;
                 }
 
+            // console.log(geom.morphTargets[i].vertexNormals)
             // if (geom.morphTargets[i].vertexNormals && geom.morphTargets[i].vertexNormals.length)
             // {
             //     for (let j = 0; j < geom.morphTargets[i].vertexNormals.length; j += 3)
             //     {
-            //         pixels[(row * w + j / 3) * 4 + 0] = geom.morphTargets[i].vertexNormals[j + 0];
-            //         pixels[(row * w + j / 3) * 4 + 1] = geom.morphTargets[i].vertexNormals[j + 1];
-            //         pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].vertexNormals[j + 2];
+            //         pixels[(row * w + j / 3) * 4 + 0] = 0.0;// geom.morphTargets[i].vertexNormals[j + 0];
+            //         pixels[(row * w + j / 3) * 4 + 1] = 1.0;// geom.morphTargets[i].vertexNormals[j + 1];
+            //         pixels[(row * w + j / 3) * 4 + 2] = 0.0;// geom.morphTargets[i].vertexNormals[j + 2];
             //         pixels[(row * w + j / 3) * 4 + 3] = 1;
             //     }
 
@@ -125,7 +127,7 @@ const GltfTargetsRenderer = class
 
         this.tex = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "targetsTexture" });
 
-        this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_NEAREST, CGL.Texture.WRAP_CLAMP_TO_EDGE);
+        this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
 
         console.log("morphTargets generated texture", w, h);
     }
