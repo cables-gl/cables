@@ -182,8 +182,6 @@ function loadAnims(gltf)
                     for (let k = 0; k < numComps; k++)
                         anims[k].setValue(0, bufferOut[0 * numComps + k]);
 
-                // console.log("/////", sampler.interpolation, numComps);
-
                 for (let j = 0; j < bufferIn.length; j++)
                 {
                     maxTime = Math.max(bufferIn[j], maxTime);

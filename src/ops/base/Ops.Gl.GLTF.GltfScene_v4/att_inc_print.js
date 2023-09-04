@@ -292,7 +292,7 @@ function printInfo()
             else html += "-<br/>";
         }
 
-        if (gltf.json.meshes[i].primitives.length > 0)
+        if (gltf.json.meshes[i].primitives.length > 1)
             html += "=" + numVerts;
         html += "</td>";
 

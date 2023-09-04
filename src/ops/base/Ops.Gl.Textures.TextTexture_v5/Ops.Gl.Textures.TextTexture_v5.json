@@ -48,6 +48,16 @@
             },
             {
                 "type": 0,
+                "name": "Padding Y",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Padding X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "filter index",
                 "group": "Texture",
                 "subType": "integer"
