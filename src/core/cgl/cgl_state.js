@@ -1247,7 +1247,12 @@ Context.prototype.enableExtension = function (name)
     // const start = performance.now();
     const o = this.gl.getExtension(name);
     // console.log(performance.now() - start);
-    if (!o) console.error("extension not available", name);
+    if (!o)
+    {
+        console.error("extension not available", name);
+        this._log.stack("extension");
+    }
+
     return o;
 };
 

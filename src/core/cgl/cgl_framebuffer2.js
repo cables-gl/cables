@@ -209,10 +209,14 @@ Framebuffer2.prototype.setSize = function (w, h)
 
         if (this._options.isFloatingPointTexture)
         {
+            if (this._cgl.glUseHalfFloatTex)
+            {
+                console.log("forcing half float...");
+            }
             if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA16HF || this._cgl.glUseHalfFloatTex)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
-                // const extcb2 = this._cgl.enableExtension("EXT_color_buffer_half_float_linear");
+                const extcb2 = this._cgl.enableExtension("EXT_color_buffer_half_float_linear");
                 internFormat = this._cgl.gl.RGBA16F;
             }
             else if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
