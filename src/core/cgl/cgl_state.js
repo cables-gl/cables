@@ -157,7 +157,7 @@ const Context = function (_patch)
             // this.patch.config.glslPrecision = "highp";
             // this.patch.config.canvas.forceWebGl1 = true;
             // this.patch.config.canvas.forceTextureNearest = true;
-            // this.glUseHalfFloatTex = true;
+            this.glUseHalfFloatTex = true;
         }
 
 
