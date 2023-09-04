@@ -149,8 +149,9 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
         // safari stuff..........
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) // && (navigator.userAgent.match(/iPhone/i))
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
         {
+            console.log("safari....");
             this._isSafariCrap = true;
             // this._log.warn("safari detected, adjusting canvas settings...");
             // this.patch.config.canvas.antialias = false;
