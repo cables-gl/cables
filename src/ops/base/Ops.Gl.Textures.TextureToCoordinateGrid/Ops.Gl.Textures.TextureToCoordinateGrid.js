@@ -17,29 +17,40 @@ const tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
 
     });
 
+let needsUpdate = true;
 let height = 0;
 const uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect);
 const uni2 = new CGL.Uniform(tc.bgShader, "f", "threshold", inThreshold);
 new CGL.Uniform(tc.bgShader, "f", "repeatsY", inRepeatZ);
 new CGL.Uniform(tc.bgShader, "f", "repeatsSpace", inRepeatSpace);
 
+inTex.onChange =
+inRepeatSpace.onChange =
+inRepeatZ.onChange =
+inThreshold.onChange =
+inAspect.onChange =
+() =>
+{
+    needsUpdate = true;
+};
+
 exec.onTriggered = () =>
 {
-    if (!inTex.get()) return;
+    const tex = inTex.get();
+    if (!tex) return;
 
-    const repeats = Math.max(1, inRepeatZ.get());
-
-    const nheight = inTex.get().height * repeats;
-    if (height != nheight)
+    if (needsUpdate)
     {
-        height = nheight;
-        tc.setSize(
-            inTex.get().width,
-            inTex.get().height * repeats);
-    }
+        const repeats = Math.max(1, inRepeatZ.get());
 
-    outFpTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-    outFpTex.set(tc.copy(inTex.get()));
+        tc.setSize(
+            tex.width,
+            tex.height * repeats);
+
+        outFpTex.setRef(tc.copy(inTex.get()));
+
+        needsUpdate = false;
+    }
 
     next.trigger();
 };
