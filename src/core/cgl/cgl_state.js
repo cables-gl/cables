@@ -151,13 +151,7 @@ const Context = function (_patch)
         // safari stuff..........
         if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
         {
-            console.log("safari....");
             this._isSafariCrap = true;
-            // this._log.warn("safari detected, adjusting canvas settings...");
-            // this.patch.config.canvas.antialias = false;
-            // this.patch.config.glslPrecision = "highp";
-            // this.patch.config.canvas.forceWebGl1 = true;
-            // this.patch.config.canvas.forceTextureNearest = true;
             this.glUseHalfFloatTex = true;
         }
 
@@ -1250,7 +1244,7 @@ Context.prototype.enableExtension = function (name)
     // console.log(performance.now() - start);
     if (!o)
     {
-        console.error("extension not available", name);
+        console.log("[cgl_state] extension not available", name);
         // this._log.stack("extension");
     }
 
