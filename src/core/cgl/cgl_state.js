@@ -1251,7 +1251,7 @@ Context.prototype.enableExtension = function (name)
     if (!o)
     {
         console.error("extension not available", name);
-        this._log.stack("extension");
+        // this._log.stack("extension");
     }
 
     return o;
