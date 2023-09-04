@@ -157,7 +157,7 @@ const Context = function (_patch)
             // this.patch.config.glslPrecision = "highp";
             // this.patch.config.canvas.forceWebGl1 = true;
             // this.patch.config.canvas.forceTextureNearest = true;
-            this.glUseHalfFloatTex = true;
+            // this.glUseHalfFloatTex = true;
         }
 
 
@@ -175,7 +175,7 @@ const Context = function (_patch)
             // safari
             if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
             {
-                // this.glUseHalfFloatTex = true;
+                this.glUseHalfFloatTex = true;
             }
 
             // ios
