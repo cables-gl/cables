@@ -380,9 +380,6 @@ function parseGltf(arrayBuffer)
                             if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
                             accPos += 4;
                         }
-
-                        if (acc.min)
-                            console.log("!!!!!!!!!!!!!", dataBuff);
                     }
                     else if (acc.componentType == 5123) // UNSIGNED_SHORT
                     {

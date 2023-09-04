@@ -16,9 +16,15 @@ for(float i=0.0;i<MOD_numTargets;i+=1.0)
 {
     float y=1.0-((MOD_numLinesPerTarget*i)/MOD_height+halfpixy);
     vec2 coord=vec2(x,y);
-    vec4 targetXYZ = texture(MOD_targetTex,coord);
+    vec3 targetXYZ = texture(MOD_targetTex,coord).xyz;
 
-    off+=(targetXYZ.xyz*MOD_weights[int(i)]);
+    off+=(targetXYZ*MOD_weights[int(i)]);
+
+
+    coord.y+=1.0/MOD_height;
+    vec3 targetNormal = texture(MOD_targetTex,coord).xyz;
+    norm+=targetNormal*MOD_weights[int(i)];
+
 }
 
 pos.xyz+=off;
