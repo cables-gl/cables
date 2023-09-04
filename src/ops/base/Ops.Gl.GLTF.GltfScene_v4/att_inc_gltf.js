@@ -182,7 +182,7 @@ function loadAnims(gltf)
                     for (let k = 0; k < numComps; k++)
                         anims[k].setValue(0, bufferOut[0 * numComps + k]);
 
-                console.log("/////", sampler.interpolation, numComps);
+                // console.log("/////", sampler.interpolation, numComps);
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {
@@ -382,6 +382,9 @@ function parseGltf(arrayBuffer)
                             if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
                             accPos += 4;
                         }
+
+                        if (acc.min)
+                            console.log("!!!!!!!!!!!!!", dataBuff);
                     }
                     else if (acc.componentType == 5123) // UNSIGNED_SHORT
                     {
