@@ -149,15 +149,10 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
         // safari stuff..........
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) // && (navigator.userAgent.match(/iPhone/i))
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
         {
             this._isSafariCrap = true;
-            // this._log.warn("safari detected, adjusting canvas settings...");
-            // this.patch.config.canvas.antialias = false;
-            // this.patch.config.glslPrecision = "highp";
-            // this.patch.config.canvas.forceWebGl1 = true;
-            // this.patch.config.canvas.forceTextureNearest = true;
-            // this.glUseHalfFloatTex = true;
+            this.glUseHalfFloatTex = true;
         }
 
 
@@ -173,10 +168,10 @@ const Context = function (_patch)
             this.glVersion = 1;
 
             // safari
-            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
-            {
-                // this.glUseHalfFloatTex = true;
-            }
+            // if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
+            // {
+            //     this.glUseHalfFloatTex = true;
+            // }
 
             // ios
             if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
@@ -1247,7 +1242,12 @@ Context.prototype.enableExtension = function (name)
     // const start = performance.now();
     const o = this.gl.getExtension(name);
     // console.log(performance.now() - start);
-    if (!o) console.error("extension not available", name);
+    if (!o)
+    {
+        console.log("[cgl_state] extension not available", name);
+        // this._log.stack("extension");
+    }
+
     return o;
 };
 

@@ -211,31 +211,43 @@ Framebuffer2.prototype.setSize = function (w, h)
         {
             if (this._cgl.glUseHalfFloatTex)
             {
-                // const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+                console.log("forcing half float...");
             }
-            else
-            {
-            }
-
-            if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA16HF)
+            if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA16HF || this._cgl.glUseHalfFloatTex)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
-                const extcb2 = this._cgl.enableExtension("EXT_color_buffer_half_float_linear");
+                if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
+                {
+                    this._options.filter = Texture.FILTER_NEAREST;
+                    this.setFilter(this._options.filter);
+                }
                 internFormat = this._cgl.gl.RGBA16F;
             }
-            if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
+            else if (this._options.pixelFormat == Texture.PFORMATSTR_RGBA32F)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
                 // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
-                const ext3 = this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+
+                if (!this._cgl.enableExtension("EXT_color_buffer_float_linear"))
+                {
+                    console.log("no linear pixelformat,using nearest");
+                    this._options.filter = Texture.FILTER_NEAREST;
+                    this.setFilter(this._options.filter);
+                }
 
                 internFormat = this._cgl.gl.RGBA32F;
             }
-            if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+            else if (this._options.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
-                // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
-                const ext3 = this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+
+                if (!this._cgl.enableExtension("OES_texture_float_linear"))
+                {
+                    console.log("no linear pixelformat,switching to nearest");
+                    this._options.filter = Texture.FILTER_NEAREST;
+                    this.setFilter(this._options.filter);
+                }
+
 
                 internFormat = this._cgl.gl.R11F_G11F_B10F;
             }

@@ -62,6 +62,16 @@
                 "type": 0,
                 "name": "Threshold",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Repeats",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Repeats Spacing",
+                "subType": "number"
             }
         ],
         "portsOut": [
