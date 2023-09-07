@@ -43,6 +43,8 @@ const
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
 const cgl = op.patch.cgl;
+let gltfLoadingErrorMesh = null;
+let gltfLoadingError = false;
 let gltfTransforms = 0;
 let finishedLoading = false;
 let cam = null;
@@ -141,6 +143,12 @@ inExec.onTriggered = function ()
     if (!finishedLoading) return;
     if (!inActive.get()) return;
 
+    if (gltfLoadingError)
+    {
+        if (!gltfLoadingErrorMesh) gltfLoadingErrorMesh = CGL.MESHES.getSimpleCube(cgl, "ErrorCube");
+        gltfLoadingErrorMesh.render(cgl.getShader());
+    }
+
     gltfTransforms = 0;
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
@@ -226,10 +234,16 @@ function finishLoading()
 {
     if (!gltf)
     {
-        op.setUiError("nogltf", "gltf not found");
+        finishedLoading = true;
+        gltfLoadingError = true;
+        cgl.patch.loading.finished(loadingId);
+
+        op.setUiError("nogltf", "GLTF File not found");
         return;
     }
+
     op.setUiError("nogltf", null);
+
     if (gltf.loadingMeshes > 0)
     {
         // op.log("waiting for async meshes...");
@@ -246,8 +260,8 @@ function finishLoading()
     gltf.bounds = new CABLES.CG.BoundingBox();
     // gltf.bounds.applyPos(0, 0, 0);
 
-    if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
-    else op.setUiError("urlerror", null);
+    // if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
+    // else op.setUiError("urlerror", null);
 
     gltf.timing.push(["start calc bounds", Math.round((performance.now() - gltf.startTime))]);
 
