@@ -35,6 +35,7 @@ el.addEventListener("dblclick", function ()
 {
     valuePort.set(parseFloat(defaultValuePort.get()));
     inputValuePort.set(parseFloat(defaultValuePort.get()));
+    setValueFieldValue(defaultValuePort.get());
 });
 
 el.dataset.op = op.id;

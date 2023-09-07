@@ -1,5 +1,3 @@
-const CHUNK_HEADER_SIZE = 8;
-
 const Gltf = class
 {
     constructor()
@@ -256,6 +254,8 @@ function loadAfterDraco()
 
 function parseGltf(arrayBuffer)
 {
+    const CHUNK_HEADER_SIZE = 8;
+
     let j = 0, i = 0;
 
     const gltf = new Gltf();

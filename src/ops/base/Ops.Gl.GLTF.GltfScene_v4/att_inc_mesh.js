@@ -21,7 +21,6 @@ let gltfMesh = class
         this.bounds = null;
         this.primitive = 4;
         this.morphTargetsRenderMod = null;
-
         this.weights = prim.weights;
 
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
@@ -423,7 +422,12 @@ let gltfMesh = class
             }
 
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
-            if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
+            if (this.mesh)
+            {
+                // console.log(this.mesh)
+                // this.mesh.lastMaterial=0;
+                this.mesh.render(cgl.getShader(), ignoreMaterial);
+            }
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 
             if (inUseMatProps.get())
