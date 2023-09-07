@@ -712,6 +712,22 @@ Texture.getTempTexture = function (cgl)
 };
 
 /**
+ * @static
+ * @function getErrorTexture
+ * @memberof Texture
+ * @description returns the default temporary texture (grey diagonal stipes)
+ * @param {Context} cgl
+ * @return {Texture}
+ */
+Texture.getErrorTexture = function (cgl)
+{
+    if (!cgl) console.error("[getTempTexture] no cgl!");
+    if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT, 1, 0.2, 0.2);
+    return cgl.errorTexture;
+};
+
+
+/**
  * @function getEmptyTexture
  * @memberof Texture
  * @instance
@@ -934,8 +950,11 @@ Texture.getTempGradientTexture = function (cgl)
     return temptex;
 };
 
-Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
+Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
 {
+    if (r === undefined)r = 1;
+    if (g === undefined)g = 1;
+    if (b === undefined)b = 1;
     const temptex = new Texture(cgl);
     const arr = [];
     for (let y = 0; y < size; y++)
@@ -944,15 +963,15 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
         {
             if ((x + y) % 64 < 32)
             {
-                arr.push(200 + (y / size) * 25 + (x / size) * 25);
-                arr.push(200 + (y / size) * 25 + (x / size) * 25);
-                arr.push(200 + (y / size) * 25 + (x / size) * 25);
+                arr.push((200 + (y / size) * 25 + (x / size) * 25) * r);
+                arr.push((200 + (y / size) * 25 + (x / size) * 25) * g);
+                arr.push((200 + (y / size) * 25 + (x / size) * 25) * b);
             }
             else
             {
-                arr.push(40 + (y / size) * 25 + (x / size) * 25);
-                arr.push(40 + (y / size) * 25 + (x / size) * 25);
-                arr.push(40 + (y / size) * 25 + (x / size) * 25);
+                arr.push((40 + (y / size) * 25 + (x / size) * 25) * r);
+                arr.push((40 + (y / size) * 25 + (x / size) * 25) * g);
+                arr.push((40 + (y / size) * 25 + (x / size) * 25) * b);
             }
             arr.push(255);
         }
