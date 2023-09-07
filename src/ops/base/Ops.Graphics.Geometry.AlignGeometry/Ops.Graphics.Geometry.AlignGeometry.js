@@ -14,8 +14,7 @@ const
     ALIGN_MAX = 2,
     ALIGN_MIN = 3;
 
-let oldGeom = null,
-    geom = null;
+let geom = null;
 
 function getAxisId(port)
 {
@@ -27,11 +26,7 @@ function getAxisId(port)
 
 function update()
 {
-    if (oldGeom != geometry.get())
-    {
-        geom = null;
-        oldGeom = geometry.get();
-    }
+    const oldGeom = geometry.get();
 
     if (!oldGeom)
     {
@@ -44,7 +39,7 @@ function update()
     axis[2] = getAxisId(z);
 
     const bounds = oldGeom.getBounds();
-    if (!geom) geom = oldGeom.copy();
+    geom = oldGeom.copy();
 
     for (let axi = 0; axi < 3; axi++)
     {
@@ -88,6 +83,5 @@ function update()
         }
     }
 
-    outGeom.set(null);
-    outGeom.set(geom);
+    outGeom.setRef(geom);
 }
