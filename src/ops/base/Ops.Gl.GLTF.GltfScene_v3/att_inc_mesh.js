@@ -160,7 +160,7 @@ let gltfMesh = class
         else if (x < 0.0031308)
             return x * 12.92;
         else
-            return Math.pow(x, 1 / 2.2) * 1.055 - 0.055;
+            return x ** (1 / 2.2) * 1.055 - 0.055;
     }
 
     calcVertexColors(arr)

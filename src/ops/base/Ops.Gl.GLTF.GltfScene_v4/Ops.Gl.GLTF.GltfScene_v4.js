@@ -42,7 +42,6 @@ const
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
-const le = true; // little endian
 const cgl = op.patch.cgl;
 let gltfTransforms = 0;
 let finishedLoading = false;
@@ -353,7 +352,6 @@ function loadBin(addCacheBuster)
             }
 
             boundingPoints = [];
-
             maxTime = 0;
             gltf = parseGltf(arrayBuffer);
 
