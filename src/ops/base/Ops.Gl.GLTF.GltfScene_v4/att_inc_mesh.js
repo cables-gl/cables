@@ -21,7 +21,6 @@ let gltfMesh = class
         this.bounds = null;
         this.primitive = 4;
         this.morphTargetsRenderMod = null;
-
         this.weights = prim.weights;
 
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
@@ -164,7 +163,7 @@ let gltfMesh = class
         else if (x < 0.0031308)
             return x * 12.92;
         else
-            return Math.pow(x, 1 / 2.2) * 1.055 - 0.055;
+            return x ** (1 / 2.2) * 1.055 - 0.055;
     }
 
     calcVertexColors(arr)
@@ -310,7 +309,11 @@ let gltfMesh = class
                 }
             }
 
-            if (geom.tangents.length === 0 || inCalcNormals.get()) geom.calcTangentsBitangents();
+            if (geom.tangents.length === 0 || inCalcNormals.get() != "Never")
+            {
+                console.log("[gltf ]no tangents... calculating tangents...");
+                geom.calcTangentsBitangents();
+            }
         }
 
         this.geom = geom;
@@ -340,47 +343,16 @@ let gltfMesh = class
             }
 
             this.mesh = new CGL.Mesh(cgl, g, glprim);
-            this.mesh.addVertexNumbers = true;
-            // this.mesh._geom = null;
         }
         else
         {
             // update morphTargets
             if (this.geom && this.geom.morphTargets.length && !this.morphTargetsRenderMod)
             {
+                this.mesh.addVertexNumbers = true;
                 this.morphTargetsRenderMod = new GltfTargetsRenderer(this);
             }
-            //     this.morphGeom = this.geom.copy();
 
-            //     this.test = time;
-
-            //     // if (this.test >= this.geom.morphTargets.length - 1) this.test = 0;
-
-            //     const mt = this.geom.morphTargets[Math.floor(this.test)];
-            //     const mt2 = this.geom.morphTargets[Math.floor(this.test + 1)];
-
-            //     if (mt && mt.vertices && mt2)
-            //     {
-            //         if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
-            //             this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
-
-            //         const fract = 0.0;// this.test % 1;
-            //         for (let i = 0; i < this.morphGeom.vertices.length; i++)
-            //         {
-            //             this.morphGeom.vertices[i] =
-            //                 this.geom.vertices[i] +
-            //                 (1.0 - fract) * mt.vertices[i] +
-            //                 fract * mt2.vertices[i];
-
-            //             this.morphGeom.vertexNormals[i] =
-            //                 (1.0 - fract) * mt.vertexNormals[i] +
-            //                 fract * mt2.vertexNormals[i];
-            //         }
-
-            //         this.mesh.updateNormals(this.morphGeom);
-            //         this.mesh.updateVertices(this.morphGeom);
-            //     }
-            // }
 
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
             if (skinRenderer)useMat = false;
@@ -423,7 +395,12 @@ let gltfMesh = class
             }
 
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
-            if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
+            if (this.mesh)
+            {
+                // console.log(this.mesh)
+                // this.mesh.lastMaterial=0;
+                this.mesh.render(cgl.getShader(), ignoreMaterial);
+            }
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 
             if (inUseMatProps.get())

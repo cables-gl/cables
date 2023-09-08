@@ -43,7 +43,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Gl.Geometry.AlignGeometry"
+        "name": "Ops.Graphics.Geometry.AlignGeometry"
     },
     "summary": "align a geometry / change its pivot / center / origin point",
     "issues": "",

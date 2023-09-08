@@ -42,8 +42,8 @@ const GltfTargetsRenderer = class
         this._mod.setUniformValue("MOD_weights", this.mesh.weights);
         this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
 
-        // console.log(this.mesh.weights)
-        this._mod.define("MOD_NUM_WEIGHTS", this.mesh.weights.length);
+        // console.log("MOD_NUM_WEIGHTS",this.mesh.weights)
+        this._mod.define("MOD_NUM_WEIGHTS", Math.max(1, this.mesh.weights.length));
         this._mod.bind();
 
         // draw mesh...

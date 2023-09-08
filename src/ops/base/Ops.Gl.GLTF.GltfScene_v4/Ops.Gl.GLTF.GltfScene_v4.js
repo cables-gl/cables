@@ -42,13 +42,9 @@ const
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
-const le = true; // little endian
 const cgl = op.patch.cgl;
-inFile.onChange =
-    inVertFormat.onChange =
-    inCalcNormals.onChange =
-    inNormFormat.onChange = reloadSoon;
-
+let gltfLoadingErrorMesh = null;
+let gltfLoadingError = false;
 let gltfTransforms = 0;
 let finishedLoading = false;
 let cam = null;
@@ -63,18 +59,21 @@ let data = null;
 const scale = vec3.create();
 let lastTime = 0;
 let doCenter = false;
-
 const boundsCenter = vec3.create();
 
+inFile.onChange =
+    inVertFormat.onChange =
+    inCalcNormals.onChange =
+    inNormFormat.onChange = reloadSoon;
+
 inShow.onTriggered = printInfo;
-dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 dataPort.onChange = loadData;
 inHideNodes.onChange = hideNodesFromData;
 inAnimation.onChange = updateAnimation;
-
-op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
-
 inCenter.onChange = updateCenter;
+
+dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
+op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
 
 function updateCamera()
 {
@@ -144,6 +143,12 @@ inExec.onTriggered = function ()
     if (!finishedLoading) return;
     if (!inActive.get()) return;
 
+    if (gltfLoadingError)
+    {
+        if (!gltfLoadingErrorMesh) gltfLoadingErrorMesh = CGL.MESHES.getSimpleCube(cgl, "ErrorCube");
+        gltfLoadingErrorMesh.render(cgl.getShader());
+    }
+
     gltfTransforms = 0;
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
@@ -194,35 +199,25 @@ inExec.onTriggered = function ()
         {
             gltf.time = time;
 
+            if (gltf.bounds && cgl.shouldDrawHelpers(op))
             {
-                if (gltf.bounds && cgl.shouldDrawHelpers(op))
-                {
-                    if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-                    else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
-                    gltf.bounds.render(cgl);
-                    cgl.popShader();
-                }
+                if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+                else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                gltf.bounds.render(cgl);
+                cgl.popShader();
+            }
 
-                // if (!gltf.renderMMatrix)gltf.renderMMatrix = mat4.create();
-                // cgl.pushModelMatrix();
-                // mat4.copy(gltf.renderMMatrix, cgl.mMatrix);
-                // mat4.identity(cgl.mMatrix);
-
-                if (inRender.get())
-                {
-                    for (let i = 0; i < gltf.nodes.length; i++)
-                        if (!gltf.nodes[i].isChild)
-                            gltf.nodes[i].render(cgl);
-                }
-                else
-                {
-                    for (let i = 0; i < gltf.nodes.length; i++)
-                        if (!gltf.nodes[i].isChild)
-                            gltf.nodes[i].render(cgl, false, true);
-                    // render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
-                }
-
-                // cgl.popModelMatrix();
+            if (inRender.get())
+            {
+                for (let i = 0; i < gltf.nodes.length; i++)
+                    if (!gltf.nodes[i].isChild)
+                        gltf.nodes[i].render(cgl);
+            }
+            else
+            {
+                for (let i = 0; i < gltf.nodes.length; i++)
+                    if (!gltf.nodes[i].isChild)
+                        gltf.nodes[i].render(cgl, false, true);
             }
         }
     }
@@ -239,10 +234,16 @@ function finishLoading()
 {
     if (!gltf)
     {
-        op.setUiError("nogltf", "gltf not found");
+        finishedLoading = true;
+        gltfLoadingError = true;
+        cgl.patch.loading.finished(loadingId);
+
+        op.setUiError("nogltf", "GLTF File not found");
         return;
     }
+
     op.setUiError("nogltf", null);
+
     if (gltf.loadingMeshes > 0)
     {
         // op.log("waiting for async meshes...");
@@ -259,8 +260,8 @@ function finishLoading()
     gltf.bounds = new CABLES.CG.BoundingBox();
     // gltf.bounds.applyPos(0, 0, 0);
 
-    if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
-    else op.setUiError("urlerror", null);
+    // if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
+    // else op.setUiError("urlerror", null);
 
     gltf.timing.push(["start calc bounds", Math.round((performance.now() - gltf.startTime))]);
 
@@ -351,7 +352,7 @@ function loadBin(addCacheBuster)
     {
         if (addCacheBuster === true)url += "?rnd=" + CABLES.generateUUID();
     }
-    finishedLoading = false;
+    needsMatUpdate = true;
     outLoading.set(true);
     fetch(url)
         .then((res) => { return res.arrayBuffer(); })
@@ -365,7 +366,6 @@ function loadBin(addCacheBuster)
             }
 
             boundingPoints = [];
-
             maxTime = 0;
             gltf = parseGltf(arrayBuffer);
 
@@ -421,7 +421,8 @@ function updateMaterials()
 
     if (inMaterials.links.length == 1 && inMaterials.get())
     {
-        // just accept a associative object with shader in it
+        // just accept a associative object with s
+        needsMatUpdate = true;
         const op = inMaterials.links[0].portOut.op;
 
         const portShader = op.getPort("Shader");

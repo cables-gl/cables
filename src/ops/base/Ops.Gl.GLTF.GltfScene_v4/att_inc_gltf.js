@@ -1,4 +1,4 @@
-const CHUNK_HEADER_SIZE = 8;
+const le = true; // little endian
 
 const Gltf = class
 {
@@ -221,8 +221,7 @@ function loadAnims(gltf)
 
     gltf.uniqueAnimNames = uniqueAnimNames;
 
-    outAnims.set(null);
-    outAnims.set(Object.keys(uniqueAnimNames));
+    outAnims.setRef(Object.keys(uniqueAnimNames));
 }
 
 function loadCams(gltf)
@@ -256,6 +255,8 @@ function loadAfterDraco()
 
 function parseGltf(arrayBuffer)
 {
+    const CHUNK_HEADER_SIZE = 8;
+
     let j = 0, i = 0;
 
     const gltf = new Gltf();
@@ -292,8 +293,8 @@ function parseGltf(arrayBuffer)
         "shortFileName": CABLES.basename(inFile.get())
     };
 
-    outJson.set(gltf.json);
-    outExtensions.set(gltf.json.extensionsUsed || []);
+    outJson.setRef(gltf.json);
+    outExtensions.setRef(gltf.json.extensionsUsed || []);
 
     let ch = readChunk(dv, byteArray, arrayBuffer, pos);
     while (ch)
