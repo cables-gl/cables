@@ -1058,7 +1058,9 @@ Texture.getTexInfo = function (tex)
     if (tex.textureType == Texture.TYPE_HALF_FLOAT) obj.textureType = "TYPE_HALF_FLOAT";
     else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
     else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
-    else obj.textureType = "UNKNOWN";
+    else obj.textureType = "UNKNOWN " + this.textureType;
+
+    obj.pixelFormat = this.pixelFormat;
 
     if (tex.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
     else if (tex.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";
