@@ -57,9 +57,14 @@ function onKeyUp(e)
 {
     if (e.keyCode == learnedKeyCode.get())
     {
-        // op.log("Key released, key code: " + e.keyCode);
-        onRelease.trigger();
-        outPressed.set(false);
+        let doTrigger = true;
+        if (modKey.get() == "alt" && e.altKey != true) doTrigger = false;
+
+        if (doTrigger)
+        {
+            onRelease.trigger();
+            outPressed.set(false);
+        }
     }
 }
 
