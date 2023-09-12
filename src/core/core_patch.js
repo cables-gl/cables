@@ -559,7 +559,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 }
 
                 const opToDelete = this.ops[i];
-                opToDelete.roveLinks();
+                opToDelete.removeLinks();
 
                 if (this.onDelete)
                 {
