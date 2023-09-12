@@ -3,8 +3,11 @@ const
     next = op.outTrigger("Next"),
     inPosX = op.inInt("Pos X", 0),
     inPosY = op.inInt("Pos Y", 0),
+    inSizeX = op.inInt("Width", 800),
+    inSizeY = op.inInt("Height", 480),
     inSmoothing = op.inBool("Smoothing", true),
     inStretch = op.inBool("Stretch", false),
+    inTitle = op.inString("Title", "cables"),
     inOpen = op.inTriggerButton("Open Window"),
     outEle = op.outObject("Element", null, "element"),
     inClose = op.inTriggerButton("Close");
@@ -18,6 +21,8 @@ let x = 0;
 let y = 0;
 
 op.toWorkPortsNeedToBeLinked(inUpdate, next);
+op.setPortGroup("Size", [inSizeX, inSizeY]);
+op.setPortGroup("Position", [inPosY, inPosX]);
 
 inClose.onTriggered = close;
 op.onDelete = close;
@@ -28,13 +33,27 @@ if (CABLES.UI)gui.on("resizecanvas", () => { resize(); setTimeout(resize, 150); 
 inStretch.onChange = resize;
 
 inPosY.onChange =
-inPosX.onChange = move;
+    inPosX.onChange = move;
+
+inSizeY.onChange =
+    inSizeX.onChange = onSize;
+
+function onSize()
+{
+    if (subWindow) subWindow.resizeTo(inSizeX.get(), inSizeY.get());
+    resize();
+}
 
 function move()
 {
     if (!subWindow) return;
     subWindow.moveTo(inPosX.get(), inPosY.get());
 }
+
+inTitle.onChange = () =>
+{
+    if (subWindow)subWindow.document.title = inTitle.get();
+};
 
 inUpdate.onTriggered = () =>
 {
@@ -110,9 +129,11 @@ inOpen.onTriggered = () =>
 {
     if (subWindow)close();
     let id = CABLES.uuid();
-    subWindow = window.open("", "view#" + id, "width=" + 800 + ",height=" + 480 + ",directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=yes,popup=true");
+    subWindow = window.open("", "view#" + id, "width=" + inSizeX.get() + ",height=" + inSizeY.get() + ",directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=yes,popup=true");
     if (!subWindow) return;
     let document = subWindow.document;
+    document.title = inTitle.get();
+
     let body = document.body;
     body.style = "padding:0px;margin:0px;background-color:#000;overflow:hidden;";
     canvas = document.createElement("canvas");

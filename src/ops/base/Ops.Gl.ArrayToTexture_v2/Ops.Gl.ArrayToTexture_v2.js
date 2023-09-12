@@ -17,7 +17,7 @@ const
 const cgl = op.patch.cgl;
 const emptyTex = CGL.Texture.getEmptyTexture(cgl);
 
-let tex = new CGL.Texture(cgl);
+let tex = null;
 let arrayResized = true;
 let pixels = new Uint8Array(8);
 let cgl_filter = CGL.Texture.FILTER_NEAREST;

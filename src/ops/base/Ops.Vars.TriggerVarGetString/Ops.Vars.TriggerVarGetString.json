@@ -15,14 +15,13 @@
                 "name": "Next"
             },
             {
-                "type": 0,
-                "name": "Value",
-                "subType": "number"
+                "type": 5,
+                "name": "Value"
             }
         ],
-        "name": "Ops.Vars.TriggerVarGetNumber"
+        "name": "Ops.Vars.TriggerVarGetString"
     },
-    "summary": "read a variable number when triggering",
+    "summary": "Get a string variable value at time of trigger",
     "issues": "",
     "relatedops": null,
     "youtubeids": [

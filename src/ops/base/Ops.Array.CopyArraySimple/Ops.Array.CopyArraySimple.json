@@ -18,7 +18,7 @@
         ],
         "name": "Ops.Array.CopyArraySimple"
     },
-    "summary": "Reverses an array (creates a copy of the array before), shallow copy",
+    "summary": "create a copy of an array",
     "changelog": [
         {
             "message": "cloned op from Ops.Array.ArrayReverse",
@@ -31,5 +31,10 @@
             "author": "pandur",
             "date": 1693484960111
         }
-    ]
+    ],
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

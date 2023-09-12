@@ -33,5 +33,11 @@
         "name": "Ops.Patch.PGUpzJB.CompString"
     },
     "authorName": "pandur",
-    "created": 1689760384412
+    "created": 1689760384412,
+    "summary": "Compose a string",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

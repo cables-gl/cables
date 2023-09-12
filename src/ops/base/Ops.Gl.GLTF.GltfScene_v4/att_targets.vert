@@ -21,10 +21,13 @@ for(float i=0.0;i<MOD_numTargets;i+=1.0)
     off+=(targetXYZ*MOD_weights[int(i)]);
 
 
-    coord.y+=1.0/MOD_height;
+
+    coord.y+=1.0/MOD_height; // normals are in next row
     vec3 targetNormal = texture(MOD_targetTex,coord).xyz;
     norm+=targetNormal*MOD_weights[int(i)];
 
+
 }
 
+// norm=normalize(norm);
 pos.xyz+=off;
