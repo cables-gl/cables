@@ -131,6 +131,7 @@ const Context = function (_patch)
 
     this.exitError = function (msgId, msg)
     {
+        console.log(msgId, msg);
         this.patch.exitError(msgId, msg);
         this.aborted = true;
     };
@@ -182,6 +183,7 @@ const Context = function (_patch)
 
         if (!this.gl)
         {
+            this.aborted = true;
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }

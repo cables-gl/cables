@@ -172,6 +172,7 @@ Texture.prototype.clone = function ()
  */
 Texture.prototype.setSize = function (w, h)
 {
+    if (this._cgl.aborted) return;
     if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
     if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
