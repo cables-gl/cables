@@ -286,7 +286,6 @@ Texture.prototype.setSize = function (w, h)
             if (dataType === this._cgl.gl.FLOAT)
             {
                 this._cgl.gl.getExtension("EXT_color_buffer_float");
-                // this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
                 this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
             }
 
