@@ -72,9 +72,15 @@ const Texture = function (__cgl, options)
     if (!options.pixelFormat)
     {
         if (!options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
-        if (options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+        if (options.isFloatingPointTexture)
+        {
+            this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+        }
     }
     else this.pixelFormat = options.pixelFormat;
+
+    if (this._cgl.glUseHalfFloatTex && this.pixelFormat == Texture.PFORMATSTR_RGBA32F) this.pixelFormat = Texture.PFORMATSTR_RGBA16F;
+
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
@@ -209,7 +215,6 @@ Texture.prototype.setSize = function (w, h)
     let internalFormat = this._cgl.gl.RGBA;
     let dataFormat = this._cgl.gl.RGBA;
 
-    if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
 
     // if (
     //     this._cgl.glVersion == 1 &&
