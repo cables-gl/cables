@@ -57,7 +57,7 @@ function clean()
 
                 removeLinks.push(outputs[i].links[j]);
                 const otherPort = outputs[i].links[j].getOtherPort(outputs[i]);
-                op.patch.link(op, "Output " + count, otherPort.parent, otherPort.name);
+                op.patch.link(op, "Output " + count, otherPort.op, otherPort.name);
                 count++;
             }
 
