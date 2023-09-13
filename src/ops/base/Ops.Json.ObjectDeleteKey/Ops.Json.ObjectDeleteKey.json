@@ -44,5 +44,11 @@
             }
         ],
         "name": "Ops.Json.ObjectDeleteKey"
+    },
+    "summary": "Remove a Property from an Object by Key",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

@@ -28,11 +28,25 @@
             {
                 "type": 0,
                 "name": "Pos X",
+                "group": "Position",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Pos Y",
+                "group": "Position",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Size",
                 "subType": "integer"
             },
             {
@@ -44,6 +58,10 @@
                 "type": 0,
                 "name": "Stretch",
                 "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Title"
             },
             {
                 "type": 1,
@@ -68,5 +86,11 @@
         "name": "Ops.Gl.ExternalCanvas"
     },
     "authorName": "pandur",
-    "created": 1689248551446
+    "created": 1689248551446,
+    "summary": "Open a new window that shows a copy of the patch canvas",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

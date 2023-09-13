@@ -72,9 +72,15 @@ const Texture = function (__cgl, options)
     if (!options.pixelFormat)
     {
         if (!options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
-        if (options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+        if (options.isFloatingPointTexture)
+        {
+            this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+        }
     }
     else this.pixelFormat = options.pixelFormat;
+
+    if (this._cgl.glUseHalfFloatTex && this.pixelFormat == Texture.PFORMATSTR_RGBA32F) this.pixelFormat = Texture.PFORMATSTR_RGBA16F;
+
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
@@ -172,6 +178,7 @@ Texture.prototype.clone = function ()
  */
 Texture.prototype.setSize = function (w, h)
 {
+    if (this._cgl.aborted) return;
     if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
     if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
@@ -208,7 +215,6 @@ Texture.prototype.setSize = function (w, h)
     let internalFormat = this._cgl.gl.RGBA;
     let dataFormat = this._cgl.gl.RGBA;
 
-    if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
 
     // if (
     //     this._cgl.glVersion == 1 &&
@@ -286,7 +292,6 @@ Texture.prototype.setSize = function (w, h)
             if (dataType === this._cgl.gl.FLOAT)
             {
                 this._cgl.gl.getExtension("EXT_color_buffer_float");
-                // this._cgl.gl.getExtension("EXT_color_buffer_float_linear");
                 this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
             }
 
@@ -1053,7 +1058,9 @@ Texture.getTexInfo = function (tex)
     if (tex.textureType == Texture.TYPE_HALF_FLOAT) obj.textureType = "TYPE_HALF_FLOAT";
     else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
     else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
-    else obj.textureType = "UNKNOWN";
+    else obj.textureType = "UNKNOWN " + this.textureType;
+
+    obj.pixelFormat = this.pixelFormat;
 
     if (tex.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
     else if (tex.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";

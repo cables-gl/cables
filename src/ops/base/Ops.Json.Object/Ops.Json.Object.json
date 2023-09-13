@@ -24,5 +24,11 @@
             }
         ],
         "name": "Ops.Json.Object"
+    },
+    "summary": "An empty Object",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

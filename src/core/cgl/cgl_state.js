@@ -131,6 +131,7 @@ const Context = function (_patch)
 
     this.exitError = function (msgId, msg)
     {
+        console.log(msgId, msg);
         this.patch.exitError(msgId, msg);
         this.aborted = true;
     };
@@ -182,6 +183,7 @@ const Context = function (_patch)
 
         if (!this.gl)
         {
+            this.aborted = true;
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }
@@ -1244,8 +1246,8 @@ Context.prototype.enableExtension = function (name)
     // console.log(performance.now() - start);
     if (!o)
     {
-        console.log("[cgl_state] extension not available", name);
-        // this._log.stack("extension");
+        // console.log("[cgl_state] extension not available", name);
+        this._log.stack("[cgl_state] extension not available");
     }
 
     return o;

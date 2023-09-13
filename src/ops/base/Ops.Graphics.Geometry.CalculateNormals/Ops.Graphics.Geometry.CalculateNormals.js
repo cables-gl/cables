@@ -26,5 +26,5 @@ function calc()
         "forceZUp": forceZUp.get()
     });
 
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 }

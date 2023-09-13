@@ -22,7 +22,7 @@
         ],
         "name": "Ops.Vars.TriggerVarGetNumber"
     },
-    "summary": "read a variable number when triggering",
+    "summary": "Get a number variable value at time of trigger",
     "issues": "",
     "relatedops": null,
     "youtubeids": [
