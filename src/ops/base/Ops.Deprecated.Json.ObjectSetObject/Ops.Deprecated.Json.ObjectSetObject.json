@@ -12,6 +12,12 @@
             "message": "Ops.User.pandur.ObjectSetObject renamed to Ops.Json.ObjectSetObject",
             "author": "pandur",
             "date": 1623846340859
+        },
+        {
+            "message": "Ops.Json.ObjectSetObject renamed to Ops.Deprecated.Json.ObjectSetObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694610733817
         }
     ],
     "layout": {
