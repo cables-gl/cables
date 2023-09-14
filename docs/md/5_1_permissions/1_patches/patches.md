@@ -1,6 +1,6 @@
 # Patches
 
-Patches on [cables.gl](https://cables.gl) cables.gl can be private, unlisted or public, pick one of the three for the level of permission
+Patches on [cables.gl](https://cables.gl) can be private, unlisted or public, pick one of the three for the level of permission
 and collaboration you deem appropriate. We strongly encourage making your patch public to share your work with the community!
 
 ---
@@ -23,7 +23,7 @@ Public patches can be:
 ### Unlisted patches
 
 You can set patches to "unlisted" visibility. Users need the URL of the patch to access it. Rules are the same as
-for private patches (see above) but they will never appear in any of the lists like "Top Patches" or "Featured Patches".
+for public patches (see above) but they will never appear in any of the lists like "Top Patches" or "Featured Patches".
 
 So, rules are:
 
