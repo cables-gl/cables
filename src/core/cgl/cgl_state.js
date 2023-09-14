@@ -1,6 +1,5 @@
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
-import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
 import { CGState } from "../cg/cg_state";
@@ -49,10 +48,41 @@ const Context = function (_patch)
     this._cursor = "auto";
     this._currentCursor = "";
 
+    this._viewPortStack = [];
     this._glFrameBufferStack = [];
     this._frameBufferStack = [];
     this._shaderStack = [];
     this._stackDepthTest = [];
+
+
+
+    Object.defineProperty(this, "viewPort", {
+        get()
+        {
+            if (this._viewPortStack.length > 3)
+            {
+                const l = this._viewPortStack.length;
+
+                return [
+                    this._viewPortStack[l - 4],
+                    this._viewPortStack[l - 3],
+                    this._viewPortStack[l - 2],
+                    this._viewPortStack[l - 1]
+                ];
+            }
+            else
+            {
+                // workaround pre viewport stack times / or+and initial value...
+
+                return this._viewPort;
+            }
+        }
+        // set()
+        // {
+        //     // this.mMatrix = m;
+        // },
+    });
+
 
     Object.defineProperty(this, "mvMatrix", {
         get()
@@ -100,6 +130,7 @@ const Context = function (_patch)
 
     this.exitError = function (msgId, msg)
     {
+        console.log(msgId, msg);
         this.patch.exitError(msgId, msg);
         this.aborted = true;
     };
@@ -118,15 +149,10 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
         // safari stuff..........
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) // && (navigator.userAgent.match(/iPhone/i))
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
         {
             this._isSafariCrap = true;
-            // this._log.warn("safari detected, adjusting canvas settings...");
-            // this.patch.config.canvas.antialias = false;
-            // this.patch.config.glslPrecision = "highp";
-            // this.patch.config.canvas.forceWebGl1 = true;
-            // this.patch.config.canvas.forceTextureNearest = true;
-            // this.glUseHalfFloatTex = true;
+            this.glUseHalfFloatTex = true;
         }
 
 
@@ -142,10 +168,10 @@ const Context = function (_patch)
             this.glVersion = 1;
 
             // safari
-            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
-            {
-                // this.glUseHalfFloatTex = true;
-            }
+            // if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
+            // {
+            //     this.glUseHalfFloatTex = true;
+            // }
 
             // ios
             if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
@@ -165,6 +191,7 @@ const Context = function (_patch)
 
         if (!this.gl)
         {
+            this.aborted = true;
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }
@@ -191,6 +218,18 @@ const Context = function (_patch)
         this.maxUniformsVert = this.gl.getParameter(this.gl.MAX_VERTEX_UNIFORM_VECTORS);
         this.maxSamples = 0;
         if (this.gl.MAX_SAMPLES) this.maxSamples = this.gl.getParameter(this.gl.MAX_SAMPLES);
+
+        if (this.glVersion == 1)
+        {
+            this.enableExtension("OES_standard_derivatives");
+            const instancingExt = this.enableExtension("ANGLE_instanced_arrays") || this.gl;
+
+            if (instancingExt.vertexAttribDivisorANGLE)
+            {
+                this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
+                this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
+            }
+        }
     };
 
     this.getInfo = function ()
@@ -211,33 +250,69 @@ const Context = function (_patch)
     let oldCanvasWidth = -1;
     let oldCanvasHeight = -1;
 
+
+
+
     /**
-     * @function getViewPort
+     * @function popViewPort
      * @memberof Context
      * @instance
-     * @description get current gl viewport
-     * @returns {Array} array [x,y,w,h]
+     * @description pop viewPort stack
      */
-    this.getViewPort = function ()
-    {
-        return this._viewPort;
-    };
 
-    this.resetViewPort = function ()
+
+    this.popViewPort = function ()
     {
-        this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
+        this._viewPortStack.pop();
+        this._viewPortStack.pop();
+        this._viewPortStack.pop();
+        this._viewPortStack.pop();
+
+        if (this._viewPortStack.length == 0)
+        {
+            this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
+            // this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
+            // this.setViewPort(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
+        }
+        else
+        {
+            // this.viewPort = [this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]];
+            // this.gl.viewport(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
+            this.setViewPort(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
+        }
     };
 
     /**
-     * @function setViewPort
+     * @function pushViewPort
      * @memberof Context
      * @instance
-     * @description set current gl viewport
+     * @description push a new viewport onto stack
      * @param {Number} x
      * @param {Number} y
      * @param {Number} w
      * @param {Number} h
      */
+
+    this.pushViewPort = function (x, y, w, h)
+    {
+        this._viewPortStack.push(x, y, w, h);
+        this.setViewPort(x, y, w, h);
+    };
+
+
+    // old
+    this.getViewPort = function ()
+    {
+        return this._viewPort;
+    };
+
+    // old
+    this.resetViewPort = function ()
+    {
+        this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
+    };
+
+    // old
     this.setViewPort = function (x, y, w, h)
     {
         this._viewPort[0] = Math.round(x);
@@ -246,6 +321,7 @@ const Context = function (_patch)
         this._viewPort[3] = Math.round(h);
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     };
+
 
     this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
     {
@@ -285,9 +361,9 @@ const Context = function (_patch)
         if (this._shaderStack.length > 0) this.logStackError("this._shaderStack length !=0 at end of rendering...");
         if (this._stackCullFace.length > 0) this.logStackError("this._stackCullFace length !=0 at end of rendering...");
         if (this._stackCullFaceFacing.length > 0) this.logStackError("this._stackCullFaceFacing length !=0 at end of rendering...");
+        if (this._viewPortStack.length > 0) this.logStackError("viewport stack length !=0 at end of rendering...");
 
         this._frameStarted = false;
-
 
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
@@ -629,8 +705,8 @@ const Context = function (_patch)
     {
         this.patch.renderOneFrame();
 
-        let w = this.canvas.clientWidth;
-        let h = this.canvas.clientHeight;
+        let w = this.canvas.clientWidth * this.pixelDensity;
+        let h = this.canvas.clientHeight * this.pixelDensity;
 
         if (pw)
         {
@@ -659,6 +735,7 @@ const Context = function (_patch)
         {
             this.canvas.width = w;
             this.canvas.height = h;
+
             if (blob)
             {
                 const anchor = document.createElement("a");
@@ -1170,11 +1247,16 @@ Context.prototype.setCursor = function (str)
  */
 Context.prototype.enableExtension = function (name)
 {
-    console.log("extension", name);
+    // console.log("extension", name);
     // const start = performance.now();
     const o = this.gl.getExtension(name);
     // console.log(performance.now() - start);
-    if (!o)console.error("extension not available", name);
+    if (!o)
+    {
+        // console.log("[cgl_state] extension not available", name);
+        this._log.stack("[cgl_state] extension not available");
+    }
+
     return o;
 };
 

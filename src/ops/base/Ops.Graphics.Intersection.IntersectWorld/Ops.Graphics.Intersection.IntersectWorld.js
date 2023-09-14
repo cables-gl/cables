@@ -1,6 +1,7 @@
 const
     trigger = op.inTrigger("Trigger"),
     render = op.inBool("Render", true),
+    inTextCol = op.inBool("Check Body Collisions", true),
     next = op.outTrigger("Next"),
     outNum = op.outNumber("Total Bodies"),
     outCollisions = op.outArray("Collisions", []);
@@ -16,7 +17,7 @@ function doRender()
 
     outNum.set(cgl.frameStore.collisionWorld.bodies.length);
 
-    checkCollisions();
+    if (inTextCol.get()) checkCollisions();
 
     if (render.get())renderBodies();
 }

@@ -7,6 +7,7 @@ const
     inMode = op.inSwitch("Color", ["Mono", "RGB", "R", "G", "B"], "Mono"),
     scale = op.inValue("Scale", 8),
     rangeMul = op.inValue("Multiply", 1),
+    valueRange = op.inSwitch("Value", ["0-1", "-1-1"], "0-1"),
     inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
@@ -56,12 +57,13 @@ inHarmonics.onChange = () =>
     shader.toggleDefine("HARMONICS", inHarmonics.get() > 1);
 };
 
-offsetX.onChange =
-offsetY.onChange =
-offsetZ.onChange =
-inTexMask.onChange =
-inMode.onChange =
-inTexOffsetZ.onChange = updateDefines;
+valueRange.onChange =
+    offsetX.onChange =
+    offsetY.onChange =
+    offsetZ.onChange =
+    inTexMask.onChange =
+    inMode.onChange =
+    inTexOffsetZ.onChange = updateDefines;
 updateDefines();
 
 function updateDefines()
@@ -84,6 +86,8 @@ function updateDefines()
     shader.toggleDefine("OFFSET_Z_R", offsetZ.get() == "R");
     shader.toggleDefine("OFFSET_Z_G", offsetZ.get() == "G");
     shader.toggleDefine("OFFSET_Z_B", offsetZ.get() == "B");
+
+    shader.toggleDefine("RANGE_MIN1", valueRange.get() == "-1-1");
 
     offsetX.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });
     offsetY.setUiAttribs({ "greyout": !inTexOffsetZ.isLinked() });

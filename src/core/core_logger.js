@@ -10,9 +10,9 @@ export default class Logger
 
     stack(t)
     {
-        console.error("[" + this.initiator + "] ", t);
+        console.info("[" + this.initiator + "] ", t);
         console.log((new Error()).stack);
-        if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "error", t);
+        // if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "error", t);
     }
 
     groupCollapsed(t)

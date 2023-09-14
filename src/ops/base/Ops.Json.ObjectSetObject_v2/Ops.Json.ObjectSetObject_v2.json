@@ -1,0 +1,75 @@
+{
+    "authorName": "pandur",
+    "id": "84283526-5687-4bdc-92aa-22c81972a3a7",
+    "created": 1694610247814,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.ObjectKeyObject renamed to Ops.User.pandur.ObjectSetObject",
+            "author": "pandur",
+            "date": 1587020854846
+        },
+        {
+            "message": "Ops.User.pandur.ObjectSetObject renamed to Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1623846340859
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1633094413451
+        },
+        {
+            "message": "Ops.User.pandur.ObjectSetObjectSimple renamed to Ops.Json.ObjectSetObjectSimple",
+            "author": "pandur",
+            "date": 1633094962089
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectSetObjectSimple",
+            "author": "pandur",
+            "date": 1694610247815
+        },
+        {
+            "message": "Ops.Patch.PpiMxeG.ObjectSetObjectSimple_v2 renamed to Ops.Json.ObjectSetObjectSimple_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694610319270
+        },
+        {
+            "message": "Ops.Json.ObjectSetObjectSimple_v2 renamed to Ops.Json.ObjectSetObject_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694610764279
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 2,
+                "name": "Object Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Patch.PpiMxeG.ObjectSetObjectSimple_v2"
+    },
+    "summary": "set object as value in an object",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "7X58nR"
+}

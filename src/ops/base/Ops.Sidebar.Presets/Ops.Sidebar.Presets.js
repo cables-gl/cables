@@ -185,7 +185,7 @@ function serializeSidebar()
 
     const r = { "ops": values };
 
-    if (CABLES.UI && gui) gui.setStateUnsaved();
+    if (CABLES.UI && gui) gui.savedState.setUnSaved("preset sidebar");
     return r;
 }
 

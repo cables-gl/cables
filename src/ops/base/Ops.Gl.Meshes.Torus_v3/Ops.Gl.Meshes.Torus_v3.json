@@ -1,0 +1,83 @@
+{
+    "summary": "Draw a torus (doughnut, donut, ring mesh)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "sides",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "rings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "innerRadius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "outerRadius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Draw",
+                "uititle": "Render mesh",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Patch.PWSzNZB.ProperMappedTorus"
+    },
+    "authorName": "pandur",
+    "id": "bfe60760-6cf6-43d0-96da-b4848c2b146a",
+    "created": 1690032573113,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ECMhQ6",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Torus",
+            "author": "pandur",
+            "date": 1678450297664
+        },
+        {
+            "message": "Ops.User.pandur.Torus2 renamed to Ops.Gl.Meshes.Torus_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678451589034
+        },
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Torus_v2",
+            "author": "kb_",
+            "date": 1690032573114
+        },
+        {
+            "message": "Ops.Patch.PWSzNZB.ProperMappedTorus renamed to Ops.Gl.Meshes.Torus_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1690231200828
+        }
+    ]
+}

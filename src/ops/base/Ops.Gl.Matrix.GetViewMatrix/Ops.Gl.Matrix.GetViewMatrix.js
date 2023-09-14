@@ -1,6 +1,7 @@
-let render = op.inTrigger("render");
-let trigger = op.outTrigger("trigger");
-let matrix = op.addOutPort(new CABLES.Port(op, "matrix", CABLES.OP_PORT_TYPE_ARRAY));
+const
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger"),
+    matrix = op.outArray("matrix", 4);
 
 let m = mat4.create();
 

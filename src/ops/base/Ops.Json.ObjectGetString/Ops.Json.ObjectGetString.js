@@ -15,10 +15,20 @@ function exec()
 {
     if (data.get())
     {
-        result.set(data.get()[key.get()]);
+        const value = data.get()[key.get()];
+        const isNull = value === undefined || value === null;
+
+        if (isNull)
+        {
+            result.setRef(null);
+        }
+        else
+        {
+            result.set(String(value));
+        }
     }
     else
     {
-        result.set(null);
+        result.setRef(null);
     }
 }

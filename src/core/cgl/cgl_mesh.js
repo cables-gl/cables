@@ -378,7 +378,6 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
 
         if (vertIndices.length > 65535)
         {
-            // console.log("32bit vertex indices...");
             this.vertIndicesTyped = new Uint32Array(vertIndices);
             this._indexType = this._cgl.gl.UNSIGNED_INT;
         }
@@ -389,7 +388,11 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
             this._indexType = this._cgl.gl.UNSIGNED_INT;
         }
         else
-        if (!(vertIndices instanceof Uint16Array)) this.vertIndicesTyped = new Uint16Array(vertIndices);
+        if (!(vertIndices instanceof Uint16Array))
+        {
+            this.vertIndicesTyped = new Uint16Array(vertIndices);
+            this._indexType = this._cgl.gl.UNSIGNED_SHORT;
+        }
         else this.vertIndicesTyped = vertIndices;
 
         this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
@@ -715,16 +718,14 @@ Mesh.prototype.render = function (shader)
     let queryStarted = false;
     if (doQuery)
     {
-        let id = this._name + " " + shader.getName() + " #" + shader.id;
+        let id = this._name + " - " + shader.getName() + " #" + shader.id;
         if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
-        if (!queryProfilerData)
-        {
-            queryProfilerData = { "id": id, "num": 0 };
-            this._cgl.profileData.glQueryData[id] = queryProfilerData;
-        }
+        if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0 };
+
+        this._cgl.profileData.glQueryData[id] = queryProfilerData;
 
         if (!this._queryExt && this._queryExt !== false) this._queryExt = this._cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
         if (this._queryExt)
@@ -737,6 +738,7 @@ Mesh.prototype.render = function (shader)
                     const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
                     const currentTimeGPU = elapsedNanos / 1000000;
 
+                    queryProfilerData._times = queryProfilerData._times || 0;
                     queryProfilerData._times += currentTimeGPU;
                     queryProfilerData._numcount++;
                     queryProfilerData.when = performance.now();
@@ -780,8 +782,16 @@ Mesh.prototype.render = function (shader)
     else
     {
         if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
-        if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
-        else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
+        if (this._numInstances === 0)
+        {
+            // console.log("la", this._bufVerticesIndizes.numItems);
+
+            this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
+        }
+        else
+        {
+            this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
+        }
     }
 
     if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)

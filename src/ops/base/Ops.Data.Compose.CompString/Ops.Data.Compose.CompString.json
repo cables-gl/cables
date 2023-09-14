@@ -1,0 +1,44 @@
+{
+    "id": "a1fde819-2b8e-4520-8086-c08e00e0d2f7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1689760361275
+        },
+        {
+            "message": "Ops.Patch.PGUpzJB.CompString renamed to Ops.Data.Compose.CompString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1689761421758
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Patch.PGUpzJB.CompString"
+    },
+    "authorName": "pandur",
+    "created": 1689760384412,
+    "summary": "Compose a string",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "GUpzJB"
+}

@@ -1,0 +1,84 @@
+{
+    "id": "ad783119-cfbc-41d6-92f9-16c110e8d2a2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1688652953237
+        },
+        {
+            "message": "Ops.Patch.PI9EzHA.Cross renamed to Ops.Math.Cross",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1688653205752
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "X1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Patch.PI9EzHA.Cross"
+    },
+    "authorName": "pandur",
+    "created": 1688653053202,
+    "summary": "Computes the cross product of two vec3's ",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

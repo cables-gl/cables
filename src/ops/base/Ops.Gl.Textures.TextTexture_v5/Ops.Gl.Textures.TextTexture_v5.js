@@ -2,13 +2,15 @@ const
     render = op.inTriggerButton("Render"),
 
     drawMesh = op.inValueBool("Draw Mesh", true),
-    meshScale = op.inValueFloat("Scale Mesh", 1.0),
+    meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
     weight = op.inString("weight", "normal"),
     inFontSize = op.inValueFloat("fontSize", 300),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
+    inPadding = op.inInt("Padding Y", 3),
+    inPaddingX = op.inInt("Padding X", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
@@ -51,7 +53,8 @@ render.onLinkChanged = () =>
 };
 
 align.onChange =
-
+    inPadding.onChange =
+    inPaddingX.onChange =
     text.onChange =
     inFontSize.onChange =
     weight.onChange =
@@ -71,6 +74,7 @@ const fontImage = document.createElement("canvas");
 fontImage.id = "texturetext_" + CABLES.generateUUID();
 fontImage.style.display = "none";
 document.body.appendChild(fontImage);
+fontImage.style.letterSpacing = "0px";
 
 let ctx = fontImage.getContext("2d");
 let needsRefresh = true;
@@ -197,7 +201,7 @@ function refresh()
     if (fontname.indexOf(" ") > -1) fontname = "\"" + fontname + "\"";
     ctx.font = weight.get() + " " + fontSize + "px " + fontname + "";
 
-    ctx.textBaseline = "hanging";
+    ctx.textBaseline = "top";
     ctx.textAlign = align.get();
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
@@ -206,7 +210,8 @@ function refresh()
     needsRefresh = false;
 
     let oneLineHeight = 0;
-    let padding = 3;
+    let padding = inPadding.get();
+    let paddingX = inPaddingX.get();
 
     autoWidth = 0;
     autoHeight = 0;
@@ -214,13 +219,13 @@ function refresh()
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        oneLineHeight = Math.max(oneLineHeight, Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent);
+        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent));
     }
 
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        autoWidth = Math.max(autoWidth, measure.width);
+        autoWidth = Math.max(autoWidth, measure.width) + paddingX;
         autoHeight += oneLineHeight + padding + padding;
     }
 
@@ -242,9 +247,9 @@ function refresh()
     for (let i = 0; i < strings.length; i++)
     {
         posy += padding;
-        let posx = 0;
-        if (align.get() == "center") posx = ctx.canvas.width / 2;
-        if (align.get() == "right") posx = ctx.canvas.width;
+        let posx = 0 + paddingX;
+        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX;
+        if (align.get() == "right") posx = ctx.canvas.width - paddingX;
 
         ctx.fillText(strings[i], posx, posy);
 
@@ -259,7 +264,6 @@ function refresh()
         }
 
         posy += oneLineHeight + padding;
-        1;
     }
 
     ctx.restore();

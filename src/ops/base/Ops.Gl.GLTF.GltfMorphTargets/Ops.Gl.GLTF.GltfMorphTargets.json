@@ -1,0 +1,82 @@
+{
+    "id": "356f4a5a-992c-49c2-a6ce-d56e1722f983",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1693646473738
+        },
+        {
+            "message": "Ops.Patch.P0QRQgF.GltfMorphTargets renamed to Ops.Gl.GLTF.GltfMorphTargets",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1693845458520
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Scene Time",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Submesh",
+                "subType": "integer"
+            },
+            {
+                "type": 3,
+                "name": "Target Weights"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Found Node",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Found Skin",
+                "subType": "boolean"
+            },
+            {
+                "type": 3,
+                "name": "Target Names"
+            },
+            {
+                "type": 2,
+                "name": "MorphTargets Tex",
+                "objType": "texture"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Patch.P0QRQgF.GltfMorphTargets"
+    },
+    "authorName": "pandur",
+    "created": 1693646482040,
+    "summary": "render weighted morph targets/shape keys from a gltf file",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "zon4xF"
+}

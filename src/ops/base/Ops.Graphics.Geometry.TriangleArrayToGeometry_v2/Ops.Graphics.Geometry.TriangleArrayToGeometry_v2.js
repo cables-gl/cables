@@ -35,7 +35,11 @@ function update()
     op.setUiError("colorsMismatch", null);
 
     verts = inArr.get();
-    if (!verts) return;
+    if (!verts)
+    {
+        geomOut.set(null);
+        return;
+    }
 
     let num = verts.length / 3;
     num = Math.abs(Math.floor(num));

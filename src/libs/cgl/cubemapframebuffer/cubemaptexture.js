@@ -105,7 +105,7 @@ class CubemapTexture
                 {
                     // console.log("cubemap FLOAT TEX", this._options);
                     this._cgl.enableExtension("EXT_color_buffer_float");
-                    this._cgl.enableExtension("EXT_color_buffer_float_linear");
+                    // this._cgl.enableExtension("EXT_color_buffer_float_linear");
                     this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);

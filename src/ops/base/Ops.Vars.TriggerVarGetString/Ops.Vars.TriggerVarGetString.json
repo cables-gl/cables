@@ -1,0 +1,62 @@
+{
+    "authorName": "stephan",
+    "id": "3cbe9fe4-3c32-45ca-bbcc-7d2c98c1dee5",
+    "created": 1691137347207,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Vars.TriggerVarGetString"
+    },
+    "summary": "Get a string variable value at time of trigger",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "coreLibs": [
+        "vargetset"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "elyQeG",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Vars.VarGetNumber_v2",
+            "author": "pandur",
+            "date": 1682433539531
+        },
+        {
+            "message": "Ops.Patch.P2dk___Nu.TriggerVarGetNumber renamed to Ops.Vars.TriggerVarGetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1682434069596
+        },
+        {
+            "message": "cloned op from Ops.Vars.TriggerVarGetNumber",
+            "author": "stephan",
+            "date": 1691137347207
+        },
+        {
+            "message": "Ops.Patch.PU7byNy.TriggerVarGetString renamed to Ops.Vars.TriggerVarGetString",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1691138636639
+        }
+    ],
+    "collections": null
+}

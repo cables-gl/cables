@@ -15,6 +15,7 @@ UNI mat4 modelMatrix;
 
 UNI float width;
 UNI float texOffset;
+UNI float aspect;
 
 #define PI 3.1415926538
 
@@ -26,12 +27,9 @@ vec2 rotate(vec2 v, float a)
 	return m * v;
 }
 
-float aspect=1.7777; // todo uniform ?
-
 vec2 fix( vec4 i )
 {
     vec2 res = i.xy / i.w;
-    res.x *= aspect;
     return res;
 }
 
@@ -72,8 +70,8 @@ void main()
 
 	if( screenPos2 == screenPos ) dir1 = normalize( screenPos3 - screenPos2 );
 
-    vec2 normal = vec2( -dir1.y, dir1.x ) * 0.5 * wid;
-    vec2 normal2 = vec2( -dir2.y, dir2.x ) * 0.5 * wid;
+    vec2 normal = vec2( -dir1.y/aspect, dir1.x ) * 0.5 * wid;
+    vec2 normal2 = vec2( -dir2.y/aspect, dir2.x ) * 0.5 * wid;
 
     vec4 offset = vec4( mix(normal,normal2,vPosition.x) * vPosition.y, 0.0, 1.0 );
 
@@ -82,10 +80,3 @@ void main()
 
     gl_Position = finalPosition;
 }
-
-
-
-
-
-
-

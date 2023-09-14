@@ -17,6 +17,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
 {
     const cgl = _cgl;
     this._log = new Logger("Framebuffer");
+    this.valid = true;
 
     const depthTextureExt =
         cgl.enableExtension("WEBGL_depth_texture") ||
@@ -153,27 +154,34 @@ const Framebuffer = function (_cgl, _w, _h, options)
 
         if (!cgl.gl.isFramebuffer(frameBuf)) throw new Error("Invalid framebuffer");
         const status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
+
         switch (status)
         {
         case cgl.gl.FRAMEBUFFER_COMPLETE:
             break;
         case cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
             this._log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", width, height, texture.tex, depthBuffer);
+            this.valid = false;
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
         case cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
             this._log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            this.valid = false;
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
         case cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
             this._log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            this.valid = false;
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
         case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
             this._log.warn("FRAMEBUFFER_UNSUPPORTED");
+            this.valid = false;
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         case 0x8CDB:
             this._log.warn("Incomplete: FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER from ext. Or Safari/iOS undefined behaviour.");
+            this.valid = false;
             break;
         default:
             this._log.warn("incomplete framebuffer", status);
+            this.valid = false;
             throw new Error("Incomplete framebuffer: " + status);
             // throw("Incomplete framebuffer: " + status);
         }
@@ -213,6 +221,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
     this.delete = function ()
     {
         texture.delete();
+        this.valid = false;
         if (textureDepth) textureDepth.delete();
         cgl.gl.deleteRenderbuffer(depthBuffer);
         cgl.gl.deleteFramebuffer(frameBuf);

@@ -42,7 +42,7 @@ function setOutarray()
     let newLen = Math.min(inArr.length, begin + end) - begin;
     if (newLen < 0)
     {
-        op.setUiError("idx", "invalid index/array length");
+        // op.setUiError("idx", "invalid index/array length");
         newLen = 0;
     }
     else op.setUiError("idx", null);

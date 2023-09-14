@@ -5,6 +5,7 @@ const inEvent = op.inObject("MIDI Event In");
 const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
 const ccIndexDropdown = op.inValueInt("CC Index", 0);
 const normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "none");
+const triggerOn = op.inSwitch("Trigger On", ["Both", "Down", "Up"], "Both");
 const learn = op.inTriggerButton("learn");
 const clear = op.inTriggerButton("clear");
 
@@ -93,20 +94,30 @@ inEvent.onChange = () =>
                 value = ccValue / 127;
                 ccValueOut.set(value);
                 ccArray[ccIndex] = ccValue;
-                triggerOut.trigger();
+
+                if (triggerOn.get() == "Both") triggerOut.trigger();
+                else if (triggerOn.get() == "Down" && ccValue != 0) triggerOut.trigger();
+                else if (triggerOn.get() == "Up" && ccValue == 0) triggerOut.trigger();
             }
             else if (normalizeDropdown.get() === "-1 to 1")
             {
                 value = ccValue / (127 / 2) - 1;
-                triggerOut.trigger();
+
                 ccValueOut.set(value);
                 ccArray[ccIndex] = ccValue;
+
+                if (triggerOn.get() == "Both") triggerOut.trigger();
+                else if (triggerOn.get() == "Down" && ccValue != 0) triggerOut.trigger();
+                else if (triggerOn.get() == "Up" && ccValue == 0) triggerOut.trigger();
             }
             else if (normalizeDropdown.get() === "none")
             {
-                triggerOut.trigger();
                 ccValueOut.set(value);
                 ccArray[ccIndex] = ccValue;
+
+                if (triggerOn.get() == "Both") triggerOut.trigger();
+                else if (triggerOn.get() == "Down" && ccValue != 0) triggerOut.trigger();
+                else if (triggerOn.get() == "Up" && ccValue == 0) triggerOut.trigger();
             }
             else
             {

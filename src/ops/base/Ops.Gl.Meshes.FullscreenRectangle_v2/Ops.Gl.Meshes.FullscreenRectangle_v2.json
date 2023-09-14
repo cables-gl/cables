@@ -1,0 +1,75 @@
+{
+    "summary": "Draws a rectangle using the full WebGL canvas size",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Scale index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Patch.P4SCBDz.FullscreenRectangle_v2"
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "fb70721a-eac2-4ff5-a5a2-5c59e2393972",
+    "created": 1687515551692,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Draw the Rectangle"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger the next op to execute"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "option to keep correct aspect ratio and make it fit into canvas area (letterbox)",
+            "author": "pandur",
+            "date": 1643616964751
+        },
+        {
+            "message": "cloned op from Ops.Gl.Meshes.FullscreenRectangle",
+            "author": "pandur",
+            "date": 1687515551692
+        },
+        {
+            "message": "Ops.Patch.P4SCBDz.FullscreenRectangle_v2 renamed to Ops.Gl.Meshes.FullscreenRectangle_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687527468365
+        }
+    ],
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "uKkIeG"
+}

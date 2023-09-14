@@ -132,19 +132,13 @@ function rebuild()
     else if (pivotY.get() == "top") y = -h / 2;
     else if (pivotY.get() == "bottom") y = +h / 2;
 
-    // const verts = [];
-    // const tc = [];
-    // const norms = [];
-    // const tangents = [];
-    // const biTangents = [];
-    const indices = [];
-
     const numRows = Math.max(1, Math.round(nRows.get()));
     const numColumns = Math.max(1, Math.round(nColumns.get()));
 
     const stepColumn = w / numColumns;
     const stepRow = h / numRows;
 
+    const indices = [];
     const tc = new Float32Array((numColumns + 1) * (numRows + 1) * 2);
     const verts = new Float32Array((numColumns + 1) * (numRows + 1) * 3);
     const norms = new Float32Array((numColumns + 1) * (numRows + 1) * 3);
@@ -170,7 +164,7 @@ function rebuild()
             tc[idxTc++] = c / numColumns;
             tc[idxTc++] = r / numRows;
 
-            if (curAxis == AXIS_XY)// default
+            if (curAxis == AXIS_XY) // default
             {
                 norms[idxNorms++] = 0;
                 norms[idxNorms++] = 0;

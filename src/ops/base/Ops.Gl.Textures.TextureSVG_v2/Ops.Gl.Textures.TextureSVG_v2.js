@@ -82,12 +82,19 @@ function reload()
         op.patch.getFilePath(filename.get()),
         function (err, _data, xhr)
         {
-            data = "data:image/svg+xml," + _data;
-
-            data = data.replace(/#/g, "%23");
-
             op.patch.loading.finished(loadingId);
-            update();
+            if (!err)
+            {
+                data = "data:image/svg+xml," + _data;
+                data = data.replace(/#/g, "%23");
+                update();
+            }
+            else
+            {
+                outLoaded.set(false);
+                op.logError("could not load file",);
+                op.setUiError("error", "Could not load SVG file!");
+            }
         }
     );
 }
@@ -104,8 +111,6 @@ function update()
         outLoaded.set(false);
         op.logError("could not load file",);
         op.patch.loading.finished(loadingId);
-
-        //     op.patch.loading.finished(loadingId);
         op.setUiError("error", "Could not load SVG file!");
     };
 
@@ -121,14 +126,13 @@ function update()
             canvas.height = texHeight.get();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            textureOut.set(new CGL.Texture.createFromImage(cgl, canvas,
-                {
-                    "wrap": cgl_wrap,
-                    "filter": cgl_filter,
-                    "width": canvas.width,
-                    "height": canvas.height,
-                    "unpackAlpha": true
-                }));
+            textureOut.set(new CGL.Texture.createFromImage(cgl, canvas, {
+                "wrap": cgl_wrap,
+                "filter": cgl_filter,
+                "width": canvas.width,
+                "height": canvas.height,
+                "unpackAlpha": true
+            }));
             removeCanvas();
             outLoaded.set(true);
         });

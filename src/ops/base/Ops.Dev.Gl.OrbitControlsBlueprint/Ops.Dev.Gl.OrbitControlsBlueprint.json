@@ -1,0 +1,37 @@
+{
+    "id": "623ea4d4-3b21-4170-a3ac-20ad218ae141",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1692972798494
+        },
+        {
+            "message": " added core lib: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1692972798582
+        },
+        {
+            "message": "Ops.Patch.P_PJ_IE.OrbContBp renamed to Ops.Dev.Gl.OrbitControlsBlueprint",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692973027340
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "patchId"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Dev.Gl.OrbitControlsBlueprint"
+    },
+    "authorName": "pandur",
+    "created": 1692972799843
+}

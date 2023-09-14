@@ -31,6 +31,7 @@ IN vec4 attrVertColor;
 vec3 MOD_calcNormal(sampler2D tex,vec2 uv)
 {
     float strength=13.0;
+    // float texelSize=1.0/float(textureSize(tex,0).x); // not on linux intel?!
     float texelSize=1.0/512.0;
 
     float tl = abs(texture(tex, uv + texelSize * vec2(-1.0, -1.0)).x);   // top left
@@ -56,10 +57,21 @@ vec3 MOD_calcNormal(sampler2D tex,vec2 uv)
 
     //     // Build the normalized normal
 
-    vec3 N = normalize(vec3(dX,dY, 1.0 / strength));
+vec3 N;
 
-    //     //convert (-1.0 , 1.0) to (0.0 , 1.0), if needed
-    N= N * 0.5 + 0.5;
+#ifdef MOD_NORMALS_Z
+    N = normalize(vec3(dX,dY, 1.0 / strength));
+#endif
+
+#ifdef MOD_NORMALS_Y
+    N = normalize(vec3(dX,1.0/strength,dY));
+#endif
+#ifdef MOD_NORMALS_X
+    N = normalize(vec3(1.0/strength,dX,dY));
+#endif
+// N*=-1.0;
+// N= N * 0.5 + 0.5;
+
 
    return N;
 }

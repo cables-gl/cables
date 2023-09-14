@@ -1,9 +1,11 @@
 import { EventTarget } from "./eventtarget";
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
-import { Port, SwitchPort, ValueSelectPort } from "./core_port";
+import { Port } from "./core_port";
 import { Link } from "./core_link";
 import Logger from "./core_logger";
+import { SwitchPort } from "./core_port_switch";
+import { ValueSelectPort } from "./core_port_select";
 
 /**
  * op the class of all operators
@@ -85,13 +87,8 @@ const Op = function ()
      */
     this.init = null;
 
-
-    Object.defineProperty(this, "objName", {
-        get()
-        {
-            return this._objName;
-        }
-    });
+    Object.defineProperty(this, "objName", { get() { return this._objName; } });
+    Object.defineProperty(this, "shortName", { get() { return this._shortOpName; } });
 };
 
 {
@@ -216,15 +213,16 @@ const Op = function ()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
 
-        return this.objName.split(".");
 
-        // return this.name;
+        // return this.objName.split(".");
+
+        return this.name;
     };
 
     Op.prototype.addOutPort = function (p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
-        p.parent = this;
+        p._op = this;
         this.portsOut.push(p);
         this.emitEvent("onPortAdd", p);
         return p;
@@ -259,7 +257,7 @@ const Op = function ()
             throw new Error("parameter is not a port!");
 
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
-        p.parent = this;
+        p._op = this;
 
         this.portsIn.push(p);
         this.emitEvent("onPortAdd", p);
@@ -576,6 +574,7 @@ const Op = function ()
         let p = null;
         if (!noindex)
         {
+            if (!v)v = values[0];
             const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "increment": "integer",
                 "hideParam": true
@@ -956,7 +955,8 @@ const Op = function ()
                 "objType": "texture"
             })
         );
-        if (v !== undefined) p.set(v);
+        if (v !== undefined) p.set(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
+
         p.ignoreValueSerialize = true;
         return p;
     };
@@ -999,9 +999,7 @@ const Op = function ()
         const op = {};
 
         if (this.opId) op.opId = this.opId;
-
         if (this.patch.storeObjNames) op.objName = this.objName;
-
 
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
@@ -1174,6 +1172,8 @@ const Op = function ()
         {
             this.portsIn[i].setAnimated(false);
         }
+
+        if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
     };
 
     // todo: check instancing stuff?

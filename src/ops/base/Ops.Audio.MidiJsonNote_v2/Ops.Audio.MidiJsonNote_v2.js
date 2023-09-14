@@ -19,17 +19,6 @@ let oldNames = null;
 let oldProgress = null;
 let lastHit = 0;
 let notfound = true;
-// let NoteOrMidi = true;
-// inFilter.onChange = updateUi;
-// updateUi();
-
-// function updateUi()
-// {
-//     inNote.setUiAttribs({ "greyout": inFilter.get() != "Note Name" });
-//     inNoteMidi.setUiAttribs({ "greyout": inFilter.get() != "Midi" });
-
-//     NoteOrMidi = inFilter.get() == "Note Name";
-// }
 
 inNote.onChange = () =>
 {
@@ -87,7 +76,7 @@ inData.onChange = function ()
 
     for (let i = startChn; i < endChn; i++)
     {
-        if ((NoteOrMidi && names[i] == note))
+        if (names[i] == note)
         {
             if ((oldNames[i] != note) || notfound) // ( oldNames[i]==note && progress[i]<oldProgress[i])
             {

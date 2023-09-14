@@ -44,6 +44,11 @@
             },
             {
                 "type": 0,
+                "name": "Syntax index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Font Size",
                 "subType": "number"
             },

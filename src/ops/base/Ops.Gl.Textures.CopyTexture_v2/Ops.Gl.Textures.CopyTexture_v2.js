@@ -31,6 +31,7 @@ let lastTex = null;
 let effect = null;
 let tex = null;
 let needsResUpdate = true;
+let oldTex = null;
 
 let w = 2, h = 2;
 const prevViewPort = [0, 0, 0, 0];
@@ -47,18 +48,21 @@ let textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-alphaMaskMethod.onChange =
-    greyscale.onChange =
-    invertR.onChange =
-    invertG.onChange =
-    invertB.onChange =
-    twrap.onChange =
-    tfilter.onChange =
-    fpTexture.onChange =
-    render.onLinkChanged =
-    inTexture.onLinkChanged =
-    inTexture.onChange =
-    inTextureMask.onChange = updateSoon;
+alphaMaskMethod.onChange = () => { updateSoon(); };
+greyscale.onChange = () => { updateSoon(); };
+invertR.onChange = () => { updateSoon(); };
+invertG.onChange = () => { updateSoon(); };
+invertB.onChange = () => { updateSoon(); };
+twrap.onChange = () => { updateSoon(); };
+tfilter.onChange = () => { updateSoon(); };
+fpTexture.onChange = () => { updateSoon(); };
+render.onLinkChanged = () => { updateSoon(); };
+inTexture.onLinkChanged = () => { updateSoon(); };
+inTexture.onChange = () =>
+{
+    if (oldTex != inTexture.get()) { updateSoon(); console.log("redo reason: inTexture"); }oldTex = inTexture.get();
+};
+inTextureMask.onChange = () => { updateSoon(); };
 
 render.onTriggered = doRender;
 updateSizePorts();
@@ -94,7 +98,7 @@ function initEffect()
     }
 
     effect.setSourceTexture(tex);
-    texOut.set(null);
+    // texOut.set(CGL.Texture.getEmptyTexture(cgl));
     reInitEffect = false;
 }
 
@@ -132,12 +136,12 @@ function updateResolution()
         effect.setSourceTexture(tex);
     }
 
-    if (texOut.get() && selectedFilter != CGL.Texture.FILTER_NEAREST)
-    {
-        if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering when scaling will not work on ios devices.", 0);
-        else op.setUiError("hintnpot", null, 0);
-    }
-    else op.setUiError("hintnpot", null, 0);
+    // if (texOut.get() && selectedFilter != CGL.Texture.FILTER_NEAREST)
+    // {
+    //     if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering when scaling will not work on ios devices.", 0);
+    //     else op.setUiError("hintnpot", null, 0);
+    // }
+    // else op.setUiError("hintnpot", null, 0);
 
     needsResUpdate = false;
 }

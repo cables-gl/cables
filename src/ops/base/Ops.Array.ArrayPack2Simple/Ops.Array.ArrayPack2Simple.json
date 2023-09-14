@@ -1,0 +1,67 @@
+{
+    "id": "6248877c-9509-483f-9e44-0061d0447acf",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1612448018942
+        },
+        {
+            "message": "Ops.User.pandur.ArrayPack3Simple renamed to Ops.Array.ArrayPack3Simple",
+            "author": "pandur",
+            "date": 1653405047385
+        },
+        {
+            "message": "cloned op from Ops.Array.ArrayPack3Simple",
+            "author": "pandur",
+            "date": 1692281968283
+        },
+        {
+            "message": "Ops.Patch.PUlcN_D.ArrayPack2Simple renamed to Ops.Array.ArrayPack2Simple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692282117050
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1692281968282,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array 1"
+            },
+            {
+                "type": 3,
+                "name": "Array 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array out"
+            },
+            {
+                "type": 0,
+                "name": "Num Points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.ArrayPack2Simple"
+    },
+    "summary": "Packs 2 individual arrays into an array2 - without needing a trigger",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "Udb6eG",
+    "docs": {
+        "ports": []
+    },
+    "collections": null
+}

@@ -1,0 +1,1649 @@
+{
+    "ops": [
+        {
+            "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+            "id": "1fcbe505-e47d-4781-9ec7-2ed35bbed3b9",
+            "uiAttribs": {
+                "title": "Sequence",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 12,
+                    "y": -460
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "exe"
+                },
+                {
+                    "name": "Clean up connections",
+                    "value": 0
+                },
+                {
+                    "name": "exe 0",
+                    "value": 0
+                },
+                {
+                    "name": "exe 1",
+                    "value": 0
+                },
+                {
+                    "name": "exe 2",
+                    "value": 0
+                },
+                {
+                    "name": "exe 3",
+                    "value": 0
+                },
+                {
+                    "name": "exe 4",
+                    "value": 0
+                },
+                {
+                    "name": "exe 5",
+                    "value": 0
+                },
+                {
+                    "name": "exe 6",
+                    "value": 0
+                },
+                {
+                    "name": "exe 7",
+                    "value": 0
+                },
+                {
+                    "name": "exe 8",
+                    "value": 0
+                },
+                {
+                    "name": "exe 9",
+                    "value": 0
+                },
+                {
+                    "name": "exe 10",
+                    "value": 0
+                },
+                {
+                    "name": "exe 11",
+                    "value": 0
+                },
+                {
+                    "name": "exe 12",
+                    "value": 0
+                },
+                {
+                    "name": "exe 13",
+                    "value": 0
+                },
+                {
+                    "name": "exe 14",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "trigger 0",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 1",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 2",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 3",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 4",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 5",
+                    "links": [
+                        {
+                            "portIn": "Update",
+                            "portOut": "trigger 5",
+                            "objIn": "bc309321-267a-4e89-9343-7b289cb8075e",
+                            "objOut": "1fcbe505-e47d-4781-9ec7-2ed35bbed3b9"
+                        }
+                    ]
+                },
+                {
+                    "name": "trigger 6",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 7",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 8",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 9",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 10",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 11",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 12",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 13",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 14",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 15",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+            "id": "4c791d17-7e95-4fb8-b309-e1ec6fa2c135",
+            "uiAttribs": {
+                "title": "PatchInput",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -60,
+                    "y": -660
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [],
+            "portsOut": []
+        },
+        {
+            "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+            "id": "a5303620-69d2-44a2-9a0f-fb7c6c5b3ebb",
+            "uiAttribs": {
+                "title": "PatchOutput",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 96,
+                    "y": 540
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [],
+            "portsOut": []
+        },
+        {
+            "opId": "0b3e04f7-323e-4ac8-8a22-a21e2f36e0e9",
+            "id": "3dfd09eb-fb70-4c60-b560-6a440a1528bd",
+            "uiAttribs": {
+                "title": "TransformView",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 24,
+                    "y": 220
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "render"
+                },
+                {
+                    "name": "posX",
+                    "value": 0
+                },
+                {
+                    "name": "posY",
+                    "value": 0
+                },
+                {
+                    "name": "posZ",
+                    "value": 0
+                },
+                {
+                    "name": "scale",
+                    "value": 1
+                },
+                {
+                    "name": "rotX",
+                    "value": 0
+                },
+                {
+                    "name": "rotY"
+                },
+                {
+                    "name": "rotZ",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "trigger",
+                    "value": 0,
+                    "expose": true
+                }
+            ]
+        },
+        {
+            "opId": "1bf7c63e-e2c2-42e2-abb3-42235e7e24f0",
+            "id": "00cd0325-2ef4-4e03-ac92-3287bec6d837",
+            "uiAttribs": {
+                "title": "ResetTransform",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -12,
+                    "y": -560
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "exe",
+                    "expose": true
+                },
+                {
+                    "name": "Reset Model Transform",
+                    "value": true
+                },
+                {
+                    "name": "Reset View Transform",
+                    "value": false
+                },
+                {
+                    "name": "Default View",
+                    "value": true
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "trigger",
+                    "links": [
+                        {
+                            "portIn": "exe",
+                            "portOut": "trigger",
+                            "objIn": "1fcbe505-e47d-4781-9ec7-2ed35bbed3b9",
+                            "objOut": "00cd0325-2ef4-4e03-ac92-3287bec6d837"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
+            "id": "9cc85e85-1ed2-40ed-9b48-e4472ab6fc04",
+            "uiAttribs": {
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -264,
+                    "y": -360
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Delta Value"
+                },
+                {
+                    "name": "Default Value",
+                    "value": 0
+                },
+                {
+                    "name": "Multiply",
+                    "value": 11
+                },
+                {
+                    "name": "Reset"
+                },
+                {
+                    "name": "Limit",
+                    "value": false
+                },
+                {
+                    "name": "Min",
+                    "value": 0
+                },
+                {
+                    "name": "Max",
+                    "value": 100
+                },
+                {
+                    "name": "Rubberband",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Absolute Value",
+                    "links": [
+                        {
+                            "portIn": "Value",
+                            "portOut": "Absolute Value",
+                            "objIn": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46",
+                            "objOut": "9cc85e85-1ed2-40ed-9b48-e4472ab6fc04"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "5103d14e-2f21-4f43-ae91-c1b55a944226",
+            "id": "948e77c7-ac73-44f1-8e38-e34b924c812f",
+            "uiAttribs": {
+                "title": "MouseDrag",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -264,
+                    "y": -460
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Active",
+                    "value": true
+                },
+                {
+                    "name": "Speed"
+                },
+                {
+                    "name": "Input Type index",
+                    "value": 0
+                },
+                {
+                    "name": "Input Type",
+                    "value": "All"
+                },
+                {
+                    "name": "Area index",
+                    "value": 0
+                },
+                {
+                    "name": "Area",
+                    "value": "Canvas Area"
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Delta X",
+                    "links": [
+                        {
+                            "portIn": "Delta Value",
+                            "portOut": "Delta X",
+                            "objIn": "9cc85e85-1ed2-40ed-9b48-e4472ab6fc04",
+                            "objOut": "948e77c7-ac73-44f1-8e38-e34b924c812f"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delta Y",
+                    "links": [
+                        {
+                            "portIn": "Delta Value",
+                            "portOut": "Delta Y",
+                            "objIn": "bf3b685a-70af-4901-8b59-3c5b2b546c91",
+                            "objOut": "948e77c7-ac73-44f1-8e38-e34b924c812f"
+                        }
+                    ]
+                },
+                {
+                    "name": "Is Dragging",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "opId": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
+            "id": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46",
+            "uiAttribs": {
+                "title": "Smooth",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 48,
+                    "y": 120
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Update"
+                },
+                {
+                    "name": "Separate inc/dec",
+                    "value": false
+                },
+                {
+                    "name": "Value"
+                },
+                {
+                    "name": "Inc factor",
+                    "title": "Inc/Dec factor"
+                },
+                {
+                    "name": "Dec factor",
+                    "value": 4
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Next",
+                    "links": [
+                        {
+                            "portIn": "render",
+                            "portOut": "Next",
+                            "objIn": "3dfd09eb-fb70-4c60-b560-6a440a1528bd",
+                            "objOut": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46"
+                        }
+                    ]
+                },
+                {
+                    "name": "Result",
+                    "links": [
+                        {
+                            "portIn": "rotY",
+                            "portOut": "Result",
+                            "objIn": "3dfd09eb-fb70-4c60-b560-6a440a1528bd",
+                            "objOut": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
+            "id": "bf3b685a-70af-4901-8b59-3c5b2b546c91",
+            "uiAttribs": {
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -132,
+                    "y": -340
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Delta Value"
+                },
+                {
+                    "name": "Default Value",
+                    "value": 0
+                },
+                {
+                    "name": "Multiply",
+                    "value": 11.32
+                },
+                {
+                    "name": "Reset",
+                    "value": 0
+                },
+                {
+                    "name": "Limit",
+                    "value": false
+                },
+                {
+                    "name": "Min",
+                    "value": 0
+                },
+                {
+                    "name": "Max",
+                    "value": 100
+                },
+                {
+                    "name": "Rubberband",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Absolute Value",
+                    "links": [
+                        {
+                            "portIn": "Value",
+                            "portOut": "Absolute Value",
+                            "objIn": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065",
+                            "objOut": "bf3b685a-70af-4901-8b59-3c5b2b546c91"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
+            "id": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065",
+            "uiAttribs": {
+                "title": "Smooth",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 48,
+                    "y": -220
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Update"
+                },
+                {
+                    "name": "Separate inc/dec",
+                    "value": false
+                },
+                {
+                    "name": "Value"
+                },
+                {
+                    "name": "Inc factor",
+                    "title": "Inc/Dec factor"
+                },
+                {
+                    "name": "Dec factor",
+                    "value": 4
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Next",
+                    "links": [
+                        {
+                            "portIn": "render",
+                            "portOut": "Next",
+                            "objIn": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
+                            "objOut": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065"
+                        }
+                    ]
+                },
+                {
+                    "name": "Result",
+                    "value": 76.22999999999996
+                }
+            ]
+        },
+        {
+            "opId": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
+            "id": "318dfbd0-74a8-4a6a-b209-a336e0d8de50",
+            "uiAttribs": {
+                "title": "SMOOTHNESS",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -492,
+                    "y": -180
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "value",
+                    "value": 8.2
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "result",
+                    "links": [
+                        {
+                            "portIn": "Inc factor",
+                            "portOut": "result",
+                            "objIn": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065",
+                            "objOut": "318dfbd0-74a8-4a6a-b209-a336e0d8de50"
+                        },
+                        {
+                            "portIn": "Inc factor",
+                            "portOut": "result",
+                            "objIn": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46",
+                            "objOut": "318dfbd0-74a8-4a6a-b209-a336e0d8de50"
+                        },
+                        {
+                            "portIn": "Inc factor",
+                            "portOut": "result",
+                            "objIn": "bc309321-267a-4e89-9343-7b289cb8075e",
+                            "objOut": "318dfbd0-74a8-4a6a-b209-a336e0d8de50"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
+            "id": "9a4bb8db-55eb-47ba-ac62-9df629047fe9",
+            "uiAttribs": {
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 384,
+                    "y": -320
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Delta Value"
+                },
+                {
+                    "name": "Default Value",
+                    "value": 0
+                },
+                {
+                    "name": "Multiply",
+                    "value": 1.12
+                },
+                {
+                    "name": "Reset"
+                },
+                {
+                    "name": "Limit",
+                    "value": false
+                },
+                {
+                    "name": "Min",
+                    "value": 0
+                },
+                {
+                    "name": "Max",
+                    "value": 100
+                },
+                {
+                    "name": "Rubberband",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Absolute Value",
+                    "links": [
+                        {
+                            "portIn": "posX",
+                            "portOut": "Absolute Value",
+                            "objIn": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
+                            "objOut": "9a4bb8db-55eb-47ba-ac62-9df629047fe9"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "5103d14e-2f21-4f43-ae91-c1b55a944226",
+            "id": "d9978929-51f5-41b1-9a39-3388435be95c",
+            "uiAttribs": {
+                "title": "MouseDrag",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 324,
+                    "y": -460
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Active",
+                    "value": true
+                },
+                {
+                    "name": "Speed"
+                },
+                {
+                    "name": "Input Type index",
+                    "value": 0
+                },
+                {
+                    "name": "Input Type",
+                    "value": "All"
+                },
+                {
+                    "name": "Area index",
+                    "value": 0
+                },
+                {
+                    "name": "Area",
+                    "value": "Canvas Area"
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Delta X",
+                    "links": [
+                        {
+                            "portIn": "Delta Value",
+                            "portOut": "Delta X",
+                            "objIn": "9a4bb8db-55eb-47ba-ac62-9df629047fe9",
+                            "objOut": "d9978929-51f5-41b1-9a39-3388435be95c"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delta Y",
+                    "links": [
+                        {
+                            "portIn": "Value",
+                            "portOut": "Delta Y",
+                            "objIn": "ead26bfe-c323-4a80-b216-2fc49b9a722a",
+                            "objOut": "d9978929-51f5-41b1-9a39-3388435be95c"
+                        }
+                    ]
+                },
+                {
+                    "name": "Is Dragging",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
+            "id": "6d0c501c-645a-4950-89a8-19fcfa489a1e",
+            "uiAttribs": {
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 516,
+                    "y": -340
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Delta Value"
+                },
+                {
+                    "name": "Default Value",
+                    "value": 0
+                },
+                {
+                    "name": "Multiply",
+                    "value": 1
+                },
+                {
+                    "name": "Reset"
+                },
+                {
+                    "name": "Limit",
+                    "value": false
+                },
+                {
+                    "name": "Min",
+                    "value": 0
+                },
+                {
+                    "name": "Max",
+                    "value": 100
+                },
+                {
+                    "name": "Rubberband",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Absolute Value",
+                    "links": [
+                        {
+                            "portIn": "posY",
+                            "portOut": "Absolute Value",
+                            "objIn": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
+                            "objOut": "6d0c501c-645a-4950-89a8-19fcfa489a1e"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "0b3e04f7-323e-4ac8-8a22-a21e2f36e0e9",
+            "id": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
+            "uiAttribs": {
+                "title": "TransformView",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 276,
+                    "y": 0
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "render"
+                },
+                {
+                    "name": "posX"
+                },
+                {
+                    "name": "posY"
+                },
+                {
+                    "name": "posZ"
+                },
+                {
+                    "name": "scale",
+                    "value": 1
+                },
+                {
+                    "name": "rotX",
+                    "value": 0
+                },
+                {
+                    "name": "rotY",
+                    "value": 0
+                },
+                {
+                    "name": "rotZ",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "trigger",
+                    "links": [
+                        {
+                            "portIn": "Update",
+                            "portOut": "trigger",
+                            "objIn": "2cb0ecbe-134e-4d7d-80ac-e41e50522b46",
+                            "objOut": "993c5ed8-926c-4798-b88d-c3d7f81881f2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+            "id": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba",
+            "uiAttribs": {
+                "title": "Sequence",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 36,
+                    "y": -1020
+                },
+                "blueprintSubpatch2": true,
+                "comment": "RESET"
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "exe"
+                },
+                {
+                    "name": "Clean up connections",
+                    "value": 0
+                },
+                {
+                    "name": "exe 0",
+                    "value": 0
+                },
+                {
+                    "name": "exe 1",
+                    "value": 0
+                },
+                {
+                    "name": "exe 2",
+                    "value": 0
+                },
+                {
+                    "name": "exe 3",
+                    "value": 0
+                },
+                {
+                    "name": "exe 4",
+                    "value": 0
+                },
+                {
+                    "name": "exe 5",
+                    "value": 0
+                },
+                {
+                    "name": "exe 6",
+                    "value": 0
+                },
+                {
+                    "name": "exe 7",
+                    "value": 0
+                },
+                {
+                    "name": "exe 8",
+                    "value": 0
+                },
+                {
+                    "name": "exe 9",
+                    "value": 0
+                },
+                {
+                    "name": "exe 10",
+                    "value": 0
+                },
+                {
+                    "name": "exe 11",
+                    "value": 0
+                },
+                {
+                    "name": "exe 12",
+                    "value": 0
+                },
+                {
+                    "name": "exe 13",
+                    "value": 0
+                },
+                {
+                    "name": "exe 14",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "trigger 0",
+                    "links": [
+                        {
+                            "portIn": "Reset",
+                            "portOut": "trigger 0",
+                            "objIn": "6d0c501c-645a-4950-89a8-19fcfa489a1e",
+                            "objOut": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba"
+                        },
+                        {
+                            "portIn": "Reset",
+                            "portOut": "trigger 0",
+                            "objIn": "9a4bb8db-55eb-47ba-ac62-9df629047fe9",
+                            "objOut": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba"
+                        },
+                        {
+                            "portIn": "Reset",
+                            "portOut": "trigger 0",
+                            "objIn": "9cc85e85-1ed2-40ed-9b48-e4472ab6fc04",
+                            "objOut": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba"
+                        }
+                    ]
+                },
+                {
+                    "name": "trigger 1",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 2",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 3",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 4",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 5",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 6",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 7",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 8",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 9",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 10",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 11",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 12",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 13",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 14",
+                    "value": 0
+                },
+                {
+                    "name": "trigger 15",
+                    "links": [
+                        {
+                            "portIn": "Reset",
+                            "portOut": "trigger 15",
+                            "objIn": "09d8b512-3f03-4531-859a-dd8da2ddebcb",
+                            "objOut": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "21630924-39e4-4df5-9965-b9136510d156",
+            "id": "a57cb411-606e-4b7e-a431-c6292c93b1aa",
+            "uiAttribs": {
+                "title": "TriggerButton",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 36,
+                    "y": -1120
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Trigger",
+                    "value": 0,
+                    "expose": true,
+                    "title": "Reset"
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Next",
+                    "links": [
+                        {
+                            "portIn": "exe",
+                            "portOut": "Next",
+                            "objIn": "b0540f88-ff11-460b-8bd5-97b77ae6e1ba",
+                            "objOut": "a57cb411-606e-4b7e-a431-c6292c93b1aa"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "f5c858a2-2654-4108-86fe-319efa70ecec",
+            "id": "ead26bfe-c323-4a80-b216-2fc49b9a722a",
+            "uiAttribs": {
+                "title": "FlipSign",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 516,
+                    "y": -420
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Value"
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Result",
+                    "links": [
+                        {
+                            "portIn": "Delta Value",
+                            "portOut": "Result",
+                            "objIn": "6d0c501c-645a-4950-89a8-19fcfa489a1e",
+                            "objOut": "ead26bfe-c323-4a80-b216-2fc49b9a722a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "7b9626db-536b-4bb4-85c3-95401bc60d1b",
+            "id": "a6cf7e5c-277a-47e2-87b2-fd6d18b89d80",
+            "uiAttribs": {
+                "title": "MouseWheel",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 768,
+                    "y": -360
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Speed",
+                    "value": 1
+                },
+                {
+                    "name": "prevent scroll",
+                    "value": true
+                },
+                {
+                    "name": "Flip Direction",
+                    "value": false
+                },
+                {
+                    "name": "Simple Delta",
+                    "value": true
+                },
+                {
+                    "name": "Area index",
+                    "value": 1
+                },
+                {
+                    "name": "Area",
+                    "value": "Document"
+                },
+                {
+                    "name": "active",
+                    "value": true
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "delta",
+                    "links": [
+                        {
+                            "portIn": "Delta Value",
+                            "portOut": "delta",
+                            "objIn": "09d8b512-3f03-4531-859a-dd8da2ddebcb",
+                            "objOut": "a6cf7e5c-277a-47e2-87b2-fd6d18b89d80"
+                        }
+                    ]
+                },
+                {
+                    "name": "delta X",
+                    "value": 0
+                },
+                {
+                    "name": "browser event delta",
+                    "value": -1680
+                },
+                {
+                    "name": "Wheel Action",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "opId": "d9d4b3db-c24b-48da-b798-9e6230d861f7",
+            "id": "09d8b512-3f03-4531-859a-dd8da2ddebcb",
+            "uiAttribs": {
+                "title": "DeltaSum",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 768,
+                    "y": -300
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Delta Value"
+                },
+                {
+                    "name": "Default Value",
+                    "value": 0
+                },
+                {
+                    "name": "Multiply",
+                    "value": -1
+                },
+                {
+                    "name": "Reset"
+                },
+                {
+                    "name": "Limit",
+                    "value": false
+                },
+                {
+                    "name": "Min",
+                    "value": 0
+                },
+                {
+                    "name": "Max",
+                    "value": 100
+                },
+                {
+                    "name": "Rubberband",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Absolute Value",
+                    "links": [
+                        {
+                            "portIn": "Value",
+                            "portOut": "Absolute Value",
+                            "objIn": "bc309321-267a-4e89-9343-7b289cb8075e",
+                            "objOut": "09d8b512-3f03-4531-859a-dd8da2ddebcb"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
+            "id": "bc309321-267a-4e89-9343-7b289cb8075e",
+            "uiAttribs": {
+                "title": "Smooth",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 60,
+                    "y": -300
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Update"
+                },
+                {
+                    "name": "Separate inc/dec",
+                    "value": false
+                },
+                {
+                    "name": "Value"
+                },
+                {
+                    "name": "Inc factor",
+                    "title": "Inc/Dec factor"
+                },
+                {
+                    "name": "Dec factor",
+                    "value": 4
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Next",
+                    "links": [
+                        {
+                            "portIn": "Update",
+                            "portOut": "Next",
+                            "objIn": "b9f70aab-81e8-49d1-8d96-9bdbdc3db065",
+                            "objOut": "bc309321-267a-4e89-9343-7b289cb8075e"
+                        }
+                    ]
+                },
+                {
+                    "name": "Result",
+                    "links": [
+                        {
+                            "portIn": "posZ",
+                            "portOut": "Result",
+                            "objIn": "993c5ed8-926c-4798-b88d-c3d7f81881f2",
+                            "objOut": "bc309321-267a-4e89-9343-7b289cb8075e"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",
+            "id": "fd09f979-8a25-471d-ba70-86976d788e9f",
+            "uiAttribs": {
+                "title": "OrbitControls",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 624,
+                    "y": -20
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "render",
+                    "value": 0
+                },
+                {
+                    "name": "min distance",
+                    "value": 0.05
+                },
+                {
+                    "name": "max distance",
+                    "value": 99999
+                },
+                {
+                    "name": "min rot y",
+                    "value": 0
+                },
+                {
+                    "name": "max rot y",
+                    "value": 0
+                },
+                {
+                    "name": "initial radius",
+                    "value": 0.05
+                },
+                {
+                    "name": "initial axis y",
+                    "value": 0.5
+                },
+                {
+                    "name": "initial axis x",
+                    "value": 0.25
+                },
+                {
+                    "name": "mul",
+                    "value": 1
+                },
+                {
+                    "name": "Smoothness",
+                    "value": 1
+                },
+                {
+                    "name": "Speed X",
+                    "value": 1
+                },
+                {
+                    "name": "Speed Y",
+                    "value": 1
+                },
+                {
+                    "name": "Active",
+                    "value": true
+                },
+                {
+                    "name": "Allow Panning",
+                    "value": true
+                },
+                {
+                    "name": "Allow Zooming",
+                    "value": true
+                },
+                {
+                    "name": "Allow Rotation",
+                    "value": true
+                },
+                {
+                    "name": "restricted",
+                    "value": true
+                },
+                {
+                    "name": "Reset",
+                    "value": 0
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "trigger",
+                    "value": 0
+                },
+                {
+                    "name": "radius",
+                    "value": 0.05
+                },
+                {
+                    "name": "Rot X",
+                    "value": 0
+                },
+                {
+                    "name": "Rot Y",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "opId": "c7e5e545-c8a1-4fef-85c2-45422b947f0d",
+            "id": "bd1e1931-0026-4a80-a6a9-c8d784ee8b92",
+            "uiAttribs": {
+                "title": "MouseButtons",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 252,
+                    "y": -680
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Area index",
+                    "value": 0
+                },
+                {
+                    "name": "Area",
+                    "value": "Canvas"
+                },
+                {
+                    "name": "Active",
+                    "value": true
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Click Left",
+                    "value": 0
+                },
+                {
+                    "name": "Click Right",
+                    "value": 0
+                },
+                {
+                    "name": "Double Click",
+                    "value": 0
+                },
+                {
+                    "name": "Button pressed Left",
+                    "value": 0
+                },
+                {
+                    "name": "Button pressed Middle",
+                    "value": 0
+                },
+                {
+                    "name": "Button pressed Right",
+                    "links": [
+                        {
+                            "portIn": "number1",
+                            "portOut": "Button pressed Right",
+                            "objIn": "2f4c4fc0-2c3f-4e28-8153-ab233735596f",
+                            "objOut": "bd1e1931-0026-4a80-a6a9-c8d784ee8b92"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mouse Down Left",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Down Middle",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Down Right",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Up Left",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Up Middle",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Up Right",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "opId": "c7e5e545-c8a1-4fef-85c2-45422b947f0d",
+            "id": "da32f08a-8ccc-4b77-83be-1bf982852851",
+            "uiAttribs": {
+                "title": "MouseButtons",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -372,
+                    "y": -680
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "Area index",
+                    "value": 0
+                },
+                {
+                    "name": "Area",
+                    "value": "Canvas"
+                },
+                {
+                    "name": "Active",
+                    "value": true
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "Click Left",
+                    "value": 0
+                },
+                {
+                    "name": "Click Right",
+                    "value": 0
+                },
+                {
+                    "name": "Double Click",
+                    "value": 0
+                },
+                {
+                    "name": "Button pressed Left",
+                    "links": [
+                        {
+                            "portIn": "number1",
+                            "portOut": "Button pressed Left",
+                            "objIn": "b02732c6-2545-4e83-9bca-62ebaebc0328",
+                            "objOut": "da32f08a-8ccc-4b77-83be-1bf982852851"
+                        }
+                    ]
+                },
+                {
+                    "name": "Button pressed Middle",
+                    "value": 0
+                },
+                {
+                    "name": "Button pressed Right",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Down Left",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Down Middle",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Down Right",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Up Left",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Up Middle",
+                    "value": 0
+                },
+                {
+                    "name": "Mouse Up Right",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "opId": "1bbdae06-fbb2-489b-9bcc-36c9d65bd441",
+            "id": "2f4c4fc0-2c3f-4e28-8153-ab233735596f",
+            "uiAttribs": {
+                "title": "*",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": 324,
+                    "y": -600
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "number1"
+                },
+                {
+                    "name": "number2",
+                    "value": 3.37
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "result",
+                    "links": [
+                        {
+                            "portIn": "Speed",
+                            "portOut": "result",
+                            "objIn": "d9978929-51f5-41b1-9a39-3388435be95c",
+                            "objOut": "2f4c4fc0-2c3f-4e28-8153-ab233735596f"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "opId": "1bbdae06-fbb2-489b-9bcc-36c9d65bd441",
+            "id": "b02732c6-2545-4e83-9bca-62ebaebc0328",
+            "uiAttribs": {
+                "title": "*",
+                "subPatch": "hqzw4dh2d",
+                "translate": {
+                    "x": -264,
+                    "y": -520
+                },
+                "blueprintSubpatch2": true
+            },
+            "storage": {},
+            "portsIn": [
+                {
+                    "name": "number1"
+                },
+                {
+                    "name": "number2",
+                    "value": 2.68
+                }
+            ],
+            "portsOut": [
+                {
+                    "name": "result",
+                    "links": [
+                        {
+                            "portIn": "Speed",
+                            "portOut": "result",
+                            "objIn": "948e77c7-ac73-44f1-8e38-e34b924c812f",
+                            "objOut": "b02732c6-2545-4e83-9bca-62ebaebc0328"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

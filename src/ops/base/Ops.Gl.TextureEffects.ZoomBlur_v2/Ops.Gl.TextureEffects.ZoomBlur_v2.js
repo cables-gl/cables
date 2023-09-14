@@ -1,6 +1,7 @@
 const
     render = op.inTrigger("render"),
     strength = op.inValueSlider("Strength", 0.5),
+    inNumSamples = op.inInt("Samples", 40),
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     inMaskTex = op.inTexture("Strength Map"),
@@ -22,6 +23,7 @@ const
     uniY = new CGL.Uniform(shader, "f", "y", y),
     strengthUniform = new CGL.Uniform(shader, "f", "strength", strength);
 
+inNumSamples.onChange =
 inMaskSource.onChange =
     inMaskInv.onChange =
     inMaskTex.onChange = updateDefines;
@@ -39,6 +41,8 @@ function updateDefines()
     shader.toggleDefine("MASK_SRC_LUM", inMaskSource.get() == "Lum");
 
     shader.toggleDefine("MASK_INV", inMaskInv.get());
+
+    shader.define("NUM_SAMPLES", inNumSamples.get() + ".0");
 
     inMaskSource.setUiAttribs({ "greyout": !inMaskTex.isLinked() });
     inMaskInv.setUiAttribs({ "greyout": !inMaskTex.isLinked() });

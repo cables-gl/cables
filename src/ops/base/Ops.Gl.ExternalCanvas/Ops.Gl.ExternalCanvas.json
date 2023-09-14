@@ -1,0 +1,97 @@
+{
+    "id": "7fdeec7a-43df-4e0c-bde5-d398b2151930",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1689248529267
+        },
+        {
+            "message": "Ops.Patch.PHnG3fB.NewCanvas renamed to Ops.Team.Vj.CanvasCopyWindow",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1689251935962
+        },
+        {
+            "message": "Ops.Team.Vj.CanvasCopyWindow renamed to Ops.Gl.ExternalCanvas",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1689425406750
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Smoothing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Stretch",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Title"
+            },
+            {
+                "type": 1,
+                "name": "Open Window"
+            },
+            {
+                "type": 1,
+                "name": "Close"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ],
+        "name": "Ops.Gl.ExternalCanvas"
+    },
+    "authorName": "pandur",
+    "created": 1689248551446,
+    "summary": "Open a new window that shows a copy of the patch canvas",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "HnG3fB"
+}

@@ -39,7 +39,7 @@ inTex.onChange = () =>
 
     let title = "";
 
-    if (inTex.get()) title = inTex.links[0].getOtherPort(inTex).name;
+    if (inTex.get() && inTex.links[0]) title = inTex.links[0].getOtherPort(inTex).name;
 
     op.setUiAttrib({ "extendTitle": title });
 };
@@ -57,18 +57,18 @@ op.renderVizLayer = (ctx, layer) =>
     const texSlotCubemap = texSlot + 1;
 
     const perf = CABLES.UI.uiProfiler.start("previewlayer texture");
-    const cgl = port.parent.patch.cgl;
+    const cgl = port.op.patch.cgl;
 
     if (!layer.useGl) return;
 
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
-    port.parent.patch.cgl.profileData.profileTexPreviews++;
+    port.op.patch.cgl.profileData.profileTexPreviews++;
 
     const portTex = port.get() || CGL.Texture.getEmptyTexture(cgl);
 
     if (!this._mesh)
     {
-        const geom = new CGL.Geometry("preview op rect");
+        const geom = new CGL.Geometry("vizTexture rect");
         geom.vertices = [1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0];
         geom.texCoords = [
             1.0, 1.0,
@@ -96,11 +96,11 @@ op.renderVizLayer = (ctx, layer) =>
 
     cgl.pushPMatrix();
     const sizeTex = [portTex.width, portTex.height];
-    const small = port.parent.patch.cgl.canvasWidth > sizeTex[0] && port.parent.patch.cgl.canvasHeight > sizeTex[1];
+    const small = port.op.patch.cgl.canvasWidth > sizeTex[0] && port.op.patch.cgl.canvasHeight > sizeTex[1];
 
     if (small)
     {
-        mat4.ortho(cgl.pMatrix, 0, port.parent.patch.cgl.canvasWidth, port.parent.patch.cgl.canvasHeight, 0, 0.001, 11);
+        mat4.ortho(cgl.pMatrix, 0, port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight, 0, 0.001, 11);
     }
     else mat4.ortho(cgl.pMatrix, -1, 1, 1, -1, 0.001, 11);
 
@@ -126,7 +126,7 @@ op.renderVizLayer = (ctx, layer) =>
     this._shaderTimeUniform.setValue(timer.get());
 
     this._shaderTypeUniform.setValue(texType);
-    let s = [port.parent.patch.cgl.canvasWidth, port.parent.patch.cgl.canvasHeight];
+    let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
 
     cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
@@ -194,40 +194,48 @@ op.renderVizLayer = (ctx, layer) =>
     const borderLeft = (layer.width - sizeImg[0]) / 2;
     const borderTop = (layer.height - sizeImg[1]) / 2;
     ctx.fillRect(
-        layer.x, layer.y,
-        borderLeft, (layer.height)
+        layer.x, layer.y, borderLeft, (layer.height)
     );
     ctx.fillRect(
-        layer.x + sizeImg[0] + borderLeft, layer.y,
-        borderLeft, (layer.height)
+        layer.x + sizeImg[0] + borderLeft, layer.y, borderLeft, (layer.height)
     );
     ctx.fillRect(
-        layer.x, layer.y,
-        layer.width, borderTop
+        layer.x, layer.y, layer.width, borderTop
     );
     ctx.fillRect(
-        layer.x, layer.y + sizeImg[1] + borderTop,
-        layer.width, borderTop
+        layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop
     );
 
     if (sizeTex[1] == 1)
         ctx.drawImage(cgl.canvas,
-            0, 0,
-            s[0], s[1],
-            layer.x, layer.y,
-            layer.width, layer.height * 5);// workaround filtering problems
+            0,
+            0,
+            s[0],
+            s[1],
+            layer.x,
+            layer.y,
+            layer.width,
+            layer.height * 5);// workaround filtering problems
     if (sizeTex[0] == 1)
         ctx.drawImage(cgl.canvas,
-            0, 0,
-            s[0], s[1],
-            layer.x, layer.y,
-            layer.width * 5, layer.height); // workaround filtering problems
+            0,
+            0,
+            s[0],
+            s[1],
+            layer.x,
+            layer.y,
+            layer.width * 5,
+            layer.height); // workaround filtering problems
     else
         ctx.drawImage(cgl.canvas,
-            0, 0,
-            s[0], s[1],
-            layer.x + (layer.width - sizeImg[0]) / 2, layer.y + (layer.height - sizeImg[1]) / 2,
-            sizeImg[0], sizeImg[1]);
+            0,
+            0,
+            s[0],
+            s[1],
+            layer.x + (layer.width - sizeImg[0]) / 2,
+            layer.y + (layer.height - sizeImg[1]) / 2,
+            sizeImg[0],
+            sizeImg[1]);
 
     let info = "unknown";
 
@@ -261,23 +269,27 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.fillRect(
             layer.x + layer.width * inX.get() - 1,
             layer.y + sizeImg[1] * inY.get() - 10 + borderTop,
-            3, 20);
+            3,
+            20);
 
         ctx.fillRect(
             layer.x + layer.width * inX.get() - 10,
             layer.y + sizeImg[1] * inY.get() - 1 + borderTop,
-            20, 3);
+            20,
+            3);
 
         ctx.fillStyle = "#fff";
         ctx.fillRect(
             layer.x + layer.width * inX.get() - 1,
             layer.y + sizeImg[1] * inY.get() - 10 + borderTop,
-            1, 20);
+            1,
+            20);
 
         ctx.fillRect(
             layer.x + layer.width * inX.get() - 10,
             layer.y + sizeImg[1] * inY.get() - 1 + borderTop,
-            20, 1);
+            20,
+            1);
     }
 
     outInfo.set(info);
@@ -297,18 +309,16 @@ op.renderVizLayer = (ctx, layer) =>
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
         gl.framebufferTexture2D(
-            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
-            gl.TEXTURE_2D, realTexture.tex, 0
+            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
         );
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-        pixelReader.read(cgl, fb, realTexture.textureType, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1,
-            (pixel) =>
-            {
-                if (realTexture.textureType != CGL.Texture.TYPE_FLOAT)colorString = Math.floor(pixel[0] / 255 * 100) / 100 + "," + Math.floor(pixel[1] / 255 * 100) / 100 + "," + Math.floor(pixel[2] / 255 * 100) / 100 + "," + Math.floor(pixel[3] / 255 * 100) / 100;
-                else colorString = Math.round(pixel[0] * 100) / 100 + "," + Math.round(pixel[1] * 100) / 100 + "," + Math.round(pixel[2] * 100) / 100 + "," + Math.round(pixel[3] * 100) / 100;
-            });
+        pixelReader.read(cgl, fb, realTexture.textureType, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
+        {
+            if (realTexture.textureType != CGL.Texture.TYPE_FLOAT)colorString = Math.floor(pixel[0] / 255 * 100) / 100 + "," + Math.floor(pixel[1] / 255 * 100) / 100 + "," + Math.floor(pixel[2] / 255 * 100) / 100 + "," + Math.floor(pixel[3] / 255 * 100) / 100;
+            else colorString = Math.round(pixel[0] * 100) / 100 + "," + Math.round(pixel[1] * 100) / 100 + "," + Math.round(pixel[2] * 100) / 100 + "," + Math.round(pixel[3] * 100) / 100;
+        });
     }
 
     cgl.gl.clearColor(0, 0, 0, 0);

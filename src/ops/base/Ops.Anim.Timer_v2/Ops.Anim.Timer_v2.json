@@ -38,7 +38,6 @@
     },
     "summary": "A timer that can be started, paused and reset by triggering",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

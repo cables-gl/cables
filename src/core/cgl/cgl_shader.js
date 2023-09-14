@@ -252,6 +252,7 @@ Shader.prototype.setSource = function (srcVert, srcFrag)
     this.srcFrag = srcFrag;
     this.setWhyCompile("Source changed");
     this._needsRecompile = true;
+    this._isValid = true;
 };
 
 Shader.prototype._addLibs = function (src)
@@ -458,6 +459,8 @@ Shader.prototype.compile = function ()
     if (this._cgl.aborted) return;
     const startTime = performance.now();
 
+
+
     this._cgl.profileData.profileShaderCompiles++;
     this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
@@ -474,6 +477,8 @@ Shader.prototype.compile = function ()
     const structStrings = this.createStructUniforms();
     this._cgl.profileData.addHeavyEvent("shader compile", this._name + " [" + this._compileReason + "]");
     this._compileReason = "";
+
+
 
     if (this._uniforms)
     {
@@ -540,6 +545,7 @@ Shader.prototype.compile = function ()
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
             .endl() + "#define IN in"
+            .endl() + "#define OUT out"
             .endl() + "#define UNI uniform"
             .endl() + "{{DRAWBUFFER}}"
 
@@ -817,7 +823,7 @@ Shader.prototype.bind = function ()
     if (!this._projMatrixUniform && !this.ignoreMissingUniforms)
     {
         this._countMissingUniforms++;
-        if (this._countMissingUniforms == 10)console.log("stopping getlocation of missing uniforms...", this._name);
+        // if (this._countMissingUniforms == 10)console.log("stopping getlocation of missing uniforms...", this._name);
         if (this._countMissingUniforms < 10)
         {
             this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
@@ -1696,6 +1702,7 @@ Shader.getErrorFragmentShader = function ()
 Shader.createShader = function (cgl, str, type, cglShader)
 {
     if (cgl.aborted) return;
+
     // cgl.printError("[Shader.createShader] ", cglShader._name);
 
     function getBadLines(infoLog)

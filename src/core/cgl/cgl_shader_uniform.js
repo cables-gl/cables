@@ -511,7 +511,7 @@ Uniform.glslTypeString = (t) =>
     if (t == "m4[]") return null; // ignore this for now...
     if (t == "f[]") return null; // ignore this for now...
 
-    this._log.warn("[CGL UNIFORM] unknown glsl type string ", t);
+    console.warn("[CGL UNIFORM] unknown glsl type string ", t);
 };
 
 

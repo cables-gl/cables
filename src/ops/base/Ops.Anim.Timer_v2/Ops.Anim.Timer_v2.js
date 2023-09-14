@@ -46,7 +46,7 @@ inSyncTimeline.onChange = function ()
     reset.setUiAttribs({ "greyout": syncTimeline });
 };
 
-op.onAnimFrame = function (tt)
+op.onAnimFrame = function (tt, frameNum, deltaMs)
 {
     if (timer.isPlaying())
     {

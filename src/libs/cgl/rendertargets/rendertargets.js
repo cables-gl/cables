@@ -59,6 +59,7 @@ class RenderTargets
             "Position Local",
             "Position Object",
             "Normal",
+            "Normal World",
             "Normal * ModelView",
             "FragCoord.z",
             "TexCoord",
@@ -86,6 +87,7 @@ class RenderTargets
         else if (type == "Position Local") return "    " + outcolor + i + " = vec4(MOD_pos_local,1.);".endl();
         else if (type == "Position World") return "    " + outcolor + i + " = vec4(MOD_pos_world,1.);".endl();
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
+        else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
         else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
@@ -114,15 +116,17 @@ class RenderTargets
     update(slots)
     {
         this._slots = slots;
-
+        this._numBuffers = slots.length;
         this.asString = "";
+
         let hasPosWorld = false;
         let hasPosLocal = false;
         let hasPosObject = false;
         let hasMaterialId = false;
         let hasObjectId = false;
         let hasNormalModelView = false;
-        this._numBuffers = slots.length;
+        let hasNormalWorld = false;
+
 
         for (let i = 0; i < this._numBuffers; i++)
         {
@@ -132,14 +136,15 @@ class RenderTargets
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
             hasMaterialId = (slots[i].indexOf("Material Id") > -1) || hasMaterialId;
             hasObjectId = (slots[i].indexOf("Object Id") > -1) || hasObjectId;
+            hasNormalWorld = (slots[i].indexOf("Normal World") > -1) || hasNormalWorld;
 
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
         }
 
 
-        this.updateModules();
         // this.updateModules();
+        this.updateModules();
 
         this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
         this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", hasMaterialId);
@@ -148,6 +153,7 @@ class RenderTargets
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);
         this.mod.toggleDefine("MOD_SLOT_POS_OBJECT", hasPosObject);
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_MV", hasNormalModelView);
+        this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_WORLD", hasNormalWorld);
     }
 }
 

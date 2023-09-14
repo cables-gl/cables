@@ -1,0 +1,135 @@
+{
+    "id": "7331692b-1e5a-4b1e-8c6d-4dc006daac0e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642868426174
+        },
+        {
+            "message": " added core lib: cgl_texturecopy",
+            "author": "pandur",
+            "date": 1642868439042
+        },
+        {
+            "message": " added core lib: cgl_copytexture",
+            "author": "pandur",
+            "date": 1642869069922
+        },
+        {
+            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
+            "author": "pandur",
+            "date": 1642869809458
+        },
+        {
+            "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
+            "author": "pandur",
+            "date": 1644228758190
+        },
+        {
+            "message": "Ops.Gl.Textures.RgbeToHdrTexture renamed to Ops.Gl.Textures.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1654583702527
+        },
+        {
+            "message": "Ops.Gl.Textures.RgbeToFloat32Texture renamed to Ops.Deprecated.Gl.Textures.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1654584335564
+        },
+        {
+            "message": "cloned op from Ops.Deprecated.Gl.Textures.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1673434160072
+        },
+        {
+            "message": "Ops.User.pandur.SSAO3 renamed to Ops.Dev.SSAO3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1673436349528
+        },
+        {
+            "message": "Ops.Dev.SSAO3 renamed to Ops.Gl.Textures.SSAO",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694617670088
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture"
+    ],
+    "authorName": "pandur",
+    "created": 1673434160072,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 2,
+                "name": "Depth Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "group": "SSAO",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Dist",
+                "group": "SSAO",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Begin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "End",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "group": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Base",
+                "group": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "SSAO",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.SSAO3"
+    },
+    "summary": "",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": ""
+}

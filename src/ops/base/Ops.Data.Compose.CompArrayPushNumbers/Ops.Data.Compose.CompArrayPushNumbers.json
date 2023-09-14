@@ -68,6 +68,11 @@
             },
             {
                 "type": 0,
+                "name": "Num index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },

@@ -17,4 +17,4 @@ float ty = ((attrVertIndex)/MOD_texSize);
 
 gl_PointSize=1.0;
 
-pos=vec4(tx,ty,0.0,1.0);
+pos=vec4(tx,ty,1.0,1.0);

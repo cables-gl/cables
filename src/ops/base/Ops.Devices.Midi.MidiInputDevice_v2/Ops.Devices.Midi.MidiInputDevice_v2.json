@@ -51,7 +51,6 @@
     },
     "summary": "connect to MIDI device output port",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiClock",
         "Ops.Devices.Midi.MidiCC",

@@ -13,3 +13,7 @@
 #ifdef MOD_SLOT_POS_NORMAL_MV
     out vec3 MOD_normal_mv;
 #endif
+
+#ifdef MOD_SLOT_POS_NORMAL_WORLD
+    out vec3 MOD_normal_world;
+#endif

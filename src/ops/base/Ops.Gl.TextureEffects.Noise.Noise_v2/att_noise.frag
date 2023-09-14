@@ -2,6 +2,7 @@ IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float amount;
 UNI float time;
+UNI float thresh;
 
 #ifdef HAS_MULMASK
     UNI sampler2D texMul;
@@ -34,6 +35,8 @@ void main()
         col.rgb*=texture(texMul,texCoord).rgb;
     #endif
 
+    col*=step(thresh,cgl_random(texCoord.xy*11.0+vec2(time)));
+
+
     outColor=cgl_blendPixel(base,col,amount);
-    // outColor=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
 }

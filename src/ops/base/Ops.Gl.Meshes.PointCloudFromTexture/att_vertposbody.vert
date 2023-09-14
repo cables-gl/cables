@@ -2,7 +2,7 @@
 // float tx=mod(attrVertIndex,(MOD_texSize))/(MOD_texSize);
 // float ty=float(int((attrVertIndex/(MOD_texSize))))/(MOD_texSize);
 
-highp vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
+vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
 
 
 

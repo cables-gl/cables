@@ -47,8 +47,7 @@ op.patch.cgl.on("beginFrame",
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
             gl.framebufferTexture2D(
-                gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
-                gl.TEXTURE_2D, realTexture.tex, 0
+                gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
             );
 
             gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -86,11 +85,10 @@ op.patch.cgl.on("beginFrame",
             lastRead = performance.now();
 
             if (!texChanged)
-                pixelReader.read(op.patch.cgl, fb, realTexture.textureType, 0, realTexture.height - texRows, readW, readH,
-                    (pixel) =>
-                    {
-                        pixelData = pixel;
-                    });
+                pixelReader.read(op.patch.cgl, fb, realTexture.textureType, 0, realTexture.height - texRows, readW, readH, (pixel) =>
+                {
+                    pixelData = pixel;
+                });
             // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
             // gl.readPixels(
@@ -148,7 +146,6 @@ op.renderVizLayer = (ctx, layer) =>
 
             const i = x * stride + (y * readW * stride);
             const idx = count * stride;
-            // if(arr.length<idx)break;
 
             ctx.fillStyle = "#666";
 
@@ -162,7 +159,8 @@ op.renderVizLayer = (ctx, layer) =>
             ctx.fillRect(
                 layer.x / layer.scale + padding + 25,
                 layer.y / layer.scale + lineHeight + count * lineHeight + padding - 7,
-                15, 8);
+                15,
+                8);
 
             ctx.fillStyle = "#ccc";
 

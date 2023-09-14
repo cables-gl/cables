@@ -33,7 +33,9 @@ let loadingCounter = 0;
 const loadingChars = ["|", "/", "-", "\\"];
 let initMeasures = true;
 
-const colorRAFSlow = "#ffffff";
+const colorRAFSlow = "#007f9c";
+const colorRAFVeruSlow = "#aaaaaa";
+
 const colorBg = "#222222";
 const colorRAF = "#003f5c"; // color: https://learnui.design/tools/data-color-picker.html
 const colorMainloop = "#7a5195";
@@ -191,7 +193,9 @@ function updateCanvas()
 
     for (k = numBars; k >= 0; k--)
     {
-        if (queue[k] > 30)ctx.fillStyle = colorRAFSlow;
+        if (queue[k] > 30) ctx.fillStyle = colorRAFSlow;
+        if (queue[k] > 60) ctx.fillStyle = colorRAFVeruSlow;
+
         ctx.fillRect(numBars - k, height - queue[k] * hmul, 1, queue[k] * hmul);
         if (queue[k] > 30)ctx.fillStyle = colorRAF;
     }
@@ -477,8 +481,8 @@ function render()
 
         if (opened && !op.patch.cgl.profileData.pause)
         {
-            const timeUsed = performance.now() - lastTime;
-            queue.push(timeUsed);
+            // const timeUsed = performance.now() - lastTime;
+            queue.push(op.patch.cgl.profileData.profileFrameDelta);
             queue.shift();
 
             timesMainloop.push(childsTime);
@@ -498,12 +502,9 @@ function render()
     selfTime = performance.now() - selfTimeStart;
     const startTimeChilds = performance.now();
 
-    outCanv.set(null);
-    outCanv.set(canvas);
+    outCanv.setRef(canvas);
 
-    // startGlQuery();
     next.trigger();
-    // endGlQuery();
 
     const nChildsTime = performance.now() - startTimeChilds;
     const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;

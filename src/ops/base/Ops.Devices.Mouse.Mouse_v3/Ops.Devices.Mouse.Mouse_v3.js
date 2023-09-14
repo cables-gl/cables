@@ -1,5 +1,5 @@
 const
-    inCoords = op.inSwitch("Coordinates", ["Pixel", "Pixel Display", "-1 to 1", "0 to 1"], "-1 to 1"),
+    inCoords = op.inSwitch("Coordinates", ["-1 to 1", "Pixel Display", "Pixel", "0 to 1"], "-1 to 1"),
     area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element", "Canvas Area"], "Canvas"),
     flipY = op.inValueBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
@@ -71,6 +71,8 @@ function setValue(x, y)
         {
             let xx = (x / w * 2.0 - 1.0);
             let yy = (y / h * 2.0 - 1.0);
+            xx = CABLES.clamp(xx, -1, 1);
+            yy = CABLES.clamp(yy, -1, 1);
 
             outMouseX.set(xx);
             outMouseY.set(yy);
@@ -80,6 +82,9 @@ function setValue(x, y)
             let xx = x / w;
             let yy = y / h;
 
+            xx = CABLES.clamp(xx, 0, 1);
+            yy = CABLES.clamp(yy, 0, 1);
+
             outMouseX.set(xx);
             outMouseY.set(yy);
         }
@@ -88,18 +93,14 @@ function setValue(x, y)
 
 function checkHovering(e)
 {
-    if (area.get() === "Canvas Area")
-    {
-        const r = sizeElement.getBoundingClientRect();
+    const r = sizeElement.getBoundingClientRect();
 
-        return (
-            e.clientX > r.left &&
-            e.clientX < r.left + r.width &&
-            e.clientY > r.top &&
-            e.clientY < r.top + r.height
-        );
-    }
-    return true;
+    return (
+        e.clientX > r.left &&
+        e.clientX < r.left + r.width &&
+        e.clientY > r.top &&
+        e.clientY < r.top + r.height
+    );
 }
 
 touchscreen.onChange = function ()
@@ -119,7 +120,7 @@ function updateCoordNormalizing()
     if (inCoords.get() == "Pixel")normalize = 0;
     else if (inCoords.get() == "-1 to 1")normalize = 1;
     else if (inCoords.get() == "0 to 1")normalize = 2;
-    else if (inCoords.get() == "Pixel CSS")normalize = 3;
+    else if (inCoords.get() == "Pixel Display")normalize = 3;
 }
 
 function onMouseEnter(e)

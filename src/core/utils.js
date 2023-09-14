@@ -510,7 +510,14 @@ export const request = function (options)
         // }
     });
 
-    xhr.open(options.method ? options.method.toUpperCase() : "GET", options.url, !options.sync);
+    try
+    {
+        xhr.open(options.method ? options.method.toUpperCase() : "GET", options.url, !options.sync);
+    }
+    catch (e)
+    {
+        if (options.cb) options.cb(true, e.msg, xhr);
+    }
 
     if (typeof options.headers === "object")
     {
@@ -523,17 +530,24 @@ export const request = function (options)
         }
     }
 
-    if (!options.post && !options.data)
+    try
     {
-        xhr.send();
+        if (!options.post && !options.data)
+        {
+            xhr.send();
+        }
+        else
+        {
+            xhr.setRequestHeader(
+                "Content-type",
+                options.contenttype ? options.contenttype : "application/x-www-form-urlencoded",
+            );
+            xhr.send(options.data || options.post);
+        }
     }
-    else
+    catch (e)
     {
-        xhr.setRequestHeader(
-            "Content-type",
-            options.contenttype ? options.contenttype : "application/x-www-form-urlencoded",
-        );
-        xhr.send(options.data || options.post);
+        if (options.cb) options.cb(true, e.msg, xhr);
     }
 };
 

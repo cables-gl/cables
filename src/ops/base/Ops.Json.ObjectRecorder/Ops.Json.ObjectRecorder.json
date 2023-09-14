@@ -23,6 +23,10 @@
         ],
         "portsOut": [
             {
+                "type": 3,
+                "name": "Result"
+            },
+            {
                 "type": 0,
                 "name": "Num Objects",
                 "subType": "number"
@@ -33,7 +37,6 @@
     "summary": "record objects and download as json file",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

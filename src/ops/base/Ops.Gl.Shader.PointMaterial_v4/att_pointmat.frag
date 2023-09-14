@@ -2,8 +2,14 @@
 {{MODULES_HEAD}}
 
 UNI vec4 color;
+UNI float atlasNumX;
+
 // IN vec2 pointCoord;
 IN float ps;
+
+#ifdef ATLAS_NUMX
+IN float randAtlas;
+#endif
 
 #ifdef HAS_TEXTURE_DIFFUSE
     UNI sampler2D diffTex;
@@ -29,6 +35,13 @@ void main()
     #ifndef FLIP_TEX
         vec2 pointCoord=gl_PointCoord;
     #endif
+
+    // #ifdef repeatedTexture
+    #ifdef ATLAS_NUMX
+    pointCoord.x=pointCoord.x/atlasNumX+randAtlas*(1.0/atlasNumX);
+    #endif
+    // #endif
+
     {{MODULE_BEGIN_FRAG}}
 
     if(ps<1.0)discard;

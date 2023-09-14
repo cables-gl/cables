@@ -5,6 +5,9 @@ const inClear = op.inTriggerButton("Clear");
 let lines = 10;
 const arr = [];
 
+inNum.changeAlways =
+    inString.changeAlways = true;
+
 inClear.onTriggered = () =>
 {
     arr.length = 0;
@@ -12,7 +15,10 @@ inClear.onTriggered = () =>
 
 inString.onChange = () =>
 {
-    arr.push("" + inString.get());
+    if (typeof inString.get() == "string")
+        arr.push("\"" + inString.get() + "\"");
+    else
+        arr.push("" + inString.get());
 };
 
 inNum.onChange = () =>

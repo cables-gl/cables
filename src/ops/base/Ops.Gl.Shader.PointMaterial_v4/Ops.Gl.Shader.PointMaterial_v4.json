@@ -144,6 +144,16 @@
                 "type": 0,
                 "name": "Flip Texture",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Random Atlas",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Atlas Repeat X",
+                "subType": "number"
             }
         ],
         "portsOut": [

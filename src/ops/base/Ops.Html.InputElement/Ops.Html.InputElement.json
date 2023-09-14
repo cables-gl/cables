@@ -1,0 +1,112 @@
+{
+    "id": "b7e1635c-b5c0-43e1-be03-2f137e6e61ea",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1692307325062
+        },
+        {
+            "message": "Ops.Patch.PB9In5E.InputElement renamed to Ops.Html.InputElement",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692309153225
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1692307353078,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Element index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Default Value"
+            },
+            {
+                "type": 5,
+                "name": "Placeholder"
+            },
+            {
+                "type": 5,
+                "name": "Id"
+            },
+            {
+                "type": 5,
+                "name": "Class"
+            },
+            {
+                "type": 5,
+                "name": "Style"
+            },
+            {
+                "type": 0,
+                "name": "Autocomplete",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Max Length",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Interactive",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Focus"
+            },
+            {
+                "type": 1,
+                "name": "Blur"
+            },
+            {
+                "type": 1,
+                "name": "Clear"
+            },
+            {
+                "type": 1,
+                "name": "Select"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "DOM Element",
+                "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            },
+            {
+                "type": 0,
+                "name": "Hover",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Html.InputElement"
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "L83aeG",
+    "docs": {
+        "ports": []
+    },
+    "summary": "HTML input/textarea element to allow the user to enter text "
+}

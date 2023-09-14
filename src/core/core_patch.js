@@ -84,8 +84,10 @@ const Patch = function (cfg)
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
     this.frameStore = {};
+    this.deSerialized = false;
+    this._lastReqAnimTimeStamp = 0;
 
-    if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
+    if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
     this._isLocal = document.location.href.indexOf("file:") === 0;
 
@@ -364,7 +366,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 if (opName)
                 {
                     identifier = opName;
-                    this._log.warn("could not find op by id: " + opId);
+                    console.log("could not find op by id: " + opId);
                 }
                 else
                 {
@@ -398,7 +400,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
                 else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
                 else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-                else this._log.warn("parts.length", parts.length);
+                else console.log("parts.length", parts.length);
             }
 
             if (op)
@@ -423,8 +425,8 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
             this._log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
-            this.exitError("INSTANCE_ERR", "Instancing Error " + objName, e);
-            throw new Error("instancing error " + objName);
+            this.exitError("INSTANCE_ERR", "Instancing Error 1" + objName, e);
+            throw new Error("instancing error 1" + objName);
         }
     }
 
@@ -473,7 +475,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         if (this._opIdCache[op.id])
         {
-            this._log.warn("opid with id " + op.id + " already exists in patch!");
+            console.log("opid with id " + op.id + " already exists in patch!");
+            // op.id += "_double";
             return;
         }
 
@@ -483,6 +486,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
         if (op.init) op.init();
+        op.emitEvent("init", fromDeserialize);
     }
     else
     {
@@ -557,11 +561,10 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
 
-
                 if (this.onDelete)
                 {
                     // todo: remove
-                    this._log.warn("deprecated this.onDelete", this.onDelete);
+                    console.log("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
 
@@ -574,7 +577,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
 
                 if (reLinkP1 !== null && reLinkP2 !== null)
                 {
-                    this.link(reLinkP1.parent, reLinkP1.getName(), reLinkP2.parent, reLinkP2.getName());
+                    this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                 }
 
                 delete this._opIdCache[opid];
@@ -583,7 +586,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found) this._log.warn("core patch deleteop: not found...", opid);
+    if (!found) console.log("core patch deleteop: not found...", opid);
 };
 
 Patch.prototype.getFrameNum = function ()
@@ -591,33 +594,37 @@ Patch.prototype.getFrameNum = function ()
     return this._frameNum;
 };
 
-Patch.prototype.emitOnAnimFrameEvent = function (time)
+Patch.prototype.emitOnAnimFrameEvent = function (time, delta)
 {
     time = time || this.timer.getTime();
 
     for (let i = 0; i < this.animFrameCallbacks.length; ++i)
     {
-        if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
+        if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum, delta);
     }
 
     for (let i = 0; i < this.animFrameOps.length; ++i)
     {
         if (this.animFrameOps[i].onAnimFrame)
         {
-            this.animFrameOps[i].onAnimFrame(time);
+            this.animFrameOps[i].onAnimFrame(time, this._frameNum, delta);
         }
     }
 };
 
-Patch.prototype.renderFrame = function (e)
+Patch.prototype.renderFrame = function (timestamp)
 {
     this.timer.update();
     this.freeTimer.update();
     const time = this.timer.getTime();
     const startTime = performance.now();
 
-    this.emitOnAnimFrameEvent(time);
+    const delta = timestamp - this._lastReqAnimTimeStamp || timestamp;
 
+    this.emitOnAnimFrameEvent(null, delta);
+
+    this.cgl.profileData.profileFrameDelta = delta;
+    this._lastReqAnimTimeStamp = timestamp;
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
     this.emitEvent("onRenderFrame", time);
@@ -629,7 +636,7 @@ Patch.prototype.renderFrame = function (e)
     }
 };
 
-Patch.prototype.exec = function (e)
+Patch.prototype.exec = function (timestamp)
 {
     if (!this._renderOneFrame && (this._paused || this.aborted)) return;
     this.emitEvent("reqAnimFrame");
@@ -660,8 +667,7 @@ Patch.prototype.exec = function (e)
 
     if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
     {
-        const startFrameTime = CABLES.now();
-        this.renderFrame();
+        this.renderFrame(timestamp);
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }
@@ -702,12 +708,12 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 {
     if (!op1)
     {
-        this._log.warn("link: op1 is null ");
+        console.log("link: op1 is null ");
         return;
     }
     if (!op2)
     {
-        this._log.warn("link: op2 is null");
+        console.log("link: op2 is null");
         return;
     }
 
@@ -716,13 +722,13 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port1)
     {
-        this._log.warn("port not found! " + port1Name + "(" + op1.objName + ")");
+        console.log("port not found! " + port1Name + "(" + op1.objName + ")");
         return;
     }
 
     if (!port2)
     {
-        this._log.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
+        console.log("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
         return;
     }
 
@@ -844,11 +850,11 @@ Patch.prototype.reloadOp = function (objName, cb)
         oldOp.deleted = true;
         const op = this.addOp(objName, oldOp.uiAttribs);
         if (!op) continue;
-        if (oldOp && oldOp.storage) op.storage = JSON.parse(JSON.stringify(oldOp.storage));
+        if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
         ops.push(op);
 
-        let j, k, l;
-        for (j in oldOp.portsIn)
+        let l;
+        for (let j in oldOp.portsIn)
         {
             if (oldOp.portsIn[j].links.length === 0)
             {
@@ -868,27 +874,27 @@ Patch.prototype.reloadOp = function (objName, cb)
                 {
                     const oldName = oldOp.portsIn[j].links[0].portIn.name;
                     const oldOutName = oldOp.portsIn[j].links[0].portOut.name;
-                    const oldOutOp = oldOp.portsIn[j].links[0].portOut.parent;
+                    const oldOutOp = oldOp.portsIn[j].links[0].portOut.op;
                     oldOp.portsIn[j].links[0].remove();
 
                     l = this.link(op, oldName, oldOutOp, oldOutName);
-                    if (!l) this._log.warn("[reloadOp] relink after op reload not successfull for port " + oldOutName);
+                    if (!l) console.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
                     else l.setValue();
                 }
             }
         }
 
-        for (j in oldOp.portsOut)
+        for (let j in oldOp.portsOut)
         {
             while (oldOp.portsOut[j].links.length)
             {
                 const oldNewName = oldOp.portsOut[j].links[0].portOut.name;
                 const oldInName = oldOp.portsOut[j].links[0].portIn.name;
-                const oldInOp = oldOp.portsOut[j].links[0].portIn.parent;
+                const oldInOp = oldOp.portsOut[j].links[0].portIn.op;
                 oldOp.portsOut[j].links[0].remove();
 
                 l = this.link(op, oldNewName, oldInOp, oldInName);
-                if (!l) this._log.warn("relink after op reload not successfull for port " + oldInName);
+                if (!l) console.log("relink after op reload not successfull for port " + oldInName);
                 else l.setValue();
             }
         }
@@ -933,14 +939,25 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     return false;
 };
 
+Patch.prototype.getSubPatchOuterOp = function (subPatchId)
+{
+    const ops = this.ops;
+    for (let i = 0; i < ops.length; i++)
+    {
+        const op = ops[i];
+        if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
+    }
+};
+
 
 Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
 {
     this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
 };
 
-Patch.prototype.deSerialize = function (obj, genIds)
+Patch.prototype.deSerialize = function (obj, options)
 {
+    options = options || { "genIds": false, "createRef": false };
     if (this.aborted) return;
     const newOps = [];
     const loadingId = this.loading.start("core", "deserialize");
@@ -948,18 +965,16 @@ Patch.prototype.deSerialize = function (obj, genIds)
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
 
-    if (typeof obj === "string")
-    {
-        obj = JSON.parse(obj);
-    }
+    if (typeof obj === "string") obj = JSON.parse(obj);
 
     this.settings = obj.settings;
 
     this.emitEvent("patchLoadStart");
 
     if (window.logStartup)logStartup("add " + obj.ops.length + " ops... ");
+
     // add ops...
-    for (const iop in obj.ops)
+    for (let iop = 0; iop < obj.ops.length; iop++)
     {
         const start = CABLES.now();
         const opData = obj.ops[iop];
@@ -972,14 +987,13 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
         catch (e)
         {
-            this._log.warn("[instancing error] op data:", opData, e);
-            throw new Error("instancing error: " + opData.objName);
+            console.log("[instancing error] op data:", opData, e);
+            throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
         }
-
 
         if (op)
         {
-            if (genIds) op.id = uuid();
+            if (options.genIds) op.id = uuid();
             op.portsInData = opData.portsIn;
             op._origData = opData;
             op.storage = opData.storage;
@@ -992,7 +1006,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
-                if (port)port.deSerializeSettings(objPort);
+                if (port) port.deSerializeSettings(objPort);
             }
 
             for (const ipo in opData.portsOut)
@@ -1007,10 +1021,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
             newOps.push(op);
         }
 
-        // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
-
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        if (!this.silent && timeused > 5) this._log.warn("long op init ", obj.ops[iop].objName, timeused);
+        if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused);
     }
     if (window.logStartup)logStartup("add ops done");
 
@@ -1041,14 +1053,15 @@ Patch.prototype.deSerialize = function (obj, genIds)
                         for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                         {
                             let found = false;
-                            if (obj.ops[iop].portsIn[ipi2].links[ili])
-                            {
-                                // const startTime = performance.now();
-                                this._addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
-                                // const took = performance.now() - startTime;
-                                // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
-                            }
+                            this._addLink(
+                                obj.ops[iop].portsIn[ipi2].links[ili].objIn,
+                                obj.ops[iop].portsIn[ipi2].links[ili].objOut,
+                                obj.ops[iop].portsIn[ipi2].links[ili].portIn,
+                                obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+                            // const took = performance.now() - startTime;
+                            // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                         }
                     }
                 }
@@ -1059,11 +1072,53 @@ Patch.prototype.deSerialize = function (obj, genIds)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsOut[ipi2].links.length; ili++)
                         {
-                            let found = false;
                             if (obj.ops[iop].portsOut[ipi2].links[ili])
                             {
-                                found = true;
-                                this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                if (obj.ops[iop].portsOut[ipi2].links[ili].subOpRef)
+                                {
+                                    // lost link
+                                    const outOp = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
+                                    let dstOp = null;
+                                    let theSubPatch = 0;
+
+                                    for (let i = 0; i < this.ops.length; i++)
+                                    {
+                                        if (
+                                            this.ops[i].storage &&
+                                            this.ops[i].storage.ref == obj.ops[iop].portsOut[ipi2].links[ili].subOpRef &&
+                                            outOp.uiAttribs.subPatch == this.ops[i].uiAttribs.subPatch
+                                        )
+                                        {
+                                            theSubPatch = this.ops[i].patchId.get();
+                                            break;
+                                        }
+                                    }
+
+                                    for (let i = 0; i < this.ops.length; i++)
+                                    {
+                                        if (
+                                            this.ops[i].storage &&
+                                            this.ops[i].storage.ref == obj.ops[iop].portsOut[ipi2].links[ili].refOp &&
+                                            this.ops[i].uiAttribs.subPatch == theSubPatch)
+                                        {
+                                            dstOp = this.ops[i];
+                                            break;
+                                        }
+                                    }
+
+                                    if (!dstOp) this._log.warn("could not find op for lost link");
+                                    else
+                                        this._addLink(
+                                            dstOp.id,
+                                            obj.ops[iop].portsOut[ipi2].links[ili].objOut,
+
+                                            obj.ops[iop].portsOut[ipi2].links[ili].portIn,
+                                            obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                }
+                                else
+                                {
+                                    this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                }
                             }
                         }
                     }
@@ -1106,16 +1161,14 @@ Patch.prototype.deSerialize = function (obj, genIds)
         delete this.ops[i].uiAttribs.pasted;
     }
 
-
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
     if (window.logStartup)logStartup("calling onPatchLoaded/patchLoadEnd");
 
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
-
-    this.emitEvent("patchLoadEnd", newOps, obj, genIds);
-    // if (this.onLoadEnd) this.onLoadEnd();
+    this.deSerialized = true;
+    this.emitEvent("patchLoadEnd", newOps, obj, options.genIds);
 };
 
 Patch.prototype.profile = function (enable)
@@ -1146,7 +1199,7 @@ Patch.prototype.setVariable = function (name, val)
     }
     else
     {
-        this._log.warn("variable " + name + " not found!");
+        console.log("variable " + name + " not found!");
     }
 };
 
@@ -1339,27 +1392,100 @@ Patch.prototype.printTriggerStack = function ()
         return;
     }
     console.groupCollapsed( // eslint-disable-line
-        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].op.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
     );
 
     const rows = [];
     for (let i = 0; i < this._triggerStack.length; i++)
     {
-        rows.push(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
+        rows.push(i + ". " + this._triggerStack[i].op.name + " " + this._triggerStack[i].name);
     }
 
     console.table(rows); // eslint-disable-line
     console.groupEnd(); // eslint-disable-line
 };
 
-Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
+Patch.replaceOpIds = function (json, options)
 {
+    const opids = {};
     for (const i in json.ops)
     {
-        const searchID = json.ops[i].id;
-        let newId = uuid();
-        if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].id);
-        const newID = json.ops[i].id = newId;
+        opids[json.ops[i].id] = json.ops[i];
+    }
+
+    for (const j in json.ops)
+    {
+        for (const k in json.ops[j].portsOut)
+        {
+            const links = json.ops[j].portsOut[k].links;
+            if (links)
+            {
+                let l = links.length;
+
+                while (l--)
+                {
+                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                    {
+                        if (!options.doNotUnlinkLostLinks)
+                        {
+                            links.splice(l, 1);
+                        }
+                        else
+                        {
+                            if (options.fixLostLinks)
+                            {
+                                // console.log("lost link...?", links[l]);
+                                const op = gui.corePatch().getOpById(links[l].objIn);
+                                if (!op) console.log("op not found!");
+                                else
+                                {
+                                    const outerOp = gui.patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
+                                    if (outerOp)
+                                    {
+                                        op.storage = op.storage || {};
+                                        op.storage.ref = op.storage.ref || CABLES.shortId();
+                                        links[l].refOp = op.storage.ref;
+                                        links[l].subOpRef = outerOp.storage.ref;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    for (const i in json.ops)
+    {
+        const op = json.ops[i];
+        const oldId = op.id;
+        let newId = CABLES.shortId();
+        if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
+        else if (options.prefixId) newId = options.prefixId + oldId;
+        else if (options.refAsId) // when saving json
+        {
+            if (op.storage && op.storage.ref)
+            {
+                newId = op.storage.ref;
+                delete op.storage.ref;
+            }
+            else
+            {
+                op.storage = op.storage || {};
+                op.storage.ref = newId = CABLES.shortId();
+            }
+        }
+
+        const newID = op.id = newId;
+
+        if (options.oldIdAsRef) // when loading json
+        {
+            op.storage = op.storage || {};
+            op.storage.ref = oldId;
+        }
 
         for (const j in json.ops)
         {
@@ -1369,14 +1495,13 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
                     if (json.ops[j].portsIn[k].links)
                     {
                         let l = json.ops[j].portsIn[k].links.length;
-                        while (l--)
-                            if (json.ops[j].portsIn[k].links[l] === null)
-                                json.ops[j].portsIn[k].links.splice(l, 1);
+
+                        while (l--) if (json.ops[j].portsIn[k].links[l] === null) json.ops[j].portsIn[k].links.splice(l, 1);
 
                         for (l in json.ops[j].portsIn[k].links)
                         {
-                            if (json.ops[j].portsIn[k].links[l].objIn === searchID) json.ops[j].portsIn[k].links[l].objIn = newID;
-                            if (json.ops[j].portsIn[k].links[l].objOut === searchID) json.ops[j].portsIn[k].links[l].objOut = newID;
+                            if (json.ops[j].portsIn[k].links[l].objIn === oldId) json.ops[j].portsIn[k].links[l].objIn = newID;
+                            if (json.ops[j].portsIn[k].links[l].objOut === oldId) json.ops[j].portsIn[k].links[l].objOut = newID;
                         }
                     }
                 }
@@ -1387,14 +1512,13 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
                     if (json.ops[j].portsOut[k].links)
                     {
                         let l = json.ops[j].portsOut[k].links.length;
-                        while (l--)
-                            if (json.ops[j].portsOut[k].links[l] === null)
-                                json.ops[j].portsOut[k].links.splice(l, 1);
+
+                        while (l--) if (json.ops[j].portsOut[k].links[l] === null) json.ops[j].portsOut[k].links.splice(l, 1);
 
                         for (l in json.ops[j].portsOut[k].links)
                         {
-                            if (json.ops[j].portsOut[k].links[l].objIn === searchID) json.ops[j].portsOut[k].links[l].objIn = newID;
-                            if (json.ops[j].portsOut[k].links[l].objOut === searchID) json.ops[j].portsOut[k].links[l].objOut = newID;
+                            if (json.ops[j].portsOut[k].links[l].objIn === oldId) json.ops[j].portsOut[k].links[l].objIn = newID;
+                            if (json.ops[j].portsOut[k].links[l].objOut === oldId) json.ops[j].portsOut[k].links[l].objOut = newID;
                         }
                     }
                 }
@@ -1415,7 +1539,7 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
                 if (json.ops[i].portsIn[k].name === "patchId")
                 {
                     let newId = uuid();
-                    if (randomSeed) newId = prefixedHash(randomSeed + json.ops[i].portsIn[k].value);
+                    if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
 
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
                     const newSubPatchId = json.ops[i].portsIn[k].value = newId;
@@ -1451,11 +1575,10 @@ Patch.replaceOpIds = function (json, parentSubPatchId = 0, randomSeed = null)
             }
         }
         // op has no uiAttribs in export, we don't care about subpatches in export though
-        if (!found && json.ops[kk].uiAttribs)
-        {
-            json.ops[kk].uiAttribs.subPatch = parentSubPatchId;
-        }
+        if (!found && json.ops[kk].uiAttribs && options.parentSubPatchId != null)
+            json.ops[kk].uiAttribs.subPatch = options.parentSubPatchId;
     }
+
     return json;
 };
 

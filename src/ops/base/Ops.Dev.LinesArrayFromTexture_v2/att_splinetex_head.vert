@@ -1,2 +1,0 @@
-OUT float mulAlpha;
-

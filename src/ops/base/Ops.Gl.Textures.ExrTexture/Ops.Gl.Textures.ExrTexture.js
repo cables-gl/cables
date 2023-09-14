@@ -67,8 +67,10 @@ function loadBin(addCacheBuster)
                     outChannels.set(channels);
 
                     let filter = CGL.Texture.FILTER_NEAREST;
-                    if (inFilter.get() === "Linear")filter = CGL.Texture.FILTER_LINEAR;
+                    if (inFilter.get() === "Linear") filter = CGL.Texture.FILTER_LINEAR;
+
                     const tex = new CGL.Texture(cgl, {
+                        "name": "exr texture",
                         "filter": filter,
                         "wrap": filter,
                         "isFloatingPointTexture": true });

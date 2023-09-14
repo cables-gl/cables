@@ -77,6 +77,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
         }
 
         if (op.shaderUniforms)
+        {
             for (let i = 0; i < op.shaderUniforms.length; i++)
             {
                 const uni = op.shaderUniforms[i];
@@ -88,20 +89,32 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                 else
                     this._headUniSrc += this.uniformAsStaticVar(uni);
             }
+        }
     }
 
     uniformAsStaticVar(uni)
     {
         const typeStr = CGL.Uniform.glslTypeString(uni.type);
-        let str = typeStr + " " + uni.name + "=" + typeStr + "(";
+        let str = "";
 
-        for (let i = 0; i < uni.ports.length; i++)
+        if (typeStr == "float")
         {
-            str += uni.ports[i].get();
-            if (i != uni.ports.length - 1)str += ",";
+            let floatStr = String(uni.ports[0].get());
+            if (floatStr.indexOf(".") == -1)floatStr += ".";
+            str = typeStr + " " + uni.name + " = " + floatStr + ";".endl();
         }
+        else
+        {
+            str = typeStr + " " + uni.name + "=" + typeStr + "(";
 
-        str += ");".endl();
+            for (let i = 0; i < uni.ports.length; i++)
+            {
+                str += uni.ports[i].get();
+                if (i != uni.ports.length - 1)str += ",";
+            }
+
+            str += ");".endl();
+        }
         return str;
     }
 
@@ -142,12 +155,12 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                     paramStr = this._getPortParamStr(otherPort, p.uiAttribs.objType);
 
                     // console.log("objtype", p.uiAttribs.objType);
-                    this.addOpShaderFuncCode(otherPort.parent);
+                    this.addOpShaderFuncCode(otherPort.op);
                 }
             }
             else
             {
-                this.addOpShaderFuncCode(p.parent);
+                this.addOpShaderFuncCode(p.op);
                 // if (p.uiAttribs.objType == "sg_sampler2D")
                 // {
                 //     // callstr = "vec4(1.0)";
@@ -161,10 +174,10 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                 // }
             }
 
-            if (p.parent.shaderCodeOperator)
+            if (p.op.shaderCodeOperator)
             {
                 callstr += paramStr;
-                if (count < numObjectPorts - 1) callstr += " " + p.parent.shaderCodeOperator + " ";
+                if (count < numObjectPorts - 1) callstr += " " + p.op.shaderCodeOperator + " ";
             }
             else
             if (paramStr)
@@ -196,14 +209,14 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
     {
         let paramStr = "";
 
-        if (p.parent.shaderVar)
+        if (p.op.shaderVar)
         {
-            paramStr = p.parent.shaderVar;
+            paramStr = p.op.shaderVar;
         }
         else
         if (p.direction == CABLES.PORT_DIR_OUT)
         {
-            paramStr += this.callFunc(p.parent, p.uiAttribs.objType);
+            paramStr += this.callFunc(p.op, p.uiAttribs.objType);
         }
 
         if (convertTo && convertTo != p.uiAttribs.objType)
@@ -231,15 +244,16 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
         for (let i = 0; i < l.length; i++)
         {
             const lnk = l[i];
-            callSrc += this.callFunc(lnk.getOtherPort(port).parent) + ";".endl();
+            callSrc += this.callFunc(lnk.getOtherPort(port).op) + ";".endl();
         }
 
         callSrc = this._callFuncStack.join("\n");
 
-        let src = "".endl() +
-            "{{MODULES_HEAD}}".endl().endl();
-        console.log("COMPILE", this._type);
+        let src = "".endl() + "{{MODULES_HEAD}}".endl().endl();
+
+        // console.log("COMPILE", this._type);
         // todo use shader attrib system...
+
         if (this._type == "frag") src += "IN vec2 texCoord;".endl().endl();
         if (this._type == "vert") src += "IN vec3 vPosition;".endl() +
                 "IN vec2 attrTexCoord;".endl() +

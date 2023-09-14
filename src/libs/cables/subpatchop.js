@@ -4,14 +4,14 @@ const subpatchOutputOpName = "Ops.Dev.Ui.PatchOutput";
 
 const SubPatchOp = class
 {
-    constructor(op)
+    constructor(op, options)
     {
+        options = options || {};
         this._op = op;
 
         op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_STRING, { "display": "readonly" }));
 
         op.setUiAttribs({ "subPatchOp": { "version": 2 } });
-
 
         if (op.uiAttribs.parentOfSubpatch)
         {
@@ -19,9 +19,15 @@ const SubPatchOp = class
         }
         else
         {
-            let newPatchId = CABLES.generateUUID();
-            op.patchId.set(newPatchId);
+            if (options.subId) op.patchId.set(options.subId);
+            else op.patchId.set(CABLES.generateUUID());
         }
+
+        op.patchId.onChange = () =>
+        {
+            if (options.subId) op.patchId.value = options.subId;
+            // else op.patchId.value=CABLES.uuid();
+        };
 
         op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
         op.on("loadedValueSet", () => { this.createInOutOps(); });
@@ -29,14 +35,15 @@ const SubPatchOp = class
 
         op.init = () =>
         {
-            op.setStorage({ "subPatchVer": 1 });
+            op.setStorage({ "subPatchVer": 2 });
         };
 
         op.on("delete", () =>
         {
-            for (let i = op.patch.ops.length - 1; i >= 0; i--)
-                if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == this.patchId)
-                    op.patch.deleteOp(op.patch.ops[i].id);
+            const ops = op.patch.ops;
+            for (let i = ops.length - 1; i >= 0; i--)
+                if (ops[i] && ops[i].uiAttribs && ops[i].uiAttribs.subPatch == op.patchId.get())
+                    op.patch.deleteOp(ops[i].id);
         });
 
         this._op.isExposableSubpatchOp = () =>
@@ -54,6 +61,10 @@ const SubPatchOp = class
     {
         let patchInputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchInputOpName);
         let patchOutputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchOutputOpName);
+
+        // console.log("this.patchId", this.patchId, patchInputOP);
+
+        if (!patchInputOP)console.log("CREATE INPUT OP!!!!!!!!!!!!", this.patchId);
 
         if (!patchInputOP) this._op.patch.addOp(subpatchInputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
         if (!patchOutputOP) this._op.patch.addOp(subpatchOutputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });

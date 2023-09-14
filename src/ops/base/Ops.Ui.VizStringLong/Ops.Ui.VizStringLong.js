@@ -2,6 +2,7 @@ const
     inStr = op.inStringEditor("String"),
     inZoomText = op.inBool("ZoomText", false),
     inLineNums = op.inBool("Line Numbers", true),
+    syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript", "inline-css", "sql"], "text"),
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0);
 
@@ -39,7 +40,8 @@ op.renderVizLayer = (ctx, layer, viz) =>
         "zoomText": inZoomText.get(),
         "showLineNum": inLineNums.get(),
         "fontSize": inFontSize.get(),
-        "scroll": inPos.get()
+        "scroll": inPos.get(),
+        "syntax": syntax.get()
     });
 
     ctx.restore();

@@ -32,7 +32,7 @@ function update()
     const oldGeom = geometry.get();
     const i = 0;
 
-    if (oldGeom)
+    if (oldGeom && oldGeom.copy)
     {
         const geom = oldGeom.copy();
 
@@ -63,11 +63,10 @@ function update()
             geom.vertices[i + 2] = rotVec[2];
         }
 
-        outGeom.set(null);
-        outGeom.set(geom);
+        outGeom.setRef(geom);
     }
     else
     {
-        outGeom.set(null);
+        outGeom.setRef(null);
     }
 }

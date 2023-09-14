@@ -47,13 +47,14 @@ const Texture = function (__cgl, options)
     this.unpackAlpha = true;
     this._fromData = true;
     this.name = "unknown";
+    this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
 
 
     if (options)
     {
         this.name = options.name || this.name;
         if (options.isDepthTexture) this.textureType = Texture.TYPE_DEPTH;
-        if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
+        if (options.isFloatingPointTexture === true) this.textureType = Texture.TYPE_FLOAT;
 
         if ("textureType" in options) this.textureType = options.textureType;
         if ("filter" in options) this.filter = options.filter;
@@ -67,6 +68,19 @@ const Texture = function (__cgl, options)
     {
         options = {};
     }
+
+    if (!options.pixelFormat)
+    {
+        if (!options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
+        if (options.isFloatingPointTexture)
+        {
+            this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+        }
+    }
+    else this.pixelFormat = options.pixelFormat;
+
+    if (this._cgl.glUseHalfFloatTex && this.pixelFormat == Texture.PFORMATSTR_RGBA32F) this.pixelFormat = Texture.PFORMATSTR_RGBA16F;
+
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
@@ -135,6 +149,7 @@ Texture.prototype.clone = function ()
         "filter": this.filter,
         "wrap": this.wrap,
         "textureType": this.textureType,
+        "pixelFormat": this.pixelFormat,
         "unpackAlpha": this.unpackAlpha,
         "flip": this.flip,
         "width": this.width,
@@ -163,6 +178,7 @@ Texture.prototype.clone = function ()
  */
 Texture.prototype.setSize = function (w, h)
 {
+    if (this._cgl.aborted) return;
     if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
     if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
@@ -195,17 +211,20 @@ Texture.prototype.setSize = function (w, h)
 
     const uarr = null;
 
-    if (this._cgl.patch.config.canvas.forceTextureNearest) this.filter = Texture.FILTER_NEAREST;
+    let dataType = this._cgl.gl.UNSIGNED_BYTE;
+    let internalFormat = this._cgl.gl.RGBA;
+    let dataFormat = this._cgl.gl.RGBA;
 
-    if (
-        this._cgl.glVersion == 1 &&
-        this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
-        (!this._cgl.enableExtension("OES_texture_float_linear"))
-    )
-    {
-        console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
-        this.filter = Texture.FILTER_NEAREST;
-    }
+
+    // if (
+    //     this._cgl.glVersion == 1 &&
+    //     this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
+    //     (!this._cgl.enableExtension("OES_texture_float_linear"))
+    // )
+    // {
+    //     console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
+    //     this.filter = Texture.FILTER_NEAREST;
+    // }
 
 
     if (this.textureType == Texture.TYPE_FLOAT)
@@ -232,26 +251,52 @@ Texture.prototype.setSize = function (w, h)
         }
         else
         {
-            if (this._cgl.glUseHalfFloatTex)
+            // if (this._cgl.glUseHalfFloatTex)
+            // {
+            //     const ext = this._cgl.enableExtension("EXT_color_buffer_half_float");
+            //     if (!ext) throw new Error("no half float texture extension");
+            // if (this._cgl.glUseHalfFloatTex)
+            // {
+            //     const ext = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+            //     if (!ext) throw new Error("no half float texture extension");
+
+            //     console.log("half float", this._cgl.gl.RGBA16F, this._cgl.gl.HALF_FLOAT);
+
+            //     console.log("half float", this._cgl.gl.HALF_FLOAT);
+            //     console.log("half float", this._cgl.gl.RGBA16F);
+
+            //     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
+            // }
+            // else
+            // {
+
+            if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F)
             {
-                const ext = this._cgl.enableExtension("EXT_color_buffer_half_float");
-                if (!ext) throw new Error("no half float texture extension");
-
-                console.log("half float", this._cgl.gl.RGBA16F, this._cgl.gl.HALF_FLOAT);
-
-                console.log("half float", this._cgl.gl.HALF_FLOAT);
-                console.log("half float", this._cgl.gl.RGBA16F);
-
-                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
+                internalFormat = this._cgl.gl.RGBA32F;
+                dataType = this._cgl.gl.FLOAT;
             }
-            else
+
+            if (this.pixelFormat == Texture.PFORMATSTR_RGBA16F)
             {
-                this._cgl.enableExtension("EXT_color_buffer_float");
-                this._cgl.enableExtension("EXT_color_buffer_float_linear");
-                this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
-
-                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+                internalFormat = this._cgl.gl.RGBA16F;
+                dataType = this._cgl.gl.FLOAT;
             }
+
+            if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+            {
+                internalFormat = this._cgl.gl.R11F_G11F_B10F;
+                dataType = this._cgl.gl.FLOAT;
+                dataFormat = this._cgl.gl.RGB;
+            }
+
+            if (dataType === this._cgl.gl.FLOAT)
+            {
+                this._cgl.gl.getExtension("EXT_color_buffer_float");
+                this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            }
+
+            // this._cgl.gl.texImage2D(this.texTarget, 0, internalFormat, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            // }
         }
     }
     else if (this.textureType == Texture.TYPE_DEPTH)
@@ -265,19 +310,28 @@ Texture.prototype.setSize = function (w, h)
             //     this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
             // }
             // else
-            const tcomp = this._cgl.gl.DEPTH_COMPONENT;
-            this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+            internalFormat = this._cgl.gl.DEPTH_COMPONENT;
+            dataType = this._cgl.gl.UNSIGNED_SHORT;
+            dataFormat = this._cgl.gl.DEPTH_COMPONENT;
+            // this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
         }
         else
         {
-            const tcomp = this._cgl.gl.DEPTH_COMPONENT32F;
-            this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
+            internalFormat = this._cgl.gl.DEPTH_COMPONENT32F;
+            dataType = this._cgl.gl.FLOAT;
+            dataFormat = this._cgl.gl.DEPTH_COMPONENT;
+            // this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
         }
     }
     else
     {
-        this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
+        dataType = this._cgl.gl.UNSIGNED_BYTE;
+        internalFormat = this._cgl.gl.RGBA;
+        dataFormat = this._cgl.gl.RGBA;
+        // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
+
+    this._cgl.gl.texImage2D(this.texTarget, 0, internalFormat, w, h, 0, dataFormat, dataType, uarr);
 
     this._setFilter();
 
@@ -465,7 +519,10 @@ Texture.prototype.getInfoReadable = function ()
 Texture.prototype.getInfoOneLine = function ()
 {
     let txt = "" + this.width + "x" + this.height;
-    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
+    txt += " ";
+    // if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
+    // if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
+    txt += this.pixelFormat;
 
     if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";
     if (this.filter === CGL.Texture.FILTER_LINEAR) txt += " linear";
@@ -483,7 +540,9 @@ Texture.prototype.getInfoOneLine = function ()
 Texture.prototype.getInfoOneLineShort = function ()
 {
     let txt = "" + this.width + "x" + this.height;
-    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
+    // if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
+    txt += " ";
+    txt += this.pixelFormat;
 
     this.shortInfoString = txt;
 
@@ -656,6 +715,22 @@ Texture.getTempTexture = function (cgl)
     if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
     return cgl.tempTexture;
 };
+
+/**
+ * @static
+ * @function getErrorTexture
+ * @memberof Texture
+ * @description returns the default temporary texture (grey diagonal stipes)
+ * @param {Context} cgl
+ * @return {Texture}
+ */
+Texture.getErrorTexture = function (cgl)
+{
+    if (!cgl) console.error("[getTempTexture] no cgl!");
+    if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT, 1, 0.2, 0.2);
+    return cgl.errorTexture;
+};
+
 
 /**
  * @function getEmptyTexture
@@ -880,8 +955,11 @@ Texture.getTempGradientTexture = function (cgl)
     return temptex;
 };
 
-Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
+Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
 {
+    if (r === undefined)r = 1;
+    if (g === undefined)g = 1;
+    if (b === undefined)b = 1;
     const temptex = new Texture(cgl);
     const arr = [];
     for (let y = 0; y < size; y++)
@@ -890,15 +968,15 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
         {
             if ((x + y) % 64 < 32)
             {
-                arr.push(200 + (y / size) * 25 + (x / size) * 25);
-                arr.push(200 + (y / size) * 25 + (x / size) * 25);
-                arr.push(200 + (y / size) * 25 + (x / size) * 25);
+                arr.push((200 + (y / size) * 25 + (x / size) * 25) * r);
+                arr.push((200 + (y / size) * 25 + (x / size) * 25) * g);
+                arr.push((200 + (y / size) * 25 + (x / size) * 25) * b);
             }
             else
             {
-                arr.push(40 + (y / size) * 25 + (x / size) * 25);
-                arr.push(40 + (y / size) * 25 + (x / size) * 25);
-                arr.push(40 + (y / size) * 25 + (x / size) * 25);
+                arr.push((40 + (y / size) * 25 + (x / size) * 25) * r);
+                arr.push((40 + (y / size) * 25 + (x / size) * 25) * g);
+                arr.push((40 + (y / size) * 25 + (x / size) * 25) * b);
             }
             arr.push(255);
         }
@@ -977,9 +1055,12 @@ Texture.getTexInfo = function (tex)
     if (tex.cubemap)obj.cubemap = true;
 
     if (tex.textureType == Texture.TYPE_FLOAT) obj.textureType = "TYPE_FLOAT";
+    if (tex.textureType == Texture.TYPE_HALF_FLOAT) obj.textureType = "TYPE_HALF_FLOAT";
     else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
     else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
-    else obj.textureType = "UNKNOWN";
+    else obj.textureType = "UNKNOWN " + this.textureType;
+
+    obj.pixelFormat = this.pixelFormat;
 
     if (tex.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
     else if (tex.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";
@@ -1008,9 +1089,17 @@ Texture.TYPE_DEFAULT = 0;
 Texture.TYPE_DEPTH = 1;
 Texture.TYPE_FLOAT = 2;
 
-
-Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 Texture.PFORMATSTR_RGBA8UB = "RGBA 8bit ubyte";
-Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_RGBA32F];
+Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
+Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
+Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
+
+Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
+
+Texture.isPixelFormatFloat = (pxlfrmt) =>
+{
+    return (pxlfrmt == Texture.PFORMATSTR_RGBA32F || pxlfrmt == Texture.PFORMATSTR_R11FG11FB10F || pxlfrmt == Texture.PFORMATSTR_RGBA16F);
+};
+
 
 export { Texture };

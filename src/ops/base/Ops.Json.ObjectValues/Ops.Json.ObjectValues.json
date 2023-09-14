@@ -23,20 +23,19 @@
         ],
         "portsOut": [
             {
+                "type": 3,
+                "name": "Values"
+            },
+            {
                 "type": 0,
                 "name": "Num values",
                 "subType": "number"
-            },
-            {
-                "type": 3,
-                "name": "Values"
             }
         ],
         "name": "Ops.Json.ObjectValues"
     },
     "summary": "extract all object values as an array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

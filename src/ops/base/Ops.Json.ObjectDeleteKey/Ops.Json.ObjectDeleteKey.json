@@ -1,0 +1,55 @@
+{
+    "id": "57a80386-b565-4915-a365-61b2dccf5ccc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1692282546573
+        },
+        {
+            "message": "Ops.Patch.PUlcN_D.ObjectMerge renamed to Ops.Json.ObjectMerge",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692282744562
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectMerge",
+            "author": "pandur",
+            "date": 1692282851977
+        },
+        {
+            "message": "Ops.Patch.PUlcN_D.ObjectDeleteKey renamed to Ops.Json.ObjectDeleteKey",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692283074999
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1692282851977,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Object Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectDeleteKey"
+    },
+    "summary": "Remove a Property from an Object by Key",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "piMxeG"
+}

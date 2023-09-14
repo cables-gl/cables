@@ -1,6 +1,7 @@
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec2 attrTexCoord1;
+IN float attrVertIndex;
 IN vec3 attrVertNormal,attrTangent,attrBiTangent;
 OUT vec2 texCoord;
 OUT vec2 texCoord1;

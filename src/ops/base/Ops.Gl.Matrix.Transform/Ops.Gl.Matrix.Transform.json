@@ -84,9 +84,13 @@
             "type": "",
             "author": "pandur",
             "date": 1681561925970
+        },
+        {
+            "message": " removed core lib: ammoworld",
+            "type": "",
+            "author": "stephan",
+            "date": 1692022436785
         }
     ],
-    "coreLibs": [
-        "ammoworld"
-    ]
+    "coreLibs": []
 }

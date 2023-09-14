@@ -29,6 +29,11 @@
                 "type": 0,
                 "name": "Render",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Check Body Collisions",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

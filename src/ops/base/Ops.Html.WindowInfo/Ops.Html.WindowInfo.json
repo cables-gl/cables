@@ -23,7 +23,6 @@
     "created": 1566822681581,
     "summary": "size of browser window in pixels",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -55,10 +54,21 @@
             {
                 "type": 0,
                 "name": "Iframe Parent",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Orientation Angle",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Orientation Type"
             }
         ],
         "name": "Ops.Html.WindowInfo"
     },
-    "exampleProjectId": "DyHxSP"
+    "exampleProjectId": "DyHxSP",
+    "caniusequery": "ScreenOrientation",
+    "collections": null
 }

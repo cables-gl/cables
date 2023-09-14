@@ -43,7 +43,9 @@ TextureEffect.prototype.getHeight = function ()
 
 TextureEffect.prototype.setSourceTexture = function (tex)
 {
-    if (tex.textureType == Texture.TYPE_FLOAT) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    if (tex.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    if (tex.pixelFormat == Texture.PFORMATSTR_RGBA32F) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    if (tex.pixelFormat == Texture.PFORMATSTR_RGBA16HF) this._cgl.gl.getExtension("EXT_color_buffer_half_float");
 
     if (tex === null)
     {
@@ -109,7 +111,9 @@ TextureEffect.prototype.continueEffect = function ()
     this._cgl.pushModelMatrix();
 
     this._cgl.pushPMatrix();
-    this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
+
+    this._cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
+    // this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
     mat4.perspective(this._cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0);
 
     this._cgl.pushPMatrix();
@@ -119,7 +123,7 @@ TextureEffect.prototype.continueEffect = function ()
     mat4.identity(this._cgl.vMatrix);
 
     this._cgl.pushModelMatrix();
-    mat4.identity(this._cgl.mvMatrix);
+    mat4.identity(this._cgl.mMatrix);
 };
 
 
@@ -152,7 +156,7 @@ TextureEffect.prototype.endEffect = function ()
     this._cgl.popViewMatrix();
 
     this._cgl.popPMatrix();
-    this._cgl.resetViewPort();
+    this._cgl.popViewPort();
 };
 
 TextureEffect.prototype.bind = function ()
@@ -371,6 +375,16 @@ TextureEffect.getBlendCode = function (ver)
             .endl()
         + "      colNew=vec3(BlendColorBurnf(base.r, blend.r),BlendColorBurnf(base.g, blend.g),BlendColorBurnf(base.b, blend.b));".endl()
         + "   #endif".endl()
+
+
+
+
+
+
+
+
+
+
         + "   return colNew;".endl()
         + "}".endl();
 
@@ -385,18 +399,39 @@ TextureEffect.getBlendCode = function (ver)
     if (ver >= 3)
         src += "vec4 cgl_blendPixel(vec4 base,vec4 col,float amount)".endl() +
                 "{".endl() +
-                    "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
 
-                    "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
+                "#ifdef BM_MATH_ADD".endl() +
+                "   return vec4(base.rgb+col.rgb*amount,1.0);".endl() +
+                "#endif".endl() +
 
-                    "#ifdef BM_ALPHAMASKED".endl() +
-                        "newA=base.a;".endl() +
+                "#ifdef BM_MATH_SUB".endl() +
+                "   return vec4(base.rgb-col.rgb*amount,1.0);".endl() +
+                "#endif".endl() +
+
+                "#ifdef BM_MATH_MUL".endl() +
+                "   return vec4(base.rgb*col.rgb*amount,1.0);".endl() +
+                "#endif".endl() +
+
+                "#ifdef BM_MATH_DIV".endl() +
+                "   return vec4(base.rgb/col.rgb*amount,1.0);".endl() +
+                "#endif".endl() +
+
+
+                    "#ifndef BM_MATH".endl() +
+                        "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
+
+                        "float newA=clamp(base.a+(col.a*amount),0.,1.);".endl() +
+
+                        "#ifdef BM_ALPHAMASKED".endl() +
+                            "newA=base.a;".endl() +
+                        "#endif".endl() +
+
+                        "return vec4(".endl() +
+                            "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
+                            "newA);".endl() +
+
                     "#endif".endl() +
-
-                    "return vec4(".endl() +
-                        "mix(colNew,base.rgb,1.0-(amount*col.a)),".endl() +
-                        "newA);".endl() +
-                "}".endl();
+    "}".endl();
 
     return src;
 };
@@ -422,12 +457,27 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha)
     shader.toggleDefine("BM_COLORDODGE", blendName == "color dodge");
     shader.toggleDefine("BM_COLORBURN", blendName == "color burn");
 
+    shader.toggleDefine("BM_MATH_ADD", blendName == "Math Add");
+    shader.toggleDefine("BM_MATH_SUB", blendName == "Math Subtract");
+    shader.toggleDefine("BM_MATH_MUL", blendName == "Math Multiply");
+    shader.toggleDefine("BM_MATH_DIV", blendName == "Math Divide");
+
+    shader.toggleDefine("BM_MATH", blendName.indexOf("Math ") == 0);
+
+
     shader.toggleDefine("BM_ALPHAMASKED", maskAlpha);
 };
 
 TextureEffect.AddBlendSelect = function (op, name, defaultMode)
 {
-    const p = op.inValueSelect(name || "Blend Mode", ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "subtract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight", "subtract one"], defaultMode || "normal");
+    const p = op.inValueSelect(name || "Blend Mode", [
+        "normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "subtract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight", "subtract one",
+        "Math Add",
+        "Math Subtract",
+        "Math Multiply",
+        "Math Divide",
+
+    ], defaultMode || "normal");
     return p;
 };
 
@@ -462,6 +512,10 @@ TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alpha
         else if (str == "color burn") str = "burn";
         else if (str == "softlight") str = "soft";
         else if (str == "hardlight") str = "hard";
+        else if (str == "Math Add") str = "+";
+        else if (str == "Math Subtract") str = "-";
+        else if (str == "Math Multiply") str = "*";
+        else if (str == "Math Divide") str = "/";
 
         op.setUiAttrib({ "extendTitle": str });
     };

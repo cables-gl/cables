@@ -118,36 +118,12 @@ function tesselateGeom(oldGeom)
     const tangents = [];
     const tc = [];
 
-    let i, j, k;
+    let j, k;
 
     if (oldGeom.verticesIndices.length > 0)
     {
-        for (i = 0; i < oldGeom.verticesIndices.length; i += 3)
+        for (let i = 0; i < oldGeom.verticesIndices.length; i += 3)
         {
-            for (j = 0; j < 4; j++)
-                for (k = 0; k < 3; k++)
-                {
-                    norms.push(
-                        oldGeom.vertexNormals[oldGeom.verticesIndices[i + k] * 3 + 0],
-                        oldGeom.vertexNormals[oldGeom.verticesIndices[i + k] * 3 + 1],
-                        oldGeom.vertexNormals[oldGeom.verticesIndices[i + k] * 3 + 2]
-                    );
-
-                    if (oldGeom.tangents)
-                        tangents.push(
-                            oldGeom.tangents[oldGeom.verticesIndices[i + k] * 3 + 0],
-                            oldGeom.tangents[oldGeom.verticesIndices[i + k] * 3 + 1],
-                            oldGeom.tangents[oldGeom.verticesIndices[i + k] * 3 + 2]
-                        );
-
-                    if (oldGeom.biTangents)
-                        biTangents.push(
-                            oldGeom.biTangents[oldGeom.verticesIndices[i + k] * 3 + 0],
-                            oldGeom.biTangents[oldGeom.verticesIndices[i + k] * 3 + 1],
-                            oldGeom.biTangents[oldGeom.verticesIndices[i + k] * 3 + 2]
-                        );
-                }
-
             tesselate(vertices,
                 oldGeom.vertices[oldGeom.verticesIndices[i + 0] * 3 + 0],
                 oldGeom.vertices[oldGeom.verticesIndices[i + 0] * 3 + 1],
@@ -160,6 +136,48 @@ function tesselateGeom(oldGeom)
                 oldGeom.vertices[oldGeom.verticesIndices[i + 2] * 3 + 0],
                 oldGeom.vertices[oldGeom.verticesIndices[i + 2] * 3 + 1],
                 oldGeom.vertices[oldGeom.verticesIndices[i + 2] * 3 + 2]
+            );
+
+            tesselate(tangents,
+                oldGeom.tangents[oldGeom.verticesIndices[i + 0] * 3 + 0],
+                oldGeom.tangents[oldGeom.verticesIndices[i + 0] * 3 + 1],
+                oldGeom.tangents[oldGeom.verticesIndices[i + 0] * 3 + 2],
+
+                oldGeom.tangents[oldGeom.verticesIndices[i + 1] * 3 + 0],
+                oldGeom.tangents[oldGeom.verticesIndices[i + 1] * 3 + 1],
+                oldGeom.tangents[oldGeom.verticesIndices[i + 1] * 3 + 2],
+
+                oldGeom.tangents[oldGeom.verticesIndices[i + 2] * 3 + 0],
+                oldGeom.tangents[oldGeom.verticesIndices[i + 2] * 3 + 1],
+                oldGeom.tangents[oldGeom.verticesIndices[i + 2] * 3 + 2]
+            );
+
+            tesselate(biTangents,
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 0] * 3 + 0],
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 0] * 3 + 1],
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 0] * 3 + 2],
+
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 1] * 3 + 0],
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 1] * 3 + 1],
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 1] * 3 + 2],
+
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 2] * 3 + 0],
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 2] * 3 + 1],
+                oldGeom.biTangents[oldGeom.verticesIndices[i + 2] * 3 + 2]
+            );
+
+            tesselate(norms,
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 0] * 3 + 0],
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 0] * 3 + 1],
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 0] * 3 + 2],
+
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 1] * 3 + 0],
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 1] * 3 + 1],
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 1] * 3 + 2],
+
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 2] * 3 + 0],
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 2] * 3 + 1],
+                oldGeom.vertexNormals[oldGeom.verticesIndices[i + 2] * 3 + 2]
             );
 
             tesselateTC(tc,
@@ -178,21 +196,64 @@ function tesselateGeom(oldGeom)
     {
         if (oldGeom.vertices.length > 0)
         {
-            for (i = 0; i < oldGeom.vertices.length; i += 9)
+            for (let i = 0; i < oldGeom.vertices.length; i += 9)
             {
-                for (j = 0; j < 4; j++)
-                {
-                    for (k = 0; k < 9; k++)
-                        norms.push(oldGeom.vertexNormals[i + k]);
+                // for (let j = 0; j < 4; j++)
+                // {
+                //     for (let k = 0; k < 9; k++)
+                //         norms.push(oldGeom.vertexNormals[i + k]);
 
-                    if (oldGeom.tangents)
-                        for (k = 0; k < 9; k++)
-                            tangents.push(oldGeom.tangents[i + k]);
+                //     if (oldGeom.tangents)
+                //         for (let k = 0; k < 9; k++)
+                //             tangents.push(oldGeom.tangents[i + k]);
 
-                    if (oldGeom.biTangents)
-                        for (k = 0; k < 9; k++)
-                            biTangents.push(oldGeom.biTangents[i + k]);
-                }
+                //     if (oldGeom.biTangents)
+                //         for (let k = 0; k < 9; k++)
+                //             biTangents.push(oldGeom.biTangents[i + k]);
+                // }
+
+                if (oldGeom.vertexNormals)
+                    tesselate(norms,
+                        oldGeom.vertexNormals[i + 0],
+                        oldGeom.vertexNormals[i + 1],
+                        oldGeom.vertexNormals[i + 2],
+
+                        oldGeom.vertexNormals[i + 3],
+                        oldGeom.vertexNormals[i + 4],
+                        oldGeom.vertexNormals[i + 5],
+
+                        oldGeom.vertexNormals[i + 6],
+                        oldGeom.vertexNormals[i + 7],
+                        oldGeom.vertexNormals[i + 8]
+                    );
+                if (oldGeom.tangents)
+                    tesselate(tangents,
+                        oldGeom.tangents[i + 0],
+                        oldGeom.tangents[i + 1],
+                        oldGeom.tangents[i + 2],
+
+                        oldGeom.tangents[i + 3],
+                        oldGeom.tangents[i + 4],
+                        oldGeom.tangents[i + 5],
+
+                        oldGeom.tangents[i + 6],
+                        oldGeom.tangents[i + 7],
+                        oldGeom.tangents[i + 8]
+                    );
+                if (oldGeom.biTangents)
+                    tesselate(biTangents,
+                        oldGeom.biTangents[i + 0],
+                        oldGeom.biTangents[i + 1],
+                        oldGeom.biTangents[i + 2],
+
+                        oldGeom.biTangents[i + 3],
+                        oldGeom.biTangents[i + 4],
+                        oldGeom.biTangents[i + 5],
+
+                        oldGeom.biTangents[i + 6],
+                        oldGeom.biTangents[i + 7],
+                        oldGeom.biTangents[i + 8]
+                    );
 
                 tesselate(vertices,
                     oldGeom.vertices[i + 0],

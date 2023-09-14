@@ -55,7 +55,7 @@ const Geometry = function (name)
     this._vertices = [];
     this.verticesIndices = [];
 
-    this.isGeometry=true;
+    this.isGeometry = true;
 
     this.morphTargets = [];
 
@@ -265,8 +265,8 @@ Geometry.prototype.setTexCoords = function (arr)
 // deprecated
 Geometry.prototype.calcNormals = function (smooth)
 {
-    const options = {};
-    if (!smooth) this.unIndex();
+    const options = { "smooth": smooth };
+
 
     this.calculateNormals(options);
 };
@@ -431,6 +431,8 @@ Geometry.prototype.copy = function ()
 Geometry.prototype.calculateNormals = function (options)
 {
     // todo: should check angle of normals to get edges    https://community.khronos.org/t/calculating-accurate-vertex-normals/28152
+    options = options || {};
+    if (options.smooth === false) this.unIndex();
 
     const u = vec3.create();
     const v = vec3.create();
@@ -536,12 +538,12 @@ Geometry.prototype.calcTangentsBitangents = function ()
 {
     if (!this.vertices.length)
     {
-        this._log.error("Cannot calculate tangents/bitangents without vertices.");
+        // this._log.error("Cannot calculate tangents/bitangents without vertices.");
         return;
     }
     if (!this.vertexNormals.length)
     {
-        this._log.error("Cannot calculate tangents/bitangents without normals.");
+        // this._log.error("Cannot calculate tangents/bitangents without normals.");
         return;
     }
     if (!this.texCoords.length)
@@ -553,7 +555,7 @@ Geometry.prototype.calcTangentsBitangents = function ()
     }
     if (!this.verticesIndices || !this.verticesIndices.length)
     {
-        this._log.error("Cannot calculate tangents/bitangents without vertex indices.");
+        // this._log.error("Cannot calculate tangents/bitangents without vertex indices.");
         return;
     }
     // this code assumes that we have three indices per triangle
@@ -685,35 +687,35 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     const newVerts = [];
     const newIndizes = [];
     let count = 0;
-    
-    for (let j in this._attributes) 
+
+    for (let j in this._attributes)
     {
-        const attr=this._attributes[j];
-        let na=[];
-        
+        const attr = this._attributes[j];
+        let na = [];
+
         for (let i = 0; i < this.verticesIndices.length; i += 3)
         {
-            for (let s = 0; s < 3; s ++)
+            for (let s = 0; s < 3; s++)
             {
-                if(attr.itemSize==3)
+                if (attr.itemSize == 3)
                     na.push(
                         attr.data[this.verticesIndices[i + s] * 3 + 0],
                         attr.data[this.verticesIndices[i + s] * 3 + 1],
                         attr.data[this.verticesIndices[i + s] * 3 + 2]);
-                else if(attr.itemSize==4)
-                    na.push( 
+                else if (attr.itemSize == 4)
+                    na.push(
                         attr.data[this.verticesIndices[i + s] * 4 + 0],
                         attr.data[this.verticesIndices[i + s] * 4 + 1],
                         attr.data[this.verticesIndices[i + s] * 4 + 2],
                         attr.data[this.verticesIndices[i + s] * 4 + 3]);
-                else if(attr.itemSize==2)
+                else if (attr.itemSize == 2)
                     na.push(
                         attr.data[this.verticesIndices[i + s] * 2 + 0],
                         attr.data[this.verticesIndices[i + s] * 2 + 1]);
-                else if(attr.itemSize==1)
+                else if (attr.itemSize == 1)
                     na.push(
                         attr.data[this.verticesIndices[i + s]]);
-                else console.log("unknown attr",attr)
+                else console.log("unknown attr", attr);
             }
         }
         this.setAttribute(attr.name, na, attr.itemSize);

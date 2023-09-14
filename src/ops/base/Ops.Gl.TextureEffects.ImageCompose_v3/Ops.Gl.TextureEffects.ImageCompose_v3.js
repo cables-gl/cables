@@ -57,12 +57,13 @@ function initEffect()
     if (effect)effect.delete();
     if (tex)tex.delete();
 
-    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": getFloatingPoint() });
+    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixel.get()) });
 
     tex = new CGL.Texture(cgl,
         {
             "name": "image_compose_v2_" + op.id,
-            "isFloatingPointTexture": getFloatingPoint(),
+            "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixel.get()),
+            "pixelFormat": inPixel.get(),
             "filter": getFilter(),
             "wrap": getWrap(),
             "width": getWidth(),
@@ -95,12 +96,6 @@ function getWrap()
     else if (inWrap.get() == "clamp to edge") return CGL.Texture.WRAP_CLAMP_TO_EDGE;
 }
 
-function getFloatingPoint()
-{
-    isFloatTex = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
-    return isFloatTex;
-}
-
 function getWidth()
 {
     if (inTex.get() && inSize.get() == "Auto") return inTex.get().width;
@@ -125,7 +120,8 @@ function updateResolution()
     if ((
         getWidth() != tex.width ||
         getHeight() != tex.height ||
-        tex.isFloatingPoint() != getFloatingPoint() ||
+        tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixel.get()) ||
+        tex.pixelFormat != inPixel.get() ||
         tex.filter != getFilter() ||
         tex.wrap != getWrap()
     ) && (getWidth() !== 0 && getHeight() !== 0))
@@ -181,7 +177,7 @@ function updateUi()
     height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
     if (tex)
-        if (getFloatingPoint() && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
+        if (CGL.Texture.isPixelFormatFloat(inPixel.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
 
     updateResolutionInfo();

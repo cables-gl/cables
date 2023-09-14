@@ -164,9 +164,9 @@ function loadAnims(gltf)
                     anims.push(newAnim);
                 }
 
-                if (sampler.interpolation == "LINEAR") {}
-                else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
-                else if (sampler.interpolation == "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
+                if (sampler.interpolation === "LINEAR") {}
+                else if (sampler.interpolation === "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
+                else if (sampler.interpolation === "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
                 // console.log(bufferOut)
@@ -217,8 +217,7 @@ function loadAnims(gltf)
 
     gltf.uniqueAnimNames = uniqueAnimNames;
 
-    outAnims.set(null);
-    outAnims.set(Object.keys(uniqueAnimNames));
+    outAnims.setRef(Object.keys(uniqueAnimNames));
 }
 
 function loadCams(gltf)

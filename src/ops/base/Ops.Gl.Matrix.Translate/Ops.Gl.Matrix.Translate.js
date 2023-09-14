@@ -1,10 +1,11 @@
-const render = op.inTrigger("render");
-const trigger = op.outTrigger("trigger");
-const x = op.inValue("x");
-const y = op.inValue("y");
-const z = op.inValue("z");
+const
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger"),
+    x = op.inValue("x"),
+    y = op.inValue("y"),
+    z = op.inValue("z");
 
-let vec = vec3.create();
+const vec = vec3.create();
 
 render.onTriggered = function ()
 {
