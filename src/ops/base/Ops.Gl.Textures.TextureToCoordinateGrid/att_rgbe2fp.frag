@@ -7,9 +7,8 @@ UNI float repeatsSpace;
 
 void main()
 {
-
     vec4 col=texture(tex,vec2(texCoord.x,mod(texCoord.y*repeatsY,1.0)));
-    vec4 outCol=vec4((111111.0));
+    vec4 outCol=vec4(vec3(111111.0),0.0);
 
     if(col.r>threshold)
     {
