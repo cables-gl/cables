@@ -436,7 +436,7 @@ TextureEffect.getBlendCode = function (ver)
     return src;
 };
 
-TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha)
+TextureEffect.onChangeBlendSelect = function (shader, blendName = "", maskAlpha = false)
 {
     shader.toggleDefine("BM_NORMAL", blendName == "normal");
     shader.toggleDefine("BM_MULTIPLY", blendName == "multiply");
