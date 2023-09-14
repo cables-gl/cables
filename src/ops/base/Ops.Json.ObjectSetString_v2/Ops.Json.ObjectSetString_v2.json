@@ -1,0 +1,53 @@
+{
+    "id": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1584025826276
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectSetString",
+            "author": "pandur",
+            "date": 1694609466138
+        },
+        {
+            "message": "Ops.Patch.PpiMxeG.ObjectSetString_v2 renamed to Ops.Json.ObjectSetString_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694609540103
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1694609466137,
+    "summary": "set a string value by key in an object",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectSetString_v2"
+    }
+}

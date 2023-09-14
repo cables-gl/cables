@@ -101,5 +101,12 @@
             }
         ],
         "name": "Ops.Html.InputElement"
-    }
+    },
+    "collections": null,
+    "relatedops": null,
+    "exampleProjectId": "L83aeG",
+    "docs": {
+        "ports": []
+    },
+    "summary": "HTML input/textarea element to allow the user to enter text "
 }

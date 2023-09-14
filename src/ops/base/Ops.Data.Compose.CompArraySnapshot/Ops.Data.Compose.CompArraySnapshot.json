@@ -47,7 +47,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Team.CompOps.Dev.CompArraySnapshot"
+        "name": "Ops.Data.Compose.CompArraySnapshot"
     },
     "authorName": "pandur",
     "created": 1686661094980,

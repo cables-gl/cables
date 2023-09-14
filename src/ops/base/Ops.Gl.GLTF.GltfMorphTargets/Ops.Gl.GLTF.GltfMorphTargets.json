@@ -71,5 +71,12 @@
         "name": "Ops.Patch.P0QRQgF.GltfMorphTargets"
     },
     "authorName": "pandur",
-    "created": 1693646482040
+    "created": 1693646482040,
+    "summary": "render weighted morph targets/shape keys from a gltf file",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "zon4xF"
 }
