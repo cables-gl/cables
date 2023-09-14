@@ -48,7 +48,7 @@ There are several ways to share patchlists on [cables.gl](https://cables.gl). De
 
 ### Collaborators
 
-![Button](../1_patches/img/collaboration.png)
+![Button](./img/collaboration.png)
 
 By adding other users to your patchlists, you grant them "read only" or "full access" to your patchlist. Use this to work on patches with other people.
 
@@ -65,7 +65,7 @@ Users with "Full Access" can do all of the above, and:
 
 ### Teams
 
-![Button](../1_patches/img/teams.png)
+![Button](./img/teams.png)
 
 Using the "Collaboration" tab in the patchlists settings you can add one or multiple [teams](../2_teams/teams) to the patchlists (if you have "Full Access").
 
