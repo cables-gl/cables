@@ -7,6 +7,7 @@ void main()
 {
     vec4 col=texture(tex,texCoord);
     vec4 outCol=vec4(111111.0);
+    outCol.a=0.0;
 
     if(col.r>threshold)
     {
