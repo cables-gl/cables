@@ -1,61 +1,62 @@
 {
+    "id": "9989b1c0-1073-4d5f-bfa0-36dd98b66e27",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1551085749888
+        },
+        {
+            "message": "Ops.Trigger.SetNumberOnTrigger renamed to Ops.Trigger.TriggerNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676552717
+        }
+    ],
     "authorName": "pandur",
-    "id": "43ed1123-1312-4383-b843-27b8ec540c09",
-    "created": 1519814609448,
+    "created": 1551085774736,
     "layout": {
         "portsIn": [
             {
                 "type": 1,
-                "name": "0"
+                "name": "Set"
             },
             {
-                "type": 1,
-                "name": "1"
-            },
-            {
-                "type": 1,
-                "name": "2"
-            },
-            {
-                "type": 1,
-                "name": "3"
-            },
-            {
-                "type": 1,
-                "name": "4"
-            },
-            {
-                "type": 1,
-                "name": "5"
-            },
-            {
-                "type": 1,
-                "name": "6"
-            },
-            {
-                "type": 1,
-                "name": "7"
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": 0,
-                "name": "number",
-                "subType": "number"
+                "type": 1,
+                "name": "Next"
             },
             {
-                "type": 1,
-                "name": "Triggered"
+                "type": 0,
+                "name": "Out Value",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Trigger.TriggerNumber"
+        "name": "Ops.Trigger.SetNumberOnTrigger"
     },
-    "summary": "Outputs the last number of the input port which was triggered",
+    "summary": "Outputs a number when triggered",
+    "youtubeid": "",
+    "issues": "",
+    "relatedops": null,
     "docs": {
         "ports": [
             {
-                "name": "number",
-                "text": "The input-port which was triggered last"
+                "name": "Set",
+                "text": "Trigger - send out stored number"
+            },
+            {
+                "name": "Number",
+                "text": "Number to output on Trigger"
+            },
+            {
+                "name": "Out Value",
+                "text": "Number out"
             }
         ]
     }

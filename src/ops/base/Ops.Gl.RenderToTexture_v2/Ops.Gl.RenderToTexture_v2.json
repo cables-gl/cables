@@ -1,0 +1,112 @@
+{
+    "summary": "Render into an Image",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Auto Aspect",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "MSAA index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "textureDepth",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Gl.Render2Texture_v2"
+    },
+    "authorName": "pandur",
+    "id": "c4b5893e-bdfe-4f2d-a274-8a2b486492eb",
+    "created": 1687444885322,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [
+        "XmOk70epdf0"
+    ],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Render2Texture",
+            "author": "pandur",
+            "date": 1687444885322
+        },
+        {
+            "message": "Ops.Patch.PheLezz.Render2Texture2 renamed to Ops.Gl.Render2Texture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687445363475
+        },
+        {
+            "message": "Ops.Gl.Render2Texture_v2 renamed to Ops.Gl.RenderToTexture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694675870051
+        }
+    ]
+}
