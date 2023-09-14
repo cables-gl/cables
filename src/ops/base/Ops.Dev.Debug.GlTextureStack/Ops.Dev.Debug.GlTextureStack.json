@@ -11,6 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1687531644869
+        },
+        {
+            "message": "Ops.Debug.GlTextureStack renamed to Ops.Dev.Debug.GlTextureStack",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694686524385
         }
     ],
     "layout": {
