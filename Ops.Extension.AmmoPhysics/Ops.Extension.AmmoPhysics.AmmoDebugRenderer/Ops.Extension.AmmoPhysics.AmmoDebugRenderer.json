@@ -1,0 +1,111 @@
+{
+    "id": "e4b4f6c9-483b-486e-abbc-fbc4254a65d1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1648716768370
+        },
+        {
+            "message": "Ops.User.pandur.AmmoDebugRenderer renamed to Ops.Dev.AmmoDebugRenderer",
+            "author": "pandur",
+            "date": 1648724622788
+        },
+        {
+            "message": " added core lib: ammodebugdrawer",
+            "author": "pandur",
+            "date": 1648814836906
+        },
+        {
+            "message": "Ops.Dev.AmmoDebugRenderer renamed to Ops.Physics.Ammo.AmmoDebugRenderer",
+            "author": "pandur",
+            "date": 1652089894162
+        },
+        {
+            "message": "Ops.Physics.Ammo.AmmoDebugRenderer renamed to Ops.Extension.AmmoPhysics.AmmoDebugRenderer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694677159107
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1648716798747,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Draw Wireframe",
+                "group": "Options",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw AABB",
+                "group": "Options",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Contact Points",
+                "group": "Options",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Constraints",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
+                "group": "Options",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Physics.Ammo.AmmoDebugRenderer"
+    },
+    "coreLibs": [
+        "ammodebugdrawer"
+    ],
+    "summary": "Visualize the physical bodies as lines and points",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "psyNZ4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Draw Wireframe",
+                "text": "Exact geometry wireframe of your collision mesh (cpu intensive)"
+            },
+            {
+                "name": "Draw AABB",
+                "text": "simplified view of your physics objects as cubes"
+            },
+            {
+                "name": "Draw Contact Points",
+                "text": "show collision locations"
+            },
+            {
+                "name": "Depth",
+                "text": "toggle seethrough"
+            }
+        ]
+    }
+}

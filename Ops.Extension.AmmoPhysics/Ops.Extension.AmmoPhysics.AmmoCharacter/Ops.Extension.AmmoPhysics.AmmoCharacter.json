@@ -1,0 +1,242 @@
+{
+    "id": "5f6c2a84-8de9-41e5-948a-d9c5ed49022f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647282102349
+        },
+        {
+            "message": "Ops.User.pandur.AmmoCharacter renamed to Ops.Dev.AmmoCharacter",
+            "author": "pandur",
+            "date": 1647283153556
+        },
+        {
+            "message": "Ops.Dev.AmmoCharacter renamed to Ops.Physics.Ammo.AmmoCharacter",
+            "author": "pandur",
+            "date": 1654010327919
+        },
+        {
+            "message": "Ops.Physics.Ammo.AmmoCharacter renamed to Ops.Extension.AmmoPhysics.AmmoCharacter",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694677112319
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "View index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 1,
+                "name": "Activate"
+            },
+            {
+                "type": 0,
+                "name": "Move X+",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move X-",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Y+",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Y-",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Z+",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Z-",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Dir X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Pos X",
+                "group": "Reset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Pos Y",
+                "group": "Reset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Pos Z",
+                "group": "Reset",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset",
+                "group": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Add Velocity Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Transformed"
+            }
+        ],
+        "name": "Ops.Physics.Ammo.AmmoCharacter"
+    },
+    "authorName": "pandur",
+    "created": 1647282185058,
+    "summary": "Control and move a character in a physics environment",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "psyNZ4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "radius  of the capsule  collision mesh"
+            },
+            {
+                "name": "View index",
+                "text": "1st person or 3rd person mode"
+            },
+            {
+                "name": "Height",
+                "text": "heigh of capsule collision mesh"
+            },
+            {
+                "name": "Mass",
+                "text": "weight of capsule"
+            },
+            {
+                "name": "Name",
+                "text": "name of this capsule to be used for collision checking"
+            },
+            {
+                "name": "Reset",
+                "text": "reset location"
+            },
+            {
+                "name": "Activate",
+                "text": "wake up this object"
+            },
+            {
+                "name": "Dir X",
+                "text": "X axis rotation value (from AmmoCharacterFpsCamera for example)"
+            },
+            {
+                "name": "Dir Y",
+                "text": "Y axis ratation value (from AmmoCharacterFpsCamera for example)"
+            },
+            {
+                "name": "Dir Z",
+                "text": "Z axis rotation value (from AmmoCharacterFpsCamera for example)"
+            },
+            {
+                "name": "Speed",
+                "text": "speed at which this object will travel on user input booleans"
+            },
+            {
+                "name": "Add Velocity Y",
+                "text": "Y axis velocity impulse, for a jump"
+            },
+            {
+                "name": "Position X",
+                "text": "current X location of capsule"
+            },
+            {
+                "name": "Position Y",
+                "text": "current Y location of capsule"
+            },
+            {
+                "name": "Position Z",
+                "text": "current Z location of capsule"
+            },
+            {
+                "name": "Transformed",
+                "text": "resize meshes underneath to dimensions of this object"
+            }
+        ]
+    }
+}

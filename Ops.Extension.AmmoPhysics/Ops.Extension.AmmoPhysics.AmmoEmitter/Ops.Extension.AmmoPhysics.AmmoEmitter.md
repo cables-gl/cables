@@ -1,0 +1,1 @@
+The emitter operator will create a physics object with the specified parameters including velocity and direction.  You can create more than one parameter and also remove and limit the number of objects that are created.
