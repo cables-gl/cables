@@ -10,6 +10,18 @@
             "message": "Ops.User.pandur.GltfMeshSequence renamed to Ops.Gl.GLTF.GltfMeshSequence",
             "author": "pandur",
             "date": 1602248356916
+        },
+        {
+            "message": "Ops.Gl.GLTF.GltfMeshSequence renamed to Ops.Deprecated.Gl.GLTF.GltfMeshSequence",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676762446
+        },
+        {
+            "message": "Ops.Deprecated.Gl.GLTF.GltfMeshSequence renamed to Ops.Gl.GLTF.GltfMeshSequence",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676814830
         }
     ],
     "authorName": "pandur",
@@ -60,7 +72,6 @@
     },
     "summary": "switch between meshes e.g. like a stop motion animation",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
