@@ -41,7 +41,7 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "INQQgo",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.ShaderEffects.Render2TexturesSlots",
@@ -76,5 +76,7 @@
     "coreLibs": [
         "cgl_rendertargets",
         "cgl_shadermodifier"
-    ]
+    ],
+    "collections": null,
+    "relatedops": null
 }

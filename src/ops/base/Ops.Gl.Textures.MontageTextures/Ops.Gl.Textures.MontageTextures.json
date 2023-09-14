@@ -196,5 +196,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "yZJ2WW"
+    "exampleProjectId": "",
+    "collections": null
 }

@@ -35,5 +35,11 @@
         "name": "Ops.Patch.PxgBYvA.CablesEvents"
     },
     "authorName": "pandur",
-    "created": 1689660639693
+    "created": 1689660639693,
+    "summary": "Get current cables events",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

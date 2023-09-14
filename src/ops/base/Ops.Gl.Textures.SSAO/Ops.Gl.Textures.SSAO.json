@@ -123,7 +123,7 @@
         ],
         "name": "Ops.Dev.SSAO3"
     },
-    "summary": "Depth buffer based screen space ambient occlusion",
+    "summary": "screen space ambient occlusion from depth texture",
     "issues": "",
     "caniusequery": "",
     "relatedops": null,
