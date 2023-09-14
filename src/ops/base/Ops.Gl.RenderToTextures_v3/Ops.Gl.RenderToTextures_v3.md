@@ -1,1 +1,0 @@
-see Ops.Gl.ShaderEffects.Render2TexturesSlots to toggle which textures to render to
