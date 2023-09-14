@@ -94,23 +94,9 @@
             {
                 "name": "render",
                 "text": "Trigger in"
-            },
-            {
-                "name": "amount",
-                "text": "Amount of blur"
-            },
-            {
-                "name": "Clamp",
-                "text": "Clamp texture output"
-            },
-            {
-                "name": "direction",
-                "text": "Both , vertical or horizontal"
-            },
-            {
-                "name": "trigger",
-                "text": "Trigger out"
             }
         ]
-    }
+    },
+    "collections": null,
+    "exampleProjectId": "xHp9eG"
 }
