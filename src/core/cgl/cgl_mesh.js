@@ -718,16 +718,14 @@ Mesh.prototype.render = function (shader)
     let queryStarted = false;
     if (doQuery)
     {
-        let id = this._name + " " + shader.getName() + " #" + shader.id;
+        let id = this._name + " - " + shader.getName() + " #" + shader.id;
         if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
-        if (!queryProfilerData)
-        {
-            queryProfilerData = { "id": id, "num": 0 };
-            this._cgl.profileData.glQueryData[id] = queryProfilerData;
-        }
+        if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0 };
+
+        this._cgl.profileData.glQueryData[id] = queryProfilerData;
 
         if (!this._queryExt && this._queryExt !== false) this._queryExt = this._cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
         if (this._queryExt)

@@ -68,7 +68,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (!this._mesh)
     {
-        const geom = new CGL.Geometry("preview op rect");
+        const geom = new CGL.Geometry("vizTexture rect");
         geom.vertices = [1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0];
         geom.texCoords = [
             1.0, 1.0,
