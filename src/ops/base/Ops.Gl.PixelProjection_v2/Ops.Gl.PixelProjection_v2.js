@@ -96,7 +96,7 @@ function exec()
         yt -= h;
         yb = y0;
     }
-    if (inAlign.get() === "Top Left ")
+    if (inAlign.get() === "Top Left")
     {
         xl = x0;
         xr = w;

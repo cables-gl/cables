@@ -46,6 +46,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1673436349528
+        },
+        {
+            "message": "Ops.Dev.SSAO3 renamed to Ops.Gl.Textures.SSAO",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694617670088
         }
     ],
     "coreLibs": [

@@ -13,7 +13,7 @@ update.onTriggered = () =>
         }
         catch (e)
         {
-            console.log(e);
+            op.log(e);
         }
     }
 

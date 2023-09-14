@@ -15,7 +15,7 @@ update.onTriggered = () =>
         }
         catch (e)
         {
-            console.log("error comparraupusharray");
+            op.log("error comparraupusharray");
         }
     }
     next.trigger();

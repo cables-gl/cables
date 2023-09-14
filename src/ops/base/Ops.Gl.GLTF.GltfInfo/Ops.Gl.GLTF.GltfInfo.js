@@ -17,7 +17,6 @@ exec.onTriggered = () =>
 
         for (let i = 0; i < gltf.cameras.length; i++)
         {
-            // console.log(gltf.cameras[i])
             arrCamNames.push(gltf.cameras[i].name);
         }
         outCamNames.set(arrCamNames);
