@@ -11,6 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1689661371079
+        },
+        {
+            "message": "Ops.Debug.CablesEvents renamed to Ops.Dev.Debug.CablesEvents",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694686430596
         }
     ],
     "layout": {

@@ -2,7 +2,7 @@ const addSpacesCheckBox = op.inBool("add spaces", false),
     newLineX = op.inBool("new lines", false),
     result = op.outString("concat string"),
     outArr = op.outArray("Result"),
-    outLines=op.outNumber("Total Lines");
+    outLines = op.outNumber("Total Lines");
 
 const
     stringPorts = [],
@@ -30,11 +30,11 @@ function update()
     let space = addSpacesCheckBox.get();
     let line = 0;
     let numLines = 1;
-    let countStringLines=0;
+    let countStringLines = 0;
 
     for (let i = 0; i < arrayPorts.length; i++)
     {
-        if(arrayPorts[i].get()) numLines = Math.max(numLines, arrayPorts[i].get().length);
+        if (arrayPorts[i].get()) numLines = Math.max(numLines, arrayPorts[i].get().length);
     }
 
     for (let j = 0; j < numLines; j++)
@@ -49,16 +49,15 @@ function update()
             str += inString;
             if (inArray)
             {
-                if(space)str += " ";
+                if (space)str += " ";
                 str += inArray[j];
             }
         }
-        if (newLineX.get() )
+        if (newLineX.get())
         {
             str += "\n";
             countStringLines++;
         }
-
     }
 
     result.set(str);

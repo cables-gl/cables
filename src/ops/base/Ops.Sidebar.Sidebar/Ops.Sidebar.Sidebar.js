@@ -21,7 +21,7 @@ const minimizedOpacityPort = op.inValueSlider("Minimized Opacity", 0.5);
 const undoButtonPort = op.inValueBool("Show undo button", false);
 const inMinimize = op.inValueBool("Show Minimize", false);
 
-const inTitle = op.inString("Title", "Sidebar");
+const inTitle = op.inString("Title", "");
 const side = op.inValueBool("Side");
 
 // outputs

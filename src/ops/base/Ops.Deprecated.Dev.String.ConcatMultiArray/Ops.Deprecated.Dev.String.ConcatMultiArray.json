@@ -15,6 +15,12 @@
             "message": "Ops.String.ConcatMultiArray renamed to Ops.Dev.String.ConcatMultiArray",
             "author": "pandur",
             "date": 1654083352658
+        },
+        {
+            "message": "Ops.Dev.String.ConcatMultiArray renamed to Ops.Deprecated.Dev.String.ConcatMultiArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694686304322
         }
     ],
     "authorName": "pandur",
