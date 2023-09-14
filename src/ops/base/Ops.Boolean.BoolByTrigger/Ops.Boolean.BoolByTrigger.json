@@ -1,0 +1,37 @@
+{
+    "authorName": "pandur",
+    "id": "31f65abe-9d6c-4ba6-a291-ef2de41d2087",
+    "created": 1521804228732,
+    "summary": "trigger true or false values",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "True"
+            },
+            {
+                "type": 1,
+                "name": "false"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Boolean.TriggerBoolean"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Boolean.TriggerBoolean renamed to Ops.Boolean.BoolByTrigger",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676612160
+        }
+    ]
+}

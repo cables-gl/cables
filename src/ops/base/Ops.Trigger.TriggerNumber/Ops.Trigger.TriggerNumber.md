@@ -1,2 +1,1 @@
-Outputs the last number of the input port which was triggered, so e.g. if input port `2` was triggered last, `Result` will be `2`.
-
+A very handy op for outputting a number only when triggered

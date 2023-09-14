@@ -1,0 +1,52 @@
+{
+    "authorName": "pandur",
+    "id": "1444ab6f-a4da-462c-8abe-a1deef2084da",
+    "created": 1516618630292,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "ratio index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "ratio",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Pos X index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Viewport2"
+    },
+    "summary": "force a viewport aspect ratio",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Viewport2 renamed to Ops.Deprecated.Gl.Viewport2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676679639
+        }
+    ]
+}
