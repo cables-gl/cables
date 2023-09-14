@@ -1,6 +1,6 @@
 # Patches
 
-Patches on [cables.gl](https://cables.gl) cables.gl can be private or public, pick one of the two for the level of permission
+Patches on [cables.gl](https://cables.gl) cables.gl can be private, unlisted or public, pick one of the three for the level of permission
 and collaboration you deem appropriate. We strongly encourage making your patch public to share your work with the community!
 
 ---
@@ -20,6 +20,17 @@ Public patches can be:
 
 ---
 
+### Unlisted patches
+
+You can set patches to "unlisted" visibility. Users need the URL of the patch to access it. Rules are the same as
+for private patches (see above) but they will never appear in any of the lists like "Top Patches" or "Featured Patches".
+
+So, rules are:
+
+- Viewed by everyone that knows the URL, even [visitors](../0_users/users)
+- Opened in the editor, altered but not saved by [visitors](../0_users/users) and any user
+- Cloned for remixing, basis for new work or inspiration by any registered user
+
 ## Private patches
 
 Once you create or clone a patch on [cables.gl](https://cables.gl) it is marked as private. This means:
@@ -28,15 +39,6 @@ Once you create or clone a patch on [cables.gl](https://cables.gl) it is marked 
 - Only you (as the owner) can view, edit and save the patch in the editor
 - Only you (as the owner) can invite other people for collaboration or add the patch to a [team](../2_teams/teams)
 - Only the owner can delete a patch and all it's assets
-
-### Secret URL
-
-Cables allows you to create a secret url for any private patch. This URL can then be shared with people that are not collaborators to the patch or have no account on [cables.gl](https://cables.gl). 
-
-With this URL users can:
-
-- View the patch on the patchpage (like [this](/p/RnUxjX))
-- NOT open it in the editor
 
 ---
 
