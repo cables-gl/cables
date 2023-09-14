@@ -436,8 +436,9 @@ TextureEffect.getBlendCode = function (ver)
     return src;
 };
 
-TextureEffect.onChangeBlendSelect = function (shader, blendName = "", maskAlpha = false)
+TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha = false)
 {
+    blendName = String(blendName);
     shader.toggleDefine("BM_NORMAL", blendName == "normal");
     shader.toggleDefine("BM_MULTIPLY", blendName == "multiply");
     shader.toggleDefine("BM_MULTIPLY_INV", blendName == "multiply invert");
