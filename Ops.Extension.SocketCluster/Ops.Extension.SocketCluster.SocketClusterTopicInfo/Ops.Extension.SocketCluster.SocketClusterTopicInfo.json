@@ -71,8 +71,7 @@
                 "type": 1,
                 "name": "Updated"
             }
-        ],
-        "name": "Ops.Net.SocketCluster.SocketClusterTopicInfo"
+        ]
     },
     "summary": "get info for clients listening on a socketcluster topic",
     "issues": "",

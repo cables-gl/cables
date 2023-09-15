@@ -39,8 +39,7 @@
                 "type": "1",
                 "name": "received"
             }
-        ],
-        "name": "Ops.Net.SocketCluster.SocketClusterRecieveNumber"
+        ]
     },
     "summary": "recieves number from the socketcluster socket/topic",
     "issues": "",

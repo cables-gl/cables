@@ -27,8 +27,7 @@
                 "type": 1,
                 "name": "received"
             }
-        ],
-        "name": "Ops.Net.SocketCluster.SocketClusterRecieveObject"
+        ]
     },
     "summary": "Recieves object from the socketcluster socket/topic",
     "issues": "",

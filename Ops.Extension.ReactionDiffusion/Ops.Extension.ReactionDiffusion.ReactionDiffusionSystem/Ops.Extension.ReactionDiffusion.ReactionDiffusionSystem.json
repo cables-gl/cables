@@ -95,8 +95,7 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ReactionDiffusionSystem"
+        ]
     },
     "changelog": [
         {

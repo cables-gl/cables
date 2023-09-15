@@ -68,8 +68,7 @@
                 "name": "Dirty (needs rebind)",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Libs.ECharts.EChartsEvent"
+        ]
     },
     "summary": "capture echart-library-events",
     "issues": "",

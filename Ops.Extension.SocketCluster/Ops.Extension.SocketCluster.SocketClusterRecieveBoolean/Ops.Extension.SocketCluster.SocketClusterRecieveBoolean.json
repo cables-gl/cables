@@ -27,8 +27,7 @@
                 "type": "1",
                 "name": "received"
             }
-        ],
-        "name": "Ops.Admin.SocketClusterRecieveBoolean"
+        ]
     },
     "summary": "Recieves boolean value from the socketcluster socket/topic",
     "issues": "",

@@ -58,8 +58,7 @@
                 "name": "Number 3",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.OSC.OscNumbers"
+        ]
     },
     "summary": "Outputs up to 4 numbers from a user defined OSC address",
     "issues": "",

@@ -59,8 +59,7 @@
                 "name": "Opentype Font",
                 "objType": "opentype"
             }
-        ],
-        "name": "Ops.Libs.OpenType.OpentypeFont"
+        ]
     },
     "authorName": "pandur",
     "created": 1642189494325,

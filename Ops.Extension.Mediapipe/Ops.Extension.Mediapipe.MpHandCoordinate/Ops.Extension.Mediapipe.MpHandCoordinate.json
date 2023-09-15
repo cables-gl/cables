@@ -53,8 +53,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.MpHandCoordinate"
+        ]
     },
     "summary": "Get individual coordinates of fingers or wrist from an array of mediapipe data",
     "issues": "",

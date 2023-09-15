@@ -53,8 +53,7 @@
                 "type": 2,
                 "name": "HTML Element"
             }
-        ],
-        "name": "Ops.Extension.RecklessHtml.RecklessCssPropertyNumber"
+        ]
     },
     "summary": "Set css style properties of a html element",
     "issues": "",

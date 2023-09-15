@@ -27,8 +27,7 @@
                 "type": "3",
                 "name": "classifier"
             }
-        ],
-        "name": "Ops.Api.TeachableMachines.AudioClassifier"
+        ]
     },
     "summary": "Use the Teachable Machines audio classifier for your microphone. Insert the uploaded model URL.",
     "author": "mick",

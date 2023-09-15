@@ -149,8 +149,7 @@
                 "name": "Found",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Libs.Mediapipe.MpPoseTracking"
+        ]
     },
     "summary": "Get pose-data (points/landmarks/lines) from webcam using mediapipe library",
     "issues": "",

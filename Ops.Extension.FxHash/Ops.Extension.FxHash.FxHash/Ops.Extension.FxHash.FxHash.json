@@ -65,8 +65,7 @@
                 "name": "fxhash environment",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Api.FxHash.FxHash"
+        ]
     },
     "summary": "FxHash simulator / generator of seeded random numbers",
     "issues": "",

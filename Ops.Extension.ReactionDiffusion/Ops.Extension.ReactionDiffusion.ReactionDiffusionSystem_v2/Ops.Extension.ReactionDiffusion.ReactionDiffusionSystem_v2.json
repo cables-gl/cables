@@ -126,8 +126,7 @@
                 "name": "Texture Out",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Extension.ReactionDiffusion.ReactionDiffusionSystem_v2"
+        ]
     },
     "changelog": [
         {

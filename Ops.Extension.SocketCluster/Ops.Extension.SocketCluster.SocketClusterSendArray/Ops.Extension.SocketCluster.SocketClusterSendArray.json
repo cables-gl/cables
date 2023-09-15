@@ -27,8 +27,7 @@
                 "subType": "integer"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Extension.SocketCluster.SocketClusterSendArray"
+        "portsOut": []
     },
     "summary": "sends an array via socketcluster/websocket",
     "issues": "",

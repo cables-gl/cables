@@ -104,8 +104,7 @@
                 "name": "Rot Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Physics.Ammo.AmmoCharacterFpsCamera"
+        ]
     },
     "summary": "First person camera to use with AmmoCharacter",
     "issues": "",

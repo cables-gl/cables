@@ -31,8 +31,7 @@
                 "type": "3",
                 "name": "Classifier"
             }
-        ],
-        "name": "Ops.Api.TeachableMachines.ImageClassifier"
+        ]
     },
     "summary": "Use the Teachable Machines image classifier. Insert the uploaded model URL.",
     "updated": 0,

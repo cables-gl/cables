@@ -105,8 +105,7 @@
                 "type": 2,
                 "name": "Error"
             }
-        ],
-        "name": "Ops.Net.SocketCluster.SocketCluster_v2"
+        ]
     },
     "summary": "connect to a socketcluster server and manage the connection",
     "issues": "",

@@ -27,8 +27,7 @@
                 "subType": "integer"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Net.SocketCluster.SocketClusterSendTrigger"
+        "portsOut": []
     },
     "summary": "sends a trigger via socketcluster/websocket",
     "issues": "",

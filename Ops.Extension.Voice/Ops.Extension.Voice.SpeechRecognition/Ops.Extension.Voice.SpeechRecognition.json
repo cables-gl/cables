@@ -39,8 +39,7 @@
                 "name": "Started",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Audio.SpeechRecognition"
+        ]
     },
     "authorName": "pandur",
     "id": "e7ccd7a9-54e9-4637-b8cb-011708dfc0dd",

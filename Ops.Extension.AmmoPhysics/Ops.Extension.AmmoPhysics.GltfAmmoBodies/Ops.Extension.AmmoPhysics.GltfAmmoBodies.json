@@ -57,8 +57,7 @@
                 "name": "Meshes",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Physics.Ammo.GltfAmmoBodies"
+        ]
     },
     "summary": "Create physics bodies from a GLTF File",
     "issues": "",

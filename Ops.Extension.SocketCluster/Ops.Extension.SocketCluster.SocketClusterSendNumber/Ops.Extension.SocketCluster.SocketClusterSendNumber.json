@@ -33,8 +33,7 @@
                 "name": "data",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Admin.SocketClusterSendNumber"
+        ]
     },
     "summary": "sends a number via socketcluster/websocket",
     "issues": "",

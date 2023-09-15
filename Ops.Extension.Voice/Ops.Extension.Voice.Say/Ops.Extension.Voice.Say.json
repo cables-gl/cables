@@ -66,8 +66,7 @@
                 "type": "0",
                 "name": "Paused"
             }
-        ],
-        "name": "Ops.WebAudio.TextToSpeech.Say"
+        ]
     },
     "summary": "Text-to-Speech, speaks different languages (speech synthesis)",
     "docs": {

@@ -21,8 +21,7 @@
                 "name": "data",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Admin.SocketClusterSendBoolean"
+        ]
     },
     "summary": "Sends boolean value via socketcluster/websocket",
     "issues": "",

@@ -88,8 +88,7 @@
                 "name": "Hit Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Physics.Ammo.AmmoRaycast"
+        ]
     },
     "authorName": "pandur",
     "created": 1647160233425,

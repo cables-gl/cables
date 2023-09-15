@@ -31,8 +31,7 @@
                 "type": 3,
                 "name": "Classifier"
             }
-        ],
-        "name": "Ops.User.stephan.ImageClassifier_v2"
+        ]
     },
     "summary": "Use the Teachable Machines image classifier. Insert the uploaded model URL.",
     "updated": 0,

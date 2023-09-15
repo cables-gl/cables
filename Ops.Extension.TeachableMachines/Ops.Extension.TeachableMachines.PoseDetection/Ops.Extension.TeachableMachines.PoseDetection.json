@@ -45,8 +45,7 @@
                 "name": "Image flipped",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Api.TeachableMachines.PoseDetection"
+        ]
     },
     "summary": "Use the Teachable Machines pose detection with your webcam. Insert the uploaded model URL.",
     "author": "mick",

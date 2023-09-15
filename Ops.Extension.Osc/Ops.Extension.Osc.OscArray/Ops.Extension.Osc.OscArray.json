@@ -47,8 +47,7 @@
                 "type": "1",
                 "name": "Received"
             }
-        ],
-        "name": "Ops.Devices.OSC.OscArray"
+        ]
     },
     "summary": "Outputs an array of data from a user defined OSC address",
     "issues": "",

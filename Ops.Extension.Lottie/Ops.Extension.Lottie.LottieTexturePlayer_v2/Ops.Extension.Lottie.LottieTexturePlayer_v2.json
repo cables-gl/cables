@@ -121,8 +121,7 @@
                 "name": "Total Frames",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Libs.Lottie.LottieTexturePlayer_v2"
+        ]
     },
     "libs": [
         "lottie_canvas.min.js"

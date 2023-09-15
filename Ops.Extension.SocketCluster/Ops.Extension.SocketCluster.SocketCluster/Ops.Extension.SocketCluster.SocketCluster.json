@@ -90,8 +90,7 @@
                 "type": 2,
                 "name": "error"
             }
-        ],
-        "name": "Ops.Net.SocketCluster.SocketCluster"
+        ]
     },
     "summary": "connect to a socketcluster server and manage the connection",
     "issues": "",

@@ -120,8 +120,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Dev.Mediapipe.MpFace"
+        ]
     },
     "summary": "Get face mesh from webcam/video using mediapipe library",
     "issues": "",

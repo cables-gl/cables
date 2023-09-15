@@ -114,8 +114,7 @@
                 "type": 3,
                 "name": "Collisions"
             }
-        ],
-        "name": "Ops.Physics.Ammo.AmmoWorld"
+        ]
     },
     "authorName": "pandur",
     "created": 1647106814814,

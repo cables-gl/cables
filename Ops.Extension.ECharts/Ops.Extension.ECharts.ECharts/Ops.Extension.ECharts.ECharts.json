@@ -113,8 +113,7 @@
                 "type": 1,
                 "name": "Theme changed"
             }
-        ],
-        "name": "Ops.Libs.ECharts.ECharts"
+        ]
     },
     "summary": "wrapper for echarts-library",
     "issues": "The ECharts WebGL extension library is not supported (yet).",

@@ -70,8 +70,7 @@
                 "name": "Score",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Libs.Mediapipe.MpHand"
+        ]
     },
     "summary": "Get points and lines for left/right hand from mediapipe",
     "issues": "",

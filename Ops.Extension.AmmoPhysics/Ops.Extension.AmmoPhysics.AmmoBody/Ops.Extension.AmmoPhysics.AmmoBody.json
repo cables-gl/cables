@@ -158,8 +158,7 @@
                 "type": 1,
                 "name": "Transformed"
             }
-        ],
-        "name": "Ops.Physics.Ammo.AmmoBody"
+        ]
     },
     "summary": "Create a physics body/collision shape using a any geometry or select a shape",
     "issues": "",

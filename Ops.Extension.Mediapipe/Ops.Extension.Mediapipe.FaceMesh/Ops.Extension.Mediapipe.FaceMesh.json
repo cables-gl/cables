@@ -61,8 +61,7 @@
                 "type": 2,
                 "name": "result geom"
             }
-        ],
-        "name": "Ops.Libs.Mediapipe.FaceMesh"
+        ]
     },
     "summary": "Generate an animated geometry from MpFaceTracking Point Coordinates",
     "issues": "",

@@ -48,8 +48,7 @@
                 "type": "1",
                 "name": "Received"
             }
-        ],
-        "name": "Ops.Devices.OSC.OscNumber"
+        ]
     },
     "summary": "Outputs a single number from a user defined OSC address",
     "issues": "",

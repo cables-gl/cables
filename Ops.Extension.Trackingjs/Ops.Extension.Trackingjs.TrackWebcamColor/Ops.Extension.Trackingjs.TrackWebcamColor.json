@@ -78,8 +78,7 @@
                 "type": 3,
                 "name": "Sizes"
             }
-        ],
-        "name": "Ops.User.pandur.TrackingColor"
+        ]
     },
     "summary": "Track a position of a specific color in the current webcam stream",
     "issues": "",
