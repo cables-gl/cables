@@ -1,6 +1,5 @@
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
-import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
 import { CGState } from "../cg/cg_state";
@@ -179,6 +178,15 @@ const Context = function (_patch)
             {
                 if (!this.patch.config.canvas.hasOwnProperty("powerPreference")) this.patch.config.canvas.powerPreference = "high-performance";
             }
+
+            this.enableExtension("OES_standard_derivatives");
+            // this.enableExtension("GL_OES_standard_derivatives");
+            const instancingExt = this.enableExtension("ANGLE_instanced_arrays") || this.gl;
+            if (instancingExt.vertexAttribDivisorANGLE)
+            {
+                this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
+                this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
+            }
         }
 
         if (!this.gl)
@@ -194,7 +202,6 @@ const Context = function (_patch)
             this.glRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
             if (this.glRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
-
 
 
         this.canvas.addEventListener("webglcontextlost", (event) =>

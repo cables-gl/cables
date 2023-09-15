@@ -94,10 +94,11 @@
         ],
         "name": "Ops.User.pandur.Layer"
     },
-
     "relatedops": null,
     "exampleProjectId": "VH4Oxj",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Render Multiple Layers in a specific order",
+    "collections": null
 }

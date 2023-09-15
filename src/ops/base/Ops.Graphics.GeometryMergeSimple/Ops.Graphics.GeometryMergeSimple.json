@@ -1,0 +1,38 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry Result"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryMergeSimple"
+    },
+    "authorName": "pandur",
+    "id": "e9a6c398-b6f2-4c53-a7ea-47aa835c6938",
+    "created": 1665668540752,
+    "summary": "merge two geometries into one",
+    "relatedops": null,
+    "exampleProjectId": "4gsNve",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Geometry.GeometryMergeSimple renamed to Ops.Graphics.GeometryMergeSimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694677414136
+        }
+    ]
+}

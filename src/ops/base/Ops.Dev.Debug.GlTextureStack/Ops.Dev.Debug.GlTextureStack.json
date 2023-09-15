@@ -1,0 +1,34 @@
+{
+    "id": "79d42e8a-139a-4150-9929-7e595877f8e0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1687530030588
+        },
+        {
+            "message": "Ops.Patch.PgL_DEz.GlTextureStack renamed to Ops.Debug.GlTextureStack",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687531644869
+        },
+        {
+            "message": "Ops.Debug.GlTextureStack renamed to Ops.Dev.Debug.GlTextureStack",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694686524385
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Patch.PgL_DEz.GlTextureStack"
+    },
+    "authorName": "pandur",
+    "created": 1687530078186
+}

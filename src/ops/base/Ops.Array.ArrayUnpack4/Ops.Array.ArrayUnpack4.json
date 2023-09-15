@@ -1,6 +1,5 @@
 {
     "summary": "Splits a xyzw array into 4 individual arrays",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -61,7 +60,6 @@
         "name": "Ops.Array.ArrayUnpack4"
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Array.ArrayPack3",
         "Ops.Gl.TextureFromColorArray"
@@ -78,5 +76,6 @@
             "date": 1565014841078
         }
     ],
-    "exampleProjectId": "uZkd3x"
+    "exampleProjectId": "",
+    "collections": null
 }

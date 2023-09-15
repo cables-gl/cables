@@ -1,0 +1,64 @@
+{
+    "authorName": "pandur",
+    "id": "448f0905-dd4c-4909-9ddb-352c7f4467de",
+    "created": 1633094413450,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.ObjectKeyObject renamed to Ops.User.pandur.ObjectSetObject",
+            "author": "pandur",
+            "date": 1587020854846
+        },
+        {
+            "message": "Ops.User.pandur.ObjectSetObject renamed to Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1623846340859
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1633094413451
+        },
+        {
+            "message": "Ops.User.pandur.ObjectSetObjectSimple renamed to Ops.Json.ObjectSetObjectSimple",
+            "author": "pandur",
+            "date": 1633094962089
+        },
+        {
+            "message": "Ops.Json.ObjectSetObjectSimple renamed to Ops.Deprecated.Json.ObjectSetObjectSimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694685381892
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 2,
+                "name": "Object Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectSetObjectSimple"
+    },
+    "summary": "set object as value in an object",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "7X58nR"
+}
