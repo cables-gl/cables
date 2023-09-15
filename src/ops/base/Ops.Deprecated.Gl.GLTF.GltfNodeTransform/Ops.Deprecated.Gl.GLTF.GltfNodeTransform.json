@@ -31,7 +31,6 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfNodeTransform"
+        ]
     }
 }

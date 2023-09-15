@@ -23,8 +23,7 @@
                 "type": "0",
                 "name": "Tone Time"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Type.ToneTime"
+        ]
     },
     "docs": {
         "ports": [

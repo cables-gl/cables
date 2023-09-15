@@ -72,8 +72,7 @@
                 "name": "Language",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.BrowserCheck"
+        ]
     },
     "authorName": "pandur",
     "id": "6e2ff98b-1e85-4b89-b125-fb8da727ba0c",

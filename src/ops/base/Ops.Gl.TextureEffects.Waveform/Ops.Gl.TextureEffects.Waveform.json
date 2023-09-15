@@ -101,8 +101,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Waveform"
+        ]
     },
     "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
     "docs": {

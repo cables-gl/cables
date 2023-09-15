@@ -14,8 +14,7 @@
                 "type": "5",
                 "name": "String out"
             }
-        ],
-        "name": "Ops.Templates.PortsStringExample"
+        ]
     },
     "summary": "Is a template for creating String ports",
     "docs": {

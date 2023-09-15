@@ -33,8 +33,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.RingBuffer"
+        ]
     },
     "summary": "Array of fixed size, index is automatically incremented and restarts after reaching the end",
     "docs": {

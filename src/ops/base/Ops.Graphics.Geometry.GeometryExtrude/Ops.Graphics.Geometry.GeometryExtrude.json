@@ -62,8 +62,7 @@
                 "name": "Result Geometry",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometryExtrude"
+        ]
     },
     "authorName": "pandur",
     "created": 1647367985009,

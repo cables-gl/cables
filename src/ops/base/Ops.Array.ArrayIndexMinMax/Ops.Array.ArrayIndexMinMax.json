@@ -42,12 +42,10 @@
                 "name": "Index Min",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.ArrayIndexMinMax"
+        ]
     },
     "summary": "find lowest/highest numbers in an array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

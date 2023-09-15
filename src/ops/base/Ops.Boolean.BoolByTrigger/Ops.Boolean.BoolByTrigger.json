@@ -23,8 +23,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Boolean.TriggerBoolean"
+        ]
     },
     "changelog": [
         {

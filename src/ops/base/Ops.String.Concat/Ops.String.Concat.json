@@ -23,8 +23,7 @@
                 "name": "result",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.String.Concat"
+        ]
     },
     "summary": "Joins two strings together",
     "updated": 1520078051187,

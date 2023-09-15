@@ -56,8 +56,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.PixelDisplacement_v3"
+        ]
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
     "youtubeid": "cc5Vlmvlq6A",

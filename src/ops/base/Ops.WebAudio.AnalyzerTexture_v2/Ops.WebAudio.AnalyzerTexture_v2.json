@@ -41,8 +41,7 @@
                 "name": "Position",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.AnalyzerTexture_v2"
+        ]
     },
     "summary": "Creates a spectrogram texture from an audio FFT array",
     "created": 1607427491104,
@@ -64,7 +63,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

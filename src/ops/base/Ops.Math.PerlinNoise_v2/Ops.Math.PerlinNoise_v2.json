@@ -48,12 +48,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.PerlinNoise_v2"
+        ]
     },
     "summary": "outputs a perlin noise value like random ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

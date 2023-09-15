@@ -47,7 +47,6 @@
                 "type": "0",
                 "name": "value"
             }
-        ],
-        "name": "Ops.Polyshapes.PolyValue"
+        ]
     }
 }

@@ -30,8 +30,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.CameraPosition"
+        ]
     },
     "summary": "get the current position of viewmatrix/camera eye",
     "changelog": [

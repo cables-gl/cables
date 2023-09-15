@@ -58,13 +58,11 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.User.pandur.FillArrayRandomDuplicatesV2"
+        ]
     },
     "summary": "Fill an array with random duplicates",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

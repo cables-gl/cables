@@ -27,7 +27,6 @@
                 "type": 5,
                 "name": "Audiocontext State"
             }
-        ],
-        "name": "Ops.Dev.WebAudioContextStart"
+        ]
     }
 }

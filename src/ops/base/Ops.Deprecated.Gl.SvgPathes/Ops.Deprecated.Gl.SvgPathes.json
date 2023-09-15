@@ -27,8 +27,7 @@
                 "type": "3",
                 "name": "Points"
             }
-        ],
-        "name": "Ops.Gl.SvgPathes"
+        ]
     },
     "summary": "extract pathes from a svg json",
     "docs": {

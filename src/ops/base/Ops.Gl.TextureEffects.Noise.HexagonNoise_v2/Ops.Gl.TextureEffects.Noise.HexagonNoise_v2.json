@@ -111,12 +111,10 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Dev.HexagonNoiseV2"
+        ]
     },
     "summary": "Creates a hexagonal noise texture ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

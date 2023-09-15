@@ -11,8 +11,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.VertexNumberMaterial"
+        ]
     },
     "authorName": "pandur",
     "id": "732ff263-1aeb-4f39-969f-c781d7776cc8",

@@ -40,12 +40,10 @@
                 "type": 1,
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Gl.SaveScreenShot_v2"
+        ]
     },
     "summary": "Download the current screen content as png file",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

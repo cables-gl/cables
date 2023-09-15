@@ -31,8 +31,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Atan2"
+        ]
     },
     "summary": "Calculates the angle from a specified point to the coordinate origin.",
     "docs": {

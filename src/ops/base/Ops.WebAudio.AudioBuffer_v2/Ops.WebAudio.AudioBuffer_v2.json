@@ -57,12 +57,10 @@
                 "name": "isLoading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.WebAudio.AudioBuffer_v2"
+        ]
     },
     "summary": "Holds an audio file / sample in a buffer ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

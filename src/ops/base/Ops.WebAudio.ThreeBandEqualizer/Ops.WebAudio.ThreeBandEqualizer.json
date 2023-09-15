@@ -115,12 +115,10 @@
                 "name": "Audio Out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.ThreeBandEqualizer"
+        ]
     },
     "summary": "3 filters in one - an eq to quickly process an audio signal",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

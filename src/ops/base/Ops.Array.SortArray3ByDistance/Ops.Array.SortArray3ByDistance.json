@@ -18,8 +18,7 @@
                 "type": 3,
                 "name": "Result Index"
             }
-        ],
-        "name": "Ops.Array.SortArray3ByDistance"
+        ]
     },
     "summary": "sort an array3, by the distance of each point to the previous point",
     "docs": {

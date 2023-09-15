@@ -55,12 +55,10 @@
                 "type": 3,
                 "name": "Array Out"
             }
-        ],
-        "name": "Ops.Array.SmoothArray"
+        ]
     },
     "summary": "Smooths out changes in values of an array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

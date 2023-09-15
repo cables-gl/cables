@@ -19,8 +19,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.User.pandur.Ops.Gl.Geometry.FlipVertices"
+        ]
     },
     "summary": "Reverses the order of vertices in a geometry, back facing triangles become front facing ones",
     "docs": {

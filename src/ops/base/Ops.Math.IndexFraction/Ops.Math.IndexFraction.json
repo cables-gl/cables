@@ -28,12 +28,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.IndexFraction"
+        ]
     },
     "summary": "return fraction of value by index",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

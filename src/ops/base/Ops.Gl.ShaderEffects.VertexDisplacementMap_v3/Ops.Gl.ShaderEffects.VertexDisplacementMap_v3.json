@@ -81,8 +81,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v3"
+        ]
     },
     "changelog": [
         {

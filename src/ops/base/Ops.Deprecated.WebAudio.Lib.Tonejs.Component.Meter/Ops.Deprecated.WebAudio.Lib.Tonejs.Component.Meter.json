@@ -38,8 +38,7 @@
                 "name": "Decibels",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Meter"
+        ]
     },
     "updated": 1521132942749,
     "authorName": "tim",

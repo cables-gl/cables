@@ -78,8 +78,7 @@
                 "name": "Index 9 boolean",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Boolean.RouteBoolean"
+        ]
     },
     "summary": "Route a boolean to an output port",
     "issues": "",

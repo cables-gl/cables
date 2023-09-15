@@ -166,8 +166,7 @@
                 "name": "shader",
                 "objType": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.PointMaterial_v4"
+        ]
     },
     "changelog": [
         {

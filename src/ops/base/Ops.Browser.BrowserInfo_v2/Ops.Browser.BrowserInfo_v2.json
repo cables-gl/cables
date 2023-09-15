@@ -90,12 +90,10 @@
                 "type": "5",
                 "name": "Language"
             }
-        ],
-        "name": "Ops.Html.BrowserCheck_v2"
+        ]
     },
     "summary": "Reports the browser being used",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

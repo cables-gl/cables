@@ -31,8 +31,7 @@
                 "name": "Height Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.PowerOfTwoSize"
+        ]
     },
     "summary": "Return the next values as power of two",
     "youtubeid": "",

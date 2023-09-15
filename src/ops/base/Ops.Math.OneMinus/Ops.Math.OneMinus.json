@@ -17,8 +17,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.OneMinus"
+        ]
     },
     "summary": "subtract a number from one",
     "exampleProjectId": "8-XQ5d"

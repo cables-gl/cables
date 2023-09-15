@@ -78,8 +78,7 @@
                 "type": 5,
                 "name": "Final generated string"
             }
-        ],
-        "name": "Ops.Systems.Lsystem_v2"
+        ]
     },
     "summary": "Lsystem generator",
     "issues": "",

@@ -28,8 +28,7 @@
                 "type": 1,
                 "name": "else"
             }
-        ],
-        "name": "Ops.Trigger.IfEqualsThen"
+        ]
     },
     "summary": "triggers if value 1+2 are equal",
     "docs": {

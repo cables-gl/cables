@@ -71,14 +71,12 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.LensScratches"
+        ]
     },
     "authorName": "andro",
     "created": 1575998270324,
     "summary": "Creates a procedural texture simulating scratches on a lens",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

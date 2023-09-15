@@ -60,12 +60,10 @@
                 "type": "3",
                 "name": "MaxMin Points"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometryBoundingBox"
+        ]
     },
     "summary": "Calculate a bounding box from a geometry",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

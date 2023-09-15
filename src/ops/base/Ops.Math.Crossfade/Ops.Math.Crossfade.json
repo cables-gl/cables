@@ -51,12 +51,10 @@
                 "name": "B",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Crossfade"
+        ]
     },
     "summary": "crossfade between 2 values",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

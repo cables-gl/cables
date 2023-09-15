@@ -121,8 +121,7 @@
                 "type": "1",
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Admin.SpotLight_v2"
+        ]
     },
     "changelog": [
         {
@@ -138,7 +137,6 @@
     ],
     "summary": "spot light for phong shading",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v4",
         "Ops.Gl.Phong.AmbientLight_v4",

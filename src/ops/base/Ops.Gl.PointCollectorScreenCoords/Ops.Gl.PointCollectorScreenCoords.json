@@ -14,8 +14,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.PointCollectorScreenCoords"
+        ]
     },
     "summary": "collect screen pixel coordinates into an array",
     "youtubeid": "",

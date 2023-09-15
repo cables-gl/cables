@@ -72,8 +72,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.Slider_v2"
+        ]
     },
     "summary": "sidebar slider element (range)",
     "youtubeid": "cpRVswVdvI0",

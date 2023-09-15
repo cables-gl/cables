@@ -97,8 +97,7 @@
                 "name": "Num",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.MeshInstancer_v4"
+        ]
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",

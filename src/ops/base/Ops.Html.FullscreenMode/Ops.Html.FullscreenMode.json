@@ -21,8 +21,7 @@
                 "name": "Is Fullscreen",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.FullscreenMode"
+        ]
     },
     "summary": "switch webgl to fullscreen",
     "authorName": "pandur",

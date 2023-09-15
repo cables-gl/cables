@@ -91,8 +91,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.CircleTexture_v3"
+        ]
     },
     "changelog": [
         {
@@ -126,7 +125,6 @@
     "created": 1606497805971,
     "summary": "Draw 2d circle into texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

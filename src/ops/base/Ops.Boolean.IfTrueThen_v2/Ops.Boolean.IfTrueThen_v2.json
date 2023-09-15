@@ -39,8 +39,7 @@
                 "type": 1,
                 "name": "else"
             }
-        ],
-        "name": "Ops.Boolean.IfTrueThen_v2"
+        ]
     },
     "exampleProjectId": "F9tjX8"
 }

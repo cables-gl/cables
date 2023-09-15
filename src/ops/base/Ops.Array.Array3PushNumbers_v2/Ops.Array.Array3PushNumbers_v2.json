@@ -41,8 +41,7 @@
                 "type": 3,
                 "name": "Result Array"
             }
-        ],
-        "name": "Ops.User.pandur.Array3PushNumbers_v2"
+        ]
     },
     "summary": "Push three numbers to the end of an array (was ArrayPushValue3x)",
     "changelog": [
@@ -63,7 +62,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

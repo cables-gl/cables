@@ -49,8 +49,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArraySetNumber3"
+        ]
     },
     "summary": "set number values in an array3 ",
     "issues": "",

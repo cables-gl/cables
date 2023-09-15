@@ -27,12 +27,10 @@
                 "name": "Acceleration Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Device.Mobile.ShakeGesture"
+        ]
     },
     "summary": "Reads the accelerometer data from a mobile device",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

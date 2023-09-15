@@ -50,13 +50,11 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.User.pandur.GltfVertexAnim"
+        ]
     },
     "summary": "play gltf vertex anim directly with its own timing",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "",

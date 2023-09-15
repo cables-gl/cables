@@ -19,8 +19,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Round"
+        ]
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",

@@ -18,8 +18,7 @@
                 "name": "Out Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.DelayedValueSimple"
+        ]
     },
     "summary": "delay the value data flow by x seconds",
     "authorName": "pandur",

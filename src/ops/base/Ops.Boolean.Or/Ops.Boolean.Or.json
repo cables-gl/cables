@@ -59,8 +59,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Boolean.Or"
+        ]
     },
     "docs": {
         "ports": [

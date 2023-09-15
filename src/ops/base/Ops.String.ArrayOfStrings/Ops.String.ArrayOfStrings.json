@@ -34,15 +34,13 @@
                 "type": 3,
                 "name": "Array"
             }
-        ],
-        "name": "Ops.User.pandur.ArrayOfStrings"
+        ]
     },
     "authorName": "pandur",
     "created": 1647500932771,
     "summary": "Create an array of strings and optionally attach index-number",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "haeXx3",

@@ -41,12 +41,10 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.LumaKey_v2"
+        ]
     },
     "summary": "Remove darkest or brightest parts of the image",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

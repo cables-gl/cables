@@ -34,8 +34,7 @@
                 "type": "2",
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Json3d.Mesh"
+        ]
     },
     "summary": "internal op of json3dscene - render a mesh",
     "docs": {

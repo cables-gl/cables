@@ -101,12 +101,10 @@
                 "name": "Num",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Dev.Gl.Meshes.MeshInstancerFromTexture"
+        ]
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.RandomArrays",
         "Ops.Array.RandomNumbersArray3",

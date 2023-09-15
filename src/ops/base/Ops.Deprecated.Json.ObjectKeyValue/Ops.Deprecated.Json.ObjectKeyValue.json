@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Json.ObjectKeyValue"
+        ]
     },
     "summary": "set value for key in an object",
     "docs": {

@@ -13,8 +13,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.Boolean"
+        ]
     },
     "summary": "Stores a boolean value",
     "docs": {
@@ -41,7 +40,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "JlVWlg"

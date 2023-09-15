@@ -98,8 +98,7 @@
                 "type": "2",
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.PointMaterial"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -170,7 +169,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Meshes.PointCloudFromArray"
     ],

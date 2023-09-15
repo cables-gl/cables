@@ -26,8 +26,7 @@
                 "type": 3,
                 "name": "Array Out"
             }
-        ],
-        "name": "Ops.Array.GateArray_v2"
+        ]
     },
     "summary": "Only allows an array through if pass through is true",
     "issues": "",

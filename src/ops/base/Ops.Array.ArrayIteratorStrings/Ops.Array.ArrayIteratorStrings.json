@@ -24,8 +24,7 @@
                 "type": 5,
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Array.ArrayIteratorStrings"
+        ]
     },
     "summary": "Loop over every element of an array",
     "docs": {
@@ -56,7 +55,6 @@
     "id": "0f8ee026-e094-484d-8403-547c92293be9",
     "created": 1620740481047,
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

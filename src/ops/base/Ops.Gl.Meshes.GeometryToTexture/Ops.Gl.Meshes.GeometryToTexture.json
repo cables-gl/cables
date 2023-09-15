@@ -51,8 +51,7 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Meshes.GeometryToTexture"
+        ]
     },
     "summary": "Convert vertices of a geometry to a data texture",
     "docs": {
@@ -84,7 +83,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "PrkdnENo8wQ"

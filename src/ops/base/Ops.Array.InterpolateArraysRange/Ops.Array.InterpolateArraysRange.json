@@ -46,8 +46,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.InterpolateArraysRange"
+        ]
     },
     "summary": "interpolate between two arrays, only a few numbers at the same time",
     "collections": [

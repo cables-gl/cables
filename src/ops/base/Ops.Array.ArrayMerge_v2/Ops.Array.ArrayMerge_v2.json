@@ -30,12 +30,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayMerge_v2"
+        ]
     },
     "summary": "Merge two arrays - Array 2 is placed behind array 1",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

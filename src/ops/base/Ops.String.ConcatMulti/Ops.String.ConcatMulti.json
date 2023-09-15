@@ -49,12 +49,10 @@
                 "type": 5,
                 "name": "concat string"
             }
-        ],
-        "name": "Ops.String.ConcatMulti"
+        ]
     },
     "summary": "Joins multiple strings together",
     "issues": "",
-
     "relatedops": [
         "Ops.String.Concat_v2"
     ],

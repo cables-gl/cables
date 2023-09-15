@@ -35,8 +35,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Trigger.TriggerOnChangeObject"
+        ]
     },
     "summary": "triggers when array has changed",
     "youtubeid": "",

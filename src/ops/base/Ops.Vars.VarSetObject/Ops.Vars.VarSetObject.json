@@ -10,8 +10,7 @@
                 "type": "2",
                 "name": "Object"
             }
-        ],
-        "name": "Ops.Vars.VarSetObject"
+        ]
     },
     "changelog": [
         {
@@ -21,7 +20,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "sUR6b0zvuSY"

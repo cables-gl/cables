@@ -47,13 +47,11 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Exp.Gl.ShaderEffects.Fur"
+        ]
     },
     "summary": "experimental fur shader ",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

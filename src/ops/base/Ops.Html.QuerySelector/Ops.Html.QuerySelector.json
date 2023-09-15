@@ -15,8 +15,7 @@
                 "type": "2",
                 "name": "Element"
             }
-        ],
-        "name": "Ops.Html.QuerySelector"
+        ]
     },
     "summary": "Selects an element in the DOM",
     "youtubeid": "",

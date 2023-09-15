@@ -76,8 +76,7 @@
                 "name": "textureDepth",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Render2Texture_v2"
+        ]
     },
     "authorName": "pandur",
     "id": "c4b5893e-bdfe-4f2d-a274-8a2b486492eb",

@@ -82,7 +82,6 @@
                 "name": "Score",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Exp.ClmTrackr"
+        ]
     }
 }

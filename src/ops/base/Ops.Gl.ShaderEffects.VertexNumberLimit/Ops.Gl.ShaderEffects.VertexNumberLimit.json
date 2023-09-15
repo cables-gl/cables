@@ -20,8 +20,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.VertexNumberLimit"
+        ]
     },
     "summary": "only draw the first X vertices of a mesh",
     "docs": {

@@ -28,8 +28,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Clamp"
+        ]
     },
     "summary": "Makes sure a value is within range  cuts off the rest",
     "docs": {

@@ -120,8 +120,7 @@
                 "name": "shader",
                 "objType": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.BasicMaterial_v3"
+        ]
     },
     "summary": "A material without shading",
     "issues": "",

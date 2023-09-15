@@ -116,7 +116,6 @@
                 "name": "Total Lines",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.ConcatMultiArray"
+        ]
     }
 }

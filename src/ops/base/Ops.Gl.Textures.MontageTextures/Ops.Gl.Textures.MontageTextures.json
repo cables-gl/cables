@@ -185,8 +185,7 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Patch.PEhGCfB.MontageTextures"
+        ]
     },
     "summary": "combine multiple textures into one by copying colorchannels",
     "issues": "",

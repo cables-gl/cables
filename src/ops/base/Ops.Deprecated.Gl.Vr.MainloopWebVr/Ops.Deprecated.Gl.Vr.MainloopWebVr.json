@@ -99,8 +99,7 @@
                 "name": "Started VR",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Vr.MainloopWebVr"
+        ]
     },
     "summary": "experimental webvr rendering / currently not being developed due to XR update",
     "docs": {
@@ -191,7 +190,6 @@
         "webvr-polyfill.js"
     ],
     "issues": "",
-
     "relatedops": [
         "Ops.Boolean.IfTrueThen",
         "Ops.Devices.Mobile.ScreenOrientation"

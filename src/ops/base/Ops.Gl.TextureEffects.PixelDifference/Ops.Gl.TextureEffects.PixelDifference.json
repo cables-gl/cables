@@ -57,8 +57,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.PixelDifference"
+        ]
     },
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
@@ -123,7 +122,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "tGDDUyFIQPU"

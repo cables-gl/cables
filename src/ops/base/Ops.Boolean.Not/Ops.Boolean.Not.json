@@ -16,8 +16,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Boolean.Not"
+        ]
     },
     "summary": "result is false if input is true and vice versa (negate/toggle/switch/!=)",
     "docs": {

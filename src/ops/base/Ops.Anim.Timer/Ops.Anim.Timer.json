@@ -23,8 +23,7 @@
                 "name": "Time",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.Timer"
+        ]
     },
     "updated": 1521123006659,
     "author": "55d744634cdc152216eb9aad",

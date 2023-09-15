@@ -74,8 +74,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.MeshPixelNoise_v2"
+        ]
     },
     "changelog": [
         {
@@ -94,7 +93,6 @@
     ],
     "summary": "3d space noise for mesh materials",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

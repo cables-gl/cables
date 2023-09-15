@@ -172,8 +172,7 @@
                 "type": 1,
                 "name": "trigger 31"
             }
-        ],
-        "name": "Ops.Trigger.TimedSequence"
+        ]
     },
     "docs": {
         "ports": []

@@ -46,8 +46,7 @@
                 "type": 2,
                 "name": "Test"
             }
-        ],
-        "name": "Ops.Dev.TestOp"
+        ]
     },
     "libs": [
         "cannon.js",

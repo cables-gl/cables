@@ -22,8 +22,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectTrigger"
+        ]
     },
     "summary": "set output object when triggered",
     "docs": {

@@ -34,8 +34,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3RandomSelection"
+        ]
     },
     "summary": "extract definable amount of random xyz points from an array",
     "issues": "",

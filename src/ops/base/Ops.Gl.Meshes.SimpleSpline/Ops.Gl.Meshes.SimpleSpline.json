@@ -43,8 +43,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Meshes.SimpleSpline"
+        ]
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",

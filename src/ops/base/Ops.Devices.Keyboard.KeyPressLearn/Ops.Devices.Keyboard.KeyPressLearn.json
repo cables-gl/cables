@@ -49,8 +49,7 @@
                 "type": 5,
                 "name": "Key"
             }
-        ],
-        "name": "Ops.Devices.Keyboard.KeyPressLearn"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

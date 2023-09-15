@@ -31,12 +31,10 @@
                 "type": 5,
                 "name": "Out Value"
             }
-        ],
-        "name": "Ops.User.pandur.DelayStringSimple"
+        ]
     },
     "summary": "delay the output of a string by n seconds",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

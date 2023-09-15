@@ -43,8 +43,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.MapRange"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -79,7 +78,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "5VmIC1xA4EU"

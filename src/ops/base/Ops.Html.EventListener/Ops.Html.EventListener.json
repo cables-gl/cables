@@ -91,13 +91,11 @@
                 "name": "Event Name",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.EventListener"
+        ]
     },
     "summary": "Listen to events of an element",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

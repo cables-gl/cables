@@ -59,8 +59,7 @@
                 "type": 1,
                 "name": "Finished Trigger"
             }
-        ],
-        "name": "Ops.Anim.BoolAnim"
+        ]
     },
     "summary": "animate between two values based on a boolean value",
     "authorName": "pandur",

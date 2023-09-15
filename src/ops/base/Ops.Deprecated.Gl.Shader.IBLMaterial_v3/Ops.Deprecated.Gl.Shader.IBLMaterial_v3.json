@@ -183,8 +183,7 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.IBLMaterial_v3"
+        ]
     },
     "summary": " image based lighting material using cubemaps",
     "issues": "",

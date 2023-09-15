@@ -65,8 +65,7 @@
                 "type": 5,
                 "name": "Orientation Type"
             }
-        ],
-        "name": "Ops.Html.WindowInfo"
+        ]
     },
     "exampleProjectId": "DyHxSP",
     "caniusequery": "ScreenOrientation",

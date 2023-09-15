@@ -1,95 +1,94 @@
 {
-  "id": "a017cc92-2354-45df-820f-ed6aad3bbb0e",
-  "changelog": [
-    {
-      "message": "created op",
-      "author": "pandur",
-      "date": 1626170532235
-    },
-    {
-      "message": "Ops.User.pandur.TestGlArray renamed to Ops.User.pandur.GlArrayMath",
-      "author": "pandur",
-      "date": 1626173698486
-    },
-    {
-      "message": "Ops.User.pandur.GlArrayMath renamed to Ops.Dev.GlArrayMath",
-      "author": "pandur",
-      "date": 1626175390946
-    },
-    {
-      "message": " added core lib: cgl_texturemath",
-      "author": "pandur",
-      "date": 1626179431070
-    },
-    {
-      "message": "cloned op from Ops.Dev.GlArrayMath",
-      "author": "pandur",
-      "date": 1626189206291
-    },
-    {
-      "message": "Ops.User.pandur.GlArrayModulo renamed to Ops.Dev.GlArrayModulo",
-      "author": "pandur",
-      "date": 1626189828086
-    }
-  ],
-  "authorName": "pandur",
-  "created": 1626189206291,
-  "layout": {
-    "portsIn": [
-      {
-        "type": 1,
-        "name": "Render"
-      },
-      {
-        "type": 2,
-        "name": "GlArray",
-        "objType": "texture"
-      },
-      {
-        "type": 0,
-        "name": "X",
-        "subType": "boolean"
-      },
-      {
-        "type": 0,
-        "name": "Modulo X",
-        "subType": "number"
-      },
-      {
-        "type": 0,
-        "name": "Y",
-        "subType": "boolean"
-      },
-      {
-        "type": 0,
-        "name": "Modulo Y",
-        "subType": "number"
-      },
-      {
-        "type": 0,
-        "name": "Z",
-        "subType": "boolean"
-      },
-      {
-        "type": 0,
-        "name": "Modulo Z",
-        "subType": "number"
-      }
+    "id": "a017cc92-2354-45df-820f-ed6aad3bbb0e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1626170532235
+        },
+        {
+            "message": "Ops.User.pandur.TestGlArray renamed to Ops.User.pandur.GlArrayMath",
+            "author": "pandur",
+            "date": 1626173698486
+        },
+        {
+            "message": "Ops.User.pandur.GlArrayMath renamed to Ops.Dev.GlArrayMath",
+            "author": "pandur",
+            "date": 1626175390946
+        },
+        {
+            "message": " added core lib: cgl_texturemath",
+            "author": "pandur",
+            "date": 1626179431070
+        },
+        {
+            "message": "cloned op from Ops.Dev.GlArrayMath",
+            "author": "pandur",
+            "date": 1626189206291
+        },
+        {
+            "message": "Ops.User.pandur.GlArrayModulo renamed to Ops.Dev.GlArrayModulo",
+            "author": "pandur",
+            "date": 1626189828086
+        }
     ],
-    "portsOut": [
-      {
-        "type": 1,
-        "name": "trigger"
-      },
-      {
-        "type": 2,
-        "name": "Result",
-        "objType": "texture"
-      }
-    ],
-    "name": "Ops.User.pandur.GlArrayModulo"
-  },
-  "coreLibs": [
-    "cgl_texturemath"
-  ]
+    "authorName": "pandur",
+    "created": 1626189206291,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "GlArray",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Modulo X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Modulo Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Modulo Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_texturemath"
+    ]
 }

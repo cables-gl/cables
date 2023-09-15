@@ -18,8 +18,7 @@
                 "type": 3,
                 "name": "matrix"
             }
-        ],
-        "name": "Ops.Gl.Matrix.GetModelMatrix"
+        ]
     },
     "summary": "get current modelmatrix",
     "docs": {

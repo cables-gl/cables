@@ -51,12 +51,10 @@
                 "type": "2",
                 "name": "MIDI Event Out"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiCCOut"
+        ]
     },
     "summary": "send MIDI CC data to a midi output",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiNRPNOut",
         "Ops.Devices.Midi.MidiOutputDevice",

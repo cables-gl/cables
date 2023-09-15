@@ -28,13 +28,11 @@
                 "type": 5,
                 "name": "result"
             }
-        ],
-        "name": "Ops.String.Concat_v2"
+        ]
     },
     "summary": "Joins two strings together",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

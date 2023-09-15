@@ -66,12 +66,10 @@
                 "type": "5",
                 "name": "Index 9 string"
             }
-        ],
-        "name": "Ops.String.RouteString"
+        ]
     },
     "summary": "Route a string to an output port",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

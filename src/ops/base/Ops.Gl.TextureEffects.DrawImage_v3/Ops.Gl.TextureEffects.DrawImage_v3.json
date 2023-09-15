@@ -145,8 +145,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.DrawImage_v3"
+        ]
     },
     "summary": "Draws an image into a composition",
     "issues": "",

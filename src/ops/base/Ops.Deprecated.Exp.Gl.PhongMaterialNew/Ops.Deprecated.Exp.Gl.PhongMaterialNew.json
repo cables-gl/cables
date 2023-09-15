@@ -86,7 +86,6 @@
                 "type": "2",
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Exp.Gl.PhongMaterialNew"
+        ]
     }
 }

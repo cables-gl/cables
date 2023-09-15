@@ -28,8 +28,7 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Json.ObjectGetStringByPath"
+        ]
     },
     "summary": "Finds a string at a position in an object defined by path",
     "issues": "",

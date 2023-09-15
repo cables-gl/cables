@@ -32,8 +32,7 @@
                 "type": 2,
                 "name": "HTML Element"
             }
-        ],
-        "name": "Ops.Html.CSSPropertyString"
+        ]
     },
     "summary": "Modify a css property of an element with a string",
     "issues": "",

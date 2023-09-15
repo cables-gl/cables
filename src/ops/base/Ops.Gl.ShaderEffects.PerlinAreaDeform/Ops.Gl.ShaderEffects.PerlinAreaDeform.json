@@ -81,8 +81,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform"
+        ]
     },
     "summary": "perlin noise vertex wobble deformer",
     "author": "55d744634cdc152216eb9aad",

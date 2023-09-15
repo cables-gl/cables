@@ -27,8 +27,7 @@
                 "type": "0",
                 "name": "percent"
             }
-        ],
-        "name": "Ops.Audio.BpmTrigger"
+        ]
     },
     "id": "de2bedd8-af43-4f12-88eb-09d4f7e245b4"
 }

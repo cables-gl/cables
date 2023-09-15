@@ -61,8 +61,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ColorMapRange"
+        ]
     },
     "summary": "Map the range of color number values to another",
     "author": "59db805b08bab26e1ab7a0f2",

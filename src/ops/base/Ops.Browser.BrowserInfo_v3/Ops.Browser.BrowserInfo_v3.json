@@ -132,8 +132,7 @@
                 "type": 5,
                 "name": "User Agent"
             }
-        ],
-        "name": "Ops.Browser.BrowserInfo_v3"
+        ]
     },
     "libs": [
         "platform.js"

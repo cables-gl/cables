@@ -23,8 +23,7 @@
                 "name": "Patch Field Visible",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Cables.UIMode"
+        ]
     },
     "docs": {
         "ports": [

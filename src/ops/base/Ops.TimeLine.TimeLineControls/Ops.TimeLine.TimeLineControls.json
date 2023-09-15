@@ -16,7 +16,6 @@
                 "name": "time",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineControls"
+        ]
     }
 }

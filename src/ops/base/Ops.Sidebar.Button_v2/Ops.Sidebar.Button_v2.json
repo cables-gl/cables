@@ -32,12 +32,10 @@
                 "type": 1,
                 "name": "Pressed Trigger"
             }
-        ],
-        "name": "Ops.Sidebar.Button_v2"
+        ]
     },
     "summary": "sidebar push button/trigger element",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "cpRVswVdvI0"

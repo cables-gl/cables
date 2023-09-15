@@ -21,13 +21,11 @@
                 "type": 5,
                 "name": "Path"
             }
-        ],
-        "name": "Ops.Cables.AssetPathURL"
+        ]
     },
     "summary": "outputs the path to the assets",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

@@ -25,13 +25,11 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.ModuloVertexPosition"
+        ]
     },
     "summary": "vertex shader modulo operation on vertex position ",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

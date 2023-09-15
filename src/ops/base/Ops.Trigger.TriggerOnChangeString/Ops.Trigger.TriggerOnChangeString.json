@@ -25,13 +25,11 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Trigger.TriggerOnChangeString"
+        ]
     },
     "summary": "triggers when string has changed",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

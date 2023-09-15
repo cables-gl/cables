@@ -33,12 +33,10 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Math"
+        ]
     },
     "summary": "Allows different mathematical operations to be applied to two numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

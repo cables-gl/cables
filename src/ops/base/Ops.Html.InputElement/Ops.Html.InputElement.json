@@ -99,8 +99,7 @@
                 "name": "Hover",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Html.InputElement"
+        ]
     },
     "collections": null,
     "relatedops": null,

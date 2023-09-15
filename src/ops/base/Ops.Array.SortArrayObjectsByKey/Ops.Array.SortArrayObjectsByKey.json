@@ -23,8 +23,7 @@
                 "type": 3,
                 "name": "Sorted array"
             }
-        ],
-        "name": "Ops.Array.SortArrayObjectsByKey"
+        ]
     },
     "summary": "sort an array of objects by value of object keys",
     "issues": "",

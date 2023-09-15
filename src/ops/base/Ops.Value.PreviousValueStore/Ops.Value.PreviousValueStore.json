@@ -21,15 +21,13 @@
                 "name": "Previous Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.PreviousValueStore"
+        ]
     },
     "summary": "remember/store last set number ",
     "docs": {
         "ports": []
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "XhZWfo"

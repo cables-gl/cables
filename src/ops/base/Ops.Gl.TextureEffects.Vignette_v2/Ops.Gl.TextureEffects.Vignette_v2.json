@@ -66,8 +66,7 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Vignette_v2"
+        ]
     },
     "summary": "Simulating an old camera effect of fading away the edges of the image",
     "docs": {

@@ -47,8 +47,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Stripes"
+        ]
     },
     "updated": 1541534453653,
     "author": "59d794f763898eb73bd67a7e",

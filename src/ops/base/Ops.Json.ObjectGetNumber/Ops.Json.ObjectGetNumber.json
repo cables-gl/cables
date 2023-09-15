@@ -21,8 +21,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json.ObjectGetValue"
+        ]
     },
     "summary": "Get a number from an object",
     "youtubeid": "",
@@ -44,7 +43,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

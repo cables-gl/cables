@@ -44,8 +44,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Dev.TriangleNoiseV2"
+        ]
     },
     "summary": "noise made from triangles",
     "docs": {

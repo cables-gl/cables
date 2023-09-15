@@ -42,8 +42,7 @@
                 "name": "Value",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Sidebar.Toggle_v3"
+        ]
     },
     "summary": "sidebar boolean toggle/switch element",
     "youtubeid": "cpRVswVdvI0",

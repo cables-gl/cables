@@ -21,8 +21,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Average"
+        ]
     },
     "summary": "average of last two values",
     "docs": {

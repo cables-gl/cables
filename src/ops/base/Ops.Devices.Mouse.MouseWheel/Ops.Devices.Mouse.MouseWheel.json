@@ -68,8 +68,7 @@
                 "name": "delta",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Mouse.MouseWheel"
+        ]
     },
     "authorName": "pandur",
     "id": "40331e99-d2c6-4a0a-b5dd-385045aecd18",

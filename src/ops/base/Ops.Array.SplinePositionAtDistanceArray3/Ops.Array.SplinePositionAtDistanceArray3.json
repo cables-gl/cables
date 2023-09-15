@@ -48,8 +48,7 @@
                 "name": "Spline Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.SplinePositionAtDistanceArray3"
+        ]
     },
     "summary": "get position in array3/spline at distance from start",
     "docs": {

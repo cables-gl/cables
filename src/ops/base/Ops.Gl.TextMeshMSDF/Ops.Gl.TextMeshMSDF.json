@@ -132,8 +132,7 @@
                 "name": "Num Chars",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextMeshMSDF"
+        ]
     },
     "changelog": [
         {

@@ -23,8 +23,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Stereoscopic.SideBySideMaterial"
+        ]
     },
     "summary": "rendering textures next to each other for stereoscopic displays",
     "docs": {

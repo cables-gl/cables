@@ -40,12 +40,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayMerge"
+        ]
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "P7siGA"
 }

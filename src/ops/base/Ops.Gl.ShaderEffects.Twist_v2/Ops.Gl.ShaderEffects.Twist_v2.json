@@ -29,8 +29,7 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.Twist_v2"
+        ]
     },
     "summary": "twist a mesh around an axis",
     "changelog": [

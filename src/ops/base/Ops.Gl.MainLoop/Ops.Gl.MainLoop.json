@@ -64,8 +64,7 @@
                 "name": "height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.MainLoop"
+        ]
     },
     "credits": [
         {

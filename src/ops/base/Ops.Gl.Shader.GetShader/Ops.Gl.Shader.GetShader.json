@@ -37,8 +37,7 @@
                 "type": 2,
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.GetShader"
+        ]
     },
     "exampleProjectId": "BweOVl"
 }

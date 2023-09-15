@@ -26,8 +26,7 @@
                 "name": "Array lengths",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3VectorLength"
+        ]
     },
     "summary": "Returns the length of a vector from an array 3 ",
     "issues": "",

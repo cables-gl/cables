@@ -87,8 +87,7 @@
                 "type": "0",
                 "name": "Ticks"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Core.Transport.Transport"
+        ]
     },
     "docs": {
         "ports": [

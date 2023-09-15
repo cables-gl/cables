@@ -27,8 +27,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.InterpolateNumbersArray"
+        ]
     },
     "summary": "interpolate between all values of an array",
     "issues": "",

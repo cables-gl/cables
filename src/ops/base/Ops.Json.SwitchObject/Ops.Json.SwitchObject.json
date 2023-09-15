@@ -56,8 +56,7 @@
                 "type": 2,
                 "name": "object out"
             }
-        ],
-        "name": "Ops.Json.SwitchObject"
+        ]
     },
     "changelog": [
         {

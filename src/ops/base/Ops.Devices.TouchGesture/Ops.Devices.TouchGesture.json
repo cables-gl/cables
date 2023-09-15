@@ -60,8 +60,7 @@
                 "type": 2,
                 "name": "Event"
             }
-        ],
-        "name": "Ops.Devices.TouchGesture"
+        ]
     },
     "summary": "detect touch gestures like swipe and pan",
     "docs": {

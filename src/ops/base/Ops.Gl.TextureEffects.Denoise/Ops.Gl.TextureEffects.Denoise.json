@@ -16,8 +16,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Denoise"
+        ]
     },
     "updated": 1542701451115,
     "authorName": "pandur",
@@ -25,7 +24,6 @@
     "created": 1542701445023,
     "summary": "Denoise texture effect - used to smooth out noisy images",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

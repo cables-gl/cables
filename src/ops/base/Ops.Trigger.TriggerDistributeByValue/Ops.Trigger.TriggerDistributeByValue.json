@@ -110,8 +110,7 @@
                 "type": 1,
                 "name": "trigger 19"
             }
-        ],
-        "name": "Ops.Trigger.TriggerDistributeByValue"
+        ]
     },
     "summary": "triggers evenly distributed by value",
     "docs": {
@@ -128,7 +127,6 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "FsZFVB"

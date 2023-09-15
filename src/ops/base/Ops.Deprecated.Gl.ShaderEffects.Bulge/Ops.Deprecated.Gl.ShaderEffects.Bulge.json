@@ -34,8 +34,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.Bulge"
+        ]
     },
     "summary": "displace vertices by the value in a texture",
     "youtubeid": "",

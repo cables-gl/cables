@@ -21,12 +21,10 @@
                 "type": "5",
                 "name": "Id"
             }
-        ],
-        "name": "Ops.String.UUID"
+        ]
     },
     "summary": "outputs a unique identifier string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

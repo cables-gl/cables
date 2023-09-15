@@ -54,8 +54,7 @@
                 "type": 2,
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Phong.LambertMaterial_v2"
+        ]
     },
     "changelog": [
         {

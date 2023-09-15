@@ -68,8 +68,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.ChromaKeyMaterial"
+        ]
     },
     "summary": "display texture and replace a color with transparency",
     "docs": {

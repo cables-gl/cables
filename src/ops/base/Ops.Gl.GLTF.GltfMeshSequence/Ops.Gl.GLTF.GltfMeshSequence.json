@@ -67,8 +67,7 @@
                 "name": "Current Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfMeshSequence"
+        ]
     },
     "summary": "switch between meshes e.g. like a stop motion animation",
     "issues": "",

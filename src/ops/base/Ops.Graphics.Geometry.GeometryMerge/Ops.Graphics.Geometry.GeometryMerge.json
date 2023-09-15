@@ -27,8 +27,7 @@
                 "type": "2",
                 "name": "Geometry Result"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometryMerge"
+        ]
     },
     "summary": "merge two geometries to one",
     "exampleProjectId": "3rCDz6",

@@ -54,8 +54,7 @@
                 "name": "Anim Duration",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json3d.SceneInfo"
+        ]
     },
     "summary": "information about the current 3d scene",
     "docs": {

@@ -43,8 +43,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Noise.Noise"
+        ]
     },
     "summary": "White noise pixel effect",
     "authorName": "pandur",

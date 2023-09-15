@@ -45,12 +45,10 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Meshes.SplineMesh_v2"
+        ]
     },
     "summary": "draw splines/lines",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

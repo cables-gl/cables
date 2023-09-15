@@ -30,8 +30,7 @@
                 "name": "pressed",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiToggle"
+        ]
     },
     "updated": 1543956236033,
     "authorName": "pandur",

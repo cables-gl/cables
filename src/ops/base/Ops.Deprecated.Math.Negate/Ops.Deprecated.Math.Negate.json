@@ -23,13 +23,11 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Negate"
+        ]
     },
     "summary": "positive number becomes negative and vice versa",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

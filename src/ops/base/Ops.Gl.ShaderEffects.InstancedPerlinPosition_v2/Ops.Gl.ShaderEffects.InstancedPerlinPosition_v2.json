@@ -73,8 +73,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.InstancedPerlinPosition_v2"
+        ]
     },
     "summary": "displace position of instanced object by perlin noise value",
     "docs": {

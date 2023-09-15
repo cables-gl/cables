@@ -27,8 +27,7 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Polyhedron"
+        ]
     },
     "summary": "generate polyhedron meshes ",
     "docs": {

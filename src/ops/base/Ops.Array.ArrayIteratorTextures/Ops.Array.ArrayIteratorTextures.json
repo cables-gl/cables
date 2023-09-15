@@ -33,8 +33,7 @@
                 "name": "value",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Patch.P9HJUvy.ArrayIteratorTexture"
+        ]
     },
     "summary": "iterate over an array of objects",
     "docs": {

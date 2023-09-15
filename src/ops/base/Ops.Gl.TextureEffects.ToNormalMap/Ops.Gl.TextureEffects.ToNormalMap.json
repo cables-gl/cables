@@ -16,8 +16,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ToNormalMap"
+        ]
     },
     "credits": [
         {
@@ -51,7 +50,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "a56wk9Xm9dY"

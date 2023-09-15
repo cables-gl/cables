@@ -52,8 +52,7 @@
                 "type": "5",
                 "name": "Chars"
             }
-        ],
-        "name": "Ops.Gl.FontMSDF"
+        ]
     },
     "summary": "Load MSDF Font data and texture to use ",
     "issues": "",

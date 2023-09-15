@@ -19,8 +19,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl2.ForceField.ForceMeshDeformer"
+        ]
     },
     "changelog": [
         {

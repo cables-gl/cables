@@ -80,12 +80,10 @@
                 "name": "Result",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.CubemapToEquirectangularTexture_v2"
+        ]
     },
     "summary": "visualize cubemap as folded texture or equirectangular texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

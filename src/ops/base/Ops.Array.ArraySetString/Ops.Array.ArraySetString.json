@@ -34,12 +34,10 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArraySetString"
+        ]
     },
     "summary": "Set a string in an array at index",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

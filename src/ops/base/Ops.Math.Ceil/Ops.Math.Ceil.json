@@ -13,8 +13,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Ceil"
+        ]
     },
     "summary": "Returns the smallest integer greater than or equal to a given number",
     "docs": {

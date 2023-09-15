@@ -41,8 +41,7 @@
                 "type": 3,
                 "name": "Array Out"
             }
-        ],
-        "name": "Ops.Array.ArraySubtract"
+        ]
     },
     "issues": "",
     "collections": [

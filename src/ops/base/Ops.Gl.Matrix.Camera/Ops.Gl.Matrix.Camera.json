@@ -113,8 +113,7 @@
                 "type": 3,
                 "name": "Look At Array"
             }
-        ],
-        "name": "Ops.Gl.Matrix.Camera"
+        ]
     },
     "summary": "Transforms and projects the scene from the point of view of the camera.",
     "docs": {
@@ -186,7 +185,6 @@
         ]
     },
     "youtubeid": "vIeAMFGA96E",
-
     "relatedops": null,
     "issues": "",
     "todos": [

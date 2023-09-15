@@ -90,8 +90,7 @@
                 "name": "rnd",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.RandomCluster"
+        ]
     },
     "collections": [
         "transform"

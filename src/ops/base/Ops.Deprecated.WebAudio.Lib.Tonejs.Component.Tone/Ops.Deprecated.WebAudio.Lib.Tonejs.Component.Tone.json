@@ -21,8 +21,7 @@
                 "type": "0",
                 "name": "Note String"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Tone"
+        ]
     },
     "summary": "Converts a note to a frequency e.g. A4 to 440 "
 }

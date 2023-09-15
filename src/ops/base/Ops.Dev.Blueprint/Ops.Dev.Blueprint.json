@@ -48,8 +48,7 @@
                 "name": "loading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Dev.Blueprint"
+        ]
     },
     "summary": "include subpatches from other patchs",
     "issues": "",

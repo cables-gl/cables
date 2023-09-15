@@ -87,8 +87,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.AreaDiscardPixel"
+        ]
     },
     "summary": "do not draw pixels inside a defined 3d area",
     "docs": {
@@ -169,7 +168,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "GQiw18"

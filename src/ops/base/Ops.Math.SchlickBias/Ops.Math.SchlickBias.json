@@ -38,13 +38,11 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.SchlickBias"
+        ]
     },
     "summary": "Custom easing curve via schlick bias and gain",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "FO9IG3",

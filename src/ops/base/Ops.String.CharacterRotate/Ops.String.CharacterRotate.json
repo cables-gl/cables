@@ -38,12 +38,10 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.CharacterRotate"
+        ]
     },
     "summary": "String rotate characters like a split-flap display",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

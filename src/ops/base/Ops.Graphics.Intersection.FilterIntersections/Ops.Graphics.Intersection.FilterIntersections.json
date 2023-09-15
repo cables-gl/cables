@@ -59,8 +59,7 @@
                 "type": 3,
                 "name": "Result Collisions"
             }
-        ],
-        "name": "Ops.Team.CollisionOps.FilterCollisions"
+        ]
     },
     "authorName": "pandur",
     "created": 1686154804127,

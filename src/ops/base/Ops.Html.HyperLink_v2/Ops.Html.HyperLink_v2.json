@@ -33,12 +33,10 @@
                 "name": "Specs"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.HyperLink_v2"
+        "portsOut": []
     },
     "summary": "Open another website",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

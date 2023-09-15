@@ -70,8 +70,7 @@
                 "name": "Expression Valid",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Array.ArrayMathExpression"
+        ]
     },
     "summary": "Calculates a user defined mathematical expression",
     "issues": "",

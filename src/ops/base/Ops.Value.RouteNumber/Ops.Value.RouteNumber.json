@@ -76,8 +76,7 @@
                 "name": "Index 9 Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.RouteNumber"
+        ]
     },
     "summary": "Routes the value to one of the output ports (based on index, relay)",
     "docs": {
@@ -101,7 +100,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "qJcKT6"

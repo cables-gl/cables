@@ -22,13 +22,11 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Ui.VizNumberBar"
+        "portsOut": []
     },
     "summary": "Visualize numbers as a bar in patch, useful for debugging",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "-yFlq4",

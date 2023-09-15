@@ -34,8 +34,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.TextureBufferArray"
+        ]
     },
     "summary": "Stores various textures in an array, starts at the beginning again when end reached",
     "docs": {

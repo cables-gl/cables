@@ -32,8 +32,7 @@
                 "name": "Command",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Keyboard.QWERTYtoMidi"
+        ]
     },
     "authorName": "tim",
     "id": "0aecef8b-3bcb-44ac-ae62-38ce8cd4051e",

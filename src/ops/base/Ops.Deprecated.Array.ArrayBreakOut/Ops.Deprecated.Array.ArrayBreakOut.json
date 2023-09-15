@@ -80,8 +80,7 @@
                 "type": "3",
                 "name": "Rest Array"
             }
-        ],
-        "name": "Ops.Array.ArrayBreakOut"
+        ]
     },
     "summary": "Breaks out the values of an array (array-value converter)",
     "docs": {

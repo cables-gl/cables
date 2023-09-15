@@ -37,8 +37,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.CheckerBoard"
+        ]
     },
     "summary": "draw a checkerboard pattern",
     "author": "5a0fe67d9641cedb39929853",

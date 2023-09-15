@@ -34,7 +34,6 @@
                 "type": "0",
                 "name": "Index"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Control.ControlPattern"
+        ]
     }
 }

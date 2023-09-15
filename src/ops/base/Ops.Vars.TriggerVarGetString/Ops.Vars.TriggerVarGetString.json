@@ -18,8 +18,7 @@
                 "type": 5,
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Vars.TriggerVarGetString"
+        ]
     },
     "summary": "Get a string variable value at time of trigger",
     "issues": "",

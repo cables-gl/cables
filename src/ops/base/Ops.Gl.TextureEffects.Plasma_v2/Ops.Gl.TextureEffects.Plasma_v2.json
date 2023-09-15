@@ -107,8 +107,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Plasma_v2"
+        ]
     },
     "summary": "Renders a plasma effect",
     "docs": {

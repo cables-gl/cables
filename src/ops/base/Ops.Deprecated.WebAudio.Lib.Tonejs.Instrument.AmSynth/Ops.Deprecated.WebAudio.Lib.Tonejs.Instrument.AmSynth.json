@@ -50,7 +50,6 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.AmSynth"
+        ]
     }
 }

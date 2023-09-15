@@ -35,8 +35,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Twirl2"
+        ]
     },
     "summary": "twirl image effect",
     "docs": {

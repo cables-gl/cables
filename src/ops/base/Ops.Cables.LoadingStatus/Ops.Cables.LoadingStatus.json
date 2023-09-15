@@ -55,8 +55,7 @@
                 "type": 1,
                 "name": "loading finished"
             }
-        ],
-        "name": "Ops.Patch.LoadingStatus"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

@@ -21,7 +21,6 @@
     "created": 1615474741499,
     "summary": "switch between filenames",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []
@@ -79,8 +78,7 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Value.SwitchFile_v2"
+        ]
     },
     "todos": [
         {

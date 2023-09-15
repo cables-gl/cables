@@ -26,12 +26,10 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.FlatArray"
+        ]
     },
     "summary": "Creates a new array with all sub-array selements concatenated into it",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

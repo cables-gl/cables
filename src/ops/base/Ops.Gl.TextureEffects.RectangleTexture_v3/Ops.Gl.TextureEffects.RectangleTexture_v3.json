@@ -92,8 +92,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.RectangleTexture_v3"
+        ]
     },
     "authorName": "pandur",
     "id": "6570ce79-8940-4684-80f1-ff42ce6190e2",
@@ -117,7 +116,6 @@
     ],
     "summary": "Draw a 2D rectangle with controllable parameters",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

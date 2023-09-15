@@ -36,8 +36,7 @@
                 "name": "bang",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Audio.Bang"
+        ]
     },
     "summary": "Outputs a number going from `1` to `0`, synced to the music (flash-effect)",
     "docs": {

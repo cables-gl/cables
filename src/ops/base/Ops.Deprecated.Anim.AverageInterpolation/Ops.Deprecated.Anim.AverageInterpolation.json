@@ -1,71 +1,70 @@
 {
-  "authorName": "pandur",
-  "id": "1f13c0a8-fed3-42e5-89e7-41696f3891f0",
-  "created": 1522791082710,
-  "layout": {
-    "portsIn": [
-      {
-        "type": "1",
-        "name": "Update"
-      },
-      {
-        "type": "0",
-        "name": "Value",
-        "subType": "number"
-      },
-      {
-        "type": "0",
-        "name": "Divisor",
-        "subType": "number"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": "1",
-        "name": "Next"
-      },
-      {
-        "type": "0",
-        "name": "Result",
-        "subType": "number"
-      }
-    ],
-    "name": "Ops.Anim.AverageInterpolation"
-  },
-  "summary": "weighted average interpolation",
-  "docs": {
-    "ports": [
-      {
-        "name": "Update",
-        "text": "Trigger the op"
-      },
-      {
-        "name": "Value",
-        "text": "The value to interpolate"
-      },
-      {
-        "name": "Divisor",
-        "text": "Higher numbers result in slower interpolation towards the current value"
-      },
-      {
-        "name": "Next",
-        "text": "Trigger out"
-      },
-      {
-        "name": "Result",
-        "text": "The interpolated result"
-      }
+    "authorName": "pandur",
+    "id": "1f13c0a8-fed3-42e5-89e7-41696f3891f0",
+    "created": 1522791082710,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Divisor",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "weighted average interpolation",
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Value",
+                "text": "The value to interpolate"
+            },
+            {
+                "name": "Divisor",
+                "text": "Higher numbers result in slower interpolation towards the current value"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The interpolated result"
+            }
+        ]
+    },
+    "youtubeid": "iM3BTNHwmsA",
+    "collections": null,
+    "relatedops": null,
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Anim.AverageInterpolation renamed to Ops.Deprecated.Anim.AverageInterpolation",
+            "author": "pandur",
+            "date": 1628151407647
+        }
     ]
-  },
-  "youtubeid": "iM3BTNHwmsA",
-  "collections": null,
-  "relatedops": null,
-  "issues": "",
-  "changelog": [
-    {
-      "message": "Ops.Anim.AverageInterpolation renamed to Ops.Deprecated.Anim.AverageInterpolation",
-      "author": "pandur",
-      "date": 1628151407647
-    }
-  ]
 }

@@ -109,10 +109,8 @@
                 "name": "Texture Depth",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.WebXr.Vr.Vr"
+        ]
     },
-
     "relatedops": null,
     "exampleProjectId": "IzKYx5",
     "docs": {

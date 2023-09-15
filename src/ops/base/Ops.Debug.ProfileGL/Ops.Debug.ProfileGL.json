@@ -18,8 +18,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Debug.ProfileGL"
+        ]
     },
     "summary": "dump all gl commands of one frame to console",
     "docs": {

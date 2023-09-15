@@ -63,8 +63,7 @@
                 "type": "1",
                 "name": "Finished Trigger"
             }
-        ],
-        "name": "Ops.Anim.SimpleAnim"
+        ]
     },
     "docs": {
         "ports": [
@@ -125,7 +124,6 @@
     "created": 1506695249414,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "dOlV9L"
 }

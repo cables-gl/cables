@@ -21,8 +21,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Min_v3"
+        ]
     },
     "summary": "Result will be the smaller number of the inputs",
     "youtubeid": "",

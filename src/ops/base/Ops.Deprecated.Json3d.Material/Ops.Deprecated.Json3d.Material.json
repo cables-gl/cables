@@ -19,13 +19,11 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Json3d.Material"
+        ]
     },
     "summary": "internal json3d op for setting a material",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

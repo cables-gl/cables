@@ -104,15 +104,13 @@
                 "type": "2",
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.BasicMaterial_v2"
+        ]
     },
     "summary": "A material without shading",
     "docs": {
         "ports": []
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "F-CUdHq40Pc"

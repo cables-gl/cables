@@ -60,8 +60,7 @@
                 "type": 5,
                 "name": "Current Scale"
             }
-        ],
-        "name": "Ops.WebAudio.MusicalScales"
+        ]
     },
     "authorName": "simod",
     "id": "9e8c08d9-8c9a-4cff-8e5b-05c72d1f8522",
@@ -84,7 +83,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -23,12 +23,10 @@
                 "type": "3",
                 "name": "Array"
             }
-        ],
-        "name": "Ops.String.LoremIpsum"
+        ]
     },
     "summary": "Lorem ipsum dolor sit amet",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -44,8 +44,7 @@
                 "name": "Timestamp",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Date.DateAndTime"
+        ]
     },
     "docs": {
         "ports": [

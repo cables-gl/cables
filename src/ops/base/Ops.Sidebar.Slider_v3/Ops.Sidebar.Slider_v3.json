@@ -70,8 +70,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.Slider_v3"
+        ]
     },
     "summary": "Sidebar slider element (range)",
     "docs": {

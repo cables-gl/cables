@@ -27,8 +27,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Grid"
+        ]
     },
     "docs": {
         "ports": []
@@ -39,7 +38,6 @@
     "exampleProjectId": "VxPlQ6",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": []
 }

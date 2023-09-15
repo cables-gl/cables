@@ -17,8 +17,7 @@
                 "type": "1",
                 "name": "Trigger Release"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.TriggerEnvelopeRelease"
+        ]
     },
     "id": "2045687a-4255-474b-ad5e-9de654c5d45e"
 }

@@ -30,8 +30,7 @@
                 "name": "length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ParseArray"
+        ]
     },
     "summary": "Parse a string into an array (create)",
     "authorName": "pandur",

@@ -86,12 +86,10 @@
                 "name": "Total Bodies",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Physics.PhysicsBodiesArray"
+        ]
     },
     "summary": "create an array of physics bodies and add them to current world",
     "issues": "",
-
     "relatedops": [
         "Ops.Physics.CastRay"
     ],

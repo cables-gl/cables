@@ -153,8 +153,7 @@
                 "name": "Number of Pre-filtered mip levels",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Pbr.PbrEnvironmentLight"
+        ]
     },
     "credits": [
         {

@@ -21,8 +21,7 @@
                 "type": "1",
                 "name": "else"
             }
-        ],
-        "name": "Ops.Boolean.IfTrueThen"
+        ]
     },
     "docs": {
         "ports": [
@@ -49,7 +48,6 @@
     "created": 1519743353368,
     "youtubeid": "3dYztfuw4lA",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "F9tjX8"
 }

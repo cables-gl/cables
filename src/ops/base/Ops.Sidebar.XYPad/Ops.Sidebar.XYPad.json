@@ -62,8 +62,7 @@
                 "name": "Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.XYPad"
+        ]
     },
     "summary": "2d coordinate input element",
     "docs": {
@@ -123,7 +122,6 @@
         "colorrick.js"
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "0NF2FL"

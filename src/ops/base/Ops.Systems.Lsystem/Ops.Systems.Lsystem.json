@@ -112,8 +112,7 @@
                 "name": "Final generated string",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Exp.Lsystem"
+        ]
     },
     "summary": "Lsystem generator",
     "docs": {

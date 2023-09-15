@@ -31,8 +31,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.LFO"
+        ]
     },
     "summary": "Low-frequency oscillation for animations",
     "docs": {
@@ -60,7 +59,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Math.MapRange",
         "Ops.Anim.SineAnim"

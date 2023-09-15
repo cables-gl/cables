@@ -36,12 +36,10 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.LimitLineBreaks_v2"
+        ]
     },
     "summary": "Limit number of lines in a string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

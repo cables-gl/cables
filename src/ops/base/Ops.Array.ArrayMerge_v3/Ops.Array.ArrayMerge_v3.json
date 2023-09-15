@@ -59,8 +59,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayMerge_v3"
+        ]
     },
     "summary": "Merge multiple arrays - in consecutive order",
     "issues": "",

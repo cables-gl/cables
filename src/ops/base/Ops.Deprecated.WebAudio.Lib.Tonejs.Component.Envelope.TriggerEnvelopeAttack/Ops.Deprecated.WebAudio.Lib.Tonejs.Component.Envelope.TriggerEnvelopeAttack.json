@@ -21,8 +21,7 @@
                 "type": "1",
                 "name": "Trigger Attack"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.TriggerEnvelopeAttack"
+        ]
     },
     "id": "5f5143b1-1796-459a-8ff4-d58953317eb1"
 }

@@ -100,8 +100,7 @@
                 "type": 3,
                 "name": "Valid Mimetypes"
             }
-        ],
-        "name": "Ops.Gl.MediaRecorder"
+        ]
     },
     "summary": "Record the renderer-output to video",
     "issues": "",

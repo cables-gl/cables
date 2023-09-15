@@ -52,8 +52,7 @@
                 "name": "Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.AspectRatio"
+        ]
     },
     "changelog": [
         {
@@ -64,7 +63,6 @@
     ],
     "summary": "set fixed viewport aspect ratop and letterboxing",
     "youtubeid": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

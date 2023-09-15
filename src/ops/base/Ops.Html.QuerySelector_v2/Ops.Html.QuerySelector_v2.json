@@ -39,12 +39,10 @@
                 "type": 2,
                 "name": "Element"
             }
-        ],
-        "name": "Ops.Html.QuerySelector_v2"
+        ]
     },
     "summary": "Selects an element in the DOM",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

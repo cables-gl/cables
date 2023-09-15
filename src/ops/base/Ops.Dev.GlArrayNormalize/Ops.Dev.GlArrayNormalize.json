@@ -66,8 +66,7 @@
                 "name": "Result",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Dev.GlArrayNormalize"
+        ]
     },
     "coreLibs": [
         "cgl_texturemath"

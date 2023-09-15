@@ -19,7 +19,6 @@
                 "name": "Max Int",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.MaximumSafeInteger"
+        ]
     }
 }

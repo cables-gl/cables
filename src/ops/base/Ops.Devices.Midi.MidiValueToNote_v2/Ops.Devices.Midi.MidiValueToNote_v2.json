@@ -16,8 +16,7 @@
                 "type": 5,
                 "name": "Note"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiValueToNote_v2"
+        ]
     },
     "summary": "Converts a MIDI value to a note string",
     "docs": {

@@ -92,8 +92,7 @@
                 "name": "Mouse is hovering",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Devices.Mouse.Mouse_v3"
+        ]
     },
     "authorName": "pandur",
     "created": 1668760408364,

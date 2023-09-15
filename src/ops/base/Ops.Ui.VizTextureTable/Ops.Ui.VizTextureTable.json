@@ -60,8 +60,7 @@
                 "objType": "texture"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Ui.VizTextureTable"
+        "portsOut": []
     },
     "summary": "Show pixel colors of connected texture as a table, useful for debugging",
     "issues": "",

@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.SetShader"
+        ]
     },
     "docs": {
         "ports": []

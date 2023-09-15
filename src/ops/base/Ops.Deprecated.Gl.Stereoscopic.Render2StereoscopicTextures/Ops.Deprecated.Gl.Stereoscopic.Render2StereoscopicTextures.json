@@ -36,7 +36,6 @@
                 "type": "2",
                 "name": "texture right"
             }
-        ],
-        "name": "Ops.Gl.Stereoscopic.render2Textures"
+        ]
     }
 }

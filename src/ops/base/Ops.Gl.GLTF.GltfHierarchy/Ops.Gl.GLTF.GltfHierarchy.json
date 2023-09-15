@@ -39,12 +39,10 @@
                 "type": 3,
                 "name": "Bones Lines"
             }
-        ],
-        "name": "Ops.User.pandur.GltfHierarchy"
+        ]
     },
     "summary": "export array of positions from a hierarchy of a branch structure in a gltf, e.g. a skeleton bones",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "I_eD5nml_5A"

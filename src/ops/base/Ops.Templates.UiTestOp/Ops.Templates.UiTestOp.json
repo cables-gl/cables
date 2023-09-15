@@ -143,8 +143,7 @@
                 "name": "Something",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Templates.UiTestOp"
+        ]
     },
     "summary": "UI indicators example op",
     "issues": "",

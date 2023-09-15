@@ -87,8 +87,7 @@
                 "type": "2",
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Gl.Phong.PhongMaterial"
+        ]
     },
     "updated": 1524478381491,
     "author": "55d744634cdc152216eb9aad",

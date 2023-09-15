@@ -41,13 +41,11 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3To4"
+        ]
     },
     "summary": "Converts an array3 to an array4 by filling it up with 1",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "h_Dbm4",

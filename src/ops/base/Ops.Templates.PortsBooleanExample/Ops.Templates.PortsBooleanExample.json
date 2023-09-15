@@ -16,8 +16,7 @@
                 "name": "Boolean out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Templates.PortsBooleanExample"
+        ]
     },
     "summary": "Is a template for creating Boolean ports",
     "docs": {

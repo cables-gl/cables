@@ -61,8 +61,7 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Mesh.Triangulate2dPath"
+        ]
     },
     "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
     "issues": "",

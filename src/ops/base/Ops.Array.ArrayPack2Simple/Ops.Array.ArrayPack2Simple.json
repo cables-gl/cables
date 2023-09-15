@@ -51,8 +51,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayPack2Simple"
+        ]
     },
     "summary": "Packs 2 individual arrays into an array2 - without needing a trigger",
     "issues": "",

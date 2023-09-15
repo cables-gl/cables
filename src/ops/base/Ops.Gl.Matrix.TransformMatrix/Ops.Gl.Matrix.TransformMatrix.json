@@ -87,8 +87,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Matrix.TransformMatrix"
+        ]
     },
     "authorName": "pandur",
     "created": 1684237592389,

@@ -13,8 +13,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Floor"
+        ]
     },
     "summary": "returns the largest integer less than or equal to a given number",
     "docs": {

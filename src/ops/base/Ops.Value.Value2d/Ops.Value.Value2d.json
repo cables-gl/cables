@@ -27,8 +27,7 @@
                 "name": "result y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.Value2d"
+        ]
     },
     "summary": "Stores a 2D coordinate",
     "docs": {

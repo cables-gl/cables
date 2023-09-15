@@ -49,8 +49,7 @@
                 "name": "Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Orthogonal_v2"
+        ]
     },
     "summary": "Orthogonal projection / objects in distance don't appear smaller (isometric)",
     "docs": {
@@ -74,7 +73,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "94Aycg"

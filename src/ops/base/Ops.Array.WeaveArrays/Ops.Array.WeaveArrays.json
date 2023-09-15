@@ -23,8 +23,7 @@
                 "type": 3,
                 "name": "Combined Array"
             }
-        ],
-        "name": "Ops.Array.WeaveArrays"
+        ]
     },
     "summary": "Weaves two arrays together (combine, join, merge)",
     "docs": {

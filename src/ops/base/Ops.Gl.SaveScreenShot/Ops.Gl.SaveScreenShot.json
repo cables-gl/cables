@@ -36,8 +36,7 @@
                 "type": "1",
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Gl.SaveScreenShot"
+        ]
     },
     "summary": "download the current screen content as png file",
     "exampleProjectId": "OB0Qmi"

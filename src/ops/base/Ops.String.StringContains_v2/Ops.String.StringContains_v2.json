@@ -24,13 +24,11 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringContains_v2"
+        ]
     },
     "summary": "check if string contains another string (find,search,indexOf)",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

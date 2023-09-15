@@ -147,8 +147,7 @@
                 "type": "2",
                 "name": "Dom Element"
             }
-        ],
-        "name": "Ops.Gl.InteractiveRectangle"
+        ]
     },
     "summary": "an area which is interactive ",
     "docs": {
@@ -162,7 +161,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "4iPmZlrYRQg"

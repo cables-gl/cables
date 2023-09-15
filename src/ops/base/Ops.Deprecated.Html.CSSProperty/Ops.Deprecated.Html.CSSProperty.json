@@ -32,7 +32,6 @@
                 "name": "Style Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.CSSProperty"
+        ]
     }
 }

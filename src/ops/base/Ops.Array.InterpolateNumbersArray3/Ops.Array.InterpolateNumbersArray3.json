@@ -30,8 +30,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.InterpolateNumbersArray3"
+        ]
     },
     "summary": "get interpolated values between the indices of an array3x",
     "docs": {

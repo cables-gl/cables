@@ -162,8 +162,7 @@
                 "name": "World Position Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Phong.PointLight_v5"
+        ]
     },
     "changelog": [
         {

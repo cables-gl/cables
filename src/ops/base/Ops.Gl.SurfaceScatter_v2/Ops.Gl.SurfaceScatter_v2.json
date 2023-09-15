@@ -85,8 +85,7 @@
                 "type": 3,
                 "name": "Quaternions"
             }
-        ],
-        "name": "Ops.Gl.SurfaceScatter_v2"
+        ]
     },
     "changelog": [
         {
@@ -97,7 +96,6 @@
     ],
     "summary": "Scatter an object on the surface of a mesh with different distribution methods",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "tQr9hdNqBmQ"

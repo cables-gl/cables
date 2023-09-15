@@ -56,8 +56,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ColorMap_v2"
+        ]
     },
     "docs": {
         "ports": []

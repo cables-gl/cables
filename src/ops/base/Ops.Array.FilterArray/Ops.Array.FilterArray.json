@@ -46,13 +46,11 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.User.pandur.FilterArray"
+        ]
     },
     "summary": "compare elements from an array and remove not matching ones",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

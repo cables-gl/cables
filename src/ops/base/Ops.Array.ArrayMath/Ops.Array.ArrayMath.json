@@ -29,8 +29,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayMath"
+        ]
     },
     "summary": "Pick from multiple mathematical modes which can all be applied to a single array",
     "issues": "",

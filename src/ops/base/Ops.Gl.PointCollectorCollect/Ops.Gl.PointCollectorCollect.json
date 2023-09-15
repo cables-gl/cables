@@ -11,8 +11,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.PointCollectorCollect"
+        ]
     },
     "summary": "collect world space coordinates into an array",
     "youtubeid": "",

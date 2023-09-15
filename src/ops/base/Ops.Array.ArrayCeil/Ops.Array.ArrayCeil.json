@@ -14,8 +14,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayCeil"
+        ]
     },
     "changelog": [
         {

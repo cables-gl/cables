@@ -41,8 +41,7 @@
                 "name": "a",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.ColorPick"
+        ]
     },
     "docs": {
         "ports": [
@@ -78,7 +77,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "YEjkgg"
 }

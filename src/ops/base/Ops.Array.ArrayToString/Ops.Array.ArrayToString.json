@@ -21,8 +21,7 @@
                 "name": "string",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayToString"
+        ]
     },
     "docs": {
         "ports": [

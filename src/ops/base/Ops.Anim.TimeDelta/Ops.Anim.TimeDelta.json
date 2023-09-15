@@ -26,8 +26,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.TimeDiff"
+        ]
     },
     "summary": "measure the time difference between two triggers",
     "updated": 1542045449176,
@@ -36,7 +35,6 @@
     "created": 1520347835082,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

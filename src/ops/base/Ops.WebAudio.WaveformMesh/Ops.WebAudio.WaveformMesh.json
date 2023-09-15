@@ -64,8 +64,7 @@
                 "name": "Geometry",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.WebAudio.WaveformMesh"
+        ]
     },
     "summary": "Outputs the waveform of an audio file as a geometry",
     "docs": {
@@ -129,7 +128,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "VqDkCp"

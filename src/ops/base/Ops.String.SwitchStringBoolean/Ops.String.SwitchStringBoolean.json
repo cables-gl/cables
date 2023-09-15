@@ -12,7 +12,6 @@
     "summary": "Switch between two strings with a boolean",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [
@@ -55,7 +54,6 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringSwitchBoolean"
+        ]
     }
 }

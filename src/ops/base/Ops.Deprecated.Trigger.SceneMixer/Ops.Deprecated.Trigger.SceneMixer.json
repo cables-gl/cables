@@ -109,8 +109,7 @@
                 "type": "1",
                 "name": "Trigger After"
             }
-        ],
-        "name": "Ops.Trigger.SceneMixer"
+        ]
     },
     "summary": "Activate triggers / scenes with a boolean",
     "docs": {

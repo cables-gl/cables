@@ -30,12 +30,10 @@
                 "type": 5,
                 "name": "String"
             }
-        ],
-        "name": "Ops.Boolean.BoolToString"
+        ]
     },
     "summary": "convert boolean to string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

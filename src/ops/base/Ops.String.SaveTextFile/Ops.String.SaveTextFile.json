@@ -27,15 +27,13 @@
                 "name": "Content String"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.User.pandur.SaveTextFile"
+        "portsOut": []
     },
     "authorName": "pandur",
     "created": 1640422030685,
     "summary": "download a textfile containing the input string",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

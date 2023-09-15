@@ -30,8 +30,7 @@
                 "type": 2,
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.AttributeAsColorMaterial"
+        ]
     },
     "authorName": "pandur",
     "id": "2963fd23-a860-461a-a3cf-394b8261159f",

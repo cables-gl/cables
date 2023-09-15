@@ -68,12 +68,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.SkewStretchImage"
+        ]
     },
     "summary": "skew / stretch an image by rendering scaled sides",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -53,7 +53,6 @@
                 "type": "3",
                 "name": "points"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.Meshes.Spline"
+        ]
     }
 }

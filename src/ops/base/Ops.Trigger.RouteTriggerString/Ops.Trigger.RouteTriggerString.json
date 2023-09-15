@@ -227,12 +227,10 @@
                 "type": 1,
                 "name": "Trigger 23"
             }
-        ],
-        "name": "Ops.Trigger.RouteTriggerString"
+        ]
     },
     "summary": "route trigger output by string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

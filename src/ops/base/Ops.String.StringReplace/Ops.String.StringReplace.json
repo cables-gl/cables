@@ -39,8 +39,7 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringReplace"
+        ]
     },
     "summary": "replace occurrences of a string with another string",
     "issues": "",

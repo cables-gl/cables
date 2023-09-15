@@ -63,8 +63,7 @@
                 "name": "Finished",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.WebAudio.AudioBufferPlayer"
+        ]
     },
     "summary": "Plays back audio data stored in an AudioBuffer",
     "created": 1506598843485,

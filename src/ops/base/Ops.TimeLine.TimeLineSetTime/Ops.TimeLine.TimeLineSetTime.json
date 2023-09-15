@@ -26,12 +26,10 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineSetTime"
+        ]
     },
     "summary": "set current time of timeline",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

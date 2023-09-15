@@ -21,12 +21,10 @@
                 "type": 5,
                 "name": "CORS URL"
             }
-        ],
-        "name": "Ops.Net.CorsProxy_v2"
+        ]
     },
     "summary": "create a cables.gl CORS proxy URL",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

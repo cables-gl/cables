@@ -62,12 +62,10 @@
                 "name": "current frame",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLinePlayer"
+        ]
     },
     "summary": "Player controls for the timeline",
     "issues": "",
-
     "relatedops": [
         "Ops.WebAudio.MediaPlayer"
     ],

@@ -10,12 +10,10 @@
                 "name": "Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Vars.VarGetNumber_v2"
+        ]
     },
     "summary": "read a variable number",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "sUR6b0zvuSY"

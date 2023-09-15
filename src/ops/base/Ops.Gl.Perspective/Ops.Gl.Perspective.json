@@ -51,8 +51,7 @@
                 "name": "Aspect",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Perspective"
+        ]
     },
     "authorName": "pandur",
     "id": "7a78e163-d28c-4f70-a6d0-6d952da79f50",

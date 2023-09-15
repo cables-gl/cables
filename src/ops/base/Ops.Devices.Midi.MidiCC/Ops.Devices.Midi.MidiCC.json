@@ -64,8 +64,7 @@
                 "type": 3,
                 "name": "Value Array"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiCC"
+        ]
     },
     "summary": "read CC value from Midi controller",
     "issues": "",

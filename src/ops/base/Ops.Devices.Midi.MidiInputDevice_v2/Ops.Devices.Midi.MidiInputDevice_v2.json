@@ -46,8 +46,7 @@
                 "type": 2,
                 "name": "Clock"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiInputDevice_v2"
+        ]
     },
     "summary": "connect to MIDI device output port",
     "issues": "",

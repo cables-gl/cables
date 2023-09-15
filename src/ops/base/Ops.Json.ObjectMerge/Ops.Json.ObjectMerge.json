@@ -31,8 +31,7 @@
                 "type": 2,
                 "name": "Object Result"
             }
-        ],
-        "name": "Ops.Json.ObjectMerge"
+        ]
     },
     "summary": "merge key+values of two objects",
     "collections": null,

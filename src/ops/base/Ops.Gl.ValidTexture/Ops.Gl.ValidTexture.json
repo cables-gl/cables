@@ -31,12 +31,10 @@
                 "type": "2",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.User.pandur.ValidTexture"
+        ]
     },
     "summary": "output current input texture or a default texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

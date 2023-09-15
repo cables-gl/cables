@@ -45,15 +45,13 @@
                 "name": "Array length out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.PerlinArray"
+        ]
     },
     "libs": [
         "perlin.js"
     ],
     "summary": "Creates An array filled with Perlin noise values",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

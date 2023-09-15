@@ -29,8 +29,7 @@
                 "type": "0",
                 "name": "Velocity"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.TriggerSynthAttackRelease"
+        ]
     },
     "docs": {
         "ports": [

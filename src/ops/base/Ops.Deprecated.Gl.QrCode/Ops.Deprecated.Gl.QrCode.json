@@ -19,8 +19,7 @@
                 "type": "2",
                 "name": "texture"
             }
-        ],
-        "name": "Ops.Gl.QrCode"
+        ]
     },
     "summary": "generate a qr code as a texture",
     "exampleProjectId": "QjlEo-",

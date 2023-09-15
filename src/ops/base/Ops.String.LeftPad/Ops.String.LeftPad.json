@@ -23,8 +23,7 @@
                 "name": "String",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.LeftPad"
+        ]
     },
     "summary": "create a fixed length string from a number 1 -> 0001",
     "updated": 1539329157039,

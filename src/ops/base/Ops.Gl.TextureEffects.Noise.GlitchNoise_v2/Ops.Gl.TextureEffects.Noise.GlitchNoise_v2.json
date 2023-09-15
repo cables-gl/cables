@@ -77,8 +77,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.GlitchNoiseV2"
+        ]
     },
     "summary": "Creates a black and white glitched texture to use for displacement",
     "docs": {

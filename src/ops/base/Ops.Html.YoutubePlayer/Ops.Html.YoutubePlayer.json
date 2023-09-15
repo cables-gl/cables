@@ -74,12 +74,10 @@
                 "type": "5",
                 "name": "Direct Link"
             }
-        ],
-        "name": "Ops.Html.YoutubePlayer"
+        ]
     },
     "summary": "play a youtube video in a HTML element",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

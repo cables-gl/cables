@@ -25,8 +25,7 @@
                 "type": "0",
                 "name": "Time"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.TriggerSynthAttack"
+        ]
     },
     "id": "02c72ee1-b7ce-4cf1-af5b-1b774a705a78"
 }

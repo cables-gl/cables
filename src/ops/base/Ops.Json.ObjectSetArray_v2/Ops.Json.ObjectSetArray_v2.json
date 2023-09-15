@@ -45,8 +45,7 @@
                 "type": 2,
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Patch.PpiMxeG.ObjectSetArray_v2"
+        ]
     },
     "summary": "Set array by key in an object",
     "issues": "",

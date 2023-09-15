@@ -39,8 +39,7 @@
                 "type": 3,
                 "name": "BiTangents"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometryPoints"
+        ]
     },
     "summary": "Get vertices of a geometry as array3x (vertex vertices)",
     "docs": {

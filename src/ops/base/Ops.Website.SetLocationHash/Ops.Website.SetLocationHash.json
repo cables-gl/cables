@@ -45,13 +45,11 @@
                 "subType": "boolean"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Website.SetLocationHash"
+        "portsOut": []
     },
     "libs": [],
     "summary": "sets window.location.hash to the specified value(s)",
     "issues": "",
-
     "relatedops": [
         "Ops.Website.LocationHash"
     ],

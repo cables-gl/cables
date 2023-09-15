@@ -41,8 +41,7 @@
                 "type": 2,
                 "name": "Element"
             }
-        ],
-        "name": "Ops.Html.IFrame_v3"
+        ]
     },
     "summary": "Show another website in an iframe element",
     "issues": "",

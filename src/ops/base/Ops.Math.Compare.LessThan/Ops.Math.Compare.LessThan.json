@@ -19,8 +19,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.LessThan"
+        ]
     },
     "docs": {
         "ports": [

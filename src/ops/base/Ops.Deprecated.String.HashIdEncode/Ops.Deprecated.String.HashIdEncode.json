@@ -18,8 +18,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.HashIdEncode"
+        ]
     },
     "summary": "generate short unique ids from integers",
     "docs": {
@@ -27,7 +26,6 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [
         "hUdHnFtBTNU"

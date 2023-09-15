@@ -28,12 +28,10 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.GreaterOrEquals"
+        ]
     },
     "summary": "result is true if number 1 is greater or equals number 2",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

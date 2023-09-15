@@ -45,8 +45,7 @@
                 "type": 3,
                 "name": "Array Out"
             }
-        ],
-        "name": "Ops.WebAudio.AudioBufferToSplineArray"
+        ]
     },
     "summary": "Outputs the waveform of an audio file as a spline array",
     "docs": {
@@ -104,7 +103,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "OcOVBp"

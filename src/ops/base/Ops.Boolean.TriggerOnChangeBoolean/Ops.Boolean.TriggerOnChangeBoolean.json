@@ -20,8 +20,7 @@
                 "type": 1,
                 "name": "False"
             }
-        ],
-        "name": "Ops.Boolean.TriggerOnChangeBoolean"
+        ]
     },
     "summary": "Triggers when boolean value has changed",
     "docs": {

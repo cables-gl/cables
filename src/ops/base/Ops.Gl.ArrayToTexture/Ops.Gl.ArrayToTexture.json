@@ -56,8 +56,7 @@
                 "name": "Texture out",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.TextureFromColorArray"
+        ]
     },
     "summary": "create a texture from an array of number values",
     "youtubeid": "",

@@ -19,8 +19,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Core.Gain"
+        ]
     },
     "id": "f20ac1a5-f3a4-4b93-8fe9-ad64a5d91988"
 }

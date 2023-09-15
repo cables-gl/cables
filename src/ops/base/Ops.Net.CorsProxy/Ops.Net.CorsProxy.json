@@ -15,8 +15,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Net.CorsProxy"
+        ]
     },
     "summary": "create a cables.gl CORS proxy URL",
     "exampleProjectId": "5FQ08W"

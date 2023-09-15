@@ -51,12 +51,10 @@
                 "type": "2",
                 "name": "MIDI Event Out"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiNRPNOut"
+        ]
     },
     "summary": "send midi NRPN data to a midi output",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiCCOut",
         "Ops.Devices.Midi.MidiOutputDevice",

@@ -65,8 +65,7 @@
                 "type": 1,
                 "name": "Trigger Loading Finished "
             }
-        ],
-        "name": "Ops.Cables.LoadingStatus_v2"
+        ]
     },
     "summary": "trigger events / get information about asset-loading status",
     "issues": "",

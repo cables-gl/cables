@@ -19,13 +19,11 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Meshes.SimpleWireframe"
+        ]
     },
     "summary": "Simple Wireframe Line Renderer",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

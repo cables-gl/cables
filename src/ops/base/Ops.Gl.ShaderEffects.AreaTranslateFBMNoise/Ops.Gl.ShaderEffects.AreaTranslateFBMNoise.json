@@ -76,8 +76,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.AreaTranslateFBMNoise"
+        ]
     },
     "changelog": [
         {
@@ -88,7 +87,6 @@
     ],
     "summary": "Translate object positions with a noise function",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

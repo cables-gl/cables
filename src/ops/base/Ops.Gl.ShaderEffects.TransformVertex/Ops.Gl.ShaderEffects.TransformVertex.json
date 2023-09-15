@@ -64,8 +64,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.TransformVertex"
+        ]
     },
     "changelog": [
         {
@@ -91,7 +90,6 @@
     ],
     "summary": "transform vertices of a mesh via vertex shader",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "SaKWF6RnsyI"

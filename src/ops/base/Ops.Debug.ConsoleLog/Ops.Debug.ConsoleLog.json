@@ -25,12 +25,10 @@
                 "type": "5",
                 "name": "String"
             }
-        ],
-        "name": "Ops.Admin.ConsoleLog"
+        ]
     },
     "summary": "Log incoming values to the console/dev tools",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -17,8 +17,7 @@
                 "name": "Listening",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.WebAudio.MicrophoneIn"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -26,7 +25,6 @@
     "created": 1513608940511,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [
