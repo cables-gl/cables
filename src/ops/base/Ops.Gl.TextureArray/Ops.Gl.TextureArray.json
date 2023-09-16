@@ -90,8 +90,7 @@
                 "name": "Count",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureArray"
+        ]
     },
     "summary": "create an array of textures",
     "docs": {

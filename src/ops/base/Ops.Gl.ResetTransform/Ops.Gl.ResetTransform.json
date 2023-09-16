@@ -1,60 +1,59 @@
 {
-  "id": "1bf7c63e-e2c2-42e2-abb3-42235e7e24f0",
-  "changelog": [
-    {
-      "message": "created op",
-      "author": "pandur",
-      "date": 1601560390207
+    "id": "1bf7c63e-e2c2-42e2-abb3-42235e7e24f0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1601560390207
+        },
+        {
+            "message": "Ops.User.pandur.TransformReset renamed to Ops.Gl.Identity.ResetTransform",
+            "author": "pandur",
+            "date": 1601561128046
+        },
+        {
+            "message": "Ops.Gl.Identity.ResetTransform renamed to Ops.Gl.ResetTransform",
+            "author": "pandur",
+            "date": 1601561249367
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1601560572709,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Reset Model Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Reset View Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Default View",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
     },
-    {
-      "message": "Ops.User.pandur.TransformReset renamed to Ops.Gl.Identity.ResetTransform",
-      "author": "pandur",
-      "date": 1601561128046
-    },
-    {
-      "message": "Ops.Gl.Identity.ResetTransform renamed to Ops.Gl.ResetTransform",
-      "author": "pandur",
-      "date": 1601561249367
+    "summary": "reset current transforms to initial value (identity)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
-  ],
-  "authorName": "pandur",
-  "created": 1601560572709,
-  "layout": {
-    "portsIn": [
-      {
-        "type": "1",
-        "name": "exe"
-      },
-      {
-        "type": "0",
-        "name": "Reset Model Transform",
-        "subType": "boolean"
-      },
-      {
-        "type": "0",
-        "name": "Reset View Transform",
-        "subType": "boolean"
-      },
-      {
-        "type": "0",
-        "name": "Default View",
-        "subType": "boolean"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": "1",
-        "name": "trigger"
-      }
-    ],
-    "name": "Ops.Gl.ResetTransform"
-  },
-  "summary": "reset current transforms to initial value (identity)",
-  "issues": "",
-  "collections": null,
-  "relatedops": null,
-  "youtubeids": [],
-  "docs": {
-    "ports": []
-  }
 }

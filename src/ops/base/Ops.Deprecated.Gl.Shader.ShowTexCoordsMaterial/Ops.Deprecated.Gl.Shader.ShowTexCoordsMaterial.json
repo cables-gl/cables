@@ -15,8 +15,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.ShowTexCoordsMaterial"
+        ]
     },
     "summary": "visualize texturecoordinates/UV mapping of a mesh ",
     "docs": {

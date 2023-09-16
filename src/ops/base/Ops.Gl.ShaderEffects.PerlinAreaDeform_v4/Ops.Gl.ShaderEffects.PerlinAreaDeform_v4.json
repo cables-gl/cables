@@ -89,8 +89,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform_v4"
+        ]
     },
     "changelog": [
         {
@@ -109,7 +108,6 @@
     ],
     "summary": "Displace vertices using perlin noise animation",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -15,11 +15,9 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineRewind"
+        ]
     },
     "summary": "set time of timeline to 0 (rewind, restart)",
-
     "relatedops": null,
     "exampleProjectId": "3F6DOe",
     "docs": {

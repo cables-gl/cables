@@ -36,12 +36,10 @@
                 "type": 3,
                 "name": "Rotations"
             }
-        ],
-        "name": "Ops.Array.AnglesBetweenPoints"
+        ]
     },
     "summary": "Outputs the angle between points in 3D space (degree)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

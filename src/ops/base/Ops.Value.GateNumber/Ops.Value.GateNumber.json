@@ -38,8 +38,7 @@
                 "name": "Value Out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.GateNumber"
+        ]
     },
     "changelog": [
         {
@@ -49,7 +48,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "JJSflJ",
     "youtubeids": [

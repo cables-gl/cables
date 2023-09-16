@@ -89,8 +89,7 @@
                 "name": "texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextTexture_v2"
+        ]
     },
     "summary": "Generates a texture which reads Text",
     "youtubeid": "z1Qf9dE67-w",

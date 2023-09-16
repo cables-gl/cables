@@ -32,8 +32,7 @@
                 "name": "Is Loading",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Net.AjaxRequestString"
+        ]
     },
     "summary": "request a file from a webserver and output it as a string",
     "docs": {

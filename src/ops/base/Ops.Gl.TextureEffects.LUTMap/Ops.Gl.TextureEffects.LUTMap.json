@@ -24,8 +24,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.LUTMap"
+        ]
     },
     "summary": "apply color filter/effects by using a lookup texture",
     "docs": {

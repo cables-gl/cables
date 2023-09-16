@@ -24,7 +24,6 @@
                 "type": 3,
                 "name": "Times"
             }
-        ],
-        "name": "Ops.Debug.StopWatch"
+        ]
     }
 }

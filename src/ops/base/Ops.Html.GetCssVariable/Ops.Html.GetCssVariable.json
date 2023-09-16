@@ -18,8 +18,7 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Html.GetCssVariable"
+        ]
     },
     "summary": "gets current value of CSS Variable",
     "docs": {
@@ -27,7 +26,6 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "Zqkkt7"

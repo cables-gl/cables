@@ -21,8 +21,7 @@
                 "name": "CPS",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.Frequency"
+        ]
     },
     "summary": "Triggers every x milliseconds. Can be used e.g. to create a strobe effect.",
     "docs": {

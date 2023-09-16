@@ -48,12 +48,10 @@
                 "name": "Brightness",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Color.RGBtoHSB"
+        ]
     },
     "summary": "convert RGB color to HSB Hue, Saturation, Brightness",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

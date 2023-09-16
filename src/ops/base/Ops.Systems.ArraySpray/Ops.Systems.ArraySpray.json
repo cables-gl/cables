@@ -123,8 +123,7 @@
                 "type": 3,
                 "name": "Lifetime"
             }
-        ],
-        "name": "Ops.Systems.ArraySpray"
+        ]
     },
     "summary": "Particle Spray simulation",
     "issues": "",

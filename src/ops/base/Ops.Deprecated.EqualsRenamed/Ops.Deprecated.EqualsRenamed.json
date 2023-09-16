@@ -22,7 +22,6 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Deprecated.EqualsRenamed"
+        ]
     }
 }

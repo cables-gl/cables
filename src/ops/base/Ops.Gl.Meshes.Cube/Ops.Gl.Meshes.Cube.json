@@ -48,8 +48,7 @@
                 "type": "2",
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Cube"
+        ]
     },
     "summary": "draw a cube",
     "authorName": "pandur",

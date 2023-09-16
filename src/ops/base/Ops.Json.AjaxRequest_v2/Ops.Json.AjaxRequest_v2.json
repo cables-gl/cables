@@ -87,8 +87,7 @@
                 "type": 1,
                 "name": "Loaded"
             }
-        ],
-        "name": "Ops.Json.AjaxRequest_v2"
+        ]
     },
     "summary": "Request a json file and output an object (ajax, url, json)",
     "issues": "",

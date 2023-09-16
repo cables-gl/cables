@@ -67,8 +67,7 @@
                 "name": "Num Events",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.TimeLine.DemoPrerender"
+        ]
     },
     "summary": "Prerenderer based on timeline progress",
     "issues": "",

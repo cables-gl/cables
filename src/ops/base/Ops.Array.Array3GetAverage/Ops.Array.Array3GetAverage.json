@@ -26,12 +26,10 @@
                 "name": "Average Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3GetAverage"
+        ]
     },
     "summary": "average x,y,z values of an array3x",
     "youtubeid": "",
-
     "relatedops": [
         "Ops.Array.ArrayAnalyze",
         "Ops.Array.Array3xAnalyze"

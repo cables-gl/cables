@@ -65,8 +65,7 @@
                 "type": 1,
                 "name": "Mouse Up Right"
             }
-        ],
-        "name": "Ops.Devices.Mouse.MouseButtons"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

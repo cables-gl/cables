@@ -65,8 +65,7 @@
                 "type": 3,
                 "name": "Column Numbers"
             }
-        ],
-        "name": "Ops.Points.PointsPlane_v2"
+        ]
     },
     "summary": "Generate coordinates for a rectangular field / grid of points",
     "issues": "",

@@ -55,8 +55,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.SwitchArray"
+        ]
     },
     "summary": "switch between multiple arrays",
     "docs": {

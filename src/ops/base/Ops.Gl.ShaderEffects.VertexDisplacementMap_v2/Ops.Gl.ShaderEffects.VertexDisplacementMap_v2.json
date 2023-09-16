@@ -83,8 +83,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v2"
+        ]
     },
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
     "issues": "",

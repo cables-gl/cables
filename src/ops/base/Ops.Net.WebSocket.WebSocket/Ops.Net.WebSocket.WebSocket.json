@@ -25,8 +25,7 @@
                 "type": "1",
                 "name": "Received Data"
             }
-        ],
-        "name": "Ops.Net.WebSocket.WebSocket"
+        ]
     },
     "authorName": "pandur",
     "id": "d45aca4c-1c62-4261-80b3-d338a3203bf6",

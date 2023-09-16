@@ -59,8 +59,7 @@
                 "type": 3,
                 "name": "Frozen Array"
             }
-        ],
-        "name": "Ops.Values.FreezeArray"
+        ]
     },
     "authorName": "pandur",
     "created": 1644069519267,

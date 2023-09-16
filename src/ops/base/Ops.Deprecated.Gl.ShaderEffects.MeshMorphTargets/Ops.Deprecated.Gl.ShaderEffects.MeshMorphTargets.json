@@ -22,7 +22,6 @@
                 "type": "0",
                 "name": "fade"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.MeshMorphTargets"
+        ]
     }
 }

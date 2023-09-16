@@ -30,8 +30,7 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.TriangleSphere"
+        ]
     },
     "summary": "A sphere mesh with uniform distributed vertices",
     "docs": {

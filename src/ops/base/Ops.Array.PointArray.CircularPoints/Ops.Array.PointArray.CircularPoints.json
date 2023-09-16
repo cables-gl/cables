@@ -86,10 +86,8 @@
                 "name": "Array lengths",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.PointArray.CircularPoints"
+        ]
     },
-
     "relatedops": null,
     "exampleProjectId": "V34dYh",
     "docs": {

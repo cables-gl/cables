@@ -54,8 +54,7 @@
                 "name": "Absolute Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.DeltaSum"
+        ]
     },
     "summary": "add delta values to an clamped absolute value",
     "docs": {

@@ -91,12 +91,10 @@
                 "type": 2,
                 "name": "Object"
             }
-        ],
-        "name": "Ops.Devices.Mobile.MotionSensor_v2"
+        ]
     },
     "summary": "get values from the device motion sensor mobile",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

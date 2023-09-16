@@ -12,8 +12,7 @@
                 "name": "length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayLength"
+        ]
     },
     "summary": "Number of items in an array",
     "author": "55d744634cdc152216eb9aad",
@@ -22,7 +21,6 @@
     "created": 1514985490845,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

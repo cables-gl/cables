@@ -36,8 +36,7 @@
                 "name": "radius",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.CirclePack"
+        ]
     },
     "authorName": "pandur",
     "id": "f71b2cda-9097-4bfb-883b-f6fe4c33937f",

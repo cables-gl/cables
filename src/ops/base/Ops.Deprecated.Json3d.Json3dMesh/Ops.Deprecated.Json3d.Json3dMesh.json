@@ -55,8 +55,7 @@
                 "name": "Scaling",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Deprecated.Json3d.Json3dMesh"
+        ]
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
@@ -78,7 +77,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": [
         "Ops.Json3d.Mesh3d"
     ],

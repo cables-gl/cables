@@ -14,8 +14,7 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.Base64Encode_v2"
+        ]
     },
     "summary": "encode a string to base64",
     "changelog": [
@@ -26,7 +25,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

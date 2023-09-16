@@ -75,8 +75,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.ExplodeDividedMesh"
+        ]
     },
     "summary": "explode a (divided) mesh in the direction of faces normals",
     "exampleProjectId": "sYIxm1"

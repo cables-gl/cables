@@ -79,8 +79,7 @@
                 "name": "was snapped",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.Snap"
+        ]
     },
     "summary": "snap at certain points (e.g. while scrolling)",
     "docs": {

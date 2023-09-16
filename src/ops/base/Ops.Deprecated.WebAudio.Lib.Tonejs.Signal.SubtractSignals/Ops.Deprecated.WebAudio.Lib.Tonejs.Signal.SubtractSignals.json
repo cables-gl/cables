@@ -19,8 +19,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Signal.SubtractSignals"
+        ]
     },
     "id": "ed69a278-56d6-4d55-9581-1d7db8a5ae8d"
 }

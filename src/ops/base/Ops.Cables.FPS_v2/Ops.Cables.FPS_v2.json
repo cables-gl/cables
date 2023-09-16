@@ -11,7 +11,6 @@
     "created": 1600117397013,
     "summary": "output current frames per second",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -30,7 +29,6 @@
                 "name": "MS",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Cables.FPS_v2"
+        ]
     }
 }

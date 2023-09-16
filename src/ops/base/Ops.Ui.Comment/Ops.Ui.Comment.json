@@ -9,8 +9,7 @@
                 "type": "5",
                 "name": "text"
             }
-        ],
-        "name": "Ops.Ui.Comment"
+        ]
     },
     "summary": "Displays a comment in the patch area",
     "author": "55d744634cdc152216eb9aad",
@@ -31,6 +30,5 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null
 }

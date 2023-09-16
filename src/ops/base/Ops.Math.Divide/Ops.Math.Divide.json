@@ -19,8 +19,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Divide"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

@@ -30,13 +30,11 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.PointArray.FillPointArrayDuplicates"
+        ]
     },
     "summary": "fill a XYZ array with existing duplicate points until it reaches the length ",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

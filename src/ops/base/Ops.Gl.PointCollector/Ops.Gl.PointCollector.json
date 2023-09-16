@@ -24,8 +24,7 @@
                 "type": 3,
                 "name": "Points"
             }
-        ],
-        "name": "Ops.Gl.PointCollector"
+        ]
     },
     "summary": "save points/coordinates in an array",
     "docs": {

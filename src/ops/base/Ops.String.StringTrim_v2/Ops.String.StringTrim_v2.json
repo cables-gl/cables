@@ -14,13 +14,11 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringTrim2"
+        ]
     },
     "summary": "Remove whitespace from both ends of a string",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

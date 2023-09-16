@@ -34,8 +34,7 @@
                 "type": 5,
                 "name": "Key"
             }
-        ],
-        "name": "Ops.Devices.Keyboard.KeyPress_v2"
+        ]
     },
     "summary": "Triggers when a key is pressed",
     "docs": {

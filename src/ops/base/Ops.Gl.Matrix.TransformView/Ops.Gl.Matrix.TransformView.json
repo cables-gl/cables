@@ -57,8 +57,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.TransformView"
+        ]
     },
     "summary": "transform the viewmatrix",
     "youtubeid": "vIeAMFGA96E",

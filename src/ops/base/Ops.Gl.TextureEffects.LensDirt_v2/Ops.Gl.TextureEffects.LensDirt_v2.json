@@ -89,12 +89,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.LensDirt"
+        ]
     },
     "summary": "Creates a lens dirt like texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

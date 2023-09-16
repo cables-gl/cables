@@ -23,8 +23,7 @@
                 "name": "Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.VectorLength"
+        ]
     },
     "summary": "length of a vector",
     "docs": {

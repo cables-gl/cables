@@ -19,8 +19,7 @@
                 "name": "Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Vars.TriggerVarGetNumber"
+        ]
     },
     "summary": "Get a number variable value at time of trigger",
     "issues": "",

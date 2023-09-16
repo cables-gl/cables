@@ -21,7 +21,6 @@
                 "name": "URL",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Value.FileInput"
+        ]
     }
 }

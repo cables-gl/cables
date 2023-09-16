@@ -94,8 +94,7 @@
                 "type": 1,
                 "name": "Triggered"
             }
-        ],
-        "name": "Ops.Value.SwitchNumberOnTrigger"
+        ]
     },
     "authorName": "pandur",
     "id": "338032c5-bf47-454b-8ae1-cd91f17e5c5b",

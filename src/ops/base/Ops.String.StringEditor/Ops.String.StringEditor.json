@@ -26,13 +26,11 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringEditor"
+        ]
     },
     "summary": "string text editor",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

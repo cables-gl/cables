@@ -63,8 +63,7 @@
                 "name": "Response Arrays Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.BiquadFilter_v2"
+        ]
     },
     "summary": "Different kinds of audio filters",
     "docs": {
@@ -129,7 +128,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "nhyACp"

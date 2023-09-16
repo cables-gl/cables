@@ -12,14 +12,12 @@
                 "name": "has focus",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.CanvasFocus"
+        ]
     },
     "summary": "is canvas focussed ?",
     "authorName": "pandur",
     "id": "e235ea77-f697-475a-8799-d5e4deed7204",
     "created": 1518602044950,
-
     "relatedops": null,
     "exampleProjectId": "vGwM7f",
     "docs": {

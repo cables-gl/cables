@@ -39,8 +39,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ArrayPathFollowParticles"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

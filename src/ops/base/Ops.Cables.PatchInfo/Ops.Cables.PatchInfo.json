@@ -28,8 +28,7 @@
                 "name": "Namespace",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Cables.PatchInfo"
+        ]
     },
     "exampleProjectId": "3hkdqX"
 }

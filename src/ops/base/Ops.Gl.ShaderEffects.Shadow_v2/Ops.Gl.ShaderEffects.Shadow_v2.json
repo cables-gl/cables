@@ -95,8 +95,7 @@
                 "type": 1,
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.Shadow_v2"
+        ]
     },
     "changelog": [
         {
@@ -120,7 +119,6 @@
     ],
     "summary": "add shadow capabilities to any material",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v5",
         "Ops.Gl.Phong.AmbientLight_v4",

@@ -210,8 +210,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.AudioMixer"
+        ]
     },
     "summary": "Mixes different audio signals together",
     "docs": {

@@ -305,8 +305,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.MultiDrawImage"
+        ]
     },
     "docs": {
         "ports": []
@@ -327,7 +326,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "dr8EeE"

@@ -55,8 +55,7 @@
                 "type": 3,
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Value.ColorValue"
+        ]
     },
     "summary": "Use a color value on multiple places",
     "docs": {

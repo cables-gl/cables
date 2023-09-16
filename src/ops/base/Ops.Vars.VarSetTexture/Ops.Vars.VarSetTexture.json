@@ -31,12 +31,10 @@
                 "type": "2",
                 "name": "Object"
             }
-        ],
-        "name": "Ops.Vars.VarSetTexture"
+        ]
     },
     "summary": "set a texture variable",
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarGetTexture"
     ],

@@ -47,7 +47,6 @@
                 "type": 2,
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Json.ObjectSetString_v2"
+        ]
     }
 }

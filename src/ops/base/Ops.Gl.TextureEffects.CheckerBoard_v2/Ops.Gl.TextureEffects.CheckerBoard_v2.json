@@ -54,8 +54,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.CheckerBoardV2"
+        ]
     },
     "summary": "Draw a checkerboard pattern",
     "author": "5a0fe67d9641cedb39929853",

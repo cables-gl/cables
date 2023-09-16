@@ -19,8 +19,7 @@
                 "type": "3",
                 "name": "Array Copy"
             }
-        ],
-        "name": "Ops.Array.CopyArray"
+        ]
     },
     "summary": "Makes a copy of an array (clone, duplicate)",
     "docs": {

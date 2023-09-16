@@ -19,8 +19,7 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.CSSFilter"
+        "portsOut": []
     },
     "summary": "set css filter to html element (blur/opacity/contrast)",
     "docs": {

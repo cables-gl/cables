@@ -117,8 +117,7 @@
                 "name": "Font Available",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Meshes.TextMesh_v2"
+        ]
     },
     "summary": "Draws text in 3d space using one of the font ops",
     "docs": {

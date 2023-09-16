@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Json.ObjectKeyObject"
+        ]
     },
     "summary": "insert an object into an object",
     "docs": {

@@ -20,13 +20,11 @@
                 "type": "0",
                 "name": "Out Value"
             }
-        ],
-        "name": "Ops.Trigger.SetValueOnTrigger"
+        ]
     },
     "summary": "set number when triggered",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

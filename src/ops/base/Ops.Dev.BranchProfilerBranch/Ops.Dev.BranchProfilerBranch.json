@@ -35,7 +35,6 @@
                 "name": "Duration",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Dev.BranchProfilerBranch"
+        ]
     }
 }

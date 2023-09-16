@@ -13,8 +13,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Boolean.IsZero"
+        ]
     },
     "summary": "Returns `true` if input value is `0`",
     "docs": {

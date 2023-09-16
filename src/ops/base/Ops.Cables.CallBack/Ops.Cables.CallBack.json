@@ -30,8 +30,7 @@
                 "name": "value 3",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Patch.CallBack"
+        ]
     },
     "docs": {
         "ports": [

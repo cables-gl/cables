@@ -36,8 +36,7 @@
                 "name": "Percentage Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.ScrollPosition_v2"
+        ]
     },
     "summary": "the current x y  top left scrolling position of html page or element",
     "authorName": "pandur",
@@ -56,7 +55,6 @@
             "date": 1674559544003
         }
     ],
-
     "relatedops": null,
     "docs": {
         "ports": []

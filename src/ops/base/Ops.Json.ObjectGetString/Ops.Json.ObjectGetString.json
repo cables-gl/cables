@@ -30,8 +30,7 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectGetString"
+        ]
     },
     "summary": "Get string from object by key",
     "issues": "",

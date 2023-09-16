@@ -107,8 +107,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Noise.PerlinNoise"
+        ]
     },
     "summary": "draw perlin noise into an image",
     "credits": [

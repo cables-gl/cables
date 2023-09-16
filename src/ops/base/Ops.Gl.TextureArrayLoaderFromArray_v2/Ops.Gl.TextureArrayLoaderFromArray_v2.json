@@ -65,8 +65,7 @@
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.TextureArrayLoaderFromArray2"
+        ]
     },
     "summary": "load multiple texture from filenames given as an array",
     "docs": {

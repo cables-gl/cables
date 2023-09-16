@@ -36,12 +36,10 @@
                 "name": "Storage Support",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Website.LocalStorageNumber"
+        ]
     },
     "summary": "Store and retreive a number in browser localstorage",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

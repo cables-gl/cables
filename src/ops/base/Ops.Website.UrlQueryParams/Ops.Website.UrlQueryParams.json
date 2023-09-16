@@ -18,8 +18,7 @@
                 "name": "result",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Website.UrlQueryParams"
+        ]
     },
     "summary": "Get URL query parameters",
     "updated": 1521728915231,

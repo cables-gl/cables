@@ -38,8 +38,7 @@
                 "type": "2",
                 "name": "audio out"
             }
-        ],
-        "name": "Ops.WebAudio.Convolver"
+        ]
     },
     "created": 1510741688555,
     "summary": "Audio reverb using an impulse response (sample)",
@@ -72,7 +71,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "WlLDwp"

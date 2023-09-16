@@ -54,12 +54,10 @@
                 "type": 3,
                 "name": "Matrix"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfNodeTransform_v2"
+        ]
     },
     "summary": "Get the transform from the GLTFscene op",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.GLTF.GltfScene"
     ],

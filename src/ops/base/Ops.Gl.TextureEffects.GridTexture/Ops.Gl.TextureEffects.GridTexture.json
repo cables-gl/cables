@@ -88,8 +88,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.GridTexture"
+        ]
     },
     "summary": "Creates a grid texture",
     "issues": "",

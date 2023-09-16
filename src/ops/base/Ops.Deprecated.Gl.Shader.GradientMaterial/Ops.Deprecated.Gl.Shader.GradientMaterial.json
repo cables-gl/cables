@@ -85,7 +85,6 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.Shader.GradientMaterial"
+        ]
     }
 }

@@ -17,8 +17,7 @@
                 "type": 3,
                 "name": "Device Names"
             }
-        ],
-        "name": "Ops.Devices.Midi.DeviceList"
+        ]
     },
     "authorName": "pandur",
     "id": "6e52048f-557d-4332-9d5e-2201f728cb23",

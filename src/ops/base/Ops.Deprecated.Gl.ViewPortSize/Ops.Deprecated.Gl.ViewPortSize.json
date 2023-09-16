@@ -31,8 +31,7 @@
                 "type": "0",
                 "name": "height"
             }
-        ],
-        "name": "Ops.Gl.ViewPortSize"
+        ]
     },
     "summary": "deprecated - use canvassize",
     "docs": {

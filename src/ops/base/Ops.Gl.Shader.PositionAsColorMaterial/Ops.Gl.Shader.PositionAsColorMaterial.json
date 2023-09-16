@@ -15,8 +15,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.PositionAsColorMaterial"
+        ]
     },
     "summary": "draw meshes using XYZ position coordinates as RGB color ",
     "docs": {

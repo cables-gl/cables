@@ -18,8 +18,7 @@
                 "subType": "boolean"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.SetCssVariableString"
+        "portsOut": []
     },
     "summary": "set CSS variable string value",
     "youtubeid": "",

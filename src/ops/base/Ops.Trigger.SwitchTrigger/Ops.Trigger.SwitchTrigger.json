@@ -86,12 +86,10 @@
                 "type": "1",
                 "name": "Trigger out"
             }
-        ],
-        "name": "Ops.Trigger.SwitchTrigger"
+        ]
     },
     "summary": "route input triggers by index to one output",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "TdHgjqOLpnM"

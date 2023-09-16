@@ -34,12 +34,10 @@
                 "type": 3,
                 "name": "Matrix"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfNodeTransform"
+        ]
     },
     "summary": "get current transformation of a gltf node",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

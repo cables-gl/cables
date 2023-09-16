@@ -31,7 +31,6 @@
                 "type": "0",
                 "name": "Percentage"
             }
-        ],
-        "name": "Ops.Anim.BoolTimelineScrub"
+        ]
     }
 }

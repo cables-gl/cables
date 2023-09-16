@@ -16,8 +16,7 @@
                 "type": "1",
                 "name": "next"
             }
-        ],
-        "name": "Ops.Trigger.NthTrigger"
+        ]
     },
     "summary": "trigger children every x times exe was triggered",
     "updated": 1525282085925,

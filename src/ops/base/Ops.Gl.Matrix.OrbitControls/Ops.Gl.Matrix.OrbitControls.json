@@ -121,8 +121,7 @@
                 "name": "Rot Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.OrbitControls"
+        ]
     },
     "summary": "rotate your object by clicking and dragging the mouse",
     "author": "55d744634cdc152216eb9aad",

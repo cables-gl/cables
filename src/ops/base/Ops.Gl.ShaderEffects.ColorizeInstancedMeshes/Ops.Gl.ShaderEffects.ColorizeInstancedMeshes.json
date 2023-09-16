@@ -29,8 +29,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.ColorizeInstancedMeshes"
+        ]
     },
     "summary": "colorize instanced meshes by picking random color from a texture",
     "docs": {

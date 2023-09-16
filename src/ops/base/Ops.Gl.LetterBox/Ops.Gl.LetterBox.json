@@ -31,8 +31,7 @@
                 "name": "Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.LetterBox"
+        ]
     },
     "summary": "Sets an aspect ratio",
     "docs": {
@@ -56,6 +55,5 @@
     "created": 1540920488363,
     "youtubeid": "",
     "issues": "will be deprecated - use Ops.Gl.AspectRatio\n",
-
     "relatedops": null
 }

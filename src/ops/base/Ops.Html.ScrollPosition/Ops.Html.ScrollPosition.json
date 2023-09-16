@@ -12,8 +12,7 @@
                 "name": "top",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.ScrollPosition"
+        ]
     },
     "summary": "the current x y  top left scrolling position of html page",
     "authorName": "pandur",

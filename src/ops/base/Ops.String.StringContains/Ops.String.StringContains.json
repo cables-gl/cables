@@ -23,8 +23,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringContains"
+        ]
     },
     "summary": "check if string contains another string (find,search,indexOf)",
     "authorName": "pandur",

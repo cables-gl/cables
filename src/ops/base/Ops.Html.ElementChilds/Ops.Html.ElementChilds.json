@@ -61,13 +61,11 @@
                 "type": 2,
                 "name": "Parent Out"
             }
-        ],
-        "name": "Ops.Html.ElementChilds"
+        ]
     },
     "summary": "Set childs of a HTML Element",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

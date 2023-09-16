@@ -24,8 +24,7 @@
                 "type": 1,
                 "name": "else"
             }
-        ],
-        "name": "Ops.Boolean.IfFalseThen"
+        ]
     },
     "summary": "Triggers if input value is `false`",
     "docs": {

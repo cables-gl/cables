@@ -39,8 +39,7 @@
                 "name": "Result Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ScreenPosTo3d_v3"
+        ]
     },
     "summary": "convert screen coordinates to a 3d position",
     "docs": {
@@ -68,7 +67,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "todos": [
         {

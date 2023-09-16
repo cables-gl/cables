@@ -80,8 +80,7 @@
                 "name": "Texture 4",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Shader.Shader2Texture"
+        ]
     },
     "summary": "render a shader into a texture",
     "docs": {

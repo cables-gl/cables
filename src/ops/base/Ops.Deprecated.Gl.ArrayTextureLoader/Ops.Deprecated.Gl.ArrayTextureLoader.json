@@ -11,8 +11,7 @@
                 "type": "3",
                 "name": "Textures"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.ArrayTextureLoader"
+        ]
     },
     "updated": 1534439700913,
     "authorName": "pandur",

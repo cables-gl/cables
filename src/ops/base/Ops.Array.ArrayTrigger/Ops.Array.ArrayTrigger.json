@@ -22,8 +22,7 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayTrigger"
+        ]
     },
     "summary": "Trigger an array",
     "docs": {
@@ -44,6 +43,5 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null
 }

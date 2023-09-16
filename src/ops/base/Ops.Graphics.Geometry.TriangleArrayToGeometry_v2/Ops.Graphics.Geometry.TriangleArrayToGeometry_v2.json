@@ -40,8 +40,7 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Graphics.Geometry.TriangleArrayToGeometry_v2"
+        ]
     },
     "summary": "Draws multiple triangles using coordinates from an array",
     "youtubeid": "",

@@ -48,8 +48,7 @@
                 "type": "2",
                 "name": "Texture"
             }
-        ],
-        "name": "Ops.Gl.Textures.Graph"
+        ]
     },
     "summary": "draw a graph of a value into a texture",
     "docs": {
@@ -72,7 +71,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "eqfKTx"

@@ -83,12 +83,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Stripes_v3"
+        ]
     },
     "summary": "Create a texture of stripes /lines",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -36,13 +36,11 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.User.pandur.ArrayChunkDuplicate"
+        ]
     },
     "summary": "repeat chunks of an array multiple times",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "Vu22bf",

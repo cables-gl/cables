@@ -51,8 +51,7 @@
                 "name": "Frozen Number",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Values.FreezeNumber"
+        ]
     },
     "authorName": "pandur",
     "created": 1644069298775,

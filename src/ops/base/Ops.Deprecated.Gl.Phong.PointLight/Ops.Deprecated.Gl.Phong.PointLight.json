@@ -59,7 +59,6 @@
                 "type": "1",
                 "name": "attachment"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.Phong.PointLight"
+        ]
     }
 }

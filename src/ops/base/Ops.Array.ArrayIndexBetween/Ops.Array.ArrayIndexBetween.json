@@ -32,12 +32,10 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.ArrayIndexBetween"
+        ]
     },
     "summary": "output index where value is greater than number and smaller then next number ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

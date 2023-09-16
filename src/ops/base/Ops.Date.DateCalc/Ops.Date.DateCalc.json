@@ -51,13 +51,11 @@
                 "name": "Timestamp",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Date.DateCalc"
+        ]
     },
     "libs": [],
     "summary": "Perform date calculations",
     "issues": "There is a dependency on moment.js, but it's not used. I can't find where to remove the dependency",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

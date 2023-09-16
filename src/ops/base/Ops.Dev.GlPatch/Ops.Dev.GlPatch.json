@@ -33,12 +33,10 @@
                 "name": "Next"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Dev.GlPatch"
+        "portsOut": []
     },
     "summary": "This render the editor ops in your canvas.",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

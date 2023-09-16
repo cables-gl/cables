@@ -15,12 +15,10 @@
                 "type": "3",
                 "name": "Palette Array out"
             }
-        ],
-        "name": "Ops.Array.PaletteLibrary"
+        ]
     },
     "summary": "Contains a collection of color palettes in groups of 5 in an array",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.TextureEffects.PaletteTexture",
         "Ops.Array.ArrayChunk"

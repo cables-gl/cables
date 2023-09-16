@@ -27,7 +27,6 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineDelayFrames"
+        ]
     }
 }

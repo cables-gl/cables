@@ -22,8 +22,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayContains"
+        ]
     },
     "summary": "check if array contains a string or number (find,search,indexOf)",
     "authorName": "pandur",
@@ -31,7 +30,6 @@
     "created": 1542698773328,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

@@ -45,8 +45,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.DepthTexture_v2"
+        ]
     },
     "summary": "draw the content of a depth texture",
     "authorName": "pandur",

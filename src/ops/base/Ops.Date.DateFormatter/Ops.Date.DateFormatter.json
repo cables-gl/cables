@@ -35,12 +35,10 @@
                 "type": "5",
                 "name": "StringDate"
             }
-        ],
-        "name": "Ops.Date.DateFormatter"
+        ]
     },
     "summary": "String representation of a date",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

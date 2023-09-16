@@ -36,12 +36,10 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayLogicBetween_v2"
+        ]
     },
     "summary": "If value of array is between min and max then the value is 1 else 0",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

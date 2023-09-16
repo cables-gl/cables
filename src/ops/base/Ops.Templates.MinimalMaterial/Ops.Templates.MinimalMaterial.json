@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Templates.MinimalMaterial"
+        ]
     },
     "summary": "Material Example Template",
     "docs": {

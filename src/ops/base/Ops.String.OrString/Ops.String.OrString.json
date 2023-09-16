@@ -11,7 +11,6 @@
     "created": 1587710105864,
     "summary": "outputs the first valid string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -57,7 +56,6 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.OrString"
+        ]
     }
 }

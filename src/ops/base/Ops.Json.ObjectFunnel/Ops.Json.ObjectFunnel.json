@@ -30,8 +30,7 @@
                 "type": 2,
                 "name": "Out Object"
             }
-        ],
-        "name": "Ops.Json.ObjectFunnel"
+        ]
     },
     "summary": "outputs the last changed object",
     "docs": {

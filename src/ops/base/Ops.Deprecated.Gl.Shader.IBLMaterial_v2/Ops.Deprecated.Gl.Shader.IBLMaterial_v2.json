@@ -95,8 +95,7 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.IBLMaterial2"
+        ]
     },
     "summary": "image based lighting material using cubemaps",
     "docs": {

@@ -25,8 +25,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array1To3"
+        ]
     },
     "summary": "convert array1 to array3",
     "docs": {

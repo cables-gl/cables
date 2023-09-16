@@ -15,8 +15,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.IgnoreInShadowPass"
+        ]
     },
     "summary": "do not trigger next when rendering the shadow pass",
     "changelog": [

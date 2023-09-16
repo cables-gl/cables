@@ -45,12 +45,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayLogicArray"
+        ]
     },
     "summary": "Performs logical comparison operations on two arrays",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.ArrayLogic"
     ],

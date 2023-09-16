@@ -44,8 +44,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.PseudoLensFlares"
+        ]
     },
     "summary": "simulate lens flare effect",
     "docs": {
@@ -85,7 +84,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "P8heur"

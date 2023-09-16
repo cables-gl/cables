@@ -33,8 +33,7 @@
                 "type": 3,
                 "name": "Lines"
             }
-        ],
-        "name": "Ops.Gl.LineFont_v2"
+        ]
     },
     "summary": "A Simple way to write text on the screen.",
     "youtubeid": "",

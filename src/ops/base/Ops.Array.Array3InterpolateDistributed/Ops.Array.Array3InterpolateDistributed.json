@@ -32,8 +32,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3InterpolateDistributed"
+        ]
     },
     "summary": "interpolate between two arrays",
     "docs": {

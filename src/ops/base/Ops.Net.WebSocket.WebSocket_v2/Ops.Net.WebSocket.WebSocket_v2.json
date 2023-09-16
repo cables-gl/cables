@@ -49,12 +49,10 @@
                 "type": 5,
                 "name": "Raw Data"
             }
-        ],
-        "name": "Ops.Net.WebSocket.WebSocket_v2"
+        ]
     },
     "summary": "Create a websocket connection and receive data from it",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

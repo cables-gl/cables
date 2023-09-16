@@ -51,8 +51,7 @@
                 "type": 2,
                 "name": "Data"
             }
-        ],
-        "name": "Ops.Audio.MidiJson"
+        ]
     },
     "summary": "read MIDI information at time x",
     "docs": {

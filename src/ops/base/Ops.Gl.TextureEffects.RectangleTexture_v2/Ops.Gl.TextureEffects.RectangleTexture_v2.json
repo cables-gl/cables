@@ -76,8 +76,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Rectangle_v2"
+        ]
     },
     "summary": "Draw a 2D rectangle with controllable parameters",
     "collections": [

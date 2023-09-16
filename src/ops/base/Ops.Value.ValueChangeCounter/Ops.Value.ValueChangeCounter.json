@@ -24,7 +24,6 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.ValueChangeCounter"
+        ]
     }
 }

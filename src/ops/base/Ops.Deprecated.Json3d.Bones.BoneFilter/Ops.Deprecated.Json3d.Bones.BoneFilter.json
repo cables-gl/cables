@@ -20,12 +20,10 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Json3d.Bones.BoneFilter"
+        ]
     },
     "summary": "Filter the bones joints and expose them for you to use its position to attach a mesh to it.",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

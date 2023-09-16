@@ -20,12 +20,10 @@
                 "type": "5",
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Vars.VarGetString"
+        ]
     },
     "summary": "String variable getter",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

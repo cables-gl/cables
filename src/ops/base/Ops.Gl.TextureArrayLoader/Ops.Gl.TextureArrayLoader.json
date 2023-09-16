@@ -67,8 +67,7 @@
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureArrayLoader"
+        ]
     },
     "summary": "load multiple images into an array",
     "authorName": "tim",
@@ -99,7 +98,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Texture",
         "Ops.Gl.TextureArrayLoaderFromArray"

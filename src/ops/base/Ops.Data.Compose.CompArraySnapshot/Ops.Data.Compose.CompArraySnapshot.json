@@ -46,8 +46,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Data.Compose.CompArraySnapshot"
+        ]
     },
     "authorName": "pandur",
     "created": 1686661094980,

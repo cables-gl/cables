@@ -96,8 +96,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.SwitchNumber"
+        ]
     },
     "summary": "switch between number values by index",
     "docs": {

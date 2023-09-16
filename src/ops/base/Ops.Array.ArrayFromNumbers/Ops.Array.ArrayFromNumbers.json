@@ -190,12 +190,10 @@
                 "type": 3,
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Array.ArrayFromNumbers"
+        ]
     },
     "summary": "simple way to create small arrays of numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "iXKo7mU422M"

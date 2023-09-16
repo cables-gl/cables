@@ -15,8 +15,7 @@
                 "name": "Number",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.ParseInt_v2"
+        ]
     },
     "summary": "Parse a string to a integer number / string to number",
     "issues": "",

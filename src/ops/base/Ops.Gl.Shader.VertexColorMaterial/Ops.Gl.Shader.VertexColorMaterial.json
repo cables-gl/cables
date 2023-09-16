@@ -1,51 +1,50 @@
 {
-  "author": "59db805b08bab26e1ab7a0f2",
-  "authorName": "pandur",
-  "id": "a01d592b-0e5e-48f3-a9fd-54b87ffd623b",
-  "created": 1513331905182,
-  "layout": {
-    "portsIn": [
-      {
-        "type": 1,
-        "name": "render"
-      },
-      {
-        "type": 0,
-        "name": "opacity",
-        "subType": "number"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": 1,
-        "name": "trigger"
-      }
-    ],
-    "name": "Ops.Gl.Shader.VertexColorMaterial"
-  },
-  "summary": "draw a mesh showing only it's vertex colors",
-  "issues": "",
-  "collections": null,
-  "relatedops": null,
-  "youtubeids": [],
-  "docs": {
-    "ports": []
-  },
-  "changelog": [
-    {
-      "message": "Ops.Gl.Shader.VertexColorMaterial renamed to Ops.Deprecated.Gl.Shader.VertexColorMaterial",
-      "author": "pandur",
-      "date": 1596093928557
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "a01d592b-0e5e-48f3-a9fd-54b87ffd623b",
+    "created": 1513331905182,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "opacity",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
     },
-    {
-      "message": "Ops.Deprecated.Gl.Shader.VertexColorMaterial renamed to Ops.Gl.Shader.VertexColorMaterial",
-      "author": "pandur",
-      "date": 1603023905272
+    "summary": "draw a mesh showing only it's vertex colors",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     },
-    {
-      "message": "fix: now works with meshinstancer",
-      "author": "pandur",
-      "date": 1643616985264
-    }
-  ]
+    "changelog": [
+        {
+            "message": "Ops.Gl.Shader.VertexColorMaterial renamed to Ops.Deprecated.Gl.Shader.VertexColorMaterial",
+            "author": "pandur",
+            "date": 1596093928557
+        },
+        {
+            "message": "Ops.Deprecated.Gl.Shader.VertexColorMaterial renamed to Ops.Gl.Shader.VertexColorMaterial",
+            "author": "pandur",
+            "date": 1603023905272
+        },
+        {
+            "message": "fix: now works with meshinstancer",
+            "author": "pandur",
+            "date": 1643616985264
+        }
+    ]
 }

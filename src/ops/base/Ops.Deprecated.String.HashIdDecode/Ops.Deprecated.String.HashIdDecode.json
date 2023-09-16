@@ -18,8 +18,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.HashIdDecode"
+        ]
     },
     "summary": "read back integers from a hashid",
     "docs": {
@@ -27,7 +26,6 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [
         "hUdHnFtBTNU"

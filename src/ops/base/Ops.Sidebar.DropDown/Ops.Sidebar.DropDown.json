@@ -48,8 +48,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.DropDown"
+        ]
     },
     "summary": "Shows a drop-down (select) element in the sidebar",
     "docs": {
@@ -88,7 +87,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "0wKJ5d"

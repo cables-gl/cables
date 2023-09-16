@@ -37,8 +37,7 @@
                 "name": "Rows",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Api.ThingSpeak.Write"
+        ]
     },
     "summary": "Writes a value to ThingSpeak",
     "docs": {

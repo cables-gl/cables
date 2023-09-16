@@ -15,8 +15,7 @@
                 "type": "1",
                 "name": "next"
             }
-        ],
-        "name": "Ops.Gl2.ForceField.ResetForces"
+        ]
     },
     "changelog": [
         {

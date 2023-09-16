@@ -90,8 +90,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.CubeMapMaterial_v2"
+        ]
     },
     "summary": "use a cubemap or equirectangular texture as a material",
     "issues": "",

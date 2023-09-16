@@ -56,8 +56,7 @@
                 "name": "RGBA Tuple Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.HSBtoRGBArray"
+        ]
     },
     "summary": "generates RGBA array from up to 4 arrays (HSBA)",
     "issues": "",

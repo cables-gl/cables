@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.SidebarVariables"
+        ]
     },
     "changelog": [
         {
@@ -40,7 +39,6 @@
     ],
     "summary": "show values of all variables in a sidebar",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

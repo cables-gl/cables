@@ -54,8 +54,7 @@
                 "type": 5,
                 "name": "queryParams"
             }
-        ],
-        "name": "Ops.Website.FilenameInfo"
+        ]
     },
     "summary": "information about a filename, like url protocol, suffix etc",
     "issues": "",

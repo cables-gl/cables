@@ -95,8 +95,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.Presets_v2"
+        ]
     },
     "summary": "manage sidebar presets",
     "docs": {

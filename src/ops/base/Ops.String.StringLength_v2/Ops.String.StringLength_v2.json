@@ -15,8 +15,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringLength_v2"
+        ]
     },
     "summary": "number of characters in a string",
     "youtubeid": "",

@@ -82,8 +82,7 @@
                 "name": "Element",
                 "objType": "element"
             }
-        ],
-        "name": "Ops.Gl.ExternalCanvas"
+        ]
     },
     "authorName": "pandur",
     "created": 1689248551446,

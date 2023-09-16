@@ -46,12 +46,10 @@
                 "name": "Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.ElementSize"
+        ]
     },
     "summary": "Get size and position of a HTML element",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

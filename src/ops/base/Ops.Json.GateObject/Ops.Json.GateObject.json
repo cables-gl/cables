@@ -31,8 +31,7 @@
                 "type": 2,
                 "name": "Object Out"
             }
-        ],
-        "name": "Ops.Json.GateObject"
+        ]
     },
     "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
     "issues": "",

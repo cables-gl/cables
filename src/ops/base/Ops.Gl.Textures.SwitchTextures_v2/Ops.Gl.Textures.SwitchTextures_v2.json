@@ -99,12 +99,10 @@
                 "type": "2",
                 "name": "texture"
             }
-        ],
-        "name": "Ops.Gl.Textures.SwitchTextures_v2"
+        ]
     },
     "summary": "Switch between different textures ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "TdHgjqOLpnM"

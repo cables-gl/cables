@@ -46,8 +46,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Interlace"
+        ]
     },
     "summary": "Tv scanlines effect",
     "author": "59d794f763898eb73bd67a7e",

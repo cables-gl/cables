@@ -23,8 +23,7 @@
                 "type": 2,
                 "name": "Object Out"
             }
-        ],
-        "name": "Ops.Json.ObjectRelay"
+        ]
     },
     "changelog": [
         {

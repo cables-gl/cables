@@ -134,12 +134,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.Shapes2DV2"
+        ]
     },
     "summary": "Generates different 2d shapes to use as a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

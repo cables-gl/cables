@@ -33,8 +33,7 @@
                 "name": "Loading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Patch.Pg2VScx.TextureToBase64_2"
+        ]
     },
     "summary": "Converts a texture into a base-64 image string",
     "docs": {

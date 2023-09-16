@@ -31,8 +31,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.TextureEffects.Color"
+        ]
     },
     "summary": "Fill the current ImageCompose with a color",
     "updated": 1542698229323,

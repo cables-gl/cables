@@ -22,8 +22,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayContains_v2"
+        ]
     },
     "summary": "check if array contains a string or number (find,search,indexOf)",
     "authorName": "simod",

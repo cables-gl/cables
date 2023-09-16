@@ -27,12 +27,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Admin.PerformanceNow"
+        ]
     },
     "summary": "Value since the time origin in milliseconds (performance.now())",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

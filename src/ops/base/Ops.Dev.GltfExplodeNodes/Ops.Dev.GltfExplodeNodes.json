@@ -85,7 +85,6 @@
                 "name": "Found",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Dev.GltfExplodeNodes"
+        ]
     }
 }

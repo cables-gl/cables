@@ -6,8 +6,7 @@
                 "name": "Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Vars.VarSetNumber"
+        ]
     },
     "summary": "set a variable number",
     "docs": {
@@ -22,7 +21,6 @@
     "id": "b0190d08-82f6-45b2-bc0c-b70a3257ea92",
     "created": 1519228504479,
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarGetNumber"
     ],

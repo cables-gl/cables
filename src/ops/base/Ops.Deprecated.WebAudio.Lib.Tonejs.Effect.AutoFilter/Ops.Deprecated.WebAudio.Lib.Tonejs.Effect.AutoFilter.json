@@ -35,8 +35,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.AutoFilter"
+        ]
     },
     "id": "c7989c98-5a09-4b15-b896-c83795b01435"
 }

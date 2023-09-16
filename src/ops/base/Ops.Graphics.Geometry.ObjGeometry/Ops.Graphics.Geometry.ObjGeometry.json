@@ -46,11 +46,9 @@
                 "type": 5,
                 "name": "Status"
             }
-        ],
-        "name": "Ops.Graphics.Geometry.ObjGeometry"
+        ]
     },
     "summary": "parse an obj string to a geometry object",
-
     "relatedops": null,
     "docs": {
         "ports": []

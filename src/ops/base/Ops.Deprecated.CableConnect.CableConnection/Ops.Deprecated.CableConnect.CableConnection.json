@@ -1,49 +1,48 @@
 {
-  "libs": [
-    "socket.io.min.js"
-  ],
-  "authorName": "pandur",
-  "id": "70661298-2632-4564-a733-7e1f53b88439",
-  "created": 1548490959351,
-  "layout": {
-    "portsIn": [
-      {
-        "type": "0",
-        "name": "URL",
-        "subType": "string"
-      },
-      {
-        "type": "0",
-        "name": "Channel",
-        "subType": "string"
-      }
+    "libs": [
+        "socket.io.min.js"
     ],
-    "portsOut": [
-      {
-        "type": "2",
-        "name": "Connection"
-      },
-      {
-        "type": "0",
-        "name": "Connected",
-        "subType": "number"
-      }
-    ],
-    "name": "Ops.Cables.CableConnect.CableConnection"
-  },
-  "summary": "internal test op",
-  "youtubeid": "",
-  "issues": "",
-  "collections": null,
-  "relatedops": null,
-  "docs": {
-    "ports": []
-  },
-  "changelog": [
-    {
-      "message": "Ops.Admin.CableConnect.CableConnection renamed to Ops.Deprecated.CableConnect.CableConnection",
-      "author": "pandur",
-      "date": 1623913714473
-    }
-  ]
+    "authorName": "pandur",
+    "id": "70661298-2632-4564-a733-7e1f53b88439",
+    "created": 1548490959351,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "URL",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Channel",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Connection"
+            },
+            {
+                "type": "0",
+                "name": "Connected",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Admin.CableConnect.CableConnection renamed to Ops.Deprecated.CableConnect.CableConnection",
+            "author": "pandur",
+            "date": 1623913714473
+        }
+    ]
 }

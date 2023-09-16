@@ -52,8 +52,7 @@
                 "type": 1,
                 "name": "Reseted"
             }
-        ],
-        "name": "Ops.Audio.MidiJsonNote_v2"
+        ]
     },
     "summary": "Filter MidiJson for notes",
     "docs": {
@@ -73,7 +72,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": ""

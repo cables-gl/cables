@@ -61,8 +61,7 @@
                 "name": "Result",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Dev.GlArrayCurlNoise"
+        ]
     },
     "summary": "draw perlin noise into an image",
     "credits": [

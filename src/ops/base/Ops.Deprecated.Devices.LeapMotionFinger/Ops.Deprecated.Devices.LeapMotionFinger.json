@@ -79,7 +79,6 @@
                 "type": "0",
                 "name": "carpal z"
             }
-        ],
-        "name": "Ops.Devices.LeapMotionFinger"
+        ]
     }
 }

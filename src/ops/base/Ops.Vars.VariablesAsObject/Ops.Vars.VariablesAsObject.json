@@ -30,8 +30,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Vars.VariablesAsObject"
+        ]
     },
     "summary": "outputs an object containing all variables",
     "issues": "",

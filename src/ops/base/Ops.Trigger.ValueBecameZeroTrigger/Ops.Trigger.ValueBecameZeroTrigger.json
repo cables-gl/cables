@@ -15,8 +15,7 @@
                 "type": 1,
                 "name": "Became Zero Trigger"
             }
-        ],
-        "name": "Ops.Trigger.ValueBecameZeroTrigger"
+        ]
     },
     "summary": "Triggers when the input value became zero",
     "docs": {

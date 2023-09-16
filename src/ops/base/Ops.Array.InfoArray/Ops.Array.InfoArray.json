@@ -23,8 +23,7 @@
                 "name": "Average",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.InfoArray"
+        ]
     },
     "authorName": "pandur",
     "id": "1db230c8-212f-4679-87d6-3531659363da",

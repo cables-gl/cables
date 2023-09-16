@@ -53,8 +53,7 @@
                 "type": 2,
                 "name": "HTML Element"
             }
-        ],
-        "name": "Ops.Html.BackgroundImage_v2"
+        ]
     },
     "changelog": [
         {
@@ -65,7 +64,6 @@
     ],
     "summary": "Load a background image and use css styling",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

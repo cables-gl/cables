@@ -119,12 +119,10 @@
                 "name": "Wet Out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.Delay"
+        ]
     },
     "summary": "add a delay effect to an audio stream",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

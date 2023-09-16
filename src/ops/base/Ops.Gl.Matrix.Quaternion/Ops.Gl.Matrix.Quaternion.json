@@ -34,8 +34,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.Quaternion"
+        ]
     },
     "summary": "multiplies current modelmatrix with a quaternion",
     "docs": {

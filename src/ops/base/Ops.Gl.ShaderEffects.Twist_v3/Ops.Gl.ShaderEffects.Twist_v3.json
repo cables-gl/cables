@@ -34,8 +34,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.Twist_v3"
+        ]
     },
     "changelog": [
         {
@@ -46,7 +45,6 @@
     ],
     "summary": "twist a mesh around an axis",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -60,8 +60,7 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.ArrayContainsString"
+        ]
     },
     "exampleProjectId": "VuK4ve"
 }

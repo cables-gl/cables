@@ -34,8 +34,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.Render2TexturesSlots_v2"
+        ]
     },
     "summary": "select textures to render to",
     "docs": {

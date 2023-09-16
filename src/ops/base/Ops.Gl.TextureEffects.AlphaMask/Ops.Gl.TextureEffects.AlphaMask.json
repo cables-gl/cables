@@ -29,13 +29,11 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.AlphaMask"
+        ]
     },
     "summary": "set alphachannel of current imagecompose via a texture mask",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

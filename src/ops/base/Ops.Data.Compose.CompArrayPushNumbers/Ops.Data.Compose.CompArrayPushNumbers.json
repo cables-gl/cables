@@ -97,8 +97,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Data.Compose.CompArrayPushNumbers"
+        ]
     },
     "authorName": "pandur",
     "created": 1686660300185,

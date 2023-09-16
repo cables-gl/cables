@@ -155,8 +155,7 @@
                 "type": 5,
                 "name": "Error Message"
             }
-        ],
-        "name": "Ops.Gl.Textures.VideoTexture_v3"
+        ]
     },
     "changelog": [
         {
@@ -200,7 +199,6 @@
     ],
     "summary": "Play a video file and use it as a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -47,8 +47,7 @@
                 "name": "Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.Toggle_v2"
+        ]
     },
     "summary": "sidebar boolean toggle/switch element",
     "youtubeid": "cpRVswVdvI0",

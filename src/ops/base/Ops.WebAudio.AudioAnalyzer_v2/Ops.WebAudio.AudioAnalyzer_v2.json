@@ -82,8 +82,7 @@
                 "name": "RMS Volume",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.AudioAnalyzer_v2"
+        ]
     },
     "summary": "Extracts FFT, RMS & Waveform data from an incoming audio signal",
     "docs": {

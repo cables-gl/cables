@@ -36,12 +36,10 @@
                 "name": "NRPN",
                 "group": "Midi Events"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiOutputDevice"
+        ]
     },
     "summary": "Connect to MIDI device input port",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiCCOut",
         "Ops.Devices.Midi.MidiNoteOut",

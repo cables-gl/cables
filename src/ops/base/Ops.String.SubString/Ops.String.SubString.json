@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.SubString"
+        ]
     },
     "summary": "subset of a string between one index and another",
     "id": "b0943bd6-fcce-4613-afb3-d4585ee10ea0"

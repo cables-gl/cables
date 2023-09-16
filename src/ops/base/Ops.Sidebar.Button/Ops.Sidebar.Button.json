@@ -33,8 +33,7 @@
                 "type": "1",
                 "name": "Pressed Trigger"
             }
-        ],
-        "name": "Ops.Sidebar.Button"
+        ]
     },
     "summary": "sidebar push button/trigger element",
     "docs": {

@@ -92,12 +92,10 @@
                 "type": 1,
                 "name": "Collision"
             }
-        ],
-        "name": "Ops.Physics.Body.PhysicsGeometryBody"
+        ]
     },
     "summary": "create a physics body from any geometry",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

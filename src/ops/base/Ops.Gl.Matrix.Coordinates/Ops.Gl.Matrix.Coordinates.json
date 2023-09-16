@@ -26,8 +26,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.Coordinates"
+        ]
     },
     "summary": "current xyz coordinates (modelmatrix)",
     "author": "58dabd06a0d7ec8d1a982e66",

@@ -21,8 +21,7 @@
                 "name": "Maximum",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Max2"
+        ]
     },
     "summary": "Returns the biggest number",
     "docs": {

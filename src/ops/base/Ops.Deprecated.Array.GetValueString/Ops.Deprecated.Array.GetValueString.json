@@ -20,7 +20,6 @@
                 "name": "String",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Deprecated.Array.GetValueString"
+        ]
     }
 }

@@ -19,8 +19,7 @@
                 "type": 2,
                 "name": "Event Out"
             }
-        ],
-        "name": "Ops.Html.Event.StopPropagation"
+        ]
     },
     "authorName": "tim",
     "id": "8a0f1c05-3ed7-4d50-b8ec-e8298050988d",

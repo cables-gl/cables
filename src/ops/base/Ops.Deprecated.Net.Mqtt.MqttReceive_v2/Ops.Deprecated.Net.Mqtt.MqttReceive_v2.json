@@ -36,8 +36,7 @@
                 "type": "5",
                 "name": "Topic"
             }
-        ],
-        "name": "Ops.Net.Mqtt.MqttReceive_v2"
+        ]
     },
     "libs": [
         "mqttws31-min.js"

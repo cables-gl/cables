@@ -27,7 +27,6 @@
                 "type": "0",
                 "name": "Finger 2 Y"
             }
-        ],
-        "name": "Ops.Html.Event.TouchEvent"
+        ]
     }
 }

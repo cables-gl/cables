@@ -36,8 +36,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.GammaCorrection"
+        ]
     },
     "summary": "Allows for Gamma correction of a texture",
     "youtubeid": "",

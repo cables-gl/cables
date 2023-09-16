@@ -48,12 +48,10 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Array3ToTexture"
+        ]
     },
     "summary": "convert an array of RGB values to a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

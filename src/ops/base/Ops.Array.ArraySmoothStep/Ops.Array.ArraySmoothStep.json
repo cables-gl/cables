@@ -24,13 +24,11 @@
                 "type": 3,
                 "name": "Array out"
             }
-        ],
-        "name": "Ops.Array.ArraySmoothStep"
+        ]
     },
     "summary": "Applies a smoothstep function to the contents of an array ",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

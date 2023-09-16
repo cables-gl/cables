@@ -29,8 +29,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.CropArray"
+        ]
     },
     "summary": "Crops an array",
     "docs": {
@@ -51,7 +50,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

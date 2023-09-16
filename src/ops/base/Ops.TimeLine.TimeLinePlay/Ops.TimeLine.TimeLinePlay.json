@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLinePlay"
+        ]
     },
     "summary": "start timeline",
     "relatedops": null,

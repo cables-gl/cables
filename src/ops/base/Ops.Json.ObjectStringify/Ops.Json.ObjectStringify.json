@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectStringify"
+        ]
     },
     "summary": "convert object to string",
     "docs": {
@@ -28,7 +27,6 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "7X58nR"

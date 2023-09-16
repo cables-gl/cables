@@ -52,8 +52,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Patch.PNSRgpz.ArraySetNumber_v2"
+        ]
     },
     "summary": "set a number at index in an array",
     "issues": "",

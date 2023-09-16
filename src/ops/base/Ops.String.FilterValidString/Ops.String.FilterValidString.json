@@ -21,7 +21,6 @@
     "created": 1584353798919,
     "summary": "filter valid strings (not null,undefined or empty)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -64,7 +63,6 @@
                 "name": "Is Valid",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.FilterValidString"
+        ]
     }
 }

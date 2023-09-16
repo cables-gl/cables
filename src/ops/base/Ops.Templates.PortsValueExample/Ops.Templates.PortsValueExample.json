@@ -16,8 +16,7 @@
                 "name": "Value out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Templates.PortsValueExample"
+        ]
     },
     "summary": "Is a template for creating Value ports",
     "docs": {

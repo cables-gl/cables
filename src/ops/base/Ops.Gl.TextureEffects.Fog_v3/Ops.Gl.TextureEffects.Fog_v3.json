@@ -110,12 +110,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Fog_v3"
+        ]
     },
     "summary": "add post processing fog (nebula) to a scene",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

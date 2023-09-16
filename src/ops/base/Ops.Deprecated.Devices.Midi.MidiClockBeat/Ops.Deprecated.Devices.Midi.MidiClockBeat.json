@@ -38,8 +38,7 @@
                 "name": "Tick Duration",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiClockBeat"
+        ]
     },
     "summary": "receive midi clock beat / sync",
     "docs": {

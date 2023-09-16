@@ -36,11 +36,9 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Arrays.ArrayToArrays"
+        ]
     },
     "summary": "splits an array up into an array of arrays",
-
     "relatedops": null,
     "docs": {
         "ports": []

@@ -33,8 +33,7 @@
                 "type": 3,
                 "name": "Points B"
             }
-        ],
-        "name": "Ops.Dev.SvgPathToPoints"
+        ]
     },
     "authorName": "pandur",
     "created": 1642924115561

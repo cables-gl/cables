@@ -43,8 +43,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Chorus"
+        ]
     },
     "authorName": "pandur",
     "id": "0dfd97e6-7ac9-4de9-b895-a52ef2ca9cbb",

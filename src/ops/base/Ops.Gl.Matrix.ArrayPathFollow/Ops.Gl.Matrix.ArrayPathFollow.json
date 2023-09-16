@@ -44,8 +44,7 @@
                 "name": "index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ArrayPathFollow"
+        ]
     },
     "summary": "interpolate position on a spline/array3x",
     "docs": {

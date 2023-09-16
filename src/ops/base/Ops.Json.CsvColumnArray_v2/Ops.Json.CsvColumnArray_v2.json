@@ -1,56 +1,55 @@
 {
-  "author": "55d744634cdc152216eb9aad",
-  "authorName": "pandur",
-  "id": "2503021e-1599-40d9-b038-bf5a36c6b2c7",
-  "created": 1640618485563,
-  "layout": {
-    "portsIn": [
-      {
-        "type": 5,
-        "name": "Column Name"
-      },
-      {
-        "type": 3,
-        "name": "CSV Array"
-      },
-      {
-        "type": 0,
-        "name": "Numbers",
-        "subType": "boolean"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": 3,
-        "name": "Result"
-      }
-    ],
-    "name": "Ops.Json.CsvColumnArray_v2"
-  },
-  "summary": "get all values of a CSV column as array of strings",
-  "docs": {
-    "ports": []
-  },
-  "changelog": [
-    {
-      "message": "cloned op from Ops.Json.CsvColumnArray",
-      "author": "pandur",
-      "date": 1640618485564
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "2503021e-1599-40d9-b038-bf5a36c6b2c7",
+    "created": 1640618485563,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Column Name"
+            },
+            {
+                "type": 3,
+                "name": "CSV Array"
+            },
+            {
+                "type": 0,
+                "name": "Numbers",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
     },
-    {
-      "message": "Ops.User.pandur.CsvColumnArray_v2 renamed to Ops.Json.CsvColumnArray_v2",
-      "author": "pandur",
-      "date": 1640618533250
+    "summary": "get all values of a CSV column as array of strings",
+    "docs": {
+        "ports": []
     },
-    {
-      "message": "added option to force number type",
-      "author": "pandur",
-      "date": 1643616875325
-    },
-    {
-      "message": "show warning if column does not exist",
-      "author": "pandur",
-      "date": 1643616880935
-    }
-  ]
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Json.CsvColumnArray",
+            "author": "pandur",
+            "date": 1640618485564
+        },
+        {
+            "message": "Ops.User.pandur.CsvColumnArray_v2 renamed to Ops.Json.CsvColumnArray_v2",
+            "author": "pandur",
+            "date": 1640618533250
+        },
+        {
+            "message": "added option to force number type",
+            "author": "pandur",
+            "date": 1643616875325
+        },
+        {
+            "message": "show warning if column does not exist",
+            "author": "pandur",
+            "date": 1643616880935
+        }
+    ]
 }

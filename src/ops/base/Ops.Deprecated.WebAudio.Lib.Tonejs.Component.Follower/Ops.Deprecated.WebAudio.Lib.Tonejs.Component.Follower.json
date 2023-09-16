@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Follower"
+        ]
     },
     "id": "59ce796d-db03-4c4f-b7db-0650c3a40a09"
 }

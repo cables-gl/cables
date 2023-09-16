@@ -117,8 +117,7 @@
                 "name": "is pressed",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.KeyPiano"
+        ]
     },
     "summary": "Generates notes based on key presses",
     "docs": {

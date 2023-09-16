@@ -59,12 +59,10 @@
                 "name": "NumPoints",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureToPoints"
+        ]
     },
     "summary": "Create points by sampling texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

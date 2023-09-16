@@ -26,8 +26,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.Between"
+        ]
     },
     "summary": "result is true if value is between number1 and number2",
     "docs": {

@@ -31,8 +31,7 @@
                 "type": 2,
                 "name": "Material"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfSetMaterial"
+        ]
     },
     "summary": "Assigns a material to a node inside of the gltfScene op",
     "issues": "",

@@ -47,8 +47,7 @@
                 "name": "index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.CircleTransform"
+        ]
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
@@ -115,7 +114,7 @@
             "author": "pandur",
             "date": 1671033974564
         }
-        ],
+    ],
     "issues": "",
     "youtubeids": [
         "1BtgdAfBLlY"

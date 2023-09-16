@@ -16,13 +16,11 @@
                 "type": "3",
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Array.EmptyArray"
+        ]
     },
     "summary": "create an empty array",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

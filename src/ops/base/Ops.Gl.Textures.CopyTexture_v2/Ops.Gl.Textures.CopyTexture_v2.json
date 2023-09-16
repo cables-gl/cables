@@ -72,8 +72,7 @@
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.CopyTexture_v2"
+        ]
     },
     "summary": "copy a texture and optionally resize it",
     "docs": {

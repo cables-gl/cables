@@ -9,8 +9,7 @@
                 "type": "2",
                 "name": "Object"
             }
-        ],
-        "name": "Ops.Vars.VarGetObject"
+        ]
     },
     "summary": "Get a variable object",
     "changelog": [
@@ -21,7 +20,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarSetObject"
     ],

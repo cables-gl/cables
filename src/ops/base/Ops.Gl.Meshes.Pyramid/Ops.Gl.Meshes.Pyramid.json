@@ -44,8 +44,7 @@
                 "type": 2,
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Pyramid"
+        ]
     },
     "summary": "render a pyramid mesh",
     "docs": {

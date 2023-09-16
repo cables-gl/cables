@@ -37,8 +37,7 @@
                 "type": 1,
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Gl.Phong.AmbientLight_v4"
+        ]
     },
     "changelog": [
         {
@@ -54,7 +53,6 @@
     ],
     "summary": "ambient light for phong material shading",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v4",
         "Ops.Gl.Phong.DirectionalLight_v4",

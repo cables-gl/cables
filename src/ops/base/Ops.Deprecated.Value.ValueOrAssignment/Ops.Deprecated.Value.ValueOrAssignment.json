@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Value.ValueOrAssignment"
+        ]
     },
     "summary": "outputs value or if false, default value",
     "docs": {

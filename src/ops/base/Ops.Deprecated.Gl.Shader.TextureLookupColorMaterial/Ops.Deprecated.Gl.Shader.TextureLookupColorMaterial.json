@@ -54,8 +54,7 @@
                 "type": 2,
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.TextureLookupColorMaterial"
+        ]
     },
     "summary": "lookup color values from a texture and use it as object color",
     "issues": "",

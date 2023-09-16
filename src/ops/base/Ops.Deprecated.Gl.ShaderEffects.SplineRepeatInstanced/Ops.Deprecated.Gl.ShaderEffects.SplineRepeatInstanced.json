@@ -85,7 +85,6 @@
                 "type": "2",
                 "name": "Texture Rotation"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.SplineRepeatInstanced"
+        ]
     }
 }

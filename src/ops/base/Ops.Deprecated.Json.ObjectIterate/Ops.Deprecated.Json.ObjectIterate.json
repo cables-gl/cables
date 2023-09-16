@@ -15,8 +15,7 @@
                 "name": "Key",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json.ObjectIterate"
+        ]
     },
     "summary": "iterate keys of an object",
     "docs": {

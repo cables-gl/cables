@@ -29,12 +29,10 @@
                 "name": "Pi",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Pi"
+        ]
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

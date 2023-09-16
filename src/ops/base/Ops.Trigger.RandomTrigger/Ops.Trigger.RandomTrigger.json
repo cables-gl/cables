@@ -62,8 +62,7 @@
                 "type": 1,
                 "name": "trigger 7"
             }
-        ],
-        "name": "Ops.Trigger.RandomTrigger"
+        ]
     },
     "summary": "randomly trigger output ports",
     "docs": {

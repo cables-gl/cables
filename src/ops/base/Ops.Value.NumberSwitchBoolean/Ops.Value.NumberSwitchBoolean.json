@@ -28,8 +28,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.NumberSwitchBoolean"
+        ]
     },
     "summary": "switch between two values by a boolean",
     "docs": {
@@ -37,7 +36,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": [
         "Ops.String.StringSwitchBoolean"
     ],

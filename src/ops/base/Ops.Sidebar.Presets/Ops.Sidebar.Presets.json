@@ -60,8 +60,7 @@
                 "type": "2",
                 "name": "Children"
             }
-        ],
-        "name": "Ops.Sidebar.Presets"
+        ]
     },
     "summary": "manage sidebar presets",
     "docs": {

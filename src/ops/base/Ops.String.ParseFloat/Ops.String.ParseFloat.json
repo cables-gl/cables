@@ -15,8 +15,7 @@
                 "name": "Number",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.ParseFloat"
+        ]
     },
     "summary": "Parses a string and returns a floating point number / string to number",
     "collections": [

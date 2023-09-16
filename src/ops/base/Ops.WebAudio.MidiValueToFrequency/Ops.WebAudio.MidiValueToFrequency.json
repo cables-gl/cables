@@ -19,7 +19,6 @@
                 "type": "0",
                 "name": "Frequency"
             }
-        ],
-        "name": "Ops.WebAudio.MidiValueToFrequency"
+        ]
     }
 }

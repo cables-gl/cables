@@ -38,8 +38,7 @@
                 "type": 2,
                 "name": "Event Object"
             }
-        ],
-        "name": "Ops.Html.Event.CustomEventListener"
+        ]
     },
     "summary": "Add a custom event listener",
     "docs": {

@@ -58,8 +58,7 @@
                 "name": "Diff",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Date.DateDifference"
+        ]
     },
     "summary": "Calculates the difference between two timestamps",
     "author": "5a0fe67d9641cedb39929853",

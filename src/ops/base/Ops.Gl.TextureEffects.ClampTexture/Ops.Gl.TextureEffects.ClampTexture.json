@@ -47,12 +47,10 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ClampTexture"
+        ]
     },
     "summary": "Clamps a texture to min and max values - Also has remap modes",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -66,8 +66,7 @@
                 "type": 3,
                 "name": "Names"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfNodeTransforms_v2"
+        ]
     },
     "summary": "output all transformations of nodes starting with [search]",
     "issues": "",

@@ -30,7 +30,6 @@
                 "type": 2,
                 "name": "Profiler Data"
             }
-        ],
-        "name": "Ops.Dev.BranchProfiler"
+        ]
     }
 }

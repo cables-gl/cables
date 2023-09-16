@@ -14,8 +14,7 @@
                 "name": "Classname",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Html.RemoveAllClasses"
+        ]
     },
     "summary": "remove CSS class [classname] from all html elements that have class [classname]",
     "docs": {

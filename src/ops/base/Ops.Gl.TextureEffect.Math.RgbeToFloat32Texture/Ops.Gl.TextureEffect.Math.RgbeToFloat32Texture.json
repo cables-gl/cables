@@ -82,8 +82,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Textures.RgbeToHdrTexture"
+        ]
     },
     "summary": "Convert a RGBE texture to HDR/floating point texture",
     "issues": "",

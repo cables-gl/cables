@@ -71,8 +71,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Noise.GlitchNoise"
+        ]
     },
     "summary": "Creates a black and white glitched texture to use for displacement",
     "docs": {

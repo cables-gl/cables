@@ -15,8 +15,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Value.ValueStringEditor"
+        ]
     },
     "summary": "edit long string values in the editor",
     "docs": {
@@ -24,7 +23,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

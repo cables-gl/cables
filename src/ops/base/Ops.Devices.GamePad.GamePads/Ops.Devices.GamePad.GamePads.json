@@ -31,8 +31,7 @@
                 "type": 2,
                 "name": "Pad 3"
             }
-        ],
-        "name": "Ops.Devices.GamePad.GamePads"
+        ]
     },
     "summary": "list connected gamepads - press a button to connect",
     "docs": {

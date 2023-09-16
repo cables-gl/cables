@@ -75,11 +75,9 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.RotateTextureV2"
+        ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "flURFr",

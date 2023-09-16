@@ -96,12 +96,10 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Fog_v2"
+        ]
     },
     "summary": "Render fog as a texture effect using a depth texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

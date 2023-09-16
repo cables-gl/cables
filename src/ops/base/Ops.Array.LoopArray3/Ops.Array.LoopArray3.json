@@ -21,12 +21,10 @@
                 "type": 3,
                 "name": "Array out"
             }
-        ],
-        "name": "Ops.Array.LoopArray3"
+        ]
     },
     "summary": "makes the 1st and last point of an array the same, good for closing splines and shapes",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

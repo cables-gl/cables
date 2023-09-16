@@ -42,8 +42,7 @@
                 "type": 2,
                 "name": "Canvas Parent"
             }
-        ],
-        "name": "Ops.Gl.CanvasInfo"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

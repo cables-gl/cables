@@ -39,8 +39,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.AmplitudeEnvelope"
+        ]
     },
     "docs": {
         "ports": [

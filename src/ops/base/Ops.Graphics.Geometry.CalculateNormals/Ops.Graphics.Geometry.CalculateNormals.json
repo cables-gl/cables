@@ -25,8 +25,7 @@
                 "type": 2,
                 "name": "Geometry Out"
             }
-        ],
-        "name": "Ops.Graphics.Geometry.CalculateNormals"
+        ]
     },
     "summary": "calculate normals of a geometry",
     "changelog": [

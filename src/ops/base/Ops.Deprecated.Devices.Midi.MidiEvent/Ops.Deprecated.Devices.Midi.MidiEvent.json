@@ -44,12 +44,10 @@
                 "type": "1",
                 "name": "Event Received"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiEvent"
+        ]
     },
     "summary": "midi event data",
     "youtubeid": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

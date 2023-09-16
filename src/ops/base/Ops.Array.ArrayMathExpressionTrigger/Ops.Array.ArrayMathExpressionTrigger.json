@@ -93,12 +93,10 @@
                 "name": "Expression Valid",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.User.pandur.ArrayMathExpressionTrigger"
+        ]
     },
     "summary": "Calculates a user defined mathematical expression",
     "issues": "",
-
     "relatedops": [
         "Ops.Math.MathExpression"
     ],

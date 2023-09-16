@@ -44,8 +44,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringCompose"
+        ]
     },
     "updated": 1541806985445,
     "author": "55d744634cdc152216eb9aad",

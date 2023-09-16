@@ -26,12 +26,10 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ShuffleArray3"
+        ]
     },
     "summary": "Shuffles/Randomizes the order of an array of triplets",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

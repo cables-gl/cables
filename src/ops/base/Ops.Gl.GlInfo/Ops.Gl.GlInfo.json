@@ -57,8 +57,7 @@
                 "type": 5,
                 "name": "Renderer"
             }
-        ],
-        "name": "Ops.Gl.GlInfo"
+        ]
     },
     "summary": "information about the webgl context",
     "docs": {
@@ -66,6 +65,5 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null
 }

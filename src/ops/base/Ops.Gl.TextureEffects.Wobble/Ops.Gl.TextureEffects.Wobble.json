@@ -61,13 +61,11 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Wobble"
+        ]
     },
     "summary": "waving wobble motion effect",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

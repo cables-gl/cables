@@ -1,21 +1,20 @@
 {
-  "summary": "detect if the browser window/tab has focus",
-  "layout": {
-    "portsOut": [
-      {
-        "type": "0",
-        "name": "has focus",
-        "subType": "boolean"
-      },
-      {
-        "type": "0",
-        "name": "Tab Visible",
-        "subType": "boolean"
-      }
-    ],
-    "name": "Ops.Html.WindowHasFocus"
-  },
-  "authorName": "pandur",
-  "id": "6542896e-aa13-4b57-81e0-163597f4149a",
-  "created": 1520526123752
+    "summary": "detect if the browser window/tab has focus",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "has focus",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Tab Visible",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "6542896e-aa13-4b57-81e0-163597f4149a",
+    "created": 1520526123752
 }

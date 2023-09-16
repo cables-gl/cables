@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "Child Out"
             }
-        ],
-        "name": "Ops.Html.AppendChild"
+        ]
     },
     "summary": "Appends a HTML DOM Element to another",
     "docs": {

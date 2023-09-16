@@ -42,8 +42,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Orthogonal"
+        ]
     },
     "updated": 1541805244958,
     "authorName": "pandur",

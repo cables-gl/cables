@@ -80,8 +80,7 @@
                 "name": "Hit Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Graphics.Intersection.IntersectRaycast"
+        ]
     },
     "authorName": "pandur",
     "created": 1686493436213,

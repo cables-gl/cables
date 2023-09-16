@@ -52,8 +52,7 @@
                 "name": "Progress",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.FrameRangeAnim_v2"
+        ]
     },
     "summary": "parses string containing ranges of frames and play as coherent animation",
     "docs": {
@@ -78,7 +77,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": []
 }

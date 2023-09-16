@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Json.ObjectKeyArray"
+        ]
     },
     "summary": "get array from object by key",
     "docs": {

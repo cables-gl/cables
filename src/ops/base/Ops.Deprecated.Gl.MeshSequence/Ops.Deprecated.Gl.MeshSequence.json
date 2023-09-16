@@ -53,8 +53,7 @@
                 "type": "2",
                 "name": "Geometry B"
             }
-        ],
-        "name": "Ops.Gl.MeshSequence"
+        ]
     },
     "summary": "morph between a series of meshes",
     "changelog": [

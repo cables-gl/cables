@@ -25,12 +25,10 @@
                 "type": 5,
                 "name": "result"
             }
-        ],
-        "name": "Ops.Website.UrlQueryParams_v2"
+        ]
     },
     "summary": "Returns a URL query parameter, e.g. index.html?Parameter=ParameterValue",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

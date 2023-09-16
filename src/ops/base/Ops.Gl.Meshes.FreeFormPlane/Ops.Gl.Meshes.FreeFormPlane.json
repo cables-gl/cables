@@ -116,8 +116,7 @@
                 "type": 2,
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.FreeFormPlane"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -129,7 +128,6 @@
     "exampleProjectId": "Q92nQ6",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": []
 }

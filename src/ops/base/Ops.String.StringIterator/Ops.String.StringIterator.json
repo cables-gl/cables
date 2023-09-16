@@ -32,8 +32,7 @@
                 "type": "0",
                 "name": "Length"
             }
-        ],
-        "name": "Ops.String.StringIterator"
+        ]
     },
     "summary": "iterate over every character of a string"
 }

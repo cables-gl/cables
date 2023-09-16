@@ -25,8 +25,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.PixelDisplacement"
+        ]
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
     "updated": 1535994572329,

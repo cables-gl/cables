@@ -21,15 +21,13 @@
                 "name": "Value"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Vars.VarSetObject_v2"
+        "portsOut": []
     },
     "coreLibs": [
         "vargetset"
     ],
     "summary": "Set a variable object",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "sUR6b0zvuSY"

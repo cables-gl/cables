@@ -15,8 +15,7 @@
                 "type": 3,
                 "name": "matrix"
             }
-        ],
-        "name": "Ops.Gl.Matrix.GetProjectionMatrix"
+        ]
     },
     "authorName": "pandur",
     "id": "3f048006-89e9-4e3f-a7d3-42aaa77ed630",

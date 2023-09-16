@@ -38,8 +38,7 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Dither"
+        ]
     },
     "authorName": "pandur",
     "id": "4fb6167d-a9b0-4604-84c4-755b09fd8dd7",
@@ -49,7 +48,6 @@
         "ports": []
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "eECnT6"

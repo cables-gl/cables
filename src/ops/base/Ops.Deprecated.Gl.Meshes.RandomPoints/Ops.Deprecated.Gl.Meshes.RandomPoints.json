@@ -36,8 +36,7 @@
                 "name": "scaleZ",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Meshes.RandomPoints"
+        ]
     },
     "updated": 1535641209013,
     "authorName": "pandur",

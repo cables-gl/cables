@@ -73,8 +73,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.User.pandur.AreaScaler_v3"
+        ]
     },
     "authorName": "pandur",
     "id": "3b7c5601-881a-4748-91d1-aea4c7c1bf67",
@@ -108,7 +107,6 @@
     ],
     "summary": "Scales the size of meshes within the area of influence",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

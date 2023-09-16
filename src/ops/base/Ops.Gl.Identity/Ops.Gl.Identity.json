@@ -11,8 +11,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Identity"
+        ]
     },
     "summary": "reset all transforms (modelmatrix)",
     "updated": 1540979538848,

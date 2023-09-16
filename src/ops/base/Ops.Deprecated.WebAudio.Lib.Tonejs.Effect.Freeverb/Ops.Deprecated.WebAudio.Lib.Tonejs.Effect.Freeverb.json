@@ -27,8 +27,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Freeverb"
+        ]
     },
     "authorName": "pandur",
     "id": "dc183aca-c794-4369-bd4a-9b2ba1321de8",

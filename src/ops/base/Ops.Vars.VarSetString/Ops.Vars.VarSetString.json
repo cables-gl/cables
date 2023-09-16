@@ -15,8 +15,7 @@
                 "name": "Variable",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Vars.SetVariableString"
+        ]
     },
     "summary": "set variable with a string input",
     "docs": {

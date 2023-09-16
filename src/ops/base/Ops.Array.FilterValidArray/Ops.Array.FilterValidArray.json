@@ -31,8 +31,7 @@
                 "name": "Is Valid",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Array.FilterValidArray"
+        ]
     },
     "summary": "Filter valid arrays",
     "issues": "",

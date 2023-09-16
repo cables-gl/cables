@@ -100,8 +100,7 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Meshes.GeometryToTexture_v2"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"

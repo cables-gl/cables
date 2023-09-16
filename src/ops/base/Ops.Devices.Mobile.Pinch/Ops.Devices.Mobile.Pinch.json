@@ -44,8 +44,7 @@
                 "name": "Delta",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Mobile.Pinch"
+        ]
     },
     "libs": [
         "hammer.js"

@@ -100,8 +100,7 @@
                 "name": "Result",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Dev.GlArrayMath"
+        ]
     },
     "coreLibs": [
         "cgl_texturemath"

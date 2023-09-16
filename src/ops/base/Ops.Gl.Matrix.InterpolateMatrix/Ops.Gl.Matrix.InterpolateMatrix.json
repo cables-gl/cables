@@ -31,8 +31,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Matrix.InterpolateMatrix"
+        ]
     },
     "summary": "interpolate between two matrices",
     "docs": {

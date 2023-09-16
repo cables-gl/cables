@@ -24,8 +24,7 @@
                 "type": "2",
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.SidebarText"
+        ]
     },
     "summary": "Display text in the sidebar",
     "youtubeid": "",

@@ -32,8 +32,7 @@
                 "name": "Success",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Api.ThingSpeak.ReadLastEntry"
+        ]
     },
     "summary": "Reads the last entry from a channel from ThingSpeak",
     "docs": {

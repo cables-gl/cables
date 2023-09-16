@@ -59,12 +59,10 @@
                 "type": 5,
                 "name": "concat string"
             }
-        ],
-        "name": "Ops.User.pandur.ConcatMulti_v2"
+        ]
     },
     "summary": "Joins multiple strings together",
     "issues": "",
-
     "relatedops": [
         "Ops.String.Concat_v2"
     ],

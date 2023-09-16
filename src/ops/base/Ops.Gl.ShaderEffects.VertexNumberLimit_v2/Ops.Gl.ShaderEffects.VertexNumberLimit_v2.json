@@ -30,8 +30,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.User.cables.VertexNumberLimit2"
+        ]
     },
     "summary": "only draw the first X vertices of a mesh",
     "docs": {

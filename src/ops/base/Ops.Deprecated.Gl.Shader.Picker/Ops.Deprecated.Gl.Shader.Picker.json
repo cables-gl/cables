@@ -47,8 +47,7 @@
                 "name": "pick texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Shader.Picker"
+        ]
     },
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",

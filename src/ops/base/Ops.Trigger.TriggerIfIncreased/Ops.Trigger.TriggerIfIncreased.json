@@ -22,12 +22,10 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Trigger.TriggerIfIncreased"
+        ]
     },
     "summary": "Outputs a trigger if the value of a number increases",
     "issues": "",
-
     "relatedops": [
         "Ops.Trigger.TriggerIfDecreased"
     ],

@@ -79,12 +79,10 @@
                 "name": "Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.CircleMovement_v2"
+        ]
     },
     "summary": "Transform objects along a circular path",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

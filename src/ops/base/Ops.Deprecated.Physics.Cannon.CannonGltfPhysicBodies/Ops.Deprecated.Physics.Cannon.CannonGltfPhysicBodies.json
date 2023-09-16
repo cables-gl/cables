@@ -66,15 +66,13 @@
                 "name": "Meshes",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfPhysicBodies"
+        ]
     },
     "libs": [
         "cannon.js"
     ],
     "summary": "create physics bodies/bounding boxes for gltf nodes",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

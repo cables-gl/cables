@@ -60,8 +60,7 @@
                 "name": "rnd",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.RandomClusterInstanced"
+        ]
     },
     "updated": 1540272266262,
     "author": "55d744634cdc152216eb9aad",

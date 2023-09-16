@@ -63,8 +63,7 @@
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ImageCompose_v2"
+        ]
     },
     "summary": "Compose Images and effects as layers to generate new Images",
     "credits": [
@@ -104,7 +103,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "ZZKdaQw1bMo"

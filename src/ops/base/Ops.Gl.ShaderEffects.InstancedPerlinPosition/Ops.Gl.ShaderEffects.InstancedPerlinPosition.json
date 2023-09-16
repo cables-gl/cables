@@ -39,8 +39,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.InstancedPerlinPosition"
+        ]
     },
     "summary": "displace position of instanced object by perlin noise value",
     "docs": {

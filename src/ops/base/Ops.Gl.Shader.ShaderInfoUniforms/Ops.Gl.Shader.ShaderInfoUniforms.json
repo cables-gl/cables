@@ -37,8 +37,7 @@
                 "type": 3,
                 "name": "Uniforms"
             }
-        ],
-        "name": "Ops.Gl.Shader.ShaderInfoUnitorms"
+        ]
     },
     "summary": "read back all uniforms values of the current bound shader",
     "collections": null,

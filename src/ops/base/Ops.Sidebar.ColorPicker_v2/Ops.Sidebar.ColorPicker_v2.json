@@ -56,8 +56,7 @@
                 "type": "5",
                 "name": "Hex"
             }
-        ],
-        "name": "Ops.Sidebar.ColorPicker_v2"
+        ]
     },
     "summary": "Shows a color-picker in the sidebar",
     "docs": {

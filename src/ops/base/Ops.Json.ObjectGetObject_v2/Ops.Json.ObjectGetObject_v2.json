@@ -25,8 +25,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectGetObject_v2"
+        ]
     },
     "summary": "Get an object from an object",
     "issues": "",

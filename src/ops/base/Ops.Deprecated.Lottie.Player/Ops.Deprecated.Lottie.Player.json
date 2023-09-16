@@ -73,8 +73,7 @@
                 "name": "texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Lottie.Player"
+        ]
     },
     "summary": "play/render a Lottie animation to a texture",
     "changelog": [
@@ -91,7 +90,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "",

@@ -36,8 +36,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Blur"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -76,7 +75,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "XmOk70epdf0"

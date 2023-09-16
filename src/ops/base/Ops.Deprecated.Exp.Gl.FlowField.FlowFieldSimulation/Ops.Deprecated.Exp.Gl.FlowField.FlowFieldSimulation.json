@@ -55,7 +55,6 @@
                 "type": "0",
                 "name": "Die Slow"
             }
-        ],
-        "name": "Ops.Exp.Gl.FlowField.FlowFieldSimulation"
+        ]
     }
 }

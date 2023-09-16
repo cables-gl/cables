@@ -41,8 +41,7 @@
                 "type": "2",
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Torus"
+        ]
     },
     "authorName": "pandur",
     "id": "d921e008-21b9-4cf5-84a2-4dedca34f0c8",
@@ -53,7 +52,6 @@
     "exampleProjectId": "ECMhQ6",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": []
 }

@@ -40,7 +40,6 @@
                 "type": "0",
                 "name": "index"
             }
-        ],
-        "name": "Ops.Gl.Meshes.TransformToGeometryVertices"
+        ]
     }
 }

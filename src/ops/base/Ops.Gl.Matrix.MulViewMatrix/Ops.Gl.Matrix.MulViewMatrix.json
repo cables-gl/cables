@@ -23,8 +23,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.MulViewMatrix"
+        ]
     },
     "summary": "multiply view matrix",
     "docs": {

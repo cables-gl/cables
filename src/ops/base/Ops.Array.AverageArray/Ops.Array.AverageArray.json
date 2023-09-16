@@ -50,12 +50,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.AverageArray"
+        ]
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

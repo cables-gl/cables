@@ -29,8 +29,7 @@
                 "name": "B",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Color.HexToRGB"
+        ]
     },
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",

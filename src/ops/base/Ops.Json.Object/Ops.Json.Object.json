@@ -22,8 +22,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.Object"
+        ]
     },
     "summary": "An empty Object",
     "collections": null,

@@ -60,12 +60,10 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Sidebar.LocalTextureFile"
+        ]
     },
     "summary": "Let the user select a local file as a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

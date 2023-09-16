@@ -30,8 +30,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.Translate"
+        ]
     },
     "summary": "Translate objects (move / position in 3D space)",
     "docs": {

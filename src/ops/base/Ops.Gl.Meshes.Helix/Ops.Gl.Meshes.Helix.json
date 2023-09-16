@@ -46,8 +46,7 @@
                 "type": 3,
                 "name": "Points"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Helix"
+        ]
     },
     "docs": {
         "ports": []

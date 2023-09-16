@@ -51,8 +51,7 @@
                 "type": "1",
                 "name": "Clicked"
             }
-        ],
-        "name": "Ops.Gl.HoverPoint"
+        ]
     },
     "summary": "create a html element at the current coordinates and use mouse events",
     "updated": 1537198631077,

@@ -60,8 +60,7 @@
                 "name": "distance",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Distance3dNew"
+        ]
     },
     "summary": "distance between two 3d points, calculated when triggered",
     "docs": {

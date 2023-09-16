@@ -43,8 +43,7 @@
                 "name": "Clear"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Ui.VizLogger"
+        "portsOut": []
     },
     "authorName": "pandur",
     "created": 1645174874478,

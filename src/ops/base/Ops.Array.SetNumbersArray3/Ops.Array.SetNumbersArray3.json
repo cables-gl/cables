@@ -38,8 +38,7 @@
                 "type": 3,
                 "name": "values"
             }
-        ],
-        "name": "Ops.Array.SetNumbersArray3"
+        ]
     },
     "summary": "set three values at position index in an array",
     "docs": {
@@ -75,7 +74,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "changelog": [

@@ -49,12 +49,10 @@
                 "type": 3,
                 "name": "Elements"
             }
-        ],
-        "name": "Ops.User.stephan.QuerySelectorAll"
+        ]
     },
     "summary": "Selects all matching elements in the DOM",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

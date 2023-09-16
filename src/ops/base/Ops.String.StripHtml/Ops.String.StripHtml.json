@@ -21,12 +21,10 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StripHtml"
+        ]
     },
     "summary": "remove html tags from a string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
