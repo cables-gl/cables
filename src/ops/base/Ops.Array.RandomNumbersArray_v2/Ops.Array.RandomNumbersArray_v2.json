@@ -49,12 +49,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.RandomNumbersArray_v2"
+        ]
     },
     "summary": "generate an array of random numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -27,8 +27,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ColorLookup"
+        ]
     },
     "id": "c4c0200e-5df7-4006-8ad3-1a37ee23cdd2"
 }

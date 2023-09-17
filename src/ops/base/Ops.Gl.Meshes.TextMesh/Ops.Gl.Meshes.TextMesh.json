@@ -76,8 +76,7 @@
                 "name": "Font Available",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Meshes.TextMesh"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

@@ -61,8 +61,7 @@
                 "name": "Loading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.WebAudio.AudioBufferPlayer_v2"
+        ]
     },
     "summary": "Play back audio data stored in an AudioBuffer",
     "created": 1605544848510,
@@ -128,7 +127,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "5PFIfu",

@@ -13,8 +13,7 @@
                 "name": "End Task"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Patch.LoadingStatusTask"
+        "portsOut": []
     },
     "summary": "Starts / stops a loading task (async loader)",
     "docs": {

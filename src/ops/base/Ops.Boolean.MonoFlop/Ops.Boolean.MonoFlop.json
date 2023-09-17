@@ -43,8 +43,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Boolean.MonoFlop"
+        ]
     },
     "summary": "Sets output to `1` when triggered, turns back to `0` automatically after x seconds",
     "docs": {

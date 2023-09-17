@@ -28,8 +28,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Dev.PosterizeV2"
+        ]
     },
     "summary": "reduce number of colors",
     "docs": {

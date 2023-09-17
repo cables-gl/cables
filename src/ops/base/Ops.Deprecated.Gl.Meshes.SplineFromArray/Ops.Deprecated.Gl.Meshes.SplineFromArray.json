@@ -28,7 +28,6 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Meshes.SplineFromArray"
+        ]
     }
 }

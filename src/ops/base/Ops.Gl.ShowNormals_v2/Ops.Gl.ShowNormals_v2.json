@@ -64,8 +64,7 @@
                 "name": "Line Geom",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Gl.ShowNormals_v2"
+        ]
     },
     "changelog": [
         {
@@ -82,7 +81,6 @@
     ],
     "summary": "visualize normals, tangents or bitangents",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Shader.ShowNormalsMaterial"
     ],

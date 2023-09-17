@@ -71,8 +71,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Stripes_v2"
+        ]
     },
     "summary": "Draw stripes into the current ImageCompose",
     "docs": {

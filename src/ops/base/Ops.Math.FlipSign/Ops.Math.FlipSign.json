@@ -16,14 +16,12 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.FlipSign"
+        ]
     },
     "summary": "positive numbers become negative and vice versa ",
     "youtubeid": "",
     "docs": {
         "ports": []
     },
-
     "relatedops": null
 }

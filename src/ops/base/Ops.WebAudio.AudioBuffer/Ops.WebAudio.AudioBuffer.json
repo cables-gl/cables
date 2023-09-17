@@ -40,8 +40,7 @@
                 "name": "Number of Channels",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.AudioBuffer"
+        ]
     },
     "summary": "Holds an audio file / sample",
     "docs": {

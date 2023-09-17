@@ -104,12 +104,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.StripesV4"
+        ]
     },
     "summary": "Create a texture of stripes /lines",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

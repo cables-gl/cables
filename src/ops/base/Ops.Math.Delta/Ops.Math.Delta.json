@@ -22,8 +22,7 @@
                 "name": "Delta",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Delta"
+        ]
     },
     "summary": "difference to the last value (previous, store)",
     "authorName": "tim",

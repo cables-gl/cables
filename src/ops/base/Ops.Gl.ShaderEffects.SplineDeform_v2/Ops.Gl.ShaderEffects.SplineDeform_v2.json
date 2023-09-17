@@ -28,8 +28,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.SplineDeform_v2"
+        ]
     },
     "summary": "Deform a mesh along a spline",
     "docs": {

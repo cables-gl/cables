@@ -28,8 +28,7 @@
                 "name": "Next Value",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Control.CtrlMarkov"
+        ]
     },
     "summary": "Represents a Markov Chain",
     "docs": {

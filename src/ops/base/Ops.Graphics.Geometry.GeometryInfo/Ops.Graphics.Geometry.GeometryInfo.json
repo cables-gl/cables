@@ -62,8 +62,7 @@
                 "name": "Other Attributes",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometryInfo"
+        ]
     },
     "summary": "information about a geometry",
     "youtubeid": "",

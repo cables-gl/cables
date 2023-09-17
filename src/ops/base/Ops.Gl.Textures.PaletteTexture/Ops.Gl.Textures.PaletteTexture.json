@@ -36,12 +36,10 @@
                 "name": "Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.PaletteTexture"
+        ]
     },
     "summary": "Create a RGB color palette using an array",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.TextureEffects.PaletteTexture"
     ],

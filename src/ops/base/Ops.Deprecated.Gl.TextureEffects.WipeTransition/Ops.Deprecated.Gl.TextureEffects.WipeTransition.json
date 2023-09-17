@@ -27,8 +27,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.WipeTransition"
+        ]
     },
     "summary": "Uses a BW Texture to reveal the layer underneath.",
     "docs": {

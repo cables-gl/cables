@@ -36,12 +36,10 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.SubdivideArray1"
+        ]
     },
     "summary": "For subdividing splines, smoothing lines using cubic bezier interpolation",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

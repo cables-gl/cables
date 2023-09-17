@@ -66,8 +66,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Noise.PolkaDotNoise"
+        ]
     },
     "summary": "noise circles",
     "docs": {

@@ -76,8 +76,7 @@
                 "type": "2",
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.MatCapMaterial"
+        ]
     },
     "updated": 1540993020707,
     "authorName": "pandur",

@@ -44,12 +44,10 @@
                 "type": "2",
                 "name": "Element"
             }
-        ],
-        "name": "Ops.Html.IFrame_v2"
+        ]
     },
     "summary": "Show another website in an iframe element",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

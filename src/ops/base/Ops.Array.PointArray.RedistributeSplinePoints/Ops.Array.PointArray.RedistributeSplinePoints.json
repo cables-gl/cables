@@ -33,8 +33,7 @@
                 "name": "Spline Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.PointArray.RedistributeSplinePoints"
+        ]
     },
     "summary": "recalculate a spline / change number of points of a spline",
     "docs": {

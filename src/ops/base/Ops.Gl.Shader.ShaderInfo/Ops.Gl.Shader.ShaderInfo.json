@@ -70,8 +70,7 @@
                 "type": 3,
                 "name": "Num Defines"
             }
-        ],
-        "name": "Ops.Gl.Shader.ShaderInfo"
+        ]
     },
     "summary": "view current shader source code",
     "author": "58dabd06a0d7ec8d1a982e66",

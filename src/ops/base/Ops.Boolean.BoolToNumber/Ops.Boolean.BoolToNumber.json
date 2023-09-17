@@ -14,8 +14,7 @@
                 "name": "number",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Boolean.BoolToNumber"
+        ]
     },
     "docs": {
         "ports": [

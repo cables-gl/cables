@@ -75,12 +75,10 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfTexture"
+        ]
     },
     "summary": "Load textures from inside a .glb file",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

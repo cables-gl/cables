@@ -72,8 +72,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Dev.PolkaDotNoiseV2"
+        ]
     },
     "summary": "noise circles",
     "docs": {

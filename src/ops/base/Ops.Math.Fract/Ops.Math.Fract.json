@@ -14,8 +14,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Fract"
+        ]
     },
     "docs": {
         "ports": []

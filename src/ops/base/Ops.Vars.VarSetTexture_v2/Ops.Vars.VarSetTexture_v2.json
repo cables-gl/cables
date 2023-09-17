@@ -39,12 +39,10 @@
                 "name": "",
                 "group": "Variable"
             }
-        ],
-        "name": "Ops.Vars.VarSetTexture_v2"
+        ]
     },
     "summary": "set a texture variable",
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarGetTexture"
     ],

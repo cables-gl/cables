@@ -20,8 +20,7 @@
                 "type": "2",
                 "name": "cubemap"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.CubeMapCamera"
+        ]
     },
     "summary": "render a scene to generate a cubemap ",
     "authorName": "pandur",

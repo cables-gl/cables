@@ -61,8 +61,7 @@
                 "type": 2,
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Patch.PpiMxeG.ObjectSetObjectSimple_v2"
+        ]
     },
     "summary": "set object as value in an object",
     "issues": "",

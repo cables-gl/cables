@@ -19,8 +19,7 @@
                 "name": "num items",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json.CsvArray"
+        ]
     },
     "summary": "parse CSV files as array",
     "docs": {

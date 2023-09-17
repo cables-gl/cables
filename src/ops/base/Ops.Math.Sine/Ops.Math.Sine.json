@@ -36,8 +36,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Sine"
+        ]
     },
     "summary": "Calculates the sine of an angle.",
     "docs": {

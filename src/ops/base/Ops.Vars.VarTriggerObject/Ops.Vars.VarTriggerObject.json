@@ -40,15 +40,13 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Vars.VarTriggerObject"
+        ]
     },
     "coreLibs": [
         "vargetset"
     ],
     "summary": "Set an object variable by trigger",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "30v_GQc6ajA"

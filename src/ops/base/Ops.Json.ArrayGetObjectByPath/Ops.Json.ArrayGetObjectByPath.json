@@ -23,8 +23,7 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Json.ArrayGetObjectByPath"
+        ]
     },
     "summary": "Returns the object at the position defined by a path",
     "issues": "",

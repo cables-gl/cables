@@ -37,12 +37,10 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.User.pandur.MyRgbToHex"
+        ]
     },
     "summary": "convert RGB float values to HEX color String",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

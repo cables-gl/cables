@@ -81,12 +81,10 @@
                 "name": "Program Change Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiMonitor"
+        ]
     },
     "summary": "detailed information about Midi events being sent",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice2",
         "Ops.Devices.Midi.MidiClock",

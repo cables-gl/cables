@@ -3,9 +3,7 @@
     "authorName": "pandur",
     "id": "1595f823-59cd-4ca7-9450-041474a9eb71",
     "created": 1513971956730,
-    "layout": {
-        "name": "Ops.TimeLine.TimeLineUI"
-    },
+    "layout": {},
     "summary": "little ui for controlling the timeline",
     "docs": {
         "ports": []

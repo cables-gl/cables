@@ -44,8 +44,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.FastBlur"
+        ]
     },
     "changelog": [
         {
@@ -56,7 +55,6 @@
     ],
     "summary": "Blurs a texture  - cheap and fast",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

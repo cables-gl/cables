@@ -35,12 +35,10 @@
                 "type": 2,
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.SidebarText_v2"
+        ]
     },
     "summary": "Display text in the sidebar",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -17,8 +17,7 @@
                 "name": "Result",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometryUnIndex"
+        ]
     },
     "summary": "convert geometry to only flat triangles without reusing vertices positions",
     "issues": "",

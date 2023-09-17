@@ -109,12 +109,10 @@
                 "name": "button",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Mouse.Mouse_v2"
+        ]
     },
     "summary": "Get mouse coordinates and events",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

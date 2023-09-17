@@ -35,8 +35,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Compressor"
+        ]
     },
     "docs": {
         "ports": [

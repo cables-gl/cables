@@ -36,8 +36,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Tangent"
+        ]
     },
     "summary": "Calculates the ratio of the sine and cosine of an angle.",
     "docs": {

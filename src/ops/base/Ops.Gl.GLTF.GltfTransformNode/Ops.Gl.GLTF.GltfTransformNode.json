@@ -65,12 +65,10 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfTransformNode"
+        ]
     },
     "summary": "set transformation of a gltf node",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

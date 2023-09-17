@@ -19,8 +19,7 @@
                 "type": "2",
                 "name": "Right"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.StereoToMono"
+        ]
     },
     "id": "e8e65dda-93f7-47e6-a6df-34c2123edfd4"
 }

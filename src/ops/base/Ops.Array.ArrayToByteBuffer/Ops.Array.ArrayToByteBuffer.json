@@ -21,12 +21,10 @@
                 "type": "2",
                 "name": "Buffer"
             }
-        ],
-        "name": "Ops.Array.ArrayToByteBuffer"
+        ]
     },
     "summary": "convert an array to a byte buffer (Uint8ClampedArray)",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

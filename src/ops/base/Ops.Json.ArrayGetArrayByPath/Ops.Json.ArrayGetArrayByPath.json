@@ -23,12 +23,10 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Json.ArrayGetArrayByPath"
+        ]
     },
     "summary": "returns the array at the position defined by a path",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

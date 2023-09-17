@@ -16,8 +16,7 @@
                 "type": "0",
                 "name": "Number"
             }
-        ],
-        "name": "Ops.String.ParseInt"
+        ]
     },
     "summary": "parse a string to a integer number"
 }

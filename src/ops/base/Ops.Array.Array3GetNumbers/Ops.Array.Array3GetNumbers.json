@@ -27,8 +27,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3GetNumbers"
+        ]
     },
     "summary": "get 3 values XYZ from an array",
     "authorName": "pandur",
@@ -36,7 +35,6 @@
     "created": 1542698784091,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

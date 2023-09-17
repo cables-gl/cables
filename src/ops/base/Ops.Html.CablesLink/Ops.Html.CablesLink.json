@@ -13,15 +13,13 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.CablesLink"
+        "portsOut": []
     },
     "authorName": "pandur",
     "id": "aba114d1-b042-484a-9b66-a9bfe6590b3d",
     "created": 1558014374347,
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "ilts7O",

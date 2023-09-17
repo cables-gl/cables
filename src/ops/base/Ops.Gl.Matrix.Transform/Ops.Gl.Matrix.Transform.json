@@ -54,8 +54,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.Transform"
+        ]
     },
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",

@@ -66,12 +66,10 @@
                 "type": "3",
                 "name": "Index 9 array"
             }
-        ],
-        "name": "Ops.Array.RouteArray"
+        ]
     },
     "summary": "Route an array to an output port",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

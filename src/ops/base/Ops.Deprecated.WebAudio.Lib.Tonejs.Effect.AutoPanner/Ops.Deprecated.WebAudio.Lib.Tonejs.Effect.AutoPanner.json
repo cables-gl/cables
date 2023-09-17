@@ -27,8 +27,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.AutoPanner"
+        ]
     },
     "id": "c14fe606-8a94-4a76-afed-2038a9cb5b5a"
 }

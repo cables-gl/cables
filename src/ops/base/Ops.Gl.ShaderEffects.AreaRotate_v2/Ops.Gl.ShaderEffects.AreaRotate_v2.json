@@ -45,8 +45,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.AreaRotate_v2"
+        ]
     },
     "summary": "rotate vertices in an area around a center point",
     "youtubeid": "",
@@ -83,7 +82,6 @@
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-
     "relatedops": null,
     "exampleProjectId": "7mss1Q"
 }

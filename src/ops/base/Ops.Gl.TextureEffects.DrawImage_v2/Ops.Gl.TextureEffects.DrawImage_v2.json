@@ -137,8 +137,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.DrawImage_v2"
+        ]
     },
     "summary": "Draws an image into a composition",
     "youtubeid": "Ww04Cw9wArM",
@@ -163,7 +162,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "todos": [
         {

@@ -55,7 +55,6 @@
                 "type": 2,
                 "name": "MIDI Event Out"
             }
-        ],
-        "name": "Ops.Dev.MidiProgramChangeOut"
+        ]
     }
 }

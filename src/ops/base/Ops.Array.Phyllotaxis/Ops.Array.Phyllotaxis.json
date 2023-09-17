@@ -30,8 +30,7 @@
                 "type": "3",
                 "name": "Coordinates"
             }
-        ],
-        "name": "Ops.Math.Phyllotaxis2"
+        ]
     },
     "summary": "coordinate generation like arrangement of leaves in some plants",
     "docs": {

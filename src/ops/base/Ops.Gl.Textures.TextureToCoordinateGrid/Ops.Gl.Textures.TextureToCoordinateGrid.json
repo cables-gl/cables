@@ -84,8 +84,7 @@
                 "name": "HDR Texture",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextureToCoordinateGrid"
+        ]
     },
     "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
     "issues": "",

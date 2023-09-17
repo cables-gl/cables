@@ -44,8 +44,7 @@
                 "type": 2,
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Patch.PXTqV___8.Pyramid_v2"
+        ]
     },
     "summary": "render a pyramid mesh",
     "docs": {

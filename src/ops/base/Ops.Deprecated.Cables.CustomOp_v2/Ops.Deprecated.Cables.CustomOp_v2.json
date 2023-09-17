@@ -61,8 +61,7 @@
                 "name": "Library"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Cables.CustomOp_v2"
+        "portsOut": []
     },
     "summary": "Code a custom op that will only be available in the current patch",
     "issues": "",

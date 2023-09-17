@@ -25,8 +25,7 @@
                 "name": "value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayIterator"
+        ]
     },
     "summary": "Loop over every element of an array",
     "docs": {
@@ -58,7 +57,6 @@
     "created": 1540826805478,
     "youtubeid": "63UbYklOZ3c",
     "issues": "",
-
     "relatedops": [
         "Ops.Trigger.Repeat"
     ],

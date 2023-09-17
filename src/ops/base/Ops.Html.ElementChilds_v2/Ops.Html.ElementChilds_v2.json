@@ -83,13 +83,11 @@
                 "name": "Parent Out",
                 "objType": "element"
             }
-        ],
-        "name": "Ops.Html.ElementChilds_v2"
+        ]
     },
     "summary": "Set childs of a HTML Element",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

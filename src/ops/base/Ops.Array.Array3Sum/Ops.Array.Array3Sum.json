@@ -29,8 +29,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.Array3Sum"
+        ]
     },
     "summary": "add number to every XYZ member of array3x",
     "docs": {
@@ -45,7 +44,6 @@
             }
         ]
     },
-
     "relatedops": null,
     "changelog": [
         {

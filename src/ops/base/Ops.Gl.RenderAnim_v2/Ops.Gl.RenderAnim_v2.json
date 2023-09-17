@@ -140,8 +140,7 @@
                 "type": 1,
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Gl.RenderAnim_v2"
+        ]
     },
     "libs": [
         "whammy.js",
@@ -149,7 +148,6 @@
     ],
     "summary": "record, render an animation and save as webm video file or png image sequence",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

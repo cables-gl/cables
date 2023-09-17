@@ -10,8 +10,7 @@
                 "name": "Min Int",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.MinimumSafeInteger"
+        ]
     },
     "summary": "Returns the minimum safe integer (number, constant)",
     "docs": {

@@ -30,13 +30,11 @@
                 "name": "Time Used",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.PerformanceMeasure"
+        ]
     },
     "summary": "Measure the time used to execute all child ops",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

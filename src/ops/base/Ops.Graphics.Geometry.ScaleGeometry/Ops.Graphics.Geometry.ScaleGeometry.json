@@ -19,8 +19,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Geometry.ScaleGeometry"
+        ]
     },
     "summary": "uniform scaling of geometry vertices",
     "docs": {

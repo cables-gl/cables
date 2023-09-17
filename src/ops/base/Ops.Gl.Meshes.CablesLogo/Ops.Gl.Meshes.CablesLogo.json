@@ -26,8 +26,7 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.CablesLogo"
+        ]
     },
     "docs": {
         "ports": []

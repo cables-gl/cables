@@ -14,8 +14,7 @@
                 "type": 2,
                 "name": "Object Out"
             }
-        ],
-        "name": "Ops.Templates.PortsObjectExample"
+        ]
     },
     "summary": "Is a template for creating Object ports",
     "docs": {

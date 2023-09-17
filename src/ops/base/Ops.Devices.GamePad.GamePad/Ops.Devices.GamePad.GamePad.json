@@ -84,8 +84,7 @@
                 "name": "Right Shoulder Bottom",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.GamePad.GamePad"
+        ]
     },
     "docs": {
         "ports": []

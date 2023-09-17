@@ -29,8 +29,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.TranslateView"
+        ]
     },
     "summary": "translate the view/camera matrix",
     "docs": {

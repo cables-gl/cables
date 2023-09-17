@@ -37,8 +37,7 @@
                 "type": "3",
                 "name": "fft"
             }
-        ],
-        "name": "Ops.WebAudio.Analyser"
+        ]
     },
     "updated": 1540296734465,
     "created": 1540295388441

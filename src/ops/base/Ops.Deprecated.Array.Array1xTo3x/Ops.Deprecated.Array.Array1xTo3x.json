@@ -14,7 +14,6 @@
                 "type": "3",
                 "name": "Array3x"
             }
-        ],
-        "name": "Ops.Deprecated.Array.Array1xTo3x"
+        ]
     }
 }

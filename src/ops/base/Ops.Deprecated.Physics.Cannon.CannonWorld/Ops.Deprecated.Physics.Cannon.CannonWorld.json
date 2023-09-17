@@ -72,8 +72,7 @@
                 "name": "Num Bodies",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Physics.World"
+        ]
     },
     "summary": "start/configure a world with physics simulation",
     "docs": {
@@ -142,7 +141,6 @@
         "cgl_wireframes"
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": []
 }

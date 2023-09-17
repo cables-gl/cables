@@ -24,12 +24,10 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Json.ArrayGetNumberByPath"
+        ]
     },
     "summary": "finds a number at a position in an array defined by path",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -14,8 +14,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayFract"
+        ]
     },
     "summary": "Returns the fractional remainder of all values in an array",
     "issues": "",

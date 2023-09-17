@@ -54,8 +54,7 @@
                 "type": "1",
                 "name": "Reseted"
             }
-        ],
-        "name": "Ops.Audio.MidiJsonNote"
+        ]
     },
     "summary": "filter midiJson for notes",
     "docs": {

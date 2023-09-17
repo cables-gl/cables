@@ -59,8 +59,7 @@
                 "type": "0",
                 "name": "isPressed"
             }
-        ],
-        "name": "Ops.Devices.Mouse.MouseDrag"
+        ]
     },
     "summary": "get values by dragging the mouse",
     "updated": 1519229638630,

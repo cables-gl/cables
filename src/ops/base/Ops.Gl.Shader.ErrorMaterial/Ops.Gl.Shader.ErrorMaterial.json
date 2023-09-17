@@ -14,8 +14,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.ErrorMaterial"
+        ]
     },
     "summary": "draw meshes using the cables error material shader",
     "docs": {

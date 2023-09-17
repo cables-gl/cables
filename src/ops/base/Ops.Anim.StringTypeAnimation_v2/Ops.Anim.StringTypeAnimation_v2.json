@@ -48,12 +48,10 @@
                 "type": 1,
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Anim.StringTypeAnimation_v2"
+        ]
     },
     "summary": "Animates a text/string, like it is being typed out by a person",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Textures.Text2"
     ],

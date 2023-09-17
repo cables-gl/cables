@@ -18,8 +18,7 @@
                 "name": "Offset X",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Midi.LaunchPadScroller"
+        ]
     },
     "summary": "Scroller for Novation Launchpad Mini",
     "docs": {

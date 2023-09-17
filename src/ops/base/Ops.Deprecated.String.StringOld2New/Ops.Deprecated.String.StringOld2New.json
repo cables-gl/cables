@@ -27,13 +27,11 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringOld2New"
+        ]
     },
     "summary": "temporary string port converter",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

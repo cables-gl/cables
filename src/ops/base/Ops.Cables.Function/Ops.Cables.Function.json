@@ -16,8 +16,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Patch.Function"
+        ]
     },
     "summary": "trigger from external function when embedded into a website",
     "docs": {
@@ -36,7 +35,6 @@
     "id": "b13d13a2-ab06-4c4c-afa3-5d506ecf327a",
     "created": 1540980283574,
     "youtubeid": "",
-
     "relatedops": null,
     "todos": [
         {

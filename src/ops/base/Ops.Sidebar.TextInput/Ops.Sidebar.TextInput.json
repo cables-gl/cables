@@ -29,8 +29,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.TextInput"
+        ]
     },
     "summary": "Enter text in the sidebar",
     "youtubeid": "",

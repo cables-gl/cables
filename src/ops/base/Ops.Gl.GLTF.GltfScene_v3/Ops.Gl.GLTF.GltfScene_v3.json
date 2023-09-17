@@ -157,8 +157,7 @@
                 "name": "Loading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfScene_v3"
+        ]
     },
     "changelog": [
         {

@@ -50,12 +50,10 @@
                 "name": "Pos Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Vr.VrController"
+        ]
     },
     "summary": "VR Controller / Currently not being developed due to XR update",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

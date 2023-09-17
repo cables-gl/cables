@@ -14,8 +14,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayAbs"
+        ]
     },
     "summary": "Converts array contents to absolute values - converts all negative numbers to positive numbers",
     "issues": "",

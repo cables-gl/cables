@@ -22,8 +22,7 @@
                 "type": "0",
                 "name": "Is Ready"
             }
-        ],
-        "name": "Ops.WebAudio.StartAudioContext"
+        ]
     },
     "summary": "Starts the web audio context on iOS / Chrome",
     "docs": {

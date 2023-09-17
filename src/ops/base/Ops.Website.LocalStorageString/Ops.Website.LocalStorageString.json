@@ -34,12 +34,10 @@
                 "name": "Storage Support",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Website.LocalStorageString"
+        ]
     },
     "summary": "Store and retreive a string in browser localstorage",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

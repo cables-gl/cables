@@ -39,8 +39,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.AutoWah"
+        ]
     },
     "id": "48982600-56e8-4d84-9fdd-6caf6ab01247"
 }

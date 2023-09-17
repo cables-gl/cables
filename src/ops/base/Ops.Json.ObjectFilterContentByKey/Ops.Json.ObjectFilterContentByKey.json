@@ -40,8 +40,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectFilterContentByKey"
+        ]
     },
     "summary": "filter values from an object if key starts with input string ",
     "issues": "",

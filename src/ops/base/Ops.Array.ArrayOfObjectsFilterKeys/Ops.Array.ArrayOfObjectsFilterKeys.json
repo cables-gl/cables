@@ -39,12 +39,10 @@
                 "type": 3,
                 "name": "Array Out"
             }
-        ],
-        "name": "Ops.Array.ArrayOfObjectsFilterKeys"
+        ]
     },
     "summary": "remove key-value pairs from objects in an array of objects",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

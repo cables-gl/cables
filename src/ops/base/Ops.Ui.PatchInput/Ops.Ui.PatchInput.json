@@ -9,8 +9,7 @@
                 "type": 4,
                 "name": "create port"
             }
-        ],
-        "name": "Ops.Ui.PatchInput"
+        ]
     },
     "summary": "Helper op for sub-patches",
     "docs": {

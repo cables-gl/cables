@@ -17,7 +17,6 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.NumberToString"
+        ]
     }
 }

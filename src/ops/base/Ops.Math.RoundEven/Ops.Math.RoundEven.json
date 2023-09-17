@@ -28,12 +28,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.RoundEven"
+        ]
     },
     "summary": "round to the next even number",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

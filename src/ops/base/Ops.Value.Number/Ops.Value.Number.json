@@ -14,8 +14,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.Number"
+        ]
     },
     "docs": {
         "ports": [
@@ -40,7 +39,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": []
 }

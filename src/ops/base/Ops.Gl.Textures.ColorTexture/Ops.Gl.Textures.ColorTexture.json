@@ -29,8 +29,7 @@
                 "name": "texture_out",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Textures.ColorTexture"
+        ]
     },
     "authorName": "pandur",
     "id": "59b94270-0364-4c0f-a9fc-ba2561696a23",

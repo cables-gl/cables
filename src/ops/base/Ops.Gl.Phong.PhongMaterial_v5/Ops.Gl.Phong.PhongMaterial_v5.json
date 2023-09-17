@@ -307,8 +307,7 @@
                 "name": "Shader",
                 "objType": "shader"
             }
-        ],
-        "name": "Ops.Gl.Phong.PhongMaterial_v5"
+        ]
     },
     "changelog": [
         {

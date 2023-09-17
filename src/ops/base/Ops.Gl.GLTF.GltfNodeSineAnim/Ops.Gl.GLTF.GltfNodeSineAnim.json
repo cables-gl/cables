@@ -65,12 +65,10 @@
                 "name": "Found",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfNodeSineAnim"
+        ]
     },
     "summary": "sine animate gltf nodes by a filter",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

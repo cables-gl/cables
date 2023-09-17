@@ -25,13 +25,11 @@
                 "name": "String"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.User.pandur.CopyToClipboard"
+        "portsOut": []
     },
     "summary": "Copy string to clipboard on trigger",
     "issues": "",
     "caniusequery": "writetext",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "Rquam4",

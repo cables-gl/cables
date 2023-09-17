@@ -29,8 +29,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.Array3Multiply"
+        ]
     },
     "summary": "multiply every XYZ member of array3x",
     "docs": {

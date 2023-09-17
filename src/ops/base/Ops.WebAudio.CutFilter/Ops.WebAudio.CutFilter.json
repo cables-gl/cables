@@ -94,12 +94,10 @@
                 "name": "Audio Out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.CutFilter"
+        ]
     },
     "summary": "dj style filter (lowpass and highpass)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

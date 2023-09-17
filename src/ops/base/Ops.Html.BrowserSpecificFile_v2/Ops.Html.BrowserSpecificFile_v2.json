@@ -59,15 +59,13 @@
                 "type": "5",
                 "name": "Detected Browser"
             }
-        ],
-        "name": "Ops.User.cables.BrowserSpecificFile_v2"
+        ]
     },
     "libs": [
         "platform.js"
     ],
     "summary": "set file dependant on browser",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

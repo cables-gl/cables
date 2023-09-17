@@ -9,8 +9,7 @@
                 "type": "3",
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Vars.VarSetArray"
+        ]
     },
     "summary": "Set a variable array",
     "changelog": [
@@ -21,7 +20,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarGetArray"
     ],

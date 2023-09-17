@@ -74,12 +74,10 @@
                 "type": 5,
                 "name": "String"
             }
-        ],
-        "name": "Ops.Sidebar.SideBarSwitch"
+        ]
     },
     "summary": "add tabs or switchbar to a sidebar",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

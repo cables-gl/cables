@@ -150,7 +150,6 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Admin.SimosPhong"
+        ]
     }
 }

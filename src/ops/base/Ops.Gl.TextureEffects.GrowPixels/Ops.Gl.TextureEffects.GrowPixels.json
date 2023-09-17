@@ -56,8 +56,7 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.GrowPixels"
+        ]
     },
     "changelog": [
         {
@@ -68,7 +67,6 @@
     ],
     "summary": "Make one pixel lines thicker via postprocessing",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

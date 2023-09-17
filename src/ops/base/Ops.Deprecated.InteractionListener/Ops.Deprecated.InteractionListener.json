@@ -14,8 +14,7 @@
                 "name": "Events",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.InteractionListener"
+        ]
     },
     "docs": {
         "ports": [

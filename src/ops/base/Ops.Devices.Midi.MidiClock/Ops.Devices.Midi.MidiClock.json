@@ -70,12 +70,10 @@
                 "type": 1,
                 "name": "1/16"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiClock"
+        ]
     },
     "summary": "sends out midi clock signals as triggers",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice2",
         "Ops.Devices.Midi.MidiCC",

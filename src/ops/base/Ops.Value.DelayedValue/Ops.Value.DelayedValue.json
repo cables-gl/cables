@@ -35,8 +35,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.DelayedValue"
+        ]
     },
     "summary": "delay a value by seconds",
     "docs": {

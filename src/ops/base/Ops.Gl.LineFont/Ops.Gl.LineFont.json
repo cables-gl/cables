@@ -32,8 +32,7 @@
                 "type": "5",
                 "name": "align"
             }
-        ],
-        "name": "Ops.Gl.LineFont"
+        ]
     },
     "summary": "A Simple way to write text on the screen.",
     "youtubeid": "",

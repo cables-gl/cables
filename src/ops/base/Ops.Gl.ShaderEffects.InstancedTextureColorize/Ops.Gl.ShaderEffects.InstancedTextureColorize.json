@@ -76,12 +76,10 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.InstancedTextureColorize"
+        ]
     },
     "summary": "colorize instanced meshes using a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

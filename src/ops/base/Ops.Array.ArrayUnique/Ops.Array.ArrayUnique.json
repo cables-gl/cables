@@ -28,12 +28,10 @@
                 "name": "Array Length Out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayUnique"
+        ]
     },
     "summary": "filters an array for duplicate items and returns all unique items in a new array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

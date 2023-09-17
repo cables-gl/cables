@@ -41,8 +41,7 @@
                 "name": "Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.ViewPortSize"
+        ]
     },
     "summary": "Outputs current viewport size",
     "issues": "",

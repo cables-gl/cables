@@ -51,8 +51,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.User.pandur.GrowPixelsV2"
+        ]
     },
     "changelog": [
         {
@@ -78,7 +77,6 @@
     ],
     "summary": "Make one pixel lines thicker via postprocessing",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

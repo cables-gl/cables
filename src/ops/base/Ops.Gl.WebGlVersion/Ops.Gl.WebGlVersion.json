@@ -8,8 +8,7 @@
                 "name": "Major Version",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.WebGlVersion"
+        ]
     },
     "authorName": "pandur",
     "id": "d6554d6c-0742-4559-b0a4-29ad0ae1e25b",

@@ -46,8 +46,7 @@
                 "name": "geometry",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Sphere_v3"
+        ]
     },
     "issues": "",
     "relatedops": null,

@@ -91,8 +91,7 @@
                 "name": "button",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Mouse.Mouse"
+        ]
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",

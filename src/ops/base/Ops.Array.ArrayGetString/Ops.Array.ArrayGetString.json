@@ -19,8 +19,7 @@
                 "type": 5,
                 "name": "result"
             }
-        ],
-        "name": "Ops.Array.ArrayGetString"
+        ]
     },
     "summary": "get a string from an array at [index]",
     "youtubeid": "",
@@ -41,6 +40,5 @@
         ]
     },
     "issues": "",
-
     "relatedops": null
 }

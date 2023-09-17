@@ -48,8 +48,7 @@
                 "name": "Connected",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Net.Mqtt.Mqtt_v2"
+        ]
     },
     "summary": "Creates a MQTT connection (IoT, messaging)",
     "docs": {

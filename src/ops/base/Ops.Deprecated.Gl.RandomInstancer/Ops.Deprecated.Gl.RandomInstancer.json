@@ -79,8 +79,7 @@
                 "name": "time",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Deprecated.Gl.RandomInstancer"
+        ]
     },
     "summary": "draw one mesh multiple times very fast",
     "youtubeid": "",

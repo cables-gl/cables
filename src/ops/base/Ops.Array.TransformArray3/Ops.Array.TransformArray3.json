@@ -76,8 +76,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.TransformArray3"
+        ]
     },
     "summary": "transform (translate,rotate,scale) positions in an array3x ",
     "docs": {

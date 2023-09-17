@@ -11,8 +11,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringLength"
+        ]
     },
     "summary": "number of characters in a string",
     "id": "3f59e539-37d1-47dd-a3cb-5fd3efe00392"

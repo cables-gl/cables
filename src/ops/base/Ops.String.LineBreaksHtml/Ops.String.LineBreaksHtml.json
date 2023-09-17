@@ -26,12 +26,10 @@
                 "type": "5",
                 "name": "HTML"
             }
-        ],
-        "name": "Ops.String.LineBreaksHtml"
+        ]
     },
     "summary": "Convert linebreaks to html breaks",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

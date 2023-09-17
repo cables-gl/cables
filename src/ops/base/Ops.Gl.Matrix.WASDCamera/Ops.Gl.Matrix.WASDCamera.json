@@ -56,8 +56,7 @@
                 "name": "posZ",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.WASDCamera"
+        ]
     },
     "summary": "camera controller like in a FPS game, move with WASD keys",
     "author": "58dabd06a0d7ec8d1a982e66",

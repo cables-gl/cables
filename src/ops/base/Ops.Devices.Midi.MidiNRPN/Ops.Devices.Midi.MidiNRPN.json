@@ -53,12 +53,10 @@
                 "name": "NRPN Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiNRPN"
+        ]
     },
     "summary": "read NRPN value from controller",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice",
         "Ops.Devices.Midi.MidiClock",

@@ -17,8 +17,7 @@
                 "type": "0",
                 "name": "Char"
             }
-        ],
-        "name": "Ops.Devices.Keyboard.KeyPress"
+        ]
     },
     "summary": "triggers when a key is pressed",
     "docs": {

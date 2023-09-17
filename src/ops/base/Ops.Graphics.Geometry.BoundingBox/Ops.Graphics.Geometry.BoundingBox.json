@@ -38,8 +38,7 @@
                 "type": "2",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Geometry.BoundingBox"
+        ]
     },
     "summary": "create a simple bounding box from width,height,depth",
     "issues": "",

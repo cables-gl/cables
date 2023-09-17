@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Time"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.SetNote"
+        ]
     },
     "summary": "Change current note of connected instrument"
 }

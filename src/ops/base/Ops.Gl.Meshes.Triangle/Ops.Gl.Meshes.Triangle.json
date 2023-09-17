@@ -33,8 +33,7 @@
                 "type": 2,
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Triangle"
+        ]
     },
     "docs": {
         "ports": [

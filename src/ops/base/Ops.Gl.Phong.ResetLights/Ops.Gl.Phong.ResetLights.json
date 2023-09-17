@@ -31,12 +31,10 @@
                 "type": 1,
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Gl.Phong.ResetLights"
+        ]
     },
     "summary": "reset lights for everything triggered after",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

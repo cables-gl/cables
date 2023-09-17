@@ -27,8 +27,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.StringToLineNumberArray"
+        ]
     },
     "summary": "outputs an array containing a line number for every character",
     "collections": null,

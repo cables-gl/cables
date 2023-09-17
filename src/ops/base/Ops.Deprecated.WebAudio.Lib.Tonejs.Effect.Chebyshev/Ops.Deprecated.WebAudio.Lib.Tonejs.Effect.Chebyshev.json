@@ -27,8 +27,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Chebyshev"
+        ]
     },
     "id": "295573a9-1565-4165-af60-138d8696225c"
 }

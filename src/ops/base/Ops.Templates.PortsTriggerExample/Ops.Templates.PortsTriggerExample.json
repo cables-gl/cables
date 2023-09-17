@@ -18,8 +18,7 @@
                 "type": "1",
                 "name": "Trigger out"
             }
-        ],
-        "name": "Ops.Templates.PortsTriggerExample"
+        ]
     },
     "summary": "Is a template for creating Trigger ports",
     "docs": {

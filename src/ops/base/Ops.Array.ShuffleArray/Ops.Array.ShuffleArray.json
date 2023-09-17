@@ -24,8 +24,7 @@
                 "type": "3",
                 "name": "shuffled array"
             }
-        ],
-        "name": "Ops.Array.ShuffleArray"
+        ]
     },
     "authorName": "tim",
     "id": "f5a62cd4-934a-4feb-99dc-f6cd6edfe350",

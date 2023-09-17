@@ -26,12 +26,10 @@
                 "type": "5",
                 "name": "String Out"
             }
-        ],
-        "name": "Ops.String.GateString"
+        ]
     },
     "summary": "Output string if pass through is true",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

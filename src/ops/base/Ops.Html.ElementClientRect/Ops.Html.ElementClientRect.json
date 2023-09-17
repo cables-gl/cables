@@ -47,12 +47,10 @@
                 "name": "Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.ElementClientRect"
+        ]
     },
     "summary": "get html element absolute position and size in pixels on screen",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

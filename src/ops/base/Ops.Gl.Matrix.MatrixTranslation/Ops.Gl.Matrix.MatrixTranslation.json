@@ -33,8 +33,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.MatrixTranslation"
+        ]
     },
     "summary": "get translation of a matrix",
     "docs": {

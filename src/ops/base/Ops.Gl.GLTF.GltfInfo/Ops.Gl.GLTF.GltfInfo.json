@@ -43,8 +43,7 @@
                 "type": 3,
                 "name": "Camera Names"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfInfo"
+        ]
     },
     "authorName": "pandur",
     "created": 1681833901074,

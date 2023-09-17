@@ -54,12 +54,10 @@
                 "type": 3,
                 "name": "Matrix"
             }
-        ],
-        "name": "Ops.Array.AnimArray_v2"
+        ]
     },
     "summary": "animate values in an array to another array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

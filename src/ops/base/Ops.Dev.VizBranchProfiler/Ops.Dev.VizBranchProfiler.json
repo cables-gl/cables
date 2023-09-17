@@ -53,7 +53,6 @@
                 "name": "Duration",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Dev.VizBranchProfiler"
+        ]
     }
 }

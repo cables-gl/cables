@@ -39,12 +39,10 @@
                 "type": 3,
                 "name": "Size"
             }
-        ],
-        "name": "Ops.User.pandur.ElementsPositionsByClass"
+        ]
     },
     "summary": "get html element absolute positions and sizes by classname",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

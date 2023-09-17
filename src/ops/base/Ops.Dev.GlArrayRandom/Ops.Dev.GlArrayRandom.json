@@ -100,8 +100,7 @@
                 "name": "Result",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Dev.GlArrayRandom"
+        ]
     },
     "coreLibs": [
         "cgl_texturemath"

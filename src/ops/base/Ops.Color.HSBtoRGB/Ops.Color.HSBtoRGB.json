@@ -34,8 +34,7 @@
                 "name": "B",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Color.HSBtoRGB"
+        ]
     },
     "docs": {
         "ports": [

@@ -41,13 +41,11 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.DiscardMaterialAlpha"
+        ]
     },
     "summary": "discard transparent pixels in material textures",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "3r_lf6",

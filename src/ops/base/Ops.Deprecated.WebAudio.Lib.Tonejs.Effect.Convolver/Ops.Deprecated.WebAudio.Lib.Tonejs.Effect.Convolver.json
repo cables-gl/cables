@@ -27,8 +27,7 @@
                 "type": "0",
                 "name": "File loaded"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Convolver"
+        ]
     },
     "updated": 1510741160039,
     "author": "56cdab144f85abfb36c6c089",

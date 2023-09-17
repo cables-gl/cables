@@ -27,8 +27,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayIteratorArray"
+        ]
     },
     "summary": "iterate over an array of arrays",
     "docs": {

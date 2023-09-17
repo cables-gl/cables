@@ -105,8 +105,7 @@
                 "name": "Die Slow",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl2.ForceField.ForceFieldSimulationLines"
+        ]
     },
     "changelog": [
         {

@@ -32,13 +32,11 @@
                 "name": "Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringIterator_v2"
+        ]
     },
     "summary": "iterate over every character of a string",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

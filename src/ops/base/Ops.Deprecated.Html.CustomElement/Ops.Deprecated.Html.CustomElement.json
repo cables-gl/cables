@@ -35,7 +35,6 @@
                 "type": "2",
                 "name": "DOM Element"
             }
-        ],
-        "name": "Ops.Html.CustomElement"
+        ]
     }
 }

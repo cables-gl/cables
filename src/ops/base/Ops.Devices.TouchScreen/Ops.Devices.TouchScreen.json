@@ -90,8 +90,7 @@
                 "type": 1,
                 "name": "Touch End"
             }
-        ],
-        "name": "Ops.Devices.TouchScreen"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

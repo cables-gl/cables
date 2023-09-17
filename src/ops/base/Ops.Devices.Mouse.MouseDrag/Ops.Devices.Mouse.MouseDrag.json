@@ -41,8 +41,7 @@
                 "name": "Is Dragging",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Mouse.MouseDrag"
+        ]
     },
     "summary": "get delta of mouse position while dragging",
     "docs": {

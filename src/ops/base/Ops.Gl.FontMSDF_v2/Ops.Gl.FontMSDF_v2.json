@@ -44,8 +44,7 @@
                 "type": "5",
                 "name": "Chars"
             }
-        ],
-        "name": "Ops.Gl.FontMSDF_v2"
+        ]
     },
     "changelog": [
         {
@@ -56,7 +55,6 @@
     ],
     "summary": "Load MSDF Font data and texture to use ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

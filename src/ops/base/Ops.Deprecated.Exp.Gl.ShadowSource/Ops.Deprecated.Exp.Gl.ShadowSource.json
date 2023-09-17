@@ -64,8 +64,7 @@
                 "type": "2",
                 "name": "shadow texture"
             }
-        ],
-        "name": "Ops.Exp.Gl.ShadowSource"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

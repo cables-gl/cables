@@ -37,8 +37,7 @@
                 "name": "Loaded",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextureSVG"
+        ]
     },
     "summary": "Load a SVG image and convert to pixel texture",
     "author": "55d744634cdc152216eb9aad",

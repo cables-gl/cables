@@ -76,8 +76,7 @@
                 "name": "Offset Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.ElementInteraction"
+        ]
     },
     "summary": "Html element interaction events",
     "issues": "",

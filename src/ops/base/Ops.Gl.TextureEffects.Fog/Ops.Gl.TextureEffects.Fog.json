@@ -53,8 +53,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Fog"
+        ]
     },
     "summary": "objects further away are colored to enhance the perception of distance.",
     "docs": {

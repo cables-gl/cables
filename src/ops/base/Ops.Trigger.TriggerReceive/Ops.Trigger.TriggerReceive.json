@@ -16,12 +16,10 @@
                 "type": 1,
                 "name": "Triggered"
             }
-        ],
-        "name": "Ops.Trigger.TriggerReceive"
+        ]
     },
     "summary": "Receives triggers from a TriggerSend op with the same variable name",
     "issues": "",
-
     "relatedops": [
         "Ops.Trigger.TriggerSend"
     ],

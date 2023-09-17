@@ -59,12 +59,10 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfNode"
+        ]
     },
     "summary": "Control a single node from the GLTFscene op",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.GLTF.GltfScene"
     ],

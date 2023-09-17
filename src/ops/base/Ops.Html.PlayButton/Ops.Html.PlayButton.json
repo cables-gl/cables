@@ -57,8 +57,7 @@
                 "type": 1,
                 "name": "Clicked Trigger"
             }
-        ],
-        "name": "Ops.Html.PlayButton"
+        ]
     },
     "summary": "shows a playbutton for forcing a simple user interaction",
     "youtubeid": "",

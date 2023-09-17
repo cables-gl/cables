@@ -37,12 +37,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayLogic"
+        ]
     },
     "summary": "Performs logical comparison operations on a single array of numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

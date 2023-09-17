@@ -52,12 +52,10 @@
                 "name": "Average Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.InfoArray2"
+        ]
     },
     "summary": "min,max and average values of an array2",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -59,12 +59,10 @@
                 "name": "Current Step",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.ClockSequencerPattern"
+        ]
     },
     "summary": "sequence triggers by defining a pattern (like a drum machine)",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.ParseArray"
     ],

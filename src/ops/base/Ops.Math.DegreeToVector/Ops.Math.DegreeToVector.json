@@ -18,8 +18,7 @@
                 "name": "y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.DegreeToVector"
+        ]
     },
     "summary": "Calculates a vector (x and y) based on an angle in degrees",
     "docs": {

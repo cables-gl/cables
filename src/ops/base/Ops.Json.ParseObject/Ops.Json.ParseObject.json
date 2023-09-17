@@ -21,8 +21,7 @@
                 "name": "Valid",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json.ParseObject"
+        ]
     },
     "summary": "Parses a string to a JSON object ",
     "docs": {

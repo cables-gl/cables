@@ -24,8 +24,7 @@
                 "name": "Offset Y",
                 "subType": "integer"
             }
-        ],
-        "name": "Ops.Html.MouseCursorImage"
+        ]
     },
     "exampleProjectId": "y8dT4y"
 }

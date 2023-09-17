@@ -29,8 +29,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Alpha"
+        ]
     },
     "changelog": [
         {
@@ -46,7 +45,6 @@
     ],
     "summary": "Modify current alpha/opacity ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

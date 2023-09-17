@@ -35,8 +35,7 @@
                 "name": "Out Value 3",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.NumberSequence"
+        ]
     },
     "summary": "Copies the input value to the output ports (value sequence)",
     "docs": {

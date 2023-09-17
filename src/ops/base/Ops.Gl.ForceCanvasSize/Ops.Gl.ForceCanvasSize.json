@@ -97,8 +97,7 @@
                 "name": "Margin Top",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.ForceCanvasSize"
+        ]
     },
     "issues": "",
     "relatedops": null,

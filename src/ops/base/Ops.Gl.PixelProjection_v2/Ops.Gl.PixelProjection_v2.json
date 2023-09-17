@@ -84,8 +84,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.PixelProjection_v2"
+        ]
     },
     "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
     "issues": "",

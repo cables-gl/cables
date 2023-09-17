@@ -16,12 +16,10 @@
     "created": 1629721822424,
     "layout": {
         "portsIn": [],
-        "portsOut": [],
-        "name": "Ops.Ui.Area"
+        "portsOut": []
     },
     "summary": "Organize and group your patch operators",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "-1vMiU6BcDg"

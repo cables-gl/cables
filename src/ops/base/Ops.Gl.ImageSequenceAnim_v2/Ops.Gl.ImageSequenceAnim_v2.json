@@ -70,8 +70,7 @@
                 "name": "Progress",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.ImageSequenceAnim_v2"
+        ]
     },
     "summary": "play a image sprite animation",
     "docs": {
@@ -120,7 +119,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

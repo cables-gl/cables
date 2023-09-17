@@ -57,8 +57,7 @@
                 "name": "Area Average Volume",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.FFTAreaAverage_v2"
+        ]
     },
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "simod",

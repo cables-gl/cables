@@ -45,8 +45,7 @@
                 "type": 5,
                 "name": "Frozen String"
             }
-        ],
-        "name": "Ops.Values.FreezeString"
+        ]
     },
     "authorName": "pandur",
     "created": 1643831677411,

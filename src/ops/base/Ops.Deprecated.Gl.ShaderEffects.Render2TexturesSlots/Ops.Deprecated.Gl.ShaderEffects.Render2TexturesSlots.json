@@ -34,14 +34,13 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.Render2TexturesSlots"
+        ]
     },
     "summary": "select textures to render to",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "INQQgo",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": " added core lib: cgl_shadermodifier",
@@ -58,5 +57,7 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "collections": null,
+    "relatedops": null
 }

@@ -126,8 +126,7 @@
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.VideoTexture"
+        ]
     },
     "summary": "play a video file and use it as a texture",
     "author": "55d744634cdc152216eb9aad",

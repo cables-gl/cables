@@ -71,8 +71,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Team.CollisionOps.CollisionBody"
+        ]
     },
     "authorName": "pandur",
     "created": 1686149050119,

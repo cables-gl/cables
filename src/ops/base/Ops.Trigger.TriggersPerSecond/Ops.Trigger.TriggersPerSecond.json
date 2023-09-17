@@ -12,8 +12,7 @@
                 "name": "cps",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.TriggersPerSecond"
+        ]
     },
     "summary": "Counts how often the port is triggered per second",
     "docs": {
@@ -44,7 +43,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "JCkpVJ"

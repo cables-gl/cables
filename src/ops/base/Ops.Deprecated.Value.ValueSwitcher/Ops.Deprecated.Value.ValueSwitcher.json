@@ -94,8 +94,7 @@
                 "type": "1",
                 "name": "Triggered"
             }
-        ],
-        "name": "Ops.Value.ValueSwitcher"
+        ]
     },
     "summary": "switch between different values",
     "docs": {

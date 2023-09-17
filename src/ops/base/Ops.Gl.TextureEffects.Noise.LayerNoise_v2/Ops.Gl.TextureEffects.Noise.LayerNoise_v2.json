@@ -93,12 +93,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Noise.LayerNoise_v2"
+        ]
     },
     "summary": "Multilayer perlin noise variation",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

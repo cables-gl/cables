@@ -22,8 +22,7 @@
                 "name": "String",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.RightPadNumber"
+        ]
     },
     "summary": "converts a number to a string with num decimal places, adds 0's",
     "docs": {

@@ -31,8 +31,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.MembraneSynth"
+        ]
     },
     "id": "ad9b730b-1774-42e3-9582-974b3cefb356"
 }

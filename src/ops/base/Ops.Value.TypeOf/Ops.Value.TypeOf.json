@@ -16,8 +16,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.TypeOf"
+        ]
     },
     "summary": "Outputs the type of the input-port (boolean, number, string).  ",
     "docs": {

@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Note Out"
             }
-        ],
-        "name": "Ops.WebAudio.Note"
+        ]
     },
     "summary": "Constructs a tone.js-compliant note (base-tone + octave)",
     "id": "f9465b6c-40a1-405e-8424-e55b81e163d8"

@@ -87,13 +87,11 @@
                 "name": "Has error",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.stephan.NumberFormatter"
+        ]
     },
     "summary": "Format a number to a string in the given locale and format",
     "issues": "",
     "caniusequery": "Date%20toLocaleString",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

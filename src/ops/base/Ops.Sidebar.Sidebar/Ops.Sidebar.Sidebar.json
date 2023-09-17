@@ -56,8 +56,7 @@
                 "uititle": "Opened",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Sidebar.Sidebar"
+        ]
     },
     "summary": "Sidebar overlay to control values",
     "docs": {

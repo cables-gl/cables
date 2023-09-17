@@ -44,12 +44,10 @@
                 "type": 3,
                 "name": "Matrix"
             }
-        ],
-        "name": "Ops.Gl.Matrix.AnimMatrix"
+        ]
     },
     "summary": "animate values in a matrix to a new matrix",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -43,12 +43,10 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.VertexColorAsAlpha"
+        ]
     },
     "summary": "Use mesh vertexcolor as Alpha/Opacity",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

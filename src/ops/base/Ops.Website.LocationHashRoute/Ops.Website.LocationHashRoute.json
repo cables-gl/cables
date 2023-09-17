@@ -52,8 +52,7 @@
                 "name": "Matching",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Website.LocationHashRoute"
+        ]
     },
     "summary": "gives updated information about window.location.hash",
     "issues": "",

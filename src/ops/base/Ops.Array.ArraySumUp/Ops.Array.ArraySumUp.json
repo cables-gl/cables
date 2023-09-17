@@ -16,12 +16,10 @@
                 "name": "Sum",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArraySumUp"
+        ]
     },
     "summary": "sum of every number in an array",
     "youtubeid": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

@@ -31,8 +31,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.ColorBalanceV2"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

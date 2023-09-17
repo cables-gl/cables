@@ -20,8 +20,7 @@
                 "type": "2",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.RandomizeTriangles"
+        ]
     },
     "summary": "randomize order of triangles in a geometry",
     "exampleProjectId": "gLrrJV",

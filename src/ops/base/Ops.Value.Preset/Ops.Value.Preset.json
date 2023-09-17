@@ -117,12 +117,10 @@
                 "type": "3",
                 "name": "dbg_sets"
             }
-        ],
-        "name": "Ops.Value.Preset"
+        ]
     },
     "summary": "State management of all parameters connected to it - Create presets of multiple ops",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "2eKIpiTv6ww"

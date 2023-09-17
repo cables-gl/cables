@@ -24,8 +24,7 @@
                 "type": "0",
                 "name": "Result Y"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ScreenPosTo3d"
+        ]
     },
     "updated": 1518867571215,
     "author": "55d744634cdc152216eb9aad",

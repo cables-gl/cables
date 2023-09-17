@@ -23,8 +23,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.TextureDifference"
+        ]
     },
     "summary": "render the difference of two textures",
     "docs": {

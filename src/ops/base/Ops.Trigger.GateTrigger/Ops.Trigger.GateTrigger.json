@@ -19,12 +19,10 @@
                 "type": "1",
                 "name": "Trigger out"
             }
-        ],
-        "name": "Ops.Trigger.GateTrigger"
+        ]
     },
     "summary": "Allows a trigger to pass only if the gate is open",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "gT1jXP5As9A"

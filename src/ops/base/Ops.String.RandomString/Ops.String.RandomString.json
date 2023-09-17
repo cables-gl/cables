@@ -24,8 +24,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.RandomString"
+        ]
     },
     "summary": "generate a random string of given characters"
 }

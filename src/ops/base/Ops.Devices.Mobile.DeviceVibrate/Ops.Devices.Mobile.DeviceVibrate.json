@@ -12,8 +12,7 @@
                 "name": "Supported",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Mobile.DeviceVibrate"
+        ]
     },
     "summary": "vibrating a mobile device",
     "authorName": "pandur",

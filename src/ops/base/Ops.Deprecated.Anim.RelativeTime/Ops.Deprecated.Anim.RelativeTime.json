@@ -22,8 +22,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.RelativeTime"
+        ]
     },
     "docs": {
         "ports": [
@@ -46,7 +45,6 @@
     "created": 1542101380011,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "-eyIQm",
     "changelog": [

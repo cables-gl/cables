@@ -111,8 +111,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.RandomArrays"
+        ]
     },
     "summary": "create a random array of 1 to 4 dimensions",
     "issues": "",

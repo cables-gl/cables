@@ -37,8 +37,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.VertexTexture.RgbCurlNoise"
+        ]
     },
     "authorName": "pandur",
     "id": "10bc3a93-47c6-48ea-aebb-20f990153e62",
@@ -66,7 +65,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

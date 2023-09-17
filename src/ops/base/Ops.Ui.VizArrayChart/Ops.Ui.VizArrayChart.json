@@ -30,11 +30,9 @@
                 "name": "Titles"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Ui.VizArrayChart"
+        "portsOut": []
     },
     "summary": "Displays information of the distribution of numerical values in an array",
-
     "relatedops": [
         "Ops.Ui.VizArrayTable"
     ],

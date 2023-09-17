@@ -36,12 +36,10 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Math.MercatorCoordsArray"
+        ]
     },
     "summary": "Mercator map and center an array of latitudes and longitudes to a local coordinate system",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

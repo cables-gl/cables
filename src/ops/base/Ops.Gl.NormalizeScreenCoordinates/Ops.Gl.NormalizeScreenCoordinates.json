@@ -31,8 +31,7 @@
                 "name": "Result Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.NormalizeScreenCoordinates"
+        ]
     },
     "summary": "convert screen pixel coordinates to range 0-1",
     "docs": {

@@ -19,8 +19,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArraySum"
+        ]
     },
     "summary": "Adds one number to all values in an array",
     "docs": {
@@ -41,7 +40,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "uIYNcn"
 }

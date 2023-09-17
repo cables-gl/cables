@@ -31,12 +31,10 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.StringBreak_v3"
+        ]
     },
     "summary": "insert linebreaks into a string after [num] chars",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

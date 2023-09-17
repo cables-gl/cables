@@ -56,8 +56,7 @@
                 "name": "Wet Out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.Convolver_v2"
+        ]
     },
     "created": 1607959999477,
     "summary": "Audio reverb using an impulse response (sample)",
@@ -114,7 +113,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "WlLDwp"

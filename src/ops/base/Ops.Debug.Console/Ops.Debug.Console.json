@@ -21,8 +21,7 @@
                 "name": "Element",
                 "objType": "element"
             }
-        ],
-        "name": "Ops.Debug.Console"
+        ]
     },
     "summary": "Shows console log output on the screen",
     "docs": {
@@ -33,7 +32,6 @@
             }
         ]
     },
-
     "relatedops": null,
     "exampleProjectId": "TVIL7f"
 }

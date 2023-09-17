@@ -19,8 +19,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Signal.AudioModulo"
+        ]
     },
     "id": "69b1ae71-ac87-43eb-aac1-5b31a336abf7"
 }

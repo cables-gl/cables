@@ -72,8 +72,7 @@
                 "type": 3,
                 "name": "Colors Pos"
             }
-        ],
-        "name": "Ops.Gl.GradientTexture"
+        ]
     },
     "summary": "texture containing a colour gradient that can be altered with an editor",
     "docs": {
@@ -105,7 +104,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "_wQNDW"

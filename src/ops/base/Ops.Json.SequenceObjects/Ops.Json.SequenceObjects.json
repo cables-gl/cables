@@ -147,8 +147,7 @@
                 "type": "2",
                 "name": "Output 15"
             }
-        ],
-        "name": "Ops.Values.SequenceObjects"
+        ]
     },
     "summary": "control order and flow of objects",
     "issues": "",

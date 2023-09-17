@@ -40,7 +40,6 @@
                 "type": "0",
                 "name": "Width"
             }
-        ],
-        "name": "Ops.Json3d.TextMesh3d"
+        ]
     }
 }

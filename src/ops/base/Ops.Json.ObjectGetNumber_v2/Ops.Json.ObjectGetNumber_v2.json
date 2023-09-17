@@ -31,8 +31,7 @@
                 "name": "Found",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json.ObjectGetNumber_v2"
+        ]
     },
     "summary": "Get a number from an object",
     "issues": "",

@@ -182,8 +182,7 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Phong.PhongMaterial_v4"
+        ]
     },
     "authorName": "simod",
     "id": "7059501e-31a6-46cd-8939-4d4b82229086",
@@ -202,7 +201,6 @@
     ],
     "summary": "A shaded material for lighting objects",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Phong.AmbientLight_v4",
         "Ops.Gl.Phong.DirectionalLight_v4",

@@ -72,7 +72,6 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.IBLMaterial"
+        ]
     }
 }

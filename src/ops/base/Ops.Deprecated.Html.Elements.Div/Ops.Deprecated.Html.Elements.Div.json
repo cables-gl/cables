@@ -151,8 +151,7 @@
                 "name": "Client Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Html.Elements.Div"
+        ]
     },
     "updated": 1534183398546,
     "authorName": "pandur",

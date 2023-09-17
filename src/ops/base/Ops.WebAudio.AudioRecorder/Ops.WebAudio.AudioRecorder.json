@@ -103,12 +103,10 @@
                 "type": 5,
                 "name": "Data URL"
             }
-        ],
-        "name": "Ops.WebAudio.AudioRecorder"
+        ]
     },
     "summary": "record, playback and download audio",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

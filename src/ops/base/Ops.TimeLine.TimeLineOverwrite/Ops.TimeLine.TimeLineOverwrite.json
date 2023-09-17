@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineOverwrite"
+        ]
     },
     "summary": "overwrite timeline time value",
     "docs": {

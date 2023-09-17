@@ -44,8 +44,7 @@
                 "name": "Beat Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Audio.BpmTap"
+        ]
     },
     "summary": "Let’s you tap in a beat, useful to synchronise visuals to music (VJ, sync, sound)",
     "docs": {

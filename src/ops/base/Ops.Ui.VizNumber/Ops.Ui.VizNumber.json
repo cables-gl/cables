@@ -26,14 +26,12 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Ui.VizNumber"
+        ]
     },
     "authorName": "pandur",
     "created": 1637676964149,
     "summary": "Displays input string on the patchfield",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "-1vMiU6BcDg"

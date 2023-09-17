@@ -34,8 +34,7 @@
                 "name": "Current value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Accumulator"
+        ]
     },
     "summary": "Add to and multiply a number, set to current value",
     "docs": {
@@ -67,7 +66,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "Ejzvsx"

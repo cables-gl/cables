@@ -83,8 +83,7 @@
                 "name": "Alpha",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureColorPick"
+        ]
     },
     "summary": "get the color of a pixel in a texture",
     "issues": "",

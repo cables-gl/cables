@@ -43,12 +43,10 @@
                 "type": 1,
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiTranspose"
+        ]
     },
     "summary": "transpose incoming midi notes",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiChord3",

@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.ObjectToJSON"
+        ]
     },
     "summary": "convert an object to a JSON string (stringify)",
     "docs": {

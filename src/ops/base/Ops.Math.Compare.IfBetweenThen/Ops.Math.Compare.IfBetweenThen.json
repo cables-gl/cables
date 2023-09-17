@@ -35,8 +35,7 @@
                 "name": "bs between",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.IfBetweenThen"
+        ]
     },
     "summary": "triggers when value is between min and max",
     "authorName": "pandur",

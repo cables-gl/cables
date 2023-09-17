@@ -117,12 +117,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.NumberSwitchByString"
+        ]
     },
     "summary": "associate numbers by strings",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

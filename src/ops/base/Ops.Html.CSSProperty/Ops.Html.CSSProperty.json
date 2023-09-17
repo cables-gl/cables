@@ -29,8 +29,7 @@
                 "type": "2",
                 "name": "HTML Element"
             }
-        ],
-        "name": "Ops.Html.CSSProperty"
+        ]
     },
     "summary": "set css style properties of a html element ",
     "docs": {

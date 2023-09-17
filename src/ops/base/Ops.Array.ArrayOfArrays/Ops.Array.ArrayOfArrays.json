@@ -61,12 +61,10 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayOfArrays"
+        ]
     },
     "summary": "Create an array filled with other arrays",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

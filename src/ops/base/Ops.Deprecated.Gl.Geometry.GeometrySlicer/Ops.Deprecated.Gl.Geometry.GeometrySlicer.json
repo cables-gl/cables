@@ -23,7 +23,6 @@
                 "type": "2",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Geometry.GeometrySlicer"
+        ]
     }
 }

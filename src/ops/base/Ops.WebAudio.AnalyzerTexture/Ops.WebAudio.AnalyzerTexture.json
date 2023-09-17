@@ -20,8 +20,7 @@
                 "name": "position",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.FftTexture"
+        ]
     },
     "summary": "Generates a texture from audio information",
     "docs": {

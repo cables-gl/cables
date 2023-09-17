@@ -19,8 +19,7 @@
                 "name": "Trigger"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Api.Ifttt.IftttTrigger"
+        "portsOut": []
     },
     "summary": "Triggers a custom event in the maker channel of IFTTT",
     "docs": {

@@ -80,8 +80,7 @@
                 "name": "Is Playing",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.WebAudio.SamplePlayer"
+        ]
     },
     "summary": "Plays back one shot samples on trigger (useful for interaction sound)",
     "issues": "",

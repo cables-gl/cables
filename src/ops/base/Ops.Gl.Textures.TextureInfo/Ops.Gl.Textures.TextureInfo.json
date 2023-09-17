@@ -72,8 +72,7 @@
                 "name": "Id",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextureInfo"
+        ]
     },
     "summary": "Outputs information about the connected texture",
     "docs": {

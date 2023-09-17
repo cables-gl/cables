@@ -83,8 +83,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Shader.WireframeMaterial_v2"
+        ]
     },
     "summary": "Renders following meshes as wireframes",
     "docs": {

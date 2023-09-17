@@ -87,8 +87,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.AreaDiscarPixel2"
+        ]
     },
     "changelog": [
         {
@@ -104,7 +103,6 @@
     ],
     "summary": "do not draw pixels inside a defined 3d area",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

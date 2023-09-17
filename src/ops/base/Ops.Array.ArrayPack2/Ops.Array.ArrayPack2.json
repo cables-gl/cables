@@ -38,12 +38,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayPack2"
+        ]
     },
     "summary": "Packs two individual arrays into a new array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

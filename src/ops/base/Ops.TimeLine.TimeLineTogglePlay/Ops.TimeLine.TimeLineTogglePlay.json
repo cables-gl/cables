@@ -11,7 +11,6 @@
     "created": 1564783928413,
     "summary": "toggle between timeline playing and being paused",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -24,7 +23,6 @@
                 "name": "Play",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineTogglePlay"
+        ]
     }
 }

@@ -15,8 +15,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.CopyArraySimple"
+        ]
     },
     "summary": "create a copy of an array",
     "changelog": [

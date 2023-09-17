@@ -35,8 +35,7 @@
                 "name": "Anim Finished",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.TimeLine.TimelineValue"
+        ]
     },
     "summary": "Animate and get value at \"time\" of timeline",
     "docs": {
@@ -56,7 +55,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "xAg8P6"

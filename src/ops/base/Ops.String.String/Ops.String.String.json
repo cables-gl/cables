@@ -16,8 +16,7 @@
                 "type": "0",
                 "name": "result"
             }
-        ],
-        "name": "Ops.Value.ValueString"
+        ]
     },
     "summary": "enter a string",
     "docs": {
@@ -42,7 +41,6 @@
     ],
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

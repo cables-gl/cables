@@ -75,8 +75,7 @@
                 "name": "length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ParseArray_v2"
+        ]
     },
     "issues": "",
     "youtubeids": [

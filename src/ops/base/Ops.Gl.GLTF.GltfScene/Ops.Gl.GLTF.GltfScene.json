@@ -106,12 +106,10 @@
                 "type": "1",
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfScene"
+        ]
     },
     "summary": "Load GLTF/GLB 3d files",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "QNLw21hSweg"

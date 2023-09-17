@@ -16,7 +16,6 @@
     "created": 1565717348413,
     "summary": "Join array values to a string (concat)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -43,8 +42,7 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayToString_v3"
+        ]
     },
     "exampleProjectId": "U4M4J5"
 }

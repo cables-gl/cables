@@ -61,8 +61,7 @@
                 "name": "Result",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Graphics.Geometry.TransformGeometry"
+        ]
     },
     "summary": "transform vertices of geometry",
     "exampleProjectId": "aoBFz6",

@@ -79,8 +79,7 @@
                 "type": 5,
                 "name": "Info"
             }
-        ],
-        "name": "Ops.Ui.VizTexture"
+        ]
     },
     "summary": "Displays texture at input port",
     "issues": "",

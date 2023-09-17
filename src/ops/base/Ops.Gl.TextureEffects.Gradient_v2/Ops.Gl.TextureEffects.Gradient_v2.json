@@ -117,8 +117,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Gradient_v2"
+        ]
     },
     "summary": "Draws a simple gradient between three colors",
     "docs": {

@@ -30,8 +30,7 @@
                 "name": "Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3xGetValues"
+        ]
     },
     "summary": "get a single set of Xyz values from an XyzArray",
     "docs": {
@@ -59,7 +58,6 @@
         ]
     },
     "youtubeid": "",
-
     "relatedops": [
         "Ops.Array.ArrayGetNumber"
     ],

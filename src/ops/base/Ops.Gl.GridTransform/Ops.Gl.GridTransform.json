@@ -46,8 +46,7 @@
                 "name": "y index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.GridTransform"
+        ]
     },
     "summary": "transform and arrange elements into a grid",
     "author": "55d744634cdc152216eb9aad",

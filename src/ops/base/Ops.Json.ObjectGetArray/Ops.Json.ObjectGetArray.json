@@ -23,8 +23,7 @@
                 "type": "0",
                 "name": "Length"
             }
-        ],
-        "name": "Ops.Json.ObjectGetArray"
+        ]
     },
     "summary": "Returns an array from a JSON-object",
     "docs": {

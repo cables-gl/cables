@@ -34,8 +34,7 @@
                 "name": "Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.Bang"
+        ]
     },
     "summary": "trigger a simple bang animation going from `1` to `0`",
     "youtubeid": "",

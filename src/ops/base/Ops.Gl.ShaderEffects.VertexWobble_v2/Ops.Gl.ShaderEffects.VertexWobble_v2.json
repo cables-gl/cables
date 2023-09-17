@@ -101,8 +101,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.VertexWobble"
+        ]
     },
     "summary": "sine wave vertex displacement",
     "docs": {

@@ -30,12 +30,10 @@
                 "type": "5",
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Vars.VarSetString_v2"
+        ]
     },
     "summary": "Set string variable",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

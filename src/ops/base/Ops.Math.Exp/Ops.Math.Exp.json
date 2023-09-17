@@ -16,8 +16,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Exp"
+        ]
     },
     "summary": "Calculates the power of Euler’s number",
     "docs": {

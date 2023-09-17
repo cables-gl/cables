@@ -20,8 +20,7 @@
                 "type": "3",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.CsvColumnArray"
+        ]
     },
     "summary": "get all values of a CSV column as array of strings",
     "docs": {

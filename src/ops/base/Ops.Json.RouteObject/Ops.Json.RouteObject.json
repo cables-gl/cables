@@ -66,8 +66,7 @@
                 "type": 2,
                 "name": "Index 9 Object"
             }
-        ],
-        "name": "Ops.Json.RouteObject"
+        ]
     },
     "summary": "Route an object to an output port",
     "issues": "",

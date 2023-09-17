@@ -23,8 +23,7 @@
                 "name": "Out Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.ToggleNumber"
+        ]
     },
     "summary": "Switches two number values using a boolean",
     "docs": {

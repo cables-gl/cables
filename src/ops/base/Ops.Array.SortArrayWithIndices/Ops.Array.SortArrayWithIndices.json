@@ -40,8 +40,7 @@
                 "type": 3,
                 "name": "Sorted Indices"
             }
-        ],
-        "name": "Ops.Array.SortArrayWithIndices"
+        ]
     },
     "summary": "Sorts an array of numbers and also get sorted indices ",
     "issues": "",

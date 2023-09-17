@@ -28,7 +28,6 @@
                 "type": "1",
                 "name": "Trigger Attack Release"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.TriggerEnvelopeAttackRelease"
+        ]
     }
 }

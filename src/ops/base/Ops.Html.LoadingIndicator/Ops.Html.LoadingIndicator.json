@@ -32,12 +32,10 @@
                 "subType": "integer"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.LoadingIndicator"
+        "portsOut": []
     },
     "summary": "show a typical web loading/progress indicator animation",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

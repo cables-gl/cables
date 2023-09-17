@@ -63,12 +63,10 @@
                 "name": "W",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.RandomNumbers_v3"
+        ]
     },
     "summary": "Simple way to get random numbers without using arrays",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "ASp7LEqZUIE"

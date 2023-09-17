@@ -18,8 +18,7 @@
                 "name": "value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayGetNumber"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

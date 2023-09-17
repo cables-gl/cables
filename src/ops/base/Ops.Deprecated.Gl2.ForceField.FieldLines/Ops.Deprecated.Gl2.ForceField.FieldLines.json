@@ -32,8 +32,7 @@
                 "type": "0",
                 "name": "Canceled lines"
             }
-        ],
-        "name": "Ops.Gl2.ForceField.FieldLines"
+        ]
     },
     "changelog": [
         {

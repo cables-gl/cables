@@ -36,8 +36,7 @@
                 "name": "Success",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Api.ThingSpeak.ReadEntries"
+        ]
     },
     "summary": "Reads the most recent entries from ThingSpeak",
     "docs": {
