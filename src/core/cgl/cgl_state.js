@@ -1250,11 +1250,9 @@ Context.prototype.enableExtension = function (name)
     // console.log("extension", name);
     // const start = performance.now();
     const o = this.gl.getExtension(name);
-    // console.log(performance.now() - start);
     if (!o)
     {
-        // console.log("[cgl_state] extension not available", name);
-        this._log.stack("[cgl_state] extension not available");
+        this._log.stack("[cgl_state] extension not available " + name);
     }
 
     return o;
