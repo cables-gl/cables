@@ -51,6 +51,9 @@ function addStyle()
             }, (fontFace) =>
             {
                 op.setUiError("loadingerror", "Font loading error!" + fontFaceObj.status);
+                op.patch.cgl.patch.loading.finished(loadingId);
+                outLoaded.set(true);
+
                 // op.logError("Font loading error! Current status", fontFaceObj.status);
             });
         }

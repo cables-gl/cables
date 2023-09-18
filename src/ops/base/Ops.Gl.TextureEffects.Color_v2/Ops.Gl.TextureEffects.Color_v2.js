@@ -9,6 +9,7 @@ const
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
+    a = op.inValueSlider("A", 1),
     trigger = op.outTrigger("trigger");
 
 r.setUiAttribs({ "colorPick": true });
@@ -27,6 +28,7 @@ const
     uniformR = new CGL.Uniform(shader, "f", "r", r),
     uniformG = new CGL.Uniform(shader, "f", "g", g),
     uniformB = new CGL.Uniform(shader, "f", "b", b),
+    uniformA = new CGL.Uniform(shader, "f", "a", a),
     uniformAmount = new CGL.Uniform(shader, "f", "amount", amount);
 
 inMask.onChange = function ()
