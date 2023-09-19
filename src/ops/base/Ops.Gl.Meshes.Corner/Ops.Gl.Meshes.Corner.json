@@ -53,7 +53,8 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ]
+        ],
+        "name": "Ops.Gl.Meshes.Corner"
     },
     "summary": "render a rectangular corner",
     "docs": {
