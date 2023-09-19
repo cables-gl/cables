@@ -3,6 +3,7 @@ UNI sampler2D tex;
 UNI float r;
 UNI float g;
 UNI float b;
+UNI float a;
 UNI float amount;
 
 #ifdef MASK
@@ -13,7 +14,7 @@ UNI float amount;
 
 void main()
 {
-    vec4 col=vec4(r,g,b,1.0);
+    vec4 col=vec4(r,g,b,a);
     vec4 base=texture(tex,texCoord);
 
     float am=amount;

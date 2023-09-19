@@ -18,13 +18,6 @@ mod.addModule({
     "srcBodyVert": attachments.displace_vert || ""
 });
 
-// mod.addModule({
-//     "title": op.name,
-//     "name": "MODULE_COLOR",
-//     "srcHeadFrag": attachments.colorize_head_frag,
-//     "srcBodyFrag": attachments.colorize_frag
-// });
-
 mod.addUniformVert("2f", "MOD_size", inWidth, inHeight);
 mod.addUniformVert("2f", "MOD_pos", inX, inY);
 
