@@ -237,7 +237,6 @@ Anim.prototype.setKeyEasing = function (index, e)
     {
         this.keys[index].setEasing(e);
         this.emitEvent("onChange", this);
-        this.emitEvent("onChangeEasing", this);
     }
 };
 
@@ -422,6 +421,8 @@ Anim.prototype.createPort = function (op, title, cb)
     port.onChange = function ()
     {
         this.defaultEasing = this.easingFromString(port.get());
+        this.emitEvent("onChangeDefaultEasing", this);
+
         if (cb) cb();
     }.bind(this);
 
