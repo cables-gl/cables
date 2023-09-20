@@ -71,8 +71,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Dev.InstancedModulo"
+        ]
     },
     "summary": "colorize instanced meshes using a texture",
     "issues": "",
