@@ -136,7 +136,8 @@
                 "name": "geometry",
                 "objType": "geometry"
             }
-        ]
+        ],
+        "name": "Ops.Gl.Meshes.Rectangle_v4"
     },
     "summary": "draw a rectangle (plane, square)",
     "issues": "",
