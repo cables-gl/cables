@@ -73,17 +73,6 @@ function rebuildLater()
     needsRebuild = true;
 }
 
-// render.onLinkChanged = () =>
-// {
-//     if (!trigger.isLinked())
-//     {
-//         if (mesh) mesh.dispose();
-//         mesh = null;
-//         geomOut.set(null);
-//         rebuildLater();
-//     }
-// };
-
 render.onTriggered = () =>
 {
     if (needsRebuild) rebuild();
@@ -177,8 +166,6 @@ function rebuild()
                 biTangents[idxBiTangent++] = 0;
                 biTangents[idxBiTangent++] = 1;
                 biTangents[idxBiTangent++] = 0;
-
-                // biTangents.push(0, 1, 0);
             }
             else if (curAxis == AXIS_XZ)
             {
@@ -189,8 +176,6 @@ function rebuild()
                 biTangents[idxBiTangent++] = 0;
                 biTangents[idxBiTangent++] = 0;
                 biTangents[idxBiTangent++] = 1;
-
-                // biTangents.push(0, 0, 1);
             }
         }
     }

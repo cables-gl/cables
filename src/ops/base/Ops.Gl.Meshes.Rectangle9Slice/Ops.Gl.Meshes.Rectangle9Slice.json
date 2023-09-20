@@ -1,0 +1,87 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "40d98dbd-6c15-4852-a130-fcac19090ad8",
+    "created": 1695109910941,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Border Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "pivot x index",
+                "group": "Align",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "pivot y index",
+                "group": "Align",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Geometry"
+            }
+        ]
+    },
+    "summary": "render a rectangular corner",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "WkQpIG",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Corner",
+            "author": "pandur",
+            "date": 1695109910942
+        },
+        {
+            "message": "Ops.Patch.PWkQpIG.Rectangle9Slice renamed to Ops.Gl.Meshes.Rectangle9Slice",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1695112138726
+        }
+    ],
+    "relatedops": null
+}
