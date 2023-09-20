@@ -237,6 +237,7 @@ Anim.prototype.setKeyEasing = function (index, e)
     {
         this.keys[index].setEasing(e);
         this.emitEvent("onChange", this);
+        this.emitEvent("onChangeEasing", this);
     }
 };
 
