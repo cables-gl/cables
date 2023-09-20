@@ -228,7 +228,7 @@ Framebuffer2.prototype.setSize = function (w, h)
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
                 // const extcbl = this._cgl.enableExtension("EXT_color_buffer_float_linear");
 
-                if (!this._cgl.enableExtension("EXT_color_buffer_float_linear"))
+                if (!this._cgl.enableExtension("OES_texture_float_linear"))
                 {
                     console.log("no linear pixelformat,using nearest");
                     this._options.filter = Texture.FILTER_NEAREST;
