@@ -421,6 +421,8 @@ Anim.prototype.createPort = function (op, title, cb)
     port.onChange = function ()
     {
         this.defaultEasing = this.easingFromString(port.get());
+        this.emitEvent("onChangeDefaultEasing", this);
+
         if (cb) cb();
     }.bind(this);
 

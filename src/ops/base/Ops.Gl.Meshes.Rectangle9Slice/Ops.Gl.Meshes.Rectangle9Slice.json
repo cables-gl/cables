@@ -63,14 +63,13 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Rectangle9Slice"
+        ]
     },
     "summary": "render a rectangular corner",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "KWolQ6",
+    "exampleProjectId": "WkQpIG",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.Meshes.Corner",
@@ -83,5 +82,6 @@
             "author": "pandur",
             "date": 1695112138726
         }
-    ]
+    ],
+    "relatedops": null
 }
