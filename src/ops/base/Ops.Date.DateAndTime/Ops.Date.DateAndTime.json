@@ -1,5 +1,5 @@
 {
-    "summary": "Returns current date and time",
+    "summary": "Returns current date and time and timestamp",
     "layout": {
         "portsIn": [
             {
@@ -85,5 +85,6 @@
     "authorName": "pandur",
     "id": "beff95ec-7b50-4b6e-80b8-a7e4ab97d8cc",
     "created": 1525244144566,
-    "exampleProjectId": "GuzKSD"
+    "exampleProjectId": "GuzKSD",
+    "relatedops": null
 }

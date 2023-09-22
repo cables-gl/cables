@@ -15,7 +15,7 @@ const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniStrength = new CGL.Uniform(shader, "f", "strength", strength),
     unisizeMul = new CGL.Uniform(shader, "f", "sizeMul", sizeMul),
-    uniSize = new CGL.Uniform(shader, "2f", "size", 0,0);
+    uniSize = new CGL.Uniform(shader, "2f", "size", 0, 0);
 
 render.onTriggered = function ()
 {
@@ -24,11 +24,11 @@ render.onTriggered = function ()
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
-    const effectTex=cgl.currentTextureEffect.getCurrentSourceTexture();
+    const effectTex = cgl.currentTextureEffect.getCurrentSourceTexture();
 
     cgl.setTexture(0, effectTex.tex);
 
-    uniSize.setValue([1/effectTex.width,1/effectTex.height]);
+    uniSize.setValue([1 / effectTex.width, 1 / effectTex.height]);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
