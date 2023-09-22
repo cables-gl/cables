@@ -110,6 +110,22 @@ const _uuid = function ()
 export const uuid = _uuid;
 export const generateUUID = _uuid;
 
+
+
+export function cleanJson(obj)
+{
+    for (const i in obj)
+    {
+        if (obj[i] && typeof objValue === "object" && obj[i].constructor === Object) obj[i] = cleanJson(obj[i]);
+
+        if (obj[i] === null || obj[i] === undefined) delete obj[i];
+        else if (Array.isArray(obj[i]) && obj[i].length == 0) delete obj[i];
+    }
+
+    return obj;
+}
+
+
 /**
  * @see http://stackoverflow.com/q/7616461/940217
  * @return {string}

@@ -2,6 +2,7 @@ import { EventTarget } from "./eventtarget";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
+import { cleanJson } from "./utils";
 
 
 /**
@@ -439,7 +440,7 @@ Port.prototype.deSerializeSettings = function (objPort)
 
 Port.prototype.getSerialized = function ()
 {
-    const obj = {};
+    let obj = {};
     obj.name = this.getName();
 
     if (!this.ignoreValueSerialize && this.links.length === 0)
@@ -466,8 +467,6 @@ Port.prototype.getSerialized = function ()
 
     if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
     {
-        const serLinks = [];
-
         for (const i in this.links)
         {
             if (!this.links[i].portIn || !this.links[i].portOut) continue;
@@ -480,6 +479,12 @@ Port.prototype.getSerialized = function ()
             }
         }
     }
+
+    if (obj.links && obj.links.length == 0) delete obj.links;
+    if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) delete obj.value;
+    if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION && this.links.length == 0) obj = null;
+    if (obj && Object.keys(obj).length == 1 && obj.name)obj = null;
+    cleanJson(obj);
 
     return obj;
 };
