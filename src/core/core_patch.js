@@ -1,5 +1,5 @@
 import { EventTarget } from "./eventtarget";
-import { ajax, uuid, ajaxSync, prefixedHash } from "./utils";
+import { ajax, uuid, ajaxSync, prefixedHash, cleanJson } from "./utils";
 import { LoadingStatus } from "./loadingstatus";
 import { Instancing } from "./instancing";
 import { Timer } from "./timer";
@@ -760,6 +760,8 @@ Patch.prototype.serialize = function (options)
         obj.ops.push(op.getSerialized());
     }
 
+    cleanJson(obj);
+
     if (options.asObject) return obj;
     return JSON.stringify(obj);
 };
@@ -1001,22 +1003,29 @@ Patch.prototype.deSerialize = function (obj, options)
             for (const ipi in opData.portsIn)
             {
                 const objPort = opData.portsIn[ipi];
-                const port = op.getPort(objPort.name);
+                if (objPort && objPort.hasOwnProperty("name"))
+                {
+                    const port = op.getPort(objPort.name);
 
-                if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
-                if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
+                    if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
+                    if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
-                if (port) port.deSerializeSettings(objPort);
+                    if (port) port.deSerializeSettings(objPort);
+                }
             }
 
             for (const ipo in opData.portsOut)
             {
-                const port2 = op.getPort(opData.portsOut[ipo].name);
-                if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty("value"))
-                    port2.set(obj.ops[iop].portsOut[ipo].value);
+                const objPort = opData.portsOut[ipo];
+                if (objPort && objPort.hasOwnProperty("name"))
+                {
+                    const port2 = op.getPort(objPort.name);
+                    if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
+                        port2.set(obj.ops[iop].portsOut[ipo].value);
 
-                // if (port2)port2.deSerializeSettings(opData.portsOut[ipo]);
-                if (port2 && opData.portsOut[ipo].expose) port2.setUiAttribs({ "expose": true });
+                    // if (port2)port2.deSerializeSettings(objPort);
+                    if (port2 && objPort.expose) port2.setUiAttribs({ "expose": true });
+                }
             }
             newOps.push(op);
         }
@@ -1048,7 +1057,7 @@ Patch.prototype.deSerialize = function (obj, options)
             {
                 for (let ipi2 = 0; ipi2 < obj.ops[iop].portsIn.length; ipi2++)
                 {
-                    if (obj.ops[iop].portsIn[ipi2].links)
+                    if (obj.ops[iop].portsIn[ipi2] && obj.ops[iop].portsIn[ipi2].links)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                         {
@@ -1060,15 +1069,15 @@ Patch.prototype.deSerialize = function (obj, options)
                                 obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                                 obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
-                            // const took = performance.now() - startTime;
-                            // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
+                            // const took = performance.now - startTime;
+                            // if (took > 100)console.log(obj().ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                         }
                     }
                 }
             }
             if (obj.ops[iop].portsOut)
                 for (let ipi2 = 0; ipi2 < obj.ops[iop].portsOut.length; ipi2++)
-                    if (obj.ops[iop].portsOut[ipi2].links)
+                    if (obj.ops[iop].portsOut[ipi2] && obj.ops[iop].portsOut[ipi2].links)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsOut[ipi2].links.length; ili++)
                         {
