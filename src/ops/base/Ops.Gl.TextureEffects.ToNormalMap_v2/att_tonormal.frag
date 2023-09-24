@@ -30,6 +30,5 @@ void main()
     // Build the normalized normal
     vec4 N = vec4(normalize(vec3(dX,dY, 1.0 / strength)), 1.0);
     N= N * 0.5 + 0.5;
-
     outColor= N;
 }

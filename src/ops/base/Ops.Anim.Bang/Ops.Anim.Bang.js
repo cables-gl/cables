@@ -10,20 +10,35 @@ const anim = new CABLES.Anim();
 let startTime = CABLES.now();
 op.toWorkPortsNeedToBeLinked(inUpdate);
 
+let needsReset = false;
+
 inBang.onTriggered = function ()
 {
-    startTime = CABLES.now();
-
-    anim.clear();
-    anim.setValue(0, 1);
-    anim.setValue(inDuration.get(), 0);
+    needsReset = true;
 };
 
 inUpdate.onTriggered = function ()
 {
-    let v = anim.getValue((CABLES.now() - startTime) / 1000);
-    if (invert.get()) outValue.set(1.0 - v);
-    else outValue.set(v);
+    if (needsReset)
+    {
+        startTime = CABLES.now();
+        anim.clear();
+        anim.setValue(0, 1);
+        anim.setValue(inDuration.get(), 0);
+        needsReset = false;
+    }
+
+    const elapsed = (CABLES.now() - startTime) / 1000;
+    if (elapsed <= inDuration.get())
+    {
+        const v = anim.getValue(elapsed);
+        if (invert.get()) outValue.set(1.0 - v);
+        else outValue.set(v);
+    }
+    else
+    {
+        outValue.set(0);
+    }
 
     outTrigger.trigger();
 };
