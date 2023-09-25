@@ -11,8 +11,6 @@ num.onChange =
     inSeed.onChange =
     arr.onChange = update;
 
-const newArray = [];
-
 let updateMethod = updateXth;
 
 inMeth.onChange = () =>
@@ -31,8 +29,7 @@ function update()
 
     let newArray = updateMethod(theArray);
 
-    outArr.set(null);
-    outArr.set(newArray);
+    outArr.setRef(newArray);
 }
 
 function updateDupes(theArray)
@@ -87,8 +84,7 @@ function updateXth(theArray)
 
     if (step === 0)
     {
-        outArr.set(null);
-        outArr.set([]);
+        outArr.setRef([]);
         return;
     }
 

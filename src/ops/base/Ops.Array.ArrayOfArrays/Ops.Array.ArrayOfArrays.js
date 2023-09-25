@@ -24,6 +24,5 @@ function update()
 
     finalArray.length = count;
 
-    outArr.set(null);
-    outArr.set(finalArray);
+    outArr.setRef(finalArray);
 }

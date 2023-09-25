@@ -19,7 +19,7 @@ function updateNames()
 {
     let names = [];
     for (let i = 0; i < triggers.length; i++)
-        if (triggers[i].isLinked()) names.push(triggers[i].links[0].getOtherPort(triggers[i]).parent.uiAttribs.title);
+        if (triggers[i].isLinked()) names.push(triggers[i].links[0].getOtherPort(triggers[i]).op.uiAttribs.title);
         else names.push("none");
 
     outNames.set(names);
@@ -53,7 +53,7 @@ function doTrigger(_time)
     if (current.anim)
     {
         let time = _time;
-        if (_time === undefined) time = current.parent.patch.timer.getTime();
+        if (_time === undefined) time = current.op.patch.timer.getTime();
         let key = current.anim.getKey(time);
 
         let timeOff = 0;
@@ -65,7 +65,7 @@ function doTrigger(_time)
         {
             if (overwriteTime.get())
             {
-                current.parent.patch.timer.overwriteTime = currentKeyTime.get(); // todo  why current ? why  not self ?
+                current.op.patch.timer.overwriteTime = currentKeyTime.get(); // todo  why current ? why  not self ?
             }
         }
     }
@@ -78,10 +78,10 @@ function doTrigger(_time)
             {
                 if (triggers[i].links[spl])
                 {
-                    if (triggers[i].links[spl].portIn.parent.patchId)
+                    if (triggers[i].links[spl].portIn.op.patchId)
                     {
                         if (CABLES.UI)
-                            if (gui.patchView.getCurrentSubPatch() == triggers[i].links[spl].portIn.parent.patchId.get())
+                            if (gui.patchView.getCurrentSubPatch() == triggers[i].links[spl].portIn.op.patchId.get())
                             {
                                 op.patch.timer.overwriteTime = -1;
 

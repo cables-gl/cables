@@ -54,6 +54,5 @@ function update()
                     newArr.push(arr[i + j]);
     }
 
-    outArr.set(null);
-    outArr.set(newArr);
+    outArr.setRef(newArr);
 }

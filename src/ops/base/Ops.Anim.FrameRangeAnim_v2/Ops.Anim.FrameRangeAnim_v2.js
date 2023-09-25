@@ -64,8 +64,7 @@ function parse()
         }
     }
 
-    outArr.set(null);
-    outArr.set(frames);
+    outArr.setRef(frames);
     outAnimLength.set(frames.length / FPS);
     setupAnim(frames);
 }

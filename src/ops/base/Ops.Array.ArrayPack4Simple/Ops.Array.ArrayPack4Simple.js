@@ -65,8 +65,7 @@ function update()
     }
 
     needsCalc = false;
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     outNum.set(arr.length / 4);
     outArrayLength.set(arr.length);
 }

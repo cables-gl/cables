@@ -40,7 +40,7 @@ inExec.onTriggered = function ()
             return;
         }
 
-        for (var i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+        for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
         {
             if (cgl.frameStore.currentScene.nodes[i].name == name)
             {
@@ -59,8 +59,6 @@ inExec.onTriggered = function ()
 
     if (n && n._animTrans && n._animTrans.length)
     {
-        outArr.set(null);
-
         const num = inNum.get();
         let len = n._animTrans[0].getLength();
         let add = 0;
@@ -71,7 +69,7 @@ inExec.onTriggered = function ()
             add = inAnimStart.get();
         }
 
-        for (var i = 0; i < num; i++)
+        for (let i = 0; i < num; i++)
         {
             const t = len * i / num + add;
 
@@ -80,8 +78,9 @@ inExec.onTriggered = function ()
             arr[i * 3 + 2] = n._animTrans[2].getValue(t);
         }
 
-        outArr.set(arr);
+        outArr.setRef(arr);
     }
+    else outArr.set(null);
 
     next.trigger();
 };

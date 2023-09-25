@@ -22,8 +22,9 @@ inReset.onTriggered =
 deflt.onChange = function ()
 {
     let arr = deflt.get();
-    outArr.set(null);
-    if (arr) outArr.set(copyArray(arr));
+
+    if (arr) outArr.setRef(copyArray(arr));
+    else outArr.set(null);
 };
 
 inExec.onTriggered = function ()
@@ -31,6 +32,5 @@ inExec.onTriggered = function ()
     let arr = inArr.get();
     if (!arr || !arr.length) return;
     const cop = copyArray(arr);
-    outArr.set(null);
-    outArr.set(cop);
+    outArr.setRef(cop);
 };
