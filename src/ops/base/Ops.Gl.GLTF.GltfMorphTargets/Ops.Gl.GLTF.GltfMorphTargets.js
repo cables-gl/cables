@@ -46,7 +46,6 @@ function update()
         if (cgl.frameStore.currentScene.nodes[i].name == name)
         {
             node = cgl.frameStore.currentScene.nodes[i];
-            outFound.set(true);
         }
     }
 
@@ -63,20 +62,30 @@ function update()
     if (node.mesh.meshes)
     {
         const idx = Math.abs(inSubmesh.get());
-        if (node.mesh.meshes[idx] && node.mesh.meshes[idx])
+        if (node.mesh.meshes[idx])
         {
             mesh = node.mesh.meshes[idx];
         }
+        // else
+        // mesh = node.mesh.meshes[0];
     }
 
-    if (mesh && mesh.geom && mesh.geom.morphTargets)
+    // if (mesh && mesh.geom && mesh.geom.morphTargets)
+    // {
+    //     // console.log("morphtargets",mesh.geom.morphTargets);
+    //     // mesh=node.mesh;
+    // }
+
+    // console.log("mesh",mesh.morphTargetsRenderMod.tex)
+    if (!mesh)
     {
-        // console.log("morphtargets",mesh.geom.morphTargets);
-        // mesh=node.mesh;
+        console.log("not found./../");
+        outFound.set(false);
+        return;
     }
+    else outFound.set(true);
 
     if (mesh.extras && mesh.extras.targetNames) outTargetnames.set(mesh.extras.targetNames);
-    // console.log("mesh",mesh.morphTargetsRenderMod.tex)
 
     if (mesh.morphTargetsRenderMod) outTex.setRef(mesh.morphTargetsRenderMod.tex);
 
