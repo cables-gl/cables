@@ -21,14 +21,13 @@ render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
+    const effectTex = cgl.currentTextureEffect.getCurrentSourceTexture();
+    uniSize.setValue([1 / effectTex.width, 1 / effectTex.height]);
+
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
-    const effectTex = cgl.currentTextureEffect.getCurrentSourceTexture();
-
     cgl.setTexture(0, effectTex.tex);
-
-    uniSize.setValue([1 / effectTex.width, 1 / effectTex.height]);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

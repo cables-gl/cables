@@ -28,12 +28,11 @@ for (let i = 0; i < NUMTEXS; i++)
 const cgl = op.patch.cgl;
 let needsUpdate = true;
 let tc = null;
-
 let uniTextures = [];
 
 inWidth.onChange =
-inHeight.onChange =
-tfilter.onChange =
+    inHeight.onChange =
+    tfilter.onChange =
     twrap.onChange = initShader;
 
 function initShader()
@@ -97,8 +96,6 @@ exec.onTriggered = () =>
 
         outTex.set(CGL.Texture.getEmptyTexture(cgl));
         outTex.set(tc.copy(CGL.Texture.getEmptyTexture(cgl)));
-
-        // console.log("numtex",num)
 
         needsUpdate = false;
     }
