@@ -32,7 +32,7 @@ function update()
         arr[i * 3 + 1] = y;
         arr[i * 3 + 2] = 0;
     }
-    outArr.seRef(arr);
+    outArr.setRef(arr);
 }
 
 update();
