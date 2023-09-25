@@ -43,8 +43,7 @@ exe.onTriggered = function ()
         mat4.rotateY(result, result, a[1]);
         mat4.rotateX(result, result, a[0]);
 
-        outArr.set(null);
-        outArr.set(result);
+        outArr.setRef(result);
     }
     next.trigger();
 };

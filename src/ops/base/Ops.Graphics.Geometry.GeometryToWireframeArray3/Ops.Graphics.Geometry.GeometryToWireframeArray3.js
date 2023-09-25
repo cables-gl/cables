@@ -6,9 +6,13 @@ inGeom.onChange = function ()
 {
     const g = inGeom.get();
 
-    outArr.set(null);
 
-    if (!g) return;
+    if (!g)
+    {
+        outArr.set(null);
+
+        return;
+    }
 
     const arr = [];
 
@@ -40,5 +44,5 @@ inGeom.onChange = function ()
             g.vertices[g.verticesIndices[i + 0] * 3 + 2]);
     }
 
-    outArr.set(arr);
+    outArr.setRef(arr);
 };

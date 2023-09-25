@@ -262,10 +262,10 @@ function getChar(chStr)
 
 function generateMesh()
 {
-    outArr.set(null);
-
     if (!font || !font.characters)
     {
+        outArr.set(null);
+
         outNumChars.set(0);
         return;
     }
@@ -427,5 +427,5 @@ function generateMesh()
     updateAlign();
     updateAlign();
 
-    outArr.set(arrPositions);
+    outArr.setRef(arrPositions);
 }

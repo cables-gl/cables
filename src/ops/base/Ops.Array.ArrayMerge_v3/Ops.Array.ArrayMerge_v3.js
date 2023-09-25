@@ -26,7 +26,6 @@ function update()
         if (ar)arr = arr.concat(ar);
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     outArrayLength.set(arr.length);
 }

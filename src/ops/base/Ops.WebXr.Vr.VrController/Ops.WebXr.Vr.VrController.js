@@ -108,8 +108,7 @@ function setGamepadValues(gp)
     const g = { "buttons": gp.buttons,
         "axes": gp.axes,
         "connected": gp.connected,
-        "mapping": gp.mapping,
-        "axes": gp.axes
+        "mapping": gp.mapping
     };
 
     outGp.set(g);
