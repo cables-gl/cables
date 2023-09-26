@@ -20,6 +20,30 @@
             "message": "Ops.Admin.TestOp renamed to Ops.Dev.TestOp",
             "author": "pandur",
             "date": 1623914595096
+        },
+        {
+            "message": " removed lib: twitterFetcher_min.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695713895975
+        },
+        {
+            "message": " removed lib: webaudio-peaks.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695713901280
+        },
+        {
+            "message": " removed lib: webvr-polyfill.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695715517399
+        },
+        {
+            "message": " removed lib: bodymovin.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695715529797
         }
     ],
     "authorName": "pandur",
@@ -50,11 +74,7 @@
     },
     "libs": [
         "cannon.js",
-        "clmtrackr.js",
-        "bodymovin.js",
-        "webvr-polyfill.js",
-        "webaudio-peaks.js",
-        "twitterFetcher_min.js"
+        "clmtrackr.js"
     ],
     "coreLibs": [
         "cgl_wireframes"
