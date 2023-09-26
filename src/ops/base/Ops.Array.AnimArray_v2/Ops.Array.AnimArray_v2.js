@@ -96,8 +96,8 @@ function ipMat(perc)
             result[i] = ip(arr1[i], arr2[i], perc);
         }
 
-        outArr.set(null);
-        outArr.set(result);
+
+        outArr.setRef(result);
     }
     next.trigger();
 }

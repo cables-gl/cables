@@ -153,8 +153,7 @@ inTrigger.onTriggered = function ()
         });
     }
     cgl.frameStore.lightStack.push(light);
-    outArr.set(null);
-    outArr.set([inPosX.get(), inPosY.get(), inPosZ.get(), inPointAtX.get(), inPointAtY.get(), inPointAtZ.get()]);
+    outArr.setRef([inPosX.get(), inPosY.get(), inPosZ.get(), inPointAtX.get(), inPointAtY.get(), inPointAtZ.get()]);
     outTrigger.trigger();
     cgl.frameStore.lightStack.pop();
 };

@@ -25,12 +25,8 @@ inCalc.onTriggered = function ()
 
     let i = 0;
     if (!inShuffleAll.get())
-    {
         for (i = 0; i < numOld; i++)
-        {
             arr[i] = oldArr[i];
-        }
-    }
 
     Math.randomSeed = inSeed.get();
 
@@ -42,6 +38,5 @@ inCalc.onTriggered = function ()
         i++;
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
 };

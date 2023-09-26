@@ -38,7 +38,7 @@ exec.onTriggered = function ()
     // if(op.instanced(exec))return;
     if (wasReset)
     {
-        for (var i = 0, len = arr.length; i < len; i += 3)
+        for (let i = 0, len = arr.length; i < len; i += 3)
         {
             arr[i + 0] = valX.get();
             arr[i + 1] = valY.get();
@@ -48,7 +48,7 @@ exec.onTriggered = function ()
         wasReset = false;
     }
 
-    for (var i = 0, len = arr.length; i < len; i++)
+    for (let i = 0, len = arr.length; i < len; i++)
         arr[i - 3] = arr[i];
 
     // for(var i=3;i<arr.length;i++)

@@ -9,10 +9,10 @@ inRad.onChange =
 
 function update()
 {
-    outArr.set(null);
     let iarr = inArr.get();
 
-    if (!iarr) return;
+    if (!iarr) return outArr.set(null);
+
 
     let l = iarr.length / 2 * 3;
     arr.length = l;
@@ -35,5 +35,5 @@ function update()
         arr[i / 2 * 3 + 2] = z;
     }
 
-    outArr.set(arr);
+    outArr.setRef(arr);
 }

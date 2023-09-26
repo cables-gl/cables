@@ -62,6 +62,5 @@ function update()
         newArray.push(lon, 0 - lat);
     }
 
-    outArr.set(null);
-    outArr.set(newArray);
+    outArr.setRef(newArray);
 }

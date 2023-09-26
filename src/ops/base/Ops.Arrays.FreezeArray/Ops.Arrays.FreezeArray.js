@@ -37,7 +37,6 @@ outArr.onLinkChanged = () =>
 inHidden.onChange = () =>
 {
     inHidden.get();
-    // outArr.set(null);
     try
     {
         outArr.setRef(JSON.parse(inHidden.get()));

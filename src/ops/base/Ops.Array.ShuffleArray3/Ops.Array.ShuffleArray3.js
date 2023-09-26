@@ -37,7 +37,6 @@ function update()
 
     for (i = 0; i < arr.length; i += 3) rndArr[i / 3] = i;
 
-    // for(let i=0;i<1;i++)
     fisherYatesShuffle(rndArr);
 
     for (i = 0; i < arr.length; i += 3)
@@ -49,6 +48,5 @@ function update()
         newArr[i + 2] = arr[j + 2];
     }
 
-    outArr.set(null);
-    outArr.set(newArr);
+    outArr.setRef(newArr);
 }

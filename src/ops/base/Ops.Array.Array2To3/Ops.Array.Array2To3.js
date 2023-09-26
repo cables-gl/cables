@@ -46,7 +46,6 @@ inArr.onChange = function ()
         arr[i * 3 + 2] = 0;
     }
 
-    // outArr.set(null);
     outArr.setRef(arr);
     outTotalPoints.set(arr.length / 3);
     outArrayLength.set(arr.length);

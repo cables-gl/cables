@@ -1,57 +1,53 @@
 const
-    exec=op.inTrigger("Trigger"),
-    inNodeName=op.inString("Node name","default"),
-    next=op.outTrigger("Next"),
-    outArr=op.outArray("Bones Lines");
+    exec = op.inTrigger("Trigger"),
+    inNodeName = op.inString("Node name", "default"),
+    next = op.outTrigger("Next"),
+    outArr = op.outArray("Bones Lines");
 
-exec.onTriggered=update;
+exec.onTriggered = update;
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
 
-let node=null;
+let node = null;
 const tr = vec3.create();
 
 
 
-inNodeName.onChange=()=>
+inNodeName.onChange = () =>
 {
-    node=null;
+    node = null;
     update();
 };
 
-function addChild(gltf,arr,parent,child)
+function addChild(gltf, arr, parent, child)
 {
-
-    if(parent)
+    if (parent)
     {
-
         mat4.getTranslation(tr, parent.modelMatAbs());
         arr.push(tr[0], tr[1], tr[2]);
 
         mat4.getTranslation(tr, child.modelMatAbs());
         arr.push(tr[0], tr[1], tr[2]);
-
     }
 
-    if(child && child.children)
+    if (child && child.children)
     {
-        for(let i=0;i<child.children.length;i++)
+        for (let i = 0; i < child.children.length; i++)
         {
-            addChild(gltf,arr,child,gltf.nodes[child.children[i]]);
+            addChild(gltf, arr, child, gltf.nodes[child.children[i]]);
         }
     }
-
 }
 
 function update()
 {
     if (!cgl.frameStore.currentScene) return;
 
-    let arr=[];
-    let found=false;
-    const idx=0;
-    const gltf=cgl.frameStore.currentScene;
+    let arr = [];
+    let found = false;
+    const idx = 0;
+    const gltf = cgl.frameStore.currentScene;
 
     if (!node)
     {
@@ -73,15 +69,14 @@ function update()
     }
 
 
-    if(found && node)
+    if (found && node)
     {
-        for(let i=0;i<node.children.length;i++)
+        for (let i = 0; i < node.children.length; i++)
         {
-            addChild(gltf,arr,null,gltf.nodes[node.children[i]]);
+            addChild(gltf, arr, null, gltf.nodes[node.children[i]]);
         }
 
-        outArr.set(null);
-        outArr.set(arr);
+        outArr.setRef(arr);
     }
     else
     {
@@ -90,5 +85,4 @@ function update()
     }
 
     next.trigger();
-
 }

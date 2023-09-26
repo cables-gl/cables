@@ -188,13 +188,11 @@ function render()
             sorted[textures.length - i - 1] = textures[(index + i + 1) % inNum.get()];
         }
 
-        outArr.set(null);
-        outArr.set(sorted);
+        outArr.setRef(sorted);
     }
     else
     {
-        outArr.set(null);
-        outArr.set(textures);
+        outArr.setRef(textures);
     }
     index++;
 }

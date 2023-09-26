@@ -27,8 +27,7 @@ function calcArray()
         points.push(0);
     }
 
-    outArr.set(null);
-    outArr.set(points);
+    outArr.setRef(points);
     outTotalPoints.set(points.length / 3);
     outArrayLength.set(points.length);
 }

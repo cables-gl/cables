@@ -517,8 +517,7 @@ render.onTriggered = function ()
         }
     }
 
-    outArr.set(null);
-    outArr.set(lineArray);
+    outArr.setRef(lineArray);
 
     cgl.popModelMatrix();
 };
