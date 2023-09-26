@@ -49,6 +49,11 @@
             },
             {
                 "type": 0,
+                "name": "Download Video",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Mimetype index",
                 "group": "Encoding",
                 "subType": "integer"
@@ -99,6 +104,19 @@
             {
                 "type": 3,
                 "name": "Valid Mimetypes"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Finished Recording"
+            },
+            {
+                "type": 2,
+                "name": "Blobs"
             }
         ]
     },

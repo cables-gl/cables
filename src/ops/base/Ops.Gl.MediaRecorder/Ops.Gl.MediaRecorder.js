@@ -5,6 +5,9 @@ const audioCodecs = ["opus", "pcm", "aac", "mp3", "ogg"];
 
 const supportedVideos = getSupportedMimeTypes("video", videoTypes, videoCodecs, audioCodecs);
 
+let startTime = 0;
+let duration = 0;
+
 function getSupportedMimeTypes(media, types, codecs, codecsB)
 {
     const isSupported = MediaRecorder.isTypeSupported;
@@ -22,13 +25,13 @@ function getSupportedMimeTypes(media, types, codecs, codecsB)
         const mimeType = `${media}/${type}`;
         codecs.forEach((codec) =>
         {
-            return [`${mimeType}; codecs=${codec}`].forEach((variation) =>
+            return [`${mimeType};codecs=${codec}`].forEach((variation) =>
             {
                 if (isSupported(variation)) supported.push(variation);
 
                 codecsB.forEach((codecB) =>
                 {
-                    return [`${mimeType}; codecs=${codec},${codecB}`].forEach((eachVariation) =>
+                    return [`${mimeType};codecs=${codec},${codecB}`].forEach((eachVariation) =>
                     {
                         if (isSupported(eachVariation)) supported.push(eachVariation);
                     });
@@ -45,6 +48,8 @@ const
     recordingToggle = op.inBool("Recording", false),
 
     inFilename = op.inString("Filename", "cables"),
+    inDownl = op.inBool("Download Video", true),
+
     inCodecs = op.inDropDown("Mimetype", supportedVideos),
     inMbit = op.inFloat("MBit", 5),
     inFPS = op.inFloat("FPS", 30),
@@ -56,7 +61,10 @@ const
     outState = op.outString("State"),
     outError = op.outString("Error"),
     outCodec = op.outString("Final Mimetype"),
-    outCodecs = op.outArray("Valid Mimetypes", supportedVideos);
+    outCodecs = op.outArray("Valid Mimetypes", supportedVideos),
+    outDuration = op.outNumber("Duration"),
+    outFinished = op.outTrigger("Finished Recording"),
+    outBlobs = op.outObject("Blobs");
 
 op.setPortGroup("Inputs", [inMedia, inAudio, inCanvasId]);
 op.setPortGroup("Encoding", [inMbit, inCodecs, inFPS]);
@@ -101,8 +109,17 @@ function handleDataAvailable(event)
 
 function toggleRecording()
 {
-    if (recordingToggle.get()) startRecording();
-    else stopRecording();
+    if (recordingToggle.get())
+    {
+        startTime = performance.now();
+        startRecording();
+    }
+    else
+    {
+        duration = performance.now() - startTime;
+        outDuration.set(duration);
+        stopRecording();
+    }
 }
 
 function setupMediaRecorder()
@@ -190,7 +207,7 @@ function startRecording()
 
     mediaRecorder.ondataavailable = handleDataAvailable;
     mediaRecorder.start(1000);
-
+    console.log(mediaRecorder.videoBitsPerSecond);
     outState.set(mediaRecorder.state);
     op.log("MediaRecorder started", mediaRecorder);
 }
@@ -202,17 +219,18 @@ function stopRecording()
         // op.warn("cant stop no mediarecorder");
         return;
     }
+
     op.verbose("mediaRecorder.state", mediaRecorder.state);
     if (mediaRecorder.state === "inactive") return;
 
-    op.verbose("mediaRecorder.videoBitsPerSecond  ", mediaRecorder.videoBitsPerSecond / 1024 / 1024);
-    op.verbose("mediaRecorder.mimeType  ", mediaRecorder.mimeType);
+    // op.verbose("mediaRecorder.videoBitsPerSecond  ", mediaRecorder.videoBitsPerSecond / 1024 / 1024);
+    // op.verbose("mediaRecorder.mimeType  ", mediaRecorder.mimeType);
+    outCodec.set(mediaRecorder.mimeType);
 
     mediaRecorder.onstop = download;
 
     mediaRecorder.stop();
     outState.set(mediaRecorder.state);
-
     op.verbose("Recorded Blobs: ", recordedBlobs);
     // download();
 }
@@ -227,20 +245,36 @@ function download()
     if (!mediaRecorder) return;
 
     const blob = new Blob(recordedBlobs, { "type": "application/octet-stream" });
+
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
     const codec = mediaRecorder.mimeType;
+    // console.log("recorded codec", mediaRecorder.mimeType, mediaRecorder.videoBitsPerSecond);
     let ext = "webm";
     if (codec.indexOf("video/x-matroska") >= 0)ext = "mkv";
     if (codec.indexOf("video/mp4") >= 0)ext = "mp4";
-    a.download = (inFilename.get() || "cables") + "." + ext;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() =>
+
+    if (inDownl.get())
     {
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-    }, 100);
+        a.download = (inFilename.get() || "cables") + "." + ext;
+        document.body.appendChild(a);
+        a.click();
+    }
+
+    if (!outBlobs.isLinked())
+    {
+        setTimeout(() =>
+        {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 100);
+    }
+    else
+    {
+        console.log("set blobs");
+        outBlobs.setRef({ "blob": blob, "duration": duration });
+    }
+    outFinished.trigger();
 }

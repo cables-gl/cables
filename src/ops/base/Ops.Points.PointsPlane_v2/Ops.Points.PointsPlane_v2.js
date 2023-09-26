@@ -12,16 +12,16 @@ const
     outColNums = op.outArray("Column Numbers", [], 1);
 
 inNumX.onChange =
-inNumY.onChange =
-inCenter.onChange =
-inWidth.onChange =
-inRowOffset.onChange =
-inHeight.onChange = generate;
+    inNumY.onChange =
+    inCenter.onChange =
+    inWidth.onChange =
+    inRowOffset.onChange =
+    inHeight.onChange = generate;
 
 const arr = [];
 const arrRowNums = [];
 const arrColNums = [];
-outArr.set(arr);
+outArr.setRef(arr);
 generate();
 
 function generate()
