@@ -37,7 +37,14 @@ inUpdate.onTriggered = function ()
     }
     else
     {
-        outValue.set(0);
+        if (invert.get())
+        {
+            outValue.set(1.0);
+        }
+        else
+        {
+            outValue.set(0);
+        }
     }
 
     outTrigger.trigger();
