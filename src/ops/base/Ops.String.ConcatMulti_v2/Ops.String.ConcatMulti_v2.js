@@ -1,20 +1,22 @@
-const addSpacesCheckBox = op.inBool("add spaces", false),
-    newLinesCheckBox = op.inBool("new lines", false),
-    stringPorts = [],
-    result = op.outString("concat string");
-
-stringPorts.onChange = addSpacesCheckBox.onChange =
-newLinesCheckBox.onChange = update;
-
-addSpacesCheckBox.setUiAttribs({ "hidePort": true });
-newLinesCheckBox.setUiAttribs({ "hidePort": true });
-
+const stringPorts = [];
 for (let i = 0; i < 8; i++)
 {
     let p = op.inString("string " + i);
     stringPorts.push(p);
     p.onChange = update;
 }
+
+const
+    addSpacesCheckBox = op.inBool("add spaces", false),
+    newLinesCheckBox = op.inBool("new lines", false),
+    result = op.outString("concat string");
+
+stringPorts.onChange =
+    addSpacesCheckBox.onChange =
+    newLinesCheckBox.onChange = update;
+
+addSpacesCheckBox.setUiAttribs({ "hidePort": true });
+newLinesCheckBox.setUiAttribs({ "hidePort": true });
 
 function update()
 {

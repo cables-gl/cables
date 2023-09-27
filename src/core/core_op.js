@@ -680,7 +680,7 @@ const Op = function ()
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "display": "file",
                 "type": "string",
-                filter
+                "filter": filter
             })
         );
         if (v !== undefined)
