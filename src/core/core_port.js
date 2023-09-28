@@ -417,10 +417,9 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (!objPort) return;
     if (objPort.animated) this.setAnimated(objPort.animated);
     if (objPort.useVariable) this.setVariableName(objPort.useVariable);
-
     if (objPort.title) this.setUiAttribs({ "title": objPort.title });
     if (objPort.expose) this.setUiAttribs({ "expose": true });
-
+    if (objPort.order) this.setUiAttribs({ "order": objPort.order });
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
@@ -454,7 +453,11 @@ Port.prototype.getSerialized = function ()
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
-    if (this.uiAttribs.expose) obj.expose = true;
+    if (this.uiAttribs.expose)
+    {
+        obj.expose = true;
+        if (this.uiAttribs.hasOwnProperty("order")) obj.order = this.uiAttribs.order;
+    }
     if (this.uiAttribs.title) obj.title = this.uiAttribs.title;
     if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
     {

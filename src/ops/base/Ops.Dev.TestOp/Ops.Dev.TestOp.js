@@ -23,7 +23,7 @@ trig.onTriggered = () =>
 
 // console.log(op.storage);
 
-console.log(a.get());
-console.log(this.storage);
+// console.log(a.get());
+// console.log(this.storage);
 
-console.log(JSON.stringify(this.uiAttribs));
+// console.log(JSON.stringify(this.uiAttribs));
