@@ -176,8 +176,11 @@ Mesh.prototype._bufferArray = function (array, attr)
                 console.log("_bufferArray create new float32array", array.length, attr.name); // eslint-disable-line
             }
 
-            this._cgl.profileData.profileNonTypedAttrib++;
-            this._cgl.profileData.profileNonTypedAttribNames = "(" + this._name + ":" + attr.name + ")";
+            if (array.length > 10000)
+            {
+                this._cgl.profileData.profileNonTypedAttrib++;
+                this._cgl.profileData.profileNonTypedAttribNames = "(" + this._name + ":" + attr.name + ")";
+            }
         }
     }
     else floatArray = array;

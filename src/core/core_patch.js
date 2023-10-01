@@ -618,6 +618,7 @@ Patch.prototype.renderFrame = function (timestamp)
     this.freeTimer.update();
     const time = this.timer.getTime();
     const startTime = performance.now();
+    this.cgl.frameStartTime = this.timer.getTime();
 
     const delta = timestamp - this._lastReqAnimTimeStamp || timestamp;
 
