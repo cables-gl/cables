@@ -1,5 +1,7 @@
 import { CG } from "../cg/cg_constants";
 import { CGState } from "../cg/cg_state";
+import Shader from "./cgp_shader";
+import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 
 /**
  * cables webgpu context/state manager
@@ -17,7 +19,7 @@ const Context = function (_patch)
     this.gApi = CG.GAPI_WEBGPU;
     this._viewport = [0, 0, 256, 256];
     this._shaderStack = [];
-
+    this._simpleShader = null;
 
 
     this.DEPTH_FUNCS = [
@@ -38,6 +40,16 @@ const Context = function (_patch)
         "none" // both does not exist in webgpu
     ];
 
+
+
+
+
+    // this._simpleShader = new Shader(this, "simpleshader");
+
+    // this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+    // this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
+
+
     /// ////////////////////
 
     this.getViewPort = () =>
@@ -47,21 +59,31 @@ const Context = function (_patch)
 
     this.renderStart = function (cgp, identTranslate, identTranslateView)
     {
+        if (!this._simpleShader)
+        {
+            this._simpleShader = new Shader(this, "simple default shader");
+            this._simpleShader.setSource(defaultShaderSrcVert);
+            this._simpleShader.addUniformFrag("4f", "color", 1, 1, 0, 1);
+        }
+
         this.fpsCounter.startFrame();
 
         this._startMatrixStacks(identTranslate, identTranslateView);
         this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
-        this.emitEvent("beginFrame");
 
+        this.pushShader(this._simpleShader);
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc("less-equal");
+
+        this.emitEvent("beginFrame");
     };
 
     this.renderEnd = () =>
     {
         this._endMatrixStacks();
 
+        this.popShader();
         this.popDepthFunc();
         this.popDepthWrite();
         this.popDepthTest();

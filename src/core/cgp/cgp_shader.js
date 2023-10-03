@@ -1,6 +1,7 @@
 import Logger from "../core_logger";
 import { simpleId } from "../utils";
 import Uniform from "./cgp_uniform";
+import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 
 export default class Shader
 {

@@ -29,6 +29,10 @@ module.exports = (isProduction) =>
                 {
                     "test": /\.vert/,
                     "use": "raw-loader",
+                },
+                {
+                    "test": /\.wgsl/,
+                    "use": "raw-loader",
                 }
             ].filter(Boolean),
         },
