@@ -84,8 +84,6 @@ export default class Pipeline
                 needsRebuild = true;
                 this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
             }
-
-            console.log(this._pipeCfg.primitive.cullMode);
         }
 
         if (needsRebuild)
