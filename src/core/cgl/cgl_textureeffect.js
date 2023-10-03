@@ -246,7 +246,7 @@ TextureEffect.prototype.createMesh = function ()
 
 TextureEffect.checkOpNotInTextureEffect = function (op)
 {
-    if (!op.patch.cgl) return false;
+    if (!op.patch.cgl) return true;
     if (op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
         op.setUiError("textureeffect", null);

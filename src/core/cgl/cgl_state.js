@@ -242,6 +242,12 @@ const Context = function (_patch)
             this.gl.EQUAL,
             this.gl.NOTEQUAL
         ];
+        this.CULL_MODES = [
+            null,
+            this.gl.BACK,
+            this.gl.FRONT,
+            this.gl.FRONT_AND_BACK
+        ];
     };
 
     this.getInfo = function ()

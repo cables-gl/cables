@@ -16,6 +16,11 @@ const CG = {
     "DEPTH_COMPARE_GREATEREQUAL": 6,
     "DEPTH_COMPARE_ALWAYS": 7,
 
+    "CULL_NONE": 0,
+    "CULL_BACK": 1,
+    "CULL_FRONT": 2,
+    "CULL_BOTH": 3,
+
 
     "Geometry": Geometry,
     "BoundingBox": BoundingBox,

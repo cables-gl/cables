@@ -31,7 +31,12 @@ const Context = function (_patch)
         "not-equal"
     ];
 
-
+    this.CULL_MODES = [
+        "none",
+        "back",
+        "front",
+        "none" // both does not exist in webgpu
+    ];
 
     /// ////////////////////
 
@@ -53,7 +58,7 @@ const Context = function (_patch)
         this.pushDepthFunc("less-equal");
     };
 
-    this.renderEnd = function ()
+    this.renderEnd = () =>
     {
         this._endMatrixStacks();
 
@@ -163,7 +168,7 @@ const Context = function (_patch)
     };
     /**
      * current state of depth testing
-     * @function stateCullFace
+     * @function stateDepthTest
      * @returns {Boolean} enabled
      * @memberof Context
      * @instance
@@ -175,7 +180,7 @@ const Context = function (_patch)
 
     /**
      * pop depth testing state
-     * @function popCullFace
+     * @function popDepthTest
      * @memberof Context
      * @instance
      */
@@ -268,6 +273,98 @@ const Context = function (_patch)
     this.popDepthFunc = () =>
     {
         this._stackDepthFunc.pop();
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // --------------------------------------
+    // state CullFace
+
+    /**
+     * push face culling face enabled state
+     * @function pushCullFaceFacing
+     * @param {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    this._stackCullFace = [];
+    this.pushCullFace = function (b)
+    {
+        this._stackCullFace.push(b);
+    };
+
+    /**
+ * current state of face culling
+ * @function stateCullFace
+ * @returns {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
+    this.stateCullFace = () =>
+    {
+        return this._stackCullFace[this._stackCullFace.length - 1];
+    };
+
+    /**
+ * pop face culling enabled state
+ * @function popCullFace
+ * @memberof Context
+ * @instance
+ */
+    this.popCullFace = () =>
+    {
+        this._stackCullFace.pop();
+    };
+
+
+    // --------------------------------------
+    // state CullFace Facing
+
+
+    /**
+     * push face culling face side
+     * @function pushCullFaceFacing
+     * @memberof Context
+     * @instance
+     */
+    this._stackCullFaceFacing = [];
+    this.pushCullFaceFacing = function (b)
+    {
+        this._stackCullFaceFacing.push(b);
+    };
+
+    /**
+     * current state of face culling side
+     * @function stateCullFaceFacing
+     * @returns {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    this.stateCullFaceFacing = () =>
+    {
+        return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
+    };
+
+    /**
+     * pop face culling face side
+     * @function popCullFaceFacing
+     * @memberof Context
+     * @instance
+     */
+    this.popCullFaceFacing = () =>
+    {
+        this._stackCullFaceFacing.pop();
     };
 };
 export { Context };

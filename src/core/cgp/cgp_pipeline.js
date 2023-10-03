@@ -57,8 +57,11 @@ export default class Pipeline
 
             if (this._cgp.stateDepthTest() === false)
             {
-                needsRebuild = true;
-                this._pipeCfg.depthStencil.depthCompare = "never";
+                if (this._pipeCfg.depthStencil.depthCompare != "never")
+                {
+                    this._pipeCfg.depthStencil.depthCompare = "never";
+                    needsRebuild = true;
+                }
             }
             else
             if (this._pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
@@ -66,6 +69,23 @@ export default class Pipeline
                 needsRebuild = true;
                 this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
             }
+
+
+            if (this._cgp.stateCullFace() === false)
+            {
+                if (this._pipeCfg.primitive.cullMode != "none")
+                {
+                    needsRebuild = true;
+                    this._pipeCfg.primitive.cullMode = "none";
+                }
+            }
+            else
+            {
+                needsRebuild = true;
+                this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
+            }
+
+            console.log(this._pipeCfg.primitive.cullMode);
         }
 
         if (needsRebuild)
@@ -148,7 +168,7 @@ export default class Pipeline
             },
             "primitive": {
                 "topology": "triangle-list",
-                "cullMode": "none", // back/none/front
+                "cullMode": "back", // back/none/front
 
                 // "point-list",
                 // "line-list",
