@@ -142,7 +142,9 @@ function rebuild()
 
     if (numColumns * numRows > 64000)geom.unIndex();
 
+    // if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
+
     else mesh.setGeom(geom);
 
     // geomOut.set(null);
