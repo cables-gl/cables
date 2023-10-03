@@ -230,6 +230,18 @@ const Context = function (_patch)
                 this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
             }
         }
+
+
+        this.DEPTH_FUNCS = [
+            this.gl.NEVER,
+            this.gl.ALWAYS,
+            this.gl.LESS,
+            this.gl.LEQUAL,
+            this.gl.GREATER,
+            this.gl.GEQUAL,
+            this.gl.EQUAL,
+            this.gl.NOTEQUAL
+        ];
     };
 
     this.getInfo = function ()

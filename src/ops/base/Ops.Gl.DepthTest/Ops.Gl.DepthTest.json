@@ -5,33 +5,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Enable depth testing",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Depth Test Method index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Depth Test Method",
-                "subType": "string"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Write to depth buffer",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ]

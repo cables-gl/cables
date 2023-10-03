@@ -16,6 +16,17 @@ export default class Pipeline
         this._vsUniformBuffer = null;
 
         this._old = {};
+
+
+        this.DEPTH_COMPARE_FUNCS_STRINGS = [
+            "never",
+            "less",
+            "equal",
+            "lessequal",
+            "greater",
+            "notequal",
+            "greaterequal",
+            "always"];
     }
 
     get isValid() { return this._isValid; }
@@ -28,7 +39,7 @@ export default class Pipeline
             return;
         }
 
-        const needsRebuild =
+        let needsRebuild =
             !this._renderPipeline ||
             !this._pipeCfg ||
             this._old.mesh != mesh ||
@@ -36,15 +47,41 @@ export default class Pipeline
             mesh.needsPipelineUpdate ||
             shader.needsPipelineUpdate;
 
+        if (this._pipeCfg)
+        {
+            if (this._pipeCfg.depthStencil.depthWriteEnabled != this._cgp.stateDepthWrite())
+            {
+                needsRebuild = true;
+                this._pipeCfg.depthStencil.depthWriteEnabled = this._cgp.stateDepthWrite();
+            }
+
+            if (this._cgp.stateDepthTest() === false)
+            {
+                needsRebuild = true;
+                this._pipeCfg.depthStencil.depthCompare = "never";
+            }
+            else
+            if (this._pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
+            {
+                needsRebuild = true;
+                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
+            }
+        }
 
         if (needsRebuild)
         {
             this._old.shader = shader;
             this._old.mesh = mesh;
 
-            this._pipeCfg = this.getPiplelineObject(shader, mesh);
-            console.log(this._pipeCfg);
+            if (!this._pipeCfg) this._pipeCfg = this.getPiplelineObject(shader, mesh);
+            // try
+            // {
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
+            // }
+            // catch (e)
+            // {
+            //     console.error(e.message);
+            // }
 
             this._bindUniforms(shader);
         }
