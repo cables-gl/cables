@@ -1,37 +1,39 @@
-// todo:rename to depthtest
-
-const render = op.inTrigger("Render");
-const enable = op.inValueBool("Enable depth testing", true);
-const meth = op.inValueSelect("Depth Test Method", ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"], "less or equal");
-const write = op.inValueBool("Write to depth buffer", true);
-const trigger = op.outTrigger("Next");
+const
+    render = op.inTrigger("Render"),
+    enable = op.inValueBool("Enable depth testing", true),
+    meth = op.inValueSelect("Depth Test Method", ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"], "less or equal"),
+    write = op.inValueBool("Write to depth buffer", true),
+    trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
-let compareMethod = cgl.gl.LEQUAL;
+let compareMethod = CABLES.CG.DEPTH_COMPARE_LESSEQUAL;
 
 meth.onChange = updateFunc;
 
 function updateFunc()
 {
-    if (meth.get() == "never") compareMethod = cgl.gl.NEVER;
-    else if (meth.get() == "always") compareMethod = cgl.gl.ALWAYS;
-    else if (meth.get() == "less") compareMethod = cgl.gl.LESS;
-    else if (meth.get() == "less or equal") compareMethod = cgl.gl.LEQUAL;
-    else if (meth.get() == "greater") compareMethod = cgl.gl.GREATER;
-    else if (meth.get() == "greater or equal") compareMethod = cgl.gl.GEQUAL;
-    else if (meth.get() == "equal") compareMethod = cgl.gl.EQUAL;
-    else if (meth.get() == "not equal") compareMethod = cgl.gl.NOTEQUAL;
+    const m = meth.get();
+    if (m == "never") compareMethod = CABLES.CG.DEPTH_COMPARE_NEVER;
+    else if (m == "always") compareMethod = CABLES.CG.DEPTH_COMPARE_ALWAYS;
+    else if (m == "less") compareMethod = CABLES.CG.DEPTH_COMPARE_LESS;
+    else if (m == "less or equal") compareMethod = CABLES.CG.DEPTH_COMPARE_LESSEQUAL;
+    else if (m == "greater") compareMethod = CABLES.CG.DEPTH_COMPARE_GREATER;
+    else if (m == "greater or equal") compareMethod = CABLES.CG.DEPTH_COMPARE_GREATEREQUAL;
+    else if (m == "equal") compareMethod = CABLES.CG.DEPTH_COMPARE_EQUAL;
+    else if (m == "not equal") compareMethod = CABLES.CG.DEPTH_COMPARE_NOTEQUAL;
 }
 
 render.onTriggered = function ()
 {
-    cgl.pushDepthTest(enable.get());
-    cgl.pushDepthWrite(write.get());
-    cgl.pushDepthFunc(compareMethod);
+    const cg = op.patch.cg;
+
+    op.patch.cg.pushDepthTest(enable.get());
+    op.patch.cg.pushDepthWrite(write.get());
+    op.patch.cg.pushDepthFunc(cg.DEPTH_FUNCS[compareMethod]);
 
     trigger.trigger();
 
-    cgl.popDepthTest();
-    cgl.popDepthWrite();
-    cgl.popDepthFunc();
+    op.patch.cg.popDepthTest();
+    op.patch.cg.popDepthWrite();
+    op.patch.cg.popDepthFunc();
 };

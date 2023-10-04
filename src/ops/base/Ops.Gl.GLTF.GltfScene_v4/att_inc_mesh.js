@@ -342,7 +342,8 @@ let gltfMesh = class
                 op.logWarn("unknown primitive type", this);
             }
 
-            this.mesh = new CGL.Mesh(cgl, g, glprim);
+            this.mesh = op.patch.cg.createMesh(g, glprim);
+            // this.mesh = new CGL.Mesh(cgl, g, glprim);
         }
         else
         {
@@ -352,7 +353,6 @@ let gltfMesh = class
                 this.mesh.addVertexNumbers = true;
                 this.morphTargetsRenderMod = new GltfTargetsRenderer(this);
             }
-
 
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
             if (skinRenderer)useMat = false;

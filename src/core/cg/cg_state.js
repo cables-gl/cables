@@ -17,6 +17,15 @@ const CGState = function ()
     vec3.set(this._ident, 0, 0, 0);
 
 
+    this.DEPTH_COMPARE_FUNC_NEVER = 0;
+    this.DEPTH_COMPARE_FUNC_LESS = 1;
+    this.DEPTH_COMPARE_FUNC_EQUAL = 2;
+    this.DEPTH_COMPARE_FUNC_LESSEQUAL = 3;
+    this.DEPTH_COMPARE_FUNC_GREATER = 4;
+    this.DEPTH_COMPARE_FUNC_NOTEQUAL = 5;
+    this.DEPTH_COMPARE_FUNC_GREATEREQUAL = 6;
+    this.DEPTH_COMPARE_FUNC_ALWAYS = 7;
+
     /**
          * Current projection matrix
          * @memberof Context

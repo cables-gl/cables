@@ -76,18 +76,18 @@ function rebuildLater()
 render.onTriggered = () =>
 {
     if (needsRebuild) rebuild();
-
+    const cg = op.patch.cg;
     if (mesh && doRender.get())
     {
         if (doScale)
         {
-            cgl.pushModelMatrix();
-            mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
+            cg.pushModelMatrix();
+            mat4.scale(cg.mMatrix, cg.mMatrix, vScale);
         }
 
-        mesh.render(op.patch.cgl.getShader());
+        mesh.render(cg.getShader());
 
-        if (doScale) cgl.popModelMatrix();
+        if (doScale) cg.popModelMatrix();
     }
 
     trigger.trigger();

@@ -10,15 +10,15 @@
             },
             {
                 "type": 0,
-                "name": "Discard index",
-                "group": "Face Fulling",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Active",
                 "group": "Face Fulling",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Discard index",
+                "group": "Face Fulling",
+                "subType": "integer"
             }
         ],
         "portsOut": [
