@@ -181,8 +181,11 @@ function doRender()
     cgl.frameStore.objectIdCounter = 0;
 
     cgl.pushShader(defaultShader);
+    cgl.pushViewPort(0, 0, width.get(), height.get());
 
     trigger.trigger();
+
+    cgl.popViewPort();
 
     cgl.popShader();
 

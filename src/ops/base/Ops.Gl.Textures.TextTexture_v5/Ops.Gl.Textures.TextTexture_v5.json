@@ -21,6 +21,21 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
                 "type": 5,
                 "name": "text"
             },
@@ -55,6 +70,11 @@
                 "type": 0,
                 "name": "Padding X",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "subType": "number"
             },
             {
                 "type": 0,

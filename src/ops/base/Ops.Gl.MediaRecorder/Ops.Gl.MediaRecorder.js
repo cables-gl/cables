@@ -52,7 +52,8 @@ const
 
     inCodecs = op.inDropDown("Mimetype", supportedVideos),
     inMbit = op.inFloat("MBit", 5),
-    inFPS = op.inFloat("FPS", 30),
+    inFPSMax = op.inFloat("Max FPS", 30),
+    inFPS = op.inFloat("Force FPS", 0),
 
     inMedia = op.inSwitch("Media", ["Video", "Audio", "Audio+Video"], "Video"),
     inAudio = op.inObject("Audio In", null, "audioNode"),
@@ -67,7 +68,7 @@ const
     outBlobs = op.outObject("Blobs");
 
 op.setPortGroup("Inputs", [inMedia, inAudio, inCanvasId]);
-op.setPortGroup("Encoding", [inMbit, inCodecs, inFPS]);
+op.setPortGroup("Encoding", [inMbit, inCodecs, inFPS, inFPSMax]);
 
 const gl = op.patch.cgl.gl;
 let fb = null;
@@ -84,7 +85,8 @@ let sourceBuffer;
 
 recordingToggle.onChange = toggleRecording;
 
-inFPS.onChange =
+inFPSMax.onChange =
+    inFPS.onChange =
     inMbit.onChange =
     inMedia.onChange =
     inAudio.onChange =
@@ -150,7 +152,7 @@ function setupMediaRecorder()
             return;
         }
         canvas.getContext("2d");
-        const streamVid = canvas.captureStream(inFPS.get());
+        const streamVid = canvas.captureStream(inFPSMax.get());
 
         let stream = streamVid;
         if (inMedia.get() !== "Video")
@@ -209,7 +211,26 @@ function startRecording()
     mediaRecorder.start(1000);
     console.log(mediaRecorder.videoBitsPerSecond);
     outState.set(mediaRecorder.state);
+
+    if (inFPS.get() != 0)
+    {
+        mediaRecorder.pause();
+        interValRecording();
+    }
     op.log("MediaRecorder started", mediaRecorder);
+}
+
+function interValRecording()
+{
+    if (mediaRecorder.state === "inactive") return;
+    mediaRecorder.resume();
+    console.log("resume...");
+    setTimeout(
+        () =>
+        {
+            if (mediaRecorder.state != "inactive") mediaRecorder.pause();
+            interValRecording();
+        }, 1000 / inFPS.get());
 }
 
 function stopRecording()
@@ -265,11 +286,12 @@ function download()
 
     if (!outBlobs.isLinked())
     {
-        setTimeout(() =>
-        {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }, 100);
+        if (inDownl.get())
+            setTimeout(() =>
+            {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 100);
     }
     else
     {

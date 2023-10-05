@@ -4,6 +4,10 @@ const
     drawMesh = op.inValueBool("Draw Mesh", true),
     meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
+    texSizeMeth = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
+    texSizeWidth = op.inInt("Width", 512),
+    texSizeHeight = op.inInt("Height", 512),
+
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
     weight = op.inString("weight", "normal"),
@@ -11,6 +15,8 @@ const
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     inPadding = op.inInt("Padding Y", 3),
     inPaddingX = op.inInt("Padding X", 0),
+
+    inLetterspacing = op.inFloat("Letter Spacing", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
@@ -52,7 +58,11 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
-align.onChange =
+texSizeMeth.onChange =
+texSizeWidth.onChange =
+texSizeHeight.onChange =
+    align.onChange =
+    inLetterspacing.onChange =
     inPadding.onChange =
     inPaddingX.onChange =
     text.onChange =
@@ -61,7 +71,13 @@ align.onChange =
     aniso.onChange =
     font.onChange =
     drawDebug.onChange =
-    cachetexture.onChange = function () { needsRefresh = true; };
+    cachetexture.onChange = function ()
+    {
+        needsRefresh = true;
+
+        texSizeWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+        texSizeHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+    };
 
 textureOut.ignoreValueSerialize = true;
 
@@ -225,8 +241,14 @@ function refresh()
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        autoWidth = Math.max(autoWidth, measure.width) + paddingX;
+        autoWidth = Math.max(autoWidth, measure.width) + paddingX + (inLetterspacing.get() * (strings[i].length + 1));
         autoHeight += oneLineHeight + padding + padding;
+    }
+
+    if (texSizeMeth.get() == "Manual")
+    {
+        autoWidth = texSizeWidth.get();
+        autoHeight = texSizeHeight.get();
     }
 
     autoHeight = Math.ceil(autoHeight);
@@ -244,12 +266,14 @@ function refresh()
 
     const dbg = drawDebug.get();
 
+    ctx.letterSpacing = inLetterspacing.get() + "px";
+
     for (let i = 0; i < strings.length; i++)
     {
         posy += padding;
-        let posx = 0 + paddingX;
-        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX;
-        if (align.get() == "right") posx = ctx.canvas.width - paddingX;
+        let posx = 0 + paddingX + inLetterspacing.get();
+        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX + inLetterspacing.get() / 2;
+        if (align.get() == "right") posx = ctx.canvas.width - paddingX + inLetterspacing.get();
 
         ctx.fillText(strings[i], posx, posy);
 
