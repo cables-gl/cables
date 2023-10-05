@@ -36,6 +36,16 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Auto Line Breaks",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Auto Height",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "text"
             },

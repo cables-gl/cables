@@ -52,6 +52,60 @@ mat4 rotateMatrixDir(vec3 direction) {
         return mat4(vec4(new_y,0.), vec4(new_z,0.), vec4(new_x,0.),addition);
 }
 
+struct quat
+{
+    float s;
+    vec3 v;
+};
+quat conjugate(quat q)
+{
+    return quat(q.s,-q.v);
+}
+
+
+quat div(quat q, float s)
+{
+    return quat(q.s / s, q.v / s);
+}
+
+float norm_squared(quat q)
+{
+    return q.s * q.s + dot(q.v, q.v);
+}
+
+quat invert(quat q) // NOTE: can't reuse function name inverse here
+{
+    return div(conjugate(q), norm_squared(q));
+}
+
+
+quat mul(quat a, quat b)
+{
+    return quat(a.s * b.s - dot(a.v, b.v), a.s * b.v + b.s * a.v + cross(a.v, b.v));
+}
+
+quat mul(float s, quat q)
+{
+    return quat(s * q.s, s * q.v);
+}
+
+vec3 rotate(quat q, vec3 p)
+{
+    return mul(mul(q, quat(0.0, p)), invert(q)).v;
+}
+
+mat4 quat_to_mat4(quat q)
+{
+    return
+        mat4
+        (
+            vec4(rotate(q, vec3(1,0,0)), 0.0),
+            vec4(rotate(q, vec3(0,1,0)), 0.0),
+            vec4(rotate(q, vec3(0,0,1)), 0.0),
+            vec4(0.0,    0.0,    0.0,    1.0)
+        );
+}
+
 
 // vec4 MOD_rot(vec4 pos, vec3 rot, mat4 modelMatrix)
 // {

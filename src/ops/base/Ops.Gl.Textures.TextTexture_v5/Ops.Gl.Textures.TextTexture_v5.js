@@ -5,8 +5,11 @@ const
     meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
     texSizeMeth = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
-    texSizeWidth = op.inInt("Width", 512),
-    texSizeHeight = op.inInt("Height", 512),
+
+    texSizeManWidth = op.inInt("Width", 512),
+    texSizeManHeight = op.inInt("Height", 512),
+    texSizeManBreak = op.inBool("Auto Line Breaks", true),
+    texSizeAutoHeight = op.inBool("Auto Height", false),
 
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
@@ -59,10 +62,12 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
-inLineHeight.onChange =
+texSizeManBreak.onChange =
+    texSizeAutoHeight.onChange =
+    inLineHeight.onChange =
     texSizeMeth.onChange =
-    texSizeWidth.onChange =
-    texSizeHeight.onChange =
+    texSizeManWidth.onChange =
+    texSizeManHeight.onChange =
     align.onChange =
     inLetterspacing.onChange =
     inPaddingY.onChange =
@@ -77,8 +82,9 @@ inLineHeight.onChange =
     {
         needsRefresh = true;
 
-        texSizeWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
-        texSizeHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+        texSizeManWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+        texSizeManHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" || texSizeAutoHeight.get() });
+        texSizeManBreak.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
     };
 
 textureOut.ignoreValueSerialize = true;
@@ -202,6 +208,45 @@ function updateUi()
     meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
 }
 
+function autoLineBreaks(strings)
+{
+    let newString = "";
+
+    for (let i = 0; i < strings.length; i++)
+    {
+        if (!strings[i])
+        {
+            newString += "\n";
+            continue;
+        }
+        let sumWidth = 0;
+        const words = strings[i].split(" ");
+
+        for (let j = 0; j < words.length; j++)
+        {
+            if (!words[j]) continue;
+            sumWidth += ctx.measureText(words[j] + " ").width;
+
+            if (sumWidth > texSizeManWidth.get())
+            {
+                // found = true;
+                newString += "\n" + words[j] + " ";
+                sumWidth = ctx.measureText(words[j] + " ").width;
+            }
+            else
+            {
+                newString += words[j] + " ";
+            }
+        }
+        newString += "\n";
+    }
+    let txt = newString;
+    strings = txt.split("\n");
+    if (strings[strings.length - 1] == "")strings.pop();
+    // console.log(strings);
+    return strings;
+}
+
 function refresh()
 {
     cgl.checkFrameStarted("texttrexture refresh");
@@ -229,11 +274,19 @@ function refresh()
     needsRefresh = false;
 
     let oneLineHeight = 0;
-    let paddingY = inPaddingY.get();
-    let paddingX = inPaddingX.get();
+    let paddingY = Math.max(0, inPaddingY.get());
+    let paddingX = Math.max(0, inPaddingX.get());
 
     autoWidth = 0;
     autoHeight = 0;
+
+    if (texSizeManBreak.get() && texSizeMeth.get() == "Manual")
+    {
+        if (texSizeManWidth.get() > 128)
+        {
+            strings = autoLineBreaks(strings);
+        }
+    }
 
     for (let i = 0; i < strings.length; i++)
     {
@@ -251,8 +304,9 @@ function refresh()
 
     if (texSizeMeth.get() == "Manual")
     {
-        autoWidth = texSizeWidth.get();
-        autoHeight = texSizeHeight.get();
+        autoWidth = texSizeManWidth.get();
+
+        if (!texSizeAutoHeight.get()) autoHeight = texSizeManHeight.get();
     }
 
     autoHeight = Math.ceil(autoHeight);
