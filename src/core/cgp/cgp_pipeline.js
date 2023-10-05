@@ -88,10 +88,12 @@ export default class Pipeline
 
         if (needsRebuild)
         {
+            if (!this._pipeCfg || this._old.shader != shader) this._pipeCfg = this.getPiplelineObject(shader, mesh);
+
             this._old.shader = shader;
             this._old.mesh = mesh;
 
-            if (!this._pipeCfg) this._pipeCfg = this.getPiplelineObject(shader, mesh);
+
             // try
             // {
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
