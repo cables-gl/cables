@@ -13,10 +13,11 @@ const
     weight = op.inString("weight", "normal"),
     inFontSize = op.inValueFloat("fontSize", 300),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
-    inPadding = op.inInt("Padding Y", 3),
+    inPaddingY = op.inInt("Padding Y", 3),
     inPaddingX = op.inInt("Padding X", 0),
 
     inLetterspacing = op.inFloat("Letter Spacing", 0),
+    inLineHeight = op.inFloat("Line Height Add", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
@@ -58,12 +59,13 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
-texSizeMeth.onChange =
-texSizeWidth.onChange =
-texSizeHeight.onChange =
+inLineHeight.onChange =
+    texSizeMeth.onChange =
+    texSizeWidth.onChange =
+    texSizeHeight.onChange =
     align.onChange =
     inLetterspacing.onChange =
-    inPadding.onChange =
+    inPaddingY.onChange =
     inPaddingX.onChange =
     text.onChange =
     inFontSize.onChange =
@@ -219,6 +221,7 @@ function refresh()
 
     ctx.textBaseline = "top";
     ctx.textAlign = align.get();
+    ctx.letterSpacing = inLetterspacing.get() + "px";
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     let strings = txt.split("\n");
@@ -226,7 +229,7 @@ function refresh()
     needsRefresh = false;
 
     let oneLineHeight = 0;
-    let padding = inPadding.get();
+    let paddingY = inPaddingY.get();
     let paddingX = inPaddingX.get();
 
     autoWidth = 0;
@@ -235,15 +238,16 @@ function refresh()
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent));
+        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent)) + inLineHeight.get();
     }
 
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        autoWidth = Math.max(autoWidth, measure.width) + paddingX + (inLetterspacing.get() * (strings[i].length + 1));
-        autoHeight += oneLineHeight + padding + padding;
+        autoWidth = Math.max(autoWidth, measure.width) + paddingX + ((strings[i].length + 1));
+        autoHeight += oneLineHeight;
     }
+    autoHeight += paddingY + paddingY;
 
     if (texSizeMeth.get() == "Manual")
     {
@@ -262,18 +266,15 @@ function refresh()
 
     if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
 
-    let posy = 0;
+    let posy = paddingY;
 
     const dbg = drawDebug.get();
 
-    ctx.letterSpacing = inLetterspacing.get() + "px";
-
     for (let i = 0; i < strings.length; i++)
     {
-        posy += padding;
-        let posx = 0 + paddingX + inLetterspacing.get();
-        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX + inLetterspacing.get() / 2;
-        if (align.get() == "right") posx = ctx.canvas.width - paddingX + inLetterspacing.get();
+        let posx = 0 + paddingX;
+        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX / 2;
+        if (align.get() == "right") posx = ctx.canvas.width - paddingX;
 
         ctx.fillText(strings[i], posx, posy);
 
@@ -287,17 +288,14 @@ function refresh()
             ctx.stroke();
         }
 
-        posy += oneLineHeight + padding;
+        posy += oneLineHeight;
     }
 
     ctx.restore();
 
-    outRatio.set(ctx.canvas.height / ctx.canvas.width);
-    outLines.set(strings.length);
-
     let cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    else if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
     let f = CGL.Texture.FILTER_LINEAR;
     if (tfilter.get() == "nearest") f = CGL.Texture.FILTER_NEAREST;
@@ -311,6 +309,9 @@ function refresh()
 
     tex.flip = false;
     tex.initTexture(fontImage, f);
+
+    outRatio.set(ctx.canvas.height / ctx.canvas.width);
+    outLines.set(strings.length);
     textureOut.setRef(tex);
     tex.unpackAlpha = false;
 }

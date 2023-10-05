@@ -78,6 +78,11 @@
             },
             {
                 "type": 0,
+                "name": "Line Height Add",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "filter index",
                 "group": "Texture",
                 "subType": "integer"
