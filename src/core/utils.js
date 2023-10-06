@@ -439,29 +439,7 @@ export const basename = function (url)
 };
 
 
-// todo: is jsonp used anywhere ?
-let jsonpCounter = null;
-export const jsonp = function (url, cb)
-{
-    jsonpCounter = jsonpCounter || 0;
-    jsonpCounter++;
-    const jsonPID = jsonpCounter;
 
-    CABLES["jsonpFunc" + jsonPID] = function (data)
-    {
-        cb(false, data);
-    };
-
-    let paramChar = "?";
-    if (url.indexOf(paramChar) > -1) paramChar = "&";
-
-    const s = document.createElement("script");
-    s.setAttribute("src", url + paramChar + "callback=CABLES.jsonpFunc" + jsonPID);
-    // s.onload=function()
-    // {
-    // };
-    document.body.appendChild(s);
-};
 
 export const ajaxSync = function (url, cb, method, post, contenttype)
 {
