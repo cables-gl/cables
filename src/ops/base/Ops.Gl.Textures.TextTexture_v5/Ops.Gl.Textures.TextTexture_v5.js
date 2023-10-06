@@ -4,13 +4,23 @@ const
     drawMesh = op.inValueBool("Draw Mesh", true),
     meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
+    texSizeMeth = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
+
+    texSizeManWidth = op.inInt("Width", 512),
+    texSizeManHeight = op.inInt("Height", 512),
+    texSizeManBreak = op.inBool("Auto Line Breaks", true),
+    texSizeAutoHeight = op.inBool("Auto Height", false),
+
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
     weight = op.inString("weight", "normal"),
     inFontSize = op.inValueFloat("fontSize", 300),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
-    inPadding = op.inInt("Padding Y", 3),
+    inPaddingY = op.inInt("Padding Y", 3),
     inPaddingX = op.inInt("Padding X", 0),
+
+    inLetterspacing = op.inFloat("Letter Spacing", 0),
+    inLineHeight = op.inFloat("Line Height Add", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
@@ -52,8 +62,15 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
-align.onChange =
-    inPadding.onChange =
+texSizeManBreak.onChange =
+    texSizeAutoHeight.onChange =
+    inLineHeight.onChange =
+    texSizeMeth.onChange =
+    texSizeManWidth.onChange =
+    texSizeManHeight.onChange =
+    align.onChange =
+    inLetterspacing.onChange =
+    inPaddingY.onChange =
     inPaddingX.onChange =
     text.onChange =
     inFontSize.onChange =
@@ -61,7 +78,14 @@ align.onChange =
     aniso.onChange =
     font.onChange =
     drawDebug.onChange =
-    cachetexture.onChange = function () { needsRefresh = true; };
+    cachetexture.onChange = function ()
+    {
+        needsRefresh = true;
+
+        texSizeManWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+        texSizeManHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" || texSizeAutoHeight.get() });
+        texSizeManBreak.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+    };
 
 textureOut.ignoreValueSerialize = true;
 
@@ -184,6 +208,45 @@ function updateUi()
     meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
 }
 
+function autoLineBreaks(strings)
+{
+    let newString = "";
+
+    for (let i = 0; i < strings.length; i++)
+    {
+        if (!strings[i])
+        {
+            newString += "\n";
+            continue;
+        }
+        let sumWidth = 0;
+        const words = strings[i].split(" ");
+
+        for (let j = 0; j < words.length; j++)
+        {
+            if (!words[j]) continue;
+            sumWidth += ctx.measureText(words[j] + " ").width;
+
+            if (sumWidth > texSizeManWidth.get())
+            {
+                // found = true;
+                newString += "\n" + words[j] + " ";
+                sumWidth = ctx.measureText(words[j] + " ").width;
+            }
+            else
+            {
+                newString += words[j] + " ";
+            }
+        }
+        newString += "\n";
+    }
+    let txt = newString;
+    strings = txt.split("\n");
+    if (strings[strings.length - 1] == "")strings.pop();
+    // console.log(strings);
+    return strings;
+}
+
 function refresh()
 {
     cgl.checkFrameStarted("texttrexture refresh");
@@ -203,6 +266,7 @@ function refresh()
 
     ctx.textBaseline = "top";
     ctx.textAlign = align.get();
+    ctx.letterSpacing = inLetterspacing.get() + "px";
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     let strings = txt.split("\n");
@@ -210,23 +274,39 @@ function refresh()
     needsRefresh = false;
 
     let oneLineHeight = 0;
-    let padding = inPadding.get();
-    let paddingX = inPaddingX.get();
+    let paddingY = Math.max(0, inPaddingY.get());
+    let paddingX = Math.max(0, inPaddingX.get());
 
     autoWidth = 0;
     autoHeight = 0;
 
-    for (let i = 0; i < strings.length; i++)
+    if (texSizeManBreak.get() && texSizeMeth.get() == "Manual")
     {
-        const measure = ctx.measureText(strings[i]);
-        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent));
+        if (texSizeManWidth.get() > 128)
+        {
+            strings = autoLineBreaks(strings);
+        }
     }
 
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        autoWidth = Math.max(autoWidth, measure.width) + paddingX;
-        autoHeight += oneLineHeight + padding + padding;
+        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent)) + inLineHeight.get();
+    }
+
+    for (let i = 0; i < strings.length; i++)
+    {
+        const measure = ctx.measureText(strings[i]);
+        autoWidth = Math.max(autoWidth, measure.width) + paddingX + ((strings[i].length + 1));
+        autoHeight += oneLineHeight;
+    }
+    autoHeight += paddingY + paddingY;
+
+    if (texSizeMeth.get() == "Manual")
+    {
+        autoWidth = texSizeManWidth.get();
+
+        if (!texSizeAutoHeight.get()) autoHeight = texSizeManHeight.get();
     }
 
     autoHeight = Math.ceil(autoHeight);
@@ -240,15 +320,14 @@ function refresh()
 
     if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
 
-    let posy = 0;
+    let posy = paddingY;
 
     const dbg = drawDebug.get();
 
     for (let i = 0; i < strings.length; i++)
     {
-        posy += padding;
         let posx = 0 + paddingX;
-        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX;
+        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX / 2;
         if (align.get() == "right") posx = ctx.canvas.width - paddingX;
 
         ctx.fillText(strings[i], posx, posy);
@@ -263,17 +342,14 @@ function refresh()
             ctx.stroke();
         }
 
-        posy += oneLineHeight + padding;
+        posy += oneLineHeight;
     }
 
     ctx.restore();
 
-    outRatio.set(ctx.canvas.height / ctx.canvas.width);
-    outLines.set(strings.length);
-
     let cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    else if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
     let f = CGL.Texture.FILTER_LINEAR;
     if (tfilter.get() == "nearest") f = CGL.Texture.FILTER_NEAREST;
@@ -287,6 +363,9 @@ function refresh()
 
     tex.flip = false;
     tex.initTexture(fontImage, f);
+
+    outRatio.set(ctx.canvas.height / ctx.canvas.width);
+    outLines.set(strings.length);
     textureOut.setRef(tex);
     tex.unpackAlpha = false;
 }

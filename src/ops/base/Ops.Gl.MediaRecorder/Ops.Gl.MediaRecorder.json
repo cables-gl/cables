@@ -66,7 +66,13 @@
             },
             {
                 "type": 0,
-                "name": "FPS",
+                "name": "Max FPS",
+                "group": "Encoding",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Force FPS",
                 "group": "Encoding",
                 "subType": "number"
             },

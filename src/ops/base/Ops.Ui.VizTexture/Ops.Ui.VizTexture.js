@@ -248,7 +248,7 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.font = "normal 10px sourceCodePro";
         ctx.fillStyle = "#000";
         ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
-        ctx.fillStyle = "#fff";
+        ctx.fillStyle = "#aaa";
         ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
         ctx.restore();
     }
@@ -260,7 +260,7 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.font = "normal 10px sourceCodePro";
         ctx.fillStyle = "#000";
         ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
-        ctx.fillStyle = "#fff";
+        ctx.fillStyle = "#aaa";
         ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
 
         ctx.restore();
