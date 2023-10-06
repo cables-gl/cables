@@ -149,7 +149,7 @@ export default class Mesh
         const shader = this._cgp.getShader();
         if (shader)shader.bind();
 
-        if (!this._cgp.getShader().isValid)
+        if (!this._cgp.getShader() || !this._cgp.getShader().isValid)
         {
             // console.log("invalid");
             return;

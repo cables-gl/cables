@@ -148,6 +148,11 @@ Port.prototype.getValueForDisplay = function ()
 
     if (typeof this.value === "string" || this.value instanceof String)
     {
+        if (str.length > 1000)
+        {
+            str.length = 1000;
+            str += "...";
+        }
         if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
         {
             str += " - ";
