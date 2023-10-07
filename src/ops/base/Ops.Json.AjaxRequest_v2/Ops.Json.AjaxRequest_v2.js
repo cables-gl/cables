@@ -21,6 +21,27 @@ reloadTrigger.setUiAttribs({ "buttonTitle": "trigger request" });
 outData.ignoreValueSerialize = true;
 outString.ignoreValueSerialize = true;
 
+let jsonpCounter = null;
+CABLES.jsonp = function (url, cb)
+{
+    jsonpCounter = jsonpCounter || 0;
+    jsonpCounter++;
+    const jsonPID = jsonpCounter;
+
+    CABLES["jsonpFunc" + jsonPID] = function (data)
+    {
+        cb(false, data);
+    };
+
+    let paramChar = "?";
+    if (url.indexOf(paramChar) > -1) paramChar = "&";
+
+    const s = document.createElement("script");
+    s.setAttribute("src", url + paramChar + "callback=CABLES.jsonpFunc" + jsonPID);
+
+    document.body.appendChild(s);
+};
+
 inAutoRequest.onChange = filename.onChange = jsonp.onChange = headers.onChange = inMethod.onChange = inParseJson.onChange = function ()
 {
     delayedReload(false);

@@ -17,6 +17,29 @@ function delayedReload()
     reloadTimeout = setTimeout(reload, 100);
 }
 
+let jsonpCounter = null;
+CABLES.jsonp = function (url, cb)
+{
+    jsonpCounter = jsonpCounter || 0;
+    jsonpCounter++;
+    const jsonPID = jsonpCounter;
+
+    CABLES["jsonpFunc" + jsonPID] = function (data)
+    {
+        cb(false, data);
+    };
+
+    let paramChar = "?";
+    if (url.indexOf(paramChar) > -1) paramChar = "&";
+
+    const s = document.createElement("script");
+    s.setAttribute("src", url + paramChar + "callback=CABLES.jsonpFunc" + jsonPID);
+    // s.onload=function()
+    // {
+    // };
+    document.body.appendChild(s);
+};
+
 function reload()
 {
     if (!filename.get()) return;
