@@ -65,7 +65,8 @@ const
     outCodecs = op.outArray("Valid Mimetypes", supportedVideos),
     outDuration = op.outNumber("Duration"),
     outFinished = op.outTrigger("Finished Recording"),
-    outBlobs = op.outObject("Blobs");
+
+    outDataUrl = op.outString("Video DataUrl");
 
 op.setPortGroup("Inputs", [inMedia, inAudio, inCanvasId]);
 op.setPortGroup("Encoding", [inMbit, inCodecs, inFPS, inFPSMax]);
@@ -284,19 +285,15 @@ function download()
         a.click();
     }
 
-    if (!outBlobs.isLinked())
-    {
-        if (inDownl.get())
-            setTimeout(() =>
-            {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            }, 100);
-    }
-    else
-    {
-        console.log("set blobs");
-        outBlobs.setRef({ "blob": blob, "duration": duration });
-    }
+    if (inDownl.get())
+        setTimeout(() =>
+        {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 100);
+
+    outDataUrl.set(url);
+    //     outBlobs.setRef({ "blob": blob, "duration": duration });
+    // }
     outFinished.trigger();
 }
