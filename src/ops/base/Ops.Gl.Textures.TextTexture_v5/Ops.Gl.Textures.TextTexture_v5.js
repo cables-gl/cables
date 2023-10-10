@@ -8,19 +8,23 @@ const
 
     texSizeManWidth = op.inInt("Width", 512),
     texSizeManHeight = op.inInt("Height", 512),
-    texSizeManBreak = op.inBool("Auto Line Breaks", true),
-    texSizeAutoHeight = op.inBool("Auto Height", false),
+    texSizeAutoHeight = op.inBool("Auto Height", true),
 
     text = op.inString("text", "cables"),
+
+    texSizeManBreak = op.inBool("Auto Line Breaks", true),
+
     font = op.inString("font", "Arial"),
     weight = op.inString("weight", "normal"),
     inFontSize = op.inValueFloat("fontSize", 300),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
-    inPaddingY = op.inInt("Padding Y", 3),
-    inPaddingX = op.inInt("Padding X", 0),
+    valign = op.inSwitch("Vertical align", ["Top", "Middle", "Bottom"], "Top"),
 
     inLetterspacing = op.inFloat("Letter Spacing", 0),
     inLineHeight = op.inFloat("Line Height Add", 0),
+
+    inPaddingY = op.inInt("Padding Y", 3),
+    inPaddingX = op.inInt("Padding X", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
@@ -51,7 +55,7 @@ op.toWorkPortsNeedToBeLinked(render);
 
 op.setPortGroup("Text Color", [r, g, b, inOpacity]);
 op.setPortGroup("Background", [bgR, bgG, bgB, bgA]);
-op.setPortGroup("Font", [font, weight, inFontSize, align]);
+op.setPortGroup("Font", [font, weight, inFontSize, align, valign, inLetterspacing, inLineHeight]);
 op.setPortGroup("Texture", [wrap, tfilter, aniso, cachetexture, drawDebug]);
 
 op.setPortGroup("Rendering", [drawMesh, meshScale]);
@@ -62,7 +66,8 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
-texSizeManBreak.onChange =
+valign.onChange =
+    texSizeManBreak.onChange =
     texSizeAutoHeight.onChange =
     inLineHeight.onChange =
     texSizeMeth.onChange =
@@ -85,6 +90,10 @@ texSizeManBreak.onChange =
         texSizeManWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
         texSizeManHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" || texSizeAutoHeight.get() });
         texSizeManBreak.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+        valign.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+        texSizeAutoHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+
+        inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
     };
 
 textureOut.ignoreValueSerialize = true;
@@ -297,16 +306,24 @@ function refresh()
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        autoWidth = Math.max(autoWidth, measure.width) + paddingX + ((strings[i].length + 1));
+        autoWidth = Math.max(autoWidth, measure.width);
         autoHeight += oneLineHeight;
     }
+
+    autoWidth += paddingX * 2;
     autoHeight += paddingY + paddingY;
+
+    let calcHeight = autoHeight;
 
     if (texSizeMeth.get() == "Manual")
     {
-        autoWidth = texSizeManWidth.get();
+        autoWidth = texSizeManWidth.get() + paddingX * 2;
 
-        if (!texSizeAutoHeight.get()) autoHeight = texSizeManHeight.get();
+        if (!texSizeAutoHeight.get())
+        {
+            autoHeight = texSizeManHeight.get();
+            paddingY = 0;
+        }
     }
 
     autoHeight = Math.ceil(autoHeight);
@@ -321,14 +338,19 @@ function refresh()
     if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
 
     let posy = paddingY;
+    if (valign.get() == "Middle")posy = (autoHeight - calcHeight) / 2;
+    else if (valign.get() == "Bottom")posy = (autoHeight - calcHeight);
 
     const dbg = drawDebug.get();
 
     for (let i = 0; i < strings.length; i++)
     {
         let posx = 0 + paddingX;
-        if (align.get() == "center") posx = ctx.canvas.width / 2 + paddingX / 2;
-        if (align.get() == "right") posx = ctx.canvas.width - paddingX;
+
+        if (align.get() == "center") posx = ctx.canvas.width / 2;
+        if (align.get() == "right") posx = ctx.canvas.width;
+
+        if (texSizeMeth.get() == "Manual")posx += inLetterspacing.get();
 
         ctx.fillText(strings[i], posx, posy);
 

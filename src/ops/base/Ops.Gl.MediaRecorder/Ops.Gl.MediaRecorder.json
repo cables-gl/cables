@@ -121,8 +121,8 @@
                 "name": "Finished Recording"
             },
             {
-                "type": 2,
-                "name": "Blobs"
+                "type": 5,
+                "name": "Video DataUrl"
             }
         ]
     },
