@@ -4,15 +4,13 @@ import Mesh from "./cgp_mesh";
 import Pipeline from "./cgp_pipeline";
 import Texture from "./cgp_texture";
 
-const CGP = Object.assign(
-    {
-        "Context": Context,
-        "Shader": Shader,
-        "Mesh": Mesh,
-        "Pipeline": Pipeline,
-        "Texture": Texture
-    },
-);
+const CGP = {
+    "Context": Context,
+    "Shader": Shader,
+    "Mesh": Mesh,
+    "Pipeline": Pipeline,
+    "Texture": Texture,
+};
 
 window.CGP = CGP;
 

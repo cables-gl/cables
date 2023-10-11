@@ -1,4 +1,5 @@
 import { BoundingBox } from "./cg_boundingbox";
+import { CgCanvas } from "./cg_canvas";
 import { Geometry } from "./cg_geom";
 import FpsCounter from "./sg_fpscounter";
 
@@ -24,7 +25,9 @@ const CG = {
 
     "Geometry": Geometry,
     "BoundingBox": BoundingBox,
-    "FpsCounter": FpsCounter
+    "FpsCounter": FpsCounter,
+
+    "CgCanvas": CgCanvas
 };
 
 

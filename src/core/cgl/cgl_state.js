@@ -19,6 +19,7 @@ const Context = function (_patch)
     CGState.apply(this);
 
     this.gApi = CG.GAPI_WEBGL;
+    this.aborted = false;
 
     this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
     this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
@@ -77,10 +78,6 @@ const Context = function (_patch)
                 return this._viewPort;
             }
         }
-        // set()
-        // {
-        //     // this.mMatrix = m;
-        // },
     });
 
 
@@ -95,38 +92,12 @@ const Context = function (_patch)
         },
     }); // todo: deprecated
 
+    this._simpleShader = new Shader(this, "simpleshader");
+    this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+    this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
-    const simpleShader = new Shader(this, "simpleshader");
+    let currentShader = this._simpleShader;
 
-    simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-    simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
-
-    let currentShader = simpleShader;
-    this.aborted = false;
-    const cbResize = [];
-
-    // this.addEventListener = function (event, cb)
-    // {
-    //     console.log("cgl state old addEventListener");
-    //     this._log.stack("cgl state old addEventListener");
-
-    //     if (event == "resize") cbResize.push(cb);
-    // };
-
-    // this.removeEventListener = function (event, cb)
-    // {
-    //     if (event == "resize")
-    //     {
-    //         for (const i in cbResize)
-    //         {
-    //             if (cbResize[i] == cb)
-    //             {
-    //                 cbResize.splice(i, 1);
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // };
 
     this.exitError = function (msgId, msg)
     {
@@ -390,7 +361,6 @@ const Context = function (_patch)
             this.setSize(this.canvasWidth / this.pixelDensity, this.canvasHeight / this.pixelDensity);
             this.updateSize();
 
-            for (let i = 0; i < cbResize.length; i++) cbResize[i]();
             this.emitEvent("resize");
         }
 
@@ -424,7 +394,7 @@ const Context = function (_patch)
 
     this.getDefaultShader = function ()
     {
-        return simpleShader;
+        return this._simpleShader;
     };
 
     /**
@@ -588,7 +558,7 @@ const Context = function (_patch)
 
         for (let i = 0; i < this._textureslots.length; i++) this._textureslots[i] = null;
 
-        this.pushShader(simpleShader);
+        this.pushShader(this._simpleShader);
 
         this._frameStarted = true;
 
