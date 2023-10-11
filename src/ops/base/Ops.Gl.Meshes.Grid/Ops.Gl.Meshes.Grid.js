@@ -1,14 +1,16 @@
 const
     render = op.inTrigger("Render"),
-    inNum = op.inValue("Num", 10),
+    inNum = op.inInt("Num", 10),
     inSpacing = op.inValue("Spacing", 1),
     inCenter = op.inBool("Center", true),
+    axis = op.inSwitch("Axis", ["XY", "XZ"], "XY"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
 let mesh = null;
 
-inCenter.onChange =
+axis.onChange =
+    inCenter.onChange =
     inNum.onChange =
     inSpacing.onChange = function ()
     {
@@ -30,29 +32,26 @@ function init()
     let start = -num / 2;
     let end = num / 2 + 1;
 
-    for (let i = start; i < end; i++)
-    {
-        geomStepsOne.vertices.push(-l);
-        geomStepsOne.vertices.push(i * space);
-        geomStepsOne.vertices.push(0);
+    if (axis.get() == "XY")
+        for (let i = start; i < end; i++)
+        {
+            geomStepsOne.vertices.push(-l, i * space, 0);
+            geomStepsOne.vertices.push(l, i * space, 0);
+            geomStepsOne.vertices.push(i * space, -l, 0);
+            geomStepsOne.vertices.push(i * space, l, 0);
 
-        geomStepsOne.vertices.push(l);
-        geomStepsOne.vertices.push(i * space);
-        geomStepsOne.vertices.push(0);
+            tc.push(0, 0, 0, 0, 0, 0, 0, 0);
+        }
+    else
+        for (let i = start; i < end; i++)
+        {
+            geomStepsOne.vertices.push(-l, 0, i * space);
+            geomStepsOne.vertices.push(l, 0, i * space);
+            geomStepsOne.vertices.push(i * space, 0, -l);
+            geomStepsOne.vertices.push(i * space, 0, l);
 
-        geomStepsOne.vertices.push(i * space);
-        geomStepsOne.vertices.push(-l);
-        geomStepsOne.vertices.push(0);
-
-        geomStepsOne.vertices.push(i * space);
-        geomStepsOne.vertices.push(l);
-        geomStepsOne.vertices.push(0);
-
-        tc.push(0, 0);
-        tc.push(0, 0);
-        tc.push(0, 0);
-        tc.push(0, 0);
-    }
+            tc.push(0, 0, 0, 0, 0, 0, 0, 0);
+        }
 
     if (!inCenter.get())
     {
