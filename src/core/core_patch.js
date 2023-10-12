@@ -87,6 +87,8 @@ const Patch = function (cfg)
     this.deSerialized = false;
     this._lastReqAnimTimeStamp = 0;
 
+    this.cgCanvas = null;
+
     if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
     this._isLocal = document.location.href.indexOf("file:") === 0;
