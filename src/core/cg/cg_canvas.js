@@ -22,7 +22,7 @@ class CgCanvas
 
     setSize(w, h, ignorestyle)
     {
-        console.log("setsize", w, h);
+        // TODO : cache size dont set ele attribs all the time?
         if (!ignorestyle)
         {
             this.canvasEle.style.width = w + "px";
