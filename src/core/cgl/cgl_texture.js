@@ -1043,7 +1043,7 @@ Texture.getTexInfo = function (tex)
     const obj = {};
 
     obj.name = tex.name;
-    obj["power of two"] = Texture.isPowerOfTwo();
+    obj["power of two"] = tex.isPowerOfTwo();
     obj.size = tex.width + " x " + tex.height;
 
     let targetString = tex.texTarget;
