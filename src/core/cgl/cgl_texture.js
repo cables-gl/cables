@@ -281,14 +281,14 @@ Texture.prototype.setSize = function (w, h)
                 internalFormat = this._cgl.gl.RGBA16F;
                 dataType = this._cgl.gl.FLOAT;
             }
-            
+
             if (this.pixelFormat == Texture.PFORMATSTR_RG16F)
             {
                 internalFormat = this._cgl.gl.RG16F;
                 dataType = this._cgl.gl.FLOAT;
                 dataFormat = this._cgl.gl.RG;
             }
-            
+
             if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
                 internalFormat = this._cgl.gl.R11F_G11F_B10F;
@@ -1102,7 +1102,7 @@ Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 Texture.PFORMATSTR_RG16F = "RG 16bit float";
 
-Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F, Texture.PFORMATSTR_RG16F];
+Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RG16F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
 
 Texture.isPixelFormatFloat = (pxlfrmt) =>
 {
