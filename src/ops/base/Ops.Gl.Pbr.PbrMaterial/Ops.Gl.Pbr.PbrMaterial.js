@@ -14,6 +14,12 @@ const inRoughness = op.inFloatSlider("Roughness", 0.5);
 const inMetalness = op.inFloatSlider("Metalness", 0.0);
 const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
 
+const inUseClearCoat = op.inValueBool("Use Clear Coat", false);
+const inClearCoatIntensity = op.inFloatSlider("Clear Coat Intensity", 1.0);
+const inClearCoatRoughness = op.inFloatSlider("Clear Coat Roughness", 0.5);
+const inUseNormalMapForCC = op.inValueBool("Use Normal map for Clear Coat", false);
+const inTexClearCoatNormal = op.inTexture("Clear Coat Normal map");
+
 const inTonemapping = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
 const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 
@@ -23,8 +29,6 @@ const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
 const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
 const inHeightDepth = op.inFloat("Height Intensity", 1.0);
 const inUseOptimizedHeight = op.inValueBool("Faster heightmapping", false);
-const inUseClearCoat = op.inValueBool("Use Clear Coat", false);
-const inClearCoatRoughness = op.inFloatSlider("Clear Coat Roughness", 0.5);
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
@@ -54,10 +58,11 @@ op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_T
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
-op.setPortGroup("Advanced Shader Parameters", [inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inUseClearCoat, inClearCoatRoughness]);
+op.setPortGroup("Advanced Shader Parameters", [inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight]);
 op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexHeight, inLightmap]);
 op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
+op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoatRoughness, inUseNormalMapForCC, inTexClearCoatNormal]);
 // globals
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
 PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -118,6 +123,7 @@ buildShader();
 const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", 0);
 const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", 0);
 const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap", 0);
+const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap", 0);
 const inIBLLUTUniform = new CGL.Uniform(PBRShader, "t", "IBL_BRDF_LUT", 0);
 const inIrradianceUniform = new CGL.Uniform(PBRShader, "tc", "_irradiance", 1);
 const inPrefilteredUniform = new CGL.Uniform(PBRShader, "tc", "_prefilteredEnvironmentColour", 1);
@@ -135,6 +141,7 @@ const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, i
 const inRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", inRoughness);
 const inMetalnessUniform = new CGL.Uniform(PBRShader, "f", "_Metalness", inMetalness);
 const inHeightDepthUniform = new CGL.Uniform(PBRShader, "f", "_HeightDepth", inHeightDepth);
+const inClearCoatIntensityUniform = new CGL.Uniform(PBRShader, "f", "_ClearCoatIntensity", inClearCoatIntensity);
 const inClearCoatRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_ClearCoatRoughness", inClearCoatRoughness);
 
 const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
@@ -149,7 +156,9 @@ inTexPrefiltered.onChange = updateIBLTexDefines;
 
 inTexAORM.onChange =
     inLightmapRGBE.onChange =
+    inUseNormalMapForCC.onChange =
     inUseClearCoat.onChange =
+    inTexClearCoatNormal.onChange =
     inTexAlbedo.onChange =
     inTexNormal.onChange =
     inTexHeight.onChange =
@@ -166,6 +175,8 @@ function updateDefines()
 {
     PBRShader.toggleDefine("USE_OPTIMIZED_HEIGHT", inUseOptimizedHeight.get());
     PBRShader.toggleDefine("USE_CLEAR_COAT", inUseClearCoat.get());
+    PBRShader.toggleDefine("USE_NORMAL_MAP_FOR_CC", inUseNormalMapForCC.get());
+    PBRShader.toggleDefine("USE_CC_NORMAL_MAP", inTexClearCoatNormal.isLinked());
     PBRShader.toggleDefine("LIGHTMAP_IS_RGBE", inLightmapRGBE.get());
     PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.isLinked() || inVertexColourMode.get() === "lightmap");
     PBRShader.toggleDefine("USE_NORMAL_TEX", inTexNormal.isLinked());
@@ -415,7 +426,8 @@ function doRender()
     if (inTexNormal.get()) PBRShader.pushTexture(inNormalUniform, inTexNormal.get().tex);
     if (inTexHeight.get()) PBRShader.pushTexture(inHeightUniform, inTexHeight.get().tex);
     if (inLightmap.get()) PBRShader.pushTexture(inLightmapUniform, inLightmap.get().tex);
-
+    if (inTexClearCoatNormal.get()) PBRShader.pushTexture(inCCNormalUniform, inTexClearCoatNormal.get().tex);
+    
     updateLights();
     updateLightUniforms();
 

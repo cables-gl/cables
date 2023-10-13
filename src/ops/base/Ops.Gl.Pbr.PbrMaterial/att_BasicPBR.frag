@@ -37,7 +37,13 @@ UNI vec3 camPos;
     #endif
 #endif
 #ifdef USE_CLEAR_COAT
+    UNI float _ClearCoatIntensity;
     UNI float _ClearCoatRoughness;
+    #ifdef USE_CC_NORMAL_MAP
+        #ifndef USE_NORMAL_MAP_FOR_CC
+            UNI sampler2D _CCNormalMap;
+        #endif
+    #endif
 #endif
 // IBL inputs
 #ifdef USE_ENVIRONMENT_LIGHTING
@@ -395,17 +401,28 @@ void main()
         col.rgb += Fr + Fd;
         #ifdef USE_CLEAR_COAT
             float CCEnvSampleSpecK = _ClearCoatRoughness * MAX_REFLECTION_LOD;
-            vec3  CCR = reflect(-V, normM);
-
-            #ifdef USE_PARALLAX_CORRECTION
-                CCR = BoxProjection(CCR, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
+            #ifndef USE_NORMAL_MAP_FOR_CC
+                #ifndef USE_CC_NORMAL_MAP
+                    vec3 CCR = reflect(-V, normM);
+                #else
+                    vec3 CCN = texture(_CCNormalMap, UV0).rgb;
+                    CCN      = CCN * 2.0 - 1.0;
+                    CCN      = normalize(TBN * CCN);
+                    vec3 CCR = reflect(-V, CCN);
+                #endif
+                #ifdef USE_PARALLAX_CORRECTION
+                    CCR = BoxProjection(CCR, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
+                #endif
             #endif
-
-        	vec3 CCPrefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, CCR, CCEnvSampleSpecK));
+            #ifndef USE_NORMAL_MAP_FOR_CC
+        	    vec3 CCPrefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, CCR, CCEnvSampleSpecK));
+        	#else
+        	    vec3 CCPrefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, R, CCEnvSampleSpecK));
+        	#endif
         	vec3 CCFr = E * CCPrefilteredEnvColour;
         	CCFr *= specOcclusion * horizonOcclusion * (0.96 + (0.04 / envBRDF.y));
         	CCFr *= 1.04;
-        	col.rgb += CCFr;
+        	col.rgb += CCFr * _ClearCoatIntensity;
         #endif
     #else
         #ifdef USE_LIGHTMAP
