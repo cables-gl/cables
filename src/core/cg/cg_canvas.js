@@ -39,8 +39,6 @@ class CgCanvas
 
             this.updateSize();
 
-            if (this._cg.gl)console.log(this._cg.gl.canvas);
-
             this._cg.emitEvent("resize");
         }
     }

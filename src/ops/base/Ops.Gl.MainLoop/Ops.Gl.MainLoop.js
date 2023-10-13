@@ -150,7 +150,7 @@ function render(time)
 
     op.patch.cg = cgl;
 
-    op.patch.cgl.pixelDensity = window.devicePixelRatio;
+    if (hdpi.get())op.patch.cgl.pixelDensity = window.devicePixelRatio;
 
     const startTime = performance.now();
 
