@@ -281,14 +281,14 @@ Texture.prototype.setSize = function (w, h)
                 internalFormat = this._cgl.gl.RGBA16F;
                 dataType = this._cgl.gl.FLOAT;
             }
-			
+            
             if (this.pixelFormat == Texture.PFORMATSTR_RG16F)
             {
                 internalFormat = this._cgl.gl.RG16F;
                 dataType = this._cgl.gl.FLOAT;
-				dataFormat = this._cgl.gl.RG;
+                dataFormat = this._cgl.gl.RG;
             }
-			
+            
             if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
                 internalFormat = this._cgl.gl.R11F_G11F_B10F;

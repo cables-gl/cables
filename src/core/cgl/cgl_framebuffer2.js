@@ -251,7 +251,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
                 internFormat = this._cgl.gl.R11F_G11F_B10F;
             }
-			else if (this._options.pixelFormat == Texture.PFORMATSTR_RG16F)
+            else if (this._options.pixelFormat == Texture.PFORMATSTR_RG16F)
             {
                 const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
 
