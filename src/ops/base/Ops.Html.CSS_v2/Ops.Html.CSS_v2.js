@@ -41,6 +41,7 @@ function update()
         styleEle.type = "text/css";
         styleEle.id = eleId;
         styleEle.textContent = attachments.css_spinner;
+        styleEle.classList.add("cablesEle");
 
         const head = document.getElementsByTagName("body")[0];
         head.appendChild(styleEle);
