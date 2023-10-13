@@ -11,9 +11,13 @@ class CgCanvas
             this._canvasEle = options.canvasEle;
         }
 
-        this.pixelDensity = 2;
+        this._cg = options.cg;
+        this.pixelDensity = 1;
         this.canvasWidth = this.canvasEle.clientWidth;
         this.canvasHeight = this.canvasEle.clientHeight;
+
+        this._oldWidthRp = -1;
+        this._oldHeightRp = -1;
 
         this.setSize(200, 200);
     }
@@ -22,17 +26,23 @@ class CgCanvas
 
     setSize(w, h, ignorestyle)
     {
-        // TODO : cache size dont set ele attribs all the time?
-        if (!ignorestyle)
+        if (this._oldWidthRp != w * this.pixelDensity || this._oldHeightRp != h * this.pixelDensity)
         {
-            this.canvasEle.style.width = w + "px";
-            this.canvasEle.style.height = h + "px";
+            this._oldWidthRp = this.canvasEle.width = w * this.pixelDensity;
+            this._oldHeightRp = this.canvasEle.height = h * this.pixelDensity;
+
+            if (!ignorestyle)
+            {
+                this.canvasEle.style.width = w + "px";
+                this.canvasEle.style.height = h + "px";
+            }
+
+            this.updateSize();
+
+            if (this._cg.gl)console.log(this._cg.gl.canvas);
+
+            this._cg.emitEvent("resize");
         }
-
-        this.canvasEle.width = w * this.pixelDensity;
-        this.canvasEle.height = h * this.pixelDensity;
-
-        this.updateSize();
     }
 
     updateSize()

@@ -147,12 +147,7 @@ class Context extends CGState
             this.glUseHalfFloatTex = true;
         }
 
-        console.log("!!!!!", canv);
-
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
-
-
-        console.log("!!!!!", canv);
 
         if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
@@ -199,7 +194,6 @@ class Context extends CGState
             if (this.glRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 
-
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
             this._log.error("canvas lost...", event);
@@ -226,7 +220,6 @@ class Context extends CGState
                 this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
             }
         }
-
 
         this.DEPTH_FUNCS = [
             this.gl.NEVER,

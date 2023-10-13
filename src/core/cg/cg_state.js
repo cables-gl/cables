@@ -62,12 +62,8 @@ class CGState extends EventTarget
         this._mMatrixStack = new MatrixStack();
         this._vMatrixStack = new MatrixStack();
 
-        // this.canvasWidth = -1;
-        // this.canvasHeight = -1;
         this.canvasScale = 1;
 
-        // this.canvas = null;
-        this.pixelDensity = 1;
         mat4.identity(this.mMatrix);
         mat4.identity(this.vMatrix);
     }
@@ -80,6 +76,16 @@ class CGState extends EventTarget
     get canvasHeight()
     {
         return this.cgCanvas.canvasHeight;
+    }
+
+    set pixelDensity(p)
+    {
+        this.cgCanvas.pixelDensity = p;
+    }
+
+    get pixelDensity()
+    {
+        return this.cgCanvas.pixelDensity;
     }
 
 
@@ -96,9 +102,8 @@ class CGState extends EventTarget
     setCanvas(canv)
     {
         if (typeof canv === "string") canv = document.getElementById(canv);
-        // else this.canvas = canv;
 
-        this.cgCanvas = new CgCanvas({ "canvasEle": canv });
+        this.cgCanvas = new CgCanvas({ "canvasEle": canv, "cg": this });
 
         if (this._setCanvas) this._setCanvas(canv);
 

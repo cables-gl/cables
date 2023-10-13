@@ -150,6 +150,8 @@ function render(time)
 
     op.patch.cg = cgl;
 
+    op.patch.cgl.pixelDensity = window.devicePixelRatio;
+
     const startTime = performance.now();
 
     op.patch.config.fpsLimit = getFpsLimit();
