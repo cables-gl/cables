@@ -1,4 +1,3 @@
-import { CGP } from "../cgp";
 import { EventTarget } from "../eventtarget";
 import { CgCanvas } from "./cg_canvas";
 import { CG } from "./cg_constants";
@@ -9,7 +8,7 @@ import Preprocessor from "./preproc";
 // const CGState ()
 class CGState extends EventTarget
 {
-    constructor()
+    constructor(_patch)
     {
         super();
         // this.canvas = null;
@@ -20,6 +19,7 @@ class CGState extends EventTarget
         vec3.set(this._identView, 0, 0, -2);
         vec3.set(this._ident, 0, 0, 0);
 
+        this.patch = _patch;
 
 
 

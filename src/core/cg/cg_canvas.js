@@ -11,6 +11,9 @@ class CgCanvas
             this._canvasEle = options.canvasEle;
         }
 
+        if (!options.cg)console.error("CgCanvas options has no cg");
+        if (!options.canvasEle)console.error("CgCanvas options has no canvasEle");
+
         this._cg = options.cg;
         this.pixelDensity = 1;
         this.canvasWidth = this.canvasEle.clientWidth;

@@ -27,7 +27,7 @@ class Context extends CGState
 {
     constructor(_patch)
     {
-        super();
+        super(_patch);
         // EventTarget.apply(this);
         // CGState.apply(this);
 
@@ -44,7 +44,6 @@ class Context extends CGState
         this.glUseHalfFloatTex = false;
         this.clearCanvasTransparent = true;
         this.clearCanvasDepth = true;
-        this.patch = _patch;
         this.debugOneFrame = false;
         this.checkGlErrors = false; // true is slow // false should be default...
         this.maxTextureUnits = 0;
