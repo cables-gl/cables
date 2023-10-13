@@ -298,11 +298,23 @@ function computeIBLLUT(size)
     {
         let isFloatingPointTexture = !inForce8bitIbl.get();
 
-        iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
-            "isFloatingPointTexture": isFloatingPointTexture,
-            "filter": CGL.Texture.FILTER_LINEAR,
-            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-        });
+        if(isFloatingPointTexture)
+        {
+            iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
+                "isFloatingPointTexture": true,
+                "pixelFormat": CGL.Texture.PFORMATSTR_RG16F,
+                "filter": CGL.Texture.FILTER_LINEAR,
+                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+            });
+        }
+        else
+        {
+            iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
+                "isFloatingPointTexture": false,
+                "filter": CGL.Texture.FILTER_LINEAR,
+                "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+            });
+        }
     }
 
     cgl.frameStore.renderOffscreen = true;
