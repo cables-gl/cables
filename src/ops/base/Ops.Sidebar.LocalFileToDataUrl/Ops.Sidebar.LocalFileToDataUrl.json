@@ -61,6 +61,14 @@
             {
                 "type": 5,
                 "name": "Data URL"
+            },
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 2,
+                "name": "File Object"
             }
         ]
     },
