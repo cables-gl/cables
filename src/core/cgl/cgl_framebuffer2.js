@@ -251,6 +251,20 @@ Framebuffer2.prototype.setSize = function (w, h)
 
                 internFormat = this._cgl.gl.R11F_G11F_B10F;
             }
+            else if (this._options.pixelFormat == Texture.PFORMATSTR_RG16F)
+            {
+                const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+
+                if (!this._cgl.enableExtension("OES_texture_float_linear"))
+                {
+                    console.log("no linear pixelformat,switching to nearest");
+                    this._options.filter = Texture.FILTER_NEAREST;
+                    this.setFilter(this._options.filter);
+                }
+
+
+                internFormat = this._cgl.gl.RG16F;
+            }
         }
 
         if (this._options.multisampling && this._options.multisamplingSamples)
