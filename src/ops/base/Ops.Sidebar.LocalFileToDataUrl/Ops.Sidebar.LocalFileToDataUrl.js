@@ -1,16 +1,18 @@
 // inputs
-const parentPort = op.inObject("link", "element");
-const labelPort = op.inString("Text", "Select File:");
-const inId = op.inValueString("Id", "");
-const inVisible = op.inBool("Visible", true);
-const inGreyOut = op.inBool("Grey Out", false);
-const inOpenDialog = op.inTriggerButton("Show Dialog");
-const reset = op.inTriggerButton("Reset");
+const
+    parentPort = op.inObject("link", "element"),
+    labelPort = op.inString("Text", "Select File:"),
+    inId = op.inValueString("Id", ""),
+    inVisible = op.inBool("Visible", true),
+    inGreyOut = op.inBool("Grey Out", false),
+    inOpenDialog = op.inTriggerButton("Show Dialog"),
+    reset = op.inTriggerButton("Reset"),
 
-// outputs
+    siblingsPort = op.outObject("childs"),
+    outDataURL = op.outString("Data URL"),
+    outFilename = op.outString("Filename"),
+    outObject = op.outObject("File Object");
 
-const siblingsPort = op.outObject("childs");
-const outDataURL = op.outString("Data URL");
 outDataURL.ignoreValueSerialize = true;
 
 // vars
@@ -96,8 +98,18 @@ function handleFileSelect(evt)
         outDataURL.set(e.target.result);
     };
 
-    if (evt.target.files[0]) reader.readAsDataURL(evt.target.files[0]);
-    else outDataURL.set("");
+    if (evt.target.files[0])
+    {
+        reader.readAsDataURL(evt.target.files[0]);
+        outFilename.set(evt.target.files[0].name);
+        outObject.set(evt.target.files[0]);
+    }
+    else
+    {
+        outDataURL.set("");
+        outFilename.set("");
+        outObject.set(null);
+    }
 }
 
 // events

@@ -643,6 +643,7 @@ Patch.prototype.exec = function (timestamp)
 {
     if (!this._renderOneFrame && (this._paused || this.aborted)) return;
     this.emitEvent("reqAnimFrame");
+    cancelAnimationFrame(this._animReq);
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
     if (this.config.fpsLimit)

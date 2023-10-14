@@ -1,111 +1,132 @@
-import { CGP } from "../cgp";
 import { EventTarget } from "../eventtarget";
+import { CgCanvas } from "./cg_canvas";
 import { CG } from "./cg_constants";
 import { MatrixStack } from "./cg_matrixstack";
 import Preprocessor from "./preproc";
 
-const CGState = function ()
+
+// const CGState ()
+class CGState extends EventTarget
 {
-    EventTarget.apply(this);
+    constructor(_patch)
+    {
+        super();
+        // this.canvas = null;
 
-    this.canvas = null;
+        this.fpsCounter = new CABLES.CG.FpsCounter();
+        this._identView = vec3.create();
+        this._ident = vec3.create();
+        vec3.set(this._identView, 0, 0, -2);
+        vec3.set(this._ident, 0, 0, 0);
 
-    this.fpsCounter = new CABLES.CG.FpsCounter();
-    this._identView = vec3.create();
-    this._ident = vec3.create();
-    vec3.set(this._identView, 0, 0, -2);
-    vec3.set(this._ident, 0, 0, 0);
+        this.patch = _patch;
 
 
-    this.DEPTH_COMPARE_FUNC_NEVER = 0;
-    this.DEPTH_COMPARE_FUNC_LESS = 1;
-    this.DEPTH_COMPARE_FUNC_EQUAL = 2;
-    this.DEPTH_COMPARE_FUNC_LESSEQUAL = 3;
-    this.DEPTH_COMPARE_FUNC_GREATER = 4;
-    this.DEPTH_COMPARE_FUNC_NOTEQUAL = 5;
-    this.DEPTH_COMPARE_FUNC_GREATEREQUAL = 6;
-    this.DEPTH_COMPARE_FUNC_ALWAYS = 7;
 
-    /**
-         * Current projection matrix
-         * @memberof Context
-         * @instance
-         * @type {mat4}
-         */
-    this.pMatrix = mat4.create();
+        this.DEPTH_COMPARE_FUNC_NEVER = 0;
+        this.DEPTH_COMPARE_FUNC_LESS = 1;
+        this.DEPTH_COMPARE_FUNC_EQUAL = 2;
+        this.DEPTH_COMPARE_FUNC_LESSEQUAL = 3;
+        this.DEPTH_COMPARE_FUNC_GREATER = 4;
+        this.DEPTH_COMPARE_FUNC_NOTEQUAL = 5;
+        this.DEPTH_COMPARE_FUNC_GREATEREQUAL = 6;
+        this.DEPTH_COMPARE_FUNC_ALWAYS = 7;
 
-    /**
-          * Current model matrix
-          * @memberof Context
-          * @instance
-          * @type {mat4}
-          */
-    this.mMatrix = mat4.create();
 
-    /**
-          * Current view matrix
-          * @memberof Context
-          * @instance
-          * @type {mat4}
-          */
-    this.vMatrix = mat4.create();
-    this._textureslots = [];
+        /**
+             * Current projection matrix
+             * @memberof Context
+             * @instance
+             * @type {mat4}
+             */
+        this.pMatrix = mat4.create();
 
-    this._pMatrixStack = new MatrixStack();
-    this._mMatrixStack = new MatrixStack();
-    this._vMatrixStack = new MatrixStack();
+        /**
+             * Current model matrix
+             * @memberof Context
+             * @instance
+             * @type {mat4}
+             */
+        this.mMatrix = mat4.create();
 
-    this.canvasWidth = -1;
-    this.canvasHeight = -1;
-    this.canvasScale = 1;
+        /**
+             * Current view matrix
+             * @memberof Context
+             * @instance
+             * @type {mat4}
+             */
+        this.vMatrix = mat4.create();
+        this._textureslots = [];
 
-    this.canvas = null;
-    this.pixelDensity = 1;
-    mat4.identity(this.mMatrix);
-    mat4.identity(this.vMatrix);
+        this._pMatrixStack = new MatrixStack();
+        this._mMatrixStack = new MatrixStack();
+        this._vMatrixStack = new MatrixStack();
 
-    this.getGApiName = () =>
+        this.canvasScale = 1;
+
+        mat4.identity(this.mMatrix);
+        mat4.identity(this.vMatrix);
+    }
+
+    get canvasWidth()
+    {
+        return this.cgCanvas.canvasWidth;
+    }
+
+    get canvasHeight()
+    {
+        return this.cgCanvas.canvasHeight;
+    }
+
+    set pixelDensity(p)
+    {
+        this.cgCanvas.pixelDensity = p;
+    }
+
+    get pixelDensity()
+    {
+        return this.cgCanvas.pixelDensity;
+    }
+
+
+    getGApiName()
     {
         return ["WebGL", "WebGPU"][this.gApi];
-    };
+    }
 
-    this.setCanvas = function (canv)
+    get canvas()
     {
-        if (typeof canv === "string") this.canvas = document.getElementById(canv);
-        else this.canvas = canv;
+        return this.cgCanvas.canvasEle;
+    }
+
+    setCanvas(canv)
+    {
+        if (typeof canv === "string") canv = document.getElementById(canv);
+
+        this.cgCanvas = new CgCanvas({ "canvasEle": canv, "cg": this });
 
         if (this._setCanvas) this._setCanvas(canv);
 
         this.updateSize();
-    };
+    }
 
-    this.updateSize = function ()
+    updateSize()
     {
-        this.canvas.width = this.canvasWidth = this.canvas.clientWidth * this.pixelDensity;
-        this.canvas.height = this.canvasHeight = this.canvas.clientHeight * this.pixelDensity;
-    };
+        this.cgCanvas.updateSize();
+    }
 
-    this.setSize = function (w, h, ignorestyle)
+    setSize(w, h, ignorestyle)
     {
-        if (!ignorestyle)
-        {
-            this.canvas.style.width = w + "px";
-            this.canvas.style.height = h + "px";
-        }
+        this.cgCanvas.setSize(w, h, ignorestyle);
+    }
 
-        this.canvas.width = w * this.pixelDensity;
-        this.canvas.height = h * this.pixelDensity;
-
-        this.updateSize();
-    };
-
-    this._resizeToWindowSize = function ()
+    _resizeToWindowSize()
     {
         this.setSize(window.innerWidth, window.innerHeight);
         this.updateSize();
-    };
+    }
 
-    this._resizeToParentSize = function ()
+    _resizeToParentSize()
     {
         const p = this.canvas.parentElement;
         if (!p)
@@ -116,9 +137,9 @@ const CGState = function ()
         this.setSize(p.clientWidth, p.clientHeight);
 
         this.updateSize();
-    };
+    }
 
-    this.setAutoResize = function (parent)
+    setAutoResize(parent)
     {
         window.removeEventListener("resize", this._resizeToWindowSize.bind(this));
         window.removeEventListener("resize", this._resizeToParentSize.bind(this));
@@ -134,7 +155,7 @@ const CGState = function ()
             window.addEventListener("resize", this._resizeToParentSize.bind(this));
             this._resizeToParentSize();
         }
-    };
+    }
 
 
     /**
@@ -144,10 +165,10 @@ const CGState = function ()
  * @instance
  * @param {mat4} projectionmatrix
  */
-    this.pushPMatrix = function ()
+    pushPMatrix()
     {
         this.pMatrix = this._pMatrixStack.push(this.pMatrix);
-    };
+    }
 
     /**
   * pop projection matrix stack
@@ -156,16 +177,16 @@ const CGState = function ()
   * @instance
   * @returns {mat4} current projectionmatrix
   */
-    this.popPMatrix = function ()
+    popPMatrix()
     {
         this.pMatrix = this._pMatrixStack.pop();
         return this.pMatrix;
-    };
+    }
 
-    this.getProjectionMatrixStateCount = function ()
+    getProjectionMatrixStateCount()
     {
         return this._pMatrixStack.stateCounter;
-    };
+    }
 
     /**
   * push a matrix to the model matrix stack
@@ -180,10 +201,10 @@ const CGState = function ()
   * trigger.trigger();
   * cgl.popModelMatrix();
   */
-    this.pushModelMatrix = function ()
+    pushModelMatrix()
     {
         this.mMatrix = this._mMatrixStack.push(this.mMatrix);
-    };
+    }
 
     /**
   * pop model matrix stack
@@ -192,13 +213,13 @@ const CGState = function ()
   * @instance
   * @returns {mat4} current modelmatrix
   */
-    this.popModelMatrix = function ()
+    popModelMatrix()
     {
         // todo: DEPRECATE
         // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
         this.mMatrix = this._mMatrixStack.pop();
         return this.mMatrix;
-    };
+    }
 
     /**
   * get model matrix
@@ -207,10 +228,10 @@ const CGState = function ()
   * @instance
   * @returns {mat4} current modelmatrix
   */
-    this.modelMatrix = function ()
+    modelMatrix()
     {
         return this.mMatrix;
-    };
+    }
 
 
     /**
@@ -220,10 +241,10 @@ const CGState = function ()
  * @instance
  * @param {mat4} viewmatrix
  */
-    this.pushViewMatrix = function ()
+    pushViewMatrix()
     {
         this.vMatrix = this._vMatrixStack.push(this.vMatrix);
-    };
+    }
 
     /**
   * pop view matrix stack
@@ -233,17 +254,17 @@ const CGState = function ()
   * @returns {mat4} current viewmatrix
   * @function
   */
-    this.popViewMatrix = function ()
+    popViewMatrix()
     {
         this.vMatrix = this._vMatrixStack.pop();
-    };
+    }
 
-    this.getViewMatrixStateCount = function ()
+    getViewMatrixStateCount()
     {
         return this._vMatrixStack.stateCounter;
-    };
+    }
 
-    this._startMatrixStacks = (identTranslate, identTranslateView) =>
+    _startMatrixStacks(identTranslate, identTranslateView)
     {
         identTranslate = identTranslate || this._ident;
         identTranslateView = identTranslateView || this._identView;
@@ -258,14 +279,16 @@ const CGState = function ()
         this.pushPMatrix();
         this.pushModelMatrix();
         this.pushViewMatrix();
-    };
+    }
 
-    this._endMatrixStacks = () =>
+    _endMatrixStacks()
     {
         this.popViewMatrix();
         this.popModelMatrix();
         this.popPMatrix();
-    };
-};
+    }
+}
 
 export { CGState };
+
+

@@ -206,6 +206,7 @@ function updateDynamicStyles()
         });
     }
     const newDynamicStyle = document.createElement("style");
+    newDynamicStyle.classList.add("cablesEle");
     newDynamicStyle.classList.add(CSS_ELEMENT_DYNAMIC_CLASS);
     let cssText = ".sidebar--closed .sidebar__close-button { ";
     cssText += "opacity: " + minimizedOpacityPort.get();
@@ -311,8 +312,10 @@ function initSidebarCss()
         });
     }
     const newStyle = document.createElement("style");
+
     newStyle.innerHTML = attachments.style_css;
     newStyle.classList.add(CSS_ELEMENT_CLASS);
+    newStyle.classList.add("cablesEle");
     document.body.appendChild(newStyle);
 }
 

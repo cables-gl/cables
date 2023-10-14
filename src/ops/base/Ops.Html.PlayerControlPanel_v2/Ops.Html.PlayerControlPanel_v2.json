@@ -74,7 +74,7 @@
             {
                 "type": 0,
                 "name": "Dragging",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 2,

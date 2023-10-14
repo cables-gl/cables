@@ -6,6 +6,15 @@ import { CGState } from "../cg/cg_state";
 import { CG } from "../cg/cg_constants";
 
 
+
+
+
+
+
+
+
+
+
 /**
  * cables gl context/state manager
  * @external CGL
@@ -13,101 +22,112 @@ import { CG } from "../cg/cg_constants";
  * @class
  * @hideconstructor
  */
-const Context = function (_patch)
+// const Context(_patch)
+class Context extends CGState
 {
-    // EventTarget.apply(this);
-    CGState.apply(this);
+    constructor(_patch)
+    {
+        super(_patch);
+        // EventTarget.apply(this);
+        // CGState.apply(this);
 
-    this.gApi = CG.GAPI_WEBGL;
-    this.aborted = false;
+        this.gApi = CG.GAPI_WEBGL;
+        this.aborted = false;
 
-    this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
-    this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
+        this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
+        this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
-    this.profileData = new ProfileData(this);
-    this._log = new Logger("cgl_context");
-    this._viewPort = [0, 0, 0, 0];
-    this.glVersion = 0;
-    this.glUseHalfFloatTex = false;
-    this.clearCanvasTransparent = true;
-    this.clearCanvasDepth = true;
-    this.patch = _patch;
-    this.debugOneFrame = false;
-    this.checkGlErrors = false; // true is slow // false should be default...
-    this.maxTextureUnits = 0;
-    this.maxVaryingVectors = 0;
-    this.currentProgram = null;
-    this._hadStackError = false;
-    this.glSlowRenderer = false;
-    this._isSafariCrap = false;
+        this.profileData = new ProfileData(this);
+        this._log = new Logger("cgl_context");
+        this._viewPort = [0, 0, 0, 0];
+        this.glVersion = 0;
+        this.glUseHalfFloatTex = false;
+        this.clearCanvasTransparent = true;
+        this.clearCanvasDepth = true;
+        this.debugOneFrame = false;
+        this.checkGlErrors = false; // true is slow // false should be default...
+        this.maxTextureUnits = 0;
+        this.maxVaryingVectors = 0;
+        this.currentProgram = null;
+        this._hadStackError = false;
+        this.glSlowRenderer = false;
+        this._isSafariCrap = false;
 
-    this.temporaryTexture = null;
-    this.frameStore = {};
-    this._onetimeCallbacks = [];
-    this.gl = null;
+        this.temporaryTexture = null;
+        this.frameStore = {};
+        this._onetimeCallbacks = [];
+        this.gl = null;
 
-    this._cursor = "auto";
-    this._currentCursor = "";
+        this._cursor = "auto";
+        this._currentCursor = "";
 
-    this._viewPortStack = [];
-    this._glFrameBufferStack = [];
-    this._frameBufferStack = [];
-    this._shaderStack = [];
-    this._stackDepthTest = [];
-
+        this._viewPortStack = [];
+        this._glFrameBufferStack = [];
+        this._frameBufferStack = [];
+        this._shaderStack = [];
+        this._stackDepthTest = [];
 
 
-    Object.defineProperty(this, "viewPort", {
-        get()
+        this._simpleShader = new Shader(this, "simpleshader");
+        this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+        this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
+
+        this._currentShader = this._simpleShader;
+
+
+        this._oldCanvasWidth = -1;
+        this._oldCanvasHeight = -1;
+    }
+
+
+
+    get viewPort()
+    {
+        if (this._viewPortStack.length > 3)
         {
-            if (this._viewPortStack.length > 3)
-            {
-                const l = this._viewPortStack.length;
+            const l = this._viewPortStack.length;
 
-                return [
-                    this._viewPortStack[l - 4],
-                    this._viewPortStack[l - 3],
-                    this._viewPortStack[l - 2],
-                    this._viewPortStack[l - 1]
-                ];
-            }
-            else
-            {
-                // workaround pre viewport stack times / or+and initial value...
-
-                return this._viewPort;
-            }
+            return [
+                this._viewPortStack[l - 4],
+                this._viewPortStack[l - 3],
+                this._viewPortStack[l - 2],
+                this._viewPortStack[l - 1]
+            ];
         }
-    });
-
-
-    Object.defineProperty(this, "mvMatrix", {
-        get()
+        else
         {
-            return this.mMatrix;
-        },
-        set(m)
-        {
-            this.mMatrix = m;
-        },
-    }); // todo: deprecated
+            // workaround pre viewport stack times / or+and initial value...
 
-    this._simpleShader = new Shader(this, "simpleshader");
-    this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-    this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
-
-    let currentShader = this._simpleShader;
+            return this._viewPort;
+        }
+    }
 
 
-    this.exitError = function (msgId, msg)
+
+    get mvMatrix() // deprecate
+    {
+        return this.mMatrix;
+    }
+
+    set mvMatrix(m) // deprecate
+    {
+        this.mMatrix = m;
+    }
+
+
+    exitError(msgId, msg)
     {
         console.log(msgId, msg);
         this.patch.exitError(msgId, msg);
         this.aborted = true;
-    };
+    }
 
-    this._setCanvas = function (canv)
+    _setCanvas(canv)
     {
+        if (!canv)
+        {
+            this._log.stack("_setCanvas undef");
+        }
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = false;
@@ -126,8 +146,7 @@ const Context = function (_patch)
             this.glUseHalfFloatTex = true;
         }
 
-
-        if (!this.patch.config.canvas.forceWebGl1) this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
+        if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
 
         if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
@@ -135,7 +154,7 @@ const Context = function (_patch)
         }
         else
         {
-            this.gl = this.canvas.getContext("webgl", this.patch.config.canvas) || this.canvas.getContext("experimental-webgl", this.patch.config.canvas);
+            this.gl = canv.getContext("webgl", this.patch.config.canvas) || canv.getContext("experimental-webgl", this.patch.config.canvas);
             this.glVersion = 1;
 
             // safari
@@ -174,7 +193,6 @@ const Context = function (_patch)
             if (this.glRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 
-
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
             this._log.error("canvas lost...", event);
@@ -202,7 +220,6 @@ const Context = function (_patch)
             }
         }
 
-
         this.DEPTH_FUNCS = [
             this.gl.NEVER,
             this.gl.ALWAYS,
@@ -219,9 +236,9 @@ const Context = function (_patch)
             this.gl.FRONT,
             this.gl.FRONT_AND_BACK
         ];
-    };
+    }
 
-    this.getInfo = function ()
+    getInfo()
     {
         return {
             "glVersion": this.glVersion,
@@ -234,10 +251,8 @@ const Context = function (_patch)
             "maxUniformsVert": this.maxUniformsVert,
             "maxSamples": this.maxSamples
         };
-    };
+    }
 
-    let oldCanvasWidth = -1;
-    let oldCanvasHeight = -1;
 
 
 
@@ -250,7 +265,7 @@ const Context = function (_patch)
      */
 
 
-    this.popViewPort = function ()
+    popViewPort()
     {
         this._viewPortStack.pop();
         this._viewPortStack.pop();
@@ -269,7 +284,7 @@ const Context = function (_patch)
             // this.gl.viewport(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
             this.setViewPort(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
         }
-    };
+    }
 
     /**
      * @function pushViewPort
@@ -282,37 +297,37 @@ const Context = function (_patch)
      * @param {Number} h
      */
 
-    this.pushViewPort = function (x, y, w, h)
+    pushViewPort(x, y, w, h)
     {
         this._viewPortStack.push(x, y, w, h);
         this.setViewPort(x, y, w, h);
-    };
+    }
 
 
     // old
-    this.getViewPort = function ()
+    getViewPort()
     {
         return this._viewPort;
-    };
+    }
 
     // old
-    this.resetViewPort = function ()
+    resetViewPort()
     {
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
-    };
+    }
 
     // old
-    this.setViewPort = function (x, y, w, h)
+    setViewPort(x, y, w, h)
     {
         this._viewPort[0] = Math.round(x);
         this._viewPort[1] = Math.round(y);
         this._viewPort[2] = Math.round(w);
         this._viewPort[3] = Math.round(h);
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
-    };
+    }
 
 
-    this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
+    screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
         if (doScreenshotClearAlpha)
         {
@@ -330,9 +345,9 @@ const Context = function (_patch)
                 else this._log.log("no screenshot callback...");
             }, mimeType, quality);
         }
-    };
+    }
 
-    this.endFrame = function ()
+    endFrame()
     {
         if (this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
@@ -354,48 +369,44 @@ const Context = function (_patch)
 
         this._frameStarted = false;
 
-        if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
+        if (this._oldCanvasWidth != this.canvasWidth || this._oldCanvasHeight != this.canvasHeight)
         {
-            oldCanvasWidth = this.canvasWidth;
-            oldCanvasHeight = this.canvasHeight;
-            this.setSize(this.canvasWidth / this.pixelDensity, this.canvasHeight / this.pixelDensity);
-            this.updateSize();
-
+            this._oldCanvasWidth = this.canvasWidth;
+            this._oldCanvasHeight = this.canvasHeight;
+            // this.setSize(this.canvasWidth / this.pixelDensity, this.canvasHeight / this.pixelDensity);
+            // this.updateSize();
             this.emitEvent("resize");
         }
 
         if (this._cursor != this._currentCursor)
-        {
             this._currentCursor = this.canvas.style.cursor = this._cursor;
-        }
-
 
         this.emitEvent("endframe");
 
         this.fpsCounter.endFrame();
-    };
+    }
 
-    this.logStackError = function (str)
+    logStackError(str)
     {
         if (!this._hadStackError)
         {
             this._hadStackError = true;
             this._log.warn("[" + this.canvas.id + "]: ", str);
         }
-    };
+    }
 
     // shader stack
-    this.getShader = function ()
+    getShader()
     {
-        if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
+        if (this._currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == this._currentShader.offScreenPass) === true) return this._currentShader;
 
         for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
-    };
+    }
 
-    this.getDefaultShader = function ()
+    getDefaultShader()
     {
         return this._simpleShader;
-    };
+    }
 
     /**
      * push a shader to the shader stack
@@ -405,8 +416,8 @@ const Context = function (_patch)
      * @param {Object} shader
      * @function
      */
-    this.pushShader =
-    this.setShader = function (shader)
+
+    pushShader(shader)
     {
         if (this.frameStore.forceShaderMods)
         {
@@ -423,8 +434,9 @@ const Context = function (_patch)
         }
 
         this._shaderStack.push(shader);
-        currentShader = shader;
-    };
+        this._currentShader = shader;
+    }
+
 
     /**
      * pop current used shader from shader stack
@@ -433,8 +445,7 @@ const Context = function (_patch)
      * @instance
      * @function
      */
-    this.popShader =
-    this.setPreviousShader = function ()
+    setPreviousShader()
     {
         if (this.frameStore.forceShaderMods)
         {
@@ -449,8 +460,8 @@ const Context = function (_patch)
 
         if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
         this._shaderStack.pop();
-        currentShader = this._shaderStack[this._shaderStack.length - 1];
-    };
+        this._currentShader = this._shaderStack[this._shaderStack.length - 1];
+    }
 
     /**
      * push a framebuffer to the framebuffer stack
@@ -460,10 +471,10 @@ const Context = function (_patch)
      * @param {Object} framebuffer
      * @function
      */
-    this.pushGlFrameBuffer = function (fb)
+    pushGlFrameBuffer(fb)
     {
         this._glFrameBufferStack.push(fb);
-    };
+    }
 
     /**
      * pop framebuffer stack
@@ -472,12 +483,12 @@ const Context = function (_patch)
      * @instance
      * @returns {Object} current framebuffer or null
      */
-    this.popGlFrameBuffer = function ()
+    popGlFrameBuffer()
     {
         if (this._glFrameBufferStack.length == 0) return null;
         this._glFrameBufferStack.pop();
         return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
-    };
+    }
 
     /**
      * get current framebuffer
@@ -486,11 +497,11 @@ const Context = function (_patch)
      * @instance
      * @returns {Object} current framebuffer or null
      */
-    this.getCurrentGlFrameBuffer = function ()
+    getCurrentGlFrameBuffer()
     {
         if (this._glFrameBufferStack.length === 0) return null;
         return this._glFrameBufferStack[this._glFrameBufferStack.length - 1];
-    };
+    }
 
     /**
      * push a framebuffer to the framebuffer stack
@@ -499,10 +510,10 @@ const Context = function (_patch)
      * @instance
      * @param {Framebuffer} framebuffer
      */
-    this.pushFrameBuffer = function (fb)
+    pushFrameBuffer(fb)
     {
         this._frameBufferStack.push(fb);
-    };
+    }
 
     /**
      * pop framebuffer stack
@@ -511,12 +522,12 @@ const Context = function (_patch)
      * @instance
      * @returns {Framebuffer} current framebuffer or null
      */
-    this.popFrameBuffer = function ()
+    popFrameBuffer()
     {
         if (this._frameBufferStack.length == 0) return null;
         this._frameBufferStack.pop();
         return this._frameBufferStack[this._frameBufferStack.length - 1];
-    };
+    }
 
     /**
      * get current framebuffer
@@ -525,14 +536,14 @@ const Context = function (_patch)
      * @instance
      * @returns {Framebuffer} current framebuffer or null
      */
-    this.getCurrentFrameBuffer = function ()
+    getCurrentFrameBuffer()
     {
         if (this._frameBufferStack.length === 0) return null;
         return this._frameBufferStack[this._frameBufferStack.length - 1];
-    };
+    }
 
 
-    this.renderStart = function (cgl, identTranslate, identTranslateView)
+    renderStart(cgl, identTranslate, identTranslateView)
     {
         this.fpsCounter.startFrame();
         this.pushDepthTest(true);
@@ -569,9 +580,9 @@ const Context = function (_patch)
         }
 
         this.emitEvent("beginFrame");
-    };
+    }
 
-    this.renderEnd = function (cgl)
+    renderEnd(cgl)
     {
         this._endMatrixStacks();
 
@@ -586,17 +597,17 @@ const Context = function (_patch)
         cgl.endFrame();
 
         this.emitEvent("endFrame");
-    };
+    }
 
-    this.getTexture = function (slot)
+    getTexture(slot)
     {
         return this._textureslots[slot];
-    };
+    }
 
-    this.hasFrameStarted = function ()
+    hasFrameStarted()
     {
         return this._frameStarted;
-    };
+    }
 
     /**
      * log warning to console if the rendering of one frame has not been started / handy to check for async problems
@@ -604,16 +615,16 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.checkFrameStarted = function (string)
+    checkFrameStarted(string)
     {
         if (!this._frameStarted)
         {
             this._log.warn("frame not started " + string);
             this.patch.printTriggerStack();
         }
-    };
+    }
 
-    this.setTexture = function (slot, t, type)
+    setTexture(slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
 
@@ -639,18 +650,18 @@ const Context = function (_patch)
         // }
 
         return true;
-    };
+    }
 
-    this.fullScreen = function ()
+    fullScreen()
     {
         if (this.canvas.requestFullscreen) this.canvas.requestFullscreen();
         else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
         else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
-    };
+    }
 
 
-    this.printError = function (str)
+    printError(str)
     {
         if (!this.checkGlErrors) return;
         let found = false;
@@ -687,9 +698,9 @@ const Context = function (_patch)
         error = this.gl.getError();
 
         return found;
-    };
+    }
 
-    this.saveScreenshot = function (filename, cb, pw, ph, noclearalpha)
+    saveScreenshot(filename, cb, pw, ph, noclearalpha)
     {
         this.patch.renderOneFrame();
 
@@ -742,9 +753,12 @@ const Context = function (_patch)
                 this._log.log("screenshot: no blob");
             }
         }.bind(this), noclearalpha);
-    };
-};
+    }
+}
 
+
+Context.prototype.popShader = Context.prototype.setPreviousShader;
+Context.prototype.setShader = Context.prototype.pushShader;
 
 /**
  * execute the callback next frame, once

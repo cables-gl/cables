@@ -20,11 +20,6 @@ hdpi.onChange = function ()
 
     op.patch.cgl.updateSize();
     if (CABLES.UI) gui.setLayout();
-
-    // inUnit.setUiAttribs({ "greyout": !hdpi.get() });
-
-    // if (!hdpi.get())inUnit.set("CSS");
-    // else inUnit.set("Display");
 };
 
 active.onChange = function ()
@@ -154,6 +149,8 @@ function render(time)
     if (cgl.aborted || cgl.canvas.clientWidth === 0 || cgl.canvas.clientHeight === 0) return;
 
     op.patch.cg = cgl;
+
+    if (hdpi.get())op.patch.cgl.pixelDensity = window.devicePixelRatio;
 
     const startTime = performance.now();
 

@@ -282,6 +282,13 @@ Texture.prototype.setSize = function (w, h)
                 dataType = this._cgl.gl.FLOAT;
             }
 
+            if (this.pixelFormat == Texture.PFORMATSTR_RG16F)
+            {
+                internalFormat = this._cgl.gl.RG16F;
+                dataType = this._cgl.gl.FLOAT;
+                dataFormat = this._cgl.gl.RG;
+            }
+
             if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
             {
                 internalFormat = this._cgl.gl.R11F_G11F_B10F;
@@ -1043,7 +1050,7 @@ Texture.getTexInfo = function (tex)
     const obj = {};
 
     obj.name = tex.name;
-    obj["power of two"] = Texture.isPowerOfTwo();
+    obj["power of two"] = tex.isPowerOfTwo();
     obj.size = tex.width + " x " + tex.height;
 
     let targetString = tex.texTarget;
@@ -1093,12 +1100,13 @@ Texture.PFORMATSTR_RGBA8UB = "RGBA 8bit ubyte";
 Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
+Texture.PFORMATSTR_RG16F = "RG 16bit float";
 
-Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
+Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RG16F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
 
 Texture.isPixelFormatFloat = (pxlfrmt) =>
 {
-    return (pxlfrmt == Texture.PFORMATSTR_RGBA32F || pxlfrmt == Texture.PFORMATSTR_R11FG11FB10F || pxlfrmt == Texture.PFORMATSTR_RGBA16F);
+    return (pxlfrmt == Texture.PFORMATSTR_RGBA32F || pxlfrmt == Texture.PFORMATSTR_R11FG11FB10F || pxlfrmt == Texture.PFORMATSTR_RGBA16F || pxlfrmt == Texture.PFORMATSTR_RG16F);
 };
 
 

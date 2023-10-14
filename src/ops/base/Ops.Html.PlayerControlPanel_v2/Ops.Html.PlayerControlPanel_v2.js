@@ -58,6 +58,7 @@ let eleId = "css_progressui_" + CABLES.uuid();
 const styleEle = document.createElement("style");
 styleEle.type = "text/css";
 styleEle.id = eleId;
+styleEle.classList.add("cablesEle");
 
 let head = document.getElementsByTagName("body")[0];
 head.appendChild(styleEle);

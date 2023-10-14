@@ -10,54 +10,54 @@ import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
  * @class
  * @hideconstructor
  */
-const Context = function (_patch)
+// const Context = function (_patch)
+class WebGpuContext extends CGState
 {
-    CGState.apply(this);
+    constructor(_patch)
+    {
+        super();
 
-    this.patch = _patch;
+        this.patch = _patch;
 
-    this.gApi = CG.GAPI_WEBGPU;
-    this._viewport = [0, 0, 256, 256];
-    this._shaderStack = [];
-    this._simpleShader = null;
+        this.gApi = CG.GAPI_WEBGPU;
+        this._viewport = [0, 0, 256, 256];
+        this._shaderStack = [];
+        this._simpleShader = null;
 
+        this._stackCullFaceFacing = [];
+        this._stackDepthTest = [];
+        this._stackCullFace = [];
+        this._stackDepthFunc = [];
+        this._stackDepthWrite = [];
 
-    this.DEPTH_FUNCS = [
-        "never",
-        "always",
-        "less",
-        "less-equal",
-        "greater",
-        "greater-equal",
-        "equal",
-        "not-equal"
-    ];
+        this.DEPTH_FUNCS = [
+            "never",
+            "always",
+            "less",
+            "less-equal",
+            "greater",
+            "greater-equal",
+            "equal",
+            "not-equal"
+        ];
 
-    this.CULL_MODES = [
-        "none",
-        "back",
-        "front",
-        "none" // both does not exist in webgpu
-    ];
-
-
-
-
-
-    // this._simpleShader = new Shader(this, "simpleshader");
-
-    // this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-    // this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
+        this.CULL_MODES = [
+            "none",
+            "back",
+            "front",
+            "none" // both does not exist in webgpu
+        ];
+    }
 
 
     /// ////////////////////
 
-    this.getViewPort = () =>
+    getViewPort()
     {
         return [0, 0, this.canvasWidth, this.canvasHeight];
-    };
+    }
 
-    this.renderStart = function (cgp, identTranslate, identTranslateView)
+    renderStart(cgp, identTranslate, identTranslateView)
     {
         if (!this._simpleShader)
         {
@@ -77,9 +77,9 @@ const Context = function (_patch)
         this.pushDepthFunc("less-equal");
 
         this.emitEvent("beginFrame");
-    };
+    }
 
-    this.renderEnd = () =>
+    renderEnd()
     {
         this._endMatrixStacks();
 
@@ -90,13 +90,13 @@ const Context = function (_patch)
 
         this.emitEvent("endFrame");
         this.fpsCounter.endFrame();
-    };
+    }
 
 
-    this.setViewPort = function (x, y, w, h)
+    setViewPort(x, y, w, h)
     {
         this._viewport = [x, y, w, h];
-    };
+    }
 
     /**
      * @function getViewPort
@@ -105,21 +105,21 @@ const Context = function (_patch)
      * @description get current gl viewport
      * @returns {Array} array [x,y,w,h]
      */
-    this.getViewPort = () =>
+    getViewPort()
     {
         return this._viewPort;
-    };
+    }
 
 
-    this.createMesh = function (geom, glPrimitive)
+    createMesh(geom, glPrimitive)
     {
         return new CGP.Mesh(this, geom, glPrimitive);
-    };
+    }
 
-    this.getShader = () =>
+    getShader()
     {
         return {};
-    };
+    }
 
     /**
      * push a shader to the shader stack
@@ -129,11 +129,11 @@ const Context = function (_patch)
      * @param {Object} shader
      * @function
     */
-    this.pushShader = function (shader)
+    pushShader(shader)
     {
         this._shaderStack.push(shader);
         // currentShader = shader;
-    };
+    }
 
     /**
      * pop current used shader from shader stack
@@ -142,26 +142,26 @@ const Context = function (_patch)
      * @instance
      * @function
      */
-    this.popShader = () =>
+    popShader()
     {
         if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
         this._shaderStack.pop();
         // currentShader = this._shaderStack[this._shaderStack.length - 1];
-    };
+    }
 
-    this.getShader = () =>
+    getShader()
     {
         return this._shaderStack[this._shaderStack.length - 1];
         // if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
         // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
-    };
+    }
 
-    this.pushErrorScope = () =>
+    pushErrorScope()
     {
         this.device.pushErrorScope("validation");
-    };
+    }
 
-    this.popErrorScope = function (name, cb)
+    popErrorScope(name, cb)
     {
         this.device.popErrorScope().then((error) =>
         {
@@ -174,7 +174,7 @@ const Context = function (_patch)
                 if (cb)cb(error);
             }
         });
-    };
+    }
 
     /**
      * push depth testing enabled state
@@ -183,11 +183,12 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this._stackDepthTest = [];
-    this.pushDepthTest = function (b)
+
+    pushDepthTest(b)
     {
         this._stackDepthTest.push(b);
-    };
+    }
+
     /**
      * current state of depth testing
      * @function stateDepthTest
@@ -195,10 +196,10 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.stateDepthTest = () =>
+    stateDepthTest()
     {
         return this._stackDepthTest[this._stackDepthTest.length - 1];
-    };
+    }
 
     /**
      * pop depth testing state
@@ -206,10 +207,10 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.popDepthTest = () =>
+    popDepthTest()
     {
         this._stackDepthTest.pop();
-    };
+    }
 
     // --------------------------------------
     // state depthwrite
@@ -221,12 +222,12 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this._stackDepthWrite = [];
-    this.pushDepthWrite = function (b)
+
+    pushDepthWrite(b)
     {
         b = b || false;
         this._stackDepthWrite.push(b);
-    };
+    }
 
     /**
      * current state of depth writing
@@ -235,10 +236,10 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.stateDepthWrite = () =>
+    stateDepthWrite()
     {
         return this._stackDepthWrite[this._stackDepthWrite.length - 1];
-    };
+    }
 
     /**
      * pop depth writing state
@@ -246,22 +247,15 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.popDepthWrite = () =>
+    popDepthWrite()
     {
         this._stackDepthWrite.pop();
-    };
-
-
-
-
-
-
+    }
 
 
     // --------------------------------------
     // state depthfunc
 
-    this._stackDepthFunc = [];
 
     /**
      * @function pushDepthFunc
@@ -269,10 +263,10 @@ const Context = function (_patch)
      * @instance
      * @param {string} depth compare func
      */
-    this.pushDepthFunc = function (f)
+    pushDepthFunc(f)
     {
         this._stackDepthFunc.push(f);
-    };
+    }
 
     /**
      * @function stateDepthFunc
@@ -280,11 +274,11 @@ const Context = function (_patch)
      * @instance
      * @returns {string}
      */
-    this.stateDepthFunc = () =>
+    stateDepthFunc()
     {
         if (this._stackDepthFunc.length > 0) return this._stackDepthFunc[this._stackDepthFunc.length - 1];
         return false;
-    };
+    }
 
     /**
      * pop depth compare func
@@ -292,21 +286,10 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.popDepthFunc = () =>
+    popDepthFunc()
     {
         this._stackDepthFunc.pop();
-    };
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 
@@ -320,11 +303,10 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this._stackCullFace = [];
-    this.pushCullFace = function (b)
+    pushCullFace(b)
     {
         this._stackCullFace.push(b);
-    };
+    }
 
     /**
  * current state of face culling
@@ -333,10 +315,10 @@ const Context = function (_patch)
  * @memberof Context
  * @instance
  */
-    this.stateCullFace = () =>
+    stateCullFace()
     {
         return this._stackCullFace[this._stackCullFace.length - 1];
-    };
+    }
 
     /**
  * pop face culling enabled state
@@ -344,10 +326,10 @@ const Context = function (_patch)
  * @memberof Context
  * @instance
  */
-    this.popCullFace = () =>
+    popCullFace()
     {
         this._stackCullFace.pop();
-    };
+    }
 
 
     // --------------------------------------
@@ -360,11 +342,11 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this._stackCullFaceFacing = [];
-    this.pushCullFaceFacing = function (b)
+
+    pushCullFaceFacing(b)
     {
         this._stackCullFaceFacing.push(b);
-    };
+    }
 
     /**
      * current state of face culling side
@@ -373,10 +355,10 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.stateCullFaceFacing = () =>
+    stateCullFaceFacing()
     {
         return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
-    };
+    }
 
     /**
      * pop face culling face side
@@ -384,9 +366,9 @@ const Context = function (_patch)
      * @memberof Context
      * @instance
      */
-    this.popCullFaceFacing = () =>
+    popCullFaceFacing()
     {
         this._stackCullFaceFacing.pop();
-    };
-};
-export { Context };
+    }
+}
+export { WebGpuContext };
