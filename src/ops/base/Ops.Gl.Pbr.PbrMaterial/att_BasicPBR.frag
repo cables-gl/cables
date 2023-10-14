@@ -472,8 +472,7 @@ void main()
     vec3  F0             = mix(vec3(0.04), AlbedoMap.rgb, metalness);
 
     #ifdef USE_THIN_FILM
-        float viewAngle = sqrt(1.0 + (square(NdotV) - 1.0));
-        vec3 iridescenceFresnel = evalIridescence(1.0, _ThinFilmIOR, viewAngle, _ThinFilmThickness, F0);
+        vec3 iridescenceFresnel = evalIridescence(1.0, _ThinFilmIOR, NdotV, _ThinFilmThickness, F0);
 
         F0 = mix(F0, iridescenceFresnel, _ThinFilmIntensity);
     #endif
