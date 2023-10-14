@@ -1,5 +1,6 @@
-
+#ifndef PI
 #define PI 3.14159265359
+#endif
 
 // from https://github.com/google/filament/blob/036bfa9b20d730bb8e5852ed449b024570167648/shaders/src/brdf.fs
 // modified to fit variable names / structure
