@@ -25,9 +25,13 @@ const inThinFilmIntensity = op.inFloatSlider("Thin Film Intensity", 1.0);
 const inThinFilmIOR = op.inFloat("Thin Film IOR", 1.3);
 const inThinFilmThickness = op.inFloat("Thin Film Thickness (nm)", 600.0);
 
+const inTFThicknessTexMin = op.inFloat("Thickness Tex Min", 300.0);
+const inTFThicknessTexMax = op.inFloat("Thickness Tex Max", 600.0);
+
 const inTonemapping = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
 const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 
+const inEmissionIntensity = op.inFloat("Emission Intensity", 1.0);
 const inToggleGR = op.inBool("Disable geometric roughness", false);
 const inToggleNMGR = op.inBool("Use roughness from normal map", false);
 const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
@@ -44,8 +48,11 @@ const inMipLevels = op.inInt("Num mip levels");
 const inTexAlbedo = op.inTexture("Albedo");
 const inTexAORM = op.inTexture("AORM");
 const inTexNormal = op.inTexture("Normal map");
+const inTexEmission = op.inTexture("Emission");
 const inTexHeight = op.inTexture("Height");
 const inLightmap = op.inTexture("Lightmap");
+const inTexThinFilm = op.inTexture("Thin Film");
+
 const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
@@ -63,12 +70,12 @@ op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_T
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
-op.setPortGroup("Advanced Shader Parameters", [inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight]);
-op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexHeight, inLightmap]);
+op.setPortGroup("Advanced Shader Parameters", [inEmissionIntensity, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight]);
+op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexEmission, inTexHeight, inLightmap, inTexThinFilm]);
 op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoatRoughness, inUseNormalMapForCC, inTexClearCoatNormal]);
-op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness]);
+op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness, inTFThicknessTexMin, inTFThicknessTexMax]);
 // globals
 const PBRShader = new CGL.Shader(cgl, "PBRShader");
 PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -129,6 +136,7 @@ buildShader();
 const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", 0);
 const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", 0);
 const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap", 0);
+const inEmissionUniform = new CGL.Uniform(PBRShader, "t", "_EmissionMap", 0);
 const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap", 0);
 const inIBLLUTUniform = new CGL.Uniform(PBRShader, "t", "IBL_BRDF_LUT", 0);
 const inIrradianceUniform = new CGL.Uniform(PBRShader, "tc", "_irradiance", 1);
@@ -142,6 +150,7 @@ const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularInte
 const inHeightUniform = new CGL.Uniform(PBRShader, "t", "_HeightMap", 0);
 const inLightmapUniform = new CGL.Uniform(PBRShader, "t", "_Lightmap", 0);
 const inLightmapIntensityUniform = new CGL.Uniform(PBRShader, "f", "lightmapIntensity", inLightmapIntensity);
+const inTexThinFilmUniform = new CGL.Uniform(PBRShader, "t", "_ThinFilmMap", 0);
 
 const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const inRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", inRoughness);
@@ -149,10 +158,14 @@ const inMetalnessUniform = new CGL.Uniform(PBRShader, "f", "_Metalness", inMetal
 const inHeightDepthUniform = new CGL.Uniform(PBRShader, "f", "_HeightDepth", inHeightDepth);
 const inClearCoatIntensityUniform = new CGL.Uniform(PBRShader, "f", "_ClearCoatIntensity", inClearCoatIntensity);
 const inClearCoatRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_ClearCoatRoughness", inClearCoatRoughness);
+const inEmissionIntensityUniform = new CGL.Uniform(PBRShader, "f", "_EmissionIntensity", inEmissionIntensity);
 
 const inThinFilmIntensityUniform = new CGL.Uniform(PBRShader, "f", "_ThinFilmIntensity", inThinFilmIntensity);
 const inThinFilmIORUniform = new CGL.Uniform(PBRShader, "f", "_ThinFilmIOR", inThinFilmIOR);
 const inThinFilmThicknessUniform = new CGL.Uniform(PBRShader, "f", "_ThinFilmThickness", inThinFilmThickness);
+
+const inTFThicknessTexMinUniform = new CGL.Uniform(PBRShader, "f", "_TFThicknessTexMin", inTFThicknessTexMin);
+const inTFThicknessTexMaxUniform = new CGL.Uniform(PBRShader, "f", "_TFThicknessTexMax", inTFThicknessTexMax);
 
 const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
 const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
@@ -171,11 +184,13 @@ inTexAORM.onChange =
     inTexClearCoatNormal.onChange =
     inTexAlbedo.onChange =
     inTexNormal.onChange =
+    inTexEmission.onChange =
     inTexHeight.onChange =
     inAlphaMode.onChange =
     inToggleNMGR.onChange =
     inTonemapping.onChange =
     inLightmap.onChange =
+    inTexThinFilm.onChange =
     inUseOptimizedHeight.onChange =
     inUseVertexColours.onChange =
     inToggleGR.onChange =
@@ -195,7 +210,9 @@ function updateDefines()
     PBRShader.toggleDefine("DONT_USE_NMGR", inToggleNMGR.get());
     PBRShader.toggleDefine("DONT_USE_GR", inToggleGR.get());
     PBRShader.toggleDefine("USE_THIN_FILM", inUseThinFilm.get());
-
+    PBRShader.toggleDefine("USE_EMISSION", inTexEmission.get());
+    PBRShader.toggleDefine("USE_THIN_FILM_MAP", inTexThinFilm.get());
+    
     // VERTEX_COLORS
     PBRShader.toggleDefine("VCOL_COLOUR", inVertexColourMode.get() === "colour");
     PBRShader.toggleDefine("VCOL_AORM", inVertexColourMode.get() === "AORM");
@@ -436,9 +453,11 @@ function doRender()
     if (inTexAlbedo.get()) PBRShader.pushTexture(inAlbedoUniform, inTexAlbedo.get().tex);
     if (inTexAORM.get()) PBRShader.pushTexture(inAORMUniform, inTexAORM.get().tex);
     if (inTexNormal.get()) PBRShader.pushTexture(inNormalUniform, inTexNormal.get().tex);
+    if (inTexEmission.get()) PBRShader.pushTexture(inEmissionUniform, inTexEmission.get().tex);
     if (inTexHeight.get()) PBRShader.pushTexture(inHeightUniform, inTexHeight.get().tex);
     if (inLightmap.get()) PBRShader.pushTexture(inLightmapUniform, inLightmap.get().tex);
     if (inTexClearCoatNormal.get()) PBRShader.pushTexture(inCCNormalUniform, inTexClearCoatNormal.get().tex);
+    if (inTexThinFilm.get()) PBRShader.pushTexture(inTexThinFilmUniform, inTexThinFilm.get().tex);
 
     updateLights();
     updateLightUniforms();

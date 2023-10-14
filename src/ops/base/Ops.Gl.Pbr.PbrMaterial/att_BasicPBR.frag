@@ -21,8 +21,16 @@ UNI vec3 camPos;
 #ifdef USE_NORMAL_TEX
     UNI sampler2D _NormalMap;
 #endif
+#ifdef USE_EMISSION
+    UNI sampler2D _EmissionMap;
+#endif
 #ifdef USE_HEIGHT_TEX
     UNI sampler2D _HeightMap;
+#endif
+#ifdef USE_THIN_FILM_MAP
+    UNI sampler2D _ThinFilmMap;
+    UNI float _TFThicknessTexMin;
+    UNI float _TFThicknessTexMax;
 #endif
 #ifdef USE_AORM_TEX
     UNI sampler2D _AORMMap;
@@ -30,7 +38,6 @@ UNI vec3 camPos;
     UNI float _Roughness;
     UNI float _Metalness;
 #endif
-
 #ifdef USE_LIGHTMAP
     #ifndef VERTEX_COLORS
         UNI sampler2D _Lightmap;
@@ -77,7 +84,9 @@ UNI float tonemappingExposure;
     UNI vec3 _PCboxMin;
     UNI vec3 _PCboxMax;
 #endif
-
+#ifdef USE_EMISSION
+    UNI float _EmissionIntensity;
+#endif
 IN vec2 texCoord;
 #ifdef USE_LIGHTMAP
     #ifndef ATTRIB_texCoord1
@@ -472,9 +481,14 @@ void main()
     vec3  F0             = mix(vec3(0.04), AlbedoMap.rgb, metalness);
 
     #ifdef USE_THIN_FILM
-        vec3 iridescenceFresnel = evalIridescence(1.0, _ThinFilmIOR, NdotV, _ThinFilmThickness, F0);
-
-        F0 = mix(F0, iridescenceFresnel, _ThinFilmIntensity);
+        #ifndef USE_THIN_FILM_MAP
+            vec3 iridescenceFresnel = evalIridescence(1.0, _ThinFilmIOR, NdotV, _ThinFilmThickness, F0);
+            F0 = mix(F0, iridescenceFresnel, _ThinFilmIntensity);
+        #else
+            vec3 ThinFilmParameters = texture(_ThinFilmMap, UV0).rgb;
+            vec3 iridescenceFresnel = evalIridescence(1.0, 1.0 / ThinFilmParameters.b, NdotV, mix(_TFThicknessTexMin, _TFThicknessTexMax, ThinFilmParameters.g), F0);
+            F0 = mix(F0, iridescenceFresnel, ThinFilmParameters.r);
+        #endif
     #endif
 
     #ifndef WEBGL1
@@ -568,6 +582,9 @@ void main()
         #ifdef USE_LIGHTMAP
             col.rgb += (1.0 - metalness) * albedo * Lightmap * lightmapIntensity;
         #endif
+    #endif
+    #ifdef USE_EMISSION
+    col.rgb += texture(_EmissionMap, UV0).rgb * _EmissionIntensity;
     #endif
     col.a   = 1.0;
 
