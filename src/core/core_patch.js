@@ -1385,6 +1385,7 @@ Patch.prototype.dispose = function ()
 {
     this.pause();
     this.clear();
+    this.cgl.dispose();
 };
 
 Patch.prototype.pushTriggerStack = function (p)

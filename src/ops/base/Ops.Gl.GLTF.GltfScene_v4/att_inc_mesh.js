@@ -311,7 +311,7 @@ let gltfMesh = class
 
             if (geom.tangents.length === 0 || inCalcNormals.get() != "Never")
             {
-                console.log("[gltf ]no tangents... calculating tangents...");
+                // console.log("[gltf ]no tangents... calculating tangents...");
                 geom.calcTangentsBitangents();
             }
         }

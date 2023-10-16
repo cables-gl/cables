@@ -754,6 +754,14 @@ class Context extends CGState
             }
         }.bind(this), noclearalpha);
     }
+
+
+    dispose()
+    {
+        this._simpleShader.dispose();
+        this.gl = null;
+        this.aborted = true;
+    }
 }
 
 
@@ -1259,6 +1267,8 @@ Context.prototype.enableExtension = function (name)
 
     return o;
 };
+
+
 
 
 export { Context };
