@@ -487,7 +487,10 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
-        if (op.init) op.init();
+        if (op.init)
+        {
+            op.init();
+        }
         op.emitEvent("init", fromDeserialize);
     }
     else

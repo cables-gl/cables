@@ -1771,14 +1771,14 @@ Shader.createShader = function (cgl, str, type, cglShader)
         console.warn(infoLog);
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
-        if (cgl.patch.isEditorMode())console.log("Shader error ", this._name, infoLog);
+        if (cgl.patch.isEditorMode())console.log("Shader error ", cglShader._name, infoLog, this);
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
 
-        cgl.patch.emitEvent("criticalError", { "title": "Shader error " + this._name, "text": htmlWarning });
+        cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning });
 
-        this._name = "errorshader";
+        // this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
     }
     else
