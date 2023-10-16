@@ -195,6 +195,7 @@ class Context extends CGState
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
+            if (this.aborted) return;
             this._log.error("canvas lost...", event);
             this.emitEvent("webglcontextlost");
             this.aborted = true;
