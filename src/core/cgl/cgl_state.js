@@ -759,7 +759,6 @@ class Context extends CGState
     _dispose()
     {
         this._simpleShader.dispose();
-        this.canvas = null;
         this.gl = null;
     }
 }
