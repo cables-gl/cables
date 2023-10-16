@@ -6,15 +6,6 @@ import { CGState } from "../cg/cg_state";
 import { CG } from "../cg/cg_constants";
 
 
-
-
-
-
-
-
-
-
-
 /**
  * cables gl context/state manager
  * @external CGL
