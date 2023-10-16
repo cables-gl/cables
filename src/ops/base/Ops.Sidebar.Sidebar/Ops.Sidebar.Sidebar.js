@@ -32,11 +32,8 @@ const isOpenOut = op.outBool("Opfened");
 isOpenOut.setUiAttribs({ "title": "Opened" });
 
 let sidebarEl = document.querySelector("." + SIDEBAR_ID);
-if (!sidebarEl)
-{
-    sidebarEl = initSidebarElement();
-}
-// if(!sidebarEl) return;
+if (!sidebarEl) sidebarEl = initSidebarElement();
+
 const sidebarItemsEl = sidebarEl.querySelector("." + SIDEBAR_ITEMS_CLASS);
 childrenPort.set({
     "parentElement": sidebarItemsEl,
@@ -88,6 +85,7 @@ function updateMinimize(header)
 
 side.onChange = function ()
 {
+    if (!sidebarEl) return;
     if (side.get()) sidebarEl.classList.add("sidebar-cables-right");
     else sidebarEl.classList.remove("sidebar-cables-right");
 };
@@ -146,20 +144,12 @@ function onDefaultMinimizedPortChanged()
     if (defaultMinimizedPort.get())
     {
         sidebarEl.classList.add("sidebar--closed");
-        if (visiblePort.get())
-        {
-            isOpenOut.set(false);
-        }
-        // openCloseBtn.textContent = BTN_TEXT_CLOSED;
+        if (visiblePort.get()) isOpenOut.set(false);
     }
     else
     {
         sidebarEl.classList.remove("sidebar--closed");
-        if (visiblePort.get())
-        {
-            isOpenOut.set(true);
-        }
-        // openCloseBtn.textContent = BTN_TEXT_OPEN;
+        if (visiblePort.get()) isOpenOut.set(true);
     }
 }
 
@@ -171,13 +161,11 @@ function onOpacityPortChange()
 
 function onVisiblePortChange()
 {
+    if (!sidebarEl) return;
     if (visiblePort.get())
     {
         sidebarEl.style.display = "block";
-        if (!sidebarEl.classList.contains("sidebar--closed"))
-        {
-            isOpenOut.set(true);
-        }
+        if (!sidebarEl.classList.contains("sidebar--closed")) isOpenOut.set(true);
     }
     else
     {
@@ -259,14 +247,8 @@ function initSidebarElement()
     openCloseBtn = document.createElement("div");
     openCloseBtn.classList.add(SIDEBAR_OPEN_CLOSE_BTN_CLASS);
     openCloseBtn.addEventListener("click", onOpenCloseBtnClick);
-    // openCloseBtn.textContent = BTN_TEXT_OPEN;
     element.appendChild(openCloseBtn);
-    // openCloseBtnIcon = document.createElement("span");
 
-    // openCloseBtnIcon.classList.add("sidebar__close-button-icon");
-    // openCloseBtnIcon.classList.add("iconsidebar-chevron-up");
-
-    // openCloseBtn.appendChild(openCloseBtnIcon);
 
     return element;
 }
@@ -301,12 +283,11 @@ function onOpenCloseBtnClick(ev)
 
 function initSidebarCss()
 {
-    // var cssEl = document.getElementById(CSS_ELEMENT_ID);
     const cssElements = document.querySelectorAll("." + CSS_ELEMENT_CLASS);
     // remove old script tag
     if (cssElements)
     {
-        cssElements.forEach(function (e)
+        cssElements.forEach((e) =>
         {
             e.parentNode.removeChild(e);
         });
