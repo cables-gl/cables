@@ -38,7 +38,7 @@ class SwitchPort extends Port
 
             if (!values)
             {
-                console.log("has no values");
+                console.log("switch port has no values", this);
                 return;
             }
 

@@ -1402,7 +1402,7 @@ Patch.prototype.printTriggerStack = function ()
 {
     if (this._triggerStack.length == 0)
     {
-        console.log("stack length", this._triggerStack.length); // eslint-disable-line
+        // console.log("stack length", this._triggerStack.length); // eslint-disable-line
         return;
     }
     console.groupCollapsed( // eslint-disable-line

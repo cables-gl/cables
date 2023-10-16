@@ -113,7 +113,6 @@ function updateNumVerts()
 
 function rebuild()
 {
-    console.log("rebuild");
     let verts = arr.get();
 
     if (!verts || verts.length == 0)
