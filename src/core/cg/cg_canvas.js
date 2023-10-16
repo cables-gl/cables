@@ -54,8 +54,8 @@ class CgCanvas
 
     dispose()
     {
-        this.canvasEle.remove();
-        this.canvasEle = null;
+        this._canvasEle.remove();
+        this._canvasEle = null;
     }
 }
 
