@@ -51,6 +51,12 @@ class CgCanvas
         this.canvasEle.width = this.canvasWidth = this.canvasEle.clientWidth * this.pixelDensity;
         this.canvasEle.height = this.canvasHeight = this.canvasEle.clientHeight * this.pixelDensity;
     }
+
+    dispose()
+    {
+        this.canvasEle.remove();
+        this.canvasEle = null;
+    }
 }
 
 export { CgCanvas };

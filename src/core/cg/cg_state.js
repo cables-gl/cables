@@ -287,6 +287,13 @@ class CGState extends EventTarget
         this.popModelMatrix();
         this.popPMatrix();
     }
+
+    dispose()
+    {
+        this.aborted = true;
+        if (this.cgCanvas) this.cgCanvas.dispose();
+        if (this._dispose) this._dispose();
+    }
 }
 
 export { CGState };

@@ -756,11 +756,11 @@ class Context extends CGState
     }
 
 
-    dispose()
+    _dispose()
     {
         this._simpleShader.dispose();
+        this.canvas = null;
         this.gl = null;
-        this.aborted = true;
     }
 }
 
