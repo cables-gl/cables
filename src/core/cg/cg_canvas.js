@@ -22,7 +22,7 @@ class CgCanvas
         this._oldWidthRp = -1;
         this._oldHeightRp = -1;
 
-        this.setSize(200, 200);
+        this.setSize(this.canvasWidth, this.canvasHeight);
     }
 
     get canvasEle() { return this._canvasEle; }
