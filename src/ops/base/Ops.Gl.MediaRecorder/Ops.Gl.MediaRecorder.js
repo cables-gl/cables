@@ -225,7 +225,7 @@ function interValRecording()
 {
     if (mediaRecorder.state === "inactive") return;
     mediaRecorder.resume();
-    console.log("resume...");
+
     setTimeout(
         () =>
         {
