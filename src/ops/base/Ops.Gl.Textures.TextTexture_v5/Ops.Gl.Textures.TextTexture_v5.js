@@ -23,7 +23,8 @@ const
     inLetterspacing = op.inFloat("Letter Spacing", 0),
     inLineHeight = op.inFloat("Line Height Add", 0),
 
-    inPaddingY = op.inInt("Padding Y", 3),
+    inPaddingY = op.inInt("Padding Y Top", 3),
+    inPaddingYBot = op.inInt("Padding Y Bottom", 3),
     inPaddingX = op.inInt("Padding X", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
@@ -76,6 +77,7 @@ valign.onChange =
     align.onChange =
     inLetterspacing.onChange =
     inPaddingY.onChange =
+    inPaddingYBot.onChange =
     inPaddingX.onChange =
     text.onChange =
     inFontSize.onChange =
@@ -94,6 +96,7 @@ valign.onChange =
         texSizeAutoHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
 
         inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
+        inPaddingYBot.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
     };
 
 textureOut.ignoreValueSerialize = true;
@@ -284,6 +287,7 @@ function refresh()
 
     let oneLineHeight = 0;
     let paddingY = Math.max(0, inPaddingY.get());
+    let paddingYBot = inPaddingYBot.get();
     let paddingX = Math.max(0, inPaddingX.get());
 
     autoWidth = 0;
@@ -311,7 +315,7 @@ function refresh()
     }
 
     autoWidth += paddingX * 2;
-    autoHeight += paddingY + paddingY;
+    autoHeight += paddingY + paddingYBot;
 
     let calcHeight = autoHeight;
 
