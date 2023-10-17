@@ -229,7 +229,7 @@ function interValRecording()
     setTimeout(
         () =>
         {
-            if (mediaRecorder.state != "inactive") mediaRecorder.pause();
+            if (mediaRecorder && mediaRecorder.state != "inactive") mediaRecorder.pause();
             interValRecording();
         }, 1000 / inFPS.get());
 }
