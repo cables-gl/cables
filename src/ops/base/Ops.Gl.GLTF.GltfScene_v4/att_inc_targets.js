@@ -130,6 +130,6 @@ const GltfTargetsRenderer = class
 
         this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
 
-        console.log("morphTargets generated texture", w, h);
+        // console.log("morphTargets generated texture", w, h);
     }
 };

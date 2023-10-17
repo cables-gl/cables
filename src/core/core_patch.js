@@ -487,7 +487,10 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
-        if (op.init) op.init();
+        if (op.init)
+        {
+            op.init();
+        }
         op.emitEvent("init", fromDeserialize);
     }
     else
@@ -1385,6 +1388,7 @@ Patch.prototype.dispose = function ()
 {
     this.pause();
     this.clear();
+    this.cgl.dispose();
 };
 
 Patch.prototype.pushTriggerStack = function (p)
@@ -1401,7 +1405,7 @@ Patch.prototype.printTriggerStack = function ()
 {
     if (this._triggerStack.length == 0)
     {
-        console.log("stack length", this._triggerStack.length); // eslint-disable-line
+        // console.log("stack length", this._triggerStack.length); // eslint-disable-line
         return;
     }
     console.groupCollapsed( // eslint-disable-line

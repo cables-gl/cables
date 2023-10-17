@@ -114,16 +114,9 @@ function updateDefines()
 
 geom.onChange = function ()
 {
-    console.log("geom upd");
     if (mesh)mesh.dispose();
     mesh = null;
 
-    // if (!geom.get() || !geom.get().vertices)
-    // {
-
-    //     return;
-    // }
-    // needsNewMesh = true;
     reset();
 };
 

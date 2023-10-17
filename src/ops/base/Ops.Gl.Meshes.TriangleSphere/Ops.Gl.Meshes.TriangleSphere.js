@@ -173,5 +173,5 @@ function generate()
     geomOut.setRef(geom);
     needsUpdate = false;
 
-    console.log("trianglesphere took", performance.now() - startTime);
+    // console.log("trianglesphere took", performance.now() - startTime);
 }

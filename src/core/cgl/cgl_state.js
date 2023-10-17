@@ -6,15 +6,6 @@ import { CGState } from "../cg/cg_state";
 import { CG } from "../cg/cg_constants";
 
 
-
-
-
-
-
-
-
-
-
 /**
  * cables gl context/state manager
  * @external CGL
@@ -195,6 +186,7 @@ class Context extends CGState
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
+            if (this.aborted) return console.log("[cgl_state] aborted context lost... can be ignored...");
             this._log.error("canvas lost...", event);
             this.emitEvent("webglcontextlost");
             this.aborted = true;
@@ -754,6 +746,13 @@ class Context extends CGState
             }
         }.bind(this), noclearalpha);
     }
+
+
+    _dispose()
+    {
+        this._simpleShader.dispose();
+        this.gl = null;
+    }
 }
 
 
@@ -1259,6 +1258,8 @@ Context.prototype.enableExtension = function (name)
 
     return o;
 };
+
+
 
 
 export { Context };

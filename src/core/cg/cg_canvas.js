@@ -22,7 +22,7 @@ class CgCanvas
         this._oldWidthRp = -1;
         this._oldHeightRp = -1;
 
-        this.setSize(200, 200);
+        this.setSize(this.canvasWidth, this.canvasHeight);
     }
 
     get canvasEle() { return this._canvasEle; }
@@ -50,6 +50,12 @@ class CgCanvas
     {
         this.canvasEle.width = this.canvasWidth = this.canvasEle.clientWidth * this.pixelDensity;
         this.canvasEle.height = this.canvasHeight = this.canvasEle.clientHeight * this.pixelDensity;
+    }
+
+    dispose()
+    {
+        this._canvasEle.remove();
+        this._canvasEle = null;
     }
 }
 

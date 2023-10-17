@@ -128,19 +128,16 @@ function doRender()
             if (msaa.get() == "4x")msSamples = 4;
             if (msaa.get() == "8x")msSamples = 8;
 
-            console.log("numSlots", numSlots);
-
-            fb = new CGL.Framebuffer2(cgl, 8, 8,
-                {
-                    "numRenderBuffers": numSlots,
-                    "isFloatingPointTexture": floatingPoint,
-                    "multisampling": ms,
-                    "depth": true,
-                    "multisamplingSamples": msSamples,
-                    "wrap": getWrap(),
-                    "filter": getFilter(),
-                    "clear": clear.get()
-                });
+            fb = new CGL.Framebuffer2(cgl, 8, 8, {
+                "numRenderBuffers": numSlots,
+                "isFloatingPointTexture": floatingPoint,
+                "multisampling": ms,
+                "depth": true,
+                "multisamplingSamples": msSamples,
+                "wrap": getWrap(),
+                "filter": getFilter(),
+                "clear": clear.get()
+            });
         }
         else
         {

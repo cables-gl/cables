@@ -60,7 +60,8 @@ render.onLinkChanged = () => { updateSoon(); };
 inTexture.onLinkChanged = () => { updateSoon(); };
 inTexture.onChange = () =>
 {
-    if (oldTex != inTexture.get()) { updateSoon(); console.log("redo reason: inTexture"); }oldTex = inTexture.get();
+    if (oldTex != inTexture.get()) { updateSoon(); }
+    oldTex = inTexture.get();
 };
 inTextureMask.onChange = () => { updateSoon(); };
 
