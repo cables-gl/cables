@@ -24,6 +24,8 @@ const inMinimize = op.inValueBool("Show Minimize", false);
 const inTitle = op.inString("Title", "");
 const side = op.inValueBool("Side");
 
+let doc = op.patch.cgl.canvas.ownerDocument;
+
 // outputs
 const childrenPort = op.outObject("childs");
 childrenPort.setUiAttribs({ "title": "Children" });
@@ -31,7 +33,7 @@ childrenPort.setUiAttribs({ "title": "Children" });
 const isOpenOut = op.outBool("Opfened");
 isOpenOut.setUiAttribs({ "title": "Opened" });
 
-let sidebarEl = document.querySelector("." + SIDEBAR_ID);
+let sidebarEl = doc.querySelector("." + SIDEBAR_ID);
 if (!sidebarEl) sidebarEl = initSidebarElement();
 
 const sidebarItemsEl = sidebarEl.querySelector("." + SIDEBAR_ITEMS_CLASS);
@@ -62,10 +64,10 @@ inMinimize.onChange = updateMinimize;
 
 function updateMinimize(header)
 {
-    if (!header || header.uiAttribs) header = document.querySelector(".sidebar-cables .sidebar__group-header");
+    if (!header || header.uiAttribs) header = doc.querySelector(".sidebar-cables .sidebar__group-header");
     if (!header) return;
 
-    const undoButton = document.querySelector(".sidebar-cables .sidebar__group-header .sidebar__group-header-undo");
+    const undoButton = doc.querySelector(".sidebar-cables .sidebar__group-header .sidebar__group-header-undo");
 
     if (inMinimize.get())
     {
@@ -92,7 +94,7 @@ side.onChange = function ()
 
 function onUndoButtonChange()
 {
-    const header = document.querySelector(".sidebar-cables .sidebar__group-header");
+    const header = doc.querySelector(".sidebar-cables .sidebar__group-header");
     if (header)
     {
         initUndoButton(header);
@@ -103,7 +105,7 @@ function initUndoButton(header)
 {
     if (header)
     {
-        const undoButton = document.querySelector(".sidebar-cables .sidebar__group-header .sidebar__group-header-undo");
+        const undoButton = doc.querySelector(".sidebar-cables .sidebar__group-header .sidebar__group-header-undo");
         if (undoButton)
         {
             if (!undoButtonPort.get())
@@ -116,15 +118,15 @@ function initUndoButton(header)
         {
             if (undoButtonPort.get())
             {
-                const headerUndo = document.createElement("span");
+                const headerUndo = doc.createElement("span");
                 headerUndo.classList.add("sidebar__group-header-undo");
                 headerUndo.classList.add("sidebar-icon-undo");
 
                 headerUndo.addEventListener("click", function (event)
                 {
                     event.stopPropagation();
-                    const reloadables = document.querySelectorAll(".sidebar-cables .sidebar__reloadable");
-                    const doubleClickEvent = document.createEvent("MouseEvents");
+                    const reloadables = doc.querySelectorAll(".sidebar-cables .sidebar__reloadable");
+                    const doubleClickEvent = doc.createEvent("MouseEvents");
                     doubleClickEvent.initEvent("dblclick", true, true);
                     reloadables.forEach((reloadable) =>
                     {
@@ -185,7 +187,7 @@ side.onChanged = function ()
  */
 function updateDynamicStyles()
 {
-    const dynamicStyles = document.querySelectorAll("." + CSS_ELEMENT_DYNAMIC_CLASS);
+    const dynamicStyles = doc.querySelectorAll("." + CSS_ELEMENT_DYNAMIC_CLASS);
     if (dynamicStyles)
     {
         dynamicStyles.forEach(function (e)
@@ -193,36 +195,36 @@ function updateDynamicStyles()
             e.parentNode.removeChild(e);
         });
     }
-    const newDynamicStyle = document.createElement("style");
+    const newDynamicStyle = doc.createElement("style");
     newDynamicStyle.classList.add("cablesEle");
     newDynamicStyle.classList.add(CSS_ELEMENT_DYNAMIC_CLASS);
     let cssText = ".sidebar--closed .sidebar__close-button { ";
     cssText += "opacity: " + minimizedOpacityPort.get();
     cssText += "}";
-    const cssTextEl = document.createTextNode(cssText);
+    const cssTextEl = doc.createTextNode(cssText);
     newDynamicStyle.appendChild(cssTextEl);
-    document.body.appendChild(newDynamicStyle);
+    doc.body.appendChild(newDynamicStyle);
 }
 
 function initSidebarElement()
 {
-    const element = document.createElement("div");
+    const element = doc.createElement("div");
     element.classList.add(SIDEBAR_CLASS);
     element.classList.add(SIDEBAR_ID);
     const canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
 
     // header...
-    const headerGroup = document.createElement("div");
+    const headerGroup = doc.createElement("div");
     headerGroup.classList.add("sidebar__group");
 
     element.appendChild(headerGroup);
-    const header = document.createElement("div");
+    const header = doc.createElement("div");
     header.classList.add("sidebar__group-header");
 
     element.appendChild(header);
-    const headerTitle = document.createElement("span");
+    const headerTitle = doc.createElement("span");
     headerTitle.classList.add("sidebar__group-header-title");
-    headerTitleText = document.createElement("span");
+    headerTitleText = doc.createElement("span");
     headerTitleText.classList.add("sidebar__group-header-title-text");
     headerTitleText.innerHTML = inTitle.get();
     headerTitle.appendChild(headerTitleText);
@@ -241,14 +243,13 @@ function initSidebarElement()
         return;
     }
     canvasWrapper.appendChild(element);
-    const items = document.createElement("div");
+    const items = doc.createElement("div");
     items.classList.add(SIDEBAR_ITEMS_CLASS);
     element.appendChild(items);
-    openCloseBtn = document.createElement("div");
+    openCloseBtn = doc.createElement("div");
     openCloseBtn.classList.add(SIDEBAR_OPEN_CLOSE_BTN_CLASS);
     openCloseBtn.addEventListener("click", onOpenCloseBtnClick);
     element.appendChild(openCloseBtn);
-
 
     return element;
 }
@@ -283,7 +284,7 @@ function onOpenCloseBtnClick(ev)
 
 function initSidebarCss()
 {
-    const cssElements = document.querySelectorAll("." + CSS_ELEMENT_CLASS);
+    const cssElements = doc.querySelectorAll("." + CSS_ELEMENT_CLASS);
     // remove old script tag
     if (cssElements)
     {
@@ -292,12 +293,12 @@ function initSidebarCss()
             e.parentNode.removeChild(e);
         });
     }
-    const newStyle = document.createElement("style");
+    const newStyle = doc.createElement("style");
 
     newStyle.innerHTML = attachments.style_css;
     newStyle.classList.add(CSS_ELEMENT_CLASS);
     newStyle.classList.add("cablesEle");
-    document.body.appendChild(newStyle);
+    doc.body.appendChild(newStyle);
 }
 
 function onDelete()
