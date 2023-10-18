@@ -5,8 +5,8 @@ If you have problems with existing styles of cables, use css selectors to define
 ```
 .cablesEle.myDiv 
 {
-    background-color:red !important;
-    border:10px solid blue !important;
+    background-color:red;
+    border:10px solid blue;
 }
 
 .cablesEle h1

@@ -20,6 +20,5 @@ function update()
     if (!arr) return;
     arr[index.get()] = value.get();
 
-    values.set("");
-    values.set(arr);
+    values.setRef(arr);
 }

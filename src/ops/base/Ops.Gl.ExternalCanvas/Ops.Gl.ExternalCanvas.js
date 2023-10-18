@@ -65,7 +65,9 @@ inUpdate.onTriggered = () =>
         canvas.style.left = x + "px";
 
         ctx.imageSmoothingEnabled = inSmoothing.get();
-        ctx.drawImage(op.patch.cgl.canvas, 0, 0, canvas.width, canvas.height);
+
+        if (op.patch.cgCanvas) ctx.drawImage(op.patch.cgCanvas.canvasEle, 0, 0, canvas.width, canvas.height);
+        else ctx.drawImage(op.patch.cgl.canvas, 0, 0, canvas.width, canvas.height);
     }
 };
 

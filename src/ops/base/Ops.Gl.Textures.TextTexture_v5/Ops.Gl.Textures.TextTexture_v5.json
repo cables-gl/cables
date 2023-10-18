@@ -91,7 +91,12 @@
             },
             {
                 "type": 0,
-                "name": "Padding Y",
+                "name": "Padding Y Top",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Padding Y Bottom",
                 "subType": "integer"
             },
             {
