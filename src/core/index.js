@@ -19,6 +19,7 @@ import { CONSTANTS } from "./constants";
 import { BranchStack, Branch } from "./banchprofiler";
 import { CGP } from "./cgp";
 import { CG } from "./cg/cg_constants";
+import MetaCode from "../../../cables_ui/src/ui/components/tabs/meta_code";
 
 window.CABLES = window.CABLES || {};
 
