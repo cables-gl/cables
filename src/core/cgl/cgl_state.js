@@ -1251,10 +1251,10 @@ Context.prototype.enableExtension = function (name)
     // console.log("extension", name);
     // const start = performance.now();
     const o = this.gl.getExtension(name);
-    if (!o)
-    {
-        this._log.stack("[cgl_state] extension not available " + name);
-    }
+    // if (!o)
+    // {
+    // this._log.stack("[cgl_state] extension not available " + name);
+    // }
 
     return o;
 };

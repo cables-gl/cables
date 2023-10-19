@@ -237,7 +237,7 @@ Texture.prototype.setSize = function (w, h)
             if (this._cgl.glUseHalfFloatTex)
             {
                 const ext = this._cgl.enableExtension("OES_texture_half_float");
-                const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
+                // const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
                 if (!ext) throw new Error("no half float texture extension");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
