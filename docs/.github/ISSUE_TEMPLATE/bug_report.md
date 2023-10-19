@@ -8,18 +8,11 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+A description of what the bug is. Screenshots also help a lot!
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**How To Reproduce**
+1. Open Editor
+2. Click on "crash" button
 
 **Platfowm**
  - Please tell us which Browser and Version you are using and if its on Desktop or Smartphone etc.
