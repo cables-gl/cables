@@ -1102,6 +1102,7 @@ Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 Texture.PFORMATSTR_RG16F = "RG 16bit float";
 
+
 Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RG16F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
 
 Texture.isPixelFormatFloat = (pxlfrmt) =>
