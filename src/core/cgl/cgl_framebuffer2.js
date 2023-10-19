@@ -248,7 +248,6 @@ Framebuffer2.prototype.setSize = function (w, h)
                     this.setFilter(this._options.filter);
                 }
 
-
                 internFormat = this._cgl.gl.R11F_G11F_B10F;
             }
             else if (this._options.pixelFormat == Texture.PFORMATSTR_RG16F)
@@ -261,8 +260,6 @@ Framebuffer2.prototype.setSize = function (w, h)
                     this._options.filter = Texture.FILTER_NEAREST;
                     this.setFilter(this._options.filter);
                 }
-
-
                 internFormat = this._cgl.gl.RG16F;
             }
         }
