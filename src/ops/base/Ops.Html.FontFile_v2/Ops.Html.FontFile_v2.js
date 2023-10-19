@@ -5,6 +5,7 @@ const
     loadedTrigger = op.outTrigger("Loaded Trigger");
 
 let loadingId = null;
+let fontFaceObj;
 
 filename.onChange = function ()
 {
@@ -13,8 +14,6 @@ filename.onChange = function ()
 };
 
 fontname.onChange = addStyle;
-
-let fontFaceObj;
 
 function addStyle()
 {
@@ -68,6 +67,7 @@ function addStyle()
                 .endl() + "}";
 
             const style = document.createElement("style");
+            style.classList.add("cablesEle");
             style.type = "text/css";
             style.innerHTML = styleStr;
             document.getElementsByTagName("head")[document.getElementsByTagName("head").length - 1].appendChild(style);
