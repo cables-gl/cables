@@ -6,34 +6,51 @@ const
 
 let loadingId = null;
 
+let doc = null;
+let fontFaceObj;
+
 filename.onChange = function ()
 {
     outLoaded.set(false);
-    addStyle();
+    addStyle(null);
 };
 
-fontname.onChange = addStyle;
-
-let fontFaceObj;
-
-function addStyle()
+fontname.onChange = () =>
 {
+    addStyle(null);
+};
+
+op.patch.on("windowChanged",
+    (win) =>
+    {
+        fontFaceObj = null;
+        console.log("window changed!");
+        addStyle(win.document);
+    });
+
+function addStyle(_doc)
+{
+    doc = _doc || doc || op.patch.cgl.canvas.ownerDocument || document;
+
+    console.log(doc.fonts, document.fonts);
+
     if (filename.get() && fontname.get())
     {
-        if (document.fonts)
+        if (doc.fonts)
         {
-            fontFaceObj = new FontFace(fontname.get(), "url(" + op.patch.getFilePath(String(filename.get())) + ")");
+            let url = "url(" + op.patch.getFilePath(String(filename.get())) + ")";
+            fontFaceObj = new FontFace(fontname.get(), url);
 
             loadingId = op.patch.cgl.patch.loading.start("FontFile", filename.get(), op);
-
+            console.log("load font!!!", url);
             // Add the FontFace to the FontFaceSet
-            document.fonts.add(fontFaceObj);
+            doc.fonts.add(fontFaceObj);
 
+            console.log(doc.title);
             // Get the current status of the FontFace
             // (should be 'unloaded')
 
             // Load the FontFace
-            fontFaceObj.load();
 
             // Get the current status of the Fontface
             // (should be 'loading' or 'loaded' if cached)
@@ -41,6 +58,7 @@ function addStyle()
             // Wait until the font has been loaded, log the current status.
             fontFaceObj.loaded.then((fontFace) =>
             {
+                console.log("loaded font....", fontFace);
                 outLoaded.set(true);
                 loadedTrigger.trigger();
                 op.patch.cgl.patch.loading.finished(loadingId);
@@ -54,8 +72,15 @@ function addStyle()
                 op.patch.cgl.patch.loading.finished(loadingId);
                 outLoaded.set(true);
 
+                console.log("font loading error");
+
                 // op.logError("Font loading error! Current status", fontFaceObj.status);
+            }).catch((f) =>
+            {
+                console.log("catch ?!?!?!?!?!?!", f);
             });
+
+            fontFaceObj.load();
         }
         else
         { // font loading api not supported
@@ -72,6 +97,8 @@ function addStyle()
             style.innerHTML = styleStr;
             document.getElementsByTagName("head")[document.getElementsByTagName("head").length - 1].appendChild(style);
             // TODO: Poll if font loaded
+
+            console.log("fallback?!");
         }
     }
 }
