@@ -3,6 +3,7 @@ const
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"]),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
+    dataFrmt = op.inSwitch("Data Format", ["R", "RG", "RGB", "RGBA"], "RGBA"),
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
@@ -30,6 +31,7 @@ let timedLoader = 0;
 unpackAlpha.setUiAttribs({ "hidePort": true });
 unpackAlpha.onChange =
     filename.onChange =
+    dataFrmt.onChange =
     flip.onChange = reloadSoon;
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
@@ -70,6 +72,14 @@ function reloadSoon(nocache)
     {
         realReload(nocache);
     }, 30);
+}
+
+function getPixelFormat()
+{
+    if (dataFrmt.get() == "R") return CGL.Texture.PFORMATSTR_R8UB;
+    if (dataFrmt.get() == "RG") return CGL.Texture.PFORMATSTR_RG8UB;
+    if (dataFrmt.get() == "RGB") return CGL.Texture.PFORMATSTR_RGB8UB;
+    return CGL.Texture.PFORMATSTR_RGBA8UB;
 }
 
 function realReload(nocache)
@@ -157,6 +167,7 @@ function realReload(nocache)
                     "wrap": cgl_wrap,
                     "flip": flip.get(),
                     "unpackAlpha": unpackAlpha.get(),
+                    "pixelFormat": getPixelFormat(),
                     "filter": cgl_filter
                 });
 
