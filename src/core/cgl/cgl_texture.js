@@ -54,7 +54,7 @@ const Texture = function (__cgl, options)
     this._glInternalFormat = -1;
     this._glDataFormat = -1;
 
-    this.setUpPixelFormat();
+    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
     if (options)
     {
@@ -85,12 +85,6 @@ const Texture = function (__cgl, options)
     }
     else this.pixelFormat = options.pixelFormat;
 
-    if (this._cgl.glUseHalfFloatTex)
-    {
-        if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F) this.pixelFormat = Texture.PFORMATSTR_RGBA16F;
-        if (this.pixelFormat == Texture.PFORMATSTR_RG32F) this.pixelFormat = Texture.PFORMATSTR_RG16F;
-        if (this.pixelFormat == Texture.PFORMATSTR_R32F) this.pixelFormat = Texture.PFORMATSTR_R16F;
-    }
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
@@ -179,153 +173,137 @@ Texture.prototype.clone = function ()
 };
 
 
-Texture.prototype.setUpPixelFormat = function ()
+Texture.prototype.setFormat = function (o)
 {
-    // if(this._cgl.glVersion==1 && !this._cgl.enableExtension('OES_texture_float')) throw "no float texture extension";
-    // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
+    this.pixelFormat = o.pixelFormat;
+    this._glDataFormat = o.glDataFormat;
+    this._glInternalFormat = o.glInternalFormat;
+    this._glDataType = o.glDataType;
+};
 
-    this._glDataType = this._cgl.gl.UNSIGNED_BYTE;
-    this._glInternalFormat = this._cgl.gl.RGBA;
-    this._glDataFormat = this._cgl.gl.RGBA;
+Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
+{
+    const o = {};
 
-
-    if (this._cgl.glVersion == 1 && this.textureType == Texture.TYPE_FLOAT)
+    if (cgl.glUseHalfFloatTex)
     {
-        if (this._cgl.glUseHalfFloatTex)
+        if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+        if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+        if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+    }
+
+    o.pixelFormat = pixelFormatStr;
+
+
+    o.glDataType = cgl.gl.UNSIGNED_BYTE;
+    o.glInternalFormat = cgl.gl.RGBA;
+    o.glDataFormat = cgl.gl.RGBA;
+
+
+    if (cgl.glVersion == 1 && this.textureType == Texture.TYPE_FLOAT)
+    {
+        if (cgl.glUseHalfFloatTex)
         {
-            const ext = this._cgl.enableExtension("OES_texture_half_float");
-            // const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
+            const ext = cgl.enableExtension("OES_texture_half_float");
             if (!ext) throw new Error("no half float texture extension");
 
-            // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
-            this._glDataType = ext.HALF_FLOAT_OES;
+            o.glDataType = ext.HALF_FLOAT_OES;
         }
         else
         {
-            this._cgl.enableExtension("OES_texture_float");
+            cgl.enableExtension("OES_texture_float");
 
-            this._glDataType = this._cgl.gl.FLOAT;
-            // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
+            o.glDataType = cgl.gl.FLOAT;
         }
     }
     else
     {
-        // if (this._cgl.glUseHalfFloatTex)
-        // {
-        //     const ext = this._cgl.enableExtension("EXT_color_buffer_half_float");
-        //     if (!ext) throw new Error("no half float texture extension");
-        // if (this._cgl.glUseHalfFloatTex)
-        // {
-        //     const ext = this._cgl.gl.getExtension("EXT_color_buffer_half_float");
-        //     if (!ext) throw new Error("no half float texture extension");
-
-        //     console.log("half float", this._cgl.gl.RGBA16F, this._cgl.gl.HALF_FLOAT);
-
-        //     console.log("half float", this._cgl.gl.HALF_FLOAT);
-        //     console.log("half float", this._cgl.gl.RGBA16F);
-
-        //     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT, null);
-        // }
-        // else
-        // {
-
-
-        if (this.pixelFormat == Texture.PFORMATSTR_RGB565)
+        if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
         {
-            this._glInternalFormat = this._cgl.gl.RGB565;
-            this._glDataFormat = this._cgl.gl.RGB;
+            o.glInternalFormat = cgl.gl.RGB565;
+            o.glDataFormat = cgl.gl.RGB;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_R8UB)
+        else if (pixelFormatStr == Texture.PFORMATSTR_R8UB)
         {
-            this._glInternalFormat = this._cgl.gl.R8;
-            this._glDataFormat = this._cgl.gl.RED;
+            o.glInternalFormat = cgl.gl.R8;
+            o.glDataFormat = cgl.gl.RED;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_RG8UB)
+        else if (pixelFormatStr == Texture.PFORMATSTR_RG8UB)
         {
-            this._glInternalFormat = this._cgl.gl.RG8;
-            this._glDataFormat = this._cgl.gl.RG;
+            o.glInternalFormat = cgl.gl.RG8;
+            o.glDataFormat = cgl.gl.RG;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_RGB8UB)
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
         {
-            this._glInternalFormat = this._cgl.gl.RGB;
-            this._glDataFormat = this._cgl.gl.RGB;
+            o.glInternalFormat = cgl.gl.RGB;
+            o.glDataFormat = cgl.gl.RGB;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_R32F)
+        else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
         {
-            this._glInternalFormat = this._cgl.gl.R32F;
-            this._glDataFormat = this._cgl.gl.RED;
-            this._glDataType = this._cgl.gl.FLOAT;
+            o.glInternalFormat = cgl.gl.R32F;
+            o.glDataFormat = cgl.gl.RED;
+            o.glDataType = cgl.gl.FLOAT;
         }
 
-        else if (this.pixelFormat == Texture.PFORMATSTR_R16F)
+        else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
         {
-            this._glInternalFormat = this._cgl.gl.R16F;
-            this._glDataType = this._cgl.gl.FLOAT;
-            this._glDataFormat = this._cgl.gl.RED;
+            o.glInternalFormat = cgl.gl.R16F;
+            o.glDataType = cgl.gl.FLOAT;
+            o.glDataFormat = cgl.gl.RED;
         }
 
-        else if (this.pixelFormat == Texture.PFORMATSTR_RG16F)
+        else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
         {
-            this._glInternalFormat = this._cgl.gl.RG16F;
-            this._glDataType = this._cgl.gl.FLOAT;
-            this._glDataFormat = this._cgl.gl.RG;
+            o.glInternalFormat = cgl.gl.RG16F;
+            o.glDataType = cgl.gl.FLOAT;
+            o.glDataFormat = cgl.gl.RG;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_RGBA16F)
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F)
         {
-            this._glInternalFormat = this._cgl.gl.RGBA16F;
-            this._glDataType = this._cgl.gl.FLOAT;
+            o.glInternalFormat = cgl.gl.RGBA16F;
+            o.glDataType = cgl.gl.FLOAT;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+        else if (pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
         {
-            this._glInternalFormat = this._cgl.gl.R11F_G11F_B10F;
-            this._glDataType = this._cgl.gl.FLOAT;
-            this._glDataFormat = this._cgl.gl.RGB;
+            o.glInternalFormat = cgl.gl.R11F_G11F_B10F;
+            o.glDataType = cgl.gl.FLOAT;
+            o.glDataFormat = cgl.gl.RGB;
         }
-        else if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F)
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F)
         {
-            this._glInternalFormat = this._cgl.gl.RGBA32F;
-            this._glDataType = this._cgl.gl.FLOAT;
+            o.glInternalFormat = cgl.gl.RGBA32F;
+            o.glDataType = cgl.gl.FLOAT;
         }
 
         /// //////
 
-        if (this._glDataType === this._cgl.gl.FLOAT)
+        if (o.glDataType === cgl.gl.FLOAT)
         {
-            this._cgl.gl.getExtension("EXT_color_buffer_float");
-            this._cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            cgl.gl.getExtension("EXT_color_buffer_float");
+            cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
-
-        // this._cgl.gl.texImage2D(this.texTarget, 0, internalFormat, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-        // }
     }
 
 
     if (this.textureType == Texture.TYPE_DEPTH)
     {
-        if (this._cgl.glVersion == 1)
+        if (cgl.glVersion == 1)
         {
-        // if(this._cgl.enableExtension('OES_texture_half_float'))
-        // {
-        //     console.log("is half float");
-        //     var tcomp=this._cgl.gl.DEPTH_COMPONENT;
-        //     this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
-        // }
-        // else
-            this._glInternalFormat = this._cgl.gl.DEPTH_COMPONENT;
-            this._glDataType = this._cgl.gl.UNSIGNED_SHORT;
-            this._glDataFormat = this._cgl.gl.DEPTH_COMPONENT;
-        // this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
+            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
+            o.glDataType = cgl.gl.UNSIGNED_SHORT;
+            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
         }
         else
         {
-            this._glInternalFormat = this._cgl.gl.DEPTH_COMPONENT32F;
-            this._glDataType = this._cgl.gl.FLOAT;
-            this._glDataFormat = this._cgl.gl.DEPTH_COMPONENT;
-        // this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
+            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
+            o.glDataType = cgl.gl.FLOAT;
+            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
         }
     }
 
-    if (!this._glDataType || !this._glInternalFormat || !this._glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, this._glDataType, this._glInternalFormat, this._glDataFormat, this);
+    if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
+
+    return o;
 };
 
 /**
@@ -357,7 +335,9 @@ Texture.prototype.setSize = function (w, h)
     this.height = h;
     this.deleted = false;
 
-    this.setUpPixelFormat();
+
+    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
+
 
     this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
     // if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
@@ -446,7 +426,8 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-    this.setUpPixelFormat();
+
+    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
     // if (this.textureType == Texture.TYPE_FLOAT)
     //     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, data);
     // else
@@ -510,7 +491,8 @@ Texture.prototype.initTexture = function (img, filter)
     this.flipped = !this.flip;
     if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
 
-    this.setUpPixelFormat();
+
+    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, this._glDataFormat, this._glDataType, img);
     // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
