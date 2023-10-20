@@ -90,14 +90,15 @@ const Framebuffer2 = function (cgl, w, h, options)
 
     if (this._options.depth)
     {
-        this._textureDepth = new Texture(cgl, {
-            "name": "fb2 depth " + this.name,
-            "isDepthTexture": true,
-            "filter": fil,
-            "shadowMap": this._options.shadowMap || false,
-            "width": w || defaultTexSize,
-            "height": h || defaultTexSize,
-        });
+        this._textureDepth = new Texture(cgl,
+            {
+                "name": "fb2 depth " + this.name,
+                "isDepthTexture": true,
+                "filter": fil,
+                "shadowMap": this._options.shadowMap || false,
+                "width": w || defaultTexSize,
+                "height": h || defaultTexSize,
+            });
     }
 
     if (cgl.aborted) return;

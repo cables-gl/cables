@@ -88,7 +88,7 @@ const Texture = function (__cgl, options)
     }
     else this.pixelFormat = options.pixelFormat;
 
-    if (this.textureType == Texture.TYPE_DEPTH) this.textureType = Texture.TYPE_DEPTH;
+    if (this.textureType == Texture.TYPE_DEPTH) this.pixelFormat = Texture.PFORMATSTR_DEPTH;
 
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
@@ -291,8 +291,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
     }
 
-    if (this.textureType === Texture.TYPE_DEPTH)
     // if (this.textureType == Texture.TYPE_DEPTH)
+    if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
     {
         if (cgl.glVersion == 1)
         {
