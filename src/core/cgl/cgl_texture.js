@@ -85,8 +85,12 @@ const Texture = function (__cgl, options)
     }
     else this.pixelFormat = options.pixelFormat;
 
-    if (this._cgl.glUseHalfFloatTex && this.pixelFormat == Texture.PFORMATSTR_RGBA32F) this.pixelFormat = Texture.PFORMATSTR_RGBA16F;
-
+    if (this._cgl.glUseHalfFloatTex)
+    {
+        if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F) this.pixelFormat = Texture.PFORMATSTR_RGBA16F;
+        if (this.pixelFormat == Texture.PFORMATSTR_RG32F) this.pixelFormat = Texture.PFORMATSTR_RG16F;
+        if (this.pixelFormat == Texture.PFORMATSTR_R32F) this.pixelFormat = Texture.PFORMATSTR_R16F;
+    }
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
@@ -231,58 +235,51 @@ Texture.prototype.setUpPixelFormat = function ()
             this._glInternalFormat = this._cgl.gl.R8;
             this._glDataFormat = this._cgl.gl.RED;
         }
-
-        if (this.pixelFormat == Texture.PFORMATSTR_RG8UB)
+        else if (this.pixelFormat == Texture.PFORMATSTR_RG8UB)
         {
             this._glInternalFormat = this._cgl.gl.RG8;
             this._glDataFormat = this._cgl.gl.RG;
         }
-
-        if (this.pixelFormat == Texture.PFORMATSTR_RGB8UB)
+        else if (this.pixelFormat == Texture.PFORMATSTR_RGB8UB)
         {
             this._glInternalFormat = this._cgl.gl.RGB;
             this._glDataFormat = this._cgl.gl.RGB;
         }
-
-
-        if (this.pixelFormat == Texture.PFORMATSTR_R32F)
+        else if (this.pixelFormat == Texture.PFORMATSTR_R32F)
         {
             this._glInternalFormat = this._cgl.gl.R32F;
             this._glDataFormat = this._cgl.gl.RED;
             this._glDataType = this._cgl.gl.FLOAT;
         }
 
-        if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F)
-        {
-            this._glInternalFormat = this._cgl.gl.RGBA32F;
-            this._glDataType = this._cgl.gl.FLOAT;
-        }
-
-        if (this.pixelFormat == Texture.PFORMATSTR_RGBA16F)
-        {
-            this._glInternalFormat = this._cgl.gl.RGBA16F;
-            this._glDataType = this._cgl.gl.FLOAT;
-        }
-
-        if (this.pixelFormat == Texture.PFORMATSTR_RG16F)
-        {
-            this._glInternalFormat = this._cgl.gl.RG16F;
-            this._glDataType = this._cgl.gl.FLOAT;
-            this._glDataFormat = this._cgl.gl.RG;
-        }
-
-        if (this.pixelFormat == Texture.PFORMATSTR_R16F)
+        else if (this.pixelFormat == Texture.PFORMATSTR_R16F)
         {
             this._glInternalFormat = this._cgl.gl.R16F;
             this._glDataType = this._cgl.gl.FLOAT;
             this._glDataFormat = this._cgl.gl.RED;
         }
 
-        if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
+        else if (this.pixelFormat == Texture.PFORMATSTR_RG16F)
+        {
+            this._glInternalFormat = this._cgl.gl.RG16F;
+            this._glDataType = this._cgl.gl.FLOAT;
+            this._glDataFormat = this._cgl.gl.RG;
+        }
+        else if (this.pixelFormat == Texture.PFORMATSTR_RGBA16F)
+        {
+            this._glInternalFormat = this._cgl.gl.RGBA16F;
+            this._glDataType = this._cgl.gl.FLOAT;
+        }
+        else if (this.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
         {
             this._glInternalFormat = this._cgl.gl.R11F_G11F_B10F;
             this._glDataType = this._cgl.gl.FLOAT;
             this._glDataFormat = this._cgl.gl.RGB;
+        }
+        else if (this.pixelFormat == Texture.PFORMATSTR_RGBA32F)
+        {
+            this._glInternalFormat = this._cgl.gl.RGBA32F;
+            this._glDataType = this._cgl.gl.FLOAT;
         }
 
         /// //////
@@ -1169,11 +1166,16 @@ Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
 
 Texture.PFORMATSTR_R16F = "R 16bit float";
 Texture.PFORMATSTR_RG16F = "RG 16bit float";
+Texture.PFORMATSTR_RGB16F = "RGB 16bit float";
 Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
+
 
 Texture.PFORMATSTR_R32F = "R 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
+
+// RGB 32
+// RGB 16
 
 Texture.PIXELFORMATS = [
     Texture.PFORMATSTR_R8UB,
@@ -1184,15 +1186,17 @@ Texture.PIXELFORMATS = [
     Texture.PFORMATSTR_R16F,
     Texture.PFORMATSTR_RG16F,
     Texture.PFORMATSTR_RGBA16F,
+
     Texture.PFORMATSTR_R32F,
     Texture.PFORMATSTR_RGBA32F
 
 ];
 
-Texture.isPixelFormatFloat = (pxlfrmt) =>
-{
-    return (pxlfrmt == Texture.PFORMATSTR_RGBA32F || pxlfrmt == Texture.PFORMATSTR_R32F || pxlfrmt == Texture.PFORMATSTR_R11FG11FB10F || pxlfrmt == Texture.PFORMATSTR_RGBA16F || pxlfrmt == Texture.PFORMATSTR_RG16F || pxlfrmt == Texture.PFORMATSTR_R16F);
-};
+Texture.isPixelFormatFloat =
+    (pxlfrmt) =>
+    {
+        return (pxlfrmt || "").indexOf("float") > -1;
+    };
 
 
 export { Texture };
