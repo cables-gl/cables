@@ -619,6 +619,8 @@ Patch.prototype.emitOnAnimFrameEvent = function (time, delta)
 
 Patch.prototype.renderFrame = function (timestamp)
 {
+    // console.log("renderframe", this._paused, this._frameNum);
+
     this.timer.update();
     this.freeTimer.update();
     const time = this.timer.getTime();
@@ -657,6 +659,8 @@ Patch.prototype.exec = function (timestamp)
     const now = CABLES.now();
     const frameDelta = now - this._frameNext;
 
+
+
     if (this.isEditorMode())
     {
         if (!this._renderOneFrame)
@@ -693,7 +697,7 @@ Patch.prototype.exec = function (timestamp)
     }
 
 
-    if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
+    if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
 };
 
 // Patch.prototype.linkPorts = function (port1, port2)

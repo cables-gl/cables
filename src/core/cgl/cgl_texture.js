@@ -237,7 +237,7 @@ Texture.prototype.setSize = function (w, h)
             if (this._cgl.glUseHalfFloatTex)
             {
                 const ext = this._cgl.enableExtension("OES_texture_half_float");
-                const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
+                // const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
                 if (!ext) throw new Error("no half float texture extension");
 
                 this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
@@ -1101,6 +1101,7 @@ Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 Texture.PFORMATSTR_RG16F = "RG 16bit float";
+
 
 Texture.PIXELFORMATS = [Texture.PFORMATSTR_RGBA8UB, Texture.PFORMATSTR_R11FG11FB10F, Texture.PFORMATSTR_RG16F, Texture.PFORMATSTR_RGBA16F, Texture.PFORMATSTR_RGBA32F];
 

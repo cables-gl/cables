@@ -123,7 +123,8 @@ function update()
             const v = pixels[i * 4 + 0];
             pixels[i * 4 + 1] = v;
             pixels[i * 4 + 2] = v;
-            pixels[i * 4 + 3] = 1;
+            if (isFp) pixels[i * 4 + 3] = 1;
+            else pixels[i * 4 + 3] = 255;
         }
 
         if (stride == 3)
