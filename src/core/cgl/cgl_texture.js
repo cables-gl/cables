@@ -230,7 +230,12 @@ Texture.prototype.setUpPixelFormat = function ()
         // {
 
 
-        if (this.pixelFormat == Texture.PFORMATSTR_R8UB)
+        if (this.pixelFormat == Texture.PFORMATSTR_RGB565)
+        {
+            this._glInternalFormat = this._cgl.gl.RGB565;
+            this._glDataFormat = this._cgl.gl.RGB;
+        }
+        else if (this.pixelFormat == Texture.PFORMATSTR_R8UB)
         {
             this._glInternalFormat = this._cgl.gl.R8;
             this._glDataFormat = this._cgl.gl.RED;
@@ -1157,6 +1162,9 @@ Texture.TYPE_DEFAULT = 0;
 Texture.TYPE_DEPTH = 1;
 Texture.TYPE_FLOAT = 2;
 
+
+Texture.PFORMATSTR_RGB565 = "RGB 5/6/5bit ubyte";
+
 Texture.PFORMATSTR_R8UB = "R 8bit ubyte";
 Texture.PFORMATSTR_RG8UB = "RG 8bit ubyte";
 Texture.PFORMATSTR_RGB8UB = "RGB 8bit ubyte";
@@ -1178,6 +1186,10 @@ Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 // RGB 16
 
 Texture.PIXELFORMATS = [
+
+
+    Texture.PFORMATSTR_RGB565,
+
     Texture.PFORMATSTR_R8UB,
     Texture.PFORMATSTR_RG8UB,
     Texture.PFORMATSTR_RGB8UB,
