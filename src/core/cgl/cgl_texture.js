@@ -59,7 +59,10 @@ const Texture = function (__cgl, options)
     if (options)
     {
         this.name = options.name || this.name;
-        if (options.isDepthTexture) this.textureType = Texture.TYPE_DEPTH;
+        if (options.isDepthTexture)
+        {
+            this.textureType = Texture.TYPE_DEPTH;
+        }
         if (options.isFloatingPointTexture === true) this.textureType = Texture.TYPE_FLOAT;
 
         if ("textureType" in options) this.textureType = options.textureType;
@@ -84,6 +87,8 @@ const Texture = function (__cgl, options)
         }
     }
     else this.pixelFormat = options.pixelFormat;
+
+    if (this.textureType == Texture.TYPE_DEPTH) this.textureType = Texture.TYPE_DEPTH;
 
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
@@ -184,6 +189,7 @@ Texture.prototype.setFormat = function (o)
 Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 {
     const o = {};
+    o.pixelFormatBase = pixelFormatStr;
 
     if (cgl.glUseHalfFloatTex)
     {
@@ -195,8 +201,9 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     o.pixelFormat = pixelFormatStr;
 
 
+
     o.glDataType = cgl.gl.UNSIGNED_BYTE;
-    o.glInternalFormat = cgl.gl.RGBA;
+    o.glInternalFormat = cgl.gl.RGBA8;
     o.glDataFormat = cgl.gl.RGBA;
 
 
@@ -284,8 +291,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
     }
 
-
-    if (this.textureType == Texture.TYPE_DEPTH)
+    if (this.textureType === Texture.TYPE_DEPTH)
+    // if (this.textureType == Texture.TYPE_DEPTH)
     {
         if (cgl.glVersion == 1)
         {
@@ -1164,12 +1171,11 @@ Texture.PFORMATSTR_R32F = "R 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
 
-// RGB 32
-// RGB 16
 
 Texture.PIXELFORMATS = [
 
 
+    Texture.PFORMATSTR_DEPTH,
     Texture.PFORMATSTR_RGB565,
 
     Texture.PFORMATSTR_R8UB,
