@@ -1,7 +1,7 @@
 const
     cgl = op.patch.cgl,
     pUpdate = op.inTrigger("update"),
-    inCoordFormat = op.inSwitch("Coordinates", ["Pixel"], "Pixel"),
+    inCoordFormat = op.inSwitch("Coordinates", ["Pixel", "0-1"], "Pixel"),
     inX = op.inInt("X", 0),
     inY = op.inInt("Y", 0),
     tex = op.inTexture("texture"),
@@ -54,7 +54,16 @@ pUpdate.onTriggered = function ()
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    pixelReader.read(cgl, fb, realTexture.textureType, inX.get(), inY.get(), 1, 1,
+    let x = inX.get();
+    let y = inY.get();
+
+    if (inCoordFormat.get() == "0-1")
+    {
+        x = Math.min(realTexture.width, realTexture.width * x);
+        y = Math.min(realTexture.height, realTexture.height * y);
+    }
+
+    pixelReader.read(cgl, fb, realTexture.textureType, x, y, 1, 1,
         (pixel) =>
         {
             wasTriggered = false;
