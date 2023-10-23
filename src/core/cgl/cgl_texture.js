@@ -82,6 +82,7 @@ const Texture = function (__cgl, options = {})
     if (this.textureType == Texture.TYPE_DEPTH) this.pixelFormat = Texture.PFORMATSTR_DEPTH;
 
 
+
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
@@ -319,7 +320,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         //     const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
         // }
 
-        console.log(pixelFormatStr);
+        console.log(pixelFormatStr, this.name);
     }
 
     // if (this.textureType == Texture.TYPE_DEPTH)
