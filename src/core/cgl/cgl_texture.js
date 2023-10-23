@@ -287,6 +287,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
         }
         else
         {
+            console.log((new Error()).stack);
+
             console.log("unknown pixelformat ", pixelFormatStr);
         }
 
