@@ -255,14 +255,12 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
             o.glDataFormat = cgl.gl.RED;
             o.glDataType = cgl.gl.FLOAT;
         }
-
         else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
         {
             o.glInternalFormat = cgl.gl.R16F;
             o.glDataType = cgl.gl.FLOAT;
             o.glDataFormat = cgl.gl.RED;
         }
-
         else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
         {
             o.glInternalFormat = cgl.gl.RG16F;
@@ -294,7 +292,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
 
         /// //////
 
-        if (o.glDataType === cgl.gl.FLOAT)
+        // if (o.glDataType === cgl.gl.FLOAT)
+        if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
         {
             cgl.getExtension("EXT_color_buffer_float");
             cgl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
