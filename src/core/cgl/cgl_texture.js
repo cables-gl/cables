@@ -24,12 +24,12 @@ const DEFAULT_TEXTURE_SIZE = 8;
  * const tex=new CGL.Texture(cgl);
  * tex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
  */
-const Texture = function (__cgl, options)
+const Texture = function (__cgl, options = {})
 {
     if (!__cgl) throw new Error("no cgl");
     this._log = new Logger("cgl_texture");
     this._cgl = __cgl;
-    this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
+    this.pixelFormat = options.pixelFormat || Texture.PFORMATSTR_RGBA8UB;
     this.tex = this._cgl.gl.createTexture();
     this.id = CABLES.uuid();
     this.width = 0;
@@ -77,15 +77,7 @@ const Texture = function (__cgl, options)
         options = {};
     }
 
-    if (!options.pixelFormat)
-    {
-        if (!options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
-        if (options.isFloatingPointTexture)
-        {
-            this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
-        }
-    }
-    else this.pixelFormat = options.pixelFormat;
+    if (!options.pixelFormat && options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
 
     if (this.textureType == Texture.TYPE_DEPTH) this.pixelFormat = Texture.PFORMATSTR_DEPTH;
 
@@ -1194,12 +1186,11 @@ Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 Texture.PFORMATSTR_R32F = "R 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
+Texture.PFORMATSTR_DEPTH = "DEPTH";
 
 
 Texture.PIXELFORMATS = [
 
-
-    Texture.PFORMATSTR_DEPTH,
     Texture.PFORMATSTR_RGB565,
 
     Texture.PFORMATSTR_R8UB,
