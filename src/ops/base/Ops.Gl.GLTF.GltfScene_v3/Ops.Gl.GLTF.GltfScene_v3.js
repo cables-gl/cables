@@ -369,6 +369,10 @@ function loadBin(addCacheBuster)
             gltf = parseGltf(arrayBuffer);
 
             finishLoading();
+        })
+        .catch((err) =>
+        {
+            console.log(err);
         });
     closeTab();
 
