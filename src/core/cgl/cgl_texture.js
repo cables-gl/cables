@@ -29,6 +29,7 @@ const Texture = function (__cgl, options)
     if (!__cgl) throw new Error("no cgl");
     this._log = new Logger("cgl_texture");
     this._cgl = __cgl;
+    this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
     this.tex = this._cgl.gl.createTexture();
     this.id = CABLES.uuid();
     this.width = 0;
@@ -48,13 +49,11 @@ const Texture = function (__cgl, options)
     this.unpackAlpha = true;
     this._fromData = true;
     this.name = "unknown";
-    this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
 
     this._glDataType = -1;
     this._glInternalFormat = -1;
     this._glDataFormat = -1;
 
-    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
     if (options)
     {
@@ -96,6 +95,8 @@ const Texture = function (__cgl, options)
 
     this._cgl.profileData.profileTextureNew++;
 
+
+    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
     this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
     this.setSize(options.width, options.height);
