@@ -112,7 +112,7 @@ function realReload(nocache)
         cgl.patch.loading.addAssetLoadingTask(() =>
         {
             op.setUiError("urlerror", null);
-
+            console.log("img load url", url);
             CGL.Texture.load(cgl, url,
                 function (err, newTex)
                 {
