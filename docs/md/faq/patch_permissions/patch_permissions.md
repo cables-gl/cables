@@ -30,7 +30,7 @@ page and in the editor.
 
 Team members will also be able to request access (in that case "Full Access" (see below)) to a patch. It is up
 to the owner of the patch to grant access to patches. You, as the owner, will find new request for access on the
-[invite page](/invites) after clicking on the red bubble notification on your welcome page.
+[activity feed](/myactivityfeed) after clicking on the red bubble notification on your welcome page.
 
 ## Read-Only
 
