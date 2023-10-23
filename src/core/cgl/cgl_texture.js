@@ -297,14 +297,14 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
 
-        if (pixelFormatStr.indexOf("16bit"))
-        {
-            const extcb = cgl.enableExtension("EXT_color_buffer_half_float");
-        }
+        if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
+
         // else if (pixelFormat == Texture.PFORMATSTR_RGBA32F)
         // {
         //     const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
         // }
+
+        console.log(pixelFormatStr);
     }
 
     // if (this.textureType == Texture.TYPE_DEPTH)
