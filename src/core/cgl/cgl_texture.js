@@ -306,7 +306,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
         /// //////
 
-        // if (o.glDataType === cgl.gl.FLOAT)
         if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
         {
             cgl.enableExtension("EXT_color_buffer_float");
@@ -315,15 +314,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
         if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
 
-        // else if (pixelFormat == Texture.PFORMATSTR_RGBA32F)
-        // {
-        //     const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
-        // }
-
-        console.log(pixelFormatStr, this.name);
+        // console.log(pixelFormatStr, this.name);
     }
-
-    // if (this.textureType == Texture.TYPE_DEPTH)
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
 
