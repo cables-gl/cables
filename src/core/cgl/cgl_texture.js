@@ -242,7 +242,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
         else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
         {
-            o.glInternalFormat = cgl.gl.RGB;
+            o.glInternalFormat = cgl.gl.RGB8;
             o.glDataFormat = cgl.gl.RGB;
         }
         else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
