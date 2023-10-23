@@ -225,7 +225,10 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
     else
     {
-        if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
+        if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
+        {
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
         {
             o.glInternalFormat = cgl.gl.RGB565;
             o.glDataFormat = cgl.gl.RGB;
@@ -281,14 +284,27 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             o.glInternalFormat = cgl.gl.RGBA32F;
             o.glDataType = cgl.gl.FLOAT;
         }
+        else
+        {
+            console.log("unknown pixelformat ", pixelFormatStr);
+        }
 
         /// //////
 
         if (o.glDataType === cgl.gl.FLOAT)
         {
-            cgl.gl.getExtension("EXT_color_buffer_float");
-            cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            cgl.getExtension("EXT_color_buffer_float");
+            cgl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
+
+        if (pixelFormatStr.indexOf("16bit"))
+        {
+            const extcb = cgl.enableExtension("EXT_color_buffer_half_float");
+        }
+        // else if (pixelFormat == Texture.PFORMATSTR_RGBA32F)
+        // {
+        //     const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+        // }
     }
 
     // if (this.textureType == Texture.TYPE_DEPTH)

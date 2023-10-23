@@ -425,7 +425,7 @@ function updateMaterials()
     if (inMaterials.links.length == 1 && inMaterials.get())
     {
         // just accept a associative object with shader in it
-        const op = inMaterials.links[0].portOut.parent;
+        const op = inMaterials.links[0].portOut.op;
 
         const portShader = op.getPort("Shader");
         const portName = op.getPort("Material Name");
