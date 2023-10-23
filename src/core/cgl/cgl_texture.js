@@ -283,11 +283,26 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             o.glInternalFormat = cgl.gl.RGBA32F;
             o.glDataType = cgl.gl.FLOAT;
         }
+
+        else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
+        {
+            if (cgl.glVersion == 1)
+            {
+                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
+                o.glDataType = cgl.gl.UNSIGNED_SHORT;
+                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            }
+            else
+            {
+                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
+                o.glDataType = cgl.gl.FLOAT;
+                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            }
+        }
         else
         {
             console.log("unknown pixelformat ", pixelFormatStr);
         }
-
         /// //////
 
         // if (o.glDataType === cgl.gl.FLOAT)
@@ -308,21 +323,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
 
     // if (this.textureType == Texture.TYPE_DEPTH)
-    if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
-    {
-        if (cgl.glVersion == 1)
-        {
-            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
-            o.glDataType = cgl.gl.UNSIGNED_SHORT;
-            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
-        }
-        else
-        {
-            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
-            o.glDataType = cgl.gl.FLOAT;
-            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
-        }
-    }
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
 
