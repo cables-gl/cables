@@ -295,8 +295,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
         // if (o.glDataType === cgl.gl.FLOAT)
         if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
         {
-            cgl.getExtension("EXT_color_buffer_float");
-            cgl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            cgl.enableExtension("EXT_color_buffer_float");
+            cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
 
         if (pixelFormatStr.indexOf("16bit"))
