@@ -206,14 +206,8 @@ Framebuffer2.prototype.setSize = function (w, h)
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, renderBuffer);
 
-
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
         let internFormat = info.glInternalFormat;
-
-        if (info.glInternalFormat == this._cgl.gl.RGBA8)console.log("internalformat RGBA8");
-        if (info.glInternalFormat == this._cgl.gl.RGB8)console.log("internalformat RGB8");
-        console.log(info);
-
 
         if (this._options.isFloatingPointTexture)
         {
