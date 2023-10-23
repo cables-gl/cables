@@ -186,9 +186,10 @@ Texture.prototype.setFormat = function (o)
     this._glDataType = o.glDataType;
 };
 
-Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
+Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
 {
     const o = {};
+
     o.pixelFormatBase = pixelFormatStr;
 
     if (cgl.glUseHalfFloatTex)
