@@ -186,9 +186,16 @@ Texture.prototype.setFormat = function (o)
     this._glDataType = o.glDataType;
 };
 
-Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
+Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 {
     const o = {};
+
+    if (!pixelFormatStr)
+    {
+        console.log("no pixelformatstr!");
+        console.log((new Error()).stack);
+        pixelFormatStr = Texture.PFORMATSTR_RGBA8UB;
+    }
 
     o.pixelFormatBase = pixelFormatStr;
 
@@ -285,8 +292,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr = "")
         }
         else
         {
-            console.log((new Error()).stack);
-
             console.log("unknown pixelformat ", pixelFormatStr);
         }
 
