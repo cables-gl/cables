@@ -515,7 +515,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTURE_AO
-            luminanceColor *= texture(texAO, tcAo).g*inTextureIntensities.AO;
+            luminanceColor *= texture(texAO, tcAo).r*inTextureIntensities.AO;
         #endif
 
         #ifdef ENV_BLEND_ADD
