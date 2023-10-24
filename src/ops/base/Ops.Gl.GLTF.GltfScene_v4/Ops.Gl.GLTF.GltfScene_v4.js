@@ -338,36 +338,36 @@ function finishLoading()
         }
     }
 
-    setTimeout(() =>
-    {
-        for (let i = 0; i < gltf.nodes.length; i++)
-        {
-        // console.log(gltf.nodes[i]);
+    // setTimeout(() =>
+    // {
+    //     for (let i = 0; i < gltf.nodes.length; i++)
+    //     {
+    //     // console.log(gltf.nodes[i]);
 
-            if (gltf.nodes[i].mesh && gltf.nodes[i].mesh.meshes)
-            {
-            // console.log(gltf.nodes[i].mesh.meshes.length);
-                for (let j = 0; j < gltf.nodes[i].mesh.meshes.length; j++)
-                {
-                    console.log(gltf.nodes[i].mesh.meshes[j]);
+    //         if (gltf.nodes[i].mesh && gltf.nodes[i].mesh.meshes)
+    //         {
+    //         // console.log(gltf.nodes[i].mesh.meshes.length);
+    //             for (let j = 0; j < gltf.nodes[i].mesh.meshes.length; j++)
+    //             {
+    //                 console.log(gltf.nodes[i].mesh.meshes[j]);
 
-                    // for (let k = 0; k < gltf.nodes[i].mesh.meshes.length; k++)
-                    {
-                        if (gltf.nodes[i].mesh.meshes[j].mesh)
-                        {
-                            gltf.nodes[i].mesh.meshes[j].mesh.freeMem();
-                            // console.log(gltf.nodes[i].mesh.meshes[j].mesh);
-                            // for (let l = 0; l < gltf.nodes[i].mesh.meshes[j].mesh._attributes.length; l++)
-                            //     gltf.nodes[i].mesh.meshes[j].mesh._attributes[l] = null;
-                        }
-                    }
+    //                 // for (let k = 0; k < gltf.nodes[i].mesh.meshes.length; k++)
+    //                 {
+    //                     if (gltf.nodes[i].mesh.meshes[j].mesh)
+    //                     {
+    //                         gltf.nodes[i].mesh.meshes[j].mesh.freeMem();
+    //                         // console.log(gltf.nodes[i].mesh.meshes[j].mesh);
+    //                         // for (let l = 0; l < gltf.nodes[i].mesh.meshes[j].mesh._attributes.length; l++)
+    //                         //     gltf.nodes[i].mesh.meshes[j].mesh._attributes[l] = null;
+    //                     }
+    //                 }
 
-                    gltf.nodes[i].mesh.meshes[j].geom.clear();
-                    console.log("clear!");
-                }
-            }
-        }
-    }, 1000);
+    //                 gltf.nodes[i].mesh.meshes[j].geom.clear();
+    //                 console.log("clear!");
+    //             }
+    //         }
+    //     }
+    // }, 1000);
 
     finishedLoading = true;
 }
