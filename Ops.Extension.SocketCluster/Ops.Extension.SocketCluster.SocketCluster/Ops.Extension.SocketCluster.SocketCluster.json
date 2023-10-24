@@ -94,7 +94,6 @@
     },
     "summary": "connect to a socketcluster server and manage the connection",
     "issues": "",
-    "collections": null,
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -149,5 +148,5 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3"
+    "exampleProjectId": ""
 }

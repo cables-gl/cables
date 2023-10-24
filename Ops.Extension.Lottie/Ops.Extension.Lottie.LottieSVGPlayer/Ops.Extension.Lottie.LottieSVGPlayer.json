@@ -77,6 +77,11 @@
                 "type": 1,
                 "name": "Rewind",
                 "group": "Timing"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

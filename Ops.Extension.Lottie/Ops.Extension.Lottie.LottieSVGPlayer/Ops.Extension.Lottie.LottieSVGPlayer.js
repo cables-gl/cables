@@ -10,6 +10,7 @@ const
 
     inDir = op.inBool("Play Backward"),
     inRewind = op.inTriggerButton("Rewind"),
+    inEnabled=op.inBool("Active",true),
 
     outComplete = op.outBool("Completed", false),
     outProgress = op.outNumber("Progress"),
@@ -21,7 +22,20 @@ let anim = null;
 let playmodeAuto = true;
 
 inPlay.onChange = play;
-inRewind.onTriggered = inLoop.onChange = inEle.onChange = inData.onChange = updateData;
+
+let timeout=null;
+
+inEnabled.onChange=
+    inRewind.onTriggered =
+    inLoop.onChange =
+    inEle.onChange =
+    inData.onChange = ()=>
+    {
+        clearTimeout(timeout);
+        timeout=setTimeout(()=>{timeout=null;updateData();},30);
+        //if(!timeout)
+    };
+
 inFrame.onChange = gotoFrame;
 inDir.onChange = updateDir;
 inPlayMode.onChange = updateUi;
@@ -87,15 +101,20 @@ function updateData()
 
     updateUi();
 
+let data=null;
+if(inEnabled.get())data=inData.get();
+else return anim=null;
+
     const params = {
         "container": inEle.get(),
         "renderer": "svg",
         "loop": inLoop.get() == true,
         "autoplay": (inPlay.get() == true && playmodeAuto),
-        "animationData": inData.get()
+        "animationData": data
     };
 
     anim = lottie.loadAnimation(params);
+    console.log("new lottie anim...")
 
     anim.addEventListener("complete", () =>
     {
