@@ -369,6 +369,8 @@ function finishLoading()
     //     }
     // }, 1000);
 
+    gltf.chunks = null;
+
     finishedLoading = true;
 }
 
