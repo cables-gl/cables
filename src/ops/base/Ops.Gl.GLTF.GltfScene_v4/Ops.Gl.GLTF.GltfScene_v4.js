@@ -369,7 +369,7 @@ function finishLoading()
     //     }
     // }, 1000);
 
-    gltf.chunks = null;
+    // gltf.chunks=null;
 
     finishedLoading = true;
 }
