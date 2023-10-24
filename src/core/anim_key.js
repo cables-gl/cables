@@ -20,6 +20,8 @@ const Key = function (obj)
     // const bezierAnim = null;
     // this._updateBezier = false;
 
+    console.log("new key");
+
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
     this.set(obj);
 };

@@ -1008,7 +1008,7 @@ Patch.prototype.deSerialize = function (obj, options)
         {
             if (options.genIds) op.id = uuid();
             op.portsInData = opData.portsIn;
-            op._origData = opData;
+            op._origData = JSON.parse(JSON.stringify(opData));
             op.storage = opData.storage;
 
             for (const ipi in opData.portsIn)
