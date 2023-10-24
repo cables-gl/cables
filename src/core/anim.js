@@ -222,6 +222,8 @@ Anim.prototype.setValue = function (time, value, cb)
                 "cb": cb,
             });
         this.keys.push(found);
+
+        if (this.keys % 1000 == 0)console.log(this.name, this.keys.length);
         this._updateLastIndex();
     }
 
