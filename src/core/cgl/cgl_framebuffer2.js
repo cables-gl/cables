@@ -65,8 +65,8 @@ const Framebuffer2 = function (cgl, w, h, options)
 
     if (!options.pixelFormat)
     {
-        if (!options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
         if (options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+        else this._options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
     }
 
 
