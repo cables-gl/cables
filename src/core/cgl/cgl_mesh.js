@@ -196,7 +196,7 @@ Mesh.prototype._bufferArray = function (array, attr)
     else floatArray = array;
 
     attr.arrayLength = floatArray.length;
-    attr.floatArray = null;// floatArray;
+    // attr.floatArray = null;// floatArray;
 
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
