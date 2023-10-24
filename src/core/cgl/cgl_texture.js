@@ -24,11 +24,12 @@ const DEFAULT_TEXTURE_SIZE = 8;
  * const tex=new CGL.Texture(cgl);
  * tex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
  */
-const Texture = function (__cgl, options)
+const Texture = function (__cgl, options = {})
 {
     if (!__cgl) throw new Error("no cgl");
     this._log = new Logger("cgl_texture");
     this._cgl = __cgl;
+    this.pixelFormat = options.pixelFormat || Texture.PFORMATSTR_RGBA8UB;
     this.tex = this._cgl.gl.createTexture();
     this.id = CABLES.uuid();
     this.width = 0;
@@ -48,13 +49,11 @@ const Texture = function (__cgl, options)
     this.unpackAlpha = true;
     this._fromData = true;
     this.name = "unknown";
-    this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
 
     this._glDataType = -1;
     this._glInternalFormat = -1;
     this._glDataFormat = -1;
 
-    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
     if (options)
     {
@@ -78,17 +77,10 @@ const Texture = function (__cgl, options)
         options = {};
     }
 
-    if (!options.pixelFormat)
-    {
-        if (!options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
-        if (options.isFloatingPointTexture)
-        {
-            this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
-        }
-    }
-    else this.pixelFormat = options.pixelFormat;
+    if (!options.pixelFormat && options.isFloatingPointTexture) this.pixelFormat = Texture.PFORMATSTR_RGBA32F;
 
     if (this.textureType == Texture.TYPE_DEPTH) this.pixelFormat = Texture.PFORMATSTR_DEPTH;
+
 
 
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
@@ -96,6 +88,8 @@ const Texture = function (__cgl, options)
 
     this._cgl.profileData.profileTextureNew++;
 
+
+    this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
     this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
     this.setSize(options.width, options.height);
@@ -189,6 +183,14 @@ Texture.prototype.setFormat = function (o)
 Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 {
     const o = {};
+
+    if (!pixelFormatStr)
+    {
+        console.log("no pixelformatstr!");
+        console.log((new Error()).stack);
+        pixelFormatStr = Texture.PFORMATSTR_RGBA8UB;
+    }
+
     o.pixelFormatBase = pixelFormatStr;
 
     if (cgl.glUseHalfFloatTex)
@@ -225,7 +227,10 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
     else
     {
-        if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
+        if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
+        {
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
         {
             o.glInternalFormat = cgl.gl.RGB565;
             o.glDataFormat = cgl.gl.RGB;
@@ -242,7 +247,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
         else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
         {
-            o.glInternalFormat = cgl.gl.RGB;
+            o.glInternalFormat = cgl.gl.RGB8;
             o.glDataFormat = cgl.gl.RGB;
         }
         else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
@@ -251,14 +256,12 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             o.glDataFormat = cgl.gl.RED;
             o.glDataType = cgl.gl.FLOAT;
         }
-
         else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
         {
             o.glInternalFormat = cgl.gl.R16F;
             o.glDataType = cgl.gl.FLOAT;
             o.glDataFormat = cgl.gl.RED;
         }
-
         else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
         {
             o.glInternalFormat = cgl.gl.RG16F;
@@ -282,30 +285,36 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             o.glDataType = cgl.gl.FLOAT;
         }
 
-        /// //////
-
-        if (o.glDataType === cgl.gl.FLOAT)
+        else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
         {
-            cgl.gl.getExtension("EXT_color_buffer_float");
-            cgl.gl.getExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
-        }
-    }
-
-    // if (this.textureType == Texture.TYPE_DEPTH)
-    if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
-    {
-        if (cgl.glVersion == 1)
-        {
-            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
-            o.glDataType = cgl.gl.UNSIGNED_SHORT;
-            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            if (cgl.glVersion == 1)
+            {
+                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
+                o.glDataType = cgl.gl.UNSIGNED_SHORT;
+                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            }
+            else
+            {
+                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
+                o.glDataType = cgl.gl.FLOAT;
+                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            }
         }
         else
         {
-            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
-            o.glDataType = cgl.gl.FLOAT;
-            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            console.log("unknown pixelformat ", pixelFormatStr);
         }
+        /// //////
+
+        if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+        {
+            cgl.enableExtension("EXT_color_buffer_float");
+            cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+        }
+
+        if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
+
+        // console.log(pixelFormatStr, this.name);
     }
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
@@ -1170,12 +1179,11 @@ Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 Texture.PFORMATSTR_R32F = "R 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
+Texture.PFORMATSTR_DEPTH = "DEPTH";
 
 
 Texture.PIXELFORMATS = [
 
-
-    Texture.PFORMATSTR_DEPTH,
     Texture.PFORMATSTR_RGB565,
 
     Texture.PFORMATSTR_R8UB,

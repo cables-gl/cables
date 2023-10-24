@@ -98,7 +98,7 @@ function getWrap()
 
 function isFloatingPoint()
 {
-    return inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    return CGL.Texture.isPixelFormatFloat(inPixelFormat.get());
 }
 
 function doRender()
