@@ -153,6 +153,8 @@ Geometry.prototype.clear = function ()
     this._attributes = {};
 };
 
+
+
 /**
  * @function getAttributes
    @memberof Geometry

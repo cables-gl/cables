@@ -50,6 +50,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._transformFeedBackLoc = -1;
     this._lastAttrUpdate = 0;
 
+    this.memFreed = false;
 
     this._cgl.profileData.addHeavyEvent("mesh constructed", this._name);
 
@@ -65,6 +66,16 @@ const Mesh = function (_cgl, __geom, glPrimitive)
             this.setNumInstances(v);
         },
     });
+};
+
+Mesh.prototype.freeMem = function ()
+{
+    this.memFreed = true;
+
+    for (let i = 0; i < this._attributes.length; i++)
+    {
+        this._attributes[i].floatArray = null;
+    }
 };
 
 /**
@@ -91,9 +102,9 @@ Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
             this._attributes[i].pointer.push(
                 {
                     "loc": -1,
-                    name,
-                    stride,
-                    offset,
+                    "name": name,
+                    "stride": stride,
+                    "offset": offset,
                     "instanced": attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
                 }
             );
@@ -113,7 +124,6 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     if (!attr.name)
     {
-        console.log(attr);
         this._log.stack("no attrname?!");
     }
 
@@ -186,7 +196,7 @@ Mesh.prototype._bufferArray = function (array, attr)
     else floatArray = array;
 
     attr.arrayLength = floatArray.length;
-    attr.floatArray = floatArray;
+    attr.floatArray = null;// floatArray;
 
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
@@ -458,6 +468,7 @@ Mesh.prototype._preBind = function (shader)
 
 Mesh.prototype._checkAttrLengths = function ()
 {
+    if (this.memFreed) return;
     // check length
     for (let i = 0; i < this._attributes.length; i++)
     {
