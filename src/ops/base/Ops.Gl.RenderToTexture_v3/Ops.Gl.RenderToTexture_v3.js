@@ -83,7 +83,7 @@ function doRender()
             fb = new CGL.Framebuffer2(cgl, 8, 8,
                 {
                     "name": "render2texture " + op.id,
-                    "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()),
+                    // "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()),
                     "pixelFormat": inPixelFormat.get(),
                     "multisampling": ms,
                     "wrap": selectedWrap,
@@ -95,7 +95,7 @@ function doRender()
         }
         else
         {
-            fb = new CGL.Framebuffer(cgl, 8, 8, { "isFloatingPointTexture": fpTexture.get(), "clear": clear.get() });
+            fb = new CGL.Framebuffer(cgl, 8, 8, { "isFloatingPointTexture": false, "clear": clear.get() });
         }
 
         if (fb && fb.valid)
