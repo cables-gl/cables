@@ -203,8 +203,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     o.pixelFormat = pixelFormatStr;
 
-    if (o.pixelFormatBase != pixelFormatStr) console.log("pixelformat changed", o.pixelFormatBase, pixelFormatStr);
-
     o.glDataType = cgl.gl.UNSIGNED_BYTE;
     o.glInternalFormat = cgl.gl.RGBA8;
     o.glDataFormat = cgl.gl.RGBA;

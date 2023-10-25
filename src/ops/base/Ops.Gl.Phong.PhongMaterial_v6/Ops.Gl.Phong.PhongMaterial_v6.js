@@ -243,9 +243,10 @@ const shaderOut = op.outObject("Shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 
 const shader = new CGL.Shader(cgl, "phongmaterial_" + op.id);
+shader.op = this;
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR"]);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
-let recompileShader = false;
+// let recompileShader = false;
 shader.define("FALLOFF_MODE_A");
 
 if (cgl.glVersion < 2)
@@ -780,16 +781,16 @@ function compareLights(lightStack)
         createUniforms(lightStack.length);
         oldCount = lightStack.length;
         setUniforms(lightStack);
-        recompileShader = false;
+        // recompileShader = false;
     }
     else
     {
-        if (recompileShader)
-        {
-            createShader(lightStack);
-            createUniforms(lightStack.length);
-            recompileShader = false;
-        }
+        // if (recompileShader)
+        // {
+        //     createShader(lightStack);
+        //     createUniforms(lightStack.length);
+        //     recompileShader = false;
+        // }
         setUniforms(lightStack);
     }
 }
