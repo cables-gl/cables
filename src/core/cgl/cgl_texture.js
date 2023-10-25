@@ -98,7 +98,8 @@ const Texture = function (__cgl, options = {})
 
 Texture.prototype.isFloatingPoint = function ()
 {
-    return this.textureType == Texture.TYPE_FLOAT;
+    // return this.textureType == Texture.TYPE_FLOAT;
+    Texture.isPixelFormatFloat(this.pixelFormat);
 };
 
 /**

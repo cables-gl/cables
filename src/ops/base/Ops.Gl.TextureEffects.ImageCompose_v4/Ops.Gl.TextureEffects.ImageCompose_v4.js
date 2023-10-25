@@ -40,8 +40,8 @@ let copyShaderUVTexUni = null;
 let copyShaderRGBAUni = null;
 
 inWrap.onChange =
-    inFilter.onChange =
-    inPixelFormat.onChange = reInitLater;
+inFilter.onChange =
+inPixelFormat.onChange = reInitLater;
 
 inTex.onLinkChanged =
 inSize.onChange =
@@ -56,13 +56,12 @@ function initEffect()
 {
     if (effect)effect.delete();
     if (tex)tex.delete();
-
+    tex = null;
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) });
 
     tex = new CGL.Texture(cgl,
         {
             "name": "image_compose_v2_" + op.id,
-            // "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()),
             "pixelFormat": inPixelFormat.get(),
             "filter": getFilter(),
             "wrap": getWrap(),
@@ -122,7 +121,7 @@ function updateResolution()
     if ((
         getWidth() != tex.width ||
         getHeight() != tex.height ||
-        tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) ||
+        // tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) ||
         tex.pixelFormat != inPixelFormat.get() ||
         tex.filter != getFilter() ||
         tex.wrap != getWrap()

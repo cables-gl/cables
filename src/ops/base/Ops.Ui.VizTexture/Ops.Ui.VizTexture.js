@@ -227,6 +227,7 @@ op.renderVizLayer = (ctx, layer) =>
             layer.width * 5,
             layer.height); // workaround filtering problems
     else
+    if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layer.height != 0)
         ctx.drawImage(cgl.canvas,
             0,
             0,
