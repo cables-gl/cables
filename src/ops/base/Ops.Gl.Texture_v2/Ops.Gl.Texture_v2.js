@@ -112,64 +112,62 @@ function realReload(nocache)
         cgl.patch.loading.addAssetLoadingTask(() =>
         {
             op.setUiError("urlerror", null);
-            console.log("img load url", url);
-            CGL.Texture.load(cgl, url,
-                function (err, newTex)
+            CGL.Texture.load(cgl, url, function (err, newTex)
+            {
+                cgl.checkFrameStarted("texture inittexture");
+
+                if (filename.get() != fileToLoad)
                 {
-                    cgl.checkFrameStarted("texture inittexture");
+                    cgl.patch.loading.finished(loadingId);
+                    loadingId = null;
+                    return;
+                }
 
-                    if (filename.get() != fileToLoad)
-                    {
-                        cgl.patch.loading.finished(loadingId);
-                        loadingId = null;
-                        return;
-                    }
+                if (tex)tex.delete();
 
-                    if (tex)tex.delete();
+                if (err)
+                {
+                    const t = CGL.Texture.getErrorTexture(cgl);
+                    textureOut.setRef(t);
 
-                    if (err)
-                    {
-                        const t = CGL.Texture.getErrorTexture(cgl);
-                        textureOut.setRef(t);
+                    op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
+                    cgl.patch.loading.finished(loadingId);
+                    loadingId = null;
+                    return;
+                }
 
-                        op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
-                        cgl.patch.loading.finished(loadingId);
-                        loadingId = null;
-                        return;
-                    }
+                // textureOut.setRef(newTex);
 
-                    // textureOut.setRef(newTex);
+                width.set(newTex.width);
+                height.set(newTex.height);
+                ratio.set(newTex.width / newTex.height);
 
-                    width.set(newTex.width);
-                    height.set(newTex.height);
-                    ratio.set(newTex.width / newTex.height);
+                // if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
+                // else op.setUiError("npot", null);
 
-                    // if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
-                    // else op.setUiError("npot", null);
+                tex = newTex;
+                // textureOut.set(null);
+                textureOut.setRef(tex);
 
-                    tex = newTex;
-                    // textureOut.set(null);
-                    textureOut.setRef(tex);
+                loading.set(false);
+                loaded.set(true);
 
-                    loading.set(false);
-                    loaded.set(true);
+                if (inFreeMemory.get()) tex.image = null;
 
-                    if (inFreeMemory.get()) tex.image = null;
-
-                    if (loadingId)
-                    {
-                        cgl.patch.loading.finished(loadingId);
-                        loadingId = null;
-                    }
-                    // testTexture();
-                }, {
-                    "anisotropic": cgl_aniso,
-                    "wrap": cgl_wrap,
-                    "flip": flip.get(),
-                    "unpackAlpha": unpackAlpha.get(),
-                    "pixelFormat": getPixelFormat(),
-                    "filter": cgl_filter
-                });
+                if (loadingId)
+                {
+                    cgl.patch.loading.finished(loadingId);
+                    loadingId = null;
+                }
+                // testTexture();
+            }, {
+                "anisotropic": cgl_aniso,
+                "wrap": cgl_wrap,
+                "flip": flip.get(),
+                "unpackAlpha": unpackAlpha.get(),
+                "pixelFormat": getPixelFormat(),
+                "filter": cgl_filter
+            });
 
             // textureOut.set(null);
             // textureOut.set(tex);

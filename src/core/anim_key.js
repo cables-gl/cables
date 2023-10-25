@@ -4,11 +4,11 @@ const Key = function (obj)
 {
     this.time = 0.0;
     this.value = 0.0;
-    this.ui = null;
+    // this.ui = null;
     this.onChange = null;
     this._easing = 0;
-    this.bezTangIn = 0;
-    this.bezTangOut = 0;
+    // this.bezTangIn = 0;
+    // this.bezTangOut = 0;
     // this.bezTime = 0.5;
     // this.bezValue = 0;
     // this.bezTimeIn = -0.5;
@@ -17,7 +17,7 @@ const Key = function (obj)
     this.cb = null;
     this.cbTriggered = false;
 
-    const bezierAnim = null;
+    // const bezierAnim = null;
     // this._updateBezier = false;
 
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
@@ -61,7 +61,7 @@ Key.easeAbsolute = function (perc, key2)
 
 export const easeExpoIn = function (t)
 {
-    return (t = Math.pow(2, 10 * (t - 1)));
+    return (t = 2 ** (10 * (t - 1)));
 };
 
 Key.easeExpoIn = function (t, key2)
@@ -72,7 +72,7 @@ Key.easeExpoIn = function (t, key2)
 
 export const easeExpoOut = function (t)
 {
-    t = -Math.pow(2, -10 * t) + 1;
+    t = -(2 ** (-10 * t)) + 1;
     return t;
 };
 
@@ -87,12 +87,12 @@ export const easeExpoInOut = function (t)
     t *= 2;
     if (t < 1)
     {
-        t = 0.5 * Math.pow(2, 10 * (t - 1));
+        t = 0.5 * 2 ** (10 * (t - 1));
     }
     else
     {
         t--;
-        t = 0.5 * (-Math.pow(2, -10 * t) + 2);
+        t = 0.5 * (-(2 ** (-10 * t)) + 2);
     }
     return t;
 };
@@ -218,7 +218,7 @@ Key.easeInElastic = function (t, key2)
             s = p / 4;
         }
         else s = (p / (2 * Math.PI)) * Math.asin(c / a);
-        t = -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b;
+        t = -(a * 2 ** (10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b;
     }
 
     return Key.linear(t, this, key2);
@@ -246,7 +246,7 @@ Key.easeOutElastic = function (t, key2)
             s = p / 4;
         }
         else s = (p / (2 * Math.PI)) * Math.asin(c / a);
-        t = a * Math.pow(2, -10 * t) * Math.sin(((t * d - s) * (2 * Math.PI)) / p) + c + b;
+        t = a * 2 ** (-10 * t) * Math.sin(((t * d - s) * (2 * Math.PI)) / p) + c + b;
     }
 
     return Key.linear(t, this, key2);

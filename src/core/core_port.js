@@ -63,7 +63,6 @@ const Port = function (___op, name, type, uiAttribs)
     this.changeAlways = false;
     this.forceRefChange = false;
 
-    this._warnedDeprecated = false;
     this._useVariableName = null;
 
     this.activityCounter = 0;
@@ -100,7 +99,6 @@ const Port = function (___op, name, type, uiAttribs)
         {
             this._log.warn("val getter deprecated!", this);
             this._log.stack("val getter deprecated");
-            this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
@@ -108,8 +106,6 @@ const Port = function (___op, name, type, uiAttribs)
             this._log.warn("val setter deprecated!", this);
             this._log.stack("val setter deprecated");
             this.setValue(v);
-            // if(!this._warnedDeprecated)console.warn('deprecated .val set used',this._op.name);
-            this._warnedDeprecated = true;
         }
     });
 };

@@ -202,6 +202,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     o.pixelFormat = pixelFormatStr;
 
+    if (o.pixelFormatBase != pixelFormatStr) console.log("pixelformat changed", o.pixelFormatBase, pixelFormatStr);
 
 
     o.glDataType = cgl.gl.UNSIGNED_BYTE;
@@ -314,7 +315,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
         if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
 
-        // console.log(pixelFormatStr, this.name);
+        console.log(pixelFormatStr, this.name);
     }
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
@@ -442,13 +443,7 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-
     this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
-    // if (this.textureType == Texture.TYPE_FLOAT)
-    //     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, data);
-    // else
-    //     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
-
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, data);
 

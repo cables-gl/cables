@@ -2,39 +2,39 @@ import { now } from "./timer";
 
 class Profiler
 {
-    constructor (patch)
+    constructor(patch)
     {
         this.startFrame = patch.getFrameNum();
         this.items = {};
         this.currentId = null;
         this.currentStart = 0;
-        this._patch=patch;
+        this._patch = patch;
     }
 
     getItems()
     {
         return this.items;
-    };
+    }
 
     clear()
     {
-        if(this.paused)return;
+        if (this.paused) return;
         this.items = {};
-    };
+    }
 
     togglePause()
     {
-        this.paused=!this.paused;
-        if(!this.paused)
+        this.paused = !this.paused;
+        if (!this.paused)
         {
-            this.items={};
-            this.currentStart=performance.now();
+            this.items = {};
+            this.currentStart = performance.now();
         }
     }
 
     add(type, object)
     {
-        if(this.paused)return;
+        if (this.paused) return;
 
         if (this.currentId !== null)
         {
@@ -79,17 +79,16 @@ class Profiler
         {
             this.currentId = null;
         }
-    };
+    }
 
     print()
     {
         console.log("--------");
         for (const i in this.items)
         {
-            console.log(items[i].title + ": " + this.items[i].numTriggers + " / " + this.items[i].timeUsed);
+            console.log(this.items[i].title + ": " + this.items[i].numTriggers + " / " + this.items[i].timeUsed);
         }
-    };
-
-};
+    }
+}
 
 export { Profiler };

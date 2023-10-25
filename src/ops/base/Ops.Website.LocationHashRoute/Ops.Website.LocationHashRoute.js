@@ -3,7 +3,6 @@ const parsedOut = op.outObject("Values", {});
 const changedOut = op.outTrigger("Changed");
 const outMatching = op.outBool("Matching");
 
-let router = null;
 let lastHref = null;
 let hashChangeListener = null;
 
@@ -13,7 +12,6 @@ function init()
 {
     if ("onhashchange" in window)
     {
-        router = new Navigo("/", { "hash": true, "noMatchWarning": true });
         const eventWrapper = (event) =>
         {
             event.internal = true;
@@ -53,10 +51,7 @@ op.onDelete = function ()
 
 routeIn.onChange = function ()
 {
-    if (router)
-    {
-        hashChange({ "newURL": window.location.href }, true);
-    }
+    hashChange({ "newURL": window.location.href }, true);
 };
 
 function hashChange(event, forceUpdate)
@@ -73,7 +68,7 @@ function hashChange(event, forceUpdate)
     let hasMatch = false;
     if (routeIn.get())
     {
-        if (router && fields.length > 1)
+        if (fields.length > 1)
         {
             hasMatch = false;
             for (let i = 1; i < fields.length; i++)
@@ -85,7 +80,7 @@ function hashChange(event, forceUpdate)
                 op.setUiError("regex", null);
                 try
                 {
-                    matched = router.matchLocation(route, match);
+                    matched = matchLocation(route, match);
                 }
                 catch (e)
                 {
@@ -189,4 +184,143 @@ function parseQuery(str)
         else query[first] = [query[first], second];
     }
     return query;
+}
+
+// https://github.com/krasimir/navigo
+function matchLocation(path, currentLocation)
+{
+    if (typeof currentLocation !== "undefined")
+    {
+        currentLocation = "/" + cleanPath(currentLocation);
+    }
+
+    let context = {
+        "to": currentLocation,
+        "currentLocationPath": currentLocation
+    };
+    if (typeof context.currentLocationPath === "undefined")
+    {
+        let envUrl = "/";
+        if (typeof window !== "undefined")
+        {
+            envUrl = location.pathname + location.search + location.hash;
+        }
+        context.currentLocationPath = context.to = envUrl;
+    }
+    if (context.currentLocationPath.indexOf("#") >= 0)
+    {
+        context.currentLocationPath = context.currentLocationPath.split("#")[1] || "/";
+    }
+
+    if (typeof path === "string")
+    {
+        path = "/" + cleanPath(path);
+    }
+
+    let match = matchRoute(context, {
+        "name": String(path),
+        "path": path,
+        "handler": function handler() {},
+        "hooks": {}
+    });
+    return match || false;
+}
+
+// https://github.com/krasimir/navigo
+function cleanPath(s)
+{
+    return s.replace(/\/+$/, "").replace(/^\/+/, "");
+}
+
+// https://github.com/krasimir/navigo
+function matchRoute(context, route)
+{
+    let tmp = cleanPath(context.currentLocationPath).split(/\?(.*)?$/);
+    let _extractGETParameters = [cleanPath(tmp[0]), tmp.slice(1).join("")];
+
+    let current = _extractGETParameters[0],
+        GETParams = _extractGETParameters[1];
+
+    let params = GETParams === "" ? null : parseQuery(GETParams);
+    let paramNames = [];
+    let pattern;
+
+    if (typeof route.path === "string")
+    {
+        pattern = "(?:/^|^)" + cleanPath(route.path).replace(/([:*])(\w+)/g, function (full, dots, name)
+        {
+            paramNames.push(name);
+            return "([^/]+)";
+        }).replace(/\*/g, "?(?:.*)").replace(/\/\?/g, "/?([^/]+|)") + "$";
+
+        if (cleanPath(route.path) === "")
+        {
+            if (cleanPath(current) === "")
+            {
+                let hash = "";
+                if (context.to && context.to.indexOf("#") >= 0)
+                {
+                    hash = context.to.split("#").pop() || "";
+                }
+
+                return {
+                    "url": current,
+                    "queryString": GETParams,
+                    "hashString": hash,
+                    "route": route,
+                    "data": null,
+                    "params": params
+                };
+            }
+        }
+    }
+    else
+    {
+        pattern = route.path;
+    }
+
+    let regexp = new RegExp(pattern, "");
+    let match = current.match(regexp);
+
+    if (match)
+    {
+        let data = null;
+        if (typeof route.path === "string")
+        {
+            if (paramNames.length === 0)
+            {
+                data = null;
+            }
+            else
+            {
+                data = match.slice(1, match.length).reduce(function (p, value, index)
+                {
+                    if (p === null) p = {};
+                    p[paramNames[index]] = decodeURIComponent(value);
+                    return p;
+                }, null);
+            }
+        }
+        else if (match.groups)
+        {
+            data = match.groups;
+        }
+        if (!data) data = match.slice(1);
+
+        let hash = "";
+        if (context.to && context.to.indexOf("#") >= 0)
+        {
+            hash = context.to.split("#").pop() || "";
+        }
+        return {
+            "url": cleanPath(current.replace(new RegExp("^/"), "")),
+            "queryString": GETParams,
+            "hashString": hash,
+            "route": route,
+            "data": data,
+            "params": params
+        };
+    }
+
+    return false;
 }

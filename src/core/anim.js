@@ -163,6 +163,7 @@ Anim.prototype.sortKeys = function ()
     this.keys.sort((a, b) => { return parseFloat(a.time) - parseFloat(b.time); });
     this._updateLastIndex();
     this._needsSort = false;
+    if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 };
 
 Anim.prototype.getLength = function ()
@@ -222,6 +223,8 @@ Anim.prototype.setValue = function (time, value, cb)
                 "cb": cb,
             });
         this.keys.push(found);
+
+        if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
         this._updateLastIndex();
     }
 
