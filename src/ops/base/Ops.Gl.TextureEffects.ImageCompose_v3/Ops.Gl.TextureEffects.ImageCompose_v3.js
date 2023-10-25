@@ -120,7 +120,7 @@ function updateResolution()
     if ((
         getWidth() != tex.width ||
         getHeight() != tex.height ||
-        tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixel.get()) ||
+        // tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixel.get()) ||
         tex.pixelFormat != inPixel.get() ||
         tex.filter != getFilter() ||
         tex.wrap != getWrap()
