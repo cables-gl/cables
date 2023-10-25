@@ -72,7 +72,7 @@ inReceiveShadow.onChange = () =>
 inAlgorithm.onChange = () =>
 {
     const current = inAlgorithm.get();
-    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+    algorithms.forEach((alg) => { return shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current); });
 
     setAlgorithmGreyouts();
 };
@@ -269,7 +269,7 @@ shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_G", inAlphaMaskSource.get() === 
 shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
 shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
 
-const srcHeadVertBase = attachments.head_vert;
+const srcHeadVertBase = "";
 const srcBodyVertBase = "";
 const srcHeadFragBase = attachments.head_frag;
 const srcBodyFragBase = "";
@@ -284,7 +284,7 @@ const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule_" + op.id);
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
-algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
+algorithms.forEach((alg) => { return shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()); });
 
 const hasShadowMap = [];
 const hasShadowCubemap = [];
@@ -339,7 +339,7 @@ function createUniforms()
     {
         shaderModule.addUniformFrag("3f", "MOD_shadowColor", inShadowColorR, inShadowColorG, inShadowColorB, null);
         shaderModule.addUniformFrag("f", "MOD_sampleSpread", inSpread, null, null, null);
-        if (cgl.frameStore.lightStack.map((l) => l.type).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
+        if (cgl.frameStore.lightStack.map((l) => { return l.type; }).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
     }
 
     STATE.lastLength = cgl.frameStore.lightStack.length;
