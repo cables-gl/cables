@@ -220,7 +220,7 @@ function capturePrefilteredCubemap(size)
 {
     size = Number(size);
     let captureFBO = new CGL.CubemapFramebuffer(cgl, size, size, {
-        // "isFloatingPointTexture": true,
+        "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
         "clear": false,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
@@ -229,7 +229,6 @@ function capturePrefilteredCubemap(size)
     if (prefilteredFrameBuffer) prefilteredFrameBuffer.dispose();
 
     prefilteredFrameBuffer = new CGL.CubemapFramebuffer(cgl, size, size, {
-        "isFloatingPointTexture": false,
         "clear": false,
         "filter": CGL.Texture.FILTER_MIPMAP,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE

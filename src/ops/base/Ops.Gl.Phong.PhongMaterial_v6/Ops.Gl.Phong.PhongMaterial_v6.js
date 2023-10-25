@@ -17,11 +17,9 @@ function createDefaultShader()
 {
     const vertexShader = attachments.phong_vert;
     let fragmentShader = attachments.phong_frag;
-    let fragmentHead = "";
-    let fragmentBody = "";
 
-    fragmentHead = fragmentHead.concat(createFragmentHead(0));
-    fragmentBody = fragmentBody.concat(createFragmentBody(0, DEFAULT_LIGHTSTACK[0].type));
+    let fragmentHead = createFragmentHead(0);
+    let fragmentBody = createFragmentBody(0, DEFAULT_LIGHTSTACK[0].type);
 
     fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead);
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
