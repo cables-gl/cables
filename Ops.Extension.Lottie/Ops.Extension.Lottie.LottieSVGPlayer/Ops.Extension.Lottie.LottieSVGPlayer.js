@@ -102,7 +102,7 @@ function updateData()
     updateUi();
 
 let data=null;
-if(inEnabled.get())data=inData.get();
+if(inEnabled.get())data=inData.get();//JSON.parse(JSON.stringify(inData.get())); // deep copy every time ? https://github.com/airbnb/lottie-web/issues/1159
 else return anim=null;
 
     const params = {
