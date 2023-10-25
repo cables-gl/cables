@@ -628,12 +628,12 @@ class Context extends CGState
         //     t = CGL.Texture.getEmptyTexture(this).tex;
         // }
 
-        if (!this.gl.isTexture(t))
-        {
-            t = CGL.Texture.getErrorTexture(this).tex;
-            // this._log.stack("not a texture!!!!");
-            // return false;
-        }
+        // if (!this.gl.isTexture(t))
+        // {
+        //     t = CGL.Texture.getErrorTexture(this).tex;
+        //     // this._log.stack("not a texture!!!!");
+        //     // return false;
+        // }
 
 
         if (this._textureslots[slot] != t)
