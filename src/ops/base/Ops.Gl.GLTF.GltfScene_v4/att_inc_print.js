@@ -138,7 +138,6 @@ function printMaterial(mat, idx)
     let html = "<tr>";
     html += " <td>" + idx + "</td>";
     html += " <td>" + mat.name + "</td>";
-    // html+=' <td><a onclick="" class="treebutton">Assign</a><td>';
 
     html += " <td>";
 
@@ -368,12 +367,15 @@ function printInfo()
 
     let numSamplers = 0;
     let numAnims = 0;
+    let numKeyframes = 0;
 
     if (gltf.json.animations)
     {
         numAnims = gltf.json.animations.length;
         for (let i = 0; i < gltf.json.animations.length; i++)
+        {
             numSamplers += gltf.json.animations[i].samplers.length;
+        }
     }
 
     html += "<div id=\"groupAnims\">Animations (" + numAnims + "/" + numSamplers + ")</div>";
@@ -388,6 +390,7 @@ function printInfo()
         html += "  <th>Interpolation</th>";
         html += "  <th>Keys</th>";
         html += "</tr>";
+
 
         sizes.animations = 0;
 
@@ -426,6 +429,7 @@ function printInfo()
                 html += "  <td>" + smplr.interpolation + "</td>";
 
                 html += "  <td>" + gltf.json.accessors[smplr.output].count;
+                numKeyframes += gltf.json.accessors[smplr.output].count;
 
                 // html += "&nbsp;&nbsp;<a onclick=\"gui.corePatch().getOpById('" + op.id + "').showAnim('" + i + "','" + j + "')\" class=\"icon icon-search\"></a>";
 
@@ -434,6 +438,14 @@ function printInfo()
                 html += "</tr>";
             }
         }
+
+        html += "<tr>";
+        html += "  <td></td>";
+        html += "  <td></td>";
+        html += "  <td></td>";
+        html += "  <td></td>";
+        html += "  <td>" + numKeyframes + " total</td>";
+        html += "</tr>";
         html += "</table>";
     }
     else
