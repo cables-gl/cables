@@ -8,7 +8,7 @@ const
     height = op.inValueInt("Height", 480),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
-    inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
+    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     r = op.inValueSlider("R", 0),
     g = op.inValueSlider("G", 0),
@@ -22,7 +22,7 @@ const
     outHeight = op.outNumber("Texture Height");
 
 op.setPortGroup("Texture Size", [inSize, width, height]);
-op.setPortGroup("Texture Parameters", [inWrap, inFilter, inPixel]);
+op.setPortGroup("Texture Parameters", [inWrap, inFilter, inPixelFormat]);
 
 r.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Color", [r, g, b, a]);
@@ -41,7 +41,7 @@ let copyShaderRGBAUni = null;
 
 inWrap.onChange =
     inFilter.onChange =
-    inPixel.onChange = reInitLater;
+    inPixelFormat.onChange = reInitLater;
 
 inTex.onLinkChanged =
 inSize.onChange =
@@ -57,13 +57,13 @@ function initEffect()
     if (effect)effect.delete();
     if (tex)tex.delete();
 
-    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixel.get()) });
+    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) });
 
     tex = new CGL.Texture(cgl,
         {
             "name": "image_compose_v2_" + op.id,
-            "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixel.get()),
-            "pixelFormat": inPixel.get(),
+            // "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()),
+            "pixelFormat": inPixelFormat.get(),
             "filter": getFilter(),
             "wrap": getWrap(),
             "width": getWidth(),
@@ -122,8 +122,8 @@ function updateResolution()
     if ((
         getWidth() != tex.width ||
         getHeight() != tex.height ||
-        tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixel.get()) ||
-        tex.pixelFormat != inPixel.get() ||
+        tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) ||
+        tex.pixelFormat != inPixelFormat.get() ||
         tex.filter != getFilter() ||
         tex.wrap != getWrap()
     ) && (getWidth() !== 0 && getHeight() !== 0))
@@ -179,7 +179,7 @@ function updateUi()
     height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
     if (tex)
-        if (CGL.Texture.isPixelFormatFloat(inPixel.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
+        if (CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
         else op.setUiError("fpmipmap", null);
 
     updateResolutionInfo();

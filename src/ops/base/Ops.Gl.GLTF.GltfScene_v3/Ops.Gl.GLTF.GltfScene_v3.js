@@ -335,6 +335,8 @@ function finishLoading()
         }
     }
 
+    gltf.chunks = null;
+
     finishedLoading = true;
 }
 

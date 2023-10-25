@@ -29,7 +29,7 @@ function getCssContent()
 
 function update()
 {
-    styleEle = document.getElementById(eleId);
+    styleEle = op.patch.cgl.canvas.ownerDocument.getElementById(eleId);
 
     if (styleEle)
     {
@@ -37,19 +37,19 @@ function update()
     }
     else
     {
-        styleEle = document.createElement("style");
+        styleEle = op.patch.cgl.canvas.ownerDocument.createElement("style");
         styleEle.type = "text/css";
         styleEle.id = eleId;
         styleEle.textContent = attachments.css_spinner;
         styleEle.classList.add("cablesEle");
 
-        const head = document.getElementsByTagName("body")[0];
+        const head = op.patch.cgl.canvas.ownerDocument.getElementsByTagName("body")[0];
         head.appendChild(styleEle);
     }
 }
 
 op.onDelete = function ()
 {
-    styleEle = document.getElementById(eleId);
+    styleEle = op.patch.cgl.canvas.ownerDocument.getElementById(eleId);
     if (styleEle)styleEle.remove();
 };

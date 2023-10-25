@@ -1,25 +1,31 @@
-const inEle = op.inObject("HTML Element");
-const inVisible = op.inValueBool("Visible", true);
-const inDuration = op.inValue("Duration", 0.5);
-const inOpacity = op.inValue("Opacity", 1);
-const outShowing = op.outBoolNum("Is Showing", false);
+const
+    inEle = op.inObject("HTML Element"),
+    inVisible = op.inValueBool("Visible", true),
+    inDuration = op.inValue("Duration", 0.5),
+    inOpacity = op.inValue("Opacity", 1),
+    outShowing = op.outBoolNum("Is Showing", false);
 
 let theTimeout = null;
-inDuration.onChange = update;
-inOpacity.onChange = update;
-
-inVisible.onChange = updateVisibility;
-inEle.onChange = updateVisibility;
-
-let styleEle = null;
-const eleId = "css_" + CABLES.uuid();
-
-update();
-
 let oldEle = null;
 let loaded = true;
 const oldvis = null;
 loaded = true;
+
+inDuration.onChange =
+    inOpacity.onChange = update;
+
+inVisible.onChange =
+    inEle.onChange = updateVisibility;
+
+let styleEle = null;
+const eleId = "css_" + CABLES.uuid();
+const cssClassesId = CABLES.shortId();
+
+const animFadeInClass = "CABLES_animFadeIn_" + cssClassesId;
+const animFadedOutClass = "CABLES_animFadedOut_" + cssClassesId;
+const animFadeOutClass = "CABLES_animFadeOut_" + cssClassesId;
+
+update();
 
 op.onLoaded = function ()
 {
@@ -45,15 +51,15 @@ function updateVisibility()
         if (inVisible.get())
         {
             outShowing.set(true);
-            if (ele && ele.classList && !ele.classList.contains("CABLES_animFadeIn"))
+            if (ele && ele.classList && !ele.classList.contains(animFadeInClass))
             {
                 clearTimeout(theTimeout);
-                ele.classList.remove("CABLES_animFadedOut");
-                ele.classList.remove("CABLES_animFadeOut");
-                ele.classList.add("CABLES_animFadeIn");
+                ele.classList.remove(animFadedOutClass);
+                ele.classList.remove(animFadeOutClass);
+                ele.classList.add(animFadeInClass);
                 theTimeout = setTimeout(function ()
                 {
-                    ele.classList.remove("CABLES_animFadeIn");
+                    ele.classList.remove(animFadeInClass);
                     outShowing.set(true);
                 }, inDuration.get() * 1000);
             }
@@ -61,14 +67,14 @@ function updateVisibility()
         else
         {
             outShowing.set(true);
-            if (ele && ele.classList && !ele.classList.contains("CABLES_animFadeOut"))
+            if (ele && ele.classList && !ele.classList.contains(animFadedOutClass))
             {
                 clearTimeout(theTimeout);
-                ele.classList.remove("CABLES_animFadeIn");
-                ele.classList.add("CABLES_animFadeOut");
+                ele.classList.remove(animFadeInClass);
+                ele.classList.add(animFadeOutClass);
                 theTimeout = setTimeout(function ()
                 {
-                    ele.classList.add("CABLES_animFadedOut");
+                    ele.classList.add(animFadedOutClass);
                     outShowing.set(false);
                 }, inDuration.get() * 1000);
             }
@@ -86,6 +92,7 @@ function getCssContent()
 
     while (css.indexOf("$LENGTH") > -1)css = css.replace("$LENGTH", inDuration.get());
     while (css.indexOf("$FULLOPACITY") > -1)css = css.replace("$FULLOPACITY", inOpacity.get());
+    while (css.indexOf("$CLASSES_ID") > -1)css = css.replace("$CLASSES_ID", cssClassesId);
 
     return css;
 }
@@ -103,6 +110,7 @@ function update()
         styleEle = document.createElement("style");
         styleEle.type = "text/css";
         styleEle.id = eleId;
+        styleEle.classList.add("cablesEle");
         styleEle.textContent = getCssContent();
 
         const head = document.getElementsByTagName("body")[0];
@@ -116,9 +124,9 @@ op.onDelete = function ()
 
     if (ele && ele.classList)
     {
-        ele.classList.remove("CABLES_animFadeIn");
-        ele.classList.remove("CABLES_animFadedOut");
-        ele.classList.remove("CABLES_animFadeOut");
+        ele.classList.remove(animFadeInClass);
+        ele.classList.remove(animFadedOutClass);
+        ele.classList.remove(animFadeOutClass);
     }
 
     styleEle = document.getElementById(eleId);

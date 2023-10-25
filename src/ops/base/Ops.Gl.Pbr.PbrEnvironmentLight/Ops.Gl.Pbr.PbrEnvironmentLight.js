@@ -51,7 +51,6 @@ const mesh = new CGL.Mesh(cgl, geometry);
 const fullscreenRectangle = CGL.MESHES.getSimpleRect(cgl, "fullscreenRectangle");
 // inputs
 const inTrigger = op.inTrigger("render");
-// const inTriggerRecapture = op.inTriggerButton("recapture");
 
 const inCubemap = op.inTexture("RGBE Environment map");
 
@@ -298,10 +297,9 @@ function computeIBLLUT(size)
     {
         let isFloatingPointTexture = !inForce8bitIbl.get();
 
-        if(isFloatingPointTexture)
+        if (isFloatingPointTexture)
         {
             iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
-                "isFloatingPointTexture": true,
                 "pixelFormat": CGL.Texture.PFORMATSTR_RG16F,
                 "filter": CGL.Texture.FILTER_LINEAR,
                 "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
@@ -310,7 +308,6 @@ function computeIBLLUT(size)
         else
         {
             iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
-                "isFloatingPointTexture": false,
                 "filter": CGL.Texture.FILTER_LINEAR,
                 "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
             });
