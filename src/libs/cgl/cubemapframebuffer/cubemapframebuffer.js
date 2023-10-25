@@ -143,10 +143,11 @@ class CubemapFramebuffer
 
     dispose()
     {
-        this.texture = null; // TODO: remove
+        if (this.texture) this.texture.delete();
         this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
         this._cgl.gl.deleteFramebuffer(this._framebuffer);
         this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
+        this.texture = null;
     }
 
     delete()

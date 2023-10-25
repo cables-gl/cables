@@ -211,6 +211,11 @@ class CubemapTexture
         if (this.filter == CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
         this._cgl.profileData.profileGenMipMap++;
     }
+
+    delete()
+    {
+        this._cgl.gl.deleteTexture(this.tex);
+    }
 }
 
 export { CubemapTexture };
