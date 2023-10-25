@@ -1,23 +1,24 @@
-const inMax = op.inFloat("Length", 30);
-const inCurrent = op.inFloat("Current", 0);
-const inClamp = op.inBool("Clamp", false);
-const inIsPlaying = op.inBool("Is Playing", false);
-const inVisible = op.inBool("Visible", true);
-const inShowValue = op.inBool("Show Time");
-const inShowSkip = op.inBool("Show Skip Buttons");
+const
+    inMax = op.inFloat("Length", 30),
+    inCurrent = op.inFloat("Current", 0),
+    inClamp = op.inBool("Clamp", false),
+    inIsPlaying = op.inBool("Is Playing", false),
+    inVisible = op.inBool("Visible", true),
+    inShowValue = op.inBool("Show Time"),
+    inShowSkip = op.inBool("Show Skip Buttons"),
 
-const outPlay = op.outTrigger("Play clicked");
-const outPause = op.outTrigger("Pause clicked");
-const outRewind = op.outTrigger("Rewind clicked");
-const outBack = op.outTrigger("Skip Back clicked");
-const outForward = op.outTrigger("Skip Forward clicked");
+    outPlay = op.outTrigger("Play clicked"),
+    outPause = op.outTrigger("Pause clicked"),
+    outRewind = op.outTrigger("Rewind clicked"),
+    outBack = op.outTrigger("Skip Back clicked"),
+    outForward = op.outTrigger("Skip Forward clicked"),
 
-const outDragged = op.outTrigger("Dragged");
-const outValue = op.outNumber("Current Value");
-const outDragging = op.outBoolNum("Dragging", false);
-const outElement = op.outObject("DOM Element", null, "element");
+    outDragged = op.outTrigger("Dragged"),
+    outValue = op.outNumber("Current Value"),
+    outDragging = op.outBoolNum("Dragging", false),
+    outElement = op.outObject("DOM Element", null, "element");
 
-let div = document.createElement("div");
+let div = op.patch.getDocument().createElement("div");
 div.id = "progressUI_" + op.id;
 div.classList.add("progressUI");
 outElement.set(div);
@@ -26,14 +27,14 @@ const cgl = op.patch.cgl;
 let canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(div);
 
-let progressContainer = document.createElement("div");
+let progressContainer = op.patch.getDocument().createElement("div");
 if (!inVisible.get())
 {
     div.style.display = "none";
 }
-let progressbar = document.createElement("input");
-let progress = document.createElement("div");
-const buttonContainer = document.createElement("div");
+let progressbar = op.patch.getDocument().createElement("input");
+let progress = op.patch.getDocument().createElement("div");
+const buttonContainer = op.patch.getDocument().createElement("div");
 
 progressContainer.classList.add("progressContainer");
 
@@ -55,12 +56,12 @@ div.appendChild(progress);
 
 let eleId = "css_progressui_" + CABLES.uuid();
 
-const styleEle = document.createElement("style");
+const styleEle = op.patch.getDocument().createElement("style");
 styleEle.type = "text/css";
 styleEle.id = eleId;
 styleEle.classList.add("cablesEle");
 
-let head = document.getElementsByTagName("body")[0];
+let head = op.patch.getDocument().getElementsByTagName("body")[0];
 head.appendChild(styleEle);
 
 buttonContainer.classList.add("buttonContainer");
@@ -99,14 +100,14 @@ progress.innerHTML = "00:00:000";
 
 function addButton(title, icon, additionalClass)
 {
-    let button = document.createElement("div");
+    let button = op.patch.getDocument().createElement("div");
     button.classList.add("button");
     button.classList.add(additionalClass);
     button.innerHTML = title;
 
     if (icon)
     {
-        let buttonicon = document.createElement("div");
+        let buttonicon = op.patch.getDocument().createElement("div");
         buttonicon.classList.add("progressUIIcon");
         buttonicon.classList.add(icon);
         button.appendChild(buttonicon);

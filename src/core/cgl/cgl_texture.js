@@ -315,7 +315,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
         if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
 
-        console.log(pixelFormatStr, this.name);
+        // console.log(pixelFormatStr, this.name);
     }
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);

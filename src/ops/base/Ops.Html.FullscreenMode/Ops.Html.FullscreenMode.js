@@ -27,7 +27,7 @@ function startFs()
 
     let elem = null;
     if (inEle == "Canvas") elem = op.patch.cgl.canvas.parentElement;
-    else elem = document.documentElement;
+    else elem = op.patch.getDocument().documentElement;
 
     if (elem.requestFullScreen) elem.requestFullScreen();
     else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
@@ -42,10 +42,10 @@ function startFs()
 function exitFs()
 {
     countStarts--;
-    if (document.exitFullscreen) document.exitFullscreen();
-    else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    else if (document.msExitFullscreen)document.msExitFullscreen();
+    if (op.patch.getDocument().exitFullscreen) op.patch.getDocument().exitFullscreen();
+    else if (op.patch.getDocument().mozCancelFullScreen) op.patch.getDocument().mozCancelFullScreen();
+    else if (op.patch.getDocument().webkitExitFullscreen) op.patch.getDocument().webkitExitFullscreen();
+    else if (op.patch.getDocument().msExitFullscreen)op.patch.getDocument().msExitFullscreen();
 
     setTimeout(setState, 100);
     setTimeout(setState, 500);

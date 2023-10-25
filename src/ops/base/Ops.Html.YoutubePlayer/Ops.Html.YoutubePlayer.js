@@ -64,7 +64,7 @@ function addElement()
     if (element) removeEle();
 
     const parent = op.patch.cgl.canvas.parentElement;
-    element = document.createElement("iframe");
+    element = op.patch.getDocument().createElement("iframe");
     element.dataset.op = op.id;
     element.style.position = "absolute";
     element.allowfullscreen = true;
