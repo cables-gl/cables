@@ -31,7 +31,7 @@ inExec.onTriggered = function ()
 {
     if (tex) return;
 
-    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.json) return;
+    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.json || !cgl.frameStore.currentScene.chunks) return;
 
     if (cgl.frameStore.currentScene.chunks.length < 2)
     {

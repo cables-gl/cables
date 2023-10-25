@@ -49,6 +49,8 @@ inFile.onChange =
     inCalcNormals.onChange =
     inNormFormat.onChange = reloadSoon;
 
+op.toWorkPortsNeedToBeLinked(inExec);
+
 let gltfTransforms = 0;
 let finishedLoading = false;
 let cam = null;

@@ -72,6 +72,7 @@ dataPort.onChange = loadData;
 inHideNodes.onChange = hideNodesFromData;
 inAnimation.onChange = updateAnimation;
 inCenter.onChange = updateCenter;
+op.toWorkPortsNeedToBeLinked(inExec);
 
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
@@ -369,7 +370,7 @@ function finishLoading()
     //     }
     // }, 1000);
 
-    gltf.chunks = null;
+    if (!(gltf.json.images && gltf.json.images.length)) gltf.chunks = null;
 
     finishedLoading = true;
 }
