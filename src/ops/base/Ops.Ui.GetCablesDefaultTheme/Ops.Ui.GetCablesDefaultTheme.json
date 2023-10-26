@@ -1,0 +1,27 @@
+{
+    "id": "1e3bf653-d87b-4abf-a0e8-0eb3141e5024",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1698253186855
+        },
+        {
+            "message": "Ops.Patch.P0Q3IDJ.GetCablesDefaultTheme renamed to Ops.Ui.GetCablesDefaultTheme",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1698336080724
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Theme"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1698253211294
+}

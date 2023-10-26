@@ -1,0 +1,37 @@
+{
+    "id": "be18afda-378b-4a57-a0f5-cec152c6ad41",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1698315272477
+        },
+        {
+            "message": "Ops.Patch.P0Q3IDJ.CopyObject renamed to Ops.Json.CopyObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1698323503605
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Valid",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1698315329826
+}
