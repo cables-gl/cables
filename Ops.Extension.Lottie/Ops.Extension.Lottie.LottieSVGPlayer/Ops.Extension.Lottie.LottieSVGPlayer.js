@@ -114,8 +114,6 @@ else return anim=null;
     };
 
     anim = lottie.loadAnimation(params);
-    console.log("new lottie anim...")
-
     anim.addEventListener("complete", () =>
     {
         outComplete.set(true);
