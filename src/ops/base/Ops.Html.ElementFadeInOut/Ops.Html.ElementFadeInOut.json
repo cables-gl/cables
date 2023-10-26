@@ -28,7 +28,7 @@
             {
                 "type": 0,
                 "name": "Is Showing",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },

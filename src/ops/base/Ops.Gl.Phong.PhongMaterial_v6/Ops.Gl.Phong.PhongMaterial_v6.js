@@ -17,11 +17,9 @@ function createDefaultShader()
 {
     const vertexShader = attachments.phong_vert;
     let fragmentShader = attachments.phong_frag;
-    let fragmentHead = "";
-    let fragmentBody = "";
 
-    fragmentHead = fragmentHead.concat(createFragmentHead(0));
-    fragmentBody = fragmentBody.concat(createFragmentBody(0, DEFAULT_LIGHTSTACK[0].type));
+    let fragmentHead = createFragmentHead(0);
+    let fragmentBody = createFragmentBody(0, DEFAULT_LIGHTSTACK[0].type);
 
     fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead);
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
@@ -245,9 +243,10 @@ const shaderOut = op.outObject("Shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 
 const shader = new CGL.Shader(cgl, "phongmaterial_" + op.id);
+shader.op = this;
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR"]);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
-let recompileShader = false;
+// let recompileShader = false;
 shader.define("FALLOFF_MODE_A");
 
 if (cgl.glVersion < 2)
@@ -782,16 +781,16 @@ function compareLights(lightStack)
         createUniforms(lightStack.length);
         oldCount = lightStack.length;
         setUniforms(lightStack);
-        recompileShader = false;
+        // recompileShader = false;
     }
     else
     {
-        if (recompileShader)
-        {
-            createShader(lightStack);
-            createUniforms(lightStack.length);
-            recompileShader = false;
-        }
+        // if (recompileShader)
+        // {
+        //     createShader(lightStack);
+        //     createUniforms(lightStack.length);
+        //     recompileShader = false;
+        // }
         setUniforms(lightStack);
     }
 }

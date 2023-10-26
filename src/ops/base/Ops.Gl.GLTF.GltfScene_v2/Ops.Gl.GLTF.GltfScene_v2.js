@@ -238,6 +238,8 @@ function loadBin(addCacheBuster)
             cgl.patch.loading.finished(loadingId);
             loadingId = null;
 
+            gltf.chunks = null;
+
             // op.log("finished loading gltf");
         };
 

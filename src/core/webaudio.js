@@ -424,8 +424,6 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
  */
 WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)
 {
-    return;
-    console.log("loadAudioFile", url);
     const audioContext = WEBAUDIO.createAudioContext();
 
     let loadingId = null;

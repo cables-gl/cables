@@ -26,8 +26,8 @@ class CubemapTexture
 
         this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
 
-        this.width = options.width || DEFAULT_TEXTURE_SIZE;
-        this.width = options.width || DEFAULT_TEXTURE_SIZE;
+        this.width = DEFAULT_TEXTURE_SIZE;
+        this.height = DEFAULT_TEXTURE_SIZE;
 
         this.filter = options.filter || CGL.Texture.FILTER_NEAREST;
         this.wrap = options.wrap || CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -36,7 +36,15 @@ class CubemapTexture
         this.flip = options.flip || true;
 
 
-        if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
+        if (!options.pixelFormat)
+        {
+            if (options.isFloatingPointTexture) options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
+            else options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
+        }
+
+        this.pixelFormat = options.pixelFormat;
+
+        // if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
 
         this._cgl.profileData.profileTextureNew++;
 
@@ -45,7 +53,7 @@ class CubemapTexture
 
     getInfo()
     {
-        return Texture.getTexInfo(this);
+        return { "pixelFormat": this.pixelFormat };
     }
 
     setSize(w, h)
@@ -79,6 +87,7 @@ class CubemapTexture
         // }
 
         this._setFilter();
+        const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
 
         for (let i = 0; i < 6; i++)
         {
@@ -101,18 +110,24 @@ class CubemapTexture
             }
             else
             {
-                if (this.textureType == Texture.TYPE_FLOAT)
-                {
-                    // console.log("cubemap FLOAT TEX", this._options);
-                    this._cgl.enableExtension("EXT_color_buffer_float");
-                    this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+                this._cgl.enableExtension("EXT_color_buffer_float");
+                this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
-                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-                }
-                else
-                {
-                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
-                }
+                // console.log(info);
+                this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, info.glInternalFormat, this.width, this.height, 0, info.glDataFormat, info.glDataType, null);
+
+                // if (this.textureType == Texture.TYPE_FLOAT)
+                // {
+                //     // console.log("cubemap FLOAT TEX", this._options);
+                //     this._cgl.enableExtension("EXT_color_buffer_float");
+                //     this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+
+                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+                // }
+                // else
+                // {
+                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+                // }
             }
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
@@ -128,7 +143,7 @@ class CubemapTexture
 
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
 
-        if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_MIPMAP)
+        if (CGL.Texture.isPixelFormatFloat(this.pixelFormat) && this.filter == CGL.Texture.FILTER_MIPMAP)
         {
             console.log("texture: HDR and mipmap filtering at the same time is not possible");
             this.filter = CGL.Texture.FILTER_LINEAR;
@@ -193,8 +208,13 @@ class CubemapTexture
     {
         if (!((this._cgl.glVersion == 2 || Texture.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)) return;
 
-        this._cgl.gl.generateMipmap(this.texTarget);
+        if (this.filter == CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
         this._cgl.profileData.profileGenMipMap++;
+    }
+
+    delete()
+    {
+        this._cgl.gl.deleteTexture(this.tex);
     }
 }
 

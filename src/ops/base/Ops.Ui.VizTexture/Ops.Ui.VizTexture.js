@@ -227,15 +227,23 @@ op.renderVizLayer = (ctx, layer) =>
             layer.width * 5,
             layer.height); // workaround filtering problems
     else
-        ctx.drawImage(cgl.canvas,
-            0,
-            0,
-            s[0],
-            s[1],
-            layer.x + (layer.width - sizeImg[0]) / 2,
-            layer.y + (layer.height - sizeImg[1]) / 2,
-            sizeImg[0],
-            sizeImg[1]);
+        try
+        {
+            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layer.height != 0)
+                ctx.drawImage(cgl.canvas,
+                    0,
+                    0,
+                    s[0],
+                    s[1],
+                    layer.x + (layer.width - sizeImg[0]) / 2,
+                    layer.y + (layer.height - sizeImg[1]) / 2,
+                    sizeImg[0],
+                    sizeImg[1]);
+        }
+        catch (e)
+        {
+            console.log("canvas drawimage exception...");
+        }
 
     let info = "unknown";
 

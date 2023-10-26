@@ -49,6 +49,8 @@ inFile.onChange =
     inCalcNormals.onChange =
     inNormFormat.onChange = reloadSoon;
 
+op.toWorkPortsNeedToBeLinked(inExec);
+
 let gltfTransforms = 0;
 let finishedLoading = false;
 let cam = null;
@@ -334,6 +336,8 @@ function finishLoading()
             gltf.accBuffers[gltf.accBuffersDelete[i]] = null;
         }
     }
+
+    gltf.chunks = null;
 
     finishedLoading = true;
 }

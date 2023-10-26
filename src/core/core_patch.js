@@ -1426,6 +1426,18 @@ Patch.prototype.printTriggerStack = function ()
     console.groupEnd(); // eslint-disable-line
 };
 
+/**
+ * returns document object of the patch could be != global document object when opening canvas ina popout window
+ * @function getDocument
+ * @memberof Patch
+ * @instance
+ * @return {Object} document
+ */
+Patch.prototype.getDocument = function ()
+{
+    return this.cgl.canvas.ownerDocument;
+};
+
 Patch.replaceOpIds = function (json, options)
 {
     const opids = {};
