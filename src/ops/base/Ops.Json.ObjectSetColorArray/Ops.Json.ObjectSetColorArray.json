@@ -1,0 +1,83 @@
+{
+    "id": "8ca272a7-bc56-4879-9648-283caf075f6a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1602271930592
+        },
+        {
+            "message": "Ops.User.pandur.ObjectSetArray renamed to Ops.Json.ObjectSetArray",
+            "author": "pandur",
+            "date": 1610979094639
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectSetArray",
+            "author": "pandur",
+            "date": 1694610610787
+        },
+        {
+            "message": "Ops.Patch.PpiMxeG.ObjectSetArray_v2 renamed to Ops.Json.ObjectSetArray_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694610684072
+        },
+        {
+            "message": "cloned op from Ops.Json.ObjectSetArray_v2",
+            "author": "pandur",
+            "date": 1698329419376
+        },
+        {
+            "message": "Ops.Patch.P0Q3IDJ.ObjectSetColorArray renamed to Ops.Json.ObjectSetColorArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1698336307991
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1698329419376,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Object"
+            }
+        ]
+    },
+    "summary": "Set array by key in an object",
+    "issues": "",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}
