@@ -585,7 +585,7 @@ function printInfo()
     tab = new CABLES.UI.Tab("GLTF " + CABLES.basename(inFile.get()), { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
     gui.mainTabs.addTab(tab, true);
 
-    tab.addEventListener("onClose", closeTab);
+    tab.addEventListener("close", closeTab);
     tab.html(html);
 
     CABLES.UI.Collapsable.setup(ele.byId("groupNodes"), ele.byId("sectionNodes"), false);

@@ -155,7 +155,7 @@ inTab.onTriggered = () =>
         });
 
     gui.mainTabs.addTab(tab, true);
-    tab.addEventListener("onClose", () => { console.log("tab was closed!"); });
+    tab.addEventListener("close", () => { console.log("tab was closed!"); });
     tab.html("this is the tab content. ");
     gui.maintabPanel.show(true);
 };

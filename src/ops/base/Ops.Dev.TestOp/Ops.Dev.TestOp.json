@@ -44,6 +44,30 @@
             "type": "",
             "author": "pandur",
             "date": 1695715529797
+        },
+        {
+            "message": " added core lib: ammodebugdrawer",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674791431
+        },
+        {
+            "message": " removed core lib: ammodebugdrawer",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674799531
+        },
+        {
+            "message": " removed core lib: cgl_wireframes",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674810962
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674826934
         }
     ],
     "authorName": "pandur",

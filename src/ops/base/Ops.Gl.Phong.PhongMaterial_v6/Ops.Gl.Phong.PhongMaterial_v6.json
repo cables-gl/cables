@@ -292,6 +292,18 @@
             "message": "Ops.User.cables.PhangMeteriel renamed to Ops.Gl.Phong.PhongMaterial_v6",
             "author": "cables",
             "date": 1618408708676
+        },
+        {
+            "message": " added core lib: ammoworld",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674521575
+        },
+        {
+            "message": " removed core lib: ammoworld",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674548919
         }
     ],
     "summary": "A shaded material for lighting objects",
@@ -520,5 +532,6 @@
             }
         ]
     },
-    "exampleProjectId": "L3HqYa"
+    "exampleProjectId": "L3HqYa",
+    "coreLibs": []
 }

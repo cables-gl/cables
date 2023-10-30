@@ -35,6 +35,12 @@
     left: initial !important;
 }
 
+.sidebar-cables *
+{
+    color: #BBBBBB !important;
+    font-family: Arial;
+}
+
 .sidebar-cables {
     --sidebar-color: #07f78c;
     --sidebar-width: 220px;
@@ -47,14 +53,12 @@
     left: 15px;
     border-radius: var(--sidebar-border-radius);
     z-index: 100000;
-    color: #BBBBBB;
-    width: var(  --sidebar-width);
+    width: var(--sidebar-width);
     max-height: 100%;
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
     font-size: 13px;
-    font-family: Arial;
     line-height: 1em; /* prevent emojis from breaking height of the title */
 }
 
@@ -396,6 +400,11 @@
  */
 
 .sidebar__button {}
+
+.sidebar__button-input:active
+{
+    background-color: #555 !important;
+}
 
 .sidebar__button-input {
     -webkit-user-select: none;  /* Chrome all / Safari all */
