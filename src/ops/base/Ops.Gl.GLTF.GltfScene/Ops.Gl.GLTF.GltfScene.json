@@ -22,88 +22,84 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
-                "name": "data"
-            },
-            {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "glb File"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Draw",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Auto Scale",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Show Structure"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Time",
                 "group": "Timing",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Sync to timeline",
                 "group": "Timing",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loop",
                 "group": "Timing",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Materials"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render Before"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Generator"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "GLTF Version",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Anim Length",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Anim Time",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Json"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Finished"
             }
         ]

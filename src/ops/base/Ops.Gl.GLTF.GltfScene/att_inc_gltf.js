@@ -23,7 +23,6 @@ const Gltf = class
     }
 };
 
-
 function readChunk(dv, bArr, arrayBuffer, offset)
 {
     const chunk = {};
@@ -61,7 +60,6 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
 function loadAnims(gltf)
 {
-    let k = 0;
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
         const an = gltf.json.animations[i];
@@ -86,7 +84,7 @@ function loadAnims(gltf)
 
             const anims = [];
 
-            for (k = 0; k < numComps; k++) anims.push(CABLES.Anim());
+            for (let k = 0; k < numComps; k++) anims.push(new CABLES.Anim());
 
             if (sampler.interpolation == "LINEAR") {}
             else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = CONSTANTS.ANIM.EASING_ABSOLUTE;
@@ -96,7 +94,7 @@ function loadAnims(gltf)
             {
                 maxTime = Math.max(bufferIn[j], maxTime);
 
-                for (k = 0; k < numComps; k++)
+                for (let k = 0; k < numComps; k++)
                 {
                     anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
                 }
@@ -150,7 +148,6 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse buffers", Math.round((performance.now() - gltf.startTime)));
 
-
     if (views)
     {
         for (i = 0; i < accessors.length; i++)
@@ -169,7 +166,6 @@ function parseGltf(arrayBuffer)
             let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
             let stride = view.byteStride || 0;
             let dataBuff = null;
-
 
             // 5120 (BYTE)	1
             // 5121(UNSIGNED_BYTE)	1
@@ -221,7 +217,6 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse nodes", Math.round((performance.now() - gltf.startTime)));
 
-
     for (i = 0; i < gltf.json.nodes.length; i++)
     {
         const node = new gltfNode(gltf.json.nodes[i], gltf);
@@ -237,7 +232,6 @@ function parseGltf(arrayBuffer)
     if (gltf.json.animations) loadAnims(gltf);
 
     gltf.timing.push("finished", Math.round((performance.now() - gltf.startTime)));
-
 
     return gltf;
 }
