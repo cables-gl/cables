@@ -89,9 +89,11 @@ class CubemapTexture
 
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
 
+        console.log("cubemap pxlfrmt", info.pixelFormat);
+
         if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
         {
-            const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+            const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
 
             if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
             {
