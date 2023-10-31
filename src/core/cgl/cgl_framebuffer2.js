@@ -211,15 +211,19 @@ Framebuffer2.prototype.setSize = function (w, h)
 
         // if (this._options.isFloatingPointTexture)
         // {
-        if (info.pixelFormat == Texture.PFORMATSTR_RGBA16F || this._cgl.glUseHalfFloatTex)
+        if (CGL.Texture.isPixelFormatHalfFloat(this._options.pixelFormat) || this._cgl.glUseHalfFloatTex)
         {
+            const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+
             if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
             {
                 this._options.filter = Texture.FILTER_NEAREST;
                 this.setFilter(this._options.filter);
             }
         }
-        else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F)
+        // else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F || info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F
+        // else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F || info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F
+        else if (CGL.Texture.isPixelFormatFloat(this._options.pixelFormat))
         {
             if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
@@ -228,26 +232,17 @@ Framebuffer2.prototype.setSize = function (w, h)
                 this.setFilter(this._options.filter);
             }
         }
-        else if (info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F)
-        {
-            if (!this._cgl.enableExtension("OES_texture_float_linear"))
-            {
-                console.log("no linear pixelformat,switching to nearest");
-                this._options.filter = Texture.FILTER_NEAREST;
-                this.setFilter(this._options.filter);
-            }
-        }
-        else if (info.pixelFormat == Texture.PFORMATSTR_RG16F)
-        {
-            const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+        // else if (info.pixelFormat == Texture.PFORMATSTR_RG16F)
+        // {
+        //     const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
 
-            if (!this._cgl.enableExtension("OES_texture_float_linear"))
-            {
-                console.log("no linear pixelformat,switching to nearest");
-                this._options.filter = Texture.FILTER_NEAREST;
-                this.setFilter(this._options.filter);
-            }
-        }
+        //     if (!this._cgl.enableExtension("OES_texture_float_linear"))
+        //     {
+        //         console.log("no linear pixelformat,switching to nearest");
+        //         this._options.filter = Texture.FILTER_NEAREST;
+        //         this.setFilter(this._options.filter);
+        //     }
+        // }
         // }
 
         if (this._options.multisampling && this._options.multisamplingSamples)

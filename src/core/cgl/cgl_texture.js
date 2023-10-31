@@ -1198,5 +1198,11 @@ Texture.isPixelFormatFloat =
         return (pxlfrmt || "").indexOf("float") > -1;
     };
 
+Texture.isPixelFormatHalfFloat =
+    (pxlfrmt) =>
+    {
+        return (pxlfrmt || "").indexOf("float") > -1 && (pxlfrmt || "").indexOf("16bit") > -1;
+    };
+
 
 export { Texture };
