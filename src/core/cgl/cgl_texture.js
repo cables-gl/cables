@@ -309,10 +309,15 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         {
             cgl.enableExtension("EXT_color_buffer_float");
             cgl.enableExtension("EXT_float_blend");
+
             cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
 
-        if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
+        if (pixelFormatStr.indexOf("16bit"))
+        {
+            cgl.enableExtension("EXT_color_buffer_half_float");
+            cgl.enableExtension("OES_texture_float_linear");
+        }
 
         // console.log(pixelFormatStr, this.name);
     }

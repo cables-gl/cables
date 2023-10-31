@@ -79,12 +79,6 @@ class CubemapTexture
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
 
-        // console.log("this.textureType", this.textureType);
-        // if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.enableExtension("OES_texture_float_linear"))
-        // {
-        //     console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
-        //     this.filter = CGL.Texture.FILTER_NEAREST;
-        // }
 
 
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
@@ -97,7 +91,7 @@ class CubemapTexture
 
             if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
             {
-                this._options.filter = Texture.FILTER_NEAREST;
+                this.filter = Texture.FILTER_NEAREST;
             }
         }
         else if (CGL.Texture.isPixelFormatFloat(info.pixelFormat))
@@ -105,7 +99,7 @@ class CubemapTexture
             if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
                 console.log("no linear pixelformat,using nearest");
-                this._options.filter = Texture.FILTER_NEAREST;
+                this.filter = Texture.FILTER_NEAREST;
             }
         }
         this._setFilter();
