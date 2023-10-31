@@ -88,15 +88,7 @@ valign.onChange =
     cachetexture.onChange = function ()
     {
         needsRefresh = true;
-
-        texSizeManWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
-        texSizeManHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" || texSizeAutoHeight.get() });
-        texSizeManBreak.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
-        valign.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
-        texSizeAutoHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
-
-        inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
-        inPaddingYBot.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
+        updateUi();
     };
 
 textureOut.ignoreValueSerialize = true;
@@ -213,11 +205,6 @@ function reSize()
     outAspect.set(fontImage.width / fontImage.height);
 
     needsRefresh = true;
-}
-
-function updateUi()
-{
-    meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
 }
 
 function autoLineBreaks(strings)
@@ -394,4 +381,17 @@ function refresh()
     outLines.set(strings.length);
     textureOut.setRef(tex);
     tex.unpackAlpha = false;
+}
+
+function updateUi()
+{
+    texSizeManWidth.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+    texSizeManHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" || texSizeAutoHeight.get() });
+    texSizeManBreak.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+    valign.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+    texSizeAutoHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
+
+    inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
+    inPaddingYBot.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
+    meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
 }
