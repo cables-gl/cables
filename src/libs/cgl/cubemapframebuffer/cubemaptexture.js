@@ -89,6 +89,27 @@ class CubemapTexture
         this._setFilter();
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
 
+        if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
+        {
+            const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+
+            if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
+            {
+                this._options.filter = Texture.FILTER_NEAREST;
+                this.setFilter(this._options.filter);
+            }
+        }
+        else if (CGL.Texture.isPixelFormatFloat(info.pixelFormat))
+        {
+            if (!this._cgl.enableExtension("OES_texture_float_linear"))
+            {
+                console.log("no linear pixelformat,using nearest");
+                this._options.filter = Texture.FILTER_NEAREST;
+                this.setFilter(this._options.filter);
+            }
+        }
+
+
         for (let i = 0; i < 6; i++)
         {
             if (this._cgl.glVersion == 1)
@@ -110,8 +131,8 @@ class CubemapTexture
             }
             else
             {
-                this._cgl.enableExtension("EXT_color_buffer_float");
-                this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+                // this._cgl.enableExtension("EXT_color_buffer_float");
+                // this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
                 // console.log(info);
                 this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, info.glInternalFormat, this.width, this.height, 0, info.glDataFormat, info.glDataType, null);

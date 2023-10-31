@@ -211,7 +211,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
         // if (this._options.isFloatingPointTexture)
         // {
-        if (CGL.Texture.isPixelFormatHalfFloat(this._options.pixelFormat) || this._cgl.glUseHalfFloatTex)
+        if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
         {
             const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
 
@@ -221,9 +221,7 @@ Framebuffer2.prototype.setSize = function (w, h)
                 this.setFilter(this._options.filter);
             }
         }
-        // else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F || info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F
-        // else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F || info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F
-        else if (CGL.Texture.isPixelFormatFloat(this._options.pixelFormat))
+        else if (CGL.Texture.isPixelFormatFloat(info.pixelFormat))
         {
             if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
@@ -232,6 +230,8 @@ Framebuffer2.prototype.setSize = function (w, h)
                 this.setFilter(this._options.filter);
             }
         }
+        // else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F || info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F
+        // else if (info.pixelFormat == Texture.PFORMATSTR_RGBA32F || info.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F
         // else if (info.pixelFormat == Texture.PFORMATSTR_RG16F)
         // {
         //     const extcb = this._cgl.enableExtension("EXT_color_buffer_float");

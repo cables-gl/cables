@@ -181,6 +181,7 @@ Texture.prototype.setFormat = function (o)
     this._glDataType = o.glDataType;
 };
 
+
 Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 {
     const o = {};
