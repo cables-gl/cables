@@ -221,6 +221,7 @@ function capturePrefilteredCubemap(size)
     size = Number(size);
     let captureFBO = new CGL.CubemapFramebuffer(cgl, size, size, {
         "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+        "isFloatingPointTexture": true,
         "clear": false,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
@@ -294,7 +295,8 @@ function computeIBLLUT(size)
     }
     else
     {
-        let isFloatingPointTexture = !inForce8bitIbl.get();
+        let isFloatingPointTexture = (!inForce8bitIbl.get()) && !cgl.glUseHalfFloatTex;
+        console.log("Pbr env USE floats: ", isFloatingPointTexture);
 
         if (isFloatingPointTexture)
         {
