@@ -44,6 +44,8 @@ class CubemapTexture
 
         this.pixelFormat = options.pixelFormat;
 
+        console.log("cubemaptexture pixelformat", this.pixelFormat);
+
         // if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
 
         this._cgl.profileData.profileTextureNew++;
@@ -153,7 +155,6 @@ class CubemapTexture
     _setFilter()
     {
         this._cgl.checkFrameStarted("cubemap corelib");
-
 
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
 
