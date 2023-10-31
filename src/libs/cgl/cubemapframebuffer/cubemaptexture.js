@@ -86,7 +86,7 @@ class CubemapTexture
         //     this.filter = CGL.Texture.FILTER_NEAREST;
         // }
 
-        this._setFilter();
+
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
 
         if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
@@ -96,7 +96,6 @@ class CubemapTexture
             if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
             {
                 this._options.filter = Texture.FILTER_NEAREST;
-                this.setFilter(this._options.filter);
             }
         }
         else if (CGL.Texture.isPixelFormatFloat(info.pixelFormat))
@@ -105,10 +104,9 @@ class CubemapTexture
             {
                 console.log("no linear pixelformat,using nearest");
                 this._options.filter = Texture.FILTER_NEAREST;
-                this.setFilter(this._options.filter);
             }
         }
-
+        this._setFilter();
 
         for (let i = 0; i < 6; i++)
         {
