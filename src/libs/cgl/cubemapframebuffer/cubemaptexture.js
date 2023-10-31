@@ -82,6 +82,7 @@ class CubemapTexture
 
 
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
+        this.pixelFormat = info.pixelFormat;
 
         if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
         {
