@@ -78,6 +78,9 @@ class CubemapTexture
         this.width = w;
         this.height = h;
 
+
+        console.log("cubemaptex set size", w, h, this);
+
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
 

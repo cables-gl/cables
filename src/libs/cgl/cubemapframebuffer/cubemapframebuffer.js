@@ -157,6 +157,7 @@ class CubemapFramebuffer
 
     setSize(width, height)
     {
+        console.log("cubemapframebuffer setsize");
         this._cgl.printError("before cubemap setsize");
 
         this.width = Math.floor(width);
