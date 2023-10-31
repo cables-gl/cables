@@ -50,7 +50,9 @@ class CubemapTexture
 
         this._cgl.profileData.profileTextureNew++;
 
+        console.log("setsize...");
         this.setSize(options.width, options.height);
+        console.log("setsize... DONE");
     }
 
     getInfo()
@@ -106,10 +108,13 @@ class CubemapTexture
                 this.filter = Texture.FILTER_NEAREST;
             }
         }
+        console.log("cubemaptex setfilter...");
         this._setFilter();
 
         for (let i = 0; i < 6; i++)
         {
+            console.log("cube tex ", i);
+
             if (this._cgl.glVersion == 1)
             {
                 // if (this._cgl.glUseHalfFloatTex)
@@ -151,7 +156,9 @@ class CubemapTexture
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
 
+        console.log("cubemaptex update mips ..");
         this.updateMipMap();
+        console.log("cubemaptex ende");
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
     }
 
