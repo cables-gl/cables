@@ -12,11 +12,15 @@ inSize.onChange = () => { return sizeChanged = true; };
 
 let fb = null;
 
-inFp.onChange = createFb;
+inFp.onChange = createFbLater;
 
 let emptyCubemap = null;
+let recreateFb = true;
 
-createFb();
+function createFbLater()
+{
+    recreateFb = true;
+}
 
 function createFb()
 {
@@ -32,6 +36,7 @@ function createFb()
 
 inTrigger.onTriggered = function ()
 {
+    if (recreateFb)createFb();
     if (sizeChanged)
     {
         if (fb) fb.setSize(Number(inSize.get()), Number(inSize.get()));

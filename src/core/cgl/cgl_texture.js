@@ -181,6 +181,7 @@ Texture.prototype.setFormat = function (o)
     this._glDataType = o.glDataType;
 };
 
+
 Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 {
     const o = {};
@@ -307,10 +308,16 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
         {
             cgl.enableExtension("EXT_color_buffer_float");
+            cgl.enableExtension("EXT_float_blend");
+
             cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
 
-        if (pixelFormatStr.indexOf("16bit")) cgl.enableExtension("EXT_color_buffer_half_float");
+        if (pixelFormatStr.indexOf("16bit"))
+        {
+            cgl.enableExtension("EXT_color_buffer_half_float");
+            cgl.enableExtension("OES_texture_float_linear");
+        }
 
         // console.log(pixelFormatStr, this.name);
     }
@@ -1196,6 +1203,12 @@ Texture.isPixelFormatFloat =
     (pxlfrmt) =>
     {
         return (pxlfrmt || "").indexOf("float") > -1;
+    };
+
+Texture.isPixelFormatHalfFloat =
+    (pxlfrmt) =>
+    {
+        return (pxlfrmt || "").indexOf("float") > -1 && (pxlfrmt || "").indexOf("16bit") > -1;
     };
 
 
