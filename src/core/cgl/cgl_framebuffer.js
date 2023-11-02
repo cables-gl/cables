@@ -217,7 +217,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
         cgl.resetViewPort();
     };
 
-    this.dispose =
+
     this.delete = function ()
     {
         texture.delete();
@@ -226,6 +226,8 @@ const Framebuffer = function (_cgl, _w, _h, options)
         cgl.gl.deleteRenderbuffer(depthBuffer);
         cgl.gl.deleteFramebuffer(frameBuf);
     };
+
+    this.dispose = this.delete;
 
     this.setSize(width, height);
 };
