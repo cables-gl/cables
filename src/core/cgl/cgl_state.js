@@ -1263,11 +1263,10 @@ Context.prototype.enableExtension = function (name)
     const o = this.gl.getExtension(name);
     this._enabledExtensions[name] = o;
 
-    console.log("enable extension", name, o);
     if (!o)
-    {
         this._log.error("[cgl_state] extension not available " + name);
-    }
+    else
+        this._log.log("enabled extension", name);
 
     return o;
 };

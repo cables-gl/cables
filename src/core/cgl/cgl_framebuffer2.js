@@ -7,6 +7,7 @@ import Logger from "../core_logger";
 
 const Framebuffer2 = function (cgl, w, h, options)
 {
+    if (cgl.glVersion == 1) return console.log("framebuffer2 used on webgl1 ?!");
     this._log = new Logger("cgl_framebuffer2");
     this.Framebuffer2DrawTargetsDefault = null;
     this.Framebuffer2BlittingFramebuffer = null;
