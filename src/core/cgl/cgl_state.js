@@ -1257,7 +1257,7 @@ Context.prototype.enableExtension = function (name)
 
     if (this._enabledExtensions.hasOwnProperty(name))
     {
-        return;
+        return this._enabledExtensions[name];
     }
 
     const o = this.gl.getExtension(name);
