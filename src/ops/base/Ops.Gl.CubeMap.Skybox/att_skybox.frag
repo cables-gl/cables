@@ -56,7 +56,7 @@ void main() {
 
     vec4 finalColor;
     #ifndef RGBE
-        finalColor = vec4(SAMPLETEX(skybox, newPos));
+        finalColor = vec4(SAMPLETEX(skybox, newPos,0.0));
     #endif
 
     #ifdef RGBE
