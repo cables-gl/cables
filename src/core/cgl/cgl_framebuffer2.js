@@ -213,9 +213,9 @@ Framebuffer2.prototype.setSize = function (w, h)
         // {
         if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
         {
-            const extcb = this._cgl.enableExtension("EXT_color_buffer_float");
+            const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
 
-            if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
+            if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
                 this._options.filter = Texture.FILTER_NEAREST;
                 this.setFilter(this._options.filter);
