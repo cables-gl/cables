@@ -187,7 +187,7 @@ function captureIrradianceCubemap(size)
     if (irradianceFrameBuffer) irradianceFrameBuffer.dispose();
 
     irradianceFrameBuffer = new CGL.CubemapFramebuffer(cgl, Number(size), Number(size), {
-        "isFloatingPointTexture": false,
+        // "isFloatingPointTexture": false,
         "clear": false,
         "filter": CGL.Texture.FILTER_NEAREST, // due to banding with rgbe
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
@@ -220,8 +220,7 @@ function capturePrefilteredCubemap(size)
 {
     size = Number(size);
     let captureFBO = new CGL.CubemapFramebuffer(cgl, size, size, {
-        "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
-        "isFloatingPointTexture": true,
+        "isFloatingPointTexture": false,
         "clear": false,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
@@ -235,17 +234,21 @@ function capturePrefilteredCubemap(size)
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
 
+    console.log(1);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
-
+    console.log(1.4);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP); // make sure memory is assigned for mips
 
+    console.log(2);
     maxMipLevels = 1.0 + Math.floor(Math.log(size) * 1.44269504088896340736);
     outMipLevels.set(maxMipLevels);
     prefilteringInfo[0] = size;
     prefilteringInfo[1] = maxMipLevels;
+
+    console.log("maxMipLevels", maxMipLevels);
 
     PrefilteringShader.popTextures();
     PrefilteringShader.pushTexture(uniformPrefilteringCubemap, inCubemap.get().tex);
@@ -310,6 +313,7 @@ function computeIBLLUT(size)
         {
             iblLutFrameBuffer = new CGL.Framebuffer2(cgl, size, size, {
                 "filter": CGL.Texture.FILTER_LINEAR,
+                "pixelFormat": CGL.Texture.PFORMATSTR_RGBA8UB,
                 "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
             });
         }
