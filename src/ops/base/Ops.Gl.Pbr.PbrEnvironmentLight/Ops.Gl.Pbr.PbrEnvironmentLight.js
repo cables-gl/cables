@@ -237,12 +237,9 @@ function capturePrefilteredCubemap(size)
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
 
-
-    let wrap = cgl.gl.TEXTURE_WRAP_R;
-    if (cgl.glVersion == 1)wrap = cgl.gl.TEXTURE_WRAP_S;
-    console.log(cgl.gl.TEXTURE_CUBE_MAP, wrap, cgl.gl.CLAMP_TO_EDGE, cgl.glVersion);
-
-    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, wrap, cgl.gl.CLAMP_TO_EDGE);
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
+    cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+    if (cgl.glVersion == 2) cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_R, cgl.gl.CLAMP_TO_EDGE);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.LINEAR_MIPMAP_LINEAR);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP); // make sure memory is assigned for mips
