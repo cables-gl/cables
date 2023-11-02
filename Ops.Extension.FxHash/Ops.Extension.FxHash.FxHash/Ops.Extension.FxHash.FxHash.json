@@ -63,7 +63,7 @@
             {
                 "type": 0,
                 "name": "fxhash environment",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },

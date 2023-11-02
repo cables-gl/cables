@@ -1,4 +1,10 @@
-if (!CABLES.fakefxhash && !window.fxhash || CABLES.fakefxhash)
+if(!window.$fx)
+{
+    console.log("$fx not found");
+}
+window.$fx=window.$fx||{};
+
+if (!CABLES.fakefxhash && !window.$fx.hash || CABLES.fakefxhash)
 {
     CABLES.fakefxhash = true;
 }
@@ -47,10 +53,10 @@ function init()
     if (isReal && inited) return;
     if (!isReal)
     {
-        window.fxhash = inHash.get() || randomHash();
+        window.$fx.hash = inHash.get() || randomHash();
         let b58dec = (str) => { return [...str].reduce((p, c) => { return p * alphabet.length + alphabet.indexOf(c) | 0; }, 0); };
-        let fxhashTrunc = fxhash.slice(2);
-        let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", "g");
+        let fxhashTrunc = window.$fx.hash.slice(2);
+        let regex = new RegExp(".{" + ((window.$fx.hash.length / 4) | 0) + "}", "g");
         let hashes = fxhashTrunc.match(regex).map((h) => { return b58dec(h); });
 
         let sfc32 = (a, b, c, d) =>
@@ -68,24 +74,24 @@ function init()
             };
         };
 
-        window.fxrand = sfc32(...hashes);
+        window.$fx.rand = sfc32(...hashes);
     }
 
     inited = true;
 
-    outHash.set(window.fxhash);
+    outHash.set(window.$fx.hash);
 
     outRandom1.set(0);
     outRandom2.set(0);
     outRandom3.set(0);
     outRandom4.set(0);
 
-    outRandom1.set(fxrand());
-    outRandom2.set(fxrand());
-    outRandom3.set(fxrand());
-    outRandom4.set(fxrand());
+    outRandom1.set(window.$fx.rand());
+    outRandom2.set(window.$fx.rand());
+    outRandom3.set(window.$fx.rand());
+    outRandom4.set(window.$fx.rand());
 
     const arr = [];
-    for (let i = 0; i < 1000; i++)arr.push(fxrand());
-    outArr.set(arr);
+    for (let i = 0; i < 1000; i++)arr.push(window.$fx.rand());
+    outArr.setRef(arr);
 }
