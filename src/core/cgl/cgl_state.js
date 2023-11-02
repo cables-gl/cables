@@ -68,6 +68,7 @@ class Context extends CGState
 
         this._oldCanvasWidth = -1;
         this._oldCanvasHeight = -1;
+        this._enabledExtensions = {};
     }
 
 
@@ -1252,16 +1253,21 @@ Context.prototype.setCursor = function (str)
  */
 Context.prototype.enableExtension = function (name)
 {
-    // console.log("extension", name);
     // const start = performance.now();
 
+    if (this._enabledExtensions.hasOwnProperty(name))
+    {
+        return;
+    }
 
     const o = this.gl.getExtension(name);
+    this._enabledExtensions[name] = o;
 
-    // if (!o)
-    // {
-    // this._log.stack("[cgl_state] extension not available " + name);
-    // }
+    console.log("enable extension", name, o);
+    if (!o)
+    {
+        this._log.error("[cgl_state] extension not available " + name);
+    }
 
     return o;
 };
