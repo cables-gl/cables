@@ -5,7 +5,15 @@ IN vec4 instTexCoords;
 IN float instanceIndex;
 OUT mat4 instModelMat;
 OUT vec4 frag_instColor;
-flat OUT float frag_instIndex;
+
+#ifdef WEBGL2
+    flat OUT float frag_instIndex;
+#endif
+#ifdef WEBGL1
+    OUT float frag_instIndex;
+#endif
+
+
 
 #define INSTANCING
 

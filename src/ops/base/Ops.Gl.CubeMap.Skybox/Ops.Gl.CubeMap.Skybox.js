@@ -63,6 +63,8 @@ const skyboxShader = new CGL.Shader(cgl, "skybox");
 const uniformSkybox = new CGL.Uniform(skyboxShader, "t", "skybox", 0);
 const uniExposure = new CGL.Uniform(skyboxShader, "2f", "expGamma", inExposure, inGamma);
 
+if (cgl.glVersion == 1) skyboxShader.enableExtension("GL_EXT_shader_texture_lod");
+
 skyboxShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 skyboxShader.setSource(attachments.skybox_vert, attachments.skybox_frag);
 skyboxShader.offScreenPass = true;
