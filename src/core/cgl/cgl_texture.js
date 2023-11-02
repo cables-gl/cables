@@ -203,126 +203,124 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
 
     o.pixelFormat = pixelFormatStr;
-
     o.glDataType = cgl.gl.UNSIGNED_BYTE;
     o.glInternalFormat = cgl.gl.RGBA8;
     o.glDataFormat = cgl.gl.RGBA;
 
-    if (cgl.glVersion == 1 && this.textureType == Texture.TYPE_FLOAT)
+    let floatDatatype = cgl.gl.FLOAT;
+
+    if (cgl.glVersion == 1)
     {
-        if (cgl.glUseHalfFloatTex)
+        o.glInternalFormat = cgl.gl.RGBA;
+
+        if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F || pixelFormatStr == Texture.PFORMATSTR_RG16F || pixelFormatStr == Texture.PFORMATSTR_R16F)
         {
             const ext = cgl.enableExtension("OES_texture_half_float");
             if (!ext) throw new Error("no half float texture extension");
 
-            o.glDataType = ext.HALF_FLOAT_OES;
+            floatDatatype = ext.HALF_FLOAT_OES;
+        }
+    }
+
+
+    if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
+    {
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
+    {
+        o.glInternalFormat = cgl.gl.RGB565;
+        o.glDataFormat = cgl.gl.RGB;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_R8UB)
+    {
+        o.glInternalFormat = cgl.gl.R8;
+        o.glDataFormat = cgl.gl.RED;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_RG8UB)
+    {
+        o.glInternalFormat = cgl.gl.RG8;
+        o.glDataFormat = cgl.gl.RG;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
+    {
+        o.glInternalFormat = cgl.gl.RGB8;
+        o.glDataFormat = cgl.gl.RGB;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
+    {
+        o.glInternalFormat = cgl.gl.R32F;
+        o.glDataFormat = cgl.gl.RED;
+        o.glDataType = floatDatatype;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
+    {
+        o.glInternalFormat = cgl.gl.R16F;
+        o.glDataType = floatDatatype;
+        o.glDataFormat = cgl.gl.RED;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
+    {
+        o.glInternalFormat = cgl.gl.RG16F;
+        o.glDataType = floatDatatype;
+        o.glDataFormat = cgl.gl.RG;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F)
+    {
+        if (cgl.glVersion == 1) o.glInternalFormat = cgl.gl.RGBA;
+        else o.glInternalFormat = cgl.gl.RGBA16F;
+        o.glDataType = floatDatatype;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+    {
+        o.glInternalFormat = cgl.gl.R11F_G11F_B10F;
+        o.glDataType = floatDatatype;
+        o.glDataFormat = cgl.gl.RGB;
+    }
+    else if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F)
+    {
+        if (cgl.glVersion == 1) o.glInternalFormat = cgl.gl.RGBA;
+        else o.glInternalFormat = cgl.gl.RGBA32F;
+        o.glDataType = floatDatatype;
+    }
+
+    else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
+    {
+        if (cgl.glVersion == 1)
+        {
+            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
+            o.glDataType = cgl.gl.UNSIGNED_SHORT;
+            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
         }
         else
         {
-            cgl.enableExtension("OES_texture_float");
-
+            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
             o.glDataType = cgl.gl.FLOAT;
+            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
         }
     }
     else
     {
-        if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
-        {
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
-        {
-            o.glInternalFormat = cgl.gl.RGB565;
-            o.glDataFormat = cgl.gl.RGB;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_R8UB)
-        {
-            o.glInternalFormat = cgl.gl.R8;
-            o.glDataFormat = cgl.gl.RED;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_RG8UB)
-        {
-            o.glInternalFormat = cgl.gl.RG8;
-            o.glDataFormat = cgl.gl.RG;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
-        {
-            o.glInternalFormat = cgl.gl.RGB8;
-            o.glDataFormat = cgl.gl.RGB;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
-        {
-            o.glInternalFormat = cgl.gl.R32F;
-            o.glDataFormat = cgl.gl.RED;
-            o.glDataType = cgl.gl.FLOAT;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
-        {
-            o.glInternalFormat = cgl.gl.R16F;
-            o.glDataType = cgl.gl.FLOAT;
-            o.glDataFormat = cgl.gl.RED;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
-        {
-            o.glInternalFormat = cgl.gl.RG16F;
-            o.glDataType = cgl.gl.FLOAT;
-            o.glDataFormat = cgl.gl.RG;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F)
-        {
-            o.glInternalFormat = cgl.gl.RGBA16F;
-            o.glDataType = cgl.gl.FLOAT;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
-        {
-            o.glInternalFormat = cgl.gl.R11F_G11F_B10F;
-            o.glDataType = cgl.gl.FLOAT;
-            o.glDataFormat = cgl.gl.RGB;
-        }
-        else if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F)
-        {
-            o.glInternalFormat = cgl.gl.RGBA32F;
-            o.glDataType = cgl.gl.FLOAT;
-        }
+        console.log("unknown pixelformat ", pixelFormatStr);
+    }
+    /// //////
 
-        else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
-        {
-            if (cgl.glVersion == 1)
-            {
-                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
-                o.glDataType = cgl.gl.UNSIGNED_SHORT;
-                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
-            }
-            else
-            {
-                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
-                o.glDataType = cgl.gl.FLOAT;
-                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
-            }
-        }
-        else
-        {
-            console.log("unknown pixelformat ", pixelFormatStr);
-        }
-        /// //////
+    if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+    {
+        cgl.enableExtension("EXT_color_buffer_float");
+        cgl.enableExtension("EXT_float_blend");
 
-        if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
-        {
-            cgl.enableExtension("EXT_color_buffer_float");
-            cgl.enableExtension("EXT_float_blend");
-
-            cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
-        }
-
-        if (pixelFormatStr.indexOf("16bit"))
-        {
-            cgl.enableExtension("EXT_color_buffer_half_float");
-            cgl.enableExtension("OES_texture_float_linear");
-        }
-
-        // console.log(pixelFormatStr, this.name);
+        cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
     }
 
-    if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", this.pixelFormat, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
+    if (pixelFormatStr.indexOf("16bit"))
+    {
+        cgl.enableExtension("EXT_color_buffer_half_float");
+        cgl.enableExtension("OES_texture_float_linear");
+    }
+
+    // console.log(pixelFormatStr, this.name);
+
+    if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
 
     return o;
 };
