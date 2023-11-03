@@ -37,7 +37,8 @@
             },
             {
                 "type": 2,
-                "name": "Skybox"
+                "name": "Skybox",
+                "objType": "texture"
             },
             {
                 "type": 0,

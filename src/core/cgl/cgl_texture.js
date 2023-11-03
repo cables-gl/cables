@@ -306,8 +306,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
     {
-        cgl.enableExtension("EXT_color_buffer_float");
-        cgl.enableExtension("EXT_float_blend");
+        if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
+        if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
 
         cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
     }

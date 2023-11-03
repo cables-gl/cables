@@ -95,7 +95,7 @@ class CubemapTexture
         {
             const extcb = this._cgl.enableExtension("EXT_color_buffer_half_float");
 
-            if (!this._cgl.enableExtension("EXT_color_buffer_half_float_linear"))
+            if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
                 this.filter = Texture.FILTER_NEAREST;
             }
@@ -108,12 +108,12 @@ class CubemapTexture
                 this.filter = Texture.FILTER_NEAREST;
             }
         }
-        console.log("cubemaptex setfilter...");
+        // console.log("cubemaptex setfilter...");
         this._setFilter();
 
         for (let i = 0; i < 6; i++)
         {
-            console.log("cube tex ", i);
+            // console.log("cube tex ", i);
 
             if (this._cgl.glVersion == 1)
             {
@@ -156,9 +156,9 @@ class CubemapTexture
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
 
-        console.log("cubemaptex update mips ..");
+        // console.log("cubemaptex update mips ..");
         this.updateMipMap();
-        console.log("cubemaptex ende");
+        // console.log("cubemaptex ende");
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
     }
 

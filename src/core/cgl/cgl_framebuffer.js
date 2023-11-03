@@ -19,11 +19,10 @@ const Framebuffer = function (_cgl, _w, _h, options)
     this._log = new Logger("Framebuffer");
     this.valid = true;
 
-    const depthTextureExt =
-        cgl.enableExtension("WEBGL_depth_texture") ||
-        cgl.enableExtension("WEBKIT_WEBGL_depth_texture") ||
-        cgl.enableExtension("MOZ_WEBGL_depth_texture") ||
-        cgl.gl.DEPTH_TEXTURE;
+    let depthTextureExt = cgl.enableExtension("WEBGL_depth_texture");
+    if (!depthTextureExt) depthTextureExt = cgl.enableExtension("WEBKIT_WEBGL_depth_texture");
+    if (!depthTextureExt) depthTextureExt = cgl.enableExtension("MOZ_WEBGL_depth_texture");
+    if (!depthTextureExt) depthTextureExt = cgl.gl.DEPTH_TEXTURE;
 
     if (!depthTextureExt)
     {
@@ -218,6 +217,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
         cgl.resetViewPort();
     };
 
+
     this.delete = function ()
     {
         texture.delete();
@@ -226,6 +226,8 @@ const Framebuffer = function (_cgl, _w, _h, options)
         cgl.gl.deleteRenderbuffer(depthBuffer);
         cgl.gl.deleteFramebuffer(frameBuf);
     };
+
+    this.dispose = this.delete;
 
     this.setSize(width, height);
 };

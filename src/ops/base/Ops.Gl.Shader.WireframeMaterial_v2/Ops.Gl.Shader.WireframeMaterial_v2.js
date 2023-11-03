@@ -32,11 +32,7 @@ function setDefines()
     fa.setUiAttribs({ "greyout": !fill.get() });
 }
 
-if (cgl.glVersion == 1)
-{
-    if (!cgl.gl.getExtension("OES_standard_derivatives")) op.setUiError("noderivatives", "no standard derivatives extension available!");
-    shader.enableExtension("OES_standard_derivatives");
-}
+
 
 let doRender = function ()
 {
@@ -59,6 +55,12 @@ shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"
 shader.setSource(attachments.wireframe_vert || "", attachments.wireframe_frag || "");
 shader.wireframe = true;
 setDefines();
+
+if (cgl.glVersion == 1)
+{
+    if (!cgl.gl.getExtension("OES_standard_derivatives")) op.setUiError("noderivatives", "no standard derivatives extension available!");
+    shader.enableExtension("OES_standard_derivatives");
+}
 
 render.onTriggered = doRender;
 
