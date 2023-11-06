@@ -42,6 +42,11 @@
                 "type": 0,
                 "name": "Side",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Default CSS",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
