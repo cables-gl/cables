@@ -141,6 +141,7 @@ class Context extends CGState
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
 
+
         if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
             this.glVersion = 2;
@@ -172,7 +173,7 @@ class Context extends CGState
             }
         }
 
-        if (!this.gl)
+        if (!this.gl || this.gl.isContextLost())
         {
             this.aborted = true;
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
