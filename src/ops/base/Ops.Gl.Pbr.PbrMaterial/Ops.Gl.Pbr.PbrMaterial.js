@@ -212,7 +212,7 @@ function updateDefines()
     PBRShader.toggleDefine("USE_THIN_FILM", inUseThinFilm.get());
     PBRShader.toggleDefine("USE_EMISSION", inTexEmission.get());
     PBRShader.toggleDefine("USE_THIN_FILM_MAP", inTexThinFilm.get());
-    
+
     // VERTEX_COLORS
     PBRShader.toggleDefine("VCOL_COLOUR", inVertexColourMode.get() === "colour");
     PBRShader.toggleDefine("VCOL_AORM", inVertexColourMode.get() === "AORM");

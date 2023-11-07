@@ -143,9 +143,10 @@ class CubemapFramebuffer
 
     dispose()
     {
-        // if (this.texture) this.texture = this.texture.delete();
-        // if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
-        // if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
+        if (this.texture) this.texture = this.texture.delete();
+        if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
+        if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
+        // // if (this._textureFrameBuffer) this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
     }
 
     delete()
@@ -167,21 +168,23 @@ class CubemapFramebuffer
 
         // if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
         // if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
+        // // if (this._textureFrameBuffer) this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
 
         this._framebuffer = this._cgl.gl.createFramebuffer();
         this._depthbuffer = this._cgl.gl.createRenderbuffer();
+        this.texture.setSize(this.width, this.height);
 
+        // this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
 
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
-        this.texture.setSize(this.width, this.height);
 
         if (!this._cgl.gl.isFramebuffer(this._framebuffer))
         {
-            console.warn("invalid framebuffer...");
+            console.error("invalid framebuffer...");
             // throw new Error("Invalid framebuffer");
         }
 

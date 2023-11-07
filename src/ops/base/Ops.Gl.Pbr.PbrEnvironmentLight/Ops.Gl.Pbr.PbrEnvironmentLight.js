@@ -212,7 +212,7 @@ function captureIrradianceCubemap(size)
     }
     irradianceFrameBuffer.renderEnd();
 
-    outTexIrradiance.set(null); // pandur
+    // outTexIrradiance.set(null); // pandur
     outTexIrradiance.set(irradianceFrameBuffer.getTextureColor());
 }
 
@@ -234,7 +234,6 @@ function capturePrefilteredCubemap(size)
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
 
-    console.log(1);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
 
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
@@ -244,45 +243,55 @@ function capturePrefilteredCubemap(size)
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.LINEAR);
     cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP); // make sure memory is assigned for mips
 
-    console.log(2);
     maxMipLevels = 1.0 + Math.floor(Math.log(size) * 1.44269504088896340736);
     outMipLevels.set(maxMipLevels);
     prefilteringInfo[0] = size;
     prefilteringInfo[1] = maxMipLevels;
 
-    console.log("maxMipLevels", maxMipLevels);
-
     PrefilteringShader.popTextures();
     PrefilteringShader.pushTexture(uniformPrefilteringCubemap, inCubemap.get().tex);
     uniformPrefilteringRotation.setValue(inRotation.get() / 360.0);
 
+    let iosFix = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i));
+
+    console.log("iosFix", iosFix);
+
+    if (iosFix)
+    {
+        maxMipLevels = 0;
+    }
+
     for (let mip = 0; mip <= maxMipLevels; ++mip)
     {
-        let currentMipSize = size * 0.5 ** mip;
-        let roughness = mip / (maxMipLevels - 1);
+        const currentMipSize = size * 0.5 ** mip;
+        const roughness = mip / (maxMipLevels - 1);
         uniformPrefilteringRoughness.setValue(roughness);
 
-        captureFBO.setSize(Number(currentMipSize), Number(currentMipSize));
+        captureFBO.setSize(currentMipSize, currentMipSize);
         captureFBO.renderStart(cgl);
-        for (let i = 0; i < 6; i += 1)
+        for (let i = 0; i < 6; i++)
         {
             captureFBO.renderStartCubemapFace(i);
 
-            // if(i==0)cgl.gl.clearColor(0, 0.1, 0.2, 0);
-            // if(i==0)cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
             mesh.render(PrefilteringShader);
+
             cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
-            cgl.gl.copyTexImage2D(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X + i, mip, cgl.gl.RGBA, 0, 0, Number(currentMipSize), Number(currentMipSize), null);
+            cgl.gl.copyTexImage2D(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X + i, mip, cgl.gl.RGBA8, 0, 0, currentMipSize, currentMipSize, 0);
             captureFBO.renderEndCubemapFace();
         }
         captureFBO.renderEnd();
     }
-    // captureFBO.delete();
+
+    if (iosFix)
+    {
+        cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, prefilteredFrameBuffer.getTextureColor().tex);
+        cgl.gl.generateMipmap(cgl.gl.TEXTURE_CUBE_MAP);
+    }
+
+    captureFBO.delete();
     cgl.setTexture(0, null);
 
-    outTexPrefiltered.set(null);
-    outTexPrefiltered.set(prefilteredFrameBuffer.getTextureColor());
+    outTexPrefiltered.setRef(prefilteredFrameBuffer.getTextureColor());
 }
 
 function computeIBLLUT(size)
@@ -301,7 +310,6 @@ function computeIBLLUT(size)
     else
     {
         let isFloatingPointTexture = (!inForce8bitIbl.get()) && !cgl.glUseHalfFloatTex;
-        console.log("Pbr env USE floats: ", isFloatingPointTexture);
 
         if (isFloatingPointTexture)
         {
@@ -422,9 +430,9 @@ inTrigger.onTriggered = function ()
         }
     }
 
-    pbrEnv.texIBLLUT = outTexIBLLUT.get();
-    pbrEnv.texDiffIrr = outTexIrradiance.get();
-    pbrEnv.texPreFiltered = outTexPrefiltered.get();
+    pbrEnv.texIBLLUT = iblLutFrameBuffer.getTextureColor();
+    pbrEnv.texDiffIrr = irradianceFrameBuffer.getTextureColor();// outTexIrradiance.get();
+    pbrEnv.texPreFiltered = prefilteredFrameBuffer.getTextureColor();// outTexPrefiltered.get();
     pbrEnv.texPreFilteredMipLevels = outMipLevels.get();
 
     pbrEnv.UseParallaxCorrection = inUseParallaxCorrection.get();

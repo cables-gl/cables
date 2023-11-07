@@ -80,23 +80,24 @@ inExec.onTriggered = function ()
 
     cgl_aniso = parseFloat(aniso.get());
 
+    const loadingId = cgl.patch.loading.start("gltfTextureOp", CABLES.uuid(), op);
+
     tex = CGL.Texture.load(cgl, sourceURI,
         function (err)
         {
             if (err)
             {
-                // outFound.set(false);
                 console.error("img load error", err);
             }
-
-            outTex.set(tex);
-
-            width.set(tex.width);
-            height.set(tex.height);
-            type.set(img.mimeType);
-            outTex.set(null);
-            outTex.set(tex);
-            outFound.set(true);
+            else
+            {
+                width.set(tex.width);
+                height.set(tex.height);
+                type.set(img.mimeType);
+                outTex.setRef(tex);
+                outFound.set(true);
+            }
+            cgl.patch.loading.finished(loadingId);
         }, {
             "anisotropic": cgl_aniso,
             "wrap": cgl_wrap,
@@ -105,8 +106,7 @@ inExec.onTriggered = function ()
             "filter": cgl_filter
         });
 
-    outTex.set(null);
-    outTex.set(tex);
+    outTex.setRef(tex);
 };
 
 function onFilterChange()
