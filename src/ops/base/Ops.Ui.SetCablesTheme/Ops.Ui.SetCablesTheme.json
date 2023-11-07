@@ -28,5 +28,12 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1698252867673
+    "created": 1698252867673,
+    "summary": "Set cables editor colors",
+    "relatedops": [
+        "Ops.Ui.GetCablesDefaultTheme"
+    ],
+    "docs": {
+        "ports": []
+    }
 }
