@@ -143,10 +143,9 @@ class CubemapFramebuffer
 
     dispose()
     {
-        if (this.texture) this.texture = this.texture.delete();
-        if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
-        if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
-        // // if (this._textureFrameBuffer) this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
+        // if (this.texture) this.texture = this.texture.delete();
+        // if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
+        // if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
     }
 
     delete()
@@ -166,9 +165,8 @@ class CubemapFramebuffer
 
         this._cgl.profileData.profileFrameBuffercreate++;
 
-        if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
-        if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
-        // // if (this._textureFrameBuffer) this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
+        // if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
+        // if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
 
         this._framebuffer = this._cgl.gl.createFramebuffer();
         this._depthbuffer = this._cgl.gl.createRenderbuffer();
