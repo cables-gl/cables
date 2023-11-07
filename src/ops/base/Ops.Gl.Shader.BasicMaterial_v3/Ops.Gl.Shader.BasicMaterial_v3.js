@@ -115,18 +115,12 @@ function updateOpacity()
         shader.removeUniform("texOpacity");
         shader.define("HAS_TEXTURE_OPACITY");
         if (!textureOpacityUniform)textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity");
-
-        alphaMaskSource.setUiAttribs({ "greyout": false });
-        texCoordAlpha.setUiAttribs({ "greyout": false });
     }
     else
     {
         shader.removeUniform("texOpacity");
         shader.removeDefine("HAS_TEXTURE_OPACITY");
         textureOpacityUniform = null;
-
-        alphaMaskSource.setUiAttribs({ "greyout": true });
-        texCoordAlpha.setUiAttribs({ "greyout": true });
     }
 
     updateDefines();
@@ -138,25 +132,33 @@ function updateDiffuseTexture()
     {
         if (!shader.hasDefine("HAS_TEXTURE_DIFFUSE"))shader.define("HAS_TEXTURE_DIFFUSE");
         if (!diffuseTextureUniform)diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
-
-        diffuseRepeatX.setUiAttribs({ "greyout": false });
-        diffuseRepeatY.setUiAttribs({ "greyout": false });
-        diffuseOffsetX.setUiAttribs({ "greyout": false });
-        diffuseOffsetY.setUiAttribs({ "greyout": false });
-        colorizeTexture.setUiAttribs({ "greyout": false });
     }
     else
     {
         shader.removeUniform("texDiffuse");
         shader.removeDefine("HAS_TEXTURE_DIFFUSE");
         diffuseTextureUniform = null;
-
-        diffuseRepeatX.setUiAttribs({ "greyout": true });
-        diffuseRepeatY.setUiAttribs({ "greyout": true });
-        diffuseOffsetX.setUiAttribs({ "greyout": true });
-        diffuseOffsetY.setUiAttribs({ "greyout": true });
-        colorizeTexture.setUiAttribs({ "greyout": true });
     }
+    updateUi();
+}
+
+function updateUi()
+{
+    diffuseRepeatX.setUiAttribs({ "greyout": !diffuseTexture.get() });
+    diffuseRepeatY.setUiAttribs({ "greyout": !diffuseTexture.get() });
+    diffuseOffsetX.setUiAttribs({ "greyout": !diffuseTexture.get() });
+    diffuseOffsetY.setUiAttribs({ "greyout": !diffuseTexture.get() });
+    colorizeTexture.setUiAttribs({ "greyout": !diffuseTexture.get() });
+
+    alphaMaskSource.setUiAttribs({ "greyout": !textureOpacity.get() });
+    texCoordAlpha.setUiAttribs({ "greyout": !textureOpacity.get() });
+
+    let notUsingColor = true;
+    notUsingColor = diffuseTexture.get() && !colorizeTexture.get();
+    r.setUiAttribs({ "greyout": notUsingColor });
+    g.setUiAttribs({ "greyout": notUsingColor });
+    b.setUiAttribs({ "greyout": notUsingColor });
+    a.setUiAttribs({ "greyout": notUsingColor });
 }
 
 function updateDefines()
@@ -174,4 +176,5 @@ function updateDefines()
     shader.toggleDefine("ALPHA_MASK_R", alphaMaskSource.get() == "R");
     shader.toggleDefine("ALPHA_MASK_G", alphaMaskSource.get() == "G");
     shader.toggleDefine("ALPHA_MASK_B", alphaMaskSource.get() == "B");
+    updateUi();
 }

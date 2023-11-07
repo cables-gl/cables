@@ -23,6 +23,7 @@ const inMinimize = op.inValueBool("Show Minimize", false);
 
 const inTitle = op.inString("Title", "");
 const side = op.inValueBool("Side");
+const addCss = op.inValueBool("Default CSS", true);
 
 let doc = op.patch.cgl.canvas.ownerDocument;
 
@@ -45,15 +46,17 @@ onDefaultMinimizedPortChanged();
 initSidebarCss();
 updateDynamicStyles();
 
-// change listeners
+addCss.onChange = () =>
+{
+    initSidebarCss();
+    updateDynamicStyles();
+};
 visiblePort.onChange = onVisiblePortChange;
 opacityPort.onChange = onOpacityPortChange;
 defaultMinimizedPort.onChange = onDefaultMinimizedPortChanged;
 minimizedOpacityPort.onChange = onMinimizedOpacityPortChanged;
 undoButtonPort.onChange = onUndoButtonChange;
 op.onDelete = onDelete;
-
-// functions
 
 function onMinimizedOpacityPortChanged()
 {
@@ -195,6 +198,9 @@ function updateDynamicStyles()
             e.parentNode.removeChild(e);
         });
     }
+
+    if (!addCss.get()) return;
+
     const newDynamicStyle = doc.createElement("style");
     newDynamicStyle.classList.add("cablesEle");
     newDynamicStyle.classList.add(CSS_ELEMENT_DYNAMIC_CLASS);
@@ -293,6 +299,9 @@ function initSidebarCss()
             e.parentNode.removeChild(e);
         });
     }
+
+    if (!addCss.get()) return;
+
     const newStyle = doc.createElement("style");
 
     newStyle.innerHTML = attachments.style_css;
