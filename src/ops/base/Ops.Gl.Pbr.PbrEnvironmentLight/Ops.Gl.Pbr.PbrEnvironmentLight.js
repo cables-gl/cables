@@ -278,7 +278,7 @@ function capturePrefilteredCubemap(size)
         }
         captureFBO.renderEnd();
     }
-    captureFBO.delete();
+    // captureFBO.delete();
     cgl.setTexture(0, null);
 
     outTexPrefiltered.set(null);
