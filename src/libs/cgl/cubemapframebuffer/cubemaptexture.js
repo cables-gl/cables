@@ -21,8 +21,8 @@ class CubemapTexture
             this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
         ];
 
-        this.tex = this._cgl.gl.createTexture();
-        this.cubemap = this.tex;
+        this.cubemap = this.tex = this._cgl.gl.createTexture();
+
 
         this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
 
@@ -44,15 +44,12 @@ class CubemapTexture
 
         this.pixelFormat = options.pixelFormat;
 
-        console.log("cubemaptexture pixelformat", this.pixelFormat);
 
         // if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
 
         this._cgl.profileData.profileTextureNew++;
 
-        console.log("setsize...");
         this.setSize(options.width, options.height);
-        console.log("setsize... DONE");
     }
 
     getInfo()
@@ -62,6 +59,11 @@ class CubemapTexture
 
     setSize(w, h)
     {
+        // if (this.width == w && this.height == h) return;
+
+        this.delete();
+        this.cubemap = this.tex = this._cgl.gl.createTexture();
+
         this._cgl.checkFrameStarted("cubemap corelib setsize");
 
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
@@ -75,12 +77,8 @@ class CubemapTexture
         w = Math.floor(w);
         h = Math.floor(h);
 
-        if (this.width == w && this.height == h) return;
-
         this.width = w;
         this.height = h;
-
-        console.log("cubemaptex set size", w, h, this);
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
@@ -106,13 +104,12 @@ class CubemapTexture
             }
         }
         // console.log("cubemaptex setfilter...");
-        this._setFilter();
 
         for (let i = 0; i < 6; i++)
         {
             // console.log("cube tex ", i);
 
-            // if (this._cgl.glVersion == 1)
+            // if (this._cgl.glVersion == 1)console.log("webgl1");
             // {
             // if (this._cgl.glUseHalfFloatTex)
             // {
@@ -153,10 +150,12 @@ class CubemapTexture
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
 
+        this._setFilter();
+
         // console.log("cubemaptex update mips ..");
         this.updateMipMap();
         // console.log("cubemaptex ende");
-        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
+        this._cgl.gl.bindTexture(this.texTarget, null);
     }
 
     _setFilter()
@@ -228,10 +227,14 @@ class CubemapTexture
 
     updateMipMap()
     {
-        if (!((this._cgl.glVersion == 2 || Texture.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)) return;
+        // if (!((this._cgl.glVersion == 2 || Texture.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)) return;
 
-        if (this.filter == CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
-        this._cgl.profileData.profileGenMipMap++;
+        if (this.filter == CGL.Texture.FILTER_MIPMAP)
+        {
+            this._cgl.gl.bindTexture(this.texTarget, this.tex);
+            this._cgl.gl.generateMipmap(this.texTarget);
+            this._cgl.profileData.profileGenMipMap++;
+        }
     }
 
     delete()
