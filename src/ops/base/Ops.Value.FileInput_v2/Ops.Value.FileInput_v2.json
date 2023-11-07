@@ -1,38 +1,44 @@
 {
-  "authorName": "pandur",
-  "id": "3f20a79f-a35f-4a4d-b2f3-c46973a4531f",
-  "created": 1605452818981,
-  "summary": "get URL of a file",
-  "docs": {
-    "ports": []
-  },
-  "layout": {
-    "portsIn": [
-      {
-        "type": "0",
-        "name": "File",
-        "subType": "string"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": "0",
-        "name": "URL",
-        "subType": "string"
-      }
-    ],
-    "name": "Ops.Value.FileInput"
-  },
-  "changelog": [
-    {
-      "message": "cloned op from Ops.Value.FileInput",
-      "author": "cables",
-      "date": 1605452818981
+    "authorName": "pandur",
+    "id": "3f20a79f-a35f-4a4d-b2f3-c46973a4531f",
+    "created": 1605452818981,
+    "summary": "get URL of a file",
+    "docs": {
+        "ports": [
+            {
+                "name": "URL",
+                "text": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F754915956278020968%2F&psig=AOvVaw3EFt2rR5tg5iBrD6aLijzF&ust=1696664297034000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiCpZ_14IEDFQAAAAAdAAAAABAD"
+            }
+        ]
     },
-    {
-      "message": "Ops.User.cables.FileInput2 renamed to Ops.Value.FileInput_v2",
-      "author": "pandur",
-      "date": 1605452883556
-    }
-  ]
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "File",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "URL",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.Value.FileInput"
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Value.FileInput",
+            "author": "cables",
+            "date": 1605452818981
+        },
+        {
+            "message": "Ops.User.cables.FileInput2 renamed to Ops.Value.FileInput_v2",
+            "author": "pandur",
+            "date": 1605452883556
+        }
+    ],
+    "relatedops": null
 }
