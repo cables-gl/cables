@@ -34,13 +34,9 @@
         "name": "Ops.Gl.Matrix.ScaleXYZ"
     },
     "summary": "enlarge or shrink objects by a scale factor for every axis",
-    "youtubeid": "5pucC-GuDcs",
     "docs": {
         "ports": []
     },
-    "collections": [
-        "transform"
-    ],
     "relatedops": null,
     "changelog": [
         {
@@ -48,5 +44,8 @@
             "author": "pandur",
             "date": 1548414796525
         }
+    ],
+    "youtubeids": [
+        "5pucC-GuDcs"
     ]
 }
