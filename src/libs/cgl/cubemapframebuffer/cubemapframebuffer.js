@@ -50,7 +50,7 @@ class CubemapFramebuffer
         this._depthRenderbuffer = null;
         this._framebuffer = null;
         this._depthbuffer = null;
-        this._textureFrameBuffer = null;
+        // this._textureFrameBuffer = null;
         this._textureDepth = null;
 
         this._options = options || {
@@ -143,11 +143,10 @@ class CubemapFramebuffer
 
     dispose()
     {
-        if (this.texture) this.texture.delete();
-        this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
-        this._cgl.gl.deleteFramebuffer(this._framebuffer);
-        this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
-        this.texture = null;
+        if (this.texture) this.texture = this.texture.delete();
+        if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
+        if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
+        // // if (this._textureFrameBuffer) this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
     }
 
     delete()
@@ -167,13 +166,9 @@ class CubemapFramebuffer
 
         this._cgl.profileData.profileFrameBuffercreate++;
 
-        // if (this._framebuffer)
-        // {
-        //     this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
-        //     this._cgl.gl.deleteFramebuffer(this._framebuffer);
-        //     // TODO: readd
-        //     // this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
-        // }
+        if (this._framebuffer) this._cgl.gl.deleteFramebuffer(this._framebuffer);
+        if (this._depthRenderbuffer) this._cgl.gl.deleteRenderbuffer(this._depthbuffer);
+        // // if (this._textureFrameBuffer) this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
 
         this._framebuffer = this._cgl.gl.createFramebuffer();
         this._depthbuffer = this._cgl.gl.createRenderbuffer();
@@ -308,7 +303,7 @@ class CubemapFramebuffer
         if (this._cgl.glVersion !== 1)
         {
             this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._framebuffer);
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._textureFrameBuffer);
+            // this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._textureFrameBuffer);
             // * NOTE: the line below is commented out because it clears the screen to black after
             // * point light shadow map has been rendered
             // this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
