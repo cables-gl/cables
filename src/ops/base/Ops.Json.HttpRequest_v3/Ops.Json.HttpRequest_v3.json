@@ -24,6 +24,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1696586677908
+        },
+        {
+            "message": "Ops.Json.AjaxRequest_v3 renamed to Ops.Json.HttpRequest_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428566517
         }
     ],
     "layout": {
