@@ -7,6 +7,5 @@ v.onChange = exec;
 
 function exec()
 {
-    console.log(v.get());
     if (result.get() != v.get()) result.set(v.get());
 }
