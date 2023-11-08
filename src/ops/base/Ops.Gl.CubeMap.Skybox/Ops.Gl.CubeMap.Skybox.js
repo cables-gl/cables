@@ -76,7 +76,6 @@ updateDefines();
 
 function updateDefines()
 {
-    console.log("inRGBE.get()", inRGBE.get());
     skyboxShader.toggleDefine("RGBE", inRGBE.get());
     const b = inTexture.get() && inTexture.get().cubemap;
 
