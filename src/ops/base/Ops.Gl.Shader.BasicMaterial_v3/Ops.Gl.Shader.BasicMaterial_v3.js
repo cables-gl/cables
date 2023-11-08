@@ -158,7 +158,6 @@ function updateUi()
     r.setUiAttribs({ "greyout": notUsingColor });
     g.setUiAttribs({ "greyout": notUsingColor });
     b.setUiAttribs({ "greyout": notUsingColor });
-    a.setUiAttribs({ "greyout": notUsingColor });
 }
 
 function updateDefines()
