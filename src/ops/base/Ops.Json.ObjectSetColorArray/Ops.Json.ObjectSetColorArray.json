@@ -74,7 +74,7 @@
             }
         ]
     },
-    "summary": "Set array by key in an object",
+    "summary": "Set rgba array by key in an object",
     "issues": "",
     "relatedops": null,
     "docs": {
