@@ -68,10 +68,10 @@
     },
     "authorName": "pandur",
     "created": 1698418579461,
-    "summary": "push/append an array to an array",
-    "collections": null,
+    "summary": "push/append an object to an array",
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "SCFZJK"
 }

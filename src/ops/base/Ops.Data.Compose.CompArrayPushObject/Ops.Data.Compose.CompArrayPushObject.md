@@ -1,0 +1,1 @@
+will try to create a copy of an object
