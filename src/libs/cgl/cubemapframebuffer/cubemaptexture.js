@@ -21,8 +21,8 @@ class CubemapTexture
             this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
         ];
 
-        this.tex = this._cgl.gl.createTexture();
-        this.cubemap = this.tex;
+        this.cubemap = this.tex = this._cgl.gl.createTexture();
+
 
         this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
 
@@ -44,15 +44,12 @@ class CubemapTexture
 
         this.pixelFormat = options.pixelFormat;
 
-        console.log("cubemaptexture pixelformat", this.pixelFormat);
 
         // if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
 
         this._cgl.profileData.profileTextureNew++;
 
-        console.log("setsize...");
         this.setSize(options.width, options.height);
-        console.log("setsize... DONE");
     }
 
     getInfo()
@@ -62,6 +59,11 @@ class CubemapTexture
 
     setSize(w, h)
     {
+        // if (this.width == w && this.height == h) return;
+
+        this.delete();
+        this.cubemap = this.tex = this._cgl.gl.createTexture();
+
         this._cgl.checkFrameStarted("cubemap corelib setsize");
 
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
@@ -75,18 +77,11 @@ class CubemapTexture
         w = Math.floor(w);
         h = Math.floor(h);
 
-        if (this.width == w && this.height == h) return;
-
         this.width = w;
         this.height = h;
 
-
-        console.log("cubemaptex set size", w, h, this);
-
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
-
-
 
         const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
         this.pixelFormat = info.pixelFormat;
@@ -109,57 +104,58 @@ class CubemapTexture
             }
         }
         // console.log("cubemaptex setfilter...");
-        this._setFilter();
 
         for (let i = 0; i < 6; i++)
         {
             // console.log("cube tex ", i);
 
-            if (this._cgl.glVersion == 1)
-            {
-                // if (this._cgl.glUseHalfFloatTex)
-                // {
-                //     const ext = this._cgl.enableExtension("OES_texture_half_float");
-                //     if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
+            // if (this._cgl.glVersion == 1)console.log("webgl1");
+            // {
+            // if (this._cgl.glUseHalfFloatTex)
+            // {
+            //     const ext = this._cgl.enableExtension("OES_texture_half_float");
+            //     if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
 
-                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
-                // }
-                // else
-                // {
-                //     const ext = this._cgl.enableExtension("OES_texture_float");
+            //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
+            // }
+            // else
+            // {
+            //     const ext = this._cgl.enableExtension("OES_texture_float");
 
-                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-                // }
-                this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
-            }
-            else
-            {
-                // this._cgl.enableExtension("EXT_color_buffer_float");
-                // this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            // }
+            //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+            // }
+            // else
+            // {
+            // this._cgl.enableExtension("EXT_color_buffer_float");
+            // this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
-                // console.log(info);
-                this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, info.glInternalFormat, this.width, this.height, 0, info.glDataFormat, info.glDataType, null);
+            // console.log(info);
+            this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, info.glInternalFormat, this.width, this.height, 0, info.glDataFormat, info.glDataType, null);
 
-                // if (this.textureType == Texture.TYPE_FLOAT)
-                // {
-                //     // console.log("cubemap FLOAT TEX", this._options);
-                //     this._cgl.enableExtension("EXT_color_buffer_float");
-                //     this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+            // if (this.textureType == Texture.TYPE_FLOAT)
+            // {
+            //     // console.log("cubemap FLOAT TEX", this._options);
+            //     this._cgl.enableExtension("EXT_color_buffer_float");
+            //     this._cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
 
-                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-                // }
-                // else
-                // {
-                //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
-                // }
-            }
+            //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA32F, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            // }
+            // else
+            // {
+            //     this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+            // }
+            // }
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
+
+        this._setFilter();
 
         // console.log("cubemaptex update mips ..");
         this.updateMipMap();
         // console.log("cubemaptex ende");
-        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
+        this._cgl.gl.bindTexture(this.texTarget, null);
     }
 
     _setFilter()
@@ -231,10 +227,14 @@ class CubemapTexture
 
     updateMipMap()
     {
-        if (!((this._cgl.glVersion == 2 || Texture.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)) return;
+        // if (!((this._cgl.glVersion == 2 || Texture.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)) return;
 
-        if (this.filter == CGL.Texture.FILTER_MIPMAP) this._cgl.gl.generateMipmap(this.texTarget);
-        this._cgl.profileData.profileGenMipMap++;
+        if (this.filter == CGL.Texture.FILTER_MIPMAP)
+        {
+            this._cgl.gl.bindTexture(this.texTarget, this.tex);
+            this._cgl.gl.generateMipmap(this.texTarget);
+            this._cgl.profileData.profileGenMipMap++;
+        }
     }
 
     delete()

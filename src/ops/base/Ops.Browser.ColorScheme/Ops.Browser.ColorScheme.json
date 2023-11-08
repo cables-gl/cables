@@ -38,5 +38,16 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1698309430889
+    "created": 1698309430889,
+    "summary": "Get light/dark color scheme preference of the browser",
+    "caniusequery": "prefers-color-scheme",
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Color Scheme",
+                "text": "light/dark"
+            }
+        ]
+    }
 }

@@ -44,7 +44,10 @@
             "message": "catch error when font not loaded",
             "author": "pandur",
             "id": "1c2356ef-c435-485a-a9aa-849e50b95bd2",
-            "date": 1605426341004
+            "date": 1605426341004,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1699373784244
         }
     ],
     "exampleProjectId": "xR9zIR"

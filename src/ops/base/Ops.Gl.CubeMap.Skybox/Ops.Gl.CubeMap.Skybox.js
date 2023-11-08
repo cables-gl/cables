@@ -69,18 +69,20 @@ skyboxShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN
 skyboxShader.setSource(attachments.skybox_vert, attachments.skybox_frag);
 skyboxShader.offScreenPass = true;
 
-inRGBE.onChange = () =>
-{
-    skyboxShader.toggleDefine("RGBE", inRGBE.get());
-};
+inTexture.onChange =
+inRGBE.onChange = updateDefines;
 
-inTexture.onChange = () =>
+updateDefines();
+
+function updateDefines()
 {
+    console.log("inRGBE.get()", inRGBE.get());
+    skyboxShader.toggleDefine("RGBE", inRGBE.get());
     const b = inTexture.get() && inTexture.get().cubemap;
 
     skyboxShader.toggleDefine("TEX_FORMAT_CUBEMAP", b);
     skyboxShader.toggleDefine("TEX_FORMAT_EQUIRECT", !b);
-};
+}
 
 inTrigger.onTriggered = () =>
 {

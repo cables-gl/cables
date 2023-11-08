@@ -1,0 +1,76 @@
+{
+    "id": "5f0d1ef7-3d41-45df-8d26-6d354b0c0cd8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680618712710
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateObjectSetNumber renamed to Ops.Team.CompOps.Dev.CompObjectSetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680625199563
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompObjectSetNumber renamed to Ops.Team.CompOps.CompObjectSetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661410348
+        },
+        {
+            "message": "Ops.Team.CompOps.CompObjectSetNumber renamed to Ops.Data.Compose.CompObjectSetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167327161
+        },
+        {
+            "message": "cloned op from Ops.Data.Compose.CompObjectSetNumber",
+            "author": "tob_har",
+            "date": 1699217231147
+        },
+        {
+            "message": "Ops.Patch.PLMzywK.CompObjectSetBool renamed to Ops.Patch.PwPLGEK.CompObjectSetBool",
+            "type": "rename",
+            "author": "tob_har",
+            "date": 1699341894903
+        },
+        {
+            "message": "Ops.Patch.PwPLGEK.CompObjectSetBool renamed to Ops.Data.Compose.CompObjectSetBool",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699351323878
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "tob_har",
+    "created": 1699217231147,
+    "summary": "set a boolean as object property",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": ""
+}
