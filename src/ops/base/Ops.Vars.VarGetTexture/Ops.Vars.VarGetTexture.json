@@ -20,12 +20,10 @@
                 "type": "2",
                 "name": "Object"
             }
-        ],
-        "name": "Ops.Vars.VarGetTexture"
+        ]
     },
     "summary": "get a texture from a variable",
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarSetTexture"
     ],

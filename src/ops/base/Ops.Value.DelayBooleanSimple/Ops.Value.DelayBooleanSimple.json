@@ -23,8 +23,7 @@
                 "name": "Out Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.DelayBooleanSimple"
+        ]
     },
     "summary": "Delay the input/output of a boolean by x seconds",
     "authorName": "pandur",
@@ -46,7 +45,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": []
 }

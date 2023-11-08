@@ -159,8 +159,7 @@
                 "name": "Audio Out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.Mixer"
+        ]
     },
     "docs": {
         "ports": [
@@ -286,7 +285,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "J7YdCp"

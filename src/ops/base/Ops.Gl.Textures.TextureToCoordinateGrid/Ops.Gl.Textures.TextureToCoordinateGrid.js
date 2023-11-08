@@ -9,7 +9,7 @@ const
     next = op.outTrigger("Next"),
     outFpTex = op.outTexture("HDR Texture");
 
-const tc = new CGL.CopyTexture(op.patch.cgl, "rgbe2hdr",
+const tc = new CGL.CopyTexture(op.patch.cgl, op.objName,
     {
         "shader": attachments.rgbe2fp_frag,
         "isFloatingPointTexture": true,
@@ -25,14 +25,14 @@ new CGL.Uniform(tc.bgShader, "f", "repeatsY", inRepeatZ);
 new CGL.Uniform(tc.bgShader, "f", "repeatsSpace", inRepeatSpace);
 
 inTex.onChange =
-inRepeatSpace.onChange =
-inRepeatZ.onChange =
-inThreshold.onChange =
-inAspect.onChange =
-() =>
-{
-    needsUpdate = true;
-};
+    inRepeatSpace.onChange =
+    inRepeatZ.onChange =
+    inThreshold.onChange =
+    inAspect.onChange =
+    () =>
+    {
+        needsUpdate = true;
+    };
 
 exec.onTriggered = () =>
 {

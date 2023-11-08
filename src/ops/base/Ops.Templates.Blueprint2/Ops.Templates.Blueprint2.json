@@ -32,8 +32,7 @@
                 "name": "patchId"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Templates.Blueprint2"
+        "portsOut": []
     },
     "authorName": "pandur",
     "created": 1686738678686,

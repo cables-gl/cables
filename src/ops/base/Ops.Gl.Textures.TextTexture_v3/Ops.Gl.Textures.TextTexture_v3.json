@@ -170,8 +170,7 @@
                 "name": "Aspect",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextTexture_v3"
+        ]
     },
     "summary": "Generates a texture which reads Text",
     "issues": "",

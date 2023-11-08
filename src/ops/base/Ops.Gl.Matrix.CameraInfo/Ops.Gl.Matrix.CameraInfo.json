@@ -136,8 +136,7 @@
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.CameraInfo"
+        ]
     },
     "summary": "get camera attributes from current camera/orbit controls",
     "issues": "",

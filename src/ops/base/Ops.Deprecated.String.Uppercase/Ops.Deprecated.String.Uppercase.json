@@ -16,7 +16,6 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Deprecated.String.Uppercase"
+        ]
     }
 }

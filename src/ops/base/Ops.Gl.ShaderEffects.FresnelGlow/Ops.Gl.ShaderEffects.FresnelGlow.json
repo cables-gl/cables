@@ -66,15 +66,13 @@
                 "type": 1,
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.FresnelGlow"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"
     ],
     "summary": "add fresnel glow to any material",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

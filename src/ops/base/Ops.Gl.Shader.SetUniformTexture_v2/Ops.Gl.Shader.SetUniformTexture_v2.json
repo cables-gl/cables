@@ -29,8 +29,7 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Shader.SetUniformTexture_v2"
+        ]
     },
     "summary": "set a uniform value of the current shader",
     "docs": {

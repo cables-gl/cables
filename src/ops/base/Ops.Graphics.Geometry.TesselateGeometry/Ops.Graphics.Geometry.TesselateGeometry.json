@@ -21,8 +21,7 @@
                 "name": "Num Vertices",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Graphics.Geometry.TesselateGeometry"
+        ]
     },
     "summary": "create new triangles in a mesh (subdivide)",
     "authorName": "pandur",

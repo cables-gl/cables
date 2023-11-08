@@ -10,7 +10,6 @@
                 "type": "1",
                 "name": "Update"
             }
-        ],
-        "name": "Ops.Json3d.SceneMeshSelect"
+        ]
     }
 }

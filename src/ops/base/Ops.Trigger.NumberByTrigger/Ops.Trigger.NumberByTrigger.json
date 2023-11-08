@@ -47,8 +47,7 @@
                 "type": 1,
                 "name": "Triggered"
             }
-        ],
-        "name": "Ops.Trigger.TriggerNumber"
+        ]
     },
     "summary": "Outputs the last number of the input port which was triggered",
     "docs": {

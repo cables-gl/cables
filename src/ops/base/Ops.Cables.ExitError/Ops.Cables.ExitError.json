@@ -29,12 +29,10 @@
                 "name": "Exit"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Cables.ExitError"
+        "portsOut": []
     },
     "summary": "stop executing the patch",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

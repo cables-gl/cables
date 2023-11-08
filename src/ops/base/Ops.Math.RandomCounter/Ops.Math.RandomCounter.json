@@ -37,12 +37,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.pandur.RandomCounter"
+        ]
     },
     "summary": "add up random numbers by triggering",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

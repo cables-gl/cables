@@ -28,7 +28,6 @@
                 "type": "0",
                 "name": "Result Y"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ScreenPosTo3d2"
+        ]
     }
 }

@@ -49,6 +49,11 @@
             },
             {
                 "type": 0,
+                "name": "Download Video",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Mimetype index",
                 "group": "Encoding",
                 "subType": "integer"
@@ -61,7 +66,13 @@
             },
             {
                 "type": 0,
-                "name": "FPS",
+                "name": "Max FPS",
+                "group": "Encoding",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Force FPS",
                 "group": "Encoding",
                 "subType": "number"
             },
@@ -99,9 +110,21 @@
             {
                 "type": 3,
                 "name": "Valid Mimetypes"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Finished Recording"
+            },
+            {
+                "type": 5,
+                "name": "Video DataUrl"
             }
-        ],
-        "name": "Ops.Gl.MediaRecorder"
+        ]
     },
     "summary": "Record the renderer-output to video",
     "issues": "",

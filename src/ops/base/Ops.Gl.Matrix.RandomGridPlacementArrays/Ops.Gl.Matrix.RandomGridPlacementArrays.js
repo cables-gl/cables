@@ -108,8 +108,6 @@ exe.onTriggered = function ()
     outArrayLength.set(arrPos.length);
     outArrayPoints.set(arrPos.length / 3);
 
-    outPosArr.set(null);
-    outPosArr.set(arrPos);
-    outScaleArr.set(null);
-    outScaleArr.set(arrScale);
+    outPosArr.setRef(arrPos);
+    outScaleArr.setRef(arrScale);
 };

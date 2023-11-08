@@ -33,12 +33,10 @@
                 "name": "audio out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.AudioPanner"
+        ]
     },
     "summary": "stereo pan an audio signal from left to right",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

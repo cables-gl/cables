@@ -23,8 +23,7 @@
                 "name": "Element",
                 "objType": "element"
             }
-        ],
-        "name": "Ops.User.pandur.QrCodeV2"
+        ]
     },
     "summary": "Generate a qr code as a texture",
     "exampleProjectId": "QjlEo-",
@@ -42,7 +41,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

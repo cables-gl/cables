@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Templates.ShaderEffectExample"
+        ]
     },
     "summary": "shader effect example template",
     "docs": {

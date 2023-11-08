@@ -37,8 +37,7 @@
                 "name": "Out Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.SetNumberOnTrigger"
+        ]
     },
     "summary": "Outputs a number when triggered",
     "youtubeid": "",

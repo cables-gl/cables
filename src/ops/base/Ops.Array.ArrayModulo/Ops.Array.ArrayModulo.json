@@ -23,8 +23,7 @@
                 "type": 3,
                 "name": "Array Out"
             }
-        ],
-        "name": "Ops.Array.ArrayModulo"
+        ]
     },
     "issues": "",
     "collections": [

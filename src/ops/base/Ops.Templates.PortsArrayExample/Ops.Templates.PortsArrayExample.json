@@ -14,8 +14,7 @@
                 "type": 3,
                 "name": "Array out"
             }
-        ],
-        "name": "Ops.Templates.PortsArrayExample"
+        ]
     },
     "summary": "Is a template for creating Array ports",
     "docs": {

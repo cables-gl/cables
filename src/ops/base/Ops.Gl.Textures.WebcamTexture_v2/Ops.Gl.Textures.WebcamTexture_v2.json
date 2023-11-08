@@ -95,12 +95,10 @@
                 "type": 2,
                 "name": "HTML Element"
             }
-        ],
-        "name": "Ops.Gl.Textures.WebcamTexture_v2"
+        ]
     },
     "summary": "use your webcam camera as a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -75,11 +75,9 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.RotateTexture"
+        ]
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "flURFr"

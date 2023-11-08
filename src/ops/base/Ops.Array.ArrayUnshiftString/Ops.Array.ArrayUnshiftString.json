@@ -40,12 +40,10 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayUnshiftString"
+        ]
     },
     "summary": "insert/add/unshift a string to the beginning of an array",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.ArrayPushString"
     ],

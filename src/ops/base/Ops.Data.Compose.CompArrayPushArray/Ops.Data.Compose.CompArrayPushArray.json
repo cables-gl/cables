@@ -53,8 +53,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Data.Compose.CompArrayPushArray"
+        ]
     },
     "authorName": "pandur",
     "created": 1680619066020,

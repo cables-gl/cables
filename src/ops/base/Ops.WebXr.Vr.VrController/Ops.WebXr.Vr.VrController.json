@@ -160,11 +160,9 @@
                 "name": "Found",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebXr.Vr.VrController"
+        ]
     },
     "summary": "tracking of vr hand controller",
-
     "relatedops": null,
     "exampleProjectId": "IzKYx5",
     "docs": {

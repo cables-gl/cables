@@ -43,12 +43,10 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArraySetNumber"
+        ]
     },
     "summary": "set a number at index in an array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

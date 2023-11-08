@@ -102,8 +102,7 @@
                 "type": 1,
                 "name": "Collision"
             }
-        ],
-        "name": "Ops.Physics.Cannon.Cannon"
+        ]
     },
     "summary": "shoot physics objects",
     "docs": {
@@ -191,7 +190,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "amF0KQ"

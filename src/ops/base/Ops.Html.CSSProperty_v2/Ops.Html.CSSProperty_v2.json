@@ -38,8 +38,7 @@
                 "type": 2,
                 "name": "HTML Element"
             }
-        ],
-        "name": "Ops.Html.CSSProperty_v2"
+        ]
     },
     "summary": "Set css style properties of a html element",
     "issues": "",

@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Trigger.NthTrigger_v2"
+        ]
     },
     "summary": "Lets a trigger through every nth time (trigger limiter)",
     "docs": {

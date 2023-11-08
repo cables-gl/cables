@@ -22,15 +22,13 @@
                 "type": "3",
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Array.Array"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "fe2ed80f-fd0a-438d-8aa0-01a59129261d",
     "created": 1506587820889,
     "youtubeid": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

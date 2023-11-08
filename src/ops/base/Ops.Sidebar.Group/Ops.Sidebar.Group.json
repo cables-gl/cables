@@ -37,15 +37,13 @@
                 "type": 2,
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.Group"
+        ]
     },
     "summary": "organize sidebar elements into groups",
     "docs": {
         "ports": []
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "changelog": [

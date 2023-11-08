@@ -70,8 +70,7 @@
                 "type": "3",
                 "name": "Buttons"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiButtonArray"
+        ]
     },
     "summary": "map state of multiple midi buttons to an array",
     "docs": {

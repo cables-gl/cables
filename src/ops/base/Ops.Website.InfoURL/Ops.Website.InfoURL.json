@@ -40,8 +40,7 @@
                 "type": 1,
                 "name": "Hash Changed"
             }
-        ],
-        "name": "Ops.Website.InfoURL"
+        ]
     },
     "summary": "Information about the current URL",
     "issues": "",

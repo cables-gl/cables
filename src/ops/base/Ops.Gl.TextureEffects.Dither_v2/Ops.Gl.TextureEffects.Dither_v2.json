@@ -33,8 +33,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.User.pandur.DitherV2"
+        ]
     },
     "authorName": "pandur",
     "id": "686ae373-2d2d-44cc-b45f-2ccb782dea26",
@@ -44,7 +43,6 @@
         "ports": []
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "eECnT6",

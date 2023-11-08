@@ -27,8 +27,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.CustomTextureEffectShader"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -36,7 +35,6 @@
     "created": 1505309334253,
     "summary": "Use custom shader as a texture effect",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

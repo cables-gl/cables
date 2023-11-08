@@ -93,12 +93,10 @@
                 "type": 5,
                 "name": "Error Message"
             }
-        ],
-        "name": "Ops.Html.VideoElement"
+        ]
     },
     "summary": "html video player element",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

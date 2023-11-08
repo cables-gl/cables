@@ -57,12 +57,10 @@
                 "name": "Expression Valid",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Math.MathExpression"
+        ]
     },
     "summary": "calculates a user defined mathematical expression",
     "issues": "",
-
     "relatedops": [
         "Ops.Math.TriggerMathExpression"
     ],

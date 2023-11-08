@@ -68,12 +68,10 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Dev.EdgeDetectionV4"
+        ]
     },
     "summary": "Draw only the edges of an image",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

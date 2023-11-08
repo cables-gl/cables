@@ -40,12 +40,10 @@
                 "type": "1",
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Anim.StringTypeAnimation"
+        ]
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Textures.Text"
     ],

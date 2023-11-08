@@ -43,9 +43,9 @@ TextureEffect.prototype.getHeight = function ()
 
 TextureEffect.prototype.setSourceTexture = function (tex)
 {
-    if (tex.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F) this._cgl.gl.getExtension("EXT_color_buffer_float");
-    if (tex.pixelFormat == Texture.PFORMATSTR_RGBA32F) this._cgl.gl.getExtension("EXT_color_buffer_float");
-    if (tex.pixelFormat == Texture.PFORMATSTR_RGBA16HF) this._cgl.gl.getExtension("EXT_color_buffer_half_float");
+    // if (tex.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    // if (tex.pixelFormat == Texture.PFORMATSTR_RGBA32F) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    // if (tex.pixelFormat == Texture.PFORMATSTR_RGBA16F) this._cgl.gl.getExtension("EXT_color_buffer_half_float");
 
     if (tex === null)
     {
@@ -246,7 +246,7 @@ TextureEffect.prototype.createMesh = function ()
 
 TextureEffect.checkOpNotInTextureEffect = function (op)
 {
-    if (!op.patch.cgl) return false;
+    if (!op.patch.cgl) return true;
     if (op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
         op.setUiError("textureeffect", null);
@@ -436,8 +436,9 @@ TextureEffect.getBlendCode = function (ver)
     return src;
 };
 
-TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha)
+TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha = false)
 {
+    blendName = String(blendName);
     shader.toggleDefine("BM_NORMAL", blendName == "normal");
     shader.toggleDefine("BM_MULTIPLY", blendName == "multiply");
     shader.toggleDefine("BM_MULTIPLY_INV", blendName == "multiply invert");

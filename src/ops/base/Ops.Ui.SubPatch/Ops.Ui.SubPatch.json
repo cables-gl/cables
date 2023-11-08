@@ -24,8 +24,7 @@
                 "type": 4,
                 "name": "create port out"
             }
-        ],
-        "name": "Ops.Ui.SubPatch"
+        ]
     },
     "summary": "subpatch op",
     "docs": {

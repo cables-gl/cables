@@ -23,8 +23,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.StereoWidener"
+        ]
     },
     "id": "f1e5702b-ea16-41fd-b2b3-c203d27ed2f6"
 }

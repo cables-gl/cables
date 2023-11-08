@@ -18,8 +18,7 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.VertexPositionFromTexture"
+        ]
     },
     "changelog": [
         {
@@ -30,7 +29,6 @@
     ],
     "summary": "set vertex positions from texture color values",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

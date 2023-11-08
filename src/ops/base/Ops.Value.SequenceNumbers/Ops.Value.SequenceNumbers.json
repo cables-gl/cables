@@ -189,8 +189,7 @@
                 "name": "Output 15",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Values.SequenceNumbers"
+        ]
     },
     "summary": "control order and flow of numbers",
     "issues": "",

@@ -30,8 +30,7 @@
                 "type": "2",
                 "name": "MQTT Object - Out"
             }
-        ],
-        "name": "Ops.Net.Mqtt.MqttSend_v2"
+        ]
     },
     "summary": "Sends a MQTT-message",
     "docs": {

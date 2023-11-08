@@ -29,8 +29,7 @@
                 "name": "Array Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.CutArray"
+        ]
     },
     "changelog": [
         {
@@ -41,7 +40,6 @@
     ],
     "summary": "Remove elements from an array from the beginning and/or the end",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

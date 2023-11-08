@@ -174,15 +174,13 @@
                 "type": 5,
                 "name": "Name"
             }
-        ],
-        "name": "Ops.Physics.CastRay"
+        ]
     },
     "libs": [
         "cannon.js"
     ],
     "summary": "cast a ray and test intersection with physics bodies",
     "issues": "",
-
     "relatedops": [
         "Ops.Physics.PhysicsBodiesArray",
         "Ops.Physics.Body.PhysicsCube_v2",

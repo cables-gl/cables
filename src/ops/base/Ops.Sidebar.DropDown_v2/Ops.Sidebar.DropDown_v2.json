@@ -67,12 +67,10 @@
                 "name": "Index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.DropDown_v2"
+        ]
     },
     "summary": "Shows a drop-down (select) element in the sidebar",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -51,7 +51,6 @@
                 "name": "Program Change Value Out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Dev.MidiProgramChange"
+        ]
     }
 }

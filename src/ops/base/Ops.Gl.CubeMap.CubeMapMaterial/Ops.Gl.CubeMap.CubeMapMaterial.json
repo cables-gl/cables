@@ -25,8 +25,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.CubeMapMaterial"
+        ]
     },
     "summary": "cubemap as material ",
     "author": "55d744634cdc152216eb9aad",
@@ -34,7 +33,6 @@
     "id": "17f73be5-401b-46f1-ace7-fd203bf1aa94",
     "created": 1507134982544,
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -94,7 +94,6 @@ function reset()
         }
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     outArrayLength.set(arr.length);
 }

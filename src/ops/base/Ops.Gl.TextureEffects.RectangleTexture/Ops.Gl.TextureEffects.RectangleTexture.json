@@ -52,8 +52,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Rectangle"
+        ]
     },
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",

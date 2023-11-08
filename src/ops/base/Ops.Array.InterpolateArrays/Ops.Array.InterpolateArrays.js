@@ -47,8 +47,7 @@ function execute()
             resultArr[i] = m;
         }
         needsCalc = false;
-        outArr.set(null);
-        outArr.set(resultArr);
+        outArr.setRef(resultArr);
     }
 
     next.trigger();

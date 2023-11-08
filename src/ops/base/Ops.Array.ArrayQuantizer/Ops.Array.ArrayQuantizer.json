@@ -42,12 +42,10 @@
                 "name": "Quantization Error",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayQuantizer"
+        ]
     },
     "summary": "quantize input to nearest number in array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

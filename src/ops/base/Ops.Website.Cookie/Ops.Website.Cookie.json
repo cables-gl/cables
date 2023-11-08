@@ -14,8 +14,7 @@
                 "type": 5,
                 "name": "Cookie String"
             }
-        ],
-        "name": "Ops.Website.Cookie"
+        ]
     },
     "summary": "cookie of the current website as object"
 }

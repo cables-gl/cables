@@ -29,12 +29,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayRandomSelection"
+        ]
     },
     "summary": "Extract a definable amount of values from an array",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.Array3xRandomSelection"
     ],

@@ -41,8 +41,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Anim.SineAnim"
+        ]
     },
     "docs": {
         "ports": [
@@ -77,7 +76,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

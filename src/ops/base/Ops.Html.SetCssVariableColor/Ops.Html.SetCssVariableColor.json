@@ -24,8 +24,7 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.SetCssVariableColor"
+        "portsOut": []
     },
     "summary": "set color value of a CSS variable",
     "youtubeid": "",

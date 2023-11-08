@@ -27,8 +27,7 @@
                 "name": "Array lengths",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayUnpack3"
+        ]
     },
     "summary": "splits a xyz array into 3 individual arrays",
     "youtubeid": "",

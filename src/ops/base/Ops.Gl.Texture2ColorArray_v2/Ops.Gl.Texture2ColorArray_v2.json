@@ -30,10 +30,9 @@
             {
                 "type": 0,
                 "name": "Floating Point",
-                "subType": "number"
+                "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Texture2ColorArray_v2"
+        ]
     },
     "summary": "extract colors from a texture",
     "docs": {
@@ -61,7 +60,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.TextureEffects.ImageCompose",
         "Ops.Gl.MeshInstancer"

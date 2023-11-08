@@ -16,8 +16,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Degrees"
+        ]
     },
     "summary": "Converts a radian measurement to its corresponding value in degrees.",
     "docs": {

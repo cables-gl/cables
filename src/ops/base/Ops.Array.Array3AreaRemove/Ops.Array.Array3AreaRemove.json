@@ -90,12 +90,10 @@
                 "name": "Out Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3AreaRemove"
+        ]
     },
     "summary": "remove points from an array3 with different shapes",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

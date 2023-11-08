@@ -2,6 +2,7 @@ import { EventTarget } from "./eventtarget";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
+import { cleanJson } from "./utils";
 
 
 /**
@@ -62,7 +63,6 @@ const Port = function (___op, name, type, uiAttribs)
     this.changeAlways = false;
     this.forceRefChange = false;
 
-    this._warnedDeprecated = false;
     this._useVariableName = null;
 
     this.activityCounter = 0;
@@ -99,7 +99,6 @@ const Port = function (___op, name, type, uiAttribs)
         {
             this._log.warn("val getter deprecated!", this);
             this._log.stack("val getter deprecated");
-            this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
@@ -107,8 +106,6 @@ const Port = function (___op, name, type, uiAttribs)
             this._log.warn("val setter deprecated!", this);
             this._log.stack("val setter deprecated");
             this.setValue(v);
-            // if(!this._warnedDeprecated)console.warn('deprecated .val set used',this._op.name);
-            this._warnedDeprecated = true;
         }
     });
 };
@@ -147,6 +144,11 @@ Port.prototype.getValueForDisplay = function ()
 
     if (typeof this.value === "string" || this.value instanceof String)
     {
+        if (str.length > 1000)
+        {
+            str = str.substring(0, 999);
+            str += "...";
+        }
         if (this.uiAttribs && (this.uiAttribs.display == "boolnum"))
         {
             str += " - ";
@@ -416,10 +418,9 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (!objPort) return;
     if (objPort.animated) this.setAnimated(objPort.animated);
     if (objPort.useVariable) this.setVariableName(objPort.useVariable);
-
     if (objPort.title) this.setUiAttribs({ "title": objPort.title });
     if (objPort.expose) this.setUiAttribs({ "expose": true });
-
+    if (objPort.order) this.setUiAttribs({ "order": objPort.order });
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
@@ -439,7 +440,7 @@ Port.prototype.deSerializeSettings = function (objPort)
 
 Port.prototype.getSerialized = function ()
 {
-    const obj = {};
+    let obj = {};
     obj.name = this.getName();
 
     if (!this.ignoreValueSerialize && this.links.length === 0)
@@ -453,7 +454,11 @@ Port.prototype.getSerialized = function ()
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
-    if (this.uiAttribs.expose) obj.expose = true;
+    if (this.uiAttribs.expose)
+    {
+        obj.expose = true;
+        if (this.uiAttribs.hasOwnProperty("order")) obj.order = this.uiAttribs.order;
+    }
     if (this.uiAttribs.title) obj.title = this.uiAttribs.title;
     if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
     {
@@ -466,8 +471,6 @@ Port.prototype.getSerialized = function ()
 
     if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
     {
-        const serLinks = [];
-
         for (const i in this.links)
         {
             if (!this.links[i].portIn || !this.links[i].portOut) continue;
@@ -480,6 +483,12 @@ Port.prototype.getSerialized = function ()
             }
         }
     }
+
+    if (obj.links && obj.links.length == 0) delete obj.links;
+    if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) delete obj.value;
+    if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION && this.links.length == 0) obj = null;
+    if (obj && Object.keys(obj).length == 1 && obj.name)obj = null;
+    cleanJson(obj);
 
     return obj;
 };

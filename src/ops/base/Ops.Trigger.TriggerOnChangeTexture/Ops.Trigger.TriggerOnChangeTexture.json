@@ -52,12 +52,10 @@
                 "name": "Result",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Trigger.TriggerOnChangeTexture"
+        ]
     },
     "summary": "triggers when texture has changed",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

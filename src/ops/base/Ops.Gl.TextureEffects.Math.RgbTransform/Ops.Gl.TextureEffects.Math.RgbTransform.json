@@ -89,8 +89,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.VertTexTransform"
+        ]
     },
     "authorName": "pandur",
     "id": "0a069281-e7a1-43a4-a74a-101026df6a29",
@@ -123,7 +122,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

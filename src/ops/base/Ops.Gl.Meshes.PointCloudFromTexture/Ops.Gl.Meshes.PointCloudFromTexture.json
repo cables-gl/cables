@@ -86,8 +86,7 @@
                 "name": "Total Points",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Meshes.PointCloudFromTexture"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"

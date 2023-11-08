@@ -26,8 +26,7 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.ShaderMaterial"
+        ]
     },
     "updated": 1526298945182,
     "author": "55d744634cdc152216eb9aad",

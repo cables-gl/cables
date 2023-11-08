@@ -40,8 +40,7 @@
                 "name": "result z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.Trigger3Numbers"
+        ]
     },
     "summary": "Stores a 3D coordinate (was Value3)",
     "docs": {
@@ -85,7 +84,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": []
 }

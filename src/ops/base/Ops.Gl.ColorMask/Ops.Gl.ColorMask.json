@@ -32,14 +32,12 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ColorMask"
+        ]
     },
     "authorName": "pandur",
     "id": "44433419-dcf4-46e6-8f40-d331598029ac",
     "created": 1542701267377,
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

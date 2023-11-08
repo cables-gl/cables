@@ -23,12 +23,10 @@
                 "type": "2",
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Json.ObjectKeyValue"
+        ]
     },
     "summary": "Set object number value by key",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

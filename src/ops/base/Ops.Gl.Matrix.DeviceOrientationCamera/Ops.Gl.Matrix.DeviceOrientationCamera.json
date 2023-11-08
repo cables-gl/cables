@@ -17,8 +17,7 @@
                 "name": "Window Orientation",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.DeviceOrientationCamera"
+        ]
     },
     "collections": [
         "cameras",

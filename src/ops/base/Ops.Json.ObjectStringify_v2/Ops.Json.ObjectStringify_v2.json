@@ -24,8 +24,7 @@
                 "name": "Error",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Json.ObjectStringify_v2"
+        ]
     },
     "summary": "Convert object to string",
     "docs": {

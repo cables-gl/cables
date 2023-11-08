@@ -32,16 +32,19 @@ const BLEND_MODES = {
 };
 
 
+
+
+
 const RAD2DEG = 180.0 / Math.PI;
 const DEG2RAD = Math.PI / 180.0;
 
 const CONSTANTS = {
     "MATH": {
-        DEG2RAD,
-        RAD2DEG,
+        "DEG2RAD": DEG2RAD,
+        "RAD2DEG": RAD2DEG,
     },
-    SHADER,
-    BLEND_MODES,
+    "SHADER": SHADER,
+    "BLEND_MODES": BLEND_MODES,
 };
 
 

@@ -30,12 +30,10 @@
                 "name": "Scaling",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.GetMatrixScaling"
+        ]
     },
     "summary": "Get the scalar scaling of a matrix",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

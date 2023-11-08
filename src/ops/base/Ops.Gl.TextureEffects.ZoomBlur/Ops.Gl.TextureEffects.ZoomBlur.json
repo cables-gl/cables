@@ -30,8 +30,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ZoomBlur"
+        ]
     },
     "authorName": "pandur",
     "id": "b60f01fc-6ea6-4720-ae33-e3d9208e99f9",

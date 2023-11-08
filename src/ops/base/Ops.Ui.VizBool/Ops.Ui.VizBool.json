@@ -46,15 +46,13 @@
                 "name": "Bool",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Ui.VizBool"
+        ]
     },
     "authorName": "pandur",
     "created": 1649238794135,
     "summary": "Visualize the state of a boolean input in the patch, useful for debugging",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "9SHiq4",

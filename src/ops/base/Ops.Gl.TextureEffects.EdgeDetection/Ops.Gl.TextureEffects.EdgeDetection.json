@@ -21,8 +21,7 @@
                 "type": "1",
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.EdgeDetection"
+        ]
     },
     "summary": "draw only the edges of an image",
     "docs": {

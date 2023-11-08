@@ -24,8 +24,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Geometry.FlipNormals"
+        ]
     },
     "summary": "flip all normals of a geometry",
     "docs": {

@@ -61,8 +61,7 @@
                 "type": "3",
                 "name": "Point Arrays"
             }
-        ],
-        "name": "Ops.Gl.Meshes.LinesArray"
+        ]
     },
     "docs": {
         "ports": []

@@ -30,7 +30,7 @@ UNI vec2 expGamma;
 
 IN vec3 worldPos;
 
-vec4 sampleEquirect(sampler2D tex, vec3 direction) {
+vec4 sampleEquirect(sampler2D tex, vec3 direction,float lod) {
     vec2 sampleUV;
     vec3 newDirection = normalize(direction);
 
@@ -38,6 +38,10 @@ vec4 sampleEquirect(sampler2D tex, vec3 direction) {
     sampleUV.y = asin( clamp(newDirection.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
 
     return texture(tex, sampleUV);
+}
+
+vec4 sampleEquirect(sampler2D tex, vec3 direction) {
+    return sampleEquirect(tex,direction,0.0);
 }
 
 highp vec3 DecodeRGBE8(highp vec4 rgbe)
@@ -56,7 +60,7 @@ void main() {
 
     vec4 finalColor;
     #ifndef RGBE
-        finalColor = vec4(SAMPLETEX(skybox, newPos));
+        finalColor = vec4(SAMPLETEX(skybox, newPos,0.0));
     #endif
 
     #ifdef RGBE

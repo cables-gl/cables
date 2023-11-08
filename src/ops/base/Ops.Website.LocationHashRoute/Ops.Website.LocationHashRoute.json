@@ -52,17 +52,13 @@
                 "name": "Matching",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Website.LocationHashRoute"
+        ]
     },
     "summary": "gives updated information about window.location.hash",
     "issues": "",
     "relatedops": null,
     "youtubeids": [
         "hUdHnFtBTNU"
-    ],
-    "libs": [
-        "navigo.js"
     ],
     "docs": {
         "ports": [

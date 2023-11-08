@@ -9,8 +9,7 @@
                 "name": "create port"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Ui.PatchOutput"
+        "portsOut": []
     },
     "summary": "Helper op for sub-patches",
     "docs": {

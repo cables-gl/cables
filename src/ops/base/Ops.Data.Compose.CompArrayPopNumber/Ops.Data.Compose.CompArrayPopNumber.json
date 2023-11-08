@@ -42,8 +42,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Team.CompOps.Dev.CompArrayPopNumber"
+        ]
     },
     "authorName": "pandur",
     "created": 1680618157701,

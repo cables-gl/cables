@@ -28,10 +28,9 @@
             {
                 "type": 0,
                 "name": "Is Showing",
-                "subType": "number"
+                "subType": "boolean"
             }
-        ],
-        "name": "Ops.Html.ElementFadeInOut"
+        ]
     },
     "summary": "fade html elements in or out",
     "docs": {

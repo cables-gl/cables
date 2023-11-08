@@ -58,12 +58,10 @@
                 "name": "Cubemap Projection",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.CubemapToEquirectangularTexture"
+        ]
     },
     "summary": "visualize cubemap as folded texture or equirectangular texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

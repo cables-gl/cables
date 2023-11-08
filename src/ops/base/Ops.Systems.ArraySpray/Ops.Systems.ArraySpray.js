@@ -1,25 +1,26 @@
-const exe = op.inTrigger("exe");
-const timer = op.inValue("time");
-const num = op.inValue("num", 100);
-const sizeX = op.inValue("Size X");
-const sizeY = op.inValue("Size Y");
-const sizeZ = op.inValue("Size Z");
-const movementX = op.inValue("movement x", 1);
-const movementY = op.inValue("movement y", 1);
-const movementZ = op.inValue("movement z", 1);
-
-const centerX = op.inBool("Center X", false);
-const centerY = op.inBool("Center Y", false);
-const centerZ = op.inBool("Center Z", false);
-
-const inReset = op.inTriggerButton("Reset");
-const lifetime = op.inValue("lifetime", 10);
-const lifetimeMin = op.inValue("Lifetime Minimum", 5);
-
 const
+    exe = op.inTrigger("exe"),
+    timer = op.inValue("time"),
+    num = op.inValue("num", 100),
+    sizeX = op.inValue("Size X"),
+    sizeY = op.inValue("Size Y"),
+    sizeZ = op.inValue("Size Z"),
+    movementX = op.inValue("movement x", 1),
+    movementY = op.inValue("movement y", 1),
+    movementZ = op.inValue("movement z", 1),
+
+    centerX = op.inBool("Center X", false),
+    centerY = op.inBool("Center Y", false),
+    centerZ = op.inBool("Center Z", false),
+
+    inReset = op.inTriggerButton("Reset"),
+    lifetime = op.inValue("lifetime", 10),
+    lifetimeMin = op.inValue("Lifetime Minimum", 5),
+
     outTrigger = op.outTrigger("Trigger Out"),
     outPositions = op.outArray("Positions", null, 3),
     outLifetimes = op.outArray("Lifetime");
+
 inReset.onTriggered = reset;
 const cgl = op.patch.cgl;
 
@@ -132,10 +133,8 @@ exe.onTriggered = function ()
         if (lifetimes[i] > 1.0)lifetimes[i] = 1.0;
     }
 
-    outPositions.set(null);
-    outLifetimes.set(null);
-    outPositions.set(positions);
-    outLifetimes.set(lifetimes);
+    outPositions.setRef(positions);
+    outLifetimes.setRef(lifetimes);
     outTrigger.trigger();
 };
 

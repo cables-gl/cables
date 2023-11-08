@@ -26,8 +26,7 @@
                 "type": "3",
                 "name": "Output Array"
             }
-        ],
-        "name": "Ops.Array.ArraySlice"
+        ]
     },
     "summary": "Extracts parts of an array (shallow copy)",
     "docs": {

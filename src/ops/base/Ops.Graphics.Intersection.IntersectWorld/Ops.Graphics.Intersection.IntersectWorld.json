@@ -50,8 +50,7 @@
                 "type": 3,
                 "name": "Collisions"
             }
-        ],
-        "name": "Ops.Graphics.Intersection.IntersectWorld"
+        ]
     },
     "authorName": "pandur",
     "created": 1686149045279,

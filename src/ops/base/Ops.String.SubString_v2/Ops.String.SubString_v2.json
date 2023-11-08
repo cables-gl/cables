@@ -29,8 +29,7 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.SubString_v2"
+        ]
     },
     "summary": "Subset of a string between one index and another",
     "youtubeid": "",

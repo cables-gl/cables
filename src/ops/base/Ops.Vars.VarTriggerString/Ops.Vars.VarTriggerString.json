@@ -35,15 +35,13 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Vars.VarTriggerString"
+        ]
     },
     "coreLibs": [
         "vargetset"
     ],
     "summary": "set string variable by trigger",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "30v_GQc6ajA"

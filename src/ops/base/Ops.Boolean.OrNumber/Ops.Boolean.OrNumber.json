@@ -1,42 +1,41 @@
 {
-  "id": "beb3c979-5723-4283-a23a-34f4b5038b49",
-  "changelog": [
-    {
-      "message": "created op",
-      "author": "pandur",
-      "date": 1599132769125
+    "id": "beb3c979-5723-4283-a23a-34f4b5038b49",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599132769125
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1599132869001,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Or",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Output another number if input number is zero",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
-  ],
-  "authorName": "pandur",
-  "created": 1599132869001,
-  "layout": {
-    "portsIn": [
-      {
-        "type": "0",
-        "name": "Number",
-        "subType": "number"
-      },
-      {
-        "type": "0",
-        "name": "Or",
-        "subType": "number"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": "0",
-        "name": "Result",
-        "subType": "number"
-      }
-    ],
-    "name": "Ops.Boolean.OrNumber"
-  },
-  "summary": "Output another number if input number is zero",
-  "issues": "",
-  "collections": null,
-  "relatedops": null,
-  "youtubeids": [],
-  "docs": {
-    "ports": []
-  }
 }

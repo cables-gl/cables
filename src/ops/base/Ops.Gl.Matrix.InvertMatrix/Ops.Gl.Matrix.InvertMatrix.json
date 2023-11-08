@@ -26,12 +26,10 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Matrix.InvertMatrix"
+        ]
     },
     "summary": "outputs an inverted matrix",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -48,12 +48,10 @@
                 "type": "1",
                 "name": "Joint Trigger"
             }
-        ],
-        "name": "Ops.Json3d.Bones.BoneSystem"
+        ]
     },
     "summary": "Creates a Bones System for you to playback and Interpolate between Bones Animations imported as a baked collada file.",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

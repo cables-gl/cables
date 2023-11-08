@@ -61,6 +61,5 @@ function animChange()
         }
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
 }

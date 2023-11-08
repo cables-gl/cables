@@ -149,8 +149,7 @@
                 "name": "textureDepth",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.Render2Textures_v3"
+        ]
     },
     "summary": "render to multiple textures at the same time",
     "docs": {

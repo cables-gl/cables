@@ -41,15 +41,13 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"
     ],
     "summary": "set vertex positions of a mesh from a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

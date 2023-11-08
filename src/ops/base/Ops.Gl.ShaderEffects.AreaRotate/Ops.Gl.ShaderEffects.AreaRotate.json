@@ -45,8 +45,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Exp.Gl.ShaderEffects.AreaRotate"
+        ]
     },
     "summary": "rotate vertices in an area around a center point",
     "youtubeid": "",

@@ -44,8 +44,7 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Phong.LambertMaterial"
+        ]
     },
     "summary": "simple shaded material",
     "docs": {
@@ -59,7 +58,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "PAvm26"

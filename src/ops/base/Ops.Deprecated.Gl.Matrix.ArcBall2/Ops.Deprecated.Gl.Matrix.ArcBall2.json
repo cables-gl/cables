@@ -28,7 +28,6 @@
                 "type": "0",
                 "name": "Radius"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ArcBall"
+        ]
     }
 }

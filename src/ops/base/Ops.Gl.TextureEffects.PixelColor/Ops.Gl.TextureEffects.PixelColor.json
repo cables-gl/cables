@@ -38,8 +38,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.PixelColor"
+        ]
     },
     "author": "59d794f763898eb73bd67a7e",
     "authorName": "pandur",
@@ -82,6 +81,5 @@
             "date": 1670920968058
         }
     ],
-
     "relatedops": null
 }

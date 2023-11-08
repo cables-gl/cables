@@ -15,12 +15,10 @@
                 "type": "3",
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Vars.VarGetArray_v2"
+        ]
     },
     "summary": "Get a variable array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "sUR6b0zvuSY"

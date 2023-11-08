@@ -102,12 +102,10 @@
                 "name": "Gate 3",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiChord3"
+        ]
     },
     "summary": "Map 3 midi notes to values",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiInputDevice2",
         "Ops.Devices.Midi.MidiClock",

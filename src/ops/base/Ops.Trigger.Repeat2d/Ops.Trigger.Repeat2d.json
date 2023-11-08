@@ -51,8 +51,7 @@
                 "name": "total iterations",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.Repeat2d"
+        ]
     },
     "summary": "Triggers all ops underneath Num X * Num Y times",
     "author": "55d744634cdc152216eb9aad",

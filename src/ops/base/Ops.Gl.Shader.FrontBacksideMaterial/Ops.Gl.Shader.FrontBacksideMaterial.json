@@ -16,8 +16,7 @@
                 "type": "1",
                 "name": "next"
             }
-        ],
-        "name": "Ops.Gl.Shader.FrontBacksideMaterial"
+        ]
     },
     "summary": "visualize which faces are facing the camera",
     "docs": {

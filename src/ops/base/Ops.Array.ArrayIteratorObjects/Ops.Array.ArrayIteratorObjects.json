@@ -32,8 +32,7 @@
                 "type": 2,
                 "name": "value"
             }
-        ],
-        "name": "Ops.Array.ArrayIteratorObjects"
+        ]
     },
     "summary": "iterate over an array of objects",
     "docs": {

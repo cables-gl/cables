@@ -15,8 +15,7 @@
                 "type": "2",
                 "name": "audio out"
             }
-        ],
-        "name": "Ops.WebAudio.Oscillator"
+        ]
     },
     "summary": "Basic oscillator",
     "docs": {

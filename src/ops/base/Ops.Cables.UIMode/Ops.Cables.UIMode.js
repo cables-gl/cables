@@ -8,7 +8,7 @@ if (CABLES.UI)
 {
     gui.on("canvasModeChange", () =>
     {
-        outCanvasMode.set(gui.getCanvasMode());
+        outCanvasMode.set(gui.canvasManager.mode);
         outPatchVisible.set(gui.patchView.element.classList.contains("hidden"));
     });
 }

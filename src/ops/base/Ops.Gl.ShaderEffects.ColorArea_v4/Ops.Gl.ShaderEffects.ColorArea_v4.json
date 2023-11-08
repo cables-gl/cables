@@ -120,8 +120,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.ColorArea_v4"
+        ]
     },
     "changelog": [
         {
@@ -160,7 +159,6 @@
     ],
     "summary": "Colorize all meshes around current position",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "cUU0fNw3rEg"

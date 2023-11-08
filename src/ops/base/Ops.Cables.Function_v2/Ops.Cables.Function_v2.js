@@ -18,9 +18,9 @@ funcName.onChange = function ()
 
 function triggered()
 {
-    const arg1 = arguments.hasOwnProperty(0) ? arguments[0] : inString1.get();
-    const arg2 = arguments.hasOwnProperty(1) ? arguments[1] : inString2.get();
-    const arg3 = arguments.hasOwnProperty(2) ? arguments[2] : inString3.get();
+    const arg1 = arguments.hasOwnProperty(0) && typeof arguments[0] !== "undefined" ? arguments[0] : inString1.get();
+    const arg2 = arguments.hasOwnProperty(1) && typeof arguments[1] !== "undefined" ? arguments[1] : inString2.get();
+    const arg3 = arguments.hasOwnProperty(2) && typeof arguments[2] !== "undefined" ? arguments[2] : inString3.get();
     outString1.set(arg1);
     outString2.set(arg2);
     outString3.set(arg3);

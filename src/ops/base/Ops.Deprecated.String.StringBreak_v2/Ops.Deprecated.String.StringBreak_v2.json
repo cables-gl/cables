@@ -20,13 +20,11 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringBreak2"
+        ]
     },
     "summary": "breaks into a string after [num] chars",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

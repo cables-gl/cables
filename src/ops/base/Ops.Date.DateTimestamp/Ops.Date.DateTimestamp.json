@@ -33,8 +33,7 @@
                 "name": "Timestamp",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Date.DateTimestamp"
+        ]
     },
     "summary": "Calculates the timestamp of a date by year / month / day / hour / minute",
     "docs": {

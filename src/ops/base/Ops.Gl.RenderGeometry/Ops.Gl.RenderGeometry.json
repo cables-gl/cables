@@ -41,8 +41,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.RenderGeometry"
+        ]
     },
     "summary": "Render a geometry as mesh",
     "author": "55d744634cdc152216eb9aad",
@@ -67,7 +66,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "w6QYlH"
 }

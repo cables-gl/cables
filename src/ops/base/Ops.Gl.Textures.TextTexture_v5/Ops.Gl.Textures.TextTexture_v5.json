@@ -21,8 +21,33 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Auto Height",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "text"
+            },
+            {
+                "type": 0,
+                "name": "Auto Line Breaks",
+                "subType": "boolean"
             },
             {
                 "type": 5,
@@ -48,7 +73,30 @@
             },
             {
                 "type": 0,
-                "name": "Padding Y",
+                "name": "Vertical align index",
+                "group": "Font",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "group": "Font",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Height Add",
+                "group": "Font",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Y Top",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Padding Y Bottom",
                 "subType": "integer"
             },
             {
@@ -160,8 +208,7 @@
                 "name": "Num Lines",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextTexture_v5"
+        ]
     },
     "changelog": [
         {

@@ -35,14 +35,12 @@
                 "name": "height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Canvas2Texture"
+        ]
     },
     "summary": "convert a canvas to texture",
     "docs": {
         "ports": []
     },
-
     "relatedops": null,
     "exampleProjectId": "QjlEo-"
 }

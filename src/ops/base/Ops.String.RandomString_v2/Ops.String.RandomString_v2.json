@@ -23,12 +23,10 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.RandomString_v2"
+        ]
     },
     "summary": "Generate a random string of given characters",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

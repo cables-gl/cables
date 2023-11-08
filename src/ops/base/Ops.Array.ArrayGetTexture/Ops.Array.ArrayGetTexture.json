@@ -26,12 +26,10 @@
                 "type": 2,
                 "name": "value"
             }
-        ],
-        "name": "Ops.Array.ArrayGetTexture"
+        ]
     },
     "summary": "get texture from array at index",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

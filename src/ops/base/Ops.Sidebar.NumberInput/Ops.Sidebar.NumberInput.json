@@ -39,8 +39,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.NumberInput"
+        ]
     },
     "summary": "Enter a number in the sidebar",
     "docs": {

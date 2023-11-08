@@ -53,8 +53,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Html.TransformElement"
+        ]
     },
     "summary": "Move html element to current transformation in screen space",
     "docs": {

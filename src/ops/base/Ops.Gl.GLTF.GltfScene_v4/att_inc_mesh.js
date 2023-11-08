@@ -132,7 +132,6 @@ let gltfMesh = class
 
             if (prim.targets)
             {
-                console.log("prim.targets", prim.targets.length);
                 for (let j = 0; j < prim.targets.length; j++)
                 {
                     const tgeom = new CGL.Geometry("gltf_target_" + j);
@@ -311,7 +310,7 @@ let gltfMesh = class
 
             if (geom.tangents.length === 0 || inCalcNormals.get() != "Never")
             {
-                console.log("[gltf ]no tangents... calculating tangents...");
+                // console.log("[gltf ]no tangents... calculating tangents...");
                 geom.calcTangentsBitangents();
             }
         }
@@ -342,7 +341,8 @@ let gltfMesh = class
                 op.logWarn("unknown primitive type", this);
             }
 
-            this.mesh = new CGL.Mesh(cgl, g, glprim);
+            this.mesh = op.patch.cg.createMesh(g, glprim);
+            // this.mesh = new CGL.Mesh(cgl, g, glprim);
         }
         else
         {
@@ -352,7 +352,6 @@ let gltfMesh = class
                 this.mesh.addVertexNumbers = true;
                 this.morphTargetsRenderMod = new GltfTargetsRenderer(this);
             }
-
 
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
             if (skinRenderer)useMat = false;

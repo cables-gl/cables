@@ -51,8 +51,7 @@
                 "type": 2,
                 "name": "Geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.PointCloudFromArray"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -108,7 +107,10 @@
             "message": "improved performance by rebuilding mesh less often",
             "author": "pandur",
             "id": "decb1b63-7f07-4dab-a96a-8f6d7936ed67",
-            "date": 1560669928210
+            "date": 1560669928210,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1699349836088
         }
     ],
     "changelog": [

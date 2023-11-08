@@ -44,15 +44,13 @@
                 "type": 3,
                 "name": "List of Input Devices"
             }
-        ],
-        "name": "Ops.WebAudio.MicrophoneIn_v2"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "simod",
     "id": "cbfbbffd-a5a8-4b21-bcb5-5d031cc5e11a",
     "created": 1606307812024,
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

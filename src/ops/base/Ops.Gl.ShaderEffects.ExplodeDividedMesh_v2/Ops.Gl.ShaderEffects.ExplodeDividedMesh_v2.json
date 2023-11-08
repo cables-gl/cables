@@ -100,8 +100,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.ExplodeDividedMesh_v2"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"

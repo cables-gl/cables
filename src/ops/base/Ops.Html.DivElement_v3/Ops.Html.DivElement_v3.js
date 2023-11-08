@@ -37,7 +37,7 @@ outElement.onLinkChanged = updateStyle;
 
 function createElement()
 {
-    div = document.createElement("div");
+    div = op.patch.getDocument().createElement("div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 

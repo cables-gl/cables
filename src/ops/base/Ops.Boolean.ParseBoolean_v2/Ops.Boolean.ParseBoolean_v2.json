@@ -15,8 +15,7 @@
                 "name": "Result",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Boolean.ParseBoolean_v2"
+        ]
     },
     "changelog": [
         {

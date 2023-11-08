@@ -25,13 +25,11 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayToString2"
+        ]
     },
     "summary": "Convert an array to a string, divided by a separator",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": [

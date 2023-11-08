@@ -39,12 +39,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.AlphaMaskV2"
+        ]
     },
     "summary": "Set alphachannel of current imagecompose via a texture mask",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

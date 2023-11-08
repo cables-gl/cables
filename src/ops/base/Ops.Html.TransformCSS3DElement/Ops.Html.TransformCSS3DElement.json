@@ -33,8 +33,7 @@
                 "type": 1,
                 "name": "next"
             }
-        ],
-        "name": "Ops.Html.TransformCSS3DElement"
+        ]
     },
     "summary": "Transform an Element in 3d space using CSS3D  ",
     "docs": {

@@ -128,7 +128,7 @@ let gltfMesh = class
 
             if (prim.targets)
             {
-                console.log("prim.targets", prim.targets.length);
+                // console.log("prim.targets", prim.targets.length);
                 for (let j = 0; j < prim.targets.length; j++)
                 {
                     // var tgeom=new CGL.Geometry("gltf_"+this.name);

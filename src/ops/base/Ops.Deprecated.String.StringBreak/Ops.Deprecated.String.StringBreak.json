@@ -18,8 +18,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.StringBreak"
+        ]
     },
     "summary": "insert linebreaks into a string after [num] chars",
     "updated": 1533987495662,

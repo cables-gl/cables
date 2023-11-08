@@ -71,8 +71,7 @@
                 "name": "Loading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Textures.ExrTexture"
+        ]
     },
     "libs": [
         "fflate.js",

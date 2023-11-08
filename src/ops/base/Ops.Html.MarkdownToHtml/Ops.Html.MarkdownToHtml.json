@@ -29,15 +29,13 @@
                 "type": 5,
                 "name": "Html"
             }
-        ],
-        "name": "Ops.Html.MarkdownToHtml"
+        ]
     },
     "created": 1669976600784,
     "libs": [
         "marked.js"
     ],
     "summary": "markdown markup language to html parser",
-
     "relatedops": null,
     "docs": {
         "ports": []

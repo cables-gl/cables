@@ -27,8 +27,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.RgbMultiply"
+        ]
     },
     "updated": 1540922021355,
     "authorName": "pandur",

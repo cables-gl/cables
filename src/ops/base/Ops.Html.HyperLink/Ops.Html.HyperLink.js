@@ -1,7 +1,8 @@
-var exec=op.inTrigger("open");
-var inUrl=op.inValueString("URL","http://cables.gl");
+const
+    exec = op.inTrigger("open"),
+    inUrl = op.inValueString("URL", "http://cables.gl");
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-    document.location.href=inUrl.get();
+    op.patch.getDocument().location.href = inUrl.get();
 };

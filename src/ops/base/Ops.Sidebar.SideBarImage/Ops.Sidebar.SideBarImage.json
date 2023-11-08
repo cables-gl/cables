@@ -31,8 +31,7 @@
                 "type": 2,
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.SideBarImage"
+        ]
     },
     "summary": "Display an image in the sidebar",
     "collections": null,

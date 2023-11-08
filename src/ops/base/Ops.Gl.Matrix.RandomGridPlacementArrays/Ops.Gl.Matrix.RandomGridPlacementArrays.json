@@ -65,12 +65,10 @@
                 "name": "Total Points",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.RandomGridPlacementArrays"
+        ]
     },
     "summary": "Place random objects on a grid",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

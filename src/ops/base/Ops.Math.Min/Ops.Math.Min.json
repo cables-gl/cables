@@ -18,8 +18,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Min"
+        ]
     },
     "summary": "Result will be the smaller number of the inputs",
     "docs": {

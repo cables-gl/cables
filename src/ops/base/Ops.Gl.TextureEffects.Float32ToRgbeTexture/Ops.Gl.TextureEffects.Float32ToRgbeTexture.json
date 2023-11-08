@@ -64,8 +64,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Textures.Float32ToRgbeTexture"
+        ]
     },
     "summary": "Convert a Float32 bit/HDR texture to RGBE format (only positive numbers)",
     "issues": "",

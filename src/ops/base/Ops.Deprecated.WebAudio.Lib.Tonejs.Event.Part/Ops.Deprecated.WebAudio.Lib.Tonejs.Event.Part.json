@@ -105,8 +105,7 @@
                 "type": "0",
                 "name": "Progress"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Event.Part"
+        ]
     },
     "summary": "Musical part",
     "docs": {

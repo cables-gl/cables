@@ -287,8 +287,7 @@ function buildMesh()
 
     if (inFlat.get()) geom.unIndex();
 
-    outGeometry.set(null);
-    outGeometry.set(geom);
+    outGeometry.setRef(geom);
 
     if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);

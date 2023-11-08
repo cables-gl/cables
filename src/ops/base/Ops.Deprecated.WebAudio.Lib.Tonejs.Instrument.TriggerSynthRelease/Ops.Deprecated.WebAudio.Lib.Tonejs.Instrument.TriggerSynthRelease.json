@@ -20,7 +20,6 @@
                 "type": "0",
                 "name": "Time"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Instrument.TriggerSynthRelease"
+        ]
     }
 }

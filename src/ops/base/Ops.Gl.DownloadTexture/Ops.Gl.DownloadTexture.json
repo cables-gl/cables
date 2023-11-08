@@ -24,8 +24,7 @@
                 "name": "Finished",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.DownloadTexture"
+        ]
     },
     "summary": "download a texture as png file",
     "youtubeid": "",
@@ -50,7 +49,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "15LaTs"
 }

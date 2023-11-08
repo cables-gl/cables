@@ -152,8 +152,7 @@
                 "type": "5",
                 "name": "Output 15"
             }
-        ],
-        "name": "Ops.Values.SequenceStrings"
+        ]
     },
     "summary": "control order and flow of strings",
     "issues": "",

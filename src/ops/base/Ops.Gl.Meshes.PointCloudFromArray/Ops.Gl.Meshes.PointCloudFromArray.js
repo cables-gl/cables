@@ -30,14 +30,15 @@ vertCols.onChange = updateVertCols;
 numPoints.onChange = updateNumVerts;
 inPointSizes.onChange = updatePointSizes;
 
-seed.onChange = arr.onChange = vertCols.onLinkChanged =
-inPointSizes.onLinkChanged = reset;
+seed.onChange =
+    arr.onChange =
+    vertCols.onLinkChanged =
+    inPointSizes.onLinkChanged = reset;
 
 exe.onTriggered = doRender;
 
 function doRender()
 {
-    outTrigger.trigger();
     if (CABLES.UI)
     {
         let shader = cgl.getShader();
@@ -47,12 +48,14 @@ function doRender()
 
     if (needsRebuild || !mesh) rebuild();
     if (!deactivated && mesh) mesh.render(cgl.getShader());
+    outTrigger.trigger();
 }
 
 function reset()
 {
     deactivated = arr.get() == null;
 
+    // needsRebuild = true;
     if (!deactivated)needsRebuild = true;
     else needsRebuild = false;
 }
@@ -92,10 +95,11 @@ function updatePointSizes()
 
 function updateVertCols()
 {
-    if (!vertCols.get()) return;
-    if (!geom.vertexColors) reset();
-
-    if (mesh)mesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR, vertCols.get(), 4);
+    // if (!vertCols.get()) return;
+    // if (!geom.vertexColors) reset();
+    // console.log("update vert cols");
+    needsRebuild = true;
+    // if (mesh)mesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR, vertCols.get(), 4);
 }
 
 function updateNumVerts()
@@ -144,7 +148,6 @@ function rebuild()
 
     if (!texCoords || texCoords.length != num * 2) texCoords = new Float32Array(num * 2); // num*2;//=
 
-    let changed = true;
     let rndTc = pTexCoordRand.get();
 
     if (!inCoords.isLinked())
@@ -208,23 +211,18 @@ function rebuild()
         geom.setAttribute("attrPointSize", [], 1);
     }
 
-    if (changed)
-    {
-        if (inCoords.isLinked()) texCoords = inCoords.get();
+    if (inCoords.isLinked()) texCoords = inCoords.get();
 
-        geom.setPointVertices(verts);
-        geom.setTexCoords(texCoords);
-        // geom.verticesIndices = [];
+    geom.setPointVertices(verts);
+    geom.setTexCoords(texCoords);
 
-        if (mesh)mesh.dispose();
-        mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    // if (mesh)mesh.dispose();
+    if (!mesh)mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
 
-        mesh.addVertexNumbers = true;
-        mesh.setGeom(geom);
+    mesh.addVertexNumbers = true;
+    mesh.setGeom(geom);
 
-        outGeom.set(null);
-        outGeom.set(geom);
-    }
+    outGeom.setRef(geom);
 
     updateNumVerts();
     needsRebuild = false;

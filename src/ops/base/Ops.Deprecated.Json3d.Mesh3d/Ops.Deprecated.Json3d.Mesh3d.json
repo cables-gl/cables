@@ -75,8 +75,7 @@
                 "type": "5",
                 "name": "Mesh Name"
             }
-        ],
-        "name": "Ops.Json3d.Mesh3d"
+        ]
     },
     "changelog": [
         {
@@ -102,7 +101,6 @@
     ],
     "summary": "Load a 3D mesh - model into a scene , e.g. .FBX. DAE .OBJ (was: json3dmesh)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

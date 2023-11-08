@@ -1,11 +1,12 @@
 const
     exe = op.inTrigger("exe"),
     inShow = op.inValueBool("Visible", true),
+    inDoGpu = op.inValueBool("Measure GPU", true),
     next = op.outTrigger("childs"),
     position = op.inSwitch("Position", ["top", "bottom"], "top"),
     openDefault = op.inBool("Open", false),
     smoothGraph = op.inBool("Smooth Graph", true),
-    inScaleGraph = op.inFloat("Scale", 4),
+    inScaleGraph = op.inFloat("Scale", 3),
     inSizeGraph = op.inFloat("Size", 128),
     outCanv = op.outObject("Canvas"),
     outFPS = op.outNumber("FPS");
@@ -186,6 +187,7 @@ function updateCanvas()
 
     ctx.fillStyle = colorBg;
     ctx.fillRect(0, 0, canvas.width, height);
+
     ctx.fillStyle = colorRAF;
 
     let k = 0;
@@ -215,6 +217,20 @@ function updateCanvas()
         sum += timesGPU[k];
         ctx.fillRect(numBars - k, height - sum * hmul, 1, timesGPU[k] * hmul);
     }
+
+    for (let i = 10; i < height; i += 10)
+    {
+        ctx.fillStyle = "#888";
+        const y = height - (i * hmul);
+        ctx.fillRect(canvas.width - 5, y, 5, 1);
+        ctx.font = "8px arial";
+
+        ctx.fillText(i + "ms", canvas.width - 27, y + 3);
+    }
+
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(canvas.width - 5, height - (1000 / fps * hmul), 5, 1);
+    ctx.fillText(Math.round(1000 / fps) + "ms", canvas.width - 27, height - (1000 / fps * hmul));
 }
 
 function createCanvas()
@@ -447,7 +463,8 @@ function render()
     const selfTimeStart = performance.now();
     frameCount++;
 
-    if (glQueryExt && inShow.get())op.patch.cgl.profileData.doProfileGlQuery = true;
+    if (glQueryExt && inDoGpu.get() && inShow.get())op.patch.cgl.profileData.doProfileGlQuery = true;
+    else op.patch.cgl.profileData.doProfileGlQuery = false;
 
     if (fpsStartTime === 0)fpsStartTime = Date.now();
     if (Date.now() - fpsStartTime >= 1000)

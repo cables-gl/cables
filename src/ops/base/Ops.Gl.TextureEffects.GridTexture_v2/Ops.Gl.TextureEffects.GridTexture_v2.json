@@ -94,8 +94,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.GridTextureV2"
+        ]
     },
     "summary": "Creates a grid texture",
     "issues": "",

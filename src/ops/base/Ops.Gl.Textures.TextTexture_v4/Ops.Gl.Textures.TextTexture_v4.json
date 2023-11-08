@@ -175,8 +175,7 @@
                 "name": "Num Lines",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextTexture_v4"
+        ]
     },
     "changelog": [
         {

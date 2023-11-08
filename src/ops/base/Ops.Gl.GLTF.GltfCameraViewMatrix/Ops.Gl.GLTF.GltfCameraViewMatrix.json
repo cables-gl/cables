@@ -35,8 +35,7 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfCameraViewMatrix"
+        ]
     },
     "summary": "get view matrix from a gltf camera",
     "issues": "",

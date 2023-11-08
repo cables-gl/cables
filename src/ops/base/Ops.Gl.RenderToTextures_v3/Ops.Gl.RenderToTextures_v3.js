@@ -98,7 +98,7 @@ function getWrap()
 
 function isFloatingPoint()
 {
-    return inPixelFormat.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    return CGL.Texture.isPixelFormatFloat(inPixelFormat.get());
 }
 
 function doRender()
@@ -128,19 +128,16 @@ function doRender()
             if (msaa.get() == "4x")msSamples = 4;
             if (msaa.get() == "8x")msSamples = 8;
 
-            console.log("numSlots", numSlots);
-
-            fb = new CGL.Framebuffer2(cgl, 8, 8,
-                {
-                    "numRenderBuffers": numSlots,
-                    "isFloatingPointTexture": floatingPoint,
-                    "multisampling": ms,
-                    "depth": true,
-                    "multisamplingSamples": msSamples,
-                    "wrap": getWrap(),
-                    "filter": getFilter(),
-                    "clear": clear.get()
-                });
+            fb = new CGL.Framebuffer2(cgl, 8, 8, {
+                "numRenderBuffers": numSlots,
+                "isFloatingPointTexture": floatingPoint,
+                "multisampling": ms,
+                "depth": true,
+                "multisamplingSamples": msSamples,
+                "wrap": getWrap(),
+                "filter": getFilter(),
+                "clear": clear.get()
+            });
         }
         else
         {
@@ -181,8 +178,11 @@ function doRender()
     cgl.frameStore.objectIdCounter = 0;
 
     cgl.pushShader(defaultShader);
+    cgl.pushViewPort(0, 0, width.get(), height.get());
 
     trigger.trigger();
+
+    cgl.popViewPort();
 
     cgl.popShader();
 

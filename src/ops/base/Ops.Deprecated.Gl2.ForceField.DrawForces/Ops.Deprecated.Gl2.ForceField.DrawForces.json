@@ -29,8 +29,7 @@
                 "name": "Range",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl2.ForceField.DrawForces"
+        ]
     },
     "changelog": [
         {

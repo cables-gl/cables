@@ -102,8 +102,7 @@
                 "name": "geometry",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.Cube_v2"
+        ]
     },
     "summary": "draw a cube",
     "issues": "",

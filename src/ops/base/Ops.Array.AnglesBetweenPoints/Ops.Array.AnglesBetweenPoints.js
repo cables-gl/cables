@@ -33,7 +33,7 @@ inArr.onChange = () =>
             x = vb[0] - va[0],
             y = vb[1] - va[1],
             z = vb[2] - va[2],
-            r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)),
+            r = Math.sqrt(x ** 2 + y ** 2 + z ** 2),
             theta = Math.acos(y / r) * (180 / Math.PI) + inTheta.get(),
             phi = Math.atan2(x, z) * (180 / Math.PI) + inPhi.get();
 
@@ -56,6 +56,5 @@ inArr.onChange = () =>
         // result.push(q[0],q[1],q[2],q[3]);
     }
 
-    outArr.set(null);
-    outArr.set(result);
+    outArr.setRef(result);
 };

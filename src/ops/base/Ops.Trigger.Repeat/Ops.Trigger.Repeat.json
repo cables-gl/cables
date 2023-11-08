@@ -22,8 +22,7 @@
                 "name": "index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.Repeat"
+        ]
     },
     "authorName": "pandur",
     "id": "0f4d6489-ea7a-436b-b1b3-25a739e150c6",
@@ -50,7 +49,6 @@
     },
     "youtubeid": "jiOLZaMUH78",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "VFAfgg"
 }

@@ -103,12 +103,10 @@
                 "type": 1,
                 "name": "Collision"
             }
-        ],
-        "name": "Ops.Physics.Body.PhysicsCube_v2"
+        ]
     },
     "summary": "physical body in form of a cube",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

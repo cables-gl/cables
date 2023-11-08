@@ -139,14 +139,12 @@
                 "type": 1,
                 "name": "Reset Out"
             }
-        ],
-        "name": "Ops.WebAudio.ClockSequencer"
+        ]
     },
     "authorName": "simod",
     "created": 1612888673498,
     "summary": "send bpm based triggers like a clocked trigger sequencer / clock divider",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

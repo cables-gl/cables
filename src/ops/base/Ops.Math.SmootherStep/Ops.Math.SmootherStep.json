@@ -27,8 +27,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.SmootherStep"
+        ]
     },
     "issues": "",
     "collections": [

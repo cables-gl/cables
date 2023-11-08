@@ -26,12 +26,10 @@
                 "type": 3,
                 "name": "Array out"
             }
-        ],
-        "name": "Ops.Array.StringToCharArray"
+        ]
     },
     "summary": "Turns a string into an array of single characters or ASCII numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

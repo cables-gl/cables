@@ -36,8 +36,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Cosine"
+        ]
     },
     "summary": "Calculates the cosine of an angle.",
     "docs": {

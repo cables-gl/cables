@@ -24,38 +24,38 @@ import { MatrixStack } from "../cg/cg_matrixstack";
 import { Geometry } from "../cg/cg_geom";
 import { BoundingBox } from "../cg/cg_boundingbox";
 
-const CGL = Object.assign(
-    {
-        "Framebuffer": Framebuffer,
-        "Framebuffer2": Framebuffer2,
-        "Geometry": Geometry,
-        "BoundingBox": BoundingBox,
-        "Marker": Marker,
-        "WirePoint": WirePoint,
-        "WireCube": WireCube,
-        "MatrixStack": MatrixStack,
-        "Mesh": Mesh,
-        "MESH": MESH,
-        "ShaderLibMods": ShaderLibMods,
-        "Shader": Shader,
-        "Uniform": Uniform,
-        "MESHES": MESHES,
-        "Context": Context,
-        "Texture": Texture,
-        "TextureEffect": TextureEffect,
-        "isWindows": isWindows,
-        "getWheelSpeed": getWheelSpeed,
-        "getWheelDelta": getWheelDelta,
-        "onLoadingAssetsFinished": onLoadingAssetsFinished,
-        "ProfileData": ProfileData,
-        "UniColorShader": UniColorShader
-    },
-    CONSTANTS.BLEND_MODES,
-    CONSTANTS.SHADER,
-    CONSTANTS.MATH,
-    CONSTANTS.BLEND_MODES,
-);
+const CGL = {
+    "Framebuffer": Framebuffer,
+    "Framebuffer2": Framebuffer2,
+    "Geometry": Geometry,
+    "BoundingBox": BoundingBox,
+    "Marker": Marker,
+    "WirePoint": WirePoint,
+    "WireCube": WireCube,
+    "MatrixStack": MatrixStack,
+    "Mesh": Mesh,
+    "MESH": MESH,
+    "ShaderLibMods": ShaderLibMods,
+    "Shader": Shader,
+    "Uniform": Uniform,
+    "MESHES": MESHES,
+    "Context": Context,
+    "Texture": Texture,
+    "TextureEffect": TextureEffect,
+    "isWindows": isWindows,
+    "getWheelSpeed": getWheelSpeed,
+    "getWheelDelta": getWheelDelta,
+    "onLoadingAssetsFinished": onLoadingAssetsFinished,
+    "ProfileData": ProfileData,
+    "UniColorShader": UniColorShader,
+    ...CONSTANTS.BLEND_MODES,
+    ...CONSTANTS.SHADER,
+    ...CONSTANTS.MATH,
+    ...CONSTANTS.BLEND_MODES,
+};
 
 window.CGL = CGL;
 
 export { CGL };
+
+

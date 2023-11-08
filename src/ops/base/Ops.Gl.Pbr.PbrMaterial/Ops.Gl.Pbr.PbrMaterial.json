@@ -62,6 +62,72 @@
             },
             {
                 "type": 0,
+                "name": "Use Clear Coat",
+                "group": "Clear Coat",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear Coat Intensity",
+                "group": "Clear Coat",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clear Coat Roughness",
+                "group": "Clear Coat",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Use Normal map for Clear Coat",
+                "group": "Clear Coat",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Clear Coat Normal map",
+                "group": "Clear Coat",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Use Thin Film",
+                "group": "Thin Film Iridescence",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Thin Film Intensity",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thin Film IOR",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thin Film Thickness (nm)",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thickness Tex Min",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thickness Tex Max",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Tonemapping index",
                 "group": "Tonemapping",
                 "subType": "integer"
@@ -70,6 +136,12 @@
                 "type": 0,
                 "name": "Exposure",
                 "group": "Tonemapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Emission Intensity",
+                "group": "Advanced Shader Parameters",
                 "subType": "number"
             },
             {
@@ -107,18 +179,6 @@
                 "name": "Faster heightmapping",
                 "group": "Advanced Shader Parameters",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Use Clear Coat",
-                "group": "Advanced Shader Parameters",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Clear Coat Roughness",
-                "group": "Advanced Shader Parameters",
-                "subType": "number"
             },
             {
                 "type": 2,
@@ -164,6 +224,12 @@
             },
             {
                 "type": 2,
+                "name": "Emission",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
                 "name": "Height",
                 "group": "Textures",
                 "objType": "texture"
@@ -171,6 +237,12 @@
             {
                 "type": 2,
                 "name": "Lightmap",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Thin Film",
                 "group": "Textures",
                 "objType": "texture"
             },
@@ -208,8 +280,7 @@
                 "type": 2,
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Pbr.PbrMaterial"
+        ]
     },
     "authorName": "amajesticseaflapflap",
     "created": 1642599874914,

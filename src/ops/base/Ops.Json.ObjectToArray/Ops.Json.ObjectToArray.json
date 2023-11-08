@@ -14,8 +14,7 @@
                 "type": 3,
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Json.ObjectToArray"
+        ]
     },
     "summary": "cast an object port to an array port",
     "docs": {

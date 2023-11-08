@@ -100,8 +100,7 @@ function update()
         laserArr[ind++] = 0;
     }
 
-    outArr.set(null);
-    outArr.set(laserArr);
+    outArr.setRef(laserArr);
     needsUpdate = false;
 
     next.trigger();

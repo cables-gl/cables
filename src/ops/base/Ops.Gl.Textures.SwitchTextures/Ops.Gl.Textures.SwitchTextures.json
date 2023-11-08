@@ -88,8 +88,7 @@
                 "type": "2",
                 "name": "texture"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextureSwitcher"
+        ]
     },
     "summary": "switch betwen different textures",
     "docs": {
@@ -120,7 +119,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "gsXwVJ"

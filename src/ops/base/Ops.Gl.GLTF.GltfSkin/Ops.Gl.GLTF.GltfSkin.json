@@ -69,15 +69,13 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfSkin"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"
     ],
     "summary": "render a skinned mesh (bone/rigging/rigged animation)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "I_eD5nml_5A"

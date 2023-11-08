@@ -30,8 +30,7 @@
                 "type": 3,
                 "name": "Sorted array"
             }
-        ],
-        "name": "Ops.Array.SortArray"
+        ]
     },
     "summary": "Sorts an array of numbers with one of two modes - ascending or descending",
     "issues": "",

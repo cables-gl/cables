@@ -63,12 +63,10 @@
                 "type": "3",
                 "name": "Array out"
             }
-        ],
-        "name": "Ops.Points.PointsHexagonGrid"
+        ]
     },
     "summary": "generate coordinates for a hexagon grid, outputs array3x",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

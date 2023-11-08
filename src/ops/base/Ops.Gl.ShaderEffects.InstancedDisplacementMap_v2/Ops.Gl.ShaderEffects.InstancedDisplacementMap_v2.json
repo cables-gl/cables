@@ -131,8 +131,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.InstancedDisplacementMap_v2"
+        ]
     },
     "summary": "displace positions of instanced meshes using a texture",
     "issues": "",

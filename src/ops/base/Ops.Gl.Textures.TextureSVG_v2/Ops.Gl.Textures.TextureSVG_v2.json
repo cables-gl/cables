@@ -47,12 +47,10 @@
                 "name": "Loaded",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.TextureSVG_v2"
+        ]
     },
     "summary": "Load a SVG image and convert to a texture of pixels",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

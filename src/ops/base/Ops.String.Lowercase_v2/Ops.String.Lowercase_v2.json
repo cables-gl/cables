@@ -14,13 +14,11 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.Lowercase_v2"
+        ]
     },
     "summary": "convert all characters to small letters",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

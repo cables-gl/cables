@@ -55,8 +55,7 @@
                 "type": 1,
                 "name": "Looped"
             }
-        ],
-        "name": "Ops.Anim.RandomAnim"
+        ]
     },
     "summary": "Animates between random values defined by a min and max value",
     "docs": {
@@ -108,7 +107,6 @@
     "created": 1525413404905,
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "exampleProjectId": "nCSoG8"
 }

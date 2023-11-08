@@ -51,8 +51,7 @@
                 "type": "0",
                 "name": "Offset Y"
             }
-        ],
-        "name": "Ops.Gl.ImageSequenceAnim"
+        ]
     },
     "summary": "play a image sprite animation",
     "updated": 1516721226552,

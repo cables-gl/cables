@@ -34,8 +34,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayChunk"
+        ]
     },
     "summary": "Extracts x elements from an array",
     "docs": {

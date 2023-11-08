@@ -75,8 +75,7 @@
                 "type": 3,
                 "name": "Out Array"
             }
-        ],
-        "name": "Ops.Array.SwitchArrayOnTrigger"
+        ]
     },
     "summary": "switch between multiple arrays",
     "docs": {

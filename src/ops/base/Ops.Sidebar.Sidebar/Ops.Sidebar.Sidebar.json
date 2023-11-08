@@ -42,6 +42,11 @@
                 "type": 0,
                 "name": "Side",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Default CSS",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -56,8 +61,7 @@
                 "uititle": "Opened",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Sidebar.Sidebar"
+        ]
     },
     "summary": "Sidebar overlay to control values",
     "docs": {

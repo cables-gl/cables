@@ -32,8 +32,7 @@
                 "type": 2,
                 "name": "shaderOut"
             }
-        ],
-        "name": "Ops.Gl.Shader.SwitchShader"
+        ]
     },
     "changelog": [
         {

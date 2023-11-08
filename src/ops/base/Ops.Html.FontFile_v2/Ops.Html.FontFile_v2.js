@@ -5,35 +5,47 @@ const
     loadedTrigger = op.outTrigger("Loaded Trigger");
 
 let loadingId = null;
+let fontFaceObj;
+let doc = null;
 
 filename.onChange = function ()
 {
     outLoaded.set(false);
-    addStyle();
+    addStyle(null);
 };
 
-fontname.onChange = addStyle;
-
-let fontFaceObj;
-
-function addStyle()
+fontname.onChange = () =>
 {
+    addStyle(null);
+};
+
+op.patch.on("windowChanged",
+    (win) =>
+    {
+        fontFaceObj = null;
+        console.log("window changed!");
+        addStyle(win.document);
+    });
+
+function addStyle(_doc)
+{
+    doc = _doc || doc || op.patch.cgl.canvas.ownerDocument || document;
+
     if (filename.get() && fontname.get())
     {
-        if (document.fonts)
+        if (doc.fonts)
         {
-            fontFaceObj = new FontFace(fontname.get(), "url(" + op.patch.getFilePath(String(filename.get())) + ")");
+            let url = "url(" + op.patch.getFilePath(String(filename.get())) + ")";
+            fontFaceObj = new FontFace(fontname.get(), url);
 
             loadingId = op.patch.cgl.patch.loading.start("FontFile", filename.get(), op);
-
             // Add the FontFace to the FontFaceSet
-            document.fonts.add(fontFaceObj);
+            doc.fonts.add(fontFaceObj);
 
             // Get the current status of the FontFace
             // (should be 'unloaded')
 
             // Load the FontFace
-            fontFaceObj.load();
 
             // Get the current status of the Fontface
             // (should be 'loading' or 'loaded' if cached)
@@ -51,8 +63,16 @@ function addStyle()
             }, (fontFace) =>
             {
                 op.setUiError("loadingerror", "Font loading error!" + fontFaceObj.status);
+                op.patch.cgl.patch.loading.finished(loadingId);
+                outLoaded.set(true);
+
                 // op.logError("Font loading error! Current status", fontFaceObj.status);
+            }).catch((f) =>
+            {
+                console.log("catch ?!?!?!?!?!?!", f);
             });
+
+            fontFaceObj.load();
         }
         else
         { // font loading api not supported
@@ -65,10 +85,13 @@ function addStyle()
                 .endl() + "}";
 
             const style = document.createElement("style");
+            style.classList.add("cablesEle");
             style.type = "text/css";
             style.innerHTML = styleStr;
             document.getElementsByTagName("head")[document.getElementsByTagName("head").length - 1].appendChild(style);
             // TODO: Poll if font loaded
+
+            console.log("fallback?!");
         }
     }
 }

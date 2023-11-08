@@ -1,5 +1,5 @@
 const
-    v = op.inValueBool("value", false),
+    v = op.inBool("value", false),
     result = op.outBoolNum("result");
 
 result.set(false);

@@ -11,12 +11,10 @@
     ],
     "layout": {
         "portsIn": [],
-        "portsOut": [],
-        "name": "Ops.Ui.Comment_v2"
+        "portsOut": []
     },
     "summary": "Displays a comment in the patch area",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -31,12 +31,10 @@
                 "name": "Was Triggered",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.IsTriggered"
+        ]
     },
     "summary": "outputs true if being triggered last frame",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

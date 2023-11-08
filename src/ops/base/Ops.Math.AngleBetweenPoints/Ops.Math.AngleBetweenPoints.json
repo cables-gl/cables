@@ -29,8 +29,7 @@
                 "name": "Angle",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.AngleBetweenPoints"
+        ]
     },
     "authorName": "pandur",
     "id": "03e20aba-a22a-40de-9287-a32fc495a643",

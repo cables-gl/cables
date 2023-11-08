@@ -13,8 +13,7 @@
                 "name": "Value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Vars.VarGetNumber"
+        ]
     },
     "summary": "read a variable number",
     "docs": {
@@ -33,7 +32,6 @@
     "id": "1b9c4504-d69a-43c2-b747-8ca795a8950f",
     "created": 1548885174898,
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.SetVariable"
     ],

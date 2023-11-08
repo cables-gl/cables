@@ -45,12 +45,10 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Vars.VarTriggerArray"
+        ]
     },
     "summary": "Set an array variable by a trigger",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "30v_GQc6ajA"

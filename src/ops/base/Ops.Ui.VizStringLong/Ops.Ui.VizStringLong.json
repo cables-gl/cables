@@ -58,8 +58,7 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Ui.VizStringLong"
+        "portsOut": []
     },
     "summary": "Displays long input string on the patchfield",
     "relatedops": [

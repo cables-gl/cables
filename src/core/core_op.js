@@ -1,8 +1,7 @@
 import { EventTarget } from "./eventtarget";
-import { uuid, UTILS } from "./utils";
+import { uuid, UTILS, cleanJson } from "./utils";
 import { CONSTANTS } from "./constants";
 import { Port } from "./core_port";
-import { Link } from "./core_link";
 import Logger from "./core_logger";
 import { SwitchPort } from "./core_port_switch";
 import { ValueSelectPort } from "./core_port_select";
@@ -681,7 +680,7 @@ const Op = function ()
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "display": "file",
                 "type": "string",
-                filter
+                "filter": filter
             })
         );
         if (v !== undefined)
@@ -1011,8 +1010,20 @@ const Op = function ()
         op.portsIn = [];
         op.portsOut = [];
 
-        for (let i = 0; i < this.portsIn.length; i++) op.portsIn.push(this.portsIn[i].getSerialized());
-        for (const ipo in this.portsOut) op.portsOut.push(this.portsOut[ipo].getSerialized());
+        for (let i = 0; i < this.portsIn.length; i++)
+        {
+            const s = this.portsIn[i].getSerialized();
+            if (s)op.portsIn.push(s);
+        }
+        for (const ipo in this.portsOut)
+        {
+            const s = this.portsOut[ipo].getSerialized();
+            if (s)op.portsOut.push(s);
+        }
+
+        if (op.portsIn.length == 0) delete op.portsIn;
+        if (op.portsOut.length == 0) delete op.portsOut;
+        cleanJson(op);
 
         return op;
     };

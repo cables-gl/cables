@@ -45,8 +45,7 @@
                 "name": "Found",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.GLTF.GltfGeometry"
+        ]
     },
     "summary": "expose geometry from gltf meshes, also possible to expose submaterial geometries",
     "issues": "",

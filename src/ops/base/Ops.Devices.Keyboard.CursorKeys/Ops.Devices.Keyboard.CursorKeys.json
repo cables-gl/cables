@@ -44,8 +44,7 @@
                 "name": "Right",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.Keyboard.CursorKeys"
+        ]
     },
     "authorName": "pandur",
     "id": "65930ca9-c923-453f-b8c4-144eda13fa0a",

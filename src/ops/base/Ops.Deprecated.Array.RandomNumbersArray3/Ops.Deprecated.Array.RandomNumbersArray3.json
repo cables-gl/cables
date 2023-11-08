@@ -49,8 +49,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.RandomNumbersArray3"
+        ]
     },
     "summary": "Generates a random array of numbers (was: RandomArray3x)",
     "authorName": "pandur",

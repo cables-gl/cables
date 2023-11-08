@@ -19,8 +19,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Signal.MultiplySignalAndNumber"
+        ]
     },
     "id": "a673ccab-569a-4ab0-865f-7b3db94851c9"
 }

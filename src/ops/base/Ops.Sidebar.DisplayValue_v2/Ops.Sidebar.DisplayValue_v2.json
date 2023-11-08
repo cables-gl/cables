@@ -22,8 +22,7 @@
                 "type": 2,
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.DisplayValue_v2"
+        ]
     },
     "summary": "display a value or string",
     "docs": {

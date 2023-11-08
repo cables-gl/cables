@@ -21,12 +21,10 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArraySqrt"
+        ]
     },
     "summary": "Returns the square root of all values in the array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

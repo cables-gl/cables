@@ -19,7 +19,7 @@ const
     outError = op.outString("Error Message");
 op.setPortGroup("Attributes", [src, elId]);
 
-let element = document.createElement("video");
+let element = op.patch.getDocument().createElement("video");
 let timeOut = null;
 
 op.onDelete = removeEle;

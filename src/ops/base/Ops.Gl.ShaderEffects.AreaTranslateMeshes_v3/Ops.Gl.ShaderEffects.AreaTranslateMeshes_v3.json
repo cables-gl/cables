@@ -87,15 +87,13 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.AreaTranslateMeshes_v3"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"
     ],
     "summary": "Change the position of all meshes inside of the area of influence",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

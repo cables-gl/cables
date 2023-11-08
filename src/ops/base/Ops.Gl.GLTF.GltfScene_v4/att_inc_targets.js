@@ -35,15 +35,18 @@ const GltfTargetsRenderer = class
             const tr = vec3.create();
         }
 
-        // if (this.tex && this.mesh.weights)
-        // {
-        // }
         this._mod.pushTexture("MOD_targetTex", this.tex);
-        this._mod.setUniformValue("MOD_weights", this.mesh.weights);
-        this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
+        if (this.tex && this.mesh.weights)
+        {
+            this._mod.setUniformValue("MOD_weights", this.mesh.weights);
+            this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
 
-        // console.log("MOD_NUM_WEIGHTS",this.mesh.weights)
-        this._mod.define("MOD_NUM_WEIGHTS", Math.max(1, this.mesh.weights.length));
+            this._mod.define("MOD_NUM_WEIGHTS", Math.max(1, this.mesh.weights.length));
+        }
+        else
+        {
+            this._mod.define("MOD_NUM_WEIGHTS", 1);
+        }
         this._mod.bind();
 
         // draw mesh...
@@ -127,6 +130,6 @@ const GltfTargetsRenderer = class
 
         this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
 
-        console.log("morphTargets generated texture", w, h);
+        // console.log("morphTargets generated texture", w, h);
     }
 };

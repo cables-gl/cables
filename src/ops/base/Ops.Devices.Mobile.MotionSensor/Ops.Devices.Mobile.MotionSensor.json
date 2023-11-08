@@ -57,8 +57,7 @@
                 "type": "2",
                 "name": "Object"
             }
-        ],
-        "name": "Ops.Devices.Mobile.MotionSensor"
+        ]
     },
     "summary": "get values from the device motion sensor  mobile",
     "author": "55d744634cdc152216eb9aad",

@@ -66,12 +66,10 @@
                 "name": "Gate",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Devices.Midi.MidiNoteFilter"
+        ]
     },
     "summary": "Only read a range of notes (e.g. C1 to C2)",
     "issues": "",
-
     "relatedops": [
         "Ops.Devices.Midi.MidiMonitor",
         "Ops.Devices.Midi.MidiNote",

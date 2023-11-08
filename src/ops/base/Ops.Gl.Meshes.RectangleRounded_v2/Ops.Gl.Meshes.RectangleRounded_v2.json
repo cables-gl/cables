@@ -72,8 +72,7 @@
                 "type": 2,
                 "name": "geometry"
             }
-        ],
-        "name": "Ops.Gl.Meshes.RectangleRounded"
+        ]
     },
     "summary": "Draws a rectangle with rounded corners",
     "issues": "",

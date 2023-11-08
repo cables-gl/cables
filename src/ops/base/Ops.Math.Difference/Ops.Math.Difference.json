@@ -19,8 +19,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Difference"
+        ]
     },
     "authorName": "pandur",
     "id": "5431b943-18aa-46e4-bd32-a7eee30d4e51",

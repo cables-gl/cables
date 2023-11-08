@@ -32,12 +32,10 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Vars.VarSetNumber_v2"
+        "portsOut": []
     },
     "summary": "set a variable number",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "sUR6b0zvuSY"

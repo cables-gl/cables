@@ -39,6 +39,5 @@ inCalc.onTriggered = function ()
         i += 3;
     }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
 };

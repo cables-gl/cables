@@ -1,0 +1,77 @@
+{
+    "id": "761d75d3-aaae-49ba-8df1-20d8012fb70a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680619062207
+        },
+        {
+            "message": "Ops.Patch.PqYKyct.CreateArrayPushArray renamed to Ops.Team.CreateOps.Dev.CreateArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680619193888
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateArrayPushArray renamed to Ops.Team.CreateOps.Dev.Dev.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626244837
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.Dev.CompArrayPushArray renamed to Ops.Team.CompOps.Dev.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626323479
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompArrayPushArray renamed to Ops.Team.CompOps.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661231934
+        },
+        {
+            "message": "Ops.Team.CompOps.CompArrayPushArray renamed to Ops.Data.Compose.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167241210
+        },
+        {
+            "message": "cloned op from Ops.Data.Compose.CompArrayPushArray",
+            "author": "pandur",
+            "date": 1698418579461
+        },
+        {
+            "message": "Ops.Patch.Prb8ENJ.CompArrayPushObject renamed to Ops.Data.Compose.CompArrayPushObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1698418841485
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1698418579461,
+    "summary": "push/append an array to an array",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

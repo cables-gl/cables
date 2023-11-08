@@ -22,13 +22,11 @@
                 "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.User.pandur.ExampleVizOp"
+        "portsOut": []
     },
     "summary": "example how to code a viz layer op",
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "",

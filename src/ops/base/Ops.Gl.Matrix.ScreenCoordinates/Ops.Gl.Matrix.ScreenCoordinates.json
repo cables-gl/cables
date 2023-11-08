@@ -35,12 +35,10 @@
                 "name": "Visible",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ScreenCoordinates"
+        ]
     },
     "summary": "screen/pixel coordinates of the current transform",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

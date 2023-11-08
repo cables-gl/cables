@@ -43,12 +43,10 @@
                 "name": "value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Sidebar.Incrementor"
+        ]
     },
     "summary": "steps through numerical or array values one by one",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

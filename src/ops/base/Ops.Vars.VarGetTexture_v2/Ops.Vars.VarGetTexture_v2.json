@@ -30,12 +30,10 @@
                 "type": "2",
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Vars.VarGetTexture_v2"
+        ]
     },
     "summary": "get a texture from a variable",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

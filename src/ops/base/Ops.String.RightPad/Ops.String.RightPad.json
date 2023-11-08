@@ -27,8 +27,7 @@
                 "name": "String",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.RightPad"
+        ]
     },
     "summary": "create a string with a fixed length filling the space with a character",
     "docs": {

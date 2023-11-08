@@ -82,8 +82,7 @@
                 "type": "0",
                 "name": "Progress"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Event.AudioLoop"
+        ]
     },
     "summary": "Repeating trigger for audio",
     "docs": {

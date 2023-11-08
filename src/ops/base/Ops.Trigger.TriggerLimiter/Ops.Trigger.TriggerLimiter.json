@@ -22,8 +22,7 @@
                 "name": "Progress",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.TriggerLimiter"
+        ]
     },
     "docs": {
         "ports": [

@@ -20,8 +20,7 @@
                 "name": "Minimum",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.MinSinceReset"
+        ]
     },
     "summary": "Outputs the minimum value since reset has been triggered",
     "docs": {

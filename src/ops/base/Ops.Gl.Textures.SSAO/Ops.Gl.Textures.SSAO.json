@@ -120,8 +120,7 @@
                 "name": "SSAO",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Dev.SSAO3"
+        ]
     },
     "summary": "screen space ambient occlusion from depth texture",
     "issues": "",

@@ -20,10 +20,9 @@
             {
                 "type": 0,
                 "name": "result",
-                "subType": "number"
+                "subType": "boolean"
             }
-        ],
-        "name": "Ops.Boolean.ToggleBool_v2"
+        ]
     },
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
@@ -63,7 +62,6 @@
             "date": 1671034318241
         }
     ],
-
     "relatedops": null,
     "exampleProjectId": "UxJNHj"
 }

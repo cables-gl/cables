@@ -23,8 +23,7 @@
                 "name": "audio out",
                 "objType": "audioNode"
             }
-        ],
-        "name": "Ops.WebAudio.Gain"
+        ]
     },
     "summary": "Changes the gain / volume",
     "docs": {
@@ -51,7 +50,6 @@
     "id": "29402bba-48ee-4f28-94f0-bdc345e6bb67",
     "created": 1542058207488,
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "JeKgDp"

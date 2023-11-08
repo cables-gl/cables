@@ -19,8 +19,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Gl.Geometry.ScaleGeometry"
+        ]
     },
     "summary": "create a copy of a geometry",
     "docs": {
@@ -43,6 +42,5 @@
             "date": 1665467727285
         }
     ],
-
     "relatedops": null
 }

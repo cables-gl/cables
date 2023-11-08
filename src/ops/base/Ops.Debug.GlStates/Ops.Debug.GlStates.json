@@ -74,8 +74,7 @@
                 "name": "Is Shadowpass",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Debug.GlStates"
+        ]
     },
     "summary": "see current gl states and error message",
     "changelog": [

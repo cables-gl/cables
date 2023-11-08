@@ -121,7 +121,6 @@
                 "type": "1",
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Admin.SimosPointLight"
+        ]
     }
 }

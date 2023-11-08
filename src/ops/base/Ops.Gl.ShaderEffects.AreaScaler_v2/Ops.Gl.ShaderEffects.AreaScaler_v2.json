@@ -77,8 +77,7 @@
                 "type": "1",
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.AreaScaler_v2"
+        ]
     },
     "authorName": "pandur",
     "id": "b44cc257-8d84-43af-a07c-c003957bf258",
@@ -102,7 +101,6 @@
     ],
     "summary": "Scales the size of meshes within the area of influence",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

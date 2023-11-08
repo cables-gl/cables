@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.GlPrimitive"
+        ]
     },
     "summary": "force rendering of meshes using points,lines or triangles",
     "docs": {
@@ -41,6 +40,5 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null
 }

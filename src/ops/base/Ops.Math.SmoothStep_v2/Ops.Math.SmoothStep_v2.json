@@ -23,8 +23,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.SmoothStep_v2"
+        ]
     },
     "summary": "Interpolate smoothly between two input values",
     "authorName": "pandur",

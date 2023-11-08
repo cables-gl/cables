@@ -106,8 +106,7 @@
                 "type": 2,
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Meshes.SplineMeshMaterial_v2"
+        ]
     },
     "summary": "material for splinemesh",
     "issues": "",

@@ -18,8 +18,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Max"
+        ]
     },
     "summary": "Sets the output to the input value which is higher",
     "docs": {

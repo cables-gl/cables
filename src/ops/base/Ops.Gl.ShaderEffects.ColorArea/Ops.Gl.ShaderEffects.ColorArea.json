@@ -87,8 +87,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.ColorArea"
+        ]
     },
     "summary": "colorize all meshes around x,y,z",
     "author": "55d744634cdc152216eb9aad",

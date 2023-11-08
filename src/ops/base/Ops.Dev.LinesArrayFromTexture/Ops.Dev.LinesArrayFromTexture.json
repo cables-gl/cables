@@ -52,8 +52,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Dev.LinesArrayFromTexture"
+        ]
     },
     "coreLibs": [
         "cgl_shadermodifier"

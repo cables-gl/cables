@@ -23,6 +23,7 @@ const
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
     inUseMatProps = op.inBool("Use Material Properties", true),
+
     inActive = op.inBool("Active", true),
 
     nextBefore = op.outTrigger("Render Before"),
@@ -71,6 +72,7 @@ dataPort.onChange = loadData;
 inHideNodes.onChange = hideNodesFromData;
 inAnimation.onChange = updateAnimation;
 inCenter.onChange = updateCenter;
+op.toWorkPortsNeedToBeLinked(inExec);
 
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
@@ -327,7 +329,7 @@ function finishLoading()
     // if (gltf.chunks.length > 1) gltf.chunks[1] = null;
     // if (gltf.chunks.length > 2) gltf.chunks[2] = null;
 
-    op.setUiAttrib({ "accBuffersDelete": CABLES.basename(inFile.get()) });
+    // op.setUiAttrib({ "accBuffersDelete": CABLES.basename(inFile.get()) });
 
     if (gltf.accBuffersDelete)
     {
@@ -336,6 +338,39 @@ function finishLoading()
             gltf.accBuffers[gltf.accBuffersDelete[i]] = null;
         }
     }
+
+    // setTimeout(() =>
+    // {
+    //     for (let i = 0; i < gltf.nodes.length; i++)
+    //     {
+    //     // console.log(gltf.nodes[i]);
+
+    //         if (gltf.nodes[i].mesh && gltf.nodes[i].mesh.meshes)
+    //         {
+    //         // console.log(gltf.nodes[i].mesh.meshes.length);
+    //             for (let j = 0; j < gltf.nodes[i].mesh.meshes.length; j++)
+    //             {
+    //                 console.log(gltf.nodes[i].mesh.meshes[j]);
+
+    //                 // for (let k = 0; k < gltf.nodes[i].mesh.meshes.length; k++)
+    //                 {
+    //                     if (gltf.nodes[i].mesh.meshes[j].mesh)
+    //                     {
+    //                         gltf.nodes[i].mesh.meshes[j].mesh.freeMem();
+    //                         // console.log(gltf.nodes[i].mesh.meshes[j].mesh);
+    //                         // for (let l = 0; l < gltf.nodes[i].mesh.meshes[j].mesh._attributes.length; l++)
+    //                         //     gltf.nodes[i].mesh.meshes[j].mesh._attributes[l] = null;
+    //                     }
+    //                 }
+
+    //                 gltf.nodes[i].mesh.meshes[j].geom.clear();
+    //                 console.log("clear!");
+    //             }
+    //         }
+    //     }
+    // }, 1000);
+
+    if (!(gltf.json.images && gltf.json.images.length)) gltf.chunks = null;
 
     finishedLoading = true;
 }
@@ -368,7 +403,7 @@ function loadBin(addCacheBuster)
             boundingPoints = [];
             maxTime = 0;
             gltf = parseGltf(arrayBuffer);
-
+            arrayBuffer = null;
             finishLoading();
         });
     closeTab();
@@ -679,21 +714,6 @@ op.toggleNodeVisibility = function (name)
 
     saveData();
 };
-
-// op.showAnim = function (anim, channel)
-// {
-//     const an = gltf.json.animations[anim];
-//     const chan = gltf.json.animations[anim].channels[channel];
-
-//     const node = gltf.nodes[chan.target.node];
-//     const sampler = an.samplers[chan.sampler];
-
-//     const acc = gltf.json.accessors[sampler.input];
-//     const bufferIn = gltf.accBuffers[sampler.input];
-
-//     const accOut = gltf.json.accessors[sampler.output];
-//     const bufferOut = gltf.accBuffers[sampler.output];
-// };
 
 function uniqueArray(arr)
 {

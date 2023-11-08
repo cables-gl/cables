@@ -27,8 +27,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Effect.Distortion"
+        ]
     },
     "id": "398a6047-e595-4525-becd-57992721081d"
 }

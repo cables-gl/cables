@@ -19,8 +19,7 @@
                 "name": "Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3xSplineLength"
+        ]
     },
     "summary": "Returns a number with the total distance between the points/items in an array3",
     "docs": {
@@ -40,7 +39,6 @@
         ]
     },
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

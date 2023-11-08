@@ -15,8 +15,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArrayReverse"
+        ]
     },
     "summary": "Reverses an array (creates a copy of the array before), shallow copy"
 }

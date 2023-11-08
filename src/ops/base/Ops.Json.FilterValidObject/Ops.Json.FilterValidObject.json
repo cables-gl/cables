@@ -33,7 +33,6 @@
                 "name": "Is Valid",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Json.FilterValidObject"
+        ]
     }
 }

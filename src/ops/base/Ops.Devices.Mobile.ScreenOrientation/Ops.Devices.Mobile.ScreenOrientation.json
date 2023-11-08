@@ -12,8 +12,7 @@
                 "type": 5,
                 "name": "Description"
             }
-        ],
-        "name": "Ops.Devices.Mobile.ScreenOrientation"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
@@ -23,7 +22,6 @@
         "ports": []
     },
     "issues": "",
-
     "relatedops": null,
     "youtubeids": []
 }

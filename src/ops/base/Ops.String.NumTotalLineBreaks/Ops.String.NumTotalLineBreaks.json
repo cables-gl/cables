@@ -11,7 +11,6 @@
     "created": 1570109660426,
     "summary": "Count number of line breaks in a string",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {
@@ -30,8 +29,7 @@
                 "name": "Total Lines",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.String.NumTotalLineBreaks"
+        ]
     },
     "exampleProjectId": "lkDCeT"
 }

@@ -81,12 +81,10 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array1toX"
+        ]
     },
     "summary": "convert an array1 to array2,3,4 by choosing content for new axis",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

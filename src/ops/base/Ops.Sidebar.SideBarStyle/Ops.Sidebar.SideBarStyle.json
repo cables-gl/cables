@@ -50,12 +50,10 @@
                 "type": 2,
                 "name": "childs"
             }
-        ],
-        "name": "Ops.Sidebar.SideBarStyle"
+        ]
     },
     "summary": "adjust appearance of sidebar",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

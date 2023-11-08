@@ -25,12 +25,10 @@
                 "type": "3",
                 "name": "Value"
             }
-        ],
-        "name": "Ops.Vars.VarSetArray_v2"
+        ]
     },
     "summary": "Set a variable array",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

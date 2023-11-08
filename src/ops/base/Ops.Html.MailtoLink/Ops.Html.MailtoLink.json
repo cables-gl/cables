@@ -24,12 +24,10 @@
                 "name": "Execute"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Html.MailtoLink"
+        "portsOut": []
     },
     "summary": "creates a mailto: link to open the default email app",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

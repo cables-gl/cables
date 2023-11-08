@@ -26,12 +26,10 @@
                 "type": "5",
                 "name": "String"
             }
-        ],
-        "name": "Ops.Array.ArrayOfObjectsToString"
+        ]
     },
     "summary": "convert an array of objects into readable string format",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

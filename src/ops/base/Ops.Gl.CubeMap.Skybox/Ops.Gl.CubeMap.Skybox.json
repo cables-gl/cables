@@ -37,7 +37,8 @@
             },
             {
                 "type": 2,
-                "name": "Skybox"
+                "name": "Skybox",
+                "objType": "texture"
             },
             {
                 "type": 0,
@@ -65,12 +66,10 @@
                 "type": 1,
                 "name": "Trigger Out"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.Skybox"
+        ]
     },
     "summary": "render an equirectangular map or a cubemap as scene background",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

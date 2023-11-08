@@ -23,12 +23,10 @@
                 "name": "Number out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.Integer"
+        ]
     },
     "summary": "Number op which only outputs integers ",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

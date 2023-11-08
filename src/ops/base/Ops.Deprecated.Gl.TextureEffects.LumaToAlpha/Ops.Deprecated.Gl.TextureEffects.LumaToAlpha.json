@@ -16,8 +16,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.LumaToAlpha"
+        ]
     },
     "authorName": "pandur",
     "id": "424c051b-4e29-49ce-b77e-f3aae9683b04",

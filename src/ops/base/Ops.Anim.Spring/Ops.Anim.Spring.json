@@ -52,8 +52,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.User.lorenzomf.Spring"
+        ]
     },
     "collections": null,
     "relatedops": null,

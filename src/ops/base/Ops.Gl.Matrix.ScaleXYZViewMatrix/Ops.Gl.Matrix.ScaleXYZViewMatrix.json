@@ -29,8 +29,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Matrix.ScaleXYZViewMatrix"
+        ]
     },
     "summary": "scale xyz of viewmatrix",
     "docs": {

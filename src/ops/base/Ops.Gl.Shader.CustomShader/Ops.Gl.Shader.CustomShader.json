@@ -30,8 +30,7 @@
                 "type": "2",
                 "name": "Shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.CustomShader"
+        ]
     },
     "summary": "write your own shader",
     "docs": {
@@ -45,12 +44,11 @@
         }
     ],
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.Shader.Shader2Texture"
     ],
     "youtubeids": [
         "Zfhn8xSM0SE"
     ],
-    "exampleProjectId": "vWyGud"
+    "exampleProjectId": ""
 }

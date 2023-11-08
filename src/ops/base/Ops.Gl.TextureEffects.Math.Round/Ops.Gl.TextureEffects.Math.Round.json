@@ -54,8 +54,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.TexMathRound"
+        ]
     },
     "summary": "Round number values of texture color channels",
     "collections": null,

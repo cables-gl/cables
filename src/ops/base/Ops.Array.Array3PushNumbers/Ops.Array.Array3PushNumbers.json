@@ -37,8 +37,7 @@
                 "type": "3",
                 "name": "Result Array"
             }
-        ],
-        "name": "Ops.Array.ArrayPushValue3x"
+        ]
     },
     "summary": "Push three numbers to the end of an array (was ArrayPushValue3x)",
     "changelog": [
@@ -49,7 +48,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

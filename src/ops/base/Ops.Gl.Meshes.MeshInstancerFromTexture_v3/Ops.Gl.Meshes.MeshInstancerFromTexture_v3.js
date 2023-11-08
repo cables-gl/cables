@@ -6,7 +6,7 @@ const
     inNum = op.inInt("Num Instances", 1000),
     inTex1 = op.inTexture("Position Texture", null, "texture"),
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
-    inRotMode = op.inSwitch("Rotation", ["Euler", "Normal"], "Euler"),
+    inRotMode = op.inSwitch("Rotation", ["Euler", "Normal", "Quaternion"], "Euler"),
     inTex3 = op.inTexture("Scale Texture", null, "texture"),
     inTex4 = op.inTexture("Color Texture", null, "texture"),
     inTex5 = op.inTexture("TexCoord Texture", null, "texture"),
@@ -98,6 +98,7 @@ function updateDefines()
 {
     mod.toggleDefine("ROT_EULER", inRotMode.get() === "Euler");
     mod.toggleDefine("ROT_NORMAL", inRotMode.get() === "Normal");
+    mod.toggleDefine("ROT_QUAT", inRotMode.get() === "Quaternion");
 
     mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
     mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
@@ -113,16 +114,9 @@ function updateDefines()
 
 geom.onChange = function ()
 {
-    console.log("geom upd");
     if (mesh)mesh.dispose();
     mesh = null;
 
-    // if (!geom.get() || !geom.get().vertices)
-    // {
-
-    //     return;
-    // }
-    // needsNewMesh = true;
     reset();
 };
 

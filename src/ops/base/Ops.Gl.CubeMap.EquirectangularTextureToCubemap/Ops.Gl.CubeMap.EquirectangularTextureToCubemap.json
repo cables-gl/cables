@@ -72,12 +72,10 @@
                 "name": "Cubemap Projection",
                 "objType": "texture"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.EquirectangularTextureToCubemap"
+        ]
     },
     "summary": "convert an equirectangular map to a cubemap",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

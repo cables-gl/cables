@@ -50,8 +50,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.AreaScaler"
+        ]
     },
     "summary": "modify scale of meshes in an area",
     "docs": {

@@ -59,7 +59,7 @@ function renderMesh()
 
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
-    shader = cgl.getShader();
+    shader = op.patch.cg.getShader();
     if (!shader) return;
     oldPrim = shader.glPrimitive;
 

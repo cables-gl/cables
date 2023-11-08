@@ -51,8 +51,7 @@
                 "type": "2",
                 "name": "Envelope Object"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Envelope.Envelope"
+        ]
     },
     "docs": {
         "ports": [

@@ -22,11 +22,9 @@
                 "name": "Length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineLength"
+        ]
     },
     "summary": "current set length of the timeline",
-
     "relatedops": null,
     "docs": {
         "ports": []

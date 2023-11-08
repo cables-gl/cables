@@ -113,8 +113,7 @@
                 "type": "2",
                 "name": "shader"
             }
-        ],
-        "name": "Ops.Gl.Shader.PointMaterial_v2"
+        ]
     },
     "changelog": [
         {
@@ -125,7 +124,6 @@
     ],
     "summary": "Draw all vertices as points / circles",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

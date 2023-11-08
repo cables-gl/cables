@@ -54,8 +54,7 @@
                 "name": "Dir",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Game.PersonController"
+        ]
     },
     "summary": "simple controller example op for game characters",
     "docs": {

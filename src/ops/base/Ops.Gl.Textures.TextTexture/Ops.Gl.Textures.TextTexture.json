@@ -72,8 +72,7 @@
                 "name": "Ratio",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Textures.Text"
+        ]
     },
     "updated": 1541970665777,
     "authorName": "pandur",

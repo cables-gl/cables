@@ -17,8 +17,8 @@ function updateLength()
 {
     arr.length = Math.floor(inNum.get());
     for (let i = 0; i < arr.length; i++) arr[i] = 0;
-    outArr.set(null);
-    outArr.set(arr);
+
+    outArr.setRef(arr);
 }
 
 inWrite.onTriggered = function ()
@@ -26,8 +26,7 @@ inWrite.onTriggered = function ()
     index = Math.floor(index % inNum.get());
     arr[index] = inVal.get();
     outIndex.set(index);
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     index++;
 };
 

@@ -16,8 +16,7 @@
                 "name": "Result",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Boolean.ParseBoolean"
+        ]
     },
     "summary": "parse boolean from string/number",
     "docs": {

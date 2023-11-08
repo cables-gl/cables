@@ -13,6 +13,11 @@
             },
             {
                 "type": 0,
+                "name": "Measure GPU",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Position index",
                 "subType": "integer"
             },
@@ -51,8 +56,7 @@
                 "name": "FPS",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Performance"
+        ]
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

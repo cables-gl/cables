@@ -34,8 +34,7 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.Viewport2"
+        ]
     },
     "summary": "force a viewport aspect ratio",
     "docs": {

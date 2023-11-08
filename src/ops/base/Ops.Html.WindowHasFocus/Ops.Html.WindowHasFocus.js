@@ -4,16 +4,16 @@ const
 
 const focused = true;
 
-outFocussed.set(document.hasFocus());
+outFocussed.set(op.patch.getDocument().hasFocus());
 
 window.addEventListener("blur", handleBlur);
 window.addEventListener("focus", handleFocus);
 
-document.addEventListener("visibilitychange", updateVisibility);
+op.patch.getDocument().addEventListener("visibilitychange", updateVisibility);
 
 op.onDelete = function ()
 {
-    document.removeEventListener("visibilitychange", updateVisibility);
+    op.patch.getDocument().removeEventListener("visibilitychange", updateVisibility);
 };
 
 function handleFocus()
@@ -28,5 +28,5 @@ function handleBlur()
 
 function updateVisibility(e)
 {
-    outVisible.set(!document.hidden);
+    outVisible.set(!op.patch.getDocument().hidden);
 }

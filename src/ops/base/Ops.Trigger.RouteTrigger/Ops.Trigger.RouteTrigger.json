@@ -125,8 +125,7 @@
                 "type": 1,
                 "name": "Default Trigger"
             }
-        ],
-        "name": "Ops.Trigger.RouteTrigger"
+        ]
     },
     "summary": "Triggers one of the out ports - value index switch case (was SwitchTrigger)",
     "docs": {
@@ -145,7 +144,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "TdHgjqOLpnM"

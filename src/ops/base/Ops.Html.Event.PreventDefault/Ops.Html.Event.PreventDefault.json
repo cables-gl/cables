@@ -22,8 +22,7 @@
                 "type": 2,
                 "name": "Event Out"
             }
-        ],
-        "name": "Ops.Html.Event.PreventDefault"
+        ]
     },
     "summary": "Prevents the default on a JavaScript event",
     "youtubeid": "",

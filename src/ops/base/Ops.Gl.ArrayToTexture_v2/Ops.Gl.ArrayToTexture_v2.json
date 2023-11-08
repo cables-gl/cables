@@ -97,8 +97,7 @@
                 "name": "Tex Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.ArrayToTexture_v2"
+        ]
     },
     "summary": "create a texture from an array of number values",
     "youtubeid": "",

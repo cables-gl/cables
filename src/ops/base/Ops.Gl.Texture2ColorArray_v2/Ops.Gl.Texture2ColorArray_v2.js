@@ -11,7 +11,7 @@ const
 let
     fb = null,
     texChanged = false;
-tex.onChange = function () { texChanged = true; };
+tex.onChange = function () { needsUpdate = true; texChanged = true; };
 
 op.toWorkPortsNeedToBeLinked(tex, outColors);
 
@@ -24,6 +24,7 @@ let lastFloatingPoint = false;
 let lastWidth = 0;
 let lastHeight = 0;
 let pixelReader = new CGL.PixelReader();
+let needsUpdate = true;
 
 function getNumChannels()
 {
@@ -40,9 +41,16 @@ function getNumChannels()
 inFormat.onChange = () =>
 {
     outColors.setUiAttribs({ "stride": getNumChannels() });
+    needsUpdate = true;
 };
 
 pUpdate.onTriggered = function ()
+{
+    if (needsUpdate) updateArray();
+    outTrigger.trigger();
+};
+
+function updateArray()
 {
     const realTexture = tex.get(), gl = cgl.gl;
 
@@ -152,9 +160,7 @@ pUpdate.onTriggered = function ()
                 for (let i = 0; i < convertedpixel.length; i++)convertedpixel[i] /= 255;
             }
 
-            outColors.set(null);
-            outColors.set(convertedpixel || pixel);
+            outColors.setRef(convertedpixel || pixel);
+            needsUpdate = false;
         });
-
-    outTrigger.trigger();
-};
+}

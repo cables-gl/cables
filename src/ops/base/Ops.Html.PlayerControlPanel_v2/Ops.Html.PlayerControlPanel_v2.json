@@ -74,15 +74,14 @@
             {
                 "type": 0,
                 "name": "Dragging",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 2,
                 "name": "DOM Element",
                 "objType": "element"
             }
-        ],
-        "name": "Ops.Html.PlayerControlPanel_v2"
+        ]
     },
     "summary": "simple html ui for timeline/mediaplayers (was: TimeLineUI)",
     "docs": {
@@ -125,7 +124,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
     "relatedops": null,
     "youtubeids": []
 }

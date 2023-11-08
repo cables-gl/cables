@@ -54,8 +54,7 @@
                 "name": "depth",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.Matrix.RandomGridPlacement"
+        ]
     },
     "summary": "place random objects on a grid",
     "docs": {
@@ -67,7 +66,6 @@
         ]
     },
     "issues": "this is slow, you should try the new version:  Ops.Gl.Matrix.RandomGridPlacementArrays",
-
     "relatedops": [
         "Ops.Gl.Matrix.RandomGridPlacementArrays"
     ],

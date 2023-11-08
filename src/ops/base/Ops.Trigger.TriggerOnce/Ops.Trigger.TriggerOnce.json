@@ -24,7 +24,6 @@
                 "name": "Was Triggered",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.TriggerOnce"
+        ]
     }
 }

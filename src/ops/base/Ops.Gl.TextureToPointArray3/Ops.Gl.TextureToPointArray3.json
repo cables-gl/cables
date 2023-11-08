@@ -76,12 +76,10 @@
                 "name": "Max Z",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureToPointArray3"
+        ]
     },
     "summary": "generate an array3 of grid positions from a texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

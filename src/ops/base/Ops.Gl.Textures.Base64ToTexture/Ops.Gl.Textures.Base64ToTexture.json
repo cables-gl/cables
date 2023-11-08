@@ -29,8 +29,7 @@
                 "name": "Loading",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Textures.Base64ToTexture"
+        ]
     },
     "summary": "Converts a base-64 image string into a texture",
     "docs": {
@@ -51,7 +50,6 @@
     },
     "id": "cd07e587-432a-4a81-a2b7-51273cf32171",
     "issues": "",
-
     "relatedops": [
         "TextureToBase64"
     ],

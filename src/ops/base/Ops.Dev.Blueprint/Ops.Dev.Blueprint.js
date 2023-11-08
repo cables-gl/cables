@@ -216,6 +216,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
                 deSerializeBlueprint(blueprintData, false);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
+                CABLES.blueprints = {};
             }, 0);
         }
         else

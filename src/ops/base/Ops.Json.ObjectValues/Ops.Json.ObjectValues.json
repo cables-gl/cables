@@ -31,8 +31,7 @@
                 "name": "Num values",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Json.ObjectValues"
+        ]
     },
     "summary": "extract all object values as an array",
     "issues": "",

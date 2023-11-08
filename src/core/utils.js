@@ -110,6 +110,22 @@ const _uuid = function ()
 export const uuid = _uuid;
 export const generateUUID = _uuid;
 
+
+
+export function cleanJson(obj)
+{
+    for (const i in obj)
+    {
+        if (obj[i] && typeof objValue === "object" && obj[i].constructor === Object) obj[i] = cleanJson(obj[i]);
+
+        if (obj[i] === null || obj[i] === undefined) delete obj[i];
+        else if (Array.isArray(obj[i]) && obj[i].length == 0) delete obj[i];
+    }
+
+    return obj;
+}
+
+
 /**
  * @see http://stackoverflow.com/q/7616461/940217
  * @return {string}
@@ -423,29 +439,7 @@ export const basename = function (url)
 };
 
 
-// todo: is jsonp used anywhere ?
-let jsonpCounter = null;
-export const jsonp = function (url, cb)
-{
-    jsonpCounter = jsonpCounter || 0;
-    jsonpCounter++;
-    const jsonPID = jsonpCounter;
 
-    CABLES["jsonpFunc" + jsonPID] = function (data)
-    {
-        cb(false, data);
-    };
-
-    let paramChar = "?";
-    if (url.indexOf(paramChar) > -1) paramChar = "&";
-
-    const s = document.createElement("script");
-    s.setAttribute("src", url + paramChar + "callback=CABLES.jsonpFunc" + jsonPID);
-    // s.onload=function()
-    // {
-    // };
-    document.body.appendChild(s);
-};
 
 export const ajaxSync = function (url, cb, method, post, contenttype)
 {

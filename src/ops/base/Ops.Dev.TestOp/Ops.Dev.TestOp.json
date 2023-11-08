@@ -20,6 +20,54 @@
             "message": "Ops.Admin.TestOp renamed to Ops.Dev.TestOp",
             "author": "pandur",
             "date": 1623914595096
+        },
+        {
+            "message": " removed lib: twitterFetcher_min.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695713895975
+        },
+        {
+            "message": " removed lib: webaudio-peaks.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695713901280
+        },
+        {
+            "message": " removed lib: webvr-polyfill.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695715517399
+        },
+        {
+            "message": " removed lib: bodymovin.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695715529797
+        },
+        {
+            "message": " added core lib: ammodebugdrawer",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674791431
+        },
+        {
+            "message": " removed core lib: ammodebugdrawer",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674799531
+        },
+        {
+            "message": " removed core lib: cgl_wireframes",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674810962
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674826934
         }
     ],
     "authorName": "pandur",
@@ -46,23 +94,18 @@
                 "type": 2,
                 "name": "Test"
             }
-        ],
-        "name": "Ops.Dev.TestOp"
+        ]
     },
     "libs": [
         "cannon.js",
-        "clmtrackr.js",
-        "bodymovin.js",
-        "webvr-polyfill.js",
-        "webaudio-peaks.js",
-        "twitterFetcher_min.js"
+        "clmtrackr.js"
     ],
     "coreLibs": [
         "cgl_wireframes"
     ],
     "collections": null,
     "relatedops": null,
-    "exampleProjectId": "aXRDhE",
+    "exampleProjectId": "mSeJ3E",
     "docs": {
         "ports": []
     }

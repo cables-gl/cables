@@ -119,12 +119,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dev.WaveformV3"
+        ]
     },
     "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

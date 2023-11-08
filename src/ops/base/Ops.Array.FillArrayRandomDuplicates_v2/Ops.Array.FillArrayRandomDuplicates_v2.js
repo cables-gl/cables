@@ -28,6 +28,5 @@ inArr.onChange =
             arr[i] = oldArr[ind];
         }
 
-        outArr.set(null);
-        outArr.set(arr);
+        outArr.setRef(arr);
     };

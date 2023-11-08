@@ -29,8 +29,7 @@
                 "name": "patchId"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Dev.Gl.OrbitControlsBlueprint"
+        "portsOut": []
     },
     "authorName": "pandur",
     "created": 1692972799843

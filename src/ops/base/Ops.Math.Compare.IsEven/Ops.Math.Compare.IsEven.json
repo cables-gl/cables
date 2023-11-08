@@ -13,8 +13,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.IsEven"
+        ]
     },
     "summary": "Checks if Value is even or not",
     "author": "55d744634cdc152216eb9aad",

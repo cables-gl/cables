@@ -21,8 +21,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.ValueTrigger"
+        ]
     },
     "summary": "Sets the output value on trigger (SetValueOnTrigger, change)",
     "authorName": "pandur",

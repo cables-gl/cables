@@ -20,6 +20,8 @@ void main()
     vec3 tangent=attrTangent;
     vec3 bitangent=attrBiTangent;
     mat4 mMatrix=modelMatrix;
+    gl_PointSize=10.0;
+
     {{MODULE_VERTEX_POSITION}}
     gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;
 }

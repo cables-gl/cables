@@ -20,8 +20,7 @@
                 "name": "Number",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Value.TriggerOnChangeNumber"
+        ]
     },
     "summary": "triggers every time the input value changed",
     "docs": {
@@ -59,7 +58,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "8y5hVJ"

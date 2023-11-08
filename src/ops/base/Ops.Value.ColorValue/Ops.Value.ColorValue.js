@@ -2,7 +2,7 @@ const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());
 const b = op.inValueSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
-const a = op.inValueSlider("a");
+const a = op.inValueSlider("a", 1);
 
 const outR = op.outNumber("outr");
 const outG = op.outNumber("outg");
@@ -36,7 +36,7 @@ function exec()
     let hex = floatToHex(r.get()) + floatToHex(g.get()) + floatToHex(b.get());
     outHex.set(hex);
 
-    arrOut.set([r.get(), g.get(), b.get()]);
+    arrOut.set([r.get(), g.get(), b.get(), a.get()]);
 }
 
 exec();

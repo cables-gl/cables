@@ -39,6 +39,5 @@ function updateArray()
     {
         resultArr[i] = anim.getValue(arr[i]);
     }
-    outArr.set(null);
-    outArr.set(resultArr);
+    outArr.setRef(resultArr);
 }

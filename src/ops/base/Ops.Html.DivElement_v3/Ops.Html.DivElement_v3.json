@@ -56,8 +56,7 @@
                 "type": 1,
                 "name": "Clicked"
             }
-        ],
-        "name": "Ops.Html.DivElement_v3"
+        ]
     },
     "summary": "Create a html DIV element",
     "issues": "",

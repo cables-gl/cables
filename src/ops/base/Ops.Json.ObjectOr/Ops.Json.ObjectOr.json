@@ -42,8 +42,7 @@
                 "type": 2,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectOr"
+        ]
     },
     "summary": "result is first connected valid object",
     "docs": {

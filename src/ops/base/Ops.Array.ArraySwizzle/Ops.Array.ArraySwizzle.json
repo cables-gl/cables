@@ -61,8 +61,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Array.ArraySwizzle"
+        ]
     },
     "summary": "manage/re-order components of an array (stride)",
     "collections": null,

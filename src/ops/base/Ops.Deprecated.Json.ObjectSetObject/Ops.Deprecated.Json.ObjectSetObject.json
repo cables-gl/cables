@@ -44,8 +44,7 @@
                 "type": 2,
                 "name": "Result Object"
             }
-        ],
-        "name": "Ops.Json.ObjectSetObject"
+        ]
     },
     "summary": "set object as value in an object",
     "issues": "",

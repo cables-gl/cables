@@ -43,8 +43,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.RepeatTextureV2"
+        ]
     },
     "summary": "Repeat Image",
     "author": "59d794f763898eb73bd67a7e",

@@ -18,8 +18,7 @@
                 "type": 3,
                 "name": "New Array"
             }
-        ],
-        "name": "Ops.Array.ArrayChangedTrigger"
+        ]
     },
     "summary": "Triggers when any array values or the array length has changed",
     "youtubeid": "",

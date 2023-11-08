@@ -39,8 +39,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Component.Equalizer3"
+        ]
     },
     "id": "af1797aa-bdf9-4827-ba10-abbcda3344af"
 }

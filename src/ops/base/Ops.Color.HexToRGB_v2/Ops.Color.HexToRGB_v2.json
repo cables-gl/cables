@@ -43,8 +43,7 @@
                 "name": "B",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Color.HexToRGB_v2"
+        ]
     },
     "issues": "",
     "collections": [

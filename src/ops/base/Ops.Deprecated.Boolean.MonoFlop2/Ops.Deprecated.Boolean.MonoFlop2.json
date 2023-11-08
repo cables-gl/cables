@@ -31,7 +31,6 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Boolean.MonoFlop2"
+        ]
     }
 }

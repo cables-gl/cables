@@ -31,8 +31,7 @@
                 "name": "Finished",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.DownloadTexture_v2"
+        ]
     },
     "summary": "Download a texture as png file",
     "issues": "",

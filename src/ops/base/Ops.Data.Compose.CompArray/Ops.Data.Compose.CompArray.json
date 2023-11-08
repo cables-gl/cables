@@ -46,8 +46,7 @@
                 "type": 3,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Data.Compose.CompArray"
+        ]
     },
     "authorName": "pandur",
     "created": 1680617369758,

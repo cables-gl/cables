@@ -19,8 +19,7 @@
                 "type": "0",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.Join"
+        ]
     },
     "summary": "join array values to a string (concat)",
     "updated": 1516211803426,

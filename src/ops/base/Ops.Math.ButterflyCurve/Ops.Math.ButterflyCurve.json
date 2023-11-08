@@ -21,8 +21,7 @@
                 "name": "Y",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.ButterflyCurve"
+        ]
     },
     "summary": "generate coordinates of a butterfly curve",
     "docs": {

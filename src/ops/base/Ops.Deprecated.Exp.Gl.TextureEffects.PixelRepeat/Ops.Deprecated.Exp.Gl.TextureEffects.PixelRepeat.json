@@ -28,7 +28,6 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Exp.Gl.TextureEffects.PixelRepeat"
+        ]
     }
 }

@@ -40,7 +40,7 @@ function update()
             else if (array2) arrlen = array2.length;
 
             if (emptyArray.length != arrlen)
-                for (var i = 0; i < arrlen; i++) emptyArray[i] = 0;
+                for (let i = 0; i < arrlen; i++) emptyArray[i] = 0;
 
             if (!array1)array1 = emptyArray;
             if (!array2)array2 = emptyArray;
@@ -63,15 +63,14 @@ function update()
         }
 
         arr.length = array1.length;
-        for (var i = 0; i < array1.length; i++)
+        for (let i = 0; i < array1.length; i++)
         {
             arr[i * 2 + 0] = array1[i];
             arr[i * 2 + 1] = array2[i];
         }
 
         needsCalc = false;
-        outArr.set(null);
-        outArr.set(arr);
+        outArr.setRef(arr);
         outArrayLength.set(arr.length);
     }
 

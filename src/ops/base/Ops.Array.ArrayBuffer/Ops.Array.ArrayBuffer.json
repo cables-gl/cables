@@ -37,8 +37,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayBuffer"
+        ]
     },
     "summary": "stores values in an array / fifo array buffer",
     "docs": {
@@ -63,7 +62,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "relatedops": [
         "Ops.Array.ArrayBuffer3x"
     ],

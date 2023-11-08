@@ -131,12 +131,10 @@
                 "type": 2,
                 "name": "Dom Element"
             }
-        ],
-        "name": "Ops.Gl.InteractiveRectangle_v2"
+        ]
     },
     "summary": "An area which is interactive",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

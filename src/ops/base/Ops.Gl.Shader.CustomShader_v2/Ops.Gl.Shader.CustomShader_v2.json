@@ -62,8 +62,7 @@
                 "name": "Has Errors",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Gl.Shader.CustomShader_v2"
+        ]
     },
     "summary": "Write your own custom shader",
     "issues": "",

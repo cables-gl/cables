@@ -4,12 +4,7 @@
     "created": 1605452818981,
     "summary": "get URL of a file",
     "docs": {
-        "ports": [
-            {
-                "name": "URL",
-                "text": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F754915956278020968%2F&psig=AOvVaw3EFt2rR5tg5iBrD6aLijzF&ust=1696664297034000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiCpZ_14IEDFQAAAAAdAAAAABAD"
-            }
-        ]
+        "ports": []
     },
     "layout": {
         "portsIn": [
@@ -25,8 +20,7 @@
                 "name": "URL",
                 "subType": "string"
             }
-        ],
-        "name": "Ops.Value.FileInput"
+        ]
     },
     "changelog": [
         {

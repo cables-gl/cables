@@ -5,7 +5,7 @@ const
 
 const cgl = op.patch.cgl;
 let tc = new CGL.CopyTexture(cgl, "textureThief", {});
-let fp = false;
+let pf = false;
 let wrap = -1;
 let filter = -1;
 
@@ -16,19 +16,19 @@ render.onTriggered = () =>
     const effect = cgl.currentTextureEffect;
     effect.endEffect();
 
-    const shouldFp = cgl.currentTextureEffect.getCurrentSourceTexture().isFloatingPoint();
+    const shouldPf = cgl.currentTextureEffect.getCurrentSourceTexture().pixelFormat;
     const shouldWrap = cgl.currentTextureEffect.getCurrentSourceTexture().wrap;
     const shouldFilter = cgl.currentTextureEffect.getCurrentSourceTexture().filter;
 
-    if (fp != shouldFp || wrap != shouldWrap || filter != shouldFilter)
+    if (pf != shouldPf || wrap != shouldWrap || filter != shouldFilter)
     {
         tc = new CGL.CopyTexture(cgl, "textureThief",
             {
-                "isFloatingPointTexture": shouldFp,
+                "pixelFormat": cgl.currentTextureEffect.getCurrentSourceTexture().pixelFormat,
                 "wrap": shouldWrap,
                 "filter": shouldFilter
             });
-        fp = shouldFp;
+        pf = shouldPf;
         wrap = shouldWrap;
         filter = shouldFilter;
     }

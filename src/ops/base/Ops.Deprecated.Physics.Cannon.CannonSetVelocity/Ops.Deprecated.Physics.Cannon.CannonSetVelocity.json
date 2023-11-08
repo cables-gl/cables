@@ -34,8 +34,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Physics.SetVelocity"
+        ]
     },
     "summary": "set velocity of a physics object",
     "docs": {
@@ -64,7 +63,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "mnoRYO"

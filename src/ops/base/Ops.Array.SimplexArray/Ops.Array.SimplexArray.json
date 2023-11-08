@@ -45,15 +45,13 @@
                 "name": "Array length out",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.SimplexArray"
+        ]
     },
     "libs": [
         "perlin.js"
     ],
     "summary": "Creates An array filled with Simplex noise values (Range: -1, 1)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -101,8 +101,7 @@
                 "name": "Texture Height",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ImageCompose_v4"
+        ]
     },
     "summary": "Compose Images and effects as layers to generate new Images",
     "credits": [

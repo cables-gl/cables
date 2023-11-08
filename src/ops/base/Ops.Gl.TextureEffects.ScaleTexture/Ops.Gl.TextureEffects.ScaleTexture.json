@@ -60,8 +60,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.ScaleTexture"
+        ]
     },
     "summary": "Scales a texture",
     "docs": {
@@ -116,7 +115,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "kj_Zbx"

@@ -15,13 +15,11 @@
                 "type": "5",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.String.Uppercase2"
+        ]
     },
     "summary": "Convert all characters in a string to upperase",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

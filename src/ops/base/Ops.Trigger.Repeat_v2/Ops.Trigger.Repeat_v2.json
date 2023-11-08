@@ -36,12 +36,10 @@
                 "name": "index",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Trigger.Repeat_v2"
+        ]
     },
     "summary": "Triggers all ops below x times (for loop / while)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "jiOLZaMUH78",

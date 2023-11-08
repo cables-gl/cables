@@ -27,8 +27,7 @@
                 "type": "2",
                 "name": "texture"
             }
-        ],
-        "name": "Ops.Gl.TextureCycler"
+        ]
     },
     "summary": "cycle between multiple textures",
     "docs": {

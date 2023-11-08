@@ -45,8 +45,7 @@
                 "name": "value",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.WebAudio.FFTAreaAverage"
+        ]
     },
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",

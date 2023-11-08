@@ -31,8 +31,7 @@
                 "type": "0",
                 "name": "Y"
             }
-        ],
-        "name": "Ops.Math.MercatorCoord"
+        ]
     },
     "summary": "project mercator coordinates",
     "exampleProjectId": "oi9AI4"

@@ -35,8 +35,7 @@
                 "name": "Angle",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Devices.GamePad.GamePadJoystickAxis"
+        ]
     },
     "summary": "get axis and angle of a joystick/thumbstick",
     "docs": {

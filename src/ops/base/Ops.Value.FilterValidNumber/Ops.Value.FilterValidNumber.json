@@ -43,12 +43,10 @@
                 "name": "Is Valid",
                 "subType": "boolean"
             }
-        ],
-        "name": "Ops.Value.ValidNumber"
+        ]
     },
     "summary": "Filter valid numbers",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

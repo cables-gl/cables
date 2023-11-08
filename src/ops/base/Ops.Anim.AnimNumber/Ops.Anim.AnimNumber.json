@@ -35,8 +35,7 @@
                 "type": 1,
                 "name": "Finished"
             }
-        ],
-        "name": "Ops.Anim.AnimNumber"
+        ]
     },
     "summary": "always animates to the current value",
     "authorName": "pandur",

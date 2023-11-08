@@ -102,8 +102,7 @@ function update()
     //     arr[i*3+2]=0;
     // }
 
-    outArr.set(null);
-    outArr.set(arr);
+    outArr.setRef(arr);
     outTotalPoints.set(arr.length / stride);
     outArrayLength.set(arr.length);
 }

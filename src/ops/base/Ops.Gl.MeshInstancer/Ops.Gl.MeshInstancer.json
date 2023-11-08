@@ -52,8 +52,7 @@
                 "name": "Num",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Gl.MeshInstancer"
+        ]
     },
     "summary": "draw the same mesh multiple times very fast",
     "docs": {
@@ -92,7 +91,6 @@
             }
         ]
     },
-
     "relatedops": null,
     "issues": "",
     "exampleProjectId": "oOsjJ5"

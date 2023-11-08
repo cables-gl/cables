@@ -55,8 +55,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.ShaderEffects.LimitMeshByTexCoord"
+        ]
     },
     "summary": "discard pixel if texture coordinate is below threshold",
     "docs": {
@@ -118,7 +117,6 @@
     ],
     "youtubeid": "",
     "issues": "",
-
     "relatedops": [
         "Ops.Json3d.Json3dMesh"
     ],

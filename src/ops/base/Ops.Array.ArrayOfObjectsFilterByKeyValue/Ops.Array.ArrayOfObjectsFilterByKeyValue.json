@@ -44,8 +44,7 @@
                 "type": 3,
                 "name": "arrayOut"
             }
-        ],
-        "name": "Ops.Array.ArrayOfObjectsFilterByKeyValue"
+        ]
     },
     "summary": "filter key value pairs in objects in an array of objects",
     "issues": "",

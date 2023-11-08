@@ -18,8 +18,7 @@
                 "name": "result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.GreaterThan"
+        ]
     },
     "summary": "result is true if number1 is greater than number2",
     "docs": {
@@ -43,7 +42,6 @@
     "created": 1540919889895,
     "youtubeid": "3dYztfuw4lA",
     "issues": "",
-
     "relatedops": null,
     "changelog": [
         {

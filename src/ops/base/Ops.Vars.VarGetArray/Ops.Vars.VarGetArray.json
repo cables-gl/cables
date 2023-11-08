@@ -10,8 +10,7 @@
                 "type": "3",
                 "name": "Array"
             }
-        ],
-        "name": "Ops.Vars.VarGetArray"
+        ]
     },
     "changelog": [
         {
@@ -26,7 +25,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": [
         "Ops.Vars.VarSetArray"
     ],

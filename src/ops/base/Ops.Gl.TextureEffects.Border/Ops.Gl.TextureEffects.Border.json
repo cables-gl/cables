@@ -78,8 +78,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.Border"
+        ]
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",

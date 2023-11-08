@@ -29,8 +29,7 @@
                 "name": "time",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Time.TimeSinceTrigger"
+        ]
     },
     "docs": {
         "ports": []

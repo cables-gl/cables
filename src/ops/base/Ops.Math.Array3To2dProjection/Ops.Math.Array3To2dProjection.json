@@ -52,8 +52,7 @@
                 "type": 3,
                 "name": "Array2x"
             }
-        ],
-        "name": "Ops.Math.Array3To2dProjection"
+        ]
     },
     "summary": "calculate 2d positions of an array3x",
     "docs": {

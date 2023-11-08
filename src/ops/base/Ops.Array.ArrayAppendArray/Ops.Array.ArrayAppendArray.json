@@ -28,8 +28,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.ArrayAppendArray"
+        ]
     },
     "summary": "Append an array to an existing array ",
     "docs": {
@@ -65,7 +64,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "quYUvH"

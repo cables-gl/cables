@@ -52,8 +52,7 @@
                 "name": "Last Exported",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Cables.PatchInfo_v2"
+        ]
     },
     "changelog": [
         {
@@ -68,7 +67,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "3hkdqX"

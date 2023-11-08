@@ -16,6 +16,17 @@ export default class Pipeline
         this._vsUniformBuffer = null;
 
         this._old = {};
+
+
+        this.DEPTH_COMPARE_FUNCS_STRINGS = [
+            "never",
+            "less",
+            "equal",
+            "lessequal",
+            "greater",
+            "notequal",
+            "greaterequal",
+            "always"];
     }
 
     get isValid() { return this._isValid; }
@@ -28,7 +39,7 @@ export default class Pipeline
             return;
         }
 
-        const needsRebuild =
+        let needsRebuild =
             !this._renderPipeline ||
             !this._pipeCfg ||
             this._old.mesh != mesh ||
@@ -36,15 +47,61 @@ export default class Pipeline
             mesh.needsPipelineUpdate ||
             shader.needsPipelineUpdate;
 
+        if (this._pipeCfg)
+        {
+            if (this._pipeCfg.depthStencil.depthWriteEnabled != this._cgp.stateDepthWrite())
+            {
+                needsRebuild = true;
+                this._pipeCfg.depthStencil.depthWriteEnabled = this._cgp.stateDepthWrite();
+            }
+
+            if (this._cgp.stateDepthTest() === false)
+            {
+                if (this._pipeCfg.depthStencil.depthCompare != "never")
+                {
+                    this._pipeCfg.depthStencil.depthCompare = "never";
+                    needsRebuild = true;
+                }
+            }
+            else
+            if (this._pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
+            {
+                needsRebuild = true;
+                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
+            }
+
+
+            if (this._cgp.stateCullFace() === false)
+            {
+                if (this._pipeCfg.primitive.cullMode != "none")
+                {
+                    needsRebuild = true;
+                    this._pipeCfg.primitive.cullMode = "none";
+                }
+            }
+            else
+            {
+                needsRebuild = true;
+                this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
+            }
+        }
 
         if (needsRebuild)
         {
+            if (!this._pipeCfg || this._old.shader != shader) this._pipeCfg = this.getPiplelineObject(shader, mesh);
+
             this._old.shader = shader;
             this._old.mesh = mesh;
 
-            this._pipeCfg = this.getPiplelineObject(shader, mesh);
-            console.log(this._pipeCfg);
+
+            // try
+            // {
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
+            // }
+            // catch (e)
+            // {
+            //     console.error(e.message);
+            // }
 
             this._bindUniforms(shader);
         }
@@ -111,7 +168,7 @@ export default class Pipeline
             },
             "primitive": {
                 "topology": "triangle-list",
-                "cullMode": "none", // back/none/front
+                "cullMode": "back", // back/none/front
 
                 // "point-list",
                 // "line-list",

@@ -51,12 +51,10 @@
                 "type": "2",
                 "name": "cubemap"
             }
-        ],
-        "name": "Ops.Gl.CubeMap.CubeMapFromTextures_v2"
+        ]
     },
     "summary": "generate a cubemap from 6 textures",
     "issues": "",
-
     "relatedops": [
         "Ops.Gl.CubeMap.CubeMapMaterial_v2",
         "Ops.Gl.CubeMap.CubeMapCamera_v2"

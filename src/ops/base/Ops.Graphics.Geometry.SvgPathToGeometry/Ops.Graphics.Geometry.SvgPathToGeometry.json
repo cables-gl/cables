@@ -51,8 +51,7 @@
                 "name": "Geometry",
                 "objType": "geometry"
             }
-        ],
-        "name": "Ops.Dev.SvgPathToMesh"
+        ]
     },
     "authorName": "pandur",
     "created": 1647416958593,

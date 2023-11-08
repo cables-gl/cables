@@ -30,8 +30,7 @@
                 "type": 3,
                 "name": "values"
             }
-        ],
-        "name": "Ops.Array.SetNumberArray"
+        ]
     },
     "changelog": [
         {
@@ -56,7 +55,6 @@
         }
     ],
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

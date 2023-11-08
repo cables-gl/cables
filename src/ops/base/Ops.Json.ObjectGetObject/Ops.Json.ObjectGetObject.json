@@ -20,13 +20,11 @@
                 "type": "2",
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Json.ObjectGetObject"
+        ]
     },
     "summary": "get an object from an object",
     "youtubeid": "",
     "issues": "",
-
     "relatedops": null,
     "docs": {
         "ports": []

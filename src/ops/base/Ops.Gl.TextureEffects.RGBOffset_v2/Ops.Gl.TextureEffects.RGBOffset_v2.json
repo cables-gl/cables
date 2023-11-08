@@ -102,12 +102,10 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.User.pandur.RGBOffsetV2"
+        ]
     },
     "summary": "Offsets the xy components of an RGB texture",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

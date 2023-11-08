@@ -43,7 +43,6 @@
                 "type": "1",
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Dreprecated.Gl.TextureEffects.BlurByDepth"
+        ]
     }
 }

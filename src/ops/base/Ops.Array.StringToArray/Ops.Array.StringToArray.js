@@ -23,7 +23,6 @@ function parse()
         for (let i = 0; i < r.length; i++)
             r[i] = Number(r[i]);
 
-    arr.set(null);
-    arr.set(r);
+    arr.setRef(r);
     parsed.trigger();
 }

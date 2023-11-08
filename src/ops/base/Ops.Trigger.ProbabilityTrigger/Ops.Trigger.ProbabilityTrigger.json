@@ -35,12 +35,10 @@
                 "type": 1,
                 "name": "Inverse Trigger Output"
             }
-        ],
-        "name": "Ops.User.simod.ProbabilityTrigger"
+        ]
     },
     "summary": "trigger by chance",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

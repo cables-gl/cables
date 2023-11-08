@@ -38,12 +38,10 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Compare.CompareNumbers"
+        ]
     },
     "summary": "Performs logical comparisons on numbers (compare, operators)",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

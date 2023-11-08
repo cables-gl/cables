@@ -58,8 +58,7 @@
                 "name": "Array length",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Array.Array3"
+        ]
     },
     "summary": "create an array of num triplets set to default values xyz  ",
     "issues": "",

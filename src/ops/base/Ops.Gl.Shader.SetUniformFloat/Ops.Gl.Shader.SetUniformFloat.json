@@ -28,8 +28,7 @@
                 "type": 5,
                 "name": "Type"
             }
-        ],
-        "name": "Ops.Gl.Shader.SetUniformValue"
+        ]
     },
     "summary": "set a uniform value of the current shader",
     "docs": {

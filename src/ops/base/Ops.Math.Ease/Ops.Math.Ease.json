@@ -31,8 +31,7 @@
                 "name": "Result",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.Math.Ease"
+        ]
     },
     "summary": "map a value to an easing curve",
     "docs": {

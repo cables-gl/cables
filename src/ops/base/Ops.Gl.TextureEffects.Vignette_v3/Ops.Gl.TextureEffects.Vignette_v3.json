@@ -72,8 +72,7 @@
                 "type": 1,
                 "name": "Trigger"
             }
-        ],
-        "name": "Ops.Dev.VignetteV3"
+        ]
     },
     "summary": "Simulating an old camera effect of fading away the edges of the image",
     "docs": {

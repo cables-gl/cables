@@ -41,8 +41,7 @@
                 "type": "3",
                 "name": "fft"
             }
-        ],
-        "name": "Ops.WebAudio.AudioAnalyzer"
+        ]
     },
     "summary": "Extracts FFT or Waveform data from the incoming audio signal",
     "docs": {

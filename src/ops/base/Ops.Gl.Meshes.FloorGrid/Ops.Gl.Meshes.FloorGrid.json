@@ -19,8 +19,7 @@
                 "type": 1,
                 "name": "Next"
             }
-        ],
-        "name": "Ops.Gl.Meshes.FloorGrid"
+        ]
     },
     "changelog": [
         {
@@ -31,7 +30,6 @@
     ],
     "summary": "draw a grid on the floor",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [],
     "docs": {

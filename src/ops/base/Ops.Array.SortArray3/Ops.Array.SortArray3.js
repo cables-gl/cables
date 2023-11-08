@@ -39,8 +39,7 @@ function recalc()
     }
     if (!comparator)
     {
-        outArr.set(null);
-        outArr.set(inArr.get());
+        outArr.setRef(inArr.get());
         return;
     }
 
@@ -49,13 +48,11 @@ function recalc()
     sliceArray();
 
     arrArr.sort(comparator);
-    outArr.set(null);
 
     if (arrArr.flat)arrArr = arrArr.flat();
     else arrArr = [].concat.apply([], arrArr);
 
-    outArr.set(null);
-    outArr.set(arrArr);
+    outArr.setRef(arrArr);
 }
 
 what.onChange = function ()

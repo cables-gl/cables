@@ -37,8 +37,7 @@
                 "type": 1,
                 "name": "trigger"
             }
-        ],
-        "name": "Ops.Gl.TextureEffects.RepeatTexture"
+        ]
     },
     "summary": "Repeat Image",
     "author": "59d794f763898eb73bd67a7e",

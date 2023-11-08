@@ -24,14 +24,12 @@
                 "type": 5,
                 "name": "Result"
             }
-        ],
-        "name": "Ops.Ui.VizString"
+        ]
     },
     "authorName": "pandur",
     "created": 1637913011187,
     "summary": "Displays input string on the patchfield",
     "issues": "",
-
     "relatedops": null,
     "youtubeids": [
         "-1vMiU6BcDg"

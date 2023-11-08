@@ -8,8 +8,7 @@
                 "name": "time",
                 "subType": "number"
             }
-        ],
-        "name": "Ops.TimeLine.TimeLineTime"
+        ]
     },
     "docs": {
         "ports": [

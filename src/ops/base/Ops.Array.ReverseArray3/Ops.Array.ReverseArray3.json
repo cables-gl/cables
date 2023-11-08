@@ -15,8 +15,7 @@
                 "type": 3,
                 "name": "Reversed Array"
             }
-        ],
-        "name": "Ops.Array.ReverseArray3"
+        ]
     },
     "summary": "Reverses an array with value triplets [x, y, z, ...]",
     "docs": {

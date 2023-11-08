@@ -65,8 +65,7 @@
                 "type": "2",
                 "name": "Audio Out"
             }
-        ],
-        "name": "Ops.WebAudio.Lib.Tonejs.Source.PulseOscillator"
+        ]
     },
     "updated": 1524590499215,
     "authorName": "tim",

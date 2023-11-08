@@ -1,68 +1,67 @@
 {
-  "id": "9a383587-272d-429b-95a3-5c9b6007f8ea",
-  "changelog": [
-    {
-      "message": "created op",
-      "author": "pandur",
-      "date": 1605799778398
+    "id": "9a383587-272d-429b-95a3-5c9b6007f8ea",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1605799778398
+        },
+        {
+            "message": "Ops.User.pandur.OrObject renamed to Ops.Gl.OrTexture",
+            "author": "pandur",
+            "date": 1607599115162
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1605799792358,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture 1"
+            },
+            {
+                "type": "2",
+                "name": "Texture 2"
+            },
+            {
+                "type": "2",
+                "name": "Texture 3"
+            },
+            {
+                "type": "2",
+                "name": "Texture 4"
+            },
+            {
+                "type": "2",
+                "name": "Texture 5"
+            },
+            {
+                "type": "2",
+                "name": "Texture 6"
+            },
+            {
+                "type": "2",
+                "name": "Texture 7"
+            },
+            {
+                "type": "2",
+                "name": "Texture 8"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ]
     },
-    {
-      "message": "Ops.User.pandur.OrObject renamed to Ops.Gl.OrTexture",
-      "author": "pandur",
-      "date": 1607599115162
+    "summary": "outputs the first valid texture of the input ports",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
-  ],
-  "authorName": "pandur",
-  "created": 1605799792358,
-  "layout": {
-    "portsIn": [
-      {
-        "type": "2",
-        "name": "Texture 1"
-      },
-      {
-        "type": "2",
-        "name": "Texture 2"
-      },
-      {
-        "type": "2",
-        "name": "Texture 3"
-      },
-      {
-        "type": "2",
-        "name": "Texture 4"
-      },
-      {
-        "type": "2",
-        "name": "Texture 5"
-      },
-      {
-        "type": "2",
-        "name": "Texture 6"
-      },
-      {
-        "type": "2",
-        "name": "Texture 7"
-      },
-      {
-        "type": "2",
-        "name": "Texture 8"
-      }
-    ],
-    "portsOut": [
-      {
-        "type": "2",
-        "name": "Result"
-      }
-    ],
-    "name": "Ops.Gl.OrTexture"
-  },
-  "summary": "outputs the first valid texture of the input ports",
-  "issues": "",
-  "collections": null,
-  "relatedops": null,
-  "youtubeids": [],
-  "docs": {
-    "ports": []
-  }
 }

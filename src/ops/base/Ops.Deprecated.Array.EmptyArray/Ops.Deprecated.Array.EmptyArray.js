@@ -1,12 +1,11 @@
-var inReset=op.inTriggerButton("Reset");
-var outArr=op.outArray("Array");
+let inReset = op.inTriggerButton("Reset");
+let outArr = op.outArray("Array");
 
-var arr=[];
+let arr = [];
 outArr.set(arr);
 
-inReset.onTriggered=function()
+inReset.onTriggered = function ()
 {
-    arr.length=0;
-    outArr.set(null);
-    outArr.set(arr);
+    arr.length = 0;
+    outArr.setRef(arr);
 };
