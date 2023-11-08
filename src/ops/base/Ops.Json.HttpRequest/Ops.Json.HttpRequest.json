@@ -35,7 +35,7 @@
             "date": 1558104567923
         }
     ],
-    "exampleProjectId": "5FQ08W",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": "Ops.Json.AjaxRequest renamed to Ops.Json.HttpRequest",
@@ -43,5 +43,9 @@
             "author": "pandur",
             "date": 1699428561904
         }
-    ]
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }

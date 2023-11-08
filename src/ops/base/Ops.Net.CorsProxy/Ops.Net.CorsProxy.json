@@ -18,5 +18,9 @@
         ]
     },
     "summary": "create a cables.gl CORS proxy URL",
-    "exampleProjectId": "5FQ08W"
+    "exampleProjectId": "",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
 }
