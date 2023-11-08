@@ -118,10 +118,6 @@
                 "text": "the http method to use"
             },
             {
-                "name": "HTTP Method",
-                "text": "the http method to use"
-            },
-            {
                 "name": "Content-Type",
                 "text": "the content type of the body sent (if any)"
             },
@@ -155,5 +151,5 @@
             }
         ]
     },
-    "exampleProjectId": "5FQ08W"
+    "exampleProjectId": ""
 }

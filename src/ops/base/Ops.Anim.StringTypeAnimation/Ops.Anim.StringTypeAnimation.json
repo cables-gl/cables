@@ -42,7 +42,6 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "relatedops": [
         "Ops.Gl.Textures.Text"
@@ -75,5 +74,5 @@
             }
         ]
     },
-    "exampleProjectId": "8dB2eH"
+    "exampleProjectId": ""
 }

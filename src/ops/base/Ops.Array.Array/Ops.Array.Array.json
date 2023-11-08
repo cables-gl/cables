@@ -28,7 +28,6 @@
     "authorName": "pandur",
     "id": "fe2ed80f-fd0a-438d-8aa0-01a59129261d",
     "created": 1506587820889,
-    "youtubeid": "",
     "relatedops": null,
     "docs": {
         "ports": [
@@ -46,5 +45,5 @@
             }
         ]
     },
-    "exampleProjectId": "P4qAz6"
+    "exampleProjectId": ""
 }
