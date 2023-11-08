@@ -30,5 +30,13 @@
                 "name": "values"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ArraySetObject renamed to Ops.Deprecated.Array.ArraySetObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428703066
+        }
+    ]
 }

@@ -59,6 +59,12 @@
             "message": "new op: replacing viewport and letterbox ops",
             "author": "pandur",
             "date": 1548266743514
+        },
+        {
+            "message": "Ops.Gl.AspectRatio renamed to Ops.Deprecated.Gl.AspectRatio",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428796585
         }
     ],
     "summary": "set fixed viewport aspect ratop and letterboxing",

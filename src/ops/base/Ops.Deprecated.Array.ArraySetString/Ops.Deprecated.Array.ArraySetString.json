@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1594020585173
+        },
+        {
+            "message": "Ops.Array.ArraySetString renamed to Ops.Deprecated.Array.ArraySetString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428728273
         }
     ],
     "authorName": "pandur",
