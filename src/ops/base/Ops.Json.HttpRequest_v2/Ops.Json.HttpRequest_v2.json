@@ -13,6 +13,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1684490024882
+        },
+        {
+            "message": "Ops.Json.AjaxRequest_v2 renamed to Ops.Json.HttpRequest_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428559690
         }
     ],
     "layout": {

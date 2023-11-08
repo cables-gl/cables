@@ -65,7 +65,7 @@
             }
         ]
     },
-    "summary": "render a rectangular corner",
+    "summary": "nine slice image format texture mapped rectangle ",
     "docs": {
         "ports": []
     },

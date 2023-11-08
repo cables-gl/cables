@@ -24,6 +24,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1696586677908
+        },
+        {
+            "message": "Ops.Json.AjaxRequest_v3 renamed to Ops.Json.HttpRequest_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428566517
         }
     ],
     "layout": {
@@ -105,10 +111,6 @@
     "docs": {
         "ports": [
             {
-                "name": "JsonP",
-                "text": "wether or not to load jsonp (to circumvent CORS)"
-            },
-            {
                 "name": "headers",
                 "text": "a key/value-object of additional headers to send"
             },
@@ -121,16 +123,8 @@
                 "text": "the http method to use"
             },
             {
-                "name": "HTTP Method",
-                "text": "the http method to use"
-            },
-            {
                 "name": "Content-Type",
                 "text": "the content type of the body sent (if any)"
-            },
-            {
-                "name": "parse json",
-                "text": "do we expect the response to be JSON, then parse the output"
             },
             {
                 "name": "Auto request",
@@ -141,14 +135,6 @@
                 "text": "refresh data from remote (overrides an inactive \"auto request\")"
             },
             {
-                "name": "data",
-                "text": "the data"
-            },
-            {
-                "name": "response",
-                "text": "the unparsed response of the request"
-            },
-            {
                 "name": "Is Loading",
                 "text": "currently loading"
             },
@@ -157,5 +143,6 @@
                 "text": "triggers when finished"
             }
         ]
-    }
+    },
+    "exampleProjectId": "5FQ08W"
 }

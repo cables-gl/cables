@@ -60,6 +60,12 @@
             "message": "cdscdscsd",
             "author": "pandur",
             "date": 1560507841493
+        },
+        {
+            "message": "Ops.Gl.DepthTest renamed to Ops.Graphics.DepthTest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428124107
         }
     ]
 }

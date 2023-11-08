@@ -35,5 +35,13 @@
             "date": 1558104567923
         }
     ],
-    "exampleProjectId": "5FQ08W"
+    "exampleProjectId": "5FQ08W",
+    "changelog": [
+        {
+            "message": "Ops.Json.AjaxRequest renamed to Ops.Json.HttpRequest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428561904
+        }
+    ]
 }
