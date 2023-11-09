@@ -1,0 +1,51 @@
+{
+    "summary": "request a json file from another server (ajax, url, json)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "JsonP"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "0",
+                "name": "Is Loading"
+            }
+        ]
+    },
+    "updated": 1539170196705,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "54330e4d-cdfb-47bd-9c5a-b54751392123",
+    "created": 1510041274265,
+    "todos": [
+        {
+            "message": "needs new version with new string type ports",
+            "author": "pandur",
+            "id": "0e182438-e98d-48e2-8f19-a36ef785ed51",
+            "date": 1558104567923
+        }
+    ],
+    "exampleProjectId": "",
+    "changelog": [
+        {
+            "message": "Ops.Json.AjaxRequest renamed to Ops.Json.HttpRequest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428561904
+        }
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

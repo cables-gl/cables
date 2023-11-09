@@ -1,0 +1,74 @@
+{
+    "authorName": "pandur",
+    "id": "9dfd0ee4-81e1-438c-8a99-4894c64f41cb",
+    "created": 1577014342965,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "group": "Face Fulling",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Discard index",
+                "group": "Face Fulling",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.FaceCulling_v2 renamed to Ops.Gl.FaceCulling_v2",
+            "author": "pandur",
+            "date": 1577014912398
+        },
+        {
+            "message": "fix: behaves correctly when using stacked cull modes",
+            "author": "andro",
+            "date": 1580204641776
+        },
+        {
+            "message": "Ops.Gl.FaceCulling_v2 renamed to Ops.Graphics.FaceCulling_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1699428385357
+        }
+    ],
+    "summary": "Disable the rendering of front or back facing triangles with culling",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Discard",
+                "text": "Mode - Front - Back - All"
+            },
+            {
+                "name": "Active",
+                "text": "Enable or disable the op"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "exampleProjectId": "mPwnD-"
+}

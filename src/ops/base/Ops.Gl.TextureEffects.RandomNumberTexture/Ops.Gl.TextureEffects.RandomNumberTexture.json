@@ -81,7 +81,7 @@
             }
         ]
     },
-    "summary": "White noise pixel effect",
+    "summary": "Set random numbers into an imagecompose",
     "authorName": "pandur",
     "id": "42c8b058-bc9d-44c4-8139-1596907ac531",
     "created": 1695287848893,
@@ -100,31 +100,15 @@
                 "text": "opacity of effect"
             },
             {
-                "name": "Animated",
-                "text": "randomize noise every frame/trigger"
-            },
-            {
-                "name": "RGB",
-                "text": "use colors"
-            },
-            {
-                "name": "Normalize",
-                "text": "offset values of colors into a -1.0 +1.0 range "
-            },
-            {
                 "name": "Multiply",
                 "text": "multiply values by input texture"
             }
         ]
     },
     "issues": "",
-    "collections": [
-        "random",
-        "generator"
-    ],
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "PdHmT6",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",

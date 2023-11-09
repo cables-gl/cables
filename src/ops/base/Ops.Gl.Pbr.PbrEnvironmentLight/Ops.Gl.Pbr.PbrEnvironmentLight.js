@@ -254,8 +254,6 @@ function capturePrefilteredCubemap(size)
 
     let iosFix = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i));
 
-    console.log("iosFix", iosFix);
-
     if (iosFix)
     {
         maxMipLevels = 0;
