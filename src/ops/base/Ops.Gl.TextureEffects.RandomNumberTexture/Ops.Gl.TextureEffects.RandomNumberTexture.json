@@ -108,7 +108,7 @@
     "issues": "",
     "relatedops": null,
     "youtubeids": [],
-    "exampleProjectId": "PdHmT6",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",
