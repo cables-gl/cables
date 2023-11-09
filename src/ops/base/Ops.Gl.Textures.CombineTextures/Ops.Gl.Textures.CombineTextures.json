@@ -74,6 +74,11 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
                 "type": 2,
                 "name": "R",
                 "group": "Red",

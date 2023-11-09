@@ -63,12 +63,12 @@
         ],
         "portsOut": [
             {
-                "type": 1,
-                "name": "Parsed"
-            },
-            {
                 "type": 3,
                 "name": "array"
+            },
+            {
+                "type": 1,
+                "name": "Parsed"
             },
             {
                 "type": 0,

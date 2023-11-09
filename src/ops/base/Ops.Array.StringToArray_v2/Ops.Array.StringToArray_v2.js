@@ -3,8 +3,8 @@ const text = op.inStringEditor("text", "1,2,3"),
     toNumber = op.inValueBool("Numbers", true),
     trim = op.inValueBool("Trim", true),
     splitNewLines = op.inBool("Split Lines", false),
-    parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),
+    parsed = op.outTrigger("Parsed"),
     len = op.outNumber("length");
 
 text.setUiAttribs({ "ignoreBigPort": true });
