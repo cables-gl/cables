@@ -32,6 +32,7 @@ op.setPortGroup("Blue", [inSrcBDefault, inTexB, inSrcB, inSrcBVal]);
 op.setPortGroup("Alpha", [inSrcADefault, inTexA, inSrcA, inSrcAVal]);
 
 const cgl = op.patch.cgl;
+let currentSize = [2, 2];
 let needsUpdate = true;
 let tc = null;
 let unitexR, unitexG, unitexB, unitexA, uniFloatR, uniFloatG, uniFloatB, uniFloatA;
@@ -46,6 +47,8 @@ inSrcRDefault.onChange =
     inPixel.onChange =
     inTexA.onChange = () =>
     {
+        currentSize = getSize();
+
         needsUpdate = true;
     };
 
@@ -66,18 +69,8 @@ inSize.onChange =
     tfilter.onChange =
     twrap.onChange = () => { tc = null; };
 
-function initShader()
+function getSize()
 {
-    let wrap = CGL.Texture.WRAP_REPEAT;
-    if (twrap.get() == "mirrored repeat") wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (twrap.get() == "clamp to edge") wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
-
-    let filter = CGL.Texture.FILTER_NEAREST;
-    if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
-    if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
-
-    if (tc)tc.dispose();
-
     let w = 4;
     let h = 4;
     let sizes = [];
@@ -139,6 +132,22 @@ function initShader()
     }
 
     console.log("size", w, h);
+    return [w, h];
+}
+
+function initShader()
+{
+    let wrap = CGL.Texture.WRAP_REPEAT;
+    if (twrap.get() == "mirrored repeat") wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (twrap.get() == "clamp to edge") wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+    let filter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
+    if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
+
+    if (tc)tc.dispose();
+
+    currentSize = getSize();
 
     tc = new CGL.CopyTexture(cgl, "combinetextures",
         {
@@ -146,8 +155,8 @@ function initShader()
             "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
             "filter": filter,
             "wrap": wrap,
-            "width": w,
-            "height": h
+            "width": currentSize[0],
+            "height": currentSize[1]
 
         });
 
@@ -214,6 +223,8 @@ function updateDefines()
     tc.bgShader.toggleDefine("HAS_B", inTexB.isLinked());
     tc.bgShader.toggleDefine("HAS_A", inTexA.isLinked());
 
+    // if (currentSize[0] != size[0] || currentSize[1] != size[1])tc = null;
+
     needsUpdate = true;
 }
 
@@ -238,8 +249,10 @@ exec.onTriggered = () =>
         uniFloatB.setValue(inSrcBDefault.get());
         uniFloatA.setValue(inSrcADefault.get());
 
-        outTex.set(CGL.Texture.getEmptyTexture(cgl));
-        outTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get() || CGL.Texture.getEmptyTexture(cgl)));
+        tc.setSize(currentSize[0], currentSize[1]);
+
+        // outTex.set(CGL.Texture.getEmptyTexture(cgl));
+        outTex.setRef(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get() || CGL.Texture.getEmptyTexture(cgl)));
 
         needsUpdate = false;
     }
