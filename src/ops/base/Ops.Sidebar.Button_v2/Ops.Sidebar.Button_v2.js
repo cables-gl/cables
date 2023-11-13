@@ -54,7 +54,6 @@ function onButtonTextChanged()
     input.textContent = buttonText;
     if (CABLES.UI)
     {
-        // op.setTitle("Button: " + buttonText);
         op.setUiAttrib({ "extendTitle": buttonText });
     }
 }

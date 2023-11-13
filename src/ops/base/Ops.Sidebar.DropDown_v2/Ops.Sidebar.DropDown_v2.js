@@ -178,10 +178,7 @@ function onLabelTextChanged()
 {
     const lblText = labelPort.get();
     label.textContent = lblText;
-    if (CABLES.UI)
-    {
-        op.setTitle("Dropdown: " + lblText);
-    }
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": lblText });
 }
 
 function onParentChanged()

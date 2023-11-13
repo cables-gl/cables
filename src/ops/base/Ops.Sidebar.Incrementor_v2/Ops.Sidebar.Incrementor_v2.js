@@ -193,10 +193,7 @@ function onLabelTextChanged()
     const labelText = labelPort.get();
     label.textContent = labelText;
 
-    if (CABLES.UI)
-    {
-        op.setTitle(labelText);
-    }
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
 }
 
 function onDelete()

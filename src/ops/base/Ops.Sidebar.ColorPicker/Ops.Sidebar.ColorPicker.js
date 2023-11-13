@@ -223,7 +223,7 @@ function onLabelTextChanged()
 
     if (CABLES.UI)
     {
-        op.setTitle("Color Picker: " + labelText);
+        op.setUiAttrib({ "extendTitle": labelText });
     }
 }
 

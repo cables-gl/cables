@@ -102,7 +102,7 @@ function onLabelTextChanged()
 {
     const text = labelPort.get();
     label.textContent = text;
-    if (CABLES.UI) op.setTitle("Toggle: " + text);
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
 }
 
 function onParentChanged()

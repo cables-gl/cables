@@ -76,10 +76,7 @@ function onLabelTextChanged()
 {
     let labelText = labelPort.get();
     label.textContent = labelText;
-    if (CABLES.UI)
-    {
-        op.setTitle("Number Input: " + labelText);
-    }
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
 }
 
 function onParentChanged()

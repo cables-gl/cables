@@ -325,7 +325,7 @@ function setDevice()
     if (!midi || !midi.inputs) return;
     const name = deviceSelect.get();
 
-    op.setTitle(`Midi ${name}`);
+    op.setUiAttrib({ "extendTitle": name });
 
     const inputs = midi.inputs.values();
     //  const outputs = midi.outputs.values();
