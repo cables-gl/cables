@@ -62,8 +62,7 @@ function updateArray()
     if (texChanged)
     {
         gl.framebufferTexture2D(
-            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
-            gl.TEXTURE_2D, realTexture.tex, 0
+            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
         );
 
         isFloatingPoint = realTexture.textureType == CGL.Texture.TYPE_FLOAT;
@@ -88,79 +87,78 @@ function updateArray()
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    pixelReader.read(cgl, fb, realTexture.textureType, 0, 0, realTexture.width, realTexture.height,
-        (pixel) =>
+    pixelReader.read(cgl, fb, realTexture.pixelFormat, 0, 0, realTexture.width, realTexture.height, (pixel) =>
+    {
+        let numItems = pixel.length;
+        numItems = numItems / 4 * getNumChannels();
+
+        if (inFormat.get() === "R")
         {
-            let numItems = pixel.length;
-            numItems = numItems / 4 * getNumChannels();
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            if (inFormat.get() === "R")
+            for (let i = 0; i < pixel.length; i += 4)
+                convertedpixel[i / 4] = pixel[i + 0];
+        }
+        else
+        if (inFormat.get() === "G")
+        {
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+
+            for (let i = 0; i < pixel.length; i += 4)
+                convertedpixel[i / 4] = pixel[i + 1];
+        }
+        else
+        if (inFormat.get() === "B")
+        {
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+
+            for (let i = 0; i < pixel.length; i += 4)
+                convertedpixel[i / 4] = pixel[i + 2];
+        }
+        else
+        if (inFormat.get() === "A")
+        {
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+
+            for (let i = 0; i < pixel.length; i += 4)
+                convertedpixel[i / 4] = pixel[i + 3];
+        }
+        else if (inFormat.get() === "RGB")
+        {
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+
+            for (let i = 0; i < pixel.length; i += 4)
             {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
-
-                for (let i = 0; i < pixel.length; i += 4)
-                    convertedpixel[i / 4] = pixel[i + 0];
+                convertedpixel[i / 4 * 3 + 0] = pixel[i + 0];
+                convertedpixel[i / 4 * 3 + 1] = pixel[i + 1];
+                convertedpixel[i / 4 * 3 + 2] = pixel[i + 2];
             }
-            else
-            if (inFormat.get() === "G")
+        }
+        else if (inFormat.get() === "RG")
+        {
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+
+            for (let i = 0; i < pixel.length; i += 4)
             {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
-
-                for (let i = 0; i < pixel.length; i += 4)
-                    convertedpixel[i / 4] = pixel[i + 1];
+                convertedpixel[i / 4 * 2 + 0] = pixel[i + 0];
+                convertedpixel[i / 4 * 2 + 1] = pixel[i + 1];
             }
-            else
-            if (inFormat.get() === "B")
-            {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+        }
+        else if (inFormat.get() === "RGBA" && !isFloatingPoint)
+        {
+            if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-                for (let i = 0; i < pixel.length; i += 4)
-                    convertedpixel[i / 4] = pixel[i + 2];
-            }
-            else
-            if (inFormat.get() === "A")
-            {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+            for (let i = 0; i < pixel.length; i++)
+                convertedpixel[i] = pixel[i];
+        }
+        else convertedpixel = null;
 
-                for (let i = 0; i < pixel.length; i += 4)
-                    convertedpixel[i / 4] = pixel[i + 3];
-            }
-            else if (inFormat.get() === "RGB")
-            {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
+        if (!isFloatingPoint && convertedpixel)
+        {
+            for (let i = 0; i < convertedpixel.length; i++)convertedpixel[i] /= 255;
+        }
 
-                for (let i = 0; i < pixel.length; i += 4)
-                {
-                    convertedpixel[i / 4 * 3 + 0] = pixel[i + 0];
-                    convertedpixel[i / 4 * 3 + 1] = pixel[i + 1];
-                    convertedpixel[i / 4 * 3 + 2] = pixel[i + 2];
-                }
-            }
-            else if (inFormat.get() === "RG")
-            {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
-
-                for (let i = 0; i < pixel.length; i += 4)
-                {
-                    convertedpixel[i / 4 * 2 + 0] = pixel[i + 0];
-                    convertedpixel[i / 4 * 2 + 1] = pixel[i + 1];
-                }
-            }
-            else if (inFormat.get() === "RGBA" && !isFloatingPoint)
-            {
-                if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
-
-                for (let i = 0; i < pixel.length; i++)
-                    convertedpixel[i] = pixel[i];
-            }
-            else convertedpixel = null;
-
-            if (!isFloatingPoint && convertedpixel)
-            {
-                for (let i = 0; i < convertedpixel.length; i++)convertedpixel[i] /= 255;
-            }
-
-            outColors.setRef(convertedpixel || pixel);
-            needsUpdate = false;
-        });
+        outColors.setRef(convertedpixel || pixel);
+        needsUpdate = false;
+    });
 }

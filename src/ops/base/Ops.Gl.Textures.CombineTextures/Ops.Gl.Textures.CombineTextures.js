@@ -4,6 +4,8 @@ const
     twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
+    inSize = op.inSwitch("Size", ["Biggest", "Smallest", "R", "G", "B", "A"], "Biggest"),
+
     inTexR = op.inTexture("R"),
     inSrcR = op.inSwitch("R Source", ["R", "G", "B", "A"], "R"),
     inSrcRVal = op.inSwitch("R Value", ["Source", "Invert"], "Source"),
@@ -30,6 +32,7 @@ op.setPortGroup("Blue", [inSrcBDefault, inTexB, inSrcB, inSrcBVal]);
 op.setPortGroup("Alpha", [inSrcADefault, inTexA, inSrcA, inSrcAVal]);
 
 const cgl = op.patch.cgl;
+let currentSize = [2, 2];
 let needsUpdate = true;
 let tc = null;
 let unitexR, unitexG, unitexB, unitexA, uniFloatR, uniFloatG, uniFloatB, uniFloatA;
@@ -44,6 +47,8 @@ inSrcRDefault.onChange =
     inPixel.onChange =
     inTexA.onChange = () =>
     {
+        currentSize = getSize();
+
         needsUpdate = true;
     };
 
@@ -60,8 +65,75 @@ inTexR.onLinkChanged =
     inSrcBVal.onChange =
     inSrcAVal.onChange = updateDefines;
 
-tfilter.onChange =
-    twrap.onChange = initShader;
+inSize.onChange =
+    tfilter.onChange =
+    twrap.onChange = () => { tc = null; };
+
+function getSize()
+{
+    let w = 4;
+    let h = 4;
+    let sizes = [];
+    if (inSize.get() == "Biggest" || inSize.get() == "Smallest")
+    {
+        if (inTexR.get()) sizes.push([inTexR.get().width, inTexR.get().height, inTexR.get().width * inTexR.get().height]);
+        if (inTexG.get()) sizes.push([inTexG.get().width, inTexG.get().height, inTexG.get().width * inTexG.get().height]);
+        if (inTexB.get()) sizes.push([inTexB.get().width, inTexB.get().height, inTexB.get().width * inTexB.get().height]);
+        if (inTexA.get()) sizes.push([inTexA.get().width, inTexA.get().height, inTexA.get().width * inTexA.get().height]);
+    }
+
+    if (inSize.get() == "Biggest")
+    {
+        let biggest = 0;
+
+        for (let i = 0; i < sizes.length; i++)
+        {
+            if (sizes[i][2] > biggest)
+            {
+                w = sizes[i][0];
+                h = sizes[i][1];
+                biggest = sizes[i][2];
+            }
+        }
+    }
+    else if (inSize.get() == "Smallest")
+    {
+        let smallest = op.patch.cgl.gl.MAX_TEXTURE_SIZE + 1;
+
+        for (let i = 0; i < sizes.length; i++)
+        {
+            if (sizes[i][2] < smallest)
+            {
+                w = sizes[i][0];
+                h = sizes[i][1];
+                smallest = sizes[i][2];
+            }
+        }
+    }
+    else if (inSize.get() == "R" && inTexR.get())
+    {
+        w = inTexR.get().width;
+        h = inTexR.get().height;
+    }
+    else if (inSize.get() == "G" && inTexG.get())
+    {
+        w = inTexG.get().width;
+        h = inTexG.get().height;
+    }
+    else if (inSize.get() == "B" && inTexB.get())
+    {
+        w = inTexB.get().width;
+        h = inTexB.get().height;
+    }
+    else if (inSize.get() == "A" && inTexA.get())
+    {
+        w = inTexA.get().width;
+        h = inTexA.get().height;
+    }
+
+    console.log("size", w, h);
+    return [w, h];
+}
 
 function initShader()
 {
@@ -74,13 +146,18 @@ function initShader()
     if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
 
     if (tc)tc.dispose();
-    tc = new CGL.CopyTexture(cgl, "combinetextures",
-        {
-            "shader": attachments.rgbe2fp_frag,
-            "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
-            "filter": filter,
-            "wrap": wrap
-        });
+
+    currentSize = getSize();
+
+    tc = new CGL.CopyTexture(cgl, "combinetextures", {
+        "shader": attachments.rgbe2fp_frag,
+        "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
+        "filter": filter,
+        "wrap": wrap,
+        "width": currentSize[0],
+        "height": currentSize[1]
+
+    });
 
     unitexR = new CGL.Uniform(tc.bgShader, "t", "texR", 0);
     unitexG = new CGL.Uniform(tc.bgShader, "t", "texG", 1);
@@ -145,12 +222,14 @@ function updateDefines()
     tc.bgShader.toggleDefine("HAS_B", inTexB.isLinked());
     tc.bgShader.toggleDefine("HAS_A", inTexA.isLinked());
 
+    // if (currentSize[0] != size[0] || currentSize[1] != size[1])tc = null;
+
     needsUpdate = true;
 }
 
 exec.onTriggered = () =>
 {
-    if (needsUpdate && !op.patch.cgl.frameStore.shadowPass)
+    if (!tc || needsUpdate && !op.patch.cgl.frameStore.shadowPass)
     {
         if (!tc)initShader();
         tc.bgShader.popTextures();
@@ -169,8 +248,10 @@ exec.onTriggered = () =>
         uniFloatB.setValue(inSrcBDefault.get());
         uniFloatA.setValue(inSrcADefault.get());
 
-        outTex.set(CGL.Texture.getEmptyTexture(cgl));
-        outTex.set(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get() || CGL.Texture.getEmptyTexture(cgl)));
+        tc.setSize(currentSize[0], currentSize[1]);
+
+        // outTex.set(CGL.Texture.getEmptyTexture(cgl));
+        outTex.setRef(tc.copy(inTexR.get() || inTexG.get() || inTexB.get() || inTexA.get() || CGL.Texture.getEmptyTexture(cgl)));
 
         needsUpdate = false;
     }

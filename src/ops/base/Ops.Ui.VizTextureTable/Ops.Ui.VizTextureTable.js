@@ -14,7 +14,7 @@ let realTexture = null;
 let texRows = 0;
 let lines = 0;
 let readW = 0, readH = 0;
-
+let pixelInfo = null;
 const arr = [];
 
 inTex.onLinkChanged = () =>
@@ -32,8 +32,10 @@ op.patch.cgl.on("beginFrame",
 
         if (!realTexture) return;
 
+        pixelInfo = CGL.Texture.setUpGlPixelFormat(cgl, realTexture.pixelFormat);
+
         let channels = gl.RGBA;
-        let numChannels = 4;
+        let numChannels = pixelInfo.numColorChannels;
 
         let channelType = gl.UNSIGNED_BYTE;
 
@@ -85,7 +87,7 @@ op.patch.cgl.on("beginFrame",
             lastRead = performance.now();
 
             if (!texChanged)
-                pixelReader.read(op.patch.cgl, fb, realTexture.textureType, 0, realTexture.height - texRows, readW, readH, (pixel) =>
+                pixelReader.read(op.patch.cgl, fb, realTexture.pixelFormat, 0, realTexture.height - texRows, readW, readH, (pixel) =>
                 {
                     pixelData = pixel;
                 });
@@ -123,11 +125,12 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.font = "normal 10px sourceCodePro";
     ctx.fillStyle = "#ccc";
 
+    if (!pixelInfo) return;
     arr.length = pixelData.length;
     let stride = 4;
     let padding = 4;
     let lineHeight = 10;
-    let isFp = realTexture.isFloatingPoint();
+    let isFp = CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat);
 
     // console.log("rr", readW, readH, lines);
 
@@ -153,7 +156,7 @@ op.renderVizLayer = (ctx, layer) =>
                 layer.x / layer.scale + padding,
                 layer.y / layer.scale + lineHeight + i / stride * lineHeight + padding);
 
-            if (inTex.get().isFloatingPoint()) ctx.fillStyle = "rgba(" + arr[idx + 0] * 255 + "," + arr[idx + 1] * 255 + "," + arr[idx + 2] * 255 + "," + arr[idx + 3] * 255 + ")";
+            if (isFp) ctx.fillStyle = "rgba(" + arr[idx + 0] * 255 + "," + arr[idx + 1] * 255 + "," + arr[idx + 2] * 255 + "," + arr[idx + 3] * 255 + ")";
             else ctx.fillStyle = "rgba(" + arr[idx + 0] + "," + arr[idx + 1] + "," + arr[idx + 2] + "," + arr[idx + 3] + ")";
 
             ctx.fillRect(

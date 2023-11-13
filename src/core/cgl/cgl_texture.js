@@ -98,8 +98,7 @@ const Texture = function (__cgl, options = {})
 
 Texture.prototype.isFloatingPoint = function ()
 {
-    // return this.textureType == Texture.TYPE_FLOAT;
-    Texture.isPixelFormatFloat(this.pixelFormat);
+    return Texture.isPixelFormatFloat(this.pixelFormat);
 };
 
 /**
@@ -317,6 +316,14 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         cgl.enableExtension("EXT_color_buffer_half_float");
         cgl.enableExtension("OES_texture_float_linear");
     }
+
+
+    o.numColorChannels = 1;
+    if (pixelFormatStr.indexOf("R") == 0)o.numColorChannels = 1;
+    if (pixelFormatStr.indexOf("RG") == 0)o.numColorChannels = 2;
+    if (pixelFormatStr.indexOf("RGB") == 0)o.numColorChannels = 3;
+    if (pixelFormatStr.indexOf("RGBA") == 0)o.numColorChannels = 4;
+
 
     // console.log(pixelFormatStr, this.name);
 
@@ -1208,6 +1215,8 @@ Texture.isPixelFormatHalfFloat =
     {
         return (pxlfrmt || "").indexOf("float") > -1 && (pxlfrmt || "").indexOf("16bit") > -1;
     };
+
+
 
 
 export { Texture };
