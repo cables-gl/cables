@@ -131,7 +131,6 @@ function getSize()
         h = inTexA.get().height;
     }
 
-    console.log("size", w, h);
     return [w, h];
 }
 
