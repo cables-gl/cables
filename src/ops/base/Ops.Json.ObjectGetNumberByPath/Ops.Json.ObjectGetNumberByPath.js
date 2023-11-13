@@ -1,10 +1,19 @@
-const objectIn = op.inObject("Object");
-const pathIn = op.inString("Path");
-const resultOut = op.outNumber("Output");
-const foundOut = op.outBool("Found");
+const
+    objectIn = op.inObject("Object"),
+    pathIn = op.inString("Path"),
+    resultOut = op.outNumber("Output"),
+    foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
+
+pathIn.on("change", updateUi);
+updateUi();
+function updateUi()
+{
+    if (!pathIn.get())op.setUiError("nokey", "Missing Key Value");
+    else op.setUiError("nokey", null);
+}
 
 function update()
 {
@@ -54,5 +63,5 @@ function update()
 function resolve(path, obj = self, separator = ".")
 {
     const properties = Array.isArray(path) ? path : path.split(separator);
-    return properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return properties.reduce((prev, curr) => { return prev && prev[curr]; }, obj);
 }

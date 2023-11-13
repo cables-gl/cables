@@ -11,6 +11,14 @@ op.setUiAttrib({ "extendTitlePort": key.name });
 key.onChange =
 data.onChange = update;
 
+key.on("change", updateUi);
+updateUi();
+function updateUi()
+{
+    if (!key.get())op.setUiError("nokey", "Missing Key Value");
+    else op.setUiError("nokey", null);
+}
+
 function update()
 {
     if (data.get())

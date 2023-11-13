@@ -1,10 +1,19 @@
-const objectIn = op.inObject("Object");
-const pathIn = op.inString("Path");
-const resultOut = op.outArray("Output");
-const foundOut = op.outBool("Found");
+const
+    objectIn = op.inObject("Object"),
+    pathIn = op.inString("Path"),
+    resultOut = op.outArray("Output"),
+    foundOut = op.outBool("Found");
 
-objectIn.onChange = update;
-pathIn.onChange = update;
+objectIn.onChange =
+    pathIn.onChange = update;
+
+pathIn.on("change", updateUi);
+updateUi();
+function updateUi()
+{
+    if (!pathIn.get())op.setUiError("nokey", "Missing Key Value");
+    else op.setUiError("nokey", null);
+}
 
 function update()
 {
