@@ -36,7 +36,8 @@ pUpdate.onTriggered = function ()
 
     if (!realTexture) return;
     if (!fb) fb = gl.createFramebuffer();
-    isFloatingPoint = realTexture.textureType == CGL.Texture.TYPE_FLOAT;
+
+    isFloatingPoint = realTexture.isFloatingPoint();
 
     if (isFloatingPoint) channelType = gl.FLOAT;
     else channelType = gl.UNSIGNED_BYTE;
@@ -48,8 +49,7 @@ pUpdate.onTriggered = function ()
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
     gl.framebufferTexture2D(
-        gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
-        gl.TEXTURE_2D, realTexture.tex, 0
+        gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
     );
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -63,27 +63,26 @@ pUpdate.onTriggered = function ()
         y = Math.min(realTexture.height, realTexture.height * y);
     }
 
-    pixelReader.read(cgl, fb, realTexture.textureType, x, y, 1, 1,
-        (pixel) =>
-        {
-            wasTriggered = false;
-            texChanged = false;
+    pixelReader.read(cgl, fb, realTexture.pixelFormat, x, y, 1, 1, (pixel) =>
+    {
+        wasTriggered = false;
+        texChanged = false;
 
-            if (isFloatingPoint)
-            {
-                outR.set(pixel[0]);
-                outG.set(pixel[1]);
-                outB.set(pixel[2]);
-                outA.set(pixel[3]);
-            }
-            else
-            {
-                outR.set(pixel[0] / 255);
-                outG.set(pixel[1] / 255);
-                outB.set(pixel[2] / 255);
-                outA.set(pixel[3] / 255);
-            }
-        });
+        if (isFloatingPoint)
+        {
+            outR.set(pixel[0]);
+            outG.set(pixel[1]);
+            outB.set(pixel[2]);
+            outA.set(pixel[3]);
+        }
+        else
+        {
+            outR.set(pixel[0] / 255);
+            outG.set(pixel[1] / 255);
+            outB.set(pixel[2] / 255);
+            outA.set(pixel[3] / 255);
+        }
+    });
 
     outTrigger.trigger();
 };
