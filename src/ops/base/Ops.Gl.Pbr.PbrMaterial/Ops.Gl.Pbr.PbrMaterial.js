@@ -423,7 +423,6 @@ function doRender()
         PBRShader.toggleDefine("USE_PARALLAX_CORRECTION", pbrEnv.UseParallaxCorrection);
         if (pbrEnv.UseParallaxCorrection)
         {
-            inPCOrigIntensitysetValue(pbrEnv.PCOrigin);
             inPCOrigin.setValue(pbrEnv.PCOrigin);
             inPCboxMin.setValue(pbrEnv.PCboxMin);
             inPCboxMax.setValue(pbrEnv.PCboxMax);
