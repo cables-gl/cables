@@ -108,7 +108,7 @@ function updateSoon()
     updateParams();
     reInitEffect = true;
 
-    if (!render.isLinked() || !inTexture.isLinked()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    if (!render.isLinked() || !inTexture.isLinked()) texOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 }
 
 function updateResolution()
@@ -180,7 +180,7 @@ function doRender()
     // op.patch.removeOnAnimCallback(doRender);
     // if (!inTexture.get())
 
-    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) texOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 
     if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl))
     {
@@ -221,7 +221,7 @@ function doRender()
 
     cgl.popBlend();
 
-    texOut.set(effect.getCurrentSourceTexture());
+    texOut.setRef(effect.getCurrentSourceTexture());
 
     effect.endEffect();
 
