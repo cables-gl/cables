@@ -68,6 +68,7 @@ UNI vec3 camPos;
     UNI float MAX_REFLECTION_LOD;
     UNI float diffuseIntensity;
     UNI float specularIntensity;
+    UNI float envIntensity;
 #endif
 #ifdef USE_LIGHTMAP
     UNI float lightmapIntensity;
@@ -531,7 +532,7 @@ void main()
                 R = BoxProjection(R, FragPos.xyz, _PCOrigin, _PCboxMin, _PCboxMax);
             #endif
 
-    	    vec3 prefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, R, envSampleSpecK)) * specularIntensity;
+    	    vec3 prefilteredEnvColour = DecodeRGBE8(SAMPLETEX(_prefilteredEnvironmentColour, R, envSampleSpecK)) * specularIntensity*envIntensity;
 
         	vec3 Fr = E * prefilteredEnvColour;
         	Fr *= specOcclusion * horizonOcclusion * (1.0 + F0 * (1.0 / envBRDF.y - 1.0));
@@ -540,7 +541,7 @@ void main()
         	#ifdef USE_LIGHTMAP
                 vec3 IBLIrradiance = Lightmap * lightmapIntensity;
             #else
-                vec3 IBLIrradiance = DecodeRGBE8(SAMPLETEX(_irradiance, N, 0.0)) * diffuseIntensity;
+                vec3 IBLIrradiance = DecodeRGBE8(SAMPLETEX(_irradiance, N, 0.0)) * diffuseIntensity*envIntensity;
         #endif
 
 	    vec3 Fd = (1.0 - metalness) * albedo * IBLIrradiance * (1.0 - E) * AO;
@@ -552,7 +553,9 @@ void main()
     // combine IBL
     col.rgb = directLighting;
     #ifdef USE_ENVIRONMENT_LIGHTING
+
         col.rgb += Fr + Fd;
+
         #ifdef USE_CLEAR_COAT
             float CCEnvSampleSpecK = _ClearCoatRoughness * MAX_REFLECTION_LOD;
             #ifndef USE_NORMAL_MAP_FOR_CC

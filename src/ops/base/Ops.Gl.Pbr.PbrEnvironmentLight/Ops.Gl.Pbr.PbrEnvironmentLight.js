@@ -51,7 +51,7 @@ const mesh = new CGL.Mesh(cgl, geometry);
 const fullscreenRectangle = CGL.MESHES.getSimpleRect(cgl, "fullscreenRectangle");
 // inputs
 const inTrigger = op.inTrigger("render");
-
+const inIntensity = op.inFloatSlider("Intensity", 1);
 const inCubemap = op.inTexture("RGBE Environment map");
 
 const inIrradianceSize = op.inDropDown("Size Irradiance map", [16, 32, 64], 64);
@@ -433,6 +433,7 @@ inTrigger.onTriggered = function ()
     pbrEnv.texPreFiltered = prefilteredFrameBuffer.getTextureColor();// outTexPrefiltered.get();
     pbrEnv.texPreFilteredMipLevels = outMipLevels.get();
 
+    pbrEnv.intensity = inIntensity.get();
     pbrEnv.UseParallaxCorrection = inUseParallaxCorrection.get();
     pbrEnv.PCOrigin = [inPCOriginX.get(), inPCOriginY.get(), inPCOriginZ.get()];
     pbrEnv.PCboxMin = [inPCboxMinX.get(), inPCboxMinY.get(), inPCboxMinZ.get()];

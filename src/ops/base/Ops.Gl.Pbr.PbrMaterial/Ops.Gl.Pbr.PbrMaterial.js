@@ -146,6 +146,7 @@ const inMipLevelsUniform = new CGL.Uniform(PBRShader, "f", "MAX_REFLECTION_LOD",
 const inTonemappingExposureUniform = new CGL.Uniform(PBRShader, "f", "tonemappingExposure", inTonemappingExposure);
 const inDiffuseIntensityUniform = new CGL.Uniform(PBRShader, "f", "diffuseIntensity", inDiffuseIntensity);
 const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularIntensity", inSpecularIntensity);
+const inIntensity = new CGL.Uniform(PBRShader, "f", "envIntensity", 1);
 
 const inHeightUniform = new CGL.Uniform(PBRShader, "t", "_HeightMap", 0);
 const inLightmapUniform = new CGL.Uniform(PBRShader, "t", "_Lightmap", 0);
@@ -412,6 +413,8 @@ function doRender()
     {
         const pbrEnv = cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1];
 
+        inIntensity.setValue(pbrEnv.intensity);
+
         PBRShader.pushTexture(inIBLLUTUniform, pbrEnv.texIBLLUT.tex);
         PBRShader.pushTexture(inIrradianceUniform, pbrEnv.texDiffIrr.tex, cgl.gl.TEXTURE_CUBE_MAP);
         PBRShader.pushTexture(inPrefilteredUniform, pbrEnv.texPreFiltered.tex, cgl.gl.TEXTURE_CUBE_MAP);
@@ -420,6 +423,7 @@ function doRender()
         PBRShader.toggleDefine("USE_PARALLAX_CORRECTION", pbrEnv.UseParallaxCorrection);
         if (pbrEnv.UseParallaxCorrection)
         {
+            inPCOrigIntensitysetValue(pbrEnv.PCOrigin);
             inPCOrigin.setValue(pbrEnv.PCOrigin);
             inPCboxMin.setValue(pbrEnv.PCboxMin);
             inPCboxMax.setValue(pbrEnv.PCboxMax);
