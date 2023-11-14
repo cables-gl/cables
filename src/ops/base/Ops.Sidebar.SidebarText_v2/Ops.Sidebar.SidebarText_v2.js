@@ -37,17 +37,6 @@ function onLabelTextChanged()
 {
     const labelText = labelPort.get();
     label.innerHTML = labelText;
-    if (CABLES.UI)
-    {
-        if (labelText && typeof labelText === "string")
-        {
-            op.setTitle("Text: " + labelText.substring(0, 10)); // display first 10 characters of text in op title
-        }
-        else
-        {
-            op.setTitle("Text");
-        }
-    }
 }
 
 function onParentChanged()

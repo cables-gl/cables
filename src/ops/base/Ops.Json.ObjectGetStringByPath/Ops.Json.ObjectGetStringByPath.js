@@ -1,14 +1,23 @@
-const objectIn = op.inObject("Object");
-const pathIn = op.inString("Path");
-const returnPathIn = op.inBool("Output path if missing", false);
-const resultOut = op.outString("Output");
-const foundOut = op.outBool("Found");
+const
+    objectIn = op.inObject("Object"),
+    pathIn = op.inString("Path"),
+    returnPathIn = op.inBool("Output path if missing", false),
+    resultOut = op.outString("Output"),
+    foundOut = op.outBool("Found");
 
 objectIn.ignoreValueSerialize = true;
 
-objectIn.onChange = update;
-pathIn.onChange = update;
-returnPathIn.onChange = update;
+objectIn.onChange =
+    pathIn.onChange =
+    returnPathIn.onChange = update;
+
+pathIn.on("change", updateUi);
+updateUi();
+function updateUi()
+{
+    if (!pathIn.get())op.setUiError("nokey", "Missing Key Value");
+    else op.setUiError("nokey", null);
+}
 
 function update()
 {

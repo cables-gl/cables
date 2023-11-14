@@ -257,7 +257,7 @@ function onLabelTextChanged()
 {
     const labelText = labelPort.get();
     label.textContent = labelText;
-    if (CABLES.UI) op.setTitle("Slider: " + labelText);
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
 }
 
 function onParentChanged()

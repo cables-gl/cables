@@ -41,7 +41,9 @@ function onLabelTextChanged()
     label.textContent = labelText;
     if (CABLES.UI)
     {
-        op.setTitle("Value: " + labelText);
+        op.setUiAttrib({ "extendTitle": labelText });
+
+        // op.setTitle("Value: " + labelText);
     }
 }
 

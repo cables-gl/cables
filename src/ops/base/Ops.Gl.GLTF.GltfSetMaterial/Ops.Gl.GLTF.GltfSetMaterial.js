@@ -6,7 +6,6 @@ const
 inName.onChange =
 inShader.onChange = function ()
 {
-    op.setTitle("Material " + inName.get());
-
+    op.setUiAttrib({ "extendTitle": name });
     outMat.setRef(inShader.get() || op.patch.cgl.getDefaultShader());
 };

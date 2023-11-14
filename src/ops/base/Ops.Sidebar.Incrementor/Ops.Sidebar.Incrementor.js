@@ -7,17 +7,17 @@ const inStepsize = op.inValue("stepsize", 1);
 const inValues = op.inArray("Values");
 
 // outputs
-var siblingsPort = op.outObject("childs");
-var outValue = op.outNumber("value");
+let siblingsPort = op.outObject("childs");
+let outValue = op.outNumber("value");
 
 // vars
 let currentPosition = 0;
 
-var containerEl = document.createElement("div");
+let containerEl = document.createElement("div");
 containerEl.classList.add("sidebar__item");
-var label = document.createElement("div");
+let label = document.createElement("div");
 label.classList.add("sidebar__item-label");
-var labelTextEl = document.createTextNode(labelPort.get());
+let labelTextEl = document.createTextNode(labelPort.get());
 label.appendChild(labelTextEl);
 containerEl.appendChild(label);
 
@@ -25,7 +25,7 @@ const innerContainer = document.createElement("span");
 innerContainer.classList.add("sidebar__item__right");
 
 // value
-var valueEl = document.createElement("span");
+let valueEl = document.createElement("span");
 valueEl.style.marginRight = "10px";
 
 let valueText = document.createTextNode(inMin.get());
@@ -38,27 +38,27 @@ valueEl.appendChild(valueText);
 innerContainer.appendChild(valueEl);
 
 // previous
-var prevEl = document.createElement("span");
+let prevEl = document.createElement("span");
 prevEl.classList.add("sidebar--button");
 prevEl.style.marginRight = "3px";
-var prevInput = document.createElement("div");
+let prevInput = document.createElement("div");
 prevInput.classList.add("sidebar__button-input");
 prevInput.classList.add("minus");
 prevEl.appendChild(prevInput);
 prevInput.addEventListener("click", onPrev);
-var prevText = document.createTextNode("-");
+let prevText = document.createTextNode("-");
 prevInput.appendChild(prevText);
 innerContainer.appendChild(prevEl);
 
 // next
-var nextEl = document.createElement("span");
+let nextEl = document.createElement("span");
 nextEl.classList.add("sidebar--button");
-var nextInput = document.createElement("div");
+let nextInput = document.createElement("div");
 nextInput.classList.add("sidebar__button-input");
 nextInput.classList.add("plus");
 nextEl.appendChild(nextInput);
 nextInput.addEventListener("click", onNext);
-var nextText = document.createTextNode("+");
+let nextText = document.createTextNode("+");
 nextInput.appendChild(nextText);
 
 innerContainer.appendChild(nextEl);
@@ -79,17 +79,17 @@ function onValueChange()
     if (Array.isArray(values))
     {
         value = values[currentPosition];
-        inMin.setUiAttribs({ greyout: true });
+        inMin.setUiAttribs({ "greyout": true });
         inMax.set(values.length - 1);
-        inMax.setUiAttribs({ greyout: true });
-        inStepsize.setUiAttribs({ greyout: true });
+        inMax.setUiAttribs({ "greyout": true });
+        inStepsize.setUiAttribs({ "greyout": true });
         inStepsize.set(1);
     }
     else
     {
-        inMin.setUiAttribs({ greyout: false });
-        inMax.setUiAttribs({ greyout: false });
-        inStepsize.setUiAttribs({ greyout: false });
+        inMin.setUiAttribs({ "greyout": false });
+        inMax.setUiAttribs({ "greyout": false });
+        inStepsize.setUiAttribs({ "greyout": false });
     }
     outValue.set(value);
     valueText.textContent = value;
@@ -143,7 +143,7 @@ function onPrev()
 
 function onParentChanged()
 {
-    var parent = parentPort.get();
+    let parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(containerEl);
@@ -159,13 +159,10 @@ function onParentChanged()
 
 function onLabelTextChanged()
 {
-    var labelText = labelPort.get();
+    let labelText = labelPort.get();
     label.textContent = labelText;
 
-    if (CABLES.UI)
-    {
-        op.setTitle(labelText);
-    }
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
 }
 
 function onDelete()

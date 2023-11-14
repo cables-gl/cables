@@ -61,7 +61,7 @@ class PixelReader
     }
 
 
-    read(cgl, fb, textureType, x, y, w, h, finishedcb)
+    read(cgl, fb, pixelFormat, x, y, w, h, finishedcb)
     {
         if (CABLES.UI)
             if (!CABLES.UI.loaded || performance.now() - CABLES.UI.loadedTime < 1000) return;
@@ -69,30 +69,35 @@ class PixelReader
         if (!this._finishedFence) return;
 
         const gl = cgl.gl;
-        let channelType = gl.UNSIGNED_BYTE;
         let bytesPerItem = 1;
 
         if (cgl.aborted) return;
         if (!fb) return;
 
-        const isFloatingPoint = textureType == CGL.Texture.TYPE_FLOAT;
-        const numItems = 4 * w * h;
+        if (pixelFormat === CGL.Texture.TYPE_FLOAT) pixelFormat = CGL.Texture.PFORMATSTR_RGBA32F;
+        // let isFloatingPoint = pixelFormat == CGL.Texture.TYPE_FLOAT; // old parameter was "textureType", not iots pixelformat, keeping this for compatibility...
 
-        if (isFloatingPoint)
-        {
-            channelType = gl.FLOAT;
-            bytesPerItem = 4;
-        }
+        let isFloatingPoint = CGL.Texture.isPixelFormatFloat(pixelFormat);
+
+        if (isFloatingPoint)bytesPerItem = 4;
+
+
+        const pixelInfo = CGL.Texture.setUpGlPixelFormat(cgl, pixelFormat);
+
+        const numItems = pixelInfo.numColorChannels * w * h * 4;
 
         if (w == 0 || h == 0 || numItems == 0) return;
 
         if (!this._pixelData || this._size != numItems * bytesPerItem)
         {
-            if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
+            if (isFloatingPoint) this._pixelData = new Float32Array(numItems * bytesPerItem);
             else this._pixelData = new Uint8Array(numItems);
 
             this._size = numItems * bytesPerItem;
         }
+
+        let channelType = gl.UNSIGNED_BYTE;
+        if (isFloatingPoint)channelType = gl.FLOAT;
 
         if (this._size == 0 || !this._pixelData)
         {
@@ -108,9 +113,9 @@ class PixelReader
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
             cgl.profileData.profileFencedPixelRead++;
-
             gl.readPixels(
-                x, y, w, h, gl.RGBA, channelType, 0
+                x, y, w, h, gl.RGBA, pixelInfo.glDataType, 0
+                // x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0
             );
 
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);

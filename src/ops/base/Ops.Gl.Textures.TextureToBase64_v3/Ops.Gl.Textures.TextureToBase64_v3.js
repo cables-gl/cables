@@ -44,45 +44,44 @@ function update()
         return;
     }
 
-    pixelReader.read(cgl, fb, inTex.get().textureType, 0, 0, width, height,
-        (pixel) =>
+    pixelReader.read(cgl, fb, inTex.get().pixelFormat, 0, 0, width, height, (pixel) =>
+    {
+        // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+        // const data = new Uint8Array(width * height * 4);
+        // gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data);
+        // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext("2d");
+
+        // Copy the pixels to a 2D canvas
+        const imageData = context.createImageData(width, height);
+        imageData.data.set(pixel);
+
+        const data2 = imageData.data;
+
+        // flip image
+        Array.from({ "length": height }, (val, i) => { return data2.slice(i * width * 4, (i + 1) * width * 4); })
+            .forEach((val, i) => { return data2.set(val, (height - i - 1) * width * 4); });
+
+        context.putImageData(imageData, 0, 0);
+        let dataString = "";
+        if (jpeg.get())
         {
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-            // const data = new Uint8Array(width * height * 4);
-            // gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data);
-            // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-
-            canvas.width = width;
-            canvas.height = height;
-            const context = canvas.getContext("2d");
-
-            // Copy the pixels to a 2D canvas
-            const imageData = context.createImageData(width, height);
-            imageData.data.set(pixel);
-
-            const data2 = imageData.data;
-
-            // flip image
-            Array.from({ "length": height }, (val, i) => { return data2.slice(i * width * 4, (i + 1) * width * 4); })
-                .forEach((val, i) => { return data2.set(val, (height - i - 1) * width * 4); });
-
-            context.putImageData(imageData, 0, 0);
-            let dataString = "";
-            if (jpeg.get())
-            {
-                dataString = canvas.toDataURL("image/jpeg", 1.0);
-            }
-            else
-            {
-                dataString = canvas.toDataURL();
-            }
-            if (!dataUrl.get())
-            {
-                dataString = dataString.split(",", 2)[1];
-            }
-            outString.set(dataString);
-            outLoading.set(false);
-        });
+            dataString = canvas.toDataURL("image/jpeg", 1.0);
+        }
+        else
+        {
+            dataString = canvas.toDataURL();
+        }
+        if (!dataUrl.get())
+        {
+            dataString = dataString.split(",", 2)[1];
+        }
+        outString.set(dataString);
+        outLoading.set(false);
+    });
 }
 
 function dataURIToBlob(dataURI, callback)

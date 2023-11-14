@@ -77,10 +77,7 @@ function onLabelTextChanged()
 {
     let labelText = labelPort.get();
     headerTitleText.textContent = labelText;
-    if (CABLES.UI)
-    {
-        op.setTitle("Group: " + labelText);
-    }
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
 }
 
 function onParentChanged()

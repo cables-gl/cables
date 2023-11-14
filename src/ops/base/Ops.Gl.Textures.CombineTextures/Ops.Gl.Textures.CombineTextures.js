@@ -131,7 +131,6 @@ function getSize()
         h = inTexA.get().height;
     }
 
-    console.log("size", w, h);
     return [w, h];
 }
 
@@ -149,16 +148,15 @@ function initShader()
 
     currentSize = getSize();
 
-    tc = new CGL.CopyTexture(cgl, "combinetextures",
-        {
-            "shader": attachments.rgbe2fp_frag,
-            "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
-            "filter": filter,
-            "wrap": wrap,
-            "width": currentSize[0],
-            "height": currentSize[1]
+    tc = new CGL.CopyTexture(cgl, "combinetextures", {
+        "shader": attachments.rgbe2fp_frag,
+        "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
+        "filter": filter,
+        "wrap": wrap,
+        "width": currentSize[0],
+        "height": currentSize[1]
 
-        });
+    });
 
     unitexR = new CGL.Uniform(tc.bgShader, "t", "texR", 0);
     unitexG = new CGL.Uniform(tc.bgShader, "t", "texG", 1);

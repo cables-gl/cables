@@ -29,7 +29,7 @@
             {
                 "type": 0,
                 "name": "Found",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
