@@ -84,7 +84,7 @@ class PixelReader
 
         const pixelInfo = CGL.Texture.setUpGlPixelFormat(cgl, pixelFormat);
 
-        const numItems = pixelInfo.numColorChannels * w * h * 4;
+        const numItems = pixelInfo.numColorChannels * w * h;
 
         if (w == 0 || h == 0 || numItems == 0) return;
 
