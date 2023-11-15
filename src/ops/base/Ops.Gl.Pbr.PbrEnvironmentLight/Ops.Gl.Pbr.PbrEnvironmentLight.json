@@ -33,6 +33,11 @@
                 "name": "render"
             },
             {
+                "type": 0,
+                "name": "Intensity",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "RGBE Environment map",
                 "objType": "texture"

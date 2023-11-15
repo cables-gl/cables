@@ -66,8 +66,7 @@ function buildMesh()
     for (let i = 0; i < thePoints.length / 3; i++)
     {
         verts.push(
-            max, min, 0, 0, min, 0, max, max, 0,
-            0, min, 0, 0, max, 0, max, max, 0
+            max, min, 0, 0, min, 0, max, max, 0, 0, min, 0, 0, max, 0, max, max, 0
         );
     }
     geom.vertices = verts;
