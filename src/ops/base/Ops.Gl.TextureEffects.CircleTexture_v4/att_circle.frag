@@ -51,6 +51,7 @@ void main()
         #ifndef FALLOFF_SMOOTHSTEP
             fade+=0.0001;
             if(dist>inner*sz && dist<sz+fade)v=1.0-((dist-sz)/(fade));
+            v=pow(v,5.0);
         #endif
     }
 
