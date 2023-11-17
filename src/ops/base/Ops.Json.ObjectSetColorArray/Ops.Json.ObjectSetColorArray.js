@@ -5,7 +5,11 @@ const
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1);
+    a = op.inValueSlider("a", 1),
+    outR = op.outNumber("Out R"),
+    outG = op.outNumber("Out G"),
+    outB = op.outNumber("Out B"),
+    outA = op.outNumber("Out A");
 
 r.setUiAttribs({ "colorPick": true });
 
@@ -23,6 +27,11 @@ function update()
     if (inKey.get()) newObj[inKey.get()] = [r.get(), g.get(), b.get(), a.get()];
 
     outObject.setRef(newObj);
+
+    outR.set(r.get());
+    outG.set(g.get());
+    outB.set(b.get());
+    outA.set(a.get());
 }
 
 inKey.onChange = () =>
