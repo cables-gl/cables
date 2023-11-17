@@ -64,7 +64,7 @@ function create()
     else if (pivot == "left") x = 0;
 
     pivot = pivotY.get();
-    if (pivot == "top") y = -w;
+    if (pivot == "top") y = -h;
     else if (pivot == "bottom") y = 0;
 
     let uvLeft = inUVScalar.get();

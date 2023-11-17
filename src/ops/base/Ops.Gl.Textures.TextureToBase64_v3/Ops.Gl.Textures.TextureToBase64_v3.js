@@ -17,7 +17,12 @@ let pixelReader = new CGL.PixelReader();
 
 jpeg.onChange =
     dataUrl.onChange =
-    start.onTriggered = update;
+    start.onTriggered = retrySoon;
+
+function retrySoon()
+{
+    op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
+}
 
 function update()
 {
@@ -44,7 +49,7 @@ function update()
         return;
     }
 
-    pixelReader.read(cgl, fb, inTex.get().pixelFormat, 0, 0, width, height, (pixel) =>
+    let retry = !pixelReader.read(cgl, fb, inTex.get().pixelFormat, 0, 0, width, height, (pixel) =>
     {
         // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
         // const data = new Uint8Array(width * height * 4);
@@ -54,7 +59,6 @@ function update()
         canvas.width = width;
         canvas.height = height;
         const context = canvas.getContext("2d");
-
         // Copy the pixels to a 2D canvas
         const imageData = context.createImageData(width, height);
         imageData.data.set(pixel);
@@ -82,6 +86,8 @@ function update()
         outString.set(dataString);
         outLoading.set(false);
     });
+
+    if (retry)setTimeout(retrySoon.bind(this), 100);
 }
 
 function dataURIToBlob(dataURI, callback)
