@@ -71,6 +71,26 @@
             {
                 "type": 2,
                 "name": "Result Object"
+            },
+            {
+                "type": 0,
+                "name": "Out R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Out G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Out B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Out A",
+                "subType": "number"
             }
         ]
     },

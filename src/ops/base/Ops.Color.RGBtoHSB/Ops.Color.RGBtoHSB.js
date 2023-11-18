@@ -6,6 +6,7 @@ const
     outS = op.outNumber("Saturation"),
     outB = op.outNumber("Brightness");
 
+inR.setUiAttribs({ "colorPick": true });
 inR.onChange = inG.onChange = inB.onChange = update;
 
 /**
