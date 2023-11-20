@@ -8,7 +8,8 @@ result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
 op.setUiAttrib({ "extendTitlePort": key.name });
 
-data.onChange = update;
+data.onChange =
+    key.onChange = update;
 
 key.on("change", updateUi);
 updateUi();
