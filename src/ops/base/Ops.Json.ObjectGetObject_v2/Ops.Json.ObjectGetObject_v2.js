@@ -9,7 +9,7 @@ data.ignoreValueSerialize = true;
 op.setUiAttrib({ "extendTitlePort": key.name });
 
 key.onChange =
-data.onChange = update;
+    data.onChange = update;
 
 key.on("change", updateUi);
 updateUi();
