@@ -46,6 +46,7 @@ function setDefaultValues()
     {
         valuePort.set(defaultValue);
     });
+    update();
 }
 
 /**
