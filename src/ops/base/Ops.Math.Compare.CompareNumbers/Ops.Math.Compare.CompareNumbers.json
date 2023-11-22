@@ -13,17 +13,18 @@
         "portsIn": [
             {
                 "type": 0,
-                "name": "Comparison mode index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Value in",
                 "subType": "number"
             },
             {
                 "type": 0,
+                "name": "Comparison mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Condition value",
+                "uititle": "Condition value",
                 "subType": "number"
             },
             {
