@@ -1,0 +1,59 @@
+{
+    "id": "b058255d-2193-4399-bf40-793558362d6f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1700499004386
+        },
+        {
+            "message": "Ops.Patch.PbY0wsL.XYZMultiply renamed to Ops.Math.Multiply3Numbers",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1700638657224
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "ResultR",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "ResultG",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "ResultB",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1700499131748
+}
