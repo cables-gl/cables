@@ -3,6 +3,7 @@ const
     inWarning1 = op.inBool("Warning", false),
     inUiError = op.inBool("Error", false),
     inUiHint = op.inBool("Hint", false),
+    inNotWorking = op.inBool("Not Working", false),
     inUiLoading = op.inBool("Loading", false),
     innum = op.inFloatSlider("Slider", 0),
     inResize = op.inBool("Resizable"),
@@ -25,7 +26,7 @@ const
     outBlah = op.outNumber("Something");
 
 op.setPortGroup("Greyout", [inSwit, ingreyoutLine]);
-op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError, inUiLoading]);
+op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError, inNotWorking, inUiLoading]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
 op.setPortGroup("Crash", [inExc, inErrorFloat]);
@@ -67,6 +68,12 @@ inUiHint.onChange = () =>
 {
     if (inUiHint.get()) op.setUiError("Hint1", "This is a hint!", 0);
     else op.setUiError("Hint1", null);
+};
+
+inNotWorking.onChange = () =>
+{
+    if (inNotWorking.get()) op.setUiError("Warn3", "Warning two", 3);
+    else op.setUiError("Warn3", null);
 };
 
 inUiError.onChange = () =>

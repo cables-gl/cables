@@ -79,7 +79,7 @@ const VarSetOpWrapper = class
     _updateName()
     {
         const varname = this._varNamePort.get();
-        this._op.setTitle("var set ");
+        this._op.setTitle("var set");
         this._op.setUiAttrib({ "extendTitle": "#" + varname });
 
         this._updateErrorUi();
@@ -257,7 +257,7 @@ const VarGetOpWrapper = class
         if (this._variable)
         {
             this._op.setUiError("unknownvar", null);
-            this._op.setTitle("var get ");
+            this._op.setTitle("var get");
             this._op.setUiAttrib({ "extendTitle": "#" + this._varnamePort.get() });
             if (this._valueOutPort) this._valueOutPort.set(this._variable.getValue());
         }
