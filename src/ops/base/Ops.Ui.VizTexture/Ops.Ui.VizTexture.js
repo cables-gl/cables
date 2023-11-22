@@ -179,8 +179,9 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
     }
 
-    let numX = (10 * layer.width / layer.height);
-    let stepY = (layer.height / 10);
+    let layerHeight = layer.height;
+    let numX = (10 * layer.width / layerHeight);
+    let stepY = (layerHeight / 10);
     let stepX = (layer.width / numX);
     for (let x = 0; x < numX; x++)
         for (let y = 0; y < 10; y++)
@@ -192,12 +193,26 @@ op.renderVizLayer = (ctx, layer) =>
 
     ctx.fillStyle = "#222";
     const borderLeft = (layer.width - sizeImg[0]) / 2;
-    const borderTop = (layer.height - sizeImg[1]) / 2;
+    const borderTop = (layerHeight - sizeImg[1]) / 2;
+
+    let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
+    let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
+    let imgSizeW = sizeImg[0];
+    let imgSizeH = sizeImg[1];
+
+    if (layerHeight - sizeImg[1] < 0)
+    {
+        imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2,
+        imgPosY = layer.y,
+        imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
+        imgSizeH = layerHeight;
+    }
+
     ctx.fillRect(
-        layer.x, layer.y, borderLeft, (layer.height)
+        layer.x, layer.y, imgPosX - layer.x, layerHeight
     );
     ctx.fillRect(
-        layer.x + sizeImg[0] + borderLeft, layer.y, borderLeft, (layer.height)
+        layer.x + imgSizeW + imgPosX - layer.x, layer.y, layer.x + imgSizeW, layerHeight
     );
     ctx.fillRect(
         layer.x, layer.y, layer.width, borderTop
@@ -215,7 +230,7 @@ op.renderVizLayer = (ctx, layer) =>
             layer.x,
             layer.y,
             layer.width,
-            layer.height * 5);// workaround filtering problems
+            layerHeight * 5);// workaround filtering problems
     if (sizeTex[0] == 1)
         ctx.drawImage(cgl.canvas,
             0,
@@ -225,81 +240,98 @@ op.renderVizLayer = (ctx, layer) =>
             layer.x,
             layer.y,
             layer.width * 5,
-            layer.height); // workaround filtering problems
+            layerHeight); // workaround filtering problems
     else
         try
         {
-            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layer.height != 0)
+            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0)
+            // if(layerHeight - sizeImg[1]>=0)
                 ctx.drawImage(cgl.canvas,
                     0,
                     0,
                     s[0],
                     s[1],
-                    layer.x + (layer.width - sizeImg[0]) / 2,
-                    layer.y + (layer.height - sizeImg[1]) / 2,
-                    sizeImg[0],
-                    sizeImg[1]);
+                    imgPosX,
+                    imgPosY,
+                    imgSizeW,
+                    imgSizeH);
+            // else
+            //     ctx.drawImage(cgl.canvas,
+            //         0,
+            //         0,
+            //         s[0],
+            //         s[1],
+            //         layer.x + (layer.width - sizeImg[0]*layerHeight/sizeImg[1]) / 2,
+            //         layer.y ,
+            //         sizeImg[0]*layerHeight/sizeImg[1],
+            //         layerHeight);
         }
         catch (e)
         {
-            console.log("canvas drawimage exception...");
+            console.log("canvas drawimage exception...", e);
         }
 
-    let info = "unknown";
-
-    if (port.get() && port.get().getInfoOneLine) info = port.get().getInfoOneLine();
+    let info = "";
 
     if (inShowInfo.get())
     {
-        ctx.save();
-        ctx.scale(layer.scale, layer.scale);
-        ctx.font = "normal 10px sourceCodePro";
-        ctx.fillStyle = "#000";
-        ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
-        ctx.fillStyle = "#aaa";
-        ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
-        ctx.restore();
+        if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
+
+        // ctx.save();
+        // ctx.scale(layer.scale, layer.scale);
+        // ctx.font = "normal 10px sourceCodePro";
+        // ctx.fillStyle = "#000";
+        // ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
+        // ctx.fillStyle = "#aaa";
+        // ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
+        // ctx.restore();
     }
 
     if (inPickColor.get())
     {
-        ctx.save();
-        ctx.scale(layer.scale, layer.scale);
-        ctx.font = "normal 10px sourceCodePro";
-        ctx.fillStyle = "#000";
-        ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
-        ctx.fillStyle = "#aaa";
-        ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
+        info += colorString + "\n";
 
-        ctx.restore();
+        // ctx.save();
+        // ctx.scale(layer.scale, layer.scale);
+        // ctx.font = "normal 10px sourceCodePro";
+        // ctx.fillStyle = "#000";
+        // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
+        // ctx.fillStyle = "#aaa";
+        // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
+
+        // ctx.restore();
+
+        const x = imgPosX + imgSizeW * inX.get();
+        const y = imgPosY + imgSizeH * inY.get();
 
         ctx.fillStyle = "#000";
         ctx.fillRect(
-            layer.x + layer.width * inX.get() - 1,
-            layer.y + sizeImg[1] * inY.get() - 10 + borderTop,
+            x - 1,
+            y - 10,
             3,
             20);
 
         ctx.fillRect(
-            layer.x + layer.width * inX.get() - 10,
-            layer.y + sizeImg[1] * inY.get() - 1 + borderTop,
+            x - 10,
+            y - 1,
             20,
             3);
 
         ctx.fillStyle = "#fff";
         ctx.fillRect(
-            layer.x + layer.width * inX.get() - 1,
-            layer.y + sizeImg[1] * inY.get() - 10 + borderTop,
+            x - 1,
+            y - 10,
             1,
             20);
 
         ctx.fillRect(
-            layer.x + layer.width * inX.get() - 10,
-            layer.y + sizeImg[1] * inY.get() - 1 + borderTop,
+            x - 10,
+            y - 1,
             20,
             1);
     }
 
+    op.setUiAttrib({ "comment": info });
     outInfo.set(info);
 
     if (inPickColor.get())
@@ -324,8 +356,31 @@ op.renderVizLayer = (ctx, layer) =>
 
         pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
         {
-            if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))colorString = Math.floor(pixel[0] / 255 * 100) / 100 + "," + Math.floor(pixel[1] / 255 * 100) / 100 + "," + Math.floor(pixel[2] / 255 * 100) / 100 + "," + Math.floor(pixel[3] / 255 * 100) / 100;
-            else colorString = Math.round(pixel[0] * 100) / 100 + "," + Math.round(pixel[1] * 100) / 100 + "," + Math.round(pixel[2] * 100) / 100 + "," + Math.round(pixel[3] * 100) / 100;
+            if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
+            {
+                colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
+                if (!isNaN(pixel[1]))colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
+                if (!isNaN(pixel[2]))colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
+                if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
+                colorString += "\n";
+
+                if (
+                    realTexture.pixelFormat.indexOf("ubyte") > 0)
+                {
+                    colorString += "Pixel UByte: ";
+                    colorString += Math.round(pixel[0]);
+                    if (!isNaN(pixel[1]))colorString += ", " + Math.round(pixel[1]);
+                    if (!isNaN(pixel[2]))colorString += ", " + Math.round(pixel[2]);
+                    if (!isNaN(pixel[3]))colorString += ", " + Math.round(pixel[3]);
+
+                    colorString += "\n";
+                }
+            }
+            else
+            {
+                colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
+                colorString += "\n";
+            }
         });
     }
 
