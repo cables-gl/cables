@@ -66,6 +66,12 @@
             },
             {
                 "type": 0,
+                "name": "Not Working",
+                "group": "Warnings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Loading",
                 "group": "Warnings",
                 "subType": "boolean"
