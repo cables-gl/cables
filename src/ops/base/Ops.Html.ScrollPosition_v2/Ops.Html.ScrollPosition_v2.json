@@ -2,6 +2,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": 1,
+                "name": "Update"
+            },
+            {
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
@@ -9,10 +13,6 @@
             {
                 "type": 1,
                 "name": "Scroll to top"
-            },
-            {
-                "type": 1,
-                "name": "Update"
             }
         ],
         "portsOut": [

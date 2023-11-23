@@ -1,7 +1,7 @@
 const
+    inUpdate = op.inTriggerButton("Update"),
     inEle = op.inObject("Element", null, "element"),
     inScrollTop = op.inTriggerButton("Scroll to top"),
-    inUpdate = op.inTriggerButton("Update"),
 
     sleft = op.addOutPort(new CABLES.Port(op, "left")),
     stop = op.addOutPort(new CABLES.Port(op, "top")),
@@ -10,6 +10,8 @@ const
 
 let el = null;
 let oldEle = null;
+
+op.toWorkPortsNeedToBeLinked(inUpdate);
 
 updateScroll();
 
@@ -30,7 +32,8 @@ function updateScroll()
 
     if (!el)
     {
-        el = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body);
+        // el = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body);
+        el = document.body;
     }
 
     if (!el) return console.log("no ele scrollpos!");
