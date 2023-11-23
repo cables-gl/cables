@@ -1,0 +1,249 @@
+{
+    "id": "13bdac27-5da7-4311-890b-6a7e49d72040",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1615390291299
+        },
+        {
+            "message": "Ops.User.pandur.RouteTriggerString renamed to Ops.Trigger.RouteTriggerString",
+            "author": "pandur",
+            "date": 1615390841610
+        },
+        {
+            "message": "cloned op from Ops.Trigger.RouteTriggerString",
+            "author": "pandur",
+            "date": 1700757356299
+        },
+        {
+            "message": "Ops.Patch.PWnb2ZL.RouteTriggerString2 renamed to Ops.Trigger.RouteTriggerString_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1700757450126
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1700757356299,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 5,
+                "name": "Switch Value"
+            },
+            {
+                "type": 5,
+                "name": "String 0"
+            },
+            {
+                "type": 5,
+                "name": "String 1"
+            },
+            {
+                "type": 5,
+                "name": "String 2"
+            },
+            {
+                "type": 5,
+                "name": "String 3"
+            },
+            {
+                "type": 5,
+                "name": "String 4"
+            },
+            {
+                "type": 5,
+                "name": "String 5"
+            },
+            {
+                "type": 5,
+                "name": "String 6"
+            },
+            {
+                "type": 5,
+                "name": "String 7"
+            },
+            {
+                "type": 5,
+                "name": "String 8"
+            },
+            {
+                "type": 5,
+                "name": "String 9"
+            },
+            {
+                "type": 5,
+                "name": "String 10"
+            },
+            {
+                "type": 5,
+                "name": "String 11"
+            },
+            {
+                "type": 5,
+                "name": "String 12"
+            },
+            {
+                "type": 5,
+                "name": "String 13"
+            },
+            {
+                "type": 5,
+                "name": "String 14"
+            },
+            {
+                "type": 5,
+                "name": "String 15"
+            },
+            {
+                "type": 5,
+                "name": "String 16"
+            },
+            {
+                "type": 5,
+                "name": "String 17"
+            },
+            {
+                "type": 5,
+                "name": "String 18"
+            },
+            {
+                "type": 5,
+                "name": "String 19"
+            },
+            {
+                "type": 5,
+                "name": "String 20"
+            },
+            {
+                "type": 5,
+                "name": "String 21"
+            },
+            {
+                "type": 5,
+                "name": "String 22"
+            },
+            {
+                "type": 5,
+                "name": "String 23"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Switched Index",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 0"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 1"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 2"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 3"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 4"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 5"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 6"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 7"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 8"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 9"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 10"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 11"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 12"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 13"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 14"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 15"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 16"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 17"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 18"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 19"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 20"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 21"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 22"
+            },
+            {
+                "type": 1,
+                "name": "Trigger 23"
+            }
+        ]
+    },
+    "summary": "route trigger output by string",
+    "issues": "",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}
