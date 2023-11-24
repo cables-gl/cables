@@ -57,8 +57,7 @@ inExec.onTriggered = function ()
 
         mat4.multiply(cgl.mMatrix, cgl.mMatrix, m);
 
-        outMat.set(null);
-        outMat.set(m);
+        outMat.setRef(m);
     }
 
     next.trigger();

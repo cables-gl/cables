@@ -1,0 +1,121 @@
+{
+    "authorName": "pandur",
+    "created": 1700758268207,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Quality",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Output dataUrl",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Base64 string"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Converts a texture into a base-64 image string",
+    "docs": {
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "Input texture to be converted"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger to do the conversion, put this behind a TriggerLimiter or TriggerOnce"
+            },
+            {
+                "name": "Use JPEG",
+                "text": "Default is a PNG lossless image, this toggle asks explicitly for a JPEG"
+            },
+            {
+                "name": "Output dataUrl",
+                "text": "Choose whether to export a string that is only a Base64, or already as a DataUrl"
+            },
+            {
+                "name": "Base64 string",
+                "text": "The string conversion of the texture"
+            },
+            {
+                "name": "Loading",
+                "text": "Gives you the status of the conversion and whether it has finished"
+            }
+        ]
+    },
+    "id": "920090d2-63b2-4aae-8ca7-0b0aacf6bc93",
+    "issues": "",
+    "relatedops": [
+        "Base64ToTexture"
+    ],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Textures.TextureToBase64",
+            "author": "pandur",
+            "date": 1684941790516
+        },
+        {
+            "message": "Ops.Patch.Pg2VScx.TextureToBase64_2 renamed to Ops.Gl.Textures.TextureToBase64_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684941850017
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.TextureToBase64_v2",
+            "author": "pandur",
+            "date": 1686647152700
+        },
+        {
+            "message": " added core lib: cgl_pixelreader",
+            "type": "",
+            "author": "pandur",
+            "date": 1686647182008
+        },
+        {
+            "message": "Ops.Patch.P___SYovy.TextureToBase64_v2 renamed to Ops.Gl.Textures.TextureToBase64_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686647401397
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.TextureToBase64_v3",
+            "author": "pandur",
+            "date": 1700758268208
+        },
+        {
+            "message": "Ops.Patch.PWnb2ZL.TextureToBase64_v4 renamed to Ops.Gl.Textures.TextureToBase64_v4",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1700758421917
+        }
+    ],
+    "coreLibs": [
+        "cgl_pixelreader"
+    ]
+}

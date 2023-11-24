@@ -1,11 +1,18 @@
 const
     inTex = op.inTexture("Texture"),
     start = op.inTriggerButton("Download"),
+    inFormat = op.inSwitch("Format", ["PNG", "JPEG", "WEBP"], "PNG"),
+    inQuality = op.inFloatSlider("Quality", 0.9),
     fileName = op.inString("Filename", "screenshot"),
     outFinished = op.outBoolNum("Finished");
 
 const gl = op.patch.cgl.gl;
 let fb = null;
+
+inFormat.onChange = () =>
+{
+    inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
+};
 
 start.onTriggered = function ()
 {
@@ -57,7 +64,9 @@ start.onTriggered = function ()
 
     context.putImageData(imageData, 0, 0);
 
-    dataURIToBlob(canvas.toDataURL(),
+    const ext = inFormat.get().toLowerCase();
+
+    dataURIToBlob(canvas.toDataURL("image/" + ext, inQuality.get()),
         function (blob)
         {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -76,7 +85,7 @@ start.onTriggered = function ()
             else
             {
                 const anchor = document.createElement("a");
-                anchor.download = fileName.get() + ".png";
+                anchor.download = fileName.get() + "." + ext;
                 // anchor.target='_blank';
                 anchor.href = URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
@@ -92,5 +101,5 @@ function dataURIToBlob(dataURI, callback)
         len = binStr.length,
         arr = new Uint8Array(len);
     for (let i = 0; i < len; i++) arr[i] = binStr.charCodeAt(i);
-    callback(new Blob([arr], { "type": "image/png" }));
+    callback(new Blob([arr], { "type": "image/" + inFormat.get().toLowerCase() }));
 }

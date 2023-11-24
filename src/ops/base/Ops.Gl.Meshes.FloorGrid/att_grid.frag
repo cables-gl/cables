@@ -4,5 +4,5 @@ IN vec3 posFrag;
 void main()
 {
     outColor=posColor;
-    outColor.a*=(1.0-(length(posFrag)/30.0));
+    outColor.a*=clamp(1.0-(length(posFrag)/30.0),0.0,1.0);
 }
