@@ -63,7 +63,6 @@ function update()
     }
     if (!mesh)
     {
-        console.log("not found./../");
         outFound.set(false);
         return;
     }

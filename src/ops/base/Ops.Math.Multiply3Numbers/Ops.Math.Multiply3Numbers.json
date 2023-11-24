@@ -55,5 +55,9 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1700499131748
+    "created": 1700499131748,
+    "summary": "multiply three numbers",
+    "docs": {
+        "ports": []
+    }
 }

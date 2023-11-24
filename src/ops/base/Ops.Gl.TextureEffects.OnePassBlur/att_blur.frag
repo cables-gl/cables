@@ -53,7 +53,7 @@ void main()
 		//Set sample weight
 		float weight = 1./rad;
 		//Sample texture
-		vec4 samp = texture2D(tex,coord);
+		vec4 samp = texture(tex,coord);
 
 		//Add sample and weight totals
 		blur += samp * weight;

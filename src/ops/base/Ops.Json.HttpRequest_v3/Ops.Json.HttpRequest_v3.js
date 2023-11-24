@@ -75,23 +75,8 @@ function reload(addCachebuster, force = false)
                 // .then((res) => { return res.arrayBuffer(); })
                 .then((res) =>
                 {
-                    // if (inFile.get() != fileToLoad)
-                    // {
-                    //     cgl.patch.loading.finished(loadingId);
-                    //     loadingId = null;
-                    //     return;
-                    // }
-
-                    // boundingPoints = [];
-                    // maxTime = 0;
-                    // gltf = parseGltf(arrayBuffer);
-
-                    // finishLoading();
-                    console.log("loaded binary", res);
-
                     res.blob().then((b) =>
                     {
-                        console.log("blobby blob");
                         outStringBin.set(URL.createObjectURL(b));
                     });
 

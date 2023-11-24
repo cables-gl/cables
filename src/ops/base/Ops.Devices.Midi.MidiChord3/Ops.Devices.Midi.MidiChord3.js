@@ -49,8 +49,8 @@ const out1 = {
     "gateOut": gateOut1,
 };
 
-const noteIndexOut2 = op.outValue("Note Out 2");
-const velocityOut2 = op.outValue("Velocity 2");
+const noteIndexOut2 = op.outNumber("Note Out 2");
+const velocityOut2 = op.outNumber("Velocity 2");
 const gateOut2 = op.outBoolNum("Gate 2");
 
 const out2 = {
@@ -59,8 +59,8 @@ const out2 = {
     "gateOut": gateOut2,
 };
 
-const noteIndexOut3 = op.outValue("Note Out 3");
-const velocityOut3 = op.outValue("Velocity 3");
+const noteIndexOut3 = op.outNumber("Note Out 3");
+const velocityOut3 = op.outNumber("Velocity 3");
 const gateOut3 = op.outBoolNum("Gate 3");
 
 const out3 = {

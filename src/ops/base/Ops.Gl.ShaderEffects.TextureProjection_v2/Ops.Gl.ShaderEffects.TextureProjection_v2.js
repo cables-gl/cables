@@ -46,7 +46,7 @@ mod.addModule({
 });
 
 let head_frag = attachments.maptexture_frag;
-head_frag = head_frag.replace("{{BLENDCODE}}", CGL.TextureEffect.getBlendCode(3));
+// head_frag = head_frag.replace("{{BLENDCODE}}", CGL.TextureEffect.getBlendCode(3));
 
 mod.addModule({
     "title": op.name,
