@@ -33,10 +33,12 @@ function updateScroll()
     if (!el)
     {
         // el = (window.pageXOffset !== undefined) ? window.pageXOffset : (document.documentElement || document.body.parentNode || document.body);
-        el = document.body;
+        el = document.documentElement;
+        if (document.body.scrollTop > 0)el = document.body;
+        // if(document.documentElement.scrollTop>0)el=document.documentElement;
     }
 
-    if (!el) return console.log("no ele scrollpos!");
+    if (!el) return console.warn("[scrollposition] no ele scrollpos!");
     sleft.set(el.scrollLeft);
     stop.set(el.scrollTop);
 
@@ -51,6 +53,5 @@ function updateScroll()
 inScrollTop.onTriggered = () =>
 {
     if (el)el.scrollTo({ "top": Math.random() * 2, "behaviour": "smooth" });
-    // else console.log("scrollpos no element");
     updateScroll();
 };

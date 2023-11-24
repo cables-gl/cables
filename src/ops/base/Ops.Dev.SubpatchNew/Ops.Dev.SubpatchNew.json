@@ -44,5 +44,9 @@
     },
     "coreLibs": [
         "subpatchop"
-    ]
+    ],
+    "summary": "new subpatches",
+    "docs": {
+        "ports": []
+    }
 }

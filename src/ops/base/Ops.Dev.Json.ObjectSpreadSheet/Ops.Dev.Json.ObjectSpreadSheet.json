@@ -27,5 +27,9 @@
                 "name": "Result"
             }
         ]
+    },
+    "summary": "convinient object data editor",
+    "docs": {
+        "ports": []
     }
 }

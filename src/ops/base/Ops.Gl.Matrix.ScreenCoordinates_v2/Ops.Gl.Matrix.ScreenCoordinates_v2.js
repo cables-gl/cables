@@ -11,16 +11,18 @@ const trans = vec3.create();
 const m = mat4.create();
 const pos = vec3.create();
 const identVec = vec3.create();
-let div = 1;
+let div = -1;
+inUnit.onChange = updateUnit;
 
-inUnit.onChange = () =>
+function updateUnit()
 {
     if (inUnit.get() == "CSS")div = cgl.pixelDensity;
     else div = 1;
-};
+}
 
 exec.onTriggered = function ()
 {
+    if (div == -1)updateUnit();
     mat4.multiply(m, cgl.vMatrix, cgl.mMatrix);
 
     vec3.transformMat4(pos, identVec, m);
@@ -33,7 +35,7 @@ exec.onTriggered = function ()
     visi.set(pos[2] < 0.0 && xp > 0 && xp < vp[2] && yp > 0 && yp < vp[3]);
 
     x.set(xp / div);
-    y.set(vp[3] - yp / div);
+    y.set(vp[3] / div - yp / div);
 
     trigger.trigger();
 };

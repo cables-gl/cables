@@ -103,10 +103,9 @@
     "coreLibs": [
         "cgl_wireframes"
     ],
-    "collections": null,
-    "relatedops": null,
     "exampleProjectId": "mSeJ3E",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "just testing"
 }
