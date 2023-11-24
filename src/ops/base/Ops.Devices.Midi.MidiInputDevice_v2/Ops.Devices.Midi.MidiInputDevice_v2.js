@@ -356,8 +356,6 @@ function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
     const inputs = midi.inputs.values();
-    console.log(inputs);
-    // op.uiAttr({ "info": "no midi devices found" });
 
     const deviceNames = [];
 

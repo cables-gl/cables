@@ -268,7 +268,7 @@ op.renderVizLayer = (ctx, layer) =>
         }
         catch (e)
         {
-            console.log("canvas drawimage exception...", e);
+            console.error("canvas drawimage exception...", e);
         }
 
     let info = "";

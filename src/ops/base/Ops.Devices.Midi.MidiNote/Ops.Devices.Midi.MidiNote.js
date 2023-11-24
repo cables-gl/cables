@@ -36,7 +36,7 @@ const eventOut = op.outObject("MIDI Event Out");
 const triggerOut = op.outTrigger("Trigger Out");
 const currentNoteOut = op.outNumber("Current Note");
 const velocityOut = op.outNumber("Velocity");
-const gateOut = op.outValueBool("Gate");
+const gateOut = op.outBoolNum("Gate");
 const arrayOut = op.outArray("Velocity Array");
 arrayOut.set(velocityArray);
 

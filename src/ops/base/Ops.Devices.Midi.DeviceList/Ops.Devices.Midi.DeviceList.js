@@ -1,4 +1,4 @@
-const outNumDevices = op.outValue("Num Devices");
+const outNumDevices = op.outNumber("Num Devices");
 const outSupport = op.outValueBool("Midi Support");
 const outNames = op.outArray("Device Names");
 
