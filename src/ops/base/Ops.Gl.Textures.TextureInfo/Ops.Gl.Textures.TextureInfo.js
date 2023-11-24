@@ -1,5 +1,5 @@
 const
-    inTex = op.inObject("Texture"),
+    inTex = op.inObject("Texture", null, "texture"),
     outName = op.outNumber("Name"),
     outPixelFormat = op.outString("PixelFormat"),
     outWidth = op.outNumber("Width"),
