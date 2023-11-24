@@ -38,13 +38,5 @@
             }
         ]
     },
-    "todos": [
-        {
-            "message": "add error handling",
-            "author": "cables",
-            "id": "377bbe9c-80cf-4ffd-845c-ffbeb5041821",
-            "date": 1605510385309
-        }
-    ],
     "exampleProjectId": "UlL2G1"
 }
