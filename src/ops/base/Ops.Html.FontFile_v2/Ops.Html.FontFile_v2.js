@@ -23,7 +23,6 @@ op.patch.on("windowChanged",
     (win) =>
     {
         fontFaceObj = null;
-        console.log("window changed!");
         addStyle(win.document);
     });
 
@@ -69,7 +68,7 @@ function addStyle(_doc)
                 // op.logError("Font loading error! Current status", fontFaceObj.status);
             }).catch((f) =>
             {
-                console.log("catch ?!?!?!?!?!?!", f);
+                console.error("catch ", f);
             });
 
             fontFaceObj.load();
