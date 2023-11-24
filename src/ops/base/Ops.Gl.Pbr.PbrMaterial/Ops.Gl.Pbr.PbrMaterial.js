@@ -368,8 +368,6 @@ function updateLights()
             {
                 if (PBRLightStack[i] != cgl.frameStore.lightStack[i])
                 {
-                    console.log(PBRLightStack[i], cgl.frameStore.lightStack[i]);
-
                     changed = true;
                     break;
                 }
