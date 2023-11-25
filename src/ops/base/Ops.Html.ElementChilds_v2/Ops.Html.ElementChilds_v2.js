@@ -90,7 +90,6 @@ function rebuild()
         return;
     }
 
-
     if (!parent.querySelector)
     {
         outParent.set(null);
@@ -108,12 +107,11 @@ function rebuild()
         const p = inPorts[i].get();
         if (p && parent)
         {
-            if (!p.dataset)console.log("p no dataset ?!");
+            if (!p.dataset)console.warn("[elementChilds] p no dataset ?!");
             else p.dataset.cablesChildId = op.id + "_" + i;
             parent.appendChild(p);
         }
     }
 
-    outParent.set(null);
-    outParent.set(parent);
+    outParent.setRef(parent);
 }

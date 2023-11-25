@@ -131,8 +131,6 @@ exec.onTriggered = function ()
             });
         }
 
-        console.log(json);
-
         showCodeModal("shader uniforms", JSON.stringify(json, false, 2), "json");
 
         doUniformDump = false;

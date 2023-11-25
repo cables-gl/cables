@@ -12,83 +12,74 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger animation"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text",
                 "group": "HTML CSS"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Class",
                 "group": "HTML CSS"
             },
             {
-                "type": "0",
+                "type": 5,
                 "name": "Style",
-                "group": "HTML CSS",
-                "subType": "string"
+                "group": "HTML CSS"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "group": "HTML CSS",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Convert Line Breaks",
                 "group": "HTML CSS",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fade in",
                 "group": "Animation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Hold ",
                 "group": "Animation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fade out",
                 "group": "Animation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mode index",
+                "group": "Positioning",
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "mode",
-                "group": "Positioning"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Side index",
+                "group": "Positioning",
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Side",
-                "group": "Positioning"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Starting position",
                 "group": "Positioning",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ending position",
                 "group": "Positioning",
                 "subType": "number"
@@ -96,16 +87,16 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Finished trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Finished",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "DOM Element"
             }
         ]

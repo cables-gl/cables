@@ -8,7 +8,7 @@ const
     tex = op.inObject("texture"),
     outTrigger = op.outTrigger("trigger"),
     outPoints = op.outArray("Points"),
-    outPointsNum = op.outValue("NumPoints");
+    outPointsNum = op.outNumber("NumPoints");
 
 let fb = null,
     pixelData = null,

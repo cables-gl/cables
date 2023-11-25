@@ -5,51 +5,53 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event In",
                 "group": "MIDI"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "MIDI Channel index",
+                "group": "MIDI",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "NRPN Index",
                 "group": "NRPN",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normalize index",
+                "group": "NRPN",
                 "subType": "integer"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "learn"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "clear"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event Out"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "NRPN Index",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "NRPN Value",
                 "subType": "number"
             }

@@ -36,5 +36,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "debug",
+    "docs": {
+        "ports": []
     }
 }

@@ -210,7 +210,6 @@ function startRecording()
 
     mediaRecorder.ondataavailable = handleDataAvailable;
     mediaRecorder.start(1000);
-    console.log(mediaRecorder.videoBitsPerSecond);
     outState.set(mediaRecorder.state);
 
     if (inFPS.get() != 0)
@@ -273,7 +272,6 @@ function download()
     a.style.display = "none";
     a.href = url;
     const codec = mediaRecorder.mimeType;
-    // console.log("recorded codec", mediaRecorder.mimeType, mediaRecorder.videoBitsPerSecond);
     let ext = "webm";
     if (codec.indexOf("video/x-matroska") >= 0)ext = "mkv";
     if (codec.indexOf("video/mp4") >= 0)ext = "mp4";

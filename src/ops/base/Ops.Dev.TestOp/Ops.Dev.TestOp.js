@@ -15,15 +15,4 @@ const meshRect = new CGL.WireframeRect(cgl);
 trig.onTriggered = () =>
 {
     meshRect.render();
-    console.log(op.storage);
-    console.log(this.storage);
 };
-
-// op.setStorage({ "subPatchVer": 221 });
-
-// console.log(op.storage);
-
-// console.log(a.get());
-// console.log(this.storage);
-
-// console.log(JSON.stringify(this.uiAttribs));

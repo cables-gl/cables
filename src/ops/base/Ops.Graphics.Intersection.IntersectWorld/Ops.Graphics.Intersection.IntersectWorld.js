@@ -46,7 +46,7 @@ function renderBodies()
             CABLES.GL_MARKER.drawCube(op, body.size[0] / 2, body.size[1] / 2, body.size[2] / 2);
             cgl.popModelMatrix();
         }
-        else console.log("unknown col shape");
+        else console.warn("[intersectWorld] unknown col shape");
     }
 }
 
@@ -116,7 +116,7 @@ function checkCollisions()
                 }
                 else
                 {
-                    // console.log("unknown collision pair...");
+                    console.warn("unknown collision pair...");
                 }
             }
         }

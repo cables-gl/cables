@@ -1000,6 +1000,8 @@ const Op = function ()
         if (this.opId) op.opId = this.opId;
         if (this.patch.storeObjNames) op.objName = this.objName;
 
+        if (!this.enabled)op.disabled = true;
+
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
 
@@ -1366,6 +1368,8 @@ const Op = function ()
     {
         this.enabled = b;
         this.emitEvent("onEnabledChange", b);
+        if (!this.enabled) this.setUiError("_disabled", "Op is disabled", 0);
+        else this.setUiError("_disabled", null);
     };
 
     /**

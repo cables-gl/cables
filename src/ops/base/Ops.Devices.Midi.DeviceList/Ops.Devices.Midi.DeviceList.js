@@ -1,5 +1,5 @@
-const outNumDevices = op.outValue("Num Devices");
-const outSupport = op.outValueBool("Midi Support");
+const outNumDevices = op.outNumber("Num Devices");
+const outSupport = op.outBoolNum("Midi Support");
 const outNames = op.outArray("Device Names");
 
 let midi = null;

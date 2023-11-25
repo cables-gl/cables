@@ -2,7 +2,7 @@ const
     triggerAnim = op.inTriggerButton("Trigger animation"),
     inText = op.inString("Text", "Hello! <br> This is a pop up"),
     inClass = op.inString("Class"),
-    inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
+    inStyle = op.inStringEditor("Style", attachments.defaultstyle_txt, "none"),
     inVisible = op.inValueBool("Active", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
     fadeInDuration = op.inFloat("Fade in", 0.5),
@@ -93,6 +93,7 @@ function removeElement()
 {
     if (div && div.parentNode) div.parentNode.removeChild(div);
 }
+
 // inline css inisde div
 function updateStyle()
 {

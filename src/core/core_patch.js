@@ -303,6 +303,7 @@ Patch.prototype.getFilePath = function (filename)
     filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
     if (filename.indexOf("data:") === 0) return filename;
+    if (filename.indexOf("file:") === 0) return filename;
 
     filename = filename.replace("//", "/");
     return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
@@ -1010,6 +1011,7 @@ Patch.prototype.deSerialize = function (obj, options)
             op.portsInData = opData.portsIn;
             op._origData = JSON.parse(JSON.stringify(opData));
             op.storage = opData.storage;
+            if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
             for (const ipi in opData.portsIn)
             {

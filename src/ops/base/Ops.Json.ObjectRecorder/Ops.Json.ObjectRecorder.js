@@ -4,7 +4,7 @@ const
     download = op.inTriggerButton("download"),
     inObj = op.inObject("Object"),
     outArr = op.outArray("Result"),
-    numObjects = op.outValue("Num Objects");
+    numObjects = op.outNumber("Num Objects");
 let data = [];
 
 reset.onTriggered = function ()

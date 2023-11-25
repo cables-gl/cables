@@ -6,9 +6,9 @@ const clockStartOut = op.outTrigger("Clock Start");
 const clockStopOut = op.outTrigger("Clock Stop");
 const clockContinueOut = op.outTrigger("Clock Continue");
 
-let outBPM = op.outValue("BPM");
-let outBeatDuration = op.outValue("Tick Duration");
-let outSubTick = op.outValue("Sub Tick");
+let outBPM = op.outNumber("BPM");
+let outBeatDuration = op.outNumber("Tick Duration");
+let outSubTick = op.outNumber("Sub Tick");
 
 const fullNoteOut = op.outTrigger("1/1");
 const halfNoteOut = op.outTrigger("1/2");
