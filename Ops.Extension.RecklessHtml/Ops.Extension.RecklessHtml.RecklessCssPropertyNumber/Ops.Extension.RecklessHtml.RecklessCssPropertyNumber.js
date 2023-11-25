@@ -10,6 +10,8 @@ const
 op.setPortGroup("Element", [inEle]);
 op.setPortGroup("Attributes", [inProperty, inValue, inValueSuffix]);
 
+op.toWorkPortsNeedToBeLinked(inEle);
+
 inProperty.onChange = updateProperty;
 // inValue.onChange = update;
 // inValueSuffix.onChange = update;
