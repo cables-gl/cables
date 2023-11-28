@@ -17,8 +17,13 @@
         "portsIn": [
             {
                 "type": 0,
-                "name": "HDPI max Density",
+                "name": "FPS Limit",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reduce FPS not focussed",
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -27,8 +32,8 @@
             },
             {
                 "type": 0,
-                "name": "ClearAlpha",
-                "subType": "boolean"
+                "name": "Max Pixel Density",
+                "subType": "number"
             },
             {
                 "type": 0,
@@ -39,7 +44,7 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next"
+                "name": "trigger"
             },
             {
                 "type": 0,
@@ -49,6 +54,11 @@
             {
                 "type": 0,
                 "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Density",
                 "subType": "number"
             }
         ]

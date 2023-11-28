@@ -8,11 +8,17 @@ const
     outOrientationType = op.outString("Orientation Type", "");
 
 window.addEventListener("resize", update);
+op.patch.cgl.addEventListener("resize", update);
+
+const mqString = `(resolution: ${window.devicePixelRatio}dppx)`;
+const media = matchMedia(mqString);
+media.addEventListener("change", update);
 
 update();
 
 function update()
 {
+    console.log("canvasinfo update");
     outWidth.set(window.innerWidth);
     outHeight.set(window.innerHeight);
     outdevicePixelRatio.set(window.devicePixelRatio);

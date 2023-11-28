@@ -27,6 +27,7 @@ class CgCanvas
 
     get canvasEle() { return this._canvasEle; }
 
+
     setSize(w, h, ignorestyle)
     {
         if (this._oldWidthRp != w * this.pixelDensity || this._oldHeightRp != h * this.pixelDensity)
