@@ -1,0 +1,128 @@
+{
+    "id": "b11cd28f-d568-4544-84b0-ecfc4e332cd6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1572277544559
+        },
+        {
+            "message": "cloned op from Ops.Gl.PixelProjection",
+            "author": "pandur",
+            "date": 1687518065568
+        },
+        {
+            "message": "Ops.Patch.P4SCBDz.PixelProjection_v2 renamed to Ops.Gl.PixelProjection_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687527434344
+        },
+        {
+            "message": "cloned op from Ops.Gl.PixelProjection_v2",
+            "author": "pandur",
+            "date": 1701098416156
+        },
+        {
+            "message": "Ops.Patch.PenrnhM.PixelProjection_v3 renamed to Ops.Gl.PixelProjection_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701098558331
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1701098416156,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "frustum near",
+                "group": "Clipping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "frustum far",
+                "group": "Clipping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position 0,0 index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "group": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "group": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Zero Y",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
+    "issues": "",
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "use viewport size",
+                "text": "set width and height to the viewport size"
+            },
+            {
+                "name": "Width",
+                "text": "Width if Use Viewport Size is disabled"
+            },
+            {
+                "name": "Height",
+                "text": "Height if Use Viewport Size is disabled"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "caniusequery": ""
+}
