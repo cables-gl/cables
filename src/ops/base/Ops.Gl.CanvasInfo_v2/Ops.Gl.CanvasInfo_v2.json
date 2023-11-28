@@ -1,0 +1,91 @@
+{
+    "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Pixel Unit index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Landscape",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Canvas"
+            },
+            {
+                "type": 2,
+                "name": "Canvas Parent"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "a249e025-ae2c-4fb1-99f1-f86bfe7d5fc4",
+    "created": 1701200513778,
+    "docs": {
+        "ports": []
+    },
+    "collections": [
+        "dataInfo"
+    ],
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "new output: landscape - true if canvas width > height",
+            "author": "pandur",
+            "date": 1550644352354
+        },
+        {
+            "message": "Ops.Gl.CanvasSize renamed to Ops.Gl.CanvasInfo",
+            "author": "pandur",
+            "date": 1572939393002
+        },
+        {
+            "message": "cloned op from Ops.Gl.CanvasInfo",
+            "author": "pandur",
+            "date": 1701200513778
+        },
+        {
+            "message": "Ops.Patch.PJUYkmM.CanvasInfo2 renamed to Ops.Gl.CanvasInfo_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701200548577
+        }
+    ]
+}
