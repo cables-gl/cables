@@ -27,5 +27,9 @@
                 "name": "Next"
             }
         ]
+    },
+    "summary": "debug",
+    "docs": {
+        "ports": []
     }
 }

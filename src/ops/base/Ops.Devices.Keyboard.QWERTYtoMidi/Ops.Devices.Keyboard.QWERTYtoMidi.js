@@ -1,9 +1,9 @@
-let canvasOnly = op.addInPort(new CABLES.Port(op, "canvas only", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-
-let noteNumberPort = op.outValue("Note Number");
-let velocityPort = op.outValue("Velocity");
-let channelPort = op.outValue("Channel");
-let commandPort = op.outValue("Command");
+const
+    canvasOnly = op.inBool("canvas only", false),
+    noteNumberPort = op.outNumber("Note Number"),
+    velocityPort = op.outNumber("Velocity"),
+    channelPort = op.outNumber("Channel"),
+    commandPort = op.outNumber("Command");
 
 let cgl = op.patch.cgl;
 

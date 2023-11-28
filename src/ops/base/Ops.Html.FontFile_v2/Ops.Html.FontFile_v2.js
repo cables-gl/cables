@@ -89,8 +89,6 @@ function addStyle(_doc)
             style.innerHTML = styleStr;
             document.getElementsByTagName("head")[document.getElementsByTagName("head").length - 1].appendChild(style);
             // TODO: Poll if font loaded
-
-            console.log("fallback?!");
         }
     }
 }

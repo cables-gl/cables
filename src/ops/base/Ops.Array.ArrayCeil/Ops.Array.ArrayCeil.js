@@ -21,6 +21,6 @@ inArray.onChange = function ()
     {
         newArr[i] = Math.ceil(arr[i]);
     }
-    outArray.set(null);
-    outArray.set(newArr);
+
+    outArray.setRef(newArr);
 };

@@ -38,5 +38,9 @@
     "created": 1686738678686,
     "coreLibs": [
         "subpatchop"
-    ]
+    ],
+    "summary": "Template code for blueprint ops",
+    "docs": {
+        "ports": []
+    }
 }

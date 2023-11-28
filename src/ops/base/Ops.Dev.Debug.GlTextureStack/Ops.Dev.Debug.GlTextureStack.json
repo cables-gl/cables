@@ -29,5 +29,9 @@
         "portsOut": []
     },
     "authorName": "pandur",
-    "created": 1687530078186
+    "created": 1687530078186,
+    "summary": "debug textures",
+    "docs": {
+        "ports": []
+    }
 }

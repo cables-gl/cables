@@ -30,6 +30,6 @@ inArr.onChange = function ()
     }
     else
     {
-        outArr.set(null);
+        outArr.setRef(null);
     }
 };
