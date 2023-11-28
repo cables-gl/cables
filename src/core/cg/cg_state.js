@@ -81,6 +81,7 @@ class CGState extends EventTarget
     set pixelDensity(p)
     {
         this.cgCanvas.pixelDensity = p;
+        this.emitEvent("resize");
     }
 
     get pixelDensity()

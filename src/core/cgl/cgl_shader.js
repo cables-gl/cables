@@ -1612,7 +1612,11 @@ Shader.prototype.setUniformTexture = function (uni, tex)
  */
 Shader.prototype.pushTexture = function (uniform, t, type)
 {
-    if (!uniform) throw (new Error("no uniform given to texturestack"));
+    if (!uniform)
+    {
+        console.log("no uniform given to texturestack", uniform);
+        return;
+    }
     if (!t)
     {
         return;
