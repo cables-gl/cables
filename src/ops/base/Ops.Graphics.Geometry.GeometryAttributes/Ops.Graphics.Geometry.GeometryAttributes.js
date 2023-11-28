@@ -11,16 +11,27 @@ const
 geometry.onChange = function ()
 {
     let geom = geometry.get();
-    if (!geom) return;
+    if (!geom)
+    {
+        outVertices.setRef(null);
+        outFaces.setRef(null);
+        outTextcoords.setRef(null);
+        outNormals.setRef(null);
+        outTangents.setRef(null);
+        outBiTangents.setRef(null);
+        outVertexColors.setRef(null);
+
+        return;
+    }
 
     // convert float32array to array
     let verts = Array.prototype.slice.call(geom.vertices);
 
-    outVertices.set(verts);
-    outFaces.set(geom.verticesIndices);
-    outTextcoords.set(geom.texCoords);
-    outNormals.set(geom.vertexNormals);
-    outTangents.set(geom.tangents);
-    outBiTangents.set(geom.biTangents);
-    outVertexColors.set(geom.vertexColors);
+    outVertices.setRef(verts);
+    outFaces.setRef(geom.verticesIndices);
+    outTextcoords.setRef(geom.texCoords);
+    outNormals.setRef(geom.vertexNormals);
+    outTangents.setRef(geom.tangents);
+    outBiTangents.setRef(geom.biTangents);
+    outVertexColors.setRef(geom.vertexColors);
 };

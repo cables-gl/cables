@@ -76,7 +76,6 @@ inExec.onTriggered = function ()
     if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
     else if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
     else if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
-    else if (tfilter.get() == "Anisotropic") cgl_filter = CGL.Texture.FILTER_ANISOTROPIC;
 
     cgl_aniso = parseFloat(aniso.get());
 
