@@ -58,6 +58,8 @@ class Context extends CGState
         this._shaderStack = [];
         this._stackDepthTest = [];
 
+        // this._pixelDensity = ;
+
 
         this._simpleShader = new Shader(this, "simpleshader");
         this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -70,6 +72,16 @@ class Context extends CGState
         this._oldCanvasHeight = -1;
         this._enabledExtensions = {};
     }
+
+    // set pixelDensity(p)
+    // {
+    //     this._pixelDensity = p;
+    // }
+
+    // get pixelDensity()
+    // {
+    //     return this._pixelDensity;
+    // }
 
 
 
@@ -114,14 +126,15 @@ class Context extends CGState
         this.aborted = true;
     }
 
+
     _setCanvas(canv)
     {
         if (!canv)
         {
             this._log.stack("_setCanvas undef");
         }
-        if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
+        if (!this.patch.config.canvas) this.patch.config.canvas = {};
         if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = false;
         if (!this.patch.config.canvas.hasOwnProperty("premultipliedAlpha")) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty("alpha")) this.patch.config.canvas.alpha = false;
@@ -138,6 +151,9 @@ class Context extends CGState
             this.glUseHalfFloatTex = true;
         }
 
+
+
+        console.log("2222222 setcanvas");
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
 
@@ -547,12 +563,12 @@ class Context extends CGState
         this.pushCullFaceFacing(cgl.gl.BACK);
         this.pushCullFace(false);
 
-        if (this.clearCanvasTransparent)
-        {
-            cgl.gl.clearColor(0, 0, 0, 0);
-            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
-        }
-        if (this.clearCanvasDepth) cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
+        // if (this.clearCanvasTransparent)
+        // {
+        //     cgl.gl.clearColor(0, 0, 0, 0);
+        //     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
+        // }
+        // if (this.clearCanvasDepth) cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 

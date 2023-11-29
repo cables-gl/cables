@@ -1,0 +1,68 @@
+{
+    "id": "f1029550-d877-42da-9b1e-63a5163a0350",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1701100567829
+        },
+        {
+            "message": "Ops.Patch.PgtCvhM.MainLoop2 renamed to Ops.Dev.MainLoop2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701181581780
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "FPS Limit",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reduce FPS not focussed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Max Pixel Density",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Density",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1701100597121
+}

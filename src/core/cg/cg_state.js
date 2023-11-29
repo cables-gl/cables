@@ -66,6 +66,14 @@ class CGState extends EventTarget
 
         mat4.identity(this.mMatrix);
         mat4.identity(this.vMatrix);
+
+
+        window.matchMedia("screen and (min-resolution: 2dppx)")
+            .addEventListener("change", (e) =>
+            {
+                console.log("density change", e);
+                this.emitEvent("resize");
+            });
     }
 
     get canvasWidth()
@@ -81,6 +89,7 @@ class CGState extends EventTarget
     set pixelDensity(p)
     {
         this.cgCanvas.pixelDensity = p;
+        this.emitEvent("resize");
     }
 
     get pixelDensity()
@@ -99,13 +108,14 @@ class CGState extends EventTarget
         return this.cgCanvas.canvasEle;
     }
 
-    setCanvas(canv)
+    setCanvas(canvEle)
     {
-        if (typeof canv === "string") canv = document.getElementById(canv);
+        if (this.cgCanvas && canvEle == this.cgCanvas.canvasEle) return;
+        if (typeof canvEle === "string") canvEle = document.getElementById(canvEle);
 
-        this.cgCanvas = new CgCanvas({ "canvasEle": canv, "cg": this });
+        this.cgCanvas = new CgCanvas({ "canvasEle": canvEle, "cg": this });
 
-        if (this._setCanvas) this._setCanvas(canv);
+        if (this._setCanvas) this._setCanvas(canvEle);
 
         this.updateSize();
     }
