@@ -9,7 +9,7 @@ const
     inNum8 = op.inFloat("Number 8"),
     inReset = op.inTriggerButton("Reset");
 
-op.setUiAttrib({ "height": 150, "resizable": true });
+op.setUiAttrib({ "height": 150, "resizable": true, "vizLayerMaxZoom": 2500 });
 
 let buff = [];
 

@@ -2,7 +2,7 @@ const
     inArr = op.inArray("Array"),
     inOffset = op.inInt("Start Row", 0);
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 
 function getCellValue(v)
 {

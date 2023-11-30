@@ -26,7 +26,7 @@ inNum.onChange = () =>
     arr.push("" + inNum.get());
 };
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 
 op.renderVizLayer = (ctx, layer) =>
 {

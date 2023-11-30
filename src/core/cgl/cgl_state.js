@@ -151,12 +151,7 @@ class Context extends CGState
             this.glUseHalfFloatTex = true;
         }
 
-
-
-        console.log("2222222 setcanvas");
-
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
-
 
         if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {

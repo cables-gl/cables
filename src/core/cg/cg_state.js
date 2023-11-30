@@ -71,7 +71,6 @@ class CGState extends EventTarget
         window.matchMedia("screen and (min-resolution: 2dppx)")
             .addEventListener("change", (e) =>
             {
-                console.log("density change", e);
                 this.emitEvent("resize");
             });
     }

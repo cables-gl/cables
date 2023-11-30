@@ -1,6 +1,6 @@
 const inTex = op.inTexture("Texture");
 
-op.setUiAttrib({ "height": 200, "width": 380, "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 380, "resizable": true, "vizLayerMaxZoom": 2500 });
 
 let pixelReader = new CGL.PixelReader();
 let pixelData = null;

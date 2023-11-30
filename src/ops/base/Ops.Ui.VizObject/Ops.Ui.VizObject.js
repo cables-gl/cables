@@ -9,7 +9,7 @@ const
 let lines = [];
 inConsole.setUiAttribs({ "hidePort": true });
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 
 inObj.onChange = () =>
 {
