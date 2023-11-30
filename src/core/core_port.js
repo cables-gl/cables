@@ -557,6 +557,18 @@ Port.prototype.getName = function ()
     return this.name;
 };
 
+/**
+ * @function getTitle
+ * @memberof Port
+ * @instance
+ * @description return port name or title
+ */
+Port.prototype.getTitle = function ()
+{
+    if (this.uiAttribs.title) return this.uiAttribs.title;
+    return this.name;
+};
+
 Port.prototype.addLink = function (l)
 {
     this._valueBeforeLink = this.value;

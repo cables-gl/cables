@@ -18,7 +18,6 @@ update();
 
 function update()
 {
-    console.log("canvasinfo update");
     outWidth.set(window.innerWidth);
     outHeight.set(window.innerHeight);
     outdevicePixelRatio.set(window.devicePixelRatio);
