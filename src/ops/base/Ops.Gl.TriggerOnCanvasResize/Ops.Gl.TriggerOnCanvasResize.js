@@ -4,6 +4,8 @@ let listener = op.patch.cgl.on("resize", resize);
 
 function resize()
 {
+    console.log((new Error()).stack);
+
     onResize.trigger();
 }
 
