@@ -6,7 +6,7 @@ const
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0);
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 inStr.ignoreValueSerialize = true;
 
 let lines = [];

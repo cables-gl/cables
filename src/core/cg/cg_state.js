@@ -71,7 +71,6 @@ class CGState extends EventTarget
         window.matchMedia("screen and (min-resolution: 2dppx)")
             .addEventListener("change", (e) =>
             {
-                console.log("density change", e);
                 this.emitEvent("resize");
             });
     }
@@ -88,8 +87,11 @@ class CGState extends EventTarget
 
     set pixelDensity(p)
     {
-        this.cgCanvas.pixelDensity = p;
-        this.emitEvent("resize");
+        if (this.cgCanvas.pixelDensity != p)
+        {
+            this.cgCanvas.pixelDensity = p;
+            this.emitEvent("resize");
+        }
     }
 
     get pixelDensity()
