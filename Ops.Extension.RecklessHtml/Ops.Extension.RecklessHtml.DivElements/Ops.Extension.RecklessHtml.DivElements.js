@@ -8,7 +8,7 @@ const
     outArr = op.outArray("Elements", null, "element"),
     outIndex = op.outNumber("Index Clicked"),
     outClicked = op.outTrigger("Element Clicked"),
-    outHover = op.outNumber("Index Hovered");
+    outHover = op.outNumber("Index Hovered", -1);
 
 const elements = [];
 
