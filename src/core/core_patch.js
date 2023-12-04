@@ -108,6 +108,8 @@ const Patch = function (cfg)
     this.cgl = new Context(this);
     this.cgp = null;
 
+    this._subpatchOpCache = {};
+
     this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
     if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
@@ -470,6 +472,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
         uiAttribs.subPatch = uiAttribs.subPatch || 0;
 
+        if (this.clearSubPatchCache) this.clearSubPatchCache(uiAttribs.subPatch);
+
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
@@ -577,6 +581,8 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 this.ops.splice(i, 1);
                 opToDelete.emitEvent("delete", this.ops[i]);
                 this.emitEvent("onOpDelete", opToDelete, reloadingOp);
+
+                if (this.clearSubPatchCache) this.clearSubPatchCache(opToDelete.uiAttribs.subPatch);
 
                 if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                 opToDelete.cleanUp();
@@ -918,32 +924,6 @@ Patch.prototype.reloadOp = function (objName, cb)
     cb(count, ops);
 };
 
-Patch.prototype.getSubPatchOps = function (patchId, recursive = false)
-{
-    let ops = [];
-    for (const i in this.ops)
-    {
-        if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
-        {
-            ops.push(this.ops[i]);
-        }
-    }
-    if (recursive)
-    {
-        for (const i in ops)
-        {
-            if (ops[i].storage && ops[i].storage.subPatchVer)
-            {
-                const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
-                if (subPatchPort)
-                {
-                    ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
-                }
-            }
-        }
-    }
-    return ops;
-};
 
 Patch.prototype.getSubPatchOp = function (patchId, objName)
 {
@@ -951,16 +931,6 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
             return this.ops[i];
     return false;
-};
-
-Patch.prototype.getSubPatchOuterOp = function (subPatchId)
-{
-    const ops = this.ops;
-    for (let i = 0; i < ops.length; i++)
-    {
-        const op = ops[i];
-        if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
-    }
 };
 
 
