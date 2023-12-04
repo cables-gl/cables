@@ -472,8 +472,6 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
         uiAttribs.subPatch = uiAttribs.subPatch || 0;
 
-        if (this.clearSubPatchCache) this.clearSubPatchCache(uiAttribs.subPatch);
-
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
@@ -491,6 +489,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         this._opIdCache[op.id] = op;
 
         this.emitEvent("onOpAdd", op, fromDeserialize);
+
+        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
 
         if (op.init)
         {
