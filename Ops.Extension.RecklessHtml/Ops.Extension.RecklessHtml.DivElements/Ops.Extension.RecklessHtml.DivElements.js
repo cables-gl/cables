@@ -8,6 +8,7 @@ const
     outArr = op.outArray("Elements", null, "element"),
     outIndex = op.outNumber("Index Clicked"),
     outClicked = op.outTrigger("Element Clicked"),
+    outPointerUp = op.outTrigger("Pointer Up"),
     outHover = op.outNumber("Index Hovered", -1);
 
 const elements = [];
@@ -59,6 +60,12 @@ function createElements()
             outIndex.set(index);
             outClicked.trigger();
             // outHover.set(-1);
+        });
+
+        div.addEventListener("pointerup", () =>
+        {
+            outIndex.set(index);
+            outPointerUp.trigger();
         });
 
         div.addEventListener("pointerenter", () =>

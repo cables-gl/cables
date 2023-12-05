@@ -65,6 +65,10 @@
                 "name": "Element Clicked"
             },
             {
+                "type": 1,
+                "name": "Pointer Up"
+            },
+            {
                 "type": 0,
                 "name": "Index Hovered",
                 "subType": "number"
