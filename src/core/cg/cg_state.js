@@ -90,6 +90,7 @@ class CGState extends EventTarget
         if (this.cgCanvas.pixelDensity != p)
         {
             this.cgCanvas.pixelDensity = p;
+            this.cgCanvas.updateSize();
             this.emitEvent("resize");
         }
     }
