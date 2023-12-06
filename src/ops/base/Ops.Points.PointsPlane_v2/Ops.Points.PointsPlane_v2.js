@@ -30,6 +30,16 @@ function generate()
     const numX = Math.floor(Math.max(0, inNumX.get()));
     const numY = Math.floor(Math.max(0, inNumY.get()));
 
+    if (!CABLES.UTILS.isNumeric(numX) || !CABLES.UTILS.isNumeric(numY) || numX < 0 || numY < 0)
+    {
+        outRowNums.setRef(0);
+        outColNums.setRef(0);
+        outArr.setRef([]);
+        outTotalPoints.set(0);
+        outArrayLength.set(0);
+        return;
+    }
+
     let stepX = 0;
     let stepY = 0;
 
