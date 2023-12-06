@@ -1,0 +1,42 @@
+{
+    "summary": "delay triggering next port by x seconds",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "delay",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Cancel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Delaying",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "f4ff66b0-8500-46f7-9117-832aea0c2750",
+    "created": 1558014639272,
+    "changelog": [
+        {
+            "message": "Ops.Time.DelayedTrigger renamed to Ops.Trigger.DelayedTrigger",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854084684
+        }
+    ]
+}

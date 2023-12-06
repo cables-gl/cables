@@ -1,0 +1,92 @@
+{
+    "id": "f81a7074-7a97-4d1e-bcb8-98f5874a64fc",
+    "authorName": "pandur",
+    "created": 1650967611788,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iterations",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.outlineGrowPixels renamed to Ops.Gl.TextureEffects.GrowPixels",
+            "author": "pandur",
+            "date": 1572620886436
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.GrowPixels",
+            "author": "pandur",
+            "date": 1650967611788
+        },
+        {
+            "message": "Ops.User.pandur.GrowPixelsV2 renamed to Ops.Dev.GrowPixelsV2",
+            "author": "pandur",
+            "date": 1650968974045
+        },
+        {
+            "message": "Ops.Dev.GrowPixelsV2 renamed to Ops.Gl.TextureEffects.GrowPixels_v2",
+            "author": "pandur",
+            "date": 1653286707218
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.GrowPixels_v2 renamed to Ops.Gl.ImageCompose.GrowPixels_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854720888
+        }
+    ],
+    "summary": "Make one pixel lines thicker via postprocessing",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "3WSXCU"
+}

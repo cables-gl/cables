@@ -1,0 +1,116 @@
+{
+    "summary": "what browser is being used",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is Mobile",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is IE",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is IE 10+",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is IE 11",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Edge",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Chrome",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Firefox",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Safari",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Windows",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Linux",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Mac",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is iOS",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Android",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Language",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "6e2ff98b-1e85-4b89-b125-fb8da727ba0c",
+    "created": 1520862565547,
+    "docs": {
+        "ports": [
+            {
+                "name": "Is IE",
+                "text": "True if the browser is any of IE 9, IE 10, IE 11"
+            },
+            {
+                "name": "Is IE 10+",
+                "text": "True if browser is IE 10 or IE 11"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "collections": [
+        "dataInfo"
+    ],
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Html.BrowserCheck renamed to Ops.Html.BrowserInfo",
+            "author": "pandur",
+            "date": 1606808099751
+        },
+        {
+            "message": "Ops.Html.BrowserInfo renamed to Ops.Browser.BrowserInfo",
+            "author": "pandur",
+            "date": 1654584658050
+        },
+        {
+            "message": "Ops.Browser.BrowserInfo renamed to Ops.Devices.Browser.BrowserInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701851103177
+        }
+    ],
+    "exampleProjectId": "YOJiIk"
+}

@@ -1,0 +1,69 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "levels",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ]
+    },
+    "summary": "reduce number of colors",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "19703953-7984-4334-af72-0991425b4850",
+    "created": 1650883291438,
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344250583
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Posterize",
+            "author": "pandur",
+            "date": 1650883291439
+        },
+        {
+            "message": "Ops.User.pandur.PosterizeV2 renamed to Ops.Dev.PosterizeV2",
+            "author": "pandur",
+            "date": 1650886061699
+        },
+        {
+            "message": "Ops.Dev.PosterizeV2 renamed to Ops.Gl.TextureEffects.Posterize_v2",
+            "author": "pandur",
+            "date": 1653286509361
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Posterize_v2 renamed to Ops.Gl.ImageCompose.Posterize_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856320425
+        }
+    ],
+    "exampleProjectId": "_MMoT6"
+}

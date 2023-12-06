@@ -1,0 +1,53 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "axis index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "flip",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "10d3c769-9a7f-4bd3-a849-7354d3e5f7f0",
+    "created": 1510252944606,
+    "summary": "mirroring image effect",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "MVFoT6",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Mirror renamed to Ops.Gl.ImageCompose.Mirror",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856261260
+        }
+    ]
+}

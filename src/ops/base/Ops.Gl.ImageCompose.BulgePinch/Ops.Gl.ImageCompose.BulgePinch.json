@@ -1,0 +1,57 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "bulge and pinch an image (deform,stretch,distort)",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "25696840-bd64-463e-9301-964a81385bfb",
+    "created": 1540923201757,
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548423809948
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.BulgePinch renamed to Ops.Gl.ImageCompose.BulgePinch",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855752994
+        }
+    ],
+    "exampleProjectId": "2lC9W6"
+}

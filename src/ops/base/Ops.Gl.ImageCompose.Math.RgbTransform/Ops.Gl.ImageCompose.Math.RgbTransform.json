@@ -1,0 +1,137 @@
+{
+    "summary": "transform RGB values interpreted as XYZ coordinates",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Translate",
+                "group": "Position",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "group": "Scale",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "group": "Rotation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "0a069281-e7a1-43a4-a74a-101026df6a29",
+    "created": 1645190583290,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1645190583290
+        },
+        {
+            "message": "Ops.User.pandur.VertTexTransform renamed to Ops.Dev.VertexTexture.VertTexTransform",
+            "author": "pandur",
+            "date": 1645192511723
+        },
+        {
+            "message": "Ops.Dev.VertexTexture.VertTexTransform renamed to Ops.Gl.TextureEffects.Math.RgbTransform",
+            "author": "pandur",
+            "date": 1670234605102
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Math.RgbTransform renamed to Ops.Gl.ImageCompose.Math.RgbTransform",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701854900963
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "UJvMbk"
+}

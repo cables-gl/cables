@@ -1,0 +1,56 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delay True",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delay False",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Out Value",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Delay the input/output of a boolean by x seconds",
+    "authorName": "pandur",
+    "id": "4516be54-9077-490f-a094-83696b9011ba",
+    "created": 1613050107456,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Value.DelayedValueSimple",
+            "author": "pandur",
+            "date": 1613050107456
+        },
+        {
+            "message": "Ops.User.pandur.DelayBooleanSimple renamed to Ops.Value.DelayBooleanSimple",
+            "author": "pandur",
+            "date": 1613050423522
+        },
+        {
+            "message": "Ops.Value.DelayBooleanSimple renamed to Ops.Boolean.DelayBooleanSimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852283589
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": []
+}

@@ -1,0 +1,181 @@
+{
+    "id": "a1d57718-20a0-4d18-89d3-69947b0d1acf",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1583496113544
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Stripes_v3",
+            "author": "pandur",
+            "date": 1650440014993
+        },
+        {
+            "message": "Ops.User.pandur.StripesV4 renamed to Ops.Dev.StripesV4",
+            "author": "pandur",
+            "date": 1650440141037
+        },
+        {
+            "message": "Ops.Dev.StripesV4 renamed to Ops.Gl.TextureEffects.Stripes_v4",
+            "author": "pandur",
+            "date": 1653286040990
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Stripes_v4 renamed to Ops.Gl.ImageCompose.Stripes_v4",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856048797
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1650440014992,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Num",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gradients",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Circular",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Create a texture of stripes /lines",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode index",
+                "text": "Pick a blend mode with an integer"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Selected blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blending"
+            },
+            {
+                "name": "Num",
+                "text": "Number of stripes"
+            },
+            {
+                "name": "Width",
+                "text": "width of each stripe"
+            },
+            {
+                "name": "Rotate",
+                "text": "rotate everything"
+            },
+            {
+                "name": "Offset",
+                "text": "offset stripes from zero"
+            },
+            {
+                "name": "Gradients",
+                "text": "Enable gradient mode"
+            },
+            {
+                "name": "Circular",
+                "text": "Enable circular stripes "
+            },
+            {
+                "name": "r",
+                "text": "red"
+            },
+            {
+                "name": "g",
+                "text": "green "
+            },
+            {
+                "name": "b",
+                "text": "blue "
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out "
+            }
+        ]
+    },
+    "caniusequery": "",
+    "exampleProjectId": "dYhlT6"
+}

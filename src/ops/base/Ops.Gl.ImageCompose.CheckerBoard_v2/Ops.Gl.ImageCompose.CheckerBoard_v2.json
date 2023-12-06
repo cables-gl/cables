@@ -1,0 +1,103 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Square",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Num X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Centered",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Draw a checkerboard pattern",
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "7edfae81-f092-413f-a2a0-b109fdffa61d",
+    "created": 1650526315120,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "J4KL_4",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.CheckerBoard",
+            "author": "pandur",
+            "date": 1650526315120
+        },
+        {
+            "message": "Ops.User.pandur.CheckerBoard renamed to Ops.Dev.CheckerBoardV2",
+            "author": "pandur",
+            "date": 1650526330246
+        },
+        {
+            "message": "Ops.Dev.CheckerBoardV2 renamed to Ops.Gl.TextureEffects.CheckerBoardV2",
+            "author": "pandur",
+            "date": 1652092996515
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.CheckerBoardV2 renamed to Ops.Gl.TextureEffects.CheckerBoard_v2",
+            "author": "pandur",
+            "date": 1652093049579
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.CheckerBoard_v2 renamed to Ops.Gl.ImageCompose.CheckerBoard_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855511505
+        }
+    ],
+    "caniusequery": ""
+}

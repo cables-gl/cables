@@ -1,0 +1,116 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Use viewport size",
+                "group": "Texture Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "group": "Texture Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "group": "Texture Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "HDR",
+                "group": "Texture Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Transparent",
+                "group": "Texture Settings",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "texture_out",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Compose Images and effects as layers to generate new Images",
+    "credits": [
+        {
+            "title": "Photoshop math GLSL shaders",
+            "author": "Romain Dura",
+            "url": "https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/",
+            "licence": "Public Domain"
+        }
+    ],
+    "authorName": "pandur",
+    "id": "a5b43d4c-a9ea-4eaf-9ed0-f257d222659d",
+    "created": 1605613484347,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ImageCompose",
+            "author": "pandur",
+            "date": 1605613484347
+        },
+        {
+            "message": "Ops.User.pandur.ImageComposeV2 renamed to Ops.Gl.TextureEffects.ImageCompose_v2",
+            "author": "pandur",
+            "date": 1605616297972
+        },
+        {
+            "message": "Removed NPOT warning message",
+            "author": "pandur",
+            "date": 1643635010528
+        },
+        {
+            "message": "fix problem when using an imageCompose in another imageCompose",
+            "author": "pandur",
+            "date": 1643886363679
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.ImageCompose_v2 renamed to Ops.Gl.ImageCompose.ImageCompose_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855966594
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [
+        "ZZKdaQw1bMo"
+    ]
+}

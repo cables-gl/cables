@@ -1,0 +1,71 @@
+{
+    "id": "8b6b50e1-8af9-4c4b-b454-e96883d1cf8f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1674725289490
+        },
+        {
+            "message": "Ops.User.pandur.RgbMathSnap renamed to Ops.Dev.RgbMathRound",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1674725852801
+        },
+        {
+            "message": "Ops.Dev.RgbMathRound renamed to Ops.Dev.TexMathRound",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1674725926551
+        },
+        {
+            "message": "Ops.Dev.TexMathRound renamed to Ops.Gl.TextureEffects.Math.Round",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678367178418
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Math.Round renamed to Ops.Gl.ImageCompose.Math.Round",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701854924882
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1674725415449,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiplier",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "name index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Round number values of texture color channels",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

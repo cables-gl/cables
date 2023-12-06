@@ -1,0 +1,50 @@
+{
+    "summary": "Stores a value, use the same value in different places (was: value.value)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "number"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "The value"
+            },
+            {
+                "name": "result",
+                "text": "Same as the input `Value`"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
+    "created": 1524498802165,
+    "changelog": [
+        {
+            "message": "Ops.Value.Value renamed to Ops.Value.Number",
+            "author": "pandur",
+            "date": 1561119761731
+        },
+        {
+            "message": "Ops.Value.Number renamed to Ops.Number.Number",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852665761
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": []
+}

@@ -1,0 +1,131 @@
+{
+    "summary": "Voronoi Noise function",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Movement",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "seed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Fill index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Draw Isolines",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Distance",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Draw Center",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ]
+    },
+    "credits": [
+        {
+            "title": "Voronoise Shader",
+            "author": "Patricio Gonzalez Vivo & Jen Lowe",
+            "url": "https://thebookofshaders.com/12/",
+            "licence": "Copyright 2015 Patricio Gonzalez Vivo"
+        }
+    ],
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "0e68dbf4-dc3e-448d-b1e1-256dde99802a",
+    "created": 1651050941195,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "code cleanup ports",
+            "author": "andro",
+            "date": 1558958462098
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.Voronoise",
+            "author": "pandur",
+            "date": 1651050941195
+        },
+        {
+            "message": "Ops.User.pandur.VoronoiseV2 renamed to Ops.Dev.VoronoiseV2",
+            "author": "pandur",
+            "date": 1651050956816
+        },
+        {
+            "message": "Ops.Dev.VoronoiseV2 renamed to Ops.Gl.TextureEffects.Noise.Voronoise_v2",
+            "author": "pandur",
+            "date": 1653286947406
+        },
+        {
+            "message": "sync default values between port and shader",
+            "author": "stephan",
+            "date": 1658399661808
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Noise.Voronoise_v2 renamed to Ops.Gl.ImageCompose.Noise.Voronoise_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701855130034
+        }
+    ],
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "3zb6Us"
+}

@@ -1,0 +1,72 @@
+{
+    "summary": "modulo pixel color values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Mask Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "modulo",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "9105dc83-9cb9-4a5e-9ec0-db641436dbe2",
+    "created": 1618244630693,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Invert",
+            "author": "pandur",
+            "date": 1618244630693
+        },
+        {
+            "message": "Ops.User.pandur.ColorModulo renamed to Ops.Gl.TextureEffects.TexMathModulo",
+            "author": "pandur",
+            "date": 1618319907230
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.TexMathModulo renamed to Ops.Gl.ImageCompose.TexMathModulo",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856031218
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "FOpoxm"
+}

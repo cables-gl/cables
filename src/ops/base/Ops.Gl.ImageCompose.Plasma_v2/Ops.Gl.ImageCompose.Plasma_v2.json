@@ -1,0 +1,151 @@
+{
+    "authorName": "pandur",
+    "id": "89b3bf34-a9a8-4dcf-a304-9dee597fcf48",
+    "created": 1650605963072,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mul",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Greyscale",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Offset",
+                "group": "Offset Map",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Offset Multiply",
+                "group": "Offset Map",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset X index",
+                "group": "Offset Map",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y index",
+                "group": "Offset Map",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset Time index",
+                "group": "Offset Map",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Renders a plasma effect",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "dD6aW6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Plasma",
+            "author": "pandur",
+            "date": 1650605963073
+        },
+        {
+            "message": "Ops.User.pandur.PlasmaV2 renamed to Ops.Dev.PlasmaV2",
+            "author": "pandur",
+            "date": 1650606002349
+        },
+        {
+            "message": "Ops.Dev.PlasmaV2 renamed to Ops.TextureEffects.Plasma_v2",
+            "author": "pandur",
+            "date": 1652093240609
+        },
+        {
+            "message": "Ops.TextureEffects.Plasma_v2 renamed to Ops.Gl.TextureEffects.Plasma_v2",
+            "author": "pandur",
+            "date": 1652093329365
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Plasma_v2 renamed to Ops.Gl.ImageCompose.Plasma_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856225557
+        }
+    ]
+}

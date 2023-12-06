@@ -1,0 +1,227 @@
+{
+    "id": "ec3e0121-b2c2-4c31-bbda-a6982080f73f",
+    "authorName": "pandur",
+    "created": 1602760318455,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Html.BrowserCheck_v2",
+            "author": "simod",
+            "date": 1602760318455
+        },
+        {
+            "message": " added lib: platform.js",
+            "author": "simod",
+            "date": 1602760393579
+        },
+        {
+            "message": "Ops.User.cables.BrowserCheck renamed to Ops.Html.BrowserInfo",
+            "author": "simod",
+            "date": 1602760602158
+        },
+        {
+            "message": "Ops.Html.BrowserInfo renamed to Ops.Html.BrowserCheck_v3",
+            "author": "cables",
+            "date": 1602763157290
+        },
+        {
+            "message": "Ops.Html.BrowserCheck_v3 renamed to Ops.Html.BrowserInfo",
+            "author": "pandur",
+            "date": 1606807854645
+        },
+        {
+            "message": "Ops.Html.BrowserInfo renamed to Ops.Html.BrowserInfo_v3",
+            "author": "pandur",
+            "date": 1606807981333
+        },
+        {
+            "message": "Ops.Html.BrowserInfo_v3 renamed to Ops.Browser.BrowserInfo_v3",
+            "author": "pandur",
+            "date": 1654584465635
+        },
+        {
+            "message": "Ops.Browser.BrowserInfo_v3 renamed to Ops.Devices.Browser.BrowserInfo_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701851073557
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Is Mobile",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Touchscreen",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is IE",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Edge",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Chrome",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Firefox",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Opera",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Safari",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Windows",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Linux",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Mac",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is iOS",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Android",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Electron",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Operating System"
+            },
+            {
+                "type": 5,
+                "name": "Browser Name"
+            },
+            {
+                "type": 5,
+                "name": "OS Version"
+            },
+            {
+                "type": 5,
+                "name": "Language"
+            },
+            {
+                "type": 5,
+                "name": "User Agent"
+            }
+        ]
+    },
+    "libs": [
+        "platform.js"
+    ],
+    "summary": "Reports the browser being used",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Is Mobile",
+                "text": "true if mobile platform, false if not"
+            },
+            {
+                "name": "Is IE",
+                "text": "True if the browser is any of IE 9, IE 10, IE 11"
+            },
+            {
+                "name": "Is Edge",
+                "text": "True if the browser is Edge "
+            },
+            {
+                "name": "Is Chrome",
+                "text": "True if the browser is Chrome or Chrome Mobile"
+            },
+            {
+                "name": "Is Firefox",
+                "text": "True if the browser is Firefox or Firefox mobile"
+            },
+            {
+                "name": "Is Opera",
+                "text": "True if the browser is Opera"
+            },
+            {
+                "name": "Is Safari",
+                "text": "True if the browser is Safari (iOS & macOS & OS X)"
+            },
+            {
+                "name": "Is Windows",
+                "text": "true if operating system is windows"
+            },
+            {
+                "name": "Is Linux",
+                "text": "true if operating system is linux "
+            },
+            {
+                "name": "Is Mac",
+                "text": "true if operating system is mac"
+            },
+            {
+                "name": "Is iOS",
+                "text": "true if operating system is iOS"
+            },
+            {
+                "name": "Is Android",
+                "text": "true if operating system is Android"
+            },
+            {
+                "name": "Is Electron",
+                "text": "true if cables electron app is used"
+            },
+            {
+                "name": "Operating System",
+                "text": "exact name of the operating system"
+            },
+            {
+                "name": "Browser Name",
+                "text": "name of the browser"
+            },
+            {
+                "name": "OS Version",
+                "text": "version of the os"
+            },
+            {
+                "name": "Language",
+                "text": "browser language"
+            },
+            {
+                "name": "User Agent",
+                "text": "current user agent "
+            }
+        ]
+    },
+    "exampleProjectId": "YOJiIk"
+}

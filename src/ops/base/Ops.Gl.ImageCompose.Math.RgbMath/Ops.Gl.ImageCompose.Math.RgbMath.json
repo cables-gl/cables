@@ -1,0 +1,115 @@
+{
+    "summary": "apply simple mathematical functions on pixels color values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Operation index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "R Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "G Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "B Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "A Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Texture",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "dc858e71-1f12-4de5-89f5-67fb41ebfa39",
+    "created": 1620994204234,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RGBMath renamed to Ops.Gl.TextureEffects.Math.RgbMath",
+            "author": "pandur",
+            "date": 1671004402345
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Math.RgbMath renamed to Ops.Gl.ImageCompose.Math.RgbMath",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701854882541
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Operation index",
+                "text": "c-x: subtraction x from color value, x-c: subtract color value from x value, c*x: multiply color value by x, x/c: divide x value by color value, c/x: divide color value by x value, c%x: modulo operation on color value by modulus x of which the remainder is the result for your selected color channel"
+            }
+        ]
+    },
+    "exampleProjectId": "H3cEpX"
+}

@@ -1,0 +1,40 @@
+{
+    "updated": 1537935102190,
+    "authorName": "pandur",
+    "id": "7e3280de-314a-41ac-87f0-82bbbc4cb221",
+    "created": 1537809182993,
+    "summary": "get URL of a file",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "File",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "URL",
+                "subType": "string"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.FileInput renamed to Ops.Cables.FileInput",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852498566
+        },
+        {
+            "message": "Ops.Cables.FileInput renamed to Ops.String.File.FileInput",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701853122062
+        }
+    ]
+}

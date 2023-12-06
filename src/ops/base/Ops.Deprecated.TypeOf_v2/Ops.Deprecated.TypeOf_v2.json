@@ -1,0 +1,38 @@
+{
+    "authorName": "pandur",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "input",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "result"
+            }
+        ]
+    },
+    "summary": "Outputs the type of the input-port (boolean, number, string).  ",
+    "docs": {
+        "ports": [
+            {
+                "name": "result",
+                "text": "type of input (string,number,boolean)"
+            }
+        ]
+    },
+    "id": "50fd0008-7bcb-4ab3-8a8c-82fc55a3e7a9",
+    "created": 1608736316172,
+    "exampleProjectId": "JlVWlg",
+    "changelog": [
+        {
+            "message": "Ops.Value.TypeOf_v2 renamed to Ops.Deprecated.TypeOf_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701853867463
+        }
+    ]
+}

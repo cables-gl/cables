@@ -1,0 +1,50 @@
+{
+    "id": "0e3c0986-071e-4c98-be84-7f17306490c6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1619627467397
+        },
+        {
+            "message": "Ops.User.pandur.DelayStringSimple renamed to Ops.Value.DelayStringSimple",
+            "author": "pandur",
+            "date": 1619702895429
+        },
+        {
+            "message": "Ops.Value.DelayStringSimple renamed to Ops.String.DelayStringSimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852334440
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1619627499494,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Value"
+            },
+            {
+                "type": 0,
+                "name": "Delay",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Out Value"
+            }
+        ]
+    },
+    "summary": "delay the output of a string by n seconds",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "kqtJkE"
+}

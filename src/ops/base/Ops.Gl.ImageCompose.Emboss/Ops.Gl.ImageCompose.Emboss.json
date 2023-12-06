@@ -1,0 +1,50 @@
+{
+    "id": "e973e104-392a-44f0-bbc5-c382a08c15df",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1548506921299
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Emboss renamed to Ops.Gl.ImageCompose.Emboss",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855570693
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1548506928011,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Emboss / bevel effect",
+    "youtubeid": "",
+    "issues": "",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "xsRcay"
+}

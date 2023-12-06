@@ -1,0 +1,35 @@
+{
+    "summary": "Adjust image sharpness",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "amount",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ]
+    },
+    "updated": 1540825751100,
+    "authorName": "pandur",
+    "id": "55647083-131d-4c70-b667-21fecf311ea5",
+    "created": 1540825724831,
+    "exampleProjectId": "Q6uJjr",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Sharpen renamed to Ops.Gl.ImageCompose.Sharpen",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856100887
+        }
+    ]
+}

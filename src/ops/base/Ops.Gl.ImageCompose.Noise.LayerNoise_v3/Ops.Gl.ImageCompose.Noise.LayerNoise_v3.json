@@ -1,0 +1,180 @@
+{
+    "id": "dedc9aec-5978-4430-bd02-5d009fafaabf",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "_LJ_",
+            "date": 1602251402379
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Noise.LayerNoise_v2 renamed to Ops.Dev.Noise.LayerNoise_v2",
+            "author": "pandur",
+            "date": 1651042224849
+        },
+        {
+            "message": "Ops.Dev.Noise.LayerNoise_v2 renamed to Ops.Dev.Noise.LayerNoiseV3",
+            "author": "pandur",
+            "date": 1651042609449
+        },
+        {
+            "message": "Ops.Dev.Noise.LayerNoiseV3 renamed to Ops.Gl.TextureEffects.Noise.LayerNoise_v3",
+            "author": "pandur",
+            "date": 1653286793536
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Noise.LayerNoise_v3 renamed to Ops.Gl.ImageCompose.Noise.LayerNoise_v3",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701855040444
+        }
+    ],
+    "authorName": "_LJ_",
+    "created": 1602251426270,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "RGBA",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "layers",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "factor",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "exponent",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "scrollX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "scrollY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "scrollZ",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tileable",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Multilayer perlin noise variation",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "trigger input"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "choose blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "blend amount"
+            },
+            {
+                "name": "mode",
+                "text": "choose between 3 different noise modes: exponential, logarithmic, linear"
+            },
+            {
+                "name": "RGBA",
+                "text": "check to get multi colored noise"
+            },
+            {
+                "name": "scale",
+                "text": "scale of the noise texture"
+            },
+            {
+                "name": "layers",
+                "text": "amount of noise layers"
+            },
+            {
+                "name": "factor",
+                "text": "luminance of the texture"
+            },
+            {
+                "name": "exponent",
+                "text": "noise exponent"
+            },
+            {
+                "name": "scrollX",
+                "text": "scroll noise in x direction"
+            },
+            {
+                "name": "scrollY",
+                "text": "scroll noise in y direction"
+            },
+            {
+                "name": "scrollZ",
+                "text": "noise animation"
+            },
+            {
+                "name": "Tileable",
+                "text": "check to get a symmetric, mandala-like noise"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger output"
+            }
+        ]
+    },
+    "exampleProjectId": "NSYy0t"
+}

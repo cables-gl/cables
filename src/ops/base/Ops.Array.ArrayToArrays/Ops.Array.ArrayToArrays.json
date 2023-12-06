@@ -1,0 +1,53 @@
+{
+    "id": "037a9886-c185-4ab2-8c7e-b9f85b1e678c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1667658305979
+        },
+        {
+            "message": "Ops.User.pandur.ArrayToArrays renamed to Ops.Dev.Arrays.ArrayToArrays",
+            "author": "pandur",
+            "date": 1667806165063
+        },
+        {
+            "message": "Ops.Dev.Arrays.ArrayToArrays renamed to Ops.Arrays.ArrayToArrays",
+            "author": "pandur",
+            "date": 1670921364982
+        },
+        {
+            "message": "Ops.Arrays.ArrayToArrays renamed to Ops.Array.ArrayToArrays",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701851375462
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1667658460529,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Stride",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "splits an array up into an array of arrays",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Bpx7ck"
+}

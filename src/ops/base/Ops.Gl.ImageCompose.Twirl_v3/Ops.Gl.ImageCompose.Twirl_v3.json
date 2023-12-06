@@ -1,0 +1,96 @@
+{
+    "authorName": "andro",
+    "id": "5c128ea4-14df-4248-a02e-b05d2783ed58",
+    "created": 1548408376629,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Twist amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Creates a twirl/swirl/spiral effect in a texture",
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Needed to render"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode "
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blending"
+            },
+            {
+                "name": "Twist amount",
+                "text": "Amount of twist applied to the texture"
+            },
+            {
+                "name": "Radius",
+                "text": "Radius of the effect"
+            },
+            {
+                "name": "Center X",
+                "text": "Center point of the effect on the x axis"
+            },
+            {
+                "name": "Center Y",
+                "text": "Center point of the effect on the y axis"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "2_pmJ5",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Twirl_v3 renamed to Ops.Gl.ImageCompose.Twirl_v3",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701855945372
+        }
+    ]
+}

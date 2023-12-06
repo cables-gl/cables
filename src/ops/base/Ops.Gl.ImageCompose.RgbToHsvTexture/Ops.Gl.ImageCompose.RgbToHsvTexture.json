@@ -1,0 +1,75 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Output RGB index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "credits": [
+        {
+            "title": "NormalMap Shader",
+            "author": "moka",
+            "url": "https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11"
+        }
+    ],
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "147ed29e-f04e-4f7c-b9d7-133d7c6cbef9",
+    "created": 1647697092030,
+    "summary": "Convert a RGB Texture to Hue/Saturation/Lightness values as RGB colors",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
+            "author": "pandur",
+            "date": 1560333507524
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ToNormalMap",
+            "author": "pandur",
+            "date": 1647697092030
+        },
+        {
+            "message": "Ops.User.pandur.RgbToHsvTexture renamed to Ops.Gl.TextureEffects.RgbToHsvTexture",
+            "author": "pandur",
+            "date": 1647699410600
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RgbToHsvTexture renamed to Ops.Gl.ImageCompose.RgbToHsvTexture",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856210670
+        }
+    ],
+    "todos": [
+        {
+            "message": "Make texture size dynamic, right now fixed at 1024!",
+            "author": "simod",
+            "id": "20d29ae3-7a58-4ad2-9b24-4c7c2ba6f314",
+            "date": 1572519515040,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1654245403986
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "V7z4v4",
+    "caniusequery": ""
+}

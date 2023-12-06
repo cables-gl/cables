@@ -1,0 +1,60 @@
+{
+    "id": "2c54d518-f110-4faf-afa9-436ffd5a6870",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1698309372175
+        },
+        {
+            "message": "Ops.Patch.PAn48HJ.ColorScheme renamed to Ops.Browser.ColorScheme",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1698309840904
+        },
+        {
+            "message": "Ops.Browser.ColorScheme renamed to Ops.Devices.Browser.ColorScheme",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701851123322
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Color Scheme"
+            },
+            {
+                "type": 0,
+                "name": "Dark Mode",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Light Mode",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1698309430889,
+    "summary": "Get light/dark color scheme preference of the browser",
+    "caniusequery": "prefers-color-scheme",
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Color Scheme",
+                "text": "light/dark"
+            }
+        ]
+    },
+    "exampleProjectId": "An48HJ"
+}

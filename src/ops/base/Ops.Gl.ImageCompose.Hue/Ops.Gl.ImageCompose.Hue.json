@@ -1,0 +1,71 @@
+{
+    "summary": "Adjust Hue of current ImageCompose",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "hue",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Offset",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "94ef0da0-c920-415c-81b0-fecbd437991d",
+    "created": 1510738260027,
+    "docs": {
+        "ports": [
+            {
+                "name": "Mask",
+                "text": "Mask texture for the Offset texture"
+            },
+            {
+                "name": "Offset",
+                "text": "Control Hue  setting with a texture"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Add Amount Slider and Mask Texture Input",
+            "author": "bagoof",
+            "id": "182b59f6-02e6-4b3e-8301-843faa57c6d0",
+            "date": 1560196212801,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1665135629951
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "kubmT6",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Hue renamed to Ops.Gl.ImageCompose.Hue",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854704164
+        }
+    ]
+}

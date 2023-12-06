@@ -1,0 +1,88 @@
+{
+    "summary": "Invert image colors",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mask Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Invert R",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Invert G",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Invert B",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "56e8c95b-da89-423b-9d31-23351c263bb6",
+    "created": 1650548755477,
+    "exampleProjectId": "Ld3nT6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Invert",
+            "author": "pandur",
+            "date": 1650548755478
+        },
+        {
+            "message": "Ops.User.pandur.InvertV2 renamed to Ops.Dev.InvertV2",
+            "author": "pandur",
+            "date": 1650550787024
+        },
+        {
+            "message": "Ops.Dev.InvertV2 renamed to Ops.Gl.TextureEffects.Invert_v2",
+            "author": "pandur",
+            "date": 1652093157669
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Invert_v2 renamed to Ops.Gl.ImageCompose.Invert_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855301443
+        }
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": []
+}

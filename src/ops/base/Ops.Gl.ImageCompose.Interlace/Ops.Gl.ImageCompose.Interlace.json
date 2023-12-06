@@ -1,0 +1,68 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Lumi Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X or Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Line Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Displacement",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Add",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "scroll",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Tv scanlines effect",
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "3cd69d5b-6c05-4522-9551-52458f99421a",
+    "created": 1510252271241,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "MCpnT6",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Interlace renamed to Ops.Gl.ImageCompose.Interlace",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855926336
+        }
+    ]
+}

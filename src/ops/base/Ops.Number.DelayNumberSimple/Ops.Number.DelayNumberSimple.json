@@ -1,0 +1,43 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delay",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Out Value",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "delay the value data flow by x seconds",
+    "authorName": "pandur",
+    "id": "89ea7e9c-0dfb-4e1e-8e61-4e79112ee533",
+    "created": 1519230727595,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.DelayedValueSimple renamed to Ops.Value.DelayNumberSimple",
+            "author": "pandur",
+            "date": 1671006227868
+        },
+        {
+            "message": "Ops.Value.DelayNumberSimple renamed to Ops.Number.DelayNumberSimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852306288
+        }
+    ]
+}

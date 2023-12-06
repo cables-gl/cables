@@ -1,0 +1,175 @@
+{
+    "id": "06993a23-1844-4a97-9aaf-d60319d4a528",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1582302771619
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Noise.HexagonNoise renamed to Ops.Gl.ImageCompose.Noise.HexagonNoise",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701855431026
+        }
+    ],
+    "authorName": "andro",
+    "created": 1582302791527,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "group": "Look",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "RGB",
+                "group": "Look",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Minimum value",
+                "group": "Look",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Maximum value",
+                "group": "Look",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Orientation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Creates a hexagonal noise texture ",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blend Mode index",
+                "text": "pick a blend mode with an integer"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Selected blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "amount of blending"
+            },
+            {
+                "name": "Loop",
+                "text": "loop noise so there's no jumps in color"
+            },
+            {
+                "name": "RGB",
+                "text": "Enable RGB noise"
+            },
+            {
+                "name": "Minimum value",
+                "text": "minimum value of every pixel"
+            },
+            {
+                "name": "Maximum value",
+                "text": "maximum value of every pixel"
+            },
+            {
+                "name": "Scale",
+                "text": "Scale noise "
+            },
+            {
+                "name": "Orientation",
+                "text": "flip orientation"
+            },
+            {
+                "name": "X",
+                "text": "Move on the x axis"
+            },
+            {
+                "name": "Y",
+                "text": "Move on the y axis"
+            },
+            {
+                "name": "Z",
+                "text": "Use to animate the noise "
+            },
+            {
+                "name": "Seed",
+                "text": "random seed number "
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "exampleProjectId": "plbB53"
+}

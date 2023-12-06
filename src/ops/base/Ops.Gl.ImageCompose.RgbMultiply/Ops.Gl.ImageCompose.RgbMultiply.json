@@ -1,0 +1,45 @@
+{
+    "summary": "multiply image colors by color channel",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "updated": 1540922021355,
+    "authorName": "pandur",
+    "id": "00f30153-f656-4701-9b93-244b033b2eaa",
+    "created": 1540921975846,
+    "exampleProjectId": "3l_8W6",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.RgbMultiply renamed to Ops.Gl.ImageCompose.RgbMultiply",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856225819
+        }
+    ]
+}

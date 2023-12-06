@@ -1,0 +1,48 @@
+{
+    "authorName": "pandur",
+    "id": "3f20a79f-a35f-4a4d-b2f3-c46973a4531f",
+    "created": 1605452818981,
+    "summary": "get URL of a file",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "URL"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Value.FileInput",
+            "author": "cables",
+            "date": 1605452818981
+        },
+        {
+            "message": "Ops.User.cables.FileInput2 renamed to Ops.Value.FileInput_v2",
+            "author": "pandur",
+            "date": 1605452883556
+        },
+        {
+            "message": "Ops.Value.FileInput_v2 renamed to Ops.Cables.FileInput_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852475693
+        },
+        {
+            "message": "Ops.Cables.FileInput_v2 renamed to Ops.String.File.FileInput_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701853095029
+        }
+    ],
+    "relatedops": null
+}

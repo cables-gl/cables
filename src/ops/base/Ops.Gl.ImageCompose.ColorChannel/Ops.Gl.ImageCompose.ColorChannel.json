@@ -1,0 +1,60 @@
+{
+    "summary": "Texture effect to enable/disable RGBA channels, convert to mono color",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "channelR",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "channelG",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "channelB",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "mono",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Alpha",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "c7c5dadd-16fd-4c3b-a910-6882048e6b8d",
+    "created": 1540831235400,
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.ColorChannel renamed to Ops.Gl.ImageCompose.ColorChannel",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856024008
+        }
+    ]
+}
