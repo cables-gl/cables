@@ -472,7 +472,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
         uiAttribs.subPatch = uiAttribs.subPatch || 0;
 
-        op.uiAttr(uiAttribs);
+        op.setUiAttribs(uiAttribs);
         if (op.onCreate) op.onCreate();
 
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
@@ -490,13 +490,13 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
-        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
 
         if (op.init)
         {
             op.init();
         }
         op.emitEvent("init", fromDeserialize);
+        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
     }
     else
     {
