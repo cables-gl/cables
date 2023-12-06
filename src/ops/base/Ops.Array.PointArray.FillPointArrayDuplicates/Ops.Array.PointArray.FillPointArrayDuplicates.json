@@ -38,13 +38,5 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    },
-    "todos": [
-        {
-            "message": "rename to XYZ instead of points",
-            "author": "pandur",
-            "id": "58ac68ef-3cc7-40b2-90ca-ca645213e76c",
-            "date": 1558092432057
-        }
-    ]
+    }
 }
