@@ -579,7 +579,7 @@ void main()
         	vec3 CCFr = E * CCPrefilteredEnvColour;
         	CCFr *= specOcclusion * horizonOcclusion * (0.96 + (0.04 / envBRDF.y));
         	CCFr *= 1.04;
-        	col.rgb += CCFr * _ClearCoatIntensity;
+        	col.rgb += CCFr * _ClearCoatIntensity*envIntensity;
         #endif
     #else
         #ifdef USE_LIGHTMAP
