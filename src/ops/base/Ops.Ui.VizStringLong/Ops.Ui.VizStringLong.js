@@ -28,8 +28,7 @@ inStr.onChange = () =>
 
 op.renderVizLayer = (ctx, layer, viz) =>
 {
-    ctx.fillStyle = "#222";
-    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
+    viz.clear(ctx, layer);
 
     if (!inStr.get()) return;
 

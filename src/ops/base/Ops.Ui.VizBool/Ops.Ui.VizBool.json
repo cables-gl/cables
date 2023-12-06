@@ -44,7 +44,7 @@
             {
                 "type": 0,
                 "name": "Bool",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },

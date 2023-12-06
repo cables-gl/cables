@@ -81,15 +81,10 @@ inConsole.onTriggered = () =>
 
 op.renderVizLayer = (ctx, layer, viz) =>
 {
-    ctx.fillStyle = "#222";
-    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
+    viz.clear(ctx, layer);
 
     ctx.save();
     ctx.scale(layer.scale, layer.scale);
-
-    // ctx.font = "normal 10px sourceCodePro";
-    // ctx.fillStyle = "#ccc";
-    // const padding = 10;
 
     viz.renderText(ctx, layer, lines, {
         "zoomText": inZoomText.get(),
