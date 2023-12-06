@@ -97,15 +97,13 @@
     "id": "cedffacf-0f09-4342-bd21-540bd9c8037d",
     "created": 1504871697605,
     "summary": "touch screen input: e.g. position of fingers ",
-    "youtubeid": "",
-    "collections": [
-        "hardware"
-    ],
-    "relatedops": [
-        ""
-    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Flip Y",
+                "text": "Only applies to Finger1"
+            }
+        ]
     },
     "changelog": [
         {
