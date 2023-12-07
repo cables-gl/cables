@@ -1,0 +1,64 @@
+{
+    "authorName": "andro",
+    "id": "f77176eb-6c43-44b7-8229-b6a7e78fe934",
+    "created": 1546883582091,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiply texture",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gamma correction",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Allows for Gamma correction of a texture",
+    "youtubeid": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Multiply texture",
+                "text": "Multiplies value of texture before gamma correction"
+            },
+            {
+                "name": "Gamma correction",
+                "text": "Amount of gamma correction to apply"
+            }
+        ]
+    },
+    "exampleProjectId": "WugPbx",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.GammaCorrection renamed to Ops.Gl.ImageCompose.GammaCorrection",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854687868
+        }
+    ]
+}

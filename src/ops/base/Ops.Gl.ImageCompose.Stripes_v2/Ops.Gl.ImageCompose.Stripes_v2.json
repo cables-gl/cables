@@ -1,0 +1,100 @@
+{
+    "authorName": "andro",
+    "id": "b8a37747-1e84-4665-b1cc-29256d55cc7c",
+    "created": 1541169517706,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gradients",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Circular",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Draw stripes into the current ImageCompose",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "added circular mode",
+            "author": "pandur",
+            "date": 1565450488807
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Stripes_v2 renamed to Ops.Gl.ImageCompose.Stripes_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856058064
+        }
+    ],
+    "exampleProjectId": "dYhlT6"
+}

@@ -1,0 +1,54 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "levels",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ]
+    },
+    "summary": "reduce number of colors",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "6828f239-09be-45fd-afab-7962596fd2a4",
+    "created": 1542698279938,
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344250583
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Posterize renamed to Ops.Gl.ImageCompose.Posterize",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856322607
+        }
+    ],
+    "exampleProjectId": "_MMoT6"
+}

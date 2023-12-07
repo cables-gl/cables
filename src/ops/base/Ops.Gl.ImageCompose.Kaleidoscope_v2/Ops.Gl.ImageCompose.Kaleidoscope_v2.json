@@ -1,0 +1,103 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sides",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Angle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Slide X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Slide Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Kaleidoscope effect",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "3c900fc2-8508-4531-a365-43224f7751c8",
+    "created": 1650886093127,
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344212850
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Kaleidoscope",
+            "author": "pandur",
+            "date": 1650886093128
+        },
+        {
+            "message": "Ops.User.pandur.KaleidoscopeV2 renamed to Ops.Dev.KaleidoscopeV2",
+            "author": "pandur",
+            "date": 1650886527357
+        },
+        {
+            "message": "Ops.Dev.KaleidoscopeV2 renamed to Ops.Gl.TextureEffects.Kaleidoscope_v2",
+            "author": "pandur",
+            "date": 1652093373646
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Kaleidoscope_v2 renamed to Ops.Gl.ImageCompose.Kaleidoscope_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855212019
+        }
+    ],
+    "exampleProjectId": "n4DaW6",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": null,
+    "youtubeids": []
+}

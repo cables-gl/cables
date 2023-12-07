@@ -23,7 +23,7 @@ op.onFileChanged = function (fn)
 {
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
-        if (ele)ele.style["background-image"] = "none";
+        if (ele && ele.style)ele.style["background-image"] = "none";
         cacheBust = CABLES.uuid();
         update();
     }
@@ -69,11 +69,6 @@ function update()
             ele.style["background-repeat"] = inRepeat.get();
         }
     }
-    // else
-    // {
-    //     // really needed ?
-    //     setTimeout(update,100);
-    // }
 
     outEle.set(inEle.get());
 }

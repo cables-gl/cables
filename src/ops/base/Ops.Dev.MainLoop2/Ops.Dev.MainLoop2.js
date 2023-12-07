@@ -35,13 +35,15 @@ testMultiMainloop();
 
 function updateHdpi()
 {
+    setPixelDensity();
+
     if (CABLES.UI)
     {
         if (hdpi.get() < 1)
             op.patch.cgl.canvas.style.imageRendering = "pixelated";
     }
 
-    // op.patch.cgl.updateSize();
+    op.patch.cgl.updateSize();
     if (CABLES.UI) gui.setLayout();
 }
 
@@ -79,6 +81,12 @@ op.onDelete = function ()
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 };
 
+function setPixelDensity()
+{
+    if (hdpi.get() != 0) op.patch.cgl.pixelDensity = Math.min(hdpi.get(), window.devicePixelRatio);
+    else op.patch.cgl.pixelDensity = window.devicePixelRatio;
+}
+
 function render(time)
 {
     if (!active.get()) return;
@@ -86,8 +94,7 @@ function render(time)
 
     op.patch.cg = cgl;
 
-    if (hdpi.get() != 0) op.patch.cgl.pixelDensity = Math.min(hdpi.get(), window.devicePixelRatio);
-    else op.patch.cgl.pixelDensity = window.devicePixelRatio;
+    setPixelDensity();
 
     // if (hdpi.get())op.patch.cgl.pixelDensity = window.devicePixelRatio;
 

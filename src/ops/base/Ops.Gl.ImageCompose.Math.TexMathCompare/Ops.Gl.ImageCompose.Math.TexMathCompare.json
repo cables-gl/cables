@@ -1,0 +1,118 @@
+{
+    "summary": "compare and pass through of color channel values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Comparison index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Result index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "R Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "G Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "B Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "A Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "b7689782-3f25-4713-b3fe-b92312a3f4bd",
+    "created": 1675320365138,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1645190583290
+        },
+        {
+            "message": "Ops.User.pandur.VertTexTransform renamed to Ops.Dev.VertexTexture.VertTexTransform",
+            "author": "pandur",
+            "date": 1645192511723
+        },
+        {
+            "message": "Ops.Dev.VertexTexture.VertTexTransform renamed to Ops.Gl.TextureEffects.Math.RgbTransform",
+            "author": "pandur",
+            "date": 1670234605102
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Math.RgbTransform",
+            "author": "pandur",
+            "date": 1674127973848
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.RgbNormalize",
+            "author": "pandur",
+            "date": 1675320365139
+        },
+        {
+            "message": "Ops.User.pandur.TexMathLogic renamed to Ops.User.pandur.TexMathCompare",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675325015336
+        },
+        {
+            "message": "Ops.User.pandur.TexMathCompare renamed to Ops.Gl.TextureEffects.Math.TexMathCompare",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1677098750432
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Math.TexMathCompare renamed to Ops.Gl.ImageCompose.Math.TexMathCompare",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701854943143
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "RjKQWp"
+}

@@ -1,0 +1,68 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "threshold",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "4fb6167d-a9b0-4604-84c4-755b09fd8dd7",
+    "created": 1519027703473,
+    "summary": "convert color to black and white patterns",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "eECnT6",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Dither renamed to Ops.Gl.ImageCmpose.Dither",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855100436
+        },
+        {
+            "message": "Ops.Gl.ImageCmpose.Dither renamed to Ops.Gl.ImageCompose.Dither",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856132634
+        }
+    ]
+}

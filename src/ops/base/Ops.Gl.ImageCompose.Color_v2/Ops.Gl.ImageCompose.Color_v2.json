@@ -1,0 +1,105 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "fill image using a color (overlay)",
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "6dada2b7-da7c-47ee-87a9-a12e87055208",
+    "created": 1650374368022,
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "AnqmT6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Color",
+            "author": "pandur",
+            "date": 1650374368024
+        },
+        {
+            "message": "Ops.User.pandur.ColorV2 renamed to Ops.Dev.TextureEffects.ColorV2",
+            "author": "pandur",
+            "date": 1650374388166
+        },
+        {
+            "message": "Ops.Dev.TextureEffects.ColorV2 renamed to Ops.Gl.TextureEffects.Color_v2",
+            "author": "pandur",
+            "date": 1653287174827
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Color_v2 renamed to Ops.Gl.ImageCompose.Color_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855706492
+        }
+    ]
+}

@@ -1,0 +1,75 @@
+{
+    "authorName": "pandur",
+    "id": "c089646e-9324-48b2-8b32-81240408222e",
+    "created": 1541486742328,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "displaceTex"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amount X",
+                "group": "Axis Displacement Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "amount Y",
+                "group": "Axis Displacement Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Input index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Zero Displace index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Changes color lookup for every pixel using a displacement map",
+    "youtubeid": "cc5Vlmvlq6A",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Qxb9W6",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.PixelDisplacement_v3 renamed to Ops.Gl.ImageCompose.PixelDisplacement_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856198114
+        }
+    ]
+}

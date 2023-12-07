@@ -1,0 +1,121 @@
+{
+    "summary": "Draws a Border (rectangular frame) around the current ImageCompose",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Side A",
+                "group": "Sides",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Side B",
+                "group": "Sides",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Side C",
+                "group": "Sides",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Side D",
+                "group": "Sides",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "ee773dc0-d00c-4d6a-86b7-8fd32f9d72e1",
+    "created": 1650524964631,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "ctPnT6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Border",
+            "author": "pandur",
+            "date": 1650524964633
+        },
+        {
+            "message": "Ops.User.pandur.BorderV2 renamed to Ops.Dev.BorderV2",
+            "author": "pandur",
+            "date": 1650525078806
+        },
+        {
+            "message": "Ops.Dev.BorderV2 renamed to Ops.Gl.TextureEffects.Border_v2",
+            "author": "pandur",
+            "date": 1653286094511
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Border_v2 renamed to Ops.Gl.ImageCompose.Border_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854850332
+        }
+    ]
+}

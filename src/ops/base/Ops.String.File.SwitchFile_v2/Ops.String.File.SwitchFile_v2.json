@@ -1,0 +1,104 @@
+{
+    "id": "250c8d79-2b83-419f-8c23-910d95936f2c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550643918720
+        },
+        {
+            "message": "cloned op from Ops.Value.SwitchFile",
+            "author": "pandur",
+            "date": 1615474741500
+        },
+        {
+            "message": "Ops.User.pandur.SwitchFile2 renamed to Ops.Value.SwitchFile_v2",
+            "author": "pandur",
+            "date": 1615709712566
+        },
+        {
+            "message": "Ops.Value.SwitchFile_v2 renamed to Ops.String.File.SwitchFile_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701853020605
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1615474741499,
+    "summary": "switch between filenames",
+    "issues": "",
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "File 0"
+            },
+            {
+                "type": 5,
+                "name": "File 1"
+            },
+            {
+                "type": 5,
+                "name": "File 2"
+            },
+            {
+                "type": 5,
+                "name": "File 3"
+            },
+            {
+                "type": 5,
+                "name": "File 4"
+            },
+            {
+                "type": 5,
+                "name": "File 5"
+            },
+            {
+                "type": 5,
+                "name": "File 6"
+            },
+            {
+                "type": 5,
+                "name": "File 7"
+            },
+            {
+                "type": 5,
+                "name": "File 8"
+            },
+            {
+                "type": 5,
+                "name": "File 9"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Needs docs and an example",
+            "author": "andro",
+            "id": "c53a5d00-1cef-4227-b27a-b0b83d43024e",
+            "date": 1558358477711,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605512036945
+        }
+    ],
+    "caniusequery": "",
+    "youtubeids": [
+        "TdHgjqOLpnM"
+    ]
+}

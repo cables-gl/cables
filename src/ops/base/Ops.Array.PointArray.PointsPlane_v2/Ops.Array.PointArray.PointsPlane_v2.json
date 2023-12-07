@@ -1,0 +1,85 @@
+{
+    "id": "d453f898-17d4-4e2c-b8c7-7b7b34c0ff68",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599741464116
+        },
+        {
+            "message": "Ops.Points.PointsPlane_v2 renamed to Ops.Array.PointArray.PointsPlane_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854275766
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1599741475800,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Rows",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Columns",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Row Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Row Numbers"
+            },
+            {
+                "type": 3,
+                "name": "Column Numbers"
+            }
+        ]
+    },
+    "summary": "Generate coordinates for a rectangular field / grid of points",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "icchV5",
+    "caniusequery": ""
+}

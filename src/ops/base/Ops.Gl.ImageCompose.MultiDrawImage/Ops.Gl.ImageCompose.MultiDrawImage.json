@@ -1,0 +1,338 @@
+{
+    "summary": "draw multiple images at once",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Mask Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Texture 1",
+                "group": "Image 1",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 1 index",
+                "group": "Image 1",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 1",
+                "group": "Image 1",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 1 index",
+                "group": "Image 1",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 1 index",
+                "group": "Image 1",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 1",
+                "group": "Image 1",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 2",
+                "group": "Image 2",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 2 index",
+                "group": "Image 2",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 2",
+                "group": "Image 2",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 2 index",
+                "group": "Image 2",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 2 index",
+                "group": "Image 2",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 2",
+                "group": "Image 2",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 3",
+                "group": "Image 3",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 3 index",
+                "group": "Image 3",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 3",
+                "group": "Image 3",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 3 index",
+                "group": "Image 3",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 3 index",
+                "group": "Image 3",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 3",
+                "group": "Image 3",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 4",
+                "group": "Image 4",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 4 index",
+                "group": "Image 4",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 4",
+                "group": "Image 4",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 4 index",
+                "group": "Image 4",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 4 index",
+                "group": "Image 4",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 4",
+                "group": "Image 4",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 5",
+                "group": "Image 5",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 5 index",
+                "group": "Image 5",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 5",
+                "group": "Image 5",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 5 index",
+                "group": "Image 5",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 5 index",
+                "group": "Image 5",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 5",
+                "group": "Image 5",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 6",
+                "group": "Image 6",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 6 index",
+                "group": "Image 6",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 6",
+                "group": "Image 6",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 6 index",
+                "group": "Image 6",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 6 index",
+                "group": "Image 6",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 6",
+                "group": "Image 6",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 7",
+                "group": "Image 7",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 7 index",
+                "group": "Image 7",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 7",
+                "group": "Image 7",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 7 index",
+                "group": "Image 7",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 7 index",
+                "group": "Image 7",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 7",
+                "group": "Image 7",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture 8",
+                "group": "Image 8",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode 8 index",
+                "group": "Image 8",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Mask 8",
+                "group": "Image 8",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 8 index",
+                "group": "Image 8",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity 8 index",
+                "group": "Image 8",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount 8",
+                "group": "Image 8",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "4df51ead-c46c-471d-ac5e-1872219a3174",
+    "created": 1620223088189,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Invert",
+            "author": "pandur",
+            "date": 1620223088189
+        },
+        {
+            "message": "Ops.User.pandur.MultiDrawImage renamed to Ops.Gl.TextureEffects.MultiDrawImage",
+            "author": "pandur",
+            "date": 1620311106730
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.MultiDrawImage renamed to Ops.Gl.ImageCompose.MultiDrawImage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855267789
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "dr8EeE"
+}

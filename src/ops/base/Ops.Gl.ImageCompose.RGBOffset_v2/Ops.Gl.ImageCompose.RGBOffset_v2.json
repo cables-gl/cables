@@ -1,0 +1,178 @@
+{
+    "id": "41a9655a-6e05-47ee-82b9-f19a33a5cfd4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1600674650971
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RGBOffset",
+            "author": "pandur",
+            "date": 1650966987036
+        },
+        {
+            "message": "Ops.User.pandur.RGBOffsetV2 renamed to Ops.Dev.RGBOffsetV2",
+            "author": "pandur",
+            "date": 1650967083268
+        },
+        {
+            "message": "Ops.Dev.RGBOffsetV2 renamed to Ops.Gl.TextureEffects.RGBOffset_v2",
+            "author": "pandur",
+            "date": 1653286729992
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RGBOffset_v2 renamed to Ops.Gl.ImageCompose.RGBOffset_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856347744
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1650966987036,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Red offset X",
+                "group": "Red",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Red offset Y",
+                "group": "Red",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Red amount",
+                "group": "Red",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Green offset X",
+                "group": "Green",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Green offset Y",
+                "group": "Green",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Green amount",
+                "group": "Green",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blue offset X",
+                "group": "Blue",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blue offset Y",
+                "group": "Blue",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blue amount",
+                "group": "Blue",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Offsets the xy components of an RGB texture",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "trigger"
+            },
+            {
+                "name": "Blend Mode index",
+                "text": "blend mode"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "amount for blend mode"
+            },
+            {
+                "name": "Red offset X",
+                "text": "offset red channel on x position"
+            },
+            {
+                "name": "Red offset Y",
+                "text": "offset red channel on y position"
+            },
+            {
+                "name": "Red amount",
+                "text": "amount of red (fade, hide, show)"
+            },
+            {
+                "name": "Green offset X",
+                "text": "offset green channel on x position"
+            },
+            {
+                "name": "Green offset Y",
+                "text": "offset green channel on y position"
+            },
+            {
+                "name": "Green amount",
+                "text": "amount of green (fade, hide, show)"
+            },
+            {
+                "name": "Blue offset X",
+                "text": "offset blue channel on x position"
+            },
+            {
+                "name": "Blue offset Y",
+                "text": "offset blue channel channel on y position"
+            },
+            {
+                "name": "Blue amount",
+                "text": "amount of blue (fade, hide, show)"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger out"
+            }
+        ]
+    },
+    "exampleProjectId": "pzC9rn"
+}

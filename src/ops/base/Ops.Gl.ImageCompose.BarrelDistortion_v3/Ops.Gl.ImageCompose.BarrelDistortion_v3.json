@@ -1,0 +1,72 @@
+{
+    "id": "d5efa9e4-d552-42f8-a345-d49e5e861602",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1579615567550
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.BarrelDistortion_v2",
+            "author": "pandur",
+            "date": 1650964935238
+        },
+        {
+            "message": "Ops.User.pandur.BarrelDistortion renamed to Ops.Dev.BarrelDistortionV3",
+            "author": "pandur",
+            "date": 1650964956987
+        },
+        {
+            "message": "Ops.Dev.BarrelDistortionV3 renamed to Ops.Gl.TextureEffects.BarrelDistortion_v3",
+            "author": "pandur",
+            "date": 1653286575892
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.BarrelDistortion_v3 renamed to Ops.Gl.ImageCompose.BarrelDistortion_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701855467994
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Intensity",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1650964935237,
+    "summary": "Simulate fisheye effect",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "qIOrS-"
+}

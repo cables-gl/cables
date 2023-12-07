@@ -1,0 +1,71 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Centered",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "draw a checkerboard pattern",
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "9a183b68-f62c-4ba5-aad6-c7976de5a51f",
+    "created": 1511080400344,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "J4KL_4",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.CheckerBoard renamed to Ops.Gl.ImageComp.CheckerBoard",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856072778
+        },
+        {
+            "message": "Ops.Gl.ImageComp.CheckerBoard renamed to Ops.Gl.ImageCompose.CheckerBoard",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856091561
+        }
+    ]
+}

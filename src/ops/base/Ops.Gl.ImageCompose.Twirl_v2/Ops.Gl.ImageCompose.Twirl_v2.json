@@ -1,0 +1,53 @@
+{
+    "updated": 1521890103593,
+    "authorName": "pandur",
+    "id": "d8f7f98b-9e83-45c4-9cc5-e82fd35c5951",
+    "created": 1521445103210,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "twirl image effect",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "2_pmJ5",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Twirl_v2 renamed to Ops.Gl.ImageCompose.Twirl_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701855922981
+        }
+    ]
+}

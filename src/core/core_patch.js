@@ -472,7 +472,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
         uiAttribs.subPatch = uiAttribs.subPatch || 0;
 
-        op.uiAttr(uiAttribs);
+        op.setUiAttribs(uiAttribs);
         if (op.onCreate) op.onCreate();
 
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
@@ -490,13 +490,13 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
-        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
 
         if (op.init)
         {
             op.init();
         }
         op.emitEvent("init", fromDeserialize);
+        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
     }
     else
     {
@@ -932,6 +932,45 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
             return this.ops[i];
     return false;
 };
+
+Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
+{
+    const ops = this.ops;
+    for (let i = 0; i < ops.length; i++)
+    {
+        const op = ops[i];
+        if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
+    }
+};
+
+
+Patch.prototype.getSubPatchOps = function (patchId, recursive = false) // remove !! moved to extend class
+{
+    let ops = [];
+    for (const i in this.ops)
+    {
+        if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
+        {
+            ops.push(this.ops[i]);
+        }
+    }
+    if (recursive)
+    {
+        for (const i in ops)
+        {
+            if (ops[i].storage && ops[i].storage.subPatchVer)
+            {
+                const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
+                if (subPatchPort)
+                {
+                    ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
+                }
+            }
+        }
+    }
+    return ops;
+};
+
 
 
 Patch.prototype._addLink = function (opinid, opoutid, inName, outName)

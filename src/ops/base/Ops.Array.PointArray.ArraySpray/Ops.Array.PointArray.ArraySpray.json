@@ -1,0 +1,223 @@
+{
+    "id": "27023519-9e88-4b85-9fcf-b316847e0df7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1569418562571
+        },
+        {
+            "message": "Ops.Admin.ArraySpray renamed to Ops.Gl.ArraySpray",
+            "author": "pandur",
+            "date": 1571078125486
+        },
+        {
+            "message": "Ops.Gl.ArraySpray renamed to Ops.Systens.ArraySpray",
+            "author": "pandur",
+            "date": 1571126063398
+        },
+        {
+            "message": "Ops.Systens.ArraySpray renamed to Ops.Systems.ArraySpray",
+            "author": "pandur",
+            "date": 1571128091069
+        },
+        {
+            "message": "Added output trigger",
+            "author": "simod",
+            "date": 1571748235057
+        },
+        {
+            "message": "fix bug with centering axis parameters",
+            "author": "pandur",
+            "date": 1644336157366
+        },
+        {
+            "message": "Ops.Systems.ArraySpray renamed to Ops.Array.PointArray.ArraySpray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701850704574
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1569418566706,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 0,
+                "name": "time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "num",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "movement x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "movement y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "movement z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center X",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Center Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Center Z",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "lifetime",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Lifetime Minimum",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger Out"
+            },
+            {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
+                "type": 3,
+                "name": "Lifetime"
+            }
+        ]
+    },
+    "summary": "Particle Spray simulation",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger in"
+            },
+            {
+                "name": "time",
+                "text": "Timer to animate the cubes movement"
+            },
+            {
+                "name": "num",
+                "text": "Array length/amount of particles"
+            },
+            {
+                "name": "Size X",
+                "text": "Size of the particle on the x axis"
+            },
+            {
+                "name": "Size Y",
+                "text": "Size of the particle on the y axis"
+            },
+            {
+                "name": "Size Z",
+                "text": "Size of the particle on the z axis"
+            },
+            {
+                "name": "movement x",
+                "text": "The direction to move the spray in on the x axis"
+            },
+            {
+                "name": "movement y",
+                "text": "The direction to move the spray in on the y axis"
+            },
+            {
+                "name": "movement z",
+                "text": "The direction to move the spray in on the z axis"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset state"
+            },
+            {
+                "name": "lifetime",
+                "text": "Amount of time before a particle dies out and is reborn"
+            },
+            {
+                "name": "Lifetime Minimum",
+                "text": "Minimum lifetime of particle"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Positions",
+                "text": "Positional array out"
+            },
+            {
+                "name": "Lifetime",
+                "text": "LifeTime array out"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "aasaa",
+            "author": "pandur",
+            "id": "d963c0d4-ede1-4631-a953-f02a735f50b9",
+            "date": 1605544621941,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605544623649
+        },
+        {
+            "message": "csdcsdcsd",
+            "author": "cables",
+            "id": "81436842-a07e-4897-99fa-01cf22ee738f",
+            "date": 1605544916581,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605544927642
+        }
+    ],
+    "exampleProjectId": "hY5lAw"
+}

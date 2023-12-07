@@ -301,7 +301,6 @@
     "summary": "PBR/Physical Based Rendering Material for realistic materials",
     "issues": "",
     "caniusequery": "",
-    "relatedops": null,
     "youtubeids": [
         "uwoj7R52yU8"
     ],
@@ -336,6 +335,14 @@
                 "text": "material opacity mode"
             },
             {
+                "name": "Use Clear Coat",
+                "text": "add a thick dielectric layer to your material. This layer will ignore the normal map."
+            },
+            {
+                "name": "Clear Coat Roughness",
+                "text": "dielectric layer roughness amount"
+            },
+            {
                 "name": "Tonemapping index",
                 "text": "tone mapping modes"
             },
@@ -366,14 +373,6 @@
             {
                 "name": "Faster heightmapping",
                 "text": "toggle to use less precise but more efficient method"
-            },
-            {
-                "name": "Use Clear Coat",
-                "text": "add a thick dielectric layer to your material. This layer will ignore the normal map."
-            },
-            {
-                "name": "Clear Coat Roughness",
-                "text": "dielectric layer roughness amount"
             },
             {
                 "name": "IBL LUT",
@@ -429,5 +428,5 @@
             }
         ]
     },
-    "exampleProjectId": "RnUxjX"
+    "exampleProjectId": "9z9kFK"
 }

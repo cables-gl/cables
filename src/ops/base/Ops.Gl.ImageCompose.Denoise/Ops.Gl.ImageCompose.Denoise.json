@@ -1,0 +1,54 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Exponent",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "updated": 1542701451115,
+    "authorName": "pandur",
+    "id": "0abfea0f-1aa9-47bf-b540-f54f89a60a6c",
+    "created": 1542701445023,
+    "summary": "Denoise texture effect - used to smooth out noisy images",
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Exponent",
+                "text": "Denoise amount to apply"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "exampleProjectId": "4vWud8",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Denoise renamed to Ops.Gl.ImageCompose.Denoise",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854805811
+        }
+    ]
+}

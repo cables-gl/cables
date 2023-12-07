@@ -1,0 +1,148 @@
+{
+    "authorName": "pandur",
+    "id": "942ef040-9be9-4848-9122-61cb28cb7789",
+    "created": 1650880873618,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 2,
+                "name": "Multiplier",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "offset Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "center X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "center Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Scales a texture",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Scale X",
+                "text": "scale on the x axis"
+            },
+            {
+                "name": "Scale Y",
+                "text": "scale on the y axis"
+            },
+            {
+                "name": "offset X",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "offset Y",
+                "text": "Offset on the Y axis"
+            },
+            {
+                "name": "center X",
+                "text": "Changes the center point on the X axis"
+            },
+            {
+                "name": "center Y",
+                "text": "Changes the center point on the Y axis"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "added offset and center parameters for better positioning",
+            "author": "pandur",
+            "date": 1553079125529
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ScaleTexture",
+            "author": "pandur",
+            "date": 1650880873619
+        },
+        {
+            "message": "Ops.User.pandur.ScaleTextureV2 renamed to Ops.Dev.ScaleTextureV2",
+            "author": "pandur",
+            "date": 1650881256300
+        },
+        {
+            "message": "Ops.Dev.ScaleTextureV2 renamed to Ops.Gl.TextureEffects.ScaleTexture_v2",
+            "author": "pandur",
+            "date": 1653286409735
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.ScaleTexture_v2 renamed to Ops.Gl.ImageCompose.ScaleTexture_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856148126
+        }
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "kj_Zbx"
+}

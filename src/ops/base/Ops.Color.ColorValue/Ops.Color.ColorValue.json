@@ -1,0 +1,113 @@
+{
+    "authorName": "tim",
+    "id": "7caa37c8-f2a7-49f2-a29c-96af362abca0",
+    "created": 1517408692744,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "outr",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "outg",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "outb",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "outa",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hex",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ]
+    },
+    "summary": "Use a color value on multiple places",
+    "docs": {
+        "ports": [
+            {
+                "name": "r",
+                "text": "Red color value, between `0.0` and `1.0`"
+            },
+            {
+                "name": "g",
+                "text": "Green color value, between `0.0` and `1.0`"
+            },
+            {
+                "name": "b",
+                "text": "Blue color value, between `0.0` and `1.0`"
+            },
+            {
+                "name": "a",
+                "text": "Alpha value (opacity), between `0.0` and `1.0`"
+            },
+            {
+                "name": "outr",
+                "text": "Red, same as input port `R`"
+            },
+            {
+                "name": "outg",
+                "text": "Green, same as input port `G`"
+            },
+            {
+                "name": "outb",
+                "text": "Blue, same as input port `B`"
+            },
+            {
+                "name": "outa",
+                "text": "Alpha, Same as input port `A`"
+            },
+            {
+                "name": "Hex",
+                "text": "The hex value of the color"
+            },
+            {
+                "name": "Array",
+                "text": "The color components as array"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.ColorValue renamed to Ops.Color.ColorValue",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701851929705
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pixel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Lens Distort",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Mask"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "38ac43a1-1757-48f4-9450-29f07ac0d376",
+    "created": 1508766086675,
+    "summary": "simulating lens effect by shifting rgb channels",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344111327
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.ChromaticAberration renamed to Ops.Gl.ImageCompose.ChromaticAberration",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701856059975
+        }
+    ],
+    "exampleProjectId": "X0WkT6"
+}

@@ -1,0 +1,189 @@
+{
+    "authorName": "pandur",
+    "id": "01ad08b6-dea4-4765-984c-3885c9c6520f",
+    "created": 1650543039389,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "group": "Look",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "RGB",
+                "group": "Look",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Minimum value",
+                "group": "Look",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Maximum value",
+                "group": "Look",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num X",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Y",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Centered",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Pixelated noise",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend mode to apply"
+            },
+            {
+                "name": "Loop",
+                "text": "If enabled the values loop and don't jump from 0-1"
+            },
+            {
+                "name": "RGB",
+                "text": "Enable for rgb noise"
+            },
+            {
+                "name": "Minimum value",
+                "text": "Minimum value the noise can reach"
+            },
+            {
+                "name": "Maximum value",
+                "text": "Maximum value the noise can reach"
+            },
+            {
+                "name": "Num X",
+                "text": "Number of cells on the x axis"
+            },
+            {
+                "name": "Num Y",
+                "text": "Number of cells on the y axis"
+            },
+            {
+                "name": "X",
+                "text": "Offsets on the x axis"
+            },
+            {
+                "name": "Y",
+                "text": "Offsets on the y axis"
+            },
+            {
+                "name": "Z",
+                "text": "Use this to animate the noise"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "exampleProjectId": "pdjoOb",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.PixelNoise_v2",
+            "author": "pandur",
+            "date": 1650543039389
+        },
+        {
+            "message": "Ops.User.pandur.PixelNoiseV3 renamed to Ops.Dev.PixelNoiseV3",
+            "author": "pandur",
+            "date": 1650543054908
+        },
+        {
+            "message": "Ops.Dev.PixelNoiseV3 renamed to Ops.Gl.TextureEffects.Noise.PixelNoise_v3",
+            "author": "pandur",
+            "date": 1653286209633
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Noise.PixelNoise_v3 renamed to Ops.Gl.ImageCompose.Noise.PixelNoise_v3",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701855447130
+        }
+    ]
+}

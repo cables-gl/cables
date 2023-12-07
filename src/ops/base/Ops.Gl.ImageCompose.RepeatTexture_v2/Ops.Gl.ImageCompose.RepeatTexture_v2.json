@@ -1,0 +1,85 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Repeat Image",
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "ff9aa796-d781-444c-a9d4-a62157f82dd5",
+    "created": 1650883045893,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Repeat renamed to Ops.Gl.TextureEffects.RepeatTexture",
+            "author": "pandur",
+            "date": 1567674684001
+        },
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RepeatTexture",
+            "author": "pandur",
+            "date": 1650883045894
+        },
+        {
+            "message": "Ops.User.pandur.RepeatTextureV2 renamed to Ops.Dev.RepeatTextureV2",
+            "author": "pandur",
+            "date": 1650883256754
+        },
+        {
+            "message": "Ops.Dev.RepeatTextureV2 renamed to Ops.Gl.TextureEffects.RepeatTexture_v2",
+            "author": "pandur",
+            "date": 1653286530312
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RepeatTexture_v2 renamed to Ops.Gl.ImageCompose.RepeatTexture_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701856284354
+        }
+    ],
+    "exampleProjectId": "S6JnT6"
+}
