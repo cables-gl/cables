@@ -83,11 +83,26 @@
             {
                 "name": "innerRadius",
                 "text": "From 0 to 1"
+            },
+            {
+                "name": "percent",
+                "text": "How much of the circumference to draw. Should be a number between 0 and 1. "
+            },
+            {
+                "name": "steps",
+                "text": "Increment for drawing the segments. Ex.: 2 will draw only every 2nd segment. Note: requires InnerRadius > 0."
+            },
+            {
+                "name": "invertSteps",
+                "text": "If true, the behavior of steps is inverted, i.e., if steps = 3, instead of drawing only every 3rd segment, all segments except every 3rd are drawn. Note: requires InnerRadius>0."
+            },
+            {
+                "name": "Spline",
+                "text": "Draws only the border of the circle as a line."
             }
         ]
     },
     "issues": "",
-    "relatedops": null,
     "youtubeids": [],
     "exampleProjectId": "DAAkQ6",
     "changelog": [
