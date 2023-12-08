@@ -830,6 +830,14 @@ Patch.prototype.getOpsByObjName = function (name)
     return arr;
 };
 
+Patch.prototype.getOpsByOpId = function (opid)
+{
+    const arr = [];
+    for (const i in this.ops)
+        if (this.ops[i].opId == opid) arr.push(this.ops[i]);
+    return arr;
+};
+
 Patch.prototype.loadLib = function (which)
 {
     ajaxSync(
@@ -870,6 +878,7 @@ Patch.prototype.reloadOp = function (objName, cb, refOldOp)
         count++;
         const oldOp = oldOps[i];
         oldOp.deleted = true;
+        console.log("reloadop ", objName, "subpatch:", oldOp.uiAttribs.subPatch);
         const op = this.addOp(objName, oldOp.uiAttribs);
         if (!op) continue;
         if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
@@ -952,32 +961,32 @@ Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to
 };
 
 
-Patch.prototype.getSubPatchOps = function (patchId, recursive = false) // remove !! moved to extend class
-{
-    let ops = [];
-    for (const i in this.ops)
-    {
-        if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
-        {
-            ops.push(this.ops[i]);
-        }
-    }
-    if (recursive)
-    {
-        for (const i in ops)
-        {
-            if (ops[i].storage && ops[i].storage.subPatchVer)
-            {
-                const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
-                if (subPatchPort)
-                {
-                    ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
-                }
-            }
-        }
-    }
-    return ops;
-};
+// Patch.prototype.getSubPatchOps = function (patchId, recursive = false) // remove !! moved to extend class
+// {
+//     let ops = [];
+//     for (const i in this.ops)
+//     {
+//         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
+//         {
+//             ops.push(this.ops[i]);
+//         }
+//     }
+//     if (recursive)
+//     {
+//         for (const i in ops)
+//         {
+//             if (ops[i].storage && ops[i].storage.subPatchVer)
+//             {
+//                 const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
+//                 if (subPatchPort)
+//                 {
+//                     ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
+//                 }
+//             }
+//         }
+//     }
+//     return ops;
+// };
 
 
 
