@@ -1,6 +1,9 @@
 const patchId = "bp2sub_" + op.id;
-new CABLES.SubPatchOp(op, { "subId": patchId });
 
+new CABLES.SubPatchOp(op, { "subId": patchId });
+// initInnerPorts(patchId);
+
+console.log("init subpatch...");
 initializeSubpatch();
 
 function initializeSubpatch()
@@ -20,7 +23,7 @@ function initializeSubpatch()
         p.ops[i].uiAttribs.blueprintSubpatch2 = true;
     }
 
-    op.patch.deSerialize(p);
+    op.patch.deSerialize(p, { "opsCreated": op.initInnerPorts });
     if (CABLES.UI)gui.savedState.setSaved("blueprintloaded", patchId);
     op.patch.emitEvent("subpatchExpose", patchId);
     op.setStorage({ "blueprintVer": 2 });
