@@ -1,5 +1,5 @@
 import { EventTarget } from "./eventtarget";
-import { uuid, UTILS, cleanJson } from "./utils";
+import { UTILS, cleanJson, shortId } from "./utils";
 import { CONSTANTS } from "./constants";
 import { Port } from "./core_port";
 import Logger from "./core_logger";
@@ -59,7 +59,7 @@ const Op = function ()
         this.getTitle();
     }
 
-    this.id = arguments[2] || uuid(); // instance id
+    this.id = arguments[2] || shortId(); // instance id
     this.onAddPort = null;
     this.onCreate = null;
     this.onResize = null;

@@ -11,8 +11,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1678290956529
+        },
+        {
+            "message": "Ops.Dev.Ui.PatchInput renamed to Ops.Ui.SubPatchInput",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1702029916865
         }
     ],
     "authorName": "pandur",
-    "created": 1678290941769
+    "created": 1678290941769,
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    }
 }

@@ -11,8 +11,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1678290913751
+        },
+        {
+            "message": "Ops.Dev.Ui.PatchOutput renamed to Ops.Ui.SubPatchOutput",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1702029936449
         }
     ],
     "authorName": "pandur",
-    "created": 1678290896829
+    "created": 1678290896829,
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    }
 }

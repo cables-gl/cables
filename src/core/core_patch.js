@@ -1,5 +1,5 @@
 import { EventTarget } from "./eventtarget";
-import { ajax, uuid, ajaxSync, prefixedHash, cleanJson } from "./utils";
+import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils";
 import { LoadingStatus } from "./loadingstatus";
 import { Instancing } from "./instancing";
 import { Timer } from "./timer";
@@ -746,7 +746,7 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port2)
     {
-        console.log("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
+        console.log("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
         return;
     }
 
@@ -849,7 +849,7 @@ Patch.prototype.loadLib = function (which)
     // add the returned content to a newly created script tag
 };
 
-Patch.prototype.reloadOp = function (objName, cb)
+Patch.prototype.reloadOp = function (objName, cb, refOldOp)
 {
     let count = 0;
     const ops = [];
@@ -863,6 +863,8 @@ Patch.prototype.reloadOp = function (objName, cb)
         }
     }
 
+    let refNewOp = null;
+
     for (let i = 0; i < oldOps.length; i++)
     {
         count++;
@@ -872,6 +874,12 @@ Patch.prototype.reloadOp = function (objName, cb)
         if (!op) continue;
         if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
         ops.push(op);
+
+        if (oldOp == refOldOp)
+        {
+            console.log("FOUND OLD OP!!!!!!!!!!!!!");
+            refNewOp = op;
+        }
 
         let l;
         for (let j in oldOp.portsIn)
@@ -921,7 +929,7 @@ Patch.prototype.reloadOp = function (objName, cb)
 
         this.deleteOp(oldOp.id, false, true);
     }
-    cb(count, ops);
+    cb(count, ops, refNewOp);
 };
 
 
@@ -996,6 +1004,7 @@ Patch.prototype.deSerialize = function (obj, options)
 
     if (window.logStartup)logStartup("add " + obj.ops.length + " ops... ");
 
+    const addedOps = [];
     // add ops...
     for (let iop = 0; iop < obj.ops.length; iop++)
     {
@@ -1016,7 +1025,8 @@ Patch.prototype.deSerialize = function (obj, options)
 
         if (op)
         {
-            if (options.genIds) op.id = uuid();
+            addedOps.push(op);
+            if (options.genIds) op.id = shortId();
             op.portsInData = opData.portsIn;
             op._origData = JSON.parse(JSON.stringify(opData));
             op.storage = opData.storage;
@@ -1069,6 +1079,8 @@ Patch.prototype.deSerialize = function (obj, options)
     }
 
     if (window.logStartup)logStartup("creating links");
+
+    if (options.opsCreated)options.opsCreated(addedOps);
 
     // create links...
     if (obj.ops)
@@ -1507,7 +1519,9 @@ Patch.replaceOpIds = function (json, options)
         const op = json.ops[i];
         const oldId = op.id;
         let newId = CABLES.shortId();
+
         if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
+
         else if (options.prefixId) newId = options.prefixId + oldId;
         else if (options.refAsId) // when saving json
         {
@@ -1582,7 +1596,8 @@ Patch.replaceOpIds = function (json, options)
             {
                 if (json.ops[i].portsIn[k].name === "patchId")
                 {
-                    let newId = uuid();
+                    let newId = shortId();
+
                     if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
 
                     const oldSubPatchId = json.ops[i].portsIn[k].value;
