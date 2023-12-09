@@ -1,4 +1,4 @@
-const patchId = "blueprint2sub_" + op.id;
+const patchId = "bp2sub_" + op.id;
 new CABLES.SubPatchOp(op, { "subId": patchId });
 
 initializeSubpatch();

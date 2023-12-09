@@ -1,6 +1,6 @@
 
-const subpatchInputOpName = "Ops.Dev.Ui.PatchInput";
-const subpatchOutputOpName = "Ops.Dev.Ui.PatchOutput";
+const subpatchInputOpName = "Ops.Ui.SubPatchInput";
+const subpatchOutputOpName = "Ops.Ui.SubPatchOutput";
 
 const SubPatchOp = class
 {

@@ -29,6 +29,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1692694149694
+        },
+        {
+            "message": "Ops.Dev.SubpatchNew renamed to Ops.Ui.Subpatch2Temp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1702031078164
+        },
+        {
+            "message": " added core lib: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1702033709369
         }
     ],
     "authorName": "pandur",
