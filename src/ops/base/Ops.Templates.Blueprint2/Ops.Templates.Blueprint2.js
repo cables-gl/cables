@@ -1,9 +1,7 @@
 const patchId = "bp2sub_" + op.id;
 
 new CABLES.SubPatchOp(op, { "subId": patchId });
-// initInnerPorts(patchId);
 
-console.log("init subpatch...");
 initializeSubpatch();
 
 function initializeSubpatch()
