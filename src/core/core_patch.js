@@ -886,8 +886,13 @@ Patch.prototype.reloadOp = function (objName, cb, refOldOp)
 
         if (oldOp == refOldOp)
         {
-            console.log("FOUND OLD OP!!!!!!!!!!!!!");
             refNewOp = op;
+        }
+
+        if (oldOp.patchId)
+        {
+            op.oldSubPatchIds = oldOp.oldSubPatchIds || [];
+            op.oldSubPatchIds.push(oldOp.patchId.get());
         }
 
         let l;
