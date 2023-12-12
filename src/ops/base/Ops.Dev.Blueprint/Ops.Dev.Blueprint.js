@@ -248,9 +248,10 @@ function getSubPatchOps(patchId, recursive = false)
     let ops = [];
     for (const i in this.ops)
     {
-        if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
+        const o = op.patch.ops[i];
+        if (o.uiAttribs && o.uiAttribs.subPatch === patchId)
         {
-            ops.push(this.ops[i]);
+            ops.push(o);
         }
     }
     if (recursive)
