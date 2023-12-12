@@ -246,7 +246,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
 function getSubPatchOps(patchId, recursive = false)
 {
     let ops = [];
-    for (const i in this.ops)
+    for (const i in op.patch.ops)
     {
         const o = op.patch.ops[i];
         if (o.uiAttribs && o.uiAttribs.subPatch === patchId)
