@@ -23,7 +23,7 @@ To draw a circle, we need two operators:
 ![](img/create_main_loop_circle.gif)
 
 - The `Select Operator`-dialog will appear
-- Type `circle`, now the entry [Ops.Gl.Meshes.Circle](https://cables.gl/op/Ops.Gl.Meshes.Circle) should be selected
+- Type `circle`, now the entry [Ops.Gl.Meshes.Circle](https://cables.gl/op/Ops.Gl.Meshes.Circle_v2) should be selected
 - Press `[enter]` or click the `+` button to create it
 
 Now it should look like this:

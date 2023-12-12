@@ -16,7 +16,6 @@ https://developer.chrome.com/blog/autoplay/
 
 https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
 
-</br>
 let's take a look at some frequently asked questions and answers:
 
 
@@ -45,8 +44,6 @@ in Chrome you can click the little Lock icon next to the url.
 - "block" will always block a permission
 
 ![chrome-audiosetting](img/pagepermissions.png)
-
-</br>
 
 
 ### what is this speaker button on my patch? 

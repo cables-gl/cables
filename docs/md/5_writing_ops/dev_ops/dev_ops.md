@@ -105,7 +105,7 @@ const innerRadius = op.inFloat("Inner Radius");
 
 Every op should have an example on how to use it. Just link to the public patches / examples which use your new op. It is good practice to include a minimal example at first which demonstrates the basic usage without all the bells and whistles. In a second one you could show a more advanced use-case.
 
-Click this [link](https://cables.gl/op/Ops.Gl.Matrix.CircleTransform) for an example of how you can write clear documentation for your new op. All the documentation text is available in the patch editor view so make sure to fill it all in.
+Click this [link](https://cables.gl/op/Ops.Gl.Matrix.OrbitControls) for an example of how you can write clear documentation for your new op. All the documentation text is available in the patch editor view so make sure to fill it all in.
 
 When you create a new op it automatically creates a documentation page for you. Click your op and then click the **view documentation** link in the UI pane to browse to the new page.<br>
 ![Button](img/dev_ops_view_documentation_link.png)

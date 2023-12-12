@@ -52,7 +52,7 @@ Access-Control-Allow-Origin: *
 
 ## Okay, I did this, still does not work, what else?
 
-So, let's assume you are using [AjaxRequest](https://cables.gl/op/Ops.Json.AjaxRequest_v2). Check that you do not have
+So, let's assume you are using [HttpRequest](https://cables.gl/op/Ops.Json.HttpRequest_v3). Check that you do not have
 the JSONP-Checkbox toggled on. Once that is on, all the above does not cause any problems, but your browser is loading
 the external ressouce as if it were a JavaScript-File. We cannot control these requests and we also cannot send any
 additional headers with them.
