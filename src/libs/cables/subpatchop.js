@@ -40,6 +40,7 @@ const SubPatchOp = class
 
         op.on("delete", () =>
         {
+            if (op.patch.clearSubPatchCache)op.patch.clearSubPatchCache(this.patchId);
             const ops = op.patch.ops;
             for (let i = ops.length - 1; i >= 0; i--)
                 if (ops[i] && ops[i].uiAttribs && ops[i].uiAttribs.subPatch == op.patchId.get())
@@ -59,6 +60,8 @@ const SubPatchOp = class
 
     createInOutOps()
     {
+        if (this._op.patch.clearSubPatchCache) this._op.patch.clearSubPatchCache(this.patchId);
+
         let patchInputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchInputOpName);
         let patchOutputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchOutputOpName);
 
