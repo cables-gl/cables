@@ -170,7 +170,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
             let err = null;
             const serializedOps = [];
 
-            let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
+            let subPatchOps = op.patch.getSubPatchOps(subPatchId, false);
             subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
             const localParent = getLocalParentSubPatchOp(subPatchId);
             if (localParent)

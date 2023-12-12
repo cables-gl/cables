@@ -65,10 +65,6 @@ const SubPatchOp = class
         let patchInputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchInputOpName);
         let patchOutputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchOutputOpName);
 
-        // console.log("this.patchId", this.patchId, patchInputOP);
-
-        if (!patchInputOP)console.log("CREATE INPUT OP!!!!!!!!!!!!", this.patchId);
-
         if (!patchInputOP) this._op.patch.addOp(subpatchInputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
         if (!patchOutputOP) this._op.patch.addOp(subpatchOutputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
 
