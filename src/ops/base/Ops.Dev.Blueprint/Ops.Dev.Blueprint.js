@@ -170,7 +170,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
             let err = null;
             const serializedOps = [];
 
-            let subPatchOps = op.patch.getSubPatchOps(subPatchId, true);
+            let subPatchOps = getSubPatchOps(subPatchId, true);
             subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
             const localParent = getLocalParentSubPatchOp(subPatchId);
             if (localParent)
@@ -242,6 +242,34 @@ op.updateBlueprint = (ignoreLinks = false) =>
         }
     }
 };
+
+function getSubPatchOps(patchId, recursive = false)
+{
+    let ops = [];
+    for (const i in op.patch.ops)
+    {
+        const o = op.patch.ops[i];
+        if (o.uiAttribs && o.uiAttribs.subPatch === patchId)
+        {
+            ops.push(o);
+        }
+    }
+    if (recursive)
+    {
+        for (const i in ops)
+        {
+            if (ops[i].storage && ops[i].storage.subPatchVer)
+            {
+                const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
+                if (subPatchPort)
+                {
+                    ops = ops.concat(getSubPatchOps(subPatchPort.value, true));
+                }
+            }
+        }
+    }
+    return ops;
+}
 
 function addBlueprintInfoToOp(serializedOp)
 {
