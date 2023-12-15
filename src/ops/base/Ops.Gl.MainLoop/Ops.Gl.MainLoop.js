@@ -42,6 +42,8 @@ active.onChange = function ()
 const cgl = op.patch.cgl;
 let rframes = 0;
 let rframeStart = 0;
+let timeOutTest = null;
+let addedListener = false;
 
 if (!op.patch.cgl) op.uiAttr({ "error": "No webgl cgl context" });
 
@@ -218,13 +220,14 @@ function render(time)
 
 function testMultiMainloop()
 {
-    setTimeout(
+    clearTimeout(timeOutTest);
+    timeOutTest = setTimeout(
         () =>
         {
             if (op.patch.getOpsByObjName(op.name).length > 1)
             {
                 op.setUiError("multimainloop", "there should only be one mainloop op!");
-                op.patch.addEventListener("onOpDelete", testMultiMainloop);
+                if (!addedListener)addedListener = op.patch.addEventListener("onOpDelete", testMultiMainloop);
             }
             else op.setUiError("multimainloop", null, 1);
         }, 500);
