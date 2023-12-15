@@ -9,6 +9,7 @@ const
     active = op.inValueBool("Active", true),
     inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
+    addCacheBust = op.inBool("Add Cachebuster", true),
     width = op.outNumber("Width"),
     height = op.outNumber("Height"),
     ratio = op.outNumber("Aspect Ratio"),
@@ -32,6 +33,7 @@ unpackAlpha.setUiAttribs({ "hidePort": true });
 unpackAlpha.onChange =
     filename.onChange =
     dataFrmt.onChange =
+    addCacheBust.onChange =
     flip.onChange = reloadSoon;
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
@@ -91,7 +93,7 @@ function realReload(nocache)
 
     let url = op.patch.getFilePath(String(filename.get()));
 
-    if (nocache)url += "?rnd=" + CABLES.uuid();
+    if ((addCacheBust.get() || nocache) && CABLES.UI)url = CABLES.cacheBust(url);
 
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
