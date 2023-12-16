@@ -15,7 +15,8 @@ hdpi.onChange = updateHdpi;
 const cgl = op.patch.cgl;
 let rframes = 0;
 let rframeStart = 0;
-
+let timeOutTest = null;
+let addedListener = false;
 if (!op.patch.cgl) op.uiAttr({ "error": "No webgl cgl context" });
 
 const identTranslate = vec3.create();
@@ -160,15 +161,18 @@ function render(time)
     op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;
 }
 
+
+
 function testMultiMainloop()
 {
-    setTimeout(
+    clearTimeout(timeOutTest);
+    timeOutTest = setTimeout(
         () =>
         {
             if (op.patch.getOpsByObjName(op.name).length > 1)
             {
                 op.setUiError("multimainloop", "there should only be one mainloop op!");
-                op.patch.addEventListener("onOpDelete", testMultiMainloop);
+                if (!addedListener)addedListener = op.patch.addEventListener("onOpDelete", testMultiMainloop);
             }
             else op.setUiError("multimainloop", null, 1);
         }, 500);

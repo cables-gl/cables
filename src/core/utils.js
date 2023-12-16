@@ -387,7 +387,7 @@ export const cacheBust = function (url)
 {
     if (url.indexOf("?") > -1) url += "&";
     else url += "?";
-    return url + "cb=" + CABLES.uuid();
+    return url + "cache=" + CABLES.uuid();
 };
 
 /**
