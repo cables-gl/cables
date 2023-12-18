@@ -966,32 +966,6 @@ Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to
 };
 
 
-// Patch.prototype.getSubPatchOps = function (patchId, recursive = false) // remove !! moved to extend class
-// {
-//     let ops = [];
-//     for (const i in this.ops)
-//     {
-//         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
-//         {
-//             ops.push(this.ops[i]);
-//         }
-//     }
-//     if (recursive)
-//     {
-//         for (const i in ops)
-//         {
-//             if (ops[i].storage && ops[i].storage.subPatchVer)
-//             {
-//                 const subPatchPort = ops[i].portsIn.find((port) => { return port.name === "patchId"; });
-//                 if (subPatchPort)
-//                 {
-//                     ops = ops.concat(this.getSubPatchOps(subPatchPort.value, true));
-//                 }
-//             }
-//         }
-//     }
-//     return ops;
-// };
 
 
 
@@ -1736,3 +1710,4 @@ Patch.replaceOpIds = function (json, options)
  */
 
 export default Patch;
+

@@ -85,6 +85,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "aaaa",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "Render"
             }

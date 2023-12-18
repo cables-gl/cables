@@ -88,6 +88,8 @@ const Op = function ()
 
     Object.defineProperty(this, "objName", { get() { return this._objName; } });
     Object.defineProperty(this, "shortName", { get() { return this._shortOpName; } });
+
+    if (this.initUi) this.initUi();
 };
 
 {
@@ -255,11 +257,13 @@ const Op = function ()
         if (!(p instanceof Port))
             throw new Error("parameter is not a port!");
 
+
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p._op = this;
 
         this.portsIn.push(p);
         this.emitEvent("onPortAdd", p);
+
 
         return p;
     };
@@ -1008,6 +1012,8 @@ const Op = function ()
         if (this.storage && Object.keys(this.storage).length > 0) op.storage = JSON.parse(JSON.stringify(this.storage));
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (op.uiAttribs.hasOwnProperty("uierrors")) delete op.uiAttribs.uierrors;
+
+        if (op.uiAttribs.title == this._shortOpName) delete op.uiAttribs.title;
 
         op.portsIn = [];
         op.portsOut = [];
