@@ -39,6 +39,12 @@
             },
             {
                 "type": 0,
+                "name": "Anisotropic index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "wrap index",
                 "group": "Texture settings",
                 "subType": "integer"

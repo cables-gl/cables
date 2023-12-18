@@ -150,6 +150,7 @@ Texture.prototype.clone = function ()
     const newTex = new Texture(this._cgl, {
         "name": this.name,
         "filter": this.filter,
+        "anisotropic": this.anisotropic,
         "wrap": this.wrap,
         "textureType": this.textureType,
         "pixelFormat": this.pixelFormat,
@@ -703,10 +704,13 @@ Texture.prototype._setFilter = function ()
         if (this.anisotropic)
         {
             const ext = this._cgl.enableExtension("EXT_texture_filter_anisotropic");
-            if (ext)
+
+
+
+            if (this._cgl.maxAnisotropic)
             {
-                const max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-                this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max, this.anisotropic));
+                const aniso = Math.min(this._cgl.maxAnisotropic, this.anisotropic);
+                this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, aniso);
             }
         }
     }

@@ -8,6 +8,8 @@ const
     height = op.inValueInt("Height", 480),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
+    aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
+
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     r = op.inValueSlider("R", 0),
@@ -22,7 +24,7 @@ const
     outHeight = op.outNumber("Texture Height");
 
 op.setPortGroup("Texture Size", [inSize, width, height]);
-op.setPortGroup("Texture Parameters", [inWrap, inFilter, inPixelFormat]);
+op.setPortGroup("Texture Parameters", [inWrap, aniso, inFilter, inPixelFormat]);
 
 r.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Color", [r, g, b, a]);
@@ -41,6 +43,7 @@ let copyShaderRGBAUni = null;
 
 inWrap.onChange =
 inFilter.onChange =
+aniso.onChange =
 inPixelFormat.onChange = reInitLater;
 
 inTex.onLinkChanged =
@@ -59,8 +62,11 @@ function initEffect()
     tex = null;
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) });
 
+    const cgl_aniso = Math.min(cgl.maxAnisotropic, parseFloat(aniso.get()));
+
     tex = new CGL.Texture(cgl,
         {
+            "anisotropic": cgl_aniso,
             "name": "image_compose_v2_" + op.id,
             "pixelFormat": inPixelFormat.get(),
             "filter": getFilter(),
@@ -121,6 +127,7 @@ function updateResolution()
     if ((
         getWidth() != tex.width ||
         getHeight() != tex.height ||
+        // tex.anisotropic != parseFloat(aniso.get()) ||
         // tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) ||
         tex.pixelFormat != inPixelFormat.get() ||
         tex.filter != getFilter() ||
@@ -166,6 +173,8 @@ function updateDefines()
 
 function updateUi()
 {
+    aniso.setUiAttribs({ "greyout": getFilter() != CGL.Texture.FILTER_MIPMAP });
+
     r.setUiAttribs({ "greyout": inTex.isLinked() });
     b.setUiAttribs({ "greyout": inTex.isLinked() });
     g.setUiAttribs({ "greyout": inTex.isLinked() });

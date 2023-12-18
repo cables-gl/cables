@@ -206,6 +206,12 @@ class Context extends CGState
             this.aborted = true;
         });
 
+
+        this.maxAnisotropic = 0;
+        if (this.enableExtension("EXT_texture_filter_anisotropic"))
+            this.maxAnisotropic = this.gl.getParameter(this.enableExtension("EXT_texture_filter_anisotropic").MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+
+
         this.maxVaryingVectors = this.gl.getParameter(this.gl.MAX_VARYING_VECTORS);
         this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
         this.maxTexSize = this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
