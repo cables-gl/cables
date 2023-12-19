@@ -83,10 +83,13 @@ class CubemapFramebuffer
 
         this._cgl.checkFrameStarted("cubemap framebuffer");
 
+        let pxlFormat = options.pixeFormat;
+        if (!pxlFormat && options.isFloatingPointTexture)pxlFormat = CGL.Texture.PFORMATSTR_RGBA32F;
+
         this.texture = new CubemapTexture(this._cgl, {
             "width": this.width,
             "height": this.height,
-            "isFloatingPointTexture": options.isFloatingPointTexture,
+            "pixelFormat": options.pixelFormat,
             "filter": this._options.filter,
             "wrap": this._options.wrap,
             "name": this.name + " cubemaptexture"
