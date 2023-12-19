@@ -352,6 +352,12 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
     try
     {
+        if (!identifier)
+        {
+            console.error("createop identifier false", identifier);
+            console.log((new Error()).stack);
+            return;
+        }
         if (identifier.indexOf("Ops.") === -1)
         {
             // this should be a uuid, not a namespace
