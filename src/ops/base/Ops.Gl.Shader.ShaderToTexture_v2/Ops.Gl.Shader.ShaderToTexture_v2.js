@@ -1,13 +1,14 @@
 const
     exec = op.inTrigger("Render"),
     inShader = op.inObject("Shader", null, "shader"),
-    inVPSize = op.inValueBool("Use Viewport Size", true),
+    // inVPSize = op.inValueBool("Use Viewport Size", true),
+    inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Manual"),
     inWidth = op.inValueInt("Width", 512),
     inHeight = op.inValueInt("Height", 512),
     tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
-    inFloatingPoint = op.inValueBool("Floating Point", false),
+    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
     inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
     next = op.outTrigger("Next"),
     outTex = op.outTexture("Texture"),
@@ -15,8 +16,8 @@ const
     outTex3 = op.outTexture("Texture 3"),
     outTex4 = op.outTexture("Texture 4");
 
-op.setPortGroup("Texture Size", [inVPSize, inWidth, inHeight]);
-op.setPortGroup("Texture settings", [tfilter, twrap, inFloatingPoint, aniso]);
+op.setPortGroup("Texture Size", [inSize, inWidth, inHeight]);
+op.setPortGroup("Texture settings", [tfilter, twrap, inPixelFormat, aniso]);
 
 let numTextures = 1;
 const cgl = op.patch.cgl;
@@ -28,13 +29,13 @@ let shader = null;
 
 inWidth.onChange =
     inHeight.onChange =
-    inFloatingPoint.onChange =
+    inPixelFormat.onChange =
     tfilter.onChange =
     inNumTex.onChange =
     aniso.onChange =
     twrap.onChange = initFbLater;
 
-inVPSize.onChange = updateUI;
+inSize.onChange = updateUI;
 
 const showingError = false;
 
@@ -52,7 +53,7 @@ updateUI();
 
 function warning()
 {
-    if (tfilter.get() == "mipmap" && inFloatingPoint.get())
+    if (tfilter.get() == "mipmap" && tex && tex.isFloatingPoint())
     {
         op.setUiError("warning", "HDR and mipmap filtering at the same time is not possible");
     }
@@ -65,11 +66,8 @@ function warning()
 function updateUI()
 {
     aniso.setUiAttribs({ "greyout": tfilter.get() != "mipmap" });
-    inWidth.setUiAttribs({ "greyout": inVPSize.get() });
-    inHeight.setUiAttribs({ "greyout": inVPSize.get() });
-
-    inWidth.set(cgl.getViewPort()[2]);
-    inHeight.set(cgl.getViewPort()[3]);
+    inWidth.setUiAttribs({ "greyout": inSize.get() == "Canvas" });
+    inHeight.setUiAttribs({ "greyout": inSize.get() == "Canvas" });
 }
 
 function initFbLater()
@@ -105,10 +103,10 @@ function initFb()
     let w = inWidth.get();
     let h = inHeight.get();
 
-    if (inVPSize.get())
+    if (inSize.get() == "Canvas")
     {
-        w = cgl.getViewPort()[2];
-        h = cgl.getViewPort()[3];
+        w = cgl.canvasWidth;
+        h = cgl.canvasHeight;
     }
 
     let filter = CGL.Texture.FILTER_NEAREST;
@@ -126,7 +124,8 @@ function initFb()
         fb = new CGL.Framebuffer2(cgl, w, h,
             {
                 "anisotropic": cgl_aniso,
-                "isFloatingPointTexture": inFloatingPoint.get(),
+                // "isFloatingPointTexture": inFloatingPoint.get(),
+                "pixelFormat": inPixelFormat.get(),
                 "multisampling": false,
                 "numRenderBuffers": numTextures,
                 "wrap": selectedWrap,
@@ -149,10 +148,23 @@ function initFb()
 
 exec.onTriggered = function ()
 {
-    const vp = cgl.getViewPort();
-
     if (!fb || needInit)initFb();
-    if (inVPSize.get() && fb && (vp[2] != fb.getTextureColor().width || vp[3] != fb.getTextureColor().height)) initFb();
+
+    if (
+        inSize.get() == "Manual" &&
+        (
+            fb.getTextureColor().width != inWidth.get() ||
+            fb.getTextureColor().height != inHeight.get()
+        ))
+    {
+        initFb();
+    }
+    else if (inSize.get() == "Canvas" &&
+        fb &&
+        (
+            fb.getTextureColor().width != cgl.canvasWidth ||
+            fb.getTextureColor().height != cgl.canvasHeight
+        )) initFb();
 
     if (!inShader.get() || !inShader.get().setDrawBuffers) return;
 
@@ -170,10 +182,7 @@ exec.onTriggered = function ()
         return;
     }
 
-    prevViewPort[0] = vp[0];
-    prevViewPort[1] = vp[1];
-    prevViewPort[2] = vp[2];
-    prevViewPort[3] = vp[3];
+    cgl.pushViewPort(0, 0, inWidth.get(), inHeight.get());
 
     fb.renderStart(cgl);
 
@@ -210,8 +219,7 @@ exec.onTriggered = function ()
     else outTex.set(fb.getTextureColor());
 
     cgl.popShader();
-
-    cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
+    cgl.popViewPort();
 
     next.trigger();
 };
