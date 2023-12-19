@@ -47,6 +47,12 @@
             },
             {
                 "type": 0,
+                "name": "Anisotropic index",
+                "group": "Texture Parameters",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Pixel Format index",
                 "group": "Texture Parameters",
                 "subType": "integer"

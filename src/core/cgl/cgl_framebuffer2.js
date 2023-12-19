@@ -76,6 +76,7 @@ const Framebuffer2 = function (cgl, w, h, options)
         this._colorTextures[i] = new Texture(cgl, {
             "name": "fb2 " + this.name + " " + i,
             "isFloatingPointTexture": this._options.isFloatingPointTexture,
+            "anisotropic": this._options.anisotropic || 0,
             "pixelFormat": this._options.pixelFormat,
             "filter": this._options.filter,
             "wrap": this._options.wrap,

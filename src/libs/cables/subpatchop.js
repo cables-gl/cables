@@ -9,7 +9,7 @@ const SubPatchOp = class
         options = options || {};
         this._op = op;
 
-        op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_STRING, { "display": "readonly" }));
+        op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_STRING, { "display": "readonly", "hidePort": true }));
 
         op.setUiAttribs({ "subPatchOp": { "version": 2 } });
 

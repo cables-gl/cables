@@ -5,6 +5,7 @@ const
     inWidth = op.inValueInt("Width", 512),
     inHeight = op.inValueInt("Height", 512),
     tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
+    aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     inFloatingPoint = op.inValueBool("Floating Point", false),
     inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
@@ -15,7 +16,7 @@ const
     outTex4 = op.outTexture("Texture 4");
 
 op.setPortGroup("Texture Size", [inVPSize, inWidth, inHeight]);
-op.setPortGroup("Texture settings", [tfilter, twrap, inFloatingPoint]);
+op.setPortGroup("Texture settings", [tfilter, twrap, inFloatingPoint, aniso]);
 
 let numTextures = 1;
 const cgl = op.patch.cgl;
@@ -30,6 +31,7 @@ inWidth.onChange =
     inFloatingPoint.onChange =
     tfilter.onChange =
     inNumTex.onChange =
+    aniso.onChange =
     twrap.onChange = initFbLater;
 
 inVPSize.onChange = updateUI;
@@ -62,6 +64,7 @@ function warning()
 
 function updateUI()
 {
+    inWidth.setUiAttribs({ "greyout": tfilter.get() != "mipmap" });
     inWidth.setUiAttribs({ "greyout": inVPSize.get() });
     inHeight.setUiAttribs({ "greyout": inVPSize.get() });
 
@@ -116,10 +119,13 @@ function initFb()
     if (twrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;
     if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
 
+    const cgl_aniso = Math.min(cgl.maxAnisotropic, parseFloat(aniso.get()));
+
     if (cgl.glVersion >= 2)
     {
         fb = new CGL.Framebuffer2(cgl, w, h,
             {
+                "anisotropic": cgl_aniso,
                 "isFloatingPointTexture": inFloatingPoint.get(),
                 "multisampling": false,
                 "numRenderBuffers": numTextures,
