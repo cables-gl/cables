@@ -955,15 +955,15 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     return false;
 };
 
-Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
-{
-    const ops = this.ops;
-    for (let i = 0; i < ops.length; i++)
-    {
-        const op = ops[i];
-        if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
-    }
-};
+// Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
+// {
+//     const ops = this.ops;
+//     for (let i = 0; i < ops.length; i++)
+//     {
+//         const op = ops[i];
+//         if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
+//     }
+// };
 
 
 
