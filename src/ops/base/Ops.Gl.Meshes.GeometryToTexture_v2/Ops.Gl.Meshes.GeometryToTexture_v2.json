@@ -80,6 +80,12 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Pixel Format index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
                 "type": 2,
                 "name": "Color Texture",
                 "objType": "texture"

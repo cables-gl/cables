@@ -83,13 +83,12 @@ function doRender()
             fb = new CGL.Framebuffer2(cgl, 8, 8,
                 {
                     "name": "render2texture " + op.id,
-                    // "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()),
                     "pixelFormat": inPixelFormat.get(),
                     "multisampling": ms,
+                    "multisamplingSamples": msSamples,
                     "wrap": selectedWrap,
                     "filter": selectFilter,
                     "depth": depth.get(),
-                    "multisamplingSamples": msSamples,
                     "clear": clear.get()
                 });
         }

@@ -10,15 +10,13 @@ const
     inWidth = op.inValueInt("Tex Width", 256),
     tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
-
+    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     inTexColor = op.inTexture("Color Texture", null, "Texture"),
-
     next = op.outTrigger("Next"),
-
     outNumVerts = op.outNumber("Total Vertices"),
     outTex = op.outTexture("Texture");
 
-op.setPortGroup("Texture settings", [tfilter, twrap, inWidth, inSize]);
+op.setPortGroup("Texture settings", [tfilter, twrap, inWidth, inPixelFormat, inSize]);
 op.toWorkPortsNeedToBeLinked(inGeom, exec);
 
 const cgl = op.patch.cgl;
@@ -36,6 +34,7 @@ let mesh = null;
 let vertNums = new Float32Array(1);
 let numVerts = 1;
 
+inPixelFormat.onChange =
 tfilter.onChange =
     twrap.onChange = initFbLater;
 
@@ -168,7 +167,7 @@ function initFb()
         fb = new CGL.Framebuffer2(cgl, size, size,
             {
                 "name": "geom2tex",
-                "isFloatingPointTexture": true,
+                "pixelFormat": inPixelFormat.get(),
                 "multisampling": false,
                 "wrap": selectedWrap,
                 "filter": filter,

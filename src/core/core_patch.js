@@ -352,6 +352,12 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
     try
     {
+        if (!identifier)
+        {
+            console.error("createop identifier false", identifier);
+            console.log((new Error()).stack);
+            return;
+        }
         if (identifier.indexOf("Ops.") === -1)
         {
             // this should be a uuid, not a namespace
@@ -857,95 +863,6 @@ Patch.prototype.loadLib = function (which)
     // add the returned content to a newly created script tag
 };
 
-Patch.prototype.reloadOp = function (objName, cb, refOldOp)
-{
-    let count = 0;
-    const ops = [];
-    const oldOps = [];
-
-    for (const i in this.ops)
-    {
-        if (this.ops[i].objName == objName)
-        {
-            oldOps.push(this.ops[i]);
-        }
-    }
-
-    let refNewOp = null;
-
-    for (let i = 0; i < oldOps.length; i++)
-    {
-        count++;
-        const oldOp = oldOps[i];
-        oldOp.deleted = true;
-        console.log("reloadop ", objName, "subpatch:", oldOp.uiAttribs.subPatch);
-        const op = this.addOp(objName, oldOp.uiAttribs);
-        if (!op) continue;
-        if (oldOp && oldOp.storage) op.setStorage(JSON.parse(JSON.stringify(oldOp.storage)));
-        ops.push(op);
-
-        if (oldOp == refOldOp)
-        {
-            refNewOp = op;
-        }
-
-        if (oldOp.patchId)
-        {
-            op.oldSubPatchIds = oldOp.oldSubPatchIds || [];
-            op.oldSubPatchIds.push(oldOp.patchId.get());
-        }
-
-        let l;
-        for (let j in oldOp.portsIn)
-        {
-            if (oldOp.portsIn[j].links.length === 0)
-            {
-                const p = op.getPort(oldOp.portsIn[j].name);
-                if (!p) this._log.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
-                else
-                {
-                    p.set(oldOp.portsIn[j].get());
-
-                    if (oldOp.portsIn[j].getVariableName())
-                        p.setVariable(oldOp.portsIn[j].getVariableName());
-                }
-            }
-            else
-            {
-                while (oldOp.portsIn[j].links.length)
-                {
-                    const oldName = oldOp.portsIn[j].links[0].portIn.name;
-                    const oldOutName = oldOp.portsIn[j].links[0].portOut.name;
-                    const oldOutOp = oldOp.portsIn[j].links[0].portOut.op;
-                    oldOp.portsIn[j].links[0].remove();
-
-                    l = this.link(op, oldName, oldOutOp, oldOutName);
-                    if (!l) console.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
-                    else l.setValue();
-                }
-            }
-        }
-
-        for (let j in oldOp.portsOut)
-        {
-            while (oldOp.portsOut[j].links.length)
-            {
-                const oldNewName = oldOp.portsOut[j].links[0].portOut.name;
-                const oldInName = oldOp.portsOut[j].links[0].portIn.name;
-                const oldInOp = oldOp.portsOut[j].links[0].portIn.op;
-                oldOp.portsOut[j].links[0].remove();
-
-                l = this.link(op, oldNewName, oldInOp, oldInName);
-                if (!l) console.log("relink after op reload not successfull for port " + oldInName);
-                else l.setValue();
-            }
-        }
-
-        this.deleteOp(oldOp.id, false, true);
-    }
-    cb(count, ops, refNewOp);
-};
-
 
 Patch.prototype.getSubPatchOp = function (patchId, objName)
 {
@@ -955,15 +872,15 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     return false;
 };
 
-Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
-{
-    const ops = this.ops;
-    for (let i = 0; i < ops.length; i++)
-    {
-        const op = ops[i];
-        if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
-    }
-};
+// Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
+// {
+//     const ops = this.ops;
+//     for (let i = 0; i < ops.length; i++)
+//     {
+//         const op = ops[i];
+//         if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
+//     }
+// };
 
 
 

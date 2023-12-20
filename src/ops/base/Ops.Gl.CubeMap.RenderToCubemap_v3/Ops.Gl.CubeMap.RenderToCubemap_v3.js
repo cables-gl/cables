@@ -1,18 +1,19 @@
 const
     inTrigger = op.inTrigger("Render"),
-    inFp = op.inBool("32bit float tex", false),
+    inSize = op.inDropDown("Size", [32, 64, 128, 256, 512, 1024, 2048], 512),
+    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
+    msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
     outTrigger = op.outTrigger("Next"),
     outTex = op.outTexture("cubemap");
 
 const cgl = op.patch.cgl;
 
-const inSize = op.inDropDown("Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 let sizeChanged = true;
-inSize.onChange = () => { sizeChanged = true; };
-
 let fb = null;
 
-inFp.onChange = createFbLater;
+inSize.onChange = () => { sizeChanged = true; };
+
+inPixelFormat.onChange = createFbLater;
 
 let emptyCubemap = null;
 let recreateFb = true;
@@ -25,12 +26,28 @@ function createFbLater()
 function createFb()
 {
     if (fb)fb.delete();
+
+    let ms = true;
+    let msSamples = 4;
+
+    if (msaa.get() == "none")
+    {
+        msSamples = 0;
+        ms = false;
+    }
+    if (msaa.get() == "2x") msSamples = 2;
+    if (msaa.get() == "4x") msSamples = 4;
+    if (msaa.get() == "8x") msSamples = 8;
+
     fb = new CGL.CubemapFramebuffer(
         cgl,
         Number(inSize.get()),
         Number(inSize.get()),
         {
-            "isFloatingPointTexture": inFp.get()
+            "pixelFormat": inPixelFormat.get(),
+            "multisampling": ms,
+            "multisamplingSamples": msSamples
+
         });
 }
 

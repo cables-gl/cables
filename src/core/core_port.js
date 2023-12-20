@@ -331,6 +331,8 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                 catch (ex)
                 {
                     this.crashed = true;
+                    this.op.crashed = true;
+                    console.log("crash", this.op.objName);
                     this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
@@ -667,12 +669,14 @@ Port.prototype.trigger = function ()
     }
     catch (ex)
     {
-        this._op.enabled = false;
+        portTriggered.op.enabled = false;
 
         if (this._op.patch.isEditorMode())
         {
             this._op.patch.emitEvent("exception", ex, portTriggered.op);
             this._op.patch.emitEvent("opcrash", portTriggered);
+            console.log("crash", portTriggered.op.objName);
+
             if (portTriggered.op.onError) portTriggered.op.onError(ex);
         }
         this._log.warn("exception!");
