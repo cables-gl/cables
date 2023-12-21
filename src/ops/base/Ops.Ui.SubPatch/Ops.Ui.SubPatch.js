@@ -31,6 +31,7 @@ op.init = () =>
 
 op.patchId.onChange = function ()
 {
+    if (!op.patch.isEditorMode()) return;
     const oldPatchOps = op.patch.getSubPatchOps(oldPatchId);
     if (oldPatchOps.length === 2)
     {

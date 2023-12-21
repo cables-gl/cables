@@ -74,6 +74,7 @@ function initFbLater()
 {
     needInit = true;
     warning();
+    updateUI();
 }
 
 function resetShader()

@@ -22,6 +22,7 @@ void main()
            else col.r=col.g=col.b=col.a=1.0;
        #endif
    #endif
+//   col.a=1.0;
 
    outColor= col;
 }

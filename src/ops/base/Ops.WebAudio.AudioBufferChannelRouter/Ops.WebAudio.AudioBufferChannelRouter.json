@@ -1,0 +1,81 @@
+{
+    "id": "646f2c46-a802-47c6-8b41-8feea8749ccc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1702653390496
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Audio Buffer",
+                "objType": "audioBuffer"
+            },
+            {
+                "type": 0,
+                "name": "Channel In",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Channel Out",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Clear Others",
+                "group": "Mode",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Channel Offset",
+                "group": "Mode",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Buffer Out",
+                "objType": "audioBuffer"
+            },
+            {
+                "type": 0,
+                "name": "Output Channels",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "stephan",
+    "created": 1702653521834,
+    "summary": "Route audio from one input channel to any output channel",
+    "docs": {
+        "ports": [
+            {
+                "name": "Channel In",
+                "text": "zero-based input chanel to route"
+            },
+            {
+                "name": "Channel Out",
+                "text": "zero-based target output channel"
+            },
+            {
+                "name": "Clear Others",
+                "text": "fill all other channels with empty data/silence"
+            },
+            {
+                "name": "Channel Offset",
+                "text": "offset input signal by x channels and keep all input channels"
+            },
+            {
+                "name": "Output Channels",
+                "text": "maximum number of output channels supported by the soundcard"
+            }
+        ]
+    },
+    "exampleProjectId": "KlCyYN"
+}

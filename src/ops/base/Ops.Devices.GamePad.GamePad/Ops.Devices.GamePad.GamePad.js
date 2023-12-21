@@ -1,23 +1,24 @@
-let data = op.inObject("GamePad Data");
-let outID = op.outString("ID");
-let digitalAnalog = op.inValueBool("Analog to Digital", true);
-let outAxes = op.outArray("Axes");
+const
+    data = op.inObject("GamePad Data"),
+    outID = op.outString("ID"),
+    digitalAnalog = op.inValueBool("Analog to Digital", true),
+    outAxes = op.outArray("Axes"),
 
-let pressedLeft = op.outBoolNum("Pad Left");
-let pressedRight = op.outBoolNum("Pad Right");
-let pressedUp = op.outBoolNum("Pad Up");
-let pressedDown = op.outBoolNum("Pad Down");
+    pressedLeft = op.outBoolNum("Pad Left"),
+    pressedRight = op.outBoolNum("Pad Right"),
+    pressedUp = op.outBoolNum("Pad Up"),
+    pressedDown = op.outBoolNum("Pad Down"),
 
-let pressedButton1 = op.outBoolNum("Button 1");
-let pressedButton2 = op.outBoolNum("Button 2");
-let pressedButton3 = op.outBoolNum("Button 3");
-let pressedButton4 = op.outBoolNum("Button 4");
+    pressedButton1 = op.outBoolNum("Button 1"),
+    pressedButton2 = op.outBoolNum("Button 2"),
+    pressedButton3 = op.outBoolNum("Button 3"),
+    pressedButton4 = op.outBoolNum("Button 4"),
 
-let outLeftShoulder = op.outNumber("Left Shoulder");
-let outLeftShoulderBottom = op.outNumber("Left Shoulder Bottom");
+    outLeftShoulder = op.outNumber("Left Shoulder"),
+    outLeftShoulderBottom = op.outNumber("Left Shoulder Bottom"),
 
-let outRightShoulder = op.outNumber("Right Shoulder");
-let outRightShoulderBottom = op.outNumber("Right Shoulder Bottom");
+    outRightShoulder = op.outNumber("Right Shoulder"),
+    outRightShoulderBottom = op.outNumber("Right Shoulder Bottom");
 
 data.onChange = function ()
 {

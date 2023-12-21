@@ -18,10 +18,8 @@
             }
         ]
     },
-    "summary": "positive numbers become negative and vice versa ",
-    "youtubeid": "",
+    "summary": "positive numbers become negative and vice versa (negate)",
     "docs": {
         "ports": []
-    },
-    "relatedops": null
+    }
 }

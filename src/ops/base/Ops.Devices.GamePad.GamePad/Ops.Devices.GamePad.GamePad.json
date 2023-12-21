@@ -27,42 +27,42 @@
             {
                 "type": 0,
                 "name": "Pad Left",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Pad Right",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Pad Up",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Pad Down",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 1",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 2",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 3",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 4",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
