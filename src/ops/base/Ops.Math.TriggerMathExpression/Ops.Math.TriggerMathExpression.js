@@ -34,7 +34,7 @@ function createFunction()
         currentFunction = new Function("m", "a", "b", "c", "d", "x", "y", "z", "w", "i", "with(m) { return " + inExpression.get() + " }");
 
         functionValid = true;
-        evaluateFunction();
+        // evaluateFunction();
         outExpressionIsValid.set(functionValid);
     }
     catch (e)
