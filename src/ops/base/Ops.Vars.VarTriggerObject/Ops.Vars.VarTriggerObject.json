@@ -27,12 +27,12 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
-                "name": "Value"
-            },
-            {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Value"
             }
         ],
         "portsOut": [
