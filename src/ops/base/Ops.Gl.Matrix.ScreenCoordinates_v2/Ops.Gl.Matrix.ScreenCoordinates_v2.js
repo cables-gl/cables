@@ -13,6 +13,9 @@ const pos = vec3.create();
 const identVec = vec3.create();
 let div = -1;
 inUnit.onChange = updateUnit;
+updateUnit();
+
+cgl.on("resize", updateUnit);
 
 function updateUnit()
 {

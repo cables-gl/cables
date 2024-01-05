@@ -45,6 +45,9 @@ void main()
             #ifdef TRANSFORMALPHATEXCOORDS
                 uv=texCoordOrig;
             #endif
+            #ifdef ALPHA_MASK_IR
+                col.a*=1.0-texture(texOpacity,uv).r;
+            #endif
             #ifdef ALPHA_MASK_IALPHA
                 col.a*=1.0-texture(texOpacity,uv).a;
             #endif

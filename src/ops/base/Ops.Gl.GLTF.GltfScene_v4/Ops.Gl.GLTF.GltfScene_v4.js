@@ -382,7 +382,10 @@ function loadBin(addCacheBuster)
     if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
     let fileToLoad = inFile.get();
+
+    if (!fileToLoad || fileToLoad == "null") return;
     let url = op.patch.getFilePath(String(inFile.get()));
+    if (!url) return;
     if (inFile.get() && !inFile.get().startsWith("data:"))
     {
         if (addCacheBuster === true)url += "?rnd=" + CABLES.generateUUID();

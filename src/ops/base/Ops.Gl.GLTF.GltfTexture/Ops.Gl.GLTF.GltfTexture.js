@@ -18,6 +18,7 @@ let cgl_filter = 0;
 let cgl_wrap = 0;
 let cgl_aniso = 0;
 
+let oldScene = null;
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
 imgName.onChange = flip.onChange = unpackAlpha.onChange = function () { reloadSoon(); };
@@ -29,6 +30,7 @@ function reloadSoon()
 
 inExec.onTriggered = function ()
 {
+    if (cgl.frameStore.currentScene != oldScene)tex = null;
     if (tex) return;
 
     if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.json || !cgl.frameStore.currentScene.chunks) return;
@@ -41,6 +43,7 @@ inExec.onTriggered = function ()
     if (!cgl.frameStore.currentScene.json.images) return;
 
     let img = null;
+    oldScene = cgl.frameStore.currentScene;
 
     for (let i = 0; i < cgl.frameStore.currentScene.json.images.length; i++)
     {
@@ -84,6 +87,8 @@ inExec.onTriggered = function ()
     tex = CGL.Texture.load(cgl, sourceURI,
         function (err)
         {
+            cgl.patch.loading.finished(loadingId);
+            if (!tex) return;
             if (err)
             {
                 console.error("img load error", err);
@@ -96,7 +101,6 @@ inExec.onTriggered = function ()
                 outTex.setRef(tex);
                 outFound.set(true);
             }
-            cgl.patch.loading.finished(loadingId);
         }, {
             "anisotropic": cgl_aniso,
             "wrap": cgl_wrap,
