@@ -3,7 +3,11 @@ const outNum = op.outNumber("Result");
 
 op.setUiAttrib({ "widthOnlyGrow": true });
 
-inNum.onChange = () =>
+inNum.onChange = update;
+
+update();
+
+function update()
 {
     let n = inNum.get();
     if (op.patch.isEditorMode())
@@ -22,4 +26,4 @@ inNum.onChange = () =>
     }
 
     outNum.set(n);
-};
+}
