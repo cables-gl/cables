@@ -76,6 +76,6 @@
         "cgl_rendertargets",
         "cgl_shadermodifier"
     ],
-    "collections": null,
-    "relatedops": null
+    "collections": null
+
 }

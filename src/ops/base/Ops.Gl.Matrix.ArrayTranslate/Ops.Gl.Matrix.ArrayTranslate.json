@@ -33,6 +33,5 @@
     "collections": [
         "pointArrays",
         "transform"
-    ],
-    "relatedops": null
+    ]
 }
