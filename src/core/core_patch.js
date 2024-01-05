@@ -960,7 +960,6 @@ Patch.prototype.deSerialize = function (obj, options)
                     if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
                         port2.set(obj.ops[iop].portsOut[ipo].value);
 
-                    // if (port2)port2.deSerializeSettings(objPort);
                     if (port2 && objPort.expose) port2.setUiAttribs({ "expose": true });
                 }
             }

@@ -214,7 +214,7 @@ function setupPorts()
 
 op.addNewInPort = function (otherPort, type, objType)
 {
-    const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
+    const newName = "in" + data.ports.length + " " + otherPort.op.name + " " + otherPort.name;
 
     const o = { "name": newName, "type": otherPort.type };
     if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
@@ -234,7 +234,7 @@ op.dyn.onLinkChanged = function ()
 
         op.log("dyn link changed!!!");
 
-        // const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
+        // const newName = "in" + data.ports.length + " " + otherPort.op.name + " " + otherPort.name;
 
         // const o = { "name": newName, "type": otherPort.type };
         // if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
@@ -245,7 +245,7 @@ op.dyn.onLinkChanged = function ()
         const newName = op.addNewInPort(otherPort);
 
         const l = gui.scene().link(
-            otherPort.parent,
+            otherPort.op,
             otherPort.getName(),
             op,
             newName
@@ -265,7 +265,7 @@ op.dyn.onLinkChanged = function ()
 
 op.addNewOutPort = function (otherPort, type, objType)
 {
-    const newName = "out" + data.portsOut.length + " " + otherPort.parent.name + " " + otherPort.name;
+    const newName = "out" + data.portsOut.length + " " + otherPort.op.name + " " + otherPort.name;
 
     const o = { "name": newName, "type": otherPort.type };
     if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
@@ -286,7 +286,7 @@ op.dynOut.onLinkChanged = function ()
         const newName = op.addNewOutPort(otherPort);
 
         gui.scene().link(
-            otherPort.parent,
+            otherPort.op,
             otherPort.getName(),
             op,
             newName
@@ -336,12 +336,12 @@ function getSubPatchInputOp()
 op.addSubLink = function (p, p2)
 {
     const num = data.ports.length;
-    const sublPortname = "in" + (num - 1) + " " + p2.parent.name + " " + p2.name;
+    const sublPortname = "in" + (num - 1) + " " + p2.op.name + " " + p2.name;
 
     if (p.direction == CABLES.PORT_DIR_IN)
     {
         gui.scene().link(
-            p.parent,
+            p.op,
             p.getName(),
             getSubPatchInputOp(),
             sublPortname
@@ -351,10 +351,10 @@ op.addSubLink = function (p, p2)
     {
         const numOut = data.portsOut.length;
         gui.scene().link(
-            p.parent,
+            p.op,
             p.getName(),
             getSubPatchOutputOp(),
-            "out" + (numOut - 1) + " " + p2.parent.name + " " + p2.name
+            "out" + (numOut - 1) + " " + p2.op.name + " " + p2.name
         );
     }
 
