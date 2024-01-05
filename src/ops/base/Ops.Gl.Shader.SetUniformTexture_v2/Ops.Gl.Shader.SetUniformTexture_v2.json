@@ -63,8 +63,5 @@
             "date": 1683907451187
         }
     ],
-    "relatedops": [
-        "Ops.Gl.Shader.SetUniformFloat_v2"
-    ],
     "exampleProjectId": "5W7X2f"
 }

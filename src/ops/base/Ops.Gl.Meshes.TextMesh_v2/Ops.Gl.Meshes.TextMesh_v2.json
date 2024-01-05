@@ -183,7 +183,7 @@
     "collections": [
         "drawText"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Gl.Meshes.TextMesh3 renamed to Ops.Gl.Meshes.TextMesh_v2",

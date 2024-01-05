@@ -107,7 +107,7 @@
     },
     "summary": "Request a json file and output an object (ajax, url, json)",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

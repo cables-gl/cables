@@ -83,7 +83,7 @@
     "collections": [
         "meshInstancing"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.ShaderEffects.InstancedPerlinPosition",

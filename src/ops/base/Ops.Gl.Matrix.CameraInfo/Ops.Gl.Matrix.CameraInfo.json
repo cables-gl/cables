@@ -143,11 +143,6 @@
     "collections": [
         "Cameras"
     ],
-    "relatedops": [
-        "Ops.Gl.Matrix.OrbitControls",
-        "Ops.Gl.Matrix.WASDCamera",
-        "Ops.Gl.Matrix.Camera"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

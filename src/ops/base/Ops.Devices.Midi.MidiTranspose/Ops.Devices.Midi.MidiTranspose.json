@@ -47,13 +47,6 @@
     },
     "summary": "transpose incoming midi notes",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiChord3",
-        "Ops.Devices.Midi.MidiCC",
-        "Ops.Devices.Midi.MidiNRPN",
-        "Ops.Devices.Midi.MidiClock"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -51,10 +51,6 @@
     "collections": [
         "FFT audio"
     ],
-    "relatedops": [
-        "Ops.WebAudio.FFTAreaAverage",
-        "Ops.WebAudio.FftTexture"
-    ],
     "youtubeids": [],
     "exampleProjectId": "h2eBh-"
 }

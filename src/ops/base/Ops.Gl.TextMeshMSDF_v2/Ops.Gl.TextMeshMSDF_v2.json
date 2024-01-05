@@ -193,9 +193,6 @@
     "collections": [
         "drawText"
     ],
-    "relatedops": [
-        "Ops.Gl.FontMSDF"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": []

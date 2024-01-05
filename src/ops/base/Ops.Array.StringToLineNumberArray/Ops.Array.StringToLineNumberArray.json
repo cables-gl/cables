@@ -31,7 +31,7 @@
     },
     "summary": "outputs an array containing a line number for every character",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     }

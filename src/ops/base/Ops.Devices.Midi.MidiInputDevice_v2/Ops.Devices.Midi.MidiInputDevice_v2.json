@@ -50,15 +50,6 @@
     },
     "summary": "connect to MIDI device output port",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiClock",
-        "Ops.Devices.Midi.MidiCC",
-        "Ops.Devices.Midi.MidiNote",
-        "Ops.Devices.Midi.MidiNoteFilter",
-        "Ops.Devices.Midi.MidiChord3",
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiNRPN"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

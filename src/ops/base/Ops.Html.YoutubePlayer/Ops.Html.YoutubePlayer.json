@@ -78,7 +78,7 @@
     },
     "summary": "play a youtube video in a HTML element",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

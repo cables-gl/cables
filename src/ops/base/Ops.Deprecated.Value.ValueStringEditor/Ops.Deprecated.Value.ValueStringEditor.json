@@ -23,7 +23,7 @@
     },
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Value.ValueStringEditor renamed to Ops.Deprecated.Value.ValueStringEditor",

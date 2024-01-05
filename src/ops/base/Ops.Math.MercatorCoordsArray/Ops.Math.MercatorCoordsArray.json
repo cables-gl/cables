@@ -40,7 +40,7 @@
     },
     "summary": "Mercator map and center an array of latitudes and longitudes to a local coordinate system",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

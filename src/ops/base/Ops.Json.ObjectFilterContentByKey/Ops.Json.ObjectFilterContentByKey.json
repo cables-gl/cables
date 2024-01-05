@@ -44,7 +44,7 @@
     },
     "summary": "filter values from an object if key starts with input string ",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

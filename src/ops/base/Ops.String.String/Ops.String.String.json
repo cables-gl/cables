@@ -41,7 +41,7 @@
     ],
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Value.ValueString renamed to Ops.String.String",

@@ -61,7 +61,7 @@
     "collections": [
         "meshInstancing"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Gl.SurfaceScatterInstanced_v2 renamed to Ops.Deprecated.Gl.SurfaceScatterInstanced_v2",

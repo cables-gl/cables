@@ -52,9 +52,6 @@
     },
     "summary": "Animates a text/string, like it is being typed out by a person",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Textures.Text2"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

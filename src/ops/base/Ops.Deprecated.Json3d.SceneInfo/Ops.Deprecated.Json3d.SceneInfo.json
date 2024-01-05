@@ -64,7 +64,7 @@
     "collections": [
         "dataInfo"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Json3d.SceneInfo renamed to Ops.Deprecated.Json3d.SceneInfo",

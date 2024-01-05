@@ -76,7 +76,7 @@
         ]
     },
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "added Trigger out port",

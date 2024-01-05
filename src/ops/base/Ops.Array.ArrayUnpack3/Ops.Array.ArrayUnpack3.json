@@ -54,7 +54,7 @@
     "collections": [
         "pointArrays"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Now reports an error if array length is not divisible by 3",

@@ -51,9 +51,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "added area option for canvas \"parent\" element",

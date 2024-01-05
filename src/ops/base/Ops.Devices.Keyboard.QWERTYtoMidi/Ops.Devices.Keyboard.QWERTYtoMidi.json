@@ -40,7 +40,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Devices.Keyboard.MidiKeyboard renamed to Ops.Devices.Keyboard.QWERTYtoMidi",

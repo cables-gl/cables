@@ -65,7 +65,7 @@
     },
     "summary": "manage/re-order components of an array (stride)",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

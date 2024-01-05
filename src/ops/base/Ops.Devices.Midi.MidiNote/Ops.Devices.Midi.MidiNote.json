@@ -74,14 +74,6 @@
     },
     "summary": "Read a single midi note",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiChord3",
-        "Ops.Devices.Midi.MidiCC",
-        "Ops.Devices.Midi.MidiNRPN",
-        "Ops.Devices.Midi.MidiClock",
-        "Ops.Devices.Midi.MidiTranspose"
-    ],
     "youtubeids": [
         "eDlaFD_d5lc"
     ],

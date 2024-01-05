@@ -57,7 +57,7 @@
     },
     "summary": "Clamps a texture to min and max values - Also has remap modes",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

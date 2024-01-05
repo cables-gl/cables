@@ -23,8 +23,5 @@
     "created": 1544360226445,
     "collections": [
         "pointArrays"
-    ],
-    "relatedops": [
-        "Ops.Gl.PointCollector"
     ]
 }

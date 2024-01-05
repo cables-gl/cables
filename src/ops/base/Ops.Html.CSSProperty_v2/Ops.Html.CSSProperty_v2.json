@@ -42,9 +42,6 @@
     },
     "summary": "Set css style properties of a html element",
     "issues": "",
-    "relatedops": [
-        "Ops.Html.CSSPropertyString"
-    ],
     "youtubeids": [
         "qnPFY8qYBUQ"
     ],

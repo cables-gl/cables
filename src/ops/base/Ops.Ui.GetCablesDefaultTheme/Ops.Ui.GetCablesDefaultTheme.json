@@ -25,9 +25,6 @@
     "authorName": "pandur",
     "created": 1698253211294,
     "summary": "Get the default theme colors of the cables editor",
-    "relatedops": [
-        "Ops.Ui.SetCablesTheme"
-    ],
     "docs": {
         "ports": []
     }

@@ -23,7 +23,7 @@
     "summary": "Triggers when any array values or the array length has changed",
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

@@ -38,9 +38,6 @@
     "summary": "morph between two geometries and render it",
     "youtubeid": "",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.RenderGeometry"
-    ],
     "docs": {
         "ports": [
             {

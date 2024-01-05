@@ -56,7 +56,7 @@
     },
     "summary": "Get infos / stream URL from a regular SoundCloud-track URL",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

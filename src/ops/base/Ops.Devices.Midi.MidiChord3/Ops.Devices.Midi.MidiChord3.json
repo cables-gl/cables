@@ -106,15 +106,6 @@
     },
     "summary": "Map 3 midi notes to values",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiInputDevice2",
-        "Ops.Devices.Midi.MidiClock",
-        "Ops.Devices.Midi.MidiCC",
-        "Ops.Devices.Midi.MidiNote",
-        "Ops.Devices.Midi.MidiNoteFilter",
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiNRPN"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

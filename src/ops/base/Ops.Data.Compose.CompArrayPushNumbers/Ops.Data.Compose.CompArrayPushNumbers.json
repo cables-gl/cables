@@ -103,7 +103,7 @@
     "created": 1686660300185,
     "summary": "push/append multiple numbers to an array",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     }

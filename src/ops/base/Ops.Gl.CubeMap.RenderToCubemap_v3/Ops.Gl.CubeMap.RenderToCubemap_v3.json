@@ -65,7 +65,7 @@
     },
     "summary": "render a scene into a cubemap",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

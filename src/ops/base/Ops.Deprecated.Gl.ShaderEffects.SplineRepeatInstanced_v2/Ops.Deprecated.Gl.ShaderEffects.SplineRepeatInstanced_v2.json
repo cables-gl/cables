@@ -100,7 +100,7 @@
     "collections": [
         "meshInstancing"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Gl.ShaderEffects.SplineRepeatInstanced renamed to Ops.Deprecated.Gl.ShaderEffects.SplineRepeatInstanced_v2",

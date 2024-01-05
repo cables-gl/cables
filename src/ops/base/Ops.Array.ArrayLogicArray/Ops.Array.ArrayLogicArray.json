@@ -49,9 +49,6 @@
     },
     "summary": "Performs logical comparison operations on two arrays",
     "issues": "",
-    "relatedops": [
-        "Ops.Array.ArrayLogic"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

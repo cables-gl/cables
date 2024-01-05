@@ -24,9 +24,6 @@
     },
     "summary": "get a texture from a variable",
     "issues": "",
-    "relatedops": [
-        "Ops.Vars.VarSetTexture"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

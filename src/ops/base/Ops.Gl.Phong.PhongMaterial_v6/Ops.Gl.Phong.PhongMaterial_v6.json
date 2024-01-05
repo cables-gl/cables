@@ -311,14 +311,6 @@
     "collections": [
         "Material"
     ],
-    "relatedops": [
-        "Ops.Gl.Phong.LambertMaterial_v2",
-        "Ops.Gl.Phong.AmbientLight_v4",
-        "Ops.Gl.Phong.DirectionalLight_v5",
-        "Ops.Gl.Phong.PointLight_v5",
-        "Ops.Gl.Phong.SpotLight_v5",
-        "Ops.Gl.ShaderEffects.Shadow_v2"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

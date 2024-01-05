@@ -43,9 +43,6 @@
     },
     "summary": "set a texture variable",
     "issues": "",
-    "relatedops": [
-        "Ops.Vars.VarGetTexture"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": []

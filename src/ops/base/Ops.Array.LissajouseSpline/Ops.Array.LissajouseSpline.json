@@ -82,10 +82,6 @@
         ]
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Meshes.SimpleSpline",
-        "Ops.Gl.Meshes.SplineMesh"
-    ],
     "youtubeids": [],
     "changelog": [
         {

@@ -26,9 +26,6 @@
     },
     "summary": "Outputs a trigger if the value of a number increases",
     "issues": "",
-    "relatedops": [
-        "Ops.Trigger.TriggerIfDecreased"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

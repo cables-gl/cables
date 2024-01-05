@@ -58,9 +58,6 @@
     },
     "summary": "Get the transform from the GLTFscene op",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.GLTF.GltfScene"
-    ],
     "youtubeids": [
         "QNLw21hSweg",
         "I_eD5nml_5A"

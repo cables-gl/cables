@@ -49,7 +49,7 @@
         ]
     },
     "summary": "parse an obj string to a geometry object",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

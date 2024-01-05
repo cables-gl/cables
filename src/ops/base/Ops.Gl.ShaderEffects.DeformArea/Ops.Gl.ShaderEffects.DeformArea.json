@@ -60,7 +60,7 @@
     "collections": [
         "vertexDeformers"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": " added core lib: cgl_shadermodifier",

@@ -72,10 +72,6 @@
         "ports": []
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.TextureArrayLoader",
-        "Ops.Gl.Texture"
-    ],
     "youtubeids": [],
     "exampleProjectId": ""
 }

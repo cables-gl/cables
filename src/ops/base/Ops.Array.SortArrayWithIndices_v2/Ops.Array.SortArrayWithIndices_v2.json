@@ -58,10 +58,6 @@
     "collections": [
         "sort"
     ],
-    "relatedops": [
-        "Ops.Array.SortArray3",
-        "Ops.Array.SortArray3ByDistance"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

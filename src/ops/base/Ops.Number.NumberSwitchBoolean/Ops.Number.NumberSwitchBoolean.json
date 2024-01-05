@@ -36,9 +36,6 @@
     },
     "youtubeid": "",
     "issues": "",
-    "relatedops": [
-        "Ops.String.StringSwitchBoolean"
-    ],
     "changelog": [
         {
             "message": "Ops.Value.ValueSwitchBoolean renamed to Ops.Value.NumberSwitchBoolean",

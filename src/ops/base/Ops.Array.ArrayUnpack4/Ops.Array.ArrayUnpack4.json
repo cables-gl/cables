@@ -59,10 +59,6 @@
         ]
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Array.ArrayPack3",
-        "Ops.Gl.TextureFromColorArray"
-    ],
     "changelog": [
         {
             "message": "Ops.Array.ArrayUnpack4x renamed to Ops.Array.ArrayUnpack4",

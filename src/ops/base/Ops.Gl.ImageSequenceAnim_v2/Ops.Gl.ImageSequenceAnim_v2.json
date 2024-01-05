@@ -119,7 +119,7 @@
     },
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "added max num of frames, if atlas has blank frames at the end",

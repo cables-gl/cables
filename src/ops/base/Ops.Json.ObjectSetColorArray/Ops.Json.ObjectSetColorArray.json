@@ -96,7 +96,7 @@
     },
     "summary": "Set rgba array by key in an object",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

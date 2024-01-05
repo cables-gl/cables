@@ -77,7 +77,7 @@
     "created": 1686149050119,
     "summary": "Add Bodies and check if they intersect/collide with each other",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

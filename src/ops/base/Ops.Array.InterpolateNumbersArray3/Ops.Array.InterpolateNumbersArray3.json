@@ -62,9 +62,6 @@
         "interpolate"
     ],
     "issues": "",
-    "relatedops": [
-        "Ops.Array.InterpolateNumbersArray"
-    ],
     "changelog": [
         {
             "message": "Ops.Array.Array3xGetValuesInterpolated renamed to Ops.Array.InterpolateNumbersArray3",

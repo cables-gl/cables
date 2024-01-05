@@ -44,9 +44,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiToggle renamed to Ops.Deprecated.Devices.Midi.MidiToggle",

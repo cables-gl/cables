@@ -48,7 +48,7 @@
     "created": 1680618157701,
     "summary": "pop/remove the last number from an array",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     }

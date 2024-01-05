@@ -55,7 +55,7 @@
     "collections": [
         "math"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "optimized - removed function call occurring twice",

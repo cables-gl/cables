@@ -33,7 +33,7 @@
     "summary": "center an object to the average x,y,z position of its vertices",
     "youtubeid": "",
     "issues": "will be deprecated - use Ops.Gl.Geometry.AlignGeometry\n",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

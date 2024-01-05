@@ -90,9 +90,6 @@
     },
     "summary": "create an array of physics bodies and add them to current world",
     "issues": "",
-    "relatedops": [
-        "Ops.Physics.CastRay"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

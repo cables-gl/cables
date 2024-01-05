@@ -214,7 +214,7 @@
         }
     ],
     "issues": "requires WebGL2",
-    "relatedops": null,
+
     "exampleProjectId": "muH2jG",
     "coreLibs": [
         "cgl_rendertargets",

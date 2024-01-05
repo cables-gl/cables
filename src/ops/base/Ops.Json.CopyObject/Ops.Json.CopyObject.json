@@ -35,7 +35,7 @@
     "authorName": "pandur",
     "created": 1698315329826,
     "summary": "Creates a copy of a JSON object",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

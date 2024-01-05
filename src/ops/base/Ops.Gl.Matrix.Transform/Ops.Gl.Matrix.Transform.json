@@ -76,7 +76,7 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": " added core lib: ammoworld",

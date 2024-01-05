@@ -40,7 +40,7 @@
     "created": 1689760598014,
     "summary": "Append a string to a string",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

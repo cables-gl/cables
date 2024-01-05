@@ -145,9 +145,6 @@
     "collections": [
         "FFT audio"
     ],
-    "relatedops": [
-        "Ops.WebAudio.FFTAreaAverage_v2"
-    ],
     "youtubeids": [],
     "changelog": [
         {

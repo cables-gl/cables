@@ -66,9 +66,6 @@
     },
     "summary": "Player controls for the timeline",
     "issues": "",
-    "relatedops": [
-        "Ops.WebAudio.MediaPlayer"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

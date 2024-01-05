@@ -201,12 +201,6 @@
     ],
     "summary": "A shaded material for lighting objects",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Phong.AmbientLight_v4",
-        "Ops.Gl.Phong.DirectionalLight_v4",
-        "Ops.Gl.Phong.PointLight_v4",
-        "Ops.Gl.Phong.SpotLight_v4"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

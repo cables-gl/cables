@@ -64,7 +64,7 @@
     "collections": [
         "dataInfo"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "new output: landscape - true if canvas width > height",

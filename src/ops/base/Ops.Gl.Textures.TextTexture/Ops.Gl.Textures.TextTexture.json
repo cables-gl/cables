@@ -85,7 +85,7 @@
     "collections": [
         "drawText"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Gl.Textures.Text renamed to Ops.Gl.Textures.TextTexture",

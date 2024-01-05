@@ -34,7 +34,7 @@
     "summary": "send an object to a websocket connection",
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

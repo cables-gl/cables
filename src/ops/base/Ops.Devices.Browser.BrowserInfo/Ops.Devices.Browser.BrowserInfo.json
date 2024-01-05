@@ -93,7 +93,7 @@
     "collections": [
         "dataInfo"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Html.BrowserCheck renamed to Ops.Html.BrowserInfo",

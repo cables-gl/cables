@@ -32,7 +32,7 @@
     },
     "summary": "Uses a geometry with baked joints animations in conjunction with the BoneSystem op to bind your geometry mesh to your joints animations. ",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

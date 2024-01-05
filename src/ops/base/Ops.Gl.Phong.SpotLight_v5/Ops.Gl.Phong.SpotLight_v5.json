@@ -275,14 +275,6 @@
     ],
     "summary": "spot light  that emits a cone of light",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Phong.PhongMaterial_v5",
-        "Ops.Gl.Phong.LambertMaterial_v2",
-        "Ops.Gl.Phong.AmbientLight_v5",
-        "Ops.Gl.Phong.DirectionalLight_v5",
-        "Ops.Gl.Phong.PointLight_v5",
-        "Ops.Gl.ShaderEffects.Shadow_v2"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

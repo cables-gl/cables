@@ -44,7 +44,7 @@
     },
     "summary": "execute glGetError after every gl command and log to browser console",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

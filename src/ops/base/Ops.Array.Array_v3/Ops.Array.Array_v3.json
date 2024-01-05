@@ -39,7 +39,7 @@
     },
     "summary": "Can generate 3 kinds of arrays. Number - 1,2,3,4 - Normalized - (ContinuousNumberArray)",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

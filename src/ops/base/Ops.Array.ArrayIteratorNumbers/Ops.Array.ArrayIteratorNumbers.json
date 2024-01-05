@@ -57,9 +57,6 @@
     "created": 1540826805478,
     "youtubeid": "63UbYklOZ3c",
     "issues": "",
-    "relatedops": [
-        "Ops.Trigger.Repeat"
-    ],
     "changelog": [
         {
             "message": "Ops.Array.ArrayIterator renamed to Ops.Array.ArrayIteratorNumbers",

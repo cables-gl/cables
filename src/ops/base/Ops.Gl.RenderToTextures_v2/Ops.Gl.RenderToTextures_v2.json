@@ -198,7 +198,7 @@
         }
     ],
     "issues": "requires WebGL2",
-    "relatedops": null,
+
     "exampleProjectId": "INQQgo",
     "coreLibs": [
         "cgl_rendertargets",

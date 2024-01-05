@@ -40,7 +40,7 @@
     },
     "summary": "Store and retreive a number in browser localstorage",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -45,7 +45,7 @@
         ]
     },
     "summary": "splits an array up into an array of arrays",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

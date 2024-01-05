@@ -117,9 +117,6 @@
     ],
     "youtubeid": "",
     "issues": "",
-    "relatedops": [
-        "Ops.Json3d.Json3dMesh"
-    ],
     "todos": [
         {
             "message": "Treshhold port name is incorrect should be Threshhold ",

@@ -54,7 +54,7 @@
     },
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Array.ArraySmooth renamed to Ops.Array.AverageArray",

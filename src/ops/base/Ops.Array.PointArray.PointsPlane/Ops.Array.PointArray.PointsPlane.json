@@ -106,10 +106,6 @@
         }
     ],
     "issues": "",
-    "relatedops": [
-        "Ops.Array.ArrayUnpack4",
-        "Ops.Gl.MeshInstancer"
-    ],
     "youtubeids": [],
     "exampleProjectId": "icchV5"
 }

@@ -55,10 +55,6 @@
     },
     "summary": "generate a cubemap from 6 textures",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.CubeMap.CubeMapMaterial_v2",
-        "Ops.Gl.CubeMap.CubeMapCamera_v2"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

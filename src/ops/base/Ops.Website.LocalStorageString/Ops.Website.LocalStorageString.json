@@ -38,7 +38,7 @@
     },
     "summary": "Store and retreive a string in browser localstorage",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

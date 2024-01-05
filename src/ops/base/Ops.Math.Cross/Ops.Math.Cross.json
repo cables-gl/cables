@@ -76,7 +76,7 @@
     "created": 1688653053202,
     "summary": "Computes the cross product of two vec3's ",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     }

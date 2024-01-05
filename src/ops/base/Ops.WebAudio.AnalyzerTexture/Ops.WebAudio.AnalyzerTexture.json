@@ -50,10 +50,6 @@
     "collections": [
         "FFT audio"
     ],
-    "relatedops": [
-        "Ops.WebAudio.FFTAreaAverage",
-        "Ops.WebAudio.AudioAnalyzer"
-    ],
     "youtubeids": [],
     "changelog": [
         {

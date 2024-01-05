@@ -35,7 +35,7 @@
     },
     "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

@@ -24,7 +24,7 @@
     },
     "summary": "Filter the bones joints and expose them for you to use its position to attach a mesh to it.",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

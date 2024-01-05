@@ -55,19 +55,6 @@
     },
     "summary": "send MIDI CC data to a midi output",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiNRPNOut",
-        "Ops.Devices.Midi.MidiOutputDevice",
-        "Ops.Devices.Midi.MidiNoteOut",
-        "Ops.Devices.Midi.MidiInputDevice",
-        "Ops.Devices.Midi.MidiNRPN",
-        "Ops.Devices.Midi.MidiNote",
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiClock",
-        "Ops.Devices.Midi.MidiNoteFilter",
-        "Ops.Devices.Midi.MidiChord3",
-        "Ops.Devices.Midi.MidiTranspose"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -67,7 +67,7 @@
     "collections": [
         "interpolate"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Array.ArrayInterpolate renamed to Ops.Array.InterpolateArrays",

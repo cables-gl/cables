@@ -44,7 +44,7 @@
             }
         ]
     },
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Array.Array3xMultiply renamed to Ops.Array.Array3Multiply",

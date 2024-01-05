@@ -190,10 +190,7 @@
     "collections": [
         "Material"
     ],
-    "relatedops": [
-        "Ops.Json3d.Json3dMesh",
-        "Ops.Gl.Texture"
-    ],
+
     "docs": {
         "ports": [
             {

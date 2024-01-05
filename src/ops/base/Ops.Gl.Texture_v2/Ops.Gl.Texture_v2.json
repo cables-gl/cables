@@ -91,12 +91,6 @@
     ],
     "summary": "Load an image as a texture",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.TextureArrayLoader",
-        "Ops.Gl.TextureArrayLoaderFromArray",
-        "Ops.Gl.Textures.VideoTexture",
-        "Ops.Gl.Textures.TextureSVG"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": []

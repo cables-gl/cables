@@ -101,7 +101,7 @@
     ],
     "summary": "Load a 3D mesh - model into a scene , e.g. .FBX. DAE .OBJ (was: json3dmesh)",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [
