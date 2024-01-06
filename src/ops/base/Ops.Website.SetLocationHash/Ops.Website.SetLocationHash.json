@@ -50,9 +50,6 @@
     "libs": [],
     "summary": "sets window.location.hash to the specified value(s)",
     "issues": "",
-    "relatedops": [
-        "Ops.Website.LocationHash"
-    ],
     "youtubeids": [
         "hUdHnFtBTNU"
     ],

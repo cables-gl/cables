@@ -74,9 +74,6 @@
     "collections": [
         "Material"
     ],
-    "relatedops": [
-        "Ops.Gl.Shader.Shader2Texture"
-    ],
     "docs": {
         "ports": [
             {

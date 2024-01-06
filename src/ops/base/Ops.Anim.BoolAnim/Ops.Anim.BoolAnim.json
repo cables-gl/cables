@@ -102,8 +102,5 @@
         ]
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Boolean.ToggleBool"
-    ],
     "exampleProjectId": "ofPcTo"
 }

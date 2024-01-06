@@ -32,7 +32,7 @@
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.ShaderEffects.ScaleByNormal",

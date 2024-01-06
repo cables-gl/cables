@@ -61,9 +61,6 @@
     },
     "summary": "calculates a user defined mathematical expression",
     "issues": "",
-    "relatedops": [
-        "Ops.Math.TriggerMathExpression"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

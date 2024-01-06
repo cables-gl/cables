@@ -36,7 +36,7 @@ class CubemapTexture
         this.flip = options.flip || true;
 
 
-        if (!options.hasOwnProperty("pixelFormat"))
+        if (!options.hasOwnProperty("pixelFormat") || !options.pixelFormat)
         {
             if (options.isFloatingPointTexture) options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
             else options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;

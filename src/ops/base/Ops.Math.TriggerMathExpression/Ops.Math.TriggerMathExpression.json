@@ -102,9 +102,6 @@
         ]
     },
     "summary": "calculates a user defined mathematical expression",
-    "relatedops": [
-        "Ops.Math.MathExpression"
-    ],
     "exampleProjectId": "6K7A5f",
     "docs": {
         "ports": []

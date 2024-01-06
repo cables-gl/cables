@@ -242,7 +242,7 @@
     },
     "summary": "route trigger output by string",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     }

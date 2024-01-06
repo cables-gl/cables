@@ -142,11 +142,6 @@
     },
     "summary": "Creates a 3d mesh from a 2d area expressions",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Meshes.SuperShape",
-        "Ops.Gl.Meshes.Polyhedron",
-        "Ops.Gl.Meshes.Icosahedron"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

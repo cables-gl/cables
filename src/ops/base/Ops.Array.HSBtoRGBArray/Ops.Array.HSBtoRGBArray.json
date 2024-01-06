@@ -66,10 +66,6 @@
         "random",
         "converter"
     ],
-    "relatedops": [
-        "Ops.Array.RandomNumbersArray",
-        "Ops.Array.RandomNumbersArray3"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -63,7 +63,7 @@
         ]
     },
     "summary": "multiply XYZ values with a gl matrix vec3 x mat4",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

@@ -33,9 +33,6 @@
         "portsOut": []
     },
     "summary": "Displays information of the distribution of numerical values in an array",
-    "relatedops": [
-        "Ops.Ui.VizArrayTable"
-    ],
     "docs": {
         "ports": [
             {

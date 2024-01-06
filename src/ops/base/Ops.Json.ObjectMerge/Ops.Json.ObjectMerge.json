@@ -35,7 +35,7 @@
     },
     "summary": "merge key+values of two objects",
     "collections": null,
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

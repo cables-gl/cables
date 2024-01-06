@@ -96,7 +96,7 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "added absolute number mode",

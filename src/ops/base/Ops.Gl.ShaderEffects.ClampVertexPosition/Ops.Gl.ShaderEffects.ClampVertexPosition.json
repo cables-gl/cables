@@ -40,7 +40,7 @@
     "summary": "clamp/restrict the vertex position to min/max values per axis",
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

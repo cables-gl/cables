@@ -38,7 +38,7 @@
     "summary": "Increments with each trigger and loops depending on min and max loop values.",
     "youtubeid": "",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

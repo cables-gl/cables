@@ -91,7 +91,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "added key-name to extended title and outport",

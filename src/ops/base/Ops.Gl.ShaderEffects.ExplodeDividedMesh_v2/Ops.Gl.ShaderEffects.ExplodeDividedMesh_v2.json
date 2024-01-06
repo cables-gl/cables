@@ -107,7 +107,7 @@
     ],
     "summary": "explode a (divided) mesh in the direction of faces normals",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

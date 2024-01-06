@@ -81,9 +81,6 @@
     ],
     "summary": "visualize normals, tangents or bitangents",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Shader.ShowNormalsMaterial"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

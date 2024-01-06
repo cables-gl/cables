@@ -190,10 +190,6 @@
         "webvr-polyfill.js"
     ],
     "issues": "",
-    "relatedops": [
-        "Ops.Boolean.IfTrueThen",
-        "Ops.Devices.Mobile.ScreenOrientation"
-    ],
     "todos": [
         {
             "message": "Enable gamepads for VR",

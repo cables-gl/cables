@@ -45,7 +45,7 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null,
+
     "todos": [
         {
             "message": "should be an array generator op, no transforms etc needed",

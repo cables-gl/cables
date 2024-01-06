@@ -27,7 +27,7 @@
     },
     "summary": "Generate a random string of given characters",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

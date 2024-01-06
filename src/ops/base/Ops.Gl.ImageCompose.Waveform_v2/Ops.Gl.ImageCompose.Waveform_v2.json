@@ -107,7 +107,7 @@
     },
     "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

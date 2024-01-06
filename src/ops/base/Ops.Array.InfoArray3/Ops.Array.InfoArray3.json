@@ -67,9 +67,6 @@
     "collections": [
         "dataInfo"
     ],
-    "relatedops": [
-        "Ops.Array.ArrayAnalyze"
-    ],
     "docs": {
         "ports": [
             {

@@ -74,15 +74,6 @@
     },
     "summary": "sends out midi clock signals as triggers",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiInputDevice2",
-        "Ops.Devices.Midi.MidiCC",
-        "Ops.Devices.Midi.MidiNote",
-        "Ops.Devices.Midi.MidiNoteFilter",
-        "Ops.Devices.Midi.MidiChord3",
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiNRPN"
-    ],
     "youtubeids": [
         "ieozmhPy8jc"
     ],

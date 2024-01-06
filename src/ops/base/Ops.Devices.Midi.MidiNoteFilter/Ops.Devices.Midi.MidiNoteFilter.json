@@ -70,14 +70,6 @@
     },
     "summary": "Only read a range of notes (e.g. C1 to C2)",
     "issues": "",
-    "relatedops": [
-        "Ops.Devices.Midi.MidiMonitor",
-        "Ops.Devices.Midi.MidiNote",
-        "Ops.Devices.Midi.MidiChord3",
-        "Ops.Devices.Midi.MidiCC",
-        "Ops.Devices.Midi.MidiNRPN",
-        "Ops.Devices.Midi.MidiClock"
-    ],
     "youtubeids": [
         "eDlaFD_d5lc",
         "x0mjo8XStzA"

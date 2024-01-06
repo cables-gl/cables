@@ -42,9 +42,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiValue renamed to Ops.Dreprecated.Devices.Midi.MidiValue",

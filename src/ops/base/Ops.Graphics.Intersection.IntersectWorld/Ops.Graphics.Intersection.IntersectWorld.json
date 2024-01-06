@@ -55,7 +55,7 @@
     "authorName": "pandur",
     "created": 1686149045279,
     "summary": "Define a world to check for intersections and collisions",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

@@ -74,11 +74,7 @@
         "generator",
         "random"
     ],
-    "relatedops": [
-        "Ops.Array.RandomNumbersArray",
-        "Ops.Array.RandomNumbersArray3",
-        "Ops.Array.HSBtoRGBArray"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": [

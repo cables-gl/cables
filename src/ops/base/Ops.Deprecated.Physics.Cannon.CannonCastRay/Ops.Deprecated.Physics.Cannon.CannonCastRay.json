@@ -181,13 +181,6 @@
     ],
     "summary": "cast a ray and test intersection with physics bodies",
     "issues": "",
-    "relatedops": [
-        "Ops.Physics.PhysicsBodiesArray",
-        "Ops.Physics.Body.PhysicsCube_v2",
-        "Ops.Physics.Body.PhysicsSphere_v2",
-        "Ops.Physics.Body.PhysicsGeometryBody",
-        "Ops.Physics.World"
-    ],
     "docs": {
         "ports": [
             {

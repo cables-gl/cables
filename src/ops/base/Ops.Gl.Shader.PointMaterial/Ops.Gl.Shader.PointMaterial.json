@@ -169,9 +169,6 @@
         ]
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Meshes.PointCloudFromArray"
-    ],
     "changelog": [
         {
             "message": "added support for vertex colors",

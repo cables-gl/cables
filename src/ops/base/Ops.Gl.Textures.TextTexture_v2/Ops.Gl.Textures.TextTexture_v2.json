@@ -99,7 +99,7 @@
     "collections": [
         "drawText"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "fixed - ui redraws slowing down op",

@@ -43,7 +43,7 @@
     "collections": [
         "dataInfo"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "add output boolean for remote viewer",

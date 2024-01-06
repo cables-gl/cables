@@ -56,7 +56,7 @@
     },
     "summary": "triggers when texture has changed",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

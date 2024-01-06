@@ -50,9 +50,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiButton renamed to Ops.Dreprecated.Devices.Midi.MidiButton",

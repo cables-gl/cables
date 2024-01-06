@@ -43,9 +43,7 @@
         ]
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Textures.Text"
-    ],
+
     "docs": {
         "ports": [
             {

@@ -101,11 +101,6 @@
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",
-    "relatedops": [
-        "Ops.Array.RandomArrays",
-        "Ops.Array.RandomNumbersArray3",
-        "Ops.Array.RandomNumbersArray4"
-    ],
     "youtubeids": [
         "DW9U5tv1GHM"
     ],

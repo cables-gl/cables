@@ -68,7 +68,7 @@
     "authorName": "tob_har",
     "created": 1699217231147,
     "summary": "set a boolean as object property",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

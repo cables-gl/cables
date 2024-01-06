@@ -98,10 +98,6 @@
     "collections": [
         "pointArrays"
     ],
-    "relatedops": [
-        "Ops.Gl.Shader.PointMaterial",
-        "Ops.Gl.Geometry.GeometryPoints"
-    ],
     "todos": [
         {
             "message": "improved performance by rebuilding mesh less often",

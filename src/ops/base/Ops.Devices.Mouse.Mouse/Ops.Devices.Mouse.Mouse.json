@@ -137,9 +137,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "fixed: wrong coordinates when using HDPI displays",

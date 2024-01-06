@@ -47,9 +47,6 @@
     "collections": [
         "math"
     ],
-    "relatedops": [
-        "Ops.Array.ArrayMath"
-    ],
     "youtubeids": [],
     "exampleProjectId": "uIYNcn"
 }

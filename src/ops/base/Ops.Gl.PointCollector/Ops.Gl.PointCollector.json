@@ -33,9 +33,6 @@
     "collections": [
         "pointArrays"
     ],
-    "relatedops": [
-        "Ops.Gl.PointCollectorCollect"
-    ],
     "issues": "",
     "youtubeids": []
 }

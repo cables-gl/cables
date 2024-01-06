@@ -36,9 +36,6 @@
     },
     "summary": "Modify a css property of an element with a string",
     "issues": "",
-    "relatedops": [
-        "Ops.Html.CSSProperty_v2"
-    ],
     "youtubeids": [
         "qnPFY8qYBUQ"
     ],

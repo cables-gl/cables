@@ -76,9 +76,6 @@
     },
     "summary": "Draws a rectangle with rounded corners",
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.Meshes.Rectangle"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

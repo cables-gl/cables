@@ -55,10 +55,6 @@
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",
-    "relatedops": [
-        "Ops.User.andro.Points3dField",
-        "Ops.Array.RandomArray3x"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -84,7 +84,7 @@
     },
     "summary": "Plays back one shot samples on trigger (useful for interaction sound)",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

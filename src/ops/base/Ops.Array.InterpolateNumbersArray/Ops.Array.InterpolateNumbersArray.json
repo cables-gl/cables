@@ -34,9 +34,6 @@
     "collections": [
         "interpolate"
     ],
-    "relatedops": [
-        "Ops.Array.InterpolateNumbersArray3"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

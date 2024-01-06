@@ -51,7 +51,7 @@
     },
     "summary": "Load a SVG image and convert to a texture of pixels",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

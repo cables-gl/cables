@@ -60,10 +60,7 @@
         ]
     },
     "issues": "",
-    "relatedops": [
-        "Ops.Gl.TextureEffects.ImageCompose",
-        "Ops.Gl.MeshInstancer"
-    ],
+
     "exampleProjectId": "uZkd3x",
     "caniusequery": "",
     "youtubeids": [

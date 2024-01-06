@@ -134,7 +134,7 @@
         ]
     },
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Gl.Shader.Shader2Texture renamed to Ops.Gl.Shader.ShaderToTexture",

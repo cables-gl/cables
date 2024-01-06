@@ -33,7 +33,7 @@
     "collections": [
         "converter"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Array.Array3xTo2x renamed to Ops.Array.Array3To2",

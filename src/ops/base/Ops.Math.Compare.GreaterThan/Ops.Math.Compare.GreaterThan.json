@@ -42,7 +42,7 @@
     "created": 1540919889895,
     "youtubeid": "3dYztfuw4lA",
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Math.Compare.Greater renamed to Ops.Math.Compare.GreaterThan",

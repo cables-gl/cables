@@ -145,7 +145,7 @@
     "created": 1612888673498,
     "summary": "send bpm based triggers like a clocked trigger sequencer / clock divider",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

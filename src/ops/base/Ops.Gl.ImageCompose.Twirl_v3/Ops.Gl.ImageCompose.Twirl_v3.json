@@ -49,7 +49,7 @@
         ]
     },
     "summary": "Creates a twirl/swirl/spiral effect in a texture",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

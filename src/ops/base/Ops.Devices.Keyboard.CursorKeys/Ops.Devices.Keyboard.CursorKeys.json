@@ -53,9 +53,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "docs": {
         "ports": []
     },

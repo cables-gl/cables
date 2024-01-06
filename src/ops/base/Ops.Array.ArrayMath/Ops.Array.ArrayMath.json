@@ -36,10 +36,6 @@
     "collections": [
         "math"
     ],
-    "relatedops": [
-        "Ops.Array.ArrayMathArray",
-        "Ops.Array.ArrayMultiply"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

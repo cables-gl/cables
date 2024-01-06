@@ -18,7 +18,7 @@
         ]
     },
     "summary": "set time of timeline to 0 (rewind, restart)",
-    "relatedops": null,
+
     "exampleProjectId": "3F6DOe",
     "docs": {
         "ports": []

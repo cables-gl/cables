@@ -49,9 +49,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "Ops.Devices.Midi.MidiSend renamed to Ops.Deprecated.Devices.Midi.MidiSend",

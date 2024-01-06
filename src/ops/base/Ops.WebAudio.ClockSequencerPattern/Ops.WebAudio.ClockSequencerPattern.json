@@ -63,9 +63,6 @@
     },
     "summary": "sequence triggers by defining a pattern (like a drum machine)",
     "issues": "",
-    "relatedops": [
-        "Ops.Array.ParseArray"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

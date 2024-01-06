@@ -67,9 +67,6 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        "Ops.Devices.Mobile.MotionSensor2"
-    ],
     "docs": {
         "ports": []
     },

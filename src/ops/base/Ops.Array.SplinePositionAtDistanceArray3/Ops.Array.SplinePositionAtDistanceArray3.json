@@ -94,7 +94,7 @@
     "collections": [
         "pointArrays"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Array.Array3xSplinePositionAtDistance renamed to Ops.Array.SplinePositionAtDistanceArray3",

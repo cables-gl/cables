@@ -58,9 +58,7 @@
         ]
     },
     "youtubeid": "",
-    "relatedops": [
-        "Ops.Array.ArrayGetNumber"
-    ],
+
     "changelog": [
         {
             "message": "optimized accepts floats as input for index and makes it an integer",

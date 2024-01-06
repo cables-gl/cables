@@ -63,9 +63,6 @@
     },
     "summary": "Joins multiple strings together",
     "issues": "",
-    "relatedops": [
-        "Ops.String.Concat_v2"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

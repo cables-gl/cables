@@ -77,10 +77,6 @@ class CubemapFramebuffer
         if (!this._options.hasOwnProperty("filter")) this._options.filter = CGL.Texture.FILTER_LINEAR;
         if (!this._options.hasOwnProperty("wrap")) this._options.wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-        // this._options.filter = CGL.Texture.FILTER_LINEAR;
-
-        // console.log("cubemapframebuffer created");
-
         this._cgl.checkFrameStarted("cubemap framebuffer");
 
         let pxlFormat = options.pixeFormat;

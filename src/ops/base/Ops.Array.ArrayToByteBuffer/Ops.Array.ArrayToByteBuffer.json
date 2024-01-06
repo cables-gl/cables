@@ -25,7 +25,7 @@
     },
     "summary": "convert an array to a byte buffer (Uint8ClampedArray)",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

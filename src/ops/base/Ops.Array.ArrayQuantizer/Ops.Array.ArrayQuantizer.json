@@ -46,7 +46,7 @@
     },
     "summary": "quantize input to nearest number in array",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

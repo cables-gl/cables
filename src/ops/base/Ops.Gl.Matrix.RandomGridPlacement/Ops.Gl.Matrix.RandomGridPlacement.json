@@ -66,9 +66,6 @@
         ]
     },
     "issues": "this is slow, you should try the new version:  Ops.Gl.Matrix.RandomGridPlacementArrays",
-    "relatedops": [
-        "Ops.Gl.Matrix.RandomGridPlacementArrays"
-    ],
     "youtubeids": [],
     "exampleProjectId": "FsZFVB"
 }

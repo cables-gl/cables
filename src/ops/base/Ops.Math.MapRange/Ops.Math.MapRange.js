@@ -2,7 +2,7 @@ const
     v = op.inValueFloat("value", 0),
     old_min = op.inValueFloat("old min", 0),
     old_max = op.inValueFloat("old max", 1),
-    new_min = op.inValueFloat("new min", -1),
+    new_min = op.inValueFloat("new min", 0),
     new_max = op.inValueFloat("new max", 1),
     easing = op.inValueSelect("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear"),
     result = op.outNumber("result", 0);

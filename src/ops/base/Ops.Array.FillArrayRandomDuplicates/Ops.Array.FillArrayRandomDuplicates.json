@@ -49,7 +49,7 @@
     },
     "summary": "Fill an array with random duplicates",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {

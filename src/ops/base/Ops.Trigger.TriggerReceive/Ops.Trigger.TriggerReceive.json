@@ -20,9 +20,6 @@
     },
     "summary": "Receives triggers from a TriggerSend op with the same variable name",
     "issues": "",
-    "relatedops": [
-        "Ops.Trigger.TriggerSend"
-    ],
     "docs": {
         "ports": [
             {

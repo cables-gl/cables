@@ -71,9 +71,6 @@
     },
     "id": "920090d2-63b2-4aae-8ca7-0b0aacf6bc93",
     "issues": "",
-    "relatedops": [
-        "Base64ToTexture"
-    ],
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.Textures.TextureToBase64",

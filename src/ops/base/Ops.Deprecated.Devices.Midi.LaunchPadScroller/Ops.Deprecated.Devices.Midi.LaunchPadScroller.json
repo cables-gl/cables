@@ -41,9 +41,7 @@
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+
     "changelog": [
         {
             "message": "Ops.Devices.Midi.LaunchPadScroller renamed to Ops.Deprecated.Devices.Midi.LaunchPadScroller",

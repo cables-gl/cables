@@ -97,9 +97,6 @@
     },
     "summary": "Calculates a user defined mathematical expression",
     "issues": "",
-    "relatedops": [
-        "Ops.Math.MathExpression"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": [

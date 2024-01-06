@@ -84,7 +84,7 @@
     "collections": [
         "vertexDeformers"
     ],
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "code cleanup - ports",

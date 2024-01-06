@@ -44,9 +44,6 @@
     },
     "summary": "insert/add/unshift a string to the beginning of an array",
     "issues": "",
-    "relatedops": [
-        "Ops.Array.ArrayPushString"
-    ],
     "youtubeids": [],
     "docs": {
         "ports": []

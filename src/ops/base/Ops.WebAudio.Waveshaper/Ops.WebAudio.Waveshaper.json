@@ -73,7 +73,7 @@
     },
     "summary": "add waveshaping (distortion, overdrive, fuzz) to an audio stream",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

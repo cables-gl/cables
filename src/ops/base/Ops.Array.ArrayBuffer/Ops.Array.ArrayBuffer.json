@@ -62,9 +62,6 @@
     },
     "youtubeid": "",
     "issues": "",
-    "relatedops": [
-        "Ops.Array.ArrayBuffer3x"
-    ],
     "changelog": [
         {
             "message": "Now has integer values for array length",

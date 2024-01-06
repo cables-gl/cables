@@ -20,9 +20,6 @@
     },
     "summary": "Allows triggers to be sent to a TriggerReceive op with the same variable name",
     "issues": "",
-    "relatedops": [
-        "Ops.Trigger.TriggerReceive"
-    ],
     "docs": {
         "ports": [
             {

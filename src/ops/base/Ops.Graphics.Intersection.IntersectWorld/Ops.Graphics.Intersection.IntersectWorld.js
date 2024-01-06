@@ -96,12 +96,12 @@ function checkCollisions()
 
                     let dist_squared = bSphere.radius * bSphere.radius;
                     /* assume bBox.minand C2 are element-wise sorted, if not, do that now */
-                    if (bSphere.pos[0] < bBox.minX) dist_squared -= Math.pow(bSphere.pos[0] - bBox.minX, 2);
-                    else if (bSphere.pos[0] > bBox.maxX) dist_squared -= Math.pow(bSphere.pos[0] - bBox.maxX, 2);
-                    if (bSphere.pos[1] < bBox.minY) dist_squared -= Math.pow(bSphere.pos[1] - bBox.minY, 2);
-                    else if (bSphere.pos[1] > bBox.maxY) dist_squared -= Math.pow(bSphere.pos[1] - bBox.maxY, 2);
-                    if (bSphere.pos[2] < bBox.minZ) dist_squared -= Math.pow(bSphere.pos[2] - bBox.minZ, 2);
-                    else if (bSphere.pos[2] > bBox.maxZ) dist_squared -= Math.pow(bSphere.pos[2] - bBox.maxZ, 2);
+                    if (bSphere.pos[0] < bBox.minX) dist_squared -= (bSphere.pos[0] - bBox.minX) ** 2;
+                    else if (bSphere.pos[0] > bBox.maxX) dist_squared -= (bSphere.pos[0] - bBox.maxX) ** 2;
+                    if (bSphere.pos[1] < bBox.minY) dist_squared -= (bSphere.pos[1] - bBox.minY) ** 2;
+                    else if (bSphere.pos[1] > bBox.maxY) dist_squared -= (bSphere.pos[1] - bBox.maxY) ** 2;
+                    if (bSphere.pos[2] < bBox.minZ) dist_squared -= (bSphere.pos[2] - bBox.minZ) ** 2;
+                    else if (bSphere.pos[2] > bBox.maxZ) dist_squared -= (bSphere.pos[2] - bBox.maxZ) ** 2;
 
                     if (dist_squared > 0)
                     {
@@ -116,7 +116,7 @@ function checkCollisions()
                 }
                 else
                 {
-                    console.warn("unknown collision pair...");
+                    console.warn("unknown collision pair...", bodyA, bodyB);
                 }
             }
         }

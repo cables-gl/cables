@@ -39,7 +39,7 @@
         ]
     },
     "issues": "",
-    "relatedops": null,
+
     "changelog": [
         {
             "message": "Ops.Array.Array3xSplineLength renamed to Ops.Array.SplineLengthArray3",

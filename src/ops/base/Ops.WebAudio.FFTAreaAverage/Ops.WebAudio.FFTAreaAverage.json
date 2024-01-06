@@ -59,10 +59,6 @@
     "collections": [
         "FFT audio"
     ],
-    "relatedops": [
-        "Ops.WebAudio.AudioAnalyzer",
-        "Ops.WebAudio.FftTexture"
-    ],
     "youtubeids": [],
     "exampleProjectId": "F6Fhyp"
 }

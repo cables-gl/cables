@@ -30,7 +30,7 @@
     },
     "summary": "Output string if pass through is true",
     "issues": "",
-    "relatedops": null,
+
     "docs": {
         "ports": [
             {
