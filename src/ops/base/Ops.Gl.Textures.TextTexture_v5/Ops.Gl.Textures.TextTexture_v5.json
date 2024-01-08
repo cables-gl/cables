@@ -136,6 +136,11 @@
             },
             {
                 "type": 0,
+                "name": "Redraw On Font Load",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "r",
                 "group": "Text Color",
                 "subType": "number"
@@ -264,7 +269,6 @@
     "collections": [
         "drawText"
     ],
-
     "youtubeids": [
         "z1Qf9dE67-w"
     ],

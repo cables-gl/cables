@@ -1,0 +1,25 @@
+{
+    "id": "5c072a3d-c307-4bcd-8f3b-7487e30f4d73",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1704727925915
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Font Loaded"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1704727937128,
+    "summary": "triggers when asynchronous requests finised loading",
+    "docs": {
+        "ports": []
+    }
+}

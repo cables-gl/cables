@@ -33,6 +33,8 @@ const
     cachetexture = op.inValueBool("Reuse Texture", true),
     drawDebug = op.inBool("Show Debug", false),
 
+    reloadOnFont = op.inBool("Redraw On Font Load", true),
+
     r = op.inValueSlider("r", 1),
     g = op.inValueSlider("g", 1),
     b = op.inValueSlider("b", 1),
@@ -151,6 +153,24 @@ op.patch.on("fontLoaded", (fontName) =>
 {
     if (fontName == font.get()) needsRefresh = true;
 });
+
+document.fonts.ready.then(() =>
+{
+    if (reloadOnFont.get())
+    {
+        needsRefresh = true;
+        console.log("reload on font...");
+    }
+});
+
+document.fonts.onloadingdone = function (fontFaceSetEvent)
+{
+    if (reloadOnFont.get())
+    {
+        needsRefresh = true;
+        console.log("reload on font...");
+    }
+};
 
 function getWidth()
 {
