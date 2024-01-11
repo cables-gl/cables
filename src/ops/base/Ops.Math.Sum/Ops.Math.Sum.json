@@ -32,5 +32,13 @@
                 "text": "Result of the addition"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "adjusted default values",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1704977945611
+        }
+    ]
 }
