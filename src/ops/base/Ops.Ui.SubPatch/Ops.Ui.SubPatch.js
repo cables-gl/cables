@@ -12,7 +12,7 @@ op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_VAL
 // }
 
 dataStr.setUiAttribs({ "hideParam": true });
-op.patchId.setUiAttribs({ "hideParam": true });
+op.patchId.setUiAttribs({ "hidePort": true });
 
 let data = { "ports": [], "portsOut": [] };
 let oldPatchId = CABLES.generateUUID();
