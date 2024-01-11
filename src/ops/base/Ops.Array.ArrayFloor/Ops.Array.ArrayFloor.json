@@ -1,9 +1,7 @@
 {
     "summary": "Round numbers down",
     "issues": "",
-    "collections": [
-        "math"
-    ],
+
 
     "docs": {
         "ports": [

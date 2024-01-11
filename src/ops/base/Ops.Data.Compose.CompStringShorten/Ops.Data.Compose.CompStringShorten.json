@@ -40,7 +40,7 @@
     "authorName": "pandur",
     "created": 1689760770988,
     "summary": "Remove characters from the beginning or end of a string",
-    "collections": null,
+
 
     "docs": {
         "ports": []

@@ -69,11 +69,7 @@
     ],
     "summary": "Generates a random array of numbers in 4-tuples",
     "issues": "",
-    "collections": [
-        "pointArrays",
-        "generator",
-        "random"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": [

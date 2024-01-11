@@ -47,9 +47,7 @@
     "authorName": "pandur",
     "id": "8a9b80c3-dd51-47f1-8a64-1d26da48fec7",
     "created": 1542698796041,
-    "collections": [
-        "pointArrays"
-    ],
+
     "changelog": [
         {
             "message": "Ops.Array.ReduceArray3x renamed to Ops.Array.ReduceArray3",

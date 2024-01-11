@@ -190,9 +190,7 @@
     },
     "summary": "draw text  using the FontMSDF operator",
     "issues": "",
-    "collections": [
-        "drawText"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": []

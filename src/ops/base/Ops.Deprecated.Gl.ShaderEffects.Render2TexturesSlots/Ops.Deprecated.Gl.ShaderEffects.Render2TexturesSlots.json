@@ -57,6 +57,5 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ],
-    "collections": null
+    ]
 }

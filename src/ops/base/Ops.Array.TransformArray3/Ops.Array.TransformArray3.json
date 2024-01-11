@@ -83,9 +83,7 @@
         "ports": []
     },
     "youtubeid": "",
-    "collections": [
-        "pointArrays"
-    ],
+
     "changelog": [
         {
             "message": "Ops.Math.Array3xTransform renamed to Ops.Array.Array3Transform",

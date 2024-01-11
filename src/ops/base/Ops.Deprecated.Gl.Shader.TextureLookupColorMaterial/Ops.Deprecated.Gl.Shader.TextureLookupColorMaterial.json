@@ -58,10 +58,6 @@
     },
     "summary": "lookup color values from a texture and use it as object color",
     "issues": "",
-    "collections": [
-        "Material"
-    ],
-
     "docs": {
         "ports": []
     },

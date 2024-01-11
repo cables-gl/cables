@@ -43,9 +43,7 @@
         ]
     },
     "summary": "Packs 3 individual arrays into a xyz array",
-    "collections": [
-        "pointArrays"
-    ],
+
     "docs": {
         "ports": [
             {

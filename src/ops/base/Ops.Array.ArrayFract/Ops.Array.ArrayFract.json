@@ -18,9 +18,7 @@
     },
     "summary": "Returns the fractional remainder of all values in an array",
     "issues": "",
-    "collections": [
-        "math"
-    ],
+
 
     "docs": {
         "ports": [

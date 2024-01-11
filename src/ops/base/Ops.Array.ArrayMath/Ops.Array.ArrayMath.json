@@ -33,9 +33,7 @@
     },
     "summary": "Pick from multiple mathematical modes which can all be applied to a single array",
     "issues": "",
-    "collections": [
-        "math"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": [

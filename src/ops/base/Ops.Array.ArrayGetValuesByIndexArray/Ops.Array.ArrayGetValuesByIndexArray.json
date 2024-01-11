@@ -33,7 +33,7 @@
     "authorName": "kikohs",
     "created": 1678108947352,
     "summary": "Pick values from input array at given indices and stride",
-    "collections": null,
+
 
     "docs": {
         "ports": [

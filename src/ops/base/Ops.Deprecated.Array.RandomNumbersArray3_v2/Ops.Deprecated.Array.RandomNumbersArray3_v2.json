@@ -69,11 +69,7 @@
     },
     "summary": "Generates a random array of numbers (was: RandomArray3x)",
     "issues": "",
-    "collections": [
-        "pointArrays",
-        "generator",
-        "random"
-    ],
+
     "youtubeids": [
         "7xlElfbMWgw"
     ],

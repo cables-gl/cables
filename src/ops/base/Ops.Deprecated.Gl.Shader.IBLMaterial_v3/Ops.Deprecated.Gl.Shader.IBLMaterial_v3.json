@@ -187,10 +187,6 @@
     },
     "summary": " image based lighting material using cubemaps",
     "issues": "",
-    "collections": [
-        "Material"
-    ],
-
     "docs": {
         "ports": [
             {

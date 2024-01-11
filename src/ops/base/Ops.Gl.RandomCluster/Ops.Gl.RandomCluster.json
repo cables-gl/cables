@@ -92,9 +92,7 @@
             }
         ]
     },
-    "collections": [
-        "transform"
-    ],
+
 
     "docs": {
         "ports": [

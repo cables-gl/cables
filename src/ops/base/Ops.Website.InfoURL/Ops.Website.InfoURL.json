@@ -44,9 +44,6 @@
     },
     "summary": "Information about the current URL",
     "issues": "",
-    "collections": [
-        "dataInfo"
-    ],
 
     "docs": {
         "ports": []

@@ -79,9 +79,7 @@
         ]
     },
     "summary": "Draw a 2D rectangle with controllable parameters",
-    "collections": [
-        "generator"
-    ],
+
 
     "docs": {
         "ports": [

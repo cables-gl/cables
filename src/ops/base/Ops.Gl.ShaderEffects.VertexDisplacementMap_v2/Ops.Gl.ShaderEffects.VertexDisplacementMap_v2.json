@@ -87,9 +87,7 @@
     },
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
     "issues": "",
-    "collections": [
-        "vertexDeformers"
-    ],
+
 
     "youtubeids": [
         "NjG85Qbbl0w"

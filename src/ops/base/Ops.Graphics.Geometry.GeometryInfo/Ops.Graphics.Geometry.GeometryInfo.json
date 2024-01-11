@@ -66,9 +66,6 @@
     },
     "summary": "information about a geometry",
     "youtubeid": "",
-    "collections": [
-        "dataInfo"
-    ],
 
     "docs": {
         "ports": []

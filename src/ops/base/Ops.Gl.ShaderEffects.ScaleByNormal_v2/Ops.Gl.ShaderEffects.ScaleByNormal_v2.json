@@ -26,9 +26,7 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "vertexDeformers"
-    ],
+
     "coreLibs": [
         "cgl_shadermodifier"
     ],

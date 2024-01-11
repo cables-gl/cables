@@ -18,9 +18,7 @@
     },
     "summary": "Converts array contents to absolute values - converts all negative numbers to positive numbers",
     "issues": "",
-    "collections": [
-        "math"
-    ],
+
 
     "docs": {
         "ports": [

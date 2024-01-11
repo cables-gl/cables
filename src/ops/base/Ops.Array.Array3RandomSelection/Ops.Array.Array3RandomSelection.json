@@ -38,9 +38,6 @@
     },
     "summary": "extract definable amount of random xyz points from an array",
     "issues": "",
-    "collections": [
-        "random"
-    ],
 
     "docs": {
         "ports": [

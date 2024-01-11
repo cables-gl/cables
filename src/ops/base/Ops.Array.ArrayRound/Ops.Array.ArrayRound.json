@@ -51,9 +51,7 @@
     ],
     "summary": "Round numbers up",
     "issues": "",
-    "collections": [
-        "math"
-    ],
+
 
     "docs": {
         "ports": [
