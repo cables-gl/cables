@@ -51,9 +51,7 @@
     },
     "summary": "Outputs an array of data from a user defined OSC address",
     "issues": "",
-    "collections": [
-        "Osc"
-    ],
+
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],

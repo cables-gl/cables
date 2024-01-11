@@ -31,7 +31,7 @@
     },
     "summary": "sends a trigger via socketcluster/websocket",
     "issues": "",
-    "collections": null,
+
     "relatedops": null,
     "youtubeids": [],
     "docs": {

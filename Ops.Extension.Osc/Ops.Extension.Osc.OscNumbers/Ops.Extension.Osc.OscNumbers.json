@@ -62,9 +62,7 @@
     },
     "summary": "Outputs up to 4 numbers from a user defined OSC address",
     "issues": "",
-    "collections": [
-        "Osc"
-    ],
+
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],

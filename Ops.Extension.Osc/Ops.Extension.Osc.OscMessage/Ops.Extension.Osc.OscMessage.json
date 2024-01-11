@@ -44,9 +44,7 @@
     },
     "summary": "Shows the current active address of an incoming OSC message",
     "issues": "",
-    "collections": [
-        "Osc"
-    ],
+
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],

@@ -75,7 +75,7 @@
     },
     "summary": "get info for clients listening on a socketcluster topic",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Net.SocketCluster.SocketCluster"
     ],

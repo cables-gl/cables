@@ -52,9 +52,7 @@
     },
     "summary": "Outputs a single number from a user defined OSC address",
     "issues": "",
-    "collections": [
-        "Osc"
-    ],
+
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],

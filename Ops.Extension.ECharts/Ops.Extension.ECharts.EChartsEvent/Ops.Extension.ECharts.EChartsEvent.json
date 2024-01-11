@@ -72,7 +72,7 @@
     },
     "summary": "capture echart-library-events",
     "issues": "",
-    "collections": null,
+
     "relatedops": [
         "Ops.Libs.ECharts.ECharts"
     ],
