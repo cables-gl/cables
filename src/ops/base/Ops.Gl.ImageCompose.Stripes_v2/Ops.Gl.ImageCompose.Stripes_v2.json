@@ -78,10 +78,6 @@
         "ports": []
     },
     "issues": "",
-    "collections": [
-        "generator"
-    ],
-
     "youtubeids": [],
     "changelog": [
         {
@@ -96,5 +92,5 @@
             "date": 1701856058064
         }
     ],
-    "exampleProjectId": "dYhlT6"
+    "exampleProjectId": ""
 }

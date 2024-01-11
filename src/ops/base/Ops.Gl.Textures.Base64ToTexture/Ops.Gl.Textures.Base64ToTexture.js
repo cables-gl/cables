@@ -2,6 +2,8 @@ const
     dataIn = op.inStringEditor("Base64 / Data URI", ""),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
+    unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     textureOut = op.outTexture("Texture"),
     loadingOut = op.outBool("Loading");
 
@@ -16,7 +18,10 @@ function createTex()
     const tex = CGL.Texture.createFromImage(op.patch.cgl, image,
         {
             "filter": selectedFilter,
-            "wrap": selectedWrap
+            "wrap": selectedWrap,
+            "unpackAlpha": unpackAlpha.get(),
+            "anisotropic": parseFloat(aniso.get())
+
         });
     textureOut.set(tex);
     loadingOut.set(false);
@@ -27,6 +32,8 @@ image.onload = function (e)
     op.patch.cgl.addNextFrameOnceCallback(createTex.bind(this));
 };
 
+aniso.onChange =
+unpackAlpha.onChange =
 dataIn.onChange = () =>
 {
     updateTex();
