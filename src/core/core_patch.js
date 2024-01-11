@@ -395,7 +395,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
             if (!opObj)
             {
-                this.emitEvent("criticalError", { "title": "unknown op", "text": "unknown op: " + objName });
+                this.emitEvent("criticalError", { "title": "unknown op" + objName, "text": "unknown op: " + objName });
 
                 this._log.error("unknown op: " + objName);
                 throw new Error("unknown op: " + objName);
