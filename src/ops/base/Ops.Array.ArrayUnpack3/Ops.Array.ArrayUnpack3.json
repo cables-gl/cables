@@ -51,9 +51,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays"
-    ],
+
 
     "changelog": [
         {

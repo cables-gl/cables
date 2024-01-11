@@ -140,9 +140,7 @@
     },
     "summary": "get camera attributes from current camera/orbit controls",
     "issues": "",
-    "collections": [
-        "Cameras"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": [

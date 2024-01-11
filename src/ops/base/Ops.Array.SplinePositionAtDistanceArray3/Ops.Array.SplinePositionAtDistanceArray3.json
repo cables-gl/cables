@@ -91,9 +91,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays"
-    ],
+
 
     "changelog": [
         {

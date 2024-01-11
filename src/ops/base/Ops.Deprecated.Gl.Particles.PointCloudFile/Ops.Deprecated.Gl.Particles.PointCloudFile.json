@@ -43,9 +43,7 @@
         "ports": []
     },
     "youtubeid": "",
-    "collections": [
-        "pointArrays"
-    ],
+
     "changelog": [
         {
             "message": "Ops.Gl.Particles.PointCloudFile renamed to Ops.Deprecated.Gl.Particles.PointCloudFile",

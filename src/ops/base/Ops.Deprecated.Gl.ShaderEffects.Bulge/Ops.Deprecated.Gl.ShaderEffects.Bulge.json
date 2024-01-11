@@ -41,9 +41,7 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "vertexDeformers"
-    ],
+
 
     "exampleProjectId": "xJFpH9",
     "changelog": [

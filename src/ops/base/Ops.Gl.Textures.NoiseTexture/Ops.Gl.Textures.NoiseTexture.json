@@ -100,10 +100,6 @@
     },
     "summary": "Simple noisetexture",
     "issues": "",
-    "collections": [
-        "random",
-        "generator"
-    ],
 
     "docs": {
         "ports": []

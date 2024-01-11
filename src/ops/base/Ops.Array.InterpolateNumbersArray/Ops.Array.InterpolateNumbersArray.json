@@ -31,9 +31,7 @@
     },
     "summary": "interpolate between all values of an array",
     "issues": "",
-    "collections": [
-        "interpolate"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": [

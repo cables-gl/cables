@@ -82,9 +82,7 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "drawText"
-    ],
+
 
     "changelog": [
         {

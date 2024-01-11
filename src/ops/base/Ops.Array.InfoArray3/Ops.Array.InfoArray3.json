@@ -64,9 +64,6 @@
         ]
     },
     "summary": "min,max and average values of an array3",
-    "collections": [
-        "dataInfo"
-    ],
     "docs": {
         "ports": [
             {

@@ -32,9 +32,7 @@
     },
     "summary": "Splits a string with separator into an array of strings",
     "issues": "",
-    "collections": [
-        "converter"
-    ],
+
 
     "docs": {
         "ports": [

@@ -40,9 +40,7 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "hardware"
-    ],
+
 
     "exampleProjectId": "lmGgPZ",
     "issues": "",

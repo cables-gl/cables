@@ -41,7 +41,7 @@
         ]
     },
     "summary": "get the id/index of the current set material",
-    "collections": null,
+
 
     "docs": {
         "ports": []

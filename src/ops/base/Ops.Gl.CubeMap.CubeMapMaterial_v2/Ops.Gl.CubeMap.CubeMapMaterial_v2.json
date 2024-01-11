@@ -94,10 +94,6 @@
     },
     "summary": "use a cubemap or equirectangular texture as a material",
     "issues": "",
-    "collections": [
-        "Material"
-    ],
-
     "youtubeids": [],
     "docs": {
         "ports": [

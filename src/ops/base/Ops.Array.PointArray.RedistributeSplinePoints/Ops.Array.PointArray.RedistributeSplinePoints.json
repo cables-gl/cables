@@ -39,10 +39,7 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "pointArrays",
-        "Spline"
-    ],
+
     "issues": "",
 
     "youtubeids": []

@@ -61,10 +61,7 @@
     },
     "summary": "transform the viewmatrix",
     "youtubeid": "vIeAMFGA96E",
-    "collections": [
-        "cameras",
-        "transform"
-    ],
+
     "docs": {
         "ports": []
     }

@@ -45,9 +45,7 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "pointArrays"
-    ],
+
     "exampleProjectId": "4VpJz6",
     "issues": "",
     "caniusequery": "",
