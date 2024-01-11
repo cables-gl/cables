@@ -32,7 +32,7 @@
     "summary": "sends a string via socketcluster/websocket",
     "issues": "",
 
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

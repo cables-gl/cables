@@ -57,7 +57,7 @@
     },
     "summary": "Get coordinates of specific body parts from mediapipe data",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

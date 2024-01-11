@@ -37,7 +37,7 @@
     "summary": "Recieves trigger from the socketcluster socket/topic",
     "issues": "",
 
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

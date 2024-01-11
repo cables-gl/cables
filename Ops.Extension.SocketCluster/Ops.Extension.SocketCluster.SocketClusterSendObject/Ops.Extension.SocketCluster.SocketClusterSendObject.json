@@ -25,7 +25,7 @@
     "summary": "sends an object via socketcluster/websocket",
     "issues": "",
 
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

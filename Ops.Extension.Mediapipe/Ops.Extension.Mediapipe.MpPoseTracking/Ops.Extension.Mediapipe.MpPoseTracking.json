@@ -153,7 +153,7 @@
     },
     "summary": "Get pose-data (points/landmarks/lines) from webcam using mediapipe library",
     "issues": "",
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": []

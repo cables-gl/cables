@@ -127,7 +127,7 @@
         "lottie_canvas.min.js"
     ],
     "summary": "Play a Lottie animation in a texture",
-    "relatedops": null,
+
     "docs": {
         "ports": []
     },

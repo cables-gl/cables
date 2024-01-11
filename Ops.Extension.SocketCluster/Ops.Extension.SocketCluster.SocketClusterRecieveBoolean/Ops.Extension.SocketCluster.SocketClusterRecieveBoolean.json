@@ -32,7 +32,7 @@
     "summary": "Recieves boolean value from the socketcluster socket/topic",
     "issues": "",
 
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [

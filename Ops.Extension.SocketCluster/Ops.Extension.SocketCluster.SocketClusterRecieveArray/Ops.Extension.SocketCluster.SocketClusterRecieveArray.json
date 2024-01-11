@@ -31,7 +31,7 @@
     "summary": "recieves an array from the socketcluster topic",
     "issues": "",
 
-    "relatedops": null,
+
     "youtubeids": [],
     "docs": {
         "ports": [
