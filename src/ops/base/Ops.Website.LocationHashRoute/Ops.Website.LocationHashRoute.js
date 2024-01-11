@@ -6,7 +6,7 @@ const outMatching = op.outBool("Matching");
 let lastHref = null;
 let hashChangeListener = null;
 
-op.onLoadedValueSet = init;
+// op.onLoadedValueSet = init;
 
 function init()
 {
@@ -33,6 +33,8 @@ function init()
         op.setUiError("unsupported", "Your browser does not support listening to hashchanges!");
     }
 }
+
+init();
 
 function hashChangeFromBrowser(event)
 {
