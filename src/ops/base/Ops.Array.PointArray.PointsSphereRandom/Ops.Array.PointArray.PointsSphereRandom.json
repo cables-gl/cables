@@ -50,9 +50,7 @@
     "summary": "Generates a point field mapped to the surface of a sphere",
     "youtubeid": "",
     "issues": "",
-    "collections": [
-        "pointArrays"
-    ],
+
 
     "docs": {
         "ports": [

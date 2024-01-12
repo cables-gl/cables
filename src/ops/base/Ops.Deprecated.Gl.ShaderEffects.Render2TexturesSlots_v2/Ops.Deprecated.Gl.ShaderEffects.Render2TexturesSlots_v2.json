@@ -75,7 +75,6 @@
     "coreLibs": [
         "cgl_rendertargets",
         "cgl_shadermodifier"
-    ],
-    "collections": null
+    ]
 
 }

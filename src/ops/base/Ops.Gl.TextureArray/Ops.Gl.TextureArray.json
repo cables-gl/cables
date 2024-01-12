@@ -112,6 +112,5 @@
     "exampleProjectId": "vS5fjz",
     "coreLibs": [
         "cgl_shadergraph"
-    ],
-    "collections": null
+    ]
 }

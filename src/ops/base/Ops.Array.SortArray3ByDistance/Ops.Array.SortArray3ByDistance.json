@@ -33,10 +33,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays",
-        "sort"
-    ],
+
     "changelog": [
         {
             "message": "Ops.Array.SortArray3xByDistance renamed to Ops.Array.SortArray3ByDistance",

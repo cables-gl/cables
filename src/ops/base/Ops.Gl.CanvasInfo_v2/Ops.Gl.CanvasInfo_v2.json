@@ -61,9 +61,6 @@
     "docs": {
         "ports": []
     },
-    "collections": [
-        "dataInfo"
-    ],
 
     "changelog": [
         {

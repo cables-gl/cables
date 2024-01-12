@@ -68,9 +68,7 @@
     "created": 1512035659193,
     "summary": "transforms view to look from eye to center ",
     "youtubeid": "vIeAMFGA96E",
-    "collections": [
-        "cameras"
-    ],
+
     "docs": {
         "ports": []
     },

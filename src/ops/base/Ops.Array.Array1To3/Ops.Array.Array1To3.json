@@ -48,10 +48,6 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays",
-        "converter"
-    ],
 
     "issues": "",
     "youtubeids": [],

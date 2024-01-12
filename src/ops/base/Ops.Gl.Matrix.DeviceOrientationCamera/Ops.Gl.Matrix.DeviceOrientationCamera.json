@@ -19,10 +19,6 @@
             }
         ]
     },
-    "collections": [
-        "cameras",
-        "hardware"
-    ],
 
     "docs": {
         "ports": []

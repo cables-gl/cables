@@ -71,9 +71,6 @@
     },
     "summary": "Write your own custom shader",
     "issues": "",
-    "collections": [
-        "Material"
-    ],
     "docs": {
         "ports": [
             {

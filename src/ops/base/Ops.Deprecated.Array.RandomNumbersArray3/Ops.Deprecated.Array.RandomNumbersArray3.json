@@ -91,11 +91,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays",
-        "generator",
-        "random"
-    ],
+
     "changelog": [
         {
             "message": "Ops.Array.RandomArray3x renamed to Ops.Array.RandomArray3",

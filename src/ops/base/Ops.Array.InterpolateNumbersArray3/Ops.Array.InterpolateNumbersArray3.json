@@ -57,10 +57,7 @@
             }
         ]
     },
-    "collections": [
-        "Spline",
-        "interpolate"
-    ],
+
     "issues": "",
     "changelog": [
         {

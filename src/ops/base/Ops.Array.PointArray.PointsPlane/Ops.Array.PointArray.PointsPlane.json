@@ -84,9 +84,7 @@
             }
         ]
     },
-    "collections": [
-        "generator"
-    ],
+
     "changelog": [
         {
             "message": "fixed the columns and rows parameter not resetting the array",

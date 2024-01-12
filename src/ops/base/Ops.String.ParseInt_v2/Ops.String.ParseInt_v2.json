@@ -19,9 +19,7 @@
     },
     "summary": "Parse a string to a integer number / string to number",
     "issues": "",
-    "collections": [
-        "converter"
-    ],
+
 
     "docs": {
         "ports": []

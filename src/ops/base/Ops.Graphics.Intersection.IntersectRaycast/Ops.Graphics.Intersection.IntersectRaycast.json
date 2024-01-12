@@ -85,7 +85,7 @@
     "authorName": "pandur",
     "created": 1686493436213,
     "summary": "Cast a ray and check if it intersect/collide with bodies",
-    "collections": null,
+
 
     "docs": {
         "ports": []

@@ -40,7 +40,7 @@
         ]
     },
     "summary": "read back all uniforms values of the current bound shader",
-    "collections": null,
+
 
     "docs": {
         "ports": []

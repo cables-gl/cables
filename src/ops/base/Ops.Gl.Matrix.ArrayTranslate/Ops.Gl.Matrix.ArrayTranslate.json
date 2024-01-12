@@ -29,9 +29,6 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
-    "collections": [
-        "pointArrays",
-        "transform"
-    ]
+    "youtubeid": ""
+
 }

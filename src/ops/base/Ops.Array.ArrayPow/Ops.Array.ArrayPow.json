@@ -1,9 +1,7 @@
 {
     "summary": "Applies a Pow function to an array",
     "issues": "",
-    "collections": [
-        "math"
-    ],
+
 
     "docs": {
         "ports": [

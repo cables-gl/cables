@@ -95,9 +95,7 @@
         ]
     },
     "issues": "",
-    "collections": [
-        "pointArrays"
-    ],
+
     "todos": [
         {
             "message": "improved performance by rebuilding mesh less often",

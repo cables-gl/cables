@@ -60,12 +60,7 @@
     },
     "summary": "generates RGBA array from up to 4 arrays (HSBA)",
     "issues": "",
-    "collections": [
-        "pointArrays",
-        "generator",
-        "random",
-        "converter"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": [

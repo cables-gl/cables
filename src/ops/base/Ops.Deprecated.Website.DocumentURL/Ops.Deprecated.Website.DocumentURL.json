@@ -34,9 +34,6 @@
     },
     "summary": "information about the current URL",
     "youtubeid": "",
-    "collections": [
-        "dataInfo"
-    ],
 
     "docs": {
         "ports": []

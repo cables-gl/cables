@@ -56,9 +56,7 @@
     },
     "summary": "Load MSDF Font data and texture to use ",
     "issues": "",
-    "collections": [
-        "drawText"
-    ],
+
     "youtubeids": [],
     "docs": {
         "ports": []

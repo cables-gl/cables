@@ -96,9 +96,6 @@ class CopyTexture
 
             if (this._options.isFloatingPointTexture)filter = CGL.Texture.FILTER_NEAREST;
 
-            // if(this"pixelFormat": this._options.pixelFormat,
-
-
             if (this._options.hasOwnProperty("filter"))filter = this._options.filter;
             if (this._options.hasOwnProperty("wrap"))wrap = this._options.wrap;
 
