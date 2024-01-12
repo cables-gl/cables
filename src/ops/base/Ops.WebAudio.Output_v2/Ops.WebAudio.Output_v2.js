@@ -167,18 +167,18 @@ function updateAudioStateButton()
                 if (audioCtx && audioCtx.state == "suspended")
                 {
                     audioCtx.resume();
-                    CABLES.interActionNeededButton.remove("audiosuspended");
+                    if (CABLES.interActionNeededButton)CABLES.interActionNeededButton.remove("audiosuspended");
                 }
             });
         }
         else
         {
-            CABLES.interActionNeededButton.remove("audiosuspended");
+            if (CABLES.interActionNeededButton)CABLES.interActionNeededButton.remove("audiosuspended");
         }
     }
     else
     {
-        CABLES.interActionNeededButton.remove("audiosuspended");
+        if (CABLES.interActionNeededButton)CABLES.interActionNeededButton.remove("audiosuspended");
 
         if (isSuspended)
         {
