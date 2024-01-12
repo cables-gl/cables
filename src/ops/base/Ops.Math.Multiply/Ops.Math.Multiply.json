@@ -31,5 +31,13 @@
     },
     "authorName": "pandur",
     "id": "1bbdae06-fbb2-489b-9bcc-36c9d65bd441",
-    "created": 1523828700087
+    "created": 1523828700087,
+    "changelog": [
+        {
+            "message": "adjusted default values",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1704977966249
+        }
+    ]
 }

@@ -259,6 +259,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1688716507446
+        },
+        {
+            "message": "force redraw when a font was loaded, to make sure we are using the correct font",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704977882055
         }
     ],
     "coreLibs": [

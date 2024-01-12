@@ -78,9 +78,16 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [
         "5VmIC1xA4EU"
     ],
-    "exampleProjectId": "YFIVGc"
+    "exampleProjectId": "YFIVGc",
+    "changelog": [
+        {
+            "message": "adjusted default values",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1704977985405
+        }
+    ]
 }
