@@ -494,6 +494,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         this.ops.push(op);
         this._opIdCache[op.id] = op;
 
+        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
 
@@ -502,7 +503,6 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
             op.init();
         }
         op.emitEvent("init", fromDeserialize);
-        if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
     }
     else
     {

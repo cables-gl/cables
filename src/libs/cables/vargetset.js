@@ -121,10 +121,14 @@ const VarSetOpWrapper = class
     {
         if (CABLES.UI && CABLES.UI.loaded && CABLES.UI.loaded)
         {
+            const perf = CABLES.UI.uiProfiler.start("[vars] _updateVarNamesDropdown");
+
             const varnames = [];
             const vars = this._op.patch.getVars();
             for (const i in vars) if (vars[i].type == this._type && i != "0") varnames.push(i);
             this._varNamePort.uiAttribs.values = varnames;
+
+            perf.finish();
         }
     }
 

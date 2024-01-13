@@ -2,9 +2,11 @@ const
     inObject = op.inObject("Object"),
     inKey = op.inString("Key"),
     inValue = op.inObject("Object Value"),
+    // inCopy=op.inBool("Deep Copy",false),
     outObject = op.outObject("Result Object");
 
 inObject.onLinkChanged =
+    inCopy.onChange =
     inValue.onChange =
     outObject.onLinkChanged =
     inObject.onChange = update;
@@ -13,7 +15,9 @@ function update()
 {
     const obj = inObject.get() || {};
 
-    const newObj = JSON.parse(JSON.stringify(obj));
+    let newObj = obj;
+    // if(inCopy.get())
+    // newObj = JSON.parse(JSON.stringify(obj));
 
     newObj[inKey.get()] = inValue.get();
 
