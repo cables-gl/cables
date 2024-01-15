@@ -100,10 +100,6 @@
                 "text": "Shader to turn into a texture"
             },
             {
-                "name": "Use Viewport Size",
-                "text": "When enabled the texture is the size of the viewport"
-            },
-            {
                 "name": "Width",
                 "text": "Width of the texture in pixels"
             },
@@ -120,10 +116,6 @@
                 "text": "Pick a wrap mode with an integer"
             },
             {
-                "name": "Floating Point",
-                "text": "Enable floating point precision"
-            },
-            {
                 "name": "Next",
                 "text": "Trigger out"
             },
@@ -134,7 +126,6 @@
         ]
     },
     "issues": "",
-
     "changelog": [
         {
             "message": "Ops.Gl.Shader.Shader2Texture renamed to Ops.Gl.Shader.ShaderToTexture",
@@ -147,5 +138,6 @@
             "author": "pandur",
             "date": 1702996150218
         }
-    ]
+    ],
+    "exampleProjectId": "vWyGud"
 }

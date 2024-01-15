@@ -65,16 +65,11 @@
     },
     "summary": "render a scene into a cubemap",
     "issues": "",
-
     "docs": {
         "ports": [
             {
                 "name": "Render",
                 "text": "Trigger input"
-            },
-            {
-                "name": "Size",
-                "text": "Size of the cubemap (per face)"
             },
             {
                 "name": "Next",
@@ -88,5 +83,6 @@
     },
     "coreLibs": [
         "cgl_cubemapframebuffer"
-    ]
+    ],
+    "exampleProjectId": "Z3KuUQ"
 }

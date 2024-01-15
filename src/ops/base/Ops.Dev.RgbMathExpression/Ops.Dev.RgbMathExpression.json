@@ -1,5 +1,5 @@
 {
-    "summary": "",
+    "summary": "execute a glsl code math expression in a image compose ",
     "layout": {
         "portsIn": [
             {
@@ -92,7 +92,6 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

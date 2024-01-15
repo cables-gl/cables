@@ -36,5 +36,10 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1704385288065
+    "created": 1704385288065,
+    "summary": "push a value on to the stack to use it later in the trigger branch",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "NT30kP"
 }
