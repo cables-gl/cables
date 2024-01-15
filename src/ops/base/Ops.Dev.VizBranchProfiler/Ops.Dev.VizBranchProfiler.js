@@ -119,7 +119,7 @@ function drawBranch(ctx, layer, b, level, posx)
 
 op.renderVizLayer = (ctx, layer) =>
 {
-    if (!inObj.get().root) return;
+    if (!inObj.get() || !inObj.get().root) return;
     clear(ctx, layer);
 
     colorCycle = 0;
