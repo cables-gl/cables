@@ -288,11 +288,11 @@ function refresh()
     ctx.letterSpacing = inLetterspacing.get() + "px";
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
+    txt = txt.trim();
     let strings = txt.split("\n");
 
     needsRefresh = false;
 
-    let oneLineHeight = 0;
     let paddingY = Math.max(0, inPaddingY.get());
     let paddingYBot = inPaddingYBot.get();
     let paddingX = Math.max(0, inPaddingX.get());
@@ -308,19 +308,19 @@ function refresh()
         }
     }
 
+    const lineHeights = [];
+
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        // oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.actualBoundingBoxAscent) + measure.actualBoundingBoxDescent)) + inLineHeight.get();
-
-        oneLineHeight = Math.max(oneLineHeight, Math.ceil(Math.abs(measure.fontBoundingBoxAscent) + measure.fontBoundingBoxDescent)) + inLineHeight.get();
+        lineHeights[i] = measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent + inLineHeight.get();
     }
 
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
         autoWidth = Math.max(autoWidth, measure.width);
-        autoHeight += oneLineHeight;
+        autoHeight += lineHeights[i];
     }
 
     autoWidth += paddingX * 2;
@@ -335,7 +335,7 @@ function refresh()
         if (!texSizeAutoHeight.get())
         {
             autoHeight = texSizeManHeight.get();
-            paddingY = 0;
+            // paddingY = 0;
         }
     }
 
@@ -348,11 +348,13 @@ function refresh()
     autoHeight = Math.min(cgl.maxTexSize, autoHeight);
     autoWidth = Math.min(cgl.maxTexSize, autoWidth);
 
-    if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
+    autoHeight += paddingY + paddingYBot;
 
     let posy = paddingY;
-    if (valign.get() == "Middle")posy = (autoHeight - calcHeight) / 2;
-    else if (valign.get() == "Bottom")posy = (autoHeight - calcHeight);
+    if (valign.get() == "Middle")posy = (autoHeight - calcHeight) / 2 + paddingY;
+    else if (valign.get() == "Bottom")posy = (autoHeight - calcHeight) + paddingYBot;
+
+    if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
 
     const dbg = drawDebug.get();
 
@@ -377,7 +379,7 @@ function refresh()
             ctx.stroke();
         }
 
-        posy += oneLineHeight;
+        posy += lineHeights[i];
     }
 
     ctx.restore();
@@ -413,7 +415,7 @@ function updateUi()
     valign.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
     texSizeAutoHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
 
-    inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
-    inPaddingYBot.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
+    // inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
+    // inPaddingYBot.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
     meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
 }
