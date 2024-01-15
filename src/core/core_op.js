@@ -100,6 +100,13 @@ const Op = function ()
         this.uiAttrib(obj);
     };
 
+    Op.prototype.checkMainloopExists = function ()
+    {
+        if (!CABLES.UI) return;
+        if (!this.patch.cgl.mainloopOp) this.setUiError("nomainloop", "patch should have a mainloop to use this op");
+        else this.setUiError("nomainloop", null);
+    };
+
     Op.prototype.getTitle = function ()
     {
         if (!this.uiAttribs) return "nouiattribs" + this.name;

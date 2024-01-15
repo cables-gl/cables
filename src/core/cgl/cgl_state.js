@@ -57,6 +57,7 @@ class Context extends CGState
         this._frameBufferStack = [];
         this._shaderStack = [];
         this._stackDepthTest = [];
+        this.mainloopOp = null;
 
         // this._pixelDensity = ;
 
@@ -635,6 +636,7 @@ class Context extends CGState
             this.patch.printTriggerStack();
         }
     }
+
 
     setTexture(slot, t, type)
     {

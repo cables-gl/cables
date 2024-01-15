@@ -2,6 +2,7 @@ const inStr = op.inString("String", "");
 const outNum = op.outString("Result");
 
 op.setUiAttrib({ "widthOnlyGrow": true });
+op.checkMainloopExists();
 
 inStr.onChange = () =>
 {

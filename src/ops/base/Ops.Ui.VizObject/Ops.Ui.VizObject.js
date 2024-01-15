@@ -13,6 +13,7 @@ op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoo
 
 inObj.onChange = () =>
 {
+    op.checkMainloopExists();
     let obj = inObj.get();
     let str = "???";
 
