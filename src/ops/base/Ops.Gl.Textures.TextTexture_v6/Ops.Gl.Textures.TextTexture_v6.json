@@ -1,0 +1,403 @@
+{
+    "authorName": "pandur",
+    "id": "2c042efa-3604-4717-b8f4-5ad08d6740e5",
+    "created": 1705328506169,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Draw Mesh",
+                "group": "Rendering",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale Mesh",
+                "group": "Rendering",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Auto Height",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "text"
+            },
+            {
+                "type": 0,
+                "name": "Auto Line Breaks",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "font",
+                "group": "Font"
+            },
+            {
+                "type": 5,
+                "name": "weight",
+                "group": "Font"
+            },
+            {
+                "type": 0,
+                "name": "fontSize",
+                "group": "Font",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "align index",
+                "group": "Font",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Vertical align index",
+                "group": "Font",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "group": "Font",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Height Add",
+                "group": "Font",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Y Top",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Padding Y Bottom",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Padding X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Anisotropic index",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Reuse Texture",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Debug",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Redraw On Font Load",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "group": "Text Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "group": "Text Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "group": "Text Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Opacity",
+                "group": "Text Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "background R",
+                "group": "Background",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "background G",
+                "group": "Background",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "background B",
+                "group": "Background",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "background A",
+                "group": "Background",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Lines",
+                "subType": "number"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": " added core lib: cgl_wireframes",
+            "author": "pandur",
+            "date": 1596978902519
+        },
+        {
+            "message": "Ops.User.pandur.Text4 renamed to Ops.Gl.Textures.TextTexture4",
+            "author": "pandur",
+            "date": 1596986227402
+        },
+        {
+            "message": "Ops.Gl.Textures.TextTexture4 renamed to Ops.Gl.Textures.TextTexture_v4",
+            "author": "pandur",
+            "date": 1596988496543
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.TextTexture_v4",
+            "author": "pandur",
+            "date": 1684343997375
+        },
+        {
+            "message": "Ops.Patch.PIabKGw.TextTexture_v4 renamed to Ops.User.pandur.TextTexture5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684488565117
+        },
+        {
+            "message": "Ops.User.pandur.TextTexture5 renamed to Ops.Gl.Textures.TextTexture_v5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1684491765597
+        },
+        {
+            "message": "Ops.Gl.Textures.TextTexture_v5 renamed to Ops.Dev.Gl.Textures.TextTexture5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685461228449
+        },
+        {
+            "message": "Ops.Dev.Gl.Textures.TextTexture5 renamed to Ops.Gl.Textures.TextTexture_v5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1688716507446
+        },
+        {
+            "message": "force redraw when a font was loaded, to make sure we are using the correct font",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704977882055
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.TextTexture_v5",
+            "author": "pandur",
+            "date": 1705328506169
+        },
+        {
+            "message": "Ops.Patch.Pmlapr1.TextTexture_v6 renamed to Ops.Gl.Textures.TextTexture_v6",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1705328536994
+        }
+    ],
+    "coreLibs": [
+        "cgl_wireframes"
+    ],
+    "summary": "Generates a texture of Text using one of the font ops",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "trigger input"
+            },
+            {
+                "name": "text",
+                "text": "text to be put in the texture"
+            },
+            {
+                "name": "font",
+                "text": "the font to be used"
+            },
+            {
+                "name": "Maximize Size",
+                "text": "check to maximize size"
+            },
+            {
+                "name": "fontSize",
+                "text": "font size"
+            },
+            {
+                "name": "Line Height",
+                "text": "line height of text"
+            },
+            {
+                "name": "Vertical Offset",
+                "text": "vertical offset of text"
+            },
+            {
+                "name": "Show Debug",
+                "text": "show outlines for debugging"
+            },
+            {
+                "name": "Limit Lines",
+                "text": "maximum line amount"
+            },
+            {
+                "name": "texture width",
+                "text": "width of texture"
+            },
+            {
+                "name": "texture height",
+                "text": "height of texture"
+            },
+            {
+                "name": "filter",
+                "text": "type of texture filtering to be applied"
+            },
+            {
+                "name": "Anisotropic",
+                "text": "anisotropy value"
+            },
+            {
+                "name": "align",
+                "text": "horizontal alignment of text: left, center, right"
+            },
+            {
+                "name": "vertical align",
+                "text": "vertical alignment of text: top, center, bottom"
+            },
+            {
+                "name": "Reuse Texture",
+                "text": "check if texture should be reused"
+            },
+            {
+                "name": "Draw Mesh",
+                "text": "check if rectangle with the texture should be drawn"
+            },
+            {
+                "name": "Scale Mesh",
+                "text": "size of the mesh"
+            },
+            {
+                "name": "Hard Edges",
+                "text": "check for hard edges"
+            },
+            {
+                "name": "Opacity",
+                "text": "alpha value of texture"
+            },
+            {
+                "name": "r",
+                "text": "r color of text"
+            },
+            {
+                "name": "g",
+                "text": "g color of text"
+            },
+            {
+                "name": "b",
+                "text": "b color of text"
+            },
+            {
+                "name": "Next",
+                "text": "trigger output"
+            },
+            {
+                "name": "Ratio",
+                "text": "width / height ratio of texture"
+            },
+            {
+                "name": "texture",
+                "text": "texture output"
+            },
+            {
+                "name": "Aspect",
+                "text": "aspect ratio of texture canvas"
+            },
+            {
+                "name": "Num Lines",
+                "text": "amount of lines in text"
+            }
+        ]
+    },
+    "caniusequery": ""
+}

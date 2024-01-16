@@ -86,6 +86,7 @@ function getPixelFormat()
 
 function realReload(nocache)
 {
+    op.checkMainloopExists();
     if (!active.get()) return;
     // if (filename.get() === null) return;
     if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
@@ -161,7 +162,7 @@ function realReload(nocache)
                     cgl.patch.loading.finished(loadingId);
                     loadingId = null;
                 }
-                // testTexture();
+                op.checkMainloopExists();
             }, {
                 "anisotropic": cgl_aniso,
                 "wrap": cgl_wrap,
@@ -171,8 +172,7 @@ function realReload(nocache)
                 "filter": cgl_filter
             });
 
-            // textureOut.set(null);
-            // textureOut.set(tex);
+            op.checkMainloopExists();
         });
     }
     else

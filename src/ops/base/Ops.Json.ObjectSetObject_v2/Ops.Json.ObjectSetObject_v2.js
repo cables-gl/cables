@@ -6,7 +6,7 @@ const
     outObject = op.outObject("Result Object");
 
 inObject.onLinkChanged =
-    inCopy.onChange =
+    // inCopy.onChange =
     inValue.onChange =
     outObject.onLinkChanged =
     inObject.onChange = update;

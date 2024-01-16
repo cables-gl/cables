@@ -74,5 +74,9 @@
     "authorName": "pandur",
     "id": "ae46d30d-9ea6-417b-968b-e7b5726afdde",
     "created": 1510654829404,
-    "exampleProjectId": "HwVRrT"
+    "exampleProjectId": "HwVRrT",
+    "issues": "",
+    "docs": {
+        "ports": []
+    }
 }

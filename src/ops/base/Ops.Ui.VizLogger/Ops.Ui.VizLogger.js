@@ -8,8 +8,11 @@ const arr = [];
 inNum.changeAlways =
     inString.changeAlways = true;
 
+op.checkMainloopExists();
+
 inClear.onTriggered = () =>
 {
+    op.checkMainloopExists();
     arr.length = 0;
 };
 

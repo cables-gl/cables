@@ -25,6 +25,8 @@ inVizRange.onChange = updateDefines;
 inPickColor.onChange = updateUi;
 updateUi();
 
+op.checkMainloopExists();
+
 function updateUi()
 {
     inX.setUiAttribs({ "greyout": !inPickColor.get() });
@@ -48,6 +50,7 @@ function updateDefines()
 {
     if (!shader) return;
     shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
+    op.checkMainloopExists();
 }
 
 op.renderVizLayer = (ctx, layer) =>

@@ -45,5 +45,10 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1704960953811
+    "created": 1704960953811,
+    "summary": "read a value from the stack to use it later in the trigger branch",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "NT30kP"
 }

@@ -21,5 +21,6 @@
     "summary": "triggers when asynchronous requests finised loading",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "xP04r1"
 }
