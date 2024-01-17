@@ -211,18 +211,10 @@ op.renderVizLayer = (ctx, layer) =>
         imgSizeH = layerHeight;
     }
 
-    ctx.fillRect(
-        layer.x, layer.y, imgPosX - layer.x, layerHeight
-    );
-    ctx.fillRect(
-        layer.x + imgSizeW + imgPosX - layer.x, layer.y, layer.x + imgSizeW, layerHeight
-    );
-    ctx.fillRect(
-        layer.x, layer.y, layer.width, borderTop
-    );
-    ctx.fillRect(
-        layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop
-    );
+    ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
+    ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, layer.x + imgSizeW, layerHeight);
+    ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
+    ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
     if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
     {
