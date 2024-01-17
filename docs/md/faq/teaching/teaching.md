@@ -35,3 +35,6 @@ Please send us an [email](mailto:hi@undev.de) or contact us on [discord](https:/
 - [Uniwersytet Marii Curie-Skłodowskiej](https://www.umcs.pl/), Lublin, Poland
 - [École Polytechnique Fédérale de Lausanne](https://www.epfl.ch), Switzerland
 - [Kunstuniversität Linz](https://kunstuni-linz.at/), Austria
+- [Hochschule Bonn-Rhein-Sieg](https://www.h-brs.de/en), Germany
+- [NYCU](https://www.nycu.edu.tw/nycu/en/index), Taiwan
+- [Art Center Nabi](https://cccv.to/artcenternabi), Korea
