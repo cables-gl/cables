@@ -56,6 +56,7 @@ function setBox(o)
 
 function render()
 {
+    if (!cgl.frameStore || !cgl.frameStore.collisionWorld) return;
     const cg = op.patch.cgl;
 
     // vec3.transformMat4(pos, empty, cg.mMatrix);
