@@ -247,7 +247,7 @@ op.renderVizLayer = (ctx, layer) =>
     else
         try
         {
-            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0)
+            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
             // if(layerHeight - sizeImg[1]>=0)
                 ctx.drawImage(cgl.canvas,
                     0,
