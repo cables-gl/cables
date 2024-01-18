@@ -205,59 +205,53 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (layerHeight - sizeImg[1] < 0)
     {
-        imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2,
-        imgPosY = layer.y,
+        imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
+        imgPosY = layer.y;
         imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
         imgSizeH = layerHeight;
     }
 
-    ctx.fillRect(
-        layer.x, layer.y, imgPosX - layer.x, layerHeight
-    );
-    ctx.fillRect(
-        layer.x + imgSizeW + imgPosX - layer.x, layer.y, layer.x + imgSizeW, layerHeight
-    );
-    ctx.fillRect(
-        layer.x, layer.y, layer.width, borderTop
-    );
-    ctx.fillRect(
-        layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop
-    );
+    ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
+    ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, layer.x + imgSizeW, layerHeight);
+    ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
+    ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
-    if (sizeTex[1] == 1)
-        ctx.drawImage(cgl.canvas,
-            0,
-            0,
-            s[0],
-            s[1],
-            layer.x,
-            layer.y,
-            layer.width,
-            layerHeight * 5);// workaround filtering problems
-    if (sizeTex[0] == 1)
-        ctx.drawImage(cgl.canvas,
-            0,
-            0,
-            s[0],
-            s[1],
-            layer.x,
-            layer.y,
-            layer.width * 5,
-            layerHeight); // workaround filtering problems
-    else
-        try
-        {
-            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0)
-            // if(layerHeight - sizeImg[1]>=0)
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    imgPosX,
-                    imgPosY,
-                    imgSizeW,
-                    imgSizeH);
+    if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
+    {
+        if (sizeTex[1] == 1)
+            ctx.drawImage(cgl.canvas,
+                0,
+                0,
+                s[0],
+                s[1],
+                layer.x,
+                layer.y,
+                layer.width,
+                layerHeight * 5);// workaround filtering problems
+        if (sizeTex[0] == 1)
+            ctx.drawImage(cgl.canvas,
+                0,
+                0,
+                s[0],
+                s[1],
+                layer.x,
+                layer.y,
+                layer.width * 5,
+                layerHeight); // workaround filtering problems
+        else
+            try
+            {
+                if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
+                // if(layerHeight - sizeImg[1]>=0)
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        imgPosX,
+                        imgPosY,
+                        imgSizeW,
+                        imgSizeH);
             // else
             //     ctx.drawImage(cgl.canvas,
             //         0,
@@ -268,11 +262,12 @@ op.renderVizLayer = (ctx, layer) =>
             //         layer.y ,
             //         sizeImg[0]*layerHeight/sizeImg[1],
             //         layerHeight);
-        }
-        catch (e)
-        {
-            console.error("canvas drawimage exception...", e);
-        }
+            }
+            catch (e)
+            {
+                console.error("canvas drawimage exception...", e);
+            }
+    }
 
     let info = "";
 

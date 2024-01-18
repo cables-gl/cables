@@ -414,7 +414,7 @@ export const copyArray = function (src, dst)
 
 
 /**
- * return the filename part of a url
+ * return the filename part of a url without extension
  * @function basename
  * @static
  * @memberof Utils
@@ -422,6 +422,24 @@ export const copyArray = function (src, dst)
  * @return {String} just the filename
  */
 export const basename = function (url)
+{
+    let name = CABLES.filename(url);
+
+    const parts2 = name.split(".");
+    name = parts2[0];
+
+    return name;
+};
+
+/**
+ * return the filename part of a url
+ * @function basename
+ * @static
+ * @memberof Utils
+ * @param {String} url
+ * @return {String} just the filename
+ */
+export const filename = function (url)
 {
     let name = "";
     if (!url) return "";
@@ -431,14 +449,10 @@ export const basename = function (url)
         const str = parts[parts.length - 1];
         let parts2 = str.split("?");
         name = parts2[0];
-        parts2 = name.split(".");
-        name = parts2[0];
     }
 
-    return name;
+    return name || "";
 };
-
-
 
 
 export const ajaxSync = function (url, cb, method, post, contenttype)
