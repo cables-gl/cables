@@ -209,42 +209,6 @@
             "date": 1705590040022
         },
         {
-            "message": "added texture atlas lookup texture input and more atlas functionality",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1705590044521
-        },
-        {
-            "message": "added texture atlas lookup texture input and more atlas functionality",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1705590045087
-        },
-        {
-            "message": "added texture atlas lookup texture input and more atlas functionality",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1705590051962
-        },
-        {
-            "message": "added texture atlas lookup texture input and more atlas functionality",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1705590067990
-        },
-        {
-            "message": "added texture atlas lookup texture input and more atlas functionality",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1705590096428
-        },
-        {
-            "message": "test",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1705590193426
-        },
-        {
             "message": "Ops.Patch.PHICOr1.PointMaterial5 renamed to Ops.Gl.Shader.PointMaterial_v5",
             "type": "rename",
             "author": "pandur",
