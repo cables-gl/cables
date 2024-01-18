@@ -1,0 +1,267 @@
+{
+    "authorName": "pandur",
+    "id": "72a2449e-db5c-44e7-ad9f-49f3c78b8c71",
+    "created": 1705588095052,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "PointSize",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size in Pixels",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Random Size",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Round",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Round Antialias",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Scale by Distance",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Vertex Colors",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "texture",
+                "group": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Texture",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Texture Mask",
+                "group": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Mask Channel index",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": "2",
+                "name": "Texture Colorize",
+                "group": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Randomize",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Texture Opacity",
+                "group": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": "2",
+                "name": "Texture Point Size",
+                "group": "Size",
+                "objType": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Point Size Channel index",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Texture Point Size Mul",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Map Size 0 index",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Flip Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Atlas Cross Fade",
+                "group": "Atlas",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Atlas Repeat X",
+                "group": "Atlas",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Atlas Lookup",
+                "group": "Atlas",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader",
+                "objType": "shader"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.PointtMat3 renamed to Ops.Gl.Shader.PointMaterial_v3",
+            "author": "pandur",
+            "date": 1595338286301
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.PointMaterial_v3",
+            "author": "pandur",
+            "date": 1616178535005
+        },
+        {
+            "message": "Ops.User.pandur.PointMaterial_v4 renamed to Ops.Gl.Shader.PointMaterial_v4",
+            "author": "pandur",
+            "date": 1616178603397
+        },
+        {
+            "message": "added alpha",
+            "author": "pandur",
+            "date": 1616178893665
+        },
+        {
+            "message": "cloned op from Ops.Gl.Shader.PointMaterial_v4",
+            "author": "pandur",
+            "date": 1705588095052
+        },
+        {
+            "message": "added texture atlas lookup texture input and more atlas functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590040022
+        },
+        {
+            "message": "added texture atlas lookup texture input and more atlas functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590044521
+        },
+        {
+            "message": "added texture atlas lookup texture input and more atlas functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590045087
+        },
+        {
+            "message": "added texture atlas lookup texture input and more atlas functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590051962
+        },
+        {
+            "message": "added texture atlas lookup texture input and more atlas functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590067990
+        },
+        {
+            "message": "added texture atlas lookup texture input and more atlas functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590096428
+        },
+        {
+            "message": "test",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705590193426
+        },
+        {
+            "message": "Ops.Patch.PHICOr1.PointMaterial5 renamed to Ops.Gl.Shader.PointMaterial_v5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1705590320602
+        }
+    ],
+    "summary": "Draw all vertices as points / circles",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "added atlas lookup texture and functionality",
+            "author": "pandur",
+            "id": "83e278d6-8c3d-4359-9f5b-56a31b7d98f6",
+            "date": 1705590014171
+        }
+    ]
+}
