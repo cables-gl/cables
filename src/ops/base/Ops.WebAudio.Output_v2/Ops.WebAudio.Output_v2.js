@@ -37,7 +37,7 @@ op.onDelete = () =>
 {
     if (gainNode) gainNode.disconnect();
     gainNode = null;
-    CABLES.interActionNeededButton.remove("audiosuspended");
+    if (CABLES.interActionNeededButton) CABLES.interActionNeededButton.remove("audiosuspended");
     if (pauseId) op.patch.off(pauseId);
     if (resumeId) op.patch.off(resumeId);
 };
@@ -162,14 +162,17 @@ function updateAudioStateButton()
         {
             isSuspended = true;
 
-            CABLES.interActionNeededButton.add(op.patch, "audiosuspended", () =>
+            if (CABLES.interActionNeededButton)
             {
-                if (audioCtx && audioCtx.state == "suspended")
+                CABLES.interActionNeededButton.add(op.patch, "audiosuspended", () =>
                 {
-                    audioCtx.resume();
-                    if (CABLES.interActionNeededButton)CABLES.interActionNeededButton.remove("audiosuspended");
-                }
-            });
+                    if (audioCtx && audioCtx.state == "suspended")
+                    {
+                        audioCtx.resume();
+                        if (CABLES.interActionNeededButton)CABLES.interActionNeededButton.remove("audiosuspended");
+                    }
+                });
+            }
         }
         else
         {

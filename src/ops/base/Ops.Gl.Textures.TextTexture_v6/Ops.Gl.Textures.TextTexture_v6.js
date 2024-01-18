@@ -308,18 +308,20 @@ function refresh()
         }
     }
 
+    // console.log(ctx.measureText(" "));
+
     const lineHeights = [];
 
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        lineHeights[i] = measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent + inLineHeight.get();
+        lineHeights[i] = Math.ceil(measure.fontBoundingBoxAscent) + Math.ceil(measure.fontBoundingBoxDescent) + inLineHeight.get();
     }
 
     for (let i = 0; i < strings.length; i++)
     {
         const measure = ctx.measureText(strings[i]);
-        autoWidth = Math.max(autoWidth, measure.width);
+        autoWidth = Math.max(autoWidth, Math.ceil(measure.width));
         autoHeight += lineHeights[i];
     }
 

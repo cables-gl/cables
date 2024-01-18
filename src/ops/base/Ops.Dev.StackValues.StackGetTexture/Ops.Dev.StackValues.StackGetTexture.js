@@ -4,7 +4,7 @@ const
     outNext = op.outTrigger("Next"),
     outValue = op.outTexture("Texture");
 
-op.patch.stackValues = op.patch.stackValues || {};
+op.patch.stackValuesTex = op.patch.stackValuesTex || {};
 
 let vName = "";
 
@@ -19,8 +19,8 @@ function updateName()
 
 inExec.onTriggered = () =>
 {
-    if (op.patch.stackValues.hasOwnProperty(vName) && op.patch.stackValues[vName].length > 0)
-        outValue.setRef(op.patch.stackValues[vName][op.patch.stackValues[vName].length - 1]);
+    if (op.patch.stackValuesTex.hasOwnProperty(vName) && op.patch.stackValuesTex[vName].length > 0)
+        outValue.setRef(op.patch.stackValuesTex[vName][op.patch.stackValuesTex[vName].length - 1]);
     else
         outValue.setRef(CGL.Texture.getEmptyTexture(op.patch.cgl));
 
