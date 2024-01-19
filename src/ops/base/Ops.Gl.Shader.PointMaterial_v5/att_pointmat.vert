@@ -50,7 +50,7 @@ IN float attrVertIndex;
 
 UNI float atlasNumX;
 
-#ifdef RAND_ATLAS
+#ifdef USE_ATLAS
     OUT float randAtlas;
 #endif
 
@@ -69,8 +69,8 @@ void main()
         float psMul=sqrt(canvasWidth/canvasHeight)+0.00000000001;
     #endif
 
-    #ifdef RAND_ATLAS
-        randAtlas=floor(atlasNumX*rand(attrVertIndex));
+    #ifdef USE_ATLAS
+        randAtlas=atlasNumX*rand(attrVertIndex+vPosition.x);
     #endif
 
     // float sizeMultiply=1.0;

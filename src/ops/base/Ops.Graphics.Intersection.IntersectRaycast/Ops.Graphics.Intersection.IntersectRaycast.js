@@ -1,8 +1,15 @@
 const
     trigger = op.inTrigger("Trigger"),
-    inCoords = op.inSwitch("Coordinate Format", ["-1 to 1"], "-1 to 1"),
+    inCoords = op.inSwitch("Coordinate Format", ["-1 to 1", "XYZ-XYZ"], "-1 to 1"),
     inX = op.inValueFloat("X"),
     inY = op.inValueFloat("Y"),
+
+    inZ = op.inValueFloat("Z"),
+
+    inToX = op.inValueFloat("To X"),
+    inToY = op.inValueFloat("To Y"),
+    inToZ = op.inValueFloat("To Z"),
+
     active = op.inBool("Active", true),
     inCursor = op.inBool("Change Cursor", true),
     next = op.outTrigger("Next"),
@@ -23,28 +30,55 @@ op.toWorkPortsNeedToBeLinked(trigger);
 
 trigger.onTriggered = doRender;
 
+inCoords.onChange = updateUi;
+updateUi();
+
+function updateUi()
+{
+    inZ.setUiAttribs({ "greyout": inCoords.get() != "XYZ-XYZ" });
+
+    inToX.setUiAttribs({ "greyout": inCoords.get() != "XYZ-XYZ" });
+    inToY.setUiAttribs({ "greyout": inCoords.get() != "XYZ-XYZ" });
+    inToZ.setUiAttribs({ "greyout": inCoords.get() != "XYZ-XYZ" });
+}
+
 function doRender()
 {
     next.trigger();
 
     if (cgl.frameStore.collisionWorld)
     {
-        const x = inX.get();
-        const y = inY.get();
+        let origin = vec3.create();
 
-        const origin = vec3.fromValues(x, y, -1);
-        mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
-        mat4.invert(mat, mat);
+        if (inCoords.get() == "-1 to 1")
+        {
+            origin = vec3.fromValues(inX.get(), inY.get(), -1);
+            mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
+            mat4.invert(mat, mat);
+            vec3.transformMat4(origin, origin, mat);
+        }
 
-        vec3.transformMat4(origin, origin, mat);
+        if (inCoords.get() == "XYZ-XYZ")
+        {
+            origin = vec3.fromValues(inX.get(), inY.get(), inZ.get());
+        }
 
         // -----------
 
-        const to = vec3.fromValues(x, y, 1);
-        mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
-        mat4.invert(mat, mat);
+        let to = vec3.create();
 
-        vec3.transformMat4(to, to, mat);
+        if (inCoords.get() == "-1 to 1")
+        {
+            to = vec3.fromValues(inX.get(), inY.get(), 1);
+            mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
+            mat4.invert(mat, mat);
+            vec3.transformMat4(to, to, mat);
+        }
+
+        if (inCoords.get() == "XYZ-XYZ")
+        {
+            to = vec3.fromValues(inToX.get(), inToY.get(), inToZ.get());
+        }
 
         vec3.sub(dir, to, origin);
         vec3.normalize(dir, dir);

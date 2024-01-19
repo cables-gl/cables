@@ -17,66 +17,92 @@
             "type": "rename",
             "author": "pandur",
             "date": 1687166309889
+        },
+        {
+            "message": "switchable to XYZ-XYZ coordinate mode: 3d rays, not only from screencoordinates",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705340431054
         }
     ],
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Trigger"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Coordinate Format index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "To X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "To Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "To Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Change Cursor",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Next"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Has Hit",
                 "subType": "boolean"
             },
             {
-                "type": 5,
+                "type": "5",
                 "name": "Hit Body Name"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Hit X",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Hit Y",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Hit Z",
                 "subType": "number"
             }
@@ -85,8 +111,6 @@
     "authorName": "pandur",
     "created": 1686493436213,
     "summary": "Cast a ray and check if it intersect/collide with bodies",
-
-
     "docs": {
         "ports": []
     },

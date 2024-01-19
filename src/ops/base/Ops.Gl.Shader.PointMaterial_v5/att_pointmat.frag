@@ -7,9 +7,6 @@ UNI float atlasNumX;
 // IN vec2 pointCoord;
 IN float ps;
 
-#ifdef USE_ATLAS
-IN float randAtlas;
-#endif
 
 #ifdef HAS_TEXTURE_DIFFUSE
     UNI sampler2D diffTex;
@@ -23,9 +20,14 @@ IN float randAtlas;
 #ifdef HAS_TEXTURE_OPACITY
     IN float opacity;
 #endif
-#ifdef HAS_TEXTURE_ATLASLOOKUP
-    UNI sampler2D texAtlasLookup;
+
+#ifdef USE_ATLAS
+    IN float randAtlas;
+    #ifdef HAS_TEXTURE_ATLASLOOKUP
+        UNI sampler2D texAtlasLookup;
+    #endif
 #endif
+
 
 #ifdef VERTEX_COLORS
     IN vec4 vertexColor;
@@ -36,33 +38,31 @@ void main()
 {
     #ifdef FLIP_TEX
         vec2 pointCoord=vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y));
+
     #endif
     #ifndef FLIP_TEX
         vec2 pointCoord=gl_PointCoord;
     #endif
 
-    #ifdef RAND_ATLAS
-        #ifndef HAS_TEXTURE_ATLASLOOKUP
-            pointCoord.x=pointCoord.x/atlasNumX+randAtlas*(1.0/atlasNumX);
-        #endif
-    #endif
+    vec2 origPointCoord=pointCoord;
 
+    #ifdef USE_ATLAS
 
+        float atlasIdx=randAtlas;
 
         #ifdef HAS_TEXTURE_ATLASLOOKUP
-
-            float atlasIdx=texture(texAtlasLookup,pointCoord).r;
-
-            #ifdef ATLAS_XFADE
-                vec2 pointCoord2=vec2(pointCoord);
-                pointCoord2.x=pointCoord.x/atlasNumX+ceil(atlasIdx)*(1.0/atlasNumX);
-            #endif
-
-            pointCoord.x=pointCoord.x/atlasNumX+floor(atlasIdx)*(1.0/atlasNumX);
-
+            // atlasIdx=texture(texAtlasLookup,origPointCoord).r;
         #endif
 
-    // #endif
+        #ifdef ATLAS_XFADE
+            vec2 pointCoord2=vec2(origPointCoord);
+            pointCoord2.x=origPointCoord.x/atlasNumX+ceil(atlasIdx)*(1.0/atlasNumX);
+        #endif
+
+        pointCoord.x=origPointCoord.x/atlasNumX+floor(atlasIdx)*(1.0/atlasNumX);
+
+
+    #endif
 
     {{MODULE_BEGIN_FRAG}}
 
@@ -87,14 +87,11 @@ void main()
 
     #ifdef HAS_TEXTURE_DIFFUSE
 
-
         col=texture(diffTex,pointCoord);
 
-        #ifdef HAS_TEXTURE_ATLASLOOKUP
         #ifdef ATLAS_XFADE
             vec4 col2=texture(diffTex,pointCoord2);
             col=mix(col,col2,fract(atlasIdx));
-        #endif
         #endif
 
         #ifdef COLORIZE_TEXTURE
