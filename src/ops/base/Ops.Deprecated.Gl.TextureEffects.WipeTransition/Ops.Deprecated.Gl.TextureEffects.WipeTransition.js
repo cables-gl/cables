@@ -6,7 +6,7 @@ const fadeWidth = op.addInPort(new CABLES.Port(op, "fadeWidth", CABLES.OP_PORT_T
 const image = op.addInPort(new CABLES.Port(op, "image", CABLES.OP_PORT_TYPE_TEXTURE));
 const trigger = op.addOutPort(new CABLES.Port(op, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
 
-let shader = new CGL.Shader(cgl);
+let shader = new CGL.Shader(cgl, "wipetransition");
 
 let srcFrag = ""
 
