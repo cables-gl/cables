@@ -31,6 +31,14 @@ const TextureEffect = function (cgl, options)
     this.depth = false;
 };
 
+TextureEffect.prototype.dispose = function ()
+{
+    if (this._renderbuffer) this._cgl.gl.deleteRenderbuffer(this._renderbuffer);
+    if (this._frameBuf) this._cgl.gl.deleteFramebuffer(this._frameBuf);
+    if (this._renderbuffer2) this._cgl.gl.deleteRenderbuffer(this._renderbuffer2);
+    if (this._frameBuf2) this._cgl.gl.deleteFramebuffer(this._frameBuf2);
+};
+
 TextureEffect.prototype.getWidth = function ()
 {
     return this._textureSource.width;
