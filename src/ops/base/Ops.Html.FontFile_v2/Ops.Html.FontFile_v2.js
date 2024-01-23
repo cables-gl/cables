@@ -30,6 +30,8 @@ function addStyle(_doc)
 {
     doc = _doc || doc || op.patch.cgl.canvas.ownerDocument || document;
 
+    op.patch.cgl.patch.loading.finished(loadingId);
+
     if (filename.get() && fontname.get())
     {
         if (doc.fonts)
@@ -68,6 +70,7 @@ function addStyle(_doc)
                 // op.logError("Font loading error! Current status", fontFaceObj.status);
             }).catch((f) =>
             {
+                op.patch.cgl.patch.loading.finished(loadingId);
                 console.error("catch ", f);
             });
 

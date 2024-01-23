@@ -254,15 +254,17 @@ function autoLineBreaks(strings)
             }
             else
             {
-                newString += words[j] + " ";
+                newString += words[j];
             }
         }
         newString += "\n";
     }
     let txt = newString;
+
     strings = txt.split("\n");
+
     if (strings[strings.length - 1] == "")strings.pop();
-    // console.log(strings);
+
     return strings;
 }
 
@@ -328,6 +330,8 @@ function refresh()
     autoWidth += paddingX * 2;
     autoHeight += paddingY + paddingYBot;
 
+    if (inLineHeight.get() < 0)autoHeight += (inLineHeight.get() / 2) * -1;
+
     let calcHeight = autoHeight;
 
     if (texSizeMeth.get() == "Manual")
@@ -354,7 +358,7 @@ function refresh()
 
     let posy = paddingY;
     if (valign.get() == "Middle")posy = (autoHeight - calcHeight) / 2 + paddingY;
-    else if (valign.get() == "Bottom")posy = (autoHeight - calcHeight) + paddingYBot;
+    else if (valign.get() == "Bottom")posy = (autoHeight - calcHeight) + paddingY;
 
     if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
 
@@ -362,10 +366,10 @@ function refresh()
 
     for (let i = 0; i < strings.length; i++)
     {
-        let posx = 0 + paddingX;
+        let posx = 0 + paddingX; // left
 
         if (align.get() == "center") posx = ctx.canvas.width / 2;
-        if (align.get() == "right") posx = ctx.canvas.width;
+        if (align.get() == "right") posx = ctx.canvas.width - paddingX;
 
         if (texSizeMeth.get() == "Manual")posx += inLetterspacing.get();
 

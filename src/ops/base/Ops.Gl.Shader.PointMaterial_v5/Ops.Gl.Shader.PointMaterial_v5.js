@@ -18,7 +18,7 @@ const
     textureMask = op.inTexture("Texture Mask"),
     texMaskChan = op.inSwitch("Mask Channel", ["R", "A", "Luminance"], "R"),
     textureColorize = op.inTexture("Texture Colorize"),
-    colorizeRandom = op.inValueBool("Colorize Randomize", true),
+    colorizeRandom = op.inValueBool("Colorize Randomize", false),
     textureOpacity = op.inTexture("Texture Opacity"),
     texturePointSize = op.inTexture("Texture Point Size"),
     texturePointSizeChannel = op.inSwitch("Point Size Channel", ["R", "G", "B"], "R"),
@@ -27,7 +27,7 @@ const
     flipTex = op.inValueBool("Flip Texture", false),
 
     inAtlasXFade = op.inBool("Atlas Cross Fade", false),
-    inAtlasRepeatX = op.inFloat("Atlas Repeat X", 4),
+    inAtlasRepeatX = op.inFloat("Atlas Repeat X", 1),
     inAtlasLookupTex = op.inTexture("Atlas Lookup"),
 
     trigger = op.outTrigger("trigger"),
@@ -148,7 +148,7 @@ function updateDefines()
     shader.toggleDefine("HAS_TEXTURE_COLORIZE", textureColorize.get());
     shader.toggleDefine("HAS_TEXTURE_OPACITY", textureOpacity.get());
     shader.toggleDefine("HAS_TEXTURE_POINTSIZE", texturePointSize.get());
-    shader.toggleDefine("HAS_TEXTURE_ATLASLOOKUP", inAtlasLookupTex.get());
+    shader.toggleDefine("HAS_TEXTURE_ATLASLOOKUP", inAtlasLookupTex.isLinked());
 
     shader.toggleDefine("TEXTURE_COLORIZE_MUL", textureMulColor.get());
 

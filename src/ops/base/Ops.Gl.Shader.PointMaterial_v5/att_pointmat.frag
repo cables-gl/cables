@@ -6,7 +6,7 @@ UNI float atlasNumX;
 
 // IN vec2 pointCoord;
 IN float ps;
-
+IN vec2 texCoord;
 
 #ifdef HAS_TEXTURE_DIFFUSE
     UNI sampler2D diffTex;
@@ -51,7 +51,7 @@ void main()
         float atlasIdx=randAtlas;
 
         #ifdef HAS_TEXTURE_ATLASLOOKUP
-            // atlasIdx=texture(texAtlasLookup,origPointCoord).r;
+            atlasIdx=texture(texAtlasLookup,texCoord).r;
         #endif
 
         #ifdef ATLAS_XFADE

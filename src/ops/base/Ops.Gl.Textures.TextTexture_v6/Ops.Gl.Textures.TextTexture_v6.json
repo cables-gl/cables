@@ -282,6 +282,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1705340479790
+        },
+        {
+            "message": "added fixes for positioning with different paddings, alignments, negative lineheight add etc.",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705942586995
         }
     ],
     "coreLibs": [
