@@ -30,7 +30,7 @@ function addStyle(_doc)
 {
     doc = _doc || doc || op.patch.cgl.canvas.ownerDocument || document;
 
-    op.patch.cgl.patch.loading.finished(loadingId);
+    if (loadingId)loadingId = op.patch.cgl.patch.loading.finished(loadingId);
 
     if (filename.get() && fontname.get())
     {
@@ -56,7 +56,7 @@ function addStyle(_doc)
             {
                 outLoaded.set(true);
                 loadedTrigger.trigger();
-                op.patch.cgl.patch.loading.finished(loadingId);
+                loadingId = op.patch.cgl.patch.loading.finished(loadingId);
 
                 op.patch.emitEvent("fontLoaded", fontname.get());
 
@@ -64,13 +64,13 @@ function addStyle(_doc)
             }, (fontFace) =>
             {
                 op.setUiError("loadingerror", "Font loading error!" + fontFaceObj.status);
-                op.patch.cgl.patch.loading.finished(loadingId);
+                loadingId = op.patch.cgl.patch.loading.finished(loadingId);
                 outLoaded.set(true);
 
                 // op.logError("Font loading error! Current status", fontFaceObj.status);
             }).catch((f) =>
             {
-                op.patch.cgl.patch.loading.finished(loadingId);
+                loadingId = op.patch.cgl.patch.loading.finished(loadingId);
                 console.error("catch ", f);
             });
 
