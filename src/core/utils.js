@@ -453,6 +453,7 @@ export const logStack = function ()
 export const filename = function (url)
 {
     let name = "";
+    if (!url) return "";
 
     if (url.indexOf("data:") == 0 && url.indexOf(":") > -1)
     {
@@ -460,7 +461,6 @@ export const filename = function (url)
         return parts[0];
     }
 
-    if (!url) return "";
     const parts = (url + "").split("/");
     if (parts.length > 0)
     {
