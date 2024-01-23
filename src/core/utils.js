@@ -433,7 +433,7 @@ export const basename = function (url)
 
 /**
  * return the filename part of a url
- * @function basename
+ * @function filename
  * @static
  * @memberof Utils
  * @param {String} url
@@ -442,6 +442,13 @@ export const basename = function (url)
 export const filename = function (url)
 {
     let name = "";
+
+    if (url.indexOf("data:") == 0 && url.indexOf(":") > -1)
+    {
+        const parts = url.split(",");
+        return parts[0];
+    }
+
     if (!url) return "";
     const parts = (url + "").split("/");
     if (parts.length > 0)
