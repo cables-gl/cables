@@ -1,33 +1,33 @@
-op.name="PointSpray";
+op.name = "PointSpray";
 
-var render=op.inTrigger("render");
-var timeIn=op.inValue("time");
-var sizeY=op.inValue("Size Y");
-var sinY=op.inValue("Sin Y");
-var sizeZ=op.inValue("Size Z");
-var sinZ=op.inValue("Sin Z");
-var lifeTime=op.inValue("Lifetime",2);
-var speed=op.inValue("Speed",1);
-var numPoints=op.inValue("Num Points",1000);
-var simTexPosOut=op.outObject("SimPosTex");
+let render = op.inTrigger("render");
+let timeIn = op.inValue("time");
+let sizeY = op.inValue("Size Y");
+let sinY = op.inValue("Sin Y");
+let sizeZ = op.inValue("Size Z");
+let sinZ = op.inValue("Sin Z");
+let lifeTime = op.inValue("Lifetime", 2);
+let speed = op.inValue("Speed", 1);
+let numPoints = op.inValue("Num Points", 1000);
+let simTexPosOut = op.outObject("SimPosTex");
 
-var cgl=op.patch.cgl;
-var simTexPos=new CGL.Texture(cgl,{isFloatingPointTexture:true});
-simTexPos.setSize(1024,1024);
+let cgl = op.patch.cgl;
+let simTexPos = new CGL.Texture(cgl, { "isFloatingPointTexture": true });
+simTexPos.setSize(1024, 1024);
 simTexPosOut.set(simTexPos);
 
-var uniTexture=null;
+let uniTexture = null;
 // position
 
-var srcHeadVert=''
-    .endl()+'IN float attrVertIndex;'
+let srcHeadVert = ""
+    .endl() + "IN float attrVertIndex;"
 
-    .endl()+'UNI sampler2D {{mod}}_texturePos;'
+    .endl() + "UNI sampler2D {{mod}}_texturePos;"
     .endl();
 
-var srcBodyVert=''
-    .endl()+'pos.rgb=texture2D( {{mod}}_texturePos, vec2(pos.r,pos.g)).rgb;'
-    // .endl()+'psMul*=pos.a;'
+let srcBodyVert = ""
+    .endl() + "pos.rgb=texture2D( {{mod}}_texturePos, vec2(pos.r,pos.g)).rgb;"
+// .endl()+'psMul*=pos.a;'
 
     // .endl()+'pos.g+=random(texCoord);'
     .endl();
@@ -35,142 +35,140 @@ var srcBodyVert=''
 
 // simulation...
 
-var simSrc=''
-    .endl()+'precision highp float;'
-    .endl()+'UNI sampler2D texPosition;'
-    .endl()+'UNI float time;'
-    .endl()+'UNI float sizeZ;'
-    .endl()+'UNI float sinZ;'
-    .endl()+'UNI float sizeY;'
-    .endl()+'UNI float sinY;'
-    .endl()+'UNI float lifeTime;'
-    .endl()+'UNI float speed;'
+let simSrc = ""
+    .endl() + "precision highp float;"
+    .endl() + "UNI sampler2D texPosition;"
+    .endl() + "UNI float time;"
+    .endl() + "UNI float sizeZ;"
+    .endl() + "UNI float sinZ;"
+    .endl() + "UNI float sizeY;"
+    .endl() + "UNI float sinY;"
+    .endl() + "UNI float lifeTime;"
+    .endl() + "UNI float speed;"
 
-    .endl()+'UNI sampler2D simTexPos;'
+    .endl() + "UNI sampler2D simTexPos;"
 
-    .endl()+'IN vec2 texCoord;'
+    .endl() + "IN vec2 texCoord;"
 
-    .endl()+'float random(vec2 co)'
-    .endl()+'{'
-    .endl()+'   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);'
-    .endl()+'}'
+    .endl() + "float random(vec2 co)"
+    .endl() + "{"
+    .endl() + "   return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);"
+    .endl() + "}"
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 old = texture2D( simTexPos, texCoord );'
-    .endl()+'   float rand=random(gl_FragCoord.xy)*3.0;'
+    .endl() + "void main()"
+    .endl() + "{"
+    .endl() + "   vec4 old = texture2D( simTexPos, texCoord );"
+    .endl() + "   float rand=random(gl_FragCoord.xy)*3.0;"
 
-    .endl()+' float pLifeTime=(random(texCoord*1.12320)*lifeTime);'
-    .endl()+' float rndOffset=(4.0 * random(texCoord));'
-
-
-    .endl()+'   float x=-1.0*mod(time*speed + rndOffset , pLifeTime);'
-    .endl()+'   float y=random(texCoord*3.32123)*sizeY-sizeY/2.0+sinY*random(texCoord*2.223)*sizeY*sin(time+16.0*random(texCoord*1.12123));'
-    .endl()+'   float z=random(texCoord*1.111)*sizeZ-sizeZ/2.0+sinZ*random(texCoord*1.453)*sizeZ*sin(time+16.0*random(texCoord*1.4523));'
-
-    .endl()+'   gl_FragColor = vec4(x,y,z,x/lifeTime*0.7);'
-    .endl()+'}';
-
-var simShader=new CGL.Shader(cgl);
-simShader.setSource(simShader.getDefaultVertexShader(),simSrc);
-new CGL.Uniform(simShader,'t','simTexPos',3);
-new CGL.Uniform(simShader,'f','sizeZ',sizeZ);
-new CGL.Uniform(simShader,'f','sizeY',sizeY);
-new CGL.Uniform(simShader,'f','sinY',sinY);
-new CGL.Uniform(simShader,'f','sinZ',sinZ);
-
-new CGL.Uniform(simShader,'f','lifeTime',lifeTime);
-new CGL.Uniform(simShader,'f','speed',speed);
+    .endl() + " float pLifeTime=(random(texCoord*1.12320)*lifeTime);"
+    .endl() + " float rndOffset=(4.0 * random(texCoord));"
 
 
-var uniTime=new CGL.Uniform(simShader,'f','time',0);
+    .endl() + "   float x=-1.0*mod(time*speed + rndOffset , pLifeTime);"
+    .endl() + "   float y=random(texCoord*3.32123)*sizeY-sizeY/2.0+sinY*random(texCoord*2.223)*sizeY*sin(time+16.0*random(texCoord*1.12123));"
+    .endl() + "   float z=random(texCoord*1.111)*sizeZ-sizeZ/2.0+sinZ*random(texCoord*1.453)*sizeZ*sin(time+16.0*random(texCoord*1.4523));"
 
-var effect=new CGL.TextureEffect(cgl,{fp:true});
+    .endl() + "   gl_FragColor = vec4(x,y,z,x/lifeTime*0.7);"
+    .endl() + "}";
+
+let simShader = new CGL.Shader(cgl, "pointspray");
+simShader.setSource(simShader.getDefaultVertexShader(), simSrc);
+new CGL.Uniform(simShader, "t", "simTexPos", 3);
+new CGL.Uniform(simShader, "f", "sizeZ", sizeZ);
+new CGL.Uniform(simShader, "f", "sizeY", sizeY);
+new CGL.Uniform(simShader, "f", "sinY", sinY);
+new CGL.Uniform(simShader, "f", "sinZ", sinZ);
+
+new CGL.Uniform(simShader, "f", "lifeTime", lifeTime);
+new CGL.Uniform(simShader, "f", "speed", speed);
+
+
+let uniTime = new CGL.Uniform(simShader, "f", "time", 0);
+
+let effect = new CGL.TextureEffect(cgl, { "fp": true });
 effect.setSourceTexture(simTexPos);
 
-numPoints.onChange=setPoints;
-var mesh=null;
-var geom=new CGL.Geometry();
+numPoints.onChange = setPoints;
+let mesh = null;
+let geom = new CGL.Geometry();
 
-var posShader=null;
+let posShader = null;
 
 setPoints();
 
 function setPoints()
 {
-    geom.vertices.length=Math.round(numPoints.get())*3;
-    var texCoords=[];
-    texCoords.length=Math.round(numPoints.get())*2;
+    geom.vertices.length = Math.round(numPoints.get()) * 3;
+    let texCoords = [];
+    texCoords.length = Math.round(numPoints.get()) * 2;
 
-    var sq=Math.round( Math.sqrt(numPoints.get()) );
-    if(sq>1024)sq=1024;
+    let sq = Math.round(Math.sqrt(numPoints.get()));
+    if (sq > 1024)sq = 1024;
 
-    for(var i=0;i<sq;i++)
+    for (let i = 0; i < sq; i++)
     {
-        for(var j=0;j<sq;j++)
+        for (let j = 0; j < sq; j++)
         {
-            var index=i*1024+j;
-            geom.vertices[index*3+0]=i/1024;
-            geom.vertices[index*3+1]=j/1024;
-            geom.vertices[index*3+2]=0;
+            let index = i * 1024 + j;
+            geom.vertices[index * 3 + 0] = i / 1024;
+            geom.vertices[index * 3 + 1] = j / 1024;
+            geom.vertices[index * 3 + 2] = 0;
 
-            texCoords[index*2]=0;
-            texCoords[index*2+1]=0;
-
+            texCoords[index * 2] = 0;
+            texCoords[index * 2 + 1] = 0;
         }
     }
 
     geom.setPointVertices(geom.vertices);
     geom.setTexCoords(texCoords);
 
-    mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-    mesh.addVertexNumbers=true;
+    mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    mesh.addVertexNumbers = true;
     mesh.setGeom(geom);
 }
 
-var posModule=null;
+let posModule = null;
 
 
 function removeModule()
 {
-    if(posShader && posModule)
+    if (posShader && posModule)
     {
         posShader.removeModule(posModule);
-        posShader=null;
+        posShader = null;
     }
 }
 
-render.onLinkChanged=removeModule;
+render.onLinkChanged = removeModule;
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-
     // set position shader...
 
-    if(cgl.getShader()!=posShader)
+    if (cgl.getShader() != posShader)
     {
-        if(posShader) removeModule();
+        if (posShader) removeModule();
 
-        posShader=cgl.getShader();
+        posShader = cgl.getShader();
 
-        posModule=posShader.addModule(
+        posModule = posShader.addModule(
             {
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": srcHeadVert,
+                "srcBodyVert": srcBodyVert
             });
 
-        uniTexture=new CGL.Uniform(posShader,'t',posModule.prefix+'_texturePos',4);
+        uniTexture = new CGL.Uniform(posShader, "t", posModule.prefix + "_texturePos", 4);
     }
 
 
 
     // do simulation
-    var t=effect.getCurrentSourceTexture().tex;
+    let t = effect.getCurrentSourceTexture().tex;
     cgl.pushShader(simShader);
     effect.bind();
 
-    cgl.setTexture(3,t);
+    cgl.setTexture(3, t);
 
     effect.finish();
     cgl.popShader();
@@ -178,7 +176,7 @@ render.onTriggered=function()
     uniTime.setValue(timeIn.get());
 
 
-    if(simTexPos)
+    if (simTexPos)
     {
         // cgl.setTexture(0,t);
         cgl.setTexture(4, simTexPos.tex);
@@ -186,6 +184,5 @@ render.onTriggered=function()
     }
 
     // render points...
-    if(mesh) mesh.render(cgl.getShader());
-
+    if (mesh) mesh.render(cgl.getShader());
 };

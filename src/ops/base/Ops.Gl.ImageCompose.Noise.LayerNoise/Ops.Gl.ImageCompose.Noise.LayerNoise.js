@@ -24,7 +24,7 @@ const outTrigger = op.outTrigger("trigger");
 
 // locals
 const TEX_SLOT = 0;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, "layernoise");
 const attribs = [inScale.get(), inNumLayers.get(), inFactor.get(), 0];
 shader.setSource(shader.getDefaultVertexShader(), attachments.layernoise_frag);
 // shader._addUniform(
