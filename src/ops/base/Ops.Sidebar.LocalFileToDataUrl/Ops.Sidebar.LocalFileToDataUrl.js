@@ -2,6 +2,7 @@
 const
     parentPort = op.inObject("link", "element"),
     labelPort = op.inString("Text", "Select File:"),
+    inLabelText = op.inString("Button Text", "Choose File"),
     inId = op.inValueString("Id", ""),
     inVisible = op.inBool("Visible", true),
     inGreyOut = op.inBool("Grey Out", false),
@@ -46,7 +47,8 @@ elReset.innerHTML = "&nbsp;&nbsp;✕";
 
 const fileInputButton = document.createElement("div");
 fileInputButton.classList.add("sidebar__button-input");
-fileInputButton.innerHTML = "Choose File";
+fileInputButton.innerHTML = inLabelText.get();
+
 fileInputButton.onclick = () => { fileInputEle.click(); };
 inOpenDialog.onTriggered = () => { fileInputButton.click(); };
 fileInputButton.style["margin-top"] = "10px";
@@ -64,6 +66,11 @@ const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
+
+inLabelText.onChange = () =>
+{
+    fileInputButton.innerHTML = inLabelText.get();
+};
 
 inGreyOut.onChange = function ()
 {

@@ -15,6 +15,12 @@
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888092603
+        },
+        {
+            "message": "added input field for button text",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705997265649
         }
     ],
     "authorName": "pandur",
@@ -22,59 +28,62 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
+                "type": "2",
                 "name": "link"
             },
             {
-                "type": 5,
+                "type": "5",
                 "name": "Text"
             },
             {
-                "type": 0,
+                "type": "5",
+                "name": "Button Text"
+            },
+            {
+                "type": "0",
                 "name": "Id",
                 "subType": "string"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Visible",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Grey Out",
                 "subType": "boolean"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "Show Dialog"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "Reset"
             }
         ],
         "portsOut": [
             {
-                "type": 2,
+                "type": "2",
                 "name": "childs"
             },
             {
-                "type": 5,
+                "type": "5",
                 "name": "Data URL"
             },
             {
-                "type": 5,
+                "type": "5",
                 "name": "Filename"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "File Object"
             }
         ]
     },
     "summary": "load a local file and output as data url",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
