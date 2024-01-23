@@ -63,7 +63,7 @@ function addStyle(_doc)
                 // Throw an error if loading wasn't successful
             }, (fontFace) =>
             {
-                op.setUiError("loadingerror", "Font loading error!" + fontFaceObj.status);
+                op.setUiError("loadingerror", "Font loading error: " + fontFaceObj.status + "(" + filename.get() + ")");
                 loadingId = op.patch.cgl.patch.loading.finished(loadingId);
                 outLoaded.set(true);
 
