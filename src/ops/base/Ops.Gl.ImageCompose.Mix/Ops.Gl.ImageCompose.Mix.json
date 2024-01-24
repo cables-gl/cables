@@ -1,0 +1,78 @@
+{
+    "summary": "apply simple mathematical functions on pixels color values",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Texture 1",
+                "objType": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Fade",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Texture 2",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "dbd68d4d-60ff-427f-8a76-c931fb8bb59b",
+    "created": 1705930771662,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
+            "author": "pandur",
+            "date": 1620994204234
+        },
+        {
+            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
+            "author": "pandur",
+            "date": 1620998033733
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.RGBMath renamed to Ops.Gl.TextureEffects.Math.RgbMath",
+            "author": "pandur",
+            "date": 1671004402345
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Math.RgbMath renamed to Ops.Gl.ImageCompose.Math.RgbMath",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1701854882541
+        },
+        {
+            "message": "cloned op from Ops.Gl.ImageCompose.Math.RgbMath",
+            "author": "pandur",
+            "date": 1705930771662
+        },
+        {
+            "message": "Ops.Patch.PfalEO1.Mix renamed to Ops.Gl.ImageCompose.Mix",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1705931355200
+        }
+    ],
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Operation index",
+                "text": "c-x: subtraction x from color value, x-c: subtract color value from x value, c*x: multiply color value by x, x/c: divide x value by color value, c/x: divide color value by x value, c%x: modulo operation on color value by modulus x of which the remainder is the result for your selected color channel"
+            }
+        ]
+    }
+}

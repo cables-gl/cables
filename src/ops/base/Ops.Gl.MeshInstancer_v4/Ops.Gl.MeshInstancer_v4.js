@@ -7,7 +7,7 @@ const
     inTranslates = op.inArray("positions", 3),
     inScales = op.inArray("Scale Array", 3),
     inRot = op.inArray("Rotations", 3),
-    inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions"], "Euler"),
+    inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions", "Normals"], "Euler"),
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
     inColor = op.inArray("Colors", 4),
     inTexCoords = op.inArray("TexCoords", 4),
@@ -138,6 +138,7 @@ function setupArray()
     const tcArr = inTexCoords.get();
     const scales = inScales.get();
     const useQuats = inRotMeth.get() == "Quaternions";
+    const useEuler = inRotMeth.get() == "Euler";
     const useNormals = inRotMeth.get() == "Normals";
 
     let stride = 3;
@@ -182,33 +183,28 @@ function setupArray()
                 mat4.fromQuat(mq, q);
                 mat4.mul(m, m, mq);
             }
+            else
             if (useNormals)
             {
-                // let q = quat.create();
-                // if (rotArr[i + 1] > 0.99999)
-                // {
-                //     q.set(0, 0, 0, 1);
-                // }
-                // else if (rotArr[i + 1] < -0.99999)
-                // {
-                //     q.set(1, 0, 0, 0);
-                // }
-                // else
-                // {
-                //     let axis = vec3.create();
-                //     vec3.set(axis, rotArr[i + 2], 0, -rotArr[i + 0]);
-                //     vec3.normalize(axis, axis);
-                //     let radians = Math.acos(rotArr[i + 1]);
-                //     quat.setAxisAngle(q, axis, radians);
-                // }
+                const n = [rotArr[i * 3 + 0], rotArr[i * 3 + 1], rotArr[i * 3 + 2]];
+                const up = [1, 0, 0];
+                const v = vec3.create();
 
-                // const mq = mat4.create();
+                vec3.cross(v, up, n);
+                vec3.normalize(v, v);
 
-                // quat.normalize(q, q);
-                // mat4.fromQuat(mq, q);
-                // mat4.mul(m, m, mq);
+                const angle = Math.acos(vec3.dot(up, n));
+                const q = quat.create();
+
+                quat.setAxisAngle(q, v, angle);
+                quat.normalize(q, q);
+
+                const mq = mat4.create();
+
+                mat4.fromQuat(mq, q);
+                mat4.mul(m, m, mq);
             }
-            else
+            if (useEuler)
             {
                 mat4.rotateX(m, m, rotArr[i * 3 + 0] * CGL.DEG2RAD);
                 mat4.rotateY(m, m, rotArr[i * 3 + 1] * CGL.DEG2RAD);

@@ -432,8 +432,19 @@ export const basename = function (url)
 };
 
 /**
+ * output a stacktrace to the console
+ * @function logStack
+ * @static
+ * @memberof Utils
+ */
+export const logStack = function ()
+{
+    console.log("logstack", (new Error()).stack);
+};
+
+/**
  * return the filename part of a url
- * @function basename
+ * @function filename
  * @static
  * @memberof Utils
  * @param {String} url
@@ -443,6 +454,13 @@ export const filename = function (url)
 {
     let name = "";
     if (!url) return "";
+
+    if (url.indexOf("data:") == 0 && url.indexOf(":") > -1)
+    {
+        const parts = url.split(",");
+        return parts[0];
+    }
+
     const parts = (url + "").split("/");
     if (parts.length > 0)
     {

@@ -5,164 +5,164 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "render"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "PointSize",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Size in Pixels",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Random Size",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Round",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Round Antialias",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Scale by Distance",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "r",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "g",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "a",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Vertex Colors",
                 "group": "Color",
                 "subType": "boolean"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "texture",
                 "group": "Texture",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Colorize Texture",
                 "group": "Texture",
                 "subType": "boolean"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Texture Mask",
                 "group": "Texture",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Mask Channel index",
                 "group": "Texture",
                 "subType": "integer"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Texture Colorize",
                 "group": "Texture",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Colorize Randomize",
                 "group": "Texture",
                 "subType": "boolean"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Texture Opacity",
                 "group": "Texture",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Texture Point Size",
                 "group": "Size",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Point Size Channel index",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Texture Point Size Mul",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Map Size 0 index",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Flip Texture",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Random Atlas",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Atlas Repeat X",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "trigger"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "shader",
                 "objType": "shader"
             }
