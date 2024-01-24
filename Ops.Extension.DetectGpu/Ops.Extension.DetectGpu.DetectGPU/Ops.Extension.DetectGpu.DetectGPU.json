@@ -1,0 +1,77 @@
+{
+    "id": "c9b3cb10-9a17-468f-80d9-23f940e2a91c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "kikohs",
+            "date": 1691415163734
+        },
+        {
+            "message": " added lib: /assets/64d0f258c033c0b9f6103e75/detect-gpu.js",
+            "type": "",
+            "author": "kikohs",
+            "date": 1691415538590
+        },
+        {
+            "message": "cloned op from Ops.User.kikohs.DetectGPU",
+            "author": "kikohs",
+            "date": 1691416278982
+        },
+        {
+            "message": "Ops.Patch.PRDGcgD.DetectGPU renamed to Ops.Team.Benchmark_Vqhlc2.DetectGPU",
+            "type": "rename",
+            "author": "kikohs",
+            "date": 1706021848868
+        },
+        {
+            "message": "Ops.Team.Benchmark_Vqhlc2.DetectGPU renamed to Ops.Extension.DetectGpu.DetectGPU",
+            "type": "rename",
+            "author": "kikohs",
+            "date": 1706041370335
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Run"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Finished"
+            },
+            {
+                "type": 0,
+                "name": "Tier",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Is Mobile",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "GPU name"
+            },
+            {
+                "type": 0,
+                "name": "FPS",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "kikohs",
+    "created": 1691416278981,
+    "libs": [
+        "/assets/64d0f258c033c0b9f6103e75/detect-gpu.js"
+    ],
+    "summary": "Use the detect-gpu library to assess performance of the client running the patch",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}
