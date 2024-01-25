@@ -3,28 +3,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "render"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "hue",
                 "subType": "number"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Mask",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Offset",
                 "objType": "texture"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "trigger"
             }
         ]
@@ -57,7 +57,6 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "kubmT6",
     "changelog": [
