@@ -416,7 +416,7 @@ Framebuffer2.prototype.renderEnd = function ()
     this._cgl.profileData.profileFramebuffer++;
 
 
-
+    console.log(555555);
 
     if (this._numRenderBuffers <= 1)
     {
