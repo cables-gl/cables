@@ -1,7 +1,7 @@
 const
     trigger = op.inTrigger("Trigger"),
     render = op.inBool("Render", true),
-    inTextCol = op.inBool("Check Body Collisions", true),
+    inTextCol = op.inBool("Check Body Collisions", false),
     next = op.outTrigger("Next"),
     outNum = op.outNumber("Total Bodies"),
     outCollisions = op.outArray("Collisions", []);

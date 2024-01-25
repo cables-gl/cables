@@ -29,105 +29,105 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "render"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Intensity",
                 "subType": "number"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "RGBE Environment map",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Size Irradiance map index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Size pre-filtered environment index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Size IBL LUT index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Force 8bit IBL",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Environment map does not contain RGBE data",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Rotation",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Use parallax correction",
                 "group": "Parallax Correction",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "center X",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "center Y",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "center Z",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Box min X",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Box min Y",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Box min Z",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Box max X",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Box max Y",
                 "group": "Parallax Correction",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Box max Z",
                 "group": "Parallax Correction",
                 "subType": "number"
@@ -135,26 +135,26 @@
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "next"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "IBL LUT",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "cubemap (diffuse irradiance)",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "cubemap (pre-filtered environment map)",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Number of Pre-filtered mip levels",
                 "subType": "number"
             }
@@ -179,7 +179,6 @@
     "summary": "PBR image based lighting setup",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [
         "uwoj7R52yU8"
     ],
