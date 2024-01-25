@@ -3,7 +3,7 @@ const
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"]),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
-    dataFrmt = op.inSwitch("Data Format", ["R", "RG", "RGB", "RGBA"], "RGBA"),
+    dataFrmt = op.inSwitch("Data Format", ["R", "RG", "RGB", "RGBA", "SRGBA"], "RGBA"),
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
@@ -81,6 +81,8 @@ function getPixelFormat()
     if (dataFrmt.get() == "R") return CGL.Texture.PFORMATSTR_R8UB;
     if (dataFrmt.get() == "RG") return CGL.Texture.PFORMATSTR_RG8UB;
     if (dataFrmt.get() == "RGB") return CGL.Texture.PFORMATSTR_RGB8UB;
+    if (dataFrmt.get() == "SRGBA") return CGL.Texture.PFORMATSTR_SRGBA8;
+
     return CGL.Texture.PFORMATSTR_RGBA8UB;
 }
 
