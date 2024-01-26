@@ -23,6 +23,13 @@
     "created": 1678290941769,
     "layout": {
         "portsIn": [],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "a1jf8yr1w",
+                "uititle": "Filter index",
+                "subType": "number"
+            }
+        ]
     }
 }

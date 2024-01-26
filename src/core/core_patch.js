@@ -746,13 +746,13 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port1)
     {
-        console.warn("port not found! " + port1Name + "(" + op1.objName + ")");
+        console.warn("port1 not found! " + port1Name + "(" + op1.objName + ")");
         return;
     }
 
     if (!port2)
     {
-        console.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
+        console.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
         return;
     }
 

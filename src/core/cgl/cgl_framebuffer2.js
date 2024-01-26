@@ -350,8 +350,6 @@ Framebuffer2.prototype.setSize = function (w, h)
         }
     }
 
-
-
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 
@@ -415,8 +413,6 @@ Framebuffer2.prototype.renderEnd = function ()
 
     this._cgl.profileData.profileFramebuffer++;
 
-
-    console.log(555555);
 
     if (this._numRenderBuffers <= 1)
     {
