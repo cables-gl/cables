@@ -222,7 +222,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
     }
 
-
     if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
     {
     }
@@ -246,6 +245,11 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         o.glInternalFormat = cgl.gl.RGB8;
         o.glDataFormat = cgl.gl.RGB;
     }
+    else if (pixelFormatStr == Texture.PFORMATSTR_SRGBA8)
+    {
+        o.glInternalFormat = cgl.gl.SRGB8_ALPHA8;
+    }
+
     else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
     {
         o.glInternalFormat = cgl.gl.R32F;
@@ -282,7 +286,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         else o.glInternalFormat = cgl.gl.RGBA32F;
         o.glDataType = floatDatatype;
     }
-
     else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
     {
         if (cgl.glVersion == 1)
@@ -302,6 +305,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     {
         console.log("unknown pixelformat ", pixelFormatStr);
     }
+
     /// //////
 
     if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
@@ -1176,6 +1180,8 @@ Texture.PFORMATSTR_RG8UB = "RG 8bit ubyte";
 Texture.PFORMATSTR_RGB8UB = "RGB 8bit ubyte";
 Texture.PFORMATSTR_RGBA8UB = "RGBA 8bit ubyte";
 
+Texture.PFORMATSTR_SRGBA8 = "SRGBA 8bit ubyte";
+
 Texture.PFORMATSTR_R11FG11FB10F = "RGB 11/11/10bit float";
 
 Texture.PFORMATSTR_R16F = "R 16bit float";
@@ -1198,6 +1204,9 @@ Texture.PIXELFORMATS = [
     Texture.PFORMATSTR_RG8UB,
     Texture.PFORMATSTR_RGB8UB,
     Texture.PFORMATSTR_RGBA8UB,
+
+    Texture.PFORMATSTR_SRGBA8,
+
     Texture.PFORMATSTR_R11FG11FB10F,
     Texture.PFORMATSTR_R16F,
     Texture.PFORMATSTR_RG16F,

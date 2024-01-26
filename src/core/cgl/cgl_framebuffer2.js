@@ -199,6 +199,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     }
 
 
+
     for (i = 0; i < this._numRenderBuffers; i++)
     {
         const renderBuffer = this._cgl.gl.createRenderbuffer();
@@ -255,6 +256,8 @@ Framebuffer2.prototype.setSize = function (w, h)
         {
             this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, internFormat, this._width, this._height);
         }
+
+
 
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.RENDERBUFFER, renderBuffer);
         this._colorRenderbuffers[i] = renderBuffer;
@@ -348,6 +351,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     }
 
 
+
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 
@@ -359,7 +363,6 @@ Framebuffer2.prototype.renderStart = function ()
     if (this._disposed) return this._log.warn("disposed framebuffer renderStart...");
     this._cgl.checkFrameStarted("fb2 renderstart");
     this._cgl.pushModelMatrix(); // needed ??
-
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
     this._cgl.pushGlFrameBuffer(this._frameBuffer);
@@ -412,10 +415,18 @@ Framebuffer2.prototype.renderEnd = function ()
 
     this._cgl.profileData.profileFramebuffer++;
 
+
+    console.log(555555);
+
     if (this._numRenderBuffers <= 1)
     {
         this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._frameBuffer);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._textureFrameBuffer);
+
+        // const a = this._cgl.gl.getFramebufferAttachmentParameter(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING);
+        // if (a == this._cgl.gl.SRGB)console.log("SRGB", this._cgl.gl.SRGB);
+        // else if (a == this._cgl.gl.LINEAR)console.log("LINEAR", this._cgl.gl.LINEAR);
+
 
         this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
         this._cgl.gl.blitFramebuffer(0, 0, this._width, this._height, 0, 0, this._width, this._height, this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST);
@@ -434,6 +445,7 @@ Framebuffer2.prototype.renderEnd = function ()
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2BlittingFramebuffer);
             this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
 
+
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
             this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
 
@@ -443,6 +455,8 @@ Framebuffer2.prototype.renderEnd = function ()
             this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
 
             // this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [0.0, 0.0, 0.0, 1.0]);
+
+
 
             let flags = this._cgl.gl.COLOR_BUFFER_BIT;
             if (i == 0) flags |= this._cgl.gl.DEPTH_BUFFER_BIT;

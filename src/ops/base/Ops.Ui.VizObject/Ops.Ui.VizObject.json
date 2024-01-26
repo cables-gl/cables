@@ -34,26 +34,26 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
+                "type": "2",
                 "name": "Object"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "ZoomText",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Line Numbers",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Font Size",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Scroll",
                 "subType": "number"
             }

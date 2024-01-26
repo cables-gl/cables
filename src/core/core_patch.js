@@ -732,12 +732,12 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 {
     if (!op1)
     {
-        console.log("link: op1 is null ");
+        console.warn("link: op1 is null ");
         return;
     }
     if (!op2)
     {
-        console.log("link: op2 is null");
+        console.warn("link: op2 is null");
         return;
     }
 
@@ -746,13 +746,13 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port1)
     {
-        console.log("port not found! " + port1Name + "(" + op1.objName + ")");
+        console.warn("port not found! " + port1Name + "(" + op1.objName + ")");
         return;
     }
 
     if (!port2)
     {
-        console.log("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
+        console.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
         return;
     }
 
