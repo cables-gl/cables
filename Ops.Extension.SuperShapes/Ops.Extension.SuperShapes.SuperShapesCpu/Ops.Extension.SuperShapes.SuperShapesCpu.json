@@ -1,0 +1,157 @@
+{
+    "id": "157875a5-234a-4abe-8fc5-8204e4876271",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1677497281605
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1678202574755
+        },
+        {
+            "message": "Ops.User.pandur.SuperShapez renamed to Ops.Team.SuperShapes.SuperShapezCpu",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678356216167
+        },
+        {
+            "message": "Ops.Team.SuperShapes.SuperShapezCpu renamed to Ops.Team.SuperShapes.SuperShapesCpu",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706190110449
+        },
+        {
+            "message": "Ops.Team.SuperShapes.SuperShapesCpu renamed to Ops.Extension.SuperShapes.SuperShapesCpu",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706271921173
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1677497331094,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Shape index",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Tesselation",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Param 0",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 3",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 4",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 5",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 6",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 7",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 8",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 9",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 10",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 11",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 12",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 13",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 14",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 15",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Coords"
+            },
+            {
+                "type": 3,
+                "name": "Faces"
+            },
+            {
+                "type": 3,
+                "name": "TexCoords"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "exampleProjectId": "LgcEiq",
+    "docs": {
+        "ports": []
+    }
+}
