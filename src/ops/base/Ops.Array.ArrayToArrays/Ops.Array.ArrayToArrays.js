@@ -3,12 +3,14 @@ const
     inStride = op.inInt("Stride", 6),
     outArr = op.outArray("Result");
 
+inStride.onChange =
 inArr.onChange = () =>
 {
     const stride = inStride.get();
+
     const result = [];
     const arr = inArr.get();
-    if (!arr) return outArr.set(null);
+    if (!arr || stride <= 0) return outArr.set(null);
 
     let count = 0;
     for (let i = 0; i < arr.length; i += stride)

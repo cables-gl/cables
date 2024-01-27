@@ -1,5 +1,7 @@
 const
     render = op.inTrigger("render"),
+    inDraw = op.inValueBool("Draw", true),
+
     radius = op.inValue("radius", 0.5),
     innerRadius = op.inValueSlider("innerRadius", 0),
     segments = op.inValueInt("segments", 40),
@@ -8,13 +10,13 @@ const
     invertSteps = op.inValueBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"]),
     drawSpline = op.inValueBool("Spline", false),
-    inDraw = op.inValueBool("Draw", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry", null, "geometry");
 
 op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
+op.toWorkPortsNeedToBeLinked(render);
 
 inDraw.setUiAttribs({ "title": "Render mesh" });
 

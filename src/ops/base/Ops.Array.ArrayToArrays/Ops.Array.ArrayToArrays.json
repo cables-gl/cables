@@ -21,6 +21,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1701851375462
+        },
+        {
+            "message": "result was not updating when changing the stride",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1706200072048
+        },
+        {
+            "message": "op crashed when stride was 0",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1706211712002
         }
     ],
     "authorName": "pandur",
@@ -28,24 +40,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": 3,
+                "type": "3",
                 "name": "Array"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Stride",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": 3,
+                "type": "3",
                 "name": "Result"
             }
         ]
     },
     "summary": "splits an array up into an array of arrays",
-
     "docs": {
         "ports": []
     },

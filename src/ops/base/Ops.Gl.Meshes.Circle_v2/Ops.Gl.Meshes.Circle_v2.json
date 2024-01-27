@@ -3,68 +3,68 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "render"
             },
             {
-                "type": 0,
+                "type": "0",
+                "name": "Draw",
+                "uititle": "Render mesh",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "radius",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "innerRadius",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "segments",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "percent",
                 "group": "Display",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "steps",
                 "group": "Display",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "invertSteps",
                 "group": "Display",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "mapping index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Spline",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Draw",
-                "uititle": "Render mesh",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "trigger"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "geometry",
                 "objType": "geometry"
             }
@@ -87,7 +87,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "DAAkQ6",
     "changelog": [
