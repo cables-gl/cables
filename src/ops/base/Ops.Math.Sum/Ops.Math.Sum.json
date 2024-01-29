@@ -3,19 +3,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "number1",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "number2",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "result",
                 "subType": "number"
             }

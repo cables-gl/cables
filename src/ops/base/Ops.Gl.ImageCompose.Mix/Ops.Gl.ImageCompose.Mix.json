@@ -1,5 +1,5 @@
 {
-    "summary": "apply simple mathematical functions on pixels color values",
+    "summary": "simple mix/fade of two input images ",
     "layout": {
         "portsIn": [
             {
@@ -68,11 +68,6 @@
     ],
     "issues": "",
     "docs": {
-        "ports": [
-            {
-                "name": "Operation index",
-                "text": "c-x: subtraction x from color value, x-c: subtract color value from x value, c*x: multiply color value by x, x/c: divide x value by color value, c/x: divide color value by x value, c%x: modulo operation on color value by modulus x of which the remainder is the result for your selected color channel"
-            }
-        ]
+        "ports": []
     }
 }

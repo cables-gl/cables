@@ -1,2 +1,1 @@
-This OP enables you to use precise values to modify the pixels in your texture.
-For example adjusting texture values that are modifying your geometry or array values, or even your post processing compositions.
+mix performs a linear interpolation between x and y using a to weight between them
