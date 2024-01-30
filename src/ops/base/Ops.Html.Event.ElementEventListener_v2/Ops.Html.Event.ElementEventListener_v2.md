@@ -1,0 +1,1 @@
+Adds a custom event listener to the HTML DOM element.
