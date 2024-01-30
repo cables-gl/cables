@@ -2,7 +2,7 @@
 
 ![Button](img/subpatchop.png)
 
-you can create new ops from existing ops. We call those subpatch ops. You can recognize them by their border. for example: [ComposingGridOverlay](/op/Ops.Gl.Meshes.ComposingGridOverlay)
+you can create new ops from existing ops. We call those subpatch ops. You can recognize them by the border around the op.
 
 there are multiple ways to patch ops. you can use the "Patch a new op" item in the menu, or select multiple ops and find a button in the right panel to create an op from the selection.
 
