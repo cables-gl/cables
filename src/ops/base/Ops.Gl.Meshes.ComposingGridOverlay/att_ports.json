@@ -1,0 +1,29 @@
+{
+    "ports": [
+        {
+            "id": "d19uw4ogh",
+            "title": "Render",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "m8bjeyajy",
+            "title": "Scale",
+            "dir": 0,
+            "type": 0,
+            "value": 1,
+            "uiDisplay": "range",
+            "order": 1
+        },
+        {
+            "id": "3yfne154r",
+            "title": "Show Center",
+            "dir": 0,
+            "type": 0,
+            "value": 1,
+            "uiDisplay": "bool",
+            "order": 2
+        }
+    ]
+}
