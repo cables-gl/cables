@@ -74,6 +74,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1706607102146
+        },
+        {
+            "message": "Ops.Html.Event.ElementPointerEvents renamed to Ops.Html.Event.ElementPointerEvents_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706607183423
         }
     ]
 }
