@@ -18,9 +18,9 @@ WebGL1 only supports [mipmapping]() for power of two textures. What does that me
 
 Put simply, mipmapping saves your texture in different resolutions internally so the graphics card can choose which resolution is optimal to display your texture without artifacts. See the following picture for a visual explanation:
 
-![mipmapping](img/Mipmap_Aliasing_Comparison.png)
+![mipmapping](img/mipmap_aliasing_comparison.png)
 
-[Source 1]: https://en.wikipedia.org/wiki/Mipmap#/media/File:Mipmap_Aliasing_Comparison.png
+[Source 1]: https://en.wikipedia.org/wiki/Mipmap#/media/File:mipmap_aliasing_comparison.png
 
 As you can see, there are moiré artefacts in the background without mipmapping. These disappear when mipmapping is enabled.
 When using the [Texture op](https://cables.gl/op/Ops.Gl.Texture_v2), mipmapping is enabled automatically.
