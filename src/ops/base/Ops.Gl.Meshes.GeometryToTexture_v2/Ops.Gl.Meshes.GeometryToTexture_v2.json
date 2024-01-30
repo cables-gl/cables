@@ -25,6 +25,12 @@
             "message": " added core lib: cgl_shadermodifier",
             "author": "pandur",
             "date": 1663952297125
+        },
+        {
+            "message": "Add Resize/Rescale option, resize vertices to new bounding",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706539979306
         }
     ],
     "authorName": "pandur",
@@ -32,77 +38,87 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Render"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Geometry",
                 "objType": "geometry"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Continously Update",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Order index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Content index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
+                "name": "Resize index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "New Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Size index",
                 "group": "Texture settings",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Tex Width",
                 "group": "Texture settings",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "filter index",
                 "group": "Texture settings",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "wrap index",
                 "group": "Texture settings",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Pixel Format index",
                 "group": "Texture settings",
                 "subType": "integer"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Color Texture",
                 "objType": "texture"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Next"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Total Vertices",
                 "subType": "number"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Texture",
                 "objType": "texture"
             }
@@ -111,7 +127,6 @@
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-
     "exampleProjectId": "bhWkpX",
     "docs": {
         "ports": []

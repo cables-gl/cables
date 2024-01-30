@@ -12,6 +12,8 @@
     MOD_pos=texture(MOD_texColor,attrTexCoord).rgb;
 #endif
 
+MOD_pos*=MOD_mul;
+
 float tx = mod(attrVertIndex,MOD_texSize)+(1.0/MOD_texSize);
 float ty = ((attrVertIndex)/MOD_texSize);
 
