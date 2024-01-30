@@ -45,13 +45,13 @@ Fortunately, cables allows you to resize a texture to the closest power of two w
 
 If you open the file browser and click on the texture you desire to resize, the following options will appear:
 
-![resize_start](img/resize_POT.png)
+![resize_start](img/resize_pot.png)
 
 If you look at the bottom of the screenshot, you can see marked in yellow the current size of your image. At the bottom right of your dimensions, there are a few buttons that allow you to process your image through cables. The relevant button to resize to the next power of two is marked in bright green.
 
 After clicking it, a dialogue appears and asks you if you want to resize the texture. If you do that, the following dialogue will appear:
 
-![resize_start](img/resized_POT.png)
+![resize_start](img/resized_pot.png)
 
 Your texture is now resized to the next power of two and usable for mipmapping in WebGL1.
 

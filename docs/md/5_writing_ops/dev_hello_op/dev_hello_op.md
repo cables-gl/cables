@@ -30,7 +30,7 @@ In this example we will just forward the input value to an out-port. So let’s 
 const myOutPort = op.outNumber("Output");
 ```
 
-In the top of the editor window click on `Save` the new code will then be executed, now reload the patch (the browser window) by pressing `cmd + r`. 
+In the top of the editor window click on `Save` the new code will then be executed, now reload the patch (the browser window) by pressing `cmd + r`.
 Now click on `Op` —> `Add` (or use the `Esc`-Shortcut) on the very top of the window, enter the name of the op you just created – `HelloOp` and press Enter.
 
 You now see your newly created op with one input- and one output-port:
@@ -100,7 +100,7 @@ const multiplyValueIn = op.inFloat("Multiply amount");
 This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
 Your op should now look like this
 
-![](img/b-port_in_multiply_amount.PNG)
+![](img/b-port_in_multiply_amount.png)
 
 
 Your code should look like this
