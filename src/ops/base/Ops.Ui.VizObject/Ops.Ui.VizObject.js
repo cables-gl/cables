@@ -22,21 +22,8 @@ inObj.onChange = () =>
         obj = obj.getInfo();
     }
 
-    if (obj instanceof Element)
-    {
-        const o = {};
-
-        o.id = obj.getAttribute("id");
-        o.classes = obj.classList.value;
-        o.innerText = obj.innerText;
-        o.tagName = obj.tagName;
-
-        obj = o;
-    }
-
     if (obj && obj.constructor && obj.constructor.name != "Object")
     {
-        // str =  + "()\n" + str;
         op.setUiAttribs({ "extendTitle": obj.constructor.name });
     }
 
@@ -44,19 +31,32 @@ inObj.onChange = () =>
     {
         str = JSON.stringify(obj, false, 4);
 
-        if (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object")
+        if (
+            obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
+            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
         {
             str = "could not stringify object: " + obj.constructor.name + "\n";
 
-            if (obj) for (let i in obj)
+            const o = {};
+            for (const i in obj)
             {
-                str += "\n" + i + " (" + typeof obj[i] + ")";
+                if (!obj[i]) continue;
+
+                if (obj[i].constructor)
+                {
+                    if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
+                        o[i] = obj[i];
+                }
+                else
+                    o[i] = "{???}";
             }
+            obj = o;
+            str = JSON.stringify(obj, false, 4);
         }
     }
     catch (e)
     {
-        str = "object can not be displayed as string";
+        str = "object can not be displayed as string", e.msg;
     }
 
     if (str === undefined)str = "undefined";

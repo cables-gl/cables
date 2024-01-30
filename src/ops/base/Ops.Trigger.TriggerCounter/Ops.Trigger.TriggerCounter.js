@@ -6,6 +6,7 @@ const
 
 op.toWorkPortsNeedToBeLinked(exe);
 
+op.setUiAttrib({ "extendTitle": 0 });
 let n = 0;
 
 reset.onTriggered =
