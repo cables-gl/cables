@@ -89,6 +89,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1678983298849
+        },
+        {
+            "message": "Ops.Dev.RgbMathExpression renamed to Ops.Gl.ImageCompose.Math.RgbMathExpression",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706629029245
         }
     ],
     "issues": "",

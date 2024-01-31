@@ -10,6 +10,12 @@
             "message": "cloned op from Ops.Team.Dev.StackValueSetNumber",
             "author": "pandur",
             "date": 1704364444906
+        },
+        {
+            "message": "Ops.Dev.StackValues.StackGetNumber renamed to Ops.Data.StackValues.StackGetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706629155748
         }
     ],
     "layout": {

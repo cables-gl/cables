@@ -10,7 +10,9 @@ const
     mouseClick = op.outTrigger("click"),
     mouseClickRight = op.outTrigger("click right"),
     mouseDown = op.outBoolNum("Button is down"),
-    mouseOver = op.outBoolNum("Mouse is hovering");
+    mouseOver = op.outBoolNum("Mouse is hovering"),
+    outMovementX = op.outNumber("Movement X", 0),
+    outMovementY = op.outNumber("Movement Y", 0);
 
 const cgl = op.patch.cgl;
 let normalize = 1;
@@ -117,10 +119,10 @@ active.onChange = function ()
 
 function updateCoordNormalizing()
 {
-    if (inCoords.get() == "Pixel")normalize = 0;
-    else if (inCoords.get() == "-1 to 1")normalize = 1;
-    else if (inCoords.get() == "0 to 1")normalize = 2;
-    else if (inCoords.get() == "Pixel Display")normalize = 3;
+    if (inCoords.get() == "Pixel") normalize = 0;
+    else if (inCoords.get() == "-1 to 1") normalize = 1;
+    else if (inCoords.get() == "0 to 1") normalize = 2;
+    else if (inCoords.get() == "Pixel Display") normalize = 3;
 }
 
 function onMouseEnter(e)
@@ -185,6 +187,9 @@ function onmousemove(e)
 {
     mouseOver.set(checkHovering(e));
     setCoords(e);
+
+    outMovementX.set(e.movementX / cgl.pixelDensity);
+    outMovementY.set(e.movementY / cgl.pixelDensity);
 }
 
 function ontouchmove(e)
@@ -238,16 +243,18 @@ function addListeners()
 
     if (touchscreen.get())
     {
-        listenerElement.addEventListener("touchend", ontouchend);
-        listenerElement.addEventListener("touchstart", ontouchstart);
-        listenerElement.addEventListener("touchmove", ontouchmove);
+        listenerElement.addEventListener("touchend", ontouchend, false);
+        listenerElement.addEventListener("touchstart", ontouchstart, false);
+        listenerElement.addEventListener("touchmove", ontouchmove, false);
     }
 
-    listenerElement.addEventListener("mousemove", onmousemove);
-    listenerElement.addEventListener("mouseleave", onMouseLeave);
-    listenerElement.addEventListener("mousedown", onMouseDown);
-    listenerElement.addEventListener("mouseup", onMouseUp);
-    listenerElement.addEventListener("mouseenter", onMouseEnter);
-    listenerElement.addEventListener("contextmenu", onClickRight);
-    listenerElement.addEventListener("click", onmouseclick);
+    listenerElement.addEventListener("mousemove", onmousemove, false);
+    listenerElement.addEventListener("mouseleave", onMouseLeave, false);
+    listenerElement.addEventListener("mousedown", onMouseDown, false);
+    listenerElement.addEventListener("mouseup", onMouseUp, false);
+    listenerElement.addEventListener("mouseenter", onMouseEnter, false);
+    listenerElement.addEventListener("contextmenu", onClickRight, false);
+    listenerElement.addEventListener("click", onmouseclick, false);
 }
+
+//

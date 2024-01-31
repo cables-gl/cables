@@ -1,0 +1,46 @@
+{
+    "id": "a86a0bdc-dd09-458e-b1c9-31ca2cb36da7",
+    "created": 1706692165490,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1706692165490
+        },
+        {
+            "message": "Ops.Patch.Pds6IV2.PointerLock renamed to Ops.Devices.Mouse.PointerLock",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706698541759
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Supported",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Locked",
+                "subType": "boolean"
+            }
+        ]
+    }
+}

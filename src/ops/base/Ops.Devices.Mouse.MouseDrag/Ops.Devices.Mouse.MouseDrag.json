@@ -5,39 +5,39 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Speed",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Input Type index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Area index",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "Delta X",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Delta Y",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Is Dragging",
                 "subType": "number"
             }
@@ -48,8 +48,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "added area option for canvas \"parent\" element",
