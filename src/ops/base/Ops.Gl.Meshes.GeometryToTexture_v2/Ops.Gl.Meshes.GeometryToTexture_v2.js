@@ -6,6 +6,9 @@ const
     inOrder = op.inDropDown("Order", ["Sequential", "Random", "Vertex X", "Vertex Y", "Vertex Z"], "Sequential"),
     inAttrib = op.inDropDown("Content", ["Vertex Pos", "Normals", "TexCoords", "Texture Color"], "Vertex Pos"),
 
+    inResize = op.inSwitch("Resize", ["None", "Rescale"]),
+    inResizeNewSize = op.inFloat("New Size", 1),
+
     inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
     inWidth = op.inValueInt("Tex Width", 256),
     tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
@@ -33,6 +36,7 @@ let needInitFb = true;
 let mesh = null;
 let vertNums = new Float32Array(1);
 let numVerts = 1;
+let gotBounds = false;
 
 inPixelFormat.onChange =
 tfilter.onChange =
@@ -61,6 +65,7 @@ mod.addModule({
     "srcHeadFrag": "IN vec3 MOD_pos;",
     "srcBodyFrag": attachments.fragpos_frag
 });
+mod.addUniformVert("f", "MOD_mul", 1);
 mod.addUniformVert("f", "MOD_texSize", 0);
 mod.addUniformVert("t", "MOD_texColor", 0);
 updateAttrib();
@@ -80,12 +85,32 @@ function shuffleArray(array)
     }
 }
 
+inResize.onChange =
+inResizeNewSize.onChange =
 inTexColor.onChange =
 inGeom.onChange = function ()
 {
     needsUpdateSize = true;
     needsUpdate = true;
+    gotBounds = false;
 };
+
+function updateRescale()
+{
+    inResizeNewSize.setUiAttribs({ "greyout": inResize.get() != "Rescale" });
+
+    if (inResize.get() == "Rescale")
+    {
+        const g = inGeom.get();
+        if (!g) return;
+        const b = g.getBounds();
+
+        console.log("rescale", b._maxAxis);
+
+        mod.setUniformValue("MOD_mul", inResizeNewSize.get() / b._maxAxis);
+        gotBounds = true;
+    }
+}
 
 function updateAttrib()
 {
@@ -228,12 +253,9 @@ exec.onTriggered = function ()
     for (let i = 0; i < numVerts; i++) vertNums[i] = i;
 
     if (inOrder.get() == "Random") shuffleArray(vertNums);
-    if (inOrder.get() == "Vertex X")
-        vertNums.sort(function (a, b) { return g.vertices[a * 3 + 0] - g.vertices[b * 3 + 0]; });
-    if (inOrder.get() == "Vertex Y")
-        vertNums.sort(function (a, b) { return g.vertices[a * 3 + 1] - g.vertices[b * 3 + 1]; });
-    if (inOrder.get() == "Vertex Z")
-        vertNums.sort(function (a, b) { return g.vertices[a * 3 + 2] - g.vertices[b * 3 + 2]; });
+    if (inOrder.get() == "Vertex X") vertNums.sort(function (a, b) { return g.vertices[a * 3 + 0] - g.vertices[b * 3 + 0]; });
+    if (inOrder.get() == "Vertex Y") vertNums.sort(function (a, b) { return g.vertices[a * 3 + 1] - g.vertices[b * 3 + 1]; });
+    if (inOrder.get() == "Vertex Z") vertNums.sort(function (a, b) { return g.vertices[a * 3 + 2] - g.vertices[b * 3 + 2]; });
 
     mesh._setVertexNumbers(vertNums);
 
@@ -287,6 +309,7 @@ function render()
         -1.00, 100);
 
     mod.bind();
+    if (!gotBounds) updateRescale();
 
     mod.setUniformValue("MOD_texSize", size);
     mesh.render(cgl.getShader());

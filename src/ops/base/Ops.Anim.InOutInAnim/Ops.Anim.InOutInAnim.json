@@ -2,69 +2,69 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Update"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Duration Out",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Easing Out index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Value Out",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Hold duration",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Duration In",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Easing In index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Value In",
                 "subType": "number"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "Start"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Next"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Result",
                 "subType": "number"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "Started"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "Middle"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "finished"
             }
         ]

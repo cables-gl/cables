@@ -1,0 +1,54 @@
+{
+    "id": "21f5515b-21cc-4d4a-b47a-279b0a0c9efc",
+    "created": 1706620823233,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1706620823233
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1706620824020
+        },
+        {
+            "message": "Ops.Patch.PG8mQQ2.SubPatch0 renamed to Ops.Gl.Meshes.ComposingGridOverlay",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706621319614
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "d19uw4ogh",
+                "uititle": "Render"
+            },
+            {
+                "type": "0",
+                "name": "m8bjeyajy",
+                "uititle": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "3yfne154r",
+                "uititle": "Show Center",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": []
+    },
+    "summary": "Rule of thirds image composition helper",
+    "exampleProjectId": "G8mQQ2",
+    "docs": {
+        "ports": []
+    }
+}

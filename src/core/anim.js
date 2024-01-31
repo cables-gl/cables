@@ -224,7 +224,7 @@ Anim.prototype.setValue = function (time, value, cb)
             });
         this.keys.push(found);
 
-        if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
+        // if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
         this._updateLastIndex();
     }
 
@@ -299,7 +299,7 @@ Anim.prototype.getValue = function (time)
 
     if (!this.loop && time > this.keys[this._lastKeyIndex].time)
     {
-        // if (this.name)console.log("lastkey", this.name, this._lastKeyIndex, this.keys.length, this.keys[this._lastKeyIndex].time);
+        if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
 
         return this.keys[this._lastKeyIndex].value;
     }
@@ -328,7 +328,7 @@ Anim.prototype.getValue = function (time)
     {
         if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
 
-        // if (this.name)console.log("B");
+        if (this.name)console.log("B", this.keys[this._lastKeyIndex].cbTriggered);
 
         return this.keys[this._lastKeyIndex].value;
     }
