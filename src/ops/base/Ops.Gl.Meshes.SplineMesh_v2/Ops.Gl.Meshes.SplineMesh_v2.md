@@ -1,0 +1,1 @@
+Draws either one polyline (line strip)  or a set of polylines, depending on whether the Points input contains an Array3 or an array of Array3.

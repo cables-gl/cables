@@ -49,10 +49,14 @@
     },
     "summary": "draw splines/lines",
     "issues": "",
-    "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Points",
+                "text": "Either an Array3 or an array of Array3"
+            }
+        ]
     },
     "exampleProjectId": "3l5Uu-"
 }

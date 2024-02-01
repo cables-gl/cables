@@ -178,11 +178,11 @@
         }
     ],
     "issues": "",
-    "relatedops": null,
     "youtubeids": [
         "ZZKdaQw1bMo"
     ],
     "coreLibs": [
         "cgl_copytexture"
-    ]
+    ],
+    "exampleProjectId": "dNv2r1"
 }

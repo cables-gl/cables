@@ -24,13 +24,11 @@
             }
         ]
     },
-    "summary": "check if array contains a string or number (find,search,indexOf)",
+    "summary": "check if array contains a number (find,search,indexOf)",
     "authorName": "simod",
     "id": "b982d7e3-c9cf-41dd-aead-66daad785fa8",
     "created": 1619617451517,
-    "youtubeid": "",
     "issues": "",
-    "relatedops": null,
     "docs": {
         "ports": [
             {
