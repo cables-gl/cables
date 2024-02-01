@@ -1,5 +1,5 @@
 {
-    "id": "57fec2b8-ebb8-4391-bd2c-bd5eae79a562",
+    "id": "75d6582c-90bf-4aff-9047-b05d32ab2c2b",
     "changelog": [
         {
             "message": "created op",
@@ -10,6 +10,17 @@
             "message": "cloned op from Ops.Team.Dev.StackValueSetNumber",
             "author": "pandur",
             "date": 1704385288066
+        },
+        {
+            "message": "cloned op from Ops.Team.Dev.StackValueSetTexture",
+            "author": "pandur",
+            "date": 1704960945761
+        },
+        {
+            "message": "Ops.Dev.StackValues.StackPushArray renamed to Ops.Data.StackValues.StackPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706629130973
         }
     ],
     "layout": {
@@ -23,9 +34,8 @@
                 "name": "Name"
             },
             {
-                "type": 2,
-                "name": "Texture",
-                "objType": "texture"
+                "type": 3,
+                "name": "ArrayOps.Team.MEvent_OTjRYN.SidebarEventManagement"
             }
         ],
         "portsOut": [
@@ -36,7 +46,7 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1704385288065,
+    "created": 1704960945760,
     "summary": "push a value on to the stack to use it later in the trigger branch",
     "docs": {
         "ports": []

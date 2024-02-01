@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1704363880148
+        },
+        {
+            "message": "Ops.Dev.StackValues.StackPushNumber renamed to Ops.Data.StackValues.StackPushNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706629175926
         }
     ],
     "layout": {

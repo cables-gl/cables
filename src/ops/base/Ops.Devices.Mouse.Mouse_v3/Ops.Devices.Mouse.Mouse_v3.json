@@ -28,75 +28,90 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1671034850149
+        },
+        {
+            "message": "added outputs Movement X/Y outputs the delta of mouse position",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706698494011
         }
     ],
     "layout": {
         "portsIn": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "Coordinates index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Area index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "flip y",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "right click prevent default",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Touch support",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Active",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "x",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "y",
                 "subType": "number"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "click"
             },
             {
-                "type": 1,
+                "type": "1",
                 "name": "click right"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Button is down",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Mouse is hovering",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Movement X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Movement Y",
+                "subType": "number"
             }
         ]
     },
     "authorName": "pandur",
     "created": 1668760408364,
-
     "exampleProjectId": "mDiCq6",
     "docs": {
         "ports": []

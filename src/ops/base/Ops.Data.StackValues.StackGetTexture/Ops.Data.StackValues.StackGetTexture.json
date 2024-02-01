@@ -15,6 +15,12 @@
             "message": "cloned op from Ops.Team.Dev.StackValueGetNumber",
             "author": "pandur",
             "date": 1704385300737
+        },
+        {
+            "message": "Ops.Dev.StackValues.StackGetTexture renamed to Ops.Data.StackValues.StackGetTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706629142804
         }
     ],
     "layout": {
