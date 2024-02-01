@@ -122,13 +122,6 @@ Disable ops and its children by pressing `d`
 <br />
 
 
-Temporarily disconnect/bypass a selected op by pressing `shift+d`, pressing `shift+d` again reconnects the cable
-
-![alt text](video/q_disable_op_with_shift_and_d_key.gif)
-<br />
-<br />
-
-
 Upload files by **dragging them** into the window
 
 ![alt text](video/r_add_file_drag_and_drop.gif)
