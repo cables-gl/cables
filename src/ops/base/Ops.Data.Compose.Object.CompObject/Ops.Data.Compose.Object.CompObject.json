@@ -1,0 +1,59 @@
+{
+    "id": "c85b449b-fb4e-40b3-928e-5eea6a5d0ebc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680618448912
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateObject renamed to Ops.Team.CompOps.Dev.CompObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626262461
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompObject renamed to Ops.Team.CompOps.CompObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661435571
+        },
+        {
+            "message": "Ops.Team.CompOps.CompObject renamed to Ops.Data.Compose.CompObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167306482
+        },
+        {
+            "message": "Ops.Data.Compose.CompObject renamed to Ops.Data.Compose.Object.CompObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776277887
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1680618476170,
+    "summary": "Compose an Object",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Theojz"
+}

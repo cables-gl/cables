@@ -1,0 +1,72 @@
+{
+    "id": "1c6974a0-3f70-4a64-8bb6-3d8ac99beab4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680618712710
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateObjectSetNumber renamed to Ops.Team.CompOps.Dev.CompObjectSetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680625199563
+        },
+        {
+            "message": "cloned op from Ops.Team.CompOps.Dev.CompObjectSetNumber",
+            "author": "pandur",
+            "date": 1680627161559
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompObjectSetArray renamed to Ops.Team.CompOps.CompObjectSetArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661423538
+        },
+        {
+            "message": "cloned op from Ops.Team.CompOps.CompObjectSetArray",
+            "author": "pandur",
+            "date": 1686670743687
+        },
+        {
+            "message": "Ops.Team.CompOps.CompObjectSetObject renamed to Ops.Data.Compose.CompObjectSetObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167336744
+        },
+        {
+            "message": "Ops.Data.Compose.CompObjectSetObject renamed to Ops.Data.Compose.Object.CompObjectSetObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776337164
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1686670743687,
+    "summary": "set object as object property",
+    "docs": {
+        "ports": []
+    }
+}

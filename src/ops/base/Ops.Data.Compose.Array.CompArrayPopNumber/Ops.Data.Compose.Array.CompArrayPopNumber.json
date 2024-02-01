@@ -1,0 +1,59 @@
+{
+    "id": "638a9336-15f3-4228-b5db-88aa25c3d16f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680618152204
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateArrayPopNumber renamed to Ops.Team.CompOps.Dev.CompArrayPopNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626236356
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompArrayPopNumber renamed to Ops.Team.CompOps.CompArrayPopNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661474640
+        },
+        {
+            "message": "Ops.Team.CompOps.CompArrayPopNumber renamed to Ops.Data.Compose.CompArrayPopNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167227378
+        },
+        {
+            "message": "Ops.Data.Compose.CompArrayPopNumber renamed to Ops.Data.Compose.Array.CompArrayPopNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776168776
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1680618157701,
+    "summary": "pop/remove the last number from an array",
+    "docs": {
+        "ports": []
+    }
+}
