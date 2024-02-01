@@ -51,6 +51,8 @@ const
     outAspect = op.outNumber("Aspect", 1),
     outLines = op.outNumber("Num Lines");
 
+const SPACE = " ";
+
 r.setUiAttribs({ "colorPick": true });
 bgR.setUiAttribs({ "colorPick": true });
 
@@ -239,22 +241,22 @@ function autoLineBreaks(strings)
             continue;
         }
         let sumWidth = 0;
-        const words = strings[i].split(" ");
+        const words = strings[i].split(SPACE);
 
         for (let j = 0; j < words.length; j++)
         {
             if (!words[j]) continue;
-            sumWidth += ctx.measureText(words[j] + " ").width;
+            sumWidth += ctx.measureText(words[j] + SPACE).width;
 
             if (sumWidth > texSizeManWidth.get())
             {
                 // found = true;
-                newString += "\n" + words[j] + " ";
-                sumWidth = ctx.measureText(words[j] + " ").width;
+                newString += "\n" + words[j] + SPACE;
+                sumWidth = ctx.measureText(words[j] + SPACE).width;
             }
             else
             {
-                newString += words[j];
+                newString += words[j] + SPACE;
             }
         }
         newString += "\n";
@@ -282,8 +284,8 @@ function refresh()
     ctx.fillStyle = rgbString;
     let fontSize = parseFloat(inFontSize.get());
     let fontname = font.get();
-    if (fontname.indexOf(" ") > -1) fontname = "\"" + fontname + "\"";
-    ctx.font = weight.get() + " " + fontSize + "px " + fontname + "";
+    if (fontname.indexOf(SPACE) > -1) fontname = "\"" + fontname + "\"";
+    ctx.font = weight.get() + SPACE + fontSize + "px " + fontname + "";
 
     ctx.textBaseline = "top";
     ctx.textAlign = align.get();
@@ -296,7 +298,7 @@ function refresh()
     needsRefresh = false;
 
     let paddingY = Math.max(0, inPaddingY.get());
-    let paddingYBot = inPaddingYBot.get();
+    let paddingYBot = Math.max(0, inPaddingYBot.get());
     let paddingX = Math.max(0, inPaddingX.get());
 
     autoWidth = 0;
@@ -309,8 +311,6 @@ function refresh()
             strings = autoLineBreaks(strings);
         }
     }
-
-    // console.log(ctx.measureText(" "));
 
     const lineHeights = [];
 
@@ -328,7 +328,6 @@ function refresh()
     }
 
     autoWidth += paddingX * 2;
-    autoHeight += paddingY + paddingYBot;
 
     if (inLineHeight.get() < 0)autoHeight += (inLineHeight.get() / 2) * -1;
 
@@ -341,7 +340,6 @@ function refresh()
         if (!texSizeAutoHeight.get())
         {
             autoHeight = texSizeManHeight.get();
-            // paddingY = 0;
         }
     }
 
@@ -354,11 +352,13 @@ function refresh()
     autoHeight = Math.min(cgl.maxTexSize, autoHeight);
     autoWidth = Math.min(cgl.maxTexSize, autoWidth);
 
-    autoHeight += paddingY + paddingYBot;
+    let posy = 0;
+    if (valign.get() == "Middle") posy = (autoHeight - calcHeight) / 2;
+    else if (valign.get() == "Bottom") posy = (autoHeight - calcHeight);
 
-    let posy = paddingY;
-    if (valign.get() == "Middle")posy = (autoHeight - calcHeight) / 2 + paddingY;
-    else if (valign.get() == "Bottom")posy = (autoHeight - calcHeight) + paddingY;
+    posy += paddingY;
+
+    autoHeight += paddingY + paddingYBot;
 
     if (ctx.canvas.width != autoWidth || ctx.canvas.height != autoHeight) reSize();
 
