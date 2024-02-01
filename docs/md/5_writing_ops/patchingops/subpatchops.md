@@ -8,9 +8,7 @@ there are multiple ways to patch ops. you can use the "Patch a new op" item in t
 
 ## Hierarchy of namespaces
 
-namespaces do not only categorize and group operators, they also control who can access ops.
-The outcome of this is a nested hierarchy how ops can use certain ops or not.
-
+namespaces do not only categorize and group operators, they also control who can access ops. The outcome of this is a nested hierarchy how ops can use certain ops or not.
 
 | Namespace Prefix |  |
 | ----------- | --------- |
