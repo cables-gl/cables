@@ -1,0 +1,31 @@
+{
+    "id": "4b5d1e60-460d-41be-8de0-e70b75801b70",
+    "created": 1706777747148,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1706777747148
+        },
+        {
+            "message": "Ops.Patch.PZjYu13.EmptyArray renamed to Ops.Array.EmptyArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706777795953
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "An Empty Array",
+    "docs": {
+        "ports": []
+    }
+}
