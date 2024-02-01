@@ -1,6 +1,6 @@
 const
     inFocus = op.inTriggerButton("Focus"),
-    hasFocus = op.outBool("has focus");
+    hasFocus = op.outBoolNum("has focus");
 
 op.onDelete = removeListeners;
 addListeners();

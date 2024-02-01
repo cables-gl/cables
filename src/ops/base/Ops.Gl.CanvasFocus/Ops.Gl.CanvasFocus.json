@@ -2,13 +2,13 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Focus"
             }
         ],
         "portsOut": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "has focus",
                 "subType": "boolean"
             }
@@ -18,7 +18,6 @@
     "authorName": "pandur",
     "id": "e235ea77-f697-475a-8799-d5e4deed7204",
     "created": 1518602044950,
-
     "exampleProjectId": "vGwM7f",
     "docs": {
         "ports": []
