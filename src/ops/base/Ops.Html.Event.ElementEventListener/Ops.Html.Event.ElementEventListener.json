@@ -68,5 +68,13 @@
                 "text": "The event object contains details about the event"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.Event.CustomEventListener renamed to Ops.Html.Event.ElementEventListener",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776830796
+        }
+    ]
 }

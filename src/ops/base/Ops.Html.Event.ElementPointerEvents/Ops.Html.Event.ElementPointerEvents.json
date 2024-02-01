@@ -96,8 +96,15 @@
     "summary": "Listen to events of an element",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.EventListener renamed to Ops.Html.Event.ElementPointerEvents",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776775380
+        }
+    ]
 }
