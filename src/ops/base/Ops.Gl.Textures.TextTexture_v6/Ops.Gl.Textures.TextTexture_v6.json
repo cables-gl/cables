@@ -302,66 +302,6 @@
                 "text": "trigger input"
             },
             {
-                "name": "text",
-                "text": "text to be put in the texture"
-            },
-            {
-                "name": "font",
-                "text": "the font to be used"
-            },
-            {
-                "name": "Maximize Size",
-                "text": "check to maximize size"
-            },
-            {
-                "name": "fontSize",
-                "text": "font size"
-            },
-            {
-                "name": "Line Height",
-                "text": "line height of text"
-            },
-            {
-                "name": "Vertical Offset",
-                "text": "vertical offset of text"
-            },
-            {
-                "name": "Show Debug",
-                "text": "show outlines for debugging"
-            },
-            {
-                "name": "Limit Lines",
-                "text": "maximum line amount"
-            },
-            {
-                "name": "texture width",
-                "text": "width of texture"
-            },
-            {
-                "name": "texture height",
-                "text": "height of texture"
-            },
-            {
-                "name": "filter",
-                "text": "type of texture filtering to be applied"
-            },
-            {
-                "name": "Anisotropic",
-                "text": "anisotropy value"
-            },
-            {
-                "name": "align",
-                "text": "horizontal alignment of text: left, center, right"
-            },
-            {
-                "name": "vertical align",
-                "text": "vertical alignment of text: top, center, bottom"
-            },
-            {
-                "name": "Reuse Texture",
-                "text": "check if texture should be reused"
-            },
-            {
                 "name": "Draw Mesh",
                 "text": "check if rectangle with the texture should be drawn"
             },
@@ -370,12 +310,24 @@
                 "text": "size of the mesh"
             },
             {
-                "name": "Hard Edges",
-                "text": "check for hard edges"
+                "name": "text",
+                "text": "text to be put in the texture"
             },
             {
-                "name": "Opacity",
-                "text": "alpha value of texture"
+                "name": "font",
+                "text": "the font to be used"
+            },
+            {
+                "name": "fontSize",
+                "text": "font size"
+            },
+            {
+                "name": "Reuse Texture",
+                "text": "check if texture should be reused"
+            },
+            {
+                "name": "Show Debug",
+                "text": "show outlines for debugging"
             },
             {
                 "name": "r",
@@ -388,6 +340,10 @@
             {
                 "name": "b",
                 "text": "b color of text"
+            },
+            {
+                "name": "Opacity",
+                "text": "alpha value of texture"
             },
             {
                 "name": "Next",
@@ -411,5 +367,6 @@
             }
         ]
     },
-    "caniusequery": ""
+    "caniusequery": "",
+    "exampleProjectId": "RZsPWU"
 }
