@@ -85,6 +85,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1706113725774
+        },
+        {
+            "message": "Ops.Gl.ImageCompose.ToneMap renamed to Ops.Dev.Gl.ImageCompose.ToneMap",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706782485855
         }
     ],
     "exampleProjectId": "7mQ5i2"
