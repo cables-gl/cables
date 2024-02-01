@@ -153,7 +153,7 @@
             },
             {
                 "type": "0",
-                "name": "Atlas Repeat X",
+                "name": "Atlas Repeat X ",
                 "group": "Atlas",
                 "subType": "number"
             },
