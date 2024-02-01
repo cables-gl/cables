@@ -40,15 +40,7 @@
     },
     "summary": "Calculates the sine of an angle.",
     "docs": {
-        "ports": [
-            {
-                "name": "Value",
-                "text": "Value input in radians"
-            },
-            {
-                "name": "Result",
-                "text": "Output in the range -1 to 1"
-            }
-        ]
-    }
+        "ports": []
+    },
+    "exampleProjectId": "RhfUW2"
 }

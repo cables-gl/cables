@@ -106,9 +106,8 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "",
+    "exampleProjectId": "j_I1TG",
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",
