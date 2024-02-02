@@ -110,6 +110,8 @@ function updateRescale()
         mod.setUniformValue("MOD_mul", inResizeNewSize.get() / b._maxAxis);
         gotBounds = true;
     }
+    else
+        mod.setUniformValue("MOD_mul", 1);
 }
 
 function updateAttrib()
