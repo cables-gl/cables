@@ -34,7 +34,7 @@ inAbsolute.onChange = function ()
     mod.toggleDefine("MOD_ABSOLUTE", inAbsolute.get());
 };
 
-const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "title": op.objName,
     "name": "MODULE_VERTEX_POSITION",

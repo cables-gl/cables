@@ -25,7 +25,7 @@ let srcBodyVert = ""
 
     .endl();
 
-const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.perlin_instposition_vert,

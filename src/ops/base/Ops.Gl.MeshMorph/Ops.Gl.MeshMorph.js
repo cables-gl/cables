@@ -37,7 +37,7 @@ const srcBodyVert = ""
 
     .endl();
 
-const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addUniform("f", "MOD_fade", 1);
 mod.addUniform("f", "MOD_doMorph", 1);
 mod.addModule({

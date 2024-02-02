@@ -38,7 +38,7 @@ const Mesh = function (_cgl, __geom, options)
     this._geom = null;
     this._lastShader = null;
     this._numInstances = 0;
-    this._glPrimitive = options.glPrimitive || 0;
+    this._glPrimitive = options.glPrimitive || undefined;
     this.opId = options.opId || "";
     this._preWireframeGeom = null;
     this.addVertexNumbers = false;
@@ -724,7 +724,7 @@ Mesh.prototype.render = function (shader)
     MESH.lastMesh = this;
 
     let prim = this._cgl.gl.TRIANGLES;
-    if (this._glPrimitive) prim = this._glPrimitive;
+    if (this._glPrimitive !== undefined) prim = this._glPrimitive;
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
     let elementDiv = 1;
