@@ -39,8 +39,7 @@ const Mesh = function (_cgl, __geom, _options)
     this._geom = null;
     this._lastShader = null;
     this._numInstances = 0;
-    this._glPrimitive = options.glPrimitive || undefined;
-    console.log("glPrimitive", this._glPrimitive);
+    this._glPrimitive = options.glPrimitive;
 
     this.opId = options.opId || "";
     this._preWireframeGeom = null;
