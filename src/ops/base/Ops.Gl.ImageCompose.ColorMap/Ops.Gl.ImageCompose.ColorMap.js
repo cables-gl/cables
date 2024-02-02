@@ -15,7 +15,7 @@ let inPos = op.inValueSlider("Position", 0.5);
 op.setPortGroup("Vertical Position", [inMin, inMax, inPos]);
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 shader.define("METH_LUMI");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.colormap_frag);

@@ -17,7 +17,7 @@ op.toWorkPortsNeedToBeLinked(render);
 fragmentShader.setUiAttribs({ "editorSyntax": "glsl" });
 vertexShader.setUiAttribs({ "editorSyntax": "glsl" });
 
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 

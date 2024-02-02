@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
-    inInput=op.inSwitch("Input",['Luminance','R','G','B'],'default'),
-    inInvert=op.inBool("Invert",false),
+    inInput = op.inSwitch("Input", ["Luminance", "R", "G", "B"], "default"),
+    inInvert = op.inBool("Invert", false),
     next = op.outTrigger("Next");
 
 
@@ -22,7 +22,7 @@ inInput.onChange =
 
 render.onTriggered = doRender;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": 2,
     "title": op.name,
@@ -43,10 +43,10 @@ updateDefines();
 
 function updateDefines()
 {
-    mod.toggleDefine("MOD_INPUT_R", inInput.get()==="R");
-    mod.toggleDefine("MOD_INPUT_G", inInput.get()==="G");
-    mod.toggleDefine("MOD_INPUT_B", inInput.get()==="B");
-    mod.toggleDefine("MOD_INPUT_LUMI", inInput.get()==="Luminance");
+    mod.toggleDefine("MOD_INPUT_R", inInput.get() === "R");
+    mod.toggleDefine("MOD_INPUT_G", inInput.get() === "G");
+    mod.toggleDefine("MOD_INPUT_B", inInput.get() === "B");
+    mod.toggleDefine("MOD_INPUT_LUMI", inInput.get() === "Luminance");
     mod.toggleDefine("MOD_INVERT", inInvert.get());
 }
 

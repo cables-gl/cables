@@ -27,7 +27,7 @@ const srcBodyVert = ""
 
 let moduleVert = null;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",

@@ -10,7 +10,7 @@ let texWidth = op.inValueInt("width");
 let texHeight = op.inValueInt("height");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.fxaa_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

@@ -22,7 +22,7 @@ const trigger = op.outTrigger("trigger");
 r.setUiAttribs({ "colorPick": true });
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.wave_v2_frag);
 

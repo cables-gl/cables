@@ -3,7 +3,7 @@ const
     inMeth = op.inSwitch("Output RGB", ["HSB", "Hue", "Sat", "Bright", "Sat*Bright"], "HSB"),
     trigger = op.outTrigger("trigger"),
     cgl = op.patch.cgl,
-    shader = new CGL.Shader(cgl, op.name);
+    shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.tonormal_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

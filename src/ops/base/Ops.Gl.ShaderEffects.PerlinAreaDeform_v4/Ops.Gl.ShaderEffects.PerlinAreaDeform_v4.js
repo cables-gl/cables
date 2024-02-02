@@ -19,7 +19,7 @@ const
     scrollz = op.inValueFloat("Scroll Z");
 
 const cgl = op.patch.cgl;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 
 inFlipNormals.onChange =
 inCalcNormals.onChange = updateCalcNormals;

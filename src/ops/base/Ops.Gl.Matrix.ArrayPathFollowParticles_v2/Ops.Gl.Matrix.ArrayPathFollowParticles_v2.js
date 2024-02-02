@@ -17,7 +17,7 @@ let needsRebuild = true;
 let geom = null;
 let updateUniformPoints = false;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "title": op.objName,
     "name": "MODULE_VERTEX_POSITION",

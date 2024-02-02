@@ -4,7 +4,7 @@ let m = null;
 
 const cgl = op.patch.cgl;
 
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 const num = cgl.maxTextureUnits;
 

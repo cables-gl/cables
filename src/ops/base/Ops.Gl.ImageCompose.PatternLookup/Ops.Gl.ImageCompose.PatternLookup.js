@@ -8,7 +8,7 @@ const patternWidth = op.inValueSlider("Width", 0.1);
 const patternHeight = op.inValueSlider("Height", 0.1);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 op.toWorkPortsNeedToBeLinked(multiplierTex);
 

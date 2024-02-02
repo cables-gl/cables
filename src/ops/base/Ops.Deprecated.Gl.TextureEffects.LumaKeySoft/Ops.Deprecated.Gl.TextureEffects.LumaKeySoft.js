@@ -9,7 +9,7 @@ let mul = op.inValue("Amount", 2.0);
 threshold.set(0.5);
 
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 
 let srcFrag = ""

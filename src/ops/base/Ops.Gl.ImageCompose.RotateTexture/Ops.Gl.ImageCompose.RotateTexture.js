@@ -7,7 +7,7 @@ const render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, "rotatetexture");
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.rotate_frag);
 

@@ -16,7 +16,7 @@ let currentNum = 0;
 
 op.toWorkPortsNeedToBeLinked(render, inTex);
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": -10,
     "title": op.name,

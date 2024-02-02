@@ -12,7 +12,7 @@ this.g = this.addInPort(new CABLES.Port(this, "g", CABLES.OP_PORT_TYPE_VALUE, { 
 this.b = this.addInPort(new CABLES.Port(this, "b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
 this.a = this.addInPort(new CABLES.Port(this, "a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;
 
 let srcFrag = ""

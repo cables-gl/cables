@@ -12,7 +12,7 @@ let shader = null;
 let moduleVert = null;
 
 const vertModTitle = "vert_" + op.name;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": 2,
     "title": vertModTitle,

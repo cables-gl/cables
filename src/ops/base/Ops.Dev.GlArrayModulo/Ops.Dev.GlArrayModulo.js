@@ -2,13 +2,13 @@ const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("GlArray"),
 
-    inDoModX = op.inBool("X",true),
+    inDoModX = op.inBool("X", true),
     inModX = op.inValue("Modulo X", 1),
 
-    inDoModY = op.inBool("Y",true),
+    inDoModY = op.inBool("Y", true),
     inModY = op.inValue("Modulo Y", 1),
 
-    inDoModZ = op.inBool("Z",true),
+    inDoModZ = op.inBool("Z", true),
     inModZ = op.inValue("Modulo Z", 1),
 
     trigger = op.outTrigger("trigger"),
@@ -17,7 +17,7 @@ const
 render.onTriggered = dorender;
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 const texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "texturePort": inTex });
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.rgbMath_frag);

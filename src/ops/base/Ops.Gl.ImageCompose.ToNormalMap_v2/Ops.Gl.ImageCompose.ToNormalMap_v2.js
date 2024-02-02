@@ -6,7 +6,7 @@ const
 
 const
     cgl = op.patch.cgl,
-    shader = new CGL.Shader(cgl, op.name);
+    shader = new CGL.Shader(cgl, op.name, op);
 
 // from: https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11
 shader.setSource(shader.getDefaultVertexShader(), attachments.tonormal_frag);

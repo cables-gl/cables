@@ -15,7 +15,7 @@ const
     transNorm = op.inBool("Transform normals", false);
 
 const cgl = op.patch.cgl;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 
 mod.addModule({
     "priority": -2,

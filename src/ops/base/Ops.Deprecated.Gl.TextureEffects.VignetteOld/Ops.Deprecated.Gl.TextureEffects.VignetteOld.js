@@ -9,7 +9,7 @@ let lensRadius2 = op.inValue("lensRadius2", 0.4);
 let ratio = op.inValue("Ratio", 1);
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.vignette_frag);

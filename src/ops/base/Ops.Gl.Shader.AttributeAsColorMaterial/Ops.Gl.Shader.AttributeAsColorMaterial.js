@@ -7,7 +7,7 @@ const
     outShader = op.outObject("Shader");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(attachments.normalsmaterial_vert, attachments.normalsmaterial_frag);
 outShader.set(shader);

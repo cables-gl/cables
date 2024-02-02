@@ -14,7 +14,7 @@ op.setPortGroup("Focus Settings", [inInv, inFocus, inWidth]);
 
 const cgl = op.patch.cgl;
 
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 const srcFrag = attachments.depth_focus_frag || "";
 shader.setSource(shader.getDefaultVertexShader(), srcFrag);
 

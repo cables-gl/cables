@@ -46,7 +46,7 @@ let srcFrag = ""
     .endl() + "gl_FragColor = col;"
     .endl() + "}";
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), srcFrag);
 

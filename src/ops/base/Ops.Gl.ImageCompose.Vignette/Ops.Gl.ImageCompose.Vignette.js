@@ -13,7 +13,7 @@ const b = op.inValueSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.vignette_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

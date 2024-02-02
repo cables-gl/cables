@@ -9,7 +9,7 @@ const cgl = op.patch.cgl;
 
 axis.onChange = updateAxis;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.twist_head_vert,
