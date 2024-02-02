@@ -3,43 +3,48 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "value",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "old min",
                 "group": "Input Range",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "old max",
                 "group": "Input Range",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "new min",
                 "group": "Output Range",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "new max",
                 "group": "Output Range",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Easing index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Clamp",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": 0,
+                "type": "0",
                 "name": "result",
                 "subType": "number"
             }
@@ -88,6 +93,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1704977985405
+        },
+        {
+            "message": "added option to turn off clamping, so values can be bigger then the specified min/max input range",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706885722609
         }
     ]
 }
