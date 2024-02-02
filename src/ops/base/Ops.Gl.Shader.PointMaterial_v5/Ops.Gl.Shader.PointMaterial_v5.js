@@ -27,7 +27,7 @@ const
     flipTex = op.inValueBool("Flip Texture", false),
 
     inAtlasXFade = op.inBool("Atlas Cross Fade", false),
-    inAtlasRepeatX = op.inFloat("Atlas Repeat X", 1),
+    inAtlasRepeatX = op.inFloat("Atlas Repeat X ", 1),
     inAtlasLookupTex = op.inTexture("Atlas Lookup"),
 
     trigger = op.outTrigger("trigger"),

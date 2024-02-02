@@ -1,0 +1,63 @@
+{
+    "id": "3703008b-0500-4a54-ae9a-58561a82d8e3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680617318226
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateArray renamed to Ops.Team.CompOps.Dev.CompArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626217405
+        },
+        {
+            "message": "cloned op from Ops.Team.CompOps.Dev.CompArray",
+            "author": "pandur",
+            "date": 1686661094980
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompArraySnapshot renamed to Ops.Team.CompOps.CompArraySnapshot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661257238
+        },
+        {
+            "message": "Ops.Team.CompOps.CompArraySnapshot renamed to Ops.Data.Compose.CompArraySnapshot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167263464
+        },
+        {
+            "message": "Ops.Data.Compose.CompArraySnapshot renamed to Ops.Data.Compose.Array.CompArraySnapshot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776263701
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1686661094980,
+    "summary": "get a copy of the current state of an array",
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "id": "192882bd-17c3-4a7b-a393-d240fa4d9fbf",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680618712710
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateObjectSetNumber renamed to Ops.Team.CompOps.Dev.CompObjectSetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680625199563
+        },
+        {
+            "message": "cloned op from Ops.Team.CompOps.Dev.CompObjectSetNumber",
+            "author": "pandur",
+            "date": 1680627161559
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompObjectSetArray renamed to Ops.Team.CompOps.CompObjectSetArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661423538
+        },
+        {
+            "message": "Ops.Team.CompOps.CompObjectSetArray renamed to Ops.Data.Compose.CompObjectSetArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167316993
+        },
+        {
+            "message": "Ops.Data.Compose.CompObjectSetArray renamed to Ops.Data.Compose.Object.CompObjectSetArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776288102
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1680627161558,
+    "summary": "set array as object property",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Theojz"
+}

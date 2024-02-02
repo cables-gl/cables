@@ -54,10 +54,6 @@
                 "text": "When triggered the input value will be stored as default value"
             },
             {
-                "name": "Default",
-                "text": "The value to use as default"
-            },
-            {
                 "name": "Children",
                 "text": "Link to next sidebar ops"
             },
@@ -73,5 +69,6 @@
             "author": "stephan",
             "date": 1643888112413
         }
-    ]
+    ],
+    "exampleProjectId": "aDgYX5"
 }

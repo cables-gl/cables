@@ -153,7 +153,7 @@
             },
             {
                 "type": "0",
-                "name": "Atlas Repeat X",
+                "name": "Atlas Repeat X ",
                 "group": "Atlas",
                 "subType": "number"
             },
@@ -220,12 +220,5 @@
     "docs": {
         "ports": []
     },
-    "todos": [
-        {
-            "message": "added atlas lookup texture and functionality",
-            "author": "pandur",
-            "id": "83e278d6-8c3d-4359-9f5b-56a31b7d98f6",
-            "date": 1705590014171
-        }
-    ]
+    "exampleProjectId": "O9yRO6"
 }

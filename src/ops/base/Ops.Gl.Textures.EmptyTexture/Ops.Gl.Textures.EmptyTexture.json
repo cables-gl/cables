@@ -20,11 +20,12 @@
             }
         ]
     },
-    "summary": "A very simple empty texture",
+    "summary": "A very simple empty transparent texture with an opacity of 0",
     "docs": {
         "ports": []
     },
     "authorName": "pandur",
     "id": "fc124913-0916-4f5c-83e0-702ddf66420c",
-    "created": 1541052805439
+    "created": 1541052805439,
+    "exampleProjectId": "QuT1X2"
 }

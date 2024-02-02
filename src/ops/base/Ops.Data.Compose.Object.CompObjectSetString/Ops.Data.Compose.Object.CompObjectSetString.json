@@ -1,0 +1,69 @@
+{
+    "id": "b5a24d4c-4b1d-44c7-b6ef-a38cc71b9ad1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680618576281
+        },
+        {
+            "message": "Ops.Patch.PqYKyct.CreateObjectSetString renamed to Ops.Team.CompOps.CompObjectSetString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680625557888
+        },
+        {
+            "message": "Ops.Team.CompOps.CompObjectSetString renamed to Ops.Team.CompOps.Dev.CompObjectSetString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680684550067
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompObjectSetString renamed to Ops.Team.CompOps.CompObjectSetString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661460340
+        },
+        {
+            "message": "Ops.Team.CompOps.CompObjectSetString renamed to Ops.Data.Compose.CompObjectSetString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167348066
+        },
+        {
+            "message": "Ops.Data.Compose.CompObjectSetString renamed to Ops.Data.Compose.Object.CompObjectSetString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776323469
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1680618631596,
+    "summary": "set string as object property",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Theojz"
+}

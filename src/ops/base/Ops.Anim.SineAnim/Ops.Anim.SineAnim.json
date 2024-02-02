@@ -50,12 +50,8 @@
                 "text": "Executes the op"
             },
             {
-                "name": "Mode",
-                "text": "Can be set to sin or cos"
-            },
-            {
                 "name": "phase",
-                "text": "Can be used to shift the animation, e.g. if you use two `SineAnim`-ops which should not be in sync"
+                "text": "Can be used to shift the animation, e.g. if you use two `SineAnim`-ops which should not be in sync. Should be an angle in radians."
             },
             {
                 "name": "frequency",
@@ -76,7 +72,6 @@
         ]
     },
     "issues": "",
-
     "changelog": [
         {
             "message": "added Trigger out port",

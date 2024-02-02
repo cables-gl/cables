@@ -1,0 +1,97 @@
+{
+    "summary": "Adjust Hue of current ImageCompose",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Mapping index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Multiply",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gamma Correct",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Gamma",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "5",
+                "name": "Selected Mapping"
+            }
+        ]
+    },
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "912f9ed1-2dd8-4ac4-af91-bebe5de852fb",
+    "created": 1706107072923,
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "Add Amount Slider and Mask Texture Input",
+            "author": "bagoof",
+            "id": "182b59f6-02e6-4b3e-8301-843faa57c6d0",
+            "date": 1560196212801,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1665135629951
+        }
+    ],
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Hue renamed to Ops.Gl.ImageCompose.Hue",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854704164
+        },
+        {
+            "message": "cloned op from Ops.Gl.ImageCompose.Hue",
+            "author": "pandur",
+            "date": 1706107072924
+        },
+        {
+            "message": "Ops.Patch.P7mQ5i2.ToneMap renamed to Ops.Dev.ImageCompose.ToneMap",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706113700539
+        },
+        {
+            "message": "Ops.Dev.ImageCompose.ToneMap renamed to Ops.Gl.ImageCompose.ToneMap",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706113725774
+        },
+        {
+            "message": "Ops.Gl.ImageCompose.ToneMap renamed to Ops.Dev.Gl.ImageCompose.ToneMap",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706782485855
+        }
+    ],
+    "exampleProjectId": "7mQ5i2"
+}

@@ -1,0 +1,70 @@
+{
+    "id": "7f9724de-4d81-4aeb-ae5e-8d566a3abf3e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680619062207
+        },
+        {
+            "message": "Ops.Patch.PqYKyct.CreateArrayPushArray renamed to Ops.Team.CreateOps.Dev.CreateArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680619193888
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.CreateArrayPushArray renamed to Ops.Team.CreateOps.Dev.Dev.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626244837
+        },
+        {
+            "message": "Ops.Team.CreateOps.Dev.Dev.CompArrayPushArray renamed to Ops.Team.CompOps.Dev.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680626323479
+        },
+        {
+            "message": "Ops.Team.CompOps.Dev.CompArrayPushArray renamed to Ops.Team.CompOps.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686661231934
+        },
+        {
+            "message": "Ops.Team.CompOps.CompArrayPushArray renamed to Ops.Data.Compose.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687167241210
+        },
+        {
+            "message": "Ops.Data.Compose.CompArrayPushArray renamed to Ops.Data.Compose.Array.CompArrayPushArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776182738
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1680619066020,
+    "summary": "push/append an array to an array",
+    "docs": {
+        "ports": []
+    }
+}

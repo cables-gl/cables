@@ -42,5 +42,11 @@
                 "subType": "boolean"
             }
         ]
-    }
+    },
+    "summary": "locks the pointer to the canvas and hides the cursor",
+    "caniusequery": "pointerLock",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ds6IV2"
 }

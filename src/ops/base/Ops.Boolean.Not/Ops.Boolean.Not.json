@@ -21,5 +21,6 @@
     "summary": "result is false if input is true and vice versa (negate/toggle/switch/!=)",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "1dAfW2"
 }
