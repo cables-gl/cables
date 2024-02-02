@@ -71,6 +71,10 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
+r.onChange =
+g.onChange =
+b.onChange =
+inOpacity.onChange =
 valign.onChange =
     texSizeManBreak.onChange =
     texSizeAutoHeight.onChange =
@@ -118,7 +122,7 @@ shader.setSource(attachments.text_vert, attachments.text_frag);
 const texUni = new CGL.Uniform(shader, "t", "tex");
 const aspectUni = new CGL.Uniform(shader, "f", "aspect", 0);
 const opacityUni = new CGL.Uniform(shader, "f", "a", inOpacity);
-const uniColor = new CGL.Uniform(shader, "3f", "color", r, g, b);
+const uniColor = new CGL.Uniform(shader, "4f", "color", r, g, b, inOpacity);
 
 if (op.patch.isEditorMode()) CABLES.UI.SIMPLEWIREFRAMERECT = CABLES.UI.SIMPLEWIREFRAMERECT || new CGL.WireframeRect(cgl);
 
@@ -421,7 +425,5 @@ function updateUi()
     valign.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
     texSizeAutoHeight.setUiAttribs({ "greyout": texSizeMeth.get() != "Manual" });
 
-    // inPaddingY.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
-    // inPaddingYBot.setUiAttribs({ "greyout": !texSizeAutoHeight.get() });
     meshScale.setUiAttribs({ "greyout": !drawMesh.get() });
 }
