@@ -76,7 +76,7 @@ function rebuild()
         geom.texCoords = tc;
         geom.verticesIndices = indices;
 
-        let mesh = new CGL.Mesh(cgl, geom, cgl.gl.LINES);
+        let mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.LINES });
         mesh.setGeom(geom);
         meshes.push(mesh);
 

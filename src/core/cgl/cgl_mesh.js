@@ -24,10 +24,11 @@ MESH.lastMesh = null;
  *   mesh.render(cgl.getShader());
  * }
  */
-const Mesh = function (_cgl, __geom, glPrimitive)
+const Mesh = function (_cgl, __geom, options)
 {
     this._cgl = _cgl;
 
+    options = options || {};
     this._log = new Logger("cgl_mesh");
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
@@ -37,7 +38,8 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._geom = null;
     this._lastShader = null;
     this._numInstances = 0;
-    this._glPrimitive = glPrimitive;
+    this._glPrimitive = options.glPrimitive || 0;
+    this.opId = options.opId || "";
     this._preWireframeGeom = null;
     this.addVertexNumbers = false;
     this._name = "unknown";
@@ -722,7 +724,7 @@ Mesh.prototype.render = function (shader)
     MESH.lastMesh = this;
 
     let prim = this._cgl.gl.TRIANGLES;
-    if (this._glPrimitive !== undefined) prim = this._glPrimitive;
+    if (this._glPrimitive) prim = this._glPrimitive;
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
     let elementDiv = 1;

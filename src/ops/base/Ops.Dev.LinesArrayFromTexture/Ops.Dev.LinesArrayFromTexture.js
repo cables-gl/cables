@@ -158,7 +158,7 @@ function setupMesh()
 
     // if (strip.get()) shader.glPrimitive = cgl.gl.LINES;
     // else
-    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, cgl.gl.LINES);
+    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.LINES });
 
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);
