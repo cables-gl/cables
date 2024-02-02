@@ -123,7 +123,7 @@ function buildMesh()
 
     ];
 
-    mesh = new CGL.Mesh(cgl, geom, cgl.gl.LINES);
+    mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.LINES });
 }
 
 // LINE/LINE

@@ -18,7 +18,7 @@ class ShaderModifier
         this.needsTexturePush = false;
         this._lastShader = null;
         this._attributes = [];
-        if (options.op) this.opId = options.op;
+        if (options && options.op) this.opId = options.op;
 
         if (this._cgl.glVersion == 1)
         {

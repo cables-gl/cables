@@ -12,7 +12,7 @@ const cgl = op.patch.cgl;
 
 const geom = new CGL.Geometry("simplespline");
 geom.vertices = [x1.get(), y1.get(), z1.get(), x2.get(), y2.get(), x2.get()];
-const mesh = new CGL.Mesh(cgl, geom, cgl.gl.LINES);
+const mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.LINES });
 
 let changed = true;
 
