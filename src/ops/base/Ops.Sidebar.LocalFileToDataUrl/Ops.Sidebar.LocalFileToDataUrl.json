@@ -21,6 +21,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1705997265649
+        },
+        {
+            "message": "File Select Button now shows Filename when a file was selected",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706866865908
+        },
+        {
+            "message": "Added Accept input to filter accepable files by extension",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706867407064
         }
     ],
     "authorName": "pandur",
@@ -38,6 +50,10 @@
             {
                 "type": "5",
                 "name": "Button Text"
+            },
+            {
+                "type": "5",
+                "name": "Accept Files"
             },
             {
                 "type": "0",
@@ -86,7 +102,12 @@
     "issues": "",
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "File Object",
+                "text": "File Select Button now shows Filename when a file was selected"
+            }
+        ]
     },
     "exampleProjectId": "a0V6xn"
 }

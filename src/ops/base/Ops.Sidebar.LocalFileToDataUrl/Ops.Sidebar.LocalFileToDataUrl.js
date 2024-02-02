@@ -3,6 +3,7 @@ const
     parentPort = op.inObject("link", "element"),
     labelPort = op.inString("Text", "Select File:"),
     inLabelText = op.inString("Button Text", "Choose File"),
+    inAccept = op.inString("Accept Files", ""),
     inId = op.inValueString("Id", ""),
     inVisible = op.inBool("Visible", true),
     inGreyOut = op.inBool("Grey Out", false),
@@ -36,23 +37,27 @@ fileInputEle.name = "file";
 fileInputEle.style["background-color"] = "transparent";
 fileInputEle.style.width = "90%";
 fileInputEle.style.display = "none";
-// fileInputEle.style.float = "left";
 
 const elReset = document.createElement("div");
 elReset.style.cursor = "pointer";
 elReset.style.position = "absolute";
 elReset.style.right = "10px";
 elReset.style["margin-top"] = "15px";
+
 elReset.innerHTML = "&nbsp;&nbsp;✕";
 
 const fileInputButton = document.createElement("div");
 fileInputButton.classList.add("sidebar__button-input");
 fileInputButton.innerHTML = inLabelText.get();
-
 fileInputButton.onclick = () => { fileInputEle.click(); };
 inOpenDialog.onTriggered = () => { fileInputButton.click(); };
 fileInputButton.style["margin-top"] = "10px";
+fileInputButton.style["padding-left"] = "5px";
+fileInputButton.style["padding-right"] = "5px";
 fileInputButton.style.width = "80%";
+fileInputButton.style["text-overflow"] = "ellipsis";
+fileInputButton.style.overflow = "hidden";
+fileInputButton.style["white-space"] = "nowrap";
 
 el.appendChild(elReset);
 el.appendChild(fileInputButton);
@@ -66,6 +71,11 @@ const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
+
+inAccept.onChange = () =>
+{
+    fileInputEle.accept = inAccept.get();
+};
 
 inLabelText.onChange = () =>
 {
@@ -86,6 +96,7 @@ function onReset()
 {
     fileInputEle.value = "";
     outDataURL.set("");
+    fileInputButton.innerHTML = inLabelText.get();
 }
 
 reset.onTriggered = onReset;
@@ -109,10 +120,13 @@ function handleFileSelect(evt)
     {
         reader.readAsDataURL(evt.target.files[0]);
         outFilename.set(evt.target.files[0].name);
+        fileInputButton.innerHTML = evt.target.files[0].name;
         outObject.set(evt.target.files[0]);
     }
     else
     {
+        fileInputButton.innerHTML = inLabelText.get();
+
         outDataURL.set("");
         outFilename.set("");
         outObject.set(null);
