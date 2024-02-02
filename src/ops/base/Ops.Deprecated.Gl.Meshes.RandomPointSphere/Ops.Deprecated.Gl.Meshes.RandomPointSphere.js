@@ -109,7 +109,7 @@ function reset()
     // if(mesh) mesh.addVertexNumbers=true;
     // if(mesh) mesh.setGeom(geom);
     if (mesh)mesh.dispose();
-    mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
     mesh.addVertexNumbers = true;
     // mesh.setGeom(geom);
 }

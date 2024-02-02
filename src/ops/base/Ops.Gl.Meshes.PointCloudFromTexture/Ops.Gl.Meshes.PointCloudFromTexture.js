@@ -114,7 +114,7 @@ function setupMesh()
 
     if (mesh)mesh.dispose();
 
-    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
 
     if (!mesh) return;
     mesh.addVertexNumbers = true;
