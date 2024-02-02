@@ -1,6 +1,6 @@
 UNI sampler2D tex;
 UNI float a;
-UNI vec3 color;
+UNI vec4 color;
 IN vec2 texCoord;
 
 void main()
