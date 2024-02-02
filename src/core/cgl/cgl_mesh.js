@@ -24,12 +24,12 @@ MESH.lastMesh = null;
  *   mesh.render(cgl.getShader());
  * }
  */
-const Mesh = function (_cgl, __geom, options)
+const Mesh = function (_cgl, __geom, _options)
 {
     this._cgl = _cgl;
 
-    options = options || {};
-    if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
+    let options = _options || {};
+    if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
     this._log = new Logger("cgl_mesh");
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
@@ -40,6 +40,7 @@ const Mesh = function (_cgl, __geom, options)
     this._lastShader = null;
     this._numInstances = 0;
     this._glPrimitive = options.glPrimitive || undefined;
+    console.log("glPrimitive", this._glPrimitive);
 
     this.opId = options.opId || "";
     this._preWireframeGeom = null;
