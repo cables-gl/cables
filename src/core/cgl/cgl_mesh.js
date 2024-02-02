@@ -489,8 +489,6 @@ Mesh.prototype._bind = function (shader)
 {
     if (!shader.isValid()) return;
 
-
-    // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
     else this._attribLocs[shader.id] = attrLocs;
@@ -737,7 +735,7 @@ Mesh.prototype.render = function (shader)
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
-        if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0 };
+        if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0, "shaderOp": shader.opId };
 
         this._cgl.profileData.glQueryData[id] = queryProfilerData;
 

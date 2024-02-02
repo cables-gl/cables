@@ -28,7 +28,7 @@ let
     arrayChangedColor = true,
     arrayChangedTrans = true;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
     "title": op.name,

@@ -12,7 +12,7 @@ let centerY = op.inValueSlider("Center Y", 0.5);
 let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let unisides = new CGL.Uniform(shader, "f", "sides", sides);
 let uniangle = new CGL.Uniform(shader, "f", "angle", angle);

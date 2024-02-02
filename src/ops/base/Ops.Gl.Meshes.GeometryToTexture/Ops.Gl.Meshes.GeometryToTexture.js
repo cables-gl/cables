@@ -34,7 +34,7 @@ updateUI();
 const drawBuffArr = [true, true];
 
 const vertModTitle = "vert_" + op.name;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": 200,
     "title": vertModTitle,
@@ -135,25 +135,23 @@ function initFb()
 
     if (cgl.glVersion >= 2)
     {
-        fb = new CGL.Framebuffer2(cgl, w, h,
-            {
-                "isFloatingPointTexture": true,
-                "multisampling": false,
-                "wrap": selectedWrap,
-                "filter": filter,
-                "depth": true,
-                "multisamplingSamples": 0,
-                "clear": true
-            });
+        fb = new CGL.Framebuffer2(cgl, w, h, {
+            "isFloatingPointTexture": true,
+            "multisampling": false,
+            "wrap": selectedWrap,
+            "filter": filter,
+            "depth": true,
+            "multisamplingSamples": 0,
+            "clear": true
+        });
     }
     else
     {
-        fb = new CGL.Framebuffer(cgl, inWidth.get(), inWidth.get(),
-            {
-                "isFloatingPointTexture": true,
-                "filter": filter,
-                "wrap": selectedWrap
-            });
+        fb = new CGL.Framebuffer(cgl, inWidth.get(), inWidth.get(), {
+            "isFloatingPointTexture": true,
+            "filter": filter,
+            "wrap": selectedWrap
+        });
     }
 }
 
@@ -187,9 +185,12 @@ exec.onTriggered = function ()
 
         mat4.ortho(
             cgl.pMatrix,
-            0, inWidth.get(),
-            0, inWidth.get(),
-            -1.00, 100);
+            0,
+            inWidth.get(),
+            0,
+            inWidth.get(),
+            -1.00,
+            100);
 
         mod.bind();
 

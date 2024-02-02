@@ -12,7 +12,7 @@ const
     outSelected = op.outString("Selected Mapping");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.map_frag);
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

@@ -14,7 +14,7 @@ const
     centerSize = op.inValueSlider("Draw Center", 0);
 
 const cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.voronoise_frag);
 

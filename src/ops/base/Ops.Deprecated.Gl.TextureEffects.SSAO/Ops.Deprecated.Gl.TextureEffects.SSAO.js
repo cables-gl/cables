@@ -14,7 +14,7 @@ this.dist = this.addInPort(new CABLES.Port(this, "dist", CABLES.OP_PORT_TYPE_VAL
 this.image = this.addInPort(new CABLES.Port(this, "image", CABLES.OP_PORT_TYPE_TEXTURE));
 this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;
 
 let srcFrag = ""

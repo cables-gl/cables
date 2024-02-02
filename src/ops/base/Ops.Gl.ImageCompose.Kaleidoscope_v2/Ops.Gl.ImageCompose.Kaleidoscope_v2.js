@@ -12,7 +12,7 @@ const
     trigger = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 const
     unisides = new CGL.Uniform(shader, "f", "sides", sides),

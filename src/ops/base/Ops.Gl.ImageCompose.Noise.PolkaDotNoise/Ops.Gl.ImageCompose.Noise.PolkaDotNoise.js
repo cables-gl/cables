@@ -13,7 +13,7 @@ let Z = op.inValue("Z", 0);
 let trigger = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 let timeUniform = new CGL.Uniform(shader, "f", "time", 1.0);

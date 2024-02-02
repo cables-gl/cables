@@ -38,7 +38,7 @@ let reInitEffect = true;
 
 op.setPortGroup("Size", [useVPSize, width, height]);
 
-const bgShader = new CGL.Shader(cgl, "copytexture");
+const bgShader = new CGL.Shader(cgl, "copytexture", this);
 bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.copytexture_frag);
 const textureUniform = new CGL.Uniform(bgShader, "t", "tex", 0);
 let textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);

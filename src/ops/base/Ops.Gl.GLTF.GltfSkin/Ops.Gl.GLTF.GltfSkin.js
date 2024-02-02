@@ -10,7 +10,7 @@ const
 
 exec.onTriggered = update;
 const cgl = op.patch.cgl;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 let arr = [];
 let node = null;
 const tr = vec3.create();

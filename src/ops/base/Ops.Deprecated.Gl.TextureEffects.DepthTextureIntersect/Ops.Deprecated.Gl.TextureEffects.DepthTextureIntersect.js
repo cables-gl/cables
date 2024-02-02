@@ -12,7 +12,7 @@ nearPlane.set(0.1);
 
 const trigger = op.outTrigger("trigger");
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;
 
 let srcFrag = ""

@@ -5,7 +5,7 @@ const texture2 = op.inTexture("Texture 2");
 const trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.tex_difference_frag);
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

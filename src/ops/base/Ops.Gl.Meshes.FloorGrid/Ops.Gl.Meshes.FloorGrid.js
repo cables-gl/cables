@@ -8,7 +8,7 @@ const num = 100;
 const cgl = op.patch.cgl;
 let mesh = null;
 
-const shader = new CGL.Shader(cgl, "gridMaterial");
+const shader = new CGL.Shader(cgl, "gridMaterial", this);
 shader.setSource(attachments.grid_vert, attachments.grid_frag);
 
 function init()

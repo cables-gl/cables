@@ -12,7 +12,7 @@ const cgl = op.patch.cgl;
 let mesh = null;
 let numVerts = 0;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": 0,
     "title": op.name,

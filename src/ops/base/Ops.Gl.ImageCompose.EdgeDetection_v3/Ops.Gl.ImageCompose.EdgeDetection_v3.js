@@ -9,7 +9,7 @@ const
     trigger = op.outTrigger("Trigger");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 // offsetPixel.onChange=updateOffsetPixel;
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.edgedetect_frag);

@@ -4,7 +4,7 @@ let amount = op.inValueSlider("amount", 1);
 let mulColor = op.inValueSlider("Mul Color", 0);
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.edgedetect_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

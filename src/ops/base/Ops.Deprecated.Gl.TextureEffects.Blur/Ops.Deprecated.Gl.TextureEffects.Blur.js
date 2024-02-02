@@ -9,7 +9,7 @@ this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_T
 this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.OP_PORT_TYPE_VALUE));
 this.iterations.val = 10;
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;
 
 let srcFrag = ""

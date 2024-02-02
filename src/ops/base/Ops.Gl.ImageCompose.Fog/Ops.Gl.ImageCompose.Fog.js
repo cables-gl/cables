@@ -12,7 +12,7 @@ ignoreInf.onChange = function ()
 };
 
 let cgl = op.patch.cgl;
-var shader = new CGL.Shader(cgl, op.name);
+var shader = new CGL.Shader(cgl, op.name, op);
 
 let srcFrag = attachments.fog_frag;
 

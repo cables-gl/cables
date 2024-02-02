@@ -62,7 +62,7 @@ inSpace.onChange =
 render.onTriggered = doRender;
 
 const vertModTitle = "vert_" + op.name;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": 2,
     "title": vertModTitle,

@@ -41,7 +41,7 @@ op.setPortGroup("Atlas", [inAtlasRepeatX, inAtlasLookupTex, inAtlasXFade]);
 
 r.setUiAttribs({ "colorPick": true });
 
-const shader = new CGL.Shader(cgl, "PointMaterial");
+const shader = new CGL.Shader(cgl, "PointMaterial", this);
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.define("MAKE_ROUND");
 

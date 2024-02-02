@@ -34,7 +34,7 @@ inUseTexAlpha.onChange =
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
 op.setPortGroup("Position", [inPosX, inPosY]);
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",

@@ -5,7 +5,7 @@ const inMask = op.inTexture("Mask");
 const invertMask = op.inValueBool("Invert Mask");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.desaturate_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

@@ -16,7 +16,7 @@ const
     noiseamount = op.inValueFloat("Noise amount", 0.0008);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 op.toWorkPortsNeedToBeLinked(depth, render);
 op.setPortGroup("Noise", [noise, noiseamount]);

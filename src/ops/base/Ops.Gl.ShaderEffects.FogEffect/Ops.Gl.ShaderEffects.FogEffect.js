@@ -47,7 +47,7 @@ const srcBodyFrag = ""
 const moduleFrag = null;
 const moduleVert = null;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 
 mod.addModule(
     {

@@ -23,7 +23,7 @@ let stepWidth = this.addInPort(new CABLES.Port(this, "step width", CABLES.OP_POR
 let showDistances = this.addInPort(new CABLES.Port(this, "showDistances", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 showDistances.set(false);
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;
 
 let srcFrag = ""

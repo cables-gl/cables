@@ -50,7 +50,7 @@ inAttrib.onChange = updateAttrib;
 updateUI();
 
 const vertModTitle = "vert_" + op.name;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
 mod.addModule({
     "priority": 200,
     "title": vertModTitle,
@@ -189,27 +189,25 @@ function initFb()
 
     if (cgl.glVersion >= 2)
     {
-        fb = new CGL.Framebuffer2(cgl, size, size,
-            {
-                "name": "geom2tex",
-                "pixelFormat": inPixelFormat.get(),
-                "multisampling": false,
-                "wrap": selectedWrap,
-                "filter": filter,
-                "depth": true,
-                "multisamplingSamples": 0,
-                "clear": true
-            });
+        fb = new CGL.Framebuffer2(cgl, size, size, {
+            "name": "geom2tex",
+            "pixelFormat": inPixelFormat.get(),
+            "multisampling": false,
+            "wrap": selectedWrap,
+            "filter": filter,
+            "depth": true,
+            "multisamplingSamples": 0,
+            "clear": true
+        });
     }
     else
     {
-        fb = new CGL.Framebuffer(cgl, size, size,
-            {
-                "name": "geom2tex",
-                "isFloatingPointTexture": true,
-                "filter": filter,
-                "wrap": selectedWrap
-            });
+        fb = new CGL.Framebuffer(cgl, size, size, {
+            "name": "geom2tex",
+            "isFloatingPointTexture": true,
+            "filter": filter,
+            "wrap": selectedWrap
+        });
     }
     needInitFb = false;
 }
@@ -304,9 +302,12 @@ function render()
 
     mat4.ortho(
         cgl.pMatrix,
-        0, size,
-        0, size,
-        -1.00, 100);
+        0,
+        size,
+        0,
+        size,
+        -1.00,
+        100);
 
     mod.bind();
     if (!gotBounds) updateRescale();
