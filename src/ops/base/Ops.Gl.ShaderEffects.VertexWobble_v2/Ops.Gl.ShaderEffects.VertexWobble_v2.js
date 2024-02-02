@@ -43,7 +43,7 @@ inArea.onChange =
 
 const srcHeadVert = "";
 // let startTime = CABLES.now() / 1000.0;
-const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 
 mod.addModule({
     "title": op.name,

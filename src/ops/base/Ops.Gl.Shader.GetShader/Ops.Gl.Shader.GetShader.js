@@ -4,7 +4,7 @@ const
     outShader = op.outObject("Shader");
 
 const cgl = op.patch.cgl;
-const mod = new CGL.ShaderModifier(cgl, op.name, { "op": op });
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 
 mod.addModule({
     "priority": 2,
