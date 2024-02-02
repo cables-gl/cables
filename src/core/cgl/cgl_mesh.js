@@ -737,7 +737,10 @@ Mesh.prototype.render = function (shader)
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
-        if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0, "shaderOp": shader.opId };
+        if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0 };
+
+        if (shader.opId)queryProfilerData.shaderOp = shader.opId;
+        if (this.opId)queryProfilerData.meshOp = this.opId;
 
         this._cgl.profileData.glQueryData[id] = queryProfilerData;
 
