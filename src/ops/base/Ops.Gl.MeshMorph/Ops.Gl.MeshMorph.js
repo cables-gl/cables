@@ -37,7 +37,7 @@ const srcBodyVert = ""
 
     .endl();
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addUniform("f", "MOD_fade", 1);
 mod.addUniform("f", "MOD_doMorph", 1);
 mod.addModule({
@@ -131,12 +131,11 @@ function updateGeom()
 
         anim.clear();
         anim.setValue(op.patch.freeTimer.get(), 0);
-        anim.setValue(op.patch.freeTimer.get() + duration.get(), 1,
-            function ()
-            {
-                oldGeom = getGeom;
-                finished.set(true);
-            });
+        anim.setValue(op.patch.freeTimer.get() + duration.get(), 1, function ()
+        {
+            oldGeom = getGeom;
+            finished.set(true);
+        });
         finished.set(false);
 
         geom1 = inGeoms[oldGeom].get();

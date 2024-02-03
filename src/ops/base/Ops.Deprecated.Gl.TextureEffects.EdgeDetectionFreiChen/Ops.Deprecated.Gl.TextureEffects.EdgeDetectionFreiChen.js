@@ -6,7 +6,7 @@ let trigger = op.outTrigger("Trigger");
 let amount = op.inValueSlider("amount", 1);
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.edgeFreiChen_frag);

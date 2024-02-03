@@ -20,7 +20,7 @@ const
 render.onTriggered = dorender;
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 let texMath = null;// = new CGL.ShaderTextureMath(cgl, op.objName, { "width":100,"height":100 });
 
 updateSize();

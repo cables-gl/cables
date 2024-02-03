@@ -159,9 +159,7 @@ function calc()
             );
 
             texCoords.push(
-                posxTexCoordIn, posyTexCoordIn,
-                oldPosXTexCoord, oldPosYTexCoord,
-                posxTexCoord, posyTexCoord
+                posxTexCoordIn, posyTexCoordIn, oldPosXTexCoord, oldPosYTexCoord, posxTexCoord, posyTexCoord
             );
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
@@ -222,25 +220,16 @@ function calc()
                 );
 
                 texCoords.push(
-                    posxTexCoord, 0,
-                    oldPosXTexCoord, 0,
-                    posxTexCoordIn, 1,
-
-                    posxTexCoord, 1,
-                    oldPosXTexCoord, 0,
-                    oldPosXTexCoordIn, 1);
+                    posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1, posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
 
                 vertexNormals.push(
-                    0, 0, 1, 0, 0, 1, 0, 0, 1,
-                    0, 0, 1, 0, 0, 1, 0, 0, 1
+                    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1
                 );
                 tangents.push(
-                    1, 0, 0, 1, 0, 0, 1, 0, 0,
-                    1, 0, 0, 1, 0, 0, 1, 0, 0
+                    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0
                 );
                 biTangents.push(
-                    0, 0, -1, 0, 0, -1, 0, 0, -1,
-                    0, 0, -1, 0, 0, -1, 0, 0, -1
+                    0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1
                 );
             }
 
@@ -271,7 +260,7 @@ function calc()
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();
     mesh = null;
-    mesh = op.patch.cg.createMesh(geom);
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     needsCalc = false;
 }
 

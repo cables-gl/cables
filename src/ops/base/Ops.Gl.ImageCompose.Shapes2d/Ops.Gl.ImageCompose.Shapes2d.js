@@ -78,7 +78,7 @@ op.init = shapeSelect.onChange = function ()
 };
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.shapes_frag);
 

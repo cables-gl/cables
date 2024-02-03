@@ -34,7 +34,7 @@ let
     arrayChangedTexcoords = true,
     arrayChangedTrans = true;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
     "title": op.name,
@@ -166,12 +166,11 @@ function setupArray()
     {
         mat4.identity(m);
 
-        mat4.translate(m, m,
-            [
-                transforms[i * 3],
-                transforms[i * 3 + 1],
-                transforms[i * 3 + 2]
-            ]);
+        mat4.translate(m, m, [
+            transforms[i * 3],
+            transforms[i * 3 + 1],
+            transforms[i * 3 + 2]
+        ]);
 
         if (rotArr)
         {

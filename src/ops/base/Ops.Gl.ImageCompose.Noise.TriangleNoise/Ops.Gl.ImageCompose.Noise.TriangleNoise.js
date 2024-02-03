@@ -6,7 +6,7 @@ const angle = op.inValue("angle");
 const add = op.inValue("Add");
 const trigger = op.outTrigger("Next");
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.trianglenoise_frag);
 

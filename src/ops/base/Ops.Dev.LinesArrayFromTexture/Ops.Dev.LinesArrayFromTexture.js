@@ -12,7 +12,7 @@ const cgl = op.patch.cgl;
 let mesh = null;
 let numVerts = 0;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "priority": 0,
     "title": op.name,
@@ -158,7 +158,7 @@ function setupMesh()
 
     // if (strip.get()) shader.glPrimitive = cgl.gl.LINES;
     // else
-    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, cgl.gl.LINES);
+    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.LINES });
 
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);

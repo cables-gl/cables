@@ -2,7 +2,7 @@ const
     render = op.inTrigger("Render"),
     limitMin = op.inValueInt("Min", 0),
     limitMax = op.inValueInt("Max", 1000),
-    inv=op.inBool("Invert",false);
+    inv = op.inBool("Invert", false);
 
 const trigger = op.outTrigger("Next");
 const cgl = op.patch.cgl;
@@ -32,7 +32,7 @@ const srcBodyFrag = ""
     .endl();
 
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 
 mod.addModule({
     "title": op.name,
@@ -48,13 +48,13 @@ mod.addModule({
     "srcBodyFrag": srcBodyFrag
 });
 
-mod.addUniform("2f", "MOD_vertLimit", limitMin,limitMax);
-inv.onChange=updateDefines;
+mod.addUniform("2f", "MOD_vertLimit", limitMin, limitMax);
+inv.onChange = updateDefines;
 
 
 function updateDefines()
 {
-    mod.toggleDefine("MOD_INVERT",inv.get());
+    mod.toggleDefine("MOD_INVERT", inv.get());
 }
 
 render.onTriggered = function ()

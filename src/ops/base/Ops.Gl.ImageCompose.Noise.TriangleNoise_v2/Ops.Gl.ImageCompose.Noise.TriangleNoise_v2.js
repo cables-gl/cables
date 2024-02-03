@@ -10,7 +10,7 @@ const
 
 const
     cgl = op.patch.cgl,
-    shader = new CGL.Shader(cgl, op.name);
+    shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.trianglenoise_frag);
 

@@ -8,7 +8,7 @@ const srcBodyVert = ""
     .endl() + "pos=MOD_scaler(pos,mat3(modelMatrix)*attrVertNormal);"
     .endl();
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addUniform("f", "MOD_strength", inStrength);
 mod.addModule({
     "title": op.objName,

@@ -122,7 +122,7 @@ function setPoints()
     geom.setPointVertices(geom.vertices);
     geom.setTexCoords(texCoords);
 
-    mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);
 }

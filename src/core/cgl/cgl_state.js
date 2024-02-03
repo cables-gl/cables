@@ -1244,9 +1244,10 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     }
 };
 
-Context.prototype.createMesh = function (geom, glPrimitive)
+Context.prototype.createMesh = function (geom, options)
 {
-    return new CGL.Mesh(this, geom, glPrimitive);
+    if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
+    return new CGL.Mesh(this, geom, options);
 };
 
 

@@ -16,7 +16,7 @@ let depthEnd = this.addInPort(new CABLES.Port(this, "depth end", CABLES.OP_PORT_
 this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.OP_PORT_TYPE_VALUE));
 this.iterations.val = 10;
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let srcFrag = ""
     .endl() + "precision highp float;"

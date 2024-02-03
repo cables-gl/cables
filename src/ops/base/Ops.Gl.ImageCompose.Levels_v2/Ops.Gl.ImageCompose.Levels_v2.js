@@ -11,7 +11,7 @@ const
     trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 const
     uniInMin = new CGL.Uniform(shader, "f", "inMin", inMin),

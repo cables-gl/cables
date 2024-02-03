@@ -138,7 +138,7 @@ op.onDelete = function ()
         CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
 };
 
-const shader = new CGL.Shader(cgl, "TextMesh");
+const shader = new CGL.Shader(cgl, "TextMesh", this);
 shader.setSource(attachments.textmesh_vert, attachments.textmesh_frag);
 const uniTex = new CGL.Uniform(shader, "t", "tex", 0);
 const uniTexMul = new CGL.Uniform(shader, "t", "texMul", 1);
@@ -425,11 +425,10 @@ function generateTexture()
     font.canvas.width = font.canvas.height = textureSize;
 
     if (!font.texture)
-        font.texture = CGL.Texture.createFromImage(cgl, font.canvas,
-            {
-                "filter": filter,
-                "anisotropic": parseFloat(aniso.get())
-            });
+        font.texture = CGL.Texture.createFromImage(cgl, font.canvas, {
+            "filter": filter,
+            "anisotropic": parseFloat(aniso.get())
+        });
 
     font.texture.setSize(textureSize, textureSize);
 

@@ -23,7 +23,7 @@ op.toWorkPortsNeedToBeLinked(render);
 op.setPortGroup("Color", [r, g, b, a]);
 op.setPortGroup("Texture", [inTexture, inTexMap, inTexColorize]);
 
-const shader = new CGL.Shader(cgl, "splinemesh_material");
+const shader = new CGL.Shader(cgl, "splinemesh_material", this);
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.splinemat_vert, attachments.splinemat_frag);
 shaderOut.set(shader);

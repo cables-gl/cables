@@ -24,10 +24,12 @@ MESH.lastMesh = null;
  *   mesh.render(cgl.getShader());
  * }
  */
-const Mesh = function (_cgl, __geom, glPrimitive)
+const Mesh = function (_cgl, __geom, _options)
 {
     this._cgl = _cgl;
 
+    let options = _options || {};
+    if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
     this._log = new Logger("cgl_mesh");
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
@@ -37,7 +39,9 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._geom = null;
     this._lastShader = null;
     this._numInstances = 0;
-    this._glPrimitive = glPrimitive;
+    this._glPrimitive = options.glPrimitive;
+
+    this.opId = options.opId || "";
     this._preWireframeGeom = null;
     this.addVertexNumbers = false;
     this._name = "unknown";
@@ -489,8 +493,6 @@ Mesh.prototype._bind = function (shader)
 {
     if (!shader.isValid()) return;
 
-
-    // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
     else this._attribLocs[shader.id] = attrLocs;
@@ -738,6 +740,9 @@ Mesh.prototype.render = function (shader)
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
         if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0 };
+
+        if (shader.opId)queryProfilerData.shaderOp = shader.opId;
+        if (this.opId)queryProfilerData.meshOp = this.opId;
 
         this._cgl.profileData.glQueryData[id] = queryProfilerData;
 

@@ -228,7 +228,7 @@ function rebuild()
     geom.tangents = tangents;
     geom.biTangents = biTangents;
 
-    if (!mesh) mesh = op.patch.cg.createMesh(geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     else mesh.setGeom(geom);
 
     geomOut.setRef(geom);

@@ -4,7 +4,7 @@ let inLut = op.inTexture("LUT Image");
 let inAmount = op.inValueSlider("Amount", 1.0);
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.lut_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

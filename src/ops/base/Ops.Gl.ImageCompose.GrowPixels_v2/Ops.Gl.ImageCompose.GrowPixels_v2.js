@@ -12,7 +12,7 @@ const
 op.setPortGroup("Look", strength);
 r.setUiAttribs({ "colorPick": true });
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.outline_frag);
 

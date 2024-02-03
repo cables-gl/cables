@@ -43,7 +43,7 @@ let materialIdCounter = 0;
  * var shader=new CGL.Shader(cgl,'MinimalMaterial');
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
  */
-const Shader = function (_cgl, _name)
+const Shader = function (_cgl, _name, _op)
 {
     if (!_cgl) throw new Error("shader constructed without cgl " + _name);
 
@@ -52,6 +52,8 @@ const Shader = function (_cgl, _name)
 
     if (!_name) this._log.stack("no shader name given");
     this._name = _name || "unknown";
+
+    if (_op) this.opId = _op.id;
     this.glslVersion = 0;
     if (_cgl.glVersion > 1) this.glslVersion = 300;
 

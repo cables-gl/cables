@@ -53,7 +53,7 @@ function setUpPointVerts()
     geom.setPointVertices(verts);
     geom.texCoords = texCoords;
 
-    meshPoints = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    meshPoints = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
     meshPoints.setGeom(geom);
 }
 

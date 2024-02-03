@@ -123,8 +123,7 @@ function buildMesh()
         for (j = 0; j < slices; j++, o++)
         {
             indices.push(
-                o, o + 1, o + slices + 1,
-                o + 1, o + slices + 2, o + slices + 1
+                o, o + 1, o + slices + 1, o + 1, o + slices + 2, o + slices + 1
             );
         }
         o++;
@@ -142,7 +141,7 @@ function buildMesh()
     outGeometry.setRef(geom);
 
     // if (!mesh) mesh = new CGL.Mesh(cgl, geom);
-    if (!mesh) mesh = op.patch.cg.createMesh(geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     else mesh.setGeom(geom);
 
     needsRebuild = false;

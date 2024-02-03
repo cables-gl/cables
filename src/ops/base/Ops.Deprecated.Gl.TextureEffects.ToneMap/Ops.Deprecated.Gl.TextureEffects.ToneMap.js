@@ -6,7 +6,7 @@ let method = op.inValueSelect("Method", ["Linear", "Reinhard", "Hejl Dawson", "U
 let exposure = op.inValue("Exposure", 3);
 let cgl = op.patch.cgl;
 
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 
 method.onChange = function ()
