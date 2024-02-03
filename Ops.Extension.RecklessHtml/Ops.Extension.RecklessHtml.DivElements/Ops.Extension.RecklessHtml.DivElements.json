@@ -75,10 +75,9 @@
             }
         ]
     },
-
-
     "exampleProjectId": "lYLMwk",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "create an array of div elements"
 }

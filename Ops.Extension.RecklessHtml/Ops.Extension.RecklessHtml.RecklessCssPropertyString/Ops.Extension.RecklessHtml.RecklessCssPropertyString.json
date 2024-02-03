@@ -14,5 +14,43 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1650464404935
+    "created": 1650464404935,
+    "summary": "set css properties",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "5",
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "Value",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "Value Suffix",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            }
+        ]
+    }
 }
