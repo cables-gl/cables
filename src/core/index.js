@@ -14,7 +14,6 @@ import { LoadingStatus } from "./loadingstatus";
 import { WEBAUDIO } from "./webaudio";
 import { Variable } from "./sessionvar";
 import { Timer, now, internalNow } from "./timer";
-import * as PatchConnections from "./patchconnection";
 import { CONSTANTS } from "./constants";
 import { BranchStack, Branch } from "./banchprofiler";
 import { CGP } from "./cgp";
@@ -46,7 +45,6 @@ CABLES = Object.assign(CABLES,
     base64,
     utils,
     anim,
-    PatchConnections,
     CONSTANTS.PORT,
     CONSTANTS.PACO,
     CONSTANTS.ANIM,
