@@ -1,7 +1,8 @@
 const
     parentPort = op.inObject("link"),
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
-    siblingsPort = op.outObject("childs");
+    siblingsPort = op.outObject("childs"),
+    outImage = op.outObject("Image Element", null, "element");
 
 const el = document.createElement("div");
 el.dataset.op = op.id;
@@ -13,7 +14,7 @@ label.classList.add("sidebar__item-label");
 const labelText = document.createElement("div");// document.createTextNode(filename.get());
 label.appendChild(labelText);
 el.appendChild(label);
-
+let imageEle = null;
 parentPort.onChange = onParentChanged;
 filename.onChange = onFilenameChanged;
 op.onDelete = onDelete;
@@ -22,20 +23,32 @@ op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
 function onFilenameChanged()
 {
-    const fileUrl = filename.get();
+    let fileUrl = filename.get();
     if (!fileUrl)
     {
         label.innerHTML = "";
         return;
     }
 
-    let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    if (!imageEle)
+    {
+        let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+        if (base64regex.test(fileUrl))
+        {
+            fileUrl = "data:image;base64," + fileUrl;
+            console.log("base46");
+        // label.innerHTML = "<img src=\"data:image;base64," + fileUrl + "\" style=\"max-width:100%\">";
+        }
 
-    if (base64regex.test(fileUrl))
-        label.innerHTML = "<img src=\"data:image;base64," + fileUrl + "\" style=\"max-width:100%\">";
-    else
-    // if (fileUrl.indexOf("/") == 0 || fileUrl.indexOf("http") == 0)
-        label.innerHTML = "<img src=\"" + fileUrl + "\" style=\"max-width:100%\">";
+        // else
+        // label.innerHTML = "<img src=\"" + fileUrl + "\" style=\"max-width:100%\">";
+
+        label.innerHTML = "<img style=\"max-width:100%\"/>";
+        imageEle = label.children[0];
+        outImage.setRef(imageEle);
+    }
+
+    imageEle.setAttribute("src", fileUrl);
 }
 
 function onParentChanged()

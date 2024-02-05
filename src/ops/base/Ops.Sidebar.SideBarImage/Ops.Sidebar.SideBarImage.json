@@ -11,6 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1672828372250
+        },
+        {
+            "message": "Added Image Element output",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1707129926541
         }
     ],
     "authorName": "pandur",
@@ -18,24 +24,27 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
+                "type": "2",
                 "name": "link"
             },
             {
-                "type": 5,
+                "type": "5",
                 "name": "File"
             }
         ],
         "portsOut": [
             {
-                "type": 2,
+                "type": "2",
                 "name": "childs"
+            },
+            {
+                "type": "2",
+                "name": "Image Element",
+                "objType": "element"
             }
         ]
     },
     "summary": "Display an image in the sidebar",
-
-
     "exampleProjectId": "nLvdby",
     "docs": {
         "ports": []
