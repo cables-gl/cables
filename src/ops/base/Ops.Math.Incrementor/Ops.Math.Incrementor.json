@@ -54,5 +54,8 @@
     "authorName": "pandur",
     "id": "45cc0011-ada8-4423-8f5b-39a3810b8389",
     "created": 1516875152747,
-    "exampleProjectId": "OdcvGu"
+    "exampleProjectId": "OdcvGu",
+    "docs": {
+        "ports": []
+    }
 }
