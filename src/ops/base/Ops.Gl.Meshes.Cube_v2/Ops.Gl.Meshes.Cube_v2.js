@@ -97,8 +97,8 @@ function buildMesh()
     }
 
     addAttribs(geom, x, y, z, nx, ny, nz);
-    if (mapping.get() == "Side") sideMappedCube(geom,1,1,1);
-    else if (mapping.get() == "SideWrap") sideMappedCube(geom,x,y,z);
+    if (mapping.get() == "Side") sideMappedCube(geom, 1, 1, 1);
+    else if (mapping.get() == "SideWrap") sideMappedCube(geom, x, y, z);
     else cubeMappedCube(geom);
 
     geom.verticesIndices = [];
@@ -113,7 +113,7 @@ function buildMesh()
     else meshvalid = true;
 
     if (mesh)mesh.dispose();
-    mesh = op.patch.cg.createMesh(geom);
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
 
     geomOut.setRef(geom);
 
@@ -125,7 +125,7 @@ op.onDelete = function ()
     if (mesh)mesh.dispose();
 };
 
-function sideMappedCube(geom,x,y,z)
+function sideMappedCube(geom, x, y, z)
 {
     const bias = mappingBias.get();
 
@@ -133,7 +133,7 @@ function sideMappedCube(geom,x,y,z)
     let u0 = 0.0 + bias;
     if (inFlipX.get())
     {
-        [u1, u0] = [u0,u1]
+        [u1, u0] = [u0, u1];
     }
 
     let v1 = 1.0 - bias;
@@ -141,35 +141,35 @@ function sideMappedCube(geom,x,y,z)
 
     geom.setTexCoords([
         // Front face
-        x*u0, y*v1,
-        x*u1, y*v1,
-        x*u1, y*v0,
-        x*u0, y*v0,
+        x * u0, y * v1,
+        x * u1, y * v1,
+        x * u1, y * v0,
+        x * u0, y * v0,
         // Back face
-        x*u1, y*v1,
-        x*u1, y*v0,
-        x*u0, y*v0,
-        x*u0, y*v1,
+        x * u1, y * v1,
+        x * u1, y * v0,
+        x * u0, y * v0,
+        x * u0, y * v1,
         // Top face
-        x*u0, z*v0,
-        x*u0, z*v1,
-        x*u1, z*v1,
-        x*u1, z*v0,
+        x * u0, z * v0,
+        x * u0, z * v1,
+        x * u1, z * v1,
+        x * u1, z * v0,
         // Bottom face
-        x*u1, y*v0,
-        x*u0, y*v0,
-        x*u0, y*v1,
-        x*u1, y*v1,
+        x * u1, y * v0,
+        x * u0, y * v0,
+        x * u0, y * v1,
+        x * u1, y * v1,
         // Right face
-        z*u1, y*v1,
-        z*u1, y*v0,
-        z*u0, y*v0,
-        z*u0, y*v1,
+        z * u1, y * v1,
+        z * u1, y * v0,
+        z * u0, y * v0,
+        z * u0, y * v1,
         // Left face
-        z*u0, y*v1,
-        z*u1, y*v1,
-        z*u1, y*v0,
-        z*u0, y*v0,
+        z * u0, y * v1,
+        z * u1, y * v1,
+        z * u1, y * v0,
+        z * u0, y * v0,
     ]);
 }
 
@@ -185,54 +185,30 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
     const tc = [];
     tc.push(
         // Front face   Z+
-        flipx + sx + bias, sy * 2 - bias,
-        flipx + sx * 2 - bias, sy * 2 - bias,
-        flipx + sx * 2 - bias, sy + bias,
-        flipx + sx + bias, sy + bias,
+        flipx + sx + bias, sy * 2 - bias, flipx + sx * 2 - bias, sy * 2 - bias, flipx + sx * 2 - bias, sy + bias, flipx + sx + bias, sy + bias,
         // Back face Z-
-        flipx + sx * 4 - bias, sy * 2 - bias,
-        flipx + sx * 4 - bias, sy + bias,
-        flipx + sx * 3 + bias, sy + bias,
-        flipx + sx * 3 + bias, sy * 2 - bias);
+        flipx + sx * 4 - bias, sy * 2 - bias, flipx + sx * 4 - bias, sy + bias, flipx + sx * 3 + bias, sy + bias, flipx + sx * 3 + bias, sy * 2 - bias);
 
     if (inFlipX.get())
         tc.push(
             // Top face
-            sx + bias, 0 - bias,
-            sx * 2 - bias, 0 - bias,
-            sx * 2 - bias, sy * 1 + bias,
-            sx + bias, sy * 1 + bias,
+            sx + bias, 0 - bias, sx * 2 - bias, 0 - bias, sx * 2 - bias, sy * 1 + bias, sx + bias, sy * 1 + bias,
             // Bottom face
-            sx + bias, sy * 3 + bias,
-            sx + bias, sy * 2 - bias,
-            sx * 2 - bias, sy * 2 - bias,
-            sx * 2 - bias, sy * 3 + bias
+            sx + bias, sy * 3 + bias, sx + bias, sy * 2 - bias, sx * 2 - bias, sy * 2 - bias, sx * 2 - bias, sy * 3 + bias
         );
 
     else
         tc.push(
             // Top face
-            sx + bias, 0 + bias,
-            sx + bias, sy * 1 - bias,
-            sx * 2 - bias, sy * 1 - bias,
-            sx * 2 - bias, 0 + bias,
+            sx + bias, 0 + bias, sx + bias, sy * 1 - bias, sx * 2 - bias, sy * 1 - bias, sx * 2 - bias, 0 + bias,
             // Bottom face
-            sx + bias, sy * 3 - bias,
-            sx * 2 - bias, sy * 3 - bias,
-            sx * 2 - bias, sy * 2 + bias,
-            sx + bias, sy * 2 + bias);
+            sx + bias, sy * 3 - bias, sx * 2 - bias, sy * 3 - bias, sx * 2 - bias, sy * 2 + bias, sx + bias, sy * 2 + bias);
 
     tc.push(
         // Right face
-        flipx + sx * 3 - bias, 1.0 - sy - bias,
-        flipx + sx * 3 - bias, 1.0 - sy * 2 + bias,
-        flipx + sx * 2 + bias, 1.0 - sy * 2 + bias,
-        flipx + sx * 2 + bias, 1.0 - sy - bias,
+        flipx + sx * 3 - bias, 1.0 - sy - bias, flipx + sx * 3 - bias, 1.0 - sy * 2 + bias, flipx + sx * 2 + bias, 1.0 - sy * 2 + bias, flipx + sx * 2 + bias, 1.0 - sy - bias,
         // Left face
-        flipx + sx * 0 + bias, 1.0 - sy - bias,
-        flipx + sx * 1 - bias, 1.0 - sy - bias,
-        flipx + sx * 1 - bias, 1.0 - sy * 2 + bias,
-        flipx + sx * 0 + bias, 1.0 - sy * 2 + bias);
+        flipx + sx * 0 + bias, 1.0 - sy - bias, flipx + sx * 1 - bias, 1.0 - sy - bias, flipx + sx * 1 - bias, 1.0 - sy * 2 + bias, flipx + sx * 0 + bias, 1.0 - sy * 2 + bias);
 
     geom.setTexCoords(tc);
 }

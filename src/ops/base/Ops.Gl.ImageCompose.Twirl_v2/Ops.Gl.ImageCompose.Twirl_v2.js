@@ -6,7 +6,7 @@ let centerY = op.inValue("Center Y", 0.5);
 let trigger = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 shader.setSource(shader.getDefaultVertexShader(), attachments.twirl_frag);
 
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

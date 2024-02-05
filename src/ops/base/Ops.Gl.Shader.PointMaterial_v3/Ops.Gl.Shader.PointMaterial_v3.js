@@ -35,7 +35,7 @@ op.setPortGroup("Color", [r, g, b, a, vertCols]);
 op.setPortGroup("Size", [pointSize, randomSize, makeRound, makeRoundAA, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel]);
 r.setUiAttribs({ "colorPick": true });
 
-const shader = new CGL.Shader(cgl, "PointMaterial");
+const shader = new CGL.Shader(cgl, "PointMaterial", this);
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.define("MAKE_ROUND");
 

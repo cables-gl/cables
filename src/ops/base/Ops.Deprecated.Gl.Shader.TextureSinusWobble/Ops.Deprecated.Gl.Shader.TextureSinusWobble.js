@@ -57,7 +57,7 @@ let srcFrag = ""
     .endl() + "}";
 
 
-var shader = new CGL.Shader(cgl, op.name);
+var shader = new CGL.Shader(cgl, op.name, op);
 shader.setSource(shader.getDefaultVertexShader(), srcFrag);
 
 this.a = this.addInPort(new CABLES.Port(this, "a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));

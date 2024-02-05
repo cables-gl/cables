@@ -3,7 +3,7 @@ let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.scroller_frag);
 

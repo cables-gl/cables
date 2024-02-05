@@ -17,7 +17,7 @@ let needsRebuild = true;
 let geom = null;
 let updateUniformPoints = false;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "title": op.objName,
     "name": "MODULE_VERTEX_POSITION",
@@ -72,7 +72,7 @@ function rebuild()
 
     if (!mesh)
     {
-        mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+        mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
 
         mesh.addVertexNumbers = true;
         mesh._verticesNumbers = null;

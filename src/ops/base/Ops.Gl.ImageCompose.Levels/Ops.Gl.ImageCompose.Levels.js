@@ -10,7 +10,7 @@ let outMax = op.inValueSlider("Out Max", 1);
 let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let uniInMin = new CGL.Uniform(shader, "f", "inMin", inMin);
 let uniInMid = new CGL.Uniform(shader, "f", "midPoint", inMid);

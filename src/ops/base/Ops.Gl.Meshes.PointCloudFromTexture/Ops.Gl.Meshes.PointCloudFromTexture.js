@@ -16,7 +16,7 @@ let currentNum = 0;
 
 op.toWorkPortsNeedToBeLinked(render, inTex);
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "priority": -10,
     "title": op.name,
@@ -114,7 +114,7 @@ function setupMesh()
 
     if (mesh)mesh.dispose();
 
-    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    if (numVerts > 0) mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
 
     if (!mesh) return;
     mesh.addVertexNumbers = true;

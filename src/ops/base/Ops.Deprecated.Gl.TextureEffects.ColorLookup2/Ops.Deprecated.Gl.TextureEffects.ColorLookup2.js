@@ -11,7 +11,7 @@ let trigger = op.outTrigger("trigger");
 let vert = op.inValueBool("vertical", true);
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 amount.set(1);
 

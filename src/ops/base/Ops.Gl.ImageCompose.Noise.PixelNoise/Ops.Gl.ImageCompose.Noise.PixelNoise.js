@@ -11,7 +11,7 @@ const render = op.inTrigger("Render"),
 const trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 const timeUniform = new CGL.Uniform(shader, "f", "time", 1.0);

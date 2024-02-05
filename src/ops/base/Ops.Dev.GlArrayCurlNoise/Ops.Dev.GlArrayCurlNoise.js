@@ -19,7 +19,7 @@ let lastTime = time.get();
 render.onTriggered = dorender;
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 const texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "texturePort": inTex });
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.curlnoise_frag);

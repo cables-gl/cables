@@ -17,7 +17,7 @@ let scale = op.inValue("Scale", 22);
 let trigger = op.outTrigger("trigger");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let srcFrag = attachments.movingrectnoise_frag.replace("{{BLENDCODE}}", CGL.TextureEffect.getBlendCode());
 

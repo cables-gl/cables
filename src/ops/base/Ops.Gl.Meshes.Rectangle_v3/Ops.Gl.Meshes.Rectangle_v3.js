@@ -180,7 +180,7 @@ function rebuild()
 
     const cgl = op.patch.cgl;
 
-    if (!mesh) mesh = op.patch.cg.createMesh(geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     else mesh.setGeom(geom);
 
     geomOut.set(null);

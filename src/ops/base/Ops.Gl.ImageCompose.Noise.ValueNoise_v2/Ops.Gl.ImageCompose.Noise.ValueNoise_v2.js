@@ -12,7 +12,7 @@ op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Look", [scale]);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(CGL.Shader.getDefaultVertexShader(), attachments.valuenoise3d_frag);
 

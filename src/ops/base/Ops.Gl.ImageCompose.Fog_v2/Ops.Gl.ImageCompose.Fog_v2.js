@@ -12,7 +12,7 @@ const
     trigger = op.outTrigger("trigger");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let srcFrag = attachments.fog_frag;
 

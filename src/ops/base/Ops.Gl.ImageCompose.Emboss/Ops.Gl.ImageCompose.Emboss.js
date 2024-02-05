@@ -4,7 +4,7 @@ const
     strength = op.inValue("Strength", 4),
     clear = op.inValueBool("Clear", true),
     cgl = op.patch.cgl,
-    shader = new CGL.Shader(cgl, op.name);
+    shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.emboss_frag || "");
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

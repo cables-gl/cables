@@ -4,7 +4,7 @@ let strength = op.inValueSlider("Exponent", 0.6);
 let trigger = op.outTrigger("trigger");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 let tsize = [128, 128];
 let srcFrag = attachments.denoise_frag;
 

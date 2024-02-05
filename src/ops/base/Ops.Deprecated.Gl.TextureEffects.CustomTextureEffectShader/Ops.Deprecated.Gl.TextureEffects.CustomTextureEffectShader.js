@@ -5,7 +5,7 @@ const amount = op.inValueSlider("Amount", 0.25);
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 let textureUniform = null;
 let amountUniform = null;

@@ -30,7 +30,7 @@ let moduleVert = null;
 // op.onDelete = exec.onLinkChanged = removeModule;
 inToZero.onChange = inSrc.onChange = inClampBool.onChange = updateToZero;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "priority": 2,
     "title": "vert_" + op.name,

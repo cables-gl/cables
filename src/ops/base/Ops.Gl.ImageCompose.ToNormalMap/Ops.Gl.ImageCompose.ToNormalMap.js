@@ -2,7 +2,7 @@ let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 let strength = op.inValue("Strength", 4);
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 // from: https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11
 

@@ -7,7 +7,7 @@ const
     next = op.outTrigger("trigger");
 
 const cgl = this.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 shader.setSource(shader.getDefaultVertexShader(), attachments.alphamask_frag);
 
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);

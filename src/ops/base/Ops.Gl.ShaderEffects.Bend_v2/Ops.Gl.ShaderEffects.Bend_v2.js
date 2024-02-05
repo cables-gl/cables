@@ -36,7 +36,7 @@ rotZ.onChange = invalidateMatrices;
 scale.onChange = invalidateMatrices;
 offset.onChange = invalidateMatrices;
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.bend_vert,

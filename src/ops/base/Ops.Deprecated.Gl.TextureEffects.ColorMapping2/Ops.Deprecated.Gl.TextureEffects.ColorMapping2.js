@@ -9,7 +9,7 @@ let axis = op.inValueSelect("Axis", ["hotizontal", "vertical"], "horizontal");
 let pos = op.inValueSlider("Position");
 
 let cgl = op.patch.cgl;
-let shader = new CGL.Shader(cgl, op.name);
+let shader = new CGL.Shader(cgl, op.name, op);
 
 axis.onChange = updateAxis;
 updateAxis();

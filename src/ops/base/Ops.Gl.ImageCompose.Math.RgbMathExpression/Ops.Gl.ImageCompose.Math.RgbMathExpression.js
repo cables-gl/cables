@@ -17,7 +17,7 @@ const
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), shader.getDefaultFragmentShader());
 const

@@ -33,6 +33,7 @@ IN vec2 texCoord;
     IN vec4 vertexColor;
 #endif
 
+vec3 lumcoeff = vec3(0.299,0.587,0.114);
 
 void main()
 {
@@ -79,10 +80,21 @@ void main()
             mask=texture(texMask,pointCoord).a;
         #endif
         #ifdef TEXTURE_MASK_LUMI
-        	vec3 lumcoeff = vec3(0.299,0.587,0.114);
         	mask = dot(texture(texMask,pointCoord).rgb, lumcoeff);
         #endif
 
+        #ifdef ATLAS_XFADE
+            float mask2=texture(texMask,pointCoord2).r;
+
+            #ifdef TEXTURE_MASK_A
+                mask2=texture(texMask,pointCoord2).a;
+            #endif
+            #ifdef TEXTURE_MASK_LUMI
+            	mask2 = dot(texture(texMask,pointCoord2).rgb, lumcoeff);
+            #endif
+
+            mask=mix(mask,mask2,fract(atlasIdx));
+        #endif
     #endif
 
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -95,11 +107,10 @@ void main()
         #endif
 
         #ifdef COLORIZE_TEXTURE
-          col.rgb*=color.rgb;
+            col.rgb*=color.rgb;
         #endif
-
-
     #endif
+
     col.a*=color.a;
 
 

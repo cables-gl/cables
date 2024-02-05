@@ -20,7 +20,7 @@ render.onTriggered = doRender;
 inTexture.onLinkChanged = updateUi;
 inScale.onChange = updateScale;
 
-const shader = new CGL.Shader(cgl, "fullscreenrectangle");
+const shader = new CGL.Shader(cgl, "fullscreenrectangle", this);
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 
 shader.setSource(attachments.shader_vert, attachments.shader_frag);

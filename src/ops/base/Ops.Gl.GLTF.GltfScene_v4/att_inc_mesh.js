@@ -341,7 +341,7 @@ let gltfMesh = class
                 op.logWarn("unknown primitive type", this);
             }
 
-            this.mesh = op.patch.cg.createMesh(g, glprim);
+            this.mesh = op.patch.cg.createMesh(g, { "glPrimitive": glprim });
             // this.mesh = new CGL.Mesh(cgl, g, glprim);
         }
         else

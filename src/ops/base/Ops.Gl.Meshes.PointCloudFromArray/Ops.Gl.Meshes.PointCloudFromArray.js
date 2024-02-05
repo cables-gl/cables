@@ -217,7 +217,7 @@ function rebuild()
     geom.setTexCoords(texCoords);
 
     // if (mesh)mesh.dispose();
-    if (!mesh)mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+    if (!mesh)mesh = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
 
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);

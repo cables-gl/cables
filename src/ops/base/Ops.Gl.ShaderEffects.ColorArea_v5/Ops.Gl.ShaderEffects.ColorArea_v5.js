@@ -62,7 +62,7 @@ inSpace.onChange =
 render.onTriggered = doRender;
 
 const vertModTitle = "vert_" + op.name;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "priority": 2,
     "title": vertModTitle,
@@ -78,7 +78,7 @@ mod.addModule({
     "srcBodyFrag": attachments.colorarea_frag
 });
 
-mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, 0);
+mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, inFalloff);
 mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
 mod.addUniform("4f", "MOD_scale", sizeX, sizeY, sizeZ, roundNess);
@@ -97,8 +97,8 @@ function updatePrio()
         // "priority": 0,
         "title": vertModTitle,
         "name": "MODULE_VERTEX_POSITION",
-        srcHeadVert,
-        srcBodyVert
+        "srcHeadVert": srcHeadVert,
+        "srcBodyVert": srcBodyVert
     };
 
     if (inPrio.get()) vmod.priority = 2;

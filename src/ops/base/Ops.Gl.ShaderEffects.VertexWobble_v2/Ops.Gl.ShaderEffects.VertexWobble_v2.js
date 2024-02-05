@@ -11,12 +11,12 @@ let src = op.inValueSelect("Source", [
 
 const
     amount = op.inValueSlider("amount", 0.1),
-    inTime=op.inFloat("Time",0),
+    inTime = op.inFloat("Time", 0),
     mul = op.inValueFloat("Scale", 3),
     toAxisX = op.inValueBool("axisX", true),
     toAxisY = op.inValueBool("axisY", true),
     toAxisZ = op.inValueBool("axisZ", true),
-    positive = op.inSwitch("Range",['-1 to 1','0 to 1'],'-1 to 1'),
+    positive = op.inSwitch("Range", ["-1 to 1", "0 to 1"], "-1 to 1"),
 
     inArea = op.inValueSelect("Area", ["Sphere", "Box", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
     inSize = op.inValue("Size", 1),
@@ -30,12 +30,12 @@ const
 
     next = this.outTrigger("trigger");
 
-op.setPortGroup("Area",[inArea,inSize,x,y,z,inFalloff,inWorldSpace,inInvert]);
+op.setPortGroup("Area", [inArea, inSize, x, y, z, inFalloff, inWorldSpace, inInvert]);
 
-positive.onChange=
-inArea.onChange=
-    inWorldSpace.onChange=
-    inSize.onChange=
+positive.onChange =
+inArea.onChange =
+    inWorldSpace.onChange =
+    inSize.onChange =
     src.onChange =
     toAxisZ.onChange =
     toAxisX.onChange =
@@ -43,7 +43,7 @@ inArea.onChange=
 
 const srcHeadVert = "";
 // let startTime = CABLES.now() / 1000.0;
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 
 mod.addModule({
     "title": op.name,
@@ -52,7 +52,7 @@ mod.addModule({
     "srcBodyVert": attachments.sinewobble_vert
 });
 
-mod.addUniform("4f", "MOD_posSize", x, y, z,inSize);
+mod.addUniform("4f", "MOD_posSize", x, y, z, inSize);
 mod.addUniformVert("f", "MOD_time", inTime);
 mod.addUniformVert("f", "MOD_amount", amount);
 mod.addUniformVert("f", "MOD_scale", mul);
@@ -63,9 +63,9 @@ setDefines();
 function setDefines()
 {
     mod.toggleDefine("MOD_AREA_INVERT", inInvert.get());
-    mod.toggleDefine("MOD_POSITIVE", positive.get()=="0 to 1");
+    mod.toggleDefine("MOD_POSITIVE", positive.get() == "0 to 1");
 
-    mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get() );
+    mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
     mod.toggleDefine("MOD_AREA_AXIS_X", inArea.get() == "Axis X");
     mod.toggleDefine("MOD_AREA_AXIS_Y", inArea.get() == "Axis Y");
     mod.toggleDefine("MOD_AREA_AXIS_Z", inArea.get() == "Axis Z");

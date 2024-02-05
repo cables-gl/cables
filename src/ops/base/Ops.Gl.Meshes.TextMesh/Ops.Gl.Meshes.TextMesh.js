@@ -106,7 +106,7 @@ op.onDelete = function ()
         CABLES.OpTextureMeshCanvas[canvasid].canvas.remove();
 };
 
-const shader = new CGL.Shader(cgl, "TextMesh");
+const shader = new CGL.Shader(cgl, "TextMesh", this);
 shader.setSource(attachments.textmesh_vert, attachments.textmesh_frag);
 const uniTex = new CGL.Uniform(shader, "t", "tex", 0);
 const uniScale = new CGL.Uniform(shader, "f", "scale", scale);
@@ -364,10 +364,9 @@ function generateTexture()
     font.canvas.width = font.canvas.height = textureSize;
 
     if (!font.texture)
-        font.texture = CGL.Texture.createFromImage(cgl, font.canvas,
-            {
-                "filter": CGL.Texture.FILTER_MIPMAP
-            });
+        font.texture = CGL.Texture.createFromImage(cgl, font.canvas, {
+            "filter": CGL.Texture.FILTER_MIPMAP
+        });
 
     font.texture.setSize(textureSize, textureSize);
 

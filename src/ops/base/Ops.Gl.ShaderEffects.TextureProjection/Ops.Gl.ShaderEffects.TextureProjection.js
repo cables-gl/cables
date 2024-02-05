@@ -32,7 +32,7 @@ inBlend.onChange = inDiscard.onChange = inWorldSpace.onChange = inMethod.onChang
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
 op.setPortGroup("Position", [inPosX, inPosY]);
 
-const mod = new CGL.ShaderModifier(cgl, op.name);
+const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",

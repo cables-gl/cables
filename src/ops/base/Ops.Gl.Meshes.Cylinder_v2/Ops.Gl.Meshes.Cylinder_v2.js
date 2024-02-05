@@ -103,8 +103,7 @@ function buildMesh()
         {
             a = d + 1;
             indices.push(
-                d + (segments + 1), a, d,
-                d + (segments + 1), a + (segments + 1), a
+                d + (segments + 1), a, d, d + (segments + 1), a + (segments + 1), a
             );
         }
     }
@@ -211,13 +210,11 @@ function buildMesh()
             )
             {
                 indices.push(
-                    o + 1, o + segments, o,
-                    o + segments + 1, o + segments, o + 1
+                    o + 1, o + segments, o, o + segments + 1, o + segments, o + 1
                 );
             }
             indices.push(
-                o + segments, a / 3 + x, a / 3 + segments + x,
-                o + segments, o, a / 3 + x
+                o + segments, a / 3 + x, a / 3 + segments + x, o + segments, o, a / 3 + x
             );
             x += segments * 2;
             for (
@@ -227,13 +224,11 @@ function buildMesh()
             )
             {
                 indices.push(
-                    o, o + segments, o + 1,
-                    o + 1, o + segments, o + segments + 1
+                    o, o + segments, o + 1, o + 1, o + segments, o + segments + 1
                 );
             }
             indices.push(
-                a / 3 + segments + x, a / 3 + x, o + segments,
-                a / 3 + x, o, o + segments
+                a / 3 + segments + x, a / 3 + x, o + segments, a / 3 + x, o, o + segments
             );
         }
     }
@@ -289,7 +284,7 @@ function buildMesh()
 
     outGeometry.setRef(geom);
 
-    if (!mesh) mesh = op.patch.cg.createMesh(geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     else mesh.setGeom(geom);
 
     needsRebuild = false;

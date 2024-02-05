@@ -12,7 +12,7 @@ const
     noiseamount = op.inValueFloat("Noise amount", 0.0008);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, op.name);
+const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.ssao_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
