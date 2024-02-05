@@ -5,11 +5,13 @@ const
     new_min = op.inValueFloat("new min", 0),
     new_max = op.inValueFloat("new max", 1),
     easing = op.inValueSelect("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear"),
+    inClamp = op.inBool("Clamp", true),
     result = op.outNumber("result", 0);
 
 op.setPortGroup("Input Range", [old_min, old_max]);
 op.setPortGroup("Output Range", [new_min, new_max]);
 
+let doClamp = true;
 let ease = 0;
 let r = 0;
 
@@ -20,6 +22,13 @@ v.onChange =
     new_max.onChange = exec;
 
 exec();
+
+inClamp.onChange =
+() =>
+{
+    doClamp = inClamp.get();
+    exec();
+};
 
 easing.onChange = function ()
 {
@@ -36,16 +45,19 @@ function exec()
     const oMax = old_max.get();
     let x = v.get();
 
-    if (x >= Math.max(oMax, oMin))
+    if (doClamp)
     {
-        result.set(nMax);
-        return;
-    }
-    else
-    if (x <= Math.min(oMax, oMin))
-    {
-        result.set(nMin);
-        return;
+        if (x >= Math.max(oMax, oMin))
+        {
+            result.set(nMax);
+            return;
+        }
+        else
+        if (x <= Math.min(oMax, oMin))
+        {
+            result.set(nMin);
+            return;
+        }
     }
 
     let reverseInput = false;

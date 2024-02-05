@@ -1,0 +1,2 @@
+changes a number's relative value by mapping within one range to the equivalent position in another range. 
+For example, given the range of 0 to 100, 50 would be halfway between. so if it were mapped to a range of 0 to 50, it would be 25 (because 25 is exactly half that range).
