@@ -1,8 +1,8 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float amount;
-// UNI float seed;
-float seed=0.0;
+UNI float seed;
+// float seed=0.0;
 
 UNI vec2 r,g,b,a;
 

@@ -26,6 +26,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1706775862473
+        },
+        {
+            "message": "Ops.Deprecate.Sidebar.LocalTextureFile renamed to Ops.Deprecated.Sidebar.LocalTextureFile",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1707136336826
         }
     ],
     "authorName": "pandur",
