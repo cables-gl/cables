@@ -22,17 +22,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
+                "type": "2",
                 "name": "Object"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Changed"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Result"
             }
         ]
@@ -40,7 +40,6 @@
     "summary": "triggers when array has changed",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {

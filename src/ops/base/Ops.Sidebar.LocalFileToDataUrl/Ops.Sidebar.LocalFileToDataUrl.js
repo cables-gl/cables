@@ -13,7 +13,8 @@ const
     siblingsPort = op.outObject("childs"),
     outDataURL = op.outString("Data URL"),
     outFilename = op.outString("Filename"),
-    outObject = op.outObject("File Object");
+    outObject = op.outObject("File Object"),
+    outFileChanged = op.outTrigger("File Changed");
 
 outDataURL.ignoreValueSerialize = true;
 
@@ -97,6 +98,7 @@ function onReset()
     fileInputEle.value = "";
     outDataURL.set("");
     fileInputButton.innerHTML = inLabelText.get();
+    outFileChanged.trigger();
 }
 
 reset.onTriggered = onReset;
@@ -131,6 +133,7 @@ function handleFileSelect(evt)
         outFilename.set("");
         outObject.set(null);
     }
+    outFileChanged.trigger();
 }
 
 // events
