@@ -2,7 +2,7 @@ import Logger from "./core_logger";
 
 const EventTarget = function ()
 {
-    this._log = new Logger("eventtaget");
+    this._log = new Logger("eventtarget");
     this._eventCallbacks = {};
     this._logName = "";
     this._logEvents = false;
