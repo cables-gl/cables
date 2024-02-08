@@ -78,7 +78,7 @@ class RenderTargets
         if (i === "")outcolor = "col";
 
         if (type == "Normal") return "    " + outcolor + i + " = vec4(norm,1.);".endl();
-        else if (type == "Material Id, Object Id, Instance Id") return "    " + outcolor + i + " = vec4(materialId,objectId,instIdx,1.0);".endl();
+        else if (type == "Material Id, Object Id, Instance Id") return "    " + outcolor + i + " = vec4(round(materialId),round(objectId),round(instIdx),1.0);".endl();
         else if (type == "Default" || type == "Color") return "    " + outcolor + i + " = col;".endl();
         else if (type == "1") return "    " + outcolor + i + " = vec4(1.,1.,1.,1.);".endl();
         else if (type == "0") return "    " + outcolor + i + " = vec4(0.,0.,0.,0.);".endl();
@@ -89,7 +89,7 @@ class RenderTargets
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
         else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
         else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
-        else if (type == "Material Id") return "    " + outcolor + i + " = vec4(materialId,instIdx,0.,1.);".endl();
+        else if (type == "Material Id") return "    " + outcolor + i + " = vec4(round(materialId),round(instIdx),0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
     }
