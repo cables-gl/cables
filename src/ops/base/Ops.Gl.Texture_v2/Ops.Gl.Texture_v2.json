@@ -87,6 +87,12 @@
             "message": "Ops.User.pandur.Texture_v2 renamed to Ops.Gl.Texture_v2",
             "author": "pandur",
             "date": 1581607147784
+        },
+        {
+            "message": "typing in the url input will not blur element",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1707381819030
         }
     ],
     "summary": "Load an image as a texture",
