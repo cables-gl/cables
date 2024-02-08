@@ -95,6 +95,10 @@
             {
                 "type": "2",
                 "name": "File Object"
+            },
+            {
+                "type": "1",
+                "name": "File Changed"
             }
         ]
     },

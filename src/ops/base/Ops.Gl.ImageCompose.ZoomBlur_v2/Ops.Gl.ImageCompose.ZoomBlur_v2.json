@@ -2,43 +2,43 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "render"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Strength",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Samples",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Strength Map",
                 "group": "Strengh Map",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Source Strength Map index",
                 "group": "Strengh Map",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Invert Strength Map",
                 "group": "Strengh Map",
                 "subType": "boolean"
@@ -46,7 +46,7 @@
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "trigger"
             }
         ]
@@ -80,10 +80,15 @@
             "type": "rename",
             "author": "stephan",
             "date": 1701855713562
+        },
+        {
+            "message": "fixed problem with masks",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1707223987620
         }
     ],
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": []
 }

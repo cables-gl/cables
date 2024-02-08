@@ -56,11 +56,11 @@ void main()
 
         am=am*mul;
 
-        if(am<=0.02)
-        {
-            outColor=texture(tex, texCoord);
-            return;
-        }
+        // if(am<=0.0)
+        // {
+        //     outColor=texture(tex, texCoord);
+        //     return;
+        // }
     #endif
 
     for (float t = 0.0; t <= NUM_SAMPLES; t++)

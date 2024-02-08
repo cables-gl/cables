@@ -2,12 +2,11 @@ import Logger from "./core_logger";
 
 const EventTarget = function ()
 {
-    this._log = new Logger("eventtaget");
+    this._log = new Logger("eventtarget");
     this._eventCallbacks = {};
     this._logName = "";
     this._logEvents = false;
     this._listeners = {};
-    CABLES.eventTargetProfile = CABLES.eventTargetProfile || {};
 
     this.addEventListener = this.on = function (which, cb, idPrefix)
     {
@@ -48,6 +47,11 @@ const EventTarget = function ()
         }
     };
 
+    this.hasListenerForEventName = function (eventName)
+    {
+        return this._eventCallbacks[eventName] && this._eventCallbacks[eventName].length > 0;
+    };
+
     this.removeEventListener = this.off = function (which, cb)
     {
         if (which === null || which === undefined) return;
@@ -57,7 +61,7 @@ const EventTarget = function ()
             const event = this._listeners[which];
             if (!event)
             {
-                console.log("could not find event...");
+                this._log.log("could not find event...");
                 return;
             }
 
@@ -82,11 +86,11 @@ const EventTarget = function ()
                 }
             }
 
-
             return;
         }
 
-        this._log.stack(" old function signature: removeEventListener! use listener id");
+        this._log.info("[eventtaget] ", "old function signature: removeEventListener! use listener id");
+        this._log.log((new Error()).stack);
 
         let index = null;
         for (let i = 0; i < this._eventCallbacks[which].length; i++)
@@ -108,36 +112,21 @@ const EventTarget = function ()
 
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
-        if (this._logEvents) console.log("[event] ", this._logName, which, this._eventCallbacks); // eslint-disable-line
+        if (this._logEvents) this._log.log("[event] ", this._logName, which, this._eventCallbacks);
 
         if (this._eventCallbacks[which])
         {
-            const execCallbacks = [];
             for (let i = 0; i < this._eventCallbacks[which].length; i++)
             {
-                if (!execCallbacks[which]) execCallbacks[which] = [];
-                execCallbacks[which].push(this._eventCallbacks[which][i]);
-            }
-
-            if (execCallbacks[which])
-            {
-                for (let i = 0; i < execCallbacks[which].length; i++)
+                if (this._eventCallbacks[which][i])
                 {
-                    if (execCallbacks[which][i])
-                    {
-                        const evName = this.constructor.name + " " + which;
-                        CABLES.eventTargetProfile[evName] = (CABLES.eventTargetProfile[evName] || { "name": this.constructor.name, "event": which, "count": 0 });
-                        CABLES.eventTargetProfile[evName].active = this._eventCallbacks[which].length;
-                        CABLES.eventTargetProfile[evName].count++;
-
-                        execCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
-                    }
+                    this._eventCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
                 }
             }
         }
         else
         {
-            if (this._logEvents) console.log("[event] has no event callback", which, this._eventCallbacks); // eslint-disable-line
+            if (this._logEvents) this._log.log("[event] has no event callback", which, this._eventCallbacks);
         }
     };
 };

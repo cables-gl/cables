@@ -17,6 +17,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694686430596
+        },
+        {
+            "message": "Ops.Dev.Debug.CablesEvents renamed to Ops.Deprecated.Dev.Debug.CablesEvents",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1707316031100
         }
     ],
     "layout": {
@@ -36,8 +42,6 @@
     "authorName": "pandur",
     "created": 1689660639693,
     "summary": "Get current cables events",
-
-
     "docs": {
         "ports": []
     }
