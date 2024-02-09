@@ -33,6 +33,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1706867407064
+        },
+        {
+            "message": "Added Option to select multiple files at the same time",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1707319033174
         }
     ],
     "authorName": "pandur",
@@ -54,6 +60,11 @@
             {
                 "type": "5",
                 "name": "Accept Files"
+            },
+            {
+                "type": "0",
+                "name": "Allow Multiple Files",
+                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -95,6 +106,19 @@
             {
                 "type": "2",
                 "name": "File Object"
+            },
+            {
+                "type": "0",
+                "name": "Num Files",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Data URLs"
+            },
+            {
+                "type": "3",
+                "name": "Filenames"
             },
             {
                 "type": "1",

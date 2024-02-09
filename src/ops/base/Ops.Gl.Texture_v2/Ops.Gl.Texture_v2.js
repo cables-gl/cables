@@ -101,7 +101,7 @@ function realReload(nocache)
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
     let needsRefresh = false;
-    if (loadedFilename != filename.get()) needsRefresh = true;
+    // if (loadedFilename != filename.get()) needsRefresh = true;
     loadedFilename = filename.get();
 
     if ((filename.get() && filename.get().length > 1))

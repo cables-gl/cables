@@ -68,92 +68,92 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "exe"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Geometry",
                 "objType": "geometry"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Limit Instances",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Num Instances",
                 "subType": "integer"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Position Texture",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Rotation Texture",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Rotation index",
                 "subType": "integer"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Scale Texture",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Color Texture",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "TexCoord Texture",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Color Texture Blendmode index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Ignore Alpha Less Than",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Multiply Pos X",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Multiply Pos Y",
                 "subType": "number"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Multiply Pos Z",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "Trigger Out"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Num",
                 "subType": "number"
             }

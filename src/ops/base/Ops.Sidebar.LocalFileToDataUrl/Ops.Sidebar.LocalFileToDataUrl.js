@@ -4,6 +4,7 @@ const
     labelPort = op.inString("Text", "Select File:"),
     inLabelText = op.inString("Button Text", "Choose File"),
     inAccept = op.inString("Accept Files", ""),
+    inMultiple = op.inBool("Allow Multiple Files", false),
     inId = op.inValueString("Id", ""),
     inVisible = op.inBool("Visible", true),
     inGreyOut = op.inBool("Grey Out", false),
@@ -14,6 +15,9 @@ const
     outDataURL = op.outString("Data URL"),
     outFilename = op.outString("Filename"),
     outObject = op.outObject("File Object"),
+    outNumFiles = op.outNumber("Num Files"),
+    outDataURLs = op.outArray("Data URLs"),
+    outFilenames = op.outArray("Filenames"),
     outFileChanged = op.outTrigger("File Changed");
 
 outDataURL.ignoreValueSerialize = true;
@@ -73,6 +77,12 @@ greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
 
+inMultiple.onChange = () =>
+{
+    if (inMultiple.get())fileInputEle.setAttribute("multiple", "multiple");
+    else fileInputEle.removeAttribute("multiple");
+};
+
 inAccept.onChange = () =>
 {
     fileInputEle.accept = inAccept.get();
@@ -99,6 +109,9 @@ function onReset()
     outDataURL.set("");
     fileInputButton.innerHTML = inLabelText.get();
     outFileChanged.trigger();
+    outNumFiles.set(0);
+    outDataURLs.setRef([]);
+    outFilenames.setRef([]);
 }
 
 reset.onTriggered = onReset;
@@ -107,6 +120,8 @@ elReset.addEventListener("click", onReset);
 function handleFileSelect(evt)
 {
     const reader = new FileReader();
+    const dataUrlArray = [];
+    const filenamesArray = [];
 
     reader.onabort = function (e)
     {
@@ -115,24 +130,55 @@ function handleFileSelect(evt)
 
     reader.onload = function (e)
     {
+        dataUrlArray[0] = e.target.result;
         outDataURL.set(e.target.result);
     };
 
+    const numFiles = evt.target.files.length;
+
+    outNumFiles.set(numFiles);
+    let outDelay = null;
+
     if (evt.target.files[0])
     {
-        reader.readAsDataURL(evt.target.files[0]);
-        outFilename.set(evt.target.files[0].name);
-        fileInputButton.innerHTML = evt.target.files[0].name;
-        outObject.set(evt.target.files[0]);
+        for (let i = 0; i < numFiles; i++)
+        {
+            if (i === 0)
+            {
+                reader.readAsDataURL(evt.target.files[0]);
+                outFilename.set(evt.target.files[0].name);
+                if (numFiles == 1)fileInputButton.innerHTML = evt.target.files[0].name;
+                outObject.set(evt.target.files[0]);
+            }
+
+            filenamesArray.push(evt.target.files[i].name);
+
+            const readerLoop = new FileReader();
+            const ii = i;
+            readerLoop.onload = function (e)
+            {
+                dataUrlArray[ii] = e.target.result;
+
+                fileInputButton.innerHTML = numFiles + " files selected";
+
+                clearTimeout(outDelay);
+                outDelay = setTimeout(() => { outDataURLs.setRef(dataUrlArray); }, 100);
+            };
+            readerLoop.readAsDataURL(evt.target.files[i]);
+        }
     }
     else
     {
         fileInputButton.innerHTML = inLabelText.get();
 
+        outFilenames.setRef([]);
         outDataURL.set("");
         outFilename.set("");
         outObject.set(null);
     }
+
+    outFilenames.setRef(filenamesArray);
+
     outFileChanged.trigger();
 }
 
