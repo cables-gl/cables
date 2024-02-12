@@ -211,6 +211,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694676274511
+        },
+        {
+            "message": "Fixed bug: output textures where not updated correctly every frame",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1707747669663
         }
     ],
     "issues": "requires WebGL2",
