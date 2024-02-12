@@ -318,6 +318,8 @@ Patch.prototype.clear = function ()
     this.animFrameOps.length = 0;
     this.timer = new Timer();
     while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
+
+    this._opIdCache = {};
     this.emitEvent("patchClearEnd");
 };
 
@@ -487,8 +489,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (this._opIdCache[op.id])
         {
             console.log("opid with id " + op.id + " already exists in patch!");
-            // op.id += "_double";
-            return;
+            this.deleteOp(op.id); // strange with subpatch ops: why is this needed, somehow ops get added twice ???.....
+            // return;
         }
 
         this.ops.push(op);
