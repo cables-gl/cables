@@ -11,6 +11,7 @@ const TextureEffect = function (cgl, options)
 
     this._textureSource = null;
     this._options = options;
+    this.name = options.name || "unknown";
 
     // TODO: do we still need the options ?
     // var opts=options ||

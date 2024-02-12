@@ -499,11 +499,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
         if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
         this.emitEvent("onOpAdd", op, fromDeserialize);
 
+        if (op.init) op.init();
 
-        if (op.init)
-        {
-            op.init();
-        }
         op.emitEvent("init", fromDeserialize);
     }
     else
@@ -619,17 +616,12 @@ Patch.prototype.emitOnAnimFrameEvent = function (time, delta)
     time = time || this.timer.getTime();
 
     for (let i = 0; i < this.animFrameCallbacks.length; ++i)
-    {
-        if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum, delta);
-    }
+        if (this.animFrameCallbacks[i])
+            this.animFrameCallbacks[i](time, this._frameNum, delta);
 
     for (let i = 0; i < this.animFrameOps.length; ++i)
-    {
         if (this.animFrameOps[i].onAnimFrame)
-        {
             this.animFrameOps[i].onAnimFrame(time, this._frameNum, delta);
-        }
-    }
 };
 
 Patch.prototype.renderFrame = function (timestamp)
