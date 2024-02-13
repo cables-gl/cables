@@ -4,7 +4,7 @@ This is a bit of a complicated question, so let's try to break this down:
 
 - Using cables and several of the used open source components does not impose a license on your work
 - Everything needed to run a cables patch is licensed under the [MIT License](https://opensource.org/licenses/MIT)
-- Every export you create of a cables patch will contain information about the licenses of other included libraries (which are all compatible with MIT, if you didn't add then on your own)
+- Every export you create of a cables patch will contain information about the licenses of other included libraries (which are all compatible with MIT, if you didn't add them on your own)
 - What you do in cables is yours, you have the choice of making patches public or not
 - Private patches retain all the copyright there is and we will never make patches public or share assets of these
 - When making patches public on cables.gl you can choose from any CC license, a "public domain" option or "all rights reserved"
