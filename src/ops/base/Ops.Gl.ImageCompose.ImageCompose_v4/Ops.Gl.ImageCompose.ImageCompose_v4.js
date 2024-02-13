@@ -235,12 +235,6 @@ function doRender()
 {
     if (!effect || reInitEffect) initEffect();
 
-    // const vp = cgl.getViewPort();
-    // prevViewPort[0] = vp[0];
-    // prevViewPort[1] = vp[1];
-    // prevViewPort[2] = vp[2];
-    // prevViewPort[3] = vp[3];
-
     cgl.pushBlend(false);
 
     updateResolution();
@@ -259,16 +253,11 @@ function doRender()
 
     cgl.pushViewPort(0, 0, width.get(), height.get());
 
-    // texOut.set(CGL.Texture.getEmptyTexture(cgl));
-
-    texOut.setRef(effect.getCurrentSourceTexture());
-
     effect.endEffect();
+    texOut.setRef(effect.getCurrentSourceTexture());
 
     cgl.popViewPort();
 
-    // cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
-
-    cgl.popBlend(false);
+    cgl.popBlend();
     cgl.currentTextureEffect = oldEffect;
 }

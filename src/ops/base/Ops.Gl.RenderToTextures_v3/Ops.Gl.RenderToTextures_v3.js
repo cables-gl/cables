@@ -147,7 +147,7 @@ function doRender()
         for (let i = 0; i < NUM_BUFFERS; i++)
         {
             if (i <= numSlots) outTexPorts[i].setRef(fb.getTextureColorNum(i));
-            else outTexPorts[i].set(null);
+            else outTexPorts[i].setRef(CGL.Texture.getEmptyTexture(cgl));
         }
 
         texDepth.setRef(fb.getTextureDepth());
@@ -190,6 +190,12 @@ function doRender()
     // mod.unbind();
 
     fb.renderEnd(cgl);
+
+    for (let i = 0; i < NUM_BUFFERS; i++)
+        if (i <= numSlots)
+            outTexPorts[i].setRef(fb.getTextureColorNum(i));
+
+    texDepth.setRef(fb.getTextureDepth());
 
     cgl.resetViewPort();
 }
