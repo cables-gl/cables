@@ -1,5 +1,4 @@
 const render = op.inTrigger("render");
-
 const trigger = op.outTrigger("trigger");
 const shaderOut = op.outObject("shader", null, "shader");
 
@@ -144,11 +143,12 @@ function updateDiffuseTexture()
 
 function updateUi()
 {
-    diffuseRepeatX.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    diffuseRepeatY.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    diffuseOffsetX.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    diffuseOffsetY.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    colorizeTexture.setUiAttribs({ "greyout": !diffuseTexture.get() });
+    const hasTexture = diffuseTexture.isLinked() || textureOpacity.isLinked();
+    diffuseRepeatX.setUiAttribs({ "greyout": !hasTexture });
+    diffuseRepeatY.setUiAttribs({ "greyout": !hasTexture });
+    diffuseOffsetX.setUiAttribs({ "greyout": !hasTexture });
+    diffuseOffsetY.setUiAttribs({ "greyout": !hasTexture });
+    colorizeTexture.setUiAttribs({ "greyout": !hasTexture });
 
     alphaMaskSource.setUiAttribs({ "greyout": !textureOpacity.get() });
     texCoordAlpha.setUiAttribs({ "greyout": !textureOpacity.get() });

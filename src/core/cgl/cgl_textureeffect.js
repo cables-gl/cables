@@ -116,14 +116,16 @@ TextureEffect.prototype.setSourceTexture = function (tex)
 TextureEffect.prototype.continueEffect = function ()
 {
     this._cgl.pushDepthTest(false);
-
     this._cgl.pushModelMatrix();
-
     this._cgl.pushPMatrix();
+    // todo why two pushs?
+
 
     this._cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
-    // this._cgl.gl.viewport(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
-    mat4.perspective(this._cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0);
+
+
+
+    mat4.perspective(this._cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0); // todo: why?
 
     this._cgl.pushPMatrix();
     mat4.identity(this._cgl.pMatrix);
