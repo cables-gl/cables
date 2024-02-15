@@ -1,7 +1,7 @@
 const inSocket = op.inObject("socket", null, "socketcluster");
 const inTopic = op.inString("topic", "main");
-const clientIdOut = op.outString("client id");
 const outData = op.outString("data");
+const clientIdOut = op.outString("client id");
 const outTrigger = op.outTrigger("received");
 
 const init = () =>

@@ -6,7 +6,8 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "socket"
+                "name": "socket",
+                "objType": "socketcluster"
             },
             {
                 "type": "5",
@@ -16,11 +17,11 @@
         "portsOut": [
             {
                 "type": "5",
-                "name": "client id"
+                "name": "data"
             },
             {
                 "type": "5",
-                "name": "data"
+                "name": "client id"
             },
             {
                 "type": "1",
@@ -30,8 +31,6 @@
     },
     "summary": "recieves string from the socketcluster socket/topic",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
