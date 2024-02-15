@@ -8,6 +8,9 @@ const
     inScales = op.inArray("Scale Array", 3),
     inRot = op.inArray("Rotations", 3),
     inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions", "Normals"], "Euler"),
+
+    inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
+
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
     inColor = op.inArray("Colors", 4),
     inTexCoords = op.inArray("TexCoords", 4),
@@ -44,6 +47,12 @@ mod.addModule({
 });
 
 mod.addModule({
+    "name": "MODULE_VERTEX_MOVELVIEW",
+    "title": op.name + "_billboard",
+    "srcBodyVert": attachments.billboard_vert
+});
+
+mod.addModule({
     "name": "MODULE_COLOR",
     "priority": -2,
     "title": op.name,
@@ -54,7 +63,9 @@ mod.addModule({
 mod.addUniformVert("f", "MOD_scale", inScale);
 
 let needsUpdateDefines = true;
+
 inBlendMode.onChange = () => { needsUpdateDefines = true; };
+
 doLimit.onChange = updateLimit;
 exe.onTriggered = doRender;
 exe.onLinkChanged = function ()
@@ -74,6 +85,7 @@ inRotMeth.onChange =
         recalc = true;
     };
 
+inBillboarding.onChange =
 inTexCoords.onChange = function ()
 {
     arrayChangedTexcoords = true;
@@ -97,6 +109,10 @@ function reset()
 
 function updateDefines()
 {
+    mod.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
+    mod.toggleDefine("BILLBOARDING_CYLINDRIC", inBillboarding.get() == "Cylindrical");
+    console.log("inBillboarding.get()", inBillboarding.get());
+
     mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
     mod.toggleDefine("TEXCOORDS_INSTANCES", inTexCoords.get());
     mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");

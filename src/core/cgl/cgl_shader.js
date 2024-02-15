@@ -112,7 +112,7 @@ const Shader = function (_cgl, _name, _op)
     this._tempInverseViewMatrix = mat4.create();
     this._tempInverseProjMatrix = mat4.create();
 
-    this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+    this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
 };
 
 Shader.prototype.isValid = function ()
@@ -1461,8 +1461,6 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
             this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
             this._log.error(this._name + " shader linking fail...");
 
-            // console.log("srcFrag", fstr);
-            // console.log("srcVert", vstr);
             console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
 
             console.log("--------------------------------------");

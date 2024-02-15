@@ -81,6 +81,11 @@
             },
             {
                 "type": "0",
+                "name": "Billboarding index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Material blend mode index",
                 "subType": "integer"
             },
