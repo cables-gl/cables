@@ -4,6 +4,8 @@ const
     inScale = op.inValue("Scale", 1),
     inLimit = op.inBool("Limit Instances", false),
     inNum = op.inInt("Num Instances", 1000),
+    inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
+
     inTex1 = op.inTexture("Position Texture", null, "texture"),
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
     inRotMode = op.inSwitch("Rotation", ["Euler", "Normal", "Quaternion"], "Euler"),
@@ -42,6 +44,12 @@ mod.addModule({
 });
 
 mod.addModule({
+    "name": "MODULE_VERTEX_MOVELVIEW",
+    "title": op.name + "_billboard",
+    "srcBodyVert": attachments.billboard_vert
+});
+
+mod.addModule({
     "name": "MODULE_COLOR",
     "priority": -2,
     "title": op.name,
@@ -60,6 +68,7 @@ mod.addUniformVert("f", "MOD_texSizeY", 0);
 mod.addUniformVert("f", "MOD_alphaThresh", inAlphaThresh);
 mod.addUniformVert("3f", "MOD_mulRGB", inMulR, inMulG, inMulB);
 
+inBillboarding.onChange =
 inBlendMode.onChange =
 inRotMode.onChange =
 inTex1.onChange =
@@ -96,6 +105,9 @@ function updateUi()
 
 function updateDefines()
 {
+    mod.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
+    mod.toggleDefine("BILLBOARDING_CYLINDRIC", inBillboarding.get() == "Cylindrical");
+
     mod.toggleDefine("ROT_EULER", inRotMode.get() === "Euler");
     mod.toggleDefine("ROT_NORMAL", inRotMode.get() === "Normal");
     mod.toggleDefine("ROT_QUAT", inRotMode.get() === "Quaternion");

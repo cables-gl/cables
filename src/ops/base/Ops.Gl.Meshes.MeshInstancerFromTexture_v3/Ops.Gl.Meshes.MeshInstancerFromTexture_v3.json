@@ -92,6 +92,11 @@
                 "subType": "integer"
             },
             {
+                "type": "0",
+                "name": "Billboarding index",
+                "subType": "integer"
+            },
+            {
                 "type": "2",
                 "name": "Position Texture",
                 "objType": "texture"

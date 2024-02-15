@@ -111,7 +111,6 @@ function updateDefines()
 {
     mod.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
     mod.toggleDefine("BILLBOARDING_CYLINDRIC", inBillboarding.get() == "Cylindrical");
-    console.log("inBillboarding.get()", inBillboarding.get());
 
     mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
     mod.toggleDefine("TEXCOORDS_INSTANCES", inTexCoords.get());
