@@ -9,12 +9,20 @@ IN vec2 texCoord;
 
 void main()
 {
-    vec4 col=texture(tex,texCoord);
+    vec2 tc=texCoord;
 
-    #ifdef TEX_MASK
-        col.a=texture(texMask,texCoord).r;
+    #ifdef FLIPX
+        tc.x=1.0-tc.x;
+    #endif
+    #ifdef FLIPY
+        tc.y=1.0-tc.y;
     #endif
 
+    vec4 col=texture(tex,tc);
+
+    #ifdef TEX_MASK
+        col.a=texture(texMask,tc).r;
+    #endif
 
     #ifdef GREY_R
         col.rgb=vec3(col.r);
