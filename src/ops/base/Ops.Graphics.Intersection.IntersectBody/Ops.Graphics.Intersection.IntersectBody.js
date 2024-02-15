@@ -28,6 +28,11 @@ let obj =
 
 trigger.onTriggered = render;
 
+function getCopyObj()
+{
+    return { "name": obj.name, "type": obj.type };
+}
+
 inArea.onChange = () =>
 {
     obj.type = shapes.indexOf(inArea.get()) + 1;
@@ -89,16 +94,17 @@ function render()
     }
     else
     {
-        cgl.frameStore.collisionWorld.bodies.push(obj);
-        obj.name = inName.get();
-        obj.pos = [0, 0, 0];
+        const objCopy = getCopyObj();
+        cgl.frameStore.collisionWorld.bodies.push(objCopy);
+        objCopy.name = inName.get();
+        objCopy.pos = [0, 0, 0];
 
-        vec3.transformMat4(obj.pos, obj.pos, cg.mMatrix);
+        vec3.transformMat4(objCopy.pos, objCopy.pos, cg.mMatrix);
 
-        obj.size = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
+        objCopy.size = [inSizeX.get(), inSizeY.get(), inSizeZ.get()];
 
-        if (obj.type == 2)setBox(obj);
-        if (obj.type == 1)obj.radius = radius;
+        if (objCopy.type == 2)setBox(objCopy);
+        if (objCopy.type == 1)objCopy.radius = radius;
     }
 
     next.trigger();

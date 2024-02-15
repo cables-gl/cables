@@ -28,6 +28,10 @@
             {
                 "type": "0",
                 "name": "Shape index",
+                "values": [
+                    "Sphere",
+                    "BoxAA"
+                ],
                 "subType": "integer"
             },
             {

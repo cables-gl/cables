@@ -221,6 +221,10 @@
             {
                 "type": "0",
                 "name": "AO UV Channel index",
+                "values": [
+                    "1",
+                    "2"
+                ],
                 "subType": "integer"
             },
             {
@@ -244,6 +248,11 @@
             {
                 "type": "0",
                 "name": "Env Map Blend index",
+                "values": [
+                    "Add",
+                    "Multiply",
+                    "Mix"
+                ],
                 "group": "Texture Intensities",
                 "subType": "integer"
             },
@@ -256,6 +265,13 @@
             {
                 "type": "0",
                 "name": "Alpha Mask Source index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "group": "Opacity Texture",
                 "subType": "integer"
             }

@@ -57,6 +57,12 @@
             {
                 "type": "0",
                 "name": "Alpha Mode index",
+                "values": [
+                    "Opaque",
+                    "Masked",
+                    "Dithered",
+                    "Blend"
+                ],
                 "group": "Shader Parameters",
                 "subType": "integer"
             },
@@ -129,6 +135,11 @@
             {
                 "type": "0",
                 "name": "Tonemapping index",
+                "values": [
+                    "sRGB",
+                    "HejiDawson",
+                    "Photographic"
+                ],
                 "group": "Tonemapping",
                 "subType": "integer"
             },
@@ -165,6 +176,14 @@
             {
                 "type": "0",
                 "name": "Vertex Colour Mode index",
+                "values": [
+                    "colour",
+                    "AORM",
+                    "AO",
+                    "R",
+                    "M",
+                    "lightmap"
+                ],
                 "group": "Advanced Shader Parameters",
                 "subType": "integer"
             },

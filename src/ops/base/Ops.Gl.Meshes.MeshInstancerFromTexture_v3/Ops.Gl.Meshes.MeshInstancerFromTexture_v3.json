@@ -100,6 +100,11 @@
             {
                 "type": "0",
                 "name": "Billboarding index",
+                "values": [
+                    "Off",
+                    "Spherical",
+                    "Cylindrical"
+                ],
                 "subType": "integer"
             },
             {
@@ -115,6 +120,11 @@
             {
                 "type": "0",
                 "name": "Rotation index",
+                "values": [
+                    "Euler",
+                    "Normal",
+                    "Quaternion"
+                ],
                 "subType": "integer"
             },
             {
@@ -135,6 +145,11 @@
             {
                 "type": "0",
                 "name": "Color Texture Blendmode index",
+                "values": [
+                    "Multiply",
+                    "Add",
+                    "Normal"
+                ],
                 "subType": "integer"
             },
             {
