@@ -17,6 +17,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1687166259353
+        },
+        {
+            "message": "Can now be used in repeat loops/randomcluster etc.",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1708013754293
         }
     ],
     "layout": {
