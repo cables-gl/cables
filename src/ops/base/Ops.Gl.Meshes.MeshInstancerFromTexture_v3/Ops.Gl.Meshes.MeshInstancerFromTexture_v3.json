@@ -61,6 +61,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1675785973179
+        },
+        {
+            "message": "Added options for billboarding",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1707988967571
         }
     ],
     "authorName": "pandur",
