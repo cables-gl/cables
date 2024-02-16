@@ -31,6 +31,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1706539979306
+        },
+        {
+            "message": "Added \"vertex color\" output option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1707910560031
         }
     ],
     "authorName": "pandur",

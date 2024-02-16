@@ -6,7 +6,7 @@ const
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inColor = op.inValueBool("Color", false),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
-
+    inInteger = op.inBool("Integer", false),
     inSeed = op.inFloat("Seed", 1),
     inOutR = op.inBool("Channel R", true),
     inMinR = op.inFloat("Min R", 0),
@@ -37,13 +37,14 @@ inSeed.onChange =
     inOutG.onChange =
     tfilter.onChange =
     wrap.onChange =
+    inInteger.onChange =
     inColor.onChange = update;
 
 update();
 
 function update()
 {
-    const isFp = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    const isFp = inPixel.get().indexOf("float") > -1;
     if (!isFp)
     {
         if (
@@ -130,6 +131,11 @@ function update()
                 pixels[i + 3] = 255;
             }
         }
+    }
+
+    if (inInteger.get())
+    {
+        for (let i = 0; i < pixels.length; i++)pixels[i] = Math.round(pixels[i] - 0.5);
     }
 
     if (!inOutR.get()) for (let i = 0; i < num; i += 4)pixels[i + 0] = 0.0;
