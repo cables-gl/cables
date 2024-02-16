@@ -17,15 +17,9 @@ inObj.onChange = () =>
     let obj = inObj.get();
     let str = "???";
 
-    if (obj && obj.getInfo)
-    {
-        obj = obj.getInfo();
-    }
+    if (obj && obj.getInfo) obj = obj.getInfo();
 
-    if (obj && obj.constructor && obj.constructor.name != "Object")
-    {
-        op.setUiAttribs({ "extendTitle": obj.constructor.name });
-    }
+    if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
 
     if (str === undefined)str = "undefined";
     else if (str === null)str = "null";
