@@ -23,14 +23,25 @@ void main()
 {
     vec2 tc=texCoord;
 
+
     #ifdef ARRANGE_COLS
         float index=floor(tc.x*numCols);
         vec2 fr=vec2(fract(tc.x*numCols),tc.y);
+
+        #ifdef FLIPORDER
+            index=numCols-(index+1.0);
+        #endif
+
     #endif
 
     #ifdef ARRANGE_ROWS
         float index=floor((1.0-tc.y)*numRows);
         vec2 fr=vec2(tc.x,fract(tc.y*numRows));
+
+        #ifdef FLIPORDER
+            index=numRows-(index+1.0);
+        #endif
+
     #endif
 
     #ifdef ARRANGE_GRID
@@ -38,8 +49,14 @@ void main()
         float colm=floor(tc.x*numCols);
         float index=row+(colm*numCols);
 
+        #ifdef FLIPORDER
+            index=(numRows*numCols)-(index)-1.0;
+        #endif
+
         vec2 fr=vec2(fract(tc.x*numCols),fract(tc.y*numRows));
     #endif
+
+
 
     vec4 col;
     if(index==0.0)col=texture(tex0,fr);
