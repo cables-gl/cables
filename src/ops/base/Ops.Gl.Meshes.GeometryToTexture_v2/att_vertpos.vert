@@ -1,4 +1,7 @@
 
+
+
+
 #ifdef MOD_ATTRIB_POS
     MOD_pos=pos.xyz;
 #endif
@@ -10,6 +13,9 @@
 #endif
 #ifdef MOD_ATTRIB_TEXTURECOLOR
     MOD_pos=texture(MOD_texColor,attrTexCoord).rgb;
+#endif
+#ifdef MOD_ATTRIB_VERTCOLS
+    MOD_pos=attrVertColor.rgb;
 #endif
 
 MOD_pos*=MOD_mul;

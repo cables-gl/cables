@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Execute"),
-    inSizeStrat = op.inSwitch("Size", ["First", "Single", "Manual"], "Auto"),
+    inSizeStrat = op.inSwitch("Size", ["First", "Single", "Manual"], "First"),
     inArrange = op.inSwitch("Arrangement", ["Columns", "Rows", "Grid"], "Columns"),
     inWidth = op.inInt("Width", 256),
     inHeight = op.inInt("Height", 256),
