@@ -41,7 +41,7 @@
             }
         ]
     },
-    "summary": "recieves number from the socketcluster socket/topic",
+    "summary": "receive number from the socketcluster socket/topic",
     "issues": "",
 
 

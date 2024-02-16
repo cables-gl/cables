@@ -136,7 +136,7 @@
             },
             {
                 "name": "socket",
-                "text": "socket object for send/recieve ops"
+                "text": "socket object for send/receive ops"
             },
             {
                 "name": "can send",

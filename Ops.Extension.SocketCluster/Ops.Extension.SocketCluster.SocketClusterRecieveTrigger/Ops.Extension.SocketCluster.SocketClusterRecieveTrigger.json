@@ -34,7 +34,7 @@
             }
         ]
     },
-    "summary": "Recieves trigger from the socketcluster socket/topic",
+    "summary": "Receives trigger from the socketcluster socket/topic",
     "issues": "",
 
 

@@ -29,7 +29,7 @@
             }
         ]
     },
-    "summary": "recieves string from the socketcluster socket/topic",
+    "summary": "receives string from the socketcluster socket/topic",
     "issues": "",
     "youtubeids": [],
     "docs": {

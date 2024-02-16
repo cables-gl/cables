@@ -29,7 +29,7 @@
             }
         ]
     },
-    "summary": "Recieves boolean value from the socketcluster socket/topic",
+    "summary": "Receive boolean value from the socketcluster socket/topic",
     "issues": "",
 
 

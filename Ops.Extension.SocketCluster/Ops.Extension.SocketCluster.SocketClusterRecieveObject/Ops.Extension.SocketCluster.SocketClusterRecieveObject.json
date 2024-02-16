@@ -29,7 +29,7 @@
             }
         ]
     },
-    "summary": "Recieves object from the socketcluster socket/topic",
+    "summary": "Receives object from the socketcluster socket/topic",
     "issues": "",
 
 
