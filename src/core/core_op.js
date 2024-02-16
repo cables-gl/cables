@@ -746,7 +746,7 @@ const Op = function ()
     Op.prototype.inGradient = function (name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_TRIGGER, {
                 "display": "gradient",
                 "hidePort": true
             })
