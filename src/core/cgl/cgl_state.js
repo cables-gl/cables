@@ -59,11 +59,8 @@ class Context extends CGState
         this._stackDepthTest = [];
         this.mainloopOp = null;
 
-        // this._pixelDensity = ;
-
-
         this._simpleShader = new Shader(this, "simpleshader");
-        this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+        this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
         this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
         this._currentShader = this._simpleShader;
@@ -154,7 +151,15 @@ class Context extends CGState
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
 
-        if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
+
+        if (!this.gl || this.gl.isContextLost())
+        {
+            this.aborted = true;
+            this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
+            return;
+        }
+
+        if (this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
             this.glVersion = 2;
         }
@@ -183,13 +188,6 @@ class Context extends CGState
                 this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
                 this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
             }
-        }
-
-        if (!this.gl || this.gl.isContextLost())
-        {
-            this.aborted = true;
-            this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
-            return;
         }
 
         const dbgRenderInfo = this.enableExtension("WEBGL_debug_renderer_info");
@@ -1274,6 +1272,7 @@ Context.prototype.setCursor = function (str)
  */
 Context.prototype.enableExtension = function (name)
 {
+    if (!this.gl) return null;
     // const start = performance.now();
 
     if (this._enabledExtensions.hasOwnProperty(name))

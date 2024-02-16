@@ -5,75 +5,98 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "render"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Texture",
                 "objType": "texture"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "Alpha Mask",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "use original size",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "width",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "height",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Pixel Format index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "wrap index",
                 "subType": "integer"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Invert A",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
+                "type": "1",
                 "name": "trigger"
             },
             {
-                "type": 2,
+                "type": "2",
                 "name": "texture_out",
                 "objType": "texture"
             },
             {
-                "type": 0,
+                "type": "0",
                 "name": "Aspect Ratio",
                 "subType": "number"
             }
@@ -99,6 +122,12 @@
             "message": "cloned op from Ops.Gl.Textures.CopyTexture_v2",
             "author": "pandur",
             "date": 1702997856007
+        },
+        {
+            "message": "Added option to fllip the image on Axis X/Y ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708016457333
         }
     ],
     "exampleProjectId": "G2_my7"

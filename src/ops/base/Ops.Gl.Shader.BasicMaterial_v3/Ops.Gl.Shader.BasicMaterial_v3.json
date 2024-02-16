@@ -128,13 +128,52 @@
         "F-CUdHq40Pc"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "colorizeTexture",
+                "text": "Multiply the RGBA color by the Texture Color, can be used to tint the texture"
+            },
+            {
+                "name": "Vertex Colors",
+                "text": "If the current geometry provides vertex colors they will be used"
+            },
+            {
+                "name": "textureOpacity",
+                "text": "Texture input for settings opacity/alpha channel of the final color. An easy way to create a mask or holes in the object"
+            },
+            {
+                "name": "Alpha Mask Source index",
+                "text": "What information should control the final alpha channel/opacity ?"
+            },
+            {
+                "name": "diffuseRepeatX",
+                "text": "Repeat the texture on the X axis. e.g.: 2 - shows the images twice, 0.5 only shows half of the image"
+            },
+            {
+                "name": "Tex Offset X",
+                "text": "Scroll the texture on the X axis"
+            },
+            {
+                "name": "Crop TexCoords",
+                "text": "Do not repeat the image, for example when scrolling &gt; 1"
+            },
+            {
+                "name": "billboard",
+                "text": "Rotate the final object perpendicular to the camera"
+            }
+        ]
     },
     "changelog": [
         {
             "message": "added \"use vertex color\" input parameter",
             "author": "pandur",
             "date": 1643616563167
+        },
+        {
+            "message": "Texture transform is now usable with only an opacity/mask texture connected",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1707980494934
         }
     ],
     "exampleProjectId": "SKCL88"

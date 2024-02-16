@@ -66,8 +66,12 @@ void main()
 
     // this needs only to be done when instancing....
 
-    mvMatrix=viewMatrix*mMatrix;
+    mat4 modelViewMatrix=viewMatrix*mMatrix;
+    {{MODULE_VERTEX_MOVELVIEW}}
+    mvMatrix=modelViewMatrix;
+
+
     modelPos=mMatrix*pos;
 
-    gl_Position = projMatrix * mvMatrix * pos;
+    gl_Position = projMatrix * modelViewMatrix * pos;
 }

@@ -543,6 +543,7 @@ Texture.prototype.initTexture = function (img, filter)
  * @memberof Texture
  * @instance
  */
+Texture.prototype.dispose =
 Texture.prototype.delete = function ()
 {
     if (this.loading)

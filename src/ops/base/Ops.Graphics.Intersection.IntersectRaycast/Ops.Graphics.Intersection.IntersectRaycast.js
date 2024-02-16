@@ -84,11 +84,13 @@ function doRender()
         vec3.normalize(dir, dir);
         const a = vec3.dot(dir, dir);
 
+        let foundDist = 9999999;
+
         let found = false;
         const bodies = cgl.frameStore.collisionWorld.bodies;
         for (let i = 0; i < bodies.length; i++)
         {
-            if (found) break;
+            // if (found) break;
 
             const body = bodies[i];
             if (body.type == 1) // sphere
@@ -100,18 +102,22 @@ function doRender()
 
                 if (discriminant > 0)
                 {
-                    found = true;
-                    outName.set(body.name);
-                    outHasHit.set(true);
-
                     const dist = (-b - Math.sqrt(discriminant)) / (2 + a);
+                    if (dist < foundDist)
+                    {
+                        found = true;
+                        outName.set(body.name);
+                        outHasHit.set(true);
 
-                    vec3.mul(oc, dir, [dist, dist, dist]);
-                    vec3.add(oc, oc, origin);
+                        foundDist = dist;
 
-                    outX.set(oc[0]);
-                    outY.set(oc[1]);
-                    outZ.set(oc[2]);
+                        vec3.mul(oc, dir, [dist, dist, dist]);
+                        vec3.add(oc, oc, origin);
+
+                        outX.set(oc[0]);
+                        outY.set(oc[1]);
+                        outZ.set(oc[2]);
+                    }
                 }
             }
             else if (body.type == 2) // aabb

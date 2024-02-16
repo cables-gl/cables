@@ -587,6 +587,7 @@ const Op = function ()
             if (!v)v = values[0];
             const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "increment": "integer",
+                "values": values,
                 "hideParam": true
             });
             const n = this.addInPort(indexPort);

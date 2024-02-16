@@ -79,6 +79,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1707480887347
+        },
+        {
+            "message": "Added option to flip order ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708016187566
         }
     ],
     "coreLibs": [
@@ -95,12 +101,27 @@
             {
                 "type": "0",
                 "name": "Size index",
+                "values": [
+                    "First",
+                    "Single",
+                    "Manual"
+                ],
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "Arrangement index",
+                "values": [
+                    "Columns",
+                    "Rows",
+                    "Grid"
+                ],
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Flip Order",
+                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -115,6 +136,11 @@
             {
                 "type": "0",
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {

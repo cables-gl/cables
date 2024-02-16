@@ -23,6 +23,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1705340431054
+        },
+        {
+            "message": "Will now pick the clostst body to the camera, not the very first one found",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708014146773
         }
     ],
     "layout": {
@@ -34,6 +40,10 @@
             {
                 "type": "0",
                 "name": "Coordinate Format index",
+                "values": [
+                    "-1 to 1",
+                    "XYZ-XYZ"
+                ],
                 "subType": "integer"
             },
             {

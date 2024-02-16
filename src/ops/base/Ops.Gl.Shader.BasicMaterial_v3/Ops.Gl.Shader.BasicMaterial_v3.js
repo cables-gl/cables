@@ -1,5 +1,4 @@
 const render = op.inTrigger("render");
-
 const trigger = op.outTrigger("trigger");
 const shaderOut = op.outObject("shader", null, "shader");
 
@@ -15,7 +14,7 @@ shader.addAttribute({ "type": "vec2", "name": "attrTexCoord" });
 shader.addAttribute({ "type": "vec3", "name": "attrVertNormal", "nameFrag": "norm" });
 shader.addAttribute({ "type": "float", "name": "attrVertIndex" });
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
 
 shader.setSource(attachments.basicmaterial_vert, attachments.basicmaterial_frag);
 
@@ -144,11 +143,12 @@ function updateDiffuseTexture()
 
 function updateUi()
 {
-    diffuseRepeatX.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    diffuseRepeatY.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    diffuseOffsetX.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    diffuseOffsetY.setUiAttribs({ "greyout": !diffuseTexture.get() });
-    colorizeTexture.setUiAttribs({ "greyout": !diffuseTexture.get() });
+    const hasTexture = diffuseTexture.isLinked() || textureOpacity.isLinked();
+    diffuseRepeatX.setUiAttribs({ "greyout": !hasTexture });
+    diffuseRepeatY.setUiAttribs({ "greyout": !hasTexture });
+    diffuseOffsetX.setUiAttribs({ "greyout": !hasTexture });
+    diffuseOffsetY.setUiAttribs({ "greyout": !hasTexture });
+    colorizeTexture.setUiAttribs({ "greyout": !hasTexture });
 
     alphaMaskSource.setUiAttribs({ "greyout": !textureOpacity.get() });
     texCoordAlpha.setUiAttribs({ "greyout": !textureOpacity.get() });

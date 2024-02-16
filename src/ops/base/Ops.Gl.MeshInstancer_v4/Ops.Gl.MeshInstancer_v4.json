@@ -26,6 +26,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1706033106935
+        },
+        {
+            "message": "Added options for billboarding",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1707988974833
         }
     ],
     "authorName": "pandur",
@@ -77,6 +83,11 @@
                 "type": "0",
                 "name": "Rotation Type index",
                 "group": "Parameters",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Billboarding index",
                 "subType": "integer"
             },
             {

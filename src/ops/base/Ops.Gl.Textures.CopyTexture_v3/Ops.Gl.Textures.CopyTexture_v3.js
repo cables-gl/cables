@@ -17,6 +17,9 @@ const
     invertB = op.inBool("Invert B", false),
     invertA = op.inBool("Invert A", false),
 
+    flipX = op.inBool("Flip X", false),
+    flipY = op.inBool("Flip Y", false),
+
     trigger = op.outTrigger("trigger"),
     texOut = op.outTexture("texture_out", null),
     outRatio = op.outNumber("Aspect Ratio");
@@ -50,6 +53,8 @@ let textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
+flipX.onChange =
+flipY.onChange =
 alphaMaskMethod.onChange =
     aniso.onChange =
     greyscale.onChange =
@@ -246,6 +251,9 @@ function doRender()
 
 function updateParams()
 {
+    bgShader.toggleDefine("FLIPX", flipX.get());
+    bgShader.toggleDefine("FLIPY", flipY.get());
+
     bgShader.toggleDefine("TEX_MASK", inTextureMask.get());
 
     bgShader.toggleDefine("GREY_R", greyscale.get() === "R");

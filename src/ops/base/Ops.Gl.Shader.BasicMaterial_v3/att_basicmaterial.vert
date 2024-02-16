@@ -25,7 +25,7 @@ UNI mat4 viewMatrix;
 void main()
 {
     mat4 mMatrix=modelMatrix;
-    mat4 mvMatrix;
+    mat4 modelViewMatrix;
 
     norm=attrVertNormal;
     texCoordOrig=attrTexCoord;
@@ -43,7 +43,7 @@ void main()
 
     #ifdef BILLBOARD
        vec3 position=vPosition;
-       mvMatrix=viewMatrix*modelMatrix;
+       modelViewMatrix=viewMatrix*modelMatrix;
 
        gl_Position = projMatrix * mvMatrix * vec4((
            position.x * vec3(
@@ -59,12 +59,16 @@ void main()
     {{MODULE_VERTEX_POSITION}}
 
     #ifndef BILLBOARD
-        mvMatrix=viewMatrix * mMatrix;
+        modelViewMatrix=viewMatrix * mMatrix;
+
+        {{MODULE_VERTEX_MOVELVIEW}}
+
     #endif
 
+    // mat4 modelViewMatrix=viewMatrix*mMatrix;
 
     #ifndef BILLBOARD
         // gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
-        gl_Position = projMatrix * mvMatrix * pos;
+        gl_Position = projMatrix * modelViewMatrix * pos;
     #endif
 }

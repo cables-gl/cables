@@ -145,5 +145,10 @@ void main()
         viewSpaceNormal = normalize(viewSpaceNormalMatrix * norm);
         viewSpacePosition = vec3(mvMatrix * pos);
     #endif
-    gl_Position = projMatrix * mvMatrix * pos;
+
+    mat4 modelViewMatrix=mvMatrix;
+    {{MODULE_VERTEX_MOVELVIEW}}
+
+
+    gl_Position = projMatrix * modelViewMatrix * pos;
 }

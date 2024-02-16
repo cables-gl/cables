@@ -1,5 +1,5 @@
 {{MODULES_HEAD}}
-IN vec3 vPosition;
+IN vec3 vPosition; //!@
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
 IN vec3 attrTangent,attrBiTangent;
@@ -23,5 +23,9 @@ void main()
     gl_PointSize=10.0;
 
     {{MODULE_VERTEX_POSITION}}
-    gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;
+
+    mat4 modelViewMatrix=viewMatrix*mMatrix;
+    {{MODULE_VERTEX_MOVELVIEW}}
+
+    gl_Position = projMatrix * modelViewMatrix * pos;
 }

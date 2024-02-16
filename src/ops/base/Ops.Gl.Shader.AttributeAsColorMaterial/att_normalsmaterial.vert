@@ -34,12 +34,14 @@ void main()
 
     {{MODULE_VERTEX_POSITION}}
 
-    mat4 mvMatrix=viewMatrix*mMatrix;
+    mat4 modelViewMatrix=viewMatrix*mMatrix;
 
     vert=pos.xyz;
     normal=norm;
     outTangent=tangent;
     outBiTangent=bitangent;
 
-    gl_Position = projMatrix * mvMatrix * pos;
+    {{MODULE_VERTEX_MOVELVIEW}}
+
+    gl_Position = projMatrix * modelViewMatrix * pos;
 }

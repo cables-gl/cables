@@ -94,6 +94,9 @@ void main()
 
     transformedNormal = normalize(mat3(normalMatrix) * normal);
 
-   gl_Position = projMatrix * mvMatrix * pos;
+    mat4 modelViewMatrix=mvMatrix;
+    {{MODULE_VERTEX_MOVELVIEW}}
+
+    gl_Position = projMatrix * modelViewMatrix * pos;
 
 }

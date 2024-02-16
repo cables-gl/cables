@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Execute"),
     inSizeStrat = op.inSwitch("Size", ["First", "Single", "Manual"], "Auto"),
     inArrange = op.inSwitch("Arrangement", ["Columns", "Rows", "Grid"], "Columns"),
+    inFlipOrder = op.inBool("Flip Order", false),
     inWidth = op.inInt("Width", 256),
     inHeight = op.inInt("Height", 256),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
@@ -39,6 +40,7 @@ let currentHeight = 0;
 
 inSizeStrat.onChange = updateUi;
 
+inFlipOrder.onChange =
 inArrange.onChange =
 inWidth.onChange =
     inHeight.onChange =
@@ -139,6 +141,7 @@ function initShader()
     uniNumRows = new CGL.Uniform(tc.bgShader, "f", "numRows", 0);
     uniNumCols = new CGL.Uniform(tc.bgShader, "f", "numCols", 0);
 
+    tc.bgShader.toggleDefine("FLIPORDER", inFlipOrder.get());
     tc.bgShader.toggleDefine("ARRANGE_COLS", inArrange.get() == "Columns");
     tc.bgShader.toggleDefine("ARRANGE_ROWS", inArrange.get() == "Rows");
     tc.bgShader.toggleDefine("ARRANGE_GRID", inArrange.get() == "Grid");
