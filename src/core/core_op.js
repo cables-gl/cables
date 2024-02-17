@@ -747,8 +747,8 @@ const Op = function ()
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-                "display": "gradient",
-                "hidePort": true
+                "display": "gradient"
+                // "hidePort": true
             })
         );
         if (v !== undefined) p.set(v);

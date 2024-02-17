@@ -17,50 +17,45 @@ inObj.onChange = () =>
     let obj = inObj.get();
     let str = "???";
 
-    if (obj && obj.getInfo)
-    {
-        obj = obj.getInfo();
-    }
+    if (obj && obj.getInfo) obj = obj.getInfo();
 
-    if (obj && obj.constructor && obj.constructor.name != "Object")
-    {
-        op.setUiAttribs({ "extendTitle": obj.constructor.name });
-    }
-
-    try
-    {
-        str = JSON.stringify(obj, false, 4);
-
-        if (
-            obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
-            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
-        {
-            str = "could not stringify object: " + obj.constructor.name + "\n";
-
-            const o = {};
-            for (const i in obj)
-            {
-                if (!obj[i]) continue;
-
-                if (obj[i].constructor)
-                {
-                    if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
-                        o[i] = obj[i];
-                }
-                else
-                    o[i] = "{???}";
-            }
-            obj = o;
-            str = JSON.stringify(obj, false, 4);
-        }
-    }
-    catch (e)
-    {
-        str = "object can not be displayed as string", e.msg;
-    }
+    if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
 
     if (str === undefined)str = "undefined";
-    if (str === null)str = "null";
+    else if (str === null)str = "null";
+    else
+        try
+        {
+            str = JSON.stringify(obj, false, 4);
+
+            if (
+                obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
+            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
+            {
+                str = "could not stringify object: " + obj.constructor.name + "\n";
+
+                const o = {};
+                for (const i in obj)
+                {
+                    if (!obj[i]) continue;
+
+                    if (obj[i].constructor)
+                    {
+                        if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
+                            o[i] = obj[i];
+                    }
+                    else
+                        o[i] = "{???}";
+                }
+                obj = o;
+                str = JSON.stringify(obj, false, 4);
+            }
+        }
+        catch (e)
+        {
+            str = "object can not be displayed as string", e.msg;
+        }
+
     str = String(str);
     lines = str.split("\n");
 };

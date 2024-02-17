@@ -102,7 +102,7 @@ function parseKeys()
         let grad = null;
         if (!inGrad.get() || inGrad.get() === "")
         {
-            op.setUiError("nodata", "gradient no data");
+            // op.setUiError("nodata", "gradient no data");
             return null;
         }
 

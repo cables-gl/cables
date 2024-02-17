@@ -36,6 +36,11 @@
             },
             {
                 "type": 0,
+                "name": "Integer",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Seed",
                 "subType": "number"
             },
@@ -100,7 +105,6 @@
     },
     "summary": "Simple noisetexture",
     "issues": "",
-
     "docs": {
         "ports": []
     },

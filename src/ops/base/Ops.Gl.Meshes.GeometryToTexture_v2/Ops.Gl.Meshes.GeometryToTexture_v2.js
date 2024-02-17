@@ -4,7 +4,7 @@ const
     inUpdateAlways = op.inBool("Continously Update", true),
 
     inOrder = op.inDropDown("Order", ["Sequential", "Random", "Vertex X", "Vertex Y", "Vertex Z"], "Sequential"),
-    inAttrib = op.inDropDown("Content", ["Vertex Pos", "Normals", "TexCoords", "Texture Color"], "Vertex Pos"),
+    inAttrib = op.inDropDown("Content", ["Vertex Pos", "Normals", "Vertex Colors", "TexCoords", "Texture Color"], "Vertex Pos"),
 
     inResize = op.inSwitch("Resize", ["None", "Rescale"]),
     inResizeNewSize = op.inFloat("New Size", 1),
@@ -55,7 +55,7 @@ mod.addModule({
     "priority": 200,
     "title": vertModTitle,
     "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": "OUT vec3 MOD_pos;",
+    "srcHeadVert": attachments.vertpos_head_vert,
     "srcBodyVert": attachments.vertpos_vert
 });
 
@@ -122,6 +122,7 @@ function updateAttrib()
     mod.toggleDefine("MOD_ATTRIB_TC", inAttrib.get() == "TexCoords");
     mod.toggleDefine("MOD_ATTRIB_NORMAL", inAttrib.get() == "Normals");
     mod.toggleDefine("MOD_ATTRIB_TEXTURECOLOR", inAttrib.get() == "Texture Color");
+    mod.toggleDefine("MOD_ATTRIB_VERTCOLS", inAttrib.get() == "Vertex Colors");
 
     needsUpdate = true;
 }

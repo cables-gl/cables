@@ -60,7 +60,7 @@ function initEffect()
     if (effect)effect.delete();
     if (tex)tex.delete();
     tex = null;
-    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) });
+    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()), "name": op.name });
 
     const cgl_aniso = Math.min(cgl.maxAnisotropic, parseFloat(aniso.get()));
 
