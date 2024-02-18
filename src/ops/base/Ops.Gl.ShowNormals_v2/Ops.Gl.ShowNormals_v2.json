@@ -21,6 +21,11 @@
             {
                 "type": 0,
                 "name": "Vectors index",
+                "values": [
+                    "Normals",
+                    "Tangents",
+                    "Bitangents"
+                ],
                 "subType": "integer"
             },
             {

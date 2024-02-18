@@ -39,11 +39,22 @@
             {
                 "type": 0,
                 "name": "Source Structure index",
+                "values": [
+                    "MONO",
+                    "RGB",
+                    "RGBA"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Manual",
+                    "Square",
+                    "Row",
+                    "Column"
+                ],
                 "subType": "integer"
             },
             {
@@ -69,6 +80,11 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {

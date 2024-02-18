@@ -45,11 +45,6 @@
                 "name": "Use As Material",
                 "group": "Options",
                 "subType": "boolean"
-            },
-            {
-                "type": 2,
-                "name": "tex",
-                "group": "uniforms"
             }
         ],
         "portsOut": [
