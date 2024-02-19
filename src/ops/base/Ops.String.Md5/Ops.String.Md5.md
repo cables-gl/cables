@@ -1,0 +1,2 @@
+MD5 is a cryptographic hashing algorithm. By Inputing data, it will output a certain string, called a hash. Any time the same data is run through the operator on any computer, you get this same number.
+It makes comparing files or long content easy and fast, without comparing each single byte.
