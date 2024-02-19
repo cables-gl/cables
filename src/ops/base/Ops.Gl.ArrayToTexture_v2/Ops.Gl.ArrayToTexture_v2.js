@@ -73,7 +73,7 @@ function update()
     inArr.setUiAttribs({ "stride": stride });
 
     let data = inArr.get();
-    const isFp = inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F;
+    const isFp = inPixel.get().indexOf("float") > -1;
 
     if (w <= 0 || h <= 0 || !data) error = true;
 
@@ -132,7 +132,7 @@ function update()
             else pixels[i * 4 + 3] = 255;
     }
 
-    if (!tex) tex = new CGL.Texture(cgl, { "isFloatingPointTexture": isFp, "name": "array2texture" });
+    if (!tex) tex = new CGL.Texture(cgl, { "pixelFormat": inPixel.get(), "name": "array2texture" });
 
     tex.initFromData(pixels, w, h, cgl_filter, cgl_wrap);
 
