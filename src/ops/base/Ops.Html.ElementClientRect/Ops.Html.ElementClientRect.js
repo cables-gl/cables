@@ -1,15 +1,16 @@
 const
-    inUpd=op.inTriggerButton("Update"),
-    inEle=op.inObject("Element",null,"element"),
-    outWidth=op.outNumber("Width"),
-    outHeight=op.outNumber("Height"),
-    outX=op.outNumber("X"),
-    outY=op.outNumber("Y");
+    inUpd = op.inTriggerButton("Update"),
+    inEle = op.inObject("Element", null, "element"),
+    inUnits = op.inSwitch("Pixel Units", ["CSS Pixels", "Display Pixels"], "CSS Pixels"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outWidth = op.outNumber("Width"),
+    outHeight = op.outNumber("Height");
 
-inUpd.onTriggered=()=>
+inUpd.onTriggered = () =>
 {
-    let ele=inEle.get();
-    if(!ele)
+    let ele = inEle.get();
+    if (!ele)
     {
         outX.set(0);
         outY.set(0);
@@ -17,12 +18,18 @@ inUpd.onTriggered=()=>
         outHeight.set(0);
         return;
     }
-    const r=ele.getBoundingClientRect();
-    const rCanv=op.patch.cgl.canvas.getBoundingClientRect();
+    const r = ele.getBoundingClientRect();
+    const rCanv = op.patch.cgl.canvas.getBoundingClientRect();
 
-    outX.set(r.left-rCanv.left);
-    outY.set(r.top-rCanv.top);
-    outWidth.set(r.width);
-    outHeight.set(r.height);
+    let mul = 1.0;
 
+    if (inUnits.get() == "Display Pixels")
+    {
+        mul = op.patch.cgl.pixelDensity;
+    }
+
+    outX.set(r.left * mul - rCanv.left * mul);
+    outY.set(r.top * mul - rCanv.top * mul);
+    outWidth.set(r.width * mul);
+    outHeight.set(r.height * mul);
 };

@@ -15,6 +15,10 @@
             {
                 "type": 0,
                 "name": "Range index",
+                "values": [
+                    "0-1",
+                    "-1-1"
+                ],
                 "subType": "integer"
             },
             {
@@ -61,6 +65,11 @@
                 "type": 0,
                 "name": "Y",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
             }
         ]
     },
@@ -116,13 +125,18 @@
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888176881
+        },
+        {
+            "message": "added HTML element output of the canvas. can be used to listen to more events",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708338000568
         }
     ],
     "libs": [
         "colorrick.js"
     ],
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "0NF2FL"
 }

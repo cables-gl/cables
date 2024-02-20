@@ -12,15 +12,14 @@ const
     defaultValuePortX = op.inValueString("Default X", 0.5),
     defaultValuePortY = op.inValueString("Default Y", 0.5),
 
-    inVisible = op.inBool("Visible", true);
-
-const siblingsPort = op.outObject("Children");
+    inVisible = op.inBool("Visible", true),
+    siblingsPort = op.outObject("Children"),
+    outX = op.outNumber("X", 0.0),
+    outY = op.outNumber("Y", 0.0),
+    outEle = op.outObject("HTML Element", null, "element");
 
 defaultValuePortX.setUiAttribs({ "hidePort": true, "greyout": true });
 defaultValuePortY.setUiAttribs({ "hidePort": true, "greyout": true });
-
-const outX = op.outNumber("X", 0.0);
-const outY = op.outNumber("Y", 0.0);
 
 const el = document.createElement("div");
 el.dataset.op = op.id;
@@ -100,6 +99,7 @@ canv.style.height = size + "px";
 canv.style.marginTop = "6px";
 canv.style.position = "initial";
 el.appendChild(canv);
+outEle.setRef(canv);
 
 const ctx = canv.getContext("2d");
 
