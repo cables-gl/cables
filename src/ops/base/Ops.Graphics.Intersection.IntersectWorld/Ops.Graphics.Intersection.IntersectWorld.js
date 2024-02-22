@@ -8,11 +8,15 @@ const
 
 trigger.onTriggered = doRender;
 
+const SHAPE_SPHERE = 1;
+const SHAPE_AABB = 2;
+const SHAPE_POINT = 3;
+
 const cgl = op.patch.cgl;
 
 function doRender()
 {
-    cgl.frameStore.collisionWorld = { "bodies": [] };
+    cgl.frameStore.collisionWorld = { "bodies": [], "testCollision": testCollision };
     next.trigger();
 
     outNum.set(cgl.frameStore.collisionWorld.bodies.length);
@@ -32,21 +36,153 @@ function renderBodies()
     {
         const body = bodies[i];
 
-        if (body.type === 1)
+        if (body.type === SHAPE_SPHERE) // sphere
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
             CABLES.GL_MARKER.drawSphere(op, body.radius);
             cgl.popModelMatrix();
         }
-        else if (body.type === 2)
+        else if (body.type === SHAPE_AABB) // AABB
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
             CABLES.GL_MARKER.drawCube(op, body.size[0] / 2, body.size[1] / 2, body.size[2] / 2);
             cgl.popModelMatrix();
         }
+        else if (body.type === SHAPE_POINT) // point
+        {
+            cgl.pushModelMatrix();
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
+            CABLES.GL_MARKER.drawAxisMarker(op, 0.05);
+            cgl.popModelMatrix();
+        }
         else console.warn("[intersectWorld] unknown col shape");
+    }
+}
+
+function testCollision(bodyA, bodyB)
+{
+    if (bodyA.type === SHAPE_SPHERE && bodyB.type === SHAPE_SPHERE)
+    {
+        const dist = vec3.distance(bodyA.pos, bodyB.pos);
+
+        if (dist < bodyA.radius + bodyB.radius)
+        {
+            return {
+                "body0": bodyA,
+                "name0": bodyA.name,
+                "body1": bodyB,
+                "name1": bodyB.name
+            };
+        }
+    }
+    else
+    if (bodyA.type === SHAPE_POINT && bodyB.type === SHAPE_POINT)
+    {
+        if (bodyA.pos[0] === bodyB.pos[0] && bodyA.pos[1] === bodyB.pos[1] && bodyA.pos[2] === bodyB.pos[2])
+        {
+            return {
+                "body0": bodyA,
+                "name0": bodyA.name,
+                "body1": bodyB,
+                "name1": bodyB.name
+            };
+        }
+    }
+    else
+    if (
+        (bodyB.type === SHAPE_SPHERE && bodyA.type === SHAPE_POINT) ||
+                    (bodyA.type === SHAPE_SPHERE && bodyB.type === SHAPE_POINT)
+    )
+    {
+        let bodyPoint = bodyA;
+        let bodySphere = bodyB;
+
+        if (bodyA.type === SHAPE_SPHERE)
+        {
+            bodyPoint = bodyB;
+            bodySphere = bodyA;
+        }
+
+        const xd = Math.abs(bodyPoint.pos[0] - bodySphere.pos[0]);
+        const yd = Math.abs(bodyPoint.pos[1] - bodySphere.pos[1]);
+        const zd = Math.abs(bodyPoint.pos[2] - bodySphere.pos[2]);
+        const dist = Math.sqrt(xd * xd + yd * yd + zd * zd);
+
+        if (dist < bodySphere.radius)
+        {
+            return {
+                "body0": bodyA,
+                "name0": bodyA.name,
+                "body1": bodyB,
+                "name1": bodyB.name };
+        }
+    }
+    else
+    if (
+        (bodyB.type === SHAPE_AABB && bodyA.type === SHAPE_POINT) ||
+                    (bodyA.type === SHAPE_AABB && bodyB.type === SHAPE_POINT)
+    )
+    {
+        let bodyPoint = bodyA;
+        let bodyBox = bodyB;
+
+        if (bodyA.type === SHAPE_AABB)
+        {
+            bodyPoint = bodyB;
+            bodyBox = bodyA;
+        }
+
+        if (
+            (bodyPoint.pos[0] > bodyBox.minX && bodyPoint.pos[0] < bodyBox.maxX) &&
+            (bodyPoint.pos[1] > bodyBox.minY && bodyPoint.pos[1] < bodyBox.maxY) &&
+            (bodyPoint.pos[2] > bodyBox.minZ && bodyPoint.pos[2] < bodyBox.maxZ)
+        )
+        {
+            return {
+                "body0": bodyA,
+                "name0": bodyA.name,
+                "body1": bodyB,
+                "name1": bodyB.name };
+        }
+    }
+    else
+    if ((bodyA.type === SHAPE_SPHERE && bodyB.type === SHAPE_AABB) || (bodyA.type === SHAPE_AABB && bodyB.type === SHAPE_SPHERE))
+    {
+        let bBox = bodyA;
+        let bSphere = bodyB;
+        if (bodyB.type === SHAPE_AABB)
+        {
+            bBox = bodyB;
+            bSphere = bodyA;
+        }
+
+        let r2 = bSphere.radius * bSphere.radius;
+        let dmin = 0;
+
+        let dist_squared = bSphere.radius * bSphere.radius;
+        /* assume bBox.minand C2 are element-wise sorted, if not, do that now */
+        if (bSphere.pos[0] < bBox.minX) dist_squared -= (bSphere.pos[0] - bBox.minX) ** 2;
+        else if (bSphere.pos[0] > bBox.maxX) dist_squared -= (bSphere.pos[0] - bBox.maxX) ** 2;
+        if (bSphere.pos[1] < bBox.minY) dist_squared -= (bSphere.pos[1] - bBox.minY) ** 2;
+        else if (bSphere.pos[1] > bBox.maxY) dist_squared -= (bSphere.pos[1] - bBox.maxY) ** 2;
+        if (bSphere.pos[2] < bBox.minZ) dist_squared -= (bSphere.pos[2] - bBox.minZ) ** 2;
+        else if (bSphere.pos[2] > bBox.maxZ) dist_squared -= (bSphere.pos[2] - bBox.maxZ) ** 2;
+
+        if (dist_squared > 0)
+        {
+            return {
+                "body0": bodyA,
+                "name0": bodyA.name,
+                "body1": bodyB,
+                "name1": bodyB.name
+            };
+        }
+    }
+    else
+    {
+        console.warn("unknown collision pair...", bodyA.type, bodyB.type);
     }
 }
 
@@ -61,63 +197,8 @@ function checkCollisions()
         {
             if (i != j)
             {
-                const bodyA = bodies[i];
-                const bodyB = bodies[j];
-
-                /// //////////
-                // SPHERE vs SPHERE
-                if (bodyA.type == 1 && bodyB.type == 1)
-                {
-                    const dist = vec3.distance(bodyA.pos, bodyB.pos);
-
-                    if (dist < bodyA.radius + bodyB.radius)
-                    {
-                        collisions.push({
-                            "body0": bodyA,
-                            "name0": bodyA.name,
-                            "body1": bodyB,
-                            "name1": bodyB.name
-                        });
-                    }
-                }
-                else
-                if ((bodyA.type == 1 && bodyB.type == 2) || (bodyA.type == 2 && bodyB.type == 1))
-                {
-                    let bBox = bodyA;
-                    let bSphere = bodyB;
-                    if (bodyB.type == 2)
-                    {
-                        bBox = bodyB;
-                        bSphere = bodyA;
-                    }
-
-                    let r2 = bSphere.radius * bSphere.radius;
-                    let dmin = 0;
-
-                    let dist_squared = bSphere.radius * bSphere.radius;
-                    /* assume bBox.minand C2 are element-wise sorted, if not, do that now */
-                    if (bSphere.pos[0] < bBox.minX) dist_squared -= (bSphere.pos[0] - bBox.minX) ** 2;
-                    else if (bSphere.pos[0] > bBox.maxX) dist_squared -= (bSphere.pos[0] - bBox.maxX) ** 2;
-                    if (bSphere.pos[1] < bBox.minY) dist_squared -= (bSphere.pos[1] - bBox.minY) ** 2;
-                    else if (bSphere.pos[1] > bBox.maxY) dist_squared -= (bSphere.pos[1] - bBox.maxY) ** 2;
-                    if (bSphere.pos[2] < bBox.minZ) dist_squared -= (bSphere.pos[2] - bBox.minZ) ** 2;
-                    else if (bSphere.pos[2] > bBox.maxZ) dist_squared -= (bSphere.pos[2] - bBox.maxZ) ** 2;
-
-                    if (dist_squared > 0)
-                    {
-                        collisions.push(
-                            {
-                                "body0": bodyA,
-                                "name0": bodyA.name,
-                                "body1": bodyB,
-                                "name1": bodyB.name
-                            });
-                    }
-                }
-                else
-                {
-                    console.warn("unknown collision pair...", bodyA, bodyB);
-                }
+                const c = testCollision(bodies[i], bodies[j]);
+                if (c)collisions.push(c);
             }
         }
     }

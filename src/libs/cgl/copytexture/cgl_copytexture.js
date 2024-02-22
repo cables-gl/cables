@@ -79,14 +79,16 @@ class CopyTexture
 
     copy(tex, tex1, tex2, tex3, tex4)
     {
+        const cgl = this.cgl;
         if (!tex) tex = CGL.Texture.getEmptyTexture(this.cgl);
-        const
+        let
             w = this._options.width || tex.width,
-            h = this._options.height || tex.height,
-            cgl = this.cgl;
+            h = this._options.height || tex.height;
 
         if (this.fb)
         {
+            if (w <= 0)w = 8;
+            if (h <= 0)h = 8;
             if (this.fb.getWidth() != w || this.fb.getHeight() != h) this.fb.setSize(w, h);
         }
         else

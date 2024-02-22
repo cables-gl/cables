@@ -22,32 +22,32 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Render",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Check Body Collisions",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Total Bodies",
                 "subType": "number"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Collisions"
             }
         ]

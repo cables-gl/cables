@@ -1,5 +1,5 @@
 const
-    shapes = ["Sphere", "BoxAA"],
+    shapes = ["Sphere", "BoxAA", "Point"],
     trigger = op.inTrigger("Trigger"),
     inArea = op.inSwitch("Shape", shapes, "Sphere"),
     inName = op.inString("Name", ""),
@@ -15,8 +15,8 @@ op.setPortGroup("Array", [inPositions, inPosIndex]);
 
 const cgl = op.patch.cgl;
 const pos = vec3.create();
-// const scale = vec3.create();
 const empty = vec3.create();
+
 updateUi();
 
 let objs = [];
