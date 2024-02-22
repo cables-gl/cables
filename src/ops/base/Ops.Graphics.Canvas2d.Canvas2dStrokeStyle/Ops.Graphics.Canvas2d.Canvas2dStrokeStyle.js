@@ -1,0 +1,33 @@
+const
+    inExec = op.inTrigger("Exec"),
+    r = op.inValueSlider("r", Math.random()),
+    g = op.inValueSlider("g", Math.random()),
+    b = op.inValueSlider("b", Math.random()),
+    inWidth = op.inFloat("LineWidth", 3),
+    inLineDash = op.inString("LineDash", ""),
+
+    next = op.outTrigger("Next");
+
+r.setUiAttribs({ "colorPick": true });
+
+inExec.onTriggered = () =>
+{
+    if (op.patch.frameStore.canvasCompose)
+    {
+        const ctx = op.patch.frameStore.canvasCompose.ctx;
+        ctx.save();
+
+        const red = parseInt(r.get() * 255);
+        const green = parseInt(g.get() * 255);
+        const blue = parseInt(b.get() * 255);
+
+        const str = (((blue | green << 8 | red << 16) | 1 << 24).toString(16).slice(1));
+
+        ctx.strokeStyle = "#" + str;
+
+        ctx.lineWidth = inWidth.get();
+
+        next.trigger();
+        ctx.restore();
+    }
+};
