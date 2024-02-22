@@ -51,6 +51,10 @@
             {
                 "type": 0,
                 "name": "Visualize outside 0-1 index",
+                "values": [
+                    "Off",
+                    "Anim"
+                ],
                 "subType": "integer"
             },
             {

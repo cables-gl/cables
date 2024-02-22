@@ -2,22 +2,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Value"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Char"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             }
         ]

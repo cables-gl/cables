@@ -9,12 +9,12 @@ OUT vec3 normal;
 OUT vec3 tangent;
 OUT vec3 bitangent;
 OUT vec3 outTangent,outBiTangent;
+OUT vec4 outPosition;
 OUT mat4 mMatrix;
 OUT vec3 vert;
 OUT mat4 mvMatrix;
 UNI mat4 projMatrix;
 
-// UNI mat4 mvMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
@@ -40,8 +40,9 @@ void main()
     normal=norm;
     outTangent=tangent;
     outBiTangent=bitangent;
+    outPosition= mMatrix * pos;
 
     {{MODULE_VERTEX_MOVELVIEW}}
 
-    gl_Position = projMatrix * modelViewMatrix * pos;
+    gl_Position = projMatrix*viewMatrix*outPosition;
 }

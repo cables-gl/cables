@@ -1,6 +1,7 @@
 IN vec3 normal;
 IN vec3 outTangent;
 IN vec3 outBiTangent;
+IN vec4 outPosition;
 IN mat4 mMatrix;
 IN vec2 texCoord;
 IN vec2 texCoord1;
@@ -35,8 +36,8 @@ void main()
     #ifdef SHOW_TEXCOORDS1
         attr.xy=texCoord1;
     #endif
-    #ifdef SHOW_POSITION
-        attr.xyz=vert;
+    #ifdef SHOW_POS
+        attr.xyz=outPosition.xyz;
     #endif
 
     #ifdef MULMODEL

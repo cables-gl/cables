@@ -1,5 +1,5 @@
 // constants
-const elId = "glcanvas";
+
 const initialScale = 1.0;
 
 // inputs
@@ -15,7 +15,7 @@ let tmpScale = initialScale;
 let pinchInProgress = false;
 
 // setup
-const el = document.getElementById(elId);
+const el = op.patch.cgl.canvas;
 const hammertime = new Hammer(el);
 hammertime.get("pinch").set({ "enable": true });
 

@@ -19,6 +19,10 @@
                 "name": "B ="
             },
             {
+                "type": 5,
+                "name": "A ="
+            },
+            {
                 "type": 1,
                 "name": "Update Shader"
             },
@@ -57,6 +61,10 @@
             {
                 "type": 1,
                 "name": "trigger"
+            },
+            {
+                "type": 5,
+                "name": "code"
             }
         ]
     },
@@ -95,6 +103,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1706629029245
+        },
+        {
+            "message": "Add parameter to set alpha channel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708513766728
         }
     ],
     "issues": "",
