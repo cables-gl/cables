@@ -51,6 +51,7 @@
             {
                 "type": 2,
                 "name": "RGBE Texture",
+                "uititle": "Texture",
                 "objType": "texture"
             },
             {
@@ -89,7 +90,6 @@
     "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [
         "PrkdnENo8wQ"
     ],

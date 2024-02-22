@@ -1,11 +1,13 @@
-let val = op.inString("Value", 1);
-let char = op.inString("Char", "0");
-let num = op.inInt("Num", 4);
-let out = op.outString("String");
+const
+    val = op.inString("Value", 1),
+    char = op.inString("Char", "0"),
+    num = op.inInt("Num", 4),
+    out = op.outString("String");
 
-val.onChange = update;
-char.onChange = update;
-num.onChange = update;
+val.onChange =
+    char.onChange =
+    num.onChange = update;
+update();
 
 function update()
 {

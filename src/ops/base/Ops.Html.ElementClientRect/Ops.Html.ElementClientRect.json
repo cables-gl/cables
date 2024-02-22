@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.ElementClientRect renamed to Ops.Html.ElementClientRect",
             "author": "pandur",
             "date": 1613486572367
+        },
+        {
+            "message": "Added parameter to switch between CSS pixels or Display pixels",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708341904175
         }
     ],
     "authorName": "pandur",
@@ -24,19 +30,18 @@
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Units index",
+                "values": [
+                    "CSS Pixels",
+                    "Display Pixels"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
-            {
-                "type": 0,
-                "name": "Width",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Height",
-                "subType": "number"
-            },
             {
                 "type": 0,
                 "name": "X",
@@ -46,12 +51,21 @@
                 "type": 0,
                 "name": "Y",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
             }
         ]
     },
     "summary": "get html element absolute position and size in pixels on screen",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

@@ -7,7 +7,7 @@ const
 val.onChange =
 char.onChange =
 num.onChange = update;
-
+update();
 function update()
 {
     let str = val.get() + "";
