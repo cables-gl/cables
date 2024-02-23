@@ -1,14 +1,17 @@
 const NUM_PORTS = 24;
+const
+    exePort = op.inTriggerButton("Execute"),
+    switchPort = op.inValueInt("Switch Value"),
+    nextTriggerPort = op.outTrigger("Next Trigger"),
+    valueOutPort = op.outNumber("Switched Value");
 
-const exePort = op.inTriggerButton("Execute");
-const switchPort = op.inValueInt("Switch Value");
-const nextTriggerPort = op.outTrigger("Next Trigger");
-const valueOutPort = op.outNumber("Switched Value");
 const triggerPorts = [];
+
 for (let j = 0; j < NUM_PORTS; j++)
 {
     triggerPorts[j] = op.outTrigger("Trigger " + j);
 }
+
 const defaultTriggerPort = op.outTrigger("Default Trigger");
 
 // functions
