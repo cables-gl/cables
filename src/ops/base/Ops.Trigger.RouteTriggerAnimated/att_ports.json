@@ -1,0 +1,99 @@
+{
+    "ports": [
+        {
+            "id": "ip34w2ny0",
+            "title": "Index",
+            "dir": 0,
+            "type": 0,
+            "value": 0,
+            "uiDisplay": "int",
+            "order": 0
+        },
+        {
+            "id": "wiikdxo89",
+            "title": "exe",
+            "dir": 0,
+            "type": 1,
+            "order": 1
+        },
+        {
+            "id": "s0ddunhhz",
+            "title": "Duration",
+            "dir": 0,
+            "type": 0,
+            "value": 1,
+            "order": 2
+        },
+        {
+            "id": "4gu5lv66h",
+            "title": "Out Value",
+            "dir": 1,
+            "type": 0,
+            "value": 1,
+            "order": 1003
+        },
+        {
+            "id": "qutsn94pc",
+            "title": "Trigger 0",
+            "dir": 1,
+            "type": 1,
+            "order": 1004
+        },
+        {
+            "id": "8xpkgorjm",
+            "title": "Trigger 1",
+            "dir": 1,
+            "type": 1,
+            "order": 1005
+        },
+        {
+            "id": "hvyzlh9o8",
+            "title": "Trigger 2",
+            "dir": 1,
+            "type": 1,
+            "order": 1006
+        },
+        {
+            "id": "367wv95xd",
+            "title": "Trigger 3",
+            "dir": 1,
+            "type": 1,
+            "order": 1007
+        },
+        {
+            "id": "7ju3j2fy0",
+            "title": "Trigger 4",
+            "dir": 1,
+            "type": 1,
+            "order": 1008
+        },
+        {
+            "id": "t8dvyjuoq",
+            "title": "Trigger 5",
+            "dir": 1,
+            "type": 1,
+            "order": 1009
+        },
+        {
+            "id": "72naih78e",
+            "title": "Trigger 6",
+            "dir": 1,
+            "type": 1,
+            "order": 1010
+        },
+        {
+            "id": "0s04tm21u",
+            "title": "Trigger 7",
+            "dir": 1,
+            "type": 1,
+            "order": 1011
+        },
+        {
+            "id": "93jpxulns",
+            "title": "Trigger 8",
+            "dir": 1,
+            "type": 1,
+            "order": 1012
+        }
+    ]
+}

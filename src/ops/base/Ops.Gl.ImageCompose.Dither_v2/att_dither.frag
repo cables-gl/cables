@@ -1,5 +1,9 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
+#ifdef MASK
+    UNI sampler2D texMask;
+#endif
+
 UNI float strength;
 UNI float amount;
 UNI float width;
@@ -44,6 +48,15 @@ void main()
 
     vec4 base=texture(tex,texCoord);
     vec4 color;
+    float am=amount;
+
+    #ifdef MASK
+        float m=texture(texMask,texCoord).r;
+        #ifdef MASK_SRC_1R
+            m=1.0-m;
+        #endif
+        am*=m;
+    #endif
 
     float lum = lumi(base);
     lum = adjustFrag(adjustments,lum, texCoord.xy);
@@ -51,5 +64,5 @@ void main()
     if (lum > threshold) color = vec4(1, 1, 1, base.a);
     else color = vec4(0, 0, 0, base.a);
 
-    outColor=cgl_blendPixel(base,color,amount);
+    outColor=cgl_blendPixel(base,color,am);
 }
