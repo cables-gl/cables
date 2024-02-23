@@ -1,0 +1,102 @@
+{
+    "id": "563afe75-045b-4c49-b58d-5f4ea4d0e807",
+    "created": 1708612895052,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708612895106
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1708612895778
+        },
+        {
+            "message": "Ops.Patch.PpUtH15.SubPatch0 renamed to Ops.Trigger.RouteTriggerAnimated",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708613938110
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "ip34w2ny0",
+                "uititle": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "wiikdxo89",
+                "uititle": "exe"
+            },
+            {
+                "type": 0,
+                "name": "s0ddunhhz",
+                "uititle": "Duration",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "4gu5lv66h",
+                "uititle": "Out Value",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "qutsn94pc",
+                "uititle": "Trigger 0"
+            },
+            {
+                "type": 1,
+                "name": "8xpkgorjm",
+                "uititle": "Trigger 1"
+            },
+            {
+                "type": 1,
+                "name": "hvyzlh9o8",
+                "uititle": "Trigger 2"
+            },
+            {
+                "type": 1,
+                "name": "367wv95xd",
+                "uititle": "Trigger 3"
+            },
+            {
+                "type": 1,
+                "name": "7ju3j2fy0",
+                "uititle": "Trigger 4"
+            },
+            {
+                "type": 1,
+                "name": "t8dvyjuoq",
+                "uititle": "Trigger 5"
+            },
+            {
+                "type": 1,
+                "name": "72naih78e",
+                "uititle": "Trigger 6"
+            },
+            {
+                "type": 1,
+                "name": "0s04tm21u",
+                "uititle": "Trigger 7"
+            },
+            {
+                "type": 1,
+                "name": "93jpxulns",
+                "uititle": "Trigger 8"
+            }
+        ]
+    }
+}
