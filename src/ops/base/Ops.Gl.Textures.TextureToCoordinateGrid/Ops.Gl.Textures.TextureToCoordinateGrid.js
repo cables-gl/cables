@@ -9,6 +9,8 @@ const
     next = op.outTrigger("Next"),
     outFpTex = op.outTexture("HDR Texture");
 
+inTex.setUiAttribs({ "title": "Texture" });
+
 const tc = new CGL.CopyTexture(op.patch.cgl, op.objName,
     {
         "shader": attachments.rgbe2fp_frag,

@@ -1,4 +1,6 @@
-const inTex = op.inTexture("Texture");
+const
+    inTex = op.inTexture("Texture"),
+    inRow = op.inInt("Row Start", 0);
 
 op.setUiAttrib({ "height": 200, "width": 380, "resizable": true, "vizLayerMaxZoom": 2500 });
 
@@ -87,7 +89,7 @@ op.patch.cgl.on("beginFrame",
             lastRead = performance.now();
 
             if (!texChanged)
-                pixelReader.read(op.patch.cgl, fb, realTexture.pixelFormat, 0, realTexture.height - texRows, readW, readH, (pixel) =>
+                pixelReader.read(op.patch.cgl, fb, realTexture.pixelFormat, 0, realTexture.height - texRows - inRow.get(), readW, readH, (pixel) =>
                 {
                     pixelData = pixel;
                 });

@@ -1,0 +1,63 @@
+{
+    "id": "750bc61c-ad56-4d50-b7d2-9e9e990ea9e1",
+    "created": 1708360978869,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708360978920
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dGetColor renamed to Ops.Graphics.Canvas2d.Canvas2dGetColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708595519667
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A",
+                "subType": "number"
+            }
+        ]
+    }
+}

@@ -53,6 +53,10 @@
             {
                 "type": 0,
                 "name": "Axis index",
+                "values": [
+                    "XYZ",
+                    "XY"
+                ],
                 "subType": "integer"
             },
             {
@@ -94,7 +98,6 @@
     "summary": "Visualize a RGB texture as XYZ coordinates as points",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [
         "PrkdnENo8wQ"
     ],

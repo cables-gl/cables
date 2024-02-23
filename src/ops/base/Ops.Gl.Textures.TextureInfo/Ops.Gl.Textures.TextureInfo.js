@@ -14,7 +14,7 @@ const
     outCubemap = op.outBoolNum("Is Cubemap"),
     outId = op.outNumber("Id");
 
-outFp.setUiAttribs({ "title": "Float" });
+outFp.setUiAttribs({ "title": "Float Texture" });
 
 const emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl);
 const defaultTex = CGL.Texture.getTempTexture(op.patch.cgl);
@@ -46,7 +46,7 @@ inTex.onChange = function ()
         outPixelFormat.set(inTex.get().pixelFormat);
         outId.set(inTex.get().id);
         outFlipped.set(inTex.get().flipped);
-        outFp.set(inTex.get().textureType == CGL.Texture.TYPE_FLOAT);
+        outFp.set(inTex.get().isFloatingPoint && inTex.get().isFloatingPoint());
 
         outCubemap.set(inTex.get().cubemap);
     }

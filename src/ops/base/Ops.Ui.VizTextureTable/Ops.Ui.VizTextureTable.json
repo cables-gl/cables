@@ -48,6 +48,12 @@
             "type": "",
             "author": "pandur",
             "date": 1675437510282
+        },
+        {
+            "message": "Add row parameter to scroll through texture rows",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708512581387
         }
     ],
     "authorName": "pandur",
@@ -58,6 +64,11 @@
                 "type": 2,
                 "name": "Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Row Start",
+                "subType": "integer"
             }
         ],
         "portsOut": []
@@ -65,7 +76,6 @@
     "summary": "Show pixel colors of connected texture as a table, useful for debugging",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "kp6oq4",
     "docs": {

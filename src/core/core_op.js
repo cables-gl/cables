@@ -755,6 +755,21 @@ const Op = function ()
         return p;
     };
 
+
+    Op.prototype.getPortVisibleIndex = function (p)
+    {
+        let ports = this.portsIn;
+        if (p.direction == CONSTANTS.PORT_DIR_OUT)ports = this.portsOut;
+
+        let index = 0;
+        for (let i = 0; i < ports.length; i++)
+        {
+            if (ports[i].uiAttribs.hidePort) continue;
+            index++;
+            if (ports[i] == p) return index;
+        }
+    };
+
     /**
      * create a array input port
      * @function inArray

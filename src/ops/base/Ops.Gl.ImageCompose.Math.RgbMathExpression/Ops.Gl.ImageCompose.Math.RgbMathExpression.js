@@ -4,6 +4,7 @@ const
     inR = op.inString("R =", "color.r*x"),
     inG = op.inString("G =", "color.g*x"),
     inB = op.inString("B =", "color.b*x"),
+    inA = op.inString("A =", "1.0"),
     inExec = op.inTriggerButton("Update Shader"),
 
     inX = op.inFloat("x", 1),
@@ -14,7 +15,8 @@ const
     intexA = op.inTexture("texA"),
     intexB = op.inTexture("texB"),
 
-    trigger = op.outTrigger("trigger");
+    trigger = op.outTrigger("trigger"),
+    outSrc = op.outString("code");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name, op);
@@ -69,27 +71,32 @@ function updateSource()
 
     src += "void main()".endl();
     src += "{".endl().endl();
-    src += "vec4 col=vec4(1.0);".endl();
-    src += "vec4 color=texture(tex,texCoord);".endl();
-    src += "vec4 texA=texture(utexA,texCoord);".endl();
-    src += "vec4 texB=texture(utexB,texCoord);".endl().endl();
+    src += "  vec4 col=vec4(1.0);".endl();
+    src += "  vec4 color=texture(tex,texCoord);".endl();
+    src += "  vec4 texA=texture(utexA,texCoord);".endl();
+    src += "  vec4 texB=texture(utexB,texCoord);".endl().endl();
 
-    src += "// R src".endl();
-    src += "col.r=" + inR.get() + ";".endl();
-    src += "".endl();
+    src += "  // R src".endl();
+    src += "  col.r=" + inR.get() + ";".endl();
+    src += "  ".endl();
 
-    src += "// G src".endl();
-    src += "col.g=" + inG.get() + ";".endl();
-    src += "".endl();
+    src += "  // G src".endl();
+    src += "  col.g=" + inG.get() + ";".endl();
+    src += "  ".endl();
 
-    src += "// B src".endl();
-    src += "col.b=" + inB.get() + ";".endl();
-    src += "".endl();
+    src += "  // B src".endl();
+    src += "  col.b=" + inB.get() + ";".endl();
+    src += "  ".endl();
 
-    src += "outColor=col;".endl().endl();
+    src += "  // A src".endl();
+    src += "  col.a=" + inA.get() + ";".endl();
+    src += "  ".endl();
+
+    src += "  outColor=col;".endl().endl();
     src += "}".endl();
 
     shader.setSource(shader.getDefaultVertexShader(), src);
+    outSrc.set(src);
     shader.compile();
 }
 

@@ -36,7 +36,6 @@
         "marked.js"
     ],
     "summary": "markdown markup language to html parser",
-
     "docs": {
         "ports": []
     },

@@ -1,0 +1,68 @@
+{
+    "id": "8a10631b-c291-499a-8b23-d1c92fab6320",
+    "created": 1708423590832,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708423590883
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dFillGradient renamed to Ops.Graphics.Canvas2d.Canvas2dFillGradient",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708595506223
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y 2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
