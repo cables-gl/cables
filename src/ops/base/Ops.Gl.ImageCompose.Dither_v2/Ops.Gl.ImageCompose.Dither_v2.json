@@ -19,13 +19,27 @@
             },
             {
                 "type": 0,
-                "name": "strength",
+                "name": "threshold",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "threshold",
+                "name": "strength",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Src index",
+                "values": [
+                    "R",
+                    "1-R"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -43,7 +57,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "eECnT6",
     "changelog": [
@@ -67,6 +80,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1701854789780
+        },
+        {
+            "message": "Added mask texture input to control where dithering is applied and mask source paramter to select the colorchannel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708677528989
         }
     ]
 }

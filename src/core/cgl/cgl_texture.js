@@ -485,7 +485,7 @@ Texture.prototype.updateMipMap = function ()
  * @param {Object} image
  * @param {Number} filter
  */
-Texture.prototype.initTexture = function (img, filter)
+Texture.prototype.initTexture = function (img, filter = Texture.FILTER_LINEAR)
 {
     this._cgl.printError("before initTexture");
     this._cgl.checkFrameStarted("texture inittexture");
@@ -495,7 +495,7 @@ Texture.prototype.initTexture = function (img, filter)
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     if (img.width) this.width = img.width;
     if (img.height) this.height = img.height;
-    if (filter) this.filter = filter;
+    this.filter = filter;
 
     if (img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize)
     {
