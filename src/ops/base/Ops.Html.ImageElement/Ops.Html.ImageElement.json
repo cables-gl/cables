@@ -1,0 +1,34 @@
+{
+    "id": "e9216fe0-0c55-47d9-83eb-c956d28b4005",
+    "created": 1708945340275,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708945340334
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dImage renamed to Ops.Html.ImageElement",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708946015328
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Image Element",
+                "objType": "element"
+            }
+        ]
+    }
+}
