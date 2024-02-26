@@ -5,184 +5,211 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Draw Mesh",
                 "group": "Rendering",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale Mesh",
                 "group": "Rendering",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Auto",
+                    "Manual"
+                ],
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Auto Height",
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "text"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Auto Line Breaks",
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "font",
                 "group": "Font"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "weight",
                 "group": "Font"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "fontSize",
                 "group": "Font",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "align index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
                 "group": "Font",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vertical align index",
+                "values": [
+                    "Top",
+                    "Middle",
+                    "Bottom"
+                ],
                 "group": "Font",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Letter Spacing",
                 "group": "Font",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Line Height Add",
                 "group": "Font",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Padding Y Top",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Padding Y Bottom",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Padding X",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "group": "Texture",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Wrap index",
                 "group": "Texture",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "group": "Texture",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Reuse Texture",
                 "group": "Texture",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Show Debug",
                 "group": "Texture",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Redraw On Font Load",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "group": "Text Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "group": "Text Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "group": "Text Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity",
                 "group": "Text Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "background R",
                 "group": "Background",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "background G",
                 "group": "Background",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "background B",
                 "group": "Background",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "background A",
                 "group": "Background",
                 "subType": "number"
@@ -190,26 +217,31 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ratio",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "texture",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
                 "name": "Aspect",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Lines",
                 "subType": "number"
             }

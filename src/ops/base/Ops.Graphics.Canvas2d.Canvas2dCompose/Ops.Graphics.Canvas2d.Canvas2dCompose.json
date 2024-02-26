@@ -23,6 +23,11 @@
                 "name": "Exec"
             },
             {
+                "type": 2,
+                "name": "Canvas Copy",
+                "objType": "element"
+            },
+            {
                 "type": 0,
                 "name": "Width",
                 "subType": "integer"

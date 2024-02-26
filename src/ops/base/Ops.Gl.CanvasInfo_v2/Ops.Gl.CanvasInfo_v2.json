@@ -5,6 +5,10 @@
             {
                 "type": 0,
                 "name": "Pixel Unit index",
+                "values": [
+                    "Display",
+                    "CSS"
+                ],
                 "subType": "integer"
             }
         ],
@@ -61,7 +65,6 @@
     "docs": {
         "ports": []
     },
-
     "changelog": [
         {
             "message": "new output: landscape - true if canvas width > height",
