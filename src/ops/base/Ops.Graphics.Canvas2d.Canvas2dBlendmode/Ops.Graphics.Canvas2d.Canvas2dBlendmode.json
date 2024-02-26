@@ -1,0 +1,49 @@
+{
+    "id": "0fee4f45-b066-4630-90af-368977f79e8a",
+    "created": 1708946349513,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708944583951
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dTransform renamed to Ops.Graphics.Canvas2d.Canvas2dTransform",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708946130847
+        },
+        {
+            "message": "cloned op from Ops.Graphics.Canvas2d.Canvas2dTransform",
+            "author": "pandur",
+            "date": 1708946349513
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dBlendmode renamed to Ops.Graphics.Canvas2d.Canvas2dBlendmode",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708946596090
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blendmode index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

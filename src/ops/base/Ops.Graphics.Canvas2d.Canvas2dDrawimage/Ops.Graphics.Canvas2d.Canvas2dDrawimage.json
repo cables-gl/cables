@@ -1,0 +1,48 @@
+{
+    "id": "c2d2c4f5-66e5-495f-b206-9c5e3e2a451c",
+    "created": 1708944031113,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708944031157
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dDrawimage renamed to Ops.Graphics.Canvas2d.Canvas2dDrawimage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708946143831
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Center",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
