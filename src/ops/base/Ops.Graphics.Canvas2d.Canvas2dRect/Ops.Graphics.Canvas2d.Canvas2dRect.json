@@ -49,10 +49,11 @@
             },
             {
                 "type": 0,
-                "name": "Fill index",
+                "name": "Method index",
                 "values": [
+                    "Fill",
                     "Stroke",
-                    "Fill"
+                    "Clip"
                 ],
                 "subType": "integer"
             }
