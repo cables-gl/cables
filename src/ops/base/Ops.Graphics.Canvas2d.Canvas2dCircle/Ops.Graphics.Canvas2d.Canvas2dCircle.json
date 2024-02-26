@@ -1,0 +1,84 @@
+{
+    "id": "d00d7755-516c-4a76-a405-cfce982e459f",
+    "created": 1708950076481,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1708357534149
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dRect renamed to Ops.Graphics.Canvas2d.Canvas2dRect",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708595545475
+        },
+        {
+            "message": "cloned op from Ops.Graphics.Canvas2d.Canvas2dRect",
+            "author": "pandur",
+            "date": 1708950076481
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dCircle renamed to Ops.Graphics.Canvas2d.Canvas2dCircle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708958557939
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Start Angle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "End Angle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Counterclockwise",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "values": [
+                    "Fill",
+                    "Stroke",
+                    "Clip"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
