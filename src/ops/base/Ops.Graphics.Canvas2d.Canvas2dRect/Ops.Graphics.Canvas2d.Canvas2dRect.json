@@ -24,16 +24,6 @@
             },
             {
                 "type": 0,
-                "name": "X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "Width",
                 "subType": "number"
             },
@@ -46,6 +36,11 @@
                 "type": 0,
                 "name": "Roundness",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center",
+                "subType": "boolean"
             },
             {
                 "type": 0,
