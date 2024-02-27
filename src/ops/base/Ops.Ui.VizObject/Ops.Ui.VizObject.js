@@ -21,8 +21,8 @@ inObj.onChange = () =>
 
     if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
 
-    if (str === undefined)str = "undefined";
-    else if (str === null)str = "null";
+    if (obj === undefined)str = "undefined";
+    else if (obj == null)str = "null";
     else
         try
         {

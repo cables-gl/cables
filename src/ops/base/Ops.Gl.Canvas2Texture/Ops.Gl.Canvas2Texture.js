@@ -1,8 +1,8 @@
 const
     cgl = op.patch.cgl,
     inCanvas = op.inObject("canvas"),
-    inTextureFilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
-    inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    inTextureFilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "linear"),
+    inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inTextureFlip = op.inValueBool("flip"),
     inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
     outTexture = op.outTexture("texture"),
@@ -10,8 +10,8 @@ const
     outHeight = op.outNumber("height"),
     canvasTexture = new CGL.Texture(cgl);
 
-let cgl_filter = null;
-let cgl_wrap = null;
+let cgl_filter = CGL.Texture.FILTER_LINEAR;
+let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 
 inTextureFlip.set(false);
 inUnpackAlpha.set(false);
@@ -19,8 +19,8 @@ inUnpackAlpha.set(false);
 inTextureFlip.setUiAttribs({ "hidePort": true });
 inUnpackAlpha.setUiAttribs({ "hidePort": true });
 
-inTextureFilter.onChange = onFilterChange;
-inTextureWrap.onChange = onWrapChange;
+inTextureFilter.onChange =
+inTextureWrap.onChange = onFilterChange;
 
 inTextureFlip.onChange =
 inCanvas.onChange =
@@ -36,6 +36,7 @@ function reload()
     canvasTexture.wrap = cgl_wrap;
     canvasTexture.image = canvas;
     canvasTexture.initTexture(canvas, cgl_filter);
+
     outWidth.set(canvasTexture.width);
     outHeight.set(canvasTexture.height);
 
@@ -52,11 +53,7 @@ function onFilterChange()
     case "linear":
     default: cgl_filter = CGL.Texture.FILTER_LINEAR;
     }
-    reload();
-}
 
-function onWrapChange()
-{
     switch (inTextureWrap.get())
     {
     case "repeat": cgl_wrap = CGL.Texture.WRAP_REPEAT; break;
@@ -66,8 +63,5 @@ function onWrapChange()
     }
     reload();
 }
-
-inTextureFilter.set("linear");
-inTextureWrap.set("repeat");
 
 outTexture.set(CGL.Texture.getEmptyTexture(cgl));

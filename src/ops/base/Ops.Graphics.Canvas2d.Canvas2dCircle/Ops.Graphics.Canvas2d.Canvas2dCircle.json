@@ -1,6 +1,6 @@
 {
-    "id": "fd02622f-989c-4ba9-a27d-a7bf3b49c972",
-    "created": 1708357534096,
+    "id": "d00d7755-516c-4a76-a405-cfce982e459f",
+    "created": 1708950076481,
     "authorName": "pandur",
     "changelog": [
         {
@@ -14,6 +14,17 @@
             "type": "rename",
             "author": "pandur",
             "date": 1708595545475
+        },
+        {
+            "message": "cloned op from Ops.Graphics.Canvas2d.Canvas2dRect",
+            "author": "pandur",
+            "date": 1708950076481
+        },
+        {
+            "message": "Ops.Patch.P2y8nK4.Canvas2dCircle renamed to Ops.Graphics.Canvas2d.Canvas2dCircle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708958557939
         }
     ],
     "layout": {
@@ -24,22 +35,32 @@
             },
             {
                 "type": 0,
-                "name": "Width",
+                "name": "X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Height",
+                "name": "Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Roundness",
+                "name": "Radius",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Center",
+                "name": "Start Angle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "End Angle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Counterclockwise",
                 "subType": "boolean"
             },
             {

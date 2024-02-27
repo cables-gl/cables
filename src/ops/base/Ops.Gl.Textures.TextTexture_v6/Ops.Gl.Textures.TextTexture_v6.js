@@ -48,6 +48,7 @@ const
     next = op.outTrigger("Next"),
     outRatio = op.outNumber("Ratio"),
     textureOut = op.outTexture("texture"),
+    outEle = op.outObject("Canvas", null, "element"),
     outAspect = op.outNumber("Aspect", 1),
     outLines = op.outNumber("Num Lines");
 
@@ -111,6 +112,8 @@ fontImage.id = "texturetext_" + CABLES.generateUUID();
 fontImage.style.display = "none";
 document.body.appendChild(fontImage);
 fontImage.style.letterSpacing = "0px";
+
+outEle.setRef(fontImage);
 
 let ctx = fontImage.getContext("2d");
 let needsRefresh = true;

@@ -1,26 +1,16 @@
 {
     "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
     "layout": {
-        "portsIn": [
-            {
-                "type": 0,
-                "name": "Pixel Unit index",
-                "values": [
-                    "Display",
-                    "CSS"
-                ],
-                "subType": "integer"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
-                "name": "width",
+                "name": "CSS Width",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "height",
+                "name": "CSS Height",
                 "subType": "number"
             },
             {
@@ -60,8 +50,8 @@
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "a249e025-ae2c-4fb1-99f1-f86bfe7d5fc4",
-    "created": 1701200513778,
+    "id": "be186ff9-427e-409f-b6a4-f8d957bf7bc7",
+    "created": 1708689721771,
     "docs": {
         "ports": []
     },
@@ -86,6 +76,23 @@
             "type": "rename",
             "author": "pandur",
             "date": 1701200548577
+        },
+        {
+            "message": "cloned op from Ops.Gl.CanvasInfo_v2",
+            "author": "pandur",
+            "date": 1708689721771
+        },
+        {
+            "message": "Ops.Patch.PU8Sz15.CanvasInfo_v2 renamed to Ops.Gl.CanvasInfo_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1708689860157
+        },
+        {
+            "message": "Fixed HDPI/Retina calculation of pixel numbers",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708694160875
         }
     ]
 }
