@@ -1,56 +1,46 @@
 {
-    "id": "fd02622f-989c-4ba9-a27d-a7bf3b49c972",
-    "created": 1708357534096,
+    "id": "faf8aae1-bd9c-4522-86b5-34f7a0a3606d",
+    "created": 1708944583908,
     "authorName": "pandur",
     "changelog": [
         {
             "message": "created op",
             "type": "",
             "author": "pandur",
-            "date": 1708357534149
+            "date": 1708944583951
         },
         {
-            "message": "Ops.Patch.P2y8nK4.Canvas2dRect renamed to Ops.Graphics.Canvas2d.Canvas2dRect",
+            "message": "Ops.Patch.P2y8nK4.Canvas2dTransform renamed to Ops.Graphics.Canvas2d.Canvas2dTransform",
             "type": "rename",
             "author": "pandur",
-            "date": 1708595545475
+            "date": 1708946130847
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 1,
-                "name": "Exec"
+                "name": "Render"
             },
             {
                 "type": 0,
-                "name": "Width",
+                "name": "X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Height",
+                "name": "Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Roundness",
+                "name": "Rotate",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Center",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Method index",
-                "values": [
-                    "Fill",
-                    "Stroke",
-                    "Clip"
-                ],
-                "subType": "integer"
+                "name": "Scale",
+                "subType": "number"
             }
         ],
         "portsOut": [

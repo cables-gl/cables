@@ -1,6 +1,7 @@
 const canv = document.createElement("canvas");
 const
     exec = op.inTrigger("Exec"),
+    inCanvas = op.inObject("Canvas Copy", null, "element"),
     inWidth = op.inInt("Width", 256),
     inHeight = op.inInt("Height", 256),
     next = op.outTrigger("Next"),
@@ -23,6 +24,8 @@ exec.onTriggered = () =>
 
     ctx.clearRect(0, 0, inWidth.get(), inHeight.get());
     ctx.fillStyle = "grey";
+
+    if (inCanvas.get() && inCanvas.get().width > 0 && inCanvas.get().height > 0)ctx.drawImage(inCanvas.get(), 0, 0);
 
     next.trigger();
     op.patch.frameStore.canvasCompose = null;

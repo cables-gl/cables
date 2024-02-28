@@ -15,6 +15,12 @@
             "message": "Ops.User.pandur.ElementsPositionsByClass renamed to Ops.Html.ElementsPositionsByClass",
             "author": "pandur",
             "date": 1613486670570
+        },
+        {
+            "message": "Added output: total number of elements that were analyzed",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708703053381
         }
     ],
     "authorName": "pandur",
@@ -38,6 +44,11 @@
             {
                 "type": 3,
                 "name": "Size"
+            },
+            {
+                "type": 0,
+                "name": "Total Elements",
+                "subType": "number"
             }
         ]
     },

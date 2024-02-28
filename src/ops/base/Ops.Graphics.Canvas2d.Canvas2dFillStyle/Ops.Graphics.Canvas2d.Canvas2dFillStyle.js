@@ -3,7 +3,6 @@ const
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
-
     next = op.outTrigger("Next");
 
 r.setUiAttribs({ "colorPick": true });

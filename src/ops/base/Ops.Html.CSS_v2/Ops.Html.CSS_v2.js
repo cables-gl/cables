@@ -1,4 +1,6 @@
-const code = op.inStringEditor("css code");
+const
+    code = op.inStringEditor("css code"),
+    inActive = op.inBool("Active", true);
 
 code.setUiAttribs(
     {
@@ -11,6 +13,12 @@ const eleId = "css_" + CABLES.uuid();
 
 code.onChange = update;
 update();
+
+inActive.onChange = () =>
+{
+    if (!inActive.get())styleEle.remove();
+    else addElement();
+};
 
 function getCssContent()
 {
@@ -42,10 +50,14 @@ function update()
         styleEle.id = eleId;
         styleEle.textContent = attachments.css_spinner;
         styleEle.classList.add("cablesEle");
-
-        const head = op.patch.getDocument().getElementsByTagName("body")[0];
-        head.appendChild(styleEle);
+        addElement();
     }
+}
+
+function addElement()
+{
+    const head = op.patch.getDocument().getElementsByTagName("body")[0];
+    head.appendChild(styleEle);
 }
 
 op.onDelete = function ()

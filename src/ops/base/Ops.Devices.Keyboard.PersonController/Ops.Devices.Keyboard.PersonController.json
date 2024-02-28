@@ -34,6 +34,26 @@
                 "subType": "boolean"
             },
             {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Start X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Start Y",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }
@@ -67,6 +87,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1701851017423
+        },
+        {
+            "message": "Added input for collision detection via a canvas element",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708686951509
+        },
+        {
+            "message": "Added start position which will be set when triggering reset",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708686967706
         }
     ]
 }
