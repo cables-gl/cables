@@ -54,6 +54,16 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Bassier Dir X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Bassier Dir Y",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }
