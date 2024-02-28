@@ -384,8 +384,6 @@ class Context extends CGState
         {
             this._oldCanvasWidth = this.canvasWidth;
             this._oldCanvasHeight = this.canvasHeight;
-            // this.setSize(this.canvasWidth / this.pixelDensity, this.canvasHeight / this.pixelDensity);
-            // this.updateSize();
             this.emitEvent("resize");
         }
 

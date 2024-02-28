@@ -5,46 +5,47 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Gradient"
+                "type": 0,
+                "name": "Gradient",
+                "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Direction index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Smoothstep",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Step",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Flip",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "sRGB",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Oklab",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Size",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "filter index",
                 "values": [
                     "nearest",
@@ -54,31 +55,31 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "wrap index",
                 "subType": "integer"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Gradient Array"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Randomize Colors"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Texture",
                 "objType": "texture"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Colors"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Colors Pos"
             }
         ]
