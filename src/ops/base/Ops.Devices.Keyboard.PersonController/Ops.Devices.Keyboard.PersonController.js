@@ -13,6 +13,9 @@ const
     inStartX = op.inFloat("Start X", 0),
     inStartY = op.inFloat("Start Y", 0),
 
+    inDirBarrierX = op.inFloat("Bassier Dir X", 0),
+    inDirBarrierY = op.inFloat("Bassier Dir Y", 0),
+
     inReset = op.inTriggerButton("Reset");
 
 let lastTime = performance.now();
@@ -21,8 +24,10 @@ let canvas = null;
 
 function getCanvasPixel(ctx, x, y)
 {
-    // if (x != x || y != y || x == Infinity || y == Infinity || x > canvas.width * 2 || y > canvas.heigth * 2)
-    // return 0;
+    if (x != x || y != y || x == Infinity || y == Infinity || x > canvas.width * 2 || y > canvas.heigth * 2)
+        return 0;
+
+    // if(x>0 && y>0)/**/
 
     let w = inCanvasTestSize.get();
     let r = 0;
@@ -71,8 +76,23 @@ exe.onTriggered = function ()
                     if (getCanvasPixel(ctx, newPosX, newPosY))
                     {
                         // all failed...
-                        newPosX = outX.get();
-                        newPosY = outY.get();
+
+                        if (inDirBarrierX.get() != 0 || inDirBarrierY.get() != 0)
+                        {
+                            for (let i = 0; i < 200; i++)
+                            {
+                                newPosX = outX.get() + inDirBarrierX.get();
+                                newPosY = outY.get() + inDirBarrierY.get();
+                                outX.set(newPosX);
+                                outY.set(newPosY);
+                                if (!getCanvasPixel(ctx, newPosX, newPosY)) break;
+                            }
+                        }
+                        else
+                        {
+                            newPosX = outX.get();
+                            newPosY = outY.get();
+                        }
                     }
                 }
             }

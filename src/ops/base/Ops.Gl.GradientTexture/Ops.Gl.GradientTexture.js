@@ -24,7 +24,11 @@ twrap.onChange =
     inFlip.onChange =
     inSRGB.onChange =
     inOklab.onChange =
-    inSize.onChange = inGrad.onChange = inSmoothstep.onChange = inDir.onChange = inGradArray.onChange = update;
+    inSize.onChange =
+    inGrad.onChange =
+    inSmoothstep.onChange =
+    inDir.onChange =
+    inGradArray.onChange = update;
 
 inGrad.set("{\"keys\" : [{\"pos\":0,\"r\":0,\"g\":0,\"b\":0},{\"pos\":1,\"r\":1,\"g\":1,\"b\":1}]}");
 
@@ -130,6 +134,7 @@ function updateGradient(keys)
     let width = Math.round(inSize.get());
     if (width < 4) width = 4;
 
+    console.log("updateGradient");
     inGrad.setUiAttribs(
         {
             "editShortcut": true,
