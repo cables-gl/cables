@@ -93,7 +93,6 @@ function rebuild()
             for (let i = 0; i < numTc; i += 2)
             {
                 bufTexCoord[i] = i / numTc;
-                // bufTexCoord[i+1] = i / numTc;
                 bufTexCoord[i + 1] = 0.5;
             }
         }

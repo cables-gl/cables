@@ -1,0 +1,82 @@
+{
+    "id": "70f69372-c036-4fa4-bb04-3ba24c4d4164",
+    "created": 1709117722517,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1709117722561
+        },
+        {
+            "message": "Ops.Patch.PgU52p5.PointsRectangle renamed to Ops.Array.PointArray.PointsRectangle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1709118818982
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Line Strip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Segments",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "border radius",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Top Left",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top Right",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom Left",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom Right",
+                "group": "Round Corner",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            }
+        ]
+    }
+}

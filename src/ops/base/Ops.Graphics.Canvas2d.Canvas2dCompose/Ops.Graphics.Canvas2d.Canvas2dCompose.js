@@ -24,6 +24,7 @@ exec.onTriggered = () =>
 
     ctx.clearRect(0, 0, inWidth.get(), inHeight.get());
     ctx.fillStyle = "grey";
+    ctx.antiAlias = true;
 
     if (inCanvas.get() && inCanvas.get().width > 0 && inCanvas.get().height > 0)ctx.drawImage(inCanvas.get(), 0, 0);
 

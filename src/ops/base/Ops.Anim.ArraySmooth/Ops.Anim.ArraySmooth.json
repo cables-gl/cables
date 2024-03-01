@@ -1,0 +1,95 @@
+{
+    "id": "fb46afd3-c08a-487e-bd22-a0d183a4b6af",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1563449317441
+        },
+        {
+            "message": "fix bugs with NaN values",
+            "author": "pandur",
+            "date": 1643616950027
+        },
+        {
+            "message": "cloned op from Ops.Anim.Smooth",
+            "author": "pandur",
+            "date": 1709200845092
+        },
+        {
+            "message": "Ops.Patch.PgU52p5.ArraySmooth renamed to Ops.Anim.ArraySmooth",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1709202973380
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1709200845092,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Inc factor",
+                "uititle": "Inc/Dec factor",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dec factor",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Smooths out jumps in values (AverageInterpolation)",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Separate inc/dec",
+                "text": "Enable to have separate control over the smoothing when values increase or decrease"
+            },
+            {
+                "name": "Value",
+                "text": "The value to smooth"
+            },
+            {
+                "name": "Inc factor",
+                "text": "Amount of smoothing applied to values that increase from the previous number"
+            },
+            {
+                "name": "Dec factor",
+                "text": "Amount of smoothing applied to values that decrease from the previous number"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The smoothed result"
+            }
+        ]
+    }
+}
