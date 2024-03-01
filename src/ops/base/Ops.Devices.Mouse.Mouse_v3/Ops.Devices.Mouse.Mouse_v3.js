@@ -25,25 +25,44 @@ op.onDelete = removeListeners;
 
 addListeners();
 
-op.on("loadedValueSet",
-    () =>
+op.on("loadedValueSet", onStart);
+
+function onStart()
+{
+    if (normalize == 0)
     {
-        if (normalize == 0)
+        if (sizeElement.clientWidth === 0)
         {
-            outMouseX.set(sizeElement.clientWidth / 2);
-            outMouseY.set(sizeElement.clientHeight / 2);
+            console.log("mouse waiting for listenerelement");
+            setTimeout(onStart, 50);
         }
-        if (normalize == 1)
+
+        outMouseX.set(sizeElement.clientWidth / 2);
+        outMouseY.set(sizeElement.clientHeight / 2);
+    }
+    else if (normalize == 1)
+    {
+        outMouseX.set(0);
+        outMouseY.set(0);
+    }
+    else if (normalize == 2)
+    {
+        outMouseX.set(0.5);
+        outMouseY.set(0.5);
+    }
+    else if (normalize == 3)
+    {
+        if (sizeElement.clientWidth === 0)
         {
-            outMouseX.set(0);
-            outMouseY.set(0);
+            console.log("mouse waiting for listenerelement");
+            setTimeout(onStart, 50);
         }
-        if (normalize == 2)
-        {
-            outMouseX.set(0.5);
-            outMouseY.set(0.5);
-        }
-    });
+
+        outMouseX.set(sizeElement.clientWidth / 2 / cgl.pixelDensity);
+        outMouseY.set(sizeElement.clientHeight / 2 / cgl.pixelDensity);
+    }
+    else console.log("unknown normalize mouse", normalize);
+}
 
 function setValue(x, y)
 {
@@ -180,6 +199,9 @@ function setCoords(e)
 
     if (flipY.get()) y = sizeElement.clientHeight - y;
 
+    //   setValue(sizeElement.clientWidth / 2, sizeElement.clientHeight / 2);
+
+    console.log("setcioiooooords");
     setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
 }
 
