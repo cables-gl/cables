@@ -9,17 +9,15 @@ let lastTime = 0;
 let startTime = 0;
 let firsttime = true;
 let cycle = 1;
+let lastArr = null;
+let arr1, arr2;
+let result = [];
 
 const anim = new CABLES.Anim();
 anim.createPort(op, "easing", init);
 anim.loop = false;
 
-let lastArr = null;
-
 inDur.onChange = inArr.onChange = init;
-
-let arr1, arr2;
-let result = [];
 
 inTrigger.onTriggered = () =>
 {
@@ -44,11 +42,6 @@ function copyArray(a)
 function init()
 {
     if (!inArr.get()) return;
-
-    // if (inArr.get() == lastArr) return; // cant dothat, then changes in array ref are not working...
-    // if (lastArr)
-    //     if (inArr.get() == lastArr)
-    //         return;
 
     lastArr = inArr.get();
     startTime = performance.now();
@@ -92,10 +85,7 @@ function ipMat(perc)
     else
     {
         for (let i = 0; i < arr1.length; i++)
-        {
             result[i] = ip(arr1[i], arr2[i], perc);
-        }
-
 
         outArr.setRef(result);
     }

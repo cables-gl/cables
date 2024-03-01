@@ -20,6 +20,11 @@
         "portsIn": [
             {
                 "type": 0,
+                "name": "Line Strip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Segments",
                 "group": "Size",
                 "subType": "integer"
