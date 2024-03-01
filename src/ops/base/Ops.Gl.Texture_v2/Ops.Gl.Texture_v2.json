@@ -5,78 +5,98 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "File"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Wrap index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Data Format index",
+                "values": [
+                    "R",
+                    "RG",
+                    "RGB",
+                    "RGBA",
+                    "SRGBA"
+                ],
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Flip",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Save Memory",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Add Cachebuster",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Texture",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Aspect Ratio",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loaded",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loading",
                 "subType": "number"
             }

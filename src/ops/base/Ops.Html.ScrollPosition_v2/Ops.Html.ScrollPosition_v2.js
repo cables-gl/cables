@@ -3,6 +3,7 @@ const
     inEle = op.inObject("Element", null, "element"),
     inScrollTop = op.inTriggerButton("Scroll to top"),
 
+    next = op.outTrigger("Next"),
     sleft = op.addOutPort(new CABLES.Port(op, "left")),
     stop = op.addOutPort(new CABLES.Port(op, "top")),
     scrollPercentageX = op.outNumber("Percentage X"),
@@ -48,6 +49,7 @@ function updateScroll()
     let px = el.scrollLeft / (el.scrollWidth - rCanv.width);
     scrollPercentageY.set(py || 0);
     scrollPercentageX.set(px || 0);
+    next.trigger();
 }
 
 inScrollTop.onTriggered = () =>
