@@ -199,9 +199,6 @@ function setCoords(e)
 
     if (flipY.get()) y = sizeElement.clientHeight - y;
 
-    //   setValue(sizeElement.clientWidth / 2, sizeElement.clientHeight / 2);
-
-    console.log("setcioiooooords");
     setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
 }
 
