@@ -15,7 +15,7 @@ const inGrad = op.inGradient("Gradient"),
     outColorPos = op.outArray("Colors Pos", null, 1);
 
 const cgl = op.patch.cgl;
-
+let timeout = null;
 inGrad.setUiAttribs({ "editShortcut": true });
 
 twrap.onChange =
@@ -87,8 +87,12 @@ function lin2srgb(r, g, b)
 
 function update()
 {
-    const keys = parseKeys();
-    if (keys) updateGradient(keys);
+    clearTimeout(timeout);
+    timeout = setTimeout(() =>
+    {
+        const keys = parseKeys();
+        if (keys) updateGradient(keys);
+    }, 5);
 }
 
 function parseKeys()
@@ -141,7 +145,6 @@ function updateGradient(keys)
             "gradEditSmoothstep": inSmoothstep.get(),
             "gradEditStep": inStep.get(),
             "gradOklab": inOklab.get(),
-
         });
 
     let selectedWrap = 0;
@@ -235,11 +238,14 @@ function updateGradient(keys)
         const animG = new CABLES.Anim();
         const animB = new CABLES.Anim();
 
-        for (let i = 0; i < keys.length - 1; i++)
+        for (let i = 0; i < keys.length; i++)
         {
-            animR.setValue(keys[i].pos, keys[i].r);
-            animG.setValue(keys[i].pos, keys[i].g);
-            animB.setValue(keys[i].pos, keys[i].b);
+            let p = keys[i].pos;
+            if (inFlip.get())p = 1 - p;
+
+            animR.setValue(p, keys[i].r);
+            animG.setValue(p, keys[i].g);
+            animB.setValue(p, keys[i].b);
         }
 
         for (let x = 0; x < width; x++)

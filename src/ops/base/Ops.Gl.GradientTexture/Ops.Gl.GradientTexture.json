@@ -115,5 +115,19 @@
     },
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "_wQNDW"
+    "exampleProjectId": "_wQNDW",
+    "changelog": [
+        {
+            "message": "fixed radial mode: flip option was ignored / default gradient was not shown without making changes",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1709211890849
+        },
+        {
+            "message": "optimized/reduced unnecessary recreation ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1709212147269
+        }
+    ]
 }

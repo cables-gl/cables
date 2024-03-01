@@ -180,11 +180,11 @@ function updateUi()
     g.setUiAttribs({ "greyout": inTex.isLinked() });
     a.setUiAttribs({ "greyout": inTex.isLinked() });
 
-    width.setUiAttribs({ "greyout": inSize.get() == "Auto" });
-    height.setUiAttribs({ "greyout": inSize.get() == "Auto" });
+    width.setUiAttribs({ "greyout": inSize.get() != "Manual" });
+    height.setUiAttribs({ "greyout": inSize.get() != "Manual" });
 
-    width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
-    height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+    // width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
+    // height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
     if (tex)
         if (CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
