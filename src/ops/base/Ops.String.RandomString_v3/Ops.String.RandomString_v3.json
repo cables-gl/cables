@@ -1,0 +1,53 @@
+{
+    "authorName": "pandur",
+    "id": "d2374316-90b1-4f50-bdb6-0d7296bbea75",
+    "created": 1709282901310,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "chars"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Generate a random string of given characters",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "added unicode support",
+            "author": "stephan",
+            "date": 1648808530498
+        },
+        {
+            "message": "cloned op from Ops.String.RandomString_v2",
+            "author": "pandur",
+            "date": 1709282901310
+        },
+        {
+            "message": "Ops.Patch.Pa03CF5.RandomString_v2 renamed to Ops.String.RandomString_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1709283039747
+        }
+    ],
+    "caniusequery": ""
+}

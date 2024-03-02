@@ -485,17 +485,17 @@ Texture.prototype.updateMipMap = function ()
  * @param {Object} image
  * @param {Number} filter
  */
-Texture.prototype.initTexture = function (img, filter = Texture.FILTER_LINEAR)
+Texture.prototype.initTexture = function (img, filter)
 {
     this._cgl.printError("before initTexture");
     this._cgl.checkFrameStarted("texture inittexture");
     this._fromData = false;
-    // if(filter) this.unpackAlpha=filter.unpackAlpha||this.unpackAlpha;
 
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
     if (img.width) this.width = img.width;
     if (img.height) this.height = img.height;
-    this.filter = filter;
+
+    if (filter !== undefined) this.filter = filter; // todo: can we remove this filter param?
 
     if (img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize)
     {
@@ -1091,6 +1091,8 @@ Texture.createFromImage = function (cgl, img, options)
     texture.width = img.width;
     texture.height = img.height;
     if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
+
+    console.log("createFromImage", options);
     texture.initTexture(img, options.filter);
 
     return texture;

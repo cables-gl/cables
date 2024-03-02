@@ -584,7 +584,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 }
 
                 this.ops.splice(i, 1);
-                opToDelete.emitEvent("delete", this.ops[i]);
+                opToDelete.emitEvent("delete", opToDelete);
                 this.emitEvent("onOpDelete", opToDelete, reloadingOp);
 
                 if (this.clearSubPatchCache) this.clearSubPatchCache(opToDelete.uiAttribs.subPatch);

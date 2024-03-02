@@ -75,28 +75,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "name",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "aaabbbbb",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "aaaa",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Test"
             }
         ]

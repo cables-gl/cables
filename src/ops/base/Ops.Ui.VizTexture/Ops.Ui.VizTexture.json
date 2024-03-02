@@ -71,6 +71,10 @@
                 "type": 0,
                 "name": "Y",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Pin"
             }
         ],
         "portsOut": [

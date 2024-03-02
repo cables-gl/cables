@@ -90,8 +90,8 @@ function realReload(nocache)
 {
     op.checkMainloopExists();
     if (!active.get()) return;
-    // if (filename.get() === null) return;
     if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
+
     loadingId = cgl.patch.loading.start("textureOp", filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
@@ -101,7 +101,6 @@ function realReload(nocache)
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
     let needsRefresh = false;
-    // if (loadedFilename != filename.get()) needsRefresh = true;
     loadedFilename = filename.get();
 
     if ((filename.get() && filename.get().length > 1))
@@ -191,7 +190,6 @@ function onFilterChange()
     else if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
     else if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
     else if (tfilter.get() == "Anisotropic") cgl_filter = CGL.Texture.FILTER_ANISOTROPIC;
-
     aniso.setUiAttribs({ "greyout": cgl_filter != CGL.Texture.FILTER_MIPMAP });
 
     cgl_aniso = parseFloat(aniso.get());

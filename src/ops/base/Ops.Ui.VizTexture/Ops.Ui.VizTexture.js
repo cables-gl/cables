@@ -7,25 +7,28 @@ const
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
 
+    inPin = op.inTriggerButton("Pin"),
+
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
 op.setUiAttrib({ "height": 150, "resizable": true });
 
 const timer = new CABLES.Timer();
-timer.play();
-
 let shader = null;
 let fb = null;
 let pixelReader = null;
 let colorString = "";
 
 inVizRange.onChange = updateDefines;
-
 inPickColor.onChange = updateUi;
 updateUi();
 
-op.checkMainloopExists();
+if (CABLES.UI)
+{
+    timer.play();
+    op.checkMainloopExists();
+}
 
 function updateUi()
 {
@@ -41,7 +44,7 @@ inTex.onChange = () =>
 
     let title = "";
 
-    if (inTex.get() && inTex.links[0]) title = inTex.links[0].getOtherPort(inTex).name;
+    if (inTex.get() && inTex.isLinked()) title = inTex.links[0].getOtherPort(inTex).name;
 
     op.setUiAttrib({ "extendTitle": title });
 };
@@ -172,6 +175,7 @@ op.renderVizLayer = (ctx, layer) =>
     const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
 
     ctx.imageSmoothingEnabled = !small || !scaledDown;
+    // ctx.imageSmoothingEnabled=false;
 
     if (!ctx.imageSmoothingEnabled)
     {
@@ -183,6 +187,7 @@ op.renderVizLayer = (ctx, layer) =>
     }
 
     let layerHeight = layer.height;
+
     let numX = (10 * layer.width / layerHeight);
     let stepY = (layerHeight / 10);
     let stepX = (layer.width / numX);
@@ -212,61 +217,59 @@ op.renderVizLayer = (ctx, layer) =>
     }
 
     ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
-    ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, layer.x + imgSizeW, layerHeight);
+    ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
     ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
     ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
     if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
     {
-        if (sizeTex[1] == 1)
-            ctx.drawImage(cgl.canvas,
-                0,
-                0,
-                s[0],
-                s[1],
-                layer.x,
-                layer.y,
-                layer.width,
-                layerHeight * 5);// workaround filtering problems
-        if (sizeTex[0] == 1)
-            ctx.drawImage(cgl.canvas,
-                0,
-                0,
-                s[0],
-                s[1],
-                layer.x,
-                layer.y,
-                layer.width * 5,
-                layerHeight); // workaround filtering problems
-        else
-            try
+        try
+        {
+            if (sizeTex[1] == 1)
             {
-                if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
-                // if(layerHeight - sizeImg[1]>=0)
-                    ctx.drawImage(cgl.canvas,
-                        0,
-                        0,
-                        s[0],
-                        s[1],
-                        imgPosX,
-                        imgPosY,
-                        imgSizeW,
-                        imgSizeH);
-            // else
-            //     ctx.drawImage(cgl.canvas,
-            //         0,
-            //         0,
-            //         s[0],
-            //         s[1],
-            //         layer.x + (layer.width - sizeImg[0]*layerHeight/sizeImg[1]) / 2,
-            //         layer.y ,
-            //         sizeImg[0]*layerHeight/sizeImg[1],
-            //         layerHeight);
+                ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                ctx.drawImage(cgl.canvas,
+                    0,
+                    0,
+                    s[0],
+                    s[1],
+                    layer.x,
+                    layer.y,
+                    layer.width,
+                    layerHeight);// workaround filtering problems
+                ctx.imageSmoothingEnabled = true;
             }
-            catch (e)
+            else
+            if (sizeTex[0] == 1)
             {
-                console.error("canvas drawimage exception...", e);
+                ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                ctx.drawImage(cgl.canvas,
+                    0,
+                    0,
+                    s[0],
+                    s[1],
+                    layer.x,
+                    layer.y,
+                    layer.width,
+                    layerHeight);
+                ctx.imageSmoothingEnabled = true;
             }
+            else
+            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
+                ctx.drawImage(cgl.canvas,
+                    0,
+                    0,
+                    s[0],
+                    s[1],
+                    imgPosX,
+                    imgPosY,
+                    imgSizeW,
+                    imgSizeH);
+        }
+        catch (e)
+        {
+            console.error("canvas drawimage exception...", e);
+        }
     }
 
     let info = "";

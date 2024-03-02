@@ -17,6 +17,10 @@
         ],
         "portsOut": [
             {
+                "type": 1,
+                "name": "Next"
+            },
+            {
                 "type": 0,
                 "name": "left",
                 "subType": "number"
@@ -55,7 +59,6 @@
             "date": 1674559544003
         }
     ],
-
     "docs": {
         "ports": []
     }

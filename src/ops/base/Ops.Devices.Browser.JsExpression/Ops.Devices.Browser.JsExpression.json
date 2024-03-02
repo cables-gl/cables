@@ -1,0 +1,51 @@
+{
+    "id": "48da33bb-ca42-4e5e-a5de-ca5d14ab6709",
+    "created": 1709305327726,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1709305327727
+        },
+        {
+            "message": "Ops.Patch.PMYM2M5.JsValue renamed to Ops.Devices.Browser.JsExpression",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1709306391089
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "JS Expression"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result String"
+            },
+            {
+                "type": 0,
+                "name": "Result Number",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Result Array"
+            },
+            {
+                "type": 2,
+                "name": "Result Object"
+            },
+            {
+                "type": 0,
+                "name": "Error",
+                "subType": "boolean"
+            }
+        ]
+    }
+}
