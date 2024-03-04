@@ -150,12 +150,6 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1707131449926
-        },
-        {
-            "message": "Fixed: Seed parameter was not changing anything",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1707131451914
         }
     ],
     "caniusequery": ""
