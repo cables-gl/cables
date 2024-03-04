@@ -16,7 +16,7 @@
             {
                 "type": 0,
                 "name": "result",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
@@ -42,7 +42,6 @@
     "created": 1540919889895,
     "youtubeid": "3dYztfuw4lA",
     "issues": "",
-
     "changelog": [
         {
             "message": "Ops.Math.Compare.Greater renamed to Ops.Math.Compare.GreaterThan",
