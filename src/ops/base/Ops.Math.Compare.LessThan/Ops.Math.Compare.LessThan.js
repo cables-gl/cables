@@ -2,7 +2,7 @@ const number1 = op.inValue("number1");
 const number2 = op.inValue("number2");
 const result = op.outBoolNum("result");
 
-op.setTitle("<");
+op.setUiAttribs({ "mathTitle": true });
 
 number1.onChange = exec;
 number2.onChange = exec;

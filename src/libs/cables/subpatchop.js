@@ -38,6 +38,21 @@ const SubPatchOp = class
             op.setStorage({ "subPatchVer": 2 });
         };
 
+        op.loadDependencies = (p, next) =>
+        {
+            if (CABLES.UI)
+            {
+                gui.serverOps.loadProjectDependencies(p, () =>
+                {
+                    if (next)next();
+                });
+            }
+            else
+            if (next)next();
+        };
+
+
+
         op.on("delete", () =>
         {
             if (op.patch.clearSubPatchCache)op.patch.clearSubPatchCache(this.patchId);
@@ -57,6 +72,7 @@ const SubPatchOp = class
     {
         return this._op.patchId.get();
     }
+
 
     createInOutOps()
     {

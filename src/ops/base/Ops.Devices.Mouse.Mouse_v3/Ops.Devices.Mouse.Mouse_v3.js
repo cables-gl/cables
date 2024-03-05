@@ -4,6 +4,7 @@ const
     flipY = op.inValueBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
     touchscreen = op.inValueBool("Touch support", true),
+    inPassive = op.inValueBool("Passive Events", false),
     active = op.inValueBool("Active", true),
     outMouseX = op.outNumber("x", 0),
     outMouseY = op.outNumber("y", 0),
@@ -18,6 +19,8 @@ const cgl = op.patch.cgl;
 let normalize = 1;
 let listenerElement = null;
 let sizeElement = null;
+
+inPassive.onChange =
 area.onChange = addListeners;
 
 inCoords.onChange = updateCoordNormalizing;
@@ -260,20 +263,23 @@ function addListeners()
     if (area.get() == "Document") sizeElement = listenerElement = document.body;
     if (area.get() == "Parent Element") listenerElement = sizeElement = cgl.canvas.parentElement;
 
+    let passive = false;
+    if (inPassive.get())passive = { "passive": true };
+
     if (touchscreen.get())
     {
-        listenerElement.addEventListener("touchend", ontouchend, false);
-        listenerElement.addEventListener("touchstart", ontouchstart, false);
-        listenerElement.addEventListener("touchmove", ontouchmove, false);
+        listenerElement.addEventListener("touchend", ontouchend, passive);
+        listenerElement.addEventListener("touchstart", ontouchstart, passive);
+        listenerElement.addEventListener("touchmove", ontouchmove, passive);
     }
 
-    listenerElement.addEventListener("mousemove", onmousemove, false);
-    listenerElement.addEventListener("mouseleave", onMouseLeave, false);
-    listenerElement.addEventListener("mousedown", onMouseDown, false);
-    listenerElement.addEventListener("mouseup", onMouseUp, false);
-    listenerElement.addEventListener("mouseenter", onMouseEnter, false);
-    listenerElement.addEventListener("contextmenu", onClickRight, false);
-    listenerElement.addEventListener("click", onmouseclick, false);
+    listenerElement.addEventListener("mousemove", onmousemove, passive);
+    listenerElement.addEventListener("mouseleave", onMouseLeave, passive);
+    listenerElement.addEventListener("mousedown", onMouseDown, passive);
+    listenerElement.addEventListener("mouseup", onMouseUp, passive);
+    listenerElement.addEventListener("mouseenter", onMouseEnter, passive);
+    listenerElement.addEventListener("contextmenu", onClickRight, passive);
+    listenerElement.addEventListener("click", onmouseclick, passive);
 }
 
 //

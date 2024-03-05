@@ -3,7 +3,7 @@ const
     number2 = op.inValueFloat("number2"),
     result = op.outBoolNum("result");
 
-op.setTitle(">");
+op.setUiAttribs({ "mathTitle": true });
 
 number1.onChange = number2.onChange = exec;
 

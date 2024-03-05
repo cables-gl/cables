@@ -71,6 +71,11 @@
             },
             {
                 "type": 0,
+                "name": "Passive Events",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }
