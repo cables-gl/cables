@@ -48,11 +48,24 @@
             {
                 "type": 0,
                 "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "subType": "integer"
             },
             {
@@ -115,7 +128,7 @@
             {
                 "type": 0,
                 "name": "Font Available",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
@@ -180,8 +193,6 @@
             }
         ]
     },
-
-
     "changelog": [
         {
             "message": "Ops.Gl.Meshes.TextMesh3 renamed to Ops.Gl.Meshes.TextMesh_v2",
