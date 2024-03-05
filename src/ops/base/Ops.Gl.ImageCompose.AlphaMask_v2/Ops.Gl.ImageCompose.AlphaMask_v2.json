@@ -43,7 +43,6 @@
     },
     "summary": "Set alphachannel of current imagecompose via a texture mask",
     "issues": "",
-
     "docs": {
         "ports": []
     },
