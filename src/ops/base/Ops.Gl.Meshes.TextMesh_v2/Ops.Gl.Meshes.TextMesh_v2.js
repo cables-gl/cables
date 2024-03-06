@@ -180,7 +180,7 @@ render.onTriggered = function ()
     }
 
     if (createTexture) generateTexture();
-    if (createMesh)generateMesh();
+    if (createMesh) generateMesh();
 
     if (mesh && mesh.numInstances > 0)
     {
@@ -201,6 +201,7 @@ render.onTriggered = function ()
         vec[1] -= lineHeight.get();
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix, cgl.mMatrix, vec);
+
         if (!disabled)mesh.render(cgl.getShader());
 
         cgl.popModelMatrix();
@@ -254,14 +255,13 @@ function generateMesh()
     outLines.set(strings.length);
 
     const transformations = [];
-    const tcOffsets = [];// new Float32Array(str.get().length*2);
-    const tcSize = [];// new Float32Array(str.get().length*2);
+    const tcOffsets = [];
+    const tcSize = [];
     const texPos = [];
-    let charCounter = 0;
-    createTexture = false;
     const m = mat4.create();
-
+    let charCounter = 0;
     let maxWidth = 0;
+    createTexture = false;
 
     for (let s = 0; s < strings.length; s++)
     {
@@ -327,7 +327,8 @@ function generateMesh()
     disabled = false;
     if (transMats.length == 0)disabled = true;
 
-    mesh.numInstances = transMats.length / 16;
+    const n = transMats.length / 16;
+    mesh.setNumInstances(n);
 
     if (mesh.numInstances == 0)
     {

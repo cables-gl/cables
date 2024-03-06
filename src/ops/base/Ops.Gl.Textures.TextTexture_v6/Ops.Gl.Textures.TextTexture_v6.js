@@ -214,7 +214,7 @@ function doRender()
             CABLES.UI.SIMPLEWIREFRAMERECT.render(outAspect.get(), 1, 1);
 
         cgl.pushShader(shader);
-        mesh.render(shader);
+        mesh.render(op.patch.cg.getShader());
 
         cgl.popShader();
         cgl.popBlendMode();

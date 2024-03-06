@@ -1,5 +1,5 @@
 {
-    "summary": "Adjust Hue of current ImageCompose",
+    "summary": "",
     "layout": {
         "portsIn": [
             {
@@ -50,17 +50,6 @@
     "docs": {
         "ports": []
     },
-    "todos": [
-        {
-            "message": "Add Amount Slider and Mask Texture Input",
-            "author": "bagoof",
-            "id": "182b59f6-02e6-4b3e-8301-843faa57c6d0",
-            "date": 1560196212801,
-            "deleted": true,
-            "deletedBy": "stephan",
-            "deletedDate": 1665135629951
-        }
-    ],
     "issues": "",
     "changelog": [
         {
@@ -93,5 +82,5 @@
             "date": 1706782485855
         }
     ],
-    "exampleProjectId": "7mQ5i2"
+    "exampleProjectId": ""
 }
