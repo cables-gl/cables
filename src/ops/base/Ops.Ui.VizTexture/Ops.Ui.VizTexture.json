@@ -32,6 +32,12 @@
             "type": "",
             "author": "pandur",
             "date": 1686651916948
+        },
+        {
+            "message": "Show pixel grid when zoomed in ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1709801021905
         }
     ],
     "authorName": "pandur",
@@ -71,10 +77,6 @@
                 "type": 0,
                 "name": "Y",
                 "subType": "number"
-            },
-            {
-                "type": 1,
-                "name": "Pin"
             }
         ],
         "portsOut": [
