@@ -14,6 +14,7 @@ const
 
     intexA = op.inTexture("texA"),
     intexB = op.inTexture("texB"),
+    intexC = op.inTexture("texC"),
 
     trigger = op.outTrigger("trigger"),
     outSrc = op.outString("code");
@@ -27,6 +28,7 @@ const
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 1),
     tex2 = new CGL.Uniform(shader, "t", "utexA", 2),
     tex3 = new CGL.Uniform(shader, "t", "utexB", 3),
+    tex4 = new CGL.Uniform(shader, "t", "utexC", 4),
 
     uniformW = new CGL.Uniform(shader, "f", "w", inW),
     uniformX = new CGL.Uniform(shader, "f", "x", inX),
@@ -56,6 +58,19 @@ function updateDefines()
 
 }
 
+function myFloat(f)
+{
+    // if(CABLES.UTILS.isNumeric(parseFloat(f)))
+    // {
+    //     let str= f+"";
+
+    //     if(f%0)str+=".0";
+    //     return str;
+
+    // }
+    return f;
+}
+
 function updateSource()
 {
     // inExec.setUiAttribs({ "greyout": true });
@@ -65,31 +80,34 @@ function updateSource()
     src += "UNI float x;".endl();
     src += "UNI float y;".endl();
     src += "UNI float z;".endl();
+    src += "UNI float w;".endl();
     src += "UNI sampler2D tex;".endl();
     src += "UNI sampler2D utexA;".endl();
     src += "UNI sampler2D utexB;".endl();
+    src += "UNI sampler2D utexC;".endl();
 
     src += "void main()".endl();
     src += "{".endl().endl();
     src += "  vec4 col=vec4(1.0);".endl();
     src += "  vec4 color=texture(tex,texCoord);".endl();
     src += "  vec4 texA=texture(utexA,texCoord);".endl();
-    src += "  vec4 texB=texture(utexB,texCoord);".endl().endl();
+    src += "  vec4 texB=texture(utexB,texCoord);".endl();
+    src += "  vec4 texC=texture(utexC,texCoord);".endl().endl();
 
     src += "  // R src".endl();
-    src += "  col.r=" + inR.get() + ";".endl();
+    src += "  col.r=" + myFloat(inR.get()) + ";".endl();
     src += "  ".endl();
 
     src += "  // G src".endl();
-    src += "  col.g=" + inG.get() + ";".endl();
+    src += "  col.g=" + myFloat(inG.get()) + ";".endl();
     src += "  ".endl();
 
     src += "  // B src".endl();
-    src += "  col.b=" + inB.get() + ";".endl();
+    src += "  col.b=" + myFloat(inB.get()) + ";".endl();
     src += "  ".endl();
 
     src += "  // A src".endl();
-    src += "  col.a=" + inA.get() + ";".endl();
+    src += "  col.a=" + myFloat(inA.get()) + ";".endl();
     src += "  ".endl();
 
     src += "  outColor=col;".endl().endl();
@@ -116,6 +134,7 @@ render.onTriggered = function ()
     // if (inTexMask.get())cgl.setTexture(1, inTexMask.get().tex);
     if (intexA.get())cgl.setTexture(2, intexA.get().tex);
     if (intexB.get())cgl.setTexture(3, intexB.get().tex);
+    if (intexC.get())cgl.setTexture(4, intexC.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

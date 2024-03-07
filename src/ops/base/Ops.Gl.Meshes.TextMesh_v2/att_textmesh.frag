@@ -1,3 +1,7 @@
+{{MODULES_HEAD}}
+
+#define INSTANCING
+
 UNI sampler2D tex;
 #ifdef DO_MULTEX
     UNI sampler2D texMul;
@@ -12,8 +16,12 @@ UNI float g;
 UNI float b;
 UNI float a;
 
+flat IN float frag_instIndex;
+
 void main()
 {
+    {{MODULE_BEGIN_FRAG}}
+
     vec4 col=texture(tex,texCoord);
     col.a=col.r;
     col.r*=r;
@@ -30,6 +38,8 @@ void main()
     #ifdef DO_MULTEX_MASK
         col*=texture(texMulMask,texPos).r;
     #endif
+
+    {{MODULE_COLOR}}
 
     outColor=col;
 }

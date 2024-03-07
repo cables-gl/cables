@@ -40,6 +40,11 @@
             {
                 "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Canvas",
+                    "ViewPort",
+                    "Manual"
+                ],
                 "group": "Size",
                 "subType": "integer"
             },
@@ -70,6 +75,13 @@
             {
                 "type": 0,
                 "name": "Position 0,0 index",
+                "values": [
+                    "Top Left",
+                    "Top Right",
+                    "Center",
+                    "Bottom Right",
+                    "Bottom Left"
+                ],
                 "subType": "integer"
             },
             {
@@ -94,12 +106,21 @@
             {
                 "type": 1,
                 "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "Size Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Height",
+                "subType": "number"
             }
         ]
     },
     "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
     "issues": "",
-
     "docs": {
         "ports": [
             {

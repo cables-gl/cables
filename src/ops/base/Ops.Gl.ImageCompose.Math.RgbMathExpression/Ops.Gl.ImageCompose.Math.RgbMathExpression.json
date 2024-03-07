@@ -55,6 +55,11 @@
                 "type": 2,
                 "name": "texB",
                 "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "texC",
+                "objType": "texture"
             }
         ],
         "portsOut": [
