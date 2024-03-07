@@ -2,18 +2,20 @@
 {
     --width:256px;
     --height:256px;
-    --width-hue:20px;
+    --width-hue:15px;
+    --width-opacity:15px;
+    --pad-opacity:10px;
     --pad:10px;
     --colorblock-height:20px;
     --inputcontainer-height:120px;
 
     background-color: #333;
-    width:calc(var(--width) + 3*var(--pad) + var(--width-hue));
+    width:calc(var(--width) + var(--pad-opacity) + 3 * var(--pad) + var(--width-hue) + var(--width-opacity));
     height:calc(var(--height) + var(--colorblock-height) + 30px + var(--inputcontainer-height));
     position: absolute;
     border-radius: 10px;
     overflow: hidden;
-    z-index: 999999;
+    z-index: 9999;
 
 }
 
@@ -53,6 +55,18 @@
     left:calc(var(--width) + var(--pad) + var(--pad));
 }
 
+.colorRick_opacity
+{
+    cursor:pointer;
+    top:var(--pad);
+    background:linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0));
+    height:var(--height);
+
+    width:var(--width-opacity);
+    position: absolute;
+    left:calc(var(--width) + var(--pad) + var(--pad) + var(--pad) + var(--width-hue));
+}
+
 .colorRick_preview
 {
     position: absolute;
@@ -80,10 +94,10 @@
     border-radius: 100%;
 }
 
-.colorRick_cursor_hue
+.colorRick_cursor_hue,.colorRick_cursor_opacity
 {
     position: absolute;
-    width:24px;
+    width:19px;
     margin-left: -2px;
     height:0px;
     border-top:1px solid white;
@@ -131,7 +145,14 @@
 
 .colorRick_input_hex
 {
-    width:100px;
+    width:60px;
+}
+
+.opacity_title
+{
+    width:60px;
+    display:inline-block;
+    margin-left:6px;
 }
 
 .colorRick_invalid
