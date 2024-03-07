@@ -13,6 +13,8 @@ inExec.onTriggered = () =>
     {
         const ctx = op.patch.frameStore.canvasCompose.ctx;
 
+        ctx.imageSmoothingEnabled = false;
+
         let x = 0;
         let y = 0;
         if (inCenter.get())
