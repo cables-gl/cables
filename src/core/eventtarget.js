@@ -48,6 +48,11 @@ const EventTarget = function ()
         }
     };
 
+    this.hasListenerForEventName = function (eventName)
+    {
+        return this._eventCallbacks[eventName] && this._eventCallbacks[eventName].length > 0;
+    };
+
     this.removeEventListener = this.off = function (which, cb)
     {
         if (which === null || which === undefined) return;
