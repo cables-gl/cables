@@ -55,12 +55,12 @@
             },
             {
                 "type": 0,
-                "name": "Bassier Dir X",
+                "name": "Barrier Dir X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Bassier Dir Y",
+                "name": "Barrier Dir Y",
                 "subType": "number"
             },
             {
@@ -83,6 +83,16 @@
                 "type": 0,
                 "name": "Dir",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Colliding",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "In Barrier",
+                "subType": "boolean"
             }
         ]
     },

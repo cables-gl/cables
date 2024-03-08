@@ -2,13 +2,9 @@ const
     inTex = op.inTexture("Texture In"),
     inShowInfo = op.inBool("Show Info", false),
     inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim"], "Anim"),
-
     inPickColor = op.inBool("Show Color", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
-
-    inPin = op.inTriggerButton("Pin"),
-
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
@@ -174,10 +170,10 @@ op.renderVizLayer = (ctx, layer) =>
 
     const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
 
-    ctx.imageSmoothingEnabled = !small || !scaledDown;
-    // ctx.imageSmoothingEnabled=false;
+    // ctx.imageSmoothingEnabled = !small || !scaledDown;
+    ctx.imageSmoothingEnabled = true;
 
-    if (!ctx.imageSmoothingEnabled)
+    // if (!ctx.imageSmoothingEnabled)
     {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(layer.x, layer.y - 10, 10, 10);
@@ -225,6 +221,8 @@ op.renderVizLayer = (ctx, layer) =>
     {
         try
         {
+            const bigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
+
             if (sizeTex[1] == 1)
             {
                 ctx.imageSmoothingEnabled = false;// workaround filtering problems
@@ -256,6 +254,9 @@ op.renderVizLayer = (ctx, layer) =>
             }
             else
             if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
+            {
+                ctx.imageSmoothingEnabled = !bigPixels;
+
                 ctx.drawImage(cgl.canvas,
                     0,
                     0,
@@ -265,6 +266,34 @@ op.renderVizLayer = (ctx, layer) =>
                     imgPosY,
                     imgSizeW,
                     imgSizeH);
+            }
+
+            if (bigPixels)
+            {
+                const stepx = imgSizeW / s[0];
+                const stepy = imgSizeH / s[1];
+
+                ctx.imageSmoothingEnabled = true;
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 0.1;
+                ctx.beginPath();
+
+                for (let x = 0; x <= s[0]; x++)
+                {
+                    ctx.moveTo(imgPosX + x * stepx, imgPosY);
+                    ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                }
+
+                for (let y = 0; y <= s[1]; y++)
+                {
+                    ctx.moveTo(imgPosX, imgPosY + y * stepy);
+                    ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                }
+
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+            }
         }
         catch (e)
         {
@@ -349,10 +378,7 @@ op.renderVizLayer = (ctx, layer) =>
         if (!pixelReader) pixelReader = new CGL.PixelReader();
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-        gl.framebufferTexture2D(
-            gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
-        );
-
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
         pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>

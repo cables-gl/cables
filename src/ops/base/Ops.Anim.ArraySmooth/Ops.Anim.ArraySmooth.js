@@ -35,6 +35,11 @@ inDivisorUp.onChange = inDivisorDown.onChange = getDivisors;
 inMode.onChange = onFilterChange;
 update();
 
+inVals.onLinkChanged = () =>
+{
+    if (inVals) inVals.copyLinkedUiAttrib("stride", resultArr);
+};
+
 function onFilterChange()
 {
     const selectedMode = inMode.get();

@@ -11,7 +11,9 @@ const
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),
     zeroY = op.inBool("Zero Y", false),
-    trigger = op.outTrigger("trigger");
+    trigger = op.outTrigger("trigger"),
+    outWidth = op.outNumber("Size Width"),
+    outHeight = op.outNumber("Size Height");
 
 const cgl = op.patch.cgl;
 
@@ -58,6 +60,9 @@ function exec()
         xr = w;
         yb = h;
     }
+
+    outWidth.set(w);
+    outHeight.set(h);
 
     if (flipX.get())
     {
