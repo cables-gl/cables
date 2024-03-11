@@ -586,13 +586,12 @@ class Context extends CGState
             this._onetimeCallbacks.length = 0;
         }
 
-        for (let i = 0; i < this._textureslots.length; i++)
-        {
-            // this.setTexture(0, null);
-            this.gl.activeTexture(this.gl.TEXTURE0 + i);
-            this.gl.bindTexture(this.gl.TEXTURE_2D, null);
-            this._textureslots[i] = null;
-        }
+        // for (let i = 0; i < this._textureslots.length; i++)
+        // {
+        //     this.gl.activeTexture(this.gl.TEXTURE0 + i);
+        //     this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+        //     this._textureslots[i] = null;
+        // }
 
         this.emitEvent("beginFrame");
     }
