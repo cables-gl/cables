@@ -570,9 +570,7 @@ class Context extends CGState
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
-
         this._startMatrixStacks(identTranslate, identTranslateView);
-
 
         cgl.pushBlendMode(CONSTANTS.BLEND_MODES.BLEND_NORMAL, false);
 
@@ -586,6 +584,13 @@ class Context extends CGState
         {
             for (let i = 0; i < this._onetimeCallbacks.length; i++) this._onetimeCallbacks[i]();
             this._onetimeCallbacks.length = 0;
+        }
+
+        for (let i = 0; i < this._textureslots.length; i++)
+        {
+            this.gl.activeTexture(this.gl.TEXTURE0 + i);
+            this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+            this._textureslots[i] = null;
         }
 
         this.emitEvent("beginFrame");

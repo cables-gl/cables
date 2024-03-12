@@ -85,7 +85,7 @@ op.renderVizLayer = (ctx, layer, viz) =>
     viz.renderText(ctx, layer, lines, {
         "zoomText": inZoomText.get(),
         "showLineNum": inLineNums.get(),
-        "syntax": "json",
+        "syntax": "js",
         "fontSize": inFontSize.get(),
         "scroll": inPos.get()
     });
