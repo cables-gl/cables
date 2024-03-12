@@ -261,7 +261,7 @@ Shader.prototype._addLibs = function (src)
 {
     for (const id in ShaderLibMods)
     {
-        if (src.indexOf(id) > -1)
+        if (src.contains(id))
         {
             const lib = new ShaderLibMods[id]();
             src = src.replace("{{" + id + "}}", lib.srcHeadFrag);
@@ -296,7 +296,7 @@ Shader.prototype.createStructUniforms = function ()
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
 
             // * check if struct is not already part of shader
-            if (this._structNames.indexOf(this._uniforms[i]._structName) === -1)
+            if (!this._structNames.includes(this._uniforms[i]._structName))
             {
                 // * create struct definition with placeholder string to inject
                 const structDefinition = "struct "
@@ -347,13 +347,13 @@ Shader.prototype.createStructUniforms = function ()
                     this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
-                if (!this._structUniformNamesIndicesFrag.contains(i)) this._structUniformNamesIndicesFrag.push(i);
-                if (!this._structUniformNamesIndicesVert.contains(i)) this._structUniformNamesIndicesVert.push(i);
+                if (!this._structUniformNamesIndicesFrag.includes(i)) this._structUniformNamesIndicesFrag.push(i);
+                if (!this._structUniformNamesIndicesVert.includes(i)) this._structUniformNamesIndicesVert.push(i);
             }
             else if (this._uniforms[i].getShaderType() === "frag")
             {
                 // * inject member before {injectionString}
-                if (!(this._injectedStringsFrag[this._uniforms[i]._structName] + "").contains(stringToInsert)) //
+                if (!this._injectedStringsFrag[this._uniforms[i]._structName].includes(stringToInsert)) //
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
 
@@ -364,12 +364,12 @@ Shader.prototype.createStructUniforms = function ()
                     this._injectedStringsFrag[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
-                if (!this._structUniformNamesIndicesFrag.contains(i)) this._structUniformNamesIndicesFrag.push(i);
+                if (!this._structUniformNamesIndicesFrag.includes(i)) this._structUniformNamesIndicesFrag.push(i);
             }
             else if (this._uniforms[i].getShaderType() === "vert")
             {
                 // * inject member before {injectionString}
-                if (!this._injectedStringsVert[this._uniforms[i]._structName].contains(stringToInsert))
+                if (!this._injectedStringsVert[this._uniforms[i]._structName].includes(stringToInsert))
                 {
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
 
@@ -380,7 +380,7 @@ Shader.prototype.createStructUniforms = function ()
                     this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
-                if (!this._structUniformNamesIndicesVert.contains(i)) this._structUniformNamesIndicesVert.push(i);
+                if (!this._structUniformNamesIndicesVert.includes(i)) this._structUniformNamesIndicesVert.push(i);
             }
         }
     }
@@ -501,7 +501,7 @@ Shader.prototype.compile = function ()
         // * also, we reset the locations of all the other valid uniforms
         for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
         {
-            if (indicesToRemove.indexOf(j) > -1) this._uniforms.splice(j, 1);
+            if (indicesToRemove.includes(j)) this._uniforms.splice(j, 1);
             else this._uniforms[j].resetLoc();
         }
     }
