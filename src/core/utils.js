@@ -373,6 +373,19 @@ String.prototype.endsWith = String.prototype.endsWith || function (suffix)
     return this.match(suffix + "$") == suffix;
 };
 
+/**
+ * return true if string contains string
+ * @function contains
+ * @memberof String
+ * @param {String} searchStr
+ * @return {Boolean}
+ */
+String.prototype.contains = String.prototype.contains || function (searchStr)
+{
+    return this.indexOf(searchStr) > -1;
+};
+
+
 // ----------------------------------------------------------------
 
 /**
@@ -476,11 +489,11 @@ export const filename = function (url)
 export const ajaxSync = function (url, cb, method, post, contenttype)
 {
     request({
-        url,
-        cb,
-        method,
+        "url": url,
+        "cb": cb,
+        "method": method,
         "data": post,
-        contenttype,
+        "contenttype": contenttype,
         "sync": true,
     });
 };

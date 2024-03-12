@@ -705,7 +705,7 @@ class Context extends CGState
 
             this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
-            if (this.canvas.id.indexOf("glGuiCanvas") == -1)
+            if (this.canvas.id.contains("glGuiCanvas"))
                 if (!this._loggedGlError)
                 {
                     this.patch.printTriggerStack();
@@ -772,7 +772,6 @@ class Context extends CGState
             }
         }.bind(this), noclearalpha);
     }
-
 
     _dispose()
     {
