@@ -111,7 +111,7 @@ op.renderVizLayer = (ctx, layer) =>
     const oldTexCubemap = cgl.getTexture(texSlotCubemap);
 
     let texType = 0;
-    if (false && portTex)
+    if (portTex)
     {
         if (portTex.cubemap) texType = 1;
         if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
@@ -215,9 +215,8 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
         ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
-        if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
+        if (cgl.canvas && cgl.canvasWidth > 0 && cgl.canvasHeight > 0 && cgl.canvas.width > 0 && cgl.canvas.height > 0)
         {
-            c;
             try
             {
                 const bigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
