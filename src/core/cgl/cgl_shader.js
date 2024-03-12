@@ -501,7 +501,7 @@ Shader.prototype.compile = function ()
         // * also, we reset the locations of all the other valid uniforms
         for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
         {
-            if (indicesToRemove.contains(j)) this._uniforms.splice(j, 1);
+            if (indicesToRemove.indexOf(j) > -1) this._uniforms.splice(j, 1);
             else this._uniforms[j].resetLoc();
         }
     }
