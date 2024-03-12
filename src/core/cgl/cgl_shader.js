@@ -395,7 +395,7 @@ Shader.prototype.createStructUniforms = function ()
         const index = this._structUniformNamesIndicesFrag[i];
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
-        if (!this._uniDeclarationsFrag.contains(uniDeclarationString))
+        if (!this._uniDeclarationsFrag.includes(uniDeclarationString))
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[index]._structName + "}}";
 
@@ -412,7 +412,7 @@ Shader.prototype.createStructUniforms = function ()
         const index = this._structUniformNamesIndicesVert[i];
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
-        if (!this._uniDeclarationsVert.contains(uniDeclarationString))
+        if (!this._uniDeclarationsVert.includes(uniDeclarationString))
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[index]._structName + "}}";
 
