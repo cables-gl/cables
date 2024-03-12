@@ -72,7 +72,7 @@ const EventTarget = function ()
                 let index = -1;
                 for (let i = 0; i < this._eventCallbacks[event.name].length; i++)
                 {
-                    if (this._eventCallbacks[event.name][i].id.indexOf(which) === 0) // this._eventCallbacks[event.name][i].id == which ||
+                    if (this._eventCallbacks[event.name][i].id.startsWith(which)) // this._eventCallbacks[event.name][i].id == which ||
                     {
                         found = true;
                         index = i;

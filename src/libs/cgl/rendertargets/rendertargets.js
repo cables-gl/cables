@@ -134,9 +134,9 @@ class RenderTargets
             hasNormalModelView = (slots[i] == "Normal * ModelView") || hasNormalModelView;
             hasPosLocal = (slots[i] == "Position Local") || hasPosLocal;
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
-            hasMaterialId = (slots[i].indexOf("Material Id") > -1) || hasMaterialId;
-            hasObjectId = (slots[i].indexOf("Object Id") > -1) || hasObjectId;
-            hasNormalWorld = (slots[i].indexOf("Normal World") > -1) || hasNormalWorld;
+            hasMaterialId = (slots[i].contains("Material Id")) || hasMaterialId;
+            hasObjectId = (slots[i].contains("Object Id")) || hasObjectId;
+            hasNormalWorld = (slots[i].contains("Normal World")) || hasNormalWorld;
 
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";

@@ -457,7 +457,7 @@ class ShaderModifier
         {
             return;
         }
-        if (name.indexOf("MOD_") == 0)
+        if (name.startsWith("MOD_"))
         {
             name = name.substr("MOD_".length);
             name = "mod" + prefix + "_" + name;
