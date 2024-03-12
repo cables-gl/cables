@@ -316,12 +316,11 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
     }
 
-    if (pixelFormatStr.indexOf("16bit"))
+    if (pixelFormatStr.indexOf("16bit") > -1)
     {
         cgl.enableExtension("EXT_color_buffer_half_float");
         cgl.enableExtension("OES_texture_float_linear");
     }
-
 
     o.numColorChannels = 1;
     if (pixelFormatStr.indexOf("R") == 0)o.numColorChannels = 1;

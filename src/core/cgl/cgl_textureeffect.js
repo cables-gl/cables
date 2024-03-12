@@ -52,10 +52,6 @@ TextureEffect.prototype.getHeight = function ()
 
 TextureEffect.prototype.setSourceTexture = function (tex)
 {
-    // if (tex.pixelFormat == Texture.PFORMATSTR_R11FG11FB10F) this._cgl.gl.getExtension("EXT_color_buffer_float");
-    // if (tex.pixelFormat == Texture.PFORMATSTR_RGBA32F) this._cgl.gl.getExtension("EXT_color_buffer_float");
-    // if (tex.pixelFormat == Texture.PFORMATSTR_RGBA16F) this._cgl.gl.getExtension("EXT_color_buffer_half_float");
-
     if (tex === null)
     {
         this._textureSource = new Texture(this._cgl);
@@ -65,7 +61,6 @@ TextureEffect.prototype.setSourceTexture = function (tex)
     {
         this._textureSource = tex;
     }
-
 
     if (!this._textureSource.compareSettings(this._textureTarget))
     {
