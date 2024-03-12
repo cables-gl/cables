@@ -353,7 +353,7 @@ Shader.prototype.createStructUniforms = function ()
             else if (this._uniforms[i].getShaderType() === "frag")
             {
                 // * inject member before {injectionString}
-                if (!(this._injectedStringsFrag[this._uniforms[i]._structName] + "").contains(stringToInsert))
+                if (!(this._injectedStringsFrag[this._uniforms[i]._structName] + "").contains(stringToInsert)) //
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
 
