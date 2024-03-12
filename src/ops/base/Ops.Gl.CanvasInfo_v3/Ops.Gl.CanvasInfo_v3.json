@@ -57,36 +57,10 @@
     },
     "changelog": [
         {
-            "message": "new output: landscape - true if canvas width > height",
+            "message": "new output: landscape - true if canvas width &gt; height",
             "author": "pandur",
-            "date": 1550644352354
-        },
-        {
-            "message": "Ops.Gl.CanvasSize renamed to Ops.Gl.CanvasInfo",
-            "author": "pandur",
-            "date": 1572939393002
-        },
-        {
-            "message": "cloned op from Ops.Gl.CanvasInfo",
-            "author": "pandur",
-            "date": 1701200513778
-        },
-        {
-            "message": "Ops.Patch.PJUYkmM.CanvasInfo2 renamed to Ops.Gl.CanvasInfo_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701200548577
-        },
-        {
-            "message": "cloned op from Ops.Gl.CanvasInfo_v2",
-            "author": "pandur",
-            "date": 1708689721771
-        },
-        {
-            "message": "Ops.Patch.PU8Sz15.CanvasInfo_v2 renamed to Ops.Gl.CanvasInfo_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708689860157
+            "date": 1550644352354,
+            "type": "feature"
         },
         {
             "message": "Fixed HDPI/Retina calculation of pixel numbers",

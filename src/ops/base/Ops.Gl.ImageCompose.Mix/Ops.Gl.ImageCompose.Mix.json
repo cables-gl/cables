@@ -32,40 +32,7 @@
     "authorName": "pandur",
     "id": "dbd68d4d-60ff-427f-8a76-c931fb8bb59b",
     "created": 1705930771662,
-    "changelog": [
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
-            "author": "pandur",
-            "date": 1620994204234
-        },
-        {
-            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
-            "author": "pandur",
-            "date": 1620998033733
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RGBMath renamed to Ops.Gl.TextureEffects.Math.RgbMath",
-            "author": "pandur",
-            "date": 1671004402345
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Math.RgbMath renamed to Ops.Gl.ImageCompose.Math.RgbMath",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701854882541
-        },
-        {
-            "message": "cloned op from Ops.Gl.ImageCompose.Math.RgbMath",
-            "author": "pandur",
-            "date": 1705930771662
-        },
-        {
-            "message": "Ops.Patch.PfalEO1.Mix renamed to Ops.Gl.ImageCompose.Mix",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705931355200
-        }
-    ],
+    "changelog": [],
     "issues": "",
     "docs": {
         "ports": []

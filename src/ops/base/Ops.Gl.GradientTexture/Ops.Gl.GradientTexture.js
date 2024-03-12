@@ -138,7 +138,6 @@ function updateGradient(keys)
     let width = Math.round(inSize.get());
     if (width < 4) width = 4;
 
-    console.log("updateGradient");
     inGrad.setUiAttribs(
         {
             "editShortcut": true,

@@ -205,12 +205,6 @@
             "date": 1709283286944
         },
         {
-            "message": "Ops.Patch.Pa03CF5.Camera_v2 renamed to Ops.Gl.Matrix.Camera_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1709283382299
-        },
-        {
             "message": "added identity toggle to reset the viewmatrix to 0,0,0 - expected coordinates are used and not influenced by default viewMatrix transform",
             "type": "bugfix",
             "author": "pandur",

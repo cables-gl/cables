@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708346079900
-        },
-        {
-            "message": "Ops.Patch.PYKxDr4.IntersectTestPoint renamed to Ops.Graphics.Intersection.IntersectTestPoint",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708356131349
         }
     ],
     "layout": {

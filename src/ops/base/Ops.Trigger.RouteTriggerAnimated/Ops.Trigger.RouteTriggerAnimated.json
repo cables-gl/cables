@@ -8,18 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708612895106
-        },
-        {
-            "message": " updated core libs: subpatchop",
-            "type": "",
-            "author": "pandur",
-            "date": 1708612895778
-        },
-        {
-            "message": "Ops.Patch.PpUtH15.SubPatch0 renamed to Ops.Trigger.RouteTriggerAnimated",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708613938110
         }
     ],
     "coreLibs": [

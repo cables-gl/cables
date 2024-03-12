@@ -2,25 +2,9 @@
     "id": "fb46afd3-c08a-487e-bd22-a0d183a4b6af",
     "changelog": [
         {
-            "message": "created op",
-            "author": "cables",
-            "date": 1563449317441
-        },
-        {
-            "message": "fix bugs with NaN values",
-            "author": "pandur",
-            "date": 1643616950027
-        },
-        {
             "message": "cloned op from Ops.Anim.Smooth",
             "author": "pandur",
             "date": 1709200845092
-        },
-        {
-            "message": "Ops.Patch.PgU52p5.ArraySmooth renamed to Ops.Anim.ArraySmooth",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1709202973380
         }
     ],
     "authorName": "pandur",
