@@ -54,14 +54,15 @@ function updateDefines()
 
 op.renderVizLayer = (ctx, layer) =>
 {
+    if (!inTex.isLinked()) return;
+    if (!layer.useGl) return;
+
     const port = inTex;
     const texSlot = 5;
     const texSlotCubemap = texSlot + 1;
 
     const perf = CABLES.UI.uiProfiler.start("previewlayer texture");
     const cgl = port.op.patch.cgl;
-
-    if (!layer.useGl) return;
 
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
     port.op.patch.cgl.profileData.profileTexPreviews++;
@@ -110,194 +111,193 @@ op.renderVizLayer = (ctx, layer) =>
     const oldTexCubemap = cgl.getTexture(texSlotCubemap);
 
     let texType = 0;
-    if (!portTex) return;
-    if (portTex.cubemap) texType = 1;
-    if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
-
-    if (texType == 0 || texType == 2)
+    if (false && portTex)
     {
-        cgl.setTexture(texSlot, portTex.tex);
-        cgl.setTexture(texSlotCubemap, this._emptyCubemap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    }
-    else if (texType == 1)
-    {
-        cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    }
+        if (portTex.cubemap) texType = 1;
+        if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
 
-    timer.update();
-    this._shaderTimeUniform.setValue(timer.get());
-
-    this._shaderTypeUniform.setValue(texType);
-    let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
-
-    cgl.gl.clearColor(0, 0, 0, 0);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-    cgl.pushModelMatrix();
-    if (small)
-    {
-        s = sizeTex;
-        mat4.translate(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
-        mat4.scale(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
-    }
-    this._mesh.render(this._shader);
-    cgl.popModelMatrix();
-
-    if (texType == 0) cgl.setTexture(texSlot, oldTex);
-    if (texType == 1) cgl.setTexture(texSlotCubemap, oldTexCubemap);
-
-    cgl.popPMatrix();
-    cgl.resetViewPort();
-
-    const sizeImg = [layer.width, layer.height];
-
-    const stretch = false;
-    if (!stretch)
-    {
-        if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
-        else
+        if (texType == 0 || texType == 2)
         {
-            sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
+            cgl.setTexture(texSlot, portTex.tex);
+            cgl.setTexture(texSlotCubemap, this._emptyCubemap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        }
+        else if (texType == 1)
+        {
+            cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        }
 
-            if (sizeImg[1] > layer.height)
+        timer.update();
+        this._shaderTimeUniform.setValue(timer.get());
+
+        this._shaderTypeUniform.setValue(texType);
+        let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
+
+        cgl.gl.clearColor(0, 0, 0, 0);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
+        cgl.pushModelMatrix();
+        if (small)
+        {
+            s = sizeTex;
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
+            mat4.scale(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
+        }
+        this._mesh.render(this._shader);
+        cgl.popModelMatrix();
+
+        if (texType == 0) cgl.setTexture(texSlot, oldTex);
+        if (texType == 1) cgl.setTexture(texSlotCubemap, oldTexCubemap);
+
+        cgl.popPMatrix();
+        cgl.resetViewPort();
+
+        const sizeImg = [layer.width, layer.height];
+
+        const stretch = false;
+        if (!stretch)
+        {
+            if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
+            else
             {
-                const r = layer.height / sizeImg[1];
-                sizeImg[0] *= r;
-                sizeImg[1] *= r;
+                sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
+
+                if (sizeImg[1] > layer.height)
+                {
+                    const r = layer.height / sizeImg[1];
+                    sizeImg[0] *= r;
+                    sizeImg[1] *= r;
+                }
             }
         }
-    }
 
-    const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
+        const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
 
-    // ctx.imageSmoothingEnabled = !small || !scaledDown;
-    ctx.imageSmoothingEnabled = true;
+        // ctx.imageSmoothingEnabled = !small || !scaledDown;
+        ctx.imageSmoothingEnabled = true;
 
-    // if (!ctx.imageSmoothingEnabled)
-    {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(layer.x, layer.y - 10, 10, 10);
         ctx.fillStyle = "#000000";
         ctx.fillRect(layer.x, layer.y - 10, 5, 5);
         ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
-    }
 
-    let layerHeight = layer.height;
+        let layerHeight = layer.height;
+        let numX = (10 * layer.width / layerHeight);
+        let stepY = (layerHeight / 10);
+        let stepX = (layer.width / numX);
+        for (let x = 0; x < numX; x++)
+            for (let y = 0; y < 10; y++)
+            {
+                if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
+                else ctx.fillStyle = "#393939";
+                ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
+            }
 
-    let numX = (10 * layer.width / layerHeight);
-    let stepY = (layerHeight / 10);
-    let stepX = (layer.width / numX);
-    for (let x = 0; x < numX; x++)
-        for (let y = 0; y < 10; y++)
+        ctx.fillStyle = "#222";
+        const borderLeft = (layer.width - sizeImg[0]) / 2;
+        const borderTop = (layerHeight - sizeImg[1]) / 2;
+
+        let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
+        let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
+        let imgSizeW = sizeImg[0];
+        let imgSizeH = sizeImg[1];
+
+        if (layerHeight - sizeImg[1] < 0)
         {
-            if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
-            else ctx.fillStyle = "#393939";
-            ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
+            imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
+            imgPosY = layer.y;
+            imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
+            imgSizeH = layerHeight;
         }
 
-    ctx.fillStyle = "#222";
-    const borderLeft = (layer.width - sizeImg[0]) / 2;
-    const borderTop = (layerHeight - sizeImg[1]) / 2;
+        ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
+        ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
+        ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
+        ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
-    let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
-    let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
-    let imgSizeW = sizeImg[0];
-    let imgSizeH = sizeImg[1];
-
-    if (layerHeight - sizeImg[1] < 0)
-    {
-        imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
-        imgPosY = layer.y;
-        imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
-        imgSizeH = layerHeight;
-    }
-
-    ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
-    ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
-    ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
-    ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
-
-    if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
-    {
-        try
+        if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
         {
-            const bigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
-
-            if (sizeTex[1] == 1)
+            c;
+            try
             {
-                ctx.imageSmoothingEnabled = false;// workaround filtering problems
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    layer.x,
-                    layer.y,
-                    layer.width,
-                    layerHeight);// workaround filtering problems
-                ctx.imageSmoothingEnabled = true;
-            }
-            else
-            if (sizeTex[0] == 1)
-            {
-                ctx.imageSmoothingEnabled = false;// workaround filtering problems
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    layer.x,
-                    layer.y,
-                    layer.width,
-                    layerHeight);
-                ctx.imageSmoothingEnabled = true;
-            }
-            else
-            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
-            {
-                ctx.imageSmoothingEnabled = !bigPixels;
+                const bigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
 
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    imgPosX,
-                    imgPosY,
-                    imgSizeW,
-                    imgSizeH);
-            }
-
-            if (bigPixels)
-            {
-                const stepx = imgSizeW / s[0];
-                const stepy = imgSizeH / s[1];
-
-                ctx.imageSmoothingEnabled = true;
-                ctx.lineWidth = 2;
-                ctx.globalAlpha = 0.1;
-                ctx.beginPath();
-
-                for (let x = 0; x <= s[0]; x++)
+                if (sizeTex[1] == 1)
                 {
-                    ctx.moveTo(imgPosX + x * stepx, imgPosY);
-                    ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                    ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        layer.x,
+                        layer.y,
+                        layer.width,
+                        layerHeight);// workaround filtering problems
+                    ctx.imageSmoothingEnabled = true;
+                }
+                else
+                if (sizeTex[0] == 1)
+                {
+                    ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        layer.x,
+                        layer.y,
+                        layer.width,
+                        layerHeight);
+                    ctx.imageSmoothingEnabled = true;
+                }
+                else
+                if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
+                {
+                    ctx.imageSmoothingEnabled = !bigPixels;
+
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        imgPosX,
+                        imgPosY,
+                        imgSizeW,
+                        imgSizeH);
                 }
 
-                for (let y = 0; y <= s[1]; y++)
+                if (bigPixels)
                 {
-                    ctx.moveTo(imgPosX, imgPosY + y * stepy);
-                    ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
-                }
+                    const stepx = imgSizeW / s[0];
+                    const stepy = imgSizeH / s[1];
 
-                ctx.strokeStyle = "black";
-                ctx.stroke();
-                ctx.globalAlpha = 1;
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.lineWidth = 2;
+                    ctx.globalAlpha = 0.1;
+                    ctx.beginPath();
+
+                    for (let x = 0; x <= s[0]; x++)
+                    {
+                        ctx.moveTo(imgPosX + x * stepx, imgPosY);
+                        ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                    }
+
+                    for (let y = 0; y <= s[1]; y++)
+                    {
+                        ctx.moveTo(imgPosX, imgPosY + y * stepy);
+                        ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                    }
+
+                    ctx.strokeStyle = "black";
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
+                }
             }
-        }
-        catch (e)
-        {
-            console.error("canvas drawimage exception...", e);
+            catch (e)
+            {
+                console.error("canvas drawimage exception...", e);
+            }
         }
     }
 
@@ -411,8 +411,8 @@ op.renderVizLayer = (ctx, layer) =>
         });
     }
 
-    cgl.gl.clearColor(0, 0, 0, 0);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    // cgl.gl.clearColor(0, 0, 0, 0);
+    // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     perf.finish();
 };
