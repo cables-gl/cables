@@ -219,7 +219,8 @@ op.renderVizLayer = (ctx, layer) =>
         {
             try
             {
-                const bigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
+                const bigPixels = imgSizeW / s[0] > 3 || imgSizeH / s[1] > 3;
+                const veryBigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
 
                 if (sizeTex[1] == 1)
                 {
@@ -266,7 +267,7 @@ op.renderVizLayer = (ctx, layer) =>
                         imgSizeH);
                 }
 
-                if (bigPixels)
+                if (veryBigPixels)
                 {
                     const stepx = imgSizeW / s[0];
                     const stepy = imgSizeH / s[1];
@@ -410,8 +411,8 @@ op.renderVizLayer = (ctx, layer) =>
         });
     }
 
-    // cgl.gl.clearColor(0, 0, 0, 0);
-    // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    cgl.gl.clearColor(0, 0, 0, 0);
+    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     perf.finish();
 };
