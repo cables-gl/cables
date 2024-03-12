@@ -154,19 +154,18 @@ op.renderVizLayer = (ctx, layer) =>
         const sizeImg = [layer.width, layer.height];
 
         const stretch = false;
-        if (!stretch)
+        // if (!stretch)
+        // {
+        if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
+        else
         {
-            if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
-            else
-            {
-                sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
+            sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
 
-                if (sizeImg[1] > layer.height)
-                {
-                    const r = layer.height / sizeImg[1];
-                    sizeImg[0] *= r;
-                    sizeImg[1] *= r;
-                }
+            if (sizeImg[1] > layer.height)
+            {
+                const r = layer.height / sizeImg[1];
+                sizeImg[0] *= r;
+                sizeImg[1] *= r;
             }
         }
 
@@ -298,14 +297,14 @@ op.renderVizLayer = (ctx, layer) =>
             {
                 console.error("canvas drawimage exception...", e);
             }
+            // }
         }
-    }
 
-    let info = "";
+        let info = "";
 
-    if (inShowInfo.get())
-    {
-        if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
+        if (inShowInfo.get())
+        {
+            if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
 
         // ctx.save();
         // ctx.scale(layer.scale, layer.scale);
@@ -315,100 +314,101 @@ op.renderVizLayer = (ctx, layer) =>
         // ctx.fillStyle = "#aaa";
         // ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
         // ctx.restore();
-    }
-
-    if (inPickColor.get())
-    {
-        info += colorString + "\n";
-
-        // ctx.save();
-        // ctx.scale(layer.scale, layer.scale);
-        // ctx.font = "normal 10px sourceCodePro";
-        // ctx.fillStyle = "#000";
-        // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
-        // ctx.fillStyle = "#aaa";
-        // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
-
-        // ctx.restore();
-
-        const x = imgPosX + imgSizeW * inX.get();
-        const y = imgPosY + imgSizeH * inY.get();
-
-        ctx.fillStyle = "#000";
-        ctx.fillRect(
-            x - 1,
-            y - 10,
-            3,
-            20);
-
-        ctx.fillRect(
-            x - 10,
-            y - 1,
-            20,
-            3);
-
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(
-            x - 1,
-            y - 10,
-            1,
-            20);
-
-        ctx.fillRect(
-            x - 10,
-            y - 1,
-            20,
-            1);
-    }
-
-    op.setUiAttrib({ "comment": info });
-    outInfo.set(info);
-
-    if (inPickColor.get())
-    {
-        const gl = cgl.gl;
-
-        const realTexture = inTex.get();
-        if (!realTexture)
-        {
-            colorString = "";
-            return;
         }
-        if (!fb) fb = gl.createFramebuffer();
-        if (!pixelReader) pixelReader = new CGL.PixelReader();
 
-        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-
-        pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
+        if (inPickColor.get())
         {
-            if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
+            info += colorString + "\n";
+
+            // ctx.save();
+            // ctx.scale(layer.scale, layer.scale);
+            // ctx.font = "normal 10px sourceCodePro";
+            // ctx.fillStyle = "#000";
+            // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
+            // ctx.fillStyle = "#aaa";
+            // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
+
+            // ctx.restore();
+
+            const x = imgPosX + imgSizeW * inX.get();
+            const y = imgPosY + imgSizeH * inY.get();
+
+            ctx.fillStyle = "#000";
+            ctx.fillRect(
+                x - 1,
+                y - 10,
+                3,
+                20);
+
+            ctx.fillRect(
+                x - 10,
+                y - 1,
+                20,
+                3);
+
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(
+                x - 1,
+                y - 10,
+                1,
+                20);
+
+            ctx.fillRect(
+                x - 10,
+                y - 1,
+                20,
+                1);
+        }
+
+        op.setUiAttrib({ "comment": info });
+        outInfo.set(info);
+
+        if (inPickColor.get())
+        {
+            const gl = cgl.gl;
+
+            const realTexture = inTex.get();
+            if (!realTexture)
             {
-                colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
-                if (!isNaN(pixel[1]))colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
-                if (!isNaN(pixel[2]))colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
-                if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
-                colorString += "\n";
+                colorString = "";
+                return;
+            }
+            if (!fb) fb = gl.createFramebuffer();
+            if (!pixelReader) pixelReader = new CGL.PixelReader();
 
-                if (
-                    realTexture.pixelFormat.indexOf("ubyte") > 0)
+            gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+            pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
+            {
+                if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
                 {
-                    colorString += "Pixel UByte: ";
-                    colorString += Math.round(pixel[0]);
-                    if (!isNaN(pixel[1]))colorString += ", " + Math.round(pixel[1]);
-                    if (!isNaN(pixel[2]))colorString += ", " + Math.round(pixel[2]);
-                    if (!isNaN(pixel[3]))colorString += ", " + Math.round(pixel[3]);
+                    colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
+                    if (!isNaN(pixel[1]))colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
+                    if (!isNaN(pixel[2]))colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
+                    if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
+                    colorString += "\n";
 
+                    if (
+                        realTexture.pixelFormat.indexOf("ubyte") > 0)
+                    {
+                        colorString += "Pixel UByte: ";
+                        colorString += Math.round(pixel[0]);
+                        if (!isNaN(pixel[1]))colorString += ", " + Math.round(pixel[1]);
+                        if (!isNaN(pixel[2]))colorString += ", " + Math.round(pixel[2]);
+                        if (!isNaN(pixel[3]))colorString += ", " + Math.round(pixel[3]);
+
+                        colorString += "\n";
+                    }
+                }
+                else
+                {
+                    colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
                     colorString += "\n";
                 }
-            }
-            else
-            {
-                colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
-                colorString += "\n";
-            }
-        });
+            });
+        }
     }
 
     cgl.gl.clearColor(0, 0, 0, 0);
