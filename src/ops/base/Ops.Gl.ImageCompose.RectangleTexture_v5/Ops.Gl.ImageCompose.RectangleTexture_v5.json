@@ -125,57 +125,6 @@
     "created": 1709909144595,
     "changelog": [
         {
-            "message": "Ops.User.pandur.Rectangle2d2 renamed to Ops.Gl.TextureEffects.Rectangle_v3",
-            "author": "pandur",
-            "date": 1575469559697
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Rectangle_v3 renamed to Ops.Gl.TextureEffects.RectangleTexture_v3",
-            "author": "pandur",
-            "date": 1587376324199
-        },
-        {
-            "message": "fix bug with alpha rendering",
-            "author": "pandur",
-            "date": 1644326911147
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.RectangleTexture_v3",
-            "author": "pandur",
-            "date": 1646846969299
-        },
-        {
-            "message": "Ops.User.pandur.RectangleTextureV4 renamed to Ops.Dev.RectangleTextureV4",
-            "author": "pandur",
-            "date": 1646847661838
-        },
-        {
-            "message": "Ops.Dev.RectangleTextureV4 renamed to Ops.Gl.TextureEffects.RectangleTextureV4",
-            "author": "pandur",
-            "date": 1652093088755
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RectangleTextureV4 renamed to Ops.Dev.RectangleTexture_v4",
-            "author": "pandur",
-            "date": 1652093107926
-        },
-        {
-            "message": "Ops.Dev.RectangleTexture_v4 renamed to Ops.Gl.TextureEffects.RectangleTexture_v4",
-            "author": "pandur",
-            "date": 1652093137359
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RectangleTexture_v4 renamed to Ops.Gl.ImageCompose.RectangleTexture_v4",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856399461
-        },
-        {
-            "message": "cloned op from Ops.Gl.ImageCompose.RectangleTexture_v4",
-            "author": "pandur",
-            "date": 1709909144595
-        },
-        {
             "message": "Added switch to change coordinates system, e.g. pixel based",
             "type": "feature",
             "author": "pandur",
