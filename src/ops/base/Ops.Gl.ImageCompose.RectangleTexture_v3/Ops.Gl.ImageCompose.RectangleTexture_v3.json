@@ -99,30 +99,14 @@
     "created": 1575468429195,
     "changelog": [
         {
-            "message": "Ops.User.pandur.Rectangle2d2 renamed to Ops.Gl.TextureEffects.Rectangle_v3",
-            "author": "pandur",
-            "date": 1575469559697
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Rectangle_v3 renamed to Ops.Gl.TextureEffects.RectangleTexture_v3",
-            "author": "pandur",
-            "date": 1587376324199
-        },
-        {
             "message": "fix bug with alpha rendering",
             "author": "pandur",
-            "date": 1644326911147
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RectangleTexture_v3 renamed to Ops.Gl.ImageCompose.RectangleTexture_v3",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856417109
+            "date": 1644326911147,
+            "type": "bugfix"
         }
     ],
     "summary": "Draw a 2D rectangle with controllable parameters",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

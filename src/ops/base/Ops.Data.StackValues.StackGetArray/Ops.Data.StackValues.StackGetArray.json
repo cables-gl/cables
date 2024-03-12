@@ -2,30 +2,9 @@
     "id": "e021e748-705a-49ab-9c9d-bb66eebca04b",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1704363880148
-        },
-        {
-            "message": "cloned op from Ops.Team.Dev.StackValueSetNumber",
-            "author": "pandur",
-            "date": 1704364444906
-        },
-        {
-            "message": "cloned op from Ops.Team.Dev.StackValueGetNumber",
-            "author": "pandur",
-            "date": 1704385300737
-        },
-        {
             "message": "cloned op from Ops.Team.Dev.StackValueGetTexture",
             "author": "pandur",
             "date": 1704960953811
-        },
-        {
-            "message": "Ops.Dev.StackValues.StackGetArray renamed to Ops.Data.StackValues.StackGetArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706629206101
         }
     ],
     "layout": {
