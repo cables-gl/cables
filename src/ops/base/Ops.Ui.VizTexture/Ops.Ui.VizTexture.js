@@ -272,8 +272,8 @@ op.renderVizLayer = (ctx, layer) =>
                     const stepy = imgSizeH / s[1];
 
                     ctx.imageSmoothingEnabled = true;
-                    ctx.lineWidth = 2;
-                    ctx.globalAlpha = 0.1;
+                    ctx.lineWidth = 1;
+                    // ctx.globalAlpha = 0.1;
                     ctx.beginPath();
 
                     for (let x = 0; x <= s[0]; x++)
@@ -288,9 +288,9 @@ op.renderVizLayer = (ctx, layer) =>
                         ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
                     }
 
-                    ctx.strokeStyle = "black";
+                    ctx.strokeStyle = "#555";
                     ctx.stroke();
-                    ctx.globalAlpha = 1;
+                    // ctx.globalAlpha = 1;
                 }
             }
             catch (e)
