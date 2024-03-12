@@ -128,6 +128,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1709212147269
+        },
+        {
+            "message": "Radial mode is more compatible/same colors like the simple gradient",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1710259310909
+        },
+        {
+            "message": "Added XY and YX mode to generate diagonal color gradients",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1710259917788
         }
     ]
 }

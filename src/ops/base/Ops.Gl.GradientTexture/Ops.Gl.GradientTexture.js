@@ -1,5 +1,5 @@
 const inGrad = op.inGradient("Gradient"),
-    inDir = op.inValueSelect("Direction", ["X", "Y", "Radial"], "X"),
+    inDir = op.inValueSelect("Direction", ["X", "Y", "XY", "YX", "Radial"], "X"),
     inSmoothstep = op.inValueBool("Smoothstep", false),
     inStep = op.inBool("Step", false),
     inFlip = op.inBool("Flip", false),
@@ -159,62 +159,59 @@ function updateGradient(keys)
 
     const tex = new CGL.Texture(cgl);
 
-    if (inDir.get() == "X" || inDir.get() == "Y")
+    let pixels = new Uint8Array(width * 4);
+
+    for (let i = 0; i < keys.length - 1; i++)
     {
-        const pixels = new Uint8Array(width * 4);
+        const keyA = keys[i];
+        const keyB = keys[i + 1];
 
-        for (let i = 0; i < keys.length - 1; i++)
+        for (let x = keyA.pos * width; x < keyB.pos * width; x++)
         {
-            const keyA = keys[i];
-            const keyB = keys[i + 1];
+            let p = CABLES.map(x, keyA.pos * width, keyB.pos * width, 0, 1);
+            if (inStep.get())p = Math.round(p);
+            if (inSmoothstep.get()) p = CABLES.smoothStep(p);
+            x = Math.round(x);
 
-            for (let x = keyA.pos * width; x < keyB.pos * width; x++)
+            let xx = x;
+            if (inFlip.get())xx = width - x - 1;
+
+            if (inOklab.get())
             {
-                let p = CABLES.map(x, keyA.pos * width, keyB.pos * width, 0, 1);
-                if (inStep.get())p = Math.round(p);
-                if (inSmoothstep.get()) p = CABLES.smoothStep(p);
-                x = Math.round(x);
+                const klabA = rgbToOklab(keyA.r, keyA.g, keyA.b);
+                const labA_r = klabA[0];
+                const labA_g = klabA[1];
+                const labA_b = klabA[2];
 
-                let xx = x;
-                if (inFlip.get())xx = width - x - 1;
+                const klabB = rgbToOklab(keyB.r, keyB.g, keyB.b);
+                const labB_r = klabB[0];
+                const labB_g = klabB[1];
+                const labB_b = klabB[2];
 
-                if (inOklab.get())
-                {
-                    const klabA = rgbToOklab(keyA.r, keyA.g, keyA.b);
-                    const labA_r = klabA[0];
-                    const labA_g = klabA[1];
-                    const labA_b = klabA[2];
+                const l = ((p * labB_r + (1.0 - p) * labA_r));
+                const a = ((p * labB_g + (1.0 - p) * labA_g));
+                const b = ((p * labB_b + (1.0 - p) * labA_b));
 
-                    const klabB = rgbToOklab(keyB.r, keyB.g, keyB.b);
-                    const labB_r = klabB[0];
-                    const labB_g = klabB[1];
-                    const labB_b = klabB[2];
+                const pixCol = oklabToRGB(l, a, b);
+                pixels[xx * 4 + 0] = Math.round(pixCol[0] * 255);
+                pixels[xx * 4 + 1] = Math.round(pixCol[1] * 255);
+                pixels[xx * 4 + 2] = Math.round(pixCol[2] * 255);
+            }
+            else
+            {
+                pixels[xx * 4 + 0] = Math.round((p * keyB.r + (1.0 - p) * keyA.r) * 255);
+                pixels[xx * 4 + 1] = Math.round((p * keyB.g + (1.0 - p) * keyA.g) * 255);
+                pixels[xx * 4 + 2] = Math.round((p * keyB.b + (1.0 - p) * keyA.b) * 255);
+            }
 
-                    const l = ((p * labB_r + (1.0 - p) * labA_r));
-                    const a = ((p * labB_g + (1.0 - p) * labA_g));
-                    const b = ((p * labB_b + (1.0 - p) * labA_b));
-
-                    const pixCol = oklabToRGB(l, a, b);
-                    pixels[xx * 4 + 0] = Math.round(pixCol[0] * 255);
-                    pixels[xx * 4 + 1] = Math.round(pixCol[1] * 255);
-                    pixels[xx * 4 + 2] = Math.round(pixCol[2] * 255);
-                }
-                else
-                {
-                    pixels[xx * 4 + 0] = Math.round((p * keyB.r + (1.0 - p) * keyA.r) * 255);
-                    pixels[xx * 4 + 1] = Math.round((p * keyB.g + (1.0 - p) * keyA.g) * 255);
-                    pixels[xx * 4 + 2] = Math.round((p * keyB.b + (1.0 - p) * keyA.b) * 255);
-                }
-
-                if (typeof keyA.a !== "undefined" && typeof keyB.a !== "undefined")
-                {
-                    const alpha = Math.round((p * keyB.a + (1.0 - p) * keyA.a) * 255);
-                    pixels[xx * 4 + 3] = alpha;
-                }
-                else
-                {
-                    pixels[xx * 4 + 3] = Math.round(255);
-                }
+            if (typeof keyA.a !== "undefined" && typeof keyB.a !== "undefined")
+            {
+                const alpha = Math.round((p * keyB.a + (1.0 - p) * keyA.a) * 255);
+                pixels[xx * 4 + 3] = alpha;
+            }
+            else
+            {
+                pixels[xx * 4 + 3] = Math.round(255);
             }
         }
 
@@ -232,21 +229,7 @@ function updateGradient(keys)
 
     if (inDir.get() == "Radial")
     {
-        const pixels = new Uint8Array(width * width * 4);
-
-        const animR = new CABLES.Anim();
-        const animG = new CABLES.Anim();
-        const animB = new CABLES.Anim();
-
-        for (let i = 0; i < keys.length; i++)
-        {
-            let p = keys[i].pos;
-            if (inFlip.get())p = 1 - p;
-
-            animR.setValue(p, keys[i].r);
-            animG.setValue(p, keys[i].g);
-            animB.setValue(p, keys[i].b);
-        }
+        const rpixels = new Uint8Array(width * width * 4);
 
         for (let x = 0; x < width; x++)
         {
@@ -258,20 +241,42 @@ function updateGradient(keys)
 
                 if (inSmoothstep.get()) pos = CABLES.smoothStep(pos);
 
-                pixels[(x * 4) + (y * 4 * width) + 0] = animR.getValue(pos) * 255;
-                pixels[(x * 4) + (y * 4 * width) + 1] = animG.getValue(pos) * 255;
-                pixels[(x * 4) + (y * 4 * width) + 2] = animB.getValue(pos) * 255;
-                pixels[(x * 4) + (y * 4 * width) + 3] = Math.round(255);
+                let aa = Math.round(pos * width) * 4;
+                if (aa >= width * 4)aa = width * 4 - 4;
+
+                rpixels[(x * 4) + (y * 4 * width) + 0] = pixels[aa + 0];
+                rpixels[(x * 4) + (y * 4 * width) + 1] = pixels[aa + 1];
+                rpixels[(x * 4) + (y * 4 * width) + 2] = pixels[aa + 2];
+                rpixels[(x * 4) + (y * 4 * width) + 3] = Math.round(255);
             }
         }
 
-        if (inSRGB.get())
-            for (let i = 0; i < pixels.length; i += 4)
+        pixels = rpixels;
+
+        tex.initFromData(pixels, width, width, selectedFilter, selectedWrap);
+    }
+
+    if (inDir.get() == "XY" || inDir.get() == "YX")
+    {
+        const rpixels = new Uint8Array(width * width * 4);
+
+        for (let x = 0; x < width; x++)
+        {
+            let xx = x;
+            if (inDir.get() == "YX")xx = width - x - 1;
+
+            for (let y = 0; y < width; y++)
             {
-                pixels[i + 0] = lin2srgb(pixels[i + 0]);
-                pixels[i + 1] = lin2srgb(pixels[i + 1]);
-                pixels[i + 2] = lin2srgb(pixels[i + 2]);
+                let aa = Math.round(((xx) + y) / 2) * 4;
+
+                rpixels[(x * 4) + (y * 4 * width) + 0] = pixels[aa + 0];
+                rpixels[(x * 4) + (y * 4 * width) + 1] = pixels[aa + 1];
+                rpixels[(x * 4) + (y * 4 * width) + 2] = pixels[aa + 2];
+                rpixels[(x * 4) + (y * 4 * width) + 3] = Math.round(255);
             }
+        }
+
+        pixels = rpixels;
 
         tex.initFromData(pixels, width, width, selectedFilter, selectedWrap);
     }

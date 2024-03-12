@@ -273,7 +273,7 @@ op.renderVizLayer = (ctx, layer) =>
 
                     ctx.imageSmoothingEnabled = true;
                     ctx.lineWidth = 1;
-                    // ctx.globalAlpha = 0.1;
+                    ctx.globalAlpha = 0.5;
                     ctx.beginPath();
 
                     for (let x = 0; x <= s[0]; x++)
@@ -290,7 +290,7 @@ op.renderVizLayer = (ctx, layer) =>
 
                     ctx.strokeStyle = "#555";
                     ctx.stroke();
-                    // ctx.globalAlpha = 1;
+                    ctx.globalAlpha = 1;
                 }
             }
             catch (e)
