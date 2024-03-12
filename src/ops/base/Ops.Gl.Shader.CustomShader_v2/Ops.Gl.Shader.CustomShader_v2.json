@@ -5,21 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1557747298207
-        },
-        {
-            "message": "Ops.Exp.Gl.Shader.CustomShader2 renamed to Ops.Gl.Shader.CustomShader_v2",
-            "author": "pandur",
-            "date": 1587375684964
-        },
-        {
-            "message": " added core lib: cgl_shadergraph",
-            "author": "pandur",
-            "date": 1663603500747
-        },
-        {
-            "message": " removed core lib: cgl_shadergraph",
-            "author": "pandur",
-            "date": 1663679379062
         }
     ],
     "authorName": "pandur",
