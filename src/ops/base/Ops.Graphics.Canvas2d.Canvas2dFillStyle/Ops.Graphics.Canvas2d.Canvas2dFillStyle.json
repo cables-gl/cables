@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708358266766
-        },
-        {
-            "message": "Ops.Patch.P2y8nK4.Canvas2dFillStyle renamed to Ops.Graphics.Canvas2d.Canvas2dFillStyle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708595513332
         }
     ],
     "layout": {

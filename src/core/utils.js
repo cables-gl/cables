@@ -40,7 +40,7 @@ export const getShortOpName = function (fullname)
 {
     let name = fullname.split(".")[fullname.split(".").length - 1];
 
-    if (name.indexOf(CONSTANTS.OP.OP_VERSION_PREFIX) > 0)
+    if (name.contains(CONSTANTS.OP.OP_VERSION_PREFIX))
     {
         const n = name.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
         name = name.substring(0, name.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);
@@ -373,6 +373,20 @@ String.prototype.endsWith = String.prototype.endsWith || function (suffix)
     return this.match(suffix + "$") == suffix;
 };
 
+/**
+ * return true if string contains string
+ * @function contains
+ * @memberof String
+ * @param {String} searchStr
+ * @return {Boolean}
+ */
+String.prototype.contains = String.prototype.contains || function (searchStr)
+{
+    return this.indexOf(searchStr) > -1;
+};
+
+
+
 // ----------------------------------------------------------------
 
 /**
@@ -385,7 +399,7 @@ String.prototype.endsWith = String.prototype.endsWith || function (suffix)
  */
 export const cacheBust = function (url)
 {
-    if (url.indexOf("?") > -1) url += "&";
+    if (url.contains("?")) url += "&";
     else url += "?";
     return url + "cache=" + CABLES.uuid();
 };
@@ -455,7 +469,7 @@ export const filename = function (url)
     let name = "";
     if (!url) return "";
 
-    if (url.indexOf("data:") == 0 && url.indexOf(":") > -1)
+    if (url.startsWith("data:") && url.contains(":"))
     {
         const parts = url.split(",");
         return parts[0];
@@ -476,11 +490,11 @@ export const filename = function (url)
 export const ajaxSync = function (url, cb, method, post, contenttype)
 {
     request({
-        url,
-        cb,
-        method,
+        "url": url,
+        "cb": cb,
+        "method": method,
         "data": post,
-        contenttype,
+        "contenttype": contenttype,
         "sync": true,
     });
 };

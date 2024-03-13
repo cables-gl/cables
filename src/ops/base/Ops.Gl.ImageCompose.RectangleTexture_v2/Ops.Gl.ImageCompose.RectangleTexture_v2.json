@@ -79,8 +79,6 @@
         ]
     },
     "summary": "Draw a 2D rectangle with controllable parameters",
-
-
     "docs": {
         "ports": [
             {
@@ -137,7 +135,8 @@
         {
             "message": "added : Blend modes",
             "author": "andro",
-            "date": 1548344369982
+            "date": 1548344369982,
+            "type": "feature"
         },
         {
             "message": "Ops.Gl.TextureEffects.Rectangle_v2 renamed to Ops.Gl.TextureEffects.RectangleTexture_v2",

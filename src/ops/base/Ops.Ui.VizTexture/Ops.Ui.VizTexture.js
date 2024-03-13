@@ -54,14 +54,15 @@ function updateDefines()
 
 op.renderVizLayer = (ctx, layer) =>
 {
+    if (!inTex.isLinked()) return;
+    if (!layer.useGl) return;
+
     const port = inTex;
     const texSlot = 5;
     const texSlotCubemap = texSlot + 1;
 
     const perf = CABLES.UI.uiProfiler.start("previewlayer texture");
     const cgl = port.op.patch.cgl;
-
-    if (!layer.useGl) return;
 
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
     port.op.patch.cgl.profileData.profileTexPreviews++;
@@ -110,50 +111,51 @@ op.renderVizLayer = (ctx, layer) =>
     const oldTexCubemap = cgl.getTexture(texSlotCubemap);
 
     let texType = 0;
-    if (!portTex) return;
-    if (portTex.cubemap) texType = 1;
-    if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
-
-    if (texType == 0 || texType == 2)
+    if (portTex)
     {
-        cgl.setTexture(texSlot, portTex.tex);
-        cgl.setTexture(texSlotCubemap, this._emptyCubemap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    }
-    else if (texType == 1)
-    {
-        cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    }
+        if (portTex.cubemap) texType = 1;
+        if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
 
-    timer.update();
-    this._shaderTimeUniform.setValue(timer.get());
+        if (texType == 0 || texType == 2)
+        {
+            cgl.setTexture(texSlot, portTex.tex);
+            cgl.setTexture(texSlotCubemap, this._emptyCubemap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        }
+        else if (texType == 1)
+        {
+            cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        }
 
-    this._shaderTypeUniform.setValue(texType);
-    let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
+        timer.update();
+        this._shaderTimeUniform.setValue(timer.get());
 
-    cgl.gl.clearColor(0, 0, 0, 0);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        this._shaderTypeUniform.setValue(texType);
+        let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
 
-    cgl.pushModelMatrix();
-    if (small)
-    {
-        s = sizeTex;
-        mat4.translate(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
-        mat4.scale(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
-    }
-    this._mesh.render(this._shader);
-    cgl.popModelMatrix();
+        cgl.gl.clearColor(0, 0, 0, 0);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-    if (texType == 0) cgl.setTexture(texSlot, oldTex);
-    if (texType == 1) cgl.setTexture(texSlotCubemap, oldTexCubemap);
+        cgl.pushModelMatrix();
+        if (small)
+        {
+            s = sizeTex;
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
+            mat4.scale(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
+        }
+        this._mesh.render(this._shader);
+        cgl.popModelMatrix();
 
-    cgl.popPMatrix();
-    cgl.resetViewPort();
+        if (texType == 0) cgl.setTexture(texSlot, oldTex);
+        if (texType == 1) cgl.setTexture(texSlotCubemap, oldTexCubemap);
 
-    const sizeImg = [layer.width, layer.height];
+        cgl.popPMatrix();
+        cgl.resetViewPort();
 
-    const stretch = false;
-    if (!stretch)
-    {
+        const sizeImg = [layer.width, layer.height];
+
+        const stretch = false;
+        // if (!stretch)
+        // {
         if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
         else
         {
@@ -166,146 +168,143 @@ op.renderVizLayer = (ctx, layer) =>
                 sizeImg[1] *= r;
             }
         }
-    }
 
-    const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
+        const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
 
-    // ctx.imageSmoothingEnabled = !small || !scaledDown;
-    ctx.imageSmoothingEnabled = true;
+        // ctx.imageSmoothingEnabled = !small || !scaledDown;
+        ctx.imageSmoothingEnabled = true;
 
-    // if (!ctx.imageSmoothingEnabled)
-    {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(layer.x, layer.y - 10, 10, 10);
         ctx.fillStyle = "#000000";
         ctx.fillRect(layer.x, layer.y - 10, 5, 5);
         ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
-    }
 
-    let layerHeight = layer.height;
+        let layerHeight = layer.height;
+        let numX = (10 * layer.width / layerHeight);
+        let stepY = (layerHeight / 10);
+        let stepX = (layer.width / numX);
+        for (let x = 0; x < numX; x++)
+            for (let y = 0; y < 10; y++)
+            {
+                if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
+                else ctx.fillStyle = "#393939";
+                ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
+            }
 
-    let numX = (10 * layer.width / layerHeight);
-    let stepY = (layerHeight / 10);
-    let stepX = (layer.width / numX);
-    for (let x = 0; x < numX; x++)
-        for (let y = 0; y < 10; y++)
+        ctx.fillStyle = "#222";
+        const borderLeft = (layer.width - sizeImg[0]) / 2;
+        const borderTop = (layerHeight - sizeImg[1]) / 2;
+
+        let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
+        let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
+        let imgSizeW = sizeImg[0];
+        let imgSizeH = sizeImg[1];
+
+        if (layerHeight - sizeImg[1] < 0)
         {
-            if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
-            else ctx.fillStyle = "#393939";
-            ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
+            imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
+            imgPosY = layer.y;
+            imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
+            imgSizeH = layerHeight;
         }
 
-    ctx.fillStyle = "#222";
-    const borderLeft = (layer.width - sizeImg[0]) / 2;
-    const borderTop = (layerHeight - sizeImg[1]) / 2;
+        ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
+        ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
+        ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
+        ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
-    let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
-    let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
-    let imgSizeW = sizeImg[0];
-    let imgSizeH = sizeImg[1];
-
-    if (layerHeight - sizeImg[1] < 0)
-    {
-        imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
-        imgPosY = layer.y;
-        imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
-        imgSizeH = layerHeight;
-    }
-
-    ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
-    ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
-    ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
-    ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
-
-    if (cgl.canvasWidth > 0 && cgl.canvasHeight > 0)
-    {
-        try
+        if (cgl.canvas && cgl.canvasWidth > 0 && cgl.canvasHeight > 0 && cgl.canvas.width > 0 && cgl.canvas.height > 0)
         {
-            const bigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
-
-            if (sizeTex[1] == 1)
+            try
             {
-                ctx.imageSmoothingEnabled = false;// workaround filtering problems
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    layer.x,
-                    layer.y,
-                    layer.width,
-                    layerHeight);// workaround filtering problems
-                ctx.imageSmoothingEnabled = true;
-            }
-            else
-            if (sizeTex[0] == 1)
-            {
-                ctx.imageSmoothingEnabled = false;// workaround filtering problems
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    layer.x,
-                    layer.y,
-                    layer.width,
-                    layerHeight);
-                ctx.imageSmoothingEnabled = true;
-            }
-            else
-            if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
-            {
-                ctx.imageSmoothingEnabled = !bigPixels;
+                const bigPixels = imgSizeW / s[0] > 3 || imgSizeH / s[1] > 3;
+                const veryBigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
 
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    imgPosX,
-                    imgPosY,
-                    imgSizeW,
-                    imgSizeH);
-            }
-
-            if (bigPixels)
-            {
-                const stepx = imgSizeW / s[0];
-                const stepy = imgSizeH / s[1];
-
-                ctx.imageSmoothingEnabled = true;
-                ctx.lineWidth = 2;
-                ctx.globalAlpha = 0.1;
-                ctx.beginPath();
-
-                for (let x = 0; x <= s[0]; x++)
+                if (sizeTex[1] == 1)
                 {
-                    ctx.moveTo(imgPosX + x * stepx, imgPosY);
-                    ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                    ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        layer.x,
+                        layer.y,
+                        layer.width,
+                        layerHeight);// workaround filtering problems
+                    ctx.imageSmoothingEnabled = true;
+                }
+                else
+                if (sizeTex[0] == 1)
+                {
+                    ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        layer.x,
+                        layer.y,
+                        layer.width,
+                        layerHeight);
+                    ctx.imageSmoothingEnabled = true;
+                }
+                else
+                if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
+                {
+                    ctx.imageSmoothingEnabled = !bigPixels;
+
+                    ctx.drawImage(cgl.canvas,
+                        0,
+                        0,
+                        s[0],
+                        s[1],
+                        imgPosX,
+                        imgPosY,
+                        imgSizeW,
+                        imgSizeH);
                 }
 
-                for (let y = 0; y <= s[1]; y++)
+                if (veryBigPixels)
                 {
-                    ctx.moveTo(imgPosX, imgPosY + y * stepy);
-                    ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                    const stepx = imgSizeW / s[0];
+                    const stepy = imgSizeH / s[1];
+
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 0.5;
+                    ctx.beginPath();
+
+                    for (let x = 0; x <= s[0]; x++)
+                    {
+                        ctx.moveTo(imgPosX + x * stepx, imgPosY);
+                        ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                    }
+
+                    for (let y = 0; y <= s[1]; y++)
+                    {
+                        ctx.moveTo(imgPosX, imgPosY + y * stepy);
+                        ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                    }
+
+                    ctx.strokeStyle = "#555";
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
                 }
-
-                ctx.strokeStyle = "black";
-                ctx.stroke();
-                ctx.globalAlpha = 1;
             }
+            catch (e)
+            {
+                console.error("canvas drawimage exception...", e);
+            }
+            // }
         }
-        catch (e)
+
+        let info = "";
+
+        if (inShowInfo.get())
         {
-            console.error("canvas drawimage exception...", e);
-        }
-    }
-
-    let info = "";
-
-    if (inShowInfo.get())
-    {
-        if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
+            if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
 
         // ctx.save();
         // ctx.scale(layer.scale, layer.scale);
@@ -315,100 +314,101 @@ op.renderVizLayer = (ctx, layer) =>
         // ctx.fillStyle = "#aaa";
         // ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
         // ctx.restore();
-    }
-
-    if (inPickColor.get())
-    {
-        info += colorString + "\n";
-
-        // ctx.save();
-        // ctx.scale(layer.scale, layer.scale);
-        // ctx.font = "normal 10px sourceCodePro";
-        // ctx.fillStyle = "#000";
-        // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
-        // ctx.fillStyle = "#aaa";
-        // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
-
-        // ctx.restore();
-
-        const x = imgPosX + imgSizeW * inX.get();
-        const y = imgPosY + imgSizeH * inY.get();
-
-        ctx.fillStyle = "#000";
-        ctx.fillRect(
-            x - 1,
-            y - 10,
-            3,
-            20);
-
-        ctx.fillRect(
-            x - 10,
-            y - 1,
-            20,
-            3);
-
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(
-            x - 1,
-            y - 10,
-            1,
-            20);
-
-        ctx.fillRect(
-            x - 10,
-            y - 1,
-            20,
-            1);
-    }
-
-    op.setUiAttrib({ "comment": info });
-    outInfo.set(info);
-
-    if (inPickColor.get())
-    {
-        const gl = cgl.gl;
-
-        const realTexture = inTex.get();
-        if (!realTexture)
-        {
-            colorString = "";
-            return;
         }
-        if (!fb) fb = gl.createFramebuffer();
-        if (!pixelReader) pixelReader = new CGL.PixelReader();
 
-        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-
-        pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
+        if (inPickColor.get())
         {
-            if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
+            info += colorString + "\n";
+
+            // ctx.save();
+            // ctx.scale(layer.scale, layer.scale);
+            // ctx.font = "normal 10px sourceCodePro";
+            // ctx.fillStyle = "#000";
+            // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
+            // ctx.fillStyle = "#aaa";
+            // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
+
+            // ctx.restore();
+
+            const x = imgPosX + imgSizeW * inX.get();
+            const y = imgPosY + imgSizeH * inY.get();
+
+            ctx.fillStyle = "#000";
+            ctx.fillRect(
+                x - 1,
+                y - 10,
+                3,
+                20);
+
+            ctx.fillRect(
+                x - 10,
+                y - 1,
+                20,
+                3);
+
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(
+                x - 1,
+                y - 10,
+                1,
+                20);
+
+            ctx.fillRect(
+                x - 10,
+                y - 1,
+                20,
+                1);
+        }
+
+        op.setUiAttrib({ "comment": info });
+        outInfo.set(info);
+
+        if (inPickColor.get())
+        {
+            const gl = cgl.gl;
+
+            const realTexture = inTex.get();
+            if (!realTexture)
             {
-                colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
-                if (!isNaN(pixel[1]))colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
-                if (!isNaN(pixel[2]))colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
-                if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
-                colorString += "\n";
+                colorString = "";
+                return;
+            }
+            if (!fb) fb = gl.createFramebuffer();
+            if (!pixelReader) pixelReader = new CGL.PixelReader();
 
-                if (
-                    realTexture.pixelFormat.indexOf("ubyte") > 0)
+            gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+            pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
+            {
+                if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
                 {
-                    colorString += "Pixel UByte: ";
-                    colorString += Math.round(pixel[0]);
-                    if (!isNaN(pixel[1]))colorString += ", " + Math.round(pixel[1]);
-                    if (!isNaN(pixel[2]))colorString += ", " + Math.round(pixel[2]);
-                    if (!isNaN(pixel[3]))colorString += ", " + Math.round(pixel[3]);
+                    colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
+                    if (!isNaN(pixel[1]))colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
+                    if (!isNaN(pixel[2]))colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
+                    if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
+                    colorString += "\n";
 
+                    if (
+                        realTexture.pixelFormat.indexOf("ubyte") > 0)
+                    {
+                        colorString += "Pixel UByte: ";
+                        colorString += Math.round(pixel[0]);
+                        if (!isNaN(pixel[1]))colorString += ", " + Math.round(pixel[1]);
+                        if (!isNaN(pixel[2]))colorString += ", " + Math.round(pixel[2]);
+                        if (!isNaN(pixel[3]))colorString += ", " + Math.round(pixel[3]);
+
+                        colorString += "\n";
+                    }
+                }
+                else
+                {
+                    colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
                     colorString += "\n";
                 }
-            }
-            else
-            {
-                colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
-                colorString += "\n";
-            }
-        });
+            });
+        }
     }
 
     cgl.gl.clearColor(0, 0, 0, 0);

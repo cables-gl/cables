@@ -178,24 +178,15 @@
     },
     "changelog": [
         {
-            "message": "Ops.User.pandur.PointtMat3 renamed to Ops.Gl.Shader.PointMaterial_v3",
-            "author": "pandur",
-            "date": 1595338286301
-        },
-        {
             "message": "cloned op from Ops.Gl.Shader.PointMaterial_v3",
             "author": "pandur",
             "date": 1616178535005
         },
         {
-            "message": "Ops.User.pandur.PointMaterial_v4 renamed to Ops.Gl.Shader.PointMaterial_v4",
-            "author": "pandur",
-            "date": 1616178603397
-        },
-        {
             "message": "added alpha",
             "author": "pandur",
-            "date": 1616178893665
+            "date": 1616178893665,
+            "type": "feature"
         },
         {
             "message": "cloned op from Ops.Gl.Shader.PointMaterial_v4",
@@ -207,12 +198,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1705590040022
-        },
-        {
-            "message": "Ops.Patch.PHICOr1.PointMaterial5 renamed to Ops.Gl.Shader.PointMaterial_v5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705590320602
         }
     ],
     "summary": "Draw all vertices as points / circles",

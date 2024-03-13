@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1709305327727
-        },
-        {
-            "message": "Ops.Patch.PMYM2M5.JsValue renamed to Ops.Devices.Browser.JsExpression",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1709306391089
         }
     ],
     "layout": {

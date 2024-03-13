@@ -56,28 +56,5 @@
     "docs": {
         "ports": []
     },
-    "changelog": [
-        {
-            "message": "Ops.Gl.TextureEffects.Scroll renamed to Ops.Gl.TextureEffects.ScrollTexture",
-            "author": "pandur",
-            "date": 1572941492771
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ScrollTexture renamed to Ops.Gl.ImageCompose.ScrollTexture",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856130318
-        },
-        {
-            "message": "cloned op from Ops.Gl.ImageCompose.ScrollTexture",
-            "author": "pandur",
-            "date": 1704730340553
-        },
-        {
-            "message": "Ops.Patch.Ph6IQFP.SortPixels renamed to Ops.Dev.Gl.ImageCompose.SortPixels",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708532993813
-        }
-    ]
+    "changelog": []
 }

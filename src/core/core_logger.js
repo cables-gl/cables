@@ -45,6 +45,7 @@ export default class Logger
     warn(args)
     {
         console.warn("[" + this.initiator + "]", ...arguments);
+        // console.log((new Error()).stack);
         if (window.gui) window.gui.emitEvent("coreLogEvent", this.initiator, "warn", arguments);
     }
 

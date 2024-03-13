@@ -13,8 +13,6 @@ let
     texChanged = false;
 tex.onChange = function () { needsUpdate = true; texChanged = true; };
 
-op.toWorkPortsNeedToBeLinked(tex, outColors);
-
 let isFloatingPoint = false;
 let channelType = op.patch.cgl.gl.UNSIGNED_BYTE;
 
@@ -44,6 +42,11 @@ inFormat.onChange = () =>
     needsUpdate = true;
 };
 
+pUpdate.onLinkChanged = () =>
+{
+    op.setUiError("texeffect", null);
+};
+
 pUpdate.onTriggered = function ()
 {
     if (needsUpdate) updateArray();
@@ -53,6 +56,8 @@ pUpdate.onTriggered = function ()
 function updateArray()
 {
     const realTexture = tex.get(), gl = cgl.gl;
+
+    if (op.patch.cgl.currentTextureEffect) op.setUiError("texeffect", "texcture2colorArray should not be in an imagecompose", 1);
 
     if (!realTexture) return;
     if (!fb) fb = gl.createFramebuffer();

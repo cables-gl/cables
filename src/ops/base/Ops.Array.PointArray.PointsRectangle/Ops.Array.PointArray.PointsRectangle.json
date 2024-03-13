@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1709117722561
-        },
-        {
-            "message": "Ops.Patch.PgU52p5.PointsRectangle renamed to Ops.Array.PointArray.PointsRectangle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1709118818982
         }
     ],
     "layout": {

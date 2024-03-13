@@ -5,30 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1680618712710
-        },
-        {
-            "message": "Ops.Team.CreateOps.Dev.CreateObjectSetNumber renamed to Ops.Team.CompOps.Dev.CompObjectSetNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1680625199563
-        },
-        {
-            "message": "Ops.Team.CompOps.Dev.CompObjectSetNumber renamed to Ops.Team.CompOps.CompObjectSetNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686661410348
-        },
-        {
-            "message": "Ops.Team.CompOps.CompObjectSetNumber renamed to Ops.Data.Compose.CompObjectSetNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687167327161
-        },
-        {
-            "message": "Ops.Data.Compose.CompObjectSetNumber renamed to Ops.Data.Compose.Object.CompObjectSetNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776348780
         }
     ],
     "layout": {

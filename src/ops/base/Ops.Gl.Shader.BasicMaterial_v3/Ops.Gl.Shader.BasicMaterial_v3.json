@@ -167,7 +167,8 @@
         {
             "message": "added \"use vertex color\" input parameter",
             "author": "pandur",
-            "date": 1643616563167
+            "date": 1643616563167,
+            "type": "feature"
         },
         {
             "message": "Texture transform is now usable with only an opacity/mask texture connected",

@@ -308,7 +308,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     /// //////
 
-    if (pixelFormatStr.indexOf("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+    if (pixelFormatStr.contains("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
     {
         if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
         if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
@@ -316,18 +316,17 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
     }
 
-    if (pixelFormatStr.indexOf("16bit"))
+    if (pixelFormatStr.contains("16bit"))
     {
         cgl.enableExtension("EXT_color_buffer_half_float");
         cgl.enableExtension("OES_texture_float_linear");
     }
 
-
     o.numColorChannels = 1;
-    if (pixelFormatStr.indexOf("R") == 0)o.numColorChannels = 1;
-    if (pixelFormatStr.indexOf("RG") == 0)o.numColorChannels = 2;
-    if (pixelFormatStr.indexOf("RGB") == 0)o.numColorChannels = 3;
-    if (pixelFormatStr.indexOf("RGBA") == 0)o.numColorChannels = 4;
+    if (pixelFormatStr.startsWith("R"))o.numColorChannels = 1;
+    if (pixelFormatStr.startsWith("RG"))o.numColorChannels = 2;
+    if (pixelFormatStr.startsWith("RGB"))o.numColorChannels = 3;
+    if (pixelFormatStr.startsWith("RGBA"))o.numColorChannels = 4;
 
 
     // console.log(pixelFormatStr, this.name);
@@ -1223,13 +1222,13 @@ Texture.PIXELFORMATS = [
 Texture.isPixelFormatFloat =
     (pxlfrmt) =>
     {
-        return (pxlfrmt || "").indexOf("float") > -1;
+        return (pxlfrmt || "").contains("float");
     };
 
 Texture.isPixelFormatHalfFloat =
     (pxlfrmt) =>
     {
-        return (pxlfrmt || "").indexOf("float") > -1 && (pxlfrmt || "").indexOf("16bit") > -1;
+        return (pxlfrmt || "").contains("float") && (pxlfrmt || "").contains("16bit");
     };
 
 

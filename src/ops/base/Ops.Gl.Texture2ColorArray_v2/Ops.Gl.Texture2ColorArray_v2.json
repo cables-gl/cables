@@ -15,6 +15,15 @@
             {
                 "type": 0,
                 "name": "Format index",
+                "values": [
+                    "RGBA",
+                    "RGB",
+                    "RG",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "subType": "integer"
             }
         ],
@@ -60,7 +69,6 @@
         ]
     },
     "issues": "",
-
     "exampleProjectId": "uZkd3x",
     "caniusequery": "",
     "youtubeids": [

@@ -184,8 +184,8 @@ Shader.prototype.copyUniformValues = function (origShader)
         // this._uniforms[i].set(origShader._uniforms[i].getValue());
 
 
-        if (origShader._uniforms[i].getName().indexOf("pathPoints") != -1)
-            console.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
+        // if (origShader._uniforms[i].getName().contains("pathPoints"))
+        //     console.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
 
         this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
     }
@@ -261,7 +261,7 @@ Shader.prototype._addLibs = function (src)
 {
     for (const id in ShaderLibMods)
     {
-        if (src.indexOf(id) > -1)
+        if (src.contains(id))
         {
             const lib = new ShaderLibMods[id]();
             src = src.replace("{{" + id + "}}", lib.srcHeadFrag);
@@ -296,7 +296,7 @@ Shader.prototype.createStructUniforms = function ()
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
 
             // * check if struct is not already part of shader
-            if (this._structNames.indexOf(this._uniforms[i]._structName) === -1)
+            if (!this._structNames.includes(this._uniforms[i]._structName))
             {
                 // * create struct definition with placeholder string to inject
                 const structDefinition = "struct "
@@ -329,8 +329,8 @@ Shader.prototype.createStructUniforms = function ()
             {
                 // * inject member before {injectionString}
                 if (
-                    this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
-                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
+                    !this._injectedStringsFrag[this._uniforms[i]._structName].contains(stringToInsert)
+                && !this._injectedStringsVert[this._uniforms[i]._structName].contains(stringToInsert))
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
@@ -347,13 +347,13 @@ Shader.prototype.createStructUniforms = function ()
                     this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
-                if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
-                if (this._structUniformNamesIndicesVert.indexOf(i) === -1) this._structUniformNamesIndicesVert.push(i);
+                if (!this._structUniformNamesIndicesFrag.includes(i)) this._structUniformNamesIndicesFrag.push(i);
+                if (!this._structUniformNamesIndicesVert.includes(i)) this._structUniformNamesIndicesVert.push(i);
             }
             else if (this._uniforms[i].getShaderType() === "frag")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
+                if (!this._injectedStringsFrag[this._uniforms[i]._structName].includes(stringToInsert)) //
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
 
@@ -364,12 +364,12 @@ Shader.prototype.createStructUniforms = function ()
                     this._injectedStringsFrag[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
-                if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
+                if (!this._structUniformNamesIndicesFrag.includes(i)) this._structUniformNamesIndicesFrag.push(i);
             }
             else if (this._uniforms[i].getShaderType() === "vert")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
+                if (!this._injectedStringsVert[this._uniforms[i]._structName].includes(stringToInsert))
                 {
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
 
@@ -380,7 +380,7 @@ Shader.prototype.createStructUniforms = function ()
                     this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
-                if (this._structUniformNamesIndicesVert.indexOf(i) === -1) this._structUniformNamesIndicesVert.push(i);
+                if (!this._structUniformNamesIndicesVert.includes(i)) this._structUniformNamesIndicesVert.push(i);
             }
         }
     }
@@ -395,7 +395,7 @@ Shader.prototype.createStructUniforms = function ()
         const index = this._structUniformNamesIndicesFrag[i];
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
-        if (this._uniDeclarationsFrag.indexOf(uniDeclarationString) === -1)
+        if (!this._uniDeclarationsFrag.includes(uniDeclarationString))
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[index]._structName + "}}";
 
@@ -412,7 +412,7 @@ Shader.prototype.createStructUniforms = function ()
         const index = this._structUniformNamesIndicesVert[i];
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
-        if (this._uniDeclarationsVert.indexOf(uniDeclarationString) === -1)
+        if (!this._uniDeclarationsVert.includes(uniDeclarationString))
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[index]._structName + "}}";
 
@@ -501,7 +501,7 @@ Shader.prototype.compile = function ()
         // * also, we reset the locations of all the other valid uniforms
         for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
         {
-            if (indicesToRemove.indexOf(j) > -1) this._uniforms.splice(j, 1);
+            if (indicesToRemove.includes(j)) this._uniforms.splice(j, 1);
             else this._uniforms[j].resetLoc();
         }
     }
@@ -622,11 +622,11 @@ Shader.prototype.compile = function ()
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
             if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both")
-                if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                if (!this.srcVert.contains(uniStr) && !this.srcVert.contains("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()))
                     uniformsStrVert += uniStr + ";" + comment.endl();
 
             if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both")
-                if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                if (!this.srcFrag.contains(uniStr) && !this.srcFrag.contains("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()))
                     uniformsStrFrag += uniStr + ";" + comment.endl();
         }
     }
@@ -646,8 +646,8 @@ Shader.prototype.compile = function ()
     if (countUniVert >= this._cgl.maxUniformsVert) this._log.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
 
 
-    if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
-    if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
+    if (!fs.contains("precision")) fs = "precision " + this.precision + " float;".endl() + fs;
+    if (!vs.contains("precision")) vs = "precision " + this.precision + " float;".endl() + vs;
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     {
         fs += "#define MOBILE".endl();
@@ -750,7 +750,7 @@ Shader.prototype.compile = function ()
 
     let drawBufferStr = "";
     for (let i = 0; i < 16; i++)
-        if (fs.indexOf("outColor" + i) > -1) this._drawBuffers[i] = true;
+        if (fs.contains("outColor" + i)) this._drawBuffers[i] = true;
 
     if (this._drawBuffers.length == 1)
     {
@@ -1072,7 +1072,7 @@ Shader.prototype.removeModule = function (mod)
                     found = false;
                     for (let j = 0; j < this._uniforms.length; j++)
                     {
-                        if (this._uniforms[j].getName().indexOf(mod.prefix) == 0)
+                        if (this._uniforms[j].getName().startsWith(mod.prefix))
                         {
                             this._uniforms.splice(j, 1);
                             found = true;

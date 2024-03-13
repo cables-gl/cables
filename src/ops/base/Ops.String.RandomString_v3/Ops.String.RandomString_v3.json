@@ -38,11 +38,6 @@
             "date": 1648808530498
         },
         {
-            "message": "cloned op from Ops.String.RandomString_v2",
-            "author": "pandur",
-            "date": 1709282901310
-        },
-        {
             "message": "Ops.Patch.Pa03CF5.RandomString_v2 renamed to Ops.String.RandomString_v3",
             "type": "rename",
             "author": "pandur",

@@ -78,36 +78,9 @@
     "created": 1678981059161,
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
-            "author": "pandur",
-            "date": 1620994204234
-        },
-        {
-            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
-            "author": "pandur",
-            "date": 1620998033733
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RGBMath renamed to Ops.Gl.TextureEffects.Math.RgbMath",
-            "author": "pandur",
-            "date": 1671004402345
-        },
-        {
             "message": "cloned op from Ops.Gl.TextureEffects.Math.RgbMath",
             "author": "pandur",
             "date": 1678981059161
-        },
-        {
-            "message": "Ops.User.pandur.RgbExponentialMath renamed to Ops.Dev.RgbMathExpression",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678983298849
-        },
-        {
-            "message": "Ops.Dev.RgbMathExpression renamed to Ops.Gl.ImageCompose.Math.RgbMathExpression",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706629029245
         },
         {
             "message": "Add parameter to set alpha channel",

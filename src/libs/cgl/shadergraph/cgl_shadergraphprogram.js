@@ -68,7 +68,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
                 const f = op.sgOp.info.functions[i];
                 // console.log("ADD FUNCTION CODE", f.name, f.uniqueName, this._functionIdInHead[f.uniqueName]);
                 if (this._functionIdInHead[f.uniqueName]) continue;
-                if (f.name.indexOf("_ID") == -1) this._functionIdInHead[f.uniqueName] = true;
+                if (!f.name.contains("_ID")) this._functionIdInHead[f.uniqueName] = true;
                 let src = f.src;
                 // console.log("src", src);
                 src = this.replaceId(op, src);
@@ -100,7 +100,7 @@ const ShaderGraphProgram = class extends CABLES.EventTarget
         if (typeStr == "float")
         {
             let floatStr = String(uni.ports[0].get());
-            if (floatStr.indexOf(".") == -1)floatStr += ".";
+            if (!floatStr.contains("."))floatStr += ".";
             str = typeStr + " " + uni.name + " = " + floatStr + ";".endl();
         }
         else

@@ -46,12 +46,6 @@
             "message": "Ops.Gl.TextureEffects.Scroll renamed to Ops.Gl.TextureEffects.ScrollTexture",
             "author": "pandur",
             "date": 1572941492771
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ScrollTexture renamed to Ops.Gl.ImageCompose.ScrollTexture",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856130318
         }
     ],
     "exampleProjectId": "DutaW6"

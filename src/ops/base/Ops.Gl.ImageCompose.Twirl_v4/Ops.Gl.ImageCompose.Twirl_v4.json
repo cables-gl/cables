@@ -49,7 +49,6 @@
         ]
     },
     "summary": "Creates a twirl/swirl/spiral effect in a texture",
-
     "docs": {
         "ports": [
             {
@@ -90,16 +89,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Twirl_v3",
             "author": "pandur",
             "date": 1650449268815
-        },
-        {
-            "message": "Ops.User.pandur.TwirlV4 renamed to Ops.Dev.TwirlV4",
-            "author": "pandur",
-            "date": 1650521310757
-        },
-        {
-            "message": "Ops.Dev.TwirlV4 renamed to Ops.Gl.TextureEffects.Twirl_v4",
-            "author": "pandur",
-            "date": 1652093211112
         },
         {
             "message": "Ops.Gl.TextureEffects.Twirl_v4 renamed to Ops.Gl.ImageCompose.Twirl_v4",

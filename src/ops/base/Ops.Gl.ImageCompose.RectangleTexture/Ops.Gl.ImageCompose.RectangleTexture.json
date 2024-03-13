@@ -60,11 +60,6 @@
     "created": 1510252862219,
     "changelog": [
         {
-            "message": "Ops.Gl.TextureEffects.Rectangle renamed to Ops.Gl.TextureEffects.RectangleTexture",
-            "author": "pandur",
-            "date": 1587376379388
-        },
-        {
             "message": "Ops.Gl.TextureEffects.RectangleTexture renamed to Ops.Gl.ImageCompose.RectangleTexture",
             "type": "rename",
             "author": "stephan",

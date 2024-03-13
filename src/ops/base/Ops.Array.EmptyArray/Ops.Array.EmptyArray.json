@@ -7,12 +7,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1706777747148
-        },
-        {
-            "message": "Ops.Patch.PZjYu13.EmptyArray renamed to Ops.Array.EmptyArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706777795953
         }
     ],
     "layout": {

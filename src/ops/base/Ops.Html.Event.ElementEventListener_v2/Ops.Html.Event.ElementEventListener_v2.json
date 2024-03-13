@@ -73,18 +73,6 @@
             "message": "cloned op from Ops.Html.Event.CustomEventListener",
             "author": "pandur",
             "date": 1706603656088
-        },
-        {
-            "message": "Ops.Patch.PHagqL2.EventListener_v2 renamed to Ops.Html.ElementEventListener",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706603919200
-        },
-        {
-            "message": "Ops.Html.ElementEventListener renamed to Ops.Html.Event.ElementEventListener_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706603997776
         }
     ],
     "exampleProjectId": "9ixt13"

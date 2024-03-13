@@ -5,18 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1689760588796
-        },
-        {
-            "message": "Ops.Patch.PGUpzJB.CompStringAppend renamed to Ops.Data.Compose.CompStringAppend",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1689761446344
-        },
-        {
-            "message": "Ops.Data.Compose.CompStringAppend renamed to Ops.Data.Compose.String.CompStringAppend",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776359751
         }
     ],
     "layout": {

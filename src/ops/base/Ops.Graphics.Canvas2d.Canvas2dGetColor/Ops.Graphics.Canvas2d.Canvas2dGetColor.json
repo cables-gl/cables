@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708360978920
-        },
-        {
-            "message": "Ops.Patch.P2y8nK4.Canvas2dGetColor renamed to Ops.Graphics.Canvas2d.Canvas2dGetColor",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708595519667
         }
     ],
     "layout": {

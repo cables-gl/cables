@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708357159285
-        },
-        {
-            "message": "Ops.Patch.P2y8nK4.Canvas2dCompose renamed to Ops.Graphics.Canvas2d.Canvas2dCompose",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708595473074
         }
     ],
     "layout": {

@@ -7,18 +7,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1706620823233
-        },
-        {
-            "message": " updated core libs: subpatchop",
-            "type": "",
-            "author": "pandur",
-            "date": 1706620824020
-        },
-        {
-            "message": "Ops.Patch.PG8mQQ2.SubPatch0 renamed to Ops.Gl.Meshes.ComposingGridOverlay",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706621319614
         }
     ],
     "coreLibs": [
