@@ -58,6 +58,11 @@
             },
             {
                 "type": 0,
+                "name": "Inner",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Width",
                 "group": "Size",
                 "subType": "number"
@@ -135,6 +140,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1710251781445
+        },
+        {
+            "message": "Added \"inner\" parameter to create an transparent inner hole in the rectangle",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1710329162662
         }
     ],
     "summary": "Draw a 2D rectangle with controllable parameters",

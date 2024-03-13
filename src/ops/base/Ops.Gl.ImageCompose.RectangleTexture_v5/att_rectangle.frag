@@ -12,6 +12,7 @@ UNI float width;
 UNI float height;
 UNI float x;
 UNI float y;
+UNI float inner;
 
 UNI float r;
 UNI float g;
@@ -54,10 +55,10 @@ void main()
     #endif
 
     pp=pp*rot(rotate*DEG2RAD/45.0);
+    vec2 mapTc=((pp/size)+1.0)/2.0;
 
     #ifdef HAS_TEXMAP
         vec4 mapCol=vec4(1.0);
-        vec2 mapTc=((pp/size)+1.0)/2.0;
 
         // if(mapTc.x>0.0 && mapTc.x<1.0 && mapTc.y>0.0 && mapTc.y<1.0)
         mapCol=texture(texMap,clamp(mapTc,0.0,1.0));
@@ -71,6 +72,14 @@ void main()
 
     d=max(absPos.x,absPos.y);
     d=min(d,length(max(absPos,0.0))-roundn);
+
+
+    vec2 absPosInner=abs(pp)-inner*ssize;
+    float dd=max(absPosInner.x,absPosInner.y);
+    d*=min(dd,length(max(absPosInner,0.0))-roundn);
+
+
+
 
     #ifdef HAS_TEXMAP
         col*=mapCol;
