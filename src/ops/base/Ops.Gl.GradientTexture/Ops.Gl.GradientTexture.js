@@ -213,18 +213,17 @@ function updateGradient(keys)
                 pixels[xx * 4 + 3] = Math.round(255);
             }
         }
-
-        if (inSRGB.get())
-            for (let i = 0; i < pixels.length; i += 4)
-            {
-                pixels[i + 0] = lin2srgb(pixels[i + 0]);
-                pixels[i + 1] = lin2srgb(pixels[i + 1]);
-                pixels[i + 2] = lin2srgb(pixels[i + 2]);
-            }
-
-        if (inDir.get() == "X") tex.initFromData(pixels, width, 1, selectedFilter, selectedWrap);
-        if (inDir.get() == "Y") tex.initFromData(pixels, 1, width, selectedFilter, selectedWrap);
     }
+    if (inSRGB.get())
+        for (let i = 0; i < pixels.length; i += 4)
+        {
+            pixels[i + 0] = lin2srgb(pixels[i + 0]);
+            pixels[i + 1] = lin2srgb(pixels[i + 1]);
+            pixels[i + 2] = lin2srgb(pixels[i + 2]);
+        }
+
+    if (inDir.get() == "X") tex.initFromData(pixels, width, 1, selectedFilter, selectedWrap);
+    if (inDir.get() == "Y") tex.initFromData(pixels, 1, width, selectedFilter, selectedWrap);
 
     if (inDir.get() == "Radial")
     {

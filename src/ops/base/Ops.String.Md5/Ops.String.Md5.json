@@ -8,12 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708377272448
-        },
-        {
-            "message": "Ops.Patch.PD4aKL4.Md5 renamed to Ops.String.Md5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708377367729
         }
     ],
     "layout": {

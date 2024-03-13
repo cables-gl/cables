@@ -35,13 +35,14 @@
         {
             "message": "added unicode support",
             "author": "stephan",
-            "date": 1648808530498
+            "date": 1648808530498,
+            "type": "feature"
         },
         {
-            "message": "Ops.Patch.Pa03CF5.RandomString_v2 renamed to Ops.String.RandomString_v3",
-            "type": "rename",
+            "message": "added seed, removed trigger ",
+            "type": "feature",
             "author": "pandur",
-            "date": 1709283039747
+            "date": 1710264090560
         }
     ],
     "caniusequery": ""

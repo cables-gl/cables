@@ -99,12 +99,5 @@
     "docs": {
         "ports": []
     },
-    "changelog": [
-        {
-            "message": "Ops.Html.EventListener renamed to Ops.Html.Event.ElementPointerEvents",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776775380
-        }
-    ]
+    "changelog": []
 }

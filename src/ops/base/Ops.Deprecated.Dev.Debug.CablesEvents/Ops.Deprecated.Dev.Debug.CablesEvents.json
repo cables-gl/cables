@@ -7,20 +7,8 @@
             "date": 1689660607316
         },
         {
-            "message": "Ops.Patch.PxgBYvA.CablesEvents renamed to Ops.Debug.CablesEvents",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1689661371079
-        },
-        {
-            "message": "Ops.Debug.CablesEvents renamed to Ops.Dev.Debug.CablesEvents",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1694686430596
-        },
-        {
             "message": "Ops.Dev.Debug.CablesEvents renamed to Ops.Deprecated.Dev.Debug.CablesEvents",
-            "type": "rename",
+            "type": "deprecated",
             "author": "stephan",
             "date": 1707316031100
         }
