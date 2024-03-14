@@ -1,5 +1,5 @@
-import { uuid } from "../utils";
-import Logger from "../core_logger";
+import { Logger } from "cables-shared-client";
+import { uuid } from "../utils.js";
 
 
 

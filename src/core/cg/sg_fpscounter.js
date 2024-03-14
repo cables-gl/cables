@@ -1,6 +1,6 @@
-import { EventTarget } from "../eventtarget";
+import { Events } from "cables-shared-client";
 
-export default class FpsCounter extends EventTarget
+export default class FpsCounter extends Events
 {
     constructor()
     {

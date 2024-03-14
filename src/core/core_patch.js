@@ -1,14 +1,14 @@
-import { EventTarget } from "./eventtarget";
-import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils";
-import { LoadingStatus } from "./loadingstatus";
-import { Instancing } from "./instancing";
-import { Timer } from "./timer";
-import { Link } from "./core_link";
-import { Profiler } from "./core_profiler";
-import { Context } from "./cgl/cgl_state";
-import { CONSTANTS } from "./constants";
-import Logger from "./core_logger";
-import PatchVariable from "./core_variable";
+import { Logger } from "cables-shared-client";
+import { EventTarget } from "./eventtarget.js";
+import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
+import { LoadingStatus } from "./loadingstatus.js";
+import { Instancing } from "./instancing.js";
+import { Timer } from "./timer.js";
+import { Link } from "./core_link.js";
+import { Profiler } from "./core_profiler.js";
+import { Context } from "./cgl/cgl_state.js";
+import { CONSTANTS } from "./constants.js";
+import PatchVariable from "./core_variable.js";
 
 
 /**

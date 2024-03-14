@@ -1,3 +1,3 @@
-import { RenderTargets } from "./rendertargets";
+import { RenderTargets } from "./rendertargets.js";
 
 CGL.RenderTargets = RenderTargets;

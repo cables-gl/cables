@@ -1,5 +1,5 @@
 
-import { SwitchPort } from "./core_port_switch";
+import { SwitchPort } from "./core_port_switch.js";
 
 
 class ValueSelectPort extends SwitchPort

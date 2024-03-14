@@ -1,6 +1,6 @@
 /** @namespace WEBAUDIO */
 
-import { CONSTANTS } from "./constants";
+import { CONSTANTS } from "./constants.js";
 
 const WEBAUDIO = {};
 

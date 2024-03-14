@@ -1,8 +1,8 @@
 // import { vec2, vec3 } from "gl-matrix";
-import { UTILS } from "../utils";
-import { b64decTypedArray } from "../base64";
-import { BoundingBox } from "./cg_boundingbox";
-import Logger from "../core_logger";
+import { Logger } from "cables-shared-client";
+import { UTILS } from "../utils.js";
+import { b64decTypedArray } from "../base64.js";
+import { BoundingBox } from "./cg_boundingbox.js";
 
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.

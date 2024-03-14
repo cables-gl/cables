@@ -1,4 +1,4 @@
-import { now } from "./timer";
+import { now } from "./timer.js";
 
 class Profiler
 {

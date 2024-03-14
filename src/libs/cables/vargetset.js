@@ -1,4 +1,4 @@
-import { CONSTANTS } from "../../core/constants";
+import { CONSTANTS } from "../../core/constants.js";
 
 const VarSetOpWrapper = class
 {

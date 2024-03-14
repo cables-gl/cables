@@ -1,3 +1,5 @@
+import { EventTarget } from "./eventtarget.js";
+
 /** @namespace CABLES */
 
 export const internalNow = function ()
@@ -27,7 +29,7 @@ export const now = function ()
  */
 const Timer = function ()
 {
-    CABLES.EventTarget.apply(this);
+    EventTarget.apply(this);
 
     this._timeStart = internalNow();
     this._timeOffset = 0;

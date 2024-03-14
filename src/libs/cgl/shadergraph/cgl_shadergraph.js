@@ -1,6 +1,7 @@
-import { ShaderGraphProgram } from "./cgl_shadergraphprogram";
+import { Events } from "cables-shared-client";
+import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
 
-const ShaderGraph = class extends CABLES.EventTarget
+const ShaderGraph = class extends Events
 {
     constructor(op, portFrag, portVert)
     {

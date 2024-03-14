@@ -1,6 +1,6 @@
-import { Texture } from "./cgl_texture";
-import { MESHES } from "./cgl_simplerect";
-import Logger from "../core_logger";
+import { Logger } from "cables-shared-client";
+import { Texture } from "./cgl_texture.js";
+import { MESHES } from "./cgl_simplerect.js";
 
 const TextureEffect = function (cgl, options)
 {

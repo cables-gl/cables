@@ -1,31 +1,23 @@
 {
     "name": "cables",
+    "private": true,
     "version": "1.0.0",
     "description": "something something cables .",
-    "main": "dist/cables.max.js",
-    "directories": {
-        "doc": "doc"
-    },
-    "private": true,
-    "scripts": {
-        "build": "gulp build",
-        "build:live": "gulp build",
-        "watch": "gulp watch",
-        "start": "gulp"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:pandrr/cables.git"
-    },
     "keywords": [],
-    "author": "",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/pandrr/cables/issues"
     },
     "homepage": "https://github.com/pandrr/cables#readme",
+    "main": "dist/cables.max.js",
+    "type": "module",
     "engines": {
         "node": "18.14.2"
+    },
+    "dependencies": {
+        "git-repo-info": "2.1.1",
+        "gl-matrix": "3.4.3",
+        "cables-shared-client": "file:../shared/client/"
     },
     "devDependencies": {
         "gulp": "4.0.2",
@@ -38,8 +30,18 @@
         "webpack-bundle-analyzer": "4.8.0",
         "webpack-stream": "7.0.0"
     },
-    "dependencies": {
-        "git-repo-info": "2.1.1",
-        "gl-matrix": "3.4.3"
-    }
+    "scripts": {
+        "build": "gulp build",
+        "build:live": "gulp build",
+        "watch": "gulp watch",
+        "start": "gulp"
+    },
+    "directories": {
+        "doc": "doc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:pandrr/cables.git"
+    },
+    "author": ""
 }

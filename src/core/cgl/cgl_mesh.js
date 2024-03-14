@@ -1,7 +1,7 @@
-import { Uniform } from "./cgl_shader_uniform";
-import { CONSTANTS } from "./constants";
-import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
-import Logger from "../core_logger";
+import { Logger } from "cables-shared-client";
+import { Uniform } from "./cgl_shader_uniform.js";
+import { CONSTANTS } from "./constants.js";
+import { extendMeshWithFeedback } from "./cgl_mesh_feedback.js";
 
 const MESH = {};
 MESH.lastMesh = null;

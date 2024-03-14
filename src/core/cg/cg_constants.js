@@ -1,7 +1,7 @@
-import { BoundingBox } from "./cg_boundingbox";
-import { CgCanvas } from "./cg_canvas";
-import { Geometry } from "./cg_geom";
-import FpsCounter from "./sg_fpscounter";
+import { BoundingBox } from "./cg_boundingbox.js";
+import { CgCanvas } from "./cg_canvas.js";
+import { Geometry } from "./cg_geom.js";
+import FpsCounter from "./sg_fpscounter.js";
 
 const CG = {
 

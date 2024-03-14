@@ -1,5 +1,5 @@
-import { Geometry } from "../cg/cg_geom";
-import { Mesh } from "./cgl_mesh";
+import { Geometry } from "../cg/cg_geom.js";
+import { Mesh } from "./cgl_mesh.js";
 
 
 const MESHES = {};

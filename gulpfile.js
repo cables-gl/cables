@@ -1,15 +1,17 @@
 //
-const gulp = require("gulp");
-const webpack = require("webpack-stream");
-const compiler = require("webpack");
-const concat = require("gulp-concat");
-const rename = require("gulp-rename");
-const clean = require("gulp-clean");
-const getRepoInfo = require("git-repo-info");
-const fs = require("fs");
-const footer = require("gulp-footer");
-const webpackConfig = require("./webpack.config");
-const libWebpackConfig = require("./webpack.config.libs");
+import gulp from "gulp";
+
+import footer from "gulp-footer";
+import fs from "fs";
+import getRepoInfo from "git-repo-info";
+import clean from "gulp-clean";
+import rename from "gulp-rename";
+import concat from "gulp-concat";
+import compiler from "webpack";
+import webpack from "webpack-stream";
+
+import webpackConfig from "./webpack.config.js";
+import libWebpackConfig from "./webpack.config.libs.js";
 
 let buildInfo = getBuildInfo();
 
@@ -53,7 +55,7 @@ function _append_build_info()
 
 function _watch(done)
 {
-    gulp.watch("src/core/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max), gulp.parallel(_core_libs_max), _append_build_info, _copy_ui, _core_libs_copy));
+    gulp.watch(["src/core/**/*", "../shared/client/**/*"], { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max), gulp.parallel(_core_libs_max), _append_build_info, _copy_ui, _core_libs_copy));
     gulp.watch("libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _external_libs, _append_build_info, _copy_ui));
     gulp.watch("src/libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_core_libs_max), _append_build_info, _core_libs_copy));
     done();

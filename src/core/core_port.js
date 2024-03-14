@@ -1,8 +1,8 @@
-import { EventTarget } from "./eventtarget";
-import { Anim, ANIM } from "./anim";
-import { CONSTANTS } from "./constants";
-import Logger from "./core_logger";
-import { cleanJson } from "./utils";
+import { Logger } from "cables-shared-client";
+import { EventTarget } from "./eventtarget.js";
+import { Anim, ANIM } from "./anim.js";
+import { CONSTANTS } from "./constants.js";
+import { cleanJson } from "./utils.js";
 
 
 /**

@@ -1,10 +1,10 @@
-import { EventTarget } from "./eventtarget";
-import { UTILS, cleanJson, shortId } from "./utils";
-import { CONSTANTS } from "./constants";
-import { Port } from "./core_port";
-import Logger from "./core_logger";
-import { SwitchPort } from "./core_port_switch";
-import { ValueSelectPort } from "./core_port_select";
+import { Logger } from "cables-shared-client";
+import { EventTarget } from "./eventtarget.js";
+import { UTILS, cleanJson, shortId } from "./utils.js";
+import { CONSTANTS } from "./constants.js";
+import { Port } from "./core_port.js";
+import { SwitchPort } from "./core_port_switch.js";
+import { ValueSelectPort } from "./core_port_select.js";
 
 /**
  * op the class of all operators

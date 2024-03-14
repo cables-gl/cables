@@ -1,4 +1,4 @@
-import { EventTarget } from "./eventtarget";
+import { Events } from "cables-shared-client";
 
 /**
  * @type {Object}
@@ -8,7 +8,7 @@ import { EventTarget } from "./eventtarget";
  * @memberof Patch
  * @constructor
  */
-class PatchVariable extends EventTarget
+class PatchVariable extends Events
 {
     constructor(name, val, type)
     {

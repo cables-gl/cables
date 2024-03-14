@@ -1,5 +1,5 @@
 
-import { Port } from "./core_port";
+import { Port } from "./core_port.js";
 
 
 class SwitchPort extends Port

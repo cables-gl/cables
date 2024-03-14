@@ -1,4 +1,4 @@
-import { Texture } from "../../../core/cgl/cgl_texture";
+import { Texture } from "../../../core/cgl/cgl_texture.js";
 
 const DEFAULT_TEXTURE_SIZE = 8;
 

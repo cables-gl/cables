@@ -1,6 +1,6 @@
 
-import CgUniform from "../cg/cg_uniform";
-import { Port } from "../core_port";
+import CgUniform from "../cg/cg_uniform.js";
+import { Port } from "../core_port.js";
 
 /**
  * Shader uniforms

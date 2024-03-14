@@ -1,4 +1,4 @@
-import Logger from "../core_logger";
+import { Logger } from "cables-shared-client";
 
 export default class Texture
 {

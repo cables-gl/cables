@@ -1,5 +1,5 @@
-import Logger from "../core_logger";
-import Pipeline from "./cgp_pipeline";
+import { Logger } from "cables-shared-client";
+import Pipeline from "./cgp_pipeline.js";
 
 export default class Mesh
 {

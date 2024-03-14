@@ -1,4 +1,4 @@
-import { CONSTANTS } from "./constants";
+import { CONSTANTS } from "./constants.js";
 
 const Key = function (obj)
 {

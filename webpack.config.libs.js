@@ -1,109 +1,109 @@
-const path = require("path");
-const fs = require("fs");
+import path from "path";
+import fs from "fs";
 
-const getDirectories = function (arr)
+export default (isProduction = false) =>
 {
-    const names = [];
-    for (let i = 0; i < arr.length; i++)
+    const getDirectories = function (arr)
     {
-        const dirent = arr[i];
-        if (dirent.isDirectory() && !dirent.name.startsWith("."))
+        const names = [];
+        for (let i = 0; i < arr.length; i++)
         {
-            names.push(dirent.name);
+            const dirent = arr[i];
+            if (dirent.isDirectory() && !dirent.name.startsWith("."))
+            {
+                names.push(dirent.name);
+            }
         }
-    }
-    return names;
-};
+        return names;
+    };
 
-
-const getJsFiles = function (arr)
-{
-    const names = [];
-    for (let i = 0; i < arr.length; i++)
+    const getJsFiles = function (arr)
     {
-        const dirent = arr[i];
-        if (!dirent.isDirectory() && !dirent.name.startsWith(".") && dirent.name.endsWith(".js"))
+        const names = [];
+        for (let i = 0; i < arr.length; i++)
         {
-            names.push(dirent.name);
+            const dirent = arr[i];
+            if (!dirent.isDirectory() && !dirent.name.startsWith(".") && dirent.name.endsWith(".js"))
+            {
+                names.push(dirent.name);
+            }
         }
-    }
-    return names;
-};
+        return names;
+    };
 
-const raiseFirstChar = (str) => { return str.charAt(0).toUpperCase() + str.substring(1); };
-const flattenArray = (arr) => { return [].concat.apply([], arr); }; // .flat() only availible in Node 11+
+    const raiseFirstChar = (str) => { return str.charAt(0).toUpperCase() + str.substring(1); };
+    const flattenArray = (arr) => { return [].concat.apply([], arr); }; // .flat() only availible in Node 11+
 
-const createOutputEntryObjectsNamespace = (namespace, isProduction) =>
-{
-    const outputs = [];
-    const dirContent = fs.readdirSync(
-        path.join(__dirname, "src", "libs", namespace),
-        { "withFileTypes": true }
-    );
-
-    const namespaceFiles = getJsFiles(dirContent);
-    const namespaceSubDirectories = getDirectories(dirContent);
-
-    for (let i = 0; i < namespaceFiles.length; i++)
+    const createOutputEntryObjectsNamespace = (namespace) =>
     {
-        const file = namespaceFiles[i];
-        const baseName = file.split(".")[0];
-        const targetName = namespace === "cables" ? baseName : `${namespace}_${baseName}`;
-        outputs.push(
-            {
-                "entry": path.join(__dirname, "src", "libs", namespace, file),
-                "output": {
-                    "filename": `${targetName}.${isProduction ? "min" : "max"}.js`,
-                    "path": path.join(__dirname, "build", "libs"),
-                    "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(baseName)],
-                    "libraryExport": raiseFirstChar(namespace),
-                    "libraryTarget": "this"
-                }
-            }
+        const outputs = [];
+        const dirContent = fs.readdirSync(
+            path.join(__dirname, "src", "libs", namespace),
+            { "withFileTypes": true }
         );
-    }
 
-    for (let i = 0; i < namespaceSubDirectories.length; i++)
-    {
-        const subdir = namespaceSubDirectories[i];
-        const targetName = namespace === "cables" ? subdir : `${namespace}_${subdir}`;
-        outputs.push(
-            {
-                "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
-                "output": {
-                    "filename": `${targetName}.${isProduction ? "min" : "max"}.js`,
-                    "path": path.join(__dirname, "build", "libs"),
-                    "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(subdir)],
-                    "libraryExport": raiseFirstChar(subdir),
-                    "libraryTarget": "this",
+        const namespaceFiles = getJsFiles(dirContent);
+        const namespaceSubDirectories = getDirectories(dirContent);
+
+        for (let i = 0; i < namespaceFiles.length; i++)
+        {
+            const file = namespaceFiles[i];
+            const baseName = file.split(".")[0];
+            const targetName = namespace === "cables" ? baseName : namespace + "_" + baseName;
+            outputs.push(
+                {
+                    "entry": path.join(__dirname, "src", "libs", namespace, file),
+                    "output": {
+                        "filename": isProduction ? targetName + ".min.js" : targetName + ".max.js",
+                        "path": path.join(__dirname, "build", "libs"),
+                        "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(baseName)],
+                        "libraryExport": raiseFirstChar(namespace),
+                        "libraryTarget": "this"
+                    }
                 }
-            }
-        );
-    }
-    return outputs;
-};
+            );
+        }
 
-const readLibraryFiles = (isProduction) =>
-{
-    const LIBDIR_ENTRIES = fs.readdirSync(
-        path.join(__dirname, "src", "libs"),
-        { "withFileTypes": true }
-    );
+        for (let i = 0; i < namespaceSubDirectories.length; i++)
+        {
+            const subdir = namespaceSubDirectories[i];
+            const targetName = namespace === "cables" ? subdir : namespace + "_" + subdir;
+            outputs.push(
+                {
+                    "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
+                    "output": {
+                        "filename": isProduction ? targetName + ".min.js" : targetName + ".max.js",
+                        "path": path.join(__dirname, "build", "libs"),
+                        "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(subdir)],
+                        "libraryExport": raiseFirstChar(subdir),
+                        "libraryTarget": "this",
+                    }
+                }
+            );
+        }
+        return outputs;
+    };
 
-    const NAMESPACE_DIRS = getDirectories(LIBDIR_ENTRIES);
-
-    const outputObjects = [];
-    for (let i = 0; i < NAMESPACE_DIRS.length; i++)
+    const readLibraryFiles = () =>
     {
-        const namespace = NAMESPACE_DIRS[i];
-        outputObjects.push(createOutputEntryObjectsNamespace(namespace, isProduction));
-    }
+        const LIBDIR_ENTRIES = fs.readdirSync(
+            path.join(__dirname, "src", "libs"),
+            { "withFileTypes": true }
+        );
 
-    return flattenArray(outputObjects);
-};
+        const NAMESPACE_DIRS = getDirectories(LIBDIR_ENTRIES);
 
-module.exports = (isProduction = false) =>
-{
+        const outputObjects = [];
+        for (let i = 0; i < NAMESPACE_DIRS.length; i++)
+        {
+            const namespace = NAMESPACE_DIRS[i];
+            outputObjects.push(createOutputEntryObjectsNamespace(namespace, isProduction));
+        }
+
+        return flattenArray(outputObjects);
+    };
+
+    const __dirname = new URL(".", import.meta.url).pathname;
     const entryAndOutputObjects = readLibraryFiles(isProduction);
     const defaultConfig = {
         "mode": "production",
