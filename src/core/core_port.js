@@ -157,8 +157,6 @@ Port.prototype.getValueForDisplay = function ()
             else str += "true";
         }
 
-        // str = str.replace(/(<([^>]+)>)/ig, "");
-
         str = str.replace(/[\u00A0-\u9999<>\&]/g, function (i)
         {
             return "&#" + i.charCodeAt(0) + ";";
@@ -187,7 +185,6 @@ Port.prototype.getValueForDisplay = function ()
  * }
  *
  */
-
 Port.prototype.onAnimToggle = function () {};
 Port.prototype._onAnimToggle = function ()
 {
