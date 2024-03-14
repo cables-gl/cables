@@ -22,14 +22,8 @@
             "date": 1643888086308
         },
         {
-            "message": "Ops.Sidebar.LocalTextureFile renamed to Ops.Deprecate.Sidebar.LocalTextureFile",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706775862473
-        },
-        {
             "message": "Ops.Deprecate.Sidebar.LocalTextureFile renamed to Ops.Deprecated.Sidebar.LocalTextureFile",
-            "type": "rename",
+            "type": "deprecated",
             "author": "pandur",
             "date": 1707136336826
         }

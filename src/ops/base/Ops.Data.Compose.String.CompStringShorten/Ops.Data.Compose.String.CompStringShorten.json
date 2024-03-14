@@ -1,24 +1,6 @@
 {
     "id": "f651619e-6353-4496-8910-cb0d8ea7af17",
-    "changelog": [
-        {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1689760712080
-        },
-        {
-            "message": "Ops.Patch.PGUpzJB.CompStringShorten renamed to Ops.Data.Compose.CompStringShorten",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1689761469737
-        },
-        {
-            "message": "Ops.Data.Compose.CompStringShorten renamed to Ops.Data.Compose.String.CompStringShorten",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776370098
-        }
-    ],
+    "changelog": [],
     "layout": {
         "portsIn": [
             {

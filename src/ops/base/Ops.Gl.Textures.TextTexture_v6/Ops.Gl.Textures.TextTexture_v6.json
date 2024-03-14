@@ -249,48 +249,9 @@
     },
     "changelog": [
         {
-            "message": " added core lib: cgl_wireframes",
-            "author": "pandur",
-            "date": 1596978902519
-        },
-        {
-            "message": "Ops.User.pandur.Text4 renamed to Ops.Gl.Textures.TextTexture4",
-            "author": "pandur",
-            "date": 1596986227402
-        },
-        {
-            "message": "Ops.Gl.Textures.TextTexture4 renamed to Ops.Gl.Textures.TextTexture_v4",
-            "author": "pandur",
-            "date": 1596988496543
-        },
-        {
             "message": "cloned op from Ops.Gl.Textures.TextTexture_v4",
             "author": "pandur",
             "date": 1684343997375
-        },
-        {
-            "message": "Ops.Patch.PIabKGw.TextTexture_v4 renamed to Ops.User.pandur.TextTexture5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1684488565117
-        },
-        {
-            "message": "Ops.User.pandur.TextTexture5 renamed to Ops.Gl.Textures.TextTexture_v5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1684491765597
-        },
-        {
-            "message": "Ops.Gl.Textures.TextTexture_v5 renamed to Ops.Dev.Gl.Textures.TextTexture5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685461228449
-        },
-        {
-            "message": "Ops.Dev.Gl.Textures.TextTexture5 renamed to Ops.Gl.Textures.TextTexture_v5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1688716507446
         },
         {
             "message": "force redraw when a font was loaded, to make sure we are using the correct font",
@@ -302,12 +263,6 @@
             "message": "cloned op from Ops.Gl.Textures.TextTexture_v5",
             "author": "pandur",
             "date": 1705328506169
-        },
-        {
-            "message": "Ops.Patch.Pmlapr1.TextTexture_v6 renamed to Ops.Gl.Textures.TextTexture_v6",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705328536994
         },
         {
             "message": "many small fixed with alignment, padding and text size",

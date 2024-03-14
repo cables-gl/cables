@@ -8,23 +8,6 @@
             "type": "",
             "author": "pandur",
             "date": 1708944583951
-        },
-        {
-            "message": "Ops.Patch.P2y8nK4.Canvas2dTransform renamed to Ops.Graphics.Canvas2d.Canvas2dTransform",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708946130847
-        },
-        {
-            "message": "cloned op from Ops.Graphics.Canvas2d.Canvas2dTransform",
-            "author": "pandur",
-            "date": 1708960139922
-        },
-        {
-            "message": "Ops.Patch.PgU52p5.Canvas2dResetTransform renamed to Ops.Graphics.Canvas2d.Canvas2dResetTransform",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1708960198836
         }
     ],
     "layout": {
