@@ -109,10 +109,12 @@ export default (isProduction = false) =>
         "mode": "production",
         "devtool": false,
         "optimization": {
-            "minimize": isProduction // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+            "minimize": isProduction, // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+            "usedExports": true
         },
         "module": {
             "rules": [
+                { "sideEffects": false },
                 {
                     "test": /\.frag/,
                     "use": "raw-loader",

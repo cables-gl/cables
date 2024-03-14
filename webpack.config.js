@@ -21,10 +21,12 @@ export default (isProduction) =>
         },
         "stats": isProduction,
         "optimization": {
-            "minimize": isProduction
+            "minimize": isProduction,
+            "usedExports": true
         },
         "module": {
             "rules": [
+                { "sideEffects": false },
                 {
                     "test": /\.frag/,
                     "use": "raw-loader",
