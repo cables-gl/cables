@@ -35,6 +35,12 @@
             "message": "Ops.Dev.Gl.Meshes.PointCloudFromTexture renamed to Ops.Gl.Meshes.PointCloudFromTexture",
             "author": "pandur",
             "date": 1644228870110
+        },
+        {
+            "message": "fixed positioning problems when using the current pointmaterial for pointCloudFromTexture and with other operators",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1710518296722
         }
     ],
     "authorName": "pandur",
