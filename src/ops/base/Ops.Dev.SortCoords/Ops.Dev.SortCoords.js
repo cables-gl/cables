@@ -15,8 +15,8 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.scroll_frag);
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniFrame = new CGL.Uniform(shader, "f", "frame", 0),
-    uniWidth = new CGL.Uniform(shader, "f", "width", 0),
-    uniHeight = new CGL.Uniform(shader, "f", "height", 0),
+    uniWidth = new CGL.Uniform(shader, "f", "widthF", 0),
+    uniHeight = new CGL.Uniform(shader, "f", "heightF", 0),
     uniColRow = new CGL.Uniform(shader, "f", "colRow", 0);
 
 // unitexMask = new CGL.Uniform(shader, "t", "texMask", 1),
@@ -49,7 +49,7 @@ render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    uniFrame.setValue(frame);
+    uniFrame.setValue(frame % 100);
     frame++;
 
     colRow = !colRow;

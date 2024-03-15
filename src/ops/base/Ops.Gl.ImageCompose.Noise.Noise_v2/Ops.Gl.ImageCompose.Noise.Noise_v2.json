@@ -14,6 +14,10 @@
             {
                 "type": 0,
                 "name": "Alpha Mask index",
+                "values": [
+                    "Off",
+                    "On"
+                ],
                 "group": "Blending",
                 "subType": "integer"
             },
@@ -93,7 +97,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "PdHmT6",
     "changelog": [

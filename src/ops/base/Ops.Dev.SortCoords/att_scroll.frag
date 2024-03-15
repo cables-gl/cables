@@ -1,30 +1,37 @@
 precision highp float;
 precision highp int;
 
+IN vec2 texCoord;
 UNI sampler2D tex;
-vec2 texRes=vec2(10.0);
+UNI float widthF;
+UNI float heightF;
 UNI float frame;
+
 int width;
 int height;
+vec2 texRes;
 
-int xor(int x, int c, int bits) {
+int xor(int x, int c)
+{
     int y = 0, s = 1;
-    for (int i = 0; i < bits; i++) {
+    for (int i = 0; i < 8; i++) {
         y += s * ((x / s) % 2 ^ (c / s) % 2);
         s *= 2;
     }
     return y;
 }
 
-int id(vec2 U) {
+int id(vec2 U)
+{
     return int(U.x) + width * int(U.y);
 }
 
-vec2 idToUV(int id) {
+vec2 idToUV(int id)
+{
     int y = id / width;
     int x = id - y * width;
-    highp vec2 uv = vec2(float(x), float(y));
-    return uv/texRes.xy;
+    vec2 uv = vec2(float(x), float(y));
+    return uv/texRes;
 }
 
 float rand(vec2 co){
@@ -33,23 +40,21 @@ float rand(vec2 co){
 
 void main()
 {
-    width = int(texRes.x);
-    height = int(texRes.y);
+    texRes=vec2(widthF,widthF);
+    width = int(widthF);
+    height = int(heightF);
 
-
-
-    vec2 U = gl_FragCoord.xy;
-    int bits = int(ceil(log2(float(width * height)))); // Correct bits calculation
+    vec2 U = floor(texCoord*texRes)+(0.5); // gl_FragCoord.xy;
 
     vec4 col = texture2D(tex, U / texRes.xy);
 
     int idA = id(U);
 
-    int cX = int(mod(frame * rand(vec2(frame*132.2,frame)*texRes.x), texRes.x));
-    int cY = int(mod(frame * rand(vec2(frame,frame*3.2)*texRes.y), texRes.y));
+    int cX = int(mod(frame * rand(vec2(frame*13.2,frame/2.0)*widthF), widthF));
+    int cY = int(mod(frame * rand(vec2(frame/3.0,frame*3.2)*heightF), heightF));
 
     int c = cX + (width * cY);
-    int idB = xor(idA, c, bits);
+    int idB = xor(idA, c);
 
     int maxID = (width * height) - 1;
     if (idB <= maxID)
@@ -58,6 +63,11 @@ void main()
 
         if ((col2.b > col.b && idB > idA) || (col2.b < col.b && idB < idA)) col = col2;
     }
+
+
+
+    // col.rg=U.xy;
+    // col=vec4(1.0);
 
     gl_FragColor = col;
 }
