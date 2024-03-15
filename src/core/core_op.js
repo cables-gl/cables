@@ -1,10 +1,10 @@
-import { EventTarget } from "./eventtarget";
-import { UTILS, cleanJson, shortId } from "./utils";
-import { CONSTANTS } from "./constants";
-import { Port } from "./core_port";
-import Logger from "./core_logger";
-import { SwitchPort } from "./core_port_switch";
-import { ValueSelectPort } from "./core_port_select";
+import { Logger } from "cables-shared-client";
+import { EventTarget } from "./eventtarget.js";
+import { UTILS, cleanJson, shortId } from "./utils.js";
+import { CONSTANTS } from "./constants.js";
+import { Port } from "./core_port.js";
+import { SwitchPort } from "./core_port_switch.js";
+import { ValueSelectPort } from "./core_port_select.js";
 
 /**
  * op the class of all operators
@@ -148,13 +148,6 @@ const Op = function ()
         if (this.storage) return (this.storage.subPatchVer || 0);
     };
 
-
-    // Op.isSubPatchOpName = function (name)
-    // {
-    //     return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
-    // };
-
-
     const _setUiAttrib = function (newAttribs)
     {
         if (!newAttribs) return;
@@ -220,10 +213,6 @@ const Op = function ()
     Op.prototype.getName = function ()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
-
-
-        // return this.objName.split(".");
-
         return this.name;
     };
 
@@ -235,12 +224,6 @@ const Op = function ()
         this.emitEvent("onPortAdd", p);
         return p;
     };
-
-    // Op.prototype.hasPort = function(name) {
-    //     for (var ipi = 0; ipi < this.portsIn.length; ipi++)
-    //         if (this.portsIn[i].getName() == name) return true;
-    //     return false;
-    // };
 
     Op.prototype.hasDynamicPort = function ()
     {
@@ -264,13 +247,11 @@ const Op = function ()
         if (!(p instanceof Port))
             throw new Error("parameter is not a port!");
 
-
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p._op = this;
 
         this.portsIn.push(p);
         this.emitEvent("onPortAdd", p);
-
 
         return p;
     };
@@ -1548,7 +1529,7 @@ const Op = function ()
 
     /**
      * Implement to render 2d canvas based graphics from in an op
-     * @function isCurrentUiOp
+     * @function renderVizLayer
      * @instance
      * @memberof Op
      * @param {ctx} context of canvas 2d

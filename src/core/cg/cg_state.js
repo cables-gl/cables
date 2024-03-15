@@ -1,12 +1,10 @@
-import { EventTarget } from "../eventtarget";
-import { CgCanvas } from "./cg_canvas";
-import { CG } from "./cg_constants";
-import { MatrixStack } from "./cg_matrixstack";
-import Preprocessor from "./preproc";
+import { Events } from "cables-shared-client";
+import { CgCanvas } from "./cg_canvas.js";
+import { MatrixStack } from "./cg_matrixstack.js";
 
 
 // const CGState ()
-class CGState extends EventTarget
+class CGState extends Events
 {
     constructor(_patch)
     {

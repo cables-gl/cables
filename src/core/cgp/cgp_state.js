@@ -1,6 +1,6 @@
-import { CG } from "../cg/cg_constants";
-import { CGState } from "../cg/cg_state";
-import Shader from "./cgp_shader";
+import { CG } from "../cg/cg_constants.js";
+import { CGState } from "../cg/cg_state.js";
+import Shader from "./cgp_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 
 /**

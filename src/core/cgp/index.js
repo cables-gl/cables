@@ -1,8 +1,8 @@
-import { WebGpuContext } from "./cgp_state";
-import Shader from "./cgp_shader";
-import Mesh from "./cgp_mesh";
-import Pipeline from "./cgp_pipeline";
-import Texture from "./cgp_texture";
+import { WebGpuContext } from "./cgp_state.js";
+import Shader from "./cgp_shader.js";
+import Mesh from "./cgp_mesh.js";
+import Pipeline from "./cgp_pipeline.js";
+import Texture from "./cgp_texture.js";
 
 const CGP = {
     "Context": WebGpuContext,

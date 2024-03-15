@@ -1,8 +1,8 @@
 // * see framebuffer1
 
 
-import { Texture } from "./cgl_texture";
-import Logger from "../core_logger";
+import { Logger } from "cables-shared-client";
+import { Texture } from "./cgl_texture.js";
 
 
 const Framebuffer2 = function (cgl, w, h, options)

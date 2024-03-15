@@ -1,4 +1,4 @@
-import { MESHES } from "../../../core/cgl/cgl_simplerect";
+import { MESHES } from "../../../core/cgl/cgl_simplerect.js";
 
 class CopyTexture
 {

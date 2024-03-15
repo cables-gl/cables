@@ -1,4 +1,4 @@
-import CgUniform from "../cg/cg_uniform";
+import CgUniform from "../cg/cg_uniform.js";
 
 export default class Uniform extends CgUniform
 {

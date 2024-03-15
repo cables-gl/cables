@@ -1,5 +1,5 @@
-import { Uniform } from "../cgl/cgl_shader_uniform";
-import UniformBuffer from "./cgp_uniformbuffer";
+import { Uniform } from "../cgl/cgl_shader_uniform.js";
+import UniformBuffer from "./cgp_uniformbuffer.js";
 
 export default class Pipeline
 {

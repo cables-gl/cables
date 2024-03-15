@@ -1,3 +1,3 @@
-import { CubemapFramebuffer } from "./cubemapframebuffer";
+import { CubemapFramebuffer } from "./cubemapframebuffer.js";
 
 CGL.CubemapFramebuffer = CubemapFramebuffer;

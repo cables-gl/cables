@@ -1,9 +1,10 @@
-const path = require("path");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const glMatrix = require("gl-matrix");
+import path from "path";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import glMatrix from "gl-matrix";
 
-module.exports = (isProduction) =>
+export default (isProduction) =>
 {
+    const __dirname = new URL(".", import.meta.url).pathname;
     return {
         "mode": isProduction ? "production" : "development",
         "entry": [
@@ -19,9 +20,13 @@ module.exports = (isProduction) =>
             "globalObject": "window",
         },
         "stats": isProduction,
-        "optimization": { "minimize": isProduction },
+        "optimization": {
+            "minimize": isProduction,
+            "usedExports": true
+        },
         "module": {
             "rules": [
+                { "sideEffects": false },
                 {
                     "test": /\.frag/,
                     "use": "raw-loader",

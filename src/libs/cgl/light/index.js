@@ -3,7 +3,7 @@ import {
     getShadowPassFragmentShader,
     getBlurPassVertexShader,
     getBlurPassFragmentShader
-} from "./createshaders";
+} from "./createshaders.js";
 
 /**
  *

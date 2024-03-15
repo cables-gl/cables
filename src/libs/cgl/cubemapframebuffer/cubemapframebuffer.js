@@ -1,4 +1,4 @@
-import { CubemapTexture } from "./cubemaptexture";
+import { CubemapTexture } from "./cubemaptexture.js";
 
 class CubemapFramebuffer
 {

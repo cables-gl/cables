@@ -1,5 +1,5 @@
-import { CONSTANTS } from "./constants";
-import { EventTarget } from "./eventtarget";
+import { CONSTANTS } from "./constants.js";
+import { EventTarget } from "./eventtarget.js";
 
 /**
  * @external CABLES

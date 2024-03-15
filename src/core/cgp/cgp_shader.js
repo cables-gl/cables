@@ -1,7 +1,6 @@
-import Logger from "../core_logger";
-import { simpleId } from "../utils";
-import Uniform from "./cgp_uniform";
-import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
+import { Logger } from "cables-shared-client";
+import { simpleId } from "../utils.js";
+import Uniform from "./cgp_uniform.js";
 
 export default class Shader
 {

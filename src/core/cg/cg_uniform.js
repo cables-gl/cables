@@ -1,5 +1,5 @@
-import Logger from "../core_logger";
-import { Port } from "../core_port";
+import { Logger } from "cables-shared-client";
+import { Port } from "../core_port.js";
 
 class CgUniform
 {

@@ -1,5 +1,6 @@
-import { generateUUID } from "./utils";
-import Logger from "./core_logger";
+import { Logger } from "cables-shared-client";
+import { generateUUID } from "./utils.js";
+import { EventTarget } from "./eventtarget.js";
 
 /**
  * LoadingStatus class, manages asynchronous loading jobs
@@ -11,7 +12,7 @@ import Logger from "./core_logger";
  */
 const LoadingStatus = function (patch)
 {
-    CABLES.EventTarget.apply(this);
+    EventTarget.apply(this);
 
     this._log = new Logger("LoadingStatus");
     this._loadingAssets = {};

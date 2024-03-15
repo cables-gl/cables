@@ -1,5 +1,5 @@
-import { WireframeCube } from "./cgl_wireframecube";
-import { WireframeRect } from "./cgl_wireframerect";
+import { WireframeCube } from "./cgl_wireframecube.js";
+import { WireframeRect } from "./cgl_wireframerect.js";
 
 
 CGL.WireframeCube = WireframeCube;

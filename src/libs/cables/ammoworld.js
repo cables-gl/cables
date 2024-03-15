@@ -1,7 +1,8 @@
 // https://stackoverflow.com/questions/12251199/re-positioning-a-rigid-body-in-bullet-physics
 // https://github.com/InfiniteLee/ammo-debug-drawer
+import { Events } from "cables-shared-client";
 
-const AmmoWorld = class extends CABLES.EventTarget
+const AmmoWorld = class extends Events
 {
     constructor()
     {

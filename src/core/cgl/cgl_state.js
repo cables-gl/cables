@@ -1,9 +1,9 @@
-import { CONSTANTS } from "./constants";
-import { Shader } from "./cgl_shader";
-import { ProfileData } from "./cgl_profiledata";
-import Logger from "../core_logger";
-import { CGState } from "../cg/cg_state";
-import { CG } from "../cg/cg_constants";
+import { Logger } from "cables-shared-client";
+import { CONSTANTS } from "./constants.js";
+import { Shader } from "./cgl_shader.js";
+import { ProfileData } from "./cgl_profiledata.js";
+import { CGState } from "../cg/cg_state.js";
+import { CG } from "../cg/cg_constants.js";
 
 
 /**

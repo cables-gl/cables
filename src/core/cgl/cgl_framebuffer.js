@@ -1,5 +1,5 @@
-import Logger from "../core_logger";
-import { Texture } from "./cgl_texture";
+import { Logger } from "cables-shared-client";
+import { Texture } from "./cgl_texture.js";
 
 // todo: convert to prototyped...
 

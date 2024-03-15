@@ -1,8 +1,8 @@
-import { EventTarget } from "./eventtarget";
-import { Anim, ANIM } from "./anim";
-import { CONSTANTS } from "./constants";
-import Logger from "./core_logger";
-import { cleanJson } from "./utils";
+import { Logger } from "cables-shared-client";
+import { EventTarget } from "./eventtarget.js";
+import { Anim, ANIM } from "./anim.js";
+import { CONSTANTS } from "./constants.js";
+import { cleanJson } from "./utils.js";
 
 
 /**
@@ -157,8 +157,6 @@ Port.prototype.getValueForDisplay = function ()
             else str += "true";
         }
 
-        // str = str.replace(/(<([^>]+)>)/ig, "");
-
         str = str.replace(/[\u00A0-\u9999<>\&]/g, function (i)
         {
             return "&#" + i.charCodeAt(0) + ";";
@@ -187,7 +185,6 @@ Port.prototype.getValueForDisplay = function ()
  * }
  *
  */
-
 Port.prototype.onAnimToggle = function () {};
 Port.prototype._onAnimToggle = function ()
 {

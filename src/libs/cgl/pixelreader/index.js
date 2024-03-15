@@ -1,3 +1,3 @@
-import { PixelReader } from "./pixelreader";
+import { PixelReader } from "./pixelreader.js";
 
 CGL.PixelReader = PixelReader;
