@@ -166,24 +166,9 @@
             "date": 1580991292936
         },
         {
-            "message": "Ops.Admin.GltfScene2 renamed to Ops.Gl.GLTF.GltfScene.GltfScene_v2",
-            "author": "pandur",
-            "date": 1582026869490
-        },
-        {
             "message": "cloned op from Ops.Gl.GLTF.GltfScene_v2",
             "author": "pandur",
             "date": 1617707426580
-        },
-        {
-            "message": "Ops.User.pandur.MyTestGLTF renamed to Ops.Gl.GLTF.GltfScene_v3",
-            "author": "pandur",
-            "date": 1617712099220
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "pandur",
-            "date": 1634219748194
         },
         {
             "message": "fix animation not playing when using skinned mesh with assigned material shaders",
@@ -203,28 +188,25 @@
         {
             "message": "warn user visually when file was not found",
             "author": "pandur",
-            "date": 1643616715384
+            "date": 1643616715384,
+            "type": "improvement"
         },
         {
             "message": "compatibility with more glb files",
             "author": "pandur",
-            "date": 1643616726676
+            "date": 1643616726676,
+            "type": "improvement"
         },
         {
             "message": "add support for dataurls",
             "author": "stephan",
-            "date": 1646674536478
+            "date": 1646674536478,
+            "type": "improvement"
         },
         {
             "message": "cloned op from Ops.Gl.GLTF.GltfScene_v3",
             "author": "pandur",
             "date": 1689944927593
-        },
-        {
-            "message": "Ops.Patch.PCZfAUB.GltfScene4 renamed to Ops.Gl.GLTF.GltfScene_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1689946635468
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

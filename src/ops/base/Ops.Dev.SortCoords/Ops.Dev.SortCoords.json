@@ -1,0 +1,42 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Sort index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "pandur",
+    "authorName": "pandur",
+    "id": "deed6b4c-6139-4ae2-b081-f2e3b116cf87",
+    "created": 1710435491832,
+    "summary": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Dev.Gl.ImageCompose.SortPixels",
+            "author": "pandur",
+            "date": 1710435491832
+        }
+    ]
+}

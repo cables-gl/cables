@@ -45,24 +45,9 @@
     },
     "changelog": [
         {
-            "message": "Ops.Deprecated.Gl.TextureEffects.FastBlur renamed to Ops.Gl.TextureEffects.FastBlur",
-            "author": "pandur",
-            "date": 1573490089072
-        },
-        {
             "message": "cloned op from Ops.Gl.TextureEffects.FastBlur",
             "author": "pandur",
             "date": 1650882627103
-        },
-        {
-            "message": "Ops.User.pandur.FastBlurV2 renamed to Ops.Dev.FastBlurV2",
-            "author": "pandur",
-            "date": 1650882706355
-        },
-        {
-            "message": "Ops.Dev.FastBlurV2 renamed to Ops.Gl.TextureEffects.FastBlur_v2",
-            "author": "pandur",
-            "date": 1653286483194
         },
         {
             "message": "Ops.Gl.TextureEffects.FastBlur_v2 renamed to Ops.Gl.ImageCompose.FastBlur_v2",
@@ -71,9 +56,8 @@
             "date": 1701854628200
         }
     ],
-    "summary": "Blurs a texture  - cheap and fast",
+    "summary": "Blurs a texture  - simple and fast",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -82,16 +66,8 @@
                 "text": "Trigger in"
             },
             {
-                "name": "amount",
-                "text": "Amount of blur"
-            },
-            {
                 "name": "Clamp",
                 "text": "Clamp texture output"
-            },
-            {
-                "name": "direction",
-                "text": "Both , vertical or horizontal"
             },
             {
                 "name": "trigger",
