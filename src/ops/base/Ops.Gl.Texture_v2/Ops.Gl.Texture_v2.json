@@ -93,12 +93,12 @@
             {
                 "type": 0,
                 "name": "Loaded",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Loading",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },

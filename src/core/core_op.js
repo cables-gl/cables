@@ -157,8 +157,7 @@ const Op = function ()
             this._log.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
         }
 
-        // if (newAttribs.warning) this._log.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
-        // if (newAttribs.hint) this._log.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
+
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
@@ -175,6 +174,11 @@ const Op = function ()
             )) emitMove = true;
 
 
+        if (newAttribs.hasOwnProperty("disabled"))
+        {
+            this.setEnabled(!newAttribs.disabled);
+        }
+
         let changed = false;
         for (const p in newAttribs)
         {
@@ -190,6 +194,7 @@ const Op = function ()
             this.emitEvent("onUiAttribsChange", newAttribs);
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
+
 
         if (emitMove) this.emitEvent("move");
     };
@@ -1008,7 +1013,6 @@ const Op = function ()
         if (this.opId) op.opId = this.opId;
         if (this.patch.storeObjNames) op.objName = this.objName;
 
-        if (!this.enabled)op.disabled = true;
 
         op.id = this.id;
         op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
