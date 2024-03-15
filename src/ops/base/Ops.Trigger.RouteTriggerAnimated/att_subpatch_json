@@ -4,7 +4,7 @@
       "opId": "44ceb5d8-b040-4722-b189-a6fb8172517d",
       "id": "mpvfm6g3x",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -264.0214073662488,
           "y": 287.28319710106143
@@ -16,7 +16,7 @@
       "portsOut": [
         {
           "name": "Switched Value",
-          "value": 3
+          "value": 0
         },
         {
           "name": "Trigger 0",
@@ -112,6 +112,39 @@
             {
               "portIn": "innerIn_93jpxulns",
               "portOut": "Trigger 8",
+              "objIn": "xa9a2c9tx",
+              "objOut": "mpvfm6g3x"
+            }
+          ]
+        },
+        {
+          "name": "Trigger 9",
+          "links": [
+            {
+              "portIn": "innerIn_a0w7orgi8",
+              "portOut": "Trigger 9",
+              "objIn": "xa9a2c9tx",
+              "objOut": "mpvfm6g3x"
+            }
+          ]
+        },
+        {
+          "name": "Trigger 10",
+          "links": [
+            {
+              "portIn": "innerIn_r8h4qx4z8",
+              "portOut": "Trigger 10",
+              "objIn": "xa9a2c9tx",
+              "objOut": "mpvfm6g3x"
+            }
+          ]
+        },
+        {
+          "name": "Trigger 11",
+          "links": [
+            {
+              "portIn": "innerIn_cr80a86xi",
+              "portOut": "Trigger 11",
               "objIn": "xa9a2c9tx",
               "objOut": "mpvfm6g3x"
             }
@@ -123,7 +156,7 @@
       "opId": "44ceb5d8-b040-4722-b189-a6fb8172517d",
       "id": "1d7nx9622",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 530.9755941311255,
           "y": 263.7583961668417
@@ -135,7 +168,7 @@
       "portsOut": [
         {
           "name": "Switched Value",
-          "value": 5
+          "value": 0
         },
         {
           "name": "Trigger 0",
@@ -235,6 +268,39 @@
               "objOut": "1d7nx9622"
             }
           ]
+        },
+        {
+          "name": "Trigger 9",
+          "links": [
+            {
+              "portIn": "innerIn_a0w7orgi8",
+              "portOut": "Trigger 9",
+              "objIn": "xa9a2c9tx",
+              "objOut": "1d7nx9622"
+            }
+          ]
+        },
+        {
+          "name": "Trigger 10",
+          "links": [
+            {
+              "portIn": "innerIn_r8h4qx4z8",
+              "portOut": "Trigger 10",
+              "objIn": "xa9a2c9tx",
+              "objOut": "1d7nx9622"
+            }
+          ]
+        },
+        {
+          "name": "Trigger 11",
+          "links": [
+            {
+              "portIn": "innerIn_cr80a86xi",
+              "portOut": "Trigger 11",
+              "objIn": "xa9a2c9tx",
+              "objOut": "1d7nx9622"
+            }
+          ]
         }
       ]
     },
@@ -242,7 +308,7 @@
       "opId": "f5c8c433-ce13-49c4-9a33-74e98f110ed0",
       "id": "yvm8dnrk7",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 283.97171475667534,
           "y": -586.5189760062061
@@ -286,7 +352,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "vcg7s3djw",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -35.86815839218056,
           "y": -900.2297800412684
@@ -338,7 +404,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "xa9a2c9tx",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 156.74720975989365,
           "y": 514.02229507125
@@ -387,6 +453,18 @@
         {
           "name": "innerIn_93jpxulns",
           "title": "Trigger 8"
+        },
+        {
+          "name": "innerIn_a0w7orgi8",
+          "title": "Trigger 9"
+        },
+        {
+          "name": "innerIn_r8h4qx4z8",
+          "title": "Trigger 10"
+        },
+        {
+          "name": "innerIn_cr80a86xi",
+          "title": "Trigger 11"
         }
       ]
     },
@@ -394,7 +472,7 @@
       "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
       "id": "2zlac8bz5",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -23.86815839218056,
           "y": -584.2682290681564
@@ -448,7 +526,7 @@
       "opId": "01716872-67bd-4b31-a4a2-e0ccadf48411",
       "id": "cbk13xl8z",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 295.97171475667534,
           "y": 10.568092833846578
@@ -485,7 +563,7 @@
       "opId": "5b244b6e-c505-4743-b2cc-8119ef720028",
       "id": "j1f4avukd",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -670.4394153470448,
           "y": -195.18024439296633
@@ -533,7 +611,7 @@
         },
         {
           "name": "finished",
-          "value": true
+          "value": false
         }
       ]
     },
@@ -543,7 +621,7 @@
       "uiAttribs": {
         "widthOnlyGrow": true,
         "extendTitle": " 1",
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -670.5815114358084,
           "y": -74.90132115544452
@@ -569,7 +647,7 @@
       "opId": "5b244b6e-c505-4743-b2cc-8119ef720028",
       "id": "0nin377vm",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -497.6755661331112,
           "y": -209.77675328577104
@@ -617,7 +695,7 @@
         },
         {
           "name": "finished",
-          "value": true
+          "value": false
         }
       ]
     },
@@ -626,8 +704,8 @@
       "id": "ootclx44p",
       "uiAttribs": {
         "widthOnlyGrow": true,
-        "extendTitle": " 0",
-        "subPatch": "76mdn48o8",
+        "extendTitle": " 1",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -485.6755661331112,
           "y": -74.90132115544452
@@ -659,7 +737,7 @@
       "opId": "9989b1c0-1073-4d5f-bfa0-36dd98b66e27",
       "id": "q5q2klxc0",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -264.0214073662488,
           "y": 140.34796471554233
@@ -696,7 +774,7 @@
       "opId": "9989b1c0-1073-4d5f-bfa0-36dd98b66e27",
       "id": "ttpt3akp2",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 533.1013354710371,
           "y": 158.98092065139974
@@ -733,7 +811,7 @@
       "opId": "9e8a4b73-4ba7-4c4f-b266-81c5f9db9b7a",
       "id": "m0e1nn8qn",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 533.1013354710371,
           "y": 49.88156832009409
@@ -760,7 +838,7 @@
       "id": "eocpn56rh",
       "uiAttribs": {
         "title": "duration",
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": -488.3251902393844,
           "y": -398.2698439680514
@@ -792,7 +870,7 @@
       "opId": "9549e2ed-a544-4d33-a672-05c7854ccf5d",
       "id": "x5lzdluen",
       "uiAttribs": {
-        "subPatch": "76mdn48o8",
+        "subPatch": "uyoggpqnl",
         "translate": {
           "x": 533.1013354710371,
           "y": -140.2482492323043

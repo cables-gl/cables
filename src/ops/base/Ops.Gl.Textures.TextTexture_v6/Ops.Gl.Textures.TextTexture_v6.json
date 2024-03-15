@@ -213,6 +213,10 @@
                 "name": "background A",
                 "group": "Background",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Force Redraw"
             }
         ],
         "portsOut": [
