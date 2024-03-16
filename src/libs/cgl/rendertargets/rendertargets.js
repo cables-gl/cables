@@ -100,8 +100,8 @@ class RenderTargets
             let str = ""
                 .endl() + "#ifndef OIT_WEIGHT"
                 .endl() + "#define OIT_WEIGHT"
-                // .endl() + "    float oitWeight=clamp(pow(min(1.0, col.a * 10.0) + 0.01, 3.0) * 1e8 * pow(1.0 - gl_FragCoord.z * 0.9, 3.0), 1e-2, 3e3);"
-                .endl() + "    float oitWeight=100.0*exp(gl_FragCoord.z*gl_FragCoord.z);"
+                .endl() + "    float oitWeight=clamp(pow(min(1.0, col.a * 10.0) + 0.01, 3.0) * 1e8 * pow(1.0 - gl_FragCoord.z * 0.9, 3.0), 1e-2, 3e3);"
+                // .endl() + "    float oitWeight=100.0*exp(gl_FragCoord.z*gl_FragCoord.z);"
                 .endl() + "#endif"
                 .endl();
 
