@@ -45,6 +45,8 @@ const
     bgB = op.inValueSlider("background B", 0),
     bgA = op.inValueSlider("background A", 1),
 
+    inRedraw = op.inTriggerButton("Force Redraw"),
+
     next = op.outTrigger("Next"),
     outRatio = op.outNumber("Ratio"),
     textureOut = op.outTexture("texture"),
@@ -72,11 +74,12 @@ render.onLinkChanged = () =>
     else textureOut.setRef(tex);
 };
 
-r.onChange =
-g.onChange =
-b.onChange =
-inOpacity.onChange =
-valign.onChange =
+inRedraw.onTriggered =
+    r.onChange =
+    g.onChange =
+    b.onChange =
+    inOpacity.onChange =
+    valign.onChange =
     texSizeManBreak.onChange =
     texSizeAutoHeight.onChange =
     inLineHeight.onChange =

@@ -182,13 +182,13 @@ function doRender()
         const imgTex = cgl.currentTextureEffect.getCurrentSourceTexture();
         cgl.setTexture(0, imgTex.tex);
 
-        if (imgTex && tex)
-        {
-            if (tex.textureType != imgTex.textureType && (tex.textureType == CGL.Texture.TYPE_FLOAT))
-                op.setUiError("textypediff", "Drawing 32bit texture into an 8 bit can result in data/precision loss", 1);
-            else
-                op.setUiError("textypediff", null);
-        }
+        // if (imgTex && tex)
+        // {
+        //     if (tex.textureType != imgTex.textureType && (tex.textureType == CGL.Texture.TYPE_FLOAT))
+        //         op.setUiError("textypediff", "Drawing 32bit texture into an 8 bit can result in data/precision loss", 1);
+        //     else
+        //         op.setUiError("textypediff", null);
+        // }
 
         const asp = 1 / (cgl.currentTextureEffect.getWidth() / cgl.currentTextureEffect.getHeight()) * (tex.width / tex.height);
         // uniTexAspect.setValue(1 / (tex.height / tex.width * imgTex.width / imgTex.height));

@@ -37,6 +37,15 @@ port_0s04tm21u.setUiAttribs({ "title": "Trigger 7", });
 const port_93jpxulns = op.outTrigger("93jpxulns");
 port_93jpxulns.setUiAttribs({ "title": "Trigger 8", });
 
+const port_a0w7orgi8 = op.outTrigger("a0w7orgi8");
+port_a0w7orgi8.setUiAttribs({ "title": "Trigger 9", });
+
+const port_r8h4qx4z8 = op.outTrigger("r8h4qx4z8");
+port_r8h4qx4z8.setUiAttribs({ "title": "Trigger 10", });
+
+const port_cr80a86xi = op.outTrigger("cr80a86xi");
+port_cr80a86xi.setUiAttribs({ "title": "Trigger 11", });
+
 op.initInnerPorts = function (addedOps)
 {
     for (let i = 0; i < addedOps.length; i++)
@@ -98,6 +107,18 @@ op.initInnerPorts = function (addedOps)
             const innerIn_93jpxulns = addedOps[i].inTrigger("innerIn_93jpxulns");
             innerIn_93jpxulns.setUiAttribs({ "title": "Trigger 8" });
             innerIn_93jpxulns.onTriggered = () => { port_93jpxulns.trigger(); };
+
+            const innerIn_a0w7orgi8 = addedOps[i].inTrigger("innerIn_a0w7orgi8");
+            innerIn_a0w7orgi8.setUiAttribs({ "title": "Trigger 9" });
+            innerIn_a0w7orgi8.onTriggered = () => { port_a0w7orgi8.trigger(); };
+
+            const innerIn_r8h4qx4z8 = addedOps[i].inTrigger("innerIn_r8h4qx4z8");
+            innerIn_r8h4qx4z8.setUiAttribs({ "title": "Trigger 10" });
+            innerIn_r8h4qx4z8.onTriggered = () => { port_r8h4qx4z8.trigger(); };
+
+            const innerIn_cr80a86xi = addedOps[i].inTrigger("innerIn_cr80a86xi");
+            innerIn_cr80a86xi.setUiAttribs({ "title": "Trigger 11" });
+            innerIn_cr80a86xi.onTriggered = () => { port_cr80a86xi.trigger(); };
         }
     }
 };

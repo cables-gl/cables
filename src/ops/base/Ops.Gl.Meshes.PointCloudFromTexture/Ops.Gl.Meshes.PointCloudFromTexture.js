@@ -77,8 +77,8 @@ function doRender()
         mesh.render(cgl.getShader());
     }
 
-    trigger.trigger();
     mod.unbind();
+    trigger.trigger();
 }
 
 function setupMesh()

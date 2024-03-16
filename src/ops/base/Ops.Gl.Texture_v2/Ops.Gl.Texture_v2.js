@@ -13,8 +13,8 @@ const
     width = op.outNumber("Width"),
     height = op.outNumber("Height"),
     ratio = op.outNumber("Aspect Ratio"),
-    loaded = op.outNumber("Loaded", false),
-    loading = op.outNumber("Loading", false);
+    loaded = op.outBoolNum("Loaded", 0),
+    loading = op.outBoolNum("Loading", 0);
 
 const cgl = op.patch.cgl;
 

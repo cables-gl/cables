@@ -941,7 +941,7 @@ Patch.prototype.deSerialize = function (obj, options)
             op.portsInData = opData.portsIn;
             op._origData = JSON.parse(JSON.stringify(opData));
             op.storage = opData.storage;
-            if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
+            // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
             for (const ipi in opData.portsIn)
             {
