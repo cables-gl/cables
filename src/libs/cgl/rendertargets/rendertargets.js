@@ -61,6 +61,8 @@ class RenderTargets
             "Normal",
             "Normal World",
             "Normal * ModelView",
+            "OIT Accum",
+            "OIT Revealage",
             "FragCoord.z",
             "TexCoord",
             "Black",
@@ -92,6 +94,23 @@ class RenderTargets
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(round(materialId),round(instIdx),0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
+
+        else if (type.contains("OIT "))
+        {
+            let str = ""
+                .endl() + "#ifndef OIT_WEIGHT"
+                .endl() + "#define OIT_WEIGHT"
+                // .endl() + "    float oitWeight=clamp(pow(min(1.0, col.a * 10.0) + 0.01, 3.0) * 1e8 * pow(1.0 - gl_FragCoord.z * 0.9, 3.0), 1e-2, 3e3);"
+                .endl() + "    float oitWeight=100.0*exp(gl_FragCoord.z*gl_FragCoord.z);"
+                .endl() + "#endif"
+                .endl();
+
+            if (type == "OIT Revealage") str += "    " + outcolor + i + " = vec4(col.a*oitWeight,1.0,1.0,1.0);".endl();
+            if (type == "OIT Accum") str += ""
+                .endl() + "    " + outcolor + i + " = vec4(col.rgb * col.a * oitWeight, col.a);";
+
+            return str;
+        }
     }
 
     getSrcFrag()

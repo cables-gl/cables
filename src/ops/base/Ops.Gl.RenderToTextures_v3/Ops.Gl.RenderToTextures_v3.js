@@ -163,12 +163,6 @@ function doRender()
         height.set(cgl.canvasHeight);
     }
 
-    // if (useVPSize.get())
-    // {
-    //     width.set(cgl.getViewPort()[2]);
-    //     height.set(cgl.getViewPort()[3]);
-    // }
-
     if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get())) fb.setSize(width.get(), height.get());
 
     fb.renderStart(cgl);
