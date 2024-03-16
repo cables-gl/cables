@@ -25,10 +25,6 @@ render.onTriggered = function ()
         return;
     }
 
-    // cgl.pushBlend(true);
-    // cgl.gl.blendFunc(cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.SRC_ALPHA);
-    // cgl.popBlend();
-
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
@@ -36,7 +32,12 @@ render.onTriggered = function ()
     if (inTexAccum.get()) cgl.setTexture(1, inTexAccum.get().tex);
     if (inTexReveal.get()) cgl.setTexture(2, inTexReveal.get().tex);
 
+    // cgl.pushBlend(true);
+    // cgl.gl.blendFunc(cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.SRC_ALPHA);
+
     cgl.currentTextureEffect.finish();
+
+    cgl.popBlend();
     cgl.popShader();
 
     trigger.trigger();

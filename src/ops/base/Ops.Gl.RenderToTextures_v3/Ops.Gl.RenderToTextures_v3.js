@@ -128,16 +128,17 @@ function doRender()
             if (msaa.get() == "4x")msSamples = 4;
             if (msaa.get() == "8x")msSamples = 8;
 
-            fb = new CGL.Framebuffer2(cgl, 8, 8, {
-                "numRenderBuffers": numSlots,
-                "isFloatingPointTexture": floatingPoint,
-                "multisampling": ms,
-                "depth": true,
-                "multisamplingSamples": msSamples,
-                "wrap": getWrap(),
-                "filter": getFilter(),
-                "clear": clear.get()
-            });
+            fb = new CGL.Framebuffer2(cgl, 8, 8,
+                {
+                    "numRenderBuffers": numSlots,
+                    "isFloatingPointTexture": floatingPoint,
+                    "multisampling": ms,
+                    "depth": true,
+                    "multisamplingSamples": msSamples,
+                    "wrap": getWrap(),
+                    "filter": getFilter(),
+                    "clear": clear.get()
+                });
         }
         else
         {
@@ -163,9 +164,15 @@ function doRender()
         height.set(cgl.canvasHeight);
     }
 
+    // fb.clear(2, [1, 1, 1, 1]);
+
     if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get())) fb.setSize(width.get(), height.get());
 
     fb.renderStart(cgl);
+
+    // fb.clearColors[2] = [0, 0, 1, 1];
+    // fb.clear();
+
     cgl.frameStore.forceShaderMods = cgl.frameStore.forceShaderMods || [];
     cgl.frameStore.forceShaderMods.push(mod);
 

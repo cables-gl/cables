@@ -8,9 +8,11 @@ UNI sampler2D texAccum;
 
 void main()
 {
-    // vec4 col=texture(tex,texCoord);
-    vec4 colReveal=texture(texReveal,texCoord);
-    vec4 accum=texture(texAccum,texCoord);
+    ivec2 fragCoord = ivec2(gl_FragCoord.xy);
+
+    vec4 tex=texelFetch(tex,fragCoord,0);
+    vec4 colReveal=texelFetch(texReveal,fragCoord,0);
+    vec4 accum=texelFetch(texAccum,fragCoord,0);
 
 
     float a = 1.0 - accum.a;
@@ -18,6 +20,8 @@ void main()
 
     vec4 col=vec4(a * accum.rgb / clamp(accum.a, 0.001, 50000.0), a);
 
+
+    col=mix(col,tex,1.0-a);
 
     outColor=col;
 }

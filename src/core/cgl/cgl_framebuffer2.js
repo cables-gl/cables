@@ -64,6 +64,10 @@ const Framebuffer2 = function (cgl, w, h, options)
     this._numRenderBuffers = this._options.numRenderBuffers;
     this._colorTextures = [];
 
+    this.clearColors = [];
+    for (let i = 0; i < this._numRenderBuffers; i++) this.clearColors.push([0, 0, 0, 1]);
+
+
     if (!options.pixelFormat)
     {
         if (options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
@@ -399,7 +403,7 @@ Framebuffer2.prototype.clear = function ()
     for (let i = 0; i < this._numRenderBuffers; i++)
     {
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
-        this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [0.0, 0.0, 0.0, 0.0]);
+        this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, this.clearColors[i]);
     }
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 };

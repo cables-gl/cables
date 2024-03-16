@@ -105,7 +105,7 @@ class RenderTargets
                 .endl() + "#endif"
                 .endl();
 
-            if (type == "OIT Revealage") str += "    " + outcolor + i + " = vec4(col.a*oitWeight,1.0,1.0,1.0);".endl();
+            if (type == "OIT Revealage") str += "    " + outcolor + i + " = vec4(col.a*oitWeight,col.a,1.0,1.0);".endl();
             if (type == "OIT Accum") str += ""
                 .endl() + "    " + outcolor + i + " = vec4(col.rgb * col.a * oitWeight, col.a);";
 

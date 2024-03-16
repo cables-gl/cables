@@ -199,8 +199,6 @@ TextureEffect.prototype.finish = function ()
 
     this._cgl.profileData.profileTextureEffect++;
 
-    // this._textureTarget.updateMipMap();
-
     if (this._textureTarget.filter == Texture.FILTER_MIPMAP)
     {
         if (!this.switched)
