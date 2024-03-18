@@ -1,0 +1,54 @@
+{
+    "id": "6d455fb3-e01d-4c40-8e92-f19879fe7aba",
+    "created": 1710763211751,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1710763211794
+        },
+        {
+            "message": " removed lib: resemble.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1710763246034
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Image 1"
+            },
+            {
+                "type": 5,
+                "name": "Image 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Difference Image"
+            },
+            {
+                "type": 0,
+                "name": "Mismatch Percentage",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Same Dimensions",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ]
+    },
+    "libs": [
+        "resemble.js"
+    ]
+}
