@@ -18,7 +18,8 @@ const
     outY = op.outNumber("Y"),
     outDir = op.outNumber("Dir"),
     outColliding = op.outBoolNum("Colliding"),
-    outInBarrier = op.outBoolNum("In Barrier");
+    outInBarrier = op.outBoolNum("In Barrier"),
+    outValuesChanged = op.outTrigger("Changed");
 
 let lastTime = performance.now();
 let dir = 0;
@@ -26,7 +27,7 @@ let canvas = null;
 
 function getCanvasPixel(ctx, x, y)
 {
-    if (x != x || y != y || x == Infinity || y == Infinity || x > canvas.width * 2 || y > canvas.heigth * 2) return 0;
+    if (x < 0 || y < 0 || x != x || y != y || x == Infinity || y == Infinity || x > canvas.width * 2 || y > canvas.heigth * 2) return 0;
 
     let wc = Math.ceil(inCanvasTestSize.get() / 2) + 0.5;
     let wf = Math.floor(inCanvasTestSize.get() / 2);
@@ -36,15 +37,23 @@ function getCanvasPixel(ctx, x, y)
     // || y > canvas.height - w
 
     let r = 0;
-    r += ctx.getImageData(x - wf, y - wf, 1, 1).data[0];
-    r += ctx.getImageData(x + wc, y - wf, 1, 1).data[0];
-    r += ctx.getImageData(x + wc, y + wc, 1, 1).data[0];
-    r += ctx.getImageData(x - wf, y + wc, 1, 1).data[0];
 
-    // r += ctx.getImageData(x, y - wf, 1, 1).data[0];
-    // r += ctx.getImageData(x, y + wc, 1, 1).data[0];
-    // r += ctx.getImageData(x - wf, y, 1, 1).data[0];
-    // r += ctx.getImageData(x + wc, y, 1, 1).data[0];
+    if (
+        x - wf < canvas.width &&
+        y - wf < canvas.height &&
+        x + wc < canvas.width &&
+        y - wf < canvas.height &&
+        x + wc < canvas.width &&
+        y + wc < canvas.height &&
+        x - wf < canvas.width &&
+        y + wc < canvas.height
+    )
+    {
+        r += ctx.getImageData(x - wf, y - wf, 1, 1).data[0];
+        r += ctx.getImageData(x + wc, y - wf, 1, 1).data[0];
+        r += ctx.getImageData(x + wc, y + wc, 1, 1).data[0];
+        r += ctx.getImageData(x - wf, y + wc, 1, 1).data[0];
+    }
 
     return r;
 }
@@ -52,94 +61,121 @@ function getCanvasPixel(ctx, x, y)
 exe.onTriggered = function ()
 {
     let ago = (performance.now() - lastTime) / 1000;
-    let x = 0;
-    let y = 0;
-    if (goEast.get()) x += ago * speed.get();
-    if (goWest.get()) x -= ago * speed.get();
-    if (goNorth.get()) y += ago * speed.get();
-    if (goSouth.get()) y -= ago * speed.get();
+    let dx = 0;
+    let dy = 0;
+    if (goEast.get()) dx += ago * speed.get();
+    if (goWest.get()) dx -= ago * speed.get();
+    if (goNorth.get()) dy += ago * speed.get();
+    if (goSouth.get()) dy -= ago * speed.get();
 
     if (goEast.get()) dir = 90;
     if (goWest.get()) dir = 270;
     if (goNorth.get()) dir = 0;
     if (goSouth.get()) dir = 180;
 
-    let newPosX = outX.get() + x;
-    let newPosY = outY.get() + y;
+    // const oldPixelX = outX.get();
+    // const oldPixelY = outY.get();
 
-    let isColliding = false;
-    let isInBarrier = false;
+    let max = Math.max(Math.abs(dx), Math.abs(dy));
 
-    if (inCanvas.get())
+    // console.log(dx,dy,max);
+
+    if (max == 0)max = 1;
+    const stepX = dx / max;
+    const stepY = dy / max;
+
+    if (max > 1000)max = 1000;
+
+    let x = 0;
+    let y = 0;
+
+    // x=dx;
+    // y=dy;
+
+    for (let i = 0; i <= max; i++)
     {
-        canvas = inCanvas.get();
-        let ctx = canvas.getContext("2d");
+        x += stepX;
+        y += stepY;
 
-        if (getCanvasPixel(ctx, newPosX, newPosY))
+        let newPosX = outX.get() + x;
+        let newPosY = outY.get() + y;
+
+        let isColliding = false;
+        let isInBarrier = false;
+
+        if (inCanvas.get())
         {
-            if (Math.random() > 0.5)
-            {
-                newPosX = outX.get() + x;
-                newPosY = outY.get();
-            }
-            else
-            {
-                newPosX = outX.get();
-                newPosY = outY.get() + y;
-            }
+            canvas = inCanvas.get();
+            let ctx = canvas.getContext("2d");
+
             if (getCanvasPixel(ctx, newPosX, newPosY))
             {
                 if (Math.random() > 0.5)
                 {
-                    newPosX = outX.get();
-                    newPosY = outY.get() + y;
-                }
-                else
-                {
                     newPosX = outX.get() + x;
                     newPosY = outY.get();
                 }
-
+                else
+                {
+                    newPosX = outX.get();
+                    newPosY = outY.get() + y;
+                }
                 if (getCanvasPixel(ctx, newPosX, newPosY))
                 {
-                    isColliding = true;
-                    // all failed...
-                    if (
-                        getCanvasPixel(ctx, outX.get(), outY.get()) &&
-                            getCanvasPixel(ctx, outX.get(), outY.get() + 1) &&
-                            getCanvasPixel(ctx, outX.get(), outY.get() - 1) &&
-                            getCanvasPixel(ctx, outX.get() + 1, outY.get()) &&
-                            getCanvasPixel(ctx, outX.get() - 1, outY.get())
-                    )
-                    {
-                        isInBarrier = true;
-
-                        for (let i = 0; i < 200; i++)
-                        {
-                            newPosX = outX.get() + Math.min(1, inDirBarrierX.get());
-                            newPosY = outY.get() + Math.min(1, inDirBarrierY.get());
-                            outX.set(newPosX);
-                            outY.set(newPosY);
-                            if (!getCanvasPixel(ctx, newPosX, newPosY)) break;
-                        }
-                    }
-
-                    else
+                    if (Math.random() > 0.5)
                     {
                         newPosX = outX.get();
+                        newPosY = outY.get() + y;
+                    }
+                    else
+                    {
+                        newPosX = outX.get() + x;
                         newPosY = outY.get();
+                    }
+
+                    if (getCanvasPixel(ctx, newPosX, newPosY))
+                    {
+                        isColliding = true;
+                        // all failed...
+                        if (
+                            getCanvasPixel(ctx, outX.get(), outY.get()) &&
+                                getCanvasPixel(ctx, outX.get(), outY.get() + 1) &&
+                                getCanvasPixel(ctx, outX.get(), outY.get() - 1) &&
+                                getCanvasPixel(ctx, outX.get() + 1, outY.get()) &&
+                                getCanvasPixel(ctx, outX.get() - 1, outY.get())
+                        )
+                        {
+                            isInBarrier = true;
+
+                            for (let i = 0; i < 200; i++)
+                            {
+                                newPosX = outX.get() + Math.min(1, inDirBarrierX.get());
+                                newPosY = outY.get() + Math.min(1, inDirBarrierY.get());
+                                outX.set(newPosX);
+                                outY.set(newPosY);
+                                if (!getCanvasPixel(ctx, newPosX, newPosY)) break;
+                            }
+                        }
+
+                        else
+                        {
+                            newPosX = outX.get();
+                            newPosY = outY.get();
+                        }
                     }
                 }
             }
         }
+
+        outColliding.set(isColliding);
+        outInBarrier.set(isInBarrier);
+
+        outDir.set(dir);
+        outX.set(newPosX);
+        outY.set(newPosY);
+        outValuesChanged.trigger();
     }
 
-    outColliding.set(isColliding);
-    outInBarrier.set(isInBarrier);
-
-    outDir.set(dir);
-    outX.set(newPosX);
-    outY.set(newPosY);
     lastTime = performance.now();
 };
 

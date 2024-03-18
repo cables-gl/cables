@@ -8,6 +8,12 @@
             "type": "",
             "author": "pandur",
             "date": 1708945340334
+        },
+        {
+            "message": "Added class input and style attribute editor",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1710764535096
         }
     ],
     "layout": {
@@ -15,6 +21,14 @@
             {
                 "type": 5,
                 "name": "File"
+            },
+            {
+                "type": 5,
+                "name": "Class"
+            },
+            {
+                "type": 5,
+                "name": "Style"
             }
         ],
         "portsOut": [

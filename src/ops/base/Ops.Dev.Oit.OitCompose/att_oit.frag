@@ -21,7 +21,7 @@ void main()
     vec4 col=vec4(a * accum.rgb / clamp(accum.a, 0.001, 50000.0), a);
 
 
-    col=mix(col,tex,1.0-a);
+    col=mix(col,tex,1.0-a-tex.a);
 
     outColor=col;
 }

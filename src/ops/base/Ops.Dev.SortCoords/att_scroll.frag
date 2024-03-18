@@ -11,14 +11,24 @@ int width;
 int height;
 vec2 texRes;
 
-int xor(int x, int c)
-{
-    int y = 0, s = 1;
-    for (int i = 0; i < 8; i++) {
-        y += s * ((x / s) % 2 ^ (c / s) % 2);
-        s *= 2;
-    }
-    return y;
+// int xor(int x, int c)
+// {
+//     float y = 0.0;
+//     float s = 1.0;
+//     for (float i = 0.0; i < widthF; i++) {
+//         y += float(int(s) * ((x / int(s)) % 2 ^ (c / int(s)) % 2));
+//         s *= 2.0;
+//     }
+//     return int(y);
+// }
+
+int xor(int x, int c) {
+    float y=0., s=1.;
+
+    for (int i=0; i<20; i++)
+       y += s* mod ( floor(float(x)/s)+floor(float(c)/s), 2. ), s*=2. ;
+
+    return int(y);
 }
 
 int id(vec2 U)
@@ -28,7 +38,7 @@ int id(vec2 U)
 
 vec2 idToUV(int id)
 {
-    int y = id / width;
+    int y = int((float(id) / widthF));
     int x = id - y * width;
     vec2 uv = vec2(float(x), float(y));
     return uv/texRes;
@@ -40,11 +50,11 @@ float rand(vec2 co){
 
 void main()
 {
-    texRes=vec2(widthF,widthF);
+    texRes=vec2(widthF,heightF);
     width = int(widthF);
     height = int(heightF);
 
-    vec2 U = floor(texCoord*texRes)+(0.5); // gl_FragCoord.xy;
+    vec2 U = floor(texCoord*texRes); // gl_FragCoord.xy;
 
     vec4 col = texture2D(tex, U / texRes.xy);
 
@@ -64,10 +74,6 @@ void main()
         if ((col2.b > col.b && idB > idA) || (col2.b < col.b && idB < idA)) col = col2;
     }
 
-
-
-    // col.rg=U.xy;
-    // col=vec4(1.0);
 
     gl_FragColor = col;
 }
