@@ -40,7 +40,7 @@
             {
                 "type": 0,
                 "name": "Same Dimensions",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,

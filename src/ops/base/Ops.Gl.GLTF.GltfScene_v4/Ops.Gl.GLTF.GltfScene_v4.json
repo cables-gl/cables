@@ -33,6 +33,11 @@
             {
                 "type": 0,
                 "name": "Center index",
+                "values": [
+                    "None",
+                    "XYZ",
+                    "XZ"
+                ],
                 "group": "Transform",
                 "subType": "integer"
             },
@@ -69,16 +74,29 @@
             {
                 "type": 0,
                 "name": "Normals Format index",
+                "values": [
+                    "XYZ",
+                    "X-ZY"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Vertices Format index",
+                "values": [
+                    "XYZ",
+                    "XZ-Y"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Calc Normals index",
+                "values": [
+                    "Auto",
+                    "Force Smooth",
+                    "Never"
+                ],
                 "subType": "integer"
             },
             {

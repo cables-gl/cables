@@ -390,8 +390,7 @@ op.renderVizLayer = (ctx, layer) =>
                     if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
                     colorString += "\n";
 
-                    if (
-                        realTexture.pixelFormat.indexOf("ubyte") > 0)
+                    if (realTexture.pixelFormat.indexOf("ubyte") > 0)
                     {
                         colorString += "Pixel UByte: ";
                         colorString += Math.round(pixel[0]);

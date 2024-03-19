@@ -4,7 +4,7 @@ const
 
     outImageUrl = op.outString("Difference Image"),
     outMatchPercentage = op.outNumber("Mismatch Percentage"),
-    outSameDimensions = op.outNumber("Same Dimensions"),
+    outSameDimensions = op.outBoolNum("Same Dimensions"),
     outFinished = op.outTrigger("Finished");
 
 const img1 = new Image();
