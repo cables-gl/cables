@@ -29,6 +29,7 @@ const
     inAtlasXFade = op.inBool("Atlas Cross Fade", false),
     inAtlasRepeatX = op.inFloat("Atlas Repeat X ", 1),
     inAtlasLookupTex = op.inTexture("Atlas Lookup"),
+    inRotTex = op.inTexture("Rotate Texture"),
 
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader", null, "shader");
@@ -62,16 +63,16 @@ const
     textureColoPointSize = new CGL.Uniform(shader, "t", "texPointSize"),
     texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize"),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask"),
-    textureAtlasLookupUniform = new CGL.Uniform(shader, "t", "texAtlasLookup");
+    textureAtlasLookupUniform = new CGL.Uniform(shader, "t", "texAtlasLookup"),
+    texRotUni = new CGL.Uniform(shader, "t", "texRot");
 
 shader.setSource(attachments.pointmat_vert, attachments.pointmat_frag);
 shader.glPrimitive = cgl.gl.POINTS;
 shaderOut.set(shader);
 shaderOut.ignoreValueSerialize = true;
 
-render.onTriggered = doRender;
 doScale.onChange =
-inAtlasRepeatX.onChange =
+    inAtlasRepeatX.onChange =
     makeRound.onChange =
     makeRoundAA.onChange =
     texture.onChange =
@@ -86,9 +87,11 @@ inAtlasRepeatX.onChange =
     texturePointSizeMap.onChange =
     texturePointSizeChannel.onChange =
     textureMulColor.onChange =
-    inAtlasLookupTex.onChange =
+    inAtlasLookupTex.onLinkChanged =
+    inRotTex.onLinkChanged =
     vertCols.onChange = updateDefines;
 
+render.onTriggered = doRender;
 updateUi();
 
 op.preRender = function ()
@@ -110,6 +113,7 @@ function doRender()
     if (textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get());
     if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get());
     if (inAtlasLookupTex.get()) shader.pushTexture(textureAtlasLookupUniform, inAtlasLookupTex.get());
+    if (inRotTex.get()) shader.pushTexture(texRotUni, inRotTex.get());
 
     trigger.trigger();
 
@@ -144,11 +148,12 @@ function updateDefines()
     shader.toggleDefine("VERTEX_COLORS", vertCols.get());
     shader.toggleDefine("RANDOM_COLORIZE", colorizeRandom.get());
     shader.toggleDefine("HAS_TEXTURE_DIFFUSE", texture.get());
-    shader.toggleDefine("HAS_TEXTURE_MASK", textureMask.get());
-    shader.toggleDefine("HAS_TEXTURE_COLORIZE", textureColorize.get());
-    shader.toggleDefine("HAS_TEXTURE_OPACITY", textureOpacity.get());
-    shader.toggleDefine("HAS_TEXTURE_POINTSIZE", texturePointSize.get());
+    shader.toggleDefine("HAS_TEXTURE_MASK", textureMask.isLinked());
+    shader.toggleDefine("HAS_TEXTURE_COLORIZE", textureColorize.isLinked());
+    shader.toggleDefine("HAS_TEXTURE_OPACITY", textureOpacity.isLinked());
+    shader.toggleDefine("HAS_TEXTURE_POINTSIZE", texturePointSize.isLinked());
     shader.toggleDefine("HAS_TEXTURE_ATLASLOOKUP", inAtlasLookupTex.isLinked());
+    shader.toggleDefine("HAS_TEXTURE_ROT", inRotTex.isLinked());
 
     shader.toggleDefine("TEXTURE_COLORIZE_MUL", textureMulColor.get());
 

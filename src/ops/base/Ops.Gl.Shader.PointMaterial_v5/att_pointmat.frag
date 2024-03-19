@@ -21,6 +21,11 @@ IN vec2 texCoord;
     IN float opacity;
 #endif
 
+#ifdef HAS_TEXTURE_ROT
+    UNI sampler2D texRot;
+#endif
+
+
 #ifdef USE_ATLAS
     IN float randAtlas;
     #ifdef HAS_TEXTURE_ATLASLOOKUP
@@ -35,17 +40,33 @@ IN vec2 texCoord;
 
 vec3 lumcoeff = vec3(0.299,0.587,0.114);
 
+#define PI 3.14159265
+#define TAU (2.0*PI)
+
+void pR(inout vec2 p, float a)
+{
+	p = cos(a)*p + sin(a)*vec2(p.y, -p.x);
+}
+
+
 void main()
 {
     #ifdef FLIP_TEX
         vec2 pointCoord=vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y));
-
     #endif
     #ifndef FLIP_TEX
         vec2 pointCoord=gl_PointCoord;
     #endif
 
+    #ifdef HAS_TEXTURE_ROT
+        float r=texture(texRot,texCoord).r;
+        pointCoord-=vec2(0.5);
+        pR(pointCoord,r*TAU);
+        pointCoord+=vec2(0.5);
+    #endif
+
     vec2 origPointCoord=pointCoord;
+
 
     #ifdef USE_ATLAS
 
@@ -157,6 +178,7 @@ void main()
     #endif
 
     {{MODULE_COLOR}}
+
 
     outColor = col;
 }
