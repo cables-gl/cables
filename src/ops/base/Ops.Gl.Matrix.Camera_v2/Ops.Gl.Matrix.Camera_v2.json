@@ -200,11 +200,6 @@
     ],
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.Matrix.Camera",
-            "author": "pandur",
-            "date": 1709283286944
-        },
-        {
             "message": "added identity toggle to reset the viewmatrix to 0,0,0 - expected coordinates are used and not influenced by default viewMatrix transform",
             "type": "bugfix",
             "author": "pandur",
