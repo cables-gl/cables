@@ -59,7 +59,18 @@
                 "name": "Visualize outside 0-1 index",
                 "values": [
                     "Off",
-                    "Anim"
+                    "Anim",
+                    "Modulo"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha index",
+                "values": [
+                    "A",
+                    "1",
+                    "1-A"
                 ],
                 "subType": "integer"
             },

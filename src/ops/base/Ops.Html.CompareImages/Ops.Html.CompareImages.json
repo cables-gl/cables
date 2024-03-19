@@ -5,15 +5,9 @@
     "changelog": [
         {
             "message": "created op",
-            "type": "",
+            "type": "new",
             "author": "pandur",
             "date": 1710763211794
-        },
-        {
-            "message": " removed lib: resemble.js",
-            "type": "",
-            "author": "pandur",
-            "date": 1710763246034
         }
     ],
     "layout": {

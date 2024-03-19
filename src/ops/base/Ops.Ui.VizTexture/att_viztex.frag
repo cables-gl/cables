@@ -90,6 +90,8 @@ void main()
     }
 
 
+
+
     #ifdef ANIM_RANGE
 
         if(colTex.r>1.0 || colTex.r<0.0)
@@ -119,6 +121,20 @@ void main()
     //         colTex.b=r;
     //     }
     // #endif
+
+    #ifdef MOD_RANGE
+        colTex.r=mod(colTex.r,1.0001);
+        colTex.g=mod(colTex.g,1.0001);
+        colTex.b=mod(colTex.b,1.0001);
+
+    #endif
+
+    #ifdef ALPHA_ONE
+        colTex.a=1.0;
+    #endif
+    #ifdef ALPHA_INV
+        colTex.a=1.0-colTex.a;
+    #endif
 
     outColor = mix(col,colTex,colTex.a);
 }

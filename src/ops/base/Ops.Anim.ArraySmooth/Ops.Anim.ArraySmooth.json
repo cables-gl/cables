@@ -2,9 +2,10 @@
     "id": "fb46afd3-c08a-487e-bd22-a0d183a4b6af",
     "changelog": [
         {
-            "message": "cloned op from Ops.Anim.Smooth",
+            "message": "op created",
             "author": "pandur",
-            "date": 1709200845092
+            "date": 1709200845092,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
