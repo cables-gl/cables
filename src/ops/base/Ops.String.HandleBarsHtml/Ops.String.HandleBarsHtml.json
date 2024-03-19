@@ -1,0 +1,40 @@
+{
+    "id": "66de24c3-da6f-458b-b160-151953bbbc3d",
+    "created": 1710844489983,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1710844490022
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Template"
+            },
+            {
+                "type": 2,
+                "name": "Data"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 5,
+                "name": "Errors"
+            }
+        ]
+    },
+    "libs": [],
+    "exampleProjectId": "TKQIs7",
+    "docs": {
+        "ports": []
+    }
+}

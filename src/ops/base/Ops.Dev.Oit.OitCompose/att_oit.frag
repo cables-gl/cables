@@ -2,6 +2,7 @@ IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D texReveal;
 UNI sampler2D texAccum;
+UNI float amount;
 
 
 {{CGL.BLENDMODES3}}
@@ -21,8 +22,17 @@ void main()
     vec4 col=vec4(a * accum.rgb / clamp(accum.a, 0.001, 50000.0), a);
 
 
-    col=mix(col,tex,1.0-a-tex.a);
+    // col=mix(col,tex,1.0-a);
 
-    outColor=col;
+    // col.a=1.0-col.a;
+
+    // col=tex+col;
+    // col.a=1.0;
+    float am=amount;
+
+    // outColor=col;
+
+    outColor=cgl_blendPixel(tex,col,am);
+
 }
 

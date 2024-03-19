@@ -20,6 +20,18 @@
                 "name": "Render"
             },
             {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "OIT Accum",
                 "objType": "texture"
