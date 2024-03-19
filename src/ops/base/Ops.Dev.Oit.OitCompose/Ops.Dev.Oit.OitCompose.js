@@ -1,5 +1,8 @@
 const
     render = op.inTrigger("Render"),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
+    amount = op.inValueSlider("Amount", 1),
+
     inTexAccum = op.inTexture("OIT Accum"),
     inTexReveal = op.inTexture("OIT Revealage"),
     trigger = op.outTrigger("Trigger");
@@ -14,7 +17,10 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.oit_frag);
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniAccum = new CGL.Uniform(shader, "t", "texAccum", 1),
-    uniReveal = new CGL.Uniform(shader, "t", "texReveal", 2);
+    uniReveal = new CGL.Uniform(shader, "t", "texReveal", 2),
+    amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
+
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 render.onTriggered = function ()
 {
