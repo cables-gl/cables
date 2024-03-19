@@ -4,59 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1642868426174
-        },
-        {
-            "message": " added core lib: cgl_texturecopy",
-            "author": "pandur",
-            "date": 1642868439042
-        },
-        {
-            "message": " added core lib: cgl_copytexture",
-            "author": "pandur",
-            "date": 1642869069922
-        },
-        {
-            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
-            "author": "pandur",
-            "date": 1642869809458
-        },
-        {
-            "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
-            "author": "pandur",
-            "date": 1644228758190
-        },
-        {
-            "message": "Ops.Gl.Textures.RgbeToHdrTexture renamed to Ops.Gl.Textures.RgbeToFloat32Texture",
-            "author": "pandur",
-            "date": 1654583702527
-        },
-        {
-            "message": "Ops.Gl.Textures.RgbeToFloat32Texture renamed to Ops.Deprecated.Gl.Textures.RgbeToFloat32Texture",
-            "author": "pandur",
-            "date": 1654584335564
-        },
-        {
-            "message": "cloned op from Ops.Deprecated.Gl.Textures.RgbeToFloat32Texture",
-            "author": "pandur",
-            "date": 1673434160072
-        },
-        {
-            "message": "Ops.User.pandur.SSAO3 renamed to Ops.Dev.SSAO3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1673436349528
-        },
-        {
-            "message": "Ops.Dev.SSAO3 renamed to Ops.Gl.Textures.SSAO",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1694617670088
-        },
-        {
-            "message": "cloned op from Ops.Gl.Textures.SSAO",
-            "author": "pandur",
-            "date": 1710607269737
+            "date": 1710607269737,
+            "type": "new"
         }
     ],
     "coreLibs": [
