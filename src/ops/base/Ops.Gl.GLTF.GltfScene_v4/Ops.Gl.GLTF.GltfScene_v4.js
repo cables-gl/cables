@@ -22,7 +22,7 @@ const
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
-    inUseMatProps = op.inBool("Use Material Properties", true),
+    inUseMatProps = op.inBool("Use Material Properties", false),
 
     inActive = op.inBool("Active", true),
 

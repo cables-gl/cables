@@ -1,7 +1,8 @@
 const
     inTex = op.inTexture("Texture In"),
     inShowInfo = op.inBool("Show Info", false),
-    inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim"], "Anim"),
+    inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim", "Modulo"], "Anim"),
+    inAlpha = op.inSwitch("Alpha", ["A", "1", "1-A"], "A"),
     inPickColor = op.inBool("Show Color", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
@@ -16,7 +17,9 @@ let fb = null;
 let pixelReader = null;
 let colorString = "";
 
-inVizRange.onChange = updateDefines;
+inAlpha.onChange =
+    inVizRange.onChange = updateDefines;
+
 inPickColor.onChange = updateUi;
 updateUi();
 
@@ -48,7 +51,11 @@ inTex.onChange = () =>
 function updateDefines()
 {
     if (!shader) return;
+
+    shader.toggleDefine("MOD_RANGE", inVizRange.get() == "Modulo");
     shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
+    shader.toggleDefine("ALPHA_INV", inAlpha.get() == "1-A");
+    shader.toggleDefine("ALPHA_ONE", inAlpha.get() == "1");
     op.checkMainloopExists();
 }
 
@@ -390,8 +397,7 @@ op.renderVizLayer = (ctx, layer) =>
                     if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
                     colorString += "\n";
 
-                    if (
-                        realTexture.pixelFormat.indexOf("ubyte") > 0)
+                    if (realTexture.pixelFormat.indexOf("ubyte") > 0)
                     {
                         colorString += "Pixel UByte: ";
                         colorString += Math.round(pixel[0]);
