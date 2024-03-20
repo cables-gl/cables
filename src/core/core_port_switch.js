@@ -50,7 +50,11 @@ class SwitchPort extends Port
             this.indexPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if (this.op.patch.isEditorMode() && window.gui && gui.patchView.isCurrentOp(this.op)) gui.opParams.show(this.op);
+            if (this.op.patch.isEditorMode() && performance.now() - (this.lastTime || 0) > 100 && window.gui && gui.patchView.isCurrentOp(this.op))
+            {
+                gui.opParams.show(this.op);
+                this.lastTime = performance.now();
+            }
         };
     }
 
