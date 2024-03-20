@@ -3,6 +3,7 @@ const
     def = op.inString("Default"),
     result = op.outString("result");
 
+result.ignoreValueSerialize = true;
 def.onChange = update;
 paramName.onChange = updateParam;
 
@@ -10,6 +11,7 @@ const query = {};
 const a = window.location.search.substr(1).split("&");
 
 update();
+// setTimeout(update, 100);
 
 for (let i = 0; i < a.length; i++)
 {
