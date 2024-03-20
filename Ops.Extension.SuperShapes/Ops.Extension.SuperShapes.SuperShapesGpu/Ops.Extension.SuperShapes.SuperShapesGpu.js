@@ -4,7 +4,8 @@ const
     exe = op.inTrigger("Update"),
     doRender = op.inBool("Render", true),
     inShape = op.inDropDown("Shape", shapeNames, "sphericalHarmonics"),
-    inTess = op.inInt("Tesselation", 5);
+    inTess = op.inInt("Tesselation", 5),
+    next=op.outTrigger("Next");
 
 op.setPortGroup("Shape", [inShape, inTess]);
 
@@ -18,7 +19,7 @@ let needsUpdate = true;
 let res = 1;
 
 mod.addModule({
-    "priority": 6,
+    "priority": -11,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.supershapes_head_vert,
@@ -86,23 +87,13 @@ function updateGeom()
     geom.verticesIndices = triangles;
     geom.vertexNormals = normals;
 
-    // geom.calcNormals();
-    // geom.unIndex();
-    // geom.tangents = tangents;
-    // geom.biTangents = biTangents;
-
-    // if (numColumns * numRows > 64000)
-    // geom.unIndex();
-
     const cgl = op.patch.cgl;
 
     if (!mesh) mesh = op.patch.cg.createMesh(geom);
     else mesh.setGeom(geom);
 
-    console.log(geom.vertices.length / 3);
-
     needsUpdate = false;
-    console.log("updategeom");
+
 }
 
 function update()
@@ -127,6 +118,7 @@ function update()
     {
         mod.bind();
         mesh.render(op.patch.cg.getShader());
+        next.trigger();
         mod.unbind();
     }
 }
