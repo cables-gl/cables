@@ -46,11 +46,16 @@
             {
                 "type": 0,
                 "name": "Range index",
+                "values": [
+                    "-1 to 1",
+                    "0 to 1"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Area index",
+                "group": "Area",
                 "subType": "integer"
             },
             {
@@ -108,8 +113,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": " added core lib: cgl_shadermodifier",
