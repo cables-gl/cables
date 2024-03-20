@@ -1,0 +1,56 @@
+{
+    "id": "77300f2f-15ea-4110-a4a7-27eff42c7750",
+    "created": 1710869016975,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1710869016977
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "Src RGB index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Dst RGB index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Src Alpha index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Dst Alpha index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Blend Equation index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "set gl blendmodes directly",
+    "docs": {
+        "ports": []
+    }
+}
