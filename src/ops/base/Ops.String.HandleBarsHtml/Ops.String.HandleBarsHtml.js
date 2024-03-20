@@ -6,8 +6,27 @@ const
 
 let template = null;
 
-inTplStr.onChange = () =>
+function wait()
 {
+    setTimeout(() =>
+    {
+        console.log("waiting for hbs");
+
+        if (!window.Handlebars)
+        {
+            wait();
+            updateString();
+        }
+    }, 100);
+}
+
+wait();
+
+inTplStr.onChange = updateString;
+
+function updateString()
+{
+    if (!window.Handlebars) return;
     try
     {
         template = Handlebars.compile(inTplStr.get());
@@ -17,7 +36,7 @@ inTplStr.onChange = () =>
         console.log(e);
     }
     render();
-};
+}
 
 inData.onChange = render;
 
@@ -37,6 +56,7 @@ function render()
     if (!template) return;
 
     op.setUiError("hbserr", null);
+    outErrors.set("");
 
     try
     {
@@ -47,12 +67,9 @@ function render()
         outStr.set("");
         if (e.message)
         {
-            console.log(JSON.stringify(e));
             op.setUiError("hbserr", "<pre>" + escapeHtml(JSON.stringify(e.message + "") + "</pre>"));
-
-            outErrors.set(escapeHtml(JSON.stringify(e.message + "")));
-
-            console.log(escapeHtml(e.message));
+            outErrors.set(e.message);
+            console.log(e.message);
         }
         else console.log(e);
     }

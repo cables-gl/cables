@@ -1,6 +1,6 @@
 
 #ifndef MOD_WORLDSPACE
-   vec4 MOD_vertPos=vec4(vPosition,1.0);
+   vec4 MOD_vertPos=vec4(pos.xyz,1.0);
 #endif
 #ifdef MOD_WORLDSPACE
    vec4 MOD_vertPos=mMatrix*pos;
@@ -64,6 +64,10 @@ float MOD_v=0.0;
 #endif
 #ifdef MOD_SRC_Z
    MOD_v=MOD_vertPos.z;
+#endif
+
+#ifdef MOD_SRC_LENGTH
+  MOD_v=length(MOD_vertPos.xyz);
 #endif
 
 
