@@ -5,6 +5,7 @@ const render = op.inTrigger("render");
 let src = op.inValueSelect("Source", [
     "X * Z + Time",
     "X * Y + Time",
+    "length",
     "X + Time",
     "Y + Time",
     "Z + Time"], "X * Z + Time");
@@ -83,6 +84,7 @@ function setDefines()
     mod.toggleDefine("MOD_SRC_X", src.get() == "X + Time");
     mod.toggleDefine("MOD_SRC_Y", src.get() == "Y + Time");
     mod.toggleDefine("MOD_SRC_Z", src.get() == "Z + Time");
+    mod.toggleDefine("MOD_SRC_LENGTH", src.get() == "length");
 }
 
 render.onTriggered = function ()

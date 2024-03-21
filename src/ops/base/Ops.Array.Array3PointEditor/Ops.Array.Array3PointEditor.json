@@ -1,0 +1,54 @@
+{
+    "id": "8c837c80-9d1d-4860-99b0-bd1aeac0a021",
+    "created": 1710851959386,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1710851959432
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Total Points",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Edit",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Coordinates"
+            }
+        ]
+    },
+    "exampleProjectId": "2Bhet7",
+    "docs": {
+        "ports": []
+    }
+}

@@ -29,7 +29,6 @@
     },
     "summary": "Returns a URL query parameter, e.g. index.html?Parameter=ParameterValue",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -1,0 +1,19 @@
+Internally this op uses uses gl [blendFuncSeperate](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBlendFuncSeparate.xhtml)
+
+### Values
+
+ZERO
+ONE
+SRC_COLOR
+ONE_MINUS_SRC_COLOR
+SRC_ALPHA
+ONE_MINUS_SRC_ALPHA
+DST_ALPHA
+ONE_MINUS_DST_ALPHA
+DST_COLOR
+ONE_MINUS_DST_COLOR
+SRC_ALPHA_SATURATE
+CONSTANT_COLOR
+ONE_MINUS_CONSTANT_COLOR
+CONSTANT_ALPHA
+ONE_MINUS_CONSTANT_ALPHA

@@ -32,7 +32,9 @@
             }
         ]
     },
-    "libs": [],
+    "libs": [
+        "/assets/65f96a07c4f63abf487f326b/handlebars-v4.7.8.js"
+    ],
     "exampleProjectId": "TKQIs7",
     "docs": {
         "ports": []
