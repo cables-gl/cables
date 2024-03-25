@@ -17,7 +17,8 @@ const
     outBrowserName = op.outString("Browser Name", ""),
     outVersion = op.outString("OS Version", ""),
     outNav = op.outString("Language"),
-    outUA = op.outString("User Agent");
+    outUA = op.outString("User Agent"),
+    outPlatform = op.outObject("Platform Object", platform);
 
 op.setPortGroup("Browsers", [isIe, isEdge, isChrome, isFirefox, isOpera, isSafari]);
 op.setPortGroup("Operating Systems", [isWindows, isLinux, isMac, isIos, isAndroid, isElectron]);

@@ -109,8 +109,33 @@
             },
             {
                 "type": 2,
-                "name": "Texture",
+                "name": "Map Texture",
+                "group": "Mapping",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Start X",
+                "group": "Mapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Start Y",
+                "group": "Mapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Map Width",
+                "group": "Mapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Map Height",
+                "group": "Mapping",
+                "subType": "number"
             },
             {
                 "type": 2,
@@ -146,6 +171,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1710329162662
+        },
+        {
+            "message": "Add mapping coordinates position and size to map parts of an image onto the rectangle",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711097840782
         }
     ],
     "summary": "draws a 2d rectangle into a texture.",

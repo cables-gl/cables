@@ -137,6 +137,10 @@
             {
                 "type": 5,
                 "name": "User Agent"
+            },
+            {
+                "type": 2,
+                "name": "Platform Object"
             }
         ]
     },
@@ -145,7 +149,6 @@
     ],
     "summary": "Reports the browser being used",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

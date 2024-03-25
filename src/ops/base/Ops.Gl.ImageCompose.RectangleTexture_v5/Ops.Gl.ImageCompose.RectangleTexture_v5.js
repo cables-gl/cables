@@ -15,13 +15,17 @@ const render = op.inTrigger("render"),
     g = op.inValueSlider("g", 1.0),
     b = op.inValueSlider("b", 1.0),
     a = op.inValueSlider("a", 1.0),
-    inTexMap = op.inTexture("Texture"),
+    inTexMap = op.inTexture("Map Texture"),
+    inTexMapX = op.inFloat("Start X", 0),
+    inTexMapY = op.inFloat("Start Y", 0),
+    inTexMapW = op.inFloat("Map Width", 1),
+    inTexMapH = op.inFloat("Map Height", 1),
     inTexMask = op.inTexture("Mask"),
-
     trigger = op.outTrigger("trigger");
 
 r.setUiAttribs({ "colorPick": true });
 
+op.setPortGroup("Mapping", [inTexMap, inTexMapH, inTexMapW, inTexMapX, inTexMapY]);
 op.setPortGroup("Size", [inWidth, inHeight]);
 op.setPortGroup("Position", [inPosX, inPosY, inCoordMode, inCenterMode]);
 op.setPortGroup("Color", [r, g, b, a]);
@@ -45,13 +49,16 @@ let
     uniformG = new CGL.Uniform(shader, "f", "g", g),
     uniformB = new CGL.Uniform(shader, "f", "b", b),
     uniformA = new CGL.Uniform(shader, "f", "a", a),
+    uniMapPos = new CGL.Uniform(shader, "2f", "mapPos", inTexMapX, inTexMapY),
+    uniMapSize = new CGL.Uniform(shader, "2f", "mapSize", inTexMapW, inTexMapH),
     uniformAmount = new CGL.Uniform(shader, "f", "amount", amount),
     uniformAspect = new CGL.Uniform(shader, "f", "aspect", 1);
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 
-inTexMask.onLinkChanged =
-inTexMap.onLinkChanged =
+inCoordMode.onLinkChanged =
+    inTexMask.onLinkChanged =
+    inTexMap.onLinkChanged =
     inCenterMode.onChange = updateDefines;
 
 updateDefines();
@@ -61,6 +68,7 @@ function updateDefines()
     shader.toggleDefine("CENTER", inCenterMode.get());
     shader.toggleDefine("HAS_TEXMAP", inTexMap.isLinked());
     shader.toggleDefine("HAS_TEXMASK", inTexMask.isLinked());
+    shader.toggleDefine("COORDS_PIXELS", inCoordMode.get() == "Pixel");
 }
 
 render.onTriggered = function ()
@@ -72,12 +80,22 @@ render.onTriggered = function ()
     let w = inWidth.get();
     let h = inHeight.get();
 
+    let mapx = inTexMapX.get();
+    let mapy = inTexMapY.get();
+    let mapw = inTexMapW.get();
+    let maph = inTexMapH.get();
+
     if (inCoordMode.get() == "-1-1")
     {
         x = (x / 2 + 0.5);
         y = (y / 2 + 0.5);
         w /= 2;
         h /= 2;
+
+        mapx = (mapx / 2 + 0.5);
+        mapy = (mapy / 2 + 0.5);
+        mapw /= 2;
+        maph /= 2;
     }
     if (inCoordMode.get() == "Pixel")
     {

@@ -1,0 +1,60 @@
+{
+    "id": "621f3334-f428-4310-b0da-66eb8259df33",
+    "created": 1711374326617,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "new version created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1711374326662
+        },
+        {
+            "message": "added range min/max inputs ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711374926839
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Range Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Range Max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    }
+}
