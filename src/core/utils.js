@@ -201,7 +201,7 @@ export const smootherStep = function (perc)
 
 /**
  * clamp number / make sure its between min/max
- * @function map
+ * @function clamp
  * @memberof Utils
  * @param {Number} value value to be mapped
  * @param {Number} min minimum value
@@ -298,13 +298,6 @@ Math.seededRandom = function (max, min)
     return min + rnd * (max - min);
 };
 
-// ----------------------------------------------------------------
-
-UTILS.arrayWriteToEnd = function (arr, v)
-{
-    for (let i = 1; i < arr.length; i++) arr[i - 1] = arr[i];
-    arr[arr.length - 1] = v;
-};
 
 // ----------------------------------------------------------------
 
@@ -556,7 +549,7 @@ export const request = function (options)
     }
     catch (e)
     {
-        if (options.cb) options.cb(true, e.msg, xhr);
+        if (options.cb && e) options.cb(true, e.msg, xhr);
     }
 
     if (typeof options.headers === "object")
