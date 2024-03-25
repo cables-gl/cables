@@ -4,10 +4,16 @@
     "authorName": "pandur",
     "changelog": [
         {
-            "message": "op created",
+            "message": "new version created",
             "type": "new op",
             "author": "pandur",
             "date": 1711374326662
+        },
+        {
+            "message": "added range min/max inputs ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711374926839
         }
     ],
     "layout": {
