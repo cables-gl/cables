@@ -31,7 +31,7 @@ function compare()
             (data) =>
             {
                 console.log(data);
-                outImageUrl.set(data.getImageDataUrl());
+                if (data.getImageDataUrl) outImageUrl.set(data.getImageDataUrl());
                 outSameDimensions.set(data.isSameDimensions);
                 outMatchPercentage.set(data.rawMisMatchPercentage);
                 outFinished.trigger();

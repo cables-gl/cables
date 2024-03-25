@@ -19,6 +19,7 @@ sizeW.onChange = sizeH.onChange = () => { mesh = null; };
 render.onLinkChanged = () =>
 {
     if (!render.isLinked()) geomOut.set(null);
+    else create();
 };
 
 render.onTriggered = function ()

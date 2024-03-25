@@ -3,6 +3,8 @@ UNI sampler2D tex;
 
 #ifdef HAS_TEXMAP
     UNI sampler2D texMap;
+    UNI vec2 mapPos;
+    UNI vec2 mapSize;
 #endif
 #ifdef HAS_TEXMASK
     UNI sampler2D texMask;
@@ -60,8 +62,21 @@ void main()
     #ifdef HAS_TEXMAP
         vec4 mapCol=vec4(1.0);
 
+        mapTc=clamp(mapTc,0.0,1.0);
+
+        vec2 _mapPos=mapPos;
+        vec2 _mapSize=mapSize;
+
+        #ifdef COORDS_PIXELS
+            _mapPos/=float(textureSize(texMap,0));
+            _mapSize/=float(textureSize(texMap,0));
+        #endif
+
+        mapTc*=_mapSize;
+        mapTc+=_mapPos;
+
         // if(mapTc.x>0.0 && mapTc.x<1.0 && mapTc.y>0.0 && mapTc.y<1.0)
-        mapCol=texture(texMap,clamp(mapTc,0.0,1.0));
+        mapCol=texture(texMap,mapTc);
     #endif
 
 
@@ -74,11 +89,12 @@ void main()
     d=min(d,length(max(absPos,0.0))-roundn);
 
 
-    vec2 absPosInner=abs(pp)-inner*ssize;
-    float dd=max(absPosInner.x,absPosInner.y);
-    d*=min(dd,length(max(absPosInner,0.0))-roundn);
-
-
+    if(inner>0.0)
+    {
+        vec2 absPosInner=abs(pp)-inner*ssize;
+        float dd=max(absPosInner.x,absPosInner.y);
+        d*=min(dd,length(max(absPosInner,0.0))-roundn);
+    }
 
 
     #ifdef HAS_TEXMAP

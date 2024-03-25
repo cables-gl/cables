@@ -79,6 +79,11 @@
             {
                 "type": 0,
                 "name": "Media index",
+                "values": [
+                    "Video",
+                    "Audio",
+                    "Audio+Video"
+                ],
                 "group": "Inputs",
                 "subType": "integer"
             },
@@ -128,7 +133,6 @@
     },
     "summary": "Record the renderer-output to video",
     "issues": "",
-
     "youtubeids": [
         "zWfwC-GH7qk"
     ],

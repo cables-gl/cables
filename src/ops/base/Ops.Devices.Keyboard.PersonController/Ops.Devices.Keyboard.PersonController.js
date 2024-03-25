@@ -27,7 +27,7 @@ let canvas = null;
 
 function getCanvasPixel(ctx, x, y)
 {
-    if (x < 0 || y < 0 || x != x || y != y || x == Infinity || y == Infinity || x > canvas.width * 2 || y > canvas.heigth * 2) return 0;
+    if (x < 0 || y < 15 || x != x || y != y || x == Infinity || y == Infinity || x > canvas.width * 2 || y > (canvas.height) - 15) return 1;
 
     let wc = Math.ceil(inCanvasTestSize.get() / 2) + 0.5;
     let wf = Math.floor(inCanvasTestSize.get() / 2);
@@ -80,7 +80,9 @@ exe.onTriggered = function ()
 
     // console.log(dx,dy,max);
 
-    if (max == 0)max = 1;
+    // if (max == 0)max = 1;
+    max = Math.round(max);
+    // console.log(max);
     const stepX = dx / max;
     const stepY = dy / max;
 
@@ -110,7 +112,7 @@ exe.onTriggered = function ()
 
             if (getCanvasPixel(ctx, newPosX, newPosY))
             {
-                if (Math.random() > 0.5)
+                if (true)
                 {
                     newPosX = outX.get() + x;
                     newPosY = outY.get();
@@ -120,9 +122,10 @@ exe.onTriggered = function ()
                     newPosX = outX.get();
                     newPosY = outY.get() + y;
                 }
+
                 if (getCanvasPixel(ctx, newPosX, newPosY))
                 {
-                    if (Math.random() > 0.5)
+                    if (true)
                     {
                         newPosX = outX.get();
                         newPosY = outY.get() + y;
@@ -146,17 +149,37 @@ exe.onTriggered = function ()
                         )
                         {
                             isInBarrier = true;
+                            let ox = outX.get();
+                            let oy = outY.get();
 
-                            for (let i = 0; i < 200; i++)
+                            let dir = 1;
+                            if (inDirBarrierY.get() < 0)dir = -1;
+
+                            let found = false;
+                            for (let i = 0; i < 400; i += 1)
                             {
-                                newPosX = outX.get() + Math.min(1, inDirBarrierX.get());
-                                newPosY = outY.get() + Math.min(1, inDirBarrierY.get());
-                                outX.set(newPosX);
-                                outY.set(newPosY);
-                                if (!getCanvasPixel(ctx, newPosX, newPosY)) break;
+                                newPosX = ox;
+                                newPosY = oy + (i * dir);
+
+                                // if (newPosY > 0 && newPosY < canvas.height-25)
+                                {
+                                    if (!getCanvasPixel(ctx, newPosX, newPosY))
+                                    {
+                                        found = true;
+                                        // outX.set(newPosX);
+                                        // outY.set(newPosY);
+                                        console.log("newpos", newPosY);
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (!found)
+                            {
+                                newPosX = ox;
+                                newPosY = oy;
                             }
                         }
-
                         else
                         {
                             newPosX = outX.get();
