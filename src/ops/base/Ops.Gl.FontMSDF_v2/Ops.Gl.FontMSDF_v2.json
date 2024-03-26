@@ -5,43 +5,43 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Font Name"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Font Data"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Font Image"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Font Image 1"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Font Image 2"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Font Image 3"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loaded",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Total Chars",
                 "subType": "number"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Chars"
             }
         ]
@@ -55,7 +55,6 @@
     ],
     "summary": "Load MSDF Font data and texture to use ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
