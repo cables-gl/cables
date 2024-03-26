@@ -24,6 +24,11 @@
                 "type": 0,
                 "name": "CSS Cursors index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Set Parent Element",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -35,7 +40,6 @@
     },
     "summary": "Set the mouse cursor",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
