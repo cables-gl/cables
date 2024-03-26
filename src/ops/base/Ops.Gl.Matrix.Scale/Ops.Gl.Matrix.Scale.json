@@ -1,5 +1,5 @@
 {
-    "summary": "Scale all child objects",
+    "summary": "Scale all child objects (scaleXYZ)",
     "layout": {
         "portsIn": [
             {
@@ -60,5 +60,13 @@
     "license": "MIT",
     "youtubeids": [
         "5pucC-GuDcs"
+    ],
+    "changelog": [
+        {
+            "message": "added non uniform axis scaling parameters for convinience",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711468368093
+        }
     ]
 }
