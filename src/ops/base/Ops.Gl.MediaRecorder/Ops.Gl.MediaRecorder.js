@@ -142,7 +142,15 @@ function setupMediaRecorder()
         return;
     }
 
-    let options = { "mimeType": inCodecs.get(), "videoBitsPerSecond": inMbit.get() * 1024 * 1024 };
+    let codec = inCodecs.get();
+
+    if (supportedVideos.indexOf(codec) == -1)
+    {
+        codec = supportedVideos[0];
+        console.log("incompaticle codec, switching to first one:", codec);
+    }
+
+    let options = { "mimeType": codec, "videoBitsPerSecond": inMbit.get() * 1024 * 1024 };
     recordedBlobs = [];
     try
     {

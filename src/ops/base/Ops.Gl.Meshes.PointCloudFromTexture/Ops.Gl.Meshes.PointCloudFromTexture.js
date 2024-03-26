@@ -6,6 +6,7 @@ const
     inTexPS = op.inTexture("Point Size", null, "texture"),
     inNorm = op.inBool("Normalize", false),
     inRemove0 = op.inBool("Remove Point at 0", false),
+    inIgnoreAlpha0 = op.inBool("Ignore Alpha 0", false),
     trigger = op.outTrigger("Trigger"),
     outNumPoints = op.outNumber("Total Points", 0);
 
@@ -35,6 +36,7 @@ mod.addUniformVert("f", "MOD_texSize", 0);
 inNorm.onChange =
     inTexPS.onChange =
     inRemove0.onChange =
+    inIgnoreAlpha0.onChange =
     inAxis.onChange = updateDefines;
 
 let needsMeshSetup = true;
@@ -50,6 +52,7 @@ function updateDefines()
     mod.toggleDefine("MOD_AXIS_XYZ", inAxis.get() == "XYZ");
     mod.toggleDefine("MOD_NORMALIZE", inNorm.get());
     mod.toggleDefine("MOD_HAS_PS_TEX", inTexPS.get());
+    mod.toggleDefine("MOD_IGNOREALPHA0", inIgnoreAlpha0.get());
 }
 
 function doRender()

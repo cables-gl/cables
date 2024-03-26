@@ -84,6 +84,11 @@
                 "type": 0,
                 "name": "Remove Point at 0",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Ignore Alpha 0",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

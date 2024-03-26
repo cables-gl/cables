@@ -9,7 +9,10 @@ inExec.onTriggered = () =>
 {
     outError.set(false);
 
-    gui.getFileManager().uploadFile(inFilename.get(), "data:;base64," + inStr.get(), (err, res) =>
+    let str = inStr.get();
+    if (str.indexOf("data" != 0))str = "data:;base64," + str;
+
+    gui.getFileManager().uploadFile(inFilename.get(), str, (err, res) =>
     {
         console.log(err, res);
 

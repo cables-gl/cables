@@ -201,7 +201,7 @@ export const smootherStep = function (perc)
 
 /**
  * clamp number / make sure its between min/max
- * @function map
+ * @function clamp
  * @memberof Utils
  * @param {Number} value value to be mapped
  * @param {Number} min minimum value
@@ -277,6 +277,19 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
  */
 Math.randomSeed = 1;
 
+
+Math.setRandomSeed = function (seed)
+{
+    // https://github.com/cables-gl/cables_docs/issues/622
+    Math.randomSeed = seed * 50728129;
+    if (seed != 0)
+    {
+        Math.randomSeed = Math.seededRandom() * 17624813;
+        Math.randomSeed = Math.seededRandom() * 9737333;
+    }
+};
+
+
 /**
  * generate a seeded random number
  * @function seededRandom
@@ -298,13 +311,6 @@ Math.seededRandom = function (max, min)
     return min + rnd * (max - min);
 };
 
-// ----------------------------------------------------------------
-
-UTILS.arrayWriteToEnd = function (arr, v)
-{
-    for (let i = 1; i < arr.length; i++) arr[i - 1] = arr[i];
-    arr[arr.length - 1] = v;
-};
 
 // ----------------------------------------------------------------
 
@@ -556,7 +562,7 @@ export const request = function (options)
     }
     catch (e)
     {
-        if (options.cb) options.cb(true, e.msg, xhr);
+        if (options.cb && e) options.cb(true, e.msg, xhr);
     }
 
     if (typeof options.headers === "object")
