@@ -51,6 +51,12 @@
             "message": "Ops.User.pandur.FontMSDF2 renamed to Ops.Gl.FontMSDF_v2",
             "author": "pandur",
             "date": 1590126791767
+        },
+        {
+            "message": "set default values to libaray example files for quicker setup",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1711464069706
         }
     ],
     "summary": "Load MSDF Font data and texture to use ",

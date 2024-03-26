@@ -1,0 +1,21 @@
+const
+    exec = op.inTriggerButton("Trigger"),
+    inObj = op.inObject("Object"),
+    inKey = op.inString("Key"),
+    inValue = op.inString("String"),
+    next = op.outTrigger("Next"),
+    outObj = op.outObject("Result");
+
+exec.onTriggered = () =>
+{
+    const obj = inObj.get();
+
+    if (obj && inKey.get())
+    {
+        obj[inKey.get()] = inValue.get();
+    }
+
+    outObj.setRef(obj);
+
+    next.trigger();
+};
