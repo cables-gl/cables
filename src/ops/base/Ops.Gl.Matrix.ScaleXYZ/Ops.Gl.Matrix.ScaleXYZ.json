@@ -41,6 +41,12 @@
             "message": "code cleanup",
             "author": "pandur",
             "date": 1548414796525
+        },
+        {
+            "message": "added non uniform axis scaling parameters for convinience",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711463607262
         }
     ],
     "youtubeids": [

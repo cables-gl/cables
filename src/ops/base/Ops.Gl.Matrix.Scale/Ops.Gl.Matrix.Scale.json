@@ -57,5 +57,8 @@
             }
         ]
     },
-    "youtubeid": "5pucC-GuDcs"
+    "license": "MIT",
+    "youtubeids": [
+        "5pucC-GuDcs"
+    ]
 }
