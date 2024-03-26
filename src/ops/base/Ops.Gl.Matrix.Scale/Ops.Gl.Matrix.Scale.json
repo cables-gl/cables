@@ -10,6 +10,24 @@
                 "type": 0,
                 "name": "scale",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Axis",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Axis",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Axis",
+                "subType": "number"
             }
         ],
         "portsOut": [
