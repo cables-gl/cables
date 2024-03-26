@@ -50,7 +50,6 @@ class Context extends CGState
         this.gl = null;
 
         this._cursor = "auto";
-        this._cursorParent = null;
         this._currentCursor = "";
 
         this._viewPortStack = [];
@@ -391,7 +390,6 @@ class Context extends CGState
         if (this._cursor != this._currentCursor)
         {
             this._currentCursor = this.canvas.style.cursor = this._cursor;
-            if (this._cursorParent && this.canvas.parentElement) this.canvas.parentElement.style.cursor = this._cursorParent;
         }
 
         this.emitEvent("endframe");
@@ -1262,12 +1260,10 @@ Context.prototype.createMesh = function (geom, options)
  * @instance
  * @param {String} css cursor string
  */
-Context.prototype.setCursor = function (str, strParent)
+Context.prototype.setCursor = function (str)
 {
-    if (parent) this._cursorParent = strParent;
     this._cursor = str;
 };
-
 
 /**
  * enable a webgl extension

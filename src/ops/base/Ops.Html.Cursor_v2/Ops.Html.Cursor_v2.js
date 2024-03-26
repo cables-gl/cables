@@ -5,6 +5,9 @@ const
     next = op.outTrigger("Next");
 
 const cursorStr = "";
+exec.onTriggered = update;
+
+let lastParentCursor = "";
 
 exec.onLinkChanged =
 next.onLinkChanged = () =>
@@ -12,10 +15,23 @@ next.onLinkChanged = () =>
     op.patch.cgl.setCursor("auto");
 };
 
-exec.onTriggered = () =>
+parentEle.onChange = () =>
+{
+    if (!parentEle.get())
+    {
+        lastParentCursor = "auto";
+        op.patch.cgl.canvas.parentElement.style.cursor = "auto";
+    }
+};
+
+function update()
 {
     let arg2 = null;
-    if (parentEle.get())arg2 = cursorPort.get();
+
     op.patch.cgl.setCursor(cursorPort.get(), arg2);
+
+    if (parentEle.get() && lastParentCursor != cursorPort.get())
+        op.patch.cgl.canvas.parentElement.style.cursor = cursorPort.get();
+
     next.trigger();
-};
+}

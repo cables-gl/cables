@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.Cursor2 renamed to Ops.Html.Cursor_v2",
             "author": "pandur",
             "date": 1602572499242
+        },
+        {
+            "message": "added option to also add that cursor to the parent element of canvas, e.g. for using this with forceCanvasSize op",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711475170563
         }
     ],
     "authorName": "pandur",
