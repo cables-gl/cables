@@ -34,36 +34,6 @@
                 "subType": "boolean"
             },
             {
-                "type": 2,
-                "name": "Canvas",
-                "objType": "element"
-            },
-            {
-                "type": 0,
-                "name": "Size",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Start X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Start Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Barrier Dir X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Barrier Dir Y",
-                "subType": "number"
-            },
-            {
                 "type": 1,
                 "name": "Reset"
             }
@@ -83,20 +53,6 @@
                 "type": 0,
                 "name": "Dir",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Colliding",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "In Barrier",
-                "subType": "boolean"
-            },
-            {
-                "type": 1,
-                "name": "Changed"
             }
         ]
     },
