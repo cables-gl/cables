@@ -388,7 +388,9 @@ class Context extends CGState
         }
 
         if (this._cursor != this._currentCursor)
+        {
             this._currentCursor = this.canvas.style.cursor = this._cursor;
+        }
 
         this.emitEvent("endframe");
 
@@ -1262,7 +1264,6 @@ Context.prototype.setCursor = function (str)
 {
     this._cursor = str;
 };
-
 
 /**
  * enable a webgl extension

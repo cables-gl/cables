@@ -1,7 +1,7 @@
 const
     inUUID = op.inString("Font Name", CABLES.uuid()),
-    urlData = op.inUrl("Font Data"),
-    urlTex = op.inUrl("Font Image"),
+    urlData = op.inUrl("Font Data", "/assets/library/fonts_msdf/worksans-regular_int.json"),
+    urlTex = op.inUrl("Font Image", "/assets/library/fonts_msdf/worksans-regular_int.png"),
     urlTex1 = op.inUrl("Font Image 1"),
     urlTex2 = op.inUrl("Font Image 2"),
     urlTex3 = op.inUrl("Font Image 3"),

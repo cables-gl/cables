@@ -1,5 +1,5 @@
 {
-    "summary": "Scale all child objects",
+    "summary": "Scale all child objects (scaleXYZ)",
     "layout": {
         "portsIn": [
             {
@@ -9,6 +9,24 @@
             {
                 "type": 0,
                 "name": "scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Axis",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Axis",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Axis",
                 "subType": "number"
             }
         ],
@@ -39,5 +57,16 @@
             }
         ]
     },
-    "youtubeid": "5pucC-GuDcs"
+    "license": "MIT",
+    "youtubeids": [
+        "5pucC-GuDcs"
+    ],
+    "changelog": [
+        {
+            "message": "added non uniform axis scaling parameters for convinience",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711468368093
+        }
+    ]
 }

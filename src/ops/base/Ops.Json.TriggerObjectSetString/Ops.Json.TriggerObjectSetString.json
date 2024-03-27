@@ -1,0 +1,48 @@
+{
+    "id": "35c75443-8587-4bae-9f87-34b2bcd96441",
+    "created": 1711464434636,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1711464202673
+        },
+        {
+            "message": "cloned op from Ops.Patch.Py8zn88.TriggerObjectSetNumber",
+            "author": "pandur",
+            "date": 1711464434636
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    }
+}
