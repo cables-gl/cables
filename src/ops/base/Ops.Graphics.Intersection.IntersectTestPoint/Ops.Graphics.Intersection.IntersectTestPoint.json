@@ -67,5 +67,11 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "test intersect bodies collision against a point/coordinate",
+    "license": "MIT",
+    "exampleProjectId": "c2DAO8",
+    "docs": {
+        "ports": []
     }
 }
