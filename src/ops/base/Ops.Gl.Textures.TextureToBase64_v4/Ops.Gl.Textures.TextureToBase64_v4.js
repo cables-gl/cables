@@ -4,7 +4,8 @@ const
     inFormat = op.inSwitch("Format", ["PNG", "JPEG", "WEBP"], "PNG"),
     inQuality = op.inFloatSlider("Quality", 0.9),
 
-    dataUrl = op.inBool("Output dataUrl", false),
+    dataUrl = op.inBool("Output dataUrl", true),
+    outSize = op.outNumber("Binary Size"),
     outString = op.outString("Base64 string"),
     outLoading = op.outBoolNum("Loading");
 
@@ -84,17 +85,26 @@ function update()
             dataString = dataString.split(",", 2)[1];
         }
         outString.set(dataString);
+
+        outSize.set(Math.ceil(dataString.length * 0.75)); // 6 bit to 8 bit
+
         outLoading.set(false);
     });
 
     if (retry)setTimeout(retrySoon.bind(this), 100);
 }
 
-function dataURIToBlob(dataURI, callback)
-{
-    const binStr = atob(dataURI.split(",")[1]),
-        len = binStr.length,
-        arr = new Uint8Array(len);
-    for (let i = 0; i < len; i++) arr[i] = binStr.charCodeAt(i);
-    callback(new Blob([arr], { "type": "image/png" }));
-}
+// function dataURIToBlob(dataURI, callback)
+// {
+//     const binStr = atob(dataURI.split(",")[1]),
+//         len = binStr.length,
+//         arr = new Uint8Array(len);
+
+//     console.log("binStr",binStr.length);
+
+//     for (let i = 0; i < len; i++) arr[i] = binStr.charCodeAt(i);
+
+//     callback(new Blob([arr], { "type": "image/png" }));
+// }
+
+//

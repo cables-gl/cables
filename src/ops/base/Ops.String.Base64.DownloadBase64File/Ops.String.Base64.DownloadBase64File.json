@@ -1,0 +1,35 @@
+{
+    "id": "7f601f11-6d44-4c0a-842a-51b4fa8ccd6b",
+    "created": 1712065810638,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1712065810639
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Data URL"
+            },
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 1,
+                "name": "Download"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

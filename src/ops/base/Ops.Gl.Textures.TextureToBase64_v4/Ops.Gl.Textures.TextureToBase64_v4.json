@@ -15,6 +15,11 @@
             {
                 "type": 0,
                 "name": "Format index",
+                "values": [
+                    "PNG",
+                    "JPEG",
+                    "WEBP"
+                ],
                 "subType": "integer"
             },
             {
@@ -29,6 +34,11 @@
             }
         ],
         "portsOut": [
+            {
+                "type": 0,
+                "name": "Binary Size",
+                "subType": "number"
+            },
             {
                 "type": 5,
                 "name": "Base64 string"
@@ -73,43 +83,10 @@
     "issues": "",
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.Textures.TextureToBase64",
+            "message": "Added Binary size output number",
+            "type": "feature",
             "author": "pandur",
-            "date": 1684941790516
-        },
-        {
-            "message": "Ops.Patch.Pg2VScx.TextureToBase64_2 renamed to Ops.Gl.Textures.TextureToBase64_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1684941850017
-        },
-        {
-            "message": "cloned op from Ops.Gl.Textures.TextureToBase64_v2",
-            "author": "pandur",
-            "date": 1686647152700
-        },
-        {
-            "message": " added core lib: cgl_pixelreader",
-            "type": "",
-            "author": "pandur",
-            "date": 1686647182008
-        },
-        {
-            "message": "Ops.Patch.P___SYovy.TextureToBase64_v2 renamed to Ops.Gl.Textures.TextureToBase64_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686647401397
-        },
-        {
-            "message": "cloned op from Ops.Gl.Textures.TextureToBase64_v3",
-            "author": "pandur",
-            "date": 1700758268208
-        },
-        {
-            "message": "Ops.Patch.PWnb2ZL.TextureToBase64_v4 renamed to Ops.Gl.Textures.TextureToBase64_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1700758421917
+            "date": 1712067811631
         }
     ],
     "coreLibs": [

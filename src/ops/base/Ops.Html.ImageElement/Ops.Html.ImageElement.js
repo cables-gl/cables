@@ -2,6 +2,7 @@ const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     inClass = op.inString("Class"),
     inStyle = op.inStringEditor("Style", "", "inline-css"),
+    inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
     outImage = op.outObject("Image Element", null, "element");
 
 let element = op.patch.getDocument().createElement("img");
@@ -25,6 +26,14 @@ function removeEle()
 }
 
 let oldClassesStr = "";
+
+inDisplay.onChange = () =>
+{
+    if (inDisplay.get() == "not set") element.style.removeProperty("display");
+    else element.style.display = inDisplay.get();
+
+    // if(!inActive.get())removeE
+};
 
 function removeClasses()
 {
