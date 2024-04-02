@@ -23,6 +23,11 @@
             {
                 "type": 1,
                 "name": "nudgeRight"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

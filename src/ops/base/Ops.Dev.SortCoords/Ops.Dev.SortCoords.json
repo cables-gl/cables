@@ -36,7 +36,8 @@
         {
             "message": "cloned op from Ops.Dev.Gl.ImageCompose.SortPixels",
             "author": "pandur",
-            "date": 1710435491832
+            "date": 1710435491832,
+            "type": "new"
         }
     ]
 }

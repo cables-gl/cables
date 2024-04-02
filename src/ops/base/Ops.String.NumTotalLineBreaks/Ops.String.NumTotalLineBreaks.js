@@ -1,12 +1,9 @@
 const
-    inStr=op.inString("String","default"),
-    outNum=op.outNumber("Total Lines",0);
+    inStr = op.inString("String", "default"),
+    outNum = op.outNumber("Total Lines", 0);
 
-
-inStr.onChange=function()
+inStr.onChange = function ()
 {
-    var strings=inStr.get().split('\n');
+    const strings = (inStr.get() || "").split("\n");
     outNum.set(strings.length);
-
-
 };

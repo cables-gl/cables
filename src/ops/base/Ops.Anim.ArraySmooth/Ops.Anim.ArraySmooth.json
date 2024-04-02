@@ -43,21 +43,13 @@
             }
         ]
     },
-    "summary": "Smooths out jumps in values (AverageInterpolation)",
+    "summary": "Smooths out jumps in values in an array",
     "issues": "",
     "docs": {
         "ports": [
             {
                 "name": "Update",
                 "text": "Trigger the op"
-            },
-            {
-                "name": "Separate inc/dec",
-                "text": "Enable to have separate control over the smoothing when values increase or decrease"
-            },
-            {
-                "name": "Value",
-                "text": "The value to smooth"
             },
             {
                 "name": "Inc factor",
@@ -76,5 +68,7 @@
                 "text": "The smoothed result"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "E8P8O8"
 }

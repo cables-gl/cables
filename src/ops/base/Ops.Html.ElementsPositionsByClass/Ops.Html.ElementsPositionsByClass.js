@@ -7,9 +7,6 @@ const
 
 inUpd.onTriggered = () =>
 {
-    outPosArr.set(null);
-    outSizeArr.set(null);
-
     const arrPos = [];
     const arrSize = [];
 

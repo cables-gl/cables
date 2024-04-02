@@ -44,5 +44,10 @@
     },
     "libs": [
         "resemble.js"
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "1xkRN8",
+    "docs": {
+        "ports": []
+    }
 }

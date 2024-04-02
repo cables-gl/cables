@@ -1,9 +1,9 @@
 const
     inUrl = op.inString("URL"),
-    outConnection = op.outObject("Connection", null, "Websocket"),
     outResult = op.outObject("Result"),
-    outConnected = op.outBoolNum("Connected"),
     outValidJson = op.outBoolNum("Valid JSON"),
+    outConnection = op.outObject("Connection", null, "Websocket"),
+    outConnected = op.outBoolNum("Connected"),
     outReceived = op.outTrigger("Received Data"),
     outRaw = op.outString("Raw Data");
 
@@ -89,6 +89,7 @@ function connect()
 
         connection.onopen = function (message)
         {
+            // op.setUiError("connection",null)
             connecting = false;
             outConnected.set(true);
             connectedTo = inUrl.get();

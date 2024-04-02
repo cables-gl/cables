@@ -41,5 +41,11 @@
                 "subType": "boolean"
             }
         ]
+    },
+    "summary": "evaluate a javascript expression",
+    "license": "MIT",
+    "exampleProjectId": "gpp4O8",
+    "docs": {
+        "ports": []
     }
 }

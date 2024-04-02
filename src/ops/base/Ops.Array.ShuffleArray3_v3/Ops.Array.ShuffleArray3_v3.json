@@ -28,11 +28,6 @@
     },
     "changelog": [
         {
-            "message": "cloned op from Ops.Array.ShuffleArray3_v2",
-            "author": "pandur",
-            "date": 1711377098200
-        },
-        {
             "message": "more random random numbers",
             "type": "improvement",
             "author": "pandur",

@@ -1,0 +1,38 @@
+{
+    "id": "f851f199-3da9-4eaf-976b-21a7bf3f10c4",
+    "created": 1711548913182,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1711548913226
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Reverse",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "sort each line of a string alphabetically ",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "MMS2O8"
+}

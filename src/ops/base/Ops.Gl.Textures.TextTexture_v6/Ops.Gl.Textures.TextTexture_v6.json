@@ -9,6 +9,10 @@
                 "name": "Render"
             },
             {
+                "type": 5,
+                "name": "text"
+            },
+            {
                 "type": 0,
                 "name": "Draw Mesh",
                 "group": "Rendering",
@@ -43,10 +47,6 @@
                 "type": 0,
                 "name": "Auto Height",
                 "subType": "boolean"
-            },
-            {
-                "type": 5,
-                "name": "text"
             },
             {
                 "type": 0,
