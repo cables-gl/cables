@@ -50,5 +50,14 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "9EOrS8",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Low-frequency oscillation for animations",
+    "youtubeids": [
+        "cn_PcwI7vO0"
+    ]
 }

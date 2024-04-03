@@ -30,13 +30,15 @@
                 "text": "The boolean value to watch for change"
             },
             {
-                "name": "False",
-                "text": "Triggers when `Value` became `false`"
-            },
-            {
                 "name": "True",
                 "text": "Triggers when `Value` became `true`"
+            },
+            {
+                "name": "False",
+                "text": "Triggers when `Value` became `false`"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "UWCvS8"
 }

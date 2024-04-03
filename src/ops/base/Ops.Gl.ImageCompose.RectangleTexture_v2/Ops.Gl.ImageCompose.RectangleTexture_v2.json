@@ -152,5 +152,6 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "TmgMD-"
+    "exampleProjectId": "TmgMD-",
+    "license": "MIT"
 }
