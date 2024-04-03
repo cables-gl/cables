@@ -85,7 +85,6 @@ function initEffect()
         tex.delete();
         tex = null;
     }
-    console.log("copytexture init");
     effect = new CGL.TextureEffect(cgl, { "pixelFormat": inPixelFormat.get(), "clear": false });
 
     if (!tex ||
