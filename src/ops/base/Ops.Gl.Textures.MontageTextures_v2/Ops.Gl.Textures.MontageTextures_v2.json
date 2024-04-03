@@ -194,5 +194,7 @@
     "caniusequery": "",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "pM45O8"
 }

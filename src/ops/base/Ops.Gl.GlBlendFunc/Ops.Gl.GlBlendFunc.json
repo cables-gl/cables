@@ -52,5 +52,7 @@
     "summary": "set gl blendmodes directly",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "24qZz7"
 }

@@ -32,12 +32,12 @@
     "layout": {
         "portsIn": [
             {
-                "type": 3,
-                "name": "Value"
-            },
-            {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 3,
+                "name": "Value"
             }
         ],
         "portsOut": [
@@ -49,7 +49,6 @@
     },
     "summary": "Set an array variable by a trigger",
     "issues": "",
-
     "youtubeids": [
         "30v_GQc6ajA"
     ],

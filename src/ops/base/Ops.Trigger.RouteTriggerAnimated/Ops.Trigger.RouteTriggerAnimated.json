@@ -101,5 +101,11 @@
                 "uititle": "Trigger 11"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "pUtH15",
+    "docs": {
+        "ports": []
+    },
+    "summary": "animated switching between things"
 }

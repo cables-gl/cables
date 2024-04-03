@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1689760588796
+        },
+        {
+            "message": "Added option do add a linebreak at the end of the new string ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711547257415
         }
     ],
     "layout": {
@@ -16,11 +22,20 @@
             {
                 "type": 0,
                 "name": "Direction index",
+                "values": [
+                    "End",
+                    "Begin"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 5,
                 "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Add Break",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

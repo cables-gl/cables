@@ -24,22 +24,22 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Connection",
-                "objType": "Websocket"
-            },
-            {
-                "type": 2,
                 "name": "Result"
             },
             {
                 "type": 0,
-                "name": "Connected",
-                "subType": "number"
+                "name": "Valid JSON",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Connection",
+                "objType": "Websocket"
             },
             {
                 "type": 0,
-                "name": "Valid JSON",
-                "subType": "number"
+                "name": "Connected",
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -53,7 +53,6 @@
     },
     "summary": "Create a websocket connection and receive data from it",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

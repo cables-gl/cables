@@ -4,6 +4,8 @@ const MIDIChannels = Array.from(Array(16).keys(), (i) => { return i + 1; });
 const inEvent = op.inObject("MIDI Event In");
 const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
 const ccIndexDropdown = op.inValueInt("CC Index", 0);
+
+const inSpeed = op.inFloat("Speed", 1);
 const normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "none");
 const triggerOn = op.inSwitch("Trigger On", ["Both", "Down", "Up"], "Both");
 const learn = op.inTriggerButton("learn");
@@ -51,7 +53,7 @@ inEvent.onChange = () =>
     if (!event) return;
     if (event.messageType !== "CC") return;
 
-    const [, ccIndex, ccValue] = event.data;
+    let [, ccIndex, ccValue] = event.data;
     if (learning)
     {
         ccIndexDropdown.set(ccIndex);

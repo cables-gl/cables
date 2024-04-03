@@ -1,6 +1,6 @@
 const
-    val = op.inArray("Value", null),
     trigger = op.inTriggerButton("Trigger"),
+    val = op.inArray("Value", null),
     next = op.outTrigger("Next");
 
 op.varName = op.inDropDown("Variable", [], "", true);

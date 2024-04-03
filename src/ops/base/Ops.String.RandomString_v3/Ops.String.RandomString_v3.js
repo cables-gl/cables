@@ -11,7 +11,7 @@ gen();
 
 function gen()
 {
-    Math.randomSeed = Math.abs(inSeed.get());
+    Math.setRandomSeed(Math.abs(inSeed.get()));
 
     const charArray = Array.from(chars.get());
     let str = "";

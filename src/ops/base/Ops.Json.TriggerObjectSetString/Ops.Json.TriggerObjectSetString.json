@@ -8,11 +8,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1711464202673
-        },
-        {
-            "message": "cloned op from Ops.Patch.Py8zn88.TriggerObjectSetNumber",
-            "author": "pandur",
-            "date": 1711464434636
         }
     ],
     "layout": {
@@ -44,5 +39,10 @@
                 "name": "Result"
             }
         ]
+    },
+    "summary": "set a string value of an object using trigger",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }

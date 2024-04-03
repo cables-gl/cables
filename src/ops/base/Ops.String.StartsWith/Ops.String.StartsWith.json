@@ -1,0 +1,38 @@
+{
+    "id": "d82e0376-2ff2-4557-b8fa-48c31f27d3ab",
+    "created": 1711550484127,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1711550484172
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "Search"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Starts with",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "does a string starts with another string?",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Hht1O8"
+}

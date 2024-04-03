@@ -31,5 +31,11 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "summary": "trigger a download of a base64 binary file",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "jE9zO8"
 }

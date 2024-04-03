@@ -11,7 +11,6 @@
     "created": 1570109660426,
     "summary": "Count number of line breaks in a string",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -19,13 +18,13 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Total Lines",
                 "subType": "number"
             }

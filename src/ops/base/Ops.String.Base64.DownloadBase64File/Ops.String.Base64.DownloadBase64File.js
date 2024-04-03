@@ -1,7 +1,3 @@
-// welcome to your new op!
-// have a look at the documentation:
-// https://cables.gl/docs/5_writing_ops/dev_ops/dev_ops
-
 const
     inStr = op.inString("Data URL", "default"),
     inFilename = op.inString("Filename"),
@@ -10,10 +6,10 @@ const
 
 exec.onTriggered = () =>
 {
-    const a = document.createElement("a"); // Create <a>
-
+    const a = document.createElement("a");
+    a.setAttribute("download", "download");
     a.href = inStr.get();
 
-    a.download = inFilename.get(); // File name Here
-    a.click(); // Downloaded file
+    a.download = inFilename.get();
+    a.click();
 };

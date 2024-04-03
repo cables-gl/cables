@@ -1,0 +1,60 @@
+{
+    "id": "afe29366-2891-41fb-84bc-f57ee66ca330",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1704363880148
+        },
+        {
+            "message": "cloned op from Ops.Team.Dev.StackValueSetNumber",
+            "author": "pandur",
+            "date": 1704364444906
+        },
+        {
+            "message": "Ops.Dev.StackValues.StackGetNumber renamed to Ops.Data.StackValues.StackGetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706629155748
+        },
+        {
+            "message": "cloned op from Ops.Data.StackValues.StackGetNumber",
+            "author": "pandur",
+            "date": 1711642361925
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "Name Select index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1711642361925,
+    "summary": "read a value from the stack to use it later in the trigger branch",
+    "docs": {
+        "ports": []
+    }
+}

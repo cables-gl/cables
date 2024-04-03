@@ -50,5 +50,7 @@
     "exampleProjectId": "2Bhet7",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "visually edit positions in an array  of point coordinates",
+    "license": "MIT"
 }

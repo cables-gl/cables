@@ -5,6 +5,7 @@ const tap = op.inTriggerButton("tap");
 const sync = op.inTriggerButton("sync");
 const nudgeLeft = op.inTriggerButton("nudgeLeft");
 const nudgeRight = op.inTriggerButton("nudgeRight");
+const inActive = op.inBool("Active", true);
 
 const beat = op.outTrigger("beat");
 // const bpm = this.addOutPort(new CABLES.Port(this, "Bpm", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor" }),0);
@@ -35,12 +36,16 @@ exe.onTriggered = function ()
 
     if (op.patch.freeTimer.get() * 1000 > lastFlash + avgMillis)
     {
-        beat.trigger();
-        incrementState();
-        outStates.set(null);
-        outStates.set(states);
+        if (inActive.get())
+        {
+            beat.trigger();
+            incrementState();
+            outStates.set(null);
+            outStates.set(states);
 
-        if (taps.length > 0) bpm.set(millisToBpm(avgMillis));
+            if (taps.length > 0) bpm.set(millisToBpm(avgMillis));
+        }
+
         lastFlash = op.patch.freeTimer.get() * 1000;
     }
 };
@@ -63,6 +68,7 @@ function incrementState()
 
 function tapPressed()
 {
+    if (document.hidden) return;
     // start new tap session
     if (op.patch.freeTimer.get() * 1000 - lastTap > 1000)
     {
@@ -127,3 +133,5 @@ tap.onTriggered = tapPressed;
 sync.onTriggered = syncPressed;
 nudgeLeft.onTriggered = nudgeLeftPressed;
 nudgeRight.onTriggered = nudgeRightPressed;
+
+//

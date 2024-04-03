@@ -53,5 +53,11 @@
                 "objType": "element"
             }
         ]
+    },
+    "summary": "create an image(img) html element",
+    "license": "MIT",
+    "exampleProjectId": "OZaVN8",
+    "docs": {
+        "ports": []
     }
 }
