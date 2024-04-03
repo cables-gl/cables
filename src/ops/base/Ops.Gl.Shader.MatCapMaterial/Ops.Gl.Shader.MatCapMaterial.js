@@ -36,13 +36,13 @@ op.setPortGroup("Color", [r, g, b, pOpacity]);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "MatCapMaterialNew");
-const uniOpacity = new CGL.Uniform(shader, "f", "opacity", pOpacity);
+let uniOpacity = new CGL.Uniform(shader, "f", "opacity", pOpacity);
 
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.matcap_vert, attachments.matcap_frag);
 shaderOut.set(shader);
 
-const textureMatcapUniform = new CGL.Uniform(shader, "t", "texMatcap");
+let textureMatcapUniform = null;
 let textureDiffuseUniform = null;
 let textureNormalUniform = null;
 let textureSpecUniform = null;
@@ -51,14 +51,14 @@ let textureAoUniform = null;
 const offsetUniform = new CGL.Uniform(shader, "2f", "texOffset", offsetX, offsetY);
 const repeatUniform = new CGL.Uniform(shader, "2f", "texRepeat", repeatX, repeatY);
 
-const aoIntensityUniform = new CGL.Uniform(shader, "f", "aoIntensity", aoIntensity);
+let aoIntensityUniform = new CGL.Uniform(shader, "f", "aoIntensity", aoIntensity);
 b.uniform = new CGL.Uniform(shader, "f", "b", b);
 g.uniform = new CGL.Uniform(shader, "f", "g", g);
 r.uniform = new CGL.Uniform(shader, "f", "r", r);
 
-
 calcTangents.onChange = updateDefines;
 updateDefines();
+updateMatcap();
 
 function updateDefines()
 {
@@ -92,36 +92,36 @@ textureMatcap.onChange = updateMatcap;
 
 function updateMatcap()
 {
-    if (!cgl.defaultMatcapTex)
+    if (textureMatcap.get())
     {
-        const pixels = new Uint8Array(256 * 4);
-        for (let x = 0; x < 16; x++)
-        {
-            for (let y = 0; y < 16; y++)
-            {
-                let c = y * 16;
-                c *= Math.min(1, (x + y / 3) / 8);
-                pixels[(x + y * 16) * 4 + 0] = pixels[(x + y * 16) * 4 + 1] = pixels[(x + y * 16) * 4 + 2] = c;
-                pixels[(x + y * 16) * 4 + 3] = 255;
-            }
-        }
-
-        cgl.defaultMatcapTex = new CGL.Texture(cgl);
-        cgl.defaultMatcapTex.initFromData(pixels, 16, 16, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
+        if (textureMatcapUniform !== null) return;
+        shader.removeUniform("tex");
+        textureMatcapUniform = new CGL.Uniform(shader, "t", "tex", 0);
     }
+    else
+    {
+        if (!CGL.defaultTextureMap)
+        {
+            let pixels = new Uint8Array(256 * 4);
+            for (let x = 0; x < 16; x++)
+            {
+                for (let y = 0; y < 16; y++)
+                {
+                    let c = y * 16;
+                    c *= Math.min(1, (x + y / 3) / 8);
+                    pixels[(x + y * 16) * 4 + 0] = pixels[(x + y * 16) * 4 + 1] = pixels[(x + y * 16) * 4 + 2] = c;
+                    pixels[(x + y * 16) * 4 + 3] = 255;
+                }
+            }
 
-    // if(textureMatcap.get())
-    // {
-    //     if(textureMatcapUniform!==null)return;
-    //     shader.removeUniform('texMatcap');
-    // }
-    // else
-    // {
-    //     // textureMatcap.set(cgl.defaultMatcapTex);
+            CGL.defaultTextureMap = new CGL.Texture(cgl);
+            CGL.defaultTextureMap.initFromData(pixels, 16, 16);
+        }
+        textureMatcap.set(CGL.defaultTextureMap);
 
-    //     shader.removeUniform('texMatcap');
-    //     textureMatcapUniform=new CGL.Uniform(shader,'t','texMatcap',0);
-    // }
+        shader.removeUniform("tex");
+        textureMatcapUniform = new CGL.Uniform(shader, "t", "tex", 0);
+    }
 }
 
 textureDiffuse.onChange = function ()
@@ -131,7 +131,7 @@ textureDiffuse.onChange = function ()
         if (textureDiffuseUniform !== null) return;
         shader.define("HAS_DIFFUSE_TEXTURE");
         shader.removeUniform("texDiffuse");
-        textureDiffuseUniform = new CGL.Uniform(shader, "t", "texDiffuse");
+        textureDiffuseUniform = new CGL.Uniform(shader, "t", "texDiffuse", 1);
     }
     else
     {
@@ -148,7 +148,7 @@ textureNormal.onChange = function ()
         if (textureNormalUniform !== null) return;
         shader.define("HAS_NORMAL_TEXTURE");
         shader.removeUniform("texNormal");
-        textureNormalUniform = new CGL.Uniform(shader, "t", "texNormal");
+        textureNormalUniform = new CGL.Uniform(shader, "t", "texNormal", 2);
     }
     else
     {
@@ -165,7 +165,7 @@ textureAo.onChange = function ()
         if (textureAoUniform !== null) return;
         shader.define("HAS_AO_TEXTURE");
         shader.removeUniform("texAo");
-        textureAoUniform = new CGL.Uniform(shader, "t", "texAo");
+        textureAoUniform = new CGL.Uniform(shader, "t", "texAo", 5);
     }
     else
     {
@@ -183,8 +183,8 @@ textureSpec.onChange = textureSpecMatCap.onChange = function ()
         shader.define("USE_SPECULAR_TEXTURE");
         shader.removeUniform("texSpec");
         shader.removeUniform("texSpecMatCap");
-        textureSpecUniform = new CGL.Uniform(shader, "t", "texSpec");
-        textureSpecMatCapUniform = new CGL.Uniform(shader, "t", "texSpecMatCap");
+        textureSpecUniform = new CGL.Uniform(shader, "t", "texSpec", 3);
+        textureSpecMatCapUniform = new CGL.Uniform(shader, "t", "texSpecMatCap", 4);
     }
     else
     {
@@ -215,8 +215,8 @@ function updateAlphaMaskMethod()
     if (alphaMaskSource.get() == "B") shader.define("ALPHA_MASK_B");
     else shader.removeDefine("ALPHA_MASK_B");
 }
+
 alphaMaskSource.onChange = updateAlphaMaskMethod;
-textureOpacity.onChange = updateOpacity;
 
 let textureOpacityUniform = null;
 
@@ -227,7 +227,7 @@ function updateOpacity()
         if (textureOpacityUniform !== null) return;
         shader.removeUniform("texOpacity");
         shader.define("HAS_TEXTURE_OPACITY");
-        if (!textureOpacityUniform) textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity");
+        if (!textureOpacityUniform) textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity", 6);
 
         alphaMaskSource.setUiAttribs({ "greyout": false });
         discardTransPxl.setUiAttribs({ "greyout": false });
@@ -246,6 +246,8 @@ function updateOpacity()
     updateAlphaMaskMethod();
 }
 
+textureOpacity.onChange = updateOpacity;
+
 discardTransPxl.onChange = function ()
 {
     if (discardTransPxl.get()) shader.define("DISCARDTRANS");
@@ -258,13 +260,24 @@ texCoordAlpha.onChange = function ()
     else shader.removeDefine("TRANSFORMALPHATEXCOORDS");
 };
 
+// function bindTextures()
+// {
+//      if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
+//      if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
+//      if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
+//      if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
+//      if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
+//      if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
+//      if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
+// };
+
 op.onDelete = function ()
 {
-    // if(cgl.defaultMatcapTex)
-    // {
-    //     cgl.defaultMatcapTex.delete();
-    //     cgl.defaultMatcapTex=null;
-    // }
+    if (CGL.defaultTextureMap)
+    {
+        CGL.defaultTextureMap.delete();
+        CGL.defaultTextureMap = null;
+    }
 };
 
 op.preRender = function ()
@@ -274,20 +287,16 @@ op.preRender = function ()
 
 render.onTriggered = function ()
 {
-    if (!cgl.defaultMatcapTex) updateMatcap();
+    // shader.bindTextures=bindTextures;
+
     shader.popTextures();
-
-
-    const tex = textureMatcap.get() || cgl.defaultMatcapTex;
-    shader.pushTexture(textureMatcapUniform, tex.tex);
-
+    if (textureMatcap.get() && textureMatcapUniform) shader.pushTexture(textureMatcapUniform, textureMatcap.get().tex);
     if (textureDiffuse.get() && textureDiffuseUniform) shader.pushTexture(textureDiffuseUniform, textureDiffuse.get().tex);
     if (textureNormal.get() && textureNormalUniform) shader.pushTexture(textureNormalUniform, textureNormal.get().tex);
     if (textureSpec.get() && textureSpecUniform) shader.pushTexture(textureSpecUniform, textureSpec.get().tex);
     if (textureSpecMatCap.get() && textureSpecMatCapUniform) shader.pushTexture(textureSpecMatCapUniform, textureSpecMatCap.get().tex);
     if (textureAo.get() && textureAoUniform) shader.pushTexture(textureAoUniform, textureAo.get().tex);
     if (textureOpacity.get() && textureOpacityUniform) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
-
 
     cgl.pushShader(shader);
     next.trigger();
