@@ -44,5 +44,11 @@
     },
     "libs": [
         "resemble.js"
-    ]
+    ],
+    "summary": "compares two images and shows the difference as a pink color",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "gAdSN8"
 }

@@ -6,7 +6,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1706777747148
+            "date": 1706777747148,
+            "type": "new"
         }
     ],
     "layout": {

@@ -45,5 +45,11 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "summary": "normalize a vector",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "O8S5O8"
 }

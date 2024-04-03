@@ -14,6 +14,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1710764535096
+        },
+        {
+            "message": "Added CSS Display parameter option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712067774369
         }
     ],
     "layout": {
@@ -29,6 +35,15 @@
             {
                 "type": 5,
                 "name": "Style"
+            },
+            {
+                "type": 0,
+                "name": "CSS Display index",
+                "values": [
+                    "not set",
+                    "none"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -38,5 +53,11 @@
                 "objType": "element"
             }
         ]
+    },
+    "summary": "create an image(img) html element",
+    "license": "MIT",
+    "exampleProjectId": "OZaVN8",
+    "docs": {
+        "ports": []
     }
 }

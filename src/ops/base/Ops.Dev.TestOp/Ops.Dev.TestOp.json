@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1559035867747
+            "date": 1559035867747,
+            "type": "new"
         },
         {
             "message": "Ops.TestOp renamed to Ops.Admin.TestOp",
@@ -68,6 +69,18 @@
             "type": "",
             "author": "pandur",
             "date": 1698674826934
+        },
+        {
+            "message": "csdcdscdscds",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711551159344
+        },
+        {
+            "message": "cdscdscdscds",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1711551163559
         }
     ],
     "authorName": "pandur",

@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1571055782982
-        },
-        {
-            "message": "cloned op from Ops.Array.ShuffleArray_v2",
-            "author": "pandur",
-            "date": 1711376925107
+            "date": 1571055782982,
+            "type": "new"
         },
         {
             "message": "more random random numbers",

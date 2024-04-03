@@ -23,13 +23,28 @@
             },
             {
                 "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Normalize index",
+                "values": [
+                    "none",
+                    "0 to 1",
+                    "-1 to 1"
+                ],
                 "group": "CC",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Trigger On index",
+                "values": [
+                    "Both",
+                    "Down",
+                    "Up"
+                ],
                 "subType": "integer"
             },
             {

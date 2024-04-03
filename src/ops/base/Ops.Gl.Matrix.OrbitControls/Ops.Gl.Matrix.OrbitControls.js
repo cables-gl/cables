@@ -34,7 +34,7 @@ op.setPortGroup("Interaction", [mul, smoothness, speedX, speedY]);
 op.setPortGroup("Boundaries", [minRotY, maxRotY, minDist, maxDist]);
 
 mul.set(1);
-minDist.set(0.05);
+minDist.set(0.01);
 maxDist.set(99999);
 
 inReset.onTriggered = reset;

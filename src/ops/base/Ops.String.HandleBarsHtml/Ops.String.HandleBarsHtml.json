@@ -38,5 +38,7 @@
     "exampleProjectId": "TKQIs7",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "string conversion using handlebars template engine",
+    "license": "MIT"
 }

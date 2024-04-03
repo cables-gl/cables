@@ -1,6 +1,8 @@
 const
     render = op.inTriggerButton("Render"),
 
+    text = op.inString("text", "cables"),
+
     drawMesh = op.inValueBool("Draw Mesh", true),
     meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
@@ -9,8 +11,6 @@ const
     texSizeManWidth = op.inInt("Width", 512),
     texSizeManHeight = op.inInt("Height", 512),
     texSizeAutoHeight = op.inBool("Auto Height", true),
-
-    text = op.inString("text", "cables"),
 
     texSizeManBreak = op.inBool("Auto Line Breaks", true),
 

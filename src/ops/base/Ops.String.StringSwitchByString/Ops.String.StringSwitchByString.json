@@ -1,0 +1,116 @@
+{
+    "id": "625418c2-dcbc-4eea-9ec6-6c3033e6630b",
+    "created": 1711546783755,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1711546783790
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "Default"
+            },
+            {
+                "type": 5,
+                "name": "String 1"
+            },
+            {
+                "type": 5,
+                "name": "Result String 1"
+            },
+            {
+                "type": 5,
+                "name": "String 2"
+            },
+            {
+                "type": 5,
+                "name": "Result String 2"
+            },
+            {
+                "type": 5,
+                "name": "String 3"
+            },
+            {
+                "type": 5,
+                "name": "Result String 3"
+            },
+            {
+                "type": 5,
+                "name": "String 4"
+            },
+            {
+                "type": 5,
+                "name": "Result String 4"
+            },
+            {
+                "type": 5,
+                "name": "String 5"
+            },
+            {
+                "type": 5,
+                "name": "Result String 5"
+            },
+            {
+                "type": 5,
+                "name": "String 6"
+            },
+            {
+                "type": 5,
+                "name": "Result String 6"
+            },
+            {
+                "type": 5,
+                "name": "String 7"
+            },
+            {
+                "type": 5,
+                "name": "Result String 7"
+            },
+            {
+                "type": 5,
+                "name": "String 8"
+            },
+            {
+                "type": 5,
+                "name": "Result String 8"
+            },
+            {
+                "type": 5,
+                "name": "String 9"
+            },
+            {
+                "type": 5,
+                "name": "Result String 9"
+            },
+            {
+                "type": 5,
+                "name": "String 10"
+            },
+            {
+                "type": 5,
+                "name": "Result String 10"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Switch between multiple strings by a string index",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}

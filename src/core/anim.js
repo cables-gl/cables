@@ -328,8 +328,6 @@ Anim.prototype.getValue = function (time)
     {
         if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
 
-        if (this.name)console.log("B", this.keys[this._lastKeyIndex].cbTriggered);
-
         return this.keys[this._lastKeyIndex].value;
     }
 

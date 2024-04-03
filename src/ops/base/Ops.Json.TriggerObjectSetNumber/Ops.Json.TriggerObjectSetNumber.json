@@ -40,5 +40,10 @@
                 "name": "Result"
             }
         ]
+    },
+    "summary": "set a number value of an object using trigger",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
