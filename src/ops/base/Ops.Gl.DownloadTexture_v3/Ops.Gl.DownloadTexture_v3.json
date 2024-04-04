@@ -73,5 +73,10 @@
                 "uititle": "Next"
             }
         ]
+    },
+    "summary": "Download a texture as an image file",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
