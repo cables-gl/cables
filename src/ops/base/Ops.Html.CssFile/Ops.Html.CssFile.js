@@ -1,6 +1,7 @@
 const
     inFile = op.inUrl("CSS File"),
-    inMedia = op.inString("Media", "all");
+    inMedia = op.inString("Media", "all"),
+    inActive = op.inBool("Active", true);
 
 let element = null;
 
@@ -11,10 +12,17 @@ inFile.onChange = create;
 op.onFileChanged = (fn) =>
 {
     if (inFile.get() && inFile.get().indexOf(fn) > -1) create();
+}
+;
+inActive.onChange = () =>
+{
+    if (!inActive.get())remove();
+    else create();
 };
 
 function create()
 {
+    if (!inActive.get()) return;
     remove();
     element = op.patch.getDocument().createElement("link");
     op.patch.getDocument().head.appendChild(element);
@@ -25,9 +33,12 @@ function create()
 function setAttribs()
 {
     if (!element)create();
-    element.setAttribute("rel", "stylesheet");
-    element.setAttribute("type", "text/css");
-    element.setAttribute("media", inMedia.get());
+    if (element)
+    {
+        element.setAttribute("rel", "stylesheet");
+        element.setAttribute("type", "text/css");
+        element.setAttribute("media", inMedia.get());
+    }
 }
 
 function remove()
