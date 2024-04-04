@@ -140,6 +140,8 @@ class PixelReader
                 gl.deleteBuffer(this._pbo);
                 this._pbo = null;
             });
+
+        return true;
     }
 }
 

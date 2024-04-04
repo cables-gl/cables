@@ -29,5 +29,7 @@
                 "text": "Triggers when `Value` changed to `false`"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "UWCvS8"
 }

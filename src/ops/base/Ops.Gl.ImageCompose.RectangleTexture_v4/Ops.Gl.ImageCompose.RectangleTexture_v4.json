@@ -155,10 +155,6 @@
                 "text": "Trigger in"
             },
             {
-                "name": "Blend Mode",
-                "text": "Blend mode to apply"
-            },
-            {
                 "name": "Amount",
                 "text": "Blend amount"
             },
@@ -169,10 +165,6 @@
             {
                 "name": "Height",
                 "text": "Height of the rectangle"
-            },
-            {
-                "name": "Aspect Ratio",
-                "text": "Aspect ratio of the rectangle"
             },
             {
                 "name": "X",
@@ -212,5 +204,6 @@
             }
         ]
     },
-    "exampleProjectId": "TmgMD-"
+    "exampleProjectId": "",
+    "license": "MIT"
 }

@@ -91,20 +91,7 @@ function update()
         outLoading.set(false);
     });
 
-    if (retry)setTimeout(retrySoon.bind(this), 100);
+    if (retry) setTimeout(retrySoon.bind(this), 100);
 }
-
-// function dataURIToBlob(dataURI, callback)
-// {
-//     const binStr = atob(dataURI.split(",")[1]),
-//         len = binStr.length,
-//         arr = new Uint8Array(len);
-
-//     console.log("binStr",binStr.length);
-
-//     for (let i = 0; i < len; i++) arr[i] = binStr.charCodeAt(i);
-
-//     callback(new Blob([arr], { "type": "image/png" }));
-// }
 
 //
