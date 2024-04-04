@@ -22,5 +22,11 @@
             }
         ],
         "portsOut": []
-    }
+    },
+    "summary": "load a css asset file",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "lc4mY8"
 }
