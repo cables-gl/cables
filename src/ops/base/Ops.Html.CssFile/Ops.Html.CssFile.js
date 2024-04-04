@@ -9,6 +9,11 @@ op.onDelete = remove;
 inMedia.onChange = setAttribs;
 inFile.onChange = create;
 
+op.onFileChanged = (fn) =>
+{
+    if (inFile.get() && inFile.get().indexOf(fn) > -1) create();
+};
+
 inActive.onChange = () =>
 {
     if (!inActive.get())remove();
