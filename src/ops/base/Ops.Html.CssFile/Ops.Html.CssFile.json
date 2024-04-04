@@ -1,0 +1,26 @@
+{
+    "id": "baae1ab2-116c-4c18-ad93-37ced0aafdd6",
+    "created": 1712225481948,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1712225481950
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "CSS File"
+            },
+            {
+                "type": 5,
+                "name": "Media"
+            }
+        ],
+        "portsOut": []
+    }
+}
