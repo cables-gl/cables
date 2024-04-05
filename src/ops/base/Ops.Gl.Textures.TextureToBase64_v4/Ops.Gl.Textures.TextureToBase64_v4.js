@@ -7,7 +7,8 @@ const
     dataUrl = op.inBool("Output dataUrl", true),
     outSize = op.outNumber("Binary Size"),
     outString = op.outString("Base64 string"),
-    outLoading = op.outBoolNum("Loading");
+    outLoading = op.outBoolNum("Loading"),
+    finished = op.outTrigger("Finished");
 
 const cgl = op.patch.cgl;
 const gl = op.patch.cgl.gl;
@@ -89,6 +90,7 @@ function update()
         outSize.set(Math.ceil(dataString.length * 0.75)); // 6 bit to 8 bit
 
         outLoading.set(false);
+        finished.trigger();
     });
 
     if (retry) setTimeout(retrySoon.bind(this), 100);

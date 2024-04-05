@@ -19,6 +19,8 @@ let idx = 0;
 let arr = [];
 arr.length = inNum.get();
 
+outArr.setUiAttribs({ "stride": 3 });
+
 inArr.setUiAttribs({ "hideParam": true, "hidePort": true });
 inPosX.setUiAttribs({ "hideParam": true, "hidePort": true });
 inPosY.setUiAttribs({ "hideParam": true, "hidePort": true });

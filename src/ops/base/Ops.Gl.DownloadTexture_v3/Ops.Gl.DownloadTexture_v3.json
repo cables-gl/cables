@@ -1,0 +1,82 @@
+{
+    "id": "20f83b41-4b28-4252-89b8-a98c7c72e618",
+    "created": 1712233339860,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1712233339862
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1712233340136
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "7zxlhqqf8",
+                "uititle": "Texture",
+                "values": [
+                    ""
+                ],
+                "objType": "texture"
+            },
+            {
+                "type": 5,
+                "name": "c6sm5ztz4",
+                "uititle": "Format",
+                "values": [
+                    "PNG",
+                    "JPG",
+                    "WEBP"
+                ]
+            },
+            {
+                "type": 0,
+                "name": "6ozewyh0e",
+                "uititle": "Quality",
+                "values": [
+                    ""
+                ],
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "ainvr3s9o",
+                "uititle": "Filename",
+                "values": [
+                    ""
+                ]
+            },
+            {
+                "type": 1,
+                "name": "uxwx45pbg",
+                "uititle": "Download",
+                "values": [
+                    ""
+                ]
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "jcrmz8mnz",
+                "uititle": "Next"
+            }
+        ]
+    },
+    "summary": "Download a texture as an image file",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}

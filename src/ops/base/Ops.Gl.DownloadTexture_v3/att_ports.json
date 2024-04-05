@@ -1,0 +1,71 @@
+{
+    "ports": [
+        {
+            "id": "7zxlhqqf8",
+            "title": "Texture",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 2,
+            "objType": "texture",
+            "uiDisplay": "texture",
+            "order": 0
+        },
+        {
+            "id": "c6sm5ztz4",
+            "title": "Format",
+            "dir": 0,
+            "values": [
+                "PNG",
+                "JPG",
+                "WEBP"
+            ],
+            "type": 5,
+            "value": "PNG",
+            "uiDisplay": "dropdown",
+            "order": 1
+        },
+        {
+            "id": "6ozewyh0e",
+            "title": "Quality",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 0,
+            "value": 0.9,
+            "uiDisplay": "range",
+            "order": 2
+        },
+        {
+            "id": "ainvr3s9o",
+            "title": "Filename",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 5,
+            "value": "screenshot",
+            "order": 3
+        },
+        {
+            "id": "uxwx45pbg",
+            "title": "Download",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 1,
+            "uiDisplay": "button",
+            "order": 4
+        },
+        {
+            "id": "jcrmz8mnz",
+            "title": "Next",
+            "dir": 1,
+            "type": 1,
+            "order": 1005
+        }
+    ]
+}

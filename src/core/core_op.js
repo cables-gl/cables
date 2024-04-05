@@ -964,7 +964,8 @@ const Op = function ()
         const p = this.addOutPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
                 "preview": true,
-                "objType": "texture"
+                "objType": "texture",
+                "display": "texture"
             })
         );
         if (v !== undefined) p.set(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
