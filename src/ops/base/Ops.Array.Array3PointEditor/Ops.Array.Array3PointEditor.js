@@ -61,9 +61,22 @@ function removePosListener()
     inPosZ.onChange = null;
 }
 
+op.addEventListener("onEnabledChange", function (enabled)
+{
+    if (!enabled) if (gizmo) gizmo = gizmo.dispose();
+});
+
+op.onDelete = () =>
+{
+    if (gizmo) gizmo = gizmo.dispose();
+};
+
 inEdit.onChange = () =>
 {
-    gui.setTransformGizmo(null);
+    if (!inEdit.get() && gizmo)
+    {
+        gizmo = gizmo.dispose();
+    }
 };
 
 inArr.onChange = () =>
