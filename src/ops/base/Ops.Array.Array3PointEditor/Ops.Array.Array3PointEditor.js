@@ -17,6 +17,7 @@ const
 let changed = false;
 let idx = 0;
 let arr = [];
+let gizmo = null;
 arr.length = inNum.get();
 
 outArr.setUiAttribs({ "stride": 3 });
@@ -91,7 +92,9 @@ exec.onTriggered = () =>
 {
     if (CABLES.UI && inEdit.get())
     {
-        gui.setTransformGizmo(
+        if (!gizmo) gizmo = new CABLES.UI.Gizmo(op.patch.cgl);
+        gizmo.set(
+        // gui.setTransformGizmo(
             {
                 "posX": inPosX,
                 "posY": inPosY,
