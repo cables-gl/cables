@@ -177,5 +177,6 @@
         "cgl_shadermodifier"
     ],
     "exampleProjectId": "oOsjJ5",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }

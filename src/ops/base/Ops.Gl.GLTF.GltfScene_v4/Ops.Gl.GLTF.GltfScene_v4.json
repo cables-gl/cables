@@ -191,12 +191,14 @@
         {
             "message": "fix animation not playing when using skinned mesh with assigned material shaders",
             "author": "pandur",
-            "date": 1643616656209
+            "date": 1643616656209,
+            "type": "bugfix"
         },
         {
             "message": "vertex colors: added automatic color conversion linear space ",
             "author": "pandur",
-            "date": 1643616684822
+            "date": 1643616684822,
+            "type": "improvement"
         },
         {
             "message": "fix problems with different animation interpolation settings",

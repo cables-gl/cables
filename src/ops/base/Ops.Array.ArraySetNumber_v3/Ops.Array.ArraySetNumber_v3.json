@@ -5,27 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1584365937229
-        },
-        {
-            "message": "cloned op from Ops.Array.ArraySetNumber",
-            "author": "pandur",
-            "date": 1623915562880
-        },
-        {
-            "message": "Ops.User.pandur.ArraySetNumber2 renamed to Ops.Array.ArraySetNumber_v2",
-            "author": "pandur",
-            "date": 1623915599231
-        },
-        {
-            "message": "cloned op from Ops.Array.ArraySetNumber_v2",
-            "author": "pandur",
-            "date": 1687272676383
-        },
-        {
-            "message": "Ops.Patch.PNSRgpz.ArraySetNumber_v2 renamed to Ops.Array.ArraySetNumber_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687273072994
         }
     ],
     "authorName": "pandur",
@@ -56,7 +35,6 @@
     },
     "summary": "set a number at index in an array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
