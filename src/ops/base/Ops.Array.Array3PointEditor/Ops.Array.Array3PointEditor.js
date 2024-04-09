@@ -36,21 +36,27 @@ inReset.onTriggered = () =>
     updateIndex();
 };
 
-inPosX.onChange = (p, v) =>
+function posChanged()
 {
-    arr[idx + 0] = v;
+    arr[idx + 0] = inPosX.get();
+    arr[idx + 1] = inPosY.get();
+    arr[idx + 2] = inPosZ.get();
     changed = true;
-};
-inPosY.onChange = (p, v) =>
+}
+
+function addPosListener()
 {
-    arr[idx + 1] = v;
-    changed = true;
-};
-inPosZ.onChange = (p, v) =>
+    inPosX.onChange = posChanged;
+    inPosY.onChange = posChanged;
+    inPosZ.onChange = posChanged;
+}
+
+function removePosListener()
 {
-    arr[idx + 2] = v;
-    changed = true;
-};
+    inPosX.onChange = null;
+    inPosY.onChange = null;
+    inPosZ.onChange = null;
+}
 
 inEdit.onChange = () =>
 {
@@ -72,9 +78,11 @@ function numChanged()
 function updateIndex()
 {
     idx = Math.min(inNum.get() * 3, Math.abs(inEditIndex.get() * 3));
+    removePosListener();
     inPosX.set(arr[idx + 0]);
     inPosY.set(arr[idx + 1]);
     inPosZ.set(arr[idx + 2]);
+    addPosListener();
 }
 
 exec.onTriggered = () =>
