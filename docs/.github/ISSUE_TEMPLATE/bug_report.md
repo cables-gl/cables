@@ -7,6 +7,7 @@ assignees: ''
 
 ---
 **Link to simple, reproducible example patch**
+
 Make this "public" or "unlisted - allow editor". see: https://cables.gl/docs/faq/features/sharing/sharing
 
 **Describe the bug**
