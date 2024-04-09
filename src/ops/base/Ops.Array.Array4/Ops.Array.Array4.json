@@ -1,0 +1,73 @@
+{
+    "id": "28607c74-fa98-423e-a6b6-14305d159eac",
+    "changelog": [
+        {
+            "message": "new op",
+            "author": "pandur",
+            "date": 1712655589998,
+            "type": "new"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1712655589997,
+    "todos": [
+        {
+            "message": "should be callex Array3 later",
+            "author": "pandur",
+            "id": "52bff88d-116b-4a5d-950c-533451b6a610",
+            "date": 1559031923240,
+            "deleted": true,
+            "deletedBy": "pandur",
+            "deletedDate": 1559058987773
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Num Quadruplets",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "W",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Total Quadruplets",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an array of num triplets set to default values xyz  ",
+    "docs": {
+        "ports": []
+    }
+}
