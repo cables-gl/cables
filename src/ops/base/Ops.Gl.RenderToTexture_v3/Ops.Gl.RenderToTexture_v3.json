@@ -118,5 +118,6 @@
             "date": 1694675884792
         }
     ],
-    "exampleProjectId": "G2_my7"
+    "exampleProjectId": "G2_my7",
+    "license": "MIT"
 }
