@@ -17,6 +17,7 @@ const
 let changed = false;
 let idx = 0;
 let arr = [];
+let gizmo = null;
 arr.length = inNum.get();
 
 outArr.setUiAttribs({ "stride": 3 });
@@ -38,25 +39,44 @@ inReset.onTriggered = () =>
     updateIndex();
 };
 
-inPosX.onChange = (p, v) =>
+function posChanged()
 {
-    arr[idx + 0] = v;
+    arr[idx + 0] = inPosX.get();
+    arr[idx + 1] = inPosY.get();
+    arr[idx + 2] = inPosZ.get();
     changed = true;
-};
-inPosY.onChange = (p, v) =>
+}
+
+function addPosListener()
 {
-    arr[idx + 1] = v;
-    changed = true;
-};
-inPosZ.onChange = (p, v) =>
+    inPosX.onChange = posChanged;
+    inPosY.onChange = posChanged;
+    inPosZ.onChange = posChanged;
+}
+
+function removePosListener()
 {
-    arr[idx + 2] = v;
-    changed = true;
+    inPosX.onChange = null;
+    inPosY.onChange = null;
+    inPosZ.onChange = null;
+}
+
+op.addEventListener("onEnabledChange", function (enabled)
+{
+    if (!enabled) if (gizmo) gizmo = gizmo.dispose();
+});
+
+op.onDelete = () =>
+{
+    if (gizmo) gizmo = gizmo.dispose();
 };
 
 inEdit.onChange = () =>
 {
-    gui.setTransformGizmo(null);
+    if (!inEdit.get() && gizmo)
+    {
+        gizmo = gizmo.dispose();
+    }
 };
 
 inArr.onChange = () =>
@@ -74,16 +94,20 @@ function numChanged()
 function updateIndex()
 {
     idx = Math.min(inNum.get() * 3, Math.abs(inEditIndex.get() * 3));
+    removePosListener();
     inPosX.set(arr[idx + 0]);
     inPosY.set(arr[idx + 1]);
     inPosZ.set(arr[idx + 2]);
+    addPosListener();
 }
 
 exec.onTriggered = () =>
 {
     if (CABLES.UI && inEdit.get())
     {
-        gui.setTransformGizmo(
+        if (!gizmo) gizmo = new CABLES.UI.Gizmo(op.patch.cgl);
+        gizmo.set(
+        // gui.setTransformGizmo(
             {
                 "posX": inPosX,
                 "posY": inPosY,

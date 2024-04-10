@@ -28,7 +28,6 @@
     },
     "summary": "finds a number at a position in an object defined by path",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -46,5 +45,6 @@
             }
         ]
     },
-    "exampleProjectId": "RrYnln"
+    "exampleProjectId": "RrYnln",
+    "license": "MIT"
 }

@@ -10,4 +10,4 @@ given an object like this:
 }
 ```
 
-a path of data.numbers.1 will return `2`:
+a path of `data.numbers.1` will return `2`:

@@ -59,7 +59,7 @@ function updateDefines()
     op.checkMainloopExists();
 }
 
-op.renderVizLayer = (ctx, layer) =>
+op.renderVizLayerGl = (ctx, layer) =>
 {
     if (!inTex.isLinked()) return;
     if (!layer.useGl) return;

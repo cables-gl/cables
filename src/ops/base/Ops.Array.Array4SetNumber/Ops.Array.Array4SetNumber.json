@@ -1,14 +1,15 @@
 {
-    "id": "1a71327d-fe88-4796-9ebd-5a1c1cd083af",
+    "id": "b0913a75-6e11-4e5b-aa7c-a5d066d4d0e0",
     "changelog": [
         {
-            "message": "created op",
+            "message": "new op",
             "author": "pandur",
-            "date": 1584365937229
+            "date": 1712655957332,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
-    "created": 1687272676383,
+    "created": 1712655957332,
     "layout": {
         "portsIn": [
             {
@@ -22,7 +23,22 @@
             },
             {
                 "type": 0,
-                "name": "Number",
+                "name": "Value X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value W",
                 "subType": "number"
             }
         ],
@@ -35,7 +51,6 @@
     },
     "summary": "set a number at index in an array",
     "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -63,6 +78,5 @@
                 "text": "Modified array out"
             }
         ]
-    },
-    "exampleProjectId": "bJrH16"
+    }
 }
