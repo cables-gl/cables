@@ -11,23 +11,25 @@ inFile.onChange = create;
 
 op.onFileChanged = (fn) =>
 {
-    if (inFile.get() && inFile.get().indexOf(fn) > -1) create();
+    if (inFile.get() && inFile.get().indexOf(fn) > -1) create(true);
 };
 
 inActive.onChange = () =>
 {
     if (!inActive.get())remove();
-    else create();
+    else create(true);
 };
 
-function create()
+function create(refresh)
 {
     if (!inActive.get()) return;
     remove();
     element = op.patch.getDocument().createElement("link");
     op.patch.getDocument().head.appendChild(element);
     setAttribs();
-    element.setAttribute("href", inFile.get());
+    let url = inFile.get();
+    if (op.patch.isEditorMode() && refresh) url = CABLES.cacheBust(url);
+    element.setAttribute("href", url);
 }
 
 function setAttribs()
