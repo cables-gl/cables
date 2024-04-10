@@ -41,6 +41,10 @@
                 "type": 0,
                 "name": "Value",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Toggled"
             }
         ]
     },

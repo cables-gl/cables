@@ -13,6 +13,7 @@ const inVisible = op.inBool("Visible", true);
 // outputs
 const siblingsPort = op.outObject("childs");
 const valuePort = op.outBoolNum("Value", defaultValuePort.get());
+const outToggled = op.outTrigger("Toggled");
 
 // vars
 const el = document.createElement("div");
@@ -28,6 +29,7 @@ el.addEventListener("dblclick", function ()
 {
     valuePort.set(defaultValuePort.get());
     inputValuePort.set(defaultValuePort.get());
+    outToggled.trigger();
 });
 
 const label = document.createElement("div");
@@ -59,6 +61,7 @@ function setDefaultValue()
 
     defaultValuePort.set(defaultValue);
     valuePort.set(defaultValue);
+    outToggled.trigger();
     op.refreshParams();
 }
 
@@ -71,6 +74,7 @@ function onInputClick()
         inputValuePort.set(true);
         icon.classList.add("icon_toggle_true");
         icon.classList.remove("icon_toggle_false");
+        outToggled.trigger();
     }
     else
     {
@@ -79,6 +83,7 @@ function onInputClick()
 
         valuePort.set(false);
         inputValuePort.set(false);
+        outToggled.trigger();
     }
     op.refreshParams();
 }
@@ -96,6 +101,7 @@ function onInputValuePortChanged()
         el.classList.remove("sidebar__toggle--active");
         valuePort.set(false);
     }
+    outToggled.trigger();
 }
 
 function onLabelTextChanged()

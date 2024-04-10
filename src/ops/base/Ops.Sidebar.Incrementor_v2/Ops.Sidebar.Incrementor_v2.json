@@ -50,12 +50,15 @@
                 "type": 0,
                 "name": "value",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Changed"
             }
         ]
     },
     "summary": "steps through numerical or array values one by one",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

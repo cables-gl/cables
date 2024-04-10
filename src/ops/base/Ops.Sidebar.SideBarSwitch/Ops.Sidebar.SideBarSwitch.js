@@ -7,7 +7,6 @@ const parentPort = op.inObject("link"),
 
     setDefaultValueButtonPort = op.inTriggerButton("Set Default"),
     inGreyOut = op.inBool("Grey Out", false),
-
     inDefault = op.inValue("Default", 0),
 
     siblingsPort = op.outObject("childs"),

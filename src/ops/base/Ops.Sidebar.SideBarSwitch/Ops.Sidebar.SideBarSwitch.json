@@ -32,6 +32,10 @@
             {
                 "type": 0,
                 "name": "Style index",
+                "values": [
+                    "Tabs",
+                    "Switch"
+                ],
                 "subType": "integer"
             },
             {
@@ -78,7 +82,6 @@
     },
     "summary": "add tabs or switchbar to a sidebar",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
