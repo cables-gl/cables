@@ -5,8 +5,8 @@ const
     inRoundOffset = op.inFloat("Radius Add Round", 0.1),
     inPointRadOffset = op.inFloat("Radius Add Point", 0.1),
     inOffset = op.inFloat("Offset", 0),
-    inPointOffset = op.inFloat("Point Offset XY", 0.1),
-    inPointOffsetZ = op.inFloat("Point Offset Z", 0.1),
+    inPointOffset = op.inFloat("Point Offset XY", 0),
+    inPointOffsetZ = op.inFloat("Point Offset Z", 0),
     inOffsetRot = op.inFloat("Offset rotation"),
     planeSelection = op.inSwitch("Plane", ["XY", "XZ", "YZ"], "XY"),
     rotationDirection = op.inSwitch("Rotation Direction", ["Clockwise", "Anticlockwise"], "Anticlockwise"),
@@ -40,7 +40,6 @@ function calcArray()
 
     let degInRadMul = 1;
     if (rotationDirection.get() === "Clockwise") degInRadMul *= -1; // Reverse direction for clockwise rotation
-
 
     for (let i = 0; i < segs * percent.get(); i++)
     {
