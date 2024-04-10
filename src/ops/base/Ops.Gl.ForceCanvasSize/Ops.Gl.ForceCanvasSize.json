@@ -29,6 +29,10 @@
             {
                 "type": 0,
                 "name": "Force index",
+                "values": [
+                    "Resolution",
+                    "Aspect Ratio"
+                ],
                 "subType": "integer"
             },
             {
@@ -100,7 +104,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

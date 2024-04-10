@@ -100,7 +100,14 @@
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888099984
+            "date": 1643888099984,
+            "type": "bugfix"
+        },
+        {
+            "message": "Added trigger output, triggered  on change",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712755375009
         }
     ],
     "exampleProjectId": "DLV0n6"

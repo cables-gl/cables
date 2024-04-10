@@ -60,14 +60,16 @@
             "date": 1623761944208
         },
         {
-            "message": "Ops.User.pandur.Toggle_v3 renamed to Ops.Sidebar.Toggle_v3",
-            "author": "pandur",
-            "date": 1623762022078
-        },
-        {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888170356
+            "date": 1643888170356,
+            "type": "bugfix"
+        },
+        {
+            "message": "Added trigger output, triggered  on change",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712755365055
         }
     ],
     "exampleProjectId": "aDgYX5"

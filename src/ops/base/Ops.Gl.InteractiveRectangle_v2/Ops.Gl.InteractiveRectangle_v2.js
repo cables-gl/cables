@@ -223,8 +223,11 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlign, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    const x1 = (trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2;
-    const y1 = (trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2;
+    const top = cgl.canvas.styleMarginTop || 0;
+    const left = cgl.canvas.styleMarginLeft || 0;
+
+    const x1 = (trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2 + left;
+    const y1 = (trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2 + top;
 
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1];
@@ -232,8 +235,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    const x2 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
-    const y2 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
+    const x2 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2) + left;
+    const y2 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2 + top);
 
     divAlignSize[0] = divAlign[0];
     divAlignSize[1] = divAlign[1] + height.get();
@@ -241,8 +244,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    const x3 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
-    const y3 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
+    const x3 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2) + left;
+    const y3 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2 + top);
 
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1] + height.get();
@@ -250,8 +253,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    const x4 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
-    const y4 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
+    const x4 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2) + left;
+    const y4 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2 + top);
 
     divX = Math.min(x1, x2, x3, x4);
     divY = Math.min(cgl.canvasHeight - y1, cgl.canvasHeight - y2, cgl.canvasHeight - y3, cgl.canvasHeight - y4);
