@@ -2,8 +2,8 @@ const
     render = op.inTrigger("render"),
     sides = op.inValue("sides", 32),
     rings = op.inValue("rings", 32),
-    innerRadius = op.inValue("innerRadius", 0.5),
-    outerRadius = op.inValue("outerRadius", 1),
+    innerRadius = op.inValue("innerRadius", 0.25),
+    outerRadius = op.inValue("outerRadius", 0.5),
     indraw = op.inBool("Draw", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");
