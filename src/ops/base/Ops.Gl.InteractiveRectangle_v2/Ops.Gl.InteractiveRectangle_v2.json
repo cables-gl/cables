@@ -71,6 +71,7 @@
             {
                 "type": 0,
                 "name": "Render",
+                "uititle": "Active",
                 "subType": "boolean"
             }
         ],
@@ -86,12 +87,12 @@
             {
                 "type": 0,
                 "name": "Pointer Hover",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Pointer Down",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -135,7 +136,6 @@
     },
     "summary": "An area which is interactive",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

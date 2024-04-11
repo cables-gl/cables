@@ -71,6 +71,11 @@ op.onDelete = () =>
     if (gizmo) gizmo = gizmo.dispose();
 };
 
+exec.onLinkChanged = () =>
+{
+    if (!exec.isLinked() && gizmo) gizmo = gizmo.dispose();
+};
+
 inEdit.onChange = () =>
 {
     if (!inEdit.get() && gizmo)

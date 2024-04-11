@@ -58,5 +58,6 @@
             }
         ]
     },
-    "exampleProjectId": "TctR5r"
+    "exampleProjectId": "TctR5r",
+    "license": "MIT"
 }

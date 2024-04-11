@@ -7,14 +7,16 @@
             "date": 1667504160840
         },
         {
-            "message": "Ops.User.pandur.CircularPoints renamed to Ops.Dev.Array.CircularPoints",
-            "author": "pandur",
-            "date": 1667549245819
+            "message": "Added direction clockwise/anti-clockwise toggle",
+            "type": "feature",
+            "author": "kikohs",
+            "date": 1712731232334
         },
         {
-            "message": "Ops.Dev.Array.CircularPoints renamed to Ops.Array.PointArray.CircularPoints",
-            "author": "pandur",
-            "date": 1670921131566
+            "message": "Added axis/plane switch",
+            "type": "feature",
+            "author": "kikohs",
+            "date": 1712731411764
         }
     ],
     "authorName": "pandur",
@@ -63,8 +65,27 @@
             },
             {
                 "type": 0,
-                "name": "Offset Rotation",
+                "name": "Offset rotation",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Plane index",
+                "values": [
+                    "XY",
+                    "XZ",
+                    "YZ"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Direction index",
+                "values": [
+                    "Clockwise",
+                    "Anticlockwise"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -88,7 +109,6 @@
             }
         ]
     },
-
     "exampleProjectId": "V34dYh",
     "docs": {
         "ports": []

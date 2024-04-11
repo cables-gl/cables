@@ -38,43 +38,53 @@
             },
             {
                 "type": 2,
-                "name": "Child 1"
+                "name": "Child 1",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 2"
+                "name": "Child 2",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 3"
+                "name": "Child 3",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 4"
+                "name": "Child 4",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 5"
+                "name": "Child 5",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 6"
+                "name": "Child 6",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 7"
+                "name": "Child 7",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 8"
+                "name": "Child 8",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 9"
+                "name": "Child 9",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child 10"
+                "name": "Child 10",
+                "objType": "element"
             }
         ],
         "portsOut": [
@@ -88,7 +98,6 @@
     "summary": "Set childs of a HTML Element",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },

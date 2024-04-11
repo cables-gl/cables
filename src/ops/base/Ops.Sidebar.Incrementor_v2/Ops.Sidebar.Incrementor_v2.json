@@ -50,12 +50,15 @@
                 "type": 0,
                 "name": "value",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Changed"
             }
         ]
     },
     "summary": "steps through numerical or array values one by one",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -97,7 +100,14 @@
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888099984
+            "date": 1643888099984,
+            "type": "bugfix"
+        },
+        {
+            "message": "Added trigger output, triggered  on change",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712755375009
         }
     ],
     "exampleProjectId": "DLV0n6"

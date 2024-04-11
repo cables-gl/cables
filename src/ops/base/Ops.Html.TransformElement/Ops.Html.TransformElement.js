@@ -137,15 +137,19 @@ function setProperties()
         getScreenCoord();
         const yy = cgl.canvas.offsetTop + y;
 
-        if (yy != cachedTop)
+        const top = cgl.canvas.styleMarginTop || 0;
+
+        if (yy + top != cachedTop)
         {
-            ele.style.top = yy + "px";
+            ele.style.top = (yy + top) + "px";
             cachedTop = yy;
         }
 
-        if (x != cachedLeft)
+        const left = cgl.canvas.styleMarginLeft || 0;
+
+        if (x + left != cachedLeft)
         {
-            ele.style.left = x + "px";
+            ele.style.left = (x + left) + "px";
             cachedLeft = x;
         }
 

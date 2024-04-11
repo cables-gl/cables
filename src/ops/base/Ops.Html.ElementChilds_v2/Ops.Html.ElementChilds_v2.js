@@ -7,7 +7,7 @@ const canvas = op.patch.cgl.canvas.parentElement;
 const inPorts = [];
 for (let i = 0; i < 10; i++)
 {
-    const p = op.inObject("Child " + (i + 1));
+    const p = op.inObject("Child " + (i + 1), null, "element");
     inPorts.push(p);
     p.onChange = () =>
     {
