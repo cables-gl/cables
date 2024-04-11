@@ -64,6 +64,7 @@ inUpdate.onTriggered = () =>
         canvas.style.top = y + "px";
         canvas.style.left = x + "px";
 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.imageSmoothingEnabled = inSmoothing.get();
 
         if (op.patch.cgCanvas) ctx.drawImage(op.patch.cgCanvas.canvasEle, 0, 0, canvas.width, canvas.height);
