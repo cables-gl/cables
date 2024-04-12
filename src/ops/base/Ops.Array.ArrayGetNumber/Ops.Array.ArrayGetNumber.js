@@ -1,7 +1,9 @@
 const
     array = op.inArray("array"),
     index = op.inValueInt("index"),
-    value = op.outNumber("value");
+    valueInvalid = op.inFloat("Value Invalid Index", 0),
+    value = op.outNumber("value"),
+    outValidIndex = op.outBoolNum("Valid Index", true);
 
 array.ignoreValueSerialize = true;
 
@@ -11,12 +13,16 @@ function update()
 {
     if (array.get())
     {
-        let input = array.get()[index.get()];
+        const input = array.get()[index.get()];
         if (isNaN(input))
         {
-            value.set(0);
-            return;
+            value.set(valueInvalid.get());
+            outValidIndex.set(false);
         }
-        value.set(parseFloat(input));
+        else
+        {
+            outValidIndex.set(true);
+            value.set(parseFloat(input));
+        }
     }
 }
