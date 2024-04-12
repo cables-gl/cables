@@ -163,11 +163,6 @@
             "type": "improvement"
         },
         {
-            "message": "cloned op from Ops.Gl.Matrix.OrbitControls",
-            "author": "pandur",
-            "date": 1712738945666
-        },
-        {
             "message": "Fix bug with zooming in was stopping too soon",
             "type": "bugfix",
             "author": "pandur",

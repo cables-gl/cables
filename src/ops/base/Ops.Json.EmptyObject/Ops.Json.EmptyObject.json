@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1692304937920
+            "date": 1692304937920,
+            "type": "new"
         },
         {
             "message": "Ops.Patch.PUlcN_D.Object renamed to Ops.Json.Object",
@@ -25,8 +26,6 @@
         ]
     },
     "summary": "An empty Object",
-
-
     "docs": {
         "ports": []
     },

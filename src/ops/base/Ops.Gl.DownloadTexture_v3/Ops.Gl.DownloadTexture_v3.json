@@ -8,12 +8,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1712233339862
-        },
-        {
-            "message": " updated core libs: subpatchop",
-            "type": "",
-            "author": "pandur",
-            "date": 1712233340136
         }
     ],
     "coreLibs": [
