@@ -19,6 +19,15 @@
                 "type": 0,
                 "name": "Pass Through",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "When False index",
+                "values": [
+                    "keep last array",
+                    "null"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -30,7 +39,6 @@
     },
     "summary": "Only allows an array through if pass through is true",
     "issues": "",
-
     "youtubeids": [
         "gT1jXP5As9A"
     ],

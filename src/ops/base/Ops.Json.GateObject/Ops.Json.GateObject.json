@@ -22,6 +22,15 @@
             },
             {
                 "type": 0,
+                "name": "When False index",
+                "values": [
+                    "keep last object",
+                    "null"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Only Valid Objects",
                 "subType": "boolean"
             }
@@ -35,7 +44,6 @@
     },
     "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
     "issues": "",
-
     "docs": {
         "ports": [
             {
