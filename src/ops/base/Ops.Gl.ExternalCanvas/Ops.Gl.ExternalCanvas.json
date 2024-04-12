@@ -7,16 +7,10 @@
             "date": 1689248529267
         },
         {
-            "message": "Ops.Patch.PHnG3fB.NewCanvas renamed to Ops.Team.Vj.CanvasCopyWindow",
-            "type": "rename",
+            "message": "Clear background every frame",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1689251935962
-        },
-        {
-            "message": "Ops.Team.Vj.CanvasCopyWindow renamed to Ops.Gl.ExternalCanvas",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1689425406750
+            "date": 1712763041798
         }
     ],
     "layout": {
@@ -87,8 +81,6 @@
     "authorName": "pandur",
     "created": 1689248551446,
     "summary": "Open a new window that shows a copy of the patch canvas",
-
-
     "docs": {
         "ports": []
     },

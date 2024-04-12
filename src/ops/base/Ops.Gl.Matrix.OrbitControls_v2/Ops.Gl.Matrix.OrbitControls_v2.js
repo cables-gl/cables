@@ -20,13 +20,14 @@ const
     allowZooming = op.inValueBool("Allow Zooming", true),
     allowRotation = op.inValueBool("Allow Rotation", true),
     restricted = op.inValueBool("restricted", true),
+    inIdentity = op.inBool("Identity", true),
+    inReset = op.inTriggerButton("Reset"),
 
     trigger = op.outTrigger("trigger"),
     outRadius = op.outNumber("radius"),
     outXDeg = op.outNumber("Rot X"),
-    outYDeg = op.outNumber("Rot Y"),
-    inIdentity = op.inBool("Identity", true),
-    inReset = op.inTriggerButton("Reset");
+    outYDeg = op.outNumber("Rot Y");
+    // outCoords = op.outArray("Eye/Target Pos");
 
 op.setPortGroup("Initial Values", [initialAxis, initialX, initialRadius]);
 op.setPortGroup("Interaction", [smoothness, speedX, speedY]);
@@ -57,6 +58,7 @@ let eye = vec3.create(),
     divisor = 1,
     element = null,
     initializing = true,
+    eyeTargetCoord = [0, 0, 0, 0, 0, 0],
     lastPy = 0;
 
 op.onDelete = unbind;
@@ -159,6 +161,14 @@ render.onTriggered = function ()
     finalCenter[0] = ip(finalCenter[0], tempCenter[0]);
     finalCenter[1] = ip(finalCenter[1], tempCenter[1]);
     finalCenter[2] = ip(finalCenter[2], tempCenter[2]);
+
+    // eyeTargetCoord[0] = finalEye[0];
+    // eyeTargetCoord[1] = finalEye[1];
+    // eyeTargetCoord[2] = finalEye[2];
+    // eyeTargetCoord[3] = finalCenter[0];
+    // eyeTargetCoord[4] = finalCenter[1];
+    // eyeTargetCoord[5] = finalCenter[2];
+    // outCoords.setRef(eyeTargetCoord);
 
     const empty = vec3.create();
 
