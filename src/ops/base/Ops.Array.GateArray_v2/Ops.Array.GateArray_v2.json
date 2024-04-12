@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1600364098080
+            "date": 1600364098080,
+            "type": "new"
+        },
+        {
+            "message": "Added option to set output to null if passThrough is false",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712928294894
         }
     ],
     "authorName": "pandur",
