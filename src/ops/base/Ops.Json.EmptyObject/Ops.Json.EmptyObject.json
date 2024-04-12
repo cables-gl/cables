@@ -1,5 +1,5 @@
 {
-    "id": "d618f2e1-4e60-4ac4-91aa-218bab2a6742",
+    "id": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
     "changelog": [
         {
             "message": "created op",
@@ -11,22 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1692305113592
-        },
-        {
-            "message": "cloned op from Ops.Json.Object",
-            "author": "pandur",
-            "date": 1712929758277
         }
     ],
     "authorName": "pandur",
-    "created": 1712929758277,
+    "created": 1692304956642,
     "layout": {
-        "portsIn": [
-            {
-                "type": 2,
-                "name": "Object"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 2,
@@ -35,7 +25,10 @@
         ]
     },
     "summary": "An empty Object",
+
+
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "piMxeG"
 }
