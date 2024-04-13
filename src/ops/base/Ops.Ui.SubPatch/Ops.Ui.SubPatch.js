@@ -4,12 +4,6 @@ op.dynOut = op.addOutPort(new CABLES.Port(op, "create port out", CABLES.OP_PORT_
 const dataStr = op.addInPort(new CABLES.Port(op, "dataStr", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
 op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
 
-// if (CABLES.UI && CABLES.sandbox.isDevEnv())
-// {
-//     const inMakeBp = op.inTriggerButton("Create Blueprint");
-//     inMakeBp.setUiAttribs({ "hidePort": true });
-//     inMakeBp.onTriggered = makeBlueprint;
-// }
 
 dataStr.setUiAttribs({ "hideParam": true });
 op.patchId.setUiAttribs({ "hidePort": true });
@@ -393,21 +387,21 @@ op.onDelete = function ()
     }
 };
 
-function makeBlueprint()
-{
-    let attribs = {
-        "pasted": true,
-        "translate": {
-            "x": op.uiAttribs.translate.x - 150,
-            "y": op.uiAttribs.translate.y
-        }
-    };
+// function makeBlueprint()
+// {
+//     let attribs = {
+//         "pasted": true,
+//         "translate": {
+//             "x": op.uiAttribs.translate.x - 150,
+//             "y": op.uiAttribs.translate.y
+//         }
+//     };
 
-    if (CABLES.UI) attribs.subPatch = gui.patchView.getCurrentSubPatch();
+//     if (CABLES.UI) attribs.subPatch = gui.patchView.getCurrentSubPatch();
 
-    const bpOp = op.patch.addOp(CABLES.UI.DEFAULTOPNAMES.blueprint, attribs);
-    bpOp.createBlueprint(gui.patchId, op.patchId.get(), true);
-}
+//     const bpOp = op.patch.addOp(CABLES.UI.DEFAULTOPNAMES.blueprint, attribs);
+//     bpOp.createBlueprint(gui.patchId, op.patchId.get(), true);
+// }
 
 op.rebuildListeners = () =>
 {

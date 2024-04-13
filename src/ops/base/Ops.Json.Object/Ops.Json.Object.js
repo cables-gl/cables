@@ -1,3 +1,8 @@
-const r = op.outObject("Result");
+const
+    i = op.inObject("Object"),
+    r = op.outObject("Result");
 
-r.setRef({});
+i.onChange = () =>
+{
+    r.setRef(i.get());
+};

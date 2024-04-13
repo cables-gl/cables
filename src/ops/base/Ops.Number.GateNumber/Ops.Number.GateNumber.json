@@ -30,6 +30,20 @@
                 "type": 0,
                 "name": "Pass Through",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "When False index",
+                "values": [
+                    "keep last number",
+                    "custom"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Custom Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -51,10 +65,15 @@
             "type": "rename",
             "author": "pandur",
             "date": 1701852557296
+        },
+        {
+            "message": "Added option to set output to custom value if passThrough is false\t",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712929293359
         }
     ],
     "issues": "",
-
     "exampleProjectId": "JJSflJ",
     "youtubeids": [
         "gT1jXP5As9A"

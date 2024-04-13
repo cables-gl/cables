@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1556101705380
+            "date": 1556101705380,
+            "type": "new"
+        },
+        {
+            "message": "Added option to set output to null if passThrough is false",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712928300812
         }
     ],
     "authorName": "pandur",
@@ -22,6 +29,15 @@
             },
             {
                 "type": 0,
+                "name": "When False index",
+                "values": [
+                    "keep last object",
+                    "null"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Only Valid Objects",
                 "subType": "boolean"
             }
@@ -35,7 +51,6 @@
     },
     "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
     "issues": "",
-
     "docs": {
         "ports": [
             {

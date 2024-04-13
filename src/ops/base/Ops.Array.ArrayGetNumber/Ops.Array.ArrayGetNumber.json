@@ -10,6 +10,11 @@
                 "type": 0,
                 "name": "index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Value Invalid Index",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -17,6 +22,11 @@
                 "type": 0,
                 "name": "value",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Valid Index",
+                "subType": "boolean"
             }
         ]
     },
@@ -39,5 +49,13 @@
                 "text": "The value of the array at position `Index`"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Added input vor value when index is invalid (negative or too big)",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712927716937
+        }
+    ]
 }
