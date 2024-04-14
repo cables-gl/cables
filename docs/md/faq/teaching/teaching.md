@@ -6,6 +6,8 @@ Cables is used at more and more universities, being completely free and [MIT-lic
 
 It's easy to get started, has a vast amount of examples and documentation and it does not need more than a browser and an internet connection. All of this makes it perfectly suited for classrooms or workshops.
 
+checkout our blog post [Using cables in the classroom](https://blog.cables.gl/2023/11/28/using-cables-in-the-classroom/)
+
 ## Need help?
 
 Do you want to introduce cables to your classroom to teach visual coding, arts, data visualisation?
