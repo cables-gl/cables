@@ -31,8 +31,6 @@
     },
     "summary": "sends a trigger via socketcluster/websocket",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -54,12 +52,13 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3",
+    "exampleProjectId": "",
     "changelog": [
         {
             "message": "Ops.Net.SocketCluster.SocketClusterSendTrigger renamed to Ops.Extension.SocketCluster.SocketClusterSendTrigger",
             "author": "stephan",
             "date": 1671003626531
         }
-    ]
+    ],
+    "license": "MIT"
 }

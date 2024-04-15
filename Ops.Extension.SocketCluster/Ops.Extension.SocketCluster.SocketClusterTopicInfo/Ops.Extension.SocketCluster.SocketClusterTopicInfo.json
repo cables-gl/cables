@@ -15,6 +15,12 @@
             "message": "Ops.Net.SocketCluster.SocketClusterTopicInfo renamed to Ops.Extension.SocketCluster.SocketClusterTopicInfo",
             "author": "stephan",
             "date": 1671003433017
+        },
+        {
+            "message": "Added toggle to receive my own data",
+            "type": "",
+            "author": "pandur",
+            "date": 1713181273974
         }
     ],
     "authorName": "stephan",
@@ -48,6 +54,11 @@
             {
                 "type": 1,
                 "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Receive My Data",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -127,5 +138,6 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3"
+    "exampleProjectId": "EJvr0a",
+    "license": "MIT"
 }

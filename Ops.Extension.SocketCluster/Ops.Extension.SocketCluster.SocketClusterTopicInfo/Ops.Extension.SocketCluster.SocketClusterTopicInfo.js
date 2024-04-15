@@ -4,6 +4,7 @@ const inSocket = op.inObject("Socket", null, "socketcluster"),
     inSoftTimeout = op.inInt("Soft Timeout", 15000),
     inRetain = op.inInt("Retain Messages", 1),
     inUpdate = op.inTriggerButton("Update"),
+    receiveMyData=op.inBool("Receive My Data",true),
     outActive = op.outArray("Active Clients"),
     outSoftTimeout = op.outObject("Will Time Out"),
     outTimeout = op.outArray("Timed Out Clients"),
@@ -48,7 +49,8 @@ const init = () =>
 
 const handleMessage = (socket, msg, type) =>
 {
-    if (msg.clientId != socket.clientId && msg.topic == inTopic.get())
+    if(receiveMyData.get() || msg.clientId != socket.clientId)
+    if ( msg.topic == inTopic.get())
     {
         if (!activeClients.hasOwnProperty(msg.clientId))
         {

@@ -12,6 +12,11 @@
             {
                 "type": 5,
                 "name": "topic"
+            },
+            {
+                "type": 0,
+                "name": "Receive Own Data",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -31,8 +36,6 @@
     },
     "summary": "Receives object from the socketcluster socket/topic",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -58,12 +61,19 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3",
+    "exampleProjectId": "EJvr0a",
     "changelog": [
         {
             "message": "Ops.Net.SocketCluster.SocketClusterRecieveObject renamed to Ops.Extension.SocketCluster.SocketClusterRecieveObject",
             "author": "stephan",
             "date": 1671003604106
+        },
+        {
+            "message": "Add toggle to receive your own client data",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713181639578
         }
-    ]
+    ],
+    "license": "MIT"
 }

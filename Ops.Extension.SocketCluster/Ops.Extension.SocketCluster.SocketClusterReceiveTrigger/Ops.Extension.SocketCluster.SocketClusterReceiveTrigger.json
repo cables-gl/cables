@@ -36,8 +36,6 @@
     },
     "summary": "Receives trigger from the socketcluster socket/topic",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -73,5 +71,7 @@
             "author": "stephan",
             "date": 1671003660905
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "EJvr0a"
 }
