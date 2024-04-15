@@ -63,7 +63,7 @@ const handleMessage = (socket, msg, type) =>
         };
         activeClients[msg.clientId].push(clientData);
         clientLastTimestamps[msg.clientId] = Date.now();
-        // cleanupClients(newClient);
+        cleanupClients(newClient);
     }
 };
 
