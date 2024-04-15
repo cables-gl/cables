@@ -30,13 +30,15 @@ take a look at the CAVEATS below if you are trying to export to OS X and especia
 - wait for the download button to appear
 - download executable, can take some time as electron might turn out to be quite big depending on your platform, even with smaller patches
 
-## CAVEATS
-- Apple introduced some security features that make it next to impossible to build these kind of apps at the moment, so there is a few caveats when using this on OS X.
+## CAVEATS MAC OS
+- Apple introduced some security features that make it next to impossible to build these kind of apps at the moment, so there is a few caveats when using this on MacOS.
 - The executable is not signed, you will need to whitelist it on every machine you run it on (right click, "open" usually does that).
   - We cannot sign this executable, as it's contents do change when downloading a patch, this is intended...sorry...
   - The build for arm/m1-architecture is even harder to run, apple forbids running unsigned apps that are build for arm entirely, not even whitelisting is possible...you may sign it on your own, though.
 - Once you downloaded the app, USE THE FINDER to move it basically anywhere else (like your desktop) before opening it
   - Apple puts downloaded apps into a random read-only directory UNTIL YOU MOVE IT USING FINDER, we need to write to the directory...sorry...
+- There are ways to still be able to execute the app: (on this website)[https://appuals.com/damaged-app-cannot-be-opened-on-macos-error/] we recomment the command line snipped: `sudo xattr -cr appName.app`
+
 
 ## Export Options
 
