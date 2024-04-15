@@ -37,7 +37,7 @@ take a look at the CAVEATS below if you are trying to export to OS X and especia
   - The build for arm/m1-architecture is even harder to run, apple forbids running unsigned apps that are build for arm entirely, not even whitelisting is possible...you may sign it on your own, though.
 - Once you downloaded the app, USE THE FINDER to move it basically anywhere else (like your desktop) before opening it
   - Apple puts downloaded apps into a random read-only directory UNTIL YOU MOVE IT USING FINDER, we need to write to the directory...sorry...
-- There are ways to still be able to execute the app: (on this website)[https://appuals.com/damaged-app-cannot-be-opened-on-macos-error/] we recomment the command line snipped: `sudo xattr -cr appName.app`
+- There are ways to still be able to execute the app: [on this website](https://appuals.com/damaged-app-cannot-be-opened-on-macos-error/) we recomment the command line snipped: `sudo xattr -cr appName.app`
 
 
 ## Export Options
