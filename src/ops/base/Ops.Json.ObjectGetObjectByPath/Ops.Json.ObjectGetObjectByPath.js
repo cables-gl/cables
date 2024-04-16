@@ -7,7 +7,9 @@ const
 objectIn.onChange =
     pathIn.onChange = update;
 
+pathIn.setUiAttribs({ "stringTrim": true });
 pathIn.on("change", updateUi);
+
 updateUi();
 function updateUi()
 {

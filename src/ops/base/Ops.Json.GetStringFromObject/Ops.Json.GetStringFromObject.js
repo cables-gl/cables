@@ -5,6 +5,7 @@ const
 
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
+key.setUiAttribs({ "stringTrim": true });
 
 data.onChange = exec;
 

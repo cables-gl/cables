@@ -54,11 +54,6 @@
             {
                 "type": 2,
                 "name": "Object Value"
-            },
-            {
-                "type": 0,
-                "name": "Deep Copy",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
