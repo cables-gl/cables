@@ -74,5 +74,13 @@
         "E-IZCKf_0c0"
     ],
     "exampleProjectId": "P4Itro",
-    "caniusequery": ""
+    "caniusequery": "",
+    "changelog": [
+        {
+            "message": "Fix problems with positioning when using forceCanvasSize",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1712913009518
+        }
+    ]
 }

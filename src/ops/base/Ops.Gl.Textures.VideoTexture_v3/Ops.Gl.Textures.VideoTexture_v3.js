@@ -59,15 +59,17 @@ videoElement.setAttribute("autoplay", "autoplay");
 
 const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
 op.toWorkPortsNeedToBeLinked(textureOut);
-textureOut.set(tex);
-textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+
+textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 play.onChange = updatePlayState;
 filename.onChange = reload;
-volume.onChange = updateVolume;
-op.onMasterVolumeChanged = updateVolume;
+
+volume.onChange =
+    op.onMasterVolumeChanged = updateVolume;
 
 tfilter.onChange = wrap.onChange = () =>
 {
+    if (tex)tex.delete();
     tex = null;
 };
 
@@ -105,7 +107,7 @@ function reInitTexture()
 {
     if (tex)tex.delete();
 
-    if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
+    cgl_filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
 
     if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
@@ -204,6 +206,7 @@ function updateTexture()
 
     if (!filename.get())
     {
+        tex = null;
         textureOut.set(emptyTexture);
         return;
     }
@@ -216,9 +219,6 @@ function updateTexture()
         op.log("video size", videoElement.videoWidth, videoElement.videoHeight);
         tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
     }
-
-    // tex.height = videoElement.videoHeight;
-    // tex.width = videoElement.videoWidth;
 
     outWidth.set(tex.width);
     outHeight.set(tex.height);
@@ -247,17 +247,17 @@ function updateTexture()
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);
 
-    if (firstTime)
-    {
-        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
-        cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
-        tex._setFilter();
-    }
-    else
-    {
-        cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
-        cgl.gl.texSubImage2D(cgl.gl.TEXTURE_2D, 0, 0, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
-    }
+    // if (firstTime)
+    // {
+    cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
+    cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+    tex._setFilter();
+    // }
+    // else
+    // {
+    // cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, flip.get());
+    // cgl.gl.texSubImage2D(cgl.gl.TEXTURE_2D, 0, 0, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
+    // }
 
     if (flip.get()) cgl.gl.pixelStorei(cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 

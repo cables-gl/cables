@@ -24,6 +24,10 @@
             {
                 "type": 0,
                 "name": "Area index",
+                "values": [
+                    "Canvas",
+                    "Document"
+                ],
                 "subType": "integer"
             },
             {

@@ -116,9 +116,9 @@ const cgl = op.patch.cgl;
 let listenerElement = null;
 function addListeners()
 {
-    listenerElement.addEventListener("touchmove", ontouchmove, { "passive": true });
-    listenerElement.addEventListener("touchstart", ontouchstart, { "passive": true });
-    listenerElement.addEventListener("touchend", ontouchend, { "passive": true });
+    listenerElement.addEventListener("touchmove", ontouchmove, { "passive": false });
+    listenerElement.addEventListener("touchstart", ontouchstart, { "passive": false });
+    listenerElement.addEventListener("touchend", ontouchend, { "passive": false });
 }
 
 function updateArea()
