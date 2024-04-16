@@ -85,7 +85,7 @@ const Patch = function (cfg)
     this._frameWasdelayed = true;
     this.frameStore = {};
     this.deSerialized = false;
-    this._lastReqAnimTimeStamp = 0;
+    this.reqAnimTimeStamp = 0;
 
     this.cgCanvas = null;
 
@@ -628,18 +628,18 @@ Patch.prototype.renderFrame = function (timestamp)
 {
     // console.log("renderframe", this._paused, this._frameNum);
 
-    this.timer.update();
-    this.freeTimer.update();
+    this.timer.update(this.reqAnimTimeStamp);
+    this.freeTimer.update(this.reqAnimTimeStamp);
     const time = this.timer.getTime();
     const startTime = performance.now();
     this.cgl.frameStartTime = this.timer.getTime();
 
-    const delta = timestamp - this._lastReqAnimTimeStamp || timestamp;
+    const delta = timestamp - this.reqAnimTimeStamp || timestamp;
 
     this.emitOnAnimFrameEvent(null, delta);
 
     this.cgl.profileData.profileFrameDelta = delta;
-    this._lastReqAnimTimeStamp = timestamp;
+    this.reqAnimTimeStamp = timestamp;
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
     this.emitEvent("onRenderFrame", time);
