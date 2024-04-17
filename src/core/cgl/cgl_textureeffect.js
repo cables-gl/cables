@@ -116,6 +116,7 @@ TextureEffect.prototype.continueEffect = function ()
     // todo why two pushs?
 
 
+
     this._cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
 
 

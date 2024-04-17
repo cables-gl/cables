@@ -252,6 +252,7 @@ function doRender()
     texOut.setRef(effect.getCurrentSourceTexture());
 
     effect.endEffect();
+    // console.log(prevViewPort);
 
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
