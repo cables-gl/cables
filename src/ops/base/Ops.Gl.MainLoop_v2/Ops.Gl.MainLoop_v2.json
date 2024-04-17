@@ -1,0 +1,68 @@
+{
+    "id": "f1029550-d877-42da-9b1e-63a5163a0350",
+    "changelog": [
+        {
+            "message": "New version: Max pixel density / DPR to have better control over rendering on HDPI/retina screens, cleanup",
+            "author": "pandur",
+            "date": 1713354512152,
+            "type": "feature"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Max Pixel Density (DPR)",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "FPS Limit",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reduce FPS unfocussed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Transparent",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Density",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1701100597121,
+    "docs": {
+        "ports": []
+    },
+    "summary": "Trigger other ops once every frame to create smooth animations",
+    "license": "MIT"
+}
