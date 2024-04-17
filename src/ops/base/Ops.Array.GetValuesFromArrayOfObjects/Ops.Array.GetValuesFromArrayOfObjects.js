@@ -10,6 +10,8 @@ inKey.onChange =
 inArr.onChange =
 inignoreNonNums.onChange = exec;
 
+inKey.setUiAttribs({ "stringTrim": true });
+
 function exec()
 {
     const arr = inArr.get();

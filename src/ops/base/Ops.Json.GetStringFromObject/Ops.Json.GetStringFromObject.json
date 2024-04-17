@@ -12,17 +12,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "data"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "key"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "result"
             }
         ]
@@ -30,8 +30,6 @@
     "summary": "get string from object",
     "youtubeid": "",
     "issues": "",
-
-
     "docs": {
         "ports": []
     },

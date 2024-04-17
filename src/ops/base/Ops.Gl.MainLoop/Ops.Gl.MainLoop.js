@@ -3,7 +3,7 @@ const
     trigger = op.outTrigger("trigger"),
     width = op.outNumber("width"),
     height = op.outNumber("height"),
-    reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true),
+    reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", false),
     reduceLoadingFPS = op.inValueBool("Reduce FPS loading"),
     clear = op.inValueBool("Clear", true),
     clearAlpha = op.inValueBool("ClearAlpha", true),

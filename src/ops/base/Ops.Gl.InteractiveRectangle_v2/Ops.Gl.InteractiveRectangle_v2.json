@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1599663936812
+        },
+        {
+            "message": "Fix problems with positioning when using forceCanvasSize",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1712913031408
         }
     ],
     "authorName": "pandur",

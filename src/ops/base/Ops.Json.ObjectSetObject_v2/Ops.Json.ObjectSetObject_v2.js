@@ -11,6 +11,8 @@ inObject.onLinkChanged =
     outObject.onLinkChanged =
     inObject.onChange = update;
 
+inKey.setUiAttribs({ "stringTrim": true });
+
 function update()
 {
     const obj = inObject.get() || {};

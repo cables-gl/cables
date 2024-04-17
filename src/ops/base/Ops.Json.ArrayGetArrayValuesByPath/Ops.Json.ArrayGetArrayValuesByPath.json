@@ -27,7 +27,6 @@
     },
     "summary": "Outputs all the values of the properties of an array of objects given a path",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

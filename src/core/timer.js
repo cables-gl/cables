@@ -41,9 +41,16 @@ const Timer = function ()
     this.overwriteTime = -1;
 };
 
+
+Timer.prototype._internalNow = function ()
+{
+    if (this._ts) return this._ts;
+    return internalNow();
+};
+
 Timer.prototype._getTime = function ()
 {
-    this._lastTime = (internalNow() - this._timeStart) / 1000;
+    this._lastTime = (this._internalNow() - this._timeStart) / 1000;
     return this._lastTime + this._timeOffset;
 };
 
@@ -72,8 +79,9 @@ Timer.prototype.isPlaying = function ()
  * @description update timer
  * @return {Number} time
  */
-Timer.prototype.update = function ()
+Timer.prototype.update = function (ts)
 {
+    if (ts) this._ts = ts;
     if (this._paused) return;
     this._currentTime = this._getTime();
 
@@ -125,7 +133,7 @@ Timer.prototype.togglePlay = function ()
 Timer.prototype.setTime = function (t)
 {
     if (isNaN(t) || t < 0) t = 0;
-    this._timeStart = internalNow();
+    this._timeStart = this._internalNow();
     this._timeOffset = t;
     this._currentTime = t;
     this.emitEvent("timeChange");
@@ -135,7 +143,7 @@ Timer.prototype.setOffset = function (val)
 {
     if (this._currentTime + val < 0)
     {
-        this._timeStart = internalNow();
+        this._timeStart = this._internalNow();
         this._timeOffset = 0;
         this._currentTime = 0;
     }
@@ -155,7 +163,7 @@ Timer.prototype.setOffset = function (val)
  */
 Timer.prototype.play = function ()
 {
-    this._timeStart = internalNow();
+    this._timeStart = this._internalNow();
     this._paused = false;
     this.emitEvent("playPause");
 };

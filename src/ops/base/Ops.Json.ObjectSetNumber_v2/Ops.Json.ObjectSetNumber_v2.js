@@ -7,6 +7,8 @@ const
 inObject.onChange =
     inValue.onChange = update;
 
+inKey.setUiAttribs({ "stringTrim": true });
+
 function update()
 {
     let obj = inObject.get();
