@@ -1,0 +1,82 @@
+{
+    "id": "8d719702-c125-4f71-af5f-7a54b9770c01",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1602247874111
+        },
+        {
+            "message": "Ops.User.pandur.GltfMeshSequence renamed to Ops.Gl.GLTF.GltfMeshSequence",
+            "author": "pandur",
+            "date": 1602248356916
+        },
+        {
+            "message": "Ops.Gl.GLTF.GltfMeshSequence renamed to Ops.Deprecated.Gl.GLTF.GltfMeshSequence",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676762446
+        },
+        {
+            "message": "Ops.Deprecated.Gl.GLTF.GltfMeshSequence renamed to Ops.Gl.GLTF.GltfMeshSequence",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676814830
+        },
+        {
+            "message": "cloned op from Ops.Gl.GLTF.GltfMeshSequence",
+            "author": "pandur",
+            "date": 1713346712323
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1713346712323,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Transformation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Ignore Material",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Current Index",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "switch between meshes e.g. like a stop motion animation",
+    "issues": "",
+    "docs": {
+        "ports": []
+    }
+}
