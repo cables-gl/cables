@@ -9,7 +9,7 @@
         "url": "https://github.com/pandrr/cables/issues"
     },
     "homepage": "https://github.com/pandrr/cables#readme",
-    "main": "dist/cables.max.js",
+    "main": "src/core/index.js",
     "type": "module",
     "engines": {
         "node": "18.14.2"
@@ -27,8 +27,8 @@
         "gulp-rename": "2.0.0",
         "raw-loader": "^4.0.2",
         "webpack": "5.75.0",
-        "webpack-bundle-analyzer": "4.8.0",
-        "webpack-stream": "7.0.0"
+        "webpack-stream": "7.0.0",
+        "terser-webpack-plugin": "5.3.10"
     },
     "scripts": {
         "build": "gulp build",

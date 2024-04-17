@@ -39,6 +39,11 @@
             {
                 "type": 0,
                 "name": "Area index",
+                "values": [
+                    "Canvas",
+                    "Document",
+                    "Parent"
+                ],
                 "subType": "integer"
             },
             {
@@ -70,10 +75,9 @@
         ]
     },
     "summary": "outputs delta values controlled by the mousewheel (scroll, zoom)",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "hH8f_6"
+    "exampleProjectId": "hH8f_6",
+    "license": "MIT"
 }

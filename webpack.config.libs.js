@@ -1,7 +1,8 @@
 import path from "path";
 import fs from "fs";
+import TerserPlugin from "terser-webpack-plugin";
 
-export default (isProduction = false) =>
+export default (isProduction = false, minify = false) =>
 {
     const getDirectories = function (arr)
     {
@@ -54,7 +55,7 @@ export default (isProduction = false) =>
                 {
                     "entry": path.join(__dirname, "src", "libs", namespace, file),
                     "output": {
-                        "filename": isProduction ? targetName + ".min.js" : targetName + ".max.js",
+                        "filename": targetName + ".js",
                         "path": path.join(__dirname, "build", "libs"),
                         "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(baseName)],
                         "libraryExport": raiseFirstChar(namespace),
@@ -72,7 +73,7 @@ export default (isProduction = false) =>
                 {
                     "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
                     "output": {
-                        "filename": isProduction ? targetName + ".min.js" : targetName + ".max.js",
+                        "filename": targetName + ".js",
                         "path": path.join(__dirname, "build", "libs"),
                         "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(subdir)],
                         "libraryExport": raiseFirstChar(subdir),
@@ -109,7 +110,8 @@ export default (isProduction = false) =>
         "mode": "production",
         "devtool": false,
         "optimization": {
-            "minimize": isProduction, // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+            "minimizer": [new TerserPlugin({ "extractComments": false, "terserOptions": { "output": { "comments": false } } })],
+            "minimize": minify,
             "usedExports": true
         },
         "module": {
