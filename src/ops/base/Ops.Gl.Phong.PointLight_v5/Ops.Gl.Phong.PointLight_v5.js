@@ -140,7 +140,8 @@ const transVec = vec3.create();
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (cgl.shouldDrawHelpers(op))
+
+    if (op.isCurrentUiOp())
     {
         gui.setTransformGizmo({
             "posX": inPosX,
