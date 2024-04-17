@@ -181,6 +181,11 @@
                 "type": 2,
                 "name": "Rotate Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Min Point Size",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -218,6 +223,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1710866771264
+        },
+        {
+            "message": "Added minimum pointsize parameter, e.g. set to 1 to make points always visible",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713346572006
         }
     ],
     "summary": "Draw all vertices as points / circles",
