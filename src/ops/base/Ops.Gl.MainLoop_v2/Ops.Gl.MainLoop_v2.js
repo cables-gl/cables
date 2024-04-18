@@ -2,7 +2,7 @@ const
     hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
     fpsLimit = op.inValue("FPS Limit", 0),
     reduceFocusFPS = op.inValueBool("Reduce FPS unfocussed", false),
-    clear = op.inValueBool("Transparent", true),
+    clear = op.inValueBool("Transparent", false),
     active = op.inValueBool("Active", true),
     trigger = op.outTrigger("trigger"),
     width = op.outNumber("width"),

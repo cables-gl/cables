@@ -203,8 +203,9 @@ inExec.onTriggered = function ()
 
             if (gltf.bounds && cgl.shouldDrawHelpers(op))
             {
-                if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-                else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                if (op.isCurrentUiOp()) cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                else cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+
                 gltf.bounds.render(cgl);
                 cgl.popShader();
             }

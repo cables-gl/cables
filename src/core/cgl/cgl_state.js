@@ -1170,14 +1170,14 @@ Context.prototype.shouldDrawHelpers = function (op)
     if (this.frameStore.shadowPass) return false;
     if (!op.patch.isEditorMode()) return false;
 
-    const fb = this.getCurrentFrameBuffer();
-    if (fb && fb.getWidth)
-    {
-        const fbshould = this.canvasWidth / this.canvasHeight == fb.getWidth() / fb.getHeight();
-        if (!fbshould) return false;
-    }
+    // const fb = this.getCurrentFrameBuffer();
+    // if (fb && fb.getWidth)
+    // {
+    //     const fbshould = this.canvasWidth / this.canvasHeight == fb.getWidth() / fb.getHeight();
+    //     if (!fbshould) return false;
+    // }
 
-    return CABLES.UI.renderHelper || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
+    return gui.shouldDrawOverlay;// || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
 };
 
 Context.prototype._setBlendMode = function (blendMode, premul)

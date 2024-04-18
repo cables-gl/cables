@@ -58,7 +58,7 @@ render.onTriggered = function ()
     trigger.trigger();
     cg.popModelMatrix();
 
-    if (CABLES.UI && CABLES.UI.showCanvasTransforms) gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
+    if (CABLES.UI) gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
 
     if (op.isCurrentUiOp())
         gui.setTransformGizmo(
