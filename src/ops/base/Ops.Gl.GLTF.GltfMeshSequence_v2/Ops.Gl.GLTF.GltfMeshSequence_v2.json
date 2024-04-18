@@ -1,5 +1,5 @@
 {
-    "id": "3faa0691-66e8-4318-838c-c2d00dff0344",
+    "id": "8d719702-c125-4f71-af5f-7a54b9770c01",
     "changelog": [
         {
             "message": "created op",
@@ -22,48 +22,53 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694676814830
+        },
+        {
+            "message": "cloned op from Ops.Gl.GLTF.GltfMeshSequence",
+            "author": "pandur",
+            "date": 1713346712323
         }
     ],
     "authorName": "pandur",
-    "created": 1602247885975,
+    "created": 1713346712323,
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Node Name"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Transformation",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ignore Material",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Found",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Current Index",
                 "subType": "number"
             }
@@ -71,9 +76,7 @@
     },
     "summary": "switch between meshes e.g. like a stop motion animation",
     "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
-    },
-    "exampleProjectId": "FiJsxn"
+    }
 }

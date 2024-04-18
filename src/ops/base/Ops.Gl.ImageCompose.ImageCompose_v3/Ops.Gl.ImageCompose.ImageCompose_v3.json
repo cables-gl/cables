@@ -18,6 +18,10 @@
             {
                 "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Auto",
+                    "Manual"
+                ],
                 "group": "Texture Size",
                 "subType": "integer"
             },
@@ -36,6 +40,11 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "group": "Texture Parameters",
                 "subType": "integer"
             },
@@ -167,7 +176,6 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [
         "ZZKdaQw1bMo"
     ],

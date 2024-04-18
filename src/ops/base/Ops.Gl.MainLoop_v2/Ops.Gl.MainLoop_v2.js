@@ -1,8 +1,8 @@
 const
+    hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
     fpsLimit = op.inValue("FPS Limit", 0),
-    reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true),
-    clear = op.inValueBool("Clear", true),
-    hdpi = op.inFloat("Max Pixel Density", 2),
+    reduceFocusFPS = op.inValueBool("Reduce FPS unfocussed", false),
+    clear = op.inValueBool("Transparent", true),
     active = op.inValueBool("Active", true),
     trigger = op.outTrigger("trigger"),
     width = op.outNumber("width"),
@@ -78,7 +78,7 @@ function getFpsLimit()
 
 op.onDelete = function ()
 {
-    cgl.gl.clearColor(0, 0, 0, 0);
+    cgl.gl.clearColor(0, 0, 0.0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 };
 
@@ -127,11 +127,10 @@ function render(time)
 
     cgl.renderStart(cgl, identTranslate, identTranslateView);
 
-    if (clear.get())
-    {
-        cgl.gl.clearColor(0, 0, 0, 1);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-    }
+    if (!clear.get()) cgl.gl.clearColor(0, 0, 0, 1);
+    else cgl.gl.clearColor(0, 0, 0, 0);
+
+    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     trigger.trigger();
 
@@ -146,7 +145,7 @@ function render(time)
 
     op.patch.cg = null;
 
-    if (clear.get())
+    if (!clear.get())
     {
         cgl.gl.clearColor(1, 1, 1, 1);
         cgl.gl.colorMask(false, false, false, true);
@@ -160,8 +159,6 @@ function render(time)
     outPixel.set(op.patch.cgl.pixelDensity);
     op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;
 }
-
-
 
 function testMultiMainloop()
 {

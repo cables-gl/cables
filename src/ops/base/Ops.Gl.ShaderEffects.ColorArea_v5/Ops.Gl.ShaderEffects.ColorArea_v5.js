@@ -157,7 +157,8 @@ function drawHelpers()
     if (cgl.frameStore.shadowPass) return;
     if (cgl.shouldDrawHelpers(op))
     {
-        gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
+        if (op.isCurrentUiOp())
+            gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);

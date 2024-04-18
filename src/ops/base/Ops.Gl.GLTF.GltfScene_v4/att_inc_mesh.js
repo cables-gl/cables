@@ -273,7 +273,7 @@ let gltfMesh = class
 
         if (this.primitive == this.TRIANGLES)
         {
-            if (inCalcNormals.get() == "Force Smooth") geom.calculateNormals();
+            if (inCalcNormals.get() == "Force Smooth" || inCalcNormals.get() == false) geom.calculateNormals();
             else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
 
             if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)

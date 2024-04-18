@@ -18,7 +18,7 @@ const
 
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
-    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Never"]),
+    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Never"], "Auto"),
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
