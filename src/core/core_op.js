@@ -1339,30 +1339,7 @@ const Op = function ()
      */
     Op.prototype.setUiError = function (id, txt, level)
     {
-        if (!txt && !this.hasUiErrors) return;
-        if (!txt && !this._uiErrors.hasOwnProperty(id)) return;
-        if (this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt == txt) return;
-
-        if (id.indexOf(" ") > -1) this._log.warn("setuierror id cant have spaces! ", id);
-        id = id.replaceAll(" ", "_");
-
-        if (!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
-        else
-        {
-            if (txt && (!this._uiErrors.hasOwnProperty(id) || this._uiErrors[id].txt != txt))
-            {
-                if (level == undefined) level = 2;
-                this._uiErrors[id] = { "txt": txt, "level": level, "id": id };
-            }
-        }
-
-        const errorArr = [];
-        for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
-
-        this.uiAttr({ "uierrors": errorArr });
-        this.hasUiErrors = Object.keys(this._uiErrors).length;
-
-        this.emitEvent("uiErrorChange");
+        // overwritten in ui: core_extend_op
     };
 
     // todo: remove

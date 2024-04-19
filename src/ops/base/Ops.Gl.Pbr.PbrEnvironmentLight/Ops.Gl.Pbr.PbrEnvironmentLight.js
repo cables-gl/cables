@@ -361,7 +361,7 @@ function drawHelpers()
         "posY": inPCboxMaxY,
         "posZ": inPCboxMaxZ,
     }, 2);
-    if (CABLES.UI.renderHelper)
+    if (CABLES.UI && gui.shouldDrawOverlay)
     {
         cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
     }

@@ -49,7 +49,7 @@ render.onTriggered = function ()
                     "posZ": z
                 });
 
-        if (op.isCurrentUiOp() || CABLES.UI.renderHelper)
+        if (op.isCurrentUiOp())
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
