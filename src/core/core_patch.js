@@ -950,7 +950,7 @@ Patch.prototype.deSerialize = function (obj, options)
                 {
                     const port = op.getPort(objPort.name);
 
-                    if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
+                    if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
                     if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
                     if (port) port.deSerializeSettings(objPort);
