@@ -453,6 +453,7 @@ Port.prototype.getSerialized = function ()
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
+
     if (this.uiAttribs.expose)
     {
         obj.expose = true;

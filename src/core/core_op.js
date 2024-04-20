@@ -524,6 +524,15 @@ const Op = function ()
 
             valuePort.indexPort = indexPort;
 
+            valuePort.on("change", (val, thePort) =>
+            {
+                if (!thePort.indexPort.isLinked())
+                {
+                    const idx = thePort.uiAttribs.values.indexOf(val);
+                    if (idx > -1) thePort.indexPort.set(idx);
+                }
+            });
+
             indexPort.onLinkChanged = function ()
             {
                 valuePort.setUiAttribs({ "greyout": indexPort.isLinked() });
@@ -592,6 +601,17 @@ const Op = function ()
                 },
                 n
             );
+
+            switchPort.indexPort = indexPort;
+
+            switchPort.on("change", (val, thePort) =>
+            {
+                if (!thePort.indexPort.isLinked())
+                {
+                    const idx = thePort.uiAttribs.values.indexOf(val);
+                    if (idx > -1) thePort.indexPort.set(idx);
+                }
+            });
 
             indexPort.onLinkChanged = function ()
             {
