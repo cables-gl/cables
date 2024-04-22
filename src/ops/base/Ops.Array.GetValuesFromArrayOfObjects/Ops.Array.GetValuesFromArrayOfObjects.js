@@ -10,7 +10,7 @@ inKey.onChange =
 inArr.onChange =
 inignoreNonNums.onChange = exec;
 
-inKey.setUiAttribs({ "stringTrim": true });
+inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 
 function exec()
 {

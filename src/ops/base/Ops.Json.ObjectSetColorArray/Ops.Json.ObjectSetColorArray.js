@@ -18,7 +18,7 @@ inObject.onChange =
     g.onChange =
     b.onChange = update;
 
-inKey.setUiAttribs({ "stringTrim": true });
+inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 
 function update()
 {
