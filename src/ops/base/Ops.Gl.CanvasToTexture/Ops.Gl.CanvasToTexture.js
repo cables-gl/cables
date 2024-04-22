@@ -7,8 +7,9 @@ const
     inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
     outTexture = op.outTexture("texture"),
     outWidth = op.outNumber("width"),
-    outHeight = op.outNumber("height"),
-    canvasTexture = new CGL.Texture(cgl);
+    outHeight = op.outNumber("height");
+
+const canvasTexture = new CGL.Texture(cgl);
 
 let cgl_filter = CGL.Texture.FILTER_LINEAR;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;

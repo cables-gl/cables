@@ -41,5 +41,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "QjlEo-"
+    "exampleProjectId": "QjlEo-",
+    "license": "MIT"
 }

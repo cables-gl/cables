@@ -185,6 +185,7 @@ function parse(str)
                     for (let j = 0; j < 3; j++)
                     {
                         gVerts.push(o.verts[o.indexVerts[i] * 3 + j]);
+
                         if (o.indexNorms.length > 0)gNorms.push(o.vertNorms[o.indexNorms[i] * 3 + j]);
                         if (o.indexTexcoords.length > 0 && j < 2)gTexCoords.push(o.texCoords[o.indexTexcoords[i] * 3 + j]);
                     }
