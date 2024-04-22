@@ -491,8 +491,8 @@ Texture.prototype.initTexture = function (img, filter)
     this._fromData = false;
 
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
-    if (img.width) this.width = img.width;
-    if (img.height) this.height = img.height;
+    if (img.width || img.videoWidth) this.width = img.videoWidth || img.width;
+    if (img.height || img.videoHeight) this.height = img.videoHeight || img.height;
 
     if (filter !== undefined) this.filter = filter; // todo: can we remove this filter param?
 
