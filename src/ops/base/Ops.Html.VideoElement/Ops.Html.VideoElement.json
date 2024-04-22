@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1594469929039
+            "date": 1594469929039,
+            "type": "new"
+        },
+        {
+            "message": "Added outputs for video width/height",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713787110168
         }
     ],
     "authorName": "pandur",
@@ -92,12 +99,21 @@
             {
                 "type": 5,
                 "name": "Error Message"
+            },
+            {
+                "type": 0,
+                "name": "Video Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Video Height",
+                "subType": "number"
             }
         ]
     },
     "summary": "html video player element",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

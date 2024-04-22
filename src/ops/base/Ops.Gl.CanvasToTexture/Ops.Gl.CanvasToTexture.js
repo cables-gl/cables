@@ -5,6 +5,9 @@ const
     inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inTextureFlip = op.inValueBool("flip"),
     inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
+
+    inForce = op.inTriggerButton("Force Update"),
+
     outTexture = op.outTexture("texture"),
     outWidth = op.outNumber("width"),
     outHeight = op.outNumber("height");
@@ -23,6 +26,7 @@ inUnpackAlpha.setUiAttribs({ "hidePort": true });
 inTextureFilter.onChange =
 inTextureWrap.onChange = onFilterChange;
 
+inForce.onTriggered =
 inTextureFlip.onChange =
 inCanvas.onChange =
 inUnpackAlpha.onChange = reload;

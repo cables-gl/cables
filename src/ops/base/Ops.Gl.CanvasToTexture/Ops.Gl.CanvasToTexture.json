@@ -17,6 +17,10 @@
                 "type": 0,
                 "name": "wrap index",
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Force Update"
             }
         ],
         "portsOut": [
@@ -42,5 +46,19 @@
         "ports": []
     },
     "exampleProjectId": "QjlEo-",
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added workaround for detecting correct size of video elements",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713787642100
+        },
+        {
+            "message": "Add trigger input to force an update of the texture, needed for video elements",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1713787664221
+        }
+    ]
 }
