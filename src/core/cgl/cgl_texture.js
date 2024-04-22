@@ -1087,8 +1087,8 @@ Texture.createFromImage = function (cgl, img, options)
     const texture = new Texture(cgl, options);
     texture.flip = false;
     texture.image = img;
-    texture.width = img.width;
-    texture.height = img.height;
+    texture.width = img.videoWidth || img.width || 8;
+    texture.height = img.videoHeight || img.height || 8;
     if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
 
     console.log("createFromImage", options);
