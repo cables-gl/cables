@@ -526,7 +526,7 @@ const Op = function ()
 
             valuePort.on("change", (val, thePort) =>
             {
-                if (!thePort.indexPort.isLinked())
+                if (!thePort.indexPort.isLinked() && thePort.uiAttribs.values)
                 {
                     const idx = thePort.uiAttribs.values.indexOf(val);
                     if (idx > -1) thePort.indexPort.set(idx);
@@ -606,7 +606,7 @@ const Op = function ()
 
             switchPort.on("change", (val, thePort) =>
             {
-                if (!thePort.indexPort.isLinked())
+                if (!thePort.indexPort.isLinked() && thePort.uiAttribs.values)
                 {
                     const idx = thePort.uiAttribs.values.indexOf(val);
                     if (idx > -1) thePort.indexPort.set(idx);
