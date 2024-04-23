@@ -31,7 +31,7 @@ Please send us an [email](mailto:hi@undev.de) or contact us on [discord](https:/
 - [Kunsthochschule für Medien](https://www.khm.de/), Köln, Germany
 - [L'École de design Nantes Atlantique](https://lecolededesign.com), France
 - [Muthesius Kunsthochschule](https://muthesius-kunsthochschule.de/), Kiel, Germany
-- [Royal Academy Antwerpen](https://www.ap-arts.be/en/academy), Netherlands
+- [Royal Academy Antwerpen](https://www.ap-arts.be/en/academy), Belgium
 - [Tokyo Kasei University](https://www.tokyo-kasei.ac.jp), Japan
 - [Universidad Nacional Autónoma de México](https://www.unam.mx/), Mexico
 - [Uniwersytet Marii Curie-Skłodowskiej](https://www.umcs.pl/), Lublin, Poland
