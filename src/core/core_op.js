@@ -388,11 +388,13 @@ const Op = function ()
             })
         );
         p.value = "";
-        if (v !== undefined)
-        {
-            p.set(v);
-            p.defaultValue = v;
-        }
+
+        p.setInitialValue(v);
+        // if (v !== undefined)
+        // {
+        //     p.set(v);
+        //     p.defaultValue = v;
+        // }
         return p;
     };
 
@@ -413,9 +415,9 @@ const Op = function ()
             })
         );
         v = v || "";
-        p.value = v;
-        p.set(v);
-        p.defaultValue = v;
+        // p.value = v;
+
+        p.setInitialValue(v);
         return p;
     };
 
@@ -437,11 +439,13 @@ const Op = function ()
             })
         );
         p.value = "";
-        if (v !== undefined)
-        {
-            p.set(v);
-            p.defaultValue = v;
-        }
+
+        p.setInitialValue(v);
+        // if (v !== undefined)
+        // {
+        //     p.set(v);
+        //     p.defaultValue = v;
+        // }
         return p;
     };
 

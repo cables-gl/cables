@@ -948,6 +948,7 @@ Patch.prototype.deSerialize = function (obj, options)
                 const objPort = opData.portsIn[ipi];
                 if (objPort && objPort.hasOwnProperty("name"))
                 {
+                    console.log("load poirt data,objPort", objPort.name, objPort);
                     const port = op.getPort(objPort.name);
 
                     if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
@@ -955,10 +956,12 @@ Patch.prototype.deSerialize = function (obj, options)
 
                     if (port)
                     {
+                        console.log("found port...");
                         port.deSerializeSettings(objPort);
                     }
                     else
                     {
+                        console.log("preserve", objPort.name, objPort.value);
                         op.preservedPortValues = op.preservedPortValues || {};
                         op.preservedPortValues[objPort.name] = objPort.value;
                     }

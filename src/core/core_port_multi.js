@@ -19,7 +19,7 @@ class MultiPort extends Port
             {
                 arr[i] = this.ports[i];
 
-                console.log("update array", this.ports[i].getSerialized);
+                // console.log("update array", this.ports[i].getSerialized);
             }
 
             this.setRef(arr);
@@ -33,12 +33,12 @@ class MultiPort extends Port
                 else this.ports[i].setUiAttribs({ "longPort": 0 });
             }
 
-            console.log(this.ports);
+            // console.log(this.ports);
         };
 
         function countPorts()
         {
-            console.log("ports.length", this.ports.length);
+            // console.log("ports.length", this.ports.length);
 
             if (this.ports[this.ports.length - 1].isLinked())
             {
@@ -52,13 +52,16 @@ class MultiPort extends Port
 
         this.newPort = () =>
         {
-            const po = new Port(this, name + "_" + CABLES.shortId(), type, {
+            const po = new Port(this.op, name + "_" + this.ports.length, type, {
                 "type": "string"
             });
-            po.direction = CONSTANTS.PORT_DIR_IN;
 
+            console.log(this.op.preservedPortValues);
+            po.direction = CONSTANTS.PORT_DIR_IN;
             po.on("change", updateArray.bind(this));
             po.onLinkChanged = countPorts.bind(this);
+
+            po.setInitialValue("");
 
             updateUi();
             return po;
