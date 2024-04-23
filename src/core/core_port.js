@@ -476,10 +476,14 @@ Port.prototype.getSerialized = function ()
             if (!this.links[i].portIn || !this.links[i].portOut) continue;
 
             const otherp = this.links[i].getOtherPort(this);
-            if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+            // check if functions exist, are defined in core_extend_ops code in ui
+            if (otherp.op.isInBlueprint2 && this.op.isInBlueprint2)
             {
-                obj.links = obj.links || [];
-                obj.links.push(this.links[i].getSerialized());
+                if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+                {
+                    obj.links = obj.links || [];
+                    obj.links.push(this.links[i].getSerialized());
+                }
             }
         }
     }
