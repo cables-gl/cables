@@ -40,11 +40,27 @@ class MultiPort extends Port
         {
             // console.log("ports.length", this.ports.length);
 
+            for (let i = 0; i < this.ports.length; i++)
+            {
+                if (this.ports[i].links.length > 1)
+                {
+                    console.log("has 2 links...!", this.ports[i].name);
+                    const po = this.newPort();
+                    console.log(this.ports[i].links[1]);
+
+                    const otherPort = this.ports[i].links[1].getOtherPort(this.ports[i]);
+                    this.ports[i].links[1].remove();
+                    this.op.patch.link(
+                        this.op, po.name, otherPort.op, otherPort.name);
+
+                    break;
+                }
+            }
+
+
             if (this.ports[this.ports.length - 1].isLinked())
             {
                 const po = this.newPort();
-                this.ports.push(po);
-                this.op.addInPort(po);
             }
             updateArray();
             updateUi();
@@ -56,12 +72,13 @@ class MultiPort extends Port
                 "type": "string"
             });
 
-            console.log(this.op.preservedPortValues);
             po.direction = CONSTANTS.PORT_DIR_IN;
-            po.on("change", updateArray.bind(this));
-            po.onLinkChanged = countPorts.bind(this);
+            this.ports.push(po);
+            this.op.addInPort(po);
 
             po.setInitialValue("");
+            po.on("change", updateArray.bind(this));
+            po.on("onLinkChanged", countPorts.bind(this));
 
             updateUi();
             return po;
@@ -72,8 +89,6 @@ class MultiPort extends Port
             for (let i = 0; i < 2; i++)
             {
                 const po = this.newPort();
-                this.ports.push(po);
-                this.op.addInPort(po);
             }
             updateArray();
             updateUi();
