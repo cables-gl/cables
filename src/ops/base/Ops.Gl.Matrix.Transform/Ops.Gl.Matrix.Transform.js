@@ -69,10 +69,10 @@ render.onTriggered = function ()
             });
 };
 
-op.transform3d = function ()
-{
-    return { "pos": [posX, posY, posZ] };
-};
+// op.transform3d = function ()
+// {
+//     return { "pos": [posX, posY, posZ] };
+// };
 
 function doUpdateMatrix()
 {

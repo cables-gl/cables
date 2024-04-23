@@ -16,7 +16,10 @@ const
     outTime = op.outNumber("Time"),
     outEnded = op.outTrigger("Ended"),
     outHasError = op.outBool("Has Error"),
-    outError = op.outString("Error Message");
+    outError = op.outString("Error Message"),
+    outWidth = op.outNumber("Video Width"),
+    outHeight = op.outNumber("Video Height");
+
 op.setPortGroup("Attributes", [src, elId]);
 
 let element = op.patch.getDocument().createElement("video");
@@ -95,8 +98,14 @@ function addElement()
     outHasError.set(false);
     outError.set("");
 
+    outWidth.set(0);
+    outHeight.set(0);
+
     element.addEventListener("canplaythrough", () =>
     {
+        outWidth.set(element.videoWidth);
+        outHeight.set(element.videoHeight);
+
         outCanplaythrough.set(true);
     }, true);
     element.addEventListener("play", () =>

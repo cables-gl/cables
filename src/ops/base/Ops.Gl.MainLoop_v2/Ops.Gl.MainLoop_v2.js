@@ -34,6 +34,8 @@ document.addEventListener("visibilitychange", () => { winVisible = !document.hid
 
 testMultiMainloop();
 
+cgl.mainloopOp = this;
+
 function updateHdpi()
 {
     setPixelDensity();

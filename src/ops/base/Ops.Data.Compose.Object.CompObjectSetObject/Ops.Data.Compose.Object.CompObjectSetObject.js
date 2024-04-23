@@ -6,7 +6,7 @@ const
 
 op.setUiAttrib({ "extendTitlePort": inKey.name });
 
-inKey.setUiAttribs({ "stringTrim": true });
+inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 
 update.onTriggered = () =>
 {
