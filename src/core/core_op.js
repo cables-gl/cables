@@ -5,6 +5,7 @@ import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
+import { MultiPort } from "./core_port_multi.js";
 
 /**
  * op the class of all operators
@@ -341,7 +342,7 @@ const Op = function ()
     {
         // old
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
                 "display": "bool"
             })
         );
@@ -353,17 +354,33 @@ const Op = function ()
         return p;
     };
 
-    /**
-     * create a String value input port
-     * @function inString
-     * @instance
-     * @memberof Op
-     * @param {String} name
-     * @param {String} value default value
-     * @return {Port} created port
-     */
+
+    Op.prototype.inMultiPort = function (name, type)
+    {
+        // const p = this.inArray("name");
+
+        const p = new MultiPort(
+            this,
+            name,
+            CONSTANTS.OP.OP_PORT_TYPE_STRING,
+            {
+                "display": "switch",
+                "hidePort": true,
+                "type": "string"
+            }
+        );
+        p.setUiAttribs({ "hidePort": true, "hideParam": true });
+
+        p.initPorts();
+
+
+        return p;
+    };
+
+
     Op.prototype.inValueString = function (name, v)
     {
+        console.warn("old string port! - inValueString");
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "type": "string"
@@ -378,7 +395,15 @@ const Op = function ()
         return p;
     };
 
-    // new string
+    /**
+     * create a String value input port
+     * @function inString
+     * @instance
+     * @memberof Op
+     * @param {String} name
+     * @param {String} value default value
+     * @return {Port} created port
+     */
     Op.prototype.inString = function (name, v)
     {
         const p = this.addInPort(
@@ -470,7 +495,7 @@ const Op = function ()
     Op.prototype.inValueEditor = function (name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
                 "type": "string",
                 "display": "editor",
                 "editorSyntax": syntax,
@@ -501,7 +526,7 @@ const Op = function ()
         let p = null;
         if (!noindex)
         {
-            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
                 "increment": "integer",
                 "hideParam": true
             });
@@ -512,7 +537,7 @@ const Op = function ()
             const valuePort = new ValueSelectPort(
                 this,
                 name,
-                CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+                CONSTANTS.OP.OP_PORT_TYPE_NUMBER,
                 {
                     "display": "dropdown",
                     "hidePort": true,
@@ -1029,40 +1054,43 @@ const Op = function ()
 
     Op.prototype.getSerialized = function ()
     {
-        const op = {};
+        const opObj = {};
 
-        if (this.opId) op.opId = this.opId;
-        if (this.patch.storeObjNames) op.objName = this.objName;
+        if (this.opId) opObj.opId = this.opId;
+        if (this.patch.storeObjNames) opObj.objName = this.objName;
 
 
-        op.id = this.id;
-        op.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
+        opObj.id = this.id;
+        opObj.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
 
-        if (this.storage && Object.keys(this.storage).length > 0) op.storage = JSON.parse(JSON.stringify(this.storage));
+        if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = JSON.parse(JSON.stringify(this.storage));
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
-        if (op.uiAttribs.hasOwnProperty("uierrors")) delete op.uiAttribs.uierrors;
+        if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
 
-        if (op.uiAttribs.title == this._shortOpName) delete op.uiAttribs.title;
+        if (opObj.uiAttribs.title == this._shortOpName) delete opObj.uiAttribs.title;
 
-        op.portsIn = [];
-        op.portsOut = [];
+        opObj.portsIn = [];
+        opObj.portsOut = [];
+
+        console.log("this.portsIn", this.portsIn);
 
         for (let i = 0; i < this.portsIn.length; i++)
         {
             const s = this.portsIn[i].getSerialized();
-            if (s)op.portsIn.push(s);
+            if (s)opObj.portsIn.push(s);
+            else console.log("i no serialize", i);
         }
         for (const ipo in this.portsOut)
         {
             const s = this.portsOut[ipo].getSerialized();
-            if (s)op.portsOut.push(s);
+            if (s)opObj.portsOut.push(s);
         }
 
-        if (op.portsIn.length == 0) delete op.portsIn;
-        if (op.portsOut.length == 0) delete op.portsOut;
-        cleanJson(op);
+        if (opObj.portsIn.length == 0) delete opObj.portsIn;
+        if (opObj.portsOut.length == 0) delete opObj.portsOut;
+        cleanJson(opObj);
 
-        return op;
+        return opObj;
     };
 
     Op.prototype.getFirstOutPortByType = function (type)

@@ -25,26 +25,7 @@
     "authorName": "pandur",
     "created": 1612768566040,
     "layout": {
-        "portsIn": [
-            {
-                "type": 3,
-                "name": "Spreadsheet"
-            },
-            {
-                "type": 0,
-                "name": "Num Columns",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Format index",
-                "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Format"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 3,
@@ -58,7 +39,6 @@
     },
     "summary": "Give the possibility to create an Array and edit its content in a Spreadsheet view.",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
