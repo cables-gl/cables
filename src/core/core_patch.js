@@ -953,7 +953,15 @@ Patch.prototype.deSerialize = function (obj, options)
                     if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
                     if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
-                    if (port) port.deSerializeSettings(objPort);
+                    if (port)
+                    {
+                        port.deSerializeSettings(objPort);
+                    }
+                    else
+                    {
+                        op.preservedPortValues = op.preservedPortValues || {};
+                        op.preservedPortValues[objPort.name] = objPort.value;
+                    }
                 }
             }
 

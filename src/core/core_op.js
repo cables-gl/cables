@@ -43,6 +43,7 @@ const Op = function ()
     this.enabled = true;
     this.patch = arguments[0];
     this.name = arguments[1];
+    this.preservedPortValues = {};
 
     this._linkTimeRules = {
         "needsLinkedToWork": [],
@@ -250,8 +251,7 @@ const Op = function ()
 
     Op.prototype.addInPort = function (p)
     {
-        if (!(p instanceof Port))
-            throw new Error("parameter is not a port!");
+        if (!(p instanceof Port)) throw new Error("parameter is not a port!");
 
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p._op = this;
@@ -309,6 +309,8 @@ const Op = function ()
         return p;
     };
 
+
+
     /**
      * create a number value input port
      * @function inFloat
@@ -321,11 +323,9 @@ const Op = function ()
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
-        if (v !== undefined)
-        {
-            p.set(v);
-            p.defaultValue = v;
-        }
+
+        p.setInitialValue(v);
+
         return p;
     };
 
@@ -346,11 +346,12 @@ const Op = function ()
                 "display": "bool"
             })
         );
-        if (v !== undefined)
-        {
-            p.set(v);
-            p.defaultValue = p.get();
-        }
+        // if (v !== undefined)
+        // {
+        p.setInitialValue(v);
+        // p.set(v);
+        // p.defaultValue = p.get();
+        // }
         return p;
     };
 
@@ -1072,13 +1073,12 @@ const Op = function ()
         opObj.portsIn = [];
         opObj.portsOut = [];
 
-        console.log("this.portsIn", this.portsIn);
+        // console.log("this.portsIn", this.portsIn);
 
         for (let i = 0; i < this.portsIn.length; i++)
         {
             const s = this.portsIn[i].getSerialized();
             if (s)opObj.portsIn.push(s);
-            else console.log("i no serialize", i);
         }
         for (const ipo in this.portsOut)
         {

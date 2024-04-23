@@ -348,14 +348,14 @@ function updateShader()
     }
 
     for (let i = 0; i < uniformInputs.length; i++)
-        if (uniformInputs[i] && uniformInputs[i].uniform)uniformInputs[i].uniform.needsUpdate = true;
+        if (uniformInputs[i] && uniformInputs[i].uniform) uniformInputs[i].uniform.needsUpdate = true;
 
     shader.compile();
 
     op.refreshParams();
 
-    outShader.set(null);
-    outShader.set(shader);
+    // outShader.set(null);
+    outShader.setRef(shader);
     needsUpdate = false;
 
     if (shader.hasErrors()) op.setUiError("compile", "Shader has errors");

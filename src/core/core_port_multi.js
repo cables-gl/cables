@@ -18,9 +18,9 @@ class MultiPort extends Port
             for (let i = 0; i < this.ports.length; i++)
             {
                 arr[i] = this.ports[i];
-            }
 
-            console.log("update array");
+                console.log("update array", this.ports[i].getSerialized);
+            }
 
             this.setRef(arr);
         };
