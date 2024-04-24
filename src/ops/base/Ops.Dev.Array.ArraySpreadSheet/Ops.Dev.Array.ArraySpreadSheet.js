@@ -19,6 +19,7 @@ updateUi();
 
 function updateUi()
 {
+    result.setUiAttribs({ "stride": inNumColumns.get() });
     spread.setUiAttribs({
         "display": "spreadsheet",
         "spread_numColumns": inNumColumns.get()

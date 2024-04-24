@@ -67,6 +67,7 @@ export const CONSTANTS = {
 
     "OP": {
         "OP_PORT_TYPE_VALUE": 0,
+        "OP_PORT_TYPE_NUMBER": 0,
         "OP_PORT_TYPE_FUNCTION": 1,
         "OP_PORT_TYPE_TRIGGER": 1,
         "OP_PORT_TYPE_OBJECT": 2,

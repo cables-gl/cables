@@ -437,6 +437,21 @@ Port.prototype.deSerializeSettings = function (objPort)
     }
 };
 
+Port.prototype.setInitialValue = function (v)
+{
+    console.log("set initial ", this.name, v, this.op.preservedPortValues);
+    if (this.op.preservedPortValues && this.op.preservedPortValues.hasOwnProperty(this.name))
+    {
+        console.log("found preserved port value!", this.op.preservedPortValues[this.name]);
+        this.set(this.op.preservedPortValues[this.name]);
+    }
+    else
+    if (v !== undefined) this.set(v);
+    if (v !== undefined) this.defaultValue = v;
+};
+
+
+
 Port.prototype.getSerialized = function ()
 {
     let obj = {};
@@ -444,23 +459,20 @@ Port.prototype.getSerialized = function ()
 
     if (!this.ignoreValueSerialize && this.links.length === 0)
     {
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.value && this.value.tex)
-        {
-        }
+        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.value && this.value.tex) {}
         else obj.value = this.value;
     }
     if (this._useVariableName) obj.useVariable = this._useVariableName;
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
-
     if (this.uiAttribs.expose)
     {
         obj.expose = true;
         if (this.uiAttribs.hasOwnProperty("order")) obj.order = this.uiAttribs.order;
     }
     if (this.uiAttribs.title) obj.title = this.uiAttribs.title;
-    if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
+    if ((this.preserveLinks || this.direction == CONSTANTS.PORT.PORT_DIR_OUT) && this.links.length > 0)
     {
         obj.links = [];
         for (const i in this.links)
@@ -476,10 +488,14 @@ Port.prototype.getSerialized = function ()
             if (!this.links[i].portIn || !this.links[i].portOut) continue;
 
             const otherp = this.links[i].getOtherPort(this);
-            if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+            // check if functions exist, are defined in core_extend_ops code in ui
+            if (otherp.op.isInBlueprint2 && this.op.isInBlueprint2)
             {
-                obj.links = obj.links || [];
-                obj.links.push(this.links[i].getSerialized());
+                if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+                {
+                    obj.links = obj.links || [];
+                    obj.links.push(this.links[i].getSerialized());
+                }
             }
         }
     }
@@ -487,7 +503,7 @@ Port.prototype.getSerialized = function ()
     if (obj.links && obj.links.length == 0) delete obj.links;
     if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) delete obj.value;
     if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION && this.links.length == 0) obj = null;
-    if (obj && Object.keys(obj).length == 1 && obj.name)obj = null;
+    if (obj && Object.keys(obj).length == 1 && obj.name)obj = null; // obj is null if there is no real information other than name
     cleanJson(obj);
 
     return obj;
