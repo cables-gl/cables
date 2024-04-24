@@ -440,7 +440,7 @@ Port.prototype.deSerializeSettings = function (objPort)
 Port.prototype.setInitialValue = function (v)
 {
     console.log("set initial ", this.name, v, this.op.preservedPortValues);
-    if (this.op.preservedPortValues && this.op.preservedPortValues.hasOwnProperty(this.name))
+    if (this.op.preservedPortValues && this.op.preservedPortValues.hasOwnProperty(this.name) && this.op.preservedPortValues[this.name] !== undefined)
     {
         console.log("found preserved port value!", this.op.preservedPortValues[this.name]);
         this.set(this.op.preservedPortValues[this.name]);
@@ -449,8 +449,6 @@ Port.prototype.setInitialValue = function (v)
     if (v !== undefined) this.set(v);
     if (v !== undefined) this.defaultValue = v;
 };
-
-
 
 Port.prototype.getSerialized = function ()
 {
