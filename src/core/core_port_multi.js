@@ -36,22 +36,32 @@ class MultiPort extends Port
             // console.log(this.ports);
         };
 
-
-        function countPorts()
+        this.removeInvalidPorts = () =>
         {
             for (let i = 0; i < this.ports.length; i++)
             {
-                if (this.ports[i].links.length > 1)
+                if (!this.ports[i]) this.ports.splice(i, 1);
+            }
+        };
+
+        this.countPorts = () =>
+        {
+            let redo = false;
+            this.removeListeners();
+            this.removeInvalidPorts();
+
+            for (let i = 0; i < this.ports.length; i++)
+            {
+                if (this.ports[i] && this.ports[i].links.length > 1)
                 {
                     const po = this.ports[i + 1];
                     const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
                     this.ports[i].links[0].remove();
                     this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
-
+                    redo = true;
                     break;
                 }
             }
-
 
 
             let foundHole = true;
@@ -60,7 +70,7 @@ class MultiPort extends Port
                 foundHole = false;
                 for (let i = this.ports.length - 1; i > 0; i--)
                 {
-                    if (this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
+                    if (this.ports[i] && this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
                     {
                         console.log("found hole!");
                         // found hole
@@ -70,23 +80,66 @@ class MultiPort extends Port
 
                         const po = this.ports[i - 1];
 
-                        console.log("move ", this.ports[i].name, "to", po.name);
+                        if (po && this.ports[i])
+                        {
+                            console.log("move ", this.ports[i].name, "to", po.name);
 
-                        this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
-                        foundHole = true;
-                        break;
+                            this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
+                            foundHole = true;
+                            redo = true;
+                            break;
+                        }
                     }
                 }
             }
 
+            if (this.ports.length > 2)
+            {
+                let i = this.ports.length - 1;
+                if (this.ports[i].links.length == 0 && this.ports[i - 1].links.length == 0)
+                {
+                    this.ports[i].remove();
+                    this.ports[i] = null;
+                }
+            }
+            this.removeInvalidPorts();
 
             if (this.ports[this.ports.length - 1].isLinked())
             {
                 const po = this.newPort();
             }
+
             updateArray();
             updateUi();
-        }
+
+            if (redo) this.countPorts();
+            else this.addListeners();
+        };
+
+
+        this.removeListeners = () =>
+        {
+            for (let i = 0; i < this.ports.length; i++)
+            {
+                const po = this.ports[i];
+                po.multiPortChangeListener = po.off(po.multiPortChangeListener);
+                po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
+            }
+        };
+
+        this.addListeners = () =>
+        {
+            for (let i = 0; i < this.ports.length; i++)
+            {
+                const po = this.ports[i];
+
+                if (po.multiPortChangeListener)po.multiPortChangeListener = po.off(po.multiPortChangeListener);
+                po.multiPortChangeListener = po.on("change", updateArray.bind(this));
+
+                if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
+                po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
+            }
+        };
 
         this.newPort = () =>
         {
@@ -99,8 +152,9 @@ class MultiPort extends Port
             this.op.addInPort(po);
 
             po.setInitialValue("");
-            po.on("change", updateArray.bind(this));
-            po.on("onLinkChanged", countPorts.bind(this));
+            // po.multiPortChangeListener = po.on("change", updateArray.bind(this));
+            // po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
+            this.addListeners();
 
             updateUi();
             return po;
