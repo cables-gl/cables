@@ -44,6 +44,7 @@ const Op = function ()
     this.patch = arguments[0];
     this.name = arguments[1];
     this.preservedPortValues = {};
+    this.preservedPortLinks = {};
 
     this._linkTimeRules = {
         "needsLinkedToWork": [],
