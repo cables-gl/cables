@@ -11,11 +11,10 @@ class MultiPort extends Port
 
         this.ports = [];
 
-
         const updateArray = () =>
         {
             const arr = [];
-            for (let i = 0; i < this.ports.length; i++)
+            for (let i = 0; i < this.ports.length - 1; i++)
             {
                 arr[i] = this.ports[i];
 
@@ -32,8 +31,6 @@ class MultiPort extends Port
                 if (i == 0) this.ports[i].setUiAttribs({ "longPort": this.ports.length });
                 else this.ports[i].setUiAttribs({ "longPort": 0 });
             }
-
-            // console.log(this.ports);
         };
 
         this.removeInvalidPorts = () =>
@@ -151,8 +148,9 @@ class MultiPort extends Port
 
         this.newPort = () =>
         {
+            console.log("new port", this.type, type, CABLES.OP_PORT_TYPE_VALUE);
             const po = new Port(this.op, name + "_" + this.ports.length, type, {
-                "type": "string"
+                // "type": "string"
             });
 
             po.direction = CONSTANTS.PORT_DIR_IN;
@@ -160,6 +158,7 @@ class MultiPort extends Port
             this.op.addInPort(po);
 
             po.setInitialValue("");
+
             // po.multiPortChangeListener = po.on("change", updateArray.bind(this));
             // po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
             this.addListeners();
