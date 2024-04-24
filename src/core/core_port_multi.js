@@ -39,8 +39,6 @@ class MultiPort extends Port
 
         function countPorts()
         {
-            // console.log("ports.length", this.ports.length);
-
             for (let i = 0; i < this.ports.length; i++)
             {
                 if (this.ports[i].links.length > 1)
@@ -53,6 +51,34 @@ class MultiPort extends Port
                     break;
                 }
             }
+
+
+
+            let foundHole = true;
+            while (foundHole)
+            {
+                foundHole = false;
+                for (let i = this.ports.length - 1; i > 0; i--)
+                {
+                    if (this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
+                    {
+                        console.log("found hole!");
+                        // found hole
+
+                        const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
+                        this.ports[i].links[0].remove();
+
+                        const po = this.ports[i - 1];
+
+                        console.log("move ", this.ports[i].name, "to", po.name);
+
+                        this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
+                        foundHole = true;
+                        break;
+                    }
+                }
+            }
+
 
             if (this.ports[this.ports.length - 1].isLinked())
             {
