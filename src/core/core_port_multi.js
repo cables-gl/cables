@@ -46,6 +46,14 @@ class MultiPort extends Port
 
         this.countPorts = () =>
         {
+            if (gui.patchView.patchRenderer.isDraggingPort())
+            {
+                clearTimeout(this.retryTo);
+                this.retryTo = setTimeout(this.countPorts.bind(this));
+                return;
+            }
+            this.retryTo = null;
+
             let redo = false;
             this.removeListeners();
             this.removeInvalidPorts();
