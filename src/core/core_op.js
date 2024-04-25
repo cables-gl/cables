@@ -369,10 +369,10 @@ const Op = function ()
                 "hidePort": true
             }
         );
-        // p.setUiAttribs({ "hidePort": true });
+        p.ignoreValueSerialize = true;
 
-        p.initPorts();
         this.addInPort(p);
+        p.initPorts();
 
         return p;
     };

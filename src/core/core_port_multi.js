@@ -138,7 +138,6 @@ class MultiPort extends Port
             else this.addListeners();
         };
 
-
         this.removeListeners = () =>
         {
             for (let i = 0; i < this.ports.length; i++)
