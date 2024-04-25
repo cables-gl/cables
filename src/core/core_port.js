@@ -335,7 +335,9 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                 {
                     this.crashed = true;
                     this.op.crashed = true;
+
                     console.log("crash", this.op.objName);
+
                     this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
