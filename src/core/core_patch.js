@@ -894,7 +894,7 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
 
 Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
 {
-    this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
+    return this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
 };
 
 Patch.prototype.deSerialize = function (obj, options)
@@ -948,7 +948,7 @@ Patch.prototype.deSerialize = function (obj, options)
                 const objPort = opData.portsIn[ipi];
                 if (objPort && objPort.hasOwnProperty("name"))
                 {
-                    console.log("load poirt data,objPort", objPort.name, objPort);
+                    // console.log("load poirt data,objPort", objPort.name, objPort);
                     const port = op.getPort(objPort.name);
 
                     if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
@@ -956,7 +956,6 @@ Patch.prototype.deSerialize = function (obj, options)
 
                     if (port)
                     {
-                        console.log("found port...");
                         port.deSerializeSettings(objPort);
                     }
                     else
@@ -1002,7 +1001,6 @@ Patch.prototype.deSerialize = function (obj, options)
     if (window.logStartup)logStartup("creating links");
 
     if (options.opsCreated)options.opsCreated(addedOps);
-
     // create links...
     if (obj.ops)
     {
@@ -1016,13 +1014,14 @@ Patch.prototype.deSerialize = function (obj, options)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                         {
-                            let found = false;
-
-                            this._addLink(
+                            const l = this._addLink(
                                 obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                                 obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                                 obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                                 obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+                            console.log("aaaa", l);
+
 
                             // const took = performance.now - startTime;
                             // if (took > 100)console.log(obj().ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
@@ -1072,16 +1071,45 @@ Patch.prototype.deSerialize = function (obj, options)
 
                                     if (!dstOp) this._log.warn("could not find op for lost link");
                                     else
-                                        this._addLink(
+                                    {
+                                        const l = this._addLink(
                                             dstOp.id,
                                             obj.ops[iop].portsOut[ipi2].links[ili].objOut,
 
                                             obj.ops[iop].portsOut[ipi2].links[ili].portIn,
                                             obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                    }
                                 }
                                 else
                                 {
-                                    this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                    const l = this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+
+                                    if (!l)
+                                    {
+                                        const op1 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objIn);
+                                        const op2 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
+
+                                        if (!op1)console.log("could not find link op1");
+                                        if (!op2)console.log("could not find link op2");
+
+                                        const p1Name = obj.ops[iop].portsOut[ipi2].links[ili].portIn;
+
+                                        if (op1 && !op1.getPort(p1Name))
+                                        {
+                                            console.log("PRESERVE port 1 not found", p1Name);
+
+                                            op1.preservedPortLinks[p1Name] = op1.preservedPortLinks[p1Name] || [];
+                                            op1.preservedPortLinks[p1Name].push(obj.ops[iop].portsOut[ipi2].links[ili]);
+                                        }
+
+                                        const p2Name = obj.ops[iop].portsOut[ipi2].links[ili].portOut;
+                                        if (op2 && !op2.getPort(p2Name))
+                                        {
+                                            console.log("PRESERVE port 2 not found", obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                            op2.preservedPortLinks[p1Name] = op2.preservedPortLinks[p1Name] || [];
+                                            op2.preservedPortLinks[p1Name].push(obj.ops[iop].portsOut[ipi2].links[ili]);
+                                        }
+                                    }
                                 }
                             }
                         }

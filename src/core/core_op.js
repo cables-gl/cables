@@ -44,6 +44,7 @@ const Op = function ()
     this.patch = arguments[0];
     this.name = arguments[1];
     this.preservedPortValues = {};
+    this.preservedPortLinks = {};
 
     this._linkTimeRules = {
         "needsLinkedToWork": [],
@@ -358,16 +359,13 @@ const Op = function ()
 
     Op.prototype.inMultiPort = function (name, type)
     {
-        // const p = this.inArray("name");
-
         const p = new MultiPort(
             this,
             name,
-            CONSTANTS.OP.OP_PORT_TYPE_STRING,
+            type,
             {
                 "display": "switch",
-                "hidePort": true,
-                "type": "string"
+                "hidePort": true
             }
         );
         p.setUiAttribs({ "hidePort": true, "hideParam": true });
