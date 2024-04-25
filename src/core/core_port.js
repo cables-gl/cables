@@ -230,6 +230,12 @@ Port.prototype.setUiAttribs = function (newAttribs)
 
     for (const p in newAttribs)
     {
+        if (newAttribs[p] === undefined)
+        {
+            // delete newAttribs[p];
+            delete this.uiAttribs[p];
+            continue;
+        }
         if (this.uiAttribs[p] != newAttribs[p]) changed = true;
         this.uiAttribs[p] = newAttribs[p];
 

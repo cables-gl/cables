@@ -28,8 +28,13 @@ class MultiPort extends Port
         {
             for (let i = 0; i < this.ports.length; i++)
             {
-                if (i == 0) this.ports[i].setUiAttribs({ "longPort": this.ports.length });
-                else this.ports[i].setUiAttribs({ "longPort": 0 });
+                let lp; // undefined to remove/not set it
+                let opacity;// undefined to remove/not set it
+                if (i == 0) lp = this.ports.length;
+                if (i == this.ports.length - 1) opacity = 0.2;
+                // else this.ports[i].setUiAttribs({ "longPort":  });
+
+                this.ports[i].setUiAttribs({ "longPort": lp, "opacity": opacity });
             }
         };
 
@@ -148,10 +153,9 @@ class MultiPort extends Port
 
         this.newPort = () =>
         {
-            console.log("new port", this.type, type, CABLES.OP_PORT_TYPE_VALUE);
-            const po = new Port(this.op, name + "_" + this.ports.length, type, {
-                // "type": "string"
-            });
+            const attrs = {};
+            if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
+            const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = CONSTANTS.PORT_DIR_IN;
             this.ports.push(po);
