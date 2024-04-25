@@ -7,8 +7,9 @@ class MultiPort extends Port
 {
     constructor(__parent, name, type, uiAttribs)
     {
-        super(__parent, name, type, uiAttribs);
+        super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
 
+        this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
 
         const updateArray = () =>
@@ -32,10 +33,11 @@ class MultiPort extends Port
                 let opacity;// undefined to remove/not set it
                 if (i == 0) lp = this.ports.length;
                 if (i == this.ports.length - 1) opacity = 0.2;
-                // else this.ports[i].setUiAttribs({ "longPort":  });
 
-                this.ports[i].setUiAttribs({ "longPort": lp, "opacity": opacity });
+                this.ports[i].setUiAttribs({ "longPort": lp, "opacity": opacity, "greyout": true, "group": this.name });
             }
+
+            // this.op.setPortGroup(this.name, this.ports);
         };
 
         this.removeInvalidPorts = () =>

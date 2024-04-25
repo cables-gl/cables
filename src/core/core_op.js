@@ -353,6 +353,7 @@ const Op = function ()
         // p.set(v);
         // p.defaultValue = p.get();
         // }
+
         return p;
     };
 
@@ -364,14 +365,14 @@ const Op = function ()
             name,
             type,
             {
-                "display": "switch",
+                "display": "multiport",
                 "hidePort": true
             }
         );
-        p.setUiAttribs({ "hidePort": true, "hideParam": true });
+        // p.setUiAttribs({ "hidePort": true });
 
         p.initPorts();
-
+        this.addInPort(p);
 
         return p;
     };

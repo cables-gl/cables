@@ -1,1 +1,0 @@
-this operator uses canvas2d [context drawimage](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
