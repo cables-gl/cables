@@ -9,12 +9,9 @@ class MultiPort extends Port
     {
         super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
 
-        this.uiAttribs.numPorts = this.uiAttribs.numPorts || MIN_NUM_PORTS;
-
+        this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || MIN_NUM_PORTS;
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
-
-
 
         const updateArray = () =>
         {
@@ -22,8 +19,6 @@ class MultiPort extends Port
             for (let i = 0; i < this.ports.length - 1; i++)
             {
                 arr[i] = this.ports[i];
-
-                // console.log("update array", this.ports[i].getSerialized);
             }
 
             this.setRef(arr);
@@ -44,7 +39,6 @@ class MultiPort extends Port
                     opacity = 0.2;
                     grey = true;
                 }
-
 
                 this.ports[i].setUiAttribs({ "longPort": lp, "opacity": opacity, "greyout": grey, "group": this.name });
             }
@@ -130,10 +124,7 @@ class MultiPort extends Port
             }
             this.removeInvalidPorts();
 
-            if (this.ports[this.ports.length - 1].isLinked())
-            {
-                const po = this.newPort();
-            }
+            if (this.ports[this.ports.length - 1].isLinked()) this.newPort();
 
             updateArray();
             updateUi();
@@ -177,9 +168,6 @@ class MultiPort extends Port
             this.op.addInPort(po);
 
             po.setInitialValue("");
-
-            // po.multiPortChangeListener = po.on("change", updateArray.bind(this));
-            // po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
             this.addListeners();
 
             updateUi();
@@ -188,41 +176,40 @@ class MultiPort extends Port
 
         this.initPorts = () =>
         {
-            for (let i = 0; i < 2; i++)
-            {
-                const po = this.newPort();
-            }
+            for (let i = 0; i < 2; i++) this.newPort();
             updateArray();
             updateUi();
         };
 
-
         this.checkNum = () =>
         {
-            console.log("CHECKNUMMMMM");
-            this.uiAttribs.numPorts = Math.max(MIN_NUM_PORTS, this.uiAttribs.numPorts);
+            console.log("CHECKNUMMMMM", this.uiAttribs.multiPortNum);
 
-            while (this.ports.length < this.uiAttribs.numPorts) this.newPort();
-            while (this.ports.length > this.uiAttribs.numPorts) if (this.ports[this.ports.length - 1])
-            {
-                this.ports.pop().remove();
-            }
+
+
+            if (MIN_NUM_PORTS != this.uiAttribs.multiPortNum) this.setUiAttribs({ "editable": true });
+
+
+
+            this.uiAttribs.multiPortNum = Math.max(MIN_NUM_PORTS, this.uiAttribs.multiPortNum);
+
+            while (this.ports.length < this.uiAttribs.multiPortNum) this.newPort();
+            while (this.ports.length > this.uiAttribs.multiPortNum) if (this.ports[this.ports.length - 1]) this.ports.pop().remove();
+
 
             this.removeInvalidPorts();
         };
 
         this.incDec = (dir) =>
         {
-            this.setUiAttribs({ "numPorts": this.uiAttribs.numPorts + dir });
-
+            this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + dir });
             this.checkNum();
-
             this.setUiAttribs({ "editable": true });
             updateUi();
         };
 
-
         this.on("onUiAttrChange", this.checkNum.bind(this));
+        this.checkNum();
     }
 }
 
