@@ -1,7 +1,7 @@
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 
-
+const MIN_NUM_PORTS = 2;
 
 class MultiPort extends Port
 {
@@ -9,8 +9,12 @@ class MultiPort extends Port
     {
         super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
 
+        this.uiAttribs.numPorts = this.uiAttribs.numPorts || MIN_NUM_PORTS;
+
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
+
+
 
         const updateArray = () =>
         {
@@ -193,12 +197,32 @@ class MultiPort extends Port
         };
 
 
+        this.checkNum = () =>
+        {
+            console.log("CHECKNUMMMMM");
+            this.uiAttribs.numPorts = Math.max(MIN_NUM_PORTS, this.uiAttribs.numPorts);
+
+            while (this.ports.length < this.uiAttribs.numPorts) this.newPort();
+            while (this.ports.length > this.uiAttribs.numPorts) if (this.ports[this.ports.length - 1])
+            {
+                this.ports.pop().remove();
+            }
+
+            this.removeInvalidPorts();
+        };
+
         this.incDec = (dir) =>
         {
-            console.log("incdec", dir);
+            this.setUiAttribs({ "numPorts": this.uiAttribs.numPorts + dir });
+
+            this.checkNum();
+
             this.setUiAttribs({ "editable": true });
             updateUi();
         };
+
+
+        this.on("onUiAttrChange", this.checkNum.bind(this));
     }
 }
 
