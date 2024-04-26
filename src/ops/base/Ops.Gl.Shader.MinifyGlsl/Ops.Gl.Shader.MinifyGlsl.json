@@ -1,0 +1,35 @@
+{
+    "id": "76775369-3b1c-46bc-9749-43648a103891",
+    "created": 1714126682361,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1714126682364
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Shader Source"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Minified Shader Source"
+            }
+        ]
+    },
+    "libs": [
+        "glsltokenizer.js"
+    ],
+    "summary": "Minify GLSL shader source code",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}
