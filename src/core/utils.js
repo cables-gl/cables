@@ -510,9 +510,9 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
  * @function ajax
  * @static
  */
-export const ajax = function (url, cb, method, post, contenttype, jsonP, headers = {})
+export const ajax = function (url, cb, method, post, contenttype, jsonP, headers = {}, options = {})
 {
-    request({
+    const requestOptions = {
         "url": url,
         "cb": cb,
         "method": method,
@@ -521,7 +521,9 @@ export const ajax = function (url, cb, method, post, contenttype, jsonP, headers
         "sync": false,
         "jsonP": jsonP,
         "headers": headers,
-    });
+    };
+    if (options && options.credentials) requestOptions.credentials = options.credentials;
+    request(requestOptions);
 };
 
 export const request = function (options)
@@ -546,16 +548,6 @@ export const request = function (options)
         }
     };
 
-    xhr.addEventListener("progress", (ev) =>
-    {
-        // console.log('progress',ev.loaded/1024+' kb');
-        // if (ev.lengthComputable)
-        // {
-        //     var percentComplete = ev.loaded / ev.total;
-        //     console.log(url,percentComplete);
-        // }
-    });
-
     try
     {
         xhr.open(options.method ? options.method.toUpperCase() : "GET", options.url, !options.sync);
@@ -574,6 +566,11 @@ export const request = function (options)
             const value = options.headers[name];
             xhr.setRequestHeader(name, value);
         }
+    }
+
+    if (options.credentials && options.credentials !== "omit")
+    {
+        xhr.withCredentials = true;
     }
 
     try

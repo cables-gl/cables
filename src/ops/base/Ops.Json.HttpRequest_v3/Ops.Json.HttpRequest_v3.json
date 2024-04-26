@@ -59,11 +59,21 @@
             {
                 "type": 0,
                 "name": "Content index",
+                "values": [
+                    "JSON",
+                    "String",
+                    "Binary"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Auto request",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Send Credentials",
                 "subType": "boolean"
             },
             {
@@ -106,8 +116,6 @@
         ]
     },
     "summary": "Request a json file and output an object (ajax, url, json)",
-    "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -131,6 +139,10 @@
                 "text": "trigger the request on any value change (or on pagereload)"
             },
             {
+                "name": "Send Credentials",
+                "text": "indicates whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates. "
+            },
+            {
                 "name": "reload",
                 "text": "refresh data from remote (overrides an inactive \"auto request\")"
             },
@@ -144,5 +156,6 @@
             }
         ]
     },
-    "exampleProjectId": "5FQ08W"
+    "exampleProjectId": "5FQ08W",
+    "license": "MIT"
 }
