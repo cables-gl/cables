@@ -353,6 +353,7 @@ const Op = function ()
         // p.set(v);
         // p.defaultValue = p.get();
         // }
+
         return p;
     };
 
@@ -364,14 +365,14 @@ const Op = function ()
             name,
             type,
             {
-                "display": "switch",
+                "display": "multiport",
                 "hidePort": true
             }
         );
-        p.setUiAttribs({ "hidePort": true, "hideParam": true });
+        p.ignoreValueSerialize = true;
 
+        this.addInPort(p);
         p.initPorts();
-
 
         return p;
     };
@@ -379,7 +380,6 @@ const Op = function ()
 
     Op.prototype.inValueString = function (name, v)
     {
-        console.warn("old string port! - inValueString");
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "type": "string"
@@ -388,11 +388,6 @@ const Op = function ()
         p.value = "";
 
         p.setInitialValue(v);
-        // if (v !== undefined)
-        // {
-        //     p.set(v);
-        //     p.defaultValue = v;
-        // }
         return p;
     };
 

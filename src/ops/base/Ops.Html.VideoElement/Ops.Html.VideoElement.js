@@ -166,7 +166,7 @@ function updateAttribs()
 {
     if (!element || !src.get()) return;
     element.setAttribute("style", inStyle.get());
-    element.setAttribute("src", src.get());
+    element.setAttribute("src", op.patch.getFilePath(String(src.get())));
     element.setAttribute("id", elId.get());
 
     if (inautoplay.get())element.setAttribute("autoplay", "");
