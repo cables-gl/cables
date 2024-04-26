@@ -4,32 +4,16 @@
     "created": 1696585492394,
     "changelog": [
         {
-            "message": "Ops.User.pandur.AjaxRequest2 renamed to Ops.Json.AjaxRequest_v2",
-            "author": "pandur",
-            "date": 1562766700020
-        },
-        {
             "message": "fix multiple requests loadingstatus",
             "type": "bugfix",
             "author": "stephan",
             "date": 1684490024882
         },
         {
-            "message": "cloned op from Ops.Json.AjaxRequest_v2",
-            "author": "pandur",
-            "date": 1696585492395
-        },
-        {
-            "message": "Ops.Patch.Pox_n4I.AjaxRequest_v3 renamed to Ops.Json.AjaxRequest_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1696586677908
-        },
-        {
-            "message": "Ops.Json.AjaxRequest_v3 renamed to Ops.Json.HttpRequest_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1699428566517
+            "message": "add option to allow sending credentials with request",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1714125448538
         }
     ],
     "layout": {

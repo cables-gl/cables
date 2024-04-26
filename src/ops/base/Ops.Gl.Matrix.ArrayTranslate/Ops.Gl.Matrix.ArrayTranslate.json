@@ -29,6 +29,13 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": ""
-
+    "youtubeid": "",
+    "changelog": [
+        {
+            "message": "Index output is now set correctly",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1714061497398
+        }
+    ]
 }
