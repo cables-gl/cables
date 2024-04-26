@@ -24,7 +24,6 @@
         "gulp-clean": "0.4.0",
         "gulp-concat": "2.6.1",
         "gulp-footer": "2.1.0",
-        "gulp-rename": "2.0.0",
         "raw-loader": "^4.0.2",
         "webpack": "5.75.0",
         "webpack-stream": "7.0.0",
