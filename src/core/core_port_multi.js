@@ -183,19 +183,12 @@ class MultiPort extends Port
 
         this.checkNum = () =>
         {
-            console.log("CHECKNUMMMMM", this.uiAttribs.multiPortNum);
-
-
-
             if (MIN_NUM_PORTS != this.uiAttribs.multiPortNum) this.setUiAttribs({ "editable": true });
-
-
 
             this.uiAttribs.multiPortNum = Math.max(MIN_NUM_PORTS, this.uiAttribs.multiPortNum);
 
             while (this.ports.length < this.uiAttribs.multiPortNum) this.newPort();
             while (this.ports.length > this.uiAttribs.multiPortNum) if (this.ports[this.ports.length - 1]) this.ports.pop().remove();
-
 
             this.removeInvalidPorts();
         };

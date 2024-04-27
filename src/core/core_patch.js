@@ -626,8 +626,6 @@ Patch.prototype.emitOnAnimFrameEvent = function (time, delta)
 
 Patch.prototype.renderFrame = function (timestamp)
 {
-    // console.log("renderframe", this._paused, this._frameNum);
-
     this.timer.update(this.reqAnimTimeStamp);
     this.freeTimer.update(this.reqAnimTimeStamp);
     const time = this.timer.getTime();
@@ -665,8 +663,6 @@ Patch.prototype.exec = function (timestamp)
 
     const now = CABLES.now();
     const frameDelta = now - this._frameNext;
-
-
 
     if (this.isEditorMode())
     {
@@ -706,11 +702,6 @@ Patch.prototype.exec = function (timestamp)
 
     if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
 };
-
-// Patch.prototype.linkPorts = function (port1, port2)
-// {
-//     this.link(port1.parent, port1.id, port2.parent, port2.id);
-// };
 
 /**
  * link two ops/ports
@@ -799,31 +790,7 @@ Patch.prototype.getOpsByRefId = function (refId)
 Patch.prototype.getOpById = function (opid)
 {
     return this._opIdCache[opid];
-    // this.timeNeededGetOpById = this.timeNeededGetOpById || 0;
-
-    // const startTime = performance.now();
-    // for (const i in this.ops)
-    // {
-    //     if (this.ops[i].id == opid)
-    //     {
-    //         this.timeNeededGetOpById += (performance.now() - startTime);
-    //         return this.ops[i];
-    //     }
-    // }
 };
-
-// Patch.prototype.getOpsById = function (opIds)
-// {
-//     const ops = [];
-//     for (const i in this.ops)
-//         for (let j = 0; j < opIds.length; j++)
-//             if (this.ops[i].id === opIds[j])
-//             {
-//                 ops.push(this.ops[i]);
-//                 break;
-//             }
-//     return ops;
-// };
 
 Patch.prototype.getOpsByName = function (name)
 {
@@ -877,20 +844,6 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
             return this.ops[i];
     return false;
 };
-
-// Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
-// {
-//     const ops = this.ops;
-//     for (let i = 0; i < ops.length; i++)
-//     {
-//         const op = ops[i];
-//         if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
-//     }
-// };
-
-
-
-
 
 Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
 {

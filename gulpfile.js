@@ -5,7 +5,6 @@ import footer from "gulp-footer";
 import fs from "fs";
 import getRepoInfo from "git-repo-info";
 import clean from "gulp-clean";
-import rename from "gulp-rename";
 import concat from "gulp-concat";
 import compiler from "webpack";
 import webpack from "webpack-stream";
