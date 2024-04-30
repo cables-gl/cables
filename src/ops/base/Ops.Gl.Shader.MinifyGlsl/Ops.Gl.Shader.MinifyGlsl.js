@@ -8,7 +8,7 @@ inStr.onChange = () =>
 
     const tokens = window.tokenString(inStr.get());
 
-    console.log(tokens);
+    // console.log(tokens);
 
     let str = "";
     for (let i = 0; i < tokens.length - 1; i++)
