@@ -1,12 +1,13 @@
 import path from "path";
 import glMatrix from "gl-matrix";
+import webpack from "webpack";
 import TerserPlugin from "terser-webpack-plugin";
 
-export default (isProduction, minify = false) =>
+export default (isLiveBuild, buildInfo, minify = false) =>
 {
     const __dirname = new URL(".", import.meta.url).pathname;
     return {
-        "mode": isProduction ? "production" : "development",
+        "mode": isLiveBuild ? "production" : "development",
         "entry": [
             path.join(__dirname, "src", "core", "index.js"),
         ],
@@ -44,6 +45,14 @@ export default (isProduction, minify = false) =>
         "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
-        }
+        },
+        "plugins": [
+            new webpack.BannerPlugin({
+                "entryOnly": true,
+                "footer": true,
+                "raw": true,
+                "banner": "\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"
+            })
+        ]
     };
 };

@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import TerserPlugin from "terser-webpack-plugin";
 
-export default (isProduction = false, minify = false) =>
+export default (isLiveBuild, buildInfo, minify = false) =>
 {
     const getDirectories = function (arr)
     {
@@ -98,14 +98,14 @@ export default (isProduction = false, minify = false) =>
         for (let i = 0; i < NAMESPACE_DIRS.length; i++)
         {
             const namespace = NAMESPACE_DIRS[i];
-            outputObjects.push(createOutputEntryObjectsNamespace(namespace, isProduction));
+            outputObjects.push(createOutputEntryObjectsNamespace(namespace, isLiveBuild));
         }
 
         return flattenArray(outputObjects);
     };
 
     const __dirname = new URL(".", import.meta.url).pathname;
-    const entryAndOutputObjects = readLibraryFiles(isProduction);
+    const entryAndOutputObjects = readLibraryFiles(isLiveBuild);
     const defaultConfig = {
         "mode": "production",
         "devtool": false,
