@@ -169,7 +169,7 @@ function printInfo()
     const sizes = {};
     let html = "<div style=\"overflow:scroll;width:100%;height:100%\">";
 
-    html += "File: <a href=\"" + CABLES.sandbox.getCablesUrl() + "/asset/patches/?filename=" + inFile.get() + "\" target=\"_blank\">" + CABLES.basename(inFile.get()) + "</a><br/>";
+    html += "File: <a href=\"" + CABLES.platform.getCablesUrl() + "/asset/patches/?filename=" + inFile.get() + "\" target=\"_blank\">" + CABLES.basename(inFile.get()) + "</a><br/>";
 
     html += "Generator:" + gltf.json.asset.generator;
 
