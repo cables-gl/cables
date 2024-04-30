@@ -44,6 +44,16 @@
             },
             {
                 "type": 0,
+                "name": "Whitespace",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Wrap lines",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Syntax index",
                 "subType": "integer"
             },
