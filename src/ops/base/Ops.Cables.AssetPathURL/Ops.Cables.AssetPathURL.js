@@ -16,12 +16,7 @@ function update()
         return;
     }
 
-    let patchId = null;
-    if (op.storage && op.storage.blueprint && op.storage.blueprint.patchId)
-    {
-        patchId = op.storage.blueprint.patchId;
-    }
-    filename = op.patch.getAssetPath(patchId) + filename;
+    filename = op.patch.getAssetPath() + filename;
     let url = op.patch.getFilePath(filename);
     path.set(url);
 }

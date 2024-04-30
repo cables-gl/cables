@@ -12,11 +12,11 @@
             {
                 "type": 0,
                 "name": "Unit index",
+                "values": [
+                    "Seconds",
+                    "Frames"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Unit"
             },
             {
                 "type": 0,
@@ -37,6 +37,11 @@
                 "type": 0,
                 "name": "Max Frames",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -119,12 +124,18 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "changelog": [
         {
             "message": "added max num of frames, if atlas has blank frames at the end",
             "author": "pandur",
-            "date": 1598544310528
+            "date": 1598544310528,
+            "type": "improvement"
+        },
+        {
+            "message": "Added parameter option to flip Y coordinate",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1714470655184
         }
     ],
     "exampleProjectId": "n0iMSq"

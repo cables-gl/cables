@@ -10,6 +10,7 @@ const
     texRepeatY = op.outNumber("Repeat Y"),
     texU = op.outNumber("Offset X"),
     texV = op.outNumber("Offset Y"),
+    flipY = op.inBool("Flip Y", false),
 
     outFrame = op.outNumber("Frame"),
     outProgress = op.outNumber("Progress");
@@ -24,6 +25,7 @@ const posY = 0;
 const lastSwitch = 0;
 const frame = 0;
 setRepeat();
+inTime.onChange = update;
 
 function setRepeat()
 {
@@ -31,8 +33,6 @@ function setRepeat()
     texRepeatX.set(1 / numX.get());
     update();
 }
-
-inTime.onChange = update;
 
 function update()
 {
@@ -49,6 +49,9 @@ function update()
     outFrame.set(frame);
     outProgress.set((frame) / (numFrames - 1));
 
+    let y = texRepeatY.get() * row;
+    if (flipY.get())y = 1.0 - y;
+
     texU.set(texRepeatX.get() * col);
-    texV.set(texRepeatY.get() * row);
+    texV.set(y);
 }

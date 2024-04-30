@@ -1,7 +1,6 @@
 //
 import gulp from "gulp";
 
-import footer from "gulp-footer";
 import fs from "fs";
 import getRepoInfo from "git-repo-info";
 import clean from "gulp-clean";
@@ -62,19 +61,11 @@ function _update_buildInfo(done)
     });
 }
 
-function _append_build_info()
-{
-    return gulp
-        .src(["build/*.js"])
-        .pipe(footer("\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"))
-        .pipe(gulp.dest("build/"));
-}
-
 function _watch(done)
 {
-    gulp.watch(["src/core/**/*", "../shared/client/**/*"], { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs), gulp.parallel(_core_libs), _append_build_info, _copy_ui, _core_libs_copy));
-    gulp.watch("libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _external_libs, _append_build_info, _copy_ui));
-    gulp.watch("src/libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_core_libs), _append_build_info, _core_libs_copy));
+    gulp.watch(["src/core/**/*", "../shared/client/**/*"], { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
+    gulp.watch("libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _external_libs, _copy_ui));
+    gulp.watch("src/libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     done();
 }
 
@@ -109,7 +100,7 @@ function _corejs(done)
         .pipe(
             webpack(
                 {
-                    "config": webpackConfig(isLiveBuild, minify),
+                    "config": webpackConfig(isLiveBuild, buildInfo, minify),
                 },
                 compiler,
                 (err, stats) =>
@@ -136,7 +127,7 @@ function _core_libs(done)
         .pipe(
             webpack(
                 {
-                    "config": webpackLibsConfig(isLiveBuild, false),
+                    "config": webpackLibsConfig(isLiveBuild, buildInfo, false),
                 },
                 compiler,
                 (err, stats) =>
@@ -173,7 +164,6 @@ gulp.task("default", gulp.series(
     gulp.parallel(
         _core_libs
     ),
-    _append_build_info,
     _copy_ui,
     _core_libs_copy,
     _watch
@@ -189,7 +179,6 @@ gulp.task("watch", gulp.series(
     gulp.parallel(
         _core_libs
     ),
-    _append_build_info,
     _copy_ui,
     _core_libs_copy,
     _watch
@@ -205,7 +194,6 @@ gulp.task("build", gulp.series(
     gulp.parallel(
         _core_libs
     ),
-    _append_build_info,
     _copy_ui,
     _core_libs_copy
 ));
