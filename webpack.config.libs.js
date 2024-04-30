@@ -1,6 +1,7 @@
-import path from "path";
+import path, { dirname } from "path";
 import fs from "fs";
 import TerserPlugin from "terser-webpack-plugin";
+import { fileURLToPath } from "url";
 
 export default (isLiveBuild, buildInfo, minify = false) =>
 {
@@ -104,7 +105,7 @@ export default (isLiveBuild, buildInfo, minify = false) =>
         return flattenArray(outputObjects);
     };
 
-    const __dirname = new URL(".", import.meta.url).pathname;
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const entryAndOutputObjects = readLibraryFiles(isLiveBuild);
     const defaultConfig = {
         "mode": "production",

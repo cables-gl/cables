@@ -1,15 +1,16 @@
-import path from "path";
+import path, { dirname } from "path";
 import glMatrix from "gl-matrix";
 import webpack from "webpack";
+import { fileURLToPath } from "url";
 import TerserPlugin from "terser-webpack-plugin";
 
 export default (isLiveBuild, buildInfo, minify = false) =>
 {
-    const __dirname = new URL(".", import.meta.url).pathname;
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     return {
         "mode": isLiveBuild ? "production" : "development",
         "entry": [
-            path.join(__dirname, "src", "core", "index.js"),
+            path.join(__dirname, "src", "core", "index.js")
         ],
         "devtool": minify ? "source-map" : false,
         "output": {
@@ -18,10 +19,13 @@ export default (isLiveBuild, buildInfo, minify = false) =>
             "library": "CABLES",
             "libraryExport": "default",
             "libraryTarget": "var",
-            "globalObject": "window",
+            "globalObject": "window"
         },
         "optimization": {
-            "minimizer": [new TerserPlugin({ "extractComments": false, "terserOptions": { "output": { "comments": false } } })],
+            "minimizer": [new TerserPlugin({
+                "extractComments": false,
+                "terserOptions": { "output": { "comments": false } }
+            })],
             "minimize": minify,
             "usedExports": true
         },
@@ -30,21 +34,21 @@ export default (isLiveBuild, buildInfo, minify = false) =>
                 { "sideEffects": false },
                 {
                     "test": /\.frag/,
-                    "use": "raw-loader",
+                    "use": "raw-loader"
                 },
                 {
                     "test": /\.vert/,
-                    "use": "raw-loader",
+                    "use": "raw-loader"
                 },
                 {
                     "test": /\.wgsl/,
-                    "use": "raw-loader",
+                    "use": "raw-loader"
                 }
-            ].filter(Boolean),
+            ].filter(Boolean)
         },
         "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
         "resolve": {
-            "extensions": [".json", ".js", ".jsx"],
+            "extensions": [".json", ".js", ".jsx"]
         },
         "plugins": [
             new webpack.BannerPlugin({
