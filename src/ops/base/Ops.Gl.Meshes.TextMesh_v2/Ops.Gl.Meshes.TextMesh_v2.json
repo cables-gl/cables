@@ -111,11 +111,6 @@
                 "name": "Next"
             },
             {
-                "type": 2,
-                "name": "texture",
-                "objType": "texture"
-            },
-            {
                 "type": 0,
                 "name": "Total Lines",
                 "subType": "number"
@@ -198,6 +193,12 @@
             "message": "Ops.Gl.Meshes.TextMesh3 renamed to Ops.Gl.Meshes.TextMesh_v2",
             "author": "pandur",
             "date": 1560335690848
+        },
+        {
+            "message": "Removed confusing texture output ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1714382385952
         }
     ],
     "issues": "",

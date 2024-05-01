@@ -25,6 +25,8 @@ op.toWorkPortsNeedToBeLinked(render);
 
 op.setPortGroup("Masking", [inMulTex, inMulTexMask]);
 
+textureOut.setUiAttribs({ "hidePort": true });
+
 const textureSize = 1024;
 let fontLoaded = false;
 let needUpdate = true;

@@ -1,5 +1,5 @@
 const
-    str = op.inString("String", 5711),
+    str = op.inString("String", 0),
     outNum = op.outNumber("Number");
 
 str.onChange = function ()
