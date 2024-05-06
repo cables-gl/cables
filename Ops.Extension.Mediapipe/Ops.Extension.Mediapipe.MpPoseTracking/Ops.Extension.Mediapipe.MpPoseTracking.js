@@ -37,6 +37,13 @@ let canvasTexture = null;
 
 updateOptions();
 
+let lastFound=0;
+let foundTo=setInterval(
+    ()=>
+    {
+        if(performance.now()-lastFound>400)outFound.set(false);
+    },500);
+
 flipX.onChange =
 flipY.onChange = initCopyShader;
 
@@ -120,12 +127,11 @@ pose.onResults((r) =>
         }
 
         if (r.segmentationMask)
-        {
             segMaskBitmap = r.segmentationMask;
-        }
 
-        outPoints.set(null);
-        outPoints.set(points);
+        outPoints.setRef(points);
+        lastFound=performance.now();
+        outFound.set(true);
 
         outLandmarks.set(r.poseLandmarks);
 
@@ -229,6 +235,7 @@ pose.onResults((r) =>
     }
     else
     {
+        outFound.set(false);
         outPoints.set(null);
         outLandmarks.set(null);
         outLines.set(null);

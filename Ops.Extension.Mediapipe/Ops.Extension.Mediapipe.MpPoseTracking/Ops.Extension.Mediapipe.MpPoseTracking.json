@@ -4,63 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1608577899421
-        },
-        {
-            "message": " added lib: hands.js",
-            "author": "pandur",
-            "date": 1608577918392
-        },
-        {
-            "message": " added lib: camera_utils.js",
-            "author": "pandur",
-            "date": 1608578877969
-        },
-        {
-            "message": "Ops.User.cables.MpHands renamed to Ops.Admin.Mediapipe.MpHands",
-            "author": "pandur",
-            "date": 1608582896776
-        },
-        {
-            "message": "Ops.Admin.Mediapipe.MpHands renamed to Ops.Libs.Mediapipe.MpHands",
-            "author": "pandur",
-            "date": 1611052266069
-        },
-        {
-            "message": "Ops.Libs.Mediapipe.MpHands renamed to Ops.Admin.Mediapipe.MpHands",
-            "author": "stephan",
-            "date": 1613553560896
-        },
-        {
-            "message": "Ops.Admin.Mediapipe.MpHands renamed to Ops.Dev.Mediapipe.MpHands",
-            "author": "pandur",
-            "date": 1623913601812
-        },
-        {
-            "message": "cloned op from Ops.Dev.Mediapipe.MpHands",
-            "author": "pandur",
-            "date": 1640184895627
-        },
-        {
-            "message": "Ops.User.pandur.MpPose renamed to Ops.Dev.MpPose",
-            "author": "pandur",
-            "date": 1640190458007
-        },
-        {
-            "message": "Ops.Dev.MpPose renamed to Ops.Libs.Mediapipe.MpPose",
-            "author": "pandur",
-            "date": 1652089143509
-        },
-        {
-            "message": "Ops.Libs.Mediapipe.MpPose renamed to Ops.Libs.Mediapipe.MpPoseTracking",
-            "author": "stephan",
-            "date": 1654013302964
+            "date": 1608577899421,
+            "type": "new"
         },
         {
             "message": "Ops.Libs.Mediapipe.MpPoseTracking renamed to Ops.Extension.Mediapipe.MpPoseTracking",
             "type": "rename",
             "author": "pandur",
             "date": 1686915628676
+        },
+        {
+            "message": "Fixed: found output was not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1714980766719
         }
     ],
     "authorName": "pandur",
@@ -79,6 +36,11 @@
             {
                 "type": 0,
                 "name": "Model Complexity index",
+                "values": [
+                    "0",
+                    "1",
+                    "2"
+                ],
                 "subType": "integer"
             },
             {
@@ -153,7 +115,6 @@
     },
     "summary": "Get pose-data (points/landmarks/lines) from webcam using mediapipe library",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
