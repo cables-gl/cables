@@ -195,12 +195,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     o.pixelFormatBase = pixelFormatStr;
 
-    if (cgl.glUseHalfFloatTex)
-    {
-        if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
-        if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
-        if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
-    }
 
     o.pixelFormat = pixelFormatStr;
     o.glDataType = cgl.gl.UNSIGNED_BYTE;
@@ -208,6 +202,36 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     o.glDataFormat = cgl.gl.RGBA;
 
     let floatDatatype = cgl.gl.FLOAT;
+
+    if (cgl.glUseHalfFloatTex)
+    {
+        if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+        if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+        if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+    }
+
+    if (pixelFormatStr.contains("16bit"))
+    {
+        if (cgl.glVersion == 2)
+        {
+            // cgl.enableExtension("OES_texture_half_float");
+            const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
+
+            if (!hasExt)
+            {
+                console.warn("no 16bit extension, fallback to 32bit");
+                // fallback to 32 bit?
+                if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F) pixelFormatStr = Texture.PFORMATSTR_RGBA32F;
+                if (pixelFormatStr == Texture.PFORMATSTR_RGB16F) pixelFormatStr = Texture.PFORMATSTR_RGB32F;
+                if (pixelFormatStr == Texture.PFORMATSTR_RG16F) pixelFormatStr = Texture.PFORMATSTR_RG32F;
+                if (pixelFormatStr == Texture.PFORMATSTR_R16F) pixelFormatStr = Texture.PFORMATSTR_R32F;
+            }
+            else
+            {
+                floatDatatype = cgl.gl.HALF_FLOAT;
+            }
+        }
+    }
 
     if (cgl.glVersion == 1)
     {
@@ -221,6 +245,10 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             floatDatatype = ext.HALF_FLOAT_OES;
         }
     }
+
+
+
+
 
     if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
     {
@@ -316,11 +344,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
     }
 
-    if (pixelFormatStr.contains("16bit"))
-    {
-        cgl.enableExtension("EXT_color_buffer_half_float");
-        cgl.enableExtension("OES_texture_float_linear");
-    }
 
     o.numColorChannels = 1;
     if (pixelFormatStr.startsWith("R"))o.numColorChannels = 1;
