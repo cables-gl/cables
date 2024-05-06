@@ -2,6 +2,7 @@ const exe = op.inTriggerButton("exe"),
     array = op.inArray("array"),
     index = op.inValueInt("index"),
     value = op.inValueFloat("value"),
+    next = op.outTrigger("Next"),
     values = op.outArray("values");
 
 exe.onTriggered = update;
@@ -23,6 +24,6 @@ function update()
 
     newArr[Math.floor(index.get())] = value.get();
 
-    values.set(null);
-    values.set(newArr);
+    values.setRef(newArr);
+    next.trigger();
 }

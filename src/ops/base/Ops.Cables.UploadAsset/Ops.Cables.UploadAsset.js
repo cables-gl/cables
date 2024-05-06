@@ -12,14 +12,15 @@ inExec.onTriggered = () =>
     let str = inStr.get();
     if (str.indexOf("data" != 0))str = "data:;base64," + str;
 
-    gui.getFileManager().uploadFile(inFilename.get(), str, (err, res) =>
-    {
-        console.log(err, res);
-
-        if (err)
+    if (CABLES.UI)
+        gui.getFileManager().uploadFile(inFilename.get(), str, (err, res) =>
         {
-            outResult.set(err.msg);
-            outError.set(true);
-        }
-    });
+            console.log(err, res);
+
+            if (err)
+            {
+                outResult.set(err.msg);
+                outError.set(true);
+            }
+        });
 };
