@@ -5,13 +5,14 @@ const MIN_NUM_PORTS = 2;
 
 class MultiPort extends Port
 {
-    constructor(__parent, name, type, uiAttribs)
+    constructor(__parent, name, type, dir, uiAttribs)
     {
         super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
 
         this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || MIN_NUM_PORTS;
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
+        this.direction = dir;
 
         const updateArray = () =>
         {
@@ -23,6 +24,10 @@ class MultiPort extends Port
 
             this.setRef(arr);
         };
+
+
+
+
 
         const updateUi = () =>
         {
@@ -152,6 +157,10 @@ class MultiPort extends Port
                 if (po.multiPortChangeListener)po.multiPortChangeListener = po.off(po.multiPortChangeListener);
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
+                if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
+                po.multiPortTriggerListener = po.on("trigger", this.trigger());
+
+
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
             }
@@ -163,9 +172,11 @@ class MultiPort extends Port
             if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
             const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
 
-            po.direction = CONSTANTS.PORT_DIR_IN;
+            po.direction = dir;
             this.ports.push(po);
-            this.op.addInPort(po);
+            console.log("CONSTANTS.PORT_DIR_OUT", CONSTANTS.PORT.PORT_DIR_OUT, this.direction);
+            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) this.op.addOutPort(po);
+            else this.op.addInPort(po);
 
             po.setInitialValue("");
             this.addListeners();
@@ -193,9 +204,9 @@ class MultiPort extends Port
             this.removeInvalidPorts();
         };
 
-        this.incDec = (dir) =>
+        this.incDec = (incDir) =>
         {
-            this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + dir });
+            this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + incDir });
             this.checkNum();
             this.setUiAttribs({ "editable": true });
             updateUi();

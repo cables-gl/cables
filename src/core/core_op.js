@@ -364,6 +364,7 @@ const Op = function ()
             this,
             name,
             type,
+            CONSTANTS.PORT_DIR_IN,
             {
                 "display": "multiport",
                 "hidePort": true
@@ -376,6 +377,27 @@ const Op = function ()
 
         return p;
     };
+
+    Op.prototype.outMultiPort = function (name, type)
+    {
+        const p = new MultiPort(
+            this,
+            name,
+            type,
+            CONSTANTS.PORT.PORT_DIR_OUT,
+            {
+                "display": "multiport",
+                "hidePort": true
+            }
+        );
+        p.ignoreValueSerialize = true;
+
+        this.addOutPort(p);
+        p.initPorts();
+
+        return p;
+    };
+
 
 
     Op.prototype.inValueString = function (name, v)
