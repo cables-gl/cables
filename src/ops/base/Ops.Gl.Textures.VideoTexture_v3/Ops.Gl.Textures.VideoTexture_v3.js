@@ -33,6 +33,7 @@ const
     outHeight = op.outNumber("Height"),
     outAspect = op.outNumber("Aspect Ratio"),
     outHasError = op.outBoolNum("Has Error"),
+    outAutoFPS = op.outBoolNum("Auto FPS", false),
     outError = op.outString("Error Message");
 
 op.setPortGroup("Texture", [tfilter, wrap, flip, fps]);
@@ -56,6 +57,8 @@ const videoElement = document.createElement("video");
 videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("webkit-playsinline", "");
 videoElement.setAttribute("autoplay", "autoplay");
+
+outAutoFPS.set(!!videoElement.requestVideoFrameCallback);
 
 const emptyTexture = CGL.Texture.getEmptyTexture(cgl);
 op.toWorkPortsNeedToBeLinked(textureOut);
@@ -85,7 +88,6 @@ inExec.onTriggered = () =>
 
     if (needsUpdate)
     {
-        lastTime = performance.now();
         updateTexture();
     }
 
@@ -203,6 +205,7 @@ muted.onChange = function ()
 function updateTexture()
 {
     const force = needsUpdate;
+    lastTime = performance.now();
 
     if (!filename.get())
     {
@@ -270,6 +273,14 @@ function updateTexture()
 
     if (videoElement.readyState == 4) loading.set(false);
     else loading.set(false);
+
+    if (videoElement.requestVideoFrameCallback)
+        videoElement.requestVideoFrameCallback(
+            () =>
+            {
+                needsUpdate = true;
+            }
+        );
 }
 
 function initVideo()

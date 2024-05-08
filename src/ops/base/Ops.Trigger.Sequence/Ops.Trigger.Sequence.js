@@ -2,6 +2,7 @@ const
     exe = op.inTrigger("exe"),
     cleanup = op.inTriggerButton("Clean up connections");
 
+op.setUiAttrib({ "resizable": true, "resizableY": false, "stretchPorts": true });
 const
     exes = [],
     triggers = [],

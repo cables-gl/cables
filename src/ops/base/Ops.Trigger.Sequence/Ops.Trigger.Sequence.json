@@ -144,15 +144,16 @@
     "youtubeid": "1PtJG-Plz4Y",
     "changelog": [
         {
-            "message": "code cleanup - ports",
-            "author": "andro",
-            "date": 1559051315372
-        },
-        {
             "message": "Ops.Sequence renamed to Ops.Trigger.Sequence",
             "type": "rename",
             "author": "pandur",
             "date": 1685959336768
+        },
+        {
+            "message": "Op is now resizable on the x axis and ports are gonna stretched out on the whole width",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1715112525892
         }
     ]
 }
