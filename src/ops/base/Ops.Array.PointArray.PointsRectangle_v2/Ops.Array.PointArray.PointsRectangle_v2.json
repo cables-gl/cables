@@ -1,0 +1,92 @@
+{
+    "id": "12b71b15-3d0b-45b6-b7fc-6204b5e4d94b",
+    "created": 1715182551624,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1709117722561
+        },
+        {
+            "message": "New Version: Correct number of vertices when having e.g. 1 segment , added loop parameter to repeat first vertex.",
+            "author": "pandur",
+            "date": 1715182551624,
+            "type": "feature"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Line Strip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Segments",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "border radius",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top Left",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top Right",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom Left",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom Right",
+                "group": "Round Corner",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            }
+        ]
+    },
+    "summary": "generate an array of XYZ coordinates of an rectangle",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}
