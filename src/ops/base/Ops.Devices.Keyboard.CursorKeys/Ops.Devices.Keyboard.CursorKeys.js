@@ -54,7 +54,7 @@ op.onDelete = function ()
     document.removeEventListener("keydown", onKeyDown, false);
 };
 
-function addListener()
+function addListeners()
 {
     if (canvasOnly.get()) addCanvasListener();
     else addDocumentListener();
@@ -74,6 +74,9 @@ inActive.onChange = () =>
     pressedDown.set(false);
     pressedLeft.set(false);
     pressedRight.set(false);
+
+    removeListeners();
+    if (inActive.get())addListeners();
 };
 
 function removeListeners()
@@ -102,7 +105,7 @@ function addDocumentListener()
 canvasOnly.onChange = function ()
 {
     removeListeners();
-    addListener();
+    addListeners();
 };
 
 canvasOnly.set(true);
