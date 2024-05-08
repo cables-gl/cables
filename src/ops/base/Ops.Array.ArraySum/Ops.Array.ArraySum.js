@@ -6,6 +6,11 @@ const
 let newArr = [];
 outArray.set(newArr);
 
+inArray.onLinkChanged = () =>
+{
+    if (inArray) inArray.copyLinkedUiAttrib("stride", outArray);
+};
+
 inValue.onChange =
 inArray.onChange = function ()
 {

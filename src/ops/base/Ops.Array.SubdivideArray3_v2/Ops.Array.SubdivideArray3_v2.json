@@ -58,15 +58,19 @@
             }
         ]
     },
-
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
             "message": "Ops.Array.Array3xSubdivide_v2 renamed to Ops.Array.SubdivideArray3_v2",
             "author": "pandur",
             "date": 1560412543616
+        },
+        {
+            "message": "Copy over array stride information\t",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715182062662
         }
     ],
     "exampleProjectId": "uywtvc"

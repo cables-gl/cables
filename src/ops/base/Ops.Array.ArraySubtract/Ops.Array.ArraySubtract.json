@@ -33,6 +33,10 @@
             {
                 "type": 0,
                 "name": "Mode index",
+                "values": [
+                    "Array-x",
+                    "x-Array"
+                ],
                 "subType": "integer"
             }
         ],
@@ -44,8 +48,14 @@
         ]
     },
     "issues": "",
-
-
     "youtubeids": [],
-    "exampleProjectId": "uIYNcn"
+    "exampleProjectId": "uIYNcn",
+    "changelog": [
+        {
+            "message": "Copy over array stride information",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715181891262
+        }
+    ]
 }

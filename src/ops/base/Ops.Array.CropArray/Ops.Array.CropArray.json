@@ -5,27 +5,27 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Source Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Start Index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "New Length",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Cropped Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Array length",
                 "subType": "number"
             }
