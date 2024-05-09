@@ -7,6 +7,11 @@ const
 let newArr = [];
 let mode = true;
 
+inArray.onLinkChanged = () =>
+{
+    if (inArray) inArray.copyLinkedUiAttrib("stride", outArray);
+};
+
 inMode.onChange = () =>
 {
     mode = inMode.get() === "Array-x";

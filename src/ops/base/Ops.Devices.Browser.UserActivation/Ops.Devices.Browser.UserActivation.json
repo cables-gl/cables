@@ -1,0 +1,53 @@
+{
+    "id": "a930662f-1dee-4623-b2b1-cc1eb9772148",
+    "created": 1715180641797,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1715180641799
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "user is or was active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "user has been active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "user is active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "mdn-api_useractivation",
+    "summary": "detect if the user interacted with or activated the page"
+}

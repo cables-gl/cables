@@ -16,6 +16,11 @@ subDivs.onChange =
     inArr.onChange =
     bezierEndPoints.onChange = calc;
 
+inArr.onLinkChanged = () =>
+{
+    inArr.copyLinkedUiAttrib("stride", result);
+};
+
 function ip(x0, x1, x2, t)// Bezier
 {
     const r = (x0 * (1 - t) * (1 - t) + 2 * x1 * (1 - t) * t + x2 * t * t);

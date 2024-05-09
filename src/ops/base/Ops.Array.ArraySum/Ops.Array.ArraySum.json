@@ -40,6 +40,13 @@
     },
     "youtubeid": "",
     "issues": "",
-
-    "exampleProjectId": "uIYNcn"
+    "exampleProjectId": "uIYNcn",
+    "changelog": [
+        {
+            "message": "Copy over array stride information",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715181844921
+        }
+    ]
 }

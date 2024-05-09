@@ -35,6 +35,12 @@
             "message": "Ops.Array.Array3xReverse renamed to Ops.Array.ReverseArray3",
             "author": "pandur",
             "date": 1560412160499
+        },
+        {
+            "message": "Copy over array stride information",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715181830222
         }
     ],
     "exampleProjectId": "1QJiVJ"

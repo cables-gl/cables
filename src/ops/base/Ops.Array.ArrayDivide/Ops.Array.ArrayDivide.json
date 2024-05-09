@@ -33,6 +33,10 @@
             {
                 "type": 0,
                 "name": "Mode index",
+                "values": [
+                    "Array/x",
+                    "x/Array"
+                ],
                 "subType": "integer"
             }
         ],
@@ -44,7 +48,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "uIYNcn"
 }
