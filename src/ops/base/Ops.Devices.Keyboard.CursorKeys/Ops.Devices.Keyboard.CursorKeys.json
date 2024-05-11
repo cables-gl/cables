@@ -30,9 +30,17 @@
                 "subType": "boolean"
             },
             {
+                "type": 1,
+                "name": "Up Pressed"
+            },
+            {
                 "type": 0,
                 "name": "Down",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Down Pressed"
             },
             {
                 "type": 0,
@@ -40,9 +48,17 @@
                 "subType": "boolean"
             },
             {
+                "type": 1,
+                "name": "Left Pressed"
+            },
+            {
                 "type": 0,
                 "name": "Right",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Right Pressed"
             }
         ]
     },
@@ -60,6 +76,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1715183037901
+        },
+        {
+            "message": "Added trigger outputs for each directional key",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1715418169833
         }
     ]
 }

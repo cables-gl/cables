@@ -4,9 +4,13 @@ const
     keysWasd = op.inValueBool("WASD", true),
     inActive = op.inBool("Active", true),
     pressedUp = op.outBoolNum("Up"),
+    triggerUp = op.outTrigger("Up Pressed"),
     pressedDown = op.outBoolNum("Down"),
+    triggerDown = op.outTrigger("Down Pressed"),
     pressedLeft = op.outBoolNum("Left"),
-    pressedRight = op.outBoolNum("Right");
+    triggerLeft = op.outTrigger("Left Pressed"),
+    pressedRight = op.outBoolNum("Right"),
+    triggerRight = op.outTrigger("Right Pressed");
 
 const cgl = op.patch.cgl;
 
@@ -14,17 +18,49 @@ function onKeyDown(e)
 {
     if (keysWasd.get())
     {
-        if (e.keyCode == 87) pressedUp.set(true);
-        if (e.keyCode == 83) pressedDown.set(true);
-        if (e.keyCode == 65) pressedLeft.set(true);
-        if (e.keyCode == 68) pressedRight.set(true);
+        if (e.keyCode == 87)
+        {
+            pressedUp.set(true);
+            triggerUp.trigger();
+        }
+        if (e.keyCode == 83)
+        {
+            pressedDown.set(true);
+            triggerDown.trigger();
+        }
+        if (e.keyCode == 65)
+        {
+            pressedLeft.set(true);
+            triggerLeft.trigger();
+        }
+        if (e.keyCode == 68)
+        {
+            pressedRight.set(true);
+            triggerRight.trigger();
+        }
     }
     if (keysCursor.get())
     {
-        if (e.keyCode == 38) pressedUp.set(true);
-        if (e.keyCode == 40) pressedDown.set(true);
-        if (e.keyCode == 37) pressedLeft.set(true);
-        if (e.keyCode == 39) pressedRight.set(true);
+        if (e.keyCode == 38)
+        {
+            pressedUp.set(true);
+            triggerUp.trigger();
+        }
+        if (e.keyCode == 40)
+        {
+            pressedDown.set(true);
+            triggerDown.trigger();
+        }
+        if (e.keyCode == 37)
+        {
+            pressedLeft.set(true);
+            triggerLeft.trigger();
+        }
+        if (e.keyCode == 39)
+        {
+            pressedRight.set(true);
+            triggerRight.trigger();
+        }
     }
 }
 
@@ -32,17 +68,49 @@ function onKeyUp(e)
 {
     if (keysWasd.get())
     {
-        if (e.keyCode == 87) pressedUp.set(false);
-        if (e.keyCode == 83) pressedDown.set(false);
-        if (e.keyCode == 65) pressedLeft.set(false);
-        if (e.keyCode == 68) pressedRight.set(false);
+        if (e.keyCode == 87)
+        {
+            pressedUp.set(false);
+            triggerUp.trigger();
+        }
+        if (e.keyCode == 83)
+        {
+            pressedDown.set(false);
+            triggerDown.trigger();
+        }
+        if (e.keyCode == 65)
+        {
+            pressedLeft.set(false);
+            triggerLeft.trigger();
+        }
+        if (e.keyCode == 68)
+        {
+            pressedRight.set(false);
+            triggerRight.trigger();
+        }
     }
     if (keysCursor.get())
     {
-        if (e.keyCode == 38) pressedUp.set(false);
-        if (e.keyCode == 40) pressedDown.set(false);
-        if (e.keyCode == 37) pressedLeft.set(false);
-        if (e.keyCode == 39) pressedRight.set(false);
+        if (e.keyCode == 38)
+        {
+            pressedUp.set(false);
+            triggerUp.trigger();
+        }
+        if (e.keyCode == 40)
+        {
+            pressedDown.set(false);
+            triggerDown.trigger();
+        }
+        if (e.keyCode == 37)
+        {
+            pressedLeft.set(false);
+            triggerLeft.trigger();
+        }
+        if (e.keyCode == 39)
+        {
+            pressedRight.set(false);
+            triggerRight.trigger();
+        }
     }
 }
 
