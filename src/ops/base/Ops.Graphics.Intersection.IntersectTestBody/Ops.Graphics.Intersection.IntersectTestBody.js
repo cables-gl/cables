@@ -59,7 +59,7 @@ function doRender()
 
             for (let i = 0; i < bodies.length; i++)
             {
-                if (testCollision(testBody, bodies[i]))
+                if (testBody != bodies[i] && testCollision(testBody, bodies[i]))
                 {
                     outHasHit.set(true);
                     outName.set(bodies[i].name);
