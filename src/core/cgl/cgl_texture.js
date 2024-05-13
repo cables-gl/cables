@@ -1215,6 +1215,8 @@ Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 
 
 Texture.PFORMATSTR_R32F = "R 32bit float";
+Texture.PFORMATSTR_RG32F = "RG 32bit float";
+Texture.PFORMATSTR_RGB32F = "RGB 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
 Texture.PFORMATSTR_DEPTH = "DEPTH";
