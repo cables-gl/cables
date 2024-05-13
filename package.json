@@ -15,7 +15,7 @@
         "node": "18.14.2"
     },
     "dependencies": {
-        "git-repo-info": "2.1.1",
+        "git-last-commit": "1.0.1",
         "gl-matrix": "3.4.3",
         "cables-shared-client": "file:../shared/client/"
     },

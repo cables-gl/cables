@@ -2,7 +2,7 @@
 import gulp from "gulp";
 
 import fs from "fs";
-import getRepoInfo from "git-repo-info";
+import git from "git-last-commit";
 import clean from "gulp-clean";
 import concat from "gulp-concat";
 import compiler from "webpack";
@@ -28,36 +28,38 @@ else
     console.error("config file not found at", configLocation, "assuming local build (dev/no minify)");
 }
 
-
-let buildInfo = getBuildInfo();
-
-function getBuildInfo()
+function getBuildInfo(cb)
 {
-    const git = getRepoInfo();
     const date = new Date();
-    return {
-        "timestamp": date.getTime(),
-        "created": date.toISOString(),
-        "git": {
-            "branch": git.branch,
-            "commit": git.sha,
-            "date": git.committerDate,
-            "message": git.commitMessage
-        }
-    };
+    git.getLastCommit((err, commit) =>
+    {
+        console.log("GIT", commit);
+        cb({
+            "timestamp": date.getTime(),
+            "created": date.toISOString(),
+            "git": {
+                "branch": commit.branch,
+                "commit": commit.hash,
+                "date": commit.committedOn,
+                "message": commit.subject
+            }
+        });
+    });
 }
 
 function _update_buildInfo(done)
 {
-    buildInfo = getBuildInfo();
     fs.mkdir("build/", { "recursive": true }, (err) =>
     {
         if (err)
         {
             return console.error(err);
         }
-        fs.writeFileSync("build/buildinfo.json", JSON.stringify(buildInfo));
-        done();
+        getBuildInfo((buildInfo) =>
+        {
+            fs.writeFileSync("build/buildinfo.json", JSON.stringify(buildInfo));
+            done();
+        });
     });
 }
 
@@ -96,56 +98,62 @@ function _external_libs()
 
 function _corejs(done)
 {
-    return gulp.src(["src/core/index.js"])
-        .pipe(
-            webpack(
-                {
-                    "config": webpackConfig(isLiveBuild, buildInfo, minify),
-                },
-                compiler,
-                (err, stats) =>
-                {
-                    if (err) throw err;
-                    if (stats.hasErrors())
+    getBuildInfo((buildInfo) =>
+    {
+        return gulp.src(["src/core/index.js"])
+            .pipe(
+                webpack(
                     {
-                        done(new Error(stats.compilation.errors.join("\n")));
+                        "config": webpackConfig(isLiveBuild, buildInfo, minify),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            done(new Error(stats.compilation.errors.join("\n")));
+                        }
+                        done();
                     }
-                    done();
-                }
+                )
             )
-        )
-        .pipe(gulp.dest("build"))
-        .on("error", (err) =>
-        {
-            console.error("WEBPACK ERROR", err);
-        });
+            .pipe(gulp.dest("build"))
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
+    });
 }
 
 function _core_libs(done)
 {
-    return gulp.src(["src/libs/**/*"])
-        .pipe(
-            webpack(
-                {
-                    "config": webpackLibsConfig(isLiveBuild, buildInfo, false),
-                },
-                compiler,
-                (err, stats) =>
-                {
-                    if (err) throw err;
-                    if (stats.hasErrors())
+    getBuildInfo((buildInfo) =>
+    {
+        return gulp.src(["src/libs/**/*"])
+            .pipe(
+                webpack(
                     {
-                        done(Error(stats.compilation.errors.join("\n")));
+                        "config": webpackLibsConfig(isLiveBuild, buildInfo, false),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            done(Error(stats.compilation.errors.join("\n")));
+                        }
+                        done();
                     }
-                    done();
-                }
+                )
             )
-        )
-        .pipe(gulp.dest("build/libs"))
-        .on("error", (err) =>
-        {
-            console.error("WEBPACK ERROR", err);
-        });
+            .pipe(gulp.dest("build/libs"))
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
+    });
 }
 
 /*
