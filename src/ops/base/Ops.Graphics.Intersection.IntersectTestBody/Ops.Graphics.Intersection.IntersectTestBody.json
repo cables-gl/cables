@@ -41,5 +41,10 @@
                 "name": "Hit Body Name"
             }
         ]
+    },
+    "summary": "test one body against all bodies in the world",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
