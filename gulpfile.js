@@ -33,7 +33,6 @@ function getBuildInfo(cb)
     const date = new Date();
     git.getLastCommit((err, commit) =>
     {
-        console.log("GIT", commit);
         cb({
             "timestamp": date.getTime(),
             "created": date.toISOString(),
