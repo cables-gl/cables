@@ -219,12 +219,14 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
             if (!hasExt)
             {
-                console.warn("no 16bit extension, fallback to 32bit");
+                console.warn("no 16bit extension, fallback to 32bit", pixelFormatStr);
                 // fallback to 32 bit?
                 if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F) pixelFormatStr = Texture.PFORMATSTR_RGBA32F;
                 if (pixelFormatStr == Texture.PFORMATSTR_RGB16F) pixelFormatStr = Texture.PFORMATSTR_RGB32F;
                 if (pixelFormatStr == Texture.PFORMATSTR_RG16F) pixelFormatStr = Texture.PFORMATSTR_RG32F;
                 if (pixelFormatStr == Texture.PFORMATSTR_R16F) pixelFormatStr = Texture.PFORMATSTR_R32F;
+
+                console.warn("after", pixelFormatStr);
             }
             else
             {
@@ -245,9 +247,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
             floatDatatype = ext.HALF_FLOAT_OES;
         }
     }
-
-
-
 
 
     if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
@@ -1216,6 +1215,8 @@ Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 
 
 Texture.PFORMATSTR_R32F = "R 32bit float";
+Texture.PFORMATSTR_RG32F = "RG 32bit float";
+Texture.PFORMATSTR_RGB32F = "RGB 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
 Texture.PFORMATSTR_DEPTH = "DEPTH";
