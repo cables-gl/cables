@@ -66,6 +66,7 @@ const SHAPE_POINT = 3;
 function renderOverlay(body)
 {
     if (!CABLES.UI) return;
+    if (!cgl.shouldDrawHelpers(op)) return;
     // const collisions = [];
     // const bodies = cgl.frameStore.collisionWorld.bodies;
 
