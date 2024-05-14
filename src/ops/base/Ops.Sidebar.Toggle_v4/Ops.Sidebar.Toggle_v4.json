@@ -1,0 +1,80 @@
+{
+    "authorName": "pandur",
+    "id": "247f5aaf-6438-4a37-9649-4c0fe9cc78c9",
+    "created": 1715690442820,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Input",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Set Default"
+            },
+            {
+                "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Toggled"
+            }
+        ]
+    },
+    "summary": "sidebar boolean toggle/switch element",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Sidebar.Toggle_v2",
+            "author": "pandur",
+            "date": 1623761944208
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888170356,
+            "type": "bugfix"
+        },
+        {
+            "message": "Added trigger output, triggered  on change",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712755365055
+        },
+        {
+            "message": "Current value is no longer saved in the patch. Default value will be set on patch load ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715693416129
+        }
+    ]
+}
