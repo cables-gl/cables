@@ -5,72 +5,9 @@ import { Shader } from "./cgl_shader.js";
 import { DEG2RAD } from "./cgl_utils.js";
 
 
-export const Marker = function (_cgl)
+export const Marker = function (_cgl) // deprecated...
 {
-    const geom = new Geometry("marker");
-    geom.setPointVertices(
-        [
-            0.00001, 0, 0, 1, 0, 0,
-            0, 0.00001, 0, 0, 1, 0,
-            0, 0, 0.00001, 0, 0, 1,
-        ]
-    );
-    const mesh = new Mesh(_cgl, geom, _cgl.gl.LINES);
-    mesh.setGeom(geom);
-
-    const shader = new Shader(_cgl, "markermaterial");
-
-    const frag = ""
-        .endl() + "precision highp float;"
-        .endl() + "IN vec3 axisColor;"
-
-        .endl() + "void main()"
-        .endl() + "{"
-        .endl() + "    vec4 col=vec4(axisColor,1.0);"
-        .endl() + "    outColor = col;"
-        .endl() + "}";
-
-    const vert = ""
-        .endl() + "IN vec3 vPosition;"
-        .endl() + "UNI mat4 projMatrix;"
-        .endl() + "UNI mat4 mvMatrix;"
-        .endl() + "OUT vec3 axisColor;"
-
-        .endl() + "void main()"
-        .endl() + "{"
-        .endl() + "   vec4 pos=vec4(vPosition, 1.0);"
-        .endl() + "   if(pos.x!=0.0)axisColor=vec3(1.0,0.3,0.0);"
-        .endl() + "   if(pos.y!=0.0)axisColor=vec3(0.0,1.0,0.2);"
-        .endl() + "   if(pos.z!=0.0)axisColor=vec3(0.0,0.5,1.0);"
-
-        .endl() + "   gl_Position = projMatrix * mvMatrix * pos;"
-        .endl() + "}";
-
-    shader.setSource(vert, frag);
-
-    this._vScale = vec3.create();
-
-    this.draw = function (cgl, _size, depthTest)
-    {
-        const size = _size || 2;
-        cgl.pushModelMatrix();
-
-        cgl.pushShader(shader);
-
-        vec3.set(this._vScale, size, size, size);
-        mat4.scale(cgl.mvMatrix, cgl.mvMatrix, this._vScale);
-
-        // cgl.gl.disable(cgl.gl.DEPTH_TEST);
-        cgl.pushDepthTest(depthTest == true);
-
-        mesh.render(cgl.getShader());
-
-        // cgl.gl.enable(cgl.gl.DEPTH_TEST);
-        cgl.popDepthTest();
-        cgl.popShader();
-
-        cgl.popModelMatrix();
-    };
+    this.draw = function (cgl, _size, depthTest) {};
 };
 
 
