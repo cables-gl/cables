@@ -1,0 +1,33 @@
+{
+    "id": "31add1df-b4ce-486a-bbad-3291e07d8b76",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 0,
+            "type": "new"
+        },
+        {
+            "message": "created op\t",
+            "type": "new",
+            "author": "pandur",
+            "date": 1715092320586
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1632840113349,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Set Changed Patch"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Saving Patch"
+            }
+        ]
+    }
+}

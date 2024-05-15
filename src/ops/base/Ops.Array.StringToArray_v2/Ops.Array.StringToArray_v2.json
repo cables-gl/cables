@@ -3,8 +3,6 @@
     "authorName": "pandur",
     "created": 1548108515570,
     "summary": "Parse a string into an array (create, split string, stringToArray)",
-
-
     "docs": {
         "ports": [
             {
