@@ -348,7 +348,7 @@ op.renderVizLayerGl = (ctx, layer) =>
                 20);
 
             ctx.fillRect(
-                x - 10,
+                x,
                 y - 1,
                 20,
                 3);

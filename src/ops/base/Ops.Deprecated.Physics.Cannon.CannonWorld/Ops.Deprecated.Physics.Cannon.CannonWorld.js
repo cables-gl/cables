@@ -37,7 +37,7 @@ let lastTime;
 
 const meshCube = new CGL.WireframeCube(cgl);
 // const wireSphere = new CGL.WirePoint(cgl);
-const marker = new CGL.Marker(cgl);
+// const marker = new CGL.Marker(cgl);
 
 reset.onTriggered = function ()
 {

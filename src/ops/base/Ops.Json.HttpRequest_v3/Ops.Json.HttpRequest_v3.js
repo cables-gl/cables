@@ -118,7 +118,7 @@ function reload(addCachebuster, force = false)
                     catch (e)
                     {
                         op.logError(e);
-                        op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
+                        op.setUiError("jsonerr", "Problem while loading json:<br/>" + e, 1);
                         op.patch.loading.finished(loadingId);
                         isLoading.set(false);
                         outData.setRef(null);

@@ -17,6 +17,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1687166338186
+        },
+        {
+            "message": "Removed render toggle, can be toggled with overlay hotkey",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715676230289
         }
     ],
     "layout": {
@@ -24,11 +30,6 @@
             {
                 "type": 1,
                 "name": "Trigger"
-            },
-            {
-                "type": 0,
-                "name": "Render",
-                "subType": "boolean"
             },
             {
                 "type": 0,

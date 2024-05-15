@@ -59,6 +59,48 @@ function setBox(o)
     o.maxZ = o.pos[2] + o.size[2] / 2;
 }
 
+const SHAPE_SPHERE = 1;
+const SHAPE_AABB = 2;
+const SHAPE_POINT = 3;
+
+function renderOverlay(body)
+{
+    if (!CABLES.UI) return;
+    if (!cgl.shouldDrawHelpers(op)) return;
+    // const collisions = [];
+    // const bodies = cgl.frameStore.collisionWorld.bodies;
+
+    // for (let i = 0; i < bodies.length; i++)
+    // {
+    // const body = bodies[i];
+
+    if (body.type === SHAPE_SPHERE) // sphere
+    {
+        // console.log("sphere")
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
+        CABLES.UI.OverlayMeshes.drawSphere(op, body.radius, true);
+        cgl.popModelMatrix();
+    }
+    else if (body.type === SHAPE_AABB) // AABB
+    {
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
+        CABLES.UI.OverlayMeshes.drawCube(op, body.size[0] / 2, body.size[1] / 2, body.size[2] / 2);
+        cgl.popModelMatrix();
+    }
+    else if (body.type === SHAPE_POINT) // point
+    {
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
+        CABLES.UI.OverlayMeshes.drawAxisMarker(op, 0.05);
+        cgl.popModelMatrix();
+    }
+    else console.warn("[intersectWorld] unknown col shape");
+
+    // }
+}
+
 function render()
 {
     if (!cgl.frameStore || !cgl.frameStore.collisionWorld) return;
@@ -90,6 +132,7 @@ function render()
             if (o.type == 1)o.radius = radius;
 
             cgl.frameStore.collisionWorld.bodies.push(o);
+            renderOverlay(o);
         }
     }
     else
@@ -105,6 +148,7 @@ function render()
 
         if (objCopy.type == 2)setBox(objCopy);
         if (objCopy.type == 1)objCopy.radius = radius;
+        renderOverlay(objCopy);
     }
 
     next.trigger();

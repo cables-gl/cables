@@ -14,6 +14,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1714125448538
+        },
+        {
+            "message": "404 Error will be shown as a warning, not an error anymore",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715676253233
         }
     ],
     "layout": {
