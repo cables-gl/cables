@@ -19,13 +19,13 @@ const canvas = document.createElement("canvas");
 
 let pixelReader = new CGL.PixelReader();
 
-dataUrl.onChange =
-    start.onTriggered = retrySoon;
+// dataUrl.onChange =
+start.onTriggered = retrySoon;
 
 inFormat.onChange = () =>
 {
     inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
-    retrySoon();
+    // retrySoon();
 };
 
 function retrySoon()

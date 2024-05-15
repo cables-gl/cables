@@ -79,14 +79,14 @@ function renderOverlay(body)
         // console.log("sphere")
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
-        CABLES.UI.OverlayMeshes.drawSphere(op, body.radius, true);
+        CABLES.UI.OverlayMeshes.drawSphere(op, body.radius * 2, true);
         cgl.popModelMatrix();
     }
     else if (body.type === SHAPE_AABB) // AABB
     {
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
-        CABLES.UI.OverlayMeshes.drawCube(op, body.size[0] / 2, body.size[1] / 2, body.size[2] / 2);
+        CABLES.UI.OverlayMeshes.drawCube(op, body.size[0], body.size[1], body.size[2]);
         cgl.popModelMatrix();
     }
     else if (body.type === SHAPE_POINT) // point
