@@ -1,6 +1,6 @@
 const objectIn = op.inArray("Array");
 const pathIn = op.inString("Path");
-const resultOut = op.outNumber("Output");
+const resultOut = op.outArray("Output");
 const foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
@@ -31,9 +31,9 @@ function update()
                 result = null;
                 op.setUiError("missing", errorMsg, 2);
             }
-            else if (typeof result !== "number")
+            else if (!Array.isArray(result))
             {
-                const errorMsg = "element at path " + path + " is not a number";
+                const errorMsg = "element at path " + path + " is not an array";
                 foundOut.set(false);
                 result = null;
                 op.setUiError("missing", errorMsg, 2);
@@ -54,5 +54,5 @@ function update()
 function resolve(path, obj = self, separator = ".")
 {
     const properties = Array.isArray(path) ? path : path.split(separator);
-    return properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return properties.reduce((prev, curr) => { return prev && prev[curr]; }, obj);
 }

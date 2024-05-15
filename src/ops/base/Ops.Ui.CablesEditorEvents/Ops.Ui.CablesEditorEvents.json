@@ -29,5 +29,10 @@
                 "name": "Saving Patch"
             }
         ]
+    },
+    "summary": "Cables UI Event Triggers",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
