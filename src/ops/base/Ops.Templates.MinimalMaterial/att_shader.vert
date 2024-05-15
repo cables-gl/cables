@@ -11,5 +11,5 @@ void main()
 
 
 
-   gl_Position = projMatrix * modelViewMatrix * pos;
+   gl_Position = projMatrix * mvMatrix * pos;
 }
