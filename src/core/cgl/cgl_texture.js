@@ -247,12 +247,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> develop
     if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
     {
     }
