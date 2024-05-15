@@ -1,27 +1,32 @@
-import path from "path";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import path, { dirname } from "path";
 import glMatrix from "gl-matrix";
+import webpack from "webpack";
+import { fileURLToPath } from "url";
+import TerserPlugin from "terser-webpack-plugin";
 
-export default (isProduction) =>
+export default (isLiveBuild, buildInfo, minify = false) =>
 {
-    const __dirname = new URL(".", import.meta.url).pathname;
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     return {
-        "mode": isProduction ? "production" : "development",
+        "mode": isLiveBuild ? "production" : "development",
         "entry": [
-            path.join(__dirname, "src", "core", "index.js"),
+            path.join(__dirname, "src", "core", "index.js")
         ],
-        "devtool": isProduction ? "source-map" : "eval-cheap-module-source-map",
+        "devtool": minify ? "source-map" : false,
         "output": {
             "path": path.join(__dirname, "build"),
-            "filename": isProduction ? "cables.min.js" : "cables.max.js",
+            "filename": "cables.js",
             "library": "CABLES",
             "libraryExport": "default",
             "libraryTarget": "var",
-            "globalObject": "window",
+            "globalObject": "window"
         },
-        "stats": isProduction,
         "optimization": {
-            "minimize": isProduction,
+            "minimizer": [new TerserPlugin({
+                "extractComments": false,
+                "terserOptions": { "output": { "comments": false } }
+            })],
+            "minimize": minify,
             "usedExports": true
         },
         "module": {
@@ -29,28 +34,29 @@ export default (isProduction) =>
                 { "sideEffects": false },
                 {
                     "test": /\.frag/,
-                    "use": "raw-loader",
+                    "use": "raw-loader"
                 },
                 {
                     "test": /\.vert/,
-                    "use": "raw-loader",
+                    "use": "raw-loader"
                 },
                 {
                     "test": /\.wgsl/,
-                    "use": "raw-loader",
+                    "use": "raw-loader"
                 }
-            ].filter(Boolean),
+            ].filter(Boolean)
         },
         "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
         "resolve": {
-            "extensions": [".json", ".js", ".jsx"],
+            "extensions": [".json", ".js", ".jsx"]
         },
         "plugins": [
-            isProduction
-            && new BundleAnalyzerPlugin({
-                "analyzerMode": "disabled",
-                "generateStatsFile": true,
+            new webpack.BannerPlugin({
+                "entryOnly": true,
+                "footer": true,
+                "raw": true,
+                "banner": "\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"
             })
-        ].filter(Boolean),
+        ]
     };
 };

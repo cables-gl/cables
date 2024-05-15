@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: notify dev
-      uses: distributhor/workflow-webhook@v2
-      env:
+      uses: distributhor/workflow-webhook@v3
+      with:
+        curl_opts: "--retry 5 --retry-all-errors"
         webhook_type: "json-extended"
         webhook_url: "https://dev.cables.gl/api/webhooks/updatecore?secret=${{ secrets.WEBHOOK_SECRET }}"
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}

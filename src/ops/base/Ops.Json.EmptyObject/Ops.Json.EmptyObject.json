@@ -1,0 +1,33 @@
+{
+    "id": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1692304937920,
+            "type": "new"
+        },
+        {
+            "message": "Ops.Patch.PUlcN_D.Object renamed to Ops.Json.Object",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1692305113592
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1692304956642,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "An empty Object",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "piMxeG"
+}

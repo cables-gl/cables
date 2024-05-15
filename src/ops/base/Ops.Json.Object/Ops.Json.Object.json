@@ -1,22 +1,28 @@
 {
-    "id": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+    "id": "d618f2e1-4e60-4ac4-91aa-218bab2a6742",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1692304937920
+            "date": 1692304937920,
+            "type": "new"
         },
         {
-            "message": "Ops.Patch.PUlcN_D.Object renamed to Ops.Json.Object",
-            "type": "rename",
+            "message": "Became simple passthrough op, old object op is now called \"emptyobject\"",
             "author": "pandur",
-            "date": 1692305113592
+            "date": 1712929758277,
+            "type": "improvement"
         }
     ],
     "authorName": "pandur",
-    "created": 1692304956642,
+    "created": 1712929758277,
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
         "portsOut": [
             {
                 "type": 2,
@@ -25,10 +31,7 @@
         ]
     },
     "summary": "An empty Object",
-
-
     "docs": {
         "ports": []
-    },
-    "exampleProjectId": "piMxeG"
+    }
 }

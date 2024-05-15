@@ -1,0 +1,33 @@
+{
+    "id": "02215044-0767-46e9-8a70-5277362f2077",
+    "created": 1713864159070,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1713864159073
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Strings_0",
+                "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_1",
+                "group": "Strings"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ]
+    }
+}

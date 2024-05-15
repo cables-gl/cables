@@ -28,6 +28,11 @@
             {
                 "type": 0,
                 "name": "Target index",
+                "values": [
+                    "Color",
+                    "Pointsize",
+                    "Alpha"
+                ],
                 "subType": "integer"
             },
             {
@@ -120,7 +125,6 @@
     ],
     "summary": "texture projection on meshes",
     "issues": "",
-
     "youtubeids": [
         "0Xgj7wKl7Ko",
         "DW9U5tv1GHM"

@@ -5,6 +5,7 @@ const filename = op.inUrl("file"),
     inContentType = op.inString("Content-Type", "application/json"),
     inContent = op.inSwitch("Content", ["JSON", "String", "Binary"], "JSON"),
     inAutoRequest = op.inBool("Auto request", true),
+    inSendCredentials = op.inBool("Send Credentials", false),
     reloadTrigger = op.inTriggerButton("reload"),
     outData = op.outObject("Response Json Object"),
     outString = op.outString("Response String"),
@@ -15,17 +16,24 @@ const filename = op.inUrl("file"),
     isLoading = op.outBoolNum("Is Loading", false),
     outTrigger = op.outTrigger("Loaded");
 
+inContent.setUiAttribs({ "title": "Response Content" });
 filename.setUiAttribs({ "title": "URL" });
 reloadTrigger.setUiAttribs({ "buttonTitle": "trigger request" });
 
 outData.ignoreValueSerialize = true;
 outString.ignoreValueSerialize = true;
 
+inContent.onChange = () =>
+{
+    const greyOut = (inContent.get() === "Binary");
+    inMethod.setUiAttribs({ "greyout": greyOut });
+    delayedReload(false);
+};
+
 inAutoRequest.onChange =
     filename.onChange =
     headers.onChange =
-    inMethod.onChange =
-    inContent.onChange = () =>
+    inMethod.onChange = () =>
     {
         delayedReload(false);
     };
@@ -59,8 +67,6 @@ function reload(addCachebuster, force = false)
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     op.setUiError("jsonerr", null);
 
-    let httpClient = CABLES.ajax;
-
     let url = op.patch.getFilePath(filename.get());
     if (addCachebuster)url += "?rnd=" + CABLES.generateUUID();
 
@@ -69,23 +75,23 @@ function reload(addCachebuster, force = false)
         const body = inBody.get();
         const startTime = performance.now();
 
-        if (inContent.get() == "Binary")
+        const options = {};
+        if (inSendCredentials.get()) options.credentials = "include";
+        if (inContent.get() === "Binary")
         {
-            fetch(url)
-                // .then((res) => { return res.arrayBuffer(); })
-                .then((res) =>
+            fetch(url, options).then((res) =>
+            {
+                res.blob().then((b) =>
                 {
-                    res.blob().then((b) =>
-                    {
-                        outStringBin.set(URL.createObjectURL(b));
-                    });
-
-                    op.patch.loading.finished(loadingId);
+                    outStringBin.set(URL.createObjectURL(b));
                 });
+
+                op.patch.loading.finished(loadingId);
+            });
         }
         else
         {
-            httpClient(
+            CABLES.ajax(
                 url,
                 (err, _data, xhr) =>
                 {
@@ -97,7 +103,7 @@ function reload(addCachebuster, force = false)
                     {
                         let data = _data;
 
-                        if (typeof data === "string" && inContent.get() == "JSON")
+                        if (typeof data === "string" && inContent.get() === "JSON")
                         {
                             data = JSON.parse(_data);
                             outData.setRef(data);
@@ -112,7 +118,7 @@ function reload(addCachebuster, force = false)
                     catch (e)
                     {
                         op.logError(e);
-                        op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
+                        op.setUiError("jsonerr", "Problem while loading json:<br/>" + e, 1);
                         op.patch.loading.finished(loadingId);
                         isLoading.set(false);
                         outData.setRef(null);
@@ -123,7 +129,8 @@ function reload(addCachebuster, force = false)
                 (body && body.length > 0) ? body : null,
                 inContentType.get(),
                 null,
-                headers.get() || {}
+                headers.get() || {},
+                options
             );
         }
     });

@@ -12,6 +12,7 @@ inSetDefault.onTriggered = setDefaultValue;
 // outputs
 const siblingsPort = op.outObject("childs");
 const outValue = op.outNumber("value");
+const outChanged = op.outTrigger("Changed");
 
 // vars
 let currentPosition = 0;
@@ -45,6 +46,11 @@ if (Array.isArray(inValues.get()))
 
 valueEl.appendChild(valueText);
 innerContainer.appendChild(valueEl);
+
+outValue.onChange = () =>
+{
+    outChanged.trigger();
+};
 
 // previous
 const prevEl = document.createElement("span");

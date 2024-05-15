@@ -6,6 +6,7 @@ const
 
 inObject.onChange =
     inValue.onChange = update;
+inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 
 function update()
 {

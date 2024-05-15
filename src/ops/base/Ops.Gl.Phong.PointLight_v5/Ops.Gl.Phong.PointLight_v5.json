@@ -103,6 +103,12 @@
             {
                 "type": 0,
                 "name": "Map Size index",
+                "values": [
+                    "256",
+                    "512",
+                    "1024",
+                    "2048"
+                ],
                 "group": "Shadow Map Settings",
                 "subType": "integer"
             },

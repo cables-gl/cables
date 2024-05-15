@@ -140,7 +140,9 @@ const transVec = vec3.create();
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (cgl.shouldDrawHelpers(op))
+
+    if (CABLES.UI) gui.setTransform(op.id, inPosX.get(), inPosY.get(), inPosZ.get());
+    if (op.isCurrentUiOp())
     {
         gui.setTransformGizmo({
             "posX": inPosX,

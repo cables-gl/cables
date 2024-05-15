@@ -17,7 +17,10 @@ const
 let changed = false;
 let idx = 0;
 let arr = [];
+let gizmo = null;
 arr.length = inNum.get();
+
+outArr.setUiAttribs({ "stride": 3 });
 
 inArr.setUiAttribs({ "hideParam": true, "hidePort": true });
 inPosX.setUiAttribs({ "hideParam": true, "hidePort": true });
@@ -58,9 +61,27 @@ function removePosListener()
     inPosZ.onChange = null;
 }
 
+op.addEventListener("onEnabledChange", function (enabled)
+{
+    if (!enabled) if (gizmo) gizmo = gizmo.dispose();
+});
+
+op.onDelete = () =>
+{
+    if (gizmo) gizmo = gizmo.dispose();
+};
+
+exec.onLinkChanged = () =>
+{
+    if (!exec.isLinked() && gizmo) gizmo = gizmo.dispose();
+};
+
 inEdit.onChange = () =>
 {
-    gui.setTransformGizmo(null);
+    if (!inEdit.get() && gizmo)
+    {
+        gizmo = gizmo.dispose();
+    }
 };
 
 inArr.onChange = () =>
@@ -89,7 +110,9 @@ exec.onTriggered = () =>
 {
     if (CABLES.UI && inEdit.get())
     {
-        gui.setTransformGizmo(
+        if (!gizmo) gizmo = new CABLES.UI.Gizmo(op.patch.cgl);
+        gizmo.set(
+        // gui.setTransformGizmo(
             {
                 "posX": inPosX,
                 "posY": inPosY,

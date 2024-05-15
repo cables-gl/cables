@@ -5,10 +5,14 @@ const
     inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inTextureFlip = op.inValueBool("flip"),
     inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
+
+    inForce = op.inTriggerButton("Force Update"),
+
     outTexture = op.outTexture("texture"),
     outWidth = op.outNumber("width"),
-    outHeight = op.outNumber("height"),
-    canvasTexture = new CGL.Texture(cgl);
+    outHeight = op.outNumber("height");
+
+const canvasTexture = new CGL.Texture(cgl);
 
 let cgl_filter = CGL.Texture.FILTER_LINEAR;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
@@ -22,6 +26,7 @@ inUnpackAlpha.setUiAttribs({ "hidePort": true });
 inTextureFilter.onChange =
 inTextureWrap.onChange = onFilterChange;
 
+inForce.onTriggered =
 inTextureFlip.onChange =
 inCanvas.onChange =
 inUnpackAlpha.onChange = reload;

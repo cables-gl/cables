@@ -60,13 +60,13 @@ function setCSSVisible(visible)
     if (!visible)
     {
         div.style.visibility = "hidden";
-        prevDisplay = div.style.display || "block";
+        prevDisplay = div.style.display || "inherit";
         div.style.display = "none";
     }
     else
     {
-        // prevDisplay=div.style.display||'block';
-        if (prevDisplay == "none") prevDisplay = "block";
+        // prevDisplay=div.style.display||'inherit';
+        if (prevDisplay == "none") prevDisplay = "inherit";
         div.style.visibility = "visible";
         div.style.display = prevDisplay;
     }

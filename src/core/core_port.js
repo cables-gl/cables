@@ -230,6 +230,12 @@ Port.prototype.setUiAttribs = function (newAttribs)
 
     for (const p in newAttribs)
     {
+        if (newAttribs[p] === undefined)
+        {
+            // delete newAttribs[p];
+            delete this.uiAttribs[p];
+            continue;
+        }
         if (this.uiAttribs[p] != newAttribs[p]) changed = true;
         this.uiAttribs[p] = newAttribs[p];
 
@@ -329,7 +335,9 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                 {
                     this.crashed = true;
                     this.op.crashed = true;
+
                     console.log("crash", this.op.objName);
+
                     this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
@@ -366,25 +374,11 @@ Port.prototype.updateAnim = function ()
     }
 };
 
-Port.args = function (func)
-{
-    return (func + "")
-        .replace(/[/][/].*$/gm, "") // strip single-line comments
-        .replace(/\s+/g, "") // strip white space
-        .replace(/[/][*][^/*]*[*][/]/g, "") // strip multi-line comments
-        .split("){", 1)[0]
-        .replace(/^[^(]*[(]/, "") // extract the parameters
-        .replace(/=[^,]+/g, "") // strip any ES6 defaults
-        .split(",")
-        .filter(Boolean); // split & filter [""]
-};
-
 Port.prototype.forceChange = function ()
 {
     if (this.onValueChanged || this.onChange)
     {
         // very temporary: deprecated warning!!!!!!!!!
-        // var params=Port.args(this.onValueChanged||this.onChange)
         // if(params.length>0) this._log.warn('TOM: port has onchange params!',this._op.objName,this.name);
     }
     this._activity();
@@ -420,6 +414,8 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.title) this.setUiAttribs({ "title": objPort.title });
     if (objPort.expose) this.setUiAttribs({ "expose": true });
     if (objPort.order) this.setUiAttribs({ "order": objPort.order });
+    if (objPort.multiPortNum) this.setUiAttribs({ "multiPortNum": objPort.multiPortNum });
+
     if (objPort.anim)
     {
         if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
@@ -437,21 +433,44 @@ Port.prototype.deSerializeSettings = function (objPort)
     }
 };
 
+Port.prototype.setInitialValue = function (v)
+{
+    if (this.op.preservedPortLinks[this.name])
+    {
+        for (let i = 0; i < this.op.preservedPortLinks[this.name].length; i++)
+        {
+            const lobj = this.op.preservedPortLinks[this.name][i];
+            this.op.patch._addLink(
+                lobj.objIn,
+                lobj.objOut,
+                lobj.portIn,
+                lobj.portOut);
+        }
+    }
+
+    if (this.op.preservedPortValues && this.op.preservedPortValues.hasOwnProperty(this.name) && this.op.preservedPortValues[this.name] !== undefined)
+    {
+        this.set(this.op.preservedPortValues[this.name]);
+    }
+    else
+    if (v !== undefined) this.set(v);
+    if (v !== undefined) this.defaultValue = v;
+};
+
 Port.prototype.getSerialized = function ()
 {
-    let obj = {};
-    obj.name = this.getName();
+    let obj = { "name": this.getName() };
+
 
     if (!this.ignoreValueSerialize && this.links.length === 0)
     {
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.value && this.value.tex)
-        {
-        }
+        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.value && this.value.tex) {}
         else obj.value = this.value;
     }
     if (this._useVariableName) obj.useVariable = this._useVariableName;
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
+    if (this.uiAttribs.multiPortNum) obj.multiPortNum = this.uiAttribs.multiPortNum;
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
     if (this.uiAttribs.expose)
     {
@@ -459,7 +478,7 @@ Port.prototype.getSerialized = function ()
         if (this.uiAttribs.hasOwnProperty("order")) obj.order = this.uiAttribs.order;
     }
     if (this.uiAttribs.title) obj.title = this.uiAttribs.title;
-    if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
+    if ((this.preserveLinks || this.direction == CONSTANTS.PORT.PORT_DIR_OUT) && this.links.length > 0)
     {
         obj.links = [];
         for (const i in this.links)
@@ -475,10 +494,14 @@ Port.prototype.getSerialized = function ()
             if (!this.links[i].portIn || !this.links[i].portOut) continue;
 
             const otherp = this.links[i].getOtherPort(this);
-            if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+            // check if functions exist, are defined in core_extend_ops code in ui
+            if (otherp.op.isInBlueprint2 && this.op.isInBlueprint2)
             {
-                obj.links = obj.links || [];
-                obj.links.push(this.links[i].getSerialized());
+                if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+                {
+                    obj.links = obj.links || [];
+                    obj.links.push(this.links[i].getSerialized());
+                }
             }
         }
     }
@@ -486,7 +509,7 @@ Port.prototype.getSerialized = function ()
     if (obj.links && obj.links.length == 0) delete obj.links;
     if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) delete obj.value;
     if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION && this.links.length == 0) obj = null;
-    if (obj && Object.keys(obj).length == 1 && obj.name)obj = null;
+    if (obj && Object.keys(obj).length == 1 && obj.name)obj = null; // obj is null if there is no real information other than name
     cleanJson(obj);
 
     return obj;
@@ -899,14 +922,11 @@ Port.prototype._onSetProfiling = function (v)
 {
     this._op.patch.profiler.add("port", this);
     this.setValue(v);
-    // if (this._op.enabled && this.onTriggered) this.onTriggered();
     this._op.patch.profiler.add("port", null);
 };
 
 Port.prototype._onTriggeredProfiling = function ()
 {
-    // this._op.updateAnims();
-
     if (this._op.enabled && this.onTriggered)
     {
         this._op.patch.profiler.add("port", this);
@@ -915,11 +935,7 @@ Port.prototype._onTriggeredProfiling = function ()
     }
 };
 
-Port.prototype.onValueChange = function (cb)
-{
-    // deprecated
-    this.onChange = cb;
-};
+
 
 Port.prototype.getUiActiveState = function ()
 {
@@ -932,10 +948,18 @@ Port.prototype.setUiActiveState = function (onoff)
     if (this.onUiActiveStateChange) this.onUiActiveStateChange();
 };
 
-Port.prototype.hidePort = function ()
+/**
+ * @deprecated
+ */
+Port.prototype.onValueChange = function (cb)
 {
-    this._log.warn("op.hideport() is deprecated, do not use it!");
+    this.onChange = cb;
 };
+
+/**
+ * @deprecated
+ */
+Port.prototype.hidePort = function () {};
 
 
 /**

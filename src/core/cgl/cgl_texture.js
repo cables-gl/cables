@@ -219,7 +219,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
             if (!hasExt)
             {
-                console.warn("no 16bit extension, fallback to 32bit");
+                console.warn("no 16bit extension, fallback to 32bit", pixelFormatStr);
                 // fallback to 32 bit?
                 if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F) pixelFormatStr = Texture.PFORMATSTR_RGBA32F;
                 if (pixelFormatStr == Texture.PFORMATSTR_RGB16F) pixelFormatStr = Texture.PFORMATSTR_RGB32F;
@@ -247,9 +247,12 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> develop
     if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
     {
     }
@@ -514,8 +517,8 @@ Texture.prototype.initTexture = function (img, filter)
     this._fromData = false;
 
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.unpackAlpha);
-    if (img.width) this.width = img.width;
-    if (img.height) this.height = img.height;
+    if (img.width || img.videoWidth) this.width = img.videoWidth || img.width;
+    if (img.height || img.videoHeight) this.height = img.videoHeight || img.height;
 
     if (filter !== undefined) this.filter = filter; // todo: can we remove this filter param?
 
@@ -1110,8 +1113,8 @@ Texture.createFromImage = function (cgl, img, options)
     const texture = new Texture(cgl, options);
     texture.flip = false;
     texture.image = img;
-    texture.width = img.width;
-    texture.height = img.height;
+    texture.width = img.videoWidth || img.width || 8;
+    texture.height = img.videoHeight || img.height || 8;
     if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
 
     console.log("createFromImage", options);
@@ -1216,6 +1219,8 @@ Texture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 
 
 Texture.PFORMATSTR_R32F = "R 32bit float";
+Texture.PFORMATSTR_RG32F = "RG 32bit float";
+Texture.PFORMATSTR_RGB32F = "RGB 32bit float";
 Texture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
 Texture.PFORMATSTR_DEPTH = "DEPTH";

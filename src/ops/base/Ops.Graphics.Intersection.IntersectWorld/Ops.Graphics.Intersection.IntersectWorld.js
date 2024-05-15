@@ -1,6 +1,5 @@
 const
     trigger = op.inTrigger("Trigger"),
-    render = op.inBool("Render", true),
     inTextCol = op.inBool("Check Body Collisions", false),
     next = op.outTrigger("Next"),
     outNum = op.outNumber("Total Bodies"),
@@ -23,42 +22,7 @@ function doRender()
 
     if (inTextCol.get()) checkCollisions();
 
-    if (render.get())renderBodies();
-}
-
-function renderBodies()
-{
-    if (!CABLES.UI) return;
-    const collisions = [];
-    const bodies = cgl.frameStore.collisionWorld.bodies;
-
-    for (let i = 0; i < bodies.length; i++)
-    {
-        const body = bodies[i];
-
-        if (body.type === SHAPE_SPHERE) // sphere
-        {
-            cgl.pushModelMatrix();
-            mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
-            CABLES.GL_MARKER.drawSphere(op, body.radius);
-            cgl.popModelMatrix();
-        }
-        else if (body.type === SHAPE_AABB) // AABB
-        {
-            cgl.pushModelMatrix();
-            mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
-            CABLES.GL_MARKER.drawCube(op, body.size[0] / 2, body.size[1] / 2, body.size[2] / 2);
-            cgl.popModelMatrix();
-        }
-        else if (body.type === SHAPE_POINT) // point
-        {
-            cgl.pushModelMatrix();
-            mat4.translate(cgl.mMatrix, cgl.mMatrix, body.pos);
-            CABLES.GL_MARKER.drawAxisMarker(op, 0.05);
-            cgl.popModelMatrix();
-        }
-        else console.warn("[intersectWorld] unknown col shape");
-    }
+    // if (render.get())renderBodies();
 }
 
 function testCollision(bodyA, bodyB)

@@ -10,6 +10,7 @@ objectIn.ignoreValueSerialize = true;
 objectIn.onChange =
     pathIn.onChange =
     returnPathIn.onChange = update;
+pathIn.setUiAttribs({ "stringTrim": true });
 
 pathIn.on("change", updateUi);
 updateUi();

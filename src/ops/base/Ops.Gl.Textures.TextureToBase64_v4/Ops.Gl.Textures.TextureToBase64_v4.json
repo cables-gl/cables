@@ -47,6 +47,10 @@
                 "type": 0,
                 "name": "Loading",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
             }
         ]
     },

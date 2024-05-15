@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1663497260224
-        },
-        {
-            "message": "Ops.User.pandur.VizStringLong renamed to Ops.Ui.VizStringLong",
-            "author": "pandur",
-            "date": 1663497628560
+            "date": 1663497260224,
+            "type": "new"
         },
         {
             "message": "added scroll slider / performance optimization for very long strings",
@@ -22,6 +18,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1671034812499
+        },
+        {
+            "message": "Added options to text-wrap to the bounds of the oprator",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1714486822488
+        },
+        {
+            "message": "white space param to visualize linebreaks,spaces and tabs",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1714486826698
         }
     ],
     "authorName": "pandur",
@@ -40,6 +48,16 @@
             {
                 "type": 0,
                 "name": "Line Numbers",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Whitespace",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Wrap lines",
                 "subType": "boolean"
             },
             {

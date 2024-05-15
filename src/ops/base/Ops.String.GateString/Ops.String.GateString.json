@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1550903879563
+            "date": 1550903879563,
+            "type": "new"
+        },
+        {
+            "message": "Added option to set output to custom value if passThrough is false\t",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712928836449
         }
     ],
     "authorName": "pandur",
@@ -12,25 +19,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String In"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pass Through",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "When False index",
+                "values": [
+                    "keep last string",
+                    "custom"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Custom Value"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String Out"
             }
         ]
     },
     "summary": "Output string if pass through is true",
     "issues": "",
-
     "docs": {
         "ports": [
             {

@@ -1,7 +1,9 @@
-import path from "path";
+import path, { dirname } from "path";
 import fs from "fs";
+import TerserPlugin from "terser-webpack-plugin";
+import { fileURLToPath } from "url";
 
-export default (isProduction = false) =>
+export default (isLiveBuild, buildInfo, minify = false) =>
 {
     const getDirectories = function (arr)
     {
@@ -54,7 +56,7 @@ export default (isProduction = false) =>
                 {
                     "entry": path.join(__dirname, "src", "libs", namespace, file),
                     "output": {
-                        "filename": isProduction ? targetName + ".min.js" : targetName + ".max.js",
+                        "filename": targetName + ".js",
                         "path": path.join(__dirname, "build", "libs"),
                         "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(baseName)],
                         "libraryExport": raiseFirstChar(namespace),
@@ -72,7 +74,7 @@ export default (isProduction = false) =>
                 {
                     "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
                     "output": {
-                        "filename": isProduction ? targetName + ".min.js" : targetName + ".max.js",
+                        "filename": targetName + ".js",
                         "path": path.join(__dirname, "build", "libs"),
                         "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(subdir)],
                         "libraryExport": raiseFirstChar(subdir),
@@ -97,19 +99,20 @@ export default (isProduction = false) =>
         for (let i = 0; i < NAMESPACE_DIRS.length; i++)
         {
             const namespace = NAMESPACE_DIRS[i];
-            outputObjects.push(createOutputEntryObjectsNamespace(namespace, isProduction));
+            outputObjects.push(createOutputEntryObjectsNamespace(namespace, isLiveBuild));
         }
 
         return flattenArray(outputObjects);
     };
 
-    const __dirname = new URL(".", import.meta.url).pathname;
-    const entryAndOutputObjects = readLibraryFiles(isProduction);
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const entryAndOutputObjects = readLibraryFiles(isLiveBuild);
     const defaultConfig = {
         "mode": "production",
         "devtool": false,
         "optimization": {
-            "minimize": isProduction, // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+            "minimizer": [new TerserPlugin({ "extractComments": false, "terserOptions": { "output": { "comments": false } } })],
+            "minimize": minify,
             "usedExports": true
         },
         "module": {

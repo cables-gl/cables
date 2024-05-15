@@ -385,7 +385,7 @@ Geometry.prototype.merge = function (geom)
     const oldIndizesLength = this.verticesIndices.length;
     const vertLength = this._vertices.length / 3;
 
-    this.verticesIndices.length = this.verticesIndices.length + geom.verticesIndices.length;
+    this.verticesIndices.length += geom.verticesIndices.length;
     for (let i = 0; i < geom.verticesIndices.length; i++)
         this.verticesIndices[oldIndizesLength + i] = geom.verticesIndices[i] + vertLength;
 

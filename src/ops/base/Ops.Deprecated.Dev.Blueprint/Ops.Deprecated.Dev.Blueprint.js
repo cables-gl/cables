@@ -190,16 +190,7 @@ op.updateBlueprint = (ignoreLinks = false) =>
         }
         else
         {
-            const options = {
-                "blueprintId": blueprintId
-            };
-
-            CABLES.sandbox.getBlueprintOps(options, (err, response) =>
-            {
-                op.setUiError("fetchOps", null);
-                let subPatchOps = err ? [] : response.data.ops;
-                doneCb(err, subPatchOps);
-            });
+            doneCb({ "code": 501, "msg": "blueprints are no longer supported, use subpatchops!" }, []);
         }
     }
     else
@@ -221,24 +212,56 @@ op.updateBlueprint = (ignoreLinks = false) =>
         }
         else
         {
-            const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
-            CABLES.ajax(
-                blueprintUrl,
-                function (err, data)
+            let isLocalSubpatch = false;
+            if (op.patch.config.patch)
+            {
+                isLocalSubpatch = ((patchId === op.patch.config.patch._id) || (patchId === op.patch.config.patch.shortId));
+            }
+
+            if (isLocalSubpatch)
+            {
+                let err = null;
+                const serializedOps = [];
+
+                let subPatchOps = getSubPatchOps(subPatchId, true);
+                subPatchOps = subPatchOps.filter((subPatchOp) => { return !(subPatchOp.uiAttribs && subPatchOp.uiAttribs.blueprintOpId); });
+                const localParent = getLocalParentSubPatchOp(subPatchId);
+                if (localParent)
                 {
-                    if (!err)
+                    subPatchOps.push(localParent);
+                    subPatchOps.forEach((subPatchOp) =>
                     {
-                        const blueprintData = JSON.parse(data);
-                        deSerializeBlueprint(blueprintData, false);
-                    }
-                    else
-                    {
-                        op.logError("failed to load blueprint from", blueprintUrl, err);
-                    }
-                    loadingOut.set(false);
-                    op.patch.loading.finished(loadingId);
+                        serializedOps.push(subPatchOp.getSerialized());
+                    });
                 }
-            );
+                else
+                {
+                    err = { "code": 404 };
+                }
+
+                doneCb(err, serializedOps);
+            }
+            else
+            {
+                const blueprintUrl = op.patch.config.prefixJsPath + op.patch.getJsPath() + exportId + ".json";
+                CABLES.ajax(
+                    blueprintUrl,
+                    (err, data) =>
+                    {
+                        if (!err)
+                        {
+                            const blueprintData = JSON.parse(data);
+                            deSerializeBlueprint(blueprintData, false);
+                        }
+                        else
+                        {
+                            op.logError("failed to load blueprint from", blueprintUrl, err);
+                        }
+                        loadingOut.set(false);
+                        op.patch.loading.finished(loadingId);
+                    }
+                );
+            }
         }
     }
 };
@@ -717,7 +740,7 @@ function getLocalParentSubPatchOp(subPatchId)
 let patchLoadListener = op.patch.on("patchLoadEnd", (newOps, obj, genIds) =>
 {
     const isRelevant = newOps.some((newOp) => { return newOp.id === op.id || (newOp.uiAttribs && newOp.uiAttribs.subPatch === subPatchIdIn.get()); });
-    if (isRelevant)
+    // if (isRelevant)
     {
         op.patch.off(patchLoadListener);
         op.updateBlueprint();

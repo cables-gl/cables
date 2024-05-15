@@ -3,6 +3,11 @@ import { CGState } from "../cg/cg_state.js";
 import Shader from "./cgp_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 
+// https://github.com/greggman/webgpu-utils
+// https://developer.chrome.com/blog/from-webgl-to-webgpu/
+// https://gpuweb.github.io/gpuweb/explainer/
+
+
 /**
  * cables webgpu context/state manager
  * @external CGP

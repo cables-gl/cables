@@ -109,7 +109,7 @@ op.patch.cgl.on("beginFrame",
         }
     });
 
-op.renderVizLayer = (ctx, layer) =>
+op.renderVizLayerGl = (ctx, layer) =>
 {
     const
         gl = op.patch.cgl.gl;

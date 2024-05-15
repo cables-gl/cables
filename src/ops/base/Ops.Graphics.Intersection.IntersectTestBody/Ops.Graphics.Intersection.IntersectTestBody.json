@@ -1,0 +1,50 @@
+{
+    "id": "1f5defea-f055-40dd-8381-831ed1eb2299",
+    "created": 1715418524298,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1715418524301
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Has Hit",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Hit Body Name"
+            }
+        ]
+    },
+    "summary": "test one body against all bodies in the world",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}

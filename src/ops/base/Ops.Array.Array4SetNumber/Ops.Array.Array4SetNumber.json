@@ -1,0 +1,82 @@
+{
+    "id": "b0913a75-6e11-4e5b-aa7c-a5d066d4d0e0",
+    "changelog": [
+        {
+            "message": "new op",
+            "author": "pandur",
+            "date": 1712655957332,
+            "type": "new"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1712655957332,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Value X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value W",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "set a number at index in an array",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger to set the value at the index"
+            },
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Index",
+                "text": "index to update with the value"
+            },
+            {
+                "name": "Number",
+                "text": "number that will be set to the selected index"
+            },
+            {
+                "name": "Reset",
+                "text": "Reverts array to it's original state"
+            },
+            {
+                "name": "Result",
+                "text": "Modified array out"
+            }
+        ]
+    }
+}

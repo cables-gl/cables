@@ -43,6 +43,10 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear"
+                ],
                 "group": "Texture",
                 "subType": "integer"
             },
@@ -109,7 +113,7 @@
             {
                 "type": 0,
                 "name": "Interaction Needed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -119,17 +123,17 @@
             {
                 "type": 0,
                 "name": "Loading",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Playing",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Can Play Through",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -149,7 +153,12 @@
             {
                 "type": 0,
                 "name": "Has Error",
-                "subType": "number"
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Auto FPS",
+                "subType": "boolean"
             },
             {
                 "type": 5,
@@ -161,22 +170,20 @@
         {
             "message": "Ops.User.pandur.VideoTexture2 renamed to Ops.Gl.Textures.VideoTexture_v2",
             "author": "pandur",
-            "date": 1600088689393
+            "date": 1600088689393,
+            "type": "improvement"
         },
         {
             "message": "cloned op from Ops.Gl.Textures.VideoTexture_v2",
             "author": "pandur",
-            "date": 1669641033926
+            "date": 1669641033926,
+            "type": "improvement"
         },
         {
             "message": " added core lib: interactionneededbutton",
             "author": "pandur",
-            "date": 1669646398470
-        },
-        {
-            "message": "Ops.User.pandur.VideoTextureV3 renamed to Ops.Gl.Textures.VideoTexture_v3",
-            "author": "pandur",
-            "date": 1669650714332
+            "date": 1669646398470,
+            "type": "improvement"
         },
         {
             "message": "new output port: shows if user interaction is needed to start",
@@ -195,11 +202,16 @@
             "type": "feature",
             "author": "pandur",
             "date": 1671034441701
+        },
+        {
+            "message": "Using automatic new frame callback if available for faster/smoother updates",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1715113571377
         }
     ],
     "summary": "Play a video file and use it as a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -5,6 +5,7 @@ const foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
+pathIn.setUiAttribs({ "stringTrim": true });
 
 function update()
 {

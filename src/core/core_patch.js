@@ -85,7 +85,7 @@ const Patch = function (cfg)
     this._frameWasdelayed = true;
     this.frameStore = {};
     this.deSerialized = false;
-    this._lastReqAnimTimeStamp = 0;
+    this.reqAnimTimeStamp = 0;
 
     this.cgCanvas = null;
 
@@ -383,7 +383,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 }
                 else
                 {
-                    throw new Error("could not find op by id: " + opId);
+                    throw new Error("could not find op by id: " + opId, { "cause": "opId:" + opId });
                 }
             }
         }
@@ -626,20 +626,18 @@ Patch.prototype.emitOnAnimFrameEvent = function (time, delta)
 
 Patch.prototype.renderFrame = function (timestamp)
 {
-    // console.log("renderframe", this._paused, this._frameNum);
-
-    this.timer.update();
-    this.freeTimer.update();
+    this.timer.update(this.reqAnimTimeStamp);
+    this.freeTimer.update(this.reqAnimTimeStamp);
     const time = this.timer.getTime();
     const startTime = performance.now();
     this.cgl.frameStartTime = this.timer.getTime();
 
-    const delta = timestamp - this._lastReqAnimTimeStamp || timestamp;
+    const delta = timestamp - this.reqAnimTimeStamp || timestamp;
 
     this.emitOnAnimFrameEvent(null, delta);
 
     this.cgl.profileData.profileFrameDelta = delta;
-    this._lastReqAnimTimeStamp = timestamp;
+    this.reqAnimTimeStamp = timestamp;
     this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
     this.emitEvent("onRenderFrame", time);
@@ -665,8 +663,6 @@ Patch.prototype.exec = function (timestamp)
 
     const now = CABLES.now();
     const frameDelta = now - this._frameNext;
-
-
 
     if (this.isEditorMode())
     {
@@ -706,11 +702,6 @@ Patch.prototype.exec = function (timestamp)
 
     if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
 };
-
-// Patch.prototype.linkPorts = function (port1, port2)
-// {
-//     this.link(port1.parent, port1.id, port2.parent, port2.id);
-// };
 
 /**
  * link two ops/ports
@@ -799,31 +790,7 @@ Patch.prototype.getOpsByRefId = function (refId)
 Patch.prototype.getOpById = function (opid)
 {
     return this._opIdCache[opid];
-    // this.timeNeededGetOpById = this.timeNeededGetOpById || 0;
-
-    // const startTime = performance.now();
-    // for (const i in this.ops)
-    // {
-    //     if (this.ops[i].id == opid)
-    //     {
-    //         this.timeNeededGetOpById += (performance.now() - startTime);
-    //         return this.ops[i];
-    //     }
-    // }
 };
-
-// Patch.prototype.getOpsById = function (opIds)
-// {
-//     const ops = [];
-//     for (const i in this.ops)
-//         for (let j = 0; j < opIds.length; j++)
-//             if (this.ops[i].id === opIds[j])
-//             {
-//                 ops.push(this.ops[i]);
-//                 break;
-//             }
-//     return ops;
-// };
 
 Patch.prototype.getOpsByName = function (name)
 {
@@ -878,23 +845,9 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     return false;
 };
 
-// Patch.prototype.getSubPatchOuterOp = function (subPatchId) // remove !! moved to extend class
-// {
-//     const ops = this.ops;
-//     for (let i = 0; i < ops.length; i++)
-//     {
-//         const op = ops[i];
-//         if (op.isSubPatchOp() && op.patchId.get() == subPatchId) return op;
-//     }
-// };
-
-
-
-
-
 Patch.prototype._addLink = function (opinid, opoutid, inName, outName)
 {
-    this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
+    return this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
 };
 
 Patch.prototype.deSerialize = function (obj, options)
@@ -948,12 +901,22 @@ Patch.prototype.deSerialize = function (obj, options)
                 const objPort = opData.portsIn[ipi];
                 if (objPort && objPort.hasOwnProperty("name"))
                 {
+                    // console.log("load poirt data,objPort", objPort.name, objPort);
                     const port = op.getPort(objPort.name);
 
-                    if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true;
+                    if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
                     if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
-                    if (port) port.deSerializeSettings(objPort);
+                    if (port)
+                    {
+                        port.deSerializeSettings(objPort);
+                    }
+                    else
+                    {
+                        console.log("preserve", objPort.name, objPort.value);
+                        op.preservedPortValues = op.preservedPortValues || {};
+                        op.preservedPortValues[objPort.name] = objPort.value;
+                    }
                 }
             }
 
@@ -991,7 +954,6 @@ Patch.prototype.deSerialize = function (obj, options)
     if (window.logStartup)logStartup("creating links");
 
     if (options.opsCreated)options.opsCreated(addedOps);
-
     // create links...
     if (obj.ops)
     {
@@ -1005,13 +967,14 @@ Patch.prototype.deSerialize = function (obj, options)
                     {
                         for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                         {
-                            let found = false;
-
-                            this._addLink(
+                            const l = this._addLink(
                                 obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                                 obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                                 obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                                 obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+                            console.log("aaaa", l);
+
 
                             // const took = performance.now - startTime;
                             // if (took > 100)console.log(obj().ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
@@ -1061,16 +1024,45 @@ Patch.prototype.deSerialize = function (obj, options)
 
                                     if (!dstOp) this._log.warn("could not find op for lost link");
                                     else
-                                        this._addLink(
+                                    {
+                                        const l = this._addLink(
                                             dstOp.id,
                                             obj.ops[iop].portsOut[ipi2].links[ili].objOut,
 
                                             obj.ops[iop].portsOut[ipi2].links[ili].portIn,
                                             obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                    }
                                 }
                                 else
                                 {
-                                    this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                    const l = this._addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+
+                                    if (!l)
+                                    {
+                                        const op1 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objIn);
+                                        const op2 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
+
+                                        if (!op1)console.log("could not find link op1");
+                                        if (!op2)console.log("could not find link op2");
+
+                                        const p1Name = obj.ops[iop].portsOut[ipi2].links[ili].portIn;
+
+                                        if (op1 && !op1.getPort(p1Name))
+                                        {
+                                            console.log("PRESERVE port 1 not found", p1Name);
+
+                                            op1.preservedPortLinks[p1Name] = op1.preservedPortLinks[p1Name] || [];
+                                            op1.preservedPortLinks[p1Name].push(obj.ops[iop].portsOut[ipi2].links[ili]);
+                                        }
+
+                                        const p2Name = obj.ops[iop].portsOut[ipi2].links[ili].portOut;
+                                        if (op2 && !op2.getPort(p2Name))
+                                        {
+                                            console.log("PRESERVE port 2 not found", obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                            op2.preservedPortLinks[p1Name] = op2.preservedPortLinks[p1Name] || [];
+                                            op2.preservedPortLinks[p1Name].push(obj.ops[iop].portsOut[ipi2].links[ili]);
+                                        }
+                                    }
                                 }
                             }
                         }

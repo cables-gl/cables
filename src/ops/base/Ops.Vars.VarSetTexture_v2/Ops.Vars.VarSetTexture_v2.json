@@ -20,26 +20,12 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Value"
-            },
-            {
-                "type": "0",
-                "name": "Variable",
-                "group": "Variable",
-                "subType": "string"
-            },
-            {
-                "type": "1",
-                "name": "Create new variable",
-                "group": "Variable"
-            },
-            {
-                "type": "1",
-                "name": "",
-                "group": "Variable"
+                "type": 2,
+                "name": "Value",
+                "objType": "texture"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "set a texture variable",
     "issues": "",

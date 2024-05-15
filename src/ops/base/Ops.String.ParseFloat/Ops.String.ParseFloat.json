@@ -18,8 +18,6 @@
         ]
     },
     "summary": "Parses a string and returns a floating point number / string to number",
-
-
     "docs": {
         "ports": []
     },

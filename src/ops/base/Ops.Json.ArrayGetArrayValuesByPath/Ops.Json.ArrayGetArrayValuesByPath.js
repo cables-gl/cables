@@ -6,6 +6,8 @@ const foundOut = op.outBool("Found");
 objectIn.onChange = update;
 pathIn.onChange = update;
 
+pathIn.setUiAttribs({ "stringTrim": true });
+
 function update()
 {
     const data = objectIn.get();
@@ -60,5 +62,5 @@ function update()
 function resolve(path, obj = self, separator = ".")
 {
     const properties = Array.isArray(path) ? path : path.split(separator);
-    return properties.reduce((prev, curr) => prev && prev[curr], obj);
+    return properties.reduce((prev, curr) => { return prev && prev[curr]; }, obj);
 }

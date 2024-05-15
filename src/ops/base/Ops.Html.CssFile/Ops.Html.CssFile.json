@@ -19,8 +19,19 @@
             {
                 "type": 5,
                 "name": "Media"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": []
-    }
+    },
+    "summary": "load a css asset file",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "lc4mY8"
 }

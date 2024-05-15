@@ -59,7 +59,7 @@ function updateDefines()
     op.checkMainloopExists();
 }
 
-op.renderVizLayer = (ctx, layer) =>
+op.renderVizLayerGl = (ctx, layer) =>
 {
     if (!inTex.isLinked()) return;
     if (!layer.useGl) return;
@@ -348,7 +348,7 @@ op.renderVizLayer = (ctx, layer) =>
                 20);
 
             ctx.fillRect(
-                x - 10,
+                x,
                 y - 1,
                 20,
                 3);

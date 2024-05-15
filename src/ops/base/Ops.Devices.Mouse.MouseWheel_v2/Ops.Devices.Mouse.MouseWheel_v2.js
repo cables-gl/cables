@@ -25,20 +25,6 @@ const vOut = 0;
 
 addListener();
 
-const isChromium = window.chrome,
-    winNav = window.navigator,
-    vendorName = winNav.vendor,
-    isOpera = winNav.userAgent.indexOf("OPR") > -1,
-    isIEedge = winNav.userAgent.indexOf("Edge") > -1,
-    isIOSChrome = winNav.userAgent.match("CriOS");
-
-const isWindows = window.navigator.userAgent.indexOf("Windows") != -1;
-const isLinux = window.navigator.userAgent.indexOf("Linux") != -1;
-const isMac = window.navigator.userAgent.indexOf("Mac") != -1;
-
-const isChrome = (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera === false && isIEedge === false);
-const isFirefox = navigator.userAgent.search("Firefox") > 1;
-
 flip.onChange = function ()
 {
     if (flip.get())dir = -1;
@@ -54,6 +40,7 @@ function normalizeWheel(event)
     if ("deltaY" in event)
     {
         sY = event.deltaY;
+        // if (deltaY < 1.0)deltaY *= 16;
         if (event.deltaY > 20)sY = 20;
         else if (event.deltaY < -20)sY = -20;
     }

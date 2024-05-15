@@ -6,6 +6,8 @@ const
     next = op.outTrigger("Next"),
     outObj = op.outObject("Result");
 
+inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
+
 exec.onTriggered = () =>
 {
     const obj = inObj.get();

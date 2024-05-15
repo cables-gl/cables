@@ -57,12 +57,12 @@ function rebuildGeom()
 
     let numRows = parseFloat(nRows.get());
     let numColumns = parseFloat(nColumns.get());
-    let rowStepX = width / numColumns;
-    let rowStepY = height / numRows;
+    let rowStepX = numColumns ? width / numColumns : width;
+    let rowStepY = numRows ? height / numRows : height;
     let heightMul = extrude.get() * 0.001;
 
-    let stepRow = meshWidth / numRows;
-    let stepColumn = meshHeight / numColumns;
+    let stepRow = numRows ? meshWidth / numRows : meshWidth;
+    let stepColumn = numColumns ? meshHeight / numColumns : meshHeight;
 
     let cycleTex = 0;
     let oldh = 0;

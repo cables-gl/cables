@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1599663936812
+        },
+        {
+            "message": "Fix problems with positioning when using forceCanvasSize",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1712913031408
         }
     ],
     "authorName": "pandur",
@@ -71,6 +77,7 @@
             {
                 "type": 0,
                 "name": "Render",
+                "uititle": "Active",
                 "subType": "boolean"
             }
         ],
@@ -86,12 +93,12 @@
             {
                 "type": 0,
                 "name": "Pointer Hover",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Pointer Down",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -135,7 +142,6 @@
     },
     "summary": "An area which is interactive",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

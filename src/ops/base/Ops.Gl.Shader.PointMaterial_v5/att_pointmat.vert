@@ -45,6 +45,7 @@ UNI float canvasWidth;
 UNI float canvasHeight;
 UNI float camDistMul;
 UNI float randomSize;
+UNI float minPointSize;
 
 IN float attrVertIndex;
 
@@ -72,8 +73,6 @@ void main()
     #ifdef USE_ATLAS
         randAtlas=atlasNumX*rand(attrVertIndex+vPosition.x);
     #endif
-
-    // float sizeMultiply=1.0;
 
     vec3 tangent=attrTangent;
     vec3 bitangent=attrBiTangent;
@@ -116,7 +115,6 @@ void main()
     vec4 model=mMatrix * pos;
 
     psMul+=rand(texCoord.x*texCoord.y+texCoord.y*3.0+texCoord.x*2.0+attrVertIndex)*randomSize;
-    // psMul*=sizeMultiply;
 
     float addPointSize=0.0;
     #ifdef HAS_TEXTURE_POINTSIZE
@@ -131,15 +129,9 @@ void main()
             addPointSize=texture(texPointSize,texCoord).b;
         #endif
 
-
         #ifdef DOTSIZEREMAPABS
-            // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
-
             addPointSize=1.0-(distance(addPointSize,0.5)*2.0);
-            // addPointSize=abs(1.0-(distance(addPointSize,0.5)*2.0));
             addPointSize=addPointSize*addPointSize*addPointSize*2.0;
-
-            // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
         #endif
 
         addPointSize*=texPointSizeMul;
@@ -154,7 +146,7 @@ void main()
         float cameraDist = distance(model.xyz, camPos);
         ps = ( (pointSize+addPointSize+attrPointSize) / cameraDist) * psMul;
     #endif
-
+    ps=max(minPointSize,ps);
     gl_PointSize += ps;
 
 

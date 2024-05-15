@@ -23,7 +23,6 @@ inGeom.onChange = () =>
     outMaxY.set(bb._max[1]);
     outMaxZ.set(bb._max[2]);
 
-
     points.length = 0;
     points.push(
         // bb._max[0],bb._max[1],bb._max[2],
@@ -41,6 +40,6 @@ inGeom.onChange = () =>
 
         bb._center[0], bb._center[1], bb._center[2]
     );
-    outPoints.set(null);
-    outPoints.set(points);
+
+    outPoints.setRef(points);
 };

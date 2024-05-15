@@ -46,6 +46,10 @@
             {
                 "type": 0,
                 "name": "Pixel Unit index",
+                "values": [
+                    "Display",
+                    "CSS"
+                ],
                 "subType": "integer"
             }
         ],

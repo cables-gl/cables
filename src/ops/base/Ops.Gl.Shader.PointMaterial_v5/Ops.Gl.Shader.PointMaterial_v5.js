@@ -30,6 +30,7 @@ const
     inAtlasRepeatX = op.inFloat("Atlas Repeat X ", 1),
     inAtlasLookupTex = op.inTexture("Atlas Lookup"),
     inRotTex = op.inTexture("Rotate Texture"),
+    minPointSize = op.inValueFloat("Min Point Size", 0),
 
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader", null, "shader");
@@ -52,6 +53,7 @@ const
     uniPointSize = new CGL.Uniform(shader, "f", "pointSize", pointSize),
     texturePointSizeMulUniform = new CGL.Uniform(shader, "f", "texPointSizeMul", texturePointSizeMul),
     uniRandomSize = new CGL.Uniform(shader, "f", "randomSize", randomSize),
+    uniMinPointSize = new CGL.Uniform(shader, "f", "minPointSize", minPointSize),
     uniColor = new CGL.Uniform(shader, "4f", "color", r, g, b, a),
     uniRandAtlasX = new CGL.Uniform(shader, "f", "atlasNumX", inAtlasRepeatX),
 

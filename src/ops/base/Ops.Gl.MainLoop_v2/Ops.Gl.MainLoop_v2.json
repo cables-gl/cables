@@ -2,19 +2,19 @@
     "id": "f1029550-d877-42da-9b1e-63a5163a0350",
     "changelog": [
         {
-            "message": "created op",
+            "message": "New version: Max pixel density / DPR to have better control over rendering on HDPI/retina screens, cleanup",
             "author": "pandur",
-            "date": 1701100567829
-        },
-        {
-            "message": "Ops.Patch.PgtCvhM.MainLoop2 renamed to Ops.Dev.MainLoop2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701181581780
+            "date": 1713354512152,
+            "type": "feature"
         }
     ],
     "layout": {
         "portsIn": [
+            {
+                "type": 0,
+                "name": "Max Pixel Density (DPR)",
+                "subType": "number"
+            },
             {
                 "type": 0,
                 "name": "FPS Limit",
@@ -22,18 +22,13 @@
             },
             {
                 "type": 0,
-                "name": "Reduce FPS not focussed",
+                "name": "Reduce FPS unfocussed",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Clear",
+                "name": "Transparent",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Max Pixel Density",
-                "subType": "number"
             },
             {
                 "type": 0,
@@ -67,5 +62,7 @@
     "created": 1701100597121,
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Trigger other ops once every frame to create smooth animations",
+    "license": "MIT"
 }

@@ -6,15 +6,18 @@ const
     valueOutPort = op.outNumber("Switched Value");
 
 const triggerPorts = [];
+exePort.onTriggered = update;
 
 for (let j = 0; j < NUM_PORTS; j++)
 {
     triggerPorts[j] = op.outTrigger("Trigger " + j);
+
+    triggerPorts[j].onLinkChanged = countLinks;
 }
 
-const defaultTriggerPort = op.outTrigger("Default Trigger");
-
-// functions
+const
+    defaultTriggerPort = op.outTrigger("Default Trigger"),
+    outNumConnected = op.outNumber("Highest Index");
 
 function update()
 {
@@ -32,5 +35,11 @@ function update()
     nextTriggerPort.trigger();
 }
 
-// change listeners / trigger events
-exePort.onTriggered = update;
+function countLinks()
+{
+    let count = 0;
+    for (let i = 0; i < triggerPorts.length; i++)
+        if (triggerPorts[i] && triggerPorts[i].isLinked())count = i;
+
+    outNumConnected.set(count);
+}

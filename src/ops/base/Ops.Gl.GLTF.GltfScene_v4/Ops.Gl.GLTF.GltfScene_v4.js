@@ -18,7 +18,7 @@ const
 
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
-    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Never"]),
+    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Never"], "Auto"),
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
@@ -203,9 +203,10 @@ inExec.onTriggered = function ()
 
             if (gltf.bounds && cgl.shouldDrawHelpers(op))
             {
-                if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-                else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
-                gltf.bounds.render(cgl);
+                if (op.isCurrentUiOp()) cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                else cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+
+                gltf.bounds.render(cgl, null, op);
                 cgl.popShader();
             }
 

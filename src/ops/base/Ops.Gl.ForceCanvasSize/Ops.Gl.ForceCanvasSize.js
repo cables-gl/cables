@@ -108,6 +108,8 @@ function removeStyles()
 {
     cgl.canvas.style["margin-top"] = "";
     cgl.canvas.style["margin-left"] = "";
+    cgl.canvas.styleMarginLeft = 0;
+    cgl.canvas.styleMarginTop = 0;
 
     outMarginLeft.set(0);
     outMarginTop.set(0);
@@ -193,11 +195,15 @@ inTrigger.onTriggered = function ()
 
         cgl.canvas.style["margin-top"] = t + "px";
         cgl.canvas.style["margin-left"] = l + "px";
+        cgl.canvas.styleMarginTop = t;
+        cgl.canvas.styleMarginLeft = l;
     }
     else
     {
         cgl.canvas.style["margin-top"] = "0";
         cgl.canvas.style["margin-left"] = "0";
+        cgl.canvas.styleMarginTop = 0;
+        cgl.canvas.styleMarginLeft = 0;
 
         outMarginLeft.set(0);
         outMarginTop.set(0);

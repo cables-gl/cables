@@ -7,6 +7,7 @@ result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
 
 op.setUiAttrib({ "extendTitlePort": key.name });
+key.setUiAttribs({ "stringTrim": true });
 
 key.onChange =
 data.onChange = exec;

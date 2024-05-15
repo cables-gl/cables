@@ -35,11 +35,21 @@
             {
                 "type": 0,
                 "name": "Align Vertical index",
+                "values": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Align Horizontal index",
+                "values": [
+                    "Top",
+                    "Center",
+                    "Bottom"
+                ],
                 "subType": "integer"
             },
             {
@@ -60,10 +70,17 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [
         "E-IZCKf_0c0"
     ],
     "exampleProjectId": "P4Itro",
-    "caniusequery": ""
+    "caniusequery": "",
+    "changelog": [
+        {
+            "message": "Fix problems with positioning when using forceCanvasSize",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1712913009518
+        }
+    ]
 }

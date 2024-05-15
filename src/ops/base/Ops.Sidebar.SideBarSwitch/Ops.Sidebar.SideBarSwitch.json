@@ -4,17 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1622527751528
-        },
-        {
-            "message": "Ops.User.pandur.sidebartabs renamed to Ops.Sidebar.SideBarSwitch",
-            "author": "pandur",
-            "date": 1622531349899
+            "date": 1622527751528,
+            "type": "new"
         },
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888132724
+            "date": 1643888132724,
+            "type": "bugfix"
+        },
+        {
+            "message": "Added trigger output, triggered  on change",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712755323798
         }
     ],
     "authorName": "pandur",
@@ -32,6 +35,10 @@
             {
                 "type": 0,
                 "name": "Style index",
+                "values": [
+                    "Tabs",
+                    "Switch"
+                ],
                 "subType": "integer"
             },
             {
@@ -78,7 +85,6 @@
     },
     "summary": "add tabs or switchbar to a sidebar",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

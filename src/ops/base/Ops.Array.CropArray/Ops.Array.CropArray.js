@@ -7,6 +7,11 @@ const
 
 inStartIndex.onChange = srcArrayPort.onChange = newLengthPort.onChange = setOutPort;
 
+srcArrayPort.onLinkChanged = () =>
+{
+    srcArrayPort.copyLinkedUiAttrib("stride", croppedArrayOutPort);
+};
+
 function setOutPort()
 {
     const srcArray = srcArrayPort.get();
