@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "simod",
             "date": 1562753949267
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1715764657283
         }
     ],
     "authorName": "simod",

@@ -117,7 +117,6 @@ const parametricBodies = [
         "yFunction": "u*sin(v)",
         "zFunction": "u*cos(v)",
 
-
         "uMin": -4,
         "uMax": 4,
         "vMin": 0,
@@ -141,7 +140,6 @@ const parametricBodies = [
         "xFunction": "cos(v)*(1 + u*cos(v/2))",
         "yFunction": "sin(v)*(1 + u*cos(v/2))",
         "zFunction": "u*sin(v/2)",
-
 
         "uMin": -0.3,
         "uMax": 0.3,
@@ -531,7 +529,6 @@ umax	:	-1.0
         // vMin = -37.4
         // vMax = 37.4
 
-
         // r = 1-0.4*0.4
         // w = sqrt(r)
         // d = a( pow(w * cosh(a*u), 2) + pow(a*sin(w*v), 2) )
@@ -570,7 +567,6 @@ umax	:	-1.0
         // vMin = -37.4
         // vMax = 37.4
 
-
         // r = 1-0.4*0.4
         // w = sqrt(r)
         // d = a( pow(w * cosh(a*u), 2) + pow(a*sin(w*v), 2) )
@@ -603,7 +599,6 @@ umax	:	-1.0
         "displaceV": 0
     }
 ];
-
 
 let shouldRender = true;
 let shouldScale = true;
@@ -639,7 +634,6 @@ op.setPortGroup("Scaling", [inScaleX, inScaleY, inScaleZ]);
 const draw = op.inValueBool("Draw", true);
 op.setPortGroup("Draw", [draw]);
 
-
 const inObj = {
     "xFunction": inFunctionX,
     "yFunction": inFunctionY,
@@ -664,15 +658,12 @@ const inObj = {
     "displaceV": inDisplaceV
 };
 
-
 const trigger = op.outTrigger("trigger");
-
 
 const geomOut = op.outObject("geometry");
 const outPosition = op.outArray("Position");
 const outLength = op.outNumber("Position Amount");
 geomOut.ignoreValueSerialize = true;
-
 
 Object.keys(inObj).forEach((key) =>
 {
@@ -764,7 +755,6 @@ const create = () =>
                     }
 
                     coords.push(x, y, z);
-
 
                     texCoords.push(CABLES.map(u_tex, uMin, uMax, 0, 1), CABLES.map(v_tex, vMin, vMax, 1, 0));
 

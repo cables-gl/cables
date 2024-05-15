@@ -48,8 +48,15 @@
             }
         ]
     },
-
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "MFBXQx"
+    "exampleProjectId": "MFBXQx",
+    "changelog": [
+        {
+            "message": "op was deprecated - use Ops.Array.ArraySwizzle",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1715764790899
+        }
+    ]
 }

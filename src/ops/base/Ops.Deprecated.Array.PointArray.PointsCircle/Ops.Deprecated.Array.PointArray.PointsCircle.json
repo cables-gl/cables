@@ -39,7 +39,6 @@
     "id": "ef54ba67-8b1d-41b0-8140-bb97061eaa97",
     "created": 1518184894733,
     "youtubeid": "",
-
     "docs": {
         "ports": []
     },
@@ -49,6 +48,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1701854407046
+        },
+        {
+            "message": "op was deprecated - use Ops.Array.PointArray.CircularPoints",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1715764714259
         }
     ]
 }

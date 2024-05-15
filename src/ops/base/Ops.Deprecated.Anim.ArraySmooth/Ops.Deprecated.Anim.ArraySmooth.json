@@ -6,6 +6,12 @@
             "author": "pandur",
             "date": 1709200845092,
             "type": "new"
+        },
+        {
+            "message": "op was deprecated - use Ops.Array.SmoothArray",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1715764888252
         }
     ],
     "authorName": "pandur",

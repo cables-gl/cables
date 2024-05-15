@@ -22,5 +22,13 @@
         "ports": []
     },
     "issues": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Renamed Ops.String.ParseFloat to Ops.String.StringToNumber",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715764434517
+        }
+    ]
 }

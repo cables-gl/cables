@@ -1,6 +1,5 @@
 new CABLES.SubPatchOp(op);
 
-
 op.on("loadedValueSet",
     () =>
     {
