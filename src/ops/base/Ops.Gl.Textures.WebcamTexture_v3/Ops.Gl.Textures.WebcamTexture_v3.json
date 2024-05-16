@@ -9,50 +9,21 @@
             "date": 1604930023022
         },
         {
-            "message": "Ops.User.pandur.Webcam renamed to Ops.Gl.Textures.WebcamTexture_v2",
-            "author": "pandur",
-            "date": 1604932359089
-        },
-        {
             "message": "cloned op from Ops.Gl.Textures.WebcamTexture_v2",
             "author": "stephan",
             "date": 1617962508757
-        },
-        {
-            "message": "Ops.User.stephan.WebcamTexture_v3 renamed to Ops.Gl.Textures.WebcamTexture_v3",
-            "author": "stephan",
-            "date": 1617962563139
-        },
-        {
-            "message": "Ops.Gl.Textures.WebcamTexture_v3 renamed to Ops.Dev.Gl.Textures.NewWebcamTexture",
-            "author": "stephan",
-            "date": 1627983328895
-        },
-        {
-            "message": " added core lib: cgl_copytexture",
-            "author": "pandur",
-            "date": 1651152292468
-        },
-        {
-            "message": "Ops.Dev.Gl.Textures.NewWebcamTexture renamed to Ops.Dev.NewWebcamTexture",
-            "author": "pandur",
-            "date": 1651158951165
-        },
-        {
-            "message": "Ops.Dev.NewWebcamTexture renamed to Ops.Dev.Gl.Textures.NewWebcamTexture",
-            "author": "pandur",
-            "date": 1651159008803
-        },
-        {
-            "message": "Ops.Dev.Gl.Textures.NewWebcamTexture renamed to Ops.Gl.Textures.WebcamTexture_v3",
-            "author": "pandur",
-            "date": 1652090146155
         },
         {
             "message": "now only asks for permission if \"active\"-port is enables",
             "type": "improvement",
             "author": "pandur",
             "date": 1671034796647
+        },
+        {
+            "message": "Fixed problem with loading status not finishing the loading",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715838799433
         }
     ],
     "layout": {
