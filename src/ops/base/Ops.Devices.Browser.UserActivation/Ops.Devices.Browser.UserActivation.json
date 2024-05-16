@@ -49,5 +49,6 @@
         "ports": []
     },
     "caniusequery": "mdn-api_useractivation",
-    "summary": "detect if the user interacted with or activated the page"
+    "summary": "detect if the user interacted with or activated the page",
+    "exampleProjectId": "3S26Qc"
 }

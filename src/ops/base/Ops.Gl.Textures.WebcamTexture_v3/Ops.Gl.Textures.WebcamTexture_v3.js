@@ -296,6 +296,7 @@ function initDevices()
 {
     if (!inActive.get()) return;
     initingDevices = true;
+    if (loadingId)cgl.patch.loading.finished(loadingId);
     loadingId = cgl.patch.loading.start("Webcam inputs", "", op);
     const constraints = getCamConstraints();
 
