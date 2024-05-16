@@ -118,11 +118,11 @@ function doRender()
         height.set(cgl.canvasHeight);
     }
 
-    if (fb.getWidth() != op.patch.cgl.checkTextureSize(width.get()) || fb.getHeight() != op.patch.cgl.checkTextureSize(height.get()))
+    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get()))
     {
         fb.setSize(
-            op.patch.cgl.checkTextureSize(width.get()),
-            op.patch.cgl.checkTextureSize(height.get()));
+            Math.max(1, Math.ceil(width.get())),
+            Math.max(1, Math.ceil(height.get())));
     }
 
     fb.renderStart(cgl);

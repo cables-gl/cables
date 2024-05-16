@@ -106,7 +106,6 @@ class Context extends CGState
 
 
 
-
     get mvMatrix() // deprecate
     {
         return this.mMatrix;
@@ -286,7 +285,7 @@ class Context extends CGState
 
         if (this._viewPortStack.length == 0)
         {
-            this.setViewPort(0, 0, this._canvasWidth, this._canvasHeight);
+            this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
             // this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
             // this.setViewPort(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
         }
@@ -381,10 +380,10 @@ class Context extends CGState
 
         this._frameStarted = false;
 
-        if (this._oldCanvasWidth != this._canvasWidth || this._oldCanvasHeight != this._canvasHeight)
+        if (this._oldCanvasWidth != this.canvasWidth || this._oldCanvasHeight != this.canvasHeight)
         {
-            this._oldCanvasWidth = this._canvasWidth;
-            this._oldCanvasHeight = this._canvasHeight;
+            this._oldCanvasWidth = this.canvasWidth;
+            this._oldCanvasHeight = this.canvasHeight;
             this.emitEvent("resize");
         }
 
@@ -1174,7 +1173,7 @@ Context.prototype.shouldDrawHelpers = function (op)
     // const fb = this.getCurrentFrameBuffer();
     // if (fb && fb.getWidth)
     // {
-    //     const fbshould = this._canvasWidth / this._canvasHeight == fb.getWidth() / fb.getHeight();
+    //     const fbshould = this.canvasWidth / this.canvasHeight == fb.getWidth() / fb.getHeight();
     //     if (!fbshould) return false;
     // }
 
@@ -1295,14 +1294,7 @@ Context.prototype.enableExtension = function (name)
     return o;
 };
 
-Context.prototype.checkTextureSize = function (x)
-{
-    x = x || 1;
-    x = Math.floor(x);
-    x = Math.min(x, this.maxTexSize);
-    x = Math.max(x, 1);
-    return x;
-};
+
 
 
 export { Context };

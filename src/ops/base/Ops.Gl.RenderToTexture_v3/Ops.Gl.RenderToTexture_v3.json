@@ -9,10 +9,6 @@
             {
                 "type": 0,
                 "name": "Size index",
-                "values": [
-                    "Canvas",
-                    "Manual"
-                ],
                 "group": "Size",
                 "subType": "integer"
             },
@@ -37,32 +33,16 @@
             {
                 "type": 0,
                 "name": "filter index",
-                "values": [
-                    "nearest",
-                    "linear",
-                    "mipmap"
-                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Wrap index",
-                "values": [
-                    "Clamp",
-                    "Repeat",
-                    "Mirror"
-                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "MSAA index",
-                "values": [
-                    "none",
-                    "2x",
-                    "4x",
-                    "8x"
-                ],
                 "subType": "integer"
             },
             {
