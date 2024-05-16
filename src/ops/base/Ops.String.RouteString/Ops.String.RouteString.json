@@ -23,6 +23,11 @@
             {
                 "type": 5,
                 "name": "Default string"
+            },
+            {
+                "type": 0,
+                "name": "Set inactive to default",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

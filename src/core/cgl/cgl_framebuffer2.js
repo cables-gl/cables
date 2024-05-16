@@ -325,6 +325,8 @@ Framebuffer2.prototype.setSize = function (w, h)
     if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
     {
         this._log.error("framebuffer incomplete: " + this.name, this);
+        console.log("options", this._options);
+
         switch (status)
         {
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
@@ -338,7 +340,6 @@ Framebuffer2.prototype.setSize = function (w, h)
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
         case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
             this._log.warn("FRAMEBUFFER_UNSUPPORTED");
-            console.log("options", this._options);
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
             this.valid = false;
@@ -349,6 +350,7 @@ Framebuffer2.prototype.setSize = function (w, h)
             this._frameBuffer = null;
             // debugger;
             throw new Error("Incomplete framebuffer: " + status);
+
         // throw("Incomplete framebuffer: " + status);
         }
     }
@@ -370,19 +372,10 @@ Framebuffer2.prototype.renderStart = function ()
     this._cgl.pushFrameBuffer(this);
 
     this._cgl.pushPMatrix();
-    // this._cgl.gl.viewport(0, 0, this._width, this._height);
     this._cgl.pushViewPort(0, 0, this._width, this._height);
 
     this._cgl.gl.drawBuffers(this._drawTargetArray);
 
-
-    // for (let i = 0; i <= this._numRenderBuffers; i++)
-    // {
-    //     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
-    //     this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [1.0, 0.0, 0.0, 0.0]);
-    // }
-
-    // this.clear();
     if (this._options.clear)
     {
         this._cgl.gl.clearColor(0, 0, 0, 0);
