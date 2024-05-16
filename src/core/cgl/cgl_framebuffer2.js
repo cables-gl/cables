@@ -338,6 +338,7 @@ Framebuffer2.prototype.setSize = function (w, h)
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
         case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
             this._log.warn("FRAMEBUFFER_UNSUPPORTED");
+            console.log("options", this._options);
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
             this.valid = false;
