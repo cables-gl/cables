@@ -69,7 +69,7 @@ function parse()
         }
         if (hasStrings)
         {
-            op.setUiError("notnum", "Parse Error / Not all values numerical!");
+            op.setUiError("notnum", "Parse Error / Not all values numerical!", 1);
         }
     }
 

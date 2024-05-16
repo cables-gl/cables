@@ -1,0 +1,34 @@
+{
+    "authorName": "pandur",
+    "id": "fa36a56b-a64d-4269-9a9e-addc16493006",
+    "created": 1541835372873,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Parses a string and returns a floating point number / string to number",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Renamed Ops.String.ParseFloat to Ops.String.StringToNumber",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715764434517
+        }
+    ]
+}

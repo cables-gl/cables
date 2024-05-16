@@ -43,6 +43,7 @@ videoElement.setAttribute("muted", "");
 videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("style", inCss.get());
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
+// let oldCanvas=op.patch.cgl.canvas;
 
 let tex = null;
 let initingDevices = false;

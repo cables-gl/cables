@@ -1,1 +1,1 @@
-result will look like this: `[XYZXYZXYZXYZ.....]`
+result will look like this: `[XYZWXYZWXYZWXYZW.....]`

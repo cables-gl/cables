@@ -49,14 +49,9 @@
             }
         ]
     },
-    "summary": "set a number at index in an array",
-    "issues": "",
+    "summary": "set four numbers at index in an array",
     "docs": {
         "ports": [
-            {
-                "name": "Execute",
-                "text": "Trigger to set the value at the index"
-            },
             {
                 "name": "Array",
                 "text": "Array in"
@@ -66,17 +61,10 @@
                 "text": "index to update with the value"
             },
             {
-                "name": "Number",
-                "text": "number that will be set to the selected index"
-            },
-            {
-                "name": "Reset",
-                "text": "Reverts array to it's original state"
-            },
-            {
                 "name": "Result",
                 "text": "Modified array out"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }

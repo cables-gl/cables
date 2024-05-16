@@ -225,8 +225,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
                 if (pixelFormatStr == Texture.PFORMATSTR_RGB16F) pixelFormatStr = Texture.PFORMATSTR_RGB32F;
                 if (pixelFormatStr == Texture.PFORMATSTR_RG16F) pixelFormatStr = Texture.PFORMATSTR_RG32F;
                 if (pixelFormatStr == Texture.PFORMATSTR_R16F) pixelFormatStr = Texture.PFORMATSTR_R32F;
-
-                console.warn("after", pixelFormatStr);
             }
             else
             {

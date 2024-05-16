@@ -45,15 +45,15 @@ void main()
        vec3 position=vPosition;
        modelViewMatrix=viewMatrix*modelMatrix;
 
-       gl_Position = projMatrix * mvMatrix * vec4((
+       gl_Position = projMatrix * modelViewMatrix * vec4((
            position.x * vec3(
-               mvMatrix[0][0],
-               mvMatrix[1][0],
-               mvMatrix[2][0] ) +
+               modelViewMatrix[0][0],
+               modelViewMatrix[1][0],
+               modelViewMatrix[2][0] ) +
            position.y * vec3(
-               mvMatrix[0][1],
-               mvMatrix[1][1],
-               mvMatrix[2][1]) ), 1.0);
+               modelViewMatrix[0][1],
+               modelViewMatrix[1][1],
+               modelViewMatrix[2][1]) ), 1.0);
     #endif
 
     {{MODULE_VERTEX_POSITION}}
