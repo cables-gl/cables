@@ -64,5 +64,6 @@
         "ports": []
     },
     "summary": "Trigger other ops once every frame to create smooth animations",
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "uZxfQc"
 }
