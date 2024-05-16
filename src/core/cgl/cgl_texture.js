@@ -377,6 +377,10 @@ Texture.prototype.setSize = function (w, h)
 
     w = Math.floor(w);
     h = Math.floor(h);
+
+    w = this._cgl.checkTextureSize(w);
+    h = this._cgl.checkTextureSize(h);
+
     if (this.width == w && this.height == h) return;
 
     // console.log("tex setsize", this.name, w, h, this.id);

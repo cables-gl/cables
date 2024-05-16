@@ -16,8 +16,8 @@ class CgCanvas
 
         this._cg = options.cg;
         this.pixelDensity = 1;
-        this.canvasWidth = this.canvasEle.clientWidth;
-        this.canvasHeight = this.canvasEle.clientHeight;
+        this._canvasWidth = this.canvasEle.clientWidth;
+        this._canvasHeight = this.canvasEle.clientHeight;
 
         this._oldWidthRp = -1;
         this._oldHeightRp = -1;
@@ -49,8 +49,8 @@ class CgCanvas
 
     updateSize()
     {
-        this.canvasEle.width = this.canvasWidth = this.canvasEle.clientWidth * this.pixelDensity;
-        this.canvasEle.height = this.canvasHeight = this.canvasEle.clientHeight * this.pixelDensity;
+        this.canvasEle.width = this._canvasWidth = this.canvasEle.clientWidth * this.pixelDensity;
+        this.canvasEle.height = this._canvasHeight = this.canvasEle.clientHeight * this.pixelDensity;
     }
 
     dispose()

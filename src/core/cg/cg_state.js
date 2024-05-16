@@ -75,12 +75,12 @@ class CGState extends Events
 
     get canvasWidth()
     {
-        return this.cgCanvas.canvasWidth;
+        return this.checkTextureSize(this.cgCanvas._canvasWidth);
     }
 
     get canvasHeight()
     {
-        return this.cgCanvas.canvasHeight;
+        return this.checkTextureSize(this.cgCanvas._canvasHeight);
     }
 
     set pixelDensity(p)

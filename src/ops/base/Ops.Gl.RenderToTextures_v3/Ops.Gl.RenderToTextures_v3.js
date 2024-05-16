@@ -166,7 +166,7 @@ function doRender()
 
     // fb.clear(2, [1, 1, 1, 1]);
 
-    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get())) fb.setSize(width.get(), height.get());
+    if (fb.getWidth() != op.patch.cgl.checkTextureSize(width.get()) || fb.getHeight() != op.patch.cgl.checkTextureSize(height.get())) fb.setSize(width.get(), height.get());
 
     fb.renderStart(cgl);
 
