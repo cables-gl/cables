@@ -1296,5 +1296,15 @@ Context.prototype.enableExtension = function (name)
 
 
 
+Context.prototype.checkTextureSize = function (x)
+{
+    x = x || 1;
+    x = Math.floor(x);
+    x = Math.min(x, this.maxTexSize);
+    x = Math.max(x, 1);
+    return x;
+};
+
 
 export { Context };
+

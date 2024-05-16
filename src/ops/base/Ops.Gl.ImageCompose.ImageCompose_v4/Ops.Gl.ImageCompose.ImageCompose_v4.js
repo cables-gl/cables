@@ -103,18 +103,23 @@ function getWrap()
 
 function getWidth()
 {
-    if (inTex.get() && inSize.get() == "Auto") return inTex.get().width;
-    else if (inSize.get() == "Auto" || inSize.get() == "Canvas") return cgl.canvasWidth;
-    else if (inSize.get() == "ViewPort") return cgl.getViewPort()[2];
-    return Math.ceil(width.get());
+    let x = 0;
+    if (inTex.get() && inSize.get() == "Auto") x = inTex.get().width;
+    else if (inSize.get() == "Auto" || inSize.get() == "Canvas") x = cgl.canvasWidth;
+    else if (inSize.get() == "ViewPort") x = cgl.getViewPort()[2];
+    else x = Math.ceil(width.get());
+    return op.patch.cgl.checkTextureSize(x);
 }
 
 function getHeight()
 {
-    if (inTex.get() && inSize.get() == "Auto") return inTex.get().height;
-    else if (inSize.get() == "Auto" || inSize.get() == "Canvas") return cgl.canvasHeight;
-    else if (inSize.get() == "ViewPort") return cgl.getViewPort()[3];
-    else return Math.ceil(height.get());
+    let x = 0;
+
+    if (inTex.get() && inSize.get() == "Auto") x = inTex.get().height;
+    else if (inSize.get() == "Auto" || inSize.get() == "Canvas") x = cgl.canvasHeight;
+    else if (inSize.get() == "ViewPort") x = cgl.getViewPort()[3];
+    else x = Math.ceil(height.get());
+    return op.patch.cgl.checkTextureSize(x);
 }
 
 function reInitLater()

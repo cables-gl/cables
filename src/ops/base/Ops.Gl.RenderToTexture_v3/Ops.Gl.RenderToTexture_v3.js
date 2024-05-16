@@ -114,15 +114,15 @@ function doRender()
     if (inSize.get() == "Canvas")
     {
         setAspect = true;
-        width.set(cgl.canvasWidth);
-        height.set(cgl.canvasHeight);
+        width.set(op.patch.cgl.checkTextureSize(cgl.canvasWidth));
+        height.set(op.patch.cgl.checkTextureSize(cgl.canvasHeight));
     }
 
-    if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get()))
+    if (fb.getWidth() != op.patch.cgl.checkTextureSize(width.get()) || fb.getHeight() != op.patch.cgl.checkTextureSize(height.get()))
     {
         fb.setSize(
-            Math.max(1, Math.ceil(width.get())),
-            Math.max(1, Math.ceil(height.get())));
+            op.patch.cgl.checkTextureSize(width.get()),
+            op.patch.cgl.checkTextureSize(height.get()));
     }
 
     fb.renderStart(cgl);

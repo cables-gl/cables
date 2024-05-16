@@ -176,10 +176,9 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._cgl.profileData.addHeavyEvent("framebuffer resize", this.name);
 
     let i = 0;
-    this._width = Math.floor(w);
-    this._height = Math.floor(h);
-    this._width = Math.min(this._width, this._cgl.maxTexSize);
-    this._height = Math.min(this._height, this._cgl.maxTexSize);
+
+    this._width = this._cgl.checkTextureSize(w);
+    this._height = this._cgl.checkTextureSize(h);
 
     this._cgl.profileData.profileFrameBuffercreate++;
 
