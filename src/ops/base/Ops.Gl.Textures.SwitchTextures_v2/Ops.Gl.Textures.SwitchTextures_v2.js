@@ -14,7 +14,6 @@ let tempTexture = CGL.Texture.getEmptyTexture(cgl);
 op.toWorkPortsNeedToBeLinked(exec);
 exec.onTriggered = function () { updateTexture(); next.trigger(); };
 
-
 defaultTransparent.onChange = function ()
 {
     if (defaultTransparent.get()) tempTexture = CGL.Texture.getEmptyTexture(cgl);
@@ -50,8 +49,8 @@ function updateTexture(force)
     )
         index = 0;
 
-    if (texturePorts[index].get()) textureOut.set(texturePorts[index].get());
-    else textureOut.set(tempTexture);
+    if (texturePorts[index].get()) textureOut.setRef(texturePorts[index].get());
+    else textureOut.setRef(tempTexture);
 
     lastIndex = index;
 }

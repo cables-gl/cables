@@ -1,0 +1,67 @@
+{
+    "id": "bcf93617-0687-4692-b3aa-16318af686ef",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Json.GateObject",
+            "author": "pandur",
+            "date": 1715862463349,
+            "type": "new"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1715862463348,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object In",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Pass Through",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "When False index",
+                "values": [
+                    "keep last texture",
+                    "empty texture"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Only Valid Textures",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Object Out",
+                "objType": "texture"
+            }
+        ]
+    },
+    "summary": "Will only allow an Object to to be output if the the pass through parameter evaluates to true",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Object In",
+                "text": "Object in "
+            },
+            {
+                "name": "Pass Through",
+                "text": "Opens or closes the gate"
+            },
+            {
+                "name": "Object Out",
+                "text": "Object output if pass through is true"
+            }
+        ]
+    },
+    "caniusequery": ""
+}
