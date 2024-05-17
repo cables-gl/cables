@@ -59,7 +59,7 @@ function update()
         {
             if (!showingError)
             {
-                op.setUiError("arrlength", "Arrays do not have the same length !");
+                op.setUiError("arrlength", "Arrays do not have the same length !", 1);
                 outArrayLength.set(0);
                 showingError = true;
             }
