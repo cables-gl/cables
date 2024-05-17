@@ -47,10 +47,15 @@ function update()
         if (!array4)array4 = emptyArray;
     }
 
-    if ((array1.length !== array2.length) || (array2.length !== array3.length))
+    if (
+        (array1.length !== array2.length) ||
+        (array2.length !== array3.length) ||
+        (array3.length !== array4.length) ||
+        (array1.length !== array4.length) ||
+        (array1.length !== array3.length)
+    )
     {
-        //
-        op.setUiError("arraylen", "Arrays do not have the same length !");
+        op.setUiError("arraylen", "Arrays do not have the same length !", 1);
         return;
     }
     op.setUiError("arraylen", null);
