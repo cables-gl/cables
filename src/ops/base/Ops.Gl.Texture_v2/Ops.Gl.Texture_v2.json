@@ -113,6 +113,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1707381819030
+        },
+        {
+            "message": "Cachebuster option default value is now false. turn on to force a reload of the image every time",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715952002835
         }
     ],
     "summary": "Load an image as a texture",

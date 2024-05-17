@@ -9,7 +9,7 @@ const
     active = op.inValueBool("Active", true),
     inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
-    addCacheBust = op.inBool("Add Cachebuster", true),
+    addCacheBust = op.inBool("Add Cachebuster", false),
     width = op.outNumber("Width"),
     height = op.outNumber("Height"),
     ratio = op.outNumber("Aspect Ratio"),
