@@ -26,6 +26,18 @@
             "message": "cloned op from Ops.String.Base64Encode",
             "author": "stephan",
             "date": 1621603158289
+        },
+        {
+            "message": "Always output data url",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715960909179
+        },
+        {
+            "message": "Add mime input port, e.g. \"image/svg+xml\" or \"image/jpeg\"",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715960934577
         }
     ],
     "issues": "",

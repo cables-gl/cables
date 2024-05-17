@@ -8,6 +8,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1711106597196
+        },
+        {
+            "message": "Fix problems with data urls",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715960888304
         }
     ],
     "layout": {
