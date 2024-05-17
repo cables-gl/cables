@@ -7,6 +7,10 @@
             {
                 "type": 5,
                 "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "MimeType"
             }
         ],
         "portsOut": [
@@ -25,7 +29,6 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

@@ -1,10 +1,15 @@
-let inString = op.inString("String");
-let result = op.outString("Result");
+const
+    inString = op.inString("String"),
+    inMime = op.inString("MimeType"),
+    result = op.outString("Result");
 
+inMime.onChange =
 inString.onChange = function ()
 {
-    result.set(b64EncodeUnicode(inString.get()));
+    result.set("data:" + inMime.get() + ";base64," + b64EncodeUnicode(inString.get()));
 };
+
+// image/svg+xml;charset=utf8,
 
 function b64EncodeUnicode(str)
 {

@@ -10,7 +10,7 @@ inExec.onTriggered = () =>
     outError.set(false);
 
     let str = inStr.get();
-    if (str.indexOf("data" != 0))str = "data:;base64," + str;
+    if (str.indexOf("data") != 0)str = "data:;base64," + str;
 
     if (CABLES.UI)
         gui.getFileManager().uploadFile(inFilename.get(), str, (err, res) =>
