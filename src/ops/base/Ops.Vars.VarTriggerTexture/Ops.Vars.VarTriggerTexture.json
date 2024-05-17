@@ -1,0 +1,45 @@
+{
+    "id": "ade7c65c-0a61-4130-aebe-47221369393b",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Vars.VarTriggerObject",
+            "author": "pandur",
+            "date": 1715862839403,
+            "type": "new"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1715862839403,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Value",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "vargetset"
+    ],
+    "summary": "Set an object variable by trigger",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "textures, geometry, api request returns, etc"
+            }
+        ]
+    }
+}

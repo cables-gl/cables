@@ -379,65 +379,30 @@ Texture.prototype.setSize = function (w, h)
     h = Math.floor(h);
     if (this.width == w && this.height == h) return;
 
-    // console.log("tex setsize", this.name, w, h, this.id);
+    w = this._cgl.checkTextureSize(w);
+    h = this._cgl.checkTextureSize(h);
 
     this.width = w;
     this.height = h;
     this.deleted = false;
 
-
     this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
-
     this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
-    // if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
-
-    // if (this._cgl.printError("cgltex before"))
-    // {
-    //     this.printInfo();
-    //     console.log((new Error()).stack);
-    // }
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.profileData.profileTextureResize++;
 
     const uarr = null;
 
-
-    // if (
-    //     this._cgl.glVersion == 1 &&
-    //     this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
-    //     (!this._cgl.enableExtension("OES_texture_float_linear"))
-    // )
-    // {
-    //     console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
-    //     this.filter = Texture.FILTER_NEAREST;
-    // }
-
-
-    // else
-    // {
-    //     dataType = this._cgl.gl.UNSIGNED_BYTE;
-    //     internalFormat = this._cgl.gl.RGBA;
-    //     dataFormat = this._cgl.gl.RGBA;
-    //     // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
-    // }
-
     this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, uarr);
 
     this._setFilter();
-
-    // if (this._cgl.printError("cgltex"))
-    // {
-    //     this.printInfo();
-    //     console.log((new Error()).stack);
-    // }
 
     this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
-
 
 
 /**

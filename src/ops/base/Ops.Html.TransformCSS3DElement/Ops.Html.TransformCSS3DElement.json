@@ -16,19 +16,9 @@
                 "type": 0,
                 "name": "origin index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Backface",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
-            {
-                "type": 2,
-                "name": "Element",
-                "objType": "element"
-            },
             {
                 "type": 1,
                 "name": "next"
@@ -50,9 +40,13 @@
             "type": "rename",
             "author": "pandur",
             "date": 1680004830536
+        },
+        {
+            "message": "Fix problems with HDPI/Retina displays",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715862360389
         }
     ],
-
-
     "exampleProjectId": "jC_6-u"
 }

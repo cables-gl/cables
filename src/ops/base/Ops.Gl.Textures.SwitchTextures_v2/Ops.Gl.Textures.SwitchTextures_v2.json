@@ -12,98 +12,114 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exec"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "num",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Default Texture Transparent",
                 "subType": "boolean"
             },
             {
-                "type": "2",
-                "name": "texture0"
+                "type": 2,
+                "name": "texture0",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture1"
+                "type": 2,
+                "name": "texture1",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture2"
+                "type": 2,
+                "name": "texture2",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture3"
+                "type": 2,
+                "name": "texture3",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture4"
+                "type": 2,
+                "name": "texture4",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture5"
+                "type": 2,
+                "name": "texture5",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture6"
+                "type": 2,
+                "name": "texture6",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture7"
+                "type": 2,
+                "name": "texture7",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture8"
+                "type": 2,
+                "name": "texture8",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture9"
+                "type": 2,
+                "name": "texture9",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture10"
+                "type": 2,
+                "name": "texture10",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture11"
+                "type": 2,
+                "name": "texture11",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture12"
+                "type": 2,
+                "name": "texture12",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture13"
+                "type": 2,
+                "name": "texture13",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture14"
+                "type": 2,
+                "name": "texture14",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "texture15"
+                "type": 2,
+                "name": "texture15",
+                "objType": "texture"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "2",
-                "name": "texture"
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
             }
         ]
     },
     "summary": "Switch between different textures ",
     "issues": "",
-
     "youtubeids": [
         "TdHgjqOLpnM"
     ],

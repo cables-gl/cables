@@ -84,8 +84,8 @@ trigger.onTriggered = function ()
     let a = -2 * cgl.gl.drawingBufferWidth / cgl.gl.drawingBufferHeight;
     vec3.set(
         sScalingVector,
-        a / cgl.gl.drawingBufferWidth / op.patch.cgl.pixelDensity,
-        -2 / cgl.gl.drawingBufferHeight / op.patch.cgl.pixelDensity,
+        a / cgl.gl.drawingBufferWidth * op.patch.cgl.pixelDensity,
+        -2 / cgl.gl.drawingBufferHeight * op.patch.cgl.pixelDensity,
         1
     );
     let el = inElement.get();
@@ -101,20 +101,24 @@ trigger.onTriggered = function ()
             sCSSMatrix,
             sScalingVector
         );
+
         if (el.parentElement)
     		el.parentElement.style.transform = "translateZ(" + pxfov + "px) matrix3d(" +
     			sCSSMatrix[0] + "," +
     			-sCSSMatrix[1] + "," +
     			sCSSMatrix[2] + "," +
     			sCSSMatrix[3] + "," +
+
     			sCSSMatrix[4] + "," +
     			-sCSSMatrix[5] + "," +
     			sCSSMatrix[6] + "," +
     			sCSSMatrix[7] + "," +
+
     			sCSSMatrix[8] + "," +
     			-sCSSMatrix[9] + "," +
     			sCSSMatrix[10] + "," +
     			sCSSMatrix[11] + "," +
+
     			sCSSMatrix[12] + "," +
     			-sCSSMatrix[13] + "," +
     			sCSSMatrix[14] + "," +
