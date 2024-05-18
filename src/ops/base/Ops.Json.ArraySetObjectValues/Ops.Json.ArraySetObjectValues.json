@@ -1,0 +1,72 @@
+{
+    "id": "e79cf9be-9001-43ef-90f8-3281409a4c4e",
+    "created": 1715940539000,
+    "authorName": "kikohs",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "kikohs",
+            "date": 1715855909274
+        },
+        {
+            "message": "moved to core op",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1715940758357
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array of objects"
+            },
+            {
+                "type": 3,
+                "name": "Data per object"
+            },
+            {
+                "type": 5,
+                "name": "Key in each object"
+            },
+            {
+                "type": 0,
+                "name": "Copy Array",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Updated array"
+            }
+        ]
+    },
+    "summary": "Updates each object in an array with new data from a corresponding array, based on a specified key",
+    "license": "MIT",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array of objects",
+                "text": " Input port for the array of objects to be updated. Each object should be structured to accommodate updates based on the key provided."
+            },
+            {
+                "name": "Data per object",
+                "text": "Data array containing the new values to be set in each object. Each index in this array corresponds to the object at the same index in inArr."
+            },
+            {
+                "name": "Key in each object",
+                "text": "The key at which to update the data in each object. Supports nested keys using dot notation (e.g., \"data.value\"). The key should not end with a dot or contain empty segments."
+            },
+            {
+                "name": "Copy Array",
+                "text": "A boolean value determining whether to modify the original array (false) or to work on a copy of it (true). Default is false."
+            },
+            {
+                "name": "Updated array",
+                "text": "Output port that emits the updated array of objects. This is either a reference to the modified original array or a new array, depending on the value of inCopy."
+            }
+        ]
+    }
+}

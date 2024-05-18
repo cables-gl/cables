@@ -1294,8 +1294,6 @@ Context.prototype.enableExtension = function (name)
     return o;
 };
 
-
-
 Context.prototype.checkTextureSize = function (x)
 {
     x = x || 1;
