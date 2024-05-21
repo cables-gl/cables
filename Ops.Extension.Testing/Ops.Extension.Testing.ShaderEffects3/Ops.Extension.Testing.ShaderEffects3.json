@@ -1,0 +1,32 @@
+{
+    "id": "2358e9cc-a396-4f60-8f22-117a3038cc69",
+    "created": 1716302478640,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716302478673
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716302478988
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "5oxvqg1zw",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}
