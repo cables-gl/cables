@@ -1,0 +1,270 @@
+{
+  "ops": [
+    {
+      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
+      "id": "rx4awvnec",
+      "uiAttribs": {
+        "translate": {
+          "x": 826.1223022126512,
+          "y": 1000.0615298726833
+        },
+        "accBuffersDelete": "vertexpaint_cube",
+        "loading": false,
+        "subPatch": "yyj2n7mqg",
+        "extendTitle": "vertexpaint_cube",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "value": "/assets/619e244ce4dff21e0ce04166/vertexpaint_cube.glb",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 0.95
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 0
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Auto"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Generator",
+          "value": "Khronos glTF Blender I/O v1.6.16"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": 0
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
+        }
+      ]
+    },
+    {
+      "opId": "a01d592b-0e5e-48f3-a9fd-54b87ffd623b",
+      "id": "g0tkkv6eh",
+      "uiAttribs": {
+        "translate": {
+          "x": 826.1223022126512,
+          "y": 899.941416955205
+        },
+        "subPatch": "yyj2n7mqg",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "opacity",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "rx4awvnec",
+              "objOut": "g0tkkv6eh"
+            },
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger",
+              "objIn": "697locqi3",
+              "objOut": "g0tkkv6eh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "xwhffn47h",
+      "uiAttribs": {
+        "subPatch": "yyj2n7mqg",
+        "translate": {
+          "x": 826.1223022126512,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_94uzkbsko",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_94uzkbsko",
+              "objIn": "g0tkkv6eh",
+              "objOut": "xwhffn47h"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "w8560wqax",
+      "uiAttribs": {
+        "subPatch": "yyj2n7mqg",
+        "translate": {
+          "x": 826.1223022126512,
+          "y": 1920.1201129174783
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "innerIn_4l3vcuia3",
+          "title": "Name"
+        }
+      ]
+    },
+    {
+      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+      "id": "697locqi3",
+      "uiAttribs": {
+        "title": "var set",
+        "subPatch": "yyj2n7mqg",
+        "translate": {
+          "x": 1190.1035032477862,
+          "y": 657.4423812624927
+        },
+        "extendTitle": "#currentTestName"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "currentTestName"
+        }
+      ],
+      "storage": {
+        "ref": "697locqi3"
+      }
+    },
+    {
+      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
+      "id": "y4vpnt8ae",
+      "uiAttribs": {
+        "subPatch": "yyj2n7mqg",
+        "translate": {
+          "x": 1262.2530408850807,
+          "y": 568.2411705872927
+        }
+      },
+      "portsOut": [
+        {
+          "name": "Name",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Name",
+              "objIn": "697locqi3",
+              "objOut": "y4vpnt8ae"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "y4vpnt8ae"
+      }
+    }
+  ]
+}
