@@ -10,7 +10,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -53,7 +53,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -102,7 +102,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -158,6 +158,12 @@
               "portOut": "trigger",
               "objIn": "ranx6izj1",
               "objOut": "s7e6u98ji"
+            },
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger",
+              "objIn": "rl3iwb8la",
+              "objOut": "s7e6u98ji"
             }
           ]
         }
@@ -173,7 +179,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -215,7 +221,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -280,7 +286,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -327,7 +333,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -375,7 +381,7 @@
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -430,7 +436,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -525,7 +531,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -652,7 +658,7 @@
         },
         "notWorkingMsg": null,
         "color": null,
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -773,7 +779,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "cs55hr2kb",
       "uiAttribs": {
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "translate": {
           "x": 1177.4886403152777,
           "y": 1894.52138934491
@@ -801,7 +807,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "d6nc25x9c",
       "uiAttribs": {
-        "subPatch": "360il25dn",
+        "subPatch": "ivrslnhtd",
         "translate": {
           "x": 1177.4886403152777,
           "y": 2817.3332067518704
@@ -810,6 +816,55 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+      "id": "rl3iwb8la",
+      "uiAttribs": {
+        "title": "var set",
+        "subPatch": "ivrslnhtd",
+        "translate": {
+          "x": 1484.1275319343708,
+          "y": 2189.928345172527
+        },
+        "extendTitle": "#currentTestName"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "currentTestName"
+        }
+      ],
+      "storage": {
+        "ref": "rl3iwb8la"
+      }
+    },
+    {
+      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
+      "id": "wdxze1brs",
+      "uiAttribs": {
+        "subPatch": "ivrslnhtd",
+        "translate": {
+          "x": 1496.1275319343708,
+          "y": 2094.743752365436
+        }
+      },
+      "portsOut": [
+        {
+          "name": "Name",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Name",
+              "objIn": "rl3iwb8la",
+              "objOut": "wdxze1brs"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "wdxze1brs"
+      }
     }
   ]
 }

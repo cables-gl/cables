@@ -8,7 +8,7 @@
           "x": 708.7147974770818,
           "y": 2842.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -82,7 +82,7 @@
           "x": 708.7147974770818,
           "y": 2282.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -182,7 +182,7 @@
           "x": 708.7147974770818,
           "y": 2222.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -382,6 +382,12 @@
               "portOut": "Trigger Out",
               "objIn": "5hwqkft4g",
               "objOut": "fqk2oz8sb"
+            },
+            {
+              "portIn": "Trigger",
+              "portOut": "Trigger Out",
+              "objIn": "czo5k3t62",
+              "objOut": "fqk2oz8sb"
             }
           ]
         }
@@ -395,7 +401,7 @@
           "x": 708.7147974770818,
           "y": 2362.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -456,7 +462,7 @@
           "x": 708.7147974770818,
           "y": 2782.47024747317
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -513,7 +519,7 @@
           "x": 708.7147974770818,
           "y": 2422.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -551,7 +557,7 @@
           "y": 2342.496953522097
         },
         "loading": false,
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "extendTitle": "beach",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -658,7 +664,7 @@
           "x": 708.7147974770818,
           "y": 2566.87968127536
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -731,7 +737,7 @@
           "x": 708.7147974770818,
           "y": 2502.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -809,7 +815,7 @@
           "x": 1068.714797477082,
           "y": 2482.496953522097
         },
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -898,7 +904,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "vzgp1f695",
       "uiAttribs": {
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "translate": {
           "x": 708.7147974770818,
           "y": 2015.59418143796
@@ -926,7 +932,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "ezgb23rd4",
       "uiAttribs": {
-        "subPatch": "qe43dq09k",
+        "subPatch": "l4z4ej7sm",
         "translate": {
           "x": 708.7147974770818,
           "y": 2922.496953522097
@@ -935,6 +941,55 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+      "id": "czo5k3t62",
+      "uiAttribs": {
+        "title": "var set",
+        "subPatch": "l4z4ej7sm",
+        "translate": {
+          "x": 1437.8539171491161,
+          "y": 2506.1991990749752
+        },
+        "extendTitle": "#currentTestName"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "currentTestName"
+        }
+      ],
+      "storage": {
+        "ref": "czo5k3t62"
+      }
+    },
+    {
+      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
+      "id": "v1g22qld7",
+      "uiAttribs": {
+        "subPatch": "l4z4ej7sm",
+        "translate": {
+          "x": 1449.8539171491161,
+          "y": 2411.0146062678846
+        }
+      },
+      "portsOut": [
+        {
+          "name": "Name",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Name",
+              "objIn": "czo5k3t62",
+              "objOut": "v1g22qld7"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "v1g22qld7"
+      }
     }
   ]
 }
