@@ -12,7 +12,7 @@
     "main": "src/core/index.js",
     "type": "module",
     "engines": {
-        "node": "18.14.2"
+        "node": "20.13.1"
     },
     "dependencies": {
         "git-last-commit": "1.0.1",
