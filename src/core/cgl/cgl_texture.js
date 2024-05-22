@@ -1076,7 +1076,6 @@ Texture.createFromImage = function (cgl, img, options)
     texture.height = img.videoHeight || img.height || 8;
     if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
 
-    console.log("createFromImage", options);
     texture.initTexture(img, options.filter);
 
     return texture;
