@@ -9,7 +9,7 @@
           "y": 2930.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -91,7 +91,7 @@
           "y": 2990.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,7 +168,7 @@
           "y": 2550.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -226,7 +226,7 @@
           "y": 2370.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -321,7 +321,7 @@
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "extendTitle": "Normal",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -415,7 +415,7 @@
           "x": 622.0710852027429,
           "y": 2770.2637819934557
         },
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -512,7 +512,7 @@
           "x": 622.0710852027429,
           "y": 2730.2637819934557
         },
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -593,7 +593,7 @@
           "x": 622.0710852027429,
           "y": 2870.2637819934557
         },
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -662,7 +662,7 @@
           "x": 622.0710852027429,
           "y": 2670.2637819934557
         },
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -783,7 +783,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "3bicj7gyn",
       "uiAttribs": {
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "translate": {
           "x": 676.393268966437,
           "y": 2129.9122494057256
@@ -811,7 +811,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "wwlwo0emm",
       "uiAttribs": {
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "translate": {
           "x": 676.393268966437,
           "y": 3070.2637819934557
@@ -831,7 +831,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "xq6pjfut8",
+        "subPatch": "bkc973hsr",
         "extendTitle": "beach",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
