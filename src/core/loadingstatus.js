@@ -176,9 +176,7 @@ LoadingStatus.prototype.existByName = function (name)
     for (let i in this._loadingAssets)
     {
         if (this._loadingAssets[i].name == name && !this._loadingAssets[i].finished)
-        {
             return true;
-        }
     }
 };
 
@@ -187,7 +185,7 @@ LoadingStatus.prototype.start = function (type, name, op)
     if (this._startTime == 0) this._startTime = Date.now();
     const id = generateUUID();
 
-    if (name.length > 30)name = name.substring(0, 30);
+    if (name.length > 100)name = name.substring(0, 100);
 
 
     if (op)op.setUiAttribs({ "loading": true });
