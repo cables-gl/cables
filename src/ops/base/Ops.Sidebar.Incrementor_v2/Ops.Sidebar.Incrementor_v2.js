@@ -7,8 +7,11 @@ const
     inDefault = op.inValue("Default", 0),
     inValues = op.inArray("Values"),
     inGreyOut = op.inBool("Grey Out", false),
+    inTriggerInc = op.inTriggerButton("Increment"),
+    inTriggerDec = op.inTriggerButton("Decrement"),
 
     inSetDefault = op.inTriggerButton("Set Default"),
+    inReset = op.inTriggerButton("Reset"),
 
     siblingsPort = op.outObject("childs"),
     outValue = op.outNumber("value"),
@@ -16,6 +19,8 @@ const
 
 inSetDefault.onTriggered = setDefaultValue;
 let currentPosition = 0;
+
+op.setPortGroup("Trigger", [inTriggerDec, inTriggerInc]);
 
 const containerEl = document.createElement("div");
 containerEl.dataset.op = op.id;
@@ -29,6 +34,10 @@ label.addEventListener("dblclick", function ()
     outChanged.trigger();
     outChanged.trigger();
 });
+
+inTriggerInc.onTriggered = onNext;
+inTriggerDec.onTriggered = onPrev;
+
 const labelTextEl = document.createTextNode(labelPort.get());
 label.appendChild(labelTextEl);
 containerEl.appendChild(label);
@@ -112,6 +121,13 @@ op.onLoaded = op.onInit = function ()
         valueText.textContent = inDefault.get();
         outChanged.trigger();
     }
+};
+
+inReset.onTriggered = () =>
+{
+    outValue.set(inDefault.get());
+    outChanged.trigger();
+    valueText.textContent = inDefault.get();
 };
 
 function onValueChange()

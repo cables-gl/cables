@@ -29,6 +29,11 @@
             {
                 "type": 0,
                 "name": "Style index",
+                "values": [
+                    "Spinner",
+                    "Ring",
+                    "Ellipsis"
+                ],
                 "subType": "integer"
             }
         ],
@@ -36,7 +41,6 @@
     },
     "summary": "show a typical web loading/progress indicator animation",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

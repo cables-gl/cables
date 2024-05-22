@@ -43,7 +43,21 @@
             },
             {
                 "type": 1,
+                "name": "Increment",
+                "group": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Decrement",
+                "group": "Trigger"
+            },
+            {
+                "type": 1,
                 "name": "Set Default"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [
@@ -119,6 +133,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1716369292696
+        },
+        {
+            "message": "Added reset button",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716370249334
+        },
+        {
+            "message": "Added Increment/Decrement trigger inputs",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716379450036
         }
     ],
     "exampleProjectId": "DLV0n6"

@@ -181,9 +181,9 @@ function realReload(nocache)
     }
     else
     {
-        cgl.patch.loading.finished(loadingId);
         loadingId = null;
         setTempTexture();
+        cgl.patch.loading.finished(loadingId);
     }
 }
 

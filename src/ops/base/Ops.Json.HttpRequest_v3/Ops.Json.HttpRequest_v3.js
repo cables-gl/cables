@@ -94,6 +94,7 @@ function reload(addCachebuster, force = false)
                             outStringBin.set(base64data);
                             isLoading.set(false);
                             outTrigger.trigger();
+                            op.patch.loading.finished(loadingId);
                         };
                         reader.readAsDataURL(b);
                     }
@@ -101,10 +102,9 @@ function reload(addCachebuster, force = false)
                     {
                         isLoading.set(false);
                         outTrigger.trigger();
+                        op.patch.loading.finished(loadingId);
                     }
                 });
-
-                op.patch.loading.finished(loadingId);
             });
         }
         else
@@ -129,18 +129,18 @@ function reload(addCachebuster, force = false)
 
                         outString.set(_data);
                         op.uiAttr({ "error": null });
-                        op.patch.loading.finished(loadingId);
                         outTrigger.trigger();
                         isLoading.set(false);
+                        op.patch.loading.finished(loadingId);
                     }
                     catch (e)
                     {
                         op.logError(e);
                         op.setUiError("jsonerr", "Problem while loading json:<br/>" + e, 1);
-                        op.patch.loading.finished(loadingId);
                         isLoading.set(false);
                         outData.setRef(null);
                         outString.set("");
+                        op.patch.loading.finished(loadingId);
                     }
                 },
                 inMethod.get(),

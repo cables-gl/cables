@@ -1,8 +1,14 @@
 const
     update = op.inTrigger("Update"),
     active = op.inBool("Active", true),
+    inReset = op.inTrigger("Reset"),
     next = op.outTrigger("Next"),
     outArr = op.outArray("Result");
+
+inReset.onTriggered = () =>
+{
+    outArr.setRef([]);
+};
 
 update.onTriggered = () =>
 {

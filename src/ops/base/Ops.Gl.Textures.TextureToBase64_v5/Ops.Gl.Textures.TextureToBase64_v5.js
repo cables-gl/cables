@@ -17,6 +17,7 @@ const canvas = document.createElement("canvas");
 
 let fb = null;
 let texChanged = false;
+let loadingId = null;
 outString.ignoreValueSerialize = true;
 
 let pixelReader = new CGL.PixelReader();
@@ -40,6 +41,10 @@ function retrySoon()
 {
     if (texChanged)
     {
+        if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
+
+        loadingId = cgl.patch.loading.start(op.name, CABLES.uuid(), op);
+
         outLoading.set(true);
         op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
     }
@@ -105,6 +110,7 @@ function update()
         outLoading.set(false);
         finished.trigger();
         texChanged = false;
+        loadingId = cgl.patch.loading.finished(loadingId);
     });
 
     if (retry) setTimeout(retrySoon.bind(this), 50);
