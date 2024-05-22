@@ -3,7 +3,8 @@ const
     inStr = op.inString("Base64 String", ""),
     inExec = op.inTriggerButton("Upload"),
     outResult = op.outString("Result"),
-    outError = op.outBoolNum("Error");
+    outError = op.outBoolNum("Error"),
+    outFinished = op.outTrigger("Finished");
 
 inExec.onTriggered = () =>
 {
@@ -22,5 +23,13 @@ inExec.onTriggered = () =>
                 outResult.set(err.msg);
                 outError.set(true);
             }
+
+            // if (CABLESUILOADER && CABLESUILOADER.talkerAPI)
+            // {
+            //     CABLESUILOADER.talkerAPI.emitEvent("fileUpdated", { "filename": inFilename.get() });
+            //     console.log("send file updated event");
+            // }
+
+            outFinished.trigger();
         });
 };

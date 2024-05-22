@@ -7,12 +7,6 @@
             "message": "op created",
             "type": "new op",
             "author": "kikohs",
-            "date": 1715855909274
-        },
-        {
-            "message": "moved to core op",
-            "type": "improvement",
-            "author": "stephan",
             "date": 1715940758357
         }
     ],

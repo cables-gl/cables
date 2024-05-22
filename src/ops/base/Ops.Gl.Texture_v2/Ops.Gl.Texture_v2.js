@@ -10,6 +10,7 @@ const
     inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
     addCacheBust = op.inBool("Add Cachebuster", false),
+    inReload = op.inTriggerButton("Reload"),
     width = op.outNumber("Width"),
     height = op.outNumber("Height"),
     ratio = op.outNumber("Aspect Ratio"),
@@ -42,6 +43,8 @@ tfilter.set("mipmap");
 wrap.set("repeat");
 
 textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+
+inReload.onTriggered = reloadSoon;
 
 active.onChange = function ()
 {
@@ -96,7 +99,7 @@ function realReload(nocache)
 
     let url = op.patch.getFilePath(String(filename.get()));
 
-    if ((addCacheBust.get() || nocache) && CABLES.UI)url = CABLES.cacheBust(url);
+    if (addCacheBust.get() || nocache) url = CABLES.cacheBust(url);
 
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 

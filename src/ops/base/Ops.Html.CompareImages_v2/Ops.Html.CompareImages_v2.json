@@ -1,0 +1,67 @@
+{
+    "id": "dea4e0a3-75e2-4470-9883-2d2e13918515",
+    "created": 1716307154631,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1710763211794
+        },
+        {
+            "message": "Trigger to start comparing images",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1716310355994
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Image 1"
+            },
+            {
+                "type": 5,
+                "name": "Image 2"
+            },
+            {
+                "type": 1,
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Difference Image"
+            },
+            {
+                "type": 0,
+                "name": "Mismatch Percentage",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Same Dimensions",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Resemble Data"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ]
+    },
+    "libs": [
+        "resemble.js"
+    ],
+    "summary": "compares two images and shows the difference as a pink color",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}

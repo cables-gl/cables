@@ -32,6 +32,8 @@ function addStyle(_doc)
 
     if (loadingId)loadingId = op.patch.cgl.patch.loading.finished(loadingId);
 
+    op.setUiError("loadingerror", null);
+
     if (filename.get() && fontname.get())
     {
         if (doc.fonts)

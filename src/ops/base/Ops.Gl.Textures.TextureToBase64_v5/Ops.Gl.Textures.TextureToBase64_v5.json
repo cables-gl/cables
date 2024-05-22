@@ -1,0 +1,109 @@
+{
+    "authorName": "pandur",
+    "created": 1716364260179,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "values": [
+                    "PNG",
+                    "JPEG",
+                    "WEBP"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Quality",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Output dataUrl",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Binary Size",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Base64 string"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ]
+    },
+    "summary": "Converts a texture into a base-64 image string",
+    "docs": {
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "Input texture to be converted"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger to do the conversion, put this behind a TriggerLimiter or TriggerOnce"
+            },
+            {
+                "name": "Use JPEG",
+                "text": "Default is a PNG lossless image, this toggle asks explicitly for a JPEG"
+            },
+            {
+                "name": "Output dataUrl",
+                "text": "Choose whether to export a string that is only a Base64, or already as a DataUrl"
+            },
+            {
+                "name": "Base64 string",
+                "text": "The string conversion of the texture"
+            },
+            {
+                "name": "Loading",
+                "text": "Gives you the status of the conversion and whether it has finished"
+            }
+        ]
+    },
+    "id": "ed772bc0-ab12-427e-8378-64ea4f7635ed",
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Added Binary size output number",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712067811631
+        },
+        {
+            "message": "Update only after texture has changed",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716367870706
+        }
+    ],
+    "coreLibs": [
+        "cgl_pixelreader"
+    ]
+}

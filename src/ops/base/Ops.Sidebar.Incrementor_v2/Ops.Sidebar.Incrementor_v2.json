@@ -37,6 +37,11 @@
                 "name": "Values"
             },
             {
+                "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "Set Default"
             }
@@ -108,6 +113,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1712755375009
+        },
+        {
+            "message": "Added toggle to greyout ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716369292696
         }
     ],
     "exampleProjectId": "DLV0n6"

@@ -40,6 +40,10 @@
                 "type": 0,
                 "name": "Error",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
             }
         ]
     },
