@@ -17,12 +17,12 @@ function update()
 
     if (outerOp)
     {
-        console.log(outerOp);
+        // console.log(outerOp);
         outName.set(outerOp.objName);
         // outName.set(outerOp.shortName);
     }
     else
     {
-        console.log("no outerOP?!");
+        // console.log("no outerOP?!");
     }
 }
