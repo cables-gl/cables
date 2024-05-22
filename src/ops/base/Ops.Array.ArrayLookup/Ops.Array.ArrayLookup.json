@@ -1,0 +1,36 @@
+{
+    "id": "45800d01-7c07-41b8-b392-a3924d256549",
+    "created": 1716371614685,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716371614725
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Indices"
+            },
+            {
+                "type": 3,
+                "name": "Values"
+            },
+            {
+                "type": 0,
+                "name": "Stride",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    }
+}
