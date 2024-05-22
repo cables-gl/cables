@@ -95,7 +95,7 @@ function realReload(nocache)
     if (!active.get()) return;
     if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
 
-    loadingId = cgl.patch.loading.start("textureOp", filename.get(), op);
+    loadingId = cgl.patch.loading.start(op.objName, filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
 

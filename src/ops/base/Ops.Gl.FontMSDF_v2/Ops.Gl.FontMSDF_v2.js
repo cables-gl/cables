@@ -140,29 +140,28 @@ function load()
 
         if (!texPort.get()) continue;
 
-        const loadingIdTex = cgl.patch.loading.start("textureOp", texPort.get(), op);
+        const loadingIdTex = cgl.patch.loading.start(op.objName, texPort.get(), op);
         const urlTexstr = op.patch.getFilePath(String(texPort.get()));
 
-        CGL.Texture.load(cgl, urlTexstr,
-            function (err, tex)
+        CGL.Texture.load(cgl, urlTexstr, function (err, tex)
+        {
+            if (err)
             {
-                if (err)
-                {
-                    op.setUiError("texurlerror", "could not load texture");
-                    cgl.patch.loading.finished(loadingIdTex);
-                    loadedTex = false;
-                    return;
-                }
-                textures[num] = tex;
-                op.patch.setVarValue(varNameTex, null);
-                op.patch.setVarValue(varNameTex, textures);
-
-                loadedTex = true;
+                op.setUiError("texurlerror", "could not load texture");
                 cgl.patch.loading.finished(loadingIdTex);
-                updateLoaded();
-            }, {
-                "filter": CGL.Texture.FILTER_LINEAR,
-                "flip": false
-            });
+                loadedTex = false;
+                return;
+            }
+            textures[num] = tex;
+            op.patch.setVarValue(varNameTex, null);
+            op.patch.setVarValue(varNameTex, textures);
+
+            loadedTex = true;
+            cgl.patch.loading.finished(loadingIdTex);
+            updateLoaded();
+        }, {
+            "filter": CGL.Texture.FILTER_LINEAR,
+            "flip": false
+        });
     }
 }

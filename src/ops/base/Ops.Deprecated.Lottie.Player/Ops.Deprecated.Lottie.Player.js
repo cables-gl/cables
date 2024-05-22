@@ -188,7 +188,7 @@ function reload(force)
         }
     };
     cgl.patch.loading.finished(loadingId);
-    loadingId = cgl.patch.loading.start("textureOp", filename.get());
+    loadingId = cgl.patch.loading.start(op.objName, filename.get());
 
     anim = bodymovin.loadAnimation(animData);
     anim.addEventListener("DOMLoaded", () =>
