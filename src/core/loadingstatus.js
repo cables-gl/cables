@@ -139,6 +139,7 @@ LoadingStatus.prototype.finished = function (id)
 
     this.checkStatus();
     this.emitEvent("finishedTask");
+    return null;
 };
 
 LoadingStatus.prototype._startAssetTasks = function ()
@@ -185,6 +186,9 @@ LoadingStatus.prototype.start = function (type, name, op)
 {
     if (this._startTime == 0) this._startTime = Date.now();
     const id = generateUUID();
+
+    if (name.length > 30)name = name.substring(0, 30);
+
 
     if (op)op.setUiAttribs({ "loading": true });
 
