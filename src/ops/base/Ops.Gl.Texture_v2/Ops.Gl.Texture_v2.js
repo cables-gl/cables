@@ -125,8 +125,7 @@ function realReload(nocache)
 
                 if (filename.get() != fileToLoad)
                 {
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
+                    loadingId = cgl.patch.loading.finished(loadingId);
                     return;
                 }
 
@@ -138,8 +137,7 @@ function realReload(nocache)
                     textureOut.setRef(t);
 
                     op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
+                    loadingId = cgl.patch.loading.finished(loadingId);
                     return;
                 }
 
@@ -163,8 +161,7 @@ function realReload(nocache)
 
                 if (loadingId)
                 {
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
+                    loadingId = cgl.patch.loading.finished(loadingId);
                 }
                 op.checkMainloopExists();
             }, {
@@ -181,9 +178,8 @@ function realReload(nocache)
     }
     else
     {
-        loadingId = null;
         setTempTexture();
-        cgl.patch.loading.finished(loadingId);
+        loadingId = cgl.patch.loading.finished(loadingId);
     }
 }
 
