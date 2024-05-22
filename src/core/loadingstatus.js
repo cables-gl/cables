@@ -185,6 +185,7 @@ LoadingStatus.prototype.start = function (type, name, op)
     if (this._startTime == 0) this._startTime = Date.now();
     const id = generateUUID();
 
+    name = name || "unknown";
     if (name.length > 100)name = name.substring(0, 100);
 
 
