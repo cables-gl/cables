@@ -32,7 +32,6 @@ label.addEventListener("dblclick", function ()
 {
     outValue.set(inDefault.get());
     outChanged.trigger();
-    outChanged.trigger();
 });
 
 inTriggerInc.onTriggered = onNext;
@@ -202,8 +201,6 @@ function onPrev()
     }
     valueText.textContent = value;
     outValue.set(value);
-    outChanged.trigger();
-    outChanged.trigger();
     outChanged.trigger();
 }
 

@@ -76,7 +76,7 @@ function reloadSoon(nocache)
     timedLoader = setTimeout(function ()
     {
         realReload(nocache);
-    }, 30);
+    }, 1);
 }
 
 function getPixelFormat()
