@@ -29,6 +29,7 @@ inUseTexAlpha.onChange =
     inBlend.onChange =
     inDiscard.onChange =
     inWorldSpace.onChange =
+    inTex.onLinkChanged =
     inMethod.onChange = updateDefines;
 
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
