@@ -11,7 +11,7 @@
           "x": 1076.379993338775,
           "y": 2584.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -72,7 +72,7 @@
           "y": 2704.535719083833
         },
         "comment": "geometry taken from GLTF scene",
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "extendTitle": "Node",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -135,7 +135,7 @@
           "y": 2704.535719083833
         },
         "comment": null,
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -180,7 +180,7 @@
           "x": 1724.379993338775,
           "y": 2644.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -291,7 +291,7 @@
           "x": 1280.379993338775,
           "y": 3064.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -332,7 +332,7 @@
           "x": 1280.379993338775,
           "y": 3144.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -396,7 +396,7 @@
           "x": 2180.379993338775,
           "y": 2744.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -485,7 +485,7 @@
           "x": 1856.379993338775,
           "y": 2904.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -578,7 +578,7 @@
           "x": 1856.379993338775,
           "y": 3224.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -602,11 +602,11 @@
       "id": "p4rm7afns",
       "uiAttribs": {
         "translate": {
-          "x": 1784.379993338775,
-          "y": 3544.535719083833
+          "x": 1856.379993338775,
+          "y": 3532.556433949571
         },
         "comment": "you can plug any texture into here\nbut as you see in the VizTexture on the left,\nit would be tough to draw meaningful shapes\nwithout proper conversion",
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -653,7 +653,7 @@
           "x": 1100.379993338775,
           "y": 2764.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -756,7 +756,7 @@
         },
         "accBuffersDelete": "head",
         "loading": false,
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "extendTitle": "head",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -895,7 +895,7 @@
           "x": 1280.379993338775,
           "y": 2944.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1017,7 +1017,7 @@
           "x": 1856.379993338775,
           "y": 3024.535719083833
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1099,10 +1099,10 @@
       "id": "z3mzq2d7d",
       "uiAttribs": {
         "translate": {
-          "x": 1784.379993338775,
-          "y": 3364.535719083833
+          "x": 1856.379993338775,
+          "y": 3352.556433949571
         },
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1114,7 +1114,7 @@
         },
         {
           "name": "Size in Pixels",
-          "value": 1
+          "value": 0
         },
         {
           "name": "Random Size",
@@ -1122,11 +1122,11 @@
         },
         {
           "name": "Round",
-          "value": 1
+          "value": true
         },
         {
           "name": "Round Antialias",
-          "value": 0
+          "value": true
         },
         {
           "name": "Scale by Distance",
@@ -1223,7 +1223,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qtvzeoxx6",
       "uiAttribs": {
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "translate": {
           "x": 1171.3435105283638,
           "y": 2385.6363659592243
@@ -1251,7 +1251,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "p9vmm0mmn",
       "uiAttribs": {
-        "subPatch": "d01ujb3x9",
+        "subPatch": "brv3egvi7",
         "translate": {
           "x": 1171.3435105283638,
           "y": 3624.535719083833
