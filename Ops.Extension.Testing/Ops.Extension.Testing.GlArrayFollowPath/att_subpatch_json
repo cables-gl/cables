@@ -9,7 +9,7 @@
           "x": 1148.8222128934372,
           "y": 2855.1148616023356
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -55,7 +55,7 @@
           "x": 1231.69939749905,
           "y": 2635.553713991364
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -92,7 +92,7 @@
           "x": 1014.05088445418,
           "y": 2088.2014915186674
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -155,7 +155,7 @@
           "x": 1148.8222128934372,
           "y": 2388.182653669567
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -207,7 +207,7 @@
           "x": 722.4433095498733,
           "y": 2313.3242646884473
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -297,10 +297,10 @@
       "id": "hqzn4ffj2",
       "uiAttribs": {
         "translate": {
-          "x": 830.4433095498733,
-          "y": 2393.3242646884473
+          "x": 936,
+          "y": 2446.6858451066873
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -353,7 +353,7 @@
           "x": 722.4433095498733,
           "y": 2650.95202263697
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -395,7 +395,7 @@
           "x": 1231.69939749905,
           "y": 2575.553713991364
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -488,7 +488,7 @@
           "x": 936,
           "y": 2580
         },
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -531,7 +531,7 @@
       "opId": "b67027f5-8f56-4aa0-8bb3-18d42ff15ffe",
       "id": "agu8yyqhd",
       "uiAttribs": {
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "translate": {
           "x": 1148.8222128934372,
           "y": 2979.0983362540683
@@ -567,7 +567,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "dmsbul8ew",
       "uiAttribs": {
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "translate": {
           "x": 1001.9532102519029,
           "y": 1703.2816434655847
@@ -595,7 +595,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "bpr2mq1t3",
       "uiAttribs": {
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "translate": {
           "x": 1001.9532102519029,
           "y": 3059.0983362540683
@@ -609,7 +609,7 @@
       "opId": "c1dd6e76-61b4-471a-b8d1-f550a5a9a4f4",
       "id": "ppxdbgpbz",
       "uiAttribs": {
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "translate": {
           "x": 1008,
           "y": 1920
@@ -708,33 +708,34 @@
       "id": "kjvktpv5x",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "translate": {
           "x": 1275.3337256079017,
           "y": 2145.22967407962
         },
-        "extendTitle": "#currentTestName"
+        "extendTitle": "#currentTestName",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
           "value": "currentTestName"
         }
-      ],
-      "storage": {
-        "ref": "kjvktpv5x"
-      }
+      ]
     },
     {
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "2naooeiil",
       "uiAttribs": {
-        "subPatch": "oc183ygon",
+        "subPatch": "ex199i8e2",
         "translate": {
           "x": 1287.3337256079017,
           "y": 2050.045081272529
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Name",
@@ -747,10 +748,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "2naooeiil"
-      }
+      ]
     }
   ]
 }
