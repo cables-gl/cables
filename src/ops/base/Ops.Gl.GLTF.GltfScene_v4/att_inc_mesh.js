@@ -342,9 +342,9 @@ let gltfMesh = class
             }
 
             this.mesh = op.patch.cg.createMesh(g, { "glPrimitive": glprim });
-            // this.mesh = new CGL.Mesh(cgl, g, glprim);
         }
-        else
+
+        if (this.mesh)
         {
             // update morphTargets
             if (this.geom && this.geom.morphTargets.length && !this.morphTargetsRenderMod)

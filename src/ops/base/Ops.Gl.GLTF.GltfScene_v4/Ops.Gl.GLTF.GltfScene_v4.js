@@ -209,7 +209,7 @@ inExec.onTriggered = function ()
                 gltf.bounds.render(cgl, null, op);
                 cgl.popShader();
             }
-
+            console.log("lala yes", finishedLoading);
             if (inRender.get())
             {
                 for (let i = 0; i < gltf.nodes.length; i++)
