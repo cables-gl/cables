@@ -54,7 +54,7 @@ function reloadSoon(nocache)
 
 function realReload(nocache)
 {
-    if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get(), op);
+    if (!loadingId)loadingId = cgl.patch.loading.start(op.objName, filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
     if (nocache)url += "?rnd=" + CABLES.generateUUID();
@@ -64,49 +64,48 @@ function realReload(nocache)
         loading.set(true);
 
         if (tex)tex.delete();
-        tex = CGL.Texture.load(cgl, url,
-            function (err)
+        tex = CGL.Texture.load(cgl, url, function (err)
+        {
+            if (err)
             {
-                if (err)
-                {
-                    setTempTexture();
-                    op.setUiError("errorload", "could not load texture \"" + filename.get() + "\"", 2);
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
-                    return;
-                }
-                else op.setUiError("errorload", null);
-                // op.uiAttr({'error':null});
-                textureOut.set(tex);
-                width.set(tex.width);
-                height.set(tex.height);
-                ratio.set(tex.width / tex.height);
+                setTempTexture();
+                op.setUiError("errorload", "could not load texture \"" + filename.get() + "\"", 2);
+                cgl.patch.loading.finished(loadingId);
+                loadingId = null;
+                return;
+            }
+            else op.setUiError("errorload", null);
+            // op.uiAttr({'error':null});
+            textureOut.set(tex);
+            width.set(tex.width);
+            height.set(tex.height);
+            ratio.set(tex.width / tex.height);
 
-                if (!tex.isPowerOfTwo())
-                    op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering will not work.", 0);
+            if (!tex.isPowerOfTwo())
+                op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering will not work.", 0);
                 // op.uiAttr(
                 //     {
                 //         hint:'texture dimensions not power of two! - texture filtering will not work.',
                 //         warning:null
                 //     });
-                else
-                    op.setUiError("hintnpot", null);
-                    // op.uiAttr(
-                    //     {
-                    //         hint:null,
-                    //         warning:null
-                    //     });
+            else
+                op.setUiError("hintnpot", null);
+            // op.uiAttr(
+            //     {
+            //         hint:null,
+            //         warning:null
+            //     });
 
-                textureOut.set(null);
-                textureOut.set(tex);
-                // tex.printInfo();
-            }, {
-                "anisotropic": cgl_aniso,
-                "wrap": cgl_wrap,
-                "flip": flip.get(),
-                "unpackAlpha": unpackAlpha.get(),
-                "filter": cgl_filter
-            });
+            textureOut.set(null);
+            textureOut.set(tex);
+            // tex.printInfo();
+        }, {
+            "anisotropic": cgl_aniso,
+            "wrap": cgl_wrap,
+            "flip": flip.get(),
+            "unpackAlpha": unpackAlpha.get(),
+            "filter": cgl_filter
+        });
 
         textureOut.set(null);
         textureOut.set(tex);

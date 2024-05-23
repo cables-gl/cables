@@ -10,6 +10,7 @@ const
     inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
     addCacheBust = op.inBool("Add Cachebuster", false),
+    inReload = op.inTriggerButton("Reload"),
     width = op.outNumber("Width"),
     height = op.outNumber("Height"),
     ratio = op.outNumber("Aspect Ratio"),
@@ -42,6 +43,8 @@ tfilter.set("mipmap");
 wrap.set("repeat");
 
 textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+
+inReload.onTriggered = reloadSoon;
 
 active.onChange = function ()
 {
@@ -92,11 +95,11 @@ function realReload(nocache)
     if (!active.get()) return;
     if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
 
-    loadingId = cgl.patch.loading.start("textureOp", filename.get(), op);
+    loadingId = cgl.patch.loading.start(op.objName, filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
 
-    if ((addCacheBust.get() || nocache) && CABLES.UI)url = CABLES.cacheBust(url);
+    if (addCacheBust.get() || nocache) url = CABLES.cacheBust(url);
 
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
@@ -122,8 +125,7 @@ function realReload(nocache)
 
                 if (filename.get() != fileToLoad)
                 {
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
+                    loadingId = cgl.patch.loading.finished(loadingId);
                     return;
                 }
 
@@ -135,8 +137,7 @@ function realReload(nocache)
                     textureOut.setRef(t);
 
                     op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
+                    loadingId = cgl.patch.loading.finished(loadingId);
                     return;
                 }
 
@@ -160,8 +161,7 @@ function realReload(nocache)
 
                 if (loadingId)
                 {
-                    cgl.patch.loading.finished(loadingId);
-                    loadingId = null;
+                    loadingId = cgl.patch.loading.finished(loadingId);
                 }
                 op.checkMainloopExists();
             }, {
@@ -178,9 +178,8 @@ function realReload(nocache)
     }
     else
     {
-        cgl.patch.loading.finished(loadingId);
-        loadingId = null;
         setTempTexture();
+        loadingId = cgl.patch.loading.finished(loadingId);
     }
 }
 

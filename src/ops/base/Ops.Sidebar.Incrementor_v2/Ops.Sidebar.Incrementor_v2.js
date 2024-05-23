@@ -1,21 +1,26 @@
-// inputs
-const parentPort = op.inObject("link");
-const labelPort = op.inString("Label", "Incrementor");
-const inMin = op.inValue("min", 0);
-const inMax = op.inValue("max", 10);
-const inStepsize = op.inValue("stepsize", 1);
-const inDefault = op.inValue("Default", 0);
-const inValues = op.inArray("Values");
-const inSetDefault = op.inTriggerButton("Set Default");
+const
+    parentPort = op.inObject("link"),
+    labelPort = op.inString("Label", "Incrementor"),
+    inMin = op.inValue("min", 0),
+    inMax = op.inValue("max", 10),
+    inStepsize = op.inValue("stepsize", 1),
+    inDefault = op.inValue("Default", 0),
+    inValues = op.inArray("Values"),
+    inGreyOut = op.inBool("Grey Out", false),
+    inTriggerInc = op.inTriggerButton("Increment"),
+    inTriggerDec = op.inTriggerButton("Decrement"),
+
+    inSetDefault = op.inTriggerButton("Set Default"),
+    inReset = op.inTriggerButton("Reset"),
+
+    siblingsPort = op.outObject("childs"),
+    outValue = op.outNumber("value"),
+    outChanged = op.outTrigger("Changed");
+
 inSetDefault.onTriggered = setDefaultValue;
-
-// outputs
-const siblingsPort = op.outObject("childs");
-const outValue = op.outNumber("value");
-const outChanged = op.outTrigger("Changed");
-
-// vars
 let currentPosition = 0;
+
+op.setPortGroup("Trigger", [inTriggerDec, inTriggerInc]);
 
 const containerEl = document.createElement("div");
 containerEl.dataset.op = op.id;
@@ -26,7 +31,13 @@ label.classList.add("sidebar__item-label");
 label.addEventListener("dblclick", function ()
 {
     outValue.set(inDefault.get());
+    outChanged.trigger();
+    outChanged.trigger();
 });
+
+inTriggerInc.onTriggered = onNext;
+inTriggerDec.onTriggered = onPrev;
+
 const labelTextEl = document.createTextNode(labelPort.get());
 label.appendChild(labelTextEl);
 containerEl.appendChild(label);
@@ -46,11 +57,6 @@ if (Array.isArray(inValues.get()))
 
 valueEl.appendChild(valueText);
 innerContainer.appendChild(valueEl);
-
-outValue.onChange = () =>
-{
-    outChanged.trigger();
-};
 
 // previous
 const prevEl = document.createElement("span");
@@ -79,6 +85,11 @@ nextInput.appendChild(nextText);
 innerContainer.appendChild(nextEl);
 containerEl.appendChild(innerContainer);
 
+const greyOut = document.createElement("div");
+greyOut.classList.add("sidebar__greyout");
+containerEl.appendChild(greyOut);
+greyOut.style.display = "none";
+
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
 function setDefaultValue()
@@ -93,6 +104,11 @@ inValues.onChange = onValueChange;
 labelPort.onChange = onLabelTextChanged;
 op.onDelete = onDelete;
 
+inGreyOut.onChange = function ()
+{
+    greyOut.style.display = inGreyOut.get() ? "block" : "none";
+};
+
 op.onLoaded = op.onInit = function ()
 {
     if (Array.isArray(inValues.get()))
@@ -103,7 +119,15 @@ op.onLoaded = op.onInit = function ()
     {
         outValue.set(inDefault.get());
         valueText.textContent = inDefault.get();
+        outChanged.trigger();
     }
+};
+
+inReset.onTriggered = () =>
+{
+    outValue.set(inDefault.get());
+    outChanged.trigger();
+    valueText.textContent = inDefault.get();
 };
 
 function onValueChange()
@@ -129,6 +153,7 @@ function onValueChange()
         inDefault.setUiAttribs({ "greyout": false });
     }
     outValue.set(value);
+    outChanged.trigger();
     valueText.textContent = value;
 }
 
@@ -153,6 +178,7 @@ function onNext()
     }
     valueText.textContent = value;
     outValue.set(value);
+    outChanged.trigger();
 }
 
 function onPrev()
@@ -176,6 +202,9 @@ function onPrev()
     }
     valueText.textContent = value;
     outValue.set(value);
+    outChanged.trigger();
+    outChanged.trigger();
+    outChanged.trigger();
 }
 
 function onParentChanged()

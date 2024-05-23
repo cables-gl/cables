@@ -1,10 +1,11 @@
 const
-    inTex = op.inTexture("Texture"),
     start = op.inTriggerButton("Trigger"),
+    inTex = op.inTexture("Texture"),
     inFormat = op.inSwitch("Format", ["PNG", "JPEG", "WEBP"], "PNG"),
     inQuality = op.inFloatSlider("Quality", 0.9),
 
     dataUrl = op.inBool("Output dataUrl", true),
+    next = op.outTrigger("next"),
     outSize = op.outNumber("Binary Size"),
     outString = op.outString("Base64 string"),
     outLoading = op.outBoolNum("Loading"),
@@ -15,6 +16,8 @@ const gl = op.patch.cgl.gl;
 const canvas = document.createElement("canvas");
 
 let fb = null;
+let texChanged = false;
+let loadingId = null;
 outString.ignoreValueSerialize = true;
 
 let pixelReader = new CGL.PixelReader();
@@ -24,6 +27,11 @@ inFormat.onChange = updateUi;
 
 updateUi();
 
+inTex.onChange = () =>
+{
+    texChanged = true;
+};
+
 function updateUi()
 {
     inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
@@ -31,14 +39,23 @@ function updateUi()
 
 function retrySoon()
 {
-    op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
+    if (texChanged)
+    {
+        if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
+
+        loadingId = cgl.patch.loading.start(op.name, CABLES.uuid(), op);
+
+        outLoading.set(true);
+        op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
+    }
+
+    next.trigger();
 }
 
 function update()
 {
     op.uiAttr({ "error": null });
     if (!inTex.get() || !inTex.get().tex) return;
-    outLoading.set(true);
 
     const width = inTex.get().width;
     const height = inTex.get().height;
@@ -54,7 +71,7 @@ function update()
 
     if (!canRead)
     {
-        outLoading.set(true);
+        outLoading.set(false);
         op.uiAttr({ "error": "cannot read texture!" });
         return;
     }
@@ -92,6 +109,8 @@ function update()
 
         outLoading.set(false);
         finished.trigger();
+        texChanged = false;
+        loadingId = cgl.patch.loading.finished(loadingId);
     });
 
     if (retry) setTimeout(retrySoon.bind(this), 50);

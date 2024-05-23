@@ -20,14 +20,16 @@ document.body.classList.add("cables-loading");
 
 let loadingId = cgl.patch.loading.start("loadingStatusInit", "loadingStatusInit", op);
 
-exe.onTriggered = () =>
+op.patch.loading.on("finishedTask", updateStatus.bind(this));
+op.patch.loading.on("startTask", updateStatus.bind(this));
+
+function updateStatus()
 {
     const jobs = op.patch.loading.getListJobs();
     outProgress.set(patch.loading.getProgress());
 
     let hasFinished = jobs.length === 0;
     const notFinished = !hasFinished;
-    // outLoading.set(!hasFinished);
 
     if (notFinished)
     {
@@ -71,7 +73,13 @@ exe.onTriggered = () =>
     if (outLoading.get() && hasFinished) loadingFinished.trigger();
 
     outLoading.set(notFinished);
+
     op.setUiAttribs({ "loading": notFinished });
+}
+
+exe.onTriggered = () =>
+{
+    updateStatus();
 
     next.trigger();
 

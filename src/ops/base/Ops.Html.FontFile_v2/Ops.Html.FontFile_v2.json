@@ -12,22 +12,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "file"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "family"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loaded",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Loaded Trigger"
             }
         ]

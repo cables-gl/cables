@@ -67,6 +67,10 @@
                 "type": 0,
                 "name": "Add Cachebuster",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reload"
             }
         ],
         "portsOut": [

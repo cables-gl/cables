@@ -405,6 +405,7 @@ String.prototype.contains = String.prototype.contains || function (searchStr)
  */
 export const cacheBust = function (url)
 {
+    if (url.startsWith("data:")) return;
     if (url.contains("?")) url += "&";
     else url += "?";
     return url + "cache=" + CABLES.uuid();

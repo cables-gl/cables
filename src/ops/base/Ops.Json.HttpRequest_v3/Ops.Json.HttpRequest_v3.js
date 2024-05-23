@@ -3,7 +3,7 @@ const filename = op.inUrl("file"),
     inBody = op.inStringEditor("body", ""),
     inMethod = op.inDropDown("HTTP Method", ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "CONNECT", "OPTIONS", "TRACE"], "GET"),
     inContentType = op.inString("Content-Type", "application/json"),
-    inContent = op.inSwitch("Content", ["JSON", "String", "Binary"], "JSON"),
+    inContent = op.inSwitch("Content", ["JSON", "String", "Binary", "Binary Base64"], "JSON"),
     inAutoRequest = op.inBool("Auto request", true),
     inSendCredentials = op.inBool("Send Credentials", false),
     reloadTrigger = op.inTriggerButton("reload"),
@@ -77,16 +77,34 @@ function reload(addCachebuster, force = false)
 
         const options = {};
         if (inSendCredentials.get()) options.credentials = "include";
-        if (inContent.get() === "Binary")
+        if (inContent.get().contains("Binary"))
         {
             fetch(url, options).then((res) =>
             {
                 res.blob().then((b) =>
                 {
                     outStringBin.set(URL.createObjectURL(b));
-                });
 
-                op.patch.loading.finished(loadingId);
+                    if (inContent.get().contains("Base64"))
+                    {
+                        const reader = new FileReader();
+                        reader.onloadend = function ()
+                        {
+                            const base64data = reader.result;
+                            outStringBin.set(base64data);
+                            isLoading.set(false);
+                            outTrigger.trigger();
+                            op.patch.loading.finished(loadingId);
+                        };
+                        reader.readAsDataURL(b);
+                    }
+                    else
+                    {
+                        isLoading.set(false);
+                        outTrigger.trigger();
+                        op.patch.loading.finished(loadingId);
+                    }
+                });
             });
         }
         else
@@ -111,18 +129,18 @@ function reload(addCachebuster, force = false)
 
                         outString.set(_data);
                         op.uiAttr({ "error": null });
-                        op.patch.loading.finished(loadingId);
                         outTrigger.trigger();
                         isLoading.set(false);
+                        op.patch.loading.finished(loadingId);
                     }
                     catch (e)
                     {
                         op.logError(e);
                         op.setUiError("jsonerr", "Problem while loading json:<br/>" + e, 1);
-                        op.patch.loading.finished(loadingId);
                         isLoading.set(false);
                         outData.setRef(null);
                         outString.set("");
+                        op.patch.loading.finished(loadingId);
                     }
                 },
                 inMethod.get(),

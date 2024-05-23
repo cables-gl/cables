@@ -20,6 +20,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1715676253233
+        },
+        {
+            "message": "Add option to output binary base64 string",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1716367825905
+        },
+        {
+            "message": "Fixed loading status for binary requests",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716367838991
         }
     ],
     "layout": {
@@ -52,7 +64,8 @@
                 "values": [
                     "JSON",
                     "String",
-                    "Binary"
+                    "Binary",
+                    "Binary Base64"
                 ],
                 "subType": "integer"
             },

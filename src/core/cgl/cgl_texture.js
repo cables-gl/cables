@@ -723,14 +723,14 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 {
     if (!url) return finishedCallback({ "error": true });
     let loadingId = null;
-    if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("texture", url);
+    if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url);
 
     const texture = new Texture(cgl);
     texture.name = url;
 
     // texture.pixelFormat = Texture.PFORMATSTR_;
 
-    if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture " + CABLES.basename(url) });
+    // if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture " + CABLES.basename(url) });
 
     texture.image = new Image();
     texture.image.crossOrigin = "anonymous";
@@ -750,7 +750,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         if (loadingId) cgl.patch.loading.finished(loadingId);
         const error = { "error": true };
         if (finishedCallback) finishedCallback(error, texture);
-        if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
+        // if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
     };
 
     texture.image.onload = function (e)
@@ -760,7 +760,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
             texture.initTexture(texture.image);
             if (loadingId) cgl.patch.loading.finished(loadingId);
             texture.loading = false;
-            if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
+            // if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
             if (finishedCallback) finishedCallback(null, texture);
         });

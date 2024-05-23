@@ -139,6 +139,7 @@ LoadingStatus.prototype.finished = function (id)
 
     this.checkStatus();
     this.emitEvent("finishedTask");
+    return null;
 };
 
 LoadingStatus.prototype._startAssetTasks = function ()
@@ -175,9 +176,7 @@ LoadingStatus.prototype.existByName = function (name)
     for (let i in this._loadingAssets)
     {
         if (this._loadingAssets[i].name == name && !this._loadingAssets[i].finished)
-        {
             return true;
-        }
     }
 };
 
@@ -185,6 +184,10 @@ LoadingStatus.prototype.start = function (type, name, op)
 {
     if (this._startTime == 0) this._startTime = Date.now();
     const id = generateUUID();
+
+    name = name || "unknown";
+    if (name.length > 100)name = name.substring(0, 100);
+
 
     if (op)op.setUiAttribs({ "loading": true });
 
