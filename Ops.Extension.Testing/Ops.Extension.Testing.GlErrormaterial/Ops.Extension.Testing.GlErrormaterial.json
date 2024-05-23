@@ -1,0 +1,32 @@
+{
+    "id": "b3dfae46-687c-417c-b85d-9712111ea022",
+    "created": 1716467098863,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716467098899
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716467099532
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "mvh7lcans",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}
