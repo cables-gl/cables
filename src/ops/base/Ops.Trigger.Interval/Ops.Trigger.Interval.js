@@ -5,10 +5,11 @@ const
 
 active.onChange = function ()
 {
+    clearTimeout(timeOutId);
+    timeOutId = -1;
+
     if (!active.get())
     {
-        clearTimeout(timeOutId);
-        timeOutId = -1;
     }
     else exec();
 };

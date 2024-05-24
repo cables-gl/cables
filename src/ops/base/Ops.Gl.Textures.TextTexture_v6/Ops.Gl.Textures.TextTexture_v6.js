@@ -196,10 +196,12 @@ function getHeight()
 
 function doRender()
 {
-    if (needsRefresh)
+    let count = 0;
+    while (needsRefresh && count < 10)
     {
         reSize();
         refresh();
+        count++;
     }
 
     if (drawMesh.get())
@@ -381,24 +383,24 @@ function refresh()
         if (align.get() == "center") posx = ctx.canvas.width / 2;
         if (align.get() == "right") posx = ctx.canvas.width - paddingX;
 
-        if (texSizeMeth.get() == "Manual")posx += inLetterspacing.get();
+        if (texSizeMeth.get() == "Manual") posx += inLetterspacing.get();
 
         ctx.fillText(strings[i], posx, posy);
 
         if (dbg)
         {
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 3;
             ctx.strokeStyle = "#FF0000";
             ctx.beginPath();
             ctx.moveTo(0, posy);
-            ctx.lineTo(21000, posy);
+            ctx.lineTo(ctx.canvas.width, posy);
             ctx.stroke();
         }
 
         posy += lineHeights[i];
     }
 
-    ctx.restore();
+    // ctx.restore();
 
     let cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
@@ -414,13 +416,14 @@ function refresh()
         tex = new CGL.Texture.createFromImage(cgl, fontImage, { "filter": f, "anisotropic": parseFloat(aniso.get()), "wrap": cgl_wrap });
     }
 
+    tex.unpackAlpha = false;
     tex.flip = false;
     tex.initTexture(fontImage, f);
 
     outRatio.set(ctx.canvas.height / ctx.canvas.width);
     outLines.set(strings.length);
+
     textureOut.setRef(tex);
-    tex.unpackAlpha = false;
 }
 
 function updateUi()

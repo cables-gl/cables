@@ -15,6 +15,7 @@ const patch = op.patch;
 let finishedOnce = false;
 const preRenderTimes = [];
 let firstTime = true;
+let timeout = 0;
 
 document.body.classList.add("cables-loading");
 
@@ -73,6 +74,13 @@ function updateStatus()
     if (outLoading.get() && hasFinished) loadingFinished.trigger();
 
     outLoading.set(notFinished);
+    // clearTimeout(timeout);
+    // if (notFinished) outLoading.set(notFinished);
+    // else
+    //     timeout = setTimeout(() =>
+    //     {
+    //         outLoading.set(notFinished);
+    //     }, 100);
 
     op.setUiAttribs({ "loading": notFinished });
 }
