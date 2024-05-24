@@ -112,6 +112,7 @@ op.render.onTriggered = function ()
     if (inLookup.get())
     {
         cgl.setTexture(5, inLookup.get().tex);
+        //mod.pushTexture("MOD_lut", inLookup.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLookup.get().tex);
     }
 

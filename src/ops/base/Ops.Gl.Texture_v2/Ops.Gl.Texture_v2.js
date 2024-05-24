@@ -76,7 +76,7 @@ function reloadSoon(nocache)
     timedLoader = setTimeout(function ()
     {
         realReload(nocache);
-    }, 30);
+    }, 1);
 }
 
 function getPixelFormat()
@@ -99,7 +99,7 @@ function realReload(nocache)
 
     let url = op.patch.getFilePath(String(filename.get()));
 
-    if (addCacheBust.get() || nocache) url = CABLES.cacheBust(url);
+    if (addCacheBust.get() || nocache === true) url = CABLES.cacheBust(url);
 
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
@@ -207,6 +207,8 @@ function onWrapChange()
 
 op.onFileChanged = function (fn)
 {
+    console.log("event onfilechanged?!", fn);
+
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
         textureOut.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
@@ -214,19 +216,3 @@ op.onFileChanged = function (fn)
         realReload(true);
     }
 };
-
-// function testTexture()
-// {
-//     cgl.setTexture(0, tex.tex);
-
-//     const filter = cgl.gl.getTexParameter(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_MIN_FILTER);
-//     const wrap = cgl.gl.getTexParameter(cgl.gl.TEXTURE_2D, cgl.gl.TEXTURE_WRAP_S);
-
-//     if (cgl_filter === CGL.Texture.FILTER_MIPMAP && filter != cgl.gl.LINEAR_MIPMAP_LINEAR) console.log("wrong texture filter!", filename.get());
-//     if (cgl_filter === CGL.Texture.FILTER_NEAREST && filter != cgl.gl.NEAREST) console.log("wrong texture filter!", filename.get());
-//     if (cgl_filter === CGL.Texture.FILTER_LINEAR && filter != cgl.gl.LINEAR) console.log("wrong texture filter!", filename.get());
-
-//     if (cgl_wrap === CGL.Texture.WRAP_REPEAT && wrap != cgl.gl.REPEAT) console.log("wrong texture wrap1!", filename.get());
-//     if (cgl_wrap === CGL.Texture.WRAP_MIRRORED_REPEAT && wrap != cgl.gl.MIRRORED_REPEAT) console.log("wrong texture wrap2!", filename.get());
-//     if (cgl_wrap === CGL.Texture.WRAP_CLAMP_TO_EDGE && wrap != cgl.gl.CLAMP_TO_EDGE) console.log("wrong texture wrap3!", filename.get());
-// }

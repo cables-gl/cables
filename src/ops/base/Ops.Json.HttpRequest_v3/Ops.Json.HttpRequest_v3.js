@@ -61,7 +61,7 @@ function reload(addCachebuster, force = false)
     if (!inAutoRequest.get() && !force) return;
     if (!filename.get()) return;
 
-    const loadingId = op.patch.loading.start("jsonFile", "" + filename.get(), op);
+    const loadingId = op.patch.loading.start(op.objName, "" + filename.get(), op);
     isLoading.set(true);
 
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });

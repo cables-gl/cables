@@ -203,7 +203,8 @@
         {
             "message": "fix problems with different animation interpolation settings",
             "author": "pandur",
-            "date": 1643616693499
+            "date": 1643616693499,
+            "type": "bugfix"
         },
         {
             "message": "warn user visually when file was not found",
@@ -227,6 +228,12 @@
             "message": "cloned op from Ops.Gl.GLTF.GltfScene_v3",
             "author": "pandur",
             "date": 1689944927593
+        },
+        {
+            "message": "Fix bug: GLTF meshes were not rendering the first time it was executed",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1716457266603
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

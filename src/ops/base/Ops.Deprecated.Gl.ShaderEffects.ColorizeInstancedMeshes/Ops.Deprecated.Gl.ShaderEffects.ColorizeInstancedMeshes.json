@@ -56,13 +56,17 @@
             }
         ]
     },
-
-
     "changelog": [
         {
             "message": "code cleanup - ports",
             "author": "andro",
             "date": 1559050673784
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1716469240000
         }
     ],
     "issues": "",

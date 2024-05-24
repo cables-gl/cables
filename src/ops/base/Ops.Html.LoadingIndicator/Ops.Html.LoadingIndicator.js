@@ -18,7 +18,7 @@ div.style.width = size + "px";
 div.style.height = size + "px";
 div.style.top = "50%";
 div.style.left = "50%";
-// div.style.border="1px solid red";
+div.style["pointer-events"] = "none";
 
 div.style["margin-left"] = "-" + size / 2 + "px";
 div.style["margin-top"] = "-" + size / 2 + "px";
@@ -43,6 +43,7 @@ op.onDelete = () =>
     if (styleEle)styleEle.remove();
 };
 
+canvas.appendChild(div);
 updateStyle();
 
 function updateStyle()
@@ -77,6 +78,9 @@ function remove()
 
 function updateVisible()
 {
-    remove();
-    if (inVisible.get()) canvas.appendChild(div);
+    // remove();
+    // if (inVisible.get()) canvas.appendChild(div);
+
+    // div.style.display = inVisible.get() ? "block" : "none";
+    div.style.opacity = inVisible.get() ? 1 : 0;
 }
