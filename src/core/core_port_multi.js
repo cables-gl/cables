@@ -9,42 +9,53 @@ class MultiPort extends Port
     {
         super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
 
-        this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || MIN_NUM_PORTS;
+        console.log("uiAttribs.multiPortNum", uiAttribs, this.uiAttribs);
+
+        // this.uiAttribs.multiPortManual = uiAttribs.multiPortManual || false;
+        // this.uiAttribs.multiPortNum = uiAttribs.multiPortNum || MIN_NUM_PORTS;
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
         this.direction = dir;
 
+        console.log("uiattribs", uiAttribs);
+
         const updateArray = () =>
         {
             const arr = [];
-            for (let i = 0; i < this.ports.length - 1; i++)
+
+            let ll = 1;
+            if (this.uiAttribs.multiPortManual)ll = 0;
+
+            for (let i = 0; i < this.ports.length - ll; i++)
             {
                 arr[i] = this.ports[i];
             }
 
+
             this.setRef(arr);
         };
 
-
-
         const updateUi = () =>
         {
+            let grey = !this.uiAttribs.multiPortManual || undefined;
+
             for (let i = 0; i < this.ports.length; i++)
             {
                 let lp; // undefined to remove/not set it
-                let opacity;// undefined to remove/not set it
-                let grey;// undefined to remove/not set it
-                let addPort;
+                // let opacity;// undefined to remove/not set it
+                // let grey;// undefined to remove/not set it
+                let addPort = false;
+                let title;
                 let o = {};
 
-                if (!this.uiAttribs.editable)grey = true;
+                // if (!this.uiAttribs.multiPortManual)grey = true;
                 if (i == 0) lp = this.ports.length;
 
                 if (!this.uiAttribs.multiPortManual)
                     if (i == this.ports.length - 1)
                     {
+                        console.log("adding addport...", this.uiAttribs.multiPortManual, this);
                         addPort = true;
-                        // opacity = 0.6;
                         grey = true;
                     }
 
@@ -65,6 +76,17 @@ class MultiPort extends Port
             {
                 if (!this.ports[i]) this.ports.splice(i, 1);
             }
+
+            if (!this.uiAttribs.multiPortManual)
+            {
+                console.log("remove from auto multi port");
+                for (let i = this.ports.length - 1; i > 0; i--)
+                {
+                    if (!this.ports[i].isLinked()) this.uiAttribs.multiPortNum = i;
+                    else break;
+                }
+            }
+
             updateArray();
         };
 
@@ -95,13 +117,12 @@ class MultiPort extends Port
                 }
             }
 
-
-
-            let foundHole = true;
-
-            if (!this.uiAttribs.editable && !this.uiAttribs.multiPortManual)
+            if (!this.uiAttribs.multiPortManual)
+            {
+                let foundHole = true;
                 while (foundHole)
                 {
+                    console.log("search holes...");
                     foundHole = false;
                     for (let i = this.ports.length - 1; i > 0; i--)
                     {
@@ -118,7 +139,6 @@ class MultiPort extends Port
                             if (po && this.ports[i])
                             {
                                 console.log("move ", this.ports[i].name, "to", po.name);
-
                                 this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
                                 foundHole = true;
                                 redo = true;
@@ -126,15 +146,23 @@ class MultiPort extends Port
                             }
                         }
                     }
+
+
+                    // this.checkNum();
                 }
+
+                // this.removeInvalidPorts();
+            }
+
 
             if (this.ports.length > 2)
             {
                 let i = this.ports.length - 1;
-                if (!this.uiAttribs.editable)
+                if (!this.uiAttribs.multiPortManual)
                 {
                     if (this.ports[i].links.length == 0 && this.ports[i - 1].links.length == 0)
                     {
+                        this.ports[i].setUiAttribs({ "hidePort": true });
                         this.ports[i].remove();
                         this.ports[i] = null;
                     }
@@ -142,7 +170,7 @@ class MultiPort extends Port
             }
             this.removeInvalidPorts();
 
-            if (!this.uiAttribs.multiPortManual && this.ports[this.ports.length - 1].isLinked()) this.newPort();
+            if (!this.uiAttribs.multiPortManual && this.ports.length > 0 && this.ports[this.ports.length - 1].isLinked()) this.newPort();
 
             updateArray();
             updateUi();
@@ -181,7 +209,8 @@ class MultiPort extends Port
         this.newPort = () =>
         {
             const attrs = {};
-            if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
+            // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
+            attrs.type = type;
             const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;
@@ -207,29 +236,37 @@ class MultiPort extends Port
 
         this.checkNum = () =>
         {
-            if (MIN_NUM_PORTS != this.uiAttribs.multiPortNum) this.setUiAttribs({ "editable": true });
-
             this.uiAttribs.multiPortNum = Math.max(MIN_NUM_PORTS, this.uiAttribs.multiPortNum);
-
-
 
             while (this.ports.length < this.uiAttribs.multiPortNum) this.newPort();
             while (this.ports.length > this.uiAttribs.multiPortNum) if (this.ports[this.ports.length - 1]) this.ports.pop().remove();
-
 
             this.removeInvalidPorts();
         };
 
         this.incDec = (incDir) =>
         {
-            this.setUiAttribs({ "multiPortManual": true, "multiPortNum": this.uiAttribs.multiPortNum + incDir });
+            this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + incDir });
             this.checkNum();
-            this.setUiAttribs({ "editable": true });
+
             updateUi();
+        };
+
+        this.toggleManual = () =>
+        {
+            this.setUiAttribs({ "multiPortManual": !this.uiAttribs.multiPortManual });
+
+            this.checkNum();
+            this.countPorts();
+            updateUi();
+            this.op.refreshParams();
         };
 
         this.on("onUiAttrChange", this.checkNum.bind(this));
         this.checkNum();
+        this.countPorts();
+        this.removeInvalidPorts();
+        updateUi();
     }
 }
 

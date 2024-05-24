@@ -200,7 +200,7 @@ Port.prototype._onAnimToggle = function ()
  */
 Port.prototype.remove = function ()
 {
-    // this.setUiAttribs({hidePort:true});
+    // this.setUiAttribs({ "hidePort": true });
     this.removeLinks();
     this._op.removePort(this);
 };
@@ -414,9 +414,9 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.title) this.setUiAttribs({ "title": objPort.title });
     if (objPort.expose) this.setUiAttribs({ "expose": true });
     if (objPort.order) this.setUiAttribs({ "order": objPort.order });
-    if (objPort.multiPortNum) this.setUiAttribs({ "multiPortNum": objPort.multiPortNum });
-    if (objPort.multiPortManual) this.setUiAttribs({ "multiPortManual": objPort.multiPortManual });
 
+    if (objPort.multiPortManual) this.setUiAttribs({ "multiPortManual": objPort.multiPortManual });
+    if (objPort.multiPortNum) this.setUiAttribs({ "multiPortNum": objPort.multiPortNum });
 
     if (objPort.anim)
     {
@@ -473,6 +473,8 @@ Port.prototype.getSerialized = function ()
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.multiPortNum) obj.multiPortNum = this.uiAttribs.multiPortNum;
+    if (this.uiAttribs.multiPortManual) obj.multiPortManual = this.uiAttribs.multiPortManual;
+
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
     if (this.uiAttribs.expose)
     {
