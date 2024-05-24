@@ -1,0 +1,82 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "pandur",
+    "id": "e9cfc6a0-c764-435c-aa98-c6e8f30729d6",
+    "created": 1716471364124,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Switch Value",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Total Connections",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_0"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_1"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_2"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_3"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_4"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_5"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_6"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_7"
+            }
+        ]
+    },
+    "summary": "Triggers one of the out ports - value index switch case (was SwitchTrigger)",
+    "docs": {
+        "ports": [
+            {
+                "name": "Default Trigger",
+                "text": "This port is triggered when a Switched Value is out of range"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Trigger.SwitchTrigger renamed to Ops.Trigger.RouteTrigger",
+            "author": "pandur",
+            "date": 1567672707912
+        },
+        {
+            "message": "Added output for highest connected index",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712822422934
+        }
+    ],
+    "issues": "",
+    "caniusequery": ""
+}
