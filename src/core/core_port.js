@@ -415,6 +415,8 @@ Port.prototype.deSerializeSettings = function (objPort)
     if (objPort.expose) this.setUiAttribs({ "expose": true });
     if (objPort.order) this.setUiAttribs({ "order": objPort.order });
     if (objPort.multiPortNum) this.setUiAttribs({ "multiPortNum": objPort.multiPortNum });
+    if (objPort.multiPortManual) this.setUiAttribs({ "multiPortManual": objPort.multiPortManual });
+
 
     if (objPort.anim)
     {

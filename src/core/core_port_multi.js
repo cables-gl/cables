@@ -27,8 +27,6 @@ class MultiPort extends Port
 
 
 
-
-
         const updateUi = () =>
         {
             for (let i = 0; i < this.ports.length; i++)
@@ -36,17 +34,29 @@ class MultiPort extends Port
                 let lp; // undefined to remove/not set it
                 let opacity;// undefined to remove/not set it
                 let grey;// undefined to remove/not set it
+                let addPort;
+                let o = {};
 
                 if (!this.uiAttribs.editable)grey = true;
                 if (i == 0) lp = this.ports.length;
-                if (i == this.ports.length - 1)
-                {
-                    opacity = 0.2;
-                    grey = true;
-                }
 
-                this.ports[i].setUiAttribs({ "longPort": lp, "opacity": opacity, "greyout": grey, "group": this.name });
+                if (!this.uiAttribs.multiPortManual)
+                    if (i == this.ports.length - 1)
+                    {
+                        addPort = true;
+                        // opacity = 0.6;
+                        grey = true;
+                    }
+
+                o.addPort = addPort;
+                o.longPort = lp;
+                o.greyout = grey;
+                o.group = this.name;
+
+                this.ports[i].setUiAttribs(o);
             }
+
+            console.log(this.ports);
         };
 
         this.removeInvalidPorts = () =>
@@ -55,6 +65,7 @@ class MultiPort extends Port
             {
                 if (!this.ports[i]) this.ports.splice(i, 1);
             }
+            updateArray();
         };
 
         this.countPorts = () =>
@@ -85,8 +96,10 @@ class MultiPort extends Port
             }
 
 
+
             let foundHole = true;
-            if (!this.uiAttribs.editable)
+
+            if (!this.uiAttribs.editable && !this.uiAttribs.multiPortManual)
                 while (foundHole)
                 {
                     foundHole = false;
@@ -95,8 +108,8 @@ class MultiPort extends Port
                         if (this.ports[i] && this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
                         {
                             console.log("found hole!");
-                            // found hole
 
+                            // found hole
                             const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
                             this.ports[i].links[0].remove();
 
@@ -129,7 +142,7 @@ class MultiPort extends Port
             }
             this.removeInvalidPorts();
 
-            if (this.ports[this.ports.length - 1].isLinked()) this.newPort();
+            if (!this.uiAttribs.multiPortManual && this.ports[this.ports.length - 1].isLinked()) this.newPort();
 
             updateArray();
             updateUi();
@@ -160,7 +173,6 @@ class MultiPort extends Port
                 if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
                 po.multiPortTriggerListener = po.on("trigger", this.trigger());
 
-
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
             }
@@ -174,7 +186,7 @@ class MultiPort extends Port
 
             po.direction = dir;
             this.ports.push(po);
-            console.log("CONSTANTS.PORT_DIR_OUT", CONSTANTS.PORT.PORT_DIR_OUT, this.direction);
+            // console.log("CONSTANTS.PORT_DIR_OUT", CONSTANTS.PORT.PORT_DIR_OUT, this.direction);
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) this.op.addOutPort(po);
             else this.op.addInPort(po);
 
@@ -182,6 +194,7 @@ class MultiPort extends Port
             this.addListeners();
 
             updateUi();
+            updateArray();
             return po;
         };
 
@@ -198,15 +211,18 @@ class MultiPort extends Port
 
             this.uiAttribs.multiPortNum = Math.max(MIN_NUM_PORTS, this.uiAttribs.multiPortNum);
 
+
+
             while (this.ports.length < this.uiAttribs.multiPortNum) this.newPort();
             while (this.ports.length > this.uiAttribs.multiPortNum) if (this.ports[this.ports.length - 1]) this.ports.pop().remove();
+
 
             this.removeInvalidPorts();
         };
 
         this.incDec = (incDir) =>
         {
-            this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + incDir });
+            this.setUiAttribs({ "multiPortManual": true, "multiPortNum": this.uiAttribs.multiPortNum + incDir });
             this.checkNum();
             this.setUiAttribs({ "editable": true });
             updateUi();

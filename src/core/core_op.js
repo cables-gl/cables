@@ -364,9 +364,9 @@ const Op = function ()
             this,
             name,
             type,
-            CONSTANTS.PORT_DIR_IN,
+            CONSTANTS.PORT.PORT_DIR_IN,
             {
-                "display": "multiport",
+                "addPort": true,
                 "hidePort": true
             }
         );
