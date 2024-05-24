@@ -255,7 +255,8 @@ class MultiPort extends Port
         this.toggleManual = () =>
         {
             this.setUiAttribs({ "multiPortManual": !this.uiAttribs.multiPortManual });
-
+            this.removeInvalidPorts();
+            this.removeInvalidPorts();
             this.checkNum();
             this.countPorts();
             updateUi();
