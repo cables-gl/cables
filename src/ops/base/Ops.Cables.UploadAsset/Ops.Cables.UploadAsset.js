@@ -16,7 +16,7 @@ inExec.onTriggered = () =>
     if (CABLES.UI)
         gui.getFileManager().uploadFile(inFilename.get(), str, (err, res) =>
         {
-            console.log(err, res);
+            // console.log(err, res);
 
             if (err)
             {
