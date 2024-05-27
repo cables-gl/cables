@@ -20,21 +20,6 @@
             {
                 "type": 1,
                 "name": "Trigger_1",
-                "group": "Trigger"
-            },
-            {
-                "type": 1,
-                "name": "Trigger_2",
-                "group": "Trigger"
-            },
-            {
-                "type": 1,
-                "name": "Trigger_3",
-                "group": "Trigger"
-            },
-            {
-                "type": 1,
-                "name": "Trigger_4",
                 "uititle": "add port",
                 "group": "Trigger"
             }
