@@ -13,7 +13,7 @@ class MultiPort extends Port
         this.ports = [];
         this.direction = dir;
 
-        console.log("uiattribs", uiAttribs);
+        // console.log("uiattribs", uiAttribs);
 
         const updateArray = () =>
         {
@@ -32,8 +32,6 @@ class MultiPort extends Port
         {
             let grey = !this.uiAttribs.multiPortManual || undefined;
 
-            console.log("update ui");
-
             for (let i = 0; i < this.ports.length; i++)
             {
                 let lp; // undefined to remove/not set it
@@ -49,8 +47,6 @@ class MultiPort extends Port
                 if (!this.uiAttribs.multiPortManual)
                     if (i == this.ports.length - 1)
                     {
-                        console.log("adding addport...", this.uiAttribs.multiPortManual, this);
-
                         title = "add port";
                         addPort = true;
                         grey = true;
@@ -75,10 +71,6 @@ class MultiPort extends Port
 
             if (!this.uiAttribs.multiPortManual)
             {
-                console.log("remove from auto multi port");
-
-                // console.log(this.ports.length, this.ports[this.ports.length - 1].isLinked());
-
                 if (this.ports.length > MIN_NUM_PORTS)
 
                     for (let i = this.ports.length - 1; i > 1; i--)
@@ -123,14 +115,14 @@ class MultiPort extends Port
                 let foundHole = true;
                 while (foundHole)
                 {
-                    console.log("search holes...");
+                    // console.log("search holes...");
                     foundHole = false;
 
                     for (let i = this.ports.length - 1; i > 1; i--)
                     {
                         if (this.ports[i] && this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
                         {
-                            console.log("found hole!");
+                            // console.log("found hole!");
 
                             // found hole
                             const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
@@ -140,7 +132,7 @@ class MultiPort extends Port
 
                             if (po && this.ports[i])
                             {
-                                console.log("move ", this.ports[i].name, "to", po.name);
+                                // console.log("move ", this.ports[i].name, "to", po.name);
                                 this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
                                 foundHole = true;
                                 redo = true;
@@ -269,7 +261,7 @@ class MultiPort extends Port
         this.incDec = (incDir) =>
         {
             this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || MIN_NUM_PORTS;
-            console.log("this.uiAttribs.multiPortNum", this.uiAttribs.multiPortNum, this.uiAttribs.multiPortNum + incDir);
+            // console.log("this.uiAttribs.multiPortNum", this.uiAttribs.multiPortNum, this.uiAttribs.multiPortNum + incDir);
             this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + incDir });
             this.checkNum();
 
