@@ -1,0 +1,57 @@
+{
+    "id": "be066ff6-85e2-408a-9570-59fb7abff7b2",
+    "created": 1716814979202,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716814979204
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Input_0",
+                "group": "Input"
+            },
+            {
+                "type": 1,
+                "name": "Input_1",
+                "group": "Input"
+            },
+            {
+                "type": 1,
+                "name": "Input_2",
+                "group": "Input"
+            },
+            {
+                "type": 1,
+                "name": "Input_3",
+                "uititle": "add port",
+                "group": "Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Output_0"
+            },
+            {
+                "type": 1,
+                "name": "Output_1"
+            },
+            {
+                "type": 1,
+                "name": "Output_2"
+            },
+            {
+                "type": 1,
+                "name": "Output_3",
+                "uititle": "add port"
+            }
+        ]
+    }
+}

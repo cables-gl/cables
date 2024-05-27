@@ -13,7 +13,6 @@ class MultiPort extends Port
         this.ports = [];
         this.direction = dir;
 
-
         console.log("uiattribs", uiAttribs);
 
         const updateArray = () =>
@@ -199,9 +198,15 @@ class MultiPort extends Port
             for (let i = 0; i < this.ports.length; i++)
             {
                 const po = this.ports[i];
+                const idx = i;
 
                 if (po.multiPortChangeListener)po.multiPortChangeListener = po.off(po.multiPortChangeListener);
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
+
+
+                if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
+                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
+
 
                 // if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
                 // po.multiPortTriggerListener = po.on("trigger", this.trigger());

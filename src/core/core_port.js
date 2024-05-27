@@ -926,6 +926,8 @@ Port.prototype._onTriggered = function (a)
     this._activity();
     this._op.updateAnims();
     if (this._op.enabled && this.onTriggered) this.onTriggered(a);
+
+    if (this._op.enabled) this.emitEvent("trigger");
 };
 
 Port.prototype._onSetProfiling = function (v)
