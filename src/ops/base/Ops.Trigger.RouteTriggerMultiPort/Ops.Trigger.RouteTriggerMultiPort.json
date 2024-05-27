@@ -66,15 +66,10 @@
     },
     "changelog": [
         {
-            "message": "Ops.Trigger.SwitchTrigger renamed to Ops.Trigger.RouteTrigger",
+            "message": "new op",
+            "type": "new",
             "author": "pandur",
-            "date": 1567672707912
-        },
-        {
-            "message": "Added output for highest connected index",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1712822422934
+            "date": 1716804897700
         }
     ],
     "issues": "",

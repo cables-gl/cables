@@ -435,6 +435,7 @@ Port.prototype.deSerializeSettings = function (objPort)
     }
 };
 
+
 Port.prototype.setInitialValue = function (v)
 {
     if (this.op.preservedPortLinks[this.name])
@@ -458,6 +459,9 @@ Port.prototype.setInitialValue = function (v)
     if (v !== undefined) this.set(v);
     if (v !== undefined) this.defaultValue = v;
 };
+
+
+
 
 Port.prototype.getSerialized = function ()
 {

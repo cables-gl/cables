@@ -4,10 +4,10 @@
     "authorName": "pandur",
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "new op",
+            "type": "new",
             "author": "pandur",
-            "date": 1713864159073
+            "date": 1716804941340
         }
     ],
     "layout": {
