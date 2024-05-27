@@ -1,6 +1,7 @@
 const
     inStrs = op.inMultiPort("Strings", CABLES.OP_PORT_TYPE_STRING),
-    outStr = op.outString("String");
+    outStr = op.outString("String"),
+    outNum = op.outNumber("Num Strings");
 
 inStrs.onChange = () =>
 {
@@ -11,6 +12,6 @@ inStrs.onChange = () =>
     {
         str += stringPorts[i].get() || "";
     }
-
     outStr.set(str);
+    outNum.set(stringPorts.length);
 };

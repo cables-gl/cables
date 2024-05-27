@@ -21,12 +21,32 @@
                 "type": 5,
                 "name": "Strings_1",
                 "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_2",
+                "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_3",
+                "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_4",
+                "group": "Strings"
             }
         ],
         "portsOut": [
             {
                 "type": 5,
                 "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Num Strings",
+                "subType": "number"
             }
         ]
     }

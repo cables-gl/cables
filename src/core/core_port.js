@@ -569,6 +569,7 @@ Port.prototype.removeLink = function (link)
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
+    this.emitEvent("onLinkRemoved");
     this._op.emitEvent("onLinkChanged");
 };
 
@@ -636,6 +637,7 @@ Port.prototype.removeLinkTo = function (p2)
 
             if (this.onLinkChanged) this.onLinkChanged();
             this.emitEvent("onLinkChanged");
+            this.emitEvent("onLinkRemoved");
             return;
         }
     }

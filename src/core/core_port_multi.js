@@ -27,10 +27,7 @@ class MultiPort extends Port
             if (this.uiAttribs.multiPortManual)ll = 0;
 
             for (let i = 0; i < this.ports.length - ll; i++)
-            {
                 arr[i] = this.ports[i];
-            }
-
 
             this.setRef(arr);
         };
@@ -38,6 +35,8 @@ class MultiPort extends Port
         const updateUi = () =>
         {
             let grey = !this.uiAttribs.multiPortManual || undefined;
+
+            console.log("update ui");
 
             for (let i = 0; i < this.ports.length; i++)
             {
@@ -55,19 +54,20 @@ class MultiPort extends Port
                     if (i == this.ports.length - 1)
                     {
                         console.log("adding addport...", this.uiAttribs.multiPortManual, this);
+
+                        title = "add port";
                         addPort = true;
                         grey = true;
                     }
 
                 o.addPort = addPort;
                 o.longPort = lp;
+                o.title = title;
                 o.greyout = grey;
                 o.group = this.name;
 
                 this.ports[i].setUiAttribs(o);
             }
-
-            console.log(this.ports);
         };
 
         this.removeInvalidPorts = () =>
@@ -80,11 +80,16 @@ class MultiPort extends Port
             if (!this.uiAttribs.multiPortManual)
             {
                 console.log("remove from auto multi port");
-                for (let i = this.ports.length - 1; i > 0; i--)
-                {
-                    if (!this.ports[i].isLinked()) this.uiAttribs.multiPortNum = i;
-                    else break;
-                }
+
+                // console.log(this.ports.length, this.ports[this.ports.length - 1].isLinked());
+
+                if (this.ports.length > 2)
+
+                    for (let i = this.ports.length - 1; i > 1; i--)
+                    {
+                        if (!this.ports[i].isLinked()) this.uiAttribs.multiPortNum = i;
+                        else break;
+                    }
             }
 
             updateArray();
@@ -124,7 +129,9 @@ class MultiPort extends Port
                 {
                     console.log("search holes...");
                     foundHole = false;
-                    for (let i = this.ports.length - 1; i > 0; i--)
+
+
+                    for (let i = this.ports.length - 1; i > 1; i--)
                     {
                         if (this.ports[i] && this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
                         {
@@ -155,19 +162,21 @@ class MultiPort extends Port
             }
 
 
-            if (this.ports.length > 2)
+            if (!this.uiAttribs.multiPortManual) // if auto
             {
-                let i = this.ports.length - 1;
-                if (!this.uiAttribs.multiPortManual)
+                while (this.ports.length > 2 && !this.ports[this.ports.length - 1].isLinked() && !this.ports[this.ports.length - 2].isLinked())
                 {
-                    if (this.ports[i].links.length == 0 && this.ports[i - 1].links.length == 0)
+                    let i = this.ports.length - 1;
+                    if (!this.ports[i].isLinked() && this.ports[i - 1] && !this.ports[i - 1].isLinked())
                     {
-                        this.ports[i].setUiAttribs({ "hidePort": true });
+                        this.ports[i].setUiAttribs({ "removed": true });
                         this.ports[i].remove();
-                        this.ports[i] = null;
+                        // this.ports[i] = null;
+                        this.ports.splice(i, 1);
                     }
                 }
             }
+
             this.removeInvalidPorts();
 
             if (!this.uiAttribs.multiPortManual && this.ports.length > 0 && this.ports[this.ports.length - 1].isLinked()) this.newPort();
@@ -198,11 +207,21 @@ class MultiPort extends Port
                 if (po.multiPortChangeListener)po.multiPortChangeListener = po.off(po.multiPortChangeListener);
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
-                if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
-                po.multiPortTriggerListener = po.on("trigger", this.trigger());
+                // if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
+                // po.multiPortTriggerListener = po.on("trigger", this.trigger());
 
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", this.countPorts.bind(this));
+
+                if (po.multiLinkRemoveListener)po.multiLinkRemoveListener = po.off(po.multiLinkRemoveListener);
+                po.multiLinkRemoveListener = po.on("onLinkRemoved", () =>
+                {
+                    // this.removeInvalidPorts();
+                    // this.checkNum();
+                    // this.countPorts();
+                    updateUi();
+                    // this.countPorts.bind(this);
+                });
             }
         };
 
