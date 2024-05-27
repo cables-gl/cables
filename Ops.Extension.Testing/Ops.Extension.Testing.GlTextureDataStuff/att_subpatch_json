@@ -11,7 +11,7 @@
           "x": 1076.379993338775,
           "y": 2584.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -54,9 +54,20 @@
           "name": "trigger 9",
           "links": [
             {
-              "portIn": "render",
+              "portIn": "Render",
               "portOut": "trigger 9",
-              "objIn": "od7uelmrh",
+              "objIn": "achszht90",
+              "objOut": "bgfiqr7uh"
+            }
+          ]
+        },
+        {
+          "name": "trigger 13",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger 13",
+              "objIn": "g3ux0lwn1",
               "objOut": "bgfiqr7uh"
             }
           ]
@@ -72,7 +83,7 @@
           "y": 2704.535719083833
         },
         "comment": "geometry taken from GLTF scene",
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "extendTitle": "Node",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -131,11 +142,11 @@
       "id": "ixrgc4z9p",
       "uiAttribs": {
         "translate": {
-          "x": 1724.379993338775,
-          "y": 2704.535719083833
+          "x": 1679.7898694960468,
+          "y": 2761.5119884384303
         },
         "comment": null,
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -173,117 +184,6 @@
       ]
     },
     {
-      "opId": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",
-      "id": "od7uelmrh",
-      "uiAttribs": {
-        "translate": {
-          "x": 1724.379993338775,
-          "y": 2644.535719083833
-        },
-        "subPatch": "brv3egvi7",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "min distance",
-          "value": 0.05
-        },
-        {
-          "name": "max distance",
-          "value": 99999
-        },
-        {
-          "name": "min rot y",
-          "value": 0
-        },
-        {
-          "name": "max rot y",
-          "value": 0
-        },
-        {
-          "name": "initial radius",
-          "value": 0.75
-        },
-        {
-          "name": "initial axis y",
-          "value": 0.464
-        },
-        {
-          "name": "initial axis x",
-          "value": 0.16
-        },
-        {
-          "name": "mul",
-          "value": 1
-        },
-        {
-          "name": "Smoothness",
-          "value": 1
-        },
-        {
-          "name": "Speed X",
-          "value": 1
-        },
-        {
-          "name": "Speed Y",
-          "value": 1
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Allow Panning",
-          "value": 1
-        },
-        {
-          "name": "Allow Zooming",
-          "value": 1
-        },
-        {
-          "name": "Allow Rotation",
-          "value": 1
-        },
-        {
-          "name": "restricted",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "trigger",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "trigger",
-              "objIn": "ixrgc4z9p",
-              "objOut": "od7uelmrh"
-            },
-            {
-              "portIn": "Render",
-              "portOut": "trigger",
-              "objIn": "achszht90",
-              "objOut": "od7uelmrh"
-            }
-          ]
-        },
-        {
-          "name": "radius",
-          "value": 0.75
-        },
-        {
-          "name": "Rot X",
-          "value": 57.6
-        },
-        {
-          "name": "Rot Y",
-          "value": 83.52000000000001
-        }
-      ]
-    },
-    {
       "opId": "00f30153-f656-4701-9b93-244b033b2eaa",
       "id": "homk0kitw",
       "uiAttribs": {
@@ -291,7 +191,7 @@
           "x": 1280.379993338775,
           "y": 3064.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -332,7 +232,7 @@
           "x": 1280.379993338775,
           "y": 3144.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -393,10 +293,10 @@
       "id": "achszht90",
       "uiAttribs": {
         "translate": {
-          "x": 2180.379993338775,
-          "y": 2744.535719083833
+          "x": 2201.436440708952,
+          "y": 2640.4920967841344
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -485,7 +385,7 @@
           "x": 1856.379993338775,
           "y": 2904.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -578,7 +478,7 @@
           "x": 1856.379993338775,
           "y": 3224.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -606,7 +506,7 @@
           "y": 3532.556433949571
         },
         "comment": "you can plug any texture into here\nbut as you see in the VizTexture on the left,\nit would be tough to draw meaningful shapes\nwithout proper conversion",
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -653,7 +553,7 @@
           "x": 1100.379993338775,
           "y": 2764.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -756,7 +656,7 @@
         },
         "accBuffersDelete": "head",
         "loading": false,
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "extendTitle": "head",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -895,7 +795,7 @@
           "x": 1280.379993338775,
           "y": 2944.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1017,7 +917,7 @@
           "x": 1856.379993338775,
           "y": 3024.535719083833
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1102,7 +1002,7 @@
           "x": 1856.379993338775,
           "y": 3352.556433949571
         },
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1122,15 +1022,15 @@
         },
         {
           "name": "Round",
-          "value": true
+          "value": 1
         },
         {
           "name": "Round Antialias",
-          "value": true
+          "value": 0
         },
         {
           "name": "Scale by Distance",
-          "value": 1
+          "value": "true"
         },
         {
           "name": "r",
@@ -1223,7 +1123,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qtvzeoxx6",
       "uiAttribs": {
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "translate": {
           "x": 1171.3435105283638,
           "y": 2385.6363659592243
@@ -1251,7 +1151,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "p9vmm0mmn",
       "uiAttribs": {
-        "subPatch": "brv3egvi7",
+        "subPatch": "j2uf7ixvu",
         "translate": {
           "x": 1171.3435105283638,
           "y": 3624.535719083833
@@ -1260,6 +1160,63 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "g3ux0lwn1",
+      "uiAttribs": {
+        "subPatch": "j2uf7ixvu",
+        "translate": {
+          "x": 1620,
+          "y": 2680
+        }
+      },
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": -2.18
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": -30.5
+        },
+        {
+          "name": "rotY",
+          "value": 0
+        },
+        {
+          "name": "rotZ",
+          "value": -16.5
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "ixrgc4z9p",
+              "objOut": "g3ux0lwn1"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "g3ux0lwn1"
+      }
     }
   ]
 }

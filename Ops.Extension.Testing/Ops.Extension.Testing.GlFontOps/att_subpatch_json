@@ -9,7 +9,7 @@
           "y": 2536.7580939550235
         },
         "notWorkingMsg": null,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -104,7 +104,7 @@
         },
         "color": "#5dc0fd",
         "notWorkingMsg": null,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -140,7 +140,7 @@
           "x": 1286.020071843423,
           "y": 2456.7580939550235
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -197,7 +197,7 @@
           "x": 1250.020071843423,
           "y": 2836.7580939550235
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -280,7 +280,7 @@
         },
         {
           "name": "Width",
-          "value": 1.5462632557702447
+          "value": 1.546266207619319
         },
         {
           "name": "Font Available",
@@ -296,7 +296,7 @@
           "x": 1250.020071843423,
           "y": 2756.7580939550235
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -337,7 +337,7 @@
           "x": 1658.020071843423,
           "y": 2836.7580939550235
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -394,7 +394,7 @@
           "x": 878.020071843423,
           "y": 2616.7580939550235
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -451,7 +451,7 @@
           "x": 878.020071843423,
           "y": 2330.158483986594
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -532,7 +532,7 @@
           "x": 1658.020071843423,
           "y": 2937.946606350698
         },
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -695,11 +695,11 @@
       "portsOut": [
         {
           "name": "Ratio",
-          "value": 0.234006734006734
+          "value": 0.23232323232323232
         },
         {
           "name": "Aspect",
-          "value": 4.273381294964029
+          "value": 4.304347826086956
         },
         {
           "name": "Num Lines",
@@ -717,7 +717,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "extendTitle": "WorkSans-Thin",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -779,7 +779,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "extendTitle": "WorkSans-Regular",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -841,7 +841,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "extendTitle": "WorkSans-Bold",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -902,7 +902,7 @@
           "y": 2529.0411363566195
         },
         "notWorkingMsg": null,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1040,7 +1040,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "ky45kl9b9",
       "uiAttribs": {
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "translate": {
           "x": 941.5984368654745,
           "y": 1994.8175270915344
@@ -1068,7 +1068,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "70qj0z4px",
       "uiAttribs": {
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "translate": {
           "x": 941.5984368654745,
           "y": 3017.946606350698
@@ -1087,7 +1087,7 @@
           "y": 2275.22878840239
         },
         "loading": false,
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1115,33 +1115,34 @@
       "id": "t8yq3pr2d",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "translate": {
           "x": 1087.7709347278228,
           "y": 2249.2789365320564
         },
-        "extendTitle": "#currentTestName"
+        "extendTitle": "#currentTestName",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
           "value": "currentTestName"
         }
-      ],
-      "storage": {
-        "ref": "t8yq3pr2d"
-      }
+      ]
     },
     {
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "m7jibe75q",
       "uiAttribs": {
-        "subPatch": "66heojnvx",
+        "subPatch": "aoh0x7vie",
         "translate": {
           "x": 1099.7709347278228,
           "y": 2154.0943437249653
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Name",
@@ -1154,10 +1155,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "m7jibe75q"
-      }
+      ]
     }
   ]
 }
