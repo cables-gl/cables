@@ -11,12 +11,16 @@
         }
     ],
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 5,
                 "name": "Name"
             }
         ]
+    },
+    "summary": "Outputs the current subpatch op name",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
