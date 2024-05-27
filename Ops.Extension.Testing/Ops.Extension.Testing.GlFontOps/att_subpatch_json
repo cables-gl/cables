@@ -9,7 +9,7 @@
           "y": 2536.7580939550235
         },
         "notWorkingMsg": null,
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -104,7 +104,7 @@
         },
         "color": "#5dc0fd",
         "notWorkingMsg": null,
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -140,7 +140,7 @@
           "x": 1286.020071843423,
           "y": 2456.7580939550235
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -197,7 +197,7 @@
           "x": 1250.020071843423,
           "y": 2836.7580939550235
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -296,7 +296,7 @@
           "x": 1250.020071843423,
           "y": 2756.7580939550235
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -337,7 +337,7 @@
           "x": 1658.020071843423,
           "y": 2836.7580939550235
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -394,7 +394,7 @@
           "x": 878.020071843423,
           "y": 2616.7580939550235
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -451,7 +451,7 @@
           "x": 878.020071843423,
           "y": 2330.158483986594
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -532,7 +532,7 @@
           "x": 1658.020071843423,
           "y": 2937.946606350698
         },
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -709,68 +709,6 @@
     },
     {
       "opId": "6cbd5d67-25d5-4936-a2ad-3ee8ed478570",
-      "id": "gq73lbj7g",
-      "uiAttribs": {
-        "translate": {
-          "x": 1371.1966605834446,
-          "y": 2196.0547258366796
-        },
-        "notWorkingMsg": null,
-        "loading": false,
-        "subPatch": "aoh0x7vie",
-        "extendTitle": "WorkSans-Thin",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Font Name",
-          "value": "93777ac9-4a63-4efb-a4a3-8ebceaf440a9"
-        },
-        {
-          "name": "Font Data",
-          "value": "/assets/5e982cd743a08a5e7d9e4169/WorkSans-Thin.ttf.font.json",
-          "display": "file"
-        },
-        {
-          "name": "Font Image",
-          "value": "/assets/5e982cd743a08a5e7d9e4169/WorkSans-Thin.ttf.png",
-          "display": "file"
-        },
-        {
-          "name": "Font Image 1",
-          "value": 0,
-          "display": "file"
-        },
-        {
-          "name": "Font Image 2",
-          "value": 0,
-          "display": "file"
-        },
-        {
-          "name": "Font Image 3",
-          "value": 0,
-          "display": "file"
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Loaded",
-          "value": true
-        },
-        {
-          "name": "Total Chars",
-          "value": 95
-        },
-        {
-          "name": "Chars",
-          "value": "}(){|[]W@$Qjgm/\\fdblhkqpwy3&06?O8SC9%GJU25FEMN!PDRBTIVAXYZ#1L4HK7ti;aecosu:nrxvz_><+^=*~-'\"`,. "
-        }
-      ]
-    },
-    {
-      "opId": "6cbd5d67-25d5-4936-a2ad-3ee8ed478570",
       "id": "47600ylgz",
       "uiAttribs": {
         "translate": {
@@ -779,7 +717,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "extendTitle": "WorkSans-Regular",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -832,68 +770,6 @@
       ]
     },
     {
-      "opId": "6cbd5d67-25d5-4936-a2ad-3ee8ed478570",
-      "id": "xc7stb9gp",
-      "uiAttribs": {
-        "translate": {
-          "x": 1371.1966605834446,
-          "y": 2276.0547258366796
-        },
-        "notWorkingMsg": null,
-        "loading": false,
-        "subPatch": "aoh0x7vie",
-        "extendTitle": "WorkSans-Bold",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Font Name",
-          "value": "b3a8148c-e268-4e8e-b7ee-3e46e0347e8f"
-        },
-        {
-          "name": "Font Data",
-          "value": "/assets/5e982cd743a08a5e7d9e4169/WorkSans-Bold.ttf.font.json",
-          "display": "file"
-        },
-        {
-          "name": "Font Image",
-          "value": "/assets/5e982cd743a08a5e7d9e4169/WorkSans-Bold.ttf.png",
-          "display": "file"
-        },
-        {
-          "name": "Font Image 1",
-          "value": 0,
-          "display": "file"
-        },
-        {
-          "name": "Font Image 2",
-          "value": 0,
-          "display": "file"
-        },
-        {
-          "name": "Font Image 3",
-          "value": 0,
-          "display": "file"
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Loaded",
-          "value": true
-        },
-        {
-          "name": "Total Chars",
-          "value": 95
-        },
-        {
-          "name": "Chars",
-          "value": "Wj()}{w|[]%Qg@$m\\/Mfdbilpqhky3&6G0?8OCS95AVtU!2;JRTNLKXYZIHF#147PBDE><x^va_o+cse:nr*~uz=-\",'`. "
-        }
-      ]
-    },
-    {
       "opId": "b5c99363-a749-4040-884b-66f91294bcad",
       "id": "fc2y9ekjd",
       "uiAttribs": {
@@ -902,7 +778,7 @@
           "y": 2529.0411363566195
         },
         "notWorkingMsg": null,
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1040,7 +916,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "ky45kl9b9",
       "uiAttribs": {
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "translate": {
           "x": 941.5984368654745,
           "y": 1994.8175270915344
@@ -1068,7 +944,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "70qj0z4px",
       "uiAttribs": {
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "translate": {
           "x": 941.5984368654745,
           "y": 3017.946606350698
@@ -1083,11 +959,11 @@
       "id": "64wl6ms3e",
       "uiAttribs": {
         "translate": {
-          "x": 1693,
-          "y": 2275.22878840239
+          "x": 1646.6030908584944,
+          "y": 2230.138834447969
         },
         "loading": false,
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1115,7 +991,7 @@
       "id": "t8yq3pr2d",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "translate": {
           "x": 1087.7709347278228,
           "y": 2249.2789365320564
@@ -1135,7 +1011,7 @@
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "m7jibe75q",
       "uiAttribs": {
-        "subPatch": "aoh0x7vie",
+        "subPatch": "rzcybfapa",
         "translate": {
           "x": 1099.7709347278228,
           "y": 2154.0943437249653

@@ -11,7 +11,7 @@
           "x": 1076.379993338775,
           "y": 2584.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -51,23 +51,23 @@
           ]
         },
         {
-          "name": "trigger 9",
-          "links": [
-            {
-              "portIn": "Render",
-              "portOut": "trigger 9",
-              "objIn": "achszht90",
-              "objOut": "bgfiqr7uh"
-            }
-          ]
-        },
-        {
           "name": "trigger 13",
           "links": [
             {
               "portIn": "render",
               "portOut": "trigger 13",
               "objIn": "g3ux0lwn1",
+              "objOut": "bgfiqr7uh"
+            }
+          ]
+        },
+        {
+          "name": "trigger 15",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger 15",
+              "objIn": "qenxybx1c",
               "objOut": "bgfiqr7uh"
             }
           ]
@@ -83,7 +83,7 @@
           "y": 2704.535719083833
         },
         "comment": "geometry taken from GLTF scene",
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "extendTitle": "Node",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -142,11 +142,11 @@
       "id": "ixrgc4z9p",
       "uiAttribs": {
         "translate": {
-          "x": 1679.7898694960468,
-          "y": 2761.5119884384303
+          "x": 1848.6985153396417,
+          "y": 2803.1768995979423
         },
         "comment": null,
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -191,7 +191,7 @@
           "x": 1280.379993338775,
           "y": 3064.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -232,7 +232,7 @@
           "x": 1280.379993338775,
           "y": 3144.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -293,10 +293,10 @@
       "id": "achszht90",
       "uiAttribs": {
         "translate": {
-          "x": 2201.436440708952,
-          "y": 2640.4920967841344
+          "x": 1856.379993338775,
+          "y": 2948.3513681408767
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -365,6 +365,17 @@
       ],
       "portsOut": [
         {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "Next",
+              "objIn": "44q3xbryu",
+              "objOut": "achszht90"
+            }
+          ]
+        },
+        {
           "name": "geometry",
           "links": [
             {
@@ -385,7 +396,7 @@
           "x": 1856.379993338775,
           "y": 2904.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -461,9 +472,9 @@
           "name": "trigger",
           "links": [
             {
-              "portIn": "exe",
+              "portIn": "Render",
               "portOut": "trigger",
-              "objIn": "44q3xbryu",
+              "objIn": "achszht90",
               "objOut": "nrwyu32tt"
             }
           ]
@@ -478,7 +489,7 @@
           "x": 1856.379993338775,
           "y": 3224.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -506,7 +517,7 @@
           "y": 3532.556433949571
         },
         "comment": "you can plug any texture into here\nbut as you see in the VizTexture on the left,\nit would be tough to draw meaningful shapes\nwithout proper conversion",
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -551,9 +562,9 @@
         "extendTitle": "Vertex Pos",
         "translate": {
           "x": 1100.379993338775,
-          "y": 2764.535719083833
+          "y": 2765.5946856164805
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -652,11 +663,11 @@
       "uiAttribs": {
         "translate": {
           "x": 716.3799933387751,
-          "y": 2644.535719083833
+          "y": 2643.4767525511857
         },
         "accBuffersDelete": "head",
         "loading": false,
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "extendTitle": "head",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -734,11 +745,11 @@
         },
         {
           "name": "Calc Normals index",
-          "value": 0
+          "value": 2
         },
         {
           "name": "Calc Normals",
-          "value": false
+          "value": "Never"
         },
         {
           "name": "Hide Nodes",
@@ -795,7 +806,7 @@
           "x": 1280.379993338775,
           "y": 2944.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -917,7 +928,7 @@
           "x": 1856.379993338775,
           "y": 3024.535719083833
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1002,7 +1013,7 @@
           "x": 1856.379993338775,
           "y": 3352.556433949571
         },
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1123,10 +1134,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qtvzeoxx6",
       "uiAttribs": {
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "translate": {
           "x": 1171.3435105283638,
-          "y": 2385.6363659592243
+          "y": 2370.1873523625077
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -1151,7 +1162,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "p9vmm0mmn",
       "uiAttribs": {
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "translate": {
           "x": 1171.3435105283638,
           "y": 3624.535719083833
@@ -1165,12 +1176,14 @@
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "g3ux0lwn1",
       "uiAttribs": {
-        "subPatch": "j2uf7ixvu",
+        "subPatch": "t9nm0oz9i",
         "translate": {
-          "x": 1620,
-          "y": 2680
-        }
+          "x": 1848.6985153396417,
+          "y": 2683.1768995979423
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "posX",
@@ -1213,9 +1226,55 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+      "id": "qenxybx1c",
+      "uiAttribs": {
+        "title": "var set",
+        "subPatch": "t9nm0oz9i",
+        "translate": {
+          "x": 2092.6306686322187,
+          "y": 2545.3719451695983
+        },
+        "extendTitle": "#currentTestName"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "currentTestName"
+        }
       ],
       "storage": {
-        "ref": "g3ux0lwn1"
+        "ref": "qenxybx1c"
+      }
+    },
+    {
+      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
+      "id": "ksz73rfez",
+      "uiAttribs": {
+        "subPatch": "t9nm0oz9i",
+        "translate": {
+          "x": 2104.6306686322187,
+          "y": 2450.1873523625077
+        }
+      },
+      "portsOut": [
+        {
+          "name": "Name",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Name",
+              "objIn": "qenxybx1c",
+              "objOut": "ksz73rfez"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "ksz73rfez"
       }
     }
   ]

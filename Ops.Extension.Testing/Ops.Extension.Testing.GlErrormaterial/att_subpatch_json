@@ -8,7 +8,7 @@
           "x": 762.5325621922866,
           "y": 2791.6249828988803
         },
-        "subPatch": "vd8dspnb2",
+        "subPatch": "fd6bj3egw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -31,7 +31,7 @@
       "opId": "6ee346d0-614e-4709-91a5-dc21ae975caf",
       "id": "pnlajyuok",
       "uiAttribs": {
-        "subPatch": "vd8dspnb2",
+        "subPatch": "fd6bj3egw",
         "translate": {
           "x": 762.5325621922866,
           "y": 2945.904792328928
@@ -61,13 +61,26 @@
           "name": "Render",
           "value": 1
         }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger",
+              "objIn": "holi9px7a",
+              "objOut": "pnlajyuok"
+            }
+          ]
+        }
       ]
     },
     {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qgxk5vc2q",
       "uiAttribs": {
-        "subPatch": "vd8dspnb2",
+        "subPatch": "fd6bj3egw",
         "translate": {
           "x": 762.5325621922866,
           "y": 2499.4874625991947
@@ -95,15 +108,64 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "0a3sp9hei",
       "uiAttribs": {
-        "subPatch": "vd8dspnb2",
+        "subPatch": "fd6bj3egw",
         "translate": {
           "x": 762.5325621922866,
-          "y": 3025.904792328928
+          "y": 3197.5446618951146
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+      "id": "holi9px7a",
+      "uiAttribs": {
+        "title": "var set",
+        "subPatch": "fd6bj3egw",
+        "translate": {
+          "x": 1019.0776433006611,
+          "y": 3117.5446618951146
+        },
+        "extendTitle": "#currentTestName"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "currentTestName"
+        }
+      ],
+      "storage": {
+        "ref": "holi9px7a"
+      }
+    },
+    {
+      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
+      "id": "azzsos234",
+      "uiAttribs": {
+        "subPatch": "fd6bj3egw",
+        "translate": {
+          "x": 1031.077643300661,
+          "y": 3022.360069088024
+        }
+      },
+      "portsOut": [
+        {
+          "name": "Name",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Name",
+              "objIn": "holi9px7a",
+              "objOut": "azzsos234"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "azzsos234"
+      }
     }
   ]
 }
