@@ -25,4 +25,5 @@ exec.onTriggered = () =>
         resultIsActive.set(navigator.userActivation.hasBeenActive);
         resultIsActive.set(navigator.userActivation.isActive);
     }
+    next.trigger();
 };
