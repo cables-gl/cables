@@ -1,0 +1,44 @@
+{
+    "id": "01290762-1a13-4636-861f-46a630527384",
+    "created": 1716885055606,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716885055609
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_0",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_1",
+                "uititle": "add port",
+                "group": "Arrays"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Number"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    }
+}
