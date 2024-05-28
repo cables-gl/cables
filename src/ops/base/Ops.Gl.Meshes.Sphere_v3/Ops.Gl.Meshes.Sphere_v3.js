@@ -141,8 +141,9 @@ function buildMesh()
     outGeometry.setRef(geom);
 
     // if (!mesh) mesh = new CGL.Mesh(cgl, geom);
-    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
-    else mesh.setGeom(geom);
+    if (op.patch.cg)
+        if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+        else mesh.setGeom(geom);
 
     needsRebuild = false;
 }
