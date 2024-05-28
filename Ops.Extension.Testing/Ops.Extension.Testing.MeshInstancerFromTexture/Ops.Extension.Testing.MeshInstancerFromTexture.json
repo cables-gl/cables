@@ -1,0 +1,32 @@
+{
+    "id": "10c66516-27e7-40b1-86fb-65a4b20e386e",
+    "created": 1716904142452,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716904142499
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716904143028
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "pl4v6t4tr",
+                "uititle": "Execute"
+            }
+        ],
+        "portsOut": []
+    }
+}

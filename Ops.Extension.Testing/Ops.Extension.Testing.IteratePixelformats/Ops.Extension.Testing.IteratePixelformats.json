@@ -1,0 +1,32 @@
+{
+    "id": "26f1614f-c097-4514-9604-842034c1f60e",
+    "created": 1716903428541,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716903428578
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716903429190
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "8rdpwhakn",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

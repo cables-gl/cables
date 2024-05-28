@@ -8,7 +8,7 @@
           "x": 762.5325621922866,
           "y": 2791.6249828988803
         },
-        "subPatch": "fd6bj3egw",
+        "subPatch": "958sggpnw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -31,7 +31,7 @@
       "opId": "6ee346d0-614e-4709-91a5-dc21ae975caf",
       "id": "pnlajyuok",
       "uiAttribs": {
-        "subPatch": "fd6bj3egw",
+        "subPatch": "958sggpnw",
         "translate": {
           "x": 762.5325621922866,
           "y": 2945.904792328928
@@ -80,7 +80,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qgxk5vc2q",
       "uiAttribs": {
-        "subPatch": "fd6bj3egw",
+        "subPatch": "958sggpnw",
         "translate": {
           "x": 762.5325621922866,
           "y": 2499.4874625991947
@@ -108,7 +108,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "0a3sp9hei",
       "uiAttribs": {
-        "subPatch": "fd6bj3egw",
+        "subPatch": "958sggpnw",
         "translate": {
           "x": 762.5325621922866,
           "y": 3197.5446618951146
@@ -123,33 +123,34 @@
       "id": "holi9px7a",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "fd6bj3egw",
+        "subPatch": "958sggpnw",
         "translate": {
           "x": 1019.0776433006611,
           "y": 3117.5446618951146
         },
-        "extendTitle": "#currentTestName"
+        "extendTitle": "#currentTestName",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
           "value": "currentTestName"
         }
-      ],
-      "storage": {
-        "ref": "holi9px7a"
-      }
+      ]
     },
     {
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "azzsos234",
       "uiAttribs": {
-        "subPatch": "fd6bj3egw",
+        "subPatch": "958sggpnw",
         "translate": {
           "x": 1031.077643300661,
           "y": 3022.360069088024
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Name",
@@ -162,10 +163,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "azzsos234"
-      }
+      ]
     }
   ]
 }

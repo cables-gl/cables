@@ -1,0 +1,32 @@
+{
+    "id": "81ce7458-b9fb-4212-8e99-dbdb50d7412b",
+    "created": 1716903945738,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716903945785
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716903946375
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "sfz56isqv",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}
