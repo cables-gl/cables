@@ -408,7 +408,6 @@ Port.prototype.getTypeString = function ()
 
 Port.prototype.deSerializeSettings = function (objPort)
 {
-    console.log(this.name, "deSerializeSettings", objPort);
     if (!objPort) return;
     if (objPort.animated) this.setAnimated(objPort.animated);
     if (objPort.useVariable) this.setVariableName(objPort.useVariable);

@@ -913,7 +913,7 @@ Patch.prototype.deSerialize = function (obj, options)
                     }
                     else
                     {
-                        console.log("preserve", objPort.name, objPort.value);
+                        // console.log("preserve", objPort.name, objPort.value);
                         op.preservedPortValues = op.preservedPortValues || {};
                         op.preservedPortValues[objPort.name] = objPort.value;
                     }
@@ -927,7 +927,7 @@ Patch.prototype.deSerialize = function (obj, options)
                 {
                     const port2 = op.getPort(objPort.name);
 
-                    port2.deSerializeSettings(objPort);
+                    if (port2)port2.deSerializeSettings(objPort);
 
 
                     if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
