@@ -1,0 +1,39 @@
+{
+    "id": "683d3ab1-4d85-4f71-ae19-e21f4c8e9110",
+    "created": 1716804979760,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716804979762
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger_0",
+                "group": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_1",
+                "uititle": "add port",
+                "group": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Number Triggered",
+                "subType": "number"
+            }
+        ]
+    }
+}

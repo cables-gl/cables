@@ -24,6 +24,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1715838799433
+        },
+        {
+            "message": "Set parentelement to non canvas so popout/external canvas can continue to work",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716826556596
         }
     ],
     "layout": {

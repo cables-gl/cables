@@ -435,6 +435,7 @@ Port.prototype.deSerializeSettings = function (objPort)
     }
 };
 
+
 Port.prototype.setInitialValue = function (v)
 {
     if (this.op.preservedPortLinks[this.name])
@@ -458,6 +459,9 @@ Port.prototype.setInitialValue = function (v)
     if (v !== undefined) this.set(v);
     if (v !== undefined) this.defaultValue = v;
 };
+
+
+
 
 Port.prototype.getSerialized = function ()
 {
@@ -569,6 +573,7 @@ Port.prototype.removeLink = function (link)
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");
+    this.emitEvent("onLinkRemoved");
     this._op.emitEvent("onLinkChanged");
 };
 
@@ -636,6 +641,7 @@ Port.prototype.removeLinkTo = function (p2)
 
             if (this.onLinkChanged) this.onLinkChanged();
             this.emitEvent("onLinkChanged");
+            this.emitEvent("onLinkRemoved");
             return;
         }
     }
@@ -920,6 +926,8 @@ Port.prototype._onTriggered = function (a)
     this._activity();
     this._op.updateAnims();
     if (this._op.enabled && this.onTriggered) this.onTriggered(a);
+
+    if (this._op.enabled) this.emitEvent("trigger");
 };
 
 Port.prototype._onSetProfiling = function (v)

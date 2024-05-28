@@ -1,17 +1,17 @@
 const
     inStrs = op.inMultiPort("Strings", CABLES.OP_PORT_TYPE_STRING),
-    outStr = op.outString("String"),
-    outNum = op.outNumber("Num Strings");
+    outArr = op.outArray("Result"),
+    outNum = op.outNumber("Num Values");
 
 inStrs.onChange = () =>
 {
     const stringPorts = inStrs.get();
-    let str = "";
+    let arr = [];
 
     for (let i = 0; i < stringPorts.length; i++)
     {
-        str += stringPorts[i].get() || "";
+        arr[i] = stringPorts[i].get() || "";
     }
-    outStr.set(str);
+    outArr.set(arr);
     outNum.set(stringPorts.length);
 };

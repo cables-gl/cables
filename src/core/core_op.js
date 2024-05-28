@@ -68,7 +68,6 @@ const Op = function ()
     this.onResize = null;
     this.onLoaded = null;
     this.onDelete = null;
-    this.onUiAttrChange = null;
     this.onError = null;
 
     this._instances = null;
@@ -159,7 +158,6 @@ const Op = function ()
         {
             this._log.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
         }
-
 
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");

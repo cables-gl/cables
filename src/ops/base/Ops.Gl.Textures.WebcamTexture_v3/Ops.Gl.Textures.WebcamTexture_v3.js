@@ -42,8 +42,8 @@ videoElement.setAttribute("autoplay", "");
 videoElement.setAttribute("muted", "");
 videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("style", inCss.get());
-op.patch.cgl.canvas.parentElement.appendChild(videoElement);
-// let oldCanvas=op.patch.cgl.canvas;
+op.patch.cgl.canvas.parentElement.parentElement.appendChild(videoElement);
+// let oldCanvasParent = op.patch.cgl.canvas.parentElement;
 
 let tex = null;
 let initingDevices = false;
@@ -329,6 +329,16 @@ function initDevices()
 
 inTrigger.onTriggered = () =>
 {
+    // if (op.patch.cgl.canvas.parentElement != oldCanvasParent)
+    // {
+    //     console.log("canvas changed!");
+
+    //     op.patch.cgl.canvas.parentElement.appendChild(videoElement);
+    //     oldCanvasParent = op.patch.cgl.canvas.parentElement;
+    //     initDevices();
+    //     restartWebcam();
+    // }
+
     if (!initingDevices && inActive.get())
     {
         if (started && camsLoaded && active)

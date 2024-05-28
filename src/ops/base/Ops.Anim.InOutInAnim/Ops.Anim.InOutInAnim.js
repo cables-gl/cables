@@ -41,22 +41,25 @@ function setupAnim()
     {
         started.trigger();
     });
+
+    const dur1 = duration1.get() || 0.001;
+    const dur2 = duration2.get() || 0.001;
     // attack
     anim.setValue(time +
-                        duration1.get(), value1.get(), function ()
+                        dur1, value1.get(), function ()
     {
 
     });
     // Hold
     anim.setValue(time +
-                        duration1.get() + holdDuration.get(), value1.get(), function ()
+                        dur1 + holdDuration.get(), value1.get(), function ()
     {
         middle.trigger();
     });
     // release
     anim.setValue(time +
-                        duration1.get() +
-                        duration2.get() + holdDuration.get(), value2.get(), function ()
+                        dur1 +
+                        dur2 + holdDuration.get(), value2.get(), function ()
     {
         finished.trigger();
     });

@@ -4,38 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1647416911262
-        },
-        {
-            "message": " added lib: earcut.js",
-            "author": "pandur",
-            "date": 1647417096569
-        },
-        {
-            "message": "Ops.User.pandur.SvgPathToMesh renamed to Ops.Dev.SvgPathToMesh",
-            "author": "pandur",
-            "date": 1647448101899
-        },
-        {
-            "message": "Ops.Dev.SvgPathToMesh renamed to Ops.Gl.Geometry.SvgPathToGeometry",
-            "author": "pandur",
-            "date": 1653287610699
-        },
-        {
-            "message": "cloned op from Ops.Gl.Geometry.SvgPathToGeometry",
-            "author": "pandur",
-            "date": 1656063040879
-        },
-        {
-            "message": "Ops.User.pandur.SvgPathToGeometry2 renamed to Ops.Gl.Geometry.SvgPathToGeometry_v2",
-            "author": "pandur",
-            "date": 1656063432007
-        },
-        {
-            "message": "Ops.Gl.Geometry.SvgPathToGeometry_v2 renamed to Ops.Graphics.Geometry.SvgPathToGeometry_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685951176542
+            "date": 1647416911262,
+            "type": "new"
         }
     ],
     "layout": {
@@ -71,7 +41,6 @@
     "summary": "Generate a SVG path string of a string using an opentype font",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
     "docs": {
