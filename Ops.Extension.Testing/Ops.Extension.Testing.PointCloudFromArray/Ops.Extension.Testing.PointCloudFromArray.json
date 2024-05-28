@@ -1,0 +1,32 @@
+{
+    "id": "d1996f41-ed97-4751-baa4-80ea368f1b93",
+    "created": 1716905253186,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716905253220
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716905253637
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "bv89n4hio",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}
