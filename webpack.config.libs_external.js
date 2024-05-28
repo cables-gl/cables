@@ -1,9 +1,6 @@
 import path, { dirname } from "path";
-import fs from "fs";
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
-import glMatrix from "gl-matrix";
-import webpack from "webpack";
 
 export default (isLiveBuild, buildInfo, minify = false) =>
 {
@@ -19,6 +16,7 @@ export default (isLiveBuild, buildInfo, minify = false) =>
             "filename": "libs.core.js"
         },
         "optimization": {
+            "concatenateModules": true,
             "minimizer": [new TerserPlugin({
                 "extractComments": false,
                 "terserOptions": { "output": { "comments": false } }
