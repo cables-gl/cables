@@ -87,18 +87,32 @@
             {
                 "type": 0,
                 "name": "pivot x index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
                 "group": "Pivot",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "pivot y index",
+                "values": [
+                    "top",
+                    "center",
+                    "bottom"
+                ],
                 "group": "Pivot",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "axis index",
+                "values": [
+                    "xy",
+                    "xz"
+                ],
                 "group": "Pivot",
                 "subType": "integer"
             },
@@ -140,7 +154,6 @@
     },
     "summary": "draw a rectangle (plane, square)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

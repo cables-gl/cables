@@ -260,7 +260,8 @@ function calc()
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();
     mesh = null;
-    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    if (op.patch.cg)
+        mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     needsCalc = false;
 }
 

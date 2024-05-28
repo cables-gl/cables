@@ -140,9 +140,9 @@ function buildMesh()
 
     outGeometry.setRef(geom);
 
-    // if (!mesh) mesh = new CGL.Mesh(cgl, geom);
-    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
-    else mesh.setGeom(geom);
+    if (op.patch.cg) // only generate mesh when there is a cg available, otherwise only outputs a geometry
+        if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+        else mesh.setGeom(geom);
 
     needsRebuild = false;
 }
