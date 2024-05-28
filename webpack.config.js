@@ -22,6 +22,7 @@ export default (isLiveBuild, buildInfo, minify = false) =>
             "globalObject": "window"
         },
         "optimization": {
+            "concatenateModules": true,
             "minimizer": [new TerserPlugin({
                 "extractComments": false,
                 "terserOptions": { "output": { "comments": false } }
