@@ -1067,7 +1067,7 @@ const Op = function ()
     Op.prototype.removeLinks = function ()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
-        for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
+        for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
     };
 
     Op.prototype.getSerialized = function ()
@@ -1095,17 +1095,20 @@ const Op = function ()
         for (let i = 0; i < this.portsIn.length; i++)
         {
             const s = this.portsIn[i].getSerialized();
-            if (s)opObj.portsIn.push(s);
+            if (s) opObj.portsIn.push(s);
         }
-        for (const ipo in this.portsOut)
+        for (let i = 0; i < this.portsOut.length; i++)
         {
-            const s = this.portsOut[ipo].getSerialized();
-            if (s)opObj.portsOut.push(s);
+            const s = this.portsOut[i].getSerialized();
+            if (s) opObj.portsOut.push(s);
         }
 
         if (opObj.portsIn.length == 0) delete opObj.portsIn;
         if (opObj.portsOut.length == 0) delete opObj.portsOut;
         cleanJson(opObj);
+
+        // console.log("s", opObj);
+
 
         return opObj;
     };
@@ -1480,6 +1483,16 @@ const Op = function ()
             if (this.portsIn[ipi] == port)
             {
                 this.portsIn.splice(ipi, 1);
+                this.emitEvent("onUiAttribsChange", {});
+                this.emitEvent("onPortRemoved", {});
+                return;
+            }
+        }
+        for (let ipi = 0; ipi < this.portsOut.length; ipi++)
+        {
+            if (this.portsOut[ipi] == port)
+            {
+                this.portsOut.splice(ipi, 1);
                 this.emitEvent("onUiAttribsChange", {});
                 this.emitEvent("onPortRemoved", {});
                 return;

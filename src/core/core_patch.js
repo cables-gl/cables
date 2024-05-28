@@ -926,6 +926,10 @@ Patch.prototype.deSerialize = function (obj, options)
                 if (objPort && objPort.hasOwnProperty("name"))
                 {
                     const port2 = op.getPort(objPort.name);
+
+                    port2.deSerializeSettings(objPort);
+
+
                     if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
                         port2.set(obj.ops[iop].portsOut[ipo].value);
 
