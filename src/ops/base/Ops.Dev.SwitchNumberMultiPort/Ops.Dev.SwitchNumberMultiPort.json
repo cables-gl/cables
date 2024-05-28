@@ -1,0 +1,47 @@
+{
+    "id": "6061c7ae-ac4b-45e7-ba7c-06b14ada2f19",
+    "created": 1716884900492,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716884900493
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Numbers_0",
+                "group": "Numbers",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Numbers_1",
+                "uititle": "add port",
+                "group": "Numbers",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "id": "9da21e77-53a4-4a0a-ac5a-24c38c818770",
+    "created": 1716885476679,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716885476681
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Textures_0",
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_1",
+                "uititle": "add port",
+                "group": "Textures"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Num Textures",
+                "subType": "number"
+            }
+        ]
+    }
+}
