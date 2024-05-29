@@ -81,6 +81,9 @@ function reload(addCachebuster, force = false)
         {
             fetch(url, options).then((res) =>
             {
+                outDuration.set(Math.round(performance.now() - startTime));
+                outStatus.set(res.status);
+
                 res.blob().then((b) =>
                 {
                     outStringBin.set(URL.createObjectURL(b));
@@ -107,19 +110,21 @@ function reload(addCachebuster, force = false)
                 }).catch((e) =>
                 {
                     op.logError(e);
-                    op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, url, 1);
+                    op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, 1);
                     isLoading.set(false);
                     outData.setRef(null);
                     outString.set("");
+                    outTrigger.trigger();
                     op.patch.loading.finished(loadingId);
                 });
             }).catch((e) =>
             {
                 op.logError(e);
-                op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, url, 1);
+                op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, 1);
                 isLoading.set(false);
                 outData.setRef(null);
                 outString.set("");
+                outTrigger.trigger();
                 op.patch.loading.finished(loadingId);
             });
         }
@@ -130,7 +135,6 @@ function reload(addCachebuster, force = false)
                 (err, _data, xhr) =>
                 {
                     outDuration.set(Math.round(performance.now() - startTime));
-
                     outStatus.set(xhr.status);
 
                     try
