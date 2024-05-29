@@ -104,7 +104,23 @@ function reload(addCachebuster, force = false)
                         outTrigger.trigger();
                         op.patch.loading.finished(loadingId);
                     }
+                }).catch((e) =>
+                {
+                    op.logError(e);
+                    op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, url, 1);
+                    isLoading.set(false);
+                    outData.setRef(null);
+                    outString.set("");
+                    op.patch.loading.finished(loadingId);
                 });
+            }).catch((e) =>
+            {
+                op.logError(e);
+                op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, url, 1);
+                isLoading.set(false);
+                outData.setRef(null);
+                outString.set("");
+                op.patch.loading.finished(loadingId);
             });
         }
         else
@@ -136,7 +152,7 @@ function reload(addCachebuster, force = false)
                     catch (e)
                     {
                         op.logError(e);
-                        op.setUiError("jsonerr", "Problem while loading json:<br/>" + e, 1);
+                        op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, url, 1);
                         isLoading.set(false);
                         outData.setRef(null);
                         outString.set("");
