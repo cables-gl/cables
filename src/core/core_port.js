@@ -518,6 +518,8 @@ Port.prototype.getSerialized = function ()
     if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) delete obj.value;
     if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION && this.links.length == 0) obj = null;
     if (obj && Object.keys(obj).length == 1 && obj.name)obj = null; // obj is null if there is no real information other than name
+
+    // console.log(obj);
     cleanJson(obj);
 
     return obj;
