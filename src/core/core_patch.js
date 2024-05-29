@@ -307,7 +307,7 @@ Patch.prototype.getFilePath = function (filename)
     if (filename.indexOf("data:") === 0) return filename;
     if (filename.indexOf("file:") === 0) return filename;
     filename = filename.replace("//", "/");
-    if (filename.startsWith(this.config.prefixAssetPath)) filename.replace(this.config.prefixAssetPath, "");
+    if (filename.startsWith(this.config.prefixAssetPath)) filename = filename.replace(this.config.prefixAssetPath, "");
     return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
 };
 
