@@ -1,0 +1,200 @@
+{
+    "id": "bad1aa6c-274b-46ff-90dc-424726be6138",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642868426174
+        },
+        {
+            "message": " added core lib: cgl_texturecopy",
+            "author": "pandur",
+            "date": 1642868439042
+        },
+        {
+            "message": " added core lib: cgl_copytexture",
+            "author": "pandur",
+            "date": 1642869069922
+        },
+        {
+            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
+            "author": "pandur",
+            "date": 1642869809458
+        },
+        {
+            "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
+            "author": "pandur",
+            "date": 1644228758190
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.RgbeToHdrTexture",
+            "author": "pandur",
+            "date": 1645091427554
+        },
+        {
+            "message": "Ops.User.pandur.ParticleSystem renamed to Ops.Dev.ParticleSystem",
+            "author": "pandur",
+            "date": 1645116302648
+        },
+        {
+            "message": "Ops.Dev.ParticleSystem renamed to Ops.Dev.ParticleSystem.ParticleSystem_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675092965650
+        },
+        {
+            "message": "Ops.Dev.ParticleSystem.ParticleSystem_v2 renamed to Ops.Team.Particles.ParticleSystem_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678367028667
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture"
+    ],
+    "authorName": "pandur",
+    "created": 1645091427553,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Num Particles",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Min Lifetime",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Lifetime",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity X",
+                "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Y",
+                "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Z",
+                "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Inherit Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Feedback Positions",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Spawn Positions",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Spawn Velocity",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Positions",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Timing",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Test",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Tex Size",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "",
+    "issues": "",
+    "caniusequery": "",
+
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": ""
+}

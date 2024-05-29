@@ -1,0 +1,227 @@
+{
+    "id": "a20a9e2f-4b99-48a9-bf67-120604268bb6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675001723497
+        },
+        {
+            "message": "Ops.User.pandur.ParticleSystemVelocityArea renamed to Ops.Dev.ParticleSystem.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675089991071
+        },
+        {
+            "message": "Ops.Dev.ParticleSystem.VelocityArea renamed to Ops.Team.Particles.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678366891284
+        },
+        {
+            "message": "cloned op from Ops.Team.Particles.VelocityArea",
+            "author": "pandur",
+            "date": 1678371079277
+        },
+        {
+            "message": "Ops.User.pandur.VelocityArea2 renamed to Ops.Team.Particles.VelocityArea_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678371395379
+        },
+        {
+            "message": "cloned op from Ops.Team.Particles.VelocityArea_v2",
+            "author": "pandur",
+            "date": 1680291857901
+        },
+        {
+            "message": "Ops.Patch.PmAyQPs.VelocityAreaV3 renamed to Ops.Team.Particles.VelocityAreaV3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680292539791
+        },
+        {
+            "message": "Ops.Team.Particles.VelocityAreaV3 renamed to Ops.Team.Particles.VelocityArea_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680592004894
+        },
+        {
+            "message": "Added Timing Texture Input and parameters to activate the Area at a certain Age ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704977784409
+        },
+        {
+            "message": "Added \"Everywhere\" Area",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704978944569
+        },
+        {
+            "message": "cloned op from Ops.Team.Particles.VelocityArea_v3",
+            "author": "pandur",
+            "date": 1705502815167
+        },
+        {
+            "message": "Ops.Team.Particles.VelocityArea4 renamed to Ops.Team.Particles.VelocityArea_v4",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1705591344598
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1705502815167,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Area",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Collision fade",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Boncyness",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Randomness",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "inForceOutwards",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Dir X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Dir Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Dir Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Age Start",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Age End",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Age Fade",
+                "group": "Age Activation",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Collision",
+                "objType": "texture"
+            }
+        ]
+    },
+    "summary": "we",
+    "docs": {
+        "ports": []
+    }
+}
