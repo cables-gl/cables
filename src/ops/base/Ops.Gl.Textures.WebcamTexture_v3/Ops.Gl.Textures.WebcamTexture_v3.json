@@ -4,16 +4,6 @@
     "created": 1617962508754,
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.Textures.WebcamTexture",
-            "author": "pandur",
-            "date": 1604930023022
-        },
-        {
-            "message": "cloned op from Ops.Gl.Textures.WebcamTexture_v2",
-            "author": "stephan",
-            "date": 1617962508757
-        },
-        {
             "message": "now only asks for permission if \"active\"-port is enables",
             "type": "improvement",
             "author": "pandur",
