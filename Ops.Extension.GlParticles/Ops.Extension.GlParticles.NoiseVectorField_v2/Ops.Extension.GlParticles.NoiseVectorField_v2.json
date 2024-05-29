@@ -161,5 +161,7 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "tmQeE9"
 }
