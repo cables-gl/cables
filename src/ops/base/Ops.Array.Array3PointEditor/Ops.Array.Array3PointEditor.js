@@ -9,8 +9,9 @@ const
     inPosY = op.inFloat("y", 0),
     inPosZ = op.inFloat("z", 0),
 
+    inCopyIndex = op.inInt("Copy From Index"),
+    inCopy = op.inTriggerButton("Copy Coordinates"),
     inReset = op.inTriggerButton("Reset"),
-
     next = op.outTrigger("Next"),
     outArr = op.outArray("Coordinates");
 
@@ -19,6 +20,8 @@ let idx = 0;
 let arr = [];
 let gizmo = null;
 arr.length = inNum.get();
+
+op.setPortGroup("Copy", [inCopyIndex, inCopy]);
 
 outArr.setUiAttribs({ "stride": 3 });
 
@@ -31,6 +34,26 @@ inNum.onChange = numChanged;
 inEditIndex.onChange = updateIndex;
 
 updateIndex();
+
+inCopy.onTriggered = () =>
+{
+    const fromIdx = inCopyIndex.get() * 3;
+    // arr[idx + 0] = arr[fromIdx + 0];
+    // arr[idx + 1] = arr[fromIdx + 1];
+    // arr[idx + 2] = arr[fromIdx + 2];
+
+    removePosListener();
+    arr[idx + 0] = arr[fromIdx + 0];
+    arr[idx + 1] = arr[fromIdx + 1];
+    arr[idx + 2] = arr[fromIdx + 2];
+    inPosX.set(arr[idx + 0]);
+    inPosY.set(arr[idx + 1]);
+    inPosZ.set(arr[idx + 2]);
+
+    addPosListener();
+
+    changed = true;
+};
 
 inReset.onTriggered = () =>
 {
@@ -112,7 +135,6 @@ exec.onTriggered = () =>
     {
         if (!gizmo) gizmo = new CABLES.UI.Gizmo(op.patch.cgl);
         gizmo.set(
-        // gui.setTransformGizmo(
             {
                 "posX": inPosX,
                 "posY": inPosY,

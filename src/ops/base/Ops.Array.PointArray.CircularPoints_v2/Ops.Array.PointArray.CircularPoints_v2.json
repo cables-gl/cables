@@ -1,15 +1,26 @@
 {
-    "id": "0bad56de-b6fb-4610-b62e-8e447197381e",
-    "created": 1716900198502,
-    "authorName": "pandur",
+    "id": "5d2de367-c2b8-4702-abf0-b16bbeb22f37",
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "created op",
             "author": "pandur",
-            "date": 1716900198536
+            "date": 1667504160840
+        },
+        {
+            "message": "Added direction clockwise/anti-clockwise toggle",
+            "type": "feature",
+            "author": "kikohs",
+            "date": 1712731232334
+        },
+        {
+            "message": "Added axis/plane switch",
+            "type": "feature",
+            "author": "kikohs",
+            "date": 1712731411764
         }
     ],
+    "authorName": "pandur",
+    "created": 1667504163826,
     "layout": {
         "portsIn": [
             {
@@ -54,8 +65,27 @@
             },
             {
                 "type": 0,
-                "name": "Offset Rotation",
+                "name": "Offset rotation",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Plane index",
+                "values": [
+                    "XY",
+                    "XZ",
+                    "YZ"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Direction index",
+                "values": [
+                    "Clockwise",
+                    "Anticlockwise"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -78,5 +108,10 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "exampleProjectId": "V34dYh",
+    "docs": {
+        "ports": []
+    },
+    "summary": "create arrays for circular shapes, helix,circle etc"
 }

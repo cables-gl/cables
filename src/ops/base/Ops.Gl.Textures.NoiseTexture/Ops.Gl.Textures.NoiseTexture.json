@@ -17,6 +17,10 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear"
+                ],
                 "subType": "integer"
             },
             {
@@ -88,6 +92,21 @@
                 "type": 0,
                 "name": "Max B",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Channel A",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Min A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max A",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -109,5 +128,13 @@
         "ports": []
     },
     "youtubeids": [],
-    "exampleProjectId": "Lv4hay"
+    "exampleProjectId": "Lv4hay",
+    "changelog": [
+        {
+            "message": "Added random parameters for alpha channel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1716976668653
+        }
+    ]
 }
