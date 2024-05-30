@@ -39,7 +39,11 @@ vec3 MOD_pos=col.xyz+pos.xyz;
 #endif
 
 #ifdef MOD_IGNOREALPHA0
-    if(col.a==0.0)psMul=0.0;
+    if(col.a==0.0)
+    {
+        psMul=0.0;
+        pos.x=pos.y=pos.z=-9999999999.0;
+    }
 #endif
 
 

@@ -91,13 +91,14 @@ function setupMesh()
         outNumPoints.set(0);
         return;
     }
-    const num = inTex.get().width * inTex.get().height;
+    const num = (inTex.get().width) * (inTex.get().height);
     outNumPoints.set(num);
 
     if (num == currentNum) return;
     currentNum = num;
 
     let verts = new Float32Array(num * 3);
+
     let texCoords = new Float32Array(num * 2);
 
     let bias = 0.5 * (1.0 / inTex.get().width);

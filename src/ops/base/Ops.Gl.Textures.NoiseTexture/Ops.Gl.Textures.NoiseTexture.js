@@ -17,6 +17,9 @@ const
     inOutB = op.inBool("Channel B", true),
     inMinB = op.inFloat("Min B", 0),
     inMaxB = op.inFloat("Max B", 1),
+    inOutA = op.inBool("Channel A", true),
+    inMinA = op.inFloat("Min A", 1),
+    inMaxA = op.inFloat("Max A", 1),
     outTex = op.outTexture("Texture"),
     outNumPixel = op.outNumber("Total Pixel");
 
@@ -29,12 +32,15 @@ inSeed.onChange =
     inMinR.onChange =
     inMaxR.onChange =
     inMinG.onChange =
+    inMinA.onChange =
     inMaxG.onChange =
+    inMaxA.onChange =
     inMinB.onChange =
     inMaxB.onChange =
     inOutR.onChange =
     inOutB.onChange =
     inOutG.onChange =
+    inOutA.onChange =
     tfilter.onChange =
     wrap.onChange =
     inInteger.onChange =
@@ -52,6 +58,7 @@ function update()
             inMinG.get() < 0.0 || inMinG.get() > 1.0 ||
             inMinB.get() < 0.0 || inMinB.get() > 1.0 ||
             inMaxR.get() < 0.0 || inMaxR.get() > 1.0 ||
+            inMaxA.get() < 0.0 || inMaxA.get() > 1.0 ||
             inMaxG.get() < 0.0 || inMaxG.get() > 1.0 ||
             inMaxB.get() < 0.0 || inMaxB.get() > 1.0) op.setUiError("nonfprange", "Non floating point textures have to be between 0 and 1");
         else op.setUiError("nonfprange", null);
@@ -62,6 +69,7 @@ function update()
     inMaxG.setUiAttribs({ "greyout": !inColor.get() });
     inMinB.setUiAttribs({ "greyout": !inColor.get() });
     inMaxB.setUiAttribs({ "greyout": !inColor.get() });
+    inMaxA.setUiAttribs({ "greyout": !inColor.get() });
 
     let width = Math.ceil(inWidth.get());
     let height = Math.ceil(inHeight.get());
@@ -81,6 +89,9 @@ function update()
     const minB = inMinB.get();
     const diffB = inMaxB.get() - minB;
 
+    const minA = inMinA.get();
+    const diffA = inMaxA.get() - minA;
+
     Math.randomSeed = inSeed.get();
 
     if (isFp)
@@ -94,7 +105,7 @@ function update()
                 pixels[i + 0] = minR + Math.seededRandom() * diffR;
                 pixels[i + 1] = minG + Math.seededRandom() * diffG;
                 pixels[i + 2] = minB + Math.seededRandom() * diffB;
-                pixels[i + 3] = 1;
+                pixels[i + 3] = minA + Math.seededRandom() * diffA;
             }
         }
         else
@@ -118,7 +129,7 @@ function update()
                 pixels[i + 0] = (minR + Math.seededRandom() * diffR) * 255;
                 pixels[i + 1] = (minG + Math.seededRandom() * diffG) * 255;
                 pixels[i + 2] = (minB + Math.seededRandom() * diffB) * 255;
-                pixels[i + 3] = 255;
+                pixels[i + 3] = (minA + Math.seededRandom() * diffA) * 255;
             }
         }
         else
@@ -141,6 +152,7 @@ function update()
     if (!inOutR.get()) for (let i = 0; i < num; i += 4)pixels[i + 0] = 0.0;
     if (!inOutG.get()) for (let i = 0; i < num; i += 4)pixels[i + 1] = 0.0;
     if (!inOutB.get()) for (let i = 0; i < num; i += 4)pixels[i + 2] = 0.0;
+    if (!inOutA.get()) for (let i = 0; i < num; i += 4)pixels[i + 3] = 0.0;
 
     let cgl_filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;

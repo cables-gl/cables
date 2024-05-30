@@ -52,6 +52,71 @@
             {
                 "type": 1,
                 "name": "Trigger_7"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_8"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_9"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_10"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_11"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_12"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_13"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_14"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_15"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_16"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_17"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_18"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_19"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_20"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_21"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_22"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_23",
+                "uititle": "add port"
             }
         ]
     },
