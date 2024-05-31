@@ -40,3 +40,4 @@ Please send us an [email](mailto:hi@undev.de) or contact us on [discord](https:/
 - [Hochschule Bonn-Rhein-Sieg](https://www.h-brs.de/en), Germany
 - [NYCU](https://www.nycu.edu.tw/nycu/en/index), Taiwan
 - [Art Center Nabi](https://cccv.to/artcenternabi), Korea
+- [Robert Schumann Hochschule]( https://www.rsh-duesseldorf.de/institute/institut-fuer-musik-und-medien/studios/labor-visual-music), Düsseldorf, Germany
