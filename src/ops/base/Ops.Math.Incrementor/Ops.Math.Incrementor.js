@@ -3,9 +3,9 @@ const
     decrement = op.inTriggerButton("Decrement"),
     inLimit = op.inBool("Limit", false),
     inLength = op.inValueInt("Length"),
-    reset = op.inTriggerButton("Reset"),
     inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind"),
     inDefault = op.inValueInt("Default", 0),
+    reset = op.inTriggerButton("Reset"),
     outChanged = op.outTrigger("Changed"),
     value = op.outNumber("Value"),
     outRestarted = op.outTrigger("Restarted");
@@ -40,6 +40,7 @@ inMode.onChange = () =>
 function updateUi()
 {
     inLength.setUiAttribs({ "greyout": !inLimit.get() });
+    inMode.setUiAttribs({ "greyout": !inLimit.get() });
 }
 
 function doReset()

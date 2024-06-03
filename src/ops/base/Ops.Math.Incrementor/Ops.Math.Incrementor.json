@@ -21,10 +21,6 @@
                 "subType": "integer"
             },
             {
-                "type": 1,
-                "name": "Reset"
-            },
-            {
                 "type": 0,
                 "name": "Mode index",
                 "values": [
@@ -37,6 +33,10 @@
                 "type": 0,
                 "name": "Default",
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [

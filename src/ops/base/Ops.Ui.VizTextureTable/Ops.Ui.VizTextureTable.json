@@ -4,32 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1644848363183
-        },
-        {
-            "message": "Ops.User.pandur.VizArraySheet renamed to Ops.Dev.VizArrayTable",
-            "author": "pandur",
-            "date": 1644873145035
-        },
-        {
-            "message": "cloned op from Ops.Dev.VizArrayTable",
-            "author": "pandur",
-            "date": 1645188318557
-        },
-        {
-            "message": "Ops.User.pandur.VizTextureTable renamed to Ops.Dev.VizTextureTable",
-            "author": "pandur",
-            "date": 1645189350150
-        },
-        {
-            "message": "Ops.Dev.VizTextureTable renamed to Ops.Viz.VizTextureTable",
-            "author": "pandur",
-            "date": 1652088859524
-        },
-        {
-            "message": "Ops.Viz.VizTextureTable renamed to Ops.Ui.VizTextureTable",
-            "author": "pandur",
-            "date": 1652088990439
+            "date": 1644848363183,
+            "type": "new"
         },
         {
             "message": "performance optimized: only read pixels that will be shown / update less often",
@@ -44,16 +20,16 @@
             "date": 1671034980836
         },
         {
-            "message": " added core lib: cgl_pixelreader",
-            "type": "",
-            "author": "pandur",
-            "date": 1675437510282
-        },
-        {
             "message": "Add row parameter to scroll through texture rows",
             "type": "feature",
             "author": "pandur",
             "date": 1708512581387
+        },
+        {
+            "message": "show coordinates of each pixel color table row",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1717428609798
         }
     ],
     "authorName": "pandur",

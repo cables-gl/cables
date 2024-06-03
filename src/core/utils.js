@@ -482,7 +482,7 @@ export const filename = function (url)
         return parts[0];
     }
 
-    const parts = (url + "").split("/");
+    let parts = (url + "").split("/");
     if (parts.length > 0)
     {
         const str = parts[parts.length - 1];
