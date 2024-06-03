@@ -6,7 +6,7 @@ const
     inTexPS = op.inTexture("Point Size", null, "texture"),
     inNorm = op.inBool("Normalize", false),
     inRemove0 = op.inBool("Remove Point at 0", false),
-    inIgnoreAlpha0 = op.inBool("Ignore Alpha 0", false),
+    inIgnoreAlpha0 = op.inBool("Ignore Alpha 0", true),
     trigger = op.outTrigger("Trigger"),
     outNumPoints = op.outNumber("Total Points", 0);
 
