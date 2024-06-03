@@ -165,16 +165,10 @@ function serializeSidebar()
             let foundPort = false;
 
             const theOp = op.patch.ops[i];
-            const opText = theOp.getPortByName("Text");
-            const opLabel = theOp.getPortByName("Label");
-            const opTitle = theOp.getPortByName("Title");
             const p = {};
             p.id = theOp.id;
             p.objName = theOp.objName;
             p.ports = {};
-            if (opText) p.text = opText;
-            if (opLabel) p.label = opLabel;
-            if (opTitle) p.title = opTitle;
 
             for (let j = 0; j < op.patch.ops[i].portsOut.length; j++)
             {
