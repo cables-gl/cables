@@ -156,7 +156,7 @@ function reload(addCachebuster, force = false)
                     catch (e)
                     {
                         op.logError(e);
-                        op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, url, 1);
+                        op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, 1);
                         isLoading.set(false);
                         outData.setRef(null);
                         outString.set("");
