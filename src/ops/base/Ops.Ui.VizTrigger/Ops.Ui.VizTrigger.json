@@ -1,0 +1,32 @@
+{
+    "id": "4533060f-3cd4-4572-ac78-dad0710a3f7a",
+    "created": 1717428723104,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1717428723105
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Count",
+                "subType": "number"
+            }
+        ]
+    }
+}

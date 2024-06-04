@@ -105,7 +105,14 @@
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888121397
+            "date": 1643888121397,
+            "type": "improvement"
+        },
+        {
+            "message": "add op title to preset json",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1717403566911
         }
     ]
 }

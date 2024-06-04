@@ -111,8 +111,7 @@ op.patch.cgl.on("beginFrame",
 
 op.renderVizLayerGl = (ctx, layer) =>
 {
-    const
-        gl = op.patch.cgl.gl;
+    const gl = op.patch.cgl.gl;
 
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
@@ -154,30 +153,42 @@ op.renderVizLayerGl = (ctx, layer) =>
 
             ctx.fillStyle = "#666";
 
-            ctx.fillText(i / stride,
-                layer.x / layer.scale + padding,
-                layer.y / layer.scale + lineHeight + i / stride * lineHeight + padding);
+            let numPadY = String(realTexture.width).length;
+            let numPadX = String(realTexture.height).length;
 
-            if (isFp) ctx.fillStyle = "rgba(" + arr[idx + 0] * 255 + "," + arr[idx + 1] * 255 + "," + arr[idx + 2] * 255 + "," + arr[idx + 3] * 255 + ")";
-            else ctx.fillStyle = "rgba(" + arr[idx + 0] + "," + arr[idx + 1] + "," + arr[idx + 2] + "," + arr[idx + 3] + ")";
+            let idxX = Math.floor(idx / realTexture.height);
 
-            ctx.fillRect(
-                layer.x / layer.scale + padding + 25,
-                layer.y / layer.scale + lineHeight + count * lineHeight + padding - 7,
-                15,
-                8);
+            let line = String(x).padStart(numPadX, " ") + "," + String(y + inRow.get()).padStart(numPadY, " ");
 
-            ctx.fillStyle = "#ccc";
-
-            for (let s = 0; s < stride; s++)
+            if (y + inRow.get() < realTexture.height && y + inRow.get() >= 0)
             {
-                let v = arr[i + s];
-                let str = "" + v;
+                ctx.fillText(
+                    line,
+                    layer.x / layer.scale + padding,
+                    layer.y / layer.scale + lineHeight + i / stride * lineHeight + padding);
 
-                if (!isFp)v /= 255;
-                str = String(Math.round(v * 10000) / 10000);
+                const indexStrWidth = line.length * 9;
+                if (isFp) ctx.fillStyle = "rgba(" + arr[idx + 0] * 255 + "," + arr[idx + 1] * 255 + "," + arr[idx + 2] * 255 + "," + arr[idx + 3] * 255 + ")";
+                else ctx.fillStyle = "rgba(" + arr[idx + 0] + "," + arr[idx + 1] + "," + arr[idx + 2] + "," + arr[idx + 3] + ")";
 
-                ctx.fillText(str, layer.x / layer.scale + s * 60 + 70, layer.y / layer.scale + 10 + (i / stride) * 10 + padding);
+                ctx.fillRect(
+                    layer.x / layer.scale + padding + indexStrWidth,
+                    layer.y / layer.scale + lineHeight + count * lineHeight + padding - 7,
+                    15,
+                    8);
+
+                ctx.fillStyle = "#ccc";
+
+                for (let s = 0; s < stride; s++)
+                {
+                    let v = arr[i + s];
+                    let str = "" + v;
+
+                    if (!isFp)v /= 255;
+                    str = String(Math.round(v * 10000) / 10000);
+
+                    ctx.fillText(str, layer.x / layer.scale + indexStrWidth + 40 + s * 55, layer.y / layer.scale + 10 + (i / stride) * 10 + padding);
+                }
             }
         }
 
