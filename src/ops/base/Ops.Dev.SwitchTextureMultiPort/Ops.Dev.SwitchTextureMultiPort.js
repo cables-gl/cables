@@ -1,7 +1,7 @@
 const
     cgl = op.patch.cgl,
     inIndex = op.inInt("Index", 0),
-    inObjs = op.inMultiPort("Textures", CABLES.OP_PORT_TYPE_OBJECT),
+    inObjs = op.inMultiPort("Textures", CABLES.OP_PORT_TYPE_TEXTURE),
     outResult = op.outTexture("Texture", CGL.Texture.getEmptyTexture(cgl)),
     outNum = op.outNumber("Num Textures");
 

@@ -13,7 +13,10 @@ update();
 
 function update()
 {
-    const outerOp = op.patch.getSubPatchOuterOp(op.uiAttribs.subPatch);
+    let outerOp = op.uiAttribs.subPatch;
+
+    if (CABLES.UI)
+        outerOp = op.patch.getSubPatchOuterOp(op.uiAttribs.subPatch);
 
     if (outerOp)
     {
