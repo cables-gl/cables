@@ -6,9 +6,9 @@
     "keywords": [],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/pandrr/cables/issues"
+        "url": "https://github.com/cables-gl/cables/issues"
     },
-    "homepage": "https://github.com/pandrr/cables#readme",
+    "homepage": "https://github.com/cables-gl/cables#readme",
     "main": "src/core/index.js",
     "type": "module",
     "engines": {
@@ -36,7 +36,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@github.com:pandrr/cables.git"
+        "url": "git@github.com:cables-gl/cables.git"
     },
     "author": ""
 }

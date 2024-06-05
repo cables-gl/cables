@@ -22,6 +22,7 @@ const
 function update()
 {
     const index = Math.round(switchPort.get());
+
     if (index >= 0 && index < NUM_PORTS)
     {
         valueOutPort.set(index);
