@@ -142,9 +142,11 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
         this._resizeAttr(array, attr);
     }
 
-    if (end >= array.length - 1)
+    if (end > array.length)
     {
-        this._log.warn(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+        this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+        // end = array.length - 1;
+        return;
     }
 
     if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
