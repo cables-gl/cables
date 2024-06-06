@@ -1,6 +1,6 @@
 const
-    v = op.inValueFloat("value"),
-    result = op.outNumber("result");
+    v = op.inString("value", ""),
+    result = op.outString("String");
 
 v.onChange = exec;
 
