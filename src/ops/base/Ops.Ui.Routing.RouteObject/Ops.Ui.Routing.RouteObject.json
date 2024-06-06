@@ -1,0 +1,47 @@
+{
+    "summary": "Stores a value, use the same value in different places (was: value.value)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Array In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Array Out",
+                "objType": "texture"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "The value"
+            },
+            {
+                "name": "result",
+                "text": "Same as the input `Value`"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "c9b14538-bcd7-4559-9f61-c0d5a96b0ba8",
+    "created": 1717676916134,
+    "changelog": [
+        {
+            "message": "Ops.Value.Value renamed to Ops.Value.Number",
+            "author": "pandur",
+            "date": 1561119761731
+        },
+        {
+            "message": "Ops.Value.Number renamed to Ops.Number.Number",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852665761
+        }
+    ],
+    "issues": ""
+}
