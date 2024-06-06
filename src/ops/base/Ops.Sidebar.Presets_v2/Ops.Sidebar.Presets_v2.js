@@ -229,6 +229,10 @@ function addPreset()
 
     const newOp = op.patch.addOp("Ops.Json.ParseObject_v2");
 
+    newOp.setUiAttribs({ "translate": {
+        "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y - 100
+    } });
+
     newOp.getPortByName("JSON String").set(JSON.stringify(r));
 
     if (CABLES.UI) gui.patchView.centerSelectOp(newOp.id);
