@@ -24,5 +24,5 @@ Use `{{ASSETPATH}}` to get a URL to file Assets
 
 ## Nesting
 
-in v3 the nesting parameter was introduced. it will use a the CSS feature (nesting)[https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting] to make sure the styles are only applied to the correct elements.
+in v3 the nesting parameter was introduced. it will use a the CSS feature [nesting](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting) to make sure the styles are only applied to the correct elements.
 the default value will make sure the styles are only apllied to elements below ".cablesContainer" this way only elements that were created below and by cables are influenced.
