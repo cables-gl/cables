@@ -116,6 +116,7 @@ class CGState extends Events
 
         this.cgCanvas = new CgCanvas({ "canvasEle": canvEle, "cg": this });
 
+        canvEle.parentElement.classList.add("cablesContainer");
         if (this._setCanvas) this._setCanvas(canvEle);
 
         this.updateSize();

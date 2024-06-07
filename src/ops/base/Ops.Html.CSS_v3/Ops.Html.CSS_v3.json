@@ -1,0 +1,41 @@
+{
+    "id": "aa44a0e9-b9fe-4eed-93a3-38e41a91b623",
+    "authorName": "pandur",
+    "created": 1717747087681,
+    "summary": "Define a custom stylesheet",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "css code"
+            },
+            {
+                "type": 5,
+                "name": "Nesting Parent"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.CSS2 renamed to Ops.Html.CSS_v2",
+            "author": "pandur",
+            "date": 1560335517152
+        },
+        {
+            "message": "Added option to activate/deactivate style",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708698463821
+        }
+    ],
+    "issues": ""
+}
