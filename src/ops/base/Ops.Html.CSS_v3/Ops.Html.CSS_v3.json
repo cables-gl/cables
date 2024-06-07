@@ -21,8 +21,7 @@
                 "name": "Active",
                 "subType": "boolean"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "changelog": [
         {
@@ -35,7 +34,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1708698463821
+        },
+        {
+            "message": "added nesting parameter",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1717747150791
         }
     ],
-    "issues": ""
+    "license": "MIT"
 }
