@@ -1,0 +1,65 @@
+{
+    "id": "3af6abc2-0c64-46f8-bf49-04714722cc3b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1584365937229
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1717747756037,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "set a number at index in an array",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger to set the value at the index"
+            },
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Index",
+                "text": "index to update with the value"
+            },
+            {
+                "name": "Number",
+                "text": "number that will be set to the selected index"
+            },
+            {
+                "name": "Reset",
+                "text": "Reverts array to it's original state"
+            },
+            {
+                "name": "Result",
+                "text": "Modified array out"
+            }
+        ]
+    }
+}
