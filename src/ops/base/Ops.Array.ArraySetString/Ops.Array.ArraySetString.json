@@ -2,9 +2,10 @@
     "id": "3af6abc2-0c64-46f8-bf49-04714722cc3b",
     "changelog": [
         {
-            "message": "created op",
+            "message": "New op",
+            "type": "new",
             "author": "pandur",
-            "date": 1584365937229
+            "date": 1717748900311
         }
     ],
     "authorName": "pandur",
@@ -32,14 +33,9 @@
             }
         ]
     },
-    "summary": "set a number at index in an array",
-    "issues": "",
+    "summary": "set a string at index in an array",
     "docs": {
         "ports": [
-            {
-                "name": "Execute",
-                "text": "Trigger to set the value at the index"
-            },
             {
                 "name": "Array",
                 "text": "Array in"
@@ -49,17 +45,10 @@
                 "text": "index to update with the value"
             },
             {
-                "name": "Number",
-                "text": "number that will be set to the selected index"
-            },
-            {
-                "name": "Reset",
-                "text": "Reverts array to it's original state"
-            },
-            {
                 "name": "Result",
                 "text": "Modified array out"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }
