@@ -189,7 +189,15 @@ function updatePlayState()
 
 speed.onChange = function ()
 {
-    videoElement.playbackRate = speed.get();
+    try
+    {
+        op.setUiError("playbackRate", null);
+        videoElement.playbackRate = speed.get();
+    }
+    catch (e)
+    {
+        op.setUiError("playbackRate", "value for 'speed' not supported by browser", 1);
+    }
 };
 
 loop.onChange = function ()
@@ -330,8 +338,15 @@ function embedVideo(force)
         videoElement.style.display = "none";
         videoElement.setAttribute("src", url);
         videoElement.setAttribute("crossOrigin", "anonymous");
-        videoElement.playbackRate = speed.get();
-
+        try
+        {
+            op.setUiError("playbackRate", null);
+            videoElement.playbackRate = speed.get();
+        }
+        catch (e)
+        {
+            op.setUiError("playbackRate", "value for 'speed' not supported by browser", 1);
+        }
         if (!addedListeners)
         {
             addedListeners = true;

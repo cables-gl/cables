@@ -5,8 +5,6 @@ const
 
 op.setUiAttrib({ "height": 100, "width": 130, "resizable": true });
 
-op.checkMainloopExists();
-
 let lastTime = 0;
 let count = 0;
 

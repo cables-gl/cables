@@ -122,9 +122,14 @@
             "message": "fixed - now works correctly with IBLMaterial3",
             "author": "andro",
             "date": 1556285398570
+        },
+        {
+            "message": "fix crash when op.patch.cg not set",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1718194859528
         }
     ],
     "issues": "",
-
     "exampleProjectId": "GxagQ6"
 }

@@ -15,6 +15,7 @@ let updateFacing = true;
 render.onTriggered = function ()
 {
     const cg = op.patch.cg;
+    if (!cg) return;
 
     if (updateFacing)
     {

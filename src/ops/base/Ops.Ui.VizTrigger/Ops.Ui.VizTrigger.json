@@ -28,5 +28,11 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "summary": "Visualize triggering for debugging reasons",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ROKBEe"
 }
