@@ -208,6 +208,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1715113571377
+        },
+        {
+            "message": "catch and display errors with negative playback rate on some browsers",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1718100994868
         }
     ],
     "summary": "Play a video file and use it as a texture",
@@ -300,5 +306,6 @@
     "exampleProjectId": "E0hWmi",
     "coreLibs": [
         "interactionneededbutton"
-    ]
+    ],
+    "license": "MIT"
 }

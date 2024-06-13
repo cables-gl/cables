@@ -4,8 +4,6 @@ const
 
 op.setUiAttrib({ "height": 100, "width": 100, "resizable": true });
 
-op.checkMainloopExists();
-
 inNum.onChange = () =>
 {
     op.checkMainloopExists();

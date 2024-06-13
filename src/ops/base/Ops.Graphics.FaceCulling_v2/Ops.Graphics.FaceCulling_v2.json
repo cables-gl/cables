@@ -17,6 +17,11 @@
             {
                 "type": 0,
                 "name": "Discard index",
+                "values": [
+                    "Back Sides",
+                    "Front Sides",
+                    "All"
+                ],
                 "group": "Face Fulling",
                 "subType": "integer"
             }
@@ -48,7 +53,6 @@
     ],
     "summary": "Disable the rendering of front or back facing triangles with culling",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

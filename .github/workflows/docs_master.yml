@@ -22,7 +22,7 @@ jobs:
     - name: build jsdoc
       run: |
         cd doc/jsdoc/
-        npm install
+        npm install --no-save
         npx documentation build ../../../cables/src/core/index.js -f html -o out --theme theme
     - name: Deploy jsdocs to netlify
       uses: netlify/actions/cli@master

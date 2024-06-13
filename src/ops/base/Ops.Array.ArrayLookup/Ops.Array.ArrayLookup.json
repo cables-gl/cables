@@ -32,5 +32,11 @@
                 "name": "Result"
             }
         ]
-    }
+    },
+    "summary": "Create an array that is filled with values looked up by index from another array",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "cwJBEe"
 }

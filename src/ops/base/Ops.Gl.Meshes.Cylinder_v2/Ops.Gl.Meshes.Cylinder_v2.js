@@ -284,8 +284,9 @@ function buildMesh()
 
     outGeometry.setRef(geom);
 
-    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
-    else mesh.setGeom(geom);
+    if (op.patch.cg)
+        if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+        else mesh.setGeom(geom);
 
     needsRebuild = false;
 }
@@ -294,7 +295,7 @@ function buildMesh()
 inRender.onTriggered = function ()
 {
     if (needsRebuild) buildMesh();
-    if (inDraw.get()) mesh.render(cgl.getShader());
+    if (inDraw.get() && mesh) mesh.render(cgl.getShader());
     outTrigger.trigger();
 };
 
