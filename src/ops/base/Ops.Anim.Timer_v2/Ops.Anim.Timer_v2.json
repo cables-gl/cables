@@ -60,5 +60,13 @@
     "youtubeids": [],
     "exampleProjectId": "YTuOQm",
     "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "fix timer not pausing correctly",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1718264617146
+        }
+    ]
 }
