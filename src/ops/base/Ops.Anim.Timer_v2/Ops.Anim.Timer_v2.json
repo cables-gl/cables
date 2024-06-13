@@ -59,5 +59,6 @@
     },
     "youtubeids": [],
     "exampleProjectId": "YTuOQm",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }
