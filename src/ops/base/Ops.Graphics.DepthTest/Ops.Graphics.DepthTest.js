@@ -26,6 +26,7 @@ function updateFunc()
 render.onTriggered = function ()
 {
     const cg = op.patch.cg;
+    if (!cg) return;
 
     op.patch.cg.pushDepthTest(enable.get());
     op.patch.cg.pushDepthWrite(write.get());

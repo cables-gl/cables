@@ -29,6 +29,7 @@ inAxis.onChange = () =>
 render.onTriggered = function ()
 {
     const cg = op.patch.cg;
+    if (!cg) return;
 
     asp = cg.getViewPort()[2] / cg.getViewPort()[3];
     if (!autoAspect.get())asp = aspect.get();
