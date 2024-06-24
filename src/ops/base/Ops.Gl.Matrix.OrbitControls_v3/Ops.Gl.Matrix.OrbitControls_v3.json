@@ -125,8 +125,8 @@
     "summary": "rotate your object by clicking and dragging the mouse",
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "efd09072-3dff-4be8-97b9-d8222ed967db",
-    "created": 1712738945666,
+    "id": "0655b098-d2a8-4ce2-a0b9-ecb2c78f873a",
+    "created": 1719244226730,
     "docs": {
         "ports": [
             {
@@ -167,6 +167,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1712740231919
+        },
+        {
+            "message": "Fixed bug with initial \"axis x\" default value not being used properly",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1719244314300
         }
     ],
     "license": "MIT"
