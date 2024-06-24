@@ -62,7 +62,6 @@ op.onAnimFrame = function (tt, frameNum, deltaMs)
         }
         else
         {
-            // timer.update(op.patch.reqAnimTimeStamp);
             timer.update();
 
             const timerVal = timer.get();
