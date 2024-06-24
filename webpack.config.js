@@ -19,7 +19,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
     ];
     if (analyze)
     {
-        plugins.push(new BundleAnalyzerPlugin({ "analyzerMode": "static", "reportTitle": "cables core", "reportFilename": path.join(__dirname, "build", "report_core.html") }));
+        plugins.push(new BundleAnalyzerPlugin({ "analyzerMode": "static", "openAnalyzer": false, "reportTitle": "cables core", "reportFilename": path.join(__dirname, "build", "report_core.html") }));
     }
     return {
         "mode": isLiveBuild ? "production" : "development",
