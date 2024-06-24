@@ -2,10 +2,11 @@ import path, { dirname } from "path";
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
 
-export default (isLiveBuild, buildInfo, minify = false) =>
+export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
 {
     const __dirname = dirname(fileURLToPath(import.meta.url));
-    return {
+
+    const config = {
         "mode": isLiveBuild ? "production" : "development",
         "entry": [
             path.join(__dirname, "libs", "index.js")
@@ -28,4 +29,5 @@ export default (isLiveBuild, buildInfo, minify = false) =>
             "extensions": [".js"]
         }
     };
+    return config;
 };

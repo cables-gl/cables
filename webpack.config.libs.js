@@ -3,7 +3,7 @@ import fs from "fs";
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
 
-export default (isLiveBuild, buildInfo, minify = false) =>
+export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
 {
     const getDirectories = function (arr)
     {
