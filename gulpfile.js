@@ -15,6 +15,8 @@ if (process.env.npm_config_apiconfig) configLocation = "../cables_api/cables_env
 
 let isLiveBuild = false;
 let minify = false;
+let analyze = false;
+
 let config = {};
 if (fs.existsSync(configLocation))
 {
@@ -57,6 +59,12 @@ function _watch(done)
     done();
 }
 
+function _analyze(done)
+{
+    analyze = true;
+    done();
+}
+
 function _core_libs_clean(done)
 {
     const dir = "build/libs/";
@@ -72,7 +80,7 @@ function _core_libs_clean(done)
 
 function _copy_ui()
 {
-    return gulp.src(["build/*", "!build/buildinfo.json", "!/build/libs/*"]).pipe(gulp.dest("../cables_ui/dist/js/"));
+    return gulp.src(["build/*", "!build/buildinfo.json", "!/build/libs/*", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
 }
 
 function _core_libs_copy()
@@ -89,7 +97,7 @@ function _core_js(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackConfig(isLiveBuild, buildInfo, minify), (err, stats) =>
+        webpack(webpackConfig(isLiveBuild, buildInfo, minify, analyze), (err, stats) =>
         {
             if (err) throw err;
             if (stats.hasErrors())
@@ -105,7 +113,7 @@ function _core_libs(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false),
+        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze),
             (err, stats) =>
             {
                 if (err) throw err;
@@ -126,7 +134,7 @@ function _external_libs(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackExternalLibsConfig(isLiveBuild, buildInfo, true),
+        webpack(webpackExternalLibsConfig(isLiveBuild, buildInfo, true, analyze),
             (err, stats) =>
             {
                 if (err) throw err;
@@ -158,6 +166,11 @@ const defaultSeries = gulp.series(
 );
 
 gulp.task("build", defaultSeries);
+
+gulp.task("analyze", gulp.series(
+    _analyze,
+    defaultSeries,
+));
 
 gulp.task("default", gulp.series(
     defaultSeries,

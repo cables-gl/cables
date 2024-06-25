@@ -70,7 +70,7 @@ eye = circlePos(0);
 vec3.set(vCenter, 0, 0, 0);
 vec3.set(vUp, 0, 1, 0);
 updateSmoothness();
-// reset();
+reset();
 
 function reset()
 {

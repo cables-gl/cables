@@ -3,10 +3,24 @@ import glMatrix from "gl-matrix";
 import webpack from "webpack";
 import { fileURLToPath } from "url";
 import TerserPlugin from "terser-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
-export default (isLiveBuild, buildInfo, minify = false) =>
+export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
 {
     const __dirname = dirname(fileURLToPath(import.meta.url));
+
+    const plugins = [
+        new webpack.BannerPlugin({
+            "entryOnly": true,
+            "footer": true,
+            "raw": true,
+            "banner": "\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"
+        })
+    ];
+    if (analyze)
+    {
+        plugins.push(new BundleAnalyzerPlugin({ "analyzerMode": "static", "openAnalyzer": false, "reportTitle": "cables core", "reportFilename": path.join(__dirname, "build", "report_core.html") }));
+    }
     return {
         "mode": isLiveBuild ? "production" : "development",
         "entry": [
@@ -51,13 +65,6 @@ export default (isLiveBuild, buildInfo, minify = false) =>
         "resolve": {
             "extensions": [".json", ".js", ".jsx"]
         },
-        "plugins": [
-            new webpack.BannerPlugin({
-                "entryOnly": true,
-                "footer": true,
-                "raw": true,
-                "banner": "\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"
-            })
-        ]
+        "plugins": plugins
     };
 };

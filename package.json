@@ -23,13 +23,15 @@
         "gulp": "5.0.0",
         "raw-loader": "^4.0.2",
         "webpack": "5.91.0",
-        "terser-webpack-plugin": "5.3.10"
+        "terser-webpack-plugin": "5.3.10",
+        "webpack-bundle-analyzer": "4.10.2"
     },
     "scripts": {
         "build": "gulp build",
         "build:live": "gulp build",
         "watch": "gulp watch",
-        "start": "gulp"
+        "start": "gulp",
+        "analyze": "gulp analyze"
     },
     "directories": {
         "doc": "doc"
