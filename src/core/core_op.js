@@ -116,7 +116,10 @@ const Op = function ()
         if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
             this.uiAttribs.title = this._shortOpName;
 
+
         if (this.uiAttribs.title === undefined) this.uiAttribs.title = this._shortOpName;
+
+
 
         return this.uiAttribs.title;
     };
@@ -1085,7 +1088,8 @@ const Op = function ()
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
 
-        if (opObj.uiAttribs.title == this._shortOpName) delete opObj.uiAttribs.title;
+        if (opObj.uiAttribs.title == this._shortOpName ||
+            (this.uiAttribs.title || "").toLowerCase() == this._shortOpName.toLowerCase()) delete opObj.uiAttribs.title;
 
         opObj.portsIn = [];
         opObj.portsOut = [];
