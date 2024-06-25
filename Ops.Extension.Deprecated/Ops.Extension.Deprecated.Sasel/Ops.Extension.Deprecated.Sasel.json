@@ -1,0 +1,23 @@
+{
+    "id": "9a6c7cbe-272a-4da5-b49d-591f1e6711bb",
+    "created": 1710152124634,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1710152124680
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719323850310
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    }
+}
