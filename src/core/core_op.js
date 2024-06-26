@@ -89,16 +89,12 @@ const Op = function ()
     this.init = null;
 
     Object.defineProperty(this, "name", {
-        get()
-        {
-            // console.log("op. get name...? deprecated...", this._name);
-            // console.log((new Error()).stack);
-            return this._name;
-        },
+        get() { return this.getTitle(); },
         set(v)
         {
-            console.log("set name? deprecated???", v);
-            this._name = v;
+            this.setTitle(v);
+            console.log("op set name? deprecated???", v);
+            // this._name = v;
         }
     });
 
@@ -128,21 +124,20 @@ const Op = function ()
     {
         if (!this.uiAttribs) return "nouiattribs" + this._name;
 
-        if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
-            this.uiAttribs.title = this._shortOpName;
+        // if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
+        //     this.uiAttribs.title = this._shortOpName;
 
-        if (this.uiAttribs.title === undefined) this.uiAttribs.title = this._shortOpName;
-
-        return this.uiAttribs.title;
+        return this.uiAttribs.title || this._shortOpName;
     };
 
-    Op.prototype.setTitle = function (name)
+    Op.prototype.setTitle = function (title)
     {
-        const doEmitEvent = this._name != name;
-        this._name = name;
+        console.log("settitle", title);
+        console.log(
+            (new Error()).stack
+        );
 
-        if (this.uiAttribs.title != name) this.uiAttr({ "title": name });
-        if (doEmitEvent) this.emitEvent("onTitleChange", name);
+        if (title != this.getTitle()) this.uiAttr({ "title": title });
     };
 
     Op.prototype.setStorage = function (newAttribs)
@@ -190,10 +185,16 @@ const Op = function ()
             )) emitMove = true;
 
 
-        if (newAttribs.hasOwnProperty("disabled"))
+        if (newAttribs.hasOwnProperty("title") && newAttribs.title != this.uiAttribs.title)
         {
-            this.setEnabled(!newAttribs.disabled);
+            const doEmitEvent = newAttribs.title != this.getTitle();
+            this.uiAttribs.title = newAttribs.title;
+            if (doEmitEvent) this.emitEvent("onTitleChange", newAttribs.title);
+
+            // this.setTitle(newAttribs.title);
         }
+
+        if (newAttribs.hasOwnProperty("disabled")) this.setEnabled(!newAttribs.disabled);
 
         let changed = false;
         for (const p in newAttribs)
@@ -202,8 +203,9 @@ const Op = function ()
             this.uiAttribs[p] = newAttribs[p];
         }
 
+
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
-        if (newAttribs.title && newAttribs.title != this._name) this.setTitle(newAttribs.title);
+
 
         if (changed)
         {
@@ -1092,7 +1094,6 @@ const Op = function ()
         if (this.opId) opObj.opId = this.opId;
         if (this.patch.storeObjNames) opObj.objName = this.objName;
 
-
         opObj.id = this.id;
         opObj.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
 
@@ -1106,13 +1107,12 @@ const Op = function ()
         opObj.portsIn = [];
         opObj.portsOut = [];
 
-        // console.log("this.portsIn", this.portsIn);
-
         for (let i = 0; i < this.portsIn.length; i++)
         {
             const s = this.portsIn[i].getSerialized();
             if (s) opObj.portsIn.push(s);
         }
+
         for (let i = 0; i < this.portsOut.length; i++)
         {
             const s = this.portsOut[i].getSerialized();
@@ -1122,9 +1122,6 @@ const Op = function ()
         if (opObj.portsIn.length == 0) delete opObj.portsIn;
         if (opObj.portsOut.length == 0) delete opObj.portsOut;
         cleanJson(opObj);
-
-        // console.log("s", opObj);
-
 
         return opObj;
     };
