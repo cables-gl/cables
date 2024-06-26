@@ -1,5 +1,4 @@
 {
-    "summary": "Stores a value, use the same value in different places (was: value.value)",
     "layout": {
         "portsIn": [
             {
@@ -19,10 +18,6 @@
             {
                 "name": "value",
                 "text": "The value"
-            },
-            {
-                "name": "result",
-                "text": "Same as the input `Value`"
             }
         ]
     },
@@ -42,5 +37,5 @@
             "date": 1701852665761
         }
     ],
-    "issues": ""
+    "license": "MIT"
 }

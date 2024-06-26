@@ -29,7 +29,6 @@
         ]
     },
     "summary": "average x,y,z values of an array3x",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -61,5 +60,7 @@
             "author": "pandur",
             "date": 1567671227369
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "lmn5Og"
 }

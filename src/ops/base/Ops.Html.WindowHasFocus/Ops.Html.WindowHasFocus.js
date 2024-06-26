@@ -1,6 +1,6 @@
 const
-    outFocussed = op.outBool("has focus"),
-    outVisible = op.outBool("Tab Visible", true);
+    outFocussed = op.outBoolNum("has focus"),
+    outVisible = op.outBoolNum("Tab Visible", true);
 
 const focused = true;
 
