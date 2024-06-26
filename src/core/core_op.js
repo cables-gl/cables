@@ -132,10 +132,10 @@ const Op = function ()
 
     Op.prototype.setTitle = function (title)
     {
-        console.log("settitle", title);
-        console.log(
-            (new Error()).stack
-        );
+        // console.log("settitle", title);
+        // console.log(
+        //     (new Error()).stack
+        // );
 
         if (title != this.getTitle()) this.uiAttr({ "title": title });
     };
@@ -173,7 +173,7 @@ const Op = function ()
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
-
+        let changed = false;
         let emitMove = false;
         if (
             CABLES.UI &&
@@ -190,13 +190,12 @@ const Op = function ()
             const doEmitEvent = newAttribs.title != this.getTitle();
             this.uiAttribs.title = newAttribs.title;
             if (doEmitEvent) this.emitEvent("onTitleChange", newAttribs.title);
-
+            changed = true;
             // this.setTitle(newAttribs.title);
         }
 
         if (newAttribs.hasOwnProperty("disabled")) this.setEnabled(!newAttribs.disabled);
 
-        let changed = false;
         for (const p in newAttribs)
         {
             if (this.uiAttribs[p] != newAttribs[p]) changed = true;
@@ -1100,6 +1099,10 @@ const Op = function ()
         if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = JSON.parse(JSON.stringify(this.storage));
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
+
+        if (opObj.uiAttribs.title === "") delete opObj.uiAttribs.title;
+        if (opObj.uiAttribs.color === null) delete opObj.uiAttribs.color;
+        if (opObj.uiAttribs.comment === null) delete opObj.uiAttribs.comment;
 
         if (opObj.uiAttribs.title == this._shortOpName ||
             (this.uiAttribs.title || "").toLowerCase() == this._shortOpName.toLowerCase()) delete opObj.uiAttribs.title;
