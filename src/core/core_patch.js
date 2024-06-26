@@ -977,9 +977,6 @@ Patch.prototype.deSerialize = function (obj, options)
                                 obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                                 obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
-                            console.log("aaaa", l);
-
-
                             // const took = performance.now - startTime;
                             // if (took > 100)console.log(obj().ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                         }
@@ -1342,13 +1339,13 @@ Patch.prototype.printTriggerStack = function ()
         return;
     }
     console.groupCollapsed( // eslint-disable-line
-        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].op.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].op.objName + "." + this._triggerStack[this._triggerStack.length - 1].name,
     );
 
     const rows = [];
     for (let i = 0; i < this._triggerStack.length; i++)
     {
-        rows.push(i + ". " + this._triggerStack[i].op.name + " " + this._triggerStack[i].name);
+        rows.push(i + ". " + this._triggerStack[i].op.objName + " " + this._triggerStack[i].name);
     }
 
     console.table(rows); // eslint-disable-line

@@ -42,7 +42,7 @@ const Op = function ()
     this.uiAttribs = {};
     this.enabled = true;
     this.patch = arguments[0];
-    this.name = arguments[1];
+    this._name = arguments[1];
     this.preservedPortValues = {};
     this.preservedPortLinks = {};
 
@@ -88,6 +88,21 @@ const Op = function ()
      */
     this.init = null;
 
+    Object.defineProperty(this, "name", {
+        get()
+        {
+            // console.log("op. get name...? deprecated...", this._name);
+            // console.log((new Error()).stack);
+            return this._name;
+        },
+        set(v)
+        {
+            console.log("set name? deprecated???", v);
+            this._name = v;
+        }
+    });
+
+
     Object.defineProperty(this, "objName", { get() { return this._objName; } });
     Object.defineProperty(this, "shortName", { get() { return this._shortOpName; } });
 
@@ -98,7 +113,7 @@ const Op = function ()
     Op.prototype.clearUiAttrib = function (name)
     {
         const obj = {};
-        obj.name = null;
+        // obj.name = null;
         this.uiAttrib(obj);
     };
 
@@ -111,23 +126,20 @@ const Op = function ()
 
     Op.prototype.getTitle = function ()
     {
-        if (!this.uiAttribs) return "nouiattribs" + this.name;
+        if (!this.uiAttribs) return "nouiattribs" + this._name;
 
         if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
             this.uiAttribs.title = this._shortOpName;
 
-
         if (this.uiAttribs.title === undefined) this.uiAttribs.title = this._shortOpName;
-
-
 
         return this.uiAttribs.title;
     };
 
     Op.prototype.setTitle = function (name)
     {
-        const doEmitEvent = this.name != name;
-        this.name = name;
+        const doEmitEvent = this._name != name;
+        this._name = name;
 
         if (this.uiAttribs.title != name) this.uiAttr({ "title": name });
         if (doEmitEvent) this.emitEvent("onTitleChange", name);
@@ -159,7 +171,7 @@ const Op = function ()
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
         {
-            this._log.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
+            this._log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
         }
 
 
@@ -191,7 +203,7 @@ const Op = function ()
         }
 
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
-        if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
+        if (newAttribs.title && newAttribs.title != this._name) this.setTitle(newAttribs.title);
 
         if (changed)
         {
@@ -222,7 +234,7 @@ const Op = function ()
     Op.prototype.getName = function ()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
-        return this.name;
+        return this._name;
     };
 
     Op.prototype.addOutPort = function (p)
