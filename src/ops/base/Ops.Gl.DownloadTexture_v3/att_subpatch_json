@@ -4,14 +4,13 @@
       "opId": "7f601f11-6d44-4c0a-842a-51b4fa8ccd6b",
       "id": "jqf9xuicl",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": -12,
           "y": -80
         },
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null,
-        "color": null
+        "tempSubOldOpId": null
       },
       "storage": {},
       "portsOut": [
@@ -38,14 +37,13 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "s3ipieojx",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": 1,
           "y": -420
         },
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null,
-        "color": null
+        "tempSubOldOpId": null
       },
       "storage": {},
       "portsOut": [
@@ -56,7 +54,7 @@
             {
               "portIn": "Texture",
               "portOut": "innerOut_7zxlhqqf8",
-              "objIn": "g76abal0y",
+              "objIn": "9mnylc2fx",
               "objOut": "s3ipieojx"
             }
           ]
@@ -80,7 +78,7 @@
             {
               "portIn": "Quality",
               "portOut": "innerOut_6ozewyh0e",
-              "objIn": "g76abal0y",
+              "objIn": "9mnylc2fx",
               "objOut": "s3ipieojx"
             }
           ]
@@ -104,7 +102,7 @@
             {
               "portIn": "Trigger",
               "portOut": "innerOut_uxwx45pbg",
-              "objIn": "g76abal0y",
+              "objIn": "9mnylc2fx",
               "objOut": "s3ipieojx"
             }
           ]
@@ -115,14 +113,13 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "dc2cts19z",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": 1,
-          "y": 109.397909800062
+          "y": 140.397909800062
         },
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null,
-        "color": null
+        "tempSubOldOpId": null
       },
       "storage": {},
       "portsIn": [
@@ -136,13 +133,12 @@
       "opId": "bc110e48-812d-489d-b1b3-b09c644c6982",
       "id": "xtisz9h2s",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": 312,
           "y": -160
         },
-        "blueprintSubpatch2": true,
-        "color": null
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
@@ -197,13 +193,12 @@
       "opId": "6b7f9561-6faf-4df7-ac3b-64235dded700",
       "id": "to8nqx69d",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": 312,
           "y": -340
         },
-        "blueprintSubpatch2": true,
-        "color": null
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
@@ -254,13 +249,12 @@
       "opId": "bff9c3d9-e63a-46d2-a59f-932c715aceab",
       "id": "129jufs0y",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": 336,
           "y": -260
         },
-        "blueprintSubpatch2": true,
-        "color": null
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsOut": [
@@ -278,20 +272,59 @@
       ]
     },
     {
-      "opId": "920090d2-63b2-4aae-8ca7-0b0aacf6bc93",
-      "id": "g76abal0y",
+      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
+      "id": "rxnsr0uls",
       "uiAttribs": {
-        "subPatch": "xb8aaibq6",
+        "extendTitle": 1,
+        "subPatch": "f5xwnyikr",
+        "translate": {
+          "x": -337.6741504378739,
+          "y": -88.74245733376421
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "timesTriggered",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
+      "id": "amfuo8tfs",
+      "uiAttribs": {
+        "extendTitle": 0,
+        "subPatch": "f5xwnyikr",
+        "translate": {
+          "x": -249.6035813745615,
+          "y": 29.397909800061996
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "timesTriggered",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "ed772bc0-ab12-427e-8378-64ea4f7635ed",
+      "id": "9mnylc2fx",
+      "uiAttribs": {
+        "subPatch": "f5xwnyikr",
         "translate": {
           "x": -24,
           "y": -240
         },
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true,
-        "color": null,
+        "loading": false,
         "error": null
       },
-      "storage": {},
       "portsIn": [
         {
           "name": "Format index",
@@ -318,7 +351,7 @@
               "portIn": "Data URL",
               "portOut": "Base64 string",
               "objIn": "jqf9xuicl",
-              "objOut": "g76abal0y"
+              "objOut": "9mnylc2fx"
             }
           ]
         },
@@ -333,58 +366,19 @@
               "portIn": "Download",
               "portOut": "Finished",
               "objIn": "jqf9xuicl",
-              "objOut": "g76abal0y"
+              "objOut": "9mnylc2fx"
             },
             {
               "portIn": "exe",
               "portOut": "Finished",
               "objIn": "rxnsr0uls",
-              "objOut": "g76abal0y"
+              "objOut": "9mnylc2fx"
             }
           ]
         }
-      ]
-    },
-    {
-      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
-      "id": "rxnsr0uls",
-      "uiAttribs": {
-        "extendTitle": 0,
-        "subPatch": "xb8aaibq6",
-        "translate": {
-          "x": -337.6741504378739,
-          "y": -88.74245733376421
-        }
-      },
-      "portsOut": [
-        {
-          "name": "timesTriggered",
-          "value": 0
-        }
       ],
       "storage": {
-        "ref": "rxnsr0uls"
-      }
-    },
-    {
-      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
-      "id": "amfuo8tfs",
-      "uiAttribs": {
-        "extendTitle": 0,
-        "subPatch": "xb8aaibq6",
-        "translate": {
-          "x": -249.6035813745615,
-          "y": 29.397909800061996
-        }
-      },
-      "portsOut": [
-        {
-          "name": "timesTriggered",
-          "value": 0
-        }
-      ],
-      "storage": {
-        "ref": "amfuo8tfs"
+        "ref": "9mnylc2fx"
       }
     }
   ]

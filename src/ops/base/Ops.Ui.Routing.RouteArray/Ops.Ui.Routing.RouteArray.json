@@ -1,5 +1,4 @@
 {
-    "summary": "Stores a value, use the same value in different places (was: value.value)",
     "layout": {
         "portsIn": [
             {
@@ -15,16 +14,7 @@
         ]
     },
     "docs": {
-        "ports": [
-            {
-                "name": "value",
-                "text": "The value"
-            },
-            {
-                "name": "result",
-                "text": "Same as the input `Value`"
-            }
-        ]
+        "ports": []
     },
     "authorName": "pandur",
     "id": "4a560a77-dedf-4367-841b-1d9334403c41",
@@ -42,5 +32,5 @@
             "date": 1701852665761
         }
     ],
-    "issues": ""
+    "license": "MIT"
 }

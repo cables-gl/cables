@@ -49,7 +49,6 @@
         ]
     },
     "summary": "sidebar boolean toggle/switch element",
-    "youtubeid": "cpRVswVdvI0",
     "docs": {
         "ports": []
     },
@@ -72,5 +71,8 @@
             "date": 1712755365055
         }
     ],
-    "exampleProjectId": "aDgYX5"
+    "license": "MIT",
+    "youtubeids": [
+        "cpRVswVdvI0"
+    ]
 }

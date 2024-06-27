@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "kikohs",
             "date": 1647361182194
+        },
+        {
+            "message": "Fixed but with boolean grouping parameter",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1719327485697
         }
     ],
     "authorName": "kikohs",
@@ -19,6 +25,10 @@
             {
                 "type": 0,
                 "name": "Locale index",
+                "values": [
+                    "browser",
+                    "custom"
+                ],
                 "subType": "integer"
             },
             {
@@ -28,6 +38,11 @@
             {
                 "type": 0,
                 "name": "Style index",
+                "values": [
+                    "decimal",
+                    "currency",
+                    "percent"
+                ],
                 "subType": "integer"
             },
             {
@@ -73,6 +88,11 @@
             {
                 "type": 0,
                 "name": "Currency Display index",
+                "values": [
+                    "symbol",
+                    "code",
+                    "name"
+                ],
                 "group": "Currency",
                 "subType": "integer"
             }
@@ -85,14 +105,13 @@
             {
                 "type": 0,
                 "name": "Has error",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
     "summary": "Format a number to a string in the given locale and format",
     "issues": "",
     "caniusequery": "Date%20toLocaleString",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -138,5 +157,6 @@
             }
         ]
     },
-    "exampleProjectId": "-h-Rx3"
+    "exampleProjectId": "-h-Rx3",
+    "license": "MIT"
 }

@@ -35,7 +35,8 @@ function formatNumber()
     let maximumFractionDigits = CABLES.clamp(inMaxFrac.get(), 0, 20);
 
     op.setUiError("minmaxfrac", null);
-    if(minimumFractionDigits > maximumFractionDigits) {
+    if (minimumFractionDigits > maximumFractionDigits)
+    {
         op.setUiError("minmaxfrac", "Minimum bigger than maximum for fraction digits, using minimum", 1);
         maximumFractionDigits = minimumFractionDigits;
     }
@@ -45,15 +46,15 @@ function formatNumber()
         "minimumFractionDigits": minimumFractionDigits,
         "maximumFractionDigits": maximumFractionDigits,
         "minimumIntegerDigits": CABLES.clamp(inMinDig.get(), 1, 21),
-        "useGrouping": inUseGroup.get()
+        "useGrouping": inUseGroup.get() == true
     };
 
     if (inMinSign.get() > 0) opts.minimumSignificantDigits = CABLES.clamp(inMinSign.get(), 1, 21);
     if (inMaxSign.get() > 0) opts.maximumSignificantDigits = CABLES.clamp(inMaxSign.get(), 1, 21);
 
-
     op.setUiError("minmaxsig", null);
-    if(opts.minimumSignificantDigits > opts.maximumSignificantDigits) {
+    if (opts.minimumSignificantDigits > opts.maximumSignificantDigits)
+    {
         op.setUiError("minmaxsig", "Minimum bigger than maximum for significant digits, using minimum", 1);
         opts.maximumSignificantDigits = opts.minimumSignificantDigits;
     }

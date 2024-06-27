@@ -9,17 +9,6 @@
     ],
     "authorName": "pandur",
     "created": 1559031714224,
-    "todos": [
-        {
-            "message": "should be callex Array3 later",
-            "author": "pandur",
-            "id": "52bff88d-116b-4a5d-950c-533451b6a610",
-            "date": 1559031923240,
-            "deleted": true,
-            "deletedBy": "pandur",
-            "deletedDate": 1559058987773
-        }
-    ],
     "layout": {
         "portsIn": [
             {
@@ -61,10 +50,9 @@
         ]
     },
     "summary": "create an array of num triplets set to default values xyz  ",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "lmn5Og"
 }

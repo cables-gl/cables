@@ -1,0 +1,32 @@
+{
+    "id": "9463db79-00aa-4dad-8a48-9d6b831c4766",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1686128136085
+        },
+        {
+            "message": "Ops.Patch.P_xdU1v.AllTextures renamed to Ops.Team.Cables.AllTextures",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686132742808
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Textures"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1686128237989
+}
