@@ -1,0 +1,85 @@
+{
+    "authorName": "pandur",
+    "id": "67714f3f-acac-4f0d-b862-b1d5b480fc4f",
+    "created": 1671127862101,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Texture 0 index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Texture 1 index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Texture 2 index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Texture 3 index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "select textures to render to",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.Render2TexturesSlots",
+            "author": "pandur",
+            "date": 1671127862102
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1671353563411
+        },
+        {
+            "message": "Ops.User.pandur.Render2TexturesSlots2 renamed to Ops.Gl.ShaderEffects.Render2TexturesSlots_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671354909903
+        },
+        {
+            "message": " added core lib: cgl_rendertargets",
+            "type": "",
+            "author": "pandur",
+            "date": 1680018924776
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.Render2TexturesSlots_v2 renamed to Ops.Deprecated.Gl.ShaderEffects.Render2TexturesSlots_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676084037
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719480318679
+        }
+    ],
+    "coreLibs": [
+        "cgl_rendertargets",
+        "cgl_shadermodifier"
+    ]
+}

@@ -1,0 +1,154 @@
+{
+    "id": "c3779911-688a-4f4e-a295-90529c95bd8d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593431098973
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.Body.PhysicsCube_v2 renamed to Ops.Physics.Body.PhysicsCube_v2",
+            "author": "pandur",
+            "date": 1596093418363
+        },
+        {
+            "message": "Ops.Physics.Body.PhysicsCube_v2 renamed to Ops.Physics.CannonBody.CannonPhysicsCube_v2",
+            "author": "pandur",
+            "date": 1654586158572
+        },
+        {
+            "message": "Ops.Physics.CannonBody.CannonPhysicsCube_v2 renamed to Ops.Physics.Cannon.Body.CannonPhysicsCube_v2",
+            "author": "pandur",
+            "date": 1654586390303
+        },
+        {
+            "message": "Ops.Physics.Cannon.Body.CannonPhysicsCube_v2 renamed to Ops.Physics.Cannon.CannonPhysicsCube_v2",
+            "author": "pandur",
+            "date": 1654586524598
+        },
+        {
+            "message": "Ops.Physics.Cannon.CannonPhysicsCube_v2 renamed to Ops.Deprecated.Physics.Cannon.CannonPhysicsCube_v2",
+            "author": "pandur",
+            "date": 1671007317712
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719479860264
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593431107187,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sizeX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sizeY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sizeZ",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Ray Hit",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Collision"
+            }
+        ]
+    },
+    "summary": "physical body in form of a cube",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Name",
+                "text": "name of this physics cube object"
+            },
+            {
+                "name": "Mass",
+                "text": "Mass of object. Value of 0 will cause no gravity to be applied to the object"
+            },
+            {
+                "name": "Reset",
+                "text": "reset this object to original position/restart simulation for this object"
+            },
+            {
+                "name": "X",
+                "text": "position of object in the world on the X axis (during simulation)"
+            },
+            {
+                "name": "Y",
+                "text": "position of object in the world on the Y axis (during simulation)"
+            },
+            {
+                "name": "Z",
+                "text": "position of object in the world on the Z axis (during simulation)"
+            },
+            {
+                "name": "Ray Hit",
+                "text": "has a Cast Ray hit this object? for use with Cast Ray operator (Ops.Physics.CastRay)"
+            },
+            {
+                "name": "Collision",
+                "text": "trigger when collided with another object or the ground plane"
+            }
+        ]
+    },
+    "exampleProjectId": "9Y8nAQ"
+}

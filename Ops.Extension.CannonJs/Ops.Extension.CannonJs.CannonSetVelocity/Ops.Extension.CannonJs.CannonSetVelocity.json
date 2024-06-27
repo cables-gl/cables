@@ -1,0 +1,69 @@
+{
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "c88e1ca8-df02-42c1-b4fd-ec1892277141",
+    "created": 1509815994482,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "Velocity X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Z",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Set"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "set velocity of a physics object",
+    "docs": {
+        "ports": [
+            {
+                "name": "Set",
+                "text": "set specified velocity"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.Physics.SetVelocity renamed to Ops.Physics.SetVelocity",
+            "author": "pandur",
+            "date": 1596093483022
+        },
+        {
+            "message": "Ops.Physics.SetVelocity renamed to Ops.Physics.Cannon.CannonSetVelocity",
+            "author": "pandur",
+            "date": 1654586099049
+        },
+        {
+            "message": "Ops.Physics.Cannon.CannonSetVelocity renamed to Ops.Deprecated.Physics.Cannon.CannonSetVelocity",
+            "author": "pandur",
+            "date": 1671007915362
+        }
+    ],
+    "issues": "",
+
+    "youtubeids": [],
+    "exampleProjectId": "mnoRYO"
+}

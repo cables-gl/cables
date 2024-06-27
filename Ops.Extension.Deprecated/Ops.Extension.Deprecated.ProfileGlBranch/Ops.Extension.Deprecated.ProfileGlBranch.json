@@ -1,0 +1,46 @@
+{
+    "id": "a0c93e10-2ac2-4e24-9a21-c8b13b5a31f1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1586327559122
+        },
+        {
+            "message": "Ops.Debug.ProfileGlBranch renamed to Ops.Admin.Debug.ProfileGlBranch",
+            "author": "pandur",
+            "date": 1596093555197
+        },
+        {
+            "message": "Ops.Admin.Debug.ProfileGlBranch renamed to Ops.Deprecated.Debug.ProfileGlBranch",
+            "author": "pandur",
+            "date": 1623914197028
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719481319006
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1586327592600,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "5",
+                "name": "Branch Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ]
+    }
+}

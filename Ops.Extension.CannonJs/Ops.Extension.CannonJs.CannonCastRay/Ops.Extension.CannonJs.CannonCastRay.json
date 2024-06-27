@@ -1,0 +1,272 @@
+{
+    "id": "88fc51f5-1550-4f00-abd3-6cae8f6f5a57",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1549947595927
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.CastRay renamed to Ops.Physics.CastRay",
+            "author": "pandur",
+            "date": 1596093452276
+        },
+        {
+            "message": "Ops.Physics.CastRay renamed to Ops.Physics.Cannon.CannonCastRay",
+            "author": "pandur",
+            "date": 1654585952830
+        },
+        {
+            "message": "Ops.Physics.Cannon.CannonCastRay renamed to Ops.Deprecated.Physics.Cannon.CannonCastRay",
+            "author": "pandur",
+            "date": 1671007669493
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1549947598925,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 0,
+                "name": "Screen X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Screen Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Screen Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Change Cursor",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Has Hit",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Normal X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Normal Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Normal Z",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "aabb x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aabb y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aabb z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aabb x2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aabb y2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aabb z2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "to x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "to y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "to z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "from x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "from y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "from z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Body x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Body y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Body z",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            }
+        ]
+    },
+    "libs": [
+        "cannon.js"
+    ],
+    "summary": "cast a ray and test intersection with physics bodies",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Screen X",
+                "text": "Position of the ray on the X axis 0.0 is the center of the screen"
+            },
+            {
+                "name": "Screen Y",
+                "text": "Position of the ray on the Y axis 0.0 is the center of the screen"
+            },
+            {
+                "name": "Screen Z",
+                "text": "Position of the ray on the Z axis 0.0 is the center of the screen"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Has Hit",
+                "text": "if the ray intersects/hits a physics body then 1 is output"
+            },
+            {
+                "name": "Hit X",
+                "text": "Intersection position in world space on the X axis"
+            },
+            {
+                "name": "Hit Y",
+                "text": "Intersection position in world space on the Y axis"
+            },
+            {
+                "name": "Hit Z",
+                "text": "Intersection position in world space on the Z axis"
+            },
+            {
+                "name": "Hit Normal X",
+                "text": "which normal was picked on the object on X axis (-1,0,1)"
+            },
+            {
+                "name": "Hit Normal Y",
+                "text": "which normal was picked on the object on Y axis (-1,0,1)"
+            },
+            {
+                "name": "Hit Normal Z",
+                "text": "which normal was picked on the object on Z axis (-1,0,1)"
+            },
+            {
+                "name": "Result",
+                "text": "object containing all parameter information and some extras, inspect to see which ones are available to parse out"
+            },
+            {
+                "name": "Body x",
+                "text": "location of picked physics body on X axis"
+            },
+            {
+                "name": "Body y",
+                "text": "location of picked physics body on Y axis"
+            },
+            {
+                "name": "Body z",
+                "text": "location of picked physics body on Z axis"
+            },
+            {
+                "name": "Name",
+                "text": "name and number of picked object - Name is set in a physics body operator and the number is assigned after it with a \".#\" format"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Docs need a lot of work, parameter names aren't clear",
+            "author": "andro",
+            "id": "6844885b-d287-4e56-ac71-6b4fc59ff2b2",
+            "date": 1558347670614,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605453281987
+        }
+    ],
+    "youtubeids": [
+        "dF1fP_7fh4Q"
+    ],
+    "caniusequery": "",
+    "exampleProjectId": "Vtv-1p"
+}

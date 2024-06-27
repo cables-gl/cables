@@ -1,0 +1,93 @@
+{
+    "id": "35cc1b97-3deb-4cbb-91b5-1658697d4460",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642868426174
+        },
+        {
+            "message": " added core lib: cgl_texturecopy",
+            "author": "pandur",
+            "date": 1642868439042
+        },
+        {
+            "message": " added core lib: cgl_copytexture",
+            "author": "pandur",
+            "date": 1642869069922
+        },
+        {
+            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
+            "author": "pandur",
+            "date": 1642869809458
+        },
+        {
+            "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
+            "author": "pandur",
+            "date": 1644228758190
+        },
+        {
+            "message": "Ops.Gl.Textures.RgbeToHdrTexture renamed to Ops.Gl.Textures.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1654583702527
+        },
+        {
+            "message": "Ops.Gl.Textures.RgbeToFloat32Texture renamed to Ops.Deprecated.Gl.Textures.RgbeToFloat32Texture",
+            "author": "pandur",
+            "date": 1654584335564
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719480288315
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture"
+    ],
+    "authorName": "pandur",
+    "created": 1642868505891,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 2,
+                "name": "RGBE Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "HDR Texture",
+                "objType": "texture"
+            }
+        ]
+    },
+    "summary": "convert a RGBE texture to HDR/floating point texture",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": ""
+}

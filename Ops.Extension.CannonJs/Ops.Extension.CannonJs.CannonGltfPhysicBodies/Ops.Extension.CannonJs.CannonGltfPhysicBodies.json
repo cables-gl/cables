@@ -1,0 +1,82 @@
+{
+    "id": "427dc7c6-329f-4601-a99a-291b5e0ec4ea",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592485604467
+        },
+        {
+            "message": " added lib: cannon.js",
+            "author": "pandur",
+            "date": 1592487378238
+        },
+        {
+            "message": "Ops.User.pandur.GltfPicking renamed to Ops.User.pandur.GltfPyhsicBodies",
+            "author": "pandur",
+            "date": 1592489372517
+        },
+        {
+            "message": "Ops.User.pandur.GltfPyhsicBodies renamed to Ops.User.pandur.GltfPhysicBodies",
+            "author": "pandur",
+            "date": 1592489392822
+        },
+        {
+            "message": "Ops.User.pandur.GltfPhysicBodies renamed to Ops.Gl.GLTF.GltfPhysicBodies",
+            "author": "pandur",
+            "date": 1592560424834
+        },
+        {
+            "message": "Ops.Gl.GLTF.GltfPhysicBodies renamed to Ops.Physics.Cannon.CannonGltfPhysicBodies",
+            "author": "pandur",
+            "date": 1654584888979
+        },
+        {
+            "message": "Ops.Physics.Cannon.CannonGltfPhysicBodies renamed to Ops.Deprecated.Physics.Cannon.CannonGltfPhysicBodies",
+            "author": "pandur",
+            "date": 1671007858763
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1592485640466,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "5",
+                "name": "Filter Meshes"
+            },
+            {
+                "type": "0",
+                "name": "Mass kg",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Multiply",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Meshes",
+                "subType": "number"
+            }
+        ]
+    },
+    "libs": [
+        "cannon.js"
+    ],
+    "summary": "create physics bodies/bounding boxes for gltf nodes",
+    "issues": "",
+
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "YndBme"
+}

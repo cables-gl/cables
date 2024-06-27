@@ -1,0 +1,45 @@
+{
+    "authorName": "pandur",
+    "id": "f503913b-9162-4784-90a6-23e6a5b6f16a",
+    "created": 1519028297170,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "input",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Outputs the type of the input-port (boolean, number, string).  ",
+    "docs": {
+        "ports": [
+            {
+                "name": "result",
+                "text": "type of input (string,number,boolean)"
+            }
+        ]
+    },
+    "exampleProjectId": "",
+    "changelog": [
+        {
+            "message": "Ops.Value.TypeOf renamed to Ops.Deprecated.TypeOf",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701853935858
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719481498544
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "78989530-a0cd-49e4-bf54-83ce3220c4b5",
+    "created": 1509660353584,
+    "libs": [
+        "cannon.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Draw Bodies",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Groundplane",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Gravity X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Solver Iterations",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Contact Stiffness",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Contact Relaxation",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Simulate",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Num Bodies",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "start/configure a world with physics simulation",
+    "docs": {
+        "ports": [
+            {
+                "name": "Reset",
+                "text": "reset all contents of a physics world"
+            },
+            {
+                "name": "Draw Bodies",
+                "text": "draw collision cages around your physics bodies assigned under the World"
+            },
+            {
+                "name": "Groundplane",
+                "text": "add a quick groundplane to your world - it is located at 0,0,0 and is invisible"
+            },
+            {
+                "name": "Simulate",
+                "text": "toggle physics simulation"
+            },
+            {
+                "name": "Num Bodies",
+                "text": "number of total physics bodies in this world."
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Needs example file and docs",
+            "author": "andro",
+            "id": "04becc10-d6b3-415a-87f1-8ea3bf0fb214",
+            "date": 1558347928358,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605511621610
+        }
+    ],
+    "changelog": [
+        {
+            "message": " added core lib: cgl_WireframeMeshes",
+            "author": "pandur",
+            "date": 1593498575949
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "author": "pandur",
+            "date": 1593499136219
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.World renamed to Ops.Physics.World",
+            "author": "pandur",
+            "date": 1596093306885
+        },
+        {
+            "message": "Ops.Physics.World renamed to Ops.Physics.Cannon.CannonWorld",
+            "author": "pandur",
+            "date": 1654584976434
+        },
+        {
+            "message": "Ops.Physics.Cannon.CannonWorld renamed to Ops.Deprecated.Physics.Cannon.CannonWorld",
+            "author": "pandur",
+            "date": 1671007398276
+        }
+    ],
+    "coreLibs": [
+        "cgl_wireframes"
+    ],
+    "issues": "",
+
+    "youtubeids": []
+}

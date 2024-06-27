@@ -1,0 +1,59 @@
+{
+    "id": "0b994f54-f30b-4229-bcb6-8dcee9ee1e30",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1664538177900
+        },
+        {
+            "message": "Ops.User.pandur.WebGpuMesh renamed to Ops.Dev.WebGpu.WebGpyuMesh",
+            "author": "pandur",
+            "date": 1664915259036
+        },
+        {
+            "message": "Ops.Dev.WebGpu.WebGpyuMesh renamed to Ops.Dev.WebGpu.WebGpuMesh",
+            "author": "pandur",
+            "date": 1664915275449
+        },
+        {
+            "message": "Ops.Dev.WebGpu.WebGpuMesh renamed to Ops.Extension.WebGPU.WebGpuMesh",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1681465890850
+        },
+        {
+            "message": "Ops.Extension.WebGPU.WebGpuMesh renamed to Ops.Deprecated.WebGpuMesh",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1681466085860
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719480307718
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1664538220050,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
