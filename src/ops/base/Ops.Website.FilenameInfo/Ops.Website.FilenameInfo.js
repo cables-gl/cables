@@ -5,8 +5,8 @@ const
     outFullPath = op.outString("Full Path"),
     outFilename = op.outString("Filename"),
     outBasename = op.outString("basename"),
-    outIsURL = op.outString("Is URL"),
     outExt = op.outString("Suffix"),
+    outIsURL = op.outString("Is URL"),
     outQuery = op.outString("queryParams");
 
 function isValidUrl(string)

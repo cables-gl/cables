@@ -105,8 +105,6 @@ function updateRescale()
         if (!g) return;
         const b = g.getBounds();
 
-        console.log("rescale", b._maxAxis);
-
         mod.setUniformValue("MOD_mul", inResizeNewSize.get() / b._maxAxis);
         gotBounds = true;
     }

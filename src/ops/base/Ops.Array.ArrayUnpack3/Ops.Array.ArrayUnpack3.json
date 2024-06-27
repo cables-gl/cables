@@ -30,7 +30,6 @@
         ]
     },
     "summary": "splits a xyz array into 3 individual arrays",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -51,13 +50,13 @@
             }
         ]
     },
-
-
     "changelog": [
         {
             "message": "Now reports an error if array length is not divisible by 3",
             "author": "andro",
             "date": 1565014813234
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "lmn5Og"
 }

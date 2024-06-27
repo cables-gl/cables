@@ -44,11 +44,11 @@
             },
             {
                 "type": 5,
-                "name": "Is URL"
+                "name": "Suffix"
             },
             {
                 "type": 5,
-                "name": "Suffix"
+                "name": "Is URL"
             },
             {
                 "type": 5,
@@ -57,11 +57,9 @@
         ]
     },
     "summary": "information about a filename, like url protocol, suffix etc",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "RyrLMg"
 }

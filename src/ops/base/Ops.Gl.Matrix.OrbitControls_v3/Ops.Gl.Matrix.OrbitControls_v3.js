@@ -6,7 +6,7 @@ const
     minRotY = op.inValue("min rot y", 0),
     maxRotY = op.inValue("max rot y", 0),
 
-    initialRadius = op.inValue("initial radius", 2),
+    initialRadius = op.inValue("initial radius", 4),
     initialAxis = op.inValueSlider("initial axis y", 0.5),
     initialX = op.inValueSlider("initial axis x", 0.25),
 
