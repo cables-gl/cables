@@ -15,6 +15,11 @@
             },
             {
                 "type": 0,
+                "name": "Receive Own Data",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Use named Trigger",
                 "subType": "boolean"
             }
@@ -35,8 +40,6 @@
         ]
     },
     "summary": "Receives trigger from the socketcluster socket/topic",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -73,5 +76,5 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "EJvr0a"
+    "exampleProjectId": "mecjP3"
 }

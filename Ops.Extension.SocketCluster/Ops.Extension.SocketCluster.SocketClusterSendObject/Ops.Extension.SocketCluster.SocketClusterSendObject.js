@@ -15,7 +15,7 @@ const send = () =>
     if(!socket)return;
 
     if(!socket.allowSend)
-        op.setUiError("allowsend", "socket is not allowed to send data");
+        op.setUiError("allowsend", "socket is not allowed to send data", 1);
         else op.setUiError("allowsend", null);
 
     if (socket.channelName && socket.allowSend)
