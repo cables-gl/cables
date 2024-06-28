@@ -187,9 +187,9 @@ const Op = function ()
 
         if (newAttribs.hasOwnProperty("title") && newAttribs.title != this.uiAttribs.title)
         {
-            const doEmitEvent = newAttribs.title != this.getTitle();
+            // const doEmitEvent = newAttribs.title != this.getTitle();
             this.uiAttribs.title = newAttribs.title;
-            if (doEmitEvent) this.emitEvent("onTitleChange", newAttribs.title);
+            // if (doEmitEvent) this.emitEvent("onTitleChange", newAttribs.title);
             changed = true;
             // this.setTitle(newAttribs.title);
         }

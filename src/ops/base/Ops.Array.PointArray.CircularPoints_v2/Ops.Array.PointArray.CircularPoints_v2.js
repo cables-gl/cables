@@ -2,13 +2,14 @@ const
     radius = op.inValue("Radius", 1),
     segments = op.inValue("Round Segments", 40),
     percent = op.inFloat("Rounds", 1),
-    inRoundOffset = op.inFloat("Radius Add Round", 0.1),
-    inPointRadOffset = op.inFloat("Radius Add Point", 0.1),
+    inRoundOffset = op.inFloat("Radius Add Round", 0),
+    inPointRadOffset = op.inFloat("Radius Add Point", 0),
     inOffset = op.inFloat("Offset", 0),
     inPointOffset = op.inFloat("Point Offset XY", 0),
     inPointOffsetZ = op.inFloat("Point Offset Z", 0),
     inOffsetRot = op.inFloat("Offset rotation"),
     planeSelection = op.inSwitch("Plane", ["XY", "XZ", "YZ"], "XY"),
+    inClose = op.inBool("Loop", false),
     rotationDirection = op.inSwitch("Rotation Direction", ["Clockwise", "Anticlockwise"], "Anticlockwise"),
     outArr = op.outArray("Points", 3),
     outRotArr = op.outArray("Rotation", 3),
@@ -16,6 +17,7 @@ const
     outArrayLength = op.outNumber("Array lengths");
 
 inOffset.onChange =
+    inClose.onChange =
     inOffsetRot.onChange =
     inPointRadOffset.onChange =
     inPointOffset.onChange =
@@ -69,6 +71,12 @@ function calcArray()
         }
 
         rots.push(0, 0, (degInRad - offsetRotRad) * (180 / Math.PI)); // Rotation in degrees, adjusted for offset
+    }
+
+    if (inClose.get())
+    {
+        points.push(points[0], points[1], points[2]);
+        rots.push(rots[0], rots[1], rots[2]);
     }
 
     outArr.setRef(points);

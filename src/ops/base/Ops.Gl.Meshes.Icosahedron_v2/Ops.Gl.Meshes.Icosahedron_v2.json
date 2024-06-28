@@ -1,0 +1,65 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Render Mesh",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "geometry"
+            }
+        ]
+    },
+    "summary": "Renders a icosahedron (polyhedron with 20 faces)",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Renders the icosahedron"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers the next op"
+            },
+            {
+                "name": "geometry",
+                "text": "The geometry of the polyhedron"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "43f6c3cf-4982-4eaa-ba70-8b556f6e3286",
+    "created": 1719417176393,
+    "changelog": [
+        {
+            "message": "Smooth toggle works again",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1719417654871
+        },
+        {
+            "message": "Added \"Render Mesh\" toggle",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1719417669089
+        }
+    ],
+    "license": "MIT"
+}

@@ -15,6 +15,7 @@ for (let i = 0; i < 16; i++)
 for (let i = 0; i < inputs.length; i++)
 {
     const inp = inputs[i];
+    // inp.onLinkChanged =
     inp.onChange = function ()
     {
         for (let j = 0; j < outputs.length; j++) outputs[j].set(inp.get());

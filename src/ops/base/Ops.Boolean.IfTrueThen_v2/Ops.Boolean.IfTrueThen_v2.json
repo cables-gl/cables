@@ -11,7 +11,6 @@
     ],
     "summary": "Switch, trigger one or the other trigger port based on the input value",
     "issues": "",
-
     "youtubeids": [
         "3dYztfuw4lA"
     ],
@@ -41,5 +40,6 @@
             }
         ]
     },
-    "exampleProjectId": "F9tjX8"
+    "exampleProjectId": "F9tjX8",
+    "license": "MIT"
 }
