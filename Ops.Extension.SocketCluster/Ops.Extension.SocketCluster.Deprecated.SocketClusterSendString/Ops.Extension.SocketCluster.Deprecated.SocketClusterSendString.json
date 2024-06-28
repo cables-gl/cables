@@ -26,14 +26,9 @@
                 "name": "delay (ms)",
                 "subType": "integer"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "summary": "sends a string via socketcluster/websocket",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -54,12 +49,12 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3",
     "changelog": [
         {
             "message": "Ops.Net.SocketCluster.SocketClusterSendString renamed to Ops.Extension.SocketCluster.SocketClusterSendString",
             "author": "stephan",
             "date": 1671003500870
         }
-    ]
+    ],
+    "license": "MIT"
 }

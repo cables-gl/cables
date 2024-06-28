@@ -36,10 +36,6 @@
         ]
     },
     "summary": "sends a number via socketcluster/websocket",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -60,5 +56,5 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3"
+    "license": "MIT"
 }

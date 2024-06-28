@@ -29,10 +29,6 @@
         ]
     },
     "summary": "receive an array from the socketcluster topic",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -57,12 +53,12 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3",
     "changelog": [
         {
             "message": "Ops.Net.SocketCluster.SocketClusterRecieveArray renamed to Ops.Extension.SocketCluster.SocketClusterRecieveArray",
             "author": "stephan",
             "date": 1671003547002
         }
-    ]
+    ],
+    "license": "MIT"
 }

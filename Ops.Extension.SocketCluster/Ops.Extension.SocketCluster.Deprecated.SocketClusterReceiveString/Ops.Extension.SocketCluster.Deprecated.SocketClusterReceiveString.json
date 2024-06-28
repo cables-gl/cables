@@ -30,8 +30,6 @@
         ]
     },
     "summary": "receives string from the socketcluster socket/topic",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -43,12 +41,12 @@
                 "text": "name of the topic"
             },
             {
-                "name": "client id",
-                "text": "sending client id"
-            },
-            {
                 "name": "data",
                 "text": "the string"
+            },
+            {
+                "name": "client id",
+                "text": "sending client id"
             },
             {
                 "name": "received",
@@ -56,12 +54,12 @@
             }
         ]
     },
-    "exampleProjectId": "mecjP3",
     "changelog": [
         {
             "message": "Ops.Net.SocketCluster.SocketClusterRecieveString renamed to Ops.Extension.SocketCluster.SocketClusterRecieveString",
             "author": "stephan",
             "date": 1671003524521
         }
-    ]
+    ],
+    "license": "MIT"
 }
