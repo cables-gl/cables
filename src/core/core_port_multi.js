@@ -5,13 +5,14 @@ const MIN_NUM_PORTS = 2;
 
 class MultiPort extends Port
 {
-    constructor(__parent, name, type, dir, uiAttribs)
+    constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
     {
         super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
 
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
         this.direction = dir;
+        this._uiAttribsPorts = uiAttribsPorts;
 
         // console.log("uiattribs", uiAttribs);
 
@@ -32,6 +33,8 @@ class MultiPort extends Port
         {
             let grey = !this.uiAttribs.multiPortManual || undefined;
 
+            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT)grey = false;
+
             for (let i = 0; i < this.ports.length; i++)
             {
                 let lp; // undefined to remove/not set it
@@ -40,6 +43,11 @@ class MultiPort extends Port
                 let addPort = false;
                 let title;
                 let o = {};
+
+
+                // console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
+                if (this.op.preservedPortTitles && this.op.preservedPortTitles[this.ports[i].name]) title = this.op.preservedPortTitles[this.ports[i].name];
+
 
                 // if (!this.uiAttribs.multiPortManual)grey = true;
                 if (i == 0) lp = this.ports.length;
@@ -51,6 +59,11 @@ class MultiPort extends Port
                         addPort = true;
                         grey = true;
                     }
+
+                for (const attin in this._uiAttribsPorts)
+                {
+                    o[attin] = this._uiAttribsPorts[attin];
+                }
 
                 o.addPort = addPort;
                 o.longPort = lp;
@@ -238,6 +251,10 @@ class MultiPort extends Port
 
             updateUi();
             updateArray();
+
+            console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
+            if (this.op.preservedPortTitles && this.op.preservedPortTitles[po.name]) po.setUiAttribs({ "title": this.op.preservedPortTitles[po.name] });
+
             return po;
         };
 

@@ -451,6 +451,7 @@ Port.prototype.setInitialValue = function (v)
         }
     }
 
+
     if (this.op.preservedPortValues && this.op.preservedPortValues.hasOwnProperty(this.name) && this.op.preservedPortValues[this.name] !== undefined)
     {
         this.set(this.op.preservedPortValues[this.name]);

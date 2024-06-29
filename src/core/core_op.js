@@ -43,6 +43,7 @@ const Op = function ()
     this.enabled = true;
     this.patch = arguments[0];
     this._name = arguments[1];
+    this.preservedPortTitles = {};
     this.preservedPortValues = {};
     this.preservedPortLinks = {};
 
@@ -392,7 +393,7 @@ const Op = function ()
         return p;
     };
 
-    Op.prototype.outMultiPort = function (name, type)
+    Op.prototype.outMultiPort = function (name, type, uiAttribsPort = {})
     {
         const p = new MultiPort(
             this,
@@ -402,7 +403,8 @@ const Op = function ()
             {
                 "display": "multiport",
                 "hidePort": true
-            }
+            },
+            uiAttribsPort
         );
         p.ignoreValueSerialize = true;
 
