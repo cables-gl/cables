@@ -914,7 +914,13 @@ Patch.prototype.deSerialize = function (obj, options)
                     }
                     else
                     {
-                        // console.log("preserve", objPort.name, objPort.value);
+                        // console.log("preserve", objPort.name, objPort.value, op.uiAttribs.title);
+
+                        // if (port.uiAttribs.hasOwnProperty("title"))
+                        // {
+                        //     op.preservedPortTitles = op.preservedPortTitles || {};
+                        //     op.preservedPortTitles[port.name] = port.uiAttribs.title;
+                        // }
                         op.preservedPortValues = op.preservedPortValues || {};
                         op.preservedPortValues[objPort.name] = objPort.value;
                     }
@@ -928,13 +934,22 @@ Patch.prototype.deSerialize = function (obj, options)
                 {
                     const port2 = op.getPort(objPort.name);
 
-                    if (port2)port2.deSerializeSettings(objPort);
+                    if (port2)
+                    {
+                        port2.deSerializeSettings(objPort);
+
+                        if (port2.uiAttribs.hasOwnProperty("title"))
+                        {
+                            op.preservedPortTitles = op.preservedPortTitles || {};
+                            op.preservedPortTitles[port2.name] = port2.uiAttribs.title;
+                        }
 
 
-                    if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
-                        port2.set(obj.ops[iop].portsOut[ipo].value);
+                        if (port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
+                            port2.set(obj.ops[iop].portsOut[ipo].value);
 
-                    if (port2 && objPort.expose) port2.setUiAttribs({ "expose": true });
+                        if (objPort.expose) port2.setUiAttribs({ "expose": true });
+                    }
                 }
             }
             newOps.push(op);
