@@ -1,0 +1,58 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Fades two audio signals (mix)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In 1"
+            },
+            {
+                "type": "2",
+                "name": "Audio In 2"
+            },
+            {
+                "type": "4",
+                "name": "Fade"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In 1",
+                "text": "The first audio signal"
+            },
+            {
+                "name": "Audio In 2",
+                "text": "The second audio signal"
+            },
+            {
+                "name": "Fade",
+                "text": "`0.0` = only left 100%, `1.0` = right side 100%"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The mixed audio signal"
+            }
+        ]
+    },
+    "id": "9394432f-f853-48c9-afd3-14c131a5ea76",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719843746668
+        }
+    ]
+}

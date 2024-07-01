@@ -1,0 +1,36 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Triggers the Attack-part of an Envelope",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Attack"
+            }
+        ]
+    },
+    "id": "5f5143b1-1796-459a-8ff4-d58953317eb1",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719843801974
+        }
+    ]
+}

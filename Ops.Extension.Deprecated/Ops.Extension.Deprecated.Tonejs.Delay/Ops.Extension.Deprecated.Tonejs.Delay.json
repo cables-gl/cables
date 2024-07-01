@@ -1,0 +1,38 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Delay Time"
+            },
+            {
+                "type": "0",
+                "name": "Max Delay Time"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "summary": "Audio delay effect",
+    "id": "d274e8fe-425b-44b5-aca1-3a7937f883d1",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719843962079
+        }
+    ]
+}

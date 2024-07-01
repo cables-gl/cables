@@ -1,0 +1,12 @@
+{
+    "id": "0dd927b4-6ec7-4699-9a42-baaf52d41ca8",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719843043514
+        }
+    ]
+}

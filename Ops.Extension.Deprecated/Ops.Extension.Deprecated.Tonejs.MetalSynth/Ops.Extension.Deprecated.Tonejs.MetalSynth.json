@@ -1,0 +1,57 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Good for making metalophone sounds",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "0",
+                "name": "Modulation Index"
+            },
+            {
+                "type": "0",
+                "name": "Harmonicity"
+            },
+            {
+                "type": "0",
+                "name": "Resonance"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "id": "410e09b4-9d70-406b-89e4-6458349c02a9",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844185378
+        }
+    ]
+}

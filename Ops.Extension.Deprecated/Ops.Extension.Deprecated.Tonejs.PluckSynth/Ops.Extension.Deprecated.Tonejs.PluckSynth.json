@@ -1,0 +1,42 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Karplus-String string synthesis. Often out of tune.",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Attack Noise"
+            },
+            {
+                "type": "4",
+                "name": "Resonance"
+            },
+            {
+                "type": "4",
+                "name": "Dampening"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "41949c0a-307d-4a61-8e01-dfb747108c1d",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844214925
+        }
+    ]
+}

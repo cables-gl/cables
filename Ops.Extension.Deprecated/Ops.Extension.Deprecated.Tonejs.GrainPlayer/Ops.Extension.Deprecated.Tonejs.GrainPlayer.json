@@ -1,0 +1,66 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Granular Synthesis, plays back parts of a sample repeatedly",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Play"
+            },
+            {
+                "type": "2",
+                "name": "Sample (AudioBuffer)"
+            },
+            {
+                "type": "0",
+                "name": "Detune"
+            },
+            {
+                "type": "0",
+                "name": "Drift"
+            },
+            {
+                "type": "0",
+                "name": "Playback Rate"
+            },
+            {
+                "type": "0",
+                "name": "Overlap"
+            },
+            {
+                "type": "0",
+                "name": "Grain Size"
+            },
+            {
+                "type": "0",
+                "name": "Loop"
+            },
+            {
+                "type": "0",
+                "name": "Loop Start"
+            },
+            {
+                "type": "0",
+                "name": "Loop End"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "2d8061f8-502c-460b-8bc8-fb57cdf1214f",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844313185
+        }
+    ]
+}

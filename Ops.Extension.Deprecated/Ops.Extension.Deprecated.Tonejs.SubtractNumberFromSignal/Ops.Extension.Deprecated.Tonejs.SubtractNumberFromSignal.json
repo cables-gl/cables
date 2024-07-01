@@ -1,0 +1,34 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Subtracts a number from a audio signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Signal 1"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "6006bca6-578b-4dfa-b545-7e675bb846bc",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844280674
+        }
+    ]
+}

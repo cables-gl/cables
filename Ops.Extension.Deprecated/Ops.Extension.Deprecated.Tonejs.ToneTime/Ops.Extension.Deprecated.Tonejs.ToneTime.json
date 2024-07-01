@@ -1,0 +1,58 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Makes it convenient to create Tone.js time-strings (e.g. \"C4\")",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Time Type"
+            },
+            {
+                "type": "0",
+                "name": "Relative To Now"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Tone Time"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Time",
+                "text": "The time to be converted to a tone.js-compatible time-format"
+            },
+            {
+                "name": "Time Type",
+                "text": "Either `Note`, `Triplet`, `Measure`, `Second`, `Frequency` or `Tick`.  See [Time](https://github.com/Tonejs/Tone.js/wiki/Time) for more infos."
+            },
+            {
+                "name": "Relative To Now",
+                "text": "When set the output string will be prefixed by a `+`-character – so the time will be interpreted as «the current time plus whatever expression follows»"
+            },
+            {
+                "name": "Tone Time",
+                "text": "A string representing time, to be used together with another tone.js-op"
+            }
+        ]
+    },
+    "id": "cfab7c5e-2ccd-451b-95fc-8b3005d214c0",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844354167
+        }
+    ]
+}

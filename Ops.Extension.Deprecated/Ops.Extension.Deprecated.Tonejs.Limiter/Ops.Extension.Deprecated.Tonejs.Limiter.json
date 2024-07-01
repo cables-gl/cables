@@ -1,0 +1,50 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Limits the loudness of an incoming signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Threshold"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to apply the limiter to"
+            },
+            {
+                "name": "Threshold",
+                "text": "The threshold of of the limiter"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio signal withe applied limiter"
+            }
+        ]
+    },
+    "id": "4af06e03-dc6f-4c4b-8c47-136c1e69ef83",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719843893274
+        }
+    ]
+}

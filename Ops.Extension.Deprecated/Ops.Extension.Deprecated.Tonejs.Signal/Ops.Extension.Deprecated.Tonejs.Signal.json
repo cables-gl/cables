@@ -1,0 +1,30 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "An audio signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "1cb3cb59-ea59-4c14-9b53-73d4f75813c1",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844270504
+        }
+    ]
+}

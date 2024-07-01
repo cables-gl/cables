@@ -1,0 +1,38 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Comb filters are basic building blocks for physical modeling",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Delay Time"
+            },
+            {
+                "type": "4",
+                "name": "Resonance"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "ed6efbf5-aa6a-46e8-a30a-a679d53a4f4e",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719843843112
+        }
+    ]
+}

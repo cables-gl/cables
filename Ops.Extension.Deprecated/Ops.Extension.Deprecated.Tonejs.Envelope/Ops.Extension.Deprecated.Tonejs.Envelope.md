@@ -1,0 +1,1 @@
+Envelopeis an [ADSR](https://en.wikipedia.org/wiki/Synthesizer#ADSR_envelope) envelope generator. [Tone.Envelope](https://tonejs.github.io/docs/#Envelope) outputs a signal which can be connected to dynamic input port of another tone.js-op or a signal. The second output port can be used to set the ADSR on synth-ops.
