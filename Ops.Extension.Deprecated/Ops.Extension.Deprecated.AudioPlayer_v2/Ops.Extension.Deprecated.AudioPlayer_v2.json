@@ -1,0 +1,114 @@
+{
+    "id": "23957c3c-963e-48bb-924e-6957be3da858",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "tim",
+            "date": 1599660449801
+        },
+        {
+            "message": "Ops.WebAudio.AudioPlayer_v2 renamed to Ops.Deprecated.WebAudio.AudioPlayer_v2",
+            "author": "pandur",
+            "date": 1610524381081
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719839561991
+        }
+    ],
+    "authorName": "tim",
+    "created": 1599660471595,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "File"
+            },
+            {
+                "type": "0",
+                "name": "Play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Autoplay",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Volume",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Synchronized Player",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio out"
+            },
+            {
+                "type": "0",
+                "name": "Playing",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Ended"
+            }
+        ]
+    },
+    "summary": "Plays an audio file, linked to the timeline",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "File",
+                "text": "The audio file you want to play"
+            },
+            {
+                "name": "Play",
+                "text": "Starts the playback when set to true"
+            },
+            {
+                "name": "Autoplay",
+                "text": "When true starts playback automatically"
+            },
+            {
+                "name": "Volume",
+                "text": "How loud the audio file should be played back"
+            },
+            {
+                "name": "Synchronized Player",
+                "text": "Sync to timeline"
+            },
+            {
+                "name": "Loop",
+                "text": "Set to true to enable looping"
+            },
+            {
+                "name": "Audio out",
+                "text": "The audio out object, can be connected to the Ops.WebAudio.Output op"
+            },
+            {
+                "name": "Playing",
+                "text": "True if it is currently playing"
+            },
+            {
+                "name": "Ended",
+                "text": "Triggers once the playback has ended"
+            }
+        ]
+    }
+}
