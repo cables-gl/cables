@@ -1,0 +1,100 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "HDR",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "texture_out"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "89920a68-f1f2-4682-b399-a0ecb78ce467",
+    "created": 1515088012394,
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.TextureEffects.ImageCompose renamed to Ops.Gl.TextureEffects.ImageCompose_v2",
+            "author": "pandur",
+            "date": 1605553739550
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.ImageCompose_v2 renamed to Ops.Exp.Gl.TextureEffects.ImageCompose",
+            "author": "pandur",
+            "date": 1605613398450
+        },
+        {
+            "message": "Ops.Exp.Gl.TextureEffects.ImageCompose renamed to Ops.Deprecated.Exp.Gl.TextureEffects.ImageCompose2",
+            "author": "pandur",
+            "date": 1606807817691
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719835785718
+        }
+    ],
+    "summary": "Compose Images and effects as layers to generate new Images",
+    "issues": "",
+    "youtubeids": [
+        "ZZKdaQw1bMo"
+    ],
+    "docs": {
+        "ports": []
+    }
+}

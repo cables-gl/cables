@@ -1,0 +1,43 @@
+{
+    "updated": 1519816858045,
+    "authorName": "pandur",
+    "id": "c635e244-5508-4481-8634-400df6869b14",
+    "created": 1519816858046,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Connection"
+            },
+            {
+                "type": "0",
+                "name": "Event"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ]
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Admin.CableConnect.CableConnectTriggerEvent renamed to Ops.Deprecated.CableConnect.CableConnectTriggerEvent",
+            "author": "pandur",
+            "date": 1623913764294
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719835968588
+        }
+    ]
+}

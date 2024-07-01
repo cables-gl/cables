@@ -1,0 +1,64 @@
+{
+    "authorName": "pandur",
+    "id": "637c5fa8-840d-4535-96ab-3d27b458a8ba",
+    "created": 1519910342752,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Value false",
+                "group": "Output Values",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Value true",
+                "group": "Output Values",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "switch between two values by a boolean",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueSwitchBoolean renamed to Ops.Value.NumberSwitchBoolean",
+            "author": "pandur",
+            "date": 1587376424074
+        },
+        {
+            "message": "Ops.Value.NumberSwitchBoolean renamed to Ops.Number.NumberSwitchBoolean",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701852722204
+        },
+        {
+            "message": "Ops.Number.NumberSwitchBoolean renamed to Ops.Deprecated.Number.NumberSwitchBoolean",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706776039306
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719835428004
+        }
+    ]
+}

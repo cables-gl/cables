@@ -1,0 +1,49 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "SoundCloud URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Stream URL"
+            },
+            {
+                "type": "0",
+                "name": "Artwork URL"
+            },
+            {
+                "type": "0",
+                "name": "Title"
+            },
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Get infos / stream URL from a regular Soundcloud-track URL",
+    "updated": 1511161981763,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "56eb1fbf-de90-4d64-9ad5-5514cf84440d",
+    "created": 1511161981049,
+    "exampleProjectId": "YTdw2n",
+    "changelog": [
+        {
+            "message": "Ops.Api.SoundCloud.SoundCloud renamed to Ops.Deprecated.Api.SoundCloud.SoundCloud",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685949945518
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719835640663
+        }
+    ]
+}

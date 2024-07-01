@@ -1,0 +1,1 @@
+Tone.js wrapper around the native Web Audio's [AnalyserNode](http://webaudio.github.io/web-audio-api/#idl-def-AnalyserNode). Extracts FFT or Waveform data from the incoming signal. Can be used to visualise sound.
