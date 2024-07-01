@@ -18,11 +18,11 @@
             },
             {
                 "type": 5,
-                "name": "True"
+                "name": "False"
             },
             {
                 "type": 5,
-                "name": "False"
+                "name": "True"
             }
         ],
         "portsOut": [
@@ -34,10 +34,10 @@
     },
     "summary": "convert boolean to string",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "kmXCm6"
+    "exampleProjectId": "kmXCm6",
+    "license": "MIT"
 }
