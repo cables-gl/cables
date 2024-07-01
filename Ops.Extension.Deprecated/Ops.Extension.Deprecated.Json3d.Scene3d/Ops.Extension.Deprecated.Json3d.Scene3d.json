@@ -1,0 +1,44 @@
+{
+    "updated": 1519817210377,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "e4863717-4ebe-4436-a246-378109f07365",
+    "created": 1513887278100,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "file"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json3d.Json3dScene renamed to Ops.Json3d.Scene3d",
+            "author": "pandur",
+            "date": 1572942354202
+        },
+        {
+            "message": "Ops.Json3d.Scene3d renamed to Ops.Deprecated.Json3d.Scene3d",
+            "author": "pandur",
+            "date": 1654588384921
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832654688
+        }
+    ],
+    "exampleProjectId": "00VeKO"
+}

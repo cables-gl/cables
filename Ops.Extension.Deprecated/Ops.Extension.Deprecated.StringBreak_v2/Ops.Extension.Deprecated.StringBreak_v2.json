@@ -1,0 +1,44 @@
+{
+    "id": "f45945ab-88c7-458d-ab2a-38b39050a984",
+    "authorName": "pandur",
+    "created": 1543053907746,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Max Line Chars",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "breaks into a string after [num] chars",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.String.StringBreak_v2 renamed to Ops.Deprecated.String.StringBreak_v2",
+            "author": "pandur",
+            "date": 1596094375376
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832277317
+        }
+    ]
+}

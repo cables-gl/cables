@@ -1,0 +1,72 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "72ed0814-2b80-48ad-90c1-2ef47eeecfe6",
+    "created": 1513785959160,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Mesh Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fade Times",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Time2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Num Bones",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Spline"
+            },
+            {
+                "type": "1",
+                "name": "Joint Trigger"
+            }
+        ]
+    },
+    "summary": "Creates a Bones System for you to playback and Interpolate between Bones Animations imported as a baked collada file.",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json3d.Bones.BoneSystem renamed to Ops.Deprecated.Json3d.Bones.BoneSystem",
+            "author": "pandur",
+            "date": 1654587833998
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832686578
+        }
+    ]
+}

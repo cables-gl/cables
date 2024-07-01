@@ -1,0 +1,108 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "3711150e-a02f-4455-b376-f31ae30c9301",
+    "created": 1513152495153,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Min X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Length",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "boundings of a geometry / draw a bounding box / (width,height,length,size)",
+    "changelog": [
+        {
+            "message": "added: draw parameter",
+            "author": "pandur",
+            "date": 1550863269608
+        },
+        {
+            "message": "Ops.Gl.Geometry.GeometryBounds renamed to Ops.Deprecated.Gl.Geometry.GeometryBounds",
+            "author": "pandur",
+            "date": 1596093896253
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719834167197
+        }
+    ]
+}

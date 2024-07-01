@@ -1,0 +1,120 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "movement x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "movement y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "movement z",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "lifetime",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Lifetime Minimum",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "lifeTimePercent",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random 3",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Spray simulation",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "80ca4cc5-d6ba-4fbf-a629-de04df600060",
+    "created": 1534507645860,
+    "changelog": [
+        {
+            "message": "Ops.Gl.Spray renamed to Ops.Systems.Spray",
+            "author": "pandur",
+            "date": 1571128079219
+        },
+        {
+            "message": "Ops.Systems.Spray renamed to Ops.Deprecated.Systems.Spray",
+            "author": "pandur",
+            "date": 1638260681171
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719833513795
+        }
+    ]
+}

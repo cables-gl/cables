@@ -1,0 +1,110 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Autoplay",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "volume",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Synchronized Player",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            },
+            {
+                "type": "0",
+                "name": "playing",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "ended"
+            }
+        ]
+    },
+    "summary": "Plays an audio file, linked to timeline",
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "The audio file you want to play"
+            },
+            {
+                "name": "play",
+                "text": "Starts the playback when set to `true`"
+            },
+            {
+                "name": "Autoplay",
+                "text": "When `true` starts playback automatically"
+            },
+            {
+                "name": "volume",
+                "text": "How loud the audio file should be played back"
+            },
+            {
+                "name": "Loop",
+                "text": "Set to `true` to enable looping"
+            },
+            {
+                "name": "audio out",
+                "text": "The audio out object, can be connected to the Ops.WebAudio.Output op e.g."
+            },
+            {
+                "name": "playing",
+                "text": "`true` if it is currently playing"
+            },
+            {
+                "name": "ended",
+                "text": "Triggers once the playback has ended"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "46f34657-e42b-421b-a632-0e76d190e9ff",
+    "created": 1549315926343,
+    "changelog": [
+        {
+            "message": "Ops.WebAudio.AudioPlayer renamed to Ops.Deprecated.WebAudio.AudioPlayer",
+            "author": "pandur",
+            "date": 1610524438744
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832335345
+        },
+        {
+            "message": "renamed Ops.Deprecated.WebAudio.AudioPlayer to Ops.Extension.Deprecated.AudioPlayer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1719832347351
+        }
+    ]
+}

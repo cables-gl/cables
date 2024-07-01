@@ -1,0 +1,107 @@
+{
+    "authorName": "pandur",
+    "id": "eca5939e-744c-4f3d-8969-82b4534dea68",
+    "created": 1562762027460,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Use Viewport Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Floating Point",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Texture 1",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Texture 2",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Texture 3",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Texture 4",
+                "objType": "texture"
+            }
+        ]
+    },
+    "summary": "render a shader to multiple textures",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Shader2Textures renamed to Ops.Gl.Shader.Shader2Textures",
+            "author": "pandur",
+            "date": 1562765213876
+        },
+        {
+            "message": "Ops.Gl.Shader.Shader2Textures renamed to Ops.Deprecated.Gl.Shader.Shader2Textures",
+            "author": "pandur",
+            "date": 1628150527709
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832413123
+        }
+    ]
+}

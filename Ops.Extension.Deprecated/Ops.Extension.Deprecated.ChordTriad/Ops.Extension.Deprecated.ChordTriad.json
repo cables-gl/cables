@@ -1,0 +1,60 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Scale"
+            },
+            {
+                "type": 0,
+                "name": "Base Note",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Chord"
+            }
+        ]
+    },
+    "summary": "Creates a triad chord",
+    "docs": {
+        "ports": [
+            {
+                "name": "Scale",
+                "text": "Connect this to a `Scale-Array`-op, which has `Append Octave` checked"
+            },
+            {
+                "name": "Base Note",
+                "text": "The note you want to get the chord from, e.g. `C4`"
+            },
+            {
+                "name": "Chord",
+                "text": "The triad chord for the base tone in the scale, e.g. `[\"C3\", \"E3\", \"G3\"]`"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "846fd784-6367-4380-a68d-6a6a33f4171d",
+    "created": 1542058146958,
+    "changelog": [
+        {
+            "message": "Ops.WebAudio.Scale.ChordTriad renamed to Ops.Deprecated.WebAudio.Scale.ChordTriad",
+            "author": "pandur",
+            "date": 1671008144360
+        },
+        {
+            "message": "",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1671035532111
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832151746
+        }
+    ]
+}

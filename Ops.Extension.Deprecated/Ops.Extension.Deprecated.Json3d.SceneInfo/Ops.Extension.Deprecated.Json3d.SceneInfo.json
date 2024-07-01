@@ -1,0 +1,77 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "11a31a88-eae5-4af1-9c29-991e78d07ce2",
+    "created": 1513850762267,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "1",
+                "name": "Dump Console"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Num Nodes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Materials",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Meshes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Bones",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Animations",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Anim Channels",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Duration",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "information about the current 3d scene",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "changelog": [
+        {
+            "message": "Ops.Json3d.SceneInfo renamed to Ops.Deprecated.Json3d.SceneInfo",
+            "author": "pandur",
+            "date": 1654588564480
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832677502
+        }
+    ]
+}

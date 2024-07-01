@@ -1,0 +1,53 @@
+{
+    "id": "77193bdc-9769-41da-95e1-51afcaad0274",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550741037882
+        },
+        {
+            "message": "Ops.String.StringOld2New renamed to Ops.Deprecated.String.StringOld2New",
+            "author": "pandur",
+            "date": 1671008102496
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832386515
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550741044364,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "temporary string port converter",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in - old format"
+            },
+            {
+                "name": "Result",
+                "text": "String out - new format"
+            }
+        ]
+    }
+}

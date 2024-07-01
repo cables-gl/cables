@@ -1,0 +1,161 @@
+{
+    "authorName": "pandur",
+    "id": "cdf55940-7726-4ab3-854c-1a576434da46",
+    "created": 1563182105585,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "Mesh Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Calculate Normals index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Calculate Normals",
+                "group": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Resize",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "New Size",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Merge All",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Mesh Name"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Json3dMesh2 renamed to Ops.Json3d.Json3dMesh2",
+            "author": "pandur",
+            "date": 1563185480950
+        },
+        {
+            "message": "Ops.Json3d.Json3dMesh2 renamed to Ops.Json3d.Mesh3d",
+            "author": "pandur",
+            "date": 1563186029634
+        },
+        {
+            "message": "Added output of Mesh name",
+            "author": "pandur",
+            "date": 1566377185673
+        },
+        {
+            "message": "Ops.Json3d.Mesh3d renamed to Ops.Deprecated.Json3d.Mesh3d",
+            "author": "pandur",
+            "date": 1654588002170
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832478398
+        }
+    ],
+    "summary": "Load a 3D mesh - model into a scene , e.g. .FBX. DAE .OBJ (was: json3dmesh)",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "file",
+                "text": "Click to load a file"
+            },
+            {
+                "name": "Mesh Index",
+                "text": "Pick which mesh is loaded with multiple meshes in one file"
+            },
+            {
+                "name": "Resize",
+                "text": "Normalizes the size of a mesh to 1"
+            },
+            {
+                "name": "New Size",
+                "text": "Resize normalized mesh"
+            },
+            {
+                "name": "Center",
+                "text": "Centers object and overrides objects original center of origin"
+            },
+            {
+                "name": "Merge All",
+                "text": "Shows all meshes at once"
+            },
+            {
+                "name": "Draw",
+                "text": "Enables or disables rendering of the model."
+            },
+            {
+                "name": "trigger",
+                "text": "Next trigger"
+            },
+            {
+                "name": "Geometry",
+                "text": "Geometry output"
+            },
+            {
+                "name": "Scaling",
+                "text": "Scaling applied to mesh to normalize it with Resize"
+            }
+        ]
+    },
+    "exampleProjectId": "kR7_jG",
+    "caniusequery": ""
+}

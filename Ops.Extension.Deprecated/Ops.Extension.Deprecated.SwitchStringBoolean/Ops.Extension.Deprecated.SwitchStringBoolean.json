@@ -1,0 +1,70 @@
+{
+    "id": "19e3c428-22ce-45a3-b903-fddfc46fc0a3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550740418598
+        },
+        {
+            "message": "Ops.String.SwitchStringBoolean renamed to Ops.Deprecated.String.SwitchStringBoolean",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706775967492
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719832370847
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550740548820,
+    "summary": "Switch between two strings with a boolean",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Boolean",
+                "text": "Boolean in true or false / 1 or 0"
+            },
+            {
+                "name": "True",
+                "text": "The string to output if boolean evaluates to true"
+            },
+            {
+                "name": "False",
+                "text": "The string to output if boolean evaluates to false"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "True"
+            },
+            {
+                "type": "5",
+                "name": "False"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ]
+    }
+}

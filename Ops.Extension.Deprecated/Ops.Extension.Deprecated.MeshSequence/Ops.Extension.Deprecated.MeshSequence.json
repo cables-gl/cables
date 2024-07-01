@@ -1,0 +1,78 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "a9ba3a67-233e-46cb-9c29-fc7b38956b45",
+    "created": 1511953165312,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "file",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "frame",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Num Frames",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frame Name",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Geometry A"
+            },
+            {
+                "type": "2",
+                "name": "Geometry B"
+            }
+        ]
+    },
+    "summary": "morph between a series of meshes",
+    "changelog": [
+        {
+            "message": "code cleanup - ports and onChange Calls",
+            "author": "andro",
+            "date": 1559045526956
+        },
+        {
+            "message": "Ops.Gl.MeshSequence renamed to Ops.Deprecated.Gl.MeshSequence",
+            "author": "pandur",
+            "date": 1654584203668
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719834244802
+        }
+    ],
+    "exampleProjectId": "oeE8Qd"
+}
