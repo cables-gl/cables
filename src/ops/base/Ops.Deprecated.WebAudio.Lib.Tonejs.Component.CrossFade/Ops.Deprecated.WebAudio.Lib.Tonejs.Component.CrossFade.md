@@ -1,1 +1,0 @@
-The [Tone.js](https://tonejs.github.io/docs/#CrossFade) crossfade-op provides equal power fading between two inputs. More on crossfading technique [**here**](https://en.wikipedia.org/wiki/Fade_(audio_engineering)#Crossfading).

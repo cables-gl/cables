@@ -1,1 +1,0 @@
-AudioMixer can be used to bring different audio signals together and change their volumes individually. Similar to a mixer found in recording studios you can `mute` individual channels or only play one by ticking `solo`. 

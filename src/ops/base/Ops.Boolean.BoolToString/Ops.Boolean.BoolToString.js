@@ -1,7 +1,7 @@
 const
     inBool = op.inBool("Boolean", false),
-    inTrue = op.inString("True", "true"),
     inFalse = op.inString("False", "false"),
+    inTrue = op.inString("True", "true"),
     result = op.outString("String", "false");
 
 inTrue.onChange =
