@@ -21,16 +21,13 @@
     "created": 1717676691500,
     "changelog": [
         {
-            "message": "Ops.Value.Value renamed to Ops.Value.Number",
+            "message": "",
+            "type": "new",
             "author": "pandur",
-            "date": 1561119761731
-        },
-        {
-            "message": "Ops.Value.Number renamed to Ops.Number.Number",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701852665761
+            "date": 1719846554955
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Patchfield cable routing helper for array cables",
+    "exampleProjectId": "CLMeDg"
 }

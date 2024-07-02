@@ -1,15 +1,25 @@
+const supported = navigator.geolocation && navigator.geolocation.watchPosition;
+
 const
-    outSupported = op.outBoolNum("Browser Support", navigator.geolocation != false),
+    outSupported = op.outBoolNum("Browser Support", supported),
     outLat = op.outNumber("Latitude"),
     outLon = op.outNumber("Longitude"),
     outData = op.outObject("Data");
 
-if (navigator.geolocation && navigator.geolocation.watchPosition)
-    navigator.geolocation.watchPosition(updatePos);
+if (supported)
+    navigator.geolocation.watchPosition(updatePos, error);
+
+function error(err)
+{
+    console.error(err);
+}
 
 function updatePos(position)
 {
-    outLat.set(position.coords.latitude);
-    outLon.set(position.coords.longitude);
+    if (position.coords)
+    {
+        outLat.set(position.coords.latitude);
+        outLon.set(position.coords.longitude);
+    }
     outData.set(position);
 }

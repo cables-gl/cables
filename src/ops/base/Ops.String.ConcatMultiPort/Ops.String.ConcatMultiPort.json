@@ -49,5 +49,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "concatinate/join multiple string inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }

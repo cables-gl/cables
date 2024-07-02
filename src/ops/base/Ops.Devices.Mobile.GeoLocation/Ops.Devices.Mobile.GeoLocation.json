@@ -6,7 +6,7 @@
             {
                 "type": 0,
                 "name": "Browser Support",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -27,5 +27,14 @@
     "authorName": "pandur",
     "id": "7d9ae643-d011-417e-afe3-b3acb78a6d63",
     "created": 1542699582684,
-    "exampleProjectId": "kIZ3Ms"
+    "exampleProjectId": "kIZ3Ms",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Does no longer output coordinates, when the location update did not contain coordinates",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1719850372788
+        }
+    ]
 }
