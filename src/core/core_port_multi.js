@@ -230,6 +230,7 @@ class MultiPort extends Port
                     // this.checkNum();
                     // this.countPorts();
                     updateUi();
+                    this.emitEvent("onLinkChanged");
                     // this.countPorts.bind(this);
                 });
             }
@@ -255,7 +256,7 @@ class MultiPort extends Port
 
             updateUi();
             updateArray();
-
+            this.emitEvent("onLinkChanged");
             console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
             if (this.op.preservedPortTitles && this.op.preservedPortTitles[po.name]) po.setUiAttribs({ "title": this.op.preservedPortTitles[po.name] });
 
