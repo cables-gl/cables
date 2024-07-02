@@ -9,6 +9,7 @@ const Plan = class extends Events
 
         patch.plans = patch.plans || {};
         this._patch = patch;
+        this._data = null;
         this._currentPlaceName = "";
         this.setName(name);
     }
@@ -31,15 +32,61 @@ const Plan = class extends Events
         this.emitEvent("stateChanged");
     }
 
-    // setPlaces(placeOps)
-    // {
+    getCurrentPlace()
+    {
+        for (let i = 0; i < this._data.places.length; i++)
+        {
+            const place = this._data.places[i];
+            if (place.name == this._currentPlaceName)
+            {
+                return place;
+            }
+        }
+    }
 
-    // }
+    getCurrentExitNames()
+    {
+        const place = this.getCurrentPlace();
+        const names = [];
+        for (const e in place.exits)
+        {
+            names.push(e);
+        }
+        return names;
+    }
 
-    // getCurrentExits()
-    // {
+    useExit(exitName)
+    {
+        if (!this._data) return;
+        console.log("use exit", exitName);
 
-    // }
+        for (let i = 0; i < this._data.places.length; i++)
+        {
+            const place = this._data.places[i];
+            if (place.name == this._currentPlaceName)
+            {
+                console.log("current place", place);
+
+                for (const e in place.exits)
+                {
+                    console.log("e", e);
+
+                    if (e == exitName)
+                    {
+                        console.log("found exit!", place.exits[e]);
+                        this.setCurrentPlaceName(place.exits[e].place);
+                        return;
+                    }
+                }
+            }
+        }
+        console.log("exit NOT found :(");
+    }
+
+    setData(data)
+    {
+        this._data = data;
+    }
 };
 
 Plan.prototype.getPlan = function (patch, name)
