@@ -3,15 +3,17 @@ import { CONSTANTS } from "../../core/constants.js";
 
 const Plan = class extends Events
 {
-    constructor(patch, name)
+    constructor(op)
     {
         super();
+        this._op = op;
+        this._patch = op.patch;
+        this._patch.plans = this._patch.plans || {};
 
-        patch.plans = patch.plans || {};
-        this._patch = patch;
         this._data = null;
         this._currentPlaceName = "";
-        this.setName(name);
+        this.setName("unknown");
+        this._patch.emitEvent("plansChanged");
     }
 
     get currentPlaceName()
@@ -19,17 +21,28 @@ const Plan = class extends Events
         return this._currentPlaceName;
     }
 
+    update()
+    {
+        op.updatePlan();
+    }
+
     setName(name)
     {
         delete this._patch.plans[this.name];
         this.name = name;
         this._patch.plans[this.name] = this;
+        this._patch.emitEvent("plansChanged");
     }
 
     setCurrentPlaceName(name)
     {
         this._currentPlaceName = name;
         this.emitEvent("stateChanged");
+    }
+
+    getCurrentPlaceName()
+    {
+        return this.getCurrentPlace().name;
     }
 
     getCurrentPlace()
@@ -42,6 +55,7 @@ const Plan = class extends Events
                 return place;
             }
         }
+        return { "name": "" };
     }
 
     getCurrentExitNames()
@@ -55,32 +69,57 @@ const Plan = class extends Events
         return names;
     }
 
-    useExit(exitName)
+    getCurrentExits()
+    {
+        const place = this.getCurrentPlace();
+        const names = [];
+        return place.exits;
+    }
+
+    gotoPlace(placeName)
     {
         if (!this._data) return;
-        console.log("use exit", exitName);
 
         for (let i = 0; i < this._data.places.length; i++)
         {
             const place = this._data.places[i];
             if (place.name == this._currentPlaceName)
             {
-                console.log("current place", place);
-
                 for (const e in place.exits)
                 {
-                    console.log("e", e);
+                    if (place.exits[e].place == placeName)
+                    {
+                        this.setCurrentPlaceName(placeName);
+                        return;
+                    }
+                }
+                break;
+            }
+        }
+        console.log("NO exit to " + placeName + " found :(");
+    }
 
+    useExit(exitName)
+    {
+        if (!this._data) return;
+
+        for (let i = 0; i < this._data.places.length; i++)
+        {
+            const place = this._data.places[i];
+            if (place.name == this._currentPlaceName)
+            {
+                for (const e in place.exits)
+                {
                     if (e == exitName)
                     {
-                        console.log("found exit!", place.exits[e]);
                         this.setCurrentPlaceName(place.exits[e].place);
                         return;
                     }
                 }
+                break;
             }
         }
-        console.log("exit NOT found :(");
+        console.log("exit " + exitName + " NOT found :(");
     }
 
     setData(data)
