@@ -28,5 +28,9 @@
                 "name": "Next"
             }
         ]
+    },
+    "summary": "Set key/values to the current ObjectCompose from an existing object",
+    "docs": {
+        "ports": []
     }
 }

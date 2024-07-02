@@ -40,5 +40,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "Switch between multiple object inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }

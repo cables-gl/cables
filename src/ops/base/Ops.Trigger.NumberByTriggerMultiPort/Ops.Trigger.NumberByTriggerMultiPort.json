@@ -35,5 +35,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "output a number by triggering an index port ",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
