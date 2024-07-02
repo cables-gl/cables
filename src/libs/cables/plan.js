@@ -23,7 +23,7 @@ const Plan = class extends Events
 
     update()
     {
-        op.updatePlan();
+        this._op.updatePlan();
     }
 
     setName(name)
