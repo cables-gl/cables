@@ -220,7 +220,7 @@ class MultiPort extends Port
                 po.multiLinkChangeListener = po.on("onLinkChanged", () =>
                 {
                     this.emitEvent("onLinkChanged");
-                    this.countPorts.bind(this);
+                    this.countPorts();
                 });
 
                 if (po.multiLinkRemoveListener)po.multiLinkRemoveListener = po.off(po.multiLinkRemoveListener);
