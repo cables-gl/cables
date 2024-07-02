@@ -1,0 +1,91 @@
+{
+    "id": "19166505-2619-4012-ad85-d2de60f27274",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1611826715780
+        },
+        {
+            "message": "Ops.User.stephan.CustomOp renamed to Ops.Cables.CustomOp",
+            "author": "stephan",
+            "date": 1611840239729
+        },
+        {
+            "message": "cloned op from Ops.Cables.CustomOp",
+            "author": "stephan",
+            "date": 1628093255694
+        },
+        {
+            "message": "Ops.User.stephan.CustomOp_v2 renamed to Ops.Cables.CustomOp_v2",
+            "author": "stephan",
+            "date": 1628093299976
+        },
+        {
+            "message": "clean up old out-ports on load",
+            "author": "stephan",
+            "date": 1643887873258
+        },
+        {
+            "message": "loading libs from uploaded files respects prefixAssetPath in export now",
+            "author": "stephan",
+            "date": 1643887883082
+        },
+        {
+            "message": "fix error when copy pasting",
+            "author": "stephan",
+            "date": 1643887895555
+        },
+        {
+            "message": "handle opening of error modal properly",
+            "author": "stephan",
+            "date": 1653382090247
+        },
+        {
+            "message": "Ops.Cables.CustomOp_v2 renamed to Ops.Deprecated.Cables.CustomOp_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694676349243
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "stephan",
+            "date": 1719915896310
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1628093255691,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "JavaScript"
+            },
+            {
+                "type": 5,
+                "name": "Library"
+            }
+        ],
+        "portsOut": []
+    },
+    "summary": "Code a custom op that will only be available in the current patch",
+    "issues": "",
+    "youtubeids": [
+        "MOdVmJ6MYQE"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "JavaScript",
+                "text": "a valid javascript snippet"
+            },
+            {
+                "name": "Library",
+                "text": "url to a library (can also be uploaded to cables) - be aware that you are completely on your own here, no support (keep CORS in mind, though)"
+            }
+        ]
+    },
+    "exampleProjectId": "5Joi9t",
+    "caniusequery": ""
+}
