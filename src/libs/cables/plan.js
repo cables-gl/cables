@@ -38,7 +38,7 @@ const Plan = class extends Events
 
     getProgress()
     {
-        return this._anim.getValue();
+        return this._anim.getValue(CABLES.now() / 1000);
     }
 
     getDuration()
@@ -49,8 +49,8 @@ const Plan = class extends Events
     setCurrentPlaceName(name)
     {
         this._anim.clear();
-        this._anim.setValue(0, 0);
-        this._anim.setValue(this.getDuration(name), 1);
+        this._anim.setValue(0, CABLES.now() / 1000);
+        this._anim.setValue(this.getDuration(name), CABLES.now() / 1000 + 1);
 
         this._currentPlaceName = name;
         this.emitEvent("stateChanged");
