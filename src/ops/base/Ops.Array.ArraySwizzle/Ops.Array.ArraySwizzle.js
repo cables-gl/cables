@@ -1,11 +1,11 @@
 const contents = ["X", "Y", "Z", "W", "0", "1", "0,1,2..", "0-1"];
 const
     inArr = op.inArray("Array"),
-    inStride = op.inSwitch("Array Stride", ["1", "2", "3", "4"], "3"),
-    inResultStride = op.inSwitch("Result Stride", ["1", "2", "3", "4"], "2"),
+    inStride = op.inSwitch("Array Stride", ["1", "2", "3", "4"], "1"),
+    inResultStride = op.inSwitch("Result Stride", ["1", "2", "3", "4"], "3"),
     in1 = op.inSwitch("X", contents, "X"),
-    in2 = op.inSwitch("Y", contents, "Y"),
-    in3 = op.inSwitch("Z", contents, "Z"),
+    in2 = op.inSwitch("Y", contents, "0"),
+    in3 = op.inSwitch("Z", contents, "0"),
     in4 = op.inSwitch("W", contents, "1"),
     outArr = op.outArray("Result");
 

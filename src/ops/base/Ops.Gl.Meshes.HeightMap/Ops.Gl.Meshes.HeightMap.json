@@ -9,9 +9,8 @@
                 "name": "render"
             },
             {
-                "type": 0,
-                "name": "file",
-                "subType": "string"
+                "type": 5,
+                "name": "file"
             },
             {
                 "type": 0,
@@ -71,5 +70,6 @@
             "date": 1559046127155
         }
     ],
-    "exampleProjectId": "bRlSDe"
+    "exampleProjectId": "bRlSDe",
+    "license": "MIT"
 }

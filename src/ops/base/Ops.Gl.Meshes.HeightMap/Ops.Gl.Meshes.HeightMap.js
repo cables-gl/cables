@@ -1,5 +1,5 @@
 const render = op.inTrigger("render"),
-    filename = op.inFile("file"),
+    filename = op.inUrl("file"),
     extrude = op.inValueFloat("extrude", 1),
     mWidth = op.inValueFloat("width", 3),
     mHeight = op.inValueFloat("height", 3),

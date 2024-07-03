@@ -24,34 +24,86 @@
             {
                 "type": 0,
                 "name": "Array Stride index",
+                "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Result Stride index",
+                "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "X index",
+                "values": [
+                    "X",
+                    "Y",
+                    "Z",
+                    "W",
+                    "0",
+                    "1",
+                    "0,1,2..",
+                    "0-1"
+                ],
                 "group": "Content Result",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Y index",
+                "values": [
+                    "X",
+                    "Y",
+                    "Z",
+                    "W",
+                    "0",
+                    "1",
+                    "0,1,2..",
+                    "0-1"
+                ],
                 "group": "Content Result",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Z index",
+                "values": [
+                    "X",
+                    "Y",
+                    "Z",
+                    "W",
+                    "0",
+                    "1",
+                    "0,1,2..",
+                    "0-1"
+                ],
                 "group": "Content Result",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "W index",
+                "values": [
+                    "X",
+                    "Y",
+                    "Z",
+                    "W",
+                    "0",
+                    "1",
+                    "0,1,2..",
+                    "0-1"
+                ],
                 "group": "Content Result",
                 "subType": "integer"
             }
@@ -64,10 +116,9 @@
         ]
     },
     "summary": "manage/re-order components of an array (stride)",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "MFv6cy"
+    "exampleProjectId": "MFv6cy",
+    "license": "MIT"
 }
