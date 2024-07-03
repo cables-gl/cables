@@ -47,7 +47,6 @@
         ]
     },
     "summary": "Set alphachannel of current imagecompose via a texture mask",
-    "issues": "",
     "docs": {
         "ports": []
     },
@@ -74,7 +73,5 @@
             "date": 1701855768516
         }
     ],
-    "caniusequery": "",
-    "youtubeids": [],
-    "exampleProjectId": ""
+    "license": "MIT"
 }

@@ -120,16 +120,11 @@
         ]
     },
     "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
-    "issues": "",
     "docs": {
         "ports": [
             {
                 "name": "render",
                 "text": "Trigger the op"
-            },
-            {
-                "name": "use viewport size",
-                "text": "set width and height to the viewport size"
             },
             {
                 "name": "Width",
@@ -145,5 +140,6 @@
             }
         ]
     },
-    "caniusequery": ""
+    "license": "MIT",
+    "exampleProjectId": "fsOPNS"
 }
