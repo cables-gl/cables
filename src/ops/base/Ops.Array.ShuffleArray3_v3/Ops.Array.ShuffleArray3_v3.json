@@ -22,7 +22,6 @@
         ]
     },
     "summary": "Shuffles/Randomizes the order of an array of triplets",
-    "issues": "",
     "docs": {
         "ports": []
     },
@@ -33,5 +32,7 @@
             "author": "pandur",
             "date": 1711377158581
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "tbdwsh"
 }
