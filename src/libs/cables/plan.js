@@ -49,8 +49,8 @@ const Plan = class extends Events
     setCurrentPlaceName(name)
     {
         this._anim.clear();
-        this._anim.setValue(0, CABLES.now() / 1000);
-        this._anim.setValue(this.getDuration(name), CABLES.now() / 1000 + 1);
+        this._anim.setValue(CABLES.now() / 1000);
+        this._anim.setValue(CABLES.now() / 1000 + this.getDuration(name), 1);
 
         this._currentPlaceName = name;
         this.emitEvent("stateChanged");
