@@ -25,6 +25,11 @@
             {
                 "type": 3,
                 "name": "Arrays_1",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_2",
                 "uititle": "add port",
                 "group": "Arrays"
             }
@@ -40,5 +45,11 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "summary": "Switch between multiple input arrays",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "L7sKrh"
 }

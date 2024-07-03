@@ -42,5 +42,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "mCTLrh"
 }

@@ -13,6 +13,18 @@
     "layout": {
         "portsIn": [
             {
+                "type": 0,
+                "name": "Seperator index",
+                "values": [
+                    "None",
+                    "LineBreak",
+                    "Space",
+                    ",",
+                    "/"
+                ],
+                "subType": "integer"
+            },
+            {
                 "type": 5,
                 "name": "Strings_0",
                 "group": "Strings"
@@ -20,21 +32,7 @@
             {
                 "type": 5,
                 "name": "Strings_1",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_2",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_3",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_4",
+                "uititle": "add port",
                 "group": "Strings"
             }
         ],
@@ -54,5 +52,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "PBHPrh"
 }
