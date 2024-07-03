@@ -35,6 +35,13 @@ op.onDelete = removeElement;
 
 outElement.onLinkChanged = updateStyle;
 
+outClicked.onLinkChanged = () =>
+{
+    op.setUiError("interactiveProblem", null);
+    if (outClicked.isLinked() && !inInteractive.get())
+        op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
+};
+
 function createElement()
 {
     div = op.patch.getDocument().createElement("div");
@@ -176,6 +183,8 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
+    op.setUiError("interactiveProblem", null);
+
     removeListeners();
     if (inInteractive.get()) addListeners();
 }

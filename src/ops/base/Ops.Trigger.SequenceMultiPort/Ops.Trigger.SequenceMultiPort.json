@@ -53,5 +53,10 @@
                 "uititle": "add port"
             }
         ]
+    },
+    "summary": "sequence trigger",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }

@@ -23,5 +23,11 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "summary": "Routing Helper for trigger cables",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "CLMeDg"
 }

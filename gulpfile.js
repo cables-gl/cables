@@ -117,7 +117,7 @@ function _core_libs(done)
             (err, stats) =>
             {
                 if (err) throw err;
-                if (stats.hasErrors())
+                if (stats && stats.hasErrors() && stats.compilation && stats.compilation.errors)
                 {
                     done(Error(stats.compilation.errors.join("\n")));
                 }

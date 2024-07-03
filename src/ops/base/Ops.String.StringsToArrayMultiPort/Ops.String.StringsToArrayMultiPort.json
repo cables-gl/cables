@@ -35,5 +35,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "create an array from multiple string input ports",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }

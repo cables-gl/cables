@@ -40,5 +40,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "switch between multiple string inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
     }
 }
