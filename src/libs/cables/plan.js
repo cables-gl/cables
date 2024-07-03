@@ -10,7 +10,8 @@ const Plan = class extends Events
         this._patch = op.patch;
         this._patch.plans = this._patch.plans || {};
 
-        this._anim = new CABLES.Anim();
+        this._anims = {};
+        this._anims.__level = new CABLES.Anim();
 
         this._data = null;
         this._currentPlaceName = "";
@@ -36,9 +37,10 @@ const Plan = class extends Events
         this._patch.emitEvent("plansChanged");
     }
 
-    getProgress()
+    getProgress(name)
     {
-        return this._anim.getValue(CABLES.now() / 1000);
+        this._anims[name] = this._anims[name] || new CABLES.Anim();
+        return this._anims[name].getValue(CABLES.now() / 1000);
     }
 
     getDuration()
@@ -46,13 +48,27 @@ const Plan = class extends Events
         return 1.0;
     }
 
+    _animPlace(name, from, to)
+    {
+        this._anims[name] = this._anims[name] || new CABLES.Anim();
+        this._anims[name].clear();
+        this._anims[name].setValue(CABLES.now() / 1000, from);
+        this._anims[name].setValue(CABLES.now() / 1000 + this.getDuration(name), to);
+    }
+
     setCurrentPlaceName(name)
     {
-        this._anim.clear();
-        this._anim.setValue(CABLES.now() / 1000, 0);
-        this._anim.setValue(CABLES.now() / 1000 + this.getDuration(name), 1);
+        this._animPlace("__levelAnim" + this.getCurrentPlace().level, 1, 0);
+
+        this._animPlace(this._currentPlaceName, 1, 0);
+        this._animPlace(name, 0, 1);
+
 
         this._currentPlaceName = name;
+
+        this._animPlace("__level", this._anims.__level.getValue(CABLES.now() / 1000), this.getCurrentPlace().level);
+        this._animPlace("__levelAnim" + this.getCurrentPlace().level, 0, 1);
+
         this.emitEvent("stateChanged");
     }
 
@@ -65,7 +81,6 @@ const Plan = class extends Events
     {
         return this.getCurrentPlace().level || 0;
     }
-
 
 
     getCurrentPlace()
