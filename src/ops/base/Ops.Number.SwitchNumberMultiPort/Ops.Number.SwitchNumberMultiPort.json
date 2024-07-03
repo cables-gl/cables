@@ -48,5 +48,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "csdcds"
 }

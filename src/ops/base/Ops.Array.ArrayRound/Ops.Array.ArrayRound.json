@@ -50,9 +50,6 @@
         }
     ],
     "summary": "Round numbers up",
-    "issues": "",
-
-
     "docs": {
         "ports": [
             {
@@ -64,5 +61,7 @@
                 "text": "Array out"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "7xdJrG"
 }
