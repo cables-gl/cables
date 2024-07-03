@@ -8,7 +8,7 @@ inIndex.onChange =
 inStrs.onChange = () =>
 {
     const valuePorts = inStrs.get();
-    const idx = Math.min(valuePorts.length - 1, Math.max(0, inIndex.get()));
+    const idx = Math.ceil(Math.min(valuePorts.length - 1, Math.max(0, inIndex.get())));
 
     outResult.set(valuePorts[idx].get());
     outNum.set(valuePorts.length);
