@@ -120,14 +120,9 @@
             }
         ]
     },
-    "summary": "Triggers one of the out ports - value index switch case (was SwitchTrigger)",
+    "summary": "Triggers one of the output ports - value index switch case",
     "docs": {
-        "ports": [
-            {
-                "name": "Default Trigger",
-                "text": "This port is triggered when a Switched Value is out of range"
-            }
-        ]
+        "ports": []
     },
     "changelog": [
         {
@@ -137,6 +132,5 @@
             "date": 1716804897700
         }
     ],
-    "issues": "",
-    "caniusequery": ""
+    "license": "MIT"
 }
