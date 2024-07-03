@@ -61,6 +61,13 @@ const Plan = class extends Events
         return this.getCurrentPlace().name;
     }
 
+    getCurrentPlaceLevel()
+    {
+        return this.getCurrentPlace().level || 0;
+    }
+
+
+
     getCurrentPlace()
     {
         for (let i = 0; i < this._data.places.length; i++)
