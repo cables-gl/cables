@@ -10,6 +10,8 @@ const Plan = class extends Events
         this._patch = op.patch;
         this._patch.plans = this._patch.plans || {};
 
+        this._anim = new CABLES.Anim();
+
         this._data = null;
         this._currentPlaceName = "";
         this.setName("unknown");
@@ -34,8 +36,22 @@ const Plan = class extends Events
         this._patch.emitEvent("plansChanged");
     }
 
+    getProgress()
+    {
+        return this._anim.getValue();
+    }
+
+    getDuration()
+    {
+        return 1.0;
+    }
+
     setCurrentPlaceName(name)
     {
+        this._anim.clear();
+        this._anim.setValue(0, 0);
+        this._anim.setValue(this.getDuration(name), 1);
+
         this._currentPlaceName = name;
         this.emitEvent("stateChanged");
     }
