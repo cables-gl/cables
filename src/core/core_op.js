@@ -943,7 +943,7 @@ const Op = function ()
 
     /**
      * create output boolean port,value will be converted to 0 or 1
-     * @function outBool
+     * @function outBoolNum
      * @instance
      * @memberof Op
      * @param {String} name

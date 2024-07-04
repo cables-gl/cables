@@ -10,6 +10,9 @@ const Plan = class extends Events
         this._patch = op.patch;
         this._patch.plans = this._patch.plans || {};
 
+        this.durationIn = 0.25;
+        this.durationOut = 0.5;
+
         this._anims = {};
         this._anims.__level = new CABLES.Anim();
 
@@ -22,6 +25,12 @@ const Plan = class extends Events
     get currentPlaceName()
     {
         return this._currentPlaceName;
+    }
+
+    setEasing(enter, exit)
+    {
+        this.easingEnter = enter;
+        this.easingExit = exit;
     }
 
     update()
@@ -43,17 +52,25 @@ const Plan = class extends Events
         return this._anims[name].getValue(CABLES.now() / 1000);
     }
 
-    getDuration()
-    {
-        return 1.0;
-    }
-
     _animPlace(name, from, to)
     {
+        let dur = this.durationIn;
         this._anims[name] = this._anims[name] || new CABLES.Anim();
+
+        if (to == 0)
+        {
+            dur = this.durationOut;
+            this._anims[name].defaultEasing = this.easingExit;
+        }
+        else
+        {
+            dur = this.durationIn;
+            this._anims[name].defaultEasing = this.easingEnter;
+        }
+
         this._anims[name].clear();
         this._anims[name].setValue(CABLES.now() / 1000, from);
-        this._anims[name].setValue(CABLES.now() / 1000 + this.getDuration(name), to);
+        this._anims[name].setValue(CABLES.now() / 1000 + dur, to);
     }
 
     setCurrentPlaceName(name)
@@ -62,7 +79,6 @@ const Plan = class extends Events
 
         this._animPlace(this._currentPlaceName, 1, 0);
         this._animPlace(name, 0, 1);
-
 
         this._currentPlaceName = name;
 
@@ -88,10 +104,7 @@ const Plan = class extends Events
         for (let i = 0; i < this._data.places.length; i++)
         {
             const place = this._data.places[i];
-            if (place.name == this._currentPlaceName)
-            {
-                return place;
-            }
+            if (place.name == this._currentPlaceName) return place;
         }
         return { "name": "" };
     }
@@ -100,10 +113,7 @@ const Plan = class extends Events
     {
         const place = this.getCurrentPlace();
         const names = [];
-        for (const e in place.exits)
-        {
-            names.push(e);
-        }
+        for (const e in place.exits) names.push(e);
         return names;
     }
 
