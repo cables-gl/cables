@@ -40,5 +40,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "oBPhsh"
 }

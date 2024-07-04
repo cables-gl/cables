@@ -36,8 +36,9 @@
         ]
     },
     "summary": "Randomizes the order of elements inside an array",
-    "issues": "",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "doUssh"
 }

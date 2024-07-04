@@ -29,9 +29,6 @@
         }
     ],
     "summary": "Round numbers up",
-    "issues": "",
-
-
     "docs": {
         "ports": [
             {
@@ -44,5 +41,6 @@
             }
         ]
     },
-    "youtubeids": []
+    "license": "MIT",
+    "exampleProjectId": "7xdJrG"
 }

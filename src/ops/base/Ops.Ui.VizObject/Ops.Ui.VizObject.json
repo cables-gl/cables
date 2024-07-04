@@ -67,5 +67,6 @@
     "exampleProjectId": "PKAmq4",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

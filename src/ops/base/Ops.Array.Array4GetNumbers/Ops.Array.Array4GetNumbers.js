@@ -1,10 +1,10 @@
 const
     pArr = op.inArray("Array"),
     pIndex = op.inValueInt("Index"),
-    outX = op.outValue("X"),
-    outY = op.outValue("Y"),
-    outZ = op.outValue("Z"),
-    outW = op.outValue("W");
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outZ = op.outNumber("Z"),
+    outW = op.outNumber("W");
 
 pArr.onChange =
     pIndex.onChange = update;

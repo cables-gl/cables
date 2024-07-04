@@ -175,11 +175,11 @@
             "date": 1701855971079
         }
     ],
-    "issues": "",
     "youtubeids": [
         "ZZKdaQw1bMo"
     ],
     "coreLibs": [
         "cgl_copytexture"
-    ]
+    ],
+    "license": "MIT"
 }

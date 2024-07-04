@@ -58,5 +58,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "F5L0sh"
 }

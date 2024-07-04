@@ -34,11 +34,7 @@ function onStart()
 {
     if (normalize == 0)
     {
-        if (sizeElement.clientWidth === 0)
-        {
-            console.log("mouse waiting for listenerelement");
-            setTimeout(onStart, 50);
-        }
+        if (sizeElement.clientWidth === 0) setTimeout(onStart, 50);
 
         outMouseX.set(sizeElement.clientWidth / 2);
         outMouseY.set(sizeElement.clientHeight / 2);
@@ -57,14 +53,13 @@ function onStart()
     {
         if (sizeElement.clientWidth === 0)
         {
-            console.log("mouse waiting for listenerelement");
             setTimeout(onStart, 50);
         }
 
         outMouseX.set(sizeElement.clientWidth / 2 / cgl.pixelDensity);
         outMouseY.set(sizeElement.clientHeight / 2 / cgl.pixelDensity);
     }
-    else console.log("unknown normalize mouse", normalize);
+    else console.error("unknown normalize mouse", normalize);
 }
 
 function setValue(x, y)

@@ -144,7 +144,8 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     if (end > array.length)
     {
-        this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+        if (CABLES.platform.isDevEnv())
+            this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
         // end = array.length - 1;
         return;
     }

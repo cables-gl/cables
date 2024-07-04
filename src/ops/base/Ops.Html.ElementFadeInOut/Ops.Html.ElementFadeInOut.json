@@ -43,5 +43,6 @@
             "date": 1556524546620
         }
     ],
-    "exampleProjectId": "Whj018"
+    "exampleProjectId": "Whj018",
+    "license": "MIT"
 }
