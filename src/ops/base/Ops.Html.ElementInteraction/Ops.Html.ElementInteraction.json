@@ -80,10 +80,10 @@
     },
     "summary": "Html element interaction events",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "W0WpUr"
+    "exampleProjectId": "W0WpUr",
+    "license": "MIT"
 }

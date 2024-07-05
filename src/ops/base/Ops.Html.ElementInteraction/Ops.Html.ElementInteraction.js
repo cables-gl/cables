@@ -48,7 +48,8 @@ function onMove(e)
 {
     outPosX.set(e.offsetX);
     outPosY.set(e.offsetY);
-    outIsDownLeft.set(e.which == 1);
+    // console.log();
+    outIsDownLeft.set(e.buttons == 1);
     outIsDownRight.set(e.which == 2);
 }
 

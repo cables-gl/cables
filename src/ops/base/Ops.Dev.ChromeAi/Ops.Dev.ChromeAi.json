@@ -1,0 +1,46 @@
+{
+    "id": "c6b2d1a1-d7b4-4c43-9a0b-1f3dc2ea2441",
+    "created": 1720035181997,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720035182051
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Prompt"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Working",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "exampleProjectId": "fAaHuh",
+    "docs": {
+        "ports": []
+    }
+}

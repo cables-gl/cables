@@ -57,5 +57,6 @@
     "exampleProjectId": "9SHiq4",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

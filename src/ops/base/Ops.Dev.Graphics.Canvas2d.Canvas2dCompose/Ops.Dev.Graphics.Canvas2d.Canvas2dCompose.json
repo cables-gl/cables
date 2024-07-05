@@ -30,6 +30,11 @@
                 "type": 0,
                 "name": "Height",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -43,5 +48,6 @@
                 "objType": "element"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }
