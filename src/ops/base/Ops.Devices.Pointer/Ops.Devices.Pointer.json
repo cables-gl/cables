@@ -36,11 +36,6 @@
             },
             {
                 "type": 0,
-                "name": "right click prevent default",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Events index",
                 "values": [
                     "Pointer",
@@ -58,6 +53,16 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Prevent Default",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
             }
         ],
         "portsOut": [

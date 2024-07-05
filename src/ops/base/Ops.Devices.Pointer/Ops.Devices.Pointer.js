@@ -2,11 +2,11 @@ const
     inCoords = op.inSwitch("Coordinates", ["-1 to 1", "Pixel Display", "Pixel", "0 to 1"], "-1 to 1"),
     area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element", "Canvas Area"], "Canvas"),
     flipY = op.inValueBool("flip y", true),
-    rightClickPrevDef = op.inBool("right click prevent default", true),
-    // touchscreen = op.inValueBool("Touch support", true),
     inEventType = op.inSwitch("Events", ["Pointer", "Mouse", "Touch"], "Pointer"),
     inPassive = op.inValueBool("Passive Events", false),
     active = op.inValueBool("Active", true),
+    inPreventDefault = op.inValueBool("Prevent Default", false),
+    inEle = op.inObject("Element", null, "element"),
     outMouseX = op.outNumber("x", 0),
     outMouseY = op.outNumber("y", 0),
     mouseClick = op.outTrigger("click"),
@@ -20,6 +20,7 @@ const cgl = op.patch.cgl;
 let normalize = 1;
 let listenerElement = null;
 let sizeElement = null;
+let startTimeDown = 0;
 
 inPassive.onChange =
 area.onChange = addListeners;
@@ -30,6 +31,15 @@ op.onDelete = removeListeners;
 addListeners();
 
 op.on("loadedValueSet", onStart);
+
+inEle.onChange =
+inEle.onLinkChanged = () =>
+{
+    removeListeners();
+    addListeners();
+
+    area.setUiAttribs({ "greyout": inEle.isLinked() });
+};
 
 function onStart()
 {
@@ -113,14 +123,17 @@ function setValue(x, y)
 
 function checkHovering(e)
 {
+    if (e.pointerType == "touch") return true;
     const r = sizeElement.getBoundingClientRect();
 
-    return (
+    let hovering = (
         e.clientX > r.left &&
-        e.clientX < r.left + r.width &&
-        e.clientY > r.top &&
-        e.clientY < r.top + r.height
+            e.clientX < r.left + r.width &&
+            e.clientY > r.top &&
+            e.clientY < r.top + r.height
     );
+
+    return hovering;
 }
 
 inEventType.onChange = function ()
@@ -145,36 +158,42 @@ function updateCoordNormalizing()
 
 function onMouseEnter(e)
 {
-    mouseDown.set(false);
-    mouseOver.set(checkHovering(e));
+    if (e.pointerType == "touch")
+    {
+        startTimeDown = 0;
+        mouseDown.set(false);
+        mouseOver.set(checkHovering(e));
+    }
 }
 
 function onMouseDown(e)
 {
+    onmousemove(e);
     if (!checkHovering(e)) return;
     mouseDown.set(true);
+    startTimeDown = performance.now();
 }
 
 function onMouseUp(e)
 {
+    onmousemove(e);
+
     mouseDown.set(false);
-}
-
-function onClickRight(e)
-{
-    if (!checkHovering(e)) return;
-    mouseClickRight.trigger();
-    if (rightClickPrevDef.get()) e.preventDefault();
-}
-
-function onmouseclick(e)
-{
-    if (!checkHovering(e)) return;
-    mouseClick.trigger();
+    if (performance.now() - startTimeDown < 200)
+    {
+        if (e.which == 1) mouseClick.trigger();
+        if (e.which == 3)
+        {
+            if (mouseClickRight.isLinked())e.preventDefault();
+            mouseClickRight.trigger();
+        }
+    }
+    if (inPreventDefault.get())e.preventDefault();
 }
 
 function onMouseLeave(e)
 {
+    startTimeDown = 0;
     mouseDown.set(false);
     mouseOver.set(checkHovering(e));
 }
@@ -196,6 +215,12 @@ function setCoords(e)
         y = e.clientY - r.top;
     }
 
+    if (inEle.isLinked())
+    {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+
     if (flipY.get()) y = sizeElement.clientHeight - y;
 
     setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
@@ -208,6 +233,8 @@ function onmousemove(e)
 
     outMovementX.set(e.movementX / cgl.pixelDensity);
     outMovementY.set(e.movementY / cgl.pixelDensity);
+
+    if (inPreventDefault.get())e.preventDefault();
 }
 
 function ontouchmove(e)
@@ -235,19 +262,16 @@ function removeListeners()
     listenerElement.removeEventListener("touchstart", ontouchstart);
     listenerElement.removeEventListener("touchmove", ontouchmove);
 
-    listenerElement.removeEventListener("contextmenu", onClickRight);
-    listenerElement.removeEventListener("click", onmouseclick);
-
     listenerElement.removeEventListener("mousemove", onmousemove);
     listenerElement.removeEventListener("mouseleave", onMouseLeave);
     listenerElement.removeEventListener("mousedown", onMouseDown);
     listenerElement.removeEventListener("mouseup", onMouseUp);
     listenerElement.removeEventListener("mouseenter", onMouseEnter);
 
-    listenerElement.removeEventListener("pointermove", onmousemove);
-    listenerElement.removeEventListener("pointerleave", onMouseLeave);
     listenerElement.removeEventListener("pointerdown", onMouseDown);
     listenerElement.removeEventListener("pointerup", onMouseUp);
+    listenerElement.removeEventListener("pointermove", onmousemove);
+    listenerElement.removeEventListener("pointerleave", onMouseLeave);
     listenerElement.removeEventListener("pointerenter", onMouseEnter);
     listenerElement = null;
 }
@@ -266,36 +290,36 @@ function addListeners()
     if (area.get() == "Document") sizeElement = listenerElement = document.body;
     if (area.get() == "Parent Element") listenerElement = sizeElement = cgl.canvas.parentElement;
 
+    if (inEle.isLinked() && inEle.get())listenerElement = inEle.get();
+
+    listenerElement.style["touch-action"] = "none";
+
     let passive = false;
     if (inPassive.get())passive = { "passive": true };
 
-    if (inEventType.get() == "touch")
+    if (inEventType.get() == "Touch")
     {
         listenerElement.addEventListener("touchend", ontouchend, passive);
         listenerElement.addEventListener("touchstart", ontouchstart, passive);
         listenerElement.addEventListener("touchmove", ontouchmove, passive);
     }
 
-    if (inEventType.get() == "mouse")
+    if (inEventType.get() == "Mouse")
     {
         listenerElement.addEventListener("mousemove", onmousemove, passive);
         listenerElement.addEventListener("mouseleave", onMouseLeave, passive);
         listenerElement.addEventListener("mousedown", onMouseDown, passive);
         listenerElement.addEventListener("mouseup", onMouseUp, passive);
         listenerElement.addEventListener("mouseenter", onMouseEnter, passive);
-        listenerElement.addEventListener("contextmenu", onClickRight, passive);
-        listenerElement.addEventListener("click", onmouseclick, passive);
     }
 
-    if (inEventType.get() == "pointer")
+    if (inEventType.get() == "Pointer")
     {
         listenerElement.addEventListener("pointermove", onmousemove, passive);
         listenerElement.addEventListener("pointerleave", onMouseLeave, passive);
         listenerElement.addEventListener("pointerdown", onMouseDown, passive);
         listenerElement.addEventListener("pointerup", onMouseUp, passive);
         listenerElement.addEventListener("pointerenter", onMouseEnter, passive);
-        listenerElement.addEventListener("contextmenu", onClickRight, passive);
-        listenerElement.addEventListener("click", onmouseclick, passive);
     }
 }
 
