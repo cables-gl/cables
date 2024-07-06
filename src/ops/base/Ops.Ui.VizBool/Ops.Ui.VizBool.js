@@ -6,7 +6,6 @@ op.setUiAttrib({ "height": 100, "width": 100, "resizable": true });
 
 inNum.onChange = () =>
 {
-    op.checkMainloopExists();
     outBool.set(inNum.get());
 };
 

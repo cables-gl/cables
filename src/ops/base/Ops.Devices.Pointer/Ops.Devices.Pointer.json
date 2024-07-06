@@ -1,0 +1,109 @@
+{
+    "id": "721349b7-433c-4da0-9706-b88abf042273",
+    "created": 1720173734886,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720173734887
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Coordinates index",
+                "values": [
+                    "-1 to 1",
+                    "Pixel Display",
+                    "Pixel",
+                    "0 to 1"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "flip y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Events index",
+                "values": [
+                    "Pointer",
+                    "Mouse",
+                    "Touch"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Passive Events",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Prevent Default",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "click"
+            },
+            {
+                "type": 1,
+                "name": "click right"
+            },
+            {
+                "type": 0,
+                "name": "Button is down",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mouse is hovering",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Movement X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Movement Y",
+                "subType": "number"
+            }
+        ]
+    }
+}

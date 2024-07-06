@@ -4,6 +4,7 @@ const
     inCanvas = op.inObject("Canvas Copy", null, "element"),
     inWidth = op.inInt("Width", 256),
     inHeight = op.inInt("Height", 256),
+    inClear = op.inBool("Clear", true),
     next = op.outTrigger("Next"),
     outEle = op.outObject("Element", canv, "element");
 
@@ -22,7 +23,8 @@ exec.onTriggered = () =>
 {
     op.patch.frameStore.canvasCompose = { "canvas": canv, "ctx": ctx };
 
-    ctx.clearRect(0, 0, inWidth.get(), inHeight.get());
+    if (inClear.get())
+        ctx.clearRect(0, 0, inWidth.get(), inHeight.get());
     ctx.fillStyle = "grey";
     ctx.antiAlias = true;
 
