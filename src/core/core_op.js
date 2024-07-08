@@ -356,18 +356,15 @@ const Op = function ()
      */
     Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
     {
-        // old
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
                 "display": "bool"
             })
         );
-        // if (v !== undefined)
-        // {
+
+        if (v === true)v = 1;
+        if (v === false)v = 0;
         p.setInitialValue(v);
-        // p.set(v);
-        // p.defaultValue = p.get();
-        // }
 
         return p;
     };
@@ -921,7 +918,8 @@ const Op = function ()
     };
 
     /**
-     * create output boolean port
+     * deprecated create output boolean port
+     * @deprecated
      * @function outBool
      * @instance
      * @memberof Op
@@ -930,7 +928,7 @@ const Op = function ()
      */
     Op.prototype.outValueBool = Op.prototype.outBool = function (name, v)
     {
-        // old
+        // old: use outBoolNum
         const p = this.addOutPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "display": "bool"

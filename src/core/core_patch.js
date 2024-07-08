@@ -885,7 +885,7 @@ Patch.prototype.deSerialize = function (obj, options)
         catch (e)
         {
             console.log("[instancing error] op data:", opData, e);
-            throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
+            // throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
         }
 
         if (op)
@@ -1104,8 +1104,15 @@ Patch.prototype.deSerialize = function (obj, options)
     {
         if (this.ops[i].init)
         {
-            this.ops[i].init();
-            this.ops[i].init = null;
+            try
+            {
+                this.ops[i].init();
+                this.ops[i].init = null;
+            }
+            catch (e)
+            {
+                console.error("op.init crash", e);
+            }
         }
     }
 
@@ -1641,4 +1648,3 @@ Patch.replaceOpIds = function (json, options)
  */
 
 export default Patch;
-

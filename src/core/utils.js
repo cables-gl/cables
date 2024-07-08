@@ -128,6 +128,7 @@ export function cleanJson(obj)
 
 /**
  * @see http://stackoverflow.com/q/7616461/940217
+ * @memberof Utils
  * @return {string}
  */
 const _prefixedHash = function (str, prefix = "id")
