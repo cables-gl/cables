@@ -33,9 +33,6 @@
         "start": "gulp",
         "analyze": "gulp analyze"
     },
-    "directories": {
-        "doc": "doc"
-    },
     "repository": {
         "type": "git",
         "url": "git@github.com:cables-gl/cables.git"
