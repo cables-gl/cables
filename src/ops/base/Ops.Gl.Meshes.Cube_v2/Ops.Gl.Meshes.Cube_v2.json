@@ -40,6 +40,11 @@
             {
                 "type": 0,
                 "name": "Mapping index",
+                "values": [
+                    "Side",
+                    "Cube +-",
+                    "SideWrap"
+                ],
                 "group": "Mapping",
                 "subType": "integer"
             },
@@ -106,7 +111,6 @@
     },
     "summary": "draw a cube",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -116,5 +120,6 @@
             }
         ]
     },
-    "exampleProjectId": "0ghhQ6"
+    "exampleProjectId": "0ghhQ6",
+    "license": "MIT"
 }

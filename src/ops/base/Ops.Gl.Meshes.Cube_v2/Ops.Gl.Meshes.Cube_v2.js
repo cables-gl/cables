@@ -113,7 +113,7 @@ function buildMesh()
     else meshvalid = true;
 
     if (mesh)mesh.dispose();
-    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    if (op.patch.cg) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
 
     geomOut.setRef(geom);
 
