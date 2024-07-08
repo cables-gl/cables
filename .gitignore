@@ -1,12 +1,9 @@
 .DS_Store
-doc/ops_base
 src/ops/users
 src/ops/teams
 src/ops/extensions
 src/ops/patches
-/doc/SUMMARY.md
 .idea/
-/doc/api_*
 node_modules
 /dist/
 build/
