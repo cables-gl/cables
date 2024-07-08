@@ -40,11 +40,6 @@
             },
             {
                 "type": 0,
-                "name": "TextArea",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Grey Out",
                 "subType": "boolean"
             },
@@ -73,5 +68,9 @@
                 "subType": "boolean"
             }
         ]
-    }
+    },
+    "docs": {
+        "ports": []
+    },
+    "summary": "date or datetime picker in the sidebar"
 }

@@ -4,9 +4,7 @@ const
     defaultValuePort = op.inString("Default", "2024-01-01"),
     inMin = op.inString("Min", ""),
     inMax = op.inString("Max", ""),
-
     inType = op.inDropDown("Type", ["date", "datetime-local"], "date"),
-    inTextArea = op.inBool("TextArea", false),
     inGreyOut = op.inBool("Grey Out", false),
     inVisible = op.inBool("Visible", true),
     inClear = op.inTriggerButton("Clear"),
@@ -38,7 +36,8 @@ creatElement();
 
 op.toWorkPortsNeedToBeLinked(parentPort);
 
-inTextArea.onChange = creatElement;
+inMin.onChange =
+inMax.onChange =
 inType.onChange = setAttribs;
 
 function setAttribs()
@@ -52,15 +51,7 @@ function setAttribs()
 function creatElement()
 {
     if (input)input.remove();
-    if (!inTextArea.get())
-    {
-        input = document.createElement("input");
-    }
-    else
-    {
-        input = document.createElement("textarea");
-        onDefaultValueChanged();
-    }
+    input = document.createElement("input");
 
     input.classList.add("sidebar__text-input-input");
 
@@ -113,7 +104,15 @@ op.onDelete = onDelete;
 
 function onInput(ev)
 {
-    const endDateIso = new Date(input.value).toISOString();
+    let endDateIso = "";
+    try
+    {
+        endDateIso = new Date(input.value).toISOString();
+    }
+    catch (e)
+    {
+        console.log(e);
+    }
     valuePort.set(endDateIso);
 }
 
