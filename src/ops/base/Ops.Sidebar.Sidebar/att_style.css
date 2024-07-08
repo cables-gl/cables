@@ -611,6 +611,8 @@
  * SIDEBAR INPUT
  */
 .sidebar__text-input textarea,
+.sidebar__text-input input[type=date],
+.sidebar__text-input input[type=datetime-local],
 .sidebar__text-input input[type=text],
 .sidebar__text-input input[type=password] {
     box-sizing: border-box;
@@ -625,6 +627,7 @@
     border:1px solid #666;
     padding: 0 0 0 4px !important;
     margin: 0;
+    color-scheme: dark;
 }
 
 .sidebar__text-input textarea:focus::placeholder {
