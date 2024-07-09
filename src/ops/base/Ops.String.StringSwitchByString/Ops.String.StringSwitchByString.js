@@ -6,6 +6,7 @@ const numberStrings = ["one", "two", "three", "four", "five", "six", "seven", "e
 const strings = [];
 const numbers = [];
 
+inDefault.onChange =
 inStr.onChange = update;
 
 for (let i = 0; i < numberStrings.length; i++)

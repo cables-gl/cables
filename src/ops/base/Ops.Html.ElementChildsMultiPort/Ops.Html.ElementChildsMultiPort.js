@@ -4,92 +4,53 @@ const
     outParent = op.outObject("Parent Out", null, "element"),
     outNum = op.outNumber("Num Values");
 
-inObjs.onChange = () =>
+const oldEles = [];
+let fakeParent = null;
+
+inObjs.onChange =
+parentPort.onChange = () =>
 {
-    if (!parentPort.isLinked())
-    {
-        cleanUp();
-    }
-    else
-    {
-        rebuild();
-    }
-
-    console.log(inObjs.get());
-
-    outNum.set(inObjs.length);
+    rebuild();
+    outNum.set(oldEles.length);
 };
 
-function cleanUp()
+function removeOldEles()
 {
-    for (let i = 0; i < inObjs.length; i++)
-    {
-        const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-        const currentChild = canvas.querySelector(selector);
-        if (currentChild && currentChild.parentNode) currentChild.remove();
-    }
-    outParent.set(null);
-}
+    for (let i = 0; i < oldEles.length; i++)
+        oldEles[i].remove();
 
-const oldEles = [];
+    oldEles.length = 0;
+}
 
 function rebuild()
 {
-    const parent = parentPort.get();
+    const ports = inObjs.get();
+    let parent = parentPort.get();
 
-    for (let i = 0; i < oldEles.length; i++)
+    if (!parent)
     {
-        oldEles[i].remove();
+        if (!fakeParent)
+        {
+            fakeParent = op.patch.getDocument().createElement("div");
+            fakeParent.style.display = "none";
+            fakeParent.setAttribute("id", "fakeParent");
+        }
+        parent = fakeParent;
     }
-    oldEles.length = 0;
 
-    for (let i = 0; i < inObjs.get().length; i++)
+    removeOldEles();
+
+    for (let i = 0; i < ports.length; i++)
     {
-        const ele = inObjs.get()[i];
-        oldEles.push(ele);
-        parent.appendChild(ele);
+        const ele = ports[i].get();
+        if (ele)
+        {
+            oldEles.push(ele);
+            parent.appendChild(ele);
+        }
     }
 
-    console.log("oldeles", oldEles.length);
-
-    // if (!parent)
-    // {
-    //     outParent.set(null);
-    //     return;
-    // }
-
-    // if (!parent.querySelector)
-    // {
-    //     outParent.set(null);
-    //     return;
-    // }
-
-    // for (let i = 0; i < inObjs.length; i++)
-    // {
-    //     const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-    //     const currentChild = parent.querySelector(selector);
-    //     if (currentChild)
-    //     {
-    //         currentChild.remove();
-    //     }
-    //     const p = inPorts[i].get();
-    //     if (p && parent)
-    //     {
-    //         if (!p.dataset)console.warn("[elementChilds] p no dataset ?!");
-    //         else p.dataset.cablesChildId = op.id + "_" + i;
-    //         parent.appendChild(p);
-    //     }
-
-    // p.onLinkChanged = () =>
-    // {
-    //     if (!p.isLinked())
-    //     {
-    //         const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-    //         const currentChild = canvas.querySelector(selector);
-    //         if (currentChild) currentChild.remove();
-    //     }
-    // };
-    // }
-
-    outParent.setRef(parent);
+    outNum.set(oldEles.length);
+    if (parent == fakeParent)outParent.setRef(null);
+    else outParent.setRef(parent);
 }

@@ -3,6 +3,7 @@ const
     inVisible = op.inValueBool("Visible", true),
     inDuration = op.inValue("Duration", 0.25),
     inOpacity = op.inValue("Opacity", 1),
+    outEle = op.outObject("PassThrough", null, "element"),
     outShowing = op.outBoolNum("Is Showing", false);
 
 let theTimeout = null;
@@ -32,6 +33,13 @@ op.onLoaded = function ()
     loaded = true;
     updateVisibility();
     outShowing.set(inVisible.get());
+};
+
+inEle.onChange =
+outEle.onLinkChanged =
+inEle.onLinkChanged = () =>
+{
+    outEle.setRef(inEle.get());
 };
 
 function updateVisibility()
