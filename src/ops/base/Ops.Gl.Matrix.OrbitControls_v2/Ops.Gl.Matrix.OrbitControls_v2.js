@@ -116,6 +116,7 @@ function ip(val, goal)
 render.onTriggered = function ()
 {
     const cgl = op.patch.cg;
+    if (!cgl) return;
 
     if (!element)
     {

@@ -127,6 +127,7 @@ const lastPx = 0;
 render.onTriggered = function ()
 {
     const cgl = op.patch.cg;
+    if (!cgl) return;
 
     if (!element)
     {

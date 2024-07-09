@@ -1,0 +1,54 @@
+{
+    "id": "d1929eb8-8839-4d4b-ba3d-7d53a4c17813",
+    "created": 1720508423655,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720508423690
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Parent",
+                "objType": "element"
+            },
+            {
+                "type": 2,
+                "name": "Childs_0",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_1",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_2",
+                "uititle": "add port",
+                "group": "Childs"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Parent Out",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    }
+}
