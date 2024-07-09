@@ -45,7 +45,7 @@ function rebuild()
 
     for (let i = 0; i < inObjs.get().length; i++)
     {
-        ele = inObjs.get()[i];
+        const ele = inObjs.get()[i];
         oldEles.push(ele);
         parent.appendChild(ele);
     }
