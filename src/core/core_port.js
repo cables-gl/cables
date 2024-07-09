@@ -336,12 +336,10 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     this.crashed = true;
                     this.op.crashed = true;
 
-                    console.log("crash", this.op.objName);
-
                     this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
-                    this._log.error("onvaluechanged exception cought", ex);
+                    this._log.error("onvaluechanged exception caught", ex);
                     this._log.error(ex.stack);
                     this._log.warn("exception in: " + this._op.name);
 

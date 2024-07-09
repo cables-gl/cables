@@ -1,0 +1,29 @@
+{
+    "id": "911db971-5cf3-474c-9cbe-6cc077f969fd",
+    "created": 1720432210082,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720432210121
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Timestamp",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "ISO Date"
+            }
+        ]
+    }
+}

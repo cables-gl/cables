@@ -2,7 +2,7 @@ import { Events } from "cables-shared-client";
 
 /**
  * @type {Object}
- * @name Variable
+ * @name PatchVariable
  * @param {String} name
  * @param {String|Number} value
  * @memberof Patch
@@ -31,10 +31,9 @@ class PatchVariable extends Events
 
     /**
      * @function Variable.getValue
-     * @memberof Variable
+     * @memberof PatchVariable
      * @returns {String|Number|Boolean}
      */
-
     getValue()
     {
         return this._v;
@@ -42,7 +41,7 @@ class PatchVariable extends Events
 
     /**
      * @function getName
-     * @memberof Variable
+     * @memberof PatchVariable
      * @instance
      * @returns {String|Number|Boolean}
      * @function
@@ -54,7 +53,7 @@ class PatchVariable extends Events
 
     /**
      * @function setValue
-     * @memberof Variable
+     * @memberof PatchVariable
      * @instance
      * @returns {String|Number|Boolean}
      * @function

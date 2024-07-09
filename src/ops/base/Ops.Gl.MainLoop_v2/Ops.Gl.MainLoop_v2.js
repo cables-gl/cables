@@ -3,7 +3,7 @@ const
     fpsLimit = op.inValue("FPS Limit", 0),
     reduceFocusFPS = op.inValueBool("Reduce FPS unfocussed", false),
     clear = op.inValueBool("Transparent", false),
-    active = op.inValueBool("Active", true),
+    active = op.inValueBool("Active", 1),
     trigger = op.outTrigger("trigger"),
     width = op.outNumber("width"),
     height = op.outNumber("height"),

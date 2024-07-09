@@ -1,0 +1,76 @@
+{
+    "id": "24019675-1b22-451f-bb23-ddf552620b34",
+    "created": 1720431466542,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720431466586
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 5,
+                "name": "Default"
+            },
+            {
+                "type": 5,
+                "name": "Min"
+            },
+            {
+                "type": 5,
+                "name": "Max"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Clear"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Children"
+            },
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Focus",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "summary": "date or datetime picker in the sidebar"
+}
