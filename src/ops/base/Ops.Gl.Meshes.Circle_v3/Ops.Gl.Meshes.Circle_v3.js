@@ -55,6 +55,7 @@ render.onLinkChanged = function ()
 
 function renderMesh()
 {
+    if (!op.patch.cg) return;
     if (needsCalc)calc();
 
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;

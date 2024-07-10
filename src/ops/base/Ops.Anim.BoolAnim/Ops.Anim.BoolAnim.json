@@ -53,7 +53,7 @@
             {
                 "type": 0,
                 "name": "finished",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -102,5 +102,6 @@
         ]
     },
     "issues": "",
-    "exampleProjectId": "ofPcTo"
+    "exampleProjectId": "ofPcTo",
+    "license": "MIT"
 }

@@ -6,21 +6,25 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Parent"
+                "name": "Parent",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child"
+                "name": "Child",
+                "objType": "element"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "Parent Out"
+                "name": "Parent Out",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Child Out"
+                "name": "Child Out",
+                "objType": "element"
             }
         ]
     },
@@ -52,5 +56,6 @@
             "author": "pandur",
             "date": 1605278069472
         }
-    ]
+    ],
+    "license": "MIT"
 }

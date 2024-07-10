@@ -109,5 +109,6 @@
             "date": 1702643016625
         }
     ],
-    "exampleProjectId": "DAAkQ6"
+    "exampleProjectId": "DAAkQ6",
+    "license": "MIT"
 }
