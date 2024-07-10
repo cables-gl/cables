@@ -63,5 +63,10 @@
             "author": "pandur",
             "date": 1671034192486
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "RJXV7i",
+    "docs": {
+        "ports": []
+    }
 }

@@ -51,10 +51,9 @@
         ]
     },
     "summary": "convert RGB color to HSB Hue, Saturation, Brightness",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "Up7r8i"
 }

@@ -147,9 +147,6 @@
         "jszip.js"
     ],
     "summary": "record, render an animation and save as webm video file or png image sequence",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -157,5 +154,7 @@
                 "text": "Frames per second for render."
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "bQhm8i"
 }

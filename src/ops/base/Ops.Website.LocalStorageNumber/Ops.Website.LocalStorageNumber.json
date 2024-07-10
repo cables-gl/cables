@@ -39,9 +39,6 @@
         ]
     },
     "summary": "Store and retreive a number in browser localstorage",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -65,5 +62,7 @@
                 "text": "boolean to indicate browser support for localstorage"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "9di48i"
 }

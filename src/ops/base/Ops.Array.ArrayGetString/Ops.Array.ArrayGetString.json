@@ -22,7 +22,6 @@
         ]
     },
     "summary": "get a string from an array at [index]",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -39,6 +38,6 @@
             }
         ]
     },
-    "issues": ""
-
+    "license": "MIT",
+    "exampleProjectId": "aHNk8i"
 }

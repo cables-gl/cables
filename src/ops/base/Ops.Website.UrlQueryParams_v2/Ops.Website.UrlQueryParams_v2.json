@@ -27,9 +27,7 @@
             }
         ]
     },
-    "summary": "Returns a URL query parameter, e.g. index.html?Parameter=ParameterValue",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Returns a URL query parameter",
     "docs": {
         "ports": [
             {
@@ -45,5 +43,7 @@
                 "text": "The value of the parameter, or default value if it could not be found in the URL"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "2SE58i"
 }

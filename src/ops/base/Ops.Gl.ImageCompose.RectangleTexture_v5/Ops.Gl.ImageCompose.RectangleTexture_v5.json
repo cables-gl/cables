@@ -180,7 +180,6 @@
         }
     ],
     "summary": "draws a 2d rectangle into a texture.",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -236,5 +235,7 @@
                 "text": "Trigger out"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "IPPT7i"
 }

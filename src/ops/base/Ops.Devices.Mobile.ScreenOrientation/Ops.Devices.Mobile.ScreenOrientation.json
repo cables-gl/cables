@@ -1,7 +1,6 @@
 {
     "summary": "get orientation of the physical screen",
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -21,7 +20,6 @@
     "docs": {
         "ports": []
     },
-    "issues": "",
-
-    "youtubeids": []
+    "license": "MIT",
+    "exampleProjectId": "Zc398i"
 }

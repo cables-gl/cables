@@ -33,11 +33,9 @@
         ]
     },
     "summary": "Push/Append a string to the end of an array",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "aHNk8i"
 }

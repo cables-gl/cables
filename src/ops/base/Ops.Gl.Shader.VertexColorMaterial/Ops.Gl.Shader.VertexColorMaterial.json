@@ -23,10 +23,6 @@
         ]
     },
     "summary": "draw a mesh showing only it's vertex colors",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
@@ -46,5 +42,7 @@
             "author": "pandur",
             "date": 1643616985264
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "6MsLhR"
 }
