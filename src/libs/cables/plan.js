@@ -90,7 +90,8 @@ const Plan = class extends Events
 
     getCurrentPlaceName()
     {
-        return this.getCurrentPlace().name;
+        const p = this.getCurrentPlace();
+        if (p) return p.name;
     }
 
     getCurrentPlaceLevel()
@@ -101,6 +102,7 @@ const Plan = class extends Events
 
     getCurrentPlace()
     {
+        if (!this._data) return { "name": "no plan data" };
         for (let i = 0; i < this._data.places.length; i++)
         {
             const place = this._data.places[i];
