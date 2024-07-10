@@ -10,6 +10,11 @@
             },
             {
                 "type": 0,
+                "name": "Overlay Mode",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Remote Viewer",
                 "subType": "boolean"
             },
@@ -40,16 +45,23 @@
     "authorName": "pandur",
     "id": "7c110d60-829f-4b06-b3e4-0af911550570",
     "created": 1540834918658,
-
     "changelog": [
         {
             "message": "add output boolean for remote viewer",
             "author": "stephan",
-            "date": 1646674613446
+            "date": 1646674613446,
+            "type": "feature"
+        },
+        {
+            "message": "Added output port: Is overlay mode activated right now ? (hotkey \"o\")",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1720601385993
         }
     ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],
-    "exampleProjectId": "vyqgR3"
+    "exampleProjectId": "vyqgR3",
+    "license": "MIT"
 }

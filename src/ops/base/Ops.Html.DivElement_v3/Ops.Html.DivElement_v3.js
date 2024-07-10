@@ -35,10 +35,11 @@ op.onDelete = removeElement;
 
 outElement.onLinkChanged = updateStyle;
 
+inInteractive.onLinkChanged =
 outClicked.onLinkChanged = () =>
 {
     op.setUiError("interactiveProblem", null);
-    if (outClicked.isLinked() && !inInteractive.get())
+    if (outClicked.isLinked() && !inInteractive.get() && !inInteractive.isLinked())
         op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
 };
 
