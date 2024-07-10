@@ -1,0 +1,73 @@
+{
+    "id": "d57433b7-7662-4ae3-8016-e09414705f77",
+    "created": 1720601721314,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720601721348
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "drop filter",
+                    "box",
+                    "text"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blur",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    }
+}
