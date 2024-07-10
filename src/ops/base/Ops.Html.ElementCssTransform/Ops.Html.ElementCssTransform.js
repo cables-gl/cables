@@ -13,7 +13,8 @@ const
 
     inDoOrigin = op.inBool("Set Origin", true),
     inOriginX = op.inSwitch("Origin X", ["left", "center", "right"], "center"),
-    inOriginY = op.inSwitch("Origin Y", ["top", "center", "bottom"], "center");
+    inOriginY = op.inSwitch("Origin Y", ["top", "center", "bottom"], "center"),
+    outEle = op.outObject("Passthrough", null, "element");
 
 op.setPortGroup("Element", [inEle]);
 op.setPortGroup("Translation", [inDoTranslate, inTransY, inTransX, inTransUnit]);
@@ -43,6 +44,7 @@ inEle.onChange = inEle.onLinkChanged = function ()
         ele.style.transform = "initial";
     }
     update();
+    outEle.setRef(inEle.get());
 };
 
 function update()
@@ -82,6 +84,4 @@ function update()
     {
         setTimeout(update, 50);
     }
-
-    // outEle.set(inEle.get());
 }

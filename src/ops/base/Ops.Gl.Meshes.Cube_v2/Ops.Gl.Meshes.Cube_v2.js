@@ -65,7 +65,7 @@ render.onTriggered = function ()
 op.preRender = function ()
 {
     buildMesh();
-    mesh.render(cgl.getShader());
+    if (mesh && cgl)mesh.render(cgl.getShader());
 };
 
 function buildMesh()

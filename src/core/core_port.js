@@ -382,8 +382,15 @@ Port.prototype.forceChange = function ()
     this._activity();
     this.emitEvent("change", this.value, this);
 
+    // try
+    // {
     if (this.onChange) this.onChange(this, this.value);
     else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
+    // }
+    // catch (e)
+    // {
+    //     console.log(e);
+    // }
 };
 
 /**

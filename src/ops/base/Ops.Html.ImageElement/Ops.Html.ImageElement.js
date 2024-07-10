@@ -1,5 +1,5 @@
 const
-    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
+    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif", ".svg"]),
     inClass = op.inString("Class"),
     inStyle = op.inStringEditor("Style", "", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),

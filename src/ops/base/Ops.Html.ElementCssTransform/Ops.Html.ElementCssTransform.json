@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.ElementCssTransform renamed to Ops.Html.ElementCssTransform",
             "author": "pandur",
             "date": 1613408894120
+        },
+        {
+            "message": "Added pass through element output port",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720518609063
         }
     ],
     "authorName": "pandur",
@@ -43,6 +49,10 @@
             {
                 "type": 0,
                 "name": "Unit index",
+                "values": [
+                    "px",
+                    "%"
+                ],
                 "group": "Translation",
                 "subType": "integer"
             },
@@ -79,24 +89,40 @@
             {
                 "type": 0,
                 "name": "Origin X index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
                 "group": "Origin",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Origin Y index",
+                "values": [
+                    "top",
+                    "center",
+                    "bottom"
+                ],
                 "group": "Origin",
                 "subType": "integer"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Passthrough",
+                "objType": "element"
+            }
+        ]
     },
     "summary": "translate,scale and rotate a HTML element using css transform",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "UyQDCu"
+    "exampleProjectId": "UyQDCu",
+    "license": "MIT"
 }

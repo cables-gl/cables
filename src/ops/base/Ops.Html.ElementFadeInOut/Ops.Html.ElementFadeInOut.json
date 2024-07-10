@@ -26,6 +26,11 @@
         ],
         "portsOut": [
             {
+                "type": 2,
+                "name": "PassThrough",
+                "objType": "element"
+            },
+            {
                 "type": 0,
                 "name": "Is Showing",
                 "subType": "boolean"
