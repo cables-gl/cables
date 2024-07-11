@@ -29,10 +29,9 @@
         ]
     },
     "summary": "check if content of two strings is the same",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "Nx2zci"
 }

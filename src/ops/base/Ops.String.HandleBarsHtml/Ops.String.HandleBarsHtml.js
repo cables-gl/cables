@@ -33,7 +33,7 @@ function updateString()
     }
     catch (e)
     {
-        console.log(e);
+        console.error(e);
     }
     render();
 }

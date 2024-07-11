@@ -1,7 +1,6 @@
 {
     "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -68,5 +67,7 @@
             "author": "pandur",
             "date": 1708694160875
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "2yaD8i"
 }

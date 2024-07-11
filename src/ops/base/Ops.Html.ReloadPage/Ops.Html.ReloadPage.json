@@ -2,7 +2,7 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exec"
             }
         ]
@@ -10,5 +10,10 @@
     "summary": "reload the website",
     "authorName": "pandur",
     "id": "d0060a4e-ffed-4a8d-8f6d-bfd9a23319de",
-    "created": 1558014677907
+    "created": 1558014677907,
+    "license": "MIT",
+    "exampleProjectId": "BPeCci",
+    "docs": {
+        "ports": []
+    }
 }

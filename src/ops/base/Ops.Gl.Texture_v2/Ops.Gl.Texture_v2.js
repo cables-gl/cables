@@ -207,8 +207,6 @@ function onWrapChange()
 
 op.onFileChanged = function (fn)
 {
-    console.log("event onfilechanged?!", fn);
-
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
         textureOut.set(CGL.Texture.getEmptyTexture(op.patch.cgl));

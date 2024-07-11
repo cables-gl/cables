@@ -71,7 +71,7 @@ inObj.onLinkChanged = () =>
 
 inConsole.onTriggered = () =>
 {
-    console.log(inObj.get());
+    console.info(inObj.get());
 };
 
 op.renderVizLayer = (ctx, layer, viz) =>

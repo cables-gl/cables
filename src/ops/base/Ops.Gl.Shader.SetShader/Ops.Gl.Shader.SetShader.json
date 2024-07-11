@@ -23,5 +23,7 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "BweOVl"
 }

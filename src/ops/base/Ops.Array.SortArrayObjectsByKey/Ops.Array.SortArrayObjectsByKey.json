@@ -26,9 +26,6 @@
         ]
     },
     "summary": "sort an array of objects by value of object keys",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -40,14 +37,11 @@
                 "text": "sorting property, can be \"nested\" (i.e. dimensions.width)"
             },
             {
-                "name": "Sorting mode",
-                "text": "ascending or descending"
-            },
-            {
                 "name": "Sorted array",
                 "text": "the sorted array of objects"
             }
         ]
     },
-    "exampleProjectId": "uDYWrU"
+    "exampleProjectId": "uDYWrU",
+    "license": "MIT"
 }

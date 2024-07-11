@@ -23,5 +23,7 @@
     "summary": "get current viewmatrix",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "hDWuci"
 }

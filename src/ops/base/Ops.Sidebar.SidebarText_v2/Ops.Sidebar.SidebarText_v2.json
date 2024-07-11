@@ -38,9 +38,6 @@
         ]
     },
     "summary": "Display text in the sidebar",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -48,5 +45,7 @@
                 "text": "The text you want to show in the sidebar"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "Ut4y8i"
 }

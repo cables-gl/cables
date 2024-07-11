@@ -35,26 +35,6 @@
     "docs": {
         "ports": []
     },
-    "todos": [
-        {
-            "message": "csdcsd",
-            "author": "pandur",
-            "id": "cc4b76ad-9c16-4053-afd9-f9311a4fd03d",
-            "date": 1560507834980,
-            "deleted": true,
-            "deletedBy": "cables",
-            "deletedDate": 1605510707322
-        },
-        {
-            "message": "cccc",
-            "author": "pandur",
-            "id": "32b10f13-df34-49c7-8339-75cd32f57043",
-            "date": 1560507838679,
-            "deleted": true,
-            "deletedBy": "cables",
-            "deletedDate": 1605510706505
-        }
-    ],
     "changelog": [
         {
             "message": "cdscdscsd",
@@ -67,5 +47,7 @@
             "author": "pandur",
             "date": 1699428124107
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "A9PD8i"
 }

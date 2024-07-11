@@ -1,1 +1,1 @@
-Forms a parent —> child relationship.
+Forms a parent —&gt; child relationship.

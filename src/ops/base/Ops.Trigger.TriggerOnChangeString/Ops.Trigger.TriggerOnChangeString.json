@@ -28,8 +28,6 @@
         ]
     },
     "summary": "triggers when string has changed",
-    "youtubeid": "",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -45,5 +43,7 @@
                 "text": "String output"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "ohxBci"
 }

@@ -14,6 +14,11 @@
                 "type": 0,
                 "name": "Number",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Not a number",
+                "subType": "boolean"
             }
         ]
     },
@@ -21,14 +26,20 @@
     "docs": {
         "ports": []
     },
-    "issues": "",
-    "youtubeids": [],
     "changelog": [
         {
             "message": "Renamed Ops.String.ParseFloat to Ops.String.StringToNumber",
-            "type": "improvement",
+            "type": "rename",
             "author": "pandur",
             "date": 1715764434517
+        },
+        {
+            "message": "Added output if string is not a number",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720682705836
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "XMEwci"
 }

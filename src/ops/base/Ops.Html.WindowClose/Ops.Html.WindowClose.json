@@ -18,10 +18,9 @@
         ]
     },
     "summary": "close current window",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "WGBCci"
 }

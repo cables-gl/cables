@@ -1,7 +1,6 @@
-var exec=op.inTrigger("Exec");
+let exec = op.inTriggerButton("Exec");
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
     location.reload();
-
 };

@@ -11,7 +11,7 @@ el.classList.add("sidebar__item");
 el.classList.add("sidebar__text");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
-const labelText = document.createElement("div");// document.createTextNode(filename.get());
+const labelText = document.createElement("div");
 label.appendChild(labelText);
 el.appendChild(label);
 let imageEle = null;
@@ -36,12 +36,7 @@ function onFilenameChanged()
         if (base64regex.test(fileUrl))
         {
             fileUrl = "data:image;base64," + fileUrl;
-            console.log("base46");
-        // label.innerHTML = "<img src=\"data:image;base64," + fileUrl + "\" style=\"max-width:100%\">";
         }
-
-        // else
-        // label.innerHTML = "<img src=\"" + fileUrl + "\" style=\"max-width:100%\">";
 
         label.innerHTML = "<img style=\"max-width:100%\"/>";
         imageEle = label.children[0];

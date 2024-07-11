@@ -23,5 +23,7 @@
     "summary": "set a projection matrix",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "573_4S"
 }

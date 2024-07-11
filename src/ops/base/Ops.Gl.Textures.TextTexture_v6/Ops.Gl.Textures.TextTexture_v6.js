@@ -168,20 +168,12 @@ op.patch.on("fontLoaded", (fontName) =>
 
 document.fonts.ready.then(() =>
 {
-    if (reloadOnFont.get())
-    {
-        needsRefresh = true;
-        console.log("reload on font...");
-    }
+    if (reloadOnFont.get()) needsRefresh = true;
 });
 
 document.fonts.onloadingdone = function (fontFaceSetEvent)
 {
-    if (reloadOnFont.get())
-    {
-        needsRefresh = true;
-        console.log("reload on font...");
-    }
+    if (reloadOnFont.get()) needsRefresh = true;
 };
 
 function getWidth()
