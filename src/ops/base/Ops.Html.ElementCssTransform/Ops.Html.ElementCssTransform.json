@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1613408280888
+            "date": 1613408280888,
+            "type": "new"
         },
         {
             "message": "Ops.User.pandur.ElementCssTransform renamed to Ops.Html.ElementCssTransform",
@@ -16,6 +17,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1720518609063
+        },
+        {
+            "message": "Show error when element is not positioned absolute",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720610207925
         }
     ],
     "authorName": "pandur",

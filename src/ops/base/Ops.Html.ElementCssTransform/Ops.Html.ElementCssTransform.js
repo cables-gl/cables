@@ -23,13 +23,8 @@ op.setPortGroup("Rotation", [inDoRot, inRot]);
 op.setPortGroup("Origin", [inDoOrigin, inOriginX, inOriginY]);
 
 inTransUnit.onChange =
-    inDoScale.onChange =
-    inDoOrigin.onChange =
     inOriginX.onChange =
     inOriginY.onChange =
-    inDoRot.onChange =
-    inDoTranslate.onChange =
-    inDoRot.onChange =
     inTransX.onChange =
     inTransY.onChange =
     inScale.onChange =
@@ -37,15 +32,39 @@ inTransUnit.onChange =
 
 let ele = null;
 
+inDoTranslate.onChange =
+    inDoOrigin.onChange =
+    inDoScale.onChange =
+    inDoRot.onChange = updateUi;
+
 inEle.onChange = inEle.onLinkChanged = function ()
 {
     if (ele && ele.style)
     {
         ele.style.transform = "initial";
+
+        if (CABLES.UI && inEle.get() && ele != inEle.get())
+        {
+            if (window.getComputedStyle(ele).position !== "absolute") op.setUiError("oppos", "Element position should be absolute");
+            else op.setUiError("oppos", null);
+        }
     }
+
     update();
     outEle.setRef(inEle.get());
 };
+
+function updateUi()
+{
+    inTransX.setUiAttribs({ "greyout": !inDoTranslate.get() });
+    inTransY.setUiAttribs({ "greyout": !inDoTranslate.get() });
+    inScale.setUiAttribs({ "greyout": !inDoScale.get() });
+    inRot.setUiAttribs({ "greyout": !inDoRot.get() });
+    inOriginY.setUiAttribs({ "greyout": !inDoOrigin.get() });
+    inOriginX.setUiAttribs({ "greyout": !inDoOrigin.get() });
+
+    update();
+}
 
 function update()
 {
