@@ -1301,6 +1301,7 @@ Patch.prototype.exitError = function (errorId, errorMessage, ex)
             if (ex)str += "<br/>Exception: " + ex.message;
             newDiv.innerHTML = str;
 
+            console.log(ex);
             const pe = this.cgl.canvas.parentElement;
 
             while (pe.hasChildNodes()) pe.removeChild(pe.lastChild);
