@@ -2,7 +2,6 @@
 import gulp from "gulp";
 
 import fs from "fs";
-import path from "path";
 import git from "git-last-commit";
 import webpack from "webpack";
 
@@ -23,10 +22,6 @@ if (fs.existsSync(configLocation))
     config = JSON.parse(fs.readFileSync(configLocation, "utf-8"));
     isLiveBuild = config.env === "live";
     minify = config.hasOwnProperty("minifyJs") ? config.minifyJs : false;
-}
-else
-{
-    console.error("config file not found at", configLocation, "assuming local build (dev/no minify)");
 }
 
 function getBuildInfo(cb)
@@ -53,9 +48,10 @@ function getBuildInfo(cb)
 
 function _watch(done)
 {
-    gulp.watch(["src/core/**/*", "../shared/client/**/*"], { "usePolling": true }, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
-    gulp.watch("libs/**/*", { "usePolling": true }, gulp.series(_external_libs, _copy_ui));
-    gulp.watch("src/libs/**/*", { "usePolling": true }, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
+    const watchOptions = { "usePolling": true, "ignored": (fileName) => { return fileName.includes("node_modules"); } };
+    gulp.watch(["src/core/**/*", "../shared/client/**/*"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
+    gulp.watch("libs/**/*", watchOptions, gulp.series(_external_libs, _copy_ui));
+    gulp.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     done();
 }
 
@@ -68,14 +64,8 @@ function _analyze(done)
 function _core_libs_clean(done)
 {
     const dir = "build/libs/";
-    fs.readdir(dir, (err, entries) =>
-    {
-        if (entries)
-        {
-            entries.forEach((f) => { return fs.rmSync(path.join(dir, f), { "recursive": true }); });
-        }
-        done();
-    });
+    if (fs.existsSync(dir)) fs.rmSync(dir, { "recursive": true });
+    done();
 }
 
 function _copy_ui()
@@ -83,14 +73,21 @@ function _copy_ui()
     return gulp.src(["build/*", "!build/buildinfo.json", "!/build/libs/*", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
 }
 
-function _core_libs_copy()
+function _core_libs_copy(done)
 {
     const source = "build/libs/";
     const target = "../cables_api/public/libs_core/";
 
-    if (!fs.existsSync(target)) fs.mkdirSync(target, { "recursive": true });
-    if (!fs.existsSync(source)) fs.mkdirSync(source, { "recursive": true });
-    return gulp.src(source + "*.js").pipe(gulp.dest(target));
+    if (!process.env.cables_standalone)
+    {
+        if (!fs.existsSync(target)) fs.mkdirSync(target, { "recursive": true });
+        if (!fs.existsSync(source)) fs.mkdirSync(source, { "recursive": true });
+        return gulp.src(source + "*.js").pipe(gulp.dest(target));
+    }
+    else
+    {
+        done();
+    }
 }
 
 function _core_js(done)

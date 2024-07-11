@@ -37,9 +37,6 @@
         ]
     },
     "summary": "Store and retreive a string in browser localstorage",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -64,5 +61,6 @@
             }
         ]
     },
-    "exampleProjectId": "ZBOrLu"
+    "exampleProjectId": "QKe58i",
+    "license": "MIT"
 }

@@ -27,5 +27,10 @@
             }
         ]
     },
-    "summary": "add up numbers"
+    "summary": "add up numbers",
+    "license": "MIT",
+    "exampleProjectId": "cWh78i",
+    "docs": {
+        "ports": []
+    }
 }

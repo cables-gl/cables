@@ -1,0 +1,94 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 5,
+                "name": "PixelFormat"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Wrap",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Flipped",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "HDR",
+                "uititle": "Float Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Empty Default Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Default Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Cubemap",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Id",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Outputs information about the connected texture",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "63d5ac1d-a21b-4449-ab93-1fae5c791cf2",
+    "created": 1720616200691,
+    "changelog": [
+        {
+            "message": "",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720616200691
+        }
+    ],
+    "license": "MIT",
+    "exampleProjectId": "y0A18i"
+}

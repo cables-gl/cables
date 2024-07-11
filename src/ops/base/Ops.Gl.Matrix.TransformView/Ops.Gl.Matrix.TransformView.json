@@ -60,10 +60,12 @@
         ]
     },
     "summary": "transform the viewmatrix",
-    "youtubeid": "vIeAMFGA96E",
-
     "docs": {
         "ports": []
-    }
-
+    },
+    "license": "MIT",
+    "youtubeids": [
+        "vIeAMFGA96E"
+    ],
+    "exampleProjectId": "0GAv8i"
 }

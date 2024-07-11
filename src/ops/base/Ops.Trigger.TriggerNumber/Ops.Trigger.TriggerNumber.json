@@ -40,9 +40,6 @@
         ]
     },
     "summary": "Outputs a number when triggered",
-    "youtubeid": "",
-    "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -58,5 +55,7 @@
                 "text": "Number out"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "Qq3Y7i"
 }

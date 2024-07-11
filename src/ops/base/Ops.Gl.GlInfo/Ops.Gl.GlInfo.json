@@ -7,6 +7,11 @@
         "portsOut": [
             {
                 "type": 0,
+                "name": "WebGl Version Short",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "WebGl Version",
                 "subType": "number"
             },
@@ -64,6 +69,6 @@
         "ports": []
     },
     "youtubeid": "",
-    "issues": ""
-
+    "issues": "",
+    "license": "MIT"
 }

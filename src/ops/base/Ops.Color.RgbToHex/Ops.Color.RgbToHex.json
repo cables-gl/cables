@@ -40,11 +40,9 @@
         ]
     },
     "summary": "convert RGB float values to HEX color String",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ox364q"
+    "exampleProjectId": "Up7r8i",
+    "license": "MIT"
 }

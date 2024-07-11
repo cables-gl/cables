@@ -43,7 +43,6 @@
         ]
     },
     "summary": "Packs 3 individual arrays into a xyz array",
-
     "docs": {
         "ports": [
             {
@@ -76,13 +75,13 @@
             }
         ]
     },
-    "issues": "",
-    "youtubeids": [],
     "changelog": [
         {
             "message": "Added trigger out port",
             "author": "andro",
             "date": 1560931058835
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "As6p8i"
 }

@@ -54,8 +54,9 @@
         ]
     },
     "summary": "switch between meshes e.g. like a stop motion animation",
-    "issues": "",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "FiJsxn"
 }

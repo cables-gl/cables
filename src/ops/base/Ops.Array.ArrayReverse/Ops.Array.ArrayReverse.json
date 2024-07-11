@@ -8,6 +8,11 @@
             {
                 "type": 3,
                 "name": "Input"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -17,5 +22,18 @@
             }
         ]
     },
-    "summary": "Reverses an array (creates a copy of the array before), shallow copy"
+    "summary": "Reverses an array",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Added active toggle",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720621937829
+        }
+    ],
+    "exampleProjectId": "UGUp8i"
 }

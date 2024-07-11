@@ -110,10 +110,9 @@
             }
         ]
     },
-    "issues": "",
-
-    "caniusequery": "",
     "youtubeids": [
         "TdHgjqOLpnM"
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "4J2o8i"
 }

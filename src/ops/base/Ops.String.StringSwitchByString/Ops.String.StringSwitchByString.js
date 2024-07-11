@@ -15,6 +15,9 @@ for (let i = 0; i < numberStrings.length; i++)
     const istr = op.inString("String " + idx, numberStrings[i]);
     const inum = op.inString("Result String " + idx, idx);
 
+    istr.onChange =
+    inum.onChange = update;
+
     strings.push(istr);
     numbers.push(inum);
 }

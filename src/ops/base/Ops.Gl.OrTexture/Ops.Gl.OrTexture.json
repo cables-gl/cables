@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1605799778398
+            "date": 1605799778398,
+            "type": "new"
         },
         {
             "message": "Ops.User.pandur.OrObject renamed to Ops.Gl.OrTexture",
@@ -57,11 +58,9 @@
         ]
     },
     "summary": "outputs the first valid texture of the input ports",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "oKRY7i"
 }

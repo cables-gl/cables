@@ -24,8 +24,9 @@
         ]
     },
     "summary": "Result will be the smaller number of the inputs",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "rvAW7i"
 }

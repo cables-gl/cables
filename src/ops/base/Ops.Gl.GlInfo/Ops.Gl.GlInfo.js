@@ -4,6 +4,7 @@ let mxsmpl = 0;
 if (gl.MAX_SAMPLES !== undefined)mxsmpl = gl.getParameter(gl.MAX_SAMPLES);
 
 const
+    outGlVersionShort = op.outNumber("WebGl Version Short", op.patch.cgl.glVersion),
     outGlVersion = op.outNumber("WebGl Version", gl.getParameter(gl.VERSION)),
     outGlslVersion = op.outNumber("GLSL Version", gl.getParameter(gl.SHADING_LANGUAGE_VERSION)),
     outFragUnis = op.outNumber("Max Frag uniforms", gl.getParameter(gl.MAX_FRAGMENT_UNIFORM_VECTORS)),

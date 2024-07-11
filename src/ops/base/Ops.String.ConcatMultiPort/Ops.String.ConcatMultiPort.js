@@ -12,7 +12,8 @@ inStrs.onChange = () =>
 
     let sep = "";
 
-    if (inSep.get() == "LineBreak")sep = "\n";
+    if (inSep.get() == "None") sep = "";
+    else if (inSep.get() == "LineBreak")sep = "\n";
     else if (inSep.get() == "Space")sep = " ";
     else sep = inSep.get();
 

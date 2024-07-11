@@ -4,7 +4,7 @@ const
     exe = op.inTrigger("exe"),
     bool = op.inValueBool("bool"),
     pease = anim.createPort(op, "easing"),
-    duration = op.inValue("duration", 0.5),
+    duration = op.inValue("duration", 0.25),
     dir = op.inValueSelect("Direction", ["Both", "Only True", "Only False"], "Both"),
     valueFalse = op.inValue("value false", 0),
     valueTrue = op.inValue("value true", 1),

@@ -1,23 +1,16 @@
-// constants
 let CANVAS_ELEMENT = op.patch.cgl.canvas.parentElement;
 
-// variables
 let lastParent = null;
 let lastChild = null;
 
-// inputs
 let parentPort = op.inObject("Parent", null, "element");
 let childPort = op.inObject("Child", null, "element");
 
-// outputs
 let parentOutPort = op.outObject("Parent Out", null, "element");
 let childOutPort = op.outObject("Child Out", null, "element");
 
-// change listeners
 parentPort.onChange = update;
 childPort.onChange = update;
-
-// functions
 
 function update()
 {
