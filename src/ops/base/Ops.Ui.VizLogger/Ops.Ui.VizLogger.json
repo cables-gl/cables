@@ -4,27 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1645174841480
+            "date": 1645174841480,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.ValueLogger renamed to Ops.Dev.Logger",
+            "message": "Performance optimization with very long lines",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1645187910828
-        },
-        {
-            "message": "Ops.Dev.Logger renamed to Ops.Dev.VizLogger",
-            "author": "pandur",
-            "date": 1645187932105
-        },
-        {
-            "message": "Ops.Dev.VizLogger renamed to Ops.Viz.VizLogger",
-            "author": "pandur",
-            "date": 1652088829959
-        },
-        {
-            "message": "Ops.Viz.VizLogger renamed to Ops.Ui.VizLogger",
-            "author": "pandur",
-            "date": 1652088970178
+            "date": 1720786632421
         }
     ],
     "layout": {
@@ -54,5 +41,6 @@
     "exampleProjectId": "-4pkq4",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
