@@ -438,7 +438,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
             this._log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
-            this.exitError("INSTANCE_ERR", "Instancing Error 1" + objName, e);
+            this.exitError("INSTANCE_ERR", "Instancing Error: " + objName, e);
             throw new Error("instancing error 1" + objName);
         }
     }
@@ -1301,6 +1301,7 @@ Patch.prototype.exitError = function (errorId, errorMessage, ex)
             if (ex)str += "<br/>Exception: " + ex.message;
             newDiv.innerHTML = str;
 
+            console.log(ex);
             const pe = this.cgl.canvas.parentElement;
 
             while (pe.hasChildNodes()) pe.removeChild(pe.lastChild);

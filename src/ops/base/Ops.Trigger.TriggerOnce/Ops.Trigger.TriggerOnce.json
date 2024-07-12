@@ -25,5 +25,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "9Eiyci",
+    "docs": {
+        "ports": []
     }
 }

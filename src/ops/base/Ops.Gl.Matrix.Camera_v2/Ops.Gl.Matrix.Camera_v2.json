@@ -124,10 +124,6 @@
     "docs": {
         "ports": [
             {
-                "name": "projection mode",
-                "text": "perspective | orthographic"
-            },
-            {
                 "name": "fov",
                 "text": "Field of view of the camera"
             },
@@ -189,15 +185,6 @@
             }
         ]
     },
-    "issues": "",
-    "todos": [
-        {
-            "message": "when creating a new version: fix spelling errors in dropdown",
-            "author": "pandur",
-            "id": "0d9fde38-60b7-486b-8aa1-86e5b02ca44a",
-            "date": 1599818244067
-        }
-    ],
     "changelog": [
         {
             "message": "added identity toggle to reset the viewmatrix to 0,0,0 - expected coordinates are used and not influenced by default viewMatrix transform",
@@ -205,5 +192,7 @@
             "author": "pandur",
             "date": 1709283492220
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "PSw73e"
 }

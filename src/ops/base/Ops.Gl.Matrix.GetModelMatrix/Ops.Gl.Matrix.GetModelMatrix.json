@@ -20,8 +20,10 @@
             }
         ]
     },
-    "summary": "get current modelmatrix",
+    "summary": "Get current modelmatrix",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "HkYpci"
 }

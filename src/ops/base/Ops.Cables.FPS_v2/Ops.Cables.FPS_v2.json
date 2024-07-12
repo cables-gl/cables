@@ -10,14 +10,10 @@
     "authorName": "pandur",
     "created": 1600117397013,
     "summary": "output current frames per second",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -30,5 +26,7 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "KhFA8i"
 }

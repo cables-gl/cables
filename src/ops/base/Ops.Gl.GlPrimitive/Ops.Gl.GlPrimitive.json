@@ -29,16 +29,11 @@
                 "text": "Trigger the op "
             },
             {
-                "name": "Primitive",
-                "text": "Pick the primitive render mode - see docs for available modes"
-            },
-            {
                 "name": "Next",
                 "text": "Trigger out"
             }
         ]
     },
-    "youtubeid": "",
-    "issues": ""
-
+    "license": "MIT",
+    "exampleProjectId": "a5Mz8i"
 }

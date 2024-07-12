@@ -65,8 +65,6 @@
         ]
     },
     "summary": "Switch between multiple strings with an index",
-    "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -119,8 +117,9 @@
             }
         ]
     },
-    "caniusequery": "",
     "youtubeids": [
         "TdHgjqOLpnM"
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "2uRAci"
 }

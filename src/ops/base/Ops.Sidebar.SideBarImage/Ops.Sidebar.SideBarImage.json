@@ -24,21 +24,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "File"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "childs"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Image Element",
                 "objType": "element"
             }
@@ -48,5 +48,6 @@
     "exampleProjectId": "nLvdby",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

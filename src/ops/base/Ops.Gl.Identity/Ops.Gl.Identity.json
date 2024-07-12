@@ -17,5 +17,10 @@
     "updated": 1540979538848,
     "authorName": "pandur",
     "id": "59a5a21f-4498-4960-8527-86f75ab5ec11",
-    "created": 1540979489513
+    "created": 1540979489513,
+    "license": "MIT",
+    "exampleProjectId": "KUVJ8i",
+    "docs": {
+        "ports": []
+    }
 }

@@ -72,5 +72,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "date or datetime picker in the sidebar"
+    "summary": "date or datetime picker in the sidebar",
+    "exampleProjectId": "Bkzmci"
 }

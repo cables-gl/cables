@@ -49,11 +49,9 @@
         ]
     },
     "summary": "reset current transforms to initial value (identity)",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "kY3J8i"
 }

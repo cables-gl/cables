@@ -33,5 +33,7 @@
                 "text": "Triggers the next op"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "aySyci"
 }

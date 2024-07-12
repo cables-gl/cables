@@ -1,0 +1,1 @@
+Outputs the current modelmatrix on the stack. use MultiplyModelMatrix to use it anywhere else again.

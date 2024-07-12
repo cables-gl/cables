@@ -8,6 +8,11 @@
                 "type": 0,
                 "name": "Number",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Decimal Places",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -18,10 +23,17 @@
         ]
     },
     "summary": "Convert a number to a string",
-    "youtubeid": "",
-    "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "fo6nci",
+    "changelog": [
+        {
+            "message": "Added Input for max number of decimal places",
+            "type": "",
+            "author": "pandur",
+            "date": 1720680766210
+        }
+    ]
 }

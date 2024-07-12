@@ -33,9 +33,6 @@
         ]
     },
     "summary": "Unpacks an xy array into separate arrays",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -55,5 +52,7 @@
                 "text": "Length of arrays"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "N00tci"
 }

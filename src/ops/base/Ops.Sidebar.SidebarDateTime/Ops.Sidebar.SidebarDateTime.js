@@ -111,7 +111,7 @@ function onInput(ev)
     }
     catch (e)
     {
-        console.log(e);
+        console.error(e);
     }
     valuePort.set(endDateIso);
 }

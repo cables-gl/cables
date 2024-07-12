@@ -1,0 +1,28 @@
+{
+    "id": "f2b35a1b-0a71-4198-af22-2cc8da0e33ef",
+    "created": 1720684108868,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720684108905
+        }
+    ],
+    "layout": {
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "In Iframe",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "exampleProjectId": "qWDDci",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Outputs true if the patch is inside of an iframe"
+}
