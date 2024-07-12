@@ -1066,7 +1066,7 @@ Patch.prototype.deSerialize = function (obj, options)
 
                                         if (op1 && !op1.getPort(p1Name))
                                         {
-                                            console.log("PRESERVE port 1 not found", p1Name);
+                                            // console.log("PRESERVE port 1 not found", p1Name);
 
                                             op1.preservedPortLinks[p1Name] = op1.preservedPortLinks[p1Name] || [];
                                             op1.preservedPortLinks[p1Name].push(obj.ops[iop].portsOut[ipi2].links[ili]);
@@ -1075,7 +1075,7 @@ Patch.prototype.deSerialize = function (obj, options)
                                         const p2Name = obj.ops[iop].portsOut[ipi2].links[ili].portOut;
                                         if (op2 && !op2.getPort(p2Name))
                                         {
-                                            console.log("PRESERVE port 2 not found", obj.ops[iop].portsOut[ipi2].links[ili].portOut);
+                                            // console.log("PRESERVE port 2 not found", obj.ops[iop].portsOut[ipi2].links[ili].portOut);
                                             op2.preservedPortLinks[p1Name] = op2.preservedPortLinks[p1Name] || [];
                                             op2.preservedPortLinks[p1Name].push(obj.ops[iop].portsOut[ipi2].links[ili]);
                                         }
