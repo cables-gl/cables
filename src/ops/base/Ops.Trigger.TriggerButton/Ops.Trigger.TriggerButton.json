@@ -24,11 +24,9 @@
         ]
     },
     "summary": "simple button to trigger manually",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "05Arii"
 }

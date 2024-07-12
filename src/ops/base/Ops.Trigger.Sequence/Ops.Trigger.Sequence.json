@@ -141,7 +141,6 @@
             }
         ]
     },
-    "youtubeid": "1PtJG-Plz4Y",
     "changelog": [
         {
             "message": "Ops.Sequence renamed to Ops.Trigger.Sequence",
@@ -155,5 +154,10 @@
             "author": "pandur",
             "date": 1715112525892
         }
-    ]
+    ],
+    "license": "MIT",
+    "youtubeids": [
+        "1PtJG-Plz4Y"
+    ],
+    "exampleProjectId": "0bQrii"
 }

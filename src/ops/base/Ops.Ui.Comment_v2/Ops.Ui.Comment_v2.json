@@ -9,15 +9,11 @@
             "date": 1587124673487
         }
     ],
-    "layout": {
-        "portsIn": [],
-        "portsOut": []
-    },
+    "layout": {},
     "summary": "Displays a comment in the patch area",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "7Tyqii"
 }

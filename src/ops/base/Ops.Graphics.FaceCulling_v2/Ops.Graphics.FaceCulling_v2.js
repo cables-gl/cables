@@ -4,8 +4,8 @@ const
     STR_BOTH = "All",
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    enable = op.inValueBool("Active", true),
     facing = op.inSwitch("Discard", [STR_BACK, STR_FRONT, STR_BOTH], STR_BACK),
+    enable = op.inValueBool("Active", true),
     cgl = op.patch.cgl;
 
 op.setPortGroup("Face Fulling", [enable, facing]);

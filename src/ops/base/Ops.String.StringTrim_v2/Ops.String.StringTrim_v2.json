@@ -17,10 +17,9 @@
         ]
     },
     "summary": "Remove whitespace from both ends of a string",
-    "youtubeid": "",
-    "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "Ddmsii"
 }
