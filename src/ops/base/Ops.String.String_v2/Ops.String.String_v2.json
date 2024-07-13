@@ -17,8 +17,6 @@
         ]
     },
     "summary": "String input/output ",
-    "youtubeid": "",
-    "issues": "",
     "docs": {
         "ports": []
     },
@@ -28,5 +26,7 @@
             "author": "pandur",
             "date": 1560332798890
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "FXRsii"
 }

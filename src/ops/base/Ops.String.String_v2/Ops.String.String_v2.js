@@ -4,7 +4,8 @@ const
 
 v.onChange = function ()
 {
-    if (!v.isLinked()) op.setUiAttrib({ "extendTitle": v.get() });
+    if (!v.isLinked())
+        op.setUiAttrib({ "extendTitle": v.get() });
 
     result.set(v.get());
 };
