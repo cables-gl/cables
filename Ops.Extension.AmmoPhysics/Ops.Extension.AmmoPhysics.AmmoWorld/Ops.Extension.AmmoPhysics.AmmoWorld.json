@@ -127,7 +127,6 @@
     "summary": "Simulate physical world",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
@@ -169,5 +168,6 @@
                 "text": "array of all collisions in the scene"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }
