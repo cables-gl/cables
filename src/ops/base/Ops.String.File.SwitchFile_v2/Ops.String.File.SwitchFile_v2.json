@@ -26,8 +26,6 @@
     "authorName": "pandur",
     "created": 1615474741499,
     "summary": "switch between filenames",
-    "issues": "",
-
     "docs": {
         "ports": []
     },
@@ -86,19 +84,9 @@
             }
         ]
     },
-    "todos": [
-        {
-            "message": "Needs docs and an example",
-            "author": "andro",
-            "id": "c53a5d00-1cef-4227-b27a-b0b83d43024e",
-            "date": 1558358477711,
-            "deleted": true,
-            "deletedBy": "cables",
-            "deletedDate": 1605512036945
-        }
-    ],
-    "caniusequery": "",
     "youtubeids": [
         "TdHgjqOLpnM"
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "unutii"
 }

@@ -31,7 +31,7 @@
     "changelog": [
         {
             "message": "Added Input for max number of decimal places",
-            "type": "",
+            "type": "feature",
             "author": "pandur",
             "date": 1720680766210
         }

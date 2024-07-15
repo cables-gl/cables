@@ -7,7 +7,7 @@ import { EventTarget } from "./eventtarget.js";
  * Keyframed interpolated animation.
  *
  * Available Easings:
- * <pre>
+ * <code>
  * CONSTANTS.ANIM.EASING_LINEAR
  * CONSTANTS.ANIM.EASING_ABSOLUTE
  * CONSTANTS.ANIM.EASING_SMOOTHSTEP
@@ -43,11 +43,9 @@ import { EventTarget } from "./eventtarget.js";
  * CONSTANTS.ANIM.EASING_QUINT_IN
  * CONSTANTS.ANIM.EASING_QUINT_OUT
  * CONSTANTS.ANIM.EASING_QUINT_INOUT
- * </pre>
- * @hideconstructor
- * @external CABLES
- * @namespace Anim
+ * </code>
  * @class
+ * @param cfg
  * @example
  * var anim=new CABLES.Anim();
  * anim.setValue(0,0);  // set value 0 at 0 seconds
@@ -197,7 +195,7 @@ Anim.prototype.getKeyIndex = function (time)
  * @instance
  * @param {Number} time
  * @param {Number} value
- * @param {Function} [callback] callback
+ * @param {Function} cb callback
  */
 Anim.prototype.setValue = function (time, value, cb)
 {

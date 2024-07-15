@@ -6,8 +6,7 @@ import { BoundingBox } from "./cg_boundingbox.js";
 
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
- * @external CGL
- * @namespace Geometry
+ * @namespace external:CGL#Geometry
  * @param {String} name
  * @class
  * @example
@@ -188,8 +187,8 @@ Geometry.prototype.getAttribute = function (name)
  * @memberof Geometry
  * @instance
  * @param {String} name
- * @param {Array} data
- * @param {Number} itemsize
+ * @param {Array} arr
+ * @param {Number} itemSize
  */
 Geometry.prototype.setAttribute = function (name, arr, itemSize)
 {
@@ -230,7 +229,7 @@ Geometry.prototype.copyAttribute = function (name, newgeom)
  * @memberof Geometry
  * @instance
  * @description set vertices
- * @param {Array|Float32Array} data [x,y,z,x,y,z,...]
+ * @param {Array|Float32Array} arr [x,y,z,x,y,z,...]
  */
 Geometry.prototype.setVertices = function (arr)
 {
@@ -243,7 +242,7 @@ Geometry.prototype.setVertices = function (arr)
  * @memberof Geometry
  * @instance
  * @description set texcoords
- * @param {Array|Float32Array} data [u,v,u,v,...]
+ * @param {Array|Float32Array} arr [u,v,u,v,...]
  */
 Geometry.prototype.setTexCoords = function (arr)
 {
@@ -276,6 +275,9 @@ Geometry.prototype.calcNormals = function (smooth)
 /**
  * @function flipNormals
  * @memberof Geometry
+ * @param x
+ * @param y
+ * @param z
  * @description flip normals
  */
 Geometry.prototype.flipNormals = function (x, y, z)
@@ -428,6 +430,7 @@ Geometry.prototype.copy = function ()
  * Calculaten normals
  * @function calculateNormals
  * @memberof Geometry
+ * @param options
  * @instance
  */
 Geometry.prototype.calculateNormals = function (options)
@@ -681,8 +684,9 @@ Geometry.prototype.isIndexed = function ()
  * @function unIndex
  * @memberof Geometry
  * @instance
- * @param {Boolean}
  * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
+ * @param {boolean} reIndex
+ * @param {boolean} dontCalcNormals
  */
 Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 {

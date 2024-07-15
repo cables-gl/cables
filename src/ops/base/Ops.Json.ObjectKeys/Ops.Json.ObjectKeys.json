@@ -24,5 +24,7 @@
     "summary": "returns an array of strings, which contain the keys of the object",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "3pkLji"
 }

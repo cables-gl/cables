@@ -5,10 +5,10 @@ import { EventTarget } from "./eventtarget.js";
 /**
  * LoadingStatus class, manages asynchronous loading jobs
  *
- * @external CABLES
- * @namespace LoadingStatus
+ * @namespace external:CABLES#LoadingStatus
  * @hideconstructor
  * @class
+ * @param patch
  */
 const LoadingStatus = function (patch)
 {
@@ -152,8 +152,8 @@ LoadingStatus.prototype._startAssetTasks = function ()
  * delay an asset loading task, mainly to wait for ui to be finished loading and showing, and only then start loading assets
  * @function addAssetLoadingTask
  * @instance
- * @memberof Op
- * @param {function} callback
+ * @memberof LoadingStatus
+ * @param {function} cb callback
  */
 LoadingStatus.prototype.addAssetLoadingTask = function (cb)
 {

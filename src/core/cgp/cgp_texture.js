@@ -19,7 +19,7 @@ export default class Texture
      * @function initTexture
      * @memberof Texture
      * @instance
-     * @param {Object} image
+     * @param {Object} img image
      * @param {Number} filter
      */
     initTexture(img, filter)
@@ -64,10 +64,10 @@ export default class Texture
  * @static
  * @memberof Texture
  * @description load an image from an url
- * @param {Context} cgl
+ * @param {Context} cgp
  * @param {String} url
  * @param {Function} onFinished
- * @param {Object} options
+ * @param {Object} settings
  * @return {Texture}
  */
 Texture.load = function (cgp, url, onFinished, settings)

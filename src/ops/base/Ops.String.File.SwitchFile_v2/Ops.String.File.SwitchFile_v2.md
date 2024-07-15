@@ -1,1 +1,1 @@
-handy if you just want to load one specific file into memory
+handy if you just want to load one specific file into memory. the texture will only be loaded when the file is switched. 

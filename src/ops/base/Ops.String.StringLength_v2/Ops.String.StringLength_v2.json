@@ -18,10 +18,9 @@
         ]
     },
     "summary": "number of characters in a string",
-    "youtubeid": "",
-    "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "v9GLji"
 }

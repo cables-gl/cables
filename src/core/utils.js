@@ -1,7 +1,6 @@
 
 /**
- * @external CABLES
- * @namespace Utils
+ * @namespace external:CABLES#Utils
  */
 
 import { CONSTANTS } from "./constants.js";
@@ -33,7 +32,7 @@ UTILS.float32Concat = function (first, second)
  * get op shortname: only last part of fullname and without version
  * @function getShortOpName
  * @memberof CABLES
- * @param {String} full op name
+ * @param {string} fullname full op name
  * @static
  */
 export const getShortOpName = function (fullname)
@@ -129,6 +128,8 @@ export function cleanJson(obj)
 /**
  * @see http://stackoverflow.com/q/7616461/940217
  * @memberof Utils
+ * @param str
+ * @param prefix
  * @return {string}
  */
 const _prefixedHash = function (str, prefix = "id")
@@ -173,7 +174,7 @@ export const simpleId = function ()
  * @function smoothStep
  * @memberof Utils
  * @function
- * @param {Number} value value to be smoothed [0-1]
+ * @param {Number} perc value value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
  */
@@ -188,7 +189,7 @@ export const smoothStep = function (perc)
  * smootherstep a value
  * @function smootherStep
  * @memberof Utils
- * @param value {Number} value to be smoothed [0-1]
+ * @param {Number} perc value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
  */
@@ -218,11 +219,12 @@ export const clamp = function (value, min, max)
  * map a value in a range to a value in another range
  * @function map
  * @memberof Utils
- * @param {Number} value value to be mapped
- * @param {Number} oldMin old range minimum value
- * @param {Number} oldMax old range maximum value
- * @param {Number} newMin new range minimum value
- * @param {Number} newMax new range maximum value
+ * @param {Number} x value to be mapped
+ * @param {Number} _oldMin old range minimum value
+ * @param {Number} _oldMax old range maximum value
+ * @param {Number} _newMin new range minimum value
+ * @param {Number} _newMax new range maximum value
+ * @param {Number} _easing
  * @return {Number} mapped value
  * @static
  */
@@ -319,7 +321,7 @@ Math.seededRandom = function (max, min)
  * returns true if parameter is a number
  * @function isNumeric
  * @memberof Utils
- * @param {Any} value The value to check.
+ * @param {Any} n value The value to check.
  * @return {Boolean}
  * @static
  */
@@ -331,7 +333,7 @@ UTILS.isNumeric = function (n)
 /**
  * returns true if parameter is array
  * @function isArray
- * @param {Any} value Value to check
+ * @param {Any} v value Value to check
  * @memberof Utils
  * @return {Boolean}
  * @static
@@ -417,7 +419,7 @@ export const cacheBust = function (url)
  * @function copyArray
  * @static
  * @memberof Utils
- * @param {Array} sourceArray
+ * @param {Array} src sourceArray
  * @param {Array} dst optional
  * @return {Array} dst
  */
@@ -509,8 +511,16 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
 
 /**
  * make an ajax request
- * @function ajax
  * @static
+ * @function ajax
+ * @param url
+ * @param cb
+ * @param method
+ * @param post
+ * @param contenttype
+ * @param jsonP
+ * @param headers
+ * @param options
  */
 export const ajax = function (url, cb, method, post, contenttype, jsonP, headers = {}, options = {})
 {

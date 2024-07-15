@@ -40,5 +40,10 @@
             "author": "pandur",
             "date": 1560335437028
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "cDlpii",
+    "docs": {
+        "ports": []
+    }
 }

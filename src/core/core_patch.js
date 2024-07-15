@@ -16,10 +16,9 @@ import PatchVariable from "./core_variable.js";
  *
  * see {@link PatchConfig}
  *
- * @external CABLES
- * @namespace Patch
+ * @namespace external:CABLES#Patch
  * @hideconstructor
- * @param {PatchConfig} config The configuration object.
+ * @param {PatchConfig} cfg The configuration object.
  * @class
  * @example
  * CABLES.patch=new CABLES.Patch(
@@ -232,7 +231,7 @@ Patch.prototype.resume = function ()
 /**
  * set volume [0-1]
  * @function setVolume
- * @param {Number} volume
+ * @param {Number} v volume
  * @memberof Patch
  * @instance
  */
@@ -247,6 +246,7 @@ Patch.prototype.setVolume = function (v)
  * get asset path
  * @function getAssetPath
  * @memberof Patch
+ * @param patchId
  * @instance
  */
 Patch.prototype.getAssetPath = function (patchId = null)
@@ -460,11 +460,11 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
  * @function addOp
  * @memberof Patch
  * @instance
- * @param {String} opIdentifier, uuid or name, e.g. Ops.Math.Sum
+ * @param {string} opIdentifier uuid or name, e.g. Ops.Math.Sum
  * @param {Object} uiAttribs Attributes
- * @param {String} id
+ * @param {string} id
  * @param {boolean} fromDeserialize
- * @param {String} opName, e.g. Ops.Math.Sum
+ * @param {string} opName e.g. Ops.Math.Sum
  * @example
  * // add invisible op
  * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
@@ -709,9 +709,11 @@ Patch.prototype.exec = function (timestamp)
  * @memberof Patch
  * @instance
  * @param {Op} op1
- * @param {String} portName1
+ * @param {String} port1Name
  * @param {Op} op2
- * @param {String} portName2
+ * @param {String} port2Name
+ * @param {boolean} lowerCase
+ * @param {boolean} fromDeserialize
  */
 Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, fromDeserialize)
 {
@@ -1157,7 +1159,7 @@ Patch.prototype.profile = function (enable)
  * @memberof Patch
  * @instance
  * @param {String} name of variable
- * @param {Number|String|Boolean} value
+ * @param {Number|String|Boolean} val value
  */
 Patch.prototype.setVariable = function (name, val)
 {
@@ -1250,6 +1252,7 @@ Patch.prototype.deleteVar = function (name)
  * @function getVars
  * @memberof Patch
  * @instance
+ * @param t
  * @return {Array<Variable>} variables
  * @function
  */
@@ -1274,6 +1277,9 @@ Patch.prototype.getVars = function (t)
  * @function exitError
  * @memberof Patch
  * @instance
+ * @param errorId
+ * @param errorMessage
+ * @param ex
  * @description cancel patch execution and quit showing an errormessage
  * @function
  */
