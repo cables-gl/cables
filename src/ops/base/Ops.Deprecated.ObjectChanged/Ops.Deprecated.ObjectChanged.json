@@ -25,7 +25,7 @@
         },
         {
             "message": "use Ops.Trigger.TriggerOnChangeObject",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671035467551
         }
