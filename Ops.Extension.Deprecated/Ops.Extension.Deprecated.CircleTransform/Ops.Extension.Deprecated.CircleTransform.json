@@ -106,7 +106,7 @@
         },
         {
             "message": "deprecated, use Ops.Array.PointArray.CircularPoints",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671033974564
         },

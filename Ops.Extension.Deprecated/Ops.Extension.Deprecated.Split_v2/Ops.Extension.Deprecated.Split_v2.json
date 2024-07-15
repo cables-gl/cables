@@ -58,7 +58,7 @@
         },
         {
             "message": "use Ops.Array.ParseArray_v2",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671035516126
         },

@@ -8,7 +8,7 @@
         },
         {
             "message": "Ops.Dev.Debug.CablesEvents renamed to Ops.Deprecated.Dev.Debug.CablesEvents",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "stephan",
             "date": 1707316031100
         },

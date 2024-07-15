@@ -35,7 +35,7 @@
         },
         {
             "message": "",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671035420600
         },

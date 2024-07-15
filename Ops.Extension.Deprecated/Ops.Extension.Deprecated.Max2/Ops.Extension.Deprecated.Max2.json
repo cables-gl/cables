@@ -48,7 +48,7 @@
         },
         {
             "message": "se Ops.Math.Max",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671035342912
         },

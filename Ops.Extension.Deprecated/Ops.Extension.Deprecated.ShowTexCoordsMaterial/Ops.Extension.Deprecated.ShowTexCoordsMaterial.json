@@ -32,7 +32,7 @@
         },
         {
             "message": "use new  Ops.Gl.Shader.AttributeAsColorMaterial",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671035486539
         },

@@ -49,12 +49,6 @@
             "date": 1671005370381
         },
         {
-            "message": "",
-            "type": "deprecated",
-            "author": "pandur",
-            "date": 1671035393353
-        },
-        {
             "message": "op was deprecated",
             "type": "deprecation",
             "author": "pandur",

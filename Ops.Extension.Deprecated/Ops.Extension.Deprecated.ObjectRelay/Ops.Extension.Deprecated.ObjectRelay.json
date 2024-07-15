@@ -33,7 +33,7 @@
         },
         {
             "message": "use Ops.Json.GateObject",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1671035441964
         },
