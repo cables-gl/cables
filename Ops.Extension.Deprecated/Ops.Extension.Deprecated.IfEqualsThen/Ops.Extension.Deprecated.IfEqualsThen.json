@@ -37,7 +37,7 @@
     "changelog": [
         {
             "message": "op was deprecated - please use ifTrueThen",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1721043406752
         }

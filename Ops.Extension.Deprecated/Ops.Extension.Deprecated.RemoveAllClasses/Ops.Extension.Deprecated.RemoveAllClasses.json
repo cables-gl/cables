@@ -23,7 +23,7 @@
     "changelog": [
         {
             "message": "op was deprecated",
-            "type": "deprecated",
+            "type": "deprecation",
             "author": "pandur",
             "date": 1721043372075
         }

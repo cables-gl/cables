@@ -23,9 +23,9 @@
     "changelog": [
         {
             "message": "op was deprecated",
-            "type": "deprecated",
             "author": "pandur",
-            "date": 1721042736459
+            "date": 1721042736459,
+            "type": "deprecation"
         },
         {
             "message": "renamed Ops.Debug.Trace to Ops.Extension.Deprecated.Trace",
