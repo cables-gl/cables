@@ -81,7 +81,10 @@ export default class Shader
      * add a uniform to the fragment shader
      * @param {String} type ['f','t', etc]
      * @param {String} name
-     * @param {any} value or port
+     * @param {any} valueOrPort value or port
+     * @param p2
+     * @param p3
+     * @param p4
      * @memberof Shader
      * @instance
      * @function addUniformFrag
@@ -98,7 +101,10 @@ export default class Shader
      * add a uniform to the vertex shader
      * @param {String} type ['f','t', etc]
      * @param {String} name
-     * @param {any} value or port
+     * @param {any} valueOrPort value or port
+     * @param p2
+     * @param p3
+     * @param p4
      * @memberof Shader
      * @instance
      * @function addUniformVert
@@ -115,7 +121,10 @@ export default class Shader
      * add a uniform to all shader programs
      * @param {String} type ['f','t', etc]
      * @param {String} name
-     * @param {any} value or port
+     * @param {any} valueOrPort value or port
+     * @param p2
+     * @param p3
+     * @param p4
      * @memberof Shader
      * @instance
      * @function addUniform

@@ -7,6 +7,7 @@ import {
 
 /**
  *
+ * @param cgl
  * @param {Object} config config for light
  */
 function Light(cgl, config)

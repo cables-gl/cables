@@ -7,13 +7,11 @@ const DEFAULT_TEXTURE_SIZE = 8;
 
 /**
  * A Texture
- * @external CGL
- * @namespace Texture
- * @constructor
- * @param {Context} cgl
- * @param {Object} [options]
- * @hideconstructor
+ * @namespace external:CGL
  * @class
+ * @param {Context} __cgl cgl
+ * @param {Object} options
+ * @hideconstructor
  * @example
  * // generate a 256x256 pixel texture of random colors
  * const size=256;
@@ -106,7 +104,7 @@ Texture.prototype.isFloatingPoint = function ()
  * @function compareSettings
  * @memberof Texture
  * @instance
- * @param {Texture} otherTexture
+ * @param {Texture} tex otherTexture
  * @returns {Boolean}
  */
 Texture.prototype.compareSettings = function (tex)
@@ -361,8 +359,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
  * @function setSize
  * @memberof Texture
  * @instance
- * @param {Number} width
- * @param {Number} height
+ * @param {Number} w width
+ * @param {Number} h height
  */
 Texture.prototype.setSize = function (w, h)
 {
@@ -411,8 +409,8 @@ Texture.prototype.setSize = function (w, h)
  * @instance
  * @description create texturem from rgb data
  * @param {Array<Number>} data rgb color array [r,g,b,a,r,g,b,a,...]
- * @param {Number} width
- * @param {Number} height
+ * @param {Number} w width
+ * @param {Number} h height
  * @param {Number} filter
  * @param {Number} wrap
  */
@@ -466,7 +464,7 @@ Texture.prototype.updateMipMap = function ()
  * @function initTexture
  * @memberof Texture
  * @instance
- * @param {Object} image
+ * @param {Object} img image
  * @param {Number} filter
  */
 Texture.prototype.initTexture = function (img, filter)
@@ -715,8 +713,8 @@ Texture.prototype._setFilter = function ()
  * @description load an image from an url
  * @param {Context} cgl
  * @param {String} url
- * @param {Function} onFinished
- * @param {Object} options
+ * @param {Function} finishedCallback
+ * @param {Object} settings
  * @return {Texture}
  */
 Texture.load = function (cgl, url, finishedCallback, settings)
@@ -805,6 +803,8 @@ Texture.getErrorTexture = function (cgl)
  * @function getEmptyTexture
  * @memberof Texture
  * @instance
+ * @param cgl
+ * @param fp
  * @description returns a reference to a small empty (transparent) texture
  * @return {Texture}
  */
@@ -827,6 +827,7 @@ Texture.getEmptyTexture = function (cgl, fp)
  * @function getEmptyTextureFloat
  * @memberof Texture
  * @instance
+ * @param cgl
  * @description returns a reference to a small empty (transparent) 32bit texture
  * @return {Texture}
  */
@@ -849,6 +850,7 @@ Texture.getEmptyTextureFloat = function (cgl)
  * @function getRandomTexture
  * @memberof Texture
  * @static
+ * @param cgl
  * @description returns a reference to a random texture
  * @return {Texture}
  */
@@ -878,6 +880,7 @@ Texture.getRandomTexture = function (cgl)
  * @function getRandomFloatTexture
  * @memberof Texture
  * @static
+ * @param cgl
  * @description returns a reference to a texture containing random numbers between -1 and 1
  * @return {Texture}
  */
@@ -907,6 +910,7 @@ Texture.getRandomFloatTexture = function (cgl)
  * @function getBlackTexture
  * @memberof Texture
  * @static
+ * @param cgl
  * @description returns a reference to a black texture
  * @return {Texture}
  */
@@ -935,6 +939,7 @@ Texture.getBlackTexture = function (cgl)
  * @function getEmptyCubemapTexture
  * @memberof Texture
  * @static
+ * @param cgl
  * @description returns an empty cubemap texture with rgba = [0, 0, 0, 0]
  * @return {Texture}
  */
@@ -1063,7 +1068,7 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
  * @memberof Texture
  * @description create texturem from image data (e.g. image or canvas)
  * @param {Context} cgl
- * @param {Object} image
+ * @param {Object} img image
  * @param {Object} options
  */
 Texture.createFromImage = function (cgl, img, options)

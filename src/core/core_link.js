@@ -2,9 +2,8 @@ import { CONSTANTS } from "./constants.js";
 import { EventTarget } from "./eventtarget.js";
 
 /**
- * @external CABLES
- * @namespace Link
- * @param {Object} patch The patch object
+ * @namespace external:CABLES#Link
+ * @param {Object} scene The patch object
  * @description a link is a connection between two ops/ports -> one input and one output port
  * @hideconstructor
  * @class
@@ -67,7 +66,7 @@ Link.prototype._setValue = function ()
  * @function getOtherPort
  * @memberof Link
  * @instance
- * @param {Port} port
+ * @param {Port} p port
  * @description returns the port of the link, which is not port
  */
 Link.prototype.getOtherPort = function (p)
@@ -110,8 +109,8 @@ Link.prototype.remove = function ()
  * @memberof Link
  * @instance
  * @description link those two ports
- * @param {Port} port1
- * @param {Port} port2
+ * @param {Port} p1 port1
+ * @param {Port} p2 port2
  */
 Link.prototype.link = function (p1, p2)
 {
@@ -163,8 +162,8 @@ Link.prototype.getSerialized = function ()
  * @memberof Link
  * @instance
  * @description return a text message with human readable reason if ports can not be linked, or can be
- * @param {Port} port1
- * @param {Port} port2
+ * @param {Port} p1 port1
+ * @param {Port} p2 port2
  */
 Link.canLinkText = function (p1, p2)
 {
@@ -208,8 +207,8 @@ Link.canLinkText = function (p1, p2)
  * @memberof Link
  * @instance
  * @description return true if ports can be linked
- * @param {Port} port1
- * @param {Port} port2
+ * @param {Port} p1 port1
+ * @param {Port} p2 port2
  * @returns {Boolean}
  */
 Link.canLink = function (p1, p2)

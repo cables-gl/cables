@@ -40,7 +40,8 @@ export default class Mesh
      * @memberof Mesh
      * @instance
      * @description set geometry for mesh
-     * @param {Geometry} geometry
+     * @param {Geometry} geom geometry
+     * @param {boolean} removeRef
      */
     setGeom(geom, removeRef)
     {
@@ -80,8 +81,8 @@ export default class Mesh
      * @description update attribute
      * @memberof Mesh
      * @instance
-     * @param {String} attribute name
-     * @param {Array} data
+     * @param {String} name attribute name
+     * @param {Array} array data
      * @param {Number} itemSize
      * @param {Object} options
      */

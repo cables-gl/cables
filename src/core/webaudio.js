@@ -167,6 +167,8 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
  * Can be used for both Audio ports as well as AudioParam ports
  * if used with an AudioParam pass e.g. `synth.frequency` as newNode
  * @param {CABLES.Port} port - The port where the audio node needs to be replaced
+ * @param oldNode
+ * @param newNode
  */
 WEBAUDIO.replaceNodeInPort = function (port, oldNode, newNode)
 {
@@ -231,6 +233,9 @@ WEBAUDIO.createAudioOutPort = function (op, portName, audioNode)
  * from the op's audio node and restore the number value set before.
  * @param {CABLES.Op} op - The operator to create an audio param input port for
  * @param {string} portName - The name of the port to create
+ * @param audioNode
+ * @param options
+ * @param defaultValue
  * @returns {(CABLES.Port|undefined)} - The newly created port, which takes care of (dis-)connecting on its own, or `undefined` if there was an error
  */
 WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, defaultValue)
@@ -418,8 +423,9 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
  * Loads an audio file and updates the loading indicators when cables is run in the editor.
  * @param {CABLES.Patch} patch - The cables patch, when called from inside an op this is `op.patch`
  * @param {string} url - The url of the audio file to load
- * @param {loadAudioFileFinishedCallback} onFinished - The callback to be called when the loading is finished, passes the AudioBuffer
- * @param {loadAudioFileErrorCallback} onError - The callback when there was an error loading the file, the rror message is passed
+ * @param {function} onFinished - The callback to be called when the loading is finished, passes the AudioBuffer
+ * @param {function} onError - The callback when there was an error loading the file, the rror message is passed
+ * @param loadingTask
  * @see {@link https://developer.mozilla.org/de/docs/Web/API/AudioContext/decodeAudioData}
  */
 WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)

@@ -2,9 +2,8 @@ export { BoundingBox };
 
 /**
  * bounding box
- * @class
- * @external CGL
- * @namespace BoundingBox
+ *
+ * @namespace external:CGL
  * @param {Geometry} geometry or bounding box
  */
 class BoundingBox
