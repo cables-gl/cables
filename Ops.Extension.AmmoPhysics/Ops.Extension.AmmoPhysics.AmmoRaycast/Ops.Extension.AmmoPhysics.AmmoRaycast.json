@@ -32,6 +32,10 @@
             {
                 "type": 0,
                 "name": "Ray Coordinates index",
+                "values": [
+                    "Screen XY",
+                    "Points 3d"
+                ],
                 "subType": "integer"
             },
             {
@@ -95,7 +99,6 @@
     "summary": "Cast a ray and detect colliding bodies",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Gh2f_4",
     "docs": {
@@ -117,5 +120,6 @@
                 "text": "report name of object at coordinates"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }
