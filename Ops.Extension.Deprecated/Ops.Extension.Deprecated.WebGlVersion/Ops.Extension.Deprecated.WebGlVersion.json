@@ -1,0 +1,36 @@
+{
+    "summary": "which webgl version is being used",
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Major Version",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "d6554d6c-0742-4559-b0a4-29ad0ae1e25b",
+    "created": 1558014381304,
+    "changelog": [
+        {
+            "message": "Ops.Html.WebGlVersion renamed to Ops.Gl.WebGlVersion",
+            "author": "pandur",
+            "date": 1596093575068,
+            "type": "improvement"
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecated",
+            "author": "pandur",
+            "date": 1721042619360
+        },
+        {
+            "message": "renamed Ops.Gl.WebGlVersion to Ops.Extension.Deprecated.WebGlVersion - use WebGlInfo",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721042620907
+        }
+    ]
+}
