@@ -1194,7 +1194,7 @@ const Op = function ()
     Op.prototype.log = function ()
     {
         const initiator = "op " + this.objName;
-        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, 0, ...arguments)) return;
+        if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 0 }, ...arguments)) return;
         if (!CABLES.UI && this.patch.silent) return;
 
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
@@ -1211,7 +1211,7 @@ const Op = function ()
             return;
         }
         const initiator = "op " + this.objName;
-        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, 2, ...arguments)) return;
+        if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 2 }, ...arguments)) return;
 
         // if (this.patch.silent) return;
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
@@ -1223,7 +1223,7 @@ const Op = function ()
     Op.prototype.warn = Op.prototype.logWarn = function ()
     {
         const initiator = "op " + this.objName;
-        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, 1, ...arguments)) return;
+        if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 1 }, ...arguments)) return;
 
         // if (this.patch.silent) return;
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
@@ -1234,7 +1234,7 @@ const Op = function ()
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
     {
         const initiator = "op " + CABLES.getShortOpName(this.objName);
-        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, 0, ...arguments)) return;
+        if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 0 }, ...arguments)) return;
 
         if (!CABLES.UI && this.patch.silent) return;
 
