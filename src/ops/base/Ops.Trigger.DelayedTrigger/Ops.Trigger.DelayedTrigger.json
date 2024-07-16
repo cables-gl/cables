@@ -38,5 +38,10 @@
             "author": "pandur",
             "date": 1701854084684
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "VgtMji",
+    "docs": {
+        "ports": []
+    }
 }

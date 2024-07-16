@@ -7,6 +7,7 @@ let doDec = false;
 let decm = 1;
 decPlaces.onChange = updateDecm;
 val.onChange = update;
+updateDecm();
 update();
 
 function updateDecm()

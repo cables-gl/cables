@@ -9,8 +9,7 @@ import { MultiPort } from "./core_port_multi.js";
 
 /**
  * op the class of all operators
- * @external CABLES
- * @namespace Op
+ * @namespace external:CABLES#Op
  * @hideconstructor
  */
 

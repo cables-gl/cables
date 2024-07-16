@@ -36,9 +36,11 @@ let materialIdCounter = 0;
 
 /**
  * @class
- * @external CGL
- * @namespace Shader
+ * @namespace external:CGL
  * @hideconstructor
+ * @param _cgl
+ * @param _name
+ * @param _op
  * @example
  * var shader=new CGL.Shader(cgl,'MinimalMaterial');
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
@@ -166,7 +168,7 @@ Shader.prototype.setWhyCompile = function (why)
  * @function copyUniforms
  * @memberof Shader
  * @instance
- * @param shader uniform values will be copied from this shader
+ * @param origShader uniform values will be copied from this shader
  */
 Shader.prototype.copyUniformValues = function (origShader)
 {
@@ -939,7 +941,7 @@ Shader.prototype.unBind = function ()
  * @memberof Shader
  * @instance
  * @param {name} name
- * @param {any} value or port
+ * @param {any} enabled value or port
  */
 Shader.prototype.toggleDefine = function (name, enabled)
 {
@@ -1056,7 +1058,7 @@ Shader.prototype.removeDefine = function (name)
  * @function removeModule
  * @memberof Shader
  * @instance
- * @param {shaderModule} module the module to be removed
+ * @param {shaderModule} mod the module to be removed
  */
 Shader.prototype.removeModule = function (mod)
 {
@@ -1105,7 +1107,7 @@ Shader.prototype.getCurrentModules = function () { return this._modules; };
  * @function addModule
  * @memberof Shader
  * @instance
- * @param {shaderModule} module the module to be added
+ * @param {shaderModule} mod the module to be added
  * @param {shaderModule} [sibling] sibling module, new module will share the same group
  */
 Shader.prototype.addModule = function (mod, sibling)
@@ -1221,7 +1223,10 @@ Shader.prototype._addUniform = function (uni)
  * add a uniform to the fragment shader
  * @param {String} type ['f','t', etc]
  * @param {String} name
- * @param {any} value or port
+ * @param {any} valueOrPort value or port
+ * @param p2
+ * @param p3
+ * @param p4
  * @memberof Shader
  * @instance
  * @function addUniformFrag
@@ -1238,7 +1243,10 @@ Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4)
  * add a uniform to the vertex shader
  * @param {String} type ['f','t', etc]
  * @param {String} name
- * @param {any} value or port
+ * @param {any} valueOrPort value or port
+ * @param p2
+ * @param p3
+ * @param p4
  * @memberof Shader
  * @instance
  * @function addUniformVert
@@ -1254,7 +1262,10 @@ Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4)
  * add a uniform to both shaders
  * @param {String} type ['f','t', etc]
  * @param {String} name
- * @param {any} value or port
+ * @param {any} valueOrPort value or port
+ * @param p2
+ * @param p3
+ * @param p4
  * @memberof Shader
  * @instance
  * @function addUniformBoth
@@ -1517,7 +1528,7 @@ Shader.prototype.getDefaultFragmentShader = Shader.getDefaultFragmentShader = fu
  * @function
  * @memberof Shader
  * @instance
- * @param {Object} attribObject {type:x,name:x,[nameFrag:x]}
+ * @param {Object} attr {type:x,name:x,[nameFrag:x]}
  * @return {Object}
  */
 Shader.prototype.addAttribute = function (attr)
@@ -1603,9 +1614,9 @@ Shader.prototype.setUniformTexture = function (uni, tex)
 
 /**
  * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
- * @param {uniform} texture uniform
- * @param {texture} texture
- * @param {type} texture type, can be ignored when TEXTURE_2D
+ * @param {uniform} uniform texture uniform
+ * @param {texture} t texture
+ * @param {type} type texture type, can be ignored when TEXTURE_2D
  * @function pushTexture
  * @memberof Shader
  * @instance

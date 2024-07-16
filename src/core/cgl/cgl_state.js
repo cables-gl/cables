@@ -8,9 +8,8 @@ import { CG } from "../cg/cg_constants.js";
 
 /**
  * cables gl context/state manager
- * @external CGL
- * @namespace Context
  * @class
+ * @namespace external:CGL
  * @hideconstructor
  */
 // const Context(_patch)
@@ -479,7 +478,7 @@ class Context extends CGState
      * @function pushGlFrameBuffer
      * @memberof Context
      * @instance
-     * @param {Object} framebuffer
+     * @param {Object} fb framebuffer
      * @function
      */
     pushGlFrameBuffer(fb)
@@ -519,7 +518,7 @@ class Context extends CGState
      * @function pushGlFrameBuffer
      * @memberof Context
      * @instance
-     * @param {Framebuffer} framebuffer
+     * @param {Framebuffer} fb framebuffer
      */
     pushFrameBuffer(fb)
     {
@@ -629,6 +628,7 @@ class Context extends CGState
      * log warning to console if the rendering of one frame has not been started / handy to check for async problems
      * @function checkFrameStarted
      * @memberof Context
+     * @param string
      * @instance
      */
     checkFrameStarted(string)
@@ -791,7 +791,7 @@ Context.prototype.setShader = Context.prototype.pushShader;
  * @function addNextFrameOnceCallback
  * @memberof Context
  * @instance
- * @param {function} callback
+ * @param {function} cb
  */
 Context.prototype.addNextFrameOnceCallback = function (cb)
 {
@@ -860,7 +860,7 @@ Context.prototype.pushDepthWrite = function (b)
 
 /**
  * current state of depth writing
- * @function stateCullFace
+ * @function stateDepthWrite
  * @returns {Boolean} enabled
  * @memberof Context
  * @instance
@@ -872,7 +872,7 @@ Context.prototype.stateDepthWrite = function ()
 
 /**
  * pop depth writing state
- * @function popCullFace
+ * @function popDepthWrite
  * @memberof Context
  * @instance
  */
@@ -886,14 +886,15 @@ Context.prototype.popDepthWrite = function ()
 // --------------------------------------
 // state CullFace
 
+Context.prototype._stackCullFace = [];
+
 /**
  * push face culling face enabled state
- * @function pushCullFaceFacing
- * @param {Boolean} enabled
+ * @function pushCullFace
+ * @param {Boolean} b enabled
  * @memberof Context
  * @instance
  */
-Context.prototype._stackCullFace = [];
 Context.prototype.pushCullFace = function (b)
 {
     this._stackCullFace.push(b);
@@ -983,7 +984,7 @@ Context.prototype._stackDepthFunc = [];
  * @function pushDepthFunc
  * @memberof Context
  * @instance
- * @param {Boolean} depthtesting
+ * @param {Boolean} f depthtesting
  */
 Context.prototype.pushDepthFunc = function (f)
 {
@@ -1027,7 +1028,7 @@ Context.prototype._stackBlend = [];
  * @function pushBlend
  * @memberof Context
  * @instance
- * @param {Boolean} blending
+ * @param {boolean} b blending
  */
 Context.prototype.pushBlend = function (b)
 {
@@ -1078,8 +1079,8 @@ Context.prototype._stackBlendModePremul = [];
  * @function pushBlendMode
  * @memberof Context
  * @instance
- * @param {Number} blendmode
- * @param {Boolean} premultiplied mode
+ * @param {Number} blendMode
+ * @param {Boolean} premul premultiplied mode
  */
 Context.prototype.pushBlendMode = function (blendMode, premul)
 {
@@ -1122,7 +1123,7 @@ Context.prototype._stackStencil = [];
 * @function pushStencil
  * @memberof Context
  * @instance
- * @param {Boolean} enable
+ * @param {Boolean} b enable
  */
 Context.prototype.pushStencil = function (b)
 {
@@ -1163,6 +1164,7 @@ Context.prototype.glGetAttribLocation = function (prog, name)
  * should an op now draw helpermeshes
  * @function shouldDrawHelpers
  * @memberof Context
+ * @param op
  * @instance
  */
 Context.prototype.shouldDrawHelpers = function (op)
@@ -1258,7 +1260,7 @@ Context.prototype.createMesh = function (geom, options)
  * @function setCursor
  * @memberof Context
  * @instance
- * @param {String} css cursor string
+ * @param {String} str css cursor string
  */
 Context.prototype.setCursor = function (str)
 {
@@ -1270,7 +1272,7 @@ Context.prototype.setCursor = function (str)
  * @function enableExtension
  * @memberof Context
  * @instance
- * @param {String} extension name
+ * @param {String} name extension name
  * @returns {Object} extension object or null
  */
 Context.prototype.enableExtension = function (name)

@@ -5,13 +5,13 @@ import { Texture } from "./cgl_texture.js";
 
 /**
  * a framebuffer
- * @external CGL
- * @namespace Framebuffer
  * @constructor
- * @param {Context} cgl
- * @param {Number} width
- * @param {Number} height
- * @param {Object} [options]
+ * @class
+ * @constructs Framebuffer
+ * @param {Context} _cgl cgl
+ * @param {Number} _w width
+ * @param {Number} _h height
+ * @param {Object} options
  */
 const Framebuffer = function (_cgl, _w, _h, options)
 {

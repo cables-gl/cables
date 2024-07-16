@@ -7,10 +7,13 @@ import { cleanJson } from "./utils.js";
 
 /**
  * data is coming into and out of ops through input and output ports
- * @external CABLES
- * @namespace Port
+ * @namespace external:CABLES#Port
  * @class
  * @hideconstructor
+ * @param ___op
+ * @param name
+ * @param type
+ * @param uiAttribs
  * @example
  * const myPort=op.inString("String Port");
  */
@@ -115,8 +118,8 @@ const Port = function (___op, name, type, uiAttribs)
  * copy over a uiattrib from an external connected port to another port
  * @function copyLinkedUiAttrib
  * @memberof Port
- * @param {which} attrib name
- * @param {Port} source port
+ * @param {string} which attrib name
+ * @param {Port} port source port
  * @instance
  * @example
 
@@ -623,7 +626,7 @@ Port.prototype.addLink = function (l)
  * @function getLinkTo
  * @memberof Port
  * @instance
- * @param {Port} otherPort
+ * @param {Port} p2 otherPort
  * @description return link, which is linked to otherPort
  */
 Port.prototype.getLinkTo = function (p2)
@@ -635,7 +638,7 @@ Port.prototype.getLinkTo = function (p2)
  * @function removeLinkTo
  * @memberof Port
  * @instance
- * @param {Port} otherPort
+ * @param {Port} p2 otherPort
  * @description removes link, which is linked to otherPort
  */
 Port.prototype.removeLinkTo = function (p2)
@@ -659,7 +662,7 @@ Port.prototype.removeLinkTo = function (p2)
  * @function isLinkedTo
  * @memberof Port
  * @instance
- * @param {Port} otherPort
+ * @param {Port} p2 otherPort
  * @description returns true if port is linked to otherPort
  */
 Port.prototype.isLinkedTo = function (p2)
@@ -926,7 +929,7 @@ Port.prototype.isHidden = function ()
  * @function onTriggered
  * @memberof Port
  * @instance
- * @param {onTriggeredCallback} callback
+ * @param {function} a onTriggeredCallback
  * @description set callback, which will be executed when port was triggered (usually output port)
  */
 Port.prototype._onTriggered = function (a)
@@ -970,6 +973,7 @@ Port.prototype.setUiActiveState = function (onoff)
 
 /**
  * @deprecated
+ * @param {function} cb
  */
 Port.prototype.onValueChange = function (cb)
 {

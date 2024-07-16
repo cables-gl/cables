@@ -12,6 +12,10 @@
             {
                 "type": 0,
                 "name": "Element index",
+                "values": [
+                    "Canvas",
+                    "Document"
+                ],
                 "subType": "integer"
             }
         ],
@@ -19,11 +23,11 @@
             {
                 "type": 0,
                 "name": "Is Fullscreen",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
-    "summary": "switch webgl to fullscreen",
+    "summary": "Switch webgl to fullscreen",
     "authorName": "pandur",
     "id": "fe933b35-696d-4738-be03-c0c011ed67a0",
     "created": 1558014424320,
@@ -33,5 +37,10 @@
             "author": "pandur",
             "date": 1564310959730
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "CCoJji",
+    "docs": {
+        "ports": []
+    }
 }

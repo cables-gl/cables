@@ -1,5 +1,10 @@
 // todo: old... remove this from ops...
 
+/**
+ * todo: old... remove this from ops...
+ *
+ * @class
+ */
 const Variable = function ()
 {
     let value = null;

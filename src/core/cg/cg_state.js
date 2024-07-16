@@ -32,27 +32,27 @@ class CGState extends Events
 
 
         /**
-             * Current projection matrix
-             * @memberof Context
-             * @instance
-             * @type {mat4}
-             */
+         * Current projection matrix
+         * @memberof Context
+         * @instance
+         * @type {mat4}
+         */
         this.pMatrix = mat4.create();
 
         /**
-             * Current model matrix
-             * @memberof Context
-             * @instance
-             * @type {mat4}
-             */
+         * Current model matrix
+         * @memberof Context
+         * @instance
+         * @type {mat4}
+         */
         this.mMatrix = mat4.create();
 
         /**
-             * Current view matrix
-             * @memberof Context
-             * @instance
-             * @type {mat4}
-             */
+         * Current view matrix
+         * @memberof Context
+         * @instance
+         * @type {mat4}
+         */
         this.vMatrix = mat4.create();
         this._textureslots = [];
 
@@ -169,26 +169,24 @@ class CGState extends Events
         }
     }
 
-
     /**
- * push a matrix to the projection matrix stack
- * @function pushPMatrix
- * @memberof Context
- * @instance
- * @param {mat4} projectionmatrix
- */
+     * push a matrix to the projection matrix stack
+     * @function pushPMatrix
+     * @memberof Context
+     * @instance
+     */
     pushPMatrix()
     {
         this.pMatrix = this._pMatrixStack.push(this.pMatrix);
     }
 
     /**
-  * pop projection matrix stack
-  * @function popPMatrix
-  * @memberof Context
-  * @instance
-  * @returns {mat4} current projectionmatrix
-  */
+      * pop projection matrix stack
+      * @function popPMatrix
+      * @memberof Context
+      * @instance
+      * @returns {mat4} current projectionmatrix
+      */
     popPMatrix()
     {
         this.pMatrix = this._pMatrixStack.pop();
@@ -201,30 +199,29 @@ class CGState extends Events
     }
 
     /**
-  * push a matrix to the model matrix stack
-  * @function pushModelMatrix
-  * @memberof Context
-  * @instance
-  * @param {mat4} modelmatrix
-  * @example
-  * // see source code of translate op:
-  * cgl.pushModelMatrix();
-  * mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
-  * trigger.trigger();
-  * cgl.popModelMatrix();
-  */
+      * push a matrix to the model matrix stack
+      * @function pushModelMatrix
+      * @memberof Context
+      * @instance
+      * @example
+      * // see source code of translate op:
+      * cgl.pushModelMatrix();
+      * mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
+      * trigger.trigger();
+      * cgl.popModelMatrix();
+      */
     pushModelMatrix()
     {
         this.mMatrix = this._mMatrixStack.push(this.mMatrix);
     }
 
     /**
-  * pop model matrix stack
-  * @function popModelMatrix
-  * @memberof Context
-  * @instance
-  * @returns {mat4} current modelmatrix
-  */
+      * pop model matrix stack
+      * @function popModelMatrix
+      * @memberof Context
+      * @instance
+      * @returns {mat4} current modelmatrix
+      */
     popModelMatrix()
     {
         // todo: DEPRECATE
@@ -234,12 +231,12 @@ class CGState extends Events
     }
 
     /**
-  * get model matrix
-  * @function modelMatrix
-  * @memberof Context
-  * @instance
-  * @returns {mat4} current modelmatrix
-  */
+      * get model matrix
+      * @function modelMatrix
+      * @memberof Context
+      * @instance
+      * @returns {mat4} current modelmatrix
+      */
     modelMatrix()
     {
         return this.mMatrix;
@@ -247,25 +244,24 @@ class CGState extends Events
 
 
     /**
- * push a matrix to the view matrix stack
- * @function pushviewMatrix
- * @memberof Context
- * @instance
- * @param {mat4} viewmatrix
- */
+     * push a matrix to the view matrix stack
+     * @function pushviewMatrix
+     * @memberof Context
+     * @instance
+     */
     pushViewMatrix()
     {
         this.vMatrix = this._vMatrixStack.push(this.vMatrix);
     }
 
     /**
-  * pop view matrix stack
-  * @function popViewMatrix
-  * @memberof Context
-  * @instance
-  * @returns {mat4} current viewmatrix
-  * @function
-  */
+      * pop view matrix stack
+      * @function popViewMatrix
+      * @memberof Context
+      * @instance
+      * @returns {mat4} current viewmatrix
+      * @function
+      */
     popViewMatrix()
     {
         this.vMatrix = this._vMatrixStack.pop();

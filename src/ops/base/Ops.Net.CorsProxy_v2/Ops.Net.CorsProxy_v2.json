@@ -24,11 +24,9 @@
         ]
     },
     "summary": "create a cables.gl CORS proxy URL",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": ""
+    "license": "MIT",
+    "exampleProjectId": "PAedBi"
 }

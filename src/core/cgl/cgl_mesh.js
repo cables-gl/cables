@@ -8,13 +8,12 @@ MESH.lastMesh = null;
 
 /**
  * webgl renderable 3d object
- * @external CGL
- * @namespace Mesh
- * @hideconstructor
- * @param {Context} cgl
- * @param {Geometry} geometry
- * @param {Number} [glPrimitive]
  * @class
+ * @namespace external:CGL
+ * @hideconstructor
+ * @param {Context} _cgl cgl
+ * @param {Geometry} __geom geometry
+ * @param {Number} _options glPrimitive
  * @example
  * const cgl=this._cgl
  * const mesh=new CGL.Mesh(cgl, geometry);
@@ -87,7 +86,7 @@ Mesh.prototype.freeMem = function ()
  * @memberof Mesh
  * @instance
  * @description update vertices only from a geometry
- * @param {Geometry} geometry
+ * @param {Geometry} geom
  */
 Mesh.prototype.updateVertices = function (geom)
 {
@@ -306,7 +305,7 @@ Mesh.prototype.getAttributes = function ()
  * @description update texture coordinates only from a geometry
  * @memberof Mesh
  * @instance
- * @param {Geometry} geometry
+ * @param {Geometry} geom
  */
 Mesh.prototype.updateTexCoords = function (geom)
 {
@@ -327,7 +326,7 @@ Mesh.prototype.updateTexCoords = function (geom)
  * @description update normals only from a geometry
  * @memberof Mesh
  * @instance
- * @param {Geometry} geometry
+ * @param {Geometry} geom
  */
 Mesh.prototype.updateNormals = function (geom)
 {
@@ -427,7 +426,8 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
  * @memberof Mesh
  * @instance
  * @description set geometry for mesh
- * @param {Geometry} geometry
+ * @param {Geometry} geom
+ * @param {boolean} removeRef
  */
 Mesh.prototype.setGeom = function (geom, removeRef)
 {

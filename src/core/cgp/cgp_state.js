@@ -10,9 +10,8 @@ import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 
 /**
  * cables webgpu context/state manager
- * @external CGP
- * @namespace Context
  * @class
+ * @namespace external:CGP
  * @hideconstructor
  */
 // const Context = function (_patch)
@@ -184,11 +183,10 @@ class WebGpuContext extends CGState
     /**
      * push depth testing enabled state
      * @function pushDepthTest
-     * @param {Boolean} enabled
+     * @param {Boolean} b enabled
      * @memberof Context
      * @instance
      */
-
     pushDepthTest(b)
     {
         this._stackDepthTest.push(b);
@@ -222,12 +220,11 @@ class WebGpuContext extends CGState
 
     /**
      * push depth write enabled state
-     * @function pushDepthTest
-     * @param {Boolean} enabled
+     * @function pushDepthWrite
+     * @param {Boolean} b enabled
      * @memberof Context
      * @instance
      */
-
     pushDepthWrite(b)
     {
         b = b || false;
@@ -266,7 +263,7 @@ class WebGpuContext extends CGState
      * @function pushDepthFunc
      * @memberof Context
      * @instance
-     * @param {string} depth compare func
+     * @param {string} f depth compare func
      */
     pushDepthFunc(f)
     {
@@ -303,8 +300,8 @@ class WebGpuContext extends CGState
 
     /**
      * push face culling face enabled state
-     * @function pushCullFaceFacing
-     * @param {Boolean} enabled
+     * @function pushCullFace
+     * @param {Boolean} b enabled
      * @memberof Context
      * @instance
      */
@@ -314,12 +311,12 @@ class WebGpuContext extends CGState
     }
 
     /**
- * current state of face culling
- * @function stateCullFace
- * @returns {Boolean} enabled
- * @memberof Context
- * @instance
- */
+     * current state of face culling
+     * @function stateCullFace
+     * @returns {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
     stateCullFace()
     {
         return this._stackCullFace[this._stackCullFace.length - 1];
@@ -345,6 +342,7 @@ class WebGpuContext extends CGState
      * push face culling face side
      * @function pushCullFaceFacing
      * @memberof Context
+     * @param b
      * @instance
      */
 

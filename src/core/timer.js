@@ -22,8 +22,7 @@ export const now = function ()
 
 /**
  * Measuring time
- * @external CABLES
- * @namespace Timer
+ * @namespace external:CABLES#Timer
  * @hideconstructor
  * @class
  */
@@ -76,6 +75,7 @@ Timer.prototype.isPlaying = function ()
  * @function
  * @memberof Timer
  * @instance
+ * @param ts
  * @description update timer
  * @return {Number} time
  */

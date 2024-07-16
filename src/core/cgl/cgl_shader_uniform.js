@@ -20,8 +20,7 @@ import { Port } from "../core_port.js";
  * 4f[] - array of float vec4
  * </pre>
  *
- * @external CGL
- * @namespace Uniform
+ * @namespace external:CGL
  * @class
  * @param {Shader} shader
  * @param {String} [type=f]
