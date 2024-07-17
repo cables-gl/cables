@@ -1278,12 +1278,9 @@ Context.prototype.setCursor = function (str)
 Context.prototype.enableExtension = function (name)
 {
     if (!this.gl) return null;
-    // const start = performance.now();
 
     if (this._enabledExtensions.hasOwnProperty(name))
-    {
         return this._enabledExtensions[name];
-    }
 
     const o = this.gl.getExtension(name);
     this._enabledExtensions[name] = o;

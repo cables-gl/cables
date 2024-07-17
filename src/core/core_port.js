@@ -337,19 +337,14 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                 catch (ex)
                 {
                     this.crashed = true;
-                    this.op.crashed = true;
 
                     this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
-                    this._log.error("onvaluechanged exception caught", ex);
-                    this._log.error(ex.stack);
-                    this._log.warn("exception in: " + this._op.name);
-
-                    if (this._op.patch.isEditorMode()) gui.showOpCrash(this._op);
+                    this._log.error("exception in ", this._op);
+                    this._log.error(ex);
 
                     this._op.patch.emitEvent("exception", ex, this._op);
-                    if (this._op.onError) this._op.onError(ex);
                 }
 
                 if (this._op && this._op.patch && this._op.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
@@ -714,16 +709,14 @@ Port.prototype.trigger = function ()
 
         if (this._op.patch.isEditorMode())
         {
-            this._op.patch.emitEvent("exception", ex, portTriggered.op);
-            this._op.patch.emitEvent("opcrash", portTriggered);
-            console.log("crash", portTriggered.op.objName);
+            // this._op.patch.emitEvent("exception", ex, portTriggered.op);
+            // this._op.patch.emitEvent("opcrash", portTriggered);
+            // console.log("crash", portTriggered.op.objName);
 
             if (portTriggered.op.onError) portTriggered.op.onError(ex);
         }
-        this._log.warn("exception!");
-        this._log.error("ontriggered exception caught", ex);
-        this._log.error(ex.stack);
-        this._log.warn("exception in: " + portTriggered.op.name);
+        this._log.error("exception in port: " + portTriggered.op.name, portTriggered.op);
+        this._log.error(ex);
     }
 };
 

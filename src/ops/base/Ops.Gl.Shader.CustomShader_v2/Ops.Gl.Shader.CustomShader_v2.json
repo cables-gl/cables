@@ -30,36 +30,6 @@
                 "name": "Use As Material",
                 "group": "Options",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "iTime",
-                "group": "uniforms",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "iResolution X",
-                "group": "iResolution",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "iResolution Y",
-                "group": "iResolution",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "iMouse X",
-                "group": "iMouse",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "iMouse Y",
-                "group": "iMouse",
-                "subType": "number"
             }
         ],
         "portsOut": [
@@ -113,5 +83,6 @@
         "Zfhn8xSM0SE"
     ],
     "exampleProjectId": "vWyGud",
-    "coreLibs": []
+    "coreLibs": [],
+    "license": "MIT"
 }

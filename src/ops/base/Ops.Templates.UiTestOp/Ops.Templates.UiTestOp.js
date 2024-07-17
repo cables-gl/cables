@@ -17,12 +17,12 @@ const
     inLogWarn = op.inTriggerButton("op.logWarn()"),
     inLogErr = op.inTriggerButton("op.logError()"),
 
+    inExc = op.inTriggerButton("Throw Exception"),
+    inErrorFloat = op.inFloat("Array Exception", 0),
+
     inPrompt = op.inTriggerButton("Open Prompt"),
     inModal = op.inTriggerButton("Open Modal"),
     inTab = op.inTriggerButton("Open new Tab"),
-
-    inExc = op.inTriggerButton("Throw Exception"),
-    inErrorFloat = op.inFloat("Array Exception", 0),
 
     outBlah = op.outNumber("Something");
 
