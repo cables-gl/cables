@@ -1448,8 +1448,6 @@ const Op = function ()
     {
         this.enabled = b;
         this.emitEvent("onEnabledChange", b);
-        if (!this.enabled) this.setUiError("_disabled", "Op is disabled", 0);
-        else this.setUiError("_disabled", null);
     };
 
     /**

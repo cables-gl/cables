@@ -42,110 +42,115 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loading Task",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Warning",
                 "group": "Warnings",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Error",
                 "group": "Warnings",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Hint",
                 "group": "Warnings",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Not Working",
                 "group": "Warnings",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loading",
                 "group": "Warnings",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Slider",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "Gradient",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Resizable",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "greyout",
                 "group": "Greyout",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "this will greyout",
                 "group": "Greyout",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "op.log()",
                 "group": "Logging"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "op.logWarn()",
                 "group": "Logging"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "op.logError()",
                 "group": "Logging"
             },
             {
-                "type": "1",
-                "name": "Open Prompt",
-                "group": "Modal"
-            },
-            {
-                "type": "1",
-                "name": "Open Modal",
-                "group": "Modal"
-            },
-            {
-                "type": "1",
-                "name": "Open new Tab"
-            },
-            {
-                "type": "1",
+                "type": 1,
                 "name": "Throw Exception",
                 "group": "Crash"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Array Exception",
                 "group": "Crash",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Open Prompt",
+                "group": "Modal"
+            },
+            {
+                "type": 1,
+                "name": "Open Modal",
+                "group": "Modal"
+            },
+            {
+                "type": 1,
+                "name": "Open new Tab"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Something",
                 "subType": "number"
             }
@@ -157,5 +162,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RUUacI"
+    "exampleProjectId": "RUUacI",
+    "license": "MIT"
 }

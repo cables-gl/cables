@@ -118,9 +118,7 @@ LoadingStatus.prototype.print = function ()
         ]);
     }
 
-    this._log.groupCollapsed(
-        "finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s",
-    );
+    this._log.groupCollapsed("finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s");
     this._log.table(rows);
     this._log.groupEnd();
 };
