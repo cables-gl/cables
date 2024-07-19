@@ -58,15 +58,21 @@ render.onTriggered = function ()
     trigger.trigger();
     cg.popModelMatrix();
 
-    if (CABLES.UI) gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
+    if (CABLES.UI)
+    {
+        if (!posX.isLinked() && !posY.isLinked() && !posZ.isLinked())
+        {
+            gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
 
-    if (op.isCurrentUiOp())
-        gui.setTransformGizmo(
-            {
-                "posX": posX,
-                "posY": posY,
-                "posZ": posZ,
-            });
+            if (op.isCurrentUiOp())
+                gui.setTransformGizmo(
+                    {
+                        "posX": posX,
+                        "posY": posY,
+                        "posZ": posZ,
+                    });
+        }
+    }
 };
 
 // op.transform3d = function ()

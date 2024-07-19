@@ -41,11 +41,16 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Array"
             }
         ]
     },
     "authorName": "pandur",
     "id": "c6a0d570-a0ac-4655-b17d-74d0870b0799",
     "created": 1541225050374,
-    "exampleProjectId": "D_eE98"
+    "exampleProjectId": "D_eE98",
+    "license": "MIT"
 }

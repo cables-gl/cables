@@ -36,7 +36,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "HTML Element"
+                "name": "HTML Element",
+                "objType": "element"
             }
         ]
     },
@@ -48,5 +49,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Y8Nrlo"
+    "exampleProjectId": "Y8Nrlo",
+    "license": "MIT"
 }

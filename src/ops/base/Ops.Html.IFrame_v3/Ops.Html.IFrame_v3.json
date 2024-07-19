@@ -45,7 +45,6 @@
     },
     "summary": "Show another website in an iframe element",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -71,5 +70,6 @@
             }
         ]
     },
-    "exampleProjectId": "SLesr2"
+    "exampleProjectId": "SLesr2",
+    "license": "MIT"
 }
