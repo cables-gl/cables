@@ -1,0 +1,40 @@
+{
+    "id": "33be8bf2-94e9-42e1-9987-9cc4f7448df6",
+    "created": 1721381123452,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1721381123452
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Async crash"
+            },
+            {
+                "type": 1,
+                "name": "Throw Exception"
+            },
+            {
+                "type": 0,
+                "name": "Float",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Array Exception"
+            },
+            {
+                "type": 1,
+                "name": "Promise Fail"
+            }
+        ],
+        "portsOut": []
+    }
+}
