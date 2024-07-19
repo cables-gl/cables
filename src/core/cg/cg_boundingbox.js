@@ -219,10 +219,8 @@ class BoundingBox
     {
         if (!this._wireMesh) this._wireMesh = new CGL.WireCube(cgl);
 
-        // console.log("bounding box render!");
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix, cgl.mMatrix, this._center);
-        // this._wireMesh.render(cgl, this._size[0] / 2, this._size[1] / 2, this._size[2] / 2);
 
         if (CABLES.UI && op)
         {

@@ -536,7 +536,3 @@ Preprocessor.prototype.process = function (defines, verbose)
 export default Preprocessor;
 
 
-// const pp = new Preprocessor("// #define AAAA\nhallo AAAA!\n// #ifdef AAAA\njaja is defined!\n// #else\n hurziburzi\n// #endif\nhuhu", ".", true);
-// // debugger;
-// const r = pp.process({ "a": 1 });
-// console.log(r);

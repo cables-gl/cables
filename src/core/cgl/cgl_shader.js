@@ -1424,7 +1424,7 @@ Shader.prototype._createProgram = function (vstr, fstr)
     {
         this._isValid = false;
         this._cgl.printError("shader _createProgram");
-        console.log("could not link shaderprogram");
+        this._log.error("could not link shaderprogram");
         return null;
     }
 

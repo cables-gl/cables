@@ -179,7 +179,7 @@ Patch.prototype.renderOneFrame = function ()
  */
 Patch.prototype.getFPS = function ()
 {
-    console.log("deprecated getfps");
+    this._log.error("deprecated getfps");
     return 0;
 };
 
@@ -379,7 +379,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 if (opName)
                 {
                     identifier = opName;
-                    console.log("could not find op by id: " + opId);
+                    this._log.warn("could not find op by id: " + opId);
                 }
                 else
                 {
@@ -868,7 +868,7 @@ Patch.prototype.deSerialize = function (obj, options)
         }
         catch (e)
         {
-            console.log("[instancing error] op data:", opData, e);
+            this._log.error("[instancing error] op data:", opData, e);
             // throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
         }
 
@@ -886,7 +886,6 @@ Patch.prototype.deSerialize = function (obj, options)
                 const objPort = opData.portsIn[ipi];
                 if (objPort && objPort.hasOwnProperty("name"))
                 {
-                    // console.log("load poirt data,objPort", objPort.name, objPort);
                     const port = op.getPort(objPort.name);
 
                     if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
@@ -898,8 +897,6 @@ Patch.prototype.deSerialize = function (obj, options)
                     }
                     else
                     {
-                        // console.log("preserve", objPort.name, objPort.value, op.uiAttribs.title);
-
                         // if (port.uiAttribs.hasOwnProperty("title"))
                         // {
                         //     op.preservedPortTitles = op.preservedPortTitles || {};
@@ -1152,7 +1149,7 @@ Patch.prototype.setVariable = function (name, val)
     }
     else
     {
-        console.log("variable " + name + " not found!");
+        this._log.warn("variable " + name + " not found!");
     }
 };
 
