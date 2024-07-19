@@ -399,7 +399,7 @@ Geometry.prototype.merge = function (geom)
 };
 
 /**
- * create a copy of the geometry
+ *   a copy of the geometry
  * @function copy
  * @memberof Geometry
  * @instance
