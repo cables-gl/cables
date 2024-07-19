@@ -20,16 +20,6 @@
             {
                 "type": 1,
                 "name": "Input_1",
-                "group": "Input"
-            },
-            {
-                "type": 1,
-                "name": "Input_2",
-                "group": "Input"
-            },
-            {
-                "type": 1,
-                "name": "Input_3",
                 "uititle": "add port",
                 "group": "Input"
             }
@@ -41,15 +31,7 @@
             },
             {
                 "type": 1,
-                "name": "Output_1"
-            },
-            {
-                "type": 1,
-                "name": "Output_2"
-            },
-            {
-                "type": 1,
-                "name": "Output_3",
+                "name": "Output_1",
                 "uititle": "add port"
             }
         ]

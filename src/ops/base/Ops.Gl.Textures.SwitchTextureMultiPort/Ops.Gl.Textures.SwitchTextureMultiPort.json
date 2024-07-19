@@ -25,16 +25,6 @@
             {
                 "type": 2,
                 "name": "Textures_1",
-                "group": "Textures"
-            },
-            {
-                "type": 2,
-                "name": "Textures_2",
-                "group": "Textures"
-            },
-            {
-                "type": 2,
-                "name": "Textures_3",
                 "uititle": "add port",
                 "group": "Textures"
             }

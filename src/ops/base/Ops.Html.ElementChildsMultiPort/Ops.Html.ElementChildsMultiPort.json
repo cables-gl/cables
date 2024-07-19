@@ -26,11 +26,6 @@
             {
                 "type": 2,
                 "name": "Childs_1",
-                "group": "Childs"
-            },
-            {
-                "type": 2,
-                "name": "Childs_2",
                 "uititle": "add port",
                 "group": "Childs"
             }
