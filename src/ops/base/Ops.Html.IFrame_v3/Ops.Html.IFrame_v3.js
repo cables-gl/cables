@@ -1,5 +1,6 @@
 const
     src = op.inString("URL", "https://undev.studio"),
+    // inHash=op.inString("Location Hash"),
     elId = op.inString("ID"),
     active = op.inBool("Active", true),
     inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:9999;\nborder:0;\nwidth:50%;\nheight:50%;"),
@@ -10,6 +11,13 @@ op.setPortGroup("Attributes", [src, elId]);
 let element = null;
 
 op.onDelete = removeEle;
+
+// inHash.onChange=()=>
+// {
+//     if(!element)return;
+
+//     element.location.hash=inHash.get();
+// };
 
 op.onLoadedValueSet = op.init = () =>
 {

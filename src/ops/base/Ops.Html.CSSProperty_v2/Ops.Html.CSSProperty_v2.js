@@ -3,7 +3,7 @@ const
     inProperty = op.inString("Property"),
     inValue = op.inFloat("Value"),
     inValueSuffix = op.inString("Value Suffix", "px"),
-    outEle = op.outObject("HTML Element");
+    outEle = op.outObject("HTML Element", null, "element");
 
 op.setPortGroup("Element", [inEle]);
 op.setPortGroup("Attributes", [inProperty, inValue, inValueSuffix]);
