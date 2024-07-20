@@ -27,21 +27,12 @@
             {
                 "type": 5,
                 "name": "Strings_0",
+                "longPort": 2,
                 "group": "Strings"
             },
             {
                 "type": 5,
                 "name": "Strings_1",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_2",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_3",
                 "uititle": "add port",
                 "group": "Strings"
             }

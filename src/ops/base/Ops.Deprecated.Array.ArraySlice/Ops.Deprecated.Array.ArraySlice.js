@@ -1,17 +1,18 @@
 
 // inputs
-var inArrayPort = op.inArray("Input Array");
-var beginPort = op.inValue("Begin Index", 0);
-var endPort = op.inValue("End Index", 1);
+let inArrayPort = op.inArray("Input Array");
+let beginPort = op.inValue("Begin Index", 0);
+let endPort = op.inValue("End Index", 1);
 
 // functions
-function setOutarray() {
-    var inArr = inArrayPort.get();
-    var begin = beginPort.get();
-    var end = endPort.get();
+function setOutarray()
+{
+    let inArr = inArrayPort.get();
+    let begin = beginPort.get();
+    let end = endPort.get();
 
-    // console.log('out arr',inArr);
-    if(!Array.isArray(inArr)) {
+    if (!Array.isArray(inArr))
+    {
         outArrayPort.set(null);
         return;
     }

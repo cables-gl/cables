@@ -198,7 +198,7 @@ class Context extends CGState
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
-            if (this.aborted) return console.log("[cgl_state] aborted context lost... can be ignored...");
+            if (this.aborted) return this._log.warn("[cgl_state] aborted context lost... can be ignored...");
             this._log.error("canvas lost...", event);
             this.emitEvent("webglcontextlost");
             this.aborted = true;
@@ -646,20 +646,6 @@ class Context extends CGState
         this.checkFrameStarted("cgl setTexture");
 
         if (t === null) t = CGL.Texture.getEmptyTexture(this).tex;
-
-        // if (!this.gl.isTexture(t))
-        // {
-        //     console.log("not a texture!!!!"); return false;
-        //     t = CGL.Texture.getEmptyTexture(this).tex;
-        // }
-
-        // if (!this.gl.isTexture(t))
-        // {
-        //     t = CGL.Texture.getErrorTexture(this).tex;
-        //     // this._log.stack("not a texture!!!!");
-        //     // return false;
-        // }
-
 
         if (this._textureslots[slot] != t)
         {

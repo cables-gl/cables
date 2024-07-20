@@ -14,7 +14,13 @@
             },
             {
                 "type": 0,
+                "name": "Scale Text",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Scale",
+                "uititle": "Line Scale",
                 "group": "Display",
                 "subType": "number"
             },
@@ -199,10 +205,17 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1714382385952
+        },
+        {
+            "message": "Text scale parameter: scale the whole text",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1721395559864
         }
     ],
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "LzDnH-",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }

@@ -152,7 +152,6 @@ export default class Mesh
 
         if (!this._cgp.getShader() || !this._cgp.getShader().isValid)
         {
-            // console.log("invalid");
             return;
         }
 
@@ -160,7 +159,6 @@ export default class Mesh
 
         if (!this._pipe.isValid)
         {
-            // console.log("invalid");
             return;
         }
 

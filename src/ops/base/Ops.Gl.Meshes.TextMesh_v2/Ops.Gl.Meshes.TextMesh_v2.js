@@ -1,6 +1,7 @@
 const
     render = op.inTrigger("Render"),
     str = op.inString("Text", "cables"),
+    scaleText = op.inFloat("Scale Text", 1),
     scale = op.inValueFloat("Scale", 1),
     inFont = op.inString("Font", "Arial"),
     align = op.inValueSelect("align", ["left", "center", "right"], "center"),
@@ -20,10 +21,15 @@ const
     loaded = op.outBoolNum("Font Available", 0);
 
 const cgl = op.patch.cgl;
+const vScale = vec3.create();
+
+vec3.set(vScale, 1, 1, 1);
 
 op.toWorkPortsNeedToBeLinked(render);
 
 op.setPortGroup("Masking", [inMulTex, inMulTexMask]);
+
+scale.setUiAttribs({ "title": "Line Scale" });
 
 textureOut.setUiAttribs({ "hidePort": true });
 
@@ -49,6 +55,11 @@ let mesh = null;
 
 let createMesh = true;
 let createTexture = true;
+
+scaleText.onChange = () =>
+{
+    vec3.set(vScale, scaleText.get(), scaleText.get(), scaleText.get());
+};
 
 aniso.onChange =
 tfilter.onChange = () =>
@@ -203,6 +214,7 @@ render.onTriggered = function ()
         vec[1] -= lineHeight.get();
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix, cgl.mMatrix, vec);
+        mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
 
         if (!disabled)mesh.render(cgl.getShader());
 

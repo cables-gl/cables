@@ -1424,7 +1424,7 @@ Shader.prototype._createProgram = function (vstr, fstr)
     {
         this._isValid = false;
         this._cgl.printError("shader _createProgram");
-        console.log("could not link shaderprogram");
+        this._log.error("could not link shaderprogram");
         return null;
     }
 
@@ -1761,7 +1761,6 @@ Shader.createShader = function (cgl, str, type, cglShader)
             {
                 const j = parseInt(i, 10) + 1;
                 const line = j + ": " + lines[i];
-                console.log(line);
 
                 let isBadLine = false;
                 for (const bj in badLines)
@@ -1783,7 +1782,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
             }
         }
 
-        console.warn(infoLog);
+        // console.warn(infoLog);
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
         if (cgl.patch.isEditorMode())console.log("Shader error ", cglShader._name, infoLog, this);
@@ -1791,7 +1790,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
 
-        cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
+        // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
 
         // this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());

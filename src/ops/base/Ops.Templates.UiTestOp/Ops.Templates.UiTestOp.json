@@ -124,17 +124,6 @@
             },
             {
                 "type": 1,
-                "name": "Throw Exception",
-                "group": "Crash"
-            },
-            {
-                "type": 0,
-                "name": "Array Exception",
-                "group": "Crash",
-                "subType": "number"
-            },
-            {
-                "type": 1,
                 "name": "Open Prompt",
                 "group": "Modal"
             },

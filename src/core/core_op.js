@@ -93,8 +93,7 @@ const Op = function ()
         set(v)
         {
             this.setTitle(v);
-            console.log("op set name? deprecated???", v);
-            // this._name = v;
+            console.warn("deprecated op set name ", v);
         }
     });
 
@@ -1206,7 +1205,7 @@ const Op = function ()
     {
         if (!this)
         {
-            console.log("no this...!!!");
+            console.error("no this...!!!");
             debugger;
             return;
         }

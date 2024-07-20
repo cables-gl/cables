@@ -179,7 +179,7 @@ Patch.prototype.renderOneFrame = function ()
  */
 Patch.prototype.getFPS = function ()
 {
-    console.log("deprecated getfps");
+    this._log.error("deprecated getfps");
     return 0;
 };
 
@@ -379,7 +379,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
                 if (opName)
                 {
                     identifier = opName;
-                    console.log("could not find op by id: " + opId);
+                    this._log.warn("could not find op by id: " + opId);
                 }
                 else
                 {
@@ -488,7 +488,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
 
         if (this._opIdCache[op.id])
         {
-            console.log("opid with id " + op.id + " already exists in patch!");
+            this._log.warn("opid with id " + op.id + " already exists in patch!");
             this.deleteOp(op.id); // strange with subpatch ops: why is this needed, somehow ops get added twice ???.....
             // return;
         }
@@ -579,7 +579,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 if (this.onDelete)
                 {
                     // todo: remove
-                    console.log("deprecated this.onDelete", this.onDelete);
+                    this._log.warn("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
 
@@ -603,7 +603,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found) console.log("core patch deleteop: not found...", opid);
+    if (!found) this._log.warn("core patch deleteop: not found...", opid);
 };
 
 Patch.prototype.getFrameNum = function ()
@@ -717,36 +717,17 @@ Patch.prototype.exec = function (timestamp)
  */
 Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, fromDeserialize)
 {
-    if (!op1)
-    {
-        console.warn("link: op1 is null ");
-        return;
-    }
-    if (!op2)
-    {
-        console.warn("link: op2 is null");
-        return;
-    }
+    if (!op1) return op1._log.warn("link: op1 is null ");
+    if (!op2) return op1._log.warn("link: op2 is null");
 
     const port1 = op1.getPort(port1Name, lowerCase);
     const port2 = op2.getPort(port2Name, lowerCase);
 
-    if (!port1)
-    {
-        console.warn("port1 not found! " + port1Name + "(" + op1.objName + ")");
-        return;
-    }
+    if (!port1) return op1._log.warn("port1 not found! " + port1Name + "(" + op1.objName + ")");
 
-    if (!port2)
-    {
-        console.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
-        return;
-    }
+    if (!port2) return op1._log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
 
-    if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2))
-    {
-        return false;
-    }
+    if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
 
     if (Link.canLink(port1, port2))
     {
@@ -844,6 +825,7 @@ Patch.prototype.getSubPatchOp = function (patchId, objName)
     for (const i in this.ops)
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
             return this.ops[i];
+
     return false;
 };
 
@@ -886,7 +868,7 @@ Patch.prototype.deSerialize = function (obj, options)
         }
         catch (e)
         {
-            console.log("[instancing error] op data:", opData, e);
+            this._log.error("[instancing error] op data:", opData, e);
             // throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
         }
 
@@ -904,7 +886,6 @@ Patch.prototype.deSerialize = function (obj, options)
                 const objPort = opData.portsIn[ipi];
                 if (objPort && objPort.hasOwnProperty("name"))
                 {
-                    // console.log("load poirt data,objPort", objPort.name, objPort);
                     const port = op.getPort(objPort.name);
 
                     if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
@@ -916,8 +897,6 @@ Patch.prototype.deSerialize = function (obj, options)
                     }
                     else
                     {
-                        // console.log("preserve", objPort.name, objPort.value, op.uiAttribs.title);
-
                         // if (port.uiAttribs.hasOwnProperty("title"))
                         // {
                         //     op.preservedPortTitles = op.preservedPortTitles || {};
@@ -1170,7 +1149,7 @@ Patch.prototype.setVariable = function (name, val)
     }
     else
     {
-        console.log("variable " + name + " not found!");
+        this._log.warn("variable " + name + " not found!");
     }
 };
 

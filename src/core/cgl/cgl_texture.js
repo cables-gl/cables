@@ -186,8 +186,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     if (!pixelFormatStr)
     {
-        console.log("no pixelformatstr!");
-        console.log((new Error()).stack);
+        cgl._log.error("no pixelformatstr!");
+        cgl._log.log((new Error()).stack);
         pixelFormatStr = Texture.PFORMATSTR_RGBA8UB;
     }
 
