@@ -25,11 +25,6 @@
     },
     "summary": "Converts a note to a frequency e.g. A4 to 440 ",
     "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836713187
-        }
+
     ]
 }

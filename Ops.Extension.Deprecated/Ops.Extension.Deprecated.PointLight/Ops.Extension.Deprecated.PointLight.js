@@ -74,7 +74,6 @@ exe.onTriggered = function ()
     vec3.transformMat4(mpos, [x.get(), y.get(), z.get()], cgl.mvMatrix);
     light = light || {};
 
-    // console.log(mpos);
     light.pos = mpos;
     light.mul = mul.get();
     light.type = 0;
@@ -82,10 +81,9 @@ exe.onTriggered = function ()
     if (attachment.isLinked())
     {
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix, cgl.mvMatrix,
-            [x.get(),
-                y.get(),
-                z.get()]);
+        mat4.translate(cgl.mvMatrix, cgl.mvMatrix, [x.get(),
+            y.get(),
+            z.get()]);
         attachment.trigger();
         cgl.popModelMatrix();
     }

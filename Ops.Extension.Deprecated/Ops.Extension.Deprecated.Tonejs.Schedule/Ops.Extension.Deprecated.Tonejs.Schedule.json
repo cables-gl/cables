@@ -24,11 +24,6 @@
     "id": "2b981db6-b64e-4bb5-a26a-8129fb48bdd5",
     "authorName": "pandur",
     "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719844400777
-        }
+
     ]
 }

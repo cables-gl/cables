@@ -203,9 +203,7 @@ function updateGeom()
             // maxDist=Math.max(maxDist,Math.abs(edge.vb.x-cell.site.x));
             // maxDist=Math.max(maxDist,Math.abs(edge.vb.y-cell.site.y));
             maxDist += Math.abs(triangleArea(
-                cell.site.x, cell.site.y, 0,
-                edge.va.x, edge.va.y, 0,
-                edge.vb.x, edge.vb.y, 0
+                cell.site.x, cell.site.y, 0, edge.va.x, edge.va.y, 0, edge.vb.x, edge.vb.y, 0
             ));
         }
 

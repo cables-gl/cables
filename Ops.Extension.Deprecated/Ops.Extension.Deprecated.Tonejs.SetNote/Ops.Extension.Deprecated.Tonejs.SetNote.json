@@ -23,11 +23,6 @@
     },
     "summary": "Change current note of connected instrument",
     "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836621667
-        }
+
     ]
 }
