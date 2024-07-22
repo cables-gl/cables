@@ -34,12 +34,6 @@
             "message": "Ops.Vars.SetVariableByTrigger renamed to Ops.Deprecated.Vars.SetVariableByTrigger",
             "author": "pandur",
             "date": 1628149977365
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833896387
         }
     ]
 }

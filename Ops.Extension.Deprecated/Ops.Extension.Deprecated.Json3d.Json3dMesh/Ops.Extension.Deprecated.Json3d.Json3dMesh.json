@@ -74,12 +74,6 @@
             "message": "Ops.Json3d.Json3dMesh renamed to Ops.Deprecated.Json3d.Json3dMesh",
             "author": "pandur",
             "date": 1567674037157
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832811177
         }
     ],
     "issues": "",

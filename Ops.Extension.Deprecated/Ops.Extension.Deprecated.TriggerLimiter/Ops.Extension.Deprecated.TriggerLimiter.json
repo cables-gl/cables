@@ -38,12 +38,6 @@
             "message": "Ops.TriggerLimiter renamed to Ops.Deprecated.TriggerLimiter",
             "author": "pandur",
             "date": 1560417289119
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719834276901
         }
     ]
 }

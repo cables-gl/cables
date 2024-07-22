@@ -30,12 +30,6 @@
             "message": "Ops.Admin.CableConnect.SendPatchChanges renamed to Ops.Deprecated.CableConnect.SendPatchChanges",
             "author": "pandur",
             "date": 1623913732652
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835895448
         }
     ]
 }

@@ -34,12 +34,6 @@
             "message": "Ops.String.HashIdDecode renamed to Ops.Deprecated.String.HashIdDecode",
             "author": "pandur",
             "date": 1671005976972
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719834079485
         }
     ]
 }

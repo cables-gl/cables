@@ -45,12 +45,6 @@
             "message": "Ops.Json3d.Mesh renamed to Ops.Deprecated.Json3d.Mesh",
             "author": "pandur",
             "date": 1654588105783
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832818338
         }
     ]
 }

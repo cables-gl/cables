@@ -82,12 +82,6 @@
             "message": "Ops.Gl.Meshes.RandomPointSphere renamed to Ops.Deprecated.Gl.Meshes.RandomPointSphere",
             "author": "pandur",
             "date": 1596093988609
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719481490174
         }
     ]
 }

@@ -217,12 +217,6 @@
             "message": "Ops.Gl.Vr.MainloopWebVr renamed to Ops.Deprecated.Gl.Vr.MainloopWebVr",
             "author": "pandur",
             "date": 1655965617379
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835129375
         }
     ]
 }

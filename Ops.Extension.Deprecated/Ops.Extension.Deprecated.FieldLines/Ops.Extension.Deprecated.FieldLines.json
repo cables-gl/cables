@@ -39,12 +39,6 @@
             "message": "Ops.Gl2.ForceField.FieldLines renamed to Ops.Deprecated.Gl2.ForceField.FieldLines",
             "author": "pandur",
             "date": 1587376183932
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835723461
         }
     ]
 }

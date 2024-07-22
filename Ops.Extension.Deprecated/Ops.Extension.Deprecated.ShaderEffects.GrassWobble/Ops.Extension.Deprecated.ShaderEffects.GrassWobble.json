@@ -42,12 +42,6 @@
             "message": "Ops.Gl.ShaderEffects.GrassWobble renamed to Ops.Deprecated.Gl.ShaderEffects.GrassWobble",
             "author": "pandur",
             "date": 1654584067535
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833887585
         }
     ]
 }

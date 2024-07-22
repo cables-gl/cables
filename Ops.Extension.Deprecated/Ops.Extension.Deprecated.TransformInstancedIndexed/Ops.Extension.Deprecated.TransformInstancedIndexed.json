@@ -95,12 +95,6 @@
             "message": "Ops.Admin.TransformInstancedIndexed renamed to Ops.Deprecated.Admin.TransformInstancedIndexed",
             "author": "pandur",
             "date": 1628150398677
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719481328813
         }
     ]
 }

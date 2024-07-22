@@ -56,12 +56,6 @@
             "message": "Ops.Devices.Midi.MidiKeyPressed renamed to Ops.Deprecated.Devices.Midi.MidiKeyPressed",
             "author": "pandur",
             "date": 1572947852944
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835779127
         }
     ]
 }

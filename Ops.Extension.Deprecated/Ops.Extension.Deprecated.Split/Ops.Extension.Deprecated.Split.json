@@ -39,12 +39,6 @@
             "message": "Ops.String.Split renamed to Ops.Deprecated.String.Split",
             "author": "pandur",
             "date": 1671004284675
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719843287041
         }
     ],
     "id": "a9d03d16-3761-4281-9d33-f1a4bb2d1a0a",

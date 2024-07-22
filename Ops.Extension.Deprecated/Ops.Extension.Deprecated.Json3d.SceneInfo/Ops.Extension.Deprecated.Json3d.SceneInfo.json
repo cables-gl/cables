@@ -66,12 +66,6 @@
             "message": "Ops.Json3d.SceneInfo renamed to Ops.Deprecated.Json3d.SceneInfo",
             "author": "pandur",
             "date": 1654588564480
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832677502
         }
     ]
 }

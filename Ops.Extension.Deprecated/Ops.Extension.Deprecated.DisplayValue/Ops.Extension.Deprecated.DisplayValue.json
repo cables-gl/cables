@@ -28,12 +28,6 @@
             "message": "Ops.Exp.Ui.DisplayValue renamed to Ops.Deprecated.Exp.Ui.DisplayValue",
             "author": "pandur",
             "date": 1628150449447
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835747213
         }
     ]
 }

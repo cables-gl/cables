@@ -33,12 +33,6 @@
             "message": "Ops.String.StringBreak_v2 renamed to Ops.Deprecated.String.StringBreak_v2",
             "author": "pandur",
             "date": 1596094375376
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832277317
         }
     ]
 }

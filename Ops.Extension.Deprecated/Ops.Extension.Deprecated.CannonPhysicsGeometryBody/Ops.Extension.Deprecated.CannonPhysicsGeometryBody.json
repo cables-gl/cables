@@ -25,12 +25,6 @@
             "message": "Ops.Physics.Cannon.CannonPhysicsGeometryBody renamed to Ops.Deprecated.Physics.Cannon.CannonPhysicsGeometryBody",
             "author": "pandur",
             "date": 1671007653886
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719479664675
         }
     ],
     "authorName": "pandur",

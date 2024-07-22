@@ -55,12 +55,6 @@
             "message": "Ops.Gl.Phyllotaxis renamed to Ops.Deprecated.Gl.Phyllotaxis",
             "author": "pandur",
             "date": 1632209032739
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833432678
         }
     ]
 }

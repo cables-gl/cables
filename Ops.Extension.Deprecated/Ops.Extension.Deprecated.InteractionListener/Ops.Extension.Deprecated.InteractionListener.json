@@ -38,12 +38,6 @@
             "type": "deprecation",
             "author": "pandur",
             "date": 1671035420600
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480515992
         }
     ]
 }

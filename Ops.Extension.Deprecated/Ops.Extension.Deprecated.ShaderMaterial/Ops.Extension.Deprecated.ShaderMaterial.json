@@ -33,12 +33,5 @@
     "authorName": "pandur",
     "id": "f9aacdd4-06da-4bae-bea5-52dd5e7638dd",
     "created": 1505309845176,
-    "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836062878
-        }
-    ]
+    "changelog": []
 }

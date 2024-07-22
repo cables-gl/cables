@@ -70,12 +70,6 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694676084037
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480318679
         }
     ],
     "coreLibs": [

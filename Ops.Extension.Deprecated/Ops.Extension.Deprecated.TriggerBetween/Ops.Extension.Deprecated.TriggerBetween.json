@@ -45,12 +45,6 @@
             "message": "Ops.Trigger.TriggerBetween renamed to Ops.Deprecated.Trigger.TriggerBetween",
             "author": "pandur",
             "date": 1638260885248
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480507376
         }
     ]
 }

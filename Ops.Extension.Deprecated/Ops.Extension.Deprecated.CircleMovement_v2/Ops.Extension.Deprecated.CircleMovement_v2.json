@@ -12,12 +12,6 @@
             "message": "Ops.Gl.Matrix.CircleMovement_v2 renamed to Ops.Deprecated.Gl.Matrix.CircleMovement_v2",
             "author": "pandur",
             "date": 1654584241926
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719479676610
         }
     ],
     "layout": {

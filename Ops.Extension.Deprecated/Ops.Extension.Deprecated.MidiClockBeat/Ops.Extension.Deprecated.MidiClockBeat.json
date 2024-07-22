@@ -51,12 +51,6 @@
             "message": "Ops.Devices.Midi.MidiClockBeat renamed to Ops.Deprecated.Devices.Midi.MidiClockBeat",
             "author": "pandur",
             "date": 1560334363067
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835798826
         }
     ]
 }

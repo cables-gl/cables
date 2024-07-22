@@ -79,12 +79,6 @@
             "message": "Ops.Audio.Bang renamed to Ops.Deprecated.Audio.Bang",
             "author": "pandur",
             "date": 1596093948922
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832258597
         }
     ]
 }

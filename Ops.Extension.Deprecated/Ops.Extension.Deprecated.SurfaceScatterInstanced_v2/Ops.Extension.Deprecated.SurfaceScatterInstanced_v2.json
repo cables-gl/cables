@@ -63,12 +63,6 @@
             "message": "Ops.Gl.SurfaceScatterInstanced_v2 renamed to Ops.Deprecated.Gl.SurfaceScatterInstanced_v2",
             "author": "pandur",
             "date": 1596094151611
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833289438
         }
     ]
 }

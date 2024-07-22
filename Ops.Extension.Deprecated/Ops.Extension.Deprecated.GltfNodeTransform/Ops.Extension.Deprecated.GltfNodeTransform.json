@@ -10,12 +10,6 @@
             "message": "Ops.Gl.GLTF.GltfNodeTransform renamed to Ops.Deprecated.Gl.GLTF.GltfNodeTransform",
             "author": "pandur",
             "date": 1581323224671
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719481292048
         }
     ],
     "authorName": "pandur",

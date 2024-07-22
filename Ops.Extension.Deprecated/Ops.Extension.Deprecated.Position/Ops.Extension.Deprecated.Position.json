@@ -15,12 +15,6 @@
             "message": "Ops.Admin.Gl.Position renamed to Ops.Deprecated.Gl.Position",
             "author": "pandur",
             "date": 1623913573679
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719831047331
         }
     ],
     "authorName": "pandur",

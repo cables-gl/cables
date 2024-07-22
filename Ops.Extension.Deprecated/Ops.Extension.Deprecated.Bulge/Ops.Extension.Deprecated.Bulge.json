@@ -47,12 +47,6 @@
             "message": "Ops.Gl.ShaderEffects.Bulge renamed to Ops.Deprecated.Gl.ShaderEffects.Bulge",
             "author": "pandur",
             "date": 1671005370381
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833329727
         }
     ]
 }

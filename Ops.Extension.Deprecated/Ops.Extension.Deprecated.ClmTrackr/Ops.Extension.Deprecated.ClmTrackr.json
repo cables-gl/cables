@@ -8,12 +8,6 @@
             "message": "created op",
             "author": "stephan",
             "date": 1548867400749
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719479410931
         }
     ],
     "authorName": "stephan",

@@ -107,12 +107,6 @@
             "message": "Ops.WebAudio.Waveform renamed to Ops.Deprecated.WebAudio.Waveform",
             "author": "pandur",
             "date": 1608539670715
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836787122
         }
     ]
 }

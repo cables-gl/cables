@@ -41,12 +41,5 @@
     },
     "updated": 1540296734465,
     "created": 1540295388441,
-    "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839619167
-        }
-    ]
+    "changelog": []
 }

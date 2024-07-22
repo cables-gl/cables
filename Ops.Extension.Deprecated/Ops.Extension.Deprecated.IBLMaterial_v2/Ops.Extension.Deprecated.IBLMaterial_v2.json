@@ -107,12 +107,6 @@
             "message": "Ops.Gl.Shader.IBLMaterial_v2 renamed to Ops.Deprecated.Gl.Shader.IBLMaterial_v2",
             "author": "pandur",
             "date": 1654583809175
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833524428
         }
     ]
 }

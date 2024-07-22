@@ -38,12 +38,6 @@
             "message": "Ops.Gl.ShaderEffects.CubeMapReflection renamed to Ops.Deprecated.Gl.ShaderEffects.CubeMapReflection",
             "author": "pandur",
             "date": 1632208978718
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835671020
         }
     ]
 }

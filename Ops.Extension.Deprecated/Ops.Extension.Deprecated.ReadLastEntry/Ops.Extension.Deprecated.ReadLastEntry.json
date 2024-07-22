@@ -68,12 +68,6 @@
             "message": "Ops.Api.ThingSpeak.ReadLastEntry renamed to Ops.Deprecated.Api.ThingSpeak.ReadLastEntry",
             "author": "pandur",
             "date": 1666622238111
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839918808
         }
     ]
 }

@@ -58,12 +58,6 @@
             "message": "Ops.WebAudio.MultiIn renamed to Ops.Deprecated.WebAudio.MultiIn",
             "author": "pandur",
             "date": 1608539699328
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839584167
         }
     ]
 }

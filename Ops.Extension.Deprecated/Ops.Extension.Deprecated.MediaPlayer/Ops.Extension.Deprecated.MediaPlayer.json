@@ -97,12 +97,6 @@
             "message": "Ops.WebAudio.MediaPlayer renamed to Ops.Deprecated.WebAudio.MediaPlayer",
             "author": "pandur",
             "date": 1610524288625
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836807913
         }
     ]
 }

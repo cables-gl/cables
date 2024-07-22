@@ -34,12 +34,6 @@
             "message": "Ops.Json3d.SetMaterial renamed to Ops.Deprecated.Json3d.SetMaterial",
             "author": "pandur",
             "date": 1654588187996
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832724910
         }
     ]
 }

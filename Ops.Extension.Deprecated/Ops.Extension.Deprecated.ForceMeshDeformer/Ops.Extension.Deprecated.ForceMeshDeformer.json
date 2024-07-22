@@ -26,12 +26,6 @@
             "message": "Ops.Gl2.ForceField.ForceMeshDeformer renamed to Ops.Deprecated.Gl2.ForceField.ForceMeshDeformer",
             "author": "pandur",
             "date": 1587376130797
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835330298
         }
     ]
 }

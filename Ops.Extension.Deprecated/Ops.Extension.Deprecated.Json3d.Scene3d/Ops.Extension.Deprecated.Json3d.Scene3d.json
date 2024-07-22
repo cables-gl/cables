@@ -32,12 +32,6 @@
             "message": "Ops.Json3d.Scene3d renamed to Ops.Deprecated.Json3d.Scene3d",
             "author": "pandur",
             "date": 1654588384921
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832654688
         }
     ],
     "exampleProjectId": "00VeKO"

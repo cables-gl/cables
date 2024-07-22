@@ -33,12 +33,6 @@
             "message": "Ops.Exp.MatrixToCssTransform renamed to Ops.Deprecated.Exp.MatrixToCssTransform",
             "author": "pandur",
             "date": 1628150955348
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719834195985
         }
     ]
 }

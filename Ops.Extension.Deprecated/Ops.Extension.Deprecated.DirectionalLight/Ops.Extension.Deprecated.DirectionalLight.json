@@ -15,12 +15,6 @@
             "message": "Ops.Admin.DirectionalLight renamed to Ops.Deprecated.DirectionalLight",
             "author": "pandur",
             "date": 1571928775787
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719479471619
         }
     ],
     "authorName": "cables",

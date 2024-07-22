@@ -41,18 +41,6 @@
             "message": "Ops.Admin.CableConnect.CableConnection renamed to Ops.Deprecated.CableConnect.CableConnection",
             "author": "pandur",
             "date": 1623913714473
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832305133
-        },
-        {
-            "message": "renamed Ops.Deprecated.CableConnect.CableConnection to Ops.Extension.Deprecated.CableConnection",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1719832310073
         }
     ]
 }

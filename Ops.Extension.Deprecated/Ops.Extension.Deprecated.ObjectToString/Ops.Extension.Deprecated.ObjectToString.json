@@ -26,12 +26,6 @@
             "message": "Ops.String.ObjectToString renamed to Ops.Deprecated.String.ObjectToString",
             "author": "pandur",
             "date": 1628150654870
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719481506699
         }
     ]
 }

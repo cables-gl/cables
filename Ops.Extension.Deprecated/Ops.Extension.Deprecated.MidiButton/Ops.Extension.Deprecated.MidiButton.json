@@ -57,12 +57,6 @@
             "message": "Ops.Dreprecated.Devices.Midi.MidiButton renamed to Ops.Deprecated.Devices.Midi.MidiButton",
             "author": "pandur",
             "date": 1567675245254
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835773168
         }
     ]
 }

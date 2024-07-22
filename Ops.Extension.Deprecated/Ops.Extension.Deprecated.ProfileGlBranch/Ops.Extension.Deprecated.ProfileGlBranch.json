@@ -15,12 +15,6 @@
             "message": "Ops.Admin.Debug.ProfileGlBranch renamed to Ops.Deprecated.Debug.ProfileGlBranch",
             "author": "pandur",
             "date": 1623914197028
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719481319006
         }
     ],
     "authorName": "pandur",

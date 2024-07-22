@@ -47,12 +47,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1711463607262
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835729267
         }
     ],
     "youtubeids": [

@@ -28,12 +28,6 @@
             "message": "Ops.Json3d.ClonedMesh renamed to Ops.Deprecated.Json3d.ClonedMesh",
             "author": "pandur",
             "date": 1654587872940
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832732351
         }
     ]
 }

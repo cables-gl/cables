@@ -11,12 +11,6 @@
             "type": "deprecation",
             "author": "stephan",
             "date": 1707316031100
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480329119
         }
     ],
     "layout": {

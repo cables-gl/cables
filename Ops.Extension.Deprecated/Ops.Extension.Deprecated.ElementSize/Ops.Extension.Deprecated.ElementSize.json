@@ -5,12 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1574152979661
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719481263678
         }
     ],
     "authorName": "pandur",

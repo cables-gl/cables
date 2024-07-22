@@ -21,12 +21,6 @@
             "message": "Ops.Sidebar.SidebarAsObject renamed to Ops.Deprecated.Sidebar.SidebarAsObject",
             "author": "pandur",
             "date": 1596093718836
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833459955
         }
     ]
 }

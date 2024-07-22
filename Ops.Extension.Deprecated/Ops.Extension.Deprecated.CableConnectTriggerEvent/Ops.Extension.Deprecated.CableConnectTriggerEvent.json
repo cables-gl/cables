@@ -32,12 +32,6 @@
             "message": "Ops.Admin.CableConnect.CableConnectTriggerEvent renamed to Ops.Deprecated.CableConnect.CableConnectTriggerEvent",
             "author": "pandur",
             "date": 1623913764294
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835968588
         }
     ]
 }

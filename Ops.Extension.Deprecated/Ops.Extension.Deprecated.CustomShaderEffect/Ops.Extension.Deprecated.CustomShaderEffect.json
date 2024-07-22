@@ -31,12 +31,5 @@
     "docs": {
         "ports": []
     },
-    "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833835003
-        }
-    ]
+    "changelog": []
 }

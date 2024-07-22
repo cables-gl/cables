@@ -102,12 +102,6 @@
             "message": "Ops.Gl.ShaderEffects.SplineRepeatInstanced renamed to Ops.Deprecated.Gl.ShaderEffects.SplineRepeatInstanced_v2",
             "author": "pandur",
             "date": 1638260826375
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833317011
         }
     ]
 }

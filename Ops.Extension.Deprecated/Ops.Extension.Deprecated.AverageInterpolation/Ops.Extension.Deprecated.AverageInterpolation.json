@@ -63,12 +63,6 @@
             "message": "Ops.Anim.AverageInterpolation renamed to Ops.Deprecated.Anim.AverageInterpolation",
             "author": "pandur",
             "date": 1628151407647
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833371634
         }
     ]
 }

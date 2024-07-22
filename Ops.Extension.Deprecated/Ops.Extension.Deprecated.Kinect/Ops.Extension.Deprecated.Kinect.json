@@ -36,12 +36,6 @@
             "message": "Ops.Admin.Kinect renamed to Ops.Deprecated.Admin.Kinect",
             "author": "pandur",
             "date": 1628150417841
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836122906
         }
     ]
 }

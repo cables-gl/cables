@@ -97,12 +97,6 @@
             "message": "Ops.Json3d.Mesh3d renamed to Ops.Deprecated.Json3d.Mesh3d",
             "author": "pandur",
             "date": 1654588002170
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832478398
         }
     ],
     "summary": "Load a 3D mesh - model into a scene , e.g. .FBX. DAE .OBJ (was: json3dmesh)",

@@ -27,18 +27,6 @@
             "message": "Ops.Gl.TextureEffects.ClearAlpha renamed to Ops.Deprecated.Gl.TextureEffects.ClearAlpha",
             "author": "pandur",
             "date": 1606807538641
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719831261913
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719831642489
         }
     ]
 }

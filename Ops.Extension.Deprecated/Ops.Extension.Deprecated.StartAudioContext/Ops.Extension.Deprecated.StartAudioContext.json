@@ -46,12 +46,6 @@
             "message": "fixed - removed a user op from tim which was causing the patch to not load for users",
             "author": "andro",
             "date": 1549890067562
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719840074677
         }
     ]
 }

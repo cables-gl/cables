@@ -97,12 +97,6 @@
             "message": "Ops.Net.Mqtt.Mqtt_v2 renamed to Ops.Deprecated.Net.Mqtt.Mqtt_v2",
             "author": "pandur",
             "date": 1671004957234
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839551871
         }
     ]
 }

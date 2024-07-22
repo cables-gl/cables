@@ -34,12 +34,6 @@
             "message": "Ops.Gl.Meshes.VoronoiPaths renamed to Ops.Deprecated.Gl.Meshes.VoronoiPaths",
             "author": "pandur",
             "date": 1606807608826
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835993007
         }
     ]
 }

@@ -79,12 +79,6 @@
             "message": "Ops.Net.Mqtt.MqttReceive renamed to Ops.Deprecated.Net.Mqtt.MqttReceive",
             "author": "pandur",
             "date": 1671005023843
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839593927
         }
     ]
 }

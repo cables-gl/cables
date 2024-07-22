@@ -93,18 +93,6 @@
             "message": "Ops.WebAudio.AudioPlayer renamed to Ops.Deprecated.WebAudio.AudioPlayer",
             "author": "pandur",
             "date": 1610524438744
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832335345
-        },
-        {
-            "message": "renamed Ops.Deprecated.WebAudio.AudioPlayer to Ops.Extension.Deprecated.AudioPlayer",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1719832347351
         }
     ]
 }

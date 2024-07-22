@@ -34,12 +34,6 @@
             "message": "Ops.Json.ObjectKeyArray renamed to Ops.Deprecated.Json.ObjectKeyArray",
             "author": "pandur",
             "date": 1587375933391
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835933567
         }
     ]
 }

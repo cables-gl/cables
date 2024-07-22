@@ -42,12 +42,6 @@
             "message": "Ops.Math.ApproachInterpolation renamed to Ops.Deprecated.Math.ApproachInterpolation",
             "author": "pandur",
             "date": 1638260617781
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835740985
         }
     ]
 }

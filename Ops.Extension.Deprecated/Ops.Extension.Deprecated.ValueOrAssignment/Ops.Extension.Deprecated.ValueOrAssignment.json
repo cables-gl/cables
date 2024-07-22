@@ -30,12 +30,6 @@
             "message": "Ops.Value.ValueOrAssignment renamed to Ops.Deprecated.Value.ValueOrAssignment",
             "author": "pandur",
             "date": 1596093966744
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835363760
         }
     ]
 }

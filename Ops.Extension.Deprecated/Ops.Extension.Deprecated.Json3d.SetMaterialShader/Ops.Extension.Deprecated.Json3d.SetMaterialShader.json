@@ -31,12 +31,6 @@
             "message": "Ops.Json3d.SetMaterialShader renamed to Ops.Deprecated.Json3d.SetMaterialShader",
             "author": "pandur",
             "date": 1654588533445
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832837345
         }
     ]
 }

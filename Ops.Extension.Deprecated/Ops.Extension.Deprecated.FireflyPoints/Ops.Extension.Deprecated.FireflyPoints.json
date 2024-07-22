@@ -62,12 +62,5 @@
             }
         ]
     },
-    "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719833347568
-        }
-    ]
+    "changelog": []
 }

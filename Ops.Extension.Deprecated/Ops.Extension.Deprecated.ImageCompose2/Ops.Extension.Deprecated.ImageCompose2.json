@@ -81,12 +81,6 @@
             "message": "Ops.Exp.Gl.TextureEffects.ImageCompose renamed to Ops.Deprecated.Exp.Gl.TextureEffects.ImageCompose2",
             "author": "pandur",
             "date": 1606807817691
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835785718
         }
     ],
     "summary": "Compose Images and effects as layers to generate new Images",

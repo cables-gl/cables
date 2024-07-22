@@ -43,12 +43,6 @@
             "message": "Ops.Net.AjaxRequestString renamed to Ops.Deprecated.Net.AjaxRequestString",
             "author": "pandur",
             "date": 1596093839117
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719834299509
         }
     ]
 }

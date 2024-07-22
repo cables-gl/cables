@@ -51,12 +51,6 @@
             "message": "Ops.Devices.Midi.MidiSend renamed to Ops.Deprecated.Devices.Midi.MidiSend",
             "author": "pandur",
             "date": 1572947984690
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835562479
         }
     ]
 }

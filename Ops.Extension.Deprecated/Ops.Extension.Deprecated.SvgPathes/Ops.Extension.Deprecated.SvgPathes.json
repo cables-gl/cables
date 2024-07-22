@@ -46,12 +46,6 @@
             "message": "Ops.Gl.SvgPathes renamed to Ops.Deprecated.Gl.SvgPathes",
             "author": "pandur",
             "date": 1654584184053
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835418922
         }
     ]
 }

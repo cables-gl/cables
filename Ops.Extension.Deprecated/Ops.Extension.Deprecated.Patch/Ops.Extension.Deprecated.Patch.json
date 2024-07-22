@@ -14,12 +14,5 @@
     "summary": "Creates a sub patch",
     "id": "aa19a477-da3e-4b84-9919-22a73fd78647",
     "authorName": "pandur",
-    "changelog": [
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719843168426
-        }
-    ]
+    "changelog": []
 }

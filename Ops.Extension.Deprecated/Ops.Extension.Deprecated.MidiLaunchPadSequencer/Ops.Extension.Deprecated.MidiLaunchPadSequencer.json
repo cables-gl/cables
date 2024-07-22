@@ -40,12 +40,6 @@
             "message": "Ops.Devices.Midi.LaunchPadSequencer renamed to Ops.Deprecated.Devices.Midi.LaunchPadSequencer",
             "author": "pandur",
             "date": 1596093793586
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719834136695
         }
     ]
 }

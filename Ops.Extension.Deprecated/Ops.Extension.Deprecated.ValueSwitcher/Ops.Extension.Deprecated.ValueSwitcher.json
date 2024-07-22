@@ -113,12 +113,6 @@
             "message": "Ops.Value.ValueSwitcher renamed to Ops.Deprecated.Value.ValueSwitcher",
             "author": "pandur",
             "date": 1560335249961
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839866299
         }
     ]
 }

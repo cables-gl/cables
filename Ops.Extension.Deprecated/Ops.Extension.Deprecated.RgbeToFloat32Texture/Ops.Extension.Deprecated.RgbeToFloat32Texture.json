@@ -35,12 +35,6 @@
             "message": "Ops.Gl.Textures.RgbeToFloat32Texture renamed to Ops.Deprecated.Gl.Textures.RgbeToFloat32Texture",
             "author": "pandur",
             "date": 1654584335564
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480288315
         }
     ],
     "coreLibs": [

@@ -36,12 +36,6 @@
             "message": "Ops.Json3d.QuaternionChannel renamed to Ops.Deprecated.Json3d.QuaternionChannel",
             "author": "pandur",
             "date": 1654588504207
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832620808
         }
     ]
 }

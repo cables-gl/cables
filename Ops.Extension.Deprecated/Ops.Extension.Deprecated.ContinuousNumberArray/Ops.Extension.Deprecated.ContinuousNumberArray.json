@@ -23,12 +23,6 @@
             "message": "Ops.Array.ContinuousNumberArray renamed to Ops.Deprecated.Array.ContinuousNumberArray",
             "author": "pandur",
             "date": 1561124373400
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835999916
         }
     ]
 }

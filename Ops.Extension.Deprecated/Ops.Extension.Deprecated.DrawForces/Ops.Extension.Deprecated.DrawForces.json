@@ -36,12 +36,6 @@
             "message": "Ops.Gl2.ForceField.DrawForces renamed to Ops.Deprecated.Gl2.ForceField.DrawForces",
             "author": "pandur",
             "date": 1587376164056
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480554320
         }
     ]
 }

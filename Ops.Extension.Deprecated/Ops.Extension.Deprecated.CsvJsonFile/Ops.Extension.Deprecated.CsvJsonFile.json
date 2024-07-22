@@ -42,12 +42,6 @@
             "message": "Ops.Json.CsvJsonFile renamed to Ops.Deprecated.Json.CsvJsonFile",
             "author": "pandur",
             "date": 1610524250722
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719834175183
         }
     ]
 }

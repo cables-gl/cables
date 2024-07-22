@@ -77,12 +77,6 @@
             "message": "Ops.Api.ThingSpeak.Write renamed to Ops.Deprecated.Api.ThingSpeak.Write",
             "author": "pandur",
             "date": 1666622217708
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839902377
         }
     ]
 }

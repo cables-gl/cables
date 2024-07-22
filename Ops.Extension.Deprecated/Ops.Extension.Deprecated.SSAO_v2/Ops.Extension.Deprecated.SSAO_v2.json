@@ -104,12 +104,6 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694675696476
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719480253090
         }
     ],
     "exampleProjectId": "4d2t4d",

@@ -61,12 +61,6 @@
             "message": "Ops.Json3d.Bones.BoneSystem renamed to Ops.Deprecated.Json3d.Bones.BoneSystem",
             "author": "pandur",
             "date": 1654587833998
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832686578
         }
     ]
 }

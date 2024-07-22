@@ -96,12 +96,6 @@
             "message": "Ops.Gl.Shader.Shader2Textures renamed to Ops.Deprecated.Gl.Shader.Shader2Textures",
             "author": "pandur",
             "date": 1628150527709
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719832413123
         }
     ]
 }

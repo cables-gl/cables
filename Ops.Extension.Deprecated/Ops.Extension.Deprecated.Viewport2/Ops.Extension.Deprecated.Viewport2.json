@@ -46,12 +46,6 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694676679639
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719835843959
         }
     ]
 }

@@ -97,12 +97,6 @@
             "message": "Ops.WebAudio.DynamicsCompressor renamed to Ops.Deprecated.WebAudio.DynamicsCompressor",
             "author": "pandur",
             "date": 1608539584574
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719839573589
         }
     ]
 }

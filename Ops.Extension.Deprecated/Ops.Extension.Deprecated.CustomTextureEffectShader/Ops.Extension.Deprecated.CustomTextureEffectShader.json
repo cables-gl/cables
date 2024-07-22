@@ -45,12 +45,6 @@
             "message": "Ops.Gl.TextureEffects.CustomTextureEffectShader renamed to Ops.Deprecated.Gl.TextureEffects.CustomTextureEffectShader",
             "author": "pandur",
             "date": 1665557282781
-        },
-        {
-            "message": "op was deprecated",
-            "type": "deprecation",
-            "author": "pandur",
-            "date": 1719836054799
         }
     ]
 }
