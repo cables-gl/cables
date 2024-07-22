@@ -46,7 +46,7 @@
             "message": "Ops.WebAudio.AnalyserTexture renamed to Ops.Deprecated.WebAudio.AnalyserTexture",
             "author": "pandur",
             "date": 1608540153409
-        },
+        }
 
     ]
 }
