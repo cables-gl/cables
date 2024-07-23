@@ -405,7 +405,7 @@ Anim.prototype.easingFromString = function (str)
 
 Anim.prototype.createPort = function (op, title, cb)
 {
-    const port = op.inDropDown(title, CONSTANTS.ANIM.EASINGS);
+    const port = op.inDropDown(title, CONSTANTS.ANIM.EASINGS, "Cubic Out");
 
     // const port = op.addInPort(
     //     new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
