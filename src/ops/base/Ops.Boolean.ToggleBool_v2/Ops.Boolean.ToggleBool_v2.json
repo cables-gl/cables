@@ -18,6 +18,10 @@
         ],
         "portsOut": [
             {
+                "type": 1,
+                "name": "Next"
+            },
+            {
                 "type": 0,
                 "name": "result",
                 "subType": "boolean"
@@ -51,17 +55,18 @@
             "date": 1669884037219
         },
         {
-            "message": "Ops.User.pandur.ToggleBoolV2 renamed to Ops.Boolean.ToggleBool_v2",
-            "author": "pandur",
-            "date": 1669884155792
-        },
-        {
             "message": "output default value on patch load",
             "type": "bugfix",
             "author": "pandur",
             "date": 1671034318241
+        },
+        {
+            "message": "Add output trigger which is triggered after any input was triggered",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721724788159
         }
     ],
-
-    "exampleProjectId": "UxJNHj"
+    "exampleProjectId": "UxJNHj",
+    "license": "MIT"
 }

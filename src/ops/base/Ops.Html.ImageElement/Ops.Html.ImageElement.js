@@ -11,11 +11,23 @@ op.onDelete = removeEle;
 inClass.onChange = updateClass;
 inStyle.onChange = updateStyle;
 
-filename.onChange = () =>
+filename.onChange = filenameChanged;
+
+function filenameChanged()
 {
     element.setAttribute("src", filename.get());
+    op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     element.setAttribute("crossOrigin", "anonymous");
     outImage.setRef(element);
+}
+
+op.onFileChanged = function (fn)
+{
+    if (filename.get() && filename.get().indexOf(fn) > -1)
+    {
+        // realReload(true);
+        filenameChanged();
+    }
 };
 
 function removeEle()
@@ -31,8 +43,6 @@ inDisplay.onChange = () =>
 {
     if (inDisplay.get() == "not set") element.style.removeProperty("display");
     else element.style.display = inDisplay.get();
-
-    // if(!inActive.get())removeE
 };
 
 function removeClasses()

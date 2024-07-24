@@ -11,6 +11,7 @@ const
 canv.width = canv.height = 256;
 
 const ctx = canv.getContext("2d");
+outEle.setRef(canv);
 
 inWidth.onChange =
 inHeight.onChange = () =>
@@ -32,5 +33,4 @@ exec.onTriggered = () =>
 
     next.trigger();
     op.patch.frameStore.canvasCompose = null;
-    outEle.setRef(canv);
 };

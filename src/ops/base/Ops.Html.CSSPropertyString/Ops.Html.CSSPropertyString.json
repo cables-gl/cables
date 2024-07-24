@@ -12,24 +12,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element",
                 "group": "Element"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Property",
                 "group": "Attributes"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Value",
                 "group": "Attributes"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "HTML Element"
             }
         ]
@@ -55,5 +60,6 @@
             }
         ]
     },
-    "exampleProjectId": "6leHfe"
+    "exampleProjectId": "6leHfe",
+    "license": "MIT"
 }
