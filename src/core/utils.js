@@ -406,8 +406,9 @@ String.prototype.contains = String.prototype.contains || function (searchStr)
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
-export const cacheBust = function (url)
+export const cacheBust = function (url = "")
 {
+    if (!url) return "";
     if (url.startsWith("data:")) return;
     if (url.contains("?")) url += "&";
     else url += "?";
