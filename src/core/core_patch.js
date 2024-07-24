@@ -717,14 +717,13 @@ Patch.prototype.exec = function (timestamp)
  */
 Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, fromDeserialize)
 {
-    if (!op1) return op1._log.warn("link: op1 is null ");
-    if (!op2) return op1._log.warn("link: op2 is null");
+    if (!op1) return this._log.warn("link: op1 is null ");
+    if (!op2) return this._log.warn("link: op2 is null");
 
     const port1 = op1.getPort(port1Name, lowerCase);
     const port2 = op2.getPort(port2Name, lowerCase);
 
     if (!port1) return op1._log.warn("port1 not found! " + port1Name + "(" + op1.objName + ")");
-
     if (!port2) return op1._log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
 
     if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
