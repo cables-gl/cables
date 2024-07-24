@@ -78,7 +78,7 @@ function _core_libs_copy(done)
     const source = "build/libs/";
     const target = "../cables_api/public/libs_core/";
 
-    if (!process.env.cables_standalone)
+    if (!process.env.cables_standalone || process.env.cables_standalone === "false")
     {
         if (!fs.existsSync(target)) fs.mkdirSync(target, { "recursive": true });
         if (!fs.existsSync(source)) fs.mkdirSync(source, { "recursive": true });
