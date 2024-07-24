@@ -93,7 +93,7 @@ const Op = function ()
         set(v)
         {
             this.setTitle(v);
-            console.warn("deprecated op set name ", v);
+            this._log.warn("deprecated op set name ", v);
         }
     });
 
@@ -131,8 +131,8 @@ const Op = function ()
 
     Op.prototype.setTitle = function (title)
     {
-        // console.log("settitle", title);
-        // console.log(
+        // this._log.log("settitle", title);
+        // this._log.log(
         //     (new Error()).stack
         // );
 
@@ -956,7 +956,7 @@ const Op = function ()
         p.set = function (b)
         {
             this.setValue(b ? 1 : 0);
-            // console.log("bool set", b, this.get());
+            // this._log.log("bool set", b, this.get());
         }.bind(p);
 
         if (v !== undefined) p.set(v);
@@ -1198,14 +1198,14 @@ const Op = function ()
 
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.log, [console, args]);// eslint-disable-line
+        Function.prototype.apply.apply(this._log.log, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.error = Op.prototype.logError = function ()
     {
         if (!this)
         {
-            console.error("no this...!!!");
+            this._log.error("no this...!!!");
             debugger;
             return;
         }
@@ -1215,7 +1215,7 @@ const Op = function ()
         // if (this.patch.silent) return;
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
+        Function.prototype.apply.apply(this._log.error, [console, args]);// eslint-disable-line
         if (window.gui) window.gui.emitEvent("opLogEvent", this.objName, "error", arguments);
     };
 
@@ -1227,7 +1227,7 @@ const Op = function ()
         // if (this.patch.silent) return;
         const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.warn, [console, args]);// eslint-disable-line
+        Function.prototype.apply.apply(this._log.warn, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
@@ -1239,7 +1239,7 @@ const Op = function ()
 
         const args = ["[" + initiator + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.info, [console, args]);// eslint-disable-line
+        Function.prototype.apply.apply(this._log.info, [console, args]);// eslint-disable-line
     };
 
 
@@ -1294,7 +1294,7 @@ const Op = function ()
     // todo: check instancing stuff?
     Op.prototype.instanced = function (triggerPort)
     {
-        console.log("instanced", this.patch.instancing.numCycles());
+        this._log.log("instanced", this.patch.instancing.numCycles());
         if (this.patch.instancing.numCycles() === 0) return false;
 
 
@@ -1366,7 +1366,7 @@ const Op = function ()
     {
         //         if(this.isInstanced)
         //         {
-        //             console.log('cancel instancing');
+        //             this._log.log('cancel instancing');
         //             return;
         //         }
         //         this._instances=[];
@@ -1383,7 +1383,7 @@ const Op = function ()
         //                 {
         //
         //                     var i=0;
-        // // console.log('trigger',this._instances.length);
+        // // this._log.log('trigger',this._instances.length);
         //
         //                 }.bind(this,ipi );
         //

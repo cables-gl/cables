@@ -19,8 +19,6 @@ class CGState extends Events
 
         this.patch = _patch;
 
-
-
         this.DEPTH_COMPARE_FUNC_NEVER = 0;
         this.DEPTH_COMPARE_FUNC_LESS = 1;
         this.DEPTH_COMPARE_FUNC_EQUAL = 2;
@@ -108,6 +106,8 @@ class CGState extends Events
     {
         return this.cgCanvas.canvasEle;
     }
+
+
 
     setCanvas(canvEle)
     {
