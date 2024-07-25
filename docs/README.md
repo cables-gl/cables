@@ -5,7 +5,7 @@ This repository contains files of the documentation on the cables.gl website:
 
 ## Giving Feedback
 
-# Issues and discussions
+### Issues and discussions
 
 Discuss cables.gl features, ask questions, report problems, show patches etc:
 - https://github.com/cables-gl/cables_docs/discussions
