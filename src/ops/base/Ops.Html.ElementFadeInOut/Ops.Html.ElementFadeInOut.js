@@ -40,6 +40,7 @@ outEle.onLinkChanged =
 inEle.onLinkChanged = () =>
 {
     outEle.setRef(inEle.get());
+    updateVisibility();
 };
 
 function updateVisibility()

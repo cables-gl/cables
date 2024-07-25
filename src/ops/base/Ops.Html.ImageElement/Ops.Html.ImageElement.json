@@ -20,6 +20,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1712067774369
+        },
+        {
+            "message": "Show filename in extended op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721656111652
         }
     ],
     "layout": {
