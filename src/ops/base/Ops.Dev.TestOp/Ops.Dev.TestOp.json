@@ -125,5 +125,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "just testing"
+    "summary": "just testing",
+    "license": "MIT"
 }
