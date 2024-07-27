@@ -116,9 +116,17 @@ class MultiPort extends Port
                 {
                     const po = this.ports[i + 1];
                     const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
-                    this.ports[i].links[0].remove();
-                    this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
-                    redo = true;
+
+                    if (!po || !otherPort)
+                    {
+                        this._log.warn("no port found?", po.name);
+                    }
+                    else
+                    {
+                        this.ports[i].links[0].remove();
+                        this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
+                        redo = true;
+                    }
                     break;
                 }
             }
