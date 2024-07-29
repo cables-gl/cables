@@ -1109,8 +1109,6 @@ Patch.prototype.deSerialize = function (obj, options)
 
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
-    if (window.logStartup)logStartup("calling onPatchLoaded/patchLoadEnd");
-
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
     this.deSerialized = true;
