@@ -430,14 +430,11 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
     {
         this._crashedOps.push(objName);
 
-        this.emitEvent("exceptionOp", e, objName, op);
+        this._log.error(e);
+        this._log.error("[instancing error] " + objName, e);
 
         if (!this.isEditorMode())
         {
-            this._log.error(e);
-            this._log.error("[instancing error] " + objName, e);
-
-            // if (CABLES.api) CABLES.api.sendErrorReport(e);
             this.exitError("INSTANCE_ERR", "Instancing Error: " + objName, e);
             throw new Error("instancing error 1" + objName);
         }
@@ -505,7 +502,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize, 
     }
     else
     {
-        this._log.error("addop: no op.....");
+        this._log.error("addop: op could not be created: ", opIdentifier);
     }
 
     return op;
