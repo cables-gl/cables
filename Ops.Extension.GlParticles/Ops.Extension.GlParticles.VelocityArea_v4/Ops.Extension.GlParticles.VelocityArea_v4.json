@@ -223,5 +223,6 @@
     "summary": "we",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

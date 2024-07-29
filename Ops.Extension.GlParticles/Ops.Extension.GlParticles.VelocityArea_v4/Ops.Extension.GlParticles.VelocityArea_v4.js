@@ -2,7 +2,7 @@ const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
     inInvArea = op.inBool("Invert Area", false),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision"], "Collision"),
+    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision"], "Point"),
     inStrength = op.inFloat("Strength", 1),
     inSize = op.inFloat("Size", 1),
     inCollisionFade = op.inFloat("Collision fade", 1),
