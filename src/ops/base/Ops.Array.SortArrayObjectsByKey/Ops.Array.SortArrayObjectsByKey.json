@@ -25,7 +25,7 @@
             }
         ]
     },
-    "summary": "sort an array of objects by value of object keys",
+    "summary": "sort an array of objects by value of object properties",
     "docs": {
         "ports": [
             {

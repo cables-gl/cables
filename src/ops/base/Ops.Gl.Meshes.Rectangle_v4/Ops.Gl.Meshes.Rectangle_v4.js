@@ -77,7 +77,7 @@ render.onTriggered = () =>
 {
     if (needsRebuild) rebuild();
     const cg = op.patch.cg;
-    if (mesh && doRender.get())
+    if (cg && mesh && doRender.get())
     {
         if (doScale)
         {

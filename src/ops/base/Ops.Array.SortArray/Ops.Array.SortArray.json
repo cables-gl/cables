@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "andro",
             "date": 1561021078579
+        },
+        {
+            "message": "make sorting work with array of strings",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1721828599291
         }
     ],
     "authorName": "andro",
@@ -18,11 +24,11 @@
             {
                 "type": 0,
                 "name": "Sorting mode index",
+                "values": [
+                    "Sort ascending",
+                    "Sort descending"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Sorting mode"
             }
         ],
         "portsOut": [
@@ -34,7 +40,6 @@
     },
     "summary": "Sorts an array of numbers with one of two modes - ascending or descending",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -52,5 +57,6 @@
             }
         ]
     },
-    "exampleProjectId": "M2f7RJ"
+    "exampleProjectId": "M2f7RJ",
+    "license": "MIT"
 }

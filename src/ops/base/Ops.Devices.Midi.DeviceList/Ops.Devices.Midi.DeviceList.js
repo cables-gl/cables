@@ -14,6 +14,7 @@ else onMIDIFailure();
 
 function onMIDISuccess(midiAccess)
 {
+    console.log("onMIDISuccess");
     let arr = [];
     midi = midiAccess;
     outSupport.set(true);
@@ -28,6 +29,8 @@ function onMIDISuccess(midiAccess)
         numDevices++;
     }
 
-    outNames.set(arr);
+    console.log(arr);
+
+    outNames.setRef(arr);
     outNumDevices.set(numDevices);
 }

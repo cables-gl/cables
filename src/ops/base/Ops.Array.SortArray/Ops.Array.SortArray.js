@@ -28,11 +28,11 @@ function update()
 
     if (sortMode.get() === "Sort ascending")
     {
-        arrOut.sort(function (a, b) { return a - b; });
+        arrOut.sort(function (a, b) { return a < b ? -1 : a > b ? 1 : 0; });
     }
     else
     {
-        arrOut.sort(function (a, b) { return b - a; });
+        arrOut.sort(function (a, b) { return a > b ? -1 : a < b ? 1 : 0; });
     }
 
     arrayOut.set(null);

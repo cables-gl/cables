@@ -91,5 +91,6 @@
         }
     ],
     "caniusequery": "Web MIDI API",
-    "exampleProjectId": "dfF3DI"
+    "exampleProjectId": "dfF3DI",
+    "license": "MIT"
 }

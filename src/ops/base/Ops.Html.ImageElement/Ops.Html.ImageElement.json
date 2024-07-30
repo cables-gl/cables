@@ -26,6 +26,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1721656111652
+        },
+        {
+            "message": "Disable caching when uploading a new version of image to the editor",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721829675023
         }
     ],
     "layout": {
@@ -57,6 +63,16 @@
                 "type": 2,
                 "name": "Image Element",
                 "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
             }
         ]
     },

@@ -64,7 +64,6 @@ function perspectiveFovX(out, fovx, aspect, near, far)
     // Math.tan(1 / fovx * 2),
     // f=Math.max(0,f);
 
-    op.log(f);
     out[0] = f;
     out[1] = 0;
     out[2] = 0;
