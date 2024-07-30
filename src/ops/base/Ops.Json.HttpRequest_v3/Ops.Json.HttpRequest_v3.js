@@ -66,6 +66,7 @@ function reload(addCachebuster, force = false)
 
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     op.setUiError("jsonerr", null);
+    op.setUiError("jsonParse", null);
 
     let url = op.patch.getFilePath(filename.get());
     if (addCachebuster)url += "?rnd=" + CABLES.generateUUID();
@@ -143,8 +144,16 @@ function reload(addCachebuster, force = false)
 
                         if (typeof data === "string" && inContent.get() === "JSON")
                         {
-                            data = JSON.parse(_data);
-                            outData.setRef(data);
+                            try
+                            {
+                                data = JSON.parse(_data);
+                                outData.setRef(data);
+                            }
+                            catch (e)
+                            {
+                                op.setUiError("jsonParse", "could not parse json" + e.message, 1);
+                                outData.setRef({});
+                            }
                         }
 
                         outString.set(_data);

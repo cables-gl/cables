@@ -3,7 +3,9 @@ const
     inClass = op.inString("Class"),
     inStyle = op.inStringEditor("Style", "", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
-    outImage = op.outObject("Image Element", null, "element");
+    outImage = op.outObject("Image Element", null, "element"),
+    outWidth = op.outNumber("Width"),
+    outHeight = op.outNumber("Height");
 
 let element = op.patch.getDocument().createElement("img");
 op.onDelete = removeEle;
@@ -13,9 +15,17 @@ inStyle.onChange = updateStyle;
 
 filename.onChange = filenameChanged;
 
-function filenameChanged()
+element.onload = () =>
 {
-    element.setAttribute("src", filename.get());
+    outWidth.set(element.width);
+    outHeight.set(element.height);
+};
+function filenameChanged(cacheBuster)
+{
+    let url = filename.get();
+    url = CABLES.cacheBust(url);
+
+    element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     element.setAttribute("crossOrigin", "anonymous");
     outImage.setRef(element);
@@ -25,8 +35,7 @@ op.onFileChanged = function (fn)
 {
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
-        // realReload(true);
-        filenameChanged();
+        filenameChanged(true);
     }
 };
 

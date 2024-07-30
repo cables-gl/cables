@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "andro",
-            "date": 1594657868344
+            "date": 1721829697181,
+            "type": "new"
+        },
+        {
+            "message": "Added active toggle to temporary remove property from element",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721829720969
         }
     ],
     "authorName": "andro",
