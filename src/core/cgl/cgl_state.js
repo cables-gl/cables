@@ -1273,8 +1273,8 @@ Context.prototype.enableExtension = function (name)
 
     if (!o)
         this._log.warn("[cgl_state] extension not available " + name);
-    else
-        this._log.log("enabled extension", name);
+    // else
+        // this._log.log("enabled extension", name);
 
     return o;
 };
