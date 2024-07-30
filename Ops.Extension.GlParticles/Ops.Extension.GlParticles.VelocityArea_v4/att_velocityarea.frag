@@ -144,11 +144,11 @@ void main()
             // pR(a, timeDiff);
             // col.xy=normalize(pos.xy-a)*strength;
 
-            vec4 coll=vec4(pos.xyz-areaPos,1.0);
+            vec4 coll=normalize(vec4(areaPos-pos.xyz,1.0));
 
-            coll*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x*timeDiff);
-            coll*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y*timeDiff);
-            coll*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z*timeDiff);
+            coll*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x);
+            coll*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y);
+            coll*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z);
 
             col+=normalize(coll)*strength*MOD_de;
         }
