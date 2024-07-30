@@ -97,7 +97,6 @@ const Op = function ()
         }
     });
 
-
     Object.defineProperty(this, "_objName", { set(on)
     {
         this.__objName = on; this._log = new Logger("op " + on);
