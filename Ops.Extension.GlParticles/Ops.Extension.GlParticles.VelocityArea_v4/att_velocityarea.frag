@@ -67,8 +67,7 @@ void main()
 {
     vec4 pos=texture(texPos,texCoord);
     vec4 col=texture(tex,texCoord);
-        col.a=1.0;
-
+    col.a=1.0;
 
     vec4 collisionCol=texture(texCollision,texCoord);
 
@@ -77,16 +76,13 @@ void main()
 
 
     float lifeProgress=texture(texLifeProgress,texCoord).r;
-        // collisionCol.r*=step(1.0-lifeProgress,0.1);
-
-
 
     collisionCol.r*=(1.0-(timeDiff*collisionFade));
     collisionCol.a=1.0;
     collisionCol.g=collisionCol.b=0.0;
 
     if(age<0.1)collisionCol.r=0.0;
-        // collisionCol.r*=1.0-step(0.3,age);
+    // collisionCol.r*=1.0-step(0.3,age);
 
     vec3 p=pos.xyz-areaPos;
 
@@ -143,31 +139,20 @@ void main()
 
         if(MOD_de>0.0)
         {
+            // 2d rot....
+            // vec2 a=pos.xy;
+            // pR(a, timeDiff);
+            // col.xy=normalize(pos.xy-a)*strength;
 
-// vec2 a=pos.xy;
-// pR(a, timeDiff);
-// col.xy=normalize(pos.xy-a)*strength;
+            vec4 coll=vec4(pos.xyz-areaPos,1.0);
 
+            coll*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x*timeDiff);
+            coll*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y*timeDiff);
+            coll*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z*timeDiff);
 
-mat4 rotation=rotationMatrix(vec3(1.0,0.0,0.0),strength*timeDiff);
-
-    // mat3 rotation = mat3(
-    //     vec3( cos(strength*timeDiff),  sin(strength*timeDiff),  0.0),
-    //     vec3(-sin(strength*timeDiff),  cos(strength*timeDiff),  0.0),
-    //     vec3(        0.0,         0.0,  1.0)
-    // );
-        // col.xyz = (rotation * vec4(pos.xyz,1.0)).xyz;
-
-        vec4 coll=vec4(pos.xyz,1.0);
-
-        coll*=rotationMatrix(vec3(1.0,0.0,0.0), strength*timeDiff);
-        coll*=rotationMatrix(vec3(0.0,1.0,0.0), 0.0*timeDiff);
-        coll*=rotationMatrix(vec3(0.0,0.0,1.0), 0.0);
-
-col=coll;
-
+            col+=normalize(coll)*strength*MOD_de;
         }
-            // col.xyz+=normalize( pos.xyz-areaPos )*finalStrength*MOD_de;
+
     #endif
 
 

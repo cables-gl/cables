@@ -126,9 +126,9 @@ function updateDefines()
     scale_y.setUiAttribs({ "greyout": inArea.get() != "Box" });
     scale_z.setUiAttribs({ "greyout": inArea.get() != "Box" });
 
-    dir_x.setUiAttribs({ "greyout": inMethod.get() != "Direction" });
-    dir_y.setUiAttribs({ "greyout": inMethod.get() != "Direction" });
-    dir_z.setUiAttribs({ "greyout": inMethod.get() != "Direction" });
+    dir_x.setUiAttribs({ "greyout": inMethod.get() != "Direction" &&inMethod.get() != "Rotate"  });
+    dir_y.setUiAttribs({ "greyout": inMethod.get() != "Direction" &&inMethod.get() != "Rotate"  });
+    dir_z.setUiAttribs({ "greyout": inMethod.get() != "Direction" &&inMethod.get() != "Rotate"  });
 
     inBounciness.setUiAttribs({ "greyout": inMethod.get() != "Collision" });
     inRandomDir.setUiAttribs({ "greyout": inMethod.get() != "Collision" });
