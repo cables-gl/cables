@@ -41,6 +41,28 @@ float MOD_sdRoundBox( vec3 p, vec3 b, float r )
     return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
 }
 
+
+void pR(inout vec2 p, float a)
+{
+	p = cos(a)*p + sin(a)*vec2(p.y, -p.x);
+}
+
+
+mat4 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+
+    return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+                0.0,                                0.0,                                0.0,                                1.0);
+}
+
+
+
 void main()
 {
     vec4 pos=texture(texPos,texCoord);
@@ -113,6 +135,39 @@ void main()
 
         if(MOD_de>0.0)
             col.xyz+=normalize( pos.xyz-areaPos )*finalStrength*MOD_de;
+    #endif
+
+
+    #ifdef METHOD_ROTATE
+
+
+        if(MOD_de>0.0)
+        {
+
+// vec2 a=pos.xy;
+// pR(a, timeDiff);
+// col.xy=normalize(pos.xy-a)*strength;
+
+
+mat4 rotation=rotationMatrix(vec3(1.0,0.0,0.0),strength*timeDiff);
+
+    // mat3 rotation = mat3(
+    //     vec3( cos(strength*timeDiff),  sin(strength*timeDiff),  0.0),
+    //     vec3(-sin(strength*timeDiff),  cos(strength*timeDiff),  0.0),
+    //     vec3(        0.0,         0.0,  1.0)
+    // );
+        // col.xyz = (rotation * vec4(pos.xyz,1.0)).xyz;
+
+        vec4 coll=vec4(pos.xyz,1.0);
+
+        coll*=rotationMatrix(vec3(1.0,0.0,0.0), strength*timeDiff);
+        coll*=rotationMatrix(vec3(0.0,1.0,0.0), 0.0*timeDiff);
+        coll*=rotationMatrix(vec3(0.0,0.0,1.0), 0.0);
+
+col=coll;
+
+        }
+            // col.xyz+=normalize( pos.xyz-areaPos )*finalStrength*MOD_de;
     #endif
 
 

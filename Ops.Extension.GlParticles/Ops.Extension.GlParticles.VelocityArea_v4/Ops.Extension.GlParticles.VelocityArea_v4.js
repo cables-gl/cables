@@ -2,7 +2,7 @@ const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
     inInvArea = op.inBool("Invert Area", false),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision"], "Point"),
+    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision","Rotate"], "Point"),
     inStrength = op.inFloat("Strength", 1),
     inSize = op.inFloat("Size", 1),
     inCollisionFade = op.inFloat("Collision fade", 1),
@@ -112,6 +112,8 @@ function updateDefines()
         velAreaSys.bgShader.toggleDefine("METHOD_POINT", inMethod.get() == "Point");
         velAreaSys.bgShader.toggleDefine("METHOD_DIR", inMethod.get() == "Direction");
         velAreaSys.bgShader.toggleDefine("METHOD_COLLISION", inMethod.get() == "Collision");
+        velAreaSys.bgShader.toggleDefine("METHOD_ROTATE", inMethod.get() == "Rotate");
+
 
         // velAreaSys.bgShader.toggleDefine("HAS_TEX_TIMING", inTimeAge.isLinked());
         // velAreaSys.bgShader.toggleDefine("HAS_TEX_LIFETIME", inLifetime.isLinked());
