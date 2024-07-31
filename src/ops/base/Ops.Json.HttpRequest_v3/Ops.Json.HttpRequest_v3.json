@@ -32,6 +32,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1716367838991
+        },
+        {
+            "message": "JSON parse errors will not throw an exception but show an uiError",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722348809374
         }
     ],
     "layout": {

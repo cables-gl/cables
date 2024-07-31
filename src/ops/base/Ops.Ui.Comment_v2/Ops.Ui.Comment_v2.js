@@ -18,9 +18,8 @@ function update()
         op.uiAttr(
             {
                 "comment_title": inTitle.get(),
-                "comment_text": inText.get()
+                "comment_text": inText.get(),
+                "extendTitle": inTitle.get()
             });
-
-        op.name = inTitle.get();
     }
 }

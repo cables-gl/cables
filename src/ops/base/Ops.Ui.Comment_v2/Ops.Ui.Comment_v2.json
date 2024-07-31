@@ -9,7 +9,10 @@
             "date": 1587124673487
         }
     ],
-    "layout": {},
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    },
     "summary": "Displays a comment in the patch area",
     "docs": {
         "ports": []
