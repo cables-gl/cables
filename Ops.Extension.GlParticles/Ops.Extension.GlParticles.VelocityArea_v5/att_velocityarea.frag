@@ -96,7 +96,7 @@ void main()
     #endif
 
     #ifdef MOD_AREA_EVERYWHERE
-        MOD_de=1.0;
+        MOD_de=0.0;
     #endif
 
     #ifdef INVERT_SHAPE
@@ -123,7 +123,6 @@ void main()
     #endif
 
 
-
     ///////////////////////////////////////////
     // methods...
 
@@ -135,15 +134,15 @@ void main()
 
 
     #ifdef METHOD_POINT
-        if(MOD_de>0.0 && MOD_de<1.0)
-            col.xyz+=normalize( pos.xyz-areaPos )*finalStrength;
+        if(MOD_de>0.0)
+            col.xyz+=normalize(pos.xyz-areaPos)*finalStrength;
     #endif
 
 
     #ifdef METHOD_ROTATE
 
 
-        if(MOD_de>0.0 && MOD_de<1.0)
+        if(MOD_de>0.0)
         {
             // 2d rot....
             // vec2 a=pos.xy;
