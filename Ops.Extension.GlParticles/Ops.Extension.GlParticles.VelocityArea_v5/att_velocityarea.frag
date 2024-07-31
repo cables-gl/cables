@@ -116,10 +116,11 @@ void main()
         mul*=smoothstep(0.0,1.0, MOD_map(age,ageMul.x,ageMul.x+ageMul.z,0.0,1.0));
     #endif
 
-    vec3 finalStrength=vec3(strength)*mul;
+    float finalStrength=strength*mul;
+    vec3 finalStrength3=vec3(finalStrength);
 
     #ifdef HAS_TEX_MUL
-        finalStrength*=texture(texMul,texCoord).rgb;
+        finalStrength3*=texture(texMul,texCoord).rgb;
     #endif
 
 
@@ -128,34 +129,37 @@ void main()
 
     #ifdef METHOD_DIR
         if(length(direction)>0.0)
-            col.xyz+=normalize(direction)*finalStrength;
+            col.xyz+=normalize(direction)*finalStrength3;
     #endif
 
 
 
     #ifdef METHOD_POINT
-        if(MOD_de>0.0)
-            col.xyz+=normalize(pos.xyz-areaPos)*finalStrength;
+        col.xyz+=normalize(pos.xyz-areaPos)*finalStrength3;
     #endif
 
 
     #ifdef METHOD_ROTATE
 
 
-        if(MOD_de>0.0)
+        if(finalStrength>0.0)
         {
             // 2d rot....
             // vec2 a=pos.xy;
             // pR(a, timeDiff);
             // col.xy=normalize(pos.xy-a)*strength;
 
-            vec4 coll=normalize(vec4(areaPos-pos.xyz,1.0));
+            vec3 p=pos.xyz;
+            p.x*=0.0;
+            // p.y*=0.2;
 
-            coll*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x);
-            coll*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y);
-            coll*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z);
+            vec4 vecV=normalize(vec4(areaPos-p,1.0));
 
-            col+=normalize(coll)*finalStrength;
+            vecV*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x);
+            vecV*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y);
+            vecV*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z);
+
+            col.rgb+=(normalize(vecV.rgb).rgb*finalStrength);
         }
 
     #endif
@@ -164,7 +168,7 @@ void main()
 
     #ifdef METHOD_COLLISION
 
-        if(MOD_de>0.0 && MOD_de<1.0)
+        if(finalStrength>0.0)
         {
             // collisionParams
             // x: bouncyness

@@ -114,11 +114,7 @@ function updateDefines()
         velAreaSys.bgShader.toggleDefine("METHOD_COLLISION", inMethod.get() == "Collision");
         velAreaSys.bgShader.toggleDefine("METHOD_ROTATE", inMethod.get() == "Rotate");
 
-
-        // velAreaSys.bgShader.toggleDefine("HAS_TEX_TIMING", inTimeAge.isLinked());
-        // velAreaSys.bgShader.toggleDefine("HAS_TEX_LIFETIME", inLifetime.isLinked());
         velAreaSys.bgShader.toggleDefine("HAS_TEX_MUL", inTexMultiply.isLinked());
-
         velAreaSys.bgShader.toggleDefine("INVERT_SHAPE", inInvArea.get());
     }
 
