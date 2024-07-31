@@ -1786,23 +1786,18 @@ Shader.createShader = function (cgl, str, type, cglShader)
             }
         }
 
-        // console.warn(infoLog);
-
         infoLog = infoLog.replace(/\n/g, "<br/>");
         if (cgl.patch.isEditorMode())console.log("Shader error ", cglShader._name, infoLog, this);
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
 
-
-        // console.log(htmlWarning);
         if (this._fromUserInteraction)
         {
             // console.log("todo show modal?");
             // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
         }
 
-        // this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
     }
     else
