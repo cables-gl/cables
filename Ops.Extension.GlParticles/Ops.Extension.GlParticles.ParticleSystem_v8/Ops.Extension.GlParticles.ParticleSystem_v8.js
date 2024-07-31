@@ -138,16 +138,19 @@ const texBlack = new CGL.Texture(cgl,
         "height": 8
     });
 
+let velocityFeedback = null
 
-// const velocityFeedback = new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
-//         {
-//             "shader": attachments.velocity_feedback_frag_frag,
-//             "vertexShader": CGL.Shader.getDefaultVertexShader(),
-//             "numRenderBuffers": 4,
-//             "pixelFormat": cgl.frameStore.particleSys.pixelFormat,
-//             "filter": CGL.Texture.FILTER_NEAREST
-//         });
+velocityFeedback=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
+        {
+            "shader": attachments.velocity_feedback_frag,
+            "vertexShader": CGL.Shader.getDefaultVertexShader(),
+            "numRenderBuffers": 1,
+            "pixelFormat": thePixelFormat,
+            "filter": CGL.Texture.FILTER_NEAREST
+        });
 
+const texVelFeedA = new CGL.Uniform(velocityFeedback.bgShader, "t", "texA", 0);
+const texVelFeedB = new CGL.Uniform(velocityFeedback.bgShader, "t", "texB", 1);
 
 timer.play();
 createShader();
@@ -489,7 +492,15 @@ function renderVelocity()
 
     cgl.popBlend();
 
-    texVelocity = effect.getCurrentSourceTexture();
+
+
+    velocityFeedback.bgShader.pushTexture(texCollisionFeedback, tcCollision.copy(outTexCollision.get()));
+    velocityFeedback.copy(effect.getCurrentSourceTexture());
+
+
+    // texVelocity = effect.getCurrentSourceTexture();
+    texVelocity = velAreaSys.fb.getTextureColorNum(0);
+
     cgl.currentTextureEffect = oldEffect;
 }
 

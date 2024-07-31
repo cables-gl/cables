@@ -6,7 +6,7 @@ UNI sampler2D texVel;
 void main()
 {
     vec4 colVel=texture(texVel,texCoord);
-    // vec4 col=texture(tex,texCoord);
+    vec4 col=texture(tex,texCoord);
 
-    outColor=colVel;
+    outColor=col*0.5+colVel*0.5;
 }
