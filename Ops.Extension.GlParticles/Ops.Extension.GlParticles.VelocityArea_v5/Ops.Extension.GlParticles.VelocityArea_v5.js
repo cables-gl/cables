@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
-    inInvArea = op.inBool("Invert Area", false),
     inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision","Rotate"], "Point"),
+    inInvArea = op.inBool("Invert Area", false),
     inStrength = op.inFloat("Strength", 1),
     inSize = op.inFloat("Size", 1),
-    inCollisionFade = op.inFloat("Collision fade", 1),
     inFalloff = op.inFloat("Falloff", 0.3),
     inBounciness = op.inFloat("Boncyness", 0.5),
+    inCollisionFade = op.inFloat("Collision fade", 1),
     inRandomDir = op.inFloat("Dir Randomness", 0.5),
     inForceOutwards = op.inFloat("inForceOutwards", 0.5),
     x = op.inValue("x", 0),
@@ -29,7 +29,7 @@ const
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
-op.setPortGroup("Collision", [inBounciness, inRandomDir, inForceOutwards]);
+op.setPortGroup("Collision", [inBounciness, inRandomDir, inForceOutwards,inCollisionFade]);
 op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Age Activation", [inTimeEnd, inTimeFade, inTimeStart]);
 shader.setSource(shader.getDefaultVertexShader(), attachments.copy_frag);
@@ -192,8 +192,8 @@ render.onTriggered = function ()
             }
             else if (inArea.get() == "Sphere")
             {
-                CABLES.GL_MARKER.drawCircle(op, inSize.get() * 2.0);
-                CABLES.GL_MARKER.drawCircle(op, inSize.get() * 2.0 - inFalloff.get());
+                CABLES.GL_MARKER.drawCircle(op, inSize.get() /2.0);
+                CABLES.GL_MARKER.drawCircle(op, inSize.get() /2.0 + inFalloff.get());
             }
 
             cgl.popModelMatrix();

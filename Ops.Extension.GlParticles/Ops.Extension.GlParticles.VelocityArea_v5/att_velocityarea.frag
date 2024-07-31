@@ -85,61 +85,65 @@ void main()
     // collisionCol.r*=1.0-step(0.3,age);
 
     vec3 p=pos.xyz-areaPos;
+    float MOD_de=0.0;
 
     #ifdef MOD_AREA_SPHERE
-        float MOD_de=1.0-MOD_sdSphere(p,size+falloff);
+        MOD_de=MOD_sdSphere(p,size+falloff);
     #endif
 
     #ifdef MOD_AREA_BOX
-        float MOD_de=1.0-MOD_sdRoundBox(p,scale+falloff,0.0);
+        MOD_de=MOD_sdRoundBox(p,scale+falloff,0.0);
     #endif
+
     #ifdef MOD_AREA_EVERYWHERE
-        float MOD_de=1.0;
+        MOD_de=1.0;
     #endif
-
-    #ifdef HAS_TEX_TIMING
-
-        MOD_de*=smoothstep(0.0,1.0, MOD_map(age,ageMul.x,ageMul.x+ageMul.z,0.0,1.0));
-
-    #endif
-
-    MOD_de=MOD_map(
-        MOD_de,
-        0.0, falloff,
-        0.0,1.0
-        );
-
-
 
     #ifdef INVERT_SHAPE
         MOD_de=1.0-MOD_de;
     #endif
 
-    vec3 finalStrength=vec3(strength);
+
+    ////////////////////
+    // build multiplyer strength + falloff + timing adjust ...
+    // fade in to falloff...
+    float mul=1.0-MOD_map(
+        MOD_de,
+        0.0, falloff,
+        0.0,1.0
+        );
+    #ifdef HAS_TEX_TIMING
+        mul*=smoothstep(0.0,1.0, MOD_map(age,ageMul.x,ageMul.x+ageMul.z,0.0,1.0));
+    #endif
+
+    vec3 finalStrength=vec3(strength)*mul;
 
     #ifdef HAS_TEX_MUL
         finalStrength*=texture(texMul,texCoord).rgb;
     #endif
 
 
+
+    ///////////////////////////////////////////
+    // methods...
+
     #ifdef METHOD_DIR
         if(length(direction)>0.0)
-            col.xyz+=normalize(direction)*finalStrength*MOD_de;
+            col.xyz+=normalize(direction)*finalStrength;
     #endif
 
+
+
     #ifdef METHOD_POINT
-
-        // col.xyz+=normalize( pos.xyz-areaPos )*finalStrength*MOD_de;
-
-        if(MOD_de>0.0)
-            col.xyz+=normalize( pos.xyz-areaPos )*finalStrength*MOD_de;
+        if(MOD_de>0.0 && MOD_de<1.0)
+            col.xyz+=normalize( pos.xyz-areaPos )*finalStrength;
     #endif
 
 
     #ifdef METHOD_ROTATE
 
 
-        if(MOD_de>0.0)
+        if(MOD_de>0.0 && MOD_de<1.0)
         {
             // 2d rot....
             // vec2 a=pos.xy;
@@ -152,7 +156,7 @@ void main()
             coll*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y);
             coll*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z);
 
-            col+=normalize(coll)*strength*MOD_de;
+            col+=normalize(coll)*finalStrength;
         }
 
     #endif
@@ -161,7 +165,7 @@ void main()
 
     #ifdef METHOD_COLLISION
 
-        if(MOD_de>0.0)
+        if(MOD_de>0.0 && MOD_de<1.0)
         {
             // collisionParams
             // x: bouncyness

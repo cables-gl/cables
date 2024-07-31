@@ -103,11 +103,13 @@ void main()
 
     #endif
 
-    MOD_de=MOD_map(
+    MOD_de=1.0-MOD_map(
         MOD_de,
         0.0, falloff,
         0.0,1.0
         );
+
+
 
     #ifdef INVERT_SHAPE
         MOD_de=1.0-MOD_de;
