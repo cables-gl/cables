@@ -22,13 +22,12 @@
     "authorName": "pandur",
     "id": "6e52048f-557d-4332-9d5e-2201f728cb23",
     "created": 1541344437570,
-
-
     "docs": {
         "ports": []
     },
     "issues": "",
     "caniusequery": "Web MIDI API",
     "youtubeids": [],
-    "exampleProjectId": "EEHSl5"
+    "exampleProjectId": "EEHSl5",
+    "license": "MIT"
 }

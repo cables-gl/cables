@@ -172,7 +172,6 @@ function updateSize()
     updateUI();
     if (oldSize != size) needsUpdate = true;
     needsUpdateSize = false;
-    op.log("size", size);
 }
 
 function initFb()

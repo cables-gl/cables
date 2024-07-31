@@ -347,9 +347,10 @@ function setDevice()
   } */
 }
 
-function onMIDIFailure()
+function onMIDIFailure(e)
 {
     op.uiAttr({ "warning": "No MIDI support in your browser." });
+    if (e)op.error(e);
 }
 
 function onMIDISuccess(midiAccess)

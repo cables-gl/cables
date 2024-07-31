@@ -9,6 +9,10 @@
             {
                 "type": 0,
                 "name": "Axis index",
+                "values": [
+                    "Vertical",
+                    "Horizontal"
+                ],
                 "subType": "integer"
             },
             {
