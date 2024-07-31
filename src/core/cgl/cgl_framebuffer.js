@@ -184,7 +184,6 @@ const Framebuffer = function (_cgl, _w, _h, options)
             this._log.warn("incomplete framebuffer", status);
             this.valid = false;
             throw new Error("Incomplete framebuffer: " + status);
-            // throw("Incomplete framebuffer: " + status);
         }
 
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
