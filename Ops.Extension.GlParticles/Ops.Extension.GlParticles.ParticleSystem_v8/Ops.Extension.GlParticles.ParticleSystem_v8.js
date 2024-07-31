@@ -138,19 +138,11 @@ const texBlack = new CGL.Texture(cgl,
         "height": 8
     });
 
-let velocityFeedback = null
+let velocityFeedback = null;
+let velocityFeedback2 = null;
+let texVelFeedA;
+let texVelFeedB;
 
-velocityFeedback=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
-        {
-            "shader": attachments.velocity_feedback_frag,
-            "vertexShader": CGL.Shader.getDefaultVertexShader(),
-            "numRenderBuffers": 1,
-            "pixelFormat": thePixelFormat,
-            "filter": CGL.Texture.FILTER_NEAREST
-        });
-
-const texVelFeedA = new CGL.Uniform(velocityFeedback.bgShader, "t", "texA", 0);
-const texVelFeedB = new CGL.Uniform(velocityFeedback.bgShader, "t", "texB", 1);
 
 timer.play();
 createShader();
@@ -488,20 +480,54 @@ function renderVelocity()
 
     effect.endEffect();
 
+
+
+
+if(!velocityFeedback)
+{
+
+velocityFeedback2=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
+        {
+            "shader": attachments.velocity_feedback_frag,
+            "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+            "filter": CGL.Texture.FILTER_LINEAR
+        });
+
+velocityFeedback=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
+        {
+            "shader": attachments.velocity_feedback_frag,
+            "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+            "filter": CGL.Texture.FILTER_LINEAR
+        });
+
+texVelFeedA = new CGL.Uniform(velocityFeedback.bgShader, "t", "texA");
+texVelFeedB = new CGL.Uniform(velocityFeedback.bgShader, "t", "texB");
+    velocityFeedback2.copy(texVelocity);
+
+}
+
+    velocityFeedback.setSize(texSize,texSize);
+
+    velocityFeedback.bgShader.popTextures();
+    velocityFeedback.bgShader.pushTexture(texVelFeedA, velocityFeedback2.fb.getTextureColorNum(0));
+    velocityFeedback.bgShader.pushTexture(texVelFeedB, effect.getCurrentSourceTexture());
+    velocityFeedback.copy(texVelocity);
+    texVelocity = velocityFeedback.fb.getTextureColorNum(0);
+
+    // texVelocity = effect.getCurrentSourceTexture();
+
+    velocityFeedback2.copy(texVelocity);
+    velocityFeedback2.setSize(texSize,texSize);
+
+
+    cgl.currentTextureEffect = oldEffect;
+
     cgl.popViewPort();
 
     cgl.popBlend();
 
 
 
-    velocityFeedback.bgShader.pushTexture(texCollisionFeedback, tcCollision.copy(outTexCollision.get()));
-    velocityFeedback.copy(effect.getCurrentSourceTexture());
-
-
-    // texVelocity = effect.getCurrentSourceTexture();
-    texVelocity = velAreaSys.fb.getTextureColorNum(0);
-
-    cgl.currentTextureEffect = oldEffect;
 }
 
 //

@@ -1,12 +1,14 @@
 
 in vec2 texCoord;
-UNI sampler2D tex;
-UNI sampler2D texVel;
+UNI sampler2D texA;
+UNI sampler2D texB;
 
 void main()
 {
-    vec4 colVel=texture(texVel,texCoord);
-    vec4 col=texture(tex,texCoord);
+    vec4 a=texture(texA,texCoord);
+    vec4 b=texture(texB,texCoord);
 
-    outColor=col*0.5+colVel*0.5;
+    // outColor=(a*0.1)+(b*0.9);
+    // outColor=b;
+    outColor=mix(a,b,0.8);
 }
