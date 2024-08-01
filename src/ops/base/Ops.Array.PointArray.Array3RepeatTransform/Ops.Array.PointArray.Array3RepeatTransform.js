@@ -55,7 +55,7 @@ exec.onTriggered = () =>
         const posArr = inPosArr.get();
         const num = inNum.get();
 
-        if (posArr && posArr.length != num)console.warn("position array must be num length");
+        if (posArr && posArr.length != num)op.warn("position array must be num length");
 
         const stepX = inTransX.get() / num;
         const stepY = inTransY.get() / num;

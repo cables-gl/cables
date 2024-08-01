@@ -35,6 +35,7 @@ fragmentShader.onChange = vertexShader.onChange = function ()
 
 render.onTriggered = doRender;
 
+let updateCount = 0;
 let needsUpdate = true;
 op.onLoadedValueSet = initDataOnLoad;
 
@@ -300,9 +301,12 @@ function parseUniforms(src)
 function updateShader()
 {
     if (!shader) return;
+    let manual = false;
+    updateCount++;
+    if (updateCount > 2)manual = true;
 
     shader.bindTextures = bindTextures.bind(this);
-    shader.setSource(vertexShader.get(), fragmentShader.get());
+    shader.setSource(vertexShader.get(), fragmentShader.get(), manual);
 
     if (cgl.glVersion == 1)
     {

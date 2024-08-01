@@ -78,6 +78,7 @@ const Shader = function (_cgl, _name, _op)
     this._camPosUniform = null;
     this._normalMatrixUniform = null;
     this._inverseViewMatrixUniform = null;
+    this._fromUserInteraction = false;
 
     this._attrVertexPos = -1;
     this.precision = _cgl.patch.config.glslPrecision || "highp";
@@ -250,8 +251,9 @@ Shader.prototype.copy = function ()
  * @param {String} srcVert
  * @param {String} srcFrag
  */
-Shader.prototype.setSource = function (srcVert, srcFrag)
+Shader.prototype.setSource = function (srcVert, srcFrag, fromUserInteraction)
 {
+    this._fromUserInteraction = fromUserInteraction;
     this.srcVert = srcVert;
     this.srcFrag = srcFrag;
     this.setWhyCompile("Source changed");
@@ -1478,9 +1480,7 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
             this._log.error(this._name + " shader linking fail...");
 
             console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
-            console.log("--------------------------------------");
             console.log(this);
-            console.log("--------------------------------------");
             this._isValid = false;
 
             this._name = "errorshader";
@@ -1750,7 +1750,6 @@ Shader.createShader = function (cgl, str, type, cglShader)
             return;
         }
 
-        console.log("compile status: ");
 
         const badLines = getBadLines(infoLog);
         let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
@@ -1773,8 +1772,9 @@ Shader.createShader = function (cgl, str, type, cglShader)
                 if (isBadLine)
                 {
                     htmlWarning += "</code></pre>";
-                    // htmlWarning += "<span class=\"shaderErrorCode error\">";
                     htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\"background-color:#660000;padding-top:0px;padding-bottom:0px\">";
+
+                    cglShader._log.log("bad line: `" + line + "`");
                 }
                 htmlWarning += escapeHTML(line);
 
@@ -1786,17 +1786,18 @@ Shader.createShader = function (cgl, str, type, cglShader)
             }
         }
 
-        // console.warn(infoLog);
-
         infoLog = infoLog.replace(/\n/g, "<br/>");
         if (cgl.patch.isEditorMode())console.log("Shader error ", cglShader._name, infoLog, this);
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
 
-        // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
+        if (this._fromUserInteraction)
+        {
+            // console.log("todo show modal?");
+            // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
+        }
 
-        // this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
     }
     else

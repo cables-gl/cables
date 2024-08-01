@@ -201,8 +201,6 @@ Framebuffer2.prototype.setSize = function (w, h)
         this._colorTextures[i].setSize(this._width, this._height);
     }
 
-
-
     for (i = 0; i < this._numRenderBuffers; i++)
     {
         const renderBuffer = this._cgl.gl.createRenderbuffer();
@@ -325,6 +323,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     {
         this._log.error("framebuffer incomplete: " + this.name, this);
         this._log.log("options", this._options);
+        this._log.log("options pixelformat", this._options.pixelFormat);
 
         switch (status)
         {
