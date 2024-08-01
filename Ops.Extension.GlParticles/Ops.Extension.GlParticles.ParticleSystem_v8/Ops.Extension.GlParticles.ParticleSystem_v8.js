@@ -104,7 +104,8 @@ let
     uniVel = null,
     unigrav = null,
     uniPos = null,
-    uniReset = null;
+    uniReset = null,
+    shaderDrag=null;
 
 inReset.onTriggered = () =>
 {
@@ -455,6 +456,20 @@ function renderVelocity()
 {
     if (!effect || imgCompTex.width != texSize) initImgComp();
 
+    if(!velocityFeedback2)
+    {
+
+        velocityFeedback2=new CGL.CopyTexture(op.patch.cgl, "velocity copy",
+            {
+                // "shader": attachments.velocity_feedback_frag,
+                "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+                "filter": CGL.Texture.FILTER_LINEAR
+            });
+
+    }
+
+
+
     cgl.pushBlend(false);
 
     // updateResolution();
@@ -471,49 +486,40 @@ function renderVelocity()
 
     effect.startEffect(texPos, true);
 
-
-
-
-// const shaderDrag = new CGL.Shader(cgl, "textureeffect color");
-// const srcFrag = attachments.color_frag || "";
-// shader.setSource(shader.getDefaultVertexShader(), srcFrag);
-
-
-
-
-
-
-
     next.trigger();
+
+
+
+    // last velocity layer is a feedback
+    // uniTexOldPos = new CGL.Uniform(ps.bgShader, "t", "texOldPos", 6);
+
+    if(!shaderDrag)
+    {
+        shaderDrag = new CGL.Shader(cgl, "psVelDragFeedback");
+        shaderDrag.setSource(shaderDrag.getDefaultVertexShader(), attachments.velocity_feedback_frag);
+
+        const uni = new CGL.Uniform(shaderDrag, "t", "tex", 0);
+        const uni2 = new CGL.Uniform(shaderDrag, "t", "texA", 1);
+    }
+
+    cgl.pushShader(shaderDrag);
+    cgl.currentTextureEffect.bind();
+
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    // cgl.setTexture(1, ps.fb.getTextureColorNum(3).tex);
+    if(velocityFeedback2.fb)cgl.setTexture(1, velocityFeedback2.fb.getTextureColorNum(0).tex);
+
+    cgl.currentTextureEffect.finish();
+    cgl.popShader();
+
+
+
+
 
     effect.endEffect();
 
 
-
-
-if(!velocityFeedback)
-{
-
-// velocityFeedback2=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
-//         {
-//             "shader": attachments.velocity_feedback_frag,
-//             "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
-//             "filter": CGL.Texture.FILTER_LINEAR
-//         });
-
-velocityFeedback=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
-        {
-            "shader": attachments.velocity_feedback_frag,
-            "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
-            "filter": CGL.Texture.FILTER_LINEAR
-        });
-
-texVelFeedA = new CGL.Uniform(velocityFeedback.bgShader, "t", "texA");
-texVelFeedB = new CGL.Uniform(velocityFeedback.bgShader, "t", "texB");
-    velocityFeedback2.copy(texVelocity);
-
-}
-
+    // velocityFeedback2.copy(texVelocity);
     // velocityFeedback.setSize(texSize,texSize);
 
     // velocityFeedback.bgShader.popTextures();
