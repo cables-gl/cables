@@ -471,10 +471,18 @@ function renderVelocity()
 
     effect.startEffect(texPos, true);
 
-    // cgl.pushViewPort(0, 0, texSize, texSize);
-    // mat4.identity(cgl.pMatrix);
-    // mat4.identity(cgl.vMatrix);
-    // mat4.identity(cgl.mMatrix);
+
+
+
+// const shaderDrag = new CGL.Shader(cgl, "textureeffect color");
+// const srcFrag = attachments.color_frag || "";
+// shader.setSource(shader.getDefaultVertexShader(), srcFrag);
+
+
+
+
+
+
 
     next.trigger();
 
@@ -486,12 +494,12 @@ function renderVelocity()
 if(!velocityFeedback)
 {
 
-velocityFeedback2=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
-        {
-            "shader": attachments.velocity_feedback_frag,
-            "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
-            "filter": CGL.Texture.FILTER_LINEAR
-        });
+// velocityFeedback2=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
+//         {
+//             "shader": attachments.velocity_feedback_frag,
+//             "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+//             "filter": CGL.Texture.FILTER_LINEAR
+//         });
 
 velocityFeedback=new CGL.CopyTexture(op.patch.cgl, "velocity_feedback_frag",
         {
@@ -506,15 +514,15 @@ texVelFeedB = new CGL.Uniform(velocityFeedback.bgShader, "t", "texB");
 
 }
 
-    velocityFeedback.setSize(texSize,texSize);
+    // velocityFeedback.setSize(texSize,texSize);
 
-    velocityFeedback.bgShader.popTextures();
-    velocityFeedback.bgShader.pushTexture(texVelFeedA, velocityFeedback2.fb.getTextureColorNum(0));
-    velocityFeedback.bgShader.pushTexture(texVelFeedB, effect.getCurrentSourceTexture());
-    velocityFeedback.copy(texVelocity);
-    texVelocity = velocityFeedback.fb.getTextureColorNum(0);
+    // velocityFeedback.bgShader.popTextures();
+    // velocityFeedback.bgShader.pushTexture(texVelFeedA, velocityFeedback2.fb.getTextureColorNum(0));
+    // velocityFeedback.bgShader.pushTexture(texVelFeedB, effect.getCurrentSourceTexture());
+    // velocityFeedback.copy(texVelocity);
+    // texVelocity = velocityFeedback.fb.getTextureColorNum(0);
 
-    // texVelocity = effect.getCurrentSourceTexture();
+    texVelocity = effect.getCurrentSourceTexture();
 
     velocityFeedback2.copy(texVelocity);
     velocityFeedback2.setSize(texSize,texSize);
