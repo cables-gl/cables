@@ -33,8 +33,15 @@
             {
                 "type": 1,
                 "name": "Promise Fail"
+            },
+            {
+                "type": 1,
+                "name": "Shader Error"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "summary": "Crash the editor in many ways",
+    "docs": {
+        "ports": []
     }
 }
