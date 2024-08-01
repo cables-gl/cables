@@ -171,7 +171,7 @@
             },
             {
                 "type": 0,
-                "name": "Inherit Velocity",
+                "name": "Velocity Drag",
                 "subType": "number"
             },
             {

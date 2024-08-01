@@ -37,7 +37,9 @@ const
 
     // inTexVelocity = op.inTexture("Velocity"),
 
-    inherVel = op.inFloatSlider("Inherit Velocity", 0),
+    inVelocityDrag = op.inFloatSlider("Velocity Drag", 1),
+
+    // inherVel = op.inFloatSlider("Inherit Velocity", 0),
     inTexPassThrough1 = op.inTexture("Pass Through 1"),
     inTexPassThrough2 = op.inTexture("Pass Through 2"),
 
@@ -105,7 +107,7 @@ let
     unigrav = null,
     uniPos = null,
     uniReset = null,
-    shaderDrag=null;
+    shaderDrag=null,univelDrag;
 
 inReset.onTriggered = () =>
 {
@@ -194,7 +196,7 @@ function createShader()
     uniModelMatrix = new CGL.Uniform(ps.bgShader, "m4", "outModelMatrix", []),
     uniLifeTime = new CGL.Uniform(ps.bgShader, "2f", "lifeTime", inLifeTimeMin, inLifeTimeMax),
     uniMass = new CGL.Uniform(ps.bgShader, "2f", "mass", inMass, inMassMax),
-    uniVel = new CGL.Uniform(ps.bgShader, "4f", "velocity", moveX, moveY, moveZ, inherVel),
+    uniVel = new CGL.Uniform(ps.bgShader, "4f", "velocity", moveX, moveY, moveZ,moveZ),
     unigrav = new CGL.Uniform(ps.bgShader, "3f", "gravity", gravX, gravY, gravZ),
     uniPos = new CGL.Uniform(ps.bgShader, "3f", "position", posX, posY, posZ),
     uniReset = new CGL.Uniform(ps.bgShader, "f", "reset", 1);
@@ -498,6 +500,8 @@ function renderVelocity()
         shaderDrag = new CGL.Shader(cgl, "psVelDragFeedback");
         shaderDrag.setSource(shaderDrag.getDefaultVertexShader(), attachments.velocity_feedback_frag);
 
+
+        univelDrag = new CGL.Uniform(shaderDrag, "f", "velDrag", inVelocityDrag);
         const uni = new CGL.Uniform(shaderDrag, "t", "tex", 0);
         const uni2 = new CGL.Uniform(shaderDrag, "t", "texA", 1);
     }
@@ -505,9 +509,11 @@ function renderVelocity()
     cgl.pushShader(shaderDrag);
     cgl.currentTextureEffect.bind();
 
+univelDrag.setValue(inVelocityDrag.get());
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     // cgl.setTexture(1, ps.fb.getTextureColorNum(3).tex);
     if(velocityFeedback2.fb)cgl.setTexture(1, velocityFeedback2.fb.getTextureColorNum(0).tex);
+    else op.log("no fb tex")
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
