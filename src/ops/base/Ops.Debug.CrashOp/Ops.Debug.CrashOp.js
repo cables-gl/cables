@@ -1,7 +1,3 @@
-// welcome to your new op!
-// have a look at the documentation:
-// https://cables.gl/docs/5_writing_ops/dev_ops/dev_ops
-
 const
     exec = op.inTriggerButton("Async crash"),
     inExc = op.inTriggerButton("Throw Exception"),
