@@ -572,12 +572,15 @@ export const request = function (options)
 
     if (typeof options.headers === "object")
     {
-        const keys = Object.keys(options.headers);
-        for (let i = 0; i < keys.length; i++)
+        if (options.headers)
         {
-            const name = keys[i];
-            const value = options.headers[name];
-            xhr.setRequestHeader(name, value);
+            const keys = Object.keys(options.headers);
+            for (let i = 0; i < keys.length; i++)
+            {
+                const name = keys[i];
+                const value = options.headers[name];
+                xhr.setRequestHeader(name, value);
+            }
         }
     }
 
