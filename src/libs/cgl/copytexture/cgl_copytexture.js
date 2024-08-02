@@ -32,7 +32,7 @@ class CopyTexture
 
             if (options.numRenderBuffers == 1)
             {
-                shader = shader.endl() + "    outColor= texture(tex0,texCoord);;".endl();
+                shader = shader.endl() + "    outColor= texture(tex0,texCoord);".endl();
             }
 
             else

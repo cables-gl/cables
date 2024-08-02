@@ -38,6 +38,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1722348809374
+        },
+        {
+            "message": "Show warning if url is empty",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722493733058
         }
     ],
     "layout": {

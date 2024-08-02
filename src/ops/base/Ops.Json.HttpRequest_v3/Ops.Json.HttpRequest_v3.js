@@ -23,6 +23,10 @@ reloadTrigger.setUiAttribs({ "buttonTitle": "trigger request" });
 outData.ignoreValueSerialize = true;
 outString.ignoreValueSerialize = true;
 
+outString.onLinkChanged =
+    outStringBin.onLinkChanged =
+    outData.onLinkChanged = showEmptyUrlWarning;
+
 inContent.onChange = () =>
 {
     const greyOut = (inContent.get() === "Binary");
@@ -56,10 +60,23 @@ op.onFileChanged = (fn) =>
     if (filename.get() && filename.get().indexOf(fn) > -1) reload(true);
 };
 
+function showEmptyUrlWarning()
+{
+    if (!filename.get())
+        op.setUiError("nourl", "URL is empty", 1);
+    else
+        op.setUiError("nourl", null);
+}
+
 function reload(addCachebuster, force = false)
 {
     if (!inAutoRequest.get() && !force) return;
-    if (!filename.get()) return;
+
+    showEmptyUrlWarning();
+    if (!filename.get())
+    {
+        return;
+    }
 
     const loadingId = op.patch.loading.start(op.objName, "" + filename.get(), op);
     isLoading.set(true);

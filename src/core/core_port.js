@@ -80,7 +80,6 @@ const Port = function (___op, name, type, uiAttribs)
             return this.uiAttribs.title || this.name;
         } });
 
-
     Object.defineProperty(this, "parent", {
         get()
         {
@@ -88,14 +87,11 @@ const Port = function (___op, name, type, uiAttribs)
             return this._op;
         } });
 
-
-
     Object.defineProperty(this, "op", {
         get()
         {
             return this._op;
         } });
-
 
     Object.defineProperty(this, "val", {
         get()
