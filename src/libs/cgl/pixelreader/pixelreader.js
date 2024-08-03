@@ -80,10 +80,9 @@ class PixelReader
         let isFloatingPoint = CGL.Texture.isPixelFormatFloat(pixelFormat);
 
         if (isFloatingPoint)bytesPerItem = 4;
-
+        if (CGL.Texture.isPixelFormatHalfFloat(pixelFormat)) bytesPerItem = 2;
 
         const pixelInfo = CGL.Texture.setUpGlPixelFormat(cgl, pixelFormat);
-
         const numItems = pixelInfo.numColorChannels * w * h;
 
         if (w == 0 || h == 0 || numItems == 0) return;

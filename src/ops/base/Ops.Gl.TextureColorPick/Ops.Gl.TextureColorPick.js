@@ -48,9 +48,7 @@ pUpdate.onTriggered = function ()
         else pixelData = new Uint8Array(size);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-    gl.framebufferTexture2D(
-        gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
-    );
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
