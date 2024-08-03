@@ -93,6 +93,9 @@ function createShader()
 
 function updateDefines()
 {
+
+    op.setUiAttrib({ "extendTitle": inArea.get()+" / "+inMethod.get() });
+
     inSize.setUiAttribs({ "greyout": inArea.get() != "Sphere" });
     x.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
     y.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
