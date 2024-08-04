@@ -519,7 +519,7 @@ Shader.prototype.compile = function ()
 
     if (!this.srcFrag)
     {
-        this._log.error("[cgl shader] has no fragment source!", this);
+        this._log.warn("[cgl shader] has no fragment source!", this._name, this);
         this.srcVert = this.getDefaultVertexShader();
         this.srcFrag = this.getDefaultFragmentShader();
         // return;

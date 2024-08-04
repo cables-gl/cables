@@ -35,6 +35,10 @@
             {
                 "type": 0,
                 "name": "Coordinates index",
+                "values": [
+                    "Pixel",
+                    "0-1"
+                ],
                 "subType": "integer"
             },
             {
@@ -87,7 +91,6 @@
     },
     "summary": "get the color of a pixel in a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -95,5 +98,6 @@
     "exampleProjectId": "bzVSwn",
     "coreLibs": [
         "cgl_pixelreader"
-    ]
+    ],
+    "license": "MIT"
 }
