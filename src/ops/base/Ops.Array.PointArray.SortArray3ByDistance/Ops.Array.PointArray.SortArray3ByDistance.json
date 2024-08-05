@@ -33,16 +33,20 @@
             }
         ]
     },
-
     "changelog": [
         {
             "message": "Ops.Array.SortArray3xByDistance renamed to Ops.Array.SortArray3ByDistance",
             "author": "pandur",
             "date": 1560413930149
+        },
+        {
+            "message": "Ops.Array.SortArray3ByDistance renamed to Ops.Array.PointArray.SortArray3ByDistance",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850079168
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "7C6DlJ"
 }

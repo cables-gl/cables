@@ -43,7 +43,6 @@ inAxis3.onChange = () =>
     if (inAxis3.get() == "Y") for (let i = 0; i < len; i += 3) arr[i + 2] = oldArr[i + 1];
     if (inAxis3.get() == "Z") for (let i = 0; i < len; i += 3) arr[i + 2] = oldArr[i + 2];
 
-
     const maxi = len;
 
     if (inFlipX.get())
@@ -62,7 +61,6 @@ inAxis3.onChange = () =>
             arr[(len - i) + 1] = temp;
         }
 
-
     if (inFlipZ.get())
         for (let i = 0; i < len / 2; i += 3)
         {
@@ -70,7 +68,6 @@ inAxis3.onChange = () =>
             arr[i + 2] = arr[(len - i) + 2];
             arr[(len - i) + 2] = temp;
         }
-
 
     result.set(null);
     result.set(arr);

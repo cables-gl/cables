@@ -14,6 +14,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1716977674690
+        },
+        {
+            "message": "Ops.Array.Array3PointEditor renamed to Ops.Array.PointArray.Array3PointEditor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850062841
         }
     ],
     "layout": {

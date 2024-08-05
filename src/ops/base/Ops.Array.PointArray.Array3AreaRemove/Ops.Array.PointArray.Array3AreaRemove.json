@@ -10,6 +10,12 @@
             "message": "Ops.User.simod.PointRemoval renamed to Ops.Array.Array3AreaRemove",
             "author": "simod",
             "date": 1601387357399
+        },
+        {
+            "message": "Ops.Array.Array3AreaRemove renamed to Ops.Array.PointArray.Array3AreaRemove",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850038352
         }
     ],
     "authorName": "simod",
@@ -94,7 +100,6 @@
     },
     "summary": "remove points from an array3 with different shapes",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
