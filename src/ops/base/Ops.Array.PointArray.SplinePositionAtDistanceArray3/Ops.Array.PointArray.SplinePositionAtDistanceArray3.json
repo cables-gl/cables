@@ -91,13 +91,17 @@
             }
         ]
     },
-
-
     "changelog": [
         {
             "message": "Ops.Array.Array3xSplinePositionAtDistance renamed to Ops.Array.SplinePositionAtDistanceArray3",
             "author": "pandur",
             "date": 1560415583904
+        },
+        {
+            "message": "Ops.Array.SplinePositionAtDistanceArray3 renamed to Ops.Array.PointArray.SplinePositionAtDistanceArray3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850087919
         }
     ],
     "issues": "",

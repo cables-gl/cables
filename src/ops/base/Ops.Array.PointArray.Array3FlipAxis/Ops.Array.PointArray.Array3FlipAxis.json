@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.Array3FlipAxis renamed to Ops.Array.Array3FlipAxis",
             "author": "pandur",
             "date": 1605534511522
+        },
+        {
+            "message": "Ops.Array.Array3FlipAxis renamed to Ops.Array.PointArray.Array3FlipAxis",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850167358
         }
     ],
     "authorName": "pandur",
@@ -72,8 +78,6 @@
     },
     "summary": "Transform Array3 by flipping on an axis",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
