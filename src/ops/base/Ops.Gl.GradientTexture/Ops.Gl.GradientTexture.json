@@ -140,6 +140,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1710259917788
+        },
+        {
+            "message": "Fix problems with flickering because texture was generated not early enough",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722863478104
         }
-    ]
+    ],
+    "license": "MIT"
 }

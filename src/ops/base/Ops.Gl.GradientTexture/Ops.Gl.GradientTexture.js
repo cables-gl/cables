@@ -87,12 +87,13 @@ function lin2srgb(r, g, b)
 
 function update()
 {
-    clearTimeout(timeout);
-    timeout = setTimeout(() =>
-    {
-        const keys = parseKeys();
-        if (keys) updateGradient(keys);
-    }, 5);
+    cgl.addNextFrameOnceCallback(doUpdate);
+}
+
+function doUpdate()
+{
+    const keys = parseKeys();
+    if (keys) updateGradient(keys);
 }
 
 function parseKeys()
