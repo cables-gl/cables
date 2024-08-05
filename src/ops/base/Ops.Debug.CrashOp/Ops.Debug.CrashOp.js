@@ -1,5 +1,6 @@
 const
     exec = op.inTriggerButton("Async crash"),
+    inUndef = op.inTriggerButton("Undefined crash"),
     inExc = op.inTriggerButton("Throw Exception"),
     inErrorFloat2 = op.inFloat("Float", 0),
     inErrorFloat = op.inTriggerButton("Array Exception"),
@@ -30,6 +31,11 @@ inExc.on("trigger", () =>
 {
     throw new Error("crash0r");
 });
+
+inUndef.onTriggered = () =>
+{
+    cdsvdfscdscds;
+};
 
 inPromiseFailEx.onTriggered = () =>
 {

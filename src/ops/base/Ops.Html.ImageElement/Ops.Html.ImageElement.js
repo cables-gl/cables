@@ -17,12 +17,21 @@ filename.onChange = filenameChanged;
 
 element.onload = () =>
 {
-    outWidth.set(element.width);
-    outHeight.set(element.height);
+    if (element)
+    {
+        outWidth.set(element.width);
+        outHeight.set(element.height);
+    }
+    else
+    {
+        outWidth.set(0);
+        outHeight.set(0);
+    }
 };
 function filenameChanged(cacheBuster)
 {
     let url = filename.get();
+
     url = CABLES.cacheBust(url);
 
     element.setAttribute("src", url);
