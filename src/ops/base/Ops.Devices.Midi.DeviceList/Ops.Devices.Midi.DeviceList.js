@@ -9,12 +9,9 @@ function onMIDIFailure()
     outSupport.set(false);
 }
 
-if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
-else onMIDIFailure();
-
 function onMIDISuccess(midiAccess)
 {
-    console.log("onMIDISuccess");
+    if (midi) return;
     let arr = [];
     midi = midiAccess;
     outSupport.set(true);
@@ -34,3 +31,13 @@ function onMIDISuccess(midiAccess)
     outNames.setRef(arr);
     outNumDevices.set(numDevices);
 }
+
+function request()
+{
+    if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+    else onMIDIFailure();
+
+    if (!midi) setTimeout(request, 500);
+}
+
+request();
