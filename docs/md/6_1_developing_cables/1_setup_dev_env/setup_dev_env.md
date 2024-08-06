@@ -26,6 +26,7 @@ But let's get started:
 - make sure you have a profile file for your shell `touch ~/.bash_profile`
 - continue [below](#common)
 
+<a id="common"></a>
 ## Common
 - install [Node Version Manager](https://github.com/nvm-sh/nvm#install--update-script)
 - close and reopen your terminal, make sure nvm is installed properly, `nvm --version` should output some version number
