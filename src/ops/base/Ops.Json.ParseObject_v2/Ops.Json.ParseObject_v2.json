@@ -24,13 +24,12 @@
             {
                 "type": 0,
                 "name": "Valid",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
     "summary": "Parses a string to a JSON object ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -48,5 +47,6 @@
             }
         ]
     },
-    "exampleProjectId": "Z17vG8"
+    "exampleProjectId": "Z17vG8",
+    "license": "MIT"
 }
