@@ -93,7 +93,6 @@ const Op = function ()
         set(v)
         {
             this.setTitle(v);
-            this._log.warn("deprecated op set name ", v);
         }
     });
 
