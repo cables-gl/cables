@@ -71,6 +71,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1715182062662
+        },
+        {
+            "message": "Ops.Array.SubdivideArray3_v2 renamed to Ops.Array.PointArray.SubdivideArray3_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850113040
         }
     ],
     "exampleProjectId": "uywtvc"

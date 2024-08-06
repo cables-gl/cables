@@ -88,6 +88,12 @@
             "message": "Ops.Devices.Midi.MidiInputDevice2 renamed to Ops.Devices.Midi.MidiInputDevice_v2",
             "author": "pandur",
             "date": 1560333646996
+        },
+        {
+            "message": "Workaround browser does not return midi access: try again many times ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722842048728
         }
     ],
     "caniusequery": "Web MIDI API",

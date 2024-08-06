@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "andro",
             "date": 1563376252532
+        },
+        {
+            "message": "Ops.Array.Array3VectorDistance renamed to Ops.Array.PointArray.Array3VectorDistance",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1722850071201
         }
     ],
     "authorName": "andro",
@@ -29,7 +35,6 @@
     },
     "summary": "Returns the distance between 2 points from an array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

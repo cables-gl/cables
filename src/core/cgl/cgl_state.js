@@ -781,7 +781,7 @@ Context.prototype.setShader = Context.prototype.pushShader;
  */
 Context.prototype.addNextFrameOnceCallback = function (cb)
 {
-    if (cb) this._onetimeCallbacks.push(cb);
+    if (cb && this._onetimeCallbacks.indexOf(cb) == -1) this._onetimeCallbacks.push(cb);
 };
 
 // state depthtest

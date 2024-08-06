@@ -349,12 +349,13 @@ function setDevice()
 
 function onMIDIFailure(e)
 {
-    op.uiAttr({ "warning": "No MIDI support in your browser." });
-    if (e)op.error(e);
+    op.setUiError("no midi", "No MIDI support in your browser.");
+    if (e)op.logError("No midi found", e);
 }
 
 function onMIDISuccess(midiAccess)
 {
+    if (midi) return;
     midi = midiAccess;
     const inputs = midi.inputs.values();
 
@@ -374,11 +375,21 @@ function onMIDISuccess(midiAccess)
 
 deviceSelect.onChange = setDevice;
 
-if (navigator.requestMIDIAccess)
+op.setUiError("no midi", null);
+
+request();
+
+function request()
 {
-    navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+    if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+    else onMIDIFailure("no midi/requestMIDIAccess");
+
+    if (!midi)
+    {
+        op.log("request midi again?");
+        setTimeout(request, 500);
+    }
 }
-else onMIDIFailure();
 
 resetIn.onTriggered = () =>
 {
