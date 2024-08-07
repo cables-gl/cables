@@ -96,7 +96,6 @@ inExec.onTriggered = () =>
     if (interActionNeededButton && !videoElement.paused && play.get())
     {
         // remove button after player says no but plays anyhow after some time...
-        op.log("weirdness...");
         interActionNeededButton = false;
         CABLES.interActionNeededButton.remove("videoplayer");
     }
@@ -241,13 +240,13 @@ function updateTexture()
     if (videoElement.videoHeight <= 0)
     {
         op.setUiError("videosize", "video width is 0!");
-        op.log(videoElement);
+        // op.log(videoElement);
         return;
     }
     if (videoElement.videoWidth <= 0)
     {
         op.setUiError("videosize", "video height is 0!");
-        op.log(videoElement);
+        // op.log(videoElement);
         return;
     }
 

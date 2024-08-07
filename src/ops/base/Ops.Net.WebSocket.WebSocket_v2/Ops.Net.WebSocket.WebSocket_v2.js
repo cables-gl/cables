@@ -22,7 +22,7 @@ function checkConnection()
 {
     if (!outConnected.get() && !connecting)
     {
-        op.log("reconnect websocket...");
+        // op.log("reconnect websocket...");
         connect();
     }
 
@@ -43,6 +43,13 @@ function connect()
 
     if (outConnected.get() && connectedTo == inUrl.get()) return;
 
+    if (inUrl.get() && inUrl.get().indexOf("ws://") == -1 && inUrl.get().indexOf("wss://") == -1)
+    {
+        op.setUiError("wrongproto", "only valid protocols are ws:// or wss:// ");
+    }
+    else
+        op.setUiError("wrongproto", null);
+
     if (!inUrl.get() || inUrl.get() === "")
     {
         op.log("websocket: invalid url ");
@@ -55,6 +62,8 @@ function connect()
     if (!window.WebSocket)
         op.logError("Sorry, but your browser doesn't support WebSockets.");
 
+    op.setUiError("websocket", null);
+
     try
     {
         connecting = true;
@@ -63,33 +72,32 @@ function connect()
     }
     catch (e)
     {
+        if (e && e.message)op.setUiError("websocket", e.message);
         op.log("could not connect to", inUrl.get());
         connecting = false;
-        op.log(e);
+        // op.log(e);
     }
 
     if (connection)
     {
-        connection.onerror = function (message)
+        connection.onerror = function (e)
         {
             connecting = false;
-            op.log("ws error");
+
             outConnected.set(false);
             outConnection.set(null);
-            op.setUiError("connection", "Error connecting to websocket server", 2);
+            // op.setUiError("connection", "Error connecting to websocket server", 2);
         };
 
         connection.onclose = function (message)
         {
             connecting = false;
-            op.log("ws close");
             outConnected.set(false);
             outConnection.set(null);
         };
 
         connection.onopen = function (message)
         {
-            // op.setUiError("connection",null)
             connecting = false;
             outConnected.set(true);
             connectedTo = inUrl.get();
@@ -103,8 +111,8 @@ function connect()
             try
             {
                 const json = JSON.parse(message.data);
-                outResult.set(null);
-                outResult.set(json);
+                // outResult.set(null);
+                outResult.setRef(json);
                 outValidJson.set(true);
             }
             catch (e)
