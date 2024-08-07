@@ -23,7 +23,7 @@ function parse()
     }
     catch (ex)
     {
-        op.logError(ex);
+        op.logWarn(ex);
         isValid.set(false);
 
         let outStr = "";
