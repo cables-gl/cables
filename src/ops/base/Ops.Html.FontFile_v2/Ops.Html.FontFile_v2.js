@@ -1,12 +1,16 @@
 const
     filename = op.inUrl("file", [".otf", ".ttf", ".woff", ".woff2"]),
     fontname = op.inString("family"),
+    inActive = op.inBool("Active", true),
     outLoaded = op.outBoolNum("Loaded"),
     loadedTrigger = op.outTrigger("Loaded Trigger");
 
 let loadingId = null;
 let fontFaceObj;
 let doc = null;
+let to = null;
+let style = null;
+let oldFontName = "";
 
 filename.onChange = function ()
 {
@@ -14,10 +18,20 @@ filename.onChange = function ()
     addStyle(null);
 };
 
+inActive.onChange =
 fontname.onChange = () =>
 {
-    addStyle(null);
+    loadSoon();
 };
+
+function loadSoon()
+{
+    clearTimeout(to);
+    to = setTimeout(() =>
+    {
+        addStyle(null);
+    }, 50);
+}
 
 op.patch.on("windowChanged",
     (win) =>
@@ -28,11 +42,27 @@ op.patch.on("windowChanged",
 
 function addStyle(_doc)
 {
+    if (style)style.remove();
+
+    if (fontFaceObj)
+    {
+        const success = doc.fonts.delete(fontFaceObj);
+        fontFaceObj = null;
+
+        setTimeout(() => // delete needs some time, so we delay this a bit.....
+        {
+            op.patch.emitEvent("fontLoaded", oldFontName);
+        }, 100);
+    }
+
+    if (!inActive.get()) return;
     doc = _doc || doc || op.patch.cgl.canvas.ownerDocument || document;
 
     if (loadingId)loadingId = op.patch.cgl.patch.loading.finished(loadingId);
 
     op.setUiError("loadingerror", null);
+
+    oldFontName = fontname.get();
 
     if (filename.get() && fontname.get())
     {
@@ -88,7 +118,7 @@ function addStyle(_doc)
                 .endl() + "  src: url(\"" + fileUrl + "\") format(\"truetype\");"
                 .endl() + "}";
 
-            const style = document.createElement("style");
+            style = document.createElement("style");
             style.classList.add("cablesEle");
             style.type = "text/css";
             style.innerHTML = styleStr;
