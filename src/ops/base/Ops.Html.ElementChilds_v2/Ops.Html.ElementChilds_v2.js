@@ -96,6 +96,8 @@ function rebuild()
         return;
     }
 
+    op.setUiError("multilinks", null);
+
     for (let i = 0; i < inPorts.length; i++)
     {
         const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
@@ -105,6 +107,10 @@ function rebuild()
             currentChild.remove();
         }
         const p = inPorts[i].get();
+        if (inPorts[i].links.length > 1)
+        {
+            op.setUiError("multilinks", "Every port should only have not more then one connection");
+        }
         if (p && parent)
         {
             if (!p.dataset)console.warn("[elementChilds] p no dataset ?!");
