@@ -36,7 +36,7 @@
             {
                 "type": 0,
                 "name": "Finished",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -77,6 +77,6 @@
     ],
     "issues": "",
     "caniusequery": "",
-
-    "youtubeids": []
+    "youtubeids": [],
+    "license": "MIT"
 }
