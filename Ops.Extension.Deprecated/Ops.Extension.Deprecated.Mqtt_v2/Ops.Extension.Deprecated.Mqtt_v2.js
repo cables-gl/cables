@@ -191,7 +191,7 @@ function connect()
             "onFailure": onFailure,
             "userName": mqttUsername.get(),
             "password": mqttPassword.get(),
-            "useSSL": useSsl.get(),
+            "useSSL": useSsl.get()?true:false,
             "timeout": TIMEOUT
         });
     }
@@ -201,7 +201,7 @@ function connect()
         client.connect({
             "onSuccess": onConnect,
             "onFailure": onFailure,
-            "useSSL": useSsl.get(),
+            "useSSL": useSsl.get()?true:false,
             "timeout": TIMEOUT
         });
     }
