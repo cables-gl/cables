@@ -10,7 +10,7 @@
         },
         "loading": false,
         "accBuffersDelete": "DamagedHelmet",
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "extendTitle": "DamagedHelmet",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -138,7 +138,7 @@
           "x": 880.2179767326797,
           "y": 2412.006519975471
         },
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -252,7 +252,7 @@
           "y": 2322.7870117550947
         },
         "loading": false,
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "extendTitle": "gravelpath",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -365,7 +365,7 @@
           "x": 880.2179767326797,
           "y": 2582.7870117550947
         },
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -425,7 +425,7 @@
           "x": 880.2179767326797,
           "y": 2282.7870117550947
         },
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -463,7 +463,7 @@
           "x": 604.2179767326797,
           "y": 2602.7870117550947
         },
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -495,7 +495,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "4lhs69mng",
       "uiAttribs": {
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "translate": {
           "x": 880.2179767326797,
           "y": 1995.7256427900193
@@ -510,9 +510,9 @@
           "title": "exe",
           "links": [
             {
-              "portIn": "exe",
+              "portIn": "Execute",
               "portOut": "innerOut_si0ni96ke",
-              "objIn": "0tuk2726h",
+              "objIn": "2lr4bapbt",
               "objOut": "4lhs69mng"
             }
           ]
@@ -523,7 +523,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "3egrtb8fj",
       "uiAttribs": {
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "translate": {
           "x": 880.2179767326797,
           "y": 3173.7870117550947
@@ -537,10 +537,10 @@
       "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
       "id": "2lr4bapbt",
       "uiAttribs": {
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "translate": {
-          "x": 977.1065351334182,
-          "y": 2195.763099297517
+          "x": 880.2179767326797,
+          "y": 2102.0983324951976
         },
         "comment": "todo: cheating",
         "blueprintSubpatch2": true
@@ -562,6 +562,17 @@
       ],
       "portsOut": [
         {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "Next",
+              "objIn": "0tuk2726h",
+              "objOut": "2lr4bapbt"
+            }
+          ]
+        },
+        {
           "name": "index",
           "value": 4
         }
@@ -571,10 +582,10 @@
       "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
       "id": "5infvno34",
       "uiAttribs": {
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "translate": {
-          "x": 1381.4852160304513,
-          "y": 2196.528679522298
+          "x": 1355.2384360152948,
+          "y": 2157.783432833258
         },
         "loading": false,
         "extendTitle": "helm_aorm",
@@ -678,7 +689,7 @@
       "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
       "id": "460yj0j09",
       "uiAttribs": {
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "translate": {
           "x": 1279.520348628203,
           "y": 2075.7256427900193
@@ -789,7 +800,7 @@
           "x": 880.2179767326797,
           "y": 2512.879756987684
         },
-        "subPatch": "gejb6frjb",
+        "subPatch": "amfads63l",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -945,6 +956,114 @@
           ]
         }
       ]
+    },
+    {
+      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
+      "id": "sf4z4cwht",
+      "uiAttribs": {
+        "subPatch": "amfads63l",
+        "translate": {
+          "x": 1410.5218805028271,
+          "y": 2212.702472905539
+        },
+        "loading": false,
+        "extendTitle": "helm_normal"
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/664711fbbb71706c00625ead/helm_normal.webp",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Save Memory",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "Normal map",
+              "portOut": "Texture",
+              "objIn": "a9flifh9f",
+              "objOut": "sf4z4cwht"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 2048
+        },
+        {
+          "name": "Height",
+          "value": 2048
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "sf4z4cwht"
+      }
     }
   ]
 }
