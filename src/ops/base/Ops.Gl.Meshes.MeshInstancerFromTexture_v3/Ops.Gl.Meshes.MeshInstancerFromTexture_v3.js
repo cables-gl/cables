@@ -150,7 +150,12 @@ function doRender()
     if (!mesh) return;
 
     if (mesh.numInstances != inTex1.get().width * inTex1.get().height) reset();
-    if (recalc) setupArray();
+    if (recalc)
+    {
+        setupArray();
+        mod.bind();
+        mod.unbind();
+    }
 
     if (inTex1.get())mod.pushTexture("MOD_texTrans", inTex1.get().tex);
     if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
