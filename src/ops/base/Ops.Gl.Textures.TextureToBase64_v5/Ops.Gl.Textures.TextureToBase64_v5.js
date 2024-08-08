@@ -105,7 +105,6 @@ function update()
         finished.trigger();
         texChanged = false;
         loadingId = cgl.patch.loading.finished(loadingId);
-        console.log("got it");
     });
 
     if (retry) setTimeout(retrySoon.bind(this), 50);
