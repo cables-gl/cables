@@ -67,6 +67,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1707988967571
+        },
+        {
+            "message": "Fix bug not rendering correctly on the first frame",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1723112532793
         }
     ],
     "authorName": "pandur",
@@ -74,31 +80,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry",
                 "objType": "geometry"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Limit Instances",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num Instances",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Billboarding index",
                 "values": [
                     "Off",
@@ -108,17 +114,17 @@
                 "subType": "integer"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Position Texture",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Rotation Texture",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation index",
                 "values": [
                     "Euler",
@@ -128,22 +134,22 @@
                 "subType": "integer"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Scale Texture",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Color Texture",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "TexCoord Texture",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Color Texture Blendmode index",
                 "values": [
                     "Multiply",
@@ -153,33 +159,33 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ignore Alpha Less Than",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Multiply Pos X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Multiply Pos Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Multiply Pos Z",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num",
                 "subType": "number"
             }
@@ -214,5 +220,6 @@
         "cgl_shadermodifier"
     ],
     "exampleProjectId": "H3cEpX",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }

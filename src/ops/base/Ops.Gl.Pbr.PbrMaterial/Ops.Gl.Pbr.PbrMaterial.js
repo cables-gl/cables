@@ -77,8 +77,9 @@ op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoatRoughness, inUseNormalMapForCC, inTexClearCoatNormal]);
 op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness, inTFThicknessTexMin, inTFThicknessTexMax]);
 // globals
-const PBRShader = new CGL.Shader(cgl, "PBRShader", this);
+let PBRShader = new CGL.Shader(cgl, "PBRShader", this);
 PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+
 // light sources (except IBL)
 let PBRLightStack = [];
 const lightUniforms = [];
@@ -267,12 +268,6 @@ function setEnvironmentLighting(enabled)
     PBRShader.toggleDefine("USE_ENVIRONMENT_LIGHTING", enabled);
 }
 
-op.preRender = function ()
-{
-    // PBRShader.bind();
-    // doRender();
-};
-
 function updateIBLTexDefines()
 {
     inMipLevels.setUiAttribs({ "greyout": !inTexPrefiltered.get() });
@@ -378,8 +373,8 @@ function updateLights()
         {
             PBRLightStack.length = 0;
             for (let i = 0; i < cgl.frameStore.lightStack.length; i++)
-
                 PBRLightStack[i] = cgl.frameStore.lightStack[i];
+
             buildShader();
 
             currentLightCount = cgl.frameStore.lightStack.length;
@@ -389,6 +384,7 @@ function updateLights()
 
 function doRender()
 {
+    if (!PBRShader)buildShader();
     cgl.pushShader(PBRShader);
     let useDefaultLight = false;
 
@@ -397,9 +393,7 @@ function doRender()
     let numLights = 0;
     if (cgl.frameStore.lightStack)numLights = cgl.frameStore.lightStack.length;
 
-    if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) &&
-        !inLightmap.isLinked() && numLights == 0)
-
+    if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) && !inLightmap.isLinked() && numLights == 0)
     {
         useDefaultLight = true;
         op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 1);
