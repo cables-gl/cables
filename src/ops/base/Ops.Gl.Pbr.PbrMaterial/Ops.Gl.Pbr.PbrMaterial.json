@@ -15,47 +15,47 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "R",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "G",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "B",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "A",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Roughness",
                 "group": "Shader Parameters",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Metalness",
                 "group": "Shader Parameters",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Alpha Mode index",
                 "values": [
                     "Opaque",
@@ -67,73 +67,73 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use Clear Coat",
                 "group": "Clear Coat",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Clear Coat Intensity",
                 "group": "Clear Coat",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Clear Coat Roughness",
                 "group": "Clear Coat",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use Normal map for Clear Coat",
                 "group": "Clear Coat",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Clear Coat Normal map",
                 "group": "Clear Coat",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use Thin Film",
                 "group": "Thin Film Iridescence",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Thin Film Intensity",
                 "group": "Thin Film Iridescence",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Thin Film IOR",
                 "group": "Thin Film Iridescence",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Thin Film Thickness (nm)",
                 "group": "Thin Film Iridescence",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Thickness Tex Min",
                 "group": "Thin Film Iridescence",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Thickness Tex Max",
                 "group": "Thin Film Iridescence",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Tonemapping index",
                 "values": [
                     "sRGB",
@@ -144,37 +144,37 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Exposure",
                 "group": "Tonemapping",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emission Intensity",
                 "group": "Advanced Shader Parameters",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Disable geometric roughness",
                 "group": "Advanced Shader Parameters",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use roughness from normal map",
                 "group": "Advanced Shader Parameters",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use Vertex Colours",
                 "group": "Advanced Shader Parameters",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vertex Colour Mode index",
                 "values": [
                     "colour",
@@ -188,103 +188,103 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height Intensity",
                 "group": "Advanced Shader Parameters",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Faster heightmapping",
                 "group": "Advanced Shader Parameters",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "IBL LUT",
                 "group": "Lighting",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Diffuse Irradiance",
                 "group": "Lighting",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Pre-filtered envmap",
                 "group": "Lighting",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Num mip levels",
                 "group": "Lighting",
                 "subType": "integer"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Albedo",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "AORM",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Normal map",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Emission",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Height",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Lightmap",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Thin Film",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse Intensity",
                 "group": "Lighting",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Specular Intensity",
                 "group": "Lighting",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Lightmap is RGBE",
                 "group": "Lighting",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Lightmap Intensity",
                 "group": "Lighting",
                 "subType": "number"
@@ -292,11 +292,11 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader"
             }
         ]
@@ -447,5 +447,6 @@
             }
         ]
     },
-    "exampleProjectId": "9z9kFK"
+    "exampleProjectId": "9z9kFK",
+    "license": "MIT"
 }

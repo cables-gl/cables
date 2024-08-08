@@ -4,7 +4,7 @@
       "opId": "7f601f11-6d44-4c0a-842a-51b4fa8ccd6b",
       "id": "jqf9xuicl",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": -12,
           "y": -80
@@ -37,7 +37,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "s3ipieojx",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": 1,
           "y": -420
@@ -104,6 +104,12 @@
               "portOut": "innerOut_uxwx45pbg",
               "objIn": "9mnylc2fx",
               "objOut": "s3ipieojx"
+            },
+            {
+              "portIn": "exe",
+              "portOut": "innerOut_uxwx45pbg",
+              "objIn": "q0a4mifwl",
+              "objOut": "s3ipieojx"
             }
           ]
         }
@@ -113,7 +119,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "dc2cts19z",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": 1,
           "y": 140.397909800062
@@ -133,7 +139,7 @@
       "opId": "bc110e48-812d-489d-b1b3-b09c644c6982",
       "id": "xtisz9h2s",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": 312,
           "y": -160
@@ -193,7 +199,7 @@
       "opId": "6b7f9561-6faf-4df7-ac3b-64235dded700",
       "id": "to8nqx69d",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": 312,
           "y": -340
@@ -249,7 +255,7 @@
       "opId": "bff9c3d9-e63a-46d2-a59f-932c715aceab",
       "id": "129jufs0y",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": 336,
           "y": -260
@@ -275,8 +281,8 @@
       "opId": "e640619f-235c-4543-bbf8-b358e0283180",
       "id": "rxnsr0uls",
       "uiAttribs": {
-        "extendTitle": 1,
-        "subPatch": "f5xwnyikr",
+        "extendTitle": 0,
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": -337.6741504378739,
           "y": -88.74245733376421
@@ -287,7 +293,7 @@
       "portsOut": [
         {
           "name": "timesTriggered",
-          "value": 1
+          "value": 0
         }
       ]
     },
@@ -296,7 +302,7 @@
       "id": "amfuo8tfs",
       "uiAttribs": {
         "extendTitle": 0,
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": -249.6035813745615,
           "y": 29.397909800061996
@@ -315,24 +321,24 @@
       "opId": "ed772bc0-ab12-427e-8378-64ea4f7635ed",
       "id": "9mnylc2fx",
       "uiAttribs": {
-        "subPatch": "f5xwnyikr",
+        "subPatch": "ubfd8pytb",
         "translate": {
           "x": -24,
           "y": -240
         },
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true,
-        "loading": false,
-        "error": null
+        "loading": false
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Format index",
-          "value": 0
+          "value": 2
         },
         {
           "name": "Format",
-          "value": "PNG"
+          "value": "WEBP"
         },
         {
           "name": "Output dataUrl",
@@ -376,9 +382,27 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
+      "id": "q0a4mifwl",
+      "uiAttribs": {
+        "extendTitle": 0,
+        "subPatch": "ubfd8pytb",
+        "translate": {
+          "x": -288,
+          "y": -200
+        }
+      },
+      "portsOut": [
+        {
+          "name": "timesTriggered",
+          "value": 0
+        }
       ],
       "storage": {
-        "ref": "9mnylc2fx"
+        "ref": "q0a4mifwl"
       }
     }
   ]

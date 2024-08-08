@@ -101,9 +101,16 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1716367870706
+        },
+        {
+            "message": "Fixed bug: was not updating output in all cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1723109581607
         }
     ],
     "coreLibs": [
         "cgl_pixelreader"
-    ]
+    ],
+    "license": "MIT"
 }

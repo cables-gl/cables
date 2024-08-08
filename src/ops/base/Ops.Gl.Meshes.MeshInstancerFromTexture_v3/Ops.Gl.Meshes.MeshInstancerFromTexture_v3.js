@@ -69,25 +69,22 @@ mod.addUniformVert("f", "MOD_alphaThresh", inAlphaThresh);
 mod.addUniformVert("3f", "MOD_mulRGB", inMulR, inMulG, inMulB);
 
 inBillboarding.onChange =
-inBlendMode.onChange =
-inRotMode.onChange =
-inTex1.onChange =
-inTex3.onChange =
-inTex4.onChange =
-inTex5.onChange =
-inTex2.onChange = updateDefines;
+    inBlendMode.onChange =
+    inRotMode.onChange =
+    inTex1.onChange =
+    inTex3.onChange =
+    inTex4.onChange =
+    inTex5.onChange =
+    inTex2.onChange = updateDefines;
+
 updateUi();
-// let needsNewMesh = false;
 exe.onTriggered = doRender;
-exe.onLinkChanged = function ()
-{
-    if (!exe.isLinked()) removeModule();
-};
 
 inLimit.onChange =
 inNum.onChange =
     function ()
     {
+        updateDefines();
         updateUi();
         reset();
     };
@@ -120,8 +117,6 @@ function updateDefines()
     mod.toggleDefine("USE_TEX_SCALE", inTex3.get());
     mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
     mod.toggleDefine("USE_TEX_TC", inTex5.get());
-
-    // mod.define("INSTANCING");
 }
 
 geom.onChange = function ()
@@ -131,11 +126,6 @@ geom.onChange = function ()
 
     reset();
 };
-
-function removeModule()
-{
-
-}
 
 function setupArray()
 {
@@ -152,16 +142,15 @@ function setupArray()
 
 function doRender()
 {
+    if (!inTex1.get()) return;
     if (!mesh && geom.get())
     {
         mesh = new CGL.Mesh(cgl, geom.get());
     }
     if (!mesh) return;
+
+    if (mesh.numInstances != inTex1.get().width * inTex1.get().height) reset();
     if (recalc) setupArray();
-
-    if (!inTex1.get()) return;
-
-    mod.bind();
 
     if (inTex1.get())mod.pushTexture("MOD_texTrans", inTex1.get().tex);
     if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
@@ -172,10 +161,9 @@ function doRender()
     mod.setUniformValue("MOD_texSizeX", inTex1.get().width);
     mod.setUniformValue("MOD_texSizeY", inTex1.get().height);
 
-    if (mesh.numInstances != inTex1.get().width * inTex1.get().height) reset();
-
     outNum.set(mesh.numInstances);
 
+    mod.bind();
     if (mesh.numInstances > 0) mesh.render(cgl.getShader());
 
     outTrigger.trigger();
