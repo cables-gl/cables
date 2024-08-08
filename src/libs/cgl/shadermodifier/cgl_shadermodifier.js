@@ -47,7 +47,7 @@ class ShaderModifier
             if (this._boundShader) this._boundShader.shader.dispose();
             if (shader._needsRecompile) shader.compile();
             this.needsTexturePush = true;
-            this.needsTexturePush = true;
+
             this._boundShader = this._origShaders[shader.id] =
             {
                 "lastCompile": shader.lastCompile,
@@ -70,7 +70,7 @@ class ShaderModifier
 
         if (this.needsTexturePush)
         {
-            for (let j = 0; j < this._textures.length; j += 1)
+            for (let j = 0; j < this._textures.length; j++)
             {
                 const uniformName = this._textures[j][0];
                 const tex = this._textures[j][1];
