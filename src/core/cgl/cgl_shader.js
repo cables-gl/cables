@@ -1634,6 +1634,7 @@ Shader.prototype.pushTexture = function (uniform, t, type)
     }
     if (!t)
     {
+        console.log("no tex...");
         return;
     }
     if (!t.hasOwnProperty("tex") && !(t instanceof WebGLTexture))
