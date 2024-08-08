@@ -53,15 +53,7 @@ class ShaderModifier
                 "orig": shader,
                 "shader": shader.copy()
             };
-
-            // if (this._cgl.glVersion == 1)
-            // {
-            //     this._boundShader.shader.enableExtension("GL_OES_standard_derivatives");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_float");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_float_linear");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_half_float");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_half_float_linear");
-            // }
+            console.log("aaa");
 
             this._addModulesToShader(this._boundShader.shader);
             this._updateDefinesShader(this._boundShader.shader);
