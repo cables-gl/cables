@@ -1,80 +1,6 @@
 {
   "ops": [
     {
-      "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
-      "id": "zguds7yc6",
-      "uiAttribs": {
-        "translate": {
-          "x": 1176.1965678079205,
-          "y": 3437.240108073719
-        },
-        "subPatch": "20gkcv08a",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Scale",
-          "value": 0.3
-        },
-        {
-          "name": "Limit Instances",
-          "value": 0
-        },
-        {
-          "name": "Num Instances",
-          "value": 1000
-        },
-        {
-          "name": "Billboarding index",
-          "value": 0
-        },
-        {
-          "name": "Billboarding",
-          "value": "Off"
-        },
-        {
-          "name": "Rotation index",
-          "value": 0
-        },
-        {
-          "name": "Rotation",
-          "value": "Euler"
-        },
-        {
-          "name": "Color Texture Blendmode index",
-          "value": 0
-        },
-        {
-          "name": "Color Texture Blendmode",
-          "value": "Multiply"
-        },
-        {
-          "name": "Ignore Alpha Less Than",
-          "value": 0.5
-        },
-        {
-          "name": "Multiply Pos X",
-          "value": 1
-        },
-        {
-          "name": "Multiply Pos Y",
-          "value": 1
-        },
-        {
-          "name": "Multiply Pos Z",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Num",
-          "value": 1024
-        }
-      ]
-    },
-    {
       "opId": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
       "id": "41ibsufb6",
       "uiAttribs": {
@@ -82,7 +8,7 @@
           "x": 1176.1965678079205,
           "y": 3137.240108073719
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -179,10 +105,10 @@
       "id": "f6huf2s4d",
       "uiAttribs": {
         "translate": {
-          "x": 1176.1965678079205,
-          "y": 3084.0761068087127
+          "x": 1164,
+          "y": 3040
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -235,7 +161,7 @@
           "x": 1433.1772618067412,
           "y": 2975.1821900701807
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -339,6 +265,12 @@
           "name": "Texture",
           "links": [
             {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "q0nsu0e47",
+              "objOut": "dfc6eerfp"
+            },
+            {
               "portIn": "Rotation Texture",
               "portOut": "Texture",
               "objIn": "zguds7yc6",
@@ -360,7 +292,7 @@
           "x": 1481.1772618067412,
           "y": 3035.1821900701807
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -468,12 +400,6 @@
               "portOut": "Texture",
               "objIn": "zguds7yc6",
               "objOut": "oeiloiyao"
-            },
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "q0nsu0e47",
-              "objOut": "oeiloiyao"
             }
           ]
         },
@@ -491,7 +417,7 @@
           "x": 1613.1772618067412,
           "y": 3115.1821900701807
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -617,7 +543,7 @@
           "x": 839.1965678079205,
           "y": 3177.240108073719
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -716,9 +642,9 @@
       "uiAttribs": {
         "translate": {
           "x": 839.1965678079205,
-          "y": 3097.240108073719
+          "y": 3098.6979981905824
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -782,12 +708,23 @@
           "x": 1068,
           "y": 2880
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
       "storage": {},
       "portsOut": [
+        {
+          "name": "trigger 0",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger 0",
+              "objIn": "q0nsu0e47",
+              "objOut": "aqinh4zvr"
+            }
+          ]
+        },
         {
           "name": "trigger 2",
           "links": [
@@ -809,17 +746,6 @@
               "objOut": "aqinh4zvr"
             }
           ]
-        },
-        {
-          "name": "trigger 14",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "trigger 14",
-              "objIn": "q0nsu0e47",
-              "objOut": "aqinh4zvr"
-            }
-          ]
         }
       ]
     },
@@ -831,7 +757,7 @@
           "x": 1500,
           "y": 3620
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -904,7 +830,7 @@
           "x": 1500,
           "y": 3540.834201443807
         },
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -993,7 +919,7 @@
       "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
       "id": "67v8c8e3r",
       "uiAttribs": {
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "translate": {
           "x": 1068,
           "y": 2797.746526836475
@@ -1039,7 +965,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "yrprj7y9f",
       "uiAttribs": {
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "translate": {
           "x": 1068,
           "y": 2689.657283764828
@@ -1067,7 +993,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "e8369lnar",
       "uiAttribs": {
-        "subPatch": "20gkcv08a",
+        "subPatch": "xan2w4onw",
         "translate": {
           "x": 1068,
           "y": 3731
@@ -1076,6 +1002,150 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
+      "id": "zguds7yc6",
+      "uiAttribs": {
+        "translate": {
+          "x": 1176.1965678079205,
+          "y": 3437.236435825004
+        },
+        "subPatch": "xan2w4onw",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Scale",
+          "value": 0.3
+        },
+        {
+          "name": "Limit Instances",
+          "value": 0
+        },
+        {
+          "name": "Num Instances",
+          "value": 1000
+        },
+        {
+          "name": "Billboarding index",
+          "value": 0
+        },
+        {
+          "name": "Billboarding",
+          "value": "Off"
+        },
+        {
+          "name": "Rotation index",
+          "value": 0
+        },
+        {
+          "name": "Rotation",
+          "value": "Euler"
+        },
+        {
+          "name": "Color Texture Blendmode index",
+          "value": 0
+        },
+        {
+          "name": "Color Texture Blendmode",
+          "value": "Multiply"
+        },
+        {
+          "name": "Ignore Alpha Less Than",
+          "value": 0.5
+        },
+        {
+          "name": "Multiply Pos X",
+          "value": 1
+        },
+        {
+          "name": "Multiply Pos Y",
+          "value": 1
+        },
+        {
+          "name": "Multiply Pos Z",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Num",
+          "value": 1024
+        }
+      ]
+    },
+    {
+      "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
+      "id": "k52ht1rf9",
+      "uiAttribs": {
+        "subPatch": "xan2w4onw",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Scale",
+          "value": 0.3
+        },
+        {
+          "name": "Limit Instances",
+          "value": 0
+        },
+        {
+          "name": "Num Instances",
+          "value": 1000
+        },
+        {
+          "name": "Billboarding index",
+          "value": 0
+        },
+        {
+          "name": "Billboarding",
+          "value": "Off"
+        },
+        {
+          "name": "Rotation index",
+          "value": 0
+        },
+        {
+          "name": "Rotation",
+          "value": "Euler"
+        },
+        {
+          "name": "Color Texture Blendmode index",
+          "value": 0
+        },
+        {
+          "name": "Color Texture Blendmode",
+          "value": "Multiply"
+        },
+        {
+          "name": "Ignore Alpha Less Than",
+          "value": 0.5
+        },
+        {
+          "name": "Multiply Pos X",
+          "value": 1
+        },
+        {
+          "name": "Multiply Pos Y",
+          "value": 1
+        },
+        {
+          "name": "Multiply Pos Z",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Num",
+          "value": 0
+        }
+      ]
     }
   ]
 }

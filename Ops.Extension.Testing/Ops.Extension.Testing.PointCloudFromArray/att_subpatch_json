@@ -8,8 +8,7 @@
           "x": 912.2124285794649,
           "y": 2553.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -19,15 +18,15 @@
           "name": "Vertices",
           "links": [
             {
-              "portIn": "Array",
-              "portOut": "Vertices",
-              "objIn": "0sa4fbmxh",
-              "objOut": "us71qhar2"
-            },
-            {
               "portIn": "array",
               "portOut": "Vertices",
               "objIn": "maj69xeqp",
+              "objOut": "us71qhar2"
+            },
+            {
+              "portIn": "Array",
+              "portOut": "Vertices",
+              "objIn": "0sa4fbmxh",
               "objOut": "us71qhar2"
             }
           ]
@@ -43,8 +42,7 @@
           "x": 636.2124285794649,
           "y": 2913.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -89,14 +87,13 @@
       "opId": "86fcfd8c-038d-4b91-9820-a08114f6b7eb",
       "id": "6ykmqpe0s",
       "uiAttribs": {
-        "title": "/",
         "mathTitle": true,
+        "title": "/",
         "translate": {
           "x": 636.2124285794649,
           "y": 2833.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -135,8 +132,7 @@
           "x": 636.2124285794649,
           "y": 3033.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -170,8 +166,7 @@
           "x": 1248.2124285794648,
           "y": 2913.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -253,54 +248,15 @@
       ]
     },
     {
-      "opId": "0a6d9c6f-6459-45ca-88ad-268a1f7304db",
-      "id": "0sa4fbmxh",
-      "uiAttribs": {
-        "translate": {
-          "x": 1152.2124285794648,
-          "y": 3313.4125802432663
-        },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Array",
-          "title": "Positions"
-        },
-        {
-          "name": "Num Points",
-          "value": 0
-        },
-        {
-          "name": "Scramble Texcoords",
-          "value": 1
-        },
-        {
-          "name": "Seed",
-          "value": 1
-        },
-        {
-          "name": "Coordinates",
-          "value": 0,
-          "title": "Texture Coordinates"
-        }
-      ]
-    },
-    {
       "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
       "id": "qvke62tcs",
       "uiAttribs": {
         "translate": {
-          "x": 1320.2124285794648,
-          "y": 2553.4125802432663
+          "x": 1397.5568779294435,
+          "y": 2440.7106683332977
         },
         "loading": false,
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "extendTitle": "dot",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -350,7 +306,7 @@
         },
         {
           "name": "Pre Multiplied Alpha",
-          "value": true
+          "value": 1
         },
         {
           "name": "Active",
@@ -408,8 +364,7 @@
           "x": 1152,
           "y": 2540
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -448,10 +403,9 @@
       "uiAttribs": {
         "translate": {
           "x": 1152.2124285794648,
-          "y": 2433.4125802432663
+          "y": 2439.4218568801502
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -496,8 +450,7 @@
           "x": 1152.2124285794648,
           "y": 2393.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -554,8 +507,7 @@
           "x": 636.2124285794649,
           "y": 2993.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -588,8 +540,7 @@
           "x": 900.2124285794649,
           "y": 2453.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -638,8 +589,7 @@
           "x": 636.2124285794649,
           "y": 2773.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -666,8 +616,7 @@
           "x": 1152.2124285794648,
           "y": 2633.4125802432663
         },
-        "color": null,
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -795,7 +744,7 @@
           "x": 980.4254311411166,
           "y": 2266.070016998254
         },
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -829,7 +778,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "u8m2pp8vy",
       "uiAttribs": {
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "translate": {
           "x": 980,
           "y": 2104.99111437357
@@ -857,15 +806,52 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "k6bb7cups",
       "uiAttribs": {
-        "subPatch": "mq5j1m7gz",
+        "subPatch": "qridqgoyz",
         "translate": {
           "x": 980,
-          "y": 3393.4125802432663
+          "y": 3424.4125802432663
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "0a6d9c6f-6459-45ca-88ad-268a1f7304db",
+      "id": "0sa4fbmxh",
+      "uiAttribs": {
+        "translate": {
+          "x": 1152.2124285794648,
+          "y": 3313.4125802432663
+        },
+        "subPatch": "qridqgoyz",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Array",
+          "title": "Positions"
+        },
+        {
+          "name": "Num Points",
+          "value": 0
+        },
+        {
+          "name": "Scramble Texcoords",
+          "value": true
+        },
+        {
+          "name": "Seed",
+          "value": 1.5
+        },
+        {
+          "name": "Coordinates",
+          "value": 0,
+          "title": "Texture Coordinates"
+        }
+      ]
     }
   ]
 }

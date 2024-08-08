@@ -11,7 +11,7 @@
           "x": 1076.379993338775,
           "y": 2584.535719083833
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -83,7 +83,7 @@
           "y": 2704.535719083833
         },
         "comment": "geometry taken from GLTF scene",
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "extendTitle": "Node",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -143,10 +143,9 @@
       "uiAttribs": {
         "translate": {
           "x": 1848.6985153396417,
-          "y": 2803.1768995979423
+          "y": 2791.336655948354
         },
-        "comment": null,
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -174,9 +173,9 @@
           "name": "trigger",
           "links": [
             {
-              "portIn": "render",
+              "portIn": "Execute",
               "portOut": "trigger",
-              "objIn": "nrwyu32tt",
+              "objIn": "3ics2xcie",
               "objOut": "ixrgc4z9p"
             }
           ]
@@ -191,7 +190,7 @@
           "x": 1280.379993338775,
           "y": 3064.535719083833
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -232,7 +231,7 @@
           "x": 1280.379993338775,
           "y": 3144.535719083833
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -296,7 +295,7 @@
           "x": 1856.379993338775,
           "y": 2948.3513681408767
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -393,10 +392,10 @@
       "id": "nrwyu32tt",
       "uiAttribs": {
         "translate": {
-          "x": 1856.379993338775,
-          "y": 2904.535719083833
+          "x": 1936.5777785800728,
+          "y": 2727.524049896893
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -466,19 +465,6 @@
           "name": "billboard",
           "value": 0
         }
-      ],
-      "portsOut": [
-        {
-          "name": "trigger",
-          "links": [
-            {
-              "portIn": "Render",
-              "portOut": "trigger",
-              "objIn": "achszht90",
-              "objOut": "nrwyu32tt"
-            }
-          ]
-        }
       ]
     },
     {
@@ -489,7 +475,7 @@
           "x": 1856.379993338775,
           "y": 3224.535719083833
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -517,7 +503,7 @@
           "y": 3532.556433949571
         },
         "comment": "you can plug any texture into here\nbut as you see in the VizTexture on the left,\nit would be tough to draw meaningful shapes\nwithout proper conversion",
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -564,7 +550,7 @@
           "x": 1100.379993338775,
           "y": 2765.5946856164805
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -667,7 +653,7 @@
         },
         "accBuffersDelete": "head",
         "loading": false,
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "extendTitle": "head",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -806,7 +792,7 @@
           "x": 1280.379993338775,
           "y": 2944.535719083833
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -921,91 +907,6 @@
       ]
     },
     {
-      "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
-      "id": "44q3xbryu",
-      "uiAttribs": {
-        "translate": {
-          "x": 1856.379993338775,
-          "y": 3024.535719083833
-        },
-        "subPatch": "t9nm0oz9i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Scale",
-          "value": 1
-        },
-        {
-          "name": "Limit Instances",
-          "value": 1
-        },
-        {
-          "name": "Num Instances",
-          "value": 10081
-        },
-        {
-          "name": "Billboarding index",
-          "value": 0
-        },
-        {
-          "name": "Billboarding",
-          "value": "Off"
-        },
-        {
-          "name": "Rotation index",
-          "value": 0
-        },
-        {
-          "name": "Rotation",
-          "value": "Euler"
-        },
-        {
-          "name": "Color Texture Blendmode index",
-          "value": 0
-        },
-        {
-          "name": "Color Texture Blendmode",
-          "value": "Multiply"
-        },
-        {
-          "name": "Ignore Alpha Less Than",
-          "value": 0.5
-        },
-        {
-          "name": "Multiply Pos X",
-          "value": 1
-        },
-        {
-          "name": "Multiply Pos Y",
-          "value": 1
-        },
-        {
-          "name": "Multiply Pos Z",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Trigger Out",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "Trigger Out",
-              "objIn": "c2tcea2qn",
-              "objOut": "44q3xbryu"
-            }
-          ]
-        },
-        {
-          "name": "Num",
-          "value": 10081
-        }
-      ]
-    },
-    {
       "opId": "72a2449e-db5c-44e7-ad9f-49f3c78b8c71",
       "id": "z3mzq2d7d",
       "uiAttribs": {
@@ -1013,7 +914,7 @@
           "x": 1856.379993338775,
           "y": 3352.556433949571
         },
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1134,7 +1035,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qtvzeoxx6",
       "uiAttribs": {
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "translate": {
           "x": 1171.3435105283638,
           "y": 2370.1873523625077
@@ -1162,10 +1063,10 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "p9vmm0mmn",
       "uiAttribs": {
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "translate": {
           "x": 1171.3435105283638,
-          "y": 3624.535719083833
+          "y": 3643.556433949571
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -1176,7 +1077,7 @@
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "g3ux0lwn1",
       "uiAttribs": {
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "translate": {
           "x": 1848.6985153396417,
           "y": 2683.1768995979423
@@ -1233,33 +1134,34 @@
       "id": "qenxybx1c",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "translate": {
           "x": 2092.6306686322187,
           "y": 2545.3719451695983
         },
-        "extendTitle": "#currentTestName"
+        "extendTitle": "#currentTestName",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
           "value": "currentTestName"
         }
-      ],
-      "storage": {
-        "ref": "qenxybx1c"
-      }
+      ]
     },
     {
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "ksz73rfez",
       "uiAttribs": {
-        "subPatch": "t9nm0oz9i",
+        "subPatch": "rew6164mn",
         "translate": {
           "x": 2104.6306686322187,
           "y": 2450.1873523625077
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Name",
@@ -1272,10 +1174,145 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "opId": "d69316f1-bde9-4645-8280-c635a8982e0d",
+      "id": "3ics2xcie",
+      "uiAttribs": {
+        "subPatch": "rew6164mn",
+        "translate": {
+          "x": 1856.379993338775,
+          "y": 2880
+        }
+      },
+      "portsIn": [
+        {
+          "name": "Diffuse R",
+          "value": 0.124481201171875
+        },
+        {
+          "name": "Diffuse G",
+          "value": 1
+        },
+        {
+          "name": "Diffuse B",
+          "value": 0.9172361135482786
+        },
+        {
+          "name": "Diffuse A",
+          "value": 1
+        },
+        {
+          "name": "Double Sided",
+          "value": 0
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "next",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "next",
+              "objIn": "achszht90",
+              "objOut": "3ics2xcie"
+            }
+          ]
+        }
       ],
       "storage": {
-        "ref": "ksz73rfez"
+        "ref": "3ics2xcie"
       }
+    },
+    {
+      "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
+      "id": "44q3xbryu",
+      "uiAttribs": {
+        "translate": {
+          "x": 1856.379993338775,
+          "y": 3024.535719083833
+        },
+        "subPatch": "rew6164mn",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Scale",
+          "value": 1.7
+        },
+        {
+          "name": "Limit Instances",
+          "value": 1
+        },
+        {
+          "name": "Num Instances",
+          "value": 10081
+        },
+        {
+          "name": "Billboarding index",
+          "value": 0
+        },
+        {
+          "name": "Billboarding",
+          "value": "Off"
+        },
+        {
+          "name": "Rotation index",
+          "value": 0
+        },
+        {
+          "name": "Rotation",
+          "value": "Euler"
+        },
+        {
+          "name": "Color Texture Blendmode index",
+          "value": 0
+        },
+        {
+          "name": "Color Texture Blendmode",
+          "value": "Multiply"
+        },
+        {
+          "name": "Ignore Alpha Less Than",
+          "value": 0.5
+        },
+        {
+          "name": "Multiply Pos X",
+          "value": 1
+        },
+        {
+          "name": "Multiply Pos Y",
+          "value": 1
+        },
+        {
+          "name": "Multiply Pos Z",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Trigger Out",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Trigger Out",
+              "objIn": "c2tcea2qn",
+              "objOut": "44q3xbryu"
+            }
+          ]
+        },
+        {
+          "name": "Num",
+          "value": 10081
+        }
+      ]
     }
   ]
 }
