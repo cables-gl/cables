@@ -451,7 +451,15 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)
     {
         patch.loading.finished(loadingId);
         if (patch.isEditorMode()) gui.jobs().finish("loadaudio" + loadingId);
-        audioContext.decodeAudioData(request.response, onFinished, onError);
+
+        try
+        {
+            audioContext.decodeAudioData(request.response, onFinished, onError);
+        }
+        catch (e)
+        {
+            onError(e);
+        }
     };
     request.send();
 };

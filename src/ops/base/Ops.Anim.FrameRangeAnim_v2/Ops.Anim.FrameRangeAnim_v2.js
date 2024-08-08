@@ -1,13 +1,14 @@
-let inTime = op.inValue("Time");
-let inStr = op.inString("Frames");
-let inLoop = op.inValueBool("Loop");
-let inRewind = op.inTriggerButton("Rewind");
-let outValue = op.outNumber("result time");
-let outArr = op.outArray("Expanded Frames");
-let finished = op.outBoolNum("Finished", false);
-let finishedTrigger = op.outTrigger("Finished Trigger");
-let outAnimLength = op.outNumber("Anim Length");
-let outProgress = op.outNumber("Progress");
+const
+    inTime = op.inValue("Time"),
+    inStr = op.inString("Frames"),
+    inLoop = op.inValueBool("Loop"),
+    inRewind = op.inTriggerButton("Rewind"),
+    outValue = op.outNumber("result time"),
+    outArr = op.outArray("Expanded Frames"),
+    finished = op.outBoolNum("Finished", false),
+    finishedTrigger = op.outTrigger("Finished Trigger"),
+    outAnimLength = op.outNumber("Anim Length"),
+    outProgress = op.outNumber("Progress");
 
 let anim = new CABLES.Anim();
 let FPS = 30;
@@ -42,6 +43,7 @@ function setupAnim(frames)
 function parse()
 {
     let str = inStr.get();
+    if (!str) return;
     let frames = [];
     let parts = str.split(",");
 

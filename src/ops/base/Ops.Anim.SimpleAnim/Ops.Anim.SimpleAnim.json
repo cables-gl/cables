@@ -2,65 +2,65 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "reset"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "rewind"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "start",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "end",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "duration",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "loop",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Wait for Reset",
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "easing",
-                "subType": "string"
+                "type": 0,
+                "name": "easing index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "finished",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Finished Trigger"
             }
         ]
@@ -124,6 +124,6 @@
     "created": 1506695249414,
     "youtubeid": "",
     "issues": "",
-
-    "exampleProjectId": "dOlV9L"
+    "exampleProjectId": "dOlV9L",
+    "license": "MIT"
 }

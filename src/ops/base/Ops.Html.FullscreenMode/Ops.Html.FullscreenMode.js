@@ -15,6 +15,11 @@ function setState()
     isFullscreen.set(isFull);
 }
 
+function reqErr(e)
+{
+    op.warn(e);
+}
+
 function startFs()
 {
     countStarts++;
@@ -29,10 +34,10 @@ function startFs()
     if (inEle == "Canvas") elem = op.patch.cgl.canvas.parentElement;
     else elem = op.patch.getDocument().documentElement;
 
-    if (elem.requestFullScreen) elem.requestFullScreen();
-    else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
-    else if (elem.webkitRequestFullScreen)elem.webkitRequestFullScreen();
-    else if (elem.msRequestFullScreen)elem.msRequestFullScreen();
+    if (elem.requestFullScreen) elem.requestFullScreen().catch(reqErr);
+    else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen().catch(reqErr);
+    else if (elem.webkitRequestFullScreen)elem.webkitRequestFullScreen().catch(reqErr);
+    else if (elem.msRequestFullScreen)elem.msRequestFullScreen().catch(reqErr);
 
     setTimeout(setState, 100);
     setTimeout(setState, 500);
@@ -42,10 +47,11 @@ function startFs()
 function exitFs()
 {
     countStarts--;
-    if (op.patch.getDocument().exitFullscreen) op.patch.getDocument().exitFullscreen();
-    else if (op.patch.getDocument().mozCancelFullScreen) op.patch.getDocument().mozCancelFullScreen();
-    else if (op.patch.getDocument().webkitExitFullscreen) op.patch.getDocument().webkitExitFullscreen();
-    else if (op.patch.getDocument().msExitFullscreen)op.patch.getDocument().msExitFullscreen();
+
+    if (op.patch.getDocument().exitFullscreen) op.patch.getDocument().exitFullscreen().catch(reqErr);
+    else if (op.patch.getDocument().mozCancelFullScreen) op.patch.getDocument().mozCancelFullScreen().catch(reqErr);
+    else if (op.patch.getDocument().webkitExitFullscreen) op.patch.getDocument().webkitExitFullscreen().catch(reqErr);
+    else if (op.patch.getDocument().msExitFullscreen)op.patch.getDocument().msExitFullscreen().catch(reqErr);
 
     setTimeout(setState, 100);
     setTimeout(setState, 500);

@@ -21,7 +21,6 @@ init();
 
 duration.onChange = init;
 
-
 function init()
 {
     if (anim.keys.length != 3)
@@ -43,9 +42,9 @@ function init()
     anim.loop = loop.get();
     if (anim.loop)
     {
-        anim.keys[2].time = (2.0 * duration.get()) + CABLES.now() / 1000.0;
-        anim.keys[2].value = inStart.get();
-        if (anim.defaultEasing != currentEasing) anim.keys[2].setEasing(anim.defaultEasing);
+        // anim.keys[2].time = (2.0 * duration.get()) + CABLES.now() / 1000.0;
+        // anim.keys[2].value = inStart.get();
+        // if (anim.defaultEasing != currentEasing) anim.keys[2].setEasing(anim.defaultEasing);
     }
     else
     {

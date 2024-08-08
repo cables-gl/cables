@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1582125861169
+            "date": 1582125861169,
+            "type": "new"
+        },
+        {
+            "message": "Added active toggle to completly unloaded a font, or even never load it in the first place",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1723027224789
         }
     ],
     "authorName": "pandur",
@@ -18,6 +25,11 @@
             {
                 "type": 5,
                 "name": "family"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -49,5 +61,6 @@
             "deletedDate": 1699373784244
         }
     ],
-    "exampleProjectId": "xR9zIR"
+    "exampleProjectId": "xR9zIR",
+    "license": "MIT"
 }

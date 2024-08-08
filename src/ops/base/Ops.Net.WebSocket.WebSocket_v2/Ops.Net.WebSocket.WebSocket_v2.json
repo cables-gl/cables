@@ -4,12 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1600247160967
+            "date": 1600247160967,
+            "type": "new"
         },
         {
             "message": "output raw message, add uierrors on invalid json and connection error",
             "author": "stephan",
-            "date": 1660809295216
+            "date": 1660809295216,
+            "type": "improvement"
+        },
+        {
+            "message": "Show error messages from websocket API and check for correct protocol",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1723039214742
         }
     ],
     "authorName": "pandur",
@@ -57,5 +65,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gu7DBo"
+    "exampleProjectId": "gu7DBo",
+    "license": "MIT"
 }

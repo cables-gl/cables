@@ -101,5 +101,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "S4VD0H"
+    "exampleProjectId": "S4VD0H",
+    "license": "MIT"
 }

@@ -37,7 +37,7 @@ function hexToB(h)
     return parseInt((cutHex(h)).substring(4, 6), 16);
 }
 
-function cutHex(h)
+function cutHex(h = "")
 {
     return (h.charAt(0) == "#") ? h.substring(1, 7) : h;
 }
