@@ -20,7 +20,7 @@ inArr.onChange = function ()
     {
         if (!showingError)
         {
-            op.uiAttr({ "error": "Arrays length not divisible by 2e !" });
+            op.setUiError("warning", "Arrays length not divisible by 2!");
             showingError = true;
         }
         outArr.set(null);
@@ -31,7 +31,7 @@ inArr.onChange = function ()
     if (showingError)
     {
         showingError = false;
-        op.uiAttr({ "error": null });
+        op.setUiError("warning", null);
     }
 
     if ((theArray.length / 2) * 3 != arr.length)
