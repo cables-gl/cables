@@ -66,6 +66,7 @@ const substrLength = fontDataVarPrefix.length;
 const alignVec = vec3.create();
 const vScale = vec3.create();
 const shader = new CGL.Shader(cgl, "TextMeshSDF");
+shader.define("INSTANCING");
 
 let fontTexs = null;
 let fontData = null;
@@ -292,25 +293,26 @@ function buildTransMats()
 
 render.onTriggered = function ()
 {
+    if (!fontData || !fontTexs)
+    {
+        updateFontData();
+    }
+
     if (!fontData)
     {
         op.setUiError("nodata", "No font data!");
         op.setUiError("msdfhint", "Use the FontMSDF op to create font and texture.", 0);
-        updateFontData();
-        next.trigger();
-        return;
     }
     if (!fontTexs)
     {
         op.setUiError("nodata", "No font texture");
         op.setUiError("msdfhint", "Use the FontMSDF op to create font and texture.", 0);
-        updateFontData();
-        next.trigger();
-        return;
     }
-
-    op.setUiError("nodata", null);
-    op.setUiError("msdfhint", null);
+    if (fontTexs && fontData)
+    {
+        op.setUiError("nodata", null);
+        op.setUiError("msdfhint", null);
+    }
 
     if (needUpdate)
     {
@@ -320,8 +322,9 @@ render.onTriggered = function ()
 
     if (mesh && mesh.numInstances > 0)
     {
-        // cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
         cgl.pushShader(shader);
+
+        cgl.setTexture(0, CGL.Texture.getEmptyTexture(cgl).tex);
 
         if (fontTexs[0]) uniTexSize.setValue([fontTexs[0].width, fontTexs[0].height]);
 
@@ -345,7 +348,6 @@ render.onTriggered = function ()
 
         if (needsUpdateTransmats) buildTransMats();
         if (transMats) mesh.setAttribute("instMat", new Float32Array(transMats), 16, { "instanced": true });
-        if (cgl.getShader())cgl.getShader().define("INSTANCING");
 
         if (!disabled)
         {
@@ -356,7 +358,7 @@ render.onTriggered = function ()
 
         cgl.popModelMatrix();
 
-        cgl.setTexture(0, null);
+        // cgl.setTexture(0, null);
         cgl.popShader();
         // cgl.popBlendMode();
     }
