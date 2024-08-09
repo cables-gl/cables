@@ -1,13 +1,15 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif", ".svg"]),
     inClass = op.inString("Class"),
-    inStyle = op.inStringEditor("Style", "", "inline-css"),
+    inStyle = op.inStringEditor("Style", "position:absolute;", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
     outImage = op.outObject("Image Element", null, "element"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height");
 
 let element = op.patch.getDocument().createElement("img");
+// op.patch.cgl.canvas.parentElement.appendChild(element);
+
 op.onDelete = removeEle;
 
 inClass.onChange = updateClass;

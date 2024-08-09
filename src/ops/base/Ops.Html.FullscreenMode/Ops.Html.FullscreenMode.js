@@ -34,10 +34,13 @@ function startFs()
     if (inEle == "Canvas") elem = op.patch.cgl.canvas.parentElement;
     else elem = op.patch.getDocument().documentElement;
 
-    if (elem.requestFullScreen) elem.requestFullScreen().catch(reqErr);
-    else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen().catch(reqErr);
-    else if (elem.webkitRequestFullScreen)elem.webkitRequestFullScreen().catch(reqErr);
-    else if (elem.msRequestFullScreen)elem.msRequestFullScreen().catch(reqErr);
+    let prom = null;
+    if (elem.requestFullScreen) prom = elem.requestFullScreen();
+    else if (elem.mozRequestFullScreen) prom = elem.mozRequestFullScreen();
+    else if (elem.webkitRequestFullScreen)prom = elem.webkitRequestFullScreen();
+    else if (elem.msRequestFullScreen)prom = elem.msRequestFullScreen();
+
+    if (prom && prom.catch)prom.catch(reqErr);
 
     setTimeout(setState, 100);
     setTimeout(setState, 500);

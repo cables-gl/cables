@@ -30,7 +30,7 @@ function onLoadFinished(buffer)
 
 function onLoadFailed(e)
 {
-    op.logError("Error: Loading audio file failed: ", e);
+    // op.logError("Error: Loading audio file failed: ", e);
     invalidateOutPorts();
 }
 

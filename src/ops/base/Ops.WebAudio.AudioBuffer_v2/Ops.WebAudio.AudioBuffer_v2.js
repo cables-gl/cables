@@ -202,7 +202,7 @@ function onLoadFinished(buffer)
 
 function onLoadFailed(e)
 {
-    op.logError("Error: Loading audio file failed: ", e);
+    // op.logError("Error: Loading audio file failed: ", e);
     op.setUiError("failedLoading", "The audio file could not be loaded. Make sure the right file URL is used.", 2);
     isLoading = false;
     invalidateOutPorts();

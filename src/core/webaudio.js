@@ -432,6 +432,8 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)
 {
     const audioContext = WEBAUDIO.createAudioContext();
 
+    if (!audioContext) onError(new Error("No Audiocontext"));
+
     let loadingId = null;
     if (loadingTask || loadingTask === undefined)
     {
@@ -439,27 +441,21 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)
         if (patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingId, "title": " loading audio (" + url + ")" });
     }
     const request = new XMLHttpRequest();
-    if (!url)
-    {
-        return;
-    }
+
+    if (!url) return;
+
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
-    // TODO: maybe crossorigin stuff needed?
-    // Decode asynchronously
+
     request.onload = function ()
     {
         patch.loading.finished(loadingId);
         if (patch.isEditorMode()) gui.jobs().finish("loadaudio" + loadingId);
 
-        try
-        {
-            audioContext.decodeAudioData(request.response, onFinished, onError);
-        }
-        catch (e)
+        audioContext.decodeAudioData(request.response, onFinished, onError).catch((e) =>
         {
             onError(e);
-        }
+        });
     };
     request.send();
 };

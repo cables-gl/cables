@@ -23,19 +23,12 @@ outString.ignoreValueSerialize = true;
 let pixelReader = new CGL.PixelReader();
 
 start.onTriggered = retrySoon;
-inFormat.onChange = updateUi;
 
-updateUi();
-
+inFormat.onChange =
 inTex.onChange = () =>
 {
     texChanged = true;
 };
-
-function updateUi()
-{
-    inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
-}
 
 function retrySoon()
 {
@@ -48,6 +41,7 @@ function retrySoon()
         outLoading.set(true);
         op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
     }
+    inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
 
     next.trigger();
 }

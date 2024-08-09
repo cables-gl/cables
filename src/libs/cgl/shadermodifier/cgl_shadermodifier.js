@@ -46,21 +46,14 @@ class ShaderModifier
         {
             if (this._boundShader) this._boundShader.shader.dispose();
             if (shader._needsRecompile) shader.compile();
+            this.needsTexturePush = true;
+
             this._boundShader = this._origShaders[shader.id] =
             {
                 "lastCompile": shader.lastCompile,
                 "orig": shader,
                 "shader": shader.copy()
             };
-
-            // if (this._cgl.glVersion == 1)
-            // {
-            //     this._boundShader.shader.enableExtension("GL_OES_standard_derivatives");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_float");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_float_linear");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_half_float");
-            //     this._boundShader.shader.enableExtension("GL_OES_texture_half_float_linear");
-            // }
 
             this._addModulesToShader(this._boundShader.shader);
             this._updateDefinesShader(this._boundShader.shader);
@@ -77,7 +70,7 @@ class ShaderModifier
 
         if (this.needsTexturePush)
         {
-            for (let j = 0; j < this._textures.length; j += 1)
+            for (let j = 0; j < this._textures.length; j++)
             {
                 const uniformName = this._textures[j][0];
                 const tex = this._textures[j][1];

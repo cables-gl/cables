@@ -56,8 +56,15 @@ inExec.onTriggered = function ()
                 node = cgl.frameStore.currentScene.nodes[i];
                 outFound.set(true);
 
-                if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom) outGeom.set(node.mesh.meshes[0].geom);
-                else outGeom.set(null);
+                if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom)
+                {
+                    outGeom.setRef(node.mesh.meshes[0].geom);
+                }
+                else
+                {
+                    console.log("has no geom?!");
+                    outGeom.set(null);
+                }
             }
         }
     }
@@ -73,7 +80,6 @@ inExec.onTriggered = function ()
         }
 
         // node.updateMatrix();
-
         // render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
 
         let time;

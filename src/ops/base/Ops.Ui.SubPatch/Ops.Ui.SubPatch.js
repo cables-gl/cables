@@ -276,16 +276,19 @@ op.dynOut.onLinkChanged = function ()
     {
         const otherPort = op.dynOut.links[0].getOtherPort(op.dynOut);
         op.dynOut.removeLinks();
-        otherPort.removeLinkTo(op.dynOut);
+        if (otherPort)
+        {
+            otherPort.removeLinkTo(op.dynOut);
 
-        const newName = op.addNewOutPort(otherPort);
+            const newName = op.addNewOutPort(otherPort);
 
-        gui.scene().link(
-            otherPort.op,
-            otherPort.getName(),
-            op,
-            newName
-        );
+            gui.scene().link(
+                otherPort.op,
+                otherPort.getName(),
+                op,
+                newName
+            );
+        }
 
         dataLoaded = true;
         saveData();

@@ -35,7 +35,14 @@
         {
             "message": "Enhancement: Stop Requesting fullscreen mode without exiting it",
             "author": "pandur",
-            "date": 1564310959730
+            "date": 1564310959730,
+            "type": "improvement"
+        },
+        {
+            "message": "Fix null pointer exception happening even if everything worked fine",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1723100723437
         }
     ],
     "license": "MIT",
