@@ -135,6 +135,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1716976668653
+        },
+        {
+            "message": "Texture creation will create a loading job and only run before rendering a frame",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1723124135500
         }
-    ]
+    ],
+    "license": "MIT"
 }

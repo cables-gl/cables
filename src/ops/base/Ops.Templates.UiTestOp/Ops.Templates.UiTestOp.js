@@ -120,7 +120,7 @@ inPrompt.onTriggered = () =>
         "promptValue": "default",
         "promptOk": (v) =>
         {
-            console.log("yes! prompt finished", v);
+            op.log("yes! prompt finished", v);
         }
     });
 };
@@ -148,7 +148,7 @@ inTab.onTriggered = () =>
         });
 
     gui.mainTabs.addTab(tab, true);
-    tab.addEventListener("close", () => { console.log("tab was closed!"); });
+    tab.addEventListener("close", () => { op.log("tab was closed!"); });
     tab.html("this is the tab content. ");
     gui.maintabPanel.show(true);
 };

@@ -62,7 +62,7 @@ mod.addUniformVert("t", "MOD_texTrans");
 mod.addUniformVert("t", "MOD_texRot");
 mod.addUniformVert("t", "MOD_texScale");
 mod.addUniformVert("t", "MOD_texCoords");
-mod.addUniformVert("t", "MOD_texColor");
+const modCol = mod.addUniformVert("t", "MOD_texColor");
 mod.addUniformVert("f", "MOD_texSizeX", 0);
 mod.addUniformVert("f", "MOD_texSizeY", 0);
 mod.addUniformVert("f", "MOD_alphaThresh", inAlphaThresh);
@@ -113,10 +113,10 @@ function updateDefines()
     mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
     mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
 
-    mod.toggleDefine("USE_TEX_ROT", inTex2.get());
-    mod.toggleDefine("USE_TEX_SCALE", inTex3.get());
-    mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
-    mod.toggleDefine("USE_TEX_TC", inTex5.get());
+    mod.toggleDefine("USE_TEX_ROT", inTex2.isLinked());
+    mod.toggleDefine("USE_TEX_SCALE", inTex3.isLinked());
+    mod.toggleDefine("USE_TEX_COLOR", inTex4.isLinked());
+    mod.toggleDefine("USE_TEX_TC", inTex5.isLinked());
 }
 
 geom.onChange = function ()
@@ -155,13 +155,14 @@ function doRender()
         setupArray();
         mod.bind();
         mod.unbind();
+        updateDefines();
     }
 
-    if (inTex1.get())mod.pushTexture("MOD_texTrans", inTex1.get().tex);
-    if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
-    if (inTex3.get())mod.pushTexture("MOD_texScale", inTex3.get().tex);
-    if (inTex4.get())mod.pushTexture("MOD_texColor", inTex4.get().tex);
-    if (inTex5.get())mod.pushTexture("MOD_texCoords", inTex5.get().tex);
+    if (inTex1.isLinked()) mod.pushTexture("MOD_texTrans", inTex1.get().tex);
+    if (inTex2.isLinked()) mod.pushTexture("MOD_texRot", inTex2.get().tex);
+    if (inTex3.isLinked()) mod.pushTexture("MOD_texScale", inTex3.get().tex);
+    if (inTex4.isLinked()) mod.pushTexture("MOD_texColor", inTex4.get().tex);
+    if (inTex5.isLinked()) mod.pushTexture("MOD_texCoords", inTex5.get().tex);
 
     mod.setUniformValue("MOD_texSizeX", inTex1.get().width);
     mod.setUniformValue("MOD_texSizeY", inTex1.get().height);
