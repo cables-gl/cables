@@ -9,7 +9,7 @@
           "y": 2930.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -91,7 +91,7 @@
           "y": 2990.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,7 +168,7 @@
           "y": 2466.1695182199105
         },
         "notWorkingMsg": null,
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -226,7 +226,7 @@
           "y": 2370.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -319,7 +319,7 @@
           "x": 622.0710852027429,
           "y": 2788.1887978847953
         },
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -416,7 +416,7 @@
           "x": 622.0710852027429,
           "y": 2730.2637819934557
         },
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -497,7 +497,7 @@
           "x": 622.0710852027429,
           "y": 2863.255910943437
         },
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -566,7 +566,7 @@
           "x": 622.0710852027429,
           "y": 2670.2637819934557
         },
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -687,7 +687,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "3bicj7gyn",
       "uiAttribs": {
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "translate": {
           "x": 622.0710852027429,
           "y": 2137.307588100756
@@ -715,10 +715,10 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "wwlwo0emm",
       "uiAttribs": {
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "translate": {
           "x": 622.0710852027429,
-          "y": 3070.2637819934557
+          "y": 3101.2637819934557
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -735,7 +735,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "extendTitle": "beach",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -844,7 +844,7 @@
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "extendTitle": "mul",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -939,7 +939,7 @@
           "y": 2241.3607512465296
         },
         "comment": "todo: cheating!!",
-        "subPatch": "bcs2povy1",
+        "subPatch": "zgshi71gn",
         "blueprintSubpatch2": true
       },
       "storage": {},
