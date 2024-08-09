@@ -9,9 +9,18 @@ vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
 
 // vec4 col=texture(MOD_tex,texCoord);
 
-#ifdef MOD_HAS_PS_TEX
-    psMul*=abs(texture(MOD_texPointSize,texCoord).r);
-    // psMul*=attrVertIndex/21000.0;
+#ifdef POINTMATERIAL
+    #ifdef MOD_HAS_PS_TEX
+        psMul*=abs(texture(MOD_texPointSize,texCoord).r);
+        // psMul*=attrVertIndex/21000.0;
+    #endif
+    #ifdef PIXELSIZE
+        if(col.a==0.0)psMul=0.0;
+    #endif
+
+    #ifdef MOD_REMOVEZERO
+        if(MOD_pos.x==0.0 && MOD_pos.y==0.0 && MOD_pos.z==0.0) psMul=0.0;
+    #endif
 #endif
 
 vec3 MOD_pos=col.xyz+pos.xyz;
@@ -30,18 +39,14 @@ vec3 MOD_pos=col.xyz+pos.xyz;
     pos.w=1.0;
 #endif
 
-#ifdef PIXELSIZE
-    if(col.a==0.0)psMul=0.0;
-#endif
 
-#ifdef MOD_REMOVEZERO
-    if(MOD_pos.x==0.0 && MOD_pos.y==0.0 && MOD_pos.z==0.0) psMul=0.0;
-#endif
 
 #ifdef MOD_IGNOREALPHA0
     if(col.a==0.0)
     {
-        psMul=0.0;
+        #ifdef POINTMATERIAL
+            psMul=0.0;
+        #endif
         pos.x=pos.y=pos.z=-9999999999.0;
     }
 #endif

@@ -4,43 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1602105139180
-        },
-        {
-            "message": "Ops.User.pandur.Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2 renamed to Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2",
-            "author": "pandur",
-            "date": 1602361099605
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "pandur",
-            "date": 1609955771764
-        },
-        {
-            "message": "cloned op from Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2",
-            "author": "pandur",
-            "date": 1614467987845
-        },
-        {
-            "message": "Ops.User.pandur.PointCloudFromTexture renamed to Ops.Gl.Meshes.PointCloudFromTexture",
-            "author": "pandur",
-            "date": 1614494725393
-        },
-        {
-            "message": "Ops.Gl.Meshes.PointCloudFromTexture renamed to Ops.Dev.Gl.Meshes.PointCloudFromTexture",
-            "author": "pandur",
-            "date": 1628153813182
-        },
-        {
-            "message": "Ops.Dev.Gl.Meshes.PointCloudFromTexture renamed to Ops.Gl.Meshes.PointCloudFromTexture",
-            "author": "pandur",
-            "date": 1644228870110
+            "date": 1602105139180,
+            "type": "new"
         },
         {
             "message": "fixed positioning problems when using the current pointmaterial for pointCloudFromTexture and with other operators",
             "type": "bugfix",
             "author": "pandur",
             "date": 1710518296722
+        },
+        {
+            "message": "Only modifies PSMUL pointsize multiplier when POINTMATERIAL is defined / fixes crashes with non pointmaterials",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1723208124845
         }
     ],
     "authorName": "pandur",
