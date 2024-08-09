@@ -81,19 +81,20 @@
             "date": 1675434947623
         },
         {
-            "message": " added core lib: cgl_pixelreader",
-            "type": "",
-            "author": "pandur",
-            "date": 1675435142870
-        },
-        {
             "message": "Ops.User.pandur.Texture2ColorArray2 renamed to Ops.Gl.Texture2ColorArray_v2",
             "type": "rename",
             "author": "pandur",
             "date": 1675437853831
+        },
+        {
+            "message": "Fix problem with floating point textures",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1723207672211
         }
     ],
     "coreLibs": [
         "cgl_pixelreader"
-    ]
+    ],
+    "license": "MIT"
 }
