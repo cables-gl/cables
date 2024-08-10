@@ -24,6 +24,8 @@ const
     outNumPixel = op.outNumber("Total Pixel");
 
 const cgl = op.patch.cgl;
+let to = null;
+let loadingId = null;
 
 inSeed.onChange =
     inWidth.onChange =
@@ -44,9 +46,16 @@ inSeed.onChange =
     tfilter.onChange =
     wrap.onChange =
     inInteger.onChange =
-    inColor.onChange = update;
+    inColor.onChange = createSoon;
 
-update();
+createSoon();
+
+function createSoon()
+{
+    if (loadingId)cgl.patch.loading.finished(loadingId);
+    loadingId = cgl.patch.loading.start("noisetexture", "noisetexture");
+    cgl.addNextFrameOnceCallback(update);
+}
 
 function update()
 {
@@ -167,7 +176,7 @@ function update()
 
     tex.initFromData(pixels, width, height, cgl_filter, cgl_wrap);
 
-    // outTex.set(CGL.Texture.getEmptyTexture(op.patch.cgl, isFp));
     outNumPixel.set(width * height);
     outTex.setRef(tex);
+    loadingId = cgl.patch.loading.finished(loadingId);
 }

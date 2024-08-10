@@ -70,7 +70,7 @@ function updateArray()
             gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0
         );
 
-        isFloatingPoint = realTexture.textureType == CGL.Texture.TYPE_FLOAT;
+        isFloatingPoint = realTexture.isFloatingPoint();
 
         if (isFloatingPoint) channelType = gl.FLOAT;
         else channelType = gl.UNSIGNED_BYTE;
