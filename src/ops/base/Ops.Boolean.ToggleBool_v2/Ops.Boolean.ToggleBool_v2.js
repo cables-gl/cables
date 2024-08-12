@@ -9,6 +9,7 @@ let theBool = false;
 
 op.onLoadedValueSet = () =>
 {
+    theBool = inDefault.get();
     outBool.set(inDefault.get());
     next.trigger();
 };
