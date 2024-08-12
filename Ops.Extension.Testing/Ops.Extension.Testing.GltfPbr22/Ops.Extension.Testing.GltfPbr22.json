@@ -14,6 +14,12 @@
             "type": "",
             "author": "pandur",
             "date": 1716905552746
+        },
+        {
+            "message": "Ops.Extension.Testing.GltfPbr renamed to Ops.Extension.Testing.GltfPbr22",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1723457170658
         }
     ],
     "coreLibs": [
