@@ -18,9 +18,6 @@ vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
         if(col.a==0.0)psMul=0.0;
     #endif
 
-    #ifdef MOD_REMOVEZERO
-        if(MOD_pos.x==0.0 && MOD_pos.y==0.0 && MOD_pos.z==0.0) psMul=0.0;
-    #endif
 #endif
 
 vec3 MOD_pos=col.xyz+pos.xyz;
@@ -39,7 +36,11 @@ vec3 MOD_pos=col.xyz+pos.xyz;
     pos.w=1.0;
 #endif
 
-
+#ifdef POINTMATERIAL
+    #ifdef MOD_REMOVEZERO
+        if(MOD_pos.x==0.0 && MOD_pos.y==0.0 && MOD_pos.z==0.0) psMul=0.0;
+    #endif
+#endif
 
 #ifdef MOD_IGNOREALPHA0
     if(col.a==0.0)

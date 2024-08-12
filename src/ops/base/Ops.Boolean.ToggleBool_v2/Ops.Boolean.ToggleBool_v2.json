@@ -65,6 +65,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1721724788159
+        },
+        {
+            "message": "fixed bug when default value true needed two trigger to become false",
+            "type": "bugfix",
+            "author": "tobyk",
+            "date": 1723477488163
         }
     ],
     "exampleProjectId": "UxJNHj",
