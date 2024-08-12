@@ -187,13 +187,11 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     if (!pixelFormatStr)
     {
         cgl._log.error("no pixelformatstr!");
-        cgl._log.log((new Error()).stack);
+        cgl._log.log(new Error());
         pixelFormatStr = Texture.PFORMATSTR_RGBA8UB;
     }
 
     o.pixelFormatBase = pixelFormatStr;
-
-
     o.pixelFormat = pixelFormatStr;
     o.glDataType = cgl.gl.UNSIGNED_BYTE;
     o.glInternalFormat = cgl.gl.RGBA8;
