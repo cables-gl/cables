@@ -75,6 +75,30 @@
             {
                 "type": 5,
                 "name": "File 9"
+            },
+            {
+                "type": 5,
+                "name": "File 10"
+            },
+            {
+                "type": 5,
+                "name": "File 11"
+            },
+            {
+                "type": 5,
+                "name": "File 12"
+            },
+            {
+                "type": 5,
+                "name": "File 13"
+            },
+            {
+                "type": 5,
+                "name": "File 14"
+            },
+            {
+                "type": 5,
+                "name": "File 15"
             }
         ],
         "portsOut": [

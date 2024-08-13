@@ -169,6 +169,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1719244314300
+        },
+        {
+            "message": "fix with active toggle not working when value is false and it was never triggered before",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1723563990927
         }
     ],
     "license": "MIT",

@@ -4,7 +4,7 @@ let result = op.outString("Result");
 
 idx.onChange = update;
 
-for (let i = 0; i < 10; i++)
+for (let i = 0; i < 16; i++)
 {
     let p = op.inUrl("File " + i);
     valuePorts.push(p);

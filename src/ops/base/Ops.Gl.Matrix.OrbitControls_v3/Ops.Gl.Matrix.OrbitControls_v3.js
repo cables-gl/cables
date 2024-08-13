@@ -346,6 +346,7 @@ function setElement(ele)
 function bind()
 {
     if (!element) return;
+    if (!active.get()) return unbind();
 
     element.addEventListener("pointermove", onmousemove);
     element.addEventListener("pointerdown", onMouseDown);
