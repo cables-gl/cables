@@ -1,5 +1,4 @@
 const
-    // src=op.inString("URL",'https://undev.studio'),
     src = op.inUrl("File", null, ""),
     elId = op.inString("ID"),
     play = op.inBool("Play"),
@@ -26,7 +25,6 @@ let element = op.patch.getDocument().createElement("video");
 let timeOut = null;
 
 op.onDelete = removeEle;
-
 op.onLoaded = init;
 
 function init()
@@ -39,15 +37,14 @@ function init()
     inautoplay.onChange =
     updateAttribs.onChange =
     elId.onChange = updateSoon;
-
     active.onChange = updateActive;
 }
 
 init();
 
 loop.onChange =
-controls.onChange =
-inMuted.onChange = updateVideoSettings;
+    controls.onChange =
+    inMuted.onChange = updateVideoSettings;
 
 function updateVideoSettings()
 {
@@ -93,11 +90,10 @@ function addElement()
     element.preload = "true";
     updateVideoSettings();
     element.setAttribute("crossOrigin", "anonymous");
-    outCanplaythrough.set(false);
 
+    outCanplaythrough.set(false);
     outHasError.set(false);
     outError.set("");
-
     outWidth.set(0);
     outHeight.set(0);
 
@@ -139,15 +135,6 @@ function addElement()
         }
     };
 
-    // element.playbackRate = speed.get();
-    // if (!addedListeners)
-    // {
-    //     addedListeners = true;
-    //     element.addEventListener("canplaythrough", initVideo, true);
-    //     element.addEventListener("loadedmetadata", loadedMetaData);
-    //     element.addEventListener("playing", function () { videoElementPlaying = true; }, true);
-    // }
-
     updateAttribs();
     const parent = op.patch.cgl.canvas.parentElement;
     parent.appendChild(element);
@@ -185,11 +172,6 @@ function removeEle()
 
 function updateActive()
 {
-    if (!active.get())
-    {
-        removeEle();
-        return;
-    }
-
-    addElement();
+    if (!active.get()) removeEle();
+    else addElement();
 }
