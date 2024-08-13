@@ -103,19 +103,22 @@ function addElement()
 
     element.addEventListener("canplaythrough", () =>
     {
+        if (!element) return;
         outWidth.set(element.videoWidth);
         outHeight.set(element.videoHeight);
-
         outCanplaythrough.set(true);
     }, true);
+
     element.addEventListener("play", () =>
     {
         outPlaying.set(true);
     }, true);
+
     element.addEventListener("ended", () =>
     {
         outEnded.trigger();
     }, true);
+
     element.addEventListener("pause", () =>
     {
         outPlaying.set(false);
