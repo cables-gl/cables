@@ -1,6 +1,6 @@
 const
     inExe = op.inTrigger("Update"),
-    inArr = op.inArray("array", null, 4),
+    inArr = op.inArray("array", null),
     inStride = op.inSwitch("Source Structure", ["MONO", "RGB", "RGBA"], "RGBA"),
     inSizeType = op.inSwitch("Size", ["Manual", "Square", "Row", "Column"], "Manual"),
     inWidth = op.inValueInt("width", 32),
