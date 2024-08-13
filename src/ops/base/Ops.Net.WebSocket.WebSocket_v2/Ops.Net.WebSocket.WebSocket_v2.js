@@ -46,6 +46,7 @@ function connect()
     if (inUrl.get() && inUrl.get().indexOf("ws://") == -1 && inUrl.get().indexOf("wss://") == -1)
     {
         op.setUiError("wrongproto", "only valid protocols are ws:// or wss:// ");
+        return;
     }
     else
         op.setUiError("wrongproto", null);
