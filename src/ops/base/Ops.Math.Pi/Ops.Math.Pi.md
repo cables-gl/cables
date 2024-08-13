@@ -1,1 +1,1 @@
-Outputs PI * multiply amount
+Outputs PI * multiply amount.
