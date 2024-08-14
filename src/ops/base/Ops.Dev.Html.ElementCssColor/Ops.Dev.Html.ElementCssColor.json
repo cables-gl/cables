@@ -1,0 +1,88 @@
+{
+    "id": "6061a9d6-f914-4790-9336-3b2c2a924845",
+    "created": 1723566813058,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723566813059
+        },
+        {
+            "message": "Ops.Patch.P14nxll.ElementCssColor renamed to Ops.Dev.Html.ElementCssColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1723569699776
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Set Color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Background",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Background Color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background Color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background Color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background Color A",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    },
+    "summary": "Add shadows to html elements",
+    "docs": {
+        "ports": []
+    }
+}

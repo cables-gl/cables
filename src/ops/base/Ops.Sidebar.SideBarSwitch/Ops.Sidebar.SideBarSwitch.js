@@ -130,7 +130,6 @@ function setActiveTab(el)
     if (el)
     {
         elTabActive = el;
-        op.log(el.dataset.index);
         outIndex.set(parseInt(el.dataset.index));
         outStr.set(el.dataset.txt);
 

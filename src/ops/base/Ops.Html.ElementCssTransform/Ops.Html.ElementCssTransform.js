@@ -14,6 +14,10 @@ const
     inDoOrigin = op.inBool("Set Origin", true),
     inOriginX = op.inSwitch("Origin X", ["left", "center", "right"], "center"),
     inOriginY = op.inSwitch("Origin Y", ["top", "center", "bottom"], "center"),
+
+    inDoZ = op.inBool("Z Index Active", false),
+    inZ = op.inFloat("Z Index", 100),
+
     outEle = op.outObject("Passthrough", null, "element");
 
 op.setPortGroup("Element", [inEle]);
@@ -74,8 +78,7 @@ function update()
         let str = "";
 
         if (inDoTranslate.get())
-            if (inTransY.get() || inTransX.get())
-                str += "translate(" + inTransX.get() + inTransUnit.get() + " , " + inTransY.get() + inTransUnit.get() + ") ";
+            str += "translate(" + inTransX.get() + inTransUnit.get() + " , " + inTransY.get() + inTransUnit.get() + ") ";
 
         if (inDoScale.get())
             if (inScale.get() != 1.0)

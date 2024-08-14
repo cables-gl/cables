@@ -119,7 +119,7 @@ class MultiPort extends Port
 
                     if (!po || !otherPort)
                     {
-                        this._log.warn("no port found?", po.name);
+                        this._log.warn("no port found?");
                     }
                     else
                     {

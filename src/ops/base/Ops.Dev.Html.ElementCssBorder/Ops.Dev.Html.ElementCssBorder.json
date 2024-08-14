@@ -1,0 +1,68 @@
+{
+    "id": "e1c84aec-667d-426f-8922-99fa8a175bad",
+    "created": 1723567532363,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723567532363
+        },
+        {
+            "message": "Ops.Patch.P14nxll.ElementCssBorder renamed to Ops.Dev.Html.ElementCssBorder",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1723569709587
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Thickness",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color A",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    },
+    "summary": "Add shadows to html elements",
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "id": "589458a4-caf5-43a7-9179-f47709f66b90",
+    "created": 1723570293626,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723570293627
+        },
+        {
+            "message": "Ops.Patch.P14nxll.CssPad2 renamed to Ops.Dev.Html.ElementCssPadding",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1723570447775
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Padding Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Right",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    }
+}

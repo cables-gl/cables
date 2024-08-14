@@ -114,6 +114,16 @@
                 ],
                 "group": "Origin",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Z Index Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Z Index",
+                "subType": "number"
             }
         ],
         "portsOut": [

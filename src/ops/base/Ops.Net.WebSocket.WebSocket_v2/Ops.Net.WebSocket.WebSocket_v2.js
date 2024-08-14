@@ -46,13 +46,14 @@ function connect()
     if (inUrl.get() && inUrl.get().indexOf("ws://") == -1 && inUrl.get().indexOf("wss://") == -1)
     {
         op.setUiError("wrongproto", "only valid protocols are ws:// or wss:// ");
+        return;
     }
     else
         op.setUiError("wrongproto", null);
 
     if (!inUrl.get() || inUrl.get() === "")
     {
-        op.log("websocket: invalid url ");
+        op.logWarn("websocket: invalid url ");
         outConnected.set(false);
         return;
     }
@@ -60,7 +61,7 @@ function connect()
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
     if (!window.WebSocket)
-        op.logError("Sorry, but your browser doesn't support WebSockets.");
+        return op.logError("Sorry, but your browser doesn't support WebSockets.");
 
     op.setUiError("websocket", null);
 
@@ -73,9 +74,8 @@ function connect()
     catch (e)
     {
         if (e && e.message)op.setUiError("websocket", e.message);
-        op.log("could not connect to", inUrl.get());
+        op.logWarn("could not connect to", inUrl.get());
         connecting = false;
-        // op.log(e);
     }
 
     if (connection)

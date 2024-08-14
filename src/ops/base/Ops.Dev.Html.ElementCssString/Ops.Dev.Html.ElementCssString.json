@@ -1,0 +1,44 @@
+{
+    "id": "5f446f36-de03-454e-bce6-42eb878baa8b",
+    "created": 1723568596361,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723568596362
+        },
+        {
+            "message": "Ops.Patch.P14nxll.ElementCssGet renamed to Ops.Patch.P14nxll.ElementCssString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1723568815226
+        },
+        {
+            "message": "Ops.Patch.P14nxll.ElementCssString renamed to Ops.Dev.Html.ElementCssString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1723569692150
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "CSS"
+            }
+        ]
+    },
+    "summary": "Add shadows to html elements",
+    "docs": {
+        "ports": []
+    }
+}

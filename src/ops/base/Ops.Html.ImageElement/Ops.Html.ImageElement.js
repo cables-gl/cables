@@ -109,4 +109,7 @@ function updateClass()
 function updateStyle()
 {
     element.setAttribute("style", inStyle.get());
+    outImage.setRef(element);
 }
+
+//
