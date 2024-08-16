@@ -150,8 +150,8 @@ void main()
             // col.xy=normalize(pos.xy-a)*strength;
 
             vec3 p=pos.xyz;
-            // p.x*=0.0;
-            // p.y*=0.2;
+            // p.y*=0.0;
+            // p.z*=0.;
 
             vec4 vecV=normalize(vec4(areaPos-p,1.0));
 
