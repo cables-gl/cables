@@ -290,10 +290,15 @@ Port.prototype.get = function ()
     if (this._animated && this._lastAnimFrame != this._op.patch.getFrameNum())
     {
         this._lastAnimFrame = this._op.patch.getFrameNum();
-        this.value = this.anim.getValue(this._op.patch.timer.getTime());
 
-        this._oldAnimVal = this.value;
-        this.forceChange();
+        let animval = this.anim.getValue(this._op.patch.timer.getTime());
+
+        if (this.value != animval)
+        {
+            this.value = animval;
+            this._oldAnimVal = this.value;
+            this.forceChange();
+        }
     }
 
     return this.value;
