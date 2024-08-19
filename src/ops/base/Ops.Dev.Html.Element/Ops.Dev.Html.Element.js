@@ -13,6 +13,7 @@ const
     inBlacklist = op.inString("Disable CSS Props"),
 
     inDisplay = op.inSwitch("Display", ["None", "Block", "Inline"], "Block"),
+    inOpacity = op.inFloatSlider("Opacity", 1),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
 
     outElement = op.outObject("DOM Element", null, "element"),
@@ -35,6 +36,7 @@ inClass.onChange = updateClass;
 inText.onChange = updateText;
 
 inDisplay.onChange =
+    inOpacity.onChange =
     inPos.onChange =
     inWidth.onChange =
     inHeight.onChange =
@@ -101,6 +103,7 @@ function updateStyle()
 
     div.style.overflow = inOverflow.get().toLowerCase();
     div.style.display = inDisplay.get();
+    div.style.opacity = inOpacity.get();
 
     if (inSetSize.get())
     {

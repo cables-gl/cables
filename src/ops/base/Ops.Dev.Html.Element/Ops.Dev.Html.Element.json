@@ -94,6 +94,11 @@
             },
             {
                 "type": 0,
+                "name": "Opacity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Propagate Click-Events",
                 "subType": "boolean"
             }
