@@ -8,11 +8,6 @@
             "type": "new"
         },
         {
-            "message": "Ops.User.pandur.ElementCssTransform renamed to Ops.Html.ElementCssTransform",
-            "author": "pandur",
-            "date": 1613408894120
-        },
-        {
             "message": "Added pass through element output port",
             "type": "improvement",
             "author": "pandur",
