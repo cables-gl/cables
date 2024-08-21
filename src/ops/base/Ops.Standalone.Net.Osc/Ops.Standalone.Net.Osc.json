@@ -1,0 +1,75 @@
+{
+    "shortName": "Osc",
+    "id": "d07144df-fd41-4341-9a83-c5d33c4cc55e",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Port",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Test"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Message Received"
+            },
+            {
+                "type": 2,
+                "name": "Message"
+            },
+            {
+                "type": 2,
+                "name": "Connection"
+            },
+            {
+                "type": 5,
+                "name": "Status"
+            }
+        ]
+    },
+    "hasScreenshot": false,
+    "authorName": "tom",
+    "license": "MIT",
+    "hasExample": false,
+    "namespace": "Ops.Standalone.Net",
+    "nameNoVersion": "Ops.Standalone.Net.Osc",
+    "shortNameDisplay": "Osc",
+    "version": 0,
+    "created": 1724247727466,
+    "hasPublicRepo": true,
+    "hidden": false,
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724247727467
+        }
+    ],
+    "oldVersion": false,
+    "versions": [
+        {
+            "name": "Ops.Standalone.Net.Osc",
+            "version": 0
+        }
+    ],
+    "newestVersion": {
+        "name": "Ops.Standalone.Net.Osc",
+        "version": 0
+    },
+    "dependencies": [
+        {
+            "name": "osc",
+            "type": "npm",
+            "src": [
+                "osc"
+            ],
+            "version": ""
+        }
+    ]
+}
