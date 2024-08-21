@@ -1,0 +1,43 @@
+{
+    "id": "20ff324a-e4a5-45f9-a456-8550478197c6",
+    "created": 1724238917821,
+    "license": "MIT",
+    "authorName": "tom",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724238917822
+        },
+        {
+            "message": "Ops.Standalone.HttpServerResponse renamed to Ops.Standalone.Net.Net.HttpServerResponse",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724247147379
+        },
+        {
+            "message": "Ops.Standalone.Net.Net.HttpServerResponse renamed to Ops.Standalone.Net.HttpServerResponse",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724247193378
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Response"
+            },
+            {
+                "type": 5,
+                "name": "Body"
+            }
+        ],
+        "portsOut": []
+    }
+}

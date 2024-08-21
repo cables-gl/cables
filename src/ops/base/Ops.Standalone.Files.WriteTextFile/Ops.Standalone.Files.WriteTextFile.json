@@ -1,0 +1,51 @@
+{
+    "id": "b393fdac-6303-429f-829a-fe979254803e",
+    "created": 1724236835790,
+    "license": "MIT",
+    "authorName": "tom",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724235837065
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724236835790
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 5,
+                "name": "Content"
+            },
+            {
+                "type": 1,
+                "name": "Write"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            }
+        ]
+    }
+}

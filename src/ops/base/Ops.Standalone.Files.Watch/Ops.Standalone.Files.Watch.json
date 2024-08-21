@@ -1,0 +1,53 @@
+{
+    "id": "65fdf2f0-cab2-4104-a79f-67a664c11163",
+    "created": 1724237240595,
+    "license": "MIT",
+    "authorName": "tom",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724237240596
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 1,
+                "name": "Read"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Event Type"
+            },
+            {
+                "type": 5,
+                "name": "Event Filename"
+            },
+            {
+                "type": 1,
+                "name": "Event happened"
+            },
+            {
+                "type": 5,
+                "name": "Content"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            }
+        ]
+    }
+}
