@@ -1,6 +1,6 @@
 
-const subpatchInputOpName = "Ops.Ui.SubPatchInput";
-const subpatchOutputOpName = "Ops.Ui.SubPatchOutput";
+// const subpatchInputOpName = "Ops.Ui.SubPatchInput"; // can't use defaultops js because we are in core...
+// const subpatchOutputOpName = "Ops.Ui.SubPatchOutput";
 
 const SubPatchOp = class
 {
@@ -29,8 +29,8 @@ const SubPatchOp = class
             // else op.patchId.value=CABLES.uuid();
         };
 
-        op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
-        op.on("loadedValueSet", () => { this.createInOutOps(); });
+        // op.patch.on("subpatchCreated", () => { this.createInOutOps(); });
+        // op.on("loadedValueSet", () => { this.createInOutOps(); });
 
 
         op.init = () =>
@@ -71,20 +71,6 @@ const SubPatchOp = class
     get patchId()
     {
         return this._op.patchId.get();
-    }
-
-
-    createInOutOps()
-    {
-        if (this._op.patch.clearSubPatchCache) this._op.patch.clearSubPatchCache(this.patchId);
-
-        let patchInputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchInputOpName);
-        let patchOutputOP = this._op.patch.getSubPatchOp(this.patchId, subpatchOutputOpName);
-
-        if (!patchInputOP) this._op.patch.addOp(subpatchInputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
-        if (!patchOutputOP) this._op.patch.addOp(subpatchOutputOpName, { "subPatch": this.patchId, "translate": { "x": 0, "y": 0 } });
-
-        // todo: move to correct positions...
     }
 };
 

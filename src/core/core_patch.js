@@ -816,7 +816,17 @@ Patch.prototype.loadLib = function (which)
 };
 
 
-Patch.prototype.getSubPatchOp = function (patchId, objName)
+Patch.prototype.getSubPatchOpsByName = function (patchId, objName)
+{
+    const arr = [];
+    for (const i in this.ops)
+        if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
+            arr.push(this.ops[i]);
+
+    return arr;
+};
+
+Patch.prototype.getFirstSubPatchOpByName = function (patchId, objName)
 {
     for (const i in this.ops)
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
