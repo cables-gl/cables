@@ -11,4 +11,4 @@ ffmpeg -framerate 30 -i loopDfast.png_%d.png -vcodec libx264 -profile:v main -cr
 `
 How to download all images at once :
 
-Make sure to go to site settings and "allow" automatic downloads. This will allow you to download all of the image files in one go. Otherwise you'll be asked to confirm each files location :(
+Make sure to go to site settings and "allow" automatic downloads. This will allow you to download all of the image files in one go. Otherwise you'll be asked to confirm each files location.

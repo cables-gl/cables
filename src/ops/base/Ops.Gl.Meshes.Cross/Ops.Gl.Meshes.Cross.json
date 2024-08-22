@@ -25,6 +25,26 @@
             },
             {
                 "type": 0,
+                "name": "Left",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Right",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }
@@ -45,5 +65,14 @@
         "ports": []
     },
     "youtubeid": "",
-    "exampleProjectId": "ojTS_o"
+    "exampleProjectId": "ojTS_o",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added toggles for left/right/top/bottom parts",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1724334475383
+        }
+    ]
 }
