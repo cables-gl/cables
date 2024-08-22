@@ -39,15 +39,16 @@ exe.onTriggered = doRender;
 
 function doRender()
 {
-    if (CABLES.UI)
+    let shader = cgl.getShader();
+
+    if (CABLES.UI && shader)
     {
-        let shader = cgl.getShader();
         if (shader.glPrimitive != cgl.gl.POINTS) op.setUiError("nopointmat", "Using a Material not made for point rendering. Try to use PointMaterial.");
         else op.setUiError("nopointmat", null);
     }
 
     if (needsRebuild || !mesh) rebuild();
-    if (!deactivated && mesh) mesh.render(cgl.getShader());
+    if (!deactivated && mesh) mesh.render(shader);
     outTrigger.trigger();
 }
 
