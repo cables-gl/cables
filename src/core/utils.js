@@ -367,7 +367,13 @@ String.prototype.endl = function ()
  */
 String.prototype.startsWith = function (prefix)
 {
-    return this.indexOf(prefix) === 0;
+    if (!this || !prefix) return false;
+    if (this.length >= prefix.length)
+    {
+        if (this.substring(0, prefix.length) == prefix) return true;
+    }
+    return false;
+    // return this.indexOf(prefix) === 0;
 };
 
 /**

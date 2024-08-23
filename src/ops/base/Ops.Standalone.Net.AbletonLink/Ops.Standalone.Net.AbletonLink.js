@@ -13,7 +13,6 @@ link.startUpdate(25, (beat, phase, bpm, playState) => {
     outBpm.set(bpm);
     outPhase.set(phase);
     outBeat.set(beat);
-    console.log(playState,link)
     outPlaystate.set(playState);
     outPeers.set(link.numPeers);
 });
