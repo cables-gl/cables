@@ -1,0 +1,63 @@
+{
+    "authorName": "pandur",
+    "id": "4b30d030-68ec-4baa-bbdd-8fd4479b396c",
+    "created": 1724403805191,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "MimeType"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "encode a string to base64",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.String.Base64Encode",
+            "author": "stephan",
+            "date": 1621603158289
+        },
+        {
+            "message": "Always output data url",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715960909179
+        },
+        {
+            "message": "Add mime input port, e.g. \"image/svg+xml\" or \"image/jpeg\"",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715960934577
+        },
+        {
+            "message": "new Version 3: Default value for mimetype input, when no mimetype is provided, the output is not a dataUrl",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1724404097812
+        }
+    ],
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "the input string"
+            },
+            {
+                "name": "Result",
+                "text": "base64 output"
+            }
+        ]
+    },
+    "license": "MIT"
+}

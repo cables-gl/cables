@@ -70,7 +70,6 @@
     },
     "summary": "Displays graphs for the numbers on the input port in the patchfield",
     "issues": "",
-
     "youtubeids": [
         "-1vMiU6BcDg"
     ],
@@ -78,5 +77,6 @@
         "ports": []
     },
     "exampleProjectId": "4D2DnR",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }

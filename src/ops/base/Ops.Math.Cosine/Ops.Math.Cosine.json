@@ -51,5 +51,6 @@
             }
         ]
     },
-    "exampleProjectId": "RhfUW2"
+    "exampleProjectId": "RhfUW2",
+    "license": "MIT"
 }

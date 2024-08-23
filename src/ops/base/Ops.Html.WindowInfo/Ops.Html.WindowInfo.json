@@ -22,14 +22,10 @@
     "authorName": "pandur",
     "created": 1566822681581,
     "summary": "size of browser window in pixels",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -68,5 +64,6 @@
         ]
     },
     "exampleProjectId": "DyHxSP",
-    "caniusequery": "ScreenOrientation"
+    "caniusequery": "ScreenOrientation",
+    "license": "MIT"
 }
