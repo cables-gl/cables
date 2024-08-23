@@ -9,7 +9,7 @@ const
     inAudio=op.inSwitch("Audio",["No Change","Remove"],"No Change"),
 
     inBitrate=op.inBool("Set Bitrate",false),
-    inBitrateStr=op.inInt("Bitrate","1000k"),
+    inBitrateStr=op.inString("Bitrate","1000k"),
     inBitrateConst=op.inBool("Constant",false),
 
     inCodec=op.inBool("Set Codec",false),
