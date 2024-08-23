@@ -56,7 +56,6 @@ function reset()
 {
     deactivated = arr.get() == null;
 
-    // needsRebuild = true;
     if (!deactivated)needsRebuild = true;
     else needsRebuild = false;
 }
