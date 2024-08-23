@@ -1,0 +1,31 @@
+{
+    "id": "1be97de1-1577-4eaa-8de2-5cd18904c26c",
+    "created": 1724411851643,
+    "license": "MIT",
+    "authorName": "tom",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724411851645
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Base64"
+            },
+            {
+                "type": 5,
+                "name": "Filename"
+            }
+        ],
+        "portsOut": []
+    }
+}
