@@ -113,17 +113,28 @@ op.renderVizLayer = (ctx, layer) =>
 
             if (typeof v == "string")
             {
+                str = v;
             }
             else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
             else if (Array.isArray(v))
             {
+                str = JSON.stringify(v);
             }
             else if (typeof v == "object")
             {
+                try
+                {
+                    str = JSON.stringify(v);
+                }
+                catch (e)
+                {
+                    str = "{object}";
+                }
             }
             else if (v != v || v === undefined)
             {
                 ctx.fillStyle = "#f00";
+                str = "?";
             }
 
             ctx.fillText(str,

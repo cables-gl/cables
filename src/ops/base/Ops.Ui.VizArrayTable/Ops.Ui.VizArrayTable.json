@@ -26,6 +26,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1671034824349
+        },
+        {
+            "message": "it will now also visualize arrays of arrays and objects ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1724704064278
         }
     ],
     "authorName": "pandur",
