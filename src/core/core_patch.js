@@ -251,7 +251,11 @@ Patch.prototype.setVolume = function (v)
  */
 Patch.prototype.getAssetPath = function (patchId = null)
 {
-    if (this.isEditorMode())
+    if (this.config.hasOwnProperty("assetPath"))
+    {
+        return this.config.assetPath;
+    }
+    else if (this.isEditorMode())
     {
         let id = patchId || gui.project()._id;
         return "/assets/" + id + "/";
@@ -261,10 +265,6 @@ Patch.prototype.getAssetPath = function (patchId = null)
         const parts = document.location.pathname.split("/");
         let id = patchId || parts[parts.length - 1];
         return "/assets/" + id + "/";
-    }
-    else if (this.config.hasOwnProperty("assetPath"))
-    {
-        return this.config.assetPath;
     }
     else
     {
