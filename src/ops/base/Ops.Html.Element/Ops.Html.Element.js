@@ -12,7 +12,7 @@ const
     inClass = op.inString("CSS Class"),
     inBlacklist = op.inString("Disable CSS Props"),
 
-    inDisplay = op.inSwitch("Display", ["None", "Block", "Inline"], "Block"),
+    inDisplay = op.inDropDown("Display", ["None", "Block", "Inline", "inline-block", "flex", "inline-flex", "grid", "inline-grid", "flow-root"], "Block"),
     inOpacity = op.inFloatSlider("Opacity", 1),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
 
