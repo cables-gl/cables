@@ -1,43 +1,44 @@
 // https://www.npmjs.com/package/fluent-ffmpeg
 
-const ffmpeg = op.require('fluent-ffmpeg');
+const ffmpeg = op.require("fluent-ffmpeg");
 
 const
-    inFile=op.inUrl("Source Video"),
-    inOutFile=op.inString("Destination File","/Users/tom/output.mp4"),
+    inFile = op.inUrl("Source Video"),
+    inOutFile = op.inString("Destination File", "/Users/tom/output.mp4"),
 
-    inAudio=op.inSwitch("Audio",["No Change","Remove"],"No Change"),
+    inAudio = op.inSwitch("Audio", ["No Change", "Remove"], "No Change"),
 
-    inBitrate=op.inBool("Set Bitrate",false),
-    inBitrateStr=op.inString("Bitrate","1000k"),
-    inBitrateConst=op.inBool("Constant",false),
+    inBitrate = op.inBool("Set Bitrate", false),
+    inBitrateStr = op.inString("Bitrate", "1000k"),
+    inBitrateConst = op.inBool("Constant", false),
 
-    inCodec=op.inBool("Set Codec",false),
-    inCodecStr=op.inString("Codec","libx264"),
+    inCodec = op.inBool("Set Codec", false),
+    inCodecStr = op.inString("Codec", "libx264"),
 
-    inSize=op.inBool("Set Size",false),
-    inSizeStr=op.inString("Size","640x480"),
+    inSize = op.inBool("Set Size", false),
+    inSizeStr = op.inString("Size", "640x480"),
 
-    inTime=op.inBool("Crop Time",false),
-    inTimeStart=op.inString("Start time","0"),
-    inTimeDur=op.inString("Duration","3"),
+    inTime = op.inBool("Crop Time", false),
+    inTimeStart = op.inString("Start time", "0"),
+    inTimeDur = op.inString("Duration", "3"),
 
     exec = op.inTriggerButton("Process"),
+    outBusy = op.outBoolNum("Processing");
 
-    outBusy=op.outBoolNum("Processing");
+op.setPortGroup("Timing", [inTime, inTimeStart, inTimeDur]);
+op.setPortGroup("Size", [inSizeStr, inSize]);
+op.setPortGroup("Video Codec", [inCodecStr, inCodec]);
+op.setPortGroup("Video Bitrate", [inBitrate, inBitrateConst, inBitrateStr]);
 
-op.setPortGroup("Timing",[inTime,inTimeStart,inTimeDur]);
-op.setPortGroup("Size",[inSizeStr,inSize]);
-op.setPortGroup("Video Codec",[inCodecStr,inCodec]);
-op.setPortGroup("Video Bitrate",[inBitrate,inBitrateConst,inBitrateStr]);
+let loadingId = null;
 
-
-let loadingId=null;
-
-inTime.onChange=
-    inBitrate.onChange=
-    inCodec.onChange=
-    inSize.onChange=updateUi;
+if (ffmpeg)
+{
+    inTime.onChange =
+    inBitrate.onChange =
+    inCodec.onChange =
+    inSize.onChange = updateUi;
+}
 
 updateUi();
 
@@ -51,71 +52,63 @@ function updateUi()
 
     inBitrateConst.setUiAttribs({ "greyout": !inBitrate.get() });
     inBitrateStr.setUiAttribs({ "greyout": !inBitrate.get() });
-
 }
 
-
-exec.onTriggered = () =>
-{
-    op.setUiError("exc", null);
-
-    outBusy.set(true);
-    let fn=inFile.get();
-    fn=fn.replaceAll("%20"," ");
-
-    loadingId = op.patch.loading.start(op.objName, fn, op);
-
-    try
+if (ffmpeg)
+    exec.onTriggered = () =>
     {
+        op.setUiError("exc", null);
 
-        let ff = ffmpeg();
+        outBusy.set(true);
+        let fn = inFile.get();
+        fn = fn.replaceAll("%20", " ");
 
-        ff.on('end', ()=>
+        loadingId = op.patch.loading.start(op.objName, fn, op);
+
+        try
         {
-            outBusy.set(false);
-            console.log('Finished processing');
-            loadingId = op.patch.loading.finished(loadingId);
+            let ff = ffmpeg();
 
-        });
+            ff.on("end", () =>
+            {
+                outBusy.set(false);
+                loadingId = op.patch.loading.finished(loadingId);
+            });
 
-        ff.on('error', (err)=>
-        {
-            op.setUiError("exc", err);
-            console.log('err',err);
-            loadingId = op.patch.loading.finished(loadingId);
-        });
+            ff.on("error", (err) =>
+            {
+                op.setUiError("exc", err);
+                op.log("err", err);
+                loadingId = op.patch.loading.finished(loadingId);
+            });
 
-        ff.input(inFile.get());
+            ff.input(inFile.get());
 
+            if (inBitrate.get())
+                ff.videoBitrate(inBitrateStr.get(), inBitrateConst.get() == 1);
 
-        if(inBitrate.get())
-            ff.videoBitrate(inBitrateStr.get(),inBitrateConst.get()==1);
+            if (inAudio.get() == "Remove")
+                ff.noAudio();
 
-        if(inAudio.get()=="Remove")
-            ff.noAudio();
+            if (inCodec.get())
+                ff.videoCodec(inCodecStr.get());
 
-        if(inCodec.get())
-            ff.videoCodec(inCodecStr.get());
+            if (inSize.get())
+                ff.size(inSizeStr.get());
 
-        if(inSize.get())
-            ff.size(inSizeStr.get());
+            if (inTime.get())
+            {
+                ff.seekInput(inTimeStart.get());
+                ff.duration(inTimeDur.get());
+            }
 
-        if(inTime.get())
-        {
-            ff.seekInput(inTimeStart.get());
-            ff.duration(inTimeDur.get());
+            ff.output(inOutFile.get());
+
+            ff.run();
         }
-
-        ff.output(inOutFile.get());
-
-        ff.run();
-    }
-    catch(e)
-    {
-        op.setUiError("exc", e.message);
-        loadingId = op.patch.loading.finished(loadingId);
-    }
-
-
-
-};
+        catch (e)
+        {
+            op.setUiError("exc", e.message);
+            loadingId = op.patch.loading.finished(loadingId);
+        }
+    };

@@ -6,28 +6,32 @@ const
     outData=op.outObject("Data");
 
 
-get();
-
-async function get()
+if(os)
 {
-    const ifaces=os.networkInterfaces();
+    get();
 
-    outData.set(ifaces);
-    for(let i in ifaces)
+    async function get()
     {
+        const ifaces=os.networkInterfaces();
 
-        for(let j=0;j<ifaces[i].length;j++)
+        outData.set(ifaces);
+        for(let i in ifaces)
         {
-            const inf=ifaces[i][j];
 
-            if(inf.family=="IPv4" && !inf.internal)
+            for(let j=0;j<ifaces[i].length;j++)
             {
-                outInter.set(i);
-                outIp.set(inf.address);
-                return;
-            }
+                const inf=ifaces[i][j];
 
+                if(inf.family=="IPv4" && !inf.internal)
+                {
+                    outInter.set(i);
+                    outIp.set(inf.address);
+                    return;
+                }
+
+            }
         }
+
     }
 
 }

@@ -77,5 +77,8 @@
             ],
             "version": ""
         }
+    ],
+    "coreLibs": [
+        "standalone_electron"
     ]
 }

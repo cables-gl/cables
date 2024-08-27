@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "tom",
             "date": 1724742540419
+        },
+        {
+            "message": "Ops.Extension.Standalone.Net.HttpServerOscSend renamed to Ops.Extension.Standalone.Net.OscSend",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724750310997
         }
     ],
     "layout": {

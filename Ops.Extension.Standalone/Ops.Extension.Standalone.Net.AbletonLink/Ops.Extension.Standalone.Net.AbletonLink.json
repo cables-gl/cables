@@ -2,7 +2,6 @@
     "shortName": "AbletonLink",
     "id": "86314868-cd03-41eb-a67d-fbd3025b4759",
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -48,12 +47,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724406170315
-        },
-        {
-            "message": "Ops.Standalone.Net.AbletonLink renamed to Ops.Extension.Standalone.Net.AbletonLink",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724684122364
         }
     ],
     "dependencies": [
@@ -76,5 +69,9 @@
     "newestVersion": {
         "name": "Ops.Standalone.Net.AbletonLink",
         "version": 0
+    },
+    "summary": "connect to ableton link music making apps and receive data",
+    "docs": {
+        "ports": []
     }
 }

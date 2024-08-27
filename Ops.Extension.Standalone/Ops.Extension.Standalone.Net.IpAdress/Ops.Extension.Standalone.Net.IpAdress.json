@@ -63,5 +63,8 @@
         "name": "Ops.Standalone.Net.IpAdress",
         "versionString": "",
         "version": 0
-    }
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
 }

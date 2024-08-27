@@ -40,5 +40,8 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
 }

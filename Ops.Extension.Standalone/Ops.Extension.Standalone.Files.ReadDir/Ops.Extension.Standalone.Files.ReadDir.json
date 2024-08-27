@@ -49,5 +49,8 @@
                 "name": "Error"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
 }

@@ -7,6 +7,7 @@ const
     error = op.outBoolNum("Has Error"),
     errorStr = op.outString("Error");
 
+if(fs)
 exec.onTriggered = ()=>
 {
     fs.writeFile(inFilename.get(), inStr.get(),

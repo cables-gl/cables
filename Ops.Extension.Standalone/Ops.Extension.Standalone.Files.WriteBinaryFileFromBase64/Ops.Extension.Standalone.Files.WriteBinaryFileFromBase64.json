@@ -33,5 +33,8 @@
             }
         ],
         "portsOut": []
-    }
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
 }
