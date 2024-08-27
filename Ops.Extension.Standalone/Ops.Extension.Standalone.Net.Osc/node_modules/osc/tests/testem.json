@@ -1,0 +1,5 @@
+{
+    "test_page": "tests/all-tests.html",
+    "timeout": 300,
+    "skip": "Headless Chrome,Headless Edge"
+}

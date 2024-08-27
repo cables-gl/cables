@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1567751791830
-        },
-        {
-            "message": "Ops.User.pandur.OscMessage renamed to Ops.Devices.OSC.OscMessage",
-            "author": "pandur",
-            "date": 1567752712258
+            "date": 1567751791830,
+            "type": "new"
         },
         {
             "message": "Ops.Devices.OSC.OscMessage renamed to Ops.Extension.Osc.OscMessage",
@@ -44,7 +40,6 @@
     },
     "summary": "Shows the current active address of an incoming OSC message",
     "issues": "",
-
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],

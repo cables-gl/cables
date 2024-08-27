@@ -1,0 +1,29 @@
+{
+  "name": "consumable-stream",
+  "version": "2.0.0",
+  "description": "A readable async stream which can be iterated over using a for-await-of loop.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/_mocha --reporter spec --timeout 10000 --slow 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SocketCluster/consumable-stream.git"
+  },
+  "keywords": [
+    "async",
+    "generator",
+    "stream",
+    "data",
+    "for-await-of"
+  ],
+  "author": "Jonathan Gros-Dubois",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SocketCluster/consumable-stream/issues"
+  },
+  "homepage": "https://github.com/SocketCluster/consumable-stream#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}

@@ -1,0 +1,68 @@
+{
+    "id": "da8622ba-5b7d-4f6d-9ff8-588ee06e418e",
+    "created": 1724238219266,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724238219267
+        },
+        {
+            "message": "Ops.Standalone.HttpServer renamed to Ops.Standalone.Net.Net.HttpServer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724247048366
+        },
+        {
+            "message": "Ops.Standalone.Net.Net.HttpServer renamed to Ops.Standalone.Net.HttpServer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724247225615
+        },
+        {
+            "message": "Ops.Standalone.Net.HttpServer renamed to Ops.Extension.Standalone.Net.HttpServer",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724742497531
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Hostname"
+            },
+            {
+                "type": 0,
+                "name": "Port",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger Request"
+            },
+            {
+                "type": 2,
+                "name": "Response"
+            },
+            {
+                "type": 5,
+                "name": "Request URL"
+            },
+            {
+                "type": 2,
+                "name": "Request"
+            },
+            {
+                "type": 0,
+                "name": "Running",
+                "subType": "boolean"
+            }
+        ]
+    }
+}

@@ -588,7 +588,7 @@ function setupPorts(subPatchId, ignoreLinks = false)
         if (!op.getPortByName(subPatchPortsOut[i].name))
         {
             const patchPortIn = subPatch.portsIn.find((port) => { return port.name === "patchId"; });
-            const patchOutputOP = op.patch.getSubPatchOp(patchPortIn.value, "Ops.Ui.PatchOutput");
+            const patchOutputOP = op.patch.getFirstSubPatchOpByName(patchPortIn.value, "Ops.Ui.PatchOutput");
             if (patchOutputOP.portsIn)
             {
                 const subPatchPort = patchOutputOP.portsIn.find((port) => { return port.name == subPatchPortsOut[i].name; });

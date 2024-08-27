@@ -1,0 +1,37 @@
+{
+  "name": "abletonlink",
+  "version": "0.2.0-beta.0",
+  "description": "ableton link for node.js",
+  "main": "index.js",
+  "directories": {
+    "example": "./example"
+  },
+  "scripts": {
+    "node-gyp": "node-gyp"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2bbb/node-abletonlink"
+  },
+  "author": "2bit [i@2bit.jp]",
+  "license": "MIT",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "types": "./index.d.ts",
+  "gypfile": true,
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/2bbb"
+    }
+  ],
+  "devDependencies": {
+    "node-gyp": "^9.4.0"
+  }
+}

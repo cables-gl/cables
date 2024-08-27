@@ -1,0 +1,75 @@
+{
+	"name": "public-ip",
+	"version": "7.0.1",
+	"description": "Get your public IP address — very fast!",
+	"license": "MIT",
+	"repository": "sindresorhus/public-ip",
+	"funding": "https://github.com/sponsors/sindresorhus",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "https://sindresorhus.com"
+	},
+	"type": "module",
+	"exports": {
+		"types": "./index.d.ts",
+		"node": "./index.js",
+		"default": "./browser.js"
+	},
+	"sideEffects": false,
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"//test": "xo && ava && tsc index.d.ts",
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js",
+		"index.d.ts",
+		"browser.js",
+		"core.js"
+	],
+	"keywords": [
+		"get",
+		"ip",
+		"ipv4",
+		"ipv6",
+		"address",
+		"external",
+		"public",
+		"machine",
+		"fast",
+		"opendns",
+		"dns"
+	],
+	"dependencies": {
+		"dns-socket": "^4.2.2",
+		"got": "^13.0.0",
+		"is-ip": "^5.0.1"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^6.0.0",
+		"ava": "^5.3.1",
+		"esmock": "^2.6.7",
+		"sinon": "^18.0.0",
+		"time-span": "^5.1.0",
+		"typescript": "^5.5.4",
+		"xo": "^0.59.2"
+	},
+	"xo": {
+		"envs": [
+			"node",
+			"browser"
+		]
+	},
+	"ava": {
+		"serial": true,
+		"files": [
+			"test.js"
+		],
+		"nodeArguments": [
+			"--loader=esmock"
+		]
+	}
+}

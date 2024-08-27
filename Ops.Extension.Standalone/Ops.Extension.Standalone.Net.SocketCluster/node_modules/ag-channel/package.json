@@ -1,0 +1,27 @@
+{
+  "name": "ag-channel",
+  "version": "5.0.0",
+  "description": "Channel object for Asyngular",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SocketCluster/ag-channel.git"
+  },
+  "dependencies": {
+    "consumable-stream": "^2.0.0"
+  },
+  "keywords": [
+    "channel",
+    "asyngular",
+    "socketcluster",
+    "pubsub",
+    "publish",
+    "subscribe"
+  ],
+  "author": "Jonathan Gros-Dubois",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SocketCluster/ag-channel/issues"
+  },
+  "homepage": "https://github.com/SocketCluster/ag-channel"
+}

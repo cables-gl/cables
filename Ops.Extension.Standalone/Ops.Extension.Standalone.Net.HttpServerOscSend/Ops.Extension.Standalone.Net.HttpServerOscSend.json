@@ -1,0 +1,51 @@
+{
+    "id": "333a0f10-3c3d-4e79-8127-595dd85509fd",
+    "created": 1724250126260,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724250126261
+        },
+        {
+            "message": "Ops.Standalone.Net.OscSend renamed to Ops.Extension.Standalone.Net.HttpServerOscSend",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724742540419
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Connection"
+            },
+            {
+                "type": 5,
+                "name": "Net Address"
+            },
+            {
+                "type": 0,
+                "name": "Port",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "OSC Address"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Send"
+            }
+        ],
+        "portsOut": []
+    }
+}

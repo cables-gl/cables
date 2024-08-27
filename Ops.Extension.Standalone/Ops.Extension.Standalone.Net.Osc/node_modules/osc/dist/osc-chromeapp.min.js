@@ -1,0 +1,897 @@
+/*! osc.js 2.4.5, Copyright 2024 Colin Clark | github.com/colinbdclark/osc.js */
+(osc = osc || {}).SECS_70YRS = 2208988800, osc.TWO_32 = 4294967296, osc.defaults = {
+    metadata: !1,
+    unpackSingleArgs: !0
+}, osc.isCommonJS = !("undefined" == typeof module || !module.exports), osc.isNode = osc.isCommonJS && "undefined" == typeof window, 
+osc.isElectron = !("undefined" == typeof process || !process.versions || !process.versions.electron), 
+osc.isBufferEnv = osc.isNode || osc.isElectron, osc.isArray = function(e) {
+    return e && "[object Array]" === Object.prototype.toString.call(e);
+}, osc.isTypedArrayView = function(e) {
+    return e.buffer && e.buffer instanceof ArrayBuffer;
+}, osc.isBuffer = function(e) {
+    return osc.isBufferEnv && e instanceof Buffer;
+}, osc.Long = "undefined" != typeof Long ? Long : osc.isNode ? require("long") : void 0, 
+osc.TextDecoder = "undefined" != typeof TextDecoder ? new TextDecoder("utf-8") : "undefined" != typeof util && (util.TextDecoder, 
+1) ? new util.TextDecoder("utf-8") : void 0, osc.TextEncoder = "undefined" != typeof TextEncoder ? new TextEncoder("utf-8") : "undefined" != typeof util && (util.TextEncoder, 
+1) ? new util.TextEncoder("utf-8") : void 0, osc.dataView = function(e, t, r) {
+    return e.buffer ? new DataView(e.buffer, t, r) : e instanceof ArrayBuffer ? new DataView(e, t, r) : new DataView(new Uint8Array(e), t, r);
+}, osc.byteArray = function(e) {
+    if (e instanceof Uint8Array) return e;
+    var t = e.buffer || e;
+    if (t instanceof ArrayBuffer || void 0 !== t.length && "string" != typeof t) return new Uint8Array(t);
+    throw new Error("Can't wrap a non-array-like object as Uint8Array. Object was: " + JSON.stringify(e, null, 2));
+}, osc.nativeBuffer = function(e) {
+    return osc.isBufferEnv ? osc.isBuffer(e) ? e : Buffer.from(e.buffer ? e : new Uint8Array(e)) : osc.isTypedArrayView(e) ? e : new Uint8Array(e);
+}, osc.copyByteArray = function(e, t, r) {
+    if (osc.isTypedArrayView(e) && osc.isTypedArrayView(t)) t.set(e, r); else for (var n = void 0 === r ? 0 : r, i = Math.min(t.length - r, e.length), s = 0, o = n; s < i; s++, 
+    o++) t[o] = e[s];
+    return t;
+}, osc.readString = function(e, t) {
+    for (var r = [], n = t.idx; n < e.byteLength; n++) {
+        var i = e.getUint8(n);
+        if (0 === i) {
+            n++;
+            break;
+        }
+        r.push(i);
+    }
+    return t.idx = n = n + 3 & -4, (osc.isBufferEnv ? osc.readString.withBuffer : osc.TextDecoder ? osc.readString.withTextDecoder : osc.readString.raw)(r);
+}, osc.readString.raw = function(e) {
+    for (var t = "", r = 0; r < e.length; r += 1e4) t += String.fromCharCode.apply(null, e.slice(r, r + 1e4));
+    return t;
+}, osc.readString.withTextDecoder = function(e) {
+    e = new Int8Array(e);
+    return osc.TextDecoder.decode(e);
+}, osc.readString.withBuffer = function(e) {
+    return Buffer.from(e).toString("utf-8");
+}, osc.writeString = function(e) {
+    for (var t, r = osc.isBufferEnv ? osc.writeString.withBuffer : osc.TextEncoder ? osc.writeString.withTextEncoder : null, n = e + "\0", i = (r && (t = r(n)), 
+    (r ? t : n).length), s = new Uint8Array(i + 3 & -4), o = 0; o < i - 1; o++) {
+        var c = r ? t[o] : n.charCodeAt(o);
+        s[o] = c;
+    }
+    return s;
+}, osc.writeString.withTextEncoder = function(e) {
+    return osc.TextEncoder.encode(e);
+}, osc.writeString.withBuffer = function(e) {
+    return Buffer.from(e);
+}, osc.readPrimitive = function(e, t, r, n) {
+    e = e[t](n.idx, !1);
+    return n.idx += r, e;
+}, osc.writePrimitive = function(e, t, r, n, i) {
+    var s;
+    return i = void 0 === i ? 0 : i, t ? s = new Uint8Array(t.buffer) : (s = new Uint8Array(n), 
+    t = new DataView(s.buffer)), t[r](i, e, !1), s;
+}, osc.readInt32 = function(e, t) {
+    return osc.readPrimitive(e, "getInt32", 4, t);
+}, osc.writeInt32 = function(e, t, r) {
+    return osc.writePrimitive(e, t, "setInt32", 4, r);
+}, osc.readInt64 = function(e, t) {
+    var r = osc.readPrimitive(e, "getInt32", 4, t), e = osc.readPrimitive(e, "getInt32", 4, t);
+    return osc.Long ? new osc.Long(e, r) : {
+        high: r,
+        low: e,
+        unsigned: !1
+    };
+}, osc.writeInt64 = function(e, t, r) {
+    var n = new Uint8Array(8);
+    return n.set(osc.writePrimitive(e.high, t, "setInt32", 4, r), 0), n.set(osc.writePrimitive(e.low, t, "setInt32", 4, r + 4), 4), 
+    n;
+}, osc.readFloat32 = function(e, t) {
+    return osc.readPrimitive(e, "getFloat32", 4, t);
+}, osc.writeFloat32 = function(e, t, r) {
+    return osc.writePrimitive(e, t, "setFloat32", 4, r);
+}, osc.readFloat64 = function(e, t) {
+    return osc.readPrimitive(e, "getFloat64", 8, t);
+}, osc.writeFloat64 = function(e, t, r) {
+    return osc.writePrimitive(e, t, "setFloat64", 8, r);
+}, osc.readChar32 = function(e, t) {
+    e = osc.readPrimitive(e, "getUint32", 4, t);
+    return String.fromCharCode(e);
+}, osc.writeChar32 = function(e, t, r) {
+    e = e.charCodeAt(0);
+    if (!(void 0 === e || e < -1)) return osc.writePrimitive(e, t, "setUint32", 4, r);
+}, osc.readBlob = function(e, t) {
+    var r = osc.readInt32(e, t), n = r + 3 & -4, e = new Uint8Array(e.buffer, t.idx, r);
+    return t.idx += n, e;
+}, osc.writeBlob = function(e) {
+    var t = (e = osc.byteArray(e)).byteLength, r = new Uint8Array(4 + (t + 3 & -4)), n = new DataView(r.buffer);
+    return osc.writeInt32(t, n), r.set(e, 4), r;
+}, osc.readMIDIBytes = function(e, t) {
+    e = new Uint8Array(e.buffer, t.idx, 4);
+    return t.idx += 4, e;
+}, osc.writeMIDIBytes = function(e) {
+    e = osc.byteArray(e);
+    var t = new Uint8Array(4);
+    return t.set(e), t;
+}, osc.readColor = function(e, t) {
+    var e = new Uint8Array(e.buffer, t.idx, 4), r = e[3] / 255;
+    return t.idx += 4, {
+        r: e[0],
+        g: e[1],
+        b: e[2],
+        a: r
+    };
+}, osc.writeColor = function(e) {
+    var t = Math.round(255 * e.a);
+    return new Uint8Array([ e.r, e.g, e.b, t ]);
+}, osc.readTrue = function() {
+    return !0;
+}, osc.readFalse = function() {
+    return !1;
+}, osc.readNull = function() {
+    return null;
+}, osc.readImpulse = function() {
+    return 1;
+}, osc.readTimeTag = function(e, t) {
+    var r = osc.readPrimitive(e, "getUint32", 4, t), e = osc.readPrimitive(e, "getUint32", 4, t);
+    return {
+        raw: [ r, e ],
+        native: 0 === r && 1 === e ? Date.now() : osc.ntpToJSTime(r, e)
+    };
+}, osc.writeTimeTag = function(e) {
+    var e = e.raw || osc.jsToNTPTime(e.native), t = new Uint8Array(8), r = new DataView(t.buffer);
+    return osc.writeInt32(e[0], r, 0), osc.writeInt32(e[1], r, 4), t;
+}, osc.timeTag = function(e, t) {
+    e = e || 0;
+    var t = (t = t || Date.now()) / 1e3, r = Math.floor(t), t = t - r, n = Math.floor(e), t = t + (e - n);
+    return 1 < t && (n += e = Math.floor(t), t = t - e), {
+        raw: [ r + n + osc.SECS_70YRS, Math.round(osc.TWO_32 * t) ]
+    };
+}, osc.ntpToJSTime = function(e, t) {
+    return 1e3 * (e - osc.SECS_70YRS + t / osc.TWO_32);
+}, osc.jsToNTPTime = function(e) {
+    var e = e / 1e3, t = Math.floor(e);
+    return [ t + osc.SECS_70YRS, Math.round(osc.TWO_32 * (e - t)) ];
+}, osc.readArguments = function(e, t, r) {
+    var n = osc.readString(e, r);
+    if (0 !== n.indexOf(",")) throw new Error("A malformed type tag string was found while reading the arguments of an OSC message. String was: " + n, " at offset: " + r.idx);
+    var i = n.substring(1).split(""), s = [];
+    return osc.readArgumentsIntoArray(s, i, n, e, t, r), s;
+}, osc.readArgument = function(e, t, r, n, i) {
+    var s = osc.argumentTypes[e];
+    if (s) return s = s.reader, s = osc[s](r, i), n.metadata ? {
+        type: e,
+        value: s
+    } : s;
+    throw new Error("'" + e + "' is not a valid OSC type tag. Type tag string was: " + t);
+}, osc.readArgumentsIntoArray = function(e, t, r, n, i, s) {
+    for (var o = 0; o < t.length; ) {
+        var c = t[o];
+        if ("[" === c) {
+            var a = t.slice(o + 1), u = a.indexOf("]");
+            if (u < 0) throw new Error("Invalid argument type tag: an open array type tag ('[') was found without a matching close array tag ('[]'). Type tag was: " + r);
+            a = a.slice(0, u), a = osc.readArgumentsIntoArray([], a, r, n, i, s);
+            o += u + 2;
+        } else a = osc.readArgument(c, r, n, i, s), o++;
+        e.push(a);
+    }
+    return e;
+}, osc.writeArguments = function(e, t) {
+    e = osc.collectArguments(e, t);
+    return osc.joinParts(e);
+}, osc.joinParts = function(e) {
+    for (var t = new Uint8Array(e.byteLength), r = e.parts, n = 0, i = 0; i < r.length; i++) {
+        var s = r[i];
+        osc.copyByteArray(s, t, n), n += s.length;
+    }
+    return t;
+}, osc.addDataPart = function(e, t) {
+    t.parts.push(e), t.byteLength += e.length;
+}, osc.writeArrayArguments = function(e, t) {
+    for (var r = "[", n = 0; n < e.length; n++) r += osc.writeArgument(e[n], t);
+    return r += "]";
+}, osc.writeArgument = function(e, t) {
+    var r;
+    return osc.isArray(e) ? osc.writeArrayArguments(e, t) : (r = e.type, (r = osc.argumentTypes[r].writer) && (r = osc[r](e.value), 
+    osc.addDataPart(r, t)), e.type);
+}, osc.collectArguments = function(e, t, r) {
+    osc.isArray(e) || (e = void 0 === e ? [] : [ e ]), r = r || {
+        byteLength: 0,
+        parts: []
+    }, t.metadata || (e = osc.annotateArguments(e));
+    for (var n = ",", t = r.parts.length, i = 0; i < e.length; i++) {
+        var s = e[i];
+        n += osc.writeArgument(s, r);
+    }
+    var o = osc.writeString(n);
+    return r.byteLength += o.byteLength, r.parts.splice(t, 0, o), r;
+}, osc.readMessage = function(e, t, r) {
+    t = t || osc.defaults;
+    var e = osc.dataView(e, e.byteOffset, e.byteLength), n = osc.readString(e, r = r || {
+        idx: 0
+    });
+    return osc.readMessageContents(n, e, t, r);
+}, osc.readMessageContents = function(e, t, r, n) {
+    if (0 !== e.indexOf("/")) throw new Error("A malformed OSC address was found while reading an OSC message. String was: " + e);
+    t = osc.readArguments(t, r, n);
+    return {
+        address: e,
+        args: 1 === t.length && r.unpackSingleArgs ? t[0] : t
+    };
+}, osc.collectMessageParts = function(e, t, r) {
+    return r = r || {
+        byteLength: 0,
+        parts: []
+    }, osc.addDataPart(osc.writeString(e.address), r), osc.collectArguments(e.args, t, r);
+}, osc.writeMessage = function(e, t) {
+    if (t = t || osc.defaults, osc.isValidMessage(e)) return t = osc.collectMessageParts(e, t), 
+    osc.joinParts(t);
+    throw new Error("An OSC message must contain a valid address. Message was: " + JSON.stringify(e, null, 2));
+}, osc.isValidMessage = function(e) {
+    return e.address && 0 === e.address.indexOf("/");
+}, osc.readBundle = function(e, t, r) {
+    return osc.readPacket(e, t, r);
+}, osc.collectBundlePackets = function(e, t, r) {
+    r = r || {
+        byteLength: 0,
+        parts: []
+    }, osc.addDataPart(osc.writeString("#bundle"), r), osc.addDataPart(osc.writeTimeTag(e.timeTag), r);
+    for (var n = 0; n < e.packets.length; n++) {
+        var i = e.packets[n], i = (i.address ? osc.collectMessageParts : osc.collectBundlePackets)(i, t);
+        r.byteLength += i.byteLength, osc.addDataPart(osc.writeInt32(i.byteLength), r), 
+        r.parts = r.parts.concat(i.parts);
+    }
+    return r;
+}, osc.writeBundle = function(e, t) {
+    if (!osc.isValidBundle(e)) throw new Error("An OSC bundle must contain 'timeTag' and 'packets' properties. Bundle was: " + JSON.stringify(e, null, 2));
+    t = t || osc.defaults;
+    e = osc.collectBundlePackets(e, t);
+    return osc.joinParts(e);
+}, osc.isValidBundle = function(e) {
+    return void 0 !== e.timeTag && void 0 !== e.packets;
+}, osc.readBundleContents = function(e, t, r, n) {
+    for (var i = osc.readTimeTag(e, r), s = []; r.idx < n; ) {
+        var o = osc.readInt32(e, r), o = r.idx + o, o = osc.readPacket(e, t, r, o);
+        s.push(o);
+    }
+    return {
+        timeTag: i,
+        packets: s
+    };
+}, osc.readPacket = function(e, t, r, n) {
+    var e = osc.dataView(e, e.byteOffset, e.byteLength), i = (n = void 0 === n ? e.byteLength : n, 
+    osc.readString(e, r = r || {
+        idx: 0
+    })), s = i[0];
+    if ("#" === s) return osc.readBundleContents(e, t, r, n);
+    if ("/" === s) return osc.readMessageContents(i, e, t, r);
+    throw new Error("The header of an OSC packet didn't contain an OSC address or a #bundle string. Header was: " + i);
+}, osc.writePacket = function(e, t) {
+    if (osc.isValidMessage(e)) return osc.writeMessage(e, t);
+    if (osc.isValidBundle(e)) return osc.writeBundle(e, t);
+    throw new Error("The specified packet was not recognized as a valid OSC message or bundle. Packet was: " + JSON.stringify(e, null, 2));
+}, osc.argumentTypes = {
+    i: {
+        reader: "readInt32",
+        writer: "writeInt32"
+    },
+    h: {
+        reader: "readInt64",
+        writer: "writeInt64"
+    },
+    f: {
+        reader: "readFloat32",
+        writer: "writeFloat32"
+    },
+    s: {
+        reader: "readString",
+        writer: "writeString"
+    },
+    S: {
+        reader: "readString",
+        writer: "writeString"
+    },
+    b: {
+        reader: "readBlob",
+        writer: "writeBlob"
+    },
+    t: {
+        reader: "readTimeTag",
+        writer: "writeTimeTag"
+    },
+    T: {
+        reader: "readTrue"
+    },
+    F: {
+        reader: "readFalse"
+    },
+    N: {
+        reader: "readNull"
+    },
+    I: {
+        reader: "readImpulse"
+    },
+    d: {
+        reader: "readFloat64",
+        writer: "writeFloat64"
+    },
+    c: {
+        reader: "readChar32",
+        writer: "writeChar32"
+    },
+    r: {
+        reader: "readColor",
+        writer: "writeColor"
+    },
+    m: {
+        reader: "readMIDIBytes",
+        writer: "writeMIDIBytes"
+    }
+}, osc.inferTypeForArgument = function(e) {
+    switch (typeof e) {
+      case "boolean":
+        return e ? "T" : "F";
+
+      case "string":
+        return "s";
+
+      case "number":
+        return "f";
+
+      case "undefined":
+        return "N";
+
+      case "object":
+        if (null === e) return "N";
+        if (e instanceof Uint8Array || e instanceof ArrayBuffer) return "b";
+        if ("number" == typeof e.high && "number" == typeof e.low) return "h";
+    }
+    throw new Error("Can't infer OSC argument type for value: " + JSON.stringify(e, null, 2));
+}, osc.annotateArguments = function(e) {
+    for (var t = [], r = 0; r < e.length; r++) {
+        var n = e[r];
+        n = "object" == typeof n && n.type && void 0 !== n.value ? n : osc.isArray(n) ? osc.annotateArguments(n) : {
+            type: osc.inferTypeForArgument(n),
+            value: n
+        }, t.push(n);
+    }
+    return t;
+}, osc.isCommonJS && (module.exports = osc), ((e, t) => {
+    "object" == typeof exports && "object" == typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define([], t) : "object" == typeof exports ? exports.Long = t() : e.Long = t();
+})("undefined" != typeof self ? self : this, function() {
+    return r = [ function(e, t) {
+        function n(e, t, r) {
+            this.low = 0 | e, this.high = 0 | t, this.unsigned = !!r;
+        }
+        function d(e) {
+            return !0 === (e && e.__isLong__);
+        }
+        function r(e, t) {
+            var r, n, i;
+            return t ? (i = 0 <= (e >>>= 0) && e < 256) && (n = o[e]) ? n : (r = g(e, (0 | e) < 0 ? -1 : 0, !0), 
+            i && (o[e] = r), r) : (i = -128 <= (e |= 0) && e < 128) && (n = s[e]) ? n : (r = g(e, e < 0 ? -1 : 0, !1), 
+            i && (s[e] = r), r);
+        }
+        function l(e, t) {
+            if (isNaN(e)) return t ? f : y;
+            if (t) {
+                if (e < 0) return f;
+                if (c <= e) return P;
+            } else {
+                if (e <= -a) return A;
+                if (a <= e + 1) return E;
+            }
+            return e < 0 ? l(-e, t).neg() : g(e % i | 0, e / i | 0, t);
+        }
+        function g(e, t, r) {
+            return new n(e, t, r);
+        }
+        function u(e, t, r) {
+            if (0 === e.length) throw Error("empty string");
+            if ("NaN" === e || "Infinity" === e || "+Infinity" === e || "-Infinity" === e) return y;
+            if (t = "number" == typeof t ? (r = t, !1) : !!t, (r = r || 10) < 2 || 36 < r) throw RangeError("radix");
+            var n;
+            if (0 < (n = e.indexOf("-"))) throw Error("interior hyphen");
+            if (0 === n) return u(e.substring(1), t, r).neg();
+            for (var i = l(h(r, 8)), s = y, o = 0; o < e.length; o += 8) {
+                var c = Math.min(8, e.length - o), a = parseInt(e.substring(o, o + c), r);
+                s = (c < 8 ? (c = l(h(r, c)), s.mul(c)) : s = s.mul(i)).add(l(a));
+            }
+            return s.unsigned = t, s;
+        }
+        function p(e, t) {
+            return "number" == typeof e ? l(e, t) : "string" == typeof e ? u(e, t) : g(e.low, e.high, "boolean" == typeof t ? t : e.unsigned);
+        }
+        e.exports = n;
+        var m = null;
+        try {
+            m = new WebAssembly.Instance(new WebAssembly.Module(new Uint8Array([ 0, 97, 115, 109, 1, 0, 0, 0, 1, 13, 2, 96, 0, 1, 127, 96, 4, 127, 127, 127, 127, 1, 127, 3, 7, 6, 0, 1, 1, 1, 1, 1, 6, 6, 1, 127, 1, 65, 0, 11, 7, 50, 6, 3, 109, 117, 108, 0, 1, 5, 100, 105, 118, 95, 115, 0, 2, 5, 100, 105, 118, 95, 117, 0, 3, 5, 114, 101, 109, 95, 115, 0, 4, 5, 114, 101, 109, 95, 117, 0, 5, 8, 103, 101, 116, 95, 104, 105, 103, 104, 0, 0, 10, 191, 1, 6, 4, 0, 35, 0, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 126, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 127, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 128, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 129, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 130, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11 ])), {}).exports;
+        } catch (e) {}
+        Object.defineProperty(n.prototype, "__isLong__", {
+            value: !0
+        }), n.isLong = d;
+        var s = {}, o = {}, h = (n.fromInt = r, n.fromNumber = l, n.fromBits = g, 
+        Math.pow), i = (n.fromString = u, n.fromValue = p, 4294967296), c = i * i, a = c / 2, w = r(1 << 24), y = r(0), f = (n.ZERO = y, 
+        r(0, !0)), v = (n.UZERO = f, r(1)), b = (n.ONE = v, r(1, !0)), S = (n.UONE = b, 
+        r(-1)), E = (n.NEG_ONE = S, g(-1, 2147483647, !1)), P = (n.MAX_VALUE = E, 
+        g(-1, -1, !0)), A = (n.MAX_UNSIGNED_VALUE = P, g(0, -2147483648, !1)), T = (n.MIN_VALUE = A, 
+        n.prototype);
+        T.toInt = function() {
+            return this.unsigned ? this.low >>> 0 : this.low;
+        }, T.toNumber = function() {
+            return this.unsigned ? (this.high >>> 0) * i + (this.low >>> 0) : this.high * i + (this.low >>> 0);
+        }, T.toString = function(e) {
+            if ((e = e || 10) < 2 || 36 < e) throw RangeError("radix");
+            if (this.isZero()) return "0";
+            var t, r;
+            if (this.isNegative()) return this.eq(A) ? (r = l(e), r = (t = this.div(r)).mul(r).sub(this), 
+            t.toString(e) + r.toInt().toString(e)) : "-" + this.neg().toString(e);
+            for (var n = l(h(e, 6), this.unsigned), i = this, s = ""; ;) {
+                var o = i.div(n), c = (i.sub(o.mul(n)).toInt() >>> 0).toString(e);
+                if ((i = o).isZero()) return c + s;
+                for (;c.length < 6; ) c = "0" + c;
+                s = "" + c + s;
+            }
+        }, T.getHighBits = function() {
+            return this.high;
+        }, T.getHighBitsUnsigned = function() {
+            return this.high >>> 0;
+        }, T.getLowBits = function() {
+            return this.low;
+        }, T.getLowBitsUnsigned = function() {
+            return this.low >>> 0;
+        }, T.getNumBitsAbs = function() {
+            if (this.isNegative()) return this.eq(A) ? 64 : this.neg().getNumBitsAbs();
+            for (var e = 0 != this.high ? this.high : this.low, t = 31; 0 < t && 0 == (e & 1 << t); t--);
+            return 0 != this.high ? t + 33 : t + 1;
+        }, T.isZero = function() {
+            return 0 === this.high && 0 === this.low;
+        }, T.eqz = T.isZero, T.isNegative = function() {
+            return !this.unsigned && this.high < 0;
+        }, T.isPositive = function() {
+            return this.unsigned || 0 <= this.high;
+        }, T.isOdd = function() {
+            return 1 == (1 & this.low);
+        }, T.isEven = function() {
+            return 0 == (1 & this.low);
+        }, T.equals = function(e) {
+            return d(e) || (e = p(e)), (this.unsigned === e.unsigned || this.high >>> 31 != 1 || e.high >>> 31 != 1) && this.high === e.high && this.low === e.low;
+        }, T.eq = T.equals, T.notEquals = function(e) {
+            return !this.eq(e);
+        }, T.neq = T.notEquals, T.ne = T.notEquals, T.lessThan = function(e) {
+            return this.comp(e) < 0;
+        }, T.lt = T.lessThan, T.lessThanOrEqual = function(e) {
+            return this.comp(e) <= 0;
+        }, T.lte = T.lessThanOrEqual, T.le = T.lessThanOrEqual, T.greaterThan = function(e) {
+            return 0 < this.comp(e);
+        }, T.gt = T.greaterThan, T.greaterThanOrEqual = function(e) {
+            return 0 <= this.comp(e);
+        }, T.gte = T.greaterThanOrEqual, T.ge = T.greaterThanOrEqual, T.compare = function(e) {
+            var t, r;
+            return d(e) || (e = p(e)), this.eq(e) ? 0 : (t = this.isNegative(), 
+            r = e.isNegative(), t && !r ? -1 : !t && r ? 1 : this.unsigned ? e.high >>> 0 > this.high >>> 0 || e.high === this.high && e.low >>> 0 > this.low >>> 0 ? -1 : 1 : this.sub(e).isNegative() ? -1 : 1);
+        }, T.comp = T.compare, T.negate = function() {
+            return !this.unsigned && this.eq(A) ? A : this.not().add(v);
+        }, T.neg = T.negate, T.add = function(e) {
+            d(e) || (e = p(e));
+            var t = this.high >>> 16, r = 65535 & this.high, n = this.low >>> 16, i = 65535 & this.low, s = e.high >>> 16, o = 65535 & e.high, c = e.low >>> 16, a = 0, u = 0, h = 0, f = 0;
+            return u += (h = h + ((f += i + (65535 & e.low)) >>> 16) + (n + c)) >>> 16, 
+            g((h &= 65535) << 16 | (f &= 65535), ((a += (u += r + o) >>> 16) + (t + s) & 65535) << 16 | (u &= 65535), this.unsigned);
+        }, T.subtract = function(e) {
+            return d(e) || (e = p(e)), this.add(e.neg());
+        }, T.sub = T.subtract, T.multiply = function(e) {
+            var t, r, n, i, s, o, c, a, u, h, f;
+            return this.isZero() ? y : (d(e) || (e = p(e)), m ? g(m.mul(this.low, this.high, e.low, e.high), m.get_high(), this.unsigned) : e.isZero() ? y : this.eq(A) ? e.isOdd() ? A : y : e.eq(A) ? this.isOdd() ? A : y : this.isNegative() ? e.isNegative() ? this.neg().mul(e.neg()) : this.neg().mul(e).neg() : e.isNegative() ? this.mul(e.neg()).neg() : this.lt(w) && e.lt(w) ? l(this.toNumber() * e.toNumber(), this.unsigned) : (t = this.high >>> 16, 
+            r = 65535 & this.high, n = this.low >>> 16, i = 65535 & this.low, s = e.high >>> 16, 
+            o = 65535 & e.high, c = e.low >>> 16, f = (f = h = u = a = 0) + ((u = u + ((h += i * (e = 65535 & e.low)) >>> 16) + n * e) >>> 16) + ((u = (u & 65535) + i * c) >>> 16), 
+            g((u &= 65535) << 16 | (h &= 65535), (a = (a = (a += (f += r * e) >>> 16) + ((f = (f & 65535) + n * c) >>> 16) + ((f = (f & 65535) + i * o) >>> 16)) + (t * e + r * c + n * o + i * s) & 65535) << 16 | (f &= 65535), this.unsigned)));
+        }, T.mul = T.multiply, T.divide = function(e) {
+            if ((e = d(e) ? e : p(e)).isZero()) throw Error("division by zero");
+            if (m) return this.unsigned || -2147483648 !== this.high || -1 !== e.low || -1 !== e.high ? g((this.unsigned ? m.div_u : m.div_s)(this.low, this.high, e.low, e.high), m.get_high(), this.unsigned) : this;
+            if (this.isZero()) return this.unsigned ? f : y;
+            var t, r;
+            if (this.unsigned) {
+                if ((e = e.unsigned ? e : e.toUnsigned()).gt(this)) return f;
+                if (e.gt(this.shru(1))) return b;
+                r = f;
+            } else {
+                if (this.eq(A)) return e.eq(v) || e.eq(S) ? A : e.eq(A) ? v : (n = this.shr(1).div(e).shl(1)).eq(y) ? e.isNegative() ? v : S : (t = this.sub(e.mul(n)), 
+                n.add(t.div(e)));
+                if (e.eq(A)) return this.unsigned ? f : y;
+                if (this.isNegative()) return e.isNegative() ? this.neg().div(e.neg()) : this.neg().div(e).neg();
+                if (e.isNegative()) return this.div(e.neg()).neg();
+                r = y;
+            }
+            for (t = this; t.gte(e); ) {
+                for (var n = Math.max(1, Math.floor(t.toNumber() / e.toNumber())), i = Math.ceil(Math.log(n) / Math.LN2), s = i <= 48 ? 1 : h(2, i - 48), o = l(n), c = o.mul(e); c.isNegative() || c.gt(t); ) c = (o = l(n -= s, this.unsigned)).mul(e);
+                o.isZero() && (o = v), r = r.add(o), t = t.sub(c);
+            }
+            return r;
+        }, T.div = T.divide, T.modulo = function(e) {
+            return d(e) || (e = p(e)), m ? g((this.unsigned ? m.rem_u : m.rem_s)(this.low, this.high, e.low, e.high), m.get_high(), this.unsigned) : this.sub(this.div(e).mul(e));
+        }, T.mod = T.modulo, T.rem = T.modulo, T.not = function() {
+            return g(~this.low, ~this.high, this.unsigned);
+        }, T.and = function(e) {
+            return d(e) || (e = p(e)), g(this.low & e.low, this.high & e.high, this.unsigned);
+        }, T.or = function(e) {
+            return d(e) || (e = p(e)), g(this.low | e.low, this.high | e.high, this.unsigned);
+        }, T.xor = function(e) {
+            return d(e) || (e = p(e)), g(this.low ^ e.low, this.high ^ e.high, this.unsigned);
+        }, T.shiftLeft = function(e) {
+            return d(e) && (e = e.toInt()), 0 == (e &= 63) ? this : e < 32 ? g(this.low << e, this.high << e | this.low >>> 32 - e, this.unsigned) : g(0, this.low << e - 32, this.unsigned);
+        }, T.shl = T.shiftLeft, T.shiftRight = function(e) {
+            return d(e) && (e = e.toInt()), 0 == (e &= 63) ? this : e < 32 ? g(this.low >>> e | this.high << 32 - e, this.high >> e, this.unsigned) : g(this.high >> e - 32, 0 <= this.high ? 0 : -1, this.unsigned);
+        }, T.shr = T.shiftRight, T.shiftRightUnsigned = function(e) {
+            var t;
+            return d(e) && (e = e.toInt()), 0 == (e &= 63) ? this : (t = this.high, 
+            e < 32 ? g(this.low >>> e | t << 32 - e, t >>> e, this.unsigned) : g(32 === e ? t : t >>> e - 32, 0, this.unsigned));
+        }, T.shru = T.shiftRightUnsigned, T.shr_u = T.shiftRightUnsigned, T.toSigned = function() {
+            return this.unsigned ? g(this.low, this.high, !1) : this;
+        }, T.toUnsigned = function() {
+            return this.unsigned ? this : g(this.low, this.high, !0);
+        }, T.toBytes = function(e) {
+            return e ? this.toBytesLE() : this.toBytesBE();
+        }, T.toBytesLE = function() {
+            var e = this.high, t = this.low;
+            return [ 255 & t, t >>> 8 & 255, t >>> 16 & 255, t >>> 24, 255 & e, e >>> 8 & 255, e >>> 16 & 255, e >>> 24 ];
+        }, T.toBytesBE = function() {
+            var e = this.high, t = this.low;
+            return [ e >>> 24, e >>> 16 & 255, e >>> 8 & 255, 255 & e, t >>> 24, t >>> 16 & 255, t >>> 8 & 255, 255 & t ];
+        }, n.fromBytes = function(e, t, r) {
+            return r ? n.fromBytesLE(e, t) : n.fromBytesBE(e, t);
+        }, n.fromBytesLE = function(e, t) {
+            return new n(e[0] | e[1] << 8 | e[2] << 16 | e[3] << 24, e[4] | e[5] << 8 | e[6] << 16 | e[7] << 24, t);
+        }, n.fromBytesBE = function(e, t) {
+            return new n(e[4] << 24 | e[5] << 16 | e[6] << 8 | e[7], e[0] << 24 | e[1] << 16 | e[2] << 8 | e[3], t);
+        };
+    } ], i = {}, n.m = r, n.c = i, n.d = function(e, t, r) {
+        n.o(e, t) || Object.defineProperty(e, t, {
+            configurable: !1,
+            enumerable: !0,
+            get: r
+        });
+    }, n.n = function(e) {
+        var t = e && e.__esModule ? function() {
+            return e.default;
+        } : function() {
+            return e;
+        };
+        return n.d(t, "a", t), t;
+    }, n.o = function(e, t) {
+        return Object.prototype.hasOwnProperty.call(e, t);
+    }, n.p = "", n(n.s = 0);
+    function n(e) {
+        var t;
+        return (i[e] || (t = i[e] = {
+            i: e,
+            l: !1,
+            exports: {}
+        }, r[e].call(t.exports, t, t.exports, n), t.l = !0, t)).exports;
+    }
+    var r, i;
+}), ((t, r) => {
+    "object" == typeof exports ? (t.slip = exports, r(exports)) : "function" == typeof define && define.amd ? define([ "exports" ], function(e) {
+        return t.slip = e, r(e);
+    }) : (t.slip = {}, r(t.slip));
+})(this, function(e) {
+    var o = e, e = (o.END = 192, o.ESC = 219, o.ESC_END = 220, o.ESC_ESC = 221, 
+    o.byteArray = function(e, t, r) {
+        return e instanceof ArrayBuffer ? new Uint8Array(e, t, r) : e;
+    }, o.expandByteArray = function(e) {
+        var t = new Uint8Array(2 * e.length);
+        return t.set(e), t;
+    }, o.sliceByteArray = function(e, t, r) {
+        e = e.buffer.slice ? e.buffer.slice(t, r) : e.subarray(t, r);
+        return new Uint8Array(e);
+    }, o.encode = function(e, t) {
+        (t = t || {}).bufferPadding = t.bufferPadding || 4;
+        var t = (e = o.byteArray(e, t.offset, t.byteLength)).length + t.bufferPadding + 3 & -4, r = new Uint8Array(t), n = 1;
+        r[0] = o.END;
+        for (var i = 0; i < e.length; i++) {
+            n > r.length - 3 && (r = o.expandByteArray(r));
+            var s = e[i];
+            s === o.END ? (r[n++] = o.ESC, s = o.ESC_END) : s === o.ESC && (r[n++] = o.ESC, 
+            s = o.ESC_ESC), r[n++] = s;
+        }
+        return r[n] = o.END, o.sliceByteArray(r, 0, n + 1);
+    }, o.Decoder = function(e) {
+        this.maxMessageSize = (e = "function" != typeof e ? e || {} : {
+            onMessage: e
+        }).maxMessageSize || 10485760, this.bufferSize = e.bufferSize || 1024, this.msgBuffer = new Uint8Array(this.bufferSize), 
+        this.msgBufferIdx = 0, this.onMessage = e.onMessage, this.onError = e.onError, 
+        this.escape = !1;
+    }, o.Decoder.prototype);
+    return e.decode = function(e) {
+        var t;
+        e = o.byteArray(e);
+        for (var r = 0; r < e.length; r++) {
+            var n = e[r];
+            if (this.escape) n === o.ESC_ESC ? n = o.ESC : n === o.ESC_END && (n = o.END); else {
+                if (n === o.ESC) {
+                    this.escape = !0;
+                    continue;
+                }
+                if (n === o.END) {
+                    t = this.handleEnd();
+                    continue;
+                }
+            }
+            this.addByte(n) || this.handleMessageMaxError();
+        }
+        return t;
+    }, e.handleMessageMaxError = function() {
+        this.onError && this.onError(this.msgBuffer.subarray(0), "The message is too large; the maximum message size is " + this.maxMessageSize / 1024 + "KB. Use a larger maxMessageSize if necessary."), 
+        this.msgBufferIdx = 0, this.escape = !1;
+    }, e.addByte = function(e) {
+        return this.msgBufferIdx > this.msgBuffer.length - 1 && (this.msgBuffer = o.expandByteArray(this.msgBuffer)), 
+        this.msgBuffer[this.msgBufferIdx++] = e, this.escape = !1, this.msgBuffer.length < this.maxMessageSize;
+    }, e.handleEnd = function() {
+        var e;
+        if (0 !== this.msgBufferIdx) return e = o.sliceByteArray(this.msgBuffer, 0, this.msgBufferIdx), 
+        this.onMessage && this.onMessage(e), this.msgBufferIdx = 0, e;
+    }, o;
+}), (e => {
+    function t() {}
+    var r = t.prototype, n = e.EventEmitter;
+    function s(e, t) {
+        for (var r = e.length; r--; ) if (e[r].listener === t) return r;
+        return -1;
+    }
+    function i(e) {
+        return function() {
+            return this[e].apply(this, arguments);
+        };
+    }
+    r.getListeners = function(e) {
+        var t, r, n = this._getEvents();
+        if (e instanceof RegExp) for (r in t = {}, n) n.hasOwnProperty(r) && e.test(r) && (t[r] = n[r]); else t = n[e] || (n[e] = []);
+        return t;
+    }, r.flattenListeners = function(e) {
+        for (var t = [], r = 0; r < e.length; r += 1) t.push(e[r].listener);
+        return t;
+    }, r.getListenersAsObject = function(e) {
+        var t, r = this.getListeners(e);
+        return r instanceof Array && ((t = {})[e] = r), t || r;
+    }, r.addListener = function(e, t) {
+        if (!function e(t) {
+            return "function" == typeof t || t instanceof RegExp || !(!t || "object" != typeof t) && e(t.listener);
+        }(t)) throw new TypeError("listener must be a function");
+        var r, n = this.getListenersAsObject(e), i = "object" == typeof t;
+        for (r in n) n.hasOwnProperty(r) && -1 === s(n[r], t) && n[r].push(i ? t : {
+            listener: t,
+            once: !1
+        });
+        return this;
+    }, r.on = i("addListener"), r.addOnceListener = function(e, t) {
+        return this.addListener(e, {
+            listener: t,
+            once: !0
+        });
+    }, r.once = i("addOnceListener"), r.defineEvent = function(e) {
+        return this.getListeners(e), this;
+    }, r.defineEvents = function(e) {
+        for (var t = 0; t < e.length; t += 1) this.defineEvent(e[t]);
+        return this;
+    }, r.removeListener = function(e, t) {
+        var r, n, i = this.getListenersAsObject(e);
+        for (n in i) i.hasOwnProperty(n) && -1 !== (r = s(i[n], t)) && i[n].splice(r, 1);
+        return this;
+    }, r.off = i("removeListener"), r.addListeners = function(e, t) {
+        return this.manipulateListeners(!1, e, t);
+    }, r.removeListeners = function(e, t) {
+        return this.manipulateListeners(!0, e, t);
+    }, r.manipulateListeners = function(e, t, r) {
+        var n, i, s = e ? this.removeListener : this.addListener, o = e ? this.removeListeners : this.addListeners;
+        if ("object" != typeof t || t instanceof RegExp) for (n = r.length; n--; ) s.call(this, t, r[n]); else for (n in t) t.hasOwnProperty(n) && (i = t[n]) && ("function" == typeof i ? s : o).call(this, n, i);
+        return this;
+    }, r.removeEvent = function(e) {
+        var t, r = typeof e, n = this._getEvents();
+        if ("string" == r) delete n[e]; else if (e instanceof RegExp) for (t in n) n.hasOwnProperty(t) && e.test(t) && delete n[t]; else delete this._events;
+        return this;
+    }, r.removeAllListeners = i("removeEvent"), r.emitEvent = function(e, t) {
+        var r, n, i, s, o = this.getListenersAsObject(e);
+        for (s in o) if (o.hasOwnProperty(s)) for (r = o[s].slice(0), i = 0; i < r.length; i++) !0 === (n = r[i]).once && this.removeListener(e, n.listener), 
+        n.listener.apply(this, t || []) === this._getOnceReturnValue() && this.removeListener(e, n.listener);
+        return this;
+    }, r.trigger = i("emitEvent"), r.emit = function(e) {
+        var t = Array.prototype.slice.call(arguments, 1);
+        return this.emitEvent(e, t);
+    }, r.setOnceReturnValue = function(e) {
+        return this._onceReturnValue = e, this;
+    }, r._getOnceReturnValue = function() {
+        return !this.hasOwnProperty("_onceReturnValue") || this._onceReturnValue;
+    }, r._getEvents = function() {
+        return this._events || (this._events = {});
+    }, t.noConflict = function() {
+        return e.EventEmitter = n, t;
+    }, "function" == typeof define && define.amd ? define(function() {
+        return t;
+    }) : "object" == typeof module && module.exports ? module.exports = t : e.EventEmitter = t;
+})("undefined" != typeof window ? window : this || {});
+
+var osc = osc || require("./osc.js"), slip = slip || require("slip"), EventEmitter = EventEmitter || require("events").EventEmitter, osc = ((() => {
+    osc.supportsSerial = !1, osc.firePacketEvents = function(e, t, r, n) {
+        t.address ? e.emit("message", t, r, n) : osc.fireBundleEvents(e, t, r, n);
+    }, osc.fireBundleEvents = function(e, t, r, n) {
+        e.emit("bundle", t, r, n);
+        for (var i = 0; i < t.packets.length; i++) {
+            var s = t.packets[i];
+            osc.firePacketEvents(e, s, t.timeTag, n);
+        }
+    }, osc.fireClosedPortSendError = function(e, t) {
+        e.emit("error", t = t || "Can't send packets on a closed osc.Port object. Please open (or reopen) this Port by calling open().");
+    }, osc.Port = function(e) {
+        this.options = e || {}, this.on("data", this.decodeOSC.bind(this));
+    };
+    var e = osc.Port.prototype = Object.create(EventEmitter.prototype);
+    e.constructor = osc.Port, e.send = function(e) {
+        var t = Array.prototype.slice.call(arguments), e = this.encodeOSC(e), e = osc.nativeBuffer(e);
+        t[0] = e, this.sendRaw.apply(this, t);
+    }, e.encodeOSC = function(e) {
+        var t;
+        e = e.buffer || e;
+        try {
+            t = osc.writePacket(e, this.options);
+        } catch (e) {
+            this.emit("error", e);
+        }
+        return t;
+    }, e.decodeOSC = function(e, t) {
+        e = osc.byteArray(e), this.emit("raw", e, t);
+        try {
+            var r = osc.readPacket(e, this.options);
+            this.emit("osc", r, t), osc.firePacketEvents(this, r, void 0, t);
+        } catch (e) {
+            this.emit("error", e);
+        }
+    }, osc.SLIPPort = function(e) {
+        var t = this, e = this.options = e || {}, e = (e.useSLIP = void 0 === e.useSLIP || e.useSLIP, 
+        this.decoder = new slip.Decoder({
+            onMessage: this.decodeOSC.bind(this),
+            onError: function(e) {
+                t.emit("error", e);
+            }
+        }), e.useSLIP ? this.decodeSLIPData : this.decodeOSC);
+        this.on("data", e.bind(this));
+    }, (e = osc.SLIPPort.prototype = Object.create(osc.Port.prototype)).constructor = osc.SLIPPort, 
+    e.encodeOSC = function(e) {
+        e = e.buffer || e;
+        try {
+            var t = osc.writePacket(e, this.options), r = slip.encode(t);
+        } catch (e) {
+            this.emit("error", e);
+        }
+        return r;
+    }, e.decodeSLIPData = function(e, t) {
+        this.decoder.decode(e, t);
+    }, osc.relay = function(e, t, r, n, i, s) {
+        r = r || "message", n = n || "send", i = i || function() {}, s = s ? [ null ].concat(s) : [];
+        function o(e) {
+            s[0] = e, e = i(e), t[n].apply(t, s);
+        }
+        return e.on(r, o), {
+            eventName: r,
+            listener: o
+        };
+    }, osc.relayPorts = function(e, t, r) {
+        var n = r.raw ? "raw" : "osc";
+        return osc.relay(e, t, n, r.raw ? "sendRaw" : "send", r.transform);
+    }, osc.stopRelaying = function(e, t) {
+        e.removeListener(t.eventName, t.listener);
+    }, osc.Relay = function(e, t, r) {
+        (this.options = r || {}).raw = !1, this.port1 = e, this.port2 = t, this.listen();
+    }, (e = osc.Relay.prototype = Object.create(EventEmitter.prototype)).constructor = osc.Relay, 
+    e.open = function() {
+        this.port1.open(), this.port2.open();
+    }, e.listen = function() {
+        this.port1Spec && this.port2Spec && this.close(), this.port1Spec = osc.relayPorts(this.port1, this.port2, this.options), 
+        this.port2Spec = osc.relayPorts(this.port2, this.port1, this.options);
+        var e = this.close.bind(this);
+        this.port1.on("close", e), this.port2.on("close", e);
+    }, e.close = function() {
+        osc.stopRelaying(this.port1, this.port1Spec), osc.stopRelaying(this.port2, this.port2Spec), 
+        this.emit("close", this.port1, this.port2);
+    }, "undefined" != typeof module && module.exports && (module.exports = osc);
+})(), osc || require("./osc.js")), osc = ((() => {
+    osc.WebSocket = "undefined" != typeof WebSocket ? WebSocket : require("ws"), 
+    osc.WebSocketPort = function(e) {
+        osc.Port.call(this, e), this.on("open", this.listen.bind(this)), this.socket = e.socket, 
+        this.socket && (1 === this.socket.readyState ? (osc.WebSocketPort.setupSocketForBinary(this.socket), 
+        this.emit("open", this.socket)) : this.open());
+    };
+    var e = osc.WebSocketPort.prototype = Object.create(osc.Port.prototype);
+    e.constructor = osc.WebSocketPort, e.open = function() {
+        (!this.socket || 1 < this.socket.readyState) && (this.socket = new osc.WebSocket(this.options.url)), 
+        osc.WebSocketPort.setupSocketForBinary(this.socket);
+        var t = this;
+        this.socket.onopen = function() {
+            t.emit("open", t.socket);
+        }, this.socket.onerror = function(e) {
+            t.emit("error", e);
+        };
+    }, e.listen = function() {
+        var t = this;
+        this.socket.onmessage = function(e) {
+            t.emit("data", e.data, e);
+        }, this.socket.onclose = function(e) {
+            t.emit("close", e);
+        }, t.emit("ready");
+    }, e.sendRaw = function(e) {
+        this.socket && 1 === this.socket.readyState ? this.socket.send(e) : osc.fireClosedPortSendError(this);
+    }, e.close = function(e, t) {
+        this.socket.close(e, t);
+    }, osc.WebSocketPort.setupSocketForBinary = function(e) {
+        e.binaryType = osc.isNode ? "nodebuffer" : "arraybuffer";
+    };
+})(), osc || {});
+
+(() => {
+    osc.listenToTransport = function(t, e, r) {
+        e.onReceive.addListener(function(e) {
+            e[r] === t[r] && t.emit("data", e.data, e);
+        }), e.onReceiveError.addListener(function(e) {
+            t.emit("error", e);
+        }), t.emit("ready");
+    }, osc.emitNetworkError = function(e, t) {
+        e.emit("error", "There was an error while opening the UDP socket connection. Result code: " + t);
+    }, osc.SerialPort = function(e) {
+        this.on("open", this.listen.bind(this)), osc.SLIPPort.call(this, e), this.connectionId = this.options.connectionId, 
+        this.connectionId && this.emit("open", this.connectionId);
+    };
+    var e = osc.SerialPort.prototype = Object.create(osc.SLIPPort.prototype);
+    e.constructor = osc.SerialPort, osc.supportsSerial = !0, e.open = function() {
+        var t = this, e = {
+            bitrate: t.options.bitrate
+        };
+        chrome.serial.connect(this.options.devicePath, e, function(e) {
+            t.connectionId = e.connectionId, t.emit("open", e);
+        });
+    }, e.listen = function() {
+        osc.listenToTransport(this, chrome.serial, "connectionId");
+    }, e.sendRaw = function(e) {
+        var r;
+        this.connectionId ? (r = this, chrome.serial.send(this.connectionId, e.buffer, function(e, t) {
+            t && r.emit("error", t + ". Total bytes sent: " + e);
+        })) : osc.fireClosedPortSendError(this);
+    }, e.close = function() {
+        var t;
+        this.connectionId && (t = this, chrome.serial.disconnect(this.connectionId, function(e) {
+            e && t.emit("close");
+        }));
+    }, osc.UDPPort = function(e) {
+        osc.Port.call(this, e);
+        e = this.options;
+        e.localAddress = e.localAddress || "127.0.0.1", e.localPort = void 0 !== e.localPort ? e.localPort : 57121, 
+        this.on("open", this.listen.bind(this)), this.socketId = e.socketId, this.socketId && this.emit("open", 0);
+    }, (e = osc.UDPPort.prototype = Object.create(osc.Port.prototype)).constructor = osc.UDPPort, 
+    e.open = function() {
+        var e, t;
+        this.socketId || (e = {
+            persistent: (e = this.options).persistent,
+            name: e.name,
+            bufferSize: e.bufferSize
+        }, t = this, chrome.sockets.udp.create(e, function(e) {
+            t.socketId = e.socketId, t.bindSocket();
+        }));
+    }, e.bindSocket = function() {
+        var t = this, e = this.options;
+        void 0 !== e.broadcast && chrome.sockets.udp.setBroadcast(this.socketId, e.broadcast, function(e) {
+            e < 0 && t.emit("error", new Error("An error occurred while setting the socket's broadcast flag. Result code: " + e));
+        }), void 0 !== e.multicastTTL && chrome.sockets.udp.setMulticastTimeToLive(this.socketId, e.multicastTTL, function(e) {
+            e < 0 && t.emit("error", new Error("An error occurred while setting the socket's multicast time to live flag. Result code: " + e));
+        }), chrome.sockets.udp.bind(this.socketId, e.localAddress, e.localPort, function(e) {
+            0 < e ? osc.emitNetworkError(t, e) : t.emit("open", e);
+        });
+    }, e.listen = function() {
+        var e = this.options;
+        osc.listenToTransport(this, chrome.sockets.udp, "socketId"), e.multicastMembership && ("string" == typeof e.multicastMembership && (e.multicastMembership = [ e.multicastMembership ]), 
+        e.multicastMembership.forEach(function(t) {
+            chrome.sockets.udp.joinGroup(this.socketId, t, function(e) {
+                e < 0 && this.emit("error", new Error("There was an error while trying to join the multicast group " + t + ". Result code: " + e));
+            });
+        }));
+    }, e.sendRaw = function(e, t, r) {
+        var n, i;
+        this.socketId ? (n = this.options, i = this, t = t || n.remoteAddress, r = void 0 !== r ? r : n.remotePort, 
+        chrome.sockets.udp.send(this.socketId, e.buffer, t, r, function(e) {
+            e || i.emit("error", "There was an unknown error while trying to send a UDP message. Have you declared the appropriate udp send permissions in your application's manifest file?"), 
+            0 < e.resultCode && osc.emitNetworkError(i, e.resultCode);
+        })) : osc.fireClosedPortSendError(this);
+    }, e.close = function() {
+        var e;
+        this.socketId && (e = this, chrome.sockets.udp.close(this.socketId, function() {
+            e.emit("close");
+        }));
+    };
+})();

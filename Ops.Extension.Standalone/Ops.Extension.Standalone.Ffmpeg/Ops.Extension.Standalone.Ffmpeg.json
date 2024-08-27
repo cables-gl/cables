@@ -1,0 +1,137 @@
+{
+    "shortName": "Ffmpeg",
+    "id": "51980908-29d2-4b4c-aebe-6d1c80aaeab8",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Source Video"
+            },
+            {
+                "type": 5,
+                "name": "Destination File"
+            },
+            {
+                "type": 0,
+                "name": "Audio index",
+                "values": [
+                    "No Change",
+                    "Remove"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Set Bitrate",
+                "group": "Video Bitrate",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Bitrate",
+                "group": "Video Bitrate"
+            },
+            {
+                "type": 0,
+                "name": "Constant",
+                "group": "Video Bitrate",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set Codec",
+                "group": "Video Codec",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Codec",
+                "group": "Video Codec"
+            },
+            {
+                "type": 0,
+                "name": "Set Size",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Size",
+                "group": "Size"
+            },
+            {
+                "type": 0,
+                "name": "Crop Time",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Start time",
+                "group": "Timing"
+            },
+            {
+                "type": 5,
+                "name": "Duration",
+                "group": "Timing"
+            },
+            {
+                "type": 1,
+                "name": "Process"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Processing",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "hasScreenshot": false,
+    "authorName": "pandur",
+    "license": "MIT",
+    "hasExample": false,
+    "namespace": "Ops.Standalone",
+    "nameNoVersion": "Ops.Standalone.Ffmpeg",
+    "shortNameDisplay": "Ffmpeg",
+    "version": 0,
+    "created": 1724414611848,
+    "hasPublicRepo": true,
+    "hidden": false,
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "tom",
+            "date": 1724414611849
+        },
+        {
+            "message": "Ops.Standalone.Ffmpeg renamed to Ops.Extension.Standalone.Ffmpeg",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724742366393
+        }
+    ],
+    "oldVersion": false,
+    "versions": [
+        {
+            "name": "Ops.Standalone.Ffmpeg",
+            "version": 0
+        }
+    ],
+    "newestVersion": {
+        "name": "Ops.Standalone.Ffmpeg",
+        "version": 0
+    },
+    "dependencies": [
+        {
+            "name": "fluent-ffmpeg",
+            "type": "npm",
+            "src": [
+                "fluent-ffmpeg"
+            ],
+            "version": ""
+        }
+    ]
+}

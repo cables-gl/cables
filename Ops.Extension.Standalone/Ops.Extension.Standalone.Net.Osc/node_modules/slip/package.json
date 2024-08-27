@@ -1,0 +1,31 @@
+{
+    "name": "slip",
+    "main": "src/slip.js",
+    "version": "1.0.2",
+    "description": "A Serial Line Internet Protocol (SLIP) library that runs in Node.js and the browser.",
+    "author": "Colin Clark",
+    "homepage": "https://github.com/colinbdclark/slip.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/colinbdclark/slip.js.git"
+    },
+    "bugs": "https://github.com/colinbdclark/slip.js/issues",
+    "license": "(MIT OR GPL-2.0)",
+    "keywords": [
+        "Serial Line Internet Protocol",
+        "SLIP",
+        "Open Sound Control",
+        "OSC"
+    ],
+    "readmeFilename": "README.md",
+    "devDependencies": {
+        "qunit": "0.6.2",
+        "grunt": "~0.4.2",
+        "grunt-contrib-uglify": "~0.3.2",
+        "grunt-contrib-clean": "~0.4.1",
+        "grunt-contrib-jshint": "~0.8.0",
+        "grunt-contrib-qunit": "~0.5.1",
+        "grunt-node-qunit": "~2.0.2"
+    },
+    "dependencies": {}
+}

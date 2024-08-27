@@ -1,0 +1,80 @@
+{
+    "shortName": "AbletonLink",
+    "id": "86314868-cd03-41eb-a67d-fbd3025b4759",
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "BPM",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Beat",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Play state",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Peers",
+                "subType": "number"
+            }
+        ]
+    },
+    "hasScreenshot": false,
+    "authorName": "pandur",
+    "license": "MIT",
+    "hasExample": false,
+    "namespace": "Ops.Standalone.Net",
+    "nameNoVersion": "Ops.Standalone.Net.AbletonLink",
+    "shortNameDisplay": "AbletonLink",
+    "version": 0,
+    "created": 1724406170313,
+    "hasPublicRepo": true,
+    "hidden": false,
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724406170315
+        },
+        {
+            "message": "Ops.Standalone.Net.AbletonLink renamed to Ops.Extension.Standalone.Net.AbletonLink",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724684122364
+        }
+    ],
+    "dependencies": [
+        {
+            "name": "abletonlink",
+            "type": "npm",
+            "src": [
+                "abletonlink"
+            ],
+            "version": ""
+        }
+    ],
+    "oldVersion": false,
+    "versions": [
+        {
+            "name": "Ops.Standalone.Net.AbletonLink",
+            "version": 0
+        }
+    ],
+    "newestVersion": {
+        "name": "Ops.Standalone.Net.AbletonLink",
+        "version": 0
+    }
+}

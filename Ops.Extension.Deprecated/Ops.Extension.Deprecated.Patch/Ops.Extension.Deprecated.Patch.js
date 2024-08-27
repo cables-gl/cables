@@ -52,14 +52,14 @@ op.getPort = function (name)
 
 let getSubPatchInputOp = function ()
 {
-    let patchInputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchInput");
-    let patchOutputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchOutput");
+    let patchInputOP = op.patch.getFirstSubPatchOpByName(op.patchId.get(), "Ops.Ui.PatchInput");
+    let patchOutputOP = op.patch.getFirstSubPatchOpByName(op.patchId.get(), "Ops.Ui.PatchOutput");
 
     if (!patchOutputOP)
     {
         op.patch.addOp("Ops.Ui.PatchOutput", { "subPatch": op.patchId.get() });
 
-        patchOutputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchOutput");
+        patchOutputOP = op.patch.getFirstSubPatchOpByName(op.patchId.get(), "Ops.Ui.PatchOutput");
 
         if (!patchOutputOP) console.warn("no patchinput2!");
     }
@@ -68,7 +68,7 @@ let getSubPatchInputOp = function ()
     {
         op.patch.addOp("Ops.Ui.PatchInput", { "subPatch": op.patchId.get() });
 
-        patchInputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchInput");
+        patchInputOP = op.patch.getFirstSubPatchOpByName(op.patchId.get(), "Ops.Ui.PatchInput");
 
         if (!patchInputOP) console.warn("no patchinput2!");
     }
