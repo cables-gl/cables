@@ -1,0 +1,47 @@
+{
+    "id": "69c16334-5f9d-4286-84b5-7ac12aa54e37",
+    "created": 1724765849078,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724765849080
+        },
+        {
+            "message": "Ops.Patch.P14nxll.ScrollIntoView renamed to Ops.Html.ScrollIntoView",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724766095036
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Behaviour index",
+                "values": [
+                    "smooth",
+                    "instant"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Scroll Into View"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    }
+}
