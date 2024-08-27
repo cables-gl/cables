@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724229085946
-        },
-        {
-            "message": "Ops.Standalone.Fs.ReadDir renamed to Ops.Standalone.Files.ReadDir",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724243660335
-        },
-        {
-            "message": "Ops.Standalone.Files.ReadDir renamed to Ops.Extension.Standalone.Files.ReadDir",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742467410
         }
     ],
     "layout": {

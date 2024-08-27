@@ -9,24 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724238219267
-        },
-        {
-            "message": "Ops.Standalone.HttpServer renamed to Ops.Standalone.Net.Net.HttpServer",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724247048366
-        },
-        {
-            "message": "Ops.Standalone.Net.Net.HttpServer renamed to Ops.Standalone.Net.HttpServer",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724247225615
-        },
-        {
-            "message": "Ops.Standalone.Net.HttpServer renamed to Ops.Extension.Standalone.Net.HttpServer",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742497531
         }
     ],
     "layout": {

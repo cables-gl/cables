@@ -42,12 +42,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724312944377
-        },
-        {
-            "message": "Ops.Standalone.Net.IpAdress renamed to Ops.Extension.Standalone.Net.IpAdress",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742449383
         }
     ],
     "dependencies": [],

@@ -8,31 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1724229085946
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1724229611788
-        },
-        {
-            "message": "Ops.Standalone.Files.Stat renamed to Ops.Standalone.Files.CscsdStat",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724673161187
-        },
-        {
-            "message": "Ops.Standalone.Files.CscsdStat renamed to Ops.Standalone.Files.Stat",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724673232863
-        },
-        {
-            "message": "Ops.Standalone.Files.Stat renamed to Ops.Extension.Standalone.Files.Stat",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742384531
         }
     ],
     "layout": {

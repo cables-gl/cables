@@ -8,19 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1724235837065
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1724236835790
-        },
-        {
-            "message": "Ops.Standalone.Files.WriteTextFile renamed to Ops.Extension.Standalone.Files.WriteTextFile",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742594262
         }
     ],
     "layout": {

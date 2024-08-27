@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724411851645
-        },
-        {
-            "message": "Ops.Standalone.Files.WriteBinaryFileFromBase64 renamed to Ops.Extension.Standalone.Files.WriteBinaryFileFromBase64",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742631407
         }
     ],
     "layout": {

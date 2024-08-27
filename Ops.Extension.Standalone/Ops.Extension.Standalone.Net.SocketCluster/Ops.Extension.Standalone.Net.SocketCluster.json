@@ -42,12 +42,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724405312301
-        },
-        {
-            "message": "Ops.Standalone.Net.SocketCluster renamed to Ops.Extension.Standalone.Net.SocketCluster",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742557710
         }
     ],
     "oldVersion": false,

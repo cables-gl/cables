@@ -105,12 +105,6 @@
             "type": "new op",
             "author": "tom",
             "date": 1724414611849
-        },
-        {
-            "message": "Ops.Standalone.Ffmpeg renamed to Ops.Extension.Standalone.Ffmpeg",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742366393
         }
     ],
     "oldVersion": false,

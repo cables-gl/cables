@@ -49,12 +49,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724247727467
-        },
-        {
-            "message": "Ops.Standalone.Net.Osc renamed to Ops.Extension.Standalone.Net.Osc",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742415928
         }
     ],
     "oldVersion": false,

@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724235837065
-        },
-        {
-            "message": "Ops.Standalone.Files.ReadTextFile renamed to Ops.Extension.Standalone.Net.ReadTextFile",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742573556
         }
     ],
     "layout": {

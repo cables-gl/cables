@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724237240596
-        },
-        {
-            "message": "Ops.Standalone.Files.Watch renamed to Ops.Extension.Standalone.Files.Watch",
-            "type": "rename",
-            "author": "tom",
-            "date": 1724742426467
         }
     ],
     "layout": {
