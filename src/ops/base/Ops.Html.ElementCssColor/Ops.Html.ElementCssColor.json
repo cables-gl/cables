@@ -78,5 +78,6 @@
     "summary": "Set text and background colors of an HTML element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "KmnVEm"
 }

@@ -56,5 +56,6 @@
     "summary": "Set font and text properties of a html element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "KmnVEm"
 }

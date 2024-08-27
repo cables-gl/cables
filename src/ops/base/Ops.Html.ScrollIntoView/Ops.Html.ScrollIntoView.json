@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724765849080
-        },
-        {
-            "message": "Ops.Patch.P14nxll.ScrollIntoView renamed to Ops.Html.ScrollIntoView",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724766095036
         }
     ],
     "layout": {
@@ -43,5 +37,10 @@
                 "name": "HTML Element"
             }
         ]
-    }
+    },
+    "exampleProjectId": "KmnVEm",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Scroll an area, so the html element is visible/in view"
 }

@@ -58,5 +58,6 @@
     "summary": "Set CSS border properties of a HTML element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "KmnVEm"
 }
