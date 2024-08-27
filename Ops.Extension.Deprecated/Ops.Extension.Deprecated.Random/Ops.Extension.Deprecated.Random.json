@@ -26,7 +26,6 @@
             }
         ]
     },
-    "updated": 1517532629537,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "168d5a88-b0dd-4b06-8dea-e669adef08dc",
@@ -34,5 +33,6 @@
     "docs": {
         "ports": []
     },
-    "changelog": []
+    "changelog": [],
+    "license": "MIT"
 }

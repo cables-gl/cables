@@ -4,13 +4,14 @@ let max = op.inValue("max", 1);
 let seed = op.inValue("random seed", 0);
 let result = op.outValue("result");
 
+let oldSeed = 0;
+
 exe.onTriggered = calcRandom;
 seed.onChange = calcRandom;
 max.onChange = calcRandom;
 
 calcRandom();
 
-let oldSeed = 0;
 function calcRandom()
 {
     oldSeed = Math.randomSeed;

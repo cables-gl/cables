@@ -7,7 +7,7 @@ this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE
 this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
 
 this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.OP_PORT_TYPE_VALUE));
-this.iterations.val = 10;
+this.iterations.set(10);
 
 let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;
