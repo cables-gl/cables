@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1723567532363
-        },
-        {
-            "message": "Ops.Patch.P14nxll.ElementCssBorder renamed to Ops.Dev.Html.ElementCssBorder",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723569709587
-        },
-        {
-            "message": "Ops.Dev.Html.ElementCssBorder renamed to Ops.Html.ElementCssBorder",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724762150301
         }
     ],
     "layout": {

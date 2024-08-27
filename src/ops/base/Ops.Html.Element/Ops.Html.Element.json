@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1723564156100
-        },
-        {
-            "message": "Ops.Dev.Html.Element renamed to Ops.Html.Element",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724762077404
         }
     ],
     "layout": {
@@ -119,5 +113,9 @@
                 "name": "Clicked"
             }
         ]
+    },
+    "summary": "A more convinient version of div element op, that can be used for creating html without writing much css code",
+    "docs": {
+        "ports": []
     }
 }

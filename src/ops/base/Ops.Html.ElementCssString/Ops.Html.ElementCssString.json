@@ -9,24 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1723568596362
-        },
-        {
-            "message": "Ops.Patch.P14nxll.ElementCssGet renamed to Ops.Patch.P14nxll.ElementCssString",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723568815226
-        },
-        {
-            "message": "Ops.Patch.P14nxll.ElementCssString renamed to Ops.Dev.Html.ElementCssString",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723569692150
-        },
-        {
-            "message": "Ops.Dev.Html.ElementCssString renamed to Ops.Html.ElementCssString",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724762237981
         }
     ],
     "layout": {

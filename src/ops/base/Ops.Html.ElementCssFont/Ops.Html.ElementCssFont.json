@@ -9,30 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1723570293627
-        },
-        {
-            "message": "Ops.Patch.P14nxll.CssPad2 renamed to Ops.Dev.Html.ElementCssPadding",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723570447775
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1723570981057
-        },
-        {
-            "message": "Ops.Patch.PU99Vll.ElementCssFont renamed to Ops.Dev.Html.ElementCssFont",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723571628645
-        },
-        {
-            "message": "Ops.Dev.Html.ElementCssFont renamed to Ops.Html.ElementCssFont",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724761962482
         }
     ],
     "layout": {
@@ -76,5 +52,9 @@
                 "name": "HTML Element"
             }
         ]
+    },
+    "summary": "Set font and text properties of a html element",
+    "docs": {
+        "ports": []
     }
 }
