@@ -816,6 +816,7 @@ Patch.prototype.loadLib = function (which)
 };
 
 
+Patch.prototype.getFirstSubPatchOps =
 Patch.prototype.getSubPatchOpsByName = function (patchId, objName)
 {
     const arr = [];
@@ -825,6 +826,7 @@ Patch.prototype.getSubPatchOpsByName = function (patchId, objName)
 
     return arr;
 };
+
 
 Patch.prototype.getFirstSubPatchOpByName = function (patchId, objName)
 {

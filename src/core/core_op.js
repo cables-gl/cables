@@ -115,6 +115,15 @@ const Op = function ()
         this.uiAttrib(obj);
     };
 
+    Op.prototype.require = function (name)
+    {
+        if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isStandalone)
+            this.setUiError("notstandalone", "This op will only work in cables standalone version", 3);
+
+        return null;
+    };
+
+
     Op.prototype.checkMainloopExists = function ()
     {
         if (!CABLES.UI) return;
