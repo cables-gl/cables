@@ -2,24 +2,24 @@
     "id": "da8622ba-5b7d-4f6d-9ff8-588ee06e418e",
     "created": 1724238219266,
     "license": "MIT",
-    "authorName": "tom",
+    "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724238219267
         },
         {
             "message": "Ops.Standalone.HttpServer renamed to Ops.Standalone.Net.Net.HttpServer",
             "type": "rename",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724247048366
         },
         {
             "message": "Ops.Standalone.Net.Net.HttpServer renamed to Ops.Standalone.Net.HttpServer",
             "type": "rename",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724247225615
         }
     ],

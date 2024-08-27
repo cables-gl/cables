@@ -2,18 +2,18 @@
     "id": "3a645c72-42f7-432a-bbbf-a4516e0d8598",
     "created": 1724229085945,
     "license": "MIT",
-    "authorName": "tom",
+    "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724229085946
         },
         {
             "message": "Ops.Standalone.Fs.ReadDir renamed to Ops.Standalone.Files.ReadDir",
             "type": "rename",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724243660335
         }
     ],

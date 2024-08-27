@@ -51,7 +51,7 @@ const Patch = function (cfg)
             "onFinishedLoading": null,
             "onFirstFrameRendered": null,
             "onPatchLoaded": null,
-            "fpsLimit": 0,
+            "fpsLimit": 0
         };
     this.timer = new Timer();
     this.freeTimer = new Timer();

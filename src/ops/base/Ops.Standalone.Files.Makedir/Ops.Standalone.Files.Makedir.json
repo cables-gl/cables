@@ -2,18 +2,18 @@
     "id": "e8482a86-93f6-44f2-8ed7-d2dfd8688201",
     "created": 1724234360520,
     "license": "MIT",
-    "authorName": "tom",
+    "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724229085946
         },
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724234360520
         }
     ],

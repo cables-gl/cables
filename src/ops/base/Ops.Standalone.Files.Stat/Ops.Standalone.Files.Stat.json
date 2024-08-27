@@ -2,19 +2,31 @@
     "id": "a0354814-baa6-4a17-badd-54e72b9b57a2",
     "created": 1724229611788,
     "license": "MIT",
-    "authorName": "tom",
+    "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724229085946
         },
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724229611788
+        },
+        {
+            "message": "Ops.Standalone.Files.Stat renamed to Ops.Standalone.Files.CscsdStat",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724673161187
+        },
+        {
+            "message": "Ops.Standalone.Files.CscsdStat renamed to Ops.Standalone.Files.Stat",
+            "type": "rename",
+            "author": "tom",
+            "date": 1724673232863
         }
     ],
     "layout": {

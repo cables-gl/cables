@@ -33,7 +33,7 @@
         ]
     },
     "hasScreenshot": false,
-    "authorName": "tom",
+    "authorName": "pandur",
     "license": "MIT",
     "hasExample": false,
     "namespace": "Ops.Standalone.Net",
@@ -47,7 +47,7 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724247727467
         }
     ],
