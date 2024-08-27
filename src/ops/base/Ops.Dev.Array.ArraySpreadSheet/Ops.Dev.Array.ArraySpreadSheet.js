@@ -2,15 +2,18 @@ const
     spread = op.inArray("Spreadsheet"),
     inNumColumns = op.inInt("Num Columns", 3),
     outp = op.inSwitch("Format", ["Flat", "Objects", "Arrays"], "Flat"),
+    inDefault = op.inSwitch("Default Value", ["0", "Empty String", "null"], "0"),
     result = op.outArray("Array"),
     outColNames = op.outArray("Column Names");
 
-// spread.hidePort();
+let defaultValue = 0;
+
 spread.setUiAttribs({ "hidePort": true });
 inNumColumns.setUiAttribs({ "hidePort": true });
 outp.setUiAttribs({ "hidePort": true });
-// inNumColumns.hidePort();
 
+inNumColumns.onChange =
+inDefault.onChange =
 outp.onChange =
 spread.onChange = update;
 
@@ -19,28 +22,35 @@ updateUi();
 
 function updateUi()
 {
-    result.setUiAttribs({ "stride": inNumColumns.get() });
     spread.setUiAttribs({
         "display": "spreadsheet",
         "spread_numColumns": inNumColumns.get()
     });
 }
 
+function updateDefault()
+{
+    defaultValue = 0;
+    if (inDefault.get() == "null")defaultValue = null;
+    else if (inDefault.get() == "Empty String")defaultValue = "";
+}
+
 function update()
 {
-    result.set(null);
-
     if (!spread.get()) return;
 
     outColNames.set(spread.get().colNames);
+    updateDefault();
 
     if (outp.get() == "Flat")
     {
-        result.set(asFlat());
+        result.setRef(asFlat());
+        result.setUiAttribs({ "stride": inNumColumns.get() });
     }
     else if (outp.get() == "Objects" || outp.get() == "Arrays")
     {
-        result.set(asObjectArray(outp.get() == "Objects"));
+        result.setRef(asObjectArray(outp.get() == "Objects"));
+        result.setUiAttribs({ "stride": 1 });
     }
 }
 
@@ -54,12 +64,13 @@ function asFlat()
     const arr = [];
     arr.length = data.cells.length * data.cols || 1;
     let lastRow = 0;
+
     for (let y = 0; y < data.cells.length; y++)
     {
         if (data.cells[y])
             for (let x = 0; x < data.cells[0].length; x++)
             {
-                let v = data.cells[y][x] || null;
+                let v = data.cells[y][x] || defaultValue;
                 if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
                 if (v !== "" && v !== null) lastRow = y;
 
@@ -91,7 +102,7 @@ function asObjectArray(objects)
         if (data.cells[y])
             for (let x = 0; x < data.cols; x++)
             {
-                let v = data.cells[y][x] || null;
+                let v = data.cells[y][x] || defaultValue;
                 if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
                 if (v !== "" && v !== null) lastRow = y;
 
