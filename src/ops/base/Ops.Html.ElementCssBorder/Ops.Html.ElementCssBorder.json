@@ -55,7 +55,7 @@
             }
         ]
     },
-    "summary": "Add shadows to html elements",
+    "summary": "Set CSS border properties of a HTML element",
     "docs": {
         "ports": []
     }

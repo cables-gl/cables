@@ -75,7 +75,7 @@
             }
         ]
     },
-    "summary": "Add shadows to html elements",
+    "summary": "Set text and background colors of an HTML element",
     "docs": {
         "ports": []
     }
