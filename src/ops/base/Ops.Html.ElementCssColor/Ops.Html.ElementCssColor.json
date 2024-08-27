@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1723566813059
-        },
-        {
-            "message": "Ops.Patch.P14nxll.ElementCssColor renamed to Ops.Dev.Html.ElementCssColor",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723569699776
-        },
-        {
-            "message": "Ops.Dev.Html.ElementCssColor renamed to Ops.Html.ElementCssColor",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724762225928
         }
     ],
     "layout": {
@@ -87,7 +75,7 @@
             }
         ]
     },
-    "summary": "Add shadows to html elements",
+    "summary": "Set text and background colors of an HTML element",
     "docs": {
         "ports": []
     }
