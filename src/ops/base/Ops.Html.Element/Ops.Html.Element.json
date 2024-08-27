@@ -11,10 +11,10 @@
             "date": 1723564156100
         },
         {
-            "message": "Ops.Patch.P14nxll.Element renamed to Ops.Dev.Html.Element",
+            "message": "Ops.Dev.Html.Element renamed to Ops.Html.Element",
             "type": "rename",
             "author": "pandur",
-            "date": 1723569717980
+            "date": 1724762077404
         }
     ],
     "layout": {

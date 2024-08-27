@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1723569709587
+        },
+        {
+            "message": "Ops.Dev.Html.ElementCssBorder renamed to Ops.Html.ElementCssBorder",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724762150301
         }
     ],
     "layout": {

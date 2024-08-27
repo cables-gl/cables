@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1723570293627
-        },
-        {
-            "message": "Ops.Patch.P14nxll.CssPad2 renamed to Ops.Dev.Html.ElementCssPadding",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1723570447775
         }
     ],
     "layout": {

@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1723569692150
+        },
+        {
+            "message": "Ops.Dev.Html.ElementCssString renamed to Ops.Html.ElementCssString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724762237981
         }
     ],
     "layout": {

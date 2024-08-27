@@ -27,6 +27,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1723571628645
+        },
+        {
+            "message": "Ops.Dev.Html.ElementCssFont renamed to Ops.Html.ElementCssFont",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724761962482
         }
     ],
     "layout": {

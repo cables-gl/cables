@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1723569699776
+        },
+        {
+            "message": "Ops.Dev.Html.ElementCssColor renamed to Ops.Html.ElementCssColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724762225928
         }
     ],
     "layout": {
