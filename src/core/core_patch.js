@@ -816,7 +816,7 @@ Patch.prototype.loadLib = function (which)
 };
 
 
-
+Patch.prototype.getSubPatchOps =
 Patch.prototype.getSubPatchOpsByName = function (patchId, objName)
 {
     const arr = [];
