@@ -64,5 +64,9 @@
             ],
             "version": ""
         }
-    ]
+    ],
+    "summary": "Create a socketcluster server",
+    "docs": {
+        "ports": []
+    }
 }

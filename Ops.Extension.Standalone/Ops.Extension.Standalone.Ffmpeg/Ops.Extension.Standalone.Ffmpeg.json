@@ -103,7 +103,7 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "tom",
+            "author": "pandur",
             "date": 1724414611849
         }
     ],
@@ -130,5 +130,9 @@
     ],
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "FFmpeg toolbox op",
+    "docs": {
+        "ports": []
+    }
 }

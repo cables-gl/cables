@@ -25,10 +25,13 @@
                 "type": 5,
                 "name": "Filename"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Create a binary file on the local file system from a base64 string",
+    "docs": {
+        "ports": []
+    }
 }

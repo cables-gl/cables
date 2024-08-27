@@ -40,5 +40,9 @@
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Read all entries in a directory",
+    "docs": {
+        "ports": []
+    }
 }

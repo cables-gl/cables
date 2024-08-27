@@ -49,5 +49,9 @@
                 "name": "Error"
             }
         ]
+    },
+    "summary": "Watch a directory, get a trigger when a file changes",
+    "docs": {
+        "ports": []
     }
 }

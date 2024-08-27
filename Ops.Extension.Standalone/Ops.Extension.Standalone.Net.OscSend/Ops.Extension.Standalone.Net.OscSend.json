@@ -39,7 +39,10 @@
                 "type": 1,
                 "name": "Send"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "summary": "send data to a OSC device",
+    "docs": {
+        "ports": []
     }
 }

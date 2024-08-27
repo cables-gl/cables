@@ -1,12 +1,7 @@
 {
-    "name": "Ops.Standalone.Net.IpAdress",
-    "content": "",
-    "attachmentFiles": [],
-    "summary": "",
     "shortName": "IpAdress",
     "id": "b6330f54-d765-47d7-b157-e391f173a57c",
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 5,
@@ -26,13 +21,10 @@
     "authorName": "pandur",
     "license": "MIT",
     "hasExample": false,
-    "exampleProjectId": "",
     "namespace": "Ops.Standalone.Net",
     "nameNoVersion": "Ops.Standalone.Net.IpAdress",
     "shortNameDisplay": "IpAdress",
     "version": 0,
-    "libs": [],
-    "youtubeids": [],
     "created": 1724312944376,
     "hasPublicRepo": true,
     "hidden": false,
@@ -44,7 +36,6 @@
             "date": 1724312944377
         }
     ],
-    "dependencies": [],
     "oldVersion": false,
     "versions": [
         {
@@ -55,10 +46,13 @@
     ],
     "newestVersion": {
         "name": "Ops.Standalone.Net.IpAdress",
-        "versionString": "",
         "version": 0
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Outputs your local IP Adress",
+    "docs": {
+        "ports": []
+    }
 }

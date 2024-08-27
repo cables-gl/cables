@@ -25,10 +25,13 @@
                 "type": 5,
                 "name": "Body"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Answer http requests by sending string to the browser/client",
+    "docs": {
+        "ports": []
+    }
 }

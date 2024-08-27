@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724229085946
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1724229611788
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1724231959420
         }
     ],
     "layout": {
@@ -40,5 +28,9 @@
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Check if a file exists on the local file system",
+    "docs": {
+        "ports": []
+    }
 }

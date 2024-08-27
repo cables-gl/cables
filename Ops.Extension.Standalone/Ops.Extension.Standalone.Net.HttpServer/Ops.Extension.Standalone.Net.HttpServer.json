@@ -46,5 +46,9 @@
                 "subType": "boolean"
             }
         ]
+    },
+    "summary": "Create a Web/Http server locally ",
+    "docs": {
+        "ports": []
     }
 }
