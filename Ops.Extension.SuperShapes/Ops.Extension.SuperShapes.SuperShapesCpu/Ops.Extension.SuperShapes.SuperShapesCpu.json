@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1677497281605
+            "date": 1677497281605,
+            "type": "new"
         },
         {
             "message": " added core lib: cgl_shadermodifier",
