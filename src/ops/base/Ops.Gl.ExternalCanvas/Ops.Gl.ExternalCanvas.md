@@ -1,0 +1,1 @@
+It is additionally possible to render content in the patch canvas, but NOT in the external window by placing it *after* the ExternalCanvas (e.g. in a sequence). [example](https://cables.gl/p/An9oal)

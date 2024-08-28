@@ -1,0 +1,1 @@
+... can be also used together with a running animation input (like ops.Anim.Bang) to do animated transitions between different scenes: https://cables.gl/p/o4_6Bo
