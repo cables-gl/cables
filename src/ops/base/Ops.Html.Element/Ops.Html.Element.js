@@ -1,6 +1,6 @@
 const
     inText = op.inString("Text", "Hello Div"),
-    inPos = op.inSwitch("Position", ["Absolute", "Fixed"], "Absolute"),
+    inPos = op.inSwitch("Position", ["Absolute", "Static", "Relative", "Fixed"], "Absolute"),
     inInteractive = op.inValueBool("Interactive", false),
 
     inSetSize = op.inValueBool("Set Size", true),
@@ -100,6 +100,8 @@ function updateStyle()
     if (!div) return;
 
     div.setAttribute("style", inStyle.get());
+
+    div.style.position = inPos.get().toLowerCase();
 
     div.style.overflow = inOverflow.get().toLowerCase();
     div.style.display = inDisplay.get();

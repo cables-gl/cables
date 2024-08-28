@@ -1,8 +1,8 @@
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
     inBehaviour = op.inSwitch("Behaviour", ["smooth", "instant"], "smooth"),
     inScroll = op.inTriggerButton("Scroll Into View"),
-    outEle = op.outObject("HTML Element");
+    outEle = op.outObject("HTML Element", null, "element");
 
 inScroll.onTriggered = update;
 

@@ -1,5 +1,5 @@
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
     inFamily = op.inString("Font Family", "sans serif"),
     inSize = op.inFloat("Text Size", 12),
     inWeight = op.inString("Font Weight", "normal"),
@@ -7,7 +7,7 @@ const
     inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right"], "Left"),
     inLineHeight = op.inFloat("Line Height", 0),
     // in1 = op.inSwitch("White Space",["Initial","no-wrap"], "Initial"),
-    outEle = op.outObject("HTML Element");
+    outEle = op.outObject("HTML Element", null, "element");
 
 let ele = null;
 

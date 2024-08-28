@@ -1,10 +1,10 @@
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
     inPadTop = op.inFloat("Padding Top", 3),
     inPadBottom = op.inFloat("Padding Bottom", 3),
     inPadLeft = op.inFloat("Padding Left", 3),
     inPadRight = op.inFloat("Padding Right", 3),
-    outEle = op.outObject("HTML Element");
+    outEle = op.outObject("HTML Element", null, "element");
 
 let ele = null;
 

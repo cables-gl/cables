@@ -1,5 +1,5 @@
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
     inSetCol = op.inBool("Set Color", true),
     r = op.inValueSlider("Color R", 0),
     g = op.inValueSlider("Color G", 0),
@@ -10,7 +10,7 @@ const
     bgg = op.inValueSlider("Background Color G", 1),
     bgb = op.inValueSlider("Background Color B", 1),
     bga = op.inValueSlider("Background Color A", 1),
-    outEle = op.outObject("HTML Element");
+    outEle = op.outObject("HTML Element", null, "element");
 
 r.setUiAttribs({ "colorPick": true });
 bgr.setUiAttribs({ "colorPick": true });

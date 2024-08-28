@@ -15,7 +15,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Element"
+                "name": "Element",
+                "objType": "element"
             }
         ],
         "portsOut": [

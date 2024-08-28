@@ -22,6 +22,8 @@
                 "name": "Position index",
                 "values": [
                     "Absolute",
+                    "Static",
+                    "Relative",
                     "Fixed"
                 ],
                 "subType": "integer"

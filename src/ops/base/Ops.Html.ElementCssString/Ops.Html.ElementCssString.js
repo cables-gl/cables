@@ -1,5 +1,5 @@
 const
-    inEle = op.inObject("Element"),
+    inEle = op.inObject("Element", null, "element"),
     outStr = op.outString("CSS");
 
 inEle.onChange = () =>

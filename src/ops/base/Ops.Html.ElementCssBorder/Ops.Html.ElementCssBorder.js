@@ -7,7 +7,7 @@ const
     g = op.inValueSlider("Color G", 0),
     b = op.inValueSlider("Color B", 0),
     a = op.inValueSlider("Color A", 1),
-    outEle = op.outObject("HTML Element");
+    outEle = op.outObject("HTML Element", null, "element");
 
 r.setUiAttribs({ "colorPick": true });
 

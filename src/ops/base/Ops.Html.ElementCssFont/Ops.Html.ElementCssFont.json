@@ -15,7 +15,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Element"
+                "name": "Element",
+                "objType": "element"
             },
             {
                 "type": 5,
@@ -49,7 +50,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "HTML Element"
+                "name": "HTML Element",
+                "objType": "element"
             }
         ]
     },
