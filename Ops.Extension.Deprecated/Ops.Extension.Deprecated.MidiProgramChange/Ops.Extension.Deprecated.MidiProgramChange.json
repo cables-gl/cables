@@ -1,0 +1,62 @@
+{
+    "id": "02764bff-ac5c-4ee4-92c4-37592cb3e757",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1638459782238
+        },
+        {
+            "message": "Ops.User.pandur.Midiprogramchange renamed to Ops.Dev.MidiProgramChange",
+            "author": "pandur",
+            "date": 1638459816708
+        },
+        {
+            "message": "Ops.Dev.MidiProgramChange renamed to Ops.Deprecated.MidiProgramChange",
+            "author": "pandur",
+            "date": 1666623257193
+        },
+        {
+            "message": "op Ops.Deprecated.MidiProgramChange was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1724836773856
+        }
+    ],
+    "authorName": "lofiddler",
+    "created": 1638459795133,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "MIDI Event In",
+                "group": "MIDI"
+            },
+            {
+                "type": 0,
+                "name": "MIDI Channel index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Normalize index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Event"
+            },
+            {
+                "type": 1,
+                "name": "Trigger Out"
+            },
+            {
+                "type": 0,
+                "name": "Program Change Value Out",
+                "subType": "number"
+            }
+        ]
+    }
+}
