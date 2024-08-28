@@ -1,0 +1,75 @@
+{
+    "name": "Ops.Standalone.Files.SystemDirs",
+    "content": "",
+    "attachmentFiles": [],
+    "summary": "",
+    "shortName": "SystemDirs",
+    "id": "699023ff-8297-441d-ab21-5234d904ed0d",
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Home"
+            },
+            {
+                "type": 5,
+                "name": "Downloads"
+            },
+            {
+                "type": 5,
+                "name": "Documents"
+            },
+            {
+                "type": 5,
+                "name": "Desktop"
+            },
+            {
+                "type": 5,
+                "name": "Exe"
+            }
+        ]
+    },
+    "hasScreenshot": false,
+    "authorName": "pandur",
+    "license": "MIT",
+    "hasExample": false,
+    "exampleProjectId": "",
+    "namespace": "Ops.Standalone.Files",
+    "nameNoVersion": "Ops.Standalone.Files.SystemDirs",
+    "shortNameDisplay": "SystemDirs",
+    "version": 0,
+    "libs": [],
+    "youtubeids": [],
+    "created": 1724316833337,
+    "hasPublicRepo": true,
+    "hidden": false,
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724316833338
+        },
+        {
+            "message": "Ops.Standalone.Files.SystemDirs renamed to Ops.Extension.Standalone.Files.SystemDirs",
+            "type": "rename",
+            "author": "",
+            "date": 1724855098710
+        }
+    ],
+    "dependencies": [],
+    "oldVersion": false,
+    "versions": [
+        {
+            "name": "Ops.Standalone.Files.SystemDirs",
+            "versionString": "",
+            "version": 0
+        }
+    ],
+    "newestVersion": {
+        "name": "Ops.Standalone.Files.SystemDirs",
+        "versionString": "",
+        "version": 0
+    }
+}
