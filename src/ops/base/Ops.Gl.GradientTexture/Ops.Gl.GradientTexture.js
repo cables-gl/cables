@@ -1,5 +1,5 @@
 const inGrad = op.inGradient("Gradient"),
-    inDir = op.inValueSelect("Direction", ["X", "Y", "XY", "YX", "Radial"], "X"),
+    inDir = op.inValueSelect("Direction", ["X", "XX", "Y", "YY", "XY", "YX", "Radial"], "X"),
     inSmoothstep = op.inValueBool("Smoothstep", false),
     inStep = op.inBool("Step", false),
     inFlip = op.inBool("Flip", false),
@@ -8,6 +8,7 @@ const inGrad = op.inGradient("Gradient"),
     inSize = op.inValueInt("Size", 256),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    inNoise = op.inFloatSlider("Dither", 0),
     inGradArray = op.inArray("Gradient Array"),
     inRandom = op.inTriggerButton("Randomize Colors"),
     outTex = op.outTexture("Texture"),
@@ -18,6 +19,7 @@ const cgl = op.patch.cgl;
 let timeout = null;
 inGrad.setUiAttribs({ "editShortcut": true });
 
+inNoise.onChange =
 twrap.onChange =
     tfilter.onChange =
     inStep.onChange =
@@ -134,6 +136,44 @@ function parseKeys()
     return keys;
 }
 
+function addNoise(pixels, width, height)
+{
+    if (inNoise.get() == 0.0) return pixels;
+
+    for (let x = 0; x < width; x++)
+        for (let y = 0; y < height; y++)
+        {
+            const r1 = pixels[(x + (y * width)) * 4 + 0];
+            const g1 = pixels[(x + (y * width)) * 4 + 1];
+            const b1 = pixels[(x + (y * width)) * 4 + 2];
+
+            let offX = (width / 8) * inNoise.get() * (Math.random() - 0.5);
+            let offY = (height / 8) * inNoise.get() * (Math.random() - 0.5);
+
+            if (height == 1)offY = 0;
+            if (width == 1)offX = 0;
+
+            offX = Math.round(offX);
+            offY = Math.round(offY);
+
+            const yOffY = CABLES.clamp(y + offY, 0, height - 1);
+            const xOffX = CABLES.clamp(x + offX, 0, width - 1);
+
+            const r2 = pixels[(xOffX + ((yOffY) * width)) * 4 + 0];
+            const g2 = pixels[(xOffX + ((yOffY) * width)) * 4 + 1];
+            const b2 = pixels[(xOffX + ((yOffY) * width)) * 4 + 2];
+
+            pixels[(x + y * width) * 4 + 0] = r2;
+            pixels[(x + y * width) * 4 + 1] = g2;
+            pixels[(x + y * width) * 4 + 2] = b2;
+
+            pixels[(xOffX + ((yOffY) * width)) * 4 + 0] = r1;
+            pixels[(xOffX + ((yOffY) * width)) * 4 + 1] = g1;
+            pixels[(xOffX + ((yOffY) * width)) * 4 + 2] = b1;
+        }
+    return pixels;
+}
+
 function updateGradient(keys)
 {
     let width = Math.round(inSize.get());
@@ -223,8 +263,8 @@ function updateGradient(keys)
             pixels[i + 2] = lin2srgb(pixels[i + 2]);
         }
 
-    if (inDir.get() == "X") tex.initFromData(pixels, width, 1, selectedFilter, selectedWrap);
-    if (inDir.get() == "Y") tex.initFromData(pixels, 1, width, selectedFilter, selectedWrap);
+    if (inDir.get() == "X") tex.initFromData(addNoise(pixels, width, 1), width, 1, selectedFilter, selectedWrap);
+    if (inDir.get() == "Y") tex.initFromData(addNoise(pixels, 1, width), 1, width, selectedFilter, selectedWrap);
 
     if (inDir.get() == "Radial")
     {
@@ -252,7 +292,39 @@ function updateGradient(keys)
 
         pixels = rpixels;
 
-        tex.initFromData(pixels, width, width, selectedFilter, selectedWrap);
+        tex.initFromData(addNoise(pixels, width, width), width, width, selectedFilter, selectedWrap);
+    }
+
+    if (inDir.get() == "XX")
+    {
+        const rpixels = new Uint8Array(width * width * 4);
+        for (let x = 0; x < width; x++)
+            for (let y = 0; y < width; y++)
+            {
+                const aa = x * 4;
+                rpixels[(x * 4) + (y * 4 * width) + 0] = pixels[aa + 0];
+                rpixels[(x * 4) + (y * 4 * width) + 1] = pixels[aa + 1];
+                rpixels[(x * 4) + (y * 4 * width) + 2] = pixels[aa + 2];
+                rpixels[(x * 4) + (y * 4 * width) + 3] = Math.round(255);
+            }
+        pixels = rpixels;
+        tex.initFromData(addNoise(pixels, width, width), width, width, selectedFilter, selectedWrap);
+    }
+
+    if (inDir.get() == "YY")
+    {
+        const rpixels = new Uint8Array(width * width * 4);
+        for (let x = 0; x < width; x++)
+            for (let y = 0; y < width; y++)
+            {
+                const aa = x * 4;
+                rpixels[(y * 4) + (x * 4 * width) + 0] = pixels[aa + 0];
+                rpixels[(y * 4) + (x * 4 * width) + 1] = pixels[aa + 1];
+                rpixels[(y * 4) + (x * 4 * width) + 2] = pixels[aa + 2];
+                rpixels[(y * 4) + (x * 4 * width) + 3] = Math.round(255);
+            }
+        pixels = rpixels;
+        tex.initFromData(addNoise(pixels, width, width), width, width, selectedFilter, selectedWrap);
     }
 
     if (inDir.get() == "XY" || inDir.get() == "YX")
@@ -277,7 +349,7 @@ function updateGradient(keys)
 
         pixels = rpixels;
 
-        tex.initFromData(pixels, width, width, selectedFilter, selectedWrap);
+        tex.initFromData(addNoise(pixels, width, width), width, width, selectedFilter, selectedWrap);
     }
 
     const colorArr = [];
