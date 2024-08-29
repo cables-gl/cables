@@ -19,7 +19,7 @@ vertexShader.setUiAttribs({ "editorSyntax": "glsl" });
 
 const shader = new CGL.Shader(cgl, "customshader", op);
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 
 op.setPortGroup("Source Code", [fragmentShader, vertexShader]);
 op.setPortGroup("Options", [asMaterial]);

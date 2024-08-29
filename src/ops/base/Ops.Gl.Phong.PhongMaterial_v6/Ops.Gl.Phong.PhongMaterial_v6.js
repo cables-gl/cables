@@ -244,7 +244,7 @@ shaderOut.ignoreValueSerialize = true;
 
 const shader = new CGL.Shader(cgl, "phongmaterial_" + op.id, this);
 shader.op = this;
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR", "MODULE_VERTEX_MOVELVIEW"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR", "MODULE_VERTEX_MODELVIEW"]);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 // let recompileShader = false;
 shader.define("FALLOFF_MODE_A");

@@ -44,7 +44,7 @@ mod.addModule({
 });
 
 mod.addModule({
-    "name": "MODULE_VERTEX_MOVELVIEW",
+    "name": "MODULE_VERTEX_MODELVIEW",
     "title": op.name + "_billboard",
     "srcBodyVert": attachments.billboard_vert
 });

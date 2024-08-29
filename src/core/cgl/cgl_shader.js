@@ -115,7 +115,7 @@ const Shader = function (_cgl, _name, _op)
     this._tempInverseViewMatrix = mat4.create();
     this._tempInverseProjMatrix = mat4.create();
 
-    this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+    this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 };
 
 Shader.prototype.isValid = function ()

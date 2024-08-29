@@ -78,7 +78,7 @@ op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoat
 op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness, inTFThicknessTexMin, inTFThicknessTexMax]);
 // globals
 let PBRShader = new CGL.Shader(cgl, "PBRShader", this);
-PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+PBRShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 
 // light sources (except IBL)
 let PBRLightStack = [];

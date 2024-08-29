@@ -59,7 +59,7 @@ class Context extends CGState
         this.mainloopOp = null;
 
         this._simpleShader = new Shader(this, "simpleshader");
-        this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+        this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
         this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
         this._currentShader = this._simpleShader;

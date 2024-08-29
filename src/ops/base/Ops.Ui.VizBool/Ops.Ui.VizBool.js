@@ -11,11 +11,10 @@ inNum.onChange = () =>
 
 op.renderVizLayer = (ctx, layer) =>
 {
-    ctx.fillStyle = "#222";
-    ctx.fillRect(
-        layer.x, layer.y, layer.width, layer.height);
-
     if (layer.width <= 0 || layer.height <= 0) return;
+
+    ctx.fillStyle = "#222";
+    ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
     let isTrue = !!inNum.get();
 

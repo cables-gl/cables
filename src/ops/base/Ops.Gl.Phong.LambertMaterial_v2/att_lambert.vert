@@ -67,7 +67,7 @@ void main()
     // this needs only to be done when instancing....
 
     mat4 modelViewMatrix=viewMatrix*mMatrix;
-    {{MODULE_VERTEX_MOVELVIEW}}
+    {{MODULE_VERTEX_MODELVIEW}}
     mvMatrix=modelViewMatrix;
 
 
