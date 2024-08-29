@@ -78,24 +78,21 @@
         "random",
         "generator"
     ],
+    "credits": [
+        {
+            "title": "Gabor Noise",
+            "author": "inigo quilez",
+            "url": "https://www.shadertoy.com/view/clGyWm",
+            "licence": "MIT"
+        }
+    ],
     "relatedops": null,
     "changelog": [
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",
-            "author": "pandur",
-            "date": 1625749672838
-        },
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
             "date": 1724933669734
-        },
-        {
-            "message": "Ops.Patch.PPWDdQm.User_pandur_Noise2 renamed to Ops.Gl.ImageCompose.Noise.GaborNoise",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724936546409
         }
     ],
     "license": "MIT"
