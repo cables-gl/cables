@@ -71,5 +71,8 @@
         "name": "Ops.Standalone.Files.SystemDirs",
         "versionString": "",
         "version": 0
-    }
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
 }

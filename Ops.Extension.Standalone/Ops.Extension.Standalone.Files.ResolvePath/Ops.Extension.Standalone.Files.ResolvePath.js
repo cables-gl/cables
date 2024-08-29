@@ -10,14 +10,14 @@ update();
 
 function update()
 {
+    op.setUiError("except", null);
     try
     {
         outDir.set(path.resolve(inPath.get()));
     }
     catch(e)
     {
-        console.log(e);
+        op.setUiError("except", e.message);
     }
 
 }
-
