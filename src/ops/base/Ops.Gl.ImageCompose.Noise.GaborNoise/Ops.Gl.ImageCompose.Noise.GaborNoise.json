@@ -1,0 +1,102 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "values": [
+                    "Off",
+                    "On"
+                ],
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Channels index",
+                "values": [
+                    "R",
+                    "G",
+                    "B",
+                    "RGB"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "white noise pixel effect",
+    "authorName": "pandur",
+    "id": "e5096f56-aa29-400e-803d-99b18237b104",
+    "created": 1724933669731,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",
+            "author": "pandur",
+            "date": 1625749672838
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724933669734
+        },
+        {
+            "message": "Ops.Patch.PPWDdQm.User_pandur_Noise2 renamed to Ops.Gl.ImageCompose.Noise.GaborNoise",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724936546409
+        }
+    ],
+    "license": "MIT"
+}
