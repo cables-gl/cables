@@ -5,6 +5,10 @@ UNI float amountX;
 UNI float amountY;
 UNI float amount;
 
+#ifdef MAPPING_REPEAT
+    UNI vec2 repeat;
+#endif
+
 {{CGL.BLENDMODES3}}
 
 vec3 getOffset(vec3 offset)
@@ -31,7 +35,13 @@ float getOffset(float offset)
 
 void main()
 {
-    vec4 rgba=texture(displaceTex,texCoord);
+    #ifndef MAPPING_REPEAT
+        vec4 rgba=texture(displaceTex,texCoord);
+    #endif
+    #ifdef MAPPING_REPEAT
+        vec4 rgba=texture(displaceTex,texCoord*repeat);
+    #endif
+
     vec3 offset=rgba.rgb*rgba.a;
     float x,y;
 

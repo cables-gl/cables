@@ -25,6 +25,11 @@
                     "A"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Force floats",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -81,16 +86,16 @@
             "date": 1675434947623
         },
         {
-            "message": "Ops.User.pandur.Texture2ColorArray2 renamed to Ops.Gl.Texture2ColorArray_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1675437853831
-        },
-        {
             "message": "Fix problem with floating point textures",
             "type": "bugfix",
             "author": "pandur",
             "date": 1723207672211
+        },
+        {
+            "message": "Add option to not always output floating point numbers",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725010283705
         }
     ],
     "coreLibs": [

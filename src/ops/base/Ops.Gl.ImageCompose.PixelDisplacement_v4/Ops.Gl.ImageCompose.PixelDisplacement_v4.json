@@ -40,6 +40,11 @@
             {
                 "type": 0,
                 "name": "Wrap index",
+                "values": [
+                    "Mirror",
+                    "Clamp",
+                    "Repeat"
+                ],
                 "group": "Modes",
                 "subType": "integer"
             },
@@ -52,6 +57,19 @@
             {
                 "type": 0,
                 "name": "Zero Displace index",
+                "values": [
+                    "Grey",
+                    "Black"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Mapping index",
+                "values": [
+                    "Stretch",
+                    "Repeat"
+                ],
                 "subType": "integer"
             }
         ],
@@ -72,23 +90,21 @@
         {
             "message": "cloned op from Ops.Gl.TextureEffects.PixelDisplacement_v3",
             "author": "pandur",
-            "date": 1650887521719
-        },
-        {
-            "message": "Ops.User.pandur.PixelDisplacementV4 renamed to Ops.Dev.PixelDisplacementV4",
-            "author": "pandur",
-            "date": 1650887658882
-        },
-        {
-            "message": "Ops.Dev.PixelDisplacementV4 renamed to Ops.Gl.TextureEffects.PixelDisplacement_v4",
-            "author": "pandur",
-            "date": 1653286556466
+            "date": 1650887521719,
+            "type": "new"
         },
         {
             "message": "Ops.Gl.TextureEffects.PixelDisplacement_v4 renamed to Ops.Gl.ImageCompose.PixelDisplacement_v4",
             "type": "rename",
             "author": "pandur",
             "date": 1701856190975
+        },
+        {
+            "message": "Added pixel mapping mode: e.g. in case the displacement texture is smaller than the texture to displace. useful for displacing with smaller noise textures",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1725009718382
         }
-    ]
+    ],
+    "license": "MIT"
 }

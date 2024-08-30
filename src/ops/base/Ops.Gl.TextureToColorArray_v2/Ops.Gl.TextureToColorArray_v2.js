@@ -3,6 +3,7 @@ const
     pUpdate = op.inTrigger("update"),
     tex = op.inObject("texture"),
     inFormat = op.inSwitch("Format", ["RGBA", "RGB", "RG", "R", "G", "B", "A"], "RGBA"),
+    inForceFloats = op.inBool("Force floats", true),
     outTrigger = op.outTrigger("trigger"),
 
     outColors = op.outArray("Colors", null, 4),
@@ -36,6 +37,7 @@ function getNumChannels()
     else if (f == "A") return 1;
 }
 
+inForceFloats.onChange =
 inFormat.onChange = () =>
 {
     outColors.setUiAttribs({ "stride": getNumChannels() });
@@ -160,7 +162,7 @@ function updateArray()
 
         if (!isFloatingPoint && convertedpixel)
         {
-            for (let i = 0; i < convertedpixel.length; i++)convertedpixel[i] /= 255;
+            if (inForceFloats.get()) for (let i = 0; i < convertedpixel.length; i++)convertedpixel[i] /= 255;
         }
 
         outColors.setRef(convertedpixel || pixel);

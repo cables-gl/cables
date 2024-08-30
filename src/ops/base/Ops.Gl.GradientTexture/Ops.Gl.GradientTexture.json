@@ -163,6 +163,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1724921301763
+        },
+        {
+            "message": "Opening the gradient editor at the bottom edge of the window will now move the gradient editor up so it is fully visible",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725011824866
         }
     ],
     "license": "MIT"
