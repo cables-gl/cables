@@ -40,6 +40,11 @@
             {
                 "type": 0,
                 "name": "Wrap index",
+                "values": [
+                    "Mirror",
+                    "Clamp",
+                    "Repeat"
+                ],
                 "group": "Modes",
                 "subType": "integer"
             },
@@ -52,6 +57,10 @@
             {
                 "type": 0,
                 "name": "Zero Displace index",
+                "values": [
+                    "Grey",
+                    "Black"
+                ],
                 "subType": "integer"
             }
         ],
