@@ -100,7 +100,7 @@ const multiplyValueIn = op.inFloat("Multiply amount");
 This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
 Your op should now look like this
 
-![](img/b-port_in_multiply_amount.png)
+![](img/b-port_in_multiply_amount2.png)
 
 
 Your code should look like this
