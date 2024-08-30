@@ -56,6 +56,7 @@ class RenderTargets
             "Material Id",
             "Object Id",
             "Position World",
+            "Position * ModelView",
             "Position Local",
             "Position Object",
             "Normal",
@@ -88,6 +89,8 @@ class RenderTargets
         else if (type == "TexCoord") return "    " + outcolor + i + " = vec4(texCoord,0.,1.);".endl();
         else if (type == "Position Local") return "    " + outcolor + i + " = vec4(MOD_pos_local,1.);".endl();
         else if (type == "Position World") return "    " + outcolor + i + " = vec4(MOD_pos_world,1.);".endl();
+        else if (type == "Position * ModelView") return "    " + outcolor + i + " = vec4(MOD_pos_mv,1.);".endl();
+
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
         else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
         else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
@@ -145,6 +148,7 @@ class RenderTargets
         let hasObjectId = false;
         let hasNormalModelView = false;
         let hasNormalWorld = false;
+        let hasPosModelView = false;
 
 
         for (let i = 0; i < this._numBuffers; i++)
@@ -152,6 +156,7 @@ class RenderTargets
             hasPosWorld = (slots[i] == "Position World") || hasPosWorld;
             hasNormalModelView = (slots[i] == "Normal * ModelView") || hasNormalModelView;
             hasPosLocal = (slots[i] == "Position Local") || hasPosLocal;
+            hasPosModelView = (slots[i] == "Position * ModelView") || hasPosModelView;
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
             hasMaterialId = (slots[i].contains("Material Id")) || hasMaterialId;
             hasObjectId = (slots[i].contains("Object Id")) || hasObjectId;
@@ -167,6 +172,7 @@ class RenderTargets
 
         this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
         this.mod.toggleDefine("MOD_UNI_MATERIAL_ID", hasMaterialId);
+        this.mod.toggleDefine("MOD_SLOT_POS_MV", hasPosModelView);
 
         this.mod.toggleDefine("MOD_SLOT_POS_WORLD", hasPosWorld);
         this.mod.toggleDefine("MOD_SLOT_POS_LOCAL", hasPosLocal);

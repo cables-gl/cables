@@ -17,3 +17,8 @@
 #ifdef MOD_SLOT_POS_NORMAL_WORLD
     out vec3 MOD_normal_world;
 #endif
+
+
+#ifdef MOD_SLOT_POS_MV
+    out vec3 MOD_pos_mv;
+#endif

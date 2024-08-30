@@ -14,6 +14,11 @@
     MOD_normal_mv=((viewMatrix*mMatrix)*vec4(norm,1.0)).xyz;
 #endif
 
+#ifdef MOD_SLOT_POS_MV
+    MOD_pos_mv=((viewMatrix*mMatrix)*vec4(pos.xyz,1.0)).xyz;
+#endif
+
+
 #ifdef MOD_SLOT_POS_NORMAL_WORLD
     MOD_normal_world=(mMatrix*vec4(norm,1.0)).xyz;
 #endif
