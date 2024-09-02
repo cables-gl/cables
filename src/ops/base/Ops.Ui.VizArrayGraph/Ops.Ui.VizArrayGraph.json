@@ -1,0 +1,29 @@
+{
+    "id": "afc587e0-d2a9-455d-821e-325065740de1",
+    "created": 1725286828739,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1725286828740
+        },
+        {
+            "message": "Ops.Patch.PCvlEdn.VizArrayGraph renamed to Ops.Ui.VizArrayGraph",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1725288034307
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array Numbers"
+            }
+        ],
+        "portsOut": []
+    }
+}

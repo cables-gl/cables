@@ -4,22 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1644848363183
-        },
-        {
-            "message": "Ops.User.pandur.VizArraySheet renamed to Ops.Dev.VizArrayTable",
-            "author": "pandur",
-            "date": 1644873145035
-        },
-        {
-            "message": "Ops.Dev.VizArrayTable renamed to Ops.Viz.VizArrayTable",
-            "author": "pandur",
-            "date": 1652088789616
-        },
-        {
-            "message": "Ops.Viz.VizArrayTable renamed to Ops.Ui.VizArrayTable",
-            "author": "pandur",
-            "date": 1652088955403
+            "date": 1644848363183,
+            "type": "new"
         },
         {
             "message": "visualize there is more content to scroll to by fading out the first/last line",

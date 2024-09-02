@@ -1,20 +1,21 @@
 const DEFAULT_BPM = 127;
 
-const exe = op.inTrigger("exe");
-const tap = op.inTriggerButton("tap");
-const sync = op.inTriggerButton("sync");
-const nudgeLeft = op.inTriggerButton("nudgeLeft");
-const nudgeRight = op.inTriggerButton("nudgeRight");
-const inActive = op.inBool("Active", true);
-
-const beat = op.outTrigger("beat");
-// const bpm = this.addOutPort(new CABLES.Port(this, "Bpm", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor" }),0);
-const bpm = op.outNumber("Bpm", DEFAULT_BPM);
-const outStates = op.outArray("States");
-const beatNum = op.outNumber("Beat Index");
+const
+    exe = op.inTrigger("exe"),
+    tap = op.inTriggerButton("tap"),
+    sync = op.inTriggerButton("sync"),
+    nudgeLeft = op.inTriggerButton("nudgeLeft"),
+    nudgeRight = op.inTriggerButton("nudgeRight"),
+    inActive = op.inBool("Active", true),
+    beat = op.outTrigger("beat"),
+    bpm = op.outNumber("Bpm", DEFAULT_BPM),
+    outStates = op.outArray("States"),
+    beatNum = op.outNumber("Beat Index");
 
 const DEFAULT_MILLIS = bpmToMillis(DEFAULT_BPM);
 const NUDGE_VALUE = 0.5; // to add / substract from avg bpm
+
+op.toWorkPortsNeedToBeLinked(exe);
 
 let lastFlash = -1;
 let lastTap = -1;

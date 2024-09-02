@@ -85,9 +85,10 @@
             "date": 1606307812024
         },
         {
-            "message": "Ops.User.cables.MicrophoneIn_v2 renamed to Ops.WebAudio.MicrophoneIn_v2",
-            "author": "cables",
-            "date": 1606308007450
+            "message": "Fix listening state output was outputing the wrong value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1725286288219
         }
     ],
     "youtubeids": [],
