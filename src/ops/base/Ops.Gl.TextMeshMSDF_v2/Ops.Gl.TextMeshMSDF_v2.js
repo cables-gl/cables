@@ -185,7 +185,7 @@ function updateFontData()
     {
         fontData = null;
 
-        op.warn("no varname", varname);
+        // op.warn("no varname", varname);
         return;
     }
 

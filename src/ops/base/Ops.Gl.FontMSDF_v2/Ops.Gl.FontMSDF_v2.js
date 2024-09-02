@@ -118,7 +118,7 @@ function load()
                 op.patch.setVarValue(varNameData, null);
                 op.patch.setVarValue(varNameTex, null);
 
-                op.logError(e);
+                // op.logError(e);
                 op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                 op.patch.loading.finished(loadingId);
                 updateLoaded();

@@ -1,4 +1,3 @@
-import * as base64 from "./base64.js";
 import * as utils from "./utils.js";
 import * as anim from "./anim.js";
 import { Link } from "./core_link.js";
@@ -41,7 +40,6 @@ CABLES.Branch = Branch;
 
 
 CABLES = Object.assign(CABLES,
-    base64,
     utils,
     anim,
     CONSTANTS.PORT,
