@@ -13,11 +13,6 @@
             },
             {
                 "type": 0,
-                "name": "Audio Input",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Volume",
                 "group": "Volume Settings",
                 "subType": "number"
@@ -51,7 +46,6 @@
     "id": "cbfbbffd-a5a8-4b21-bcb5-5d031cc5e11a",
     "created": 1606307812024,
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -97,5 +91,6 @@
         }
     ],
     "youtubeids": [],
-    "exampleProjectId": "xjHACp"
+    "exampleProjectId": "xjHACp",
+    "license": "MIT"
 }

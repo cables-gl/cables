@@ -8,7 +8,7 @@ const inInputDevices = op.inDropDown("Audio Input", ["None"]);
 const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
 const audioOut = op.outObject("Audio Out", null, "audioNode");
-const recording = op.outBool("Listening", false);
+const recording = op.outBoolNum("Listening", false);
 const outDevices = op.outArray("List of Input Devices");
 
 op.setPortGroup("Volume Settings", [inGain, inMute]);
@@ -64,6 +64,7 @@ inInit.onTriggered = function ()
 
             if (device === "None")
             {
+                recording.set(false);
                 op.setUiError("noDeviceSelected", "No audio device selected!", 1);
                 return;
             }
@@ -93,6 +94,7 @@ inInit.onTriggered = function ()
         else
         {
             op.setUiError("noAudioInputs", "There are no audio inputs to use the MicrophoneIn op with.", 2);
+            recording.set(false);
         }
     }
     else

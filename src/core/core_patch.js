@@ -765,7 +765,6 @@ Patch.prototype.getOpsByRefId = function (refId)
     return refOps;
 };
 
-
 Patch.prototype.getOpById = function (opid)
 {
     return this._opIdCache[opid];
@@ -809,13 +808,7 @@ Patch.prototype.loadLib = function (which)
         },
         "GET",
     );
-    // open and send a synchronous request
-    // xhrObj.open('GET', '/ui/libs/'+which+'.js', false);
-    // xhrObj.send('');
-    // add the returned content to a newly created script tag
 };
-
-
 
 Patch.prototype.getSubPatchOpsByName = function (patchId, objName)
 {
