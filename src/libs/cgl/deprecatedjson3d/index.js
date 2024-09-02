@@ -1,3 +1,5 @@
+// deprecated json3d loader geomgetry helper
+
 const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 // Use a lookup table to find the index.

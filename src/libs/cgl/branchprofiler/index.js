@@ -82,5 +82,8 @@ class BranchStack
     }
 }
 
-export { BranchStack };
-export { Branch };
+// export { BranchStack };
+// export { Branch };
+
+CABLES.BranchStack = BranchStack;
+CABLES.Branch = Branch;
