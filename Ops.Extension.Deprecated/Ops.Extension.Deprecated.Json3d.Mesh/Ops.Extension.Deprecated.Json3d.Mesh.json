@@ -46,5 +46,8 @@
             "author": "pandur",
             "date": 1654588105783
         }
+    ],
+    "coreLibs": [
+        "cgl_deprecatedjson3d"
     ]
 }

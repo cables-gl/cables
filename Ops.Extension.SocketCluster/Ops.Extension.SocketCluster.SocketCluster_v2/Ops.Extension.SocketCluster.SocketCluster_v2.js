@@ -47,7 +47,7 @@ const init = () =>
                 for await (const { error } of socket.listener("error"))
                 {
                     op.setUiError("connectionError", `error in socketcluster connection (${error.name})`, 2);
-                    op.logError(error);
+                    // op.logError(error);
                     errorOut.set(error);
                     ready.set(false);
                 }

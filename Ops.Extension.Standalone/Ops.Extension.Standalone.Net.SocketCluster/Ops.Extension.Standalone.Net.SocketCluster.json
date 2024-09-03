@@ -9,8 +9,8 @@
             },
             {
                 "type": 0,
-                "name": "Number",
-                "subType": "number"
+                "name": "Port",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -20,7 +20,7 @@
             },
             {
                 "type": 0,
-                "name": "Result",
+                "name": "Started",
                 "subType": "number"
             }
         ]
