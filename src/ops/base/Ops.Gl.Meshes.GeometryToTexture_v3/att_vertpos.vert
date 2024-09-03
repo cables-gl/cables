@@ -21,9 +21,8 @@ MOD_pos*=MOD_mul; // color for the pixel
 highp float ty = floor(attrVertIndex/(MOD_texSize));
 highp float tx = attrVertIndex-(ty*MOD_texSize)+1.0;
 
-
-MOD_pos.x=tx;
-MOD_pos.y=ty;
-MOD_pos.z=attrVertIndex;
+// MOD_pos.x=tx;
+// MOD_pos.y=ty;
+// MOD_pos.z=attrVertIndex;
 
 pos=vec4(tx,ty+1.0,0.0,1.0); // pixel position
