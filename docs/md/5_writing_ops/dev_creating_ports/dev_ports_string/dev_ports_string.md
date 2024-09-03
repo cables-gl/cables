@@ -4,7 +4,7 @@ This page will explain how to create an input and output port of the type 'Strin
 
 ![Button](../img/creating_ports_string_port_color.png)<br>
 
-Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
+Click this [link](https://cables.gl/edit/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
 JavaScript strings are used for storing and manipulating text
 A string is zero or more characters written inside quotes
