@@ -4,27 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1663227442753
-        },
-        {
-            "message": "Ops.User.pandur.Geom2Tex2 renamed to Ops.Dve.Geom2Tex2TEST",
-            "author": "pandur",
-            "date": 1663256604502
-        },
-        {
-            "message": "Ops.Dve.Geom2Tex2TEST renamed to Ops.Dev.Geom2Tex2TEST",
-            "author": "pandur",
-            "date": 1663256622622
-        },
-        {
-            "message": "Ops.Dev.Geom2Tex2TEST renamed to Ops.Gl.Meshes.GeometryToTexture_v2",
-            "author": "pandur",
-            "date": 1663310966217
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "pandur",
-            "date": 1663952297125
+            "date": 1663227442753,
+            "type": "new"
         },
         {
             "message": "Add Resize/Rescale option, resize vertices to new bounding",
@@ -37,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1707910560031
+        },
+        {
+            "message": "fixed rounding errors with some texture sizes resulting in transparent pixels",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1725386162104
         }
     ],
     "authorName": "pandur",
