@@ -56,7 +56,23 @@ void main()
         vec2 fr=vec2(fract(tc.x*numCols),fract(tc.y*numRows));
     #endif
 
+    #ifdef ARRANGE_OVERLAPX
+        float index=floor(tc.x*numCols);
+        vec2 fr=vec2(fract(tc.x),tc.y);
 
+        #ifdef FLIPORDER
+            index=numCols-(index+1.0);
+        #endif
+    #endif
+
+    #ifdef ARRANGE_OVERLAPY
+        float index=floor( (1.0-tc.y)*numRows);
+        vec2 fr=vec2(fract(tc.x),tc.y);
+
+        #ifdef FLIPORDER
+            index=numCols-(index+1.0);
+        #endif
+    #endif
 
     vec4 col;
     if(index==0.0)col=texture(tex0,fr);
