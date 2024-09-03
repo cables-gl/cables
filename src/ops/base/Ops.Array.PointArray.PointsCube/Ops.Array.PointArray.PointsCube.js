@@ -3,7 +3,7 @@ const numx = op.inValueInt("num x", 5),
     numz = op.inValueInt("num z", 5),
     mul = op.inValue("mul", 1),
     center = op.inValueBool("center", true),
-    outArray = op.outArray("Array out"),
+    outArray = op.outArray("Array out", [], 3),
     idx = op.outNumber("Total points"),
     arrayLengthOut = op.outNumber("Array length");
 
@@ -56,8 +56,7 @@ function update()
         }
     }
     idx.set(x * y * z);
-    outArray.set(null);
-    outArray.set(newArr);
+    outArray.setRef(newArr);
     arrayLengthOut.set(newArr.length);
 }
 

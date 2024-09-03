@@ -8,7 +8,7 @@ const
     py = op.inValueFloat("Pos Y", -0.5),
     coordmul = op.inValueFloat("mul"),
     next = op.outTrigger("Next"),
-    outArr = op.outArray("Array2x");
+    outArr = op.outArray("Array2x", [], 3);
 
 exe.onTriggered = function ()
 {
