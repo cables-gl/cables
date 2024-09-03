@@ -28,6 +28,19 @@ label.classList.add("sidebar__item-label");
 label.appendChild(labelText);
 
 const icon = document.createElement("div");
+
+if (defaultValuePort.get())
+{
+    icon.classList.remove("icon_toggle_false");
+    icon.classList.add("icon_toggle_true");
+}
+else
+{
+    icon.classList.remove("icon_toggle_true");
+    icon.classList.add("icon_toggle_false");
+}
+valuePort.set(defaultValuePort.get());
+
 icon.classList.add("icon_toggle");
 icon.addEventListener("click", onInputClick);
 
@@ -82,6 +95,7 @@ function onInputClick()
         icon.classList.remove("icon_toggle_true");
         icon.classList.add("icon_toggle_false");
     }
+
     outToggled.trigger();
     op.refreshParams();
 }

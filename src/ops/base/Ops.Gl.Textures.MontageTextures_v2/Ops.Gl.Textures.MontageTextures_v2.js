@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Execute"),
     inSizeStrat = op.inSwitch("Size", ["First", "Single", "Manual"], "First"),
-    inArrange = op.inSwitch("Arrangement", ["Columns", "Rows", "Grid"], "Columns"),
+    inArrange = op.inSwitch("Arrangement", ["Columns", "Rows", "Grid", "Overlap X", "Overlap Y"], "Columns"),
     inFlipOrder = op.inBool("Flip Order", false),
     inWidth = op.inInt("Width", 256),
     inHeight = op.inInt("Height", 256),
@@ -69,21 +69,28 @@ function getNumTextureRows()
 {
     if (inArrange.get() == "Grid") return Math.ceil(Math.sqrt(getNumTextures()));
 
-    if (inArrange.get() == "Rows") return getNumTextures();
+    if (inArrange.get() == "Rows" ||
+        inArrange.get() == "Overlap Y") return getNumTextures();
     return 1;
 }
 
 function getNumTextureColumns()
 {
     if (inArrange.get() == "Grid") return Math.ceil(Math.sqrt(getNumTextures()));
-    if (inArrange.get() == "Columns") return getNumTextures();
+    if (inArrange.get() == "Columns" ||
+        inArrange.get() == "Overlap X") return getNumTextures();
     return 1;
 }
 
 function getHeight()
 {
-    const num = getNumTextureRows();
+    let num = getNumTextureRows();
+
     outRows.set(num);
+
+    if (inArrange.get() == "Overlap X")num = 1;
+    if (inArrange.get() == "Overlap Y")num = 1;
+
     if (inSizeStrat.get() == "Manual") return inHeight.get();
     if (inSizeStrat.get() == "Single") return inHeight.get() * num;
     if (inSizeStrat.get() == "First")
@@ -97,8 +104,11 @@ function getHeight()
 
 function getWidth()
 {
-    const num = getNumTextureColumns();
+    let num = getNumTextureColumns();
+
     outColumns.set(num);
+    if (inArrange.get() == "Overlap X")num = 1;
+    if (inArrange.get() == "Overlap Y")num = 1;
 
     if (inSizeStrat.get() == "Manual") return inWidth.get();
     if (inSizeStrat.get() == "Single") return inWidth.get() * num;
@@ -145,6 +155,8 @@ function initShader()
     tc.bgShader.toggleDefine("ARRANGE_COLS", inArrange.get() == "Columns");
     tc.bgShader.toggleDefine("ARRANGE_ROWS", inArrange.get() == "Rows");
     tc.bgShader.toggleDefine("ARRANGE_GRID", inArrange.get() == "Grid");
+    tc.bgShader.toggleDefine("ARRANGE_OVERLAPX", inArrange.get() == "Overlap X");
+    tc.bgShader.toggleDefine("ARRANGE_OVERLAPY", inArrange.get() == "Overlap Y");
 
     updateDefines();
     needsUpdate = true;

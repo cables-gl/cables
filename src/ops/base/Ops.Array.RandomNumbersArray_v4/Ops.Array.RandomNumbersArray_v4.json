@@ -114,14 +114,8 @@
         ]
     },
     "summary": "create a random array of 1 to 4 dimensions",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
-            {
-                "name": "Mode",
-                "text": "Specify the mode, either A, AB, ABC, ABCD (A = 1 dimension, ABCD = 4 dimensions)"
-            },
             {
                 "name": "Num Values",
                 "text": "amount of chunks "
@@ -180,5 +174,6 @@
             }
         ]
     },
-    "exampleProjectId": "jmm7N-"
+    "exampleProjectId": "jmm7N-",
+    "license": "MIT"
 }
