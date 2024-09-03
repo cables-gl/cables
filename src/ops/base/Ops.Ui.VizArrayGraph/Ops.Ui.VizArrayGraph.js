@@ -16,7 +16,7 @@ op.renderVizLayer = (ctx, layer) =>
     const arr = inArr.get();
     if (!arr) return;
 
-    const colors = ["#d1838e", "#95d183", "#7AC4E0", "#D183BF", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#CF5D9D", "#66C984", "#D66AA6", "#515151"];
+    const colors = ["#d1838e", "#95d183", "#7AC4E0", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#D183BF", "#CF5D9D", "#66C984", "#D66AA6", "#515151"];
 
     let stride = 1;
 
@@ -34,6 +34,18 @@ op.renderVizLayer = (ctx, layer) =>
 
         min = Math.min(v, min);
         max = Math.max(v, max);
+    }
+
+    const step = mulX / (stride);
+
+    let off = 0;
+    if (inCurve.get())off = mulX / 2;
+    for (let i = -stride; i < arr.length; i += stride)
+    {
+        if (i / stride % 2 == 0) ctx.fillStyle = "#222";
+        else ctx.fillStyle = "#333";
+
+        ctx.fillRect(layer.x + i * step + off, layer.y, mulX, layer.height);
     }
 
     {
@@ -69,7 +81,8 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (!inCurve.get())
     {
-        if (stride != 1)ctx.globalAlpha = 0.75;
+        // if(stride!=1)ctx.globalAlpha = 0.6;
+
         for (let st = 0; st < stride; st++)
         {
             for (let i = st; i < arr.length; i += stride)
@@ -77,7 +90,6 @@ op.renderVizLayer = (ctx, layer) =>
                 let y = arr[i];
 
                 ctx.fillStyle = colors[st];
-                // ctx.fillStyle = "rgb(255 0 0 / 50%)";
 
                 y = CABLES.map(y, min, max, layer.height - 3, 3);
                 const y0 = CABLES.map(0, min, max, layer.height - 3, 3);
@@ -85,10 +97,10 @@ op.renderVizLayer = (ctx, layer) =>
                 const ymin = Math.min(y, y0);
                 const ymax = Math.max(y, y0);
 
-                ctx.fillRect(layer.x + (i - st) / stride * mulX, layer.y + ymin, Math.floor(mulX) - 1, (ymax - ymin));
+                ctx.fillRect(layer.x + (i - st) / stride * mulX + st * step, layer.y + ymin, step, (ymax - ymin));
             }
         }
 
-        ctx.globalAlpha = 1.0;
+        // ctx.globalAlpha = 1.0;
     }
 };
