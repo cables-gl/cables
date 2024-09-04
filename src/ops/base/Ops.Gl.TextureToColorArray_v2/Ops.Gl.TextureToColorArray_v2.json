@@ -45,6 +45,11 @@
                 "type": 0,
                 "name": "Floating Point",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Num Pixel",
+                "subType": "number"
             }
         ]
     },
@@ -60,6 +65,10 @@
                 "text": "texture in to turn into an array. Beware of high resolutions."
             },
             {
+                "name": "Force floats",
+                "text": "Force output of floats, when the texture is 8 bit and you don't want byte values (0-255)"
+            },
+            {
                 "name": "trigger",
                 "text": "Trigger out"
             },
@@ -73,9 +82,7 @@
             }
         ]
     },
-    "issues": "",
     "exampleProjectId": "uZkd3x",
-    "caniusequery": "",
     "youtubeids": [
         "mQN8VtVOltQ"
     ],

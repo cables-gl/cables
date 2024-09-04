@@ -5,9 +5,9 @@ const
     inFormat = op.inSwitch("Format", ["RGBA", "RGB", "RG", "R", "G", "B", "A"], "RGBA"),
     inForceFloats = op.inBool("Force floats", true),
     outTrigger = op.outTrigger("trigger"),
-
     outColors = op.outArray("Colors", null, 4),
-    outIsFloatingPoint = op.outBoolNum("Floating Point");
+    outIsFloatingPoint = op.outBoolNum("Floating Point"),
+    outNumPixel = op.outNumber("Num Pixel");
 
 let
     fb = null,
@@ -96,59 +96,64 @@ function updateArray()
 
     pixelReader.read(cgl, fb, realTexture.pixelFormat, 0, 0, realTexture.width, realTexture.height, (pixel) =>
     {
-        let numItems = pixel.length;
-        numItems = numItems / 4 * getNumChannels();
+        let origNumChannels = CGL.Texture.getPixelFormatNumChannels(realTexture.pixelFormat);
+
+        console.log(pixel.length, realTexture.width, realTexture.height);
+
+        let numItems = (pixel.length / origNumChannels) * getNumChannels();
+
+        outNumPixel.set(numItems);
 
         if (inFormat.get() === "R")
         {
             if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            for (let i = 0; i < pixel.length; i += 4)
-                convertedpixel[i / 4] = pixel[i + 0];
+            for (let i = 0; i < pixel.length; i += origNumChannels)
+                convertedpixel[i / origNumChannels] = pixel[i + 0];
         }
         else
         if (inFormat.get() === "G")
         {
             if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            for (let i = 0; i < pixel.length; i += 4)
-                convertedpixel[i / 4] = pixel[i + 1];
+            for (let i = 0; i < pixel.length; i += origNumChannels)
+                convertedpixel[i / origNumChannels] = pixel[i + 1];
         }
         else
         if (inFormat.get() === "B")
         {
             if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            for (let i = 0; i < pixel.length; i += 4)
-                convertedpixel[i / 4] = pixel[i + 2];
+            for (let i = 0; i < pixel.length; i += origNumChannels)
+                convertedpixel[i / origNumChannels] = pixel[i + 2];
         }
         else
         if (inFormat.get() === "A")
         {
             if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            for (let i = 0; i < pixel.length; i += 4)
-                convertedpixel[i / 4] = pixel[i + 3];
+            for (let i = 0; i < pixel.length; i += origNumChannels)
+                convertedpixel[i / origNumChannels] = pixel[i + 3];
         }
         else if (inFormat.get() === "RGB")
         {
             if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            for (let i = 0; i < pixel.length; i += 4)
+            for (let i = 0; i < pixel.length; i += origNumChannels)
             {
-                convertedpixel[i / 4 * 3 + 0] = pixel[i + 0];
-                convertedpixel[i / 4 * 3 + 1] = pixel[i + 1];
-                convertedpixel[i / 4 * 3 + 2] = pixel[i + 2];
+                convertedpixel[i / origNumChannels * 3 + 0] = pixel[i + 0];
+                convertedpixel[i / origNumChannels * 3 + 1] = pixel[i + 1];
+                convertedpixel[i / origNumChannels * 3 + 2] = pixel[i + 2];
             }
         }
         else if (inFormat.get() === "RG")
         {
             if (!convertedpixel || convertedpixel.length != numItems) convertedpixel = new Float32Array(numItems);
 
-            for (let i = 0; i < pixel.length; i += 4)
+            for (let i = 0; i < pixel.length; i += origNumChannels)
             {
-                convertedpixel[i / 4 * 2 + 0] = pixel[i + 0];
-                convertedpixel[i / 4 * 2 + 1] = pixel[i + 1];
+                convertedpixel[i / origNumChannels * 2 + 0] = pixel[i + 0];
+                convertedpixel[i / origNumChannels * 2 + 1] = pixel[i + 1];
             }
         }
         else if (inFormat.get() === "RGBA" && !isFloatingPoint)
