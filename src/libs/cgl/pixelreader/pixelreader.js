@@ -92,7 +92,7 @@ class PixelReader
 
         if (!this._pixelData || this._size != numItems * bytesPerItem)
         {
-            if (isFloatingPoint) this._pixelData = new Float32Array(numItems * bytesPerItem);
+            if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
             else this._pixelData = new Uint8Array(numItems);
 
             this._size = numItems * bytesPerItem;
