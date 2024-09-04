@@ -50,5 +50,6 @@
     "summary": "Create a Web/Http server locally ",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "lke9pn"
 }

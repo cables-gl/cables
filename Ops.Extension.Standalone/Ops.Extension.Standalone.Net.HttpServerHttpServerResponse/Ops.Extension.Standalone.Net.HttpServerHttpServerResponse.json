@@ -33,5 +33,6 @@
     "summary": "Answer http requests by sending string to the browser/client",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "lke9pn"
 }
