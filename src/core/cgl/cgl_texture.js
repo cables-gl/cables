@@ -338,14 +338,8 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
 
 
-    o.numColorChannels = 1;
-    if (pixelFormatStr.startsWith("R"))o.numColorChannels = 1;
-    if (pixelFormatStr.startsWith("RG"))o.numColorChannels = 2;
-    if (pixelFormatStr.startsWith("RGB"))o.numColorChannels = 3;
-    if (pixelFormatStr.startsWith("RGBA"))o.numColorChannels = 4;
+    o.numColorChannels = Texture.getPixelFormatNumChannels(pixelFormatStr);
 
-
-    // console.log(pixelFormatStr, this.name);
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
 
@@ -1208,16 +1202,26 @@ Texture.PIXELFORMATS = [
 
 ];
 
-Texture.isPixelFormatFloat =
-    (pxlfrmt) =>
+Texture.getPixelFormatNumChannels =
+    (pxlFrmtStr) =>
     {
-        return (pxlfrmt || "").contains("float");
+        if (pxlFrmtStr.startsWith("R")) return 1;
+        if (pxlFrmtStr.startsWith("RG")) return 2;
+        if (pxlFrmtStr.startsWith("RGB")) return 3;
+        if (pxlFrmtStr.startsWith("RGBA")) return 4;
+        return 1;
+    };
+
+Texture.isPixelFormatFloat =
+    (pxlFrmtStr) =>
+    {
+        return (pxlFrmtStr || "").contains("float");
     };
 
 Texture.isPixelFormatHalfFloat =
-    (pxlfrmt) =>
+    (pxlFrmtStr) =>
     {
-        return (pxlfrmt || "").contains("float") && (pxlfrmt || "").contains("16bit");
+        return (pxlFrmtStr || "").contains("float") && (pxlFrmtStr || "").contains("16bit");
     };
 
 

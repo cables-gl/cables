@@ -75,7 +75,6 @@ class PixelReader
         if (!fb) return;
 
         if (pixelFormat === CGL.Texture.TYPE_FLOAT) pixelFormat = CGL.Texture.PFORMATSTR_RGBA32F;
-        // let isFloatingPoint = pixelFormat == CGL.Texture.TYPE_FLOAT; // old parameter was "textureType", not iots pixelformat, keeping this for compatibility...
 
         let isFloatingPoint = CGL.Texture.isPixelFormatFloat(pixelFormat);
 
