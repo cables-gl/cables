@@ -1,8 +1,11 @@
+import { Logger } from "cables-shared-client";
 
 class PixelReader
 {
     constructor()
     {
+        this._log = new Logger("LoadingStatus");
+
         this.pixelData = null;
         this._finishedFence = true;
         this._size = 0;
@@ -33,25 +36,25 @@ class PixelReader
                 else
                 if (status == gl.TIMEOUT_EXPIRED)
                 {
-                    // console.log("TIMEOUT_EXPIRED");
+                    // this._log.log("TIMEOUT_EXPIRED");
                     return setTimeout(check, 0);
                 }
                 else
                 if (status == gl.CONDITION_SATISFIED)
                 {
-                    // console.log("CONDITION_SATISFIED");
+                    // this._log.log("CONDITION_SATISFIED");
                     resolve();
                     gl.deleteSync(sync);
                 }
                 else if (status == gl.ALREADY_SIGNALED)
                 {
-                    // console.log("already signaled");
+                    // this._log.log("already signaled");
                     resolve();
                     gl.deleteSync(sync);
                 }
                 else
                 {
-                    console.log("unknown fence status", status);
+                    this._log.log("unknown fence status", status);
                 }
             }
 
@@ -75,6 +78,7 @@ class PixelReader
         if (!fb) return;
 
         if (pixelFormat === CGL.Texture.TYPE_FLOAT) pixelFormat = CGL.Texture.PFORMATSTR_RGBA32F;
+        // let isFloatingPoint = pixelFormat == CGL.Texture.TYPE_FLOAT; // old parameter was "textureType", not iots pixelformat, keeping this for compatibility...
 
         let isFloatingPoint = CGL.Texture.isPixelFormatFloat(pixelFormat);
 
@@ -88,7 +92,7 @@ class PixelReader
 
         if (!this._pixelData || this._size != numItems * bytesPerItem)
         {
-            if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
+            if (isFloatingPoint) this._pixelData = new Float32Array(numItems * bytesPerItem);
             else this._pixelData = new Uint8Array(numItems);
 
             this._size = numItems * bytesPerItem;
@@ -99,7 +103,7 @@ class PixelReader
 
         if (this._size == 0 || !this._pixelData)
         {
-            console.error("readpixel size 0", this._size, w, h);
+            this._log.error("readpixel size 0", this._size, w, h);
             return;
         }
 
@@ -111,6 +115,17 @@ class PixelReader
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
             cgl.profileData.profileFencedPixelRead++;
+
+
+
+
+
+
+            if (this._size != numItems * bytesPerItem)
+            {
+                this._log.error("buffer size invalid", numItems, w, h, bytesPerItem);
+            }
+
             gl.readPixels(
                 x, y, w, h, gl.RGBA, pixelInfo.glDataType, 0
                 // x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0

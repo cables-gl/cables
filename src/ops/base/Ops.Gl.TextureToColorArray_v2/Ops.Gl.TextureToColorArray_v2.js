@@ -98,7 +98,7 @@ function updateArray()
     {
         let origNumChannels = CGL.Texture.getPixelFormatNumChannels(realTexture.pixelFormat);
 
-        console.log(pixel.length, realTexture.width, realTexture.height);
+        // console.log(pixel.length, realTexture.width, realTexture.height);
 
         let numItems = (pixel.length / origNumChannels) * getNumChannels();
 
