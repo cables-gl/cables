@@ -127,7 +127,7 @@ class PixelReader
             }
 
             gl.readPixels(
-                x, y, w, h, gl.RGBA, pixelInfo.glDataType, 0
+                x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0
                 // x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0
             );
 
