@@ -116,24 +116,15 @@ class PixelReader
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
             cgl.profileData.profileFencedPixelRead++;
 
-
-
-
-
-
             if (this._size != numItems * bytesPerItem)
-            {
                 this._log.error("buffer size invalid", numItems, w, h, bytesPerItem);
-            }
 
-            const altFormat = gl.getParameter(gl.IMPLEMENTATION_COLOR_READ_FORMAT);
-            const altType = gl.getParameter(gl.IMPLEMENTATION_COLOR_READ_TYPE);
-            // console.log("altFormat,alt", altFormat, altType);
-
+            // const altFormat = gl.getParameter(gl.IMPLEMENTATION_COLOR_READ_FORMAT);
+            // const altType = gl.getParameter(gl.IMPLEMENTATION_COLOR_READ_TYPE);
 
             gl.readPixels(
-                x, y, w, h, altFormat, altType, 0
-                // x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0
+                // x, y, w, h, altFormat, altType, 0
+                x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0
             );
 
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
