@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "549efc37-c037-4915-9ec6-c8584c0f1def",
-    "created": 1675434947622,
+    "id": "946ca491-3455-495f-ab32-ed7c34830aeb",
+    "created": 1725429533811,
     "layout": {
         "portsIn": [
             {
@@ -11,25 +11,6 @@
             {
                 "type": 2,
                 "name": "texture"
-            },
-            {
-                "type": 0,
-                "name": "Format index",
-                "values": [
-                    "RGBA",
-                    "RGB",
-                    "RG",
-                    "R",
-                    "G",
-                    "B",
-                    "A"
-                ],
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Force floats",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -82,10 +63,6 @@
             }
         ]
     },
-    "exampleProjectId": "uZkd3x",
-    "youtubeids": [
-        "mQN8VtVOltQ"
-    ],
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.Texture2ColorArray",
@@ -109,6 +86,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1725429426523
+        },
+        {
+            "message": "Reduce complexity of op, remove channel conversion and bytes to float. just output the pixel values if possible",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725430970515
         }
     ],
     "coreLibs": [
