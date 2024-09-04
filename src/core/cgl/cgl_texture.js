@@ -1205,10 +1205,9 @@ Texture.PIXELFORMATS = [
 Texture.getPixelFormatNumChannels =
     (pxlFrmtStr) =>
     {
-        if (pxlFrmtStr.startsWith("R")) return 1;
-        if (pxlFrmtStr.startsWith("RG")) return 2;
-        if (pxlFrmtStr.startsWith("RGB")) return 3;
         if (pxlFrmtStr.startsWith("RGBA")) return 4;
+        if (pxlFrmtStr.startsWith("RGB")) return 3;
+        if (pxlFrmtStr.startsWith("RG")) return 2;
         return 1;
     };
 
