@@ -50,9 +50,9 @@ inEle.onChange = inEle.onLinkChanged = function ()
         if (CABLES.UI && inEle.get() && ele != inEle.get())
         {
             if (window.getComputedStyle(ele).position !== "absolute") op.setUiError("oppos", "Element position should be absolute");
-            else op.setUiError("oppos", null);
         }
     }
+    if (CABLES.UI) op.setUiError("oppos", null);
 
     update();
     outEle.setRef(inEle.get());

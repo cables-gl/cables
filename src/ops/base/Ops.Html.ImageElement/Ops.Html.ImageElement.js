@@ -8,7 +8,6 @@ const
     outHeight = op.outNumber("Height");
 
 let element = op.patch.getDocument().createElement("img");
-// op.patch.cgl.canvas.parentElement.appendChild(element);
 
 op.onDelete = removeEle;
 

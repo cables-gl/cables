@@ -32,6 +32,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1721829675023
+        },
+        {
+            "message": "Can now be ctrl-hover picked as all html elements",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725439597054
         }
     ],
     "layout": {

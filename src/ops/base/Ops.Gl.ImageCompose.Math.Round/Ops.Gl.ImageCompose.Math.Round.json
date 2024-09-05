@@ -52,6 +52,12 @@
             {
                 "type": 0,
                 "name": "name index",
+                "values": [
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "subType": "integer"
             }
         ],
@@ -63,9 +69,8 @@
         ]
     },
     "summary": "Round number values of texture color channels",
-
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
