@@ -7,10 +7,6 @@
                 "type": 0,
                 "name": "Port",
                 "subType": "integer"
-            },
-            {
-                "type": 1,
-                "name": "Test"
             }
         ],
         "portsOut": [
@@ -78,5 +74,6 @@
     "summary": "OSC Connection",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "PCZCun"
 }

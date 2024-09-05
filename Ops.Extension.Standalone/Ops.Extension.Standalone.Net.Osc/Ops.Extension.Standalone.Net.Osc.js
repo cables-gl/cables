@@ -4,7 +4,6 @@ const
     next = op.outTrigger("Message Received"),
     msg=op.outObject("Message"),
     outConn=op.outObject("Connection"),
-    inTest=op.inTriggerButton("Test"),
     outStatus=op.outString("Status");
 
 const osc=op.require("osc");
@@ -56,9 +55,3 @@ function stop()
     udpPort=null;
     outConn.set(null);
 }
-
-
-inTest.onTriggered=()=>
-{
-
-};
