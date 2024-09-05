@@ -45,5 +45,6 @@
     "summary": "Write a string to a text file on the local file system",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "PT9Aun"
 }

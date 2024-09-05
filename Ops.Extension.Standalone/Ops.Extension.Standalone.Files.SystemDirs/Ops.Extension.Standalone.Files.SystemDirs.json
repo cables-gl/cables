@@ -1,12 +1,7 @@
 {
-    "name": "Ops.Standalone.Files.SystemDirs",
-    "content": "",
-    "attachmentFiles": [],
-    "summary": "",
     "shortName": "SystemDirs",
     "id": "699023ff-8297-441d-ab21-5234d904ed0d",
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 5,
@@ -34,13 +29,10 @@
     "authorName": "pandur",
     "license": "MIT",
     "hasExample": false,
-    "exampleProjectId": "",
     "namespace": "Ops.Standalone.Files",
     "nameNoVersion": "Ops.Standalone.Files.SystemDirs",
     "shortNameDisplay": "SystemDirs",
     "version": 0,
-    "libs": [],
-    "youtubeids": [],
     "created": 1724316833337,
     "hasPublicRepo": true,
     "hidden": false,
@@ -58,7 +50,6 @@
             "date": 1724855098710
         }
     ],
-    "dependencies": [],
     "oldVersion": false,
     "versions": [
         {
@@ -69,10 +60,14 @@
     ],
     "newestVersion": {
         "name": "Ops.Standalone.Files.SystemDirs",
-        "versionString": "",
         "version": 0
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Get Default System Directories Paths",
+    "exampleProjectId": "7hftun",
+    "docs": {
+        "ports": []
+    }
 }

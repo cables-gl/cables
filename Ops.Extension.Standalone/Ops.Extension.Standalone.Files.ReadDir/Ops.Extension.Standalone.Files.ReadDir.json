@@ -44,5 +44,6 @@
     "summary": "Read all entries in a directory",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "I6buun"
 }

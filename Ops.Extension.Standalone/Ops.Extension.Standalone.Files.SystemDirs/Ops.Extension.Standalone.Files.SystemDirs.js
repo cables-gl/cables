@@ -1,9 +1,11 @@
 
+const fs=op.require("fs");
 
+const paths=op.patch.config.paths||{};
 
-op.outString("Home",op.patch.config.paths.home);
-op.outString("Downloads",op.patch.config.paths.downloads);
-op.outString("Documents",op.patch.config.paths.documents);
-op.outString("Desktop",op.patch.config.paths.desktop);
-op.outString("Exe",op.patch.config.paths.exe);
+op.outString("Home",paths.home);
+op.outString("Downloads",paths.downloads);
+op.outString("Documents",paths.documents);
+op.outString("Desktop",paths.desktop);
+op.outString("Exe",paths.exe);
 

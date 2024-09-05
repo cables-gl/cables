@@ -45,5 +45,6 @@
     "summary": "Read a text file as string from the local file system",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "PT9Aun"
 }

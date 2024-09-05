@@ -34,6 +34,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724312944377
+        },
+        {
+            "message": "Ops.Extension.Standalone.Net.IpAdress renamed to Ops.Extension.Standalone.Net.IpAddress",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1725527886689
         }
     ],
     "oldVersion": false,
@@ -54,5 +60,6 @@
     "summary": "Outputs your local IP Adress",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "lCYxun"
 }

@@ -53,5 +53,6 @@
     "summary": "Watch a directory, get a trigger when a file changes",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "PT9Aun"
 }
