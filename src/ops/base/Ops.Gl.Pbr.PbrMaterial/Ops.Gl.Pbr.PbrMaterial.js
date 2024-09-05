@@ -38,6 +38,7 @@ const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
 const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
 const inHeightDepth = op.inFloat("Height Intensity", 1.0);
 const inUseOptimizedHeight = op.inValueBool("Faster heightmapping", false);
+const inDoubleSided = op.inValueBool("Double Sided", false);
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
@@ -70,7 +71,7 @@ op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_T
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
-op.setPortGroup("Advanced Shader Parameters", [inEmissionIntensity, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight]);
+op.setPortGroup("Advanced Shader Parameters", [inEmissionIntensity, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inDoubleSided]);
 op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexEmission, inTexHeight, inLightmap, inTexThinFilm]);
 op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
@@ -180,6 +181,7 @@ PBRShader.uniformPbrRoughness = inRoughnessUniform;
 inTexPrefiltered.onChange = updateIBLTexDefines;
 
 inTexAORM.onChange =
+    inDoubleSided.onChange =
     inLightmapRGBE.onChange =
     inUseNormalMapForCC.onChange =
     inUseClearCoat.onChange =
@@ -201,6 +203,7 @@ inTexAORM.onChange =
 
 function updateDefines()
 {
+    PBRShader.toggleDefine("DOUBLE_SIDED", inDoubleSided.get());
     PBRShader.toggleDefine("USE_OPTIMIZED_HEIGHT", inUseOptimizedHeight.get());
     PBRShader.toggleDefine("USE_CLEAR_COAT", inUseClearCoat.get());
     PBRShader.toggleDefine("USE_NORMAL_MAP_FOR_CC", inUseNormalMapForCC.get());
