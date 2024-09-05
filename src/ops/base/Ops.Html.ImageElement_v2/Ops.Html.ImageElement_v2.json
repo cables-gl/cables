@@ -1,0 +1,101 @@
+{
+    "id": "d78cb7f1-da19-4abc-a658-15503108acdc",
+    "created": 1725443030352,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1708945340334
+        },
+        {
+            "message": "Added class input and style attribute editor",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1710764535096
+        },
+        {
+            "message": "Added CSS Display parameter option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712067774369
+        },
+        {
+            "message": "Show filename in extended op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721656111652
+        },
+        {
+            "message": "Disable caching when uploading a new version of image to the editor",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721829675023
+        },
+        {
+            "message": "Can now be ctrl-hover picked as all html elements",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725439597054
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "values": [
+                    "Absolute",
+                    "Static",
+                    "Relative",
+                    "Fixed"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Class"
+            },
+            {
+                "type": 5,
+                "name": "Style"
+            },
+            {
+                "type": 0,
+                "name": "CSS Display index",
+                "values": [
+                    "not set",
+                    "none"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Image Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an image(img) html element",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}
