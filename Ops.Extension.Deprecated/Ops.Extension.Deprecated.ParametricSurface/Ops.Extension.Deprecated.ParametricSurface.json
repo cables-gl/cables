@@ -24,109 +24,109 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "shapes index",
                 "subType": "integer"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "u Segments",
                 "group": "Segments",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "v Segments",
                 "group": "Segments",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Multiple of PI - u",
                 "group": "U range",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "uMin",
                 "group": "U range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "uMax",
                 "group": "U range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Displace U",
                 "group": "U range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Multiple of PI - v",
                 "group": "V range",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "vMin",
                 "group": "V range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "vMax",
                 "group": "V range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Displace V",
                 "group": "V range",
                 "subType": "number"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "X Function",
                 "group": "XYZ Functions"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Y Function",
                 "group": "XYZ Functions"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Z Function",
                 "group": "XYZ Functions"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale X",
                 "group": "Scaling",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale Y",
                 "group": "Scaling",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale Z",
                 "group": "Scaling",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Draw",
                 "group": "Draw",
                 "subType": "boolean"
@@ -134,19 +134,19 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "geometry"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Position"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Position Amount",
                 "subType": "number"
             }
@@ -251,5 +251,6 @@
             }
         ]
     },
-    "exampleProjectId": "TnUBsL"
+    "exampleProjectId": "TnUBsL",
+    "license": "MIT"
 }
