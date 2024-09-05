@@ -11,7 +11,7 @@
             "date": 1723564156100
         },
         {
-            "message": "Interactivity is now a switch between True,False or pointer-events:none",
+            "message": "v2: Interactivity is now a switch between True,False or pointer-events:none",
             "type": "improvement",
             "author": "pandur",
             "date": 1725443788815
