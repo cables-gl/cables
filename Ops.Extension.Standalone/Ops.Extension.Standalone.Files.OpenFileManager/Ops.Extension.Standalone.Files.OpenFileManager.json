@@ -33,10 +33,13 @@
                 "type": 1,
                 "name": "Open File Manager"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Open the native file manager application using that path",
+    "docs": {
+        "ports": []
+    }
 }

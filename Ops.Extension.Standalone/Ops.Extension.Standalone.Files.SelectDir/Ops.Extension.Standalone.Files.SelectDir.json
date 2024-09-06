@@ -61,5 +61,9 @@
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Choose a directory on your hard drive",
+    "docs": {
+        "ports": []
+    }
 }

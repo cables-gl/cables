@@ -27,5 +27,9 @@
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "summary": "Resolves a paths into an absolute path",
+    "docs": {
+        "ports": []
+    }
 }
