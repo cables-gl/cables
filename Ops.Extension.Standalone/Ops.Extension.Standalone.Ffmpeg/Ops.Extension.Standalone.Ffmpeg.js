@@ -4,7 +4,7 @@ const ffmpeg = op.require("fluent-ffmpeg");
 
 const
     inFile = op.inUrl("Source Video"),
-    inOutFile = op.inString("Destination File", "/Users/tom/output.mp4"),
+    inOutFile = op.inString("Destination File", ""),
 
     inAudio = op.inSwitch("Audio", ["No Change", "Remove"], "No Change"),
 

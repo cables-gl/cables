@@ -16,6 +16,10 @@
             {
                 "type": 5,
                 "name": "Path"
+            },
+            {
+                "type": 1,
+                "name": "Execute"
             }
         ],
         "portsOut": [

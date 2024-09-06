@@ -19,11 +19,13 @@ exec.onTriggered = ()=>
       {
         if(err)
         {
-            outStr.set("");
-            errorStr.set(error.message);
+
+            errorStr.set("Error:"+err.message);
         }
         else
         {
+            errorStr.set();
+
         }
         next.trigger();
     });
