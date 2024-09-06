@@ -1,4 +1,4 @@
-
+op.require("fs");
 const
     inPath=op.inString("Default Path",""),
     exec = op.inTriggerButton("Select Directory"),
@@ -6,7 +6,8 @@ const
 
 exec.onTriggered = () =>
 {
-    CABLESUILOADER.talkerAPI.send("selectDir",{dir:inPath.get()});
+    if(CABLES.UI)
+        CABLESUILOADER.talkerAPI.send("selectDir",{dir:inPath.get()});
 
     // TODO SET outPath!
 };

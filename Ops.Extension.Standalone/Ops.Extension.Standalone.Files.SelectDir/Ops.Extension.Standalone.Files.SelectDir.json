@@ -58,5 +58,8 @@
                 "name": "Path"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
 }
