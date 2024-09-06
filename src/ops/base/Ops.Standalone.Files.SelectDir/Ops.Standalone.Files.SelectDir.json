@@ -1,0 +1,50 @@
+{
+    "id": "8e840fa5-32f4-477b-9da6-3705d62ae695",
+    "created": 1725634236660,
+    "license": "MIT",
+    "authorName": "",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1725632978898
+        },
+        {
+            "message": "Ops.ExtensionStandalone.Files.SelectDir renamed to Ops.ExtensionStandalone.Files.OpenFileManager",
+            "type": "rename",
+            "author": "",
+            "date": 1725634162944
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1725634236660
+        },
+        {
+            "message": "Ops.Standalone.Files.PickDir renamed to Ops.Standalone.Files.SelectDir",
+            "type": "rename",
+            "author": "",
+            "date": 1725634310843
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Default Path"
+            },
+            {
+                "type": 1,
+                "name": "Select Directory"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ]
+    }
+}
