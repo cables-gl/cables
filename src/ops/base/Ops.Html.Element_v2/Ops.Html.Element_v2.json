@@ -1,0 +1,129 @@
+{
+    "id": "a0d2cc80-0b2f-4422-ba2d-c903ac9ca297",
+    "created": 1725443366749,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723564156100
+        },
+        {
+            "message": "v2: Interactivity is now a switch between True,False or pointer-events:none",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725443788815
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "values": [
+                    "Absolute",
+                    "Static",
+                    "Relative",
+                    "Fixed"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Interactive index",
+                "values": [
+                    "True",
+                    "False",
+                    "No Pointer Events"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Set Size",
+                "group": "Area",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Overflow index",
+                "values": [
+                    "Visible",
+                    "Hidden",
+                    "Scroll",
+                    "Auto"
+                ],
+                "group": "Area",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Inline Style",
+                "group": "CSS"
+            },
+            {
+                "type": 5,
+                "name": "CSS Class",
+                "group": "CSS"
+            },
+            {
+                "type": 5,
+                "name": "Disable CSS Props",
+                "group": "CSS"
+            },
+            {
+                "type": 0,
+                "name": "Display index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Propagate Click-Events",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "DOM Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Hovering",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Clicked"
+            }
+        ]
+    },
+    "summary": "A more convinient version of div element op, that can be used for creating html without writing much css code",
+    "docs": {
+        "ports": []
+    }
+}

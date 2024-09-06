@@ -1,7 +1,8 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif", ".svg"]),
+    inPos = op.inSwitch("Position", ["Absolute", "Static", "Relative", "Fixed"], "Absolute"),
     inClass = op.inString("Class"),
-    inStyle = op.inStringEditor("Style", "position:absolute;", "inline-css"),
+    inStyle = op.inStringEditor("Style", "", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
     outImage = op.outObject("Image Element", null, "element"),
     outWidth = op.outNumber("Width"),
@@ -15,6 +16,9 @@ inClass.onChange = updateClass;
 inStyle.onChange = updateStyle;
 
 filename.onChange = filenameChanged;
+
+inPos.onChange = updateStyle;
+updateStyle();
 
 element.onload = () =>
 {
@@ -106,6 +110,10 @@ function updateClass()
 function updateStyle()
 {
     element.setAttribute("style", inStyle.get());
+    element.style.position = inPos.get().toLowerCase();
+    outImage.setRef(element);
+    element.classList.add("cablesEle");
+    element.dataset.op = op.id;
     outImage.setRef(element);
 }
 
