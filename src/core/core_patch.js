@@ -745,7 +745,7 @@ Patch.prototype.serialize = function (options)
     for (const i in this.ops)
     {
         const op = this.ops[i];
-        obj.ops.push(op.getSerialized());
+        if (op)obj.ops.push(op.getSerialized());
     }
 
     cleanJson(obj);
