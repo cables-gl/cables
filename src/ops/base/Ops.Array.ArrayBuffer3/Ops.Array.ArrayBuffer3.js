@@ -5,7 +5,7 @@ const exec = op.inTrigger("exec"),
     valZ = op.inValue("Value Z"),
     inReset = op.inTriggerButton("Reset"),
     outTrigger = op.outTrigger("Trigger out"),
-    arrOut = op.outArray("Result"),
+    arrOut = op.outArray("Result", [], 3),
     outArrayLength = op.outNumber("Array length");
 
 let arr = [];
