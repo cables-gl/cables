@@ -2,42 +2,42 @@
     "id": "8e840fa5-32f4-477b-9da6-3705d62ae695",
     "created": 1725634236660,
     "license": "MIT",
-    "authorName": "",
+    "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "",
+            "author": "pandur",
             "date": 1725632978898
         },
         {
             "message": "Ops.ExtensionStandalone.Files.SelectDir renamed to Ops.ExtensionStandalone.Files.OpenFileManager",
             "type": "rename",
-            "author": "",
+            "author": "pandur",
             "date": 1725634162944
         },
         {
             "message": "op created",
             "type": "new op",
-            "author": "",
+            "author": "pandur",
             "date": 1725634236660
         },
         {
             "message": "Ops.Standalone.Files.PickDir renamed to Ops.Standalone.Files.SelectDir",
             "type": "rename",
-            "author": "",
+            "author": "pandur",
             "date": 1725634310843
         },
         {
             "message": "Ops.Standalone.Files.SelectDir renamed to Ops.Extension.Standalone.SelectDir",
             "type": "rename",
-            "author": "",
+            "author": "pandur",
             "date": 1725634496601
         },
         {
             "message": "Ops.Extension.Standalone.SelectDir renamed to Ops.Extension.Standalone.Files.SelectDir",
             "type": "rename",
-            "author": "",
+            "author": "pandur",
             "date": 1725634536998
         }
     ],
