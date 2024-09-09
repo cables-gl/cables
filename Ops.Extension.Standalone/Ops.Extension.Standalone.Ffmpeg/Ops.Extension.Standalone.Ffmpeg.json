@@ -131,7 +131,7 @@
     "coreLibs": [
         "standalone_electron"
     ],
-    "summary": "FFmpeg toolbox op",
+    "summary": "FFmpeg video converter toolbox op",
     "docs": {
         "ports": []
     }
