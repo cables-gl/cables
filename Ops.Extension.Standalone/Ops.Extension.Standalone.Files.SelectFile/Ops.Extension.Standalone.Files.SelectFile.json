@@ -1,14 +1,14 @@
 {
-    "id": "8e840fa5-32f4-477b-9da6-3705d62ae695",
-    "created": 1725634236660,
+    "id": "cd84771e-af78-481e-a589-f38cb002abbb",
+    "created": 1725892278542,
     "license": "MIT",
-    "authorName": "pandur",
+    "authorName": "stephan",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "pandur",
-            "date": 1725632978898
+            "author": "stephan",
+            "date": 1725892278542
         }
     ],
     "layout": {
@@ -19,7 +19,7 @@
             },
             {
                 "type": 1,
-                "name": "Select Directory"
+                "name": "Select File"
             }
         ],
         "portsOut": [
@@ -36,7 +36,7 @@
     "coreLibs": [
         "standalone_electron"
     ],
-    "summary": "Choose a directory on your hard drive",
+    "summary": "Choose a file on your hard drive",
     "docs": {
         "ports": []
     }

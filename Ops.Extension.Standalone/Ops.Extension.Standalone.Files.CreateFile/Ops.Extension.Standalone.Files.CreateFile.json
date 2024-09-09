@@ -1,14 +1,14 @@
 {
-    "id": "8e840fa5-32f4-477b-9da6-3705d62ae695",
-    "created": 1725634236660,
+    "id": "8606df01-51c5-47ca-8a52-cdee77cce043",
+    "created": 1725887828570,
     "license": "MIT",
-    "authorName": "pandur",
+    "authorName": "stephan",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
-            "author": "pandur",
-            "date": 1725632978898
+            "author": "stephan",
+            "date": 1725887828571
         }
     ],
     "layout": {
@@ -19,7 +19,7 @@
             },
             {
                 "type": 1,
-                "name": "Select Directory"
+                "name": "Create File"
             }
         ],
         "portsOut": [
@@ -36,7 +36,7 @@
     "coreLibs": [
         "standalone_electron"
     ],
-    "summary": "Choose a directory on your hard drive",
+    "summary": "create a new empty file on your local harddrive",
     "docs": {
         "ports": []
     }
