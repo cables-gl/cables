@@ -1,7 +1,16 @@
+let defaultTexUrl = null;
+let defaultDataUrl = null;
+
+if (CABLES.UI)
+{
+    defaultTexUrl = "/assets/library/fonts_msdf/worksans-regular_int.png";
+    defaultDataUrl = "/assets/library/fonts_msdf/worksans-regular_int.json";
+}
+
 const
     inUUID = op.inString("Font Name", CABLES.uuid()),
-    urlData = op.inUrl("Font Data", [".json"], "/assets/library/fonts_msdf/worksans-regular_int.json"),
-    urlTex = op.inUrl("Font Image", [".png"], "/assets/library/fonts_msdf/worksans-regular_int.png"),
+    urlData = op.inUrl("Font Data", [".json"], defaultDataUrl),
+    urlTex = op.inUrl("Font Image", [".png"], defaultTexUrl),
     urlTex1 = op.inUrl("Font Image 1", [".png"]),
     urlTex2 = op.inUrl("Font Image 2", [".png"]),
     urlTex3 = op.inUrl("Font Image 3", [".png"]),

@@ -48,15 +48,16 @@
     },
     "changelog": [
         {
-            "message": "Ops.User.pandur.FontMSDF2 renamed to Ops.Gl.FontMSDF_v2",
-            "author": "pandur",
-            "date": 1590126791767
-        },
-        {
-            "message": "set default values to libaray example files for quicker setup",
+            "message": "set default values to library example files for quicker setup",
             "type": "improvement",
             "author": "pandur",
             "date": 1711464069706
+        },
+        {
+            "message": "only set library default values when in UI/Editor",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1725892920903
         }
     ],
     "summary": "Load MSDF Font data and texture to use ",
