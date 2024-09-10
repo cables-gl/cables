@@ -13,10 +13,11 @@ function updateVarNamesDropdown()
 {
     if (CABLES.UI)
     {
-        const varnames = [];
+        let varnames = [];
         const vars = op.patch.namedTriggers;
         varnames.push("+ create new one");
         for (const i in vars) varnames.push(i);
+        varnames = varnames.sort();
         op.varName.uiAttribs.values = varnames;
     }
 }
