@@ -47,7 +47,7 @@ inSwit.onChange = () =>
 
 inLoadingTask.onChange = () =>
 {
-    if (inLoadingTask.get()) loadingId = op.patch.loading.start("test ui op file", "test.txt");
+    if (inLoadingTask.get()) loadingId = op.patch.loading.start("test ui op file", "uiTestOp.txt");
     else
     {
         op.patch.loading.finished(loadingId);
