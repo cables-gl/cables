@@ -7,9 +7,10 @@
             "date": 1599664419300
         },
         {
-            "message": "Ops.User.simod.MatCapMaterialNew_v3 renamed to Ops.Gl.Shader.MatCapMaterialNew_v3",
-            "author": "simod",
-            "date": 1599664555174
+            "message": "double sided toggle",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725946236694
         }
     ],
     "authorName": "simod",
@@ -17,148 +18,161 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "MatCap",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Diffuse",
                 "group": "Texture Maps",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Normal",
                 "group": "Texture Maps",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Specular Mask",
                 "group": "Texture Maps",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Specular MatCap",
                 "group": "Texture Maps",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "AO Texture",
                 "group": "Texture Maps",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Opacity Texture",
                 "group": "Texture Maps",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "AO Intensity",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normal Map Intensity",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Repeat X",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Repeat Y",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset X",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset Y",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "Double Sided",
+                "group": "Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Screen Space Normals",
-                "group": "Texture Transforms",
+                "group": "Normals",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Calc normal tangents",
-                "group": "Texture Transforms",
+                "group": "Normals",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity TexCoords Transform",
                 "group": "Texture Opacity",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Discard Transparent Pixels",
                 "group": "Texture Opacity",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Alpha Mask Source index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "group": "Texture Opacity",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader"
             }
         ]
@@ -276,5 +290,6 @@
             }
         ]
     },
-    "exampleProjectId": "gWkghi"
+    "exampleProjectId": "gWkghi",
+    "license": "MIT"
 }

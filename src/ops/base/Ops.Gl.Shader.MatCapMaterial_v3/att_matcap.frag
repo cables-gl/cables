@@ -63,15 +63,23 @@ void main()
 {
     vec3 viewSpaceNormal = normalize(transformedNormal);
 
+
+
     #ifdef HAS_TEXTURES
         vec2 texCoords = texCoord;
         {{MODULE_BEGIN_FRAG}}
     #endif
 
 
+
+    #ifdef DOUBLE_SIDED
+        if(!gl_FrontFacing) viewSpaceNormal *= -1.0;
+    #endif
+
     #ifdef CALC_SSNORMALS
         viewSpaceNormal = CalculateScreenSpaceNormals();
     #endif
+
 
 
    #ifdef HAS_NORMAL_TEXTURE

@@ -19,6 +19,7 @@ const
     repeatY = op.inValue("Repeat Y", 1),
     offsetX = op.inValue("Offset X", 0),
     offsetY = op.inValue("Offset Y", 0),
+    inDoubleSided = op.inValueBool("Double Sided"),
     ssNormals = op.inValueBool("Screen Space Normals"),
     calcTangents = op.inValueBool("Calc normal tangents", true),
     texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false),
@@ -32,8 +33,9 @@ r.setUiAttribs({ "colorPick": true });
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
+op.setPortGroup("Normals", [calcTangents, ssNormals, inDoubleSided]);
 op.setPortGroup("Texture Opacity", [alphaMaskSource, texCoordAlpha, discardTransPxl]);
-op.setPortGroup("Texture Transforms", [aoIntensity, normalMapIntensity, repeatX, repeatY, offsetX, offsetY, calcTangents, ssNormals]);
+op.setPortGroup("Texture Transforms", [aoIntensity, normalMapIntensity, repeatX, repeatY, offsetX, offsetY]);
 op.setPortGroup("Texture Maps", [textureDiffuse, textureNormal, textureSpec, textureSpecMatCap, textureAo, textureOpacity]);
 op.setPortGroup("Color", [r, g, b, pOpacity]);
 
@@ -57,11 +59,14 @@ const repeatUniform = new CGL.Uniform(shader, "2f", "texRepeat", repeatX, repeat
 const aoIntensityUniform = new CGL.Uniform(shader, "f", "aoIntensity", aoIntensity);
 const colorUniform = new CGL.Uniform(shader, "4f", "inColor", r, g, b, pOpacity);
 
+inDoubleSided.onChange =
 calcTangents.onChange = updateDefines;
 updateDefines();
 
 function updateDefines()
 {
+    shader.toggleDefine("DOUBLE_SIDED", inDoubleSided.get());
+
     if (calcTangents.get()) shader.define("CALC_TANGENT");
     else shader.removeDefine("CALC_TANGENT");
 }

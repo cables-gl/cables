@@ -1,6 +1,6 @@
 const
     code = op.inStringEditor("css code"),
-    nest = op.inString("Nesting Parent", ".cablesContainer"),
+    nest = op.inString("Nesting Parent", ""),
     inActive = op.inBool("Active", true);
 
 code.setUiAttribs(
