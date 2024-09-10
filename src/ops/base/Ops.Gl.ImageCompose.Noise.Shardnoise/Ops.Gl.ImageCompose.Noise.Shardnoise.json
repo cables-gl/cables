@@ -77,18 +77,12 @@
             }
         ]
     },
-    "summary": "white noise pixel effect",
     "authorName": "pandur",
     "id": "b4ee2d01-4ec3-4152-827e-0ec9ddbb9ec2",
     "created": 1724937693021,
     "docs": {
         "ports": []
     },
-    "issues": "",
-    "collections": [
-        "random",
-        "generator"
-    ],
     "credits": [
         {
             "title": "Gabor Noise",
@@ -103,7 +97,6 @@
             "licence": "MIT"
         }
     ],
-    "relatedops": null,
     "changelog": [
         {
             "message": "op created",

@@ -4,37 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1596026344766
-        },
-        {
-            "message": " added core lib: cgl_cubemap",
-            "author": "pandur",
-            "date": 1598600225918
-        },
-        {
-            "message": " added core lib: cgl_cubemapframebuffer",
-            "author": "pandur",
-            "date": 1598600387799
-        },
-        {
-            "message": " added lib: cannon.js",
-            "author": "pandur",
-            "date": 1598600418875
-        },
-        {
-            "message": "Ops.User.pandur.errortestop renamed to Ops.Admin.UiTestOp",
-            "author": "pandur",
-            "date": 1606753546773
-        },
-        {
-            "message": "Ops.Admin.UiTestOp renamed to Ops.Dev.UiTestOp",
-            "author": "pandur",
-            "date": 1623913439032
-        },
-        {
-            "message": "Ops.Dev.UiTestOp renamed to Ops.Templates.UiTestOp",
-            "author": "pandur",
-            "date": 1623914708576
+            "date": 1596026344766,
+            "type": "new"
         }
     ],
     "authorName": "pandur",

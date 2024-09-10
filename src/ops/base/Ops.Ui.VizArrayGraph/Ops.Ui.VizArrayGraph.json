@@ -22,7 +22,10 @@
                 "name": "Curve",
                 "subType": "boolean"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "summary": "Visualize Arraty as line graph",
+    "docs": {
+        "ports": []
     }
 }
