@@ -110,17 +110,14 @@
         {
             "message": "added vertex color support",
             "author": "pandur",
-            "date": 1561042923889
+            "date": 1561042923889,
+            "type": "feature"
         },
         {
-            "message": "Ops.Gl.Meshes.PointCloudFromArray renamed to Ops.Dev.Gl.Meshes.PointCloudFromArray",
+            "message": "New Version v2: An array with the length of 0 will now draw nothing. (was: was still drawing the last valid pointcloud)",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1628066492278
-        },
-        {
-            "message": "Ops.Dev.Gl.Meshes.PointCloudFromArray renamed to Ops.Gl.Meshes.PointCloudFromArray",
-            "author": "pandur",
-            "date": 1628232921767
+            "date": 1726143208685
         }
     ],
     "license": "MIT"

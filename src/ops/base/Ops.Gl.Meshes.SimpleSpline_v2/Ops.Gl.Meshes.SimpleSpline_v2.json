@@ -96,7 +96,7 @@
             "type": "feature"
         },
         {
-            "message": "An array with the length of 0 will now draw nothing. (was: was still drawing the last valid spline)",
+            "message": "New Version v2: An array with the length of 0 will now draw nothing. (was: was still drawing the last valid spline)",
             "type": "bugfix",
             "author": "pandur",
             "date": 1726142752975
