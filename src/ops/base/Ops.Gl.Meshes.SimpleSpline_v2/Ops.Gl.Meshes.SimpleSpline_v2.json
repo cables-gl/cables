@@ -1,0 +1,106 @@
+{
+    "summary": "Draws a simple spline only one pixel wide",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 0,
+                "name": "Num Points",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Line Strip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "TexCoords index",
+                "values": [
+                    "0",
+                    "0-1",
+                    "Random",
+                    "Fill"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 3,
+                "name": "TexCoords Array"
+            },
+            {
+                "type": 3,
+                "name": "Vertex Colors"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "b9cca0c1-17ac-466a-96ed-bb3916433e6f",
+    "created": 1726142499574,
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Points",
+                "text": "Array in - needs to be in xyzxyzxyz format"
+            },
+            {
+                "name": "Num Points",
+                "text": "Amount of points to render - useful for drawing out lines "
+            },
+            {
+                "name": "Line Strip",
+                "text": "Changes rendering method to linestrip"
+            },
+            {
+                "name": "TexCoords",
+                "text": "Texture co-ordinates mode"
+            },
+            {
+                "name": "Geometry",
+                "text": "Geometry object out"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "issues": "",
+    "changelog": [
+        {
+            "message": "added \"vertex color array\" input",
+            "author": "pandur",
+            "date": 1643616635049,
+            "type": "feature"
+        },
+        {
+            "message": "An array with the length of 0 will now draw nothing. (was: was still drawing the last valid spline)",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1726142752975
+        }
+    ],
+    "license": "MIT"
+}
