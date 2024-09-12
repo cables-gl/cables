@@ -4,17 +4,14 @@
         {
             "message": "created op",
             "author": "tim",
-            "date": 1582126210630
+            "date": 1582126210630,
+            "type": "new"
         },
         {
-            "message": "cloned op from Ops.Html.QuerySelector_v2",
-            "author": "stephan",
-            "date": 1637067837289
-        },
-        {
-            "message": "Ops.User.stephan.QuerySelectorAll renamed to Ops.Html.QuerySelectorAll",
-            "author": "stephan",
-            "date": 1637339433540
+            "message": "Catch errors and show them to the user",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1726147345494
         }
     ],
     "authorName": "stephan",
@@ -53,7 +50,6 @@
     },
     "summary": "Selects all matching elements in the DOM",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -63,5 +59,6 @@
             }
         ]
     },
-    "exampleProjectId": "HPRqIR"
+    "exampleProjectId": "HPRqIR",
+    "license": "MIT"
 }
