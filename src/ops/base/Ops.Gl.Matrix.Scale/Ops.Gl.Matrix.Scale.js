@@ -19,7 +19,7 @@ scaleChanged();
 
 render.onTriggered = function ()
 {
-    const cgl = op.patch.cgl;
+    const cgl = op.patch.cg || op.patch.cgl;
     cgl.pushModelMatrix();
     mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
     trigger.trigger();

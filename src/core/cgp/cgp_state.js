@@ -120,11 +120,6 @@ class WebGpuContext extends CGState
         return new CGP.Mesh(this, geom, glPrimitive);
     }
 
-    getShader()
-    {
-        return {};
-    }
-
     /**
      * push a shader to the shader stack
      * @function pushShader

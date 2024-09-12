@@ -147,6 +147,9 @@ export default class Mesh
 
         // this.setPipeline();
 
+
+
+
         const shader = this._cgp.getShader();
         if (shader)shader.bind();
 
@@ -155,10 +158,13 @@ export default class Mesh
             return;
         }
 
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh.render");
+
         this._pipe.setPipeline(this._cgp.getShader(), this);
 
         if (!this._pipe.isValid)
         {
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
             return;
         }
 
@@ -175,6 +181,8 @@ export default class Mesh
             this._cgp.passEncoder.draw(this._numIndices);
         else
             this._cgp.passEncoder.drawIndexed(this._numIndices);
+
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
         // if (shader)shader.unbind();
     }

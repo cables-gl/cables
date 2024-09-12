@@ -53,8 +53,9 @@ function updateUi()
 
 function getWidth(layer, d)
 {
+    d = Math.max(0.01, d);
     // if (d < 0.2) d = 0.004;
-    return layer.width * (d / totalDur);
+    return Math.max(layer.width * (0.01 / totalDur), layer.width * (d / totalDur));
 }
 
 inUpdate.onTriggered = () =>
@@ -101,12 +102,12 @@ function drawBranch(ctx, layer, b, level, posx)
         layer.x + posx, posy + layer.y,
         getWidth(layer, b.dur), rowHeight);
 
-    let fontSize = 18;
+    let fontSize = 22;
     ctx.fillStyle = "#222";
     ctx.font = "normal " + fontSize + "px sourceCodePro";
 
     let durs = "(" + Math.round(b.dur * 100) / 100 + "ms)";
-    if (b.dur < 0.2)durs = "";
+    // if (b.dur < 0.2)durs = "";
     ctx.fillText(b.name + durs, layer.x + posx, layer.y + posy + fontSize);
 
     let xadd = 0;

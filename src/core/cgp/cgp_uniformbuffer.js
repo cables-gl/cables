@@ -21,8 +21,7 @@ export default class UniformBuffer
         {
             const uni = this._shader.uniforms[i];
 
-            if (this._shaderType == uni.shaderType)
-                this._sizeBytes += uni.getSizeBytes();
+            if (this._shaderType == uni.shaderType) this._sizeBytes += uni.getSizeBytes();
         }
 
         this._gpuBuffer = this._cgp.device.createBuffer(

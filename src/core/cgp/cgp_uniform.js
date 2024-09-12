@@ -42,6 +42,23 @@ export default class Uniform extends CgUniform
         this._value = v;
     }
 
+    setValueT(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
+
+
+    setValueAny(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
+
+    updateValueAny() {}
+
+    updateValueT() {}
+
     getSizeBytes()
     {
         if (this._type == "f") return 1 * 4;
@@ -52,7 +69,8 @@ export default class Uniform extends CgUniform
         if (this._type == "4f") return 4 * 4;
         if (this._type == "m4") return 4 * 4 * 4;
 
-        this._log.warn("unknown type getSizeBytes");
+        // this._log.warn("unknown type getSizeBytes");
+        return 4;
         // if (this._type == "t") return "sampler2D";
         // if (this._type == "tc") return "samplerCube";
         // if (this._type == "b") return "bool";

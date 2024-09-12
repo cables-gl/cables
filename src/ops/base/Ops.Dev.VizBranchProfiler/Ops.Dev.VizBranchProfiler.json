@@ -23,6 +23,11 @@
             {
                 "type": 0,
                 "name": "Render index",
+                "values": [
+                    "Patch",
+                    "Canvas",
+                    "Both"
+                ],
                 "subType": "integer"
             },
             {
@@ -54,5 +59,6 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }

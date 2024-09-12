@@ -56,7 +56,7 @@ export default class GpuCompute
         passEncoder.setBindGroup(0, bindGroup);
         // const workgroupCountX = Math.ceil(firstMatrix[0] / 8);
         // const workgroupCountY = Math.ceil(secondMatrix[1] / 8);
-        passEncoder.dispatchWorkgroups(22, 1);
+        passEncoder.dispatchWorkgroups(64, 1);
         passEncoder.end();
 
         // Get a GPU buffer for reading in an unmapped state.
@@ -80,10 +80,10 @@ export default class GpuCompute
 
 
         // Read buffer.
-        // gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
-        // {
-        //     const arrayBuffer = gpuReadBuffer.getMappedRange();
-        //     console.log(new Float32Array(arrayBuffer));
-        // });
+        gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
+        {
+            const arrayBuffer = gpuReadBuffer.getMappedRange();
+            console.log(new Float32Array(arrayBuffer));
+        });
     }
 }

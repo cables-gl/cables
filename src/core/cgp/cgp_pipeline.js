@@ -39,6 +39,8 @@ export default class Pipeline
             return;
         }
 
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("setPipeline");
+
         let needsRebuild =
             !this._renderPipeline ||
             !this._pipeCfg ||
@@ -71,19 +73,26 @@ export default class Pipeline
             }
 
 
-            if (this._cgp.stateCullFace() === false)
-            {
-                if (this._pipeCfg.primitive.cullMode != "none")
-                {
-                    needsRebuild = true;
-                    this._pipeCfg.primitive.cullMode = "none";
-                }
-            }
-            else
+            // if (this._cgp.stateCullFace() === false)
+            // {
+            //     if (this._pipeCfg.primitive.cullMode != "none")
+            //     {
+            //         needsRebuild = true;
+            //         this._pipeCfg.primitive.cullMode = "none";
+            //     }
+            // }
+            // else
+            // {
+            //     // needsRebuild = true;
+            //     this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
+            // }
+            if (this._pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
             {
                 needsRebuild = true;
                 this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
             }
+            // console.log(this._cgp.stateCullFaceFacing());
+            // this._pipeCfg.primitive.cullMode = "back";
         }
 
         if (needsRebuild)
@@ -92,7 +101,7 @@ export default class Pipeline
 
             this._old.shader = shader;
             this._old.mesh = mesh;
-
+            // console.log("rebuild pipeline");
 
             // try
             // {
@@ -102,15 +111,30 @@ export default class Pipeline
             // {
             //     console.error(e.message);
             // }
-
-            this._bindUniforms(shader);
         }
+        this._bindUniforms(shader);
 
         if (this._renderPipeline && this._isValid)
         {
             mat4.copy(this._matModel, this._cgp.mMatrix);
             mat4.copy(this._matView, this._cgp.vMatrix);
             mat4.copy(this._matProj, this._cgp.pMatrix);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
+
 
             this._cgp.device.queue.writeBuffer(
                 this._vsUniformBuffer,
@@ -121,9 +145,13 @@ export default class Pipeline
             );
 
             this._uniBufFrag.updateUniformValues();
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
             this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+
             // this._pipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
         }
     }
@@ -177,7 +205,7 @@ export default class Pipeline
                 // "triangle-strip"
             },
             "depthStencil": {
-                "depthWriteEnabled": true,
+                "depthWriteEnabled": false,
                 "depthCompare": "less",
                 "format": "depth24plus",
             },
@@ -202,8 +230,6 @@ export default class Pipeline
         //     const uni = shader.uniforms[i];
         //     const type = uni.shaderType;
         //     counts[type] = counts[type] || 0;
-
-
         //     counts[type] += uni.getSizeBytes();
         // }
         // console.log(counts, counts.frag);
@@ -221,7 +247,6 @@ export default class Pipeline
         //     "size": fUniformBufferSize,
         //     "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
         // });
-
         // this._fsUniformValues = new Float32Array(counts.frag / 4);
 
         this._vsUniformValues = new Float32Array(vUniformBufferSize / 4);
@@ -234,7 +259,6 @@ export default class Pipeline
         // this._fsUniformValues[1] = 1.0;
         // this._fsUniformValues[0] = 1.0;
         // const lightDirection = this._fsUniformValues.subarray(0, 3);
-
         // console.log("pipeline bindgrouplayout ", pipeline.getBindGroupLayout(0));
 
         this._bindGroup = this._cgp.device.createBindGroup(
@@ -242,9 +266,9 @@ export default class Pipeline
                 "layout": this._renderPipeline.getBindGroupLayout(0),
                 "entries": [
                     { "binding": 0, "resource": { "buffer": this._vsUniformBuffer } },
-                    { "binding": 1, "resource": { "buffer": this._uniBufFrag._gpuBuffer } }
-                    //   { binding: 2, resource: sampler },
-                    //   { binding: 3, resource: tex.createView() },
+                    { "binding": 1, "resource": { "buffer": this._uniBufFrag._gpuBuffer } },
+                    // { "binding": 2, "resource": sampler },
+                    // { "binding": 3, "resource": tex.createView() },
                 ],
             });
 

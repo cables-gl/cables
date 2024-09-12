@@ -9,6 +9,7 @@ class CGState extends Events
     constructor(_patch)
     {
         super();
+        this.frameStore = this.frameStore || {};
         // this.canvas = null;
 
         this.fpsCounter = new CABLES.CG.FpsCounter();
@@ -301,6 +302,11 @@ class CGState extends Events
         this.aborted = true;
         if (this.cgCanvas) this.cgCanvas.dispose();
         if (this._dispose) this._dispose();
+    }
+
+    shouldDrawHelpers()
+    {
+        return false;
     }
 }
 
