@@ -38,7 +38,8 @@ function update()
         }
         catch (e)
         {
-            op.setUiError("exc", e.message);
+            op.setUiError("exc", e.message, 1);
+            op.logWarn(e);
         }
     }
     else
@@ -50,7 +51,8 @@ function update()
         }
         catch (e)
         {
-            op.setUiError("exc", e.message);
+            op.setUiError("exc", e.message, 1);
+            op.logWarn(e);
         }
     }
 }
