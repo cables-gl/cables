@@ -106,6 +106,9 @@ export default class Pipeline
             // try
             // {
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
+
+
+            this._cgp.currentPipe = this._pipeCfg;
             // }
             // catch (e)
             // {
@@ -119,17 +122,6 @@ export default class Pipeline
             mat4.copy(this._matModel, this._cgp.mMatrix);
             mat4.copy(this._matView, this._cgp.vMatrix);
             mat4.copy(this._matProj, this._cgp.pMatrix);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -205,7 +197,7 @@ export default class Pipeline
                 // "triangle-strip"
             },
             "depthStencil": {
-                "depthWriteEnabled": false,
+                "depthWriteEnabled": true,
                 "depthCompare": "less",
                 "format": "depth24plus",
             },

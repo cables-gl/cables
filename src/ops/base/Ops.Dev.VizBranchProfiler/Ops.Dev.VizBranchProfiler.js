@@ -53,9 +53,11 @@ function updateUi()
 
 function getWidth(layer, d)
 {
-    d = Math.max(0.01, d);
+    // d = Math.max(0.01, d);
     // if (d < 0.2) d = 0.004;
-    return Math.max(layer.width * (0.01 / totalDur), layer.width * (d / totalDur));
+    // return Math.max(layer.width * (0.01 / totalDur), layer.width * (d / totalDur));
+    // return layer.width * (d / totalDur);
+    return layer.width * (d /totalDur);
 }
 
 inUpdate.onTriggered = () =>
@@ -87,7 +89,7 @@ function clear(ctx, layer)
         layer.width, layer.height);
 }
 
-function drawBranch(ctx, layer, b, level, posx)
+function drawBranch(ctx, layer, b, level, posx,branchDur)
 {
     if (!b) return;
 
@@ -106,11 +108,23 @@ function drawBranch(ctx, layer, b, level, posx)
     ctx.fillStyle = "#222";
     ctx.font = "normal " + fontSize + "px sourceCodePro";
 
-    let durs = "(" + Math.round(b.dur * 100) / 100 + "ms)";
+    let durs = Math.round(b.dur*100)/100 + "ms";
+
+    let nBranchDur=0;
+    for (let i = 0; i < b.childs.length; i++)
+        nBranchDur+=b.childs[i].dur;
+
+
+let padd=5;
+    // let durs = "(" + Math.round(b.dur * 100) / 100 + "ms)";
     // if (b.dur < 0.2)durs = "";
-    ctx.fillText(b.name + durs, layer.x + posx, layer.y + posy + fontSize);
+    ctx.fillText(b.name , layer.x + posx+padd, layer.y + posy + fontSize+padd);
+    ctx.fillText(durs, layer.x + posx+padd, layer.y + posy + fontSize+fontSize*1.2+padd);
+    if(nBranchDur)ctx.fillText("child durs "+Math.round(nBranchDur/b.dur*100)+"%", layer.x + posx+padd, layer.y + posy + fontSize+fontSize+fontSize*1.2+padd);
 
     let xadd = 0;
+
+
     for (let i = 0; i < b.childs.length; i++)
     {
         drawBranch(ctx, layer, b.childs[i], level + 1, posx + xadd);
