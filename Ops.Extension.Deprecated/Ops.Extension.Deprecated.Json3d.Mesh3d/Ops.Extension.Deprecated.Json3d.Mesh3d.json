@@ -151,5 +151,8 @@
         ]
     },
     "exampleProjectId": "kR7_jG",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl_deprecatedjson3d"
+    ]
 }

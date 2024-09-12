@@ -77,5 +77,8 @@
         }
     ],
     "issues": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl_deprecatedjson3d"
+    ]
 }
