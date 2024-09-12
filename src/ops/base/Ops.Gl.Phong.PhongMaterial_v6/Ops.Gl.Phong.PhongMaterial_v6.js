@@ -587,7 +587,7 @@ function updateDefines()
     shader.toggleDefine("ENV_BLEND_MUL", inEnvMapBlend.get() == "Multiply");
     shader.toggleDefine("ENV_BLEND_MIX", inEnvMapBlend.get() == "Mix");
 
-    shader.toggleDefine("ALPHA_MASK_ALPHA", alphaMaskSource.get() == "Alpha Channel");
+    shader.toggleDefine("ALPHA_MASK_ALPHA", alphaMaskSource.get() == "A" || alphaMaskSource.get() == "Alpha");
     shader.toggleDefine("ALPHA_MASK_LUMI", alphaMaskSource.get() == "Luminance");
     shader.toggleDefine("ALPHA_MASK_R", alphaMaskSource.get() == "R");
     shader.toggleDefine("ALPHA_MASK_G", alphaMaskSource.get() == "G");

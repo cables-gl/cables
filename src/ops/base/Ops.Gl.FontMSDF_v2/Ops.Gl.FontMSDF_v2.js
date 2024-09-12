@@ -29,7 +29,7 @@ urlData.onChange =
     urlTex.onChange =
     urlTex1.onChange =
     urlTex2.onChange =
-    urlTex3.onChange = load;
+    urlTex3.onChange = loadLater;
 
 const textures = [];
 
@@ -48,9 +48,14 @@ op.onFileChanged = function (fn)
         (urlTex2.get() && urlTex2.get().indexOf(fn) > -1) ||
         (urlTex3.get() && urlTex3.get().indexOf(fn) > -1))
     {
-        load();
+        loadLater();
     }
 };
+
+function loadLater()
+{
+    cgl.addNextFrameOnceCallback(load);
+}
 
 let oldUUID = "";
 
