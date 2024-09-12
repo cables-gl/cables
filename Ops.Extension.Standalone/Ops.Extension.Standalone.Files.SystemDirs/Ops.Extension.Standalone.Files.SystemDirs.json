@@ -1,5 +1,4 @@
 {
-    "shortName": "SystemDirs",
     "id": "699023ff-8297-441d-ab21-5234d904ed0d",
     "layout": {
         "portsOut": [
@@ -25,17 +24,9 @@
             }
         ]
     },
-    "hasScreenshot": false,
     "authorName": "pandur",
     "license": "MIT",
-    "hasExample": false,
-    "namespace": "Ops.Standalone.Files",
-    "nameNoVersion": "Ops.Standalone.Files.SystemDirs",
-    "shortNameDisplay": "SystemDirs",
-    "version": 0,
     "created": 1724316833337,
-    "hasPublicRepo": true,
-    "hidden": false,
     "changelog": [
         {
             "message": "op created",
@@ -50,18 +41,6 @@
             "date": 1724855098710
         }
     ],
-    "oldVersion": false,
-    "versions": [
-        {
-            "name": "Ops.Standalone.Files.SystemDirs",
-            "versionString": "",
-            "version": 0
-        }
-    ],
-    "newestVersion": {
-        "name": "Ops.Standalone.Files.SystemDirs",
-        "version": 0
-    },
     "coreLibs": [
         "standalone_electron"
     ],

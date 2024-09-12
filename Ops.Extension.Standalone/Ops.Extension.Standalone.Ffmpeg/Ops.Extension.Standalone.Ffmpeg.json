@@ -1,5 +1,4 @@
 {
-    "shortName": "Ffmpeg",
     "id": "51980908-29d2-4b4c-aebe-6d1c80aaeab8",
     "layout": {
         "portsIn": [
@@ -88,17 +87,9 @@
             }
         ]
     },
-    "hasScreenshot": false,
     "authorName": "pandur",
     "license": "MIT",
-    "hasExample": false,
-    "namespace": "Ops.Standalone",
-    "nameNoVersion": "Ops.Standalone.Ffmpeg",
-    "shortNameDisplay": "Ffmpeg",
-    "version": 0,
     "created": 1724414611848,
-    "hasPublicRepo": true,
-    "hidden": false,
     "changelog": [
         {
             "message": "op created",
@@ -107,17 +98,6 @@
             "date": 1724414611849
         }
     ],
-    "oldVersion": false,
-    "versions": [
-        {
-            "name": "Ops.Standalone.Ffmpeg",
-            "version": 0
-        }
-    ],
-    "newestVersion": {
-        "name": "Ops.Standalone.Ffmpeg",
-        "version": 0
-    },
     "dependencies": [
         {
             "name": "fluent-ffmpeg",

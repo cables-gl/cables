@@ -1,5 +1,4 @@
 {
-    "shortName": "Osc",
     "id": "d07144df-fd41-4341-9a83-c5d33c4cc55e",
     "layout": {
         "portsIn": [
@@ -28,17 +27,9 @@
             }
         ]
     },
-    "hasScreenshot": false,
     "authorName": "pandur",
     "license": "MIT",
-    "hasExample": false,
-    "namespace": "Ops.Standalone.Net",
-    "nameNoVersion": "Ops.Standalone.Net.Osc",
-    "shortNameDisplay": "Osc",
-    "version": 0,
     "created": 1724247727466,
-    "hasPublicRepo": true,
-    "hidden": false,
     "changelog": [
         {
             "message": "op created",
@@ -47,17 +38,6 @@
             "date": 1724247727467
         }
     ],
-    "oldVersion": false,
-    "versions": [
-        {
-            "name": "Ops.Standalone.Net.Osc",
-            "version": 0
-        }
-    ],
-    "newestVersion": {
-        "name": "Ops.Standalone.Net.Osc",
-        "version": 0
-    },
     "dependencies": [
         {
             "name": "osc",
