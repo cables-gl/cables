@@ -1,3 +1,4 @@
+import { Logger } from "cables-shared-client";
 import { CG } from "../cg/cg_constants.js";
 import { CGState } from "../cg/cg_state.js";
 import Shader from "./cgp_shader.js";
@@ -23,6 +24,9 @@ class WebGpuContext extends CGState
 
         this.patch = _patch;
 
+        this.lastErrorMsg = "";
+
+        this._log = new Logger("WebGpuContext");
         this.gApi = CG.GAPI_WEBGPU;
         this._viewport = [0, 0, 256, 256];
         this._shaderStack = [];
@@ -114,7 +118,6 @@ class WebGpuContext extends CGState
         return this._viewPort;
     }
 
-
     createMesh(geom, glPrimitive)
     {
         return new CGP.Mesh(this, geom, glPrimitive);
@@ -166,10 +169,17 @@ class WebGpuContext extends CGState
         {
             if (error)
             {
-                this.patch.emitEvent("criticalError", { "title": "WebGPU error \"" + name + "\"", "codeText": error.message });
-                // if (this.patch.isEditorMode())console.log("WebGPU error " + this._name, error.message);
+                if (this.lastErrorMsg == error.message)
+                {
+                    this._log.warn("last error once more...");
+                }
+                else
+                {
+                    this._log.error(error.constructor.name, "in", name);
+                    this._log.error(error.message);
+                }
+                this.lastErrorMsg = error.message;
 
-                console.warn("[cgp]", name, error.message, error, cb);
                 if (cb)cb(error);
             }
         });
