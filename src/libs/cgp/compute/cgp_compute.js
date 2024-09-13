@@ -8,7 +8,7 @@ export default class GpuCompute
         this._options = options || {};
         this._options.workGroups = this._options.workGroups || [8, 8];
 
-        this._resultMatrixBufferSize = Float32Array.BYTES_PER_ELEMENT * (9999);
+        this._resultMatrixBufferSize = Float32Array.BYTES_PER_ELEMENT * 300;
         this._resultMatrixBuffer = this._cgp.device.createBuffer({
             "size": this._resultMatrixBufferSize,
             "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
