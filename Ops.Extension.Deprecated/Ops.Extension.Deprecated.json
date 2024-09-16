@@ -2,5 +2,5 @@
     "name": "Ops.Extension.Deprecated.",
     "summary": "",
     "description": "",
-    "visibility": "public"
+    "visibility": "unlisted"
 }
