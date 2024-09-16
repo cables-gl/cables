@@ -3,7 +3,6 @@ const
     inResponse = op.inObject("Response"),
     inBody = op.inString("Body", "");
 
-
 exec.onTriggered = () =>
 {
     const res = inResponse.get();
