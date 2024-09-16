@@ -14,7 +14,10 @@ const
     mouseDown = op.outBoolNum("Button is down"),
     mouseOver = op.outBoolNum("Mouse is hovering"),
     outMovementX = op.outNumber("Movement X", 0),
-    outMovementY = op.outNumber("Movement Y", 0);
+    outMovementY = op.outNumber("Movement Y", 0),
+    outIsPrimary = op.outBoolNum("Is Primary", 0),
+    outEvent = op.outObject("Event"),
+    outMoved = op.outTrigger("Moved");
 
 const cgl = op.patch.cgl;
 let normalize = 1;
@@ -224,6 +227,7 @@ function setCoords(e)
     if (flipY.get()) y = sizeElement.clientHeight - y;
 
     setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
+    outMoved.trigger();
 }
 
 function onmousemove(e)
@@ -231,10 +235,14 @@ function onmousemove(e)
     mouseOver.set(checkHovering(e));
     setCoords(e);
 
+    outIsPrimary.set(e.isPrimary);
+
     outMovementX.set(e.movementX / cgl.pixelDensity);
     outMovementY.set(e.movementY / cgl.pixelDensity);
 
     if (inPreventDefault.get())e.preventDefault();
+
+    outEvent.set(e);
 }
 
 function ontouchmove(e)

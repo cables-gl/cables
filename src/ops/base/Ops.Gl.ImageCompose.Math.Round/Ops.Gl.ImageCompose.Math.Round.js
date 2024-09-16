@@ -17,6 +17,7 @@ const
     mulUniform = new CGL.Uniform(shader, "f", "mul", mul);
 
 inChan.onChange = updateDefines;
+updateDefines();
 
 function updateDefines()
 {

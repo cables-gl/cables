@@ -28,6 +28,9 @@ label.classList.add("sidebar__item-label");
 label.appendChild(labelText);
 
 const icon = document.createElement("div");
+
+valuePort.set(defaultValuePort.get());
+
 icon.classList.add("icon_toggle");
 icon.addEventListener("click", onInputClick);
 
@@ -40,7 +43,11 @@ el.appendChild(icon);
 el.appendChild(label);
 el.addEventListener("dblclick", reset);
 
-op.init = reset;
+op.init = () =>
+{
+    reset();
+    updateClass();
+};
 op.onDelete = onDelete;
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
@@ -64,14 +71,9 @@ function storeDefaultValue()
     op.refreshParams();
 }
 
-function onInputClick()
+function updateClass()
 {
-    el.classList.toggle(classNameActive);
-
-    const isActive = el.classList.contains(classNameActive);
-    valuePort.set(isActive);
-    inputValue.set(isActive);
-
+    const isActive = valuePort.get();
     if (isActive)
     {
         icon.classList.add("icon_toggle_true");
@@ -82,6 +84,17 @@ function onInputClick()
         icon.classList.remove("icon_toggle_true");
         icon.classList.add("icon_toggle_false");
     }
+}
+
+function onInputClick()
+{
+    el.classList.toggle(classNameActive);
+
+    const isActive = el.classList.contains(classNameActive);
+    valuePort.set(isActive);
+    inputValue.set(isActive);
+
+    updateClass();
     outToggled.trigger();
     op.refreshParams();
 }

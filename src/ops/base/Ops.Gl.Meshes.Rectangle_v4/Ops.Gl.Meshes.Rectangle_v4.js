@@ -15,7 +15,7 @@ const
 
 geomOut.ignoreValueSerialize = true;
 
-const cgl = op.patch.cgl;
+// const cgl = op.patch.cg || op.patch.cgl;
 const geom = new CGL.Geometry("rectangle");
 
 doRender.setUiAttribs({ "title": "Render" });

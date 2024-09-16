@@ -1,7 +1,6 @@
 // import { vec2, vec3 } from "gl-matrix";
 import { Logger } from "cables-shared-client";
 import { UTILS } from "../utils.js";
-import { b64decTypedArray } from "../base64.js";
 import { BoundingBox } from "./cg_boundingbox.js";
 
 /**
@@ -267,8 +266,6 @@ Geometry.prototype.setTexCoords = function (arr)
 Geometry.prototype.calcNormals = function (smooth)
 {
     const options = { "smooth": smooth };
-
-
     this.calculateNormals(options);
 };
 
@@ -931,43 +928,6 @@ Geometry.buildFromFaces = function (arr, name, optimize)
     geom.name = name;
     geom.vertices = vertices;
     geom.verticesIndices = verticesIndices;
-
-    return geom;
-};
-
-// TODO: not needed anymore ?! move to deprecated ops?
-Geometry.json2geom = function (jsonMesh)
-{
-    const geom = new Geometry("jsonMeshGeom");
-    geom.verticesIndices = [];
-
-    geom.vertices = jsonMesh.vertices || [];
-    geom.vertexNormals = jsonMesh.normals || [];
-    geom.vertexColors = jsonMesh.colors || [];
-    geom.tangents = jsonMesh.tangents || [];
-    geom.biTangents = jsonMesh.bitangents || [];
-    if (jsonMesh.texturecoords) geom.setTexCoords(jsonMesh.texturecoords[0]);
-
-    if (jsonMesh.vertices_b64)geom.vertices = new Float32Array(b64decTypedArray(jsonMesh.vertices_b64));
-    if (jsonMesh.normals_b64) geom.vertexNormals = new Float32Array(b64decTypedArray(jsonMesh.normals_b64));
-    if (jsonMesh.tangents_b64) geom.tangents = new Float32Array(b64decTypedArray(jsonMesh.tangents_b64));
-    if (jsonMesh.bitangents_b64) geom.biTangents = new Float32Array(b64decTypedArray(jsonMesh.bitangents_b64));
-    if (jsonMesh.texturecoords_b64) geom.setTexCoords(new Float32Array(b64decTypedArray(jsonMesh.texturecoords_b64[0])));
-
-    if (jsonMesh.faces_b64)
-    {
-        geom.verticesIndices = new Uint32Array(b64decTypedArray(jsonMesh.faces_b64));
-    }
-    else
-    {
-        geom.verticesIndices.length = jsonMesh.faces.length * 3;
-        for (let i = 0; i < jsonMesh.faces.length; i++)
-        {
-            geom.verticesIndices[i * 3] = jsonMesh.faces[i][0];
-            geom.verticesIndices[i * 3 + 1] = jsonMesh.faces[i][1];
-            geom.verticesIndices[i * 3 + 2] = jsonMesh.faces[i][2];
-        }
-    }
 
     return geom;
 };

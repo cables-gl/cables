@@ -31,5 +31,9 @@
                 "name": "Profiler Data"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl_branchprofiler"
+    ],
+    "license": "MIT"
 }

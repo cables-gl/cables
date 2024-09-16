@@ -78,7 +78,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
     if (offset >= dv.byteLength)
     {
-        op.log("could not read chunk...");
+        // op.log("could not read chunk...");
         return;
     }
     chunk.size = dv.getUint32(offset + 0, le);

@@ -22,6 +22,7 @@ inMode.onChange = modeChange;
 
 function update()
 {
+    op.setUiError("exc", null);
     const q = queryPort.get();
     const theDocument = inSource.get();
     const mode = inMode.get();
@@ -37,7 +38,8 @@ function update()
         }
         catch (e)
         {
-            op.logError(e);
+            op.setUiError("exc", e.message, 1);
+            op.logWarn(e);
         }
     }
     else
@@ -49,7 +51,8 @@ function update()
         }
         catch (e)
         {
-            op.logError(e);
+            op.setUiError("exc", e.message, 1);
+            op.logWarn(e);
         }
     }
 }

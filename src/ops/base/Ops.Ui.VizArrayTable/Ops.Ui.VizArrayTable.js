@@ -1,5 +1,6 @@
 const
     inArr = op.inArray("Array"),
+    inStride = op.inInt("Stride", 0),
     inOffset = op.inInt("Start Row", 0);
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
@@ -56,14 +57,17 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.fillStyle = "#ccc";
 
     const arr = inArr.get() || [];
-    let stride = 1;
+    let stride = inStride.get() || 1;
 
     if (inArr.get() === null) op.setUiAttrib({ "extendTitle": "null" });
     else if (inArr.get() === undefined) op.setUiAttrib({ "extendTitle": "undefined" });
     else op.setUiAttrib({ "extendTitle": "length: " + arr.length });
 
     if (inArr.links.length > 0 && inArr.links[0].getOtherPort(inArr))
-        stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || 1;
+        stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || inStride.get() || 1;
+
+    if (arr.length % stride != 0)op.setUiError("stride", "stride does not fit length of array. some values may not be shown", 1);
+    else op.setUiError("stride", null);
 
     let lines = Math.floor(layer.height / layer.scale / 10 - 1);
     let padding = 4;
@@ -113,17 +117,28 @@ op.renderVizLayer = (ctx, layer) =>
 
             if (typeof v == "string")
             {
+                str = v;
             }
             else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
             else if (Array.isArray(v))
             {
+                str = JSON.stringify(v);
             }
             else if (typeof v == "object")
             {
+                try
+                {
+                    str = JSON.stringify(v);
+                }
+                catch (e)
+                {
+                    str = "{object}";
+                }
             }
             else if (v != v || v === undefined)
             {
                 ctx.fillStyle = "#f00";
+                str = "?";
             }
 
             ctx.fillText(str,

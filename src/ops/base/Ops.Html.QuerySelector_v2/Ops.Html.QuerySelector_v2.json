@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "tim",
-            "date": 1582126210630
+            "date": 1582126210630,
+            "type": "new"
+        },
+        {
+            "message": "catch and show errors to the user",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1726147294928
         }
     ],
     "authorName": "tim",
@@ -43,7 +50,6 @@
     },
     "summary": "Selects an element in the DOM",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -57,5 +63,6 @@
             }
         ]
     },
-    "exampleProjectId": "HPRqIR"
+    "exampleProjectId": "HPRqIR",
+    "license": "MIT"
 }

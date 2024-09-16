@@ -36,14 +36,15 @@ op.renderVizLayer = (ctx, layer) =>
     const perf = CABLES.UI.uiProfiler.start("previewlayer graph");
 
     const colors = [
+        "#aaaaaa",
         "#00ffff",
         "#ffff00",
         "#ff00ff",
         "#0000ff",
         "#00ff00",
         "#ff0000",
-        "#ffffff",
-        "#888888",
+        "#ffffff"
+
     ];
 
     ctx.fillStyle = "#222";
@@ -61,10 +62,10 @@ op.renderVizLayer = (ctx, layer) =>
         buff[p].push(newVal);
         if (buff[p].length > 60) buff[p].shift();
 
-        const texSlot = 5;
+        const texSlot = 6;
         const mulX = layer.width / 60;
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 5;
         ctx.strokeStyle = "#555555";
 
         ctx.beginPath();
@@ -80,7 +81,7 @@ op.renderVizLayer = (ctx, layer) =>
         {
             let y = buff[p][i];
 
-            y = CABLES.map(y, min, max, layer.height, 0);
+            y = CABLES.map(y, min, max, layer.height - 3, 3);
             y += layer.y;
             if (i === 0)ctx.moveTo(layer.x, y);
             else ctx.lineTo(layer.x + i * mulX, y);

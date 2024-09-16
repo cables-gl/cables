@@ -186,5 +186,6 @@
             "date": 1707980494934
         }
     ],
-    "exampleProjectId": "SKCL88"
+    "exampleProjectId": "SKCL88",
+    "license": "MIT"
 }

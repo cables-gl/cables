@@ -103,6 +103,19 @@
                 "type": 0,
                 "name": "Movement Y",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Is Primary",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Event"
+            },
+            {
+                "type": 1,
+                "name": "Moved"
             }
         ]
     }

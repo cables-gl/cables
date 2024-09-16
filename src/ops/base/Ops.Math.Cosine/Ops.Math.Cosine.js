@@ -8,6 +8,9 @@ const
 
 let calculate = Math.cos;
 
+mul.onChange =
+amplitude.onChange =
+phase.onChange =
 value.onChange = function ()
 {
     result.set(

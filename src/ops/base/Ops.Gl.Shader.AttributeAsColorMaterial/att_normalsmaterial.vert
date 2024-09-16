@@ -42,7 +42,7 @@ void main()
     outBiTangent=bitangent;
     outPosition= mMatrix * pos;
 
-    {{MODULE_VERTEX_MOVELVIEW}}
+    {{MODULE_VERTEX_MODELVIEW}}
 
     gl_Position = projMatrix*viewMatrix*outPosition;
 }

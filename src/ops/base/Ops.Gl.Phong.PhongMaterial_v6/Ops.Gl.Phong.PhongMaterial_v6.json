@@ -5,221 +5,221 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger In"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "R",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "G",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "B",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "A",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Albedo",
                 "group": "Oren-Nayar Diffuse",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Roughness",
                 "group": "Oren-Nayar Diffuse",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel Intensity",
                 "group": "Fresnel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel Width",
                 "group": "Fresnel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel Exponent",
                 "group": "Fresnel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel R",
                 "group": "Fresnel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel G",
                 "group": "Fresnel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fresnel B",
                 "group": "Fresnel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emissive Active",
                 "group": "Emissive Color",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Color Intensity",
                 "group": "Emissive Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emissive R",
                 "group": "Emissive Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emissive G",
                 "group": "Emissive Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emissive B",
                 "group": "Emissive Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Shininess",
                 "group": "Specular",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Specular Amount",
                 "group": "Specular",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Diffuse Texture",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Specular Texture",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Normal Map",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "AO Texture",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Emissive Texture",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Emissive Mask",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Opacity Texture",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Environment Map",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Env Map Mask",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse Repeat X",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse Repeat Y",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture Offset X",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Texture Offset Y",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Specular Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normal Map Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "AO Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "AO UV Channel index",
                 "values": [
                     "1",
@@ -228,25 +228,25 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emissive Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Emissive Mask Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Env Map Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Env Map Blend index",
                 "values": [
                     "Add",
@@ -257,13 +257,13 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Env Mask Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Alpha Mask Source index",
                 "values": [
                     "Luminance",
@@ -278,11 +278,11 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader",
                 "objType": "shader"
             }
@@ -538,5 +538,6 @@
         ]
     },
     "exampleProjectId": "L3HqYa",
-    "coreLibs": []
+    "coreLibs": [],
+    "license": "MIT"
 }

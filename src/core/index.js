@@ -1,4 +1,3 @@
-import * as base64 from "./base64.js";
 import * as utils from "./utils.js";
 import * as anim from "./anim.js";
 import { Link } from "./core_link.js";
@@ -13,7 +12,6 @@ import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
-import { BranchStack, Branch } from "./banchprofiler.js";
 import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";
@@ -36,12 +34,10 @@ CABLES.Variable = Variable;
 CABLES.LoadingStatus = LoadingStatus;
 CABLES.now = now;
 CABLES.internalNow = internalNow;
-CABLES.BranchStack = BranchStack;
-CABLES.Branch = Branch;
+
 
 
 CABLES = Object.assign(CABLES,
-    base64,
     utils,
     anim,
     CONSTANTS.PORT,

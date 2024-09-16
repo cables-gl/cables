@@ -217,8 +217,6 @@
         }
     ],
     "summary": "Play a video file and use it as a texture",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -234,10 +232,6 @@
                 "text": "Loop file when it reaches the end"
             },
             {
-                "name": "auto play",
-                "text": "Automatically plays when the patch opens"
-            },
-            {
                 "name": "Volume",
                 "text": "Audio volume"
             },
@@ -246,36 +240,16 @@
                 "text": "mute audio"
             },
             {
-                "name": "speed",
-                "text": "Speed of playback"
-            },
-            {
-                "name": "filter index",
-                "text": "Texture filter type - pick with index or dropdown"
-            },
-            {
-                "name": "filter",
-                "text": "Selected texture filter type "
-            },
-            {
-                "name": "wrap index",
-                "text": "Texture wrap type - pick with index or dropdown"
-            },
-            {
-                "name": "wrap",
-                "text": "Selected wrap mode"
-            },
-            {
                 "name": "flip",
                 "text": "Flip the texture"
             },
             {
-                "name": "set time",
-                "text": "Set time to trigger playback from"
+                "name": "speed",
+                "text": "Speed of playback"
             },
             {
-                "name": "rewind",
-                "text": "rewind to start of file"
+                "name": "set time",
+                "text": "Set time to trigger playback from"
             },
             {
                 "name": "Preload",
@@ -303,7 +277,7 @@
             }
         ]
     },
-    "exampleProjectId": "E0hWmi",
+    "exampleProjectId": "RQCm0m",
     "coreLibs": [
         "interactionneededbutton"
     ],

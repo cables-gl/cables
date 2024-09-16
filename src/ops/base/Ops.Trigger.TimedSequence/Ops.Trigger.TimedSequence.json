@@ -177,5 +177,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "GbEqL-"
+    "exampleProjectId": "GbEqL-",
+    "license": "MIT"
 }

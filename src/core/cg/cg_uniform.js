@@ -91,6 +91,14 @@ class CgUniform
             this.set = this.setValue = this.setValueT.bind(this);
             this.updateValue = this.updateValueT.bind(this);
         }
+        else if (__type == "sampler")
+        {
+            if (this.setValueAny)
+            {
+                this.set = this.setValue = this.setValueAny.bind(this);
+                this.updateValue = this.updateValueAny.bind(this);
+            }
+        }
         else if (__type == "tc")
         {
             this.set = this.setValue = this.setValueT.bind(this);
@@ -106,7 +114,11 @@ class CgUniform
             this.set = this.setValue = this.setValueM4.bind(this);
             this.updateValue = this.updateValueM4.bind(this);
         }
-        else throw new Error("Unknown uniform type");
+        else
+        {
+            // console.error("unknown");
+            this._log.error("Unknown uniform type " + __type);
+        }
 
         if (typeof _value == "object" && _value instanceof Port)
         {

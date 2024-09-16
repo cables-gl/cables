@@ -25,7 +25,18 @@
     "authorName": "pandur",
     "created": 1612768566040,
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Default Value index",
+                "values": [
+                    "0",
+                    "Empty String",
+                    "null"
+                ],
+                "subType": "integer"
+            }
+        ],
         "portsOut": [
             {
                 "type": 3,
@@ -42,5 +53,6 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

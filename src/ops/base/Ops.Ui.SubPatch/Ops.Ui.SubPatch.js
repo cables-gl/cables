@@ -382,29 +382,9 @@ op.addSubLink = function (p, p2)
 op.onDelete = function ()
 {
     for (let i = op.patch.ops.length - 1; i >= 0; i--)
-    {
         if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == op.patchId.get())
-        {
             op.patch.deleteOp(op.patch.ops[i].id);
-        }
-    }
 };
-
-// function makeBlueprint()
-// {
-//     let attribs = {
-//         "pasted": true,
-//         "translate": {
-//             "x": op.uiAttribs.translate.x - 150,
-//             "y": op.uiAttribs.translate.y
-//         }
-//     };
-
-//     if (CABLES.UI) attribs.subPatch = gui.patchView.getCurrentSubPatch();
-
-//     const bpOp = op.patch.addOp(CABLES.UI.DEFAULTOPNAMES.blueprint, attribs);
-//     bpOp.createBlueprint(gui.patchId, op.patchId.get(), true);
-// }
 
 op.rebuildListeners = () =>
 {

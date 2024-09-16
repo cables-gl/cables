@@ -182,60 +182,10 @@
     },
     "changelog": [
         {
-            "message": "added webgl2 requirement",
-            "author": "pandur",
-            "date": 1549608962401
-        },
-        {
-            "message": "code cleanup - ports , onChange",
-            "author": "andro",
-            "date": 1559049206585
-        },
-        {
             "message": "cloned op from Ops.Gl.Render2Textures",
             "author": "pandur",
-            "date": 1680014424477
-        },
-        {
-            "message": "Ops.Patch.PncOFEs.Render2Textures renamed to Ops.Dev.Gl.Render2Textures2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1680110539327
-        },
-        {
-            "message": " added core lib: cgl_rendertargets",
-            "type": "",
-            "author": "pandur",
-            "date": 1681236029664
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "type": "",
-            "author": "pandur",
-            "date": 1681236071666
-        },
-        {
-            "message": "Ops.Dev.Gl.Render2Textures2 renamed to Ops.Gl.Render2Textures_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1684505522013
-        },
-        {
-            "message": "cloned op from Ops.Gl.Render2Textures_v2",
-            "author": "pandur",
-            "date": 1687516278323
-        },
-        {
-            "message": "Ops.Patch.P4SCBDz.Render2Textures_v3 renamed to Ops.Gl.Render2Textures_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687527380346
-        },
-        {
-            "message": "Ops.Gl.Render2Textures_v3 renamed to Ops.Gl.RenderToTextures_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1694676274511
+            "date": 1680014424477,
+            "type": "new"
         },
         {
             "message": "Fixed bug: output textures where not updated correctly every frame",

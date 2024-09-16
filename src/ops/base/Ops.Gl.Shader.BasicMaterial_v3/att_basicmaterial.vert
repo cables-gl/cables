@@ -61,7 +61,7 @@ void main()
     #ifndef BILLBOARD
         modelViewMatrix=viewMatrix * mMatrix;
 
-        {{MODULE_VERTEX_MOVELVIEW}}
+        {{MODULE_VERTEX_MODELVIEW}}
 
     #endif
 

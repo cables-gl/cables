@@ -429,6 +429,11 @@ void main()
         internalNormals      = normalize(TBN * internalNormals);
     #else
         vec3 internalNormals = normM;
+
+        #ifdef DOUBLE_SIDED
+            if(!gl_FrontFacing) internalNormals = internalNormals*-1.0;
+        #endif
+
     #endif
 	#ifdef USE_LIGHTMAP
     	#ifndef VERTEX_COLORS

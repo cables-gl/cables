@@ -1,6 +1,5 @@
 {
     "id": "4107c3c2-40ad-4bee-b809-022377bf5601",
-    "changelog": [],
     "layout": {
         "portsIn": [
             {
@@ -24,5 +23,7 @@
     "summary": "push/append an array to an array",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "ADSKWn"
 }

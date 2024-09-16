@@ -40,5 +40,9 @@
     "summary": "debug",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_branchprofiler"
+    ],
+    "license": "MIT"
 }

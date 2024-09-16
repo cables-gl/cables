@@ -51,7 +51,7 @@ const Patch = function (cfg)
             "onFinishedLoading": null,
             "onFirstFrameRendered": null,
             "onPatchLoaded": null,
-            "fpsLimit": 0,
+            "fpsLimit": 0
         };
     this.timer = new Timer();
     this.freeTimer = new Timer();
@@ -251,7 +251,11 @@ Patch.prototype.setVolume = function (v)
  */
 Patch.prototype.getAssetPath = function (patchId = null)
 {
-    if (this.isEditorMode())
+    if (this.config.hasOwnProperty("assetPath"))
+    {
+        return this.config.assetPath;
+    }
+    else if (this.isEditorMode())
     {
         let id = patchId || gui.project()._id;
         return "/assets/" + id + "/";
@@ -261,10 +265,6 @@ Patch.prototype.getAssetPath = function (patchId = null)
         const parts = document.location.pathname.split("/");
         let id = patchId || parts[parts.length - 1];
         return "/assets/" + id + "/";
-    }
-    else if (this.config.hasOwnProperty("assetPath"))
-    {
-        return this.config.assetPath;
     }
     else
     {
@@ -745,7 +745,7 @@ Patch.prototype.serialize = function (options)
     for (const i in this.ops)
     {
         const op = this.ops[i];
-        obj.ops.push(op.getSerialized());
+        if (op && op.getSerialized)obj.ops.push(op.getSerialized());
     }
 
     cleanJson(obj);
@@ -764,7 +764,6 @@ Patch.prototype.getOpsByRefId = function (refId)
     perf.finish();
     return refOps;
 };
-
 
 Patch.prototype.getOpById = function (opid)
 {
@@ -809,14 +808,20 @@ Patch.prototype.loadLib = function (which)
         },
         "GET",
     );
-    // open and send a synchronous request
-    // xhrObj.open('GET', '/ui/libs/'+which+'.js', false);
-    // xhrObj.send('');
-    // add the returned content to a newly created script tag
 };
 
+Patch.prototype.getSubPatchOpsByName = function (patchId, objName)
+{
+    const arr = [];
+    for (const i in this.ops)
+        if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
+            arr.push(this.ops[i]);
 
-Patch.prototype.getSubPatchOp = function (patchId, objName)
+    return arr;
+};
+
+Patch.prototype.getSubPatchOp =
+Patch.prototype.getFirstSubPatchOpByName = function (patchId, objName)
 {
     for (const i in this.ops)
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)

@@ -1,0 +1,136 @@
+{
+    "id": "2c17be7d-2fdd-449f-8dfd-b4f546f0546e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663227442753,
+            "type": "new"
+        },
+        {
+            "message": "Add Resize/Rescale option, resize vertices to new bounding",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706539979306
+        },
+        {
+            "message": "Added \"vertex color\" output option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1707910560031
+        },
+        {
+            "message": "fixed rounding errors with some texture sizes resulting in transparent pixels",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1725386162104
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1725386090956,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Continously Update",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Order index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Content index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Resize index",
+                "values": [
+                    "None",
+                    "Rescale"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "New Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "values": [
+                    "Auto",
+                    "Manual"
+                ],
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Tex Width",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Format index",
+                "group": "Texture settings",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Color Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total Vertices",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "summary": "Convert vertices of a geometry to a data texture",
+    "license": "MIT"
+}

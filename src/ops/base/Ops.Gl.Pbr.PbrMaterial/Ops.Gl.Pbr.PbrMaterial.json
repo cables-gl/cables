@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "amajesticseaflapflap",
-            "date": 1642599258807
+            "date": 1642599258807,
+            "type": "new"
         },
         {
-            "message": "Ops.Dev.PbrMaterial renamed to Ops.Gl.Pbr.PbrMaterial",
+            "message": "Added toggle for double sided, which will flip normals when the face is not front-facing ",
+            "type": "feature",
             "author": "pandur",
-            "date": 1644228803318
+            "date": 1725553568070
         }
     ],
     "layout": {
@@ -196,6 +198,12 @@
             {
                 "type": 0,
                 "name": "Faster heightmapping",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Double Sided",
                 "group": "Advanced Shader Parameters",
                 "subType": "boolean"
             },

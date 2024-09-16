@@ -89,7 +89,7 @@ function rebuild()
         return;
     }
 
-    if (inpoints[0].length)
+    if (inpoints[0] && inpoints[0].length)
     {
         const arr = [];
         splineIndex = [];

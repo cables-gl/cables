@@ -22,7 +22,7 @@ geometry.ignoreValueSerialize = true;
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "colorizeNormals");
 shader.setSource(shader.getDefaultVertexShader(), attachments.colorize_normals_frag);
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 shader.glPrimitive = cgl.gl.LINES;
 
 const inColorUniform = new CGL.Uniform(shader, "4f", "inColor", inR, inG, inB, inA);

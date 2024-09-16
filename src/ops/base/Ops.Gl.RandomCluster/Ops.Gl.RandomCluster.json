@@ -92,8 +92,6 @@
             }
         ]
     },
-
-
     "docs": {
         "ports": [
             {
@@ -106,5 +104,6 @@
     "youtubeids": [
         "DW9U5tv1GHM"
     ],
-    "exampleProjectId": "Ah6Rj6"
+    "exampleProjectId": "Ah6Rj6",
+    "license": "MIT"
 }

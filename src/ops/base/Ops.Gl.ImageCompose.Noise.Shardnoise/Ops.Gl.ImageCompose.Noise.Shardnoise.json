@@ -1,0 +1,115 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "values": [
+                    "Off",
+                    "On"
+                ],
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sharpness",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Round",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Harmonics index",
+                "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "b4ee2d01-4ec3-4152-827e-0ec9ddbb9ec2",
+    "created": 1724937693021,
+    "docs": {
+        "ports": []
+    },
+    "credits": [
+        {
+            "title": "Gabor Noise",
+            "author": "inigo quilez",
+            "url": "https://www.shadertoy.com/view/clGyWm",
+            "licence": "MIT"
+        },
+        {
+            "title": "SHARD NOISE",
+            "author": "ENDESGA",
+            "url": "https://www.shadertoy.com/view/dlKyWw",
+            "licence": "MIT"
+        }
+    ],
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724937693022
+        },
+        {
+            "message": "Ops.Patch.PTMEvPm.Shardnoise renamed to Ops.Gl.ImageCompose.Noise.Shardnoise",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1724939289103
+        }
+    ],
+    "license": "MIT"
+}

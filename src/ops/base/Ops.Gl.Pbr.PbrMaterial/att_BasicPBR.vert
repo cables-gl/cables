@@ -94,7 +94,7 @@ void main()
     normM = N;
 
     mat4 modelViewMatrix=viewMatrix*mMatrix;
-    {{MODULE_VERTEX_MOVELVIEW}}
+    {{MODULE_VERTEX_MODELVIEW}}
 
     gl_Position = projMatrix * modelViewMatrix * pos;
 }

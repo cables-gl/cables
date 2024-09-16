@@ -3,36 +3,36 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Audio In",
                 "objType": "audioNode"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Volume",
                 "group": "Volume Settings",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mute",
                 "group": "Volume Settings",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Show Audio Suspended Button",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Current Volume",
                 "subType": "number"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Context State"
             }
         ]
@@ -76,5 +76,6 @@
     "exampleProjectId": "teZhCp",
     "coreLibs": [
         "interactionneededbutton"
-    ]
+    ],
+    "license": "MIT"
 }

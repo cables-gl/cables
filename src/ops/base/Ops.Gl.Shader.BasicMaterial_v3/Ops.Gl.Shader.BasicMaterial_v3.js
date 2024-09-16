@@ -14,7 +14,7 @@ shader.addAttribute({ "type": "vec2", "name": "attrTexCoord" });
 shader.addAttribute({ "type": "vec3", "name": "attrVertNormal", "nameFrag": "norm" });
 shader.addAttribute({ "type": "float", "name": "attrVertIndex" });
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MOVELVIEW"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 
 shader.setSource(attachments.basicmaterial_vert, attachments.basicmaterial_frag);
 

@@ -145,7 +145,7 @@ function updateStateError()
     if (audioCtx.state == "suspended")
     {
         const errorText = "Your Browser suspended audio context, use playButton op to play audio after a user interaction";
-        let level = 2;
+        let level = 1;
         if (inMute.get()) level = 0;
         op.setUiError("ctxSusp", errorText, level);
     }

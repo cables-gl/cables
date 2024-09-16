@@ -20,7 +20,6 @@ op.setPortGroup("Rotation", [rotX, rotY, rotZ]);
 op.setPortGroup("Parameters", [num, round, seed]);
 op.toWorkPortsNeedToBeLinked(exe, trigger);
 
-const cgl = op.patch.cgl;
 const randoms = [];
 const origRandoms = [];
 const randomsRot = [];
@@ -44,6 +43,8 @@ num.set(100);
 
 function doRender()
 {
+    const cgl = op.patch.cg || op.patch.cgl;
+
     if (cgl.shouldDrawHelpers(op))
     {
         CABLES.GL_MARKER.drawCube(op,

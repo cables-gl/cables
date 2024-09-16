@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1555064309756
+            "date": 1555064309756,
+            "type": "new"
+        },
+        {
+            "message": "Trigger names in dropdown are sorted alphabetically",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725990424430
         }
     ],
     "authorName": "pandur",
@@ -31,5 +38,6 @@
     "youtubeids": [
         "QZqtvPytsKE"
     ],
-    "exampleProjectId": "hrXVpH"
+    "exampleProjectId": "hrXVpH",
+    "license": "MIT"
 }

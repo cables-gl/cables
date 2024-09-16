@@ -8,7 +8,7 @@ const
     inWrap = op.inSwitch("Wrap", ["Mirror", "Clamp", "Repeat"], "Mirror"),
     inInput = op.inValueSelect("Input", ["Luminance", "RedGreen", "Red", "Green", "Blue"], "Luminance"),
     inZero = op.inSwitch("Zero Displace", ["Grey", "Black"], "Grey"),
-    // displaceTex=op.inTexture("displaceTex"),
+    inMapping = op.inSwitch("Pixel Mapping", ["Stretch", "Repeat"], "Stretch"),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Axis Displacement Strength", [amountX, amountY]);
@@ -26,35 +26,31 @@ const
     textureDisplaceUniform = new CGL.Uniform(shader, "t", "displaceTex", 1),
     amountXUniform = new CGL.Uniform(shader, "f", "amountX", amountX),
     amountYUniform = new CGL.Uniform(shader, "f", "amountY", amountY),
+    repeatUni = new CGL.Uniform(shader, "2f", "repeat", 1, 1),
     amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
-inZero.onChange = updateZero;
-inWrap.onChange = updateWrap;
-inInput.onChange = updateInput;
+inMapping.onChange =
+inZero.onChange =
+inWrap.onChange =
+inInput.onChange = updateDefines;
 
-updateWrap();
-updateInput();
-updateZero();
+updateDefines();
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
-function updateZero()
+function updateDefines()
 {
+    shader.toggleDefine("MAPPING_REPEAT", inMapping.get() == "Repeat");
+
     shader.removeDefine("ZERO_BLACK");
     shader.removeDefine("ZERO_GREY");
     shader.define("ZERO_" + (inZero.get() + "").toUpperCase());
-}
 
-function updateWrap()
-{
     shader.removeDefine("WRAP_CLAMP");
     shader.removeDefine("WRAP_REPEAT");
     shader.removeDefine("WRAP_MIRROR");
     shader.define("WRAP_" + (inWrap.get() + "").toUpperCase());
-}
 
-function updateInput()
-{
     shader.removeDefine("INPUT_LUMINANCE");
     shader.removeDefine("INPUT_REDGREEN");
     shader.removeDefine("INPUT_RED");
@@ -69,6 +65,10 @@ render.onTriggered = function ()
     {
         cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
+
+        repeatUni.setValue([
+            cgl.currentTextureEffect.getCurrentSourceTexture().width / displaceTex.get().width,
+            cgl.currentTextureEffect.getCurrentSourceTexture().height / displaceTex.get().height]);
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
         if (displaceTex.get()) cgl.setTexture(1, displaceTex.get().tex);

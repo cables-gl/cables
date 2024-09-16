@@ -1,0 +1,1 @@
+Use this op to generate different different oscillation patterns based upon a timer signal. Standard output is -1 to 1.

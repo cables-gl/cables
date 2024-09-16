@@ -4,28 +4,26 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1644848363183
-        },
-        {
-            "message": "Ops.User.pandur.VizArraySheet renamed to Ops.Dev.VizArrayTable",
-            "author": "pandur",
-            "date": 1644873145035
-        },
-        {
-            "message": "Ops.Dev.VizArrayTable renamed to Ops.Viz.VizArrayTable",
-            "author": "pandur",
-            "date": 1652088789616
-        },
-        {
-            "message": "Ops.Viz.VizArrayTable renamed to Ops.Ui.VizArrayTable",
-            "author": "pandur",
-            "date": 1652088955403
+            "date": 1644848363183,
+            "type": "new"
         },
         {
             "message": "visualize there is more content to scroll to by fading out the first/last line",
             "type": "improvement",
             "author": "pandur",
             "date": 1671034824349
+        },
+        {
+            "message": "it will now also visualize arrays of arrays and objects ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1724704064278
+        },
+        {
+            "message": "Added stride input. Force a stride for display. Default value 0 will not change stride at all. Will display an error if the stride is not compatible with the arrays length",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1726142383143
         }
     ],
     "authorName": "pandur",
@@ -35,6 +33,11 @@
             {
                 "type": 3,
                 "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Stride",
+                "subType": "integer"
             },
             {
                 "type": 0,

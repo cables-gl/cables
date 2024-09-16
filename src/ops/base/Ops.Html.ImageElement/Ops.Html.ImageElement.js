@@ -8,7 +8,6 @@ const
     outHeight = op.outNumber("Height");
 
 let element = op.patch.getDocument().createElement("img");
-// op.patch.cgl.canvas.parentElement.appendChild(element);
 
 op.onDelete = removeEle;
 
@@ -33,8 +32,6 @@ element.onload = () =>
 function filenameChanged(cacheBuster)
 {
     let url = filename.get();
-
-    // url = CABLES.cacheBust(url);
 
     element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });

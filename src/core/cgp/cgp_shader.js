@@ -1,11 +1,13 @@
 import { Logger } from "cables-shared-client";
-import { simpleId } from "../utils.js";
 import Uniform from "./cgp_uniform.js";
+import { preproc } from "../cg/preproc.js";
+import { CgShader } from "../cg/cg_shader.js";
 
-export default class Shader
+export default class Shader extends CgShader
 {
     constructor(_cgp, _name)
     {
+        super();
         if (!_cgp) throw new Error("shader constructed without cgp " + _name);
         this._log = new Logger("cgp_shader");
         this._cgp = _cgp;
@@ -14,8 +16,6 @@ export default class Shader
 
         if (!_name) this._log.stack("no shader name given");
         this._name = _name || "unknown";
-        this.id = simpleId();
-        this._isValid = true;
         this._compileReason = "";
         this.shaderModule = null;
         this._needsRecompile = true;
@@ -53,9 +53,15 @@ export default class Shader
     compile()
     {
         this._isValid = true;
-        console.log("compiling shader...", this._compileReason);
         this._cgp.pushErrorScope();
-        this.shaderModule = this._cgp.device.createShaderModule({ "code": this._src });
+
+        const defs = {};
+        for (let i = 0; i < this._defines.length; i++)
+            defs[this._defines[i][0]] = this._defines[i][1] || true;
+
+        const src = preproc(this._src, defs);
+
+        this.shaderModule = this._cgp.device.createShaderModule({ "code": src });
         this._cgp.popErrorScope("cgp_shader " + this._name, this.error.bind(this));
         this._needsRecompile = false;
     }
@@ -64,7 +70,6 @@ export default class Shader
     {
         this._isValid = false;
     }
-
 
     bind()
     {

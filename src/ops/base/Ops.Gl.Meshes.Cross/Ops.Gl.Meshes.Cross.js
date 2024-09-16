@@ -3,6 +3,12 @@ const
     size = op.inValue("Size", 1),
     thick = op.inValue("Thickness", 0.25),
     target = op.inValueBool("Crosshair"),
+
+    showLeft = op.inValueBool("Left", true),
+    showRight = op.inValueBool("Right", true),
+    showTop = op.inValueBool("Top", true),
+    showBottom = op.inValueBool("Bottom", true),
+
     active = op.inValueBool("Active", true),
 
     trigger = op.outTrigger("Next"),
@@ -12,7 +18,11 @@ const cgl = op.patch.cgl;
 let geom = null;
 let mesh = null;
 
-size.onChange =
+showLeft.onChange =
+    showRight.onChange =
+    showTop.onChange =
+    showBottom.onChange =
+    size.onChange =
     thick.onChange =
     target.onChange = buildMeshLater;
 
@@ -136,37 +146,37 @@ function buildMesh()
     if (target.get() == true)
     {
         // draws a crosshair
-        geom.verticesIndices = [
+        geom.verticesIndices = [];
         // left
-            4, 5, 6, 4, 6, 7,
-            // right
-            8, 9, 10, 8, 10, 11,
-            // top
-            12, 13, 14, 12, 14, 15,
-            // bottom
-            16, 17, 18, 16, 18, 19
-        ];
+        if (showLeft.get())geom.verticesIndices.push(4, 5, 6, 4, 6, 7);
+        // right
+        if (showRight.get())geom.verticesIndices.push(8, 9, 10, 8, 10, 11);
+        // top
+        if (showTop.get())geom.verticesIndices.push(12, 13, 14, 12, 14, 15);
+        // bottom
+        if (showBottom.get())geom.verticesIndices.push(16, 17, 18, 16, 18, 19);
     }
     else
     {
         // draws a solid cross
         geom.verticesIndices = [
-        // center
-            2, 1, 0, 3, 2, 0,
-            // left
-            6, 5, 4, 7, 6, 4,
-            // right
-            10, 9, 8, 11, 10, 8,
-            // top
-            14, 13, 12, 15, 14, 12,
-            // bottom
-            18, 17, 16, 19, 18, 16
-        ];
+            // center
+            2, 1, 0, 3, 2, 0];
+        // left
+        if (showLeft.get())geom.verticesIndices.push(6, 5, 4, 7, 6, 4);
+        // right
+        if (showRight.get())geom.verticesIndices.push(10, 9, 8, 11, 10, 8);
+        // top
+        if (showTop.get())geom.verticesIndices.push(14, 13, 12, 15, 14, 12);
+        // bottom
+        if (showBottom.get())geom.verticesIndices.push(18, 17, 16, 19, 18, 16);
     }
 
+    if (geom.verticesIndices.length === 0)geom.verticesIndices.push(0, 0, 0);
+
     mesh = new CGL.Mesh(cgl, geom);
-    geomOut.set(null);
-    geomOut.set(geom);
+
+    geomOut.setRef(geom);
 }
 
 function buildMeshLater()

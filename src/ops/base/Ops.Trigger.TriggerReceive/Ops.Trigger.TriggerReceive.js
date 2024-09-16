@@ -17,8 +17,9 @@ function updateVarNamesDropdown()
     {
         let varnames = [];
         let vars = op.patch.namedTriggers;
-        // varnames.push('+ create new one');
+
         for (let i in vars) varnames.push(i);
+        varnames = varnames.sort();
         op.varName.uiAttribs.values = varnames;
     }
 }

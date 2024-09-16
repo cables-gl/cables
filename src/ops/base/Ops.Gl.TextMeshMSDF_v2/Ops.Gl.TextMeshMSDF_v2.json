@@ -33,12 +33,23 @@
             {
                 "type": 0,
                 "name": "Align index",
+                "values": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
                 "group": "Alignment",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Vertical Align index",
+                "values": [
+                    "Zero",
+                    "Top",
+                    "Middle",
+                    "Bottom"
+                ],
                 "group": "Alignment",
                 "subType": "integer"
             },
@@ -196,5 +207,13 @@
     },
     "exampleProjectId": "9COr26",
     "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "fix: correctly discard Pixels when fully transparent",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1724449386107
+        }
+    ]
 }

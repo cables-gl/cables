@@ -75,6 +75,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1715693416129
+        },
+        {
+            "message": "CSS classes are applied correctly now on init",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725551784635
         }
     ],
     "license": "MIT",

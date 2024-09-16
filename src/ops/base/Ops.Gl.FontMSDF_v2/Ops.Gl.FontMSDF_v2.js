@@ -1,10 +1,19 @@
+let defaultTexUrl = null;
+let defaultDataUrl = null;
+
+if (CABLES.UI)
+{
+    defaultTexUrl = "/assets/library/fonts_msdf/worksans-regular_int.png";
+    defaultDataUrl = "/assets/library/fonts_msdf/worksans-regular_int.json";
+}
+
 const
     inUUID = op.inString("Font Name", CABLES.uuid()),
-    urlData = op.inUrl("Font Data", "/assets/library/fonts_msdf/worksans-regular_int.json"),
-    urlTex = op.inUrl("Font Image", "/assets/library/fonts_msdf/worksans-regular_int.png"),
-    urlTex1 = op.inUrl("Font Image 1"),
-    urlTex2 = op.inUrl("Font Image 2"),
-    urlTex3 = op.inUrl("Font Image 3"),
+    urlData = op.inUrl("Font Data", [".json"], defaultDataUrl),
+    urlTex = op.inUrl("Font Image", [".png"], defaultTexUrl),
+    urlTex1 = op.inUrl("Font Image 1", [".png"]),
+    urlTex2 = op.inUrl("Font Image 2", [".png"]),
+    urlTex3 = op.inUrl("Font Image 3", [".png"]),
     outLoaded = op.outBool("Loaded"),
     outNumChars = op.outNumber("Total Chars"),
     outChars = op.outString("Chars"),
@@ -20,7 +29,7 @@ urlData.onChange =
     urlTex.onChange =
     urlTex1.onChange =
     urlTex2.onChange =
-    urlTex3.onChange = load;
+    urlTex3.onChange = loadLater;
 
 const textures = [];
 
@@ -39,9 +48,14 @@ op.onFileChanged = function (fn)
         (urlTex2.get() && urlTex2.get().indexOf(fn) > -1) ||
         (urlTex3.get() && urlTex3.get().indexOf(fn) > -1))
     {
-        load();
+        loadLater();
     }
 };
+
+function loadLater()
+{
+    cgl.addNextFrameOnceCallback(load);
+}
 
 let oldUUID = "";
 
@@ -82,7 +96,7 @@ function load()
         {
             if (err)
             {
-                op.logError(err);
+                // op.logError(err);
                 return;
             }
             try
@@ -118,7 +132,7 @@ function load()
                 op.patch.setVarValue(varNameData, null);
                 op.patch.setVarValue(varNameTex, null);
 
-                op.logError(e);
+                // op.logError(e);
                 op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                 op.patch.loading.finished(loadingId);
                 updateLoaded();

@@ -3,6 +3,7 @@ const
     keysCursor = op.inValueBool("Cursor Keys", true),
     keysWasd = op.inValueBool("WASD", true),
     inActive = op.inBool("Active", true),
+    outDeg = op.outNumber("Degree"),
     pressedUp = op.outBoolNum("Up"),
     triggerUp = op.outTrigger("Up Pressed"),
     pressedDown = op.outBoolNum("Down"),
@@ -10,7 +11,8 @@ const
     pressedLeft = op.outBoolNum("Left"),
     triggerLeft = op.outTrigger("Left Pressed"),
     pressedRight = op.outBoolNum("Right"),
-    triggerRight = op.outTrigger("Right Pressed");
+    triggerRight = op.outTrigger("Right Pressed"),
+    outPressed = op.outNumber("Any Button Pressed");
 
 const cgl = op.patch.cgl;
 
@@ -62,6 +64,26 @@ function onKeyDown(e)
             triggerRight.trigger();
         }
     }
+
+    setDegrees();
+    outPressed.set(pressedUp.get() || pressedDown.get() || pressedLeft.get() || pressedRight.get());
+}
+
+function setDegrees()
+{
+    let deg = 0;
+
+    if (pressedUp.get())deg = 360;
+    if (pressedRight.get())deg = 90;
+    if (pressedDown.get())deg = 180;
+    if (pressedLeft.get())deg = 270;
+
+    if (pressedUp.get() && pressedRight.get())deg = 360 + 45;
+    if (pressedDown.get() && pressedRight.get())deg = 90 + 45;
+    if (pressedDown.get() && pressedLeft.get())deg = 180 + 45;
+    if (pressedUp.get() && pressedLeft.get())deg = 270 + 45;
+
+    outDeg.set(deg);
 }
 
 function onKeyUp(e)
@@ -112,6 +134,9 @@ function onKeyUp(e)
             triggerRight.trigger();
         }
     }
+
+    setDegrees();
+    outPressed.set(pressedUp.get() || pressedDown.get() || pressedLeft.get() || pressedRight.get());
 }
 
 op.onDelete = function ()

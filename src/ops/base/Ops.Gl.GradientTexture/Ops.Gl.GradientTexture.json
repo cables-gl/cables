@@ -60,6 +60,11 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Dither",
+                "subType": "number"
+            },
+            {
                 "type": 3,
                 "name": "Gradient Array"
             },
@@ -146,6 +151,24 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1722863478104
+        },
+        {
+            "message": "Added option to add dithering to reduce color banding",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1724921254702
+        },
+        {
+            "message": "Add XX and YY option to have a one axis gradient that is size*size pixels big and not size*1 pixels (e.g. needed to add dithering)",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1724921301763
+        },
+        {
+            "message": "Opening the gradient editor at the bottom edge of the window will now move the gradient editor up so it is fully visible",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725011824866
         }
     ],
     "license": "MIT"

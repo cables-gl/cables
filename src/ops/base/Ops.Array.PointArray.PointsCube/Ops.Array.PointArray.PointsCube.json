@@ -49,7 +49,6 @@
     },
     "summary": "Generates a 3d point field with controllable amount of xyz points (was PointsField3d)",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -103,5 +102,6 @@
     "youtubeids": [
         "tVphEMCXDb4"
     ],
-    "exampleProjectId": "_SC2JB"
+    "exampleProjectId": "_SC2JB",
+    "license": "MIT"
 }

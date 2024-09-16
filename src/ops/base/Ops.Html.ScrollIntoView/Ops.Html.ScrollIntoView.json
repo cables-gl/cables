@@ -1,0 +1,48 @@
+{
+    "id": "69c16334-5f9d-4286-84b5-7ac12aa54e37",
+    "created": 1724765849078,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724765849080
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Behaviour index",
+                "values": [
+                    "smooth",
+                    "instant"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Scroll Into View"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "exampleProjectId": "KmnVEm",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Scroll an area, so the html element is visible/in view"
+}

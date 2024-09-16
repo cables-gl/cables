@@ -37,22 +37,22 @@
             }
         ]
     },
-    "summary": "triggers when array has changed",
+    "summary": "triggers when Object has changed",
     "youtubeid": "",
     "issues": "",
     "docs": {
         "ports": [
             {
-                "name": "Array",
-                "text": "Array in"
+                "name": "Object",
+                "text": "Object in"
             },
             {
                 "name": "Changed",
-                "text": "Trigger out - happens only when something in the array has changed"
+                "text": "Trigger out - happens only when something in the Object has changed"
             },
             {
                 "name": "Result",
-                "text": "Array out"
+                "text": "Object out"
             }
         ]
     }

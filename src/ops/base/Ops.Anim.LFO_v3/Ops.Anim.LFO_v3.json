@@ -1,0 +1,65 @@
+{
+    "id": "5bdbe26b-dea3-4266-850c-1b66ed29936e",
+    "created": 1723816290994,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "added range min/max inputs ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711374926839
+        },
+        {
+            "message": "Adjusted amplitudes",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1724338994688
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Range Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Range Max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Low-frequency oscillation for animations"
+}

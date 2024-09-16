@@ -94,9 +94,11 @@ void main()
         fgColor=mix(fgColor,vec4(colorBorder,1.0),1.0-opacity2);
     #endif
 
-    if(color.a==0.0)discard;
+    float opa=opacity*color.a;
 
-    outColor = mix(outColor, fgColor, opacity*color.a);
+    if(opa==0.0)discard;
+
+    outColor = mix(outColor, fgColor, opa);
 
 #ifdef HAS_ATTR_COLORS
     outColor*=fragAttrColors;

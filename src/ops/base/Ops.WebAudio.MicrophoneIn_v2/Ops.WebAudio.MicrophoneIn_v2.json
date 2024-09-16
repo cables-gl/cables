@@ -13,11 +13,6 @@
             },
             {
                 "type": 0,
-                "name": "Audio Input",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Volume",
                 "group": "Volume Settings",
                 "subType": "number"
@@ -51,7 +46,6 @@
     "id": "cbfbbffd-a5a8-4b21-bcb5-5d031cc5e11a",
     "created": 1606307812024,
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -91,11 +85,13 @@
             "date": 1606307812024
         },
         {
-            "message": "Ops.User.cables.MicrophoneIn_v2 renamed to Ops.WebAudio.MicrophoneIn_v2",
-            "author": "cables",
-            "date": 1606308007450
+            "message": "Fix listening state output was outputing the wrong value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1725286288219
         }
     ],
     "youtubeids": [],
-    "exampleProjectId": "xjHACp"
+    "exampleProjectId": "xjHACp",
+    "license": "MIT"
 }

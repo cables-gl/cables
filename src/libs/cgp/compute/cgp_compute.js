@@ -1,27 +1,25 @@
 export default class GpuCompute
 {
-    constructor(cgp, name, src)
+    constructor(cgp, name, src, options)
     {
+        this._name = name;
         this._cgp = cgp;
         this._src = src;
-        console.log("hello compute!");
+        this._options = options || {};
+        this._options.workGroups = this._options.workGroups || [8, 8];
 
-
-        this._resultMatrixBufferSize = Float32Array.BYTES_PER_ELEMENT * (100);
+        this._resultMatrixBufferSize = Float32Array.BYTES_PER_ELEMENT * 300;
         this._resultMatrixBuffer = this._cgp.device.createBuffer({
             "size": this._resultMatrixBufferSize,
             "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
         });
     }
 
-
     compute()
     {
         const shaderModule = this._cgp.device.createShaderModule({
             "code": this._src
         });
-
-        // Pipeline setup
 
         const computePipeline = this._cgp.device.createComputePipeline({
             "layout": "auto",
@@ -30,9 +28,6 @@ export default class GpuCompute
                 "entryPoint": "main"
             }
         });
-
-
-        // Bind group
 
         const bindGroup = this._cgp.device.createBindGroup({
             "layout": computePipeline.getBindGroupLayout(0 /* index */),
@@ -51,13 +46,16 @@ export default class GpuCompute
 
         const commandEncoder = this._cgp.device.createCommandEncoder();
 
-        const passEncoder = commandEncoder.beginComputePass();
-        passEncoder.setPipeline(computePipeline);
-        passEncoder.setBindGroup(0, bindGroup);
-        // const workgroupCountX = Math.ceil(firstMatrix[0] / 8);
-        // const workgroupCountY = Math.ceil(secondMatrix[1] / 8);
-        passEncoder.dispatchWorkgroups(22, 1);
-        passEncoder.end();
+        this._passEncoder = commandEncoder.beginComputePass();
+        this._passEncoder.setPipeline(computePipeline);
+        this._passEncoder.setBindGroup(0, bindGroup);
+
+
+        if (this._options.workGroups.length == 1) this._passEncoder.dispatchWorkgroups(this._options.workGroups[0] || 8);
+        if (this._options.workGroups.length == 2) this._passEncoder.dispatchWorkgroups(this._options.workGroups[0] || 8, this._options.workGroups[1] || 8);
+        if (this._options.workGroups.length == 3) this._passEncoder.dispatchWorkgroups(this._options.workGroups[0] || 8, this._options.workGroups[1] || 8, this._options.workGroups[2] || 8);
+
+        this._passEncoder.end();
 
         // Get a GPU buffer for reading in an unmapped state.
         const gpuReadBuffer = this._cgp.device.createBuffer({
@@ -78,12 +76,14 @@ export default class GpuCompute
         const gpuCommands = commandEncoder.finish();
         this._cgp.device.queue.submit([gpuCommands]);
 
-
-        // Read buffer.
-        // gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
-        // {
-        //     const arrayBuffer = gpuReadBuffer.getMappedRange();
-        //     console.log(new Float32Array(arrayBuffer));
-        // });
+        gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
+        {
+            if (this._options.read)
+            {
+                const arrayBuffer = gpuReadBuffer.getMappedRange();
+                const b = new Float32Array(arrayBuffer);
+                this._options.read({ "buffer": b });
+            }
+        });
     }
 }

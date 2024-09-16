@@ -185,7 +185,7 @@ function updateFontData()
     {
         fontData = null;
 
-        op.warn("no varname", varname);
+        // op.warn("no varname", varname);
         return;
     }
 
@@ -320,7 +320,7 @@ render.onTriggered = function ()
         needUpdate = false;
     }
 
-    if (mesh && mesh.numInstances > 0)
+    if (mesh && mesh.numInstances > 0 && fontTexs)
     {
         cgl.pushShader(shader);
 
