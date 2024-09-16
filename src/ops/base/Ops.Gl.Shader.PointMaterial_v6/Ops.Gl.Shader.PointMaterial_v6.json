@@ -233,9 +233,9 @@
         }
     ],
     "summary": "Draw all vertices as points / circles",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "O9yRO6"
 }
