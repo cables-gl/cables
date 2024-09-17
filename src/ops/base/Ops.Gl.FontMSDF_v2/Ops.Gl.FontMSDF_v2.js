@@ -96,7 +96,7 @@ function load()
         {
             if (err)
             {
-                op.logError(err);
+                // op.logError(err);
                 return;
             }
             try
