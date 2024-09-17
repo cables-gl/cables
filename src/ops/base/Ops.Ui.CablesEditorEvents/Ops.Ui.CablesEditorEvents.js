@@ -10,5 +10,5 @@ op.patch.on("uiSavePatch", () =>
 inTriggerChanged.onTriggered = () =>
 {
     if (!CABLES.UI) return;
-    gui.savedState.setUnSaved("ui event op", 0);
+    gui.savedState.setUnSaved("ui event op", op.getSubPatch());
 };

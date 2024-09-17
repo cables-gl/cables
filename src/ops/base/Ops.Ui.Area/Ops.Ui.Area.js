@@ -14,7 +14,7 @@ function update()
 {
     if (CABLES.UI)
     {
-        gui.savedState.setUnSaved("areaOp");
+        gui.savedState.setUnSaved("areaOp", op.getSubPatch());
         op.uiAttr(
             {
                 "comment_title": inTitle.get() || " "
