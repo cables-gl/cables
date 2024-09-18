@@ -8,6 +8,7 @@ export default class Texture
         this._log = new Logger("cgp_texture");
         this._cgp = _cgp;
         this.id = CABLES.uuid();
+        this.pixelFormat = options.pixelFormat || Texture.PFORMATSTR_RGBA8UB;
 
         options = options || {};
 

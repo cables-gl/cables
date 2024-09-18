@@ -48,6 +48,13 @@ export default class Uniform extends CgUniform
         this._value = v;
     }
 
+    updateValueM4(v) {}
+
+    setValueM4(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
 
     setValueAny(v)
     {
@@ -59,15 +66,50 @@ export default class Uniform extends CgUniform
 
     updateValueT() {}
 
+
+    copyToBuffer(buff, pos = 0)
+    {
+        if (this._type == "f") buff[pos] = this._value;
+        else if (this._type == "4f")
+        {
+            buff[pos] = this._value[0];
+            buff[pos + 1] = this._value[1];
+            buff[pos + 2] = this._value[2];
+            buff[pos + 3] = this._value[3];
+        }
+        else if (this._type == "m4")
+        {
+            // const mView = buff.subarray(pos, pos + 16);
+
+            for (let i = 0; i < 16; i++)
+            {
+                buff[pos + i] = this._value[i];
+
+                // console.log(this._value[i]);
+            }
+            // console.log(buff);
+
+            // mat4.copy(mView, this._value);
+        }
+        else
+        {
+            this._log.warn("uniform copy to buffer unknown", this._type);
+        }
+    }
+
     getSizeBytes()
     {
-        if (this._type == "f") return 1 * 4;
-        if (this._type == "i") return 1 * 4;
-        if (this._type == "2i") return 2 * 4;
-        if (this._type == "2f") return 2 * 4;
-        if (this._type == "3f") return 3 * 4;
-        if (this._type == "4f") return 4 * 4;
-        if (this._type == "m4") return 4 * 4 * 4;
+        const bytesPerFloat = 4;
+        const bytesPerInt = 4;
+        if (this._type == "f") return 1 * bytesPerFloat;
+        if (this._type == "2f") return 2 * bytesPerFloat;
+        if (this._type == "3f") return 3 * bytesPerFloat;
+        if (this._type == "4f") return 4 * bytesPerFloat;
+
+        if (this._type == "m4") return 4 * 4 * bytesPerFloat;
+
+        if (this._type == "i") return 1 * bytesPerInt;
+        if (this._type == "2i") return 2 * bytesPerInt;
 
         // this._log.warn("unknown type getSizeBytes");
         return 4;
