@@ -1,6 +1,5 @@
 const
     TAU = Math.PI * 2,
-    cgl = op.patch.cgl,
     inTrigger = op.inTrigger("render"),
     inRadius = op.inValue("radius", 0.5),
     inStacks = op.inValue("stacks", 32),
@@ -13,6 +12,7 @@ const
     RIGHT = vec3.fromValues(1, 0, 0);
 
 let
+    cgl = null,
     geom = new CGL.Geometry("Sphere"),
     tmpNormal = vec3.create(),
     tmpVec = vec3.create(),
@@ -26,6 +26,7 @@ op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 inTrigger.onTriggered = function ()
 {
+    cgl = op.patch.cg || op.patch.cgl;
     if (needsRebuild) buildMesh();
 
     if (doScale)
