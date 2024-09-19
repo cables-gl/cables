@@ -8,7 +8,7 @@ export default class Binding
         this.stage = GPUShaderStage.VERTEX;
         if (stage == "frag") this.stage = GPUShaderStage.FRAGMENT;
 
-        this.stage = GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX; // why needed??
+        // this.stage = GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX; // why needed??
 
         this.uniforms = [];
         this._gpuBuffer = null;
@@ -97,10 +97,11 @@ export default class Binding
         let off = 0;
         for (let i = 0; i < this.uniforms.length; i++)
         {
-            this.uniforms[i].copyToBuffer(this._buffer, off);
+            this.uniforms[i].copyToBuffer(this._buffer, off); // todo: check if uniform changed?
             off += this.uniforms[i].getSizeBytes() / 4;
         }
 
+        // todo: only if changed...
         cgp.device.queue.writeBuffer(
             this._gpuBuffer,
             0,

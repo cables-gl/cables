@@ -60,10 +60,10 @@ class WebGpuContext extends CGState
 
     /// ////////////////////
 
-    getViewPort()
-    {
-        return [0, 0, this.canvasWidth, this.canvasHeight];
-    }
+    // getViewPort()
+    // {
+    //     return [0, 0, this.canvasWidth, this.canvasHeight];
+    // }
 
     renderStart(cgp, identTranslate, identTranslateView)
     {
