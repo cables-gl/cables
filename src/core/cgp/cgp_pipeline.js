@@ -192,13 +192,6 @@ export default class Pipeline
                             { "shaderLocation": 0, "offset": 0, "format": "float32x3" },
                         ],
                     },
-                    // normals
-                    {
-                        "arrayStride": 3 * 4, // 3 floats, 4 bytes each
-                        "attributes": [
-                            { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
-                        ],
-                    },
                     // texcoords
                     {
                         "arrayStride": 2 * 4, // 2 floats, 4 bytes each
@@ -206,6 +199,15 @@ export default class Pipeline
                             { "shaderLocation": 2, "offset": 0, "format": "float32x2", },
                         ],
                     },
+                    // normals
+                    {
+                        "arrayStride": 3 * 4, // 3 floats, 4 bytes each
+                        "attributes": [
+                            { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
+                        ],
+                    },
+
+
                 ],
             },
             "fragment": {
