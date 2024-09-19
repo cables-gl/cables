@@ -171,7 +171,7 @@ class WebGpuContext extends CGState
             {
                 if (this.lastErrorMsg == error.message)
                 {
-                    this._log.warn("last error once more...");
+                    // this._log.warn("last error once more...");
                 }
                 else
                 {

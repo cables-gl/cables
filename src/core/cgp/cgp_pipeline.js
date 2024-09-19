@@ -3,20 +3,17 @@ import UniformBuffer from "./cgp_uniformbuffer.js";
 
 export default class Pipeline
 {
-    constructor(_cgp, _name)
+    constructor(_cgp, name)
     {
-        if (!_cgp) throw new Error("Pipeline constructed without cgp " + _name);
+        if (!_cgp) throw new Error("Pipeline constructed without cgp " + name);
+        this._name = name;
         this._cgp = _cgp;
         this._isValid = true;
 
         this._pipeCfg = null;
         this._renderPipeline = null;
 
-        this._fsUniformBuffer = null;
-        this._vsUniformBuffer = null;
-
         this._old = {};
-
 
         this.DEPTH_COMPARE_FUNCS_STRINGS = [
             "never",
@@ -72,27 +69,11 @@ export default class Pipeline
                 this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
             }
 
-
-            // if (this._cgp.stateCullFace() === false)
-            // {
-            //     if (this._pipeCfg.primitive.cullMode != "none")
-            //     {
-            //         needsRebuild = true;
-            //         this._pipeCfg.primitive.cullMode = "none";
-            //     }
-            // }
-            // else
-            // {
-            //     // needsRebuild = true;
-            //     this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
-            // }
             if (this._pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
             {
                 needsRebuild = true;
                 this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
             }
-            // console.log(this._cgp.stateCullFaceFacing());
-            // this._pipeCfg.primitive.cullMode = "back";
         }
 
         if (needsRebuild)
@@ -101,57 +82,83 @@ export default class Pipeline
 
             this._old.shader = shader;
             this._old.mesh = mesh;
-            // console.log("rebuild pipeline");
-
-            // try
-            // {
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
 
+            this._cgp.currentPipeDebug =
+            {
 
-            this._cgp.currentPipe = this._pipeCfg;
-            // }
-            // catch (e)
-            // {
-            //     console.error(e.message);
-            // }
+                "cfg": this._pipeCfg,
+
+                "bindingGroupEntries": this.bindingGroupEntries,
+                "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
+
+            };
         }
         this._bindUniforms(shader);
 
         if (this._renderPipeline && this._isValid)
         {
-            mat4.copy(this._matModel, this._cgp.mMatrix);
-            mat4.copy(this._matView, this._cgp.vMatrix);
-            mat4.copy(this._matProj, this._cgp.pMatrix);
-
-
-
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
 
 
-            this._cgp.device.queue.writeBuffer(
-                this._vsUniformBuffer,
-                0,
-                this._vsUniformValues.buffer,
-                this._vsUniformValues.byteOffset,
-                this._vsUniformValues.byteLength
-            );
-
-            this._uniBufFrag.updateUniformValues();
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
             this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
-
-            // this._pipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
         }
     }
 
     getPiplelineObject(shader, mesh)
     {
+        this.bindingGroupEntries = [];
+        this.bindingGroupLayoutEntries = [];
+
+
+        if (shader.defaultBindingVert.getSizeBytes() > 0)
+        {
+            this.bindingGroupEntries.push(shader.defaultBindingVert.getBindingGroupEntry(this._cgp.device));
+            this.bindingGroupLayoutEntries.push(shader.defaultBindingVert.getBindingGroupLayoutEntry());
+        }
+        else console.log("shader defaultBindingVert size 0");
+
+        if (shader.defaultBindingFrag.getSizeBytes() > 0)
+        {
+            this.bindingGroupEntries.push(shader.defaultBindingFrag.getBindingGroupEntry(this._cgp.device));
+            this.bindingGroupLayoutEntries.push(shader.defaultBindingFrag.getBindingGroupLayoutEntry());
+        }
+        else
+        {
+            console.log("shader defaultBindingFrag size 0");
+        }
+
+
+
+        const bindGroupLayout = this._cgp.device.createBindGroupLayout(
+            {
+                "label": "label3",
+                "entries": this.bindingGroupLayoutEntries,
+            });
+
+        this._bindGroup = this._cgp.device.createBindGroup(
+            {
+                "label": "label2",
+                "layout": bindGroupLayout,
+                "entries": this.bindingGroupEntries
+            });
+
+        const pipelineLayout = this._cgp.device.createPipelineLayout({
+            "label": "label1",
+            "bindGroupLayouts": [
+                bindGroupLayout, // @group(0)
+            ]
+        });
+
         const pipeCfg = {
-            "layout": "auto",
+            // "layout": "auto",
+            "label": this._name,
+            "layout": pipelineLayout,
             "vertex": {
                 "module": shader.shaderModule,
                 "entryPoint": "myVSMain",
@@ -212,67 +219,11 @@ export default class Pipeline
     {
         this._cgp.pushErrorScope();
 
-
-        const counts = { };
-
-        this._uniBufFrag = new UniformBuffer(shader, "frag");
-
-        // for (let i = 0; i < shader.uniforms.length; i++)
-        // {
-        //     const uni = shader.uniforms[i];
-        //     const type = uni.shaderType;
-        //     counts[type] = counts[type] || 0;
-        //     counts[type] += uni.getSizeBytes();
-        // }
-        // console.log(counts, counts.frag);
+        shader.bind();
+        shader.defaultBindingFrag.update(this._cgp);
+        shader.defaultBindingVert.update(this._cgp);
 
 
-        const vUniformBufferSize = 3 * 16 * 4; // 2 mat4s * 16 floats per mat * 4 bytes per float
-        // const fUniformBufferSize = counts.frag;// 2 * 3 * 4; // 1 vec3 * 3 floats per vec3 * 4 bytes per float
-
-        this._vsUniformBuffer = this._cgp.device.createBuffer({
-            "size": vUniformBufferSize,
-            "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
-        });
-
-        // this._fsUniformBuffer = this._cgp.device.createBuffer({
-        //     "size": fUniformBufferSize,
-        //     "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
-        // });
-        // this._fsUniformValues = new Float32Array(counts.frag / 4);
-
-        this._vsUniformValues = new Float32Array(vUniformBufferSize / 4);
-
-        this._matModel = this._vsUniformValues.subarray(0, 16);
-        this._matView = this._vsUniformValues.subarray(16, 32);
-        this._matProj = this._vsUniformValues.subarray(32, 48);
-
-
-        // this._fsUniformValues[1] = 1.0;
-        // this._fsUniformValues[0] = 1.0;
-        // const lightDirection = this._fsUniformValues.subarray(0, 3);
-        // console.log("pipeline bindgrouplayout ", pipeline.getBindGroupLayout(0));
-
-        this._bindGroup = this._cgp.device.createBindGroup(
-            {
-                "layout": this._renderPipeline.getBindGroupLayout(0),
-                "entries": [
-                    { "binding": 0, "resource": { "buffer": this._vsUniformBuffer } },
-                    { "binding": 1, "resource": { "buffer": this._uniBufFrag._gpuBuffer } },
-                    // { "binding": 2, "resource": sampler },
-                    // { "binding": 3, "resource": tex.createView() },
-                ],
-            });
-
-        this._cgp.device.queue.writeBuffer(
-            this._vsUniformBuffer,
-            0,
-            this._vsUniformValues.buffer,
-            this._vsUniformValues.byteOffset,
-            this._vsUniformValues.byteLength
-        );
-
-        this._uniBufFrag.updateUniformValues();
         this._cgp.popErrorScope("cgp_pipeline end", (e) =>
         {
             this._isValid = false;

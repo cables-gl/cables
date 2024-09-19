@@ -2,6 +2,7 @@ import { Logger } from "cables-shared-client";
 import Uniform from "./cgp_uniform.js";
 import { preproc } from "../cg/preproc.js";
 import { CgShader } from "../cg/cg_shader.js";
+import Binding from "./cgp_binding.js";
 
 export default class Shader extends CgShader
 {
@@ -19,6 +20,13 @@ export default class Shader extends CgShader
         this._compileReason = "";
         this.shaderModule = null;
         this._needsRecompile = true;
+
+        this.defaultBindingVert = new Binding(0, "defaultVert", "vert");
+        this.defaultBindingFrag = new Binding(1, "defaultFrag", "frag");
+
+        this.uniModelMatrix = this.addUniformVert("m4", "modelMatrix");
+        this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
+        this.uniProjMatrix = this.addUniformVert("m4", "projMatrix");
 
         this._src = "";
     }
@@ -73,11 +81,16 @@ export default class Shader extends CgShader
 
     bind()
     {
-        let sizes = {};
-        for (let i = 0; i < this._uniforms.length; i++)
-        {
-            // console.log(this._uniforms[i]);
-        }
+        // let sizes = {};
+        // for (let i = 0; i < this._uniforms.length; i++)
+        // {
+        //     // console.log(this._uniforms[i]);
+        // }
+
+        this.uniModelMatrix.setValue(this._cgp.mMatrix);
+        this.uniViewMatrix.setValue(this._cgp.vMatrix);
+        this.uniProjMatrix.setValue(this._cgp.pMatrix);
+
 
         if (this._needsRecompile) this.compile();
     }
@@ -99,6 +112,9 @@ export default class Shader extends CgShader
     {
         const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "frag";
+
+        this.defaultBindingFrag.addUniform(uni);
+        this.needsPipelineUpdate = true;
         return uni;
     }
 
@@ -119,6 +135,10 @@ export default class Shader extends CgShader
     {
         const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "vert";
+
+        this.defaultBindingVert.addUniform(uni);
+        this.needsPipelineUpdate = true;
+
         return uni;
     }
 
