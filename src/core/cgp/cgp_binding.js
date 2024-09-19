@@ -11,7 +11,9 @@ export default class Binding
         // this.stage = GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX; // why needed??
 
         this.uniforms = [];
-        this._gpuBuffer = null;
+
+        this.bindingInstances = [];
+
         this._buffer = null;
         this.isValid = true;
 
@@ -70,15 +72,15 @@ export default class Binding
         }
         else
         {
-            o.buffer = this._gpuBuffer;
+            o.buffer = {};
         }
 
         return o;
     }
 
-    getBindingGroupEntry(gpuDevice)
+    getBindingGroupEntry(gpuDevice, inst)
     {
-        this.checkBuffer(gpuDevice);
+        // this.checkBuffer(gpuDevice);
 
         this.isValid = false;
 
@@ -104,29 +106,30 @@ export default class Binding
             o.resource = sampler;
         }
         else
-            o.resource = {
-                "buffer": this._gpuBuffer,
-                "minBindingSize": this.getSizeBytes(),
-                "hasDynamicOffset": 0
-            };
-
-        this.isValid = true;
-
-        return o;
-    }
-
-    checkBuffer(gpuDevice)
-    {
-        if (!this._gpuBuffer || this._gpuBuffer.size != this.getSizeBytes())
         {
-            this._gpuBuffer = gpuDevice.createBuffer(
+            // this._gpuBuffer = null;
+            // if (!this._gpuBuffer || this._gpuBuffer.size != this.getSizeBytes())
+
+            const gpuBuffer = gpuDevice.createBuffer(
                 {
                     "label": this._name,
                     "size": this.getSizeBytes(),
                     "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM
                 });
+
+            o.resource = {
+                "buffer": gpuBuffer,
+                "minBindingSize": this.getSizeBytes(),
+                "hasDynamicOffset": 0
+            };
         }
+
+        this.isValid = true;
+        this.bindingInstances[inst] = o;
+
+        return o;
     }
+
 
 
     getShaderHeader()
@@ -134,10 +137,11 @@ export default class Binding
         // ????
     }
 
-    update(cgp)
+    update(cgp, inst)
     {
-        if (!this._gpuBuffer) return console.log("has no gpubuffer...");
-
+        // if (!this._gpuBuffer) return console.log("has no gpubuffer...");
+        let b = this.bindingInstances[inst];
+        if (!b) b = this.getBindingGroupEntry(cgp.device, inst);
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
@@ -168,7 +172,8 @@ export default class Binding
 
             // todo: only if changed...
             cgp.device.queue.writeBuffer(
-                this._gpuBuffer,
+                // this._gpuBuffer,
+                b.resource.buffer,
                 0,
                 this._buffer.buffer,
                 this._buffer.byteOffset,

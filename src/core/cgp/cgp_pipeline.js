@@ -15,6 +15,8 @@ export default class Pipeline
         this._pipeCfg = null;
         this._renderPipeline = null;
 
+        this._bindGroups = [];
+
         this.lastFrame = -1;
         this.bindingCounter = 0;
 
@@ -89,7 +91,7 @@ export default class Pipeline
         this._cgp.currentPipeDebug =
         {
             "cfg": this._pipeCfg,
-            "bindingGroupEntries": this.bindingGroupEntries,
+            // "bindingGroupEntries": this.bindingGroupEntries,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
 
@@ -104,39 +106,80 @@ export default class Pipeline
 
             this._old.shader = shader;
             this._old.mesh = mesh;
+
+
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
 
 
             this._cgp.popErrorScope();
         }
-        this._bindUniforms(shader);
 
         if (this._renderPipeline && this._isValid)
         {
-            this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
-
+            // this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
-
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
 
 
-            if (this.lastFrame != this._cgp.frame)
-            {
-                this.bindingCounter = 0;
-            }
+            if (this.lastFrame != this._cgp.frame) this.bindingCounter = 0;
             this.lastFrame = this._cgp.frame;
 
-            if (this._bindGroup) this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
+            // if (this._bindGroup) this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
 
 
+            // const bg = {
+            //     "label": "label2",
+            //     "layout": this.bindGroupLayout,
+            //     "entries": this.bindingGroupEntries
+            // };
+
+
+
+            if (!this._bindGroups[this.bindingCounter])
+            {
+                const bindingGroupEntries = [];
+
+                for (let i = 0; i < shader.bindingsVert.length; i++)
+                {
+                    if (shader.bindingsVert[i].getSizeBytes() > 0)
+                    {
+                        bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device, this.bindingCounter));
+                        // bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
+                    }
+                    else console.log("shader defaultBindingVert size 0");
+                }
+                for (let i = 0; i < shader.bindingsFrag.length; i++)
+                {
+                    if (shader.bindingsFrag[i].getSizeBytes() > 0)
+                    {
+                        bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device, this.bindingCounter));
+                        // bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
+                    }
+                    else console.log("shader defaultBindingFrag size 0");
+                }
+
+                const bg = {
+                    "label": "label2",
+                    "layout": this.bindGroupLayout,
+                    "entries": bindingGroupEntries
+                };
+
+                this._bindGroups[this.bindingCounter] = this._cgp.device.createBindGroup(bg);
+                console.log("createBindGroup");
+            }
+
+            this._bindUniforms(shader, this.bindingCounter);
+
+            if (this._bindGroups[this.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[this.bindingCounter]);
+            this.bindingCounter++;
 
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
-            this._cgp.popErrorScope();
+            // this._cgp.popErrorScope();
         }
 
         shader.needsPipelineUpdate = false;
@@ -144,7 +187,7 @@ export default class Pipeline
 
     getPipelineObject(shader, mesh)
     {
-        this.bindingGroupEntries = [];
+        // this.bindingGroupEntries = [];
         this.bindingGroupLayoutEntries = [];
 
 
@@ -152,7 +195,7 @@ export default class Pipeline
         {
             if (shader.bindingsVert[i].getSizeBytes() > 0)
             {
-                this.bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device));
+                // this.bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device));
                 this.bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
             }
             else console.log("shader defaultBindingVert size 0");
@@ -162,7 +205,7 @@ export default class Pipeline
         {
             if (shader.bindingsFrag[i].getSizeBytes() > 0)
             {
-                this.bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device));
+                // this.bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device));
                 this.bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
             }
             else console.log("shader defaultBindingFrag size 0");
@@ -179,15 +222,8 @@ export default class Pipeline
         // console.log(this.bindingGroupEntries);
         // console.log(this.bindingGroupLayoutEntries);
 
-        if (!this.bindingGroupEntries) return console.warn("no bindingGroupEntries");
+        // if (!this.bindingGroupEntries) return console.warn("no bindingGroupEntries");
 
-        const bg = {
-            "label": "label2",
-            "layout": this.bindGroupLayout,
-            "entries": this.bindingGroupEntries
-        };
-
-        this._bindGroup = this._cgp.device.createBindGroup(bg);
 
         const pipelineLayout = this._cgp.device.createPipelineLayout({
             "label": "label1",
@@ -258,23 +294,23 @@ export default class Pipeline
     }
 
 
-    _bindUniforms(shader)
+    _bindUniforms(shader, inst)
     {
-        this._cgp.pushErrorScope("pipeline bind uniforms", { "logger": this._log });
+        // this._cgp.pushErrorScope("pipeline bind uniforms", { "logger": this._log });
 
         shader.bind();
 
         for (let i = 0; i < shader.bindingsVert.length; i++)
-            shader.bindingsVert[i].update(this._cgp);
+            shader.bindingsVert[i].update(this._cgp, inst);
 
         for (let i = 0; i < shader.bindingsFrag.length; i++)
-            shader.bindingsFrag[i].update(this._cgp);
+            shader.bindingsFrag[i].update(this._cgp, inst);
 
         // shader.defaultBindingVert.update(this._cgp);
 
-        this._cgp.popErrorScope((e) =>
-        {
-            this._isValid = false;
-        });
+        // this._cgp.popErrorScope((e) =>
+        // {
+        //     this._isValid = false;
+        // });
     }
 }
