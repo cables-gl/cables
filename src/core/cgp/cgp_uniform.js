@@ -55,7 +55,6 @@ export default class Uniform extends CgUniform
 
     setValueT(v)
     {
-        console.log("valuet", v);
         this.needsUpdate = true;
         this._value = v;
         this._shader.needsPipelineUpdate = true;
@@ -83,6 +82,7 @@ export default class Uniform extends CgUniform
     copyToBuffer(buff, pos = 0)
     {
         if (this._type == "f") buff[pos] = this._value;
+        else
         if (this._type == "t")
         {
 

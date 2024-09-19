@@ -40,7 +40,6 @@ export default class Binding
         return size;
     }
 
-
     getBindingGroupLayoutEntry()
     {
         let label = "layout " + this._name + " [";
@@ -54,7 +53,6 @@ export default class Binding
             "binding": this.idx,
             "visibility": this.stage,
             "size": this.getSizeBytes()
-
         };
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
@@ -93,9 +91,10 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
-            o.name = this.uniforms[0].getValue().name;
-            o.width = this.uniforms[0].getValue().width;
-            if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
+            if (this.uniforms[0].getValue())
+            {
+                if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
+            }
             else o.resource = CABLES.emptyCglTexture.createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
@@ -105,9 +104,10 @@ export default class Binding
             o.resource = sampler;
         }
         else
-            o.resource = { "buffer": this._gpuBuffer,
+            o.resource = {
+                "buffer": this._gpuBuffer,
                 "minBindingSize": this.getSizeBytes(),
-                "hasDynamicOffset": 0,
+                "hasDynamicOffset": 0
             };
 
         this.isValid = true;
@@ -157,7 +157,14 @@ export default class Binding
             {
                 this.uniforms[i].copyToBuffer(this._buffer, off); // todo: check if uniform changed?
                 off += this.uniforms[i].getSizeBytes() / 4;
+                // if (this.uniforms[0].getType() == "m4")
+                // {
+                //     if (this.uniforms[i].getName() == "modelMatrix")
+                // console.log(this.uniforms[i].getName(), this._buffer);
+                // }
             }
+
+            // console.log(this._buffer);
 
             // todo: only if changed...
             cgp.device.queue.writeBuffer(

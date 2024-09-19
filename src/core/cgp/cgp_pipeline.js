@@ -15,6 +15,10 @@ export default class Pipeline
         this._pipeCfg = null;
         this._renderPipeline = null;
 
+        this.lastFrame = -1;
+        this.bindingCounter = 0;
+
+
         this._old = {};
 
         this.DEPTH_COMPARE_FUNCS_STRINGS = [
@@ -40,19 +44,22 @@ export default class Pipeline
 
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("setPipeline");
 
-        let needsRebuild =
-            !this._renderPipeline ||
-            !this._pipeCfg ||
-            this._old.mesh != mesh ||
-            this._old.shader != shader ||
-            mesh.needsPipelineUpdate ||
-            shader.needsPipelineUpdate;
+        // let needsRebuild = false;
+        let needsRebuildReason = "";
+        if (!this._renderPipeline) needsRebuildReason = "no renderpipeline";
+        if (!this._pipeCfg)needsRebuildReason = "no pipecfg";
+        if (this._old.mesh != mesh)needsRebuildReason = "no mesh";
+        if (this._old.shader != shader)needsRebuildReason = "shader changed";
+        if (mesh.needsPipelineUpdate)needsRebuildReason = "mesh needs update";
+        if (shader.needsPipelineUpdate)needsRebuildReason = "shader needs update";
+
+
 
         if (this._pipeCfg)
         {
             if (this._pipeCfg.depthStencil.depthWriteEnabled != this._cgp.stateDepthWrite())
             {
-                needsRebuild = true;
+                needsRebuildReason = "depth changed";
                 this._pipeCfg.depthStencil.depthWriteEnabled = this._cgp.stateDepthWrite();
             }
 
@@ -61,19 +68,20 @@ export default class Pipeline
                 if (this._pipeCfg.depthStencil.depthCompare != "never")
                 {
                     this._pipeCfg.depthStencil.depthCompare = "never";
-                    needsRebuild = true;
+                    needsRebuildReason = "depth compare changed";
                 }
             }
             else
             if (this._pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
             {
-                needsRebuild = true;
-                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
+                needsRebuildReason = "depth state ";
+                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepththis._cgp.stateDepthFunc();
             }
 
+            // console.log(this._pipeCfg.primitive.cullMode, this._cgp.stateCullFaceFacing());
             if (this._pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
             {
-                needsRebuild = true;
+                needsRebuildReason = "cullmode change";
                 this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
             }
         }
@@ -84,18 +92,19 @@ export default class Pipeline
             "bindingGroupEntries": this.bindingGroupEntries,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
-        if (needsRebuild)
+
+
+
+        if (needsRebuildReason != "")
         {
+            console.log("rebuild pipe", needsRebuildReason);
             this._cgp.pushErrorScope("createPipeline", { "logger": this._log });
 
-
-            // if (!this._pipeCfg || this._old.shader != shader)
-            this._pipeCfg = this.getPiplelineObject(shader, mesh);
+            this._pipeCfg = this.getPipelineObject(shader, mesh);
 
             this._old.shader = shader;
             this._old.mesh = mesh;
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
-
 
 
             this._cgp.popErrorScope();
@@ -113,7 +122,17 @@ export default class Pipeline
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
 
+
+            if (this.lastFrame != this._cgp.frame)
+            {
+                this.bindingCounter = 0;
+            }
+            this.lastFrame = this._cgp.frame;
+
             if (this._bindGroup) this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
+
+
+
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
@@ -123,7 +142,7 @@ export default class Pipeline
         shader.needsPipelineUpdate = false;
     }
 
-    getPiplelineObject(shader, mesh)
+    getPipelineObject(shader, mesh)
     {
         this.bindingGroupEntries = [];
         this.bindingGroupLayoutEntries = [];
@@ -150,7 +169,7 @@ export default class Pipeline
         }
         // //////////
 
-        const bindGroupLayout = this._cgp.device.createBindGroupLayout(
+        this.bindGroupLayout = this._cgp.device.createBindGroupLayout(
             {
                 "label": "label3",
                 "entries": this.bindingGroupLayoutEntries,
@@ -164,7 +183,7 @@ export default class Pipeline
 
         const bg = {
             "label": "label2",
-            "layout": bindGroupLayout,
+            "layout": this.bindGroupLayout,
             "entries": this.bindingGroupEntries
         };
 
@@ -173,7 +192,7 @@ export default class Pipeline
         const pipelineLayout = this._cgp.device.createPipelineLayout({
             "label": "label1",
             "bindGroupLayouts": [
-                bindGroupLayout,
+                this.bindGroupLayout,
             ]
         });
 
@@ -219,7 +238,7 @@ export default class Pipeline
             },
             "primitive": {
                 "topology": "triangle-list",
-                "cullMode": "back", // back/none/front
+                "cullMode": this._cgp.stateCullFaceFacing(), // back/none/front
 
                 // "point-list",
                 // "line-list",
@@ -229,7 +248,7 @@ export default class Pipeline
             },
             "depthStencil": {
                 "depthWriteEnabled": true,
-                "depthCompare": "less",
+                "depthCompare": this._cgp.stateDepthFunc(),
                 "format": "depth24plus",
             },
 
@@ -252,7 +271,6 @@ export default class Pipeline
             shader.bindingsFrag[i].update(this._cgp);
 
         // shader.defaultBindingVert.update(this._cgp);
-
 
         this._cgp.popErrorScope((e) =>
         {

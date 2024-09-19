@@ -177,6 +177,7 @@ export default class Mesh
 
         this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
 
+        // draw finally........
         if (this._numNonIndexed)
             this._cgp.passEncoder.draw(this._numIndices);
         else

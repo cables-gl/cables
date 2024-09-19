@@ -31,6 +31,7 @@ class WebGpuContext extends CGState
         this._viewport = [0, 0, 256, 256];
         this._shaderStack = [];
         this._simpleShader = null;
+        this.frame = 0;
 
         this._stackCullFaceFacing = [];
         this._stackDepthTest = [];
@@ -69,6 +70,7 @@ class WebGpuContext extends CGState
 
     renderStart(cgp, identTranslate, identTranslateView)
     {
+        this.frame++;
         this.pushErrorScope("cgpstate internal", "internal");
         this.pushErrorScope("cgpstate out-of-memory", "out-of-memory");
 

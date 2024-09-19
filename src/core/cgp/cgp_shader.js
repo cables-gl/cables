@@ -89,6 +89,7 @@ export default class Shader extends CgShader
         //     // console.log(this._uniforms[i]);
         // }
 
+
         this.uniModelMatrix.setValue(this._cgp.mMatrix);
         this.uniViewMatrix.setValue(this._cgp.vMatrix);
         this.uniProjMatrix.setValue(this._cgp.pMatrix);
