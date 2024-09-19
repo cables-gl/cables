@@ -37,6 +37,8 @@ class WebGpuContext extends CGState
         this._stackCullFace = [];
         this._stackDepthFunc = [];
         this._stackDepthWrite = [];
+        this._stackErrorScope = [];
+        this._stackErrorScopeLogs = [];
 
         this.DEPTH_FUNCS = [
             "never",
@@ -67,6 +69,9 @@ class WebGpuContext extends CGState
 
     renderStart(cgp, identTranslate, identTranslateView)
     {
+        this.pushErrorScope("cgpstate internal", "internal");
+        this.pushErrorScope("cgpstate out-of-memory", "out-of-memory");
+
         if (!this._simpleShader)
         {
             this._simpleShader = new Shader(this, "simple default shader");
@@ -95,6 +100,11 @@ class WebGpuContext extends CGState
         this.popDepthFunc();
         this.popDepthWrite();
         this.popDepthTest();
+
+        this.popErrorScope();
+        this.popErrorScope();
+
+        if (this._stackErrorScope.length > 0)console.log("scope stack length invalid...");
 
         this.emitEvent("endFrame");
         this.fpsCounter.endFrame();
@@ -158,13 +168,20 @@ class WebGpuContext extends CGState
         // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
-    pushErrorScope()
+
+
+
+    pushErrorScope(name, options = {})
     {
-        this.device.pushErrorScope("validation");
+        this._stackErrorScope.push(name);
+        this._stackErrorScopeLogs.push(options.logger || null);
+        this.device.pushErrorScope(options.scope || "validation");
     }
 
-    popErrorScope(name, cb)
+    popErrorScope(cb)
     {
+        const name = this._stackErrorScope.pop();
+        const logger = this._stackErrorScopeLogs.pop();
         this.device.popErrorScope().then((error) =>
         {
             if (error)
@@ -175,8 +192,8 @@ class WebGpuContext extends CGState
                 }
                 else
                 {
-                    this._log.error(error.constructor.name, "in", name);
-                    this._log.error(error.message);
+                    (logger || this._log).error(error.constructor.name, "in", name);
+                    (logger || this._log).error(error.message);
                 }
                 this.lastErrorMsg = error.message;
 

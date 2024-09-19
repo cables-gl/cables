@@ -5,8 +5,19 @@ export default class Uniform extends CgUniform
     constructor(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
     {
         super(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
-        this._loc = -1;
-        this._cgl = __shader._cgl;
+        this._cgp = __shader._cgp;
+
+
+
+        if (!CABLES.emptyCglTexture)
+            CABLES.emptyCglTexture = this._cgp.device.createTexture(
+                {
+                    "size": [8, 8],
+                    "format": "rgba8unorm",
+                    "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST,
+                });
+
+        if (this.getType() == "t" && !_value) this._value = CABLES.emptyCglTexture;
     }
 
 
@@ -44,8 +55,10 @@ export default class Uniform extends CgUniform
 
     setValueT(v)
     {
+        console.log("valuet", v);
         this.needsUpdate = true;
         this._value = v;
+        this._shader.needsPipelineUpdate = true;
     }
 
     updateValueM4(v) {}
@@ -70,6 +83,10 @@ export default class Uniform extends CgUniform
     copyToBuffer(buff, pos = 0)
     {
         if (this._type == "f") buff[pos] = this._value;
+        if (this._type == "t")
+        {
+
+        }
         else if (this._type == "4f")
         {
             buff[pos] = this._value[0];

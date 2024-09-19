@@ -94,27 +94,27 @@ export default class Mesh
             throw new Error();
         }
 
-        for (let i = 0; i < this._attributes.length; i++)
-        {
-            const attr = this._attributes[i];
-            if (attr.name == name)
-            {
-                // if (attr.numItems === numItems)
-                // {
-                // }
-                // else
-                // {
-                //     // this._log.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
-                //     this._resizeAttr(array, attr);
-                // }
-                // normalBuffer = this._createBuffer(this._cgp.device, new Float32Array(geom.vertexNormals), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
+        // for (let i = 0; i < this._attributes.length; i++)
+        // {
+        //     const attr = this._attributes[i];
+        //     if (attr.name == name)
+        //     {
+        //         // if (attr.numItems === numItems)
+        //         // {
+        //         // }
+        //         // else
+        //         // {
+        //         //     // this._log.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
+        //         //     this._resizeAttr(array, attr);
+        //         // }
+        //         // normalBuffer = this._createBuffer(this._cgp.device, new Float32Array(geom.vertexNormals), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
 
-                // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
-                // this._bufferArray(array, attr);
+        //         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+        //         // this._bufferArray(array, attr);
 
-                return attr;
-            }
-        }
+        //         return attr;
+        //     }
+        // }
 
         const buffer = this._createBuffer(this._cgp.device, new Float32Array(array), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
 

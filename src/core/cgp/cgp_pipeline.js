@@ -1,3 +1,4 @@
+import { Logger } from "cables-shared-client";
 import { Uniform } from "../cgl/cgl_shader_uniform.js";
 import UniformBuffer from "./cgp_uniformbuffer.js";
 
@@ -9,6 +10,7 @@ export default class Pipeline
         this._name = name;
         this._cgp = _cgp;
         this._isValid = true;
+        this._log = new Logger("pipeline");
 
         this._pipeCfg = null;
         this._renderPipeline = null;
@@ -76,38 +78,49 @@ export default class Pipeline
             }
         }
 
+        this._cgp.currentPipeDebug =
+        {
+            "cfg": this._pipeCfg,
+            "bindingGroupEntries": this.bindingGroupEntries,
+            "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
+        };
         if (needsRebuild)
         {
-            if (!this._pipeCfg || this._old.shader != shader) this._pipeCfg = this.getPiplelineObject(shader, mesh);
+            this._cgp.pushErrorScope("createPipeline", { "logger": this._log });
+
+
+            // if (!this._pipeCfg || this._old.shader != shader)
+            this._pipeCfg = this.getPiplelineObject(shader, mesh);
 
             this._old.shader = shader;
             this._old.mesh = mesh;
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
 
-            this._cgp.currentPipeDebug =
-            {
 
-                "cfg": this._pipeCfg,
 
-                "bindingGroupEntries": this.bindingGroupEntries,
-                "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
-
-            };
+            this._cgp.popErrorScope();
         }
         this._bindUniforms(shader);
 
         if (this._renderPipeline && this._isValid)
         {
-            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
+            this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
 
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
-            this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
+
+            if (this._bindGroup) this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+
+            this._cgp.popErrorScope();
         }
+
+        shader.needsPipelineUpdate = false;
     }
 
     getPiplelineObject(shader, mesh)
@@ -116,42 +129,51 @@ export default class Pipeline
         this.bindingGroupLayoutEntries = [];
 
 
-        if (shader.defaultBindingVert.getSizeBytes() > 0)
+        for (let i = 0; i < shader.bindingsVert.length; i++)
         {
-            this.bindingGroupEntries.push(shader.defaultBindingVert.getBindingGroupEntry(this._cgp.device));
-            this.bindingGroupLayoutEntries.push(shader.defaultBindingVert.getBindingGroupLayoutEntry());
-        }
-        else console.log("shader defaultBindingVert size 0");
-
-        if (shader.defaultBindingFrag.getSizeBytes() > 0)
-        {
-            this.bindingGroupEntries.push(shader.defaultBindingFrag.getBindingGroupEntry(this._cgp.device));
-            this.bindingGroupLayoutEntries.push(shader.defaultBindingFrag.getBindingGroupLayoutEntry());
-        }
-        else
-        {
-            console.log("shader defaultBindingFrag size 0");
+            if (shader.bindingsVert[i].getSizeBytes() > 0)
+            {
+                this.bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device));
+                this.bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
+            }
+            else console.log("shader defaultBindingVert size 0");
         }
 
-
+        for (let i = 0; i < shader.bindingsFrag.length; i++)
+        {
+            if (shader.bindingsFrag[i].getSizeBytes() > 0)
+            {
+                this.bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device));
+                this.bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
+            }
+            else console.log("shader defaultBindingFrag size 0");
+        }
+        // //////////
 
         const bindGroupLayout = this._cgp.device.createBindGroupLayout(
             {
                 "label": "label3",
                 "entries": this.bindingGroupLayoutEntries,
             });
+        // const bindGroupLayout = pipeline.getBindGroupLayout(0);
 
-        this._bindGroup = this._cgp.device.createBindGroup(
-            {
-                "label": "label2",
-                "layout": bindGroupLayout,
-                "entries": this.bindingGroupEntries
-            });
+        // console.log(this.bindingGroupEntries);
+        // console.log(this.bindingGroupLayoutEntries);
+
+        if (!this.bindingGroupEntries) return console.warn("no bindingGroupEntries");
+
+        const bg = {
+            "label": "label2",
+            "layout": bindGroupLayout,
+            "entries": this.bindingGroupEntries
+        };
+
+        this._bindGroup = this._cgp.device.createBindGroup(bg);
 
         const pipelineLayout = this._cgp.device.createPipelineLayout({
             "label": "label1",
             "bindGroupLayouts": [
-                bindGroupLayout, // @group(0)
+                bindGroupLayout,
             ]
         });
 
@@ -217,14 +239,20 @@ export default class Pipeline
 
     _bindUniforms(shader)
     {
-        this._cgp.pushErrorScope();
+        this._cgp.pushErrorScope("pipeline bind uniforms", { "logger": this._log });
 
         shader.bind();
-        shader.defaultBindingFrag.update(this._cgp);
-        shader.defaultBindingVert.update(this._cgp);
+
+        for (let i = 0; i < shader.bindingsVert.length; i++)
+            shader.bindingsVert[i].update(this._cgp);
+
+        for (let i = 0; i < shader.bindingsFrag.length; i++)
+            shader.bindingsFrag[i].update(this._cgp);
+
+        // shader.defaultBindingVert.update(this._cgp);
 
 
-        this._cgp.popErrorScope("cgp_pipeline end", (e) =>
+        this._cgp.popErrorScope((e) =>
         {
             this._isValid = false;
         });
