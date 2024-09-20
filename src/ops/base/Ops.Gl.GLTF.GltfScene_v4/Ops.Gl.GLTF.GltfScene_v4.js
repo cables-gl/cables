@@ -43,7 +43,7 @@ const
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
-const cgl = op.patch.cgl;
+let cgl = op.patch.cg || op.patch.cgl;
 let gltfLoadingErrorMesh = null;
 let gltfLoadingError = false;
 let gltfTransforms = 0;
@@ -142,6 +142,8 @@ function setCam()
 
 inExec.onTriggered = function ()
 {
+    cgl = op.patch.cg || op.patch.cgl;
+
     if (!finishedLoading) return;
     if (!inActive.get()) return;
 

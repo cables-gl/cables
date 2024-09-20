@@ -114,15 +114,15 @@ class Texture extends CgTexture
         if (!tex) return false;
         return (
             tex.width == this.width &&
-        tex.height == this.height &&
-        tex.filter == this.filter &&
-        tex.wrap == this.wrap &&
-        tex.textureType == this.textureType &&
-        tex.unpackAlpha == this.unpackAlpha &&
-        tex.anisotropic == this.anisotropic &&
-        tex.shadowMap == this.shadowMap &&
-        tex.texTarget == this.texTarget &&
-        tex.flip == this.flip
+            tex.height == this.height &&
+            tex.filter == this.filter &&
+            tex.wrap == this.wrap &&
+            tex.textureType == this.textureType &&
+            tex.unpackAlpha == this.unpackAlpha &&
+            tex.anisotropic == this.anisotropic &&
+            tex.shadowMap == this.shadowMap &&
+            tex.texTarget == this.texTarget &&
+            tex.flip == this.flip
         );
     }
 

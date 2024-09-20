@@ -29,6 +29,8 @@ export default class Shader extends CgShader
         this.uniModelMatrix = this.addUniformVert("m4", "modelMatrix");
         this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
         this.uniProjMatrix = this.addUniformVert("m4", "projMatrix");
+        this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
+        this._tempNormalMatrix = mat4.create();
 
         this._src = "";
     }
@@ -94,6 +96,12 @@ export default class Shader extends CgShader
         this.uniModelMatrix.setValue(this._cgp.mMatrix);
         this.uniViewMatrix.setValue(this._cgp.vMatrix);
         this.uniProjMatrix.setValue(this._cgp.pMatrix);
+
+        mat4.mul(this._tempNormalMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+        mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
+        mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
+
+        this.uniNormalMatrix.setValue(this._tempNormalMatrix);
 
 
         if (this._needsRecompile) this.compile();

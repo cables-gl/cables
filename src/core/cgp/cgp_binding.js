@@ -97,8 +97,15 @@ export default class Binding
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-            const sampler = this.uniforms[0]._cgp.device.createSampler();
+            // const sampler = this.uniforms[0]._cgp.device.createSampler();
 
+            const sampler = this.uniforms[0]._cgp.device.createSampler({
+                "addressModeU": "repeat",
+                "addressModeV": "repeat",
+                "magFilter": "linear",
+                "minFilter": "linear",
+                "mipmapFilter": "linear",
+            });
             o.resource = sampler;
         }
         else

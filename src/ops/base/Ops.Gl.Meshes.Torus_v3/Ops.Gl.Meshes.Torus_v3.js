@@ -15,7 +15,7 @@ let tmpNormal = vec3.create(), tmpVec = vec3.create();
 
 geomOut.ignoreValueSerialize = true;
 
-let cgl = op.patch.cgl;
+let cgl = op.patch.cg || op.patch.cgl;
 let mesh = null;
 let geom = null;
 let j = 0, i = 0, idx = 0;
@@ -151,9 +151,9 @@ function generateTorus(iradius, oradius, nRings, nSides)
 
     geom.setTexCoords(tc);
 
-    geomOut.set(null);
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 
-    if (!mesh)mesh = new CGL.Mesh(cgl, geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    // if (!mesh)mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);
 }

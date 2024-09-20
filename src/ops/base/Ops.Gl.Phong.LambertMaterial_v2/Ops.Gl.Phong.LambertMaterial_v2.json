@@ -5,41 +5,41 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Execute"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse R",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse G",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse B",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Diffuse A",
                 "group": "Diffuse Color",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Diffuse Texture",
                 "group": "Texture",
                 "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Colorize Texture",
                 "group": "Texture",
                 "subType": "boolean"
@@ -47,11 +47,11 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "next"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader"
             }
         ]
@@ -110,5 +110,6 @@
             }
         ]
     },
-    "exampleProjectId": "PAvm26"
+    "exampleProjectId": "PAvm26",
+    "license": "MIT"
 }

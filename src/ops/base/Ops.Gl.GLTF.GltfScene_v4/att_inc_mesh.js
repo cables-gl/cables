@@ -332,13 +332,17 @@ let gltfMesh = class
             }
 
             let glprim;
-            if (this.primitive == this.TRIANGLES)glprim = cgl.gl.TRIANGLES;
-            else if (this.primitive == this.LINES)glprim = cgl.gl.LINES;
-            else if (this.primitive == this.LINE_STRIP)glprim = cgl.gl.LINE_STRIP;
-            else if (this.primitive == this.POINTS)glprim = cgl.gl.POINTS;
-            else
+
+            if (cgl.gl)
             {
-                op.logWarn("unknown primitive type", this);
+                if (this.primitive == this.TRIANGLES)glprim = cgl.gl.TRIANGLES;
+                else if (this.primitive == this.LINES)glprim = cgl.gl.LINES;
+                else if (this.primitive == this.LINE_STRIP)glprim = cgl.gl.LINE_STRIP;
+                else if (this.primitive == this.POINTS)glprim = cgl.gl.POINTS;
+                else
+                {
+                    op.logWarn("unknown primitive type", this);
+                }
             }
 
             this.mesh = op.patch.cg.createMesh(g, { "glPrimitive": glprim });
