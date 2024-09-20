@@ -1,3 +1,4 @@
+import CgTexture from "../cg/cg_texture.js";
 import CgUniform from "../cg/cg_uniform.js";
 
 export default class Uniform extends CgUniform
@@ -9,13 +10,25 @@ export default class Uniform extends CgUniform
 
 
 
+
         if (!CABLES.emptyCglTexture)
+        {
+            let size = 256;
             CABLES.emptyCglTexture = this._cgp.device.createTexture(
                 {
-                    "size": [8, 8],
+                    "size": [size, size],
                     "format": "rgba8unorm",
                     "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST,
                 });
+            const data = CgTexture.getDefaultTextureData("stripes", size);
+
+            this._cgp.device.queue.writeTexture(
+                { "texture": CABLES.emptyCglTexture },
+                data,
+                { "bytesPerRow": size * 4 },
+                { "width": size, "height": size },
+            );
+        }
 
         if (this.getType() == "t" && !_value) this._value = CABLES.emptyCglTexture;
     }

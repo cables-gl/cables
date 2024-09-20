@@ -30,7 +30,6 @@ function doRender()
 shader.bindTextures = function ()
 {
     if (texture.get()) cgl.setTexture(0, texture.get().tex);
-    // else cgl.setTexture(0, CGL.Texture.getTemporaryTexture());
 };
 
 inMode.onChange = function ()

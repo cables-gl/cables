@@ -82,6 +82,12 @@ export default class Binding
     {
         // this.checkBuffer(gpuDevice);
 
+        if (this.bindingInstances[inst] && this.bindingInstances[inst].resource.buffer)
+        {
+            console.log("destrouy");
+            this.bindingInstances[inst].resource.buffer.destroy();
+        }
+
         this.isValid = false;
 
         const o = {

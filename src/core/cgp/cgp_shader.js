@@ -74,6 +74,7 @@ export default class Shader extends CgShader
         this.shaderModule = this._cgp.device.createShaderModule({ "code": src });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
+        this.needsPipelineUpdate = true;
     }
 
     error(e)

@@ -168,14 +168,13 @@ export default class Pipeline
                 };
 
                 this._bindGroups[this.bindingCounter] = this._cgp.device.createBindGroup(bg);
-                console.log("createBindGroup");
+                // console.log("createBindGroup");
             }
 
             this._bindUniforms(shader, this.bindingCounter);
 
             if (this._bindGroups[this.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[this.bindingCounter]);
             this.bindingCounter++;
-
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
