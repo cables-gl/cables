@@ -1,20 +1,22 @@
 import { Logger } from "cables-shared-client";
+import CgTexture from "../cg/cg_texture.js";
 
-export default class Texture
+export default class Texture extends CgTexture
 {
     constructor(_cgp, options)
     {
+        super();
         if (!_cgp) throw new Error("no cgp");
         this._log = new Logger("cgp_texture");
         this._cgp = _cgp;
-        this.id = CABLES.uuid();
+        // this.id = CABLES.uuid();
         this.pixelFormat = options.pixelFormat || Texture.PFORMATSTR_RGBA8UB;
         this.gpuTexture = null;
         this.gpuTextureDescriptor = null;
 
         options = options || {};
 
-        this.name = options.name || "unknown";
+        // this.name = options.name || "unknown";
     }
 
     /**
@@ -40,7 +42,12 @@ export default class Texture
             "format": textureType,
             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT
         };
-        this.gpuTexture = this._cgp.device.createTexture(this.gpuTextureDescriptor);
+
+        console.log(
+            this.gpuTexture = this._cgp.device.createTexture(this.gpuTextureDescriptor));
+
+
+        console.log(CABLES.errorTexture);
 
         this._cgp.device.queue.copyExternalImageToTexture({ "source": img }, { "texture": this.gpuTexture }, this.gpuTextureDescriptor.size);
 
