@@ -9,6 +9,8 @@ export default class Texture
         this._cgp = _cgp;
         this.id = CABLES.uuid();
         this.pixelFormat = options.pixelFormat || Texture.PFORMATSTR_RGBA8UB;
+        this.gpuTexture = null;
+        this.gpuTextureDescriptor = null;
 
         options = options || {};
 
@@ -28,21 +30,24 @@ export default class Texture
         this.width = img.width;
         this.height = img.height;
 
-        this.textureType = "rgba8unorm";
+        const textureType = "rgba8unorm";
 
-        const textureDescriptor = {
-            // Unlike in WebGL, the size of our texture must be set at texture creation time.
-            // This means we have to wait until the image is loaded to create the texture, since we won't
-            // know the size until then.
+        this._cgp.pushErrorScope("inittexture", { "logger": this._log });
+
+        this.gpuTextureDescriptor = {
+
             "size": { "width": img.width, "height": img.height },
-            "format": this.textureType,
-            "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST
+            "format": textureType,
+            "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT
         };
-        const texture = this._cgp.device.createTexture(textureDescriptor);
+        this.gpuTexture = this._cgp.device.createTexture(this.gpuTextureDescriptor);
 
-        this._cgp.device.queue.copyExternalImageToTexture({ "source": img }, { "texture": texture }, textureDescriptor.size);
+        this._cgp.device.queue.copyExternalImageToTexture({ "source": img }, { "texture": this.gpuTexture }, this.gpuTextureDescriptor.size);
 
-        return texture;
+
+        this._cgp.popErrorScope();
+
+        return this.gpuTexture;
     }
 
     getInfo()

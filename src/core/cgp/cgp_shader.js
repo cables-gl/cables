@@ -23,6 +23,8 @@ export default class Shader extends CgShader
 
         this.defaultBindingVert = new Binding(0, "defaultVert", "vert");
         this.defaultBindingFrag = new Binding(1, "defaultFrag", "frag");
+        this.bindingsFrag = [this.defaultBindingFrag];
+        this.bindingsVert = [this.defaultBindingVert];
 
         this.uniModelMatrix = this.addUniformVert("m4", "modelMatrix");
         this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
@@ -61,7 +63,7 @@ export default class Shader extends CgShader
     compile()
     {
         this._isValid = true;
-        this._cgp.pushErrorScope();
+        this._cgp.pushErrorScope("cgp_shader " + this._name);
 
         const defs = {};
         for (let i = 0; i < this._defines.length; i++)
@@ -70,7 +72,7 @@ export default class Shader extends CgShader
         const src = preproc(this._src, defs);
 
         this.shaderModule = this._cgp.device.createShaderModule({ "code": src });
-        this._cgp.popErrorScope("cgp_shader " + this._name, this.error.bind(this));
+        this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
     }
 
@@ -86,6 +88,7 @@ export default class Shader extends CgShader
         // {
         //     // console.log(this._uniforms[i]);
         // }
+
 
         this.uniModelMatrix.setValue(this._cgp.mMatrix);
         this.uniViewMatrix.setValue(this._cgp.vMatrix);

@@ -4,6 +4,7 @@ import Mesh from "./cgp_mesh.js";
 import Pipeline from "./cgp_pipeline.js";
 import Texture from "./cgp_texture.js";
 import Binding from "./cgp_binding.js";
+import Uniform from "./cgp_uniform.js";
 
 const CGP = {
     "Context": WebGpuContext,
@@ -12,6 +13,7 @@ const CGP = {
     "Pipeline": Pipeline,
     "Texture": Texture,
     "Binding": Binding,
+    "Uniform": Uniform
 };
 
 window.CGP = CGP;
