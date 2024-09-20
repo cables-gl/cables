@@ -151,10 +151,34 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
+            if (this.uniforms[0].getValue())
+                if (this.uniforms[0].getValue().gpuTexture)
+                {
+                    b.resource = this.uniforms[0].getValue().gpuTexture.createView();
+                    // console.log(this.uniforms[0].getValue().width);
+                    // console.log("yay");
+                }
+                else b.resource = CABLES.emptyCglTexture.createView();
+            // console.log("texture.....");
+            // o.resource = CABLES.emptyCglTexture.createView();
+            // if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
+            // {
+            //     if (this.uniforms[0].getValue())
+            //     {
+            //         if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
+            //     }
+            //     else o.resource = CABLES.emptyCglTexture.createView();
+            // }
+            // else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
+            // {
+            //     const sampler = this.uniforms[0]._cgp.device.createSampler();
+
+            //     o.resource = sampler;
+            // }
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-
+            b.resource = this.uniforms[0].getValue();
         }
         else
         {
