@@ -9,6 +9,7 @@ export default class CgTexture
         this.height = 0;
         this.name = "unknown";
 
+        options = options || {};
         this.pixelFormat = options.pixelFormat || CgTexture.PFORMATSTR_RGBA8UB;
 
         this.name = options.name || "unknown";

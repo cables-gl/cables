@@ -3,20 +3,19 @@ import CgTexture from "../cg/cg_texture.js";
 
 export default class Texture extends CgTexture
 {
-    constructor(_cgp, options)
+    constructor(_cgp, options = {})
     {
-        super();
+        super(options);
         if (!_cgp) throw new Error("no cgp");
         this._log = new Logger("cgp_texture");
         this._cgp = _cgp;
         // this.id = CABLES.uuid();
-        this.pixelFormat = options.pixelFormat || Texture.PFORMATSTR_RGBA8UB;
         this.gpuTexture = null;
         this.gpuTextureDescriptor = null;
 
         options = options || {};
 
-        // this.name = options.name || "unknown";
+        this.name = options.name || "unknown";
     }
 
     /**
@@ -43,14 +42,8 @@ export default class Texture extends CgTexture
             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT
         };
 
-        console.log(
-            this.gpuTexture = this._cgp.device.createTexture(this.gpuTextureDescriptor));
-
-
-        console.log(CABLES.errorTexture);
-
+        this.gpuTexture = this._cgp.device.createTexture(this.gpuTextureDescriptor);
         this._cgp.device.queue.copyExternalImageToTexture({ "source": img }, { "texture": this.gpuTexture }, this.gpuTextureDescriptor.size);
-
 
         this._cgp.popErrorScope();
 
@@ -68,6 +61,35 @@ export default class Texture extends CgTexture
         obj.textureType = tex.textureType;
 
         return obj;
+    }
+
+    /**
+     * @function initFromData
+     * @memberof Texture
+     * @instance
+     * @description create texturem from rgb data
+     * @param {Array<Number>} data rgb color array [r,g,b,a,r,g,b,a,...]
+     * @param {Number} w width
+     * @param {Number} h height
+     * @param {Number} filter
+     * @param {Number} wrap
+     */
+    initFromData(data, w, h, filter, wrap)
+    {
+        this.width = w;
+        this.height = h;
+        this.gpuTexture = this._cgp.device.createTexture(
+            {
+                "size": [w, h],
+                "format": "rgba8unorm",
+                "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
+            });
+
+        this._cgp.device.queue.writeTexture(
+            { "texture": this.gpuTexture },
+            data,
+            { "bytesPerRow": w * 4 },
+            { "width": w, "height": h });
     }
 }
 

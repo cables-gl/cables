@@ -72,11 +72,9 @@ export default class Binding
 
     getBindingGroupEntry(gpuDevice, inst)
     {
-        // this.checkBuffer(gpuDevice);
-
-        if (this.bindingInstances[inst] && this.bindingInstances[inst].resource.buffer)
+        if (this.bindingInstances[inst] && this.bindingInstances[inst].resource && this.bindingInstances[inst].resource.buffer)
         {
-            console.log("destrouy");
+            console.log("destroy");
             this.bindingInstances[inst].resource.buffer.destroy();
         }
 
