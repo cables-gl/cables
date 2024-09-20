@@ -9,7 +9,7 @@
           "y": 2930.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -91,7 +91,7 @@
           "y": 2990.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,7 +168,7 @@
           "y": 2466.1695182199105
         },
         "notWorkingMsg": null,
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -226,7 +226,7 @@
           "y": 2370.2637819934557
         },
         "notWorkingMsg": null,
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -270,6 +270,10 @@
         },
         {
           "name": "Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Double Sided",
           "value": 0
         },
         {
@@ -319,7 +323,7 @@
           "x": 622.0710852027429,
           "y": 2788.1887978847953
         },
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -416,7 +420,7 @@
           "x": 622.0710852027429,
           "y": 2730.2637819934557
         },
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -497,7 +501,7 @@
           "x": 622.0710852027429,
           "y": 2863.255910943437
         },
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -566,7 +570,7 @@
           "x": 622.0710852027429,
           "y": 2670.2637819934557
         },
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -687,7 +691,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "3bicj7gyn",
       "uiAttribs": {
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "translate": {
           "x": 622.0710852027429,
           "y": 2137.307588100756
@@ -715,7 +719,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "wwlwo0emm",
       "uiAttribs": {
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "translate": {
           "x": 622.0710852027429,
           "y": 3101.2637819934557
@@ -724,115 +728,6 @@
         "tempSubOldOpId": null
       },
       "storage": {}
-    },
-    {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "eqe2hnia0",
-      "uiAttribs": {
-        "translate": {
-          "x": 788.8493867409281,
-          "y": 2523.35092968731
-        },
-        "notWorkingMsg": null,
-        "loading": false,
-        "subPatch": "zgshi71gn",
-        "extendTitle": "beach",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "value": "/assets/library/images/beach.jpg",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 2
-        },
-        {
-          "name": "Wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": 0
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 0
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "Texture",
-              "portOut": "Texture",
-              "objIn": "q81nw8e8f",
-              "objOut": "eqe2hnia0"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 1024
-        },
-        {
-          "name": "Height",
-          "value": 1024
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
     },
     {
       "opId": "9be647c2-7afd-40ed-b669-9826ea6a50ca",
@@ -844,7 +739,7 @@
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "extendTitle": "mul",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -939,7 +834,7 @@
           "y": 2241.3607512465296
         },
         "comment": "todo: cheating!!",
-        "subPatch": "zgshi71gn",
+        "subPatch": "t9wcuecvd",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -974,6 +869,41 @@
           "value": 2
         }
       ]
+    },
+    {
+      "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
+      "id": "k23jfvqxl",
+      "uiAttribs": {
+        "subPatch": "t9wcuecvd",
+        "translate": {
+          "x": 771.446059677827,
+          "y": 2465.738332057012
+        },
+        "extendTitle": "#texBeach",
+        "title": "var get"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "texBeach"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Value",
+          "links": [
+            {
+              "portIn": "Texture",
+              "portOut": "Value",
+              "objIn": "q81nw8e8f",
+              "objOut": "k23jfvqxl"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "k23jfvqxl"
+      }
     }
   ]
 }

@@ -10,7 +10,7 @@
         },
         "loading": false,
         "accBuffersDelete": "DamagedHelmet",
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "extendTitle": "DamagedHelmet",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -23,7 +23,6 @@
         },
         {
           "name": "glb File",
-          "value": "/assets/654a1089765b6f277db8e991/DamagedHelmet.glb",
           "display": "file"
         },
         {
@@ -138,7 +137,7 @@
           "x": 880.2179767326797,
           "y": 2412.006519975471
         },
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -252,7 +251,7 @@
           "y": 2322.7870117550947
         },
         "loading": false,
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "extendTitle": "gravelpath",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -365,7 +364,7 @@
           "x": 880.2179767326797,
           "y": 2582.7870117550947
         },
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -425,7 +424,7 @@
           "x": 880.2179767326797,
           "y": 2282.7870117550947
         },
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -463,7 +462,7 @@
           "x": 604.2179767326797,
           "y": 2602.7870117550947
         },
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -495,10 +494,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "4lhs69mng",
       "uiAttribs": {
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "translate": {
-          "x": 880.2179767326797,
-          "y": 1773.425523997295
+          "x": 888,
+          "y": 1768.7581046258415
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -516,6 +515,54 @@
               "objOut": "4lhs69mng"
             }
           ]
+        },
+        {
+          "name": "innerOut_sctq1r681",
+          "title": "glb File",
+          "links": [
+            {
+              "portIn": "glb File",
+              "portOut": "innerOut_sctq1r681",
+              "objIn": "yqq8mejhy",
+              "objOut": "4lhs69mng"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_s8gc9utlu",
+          "title": "File",
+          "links": [
+            {
+              "portIn": "File",
+              "portOut": "innerOut_s8gc9utlu",
+              "objIn": "460yj0j09",
+              "objOut": "4lhs69mng"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_1q0owu3w6",
+          "title": "File",
+          "links": [
+            {
+              "portIn": "File",
+              "portOut": "innerOut_1q0owu3w6",
+              "objIn": "5infvno34",
+              "objOut": "4lhs69mng"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_hs0fvs2ks",
+          "title": "File",
+          "links": [
+            {
+              "portIn": "File",
+              "portOut": "innerOut_hs0fvs2ks",
+              "objIn": "sf4z4cwht",
+              "objOut": "4lhs69mng"
+            }
+          ]
         }
       ]
     },
@@ -523,7 +570,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "3egrtb8fj",
       "uiAttribs": {
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "translate": {
           "x": 880.2179767326797,
           "y": 3173.7870117550947
@@ -537,7 +584,7 @@
       "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
       "id": "2lr4bapbt",
       "uiAttribs": {
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "translate": {
           "x": 888,
           "y": 1940
@@ -582,7 +629,7 @@
       "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
       "id": "5infvno34",
       "uiAttribs": {
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "translate": {
           "x": 1355.2384360152948,
           "y": 2157.783432833258
@@ -595,7 +642,6 @@
       "portsIn": [
         {
           "name": "File",
-          "value": "/assets/664711fbbb71706c00625ead/helm_aorm.webp",
           "display": "file"
         },
         {
@@ -689,7 +735,7 @@
       "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
       "id": "460yj0j09",
       "uiAttribs": {
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "translate": {
           "x": 1279.520348628203,
           "y": 2075.7256427900193
@@ -702,7 +748,6 @@
       "portsIn": [
         {
           "name": "File",
-          "value": "/assets/664711fbbb71706c00625ead/helm_albedo.webp",
           "display": "file"
         },
         {
@@ -796,7 +841,7 @@
       "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
       "id": "sf4z4cwht",
       "uiAttribs": {
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "translate": {
           "x": 1410.5218805028271,
           "y": 2212.702472905539
@@ -809,7 +854,6 @@
       "portsIn": [
         {
           "name": "File",
-          "value": "/assets/664711fbbb71706c00625ead/helm_normal.webp",
           "display": "file"
         },
         {
@@ -907,7 +951,7 @@
           "x": 880.2179767326797,
           "y": 2512.879756987684
         },
-        "subPatch": "r942f94lg",
+        "subPatch": "ijxx942fh",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1027,6 +1071,10 @@
         },
         {
           "name": "Faster heightmapping",
+          "value": 0
+        },
+        {
+          "name": "Double Sided",
           "value": 0
         },
         {

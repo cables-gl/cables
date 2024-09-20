@@ -1,1 +1,20 @@
-{"ports":[{"id":"m57hn1hvy","title":"render","dir":0,"type":1}]}
+{
+    "ports": [
+        {
+            "id": "m57hn1hvy",
+            "title": "render",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "q7rod63s1",
+            "title": "File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/664711fbbb71706c00625ead/cables.svg",
+            "order": 1
+        }
+    ]
+}

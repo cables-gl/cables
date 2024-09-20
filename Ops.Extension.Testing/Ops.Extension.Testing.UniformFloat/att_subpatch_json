@@ -8,8 +8,7 @@
           "x": 819.8598416628007,
           "y": 2897.7341285124808
         },
-        "color": null,
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -102,9 +101,8 @@
           "x": 1059.8598416628006,
           "y": 2757.7341285124808
         },
-        "color": null,
         "loading": false,
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "extendTitle": "uv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -204,115 +202,6 @@
       ]
     },
     {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "s9djccypk",
-      "uiAttribs": {
-        "translate": {
-          "x": 867.8598416628007,
-          "y": 3317.7341285124808
-        },
-        "color": null,
-        "loading": false,
-        "subPatch": "3y35woj4j",
-        "extendTitle": "beach",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "value": "/assets/library/images/beach.jpg",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": 0
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "Texture",
-              "portOut": "Texture",
-              "objIn": "osgt0xxbb",
-              "objOut": "s9djccypk"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 1024
-        },
-        {
-          "name": "Height",
-          "value": 1024
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
       "opId": "9e6328da-457d-4d80-a881-dcab25a0e0f8",
       "id": "sayvgu5nl",
       "uiAttribs": {
@@ -322,7 +211,7 @@
         },
         "comment": "set colorization to red",
         "color": "#5dc0fd",
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "extendTitle": "color (4f)",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -386,7 +275,7 @@
         },
         "comment": "use the same shader but with the beach texture",
         "color": "#5dc0fd",
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "extendTitle": "texDiffuse (t)",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -429,8 +318,7 @@
           "y": 2977.7341285124808
         },
         "comment": "draw rectangle with the uv test texture",
-        "color": null,
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -517,8 +405,7 @@
           "x": 819.8598416628007,
           "y": 3477.7341285124808
         },
-        "color": null,
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -584,7 +471,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "3ohp36xc1",
       "uiAttribs": {
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "translate": {
           "x": 819.8598416628007,
           "y": 2677.7341285124808
@@ -612,7 +499,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "l0f3aqqw2",
       "uiAttribs": {
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "translate": {
           "x": 819.8598416628007,
           "y": 3862.2687938601093
@@ -627,33 +514,34 @@
       "id": "pnjnz0k83",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "translate": {
           "x": 1096.0502031554227,
           "y": 3782.2687938601093
         },
-        "extendTitle": "#currentTestName"
+        "extendTitle": "#currentTestName",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
           "value": "currentTestName"
         }
-      ],
-      "storage": {
-        "ref": "pnjnz0k83"
-      }
+      ]
     },
     {
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "qdcixa5vr",
       "uiAttribs": {
-        "subPatch": "3y35woj4j",
+        "subPatch": "fk0wpy1yr",
         "translate": {
           "x": 1108.0502031554227,
           "y": 3687.0842010530187
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Name",
@@ -666,9 +554,41 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
+      "id": "b0k36f8np",
+      "uiAttribs": {
+        "subPatch": "fk0wpy1yr",
+        "translate": {
+          "x": 843.8598416628007,
+          "y": 3340
+        },
+        "extendTitle": "#texBeach",
+        "title": "var get"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "texBeach"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Value",
+          "links": [
+            {
+              "portIn": "Texture",
+              "portOut": "Value",
+              "objIn": "osgt0xxbb",
+              "objOut": "b0k36f8np"
+            }
+          ]
+        }
       ],
       "storage": {
-        "ref": "qdcixa5vr"
+        "ref": "b0k36f8np"
       }
     }
   ]

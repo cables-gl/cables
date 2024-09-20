@@ -9,7 +9,7 @@
           "y": 2536.7580939550235
         },
         "notWorkingMsg": null,
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -104,7 +104,7 @@
         },
         "color": "#5dc0fd",
         "notWorkingMsg": null,
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -140,7 +140,7 @@
           "x": 1286.020071843423,
           "y": 2456.7580939550235
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -197,7 +197,7 @@
           "x": 1250.020071843423,
           "y": 2836.7580939550235
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -209,8 +209,13 @@
           "value": "textmesh"
         },
         {
-          "name": "Scale",
+          "name": "Scale Text",
           "value": 1
+        },
+        {
+          "name": "Scale",
+          "value": 1,
+          "title": "Line Scale"
         },
         {
           "name": "Font",
@@ -296,7 +301,7 @@
           "x": 1250.020071843423,
           "y": 2756.7580939550235
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -337,7 +342,7 @@
           "x": 1658.020071843423,
           "y": 2836.7580939550235
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -394,7 +399,7 @@
           "x": 878.020071843423,
           "y": 2616.7580939550235
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -451,7 +456,7 @@
           "x": 878.020071843423,
           "y": 2330.158483986594
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -532,7 +537,7 @@
           "x": 1658.020071843423,
           "y": 2937.946606350698
         },
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -717,7 +722,7 @@
         },
         "notWorkingMsg": null,
         "loading": false,
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "extendTitle": "WorkSans-Regular",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -778,7 +783,7 @@
           "y": 2529.0411363566195
         },
         "notWorkingMsg": null,
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -916,7 +921,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "ky45kl9b9",
       "uiAttribs": {
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "translate": {
           "x": 941.5984368654745,
           "y": 1994.8175270915344
@@ -944,7 +949,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "70qj0z4px",
       "uiAttribs": {
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "translate": {
           "x": 941.5984368654745,
           "y": 3048.946606350698
@@ -955,43 +960,11 @@
       "storage": {}
     },
     {
-      "opId": "68177370-116e-4c76-aef3-3b10d68e7227",
-      "id": "64wl6ms3e",
-      "uiAttribs": {
-        "translate": {
-          "x": 1646.6030908584944,
-          "y": 2230.138834447969
-        },
-        "loading": false,
-        "subPatch": "wihusshfl",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "file",
-          "value": "/assets/664711fbbb71706c00625ead/Interface-Regular.woff",
-          "display": "file"
-        },
-        {
-          "name": "family",
-          "value": "interface"
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Loaded",
-          "value": 1
-        }
-      ]
-    },
-    {
       "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
       "id": "t8yq3pr2d",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "translate": {
           "x": 1087.7709347278228,
           "y": 2249.2789365320564
@@ -1011,7 +984,7 @@
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "m7jibe75q",
       "uiAttribs": {
-        "subPatch": "wihusshfl",
+        "subPatch": "ft0bixmwv",
         "translate": {
           "x": 1099.7709347278228,
           "y": 2154.0943437249653
