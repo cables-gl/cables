@@ -102,27 +102,27 @@ export default class Pipeline
             console.log("rebuild pipe", needsRebuildReason);
             this._cgp.pushErrorScope("createPipeline", { "logger": this._log });
 
-            this._pipeCfg = this.getPipelineObject(shader, mesh);
 
+
+            this._bindGroups = [];
+
+            this._pipeCfg = this.getPipelineObject(shader, mesh);
             this._old.shader = shader;
             this._old.mesh = mesh;
-
-
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
-
 
             this._cgp.popErrorScope();
         }
 
+
         if (this._renderPipeline && this._isValid)
         {
-            // this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
+            this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
-
 
             if (this.lastFrame != this._cgp.frame) this.bindingCounter = 0;
             this.lastFrame = this._cgp.frame;
@@ -168,7 +168,7 @@ export default class Pipeline
                 };
 
                 this._bindGroups[this.bindingCounter] = this._cgp.device.createBindGroup(bg);
-                console.log("createBindGroup");
+                // console.log("createBindGroup");
             }
 
             this._bindUniforms(shader, this.bindingCounter);
@@ -176,10 +176,9 @@ export default class Pipeline
             if (this._bindGroups[this.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[this.bindingCounter]);
             this.bindingCounter++;
 
-
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
-            // this._cgp.popErrorScope();
+            this._cgp.popErrorScope();
         }
 
         shader.needsPipelineUpdate = false;

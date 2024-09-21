@@ -5,14 +5,11 @@ export default class Binding
     {
         this.idx = idx;
         this._name = name;
+        this.uniforms = [];
+        this.bindingInstances = [];
+
         this.stage = GPUShaderStage.VERTEX;
         if (stage == "frag") this.stage = GPUShaderStage.FRAGMENT;
-
-        // this.stage = GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX; // why needed??
-
-        this.uniforms = [];
-
-        this.bindingInstances = [];
 
         this._buffer = null;
         this.isValid = true;
@@ -59,16 +56,11 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
-            o.texture = this.uniforms[0].getValue() || CABLES.emptyCglTexture;
+            o.texture = {};
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-            // const sampler = this.uniforms[0]._cgp.device.createSampler();
-            const sampler = this.uniforms[0]._cgp.device.createSampler({
-                "magFilter": "linear",
-                "minFilter": "linear",
-            });
-            o.sampler = sampler;
+            o.sampler = {};
         }
         else
         {
@@ -80,7 +72,11 @@ export default class Binding
 
     getBindingGroupEntry(gpuDevice, inst)
     {
-        // this.checkBuffer(gpuDevice);
+        if (this.bindingInstances[inst] && this.bindingInstances[inst].resource && this.bindingInstances[inst].resource.buffer)
+        {
+            console.log("destroy");
+            this.bindingInstances[inst].resource.buffer.destroy();
+        }
 
         this.isValid = false;
 
@@ -97,12 +93,19 @@ export default class Binding
             {
                 if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
             }
-            else o.resource = CABLES.emptyCglTexture.createView();
+            else o.resource = CABLES.emptyCglTexture.createView();// CABLES.emptyCglTexture.createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-            const sampler = this.uniforms[0]._cgp.device.createSampler();
+            // const sampler = this.uniforms[0]._cgp.device.createSampler();
 
+            const sampler = this.uniforms[0]._cgp.device.createSampler({
+                "addressModeU": "repeat",
+                "addressModeV": "repeat",
+                "magFilter": "linear",
+                "minFilter": "linear",
+                "mipmapFilter": "linear",
+            });
             o.resource = sampler;
         }
         else
@@ -145,10 +148,45 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
+            if (this.uniforms[0].getValue())
+                if (this.uniforms[0].getValue().gpuTexture)
+                {
+                    this.bindingInstances[inst] = this.getBindingGroupEntry(this.uniforms[0]._cgp.device, inst);
+                    // b.resource = this.uniforms[0].getValue().gpuTexture.createView();
+                    // console.log(this.uniforms[0].getValue().width);
+                    // console.log("yay");
+                    // console.log("real tex...", this.uniforms[0].getValue());
+                    // CABLES.errorTexture;
+                    // b.resource = CABLES.errorTexture.createView();
+                }
+                else
+                {
+                    // console.log("fake tex...");
+                    b.resource = CABLES.errorTexture.createView();
+                }
+            // console.log(1);
+
+
+            // console.log("texture.....");
+            // o.resource = CABLES.emptyCglTexture.createView();
+            // if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
+            // {
+            //     if (this.uniforms[0].getValue())
+            //     {
+            //         if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
+            //     }
+            //     else o.resource = CABLES.emptyCglTexture.createView();
+            // }
+            // else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
+            // {
+            //     const sampler = this.uniforms[0]._cgp.device.createSampler();
+
+            //     o.resource = sampler;
+            // }
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-
+            b.resource = this.uniforms[0].getValue();
         }
         else
         {

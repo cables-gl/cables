@@ -36,6 +36,50 @@ op.setPortGroup("Texture", [
     inColorizeTexture
 ]);
 
+let oldCount = 0;
+
+const next = op.outTrigger("next");
+const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl, "LambertMaterial");
+shader.define("NUM_LIGHTS", "1");
+
+const colUni = new CGL.Uniform(shader, "4f", "materialColor", r, g, b, a);
+
+shader.uniformColorDiffuse = colUni;
+
+const outShader = op.outObject("Shader");
+outShader.set(shader);
+
+const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
+const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
+const iViewMatrix = mat4.create();
+
+shader.setSource(attachments.lambert_vert, attachments.lambert_frag);
+
+shader.define("MAX_LIGHTS", MAX_LIGHTS.toString());
+
+let defaultUniform = null;
+const lightUniforms = [];
+const hasLight = {
+    "directional": false,
+    "spot": false,
+    "ambient": false,
+    "point": false,
+};
+
+const DEFAULT_LIGHTSTACK = [
+    {
+        "type": "point",
+        "position": [0, 2, 1],
+        "intensity": 1,
+        "attenuation": 0,
+        "falloff": 0.5,
+        "radius": 80,
+        "castLight": 1,
+    }];
+
+updateDiffuseTexture();
+
 function updateDiffuseTexture()
 {
     if (inDiffuseTexture.get())
@@ -53,39 +97,6 @@ function updateDiffuseTexture()
         diffuseTextureUniform = null;
     }
 }
-
-const next = op.outTrigger("next");
-
-const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, "LambertMaterial");
-shader.define("NUM_LIGHTS", "1");
-
-const colUni = new CGL.Uniform(shader, "4f", "materialColor", r, g, b, a);
-
-shader.uniformColorDiffuse = colUni;
-
-const outShader = op.outObject("Shader");
-outShader.set(shader);
-
-const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
-const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
-
-shader.setSource(attachments.lambert_vert, attachments.lambert_frag);
-
-const DEFAULT_LIGHTSTACK = [
-    {
-        "type": "point",
-        "position": [0, 2, 1],
-        "intensity": 1,
-        "attenuation": 0,
-        "falloff": 0.5,
-        "radius": 80,
-        "castLight": 1,
-    }];
-
-shader.define("MAX_LIGHTS", MAX_LIGHTS.toString());
-
-let defaultUniform = null;
 
 function createDefaultUniform()
 {
@@ -106,20 +117,7 @@ function createDefaultUniform()
 function setDefaultUniform(light)
 {
     shader.define("NUM_LIGHTS", "1");
-    if (shader.hasDefine("HAS_SPOT"))
-    {
-        shader.removeDefine("HAS_SPOT");
-    }
-    if (shader.hasDefine("HAS_DIRECTIONAL"))
-    {
-        shader.removeDefine("HAS_DIRECTIONAL");
-    }
-    if (shader.hasDefine("HAS_AMBIENT"))
-    {
-        shader.removeDefine("HAS_AMBIENT");
-    }
-
-    if (!shader.hasDefine("HAS_POINT")) shader.define("HAS_POINT");
+    shader.removeDefine("HAS_SPOT");
 
     defaultUniform.position.setValue(light.position);
     defaultUniform.color.setValue(light.color);
@@ -143,20 +141,9 @@ function setDefaultUniform(light)
     ]);
 }
 
-const lightUniforms = [];
-const hasLight = {
-    "directional": false,
-    "spot": false,
-    "ambient": false,
-    "point": false,
-};
-
 function createUniforms(lightStack)
 {
-    for (let i = 0; i < lightUniforms.length; i += 1)
-    {
-        lightUniforms[i] = null;
-    }
+    for (let i = 0; i < lightUniforms.length; i += 1) lightUniforms[i] = null;
 
     hasLight.directional = false;
     hasLight.spot = false;
@@ -180,10 +167,8 @@ function createUniforms(lightStack)
                 "position": new CGL.Uniform(shader, "3f", "lights[" + i + "].position", [0, 11, 0]),
                 // intensity, attenuation, falloff, radius
                 "lightProperties": new CGL.Uniform(shader, "4f", "lights[" + i + "].lightProperties", [1, 1, 1, 1]),
-
                 "conePointAt": new CGL.Uniform(shader, "3f", "lights[" + i + "].conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(shader, "3f", "lights[" + i + "].spotProperties", [0, 0, 0, 0]),
-
                 "castLightType": new CGL.Uniform(shader, "2i", "lights[" + i + "].castLightType", [0, 0])
             };
         }
@@ -194,20 +179,6 @@ function createUniforms(lightStack)
         const key = keys[i];
 
         shader.toggleDefine("HAS_" + key.toUpperCase(), hasLight[key]);
-        /* if (hasLight[key])
-        {
-            if (!shader.hasDefine("HAS_" + key.toUpperCase()))
-            {
-                shader.define("HAS_" + key.toUpperCase());
-            }
-        }
-        else
-        {
-            if (shader.hasDefine("HAS_" + key.toUpperCase()))
-            {
-                shader.removeDefine("HAS_" + key.toUpperCase());
-            }
-        } */
     }
 }
 
@@ -242,7 +213,6 @@ function setUniforms(lightStack)
     }
 }
 
-let oldCount = 0;
 function compareLights(lightStack)
 {
     if (lightStack.length !== oldCount)
@@ -257,8 +227,6 @@ function compareLights(lightStack)
         setUniforms(lightStack);
     }
 }
-
-const iViewMatrix = mat4.create();
 
 function updateLights()
 {
@@ -311,5 +279,3 @@ execute.onTriggered = function ()
     next.trigger();
     cgl.popShader();
 };
-
-updateDiffuseTexture();

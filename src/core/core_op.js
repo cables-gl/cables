@@ -1538,8 +1538,6 @@ const Op = function ()
      */
     Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
-        if (!this.patch.isEditorMode()) return;
-
         this._linkTimeRules.needsParentOp = parentOpName;
     };
 

@@ -45,13 +45,12 @@
             {
                 "type": 0,
                 "name": "Loaded",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
     "summary": "Load a SVG image and convert to a texture of pixels",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -93,5 +92,6 @@
             }
         ]
     },
-    "exampleProjectId": "oqCKY6"
+    "exampleProjectId": "oqCKY6",
+    "license": "MIT"
 }

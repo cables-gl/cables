@@ -74,7 +74,6 @@ const Framebuffer2 = function (cgl, w, h, options)
         else this._options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
     }
 
-
     for (let i = 0; i < this._numRenderBuffers; i++)
     {
         this._colorTextures[i] = new Texture(cgl, {
