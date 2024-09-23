@@ -36,7 +36,7 @@
     "coreLibs": [
         "standalone_electron"
     ],
-    "summary": "create a new empty file on your local harddrive",
+    "summary": "Create a new empty file on your local harddrive",
     "docs": {
         "ports": []
     }
