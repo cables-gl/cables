@@ -26,14 +26,14 @@ let count = 0;
 
 maxDepth.onChange =
     deeper.onChange =
-    seed.onChange =
-    inScale.onChange =
-    width.onChange =
-    height.onChange =
-    function ()
-    {
-        needsChange = true;
-    };
+        seed.onChange =
+            inScale.onChange =
+                width.onChange =
+                    height.onChange =
+                        function ()
+                        {
+                            needsChange = true;
+                        };
 
 function drawSquare(x, y, depth, scale)
 {
