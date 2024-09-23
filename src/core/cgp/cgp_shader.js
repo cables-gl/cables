@@ -92,17 +92,19 @@ export default class Shader extends CgShader
         //     // console.log(this._uniforms[i]);
         // }
 
-
         this.uniModelMatrix.setValue(this._cgp.mMatrix);
         this.uniViewMatrix.setValue(this._cgp.vMatrix);
         this.uniProjMatrix.setValue(this._cgp.pMatrix);
 
-        mat4.mul(this._tempNormalMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+        // mat4.mul(this._tempNormalMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+        // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
+        // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
+
+
+        mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
         mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
-        mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
         this.uniNormalMatrix.setValue(this._tempNormalMatrix);
-
 
         if (this._needsRecompile) this.compile();
     }
