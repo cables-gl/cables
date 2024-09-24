@@ -26,6 +26,7 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
     {
         return new Uint8Array(size * size * 4).fill(0);
     }
+    else
     if (name == "color")
     {
         const data = new Uint8Array(size * size * 4);
@@ -42,8 +43,7 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
         }
         return data;
     }
-
-
+    else
     if (name == "randomUInt")
     {
         const data = new Uint8Array(size * size * 4);
@@ -57,8 +57,7 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
         }
         return data;
     }
-
-
+    else
     if (name == "random")
     {
         const data = new Float32Array(size * size * 4);
@@ -72,13 +71,19 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
         }
         return data;
     }
+    else
     if (name == "stripes")
     {
         const arr = [];
 
-        let r = options.r || 1;
-        let g = options.g || 1;
-        let b = options.b || 1;
+        let r = options.r;
+        let g = options.g;
+        let b = options.b;
+
+        if (r === undefined)r = 1;
+        if (g === undefined)g = 1;
+        if (b === undefined)b = 1;
+
         for (let y = 0; y < size; y++)
         {
             for (let x = 0; x < size; x++)
@@ -101,8 +106,12 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
 
         return new Uint8Array(arr);
     }
+    else
+    {
+        this._log.error("unknown default texture", name);
+        return CgTexture.getDefaultTextureData("stripes", size, { "r": 1, "g": 0, "b": 0 });
+    }
 };
-
 
 
 

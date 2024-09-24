@@ -58,9 +58,7 @@ export default class Pipeline
         if (this._old.mesh != mesh)needsRebuildReason = "no mesh";
         if (this._old.shader != shader)needsRebuildReason = "shader changed";
         if (mesh.needsPipelineUpdate)needsRebuildReason = "mesh needs update";
-        if (shader.needsPipelineUpdate)needsRebuildReason = "shader needs update";
-
-
+        if (shader.needsPipelineUpdate)needsRebuildReason = "shader needs update: " + shader.needsPipelineUpdate;
 
         if (this._pipeCfg)
         {

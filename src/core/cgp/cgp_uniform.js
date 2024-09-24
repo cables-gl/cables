@@ -11,46 +11,46 @@ export default class Uniform extends CgUniform
 
 
 
-        if (!CABLES.emptyCglTexture)
-        {
-            let size = 256;
+        // if (!CABLES.emptyCglTexture)
+        // {
+        //     let size = 256;
 
-            CABLES.emptyCglTexture = this._cgp.device.createTexture(
-                {
-                    "size": [size, size],
-                    "format": "rgba8unorm",
-                    "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
-                });
-            const data = CgTexture.getDefaultTextureData("stripes", size);
+        //     CABLES.emptyCglTexture = this._cgp.device.createTexture(
+        //         {
+        //             "size": [size, size],
+        //             "format": "rgba8unorm",
+        //             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
+        //         });
+        //     const data = CgTexture.getDefaultTextureData("stripes", size);
 
-            this._cgp.device.queue.writeTexture(
-                { "texture": CABLES.emptyCglTexture },
-                data,
-                { "bytesPerRow": size * 4 },
-                { "width": size, "height": size },
-            );
-
-
-            /// ////////////
+        //     this._cgp.device.queue.writeTexture(
+        //         { "texture": CABLES.emptyCglTexture },
+        //         data,
+        //         { "bytesPerRow": size * 4 },
+        //         { "width": size, "height": size },
+        //     );
 
 
-            CABLES.errorTexture = this._cgp.device.createTexture(
-                {
-                    "size": [size, size],
-                    "format": "rgba8unorm",
-                    "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
-                });
-            const data2 = CgTexture.getDefaultTextureData("stripes", size, { "r": 55, "g": 0, "b": 0 });
+        //     /// ////////////
 
-            this._cgp.device.queue.writeTexture(
-                { "texture": CABLES.errorTexture },
-                data2,
-                { "bytesPerRow": size * 4 },
-                { "width": size, "height": size },
-            );
-        }
 
-        // if (this.getType() == "t" && !_value) this._value = CABLES.emptyCglTexture;
+        //     CABLES.errorTexture = this._cgp.device.createTexture(
+        //         {
+        //             "size": [size, size],
+        //             "format": "rgba8unorm",
+        //             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
+        //         });
+        //     const data2 = CgTexture.getDefaultTextureData("stripes", size, { "r": 55, "g": 0, "b": 0 });
+
+        //     this._cgp.device.queue.writeTexture(
+        //         { "texture": CABLES.errorTexture },
+        //         data2,
+        //         { "bytesPerRow": size * 4 },
+        //         { "width": size, "height": size },
+        //     );
+        // }
+
+        if (this.getType() == "t" && !_value) this._value = this._cgp.getEmptyTexture();
     }
 
 
@@ -88,9 +88,11 @@ export default class Uniform extends CgUniform
 
     setValueT(v)
     {
+        if (this._value != v)
+            this._shader.needsPipelineUpdate = "texture changed"; // todo really needed ? change binding instead?
+
         this.needsUpdate = true;
         this._value = v;
-        this._shader.needsPipelineUpdate = true;
     }
 
     updateValueM4(v) {}

@@ -36,16 +36,14 @@ export default class Shader extends CgShader
 
         this._cgp.on("deviceChange", () =>
         {
-            this.reInit();
+            this.shaderModule = null;
+            this._needsRecompile = "device changed";
         });
     }
 
     reInit()
     {
-        console.log("reinit shader");
-        // todo: dispose?
-        this.shaderModule = null;
-        this._needsRecompile = true;
+
     }
 
     get isValid()
@@ -89,7 +87,7 @@ export default class Shader extends CgShader
         this.shaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
-        this.needsPipelineUpdate = true;
+        this.needsPipelineUpdate = "compiled";
     }
 
     error(e)
@@ -141,7 +139,8 @@ export default class Shader extends CgShader
         uni.shaderType = "frag";
 
         this.defaultBindingFrag.addUniform(uni);
-        this.needsPipelineUpdate = true;
+        this.needsPipelineUpdate = "add frag uniform";
+
         return uni;
     }
 
@@ -164,7 +163,7 @@ export default class Shader extends CgShader
         uni.shaderType = "vert";
 
         this.defaultBindingVert.addUniform(uni);
-        this.needsPipelineUpdate = true;
+        this.needsPipelineUpdate = "add ver uniform";
 
         return uni;
     }

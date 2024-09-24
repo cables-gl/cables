@@ -99,7 +99,7 @@ export default class Binding
             {
                 if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
             }
-            else o.resource = CABLES.emptyCglTexture.createView();// CABLES.emptyCglTexture.createView();
+            else o.resource = this._cgp.getEmptyTexture().createView();// CABLES.emptyCglTexture.createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
