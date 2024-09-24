@@ -10,7 +10,7 @@ export default class Mesh
         this._geom = null;
         this.numIndex = 0;
 
-        this._pipe = new Pipeline(this._cgp);
+        this._pipe = new Pipeline(this._cgp, "new mesh");
 
         this._numNonIndexed = 0;
         this._positionBuffer = null;
@@ -135,10 +135,7 @@ export default class Mesh
 
     // setPipeline()
     // {
-
     //     this._cgp.passEncoder.setPipeline(this._pipe.getPiplelineObject(this._cgp.getShader(),this));
-
-
     // }
 
     render()
@@ -160,6 +157,7 @@ export default class Mesh
 
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh.render");
 
+        this._pipe.setName("mesh " + this._geom.name + " " + this._cgp.getShader().getName());
         this._pipe.setPipeline(this._cgp.getShader(), this);
 
         if (!this._pipe.isValid)

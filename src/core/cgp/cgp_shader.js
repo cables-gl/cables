@@ -87,7 +87,9 @@ export default class Shader extends CgShader
         this.shaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
-        this.needsPipelineUpdate = "compiled";
+        // this.needsPipelineUpdate = "compiled";
+
+        this.emitEvent("compiled");
     }
 
     error(e)
@@ -110,7 +112,6 @@ export default class Shader extends CgShader
         // mat4.mul(this._tempNormalMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
         // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
         // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
-
 
         mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
         mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);

@@ -17,6 +17,9 @@ export default class Pipeline
 
         this._bindGroups = [];
 
+        this._shaderListeners = [];
+        this.shaderNeedsPipelineUpdate = false;
+
         this.lastFrame = -1;
         this.bindingCounter = 0;
 
@@ -41,6 +44,32 @@ export default class Pipeline
 
     get isValid() { return this._isValid; }
 
+
+
+    setName(name)
+    {
+        this._name = name;
+    }
+
+
+    setShaderListener(oldShader, newShader)
+    {
+        for (let i = 0; i < this._shaderListeners.length; i++)
+        {
+            oldShader.off(this._shaderListeners[i]);
+        }
+
+
+        this._shaderListeners.push(
+            newShader.on("compiled", () =>
+            {
+                console.log("pipe update shader compileeeeeee");
+                // this.needsRebuildReason = "shader changed";
+                this.shaderNeedsPipelineUpdate = "shader compiled";
+            }));
+    }
+
+
     setPipeline(shader, mesh)
     {
         if (!mesh || !shader)
@@ -51,14 +80,17 @@ export default class Pipeline
 
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("setPipeline");
 
-        // let needsRebuild = false;
         let needsRebuildReason = "";
         if (!this._renderPipeline) needsRebuildReason = "no renderpipeline";
         if (!this._pipeCfg)needsRebuildReason = "no pipecfg";
         if (this._old.mesh != mesh)needsRebuildReason = "no mesh";
-        if (this._old.shader != shader)needsRebuildReason = "shader changed";
+        if (this._old.shader != shader)
+        {
+            this.setShaderListener(this._old.shader, shader);
+            needsRebuildReason = "shader changed";
+        }
         if (mesh.needsPipelineUpdate)needsRebuildReason = "mesh needs update";
-        if (shader.needsPipelineUpdate)needsRebuildReason = "shader needs update: " + shader.needsPipelineUpdate;
+        if (this.shaderNeedsPipelineUpdate)needsRebuildReason = "shader needs update: " + this.shaderNeedsPipelineUpdate;
 
         if (this._pipeCfg)
         {
@@ -99,7 +131,6 @@ export default class Pipeline
         };
 
 
-
         if (needsRebuildReason != "")
         {
             console.log("rebuild pipe", needsRebuildReason);
@@ -128,7 +159,6 @@ export default class Pipeline
 
             if (this.lastFrame != this._cgp.frame) this.bindingCounter = 0;
             this.lastFrame = this._cgp.frame;
-
 
             if (!this._bindGroups[this.bindingCounter])
             {
@@ -172,7 +202,7 @@ export default class Pipeline
             this._cgp.popErrorScope();
         }
 
-        shader.needsPipelineUpdate = false;
+        this.shaderNeedsPipelineUpdate = false;
     }
 
     getPipelineObject(shader, mesh)
