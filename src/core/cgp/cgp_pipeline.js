@@ -23,18 +23,9 @@ export default class Pipeline
         this.lastFrame = -1;
         this.bindingCounter = 0;
 
-
         this._old = {};
 
-        this.DEPTH_COMPARE_FUNCS_STRINGS = [
-            "never",
-            "less",
-            "equal",
-            "lessequal",
-            "greater",
-            "notequal",
-            "greaterequal",
-            "always"];
+        this.DEPTH_COMPARE_FUNCS_STRINGS = ["never", "less", "equal", "lessequal", "greater", "notequal", "greaterequal", "always"];
 
         this._cgp.on("deviceChange", () =>
         {
@@ -44,31 +35,33 @@ export default class Pipeline
 
     get isValid() { return this._isValid; }
 
-
-
     setName(name)
     {
         this._name = name;
     }
 
-
     setShaderListener(oldShader, newShader)
     {
-        for (let i = 0; i < this._shaderListeners.length; i++)
-        {
-            oldShader.off(this._shaderListeners[i]);
-        }
-
+        for (let i = 0; i < this._shaderListeners.length; i++) oldShader.off(this._shaderListeners[i]);
 
         this._shaderListeners.push(
             newShader.on("compiled", () =>
             {
-                console.log("pipe update shader compileeeeeee");
+                // console.log("pipe update shader compileeeeeee");
                 // this.needsRebuildReason = "shader changed";
                 this.shaderNeedsPipelineUpdate = "shader compiled";
             }));
     }
 
+
+    getInfo()
+    {
+        return [
+            "name: " + this._name,
+            "bindgroups: " + this._bindGroups.length,
+
+        ];
+    }
 
     setPipeline(shader, mesh)
     {
@@ -78,7 +71,7 @@ export default class Pipeline
             return;
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("setPipeline");
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("setPipeline", this.getInfo());
 
         let needsRebuildReason = "";
         if (!this._renderPipeline) needsRebuildReason = "no renderpipeline";
@@ -152,10 +145,10 @@ export default class Pipeline
         {
             this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
 
-            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
-            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
 
             if (this.lastFrame != this._cgp.frame) this.bindingCounter = 0;
             this.lastFrame = this._cgp.frame;
@@ -201,6 +194,8 @@ export default class Pipeline
 
             this._cgp.popErrorScope();
         }
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+
 
         this.shaderNeedsPipelineUpdate = false;
     }
@@ -309,11 +304,15 @@ export default class Pipeline
 
         shader.bind();
 
-        for (let i = 0; i < shader.bindingsVert.length; i++)
-            shader.bindingsVert[i].update(this._cgp, inst);
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("bind uniforms vert", ["num:" + shader.bindingsVert.length]);
+        for (let i = 0; i < shader.bindingsVert.length; i++) shader.bindingsVert[i].update(this._cgp, inst);
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
-        for (let i = 0; i < shader.bindingsFrag.length; i++)
-            shader.bindingsFrag[i].update(this._cgp, inst);
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("bind uniforms frag", ["num:" + shader.bindingsFrag.length]);
+        for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(this._cgp, inst);
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+
+
 
         // shader.defaultBindingVert.update(this._cgp);
 

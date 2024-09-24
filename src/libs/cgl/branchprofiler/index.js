@@ -1,8 +1,9 @@
 class Branch
 {
-    constructor(name)
+    constructor(name, txt)
     {
         this.name = name;
+        this.txt = txt;
         this.dur = 0;
         this._startTime = 0;
         this.childs = [];
@@ -18,9 +19,9 @@ class Branch
         this.dur = performance.now() - this._startTime;
     }
 
-    push(name)
+    push(name, txt)
     {
-        const b = new Branch(name);
+        const b = new Branch(name, txt);
         this.childs.push(b);
         b.start();
         return b;
@@ -34,9 +35,7 @@ class Branch
         for (let i = 0; i < level; i++) str += "  ";
 
         for (let i = 0; i < this.childs.length; i++)
-        {
             this.childs[i].print(level + 1);
-        }
     }
 }
 
@@ -56,12 +55,12 @@ class BranchStack
         this.current = this.root;
     }
 
-    push(name)
+    push(name, txt)
     {
         if (!this.current) this.start();
 
         const prev = this.current;
-        this.current = this.current.push(name);
+        this.current = this.current.push(name, txt);
         this.current.prev = prev;
         this.current.start();
         return this.current;

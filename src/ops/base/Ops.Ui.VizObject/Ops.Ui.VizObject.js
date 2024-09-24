@@ -15,7 +15,7 @@ inObj.onChange = () =>
 {
     let obj = inObj.get();
     let str = "???";
-
+    // console.log(obj)
     if (obj && obj.getInfo) obj = obj.getInfo();
 
     if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
