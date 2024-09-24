@@ -100,7 +100,7 @@ export const CONSTANTS = {
         "PACO_PORT_SETVARIABLE": 12,
         "PACO_PORT_SETANIMATED": 13,
         "PACO_PORT_ANIM_UPDATED": 14,
-        "PACO_DESERIALIZE": 15
-
+        "PACO_DESERIALIZE": 15,
+        "PACO_OP_RELOAD": 16
     },
 };

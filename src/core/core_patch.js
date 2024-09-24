@@ -851,6 +851,8 @@ Patch.prototype.deSerialize = function (obj, options)
 
     this.emitEvent("patchLoadStart");
 
+    obj.ops = obj.ops || [];
+
     if (window.logStartup)logStartup("add " + obj.ops.length + " ops... ");
 
     const addedOps = [];

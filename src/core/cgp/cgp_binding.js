@@ -199,6 +199,9 @@ export default class Binding
             {
                 this.uniforms[i].copyToBuffer(this._buffer, off); // todo: check if uniform changed?
                 off += this.uniforms[i].getSizeBytes() / 4;
+
+                // console.log(this.uniforms[0].getName(), this.uniforms[i]);
+
                 // if (this.uniforms[0].getType() == "m4")
                 // {
                 //     if (this.uniforms[i].getName() == "modelMatrix")
