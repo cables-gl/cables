@@ -171,6 +171,12 @@ class WebGpuContext extends CGState
     }
 
 
+    setDevice(device)
+    {
+        this.device = device;
+        this.emitEvent("deviceChange");
+    }
+
 
 
     pushErrorScope(name, options = {})

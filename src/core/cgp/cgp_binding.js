@@ -1,10 +1,11 @@
 
 export default class Binding
 {
-    constructor(idx, name, stage, options = {})
+    constructor(cgp, idx, name, stage, options = {})
     {
         this.idx = idx;
         this._name = name;
+        this._cgp = cgp;
         this.uniforms = [];
         this.bindingInstances = [];
 
@@ -19,6 +20,11 @@ export default class Binding
             if (stage == "frag") options.shader.bindingsFrag.push(this);
             if (stage == "vert") options.shader.bindingsVert.push(this);
         }
+
+        this._cgp.on("deviceChange", () =>
+        {
+            // this.reInit();
+        });
     }
 
     addUniform(uni)

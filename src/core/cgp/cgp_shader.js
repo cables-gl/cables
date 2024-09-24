@@ -21,8 +21,8 @@ export default class Shader extends CgShader
         this.shaderModule = null;
         this._needsRecompile = true;
 
-        this.defaultBindingVert = new Binding(0, "defaultVert", "vert");
-        this.defaultBindingFrag = new Binding(1, "defaultFrag", "frag");
+        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", "vert");
+        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", "frag");
         this.bindingsFrag = [this.defaultBindingFrag];
         this.bindingsVert = [this.defaultBindingVert];
 
@@ -33,6 +33,19 @@ export default class Shader extends CgShader
         this._tempNormalMatrix = mat4.create();
 
         this._src = "";
+
+        this._cgp.on("deviceChange", () =>
+        {
+            this.reInit();
+        });
+    }
+
+    reInit()
+    {
+        console.log("reinit shader");
+        // todo: dispose?
+        this.shaderModule = null;
+        this._needsRecompile = true;
     }
 
     get isValid()
@@ -73,7 +86,7 @@ export default class Shader extends CgShader
 
         const src = preproc(this._src, defs);
 
-        this.shaderModule = this._cgp.device.createShaderModule({ "code": src });
+        this.shaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
         this.needsPipelineUpdate = true;

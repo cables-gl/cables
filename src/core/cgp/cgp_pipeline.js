@@ -32,6 +32,11 @@ export default class Pipeline
             "notequal",
             "greaterequal",
             "always"];
+
+        this._cgp.on("deviceChange", () =>
+        {
+            this._renderPipeline = null;
+        });
     }
 
     get isValid() { return this._isValid; }
@@ -102,11 +107,10 @@ export default class Pipeline
             console.log("rebuild pipe", needsRebuildReason);
             this._cgp.pushErrorScope("createPipeline", { "logger": this._log });
 
-
-
             this._bindGroups = [];
 
             this._pipeCfg = this.getPipelineObject(shader, mesh);
+            this._old.device = this._cgp.device;
             this._old.shader = shader;
             this._old.mesh = mesh;
             this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
@@ -126,16 +130,6 @@ export default class Pipeline
 
             if (this.lastFrame != this._cgp.frame) this.bindingCounter = 0;
             this.lastFrame = this._cgp.frame;
-
-            // if (this._bindGroup) this._cgp.passEncoder.setBindGroup(0, this._bindGroup);
-
-
-            // const bg = {
-            //     "label": "label2",
-            //     "layout": this.bindGroupLayout,
-            //     "entries": this.bindingGroupEntries
-            // };
-
 
 
             if (!this._bindGroups[this.bindingCounter])
@@ -168,7 +162,6 @@ export default class Pipeline
                 };
 
                 this._bindGroups[this.bindingCounter] = this._cgp.device.createBindGroup(bg);
-                // console.log("createBindGroup");
             }
 
             this._bindUniforms(shader, this.bindingCounter);
@@ -186,9 +179,7 @@ export default class Pipeline
 
     getPipelineObject(shader, mesh)
     {
-        // this.bindingGroupEntries = [];
         this.bindingGroupLayoutEntries = [];
-
 
         for (let i = 0; i < shader.bindingsVert.length; i++)
         {
@@ -216,19 +207,10 @@ export default class Pipeline
                 "label": "label3",
                 "entries": this.bindingGroupLayoutEntries,
             });
-        // const bindGroupLayout = pipeline.getBindGroupLayout(0);
-
-        // console.log(this.bindingGroupEntries);
-        // console.log(this.bindingGroupLayoutEntries);
-
-        // if (!this.bindingGroupEntries) return console.warn("no bindingGroupEntries");
-
 
         const pipelineLayout = this._cgp.device.createPipelineLayout({
             "label": "label1",
-            "bindGroupLayouts": [
-                this.bindGroupLayout,
-            ]
+            "bindGroupLayouts": [this.bindGroupLayout]
         });
 
         const pipeCfg = {

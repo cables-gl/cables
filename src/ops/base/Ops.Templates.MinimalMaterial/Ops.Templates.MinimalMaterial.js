@@ -5,13 +5,6 @@ const
 
 const cgl = op.patch.cgl;
 
-function doRender()
-{
-    cgl.pushShader(shader);
-    trigger.trigger();
-    cgl.popShader();
-}
-
 const shader = new CGL.Shader(cgl, "MinimalMaterial");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.shader_vert, attachments.shader_frag);
@@ -19,3 +12,10 @@ shader.setSource(attachments.shader_vert, attachments.shader_frag);
 shader.addUniformFrag("f", "red", inRed);
 
 render.onTriggered = doRender;
+
+function doRender()
+{
+    cgl.pushShader(shader);
+    trigger.trigger();
+    cgl.popShader();
+}
