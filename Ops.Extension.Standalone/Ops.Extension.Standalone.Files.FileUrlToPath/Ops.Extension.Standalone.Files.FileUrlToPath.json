@@ -1,0 +1,45 @@
+{
+    "id": "fb51d82f-f9e5-48f8-8638-cfdae0999f43",
+    "created": 1727174068677,
+    "license": "MIT",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "FileUrl"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "values": [
+                    "System",
+                    "Windows",
+                    "Posix"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1727176572264
+        }
+    ],
+    "authorName": "stephan",
+    "summary": "convert file-url to path",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ]
+}
