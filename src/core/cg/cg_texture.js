@@ -58,7 +58,7 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
         return data;
     }
     else
-    if (name == "random")
+    if (name == "random" || name == "randomFloat")
     {
         const data = new Float32Array(size * size * 4);
 
