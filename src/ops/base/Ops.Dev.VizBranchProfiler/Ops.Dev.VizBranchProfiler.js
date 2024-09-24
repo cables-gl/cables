@@ -104,6 +104,11 @@ function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
     let w = getWidth(layer, b.dur);
     if (expEle.get()) w = branchWidth;
 
+    let region = new Path2D();
+    region.rect(layer.x + posx, posy + layer.y, w, rowHeight);
+    ctx.save();
+    ctx.clip(region);
+
     ctx.fillStyle = colors[colorCycle];
     ctx.fillRect(
         layer.x + posx, posy + layer.y,
@@ -139,6 +144,8 @@ function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
         for (let i = 0; i < b.txt.length; i++)
             ctx.fillText(b.txt[i], layer.x + posx + padd + 15, layer.y + posy + fontSize + fontSize * (i + 1) * 1.3 + padd);
     }
+
+    ctx.restore();
 
     // if (nBranchDur)ctx.fillText("child durs " + Math.round(nBranchDur / b.dur * 100) + "%", layer.x + posx + padd, layer.y + posy + fontSize + fontSize + fontSize * 1.2 + padd);
 
