@@ -108,7 +108,7 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
     }
     else
     {
-        this._log.error("unknown default texture", name);
+        console.warn("unknown default texture", name);
         return CgTexture.getDefaultTextureData("stripes", size, { "r": 1, "g": 0, "b": 0 });
     }
 };
