@@ -248,7 +248,7 @@ class Texture extends CgTexture
             this.width = t.width;
             this.height = t.height;
             this.tex = t.tex;
-            this._log.error("[cgl_texture] texture size to big!!!", this.width, this.height, this._cgl.maxTexSize);
+            this._log.warn("[cgl_texture] texture size too big!", this.width, this.height, this._cgl.maxTexSize);
             return;
         }
 
@@ -302,12 +302,9 @@ class Texture extends CgTexture
             this.width = t.width;
             this.height = t.height;
             this.tex = t.tex;
-            this._log.error("[cgl_texture] texture size to big!!!", img.width, img.height, this._cgl.maxTexSize);
+            this._log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
             return;
         }
-
-
-        // console.log("loaded texture", img.width, img.height);
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
@@ -319,14 +316,9 @@ class Texture extends CgTexture
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
         this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, this._glDataFormat, this._glDataType, img);
-        // this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
-
-        // if (this._cgl.printError("[cgl_texture] init " + this.name));
 
         this._setFilter();
         this.updateMipMap();
-
-        // if (this._cgl.printError("[cgl_texture] init2"));
 
         this._cgl.gl.bindTexture(this.texTarget, null);
         this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
