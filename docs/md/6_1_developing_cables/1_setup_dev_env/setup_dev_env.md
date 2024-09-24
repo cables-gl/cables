@@ -14,7 +14,7 @@ But let's get started:
 
 ## Mac/Linux
 - install [git](https://github.com/git-guides/install-git)
-- clone [this repository](https://github.com/cables-gl/cables_dev)
+- clone the [cables dev repository](https://github.com/cables-gl/cables_dev): `git clone git@github.com:cables-gl/cables_dev.git`
 - change into the checked out directory (`cd cables_dev/`)
 - continue [below](#common)
 

@@ -24,9 +24,7 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Is there a standalone version of cables that doesn’t require an internet connection?
 
-- Yes and no. To make and and edit patches you need an internet connection so you can use the cables editor.
-If you have a finished patch you can run it without an internet connection straight from a USB stick.
-It's called Daplaya, you can download it and get started [here](https://github.com/cables-gl/cables-daplaya)
+- Yes! You can download the latest version [here](https://cables.gl/standalone)
 
 #### Can I embed a cables patch in a wordpress page?
 
