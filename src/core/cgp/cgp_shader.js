@@ -21,8 +21,8 @@ export default class Shader extends CgShader
         this.shaderModule = null;
         this._needsRecompile = true;
 
-        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", "vert");
-        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", "frag");
+        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", { "stage": "vert", "bindingType": "read-only-storage" });
+        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", { "stage": "frag", "bindingType": "read-only-storage" });
         this.bindingsFrag = [this.defaultBindingFrag];
         this.bindingsVert = [this.defaultBindingVert];
 
@@ -32,8 +32,9 @@ export default class Shader extends CgShader
         this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
         this._tempNormalMatrix = mat4.create();
 
-        this.bindingCounter = 0;
 
+        this.bindingCounter = 0;
+        this.bindCountlastFrame = -1;
 
 
         this._src = "";

@@ -54,11 +54,24 @@ export default class Pipeline
 
     getInfo()
     {
-        return [
+        // console.log(this.bindingGroupLayoutEntries);
+
+        const arr = [
             "name: " + this._name,
-            "bindgroups: " + this._bindGroups.length,
+            "bindgroups: " + this._bindGroups.length
 
         ];
+
+        if (this.bindingGroupLayoutEntries)arr.push("layouts: " + this.bindingGroupLayoutEntries.length);
+
+        // if (this.bindingGroupLayoutEntries)
+        //     for (let i = 0; i < this.bindingGroupLayoutEntries.length; i++)
+        //     {
+        //         // const lines = JSON.stringify(this.bindingGroupLayoutEntries, 4, true).split(",");
+        //         arr.push(...lines);
+        //     }
+
+        return arr;
     }
 
     setPipeline(shader, mesh)
@@ -117,7 +130,7 @@ export default class Pipeline
         this._cgp.currentPipeDebug =
         {
             "cfg": this._pipeCfg,
-            // "bindingGroupEntries": this.bindingGroupEntries,
+            "bindingGroupEntries": this.bindingGroupEntries,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
 
@@ -159,7 +172,6 @@ export default class Pipeline
                     if (shader.bindingsVert[i].getSizeBytes() > 0)
                     {
                         bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device, shader.bindingCounter));
-                        // bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
                     }
                     else console.log("shader defaultBindingVert size 0");
                 }
@@ -168,7 +180,6 @@ export default class Pipeline
                     if (shader.bindingsFrag[i].getSizeBytes() > 0)
                     {
                         bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device, shader.bindingCounter));
-                        // bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
                     }
                     else console.log("shader defaultBindingFrag size 0");
                 }
@@ -205,7 +216,6 @@ export default class Pipeline
         {
             if (shader.bindingsVert[i].getSizeBytes() > 0)
             {
-                // this.bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device));
                 this.bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
             }
             else console.log("shader defaultBindingVert size 0");
@@ -215,7 +225,6 @@ export default class Pipeline
         {
             if (shader.bindingsFrag[i].getSizeBytes() > 0)
             {
-                // this.bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device));
                 this.bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
             }
             else console.log("shader defaultBindingFrag size 0");
@@ -224,14 +233,47 @@ export default class Pipeline
 
         this.bindGroupLayout = this._cgp.device.createBindGroupLayout(
             {
-                "label": "label3",
+                "label": "bg layout " + this._name,
                 "entries": this.bindingGroupLayoutEntries,
             });
 
         const pipelineLayout = this._cgp.device.createPipelineLayout({
-            "label": "label1",
+            "label": "pipe layout " + this._name,
             "bindGroupLayouts": [this.bindGroupLayout]
         });
+
+
+        let buffers = [
+            // position
+            {
+                "arrayStride": 3 * 4, // 3 floats, 4 bytes each
+                "attributes": [
+                    { "shaderLocation": 0, "offset": 0, "format": "float32x3" },
+                ],
+            },
+            // texcoords
+            {
+                "arrayStride": 2 * 4, // 2 floats, 4 bytes each
+                "attributes": [
+                    { "shaderLocation": 2, "offset": 0, "format": "float32x2", },
+                ],
+            },
+            // normals
+            {
+                "arrayStride": 3 * 4, // 3 floats, 4 bytes each
+                "attributes": [
+                    { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
+                ],
+            }];
+
+        // buffers.push(
+        //     {
+        //         "arrayStride": 16 * 4,
+        //         "stepMode": "instance",
+        //         "attributes": [
+        //             { "shaderLocation": 3, "offset": 0, "format": "float32x16" }, // position
+        //         ],
+        //     });
 
         const pipeCfg = {
             // "layout": "auto",
@@ -240,31 +282,8 @@ export default class Pipeline
             "vertex": {
                 "module": shader.shaderModule,
                 "entryPoint": "myVSMain",
-                "buffers": [
-                    // position
-                    {
-                        "arrayStride": 3 * 4, // 3 floats, 4 bytes each
-                        "attributes": [
-                            { "shaderLocation": 0, "offset": 0, "format": "float32x3" },
-                        ],
-                    },
-                    // texcoords
-                    {
-                        "arrayStride": 2 * 4, // 2 floats, 4 bytes each
-                        "attributes": [
-                            { "shaderLocation": 2, "offset": 0, "format": "float32x2", },
-                        ],
-                    },
-                    // normals
-                    {
-                        "arrayStride": 3 * 4, // 3 floats, 4 bytes each
-                        "attributes": [
-                            { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
-                        ],
-                    },
+                "buffers": buffers
 
-
-                ],
             },
             "fragment": {
                 "module": shader.shaderModule,

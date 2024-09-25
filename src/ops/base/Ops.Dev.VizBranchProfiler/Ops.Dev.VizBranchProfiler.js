@@ -25,6 +25,8 @@ let canvas = null;
 let render2Canvas = false;
 let canvasWidth = 0;
 let canvasHeight = 0;
+let pixelDensity = 1;
+let hovering = false;
 
 inRender.onChange = updateUi;
 inHeight.onChange = inWidth.onChange = setupCanvas;
@@ -51,15 +53,6 @@ function updateUi()
     inHeight.setUiAttribs({ "greyout": !render2Canvas });
 
     setupCanvas();
-}
-
-function getWidth(layer, d)
-{
-    // d = Math.max(0.01, d);
-    if (d < 0.2) d = 0.004;
-    // return Math.max(layer.width * (0.01 / totalDur), layer.width * (d / totalDur));
-    // return layer.width * (d / totalDur);
-    return layer.width * (d / totalDur);
 }
 
 inUpdate.onTriggered = () =>
@@ -91,30 +84,78 @@ function clear(ctx, layer)
         layer.width, layer.height);
 }
 
-function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
+function drawElement()
+{
+
+}
+
+function getWidth(layer, d)
+{
+    // d = Math.max(0.01, d);
+    if (d < 0.1) d = 0.1;
+    // return Math.max(layer.width * (0.01 / totalDur), layer.width * (d / totalDur));
+    // return layer.width * (d / totalDur);
+    return layer.width * (d / totalDur) / pixelDensity;
+}
+
+function drawEle(b, ctx, layer, x, y, posx, posy)
+{
+}
+
+let hoverX = 0;
+let hoverY = 0;
+let hoverW = 0;
+let hoverH = 0;
+
+function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, viewBox)
 {
     if (!b) return;
 
     colorCycle++;
     colorCycle %= (colors.length);
+    let padd = 7;
 
-    let rowHeight = (layer.height / 10);
-    let posy = rowHeight * level;
-
-    let w = getWidth(layer, b.dur);
+    let lines = 1;
+    if (b.txt)lines += b.txt.length;
+    let rowHeight = ((lines + 1) * 14) * pixelDensity + padd + padd;
+    let hoverele = null;
+    let hover = false;
+    let w = getWidth(layer, b.dur) * 0.25;
     if (expEle.get()) w = branchWidth;
+
+    if (viewBox.mouseX * pixelDensity > layer.x + posx &&
+        viewBox.mouseX * pixelDensity < layer.x + posx + w &&
+        viewBox.mouseY * pixelDensity > layer.y + posy &&
+        viewBox.mouseY * pixelDensity < layer.y + posy + rowHeight)
+    {
+        hoverele = b;
+        hover = true;
+        hovering = b;
+        w = layer.width - posx;
+
+        hoverX = layer.x + posx;
+        hoverY = layer.y + posy;
+        hoverW = w;
+        hoverH = rowHeight;
+    }
 
     let region = new Path2D();
     region.rect(layer.x + posx, posy + layer.y, w, rowHeight);
     ctx.save();
     ctx.clip(region);
 
+    if (hovering && hovering != b)
+    {
+        region.rect(hoverX, hoverY, hoverW, hoverH);
+        ctx.clip(region, "evenodd");
+    }
+
     ctx.fillStyle = colors[colorCycle];
     ctx.fillRect(
         layer.x + posx, posy + layer.y,
         w, rowHeight);
 
-    let fontSize = 12 * op.patch.cgl.pixelDensity;
+    let fontSize = 12 * pixelDensity;
     ctx.fillStyle = "#f0d164";
     ctx.font = "bold " + fontSize + "px sourceCodePro";
 
@@ -124,20 +165,20 @@ function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
     for (let i = 0; i < b.childs.length; i++)
         nBranchDur += b.childs[i].dur;
 
-    let padd = 7;
-
     ctx.fillText(b.name, layer.x + posx + padd + 5, layer.y + posy + fontSize + padd);
     // ctx.fillText(durs, layer.x + posx + padd, layer.y + posy + fontSize + fontSize * 1.2 + padd);
     if (b.txt)
     {
         ctx.fillStyle = "#ccc";
-        ctx.font = "normal " + 12 * op.patch.cgl.pixelDensity + "px sourceCodePro";
+        ctx.font = "normal " + 12 * pixelDensity + "px sourceCodePro";
 
         for (let i = 0; i < b.txt.length; i++)
             ctx.fillText(b.txt[i], layer.x + posx + padd + 15, layer.y + posy + fontSize + fontSize * (i + 1) * 1.3 + padd);
     }
 
-    ctx.strokeStyle = "#000000";
+    // outline
+    if (hover)ctx.strokeStyle = "#ffffff";
+    else ctx.strokeStyle = "#000000";
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.rect(
@@ -153,14 +194,14 @@ function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
 
     for (let i = 0; i < b.childs.length; i++)
     {
-        drawBranch(ctx, layer, b.childs[i], level + 1, posx + xadd, w, branchWidth / b.childs.length);
+        drawBranch(ctx, layer, b.childs[i], level + 1, posx + xadd, posy + rowHeight, w, branchWidth / b.childs.length, viewBox);
 
         if (expEle.get()) xadd += branchWidth / b.childs.length;
         else xadd += getWidth(layer, b.childs[i].dur);
     }
 }
 
-op.renderVizLayer = (ctx, layer) =>
+op.renderVizLayer = (ctx, layer, viz) =>
 {
     if (!inObj.get() || !inObj.get().root) return;
     clear(ctx, layer);
@@ -174,5 +215,13 @@ op.renderVizLayer = (ctx, layer) =>
         root = inObj.get().root;
     }
 
-    drawBranch(ctx, layer, root, 0, 0, 0, layer.width);
+    hovering = false;
+    pixelDensity = layer.pixelDensity;
+
+    // ctx.fillStyle = "#ff0000";
+    // ctx.fillRect(layer.x,layer.y , 410, 401);
+    // ctx.fillRect(viz._glPatch.viewBox.mouseX * pixelDensity, viz._glPatch.viewBox.mouseY * pixelDensity, 410, 401);
+
+    // console.log(viz._glPatch.viewBox.mouseX * 2, layer.x);
+    drawBranch(ctx, layer, root, 0, 0, 0, 0, layer.width, viz._glPatch.viewBox);
 };
