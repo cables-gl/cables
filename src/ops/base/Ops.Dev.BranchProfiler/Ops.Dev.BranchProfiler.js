@@ -1,11 +1,12 @@
 const
     inExec = op.inTrigger("Exec"),
     outNext = op.outTrigger("Next"),
+    outFinish = op.outTrigger("Finished"),
     outProfilerStack = op.outObject("Profiler Data");
 
 inExec.onTriggered = () =>
 {
-    op.patch.cg.frameStore.branchProfiler = op.patch.cg.frameStore.branchProfiler || {};
+    // op.patch.cg.frameStore.branchProfiler = op.patch.cg.frameStore.branchProfiler || {};
 
     op.patch.cg.frameStore.branchProfiler = {};
 
@@ -18,4 +19,5 @@ inExec.onTriggered = () =>
     op.patch.cg.frameStore.branchStack.finish();
 
     outProfilerStack.set(op.patch.cg.frameStore.branchStack);
+    outFinish.trigger();
 };

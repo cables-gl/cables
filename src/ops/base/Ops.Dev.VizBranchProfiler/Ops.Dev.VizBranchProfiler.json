@@ -43,6 +43,11 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Expand elements",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "Update"
             }

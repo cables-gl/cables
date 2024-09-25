@@ -1,12 +1,14 @@
 
 export default class Binding
 {
-    constructor(idx, name, stage, options = {})
+    constructor(cgp, idx, name, stage, options = {})
     {
         this.idx = idx;
         this._name = name;
+        this._cgp = cgp;
         this.uniforms = [];
         this.bindingInstances = [];
+        this.stageStr = stage;
 
         this.stage = GPUShaderStage.VERTEX;
         if (stage == "frag") this.stage = GPUShaderStage.FRAGMENT;
@@ -19,6 +21,11 @@ export default class Binding
             if (stage == "frag") options.shader.bindingsFrag.push(this);
             if (stage == "vert") options.shader.bindingsVert.push(this);
         }
+
+        this._cgp.on("deviceChange", () =>
+        {
+            // this.reInit();
+        });
     }
 
     addUniform(uni)
@@ -72,11 +79,11 @@ export default class Binding
 
     getBindingGroupEntry(gpuDevice, inst)
     {
-        if (this.bindingInstances[inst] && this.bindingInstances[inst].resource && this.bindingInstances[inst].resource.buffer)
-        {
-            console.log("destroy");
-            this.bindingInstances[inst].resource.buffer.destroy();
-        }
+        // if (this.bindingInstances[inst] && this.bindingInstances[inst].resource && this.bindingInstances[inst].resource.buffer)
+        // {
+        //     console.log("destroy");
+        //     this.bindingInstances[inst].resource.buffer.destroy();
+        // }
 
         this.isValid = false;
 
@@ -93,7 +100,7 @@ export default class Binding
             {
                 if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
             }
-            else o.resource = CABLES.emptyCglTexture.createView();// CABLES.emptyCglTexture.createView();
+            else o.resource = this._cgp.getEmptyTexture().createView();// CABLES.emptyCglTexture.createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
@@ -148,6 +155,7 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni texture");
             if (this.uniforms[0].getValue())
                 if (this.uniforms[0].getValue().gpuTexture)
                 {
@@ -164,6 +172,8 @@ export default class Binding
                     // console.log("fake tex...");
                     b.resource = CABLES.errorTexture.createView();
                 }
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
             // console.log(1);
 
 
@@ -186,10 +196,14 @@ export default class Binding
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni sampler");
             b.resource = this.uniforms[0].getValue();
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
         }
         else
         {
+            let info = ["stage " + this.stageStr + " / inst " + inst];
+
             // update uniform values to buffer
             const s = this.getSizeBytes() / 4;
             if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
@@ -197,6 +211,7 @@ export default class Binding
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
+                info.push(this.uniforms[i].getName() + " " + this.uniforms[i].getValue());
                 this.uniforms[i].copyToBuffer(this._buffer, off); // todo: check if uniform changed?
                 off += this.uniforms[i].getSizeBytes() / 4;
 
@@ -208,6 +223,7 @@ export default class Binding
                 // console.log(this.uniforms[i].getName(), this._buffer);
                 // }
             }
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni buff", info);
 
             // console.log(this._buffer);
 
@@ -220,6 +236,8 @@ export default class Binding
                 this._buffer.byteOffset,
                 this._buffer.byteLength
             );
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
         }
     }
 }

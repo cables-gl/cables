@@ -21,8 +21,8 @@ export default class Shader extends CgShader
         this.shaderModule = null;
         this._needsRecompile = true;
 
-        this.defaultBindingVert = new Binding(0, "defaultVert", "vert");
-        this.defaultBindingFrag = new Binding(1, "defaultFrag", "frag");
+        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", "vert");
+        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", "frag");
         this.bindingsFrag = [this.defaultBindingFrag];
         this.bindingsVert = [this.defaultBindingVert];
 
@@ -33,6 +33,17 @@ export default class Shader extends CgShader
         this._tempNormalMatrix = mat4.create();
 
         this._src = "";
+
+        this._cgp.on("deviceChange", () =>
+        {
+            this.shaderModule = null;
+            this._needsRecompile = "device changed";
+        });
+    }
+
+    reInit()
+    {
+
     }
 
     get isValid()
@@ -73,10 +84,12 @@ export default class Shader extends CgShader
 
         const src = preproc(this._src, defs);
 
-        this.shaderModule = this._cgp.device.createShaderModule({ "code": src });
+        this.shaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
-        this.needsPipelineUpdate = true;
+        // this.needsPipelineUpdate = "compiled";
+
+        this.emitEvent("compiled");
     }
 
     error(e)
@@ -99,7 +112,6 @@ export default class Shader extends CgShader
         // mat4.mul(this._tempNormalMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
         // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
         // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
-
 
         mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
         mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
@@ -128,7 +140,8 @@ export default class Shader extends CgShader
         uni.shaderType = "frag";
 
         this.defaultBindingFrag.addUniform(uni);
-        this.needsPipelineUpdate = true;
+        this.needsPipelineUpdate = "add frag uniform";
+
         return uni;
     }
 
@@ -151,7 +164,7 @@ export default class Shader extends CgShader
         uni.shaderType = "vert";
 
         this.defaultBindingVert.addUniform(uni);
-        this.needsPipelineUpdate = true;
+        this.needsPipelineUpdate = "add ver uniform";
 
         return uni;
     }

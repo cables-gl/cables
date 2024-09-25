@@ -27,6 +27,10 @@
                 "name": "Next"
             },
             {
+                "type": 1,
+                "name": "Finished"
+            },
+            {
                 "type": 2,
                 "name": "Profiler Data"
             }

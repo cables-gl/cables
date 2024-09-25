@@ -10,7 +10,7 @@ export default class Mesh
         this._geom = null;
         this.numIndex = 0;
 
-        this._pipe = new Pipeline(this._cgp);
+        this._pipe = new Pipeline(this._cgp, "new mesh");
 
         this._numNonIndexed = 0;
         this._positionBuffer = null;
@@ -135,53 +135,45 @@ export default class Mesh
 
     // setPipeline()
     // {
-
     //     this._cgp.passEncoder.setPipeline(this._pipe.getPiplelineObject(this._cgp.getShader(),this));
-
-
     // }
 
     render()
     {
         if (!this._positionBuffer) return;
 
-        // this.setPipeline();
-
-
-
-
         const shader = this._cgp.getShader();
         if (shader)shader.bind();
 
         if (!this._cgp.getShader() || !this._cgp.getShader().isValid)
         {
+            console.log("no shader");
             return;
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh.render");
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh", ["geom " + this._geom.name, "shader " + this._cgp.getShader().getName()]);
 
+        this._pipe.setName("mesh " + this._geom.name + " " + this._cgp.getShader().getName());
         this._pipe.setPipeline(this._cgp.getShader(), this);
 
-        if (!this._pipe.isValid)
+        if (this._pipe.isValid)
         {
-            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
-            return;
+            // render
+
+            this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
+            for (let i = 0; i < this._attributes.length; i++)
+            {
+                this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);
+            }
+
+            this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
+
+            // draw finally........
+            if (this._numNonIndexed)
+                this._cgp.passEncoder.draw(this._numIndices);
+            else
+                this._cgp.passEncoder.drawIndexed(this._numIndices);
         }
-
-
-        this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
-        for (let i = 0; i < this._attributes.length; i++)
-        {
-            this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);
-        }
-
-        this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
-
-        // draw finally........
-        if (this._numNonIndexed)
-            this._cgp.passEncoder.draw(this._numIndices);
-        else
-            this._cgp.passEncoder.drawIndexed(this._numIndices);
 
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 

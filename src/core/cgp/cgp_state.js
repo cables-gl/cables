@@ -3,6 +3,8 @@ import { CG } from "../cg/cg_constants.js";
 import { CGState } from "../cg/cg_state.js";
 import Shader from "./cgp_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
+import Texture from "./cgp_texture.js";
+import CgTexture from "../cg/cg_texture.js";
 
 // https://github.com/greggman/webgpu-utils
 // https://developer.chrome.com/blog/from-webgl-to-webgpu/
@@ -170,6 +172,18 @@ class WebGpuContext extends CGState
         // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
+
+    setDevice(device)
+    {
+        this.device = device;
+
+
+        if (this._emptyTexture) this._emptyTexture = this._emptyTexture.dispose();
+        if (this._defaultTexture) this._defaultTexture = this._defaultTexture.dispose();
+        if (this._errorTexture) this._errorTexture = this._errorTexture.dispose();
+
+        this.emitEvent("deviceChange");
+    }
 
 
 
@@ -396,6 +410,35 @@ class WebGpuContext extends CGState
     popCullFaceFacing()
     {
         this._stackCullFaceFacing.pop();
+    }
+
+
+
+    getEmptyTexture()
+    {
+        if (this._emptyTexture) return this._emptyTexture;
+        const size = 8;
+        this._emptyTexture = new Texture(this, {});
+        this._emptyTexture.initFromData(CgTexture.getDefaultTextureData("empty", size), size, size);
+        return this._emptyTexture;
+    }
+
+    getErrorTexture()
+    {
+        if (this._errorTexture) return this._errorTexture;
+        const size = 256;
+        this._errorTexture = new Texture(this, {});
+        this._errorTexture.initFromData(CgTexture.getDefaultTextureData("stripes", size, { "r": 1, "g": 0, "b": 0 }), size, size);
+        return this._errorTexture;
+    }
+
+    getDefaultTexture()
+    {
+        if (this._defaultTexture) return this._defaultTexture;
+        const size = 256;
+        this._defaultTexture = new Texture(this, {});
+        this._defaultTexture.initFromData(CgTexture.getDefaultTextureData("stripes", size), size, size);
+        return this._defaultTexture;
     }
 }
 export { WebGpuContext };

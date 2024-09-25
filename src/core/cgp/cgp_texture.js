@@ -16,6 +16,11 @@ export default class Texture extends CgTexture
         options = options || {};
 
         this.name = options.name || "unknown";
+
+        this._cgp.on("deviceChange", () =>
+        {
+            // this.reInit();
+        });
     }
 
     /**
@@ -50,6 +55,11 @@ export default class Texture extends CgTexture
         return this.gpuTexture;
     }
 
+    dispose()
+    {
+        console.log("todo dispose");
+    }
+
     getInfo()
     {
         const tex = this;
@@ -61,6 +71,16 @@ export default class Texture extends CgTexture
         obj.textureType = tex.textureType;
 
         return obj;
+    }
+
+    createView()
+    {
+        if (!this.gpuTexture)
+        {
+            console.log("no gputexture...");
+            return null;
+        }
+        return this.gpuTexture.createView();
     }
 
     /**
@@ -76,6 +96,7 @@ export default class Texture extends CgTexture
      */
     initFromData(data, w, h, filter, wrap)
     {
+        if (!w || !h) this._log.error("texture size is 0");
         this.width = w;
         this.height = h;
         this.gpuTexture = this._cgp.device.createTexture(
@@ -109,14 +130,18 @@ Texture.load = function (cgp, url, onFinished, settings)
 {
     fetch(url).then((response) =>
     {
+        const texture = new Texture(cgp, { "name": url });
+
         response.blob().then((blob) =>
         {
             createImageBitmap(blob).then((imgBitmap) =>
             {
-                const texture = new Texture(cgp, { "name": url });
                 texture.initTexture(imgBitmap);
                 if (onFinished)onFinished(texture);
                 else console.log("Texture.load no onFinished callback");
+            }).catch((err) =>
+            {
+                if (onFinished)onFinished(cgp.getErrorTexture());
             });
         });
     });

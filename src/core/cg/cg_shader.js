@@ -1,9 +1,11 @@
+import { EventTarget } from "../eventtarget.js";
 import { simpleId } from "../utils.js";
 
-class CgShader
+class CgShader extends EventTarget
 {
     constructor()
     {
+        super();
         this.id = simpleId();
         this._isValid = true;
         this._defines = [];
