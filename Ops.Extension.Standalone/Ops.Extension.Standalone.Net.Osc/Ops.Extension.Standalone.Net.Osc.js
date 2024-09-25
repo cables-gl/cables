@@ -9,10 +9,12 @@ const
 const osc=op.require("osc");
 let udpPort=null;
 inPort.onChange=start;
+op.onDelete=stop;
 start();
 
 function start()
 {
+    outStatus.set("");
     if(udpPort)stop();
     outStatus.set("connecting");
 
@@ -20,7 +22,7 @@ function start()
     {
         udpPort = new osc.UDPPort({
             localAddress: "0.0.0.0",
-            localPort: 9000,
+            localPort: inPort.get(),
             metadata: true
         });
 

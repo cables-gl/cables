@@ -36,6 +36,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724247727467
+        },
+        {
+            "message": "fixed port input / fixed status output not resetting /  fixed problems with reconnecting after deleting op",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1727253693386
         }
     ],
     "dependencies": [

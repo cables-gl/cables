@@ -90,7 +90,7 @@ inGeom.onChange = () =>
 
 function createShaderModule(device, code)
 {
-    cgp.pushErrorScope("validation");
+    cgp.pushErrorScope("webgpumesh");
 
     const shaderModule = device.createShaderModule({ code });
     // const error = await device.popErrorScope();
@@ -98,7 +98,7 @@ function createShaderModule(device, code)
     //   throw new Error(error.message);
     // }
 
-    cgp.popErrorScope("cgp_pipeline createshadermodule");
+    cgp.popErrorScope();
 
     return shaderModule;
 }
@@ -138,7 +138,7 @@ function rebuild()
 
     shader.shaderModule = createShaderModule(cgp.device, attachments.mesh_wgsl);
 
-    cgp.pushErrorScope();
+    cgp.pushErrorScope("webgpumesh");
 
     if (!pipe)pipe = new CGP.Pipeline(cgp);
 
