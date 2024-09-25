@@ -32,6 +32,10 @@ export default class Shader extends CgShader
         this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
         this._tempNormalMatrix = mat4.create();
 
+        this.bindingCounter = 0;
+
+
+
         this._src = "";
 
         this._cgp.on("deviceChange", () =>
@@ -39,6 +43,13 @@ export default class Shader extends CgShader
             this.shaderModule = null;
             this._needsRecompile = "device changed";
         });
+    }
+
+    incBindingCounter()
+    {
+        if (this.bindCountlastFrame != this._cgp.frame) this.bindingCounter = 0;
+        else this.bindingCounter++;
+        this.bindCountlastFrame = this._cgp.frame;
     }
 
     reInit()

@@ -114,15 +114,7 @@ function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
         layer.x + posx, posy + layer.y,
         w, rowHeight);
 
-    ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.rect(
-        layer.x + posx, posy + layer.y,
-        w, rowHeight);
-    ctx.stroke();
-
-    let fontSize = 24;
+    let fontSize = 12 * op.patch.cgl.pixelDensity;
     ctx.fillStyle = "#f0d164";
     ctx.font = "bold " + fontSize + "px sourceCodePro";
 
@@ -139,11 +131,19 @@ function drawBranch(ctx, layer, b, level, posx, branchDur, branchWidth)
     if (b.txt)
     {
         ctx.fillStyle = "#ccc";
-        ctx.font = "normal " + 21 + "px sourceCodePro";
+        ctx.font = "normal " + 12 * op.patch.cgl.pixelDensity + "px sourceCodePro";
 
         for (let i = 0; i < b.txt.length; i++)
             ctx.fillText(b.txt[i], layer.x + posx + padd + 15, layer.y + posy + fontSize + fontSize * (i + 1) * 1.3 + padd);
     }
+
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.rect(
+        layer.x + posx, posy + layer.y,
+        w, rowHeight);
+    ctx.stroke();
 
     ctx.restore();
 

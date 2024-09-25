@@ -20,8 +20,6 @@ export default class Pipeline
         this._shaderListeners = [];
         this.shaderNeedsPipelineUpdate = false;
 
-        this.lastFrame = -1;
-        this.bindingCounter = 0;
 
         this._old = {};
 
@@ -150,10 +148,9 @@ export default class Pipeline
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
 
-            if (this.lastFrame != this._cgp.frame) this.bindingCounter = 0;
-            this.lastFrame = this._cgp.frame;
+            shader.incBindingCounter();
 
-            if (!this._bindGroups[this.bindingCounter])
+            if (!this._bindGroups[shader.bindingCounter])
             {
                 const bindingGroupEntries = [];
 
@@ -161,7 +158,7 @@ export default class Pipeline
                 {
                     if (shader.bindingsVert[i].getSizeBytes() > 0)
                     {
-                        bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device, this.bindingCounter));
+                        bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device, shader.bindingCounter));
                         // bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
                     }
                     else console.log("shader defaultBindingVert size 0");
@@ -170,7 +167,7 @@ export default class Pipeline
                 {
                     if (shader.bindingsFrag[i].getSizeBytes() > 0)
                     {
-                        bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device, this.bindingCounter));
+                        bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device, shader.bindingCounter));
                         // bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
                     }
                     else console.log("shader defaultBindingFrag size 0");
@@ -182,13 +179,13 @@ export default class Pipeline
                     "entries": bindingGroupEntries
                 };
 
-                this._bindGroups[this.bindingCounter] = this._cgp.device.createBindGroup(bg);
+                this._bindGroups[shader.bindingCounter] = this._cgp.device.createBindGroup(bg);
             }
 
-            this._bindUniforms(shader, this.bindingCounter);
+            this._bindUniforms(shader, shader.bindingCounter);
 
-            if (this._bindGroups[this.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[this.bindingCounter]);
-            this.bindingCounter++;
+            if (this._bindGroups[shader.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[shader.bindingCounter]);
+            // shader.bindingCounter++;
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
