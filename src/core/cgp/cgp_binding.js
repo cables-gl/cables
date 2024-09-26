@@ -1,25 +1,33 @@
 
 export default class Binding
 {
-    constructor(cgp, idx, name, stage, options = {})
+    /**
+     * Description
+     * @param {any} cgp
+     * @param {any} idx
+     * @param {string} name
+     * @param {any} options={}
+     */
+    constructor(cgp, idx, name, options = {})
     {
         this.idx = idx;
         this._name = name;
         this._cgp = cgp;
         this.uniforms = [];
         this.bindingInstances = [];
-        this.stageStr = stage;
+        this.stageStr = options.stage;
+        this.bindingType = options.bindingType || "uniform"; // "uniform", "storage", "read-only-storage",
 
         this.stage = GPUShaderStage.VERTEX;
-        if (stage == "frag") this.stage = GPUShaderStage.FRAGMENT;
+        if (this.stageStr == "frag") this.stage = GPUShaderStage.FRAGMENT;
 
         this._buffer = null;
         this.isValid = true;
 
         if (options.shader)
         {
-            if (stage == "frag") options.shader.bindingsFrag.push(this);
-            if (stage == "vert") options.shader.bindingsVert.push(this);
+            if (this.stageStr == "frag") options.shader.bindingsFrag.push(this);
+            if (this.stageStr == "vert") options.shader.bindingsVert.push(this);
         }
 
         this._cgp.on("deviceChange", () =>
@@ -55,6 +63,7 @@ export default class Binding
         label += "]";
 
         const o = {
+            // "type": this.type,
             "label": label,
             "binding": this.idx,
             "visibility": this.stage,
@@ -72,6 +81,7 @@ export default class Binding
         else
         {
             o.buffer = {};
+            o.buffer.type = this.bindingType;
         }
 
         return o;
@@ -104,8 +114,6 @@ export default class Binding
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-            // const sampler = this.uniforms[0]._cgp.device.createSampler();
-
             const sampler = this.uniforms[0]._cgp.device.createSampler({
                 "addressModeU": "repeat",
                 "addressModeV": "repeat",
@@ -117,15 +125,15 @@ export default class Binding
         }
         else
         {
-            // this._gpuBuffer = null;
-            // if (!this._gpuBuffer || this._gpuBuffer.size != this.getSizeBytes())
+            let buffCfg = {
+                "label": this._name,
+                "size": this.getSizeBytes(),
+                "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM
+            };
 
-            const gpuBuffer = gpuDevice.createBuffer(
-                {
-                    "label": this._name,
-                    "size": this.getSizeBytes(),
-                    "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM
-                });
+            if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
+
+            const gpuBuffer = gpuDevice.createBuffer(buffCfg);
 
             o.resource = {
                 "buffer": gpuBuffer,
@@ -139,8 +147,6 @@ export default class Binding
 
         return o;
     }
-
-
 
     getShaderHeader()
     {
@@ -174,25 +180,6 @@ export default class Binding
                 }
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
-            // console.log(1);
-
-
-            // console.log("texture.....");
-            // o.resource = CABLES.emptyCglTexture.createView();
-            // if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
-            // {
-            //     if (this.uniforms[0].getValue())
-            //     {
-            //         if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
-            //     }
-            //     else o.resource = CABLES.emptyCglTexture.createView();
-            // }
-            // else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
-            // {
-            //     const sampler = this.uniforms[0]._cgp.device.createSampler();
-
-            //     o.resource = sampler;
-            // }
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {

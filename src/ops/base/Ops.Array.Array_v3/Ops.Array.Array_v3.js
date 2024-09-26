@@ -62,9 +62,15 @@ function reset()
     // mode 2 Normalized array
     else if (selectIndex === MODE_0_TO_1)
     {
-        for (i = 0; i < arrLength; i++)
+        if (arrLength > 1) { 
+            for (i = 0; i < arrLength; i++)
+                {
+                    arr[i] = i / (arrLength - 1);
+                }
+        } else 
         {
-            arr[i] = i / (arrLength - 1);
+            //When array length is only 1 
+            arr = [0];
         }
     }
 

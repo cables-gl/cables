@@ -24,11 +24,13 @@ export default class Mesh
 
     _createBuffer(device, data, usage)
     {
-        const buffer = device.createBuffer({
+        let bo = {
             "size": data.byteLength,
             "usage": usage,
             "mappedAtCreation": true,
-        });
+        };
+        // ifbo.stepMode = "instance";
+        const buffer = device.createBuffer(bo);
         const dst = new data.constructor(buffer.getMappedRange());
         dst.set(data);
         buffer.unmap();
@@ -58,6 +60,8 @@ export default class Mesh
 
         if (geom.texCoords && geom.texCoords.length) this.setAttribute("texCoords", geom.texCoords, 2);
         if (geom.vertexNormals && geom.vertexNormals.length) this.setAttribute("normals", geom.vertexNormals, 3);
+
+        this.setAttribute("normals", geom.vertexNormals, 3);
     }
 
 
@@ -86,13 +90,16 @@ export default class Mesh
      * @param {Number} itemSize
      * @param {Object} options
      */
-    setAttribute(name, array, itemSize, options)
+    setAttribute(name, array, itemSize, options = {})
     {
         if (!array)
         {
             this._log.error("mesh addAttribute - no array given! " + name);
             throw new Error();
         }
+
+        let instanced = false;
+        if (options.instanced) instanced = options.instanced;
 
         // for (let i = 0; i < this._attributes.length; i++)
         // {
@@ -125,7 +132,7 @@ export default class Mesh
             // "itemSize": itemSize,
             // "numItems": numItems,
             // "startItem": 0,
-            // "instanced": instanced,
+            "instanced": instanced,
             // "type": type
         };
         this._attributes.push(attr);
