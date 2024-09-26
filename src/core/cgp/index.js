@@ -5,6 +5,7 @@ import Pipeline from "./cgp_pipeline.js";
 import Texture from "./cgp_texture.js";
 import Binding from "./cgp_binding.js";
 import Uniform from "./cgp_uniform.js";
+import GPUBuffer from "./cgp_gpubuffer.js";
 
 const CGP = {
     "Context": WebGpuContext,
@@ -13,9 +14,12 @@ const CGP = {
     "Pipeline": Pipeline,
     "Texture": Texture,
     "Binding": Binding,
-    "Uniform": Uniform
+    "Uniform": Uniform,
+    "GPUBuffer": GPUBuffer
 };
 
+window.CABLES = window.CABLES || {};
+window.CABLES.CGP = CGP;
 window.CGP = CGP;
 
 

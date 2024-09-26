@@ -131,12 +131,5 @@ export default class Uniform extends CgUniform
 
         this._log.warn("unknown type getSizeBytes", this._type);
         return 4;
-        // if (this._type == "t") return "sampler2D";
-        // if (this._type == "tc") return "samplerCube";
-        // if (this._type == "b") return "bool";
-
-        // if (t == "3f[]") return null; // ignore this for now...
-        // if (t == "m4[]") return null; // ignore this for now...
-        // if (t == "f[]") return null; // ignore this for now...
     }
 }
