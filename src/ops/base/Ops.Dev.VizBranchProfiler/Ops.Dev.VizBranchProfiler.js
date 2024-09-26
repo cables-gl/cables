@@ -27,6 +27,9 @@ let canvasWidth = 0;
 let canvasHeight = 0;
 let pixelDensity = 1;
 let hovering = false;
+let mulY = 1;
+let maxPosy = 0;
+let padd = 7;
 
 inRender.onChange = updateUi;
 inHeight.onChange = inWidth.onChange = setupCanvas;
@@ -107,17 +110,23 @@ let hoverY = 0;
 let hoverW = 0;
 let hoverH = 0;
 
+function itemHeight(b)
+{
+    let lines = 1;
+    if (b.txt)lines += b.txt.length;
+    let rowHeight = ((lines + 1) * 14) * pixelDensity + padd + padd;
+    return rowHeight;
+}
+
 function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, viewBox)
 {
     if (!b) return;
 
     colorCycle++;
     colorCycle %= (colors.length);
-    let padd = 7;
 
-    let lines = 1;
-    if (b.txt)lines += b.txt.length;
-    let rowHeight = ((lines + 1) * 14) * pixelDensity + padd + padd;
+    // let lines = 1;
+    let rowHeight = itemHeight(b) * mulY;// ((lines + 1) * 14) * pixelDensity + padd + padd+(mulY);
     let hoverele = null;
     let hover = false;
     let w = getWidth(layer, b.dur) * 0.25;
@@ -201,6 +210,18 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
     }
 }
 
+function calcHeight(b, posy)
+{
+    let rowHeight = itemHeight(b);
+
+    maxPosy = Math.max(posy, maxPosy);
+
+    for (let i = 0; i < b.childs.length; i++)
+    {
+        calcHeight(b.childs[i], posy + rowHeight);
+    }
+}
+
 op.renderVizLayer = (ctx, layer, viz) =>
 {
     if (!inObj.get() || !inObj.get().root) return;
@@ -217,11 +238,12 @@ op.renderVizLayer = (ctx, layer, viz) =>
 
     hovering = false;
     pixelDensity = layer.pixelDensity;
+    maxPosy = 0;
 
-    // ctx.fillStyle = "#ff0000";
-    // ctx.fillRect(layer.x,layer.y , 410, 401);
-    // ctx.fillRect(viz._glPatch.viewBox.mouseX * pixelDensity, viz._glPatch.viewBox.mouseY * pixelDensity, 410, 401);
+    calcHeight(root, 0);
 
-    // console.log(viz._glPatch.viewBox.mouseX * 2, layer.x);
+    mulY = (layer.height + 20) / maxPosy / 1.5; // why these magic numbers
+    // console.log(maxPosy, layer.height, mulY);
+
     drawBranch(ctx, layer, root, 0, 0, 0, 0, layer.width, viz._glPatch.viewBox);
 };

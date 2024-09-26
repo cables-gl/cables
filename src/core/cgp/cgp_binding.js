@@ -63,7 +63,6 @@ export default class Binding
         label += "]";
 
         const o = {
-            // "type": this.type,
             "label": label,
             "binding": this.idx,
             "visibility": this.stage,
@@ -89,12 +88,6 @@ export default class Binding
 
     getBindingGroupEntry(gpuDevice, inst)
     {
-        // if (this.bindingInstances[inst] && this.bindingInstances[inst].resource && this.bindingInstances[inst].resource.buffer)
-        // {
-        //     console.log("destroy");
-        //     this.bindingInstances[inst].resource.buffer.destroy();
-        // }
-
         this.isValid = false;
 
         const o = {
@@ -106,10 +99,7 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
-            if (this.uniforms[0].getValue())
-            {
-                if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
-            }
+            if (this.uniforms[0].getValue() && this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
             else o.resource = this._cgp.getEmptyTexture().createView();// CABLES.emptyCglTexture.createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
@@ -148,14 +138,10 @@ export default class Binding
         return o;
     }
 
-    getShaderHeader()
-    {
-        // ????
-    }
+
 
     update(cgp, inst)
     {
-        // if (!this._gpuBuffer) return console.log("has no gpubuffer...");
         let b = this.bindingInstances[inst];
         if (!b) b = this.getBindingGroupEntry(cgp.device, inst);
 
@@ -166,16 +152,9 @@ export default class Binding
                 if (this.uniforms[0].getValue().gpuTexture)
                 {
                     this.bindingInstances[inst] = this.getBindingGroupEntry(this.uniforms[0]._cgp.device, inst);
-                    // b.resource = this.uniforms[0].getValue().gpuTexture.createView();
-                    // console.log(this.uniforms[0].getValue().width);
-                    // console.log("yay");
-                    // console.log("real tex...", this.uniforms[0].getValue());
-                    // CABLES.errorTexture;
-                    // b.resource = CABLES.errorTexture.createView();
                 }
                 else
                 {
-                    // console.log("fake tex...");
                     b.resource = CABLES.errorTexture.createView();
                 }
 
@@ -216,7 +195,6 @@ export default class Binding
 
             // todo: only if changed...
             cgp.device.queue.writeBuffer(
-                // this._gpuBuffer,
                 b.resource.buffer,
                 0,
                 this._buffer.buffer,

@@ -9,14 +9,13 @@ export default class Mesh
         this._cgp = _cgp;
         this._geom = null;
         this.numIndex = 0;
+        this.instances = 1;
 
         this._pipe = new Pipeline(this._cgp, "new mesh");
-
         this._numNonIndexed = 0;
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
         this._attributes = [];
-
         this._needsPipelineUpdate = false;
 
         if (__geom) this.setGeom(__geom);
@@ -101,60 +100,30 @@ export default class Mesh
         let instanced = false;
         if (options.instanced) instanced = options.instanced;
 
-        // for (let i = 0; i < this._attributes.length; i++)
-        // {
-        //     const attr = this._attributes[i];
-        //     if (attr.name == name)
-        //     {
-        //         // if (attr.numItems === numItems)
-        //         // {
-        //         // }
-        //         // else
-        //         // {
-        //         //     // this._log.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
-        //         //     this._resizeAttr(array, attr);
-        //         // }
-        //         // normalBuffer = this._createBuffer(this._cgp.device, new Float32Array(geom.vertexNormals), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
-
-        //         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
-        //         // this._bufferArray(array, attr);
-
-        //         return attr;
-        //     }
-        // }
-
         const buffer = this._createBuffer(this._cgp.device, new Float32Array(array), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
 
         const attr = {
             "buffer": buffer,
             "name": name,
-            // "cb": cb,
-            // "itemSize": itemSize,
-            // "numItems": numItems,
-            // "startItem": 0,
             "instanced": instanced,
-            // "type": type
         };
         this._attributes.push(attr);
 
         return attr;
     }
 
-    // setPipeline()
-    // {
-    //     this._cgp.passEncoder.setPipeline(this._pipe.getPiplelineObject(this._cgp.getShader(),this));
-    // }
 
     render()
     {
         if (!this._positionBuffer) return;
+        if (this.instances <= 0) return;
 
         const shader = this._cgp.getShader();
         if (shader)shader.bind();
 
         if (!this._cgp.getShader() || !this._cgp.getShader().isValid)
         {
-            console.log("no shader");
+            // this.status = "shader invalid";
             return;
         }
 
@@ -163,10 +132,9 @@ export default class Mesh
         this._pipe.setName("mesh " + this._geom.name + " " + this._cgp.getShader().getName());
         this._pipe.setPipeline(this._cgp.getShader(), this);
 
+
         if (this._pipe.isValid)
         {
-            // render
-
             this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
             for (let i = 0; i < this._attributes.length; i++)
             {
@@ -175,11 +143,10 @@ export default class Mesh
 
             this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
 
-            // draw finally........
             if (this._numNonIndexed)
-                this._cgp.passEncoder.draw(this._numIndices);
+                this._cgp.passEncoder.draw(this._numIndices, this.instances);
             else
-                this._cgp.passEncoder.drawIndexed(this._numIndices);
+                this._cgp.passEncoder.drawIndexed(this._numIndices, this.instances);
         }
 
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();

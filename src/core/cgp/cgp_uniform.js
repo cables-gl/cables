@@ -8,53 +8,19 @@ export default class Uniform extends CgUniform
         super(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
         this._cgp = __shader._cgp;
 
-
-
-
-        // if (!CABLES.emptyCglTexture)
-        // {
-        //     let size = 256;
-
-        //     CABLES.emptyCglTexture = this._cgp.device.createTexture(
-        //         {
-        //             "size": [size, size],
-        //             "format": "rgba8unorm",
-        //             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
-        //         });
-        //     const data = CgTexture.getDefaultTextureData("stripes", size);
-
-        //     this._cgp.device.queue.writeTexture(
-        //         { "texture": CABLES.emptyCglTexture },
-        //         data,
-        //         { "bytesPerRow": size * 4 },
-        //         { "width": size, "height": size },
-        //     );
-
-
-        //     /// ////////////
-
-
-        //     CABLES.errorTexture = this._cgp.device.createTexture(
-        //         {
-        //             "size": [size, size],
-        //             "format": "rgba8unorm",
-        //             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
-        //         });
-        //     const data2 = CgTexture.getDefaultTextureData("stripes", size, { "r": 55, "g": 0, "b": 0 });
-
-        //     this._cgp.device.queue.writeTexture(
-        //         { "texture": CABLES.errorTexture },
-        //         data2,
-        //         { "bytesPerRow": size * 4 },
-        //         { "width": size, "height": size },
-        //     );
-        // }
-
         if (this.getType() == "t" && !_value) this._value = this._cgp.getEmptyTexture();
     }
 
 
     updateValueF() { }
+
+    updateValueArrayF() {}
+
+    setValueArrayF(v)
+    {
+        this.needsUpdate = true;
+        this._value = v;
+    }
 
     setValueF(v)
     {
@@ -116,11 +82,12 @@ export default class Uniform extends CgUniform
 
     copyToBuffer(buff, pos = 0)
     {
-        if (this._type == "f") buff[pos] = this._value;
-        else
-        if (this._type == "t")
+        if (this._type == "f")
         {
-
+            buff[pos] = this._value;
+        }
+        else if (this._type == "t")
+        {
         }
         else if (this._type == "4f")
         {
@@ -129,19 +96,15 @@ export default class Uniform extends CgUniform
             buff[pos + 2] = this._value[2];
             buff[pos + 3] = this._value[3];
         }
+        else if (this._type == "f[]")
+        {
+            for (let i = 0; i < this._value.length; i++)
+                buff[pos + i] = this._value[i];
+        }
         else if (this._type == "m4")
         {
-            // const mView = buff.subarray(pos, pos + 16);
-
             for (let i = 0; i < 16; i++)
-            {
                 buff[pos + i] = this._value[i];
-
-                // console.log(this._value[i]);
-            }
-            // console.log(buff);
-
-            // mat4.copy(mView, this._value);
         }
         else
         {
@@ -153,17 +116,20 @@ export default class Uniform extends CgUniform
     {
         const bytesPerFloat = 4;
         const bytesPerInt = 4;
+        if (this._type == "t") return 4;
+        if (this._type == "sampler") return 4;
         if (this._type == "f") return 1 * bytesPerFloat;
         if (this._type == "2f") return 2 * bytesPerFloat;
         if (this._type == "3f") return 3 * bytesPerFloat;
         if (this._type == "4f") return 4 * bytesPerFloat;
+        if (this._type == "f[]") return this._value.length * bytesPerFloat;
 
         if (this._type == "m4") return 4 * 4 * bytesPerFloat;
 
         if (this._type == "i") return 1 * bytesPerInt;
         if (this._type == "2i") return 2 * bytesPerInt;
 
-        // this._log.warn("unknown type getSizeBytes");
+        this._log.warn("unknown type getSizeBytes", this._type);
         return 4;
         // if (this._type == "t") return "sampler2D";
         // if (this._type == "tc") return "samplerCube";
