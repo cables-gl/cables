@@ -34,7 +34,7 @@ export default class GPUBuffer extends EventTarget
     updateGpuBuffer(cgp)
     {
         if (cgp) this._cgp = cgp;
-        if (!this._cgp)
+        if (!this._cgp || !this._cgp.device)
         {
             console.log("no cgp...", this._name, this._cgp);
             return;
