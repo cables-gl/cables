@@ -11,63 +11,89 @@ inConsole.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 
-function myStringify(o)
+function myStringify(o, level = 0)
 {
-    let str = "{\n";
+    let ind = "   ";
+    let indent = "";
+    let str = "";
+    for (let i = 0; i < level; i++) indent += ind;
 
-    for (let i in o)
+    let keys = Object.keys(o).sort();
+    let numKeys = keys.length;
+
+    if (numKeys == 0)
     {
-        str += "    \"" + i + "\": ";
-
-        if (o[i] === null)
-        {
-            str += "null";
-        }
-        else
-        if (o[i] === undefined)
-        {
-            str += "undefined";
-        }
-        else
-        if (o[i] === true)
-        {
-            str += "true";
-        }
-        else
-        if (o[i] === false)
-        {
-            str += "false";
-        }
-        else
-        if (typeof o[i] === "number")
-        {
-            str += String(o[i]);
-        }
-        else if (typeof o[i] === "string")
-        {
-            str += "\"" + o[i] + "\"";
-        }
-        else if (Array.isArray(o[i]) || (o[i].constructor && o[i].constructor.name === "Float32Array"))
-        {
-            str += "{" + o[i].constructor.name + "[" + o[i].length + "]} ";
-            str += "[";
-            for (let a = 0; a < Math.min(5, o[i].length); a++)
-            {
-                if (a > 0)str += ",";
-                str += o[i][a];
-            }
-            str += "...";
-            str += "]";
-        }
-        else
-        {
-            str += "{" + o[i].constructor.name + "}";
-        }
-
-        str += ",\n";
+        str += indent + "{}";
     }
+    else
+    {
+        let keyCounter = 0;
+        str += indent + "{\n";
+        for (let i = 0; i < keys.length; i++)
+        {
+            const item = o[keys[i]];
 
-    str += "}";
+            keyCounter++;
+            str += indent + ind;
+            str += "\"" + keys[i] + "\": ";
+
+            if (item === null)
+            {
+                str += "null";
+            }
+            else
+            if (item === undefined)
+            {
+                str += "undefined";
+            }
+            else
+            if (item === true)
+            {
+                str += "true";
+            }
+            else
+            if (item === false)
+            {
+                str += "false";
+            }
+            else
+            if (typeof item === "number")
+            {
+                str += String(item);
+            }
+            else if (typeof item === "string")
+            {
+                str += "\"" + item + "\"";
+            }
+            else if (Array.isArray(item) || (item.constructor && item.constructor.name === "Float32Array"))
+            {
+                str += "{" + item.constructor.name + "[" + item.length + "]} ";
+                str += "[";
+                for (let a = 0; a < Math.min(5, item.length); a++)
+                {
+                    if (a > 0)str += ",";
+                    str += item[a];
+                }
+                str += "...";
+                str += "]";
+            }
+            else if (item.constructor.name === "Object")
+            {
+                if (Object.keys(item).length == 0) str += "{}";
+                else str += "\n" + myStringify(item, level + 1);
+            }
+            else
+            {
+                str += "{" + item.constructor.name + "}";
+            }
+
+            if (keyCounter != numKeys)str += ",";
+            str += "\n";
+        }
+
+        str += indent;
+        str += "}";
+    }
 
     return str;
 }
@@ -76,7 +102,6 @@ inObj.onChange = () =>
 {
     let obj = inObj.get();
     let str = "???";
-    // console.log(obj)
     if (obj && obj.getInfo) obj = obj.getInfo();
 
     if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
