@@ -1,3 +1,4 @@
+import GPUBuffer from "./cgp_gpubuffer.js";
 
 export default class Binding
 {
@@ -14,6 +15,8 @@ export default class Binding
         this._name = name;
         this._cgp = cgp;
         this.uniforms = [];
+        this.cGpuBuffer = null;
+
         this.bindingInstances = [];
         this.stageStr = options.stage;
         this.bindingType = options.bindingType || "uniform"; // "uniform", "storage", "read-only-storage",
@@ -63,7 +66,6 @@ export default class Binding
         label += "]";
 
         const o = {
-            // "type": this.type,
             "label": label,
             "binding": this.idx,
             "visibility": this.stage,
@@ -89,12 +91,6 @@ export default class Binding
 
     getBindingGroupEntry(gpuDevice, inst)
     {
-        // if (this.bindingInstances[inst] && this.bindingInstances[inst].resource && this.bindingInstances[inst].resource.buffer)
-        // {
-        //     console.log("destroy");
-        //     this.bindingInstances[inst].resource.buffer.destroy();
-        // }
-
         this.isValid = false;
 
         const o = {
@@ -106,10 +102,7 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
-            if (this.uniforms[0].getValue())
-            {
-                if (this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
-            }
+            if (this.uniforms[0].getValue() && this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
             else o.resource = this._cgp.getEmptyTexture().createView();// CABLES.emptyCglTexture.createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
@@ -133,10 +126,11 @@ export default class Binding
 
             if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
 
-            const gpuBuffer = gpuDevice.createBuffer(buffCfg);
+            if (this.cGpuBuffer) this.cGpuBuffer.dispose();
+            this.cGpuBuffer = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
 
             o.resource = {
-                "buffer": gpuBuffer,
+                "buffer": this.cGpuBuffer.gpuBuffer,
                 "minBindingSize": this.getSizeBytes(),
                 "hasDynamicOffset": 0
             };
@@ -148,14 +142,10 @@ export default class Binding
         return o;
     }
 
-    getShaderHeader()
-    {
-        // ????
-    }
+
 
     update(cgp, inst)
     {
-        // if (!this._gpuBuffer) return console.log("has no gpubuffer...");
         let b = this.bindingInstances[inst];
         if (!b) b = this.getBindingGroupEntry(cgp.device, inst);
 
@@ -166,16 +156,9 @@ export default class Binding
                 if (this.uniforms[0].getValue().gpuTexture)
                 {
                     this.bindingInstances[inst] = this.getBindingGroupEntry(this.uniforms[0]._cgp.device, inst);
-                    // b.resource = this.uniforms[0].getValue().gpuTexture.createView();
-                    // console.log(this.uniforms[0].getValue().width);
-                    // console.log("yay");
-                    // console.log("real tex...", this.uniforms[0].getValue());
-                    // CABLES.errorTexture;
-                    // b.resource = CABLES.errorTexture.createView();
                 }
                 else
                 {
-                    // console.log("fake tex...");
                     b.resource = CABLES.errorTexture.createView();
                 }
 
@@ -193,36 +176,29 @@ export default class Binding
 
             // update uniform values to buffer
             const s = this.getSizeBytes() / 4;
-            if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
+            // if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
+
+            this.cGpuBuffer.setSize(s);
 
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
                 info.push(this.uniforms[i].getName() + " " + this.uniforms[i].getValue());
-                this.uniforms[i].copyToBuffer(this._buffer, off); // todo: check if uniform changed?
+                this.uniforms[i].copyToBuffer(this.cGpuBuffer.floatArr, off); // todo: check if uniform changed?
                 off += this.uniforms[i].getSizeBytes() / 4;
-
-                // console.log(this.uniforms[0].getName(), this.uniforms[i]);
-
-                // if (this.uniforms[0].getType() == "m4")
-                // {
-                //     if (this.uniforms[i].getName() == "modelMatrix")
-                // console.log(this.uniforms[i].getName(), this._buffer);
-                // }
             }
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni buff", info);
 
-            // console.log(this._buffer);
 
+            this.cGpuBuffer.updateGpuBuffer();
             // todo: only if changed...
-            cgp.device.queue.writeBuffer(
-                // this._gpuBuffer,
-                b.resource.buffer,
-                0,
-                this._buffer.buffer,
-                this._buffer.byteOffset,
-                this._buffer.byteLength
-            );
+            // cgp.device.queue.writeBuffer(
+            //     b.resource.buffer,
+            //     0,
+            //     this._buffer.buffer,
+            //     this._buffer.byteOffset,
+            //     this._buffer.byteLength
+            // );
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
         }

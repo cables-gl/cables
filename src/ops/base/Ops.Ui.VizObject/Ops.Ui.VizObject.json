@@ -7,16 +7,6 @@
             "date": 1647421046849
         },
         {
-            "message": "Ops.User.pandur.VizObject renamed to Ops.Dev.VizObject",
-            "author": "pandur",
-            "date": 1651131537480
-        },
-        {
-            "message": "Ops.Dev.VizObject renamed to Ops.Ui.VizObject",
-            "author": "pandur",
-            "date": 1651219336727
-        },
-        {
             "message": "now shows if it can not stringify an object, has more alternative ways to show them",
             "type": "improvement",
             "author": "pandur",
@@ -27,6 +17,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1671034952752
+        },
+        {
+            "message": "Can now also visualize complex objects with functions etc.",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1727423813482
         }
     ],
     "authorName": "pandur",

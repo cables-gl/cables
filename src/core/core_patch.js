@@ -132,16 +132,23 @@ const Patch = function (cfg)
                 this.config.patchFile,
                 (err, _data) =>
                 {
-                    const data = JSON.parse(_data);
-                    if (err)
+                    try
                     {
-                        const txt = "";
-                        this._log.error("err", err);
-                        this._log.error("data", data);
-                        this._log.error("data", data.msg);
-                        return;
+                        const data = JSON.parse(_data);
+                        if (err)
+                        {
+                            const txt = "";
+                            this._log.error("err", err);
+                            this._log.error("data", data);
+                            this._log.error("data", data.msg);
+                            return;
+                        }
+                        this.deSerialize(data);
                     }
-                    this.deSerialize(data);
+                    catch (e)
+                    {
+                        this._log.error("could not load/parse patch ", e);
+                    }
                 }
             );
         }

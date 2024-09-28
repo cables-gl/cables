@@ -677,4 +677,56 @@ window.performance = window.performance || {
     },
 };
 
+
+export const logErrorConsole = function (initiator)
+{
+    CABLES.errorConsole = CABLES.errorConsole || { "log": [] };
+    CABLES.errorConsole.log.push({ "initiator": initiator, "arguments": arguments });
+
+    if (!CABLES.errorConsole.ele)
+    {
+        const ele = document.createElement("div");
+        ele.id = "cablesErrorConsole";
+        ele.style.width = "90%";
+        ele.style.height = "300px";
+        ele.style.zIndex = "9999999";
+        ele.style.display = "inline-block";
+        ele.style.position = "absolute";
+        ele.style.padding = "10px";
+        ele.style.fontFamily = "monospace";
+        ele.style.color = "red";
+        ele.style.backgroundColor = "#200";
+
+        CABLES.errorConsole.ele = ele;
+        document.body.appendChild(ele);
+    }
+
+    let logHtml = "ERROR<br/>for more info, open your browsers dev tools console<br/>";
+
+    for (let l = 0; l < CABLES.errorConsole.log.length; l++)
+    {
+        logHtml += CABLES.errorConsole.log[l].initiator + " ";
+        for (let i = 1; i < CABLES.errorConsole.log[l].arguments.length; i++)
+        {
+            if (i > 2)logHtml += ", ";
+            let arg = CABLES.errorConsole.log[l].arguments[i];
+            if (arg.constructor.name.indexOf("Error") > -1 || arg.constructor.name.indexOf("error") > -1)
+            {
+                let txt = "Uncaught ErrorEvent ";
+                if (arg.message)txt += " message: " + arg.message;
+                logHtml += txt;
+            }
+            else if (typeof arg == "string")
+                logHtml += arg;
+            else if (typeof arg == "number")
+                logHtml += String(arg) + " ";
+        }
+        logHtml += "<br/>";
+    }
+
+
+    CABLES.errorConsole.ele.innerHTML = logHtml;
+};
+
+
 export { UTILS };
