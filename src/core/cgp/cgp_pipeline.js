@@ -275,6 +275,17 @@ export default class Pipeline
         //         ],
         //     });
 
+        const blend = {
+            "color": {
+                "srcFactor": "one",
+                "dstFactor": "one-minus-src-alpha"
+            },
+            "alpha": {
+                "srcFactor": "one",
+                "dstFactor": "one-minus-src-alpha"
+            },
+        };
+
         const pipeCfg = {
             // "layout": "auto",
             "label": this._name,
@@ -289,7 +300,8 @@ export default class Pipeline
                 "module": shader.shaderModule,
                 "entryPoint": "myFSMain",
                 "targets": [
-                    { "format": this._cgp.presentationFormat },
+                    { "format": this._cgp.presentationFormat,
+                        "blend": blend },
                 ],
             },
             "primitive": {

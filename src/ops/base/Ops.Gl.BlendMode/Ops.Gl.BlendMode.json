@@ -49,5 +49,6 @@
     },
     "youtubeid": "",
     "issues": "",
-    "exampleProjectId": "x1-Fvc"
+    "exampleProjectId": "x1-Fvc",
+    "license": "MIT"
 }
