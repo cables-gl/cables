@@ -17,6 +17,8 @@ export default class Binding
         this.uniforms = [];
         this.cGpuBuffer = null;
 
+        this.shader = null;
+
         this.bindingInstances = [];
         this.stageStr = options.stage;
         this.bindingType = options.bindingType || "uniform"; // "uniform", "storage", "read-only-storage",
@@ -24,8 +26,11 @@ export default class Binding
         this.stage = GPUShaderStage.VERTEX;
         if (this.stageStr == "frag") this.stage = GPUShaderStage.FRAGMENT;
 
+        if (options.shader) this.shader = options.shader;
+
         this._buffer = null;
         this.isValid = true;
+        this.changed = 0;
 
         if (options.shader)
         {
@@ -121,13 +126,15 @@ export default class Binding
             let buffCfg = {
                 "label": this._name,
                 "size": this.getSizeBytes(),
-                "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM
+                "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM,
             };
 
             if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
 
             if (this.cGpuBuffer) this.cGpuBuffer.dispose();
             this.cGpuBuffer = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
+
+            if (this.uniforms[0].gpuBuffer) this.cGpuBuffer = this.uniforms[0].gpuBuffer;
 
             o.resource = {
                 "buffer": this.cGpuBuffer.gpuBuffer,
@@ -149,6 +156,49 @@ export default class Binding
         let b = this.bindingInstances[inst];
         if (!b) b = this.getBindingGroupEntry(cgp.device, inst);
 
+        if (this.uniforms.length == 1 && this.uniforms[0].gpuBuffer)
+        {
+            // console.log("A", this.uniforms[0].gpuBuffer.gpuBuffer);
+
+            // if (this.cGpuBuffer != this.uniforms[0].gpuBuffer)
+            // {
+            //     this.cGpuBuffer = this.uniforms[0].gpuBuffer;
+
+            //     b.resource = {
+            //         "buffer": this.uniforms[0].gpuBuffer.gpuBuffer,
+            //         "minBindingSize": this.uniforms[0].gpuBuffer.getSizeBytes(),
+            //         "hasDynamicOffset": 0
+            //     };
+            //     this.changed++;
+            //     // this.shader._needsRecompile = true;
+            // }
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("extern uni bind", [this.uniforms[0].getName(), this.cGpuBuffer.floatArr]);
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+
+
+            const s = this.getSizeBytes();
+            // if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
+
+            this.cGpuBuffer.setSize(s / 4);
+
+            // console.log("xc", s);
+
+            const commandEncoder = this._cgp.device.createCommandEncoder();
+            // console.log(this.uniforms[0].gpuBuffer.gpuBuffer);
+            // console.log("copyBufferToBuffer");
+
+            this.cGpuBuffer.gpuBuffer.unmap();
+            this.uniforms[0].gpuBuffer.gpuBuffer.unmap();
+            commandEncoder.copyBufferToBuffer(
+                this.uniforms[0].gpuBuffer.gpuBuffer, 0, this.cGpuBuffer.gpuBuffer, 0, this.getSizeBytes()
+            );
+            commandEncoder.finish();
+
+
+            // console.log("A", this.uniforms[0].gpuBuffer.id);
+        }
+        else
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni texture");
@@ -173,6 +223,9 @@ export default class Binding
         else
         {
             let info = ["stage " + this.stageStr + " / inst " + inst];
+
+            // console.log("B",this.);
+
 
             // update uniform values to buffer
             const s = this.getSizeBytes() / 4;

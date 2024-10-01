@@ -208,4 +208,12 @@ export default class Shader extends CgShader
         this.setWhyCompile("add uniform " + name);
         this._needsRecompile = true;
     }
+
+    getUniform(name)
+    {
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            if (this._uniforms[i].getName() == name) return this._uniforms[i];
+        }
+    }
 }

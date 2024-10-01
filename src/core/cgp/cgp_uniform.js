@@ -9,6 +9,8 @@ export default class Uniform extends CgUniform
         this._cgp = __shader._cgp;
 
         if (this.getType() == "t" && !_value) this._value = this._cgp.getEmptyTexture();
+
+        this.gpuBuffer = null;
     }
 
 
@@ -79,6 +81,11 @@ export default class Uniform extends CgUniform
 
     updateValueT() {}
 
+
+    setGpuBuffer(b)
+    {
+        this.gpuBuffer = b;
+    }
 
     copyToBuffer(buff, pos = 0)
     {

@@ -66,7 +66,11 @@ function renderMesh()
 
     if (drawSpline.get()) shader.glPrimitive = cgl.gl.LINE_STRIP;
 
-    if (inDraw.get() && mesh)mesh.render(shader);
+    if (inDraw.get() && mesh)
+    {
+        // mesh.instances = 3;
+        mesh.render(shader);
+    }
     trigger.trigger();
 
     shader.glPrimitive = oldPrim;

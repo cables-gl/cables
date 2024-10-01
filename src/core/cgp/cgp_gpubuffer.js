@@ -6,6 +6,8 @@ export default class GPUBuffer extends EventTarget
     {
         super();
 
+        this.id = CABLES.shortId();
+
         this._name = name;
         this.floatArr = null;
         this._gpuBuffer = null;
@@ -28,7 +30,11 @@ export default class GPUBuffer extends EventTarget
 
     setData(d)
     {
+        // console.log((new Error()).stack);
+
         this.floatArr = new Float32Array(d);
+
+        // console.log(this.name, this.floatArr);
         this.needsUpdate = true;
     }
 
@@ -54,12 +60,18 @@ export default class GPUBuffer extends EventTarget
             this._buffCfg = this._buffCfg || {};
             this._buffCfg.label = "gpuBuffer-" + this._name;
             if (!this._buffCfg.hasOwnProperty("size") && this.floatArr) this._buffCfg.size = this.floatArr.length * 4;
-            this._buffCfg.usage = this._buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE);
+            this._buffCfg.usage = this._buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
 
             this._gpuBuffer = this._cgp.device.createBuffer(this._buffCfg);
+            this._gpuBuffer.unmap();
 
-            console.log("this._gpuBuffer", this._gpuBuffer);
+            // console.log("this._gpuBuffer", this._gpuBuffer);
         }
+        // console.log(this._name, this.floatArr);
+
+
+        // if (!this.hello)
+        // console.log("writebuffer", this.floatArr);
 
         if (this.floatArr)
             this._cgp.device.queue.writeBuffer(
@@ -69,6 +81,8 @@ export default class GPUBuffer extends EventTarget
                 this.floatArr.byteOffset,
                 this.floatArr.byteLength
             );
+
+        this._gpuBuffer.unmap();
 
         this.needsUpdate = false;
     }
