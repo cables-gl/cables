@@ -42,7 +42,21 @@ class WebGpuContext extends CGState
         this._stackDepthFunc = [];
         this._stackDepthWrite = [];
         this._stackErrorScope = [];
+        this._stackBlend = [];
         this._stackErrorScopeLogs = [];
+
+        this._defaultBlend = {
+            "color": {
+                "operation": "add",
+                "srcFactor": "one",
+                "dstFactor": "zero",
+            },
+            "alpha": {
+                "operation": "add",
+                "srcFactor": "one",
+                "dstFactor": "zero",
+            },
+        };
 
         this.DEPTH_FUNCS = [
             "never",
@@ -93,6 +107,9 @@ class WebGpuContext extends CGState
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc("less-equal");
+
+
+        this.pushBlend(this._defaultBlend);
 
         this.emitEvent("beginFrame");
     }
@@ -417,6 +434,22 @@ class WebGpuContext extends CGState
     popCullFaceFacing()
     {
         this._stackCullFaceFacing.pop();
+    }
+
+    pushBlend(b)
+    {
+        this._stackBlend.push(b);
+    }
+
+
+    popBlend()
+    {
+        this._stackBlend.pop();
+    }
+
+    stateBlend()
+    {
+        return this._stackBlend[this._stackBlend.length - 1];
     }
 
 
