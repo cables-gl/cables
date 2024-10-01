@@ -33,6 +33,11 @@
             {
                 "type": 2,
                 "name": "Profiler Data"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
             }
         ]
     },

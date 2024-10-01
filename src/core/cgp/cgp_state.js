@@ -34,6 +34,7 @@ class WebGpuContext extends CGState
         this._shaderStack = [];
         this._simpleShader = null;
         this.frame = 0;
+        this.catchErrors = false;
 
         this._stackCullFaceFacing = [];
         this._stackDepthTest = [];
@@ -189,33 +190,39 @@ class WebGpuContext extends CGState
 
     pushErrorScope(name, options = {})
     {
-        this._stackErrorScope.push(name);
-        this._stackErrorScopeLogs.push(options.logger || null);
-        this.device.pushErrorScope(options.scope || "validation");
+        if (this.catchErrors)
+        {
+            this._stackErrorScope.push(name);
+            this._stackErrorScopeLogs.push(options.logger || null);
+            this.device.pushErrorScope(options.scope || "validation");
+        }
     }
 
     popErrorScope(cb)
     {
-        const name = this._stackErrorScope.pop();
-        const logger = this._stackErrorScopeLogs.pop();
-        this.device.popErrorScope().then((error) =>
+        if (this.catchErrors)
         {
-            if (error)
+            const name = this._stackErrorScope.pop();
+            const logger = this._stackErrorScopeLogs.pop();
+            this.device.popErrorScope().then((error) =>
             {
-                if (this.lastErrorMsg == error.message)
+                if (error)
                 {
-                    // this._log.warn("last error once more...");
-                }
-                else
-                {
-                    (logger || this._log).error(error.constructor.name, "in", name);
-                    (logger || this._log).error(error.message);
-                }
-                this.lastErrorMsg = error.message;
+                    if (this.lastErrorMsg == error.message)
+                    {
+                        // this._log.warn("last error once more...");
+                    }
+                    else
+                    {
+                        (logger || this._log).error(error.constructor.name, "in", name);
+                        (logger || this._log).error(error.message);
+                    }
+                    this.lastErrorMsg = error.message;
 
-                if (cb)cb(error);
-            }
-        });
+                    if (cb)cb(error);
+                }
+            });
+        }
     }
 
     /**

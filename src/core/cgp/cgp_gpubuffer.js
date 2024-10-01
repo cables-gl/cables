@@ -55,6 +55,8 @@ export default class GPUBuffer extends EventTarget
             console.log("no cgp...", this._name, this._cgp);
             return;
         }
+
+        this._cgp.pushErrorScope("updateGpuBuffer");
         if (!this._gpuBuffer)
         {
             this._buffCfg = this._buffCfg || {};
@@ -63,15 +65,7 @@ export default class GPUBuffer extends EventTarget
             this._buffCfg.usage = this._buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
 
             this._gpuBuffer = this._cgp.device.createBuffer(this._buffCfg);
-            this._gpuBuffer.unmap();
-
-            // console.log("this._gpuBuffer", this._gpuBuffer);
         }
-        // console.log(this._name, this.floatArr);
-
-
-        // if (!this.hello)
-        // console.log("writebuffer", this.floatArr);
 
         if (this.floatArr)
             this._cgp.device.queue.writeBuffer(
@@ -82,7 +76,9 @@ export default class GPUBuffer extends EventTarget
                 this.floatArr.byteLength
             );
 
-        this._gpuBuffer.unmap();
+        // this._gpuBuffer.unmap();
+
+        this._cgp.popErrorScope();
 
         this.needsUpdate = false;
     }
@@ -102,6 +98,9 @@ export default class GPUBuffer extends EventTarget
 
     dispose()
     {
-        // todo
+        // setTimeout(() =>
+        // {
+        //     if (this._gpuBuffer) this._gpuBuffer.destroy();
+        // }, 100);
     }
 }

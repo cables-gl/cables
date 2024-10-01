@@ -15,7 +15,8 @@ export default class Binding
         this._name = name;
         this._cgp = cgp;
         this.uniforms = [];
-        this.cGpuBuffer = null;
+        // this.cGpuBuffer = null;
+        this.cGpuBuffers = [];
 
         this.shader = null;
 
@@ -131,13 +132,13 @@ export default class Binding
 
             if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
 
-            if (this.cGpuBuffer) this.cGpuBuffer.dispose();
-            this.cGpuBuffer = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
+            if (this.cGpuBuffers[inst]) this.cGpuBuffers[inst].dispose();
+            this.cGpuBuffers[inst] = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
 
-            if (this.uniforms[0].gpuBuffer) this.cGpuBuffer = this.uniforms[0].gpuBuffer;
+            if (this.uniforms[0].gpuBuffer) this.cGpuBuffers[inst] = this.uniforms[0].gpuBuffer;
 
             o.resource = {
-                "buffer": this.cGpuBuffer.gpuBuffer,
+                "buffer": this.cGpuBuffers[inst].gpuBuffer,
                 "minBindingSize": this.getSizeBytes(),
                 "hasDynamicOffset": 0
             };
@@ -158,45 +159,14 @@ export default class Binding
 
         if (this.uniforms.length == 1 && this.uniforms[0].gpuBuffer)
         {
-            // console.log("A", this.uniforms[0].gpuBuffer.gpuBuffer);
+            if (this.uniforms[0].gpuBuffer != this.cGpuBuffers[inst])
+            {
+                console.log("changed?!");
+                this.shader._needsRecompile = true; // TODO this should actually just rebuild the bindinggroup i guess ?
+            }
 
-            // if (this.cGpuBuffer != this.uniforms[0].gpuBuffer)
-            // {
-            //     this.cGpuBuffer = this.uniforms[0].gpuBuffer;
-
-            //     b.resource = {
-            //         "buffer": this.uniforms[0].gpuBuffer.gpuBuffer,
-            //         "minBindingSize": this.uniforms[0].gpuBuffer.getSizeBytes(),
-            //         "hasDynamicOffset": 0
-            //     };
-            //     this.changed++;
-            //     // this.shader._needsRecompile = true;
-            // }
-
-            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("extern uni bind", [this.uniforms[0].getName(), this.cGpuBuffer.floatArr]);
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("extern uni bind", [this.uniforms[0].getName(), this.cGpuBuffers[inst].floatArr]);
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
-
-
-            const s = this.getSizeBytes();
-            // if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
-
-            this.cGpuBuffer.setSize(s / 4);
-
-            // console.log("xc", s);
-
-            const commandEncoder = this._cgp.device.createCommandEncoder();
-            // console.log(this.uniforms[0].gpuBuffer.gpuBuffer);
-            // console.log("copyBufferToBuffer");
-
-            this.cGpuBuffer.gpuBuffer.unmap();
-            this.uniforms[0].gpuBuffer.gpuBuffer.unmap();
-            commandEncoder.copyBufferToBuffer(
-                this.uniforms[0].gpuBuffer.gpuBuffer, 0, this.cGpuBuffer.gpuBuffer, 0, this.getSizeBytes()
-            );
-            commandEncoder.finish();
-
-
-            // console.log("A", this.uniforms[0].gpuBuffer.id);
         }
         else
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
@@ -229,21 +199,21 @@ export default class Binding
 
             // update uniform values to buffer
             const s = this.getSizeBytes() / 4;
-            // if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
-
-            this.cGpuBuffer.setSize(s);
+            this.cGpuBuffers[inst].setSize(s);
 
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
                 info.push(this.uniforms[i].getName() + " " + this.uniforms[i].getValue());
-                this.uniforms[i].copyToBuffer(this.cGpuBuffer.floatArr, off); // todo: check if uniform changed?
+                this.uniforms[i].copyToBuffer(this.cGpuBuffers[inst].floatArr, off); // todo: check if uniform changed?
                 off += this.uniforms[i].getSizeBytes() / 4;
             }
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni buff", info);
 
 
-            this.cGpuBuffer.updateGpuBuffer();
+            // console.log("upodate", inst);
+
+            this.cGpuBuffers[inst].updateGpuBuffer();
             // todo: only if changed...
             // cgp.device.queue.writeBuffer(
             //     b.resource.buffer,
