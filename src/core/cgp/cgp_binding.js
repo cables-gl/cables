@@ -199,7 +199,7 @@ export default class Binding
 
             // update uniform values to buffer
             const s = this.getSizeBytes() / 4;
-            this.cGpuBuffers[inst].setSize(s);
+            this.cGpuBuffers[inst].setLength(s);
 
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)

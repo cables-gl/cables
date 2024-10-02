@@ -1,0 +1,58 @@
+{
+    "id": "aaab7bb4-1193-450a-bf3e-e34d234ec877",
+    "created": 1727873067897,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1727873067898
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "C",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "M",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "K",
+                "subType": "number"
+            }
+        ]
+    },
+    "libs": [
+        "chroma.js"
+    ]
+}
