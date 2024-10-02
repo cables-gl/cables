@@ -25,6 +25,12 @@
             "message": "Ops.Net.SocketCluster.SocketCluster_v2 renamed to Ops.Extension.SocketCluster.SocketCluster_v2",
             "author": "stephan",
             "date": 1671003339954
+        },
+        {
+            "message": "print error message, remove connection on op delete, return error string",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1727880750822
         }
     ],
     "authorName": "stephan",
