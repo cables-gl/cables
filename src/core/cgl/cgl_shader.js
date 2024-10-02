@@ -34,19 +34,6 @@ uCamPosition - currently: camPos
 
 let materialIdCounter = 0;
 
-/**
- * @class
- * @namespace external:CGL
- * @hideconstructor
- * @param _cgl
- * @param _name
- * @param _op
- * @example
- * var shader=new CGL.Shader(cgl,'MinimalMaterial');
- * shader.setSource(attachments.shader_vert,attachments.shader_frag);
- */
-
-
 
 
 
@@ -75,6 +62,18 @@ function getDefaultFragmentShader(r, g, b)
         .endl() + "}";
 };
 
+
+/**
+ * @class
+ * @namespace external:CGL
+ * @hideconstructor
+ * @param _cgl
+ * @param _name
+ * @param _op
+ * @example
+ * var shader=new CGL.Shader(cgl,'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert,attachments.shader_frag);
+ */
 class Shader extends CgShader
 {
     constructor (_cgl, _name, _op)
@@ -287,6 +286,7 @@ class Shader extends CgShader
      * @instance
      * @param {String} srcVert
      * @param {String} srcFrag
+     * @param {Bool} fromUserInteraction
      */
     setSource(srcVert, srcFrag, fromUserInteraction)
     {

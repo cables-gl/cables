@@ -407,7 +407,6 @@ class WebGpuContext extends CGState
      * @param b
      * @instance
      */
-
     pushCullFaceFacing(b)
     {
         this._stackCullFaceFacing.push(b);
@@ -451,8 +450,6 @@ class WebGpuContext extends CGState
     {
         return this._stackBlend[this._stackBlend.length - 1];
     }
-
-
 
     getEmptyTexture()
     {
