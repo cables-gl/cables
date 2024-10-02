@@ -15,7 +15,10 @@ export default class Binding
         this._name = name;
         this._cgp = cgp;
         this.uniforms = [];
-        this.cGpuBuffer = null;
+        // this.cGpuBuffer = null;
+        this.cGpuBuffers = [];
+
+        this.shader = null;
 
         this.bindingInstances = [];
         this.stageStr = options.stage;
@@ -24,8 +27,11 @@ export default class Binding
         this.stage = GPUShaderStage.VERTEX;
         if (this.stageStr == "frag") this.stage = GPUShaderStage.FRAGMENT;
 
+        if (options.shader) this.shader = options.shader;
+
         this._buffer = null;
         this.isValid = true;
+        this.changed = 0;
 
         if (options.shader)
         {
@@ -121,16 +127,18 @@ export default class Binding
             let buffCfg = {
                 "label": this._name,
                 "size": this.getSizeBytes(),
-                "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM
+                "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM,
             };
 
             if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
 
-            if (this.cGpuBuffer) this.cGpuBuffer.dispose();
-            this.cGpuBuffer = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
+            if (this.cGpuBuffers[inst]) this.cGpuBuffers[inst].dispose();
+            this.cGpuBuffers[inst] = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
+
+            if (this.uniforms[0].gpuBuffer) this.cGpuBuffers[inst] = this.uniforms[0].gpuBuffer;
 
             o.resource = {
-                "buffer": this.cGpuBuffer.gpuBuffer,
+                "buffer": this.cGpuBuffers[inst].gpuBuffer,
                 "minBindingSize": this.getSizeBytes(),
                 "hasDynamicOffset": 0
             };
@@ -149,6 +157,18 @@ export default class Binding
         let b = this.bindingInstances[inst];
         if (!b) b = this.getBindingGroupEntry(cgp.device, inst);
 
+        if (this.uniforms.length == 1 && this.uniforms[0].gpuBuffer)
+        {
+            if (this.uniforms[0].gpuBuffer != this.cGpuBuffers[inst])
+            {
+                console.log("changed?!");
+                this.shader._needsRecompile = true; // TODO this should actually just rebuild the bindinggroup i guess ?
+            }
+
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("extern uni bind", [this.uniforms[0].getName(), this.cGpuBuffers[inst].floatArr]);
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+        }
+        else
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni texture");
@@ -174,23 +194,26 @@ export default class Binding
         {
             let info = ["stage " + this.stageStr + " / inst " + inst];
 
+            // console.log("B",this.);
+
+
             // update uniform values to buffer
             const s = this.getSizeBytes() / 4;
-            // if (!this._buffer || s != this._buffer.length) this._buffer = new Float32Array(s);
-
-            this.cGpuBuffer.setSize(s);
+            this.cGpuBuffers[inst].setSize(s);
 
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
                 info.push(this.uniforms[i].getName() + " " + this.uniforms[i].getValue());
-                this.uniforms[i].copyToBuffer(this.cGpuBuffer.floatArr, off); // todo: check if uniform changed?
+                this.uniforms[i].copyToBuffer(this.cGpuBuffers[inst].floatArr, off); // todo: check if uniform changed?
                 off += this.uniforms[i].getSizeBytes() / 4;
             }
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni buff", info);
 
 
-            this.cGpuBuffer.updateGpuBuffer();
+            // console.log("upodate", inst);
+
+            this.cGpuBuffers[inst].updateGpuBuffer();
             // todo: only if changed...
             // cgp.device.queue.writeBuffer(
             //     b.resource.buffer,

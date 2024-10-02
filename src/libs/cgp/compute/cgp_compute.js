@@ -50,7 +50,6 @@ export default class GpuCompute
         this._passEncoder.setPipeline(computePipeline);
         this._passEncoder.setBindGroup(0, bindGroup);
 
-
         if (this._options.workGroups.length == 1) this._passEncoder.dispatchWorkgroups(this._options.workGroups[0] || 8);
         if (this._options.workGroups.length == 2) this._passEncoder.dispatchWorkgroups(this._options.workGroups[0] || 8, this._options.workGroups[1] || 8);
         if (this._options.workGroups.length == 3) this._passEncoder.dispatchWorkgroups(this._options.workGroups[0] || 8, this._options.workGroups[1] || 8, this._options.workGroups[2] || 8);

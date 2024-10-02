@@ -880,7 +880,7 @@ Geometry.prototype.getInfo = function ()
 
 // -----------------
 
-// TODO : move this into "old" circle op
+// TODO : rewritwe circle op
 Geometry.buildFromFaces = function (arr, name, optimize)
 {
     const vertices = [];

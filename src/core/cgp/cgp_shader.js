@@ -30,7 +30,9 @@ export default class Shader extends CgShader
         this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
         this.uniProjMatrix = this.addUniformVert("m4", "projMatrix");
         this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
+        this.uniModelViewMatrix = this.addUniformVert("m4", "modelViewMatrix");
         this._tempNormalMatrix = mat4.create();
+        this._tempModelViewMatrix = mat4.create();
 
 
         this.bindingCounter = 0;
@@ -121,12 +123,33 @@ export default class Shader extends CgShader
         this.uniViewMatrix.setValue(this._cgp.vMatrix);
         this.uniProjMatrix.setValue(this._cgp.pMatrix);
 
-        // mat4.mul(this._tempNormalMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+
         // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
         // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
         mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
         mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
+
+
+
+        mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+
+        // cpu billboarding?
+        // this._tempModelViewMatrix[0 * 4 + 0] = 1.0;
+        // this._tempModelViewMatrix[0 * 4 + 1] = 0.0;
+        // this._tempModelViewMatrix[0 * 4 + 2] = 0.0;
+
+        // // #ifndef BILLBOARDING_CYLINDRIC
+        // this._tempModelViewMatrix[1 * 4 + 0] = 0.0;
+        // this._tempModelViewMatrix[1 * 4 + 1] = 1.0;
+        // this._tempModelViewMatrix[1 * 4 + 2] = 0.0;
+        // // #endif
+
+        // this._tempModelViewMatrix[2 * 4 + 0] = 0.0;
+        // this._tempModelViewMatrix[2 * 4 + 1] = 0.0;
+        // this._tempModelViewMatrix[2 * 4 + 2] = 1.0;
+
+        this.uniModelViewMatrix.setValue(this._tempModelViewMatrix);
 
         this.uniNormalMatrix.setValue(this._tempNormalMatrix);
 
@@ -207,5 +230,13 @@ export default class Shader extends CgShader
         this._uniforms.push(uni);
         this.setWhyCompile("add uniform " + name);
         this._needsRecompile = true;
+    }
+
+    getUniform(name)
+    {
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            if (this._uniforms[i].getName() == name) return this._uniforms[i];
+        }
     }
 }

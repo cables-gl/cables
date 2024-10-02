@@ -4,16 +4,19 @@ import { Mesh } from "./cgl_mesh.js";
 
 const MESHES = {};
 
-MESHES.getSimpleRect = function (cgl, name)
+MESHES.getSimpleRect = function (cgl, name, size = 1.0)
 {
     const geom = new Geometry(name);
 
-    geom.vertices = [1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0];
+
+
+    geom.vertices = [1.0 * size, 1.0 * size, 0.0, -1.0 * size, 1.0 * size, 0.0, 1.0 * size, -1.0 * size, 0.0, -1.0 * size, -1.0 * size, 0.0];
     geom.texCoords = [1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0];
     geom.verticesIndices = [0, 1, 2, 2, 1, 3];
     geom.vertexNormals = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
-    return new Mesh(cgl, geom);
+    return cgl.createMesh(geom);
+    // return new Mesh(cgl, geom);
 };
 
 

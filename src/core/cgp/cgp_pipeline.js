@@ -102,6 +102,22 @@ export default class Pipeline
                 this._pipeCfg.depthStencil.depthWriteEnabled = this._cgp.stateDepthWrite();
             }
 
+            if (this._pipeCfg.fragment.targets[0].blend != this._cgp.stateBlend())
+            {
+                needsRebuildReason = "blend changed";
+                this._pipeCfg.fragment.targets[0].blend = this._cgp.stateBlend();
+            }
+
+            // "fragment": {
+            //     "module": shader.shaderModule,
+            //     "entryPoint": "myFSMain",
+            //     "targets": [
+            //         {
+            //             "format": this._cgp.presentationFormat,
+            //             "blend":
+            //         },
+
+
             if (this._cgp.stateDepthTest() === false)
             {
                 if (this._pipeCfg.depthStencil.depthCompare != "never")
@@ -194,6 +210,8 @@ export default class Pipeline
             this._bindUniforms(shader, shader.bindingCounter);
 
             if (this._bindGroups[shader.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[shader.bindingCounter]);
+
+
             // shader.bindingCounter++;
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
@@ -264,14 +282,7 @@ export default class Pipeline
                 ],
             }];
 
-        // buffers.push(
-        //     {
-        //         "arrayStride": 16 * 4,
-        //         "stepMode": "instance",
-        //         "attributes": [
-        //             { "shaderLocation": 3, "offset": 0, "format": "float32x16" }, // position
-        //         ],
-        //     });
+
 
         const pipeCfg = {
             // "layout": "auto",
@@ -287,7 +298,10 @@ export default class Pipeline
                 "module": shader.shaderModule,
                 "entryPoint": "myFSMain",
                 "targets": [
-                    { "format": this._cgp.presentationFormat },
+                    {
+                        "format": this._cgp.presentationFormat,
+                        "blend": this._cgp.stateBlend()
+                    },
                 ],
             },
             "primitive": {
@@ -301,7 +315,7 @@ export default class Pipeline
                 // "triangle-strip"
             },
             "depthStencil": {
-                "depthWriteEnabled": true,
+                "depthWriteEnabled": this._cgp.stateDepthTest(),
                 "depthCompare": this._cgp.stateDepthFunc(),
                 "format": "depth24plus",
             },
