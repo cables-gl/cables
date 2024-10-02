@@ -4,7 +4,7 @@ const inSocket = op.inObject("Socket", null, "socketcluster"),
     inSoftTimeout = op.inInt("Soft Timeout", 15000),
     inRetain = op.inInt("Retain Messages", 1),
     inUpdate = op.inTriggerButton("Update"),
-    receiveMyData=op.inBool("Receive My Data",true),
+    receiveMyData = op.inBool("Receive My Data", true),
     outActive = op.outArray("Active Clients"),
     outSoftTimeout = op.outObject("Will Time Out"),
     outTimeout = op.outArray("Timed Out Clients"),
@@ -33,40 +33,41 @@ const init = () =>
         channels.array = socket.subscribe(socket.channelName + "/arrays");
         channels.object = socket.subscribe(socket.channelName + "/objects");
 
-        Object.keys(channels).forEach((key, index) =>
-        {
-            (async () =>
+        Object.keys(channels)
+            .forEach((key) =>
             {
-                const channel = channels[key];
-                for await (const obj of channel)
+                (async () =>
                 {
-                    handleMessage(socket, obj, key);
-                }
-            })();
-        });
+                    const channel = channels[key];
+                    for await (const obj of channel)
+                    {
+                        handleMessage(socket, obj, key);
+                    }
+                })();
+            });
     }
 };
 
 const handleMessage = (socket, msg, type) =>
 {
-    if(receiveMyData.get() || msg.clientId != socket.clientId)
-    if ( msg.topic == inTopic.get())
-    {
-        if (!activeClients.hasOwnProperty(msg.clientId))
+    if (receiveMyData.get() || msg.clientId !== socket.clientId)
+        if (msg.topic === inTopic.get())
         {
-            activeClients[msg.clientId] = [];
-            newClient = true;
+            if (!activeClients.hasOwnProperty(msg.clientId))
+            {
+                activeClients[msg.clientId] = [];
+                newClient = true;
+            }
+            const timestamp = Date.now();
+            const clientData = {
+                "type": type,
+                "timestamp": timestamp,
+                "payload": msg.payload
+            };
+            activeClients[msg.clientId].push(clientData);
+            clientLastTimestamps[msg.clientId] = Date.now();
+            cleanupClients(newClient);
         }
-        const timestamp = Date.now();
-        const clientData = {
-            "type": type,
-            "timestamp": timestamp,
-            "payload": msg.payload
-        };
-        activeClients[msg.clientId].push(clientData);
-        clientLastTimestamps[msg.clientId] = Date.now();
-        cleanupClients(newClient);
-    }
 };
 
 const cleanupClients = () =>
@@ -79,49 +80,49 @@ const cleanupClients = () =>
     const now = Date.now();
     const timeout = inTimeout.get();
     const softTimeout = inSoftTimeout.get();
-    Object.keys(clientLastTimestamps).forEach((clientId, index) =>
-    {
-        const clientTimestamp = clientLastTimestamps[clientId];
-        if (clientTimestamp <= (now - timeout))
+    Object.keys(clientLastTimestamps)
+        .forEach((clientId) =>
         {
-            if (activeClients.hasOwnProperty(clientId))
+            const clientTimestamp = clientLastTimestamps[clientId];
+            if (clientTimestamp <= (now - timeout))
             {
-                delete activeClients[clientId];
-                timedOutClients.push(clientId);
-                activeClientsChanged = true;
+                if (activeClients.hasOwnProperty(clientId))
+                {
+                    delete activeClients[clientId];
+                    timedOutClients.push(clientId);
+                    activeClientsChanged = true;
+                }
+                if (willTimeoutClients.hasOwnProperty(clientId))
+                {
+                    delete willTimeoutClients[clientId];
+                    willTimeoutClientsChanged = true;
+                }
+                delete clientLastTimestamps[clientId];
             }
-            if (willTimeoutClients.hasOwnProperty(clientId))
+            else if (clientTimestamp <= (now - softTimeout))
             {
-                delete willTimeoutClients[clientId];
+                const progressToTimeout = (now - clientTimestamp) / timeout;
+                willTimeoutClients[clientId] = {
+                    "lastMessage": clientTimestamp,
+                    "timeoutAt": clientTimestamp + timeout,
+                    "progress": progressToTimeout
+                };
                 willTimeoutClientsChanged = true;
             }
-            delete clientLastTimestamps[clientId];
-        }
-        else if (clientTimestamp <= (now - softTimeout))
-        {
-            const progressToTimeout = (now - clientTimestamp) / timeout;
-            const timeoutData = {
-                "lastMessage": clientTimestamp,
-                "timeoutAt": clientTimestamp + timeout,
-                "progress": progressToTimeout
-            };
-            willTimeoutClients[clientId] = timeoutData;
-            willTimeoutClientsChanged = true;
-        }
-        else
-        {
-            if (willTimeoutClients.hasOwnProperty(clientId))
+            else
             {
-                delete willTimeoutClients[clientId];
-                willTimeoutClientsChanged = true;
+                if (willTimeoutClients.hasOwnProperty(clientId))
+                {
+                    delete willTimeoutClients[clientId];
+                    willTimeoutClientsChanged = true;
+                }
+                if (timedOutClients.includes(clientId))
+                {
+                    timedOutClients = timedOutClients.filter((value) => { return value !== clientId; });
+                    timedOutClientsChanged = true;
+                }
             }
-            if (timedOutClients.includes(clientId))
-            {
-                timedOutClients = timedOutClients.filter((value) => { return value !== clientId; });
-                timedOutClientsChanged = true;
-            }
-        }
-    });
+        });
     if (inRetain.get() > 0)
     {
         const clientIds = Object.keys(activeClients);

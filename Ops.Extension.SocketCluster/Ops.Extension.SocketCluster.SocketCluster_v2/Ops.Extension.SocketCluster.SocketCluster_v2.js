@@ -12,7 +12,7 @@ const ready = op.outBool("Ready", false);
 const socketOut = op.outObject("Socket", null, "socketcluster");
 const clientIdOut = op.outString("Own client id");
 const sendOut = op.outBool("Can send", false);
-const errorOut = op.outObject("Error", null);
+const errorOut = op.outString("Error", null);
 
 let socket = null;
 let initDelay = null;
@@ -46,9 +46,8 @@ const init = () =>
             {
                 for await (const { error } of socket.listener("error"))
                 {
-                    op.setUiError("connectionError", `error in socketcluster connection (${error.name})`, 2);
-                    // op.logError(error);
-                    errorOut.set(error);
+                    op.setUiError("connectionError", error.message + " (" + error.name + ")", 2);
+                    errorOut.set(error.name);
                     ready.set(false);
                 }
             })();
@@ -106,7 +105,11 @@ allowSend.onChange = () =>
         socket.allowSend = allowSend.get();
         socketOut.set(socket);
         sendOut.set(allowSend.get());
-        const payload = Object.assign(socket.commonValues, { "topic": "cablescontrol", "clientId": socket.clientId, "payload": { "allowSend": allowSend.get() } });
+        const payload = Object.assign(socket.commonValues, {
+            "topic": "cablescontrol",
+            "clientId": socket.clientId,
+            "payload": { "allowSend": allowSend.get() }
+        });
         socket.transmitPublish(channelName.get() + "/control", payload);
     }
 };
@@ -155,5 +158,13 @@ const handleControlMessage = (message) =>
 };
 
 op.init = init;
+op.onDelete = () =>
+{
+    if (socket)
+    {
+        socket.disconnect();
+        socket = null;
+    }
+};
 activeIn.onChange = init;
 serverHostname.onChange = serverPath.onChange = serverPort.onChange = serverSecure.onChange = init;

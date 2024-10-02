@@ -16,7 +16,7 @@ const init = () =>
             const channel = socket.subscribe(socket.channelName + "/triggers");
             for await (const obj of channel)
             {
-                if (inReceiveOwn.get() || obj.clientId != socket.clientId && obj.topic == inTopic.get())
+                if (inReceiveOwn.get() || obj.clientId !== socket.clientId && obj.topic === inTopic.get())
                 {
                     clientIdOut.set(obj.clientId);
                     if (inNamedTrigger.get() && obj.payload)

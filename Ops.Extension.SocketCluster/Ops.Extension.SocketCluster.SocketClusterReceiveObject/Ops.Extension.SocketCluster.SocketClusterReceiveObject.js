@@ -15,9 +15,9 @@ const init = () =>
             const channel = socket.subscribe(socket.channelName + "/objects");
             for await (const obj of channel)
             {
-                if (obj.topic == inTopic.get())
+                if (obj.topic === inTopic.get())
                 {
-                    if (inReceiveOwn.get() || obj.clientId != socket.clientId)
+                    if (inReceiveOwn.get() || obj.clientId !== socket.clientId)
                     {
                         outData.set(obj.payload);
                         clientIdOut.set(obj.clientId);
