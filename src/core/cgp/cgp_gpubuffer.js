@@ -14,6 +14,7 @@ export default class GPUBuffer extends EventTarget
 
         this.setData([0, 0, 0, 0]);
         this.needsUpdate = true;
+        this._length = 0;
 
         if (options.buffCfg)
         {
@@ -21,9 +22,9 @@ export default class GPUBuffer extends EventTarget
         }
 
         if (data)
-        {
-            this.setSize(data.length);
-        }
+            this.setData(data);
+
+        if (options.length) this.setLength(options.length);
 
         this.updateGpuBuffer(cgp);
     }
@@ -33,16 +34,18 @@ export default class GPUBuffer extends EventTarget
         // console.log((new Error()).stack);
 
         this.floatArr = new Float32Array(d);
+        this.setLength(this.floatArr.length);
 
         // console.log(this.name, this.floatArr);
         this.needsUpdate = true;
     }
 
-    setSize(s)
+    setLength(s)
     {
+        this._length = s;
         if (!this.floatArr || s != this.floatArr.length)
         {
-            this.floatArr = new Float32Array(s);
+            this.floatArr = new Float32Array(this._length);
             this.needsUpdate = true;
         }
     }
@@ -90,6 +93,10 @@ export default class GPUBuffer extends EventTarget
         return this._gpuBuffer;
     }
 
+    get length()
+    {
+        return this._length;
+    }
 
     getSizeBytes()
     {
