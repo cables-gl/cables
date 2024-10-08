@@ -216,5 +216,6 @@
         "cgl_copytexture"
     ],
     "caniusequery": "",
-    "exampleProjectId": "iwaEwm"
+    "exampleProjectId": "iwaEwm",
+    "license": "MIT"
 }

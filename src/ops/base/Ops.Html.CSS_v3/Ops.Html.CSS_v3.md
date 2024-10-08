@@ -17,10 +17,7 @@ If you have problems with existing styles of cables, use css selectors to define
 
 ## Using assets in CSS properties
 
-Use `{{ASSETPATH}}` to get a URL to file Assets
-
-`    background-image:url({{ASSETPATH}}Cloud03_8x8.png);`
-
+use css variables to use file urls, e.g: Ops.Html.SetCssVariableUrl
 
 ## Nesting
 

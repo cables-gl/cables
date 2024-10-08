@@ -89,7 +89,7 @@ op.patch.cgl.on("beginFrame",
             lastRead = performance.now();
 
             if (!texChanged)
-                pixelReader.read(op.patch.cgl, fb, realTexture.pixelFormat, 0, realTexture.height - texRows - inRow.get(), readW, readH, (pixel) =>
+                pixelReader.read(op.patch.cgl, fb, realTexture.pixelFormat, 0, realTexture.height - texRows - Math.max(0, inRow.get()), readW, readH, (pixel) =>
                 {
                     pixelData = pixel;
                 });

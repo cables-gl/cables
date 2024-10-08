@@ -53,6 +53,8 @@ inExec.onTriggered = function ()
 
     if (node)
     {
+        // node.transform(cgl, node._lastTimeTrans);
+
         mat4.copy(m, node.modelMatAbs());
 
         mat4.multiply(cgl.mMatrix, cgl.mMatrix, m);

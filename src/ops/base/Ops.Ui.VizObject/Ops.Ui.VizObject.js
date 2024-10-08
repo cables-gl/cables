@@ -111,30 +111,30 @@ inObj.onChange = () =>
     else
         try
         {
-            str = myStringify(obj);
-            // str = JSON.stringify(obj, false, 4);
-            // if (
-            //     obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
-            // (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
-            // {
-            //     str = "could not stringify object: " + obj.constructor.name + "\n";
+            // str = myStringify(obj);
+            str = JSON.stringify(obj, false, 4);
+            if (
+                obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
+            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
+            {
+                str = "could not stringify object: " + obj.constructor.name + "\n";
 
-            //     const o = {};
-            //     for (const i in obj)
-            //     {
-            //         if (!obj[i]) continue;
+                const o = {};
+                for (const i in obj)
+                {
+                    if (!obj[i]) continue;
 
-            //         if (obj[i].constructor)
-            //         {
-            //             if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
-            //                 o[i] = obj[i];
-            //         }
-            //         else
-            //             o[i] = "{???}";
-            //     }
-            //     obj = o;
-            //     str = JSON.stringify(obj, false, 4);
-            // }
+                    if (obj[i].constructor)
+                    {
+                        if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
+                            o[i] = obj[i];
+                    }
+                    else
+                        o[i] = "{???}";
+                }
+                obj = o;
+                str = JSON.stringify(obj, false, 4);
+            }
         }
         catch (e)
         {

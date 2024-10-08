@@ -165,7 +165,7 @@ let gltfMesh = class
             return x ** (1 / 2.2) * 1.055 - 0.055;
     }
 
-    calcVertexColors(arr)
+    calcVertexColors(arr, type)
     {
         let vertexColors = null;
         if (arr instanceof Float32Array)
@@ -200,6 +200,20 @@ let gltfMesh = class
             vertexColors[i] = this._linearToSrgb(vertexColors[i]);
         }
 
+        console.log("type", type);
+        if (type == "VEC3")
+        {
+            const nc = new Float32Array(vertexColors.length / 3 * 4);
+            for (let i = 0; i < vertexColors.length / 3; i++)
+            {
+                nc[i * 4 + 0] = vertexColors[i * 3 + 0];
+                nc[i * 4 + 1] = vertexColors[i * 3 + 1];
+                nc[i * 4 + 2] = vertexColors[i * 3 + 2];
+                nc[i * 4 + 2] = 1;
+            }
+            vertexColors = nc;
+        }
+
         return vertexColors;
     }
 
@@ -209,11 +223,14 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("NORMAL")) tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
         if (attribs.hasOwnProperty("TANGENT")) tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
 
-        if (attribs.hasOwnProperty("COLOR_0")) tgeom.vertexColors = this.calcVertexColors(gltf.accBuffers[attribs.COLOR_0]);
-        if (attribs.hasOwnProperty("COLOR_1")) tgeom.setAttribute("attrVertColor1", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_1]), 4);
-        if (attribs.hasOwnProperty("COLOR_2")) tgeom.setAttribute("attrVertColor2", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_2]), 4);
-        if (attribs.hasOwnProperty("COLOR_3")) tgeom.setAttribute("attrVertColor3", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_3]), 4);
-        if (attribs.hasOwnProperty("COLOR_4")) tgeom.setAttribute("attrVertColor4", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_4]), 4);
+        // // console.log(gltf.accBuffers[attribs.COLOR_0])
+        // console.log(gltf);
+
+        if (attribs.hasOwnProperty("COLOR_0")) tgeom.vertexColors = this.calcVertexColors(gltf.accBuffers[attribs.COLOR_0], gltf.accBuffers[attribs.COLOR_0].type);
+        if (attribs.hasOwnProperty("COLOR_1")) tgeom.setAttribute("attrVertColor1", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_1]), gltf.accBuffers[attribs.COLOR_1].type);
+        if (attribs.hasOwnProperty("COLOR_2")) tgeom.setAttribute("attrVertColor2", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_2]), gltf.accBuffers[attribs.COLOR_2].type);
+        if (attribs.hasOwnProperty("COLOR_3")) tgeom.setAttribute("attrVertColor3", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_3]), gltf.accBuffers[attribs.COLOR_3].type);
+        if (attribs.hasOwnProperty("COLOR_4")) tgeom.setAttribute("attrVertColor4", this.calcVertexColors(gltf.accBuffers[attribs.COLOR_4]), gltf.accBuffers[attribs.COLOR_4].type);
 
         if (attribs.hasOwnProperty("TEXCOORD_0")) tgeom.texCoords = gltf.accBuffers[attribs.TEXCOORD_0];
         if (attribs.hasOwnProperty("TEXCOORD_1")) tgeom.setAttribute("attrTexCoord1", gltf.accBuffers[attribs.TEXCOORD_1], 2);

@@ -114,5 +114,6 @@
     "caniusequery": "",
     "coreLibs": [
         "cgl_pixelreader"
-    ]
+    ],
+    "license": "MIT"
 }

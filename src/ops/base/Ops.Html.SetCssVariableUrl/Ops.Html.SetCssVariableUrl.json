@@ -12,10 +12,9 @@
                 "type": 5,
                 "name": "Value"
             }
-        ],
-        "portsOut": []
+        ]
     },
-    "summary": "set CSS variable string value",
+    "summary": "Sset CSS variable URL value",
     "docs": {
         "ports": []
     },

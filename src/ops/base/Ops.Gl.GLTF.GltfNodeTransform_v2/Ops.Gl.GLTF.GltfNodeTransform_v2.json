@@ -65,5 +65,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "yrOJve"
+    "exampleProjectId": "yrOJve",
+    "license": "MIT"
 }
