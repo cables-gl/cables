@@ -147,10 +147,7 @@ function doPlay()
 
 function updatePlayState()
 {
-    if (!embedded)
-    {
-        embedVideo(true);
-    }
+    embedVideo(true);
 
     if (play.get())
     {
@@ -313,6 +310,8 @@ function loadedMetaData()
 
 function embedVideo(force)
 {
+    if (embedded) return;
+
     outHasError.set(false);
     outError.set("");
     canPlayThrough.set(false);
@@ -374,5 +373,6 @@ function loadVideo()
 function reload()
 {
     if (!filename.get()) return;
+    embedded = false;
     loadVideo();
 }
