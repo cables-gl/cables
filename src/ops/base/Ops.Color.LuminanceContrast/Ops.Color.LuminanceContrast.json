@@ -1,0 +1,55 @@
+{
+    "id": "4e2ca01b-ba87-40f3-9437-4588dc821474",
+    "created": 1727787564060,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1727787564116
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "R 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "R 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B 2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Contrast",
+                "subType": "number"
+            }
+        ]
+    }
+}
