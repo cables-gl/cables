@@ -11,7 +11,6 @@ class CgShader extends EventTarget
         this._defines = [];
     }
 
-
     /**
      * easily enable/disable a define without a value
      * @function toggleDefine

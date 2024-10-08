@@ -12,6 +12,7 @@ const
 
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
+    inClear = op.inBool("Clear", true),
     r = op.inValueSlider("R", 0),
     g = op.inValueSlider("G", 0),
     b = op.inValueSlider("B", 0),
@@ -27,7 +28,7 @@ op.setPortGroup("Texture Size", [inSize, width, height]);
 op.setPortGroup("Texture Parameters", [inWrap, aniso, inFilter, inPixelFormat]);
 
 r.setUiAttribs({ "colorPick": true });
-op.setPortGroup("Color", [r, g, b, a]);
+op.setPortGroup("Color", [r, g, b, a, inClear]);
 
 op.toWorkPortsNeedToBeLinked(render);
 
@@ -47,8 +48,9 @@ aniso.onChange =
 inPixelFormat.onChange = reInitLater;
 
 inTex.onLinkChanged =
-inSize.onChange =
-inUVTex.onChange = updateUi;
+inClear.onChange =
+    inSize.onChange =
+    inUVTex.onChange = updateUi;
 
 render.onTriggered =
     op.preRender = doRender;
@@ -172,7 +174,7 @@ function updateResolutionInfo()
 
 function updateDefines()
 {
-    if (copyShader)copyShader.toggleDefine("USE_TEX", inTex.isLinked());
+    if (copyShader)copyShader.toggleDefine("USE_TEX", inTex.isLinked() || !inClear.get());
     if (copyShader)copyShader.toggleDefine("USE_UVTEX", inUVTex.isLinked());
 }
 
@@ -185,6 +187,7 @@ function updateUi()
     g.setUiAttribs({ "greyout": inTex.isLinked() });
     a.setUiAttribs({ "greyout": inTex.isLinked() });
 
+    inClear.setUiAttribs({ "greyout": inTex.isLinked() });
     width.setUiAttribs({ "greyout": inSize.get() != "Manual" });
     height.setUiAttribs({ "greyout": inSize.get() != "Manual" });
 
@@ -230,6 +233,7 @@ function copyTexture()
     cgl.currentTextureEffect.bind();
 
     if (inTex.get()) cgl.setTexture(0, inTex.get().tex);
+    else if (!inClear.get() && texOut.get()) cgl.setTexture(0, texOut.get().tex);
     if (inUVTex.get()) cgl.setTexture(1, inUVTex.get().tex);
 
     cgl.currentTextureEffect.finish();

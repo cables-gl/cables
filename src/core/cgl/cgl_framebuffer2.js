@@ -340,9 +340,8 @@ Framebuffer2.prototype.setSize = function (w, h)
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
             this.valid = false;
-            this._log.warn("incomplete framebuffer", status, this._frameBuffer);
+            this._log.error("incomplete framebuffer", status, this._frameBuffer);
             this._cgl.printError();
-            this._cgl.exitError("Framebuffer incomplete...");
 
             this._frameBuffer = null;
             // debugger;

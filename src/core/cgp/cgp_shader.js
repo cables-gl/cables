@@ -6,7 +6,7 @@ import Binding from "./cgp_binding.js";
 
 export default class Shader extends CgShader
 {
-    constructor(_cgp, _name)
+    constructor(_cgp, _name, options = {})
     {
         super();
         if (!_cgp) throw new Error("shader constructed without cgp " + _name);
@@ -14,36 +14,40 @@ export default class Shader extends CgShader
         this._cgp = _cgp;
         this._name = _name;
         this._uniforms = [];
+        this.compute = options.compute || false;
 
         if (!_name) this._log.stack("no shader name given");
         this._name = _name || "unknown";
         this._compileReason = "";
-        this.shaderModule = null;
+        this.gpuShaderModule = null;
         this._needsRecompile = true;
 
         this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", { "stage": "vert", "bindingType": "read-only-storage" });
         this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", { "stage": "frag", "bindingType": "read-only-storage" });
+        this.defaultBindingComp = new Binding(_cgp, 1, "defaultComp", { "bindingType": "read-only-storage" });
         this.bindingsFrag = [this.defaultBindingFrag];
         this.bindingsVert = [this.defaultBindingVert];
+        this.bindingsComp = [this.defaultBindingComp];
 
-        this.uniModelMatrix = this.addUniformVert("m4", "modelMatrix");
-        this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
-        this.uniProjMatrix = this.addUniformVert("m4", "projMatrix");
-        this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
-        this.uniModelViewMatrix = this.addUniformVert("m4", "modelViewMatrix");
-        this._tempNormalMatrix = mat4.create();
-        this._tempModelViewMatrix = mat4.create();
-
+        if (!this.compute)
+        {
+            this.uniModelMatrix = this.addUniformVert("m4", "modelMatrix");
+            this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
+            this.uniProjMatrix = this.addUniformVert("m4", "projMatrix");
+            this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
+            this.uniModelViewMatrix = this.addUniformVert("m4", "modelViewMatrix");
+            this._tempNormalMatrix = mat4.create();
+            this._tempModelViewMatrix = mat4.create();
+        }
 
         this.bindingCounter = 0;
         this.bindCountlastFrame = -1;
-
 
         this._src = "";
 
         this._cgp.on("deviceChange", () =>
         {
-            this.shaderModule = null;
+            this.gpuShaderModule = null;
             this._needsRecompile = "device changed";
         });
     }
@@ -98,10 +102,9 @@ export default class Shader extends CgShader
 
         const src = preproc(this._src, defs);
 
-        this.shaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
+        this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
-        // this.needsPipelineUpdate = "compiled";
 
         this.emitEvent("compiled");
     }
@@ -113,42 +116,37 @@ export default class Shader extends CgShader
 
     bind()
     {
-        // let sizes = {};
-        // for (let i = 0; i < this._uniforms.length; i++)
-        // {
-        //     // console.log(this._uniforms[i]);
-        // }
+        if (!this.compute)
+        {
+            this.uniModelMatrix.setValue(this._cgp.mMatrix);
+            this.uniViewMatrix.setValue(this._cgp.vMatrix);
+            this.uniProjMatrix.setValue(this._cgp.pMatrix);
 
-        this.uniModelMatrix.setValue(this._cgp.mMatrix);
-        this.uniViewMatrix.setValue(this._cgp.vMatrix);
-        this.uniProjMatrix.setValue(this._cgp.pMatrix);
+            // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
+            // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
+            mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
+            mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
+            mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
 
-        // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
-        // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
+            // cpu billboarding?
+            // this._tempModelViewMatrix[0 * 4 + 0] = 1.0;
+            // this._tempModelViewMatrix[0 * 4 + 1] = 0.0;
+            // this._tempModelViewMatrix[0 * 4 + 2] = 0.0;
 
-        mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
-        mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
-        mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+            // // #ifndef BILLBOARDING_CYLINDRIC
+            // this._tempModelViewMatrix[1 * 4 + 0] = 0.0;
+            // this._tempModelViewMatrix[1 * 4 + 1] = 1.0;
+            // this._tempModelViewMatrix[1 * 4 + 2] = 0.0;
+            // // #endif
 
-        // cpu billboarding?
-        // this._tempModelViewMatrix[0 * 4 + 0] = 1.0;
-        // this._tempModelViewMatrix[0 * 4 + 1] = 0.0;
-        // this._tempModelViewMatrix[0 * 4 + 2] = 0.0;
+            // this._tempModelViewMatrix[2 * 4 + 0] = 0.0;
+            // this._tempModelViewMatrix[2 * 4 + 1] = 0.0;
+            // this._tempModelViewMatrix[2 * 4 + 2] = 1.0;
 
-        // // #ifndef BILLBOARDING_CYLINDRIC
-        // this._tempModelViewMatrix[1 * 4 + 0] = 0.0;
-        // this._tempModelViewMatrix[1 * 4 + 1] = 1.0;
-        // this._tempModelViewMatrix[1 * 4 + 2] = 0.0;
-        // // #endif
-
-        // this._tempModelViewMatrix[2 * 4 + 0] = 0.0;
-        // this._tempModelViewMatrix[2 * 4 + 1] = 0.0;
-        // this._tempModelViewMatrix[2 * 4 + 2] = 1.0;
-
-        this.uniModelViewMatrix.setValue(this._tempModelViewMatrix);
-
-        this.uniNormalMatrix.setValue(this._tempNormalMatrix);
+            this.uniModelViewMatrix.setValue(this._tempModelViewMatrix);
+            this.uniNormalMatrix.setValue(this._tempNormalMatrix);
+        }
 
         if (this._needsRecompile) this.compile();
     }

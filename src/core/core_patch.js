@@ -442,8 +442,8 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
         if (!this.isEditorMode())
         {
-            this.exitError("INSTANCE_ERR", "Instancing Error: " + objName, e);
-            throw new Error("instancing error 1" + objName);
+            this._log.logError("INSTANCE_ERR", "Instancing Error: " + objName, e);
+            // throw new Error("instancing error 1" + objName);
         }
     }
 
@@ -1260,49 +1260,6 @@ Patch.prototype.getVars = function (t)
     return vars;
 };
 
-/**
- * @function exitError
- * @memberof Patch
- * @instance
- * @param errorId
- * @param errorMessage
- * @param ex
- * @description cancel patch execution and quit showing an errormessage
- * @function
- */
-Patch.prototype.exitError = function (errorId, errorMessage, ex)
-{
-    this.aborted = true;
-
-    if (this && this.config && this.config.onError)
-    {
-        this.config.onError(errorId, errorMessage);
-    }
-    else
-    {
-        if (!this.isEditorMode())
-        {
-            const newDiv = document.createElement("div");
-
-            const rect = this.cgl.canvas.getBoundingClientRect();
-
-            newDiv.setAttribute("style", "position:absolute;border:5px solid red;padding:15px;background-color:black;color:white;font-family:monospace;");
-            newDiv.style.top = rect.top + "px";
-            newDiv.style.left = rect.left + "px";
-            let str = "cables - An error occured:<br/>";
-            str += "[" + errorId + "] - " + errorMessage;
-            if (ex)str += "<br/>Exception: " + ex.message;
-            newDiv.innerHTML = str;
-
-            console.log(ex);
-            const pe = this.cgl.canvas.parentElement;
-
-            while (pe.hasChildNodes()) pe.removeChild(pe.lastChild);
-
-            document.body.appendChild(newDiv);
-        }
-    }
-};
 
 /**
  * @function preRenderOps

@@ -5,5 +5,5 @@ const
 
 exit.onTriggered = () =>
 {
-    op.patch.exitError(inId.get(), inMessage.get());
+    // op.patch.exitError(inId.get(), inMessage.get());
 };

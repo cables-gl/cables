@@ -50,7 +50,7 @@ WEBAUDIO.createAudioContext = function (op)
     }
     else
     {
-        op.patch.config.onError("NO_WEBAUDIO", "Web Audio is not supported in this browser.");
+        if (op.patch.config.onError)op.logError("NO_WEBAUDIO", "Web Audio is not supported in this browser.");
         return;
     }
     return window.audioContext;

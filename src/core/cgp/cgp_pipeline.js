@@ -109,7 +109,7 @@ export default class Pipeline
             }
 
             // "fragment": {
-            //     "module": shader.shaderModule,
+            //     "module": shader.gpuShaderModule,
             //     "entryPoint": "myFSMain",
             //     "targets": [
             //         {
@@ -289,13 +289,13 @@ export default class Pipeline
             "label": this._name,
             "layout": pipelineLayout,
             "vertex": {
-                "module": shader.shaderModule,
+                "module": shader.gpuShaderModule,
                 "entryPoint": "myVSMain",
                 "buffers": buffers
 
             },
             "fragment": {
-                "module": shader.shaderModule,
+                "module": shader.gpuShaderModule,
                 "entryPoint": "myFSMain",
                 "targets": [
                     {
