@@ -33,7 +33,7 @@ UNI vec2 lifeTime;
 UNI vec4 velocity; // xyz: xyz  / w: inherit velocity
 
 
-const vec3 outOfScreenPos=vec3(999999.0);
+const vec3 outOfScreenPos=vec3(99999.0);
 
 {{MODULES_HEAD}}
 {{CGL.RANDOM_LOW}}
