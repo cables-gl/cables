@@ -200,8 +200,8 @@ let gltfMesh = class
             vertexColors[i] = this._linearToSrgb(vertexColors[i]);
         }
 
-        console.log("type", type);
-        if (type == "VEC3")
+        console.log("arr.cblStride", arr.cblStride);
+        if (arr.cblStride == 3)
         {
             const nc = new Float32Array(vertexColors.length / 3 * 4);
             for (let i = 0; i < vertexColors.length / 3; i++)
