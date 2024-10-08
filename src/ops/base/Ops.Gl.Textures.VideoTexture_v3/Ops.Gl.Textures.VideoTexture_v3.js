@@ -147,6 +147,7 @@ function doPlay()
 
 function updatePlayState()
 {
+    op.setUiError("playvideo", null);
     embedVideo(true);
 
     if (play.get())
@@ -161,19 +162,27 @@ function updatePlayState()
                 doPlay();
             }).catch(function (error)
             {
-                op.warn("exc", error);
+                op.setUiError("playvideo", error.message);
+                op.logWarn("exc", error);
                 op.log(error);
                 op.log(videoElement);
 
                 if (videoElement.paused && inShowSusp.get())
                 {
+
+                    op.setUiError("playvideo", null);
                     interActionNeededButton = true;
                     CABLES.interActionNeededButton.add(op.patch, "videoplayer", () =>
                     {
                         interActionNeededButton = false;
-                        videoElement.play();
-                        doPlay();
-                        CABLES.interActionNeededButton.remove("videoplayer");
+                        videoElement.play().then(() => {
+                            doPlay();
+                            CABLES.interActionNeededButton.remove("videoplayer");
+                        }).catch((e) => {
+                            op.setUiError("playvideo", e.message);
+                            op.logWarn("playvideo", e);
+                        });
+
                     });
                 }
                 // Automatic playback failed.
