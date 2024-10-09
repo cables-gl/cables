@@ -36,31 +36,40 @@ maxDepth.onChange =
     width.onChange =
     height.onChange =
     gapSize.onChange =
-    function () {
+    function ()
+    {
         needsChange = true;
     };
 
 // Recursive function to draw squares
-function drawSquare(x, y, depth, scale) {
+function drawSquare(x, y, depth, scale)
+{
     // Determine whether to go deeper based on random chance and possibility slider
     let godeeper = Math.seededRandom() > deeper.get() * 0.9;
 
     // Stop recursion if max depth is reached
-    if (depth >= maxDepth.get()) {
+    if (depth >= maxDepth.get())
+    {
         godeeper = false;
     }
 
-    if (godeeper) {
+    if (godeeper)
+    {
         // Calculate new scale for child squares, accounting for gap size
         let new_scale = (scale - gap_size) / 2;
 
         // Stop recursion if the new scale is too small
-        if (new_scale <= 0) {
+        if (new_scale <= 0)
+        {
             godeeper = false;
-        } else {
+        }
+        else
+        {
             // Loop to create four child squares
-            for (let _x = 0; _x < 2; _x++) {
-                for (let _y = 0; _y < 2; _y++) {
+            for (let _x = 0; _x < 2; _x++)
+            {
+                for (let _y = 0; _y < 2; _y++)
+                {
                     // Calculate offsets for child squares, including gap size
                     let x_offset = _x * (new_scale + gap_size);
                     let y_offset = _y * (new_scale + gap_size);
@@ -81,7 +90,8 @@ function drawSquare(x, y, depth, scale) {
         }
     }
 
-    if (!godeeper) {
+    if (!godeeper)
+    {
         // Set scale vector for the square
         vec3.set(vScale, scale, scale, scale);
 
@@ -104,7 +114,8 @@ function drawSquare(x, y, depth, scale) {
 }
 
 // Main execution function triggered by 'Exe' input
-exe.onTriggered = function () {
+exe.onTriggered = function ()
+{
     // Only proceed if inputs have changed
     if (!needsChange) return;
 
@@ -126,8 +137,10 @@ exe.onTriggered = function () {
     count = 0;
 
     // Loop over grid dimensions to create initial squares
-    for (let x = 0; x < width.get(); x++) {
-        for (let y = 0; y < height.get(); y++) {
+    for (let x = 0; x < width.get(); x++)
+    {
+        for (let y = 0; y < height.get(); y++)
+        {
             // Calculate initial positions for squares, including gaps
             let x_pos = x * (globalScale + gap_size) - whalf + (globalScale + gap_size) / 2;
             let y_pos = y * (globalScale + gap_size) - hhalf + (globalScale + gap_size) / 2;

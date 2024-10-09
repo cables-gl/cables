@@ -7,6 +7,7 @@ const
     outShader = op.outObject("Shader", null, "shader"),
     outErrors = op.outBool("Has Errors");
 
+const texSlotOff = 7;
 const cgl = op.patch.cgl;
 const uniformInputs = [];
 const uniformTextures = [];
@@ -83,7 +84,7 @@ function bindTextures()// old - should be removed in next version ?
 {
     for (let i = 0; i < uniformTextures.length; i++)
         if (uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
-            cgl.setTexture(0 + i + 3, uniformTextures[i].get().tex);
+            cgl.setTexture(0 + i + texSlotOff, uniformTextures[i].get().tex);
 }
 
 function hasUniformInput(name)
@@ -227,7 +228,7 @@ function parseUniforms(src)
                             let uniType = "t";
                             if (type === "samplerCube")uniType = "tc";
 
-                            newInputTex.uniform = new CGL.Uniform(shader, uniType, uniName, 3 + uniformTextures.length);
+                            newInputTex.uniform = new CGL.Uniform(shader, uniType, uniName, texSlotOff + uniformTextures.length);
                             uniformTextures.push(newInputTex);
                             groupUniforms.push(newInputTex);
                             newInputTex.set(CGL.Texture.getTempTexture(cgl));
@@ -305,7 +306,7 @@ function updateShader()
     updateCount++;
     if (updateCount > 2)manual = true;
 
-    shader.bindTextures = bindTextures.bind(this);
+    // shader.bindTextures = bindTextures.bind(this);
     shader.setSource(vertexShader.get(), fragmentShader.get(), manual);
 
     if (cgl.glVersion == 1)

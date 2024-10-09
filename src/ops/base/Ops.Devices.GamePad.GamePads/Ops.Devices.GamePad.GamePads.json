@@ -42,8 +42,6 @@
             }
         ]
     },
-    "youtubeid": "",
-
-
-    "exampleProjectId": "XHK7NH"
+    "exampleProjectId": "XHK7NH",
+    "license": "MIT"
 }

@@ -116,14 +116,6 @@ class Context extends CGState
     }
 
 
-    exitError(msgId, msg)
-    {
-        console.log(msgId, msg);
-        this.patch.exitError(msgId, msg);
-        this.aborted = true;
-    }
-
-
     _setCanvas(canv)
     {
         if (!canv)
@@ -154,7 +146,7 @@ class Context extends CGState
         if (!this.gl || this.gl.isContextLost())
         {
             this.aborted = true;
-            this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
+            this._log.logError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }
 

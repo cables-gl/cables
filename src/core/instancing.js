@@ -16,7 +16,6 @@ Instancing.prototype.pushLoop = function (maxNum)
 Instancing.prototype.popLoop = function ()
 {
     this._loops.pop();
-    // this._index--;
     this._index = this._indizes.pop();
     if (this._loops.length === 0) this._index = 0;
 };

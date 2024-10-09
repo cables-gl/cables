@@ -5,9 +5,15 @@
             "message": "created op",
             "author": "pandur",
             "date": 1565935788235
+        },
+        {
+            "message": "Ops.Gl.Matrix.RandomGridPlacementArrays_v2 renamed to Ops.Dev.RandomGridPlacementArraysGap2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1727113487196
         }
     ],
-    "authorName": "stephan",
+    "authorName": "pandur",
     "created": 1727109043572,
     "layout": {
         "portsIn": [
@@ -73,7 +79,6 @@
         ]
     },
     "summary": "Place random objects on a grid",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -81,5 +86,6 @@
                 "text": "Propability to go into a deeper level"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }

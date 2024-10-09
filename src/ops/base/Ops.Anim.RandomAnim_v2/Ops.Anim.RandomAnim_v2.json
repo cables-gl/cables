@@ -1,0 +1,112 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 0,
+                "name": "min",
+                "group": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "max",
+                "group": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "duration",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "pause between",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "easing index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Looped"
+            }
+        ]
+    },
+    "summary": "Animates between random values defined by a min and max value",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "min",
+                "text": "Minimum random value that can be generated"
+            },
+            {
+                "name": "max",
+                "text": "Maximum random value that can be generated"
+            },
+            {
+                "name": "random seed",
+                "text": "Random seed. set to 0 for a different seed on each reload. Set to a number to keep the same seed"
+            },
+            {
+                "name": "duration",
+                "text": "How long it takes to animate from the random min and max values"
+            },
+            {
+                "name": "pause between",
+                "text": "Define a pause between each random animation cycle"
+            },
+            {
+                "name": "easing",
+                "text": "Easing mode "
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "result",
+                "text": "The random animated value"
+            },
+            {
+                "name": "Looped",
+                "text": "Trigger out each time the animation reaches its end"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "05581579-1cdc-4eaf-8557-9726c6f9a843",
+    "created": 1727106010525,
+    "issues": "",
+    "changelog": [
+        {
+            "message": "New version: remove not correctly working seed",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1727106151249
+        }
+    ],
+    "license": "MIT"
+}

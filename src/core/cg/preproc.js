@@ -1,9 +1,7 @@
 export function preproc(str, vars)
 {
     const lines = str.split("\n");
-
     const outLines = [];
-
     let stack = [];
 
     for (let i = 0; i < lines.length; i++)
@@ -15,6 +13,12 @@ export function preproc(str, vars)
         {
             const s = vars[parts[1]];
             stack.push({ "state": s });
+            continue;
+        }
+        if (line.startsWith("#ifndef "))
+        {
+            const s = vars[parts[1]];
+            stack.push({ "state": !s });
             continue;
         }
         if (line.startsWith("#endif"))

@@ -77,6 +77,12 @@
             },
             {
                 "type": 0,
+                "name": "Clear",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "R",
                 "group": "Color",
                 "subType": "number"
@@ -146,59 +152,14 @@
         {
             "message": "cloned op from Ops.Gl.TextureEffects.ImageCompose",
             "author": "pandur",
-            "date": 1605613484347
+            "date": 1605613484347,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.ImageComposeV2 renamed to Ops.Gl.TextureEffects.ImageCompose_v2",
+            "message": "Added clear checkbox parameter, uncheck for feedbacking",
+            "type": "feature",
             "author": "pandur",
-            "date": 1605616297972
-        },
-        {
-            "message": "Removed NPOT warning message",
-            "author": "pandur",
-            "date": 1643635010528
-        },
-        {
-            "message": "fix problem when using an imageCompose in another imageCompose",
-            "author": "pandur",
-            "date": 1643886363679
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.ImageCompose_v2",
-            "author": "pandur",
-            "date": 1645462956869
-        },
-        {
-            "message": " added core lib: cgl_copytexture",
-            "author": "pandur",
-            "date": 1645464751689
-        },
-        {
-            "message": "Ops.User.pandur.NgImageCompose renamed to Ops.Dev.NewImageCompose",
-            "author": "pandur",
-            "date": 1645548214972
-        },
-        {
-            "message": "Ops.Dev.NewImageCompose renamed to Ops.Gl.TextureEffects.ImageCompose_v3",
-            "author": "pandur",
-            "date": 1652092883025
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.ImageCompose_v3",
-            "author": "pandur",
-            "date": 1687517505866
-        },
-        {
-            "message": "Ops.Patch.P4SCBDz.ImageCompose_v4 renamed to Ops.Gl.TextureEffects.ImageCompose_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687527412894
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ImageCompose_v4 renamed to Ops.Gl.ImageCompose.ImageCompose_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855950506
+            "date": 1728137834440
         }
     ],
     "issues": "",
@@ -208,5 +169,6 @@
     "coreLibs": [
         "cgl_copytexture"
     ],
-    "exampleProjectId": "dNv2r1"
+    "exampleProjectId": "dNv2r1",
+    "license": "MIT"
 }

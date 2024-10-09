@@ -26,8 +26,8 @@ const Framebuffer = function (_cgl, _w, _h, options)
 
     if (!depthTextureExt)
     {
-        cgl.exitError("NO_DEPTH_TEXTURE", "no depth texture support");
-        // return;
+        this._log.logError("NO_DEPTH_TEXTURE", "no depth texture support");
+        return;
     }
 
     let width = _w || 512;

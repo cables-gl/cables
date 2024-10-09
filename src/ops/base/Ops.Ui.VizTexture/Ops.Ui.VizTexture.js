@@ -16,6 +16,7 @@ let shader = null;
 let fb = null;
 let pixelReader = null;
 let colorString = "";
+let firstTime = true;
 
 inAlpha.onChange =
     inVizRange.onChange = updateDefines;
@@ -26,7 +27,7 @@ updateUi();
 if (CABLES.UI)
 {
     timer.play();
-    op.checkMainloopExists();
+    // op.checkMainloopExists();
 }
 
 function updateUi()
@@ -56,11 +57,16 @@ function updateDefines()
     shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
     shader.toggleDefine("ALPHA_INV", inAlpha.get() == "1-A");
     shader.toggleDefine("ALPHA_ONE", inAlpha.get() == "1");
-    op.checkMainloopExists();
+    // op.checkMainloopExists();
 }
 
 op.renderVizLayerGl = (ctx, layer) =>
 {
+    // if (firstTime)
+    // {
+    //     firstTime = false;
+    //     op.checkMainloopExists();
+    // }
     if (!inTex.isLinked()) return;
     if (!layer.useGl) return;
 

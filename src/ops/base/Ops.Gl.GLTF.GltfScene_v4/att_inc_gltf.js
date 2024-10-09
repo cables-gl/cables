@@ -373,6 +373,8 @@ function parseGltf(arrayBuffer)
                         if (isInt)dataBuff = new Uint32Array(num);
                         else dataBuff = new Float32Array(num);
 
+                        dataBuff.cblStride = numComps;
+
                         for (j = 0; j < num; j++)
                         {
                             if (isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
@@ -387,6 +389,7 @@ function parseGltf(arrayBuffer)
                         stride = stride || 2;
 
                         dataBuff = new Uint16Array(num);
+                        dataBuff.cblStride = stride;
 
                         for (j = 0; j < num; j++)
                         {
@@ -402,6 +405,7 @@ function parseGltf(arrayBuffer)
                         stride = stride || 1;
 
                         dataBuff = new Uint8Array(num);
+                        dataBuff.cblStride = stride;
 
                         for (j = 0; j < num; j++)
                         {

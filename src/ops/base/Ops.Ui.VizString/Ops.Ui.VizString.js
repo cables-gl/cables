@@ -3,7 +3,7 @@ const
     inZoomText = op.inBool("ZoomText", false),
     inLineNums = op.inBool("Line Numbers", true),
     inWhitespace = op.inBool("Whitespace", false),
-    inWrap = op.inBool("Wrap lines", true),
+    inWrap = op.inBool("Wrap lines", false),
     syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript", "inline-css", "sql"], "text"),
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0);

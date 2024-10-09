@@ -31,6 +31,8 @@ op.setPortGroup("Camera", [inInputDevices, inWidth, inHeight]);
 op.setPortGroup("Texture", [flipX, flipY]);
 op.setPortGroup("Video Element", [inAsDOM, inCss, htmlFlipX, htmlFlipY]);
 
+op.toWorkPortsNeedToBeLinked(inTrigger);
+
 let tries = 0;
 const cgl = op.patch.cgl;
 const emptyTexture = CGL.Texture.getEmptyTexture(cgl);

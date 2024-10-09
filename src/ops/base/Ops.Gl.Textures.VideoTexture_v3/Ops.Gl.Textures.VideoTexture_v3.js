@@ -147,10 +147,8 @@ function doPlay()
 
 function updatePlayState()
 {
-    if (!embedded)
-    {
-        embedVideo(true);
-    }
+    op.setUiError("playvideo", null);
+    embedVideo(true);
 
     if (play.get())
     {
@@ -164,19 +162,27 @@ function updatePlayState()
                 doPlay();
             }).catch(function (error)
             {
-                op.warn("exc", error);
+                op.setUiError("playvideo", error.message);
+                op.logWarn("exc", error);
                 op.log(error);
                 op.log(videoElement);
 
                 if (videoElement.paused && inShowSusp.get())
                 {
+
+                    op.setUiError("playvideo", null);
                     interActionNeededButton = true;
                     CABLES.interActionNeededButton.add(op.patch, "videoplayer", () =>
                     {
                         interActionNeededButton = false;
-                        videoElement.play();
-                        doPlay();
-                        CABLES.interActionNeededButton.remove("videoplayer");
+                        videoElement.play().then(() => {
+                            doPlay();
+                            CABLES.interActionNeededButton.remove("videoplayer");
+                        }).catch((e) => {
+                            op.setUiError("playvideo", e.message);
+                            op.logWarn("playvideo", e);
+                        });
+
                     });
                 }
                 // Automatic playback failed.
@@ -313,6 +319,8 @@ function loadedMetaData()
 
 function embedVideo(force)
 {
+    if (embedded) return;
+
     outHasError.set(false);
     outError.set("");
     canPlayThrough.set(false);
@@ -374,5 +382,6 @@ function loadVideo()
 function reload()
 {
     if (!filename.get()) return;
+    embedded = false;
     loadVideo();
 }

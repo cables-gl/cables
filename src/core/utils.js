@@ -701,7 +701,7 @@ export const logErrorConsole = function (initiator)
         document.body.appendChild(ele);
     }
 
-    let logHtml = "ERROR<br/>for more info, open your browsers dev tools console<br/>";
+    let logHtml = "ERROR<br/>for more info, open your browsers dev tools console (Ctrl+Shift+I or Command+Alt+I)<br/>";
 
     for (let l = 0; l < CABLES.errorConsole.log.length; l++)
     {

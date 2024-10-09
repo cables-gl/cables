@@ -24,17 +24,18 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "value"
+                "name": "value",
+                "objType": "texture"
             }
         ]
     },
     "summary": "get texture from array at index",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "caniusequery": "",
-    "exampleProjectId": "jFv097"
+    "exampleProjectId": "jFv097",
+    "license": "MIT"
 }
