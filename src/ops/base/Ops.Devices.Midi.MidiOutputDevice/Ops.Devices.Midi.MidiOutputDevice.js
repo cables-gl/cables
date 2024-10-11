@@ -1,20 +1,22 @@
-// your new op
-// have a look at the documentation at:
-// https://docs.cables.gl/dev_hello_op/dev_hello_op.html
 const CC_STATUS_BYTE = 0xb;
 const NOTE_OFF = 0x8;
-
-let midi = null;
-let outputDevice = null;
 
 const inDeviceSelect = op.inValueSelect("Device", ["none"]);
 const inNote = op.inObject("Note");
 const inCC = op.inObject("CC");
 const inNRPN = op.inObject("NRPN");
 
+let midi = null;
+let outputDevice = null;
+let currentNote = null;
+let currentChannel = null;
+
+inDeviceSelect.onChange = setDevice;
+
 op.setPortGroup("Device", [inDeviceSelect]);
 op.setPortGroup("Midi Events", [inNote, inCC, inNRPN]);
 
+request();
 
 inNRPN.onChange = function (_event)
 {
@@ -59,9 +61,6 @@ inCC.onChange = function (_event)
     outputDevice.send(event.data);
 };
 
-let currentNote = null;
-let currentChannel = null;
-
 const killLastNote = () =>
 {
     if (!outputDevice || !currentNote || !currentChannel) return;
@@ -100,7 +99,7 @@ inNote.onChange = function (_event)
         outputDevice.send(event.data);
         currentNote = event.index;
         currentChannel = event.channel;
-    }, 20);
+    }, 10);
 };
 
 function setDevice()
@@ -122,7 +121,6 @@ function setDevice()
     }
 }
 
-
 function onMIDIFailure()
 {
     op.uiAttr({ "warning": "No MIDI support in your browser." });
@@ -138,9 +136,7 @@ function onMIDISuccess(midiAccess)
     const deviceNames = [];
 
     for (let output = outputs.next(); output && !output.done; output = outputs.next())
-    {
         deviceNames.push(output.value.name);
-    }
 
     inDeviceSelect.uiAttribs.values = deviceNames;
 
@@ -148,10 +144,14 @@ function onMIDISuccess(midiAccess)
     setDevice();
 }
 
-inDeviceSelect.onChange = setDevice;
-
-if (navigator.requestMIDIAccess)
+function request()
 {
-    navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+    if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+    else onMIDIFailure("no midi/requestMIDIAccess");
+
+    if (!midi)
+    {
+        op.log("request midi out again?");
+        setTimeout(request, 500);
+    }
 }
-else onMIDIFailure();
