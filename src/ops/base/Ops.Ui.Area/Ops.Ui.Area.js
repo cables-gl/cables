@@ -1,4 +1,6 @@
-const inTitle = op.inString("Title", "");
+const
+    inTitle = op.inString("Title", ""),
+    inDelete = op.inTriggerButton("Delete");
 
 inTitle.setUiAttribs({ "hidePort": true });
 
@@ -23,3 +25,8 @@ function update()
         op.name = inTitle.get();
     }
 }
+
+inDelete.onTriggered = () =>
+{
+    op.patch.deleteOp(op.id);
+};
