@@ -1,0 +1,186 @@
+{
+    "authorName": "pandur",
+    "id": "e55f21a2-b2cb-445c-bc38-32f8d8e5e2bf",
+    "created": 1728400487378,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Extrude",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "values": [
+                    "Norm",
+                    "Tang",
+                    "BiTang",
+                    "VertCol",
+                    "*",
+                    "+",
+                    "/"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Axis index",
+                "values": [
+                    "XYZ",
+                    "XY",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Coordinates index",
+                "values": [
+                    "Tex Coords",
+                    "Mesh XY",
+                    "Mesh XZ"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "group": "Input",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Channel index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B",
+                    "A",
+                    "RGB"
+                ],
+                "group": "Input",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip index",
+                "values": [
+                    "None",
+                    "X",
+                    "Y",
+                    "XY"
+                ],
+                "group": "Input",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Range index",
+                "values": [
+                    "0-1",
+                    "1-0",
+                    "Normalized"
+                ],
+                "group": "Input",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Calc Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Normal Axis index",
+                "values": [
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Discard Zero Values",
+                "group": "Colorize",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "colorize",
+                "group": "Colorize",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Colorize Min",
+                "group": "Colorize",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Colorize Max",
+                "group": "Colorize",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1599290609650
+        },
+        {
+            "message": "Ops.User.pandur.VertexDisplace4 renamed to Ops.Admin.VertexDisplacementMapNew",
+            "author": "pandur",
+            "date": 1600088767922
+        },
+        {
+            "message": "Ops.Admin.VertexDisplacementMapNew renamed to Ops.Gl.ShaderEffects.VertexDisplacementMap_v4",
+            "author": "pandur",
+            "date": 1613547051220
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}
