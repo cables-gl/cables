@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "simod",
-            "date": 1571218830424
+            "date": 1571218830424,
+            "type": "new"
         },
         {
-            "message": "Ops.User.simod.MidiOutputDevice renamed to Ops.Devices.Midi.MidiOutputDevice",
-            "author": "simod",
-            "date": 1571309253138
+            "message": "Retry getting midi devices when midi api silently fails",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1728638909189
         }
     ],
     "authorName": "simod",
@@ -17,26 +19,28 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Device index",
+                "group": "Device",
                 "subType": "integer"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Note",
                 "group": "Midi Events"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "CC",
                 "group": "Midi Events"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "NRPN",
                 "group": "Midi Events"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "Connect to MIDI device input port",
     "issues": "",
@@ -58,5 +62,6 @@
         ]
     },
     "caniusequery": "Web MIDI API",
-    "exampleProjectId": "VbaQXU"
+    "exampleProjectId": "VbaQXU",
+    "license": "MIT"
 }

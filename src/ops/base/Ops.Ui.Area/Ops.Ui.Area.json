@@ -4,18 +4,25 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1629721776435
+            "date": 1629721776435,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.TestArea renamed to Ops.Ui.Area",
+            "message": "Added delete button: removes area without deleting operators inside",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1637306851465
+            "date": 1728639202911
         }
     ],
     "authorName": "pandur",
     "created": 1629721822424,
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Delete"
+            }
+        ],
         "portsOut": []
     },
     "summary": "Organize and group your patch operators",
@@ -26,5 +33,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ozgnnR"
+    "exampleProjectId": "ozgnnR",
+    "license": "MIT"
 }
