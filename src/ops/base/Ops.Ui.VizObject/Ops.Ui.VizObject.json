@@ -45,6 +45,11 @@
             },
             {
                 "type": 0,
+                "name": "Experimental Stringify",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Font Size",
                 "subType": "number"
             },

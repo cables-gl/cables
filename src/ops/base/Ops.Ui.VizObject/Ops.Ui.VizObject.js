@@ -3,6 +3,7 @@ const
     inConsole = op.inTriggerButton("console log"),
     inZoomText = op.inBool("ZoomText", false),
     inLineNums = op.inBool("Line Numbers", true),
+    inExpString = op.inBool("Experimental Stringify", true),
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0);
 
@@ -84,7 +85,8 @@ function myStringify(o, level = 0)
             }
             else
             {
-                str += "{" + item.constructor.name + "}";
+                str += "[" + item.constructor.name + "]";
+                str += "\n" + myStringify(item, level + 1);
             }
 
             if (keyCounter != numKeys)str += ",";
@@ -111,8 +113,9 @@ inObj.onChange = () =>
     else
         try
         {
-            // str = myStringify(obj);
-            str = JSON.stringify(obj, false, 4);
+            if (inExpString.get()) str = myStringify(obj);
+            else str = JSON.stringify(obj, false, 4);
+
             if (
                 obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
             (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
