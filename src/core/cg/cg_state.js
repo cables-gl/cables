@@ -19,6 +19,7 @@ class CGState extends Events
         vec3.set(this._ident, 0, 0, 0);
 
         this.patch = _patch;
+        this.autoReSize = true;
 
         this.DEPTH_COMPARE_FUNC_NEVER = 0;
         this.DEPTH_COMPARE_FUNC_LESS = 1;
@@ -135,21 +136,27 @@ class CGState extends Events
 
     _resizeToWindowSize()
     {
-        this.setSize(window.innerWidth, window.innerHeight);
-        this.updateSize();
+        if (this.autoReSize)
+        {
+            this.setSize(window.innerWidth, window.innerHeight);
+            this.updateSize();
+        }
     }
 
     _resizeToParentSize()
     {
-        const p = this.canvas.parentElement;
-        if (!p)
+        if (this.autoReSize)
         {
-            this._log.error("cables: can not resize to container element");
-            return;
-        }
-        this.setSize(p.clientWidth, p.clientHeight);
+            const p = this.canvas.parentElement;
+            if (!p)
+            {
+                this._log.error("cables: can not resize to container element");
+                return;
+            }
 
-        this.updateSize();
+            this.setSize(p.clientWidth, p.clientHeight);
+            this.updateSize();
+        }
     }
 
     setAutoResize(parent)

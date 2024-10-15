@@ -22,9 +22,9 @@ export default class Shader extends CgShader
         this.gpuShaderModule = null;
         this._needsRecompile = true;
 
-        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", { "stage": "vert", "bindingType": "read-only-storage" });
-        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", { "stage": "frag", "bindingType": "read-only-storage" });
-        this.defaultBindingComp = new Binding(_cgp, 1, "defaultComp", { "bindingType": "read-only-storage" });
+        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", { "stage": "vert", "bindingType": "uniform" });
+        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", { "stage": "frag", "bindingType": "uniform" });
+        this.defaultBindingComp = new Binding(_cgp, 1, "defaultComp", { "bindingType": "uniform" });
         this.bindingsFrag = [this.defaultBindingFrag];
         this.bindingsVert = [this.defaultBindingVert];
         this.bindingsComp = [this.defaultBindingComp];
@@ -124,10 +124,14 @@ export default class Shader extends CgShader
 
             // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
             // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
-
-            mat4.transpose(this._tempNormalMatrix, this._cgp.mMatrix);
-            mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
             mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+
+
+
+            // mat4.set(this._tempNormalMatrix, this._tempModelViewMatrix);
+            mat4.invert(this._tempNormalMatrix, this._tempModelViewMatrix);
+            mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
+
 
             // cpu billboarding?
             // this._tempModelViewMatrix[0 * 4 + 0] = 1.0;
