@@ -1,7 +1,6 @@
 import { Logger } from "cables-shared-client";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS } from "./constants.js";
-import { extendMeshWithFeedback } from "./cgl_mesh_feedback.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -578,7 +577,7 @@ Mesh.prototype._bind = function (shader)
                         this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
                     }
                 }
-                this.bindFeedback(attribute);
+                if (this.bindFeedback) this.bindFeedback(attribute);
             }
         }
     }
@@ -779,10 +778,7 @@ Mesh.prototype.render = function (shader)
     }
 
 
-    if (this.hasFeedbacks())
-    {
-        this.drawFeedbacks(shader, prim);
-    }
+    if (this.hasFeedbacks && this.hasFeedbacks()) this.drawFeedbacks(shader, prim);
     else if (!this._bufVerticesIndizes || this._bufVerticesIndizes.numItems === 0)
     {
         // for (let i = 0; i < this._attributes.length; i++)
@@ -879,6 +875,6 @@ Mesh.prototype.dispose = function ()
     this._disposeAttributes();
 };
 
-extendMeshWithFeedback(Mesh);
+
 
 export { Mesh, MESH };

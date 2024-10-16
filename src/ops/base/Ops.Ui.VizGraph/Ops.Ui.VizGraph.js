@@ -7,6 +7,7 @@ const
     inNum6 = op.inFloat("Number 6"),
     inNum7 = op.inFloat("Number 7"),
     inNum8 = op.inFloat("Number 8"),
+    inFill = op.inBool("Fill Graph", true),
     inReset = op.inTriggerButton("Reset");
 
 op.setUiAttrib({ "height": 150, "resizable": true, "vizLayerMaxZoom": 2500 });
@@ -34,19 +35,12 @@ inNum1.onLinkChanged =
 op.renderVizLayer = (ctx, layer) =>
 {
     const perf = CABLES.UI.uiProfiler.start("previewlayer graph");
+    const doFill = inFill.get();
 
-    const colors = [
-        "#aaaaaa",
-        "#00ffff",
-        "#ffff00",
-        "#ff00ff",
-        "#0000ff",
-        "#00ff00",
-        "#ff0000",
-        "#ffffff"
+    const colors = ["#7AC4E0", "#D183BF", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#CF5D9D", "#66C984", "#D66AA6", "#515151"];
 
-    ];
-
+    let fontSize = 10 * layer.pixelDensity;
+    ctx.font = "bold " + fontSize + "px sourceCodePro";
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
 
@@ -65,7 +59,7 @@ op.renderVizLayer = (ctx, layer) =>
         const texSlot = 6;
         const mulX = layer.width / 60;
 
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 3;
         ctx.strokeStyle = "#555555";
 
         ctx.beginPath();
@@ -73,13 +67,13 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.lineTo(layer.x + layer.width, CABLES.map(0, min, max, layer.height, 0) + layer.y);
         ctx.stroke();
 
-        ctx.strokeStyle = colors[p];
-
         ctx.beginPath();
+
+        let y;
 
         for (let i = 0; i < buff[p].length; i++)
         {
-            let y = buff[p][i];
+            y = buff[p][i];
 
             y = CABLES.map(y, min, max, layer.height - 3, 3);
             y += layer.y;
@@ -87,10 +81,21 @@ op.renderVizLayer = (ctx, layer) =>
             else ctx.lineTo(layer.x + i * mulX, y);
         }
 
-        ctx.stroke();
+        if (doFill)
+        {
+            ctx.lineTo(layer.x + buff[p].length * mulX, layer.y + layer.height);
+            ctx.lineTo(layer.x, layer.y + layer.height);
+            ctx.fillStyle = colors[p];
+            ctx.fill();
+        }
+        else
+        {
+            ctx.strokeStyle = colors[p];
+            ctx.stroke();
+        }
     }
 
-    ctx.fillStyle = "#888";
+    ctx.fillStyle = "#fff";
     ctx.fillText("max:" + Math.round(max * 100) / 100, layer.x + 10, layer.y + layer.height - 10);
     ctx.fillText("min:" + Math.round(min * 100) / 100, layer.x + 10, layer.y + layer.height - 30);
 

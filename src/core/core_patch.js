@@ -2,7 +2,6 @@ import { Logger } from "cables-shared-client";
 import { EventTarget } from "./eventtarget.js";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
-import { Instancing } from "./instancing.js";
 import { Timer } from "./timer.js";
 import { Link } from "./core_link.js";
 import { Profiler } from "./core_profiler.js";
@@ -73,7 +72,7 @@ const Patch = function (cfg)
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
-    this.instancing = new Instancing();
+    // this.instancing = new Instancing();
     this.onOneFrameRendered = null;
     this.namedTriggers = {};
 

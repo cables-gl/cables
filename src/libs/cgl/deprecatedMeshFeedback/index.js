@@ -1,4 +1,3 @@
-// view-source:http://toji.github.io/webgl2-particles-2/
 
 export function extendMeshWithFeedback(Mesh)
 {
@@ -154,3 +153,5 @@ export function extendMeshWithFeedback(Mesh)
         }
     };
 }
+
+extendMeshWithFeedback(CGL.Mesh);

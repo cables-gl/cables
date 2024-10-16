@@ -1,3 +1,4 @@
+import { Logger } from "cables-shared-client";
 import GPUBuffer from "./cgp_gpubuffer.js";
 
 export default class Binding
@@ -14,11 +15,15 @@ export default class Binding
         this.idx = idx;
         this._name = name;
         this._cgp = cgp;
+        this._log = new Logger("cgp_binding");
         this.uniforms = [];
         // this.cGpuBuffer = null;
         this.cGpuBuffers = [];
 
         this.shader = null;
+
+        if (typeof options != "object") this._log.error("binding options is not an object");
+
 
         this.bindingInstances = [];
         this.stageStr = options.stage;
