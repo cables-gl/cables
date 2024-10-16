@@ -19,6 +19,6 @@ exe.onTriggered = function ()
         }
         val.set(value);
         trigger.trigger();
-        op.patch.instancing.increment();
+        // op.patch.instancing.increment();
     }
 };

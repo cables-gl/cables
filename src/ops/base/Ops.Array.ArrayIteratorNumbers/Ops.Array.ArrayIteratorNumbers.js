@@ -1,19 +1,19 @@
 const
-    exe=op.inTrigger("exe"),
-    arr=op.inArray("array"),
-    trigger=op.outTrigger('trigger'),
-    idx=op.addOutPort(new CABLES.Port(op,"index")),
-    val=op.addOutPort(new CABLES.Port(op,"value"));
+    exe = op.inTrigger("exe"),
+    arr = op.inArray("array"),
+    trigger = op.outTrigger("trigger"),
+    idx = op.addOutPort(new CABLES.Port(op, "index")),
+    val = op.addOutPort(new CABLES.Port(op, "value"));
 
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    if(!arr.get())return;
+    if (!arr.get()) return;
 
-    for(var i=0;i<arr.get().length;i++)
+    for (let i = 0; i < arr.get().length; i++)
     {
         idx.set(i);
         val.set(arr.get()[i]);
         trigger.trigger();
-        op.patch.instancing.increment();
+        // op.patch.instancing.increment();
     }
 };
