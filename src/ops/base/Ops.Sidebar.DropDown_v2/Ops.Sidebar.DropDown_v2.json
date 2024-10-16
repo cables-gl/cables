@@ -35,7 +35,8 @@
             },
             {
                 "type": 5,
-                "name": "Default"
+                "name": "Default",
+                "uititle": "Input"
             },
             {
                 "type": 0,
@@ -51,6 +52,10 @@
                 "type": 0,
                 "name": "Lines",
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Set Default"
             }
         ],
         "portsOut": [
@@ -71,7 +76,6 @@
     },
     "summary": "Shows a drop-down (select) element in the sidebar",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -81,5 +85,6 @@
             }
         ]
     },
-    "exampleProjectId": "0wKJ5d"
+    "exampleProjectId": "0wKJ5d",
+    "license": "MIT"
 }

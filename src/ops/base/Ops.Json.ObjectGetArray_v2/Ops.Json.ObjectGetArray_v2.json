@@ -59,5 +59,6 @@
             }
         ]
     },
-    "youtubeids": []
+    "youtubeids": [],
+    "license": "MIT"
 }
