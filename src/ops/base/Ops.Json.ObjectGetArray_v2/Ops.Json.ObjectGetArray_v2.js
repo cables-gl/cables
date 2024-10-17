@@ -16,7 +16,7 @@ key.on("change", updateUi);
 updateUi();
 function updateUi()
 {
-    if (!key.get())op.setUiError("nokey", "Missing Key Value");
+    if (!key.get())op.setUiError("nokey", "Missing Key Value", 1);
     else op.setUiError("nokey", null);
 }
 
