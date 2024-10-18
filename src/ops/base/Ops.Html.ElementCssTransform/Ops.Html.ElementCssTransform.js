@@ -35,6 +35,7 @@ inTransUnit.onChange =
     inRot.onChange = update;
 
 let ele = null;
+let timeoutUpd = null;
 
 inDoTranslate.onChange =
     inDoOrigin.onChange =
@@ -104,6 +105,7 @@ function update()
     }
     else
     {
-        setTimeout(update, 50);
+        clearTimeout(timeoutUpd);
+        timeoutUpd = setTimeout(update, 150);
     }
 }

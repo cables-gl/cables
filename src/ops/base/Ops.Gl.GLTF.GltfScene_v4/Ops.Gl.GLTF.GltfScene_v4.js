@@ -411,6 +411,13 @@ function loadBin(addCacheBuster)
             gltf = parseGltf(arrayBuffer);
             arrayBuffer = null;
             finishLoading();
+        }).catch((e) =>
+        {
+            if (loadingId)cgl.patch.loading.finished(loadingId);
+            loadingId = null;
+            finishLoading();
+
+            op.logError("gltf fetch error", e);
         });
     closeTab();
 

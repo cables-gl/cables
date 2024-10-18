@@ -209,7 +209,7 @@ let gltfMesh = class
                 nc[i * 4 + 0] = vertexColors[i * 3 + 0];
                 nc[i * 4 + 1] = vertexColors[i * 3 + 1];
                 nc[i * 4 + 2] = vertexColors[i * 3 + 2];
-                nc[i * 4 + 2] = 1;
+                nc[i * 4 + 3] = 1;
             }
             vertexColors = nc;
         }

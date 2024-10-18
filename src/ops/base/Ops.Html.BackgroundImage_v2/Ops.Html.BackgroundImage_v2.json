@@ -9,11 +9,6 @@
                 "name": "Element"
             },
             {
-                "type": 0,
-                "name": "active",
-                "subType": "boolean"
-            },
-            {
                 "type": 5,
                 "name": "image file"
             },
@@ -31,6 +26,11 @@
                 "type": 0,
                 "name": "Position index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -42,17 +42,18 @@
     },
     "changelog": [
         {
-            "message": "Ops.User.pandur.BackgroundImage_v2 renamed to Ops.Html.BackgroundImage_v2",
+            "message": "Fixed cache problems",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1581502849013
+            "date": 1729253304467
         }
     ],
     "summary": "Load a background image and use css styling",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "J3aC0H"
+    "exampleProjectId": "J3aC0H",
+    "license": "MIT"
 }
