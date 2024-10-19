@@ -38,6 +38,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1725439597054
+        },
+        {
+            "message": "Fixed cache problems",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1729253223465
         }
     ],
     "layout": {

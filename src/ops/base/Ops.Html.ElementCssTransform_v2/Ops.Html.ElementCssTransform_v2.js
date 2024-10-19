@@ -32,6 +32,7 @@ inTransUnit.onChange =
     inTransX.onChange =
     inTransY.onChange =
     inScale.onChange =
+    inZ.onChange =
     inRot.onChange = update;
 
 let ele = null;
@@ -40,6 +41,7 @@ let timeoutUpd = null;
 inDoTranslate.onChange =
     inDoOrigin.onChange =
     inDoScale.onChange =
+    inDoZ.onChange =
     inDoRot.onChange = updateUi;
 
 inEle.onChange = inEle.onLinkChanged = function ()
@@ -65,6 +67,7 @@ function updateUi()
     inTransY.setUiAttribs({ "greyout": !inDoTranslate.get() });
     inScale.setUiAttribs({ "greyout": !inDoScale.get() });
     inRot.setUiAttribs({ "greyout": !inDoRot.get() });
+    inZ.setUiAttribs({ "greyout": !inDoZ.get() });
     inOriginY.setUiAttribs({ "greyout": !inDoOrigin.get() });
     inOriginX.setUiAttribs({ "greyout": !inDoOrigin.get() });
 
@@ -88,6 +91,9 @@ function update()
         if (inDoRot.get())
             if (inRot.get() != 0.0)
                 str += "rotateZ(" + inRot.get() + "deg) ";
+
+        if (inDoZ.get())
+            ele.style["z-index"] = inZ.get();
 
         try
         {

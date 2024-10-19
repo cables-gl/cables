@@ -32,6 +32,7 @@ element.onload = () =>
 function filenameChanged(cacheBuster)
 {
     let url = filename.get();
+    if (cacheBuster)url += "?cb=" + Math.random();
 
     element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
@@ -41,10 +42,7 @@ function filenameChanged(cacheBuster)
 
 op.onFileChanged = function (fn)
 {
-    if (filename.get() && filename.get().indexOf(fn) > -1)
-    {
-        filenameChanged(true);
-    }
+    if (filename.get() && filename.get().indexOf(fn) > -1) filenameChanged(true);
 };
 
 function removeEle()

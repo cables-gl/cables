@@ -1,10 +1,10 @@
 const
     inEle = op.inObject("Element"),
-    active = op.inValueBool("active", true),
     filename = op.inUrl("image file"),
     inSize = op.inValueSelect("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "40%", "30%", "25%", "20%", "10%"], "cover"),
     inRepeat = op.inValueSelect("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
     inPosition = op.inValueSelect("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
+    active = op.inValueBool("active", true),
     outEle = op.outObject("HTML Element");
 
 op.onLoadedValueSet =
@@ -61,14 +61,15 @@ function update()
         else
         {
             let cb = "";
-            if (cacheBust)cb = "?cb=" + cacheBust;
+            let url = op.patch.getFilePath(String(filename.get()));
+            if (cacheBust)url = CABLES.cacheBust(url);
 
-            ele.style["background-image"] = "url(" + op.patch.getFilePath(String(filename.get())) + cb + ")";
+            ele.style["background-image"] = "url(" + url + ")";
             ele.style["background-size"] = inSize.get();
             ele.style["background-position"] = inPosition.get();
             ele.style["background-repeat"] = inRepeat.get();
         }
     }
 
-    outEle.set(inEle.get());
+    outEle.setRef(inEle.get());
 }
