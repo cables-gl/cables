@@ -1,0 +1,228 @@
+{
+    "id": "0dc64159-94d1-4807-8539-52ae39156f49",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675001723497
+        },
+        {
+            "message": "Ops.User.pandur.ParticleSystemVelocityArea renamed to Ops.Dev.ParticleSystem.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675089991071
+        },
+        {
+            "message": "Ops.Dev.ParticleSystem.VelocityArea renamed to Ops.Team.Particles.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678366891284
+        },
+        {
+            "message": "cloned op from Ops.Team.Particles.VelocityArea",
+            "author": "pandur",
+            "date": 1678371079277
+        },
+        {
+            "message": "Ops.User.pandur.VelocityArea2 renamed to Ops.Team.Particles.VelocityArea_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678371395379
+        },
+        {
+            "message": "cloned op from Ops.Team.Particles.VelocityArea_v2",
+            "author": "pandur",
+            "date": 1680291857901
+        },
+        {
+            "message": "Ops.Patch.PmAyQPs.VelocityAreaV3 renamed to Ops.Team.Particles.VelocityAreaV3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680292539791
+        },
+        {
+            "message": "Ops.Team.Particles.VelocityAreaV3 renamed to Ops.Team.Particles.VelocityArea_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1680592004894
+        },
+        {
+            "message": "Added Timing Texture Input and parameters to activate the Area at a certain Age ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704977784409
+        },
+        {
+            "message": "Added \"Everywhere\" Area",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704978944569
+        },
+        {
+            "message": "Ops.Extension.GlParticles.VelocityArea_v3 renamed to Ops.Extension.GlParticles.Dev.VelocityArea_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1729510173237
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1680291857900,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Invert Area",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Boncyness",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Dir Randomness",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "inForceOutwards",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Positions",
+                "objType": "texture"
+            },
+            {
+                "type": "2",
+                "name": "Absolute Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": "2",
+                "name": "Lifetime",
+                "objType": "texture"
+            },
+            {
+                "type": "2",
+                "name": "Multiply",
+                "objType": "texture"
+            },
+            {
+                "type": "2",
+                "name": "Timing Internal",
+                "group": "Age Activation",
+                "objType": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Age Start",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Age End",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Age Fade Duration",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Draw Visual Helper"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    }
+}
