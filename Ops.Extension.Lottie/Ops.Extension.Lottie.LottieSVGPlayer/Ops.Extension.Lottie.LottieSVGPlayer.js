@@ -1,5 +1,5 @@
 const
-    inEle = op.inObject("HTML Element"),
+    inEle = op.inObject("HTML Element", null, "element"),
     inData = op.inObject("JSON Data"),
     inPlayMode = op.inSwitch("Play Mode", ["Auto", "Frame"], "Auto"),
 
@@ -10,7 +10,7 @@ const
 
     inDir = op.inBool("Play Backward"),
     inRewind = op.inTriggerButton("Rewind"),
-    inEnabled=op.inBool("Active",true),
+    inEnabled = op.inBool("Active", true),
 
     outComplete = op.outBool("Completed", false),
     outProgress = op.outNumber("Progress"),
@@ -23,17 +23,17 @@ let playmodeAuto = true;
 
 inPlay.onChange = play;
 
-let timeout=null;
+let timeout = null;
 
-inEnabled.onChange=
+inEnabled.onChange =
     inRewind.onTriggered =
     inLoop.onChange =
     inEle.onChange =
-    inData.onChange = ()=>
+    inData.onChange = () =>
     {
         clearTimeout(timeout);
-        timeout=setTimeout(()=>{timeout=null;updateData();},30);
-        //if(!timeout)
+        timeout = setTimeout(() => { timeout = null; updateData(); }, 30);
+        // if(!timeout)
     };
 
 inFrame.onChange = gotoFrame;
@@ -101,9 +101,9 @@ function updateData()
 
     updateUi();
 
-let data=null;
-if(inEnabled.get())data=inData.get();//JSON.parse(JSON.stringify(inData.get())); // deep copy every time ? https://github.com/airbnb/lottie-web/issues/1159
-else return anim=null;
+    let data = null;
+    if (inEnabled.get())data = inData.get();// JSON.parse(JSON.stringify(inData.get())); // deep copy every time ? https://github.com/airbnb/lottie-web/issues/1159
+    else return anim = null;
 
     const params = {
         "container": inEle.get(),

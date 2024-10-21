@@ -37,7 +37,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "HTML Element"
+                "name": "HTML Element",
+                "objType": "element"
             },
             {
                 "type": 2,
@@ -46,6 +47,10 @@
             {
                 "type": 0,
                 "name": "Play Mode index",
+                "values": [
+                    "Auto",
+                    "Frame"
+                ],
                 "group": "Timing",
                 "subType": "integer"
             },
@@ -104,10 +109,10 @@
     },
     "summary": "Play Bodymovin/Lottie animations as SVG in a HTML element",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "3ezRZH"
+    "exampleProjectId": "3ezRZH",
+    "license": "MIT"
 }

@@ -80,5 +80,8 @@
             "author": "pandur",
             "date": 1587376114851
         }
+    ],
+    "coreLibs": [
+        "cgl_deprecatedMeshFeedback"
     ]
 }
