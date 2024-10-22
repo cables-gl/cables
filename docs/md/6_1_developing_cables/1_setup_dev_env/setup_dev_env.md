@@ -39,5 +39,5 @@ But let's get started:
 - IMPORTANT: make sure your current shell has the proper node version by running `node --version` before the next step
     - if not, open a new terminal before you start the server, and check again
 - change directory to `cables_electron/`
-- continue with the [cables electron](https://github.com/cables-gl/cables_electron/blob/develop/README.md#Development) development steps
-- if you forked any of the above repos, check out [how to work with forks](../3_working_with_forks)
+- continue with the step on ["Using standalone to develop cables"](../5_standalone_as_devenv/standalone_as_devenv)
+- if you forked any of the above repos, check out [how to work with forks](../3_working_with_forks/working_with_forks)
