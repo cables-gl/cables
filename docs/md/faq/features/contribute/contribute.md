@@ -10,7 +10,12 @@ The easiest way to contribute this to the community is to [create a team](https:
 
 ---
 
-For bugfixes or improvements in core ops, the editor or the standalone version, read up on how to [develop cables](../../../6_1_developing_cables/developing_cables) 
+If it's a really small fix, you can create a pull-request directly in github. Check out the [YouTube-Video](https://www.youtube.com/watch?v=V4Wc5JwZWaU) on how to
+quickly contribute to the cables documentation, for an example.
+
+---
+
+For more complex bugfixes or improvements in core ops, the editor or the standalone version, read up on how to [develop cables](../../../6_1_developing_cables/developing_cables) 
 and create a pull request for the affected repository.
 
 Thanks for contributing!

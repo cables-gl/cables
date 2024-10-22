@@ -1,5 +1,5 @@
 # Developing Cables
 
-setup your local enviroment to contribute to cables-development
+setup your local environment to contribute to cables-development
 
 __TOC__

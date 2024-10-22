@@ -8,7 +8,7 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Do I need a good graphics card (GPU) to use cables?
 
-- We'd advise having a the equivalent of a **Nvdia 970M** for any serious graphics work.
+- We'd advise having the equivalent of a **Nvdia 970M** for any serious graphics work.
 
 #### What kind of input devices can I use with cables?
 
@@ -18,15 +18,13 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 - cables cannot support this because it is running in the browser, you need 3rd party capturing software that captures a part of the desktop which is **syphon/spout** compatible.
 
-#### Can I use my soundcard with cables?
+#### Can I use my sound card with cables?
 
 - Yes. Though you are limited to 2 audio inputs and 2 audio outputs because of web browser limitations.
 
 #### Is there a standalone version of cables that doesn’t require an internet connection?
 
-- Yes and no. To make and and edit patches you need an internet connection so you can use the cables editor.
-If you have a finished patch you can run it without an internet connection straight from a USB stick.
-It's called Daplaya, you can download it and get started [here](https://github.com/cables-gl/cables-daplaya)
+- Yes! You can download the latest version [here](https://cables.gl/standalone)
 
 #### Can I embed a cables patch in a wordpress page?
 
