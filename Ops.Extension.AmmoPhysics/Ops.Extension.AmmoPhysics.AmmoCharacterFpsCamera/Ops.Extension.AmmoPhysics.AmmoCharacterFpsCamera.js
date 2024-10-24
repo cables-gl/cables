@@ -22,7 +22,7 @@ const viewMatrix = mat4.create();
 const vPos = vec3.create();
 let speedx = 0, speedy = 0, speedz = 0;
 const movementSpeedFactor = 0.5;
-const canvas = document.getElementById("glcanvas");
+const canvas = cgl.canvas;
 const DEG2RAD = 3.14159 / 180.0;
 let rotX = 0;
 let rotY = 0;
@@ -169,7 +169,7 @@ function removeListener()
     document.removeEventListener("pointerlockchange", lockChangeCallback, false);
     document.removeEventListener("mozpointerlockchange", lockChangeCallback, false);
     document.removeEventListener("webkitpointerlockchange", lockChangeCallback, false);
-    document.getElementById("glcanvas").removeEventListener("mousedown", startPointerLock);
+    cgl.canvas.removeEventListener("mousedown", startPointerLock);
 }
 
 function initListener()
@@ -179,7 +179,7 @@ function initListener()
         document.addEventListener("pointerlockchange", lockChangeCallback, false);
         document.addEventListener("mozpointerlockchange", lockChangeCallback, false);
         document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
-        document.getElementById("glcanvas").addEventListener("mousedown", startPointerLock);
+        cgl.canvas.addEventListener("mousedown", startPointerLock);
 
         cgl.canvas.removeEventListener("pointermove", moveCallbackNoPL, false);
         cgl.canvas.removeEventListener("pointerup", upCallbackNoPL, false);
