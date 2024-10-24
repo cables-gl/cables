@@ -215,7 +215,7 @@ function moveCallback(e)
     if (rotY > 180.0) rotY -= 360.0;
 }
 
-const canvas = document.getElementById("glcanvas");
+const canvas = op.patch.cgl.canvas;
 
 function mouseDown(e)
 {
@@ -272,7 +272,7 @@ function removeListener()
     document.removeEventListener("pointerlockchange", lockChangeCallback, false);
     document.removeEventListener("mozpointerlockchange", lockChangeCallback, false);
     document.removeEventListener("webkitpointerlockchange", lockChangeCallback, false);
-    document.getElementById("glcanvas").removeEventListener("mousedown", startPointerLock);
+    op.patch.cgl.canvas.removeEventListener("mousedown", startPointerLock);
 }
 
 function initListener()
@@ -282,7 +282,7 @@ function initListener()
         document.addEventListener("pointerlockchange", lockChangeCallback, false);
         document.addEventListener("mozpointerlockchange", lockChangeCallback, false);
         document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
-        document.getElementById("glcanvas").addEventListener("mousedown", startPointerLock);
+        op.patch.cgl.canvas.addEventListener("mousedown", startPointerLock);
 
         cgl.canvas.removeEventListener("pointermove", moveCallbackNoPL, false);
         cgl.canvas.removeEventListener("pointerup", upCallbackNoPL, false);
