@@ -5,6 +5,7 @@ const
     inRepeat = op.inValueSelect("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
     inPosition = op.inValueSelect("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
     active = op.inValueBool("active", true),
+    inNotUnset = op.inValueBool("Never Unset", false),
     outEle = op.outObject("HTML Element");
 
 op.onLoadedValueSet =
@@ -56,7 +57,7 @@ function update()
     {
         if (!active.get())
         {
-            ele.style["background-image"] = "none";
+            if (!inNotUnset.get()) ele.style["background-image"] = "none";
         }
         else
         {
@@ -71,5 +72,5 @@ function update()
         }
     }
 
-    outEle.setRef(inEle.get());
+    outEle.setRef(ele);
 }

@@ -1,13 +1,13 @@
 const
-    inExec=op.inTriggerButton("Exec"),
-    inArr=op.inArray("Array"),
-    outTrigger=op.outTrigger("Trigger out"),
-    result=op.outArray("Result");
+    inExec = op.inTriggerButton("Exec"),
+    inArr = op.inArray("Array"),
+    outTrigger = op.outTrigger("Trigger out"),
+    result = op.outArray("Result");
 
-inExec.onTriggered=function()
+inExec.onTriggered = function ()
 {
     const arrValue = inArr.get();
-    if(!arrValue) result.set(null);
-    result.set(inArr.get());
+    if (!arrValue) result.set(null);
+    result.setRef(inArr.get());
     outTrigger.trigger();
 };
