@@ -1,0 +1,69 @@
+{
+    "id": "1f634c57-fb61-485a-8d78-9b8ef2319b2e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599132769125
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1729845206491,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 3",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 4",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 5",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 6",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 7",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number 8",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Output another number if input number is zero",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}
