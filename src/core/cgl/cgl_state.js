@@ -28,7 +28,7 @@ class Context extends CGState
         this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
         this.profileData = new ProfileData(this);
-        this._log = new Logger("cgl_context");
+        this._log = new Logger("cgl_context", { "onError": _patch.config.onError });
         this._viewPort = [0, 0, 0, 0];
         this.glVersion = 0;
         this.glUseHalfFloatTex = false;

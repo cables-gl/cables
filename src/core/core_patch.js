@@ -37,7 +37,7 @@ const Patch = function (cfg)
 {
     EventTarget.apply(this);
 
-    this._log = new Logger("core_patch");
+    this._log = new Logger("core_patch", { "onError": cfg.onError });
     this.ops = [];
     this.settings = {};
     this.config = cfg ||
