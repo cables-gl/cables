@@ -4,7 +4,7 @@
       "opId": "7f601f11-6d44-4c0a-842a-51b4fa8ccd6b",
       "id": "jqf9xuicl",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
           "x": -12,
           "y": -80
@@ -22,12 +22,6 @@
               "portOut": "Next",
               "objIn": "dc2cts19z",
               "objOut": "jqf9xuicl"
-            },
-            {
-              "portIn": "exe",
-              "portOut": "Next",
-              "objIn": "amfuo8tfs",
-              "objOut": "jqf9xuicl"
             }
           ]
         }
@@ -37,10 +31,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "s3ipieojx",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
-          "x": 1,
-          "y": -420
+          "x": -32.74762577484765,
+          "y": -537.8400703285664
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -67,6 +61,12 @@
               "portIn": "String",
               "portOut": "innerOut_c6sm5ztz4",
               "objIn": "129jufs0y",
+              "objOut": "s3ipieojx"
+            },
+            {
+              "portIn": "SearchValue",
+              "portOut": "innerOut_c6sm5ztz4",
+              "objIn": "cz46ahbwr",
               "objOut": "s3ipieojx"
             }
           ]
@@ -104,12 +104,6 @@
               "portOut": "innerOut_uxwx45pbg",
               "objIn": "9mnylc2fx",
               "objOut": "s3ipieojx"
-            },
-            {
-              "portIn": "exe",
-              "portOut": "innerOut_uxwx45pbg",
-              "objIn": "q0a4mifwl",
-              "objOut": "s3ipieojx"
             }
           ]
         }
@@ -119,7 +113,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "dc2cts19z",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
           "x": 1,
           "y": 140.397909800062
@@ -139,7 +133,7 @@
       "opId": "bc110e48-812d-489d-b1b3-b09c644c6982",
       "id": "xtisz9h2s",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
           "x": 312,
           "y": -160
@@ -199,7 +193,7 @@
       "opId": "6b7f9561-6faf-4df7-ac3b-64235dded700",
       "id": "to8nqx69d",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
           "x": 312,
           "y": -340
@@ -255,7 +249,7 @@
       "opId": "bff9c3d9-e63a-46d2-a59f-932c715aceab",
       "id": "129jufs0y",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
           "x": 336,
           "y": -260
@@ -278,42 +272,84 @@
       ]
     },
     {
-      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
-      "id": "rxnsr0uls",
+      "opId": "c974de41-4ce4-4432-b94d-724741109c71",
+      "id": "90yrwyji5",
       "uiAttribs": {
-        "extendTitle": 0,
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
-          "x": -337.6741504378739,
-          "y": -88.74245733376421
+          "x": 73.30313458128518,
+          "y": -368.4557620703134
         },
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "text",
+          "value": "PNG,JPG,WEBP"
+        },
+        {
+          "name": "separator",
+          "value": ","
+        },
+        {
+          "name": "Numbers",
+          "value": 0
+        },
+        {
+          "name": "Trim",
+          "value": 1
+        },
+        {
+          "name": "Split Lines",
+          "value": 0
+        }
+      ],
       "portsOut": [
         {
-          "name": "timesTriggered",
-          "value": 0
+          "name": "array",
+          "links": [
+            {
+              "portIn": "Array",
+              "portOut": "array",
+              "objIn": "cz46ahbwr",
+              "objOut": "90yrwyji5"
+            }
+          ]
+        },
+        {
+          "name": "length",
+          "value": 3
         }
       ]
     },
     {
-      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
-      "id": "amfuo8tfs",
+      "opId": "bace9c9b-5e96-4a82-9bcd-02e316afb9de",
+      "id": "cz46ahbwr",
       "uiAttribs": {
-        "extendTitle": 0,
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
-          "x": -249.6035813745615,
-          "y": 29.397909800061996
+          "x": 68.87721644687892,
+          "y": -305.93966842182516
         },
         "blueprintSubpatch2": true
       },
       "storage": {},
       "portsOut": [
         {
-          "name": "timesTriggered",
-          "value": 0
+          "name": "Found",
+          "links": [
+            {
+              "portIn": "Format index",
+              "portOut": "Found",
+              "objIn": "9mnylc2fx",
+              "objOut": "cz46ahbwr"
+            }
+          ]
+        },
+        {
+          "name": "Index",
+          "value": 1
         }
       ]
     },
@@ -321,24 +357,21 @@
       "opId": "ed772bc0-ab12-427e-8378-64ea4f7635ed",
       "id": "9mnylc2fx",
       "uiAttribs": {
-        "subPatch": "ubfd8pytb",
+        "subPatch": "1av9tv2vt",
         "translate": {
-          "x": -24,
-          "y": -240
+          "x": -20.07048162944949,
+          "y": -242.9111599135616
         },
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true,
-        "loading": false
+        "loading": false,
+        "error": null
       },
       "storage": {},
       "portsIn": [
         {
-          "name": "Format index",
-          "value": 2
-        },
-        {
           "name": "Format",
-          "value": "WEBP"
+          "value": "JPEG"
         },
         {
           "name": "Output dataUrl",
@@ -348,7 +381,7 @@
       "portsOut": [
         {
           "name": "Binary Size",
-          "value": 37964
+          "value": 288279
         },
         {
           "name": "Base64 string",
@@ -373,37 +406,10 @@
               "portOut": "Finished",
               "objIn": "jqf9xuicl",
               "objOut": "9mnylc2fx"
-            },
-            {
-              "portIn": "exe",
-              "portOut": "Finished",
-              "objIn": "rxnsr0uls",
-              "objOut": "9mnylc2fx"
             }
           ]
         }
       ]
-    },
-    {
-      "opId": "e640619f-235c-4543-bbf8-b358e0283180",
-      "id": "q0a4mifwl",
-      "uiAttribs": {
-        "extendTitle": 0,
-        "subPatch": "ubfd8pytb",
-        "translate": {
-          "x": -288,
-          "y": -200
-        }
-      },
-      "portsOut": [
-        {
-          "name": "timesTriggered",
-          "value": 0
-        }
-      ],
-      "storage": {
-        "ref": "q0a4mifwl"
-      }
     }
   ]
 }

@@ -22,11 +22,13 @@ outString.ignoreValueSerialize = true;
 
 let pixelReader = new CGL.PixelReader();
 
-start.onTriggered = retrySoon;
+start.onTriggered = () => { texChanged = true; retrySoon(); };
 
+inQuality.onChange =
 inFormat.onChange =
 inTex.onChange = () =>
 {
+    console.log("change");
     texChanged = true;
 };
 

@@ -14,14 +14,11 @@ outArray.set(newArr);
 
 seed.set(Math.random());
 
-inArrayX.onChange = inTime.onChange = inFrequency.onChange = update;
+seed.onChange =
+    inArrayX.onChange =
+    inTime.onChange =
+    inFrequency.onChange = update;
 
-seed.onChange = function ()
-{
-    Math.randomSeed = seed.get();
-    noise.seed(Math.seededRandom());
-    update();
-};
 function update()
 {
     let arr = inArrayX.get();
@@ -29,6 +26,9 @@ function update()
 
     let time = inTime.get();
     let mult = inFrequency.get();
+
+    Math.randomSeed = seed.get();
+    noise.seed(Math.seededRandom());
 
     if (arrTime)
     {

@@ -1,10 +1,10 @@
 const
     inLoadingTask = op.inBool("Loading Task", false),
+    inUiLoading = op.inBool("Loading", false),
     inWarning1 = op.inBool("Warning", false),
     inUiError = op.inBool("Error", false),
     inUiHint = op.inBool("Hint", false),
     inNotWorking = op.inBool("Not Working", false),
-    inUiLoading = op.inBool("Loading", false),
     innum = op.inFloatSlider("Slider", 0),
     inGrad = op.inGradient("Gradient"),
     inResize = op.inBool("Resizable"),
@@ -24,7 +24,7 @@ const
     outBlah = op.outNumber("Something");
 
 op.setPortGroup("Greyout", [inSwit, ingreyoutLine]);
-op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError, inNotWorking, inUiLoading]);
+op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError, inNotWorking]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
 

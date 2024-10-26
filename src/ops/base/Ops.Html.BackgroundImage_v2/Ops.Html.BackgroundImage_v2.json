@@ -31,6 +31,11 @@
                 "type": 0,
                 "name": "active",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Never Unset",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

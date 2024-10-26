@@ -37,7 +37,7 @@ const Patch = function (cfg)
 {
     EventTarget.apply(this);
 
-    this._log = new Logger("core_patch");
+    this._log = new Logger("core_patch", { "onError": cfg.onError });
     this.ops = [];
     this.settings = {};
     this.config = cfg ||
@@ -441,7 +441,7 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
 
         if (!this.isEditorMode())
         {
-            this._log.logError("INSTANCE_ERR", "Instancing Error: " + objName, e);
+            this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
             // throw new Error("instancing error 1" + objName);
         }
     }

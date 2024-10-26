@@ -52,7 +52,6 @@
     ],
     "summary": "Creates An array filled with Simplex noise values (Range: -1, 1)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -83,5 +82,6 @@
         ]
     },
     "exampleProjectId": "rNAlhL",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }
