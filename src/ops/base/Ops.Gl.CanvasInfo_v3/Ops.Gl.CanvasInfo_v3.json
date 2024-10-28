@@ -1,6 +1,7 @@
 {
     "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,

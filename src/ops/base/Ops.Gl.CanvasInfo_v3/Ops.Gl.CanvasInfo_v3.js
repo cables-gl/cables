@@ -21,6 +21,8 @@ function update()
 {
     let div = 1;
 
+    if (cgl.canvasHeight == 0)setTimeout(update, 100);
+
     height.set(cgl.canvasHeight / op.patch.cgl.pixelDensity);
     width.set(cgl.canvasWidth / op.patch.cgl.pixelDensity);
 
