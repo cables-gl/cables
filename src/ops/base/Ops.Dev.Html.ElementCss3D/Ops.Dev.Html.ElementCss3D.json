@@ -1,0 +1,85 @@
+{
+    "id": "ee4f2f09-17df-4d26-bda3-9db51cf78b9d",
+    "created": 1729951882161,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723567532363
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1729951882162
+        },
+        {
+            "message": "Ops.Patch.PWLpPjs.ElementCss3D renamed to Ops.Dev.Html.ElementCss3D",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1729953372548
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Perspective",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Backface-Visibility",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set CSS border properties of a HTML element",
+    "docs": {
+        "ports": []
+    }
+}
