@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1729951882162
+        },
+        {
+            "message": "Ops.Dev.Html.ElementCss3D renamed to Ops.Html.ElementCss3DTransform",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730116461620
         }
     ],
     "layout": {
