@@ -119,10 +119,7 @@
             }
         ]
     },
-    "summary": "Creates a hexagonal noise texture ",
-    "issues": "",
-
-    "youtubeids": [],
+    "summary": "Creates a hexagonal noise ",
     "docs": {
         "ports": [
             {
@@ -132,10 +129,6 @@
             {
                 "name": "Blend Mode index",
                 "text": "pick a blend mode with an integer"
-            },
-            {
-                "name": "Blend Mode",
-                "text": "Selected blend mode"
             },
             {
                 "name": "Amount",
@@ -187,5 +180,6 @@
             }
         ]
     },
-    "exampleProjectId": "plbB53"
+    "exampleProjectId": "plbB53",
+    "license": "MIT"
 }
