@@ -17,28 +17,28 @@ Use `cables.tez` or `tz1ixVhzF6uBTYo6vPZ44RoZfcypC5dyvPc6`. Thanks!
 
 ## Like, Share, Comment!
 
-Tag #cablesgl when sharing your projects and artwork and throw us a mention on [twitter](https://twitter.com/cables_gl), [instagram](https://www.instagram.com/cables_gl), [facebook](https://www.facebook.com/cablesgl).
-We love seeing cables in the wild and it is a lot of fun to discuss your projects on our blogs and socials. 
+Tag #cablesgl when sharing your projects and artwork and throw us a mention on [mastodon](https://mastodon.social/@cables_gl), [instagram](https://www.instagram.com/cables_gl), [facebook](https://www.facebook.com/cablesgl).
+We love seeing cables in the wild and it is a lot of fun to discuss your projects on our blogs and socials.
 Let us know and let's get your artwork out there!
 
 Check out and comment on our [youtube](https://www.youtube.com/c/cablesgl) channel, reshare tutorials you liked!
 
 ## Share your knowledge!
 
-Sharing is caring - keep the community strong, remix, share, publish patches on our site. 
-Join in our Discord and contact the creators - maybe work together on an awesome demo or interactive project and let us know! 
+Sharing is caring - keep the community strong, remix, share, publish patches on our site.
+Join in our Discord and contact the creators - maybe work together on an awesome demo or interactive project and let us know!
 We'd love to show it to the world.
 
 ## Let us know what's missing!
 
-Bugs bugs bugs, they are everywhere... if you don't bring our attention to them! 
-Please report bugs and take part/help others in the discussion [forum](https://github.com/cables-gl/cables_docs/discussions) and [discord](https://discord.gg/cablesgl). 
+Bugs bugs bugs, they are everywhere... if you don't bring our attention to them!
+Please report bugs and take part/help others in the discussion [forum](https://github.com/cables-gl/cables_docs/discussions) and [discord](https://discord.gg/cablesgl).
 
 Help us by documenting and sharing patches that illustrate the issues, this makes it easy for us to squash them and not wander around looking for them!
 
 ## Communicate!
 
-Got a cool idea or coded an awesome shader that makes cables.gl better? 
+Got a cool idea or coded an awesome shader that makes cables.gl better?
 Share it with us and the community by posting in our [Discord](https://github.com/cables-gl/cables_docs/discussions), our Feature Requests or joining our weekly meetups.
 
 Weekly meetups? Yes! Bring your friends! Come chat and share your work on [our Discord](https://discord.gg/cablesgl), every Wednesday!
