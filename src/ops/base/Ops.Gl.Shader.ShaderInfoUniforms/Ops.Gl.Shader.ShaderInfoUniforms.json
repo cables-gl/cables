@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1684248313327
+            "date": 1684248313327,
+            "type": "new"
         },
         {
             "message": "Ops.Patch.PpsW05w.ShaderUniforms renamed to Ops.Gl.Shader.ShaderInfoUnitorms",
@@ -40,9 +41,8 @@
         ]
     },
     "summary": "read back all uniforms values of the current bound shader",
-
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

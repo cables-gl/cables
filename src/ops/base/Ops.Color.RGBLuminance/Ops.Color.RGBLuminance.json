@@ -40,5 +40,6 @@
     "summary": "Calculate the luminance of a RGB color",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Du0rvs"
 }

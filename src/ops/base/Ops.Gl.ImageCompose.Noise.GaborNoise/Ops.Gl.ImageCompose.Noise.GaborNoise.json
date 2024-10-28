@@ -89,5 +89,6 @@
         }
     ],
     "license": "MIT",
-    "summary": "Render gabor noise into a texture"
+    "summary": "Render \"gabor noise\" into a texture",
+    "exampleProjectId": "PWDdQm"
 }
