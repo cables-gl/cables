@@ -36,5 +36,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "Calculate the luminance of a RGB color",
+    "docs": {
+        "ports": []
     }
 }

@@ -54,5 +54,9 @@
     },
     "libs": [
         "chroma.js"
-    ]
+    ],
+    "summary": "Output the CMYK value of a RGB color",
+    "docs": {
+        "ports": []
+    }
 }

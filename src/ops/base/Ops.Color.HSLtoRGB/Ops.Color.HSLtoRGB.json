@@ -55,5 +55,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "Convert HSL to RGB",
+    "docs": {
+        "ports": []
     }
 }
