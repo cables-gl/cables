@@ -39,5 +39,6 @@
     "summary": "Choose a file on your hard drive",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "M58UAs"
 }

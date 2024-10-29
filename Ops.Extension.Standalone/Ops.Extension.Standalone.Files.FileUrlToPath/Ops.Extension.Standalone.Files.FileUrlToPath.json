@@ -41,5 +41,6 @@
     },
     "coreLibs": [
         "standalone_electron"
-    ]
+    ],
+    "exampleProjectId": "upnVAs"
 }

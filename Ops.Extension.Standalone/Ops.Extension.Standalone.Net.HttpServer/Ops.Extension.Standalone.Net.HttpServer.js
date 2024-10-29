@@ -38,13 +38,12 @@ function start()
     catch (e)
     {
         outRunning.set(false);
-        console.log(e);
+        op.logWarn(e);
     }
 }
 
 function stop()
 {
-    console.log(server);
     server.close();
     outRunning.set(false);
 }
