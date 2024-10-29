@@ -39,5 +39,6 @@
     "summary": "Create a new empty file on your local harddrive",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "dhvNAs"
 }
