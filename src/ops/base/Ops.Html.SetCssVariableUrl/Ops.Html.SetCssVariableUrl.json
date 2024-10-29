@@ -14,7 +14,7 @@
             }
         ]
     },
-    "summary": "Sset CSS variable URL value",
+    "summary": "Set CSS variable URL value",
     "docs": {
         "ports": []
     },
@@ -26,5 +26,6 @@
             "date": 1727104995275
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "xIpuvs"
 }

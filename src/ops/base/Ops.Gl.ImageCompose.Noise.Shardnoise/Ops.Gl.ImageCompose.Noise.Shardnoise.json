@@ -111,5 +111,7 @@
             "date": 1724939289103
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "GSZtvs",
+    "summary": "Render \"shard noise\" into a texture"
 }

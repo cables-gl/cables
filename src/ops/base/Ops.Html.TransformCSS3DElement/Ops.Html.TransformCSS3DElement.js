@@ -80,7 +80,9 @@ inOrigin.onChange = function ()
 trigger.onTriggered = function ()
 {
     let pxfov = 0.5 / (1 / cgl.pMatrix[5]) * cgl.gl.drawingBufferHeight / op.patch.cgl.pixelDensity;
-    elProjection.style.perspective = pxfov + "px";
+    elProjection.style.perspective = (pxfov) + "px";
+    // elProjection.style["-webkit-perspective"] = (pxfov) + "px";
+
     let a = -2 * cgl.gl.drawingBufferWidth / cgl.gl.drawingBufferHeight;
     vec3.set(
         sScalingVector,
@@ -103,7 +105,7 @@ trigger.onTriggered = function ()
         );
 
         if (el.parentElement)
-    		el.parentElement.style.transform = "translateZ(" + pxfov + "px) matrix3d(" +
+    		el.parentElement.style.transform = "translateZ(" + (pxfov) + "px) matrix3d(" +
     			sCSSMatrix[0] + "," +
     			-sCSSMatrix[1] + "," +
     			sCSSMatrix[2] + "," +
@@ -124,8 +126,8 @@ trigger.onTriggered = function ()
     			sCSSMatrix[14] + "," +
     			sCSSMatrix[15] +
     		") scaleX(-1) translate3d(" +
-    			cgl.gl.drawingBufferWidth / 2 / op.patch.cgl.pixelDensity + "px," +
-    			cgl.gl.drawingBufferHeight / 2 / op.patch.cgl.pixelDensity + "px" +
+    			(cgl.gl.drawingBufferWidth / 2 / op.patch.cgl.pixelDensity) + "px," +
+    			(cgl.gl.drawingBufferHeight / 2 / op.patch.cgl.pixelDensity) + "px" +
     			",0" +
     		")";
     }

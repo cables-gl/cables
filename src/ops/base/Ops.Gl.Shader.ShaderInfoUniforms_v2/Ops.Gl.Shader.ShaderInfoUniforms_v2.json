@@ -1,5 +1,5 @@
 {
-    "id": "3ca6af85-4350-4693-991a-42ead18e4020",
+    "id": "0648b136-4d35-410b-a208-75075ba1d15b",
     "changelog": [
         {
             "message": "created op",
@@ -8,20 +8,14 @@
             "type": "new"
         },
         {
-            "message": "Ops.Patch.PpsW05w.ShaderUniforms renamed to Ops.Gl.Shader.ShaderInfoUnitorms",
-            "type": "rename",
+            "message": "Output objects that contains name, value and type, and not just an array with a stride",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1684326717623
-        },
-        {
-            "message": "Ops.Gl.Shader.ShaderInfoUnitorms renamed to Ops.Gl.Shader.ShaderInfoUniforms",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685963113304
+            "date": 1730125636075
         }
     ],
     "authorName": "pandur",
-    "created": 1684248426043,
+    "created": 1730125239280,
     "layout": {
         "portsIn": [
             {

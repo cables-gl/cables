@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1582125423781
+            "date": 1582125423781,
+            "type": "new"
+        },
+        {
+            "message": "Fix problem with element propery not updating correctly in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1730124387683
         }
     ],
     "authorName": "pandur",

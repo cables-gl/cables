@@ -11,32 +11,37 @@ function update()
 {
     const shader = cgl.getShader();
 
-    let lines = [];
-
-    for (let i = 0; i < shader._uniforms.length; i++)
+    if (shader)
     {
-        lines.push(shader._uniforms[i]._name);
+        let lines = [];
 
-        let str = "";
+        console.log(shader._uniforms);
 
-        if (shader._uniforms[i]._value && shader._uniforms[i]._value.length)
+        for (let i = 0; i < shader._uniforms.length; i++)
         {
-            for (let j = 0; j < shader._uniforms[i]._value.length; j++)
+            lines.push(shader._uniforms[i]._name);
+
+            let str = "";
+
+            if (shader._uniforms[i]._value && shader._uniforms[i]._value.length)
             {
-                str += shader._uniforms[i]._value[j];
+                for (let j = 0; j < shader._uniforms[i]._value.length; j++)
+                {
+                    str += shader._uniforms[i]._value[j];
 
-                if (j < shader._uniforms[i]._value.length - 1)str += ", ";
+                    if (j < shader._uniforms[i]._value.length - 1)str += ", ";
+                }
             }
+            else
+                str += JSON.stringify(shader._uniforms[i]._value);
+
+            if (!shader._uniforms[i]._isValidLoc())str += " invalid Loc!";
+            lines.push(str);
+
+            lines.push(shader._uniforms[i]._type);
         }
-        else
-            str += JSON.stringify(shader._uniforms[i]._value);
 
-        if (!shader._uniforms[i]._isValidLoc())str += " invalid Loc!";
-        lines.push(str);
-
-        lines.push(shader._uniforms[i]._type);
+        outArr.setRef(lines);
     }
-
-    outArr.set(lines);
     next.trigger();
 }

@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1721829720969
+        },
+        {
+            "message": "Fix problem with element propery not updating correctly in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1730124373050
         }
     ],
     "authorName": "andro",

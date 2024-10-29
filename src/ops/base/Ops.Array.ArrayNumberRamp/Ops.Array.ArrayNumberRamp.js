@@ -5,8 +5,12 @@ const
     outArr = op.outArray("Result");
 
 inStart.onChange =
-inEnd.onChange =
-inNum.onChange = () =>
+    inEnd.onChange =
+    inNum.onChange = update;
+
+update();
+
+function update()
 {
     const start = Math.min(inStart.get(), inEnd.get());
     const end = Math.max(inStart.get(), inEnd.get());
@@ -16,14 +20,14 @@ inNum.onChange = () =>
     const arr = [];
 
     if (num == 0) return outArr.setRef([]);
-    const dist = end - start;
+    const dist = Math.abs(end) + Math.abs(start);
     const step = dist / (num - 1);
     arr.length = num;
 
     for (let i = 0; i < num; i++)
     {
-        arr[i] = i * step;
+        arr[i] = i * step + start;
     }
 
     outArr.setRef(arr);
-};
+}

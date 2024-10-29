@@ -55,5 +55,6 @@
     "summary": "Calculate the luminance contrast between two colors",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "lFzrvs"
 }

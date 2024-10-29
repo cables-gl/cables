@@ -52,5 +52,5 @@ function update()
         }
     }
 
-    outEle.set(inEle.get());
+    outEle.setRef(inEle.get());
 }
