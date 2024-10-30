@@ -28,5 +28,6 @@
         ]
     },
     "summary": "draw texture mapping coordinates",
-    "exampleProjectId": "Nu7dJ5"
+    "exampleProjectId": "Nu7dJ5",
+    "license": "MIT"
 }

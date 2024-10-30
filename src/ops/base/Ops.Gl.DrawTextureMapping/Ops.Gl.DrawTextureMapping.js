@@ -83,7 +83,7 @@ render.onTriggered = function ()
 {
     if (points.length === 0) return;
     if (!mesh) return;
-    if (op.instanced(render)) return;
+    // if (op.instanced(render)) return;
 
     let shader = cgl.getShader();
     if (!shader) return;
