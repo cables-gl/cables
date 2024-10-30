@@ -1,0 +1,84 @@
+{
+    "id": "a7abdfb9-4c2a-4ddb-8fc6-55b3fdfbdaf3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1594657868344,
+            "type": "new"
+        },
+        {
+            "message": "Added active toggle to temporary remove property from element",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721829720969
+        },
+        {
+            "message": "Fix problem with element propery not updating correctly in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1730124373050
+        },
+        {
+            "message": "Ops.Html.CSSPropertyString renamed to Ops.Html.CSS.CSSPropertyString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730273930983
+        }
+    ],
+    "authorName": "andro",
+    "created": 1594657882461,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": 5,
+                "name": "Value",
+                "group": "Attributes"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    },
+    "summary": "Modify a css property of an element with a string",
+    "issues": "",
+    "youtubeids": [
+        "qnPFY8qYBUQ"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Element",
+                "text": "Parent element to modify"
+            },
+            {
+                "name": "Property",
+                "text": "Property to modify"
+            },
+            {
+                "name": "Value",
+                "text": "String value in "
+            }
+        ]
+    },
+    "exampleProjectId": "6leHfe",
+    "license": "MIT"
+}

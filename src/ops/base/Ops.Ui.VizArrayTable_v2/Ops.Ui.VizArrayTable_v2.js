@@ -88,7 +88,6 @@ op.renderVizLayer = (ctx, layer) =>
         for (let s = 0; s < stride; s++)
         {
             const v = arr[i + s];
-
             columnsWidth[s] = Math.max(columnsWidth[s], getCellValue(v).length);
         }
     }

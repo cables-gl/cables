@@ -24,6 +24,7 @@ const
 
 const cgl = op.patch.cgl;
 
+render.onLinkChanged =
 inUseTexAlpha.onChange =
     inTarget.onChange =
     inBlend.onChange =
@@ -31,6 +32,8 @@ inUseTexAlpha.onChange =
     inWorldSpace.onChange =
     inTex.onLinkChanged =
     inMethod.onChange = updateDefines;
+
+op.toWorkPortsNeedToBeLinked(inTex, next);
 
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
 op.setPortGroup("Position", [inPosX, inPosY]);
@@ -97,16 +100,17 @@ function updateDefines()
 
     if (inTarget.get() == "Pointsize" && inMethod.get() == "Screen")op.setUiError("pointscreen", "This combination of Mapping and Target is not possible", 1);
     else op.setUiError("pointscreen", null);
+
+    CGL.TextureEffect.setupBlending(op, mod, inBlend, inAmount);
 }
 
 render.onTriggered = function ()
 {
     const vp = cgl.getViewPort();
 
+    mod.bind();
     mod.setUniformValue("MOD_viewPortW", vp[2]);
     mod.setUniformValue("MOD_viewPortH", vp[3]);
-
-    mod.bind();
     let tex = inTex.get();
     if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
     else tex = tex.tex;

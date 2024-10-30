@@ -1,0 +1,150 @@
+{
+    "id": "11381bfe-38b0-4051-aef9-69d83c292f0d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1613408280888,
+            "type": "new"
+        },
+        {
+            "message": "Added pass through element output port",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720518609063
+        },
+        {
+            "message": "Show error when element is not positioned absolute",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720610207925
+        },
+        {
+            "message": "fixed zindex parameter was not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1729176882936
+        },
+        {
+            "message": "Ops.Html.ElementCssTransform_v2 renamed to Ops.Html.CSS.ElementCssTransform_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730274143429
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1729176595822,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Translate Active",
+                "group": "Translation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Unit index",
+                "values": [
+                    "px",
+                    "%"
+                ],
+                "group": "Translation",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Scale Active",
+                "group": "Scaling",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate Active",
+                "group": "Rotation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rot Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Origin",
+                "group": "Origin",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Origin X index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
+                "group": "Origin",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Origin Y index",
+                "values": [
+                    "top",
+                    "center",
+                    "bottom"
+                ],
+                "group": "Origin",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Z Index Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Z Index",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Passthrough",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "translate,scale and rotate a HTML element using css transform",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

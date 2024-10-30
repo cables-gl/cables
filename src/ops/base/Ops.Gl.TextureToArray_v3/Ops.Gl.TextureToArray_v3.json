@@ -1,0 +1,103 @@
+{
+    "authorName": "pandur",
+    "id": "946ca491-3455-495f-ab32-ed7c34830aeb",
+    "created": 1725429533811,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "update"
+            },
+            {
+                "type": 2,
+                "name": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 3,
+                "name": "Colors"
+            },
+            {
+                "type": 0,
+                "name": "Floating Point",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Num Pixel",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "extract colors from a texture",
+    "docs": {
+        "ports": [
+            {
+                "name": "update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "texture",
+                "text": "texture in to turn into an array. Beware of high resolutions."
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Colors",
+                "text": "Outputs the RGBA arrays as one large array"
+            },
+            {
+                "name": "Floating Point",
+                "text": "If HDR is enable on Image compose this will be true else false"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Texture2ColorArray",
+            "author": "pandur",
+            "date": 1675434947623
+        },
+        {
+            "message": "Fix problem with floating point textures",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1723207672211
+        },
+        {
+            "message": "Add option to not always output floating point numbers",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725010283705
+        },
+        {
+            "message": "Fix outputing wrong amount of values",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1725429426523
+        },
+        {
+            "message": "Reduce complexity of op, remove channel conversion and bytes to float. just output the pixel values if possible",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725430970515
+        },
+        {
+            "message": "Ops.Gl.TextureToColorArray_v3 renamed to Ops.Gl.TextureToArray_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730273447224
+        }
+    ],
+    "coreLibs": [
+        "cgl_pixelreader"
+    ],
+    "license": "MIT"
+}

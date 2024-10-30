@@ -100,6 +100,7 @@ function myStringify(o, level = 0)
     return str;
 }
 
+inExpString.onChange =
 inObj.onChange = () =>
 {
     let obj = inObj.get();

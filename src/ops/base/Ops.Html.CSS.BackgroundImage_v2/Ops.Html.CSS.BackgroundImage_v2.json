@@ -1,0 +1,70 @@
+{
+    "authorName": "pandur",
+    "id": "081c4328-984d-4acd-8758-5d1379cc3a30",
+    "created": 1581502794546,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 5,
+                "name": "image file"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Repeat index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Never Unset",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Fixed cache problems",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1729253304467
+        },
+        {
+            "message": "Ops.Html.BackgroundImage_v2 renamed to Ops.Html.CSS.BackgroundImage_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730274226837
+        }
+    ],
+    "summary": "Load a background image and use css styling",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "J3aC0H",
+    "license": "MIT"
+}
