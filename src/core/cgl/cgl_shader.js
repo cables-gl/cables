@@ -701,6 +701,7 @@ class Shader extends CgShader
         let srcHeadVert = "";
         let srcHeadFrag = "";
 
+        // testing if this breaks things...
         // this._modules.sort(function (a, b)
         // {
         //     return a.group - b.group;
