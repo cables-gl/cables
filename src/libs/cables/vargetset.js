@@ -252,8 +252,11 @@ const VarGetOpWrapper = class
 
     _setValueOut(v)
     {
-        // this._updateVarNamesDropdown();
-        if (this._valueOutPort) this._valueOutPort.set(v);
+        if (this._valueOutPort)
+            if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_ARRAY && this._typeId == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+                this._valueOutPort.setRef(v);
+            else
+                this._valueOutPort.set(v);
     }
 
     _updateTitle()
