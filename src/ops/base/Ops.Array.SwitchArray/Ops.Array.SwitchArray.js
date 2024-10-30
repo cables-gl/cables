@@ -13,7 +13,7 @@ for (let i = 0; i < 10; i++)
 
 function update()
 {
-    if (idx.get() >= 0 && valuePorts[idx.get()].isLinked())
+    if (idx.get() >= 0 && valuePorts[idx.get()] && valuePorts[idx.get()].isLinked())
     {
         result.setRef(valuePorts[idx.get()].get());
     }
