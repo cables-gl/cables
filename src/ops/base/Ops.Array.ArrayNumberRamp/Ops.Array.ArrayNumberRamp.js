@@ -12,21 +12,32 @@ update();
 
 function update()
 {
-    const start = Math.min(inStart.get(), inEnd.get());
-    const end = Math.max(inStart.get(), inEnd.get());
+    const start = inStart.get();
+    const end = inEnd.get();
 
     const num = Math.floor(Math.max(0, inNum.get()));
 
+    if (num === 0)
+    {
+        outArr.setRef([]);
+        return;
+    }
+
     const arr = [];
 
-    if (num == 0) return outArr.setRef([]);
-    const dist = Math.abs(end) + Math.abs(start);
+    if (num === 1)
+    {
+        arr.push(start); // Or choose to push 'end' if preferred
+        outArr.setRef(arr);
+        return;
+    }
+
+    const dist = end - start;
     const step = dist / (num - 1);
-    arr.length = num;
 
     for (let i = 0; i < num; i++)
     {
-        arr[i] = i * step + start;
+        arr[i] = start + i * step;
     }
 
     outArr.setRef(arr);
