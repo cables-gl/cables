@@ -136,8 +136,8 @@ function dorender()
 {
     mod.bind();
 
-    if (texture.get() && !texture.get().deleted) mod.pushTexture("MOD_texture", texture.get());
-    else mod.pushTexture("MOD_texture", CGL.Texture.getEmptyTexture(cgl));
+    if (texture.get() && !texture.get().deleted) mod.pushTexture("MOD_texture", texture.get().tex);
+    else mod.pushTexture("MOD_texture", CGL.Texture.getEmptyTexture(cgl).tex);
 
     next.trigger();
 

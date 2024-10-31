@@ -16,16 +16,37 @@
             {
                 "type": 0,
                 "name": "Mode index",
+                "values": [
+                    "Norm",
+                    "Tang",
+                    "BiTang",
+                    "VertCol",
+                    "*",
+                    "+",
+                    "/"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Axis index",
+                "values": [
+                    "XYZ",
+                    "XY",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Coordinates index",
+                "values": [
+                    "Tex Coords",
+                    "Mesh XY",
+                    "Mesh XZ"
+                ],
                 "subType": "integer"
             },
             {
@@ -37,18 +58,37 @@
             {
                 "type": 0,
                 "name": "Channel index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B",
+                    "A",
+                    "RGB"
+                ],
                 "group": "Input",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Flip index",
+                "values": [
+                    "None",
+                    "X",
+                    "Y",
+                    "XY"
+                ],
                 "group": "Input",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Range index",
+                "values": [
+                    "0-1",
+                    "1-0",
+                    "Normalized"
+                ],
                 "group": "Input",
                 "subType": "integer"
             },
@@ -78,6 +118,11 @@
             {
                 "type": 0,
                 "name": "Normal Axis index",
+                "values": [
+                    "X",
+                    "Y",
+                    "Z"
+                ],
                 "subType": "integer"
             },
             {
@@ -134,12 +179,12 @@
     ],
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
     "issues": "",
-
     "youtubeids": [
         "a56wk9Xm9dY"
     ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "aSWlLu"
+    "exampleProjectId": "aSWlLu",
+    "license": "MIT"
 }

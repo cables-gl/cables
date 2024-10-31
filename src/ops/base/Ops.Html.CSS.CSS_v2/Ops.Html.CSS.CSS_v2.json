@@ -1,0 +1,47 @@
+{
+    "id": "a56d3edd-06ad-44ed-9810-dbf714600c67",
+    "authorName": "pandur",
+    "created": 1548415620859,
+    "summary": "Define a custom stylesheet",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "css code"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.CSS2 renamed to Ops.Html.CSS_v2",
+            "author": "pandur",
+            "date": 1560335517152
+        },
+        {
+            "message": "Added option to activate/deactivate style",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1708698463821
+        },
+        {
+            "message": "Ops.Html.CSS_v2 renamed to Ops.Html.CSS.CSS_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730274001735
+        }
+    ],
+    "issues": "",
+    "youtubeids": [
+        "CGs-O6STdbA"
+    ],
+    "exampleProjectId": "z_3M4y"
+}

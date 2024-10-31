@@ -42,7 +42,7 @@ wrap.onChange = onWrapChange;
 tfilter.set("mipmap");
 wrap.set("repeat");
 
-textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 
 inReload.onTriggered = reloadSoon;
 
@@ -51,11 +51,11 @@ active.onChange = function ()
     if (active.get())
     {
         if (loadedFilename != filename.get() || !tex) reloadSoon();
-        else textureOut.set(tex);
+        else textureOut.setRef(tex);
     }
     else
     {
-        textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+        textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
         width.set(CGL.Texture.getEmptyTexture(cgl).width);
         height.set(CGL.Texture.getEmptyTexture(cgl).height);
         if (tex)tex.delete();
@@ -67,7 +67,7 @@ active.onChange = function ()
 const setTempTexture = function ()
 {
     const t = CGL.Texture.getTempTexture(cgl);
-    textureOut.set(t);
+    textureOut.setRef(t);
 };
 
 function reloadSoon(nocache)
@@ -151,7 +151,7 @@ function realReload(nocache)
                 // else op.setUiError("npot", null);
 
                 tex = newTex;
-                // textureOut.set(null);
+                // textureOut.setRef(null);
                 textureOut.setRef(tex);
 
                 loading.set(false);
@@ -209,8 +209,8 @@ op.onFileChanged = function (fn)
 {
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
-        textureOut.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-        textureOut.set(CGL.Texture.getTempTexture(cgl));
+        textureOut.setRef(CGL.Texture.getEmptyTexture(op.patch.cgl));
+        textureOut.setRef(CGL.Texture.getTempTexture(cgl));
         realReload(true);
     }
 };

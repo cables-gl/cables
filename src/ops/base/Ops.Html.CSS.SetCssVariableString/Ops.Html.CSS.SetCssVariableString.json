@@ -1,0 +1,37 @@
+{
+    "id": "e7b4ea20-ef7e-461d-92f8-6aff58c5ba6f",
+    "authorName": "pandur",
+    "created": 1543859675351,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Var Name"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            },
+            {
+                "type": 0,
+                "name": "Output quoted string",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": []
+    },
+    "summary": "set CSS variable string value",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "F7s1du",
+    "changelog": [
+        {
+            "message": "Ops.Html.SetCssVariableString renamed to Ops.Html.CSS.SetCssVariableString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730273725723
+        }
+    ]
+}

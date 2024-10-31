@@ -1,0 +1,37 @@
+{
+    "id": "1f5d5618-7364-4cd1-bec2-9549b7cfd18e",
+    "authorName": "pandur",
+    "created": 1727104995274,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Var Name"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            }
+        ]
+    },
+    "summary": "Set CSS variable URL value",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1727104995275
+        },
+        {
+            "message": "Ops.Html.SetCssVariableUrl renamed to Ops.Html.CSS.SetCssVariableUrl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730274081967
+        }
+    ],
+    "license": "MIT",
+    "exampleProjectId": "xIpuvs"
+}

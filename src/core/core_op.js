@@ -1304,71 +1304,72 @@ const Op = function ()
     // todo: check instancing stuff?
     Op.prototype.instanced = function (triggerPort)
     {
-        this._log.log("instanced", this.patch.instancing.numCycles());
-        if (this.patch.instancing.numCycles() === 0) return false;
+        return false;
+        // this._log.log("instanced", this.patch.instancing.numCycles());
+        // if (this.patch.instancing.numCycles() === 0) return false;
 
 
-        let i = 0;
-        let ipi = 0;
-        if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
-        {
-            if (!this._instances) this._instances = [];
-            this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
-            this._instances.length = this.patch.instancing.numCycles();
+        // let i = 0;
+        // let ipi = 0;
+        // if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
+        // {
+        //     if (!this._instances) this._instances = [];
+        //     this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
+        //     this._instances.length = this.patch.instancing.numCycles();
 
-            for (i = 0; i < this._instances.length; i++)
-            {
-                this._instances[i] = this.patch.createOp(this.objName, true);
-                this._instances[i].instanced = function ()
-                {
-                    return false;
-                };
-                this._instances[i].uiAttr(this.uiAttribs);
+        //     for (i = 0; i < this._instances.length; i++)
+        //     {
+        //         this._instances[i] = this.patch.createOp(this.objName, true);
+        //         this._instances[i].instanced = function ()
+        //         {
+        //             return false;
+        //         };
+        //         this._instances[i].uiAttr(this.uiAttribs);
 
-                for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-                {
-                    if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-                    {
-                        this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
-                    }
-                }
-            }
+        //         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
+        //         {
+        //             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        //             {
+        //                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
+        //             }
+        //         }
+        //     }
 
-            for (ipi = 0; ipi < this.portsIn.length; ipi++)
-            {
-                this.portsIn[ipi].onChange = null;
-                this.portsIn[ipi].onValueChanged = null;
-            }
-        }
+        //     for (ipi = 0; ipi < this.portsIn.length; ipi++)
+        //     {
+        //         this.portsIn[ipi].onChange = null;
+        //         this.portsIn[ipi].onValueChanged = null;
+        //     }
+        // }
 
-        const theTriggerPort = null;
-        for (ipi = 0; ipi < this.portsIn.length; ipi++)
-        {
-            if (
-                this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
-                this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
-            )
-            {
-                this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
-            }
-            if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-            {
-                // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-                // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
-            }
-        }
+        // const theTriggerPort = null;
+        // for (ipi = 0; ipi < this.portsIn.length; ipi++)
+        // {
+        //     if (
+        //         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
+        //         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
+        //     )
+        //     {
+        //         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
+        //     }
+        //     if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        //     {
+        //         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+        //         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+        //     }
+        // }
 
-        if (theTriggerPort) theTriggerPort.onTriggered();
+        // if (theTriggerPort) theTriggerPort.onTriggered();
 
-        for (ipi = 0; ipi < this.portsOut.length; ipi++)
-        {
-            if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
-            {
-                this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
-            }
-        }
+        // for (ipi = 0; ipi < this.portsOut.length; ipi++)
+        // {
+        //     if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
+        //     {
+        //         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
+        //     }
+        // }
 
-        return true;
+        // return true;
     };
 
     // todo: check instancing stuff?
