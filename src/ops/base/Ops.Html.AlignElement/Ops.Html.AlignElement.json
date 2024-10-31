@@ -6,12 +6,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1730384737203
-        },
-        {
-            "message": "Ops.Patch.PgPX0Ms.AlignElement renamed to Ops.Html.AlignElement",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1730387969729
         }
     ],
     "authorName": "pandur",
