@@ -1,0 +1,89 @@
+{
+    "id": "ac562885-ea7b-4dc0-a832-0dda50ce49c1",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1730384737203
+        },
+        {
+            "message": "Ops.Patch.PgPX0Ms.AlignElement renamed to Ops.Html.AlignElement",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730387969729
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1730384737202,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 2,
+                "name": "Align Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Horizontal Align index",
+                "values": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Vertical Align index",
+                "values": [
+                    "Top",
+                    "Center",
+                    "Bottom"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Horizontal Orientation index",
+                "values": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Vertical Orientation index",
+                "values": [
+                    "Top",
+                    "Center",
+                    "Bottom"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element passthrough"
+            },
+            {
+                "type": 2,
+                "name": "Aligned Element"
+            }
+        ]
+    },
+    "summary": "get html element absolute position and size in pixels on screen",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

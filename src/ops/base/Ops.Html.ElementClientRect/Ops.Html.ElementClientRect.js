@@ -7,6 +7,7 @@ const
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height");
 
+inEle.onChange =
 inUpd.onTriggered = () =>
 {
     let ele = inEle.get();

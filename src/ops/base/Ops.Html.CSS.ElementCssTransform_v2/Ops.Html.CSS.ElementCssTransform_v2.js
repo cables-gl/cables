@@ -108,6 +108,8 @@ function update()
         {
             op.logError(e);
         }
+
+        outEle.setRef(ele);
     }
     else
     {

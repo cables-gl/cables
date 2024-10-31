@@ -1,14 +1,15 @@
 const
     exec = op.inTrigger("Exec"),
     inEle = op.inObject("Element"),
-    next = op.outTrigger("Next"),
     inScale = op.inFloat("Scale", 1),
     inOrtho = op.inBool("Orthogonal", false),
     inRotate = op.inFloat("Rotate", 0),
     inHideBehind = op.inBool("Hide out of view", false),
     inAlignVert = op.inSwitch("Align Vertical", ["Left", "Center", "Right"], "Left"),
     inAlignHor = op.inSwitch("Align Horizontal", ["Top", "Center", "Bottom"], "Top"),
-    inActive = op.inBool("Active", true);
+    inActive = op.inBool("Active", true),
+    next = op.outTrigger("Next"),
+    outEle = op.outObject("HTML Element", null, "element");
 
 const cgl = op.patch.cgl;
 let x = 0;
@@ -66,6 +67,7 @@ function updateTransform()
     {
         currTransformStr = str;
         ele.style.transform = str;
+        outEle.setRef(ele);
     }
 }
 
@@ -142,6 +144,7 @@ function setProperties()
         if (yy + top != cachedTop)
         {
             ele.style.top = (yy + top) + "px";
+            outEle.setRef(ele);
             cachedTop = yy;
         }
 
@@ -150,6 +153,7 @@ function setProperties()
         if (x + left != cachedLeft)
         {
             ele.style.left = (x + left) + "px";
+            outEle.setRef(ele);
             cachedLeft = x;
         }
 
