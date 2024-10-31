@@ -1,0 +1,49 @@
+{
+    "id": "a28591ba-e219-4537-bb6f-d96f83e9b0df",
+    "created": 1730305012425,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1728549843370
+        },
+        {
+            "message": "Ops.Patch.Pwv67Xp.ArrayRamp renamed to Ops.Array.ArrayNumberRamp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1728550251321
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Start Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "End Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Entries",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Create an array that contains X numbers between start and end values",
+    "docs": {
+        "ports": []
+    }
+}

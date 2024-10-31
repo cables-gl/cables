@@ -52,7 +52,7 @@ function createElement()
     if (inId.get()) div.id = inId.get();
 
     canvas.appendChild(div);
-    outElement.set(div);
+    outElement.setRef(div);
 }
 
 function removeElement()
@@ -95,8 +95,8 @@ function updateText()
     if (str && inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, "<br>");
 
     if (div.innerHTML != str) div.innerHTML = str;
-    outElement.set(null);
-    outElement.set(div);
+
+    outElement.setRef(div);
 }
 
 // inline css inisde div
@@ -107,14 +107,10 @@ function updateStyle()
     // {
     div.setAttribute("style", inStyle.get());
     updateVisibility();
-    outElement.set(null);
-    outElement.set(div);
+    outElement.setRef(div);
     // }
 
-    if (!div.parentElement)
-    {
-        canvas.appendChild(div);
-    }
+    if (!div.parentElement) canvas.appendChild(div);
 
     warning();
 }
