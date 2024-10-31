@@ -53,10 +53,6 @@
                 "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
-            },
-            {
-                "type": 1,
-                "name": "Clear"
             }
         ],
         "portsOut": [

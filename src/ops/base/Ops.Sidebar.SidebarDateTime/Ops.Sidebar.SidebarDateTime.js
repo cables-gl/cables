@@ -7,7 +7,6 @@ const
     inType = op.inDropDown("Type", ["date", "datetime-local"], "date"),
     inGreyOut = op.inBool("Grey Out", false),
     inVisible = op.inBool("Visible", true),
-    inClear = op.inTriggerButton("Clear"),
     siblingsPort = op.outObject("Children"),
     valuePort = op.outString("Result", defaultValuePort.get()),
     outFocus = op.outBool("Focus");
@@ -68,12 +67,6 @@ greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
 
-inClear.onTriggered = () =>
-{
-    input.value = "";
-    valuePort.set(input.value);
-};
-
 function onFocus()
 {
     outFocus.set(true);
@@ -104,6 +97,7 @@ op.onDelete = onDelete;
 
 function onInput(ev)
 {
+    op.setUiError("exc", null);
     let endDateIso = "";
     try
     {
@@ -112,14 +106,17 @@ function onInput(ev)
     catch (e)
     {
         console.error(e);
+        op.setUiError("exc", e.message);
     }
     valuePort.set(endDateIso);
 }
 
 function onDefaultValueChanged()
 {
-    const defaultValue = defaultValuePort.get();
-    valuePort.set(defaultValue);
+    let defaultValue = defaultValuePort.get() || "";
+
+    input.value = (defaultValue.trim()) || "2001-01-01";
+    // valuePort.set(defaultValue);
     onInput();
 }
 
