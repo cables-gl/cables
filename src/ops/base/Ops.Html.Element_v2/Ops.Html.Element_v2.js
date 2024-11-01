@@ -73,7 +73,7 @@ function createElement()
     div.classList.add("cablesEle");
 
     canvas.appendChild(div);
-    outElement.set(div);
+    outElement.setRef(div);
 }
 
 function removeElement()

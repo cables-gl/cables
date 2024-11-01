@@ -1,0 +1,33 @@
+{
+    "summary": "get orientation of the physical screen",
+    "layout": {
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Angle",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Type"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c56f7d8b-fa85-4906-9aa5-439cdd19bce7",
+    "created": 1730393300034,
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "caniusequery": "screenorientation",
+    "changelog": [
+        {
+            "message": "Update op to work with current API",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1730393564126
+        }
+    ]
+}

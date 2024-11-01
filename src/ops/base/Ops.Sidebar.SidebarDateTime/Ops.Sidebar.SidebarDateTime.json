@@ -8,7 +8,13 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1720431466586
+            "date": 1730379840346
+        },
+        {
+            "message": "Ops.Dev.Sidebar.SidebarDateTime renamed to Ops.Sidebar.SidebarDateTime",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730379848367
         }
     ],
     "layout": {
@@ -47,10 +53,6 @@
                 "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
-            },
-            {
-                "type": 1,
-                "name": "Clear"
             }
         ],
         "portsOut": [
