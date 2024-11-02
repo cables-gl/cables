@@ -321,10 +321,10 @@ Port.prototype.set = Port.prototype.setValue = function (v)
     if (v === undefined) v = null;
 
 
-    if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && v && !this.forceRefChange)
-    {
-        this._log.warn("object port uses .set", this.name, this.op.objName);
-    }
+    if (CABLES.UI && CABLES.UI.showDevInfos)
+        if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && v && !this.forceRefChange)
+            this._log.warn("object port uses .set", this.name, this.op.objName);
+
 
     if (this._op.enabled && !this.crashed)
     {
