@@ -108,7 +108,7 @@
                 "subType": "boolean"
             },
             {
-                "type": 2,
+                "type": 5,
                 "name": "Error"
             }
         ]

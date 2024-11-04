@@ -19,11 +19,12 @@ let initDelay = null;
 
 const init = () =>
 {
+    errorOut.set("");
+
     if (!initDelay && activeIn.get())
     {
         initDelay = setTimeout(() =>
         {
-            errorOut.set(null);
             if (socket)
             {
                 socket.disconnect();
