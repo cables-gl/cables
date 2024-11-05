@@ -4,45 +4,16 @@
     "created": 1602760318455,
     "changelog": [
         {
-            "message": "cloned op from Ops.Html.BrowserCheck_v2",
-            "author": "simod",
-            "date": 1602760318455
-        },
-        {
-            "message": " added lib: platform.js",
-            "author": "simod",
-            "date": 1602760393579
-        },
-        {
-            "message": "Ops.User.cables.BrowserCheck renamed to Ops.Html.BrowserInfo",
-            "author": "simod",
-            "date": 1602760602158
-        },
-        {
-            "message": "Ops.Html.BrowserInfo renamed to Ops.Html.BrowserCheck_v3",
-            "author": "cables",
-            "date": 1602763157290
-        },
-        {
-            "message": "Ops.Html.BrowserCheck_v3 renamed to Ops.Html.BrowserInfo",
-            "author": "pandur",
-            "date": 1606807854645
-        },
-        {
-            "message": "Ops.Html.BrowserInfo renamed to Ops.Html.BrowserInfo_v3",
-            "author": "pandur",
-            "date": 1606807981333
-        },
-        {
-            "message": "Ops.Html.BrowserInfo_v3 renamed to Ops.Browser.BrowserInfo_v3",
-            "author": "pandur",
-            "date": 1654584465635
-        },
-        {
             "message": "Ops.Browser.BrowserInfo_v3 renamed to Ops.Devices.Browser.BrowserInfo_v3",
             "type": "rename",
             "author": "pandur",
             "date": 1701851073557
+        },
+        {
+            "message": "Outputs browser version",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1730306260966
         }
     ],
     "layout": {
@@ -125,6 +96,10 @@
             {
                 "type": 5,
                 "name": "Browser Name"
+            },
+            {
+                "type": 5,
+                "name": "Browser Version"
             },
             {
                 "type": 5,
@@ -226,5 +201,6 @@
             }
         ]
     },
-    "exampleProjectId": "YOJiIk"
+    "exampleProjectId": "YOJiIk",
+    "license": "MIT"
 }

@@ -36,12 +36,8 @@
         {
             "message": "cloned op from Ops.Value.DelayedValueSimple",
             "author": "pandur",
-            "date": 1613050107456
-        },
-        {
-            "message": "Ops.User.pandur.DelayBooleanSimple renamed to Ops.Value.DelayBooleanSimple",
-            "author": "pandur",
-            "date": 1613050423522
+            "date": 1613050107456,
+            "type": "new"
         },
         {
             "message": "Ops.Value.DelayBooleanSimple renamed to Ops.Boolean.DelayBooleanSimple",
@@ -50,7 +46,6 @@
             "date": 1701852283589
         }
     ],
-    "issues": "",
-
-    "youtubeids": []
+    "license": "MIT",
+    "exampleProjectId": "VBa0ft"
 }

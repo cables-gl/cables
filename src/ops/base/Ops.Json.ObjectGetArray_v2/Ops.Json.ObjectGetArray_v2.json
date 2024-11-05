@@ -38,7 +38,6 @@
         ]
     },
     "summary": "Returns an array from a JSON-object",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -59,6 +58,6 @@
             }
         ]
     },
-    "youtubeids": [],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "yU2Pet"
 }

@@ -108,5 +108,7 @@
                 "text": "The difference as timestamp"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "d1NUet"
 }
