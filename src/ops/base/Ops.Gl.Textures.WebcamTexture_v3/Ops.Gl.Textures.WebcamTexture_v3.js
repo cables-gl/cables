@@ -331,16 +331,6 @@ function initDevices()
 
 inTrigger.onTriggered = () =>
 {
-    // if (op.patch.cgl.canvas.parentElement != oldCanvasParent)
-    // {
-    //     console.log("canvas changed!");
-
-    //     op.patch.cgl.canvas.parentElement.appendChild(videoElement);
-    //     oldCanvasParent = op.patch.cgl.canvas.parentElement;
-    //     initDevices();
-    //     restartWebcam();
-    // }
-
     if (!initingDevices && inActive.get())
     {
         if (started && camsLoaded && active)
