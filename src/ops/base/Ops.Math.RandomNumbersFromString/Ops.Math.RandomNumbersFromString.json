@@ -4,7 +4,7 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "pandur",
+            "author": "kikohs",
             "date": 1730822472048
         }
     ],
@@ -32,7 +32,7 @@
             }
         ]
     },
-    "authorName": "pandur",
+    "authorName": "kikohs",
     "created": 1730822472048,
     "license": "MIT"
 }
