@@ -21,10 +21,13 @@ export default class Shader extends CgShader
         this._compileReason = "";
         this.gpuShaderModule = null;
         this._needsRecompile = true;
+        this.bindingCounter = 0;
+        this.bindCountlastFrame = -1;
+        this._bindingIndexCount = 0;
 
-        this.defaultBindingVert = new Binding(_cgp, 0, "defaultVert", { "stage": "vert", "bindingType": "uniform" });
-        this.defaultBindingFrag = new Binding(_cgp, 1, "defaultFrag", { "stage": "frag", "bindingType": "uniform" });
-        this.defaultBindingComp = new Binding(_cgp, 1, "defaultComp", { "bindingType": "uniform" });
+        this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "stage": "vert", "bindingType": "uniform", "index": this._bindingIndexCount++ });
+        this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "stage": "frag", "bindingType": "uniform", "index": this._bindingIndexCount++ });
+        this.defaultBindingComp = new Binding(_cgp, "computeUniforms", { "bindingType": "uniform", "index": this._bindingIndexCount++ });
         this.bindingsFrag = [this.defaultBindingFrag];
         this.bindingsVert = [this.defaultBindingVert];
         this.bindingsComp = [this.defaultBindingComp];
@@ -40,8 +43,6 @@ export default class Shader extends CgShader
             this._tempModelViewMatrix = mat4.create();
         }
 
-        this.bindingCounter = 0;
-        this.bindCountlastFrame = -1;
 
         this._src = "";
 
@@ -84,6 +85,12 @@ export default class Shader extends CgShader
         this._compileReason = why;
     }
 
+    getNewBindingIndex()
+    {
+        return ++this._bindingIndexCount;
+    }
+
+
     setSource(src)
     {
         this._src = src;
@@ -100,7 +107,26 @@ export default class Shader extends CgShader
         for (let i = 0; i < this._defines.length; i++)
             defs[this._defines[i][0]] = this._defines[i][1] || true;
 
-        const src = preproc(this._src, defs);
+        let src = preproc(this._src, defs);
+
+        let bindingsHeadVert = "";
+        for (let i = 0; i < this.bindingsFrag.length; i++)
+        {
+            bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode();
+        }
+
+        let bindingsHeadFrag = "";
+        for (let i = 0; i < this.bindingsVert.length; i++)
+        {
+            bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode();
+        }
+
+        src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
+
+
+        console.log("----------------\n", src, "\n----------------------------");
+
+
 
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));

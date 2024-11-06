@@ -722,7 +722,7 @@ Port.prototype.trigger = function ()
 
             if (portTriggered.op.onError) portTriggered.op.onError(ex);
         }
-        this._log.error("exception in port: " + portTriggered.op.name, portTriggered.op);
+        this._log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op);
         this._log.error(ex);
     }
 };

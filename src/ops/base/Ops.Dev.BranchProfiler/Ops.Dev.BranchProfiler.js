@@ -22,6 +22,6 @@ inExec.onTriggered = () =>
 
     op.patch.cg.frameStore.branchStack.finish();
 
-    outProfilerStack.set(op.patch.cg.frameStore.branchStack);
+    outProfilerStack.setRef(op.patch.cg.frameStore.branchStack);
     outFinish.trigger();
 };
