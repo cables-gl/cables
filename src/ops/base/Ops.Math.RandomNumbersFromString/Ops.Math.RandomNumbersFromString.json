@@ -1,0 +1,38 @@
+{
+    "id": "f20d260e-f2e1-4277-850c-6b7526d41d22",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "kikohs",
+            "date": 1730822472048
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Input string"
+            },
+            {
+                "type": 0,
+                "name": "Random number count",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Random value",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Random Numbers"
+            }
+        ]
+    },
+    "authorName": "kikohs",
+    "created": 1730822472048,
+    "license": "MIT"
+}

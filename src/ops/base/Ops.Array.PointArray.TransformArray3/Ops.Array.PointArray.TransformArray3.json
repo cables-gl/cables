@@ -82,7 +82,6 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
     "changelog": [
         {
             "message": "Ops.Math.Array3xTransform renamed to Ops.Array.Array3Transform",
@@ -105,5 +104,7 @@
             "author": "pandur",
             "date": 1722850097434
         }
-    ]
+    ],
+    "license": "MIT",
+    "exampleProjectId": "NenSet"
 }

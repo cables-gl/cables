@@ -39,9 +39,6 @@
         ]
     },
     "summary": "If value of array is between min and max then the value is 1 else 0",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -49,5 +46,7 @@
                 "text": "When enabled values between are passed through instead of being 1"
             }
         ]
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "jTqRet"
 }

@@ -25,10 +25,9 @@
         }
     ],
     "summary": "parse boolean from string/number",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "2nXYet"
 }
