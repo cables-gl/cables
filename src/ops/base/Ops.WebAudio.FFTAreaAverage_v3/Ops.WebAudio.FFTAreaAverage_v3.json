@@ -1,0 +1,132 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Refresh"
+            },
+            {
+                "type": 3,
+                "name": "FFT Array"
+            },
+            {
+                "type": 0,
+                "name": "X Position",
+                "group": "Area Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y Position",
+                "group": "Area Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Area Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Area Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Create Texture",
+                "group": "Texture Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Texture Size index",
+                "values": [
+                    "128",
+                    "256",
+                    "512",
+                    "1024",
+                    "2048"
+                ],
+                "group": "Texture Settings",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture Out",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Area Average Volume",
+                "subType": "number"
+            }
+        ]
+    },
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "pandur",
+    "id": "e936b0bb-4ece-469d-aa93-6b3c4136c20b",
+    "created": 1730989031417,
+    "summary": "get average value in an area of a fft audio analysis buffer",
+    "docs": {
+        "ports": [
+            {
+                "name": "Refresh",
+                "text": "trigger input"
+            },
+            {
+                "name": "FFT Array",
+                "text": "FFT array input"
+            },
+            {
+                "name": "X Position",
+                "text": "x position of area to scan"
+            },
+            {
+                "name": "Y Position",
+                "text": "y position of area to scan"
+            },
+            {
+                "name": "Width",
+                "text": "width of the rectangle"
+            },
+            {
+                "name": "Height",
+                "text": "height of the rectangle"
+            },
+            {
+                "name": "Create Texture",
+                "text": "check to create texture"
+            },
+            {
+                "name": "Texture Size",
+                "text": "choose texture size"
+            },
+            {
+                "name": "Texture Out",
+                "text": "texture output"
+            },
+            {
+                "name": "Area Average Volume",
+                "text": "average volume of the scanned area"
+            }
+        ]
+    },
+    "issues": "",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.FFTAreaAverage",
+            "author": "cables",
+            "date": 1607443373884
+        },
+        {
+            "message": "Ops.User.cables.FFTAreaAverage_v2 renamed to Ops.WebAudio.FFTAreaAverage_v2",
+            "author": "cables",
+            "date": 1607446280480
+        }
+    ],
+    "license": "MIT"
+}
