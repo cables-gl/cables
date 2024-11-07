@@ -777,6 +777,8 @@ class Shader extends CgShader
             vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
             fs = fs.replace("{{" + this._moduleNames[i] + "}}", srcFrag);
         }
+
+
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         fs = fs.replace("{{MODULES_HEAD}}", srcHeadFrag);
 
