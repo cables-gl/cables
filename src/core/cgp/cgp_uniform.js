@@ -119,6 +119,21 @@ export default class Uniform extends CgUniform
         }
     }
 
+    getWgslTypeStr()
+    {
+        if (this._type == "m4") return "mat4x4f";
+        if (this._type == "4f") return "vec4f";
+        if (this._type == "3f") return "vec3f";
+        if (this._type == "2f") return "vec2f";
+        if (this._type == "f") return "float";
+        if (this._type == "f[]") return "array<vec4f>";
+        if (this._type == "i") return "int";
+        if (this._type == "sampler") return "sampler";
+        if (this._type == "t") return "texture_2d<f32>";
+        this._log.warn("unknown type getWgslTypeStr", this._type);
+        return "???";
+    }
+
     getSizeBytes()
     {
         const bytesPerFloat = 4;

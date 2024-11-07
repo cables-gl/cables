@@ -196,6 +196,12 @@ class CgUniform
         return this._type;
     }
 
+
+    get name()
+    {
+        return this._name;
+    }
+
     getName()
     {
         return this._name;

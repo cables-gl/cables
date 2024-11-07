@@ -79,7 +79,7 @@ function update()
 
     if (error)
     {
-        outTex.set(emptyTex);
+        outTex.setRef(emptyTex);
         return;
     }
 

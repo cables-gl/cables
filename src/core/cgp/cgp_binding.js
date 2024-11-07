@@ -10,27 +10,24 @@ export default class Binding
      * @param {string} name
      * @param {any} options={}
      */
-    constructor(cgp, idx, name, options = {})
+    constructor(cgp, name, options = {})
     {
-        this.idx = idx;
+        if (typeof options != "object") this._log.error("binding options is not an object");
+        this._index = -1;
+
         this._name = name;
         this._cgp = cgp;
         this._log = new Logger("cgp_binding");
         this.uniforms = [];
-        // this.cGpuBuffer = null;
         this.cGpuBuffers = [];
-
         this.shader = null;
-
-        if (typeof options != "object") this._log.error("binding options is not an object");
-
-
         this.bindingInstances = [];
         this.stageStr = options.stage;
         this.bindingType = options.bindingType || "uniform"; // "uniform", "storage", "read-only-storage",
 
-        this.stage = GPUShaderStage.VERTEX;
         if (this.stageStr == "frag") this.stage = GPUShaderStage.FRAGMENT;
+        else this.stage = GPUShaderStage.VERTEX;
+        if (options.hasOwnProperty("index")) this._index = options.index;
 
         if (options.shader) this.shader = options.shader;
 
@@ -38,11 +35,14 @@ export default class Binding
         this.isValid = true;
         this.changed = 0;
 
-        if (options.shader)
+        if (this.shader)
         {
-            if (this.stageStr == "frag") options.shader.bindingsFrag.push(this);
-            if (this.stageStr == "vert") options.shader.bindingsVert.push(this);
+            if (this.stageStr == "frag") this.shader.bindingsFrag.push(this);
+            if (this.stageStr == "vert") this.shader.bindingsVert.push(this);
+            if (this._index == -1) this._index = this.shader.getNewBindingIndex();
         }
+
+        if (this._index == -1) this._log.warn("binding could not get an index", this._name);
 
         this._cgp.on("deviceChange", () =>
         {
@@ -68,17 +68,63 @@ export default class Binding
         return size;
     }
 
+    getShaderHeaderCode()
+    {
+        let str = "";
+
+        let typeStr = "str_" + this._name;
+        let name = this._name;
+
+        if (this.uniforms.length === 0) return "// no uniforms in bindinggroup...?\n";
+
+        if (this.uniforms.length > 1)
+        {
+            str += "struct " + typeStr + "\n";
+            str += "{\n";
+            for (let i = 0; i < this.uniforms.length; i++)
+            {
+                str += "    " + this.uniforms[i].name + ": " + this.uniforms[i].getWgslTypeStr();
+                if (i != this.uniforms.length - 1)str += ",";
+                str += "\n";
+            }
+            str += "};\n";
+        }
+        else
+        {
+            typeStr = this.uniforms[0].getWgslTypeStr();
+            name = this.uniforms[0].name;
+        }
+
+        let bindingType = this.bindingType;
+
+
+        str += "@group(0) ";
+        str += "@binding(" + this._index + ") ";
+
+        if (this.uniforms.length > 1)
+        {
+            str += "var<" + bindingType + "> ";
+        }
+        else if (this.bindingType == "read-only-storage")str += "var<storage,read> ";
+        else str += "var ";
+
+
+        str += name + ": " + typeStr + ";\n";
+
+
+        return str;
+    }
+
+
     getBindingGroupLayoutEntry()
     {
         let label = "layout " + this._name + " [";
-        for (let i = 0; i < this.uniforms.length; i++)
-            label += this.uniforms[i].getName() + ",";
-
+        for (let i = 0; i < this.uniforms.length; i++) label += this.uniforms[i].getName() + ",";
         label += "]";
 
         const o = {
             "label": label,
-            "binding": this.idx,
+            "binding": this._index,
             "visibility": this.stage,
             "size": this.getSizeBytes()
         };
@@ -106,7 +152,7 @@ export default class Binding
 
         const o = {
             "label": this._name + " binding",
-            "binding": this.idx,
+            "binding": this._index,
             "size": this.getSizeBytes(),
             "visibility": this.stage,
         };
