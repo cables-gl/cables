@@ -123,9 +123,10 @@
             "date": 1607443373884
         },
         {
-            "message": "Ops.User.cables.FFTAreaAverage_v2 renamed to Ops.WebAudio.FFTAreaAverage_v2",
-            "author": "cables",
-            "date": 1607446280480
+            "message": "outputed texture is not flipped anymore",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1730990194967
         }
     ],
     "license": "MIT"
