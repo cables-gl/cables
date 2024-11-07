@@ -98,37 +98,34 @@ export default class Shader extends CgShader
         this._needsRecompile = true;
     }
 
-    compile()
+    getProcessedSource()
     {
-        this._isValid = true;
-        this._cgp.pushErrorScope("cgp_shader " + this._name);
-
         const defs = {};
         for (let i = 0; i < this._defines.length; i++)
             defs[this._defines[i][0]] = this._defines[i][1] || true;
+
 
         let src = preproc(this._src, defs);
 
         let bindingsHeadVert = "";
         for (let i = 0; i < this.bindingsFrag.length; i++)
-        {
             bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode();
-        }
 
         let bindingsHeadFrag = "";
         for (let i = 0; i < this.bindingsVert.length; i++)
-        {
             bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode();
-        }
 
         src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 
+        return src;
+        // console.log("----------------\n", src, "\n----------------------------");
+    }
 
-        console.log("----------------\n", src, "\n----------------------------");
-
-
-
-        this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
+    compile()
+    {
+        this._isValid = true;
+        this._cgp.pushErrorScope("cgp_shader " + this._name);
+        this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
 
