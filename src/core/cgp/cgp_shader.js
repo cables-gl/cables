@@ -122,8 +122,8 @@ export default class Shader extends CgShader
                             if (r.srcVert)srcVert += r.srcVert;
                         }
 
-                    srcHeadVert += mod.srcHeadVert || "";
-                    srcVert += mod.srcBodyVert || "";
+                    srcHeadVert += mod.srcHead || "";
+                    srcVert += mod.srcBody || "";
 
                     srcHeadVert += "\n//---- end mod ------\n";
 
