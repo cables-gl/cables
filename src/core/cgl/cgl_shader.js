@@ -128,9 +128,6 @@ class Shader extends CgShader
         this.srcFrag = getDefaultFragmentShader();
         this.lastCompile = 0;
 
-        this._moduleNames = [];
-        this._modules = [];
-        this._moduleNumId = 0;
 
         this._libs = [];
         this._structNames = [];
@@ -780,6 +777,8 @@ class Shader extends CgShader
             vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
             fs = fs.replace("{{" + this._moduleNames[i] + "}}", srcFrag);
         }
+
+
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         fs = fs.replace("{{MODULES_HEAD}}", srcHeadFrag);
 
@@ -975,98 +974,6 @@ class Shader extends CgShader
     {
     };
 
-    /**
-     * remove a module from shader
-     * @function removeModule
-     * @memberof Shader
-     * @instance
-     * @param {shaderModule} mod the module to be removed
-     */
-    removeModule(mod)
-    {
-        for (let i = 0; i < this._modules.length; i++)
-        {
-            if (mod && mod.id)
-            {
-                if (this._modules[i].id == mod.id || !this._modules[i])
-                {
-                    let found = true;
-                    while (found)
-                    {
-                        found = false;
-                        for (let j = 0; j < this._uniforms.length; j++)
-                        {
-                            if (this._uniforms[j].getName().startsWith(mod.prefix))
-                            {
-                                this._uniforms.splice(j, 1);
-                                found = true;
-                                continue;
-                            }
-                        }
-                    }
-
-                    this._needsRecompile = true;
-                    this.setWhyCompile("remove module " + mod.title);
-                    this._modules.splice(i, 1);
-                    break;
-                }
-            }
-        }
-    };
-
-
-    getNumModules()
-    {
-        return this._modules.length;
-    };
-
-
-    getCurrentModules() { return this._modules; };
-
-
-    /**
-     * add a module
-     * @function addModule
-     * @memberof Shader
-     * @instance
-     * @param {shaderModule} mod the module to be added
-     * @param {shaderModule} [sibling] sibling module, new module will share the same group
-     */
-    addModule(mod, sibling)
-    {
-        if (this.hasModule(mod.id)) return;
-        if (!mod.id) mod.id = CABLES.simpleId();
-        if (!mod.numId) mod.numId = this._moduleNumId;
-        if (!mod.num)mod.num = this._modules.length;
-        if (sibling && !sibling.group) sibling.group = simpleId();
-
-        if (!mod.group)
-            if (sibling) mod.group = sibling.group;
-            else mod.group = simpleId();
-
-        mod.prefix = "mod" + mod.group + "_";
-        this._modules.push(mod);
-
-        this._needsRecompile = true;
-        this.setWhyCompile("add module " + mod.title);
-        this._moduleNumId++;
-
-        return mod;
-    };
-
-    hasModule(modId)
-    {
-        for (let i = 0; i < this._modules.length; i++)
-        {
-            if (this._modules[i].id == modId) return true;
-        }
-        return false;
-    };
-
-    setModules(names)
-    {
-        this._moduleNames = names;
-    };
 
     dispose()
     {

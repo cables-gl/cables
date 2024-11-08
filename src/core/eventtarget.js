@@ -61,7 +61,7 @@ const EventTarget = function ()
             const event = this._listeners[which];
             if (!event)
             {
-                this._log.log("could not find event...", which, this);
+                this._log.log("removeEvent: could not find event...", which, this);
                 return;
             }
 

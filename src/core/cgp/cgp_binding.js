@@ -97,7 +97,6 @@ export default class Binding
 
         let bindingType = this.bindingType;
 
-
         str += "@group(0) ";
         str += "@binding(" + this._index + ") ";
 
@@ -108,9 +107,7 @@ export default class Binding
         else if (this.bindingType == "read-only-storage")str += "var<storage,read> ";
         else str += "var ";
 
-
         str += name + ": " + typeStr + ";\n";
-
 
         return str;
     }

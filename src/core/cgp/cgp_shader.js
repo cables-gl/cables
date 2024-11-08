@@ -98,37 +98,83 @@ export default class Shader extends CgShader
         this._needsRecompile = true;
     }
 
-    compile()
+    _replaceMods(vs)
     {
-        this._isValid = true;
-        this._cgp.pushErrorScope("cgp_shader " + this._name);
+        let srcHeadVert = "";
+        for (let i = 0; i < this._moduleNames.length; i++)
+        {
+            let srcVert = "";
 
+            for (let j = 0; j < this._modules.length; j++)
+            {
+                const mod = this._modules[j];
+                if (mod.name == this._moduleNames[i])
+                {
+                    srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
+
+                    srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
+
+                    if (mod.attributes)
+                        for (let k = 0; k < mod.attributes.length; k++)
+                        {
+                            const r = this._getAttrSrc(mod.attributes[k], false);
+                            if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
+                            if (r.srcVert)srcVert += r.srcVert;
+                        }
+
+                    srcHeadVert += mod.srcHeadVert || "";
+                    srcVert += mod.srcBodyVert || "";
+
+                    srcHeadVert += "\n//---- end mod ------\n";
+
+                    srcVert += "\n//---- end mod ------\n";
+
+                    srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
+                    srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
+
+                    srcVert = srcVert.replace(/MOD_/g, mod.prefix);
+                    srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
+                }
+            }
+
+            vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
+        }
+
+        vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
+        return vs;
+    }
+
+    getProcessedSource()
+    {
         const defs = {};
         for (let i = 0; i < this._defines.length; i++)
             defs[this._defines[i][0]] = this._defines[i][1] || true;
+
 
         let src = preproc(this._src, defs);
 
         let bindingsHeadVert = "";
         for (let i = 0; i < this.bindingsFrag.length; i++)
-        {
             bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode();
-        }
 
         let bindingsHeadFrag = "";
         for (let i = 0; i < this.bindingsVert.length; i++)
-        {
             bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode();
-        }
+
+
 
         src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
+        src = this._replaceMods(src);
 
+        return src;
+        // console.log("----------------\n", src, "\n----------------------------");
+    }
 
-        console.log("----------------\n", src, "\n----------------------------");
-
-
-
-        this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": src, "label": this._name });
+    compile()
+    {
+        this._isValid = true;
+        this._cgp.pushErrorScope("cgp_shader " + this._name);
+        this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
 
@@ -262,5 +308,67 @@ export default class Shader extends CgShader
         {
             if (this._uniforms[i].getName() == name) return this._uniforms[i];
         }
+    }
+
+    /**
+     * copy current shader
+     * @function copy
+     * @memberof Shader
+     * @instance
+     * @returns newShader
+     */
+    copy()
+    {
+        const shader = new Shader(this._cgp, this._name + " copy");
+        shader.setSource(this._src);
+
+        shader._modules = JSON.parse(JSON.stringify(this._modules));
+        shader._defines = JSON.parse(JSON.stringify(this._defines));
+
+        shader._modGroupCount = this._modGroupCount;
+        shader._moduleNames = this._moduleNames;
+
+        // shader.glPrimitive = this.glPrimitive;
+        // shader.offScreenPass = this.offScreenPass;
+        // shader._extensions = this._extensions;
+        // shader.wireframe = this.wireframe;
+        // shader._attributes = this._attributes;
+
+        for (let i = 0; i < this._uniforms.length; i++)
+            this._uniforms[i].copy(shader);
+
+        this.setWhyCompile("copy");
+        shader._needsRecompile = true;
+        return shader;
+    }
+
+
+    /**
+     * copy all uniform values from another shader
+     * @function copyUniforms
+     * @memberof Shader
+     * @instance
+     * @param origShader uniform values will be copied from this shader
+     */
+    copyUniformValues(origShader)
+    {
+        for (let i = 0; i < origShader._uniforms.length; i++)
+        {
+            if (!this._uniforms[i])
+            {
+                this._log.log("unknown uniform?!");
+                continue;
+            }
+            this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
+        }
+
+        // this.popTextures();
+        // for (let i = 0; i < origShader._textureStackUni.length; i++)
+        // {
+        //     this._textureStackUni[i] = origShader._textureStackUni[i];
+        //     this._textureStackTex[i] = origShader._textureStackTex[i];
+        //     this._textureStackType[i] = origShader._textureStackType[i];
+        //     this._textureStackTexCgl[i] = origShader._textureStackTexCgl[i];
+        // }
     }
 }
