@@ -114,6 +114,9 @@ export default class Binding
 
         if (this.uniforms.length === 0) return "// no uniforms in bindinggroup...?\n";
 
+
+        str += "// " + this.uniforms.length + " uniforms\n";
+
         if (this.isStruct())
         {
             str += "struct " + typeStr + "\n";

@@ -338,10 +338,19 @@ export default class Shader extends CgShader
 
         for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
 
-        for (let i = 0; i < this.bindingsFrag.length; i++) shader.bindingsFrag.push(this.bindingsFrag[i].copy(shader));
-        for (let i = 0; i < this.bindingsVert.length; i++) shader.bindingsVert.push(this.bindingsVert[i].copy(shader));
-        for (let i = 0; i < this.bindingsComp.length; i++) shader.bindingsComp.push(this.bindingsComp[i].copy(shader));
+        shader.bindingsFrag = [];
+        for (let i = 0; i < this.bindingsFrag.length; i++) this.bindingsFrag[i].copy(shader);
+        shader.defaultBindingFrag = this.bindingsFrag[0];
 
+        shader.bindingsVert = [];
+        for (let i = 0; i < this.bindingsVert.length; i++) this.bindingsVert[i].copy(shader);
+        shader.defaultBindingVert = this.bindingsVert[0];
+
+        shader.bindingsComp = [];
+        for (let i = 0; i < this.bindingsComp.length; i++) this.bindingsComp[i].copy(shader);
+        shader.defaultBindingComp = this.bindingsComp[0];
+
+        console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
         this.setWhyCompile("copy");
         shader._needsRecompile = true;
