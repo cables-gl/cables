@@ -1,17 +1,3 @@
-struct VSUniforms
-{
-    modelMatrix: mat4x4<f32>,
-    viewMatrix: mat4x4<f32>,
-    projMatrix: mat4x4<f32>,
-};
-
-struct FSUniforms
-{
-    color:vec4<f32>
-};
-
-@group(0) @binding(0) var<uniform> vsUniforms: VSUniforms;
-@group(0) @binding(1) var<uniform> fsUniforms: FSUniforms;
 
 struct MyVSInput
 {

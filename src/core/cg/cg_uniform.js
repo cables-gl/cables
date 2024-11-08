@@ -186,6 +186,11 @@ class CgUniform
         }
         else this._value = _value;
 
+
+        console.log(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
+
+
+
         this.setValue(this._value);
         this.needsUpdate = true;
     }
@@ -196,6 +201,10 @@ class CgUniform
         return this._type;
     }
 
+    get type()
+    {
+        return this._type;
+    }
 
     get name()
     {

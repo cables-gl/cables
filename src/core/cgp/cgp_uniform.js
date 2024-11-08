@@ -8,7 +8,14 @@ export default class Uniform extends CgUniform
         super(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
         this._cgp = __shader._cgp;
 
-        if (this.getType() == "t" && !_value) this._value = this._cgp.getEmptyTexture();
+        if (!_value)
+        {
+            // if (this.getType() == "m4") this._value = mat4.create();
+            if (this.getType() == "t") this._value = this._cgp.getEmptyTexture();
+            // else if (this.getType() == "2f") this._value = [0, 0];
+            // else if (this.getType() == "4f") this._value = [0, 1, 0, 1];
+            // else if (this.getType() == "3f") this._value = [0, 1, 0];
+        }
 
         this.gpuBuffer = null;
     }
@@ -50,6 +57,11 @@ export default class Uniform extends CgUniform
 
     setValue4F(v)
     {
+        if (v[0] == undefined)
+        {
+            this._log.stack("uniform value undefined");
+            console.error("uniform value undefined");
+        }
         this.needsUpdate = true;
         this._value = v;
     }
@@ -159,6 +171,10 @@ export default class Uniform extends CgUniform
     {
         const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);
         uni.shaderType = this.shaderType;
+
+        console.log(this._name, this._value, uni._value);
+
+
         return uni;
     }
 }

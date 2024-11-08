@@ -172,8 +172,10 @@ export default class Shader extends CgShader
 
     compile()
     {
+        console.log("compile", this._compileReason);
         this._isValid = true;
         this._cgp.pushErrorScope("cgp_shader " + this._name);
+        console.log(this.getProcessedSource());
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
@@ -334,8 +336,12 @@ export default class Shader extends CgShader
         // shader.wireframe = this.wireframe;
         // shader._attributes = this._attributes;
 
-        for (let i = 0; i < this._uniforms.length; i++)
-            this._uniforms[i].copy(shader);
+        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
+
+        for (let i = 0; i < this.bindingsFrag.length; i++) shader.bindingsFrag.push(this.bindingsFrag[i].copy(shader));
+        for (let i = 0; i < this.bindingsVert.length; i++) shader.bindingsVert.push(this.bindingsVert[i].copy(shader));
+        for (let i = 0; i < this.bindingsComp.length; i++) shader.bindingsComp.push(this.bindingsComp[i].copy(shader));
+
 
         this.setWhyCompile("copy");
         shader._needsRecompile = true;
