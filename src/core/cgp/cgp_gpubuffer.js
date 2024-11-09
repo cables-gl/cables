@@ -70,6 +70,8 @@ export default class GPUBuffer extends EventTarget
             this._gpuBuffer = this._cgp.device.createBuffer(this._buffCfg);
         }
 
+        // if (!isNaN(this.floatArr[0]))console.log("shit", this._name);
+
         if (this.floatArr)
             this._cgp.device.queue.writeBuffer(
                 this._gpuBuffer,
@@ -84,6 +86,11 @@ export default class GPUBuffer extends EventTarget
         this._cgp.popErrorScope();
 
         this.needsUpdate = false;
+    }
+
+    get name()
+    {
+        return this._name;
     }
 
     get gpuBuffer()

@@ -122,8 +122,8 @@ export default class Shader extends CgShader
                             if (r.srcVert)srcVert += r.srcVert;
                         }
 
-                    srcHeadVert += mod.srcHeadVert || "";
-                    srcVert += mod.srcBodyVert || "";
+                    srcHeadVert += mod.srcHead || "";
+                    srcVert += mod.srcBody || "";
 
                     srcHeadVert += "\n//---- end mod ------\n";
 
@@ -172,8 +172,10 @@ export default class Shader extends CgShader
 
     compile()
     {
+        console.log("compile", this._compileReason);
         this._isValid = true;
         this._cgp.pushErrorScope("cgp_shader " + this._name);
+        console.log(this.getProcessedSource());
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
@@ -334,8 +336,21 @@ export default class Shader extends CgShader
         // shader.wireframe = this.wireframe;
         // shader._attributes = this._attributes;
 
-        for (let i = 0; i < this._uniforms.length; i++)
-            this._uniforms[i].copy(shader);
+        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
+
+        shader.bindingsFrag = [];
+        for (let i = 0; i < this.bindingsFrag.length; i++) this.bindingsFrag[i].copy(shader);
+        shader.defaultBindingFrag = this.bindingsFrag[0];
+
+        shader.bindingsVert = [];
+        for (let i = 0; i < this.bindingsVert.length; i++) this.bindingsVert[i].copy(shader);
+        shader.defaultBindingVert = this.bindingsVert[0];
+
+        shader.bindingsComp = [];
+        for (let i = 0; i < this.bindingsComp.length; i++) this.bindingsComp[i].copy(shader);
+        shader.defaultBindingComp = this.bindingsComp[0];
+
+        console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
         this.setWhyCompile("copy");
         shader._needsRecompile = true;
