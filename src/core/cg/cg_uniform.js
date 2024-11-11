@@ -187,7 +187,7 @@ class CgUniform
         else this._value = _value;
 
 
-        console.log(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
+        // console.log(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
 
 
 
