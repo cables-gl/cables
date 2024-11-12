@@ -9,6 +9,8 @@ enters all repositories and runs `npm run build`
 tries to guess your OS, installs dependencies, creates needed directories and files and copies
 `cables_example.json` to `cables.json` if it does not exist
 
+if you do not authenticate to github via public key, add `https` as a parameter
+
 ## update_repos.sh
 
 reads the current nodeversion vom .nvmrc and walks the repositories,

@@ -30,7 +30,7 @@ But let's get started:
 ## Common
 - install [Node Version Manager](https://github.com/nvm-sh/nvm#install--update-script)
 - close and reopen your terminal, make sure nvm is installed properly, `nvm --version` should output some version number
-- run `./install_local.sh`
+- run `./install_local.sh` (if you prefer https over public-key auth, run `./install_local.sh https`)
     - this will:
         - install the required node version (and set it as default in `nvm`)
         - check out all needed repositories into subdirectories
