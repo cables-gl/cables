@@ -59,6 +59,8 @@ const
 
     outAbsVelocity = op.outTexture("Absolute Velocity", emptyTex),
 
+    outMisc = op.outTexture("Misc", emptyTex),
+
     outPassThrough1 = op.outTexture("Result Pass Through 1", emptyTex),
     outPassThrough2 = op.outTexture("Result Pass Through 2", emptyTex),
     outTexSize = op.outNumber("Tex Size"),
@@ -414,8 +416,9 @@ function renderFrame(time, timeDiff)
     outTexTiming.setRef(ps.fb.getTextureColorNum(2));
     outVelocity.setRef(ps.fb.getTextureColorNum(3));
     outPassThrough1.setRef(ps.fb.getTextureColorNum(4));
-    outPassThrough2.setRef(ps.fb.getTextureColorNum(7));
     outAbsVelocity.setRef(ps.fb.getTextureColorNum(5));
+    outMisc.setRef(ps.fb.getTextureColorNum(6));
+    outPassThrough2.setRef(ps.fb.getTextureColorNum(7));
 
     cgl.popBlend();
 }

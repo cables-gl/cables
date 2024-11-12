@@ -69,7 +69,7 @@ void main()
     vec4 col=texture(tex,texCoord);
     col.a=1.0;
 
-    // if(isnan(col.r))col=vec4(0.0,1.0,1.0,1.0);
+
 
     vec4 collisionCol=texture(texCollision,texCoord);
 
@@ -152,10 +152,10 @@ void main()
             // col.xy=normalize(pos.xy-a)*strength;
 
             vec3 p=pos.xyz;
-            // p.y*=0.0;
-            // p.z*=0.;
 
             vec4 vecV=normalize(vec4(areaPos-p,1.0));
+
+            // vecV=vec4(0.0,0.0,0.0,1.0);
 
             vecV*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x);
             vecV*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y);
@@ -203,6 +203,9 @@ void main()
         }
 
     #endif
+
+if(isnan(col.r)||isnan(col.g))col=vec4(0.0,1.0,1.0,1.0);
+// col.r=1.0;
 
 
     outColor0=col;

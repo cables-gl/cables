@@ -255,6 +255,11 @@
             },
             {
                 "type": 2,
+                "name": "Misc",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
                 "name": "Result Pass Through 1",
                 "objType": "texture"
             },
