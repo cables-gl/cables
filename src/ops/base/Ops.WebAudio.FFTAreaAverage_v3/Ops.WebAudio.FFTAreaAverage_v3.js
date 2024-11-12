@@ -34,7 +34,7 @@ const ctx = canvas.getContext("2d");
 
 const MULTIPLIERS = [0.5, 1, 2, 4, 8];
 let multiplier = 1;
-
+let tex = null;
 let areaX = 0;
 let areaY = 0;
 let areaW = 20;
@@ -106,8 +106,9 @@ refresh.onTriggered = function ()
         ctx.fillStyle = "#ff0";
         ctx.fillRect(0, 0, amount * canvas.width, 6 * multiplier);
 
-        if (texOut.get()) texOut.get().initTexture(canvas, CGL.Texture.FILTER_NEAREST);
-        else texOut.set(new CGL.Texture.createFromImage(cgl, canvas, { "filter": CGL.Texture.FILTER_NEAREST }));
+        if (!tex)tex = new CGL.Texture.createFromImage(cgl, canvas, { "filter": CGL.Texture.FILTER_NEAREST });
+        tex.initTexture(canvas, CGL.Texture.FILTER_NEAREST);
+        texOut.setRef(tex);
     }
 
     ctx.restore();

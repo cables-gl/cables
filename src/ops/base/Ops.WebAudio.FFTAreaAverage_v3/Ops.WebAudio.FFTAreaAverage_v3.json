@@ -127,6 +127,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1730990194967
+        },
+        {
+            "message": "fixed display problem when having the op multiple times on the patch",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1731335740518
         }
     ],
     "license": "MIT"
