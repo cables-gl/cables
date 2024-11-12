@@ -52,37 +52,36 @@ void main()
     float spawnRate=paramsTime.z;
     float spawnEnergy=paramsTime.w;
 
+
     vtiming.r-=timeDiff;
 
-
-
-vec4 velocityTex=_velocityTex;
-if(isnan(velocityTex.r))velocityTex=vec4(0.0);
-
-
+    vec4 velocityTex=_velocityTex;
+    if(isnan(velocityTex.r))velocityTex=vec4(0.0);
 
     // respawn!!
     if(
-            #ifdef RESPAWN
-                vtiming.r<=0.0  ||
+            #ifndef STATICLIFE
+                #ifdef RESPAWN
+                    vtiming.r<=0.0  ||
+                #endif
             #endif
 
             isnan(vtiming.r) ||
             isnan(vtiming.g) ||
             reset==1.0 )
     {
-        if(cgl_random(texCoord*time) > spawnRate || reset==1.0 ) //
+        if(
+
+                cgl_random(texCoord*time) > spawnRate ||
+
+                reset==1.0 ) //
         {
+
+
             timeDiff=0.001;
-            // newPos.rgb=outOfScreenPos;
             newPos.a=0.0;
 
-            // #ifdef RESET_RAND_LIFETIME
-                vtiming.g=vtiming.r=vtiming.r=cgl_random(texCoord*time)*lifeTime.y+0.01;
-            // #endif
-            // #ifndef RESET_RAND_LIFETIME
-                // vtiming.r=vtiming.g=0.0;
-            // #endif
+            vtiming.g=vtiming.r=vtiming.r=cgl_random(texCoord*time)*lifeTime.y+0.01;
         }
         else
         {
@@ -98,15 +97,13 @@ if(isnan(velocityTex.r))velocityTex=vec4(0.0);
             if(
                 posCol.a==0.0 ||
                 (posCol.x==0.0 && posCol.y==0.0 && posCol.z==0.0)
-                )newPos=vec4(99999.0);
+                )
+                    newPos=vec4(99999.0);
 
 
-            if(posCol.a<1.0)posCol.rgb=vec3(99999.0);
+            if(posCol.a<1.0) posCol.rgb = vec3(99999.0);
 
-            // if(posCol.x==0.0 && posCol.y==0.0 && posCol.z==0.0) posCol.a=0.0;
             vtiming.ba=rnd.xy;// tex coords of particle
-
-            // oldVelocity=texture(texSpawnVel,texCoord);
 
             rnd=posCol.rgb;
             newPos.rgb+=rnd;
@@ -123,14 +120,9 @@ if(isnan(velocityTex.r))velocityTex=vec4(0.0);
             #endif
 
             vtiming.g=
-            vtiming.r=lt;
+                vtiming.r=lt;
 
             miscParams.r=spawnEnergy; // spawn dir energy
-
-            // if(reset==1.0)
-            //     vtiming.g=
-            //     vtiming.r=(cgl_random(time*texCoord)*(_lifeTime.y-_lifeTime.x))+_lifeTime.x;
-
         }
     }
 
@@ -138,10 +130,13 @@ if(isnan(velocityTex.r))velocityTex=vec4(0.0);
         vec4 spawnDir=texture(texSpawnDir,vtiming.ba);
     #endif
 
+    float lifeProgress = 0.5;
 
-
-    float lifeProgress = vtiming.r / vtiming.g;
-    if(lifeProgress>1.0)newPos.a=0.0;
+    #ifndef STATICLIFE
+        lifeProgress= vtiming.r / vtiming.g;
+        //die...
+        if(lifeProgress>1.0)newPos.a=0.0;
+    #endif
 
 
     float m=0.0;
@@ -161,20 +156,18 @@ if(isnan(velocityTex.r))velocityTex=vec4(0.0);
     finalvelocity+=(velocity.xyz+velocityTex.xyz)*timeDiff;
 
     #ifdef HAS_TEX_SPAWNDIR
-//        finalvelocity+=spawnDir.xyz*(1.0/m)*(vtiming.g-vtiming.r)*timeDiff;
         finalvelocity+=spawnDir.xyz*(1.0/m)*miscParams.r*timeDiff;
-        //original
-    //    finalvelocity+=spawnDir.xyz*miscParams.r*timeDiff;
     #endif
 
     newPos.rgb+=finalvelocity.xyz*newPos.a;
 
-    if(newPos.a<=0.001)
-    {
-        newPos=vec4(0.0);
-        // newPos.rgb=outOfScreenPos;
-        finalvelocity=vec3(0.0);
-    }
+    #ifndef STATICLIFE
+        if(newPos.a<=0.001)
+        {
+            newPos=vec4(0.0);
+            finalvelocity=vec3(0.0);
+        }
+    #endif
 
     if(isnan(newPos.r))newPos.rgb=outOfScreenPos;
 

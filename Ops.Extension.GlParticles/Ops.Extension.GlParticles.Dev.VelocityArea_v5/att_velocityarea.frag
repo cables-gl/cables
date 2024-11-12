@@ -69,6 +69,8 @@ void main()
     vec4 col=texture(tex,texCoord);
     col.a=1.0;
 
+    // if(isnan(col.r))col=vec4(0.0,1.0,1.0,1.0);
+
     vec4 collisionCol=texture(texCollision,texCoord);
 
     vec4 timing=texture(texTiming,texCoord);
