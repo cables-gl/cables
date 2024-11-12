@@ -231,7 +231,7 @@ function updateDefines()
     ps.bgShader.toggleDefine("RESET_RAND_LIFETIME", inResetRandLifetime.get());
 
     ps.bgShader.toggleDefine("STATICLIFE", inParticleLife.get()=="static");
-
+firstTime=true;
 
     updateUi();
 }

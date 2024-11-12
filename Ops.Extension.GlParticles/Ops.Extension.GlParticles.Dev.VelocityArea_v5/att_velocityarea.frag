@@ -157,9 +157,9 @@ void main()
 
             // vecV=vec4(0.0,0.0,0.0,1.0);
 
-            vecV*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x);
-            vecV*=rotationMatrix(vec3(0.0,1.0,0.0), direction.y);
-            vecV*=rotationMatrix(vec3(0.0,0.0,1.0), direction.z);
+            vecV*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x)*
+            rotationMatrix(vec3(0.0,1.0,0.0), direction.y)*
+            rotationMatrix(vec3(0.0,0.0,1.0), direction.z);
 
             col.rgb+=(normalize(vecV.rgb).rgb*finalStrength);
         }
