@@ -1,0 +1,152 @@
+{
+    "authorName": "stephan",
+    "id": "0e4d8dcd-d4b2-4fd3-a714-b92cd0a73415",
+    "created": 1731001128199,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 5,
+                "name": "Label"
+            },
+            {
+                "type": 0,
+                "name": "min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "stepsize",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Default",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Increment",
+                "group": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Decrement",
+                "group": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Set Default"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            },
+            {
+                "type": 0,
+                "name": "value",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Changed"
+            }
+        ]
+    },
+    "summary": "steps through numerical or array values one by one",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "link",
+                "text": "link to sidebar"
+            },
+            {
+                "name": "Label",
+                "text": "the label on the sidebar"
+            },
+            {
+                "name": "min",
+                "text": "minimum value while decrementing"
+            },
+            {
+                "name": "max",
+                "text": "maximum value while incrementing"
+            },
+            {
+                "name": "stepsize",
+                "text": "size of each \"step\" (increment and decrement)"
+            },
+            {
+                "name": "Values",
+                "text": "optional array for stepping through it's items"
+            },
+            {
+                "name": "childs",
+                "text": "link to sidebar"
+            },
+            {
+                "name": "value",
+                "text": "the current value"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888099984,
+            "type": "bugfix"
+        },
+        {
+            "message": "Added trigger output, triggered  on change",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712755375009
+        },
+        {
+            "message": "Added toggle to greyout ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716369292696
+        },
+        {
+            "message": "Added reset button",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716370249334
+        },
+        {
+            "message": "Added Increment/Decrement trigger inputs",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716379450036
+        },
+        {
+            "message": "Removed values-array input",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1731325383776
+        }
+    ],
+    "license": "MIT"
+}
