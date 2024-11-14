@@ -68,7 +68,7 @@ When you inspect existing ops by pressing the `View Code` button in the op param
 op init is done asynchronously and most of the time it's better to just initalize outside of callbacks and handle port-value-changes in
 the corresponding `onChange`;
 
-Please be aware that this function will be called twice on patch load. If you need to initialize a variable global to the op, 
+Please be aware that this function will be called twice on patch load. If you need to initialize a variable global to the op,
 you might be better  off doing that outside of any callback. If you do this in `init`, create a variable, set them null and check for that.
 
 ```javascript
@@ -82,8 +82,8 @@ op.init = function()
 
 ### onLoaded
 
-Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc. 
-You normally won't need this, as op-specific init-code can just be put in your op-code without a callback. 
+Gets called when the whole patch is loaded / all ops are linked / all external libraries loaded etc.
+You normally won't need this, as op-specific init-code can just be put in your op-code without a callback.
 `op.onLoaded` is **not** called when the op has just been added to the patch, only when the patch is loaded.
 
 ```javascript
@@ -117,7 +117,7 @@ The number in the last part of the function defines what kind of error is shown
 1 - warning / orange color
 2 - error / red color / this will also place a red dot on the right hand side of the op
 <br>
-![Button](img/dev_callbacks_error_UI_example.png)
+![Button](img/dev_callbacks_error_ui_example.png)
 <br>
 example code to show an error:
 ```javascript

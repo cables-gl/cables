@@ -1,6 +1,6 @@
 # Creating Attachments
 
-Attachments are files that can be created and read as a string in the op they are attached to.  
+Attachments are files that can be created and read as a string in the op they are attached to.
 
 An attachment file can be created by clicking on an op and then clicking the create button
 
@@ -40,4 +40,4 @@ The attachment can now be accessed inside of your op, select the op and press 'e
 
 
 
-![output_attachment_img](img/output_attachment.PNG)
+![output_attachment_img](img/output_attachment.png)

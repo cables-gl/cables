@@ -14,7 +14,7 @@ The following ops are able to cast lights:
 The following materials are able to receive light:
 
 - [Lambert Material](https://cables.gl/op/Ops.Gl.Phong.LambertMaterial_v2)
-- [Phong Material](https://cables.gl/op/Ops.Gl.Phong.PhongMaterial_v5)
+- [Phong Material](https://cables.gl/op/Ops.Gl.Phong.PhongMaterial_v6)
 
 ## Basic Setup
 
@@ -34,7 +34,7 @@ The most important parameters for lights are `Color`, `Position` and `Intensity`
 
 With these 3 parameters, you can already generate an infinite amount of looks.
 
-If you are using the [Phong Material](https://cables.gl/op/Ops.Gl.Phong.PhongMaterial_v5), another interesting parameter is the `Specular Color`.
+If you are using the [Phong Material](https://cables.gl/op/Ops.Gl.Phong.PhongMaterial_v6), another interesting parameter is the `Specular Color`.
 The Phong Material features specular reflections, whose color you can control by changing the specular color of the lights. Please note that the Ambient Light doesn't feature a `Specular Color` parameter. Please refer to the documentation of the ops for a more detailed overview.
 
 ## A note on Ambient Lighting

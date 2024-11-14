@@ -9,6 +9,7 @@ Select the "GITHUB" option in the export dialog:
 - an account on [github](https://github.com/)
 - any repository, create one [here](https://github.com/new) if needed (add at least one file, otherwise the repo doesnt exists for github)
 - an [access token](https://github.com/settings/tokens) for your github-user with at least "repo" permissions
+  - if you use github's "fine grained permissions", make sure your token has "read and write" permission to the "contents" of your created repo
 - (if wanted) activate [github pages](https://pages.github.com/) for your repository in the repositories settings on github
   - your repository needs to be made public for this to be free
   - you need to pick a branch when activating pages, remember this for the settings below    
@@ -85,3 +86,17 @@ these files included in the export.
 
 - Should you need the directory structure of your patch to be "flat" (no js/ or assets/ subdirectory) you can select this option.
   - This will ususally not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
+
+### Minify Code
+
+- Deselecting this option will make your code bigger, but more readable, might be useful in debugging situations, you usually don't want this in "production".
+
+### Add Source Maps
+
+- When minifying code, this option will add [source maps](https://developer.chrome.com/blog/sourcemaps) to your javascript files.
+  This will make the code readable in dev-tools and may help in debugging situations, but will have and additional download for
+  people opening the dev-tools of their browser.
+
+## Minify GLSL
+
+- Minify shadercode. Same as "Minify Code", but for GLSL-Shadercode

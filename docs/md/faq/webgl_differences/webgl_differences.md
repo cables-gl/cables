@@ -18,9 +18,9 @@ WebGL1 only supports [mipmapping]() for power of two textures. What does that me
 
 Put simply, mipmapping saves your texture in different resolutions internally so the graphics card can choose which resolution is optimal to display your texture without artifacts. See the following picture for a visual explanation:
 
-![mipmapping](img/Mipmap_Aliasing_Comparison.png)
+![mipmapping](img/mipmap_aliasing_comparison.png)
 
-[Source 1]: https://en.wikipedia.org/wiki/Mipmap#/media/File:Mipmap_Aliasing_Comparison.png
+[Source 1]: https://en.wikipedia.org/wiki/Mipmap#/media/File:mipmap_aliasing_comparison.png
 
 As you can see, there are moiré artefacts in the background without mipmapping. These disappear when mipmapping is enabled.
 When using the [Texture op](https://cables.gl/op/Ops.Gl.Texture_v2), mipmapping is enabled automatically.
@@ -45,13 +45,13 @@ Fortunately, cables allows you to resize a texture to the closest power of two w
 
 If you open the file browser and click on the texture you desire to resize, the following options will appear:
 
-![resize_start](img/resize_POT.png)
+![resize_start](img/resize_pot.png)
 
 If you look at the bottom of the screenshot, you can see marked in yellow the current size of your image. At the bottom right of your dimensions, there are a few buttons that allow you to process your image through cables. The relevant button to resize to the next power of two is marked in bright green.
 
 After clicking it, a dialogue appears and asks you if you want to resize the texture. If you do that, the following dialogue will appear:
 
-![resize_start](img/resized_POT.png)
+![resize_start](img/resized_pot.png)
 
 Your texture is now resized to the next power of two and usable for mipmapping in WebGL1.
 

@@ -2,7 +2,7 @@
 
 ## When does this happen?
 
-Sometimes you want to access ressouces on different servers than your patch is running on, these may be
+Sometimes you want to access resources on different servers than your patch is running on, these may be
 images, some api or any different file. Check [this patch](https://cables.gl/p/5FQ08W) for example, that
 loads data from an API to get the current temperature in Berlin.
 
@@ -11,9 +11,10 @@ certain HTTP-Headers (see below). Really often this is not the case.
 
 ## How do i know this happens to me?
 
-use this cors test to see if your headers are set correctly: https://cors-test.codehappy.dev/
+Use this cors test to see if your headers are set correctly: https://cors-test.codehappy.dev/
 
-First of all, you won't see the files loaded, no images, no data from the API. Check your developer tools (ctrl+shift+i or cmd+option+i) console
+First of all, you won't see the files loaded, no images, no data from the API. Errors like "unexpected end of JSON". 
+Check your developer tools (ctrl+shift+i or cmd+option+i) console
 in the browser and you will, most likely, see something like this:
 
 ```
@@ -42,6 +43,7 @@ to adding this to your HTTP-Response headers:
 ```
 Access-Control-Allow-Origin: https://cables.gl
 Access-Control-Allow-Origin: https://sandbox.cables.gl
+Access-Control-Allow-Origin: https://devsandbox.cables.gl
 ```
 
 or more broadly:
@@ -52,7 +54,7 @@ Access-Control-Allow-Origin: *
 
 ## Okay, I did this, still does not work, what else?
 
-So, let's assume you are using [AjaxRequest](https://cables.gl/op/Ops.Json.AjaxRequest_v2). Check that you do not have
+So, let's assume you are using [HttpRequest](https://cables.gl/op/Ops.Json.HttpRequest_v3). Check that you do not have
 the JSONP-Checkbox toggled on. Once that is on, all the above does not cause any problems, but your browser is loading
 the external ressouce as if it were a JavaScript-File. We cannot control these requests and we also cannot send any
 additional headers with them.

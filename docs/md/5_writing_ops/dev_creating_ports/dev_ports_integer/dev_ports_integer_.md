@@ -2,7 +2,7 @@
 
 This page will explain how to create an input and ouput port of the type `Integer`
 
-Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
+Click this [link](https://cables.gl/edit/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
 Integer ports can hold a single integer like `-2 0 10 101`
 They're useful when you want to have a parameter to access an array by index or don't want to have to use `Math.floor` on the numerical input.

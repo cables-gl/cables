@@ -17,7 +17,7 @@ The following op(s) allow to receive shadows:
 
 - [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2)
 
-in conjuction with any [Material](https://cables.gl/ops/collection/Material).
+in conjuction with any material.
 
 Before we dive into creating shadows, we need to cover the basic terminology first:
 

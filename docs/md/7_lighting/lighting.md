@@ -14,7 +14,7 @@ Currently, the lighting ecosystem consists of the following ops:
 ## Light Receivers
 
 - [Lambert Material](https://cables.gl/op/Ops.Gl.Phong.LambertMaterial_v2)
-- [Phong Material](https://cables.gl/op/Ops.Gl.Phong.PhongMaterial_v5)
+- [Phong Material](https://cables.gl/op/Ops.Gl.Phong.PhongMaterial_v6)
 
 ## Shadow Receivers
 
@@ -26,6 +26,6 @@ For more information about shadow casting and receiving, please refer to the sha
 
 Currently, the following ops allow you to add lighting via postprocessing:
 
-- [SSAO2](https://cables.gl/op/Ops.Gl.TextureEffects.SSAO2)
+- [SSAO2](https://cables.gl/op/Ops.Gl.ImageCompose.SSAO)
 
 __TOC__

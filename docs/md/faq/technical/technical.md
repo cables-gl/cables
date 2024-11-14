@@ -8,33 +8,27 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Do I need a good graphics card (GPU) to use cables?
 
-- We'd advise having a the equivalent of a **Nvdia 970M** for any serious graphics work.
+- We'd advise having the equivalent of a **Nvdia 970M** for any serious graphics work.
 
 #### What kind of input devices can I use with cables?
 
 - Game controllers, midi controllers, mobile phone data such as a gyroscope. See this [page](https://cables.gl/ops/Ops.Device) for a full list of supported devices.
 
-#### Does cables support multiple monitors?
-
-- Not yet. 
-
 #### Is syphon or spout texture sharing available in cables?
 
 - cables cannot support this because it is running in the browser, you need 3rd party capturing software that captures a part of the desktop which is **syphon/spout** compatible.
 
-#### Can I use my soundcard with cables?
+#### Can I use my sound card with cables?
 
 - Yes. Though you are limited to 2 audio inputs and 2 audio outputs because of web browser limitations.
 
 #### Is there a standalone version of cables that doesn’t require an internet connection?
 
-- Yes and no. To make and and edit patches you need an internet connection so you can use the cables editor. 
-If you have a finished patch you can run it without an internet connection straight from a USB stick. 
-It's called Daplaya, you can download it and get started [here](https://github.com/cables-gl/cables-daplaya)
+- Yes! You can download the latest version [here](https://cables.gl/standalone)
 
 #### Can I embed a cables patch in a wordpress page?
 
-- Yes you can. Check the cables-wordpress-plugin [page](https://github.com/cables-gl/cables-wordpress-plugin) to get started.  
+- Yes you can. Check the cables-wordpress-plugin [page](https://github.com/cables-gl/cables-wordpress-plugin) to get started.
 
 #### Can I make my own custom ops?
 
@@ -44,9 +38,3 @@ You can also click on any cables op and press the **e** key to see the op code.
 #### How do I download assets from a patch to my computer?
 
 - Go into the file browser inside of the patch. Then to patch files. Click the asset and then look for the download button.
-
-#### Where are the Tone.js operators?
-
-- They've currently been deprecated. We are planning on rebuilding them and releasing them at some point in the future.
-
-
