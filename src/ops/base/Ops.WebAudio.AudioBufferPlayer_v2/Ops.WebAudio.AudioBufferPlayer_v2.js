@@ -86,7 +86,7 @@ audioBufferPort.onChange = function ()
         if (isPlaying)
         {
             stop(0);
-            source.buffer = null;
+            if (source) source.buffer = null;
             source = null;
         }
     }

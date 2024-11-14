@@ -132,7 +132,7 @@ function onXRFrame(hrTime, xrFrame)
         cgl.frameStore.xrViewerPose = xrViewerPose;
         cgl.frameStore.xrReferenceSpace = xrReferenceSpace;
 
-        outMat.set(xrViewerPose.transform.matrix);
+        if (xrViewerPose) outMat.set(xrViewerPose.transform.matrix);
 
         outPose.set(null);
         outPose.set(xrViewerPose);
@@ -154,7 +154,8 @@ function onXRFrame(hrTime, xrFrame)
 
         op.patch.cg = cgl;
 
-        for (let i = 0; i < xrViewerPose.views.length; i++)
+        const views = xrViewerPose ? xrViewerPose.views : [];
+        for (let i = 0; i < views.length; i++)
         {
             let start = performance.now();
             outEyeIndex.set(i);

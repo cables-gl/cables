@@ -34,5 +34,10 @@
     },
     "authorName": "kikohs",
     "created": 1730822472048,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Random number generator from a string seed",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "aAaJgt"
 }

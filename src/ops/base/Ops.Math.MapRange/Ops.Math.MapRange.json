@@ -82,7 +82,6 @@
             }
         ]
     },
-    "issues": "",
     "youtubeids": [
         "5VmIC1xA4EU"
     ],
@@ -100,5 +99,6 @@
             "author": "pandur",
             "date": 1706885722609
         }
-    ]
+    ],
+    "license": "MIT"
 }

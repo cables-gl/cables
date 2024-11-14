@@ -60,6 +60,12 @@
             {
                 "type": 0,
                 "name": "MSAA index",
+                "values": [
+                    "none",
+                    "2x",
+                    "4x",
+                    "8x"
+                ],
                 "group": "Texture",
                 "subType": "integer"
             }
@@ -85,7 +91,7 @@
             {
                 "type": 0,
                 "name": "VR Support",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 3,
@@ -99,7 +105,7 @@
             {
                 "type": 0,
                 "name": "In Session",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 3,
@@ -117,10 +123,10 @@
             }
         ]
     },
-
     "exampleProjectId": "IzKYx5",
     "docs": {
         "ports": []
     },
-    "summary": "rendering on webxr virtual reality immersive devices"
+    "summary": "rendering on webxr virtual reality immersive devices",
+    "license": "MIT"
 }
