@@ -147,6 +147,9 @@ if(isnan(velocityTex.r))velocityTex=vec4(0.0);
 
 
     float lifeProgress = vtiming.r / vtiming.g;
+    #ifdef STATICLIFE
+    lifeProgress=0.5;
+    #endif
     if(lifeProgress>1.0)newPos.a=0.0;
 
 
