@@ -43,6 +43,8 @@ inActiveG.onChange =
 inActiveB.onChange =
 modeSelect.onChange = updateDefines;
 
+updateDefines();
+
 function updateDefines()
 {
     shader.toggleDefine("CLAMP_R", inActiveR.get());

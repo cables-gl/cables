@@ -62,16 +62,12 @@
     "docs": {
         "ports": [
             {
-                "name": "Texture",
-                "text": "Input texture to be converted"
-            },
-            {
                 "name": "Trigger",
                 "text": "Trigger to do the conversion, put this behind a TriggerLimiter or TriggerOnce"
             },
             {
-                "name": "Use JPEG",
-                "text": "Default is a PNG lossless image, this toggle asks explicitly for a JPEG"
+                "name": "Texture",
+                "text": "Input texture to be converted"
             },
             {
                 "name": "Output dataUrl",
@@ -88,7 +84,6 @@
         ]
     },
     "id": "ed772bc0-ab12-427e-8378-64ea4f7635ed",
-    "issues": "",
     "changelog": [
         {
             "message": "Added Binary size output number",
@@ -112,5 +107,6 @@
     "coreLibs": [
         "cgl_pixelreader"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "dNuMWr"
 }
