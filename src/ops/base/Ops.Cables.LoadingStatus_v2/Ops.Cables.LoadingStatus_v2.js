@@ -1,6 +1,5 @@
 const
     exe = op.inTrigger("exe"),
-    preRenderOps = op.inValueBool("PreRender Ops"),
     startTimeLine = op.inBool("Play Timeline", true),
     next = op.outTrigger("Next"),
     outInitialFinished = op.outBoolNum("Finished Initial Loading", false),
@@ -41,7 +40,7 @@ function updateStatus()
     {
         if (firstTime)
         {
-            if (preRenderOps.get()) op.patch.preRenderOps();
+            // if (preRenderOps.get()) op.patch.preRenderOps();
 
             op.patch.timer.setTime(0);
             if (startTimeLine.get())

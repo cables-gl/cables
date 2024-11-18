@@ -1,0 +1,57 @@
+{
+    "id": "c00eef25-67d6-4fa3-9921-cbf533078a54",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1566307472489,
+            "type": "new"
+        },
+        {
+            "message": "react properly to disconnecting parent",
+            "author": "stephan",
+            "date": 1643888150675,
+            "type": "bugfix"
+        },
+        {
+            "message": "use correct string input for id",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1731928012091
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1731925146981,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 5,
+                "name": "Id"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            }
+        ]
+    },
+    "summary": "Display text in the sidebar",
+    "docs": {
+        "ports": [
+            {
+                "name": "Text",
+                "text": "The text you want to show in the sidebar"
+            }
+        ]
+    },
+    "license": "MIT"
+}
