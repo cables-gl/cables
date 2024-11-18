@@ -2,5 +2,5 @@
     "name": "Ops.Extension.Testing.",
     "summary": "",
     "description": "",
-    "visibility": "unlisted"
+    "visibility": "hidden"
 }
