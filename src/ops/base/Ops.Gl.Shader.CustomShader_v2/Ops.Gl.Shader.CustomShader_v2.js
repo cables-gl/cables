@@ -132,12 +132,12 @@ function parseUniforms(src)
                 const type = words[1];
 
 
-                let names = [varnames];
-                if (!varnames)
+                let names = [];
+                if (varnames)
                 {
-                    names = [];
+                    names = [varnames];
+                    if (varnames.indexOf(",") > -1) names = varnames.split(",");
                 }
-                else if (varnames.indexOf(",") > -1) names = varnames.split(",");
 
                 for (let l = 0; l < names.length; l++)
                 {
