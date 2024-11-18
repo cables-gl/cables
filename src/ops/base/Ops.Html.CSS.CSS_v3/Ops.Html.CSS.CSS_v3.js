@@ -32,14 +32,8 @@ function getCssContent()
     }
 
     if (css)
-    {
-        let patchId = null;
-        if (op.storage && op.storage.blueprint && op.storage.blueprint.patchId)
-        {
-            patchId = op.storage.blueprint.patchId;
-        }
-        css = css.replace(new RegExp("{{ASSETPATH}}", "g"), op.patch.getAssetPath(patchId));
-    }
+        css = css.replace(new RegExp("{{ASSETPATH}}", "g"), op.patch.getAssetPath());
+
     return css;
 }
 
