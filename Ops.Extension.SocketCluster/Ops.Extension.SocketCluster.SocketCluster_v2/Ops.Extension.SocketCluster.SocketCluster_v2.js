@@ -1,5 +1,5 @@
 const activeIn = op.inBool("Active", false);
-const serverHostname = op.inString("Server hostname", "");
+const serverHostname = op.inString("Server hostname", "socket.cables.gl");
 const serverPath = op.inString("Server path", "/socketcluster/");
 const serverPort = op.inValue("Server port", 443);
 const serverSecure = op.inBool("Use SSL", true);
