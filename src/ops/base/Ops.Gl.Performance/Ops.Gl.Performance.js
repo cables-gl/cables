@@ -1,5 +1,6 @@
 const
     exe = op.inTrigger("exe"),
+    inActive = op.inValueBool("Active", true),
     inShow = op.inValueBool("Visible", true),
     inDoGpu = op.inValueBool("Measure GPU", true),
     next = op.outTrigger("childs"),
@@ -54,6 +55,7 @@ op.toWorkPortsNeedToBeLinked(exe, next);
 const gl = op.patch.cgl.gl;
 const glQueryExt = gl.getExtension("EXT_disjoint_timer_query_webgl2");
 
+inActive.onChange =
 exe.onLinkChanged =
     inShow.onChange = () =>
     {
@@ -110,7 +112,7 @@ function updatePos()
 
 function updateVisibility()
 {
-    if (!inShow.get() || !exe.isLinked())
+    if (!inShow.get() || !exe.isLinked() || !inActive.get())
     {
         element.style.display = "none";
         element.style.opacity = 0;
@@ -461,84 +463,91 @@ exe.onTriggered = render;
 function render()
 {
     const selfTimeStart = performance.now();
-    frameCount++;
 
-    if (glQueryExt && inDoGpu.get() && inShow.get())op.patch.cgl.profileData.doProfileGlQuery = true;
-    else op.patch.cgl.profileData.doProfileGlQuery = false;
-
-    if (fpsStartTime === 0)fpsStartTime = Date.now();
-    if (Date.now() - fpsStartTime >= 1000)
+    if (inActive.get())
     {
+        frameCount++;
+
+        if (glQueryExt && inDoGpu.get() && inShow.get())op.patch.cgl.profileData.doProfileGlQuery = true;
+        else op.patch.cgl.profileData.doProfileGlQuery = false;
+
+        if (fpsStartTime === 0)fpsStartTime = Date.now();
+        if (Date.now() - fpsStartTime >= 1000)
+        {
         // query=null;
-        fps = frameCount;
-        frameCount = 0;
-        // frames = 0;
-        outFPS.set(fps);
-        if (inShow.get())updateText();
+            fps = frameCount;
+            frameCount = 0;
+            // frames = 0;
+            outFPS.set(fps);
+            if (inShow.get())updateText();
 
-        fpsStartTime = Date.now();
-    }
-
-    const glQueryData = op.patch.cgl.profileData.glQueryData;
-    currentTimeGPU = 0;
-    if (glQueryData)
-    {
-        let count = 0;
-        for (let i in glQueryData)
-        {
-            count++;
-            if (glQueryData[i].time)
-                currentTimeGPU += glQueryData[i].time;
+            fpsStartTime = Date.now();
         }
-    }
 
-    if (inShow.get())
-    {
-        measures();
-
-        if (opened && !op.patch.cgl.profileData.pause)
+        const glQueryData = op.patch.cgl.profileData.glQueryData;
+        currentTimeGPU = 0;
+        if (glQueryData)
         {
+            let count = 0;
+            for (let i in glQueryData)
+            {
+                count++;
+                if (glQueryData[i].time)
+                    currentTimeGPU += glQueryData[i].time;
+            }
+        }
+
+        if (inShow.get())
+        {
+            measures();
+
+            if (opened && !op.patch.cgl.profileData.pause)
+            {
             // const timeUsed = performance.now() - lastTime;
-            queue.push(op.patch.cgl.profileData.profileFrameDelta);
-            queue.shift();
+                queue.push(op.patch.cgl.profileData.profileFrameDelta);
+                queue.shift();
 
-            timesMainloop.push(childsTime);
-            timesMainloop.shift();
+                timesMainloop.push(childsTime);
+                timesMainloop.shift();
 
-            timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs);
-            timesOnFrame.shift();
+                timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs);
+                timesOnFrame.shift();
 
-            timesGPU.push(currentTimeGPU);
-            timesGPU.shift();
+                timesGPU.push(currentTimeGPU);
+                timesGPU.shift();
 
-            updateCanvas();
+                updateCanvas();
+            }
         }
+
+        lastTime = performance.now();
+        selfTime = performance.now() - selfTimeStart;
+
+        outCanv.setRef(canvas);
     }
-
-    lastTime = performance.now();
-    selfTime = performance.now() - selfTimeStart;
     const startTimeChilds = performance.now();
-
-    outCanv.setRef(canvas);
 
     next.trigger();
 
-    const nChildsTime = performance.now() - startTimeChilds;
-    const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
-    const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs;
-
-    if (smoothGraph.get())
+    if (inActive.get())
     {
-        childsTime = childsTime * 0.9 + nChildsTime * 0.1;
-        currentTimeMainloop = currentTimeMainloop * 0.5 + nCurrentTimeMainloop * 0.5;
-        currentTimeOnFrame = currentTimeOnFrame * 0.5 + nCurrentTimeOnFrame * 0.5;
-    }
-    else
-    {
-        childsTime = nChildsTime;
-        currentTimeMainloop = nCurrentTimeMainloop;
-        currentTimeOnFrame = nCurrentTimeOnFrame;
-    }
+        const nChildsTime = performance.now() - startTimeChilds;
+        const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
+        const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs;
 
-    op.patch.cgl.profileData.clearGlQuery();
+        if (smoothGraph.get())
+        {
+            childsTime = childsTime * 0.9 + nChildsTime * 0.1;
+            currentTimeMainloop = currentTimeMainloop * 0.5 + nCurrentTimeMainloop * 0.5;
+            currentTimeOnFrame = currentTimeOnFrame * 0.5 + nCurrentTimeOnFrame * 0.5;
+        }
+        else
+        {
+            childsTime = nChildsTime;
+            currentTimeMainloop = nCurrentTimeMainloop;
+            currentTimeOnFrame = nCurrentTimeOnFrame;
+        }
+
+        op.patch.cgl.profileData.clearGlQuery();
+    }
 }

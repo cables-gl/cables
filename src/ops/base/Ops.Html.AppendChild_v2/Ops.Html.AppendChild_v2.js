@@ -40,8 +40,8 @@ function update()
         }
         lastChild = child;
     }
-    parentOutPort.set(parent);
-    childOutPort.set(child);
+    parentOutPort.setRef(parent);
+    childOutPort.setRef(child);
 }
 
 function handleParentConnect(parent, child)

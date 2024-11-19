@@ -1,0 +1,655 @@
+{
+  "ops": [
+    {
+      "opId": "41eec5c7-c480-477a-be81-04c3efac8357",
+      "id": "1f7brohjt",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 284.9280903990682,
+          "y": -124.4053189635947
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Size index",
+          "value": 1
+        },
+        {
+          "name": "Size",
+          "value": "Manual"
+        },
+        {
+          "name": "texture width",
+          "value": 1
+        },
+        {
+          "name": "texture height",
+          "value": 1
+        },
+        {
+          "name": "Auto Aspect",
+          "value": 1
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 1
+        },
+        {
+          "name": "Wrap",
+          "value": "Repeat"
+        },
+        {
+          "name": "MSAA index",
+          "value": 0
+        },
+        {
+          "name": "MSAA",
+          "value": "none"
+        },
+        {
+          "name": "Pixel Format index",
+          "value": 11
+        },
+        {
+          "name": "Pixel Format",
+          "value": "RGBA 32bit float"
+        },
+        {
+          "name": "Depth",
+          "value": 1
+        },
+        {
+          "name": "Clear",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Exec",
+              "portOut": "trigger",
+              "objIn": "5ny941swk",
+              "objOut": "1f7brohjt"
+            }
+          ]
+        },
+        {
+          "name": "texture",
+          "links": [
+            {
+              "portIn": "Texture In",
+              "portOut": "texture",
+              "objIn": "ekzuvzla8",
+              "objOut": "1f7brohjt"
+            },
+            {
+              "portIn": "Texture",
+              "portOut": "texture",
+              "objIn": "f3utd6ygb",
+              "objOut": "1f7brohjt"
+            },
+            {
+              "portIn": "innerIn_iuqdv5507",
+              "portOut": "texture",
+              "objIn": "5mvorebxq",
+              "objOut": "1f7brohjt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
+      "id": "ekzuvzla8",
+      "uiAttribs": {
+        "height": 150,
+        "resizable": true,
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 803.8087349906335,
+          "y": -132.41170217274285
+        },
+        "extendTitle": "texture",
+        "comment": "",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Show Info",
+          "value": 0
+        },
+        {
+          "name": "Visualize outside 0-1 index",
+          "value": 1
+        },
+        {
+          "name": "Visualize outside 0-1",
+          "value": "Anim"
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "A"
+        },
+        {
+          "name": "Show Color",
+          "value": 0
+        },
+        {
+          "name": "X",
+          "value": 0.5
+        },
+        {
+          "name": "Y",
+          "value": 0.5
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Info",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "opId": "3996ed5d-8143-4bec-9cfd-c1b193a295af",
+      "id": "zk3r74b5p",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 317.29633684343327,
+          "y": 45.25260400019606
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Enable depth testing",
+          "value": 0
+        },
+        {
+          "name": "Depth Test Method index",
+          "value": 3
+        },
+        {
+          "name": "Depth Test Method",
+          "value": "less or equal"
+        },
+        {
+          "name": "Write to depth buffer",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "0v5ampkb8",
+              "objOut": "zk3r74b5p"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "77300f2f-15ea-4110-a4a7-27eff42c7750",
+      "id": "5ny941swk",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 317.29633684343327,
+          "y": -12.205179070489663
+        },
+        "comment": "gl_max blendmode!",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Src RGB index",
+          "value": 1
+        },
+        {
+          "name": "Src RGB",
+          "value": "ONE"
+        },
+        {
+          "name": "Dst RGB index",
+          "value": 2
+        },
+        {
+          "name": "Dst RGB",
+          "value": "SRC_COLOR"
+        },
+        {
+          "name": "Src Alpha index",
+          "value": 1
+        },
+        {
+          "name": "Src Alpha",
+          "value": "ONE"
+        },
+        {
+          "name": "Dst Alpha index",
+          "value": 1
+        },
+        {
+          "name": "Dst Alpha",
+          "value": "ONE"
+        },
+        {
+          "name": "Blend Equation index",
+          "value": 4
+        },
+        {
+          "name": "Blend Equation",
+          "value": "Max"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "Next",
+              "objIn": "zk3r74b5p",
+              "objOut": "5ny941swk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "9w44u6hn5",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 317.29633684343327,
+          "y": 198.3802399251022
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 0,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 1
+        },
+        {
+          "name": "height",
+          "value": 1
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 1
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "title": "Next",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "trigger",
+              "objIn": "109rjyzdr",
+              "objOut": "9w44u6hn5"
+            }
+          ]
+        },
+        {
+          "name": "geometry",
+          "links": [
+            {
+              "portIn": "Geometry",
+              "portOut": "geometry",
+              "objIn": "109rjyzdr",
+              "objOut": "9w44u6hn5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "ec55d252-3843-41b1-b731-0482dbd9e72b",
+      "id": "0v5ampkb8",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 317.29633684343327,
+          "y": 107.83693072980086
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 1
+        },
+        {
+          "name": "g",
+          "value": 1
+        },
+        {
+          "name": "b",
+          "value": 1
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "colorizeTexture",
+          "value": 0
+        },
+        {
+          "name": "Vertex Colors",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source",
+          "value": "Luminance"
+        },
+        {
+          "name": "Opacity TexCoords Transform",
+          "value": 0
+        },
+        {
+          "name": "Discard Transparent Pixels",
+          "value": 0
+        },
+        {
+          "name": "diffuseRepeatX",
+          "value": 1
+        },
+        {
+          "name": "diffuseRepeatY",
+          "value": 1
+        },
+        {
+          "name": "Tex Offset X",
+          "value": 0
+        },
+        {
+          "name": "Tex Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Crop TexCoords",
+          "value": 0
+        },
+        {
+          "name": "billboard",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "9w44u6hn5",
+              "objOut": "0v5ampkb8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
+      "id": "109rjyzdr",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 317.29633684343327,
+          "y": 378.2750199213325
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Scale",
+          "value": 17.51
+        },
+        {
+          "name": "Limit Instances",
+          "value": 0
+        },
+        {
+          "name": "Num Instances",
+          "value": 1000
+        },
+        {
+          "name": "Billboarding index",
+          "value": 0
+        },
+        {
+          "name": "Billboarding",
+          "value": "Off"
+        },
+        {
+          "name": "Rotation index",
+          "value": 0
+        },
+        {
+          "name": "Rotation",
+          "value": "Euler"
+        },
+        {
+          "name": "Color Texture Blendmode index",
+          "value": 0
+        },
+        {
+          "name": "Color Texture Blendmode",
+          "value": "Multiply"
+        },
+        {
+          "name": "Ignore Alpha Less Than",
+          "value": 0.5
+        },
+        {
+          "name": "Multiply Pos X",
+          "value": 0
+        },
+        {
+          "name": "Multiply Pos Y",
+          "value": 0
+        },
+        {
+          "name": "Multiply Pos Z",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Num",
+          "value": 50176
+        }
+      ]
+    },
+    {
+      "opId": "0e5cde34-35cd-440d-b8cd-f78e1b5b7722",
+      "id": "f3utd6ygb",
+      "uiAttribs": {
+        "height": 200,
+        "width": 380,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 816,
+          "y": 80
+        },
+        "extendTitle": "texture: 1x1 RGBA 32bit float linear repeat",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Row Start",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "y1eh5fsel",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 284.9280903990682,
+          "y": -212.41170217274285
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_c7eli7o9i",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_c7eli7o9i",
+              "objIn": "1f7brohjt",
+              "objOut": "y1eh5fsel"
+            },
+            {
+              "portIn": "innerIn_ecq8sxutk",
+              "portOut": "innerOut_c7eli7o9i",
+              "objIn": "5mvorebxq",
+              "objOut": "y1eh5fsel"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_s0ibc22vb",
+          "title": "Position Texture",
+          "links": [
+            {
+              "portIn": "Position Texture",
+              "portOut": "innerOut_s0ibc22vb",
+              "objIn": "109rjyzdr",
+              "objOut": "y1eh5fsel"
+            },
+            {
+              "portIn": "Color Texture",
+              "portOut": "innerOut_s0ibc22vb",
+              "objIn": "109rjyzdr",
+              "objOut": "y1eh5fsel"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "5mvorebxq",
+      "uiAttribs": {
+        "subPatch": "acpi5o15k",
+        "translate": {
+          "x": 117.6921504365153,
+          "y": 479.15994290746835
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "innerIn_iuqdv5507",
+          "title": "texture"
+        },
+        {
+          "name": "innerIn_ecq8sxutk",
+          "title": "render"
+        }
+      ]
+    }
+  ]
+}

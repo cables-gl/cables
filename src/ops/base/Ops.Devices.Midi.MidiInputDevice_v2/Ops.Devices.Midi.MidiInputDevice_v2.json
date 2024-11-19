@@ -94,6 +94,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1722842048728
+        },
+        {
+            "message": "reduced loglevel when device connection errors",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1731928066909
         }
     ],
     "caniusequery": "Web MIDI API",

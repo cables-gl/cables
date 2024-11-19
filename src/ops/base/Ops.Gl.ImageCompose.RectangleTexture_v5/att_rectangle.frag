@@ -80,7 +80,7 @@ void main()
     #endif
 
 
-    float roundn=roundness*min(size.x,size.y);
+    float roundn=roundness*min(size.x,size.y)*aspect;
 
     vec2 ssize=max(vec2(size.x,size.y*aspect)-roundn,0.0);
     vec2 absPos=abs(pp)-ssize;

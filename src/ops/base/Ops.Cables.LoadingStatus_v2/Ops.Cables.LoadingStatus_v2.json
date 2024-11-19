@@ -28,11 +28,6 @@
             },
             {
                 "type": 0,
-                "name": "PreRender Ops",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Play Timeline",
                 "subType": "boolean"
             }
@@ -73,5 +68,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "5FQ08W"
+    "exampleProjectId": "5FQ08W",
+    "license": "MIT"
 }

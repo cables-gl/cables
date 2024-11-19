@@ -8,6 +8,11 @@
             },
             {
                 "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             },
@@ -19,6 +24,10 @@
             {
                 "type": 0,
                 "name": "Position index",
+                "values": [
+                    "top",
+                    "bottom"
+                ],
                 "subType": "integer"
             },
             {
@@ -63,8 +72,16 @@
     "id": "9cd2d9de-000f-4a14-bd13-e7d5f057583c",
     "created": 1506600656132,
     "exampleProjectId": "zFR8z5",
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added active toggle to completly disable calculation of performance data",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1731928552752
+        }
+    ]
 }

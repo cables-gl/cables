@@ -1,0 +1,36 @@
+{
+    "ports": [
+        {
+            "id": "c7eli7o9i",
+            "title": "render",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "s0ibc22vb",
+            "title": "Position Texture",
+            "dir": 0,
+            "type": 2,
+            "objType": "texture",
+            "uiDisplay": "texture",
+            "order": 1
+        },
+        {
+            "id": "iuqdv5507",
+            "title": "texture",
+            "dir": 1,
+            "type": 2,
+            "objType": "texture",
+            "uiDisplay": "texture",
+            "order": 1002
+        },
+        {
+            "id": "ecq8sxutk",
+            "title": "render",
+            "dir": 1,
+            "type": 1,
+            "order": 1003
+        }
+    ]
+}

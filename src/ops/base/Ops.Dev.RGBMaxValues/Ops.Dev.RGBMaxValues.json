@@ -1,0 +1,51 @@
+{
+    "id": "67fe651a-ec8c-4415-8d8f-21cb38b2b710",
+    "created": 1731672252166,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1731672252211
+        },
+        {
+            "message": "Ops.Patch.P0Omdcu.SubPatch0 renamed to Ops.Dev.RGBMaxValues",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1731672301921
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "c7eli7o9i",
+                "uititle": "render"
+            },
+            {
+                "type": 2,
+                "name": "s0ibc22vb",
+                "uititle": "Position Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "iuqdv5507",
+                "uititle": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 1,
+                "name": "ecq8sxutk",
+                "uititle": "render"
+            }
+        ]
+    }
+}

@@ -131,8 +131,13 @@ function parseUniforms(src)
                 words = words.filter(function (el) { return el !== ""; });
                 const type = words[1];
 
-                let names = [varnames];
-                if (varnames.indexOf(",") > -1) names = varnames.split(",");
+
+                let names = [];
+                if (varnames)
+                {
+                    names = [varnames];
+                    if (varnames.indexOf(",") > -1) names = varnames.split(",");
+                }
 
                 for (let l = 0; l < names.length; l++)
                 {

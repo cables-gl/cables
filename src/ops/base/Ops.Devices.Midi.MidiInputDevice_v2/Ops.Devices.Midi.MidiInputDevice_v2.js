@@ -350,7 +350,7 @@ function setDevice()
 function onMIDIFailure(e)
 {
     op.setUiError("no midi", "No MIDI support in your browser.");
-    if (e)op.logError("No midi found", e);
+    if (e) op.logWarn("No midi found", e);
 }
 
 function onMIDISuccess(midiAccess)
