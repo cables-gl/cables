@@ -28,12 +28,7 @@ inExe.onTriggered = update;
 inStride.onChange =
 inSizeType.onChange =
     inArr.onChange =
-    () =>
-    {
-        needsUpdate = true;
-    };
-
-tfilter.onChange =
+    tfilter.onChange =
     inPixel.onChange =
     wrap.onChange =
     inWidth.onChange =

@@ -1,0 +1,49 @@
+{
+    "id": "ee97fe25-7600-42b9-9649-bc5c6bb94e43",
+    "created": 1728553623769,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "",
+            "type": "new",
+            "author": "pandur",
+            "date": 1732009302664
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Colors"
+            },
+            {
+                "type": 0,
+                "name": "Sort index",
+                "values": [
+                    "No",
+                    "Luminance",
+                    "Hue",
+                    "Saturation",
+                    "Lightness"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Input Format index",
+                "values": [
+                    "RGBA",
+                    "RGB"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "New Colors"
+            }
+        ]
+    }
+}
