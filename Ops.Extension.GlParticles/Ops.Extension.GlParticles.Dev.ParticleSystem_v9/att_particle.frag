@@ -90,6 +90,9 @@ if(isnan(velocityTex.r))velocityTex=vec4(0.0);
 
 
             vec3 rnd=cgl_random3(texCoord+gl_FragCoord.x/gl_FragCoord.y+time);
+            #ifdef NORANDOMIZESPAWN
+                rnd=texCoord.xyy;
+            #endif
 
             vec4 posCol=texture(texSpawnPos,rnd.xy);
 

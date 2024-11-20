@@ -7,6 +7,8 @@ const
     inNumParticles = op.inInt("Num Particles", 10000),
     inSpeed = op.inFloat("Speed", 1),
     inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
+    inRandSpawn=op.inBool("Randomize Spawn",true),
+
 
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
     inLifeTimeMax = op.inFloat("Max Lifetime", 2),
@@ -123,6 +125,7 @@ inRespawn.onChange =
     inTexLifeTime.onLinkChanged =
     inTexMass.onLinkChanged =
     inTexSpawnDir.onLinkChanged =
+    inRandSpawn.onChange=
     inResetRandLifetime.onChange = updateDefines;
 
 inMass.onChange =
@@ -223,6 +226,8 @@ function updateUi()
 
 function updateDefines()
 {
+
+    ps.bgShader.toggleDefine("NORANDOMIZESPAWN", !inRandSpawn.get());
     ps.bgShader.toggleDefine("HAS_TEX_LIFETIME", inTexLifeTime.isLinked());
     ps.bgShader.toggleDefine("HAS_TEX_MASS", inTexMass.isLinked());
     ps.bgShader.toggleDefine("HAS_TEX_SPAWNDIR", inTexSpawnDir.isLinked());

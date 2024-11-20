@@ -78,6 +78,11 @@
             },
             {
                 "type": 0,
+                "name": "Randomize Spawn",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Min Lifetime",
                 "group": "Particle Properties",
                 "subType": "number"
