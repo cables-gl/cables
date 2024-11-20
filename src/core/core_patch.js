@@ -436,7 +436,6 @@ Patch.prototype.createOp = function (identifier, id, opName = null)
     {
         this._crashedOps.push(objName);
 
-        this._log.error(e);
         this._log.error("[instancing error] " + objName, e);
 
         if (!this.isEditorMode())
