@@ -4,10 +4,10 @@
       "opId": "41eec5c7-c480-477a-be81-04c3efac8357",
       "id": "1f7brohjt",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
-          "x": 284.9280903990682,
-          "y": -124.4053189635947
+          "x": 144.84386311548062,
+          "y": -164.01534185067808
         },
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -91,18 +91,6 @@
           "name": "texture",
           "links": [
             {
-              "portIn": "Texture In",
-              "portOut": "texture",
-              "objIn": "ekzuvzla8",
-              "objOut": "1f7brohjt"
-            },
-            {
-              "portIn": "Texture",
-              "portOut": "texture",
-              "objIn": "f3utd6ygb",
-              "objOut": "1f7brohjt"
-            },
-            {
               "portIn": "innerIn_iuqdv5507",
               "portOut": "texture",
               "objIn": "5mvorebxq",
@@ -113,68 +101,10 @@
       ]
     },
     {
-      "opId": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
-      "id": "ekzuvzla8",
-      "uiAttribs": {
-        "height": 150,
-        "resizable": true,
-        "subPatch": "acpi5o15k",
-        "translate": {
-          "x": 803.8087349906335,
-          "y": -132.41170217274285
-        },
-        "extendTitle": "texture",
-        "comment": "",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Show Info",
-          "value": 0
-        },
-        {
-          "name": "Visualize outside 0-1 index",
-          "value": 1
-        },
-        {
-          "name": "Visualize outside 0-1",
-          "value": "Anim"
-        },
-        {
-          "name": "Alpha index",
-          "value": 0
-        },
-        {
-          "name": "Alpha",
-          "value": "A"
-        },
-        {
-          "name": "Show Color",
-          "value": 0
-        },
-        {
-          "name": "X",
-          "value": 0.5
-        },
-        {
-          "name": "Y",
-          "value": 0.5
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Info",
-          "value": ""
-        }
-      ]
-    },
-    {
       "opId": "3996ed5d-8143-4bec-9cfd-c1b193a295af",
       "id": "zk3r74b5p",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
           "x": 317.29633684343327,
           "y": 45.25260400019606
@@ -219,7 +149,7 @@
       "opId": "77300f2f-15ea-4110-a4a7-27eff42c7750",
       "id": "5ny941swk",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
           "x": 317.29633684343327,
           "y": -12.205179070489663
@@ -289,7 +219,7 @@
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "9w44u6hn5",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
           "x": 317.29633684343327,
           "y": 198.3802399251022
@@ -387,7 +317,7 @@
       "opId": "ec55d252-3843-41b1-b731-0482dbd9e72b",
       "id": "0v5ampkb8",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
           "x": 317.29633684343327,
           "y": 107.83693072980086
@@ -480,7 +410,7 @@
       "opId": "bf24bfd5-61be-4590-a34a-d3fcdcf543be",
       "id": "109rjyzdr",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
           "x": 317.29633684343327,
           "y": 378.2750199213325
@@ -546,32 +476,7 @@
       "portsOut": [
         {
           "name": "Num",
-          "value": 50176
-        }
-      ]
-    },
-    {
-      "opId": "0e5cde34-35cd-440d-b8cd-f78e1b5b7722",
-      "id": "f3utd6ygb",
-      "uiAttribs": {
-        "height": 200,
-        "width": 380,
-        "resizable": true,
-        "vizLayerMaxZoom": 2500,
-        "subPatch": "acpi5o15k",
-        "translate": {
-          "x": 816,
-          "y": 80
-        },
-        "extendTitle": "texture: 1x1 RGBA 32bit float linear repeat",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Row Start",
-          "value": 0
+          "value": 30276
         }
       ]
     },
@@ -579,10 +484,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "y1eh5fsel",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
-          "x": 284.9280903990682,
-          "y": -212.41170217274285
+          "x": 408.58864965630414,
+          "y": -309.02151409245846
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -631,7 +536,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "5mvorebxq",
       "uiAttribs": {
-        "subPatch": "acpi5o15k",
+        "subPatch": "xlr3ldt2m",
         "translate": {
           "x": 117.6921504365153,
           "y": 479.15994290746835
