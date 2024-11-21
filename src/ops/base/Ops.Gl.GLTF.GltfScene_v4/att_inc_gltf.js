@@ -212,7 +212,7 @@ function loadAnims(gltf)
             {
                 op.warn("loadAmins bufferIn undefined ", bufferIn === undefined);
                 op.warn("loadAmins bufferOut undefined ", bufferOut === undefined);
-                op.warn("loadAmins ", sampler, accOut);
+                op.warn("loadAmins ", an.name, sampler, accOut);
                 op.warn("loadAmins num accBuffers", gltf.accBuffers.length);
                 op.warn("loadAmins num accessors", gltf.json.accessors.length);
             }
