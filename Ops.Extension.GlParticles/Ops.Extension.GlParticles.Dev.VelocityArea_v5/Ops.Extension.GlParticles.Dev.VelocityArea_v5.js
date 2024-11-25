@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision", "Rotate"], "Point"),
+    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision", "Rotate","Vortex"], "Point"),
     inInvArea = op.inBool("Invert Area", false),
     inStrength = op.inFloat("Strength", 1),
     inSize = op.inFloat("Size", 1),
@@ -115,6 +115,7 @@ function updateDefines()
         velAreaSys.bgShader.toggleDefine("METHOD_DIR", inMethod.get() == "Direction");
         velAreaSys.bgShader.toggleDefine("METHOD_COLLISION", inMethod.get() == "Collision");
         velAreaSys.bgShader.toggleDefine("METHOD_ROTATE", inMethod.get() == "Rotate");
+        velAreaSys.bgShader.toggleDefine("METHOD_VORTEX", inMethod.get() == "Vortex");
 
         velAreaSys.bgShader.toggleDefine("HAS_TEX_MUL", inTexMultiply.isLinked());
         velAreaSys.bgShader.toggleDefine("INVERT_SHAPE", inInvArea.get());

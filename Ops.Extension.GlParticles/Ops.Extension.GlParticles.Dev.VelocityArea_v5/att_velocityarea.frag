@@ -136,6 +136,19 @@ void main()
 
 
 
+    #ifdef METHOD_VORTEX
+        // if(length(direction)>0.0)
+        //     col.xyz+=normalize(direction)*finalStrength3;
+
+        vec3 np= vec3( -(pos.xyz+areaPos).y, (pos.xyz+areaPos).x ,(pos.xyz+areaPos).z) / dot(pos.xyz,pos.xyz);      // field around a vortex
+
+        col.xyz+=(pos.xyz-np)*strength;
+
+    #endif
+
+
+
+
     #ifdef METHOD_POINT
         col.xyz+=normalize(pos.xyz-areaPos)*finalStrength3;
     #endif
