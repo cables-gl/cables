@@ -91,13 +91,13 @@ function run()
     {
         const colorSpace = [
             Math.min(inHueMin.get() * 360, inHueMax.get() * 360),
-            Math.max(inHueMin.get() * 360, inHueMax.get() * 360),
+            Math.max(inHueMin.get() * 360, inHueMax.get() * 360) + 0.001,
 
             Math.min(inChromaMin.get() * 100, inChromaMax.get() * 100),
-            Math.max(inChromaMin.get() * 100, inChromaMax.get() * 100),
+            Math.max(inChromaMin.get() * 100, inChromaMax.get() * 100) + 0.001,
 
             Math.min(inLightMin.get() * 100, inLightMax.get() * 100),
-            Math.max(inLightMin.get() * 100, inLightMax.get() * 100),
+            Math.max(inLightMin.get() * 100, inLightMax.get() * 100) + 0.001,
         ];
         settings.colorSpace = colorSpace;
     }
@@ -119,8 +119,6 @@ function run()
             }
             res = arr;
         }
-
-        // console.log(res);
 
         outHexColors.setRef(res);
         outNbCol.set(res.length);
