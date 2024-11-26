@@ -22,6 +22,7 @@ const VarSetOpWrapper = class
 
         this._op.setPortGroup("Variable", [this._helper, this._varNamePort, this._btnCreate]);
 
+        varNamePort.setUiAttribs({ "_variableSelect": true });
         this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
 
         // this._op.patch.addEventListener("variableDeleted", this._updateVarNamesDropdown.bind(this));
@@ -197,6 +198,9 @@ const VarGetOpWrapper = class
         {
             if (this._op.isCurrentUiOp()) this._op.refreshParams();
         });
+
+        varnamePort.setUiAttribs({ "_variableSelect": true });
+        varnamePort.setUiAttribs({ "_variableSelectGet": true });
 
         this._varnamePort.onChange = this._changeVar.bind(this);
         this._op.patch.addEventListener("variablesChanged", this._init.bind(this));
