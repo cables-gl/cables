@@ -195,6 +195,10 @@ class CgUniform
         this.needsUpdate = true;
     }
 
+    get shader()
+    {
+        return this._shader;
+    }
 
     getType()
     {
