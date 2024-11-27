@@ -1,7 +1,6 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D texPos;
-UNI sampler2D texAbsVel;
 UNI sampler2D texCollision;
 UNI sampler2D texLifeProgress;
 
@@ -78,29 +77,14 @@ void main()
 
 
     float lifeProgress=texture(texLifeProgress,texCoord).r;
-
-    // collisionCol.r*=(1.0-(timeDiff*collisionFade));
-    // collisionCol.a=1.0;
-    // collisionCol.g=collisionCol.b=0.0;
-
-    // if(age<0.1)collisionCol.r=0.0;
-    // collisionCol.r*=1.0-step(0.3,age);
-
     vec3 p=pos.xyz-areaPos;
     float MOD_de=0.0;
 
-    MOD_de=MOD_sdSphere(p,1.0); //size+falloff
+    MOD_de=MOD_sdSphere(p,size); //size+falloff
 
-    if(MOD_de>0.001)col.rgb=vec3(MOD_de,MOD_de,MOD_de)*-20.0;
-col.a=1.0;
+    if(MOD_de>size)col.rgb+=normalize(col.rgb-pos.xyz)*MOD_de*strength;
 
-
-
-
-if(isnan(col.r)||isnan(col.g))col=vec4(0.0,1.0,1.0,1.0);
-
-col=vec4(0.0,1.0,1.0,1.0);
-
+    if(isnan(col.r)||isnan(col.g))col=vec4(0.0,1.0,1.0,1.0);
 
     outColor0=col;
     outColor1=collisionCol;

@@ -53,6 +53,16 @@
             },
             {
                 "type": 0,
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Area",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Strength",
                 "subType": "number"
             },
@@ -136,6 +146,29 @@
             {
                 "type": 0,
                 "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Age Start",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Age End",
+                "group": "Age Activation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Age Fade",
+                "group": "Age Activation",
                 "subType": "number"
             }
         ],
