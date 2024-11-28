@@ -1446,12 +1446,12 @@ class Shader extends CgShader
     {
         if (!uniform)
         {
-            console.log("no uniform given to texturestack", uniform);
+            console.log("pushtexture: no uniform given to texturestack", "shader:"+this._name,uniform,t,type);
             return;
         }
         if (!t)
         {
-            console.log("no tex...");
+            if(uniform)this._log.warn("pushtexture: no tex","shader:"+this._name," uniform:"+uniform.name);
             return;
         }
         if (!t.hasOwnProperty("tex") && !(t instanceof WebGLTexture))

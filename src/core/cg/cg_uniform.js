@@ -195,7 +195,6 @@ class CgUniform
         this.needsUpdate = true;
     }
 
-
     getType()
     {
         return this._type;

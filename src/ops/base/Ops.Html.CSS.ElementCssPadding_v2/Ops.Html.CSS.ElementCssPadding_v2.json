@@ -1,0 +1,65 @@
+{
+    "id": "82665a37-2666-4b26-9172-7abb055f8ea0",
+    "created": 1732634532609,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723570293627
+        },
+        {
+            "message": "Added padding parameter, that gets added on top of side-paddings",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1732634598953
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Padding",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Padding Right",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set css padding of a html element",
+    "docs": {
+        "ports": []
+    }
+}
