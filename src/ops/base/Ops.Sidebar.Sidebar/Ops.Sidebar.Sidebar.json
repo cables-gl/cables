@@ -119,12 +119,20 @@
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888157315
+            "date": 1643888157315,
+            "type": "bugfix"
         },
         {
             "message": "fixed typos in parameter names",
             "author": "stephan",
-            "date": 1647621496703
+            "date": 1647621496703,
+            "type": "improvement"
+        },
+        {
+            "message": "css changes for focussed elements show outline",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1732784409592
         }
     ],
     "exampleProjectId": "aDgYX5",

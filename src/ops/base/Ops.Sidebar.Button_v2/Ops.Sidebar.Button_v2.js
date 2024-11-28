@@ -15,7 +15,7 @@ el.dataset.op = op.id;
 el.classList.add("cablesEle");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar--button");
-const input = document.createElement("div");
+const input = document.createElement("button");
 input.classList.add("sidebar__button-input");
 el.appendChild(input);
 input.addEventListener("click", onButtonClick);

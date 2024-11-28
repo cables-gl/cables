@@ -2,19 +2,27 @@ const anim = new CABLES.Anim();
 
 const
     update = op.inTrigger("Update"),
-    duration1 = op.inValue("Duration Out", 0.25),
-    easing1 = anim.createPort(op, "Easing Out"),
-    value1 = op.inValue("Value Out", 0),
-    holdDuration = op.inValue("Hold duration", 0.0),
+
     duration2 = op.inValue("Duration In", 0.25),
     easing2 = anim.createPort(op, "Easing In"),
     value2 = op.inValue("Value In", 1),
+
+    holdDuration = op.inValue("Hold duration", 0.0),
+
+    duration1 = op.inValue("Duration Out", 0.25),
+    easing1 = anim.createPort(op, "Easing Out"),
+    value1 = op.inValue("Value Out", 0),
+
     trigger = op.inTriggerButton("Start"),
+
     next = op.outTrigger("Next"),
     outVal = op.outNumber("Result", 0),
     started = op.outTrigger("Started"),
     middle = op.outTrigger("Middle"),
     finished = op.outTrigger("finished");
+
+op.setPortGroup("Out Anim", [duration1, easing1, value1]);
+op.setPortGroup("In Anim", [duration2, easing2, value2]);
 
 let time = 0;
 trigger.onTriggered = setupAnim;

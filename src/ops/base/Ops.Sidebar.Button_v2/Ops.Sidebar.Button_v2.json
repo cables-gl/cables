@@ -36,7 +36,6 @@
     },
     "summary": "sidebar push button/trigger element",
     "issues": "",
-
     "youtubeids": [
         "cpRVswVdvI0"
     ],
@@ -50,5 +49,6 @@
             "date": 1643888016994
         }
     ],
-    "exampleProjectId": "aDgYX5"
+    "exampleProjectId": "aDgYX5",
+    "license": "MIT"
 }

@@ -8,48 +8,55 @@ const
     outEle = op.outObject("Element passthrough"),
     outEleAligned = op.outObject("Aligned Element");
 
+inEle.onLinkChanged =
+    inEleAlign.onLinkChanged =
+    op.onDelete = remove;
+
 inOrientHor.onChange =
-inOrientVert.onChange =
-inEleAlign.onChange =
-inAlignVert.onChange =
+    inOrientVert.onChange =
+    inEleAlign.onChange =
+    inAlignVert.onChange =
     inAlignHor.onChange = () =>
     {
         oldTop = null;
         update();
     };
 
-inEle.onChange = update;
-
-update();
+let eleAlign = null;
 
 let oldTop;
 let oldLeft;
 let oldWidth;
 let oldHeight;
 
+inEle.onChange = update;
+
+update();
+
+function remove()
+{
+    if (eleAlign)
+    {
+        eleAlign.style.removeProperty("top");
+        eleAlign.style.removeProperty("left");
+    }
+}
+
 function update()
 {
     let ele = inEle.get();
-    let eleAlign = inEleAlign.get();
 
-    // setTimeout(update, 50);
+    if (inEleAlign.get() != eleAlign)remove();
+    eleAlign = inEleAlign.get();
 
-    if (!ele || !eleAlign)
-    {
-        return;
-    }
+    if (!ele || !eleAlign) return;
 
     const r = ele.getBoundingClientRect();
     const rCanv = op.patch.cgl.canvas.getBoundingClientRect();
 
     let childRect = null;
 
-    if (
-    // inOrientVert.get()!="Left"
-        inOrientVert.get() ||
-    inOrientHor.get()
-
-    )childRect = eleAlign.getBoundingClientRect();
+    if (inOrientVert.get() || inOrientHor.get()) childRect = eleAlign.getBoundingClientRect();
 
     if (r.top != oldTop ||
         r.left != oldLeft ||

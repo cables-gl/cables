@@ -7,17 +7,20 @@
             },
             {
                 "type": 0,
-                "name": "Duration Out",
+                "name": "Duration In",
+                "group": "In Anim",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Easing Out index",
+                "name": "Easing In index",
+                "group": "In Anim",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Value Out",
+                "name": "Value In",
+                "group": "In Anim",
                 "subType": "number"
             },
             {
@@ -27,17 +30,20 @@
             },
             {
                 "type": 0,
-                "name": "Duration In",
+                "name": "Duration Out",
+                "group": "Out Anim",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Easing In index",
+                "name": "Easing Out index",
+                "group": "Out Anim",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Value In",
+                "name": "Value Out",
+                "group": "Out Anim",
                 "subType": "number"
             },
             {
@@ -86,5 +92,6 @@
             "author": "pandur",
             "date": 1716823191623
         }
-    ]
+    ],
+    "license": "MIT"
 }
