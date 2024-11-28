@@ -1,0 +1,54 @@
+{
+    "id": "dd49d53a-ed1f-471d-be0d-be318e4ae512",
+    "created": 1732711413745,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1732711413777
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Open"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Hex"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "caniusequery": "api_eyedropper",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "kYsAkv",
+    "summary": "Native color picker"
+}

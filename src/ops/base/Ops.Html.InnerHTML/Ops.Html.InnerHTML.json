@@ -1,0 +1,53 @@
+{
+    "id": "f90c2267-50b7-4127-85f5-e48139c2c80b",
+    "created": 1732780988420,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1732780988444
+        },
+        {
+            "message": "Ops.Patch.PCenipv.InnerHTML renamed to Ops.Html.InnerHTML",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1732781580601
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "Value"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "HTML",
+                    "Text"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    }
+}
