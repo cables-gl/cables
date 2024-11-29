@@ -3,7 +3,7 @@ const
     amount = op.inFloatSlider("Amount", 1),
 
     mul = op.inFloat("Multiplier", 1),
-    inChan = op.inSwitch("name", ["R", "G", "B", "A"], "R"),
+    inChan = op.inSwitch("name", ["R", "G", "B", "A", "RGB"], "RGB"),
 
     trigger = op.outTrigger("trigger");
 
@@ -21,9 +21,9 @@ updateDefines();
 
 function updateDefines()
 {
-    shader.toggleDefine("CHAN_R", inChan.get() == "R");
-    shader.toggleDefine("CHAN_G", inChan.get() == "G");
-    shader.toggleDefine("CHAN_B", inChan.get() == "B");
+    shader.toggleDefine("CHAN_R", inChan.get() == "R" || inChan.get() == "RGB");
+    shader.toggleDefine("CHAN_G", inChan.get() == "G" || inChan.get() == "RGB");
+    shader.toggleDefine("CHAN_B", inChan.get() == "B" || inChan.get() == "RGB");
     shader.toggleDefine("CHAN_A", inChan.get() == "A");
 }
 

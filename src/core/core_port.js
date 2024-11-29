@@ -584,10 +584,17 @@ Port.prototype.removeLink = function (link)
 
     if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
 
-    if (this.onLinkChanged) this.onLinkChanged();
-    this.emitEvent("onLinkChanged");
-    this.emitEvent("onLinkRemoved");
-    this._op.emitEvent("onLinkChanged");
+    try
+    {
+        if (this.onLinkChanged) this.onLinkChanged();
+        this.emitEvent("onLinkChanged");
+        this.emitEvent("onLinkRemoved");
+        this._op.emitEvent("onLinkChanged");
+    }
+    catch (e)
+    {
+        this._log.error(e);
+    }
 };
 
 /**
@@ -619,9 +626,16 @@ Port.prototype.addLink = function (l)
     this.links.push(l);
     if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
 
-    if (this.onLinkChanged) this.onLinkChanged();
-    this.emitEvent("onLinkChanged");
-    this._op.emitEvent("onLinkChanged");
+    try
+    {
+        if (this.onLinkChanged) this.onLinkChanged();
+        this.emitEvent("onLinkChanged");
+        this._op.emitEvent("onLinkChanged");
+    }
+    catch (e)
+    {
+        this._log.error(e);
+    }
 };
 
 /**

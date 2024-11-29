@@ -337,6 +337,8 @@
     float: right;
     box-sizing: border-box;
     border-radius: 50%;
+    /*outline-style: solid;*/
+    /*outline-color:red;*/
     cursor: pointer;
     --toggle-size: 11px;
     margin-top: 2px;
@@ -421,6 +423,8 @@
     border:2px solid #555;
     cursor: pointer;
     padding-bottom: 3px;
+    display:block;
+    width:100%;
 }
 
 .sidebar__button-input.plus, .sidebar__button-input.minus {
@@ -462,7 +466,7 @@
     height: var(--sidebar-slider-input-height);
     background: #555;
     cursor: pointer;
-    outline: 0;
+    /*outline: 0;*/
 
     -webkit-transition: .2s;
     transition: background-color .2s;
@@ -548,23 +552,6 @@
     z-index: 11;
 }
 
-/*.sidebar__slider-input::-moz-range-thumb:hover {*/
-  /* background-color: #EEEEEE; */
-/*}*/
-
-
-/*.sidebar__slider-input-wrapper:hover .sidebar__slider-input-active-track {*/
-/*    background-color: #EEEEEE;*/
-/*}*/
-
-/*.sidebar__slider-input-wrapper:hover .sidebar__slider-input::-moz-range-thumb {*/
-/*    background-color: #fff !important;*/
-/*}*/
-
-/*.sidebar__slider-input-wrapper:hover .sidebar__slider-input::-webkit-slider-thumb {*/
-/*    background-color: #EEEEEE;*/
-/*}*/
-
 .sidebar__slider input[type=text],
 .sidebar__slider input[type=paddword]
 {
@@ -577,7 +564,7 @@
 
     width: 40%;
     height: 18px;
-    outline: none;
+    /*outline: none;*/
     border: none;
     border-radius: 0;
     padding: 0 0 0 4px !important;
@@ -621,7 +608,8 @@
     display: inline-block;
     width: 50%;
     height: 18px;
-    outline: none;
+
+
     border: none;
     border-radius: 0;
     border:1px solid #666;
@@ -633,6 +621,10 @@
 .sidebar__text-input textarea:focus::placeholder {
   color: transparent;
 }
+
+
+
+
 
 .sidebar__color-picker .sidebar__item-label
 {
@@ -648,6 +640,7 @@
 .sidebar__text-input input[type=password]:hover {
     background-color: transparent;
     color: #EEEEEE;
+
 }
 
 .sidebar__text-input textarea
@@ -683,7 +676,7 @@
     border: 1px solid #777;
     background-color: #444;
     cursor: pointer;
-    outline: none;
+    /*outline: none;*/
     padding-left: 5px;
 
  }
@@ -720,7 +713,7 @@
     display: inline-block;
     width: calc(50% - 21px); /* 50% minus space of picker circle */
     height: 18px;
-    outline: none;
+    /*outline: none;*/
     border: none;
     border-radius: 0;
     padding: 0 0 0 4px !important;
@@ -895,5 +888,17 @@ div.sidebar__color-picker-color-input,
 .sidebar_switch:hover
 {
     color:white;
+}
+
+.sidebar__text-input-input::focus-visible,
+/*.sidebar__text-input-input:active,*/
+.sidebar__button-input:focus-visible,
+.sidebar__text-input:focus-visible
+/*.sidebar__text-input:active*/
+{
+    outline-style: solid;
+    outline-color:white;
+    outline-width: 1px;
+
 }
 

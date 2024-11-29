@@ -56,7 +56,8 @@
                     "R",
                     "G",
                     "B",
-                    "A"
+                    "A",
+                    "RGB"
                 ],
                 "subType": "integer"
             }

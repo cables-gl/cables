@@ -9,7 +9,7 @@ const
     roty = op.inFloat("Rot Y", 0),
     rotz = op.inFloat("Rot Z", 0),
 
-    persp = op.inFloat("Perspective", 0),
+    persp = op.inFloat("Perspective", 640),
     backface = op.inBool("Backface-Visibility", true),
 
     outEle = op.outObject("HTML Element", null, "element");
@@ -29,8 +29,9 @@ function remove()
 {
     if (ele)
     {
-        ele.style.removeProperty("border");
-        ele.style.removeProperty("border-radius");
+        ele.style.removeProperty("perspective");
+        ele.style.removeProperty("transform");
+        ele.style.removeProperty("backface-visibility");
     }
 }
 

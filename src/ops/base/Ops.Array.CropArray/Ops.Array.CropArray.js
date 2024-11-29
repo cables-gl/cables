@@ -29,8 +29,7 @@ function setOutPort()
     if (start + newLength <= srcArray.length)
     {
         let croppedArr = srcArray.slice(start, start + newLength);
-        croppedArrayOutPort.set(null);
-        croppedArrayOutPort.set(croppedArr);
+        croppedArrayOutPort.setRef(croppedArr);
         outArrayLength.set(croppedArr.length);
     }
 }

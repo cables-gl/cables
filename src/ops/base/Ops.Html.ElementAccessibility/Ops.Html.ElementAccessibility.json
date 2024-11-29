@@ -1,0 +1,48 @@
+{
+    "id": "9cf8120c-807a-4adc-9007-6830187553d5",
+    "created": 1732781761113,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1732781761139
+        },
+        {
+            "message": "Ops.Patch.PCenipv.ElementAccessibility renamed to Ops.Html.ElementAccessibility",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1732782367810
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "alt"
+            },
+            {
+                "type": 0,
+                "name": "aria hidden",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    },
+    "summary": "Element Accessibility properties for screen reader",
+    "docs": {
+        "ports": []
+    }
+}

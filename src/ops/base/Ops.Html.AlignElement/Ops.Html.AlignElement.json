@@ -74,8 +74,6 @@
             }
         ]
     },
-    "summary": "get html element absolute position and size in pixels on screen",
-    "issues": "",
     "docs": {
         "ports": []
     },

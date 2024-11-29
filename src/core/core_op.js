@@ -168,7 +168,7 @@ const Op = function ()
 
     Op.prototype.isSubPatchOp = function ()
     {
-        if (this.storage) return (this.storage.subPatchVer || this.storage.blueprintVer || 0);
+        if (this.patchId && this.storage) return (this.storage.subPatchVer || this.storage.blueprintVer || 0);
         return false;
     };
 

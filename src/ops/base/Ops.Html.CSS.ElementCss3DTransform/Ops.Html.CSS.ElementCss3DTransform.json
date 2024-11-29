@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1730273906625
+        },
+        {
+            "message": "remove style when deleting op",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1732614120745
         }
     ],
     "layout": {
