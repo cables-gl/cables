@@ -103,14 +103,15 @@
             "date": 1629365161529
         },
         {
-            "message": "Ops.User.pandur.ColorPicker2 renamed to Ops.Sidebar.ColorPicker_v3",
-            "author": "pandur",
-            "date": 1629366157692
-        },
-        {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888065820
+        },
+        {
+            "message": "Added newest version of colorRick: added eyeDropper API, native colorpicking on the desktop",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1732872352234
         }
     ],
     "libs": [
