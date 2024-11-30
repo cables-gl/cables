@@ -43,6 +43,25 @@
     pointer-events: none;
 }
 
+.colorRick_eyeDrop
+{
+    cursor:pointer;
+    top:calc(var(--pad) + var(--pad) + var(--height));
+    margin-top:3px;
+    height:var(--width-hue);
+    width:var(--width-hue);
+    background-color:#aaa;
+    mask: url("data:image/svg+xml;charset=utf8, %3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:none;stroke:%23000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px}%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='m9.22 13.59 5.32-5.31-2.95-2.95-7.3 7.3a.71.71 0 0 0 0 1l1.94 1.94a.73.73 0 0 0 1 0ZM12.42 4.5l2.85-2.85a2.09 2.09 0 0 1 2.95 0h0a2.09 2.09 0 0 1 0 2.95l-2.85 2.84M10.38 4.12l5.36 5.36M5.01 14.86l-2.1 2.09M12.04 10.8H6.15M1.92 18.97h0'/%3E%3Cpath style='fill:none' d='M0 0h20v20H0z'/%3E%3C/svg%3E");
+    position: absolute;
+    left:calc(var(--width) + var(--pad) + var(--pad));
+}
+
+.colorRick_eyeDrop:hover
+{
+    background-color:#fff;
+}
+
+
 .colorRick_hue
 {
     cursor:pointer;
