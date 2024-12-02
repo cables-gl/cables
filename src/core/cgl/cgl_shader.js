@@ -1451,7 +1451,7 @@ class Shader extends CgShader
         }
         if (!t)
         {
-            if(uniform)this._log.warn("pushtexture: no tex","shader:"+this._name," uniform:"+uniform.name);
+            // if(uniform)this._log.warn("pushtexture: no tex","shader:"+this._name," uniform:"+uniform.name);
             return;
         }
         if (!t.hasOwnProperty("tex") && !(t instanceof WebGLTexture))
