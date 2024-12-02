@@ -23,7 +23,7 @@ op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
 function onFilenameChanged()
 {
-    let fileUrl = filename.get();
+    let fileUrl = op.patch.getFilePath(String(filename.get()));
     if (!fileUrl)
     {
         label.innerHTML = "";
