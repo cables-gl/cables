@@ -66,10 +66,10 @@
     "summary": "Load OTF & TTF fonts via OpenType library",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
