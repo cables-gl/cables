@@ -3,7 +3,6 @@ let skyboxCubemap = null;
 const gl = op.patch.cgl.gl;
 const cgl = op.patch.cgl;
 
-
 const inFilenames = [];
 
 const titles = [
@@ -54,7 +53,7 @@ function loadImages()
     const images = Promise.all(
         inFilenames.map((inFile) => { return inFile.get(); }) // get file address
             .filter(Boolean) // remove all 0's (empty file adresses) so we only resolve
-            .map((filename) => { return loadImage(filename); })) // map to resolver function
+            .map((filename) => { return loadImage(op.patch.getFilePath(String(filename))); })) // map to resolver function
         .then((images) =>
         { // wait for all images to be loaded and only then continue
             if (images.length === 6)
