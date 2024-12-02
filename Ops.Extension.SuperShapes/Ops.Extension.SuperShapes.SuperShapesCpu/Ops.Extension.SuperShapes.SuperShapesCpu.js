@@ -4,6 +4,7 @@ const
     exe = op.inTrigger("Update"),
     inShape = op.inDropDown("Shape", shapeNames),
     inTess = op.inInt("Tesselation", 5),
+    next=op.outTrigger("Next"),
     outArr = op.outArray("Coords", null, 3),
     outFaces = op.outArray("Faces", null, 3),
     outCoords = op.outArray("TexCoords", null, 2);
@@ -82,4 +83,6 @@ function update()
     outArr.setRef(flattenArray(mesh.vertices));
     outFaces.setRef(flattenArray(mesh.triangles));
     outCoords.setRef(flattenArray(mesh.coords));
+
+    next.trigger();
 }
