@@ -25,10 +25,6 @@
                 "group": "Element"
             },
             {
-                "type": 5,
-                "name": "alt"
-            },
-            {
                 "type": 0,
                 "name": "aria hidden",
                 "subType": "boolean"

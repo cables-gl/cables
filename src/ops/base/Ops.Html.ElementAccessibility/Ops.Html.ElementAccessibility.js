@@ -1,14 +1,12 @@
 const
     inEle = op.inObject("Element"),
-    inValue = op.inString("alt"),
     inAriaHidden = op.inBool("aria hidden", false),
 
     outEle = op.outObject("HTML Element");
 
 op.setPortGroup("Element", [inEle]);
 
-inAriaHidden.onChange =
-inValue.onChange = update;
+inAriaHidden.onChange = update;
 let ele = null;
 
 inEle.onChange =
@@ -18,7 +16,6 @@ inEle.onChange =
 function removeProp()
 {
     if (ele) ele.removeAttribute("aria-hidden");
-    if (ele) ele.removeAttribute("alt");
 }
 
 function update()
