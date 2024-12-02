@@ -4,6 +4,7 @@ const
     inClass = op.inString("Class"),
     inStyle = op.inStringEditor("Style", "", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
+    inAlt = op.inString("Alt Text"),
     outImage = op.outObject("Image Element", null, "element"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height");
@@ -13,11 +14,12 @@ let element = op.patch.getDocument().createElement("img");
 op.onDelete = removeEle;
 
 inClass.onChange = updateClass;
-inStyle.onChange = updateStyle;
 
 filename.onChange = filenameChanged;
+inStyle.onChange =
+    inAlt.onChange =
+    inPos.onChange = updateStyle;
 
-inPos.onChange = updateStyle;
 updateStyle();
 
 element.onload = () =>
@@ -116,6 +118,7 @@ function updateStyle()
     outImage.setRef(element);
     element.classList.add("cablesEle");
     element.dataset.op = op.id;
+    element.setAttribute("alt", inAlt.get());
     outImage.setRef(element);
 }
 
