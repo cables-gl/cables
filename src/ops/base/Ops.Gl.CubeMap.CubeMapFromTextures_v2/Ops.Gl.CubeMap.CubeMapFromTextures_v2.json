@@ -10,6 +10,12 @@
             "message": "Ops.User.cables.CubeMapFromTextures_v2 renamed to Ops.Gl.CubeMap.CubeMapFromTextures_v2",
             "author": "simod",
             "date": 1586341858874
+        },
+        {
+            "message": "handle prefixassetpath correctly for url input",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1733143192209
         }
     ],
     "authorName": "simod",

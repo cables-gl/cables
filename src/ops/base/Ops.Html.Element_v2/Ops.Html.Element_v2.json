@@ -95,6 +95,10 @@
                 "subType": "integer"
             },
             {
+                "type": 5,
+                "name": "Tag Name"
+            },
+            {
                 "type": 0,
                 "name": "Opacity",
                 "subType": "number"

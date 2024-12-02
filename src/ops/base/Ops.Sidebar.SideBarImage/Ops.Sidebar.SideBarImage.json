@@ -17,6 +17,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1707129926541
+        },
+        {
+            "message": "handle prefixassetpath correctly for url input",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1733143177809
         }
     ],
     "authorName": "pandur",

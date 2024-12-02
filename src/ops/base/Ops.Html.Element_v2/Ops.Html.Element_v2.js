@@ -1,7 +1,6 @@
 const
     inText = op.inString("Text", ""),
     inPos = op.inSwitch("Position", ["Absolute", "Static", "Relative", "Fixed"], "Absolute"),
-    // inInteractive = op.inValueBool("Interactive", false),
     inInteractive = op.inSwitch("Interactive", ["True", "False", "No Pointer Events"], "True"),
 
     inSetSize = op.inValueBool("Set Size", true),
@@ -14,6 +13,7 @@ const
     inBlacklist = op.inString("Disable CSS Props"),
 
     inDisplay = op.inDropDown("Display", ["None", "Block", "Inline", "inline-block", "flex", "inline-flex", "grid", "inline-grid", "flow-root"], "Block"),
+    inTag = op.inString("Tag Name", "div"),
     inOpacity = op.inFloatSlider("Opacity", 1),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
 
@@ -35,6 +35,12 @@ createElement();
 
 inClass.onChange = updateClass;
 inText.onChange = updateText;
+
+inTag.onChange = () =>
+{
+    removeElement();
+    createElement();
+};
 
 inDisplay.onChange =
     inOpacity.onChange =
@@ -68,7 +74,7 @@ outClicked.onLinkChanged = () =>
 
 function createElement()
 {
-    div = op.patch.getDocument().createElement("div");
+    div = op.patch.getDocument().createElement(inTag.get() || "div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 
