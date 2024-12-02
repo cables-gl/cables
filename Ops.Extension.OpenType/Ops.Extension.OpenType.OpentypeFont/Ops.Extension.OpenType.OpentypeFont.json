@@ -41,6 +41,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1686915904547
+        },
+        {
+            "message": "handle prefixassetpath correctly for url input",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1733143157266
         }
     ],
     "libs": [
