@@ -26,6 +26,7 @@ inActive.onChange = () =>
 function removeProp()
 {
     if (ele)ele.removeAttribute(inAttrName.get());
+    ele = null;
     update();
 }
 
@@ -40,7 +41,8 @@ function update()
     if (!inActive.get()) return;
     if (inAttrName.get() == "") return;
 
-    ele = inEle.get();
+    if (inEle.get())
+        ele = inEle.get();
 
     if (ele && ele.setAttribute)
     {

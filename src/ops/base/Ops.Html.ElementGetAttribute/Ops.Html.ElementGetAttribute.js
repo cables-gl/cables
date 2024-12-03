@@ -9,6 +9,8 @@ inEle.onChange = () =>
 {
     if (inAttrName.get() == "") return result.set("");
 
+    op.setUiAttrib({ "extendTitle": inAttrName.get() + "" });
+
     if (inEle.get())
     {
         const hasAttr = inEle.get().hasAttribute(inAttrName.get());
