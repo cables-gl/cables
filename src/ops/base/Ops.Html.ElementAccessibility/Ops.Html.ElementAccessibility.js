@@ -1,13 +1,12 @@
 const
     inEle = op.inObject("Element"),
-    inValue = op.inString("alt"),
     inAriaHidden = op.inBool("aria hidden", false),
+
     outEle = op.outObject("HTML Element");
 
 op.setPortGroup("Element", [inEle]);
 
-inAriaHidden.onChange =
-inValue.onChange = update;
+inAriaHidden.onChange = update;
 let ele = null;
 
 inEle.onChange =
@@ -17,7 +16,6 @@ inEle.onChange =
 function removeProp()
 {
     if (ele) ele.removeAttribute("aria-hidden");
-    if (ele) ele.removeAttribute("alt");
 }
 
 function update()
@@ -28,13 +26,16 @@ function update()
         if (inAriaHidden.get())
         {
             ele.setAttribute("aria-hidden", true);
+
             op.setUiAttrib({ "extendTitle": "hidden" });
         }
         else
         {
             ele.removeAttribute("aria-hidden");
+
             op.setUiAttrib({ "extendTitle": "" });
         }
+        ele.setAttribute("tabindex", 0);
 
         if (inValue.get())ele.setAttribute("alt", inValue.get());
         else ele.removeAttribute("alt");

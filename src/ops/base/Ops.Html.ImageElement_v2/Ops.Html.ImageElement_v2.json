@@ -44,6 +44,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1729253223465
+        },
+        {
+            "message": "Alt attritbute",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733147052316
         }
     ],
     "layout": {
@@ -79,6 +85,10 @@
                     "none"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Alt Text"
             }
         ],
         "portsOut": [
