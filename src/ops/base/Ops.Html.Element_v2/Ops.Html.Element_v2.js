@@ -40,6 +40,8 @@ inTag.onChange = () =>
 {
     removeElement();
     createElement();
+    updateClass();
+    updateText();
 };
 
 inDisplay.onChange =
@@ -74,12 +76,14 @@ outClicked.onLinkChanged = () =>
 
 function createElement()
 {
+    console.log("inTag.get()", inTag.get());
     div = op.patch.getDocument().createElement(inTag.get() || "div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 
     canvas.appendChild(div);
     outElement.setRef(div);
+    updateStyle();
 }
 
 function removeElement()

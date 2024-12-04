@@ -80,11 +80,11 @@
             },
             {
                 "name": "value false",
-                "text": "The value to animate to when `Bool input' evaluates to `false'"
+                "text": "The value to animate to when `Bool input` evaluates to `false`"
             },
             {
                 "name": "value true",
-                "text": "The value to animate to when `Bool input' evaluates to `true'"
+                "text": "The value to animate to when `Bool input` evaluates to `true`"
             },
             {
                 "name": "trigger",
