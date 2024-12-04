@@ -27,12 +27,16 @@ const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 label.appendChild(labelText);
 
-const icon = document.createElement("div");
+const icon = document.createElement("a");
 
 valuePort.set(defaultValuePort.get());
 
 icon.classList.add("icon_toggle");
 icon.addEventListener("click", onInputClick);
+icon.addEventListener("keypress", onKeyPress);
+
+icon.setAttribute("tabindex", 0);
+icon.setAttribute("aria-label", "toggle " + labelPort.get());
 
 const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
@@ -84,6 +88,11 @@ function updateClass()
         icon.classList.remove("icon_toggle_true");
         icon.classList.add("icon_toggle_false");
     }
+}
+
+function onKeyPress(e)
+{
+    if (e.code === "Enter") onInputClick();
 }
 
 function onInputClick()

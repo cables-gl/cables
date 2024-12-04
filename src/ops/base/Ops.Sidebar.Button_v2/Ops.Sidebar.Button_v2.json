@@ -47,6 +47,12 @@
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888016994
+        },
+        {
+            "message": "Aaccessibility: button has aria-label",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733326954495
         }
     ],
     "exampleProjectId": "aDgYX5",

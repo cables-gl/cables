@@ -81,13 +81,19 @@
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888139245
+        },
+        {
+            "message": "Aaccessibility: button has aria-label",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733326962053
         }
     ],
     "exampleProjectId": "aDgYX5",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [
         "cpRVswVdvI0"
-    ]
+    ],
+    "license": "MIT"
 }

@@ -81,6 +81,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1725551784635
+        },
+        {
+            "message": "Accessibility: aria label and can be reached with tab key/toggled with enter key",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733327166739
+        },
+        {
+            "message": "Position of active toggle does not jump anymore",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1733328211744
         }
     ],
     "license": "MIT",
