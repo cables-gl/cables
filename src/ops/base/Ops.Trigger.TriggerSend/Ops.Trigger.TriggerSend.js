@@ -9,6 +9,9 @@ op.patch.addEventListener("namedTriggersChanged", updateVarNamesDropdown);
 
 updateVarNamesDropdown();
 
+op.varName.setUiAttribs({ "_triggerSelect": true });
+
+
 function updateVarNamesDropdown()
 {
     if (CABLES.UI)

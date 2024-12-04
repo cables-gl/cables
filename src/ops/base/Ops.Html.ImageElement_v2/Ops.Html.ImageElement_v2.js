@@ -20,6 +20,7 @@ inStyle.onChange =
     inAlt.onChange =
     inPos.onChange = updateStyle;
 
+filenameChanged();
 updateStyle();
 
 element.onload = () =>

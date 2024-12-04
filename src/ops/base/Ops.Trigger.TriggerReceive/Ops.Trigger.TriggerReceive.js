@@ -1,6 +1,8 @@
 const next = op.outTrigger("Triggered");
 op.varName = op.inValueSelect("Named Trigger", [], "", true);
 
+op.varName.setUiAttribs({ "_triggerSelect": true });
+
 updateVarNamesDropdown();
 op.patch.addEventListener("namedTriggersChanged", updateVarNamesDropdown);
 

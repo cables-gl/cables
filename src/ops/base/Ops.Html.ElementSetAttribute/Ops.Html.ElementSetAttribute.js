@@ -46,6 +46,8 @@ function update()
 
     if (ele && ele.setAttribute)
     {
+        op.setUiError("errd", null);
+
         if (inAttrName.get() != oldName)
         {
             ele.removeAttribute(oldName);
@@ -60,7 +62,7 @@ function update()
         }
         catch (e)
         {
-            op.logError(e);
+            if (e.message)op.setUiError("errd", e.message);
         }
     }
 
