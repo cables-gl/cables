@@ -1,7 +1,7 @@
 const
     update = op.inTrigger("Update"),
     active = op.inBool("Active", true),
-    inReset = op.inTrigger("Reset"),
+    inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     outArr = op.outArray("Result");
 
