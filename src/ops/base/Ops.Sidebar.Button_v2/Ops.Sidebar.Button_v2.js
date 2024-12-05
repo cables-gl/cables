@@ -52,10 +52,10 @@ function onButtonTextChanged()
 {
     const buttonText = buttonTextPort.get();
     input.textContent = buttonText;
-    if (CABLES.UI)
-    {
-        op.setUiAttrib({ "extendTitle": buttonText });
-    }
+
+    input.setAttribute("aria-label", "button " + buttonTextPort.get());
+
+    if (CABLES.UI) op.setUiAttrib({ "extendTitle": buttonText });
 }
 
 function onParentChanged()

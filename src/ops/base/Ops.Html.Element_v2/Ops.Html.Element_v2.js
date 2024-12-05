@@ -102,7 +102,6 @@ function updateText()
     oldStr = str;
 
     if (div.innerHTML != str) div.innerHTML = str;
-    // outElement.setRef(div);
 }
 
 function updateStyle()

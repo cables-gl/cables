@@ -63,6 +63,7 @@ const value = document.createElement("input");
 value.value = defaultValuePort.get();
 value.classList.add("sidebar__text-input-input");
 value.setAttribute("type", "text");
+
 value.oninput = onTextInputChanged;
 el.appendChild(value);
 
@@ -258,6 +259,8 @@ function onLabelTextChanged()
     const labelText = labelPort.get();
     label.textContent = labelText;
     if (CABLES.UI) op.setUiAttrib({ "extendTitle": labelText });
+    value.setAttribute("aria-label", "slider " + labelPort.get());
+    input.setAttribute("aria-label", "slider " + labelPort.get());
 }
 
 function onParentChanged()

@@ -1058,7 +1058,7 @@ const Op = function ()
                 "display": "texture"
             })
         );
-        if (v !== undefined) p.set(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
+        if (v !== undefined) p.setRef(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
 
         p.ignoreValueSerialize = true;
         return p;

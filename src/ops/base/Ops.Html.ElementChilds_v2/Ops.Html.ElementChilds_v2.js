@@ -4,6 +4,8 @@ const
 
 const canvas = op.patch.cgl.canvas.parentElement;
 
+op.toWorkPortsNeedToBeLinked(parentPort);
+
 const inPorts = [];
 for (let i = 0; i < 10; i++)
 {
@@ -96,28 +98,35 @@ function rebuild()
         return;
     }
 
-    op.setUiError("multilinks", null);
-
-    for (let i = 0; i < inPorts.length; i++)
+    op.setUiError("id", null);
+    try
     {
-        const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
-        const currentChild = parent.querySelector(selector);
-        if (currentChild)
+        op.setUiError("multilinks", null);
+
+        for (let i = 0; i < inPorts.length; i++)
         {
-            currentChild.remove();
-        }
-        const p = inPorts[i].get();
-        if (inPorts[i].links.length > 1)
-        {
-            op.setUiError("multilinks", "Every port should only have not more then one connection");
-        }
-        if (p && parent)
-        {
-            if (!p.dataset)console.warn("[elementChilds] p no dataset ?!");
-            else p.dataset.cablesChildId = op.id + "_" + i;
-            parent.appendChild(p);
+            const selector = "[data-cables-child-id='" + op.id + "_" + i + "']";
+            const currentChild = parent.querySelector(selector);
+            if (currentChild)
+            {
+                currentChild.remove();
+            }
+            const p = inPorts[i].get();
+            if (inPorts[i].links.length > 1)
+            {
+                op.setUiError("multilinks", "Every port should only have not more then one connection");
+            }
+            if (p && parent)
+            {
+                if (!p.dataset)console.warn("[elementChilds] p no dataset ?!");
+                else p.dataset.cablesChildId = op.id + "_" + i;
+                parent.appendChild(p);
+            }
         }
     }
-
+    catch (e)
+    {
+        op.setUiError("id", e.message);
+    }
     outParent.setRef(parent);
 }
