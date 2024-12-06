@@ -49,6 +49,11 @@
             },
             {
                 "type": 0,
+                "name": "Letter Spacing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Line Height",
                 "subType": "number"
             }

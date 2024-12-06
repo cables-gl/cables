@@ -314,20 +314,8 @@ op.renderVizLayerGl = (ctx, layer) =>
         }
 
         let info = "";
-
-        if (inShowInfo.get())
-        {
-            if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
-
-        // ctx.save();
-        // ctx.scale(layer.scale, layer.scale);
-        // ctx.font = "normal 10px sourceCodePro";
-        // ctx.fillStyle = "#000";
-        // ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
-        // ctx.fillStyle = "#aaa";
-        // ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
-        // ctx.restore();
-        }
+        if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
+        outInfo.set(info);
 
         if (inPickColor.get())
         {
@@ -373,8 +361,18 @@ op.renderVizLayerGl = (ctx, layer) =>
                 1);
         }
 
-        op.setUiAttrib({ "comment": info });
-        outInfo.set(info);
+        if (inShowInfo.get())
+        {
+        // ctx.save();
+            // ctx.scale(layer.scale, layer.scale);
+            // ctx.font = "normal 10px sourceCodePro";
+            // ctx.fillStyle = "#000";
+            // ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
+            // ctx.fillStyle = "#aaa";
+            // ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
+            // ctx.restore();
+            op.setUiAttrib({ "comment": info });
+        }
 
         if (inPickColor.get())
         {

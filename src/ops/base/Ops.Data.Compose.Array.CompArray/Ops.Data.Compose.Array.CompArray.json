@@ -64,5 +64,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RLvmjz"
+    "exampleProjectId": "RLvmjz",
+    "license": "MIT"
 }
