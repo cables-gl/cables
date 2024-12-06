@@ -4,31 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1680618448912
+            "date": 1680618448912,
+            "type": "new"
         },
         {
-            "message": "Ops.Team.CreateOps.Dev.CreateObject renamed to Ops.Team.CompOps.Dev.CompObject",
-            "type": "rename",
+            "message": "Added clear toggle, object will not be cleared when triggered",
+            "type": "feature",
             "author": "pandur",
-            "date": 1680626262461
-        },
-        {
-            "message": "Ops.Team.CompOps.Dev.CompObject renamed to Ops.Team.CompOps.CompObject",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686661435571
-        },
-        {
-            "message": "Ops.Team.CompOps.CompObject renamed to Ops.Data.Compose.CompObject",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687167306482
-        },
-        {
-            "message": "Ops.Data.Compose.CompObject renamed to Ops.Data.Compose.Object.CompObject",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776277887
+            "date": 1733484226758
         }
     ],
     "layout": {
@@ -36,6 +19,11 @@
             {
                 "type": 1,
                 "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -55,5 +43,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Theojz"
+    "exampleProjectId": "Theojz",
+    "license": "MIT"
 }
