@@ -35,11 +35,6 @@
                 "type": 0,
                 "name": "Value Z",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Value W",
-                "subType": "number"
             }
         ],
         "portsOut": [

@@ -11,7 +11,9 @@ const
     inSize = op.inFloat("Text Size", 12),
     inWeight = op.inString("Font Weight", "normal"),
 
-    inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right"], "Left"),
+    inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right", "Justify"], "Left"),
+
+    inOverflow = op.inBool("Overflow Ellipsis", false),
 
     inLetterSpace = op.inFloat("Letter Spacing", 12),
 
@@ -22,6 +24,7 @@ const
 let ele = null;
 
 inLetterSpace.onChange =
+    inOverflow.onChange =
     inEle.onChange =
     inEle.onLinkChanged =
     inFamily.onChange =
