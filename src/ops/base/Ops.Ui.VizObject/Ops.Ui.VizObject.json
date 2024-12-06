@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1647421046849
+            "date": 1647421046849,
+            "type": "new"
         },
         {
             "message": "now shows if it can not stringify an object, has more alternative ways to show them",
@@ -23,6 +24,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1727423813482
+        },
+        {
+            "message": "Do nort sort object keys when it is an array ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1733417015433
         }
     ],
     "authorName": "pandur",

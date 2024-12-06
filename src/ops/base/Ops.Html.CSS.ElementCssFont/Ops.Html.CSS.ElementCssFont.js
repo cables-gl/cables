@@ -1,3 +1,10 @@
+// letter-spacing
+
+// text-justify: none;
+// text-justify: auto;
+// text-justify: inter-word;
+// text-justify: inter-character;
+
 const
     inEle = op.inObject("Element", null, "element"),
     inFamily = op.inString("Font Family", "sans serif"),
@@ -5,13 +12,17 @@ const
     inWeight = op.inString("Font Weight", "normal"),
 
     inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right"], "Left"),
+
+    inLetterSpace = op.inFloat("Letter Spacing", 12),
+
     inLineHeight = op.inFloat("Line Height", 0),
     // in1 = op.inSwitch("White Space",["Initial","no-wrap"], "Initial"),
     outEle = op.outObject("HTML Element", null, "element");
 
 let ele = null;
 
-inEle.onChange =
+inLetterSpace.onChange =
+    inEle.onChange =
     inEle.onLinkChanged =
     inFamily.onChange =
     inSize.onChange =
@@ -37,6 +48,8 @@ function update()
     if (ele && ele.style)
     {
         ele.style["font-family"] = inFamily.get();
+        ele.style["letter-spacing"] = inLetterSpace.get() + "px";
+
         ele.style["font-weight"] = inWeight.get();
         ele.style["text-align"] = inAlign.get().toLowerCase();
 

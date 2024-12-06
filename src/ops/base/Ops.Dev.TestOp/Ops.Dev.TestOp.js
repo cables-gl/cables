@@ -17,3 +17,5 @@ trig.onTriggered = () =>
 {
     meshRect.render();
 };
+
+lala.set(new Float32Array(100));

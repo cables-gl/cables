@@ -19,8 +19,11 @@ function myStringify(o, level = 0)
     let str = "";
     for (let i = 0; i < level; i++) indent += ind;
 
-    let keys = Object.keys(o).sort();
+    let keys = Object.keys(o);
     let numKeys = keys.length;
+
+    if (!(Array.isArray(o) || (o.constructor && o.constructor.name === "Float32Array")))
+        keys = keys.sort();
 
     if (numKeys == 0)
     {

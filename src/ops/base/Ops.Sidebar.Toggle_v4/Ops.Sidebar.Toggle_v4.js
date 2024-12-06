@@ -121,6 +121,7 @@ function onLabelTextChanged()
 {
     const text = labelPort.get();
     label.textContent = text;
+    icon.setAttribute("aria-label", "toggle " + labelPort.get());
     if (CABLES.UI) op.setUiAttrib({ "extendTitle": text });
 }
 
