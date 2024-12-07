@@ -179,8 +179,12 @@
     ],
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
     "issues": "",
+    "youtubeids": [
+        "a56wk9Xm9dY"
+    ],
     "docs": {
         "ports": []
     },
+    "exampleProjectId": "aSWlLu",
     "license": "MIT"
 }
