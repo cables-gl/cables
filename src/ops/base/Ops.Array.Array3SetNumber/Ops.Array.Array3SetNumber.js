@@ -4,7 +4,6 @@ const
     inValueX = op.inFloat("Value X", 1),
     inValueY = op.inFloat("Value Y", 1),
     inValueZ = op.inFloat("Value Z", 1),
-    inValueW = op.inFloat("Value W", 1),
     outArray = op.outArray("Result", null, 3);
 
 let arr = [];
@@ -14,8 +13,7 @@ inArray.onChange =
     inIndex.onChange =
     inValueX.onChange =
     inValueY.onChange =
-    inValueZ.onChange =
-    inValueW.onChange = update;
+    inValueZ.onChange = update;
 
 function update()
 {

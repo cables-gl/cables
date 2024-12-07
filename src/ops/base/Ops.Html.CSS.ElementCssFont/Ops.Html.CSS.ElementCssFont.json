@@ -11,10 +11,10 @@
             "date": 1723570293627
         },
         {
-            "message": "Ops.Html.ElementCssFont renamed to Ops.Html.CSS.ElementCssFont",
-            "type": "rename",
+            "message": "Added justify option to align parameter",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1730273894947
+            "date": 1733487901375
         }
     ],
     "layout": {
@@ -43,9 +43,15 @@
                 "values": [
                     "Left",
                     "Center",
-                    "Right"
+                    "Right",
+                    "Justify"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Overflow Ellipsis",
+                "subType": "boolean"
             },
             {
                 "type": 0,

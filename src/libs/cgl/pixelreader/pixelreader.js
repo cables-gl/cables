@@ -78,12 +78,13 @@ class PixelReader
         if (!fb) return;
 
         if (pixelFormat === CGL.Texture.TYPE_FLOAT) pixelFormat = CGL.Texture.PFORMATSTR_RGBA32F;
-        // let isFloatingPoint = pixelFormat == CGL.Texture.TYPE_FLOAT; // old parameter was "textureType", not iots pixelformat, keeping this for compatibility...
+        // let isFloatingPoint = pixelFormat == CGL.Texture.TYPE_FLOAT; // old parameter was "textureType", now it is pixelformat, keeping this for compatibility...
 
         let isFloatingPoint = CGL.Texture.isPixelFormatFloat(pixelFormat);
 
         if (isFloatingPoint)bytesPerItem = 4;
         if (CGL.Texture.isPixelFormatHalfFloat(pixelFormat)) bytesPerItem = 2;
+
 
         const pixelInfo = CGL.Texture.setUpGlPixelFormat(cgl, pixelFormat);
         const numItems = pixelInfo.numColorChannels * w * h;
@@ -92,14 +93,14 @@ class PixelReader
 
         if (!this._pixelData || this._size != numItems * bytesPerItem)
         {
-            if (isFloatingPoint) this._pixelData = new Float32Array(numItems);
+            if (bytesPerItem > 1) this._pixelData = new Float32Array(numItems);
             else this._pixelData = new Uint8Array(numItems);
 
             this._size = numItems * bytesPerItem;
         }
 
         let channelType = gl.UNSIGNED_BYTE;
-        if (isFloatingPoint)channelType = gl.FLOAT;
+        if (bytesPerItem > 1)channelType = gl.FLOAT;
 
         if (this._size == 0 || !this._pixelData)
         {
@@ -119,13 +120,11 @@ class PixelReader
             if (this._size != numItems * bytesPerItem)
                 this._log.error("buffer size invalid", numItems, w, h, bytesPerItem);
 
-            // const altFormat = gl.getParameter(gl.IMPLEMENTATION_COLOR_READ_FORMAT);
-            // const altType = gl.getParameter(gl.IMPLEMENTATION_COLOR_READ_TYPE);
+            let dataType = pixelInfo.glDataType;
+            if (bytesPerItem > 1)dataType = cgl.gl.FLOAT;
 
-            gl.readPixels(
-                // x, y, w, h, altFormat, altType, 0
-                x, y, w, h, pixelInfo.glDataFormat, pixelInfo.glDataType, 0
-            );
+            let format = pixelInfo.glDataFormat;
+            gl.readPixels(x, y, w, h, format, dataType, 0);
 
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
             gl.bindFramebuffer(gl.FRAMEBUFFER, null);

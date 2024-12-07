@@ -17,8 +17,6 @@ update.onTriggered = () =>
             {
                 arr.push(newArr[i]);
             }
-
-            // arr.push(JSON.parse(JSON.stringify(inArr.get())));
         }
         catch (e)
         {

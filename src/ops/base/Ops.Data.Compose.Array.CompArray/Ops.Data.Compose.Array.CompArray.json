@@ -4,31 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1680617318226
+            "date": 1680617318226,
+            "type": "new"
         },
         {
-            "message": "Ops.Team.CreateOps.Dev.CreateArray renamed to Ops.Team.CompOps.Dev.CompArray",
-            "type": "rename",
+            "message": "Added clear toggle, array will not be cleared when triggered, can now be used as a buffer",
+            "type": "feature",
             "author": "pandur",
-            "date": 1680626217405
-        },
-        {
-            "message": "Ops.Team.CompOps.Dev.CompArray renamed to Ops.Team.CompOps.CompArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686661493612
-        },
-        {
-            "message": "Ops.Team.CompOps.CompArray renamed to Ops.Data.Compose.CompArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687167158993
-        },
-        {
-            "message": "Ops.Data.Compose.CompArray renamed to Ops.Data.Compose.Array.CompArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776151506
+            "date": 1733484028222
         }
     ],
     "layout": {
@@ -40,6 +23,11 @@
             {
                 "type": 0,
                 "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
                 "subType": "boolean"
             },
             {
