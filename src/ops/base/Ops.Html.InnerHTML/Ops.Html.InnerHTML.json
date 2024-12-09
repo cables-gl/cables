@@ -21,8 +21,7 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Element",
-                "group": "Element"
+                "name": "Element"
             },
             {
                 "type": 5,
@@ -49,5 +48,10 @@
                 "name": "HTML Element"
             }
         ]
-    }
+    },
+    "summary": "Set innerHTML or innerTEXT of an HTML element",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "jgArsw"
 }

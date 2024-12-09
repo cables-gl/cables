@@ -5,14 +5,13 @@ const
     inActive = op.inBool("Active", true),
     outEle = op.outObject("HTML Element");
 
-op.setPortGroup("Element", [inEle]);
-
-inValue.onChange = update;
 let ele = null;
 
-inEle.onChange =
-    outEle.onLinkChanged =
-    inEle.onLinkChanged = removeProp;
+inWhat.onChange =
+    inEle.onChange =
+    inValue.onChange = update;
+
+inEle.onLinkChanged = removeProp;
 
 inActive.onChange = () =>
 {
@@ -22,15 +21,21 @@ inActive.onChange = () =>
 
 function removeProp()
 {
-    if (ele)ele.innerText = "";
+    if (ele)
+    {
+        ele.innerText = "";
+        ele.innerHTML = "";
+    }
 }
 
 function update()
 {
     if (!inActive.get()) return;
 
+    if (ele != inEle.get())removeProp();
+
     ele = inEle.get();
-    if (ele && ele.style)
+    if (ele)
     {
         const str = inValue.get();
 
@@ -38,5 +43,5 @@ function update()
         else ele.innerText = str;
     }
 
-    outEle.setRef(inEle.get());
+    outEle.setRef(ele);
 }
