@@ -1,0 +1,45 @@
+{
+    "id": "3c70f743-4414-4c72-9ba9-907d3d2dc865",
+    "created": 1733742921199,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1733742921231
+        },
+        {
+            "message": "Ops.Patch.PGflosw.ElementAttributes renamed to Ops.Html.ElementAttributes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733743183176
+        },
+        {
+            "message": "Html.ElementAttributes renamed to Ops.Html.Attributes.ElementAttributes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733744809409
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Attribs"
+            }
+        ]
+    },
+    "exampleProjectId": "Gflosw",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Get all attributes from an element an object"
+}
