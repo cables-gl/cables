@@ -52,5 +52,6 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

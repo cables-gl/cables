@@ -64,7 +64,7 @@ window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
 testMultiMainloop();
 
-cgl.mainloopOp = this;
+op.patch.tempData.mainloopOp = this;
 
 inUnit.onChange = () =>
 {

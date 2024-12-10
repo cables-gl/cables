@@ -1,10 +1,3 @@
-// letter-spacing
-
-// text-justify: none;
-// text-justify: auto;
-// text-justify: inter-word;
-// text-justify: inter-character;
-
 const
     inEle = op.inObject("Element", null, "element"),
     inFamily = op.inString("Font Family", "sans serif"),

@@ -3,11 +3,11 @@ const cgl = op.patch.cgl;
 let microphone = null;
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
-const inInit = op.inTriggerButton("Start");
 const inInputDevices = op.inDropDown("Audio Input", ["None"]);
 const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
 const audioOut = op.outObject("Audio Out", null, "audioNode");
+const inInit = op.inTriggerButton("Start");
 const recording = op.outBoolNum("Listening", false);
 const outDevices = op.outArray("List of Input Devices");
 

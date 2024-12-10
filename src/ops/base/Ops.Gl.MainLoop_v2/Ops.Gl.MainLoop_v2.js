@@ -34,7 +34,7 @@ document.addEventListener("visibilitychange", () => { winVisible = !document.hid
 
 testMultiMainloop();
 
-cgl.mainloopOp = this;
+op.patch.tempData.mainloopOp = this;
 
 function updateHdpi()
 {
