@@ -1,0 +1,72 @@
+{
+    "id": "c53a770c-cf02-41be-a7a6-ff7be8016055",
+    "created": 1733843476895,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1733843476895
+        },
+        {
+            "message": "Patch.PVtgEyw.ElementCssSize renamed to Ops.Html.ElementCssSize",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733844298573
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "values": [
+                    "Absolute",
+                    "Aspect Ratio"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Unit index",
+                "values": [
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set CSS border properties of a HTML element",
+    "docs": {
+        "ports": []
+    }
+}
