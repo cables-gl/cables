@@ -7,9 +7,9 @@ const
 
 inExec.onTriggered = () =>
 {
-    if (op.patch.frameStore.canvasCompose)
+    if (op.patch.tempData.canvasCompose)
     {
-        const ctx = op.patch.frameStore.canvasCompose.ctx;
+        const ctx = op.patch.tempData.canvasCompose.ctx;
 
         if (inCanv.isLinked())
             try

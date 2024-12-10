@@ -68,7 +68,7 @@ function renderOverlay(body)
     if (!CABLES.UI) return;
     if (!cgl.shouldDrawHelpers(op)) return;
     // const collisions = [];
-    // const bodies = cgl.frameStore.collisionWorld.bodies;
+    // const bodies = cgl.tempData.collisionWorld.bodies;
 
     // for (let i = 0; i < bodies.length; i++)
     // {
@@ -103,7 +103,7 @@ function renderOverlay(body)
 
 function render()
 {
-    if (!cgl.frameStore || !cgl.frameStore.collisionWorld) return;
+    if (!cgl.tempData || !cgl.tempData.collisionWorld) return;
     const cg = op.patch.cgl;
 
     // vec3.transformMat4(pos, empty, cg.mMatrix);
@@ -131,14 +131,14 @@ function render()
             if (o.type == 2)setBox(o);
             if (o.type == 1)o.radius = radius;
 
-            cgl.frameStore.collisionWorld.bodies.push(o);
+            cgl.tempData.collisionWorld.bodies.push(o);
             renderOverlay(o);
         }
     }
     else
     {
         const objCopy = getCopyObj();
-        cgl.frameStore.collisionWorld.bodies.push(objCopy);
+        cgl.tempData.collisionWorld.bodies.push(objCopy);
         objCopy.name = inName.get();
         objCopy.pos = [0, 0, 0];
 

@@ -49,7 +49,7 @@ render.onTriggered = function ()
 
 function changed()
 {
-    op.patch.cgl.frameStore.perspective =
+    op.patch.cgl.tempData.perspective =
     {
         "fovy": fovY.get(),
         "zFar": zFar.get(),

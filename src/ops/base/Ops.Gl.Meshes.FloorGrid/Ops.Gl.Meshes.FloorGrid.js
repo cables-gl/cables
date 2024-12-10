@@ -88,7 +88,7 @@ render.onTriggered = function ()
 {
     if (!mesh)init();
 
-    if (cgl.frameStore.shadowPass) return next.trigger();
+    if (cgl.tempData.shadowPass) return next.trigger();
 
     cgl.pushShader(shader);
     if (!shader) return;

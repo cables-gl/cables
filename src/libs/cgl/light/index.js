@@ -308,15 +308,15 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
     if (this.state.isUpdating) return;
-    if (this._cgl.frameStore.shadowPass) return;
+    if (this._cgl.tempData.shadowPass) return;
 
     this._cgl.pushCullFace(true);
     this._cgl.pushCullFaceFacing(this._cgl.gl.FRONT);
     this._cgl.gl.enable(this._cgl.gl.POLYGON_OFFSET_FILL);
     this._cgl.gl.polygonOffset(polygonOffset, polygonOffset);
 
-    this._cgl.frameStore.renderOffscreen = true;
-    this._cgl.frameStore.shadowPass = true;
+    this._cgl.tempData.renderOffscreen = true;
+    this._cgl.tempData.shadowPass = true;
 
     this._cgl.pushBlend(false);
     this._cgl.gl.colorMask(true, true, this.type === "point", this.type === "point"); // * for now just 2 channels, with MSM we need 4
@@ -335,8 +335,8 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
     this._cgl.popCullFaceFacing();
     this._cgl.popCullFace();
 
-    this._cgl.frameStore.shadowPass = false;
-    this._cgl.frameStore.renderOffscreen = false;
+    this._cgl.tempData.shadowPass = false;
+    this._cgl.tempData.renderOffscreen = false;
 
     if (this.type !== "point")
     {

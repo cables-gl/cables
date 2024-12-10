@@ -18,15 +18,15 @@ update.onTriggered = () =>
 {
     if (!active.get()) return next.trigger();
 
-    op.patch.frameStore.compArray = op.patch.frameStore.compArray || [];
+    op.patch.tempData.compArray = op.patch.tempData.compArray || [];
 
     if (clear.get())
     {
         arr = [];
     }
 
-    op.patch.frameStore.compArray.push(arr);
+    op.patch.tempData.compArray.push(arr);
     next.trigger();
 
-    outArr.setRef(op.patch.frameStore.compArray.pop());
+    outArr.setRef(op.patch.tempData.compArray.pop());
 };

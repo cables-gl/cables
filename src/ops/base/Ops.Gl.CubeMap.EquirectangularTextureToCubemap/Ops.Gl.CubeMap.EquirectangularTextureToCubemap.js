@@ -132,7 +132,7 @@ inTrigger.onTriggered = function ()
 
     equiToCubeShader.popTextures();
 
-    cgl.frameStore.renderOffscreen = true;
+    cgl.tempData.renderOffscreen = true;
 
     if (inTexture.get() && inTexture.get().tex)
     {
@@ -156,7 +156,7 @@ inTrigger.onTriggered = function ()
         cgl.popShader();
 
         // fb.renderEnd();
-        cgl.frameStore.renderOffscreen = false;
+        cgl.tempData.renderOffscreen = false;
 
         outCubemap.set(null);
         outCubemap.set(cubemap.getTextureColor());

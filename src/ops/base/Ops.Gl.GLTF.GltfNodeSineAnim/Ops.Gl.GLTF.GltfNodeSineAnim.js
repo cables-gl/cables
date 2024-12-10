@@ -30,9 +30,9 @@ function remove()
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
-    scene = cgl.frameStore.currentScene;
+    scene = cgl.tempData.currentScene;
 
     let node = null;
 
@@ -46,11 +46,11 @@ inExec.onTriggered = function ()
     Math.randomSeed = 5711;
     let found = 0;
 
-    for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+    for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
     {
-        if (cgl.frameStore.currentScene.nodes[i].name.indexOf(inFilter.get()) >= 0)
+        if (cgl.tempData.currentScene.nodes[i].name.indexOf(inFilter.get()) >= 0)
         {
-            node = cgl.frameStore.currentScene.nodes[i];
+            node = cgl.tempData.currentScene.nodes[i];
 
             found++;
 

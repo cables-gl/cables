@@ -81,7 +81,7 @@ const Patch = function (cfg)
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
-    this.frameStore = {};
+    this.tempData = this.frameStore = {};
     this.deSerialized = false;
     this.reqAnimTimeStamp = 0;
 

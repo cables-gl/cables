@@ -23,29 +23,29 @@ inNodeName.onChange = function ()
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
     if (
-        cgl.frameStore.currentScene != oldScene ||
-        currentSceneLoaded != cgl.frameStore.currentScene.loaded) nodes.length = 0;
+        cgl.tempData.currentScene != oldScene ||
+        currentSceneLoaded != cgl.tempData.currentScene.loaded) nodes.length = 0;
 
     if (!nodes.length)
     {
         const name = inNodeName.get();
 
-        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes)
         {
             return;
         }
 
-        oldScene = cgl.frameStore.currentScene;
-        currentSceneLoaded = cgl.frameStore.currentScene.loaded;
+        oldScene = cgl.tempData.currentScene;
+        currentSceneLoaded = cgl.tempData.currentScene.loaded;
 
-        for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+        for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
         {
-            if (cgl.frameStore.currentScene.nodes[i].name.indexOf(name) == 0)
+            if (cgl.tempData.currentScene.nodes[i].name.indexOf(name) == 0)
             {
-                nodes.push(cgl.frameStore.currentScene.nodes[i]);
-                cgl.frameStore.currentScene.nodes[i].render(cgl, !inTrans.get(), false, inIgnMaterial.get(), true, true);
+                nodes.push(cgl.tempData.currentScene.nodes[i]);
+                cgl.tempData.currentScene.nodes[i].render(cgl, !inTrans.get(), false, inIgnMaterial.get(), true, true);
                 outFound.set(true);
             }
         }

@@ -356,15 +356,15 @@ function buildShader()
 
 function updateLights()
 {
-    if (cgl.frameStore.lightStack)
+    if (cgl.tempData.lightStack)
     {
-        let changed = currentLightCount !== cgl.frameStore.lightStack.length;
+        let changed = currentLightCount !== cgl.tempData.lightStack.length;
 
         if (!changed)
         {
-            for (let i = 0; i < cgl.frameStore.lightStack.length; i++)
+            for (let i = 0; i < cgl.tempData.lightStack.length; i++)
             {
-                if (PBRLightStack[i] != cgl.frameStore.lightStack[i])
+                if (PBRLightStack[i] != cgl.tempData.lightStack[i])
                 {
                     changed = true;
                     break;
@@ -375,12 +375,12 @@ function updateLights()
         if (changed)
         {
             PBRLightStack.length = 0;
-            for (let i = 0; i < cgl.frameStore.lightStack.length; i++)
-                PBRLightStack[i] = cgl.frameStore.lightStack[i];
+            for (let i = 0; i < cgl.tempData.lightStack.length; i++)
+                PBRLightStack[i] = cgl.tempData.lightStack[i];
 
             buildShader();
 
-            currentLightCount = cgl.frameStore.lightStack.length;
+            currentLightCount = cgl.tempData.lightStack.length;
         }
     }
 }
@@ -394,19 +394,19 @@ function doRender()
     PBRShader.popTextures();
 
     let numLights = 0;
-    if (cgl.frameStore.lightStack)numLights = cgl.frameStore.lightStack.length;
+    if (cgl.tempData.lightStack)numLights = cgl.tempData.lightStack.length;
 
-    if ((!cgl.frameStore.pbrEnvStack || cgl.frameStore.pbrEnvStack.length == 0) && !inLightmap.isLinked() && numLights == 0)
+    if ((!cgl.tempData.pbrEnvStack || cgl.tempData.pbrEnvStack.length == 0) && !inLightmap.isLinked() && numLights == 0)
     {
         useDefaultLight = true;
         op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 1);
     }
     else op.setUiError("deflight", null);
 
-    if (cgl.frameStore.pbrEnvStack && cgl.frameStore.pbrEnvStack.length > 0 &&
-        cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texIBLLUT.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texDiffIrr.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texPreFiltered.tex)
+    if (cgl.tempData.pbrEnvStack && cgl.tempData.pbrEnvStack.length > 0 &&
+        cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texIBLLUT.tex && cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texDiffIrr.tex && cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texPreFiltered.tex)
     {
-        const pbrEnv = cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1];
+        const pbrEnv = cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1];
 
         inIntensity.setValue(pbrEnv.intensity);
 
@@ -436,7 +436,7 @@ function doRender()
         mat4.invert(iViewMatrix, cgl.vMatrix);
 
         defaultLightStack[0].position = [iViewMatrix[12], iViewMatrix[13], iViewMatrix[14]];
-        cgl.frameStore.lightStack = defaultLightStack;
+        cgl.tempData.lightStack = defaultLightStack;
     }
 
     if (inTexIBLLUT.get())
@@ -463,5 +463,5 @@ function doRender()
     outTrigger.trigger();
     cgl.popShader();
 
-    if (useDefaultLight) cgl.frameStore.lightStack = [];
+    if (useDefaultLight) cgl.tempData.lightStack = [];
 }

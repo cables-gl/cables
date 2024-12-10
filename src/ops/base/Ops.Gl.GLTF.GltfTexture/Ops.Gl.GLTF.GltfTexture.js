@@ -30,28 +30,28 @@ function reloadSoon()
 
 inExec.onTriggered = function ()
 {
-    if (cgl.frameStore.currentScene != oldScene)tex = null;
+    if (cgl.tempData.currentScene != oldScene)tex = null;
     if (tex) return;
 
-    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.json || !cgl.frameStore.currentScene.chunks) return;
+    if (!cgl.tempData.currentScene || !cgl.tempData.currentScene.json || !cgl.tempData.currentScene.chunks) return;
 
-    if (cgl.frameStore.currentScene.chunks.length < 2)
+    if (cgl.tempData.currentScene.chunks.length < 2)
     {
         return;
     }
 
-    if (!cgl.frameStore.currentScene.json.images) return;
+    if (!cgl.tempData.currentScene.json.images) return;
 
     let img = null;
-    oldScene = cgl.frameStore.currentScene;
+    oldScene = cgl.tempData.currentScene;
 
-    for (let i = 0; i < cgl.frameStore.currentScene.json.images.length; i++)
+    for (let i = 0; i < cgl.tempData.currentScene.json.images.length; i++)
     {
         if (
-            cgl.frameStore.currentScene.json.images[i].name == imgName.get() ||
-            cgl.frameStore.currentScene.json.images[i].bufferView == parseFloat(imgName.get()))
+            cgl.tempData.currentScene.json.images[i].name == imgName.get() ||
+            cgl.tempData.currentScene.json.images[i].bufferView == parseFloat(imgName.get()))
         {
-            img = cgl.frameStore.currentScene.json.images[i];
+            img = cgl.tempData.currentScene.json.images[i];
         }
     }
     if (!img)
@@ -64,8 +64,8 @@ inExec.onTriggered = function ()
         return;
     }
 
-    const buffView = cgl.frameStore.currentScene.json.bufferViews[img.bufferView];
-    let dv = cgl.frameStore.currentScene.chunks[1].dataView;
+    const buffView = cgl.tempData.currentScene.json.bufferViews[img.bufferView];
+    let dv = cgl.tempData.currentScene.chunks[1].dataView;
 
     if (!buffView) return;
     const data = new Uint8Array(buffView.byteLength);
@@ -84,30 +84,29 @@ inExec.onTriggered = function ()
 
     const loadingId = cgl.patch.loading.start("gltfTextureOp", CABLES.uuid(), op);
 
-    tex = CGL.Texture.load(cgl, sourceURI,
-        function (err)
+    tex = CGL.Texture.load(cgl, sourceURI, function (err)
+    {
+        cgl.patch.loading.finished(loadingId);
+        if (!tex) return;
+        if (err)
         {
-            cgl.patch.loading.finished(loadingId);
-            if (!tex) return;
-            if (err)
-            {
-                console.error("img load error", err);
-            }
-            else
-            {
-                width.set(tex.width);
-                height.set(tex.height);
-                type.set(img.mimeType);
-                outTex.setRef(tex);
-                outFound.set(true);
-            }
-        }, {
-            "anisotropic": cgl_aniso,
-            "wrap": cgl_wrap,
-            "flip": flip.get(),
-            "unpackAlpha": unpackAlpha.get(),
-            "filter": cgl_filter
-        });
+            console.error("img load error", err);
+        }
+        else
+        {
+            width.set(tex.width);
+            height.set(tex.height);
+            type.set(img.mimeType);
+            outTex.setRef(tex);
+            outFound.set(true);
+        }
+    }, {
+        "anisotropic": cgl_aniso,
+        "wrap": cgl_wrap,
+        "flip": flip.get(),
+        "unpackAlpha": unpackAlpha.get(),
+        "filter": cgl_filter
+    });
 
     outTex.setRef(tex);
 };

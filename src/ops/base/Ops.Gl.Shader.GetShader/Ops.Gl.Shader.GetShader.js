@@ -16,7 +16,7 @@ mod.addModule({
 
 inTrigger.onTriggered = () =>
 {
-    if (op.patch.cgl.frameStore.shadowPass) return;
+    if (op.patch.cgl.tempData.shadowPass) return;
 
     mod.bind();
     const sh = op.patch.cgl.getShader();

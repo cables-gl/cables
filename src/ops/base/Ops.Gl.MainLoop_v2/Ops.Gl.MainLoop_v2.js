@@ -34,7 +34,7 @@ document.addEventListener("visibilitychange", () => { winVisible = !document.hid
 
 testMultiMainloop();
 
-cgl.mainloopOp = this;
+op.patch.tempData.mainloopOp = this;
 
 function updateHdpi()
 {
@@ -155,7 +155,7 @@ function render(time)
         cgl.gl.colorMask(true, true, true, true);
     }
 
-    if (!cgl.frameStore.phong)cgl.frameStore.phong = {};
+    if (!cgl.tempData.phong)cgl.tempData.phong = {};
     rframes++;
 
     outPixel.set(op.patch.cgl.pixelDensity);

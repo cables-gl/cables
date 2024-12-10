@@ -22,7 +22,7 @@ inHeight.onChange = () =>
 
 exec.onTriggered = () =>
 {
-    op.patch.frameStore.canvasCompose = { "canvas": canv, "ctx": ctx };
+    op.patch.tempData.canvasCompose = { "canvas": canv, "ctx": ctx };
 
     if (inClear.get())
         ctx.clearRect(0, 0, inWidth.get(), inHeight.get());
@@ -32,5 +32,5 @@ exec.onTriggered = () =>
     if (inCanvas.get() && inCanvas.get().width > 0 && inCanvas.get().height > 0)ctx.drawImage(inCanvas.get(), 0, 0);
 
     next.trigger();
-    op.patch.frameStore.canvasCompose = null;
+    op.patch.tempData.canvasCompose = null;
 };

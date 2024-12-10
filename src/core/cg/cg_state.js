@@ -2,14 +2,12 @@ import { Events } from "cables-shared-client";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
 
-
-// const CGState ()
 class CGState extends Events
 {
     constructor(_patch)
     {
         super();
-        this.frameStore = this.frameStore || {};
+        this.tempData = this.frameStore = this.frameStore || {};
         // this.canvas = null;
 
         this.fpsCounter = new CABLES.CG.FpsCounter();

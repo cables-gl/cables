@@ -26,9 +26,9 @@ function updateUi()
 
 update.onTriggered = () =>
 {
-    if (op.patch.frameStore.compArray && op.patch.frameStore.compArray.length > 0)
+    if (op.patch.tempData.compArray && op.patch.tempData.compArray.length > 0)
     {
-        let arr = op.patch.frameStore.compArray[op.patch.frameStore.compArray.length - 1];
+        let arr = op.patch.tempData.compArray[op.patch.tempData.compArray.length - 1];
         if (arr)
         {
             if (num == 4) arr.push(inNum1.get(), inNum2.get(), inNum3.get(), inNum4.get());

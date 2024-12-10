@@ -42,12 +42,12 @@ function addChild(gltf, arr, parent, child)
 
 function update()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
     let arr = [];
     let found = false;
     const idx = 0;
-    const gltf = cgl.frameStore.currentScene;
+    const gltf = cgl.tempData.currentScene;
 
     if (!node)
     {

@@ -6,12 +6,12 @@ const
 
 update.onTriggered = () =>
 {
-    op.patch.frameStore.compString = op.patch.frameStore.compString || "";
+    op.patch.tempData.compString = op.patch.tempData.compString || "";
 
     if (inDir.get() == "End")
-        op.patch.frameStore.compString = op.patch.frameStore.compString.substr(0, Math.min(op.patch.frameStore.compString.length, op.patch.frameStore.compString.length - inNum.get()));
+        op.patch.tempData.compString = op.patch.tempData.compString.substr(0, Math.min(op.patch.tempData.compString.length, op.patch.tempData.compString.length - inNum.get()));
     else
-        op.patch.frameStore.compString = op.patch.frameStore.compString.substr(inNum.get());
+        op.patch.tempData.compString = op.patch.tempData.compString.substr(inNum.get());
 
     next.trigger();
 };

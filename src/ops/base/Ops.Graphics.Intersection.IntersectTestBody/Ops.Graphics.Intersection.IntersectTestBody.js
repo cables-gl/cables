@@ -28,7 +28,7 @@ inName.onChange = () =>
 
 function findbody(world)
 {
-    const bodies = cgl.frameStore.collisionWorld.bodies;
+    const bodies = cgl.tempData.collisionWorld.bodies;
 
     for (let i = 0; i < bodies.length; i++)
         if (bodies[i].name == inName.get())
@@ -41,20 +41,20 @@ function doRender()
 {
     next.trigger();
 
-    if (cgl.frameStore.collisionWorld)
+    if (cgl.tempData.collisionWorld)
     {
-        if (!testBody || world != cgl.frameStore.collisionWorld)
+        if (!testBody || world != cgl.tempData.collisionWorld)
         {
             outName.set("");
             outHasHit.set(false);
-            testBody = findbody(cgl.frameStore.collisionWorld);
-            world = cgl.frameStore.collisionWorld;
+            testBody = findbody(cgl.tempData.collisionWorld);
+            world = cgl.tempData.collisionWorld;
         }
 
         if (testBody)
         {
-            const testCollision = cgl.frameStore.collisionWorld.testCollision;
-            const bodies = cgl.frameStore.collisionWorld.bodies;
+            const testCollision = cgl.tempData.collisionWorld.testCollision;
+            const bodies = cgl.tempData.collisionWorld.bodies;
             let found = false;
 
             for (let i = 0; i < bodies.length; i++)

@@ -62,19 +62,19 @@ function morph(finalGeom, mt, mt2, fract)
 
 function update()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
     needsUpdate = false;
     mesh = null;
 
-    const gltf = cgl.frameStore.currentScene;
+    const gltf = cgl.tempData.currentScene;
     const name = inNodeName.get();
-    for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+    for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
     {
-        op.log(cgl.frameStore.currentScene.nodes[i].name);
-        if (cgl.frameStore.currentScene.nodes[i].name == name)
+        op.log(cgl.tempData.currentScene.nodes[i].name);
+        if (cgl.tempData.currentScene.nodes[i].name == name)
         {
-            node = cgl.frameStore.currentScene.nodes[i];
+            node = cgl.tempData.currentScene.nodes[i];
             outFound.set(true);
             op.log(node);
 
@@ -103,14 +103,14 @@ function update()
 
 function render()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
     if (needsUpdate) update();
 
     if (!geom) return;
     if (!mesh) return;
 
-    let time = cgl.frameStore.currentScene.time;
+    let time = cgl.tempData.currentScene.time;
     if (!inSceneTime.get())time = inTime.get();
 
     if (time >= geom.morphTargets.length - 1) time = geom.morphTargets.length - 1;

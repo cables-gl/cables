@@ -26,7 +26,7 @@ inExec.onTriggered = exec;
 
 function exec()
 {
-    if (cgl.frameStore.currentScene != oldScene)needsupdate = true;
+    if (cgl.tempData.currentScene != oldScene)needsupdate = true;
     if (needsupdate) update();
 
     outPos.setRef(arrPos);
@@ -39,9 +39,9 @@ function exec()
 
 function update()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
-    oldScene = cgl.frameStore.currentScene;
+    oldScene = cgl.tempData.currentScene;
 
     arrPos.length = 0;
     arrRot.length = 0;
@@ -54,12 +54,12 @@ function update()
 
     const worldspace = inSpace.get() == "World";
 
-    for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+    for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
     {
-        if (cgl.frameStore.currentScene.nodes[i].name.indexOf(inStr.get()) == 0)
+        if (cgl.tempData.currentScene.nodes[i].name.indexOf(inStr.get()) == 0)
         {
-            const n = cgl.frameStore.currentScene.nodes[i]._node;
-            const node = cgl.frameStore.currentScene.nodes[i];
+            const n = cgl.tempData.currentScene.nodes[i]._node;
+            const node = cgl.tempData.currentScene.nodes[i];
             arrNames.push(n.name);
 
             if (!worldspace)

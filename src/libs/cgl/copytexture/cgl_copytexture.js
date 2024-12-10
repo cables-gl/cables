@@ -114,7 +114,7 @@ class CopyTexture
             else this.fb = new CGL.Framebuffer2(cgl, w, h, options);
         }
 
-        cgl.frameStore.renderOffscreen = true;
+        cgl.tempData.renderOffscreen = true;
         this.fb.renderStart(cgl);
 
         cgl.setTexture(0, tex.tex);
@@ -128,7 +128,7 @@ class CopyTexture
         cgl.popShader();
 
         this.fb.renderEnd();
-        cgl.frameStore.renderOffscreen = false;
+        cgl.tempData.renderOffscreen = false;
 
         return this.fb.getTextureColor();
     }

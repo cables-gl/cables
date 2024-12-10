@@ -15,11 +15,11 @@ reset.onTriggered = () =>
 
 update.onTriggered = () =>
 {
-    op.patch.frameStore.compObject = op.patch.frameStore.compObject || [];
+    op.patch.tempData.compObject = op.patch.tempData.compObject || [];
 
     if (inClear.get())obj = {};
-    op.patch.frameStore.compObject.push(obj);
+    op.patch.tempData.compObject.push(obj);
     next.trigger();
 
-    outArr.setRef(op.patch.frameStore.compObject.pop());
+    outArr.setRef(op.patch.tempData.compObject.pop());
 };

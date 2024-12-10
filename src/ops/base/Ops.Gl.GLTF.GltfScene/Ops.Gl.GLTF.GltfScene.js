@@ -85,7 +85,7 @@ inExec.onTriggered = function ()
         mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
     }
 
-    cgl.frameStore.currentScene = gltf;
+    cgl.tempData.currentScene = gltf;
     nextBefore.trigger();
 
     if (gltf && inRender.get())
@@ -106,7 +106,7 @@ inExec.onTriggered = function ()
     }
 
     next.trigger();
-    cgl.frameStore.currentScene = null;
+    cgl.tempData.currentScene = null;
 
     cgl.popModelMatrix();
 };

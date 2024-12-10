@@ -46,7 +46,7 @@ function doRender()
 {
     next.trigger();
 
-    if (cgl.frameStore.collisionWorld)
+    if (cgl.tempData.collisionWorld)
     {
         let origin = vec3.create();
 
@@ -87,7 +87,7 @@ function doRender()
         let foundDist = 9999999;
 
         let found = false;
-        const bodies = cgl.frameStore.collisionWorld.bodies;
+        const bodies = cgl.tempData.collisionWorld.bodies;
         for (let i = 0; i < bodies.length; i++)
         {
             // if (found) break;
