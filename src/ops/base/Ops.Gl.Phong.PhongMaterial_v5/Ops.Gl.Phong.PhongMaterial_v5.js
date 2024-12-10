@@ -711,16 +711,16 @@ const iViewMatrix = mat4.create();
 
 function updateLights()
 {
-    if (cgl.frameStore.lightStack)
+    if (cgl.tempData.lightStack)
     {
-        if (cgl.frameStore.lightStack.length === 0)
+        if (cgl.tempData.lightStack.length === 0)
         {
             op.setUiError("deflight", "Default light is enabled. Please add lights to your patch to make this warning disappear.", 1);
         }
         else op.setUiError("deflight", null);
     }
 
-    if ((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length))
+    if ((!cgl.tempData.lightStack || !cgl.tempData.lightStack.length))
     {
         // if no light in light stack, use default light & set count to -1
         // so when a new light gets added, the shader does recompile
@@ -741,12 +741,12 @@ function updateLights()
     {
         if (shader)
         {
-            if (cgl.frameStore.lightStack)
+            if (cgl.tempData.lightStack)
             {
-                if (cgl.frameStore.lightStack.length)
+                if (cgl.tempData.lightStack.length)
                 {
                     defaultUniform = null;
-                    compareLights(cgl.frameStore.lightStack);
+                    compareLights(cgl.tempData.lightStack);
                 }
             }
         }

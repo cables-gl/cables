@@ -154,7 +154,7 @@ function updateDefines()
 
 function drawHelpers()
 {
-    if (cgl.frameStore.shadowPass) return;
+    if (cgl.tempData.shadowPass) return;
     if (cgl.shouldDrawHelpers(op))
     {
         if (op.isCurrentUiOp())

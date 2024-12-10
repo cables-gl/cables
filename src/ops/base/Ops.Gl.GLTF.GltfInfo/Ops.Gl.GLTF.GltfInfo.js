@@ -7,7 +7,7 @@ const exec = op.inTrigger("Exec"),
 
 exec.onTriggered = () =>
 {
-    const gltf = op.patch.cgl.frameStore.currentScene;
+    const gltf = op.patch.cgl.tempData.currentScene;
     if (!gltf) return;
 
     if (gltf.cameras)

@@ -15,10 +15,10 @@ const cgl = op.patch.cgl;
 
 function doRender()
 {
-    cgl.frameStore.collisionWorld = { "bodies": [], "testCollision": testCollision };
+    cgl.tempData.collisionWorld = { "bodies": [], "testCollision": testCollision };
     next.trigger();
 
-    outNum.set(cgl.frameStore.collisionWorld.bodies.length);
+    outNum.set(cgl.tempData.collisionWorld.bodies.length);
 
     if (inTextCol.get()) checkCollisions();
 
@@ -153,7 +153,7 @@ function testCollision(bodyA, bodyB)
 function checkCollisions()
 {
     const collisions = [];
-    const bodies = cgl.frameStore.collisionWorld.bodies;
+    const bodies = cgl.tempData.collisionWorld.bodies;
 
     for (let j = 0; j < bodies.length; j++)
     {

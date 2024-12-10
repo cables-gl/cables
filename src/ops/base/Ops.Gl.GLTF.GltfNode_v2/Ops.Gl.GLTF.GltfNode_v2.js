@@ -36,24 +36,24 @@ function updateTimeInputs()
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.frameStore.currentScene) return;
-    if (currentSceneLoaded != cgl.frameStore.currentScene.loaded) node = null;
+    if (!cgl.tempData.currentScene) return;
+    if (currentSceneLoaded != cgl.tempData.currentScene.loaded) node = null;
 
     if (!node)
     {
         const name = inNodeName.get();
 
-        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes)
         {
             return;
         }
-        currentSceneLoaded = cgl.frameStore.currentScene.loaded;
+        currentSceneLoaded = cgl.tempData.currentScene.loaded;
 
-        for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+        for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
         {
-            if (cgl.frameStore.currentScene.nodes[i].name == name)
+            if (cgl.tempData.currentScene.nodes[i].name == name)
             {
-                node = cgl.frameStore.currentScene.nodes[i];
+                node = cgl.tempData.currentScene.nodes[i];
                 outFound.set(true);
 
                 if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom)

@@ -131,7 +131,7 @@ function updateDefines()
 
 function drawHelpers()
 {
-    if (cgl.frameStore.shadowPass) return;
+    if (cgl.tempData.shadowPass) return;
     if (cgl.shouldDrawHelpers(op)) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 }
 

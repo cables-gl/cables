@@ -55,7 +55,7 @@ let updateCameraMovementMatrix = true;
 
 render.onTriggered = function ()
 {
-    if (cgl.frameStore.shadowPass) return trigger.trigger();
+    if (cgl.tempData.shadowPass) return trigger.trigger();
 
     // Aspect ration
     if (!autoAspect.get()) asp = aspect.get();

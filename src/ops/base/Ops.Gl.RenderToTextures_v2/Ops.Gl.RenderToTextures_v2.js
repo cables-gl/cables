@@ -173,14 +173,14 @@ function doRender()
     }
 
     fb.renderStart(cgl);
-    cgl.frameStore.forceShaderMods = cgl.frameStore.forceShaderMods || [];
-    cgl.frameStore.forceShaderMods.push(mod);
+    cgl.tempData.forceShaderMods = cgl.tempData.forceShaderMods || [];
+    cgl.tempData.forceShaderMods.push(mod);
 
-    cgl.frameStore.objectIdCounter = 0;
+    cgl.tempData.objectIdCounter = 0;
 
     trigger.trigger();
 
-    cgl.frameStore.forceShaderMods.pop();
+    cgl.tempData.forceShaderMods.pop();
     // mod.unbind();
 
     fb.renderEnd(cgl);

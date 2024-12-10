@@ -43,10 +43,10 @@ inUpdate.onTriggered = () =>
 {
     outGp.set(null);
 
-    if (op.patch.cgl.frameStore.xrSession)
+    if (op.patch.cgl.tempData.xrSession)
     {
         let found = false;
-        let xrSession = op.patch.cgl.frameStore.xrSession;
+        let xrSession = op.patch.cgl.tempData.xrSession;
 
         const inputSources = xrSession.inputSources;
 
@@ -58,7 +58,7 @@ inUpdate.onTriggered = () =>
 
                 if (inputSources[i].gamepad)setGamepadValues(inputSources[i].gamepad);
 
-                let controlPose = cgl.frameStore.xrFrame.getPose(inputSources[i].gripSpace, cgl.frameStore.xrReferenceSpace);
+                let controlPose = cgl.tempData.xrFrame.getPose(inputSources[i].gripSpace, cgl.tempData.xrReferenceSpace);
                 if (controlPose && controlPose.transform)
                 {
                     cgl.pushModelMatrix();

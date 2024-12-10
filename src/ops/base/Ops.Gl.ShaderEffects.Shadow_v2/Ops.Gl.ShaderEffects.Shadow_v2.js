@@ -196,9 +196,9 @@ function createModuleShaders()
     let vertexBody = "";
     let fragmentBody = "";
 
-    for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
+    for (let i = 0; i < cgl.tempData.lightStack.length; i += 1)
     {
-        const light = cgl.frameStore.lightStack[i];
+        const light = cgl.tempData.lightStack[i];
         vertexHead = vertexHead.concat(createVertexHead(i, light.type));
         vertexBody = vertexBody.concat(createVertexBody(i, light.type));
 
@@ -312,9 +312,9 @@ function removeUniforms()
 
 function createUniforms()
 {
-    for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
+    for (let i = 0; i < cgl.tempData.lightStack.length; i += 1)
     {
-        const light = cgl.frameStore.lightStack[i];
+        const light = cgl.tempData.lightStack[i];
 
         shaderModule.addUniformStructFrag("MOD_Light", "MOD_light" + i, [
             { "type": "3f", "name": "position", "v1": null },
@@ -335,14 +335,14 @@ function createUniforms()
         else shaderModule.addUniformFrag("tc", "MOD_shadowMapCube" + i, 0, null, null, null);
     }
 
-    if (cgl.frameStore.lightStack.length > 0)
+    if (cgl.tempData.lightStack.length > 0)
     {
         shaderModule.addUniformFrag("3f", "MOD_shadowColor", inShadowColorR, inShadowColorG, inShadowColorB, null);
         shaderModule.addUniformFrag("f", "MOD_sampleSpread", inSpread, null, null, null);
-        if (cgl.frameStore.lightStack.map((l) => { return l.type; }).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
+        if (cgl.tempData.lightStack.map((l) => { return l.type; }).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
     }
 
-    STATE.lastLength = cgl.frameStore.lightStack.length;
+    STATE.lastLength = cgl.tempData.lightStack.length;
     STATE.updating = false;
 }
 
@@ -351,9 +351,9 @@ function setUniforms()
     if (STATE.updating) return;
     const receiveShadow = inReceiveShadow.get();
 
-    for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
+    for (let i = 0; i < cgl.tempData.lightStack.length; i += 1)
     {
-        const light = cgl.frameStore.lightStack[i];
+        const light = cgl.tempData.lightStack[i];
 
         if (light.type === "ambient") continue;
 
@@ -451,7 +451,7 @@ function setUniforms()
 
 function updateShader()
 {
-    if (cgl.frameStore.lightStack.length !== STATE.lastLength)
+    if (cgl.tempData.lightStack.length !== STATE.lastLength)
         createModuleShaders();
 
     setUniforms();
@@ -480,7 +480,7 @@ inTrigger.onTriggered = () =>
         return;
     }
 
-    if (cgl.frameStore.shadowPass)
+    if (cgl.tempData.shadowPass)
     {
         if (!inCastShadow.get()) return;
         renderShadowPassWithModule();
@@ -497,9 +497,9 @@ inTrigger.onTriggered = () =>
 
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
 
-    if (cgl.frameStore.lightStack)
+    if (cgl.tempData.lightStack)
     {
-        if (cgl.frameStore.lightStack.length)
+        if (cgl.tempData.lightStack.length)
         {
             updateShader();
 
@@ -523,9 +523,9 @@ inTrigger.onTriggered = () =>
 
 function checkUiErrors()
 {
-    if (cgl.frameStore.lightStack)
+    if (cgl.tempData.lightStack)
     {
-        if (cgl.frameStore.lightStack.length === 0)
+        if (cgl.tempData.lightStack.length === 0)
         {
             op.setUiError("nolights", "There are no lights in the patch. Please add lights before this op and activate their \"Cast Shadow\" property to be able to use shadows.", 1);
         }
@@ -536,12 +536,12 @@ function checkUiErrors()
             let oneLightCastsShadow = false;
             let allLightsBlurAboveZero = true;
 
-            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
+            for (let i = 0; i < cgl.tempData.lightStack.length; i += 1)
             {
-                oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
+                oneLightCastsShadow = oneLightCastsShadow || cgl.tempData.lightStack[i].castShadow;
 
-                if (cgl.frameStore.lightStack[i].castShadow && cgl.frameStore.lightStack[i].type !== "point")
-                    allLightsBlurAboveZero = allLightsBlurAboveZero && (cgl.frameStore.lightStack[i].blurAmount > 0);
+                if (cgl.tempData.lightStack[i].castShadow && cgl.tempData.lightStack[i].type !== "point")
+                    allLightsBlurAboveZero = allLightsBlurAboveZero && (cgl.tempData.lightStack[i].blurAmount > 0);
             }
 
             if (oneLightCastsShadow)

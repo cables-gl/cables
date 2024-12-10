@@ -13,9 +13,9 @@ const
 
 inExec.onTriggered = () =>
 {
-    if (op.patch.frameStore.canvasCompose)
+    if (op.patch.tempData.canvasCompose)
     {
-        const ctx = op.patch.frameStore.canvasCompose.ctx;
+        const ctx = op.patch.tempData.canvasCompose.ctx;
         ctx.save();
         ctx.beginPath();
         ctx.arc(inX.get(), inY.get(), inRadius.get(), inStartAngle.get() * CGL.DEG2RAD, inEndAngle.get() * CGL.DEG2RAD, inAngleFlip.get());

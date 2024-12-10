@@ -5,9 +5,9 @@ const
 
 update.onTriggered = () =>
 {
-    if (op.patch.frameStore.compArray && op.patch.frameStore.compArray.length > 0)
+    if (op.patch.tempData.compArray && op.patch.tempData.compArray.length > 0)
     {
-        let arr = op.patch.frameStore.compArray[op.patch.frameStore.compArray.length - 1];
+        let arr = op.patch.tempData.compArray[op.patch.tempData.compArray.length - 1];
         arr.push(inStr.get());
     }
     next.trigger();

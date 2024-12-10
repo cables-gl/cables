@@ -10,11 +10,11 @@ let tempMat = mat4.create();
 
 render.onTriggered = function ()
 {
-    if (!cgl.frameStore.SplinePoints) return;
+    if (!cgl.tempData.SplinePoints) return;
 
-    if (cgl.frameStore.SplinePointsInverseOriginalMatrix)
+    if (cgl.tempData.SplinePointsInverseOriginalMatrix)
     {
-        mat4.multiply(tempMat, cgl.frameStore.SplinePointsInverseOriginalMatrix, cgl.mMatrix);
+        mat4.multiply(tempMat, cgl.tempData.SplinePointsInverseOriginalMatrix, cgl.mMatrix);
         vec3.transformMat4(pos, empty, tempMat);
     }
     else
@@ -22,11 +22,11 @@ render.onTriggered = function ()
         vec3.transformMat4(pos, empty, cgl.mMatrix);
     }
 
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 0] = pos[0];
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 1] = pos[1];
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 2] = pos[2];
+    cgl.tempData.SplinePoints[cgl.tempData.SplinePointCounter + 0] = pos[0];
+    cgl.tempData.SplinePoints[cgl.tempData.SplinePointCounter + 1] = pos[1];
+    cgl.tempData.SplinePoints[cgl.tempData.SplinePointCounter + 2] = pos[2];
 
-    cgl.frameStore.SplinePointCounter += 3;
+    cgl.tempData.SplinePointCounter += 3;
 
     trigger.trigger();
 };

@@ -22,7 +22,7 @@ inNodeName.onChange = function ()
 
 inExec.onTriggered = function ()
 {
-    const scene = cgl.frameStore.currentScene;
+    const scene = cgl.tempData.currentScene;
     if (!scene) return;
     if (currentSceneLoaded != scene.loaded) node = null;
 
@@ -30,7 +30,7 @@ inExec.onTriggered = function ()
     {
         const name = inNodeName.get();
 
-        if (!cgl.frameStore || !scene || !scene.nodes)
+        if (!cgl.tempData || !scene || !scene.nodes)
         {
             return;
         }

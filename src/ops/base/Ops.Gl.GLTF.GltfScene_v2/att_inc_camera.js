@@ -1,21 +1,21 @@
 const gltfCamera = class
 {
-    constructor(idx,gltf, config)
+    constructor(idx, gltf, config)
     {
         this.name = config.name || "unknown";
         this.config = config;
-        this.node=null;
+        this.node = null;
 
-        for(let i=0;i<gltf.nodes.length;i++)
-            if(gltf.nodes[i].camera==idx)
+        for (let i = 0; i < gltf.nodes.length; i++)
+            if (gltf.nodes[i].camera == idx)
             {
-                this.node=gltf.nodes[i].parent;
-                this.nodeDirect=gltf.nodes[i];
+                this.node = gltf.nodes[i].parent;
+                this.nodeDirect = gltf.nodes[i];
             }
 
         // this.node=gltf.nodes[gltf.nodes[idx].camera].parent;
 
-        if(!this.node) this.node = gltf.getNode(this.name);
+        if (!this.node) this.node = gltf.getNode(this.name);
 
 
         // this.nodeOrient=gltf.getNode(this.name+"_Orientation");
@@ -70,7 +70,6 @@ const gltfCamera = class
     {
         if (this.node && this.node._animTrans)
         {
-
             vec3.set(this.pos,
                 this.node._animTrans[0].getValue(time),
                 this.node._animTrans[1].getValue(time),
@@ -86,7 +85,7 @@ const gltfCamera = class
 
     start(time)
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
 
         this.updateAnim(time);
         const asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
@@ -105,14 +104,14 @@ const gltfCamera = class
         // if(this.node && this.node.parent)
         // {
         //     console.log(this.node.parent)
-            // vec3.add(this.pos,this.pos,this.node.parent._node.translation);
-            // vec3.sub(this.vCenter,this.vCenter,this.node.parent._node.translation);
-            // mat4.translate(cgl.vMatrix,cgl.vMatrix,
-            // [
-            //     -this.node.parent._node.translation[0],
-            //     -this.node.parent._node.translation[1],
-            //     -this.node.parent._node.translation[2]
-            // ])
+        // vec3.add(this.pos,this.pos,this.node.parent._node.translation);
+        // vec3.sub(this.vCenter,this.vCenter,this.node.parent._node.translation);
+        // mat4.translate(cgl.vMatrix,cgl.vMatrix,
+        // [
+        //     -this.node.parent._node.translation[0],
+        //     -this.node.parent._node.translation[1],
+        //     -this.node.parent._node.translation[2]
+        // ])
         // }
 
 
@@ -134,7 +133,7 @@ const gltfCamera = class
 
     end()
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
         cgl.popPMatrix();
         cgl.popViewMatrix();
     }

@@ -228,7 +228,7 @@ function updateDefines()
 
 exec.onTriggered = () =>
 {
-    if (!tc || needsUpdate && !op.patch.cgl.frameStore.shadowPass)
+    if (!tc || needsUpdate && !op.patch.cgl.tempData.shadowPass)
     {
         if (!tc)initShader();
         tc.bgShader.popTextures();
