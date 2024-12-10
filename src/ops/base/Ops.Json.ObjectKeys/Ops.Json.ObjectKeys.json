@@ -11,13 +11,13 @@
         ],
         "portsOut": [
             {
+                "type": 3,
+                "name": "Keys"
+            },
+            {
                 "type": 0,
                 "name": "Num Keys",
                 "subType": "number"
-            },
-            {
-                "type": 3,
-                "name": "Keys"
             }
         ]
     },

@@ -74,11 +74,6 @@
             },
             {
                 "type": 0,
-                "name": "Num index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
@@ -96,6 +91,17 @@
                 "type": 0,
                 "name": "W",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num index",
+                "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -110,5 +116,6 @@
     "summary": "push/append multiple numbers to an array",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

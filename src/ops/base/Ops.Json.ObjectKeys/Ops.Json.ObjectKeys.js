@@ -1,7 +1,7 @@
 const
     inObj = op.inObject("Object"),
-    outNumKeys = op.outNumber("Num Keys"),
-    outKeys = op.outArray("Keys");
+    outKeys = op.outArray("Keys"),
+    outNumKeys = op.outNumber("Num Keys");
 
 inObj.onChange = function ()
 {

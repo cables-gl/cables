@@ -1,10 +1,10 @@
 const
     update = op.inTrigger("Update"),
-    inNum = op.inSwitch("Num", ["1", "2", "3", "4"], "4"),
     inNum1 = op.inFloat("X", 0),
     inNum2 = op.inFloat("Y", 0),
     inNum3 = op.inFloat("Z", 0),
     inNum4 = op.inFloat("W", 1),
+    inNum = op.inSwitch("Num", ["1", "2", "3", "4"], "4"),
     next = op.outTrigger("Next");
 
 // inSwitch.onChange=updateUi;
