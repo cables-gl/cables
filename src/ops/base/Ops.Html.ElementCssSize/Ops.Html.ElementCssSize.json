@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1733843476895
-        },
-        {
-            "message": "Patch.PVtgEyw.ElementCssSize renamed to Ops.Html.ElementCssSize",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1733844298573
         }
     ],
     "layout": {
@@ -65,7 +59,7 @@
             }
         ]
     },
-    "summary": "Set CSS border properties of a HTML element",
+    "summary": "Set the size of an element",
     "docs": {
         "ports": []
     }
