@@ -9,6 +9,8 @@ Helping us grow is the best way to help us - get the word out!
 If you want to financially support us, currently your best option would be to spend some cash on the various levels on [Patreon](https://www.patreon.com/cables_gl).
 Don't forget to link your Patreon account in [your profile settings](https://cables.gl/settings) to get those sweet, sweet benefits.
 
+If regular payments aren't your thing. You can send a one-time donation via our [Ko-Fi](https://ko-fi.com/cablesgl) account. Thank you!
+
 We also have a very long list of stuff that WE want to do, but maybe you need something specific for your project
 or would like to hire us to develop project specific features. Simply [contact us](mailto:hi@undev.de)!
 
