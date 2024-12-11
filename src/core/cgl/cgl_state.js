@@ -18,8 +18,6 @@ class Context extends CGState
     constructor(_patch)
     {
         super(_patch);
-        // EventTarget.apply(this);
-        // CGState.apply(this);
 
         this.gApi = CG.GAPI_WEBGL;
         this.aborted = false;
@@ -44,7 +42,6 @@ class Context extends CGState
         this._isSafariCrap = false;
 
         this.temporaryTexture = null;
-        this.tempData = this.frameStore = {};
         this._onetimeCallbacks = [];
         this.gl = null;
 

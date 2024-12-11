@@ -99,7 +99,7 @@ function doRender()
 
         if (fb && fb.valid)
         {
-            texDepth.set(fb.getTextureDepth());
+            texDepth.setRef(fb.getTextureDepth());
             reInitFb = false;
         }
         else
