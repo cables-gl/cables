@@ -44,7 +44,7 @@ class Context extends CGState
         this._isSafariCrap = false;
 
         this.temporaryTexture = null;
-        this.frameStore = {};
+        this.tempData = this.frameStore = {};
         this._onetimeCallbacks = [];
         this.gl = null;
 
@@ -115,13 +115,9 @@ class Context extends CGState
         this.mMatrix = m;
     }
 
-
     _setCanvas(canv)
     {
-        if (!canv)
-        {
-            this._log.stack("_setCanvas undef");
-        }
+        if (!canv) this._log.stack("_setCanvas undef");
 
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
         if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = false;
@@ -400,9 +396,9 @@ class Context extends CGState
     // shader stack
     getShader()
     {
-        if (this._currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == this._currentShader.offScreenPass) === true) return this._currentShader;
+        if (this._currentShader) if (!this.tempData || ((this.tempData.renderOffscreen === true) == this._currentShader.offScreenPass) === true) return this._currentShader;
 
-        for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
+        for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.tempData.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
     getDefaultShader()
@@ -421,17 +417,17 @@ class Context extends CGState
 
     pushShader(shader)
     {
-        if (this.frameStore.forceShaderMods)
+        if (this.tempData.forceShaderMods)
         {
-            for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
+            for (let i = 0; i < this.tempData.forceShaderMods.length; i++)
             {
-                // if (!currentShader.forcedMod && currentShader != this.frameStore.forceShaderMods[i])
+                // if (!currentShader.forcedMod && currentShader != this.tempData.forceShaderMods[i])
                 // {
-                //     currentShader.forcedMod = this.frameStore.forceShaderMods[i];
-                shader = this.frameStore.forceShaderMods[i].bind(shader, false);
+                //     currentShader.forcedMod = this.tempData.forceShaderMods[i];
+                shader = this.tempData.forceShaderMods[i].bind(shader, false);
                 // }
                 // return currentShader;
-                // if (this.frameStore.forceShaderMods[i].currentShader() && shader != this.frameStore.forceShaderMods[i].currentShader().shader)
+                // if (this.tempData.forceShaderMods[i].currentShader() && shader != this.tempData.forceShaderMods[i].currentShader().shader)
             }
         }
 
@@ -449,12 +445,12 @@ class Context extends CGState
      */
     setPreviousShader()
     {
-        if (this.frameStore.forceShaderMods)
+        if (this.tempData.forceShaderMods)
         {
-            for (let i = 0; i < this.frameStore.forceShaderMods.length; i++)
+            for (let i = 0; i < this.tempData.forceShaderMods.length; i++)
             {
                 // const a =
-                this.frameStore.forceShaderMods[i].unbind(false);
+                this.tempData.forceShaderMods[i].unbind(false);
                 // if (a) return;
                 // this.popShader();
             }
@@ -1147,7 +1143,7 @@ Context.prototype.glGetAttribLocation = function (prog, name)
  */
 Context.prototype.shouldDrawHelpers = function (op)
 {
-    if (this.frameStore.shadowPass) return false;
+    if (this.tempData.shadowPass) return false;
     if (!op.patch.isEditorMode()) return false;
 
     // const fb = this.getCurrentFrameBuffer();

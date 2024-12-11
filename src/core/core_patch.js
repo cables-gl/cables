@@ -72,7 +72,6 @@ const Patch = function (cfg)
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
-    // this.instancing = new Instancing();
     this.onOneFrameRendered = null;
     this.namedTriggers = {};
 
