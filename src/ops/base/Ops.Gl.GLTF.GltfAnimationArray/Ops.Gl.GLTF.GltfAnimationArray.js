@@ -29,22 +29,22 @@ inNodeName.onChange = function ()
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
     if (!node)
     {
         const name = inNodeName.get();
 
-        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes)
         {
             return;
         }
 
-        for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+        for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
         {
-            if (cgl.frameStore.currentScene.nodes[i].name == name)
+            if (cgl.tempData.currentScene.nodes[i].name == name)
             {
-                node = cgl.frameStore.currentScene.nodes[i];
+                node = cgl.tempData.currentScene.nodes[i];
                 outFound.set(true);
             }
         }
@@ -52,7 +52,7 @@ inExec.onTriggered = function ()
 
     // var idx=inNode.get();
     // idx=Math.max(0,idx);
-    // idx=Math.min(cgl.frameStore.currentScene.nodes.length-1,idx);
+    // idx=Math.min(cgl.tempData.currentScene.nodes.length-1,idx);
 
     const n = node;
     const arr = [];

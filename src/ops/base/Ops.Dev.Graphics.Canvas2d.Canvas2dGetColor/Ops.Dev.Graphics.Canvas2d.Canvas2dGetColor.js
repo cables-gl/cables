@@ -10,9 +10,9 @@ const
 
 inExec.onTriggered = () =>
 {
-    if (op.patch.frameStore.canvasCompose)
+    if (op.patch.tempData.canvasCompose)
     {
-        const ctx = op.patch.frameStore.canvasCompose.ctx;
+        const ctx = op.patch.tempData.canvasCompose.ctx;
 
         const d = ctx.getImageData(x.get(), y.get(), 1, 1);
 

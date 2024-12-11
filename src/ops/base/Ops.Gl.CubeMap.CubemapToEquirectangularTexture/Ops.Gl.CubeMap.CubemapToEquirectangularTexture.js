@@ -62,13 +62,13 @@ inTrigger.onTriggered = function ()
     }
     projectionShader.popTextures();
 
-    cgl.frameStore.renderOffscreen = true;
+    cgl.tempData.renderOffscreen = true;
 
     fb.renderStart(cgl);
     projectionShader.pushTexture(uniformCubemap, inCubemap.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
     mesh.render(projectionShader);
     fb.renderEnd();
-    cgl.frameStore.renderOffscreen = false;
+    cgl.tempData.renderOffscreen = false;
 
     outProjection.set(null);
     outProjection.set(fb.getTextureColor());

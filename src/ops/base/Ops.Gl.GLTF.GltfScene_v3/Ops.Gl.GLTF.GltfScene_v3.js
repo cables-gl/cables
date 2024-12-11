@@ -180,8 +180,8 @@ inExec.onTriggered = function ()
         }
     }
 
-    let oldScene = cgl.frameStore.currentScene || null;
-    cgl.frameStore.currentScene = gltf;
+    let oldScene = cgl.tempData.currentScene || null;
+    cgl.tempData.currentScene = gltf;
 
     nextBefore.trigger();
 
@@ -229,7 +229,7 @@ inExec.onTriggered = function ()
     }
 
     next.trigger();
-    cgl.frameStore.currentScene = oldScene;
+    cgl.tempData.currentScene = oldScene;
 
     cgl.popModelMatrix();
 

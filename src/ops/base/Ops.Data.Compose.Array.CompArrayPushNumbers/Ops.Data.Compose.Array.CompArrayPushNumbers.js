@@ -1,10 +1,10 @@
 const
     update = op.inTrigger("Update"),
-    inNum = op.inSwitch("Num", ["1", "2", "3", "4"], "4"),
     inNum1 = op.inFloat("X", 0),
     inNum2 = op.inFloat("Y", 0),
     inNum3 = op.inFloat("Z", 0),
     inNum4 = op.inFloat("W", 1),
+    inNum = op.inSwitch("Num", ["1", "2", "3", "4"], "4"),
     next = op.outTrigger("Next");
 
 // inSwitch.onChange=updateUi;
@@ -26,9 +26,9 @@ function updateUi()
 
 update.onTriggered = () =>
 {
-    if (op.patch.frameStore.compArray && op.patch.frameStore.compArray.length > 0)
+    if (op.patch.tempData.compArray && op.patch.tempData.compArray.length > 0)
     {
-        let arr = op.patch.frameStore.compArray[op.patch.frameStore.compArray.length - 1];
+        let arr = op.patch.tempData.compArray[op.patch.tempData.compArray.length - 1];
         if (arr)
         {
             if (num == 4) arr.push(inNum1.get(), inNum2.get(), inNum3.get(), inNum4.get());

@@ -64,7 +64,7 @@ window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
 testMultiMainloop();
 
-cgl.mainloopOp = this;
+op.patch.tempData.mainloopOp = this;
 
 inUnit.onChange = () =>
 {
@@ -214,7 +214,7 @@ function render(time)
         cgl.gl.colorMask(true, true, true, true);
     }
 
-    if (!cgl.frameStore.phong)cgl.frameStore.phong = {};
+    if (!cgl.tempData.phong)cgl.tempData.phong = {};
     rframes++;
 
     op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;

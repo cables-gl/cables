@@ -26,11 +26,11 @@ function doRender()
 {
     next.trigger();
 
-    if (cgl.frameStore.collisionWorld)
+    if (cgl.tempData.collisionWorld)
     {
         const bodyPoint = { "pos": [inX.get(), inY.get(), inZ.get()], "type": 3 };
-        const testCollision = cgl.frameStore.collisionWorld.testCollision;
-        const bodies = cgl.frameStore.collisionWorld.bodies;
+        const testCollision = cgl.tempData.collisionWorld.testCollision;
+        const bodies = cgl.tempData.collisionWorld.bodies;
         let found = false;
 
         for (let i = 0; i < bodies.length; i++)

@@ -2,10 +2,10 @@ const
     inExec = op.inTrigger("Exec"),
     outNext = op.outTrigger("Next");
 
-op.patch.cgl.frameStore.branchProfiler = op.patch.cgl.frameStore.branchProfiler || {};
+op.patch.cgl.tempData.branchProfiler = op.patch.cgl.tempData.branchProfiler || {};
 
-inExec.onTriggered = ()=>
+inExec.onTriggered = () =>
 {
-    if(op.patch.cgl.frameStore.branchStack) op.patch.cgl.frameStore.branchStack.pop();
+    if (op.patch.cgl.tempData.branchStack) op.patch.cgl.tempData.branchStack.pop();
     outNext.trigger();
 };

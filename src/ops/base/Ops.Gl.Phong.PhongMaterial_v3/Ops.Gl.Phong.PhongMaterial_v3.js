@@ -60,13 +60,13 @@ const updateLights = function ()
     let count = 0;
     let i = 0;
     let num = 0;
-    if (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+    if (!cgl.tempData.phong || !cgl.tempData.phong.lights)
     {
         num = 0;
     }
     else
     {
-        for (i in cgl.frameStore.phong.lights)
+        for (i in cgl.tempData.phong.lights)
         {
             num++;
         }
@@ -78,7 +78,7 @@ const updateLights = function ()
         shader.define("NUM_LIGHTS", "" + Math.max(numLights, 1));
     }
 
-    if (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+    if (!cgl.tempData.phong || !cgl.tempData.phong.lights)
     {
         lights[count].pos.setValue([5, 5, 5]);
         lights[count].color.setValue([1, 1, 1]);
@@ -90,26 +90,26 @@ const updateLights = function ()
     {
         count = 0;
         if (shader)
-            for (i in cgl.frameStore.phong.lights)
+            for (i in cgl.tempData.phong.lights)
             {
-                lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                // if(cgl.frameStore.phong.lights[i].changed)
+                lights[count].pos.setValue(cgl.tempData.phong.lights[i].pos);
+                // if(cgl.tempData.phong.lights[i].changed)
                 {
-                    cgl.frameStore.phong.lights[i].changed = false;
-                    if (cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+                    cgl.tempData.phong.lights[i].changed = false;
+                    if (cgl.tempData.phong.lights[i].target) lights[count].target.setValue(cgl.tempData.phong.lights[i].target);
 
-                    lights[count].fallOff.setValue(cgl.frameStore.phong.lights[i].fallOff);
-                    lights[count].radius.setValue(cgl.frameStore.phong.lights[i].radius);
+                    lights[count].fallOff.setValue(cgl.tempData.phong.lights[i].fallOff);
+                    lights[count].radius.setValue(cgl.tempData.phong.lights[i].radius);
 
-                    lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
-                    lights[count].ambient.setValue(cgl.frameStore.phong.lights[i].ambient);
-                    // lights[count].specular.setValue(cgl.frameStore.phong.lights[i].specular);
-                    lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                    lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                    if (cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-                    if (cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex = cgl.frameStore.phong.lights[i].depthTex;
+                    lights[count].color.setValue(cgl.tempData.phong.lights[i].color);
+                    lights[count].ambient.setValue(cgl.tempData.phong.lights[i].ambient);
+                    // lights[count].specular.setValue(cgl.tempData.phong.lights[i].specular);
+                    lights[count].attenuation.setValue(cgl.tempData.phong.lights[i].attenuation);
+                    lights[count].type.setValue(cgl.tempData.phong.lights[i].type);
+                    if (cgl.tempData.phong.lights[i].cone) lights[count].cone.setValue(cgl.tempData.phong.lights[i].cone);
+                    if (cgl.tempData.phong.lights[i].depthTex) lights[count].texDepthTex = cgl.tempData.phong.lights[i].depthTex;
 
-                    lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul || 1);
+                    lights[count].mul.setValue(cgl.tempData.phong.lights[i].mul || 1);
                 }
 
                 count++;

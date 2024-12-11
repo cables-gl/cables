@@ -29,7 +29,7 @@ let oldStr = null;
 let prevDisplay = "block";
 let div = null;
 
-const canvas = op.patch.cgl.canvas.parentElement;
+const parent = op.patch.cgl.canvas.parentElement;
 
 createElement();
 
@@ -44,13 +44,16 @@ inTag.onChange = () =>
     updateText();
 };
 
+inSetSize.onChange =
+    updateUiAndStyle;
+
 inDisplay.onChange =
     inOpacity.onChange =
     inPos.onChange =
     inWidth.onChange =
     inHeight.onChange =
     inOverflow.onChange =
-    inSetSize.onChange =
+
     inHeight.onChange =
     inStyle.onChange = updateStyle;
 
@@ -74,13 +77,20 @@ outClicked.onLinkChanged = () =>
         op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
 };
 
+function updateUiAndStyle()
+{
+    inWidth.setUiAttribs({ "greyout": !inSetSize.get() });
+    inHeight.setUiAttribs({ "greyout": !inSetSize.get() });
+    updateStyle();
+}
+
 function createElement()
 {
     div = op.patch.getDocument().createElement(inTag.get() || "div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
 
-    canvas.appendChild(div);
+    parent.appendChild(div);
     outElement.setRef(div);
     updateStyle();
 }
@@ -129,7 +139,7 @@ function updateStyle()
 
     outElement.setRef(div);
 
-    if (!div.parentElement) canvas.appendChild(div);
+    if (!div.parentElement) parent.appendChild(div);
 
     warning();
 }

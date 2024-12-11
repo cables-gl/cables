@@ -33,7 +33,7 @@ const gltfCamera = class
 
     start(time)
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
 
         this.updateAnim(time);
         const asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
@@ -85,7 +85,7 @@ const gltfCamera = class
 
     end()
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
         cgl.popPMatrix();
         cgl.popViewMatrix();
     }

@@ -21,12 +21,12 @@ inNodeName.onChange = function ()
 
 exec.onTriggered = () =>
 {
-    if (!cgl.frameStore.currentScene) return;
-    if (currentSceneLoaded != cgl.frameStore.currentScene.loaded) mesh = null;
+    if (!cgl.tempData.currentScene) return;
+    if (currentSceneLoaded != cgl.tempData.currentScene.loaded) mesh = null;
 
     if (!mesh)
     {
-        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes || !cgl.frameStore.currentScene.loaded)
+        if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes || !cgl.tempData.currentScene.loaded)
         {
             return;
         }
@@ -34,13 +34,13 @@ exec.onTriggered = () =>
         outGeom.set(null);
         const name = inNodeName.get();
 
-        currentSceneLoaded = cgl.frameStore.currentScene.loaded;
+        currentSceneLoaded = cgl.tempData.currentScene.loaded;
 
-        for (let i = 0; i < cgl.frameStore.currentScene.meshes.length; i++)
+        for (let i = 0; i < cgl.tempData.currentScene.meshes.length; i++)
         {
-            if (cgl.frameStore.currentScene.meshes[i].name == name)
+            if (cgl.tempData.currentScene.meshes[i].name == name)
             {
-                mesh = cgl.frameStore.currentScene.meshes[i];
+                mesh = cgl.tempData.currentScene.meshes[i];
 
                 const idx = Math.abs(inSubmesh.get());
                 if (mesh.meshes[idx] && mesh.meshes[idx].geom)

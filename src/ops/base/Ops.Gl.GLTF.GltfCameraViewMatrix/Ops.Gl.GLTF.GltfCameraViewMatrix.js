@@ -22,7 +22,7 @@ inName.onChange = () => { camNode = null; };
 
 function findCam()
 {
-    const gltf = op.patch.cgl.frameStore.currentScene;
+    const gltf = op.patch.cgl.tempData.currentScene;
 
     if (gltf)
     {

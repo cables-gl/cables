@@ -8,9 +8,13 @@ inObject.onChange =
     inValue.onChange = update;
 inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 
+
 function update()
 {
     const obj = inObject.get() || {};
+
+    op.setUiError("id", null);
+    if(inKey.get()=="")op.setUiError("id", "Key needs value");
 
     const newObj = JSON.parse(JSON.stringify(obj));
 

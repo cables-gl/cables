@@ -327,11 +327,11 @@ function computeIBLLUT(size)
         }
     }
 
-    cgl.frameStore.renderOffscreen = true;
+    cgl.tempData.renderOffscreen = true;
     iblLutFrameBuffer.renderStart(cgl);
     fullscreenRectangle.render(IBLLUTShader);
     iblLutFrameBuffer.renderEnd();
-    cgl.frameStore.renderOffscreen = false;
+    cgl.tempData.renderOffscreen = false;
     outTexIBLLUT.set(iblLutFrameBuffer.getTextureColor());
 }
 
@@ -407,7 +407,7 @@ inTrigger.onTriggered = function ()
     uniformFilteringInfo.setValue(filteringInfo);
     uniformPrefilteringInfo.setValue(prefilteringInfo);
 
-    if (!cgl.frameStore.shadowPass)
+    if (!cgl.tempData.shadowPass)
     {
         if (IBLLUTSettingsChanged)
         {
@@ -439,11 +439,11 @@ inTrigger.onTriggered = function ()
     pbrEnv.PCboxMin = [inPCboxMinX.get(), inPCboxMinY.get(), inPCboxMinZ.get()];
     pbrEnv.PCboxMax = [inPCboxMaxX.get(), inPCboxMaxY.get(), inPCboxMaxZ.get()];
 
-    cgl.frameStore.pbrEnvStack = cgl.frameStore.pbrEnvStack || [];
-    cgl.frameStore.pbrEnvStack.push(pbrEnv);
+    cgl.tempData.pbrEnvStack = cgl.tempData.pbrEnvStack || [];
+    cgl.tempData.pbrEnvStack.push(pbrEnv);
 
-    if (cgl.shouldDrawHelpers(op) && pbrEnv.UseParallaxCorrection && !cgl.frameStore.shadowPass) drawHelpers();
+    if (cgl.shouldDrawHelpers(op) && pbrEnv.UseParallaxCorrection && !cgl.tempData.shadowPass) drawHelpers();
 
     outTrigger.trigger();
-    cgl.frameStore.pbrEnvStack.pop();
+    cgl.tempData.pbrEnvStack.pop();
 };

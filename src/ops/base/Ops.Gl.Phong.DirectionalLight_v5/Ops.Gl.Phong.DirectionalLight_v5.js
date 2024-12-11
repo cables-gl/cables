@@ -210,11 +210,11 @@ inTrigger.onTriggered = function ()
 {
     if (updating)
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
         updateShadowMapFramebuffer();
     }
 
-    if (!cgl.frameStore.shadowPass)
+    if (!cgl.tempData.shadowPass)
     {
         if (!newLight.isUsed && !errorActive)
         {
@@ -247,11 +247,11 @@ inTrigger.onTriggered = function ()
         updateLight = false;
     }
 
-    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
+    if (!cgl.tempData.lightStack) cgl.tempData.lightStack = [];
 
-    if (!cgl.frameStore.shadowPass) drawHelpers();
+    if (!cgl.tempData.shadowPass) drawHelpers();
 
-    cgl.frameStore.lightStack.push(newLight);
+    cgl.tempData.lightStack.push(newLight);
 
     if (inCastShadow.get())
     {
@@ -261,9 +261,9 @@ inTrigger.onTriggered = function ()
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
         // remove light from stack and readd it with shadow map & mvp matrix
-        cgl.frameStore.lightStack.pop();
+        cgl.tempData.lightStack.pop();
 
-        cgl.frameStore.lightStack.push(newLight);
+        cgl.tempData.lightStack.push(newLight);
     }
     else
     {
@@ -272,5 +272,5 @@ inTrigger.onTriggered = function ()
 
     outTrigger.trigger();
 
-    cgl.frameStore.lightStack.pop();
+    cgl.tempData.lightStack.pop();
 };

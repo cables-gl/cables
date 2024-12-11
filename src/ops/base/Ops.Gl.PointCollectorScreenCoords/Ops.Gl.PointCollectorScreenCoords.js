@@ -9,7 +9,7 @@ let trans = vec3.create();
 
 render.onTriggered = function ()
 {
-    if (!cgl.frameStore.SplinePoints) return;
+    if (!cgl.tempData.SplinePoints) return;
 
     // vec3.transformMat4(pos, [0,0,0], cgl.mMatrix);
 
@@ -20,10 +20,10 @@ render.onTriggered = function ()
 
     let vp = cgl.getViewPort();
 
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 0] = vp[2] - (vp[2] * 0.5 - trans[0] * vp[2] * 0.5 / trans[2]);
-    cgl.frameStore.SplinePoints[cgl.frameStore.SplinePointCounter + 1] = vp[3] - (vp[3] * 0.5 + trans[1] * vp[3] * 0.5 / trans[2]);
+    cgl.tempData.SplinePoints[cgl.tempData.SplinePointCounter + 0] = vp[2] - (vp[2] * 0.5 - trans[0] * vp[2] * 0.5 / trans[2]);
+    cgl.tempData.SplinePoints[cgl.tempData.SplinePointCounter + 1] = vp[3] - (vp[3] * 0.5 + trans[1] * vp[3] * 0.5 / trans[2]);
 
-    cgl.frameStore.SplinePointCounter += 2;
+    cgl.tempData.SplinePointCounter += 2;
 
     trigger.trigger();
 };

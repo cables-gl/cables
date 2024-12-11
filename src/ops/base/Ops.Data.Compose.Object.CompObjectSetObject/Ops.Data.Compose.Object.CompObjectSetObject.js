@@ -10,9 +10,9 @@ inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 
 update.onTriggered = () =>
 {
-    if (op.patch.frameStore.compObject && op.patch.frameStore.compObject.length > 0)
+    if (op.patch.tempData.compObject && op.patch.tempData.compObject.length > 0)
     {
-        let obj = op.patch.frameStore.compObject[op.patch.frameStore.compObject.length - 1];
+        let obj = op.patch.tempData.compObject[op.patch.tempData.compObject.length - 1];
         obj[inKey.get()] = inObj.get();
     }
     next.trigger();

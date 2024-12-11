@@ -7,10 +7,10 @@ inTrigger.onTriggered = () =>
 {
     if (inBool.get())
     {
-        const oldStack = cgl.frameStore.lightStack;
-        cgl.frameStore.lightStack = [];
+        const oldStack = cgl.tempData.lightStack;
+        cgl.tempData.lightStack = [];
         outTrigger.trigger();
-        cgl.frameStore.lightStack = oldStack;
+        cgl.tempData.lightStack = oldStack;
         return;
     }
 

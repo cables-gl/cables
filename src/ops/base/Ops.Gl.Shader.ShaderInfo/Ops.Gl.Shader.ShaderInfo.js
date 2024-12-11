@@ -71,7 +71,7 @@ showUniforms.onTriggered = function ()
 
 exec.onTriggered = function ()
 {
-    if (cgl.frameStore.shadowPass) return;
+    if (cgl.tempData.shadowPass) return;
     const theShader = cgl.getShader();
 
     // if (theShader && shader && (theShader == shader || shader.lastCompile == theShader.lastCompile)) return next.trigger();

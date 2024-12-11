@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1732782367810
+        },
+        {
+            "message": "Html.ElementAccessibility renamed to Ops.Html.Attributes.ElementAccessibility",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733744762919
         }
     ],
     "layout": {

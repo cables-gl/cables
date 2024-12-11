@@ -217,7 +217,7 @@ const resultPointAt = vec3.create();
 
 function drawHelpers()
 {
-    if (cgl.frameStore.shadowPass) return;
+    if (cgl.tempData.shadowPass) return;
     if (cgl.shouldDrawHelpers(op))
     {
         gui.setTransformGizmo({
@@ -251,11 +251,11 @@ function renderLight()
 {
     if (updating)
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
         updateShadowMapFramebuffer();
     }
 
-    if (!cgl.frameStore.shadowPass)
+    if (!cgl.tempData.shadowPass)
     {
         if (!newLight.isUsed && !errorActive)
         {
@@ -289,7 +289,7 @@ function renderLight()
         newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
     }
 
-    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
+    if (!cgl.tempData.lightStack) cgl.tempData.lightStack = [];
 
     vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.set(pointAtPos, inPointAtX.get(), inPointAtY.get(), inPointAtZ.get());
@@ -304,9 +304,9 @@ function renderLight()
     outWorldPosY.set(newLight.position[1]);
     outWorldPosZ.set(newLight.position[2]);
 
-    if (!cgl.frameStore.shadowPass) drawHelpers();
+    if (!cgl.tempData.shadowPass) drawHelpers();
 
-    cgl.frameStore.lightStack.push(newLight);
+    cgl.tempData.lightStack.push(newLight);
 
     if (inCastShadow.get())
     {
@@ -316,17 +316,17 @@ function renderLight()
         outTexture.setRef(newLight.getShadowMapDepth());
 
         // remove light from stack and readd it with shadow map & mvp matrix
-        cgl.frameStore.lightStack.pop();
+        cgl.tempData.lightStack.pop();
 
         newLight.castShadow = inCastShadow.get();
         newLight.blurAmount = inBlur.get();
         newLight.normalOffset = inNormalOffset.get();
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();
-        cgl.frameStore.lightStack.push(newLight);
+        cgl.tempData.lightStack.push(newLight);
     }
 
     outTrigger.trigger();
 
-    cgl.frameStore.lightStack.pop();
+    cgl.tempData.lightStack.pop();
 }

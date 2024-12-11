@@ -5,10 +5,10 @@ const
 
 update.onTriggered = () =>
 {
-    op.patch.frameStore.compString = op.patch.frameStore.compString || "";
+    op.patch.tempData.compString = op.patch.tempData.compString || "";
 
-    op.patch.frameStore.compString = "";
+    op.patch.tempData.compString = "";
     next.trigger();
 
-    outArr.setRef(op.patch.frameStore.compString);
+    outArr.setRef(op.patch.tempData.compString);
 };

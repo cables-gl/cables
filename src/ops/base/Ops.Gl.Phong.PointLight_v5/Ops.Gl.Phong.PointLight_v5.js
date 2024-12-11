@@ -139,7 +139,7 @@ const transVec = vec3.create();
 
 function drawHelpers()
 {
-    if (cgl.frameStore.shadowPass) return;
+    if (cgl.tempData.shadowPass) return;
 
     if (CABLES.UI) gui.setTransform(op.id, inPosX.get(), inPosY.get(), inPosZ.get());
     if (op.isCurrentUiOp())
@@ -163,11 +163,11 @@ inTrigger.onTriggered = function ()
 {
     if (updating)
     {
-        if (cgl.frameStore.shadowPass) return;
+        if (cgl.tempData.shadowPass) return;
         updateShadowMapFramebuffer();
     }
 
-    if (!cgl.frameStore.shadowPass)
+    if (!cgl.tempData.shadowPass)
     {
         if (!newLight.isUsed && !errorActive)
         {
@@ -199,7 +199,7 @@ inTrigger.onTriggered = function ()
         updateLight = false;
     }
 
-    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
+    if (!cgl.tempData.lightStack) cgl.tempData.lightStack = [];
 
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
@@ -210,17 +210,17 @@ inTrigger.onTriggered = function ()
     outWorldPosY.set(newLight.position[1]);
     outWorldPosZ.set(newLight.position[2]);
 
-    if (!cgl.frameStore.shadowPass) drawHelpers();
+    if (!cgl.tempData.shadowPass) drawHelpers();
 
-    cgl.frameStore.lightStack.push(newLight);
+    cgl.tempData.lightStack.push(newLight);
 
     if (inCastShadow.get())
     {
         if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
 
-        if (!cgl.frameStore.shadowPass)
+        if (!cgl.tempData.shadowPass)
         {
-            cgl.frameStore.lightStack.pop();
+            cgl.tempData.lightStack.pop();
             newLight.castShadow = inCastShadow.get();
             newLight.shadowBias = inBias.get();
             newLight.shadowStrength = inShadowStrength.get();
@@ -238,7 +238,7 @@ inTrigger.onTriggered = function ()
                     }
                 }
             }
-            cgl.frameStore.lightStack.push(newLight);
+            cgl.tempData.lightStack.push(newLight);
         }
     }
     else
@@ -247,5 +247,5 @@ inTrigger.onTriggered = function ()
     }
 
     outTrigger.trigger();
-    cgl.frameStore.lightStack.pop();
+    cgl.tempData.lightStack.pop();
 };

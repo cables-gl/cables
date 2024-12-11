@@ -32,18 +32,18 @@ function update()
     outNames.set(null);
     // outRot.set(null);
 
-    if (!cgl.frameStore.currentScene) return;
+    if (!cgl.tempData.currentScene) return;
 
     const arrPos = [];
     const arrRot = [];
     const arrScale = [];
     const arrNames = [];
 
-    for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+    for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
     {
-        if (cgl.frameStore.currentScene.nodes[i].name.indexOf(inStr.get()) == 0)
+        if (cgl.tempData.currentScene.nodes[i].name.indexOf(inStr.get()) == 0)
         {
-            const n = cgl.frameStore.currentScene.nodes[i]._node;
+            const n = cgl.tempData.currentScene.nodes[i]._node;
             arrNames.push(n.name);
 
             if (n.translation) arrPos.push(n.translation[0], n.translation[1], n.translation[2]);

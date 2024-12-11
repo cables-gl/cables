@@ -71,10 +71,10 @@ function stopVr()
     xrSession = null;
     outSession.set(false);
 
-    cgl.frameStore.xrSession = null;
-    cgl.frameStore.xrFrame = null;
-    cgl.frameStore.xrViewerPose = null;
-    cgl.frameStore.xrReferenceSpace = null;
+    cgl.tempData.xrSession = null;
+    cgl.tempData.xrFrame = null;
+    cgl.tempData.xrViewerPose = null;
+    cgl.tempData.xrReferenceSpace = null;
 }
 
 function startVr()
@@ -127,10 +127,10 @@ function onXRFrame(hrTime, xrFrame)
     {
         xrViewerPose = xrFrame.getViewerPose(xrReferenceSpace);
 
-        cgl.frameStore.xrSession = xrSession;
-        cgl.frameStore.xrFrame = xrFrame;
-        cgl.frameStore.xrViewerPose = xrViewerPose;
-        cgl.frameStore.xrReferenceSpace = xrReferenceSpace;
+        cgl.tempData.xrSession = xrSession;
+        cgl.tempData.xrFrame = xrFrame;
+        cgl.tempData.xrViewerPose = xrViewerPose;
+        cgl.tempData.xrReferenceSpace = xrReferenceSpace;
 
         if (xrViewerPose) outMat.set(xrViewerPose.transform.matrix);
 
@@ -313,17 +313,16 @@ function r2texStart()
         if (msaa.get() == "4x") msSamples = 4;
         if (msaa.get() == "8x") msSamples = 8;
 
-        fb = new CGL.Framebuffer2(cgl, w, h,
-            {
-                "name": "render2texture " + op.id,
-                "isFloatingPointTexture": false,
-                "multisampling": ms,
-                "wrap": selectedWrap,
-                "filter": selectFilter,
-                "depth": true,
-                "multisamplingSamples": msSamples,
-                "clear": true
-            });
+        fb = new CGL.Framebuffer2(cgl, w, h, {
+            "name": "render2texture " + op.id,
+            "isFloatingPointTexture": false,
+            "multisampling": ms,
+            "wrap": selectedWrap,
+            "filter": selectFilter,
+            "depth": true,
+            "multisamplingSamples": msSamples,
+            "clear": true
+        });
 
         outDepth.set(fb.getTextureDepth());
     }

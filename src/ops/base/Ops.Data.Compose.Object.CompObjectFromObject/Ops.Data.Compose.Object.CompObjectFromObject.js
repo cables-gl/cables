@@ -5,9 +5,9 @@ const
 
 update.onTriggered = () =>
 {
-    if (op.patch.frameStore.compObject && op.patch.frameStore.compObject.length > 0)
+    if (op.patch.tempData.compObject && op.patch.tempData.compObject.length > 0)
     {
-        let arr = op.patch.frameStore.compObject[op.patch.frameStore.compObject.length - 1];
+        let arr = op.patch.tempData.compObject[op.patch.tempData.compObject.length - 1];
 
         try
         {

@@ -46,14 +46,13 @@ function initShader()
     if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
 
     if (tc)tc.dispose();
-    tc = new CGL.CopyTexture(cgl, "combinetextures",
-        {
-            "shader": attachments.rgbe2fp_frag,
-            "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixel.get()),
-            "pixelFormat": inPixel.get(),
-            "filter": filter,
-            "wrap": wrap
-        });
+    tc = new CGL.CopyTexture(cgl, "combinetextures", {
+        "shader": attachments.rgbe2fp_frag,
+        "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixel.get()),
+        "pixelFormat": inPixel.get(),
+        "filter": filter,
+        "wrap": wrap
+    });
 
     tc.setSize(inWidth.get(), inHeight.get());
 
@@ -77,7 +76,7 @@ let num = 0;
 
 exec.onTriggered = () =>
 {
-    if (needsUpdate && !op.patch.cgl.frameStore.shadowPass)
+    if (needsUpdate && !op.patch.cgl.tempData.shadowPass)
     {
         if (!tc)initShader();
         tc.bgShader.popTextures();

@@ -904,7 +904,7 @@ class Shader extends CgShader
         }
 
         if (this._objectIdUniform)
-            this._cgl.gl.uniform1f(this._objectIdUniform, ++this._cgl.frameStore.objectIdCounter);
+            this._cgl.gl.uniform1f(this._objectIdUniform, ++this._cgl.tempData.objectIdCounter);
 
         if (this._materialIdUniform)
             this._cgl.gl.uniform1f(this._materialIdUniform, this._materialId);

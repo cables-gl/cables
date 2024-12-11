@@ -1,0 +1,123 @@
+{
+    "id": "c760cd5e-0b4f-4c78-bd6c-c1dd87f4759e",
+    "created": 1733844146830,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1708945340334
+        },
+        {
+            "message": "Added class input and style attribute editor",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1710764535096
+        },
+        {
+            "message": "Added CSS Display parameter option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1712067774369
+        },
+        {
+            "message": "Show filename in extended op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721656111652
+        },
+        {
+            "message": "Disable caching when uploading a new version of image to the editor",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1721829675023
+        },
+        {
+            "message": "v2: Can now be ctrl-hover picked as all html elements",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725439597054
+        },
+        {
+            "message": "Fixed cache problems",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1729253223465
+        },
+        {
+            "message": "Alt attritbute",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733147052316
+        },
+        {
+            "message": "New Version: Element gets added to the DOM automatically",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1733844174616
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "values": [
+                    "Absolute",
+                    "Static",
+                    "Relative",
+                    "Fixed"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Class"
+            },
+            {
+                "type": 5,
+                "name": "Style"
+            },
+            {
+                "type": 0,
+                "name": "CSS Display index",
+                "values": [
+                    "not set",
+                    "none"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Alt Text"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Image Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an image(img) html element",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}

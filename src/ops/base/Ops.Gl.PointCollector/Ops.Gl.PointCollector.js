@@ -21,33 +21,33 @@ let mySplinePoints = [];
 
 render.onTriggered = function ()
 {
-    if (cgl.frameStore.SplinePoints)
+    if (cgl.tempData.SplinePoints)
     {
-        oldSplinePoints = cgl.frameStore.SplinePoints;
-        cgl.frameStore.SplinePoints = [];
+        oldSplinePoints = cgl.tempData.SplinePoints;
+        cgl.tempData.SplinePoints = [];
     }
 
-    cgl.frameStore.SplinePointCounter = 0;
+    cgl.tempData.SplinePointCounter = 0;
 
-    cgl.frameStore.SplinePoints = mySplinePoints;// cgl.frameStore.SplinePoints||[];
+    cgl.tempData.SplinePoints = mySplinePoints;// cgl.tempData.SplinePoints||[];
 
-    if (cgl.frameStore.SplinePointCounter != cgl.frameStore.SplinePoints.length)
-        cgl.frameStore.SplinePoints.length = cgl.frameStore.SplinePointCounter;
+    if (cgl.tempData.SplinePointCounter != cgl.tempData.SplinePoints.length)
+        cgl.tempData.SplinePoints.length = cgl.tempData.SplinePointCounter;
 
     if (!inAbsolute.get())
     {
         mat4.invert(m, cgl.mMatrix);
-        cgl.frameStore.SplinePointsInverseOriginalMatrix = m;
+        cgl.tempData.SplinePointsInverseOriginalMatrix = m;
     }
     else
     {
-        cgl.frameStore.SplinePointsInverseOriginalMatrix = null;
+        cgl.tempData.SplinePointsInverseOriginalMatrix = null;
     }
 
     trigger.trigger();
 
     outPoints.set(null);
-    outPoints.set(cgl.frameStore.SplinePoints);
+    outPoints.set(cgl.tempData.SplinePoints);
 
-    if (oldSplinePoints) cgl.frameStore.SplinePoints = oldSplinePoints;
+    if (oldSplinePoints) cgl.tempData.SplinePoints = oldSplinePoints;
 };

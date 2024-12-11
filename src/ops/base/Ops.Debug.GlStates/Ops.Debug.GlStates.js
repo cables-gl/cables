@@ -41,7 +41,7 @@ exec.onTriggered = function ()
     cull.set(cullModeToString(cgl.gl.getParameter(cgl.gl.CULL_FACE_MODE)));
 
     outError.set(errorToString(cgl.gl.getError()));
-    isShadowPass.set(cgl.frameStore.shadowPass);
+    isShadowPass.set(cgl.tempData.shadowPass);
 
     op.log(cgl._textureslots);
     next.trigger();

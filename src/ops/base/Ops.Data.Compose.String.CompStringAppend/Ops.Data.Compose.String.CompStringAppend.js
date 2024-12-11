@@ -7,12 +7,12 @@ const
 
 update.onTriggered = () =>
 {
-    op.patch.frameStore.compString = op.patch.frameStore.compString || "";
+    op.patch.tempData.compString = op.patch.tempData.compString || "";
 
-    if (inDir.get() == "End") op.patch.frameStore.compString += inStr.get();
-    else op.patch.frameStore.compString = inStr.get() + op.patch.frameStore.compString;
+    if (inDir.get() == "End") op.patch.tempData.compString += inStr.get();
+    else op.patch.tempData.compString = inStr.get() + op.patch.tempData.compString;
 
-    if (inAddBreak.get())op.patch.frameStore.compString += "\n";
+    if (inAddBreak.get())op.patch.tempData.compString += "\n";
 
     next.trigger();
 };

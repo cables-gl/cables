@@ -9,9 +9,9 @@ r.setUiAttribs({ "colorPick": true });
 
 inExec.onTriggered = () =>
 {
-    if (op.patch.frameStore.canvasCompose)
+    if (op.patch.tempData.canvasCompose)
     {
-        const ctx = op.patch.frameStore.canvasCompose.ctx;
+        const ctx = op.patch.tempData.canvasCompose.ctx;
 
         ctx.save();
 

@@ -162,7 +162,7 @@ inExec.onTriggered = function ()
         }
     }
 
-    cgl.frameStore.currentScene = gltf;
+    cgl.tempData.currentScene = gltf;
     nextBefore.trigger();
 
     if (needsMatUpdate) updateMaterials();
@@ -186,7 +186,7 @@ inExec.onTriggered = function ()
     }
 
     next.trigger();
-    cgl.frameStore.currentScene = null;
+    cgl.tempData.currentScene = null;
 
     cgl.popModelMatrix();
 

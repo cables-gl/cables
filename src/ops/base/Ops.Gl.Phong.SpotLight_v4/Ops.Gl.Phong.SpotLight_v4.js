@@ -134,7 +134,7 @@ const resultPointAt = vec3.create();
 
 inTrigger.onTriggered = function ()
 {
-    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
+    if (!cgl.tempData.lightStack) cgl.tempData.lightStack = [];
 
     vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.set(pointAtPos, inPointAtX.get(), inPointAtY.get(), inPointAtZ.get());
@@ -163,8 +163,8 @@ inTrigger.onTriggered = function ()
         );
     }
 
-    cgl.frameStore.lightStack.push(light);
+    cgl.tempData.lightStack.push(light);
 
     outTrigger.trigger();
-    cgl.frameStore.lightStack.pop();
+    cgl.tempData.lightStack.pop();
 };
