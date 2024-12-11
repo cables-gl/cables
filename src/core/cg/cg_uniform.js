@@ -187,11 +187,14 @@ class CgUniform
         else this._value = _value;
 
 
-        // console.log(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
-
-
+        if (this._value == undefined)
+        {
+            console.log("value undefined", this);
+            this._value = 0;
+        }
 
         this.setValue(this._value);
+
         this.needsUpdate = true;
     }
 

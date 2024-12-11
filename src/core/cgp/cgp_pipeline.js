@@ -91,8 +91,14 @@ export default class Pipeline
             this.setShaderListener(this._old.shader, shader);
             needsRebuildReason = "shader changed";
         }
+
+        if (shader.needsPipelineUpdate)
+        {
+            needsRebuildReason = "mesh needs update: " + shader.needsPipelineUpdate;
+            shader.needsPipelineUpdate = false;
+        }
         if (mesh.needsPipelineUpdate)needsRebuildReason = "mesh needs update";
-        if (this.shaderNeedsPipelineUpdate)needsRebuildReason = "shader needs update: " + this.shaderNeedsPipelineUpdate;
+        if (this.shaderNeedsPipelineUpdate)needsRebuildReason = "shader was recompiled: " + this.shaderNeedsPipelineUpdate;
 
         if (this._pipeCfg)
         {

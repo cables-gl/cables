@@ -277,6 +277,7 @@ export default class Binding
                 }
                 else
                 {
+                    console.log("uni t has no gputexture");
                     b.resource = this._cgp.getErrorTexture().createView();
                 }
 

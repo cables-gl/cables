@@ -95,7 +95,7 @@ class WebGpuContext extends CGState
         {
             this._simpleShader = new Shader(this, "simple default shader");
             this._simpleShader.setSource(defaultShaderSrcVert);
-            this._simpleShader.addUniformFrag("4f", "color", 1, 1, 0, 1);
+            this._simpleShader.addUniformFrag("4f", "color", [1, 1, 0, 1]);
         }
 
         this.fpsCounter.startFrame();
@@ -462,7 +462,7 @@ class WebGpuContext extends CGState
 
     getErrorTexture()
     {
-        if (this._errorTexture) return this._errorTexture;
+        // if (this._errorTexture) return this._errorTexture;
         const size = 256;
         this._errorTexture = new Texture(this, {});
         this._errorTexture.initFromData(CgTexture.getDefaultTextureData("stripes", size, { "r": 1, "g": 0, "b": 0 }), size, size);
