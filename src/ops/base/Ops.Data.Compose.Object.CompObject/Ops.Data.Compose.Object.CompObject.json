@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1733484226758
+        },
+        {
+            "message": "Added a reset trigger button to set itback to an empty object",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1733843551415
         }
     ],
     "layout": {
@@ -24,6 +30,10 @@
                 "type": 0,
                 "name": "Clear",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [

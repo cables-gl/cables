@@ -8,6 +8,7 @@ const
 
 inReset.onTriggered = () =>
 {
+    arr = [];
     outArr.setRef([]);
 };
 

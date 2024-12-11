@@ -1,10 +1,17 @@
 const
     update = op.inTrigger("Update"),
     inClear = op.inBool("Clear", true),
+    reset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     outArr = op.outObject("Result");
 
 let obj = {};
+
+reset.onTriggered = () =>
+{
+    obj = {};
+    outArr.setRef(obj);
+};
 
 update.onTriggered = () =>
 {

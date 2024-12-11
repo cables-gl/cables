@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1733743183176
+        },
+        {
+            "message": "Html.ElementAttributes renamed to Ops.Html.Attributes.ElementAttributes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733744809409
         }
     ],
     "layout": {
@@ -34,5 +40,6 @@
     "exampleProjectId": "Gflosw",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Get all attributes from an element an object"
 }

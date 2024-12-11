@@ -49,5 +49,6 @@
     "exampleProjectId": "zKfluu",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Sort an array of colors by saturation/lightness etc."
 }

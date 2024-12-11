@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1733148254635
+        },
+        {
+            "message": "Html.ElementSetAttribute renamed to Ops.Html.Attributes.ElementSetAttribute",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733744814508
         }
     ],
     "layout": {
