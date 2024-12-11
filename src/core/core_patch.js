@@ -809,7 +809,7 @@ class Patch extends EventTarget
 
     getSubPatchOp(patchId, objName)
     {
-        this.getFirstSubPatchOpByName(patchId, objName);
+        return this.getFirstSubPatchOpByName(patchId, objName);
     }
 
     getFirstSubPatchOpByName(patchId, objName)
