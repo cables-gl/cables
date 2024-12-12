@@ -1,0 +1,131 @@
+{
+    "id": "afa7cf72-9bc3-4058-987a-ddc7dbd55bf3",
+    "created": 1733840578753,
+    "license": "MIT",
+    "authorName": "kikohs",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "kikohs",
+            "date": 1733840578773
+        },
+        {
+            "message": "Patch.Pj3sRtw.ParticlePositionLerp renamed to Ops.Patch.Pt2FFzw.ParticlePositionLerp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733850419510
+        },
+        {
+            "message": "Patch.Pt2FFzw.ParticlePositionLerp renamed to Ops.Patch.PA5I6Lw.ParticlePositionLerp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1734019406429
+        },
+        {
+            "message": "Patch.PA5I6Lw.ParticlePositionLerp renamed to Ops.Extension.GlParticles.Dev.TargetedVelocity",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1734022818955
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Invert Area",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale x",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale y",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale z",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "group": "Rotation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Target Positions",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Collision",
+                "objType": "texture"
+            }
+        ]
+    }
+}
