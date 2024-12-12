@@ -272,9 +272,9 @@ op.preRender = function ()
 
 inTrigger.onTriggered = function ()
 {
-    if (cgl.tempData.lightStack)
+    if (cglframeStorelightStack)
     {
-        if (cgl.tempData.lightStack.length === 0)
+        if (cglframeStorelightStack.length === 0)
         {
             // if there is no lights in the stack, we set the material back to its initialLight
             for (let i = 0; i < lightUniforms.length; i += 1)
@@ -307,7 +307,7 @@ inTrigger.onTriggered = function ()
             // we have lights in the stack
             for (let i = 0; i < MAX_LIGHTS; i += 1)
             {
-                const light = cgl.tempData.lightStack[i];
+                const light = cglframeStorelightStack[i];
                 if (!light)
                 {
                     lightUniforms[i].type.setValue(LIGHT_TYPES.none);

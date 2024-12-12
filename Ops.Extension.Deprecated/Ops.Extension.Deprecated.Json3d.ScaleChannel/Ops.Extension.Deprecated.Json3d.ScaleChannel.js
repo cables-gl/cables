@@ -42,7 +42,7 @@ let animZ = null;
 
 function readAnim()
 {
-    let an = dataGetAnimation(cgl.tempData.currentScene.getValue(), channel.get());
+    let an = dataGetAnimation(cglframeStorecurrentScene.getValue(), channel.get());
 
     if (an)
     {
@@ -64,7 +64,7 @@ let vec = vec3.create();
 
 render.onTriggered = function ()
 {
-    if (!cgl.tempData.currentScene) return;
+    if (!cglframeStorecurrentScene) return;
 
     cgl.pushModelMatrix();
 

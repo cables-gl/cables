@@ -7,13 +7,13 @@ const cgl = op.patch.cgl;
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.tempData.currentScene) return;
+    if (!cglframeStorecurrentScene) return;
 
     let idx = inNode.get();
     idx = Math.max(0, idx);
-    idx = Math.min(cgl.tempData.currentScene.nodes.length - 1, idx);
+    idx = Math.min(cglframeStorecurrentScene.nodes.length - 1, idx);
 
-    let n = cgl.tempData.currentScene.nodes[idx];
+    let n = cglframeStorecurrentScene.nodes[idx];
 
     cgl.pushModelMatrix();
 

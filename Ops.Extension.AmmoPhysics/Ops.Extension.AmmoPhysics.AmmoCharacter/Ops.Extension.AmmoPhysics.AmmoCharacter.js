@@ -180,9 +180,9 @@ function copyCglTransform(transform)
 
 function update()
 {
-    if (world != cgl.tempData.ammoWorld) removeBody();
+    if (world != cglframeStoreammoWorld) removeBody();
 
-    world = cgl.tempData.ammoWorld;
+    world = cglframeStoreammoWorld;
     if (!world) return;
     if (!body) setup(world);
     if (!body) return;

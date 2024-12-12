@@ -12,10 +12,10 @@ exe.onTriggered = function ()
     // updateAll();
 
     vec3.transformMat4(mpos, [x.get(), y.get(), z.get()], cgl.mvMatrix);
-    cgl.tempData.phong.lights[id] = cgl.tempData.phong.lights[id] || {};
-    cgl.tempData.phong.lights[id].pos = mpos;
-    cgl.tempData.phong.lights[id].mul = mul.get();
-    cgl.tempData.phong.lights[id].type = 0;
+    cglframeStorephong.lights[id] = cglframeStorephong.lights[id] || {};
+    cglframeStorephong.lights[id].pos = mpos;
+    cglframeStorephong.lights[id].mul = mul.get();
+    cglframeStorephong.lights[id].type = 0;
 
     if (attachment.isLinked())
     {

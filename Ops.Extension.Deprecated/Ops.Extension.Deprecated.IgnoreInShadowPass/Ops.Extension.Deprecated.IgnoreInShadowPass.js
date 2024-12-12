@@ -3,7 +3,7 @@ let next = op.outTrigger("Next");
 
 exe.onTriggered = function ()
 {
-    if (!op.patch.cgl.tempData.shadowPass)
+    if (!op.patch.cglframeStoreshadowPass)
     {
         next.trigger();
     }

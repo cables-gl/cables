@@ -13,7 +13,7 @@ let oldWorld = null;
 
 exec.onTriggered = () =>
 {
-    const ammoWorld = op.patch.cgl.tempData.ammoWorld;
+    const ammoWorld = op.patch.cglframeStoreammoWorld;
     if (!ammoWorld) return;
 
     if (oldWorld != ammoWorld)

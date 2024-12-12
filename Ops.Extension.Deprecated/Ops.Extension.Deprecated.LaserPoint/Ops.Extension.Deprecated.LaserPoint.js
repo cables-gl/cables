@@ -32,7 +32,7 @@ numPoints.set(1);
 let vec = vec3.create();
 this.render.onTriggered = function ()
 {
-    if (!cgl.tempData.SplinePoints) return;
+    if (!cglframeStoreSplinePoints) return;
 
     vec3.set(vec, x.get(), y.get(), z.get());
     cgl.pushModelMatrix();
@@ -50,7 +50,7 @@ this.render.onTriggered = function ()
         obj.colB = b.get();
     }
 
-    cgl.tempData.laserPoints.push(obj);
+    cglframeStorelaserPoints.push(obj);
 
     self.trigger.trigger();
 

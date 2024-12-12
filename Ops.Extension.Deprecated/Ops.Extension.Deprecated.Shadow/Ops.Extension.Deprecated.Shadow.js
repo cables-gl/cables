@@ -36,7 +36,7 @@ op.render.onLinkChanged = removeModule;
 
 op.render.onTriggered = function ()
 {
-    if (cgl.tempData.shadow)
+    if (cglframeStoreshadow)
     {
         if (!cgl.getShader())
         {
@@ -77,14 +77,14 @@ op.render.onTriggered = function ()
         }
 
         // console.log(moduleVert.prefix);
-        // console.log(cgl.tempData.lightMVP[2]);
+        // console.log(cglframeStorelightMVP[2]);
 
-        moduleVert.lightMVP.setValue(cgl.tempData.lightMVP);
+        moduleVert.lightMVP.setValue(cglframeStorelightMVP);
 
         if (!shader) return;
         let texSlot = moduleVert.num + 5;
 
-        let shadow = cgl.tempData.shadow;
+        let shadow = cglframeStoreshadow;
         moduleFrag.mapsize.setValue(shadow.mapsize);
         moduleFrag.showMapArea.setValue(shadow.showMapArea ? 0.7 : 0);
         moduleFrag.strength.setValue(shadow.strength);

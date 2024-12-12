@@ -10,9 +10,9 @@ function render()
 {
     if (material.get())
     {
-        if (!cgl.tempData.currentScene.materials) cgl.tempData.currentScene.materials = [];
+        if (!cglframeStorecurrentScene.materials) cglframeStorecurrentScene.materials = [];
 
-        cgl.tempData.currentScene.materials[materialName.get()] = material.get();
+        cglframeStorecurrentScene.materials[materialName.get()] = material.get();
     }
 
     trigger.trigger();

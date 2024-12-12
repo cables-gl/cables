@@ -175,8 +175,8 @@ function draw()
 exec.onTriggered = function ()
 {
     if (!world)setup();
-    const old = cgl.tempData.world;
-    cgl.tempData.world = world;
+    const old = cglframeStoreworld;
+    cglframeStoreworld = world;
 
     next.trigger();
 
@@ -193,5 +193,5 @@ exec.onTriggered = function ()
     lastTime = time;
 
     if (doDraw.get()) draw();
-    cgl.tempData.world = old;
+    cglframeStoreworld = old;
 };

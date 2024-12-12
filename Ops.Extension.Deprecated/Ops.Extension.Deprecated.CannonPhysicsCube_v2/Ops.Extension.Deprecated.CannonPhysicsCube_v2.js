@@ -57,7 +57,7 @@ function removeBody()
 function setup(modelScale)
 {
     modelScale = modelScale || 1;
-    const world = cgl.tempData.world;
+    const world = cglframeStoreworld;
     if (!world) return;
 
     if (body)lastWorld.removeBody(body);
@@ -104,7 +104,7 @@ function render()
     timeout = setTimeout(stoppedRendering, 300);
 
     if (needSetup)setup();
-    if (lastWorld != cgl.tempData.world)setup();
+    if (lastWorld != cglframeStoreworld)setup();
     if (!body) return;
 
     outHit.set(body.raycastHit);

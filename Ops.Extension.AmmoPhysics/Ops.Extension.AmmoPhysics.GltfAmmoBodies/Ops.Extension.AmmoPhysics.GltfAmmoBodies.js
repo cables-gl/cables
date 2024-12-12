@@ -48,7 +48,7 @@ inActive.onChange = () =>
 function update()
 {
     if (!inActive.get()) return;
-    if (!added || world != cgl.tempData.ammoWorld) addToWorld();
+    if (!added || world != cglframeStoreammoWorld) addToWorld();
 
     if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0].body) == undefined)removeFromWorld();
 
@@ -96,12 +96,12 @@ function ping()
 
 function addToWorld()
 {
-    scene = cgl.tempData.currentScene;
-    if (!scene || !cgl.tempData.ammoWorld) return;
+    scene = cglframeStorecurrentScene;
+    if (!scene || !cglframeStoreammoWorld) return;
 
-    if (world != cgl.tempData.ammoWorld || currentSceneLoaded != scene.loaded) removeFromWorld();
+    if (world != cglframeStoreammoWorld || currentSceneLoaded != scene.loaded) removeFromWorld();
 
-    world = cgl.tempData.ammoWorld;
+    world = cglframeStoreammoWorld;
 
     if (!world)
     {

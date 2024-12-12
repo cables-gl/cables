@@ -271,13 +271,13 @@ function updateFrameStore()
     // outPassThrough1.setRef(ps.fb.getTextureColorNum(4));
     // outPassThrough2.setRef(ps.fb.getTextureColorNum(7));
 
-    cgl.tempData.particleSys.pixelFormat = thePixelFormat;
+    cglframeStoreparticleSys.pixelFormat = thePixelFormat;
 
-    cgl.tempData.particleSys.texPos = ps.fb.getTextureColorNum(0);
-    cgl.tempData.particleSys.texTimingInt = ps.fb.getTextureColorNum(1);
-    cgl.tempData.particleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
-    cgl.tempData.particleSys.texVelocity = ps.fb.getTextureColorNum(3);
-    cgl.tempData.particleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
+    cglframeStoreparticleSys.texPos = ps.fb.getTextureColorNum(0);
+    cglframeStoreparticleSys.texTimingInt = ps.fb.getTextureColorNum(1);
+    cglframeStoreparticleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
+    cglframeStoreparticleSys.texVelocity = ps.fb.getTextureColorNum(3);
+    cglframeStoreparticleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
 }
 
 exec.onTriggered = () =>
@@ -296,7 +296,7 @@ exec.onTriggered = () =>
         op.setUiError("fbProblem", null);
     }
 
-    cgl.tempData.particleSys = {};
+    cglframeStoreparticleSys = {};
 
     if (firstTime)
     {
@@ -308,7 +308,7 @@ exec.onTriggered = () =>
 
     timer.update();
 
-    cgl.tempData.particleSys.firstTime = firstTime;
+    cglframeStoreparticleSys.firstTime = firstTime;
 
     const timeDiff = (timer.get() - lastTime) * inSpeed.get();
 
@@ -361,9 +361,9 @@ function preWarm()
 
 function renderFrame(time, timeDiff)
 {
-    cgl.tempData.particleSys.time = time;
-    cgl.tempData.particleSys.timeDiff = timeDiff;
-    cgl.tempData.particleSys.reset = uniReset.getValue();
+    cglframeStoreparticleSys.time = time;
+    cglframeStoreparticleSys.timeDiff = timeDiff;
+    cglframeStoreparticleSys.reset = uniReset.getValue();
 
     outTime.set(time);
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpawnEnergy.get()]);

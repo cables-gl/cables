@@ -185,7 +185,7 @@ function findBoneChilds(n, parent, foundBone)
         }
 
         if (fillBoneList) boneList.push(n);
-        cgl.tempData.bone = n;
+        cglframeStorebone = n;
     }
 
     if (n.children)
@@ -206,8 +206,8 @@ render.onTriggered = function ()
 {
     pointCounter = 0;
     bones = 0;
-    scene = cgl.tempData.currentScene.getValue();
-    cgl.tempData.bones = boneList;
+    scene = cglframeStorecurrentScene.getValue();
+    cglframeStorebones = boneList;
 
     if (!scene) return;
     if (scene != oldScene)
@@ -228,5 +228,5 @@ render.onTriggered = function ()
     fillBoneList = false;
 
     next.trigger();
-    cgl.tempData.bones = null;
+    cglframeStorebones = null;
 };

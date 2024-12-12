@@ -37,7 +37,7 @@ inExec.onLinkChanged = () =>
 
 function update()
 {
-    if (!added || worldId != cgl.tempData.world.uuid) addToWorld();
+    if (!added || worldId != cglframeStoreworld.uuid) addToWorld();
 
     for (let i = 0; i < bodies.length; i++)
     {
@@ -91,14 +91,14 @@ function removeFromWorld()
 
 function addToWorld()
 {
-    scene = cgl.tempData.currentScene;
-    if (!scene || !cgl.tempData.world) return;
+    scene = cglframeStorecurrentScene;
+    if (!scene || !cglframeStoreworld) return;
 
     if (
-        worldId != cgl.tempData.world.uuid ||
+        worldId != cglframeStoreworld.uuid ||
         currentSceneLoaded != scene.loaded)removeFromWorld();
 
-    world = cgl.tempData.world;
+    world = cglframeStoreworld;
 
     if (!world)
     {

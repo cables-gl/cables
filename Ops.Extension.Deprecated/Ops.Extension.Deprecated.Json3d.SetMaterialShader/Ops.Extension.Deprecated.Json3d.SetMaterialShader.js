@@ -7,13 +7,13 @@ let mat = null;
 
 exe.onTriggered = function ()
 {
-    if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.replaceMaterials)
+    if (!cgl.tempData || !cglframeStorecurrentScene || !cglframeStorecurrentScene.replaceMaterials)
     {
         next.trigger();
         return;
     }
 
-    let replMats = cgl.tempData.currentScene.replaceMaterials;
+    let replMats = cglframeStorecurrentScene.replaceMaterials;
     if (replMats)
     {
         if (!mat)

@@ -26,10 +26,10 @@ let mySplinePoints = [];
 let oldSplinePoints = null;
 render.onTriggered = function ()
 {
-    if (cgl.tempData.SplinePoints) oldSplinePoints = cgl.tempData.SplinePoints;
+    if (cglframeStoreSplinePoints) oldSplinePoints = cglframeStoreSplinePoints;
 
     mySplinePoints.length = 0;
-    cgl.tempData.SplinePoints = mySplinePoints;
+    cglframeStoreSplinePoints = mySplinePoints;
 
     let shader = cgl.getShader();
     trigger.trigger();
@@ -53,10 +53,10 @@ render.onTriggered = function ()
 
     if (triggerPoints.isLinked())
     {
-        for (let i = 0; i < cgl.tempData.SplinePoints.length; i += 3)
+        for (let i = 0; i < cglframeStoreSplinePoints.length; i += 3)
         {
             let vec = [0, 0, 0];
-            vec3.set(vec, cgl.tempData.SplinePoints[i + 0], cgl.tempData.SplinePoints[i + 1], cgl.tempData.SplinePoints[i + 2]);
+            vec3.set(vec, cglframeStoreSplinePoints[i + 0], cglframeStoreSplinePoints[i + 1], cglframeStoreSplinePoints[i + 2]);
             cgl.pushModelMatrix();
             mat4.translate(cgl.mvMatrix, cgl.mvMatrix, vec);
             triggerPoints.trigger();
@@ -68,10 +68,10 @@ render.onTriggered = function ()
     outPoints.set(points);
 
     cgl.popModelMatrix();
-    // cgl.tempData.SplinePoints.length=0;
+    // cglframeStoreSplinePoints.length=0;
     mySplinePoints.length = 0;
 
-    if (oldSplinePoints) cgl.tempData.SplinePoints = oldSplinePoints;
+    if (oldSplinePoints) cglframeStoreSplinePoints = oldSplinePoints;
     oldSplinePoints = null;
 };
 
@@ -86,50 +86,50 @@ function bufferData()
     let i = 0, k = 0, j = 0;
     let subd = subDivs.get();
 
-    if (!cgl.tempData.SplinePoints || cgl.tempData.SplinePoints.length === 0) return;
+    if (!cglframeStoreSplinePoints || cglframeStoreSplinePoints.length === 0) return;
     points.length = 0;
 
     if (doClose.get())
     {
-        cgl.tempData.SplinePoints.push(cgl.tempData.SplinePoints[0]);
-        cgl.tempData.SplinePoints.push(cgl.tempData.SplinePoints[1]);
-        cgl.tempData.SplinePoints.push(cgl.tempData.SplinePoints[2]);
+        cglframeStoreSplinePoints.push(cglframeStoreSplinePoints[0]);
+        cglframeStoreSplinePoints.push(cglframeStoreSplinePoints[1]);
+        cglframeStoreSplinePoints.push(cglframeStoreSplinePoints[2]);
     }
 
     if (centerpoint.get())
     {
-        for (i = 0; i < cgl.tempData.SplinePoints.length; i += 3)
+        for (i = 0; i < cglframeStoreSplinePoints.length; i += 3)
         {
             // center point...
-            points.push(cgl.tempData.SplinePoints[0]);
-            points.push(cgl.tempData.SplinePoints[1]);
-            points.push(cgl.tempData.SplinePoints[2]);
+            points.push(cglframeStoreSplinePoints[0]);
+            points.push(cglframeStoreSplinePoints[1]);
+            points.push(cglframeStoreSplinePoints[2]);
 
             // other point
-            points.push(cgl.tempData.SplinePoints[i + 0]);
-            points.push(cgl.tempData.SplinePoints[i + 1]);
-            points.push(cgl.tempData.SplinePoints[i + 2]);
+            points.push(cglframeStoreSplinePoints[i + 0]);
+            points.push(cglframeStoreSplinePoints[i + 1]);
+            points.push(cglframeStoreSplinePoints[i + 2]);
         }
 
-        // cgl.tempData.SplinePoints=points;
+        // cglframeStoreSplinePoints=points;
     }
     else
     if (subd > 0 && !bezier.get())
     {
-        points.length = (cgl.tempData.SplinePoints.length - 3) * (subd);
+        points.length = (cglframeStoreSplinePoints.length - 3) * (subd);
 
         // console.log("should be length",points.length);
 
         var count = 0;
-        for (i = 0; i < cgl.tempData.SplinePoints.length - 3; i += 3)
+        for (i = 0; i < cglframeStoreSplinePoints.length - 3; i += 3)
         {
             for (j = 0; j < subd; j++)
             {
                 for (k = 0; k < 3; k++)
                 {
                     points[count] =
-                        cgl.tempData.SplinePoints[i + k] +
-                            (cgl.tempData.SplinePoints[i + k + 3] - cgl.tempData.SplinePoints[i + k]) *
+                        cglframeStoreSplinePoints[i + k] +
+                            (cglframeStoreSplinePoints[i + k + 3] - cglframeStoreSplinePoints[i + k]) *
                             j / subd;
                     count++;
                 }
@@ -141,19 +141,19 @@ function bufferData()
     else
     if (subd > 0 && bezier.get())
     {
-        points.length = (cgl.tempData.SplinePoints.length - 3) * (subd);
+        points.length = (cglframeStoreSplinePoints.length - 3) * (subd);
         var count = 0;
 
-        for (i = 3; i < cgl.tempData.SplinePoints.length - 6; i += 3)
+        for (i = 3; i < cglframeStoreSplinePoints.length - 6; i += 3)
         {
             for (j = 0; j < subd; j++)
             {
                 for (k = 0; k < 3; k++)
                 {
                     let p = ip(
-                        (cgl.tempData.SplinePoints[i + k - 3] + cgl.tempData.SplinePoints[i + k]) / 2,
-                        cgl.tempData.SplinePoints[i + k + 0],
-                        (cgl.tempData.SplinePoints[i + k + 3] + cgl.tempData.SplinePoints[i + k + 0]) / 2,
+                        (cglframeStoreSplinePoints[i + k - 3] + cglframeStoreSplinePoints[i + k]) / 2,
+                        cglframeStoreSplinePoints[i + k + 0],
+                        (cglframeStoreSplinePoints[i + k + 3] + cglframeStoreSplinePoints[i + k + 0]) / 2,
                         j / subd
                     );
 
@@ -166,14 +166,14 @@ function bufferData()
     }
     else
     {
-        points = cgl.tempData.SplinePoints.slice(); // fast array copy
+        points = cglframeStoreSplinePoints.slice(); // fast array copy
     }
 
     if (thickness.get() < 1) thickness.set(1);
 
     if (!points || points.length === 0)
     {
-        // console.log('no points...',cgl.tempData.SplinePoints.length);
+        // console.log('no points...',cglframeStoreSplinePoints.length);
     }
 
     if (renderLines.get())

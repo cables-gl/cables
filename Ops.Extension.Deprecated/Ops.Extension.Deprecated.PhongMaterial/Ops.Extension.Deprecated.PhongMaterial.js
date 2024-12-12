@@ -241,13 +241,13 @@ normIntensity.set(1);
         let count = 0;
         let i = 0;
         let num = 0;
-        if (!cgl.tempData.phong || !cgl.tempData.phong.lights)
+        if (!cglframeStorephong || !cglframeStorephong.lights)
         {
             num = 0;
         }
         else
         {
-            for (i in cgl.tempData.phong.lights)
+            for (i in cglframeStorephong.lights)
             {
                 num++;
             }
@@ -290,7 +290,7 @@ normIntensity.set(1);
         //             }
         //         }
 
-        if (!cgl.tempData.phong || !cgl.tempData.phong.lights)
+        if (!cglframeStorephong || !cglframeStorephong.lights)
         {
             // numLights=1;
             // lights[0].pos.setValue([1,2,0]);
@@ -304,29 +304,29 @@ normIntensity.set(1);
         else
         {
             count = 0;
-            // console.log(cgl.tempData.phong.lights);
+            // console.log(cglframeStorephong.lights);
             if (shader)
-                for (i in cgl.tempData.phong.lights)
+                for (i in cglframeStorephong.lights)
                 {
-                    lights[count].pos.setValue(cgl.tempData.phong.lights[i].pos);
-                    // if(cgl.tempData.phong.lights[i].changed)
+                    lights[count].pos.setValue(cglframeStorephong.lights[i].pos);
+                    // if(cglframeStorephong.lights[i].changed)
                     {
-                        cgl.tempData.phong.lights[i].changed = false;
-                        if (cgl.tempData.phong.lights[i].target) lights[count].target.setValue(cgl.tempData.phong.lights[i].target);
-                        lights[count].color.setValue(cgl.tempData.phong.lights[i].color);
-                        lights[count].attenuation.setValue(cgl.tempData.phong.lights[i].attenuation);
-                        lights[count].type.setValue(cgl.tempData.phong.lights[i].type);
-                        if (cgl.tempData.phong.lights[i].cone) lights[count].cone.setValue(cgl.tempData.phong.lights[i].cone);
-                        // if(cgl.tempData.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.tempData.phong.lights[i].depthMVP);
-                        if (cgl.tempData.phong.lights[i].depthTex) lights[count].texDepthTex = cgl.tempData.phong.lights[i].depthTex;
+                        cglframeStorephong.lights[i].changed = false;
+                        if (cglframeStorephong.lights[i].target) lights[count].target.setValue(cglframeStorephong.lights[i].target);
+                        lights[count].color.setValue(cglframeStorephong.lights[i].color);
+                        lights[count].attenuation.setValue(cglframeStorephong.lights[i].attenuation);
+                        lights[count].type.setValue(cglframeStorephong.lights[i].type);
+                        if (cglframeStorephong.lights[i].cone) lights[count].cone.setValue(cglframeStorephong.lights[i].cone);
+                        // if(cglframeStorephong.lights[i].depthMVP) lights[count].depthMVP.setValue(cglframeStorephong.lights[i].depthMVP);
+                        if (cglframeStorephong.lights[i].depthTex) lights[count].texDepthTex = cglframeStorephong.lights[i].depthTex;
 
-                        lights[count].mul.setValue(cgl.tempData.phong.lights[i].mul);
+                        lights[count].mul.setValue(cglframeStorephong.lights[i].mul);
                     }
 
                     count++;
                 }
             // console.log(count,'lights');
-            // cgl.tempData.phong.lights.length=0;
+            // cglframeStorephong.lights.length=0;
         }
     };
 }
@@ -358,10 +358,10 @@ var bindTextures = function ()
     }
 
     uniShadowPass.setValue(0);
-    if (cgl.tempData.phong && cgl.tempData.phong.lights)
-        for (i in cgl.tempData.phong.lights)
+    if (cglframeStorephong && cglframeStorephong.lights)
+        for (i in cglframeStorephong.lights)
         {
-            if (cgl.tempData.phong.lights[i].shadowPass == 1.0)uniShadowPass.setValue(1);
+            if (cglframeStorephong.lights[i].shadowPass == 1.0)uniShadowPass.setValue(1);
         }
 
     // for(var i in lights)
