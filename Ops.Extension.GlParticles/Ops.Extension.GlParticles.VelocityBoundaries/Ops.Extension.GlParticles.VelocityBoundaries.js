@@ -62,7 +62,7 @@ function createShader()
         "shader": attachments.velocityarea_frag,
         "vertexShader": CGL.Shader.getDefaultVertexShader(),
         "numRenderBuffers": 4,
-        "pixelFormat": cglframeStoreparticleSys.pixelFormat,
+        "pixelFormat": cgl.frameStore.particleSys.pixelFormat,
         "filter": CGL.Texture.FILTER_NEAREST
     });
 
@@ -159,7 +159,7 @@ function updateDefines()
 render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
-    if (!cglframeStoreparticleSys) return;
+    if (!cgl.frameStore.particleSys) return;
     if (!velAreaSys) createShader();
 
     // custom shader -------------------------------------------
@@ -217,22 +217,22 @@ render.onTriggered = function ()
 
     if (!tcCollision)
     {
-        tcCollision = new CGL.CopyTexture(op.patch.cgl, "ps_feedback", { "pixelFormat": cglframeStoreparticleSys.pixelFormat, "filter": CGL.Texture.FILTER_NEAREST });
+        tcCollision = new CGL.CopyTexture(op.patch.cgl, "ps_feedback", { "pixelFormat": cgl.frameStore.particleSys.pixelFormat, "filter": CGL.Texture.FILTER_NEAREST });
         outTexCollision.setRef(CGL.Texture.getEmptyTexture(cgl));
     }
-    if (cglframeStoreparticleSys.reset) outTexCollision.setRef(CGL.Texture.getEmptyTexture(cgl));
+    if (cgl.frameStore.particleSys.reset) outTexCollision.setRef(CGL.Texture.getEmptyTexture(cgl));
 
-    uniTimeDiff.set(cglframeStoreparticleSys.timeDiff);
+    uniTimeDiff.set(cgl.frameStore.particleSys.timeDiff);
 
     velAreaSys.bgShader.pushTexture(texCollisionFeedback, tcCollision.copy(outTexCollision.get()));
     velAreaSys.bgShader.pushTexture(textureUniform, cgl.currentTextureEffect.getCurrentSourceTexture());
-    velAreaSys.bgShader.pushTexture(texposuni, cglframeStoreparticleSys.texPos || CGL.Texture.getEmptyTexture(cgl));
+    velAreaSys.bgShader.pushTexture(texposuni, cgl.frameStore.particleSys.texPos || CGL.Texture.getEmptyTexture(cgl));
     velAreaSys.bgShader.pushTexture(texMuluni, inTexMultiply.get() || CGL.Texture.getEmptyTexture(cgl));
-    velAreaSys.bgShader.pushTexture(texAbsVel, cglframeStoreparticleSys.texAbsVel || CGL.Texture.getEmptyTexture(cgl));
-    velAreaSys.bgShader.pushTexture(texLifeProgress, cglframeStoreparticleSys.texLifeProgress || CGL.Texture.getEmptyTexture(cgl));
-    velAreaSys.bgShader.pushTexture(texTiming, cglframeStoreparticleSys.texTimingInt || CGL.Texture.getEmptyTexture(cgl));
+    velAreaSys.bgShader.pushTexture(texAbsVel, cgl.frameStore.particleSys.texAbsVel || CGL.Texture.getEmptyTexture(cgl));
+    velAreaSys.bgShader.pushTexture(texLifeProgress, cgl.frameStore.particleSys.texLifeProgress || CGL.Texture.getEmptyTexture(cgl));
+    velAreaSys.bgShader.pushTexture(texTiming, cgl.frameStore.particleSys.texTimingInt || CGL.Texture.getEmptyTexture(cgl));
 
-    velAreaSys.copy(cglframeStoreparticleSys.texPos);
+    velAreaSys.copy(cgl.frameStore.particleSys.texPos);
 
     outTexVel.setRef(velAreaSys.fb.getTextureColorNum(0));
     outTexCollision.setRef(velAreaSys.fb.getTextureColorNum(1));

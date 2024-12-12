@@ -30,14 +30,14 @@ function doRender()
 
 function reload()
 {
-    if (!cglframeStorecurrentScene || !cglframeStorecurrentScene.getValue()) return;
-    let meshes = cglframeStorecurrentScene.getValue().meshes;
+    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue()) return;
+    let meshes = cgl.frameStore.currentScene.getValue().meshes;
 
     let mesh = null;
 
     const indx = op.index.get();
 
-    if (cglframeStorecurrentScene && cglframeStorecurrentScene.getValue() && indx >= 0)
+    if (cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && indx >= 0)
     {
         op.uiAttr({ "warning": "" });
         op.uiAttr({ "info": "" });
@@ -48,13 +48,13 @@ function reload()
 
         if (CABLES.UTILS.isNumeric(indx))
         {
-            if (indx < 0 || indx >= cglframeStorecurrentScene.getValue().meshes.length)
+            if (indx < 0 || indx >= cgl.frameStore.currentScene.getValue().meshes.length)
             {
                 op.uiAttr({ "warning": "mesh not found - index out of range " });
                 return;
             }
 
-            jsonMesh = cglframeStorecurrentScene.getValue().meshes[parseInt(indx, 10)];
+            jsonMesh = cgl.frameStore.currentScene.getValue().meshes[parseInt(indx, 10)];
         }
 
         if (!jsonMesh)

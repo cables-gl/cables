@@ -33,12 +33,12 @@ updateListeners();
 
 function renderPickingPass()
 {
-    cglframeStorerenderOffscreen = true;
-    cglframeStorepickingpass = true;
-    cglframeStorepickingpassNum = 0;
+    cgl.frameStore.renderOffscreen = true;
+    cgl.frameStore.pickingpass = true;
+    cgl.frameStore.pickingpassNum = 0;
     op.trigger.trigger();
-    cglframeStorepickingpass = false;
-    cglframeStorerenderOffscreen = false;
+    cgl.frameStore.pickingpass = false;
+    cgl.frameStore.renderOffscreen = false;
 }
 
 function mouseMove(e)
@@ -159,17 +159,17 @@ const doRender = function ()
             cgl.popModelMatrix();
         }
 
-        cglframeStorepickedColor = pixelRGB[0] + pixelRGB[2];
+        cgl.frameStore.pickedColor = pixelRGB[0] + pixelRGB[2];
 
-        if (cglframeStorepickedColor)somethingPicked.set(true);
+        if (cgl.frameStore.pickedColor)somethingPicked.set(true);
         else somethingPicked.set(false);
 
-        cglframeStorepickingpassNum = 0;
+        cgl.frameStore.pickingpassNum = 0;
         op.trigger.trigger();
     }
     else
     {
-        cglframeStorepickedColor = -1000;
+        cgl.frameStore.pickedColor = -1000;
         op.trigger.trigger();
         somethingPicked.set(false);
     }

@@ -130,7 +130,7 @@ Object.keys(inLight).forEach(function (key)
 
 inTrigger.onTriggered = function ()
 {
-    if (!cglframeStorelightStack) cglframeStorelightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     if (cgl.shouldDrawHelpers(op))
     {
@@ -149,8 +149,8 @@ inTrigger.onTriggered = function ()
             "destZ": inPointAtZ.get(),
         });
     }
-    cglframeStorelightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     outArr.setRef([inPosX.get(), inPosY.get(), inPosZ.get(), inPointAtX.get(), inPointAtY.get(), inPointAtZ.get()]);
     outTrigger.trigger();
-    cglframeStorelightStack.pop();
+    cgl.frameStore.lightStack.pop();
 };

@@ -100,7 +100,7 @@ render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
     // if (!inPositions.get()) return;
-    if (!cglframeStoreparticleSys) return;
+    if (!cgl.frameStore.particleSys) return;
 
     if (CABLES.UI)
     {
@@ -144,7 +144,7 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    cgl.setTexture(1, cglframeStoreparticleSys.texPos.tex);
+    cgl.setTexture(1, cgl.frameStore.particleSys.texPos.tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

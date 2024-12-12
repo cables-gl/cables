@@ -57,9 +57,9 @@ function countNodes(n, count)
 
 render.onTriggered = function ()
 {
-    if (cglframeStorecurrentScene)
+    if (cgl.frameStore.currentScene)
     {
-        const scene = cglframeStorecurrentScene.getValue();
+        const scene = cgl.frameStore.currentScene.getValue();
 
         if (scene)
         {

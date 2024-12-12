@@ -1,6 +1,6 @@
 const cgl = op.patch.cgl;
 let scene = new CABLES.Variable();
-cglframeStorecurrentScene = null;
+cgl.frameStore.currentScene = null;
 
 let exe = op.inTrigger("Render");
 let filename = op.inFile("file", "3d json");

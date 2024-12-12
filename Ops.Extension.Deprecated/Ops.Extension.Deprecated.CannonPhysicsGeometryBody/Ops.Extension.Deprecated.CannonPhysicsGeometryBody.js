@@ -63,7 +63,7 @@ function setup(modelScale)
     if (!geom) return;
 
     modelScale = modelScale || 1;
-    const world = cglframeStoreworld;
+    const world = cgl.frameStore.world;
     if (!world) return;
 
     if (body)lastWorld.removeBody(body);
@@ -161,7 +161,7 @@ function render()
     const modelScale = getScaling(cgl.mMatrix);
 
     if (needSetup)setup(modelScale);
-    if (lastWorld != cglframeStoreworld)setup(modelScale);
+    if (lastWorld != cgl.frameStore.world)setup(modelScale);
     if (!body) return;
 
     if (oldmodelScale != modelScale)setup(modelScale);

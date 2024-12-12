@@ -9,6 +9,6 @@ this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_T
 
 this.render.onTriggered = function ()
 {
-    cglframeStorelaserPoints.length = 0;
+    cgl.frameStore.laserPoints.length = 0;
     self.trigger.trigger();
 };

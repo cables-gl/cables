@@ -5,12 +5,12 @@ let lastScene = null;
 
 update.onTriggered = function ()
 {
-    if (!cglframeStorecurrentScene || !cglframeStorecurrentScene.getValue()) return;
+    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue()) return;
 
-    if (lastScene != cglframeStorecurrentScene)
+    if (lastScene != cgl.frameStore.currentScene)
     {
-        lastScene = cglframeStorecurrentScene;
-        let meshes = cglframeStorecurrentScene.getValue().meshes;
+        lastScene = cgl.frameStore.currentScene;
+        let meshes = cgl.frameStore.currentScene.getValue().meshes;
         for (let i = 0; i < meshes.length; i++)
         {
             console.log("name", meshes[i]);

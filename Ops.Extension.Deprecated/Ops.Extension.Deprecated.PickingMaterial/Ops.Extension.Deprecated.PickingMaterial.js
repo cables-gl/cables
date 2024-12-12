@@ -22,10 +22,10 @@ cursor.set("pointer");
 
 function doRender()
 {
-    cglframeStorepickingpassNum += 2;
-    const currentPickingColor = cglframeStorepickingpassNum;
+    cgl.frameStore.pickingpassNum += 2;
+    const currentPickingColor = cgl.frameStore.pickingpassNum;
 
-    if (cglframeStorepickingpass)
+    if (cgl.frameStore.pickingpass)
     {
         // isPicked.set(false);
 
@@ -36,9 +36,9 @@ function doRender()
     }
     else
     {
-        isPicked.set(cglframeStorepickedColor == currentPickingColor);
+        isPicked.set(cgl.frameStore.pickedColor == currentPickingColor);
 
-        if (cglframeStorepickedColor == currentPickingColor)
+        if (cgl.frameStore.pickedColor == currentPickingColor)
         {
             if (cursor.get().length > 0 && cgl.canvas.style.cursor != cursor.get())
             {

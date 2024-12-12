@@ -3,7 +3,7 @@ let cgl = this.patch.cgl;
 
 let scene = new CABLES.Variable();
 
-cglframeStorecurrentScene = null;
+cgl.frameStore.currentScene = null;
 
 this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
 this.filename = this.addInPort(new CABLES.Port(this, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "mesh" }));
@@ -17,13 +17,13 @@ let cloneTransformStore = [];
 
 function render()
 {
-    let oldScene = cglframeStorecurrentScene;
-    cglframeStorecurrentScene = scene;
-    if (cglframeStorecurrentScene.materials)cglframeStorecurrentScene.materials.length = 0;// cglframeStorecurrentScene.materials=[];
+    let oldScene = cgl.frameStore.currentScene;
+    cgl.frameStore.currentScene = scene;
+    if (cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length = 0;// cgl.frameStore.currentScene.materials=[];
 
-    cglframeStorecloneTransforms = cloneTransformStore;
+    cgl.frameStore.cloneTransforms = cloneTransformStore;
     trigger.trigger();
-    cglframeStorecurrentScene = oldScene;
+    cgl.frameStore.currentScene = oldScene;
 }
 
 this.exe.onTriggered = render;

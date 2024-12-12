@@ -377,14 +377,14 @@ function ping()
 function update()
 {
     if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0]) == undefined)removeBody();
-    if (world != cglframeStoreammoWorld) removeBody();
+    if (world != cgl.frameStore.ammoWorld) removeBody();
     if (needsRemove)
     {
         removeBody();
         needsRemove = false;
     }
 
-    world = cglframeStoreammoWorld;
+    world = cgl.frameStore.ammoWorld;
     if (!world)
     {
         outRayHit.set(false);

@@ -7,13 +7,13 @@ let cgl = op.patch.cgl;
 
 render.onTriggered = function ()
 {
-    if (!cglframeStoreSplinePoints) return;
+    if (!cgl.frameStore.SplinePoints) return;
     let pos = [0, 0, 0];
     vec3.transformMat4(pos, [0, 0, 0], cgl.mvMatrix);
 
-    cglframeStoreSplinePoints.push(pos[0]);
-    cglframeStoreSplinePoints.push(pos[1]);
-    cglframeStoreSplinePoints.push(pos[2]);
+    cgl.frameStore.SplinePoints.push(pos[0]);
+    cgl.frameStore.SplinePoints.push(pos[1]);
+    cgl.frameStore.SplinePoints.push(pos[2]);
 
     trigger.trigger();
 };

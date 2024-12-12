@@ -20,9 +20,9 @@ let oldWorld = null;
 
 inRender.onTriggered = () =>
 {
-    if (cglframeStoreshadowPass) return outNext.trigger();
+    if (cgl.frameStore.shadowPass) return outNext.trigger();
 
-    const ammoWorld = cglframeStoreammoWorld;
+    const ammoWorld = cgl.frameStore.ammoWorld;
     if (!ammoWorld) return;
 
     if (!debugDrawer || oldWorld != ammoWorld.world)

@@ -31,7 +31,7 @@ let animW = null;
 
 function readAnim()
 {
-    let an = dataGetAnimation(cglframeStorecurrentScene.getValue(), channel.get());
+    let an = dataGetAnimation(cgl.frameStore.currentScene.getValue(), channel.get());
 
     if (an)
     {
@@ -54,7 +54,7 @@ function readAnim()
 
 render.onTriggered = function ()
 {
-    if (!cglframeStorecurrentScene) return;
+    if (!cgl.frameStore.currentScene) return;
 
     if (animX)
     {

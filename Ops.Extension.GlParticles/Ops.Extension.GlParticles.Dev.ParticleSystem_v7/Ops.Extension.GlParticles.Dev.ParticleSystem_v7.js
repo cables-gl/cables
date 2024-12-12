@@ -143,7 +143,7 @@ const texBlack = new CGL.Texture(cgl,
 //             "shader": attachments.velocity_feedback_frag_frag,
 //             "vertexShader": CGL.Shader.getDefaultVertexShader(),
 //             "numRenderBuffers": 4,
-//             "pixelFormat": cglframeStoreparticleSys.pixelFormat,
+//             "pixelFormat": cgl.frameStore.particleSys.pixelFormat,
 //             "filter": CGL.Texture.FILTER_NEAREST
 //         });
 
@@ -262,13 +262,13 @@ function updateFrameStore()
     // outPassThrough1.setRef(ps.fb.getTextureColorNum(4));
     // outPassThrough2.setRef(ps.fb.getTextureColorNum(7));
 
-    cglframeStoreparticleSys.pixelFormat = thePixelFormat;
+    cgl.frameStore.particleSys.pixelFormat = thePixelFormat;
 
-    cglframeStoreparticleSys.texPos = ps.fb.getTextureColorNum(0);
-    cglframeStoreparticleSys.texTimingInt = ps.fb.getTextureColorNum(1);
-    cglframeStoreparticleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
-    cglframeStoreparticleSys.texVelocity = ps.fb.getTextureColorNum(3);
-    cglframeStoreparticleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
+    cgl.frameStore.particleSys.texPos = ps.fb.getTextureColorNum(0);
+    cgl.frameStore.particleSys.texTimingInt = ps.fb.getTextureColorNum(1);
+    cgl.frameStore.particleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
+    cgl.frameStore.particleSys.texVelocity = ps.fb.getTextureColorNum(3);
+    cgl.frameStore.particleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
 }
 
 exec.onTriggered = () =>
@@ -287,7 +287,7 @@ exec.onTriggered = () =>
         op.setUiError("fbProblem", null);
     }
 
-    cglframeStoreparticleSys = {};
+    cgl.frameStore.particleSys = {};
 
     if (firstTime)
     {
@@ -299,7 +299,7 @@ exec.onTriggered = () =>
 
     timer.update();
 
-    cglframeStoreparticleSys.firstTime = firstTime;
+    cgl.frameStore.particleSys.firstTime = firstTime;
 
     const timeDiff = (timer.get() - lastTime) * inSpeed.get();
 
@@ -352,9 +352,9 @@ function preWarm()
 
 function renderFrame(time, timeDiff)
 {
-    cglframeStoreparticleSys.time = time;
-    cglframeStoreparticleSys.timeDiff = timeDiff;
-    cglframeStoreparticleSys.reset = uniReset.getValue();
+    cgl.frameStore.particleSys.time = time;
+    cgl.frameStore.particleSys.timeDiff = timeDiff;
+    cgl.frameStore.particleSys.reset = uniReset.getValue();
 
     outTime.set(time);
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpawnEnergy.get()]);
