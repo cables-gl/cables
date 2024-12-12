@@ -9,7 +9,7 @@
           "y": 2237.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -104,7 +104,7 @@
           "y": 2137.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -112,6 +112,7 @@
       "portsIn": [
         {
           "name": "File",
+          "value": "/assets/664711fbbb71706c00625ead/cables.svg",
           "display": "file"
         },
         {
@@ -166,7 +167,7 @@
           "y": 2417.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -249,7 +250,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "1a4lmjwxl",
       "uiAttribs": {
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "translate": {
           "x": 576.7960877610235,
           "y": 1753.804945918282
@@ -273,15 +274,8 @@
         },
         {
           "name": "innerOut_q7rod63s1",
-          "title": "File",
-          "links": [
-            {
-              "portIn": "File",
-              "portOut": "innerOut_q7rod63s1",
-              "objIn": "a7n7krbfc",
-              "objOut": "1a4lmjwxl"
-            }
-          ]
+          "value": "/assets/664711fbbb71706c00625ead/cables.svg",
+          "title": "File"
         }
       ]
     },
@@ -289,7 +283,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "c9a8ryr9w",
       "uiAttribs": {
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "translate": {
           "x": 576.7960877610235,
           "y": 2709.3513516777552
@@ -304,7 +298,7 @@
       "id": "kreh9vx3e",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "translate": {
           "x": 746.0383115120753,
           "y": 2629.3513516777552
@@ -324,7 +318,7 @@
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "6zqovniz1",
       "uiAttribs": {
-        "subPatch": "k2to7wb9u",
+        "subPatch": "gulnaj85y",
         "translate": {
           "x": 758.0383115120753,
           "y": 2532.970082444286
