@@ -29,7 +29,7 @@ groundPlane.onChange = setup;
 
 const cgl = op.patch.cgl;
 let world = null;
-cgl.frameStore = cgl.frameStore || {};
+cgl.tempData = cgl.tempData || {};
 
 const fixedTimeStep = 1.0 / 60.0; // seconds
 const maxSubSteps = 11;
@@ -175,8 +175,8 @@ function draw()
 exec.onTriggered = function ()
 {
     if (!world)setup();
-    const old = cgl.frameStore.world;
-    cgl.frameStore.world = world;
+    const old = cgl.tempData.world;
+    cgl.tempData.world = world;
 
     next.trigger();
 
@@ -193,5 +193,5 @@ exec.onTriggered = function ()
     lastTime = time;
 
     if (doDraw.get()) draw();
-    cgl.frameStore.world = old;
+    cgl.tempData.world = old;
 };

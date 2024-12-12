@@ -185,9 +185,9 @@ let arrRot = [];
 inExec.onTriggered = () =>
 {
     if (shouldspawnOne) spawn();
-    if (world != cgl.frameStore.ammoWorld)
+    if (world != cgl.tempData.ammoWorld)
     {
-        world = cgl.frameStore.ammoWorld;
+        world = cgl.tempData.ammoWorld;
         world.on("dispose", dispose);
     }
 

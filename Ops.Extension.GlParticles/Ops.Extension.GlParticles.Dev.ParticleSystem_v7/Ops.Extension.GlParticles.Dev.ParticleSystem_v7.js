@@ -143,7 +143,7 @@ const texBlack = new CGL.Texture(cgl,
 //             "shader": attachments.velocity_feedback_frag_frag,
 //             "vertexShader": CGL.Shader.getDefaultVertexShader(),
 //             "numRenderBuffers": 4,
-//             "pixelFormat": cgl.frameStore.particleSys.pixelFormat,
+//             "pixelFormat": cgl.tempData.particleSys.pixelFormat,
 //             "filter": CGL.Texture.FILTER_NEAREST
 //         });
 
@@ -168,14 +168,13 @@ function getPixelFormat()
 function createShader()
 {
     if (ps)ps.dispose();
-    ps = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos",
-        {
-            "shader": attachments.particle_frag,
-            "vertexShader": attachments.particle_vert,
-            "numRenderBuffers": 8,
-            "pixelFormat": getPixelFormat(),
-            "filter": CGL.Texture.FILTER_NEAREST
-        });
+    ps = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos", {
+        "shader": attachments.particle_frag,
+        "vertexShader": attachments.particle_vert,
+        "numRenderBuffers": 8,
+        "pixelFormat": getPixelFormat(),
+        "filter": CGL.Texture.FILTER_NEAREST
+    });
 
     firstTime = true;
 
@@ -263,13 +262,13 @@ function updateFrameStore()
     // outPassThrough1.setRef(ps.fb.getTextureColorNum(4));
     // outPassThrough2.setRef(ps.fb.getTextureColorNum(7));
 
-    cgl.frameStore.particleSys.pixelFormat = thePixelFormat;
+    cgl.tempData.particleSys.pixelFormat = thePixelFormat;
 
-    cgl.frameStore.particleSys.texPos = ps.fb.getTextureColorNum(0);
-    cgl.frameStore.particleSys.texTimingInt = ps.fb.getTextureColorNum(1);
-    cgl.frameStore.particleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
-    cgl.frameStore.particleSys.texVelocity = ps.fb.getTextureColorNum(3);
-    cgl.frameStore.particleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
+    cgl.tempData.particleSys.texPos = ps.fb.getTextureColorNum(0);
+    cgl.tempData.particleSys.texTimingInt = ps.fb.getTextureColorNum(1);
+    cgl.tempData.particleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
+    cgl.tempData.particleSys.texVelocity = ps.fb.getTextureColorNum(3);
+    cgl.tempData.particleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
 }
 
 exec.onTriggered = () =>
@@ -288,7 +287,7 @@ exec.onTriggered = () =>
         op.setUiError("fbProblem", null);
     }
 
-    cgl.frameStore.particleSys = {};
+    cgl.tempData.particleSys = {};
 
     if (firstTime)
     {
@@ -300,7 +299,7 @@ exec.onTriggered = () =>
 
     timer.update();
 
-    cgl.frameStore.particleSys.firstTime = firstTime;
+    cgl.tempData.particleSys.firstTime = firstTime;
 
     const timeDiff = (timer.get() - lastTime) * inSpeed.get();
 
@@ -353,9 +352,9 @@ function preWarm()
 
 function renderFrame(time, timeDiff)
 {
-    cgl.frameStore.particleSys.time = time;
-    cgl.frameStore.particleSys.timeDiff = timeDiff;
-    cgl.frameStore.particleSys.reset = uniReset.getValue();
+    cgl.tempData.particleSys.time = time;
+    cgl.tempData.particleSys.timeDiff = timeDiff;
+    cgl.tempData.particleSys.reset = uniReset.getValue();
 
     outTime.set(time);
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpawnEnergy.get()]);

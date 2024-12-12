@@ -58,7 +58,7 @@ function addObject(obj)
     {
         let object = {};
 
-        let jsonMesh = cgl.frameStore.currentScene.getValue().meshes[obj.meshes[0]];
+        let jsonMesh = cgl.tempData.currentScene.getValue().meshes[obj.meshes[0]];
 
         let verts = JSON.parse(JSON.stringify(jsonMesh.vertices));
         let geom = new CGL.Geometry();
@@ -93,23 +93,23 @@ function addObject(obj)
 
 function reload()
 {
-    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue()) return;
-    // var omeshes=cgl.frameStore.currentScene.getValue().meshes;
+    if (!cgl.tempData.currentScene || !cgl.tempData.currentScene.getValue()) return;
+    // var omeshes=cgl.tempData.currentScene.getValue().meshes;
 
     objects.length = 0;
 
-    console.log(cgl.frameStore.currentScene.getValue());
+    console.log(cgl.tempData.currentScene.getValue());
 
-    addObject(cgl.frameStore.currentScene.getValue().rootnode);
+    addObject(cgl.tempData.currentScene.getValue().rootnode);
     console.log("got # objects...", objects.length);
 
-    // if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue())
+    // if(cgl.tempData.currentScene && cgl.tempData.currentScene.getValue())
     // {
     //     op.uiAttr({warning:''});
     //     op.uiAttr({info:''});
     //     var jsonMesh=null;
 
-    //     for(var i=0;i<cgl.frameStore.currentScene.getValue().meshes.length;i++)
+    //     for(var i=0;i<cgl.tempData.currentScene.getValue().meshes.length;i++)
     //     {
 
     //     }

@@ -12,7 +12,7 @@ let cgl = op.patch.cgl;
 
 let scene = new CABLES.Variable();
 
-cgl.frameStore.currentScene = null;
+cgl.tempData.currentScene = null;
 
 doCreate.onTriggered = createNodes;
 
@@ -31,18 +31,18 @@ let subPatchOp = null;
 
 function render()
 {
-    let oldScene = cgl.frameStore.currentScene;
-    cgl.frameStore.currentScene = scene;
-    if (cgl.frameStore.currentScene.materials)cgl.frameStore.currentScene.materials.length = 0;
-    cgl.frameStore.currentScene.replaceMaterials = inReplaceMaterials.get();
+    let oldScene = cgl.tempData.currentScene;
+    cgl.tempData.currentScene = scene;
+    if (cgl.tempData.currentScene.materials)cgl.tempData.currentScene.materials.length = 0;
+    cgl.tempData.currentScene.replaceMaterials = inReplaceMaterials.get();
 
-    cgl.frameStore.cloneTransforms = cloneTransformStore;
+    cgl.tempData.cloneTransforms = cloneTransformStore;
 
     cgl.pushModelMatrix();
     trigger.trigger();
     cgl.popModelMatrix();
 
-    cgl.frameStore.currentScene = oldScene;
+    cgl.tempData.currentScene = oldScene;
 }
 
 let setPortAnimated = function (p, doLerp)

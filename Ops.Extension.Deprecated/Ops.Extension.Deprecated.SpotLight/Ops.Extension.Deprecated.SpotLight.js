@@ -43,8 +43,8 @@
 
 // var updateColor=function()
 // {
-//     cgl.frameStore.phong.lights[id].color=[ r.get(), g.get(), b.get() ];
-//     cgl.frameStore.phong.lights[id].cone=cone.get();
+//     cgl.tempData.phong.lights[id].color=[ r.get(), g.get(), b.get() ];
+//     cgl.tempData.phong.lights[id].cone=cone.get();
 // };
 
 // var mpos=vec3.create();
@@ -52,24 +52,24 @@
 
 // var updateAttenuation=function()
 // {
-//     cgl.frameStore.phong.lights[id].attenuation=attenuation.get();
+//     cgl.tempData.phong.lights[id].attenuation=attenuation.get();
 // };
 
 // this.onDelete=function()
 // {
-//     // console.log('cgl.frameStore.phong.lights.length',cgl.frameStore.phong.lights.length);
+//     // console.log('cgl.tempData.phong.lights.length',cgl.tempData.phong.lights.length);
 // };
 
 // var updateAll=function()
 // {
-//     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
-//     if(!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights=[];
-//     cgl.frameStore.phong.lights[id]={};
-//     cgl.frameStore.phong.lights[id].id=id;
-//     cgl.frameStore.phong.lights[id].pos=mpos;
-//     cgl.frameStore.phong.lights[id].target=tpos;
-//     cgl.frameStore.phong.lights[id].type=1;
-//     cgl.frameStore.phong.lights[id].cone=cone.get();
+//     if(!cgl.tempData.phong)cgl.tempData.phong={};
+//     if(!cgl.tempData.phong.lights)cgl.tempData.phong.lights=[];
+//     cgl.tempData.phong.lights[id]={};
+//     cgl.tempData.phong.lights[id].id=id;
+//     cgl.tempData.phong.lights[id].pos=mpos;
+//     cgl.tempData.phong.lights[id].target=tpos;
+//     cgl.tempData.phong.lights[id].type=1;
+//     cgl.tempData.phong.lights[id].cone=cone.get();
 
 //     updateColor();
 //     updateAttenuation();
@@ -116,18 +116,18 @@
 
 // exe.onTriggered=function()
 // {
-//     cgl.frameStore.phong.lights[id].shadowPass=1;
+//     cgl.tempData.phong.lights[id].shadowPass=1;
 //     renderShadowMap();
-//     cgl.frameStore.phong.lights[id].shadowPass=0;
+//     cgl.tempData.phong.lights[id].shadowPass=0;
 
 //     vec3.transformMat4(mpos, vecEye, cgl.mvMatrix);
-//     cgl.frameStore.phong.lights[id].pos=mpos;
-//     cgl.frameStore.phong.lights[id].type=1;
+//     cgl.tempData.phong.lights[id].pos=mpos;
+//     cgl.tempData.phong.lights[id].type=1;
 //     vec3.transformMat4(tpos, vecTarget, cgl.mvMatrix);
-//     cgl.frameStore.phong.lights[id].target=tpos;
-//     cgl.frameStore.phong.lights[id].mul=mul.get();
-//     cgl.frameStore.phong.lights[id].depthMVP=depthMVP;
-//     cgl.frameStore.phong.lights[id].depthTex=fb.getTextureDepth().tex;
+//     cgl.tempData.phong.lights[id].target=tpos;
+//     cgl.tempData.phong.lights[id].mul=mul.get();
+//     cgl.tempData.phong.lights[id].depthMVP=depthMVP;
+//     cgl.tempData.phong.lights[id].depthTex=fb.getTextureDepth().tex;
 
 //     if(attachment.isLinked())
 //     {

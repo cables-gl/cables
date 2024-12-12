@@ -21,10 +21,10 @@ joint.onChange = function ()
 
 exec.onTriggered = function ()
 {
-    if (cgl.frameStore.bones != oldBones || oldBonesNum != cgl.frameStore.bones.length)
+    if (cgl.tempData.bones != oldBones || oldBonesNum != cgl.tempData.bones.length)
     {
-        const bones = oldBones = cgl.frameStore.bones;
-        oldBonesNum = cgl.frameStore.bones.length;
+        const bones = oldBones = cgl.tempData.bones;
+        oldBonesNum = cgl.tempData.bones.length;
 
         const values = [];
         const oldValue = joint.get();
@@ -40,14 +40,14 @@ exec.onTriggered = function ()
         joint.setUiAttribs({ "values": values });
     }
 
-    if (cgl.frameStore.bones)
+    if (cgl.tempData.bones)
     {
-        const bone = cgl.frameStore.bones[boneIndex];
+        const bone = cgl.tempData.bones[boneIndex];
         cgl.pushModelMatrix();
 
         mat4.mul(cgl.mMatrix, cgl.mMatrix, bone.boneMatrix);
         // mat4.translate()
-        // cgl.frameStore.bones.transformed
+        // cgl.tempData.bones.transformed
         next.trigger();
         cgl.popModelMatrix();
     }

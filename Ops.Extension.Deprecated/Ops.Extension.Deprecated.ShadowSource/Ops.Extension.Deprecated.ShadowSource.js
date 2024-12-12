@@ -85,15 +85,12 @@ function renderPickingPass()
     mat4.mul(lightMVP, cgl.pMatrix, cgl.vMatrix);
 
     let biasMatrix = mat4.fromValues(
-        0.5, 0.0, 0.0, 0.0,
-        0.0, 0.5, 0.0, 0.0,
-        0.0, 0.0, 0.5, 0.0,
-        0.5, 0.5, 0.5, 1.0);
+        0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
     mat4.mul(lightMVP, biasMatrix, lightMVP);
     // mat4.mul(lightMVP,lightMVP,biasMatrix);
 
-    cgl.frameStore.lightMVP = lightMVP;
-    // console.log(cgl.frameStore.lightMVP);
+    cgl.tempData.lightMVP = lightMVP;
+    // console.log(cgl.tempData.lightMVP);
 
     // mat4.mul(cgl.pMatrix);
 
@@ -131,7 +128,7 @@ let doRender = function ()
         cgl.gl.polygonOffset(polyOff.get(), polyOff.get());
 
         cgl.gl.colorMask(false, false, false, false);
-        cgl.frameStore.shadowPass = true;
+        cgl.tempData.shadowPass = true;
         renderPickingPass();
         cgl.gl.colorMask(true, true, true, true);
 
@@ -143,13 +140,13 @@ let doRender = function ()
         shadowObj.samples = Math.max(1, samples.get());
         shadowObj.bias = bias.get();
         shadowObj.shadowMap = fb.getTextureDepth();
-        cgl.frameStore.shadow = shadowObj;
+        cgl.tempData.shadow = shadowObj;
 
         cgl.gl.cullFace(cgl.gl.BACK);
-        cgl.frameStore.shadowPass = false;
+        cgl.tempData.shadowPass = false;
 
         next.trigger();
-        cgl.frameStore.shadow = null;
+        cgl.tempData.shadow = null;
 
         cgl.gl.disable(cgl.gl.CULL_FACE);
     }

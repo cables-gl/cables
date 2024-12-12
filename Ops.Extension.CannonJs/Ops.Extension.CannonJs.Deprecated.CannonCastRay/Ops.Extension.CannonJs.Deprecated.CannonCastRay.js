@@ -150,7 +150,7 @@ function render()
 {
     next.trigger();
 
-    const world = cgl.frameStore.world;
+    const world = cgl.tempData.world;
     if (!world) return;
 
     let hitBody = null;

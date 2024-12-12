@@ -133,7 +133,7 @@ Object.keys(inLight).forEach(function (key)
 
 inTrigger.onTriggered = function ()
 {
-    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
+    if (!cgl.tempData.lightStack) cgl.tempData.lightStack = [];
 
     if (op.isCurrentUiOp())
     {
@@ -143,7 +143,7 @@ inTrigger.onTriggered = function ()
             "posZ": inPosZ,
         });
     }
-    cgl.frameStore.lightStack.push(light);
+    cgl.tempData.lightStack.push(light);
     outTrigger.trigger();
-    cgl.frameStore.lightStack.pop();
+    cgl.tempData.lightStack.pop();
 };

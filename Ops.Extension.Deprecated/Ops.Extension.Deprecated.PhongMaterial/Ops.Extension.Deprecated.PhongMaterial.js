@@ -241,13 +241,13 @@ normIntensity.set(1);
         let count = 0;
         let i = 0;
         let num = 0;
-        if (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+        if (!cgl.tempData.phong || !cgl.tempData.phong.lights)
         {
             num = 0;
         }
         else
         {
-            for (i in cgl.frameStore.phong.lights)
+            for (i in cgl.tempData.phong.lights)
             {
                 num++;
             }
@@ -290,7 +290,7 @@ normIntensity.set(1);
         //             }
         //         }
 
-        if (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+        if (!cgl.tempData.phong || !cgl.tempData.phong.lights)
         {
             // numLights=1;
             // lights[0].pos.setValue([1,2,0]);
@@ -304,29 +304,29 @@ normIntensity.set(1);
         else
         {
             count = 0;
-            // console.log(cgl.frameStore.phong.lights);
+            // console.log(cgl.tempData.phong.lights);
             if (shader)
-                for (i in cgl.frameStore.phong.lights)
+                for (i in cgl.tempData.phong.lights)
                 {
-                    lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                    // if(cgl.frameStore.phong.lights[i].changed)
+                    lights[count].pos.setValue(cgl.tempData.phong.lights[i].pos);
+                    // if(cgl.tempData.phong.lights[i].changed)
                     {
-                        cgl.frameStore.phong.lights[i].changed = false;
-                        if (cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
-                        lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
-                        lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                        lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                        if (cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-                        // if(cgl.frameStore.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.frameStore.phong.lights[i].depthMVP);
-                        if (cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex = cgl.frameStore.phong.lights[i].depthTex;
+                        cgl.tempData.phong.lights[i].changed = false;
+                        if (cgl.tempData.phong.lights[i].target) lights[count].target.setValue(cgl.tempData.phong.lights[i].target);
+                        lights[count].color.setValue(cgl.tempData.phong.lights[i].color);
+                        lights[count].attenuation.setValue(cgl.tempData.phong.lights[i].attenuation);
+                        lights[count].type.setValue(cgl.tempData.phong.lights[i].type);
+                        if (cgl.tempData.phong.lights[i].cone) lights[count].cone.setValue(cgl.tempData.phong.lights[i].cone);
+                        // if(cgl.tempData.phong.lights[i].depthMVP) lights[count].depthMVP.setValue(cgl.tempData.phong.lights[i].depthMVP);
+                        if (cgl.tempData.phong.lights[i].depthTex) lights[count].texDepthTex = cgl.tempData.phong.lights[i].depthTex;
 
-                        lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul);
+                        lights[count].mul.setValue(cgl.tempData.phong.lights[i].mul);
                     }
 
                     count++;
                 }
             // console.log(count,'lights');
-            // cgl.frameStore.phong.lights.length=0;
+            // cgl.tempData.phong.lights.length=0;
         }
     };
 }
@@ -358,10 +358,10 @@ var bindTextures = function ()
     }
 
     uniShadowPass.setValue(0);
-    if (cgl.frameStore.phong && cgl.frameStore.phong.lights)
-        for (i in cgl.frameStore.phong.lights)
+    if (cgl.tempData.phong && cgl.tempData.phong.lights)
+        for (i in cgl.tempData.phong.lights)
         {
-            if (cgl.frameStore.phong.lights[i].shadowPass == 1.0)uniShadowPass.setValue(1);
+            if (cgl.tempData.phong.lights[i].shadowPass == 1.0)uniShadowPass.setValue(1);
         }
 
     // for(var i in lights)

@@ -136,19 +136,11 @@ function findBoneChilds(n, parent, foundBone)
 
         if (n.quatAnimX)
         {
-            CABLES.Anim.slerpQuaternion(time, q,
-                n.quatAnimX,
-                n.quatAnimY,
-                n.quatAnimZ,
-                n.quatAnimW);
+            CABLES.Anim.slerpQuaternion(time, q, n.quatAnimX, n.quatAnimY, n.quatAnimZ, n.quatAnimW);
 
             if (inFade.get() != 0)
             {
-                CABLES.Anim.slerpQuaternion(time2, q2,
-                    n.quatAnimX,
-                    n.quatAnimY,
-                    n.quatAnimZ,
-                    n.quatAnimW);
+                CABLES.Anim.slerpQuaternion(time2, q2, n.quatAnimX, n.quatAnimY, n.quatAnimZ, n.quatAnimW);
                 quat.slerp(q, q, q2, inFade.get());
             }
 
@@ -193,7 +185,7 @@ function findBoneChilds(n, parent, foundBone)
         }
 
         if (fillBoneList) boneList.push(n);
-        cgl.frameStore.bone = n;
+        cgl.tempData.bone = n;
     }
 
     if (n.children)
@@ -214,8 +206,8 @@ render.onTriggered = function ()
 {
     pointCounter = 0;
     bones = 0;
-    scene = cgl.frameStore.currentScene.getValue();
-    cgl.frameStore.bones = boneList;
+    scene = cgl.tempData.currentScene.getValue();
+    cgl.tempData.bones = boneList;
 
     if (!scene) return;
     if (scene != oldScene)
@@ -236,5 +228,5 @@ render.onTriggered = function ()
     fillBoneList = false;
 
     next.trigger();
-    cgl.frameStore.bones = null;
+    cgl.tempData.bones = null;
 };

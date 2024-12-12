@@ -1,7 +1,7 @@
 // Op.apply(this, arguments);
 let self = this;
 let cgl = this.patch.cgl;
-cgl.frameStore.SplinePoints = [];
+cgl.tempData.SplinePoints = [];
 
 this.name = "LaserSpline";
 this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
@@ -56,7 +56,7 @@ let stride = 6;
 
 this.render.onTriggered = function ()
 {
-    if (!cgl.frameStore.laserPoints)cgl.frameStore.laserPoints = [];
+    if (!cgl.tempData.laserPoints)cgl.tempData.laserPoints = [];
     let shader = cgl.getShader();
     self.trigger.trigger();
 
@@ -89,9 +89,9 @@ this.render.onTriggered = function ()
     let lastB = 0;
 
     let numPoints = 0;
-    for (var i = 0; i < cgl.frameStore.laserPoints.length; i++)
+    for (var i = 0; i < cgl.tempData.laserPoints.length; i++)
     {
-        numPoints += parseInt(Math.abs(cgl.frameStore.laserPoints[i].num), 10);
+        numPoints += parseInt(Math.abs(cgl.tempData.laserPoints[i].num), 10);
     }
     laserObj.length = numPoints * stride;
 
@@ -100,10 +100,10 @@ this.render.onTriggered = function ()
     let lastY = 0;
     let addBlack = false;
 
-    for (var i = 0; i < cgl.frameStore.laserPoints.length; i++)
+    for (var i = 0; i < cgl.tempData.laserPoints.length; i++)
     {
         let vec = [0, 0, 0];
-        vec3.set(vec, cgl.frameStore.laserPoints[i].x, cgl.frameStore.laserPoints[i].y, cgl.frameStore.laserPoints[i].z);
+        vec3.set(vec, cgl.tempData.laserPoints[i].x, cgl.tempData.laserPoints[i].y, cgl.tempData.laserPoints[i].z);
 
         cgl.pushModelMatrix();
         mat4.translate(cgl.mvMatrix, cgl.mvMatrix, vec);
@@ -111,13 +111,13 @@ this.render.onTriggered = function ()
         cgl.popModelMatrix();
 
         let point = [
-            cgl.frameStore.laserPoints[i].x,
-            cgl.frameStore.laserPoints[i].y,
-            cgl.frameStore.laserPoints[i].z];
+            cgl.tempData.laserPoints[i].x,
+            cgl.tempData.laserPoints[i].y,
+            cgl.tempData.laserPoints[i].z];
 
         let vv = project(point, w.get(), h.get(), fov.get(), 0.01);// viewWidth, viewHeight, fov, viewDistance)
 
-        for (let ni = 0; ni < Math.abs(cgl.frameStore.laserPoints[i].num); ni++)
+        for (let ni = 0; ni < Math.abs(cgl.tempData.laserPoints[i].num); ni++)
         {
             var x = Math.round(-1 * vv[0] * coordmul.get());
             var y = Math.round(-1 * vv[1] * coordmul.get());
@@ -170,30 +170,30 @@ this.render.onTriggered = function ()
             laserObj[ind * stride + 1] = y;
             laserObj[ind * stride + 2] = 0;
 
-            if (cgl.frameStore.laserPoints[i].hasOwnProperty("colR"))
+            if (cgl.tempData.laserPoints[i].hasOwnProperty("colR"))
             {
-                cgl.frameStore.laserPoints[i].colR *= colorMul.get();
-                lastR = cgl.frameStore.laserPoints[i].colR;
+                cgl.tempData.laserPoints[i].colR *= colorMul.get();
+                lastR = cgl.tempData.laserPoints[i].colR;
             }
-            else cgl.frameStore.laserPoints[i].colR = lastR;
+            else cgl.tempData.laserPoints[i].colR = lastR;
 
-            if (cgl.frameStore.laserPoints[i].hasOwnProperty("colG"))
+            if (cgl.tempData.laserPoints[i].hasOwnProperty("colG"))
             {
-                cgl.frameStore.laserPoints[i].colG *= colorMul.get();
-                lastG = cgl.frameStore.laserPoints[i].colG;
+                cgl.tempData.laserPoints[i].colG *= colorMul.get();
+                lastG = cgl.tempData.laserPoints[i].colG;
             }
-            else cgl.frameStore.laserPoints[i].colG = lastG;
+            else cgl.tempData.laserPoints[i].colG = lastG;
 
-            if (cgl.frameStore.laserPoints[i].hasOwnProperty("colB"))
+            if (cgl.tempData.laserPoints[i].hasOwnProperty("colB"))
             {
-                cgl.frameStore.laserPoints[i].colB *= colorMul.get();
-                lastB = cgl.frameStore.laserPoints[i].colB;
+                cgl.tempData.laserPoints[i].colB *= colorMul.get();
+                lastB = cgl.tempData.laserPoints[i].colB;
             }
-            else cgl.frameStore.laserPoints[i].colB = lastB;
+            else cgl.tempData.laserPoints[i].colB = lastB;
 
-            laserObj[ind * stride + 3] = cgl.frameStore.laserPoints[i].colR * 255;// parseInt((cgl.frameStore.laserPoints[i].colR || lastR)*255*colorMul.get(),10);
-            laserObj[ind * stride + 4] = cgl.frameStore.laserPoints[i].colG * 255;// parseInt((cgl.frameStore.laserPoints[i].colG || lastG)*255*colorMul.get(),10);
-            laserObj[ind * stride + 5] = cgl.frameStore.laserPoints[i].colB * 255;// parseInt((cgl.frameStore.laserPoints[i].colB || lastB)*255*colorMul.get(),10);
+            laserObj[ind * stride + 3] = cgl.tempData.laserPoints[i].colR * 255;// parseInt((cgl.tempData.laserPoints[i].colR || lastR)*255*colorMul.get(),10);
+            laserObj[ind * stride + 4] = cgl.tempData.laserPoints[i].colG * 255;// parseInt((cgl.tempData.laserPoints[i].colG || lastG)*255*colorMul.get(),10);
+            laserObj[ind * stride + 5] = cgl.tempData.laserPoints[i].colB * 255;// parseInt((cgl.tempData.laserPoints[i].colB || lastB)*255*colorMul.get(),10);
 
             if (!showR.get()) laserObj[ind * stride + 3] = 0;
             if (!showG.get()) laserObj[ind * stride + 4] = 0;
@@ -208,7 +208,7 @@ this.render.onTriggered = function ()
 
             ind++;
         }
-        if (cgl.frameStore.laserPoints[i].hasOwnProperty("black")) addBlack = true;
+        if (cgl.tempData.laserPoints[i].hasOwnProperty("black")) addBlack = true;
 
         lastX = x;
         lastY = y;
@@ -232,7 +232,7 @@ this.render.onTriggered = function ()
 
     outNumPoints.set(ind);
     cgl.popModelMatrix();
-    cgl.frameStore.laserPoints.length = 0;
+    cgl.tempData.laserPoints.length = 0;
     outObj.set(null);
     outObj.set(laserObj);
 };
@@ -242,7 +242,7 @@ let geom = new CGL.Geometry();
 
 function bufferData()
 {
-    if (!cgl.frameStore.laserPoints)cgl.frameStore.laserPoints = [];
+    if (!cgl.tempData.laserPoints)cgl.tempData.laserPoints = [];
     let verts = [];
     let indices = [];
     let vertsColors = [];
@@ -252,21 +252,21 @@ function bufferData()
     let colB = 0;
     let addBlack = false;
     let index = 0;
-    for (let i = 0; i < cgl.frameStore.laserPoints.length; i++)
+    for (let i = 0; i < cgl.tempData.laserPoints.length; i++)
     {
         // other point
-        verts.push(cgl.frameStore.laserPoints[i].x);
-        verts.push(cgl.frameStore.laserPoints[i].y);
-        verts.push(cgl.frameStore.laserPoints[i].z);
+        verts.push(cgl.tempData.laserPoints[i].x);
+        verts.push(cgl.tempData.laserPoints[i].y);
+        verts.push(cgl.tempData.laserPoints[i].z);
 
-        if (cgl.frameStore.laserPoints[i].hasOwnProperty("colR"))
-            colR = cgl.frameStore.laserPoints[i].colR;
+        if (cgl.tempData.laserPoints[i].hasOwnProperty("colR"))
+            colR = cgl.tempData.laserPoints[i].colR;
 
-        if (cgl.frameStore.laserPoints[i].hasOwnProperty("colG"))
-            colG = cgl.frameStore.laserPoints[i].colG;
+        if (cgl.tempData.laserPoints[i].hasOwnProperty("colG"))
+            colG = cgl.tempData.laserPoints[i].colG;
 
-        if (cgl.frameStore.laserPoints[i].hasOwnProperty("colB"))
-            colB = cgl.frameStore.laserPoints[i].colB;
+        if (cgl.tempData.laserPoints[i].hasOwnProperty("colB"))
+            colB = cgl.tempData.laserPoints[i].colB;
 
         if (addBlack)
         {
@@ -277,9 +277,9 @@ function bufferData()
             vertsColors.push(0);
             vertsColors.push(1);
 
-            verts.push(cgl.frameStore.laserPoints[i].x);
-            verts.push(cgl.frameStore.laserPoints[i].y);
-            verts.push(cgl.frameStore.laserPoints[i].z);
+            verts.push(cgl.tempData.laserPoints[i].x);
+            verts.push(cgl.tempData.laserPoints[i].y);
+            verts.push(cgl.tempData.laserPoints[i].z);
 
             indices[index] = index;
             index++;
@@ -290,7 +290,7 @@ function bufferData()
         vertsColors.push(colB);
         vertsColors.push(1);
 
-        if (cgl.frameStore.laserPoints[i].hasOwnProperty("black"))
+        if (cgl.tempData.laserPoints[i].hasOwnProperty("black"))
         {
             addBlack = true;
         }
@@ -299,7 +299,7 @@ function bufferData()
         index++;
     }
 
-    cgl.frameStore.SplinePoints = verts;
+    cgl.tempData.SplinePoints = verts;
 
     geom.vertices = verts;
     geom.vertexColors = vertsColors;

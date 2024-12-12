@@ -35,7 +35,7 @@ function updateCoordsType()
 
 function update()
 {
-    world = cgl.frameStore.ammoWorld;
+    world = cgl.tempData.ammoWorld;
 
     // for(let i=0;i<world.bodies.length;i++)
     // console.log(world.bodies[i]);

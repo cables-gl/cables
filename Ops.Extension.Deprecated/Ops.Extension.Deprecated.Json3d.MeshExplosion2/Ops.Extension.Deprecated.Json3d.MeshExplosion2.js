@@ -67,7 +67,7 @@ function addObject(obj)
     {
         const object = {};
 
-        const jsonMesh = cgl.frameStore.currentScene.getValue().meshes[obj.meshes[0]];
+        const jsonMesh = cgl.tempData.currentScene.getValue().meshes[obj.meshes[0]];
 
         const verts = JSON.parse(JSON.stringify(jsonMesh.vertices));
         const geom = new CGL.Geometry();
@@ -104,9 +104,9 @@ function addObject(obj)
 
 function reload()
 {
-    if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.getValue()) return;
+    if (!cgl.tempData.currentScene || !cgl.tempData.currentScene.getValue()) return;
 
     objects.length = 0;
 
-    addObject(cgl.frameStore.currentScene.getValue().rootnode);
+    addObject(cgl.tempData.currentScene.getValue().rootnode);
 }

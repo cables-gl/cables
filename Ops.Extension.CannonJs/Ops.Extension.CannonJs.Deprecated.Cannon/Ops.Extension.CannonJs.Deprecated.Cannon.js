@@ -60,7 +60,7 @@ let bodies = [];
 function spawn()
 {
     needsSpawn = false;
-    world = cgl.frameStore.world;
+    world = cgl.tempData.world;
     if (!world)
     {
         op.logError("cannon has no world");
@@ -92,7 +92,7 @@ function spawn()
 
 function setup()
 {
-    world = cgl.frameStore.world;
+    world = cgl.tempData.world;
     if (!world) return;
 
     // if(body)world.removeBody(body);
@@ -109,7 +109,7 @@ const trMat = mat4.create();
 function render()
 {
     if (needSetup)setup();
-    if (lastWorld != cgl.frameStore.world)setup();
+    if (lastWorld != cgl.tempData.world)setup();
 
     if (needsSpawn)spawn();
 

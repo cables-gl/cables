@@ -54,11 +54,11 @@ render.onTriggered = function ()
     if (!inActive.get()) return trigger.trigger();
     if (!tmpTrans) tmpTrans = new Ammo.btTransform();
 
-    if (cgl.frameStore.shadowPass) return trigger.trigger();
+    if (cgl.tempData.shadowPass) return trigger.trigger();
 
     cgl.pushViewMatrix();
 
-    const ammoWorld = cgl.frameStore.ammoWorld;
+    const ammoWorld = cgl.tempData.ammoWorld;
 
     if (!ammoWorld)
     {

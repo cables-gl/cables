@@ -129,7 +129,7 @@ function setupIndexWeights(jsonMesh)
 render.onTriggered = function ()
 {
     if (!cgl.getShader()) return;
-    const scene = cgl.frameStore.currentScene.getValue();
+    const scene = cgl.tempData.currentScene.getValue();
 
     if ((mesh && scene && scene.meshes && scene.meshes.length > meshIndex) || cgl.getShader() != shader)
     {

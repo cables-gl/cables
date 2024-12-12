@@ -8,7 +8,7 @@ const trigger = op.outTrigger("trigger");
 
 render.onTriggered = function ()
 {
-    if (cgl.frameStore.pickingpass)
+    if (cgl.tempData.pickingpass)
     {
         trigger.trigger();
     }

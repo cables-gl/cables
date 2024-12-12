@@ -50,7 +50,7 @@ function ()
 function setup(modelScale)
 {
     modelScale = modelScale || 1;
-    const world = cgl.frameStore.world;
+    const world = cgl.tempData.world;
     if (!world) return;
 
     if (body)world.removeBody(body);
@@ -89,7 +89,7 @@ function getScaling(mat)
 function render()
 {
     if (needSetup)setup();
-    if (lastWorld != cgl.frameStore.world)setup();
+    if (lastWorld != cgl.tempData.world)setup();
     if (!body) return;
 
     outHit.set(body.raycastHit);

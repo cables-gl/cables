@@ -14,16 +14,16 @@ this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_T
 
 this.render.onTriggered = function ()
 {
-    if (!cgl.frameStore.SplinePoints) return;
+    if (!cgl.tempData.SplinePoints) return;
     let pos = [0, 0, 0];
     vec3.transformMat4(pos, [0, 0, 0], cgl.mvMatrix);
 
     let obj = { "black": true, "x": pos[0], "y": pos[1], "z": pos[2], "num": 11, "colR": 0, "colG": 0, "colB": 0 };
-    cgl.frameStore.laserPoints.push(obj);
+    cgl.tempData.laserPoints.push(obj);
 
     // obj={black:true,x:pos[0],y:pos[1],z:pos[2],num:3,colR:0,colG:0,colB:0};
 
-    // cgl.frameStore.laserPoints.push(obj);
+    // cgl.tempData.laserPoints.push(obj);
 
     self.trigger.trigger();
 };

@@ -76,7 +76,7 @@ function removeBodies(world)
 {
     for (let i = 0; i < bodies.length; i++)
     {
-        world = world || cgl.frameStore.world;
+        world = world || cgl.tempData.world;
         if (bodies[i] && world)lastWorld.removeBody(bodies[i]);
     }
 
@@ -90,7 +90,7 @@ function removeBodies(world)
 function setup(modelScale)
 {
     modelScale = modelScale || 1;
-    const world = cgl.frameStore.world;
+    const world = cgl.tempData.world;
     if (!world) return;
 
     const names = [];
@@ -214,7 +214,7 @@ function updatePositions()
 function render()
 {
     if (needSetup) setup();
-    if (lastWorld != cgl.frameStore.world) setup();
+    if (lastWorld != cgl.tempData.world) setup();
 
     outNum.set(bodies.length);
 

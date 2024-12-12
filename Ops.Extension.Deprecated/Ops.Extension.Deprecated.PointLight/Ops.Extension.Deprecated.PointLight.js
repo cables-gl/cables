@@ -55,8 +55,8 @@ function updatePos()
 
 function updateAll()
 {
-    if (!cgl.frameStore.phong)cgl.frameStore.phong = {};
-    if (!cgl.frameStore.phong.lights)cgl.frameStore.phong.lights = [];
+    if (!cgl.tempData.phong)cgl.tempData.phong = {};
+    if (!cgl.tempData.phong.lights)cgl.tempData.phong.lights = [];
     light = {};
     light.id = id;
     light.type = 0;
@@ -69,7 +69,7 @@ function updateAll()
 
 exe.onTriggered = function ()
 {
-    cgl.frameStore.phong.lights = cgl.frameStore.phong.lights || [];
+    cgl.tempData.phong.lights = cgl.tempData.phong.lights || [];
 
     vec3.transformMat4(mpos, [x.get(), y.get(), z.get()], cgl.mvMatrix);
     light = light || {};
@@ -88,7 +88,7 @@ exe.onTriggered = function ()
         cgl.popModelMatrix();
     }
 
-    cgl.frameStore.phong.lights.push(light);
+    cgl.tempData.phong.lights.push(light);
     trigger.trigger();
-    cgl.frameStore.phong.lights.pop();
+    cgl.tempData.phong.lights.pop();
 };

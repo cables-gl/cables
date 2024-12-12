@@ -93,11 +93,11 @@ const cgl = op.patch.cgl;
 
 inTrigger.onTriggered = function ()
 {
-    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
+    if (!cgl.tempData.lightStack) cgl.tempData.lightStack = [];
 
     // TODO: add directional vector gizmo
 
-    cgl.frameStore.lightStack.push(light);
+    cgl.tempData.lightStack.push(light);
     outTrigger.trigger();
-    cgl.frameStore.lightStack.pop();
+    cgl.tempData.lightStack.pop();
 };

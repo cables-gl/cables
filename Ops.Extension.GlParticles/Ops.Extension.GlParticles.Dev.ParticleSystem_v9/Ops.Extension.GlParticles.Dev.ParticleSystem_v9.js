@@ -3,11 +3,11 @@ const
     exec = op.inTrigger("Execute"),
     inPlay = op.inBool("Play", true),
     inReset = op.inTriggerButton("Reset"),
-    inParticleLife=op.inSwitch("Lifetime",["spawn+die","static"],"spawn+die"),
+    inParticleLife = op.inSwitch("Lifetime", ["spawn+die", "static"], "spawn+die"),
     inNumParticles = op.inInt("Num Particles", 10000),
     inSpeed = op.inFloat("Speed", 1),
     inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
-    inRandSpawn=op.inBool("Randomize Spawn",true),
+    inRandSpawn = op.inBool("Randomize Spawn", true),
 
 
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
@@ -125,7 +125,7 @@ inRespawn.onChange =
     inTexLifeTime.onLinkChanged =
     inTexMass.onLinkChanged =
     inTexSpawnDir.onLinkChanged =
-    inRandSpawn.onChange=
+    inRandSpawn.onChange =
     inResetRandLifetime.onChange = updateDefines;
 
 inMass.onChange =
@@ -173,14 +173,13 @@ function getPixelFormat()
 function createShader()
 {
     if (ps)ps.dispose();
-    ps = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos",
-        {
-            "shader": attachments.particle_frag,
-            "vertexShader": attachments.particle_vert,
-            "numRenderBuffers": 8,
-            "pixelFormat": getPixelFormat(),
-            "filter": CGL.Texture.FILTER_NEAREST
-        });
+    ps = new CGL.CopyTexture(op.patch.cgl, "particlesys_pos", {
+        "shader": attachments.particle_frag,
+        "vertexShader": attachments.particle_vert,
+        "numRenderBuffers": 8,
+        "pixelFormat": getPixelFormat(),
+        "filter": CGL.Texture.FILTER_NEAREST
+    });
 
     firstTime = true;
 
@@ -213,8 +212,8 @@ function updateUi()
     if (!CABLES.UI) return;
 
     inSpawnEnergy.setUiAttribs({ "greyout": !inTexSpawnDir.isLinked() });
-    inLifeTimeMin.setUiAttribs({ "greyout": inTexLifeTime.isLinked()||inParticleLife.get()=="static" });
-    inLifeTimeMax.setUiAttribs({ "greyout": inTexLifeTime.isLinked()||inParticleLife.get()=="static" });
+    inLifeTimeMin.setUiAttribs({ "greyout": inTexLifeTime.isLinked() || inParticleLife.get() == "static" });
+    inLifeTimeMax.setUiAttribs({ "greyout": inTexLifeTime.isLinked() || inParticleLife.get() == "static" });
 
     inMass.setUiAttribs({ "greyout": inTexMass.isLinked() });
     inMassMax.setUiAttribs({ "greyout": inTexMass.isLinked() });
@@ -226,7 +225,6 @@ function updateUi()
 
 function updateDefines()
 {
-
     ps.bgShader.toggleDefine("NORANDOMIZESPAWN", !inRandSpawn.get());
     ps.bgShader.toggleDefine("HAS_TEX_LIFETIME", inTexLifeTime.isLinked());
     ps.bgShader.toggleDefine("HAS_TEX_MASS", inTexMass.isLinked());
@@ -235,8 +233,8 @@ function updateDefines()
     ps.bgShader.toggleDefine("RESPAWN", inRespawn.get());
     ps.bgShader.toggleDefine("RESET_RAND_LIFETIME", inResetRandLifetime.get());
 
-    ps.bgShader.toggleDefine("STATICLIFE", inParticleLife.get()=="static");
-firstTime=true;
+    ps.bgShader.toggleDefine("STATICLIFE", inParticleLife.get() == "static");
+    firstTime = true;
 
     updateUi();
 }
@@ -273,13 +271,13 @@ function updateFrameStore()
     // outPassThrough1.setRef(ps.fb.getTextureColorNum(4));
     // outPassThrough2.setRef(ps.fb.getTextureColorNum(7));
 
-    cgl.frameStore.particleSys.pixelFormat = thePixelFormat;
+    cgl.tempData.particleSys.pixelFormat = thePixelFormat;
 
-    cgl.frameStore.particleSys.texPos = ps.fb.getTextureColorNum(0);
-    cgl.frameStore.particleSys.texTimingInt = ps.fb.getTextureColorNum(1);
-    cgl.frameStore.particleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
-    cgl.frameStore.particleSys.texVelocity = ps.fb.getTextureColorNum(3);
-    cgl.frameStore.particleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
+    cgl.tempData.particleSys.texPos = ps.fb.getTextureColorNum(0);
+    cgl.tempData.particleSys.texTimingInt = ps.fb.getTextureColorNum(1);
+    cgl.tempData.particleSys.texLifeProgress = ps.fb.getTextureColorNum(2);
+    cgl.tempData.particleSys.texVelocity = ps.fb.getTextureColorNum(3);
+    cgl.tempData.particleSys.texAbsVelocity = ps.fb.getTextureColorNum(5);
 }
 
 exec.onTriggered = () =>
@@ -298,7 +296,7 @@ exec.onTriggered = () =>
         op.setUiError("fbProblem", null);
     }
 
-    cgl.frameStore.particleSys = {};
+    cgl.tempData.particleSys = {};
 
     if (firstTime)
     {
@@ -310,7 +308,7 @@ exec.onTriggered = () =>
 
     timer.update();
 
-    cgl.frameStore.particleSys.firstTime = firstTime;
+    cgl.tempData.particleSys.firstTime = firstTime;
 
     const timeDiff = (timer.get() - lastTime) * inSpeed.get();
 
@@ -363,9 +361,9 @@ function preWarm()
 
 function renderFrame(time, timeDiff)
 {
-    cgl.frameStore.particleSys.time = time;
-    cgl.frameStore.particleSys.timeDiff = timeDiff;
-    cgl.frameStore.particleSys.reset = uniReset.getValue();
+    cgl.tempData.particleSys.time = time;
+    cgl.tempData.particleSys.timeDiff = timeDiff;
+    cgl.tempData.particleSys.reset = uniReset.getValue();
 
     outTime.set(time);
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpawnEnergy.get()]);
@@ -471,12 +469,11 @@ function renderVelocity()
 
     if (!velocityFeedback2)
     {
-        velocityFeedback2 = new CGL.CopyTexture(op.patch.cgl, "velocity copy",
-            {
-                // "shader": attachments.velocity_feedback_frag,
-                "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
-                "filter": CGL.Texture.FILTER_LINEAR
-            });
+        velocityFeedback2 = new CGL.CopyTexture(op.patch.cgl, "velocity copy", {
+            // "shader": attachments.velocity_feedback_frag,
+            "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+            "filter": CGL.Texture.FILTER_LINEAR
+        });
     }
 
     cgl.pushBlend(false);

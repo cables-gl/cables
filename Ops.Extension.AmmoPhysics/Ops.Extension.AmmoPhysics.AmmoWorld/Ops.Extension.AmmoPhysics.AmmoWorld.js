@@ -73,8 +73,8 @@ function update()
 
     if (inSim.get()) ammoWorld.frame();
 
-    const old = cgl.frameStore.ammoWorld;
-    cgl.frameStore.ammoWorld = ammoWorld;
+    const old = cgl.tempData.ammoWorld;
+    cgl.tempData.ammoWorld = ammoWorld;
 
     outNumBodies.set(ammoWorld.numBodies());
     outBodiesMeta.set(ammoWorld.getListBodies());
@@ -85,5 +85,5 @@ function update()
     next.trigger();
 
     lastTime = performance.now();
-    cgl.frameStore.ammoWorld = old;
+    cgl.tempData.ammoWorld = old;
 }

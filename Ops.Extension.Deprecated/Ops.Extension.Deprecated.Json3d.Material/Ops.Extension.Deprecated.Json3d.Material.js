@@ -7,9 +7,9 @@ let cgl = op.patch.cgl;
 
 exe.onTriggered = function ()
 {
-    if (cgl.frameStore.currentScene.materials)
+    if (cgl.tempData.currentScene.materials)
     {
-        let mat = cgl.frameStore.currentScene.materials[matName.get()];
+        let mat = cgl.tempData.currentScene.materials[matName.get()];
 
         if (mat)
         {
