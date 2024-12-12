@@ -175,7 +175,7 @@ export default class Shader extends CgShader
         console.log("compile", this._compileReason);
         this._isValid = true;
         this._cgp.pushErrorScope("cgp_shader " + this._name);
-        console.log(this.getProcessedSource());
+        // console.log(this.getProcessedSource());
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;
