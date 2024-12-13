@@ -35,12 +35,6 @@ function start()
 
         udpPort.on("message", function (m)
         {
-            if (m.address) {
-                m = {
-                    a: m.address,
-                    v: m.args.map(( arg ) => arg.value)
-                };
-            }
             msg.setRef(m);
             next.trigger();
         });
