@@ -25,7 +25,7 @@
         "portsOut": [
             {
                 "type": "5",
-                "name": "Adress"
+                "name": "Address"
             },
             {
                 "type": "3",
@@ -51,7 +51,7 @@
                 "text": "Incoming Osc message"
             },
             {
-                "name": "Adress",
+                "name": "Address",
                 "text": "Current incoming address"
             },
             {
