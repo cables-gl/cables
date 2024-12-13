@@ -1,0 +1,179 @@
+{
+    "authorName": "pandur",
+    "id": "4fe35363-bf00-40c4-bd15-eb2386fa24a0",
+    "created": 1734084346358,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Gradient",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Direction index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Smoothstep",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Step",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "sRGB",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Oklab",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Dither",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Gradient Array"
+            },
+            {
+                "type": 1,
+                "name": "Randomize Colors"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Color Array"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Colors"
+            },
+            {
+                "type": 3,
+                "name": "Colors Pos"
+            }
+        ]
+    },
+    "summary": "texture containing a colour gradient that can be altered with an editor",
+    "docs": {
+        "ports": [
+            {
+                "name": "Gradient",
+                "text": "Click this to open the editor for the gradient. See docs for a more in depth explanation."
+            },
+            {
+                "name": "Smoothstep",
+                "text": "Enable smoothstep on changes in gradients."
+            },
+            {
+                "name": "Size",
+                "text": "The resolution of the gradient in pixels. 256 is a good default value"
+            },
+            {
+                "name": "Gradient Array",
+                "text": "An array of Object containing pos,r,g,b,a information (see documentation for format)"
+            },
+            {
+                "name": "Direction",
+                "text": "`X or Y` render the texture horizontally or vertically"
+            },
+            {
+                "name": "Texture",
+                "text": "The texture out"
+            }
+        ]
+    },
+    "issues": "",
+    "changelog": [
+        {
+            "message": "fixed radial mode: flip option was ignored / default gradient was not shown without making changes",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1709211890849
+        },
+        {
+            "message": "optimized/reduced unnecessary recreation ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1709212147269
+        },
+        {
+            "message": "Radial mode is more compatible/same colors like the simple gradient",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1710259310909
+        },
+        {
+            "message": "Added XY and YX mode to generate diagonal color gradients",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1710259917788
+        },
+        {
+            "message": "Fix problems with flickering because texture was generated not early enough",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722863478104
+        },
+        {
+            "message": "Added option to add dithering to reduce color banding",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1724921254702
+        },
+        {
+            "message": "Add XX and YY option to have a one axis gradient that is size*size pixels big and not size*1 pixels (e.g. needed to add dithering)",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1724921301763
+        },
+        {
+            "message": "Opening the gradient editor at the bottom edge of the window will now move the gradient editor up so it is fully visible",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1725011824866
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1734084346359
+        },
+        {
+            "message": "Patch.PoJUzEw.GradientColorArray renamed to Ops.Color.GradientColorArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1734085793734
+        }
+    ],
+    "license": "MIT"
+}
