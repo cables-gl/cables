@@ -81,11 +81,11 @@ function oklabToRGB(L, a, b)
 
 function lin2srgb(r, g, b)
 {
-    r /= 255;
+    // r /= 255;
     const thr = 0.0031308;
     let c_loR = 12.92 * r;
     let c_hiR = 1.055 * Math.pow(r, 0.41666) - 0.055;
-    return ((r < thr) ? c_loR : c_hiR) * 255;
+    return ((r < thr) ? c_loR : c_hiR);
 }
 
 function update()
@@ -363,6 +363,8 @@ function updateGradient(keys)
     const colorPosArr = [];
     for (let i = 0; i < keys.length - 1; i++)
         colorPosArr.push(keys[i].pos);
+
+    pixels = addNoise(pixels, width, height);
 
     outWidth.set(width);
     outHeight.set(height);

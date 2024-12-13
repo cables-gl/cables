@@ -197,7 +197,7 @@ function updateGradient(keys)
             "editShortcut": true,
             "gradEditSmoothstep": inSmoothstep.get(),
             "gradEditStep": inStep.get(),
-            "gradOklab": inOklab.get(),
+            "gradOklab": inOklab.get()
         });
 
     let selectedWrap = 0;

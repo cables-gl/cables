@@ -17,6 +17,14 @@ export default class Texture extends CgTexture
 
         this.name = options.name || "unknown";
 
+        this.samplerDesc = {
+            "addressModeU": options.wrap || options.addressModeU || "clamp-to-edge",
+            "addressModeV": options.wrap || options.addressModeV || "clamp-to-edge",
+            "magFilter": options.magFilter || options.filter || "linear",
+            "minFilter": options.minFilter || options.filter || "linear",
+        };
+
+
         this._cgp.on("deviceChange", () =>
         {
             // this.reInit();
@@ -83,6 +91,15 @@ export default class Texture extends CgTexture
         return this.gpuTexture.createView();
     }
 
+    getSampler()
+    {
+        // "clamp-to-edge"
+        // "repeat"
+        // "mirror-repeat"
+
+        return this.samplerDesc;
+    }
+
     /**
      * @function initFromData
      * @memberof Texture
@@ -111,6 +128,17 @@ export default class Texture extends CgTexture
             data,
             { "bytesPerRow": w * 4 },
             { "width": w, "height": h });
+    }
+
+
+    setWrap(v)
+    {
+        this.samplerDesc.addressModeU = this.samplerDesc.addressModeV = v;
+    }
+
+    setFilter(v)
+    {
+        this.samplerDesc.minFilter = this.samplerDesc.magFilter = v;
     }
 }
 
