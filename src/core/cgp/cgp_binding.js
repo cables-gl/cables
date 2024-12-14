@@ -206,13 +206,17 @@ export default class Binding
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-            const sampler = this.uniforms[0]._cgp.device.createSampler({
-                "addressModeU": "repeat",
-                "addressModeV": "repeat",
+            let smplDesc = {
+                "addressModeU": "mirror-repeat",
+                "addressModeV": "mirror-repeat",
                 "magFilter": "linear",
                 "minFilter": "linear",
                 "mipmapFilter": "linear",
-            });
+            };
+
+            if (this.uniforms[0].getValue()) smplDesc = this.uniforms[0].getValue().getSampler();
+
+            const sampler = this.uniforms[0]._cgp.device.createSampler(smplDesc);
             o.resource = sampler;
         }
         else
