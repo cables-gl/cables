@@ -1,7 +1,9 @@
 {
     "name": "Ops.Extension.Osc",
-    "summary": "Use a WebSocket-Connection to receive OSC",
+    "summary": "Use a WebSocket-Brigde to receive OSC in the browser",
     "licence": {
         "name": "MIT"
-    }
+    },
+    "description": "",
+    "visibility": "public"
 }
