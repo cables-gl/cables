@@ -67,8 +67,7 @@ function render()
         {
             op.setUiError("hbserr", "<pre>" + escapeHtml(JSON.stringify(e.message + "") + "</pre>"));
             outErrors.set(e.message);
-            console.log(e.message);
         }
-        else console.log(e);
+        else op.logWarn(e);
     }
 }
