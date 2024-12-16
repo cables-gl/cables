@@ -35,7 +35,6 @@ op.onDelete = function ()
 function connect()
 {
     outConnected.set(false);
-    console.log("connecting", outConnected.get());
 
     const url = inUrl.get();
     if (!url) return;
@@ -101,7 +100,6 @@ function connect()
 
         connection.onopen = function (message)
         {
-            console.log("OPEN", message);
             connecting = false;
             outConnected.set(true);
             connectedTo = inUrl.get();

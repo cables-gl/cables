@@ -28,7 +28,6 @@ inQuality.onChange =
 inFormat.onChange =
 inTex.onChange = () =>
 {
-    console.log("change");
     texChanged = true;
 };
 

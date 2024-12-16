@@ -151,7 +151,7 @@ function setupMediaRecorder()
     if (supportedVideos.indexOf(codec) == -1)
     {
         codec = supportedVideos[0];
-        console.log("incompaticle codec, switching to first one:", codec);
+        op.logWarn("incompaticle codec, switching to first one:", codec);
     }
 
     let options = { "mimeType": codec, "videoBitsPerSecond": inMbit.get() * 1024 * 1024 };

@@ -17,7 +17,6 @@ function compare()
 {
     if (!finished)
     {
-        console.log("not finished");
         return;
     }
 

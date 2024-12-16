@@ -62,7 +62,6 @@ inExec.onTriggered = function ()
                 }
                 else
                 {
-                    console.log("has no geom?!");
                     outGeom.set(null);
                 }
             }
