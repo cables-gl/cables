@@ -6,13 +6,13 @@ Select the "GITHUB" option in the export dialog:
 
 ## Prerequisites
 
-- an account on [github](https://github.com/)
-- any repository, create one [here](https://github.com/new) if needed (add at least one file, otherwise the repo doesnt exists for github)
-- an [access token](https://github.com/settings/tokens) for your github-user with at least "repo" permissions
-  - if you use github's "fine grained permissions", make sure your token has "read and write" permission to the "contents" of your created repo
-- (if wanted) activate [github pages](https://pages.github.com/) for your repository in the repositories settings on github
-  - your repository needs to be made public for this to be free
-  - you need to pick a branch when activating pages, remember this for the settings below    
+- An account on [github](https://github.com/)
+- Any repository, create one [here](https://github.com/new) if needed (add at least one file, otherwise the repo doesn't exist for github).
+- An [access token](https://github.com/settings/tokens) for your github-user with at least "repo" permissions.
+  - If you use github's "fine grained permissions", make sure your token has "read and write" permission to the "contents" of your created repo.
+- (if needed) Activate [github pages](https://pages.github.com/) for your repository in the repositories settings on github.
+  - Your repository needs to be made public for this to be free.
+  - You need to pick a branch when activating pages, remember this for the settings below.    
     
 ## Parameters
 
@@ -46,37 +46,37 @@ Enter your generated [access token](https://github.com/settings/tokens) that has
 ## Video Tutorial
 <iframe width="384" height="216" src="https://www.youtube.com/embed/1TwP5DQoef4" title="Github Pages Export - Byte Size" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## WALKTHOUGH
-- enter the above information
-- click on button
-- wait for the two buttons to appear
-- click on "View Deployment" to visit your website on github
-- click on "Deploments overview" to see your repository on github
+## WALKTHROUGH
+- Enter the above information
+- Click on button
+- Wait for the two buttons to appear
+- Click on "View Deployment" to visit your website on github
+- Click on "Deploments overview" to see your repository on github
 
 ## CAVEATS
-- this will not work if there are any merge conflicts, do not change any cables files from outside cables
-- this will overwrite any patch that has been exported to the same repo/subdir-combination before
-- use git commit history to roll-back any mishaps
+- This will not work if there are any merge conflicts, so do not change any cables files from outside cables
+- This will overwrite any patch that has been exported to the same repo/subdir-combination before
+- Use git commit history to roll-back any mishaps
 
 ## Export Options
 
-You can choose how the contents of your export should look, the defaults should be fine for almost everything.
+You can choose how the contents of your export should look. The defaults should be fine for almost everything.
 
 ### Include assets
 
-If your patch uses uploaded files (textures, audio, data, ...) choose one of the following options to have
+If your patch uses uploaded files (textures, audio, data, ...), choose one of the following options to have
 these files included in the export.
 
 **Use "All" if you are generating filenames on the fly (iterators, arrays, ...) to make sure all files are available in the Export**
 
 - Automatic: Tries to guess which files are used in the patch and includes only used assets.
-- All: Includes all the assets uploaded to the patch or referenced in there, this is the safe option.
-- None: Does not include any assets in the export, smaller download but some things might not work in the export
+- All: Includes all the assets uploaded to the patch or referenced in there (safe option).
+- None: No assets included in the export with smaller download size but some things might not work in the export.
 
 ### Package
 
-- Single Javascript File: packages and minifies everything into one single javascript file to include
-- Multiple Files: will keep the patch configuration, your code, and core code in seperate files
+- Single Javascript File: Packages and minifies everything into one single javascript file to include.
+- Multiple Files: Keeps the patch configuration, your code, and core code in separate files.
 
 ### Skip Backups
 
@@ -85,18 +85,18 @@ these files included in the export.
 ### Export without subdirectories
 
 - Should you need the directory structure of your patch to be "flat" (no js/ or assets/ subdirectory) you can select this option.
-  - This will ususally not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
+  - This will usually not be needed. Some platforms do not allow for accessing subdirectories though, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
 
 ### Minify Code
 
-- Deselecting this option will make your code bigger, but more readable, might be useful in debugging situations, you usually don't want this in "production".
+- Deselecting this option will make your code bigger, but more readable. While this might be useful in debugging situations, you usually don't want this in "production" (i.e. your finished code).
 
 ### Add Source Maps
 
 - When minifying code, this option will add [source maps](https://developer.chrome.com/blog/sourcemaps) to your javascript files.
-  This will make the code readable in dev-tools and may help in debugging situations, but will have and additional download for
-  people opening the dev-tools of their browser.
+  This will make the code readable in dev-tools and may help in debugging situations, but it will have an additional download for
+  users opening the dev-tools of their browser.
 
 ## Minify GLSL
 
-- Minify shadercode. Same as "Minify Code", but for GLSL-Shadercode
+- Minify shadercode. Same as "Minify Code", but for GLSL-Shadercode.
