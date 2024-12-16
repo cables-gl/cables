@@ -27,7 +27,6 @@
             }
         ]
     },
-    "authorName": "",
     "license": "MIT",
     "created": 1734114250725,
     "changelog": [
@@ -66,5 +65,6 @@
     "summary": "OSC Connection",
     "docs": {
         "ports": []
-    }
+    },
+    "authorName": "pandur"
 }
