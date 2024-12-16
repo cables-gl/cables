@@ -363,7 +363,7 @@ function renderFrame(time, timeDiff)
 {
     cgl.frameStore.particleSys.time = time;
     cgl.frameStore.particleSys.timeDiff = timeDiff;
-    cgl.frameStore.particleSys.reset = uniReset.getValue();
+    // cgl.frameStore.particleSys.reset = uniReset.getValue();
 
     outTime.set(time);
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpawnEnergy.get()]);
