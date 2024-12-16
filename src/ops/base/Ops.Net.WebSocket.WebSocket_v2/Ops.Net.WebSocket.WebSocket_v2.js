@@ -27,17 +27,19 @@ function checkConnection()
 
 op.onDelete = function ()
 {
-    if (outConnected.get()) connection.close();
+    if (outConnected.get() && connection) connection.close();
     connecting = false;
     clearTimeout(timeout);
 };
 
 function connect()
 {
+    outConnected.set(false);
+    console.log("connecting", outConnected.get());
+
     const url = inUrl.get();
     if (!url) return;
 
-    outConnected.set(false);
     op.setUiError("connection", null);
     op.setUiError("jsonvalid", null);
     op.setUiError("websocket", null);
@@ -78,6 +80,7 @@ function connect()
         if (e && e.message) op.setUiError("websocket", e.message);
         op.logWarn("could not connect to", inUrl.get());
         connecting = false;
+        outConnected.set(false);
     }
 
     if (connection)
@@ -98,6 +101,7 @@ function connect()
 
         connection.onopen = function (message)
         {
+            console.log("OPEN", message);
             connecting = false;
             outConnected.set(true);
             connectedTo = inUrl.get();
@@ -113,7 +117,6 @@ function connect()
             try
             {
                 const json = JSON.parse(message.data);
-                // outResult.set(null);
                 outResult.setRef(json);
                 outValidJson.set(true);
             }

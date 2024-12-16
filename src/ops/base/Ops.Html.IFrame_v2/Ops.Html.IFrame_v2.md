@@ -1,1 +1,0 @@
-Some web addresses will not allow the page to be displayed in an iFrame.

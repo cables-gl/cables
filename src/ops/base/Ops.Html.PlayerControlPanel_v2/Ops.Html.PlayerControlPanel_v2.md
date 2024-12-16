@@ -1,1 +1,0 @@
-shows a player-ui that can be used to control mediaplayers or the timeline

@@ -18,6 +18,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1723039214742
+        },
+        {
+            "message": "fix wrong connection state boolean when error occurs",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1733928461087
         }
     ],
     "authorName": "pandur",

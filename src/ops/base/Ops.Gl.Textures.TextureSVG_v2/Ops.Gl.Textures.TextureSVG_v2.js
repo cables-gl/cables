@@ -93,7 +93,7 @@ function reload()
             else
             {
                 outLoaded.set(false);
-                op.logError("could not load file", op.patch.getFilePath(filename.get()));
+                op.logError("could not load file", op.patch.getFilePath(filename.get()), err);
                 op.setUiError("error", "Could not load SVG file!");
             }
         }
