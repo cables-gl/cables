@@ -132,5 +132,9 @@
         "ports": []
     },
     "summary": "Convert vertices of a geometry to a data texture",
-    "license": "MIT"
+    "license": "MIT",
+    "youtubeids": [
+        "PrkdnENo8wQ"
+    ],
+    "exampleProjectId": "bhWkpX"
 }

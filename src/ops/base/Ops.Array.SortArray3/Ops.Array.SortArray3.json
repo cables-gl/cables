@@ -39,9 +39,7 @@
             }
         ]
     },
-
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -50,5 +48,6 @@
             "date": 1560335792598
         }
     ],
-    "exampleProjectId": "QS8qVJ"
+    "exampleProjectId": "QS8qVJ",
+    "license": "MIT"
 }

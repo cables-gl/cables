@@ -74,10 +74,6 @@
                 "text": "Changes rendering method to linestrip"
             },
             {
-                "name": "TexCoords",
-                "text": "Texture co-ordinates mode"
-            },
-            {
                 "name": "Geometry",
                 "text": "Geometry object out"
             },
@@ -87,7 +83,6 @@
             }
         ]
     },
-    "issues": "",
     "changelog": [
         {
             "message": "added \"vertex color array\" input",
@@ -102,5 +97,6 @@
             "date": 1726142752975
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "qRD7W6"
 }

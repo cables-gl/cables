@@ -9,6 +9,8 @@ op.setPortGroup("Element", [inEle]);
 inAriaHidden.onChange = update;
 let ele = null;
 
+update();
+
 inEle.onChange =
     outEle.onLinkChanged =
     inEle.onLinkChanged = removeProp;
@@ -16,6 +18,7 @@ inEle.onChange =
 function removeProp()
 {
     if (ele) ele.removeAttribute("aria-hidden");
+    update();
 }
 
 function update()
@@ -36,9 +39,6 @@ function update()
             op.setUiAttrib({ "extendTitle": "" });
         }
         ele.setAttribute("tabindex", 0);
-
-        if (inValue.get())ele.setAttribute("alt", inValue.get());
-        else ele.removeAttribute("alt");
     }
 
     outEle.setRef(inEle.get());

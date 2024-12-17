@@ -1,0 +1,10 @@
+
+border-style:solid;
+border-color:transparent transparent transparent #ccc;
+box-sizing:border-box;
+width:50px;
+height:50px;
+margin-top:25px;
+margin-left:36px;
+border-width:25px 0px 25px 40px;
+pointer-events:none;

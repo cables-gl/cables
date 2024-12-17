@@ -241,9 +241,9 @@
         ]
     },
     "summary": "route trigger output by string",
-    "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "exampleProjectId": "8uTjhI"
 }

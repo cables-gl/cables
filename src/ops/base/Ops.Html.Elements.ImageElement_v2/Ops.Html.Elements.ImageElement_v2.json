@@ -1,6 +1,6 @@
 {
-    "id": "e9216fe0-0c55-47d9-83eb-c956d28b4005",
-    "created": 1708945340275,
+    "id": "d78cb7f1-da19-4abc-a658-15503108acdc",
+    "created": 1725443030352,
     "authorName": "pandur",
     "changelog": [
         {
@@ -34,10 +34,28 @@
             "date": 1721829675023
         },
         {
-            "message": "Can now be ctrl-hover picked as all html elements",
+            "message": "v2: Can now be ctrl-hover picked as all html elements",
             "type": "improvement",
             "author": "pandur",
             "date": 1725439597054
+        },
+        {
+            "message": "Fixed cache problems",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1729253223465
+        },
+        {
+            "message": "Alt attritbute",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733147052316
+        },
+        {
+            "message": "Html.ImageElement_v2 renamed to Ops.Html.Elements.ImageElement_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1734370473040
         }
     ],
     "layout": {
@@ -45,6 +63,17 @@
             {
                 "type": 5,
                 "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "values": [
+                    "Absolute",
+                    "Static",
+                    "Relative",
+                    "Fixed"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 5,
@@ -62,6 +91,10 @@
                     "none"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Alt Text"
             }
         ],
         "portsOut": [
@@ -84,8 +117,8 @@
     },
     "summary": "create an image(img) html element",
     "license": "MIT",
-    "exampleProjectId": "OZaVN8",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "OZaVN8"
 }
