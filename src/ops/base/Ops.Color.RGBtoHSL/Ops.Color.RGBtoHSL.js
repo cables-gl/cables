@@ -16,5 +16,3 @@ inB.onChange = () =>
     outS.set(hsl[1]);
     outL.set(hsl[2]);
 };
-
-console.log(chroma("orange").rgba());

@@ -198,7 +198,6 @@ export default class Binding
             return;
         }
 
-
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
             if (this.uniforms[0].getValue() && this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
@@ -311,22 +310,16 @@ export default class Binding
             for (let i = 0; i < this.uniforms.length; i++)
             {
                 info.push(this.uniforms[i].getName() + " " + this.uniforms[i].getValue());
-
-
-
                 this.uniforms[i].copyToBuffer(this.cGpuBuffers[inst].floatArr, off); // todo: check if uniform changed?
-
 
                 // if (isNaN(this.cGpuBuffers[inst].floatArr[0]))
                 // {
                 // console.log("shitttttttt", this.cGpuBuffers[inst].floatArr[0], this.uniforms[i].getName(), this.cGpuBuffers[inst].name, this.uniforms[i]);
                 // }
 
-
                 off += this.uniforms[i].getSizeBytes() / 4;
             }
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("uni buff", info);
-
 
             // console.log("upodate", inst);
 

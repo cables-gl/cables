@@ -16,5 +16,3 @@ inL.onChange = () =>
     outG.set(rgb[1] / 255);
     outB.set(rgb[2] / 255);
 };
-
-console.log(chroma("orange").rgba());

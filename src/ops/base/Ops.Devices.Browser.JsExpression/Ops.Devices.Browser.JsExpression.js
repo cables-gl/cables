@@ -44,6 +44,6 @@ function update()
     catch (e)
     {
         outErr.set(true);
-        console.log("error", e);
+        op.logWarn("error", e);
     }
 }

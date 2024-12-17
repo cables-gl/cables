@@ -117,8 +117,6 @@ inEvent.onChange = () =>
                 ccValueOut.set(value);
                 ccArray[ccIndex] = ccValue;
 
-                console.log("ccValue", ccValue);
-
                 if (triggerOn.get() == "Both") triggerOut.trigger();
                 else if (triggerOn.get() == "Down" && ccValue != 0) triggerOut.trigger();
                 else if (triggerOn.get() == "Up" && ccValue == 0) triggerOut.trigger();

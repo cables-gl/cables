@@ -10,8 +10,6 @@ function wait()
 {
     setTimeout(() =>
     {
-        console.log("waiting for hbs");
-
         if (!window.Handlebars)
         {
             wait();
@@ -33,7 +31,7 @@ function updateString()
     }
     catch (e)
     {
-        console.error(e);
+        op.logWarn(e);
     }
     render();
 }
@@ -69,8 +67,7 @@ function render()
         {
             op.setUiError("hbserr", "<pre>" + escapeHtml(JSON.stringify(e.message + "") + "</pre>"));
             outErrors.set(e.message);
-            console.log(e.message);
         }
-        else console.log(e);
+        else op.logWarn(e);
     }
 }

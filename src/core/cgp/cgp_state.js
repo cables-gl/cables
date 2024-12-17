@@ -190,7 +190,6 @@ class WebGpuContext extends CGState
         // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
-
     setDevice(device)
     {
         this.device = device;
@@ -202,8 +201,6 @@ class WebGpuContext extends CGState
 
         this.emitEvent("deviceChange");
     }
-
-
 
     pushErrorScope(name, options = {})
     {
@@ -316,10 +313,8 @@ class WebGpuContext extends CGState
         this._stackDepthWrite.pop();
     }
 
-
     // --------------------------------------
     // state depthfunc
-
 
     /**
      * @function pushDepthFunc
@@ -355,8 +350,6 @@ class WebGpuContext extends CGState
         this._stackDepthFunc.pop();
     }
 
-
-
     // --------------------------------------
     // state CullFace
 
@@ -385,20 +378,18 @@ class WebGpuContext extends CGState
     }
 
     /**
- * pop face culling enabled state
- * @function popCullFace
- * @memberof Context
- * @instance
- */
+     * pop face culling enabled state
+     * @function popCullFace
+     * @memberof Context
+     * @instance
+     */
     popCullFace()
     {
         this._stackCullFace.pop();
     }
 
-
     // --------------------------------------
     // state CullFace Facing
-
 
     /**
      * push face culling face side
@@ -439,7 +430,6 @@ class WebGpuContext extends CGState
     {
         this._stackBlend.push(b);
     }
-
 
     popBlend()
     {
