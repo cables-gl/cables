@@ -425,7 +425,6 @@
     cursor: pointer;
     padding-bottom: 3px;
     display:block;
-    width:100%;
 }
 
 .sidebar__button-input.plus, .sidebar__button-input.minus {

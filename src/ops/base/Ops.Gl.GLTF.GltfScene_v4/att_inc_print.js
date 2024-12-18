@@ -247,17 +247,18 @@ function printInfo()
         html += "<td>";
         let count = 0;
         let nodename = "";
-        for (let j = 0; j < gltf.json.nodes.length; j++)
-        {
-            if (gltf.json.nodes[j].mesh == i)
+        if (gltf.json.nodes)
+            for (let j = 0; j < gltf.json.nodes.length; j++)
             {
-                count++;
-                if (count == 1)
+                if (gltf.json.nodes[j].mesh == i)
                 {
-                    nodename = gltf.json.nodes[j].name;
+                    count++;
+                    if (count == 1)
+                    {
+                        nodename = gltf.json.nodes[j].name;
+                    }
                 }
             }
-        }
         if (count > 1) html += (count) + " nodes (" + nodename + " ...)";
         else html += nodename;
         html += "</td>";
