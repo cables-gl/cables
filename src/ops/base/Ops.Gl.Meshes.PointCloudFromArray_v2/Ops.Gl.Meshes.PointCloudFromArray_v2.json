@@ -94,18 +94,6 @@
             }
         ]
     },
-    "issues": "",
-    "todos": [
-        {
-            "message": "improved performance by rebuilding mesh less often",
-            "author": "pandur",
-            "id": "decb1b63-7f07-4dab-a96a-8f6d7936ed67",
-            "date": 1560669928210,
-            "deleted": true,
-            "deletedBy": "stephan",
-            "deletedDate": 1699349836088
-        }
-    ],
     "changelog": [
         {
             "message": "added vertex color support",
@@ -120,5 +108,9 @@
             "date": 1726143208685
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "youtubeids": [
+        "tFM2Ixf-ixs"
+    ],
+    "exampleProjectId": "v8G4Wz"
 }

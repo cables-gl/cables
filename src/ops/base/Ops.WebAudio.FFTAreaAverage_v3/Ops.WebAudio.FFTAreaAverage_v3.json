@@ -102,10 +102,6 @@
                 "text": "check to create texture"
             },
             {
-                "name": "Texture Size",
-                "text": "choose texture size"
-            },
-            {
                 "name": "Texture Out",
                 "text": "texture output"
             },
@@ -115,7 +111,6 @@
             }
         ]
     },
-    "issues": "",
     "changelog": [
         {
             "message": "cloned op from Ops.WebAudio.FFTAreaAverage",
@@ -135,5 +130,6 @@
             "date": 1731335740518
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "F6Fhyp"
 }

@@ -140,10 +140,12 @@
         ]
     },
     "summary": "Record the renderer-output to video",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "youtubeids": [
+        "zWfwC-GH7qk"
+    ],
+    "exampleProjectId": "ioiDIR"
 }

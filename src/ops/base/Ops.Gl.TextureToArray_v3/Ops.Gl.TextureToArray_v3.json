@@ -88,16 +88,14 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1725430970515
-        },
-        {
-            "message": "Ops.Gl.TextureToColorArray_v3 renamed to Ops.Gl.TextureToArray_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1730273447224
         }
     ],
     "coreLibs": [
         "cgl_pixelreader"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "youtubeids": [
+        "mQN8VtVOltQ"
+    ],
+    "exampleProjectId": "uZkd3x"
 }

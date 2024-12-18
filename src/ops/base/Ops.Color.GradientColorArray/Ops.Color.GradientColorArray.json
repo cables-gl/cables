@@ -101,18 +101,9 @@
             {
                 "name": "Gradient Array",
                 "text": "An array of Object containing pos,r,g,b,a information (see documentation for format)"
-            },
-            {
-                "name": "Direction",
-                "text": "`X or Y` render the texture horizontally or vertically"
-            },
-            {
-                "name": "Texture",
-                "text": "The texture out"
             }
         ]
     },
-    "issues": "",
     "changelog": [
         {
             "message": "fixed radial mode: flip option was ignored / default gradient was not shown without making changes",
@@ -175,5 +166,6 @@
             "date": 1734085793734
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "xAdV8x"
 }

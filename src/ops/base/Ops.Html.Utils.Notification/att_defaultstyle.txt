@@ -1,0 +1,13 @@
+visibility: hidden;
+background-color: #282828;
+color: #fff;
+
+padding: 16px;
+position: absolute;
+z-index: 9999;
+font-size: 17px;
+opacity:0;
+border-radius:10px;
+text-align:center;
+left: 50%;
+transform: translate(-50%, 0);

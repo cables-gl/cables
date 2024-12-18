@@ -1,0 +1,134 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "stephan",
+    "id": "12ac1d94-f043-454d-92a8-60733d2908b2",
+    "created": 1663064258683,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Current",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clamp",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Time",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Skip Buttons",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Play clicked"
+            },
+            {
+                "type": 1,
+                "name": "Pause clicked"
+            },
+            {
+                "type": 1,
+                "name": "Rewind clicked"
+            },
+            {
+                "type": 1,
+                "name": "Skip Back clicked"
+            },
+            {
+                "type": 1,
+                "name": "Skip Forward clicked"
+            },
+            {
+                "type": 1,
+                "name": "Dragged"
+            },
+            {
+                "type": 0,
+                "name": "Current Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dragging",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "DOM Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "simple html ui for timeline/mediaplayers (was: TimeLineUI)",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "3F6DOe",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.TimeLine.TimeLineUI",
+            "author": "stephan",
+            "date": 1663064258684
+        },
+        {
+            "message": "Ops.User.stephan.TimeLineUI_v2 renamed to Ops.Html.PlayerControls",
+            "author": "stephan",
+            "date": 1663319397876
+        },
+        {
+            "message": "Ops.Html.PlayerControls renamed to Ops.Html.PlayerControlPanel",
+            "author": "pandur",
+            "date": 1663320207656
+        },
+        {
+            "message": "Ops.Html.PlayerControlPanel renamed to Ops.Html.PlayerControlPanel_v2",
+            "author": "pandur",
+            "date": 1663320232017
+        },
+        {
+            "message": "fix states and add visible boolean",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671035035307
+        },
+        {
+            "message": "add \"is playing\" in-port, add outports for dragging",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671035042639
+        },
+        {
+            "message": "Html.PlayerControlPanel_v2 renamed to Ops.Html.Utils.PlayerControlPanel_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1734353076891
+        }
+    ],
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": []
+}

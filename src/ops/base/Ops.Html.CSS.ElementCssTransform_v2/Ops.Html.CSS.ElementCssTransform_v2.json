@@ -142,9 +142,9 @@
         ]
     },
     "summary": "translate,scale and rotate a HTML element using css transform",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "UyQDCu"
 }

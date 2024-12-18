@@ -73,7 +73,6 @@
         ]
     },
     "summary": "steps through numerical or array values one by one",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -95,10 +94,6 @@
             {
                 "name": "stepsize",
                 "text": "size of each \"step\" (increment and decrement)"
-            },
-            {
-                "name": "Values",
-                "text": "optional array for stepping through it's items"
             },
             {
                 "name": "childs",
@@ -148,5 +143,6 @@
             "date": 1731325383776
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "DLV0n6"
 }
