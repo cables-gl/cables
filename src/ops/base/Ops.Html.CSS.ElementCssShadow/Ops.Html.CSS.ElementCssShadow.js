@@ -36,7 +36,7 @@ function update()
 
     if (ele && ele.style)
     {
-        const rgba = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + Math.floor(a.get()) + ")";
+        const rgba = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + a.get() + ")";
 
         const str = inProp1.get() + "px " + inProp2.get() + "px " + inProp3.get() + "px " + rgba;
 
