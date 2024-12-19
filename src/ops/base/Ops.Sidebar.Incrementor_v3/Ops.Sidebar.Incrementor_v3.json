@@ -141,6 +141,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1731325383776
+        },
+        {
+            "message": "fix button size",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1734533029324
         }
     ],
     "license": "MIT",
