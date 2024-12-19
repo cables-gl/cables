@@ -2,34 +2,10 @@
     "id": "f3509eea-c42f-4091-961c-95c3d750778d",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1566307472489,
-            "type": "new"
-        },
-        {
-            "message": "react properly to disconnecting parent",
-            "author": "stephan",
-            "date": 1643888150675,
-            "type": "bugfix"
-        },
-        {
-            "message": "use correct string input for id",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1731928012091
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
             "date": 1734602523532
-        },
-        {
-            "message": "Patch.PICbzox.SidebarElement renamed to Ops.Sidebar.SidebarElement",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1734603470223
         }
     ],
     "authorName": "pandur",
@@ -57,14 +33,9 @@
             }
         ]
     },
-    "summary": "Display text in the sidebar",
+    "summary": "Add custom HTML Elements into the sidebar",
     "docs": {
-        "ports": [
-            {
-                "name": "Text",
-                "text": "The text you want to show in the sidebar"
-            }
-        ]
+        "ports": []
     },
     "license": "MIT"
 }
