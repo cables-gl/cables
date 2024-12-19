@@ -19,6 +19,7 @@ const input = document.createElement("button");
 input.classList.add("sidebar__button-input");
 el.appendChild(input);
 input.addEventListener("click", onButtonClick);
+input.style.width = "100%";
 const inputText = document.createTextNode(buttonTextPort.get());
 input.appendChild(inputText);
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
