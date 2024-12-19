@@ -189,7 +189,6 @@ class CgUniform
 
         if (this._value == undefined)
         {
-            console.log("value undefined", this);
             this._value = 0;
         }
 
