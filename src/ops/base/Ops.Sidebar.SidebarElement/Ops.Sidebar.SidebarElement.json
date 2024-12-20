@@ -1,0 +1,42 @@
+{
+    "id": "f3509eea-c42f-4091-961c-95c3d750778d",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1734602523532
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1734602523531,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 2,
+                "name": "Child Element"
+            },
+            {
+                "type": 0,
+                "name": "Border",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            }
+        ]
+    },
+    "summary": "Add custom HTML Elements into the sidebar",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "exampleProjectId": "CQrFox"
+}

@@ -11,16 +11,16 @@
             "date": 1732781761139
         },
         {
-            "message": "Ops.Patch.PCenipv.ElementAccessibility renamed to Ops.Html.ElementAccessibility",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1732782367810
-        },
-        {
             "message": "Html.ElementAccessibility renamed to Ops.Html.Attributes.ElementAccessibility",
             "type": "rename",
             "author": "pandur",
             "date": 1733744762919
+        },
+        {
+            "message": "Add aria Label and labeledBy",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1734605533446
         }
     ],
     "layout": {
@@ -29,6 +29,14 @@
                 "type": 2,
                 "name": "Element",
                 "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "aria Label"
+            },
+            {
+                "type": 5,
+                "name": "aria Labeled By"
             },
             {
                 "type": 0,
