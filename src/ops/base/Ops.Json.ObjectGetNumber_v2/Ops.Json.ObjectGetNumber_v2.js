@@ -4,6 +4,7 @@ const
     result = op.outNumber("Result"),
     outFound = op.outBoolNum("Found");
 
+op.toWorkPortsNeedsString(key);
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
 op.setUiAttrib({ "extendTitlePort": key.name });
@@ -11,14 +12,6 @@ key.setUiAttribs({ "stringTrim": true });
 
 key.onChange =
     data.onChange = exec;
-
-key.on("change", updateUi);
-updateUi();
-function updateUi()
-{
-    if (!key.get())op.setUiError("nokey", "Missing Key Value");
-    else op.setUiError("nokey", null);
-}
 
 function exec()
 {

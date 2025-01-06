@@ -48,6 +48,7 @@ const Op = function ()
 
     this._linkTimeRules = {
         "needsLinkedToWork": [],
+        "needsStringToWork": [],
         "needsParentOp": null
     };
 
@@ -1557,6 +1558,13 @@ const Op = function ()
         if (type != undefined) this._linkTimeRules.forbiddenParentType = type;
     };
 
+
+    Op.prototype.toWorkPortsNeedsString = function ()
+    {
+        if (!this.patch.isEditorMode()) return;
+        for (let i = 0; i < arguments.length; i++)
+            if (this._linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsStringToWork.push(arguments[i]);
+    };
 
     /**
      * show a small X to indicate op is not working when given ports are not linked

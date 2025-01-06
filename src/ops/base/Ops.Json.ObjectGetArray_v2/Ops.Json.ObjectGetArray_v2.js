@@ -9,6 +9,8 @@ data.ignoreValueSerialize = true;
 op.setUiAttrib({ "extendTitlePort": key.name });
 key.setUiAttribs({ "stringTrim": true });
 
+op.toWorkPortsNeedsString(key);
+
 data.onChange =
     key.onChange = update;
 

@@ -41,5 +41,6 @@
     "coreLibs": [
         "vargetset"
     ],
-    "exampleProjectId": "Sn0k9Q"
+    "exampleProjectId": "Sn0k9Q",
+    "license": "MIT"
 }
