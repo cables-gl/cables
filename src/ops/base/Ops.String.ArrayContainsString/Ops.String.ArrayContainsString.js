@@ -14,9 +14,11 @@ inArr.onChange = exec;
 
 function exec()
 {
-    if (inArr.get())
+    let arr = inArr.get();
+    if (arr)
     {
-        const index = inArr.get().indexOf(inValue.get());
+        if (!Array.isArray(arr)) arr = Array.from(arr);
+        const index = arr.indexOf(inValue.get());
 
         outIndex.set(index);
         outFound.set(index > -1);

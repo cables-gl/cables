@@ -16,7 +16,6 @@
     "created": 1591695070465,
     "summary": "Check if an array contains a string which can also be a number (find,search,indexOf)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -62,5 +61,6 @@
             }
         ]
     },
-    "exampleProjectId": "VuK4ve"
+    "exampleProjectId": "VuK4ve",
+    "license": "MIT"
 }
