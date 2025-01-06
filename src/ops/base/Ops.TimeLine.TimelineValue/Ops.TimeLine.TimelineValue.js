@@ -11,8 +11,8 @@ let hasError = false;
 
 animVal.setAnimated(true);
 animVal.onChange = update;
-animVal.anim.onChange = animChange;
-op.onLoaded = animChange;
+animVal.anim.onChange =
+    op.onLoaded = animChange;
 
 let useFrames = false;
 

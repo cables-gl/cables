@@ -33,7 +33,7 @@
             {
                 "type": 0,
                 "name": "Anim Finished",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
@@ -55,7 +55,7 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "xAg8P6"
+    "exampleProjectId": "xAg8P6",
+    "license": "MIT"
 }

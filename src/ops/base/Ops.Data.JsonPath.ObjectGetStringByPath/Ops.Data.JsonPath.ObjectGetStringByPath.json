@@ -49,5 +49,6 @@
             }
         ]
     },
-    "exampleProjectId": "eJIqln"
+    "exampleProjectId": "eJIqln",
+    "license": "MIT"
 }
