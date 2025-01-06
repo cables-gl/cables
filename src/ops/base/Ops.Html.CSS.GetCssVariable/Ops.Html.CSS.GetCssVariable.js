@@ -7,5 +7,7 @@ const root = document.documentElement;
 
 exe.onTriggered = function ()
 {
-    result.set(root.style.getPropertyValue("--" + varname.get()));
+    let style = root.style.getPropertyValue("--" + varname.get());
+    if (!style) style = getComputedStyle(root).getPropertyValue("--" + varname.get());
+    result.set(style);
 };
