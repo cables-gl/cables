@@ -862,11 +862,10 @@ class Geometry
     }
 
     // -----------------
-
 }
 
-   // TODO : rewritwe circle op 1
-Geometry.buildFromFaces(arr, name, optimize)
+// TODO : rewritwe circle op 1
+Geometry.buildFromFaces = function (arr, name, optimize)
 {
     const vertices = [];
     const verticesIndices = [];
@@ -915,7 +914,7 @@ Geometry.buildFromFaces(arr, name, optimize)
     geom.verticesIndices = verticesIndices;
 
     return geom;
-}
+};
 
 
 export { Geometry };
