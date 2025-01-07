@@ -807,7 +807,6 @@ class Geometry
         }
     }
 
-
     getInfoOneLine()
     {
         let txt = "";
@@ -864,57 +863,59 @@ class Geometry
 
     // -----------------
 
-    // TODO : rewritwe circle op
-    buildFromFaces(arr, name, optimize)
+}
+
+   // TODO : rewritwe circle op 1
+Geometry.buildFromFaces(arr, name, optimize)
+{
+    const vertices = [];
+    const verticesIndices = [];
+
+    for (let i = 0; i < arr.length; i += 3)
     {
-        const vertices = [];
-        const verticesIndices = [];
+        const a = arr[i + 0];
+        const b = arr[i + 1];
+        const c = arr[i + 2];
+        const face = [-1, -1, -1];
 
-        for (let i = 0; i < arr.length; i += 3)
+        if (optimize)
+            for (let iv = 0; iv < vertices.length; iv += 3)
+            {
+                if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
+                if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
+                if (vertices[iv + 0] == c[0] && vertices[iv + 1] == c[1] && vertices[iv + 2] == c[2]) face[2] = iv / 3;
+            }
+
+        if (face[0] == -1)
         {
-            const a = arr[i + 0];
-            const b = arr[i + 1];
-            const c = arr[i + 2];
-            const face = [-1, -1, -1];
-
-            if (optimize)
-                for (let iv = 0; iv < vertices.length; iv += 3)
-                {
-                    if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
-                    if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
-                    if (vertices[iv + 0] == c[0] && vertices[iv + 1] == c[1] && vertices[iv + 2] == c[2]) face[2] = iv / 3;
-                }
-
-            if (face[0] == -1)
-            {
-                vertices.push(a[0], a[1], a[2]);
-                face[0] = (vertices.length - 1) / 3;
-            }
-
-            if (face[1] == -1)
-            {
-                vertices.push(b[0], b[1], b[2]);
-                face[1] = (vertices.length - 1) / 3;
-            }
-
-            if (face[2] == -1)
-            {
-                vertices.push(c[0], c[1], c[2]);
-                face[2] = (vertices.length - 1) / 3;
-            }
-
-            verticesIndices.push(parseInt(face[0], 10));
-            verticesIndices.push(parseInt(face[1], 10));
-            verticesIndices.push(parseInt(face[2], 10));
+            vertices.push(a[0], a[1], a[2]);
+            face[0] = (vertices.length - 1) / 3;
         }
 
-        const geom = new Geometry(name);
-        geom.name = name;
-        geom.vertices = vertices;
-        geom.verticesIndices = verticesIndices;
+        if (face[1] == -1)
+        {
+            vertices.push(b[0], b[1], b[2]);
+            face[1] = (vertices.length - 1) / 3;
+        }
 
-        return geom;
+        if (face[2] == -1)
+        {
+            vertices.push(c[0], c[1], c[2]);
+            face[2] = (vertices.length - 1) / 3;
+        }
+
+        verticesIndices.push(parseInt(face[0], 10));
+        verticesIndices.push(parseInt(face[1], 10));
+        verticesIndices.push(parseInt(face[2], 10));
     }
+
+    const geom = new Geometry(name);
+    geom.name = name;
+    geom.vertices = vertices;
+    geom.verticesIndices = verticesIndices;
+
+    return geom;
 }
+
 
 export { Geometry };
