@@ -161,7 +161,7 @@ Anim.prototype.sortKeys = function ()
     this.keys.sort((a, b) => { return parseFloat(a.time) - parseFloat(b.time); });
     this._updateLastIndex();
     this._needsSort = false;
-    if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
+    if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 };
 
 Anim.prototype.getLength = function ()

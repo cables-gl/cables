@@ -1,3 +1,4 @@
+
 const
     inNum1 = op.inFloat("Number 1"),
     inNum2 = op.inFloat("Number 2"),
@@ -34,7 +35,6 @@ inNum1.onLinkChanged =
 
 op.renderVizLayer = (ctx, layer) =>
 {
-    const perf = CABLES.UI.uiProfiler.start("previewlayer graph");
     const doFill = inFill.get();
 
     const colors = ["#7AC4E0", "#D183BF", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#CF5D9D", "#66C984", "#D66AA6", "#515151"];
@@ -98,6 +98,4 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.fillStyle = "#fff";
     ctx.fillText("max:" + Math.round(max * 100) / 100, layer.x + 10, layer.y + layer.height - 10);
     ctx.fillText("min:" + Math.round(min * 100) / 100, layer.x + 10, layer.y + layer.height - 30);
-
-    perf.finish();
 };

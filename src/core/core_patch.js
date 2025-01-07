@@ -10,6 +10,7 @@ import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
 
 
+
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
@@ -739,9 +740,9 @@ class Patch extends EventTarget
         return JSON.stringify(obj);
     }
 
-    getOpsByRefId(refId)
+    getOpsByRefId(refId) // needed ?
     {
-        const perf = CABLES.UI.uiProfiler.start("[corepatchetend] getOpsByRefId");
+        const perf = gui.uiProfiler.start("[corepatchetend] getOpsByRefId");
         const refOps = [];
         const ops = gui.corePatch().ops;
         for (let i = 0; i < ops.length; i++)

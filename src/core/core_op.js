@@ -1211,46 +1211,16 @@ const Op = function ()
 
     Op.prototype.error = Op.prototype.logError = function ()
     {
-        // if (!this)
-        // {
-        //     this._log.error("no this...!!!");
-        //     debugger;
-        //     return;
-        // }
-        // const initiator = "op " + this.objName;
-        // if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 2 }, ...arguments)) return;
-
-        // // if (this.patch.silent) return;
-        // const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
-        // args.push.apply(args, arguments);
-        // Function.prototype.apply.apply(this._log.error, [console, args]);// eslint-disable-line
-        // if (window.gui) window.gui.emitEvent("opLogEvent", this.objName, "error", arguments);
         this._log.error(...arguments);
     };
 
     Op.prototype.warn = Op.prototype.logWarn = function ()
     {
         this._log.warn(...arguments);
-
-        // const initiator = "op " + this.objName;
-        // if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 1 }, ...arguments)) return;
-
-        // // if (this.patch.silent) return;
-        // const args = ["[op " + CABLES.getShortOpName(this.objName) + "]"];
-        // args.push.apply(args, arguments);
-        // Function.prototype.apply.apply(this._log.warn, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
     {
-        // const initiator = "op " + CABLES.getShortOpName(this.objName);
-        // if (CABLES.UI && !CABLES.UI.logFilter.filterLog({ "initiator": initiator, "opInstId": this.id, "level": 0 }, ...arguments)) return;
-
-        // if (!CABLES.UI && this.patch.silent) return;
-
-        // const args = ["[" + initiator + "]"];
-        // args.push.apply(args, arguments);
-        // Function.prototype.apply.apply(this._log.info, [console, args]);// eslint-disable-line
         this._log.verbose(...arguments);
     };
 

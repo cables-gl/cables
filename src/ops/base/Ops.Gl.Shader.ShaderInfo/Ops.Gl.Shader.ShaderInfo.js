@@ -1,3 +1,4 @@
+
 const
     exec = op.inTrigger("Exec"),
     showFrag = op.inTriggerButton("Show Fragment"),
@@ -23,7 +24,7 @@ let shader = null;
 
 function showCodeModal(title, code, type)
 {
-    if (!CABLES.UI || !CABLES.UI.ModalDialog)
+    if (!CABLES.UI)
     {
         op.log(title, code);
     }
@@ -40,7 +41,7 @@ function showCodeModal(title, code, type)
 
     html += "<pre><code class=\"" + (type || "javascript") + "\">" + code + "</code></pre>";
 
-    new CABLES.UI.ModalDialog({
+    new ModalDialog({
         "title": title,
         "html": html
     });

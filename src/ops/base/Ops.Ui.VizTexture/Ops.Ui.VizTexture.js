@@ -74,7 +74,7 @@ op.renderVizLayerGl = (ctx, layer) =>
     const texSlot = 5;
     const texSlotCubemap = texSlot + 1;
 
-    const perf = CABLES.UI.uiProfiler.start("previewlayer texture");
+    const perf = gui.uiProfiler.start("previewlayer texture");
     const cgl = port.op.patch.cgl;
 
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
