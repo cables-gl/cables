@@ -139,7 +139,7 @@ class Geometry
      * @instance
      * @description clear all buffers/set them to length 0
      */
-    clear ()
+    clear()
     {
         this._vertices = new Float32Array([]);
         this.verticesIndices = [];
@@ -148,7 +148,7 @@ class Geometry
         this.tangents = [];
         this.biTangents = [];
         this._attributes = {};
-    };
+    }
 
     /**
      * @function getAttributes
@@ -156,10 +156,10 @@ class Geometry
     * @instance
     * @return {Array<Object>} returns array of attribute objects
     */
-    getAttributes ()
+    getAttributes()
     {
         return this._attributes;
-    };
+    }
 
     /**
      * @function getAttribute
@@ -168,14 +168,14 @@ class Geometry
      * @param {String} name
      * @return {Object}
      */
-    getAttribute (name)
+    getAttribute(name)
     {
         for (const i in this._attributes)
         {
             if (this._attributes[i].name == name) return this._attributes[i];
         }
         return null;
-    };
+    }
 
     /**
      * @function setAttribute
@@ -186,7 +186,7 @@ class Geometry
      * @param {Array} arr
      * @param {Number} itemSize
      */
-    setAttribute (name, arr, itemSize)
+    setAttribute(name, arr, itemSize)
     {
         let attrType = "";
         if (!itemSize || itemSize > 4)
@@ -211,13 +211,13 @@ class Geometry
         };
 
         this._attributes[name] = attr;
-    };
+    }
 
-    copyAttribute (name, newgeom)
+    copyAttribute(name, newgeom)
     {
         const attr = this.getAttribute(name);
         newgeom.setAttribute(name, new Float32Array(attr.data), attr.itemSize);
-    };
+    }
 
 
     /**
@@ -227,11 +227,11 @@ class Geometry
      * @description set vertices
      * @param {Array|Float32Array} arr [x,y,z,x,y,z,...]
      */
-    setVertices (arr)
+    setVertices(arr)
     {
         if (arr instanceof Float32Array) this._vertices = arr;
         else this._vertices = new Float32Array(arr);
-    };
+    }
 
     /**
      * @function setTexCoords
@@ -240,18 +240,18 @@ class Geometry
      * @description set texcoords
      * @param {Array|Float32Array} arr [u,v,u,v,...]
      */
-    setTexCoords (arr)
+    setTexCoords(arr)
     {
         if (arr instanceof Float32Array) this.texCoords = arr;
         else this.texCoords = new Float32Array(arr);
-    };
+    }
 
     // deprecated
-    calcNormals (smooth)
+    calcNormals(smooth)
     {
         const options = { "smooth": smooth };
         this.calculateNormals(options);
-    };
+    }
 
     /**
      * @function flipNormals
@@ -261,7 +261,7 @@ class Geometry
      * @param z
      * @description flip normals
      */
-    flipNormals (x, y, z)
+    flipNormals(x, y, z)
     {
         let vec = vec3.create();
 
@@ -287,13 +287,13 @@ class Geometry
             this.vertexNormals[i + 1] = vec[1];
             this.vertexNormals[i + 2] = vec[2];
         }
-    };
+    }
 
-    getNumTriangles ()
+    getNumTriangles()
     {
         if (this.verticesIndices && this.verticesIndices.length) return this.verticesIndices.length / 3;
         return this.vertices.length / 3;
-    };
+    }
 
 
     /**
@@ -301,7 +301,7 @@ class Geometry
      * @memberof Geometry
      * @description flip order of vertices in geom faces
      */
-    flipVertDir ()
+    flipVertDir()
     {
         const newInd = [];
         newInd.length = this.verticesIndices.length;
@@ -312,10 +312,10 @@ class Geometry
             newInd[i + 2] = this.verticesIndices[i];
         }
         this.verticesIndices = newInd;
-    };
+    }
 
 
-    setPointVertices (verts)
+    setPointVertices(verts)
     {
         if (verts.length % 3 !== 0)
         {
@@ -338,7 +338,7 @@ class Geometry
             this.texCoords[i * 2] = 0;
             this.texCoords[i * 2 + 1] = 0;
         }
-    };
+    }
 
     /**
      * merge a different geometry into the this geometry
@@ -347,7 +347,7 @@ class Geometry
      * @memberof Geometry
      * @instance
      */
-    merge (geom)
+    merge(geom)
     {
         if (!geom) return;
 
@@ -377,7 +377,7 @@ class Geometry
         this.vertexNormals = UTILS.float32Concat(this.vertexNormals, geom.vertexNormals);
         this.tangents = UTILS.float32Concat(this.tangents, geom.tangents);
         this.biTangents = UTILS.float32Concat(this.biTangents, geom.biTangents);
-    };
+    }
 
     /**
      *   a copy of the geometry
@@ -385,7 +385,7 @@ class Geometry
      * @memberof Geometry
      * @instance
      */
-    copy ()
+    copy()
     {
         const geom = new Geometry(this.name + " copy");
         geom.faceVertCount = this.faceVertCount;
@@ -405,7 +405,7 @@ class Geometry
         for (let i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];
 
         return geom;
-    };
+    }
 
     /**
      * Calculaten normals
@@ -414,7 +414,7 @@ class Geometry
      * @param options
      * @instance
      */
-    calculateNormals (options)
+    calculateNormals(options)
     {
         // todo: should check angle of normals to get edges    https://community.khronos.org/t/calculating-accurate-vertex-normals/28152
         options = options || {};
@@ -508,7 +508,7 @@ class Geometry
                 }
             }
         }
-    };
+    }
 
     /**
      * Calculates tangents & bitangents with the help of uv-coordinates. Adapted from
@@ -520,7 +520,7 @@ class Geometry
      * @memberof Geometry
      * @instance
      */
-    calcTangentsBitangents ()
+    calcTangentsBitangents()
     {
         if (!this.vertices.length)
         {
@@ -653,13 +653,13 @@ class Geometry
             this.biTangents[vert * 3 + 1] = bitan[1];
             this.biTangents[vert * 3 + 2] = bitan[2];
         }
-    };
+    }
 
-    isIndexed ()
+    isIndexed()
     {
         if (this._vertices.length == 0) return true;
         return this.verticesIndices.length != 0;
-    };
+    }
 
     /**
      * @function unIndex
@@ -669,7 +669,7 @@ class Geometry
      * @param {boolean} reIndex
      * @param {boolean} dontCalcNormals
      */
-    unIndex (reIndex, dontCalcNormals)
+    unIndex(reIndex, dontCalcNormals)
     {
         const newVerts = [];
         const newIndizes = [];
@@ -741,9 +741,9 @@ class Geometry
         if (reIndex) this.verticesIndices = newIndizes;
 
         if (!dontCalcNormals) this.calculateNormals();
-    };
+    }
 
-    calcBarycentric ()
+    calcBarycentric()
     {
         let barycentrics = [];
         barycentrics.length = this.vertices.length;
@@ -758,14 +758,14 @@ class Geometry
         }
 
         this.setAttribute("attrBarycentric", barycentrics, 3);
-    };
+    }
 
-    getBounds ()
+    getBounds()
     {
         return new BoundingBox(this);
-    };
+    }
 
-    center (x, y, z)
+    center(x, y, z)
     {
         if (x === undefined)
         {
@@ -789,9 +789,9 @@ class Geometry
         }
 
         return offset;
-    };
+    }
 
-    mapTexCoords2d ()
+    mapTexCoords2d()
     {
         const bounds = this.getBounds();
         const num = this.vertices.length / 3;
@@ -805,10 +805,10 @@ class Geometry
             this.texCoords[i * 2 + 0] = vertX / (bounds.maxX - bounds.minX) + 0.5;
             this.texCoords[i * 2 + 1] = 1.0 - vertY / (bounds.maxY - bounds.minY) + 0.5;
         }
-    };
+    }
 
 
-    getInfoOneLine ()
+    getInfoOneLine()
     {
         let txt = "";
         if (this.faceVertCount == 3 && this.verticesIndices)txt += this.verticesIndices.length / 3;
@@ -822,9 +822,9 @@ class Geometry
         txt += " verts";
 
         return txt;
-    };
+    }
 
-    getInfo ()
+    getInfo()
     {
         const info = {};
 
@@ -860,12 +860,12 @@ class Geometry
         info.isIndexed = this.isIndexed();
 
         return info;
-    };
+    }
 
     // -----------------
 
     // TODO : rewritwe circle op
-    Geometry.buildFromFaces = function (arr, name, optimize)
+    buildFromFaces(arr, name, optimize)
     {
         const vertices = [];
         const verticesIndices = [];
@@ -914,8 +914,7 @@ class Geometry
         geom.verticesIndices = verticesIndices;
 
         return geom;
-    };
-
+    }
 }
 
 export { Geometry };
