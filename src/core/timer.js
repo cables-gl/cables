@@ -109,6 +109,11 @@ class Timer extends EventTarget
      */
     get()
     {
+        return this.getTime();
+    }
+
+    getTime()
+    {
         if (this.overwriteTime >= 0) return this.overwriteTime - this._delay;
         return this._currentTime - this._delay;
     }
