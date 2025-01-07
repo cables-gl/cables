@@ -1,0 +1,42 @@
+{
+    "id": "22e6afda-a331-40bf-93be-7aa0a8cac05c",
+    "created": 1736108053153,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1736108053182
+        },
+        {
+            "message": "Patch.PPAbp2z.StringRemoveCharacters renamed to Ops.String.StringRemoveCharacters",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1736153666111
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "Characters"
+            },
+            {
+                "type": 5,
+                "name": "Replace"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    }
+}

@@ -35,11 +35,9 @@ import PatchVariable from "./core_variable.js";
 
 class Patch extends EventTarget
 {
-// const Patch(cfg)
     constructor(cfg)
     {
         super();
-        // EventTarget.apply(this);
 
         this._log = new Logger("core_patch", { "onError": cfg.onError });
         this.ops = [];
@@ -180,12 +178,12 @@ class Patch extends EventTarget
     }
 
     /**
- * current number of frames per second
- * @function getFPS
- * @memberof Patch
- * @instance
- * @return {Number} fps
- */
+     * current number of frames per second
+     * @function getFPS
+     * @memberof Patch
+     * @instance
+     * @return {Number} fps
+     */
     getFPS()
     {
         this._log.error("deprecated getfps");
@@ -193,23 +191,23 @@ class Patch extends EventTarget
     }
 
     /**
- * returns true if patch is opened in editor/gui mode
- * @function isEditorMode
- * @memberof Patch
- * @instance
- * @return {Boolean} editor mode
- */
+    * returns true if patch is opened in editor/gui mode
+    * @function isEditorMode
+    * @memberof Patch
+    * @instance
+    * @return {Boolean} editor mode
+    */
     isEditorMode()
     {
         return this.config.editorMode === true;
     }
 
     /**
- * pauses patch execution
- * @function pause
- * @memberof Patch
- * @instance
- */
+     * pauses patch execution
+     * @function pause
+     * @memberof Patch
+     * @instance
+     */
     pause()
     {
         cancelAnimationFrame(this._animReq);
@@ -220,11 +218,11 @@ class Patch extends EventTarget
     }
 
     /**
- * resumes patch execution
- * @function resume
- * @memberof Patch
- * @instance
- */
+     * resumes patch execution
+     * @function resume
+     * @memberof Patch
+     * @instance
+     */
     resume()
     {
         if (this._paused)
@@ -238,12 +236,12 @@ class Patch extends EventTarget
     }
 
     /**
- * set volume [0-1]
- * @function setVolume
- * @param {Number} v volume
- * @memberof Patch
- * @instance
- */
+     * set volume [0-1]
+     * @function setVolume
+     * @param {Number} v volume
+     * @memberof Patch
+     * @instance
+     */
     setVolume(v)
     {
         this.config.masterVolume = v;
@@ -252,12 +250,12 @@ class Patch extends EventTarget
 
 
     /**
- * get asset path
- * @function getAssetPath
- * @memberof Patch
- * @param patchId
- * @instance
- */
+     * get asset path
+     * @function getAssetPath
+     * @memberof Patch
+     * @param patchId
+     * @instance
+     */
     getAssetPath(patchId = null)
     {
         if (this.config.hasOwnProperty("assetPath"))
@@ -282,11 +280,11 @@ class Patch extends EventTarget
     }
 
     /**
- * get js path
- * @function getJsPath
- * @memberof Patch
- * @instance
- */
+     * get js path
+     * @function getJsPath
+     * @memberof Patch
+     * @instance
+     */
     getJsPath()
     {
         if (this.config.hasOwnProperty("jsPath"))
@@ -300,14 +298,14 @@ class Patch extends EventTarget
     }
 
     /**
- * get url/filepath for a filename
- * this uses prefixAssetpath in exported patches
- * @function getFilePath
- * @memberof Patch
- * @instance
- * @param {String} filename
- * @return {String} url
- */
+     * get url/filepath for a filename
+     * this uses prefixAssetpath in exported patches
+     * @function getFilePath
+     * @memberof Patch
+     * @instance
+     * @param {String} filename
+     * @return {String} url
+     */
     getFilePath(filename)
     {
         if (!filename) return filename;

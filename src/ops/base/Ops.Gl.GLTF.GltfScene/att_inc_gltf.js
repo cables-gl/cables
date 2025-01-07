@@ -167,9 +167,9 @@ function parseGltf(arrayBuffer)
             let stride = view.byteStride || 0;
             let dataBuff = null;
 
-            // 5120 (BYTE)	1
-            // 5121(UNSIGNED_BYTE)	1
-            // 5122 (SHORT)	2
+            // 5120 (BYTE) 1
+            // 5121(UNSIGNED_BYTE) 1
+            // 5122 (SHORT) 2
             if (acc.componentType == 5126) // FLOAT
             {
                 stride = stride || 4;

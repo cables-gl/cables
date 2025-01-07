@@ -33,9 +33,9 @@
     "summary": "Joins two strings together",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "a8qVz6"
+    "exampleProjectId": "a8qVz6",
+    "license": "MIT"
 }

@@ -1,0 +1,72 @@
+{
+    "id": "d082beaf-ef4b-4e57-a900-9ee87c0c9fe4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1579793372912,
+            "type": "new"
+        },
+        {
+            "message": "fix infinite loop bug, when activated no dupes and min max is the same number",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034348389
+        },
+        {
+            "message": "do not generate new random number when changing parameters, only on trigger",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1734628107689
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1734628024646,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Generate"
+            },
+            {
+                "type": 0,
+                "name": "min",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "max",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Integer",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "No consecutive duplicates",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Generate random number between min and max",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "s3FP7f",
+    "license": "MIT"
+}

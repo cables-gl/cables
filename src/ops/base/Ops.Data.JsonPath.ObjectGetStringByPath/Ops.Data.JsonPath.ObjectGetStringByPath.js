@@ -3,7 +3,7 @@ const
     pathIn = op.inString("Path"),
     returnPathIn = op.inBool("Output path if missing", false),
     resultOut = op.outString("Output"),
-    foundOut = op.outBool("Found");
+    foundOut = op.outBoolNum("Found");
 
 objectIn.ignoreValueSerialize = true;
 

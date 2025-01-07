@@ -10,6 +10,7 @@ newLine.onChange =
     string1.onChange =
     active.onChange = exec;
 
+op.toWorkPortsNeedsString(string1, string2);
 exec();
 
 function exec()
