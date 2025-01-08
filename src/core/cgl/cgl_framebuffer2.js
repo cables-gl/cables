@@ -158,6 +158,11 @@ export class Framebuffer2
 
     delete()
     {
+        this.dispose();
+    }
+
+    dispose()
+    {
         this._disposed = true;
         let i = 0;
         for (i = 0; i < this._numRenderBuffers; i++) this._colorTextures[i].delete();
