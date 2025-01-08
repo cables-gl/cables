@@ -109,10 +109,9 @@ const Op = function ()
 };
 
 {
-    Op.prototype.clearUiAttrib = function (name)
+    Op.prototype.clearUiAttrib = function ()
     {
         const obj = {};
-        // obj.name = null;
         this.uiAttrib(obj);
     };
 

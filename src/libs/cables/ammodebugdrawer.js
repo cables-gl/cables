@@ -160,7 +160,6 @@ class AmmoDebugDrawer
 
     drawContactPoint(pointOnB, normalOnB, distance, lifeTime, color)
     {
-        // AmmoDebugDrawer.prototype.drawContactPoint = function(pointOnB, normalOnB, distance, lifeTime, color) {
         const heap = Ammo.HEAPF32;
         const r = heap[(color + 0) / 4];
         const g = heap[(color + 4) / 4];
