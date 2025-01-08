@@ -1,4 +1,4 @@
-import { Logger, CONSTANTS } from "cables-shared-client";
+import { Logger } from "cables-shared-client";
 import { EventTarget } from "./eventtarget.js";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
@@ -6,6 +6,7 @@ import { Timer } from "./timer.js";
 import { Link } from "./core_link.js";
 import { Profiler } from "./core_profiler.js";
 import { Context } from "./cgl/cgl_state.js";
+import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
 
 

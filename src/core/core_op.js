@@ -1,6 +1,7 @@
-import { Logger, CONSTANTS } from "cables-shared-client";
+import { Logger } from "cables-shared-client";
 import { EventTarget } from "./eventtarget.js";
 import { UTILS, cleanJson, shortId } from "./utils.js";
+import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";

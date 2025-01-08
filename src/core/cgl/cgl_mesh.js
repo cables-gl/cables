@@ -1,5 +1,6 @@
-import { Logger, CONSTANTS } from "cables-shared-client";
+import { Logger } from "cables-shared-client";
 import { Uniform } from "./cgl_shader_uniform.js";
+import { CONSTANTS } from "./constants.js";
 
 const MESH = {};
 MESH.lastMesh = null;

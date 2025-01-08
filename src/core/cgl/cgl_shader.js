@@ -2,10 +2,11 @@ import { Logger } from "cables-shared-client";
 import { ShaderLibMods } from "./cgl_shader_lib.js";
 import { now } from "../timer.js";
 import { MESH } from "./cgl_mesh.js";
-import { CONSTANTS } from "cables-shared-client";
+import { CONSTANTS } from "./constants.js";
 import { escapeHTML } from "./cgl_utils.js";
 import { CgShader } from "../cg/cg_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
+import { simpleId } from "../utils.js";
 // ---------------------------------------------------------------------------
 
 

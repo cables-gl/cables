@@ -1,4 +1,3 @@
-import { CONSTANTS } from "cables-shared-client";
 import * as utils from "./utils.js";
 import * as anim from "./anim.js";
 import { Link } from "./core_link.js";
@@ -10,7 +9,8 @@ import Patch from "./core_patch.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
-import { Timer, now, internalNow } from "./timer.js";
+import { Timer, now, internalNow, logErrorConsole } from "./timer.js";
+import { CONSTANTS } from "./constants.js";
 import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";

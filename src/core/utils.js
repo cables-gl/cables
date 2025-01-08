@@ -3,7 +3,7 @@
  * @namespace external:CABLES#Utils
  */
 
-import { CONSTANTS } from "cables-shared-client";
+import { CONSTANTS } from "./constants.js";
 
 const UTILS = {};
 /**

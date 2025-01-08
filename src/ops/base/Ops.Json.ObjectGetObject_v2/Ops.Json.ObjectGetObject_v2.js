@@ -14,11 +14,6 @@ key.onChange =
     data.onChange = update;
 
 updateUi();
-function updateUi()
-{
-    if (!key.get())op.setUiError("nokey", "Missing Key Value", 1);
-    else op.setUiError("nokey", null);
-}
 
 function update()
 {
