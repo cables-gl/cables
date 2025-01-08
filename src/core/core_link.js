@@ -8,154 +8,152 @@ import { EventTarget } from "./eventtarget.js";
  * @hideconstructor
  * @class
  */
-const Link = function (scene)
+class Link extends EventTarget
 {
-    EventTarget.apply(this);
-
-    this.id = CABLES.simpleId();
-    this.portIn = null;
-    this.portOut = null;
-    this.scene = scene; // todo: make private and rename to patch
-    this.activityCounter = 0;
-    this.ignoreInSerialize = false;
-};
-
-Link.prototype.setValue = function (v)
-{
-    if (v === undefined) this._setValue();
-    else this.portIn.set(v);
-};
-
-Link.prototype.activity = function ()
-{
-    this.activityCounter++;
-    // if(Date.now()-this.lastTime>100)
-    // {
-    //     // this.lastTime=Date.now();
-    //     // this.changesPerSecond=this.changesCounter*10;
-    //     this.changesCounter=0;
-    // }
-};
-
-Link.prototype._setValue = function ()
-{
-    if (!this.portOut)
+    constructor(p)
     {
-        this.remove();
-        return;
+        super();
+
+        this.id = CABLES.simpleId();
+        this.portIn = null;
+        this.portOut = null;
+        this._patch = p;
+        this.activityCounter = 0;
+        this.ignoreInSerialize = false;
     }
-    const v = this.portOut.get();
 
-    if (v == v) // NaN is the only JavaScript value that is treated as unequal to itself
+    setValue(v)
     {
-        if (this.portIn.type != CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) this.activity();
+        if (v === undefined) this._setValue();
+        else this.portIn.set(v);
+    }
 
-        if (this.portIn.get() !== v)
+    activity()
+    {
+        this.activityCounter++;
+    }
+
+    _setValue()
+    {
+        if (!this.portOut)
         {
-            this.portIn.set(v);
+            this.remove();
+            return;
+        }
+        const v = this.portOut.get();
+
+        if (v == v) // NaN is the only JavaScript value that is treated as unequal to itself
+        {
+            if (this.portIn.type != CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) this.activity();
+
+            if (this.portIn.get() !== v)
+            {
+                this.portIn.set(v);
+            }
+            else
+            {
+                if (this.portIn.changeAlways) this.portIn.set(v);
+                if (this.portOut.forceRefChange) this.portIn.forceChange();
+            }
+        }
+    }
+
+    /**
+     * @function getOtherPort
+     * @memberof Link
+     * @instance
+     * @param {Port} p port
+     * @description returns the port of the link, which is not port
+     */
+    getOtherPort(p)
+    {
+        if (p == this.portIn) return this.portOut;
+        return this.portIn;
+    }
+
+    /**
+     * @function remove
+     * @memberof Link
+     * @instance
+     * @description unlink/remove this link from all ports
+     */
+    remove()
+    {
+        if (this.portIn) this.portIn.removeLink(this);
+        if (this.portOut) this.portOut.removeLink(this);
+        if (this._patch)
+        {
+            this._patch.emitEvent("onUnLink", this.portIn, this.portOut, this);
+        }
+
+        if (this.portIn && (this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT || this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY))
+        {
+            this.portIn.set(null);
+            if (this.portIn.links.length > 0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());
+        }
+
+        if (this.portIn) this.portIn.op._checkLinksNeededToWork();
+        if (this.portOut) this.portOut.op._checkLinksNeededToWork();
+
+        this.portIn = null;
+        this.portOut = null;
+        this._patch = null;
+    }
+
+    /**
+     * @function link
+     * @memberof Link
+     * @instance
+     * @description link those two ports
+     * @param {Port} p1 port1
+     * @param {Port} p2 port2
+     */
+    link(p1, p2)
+    {
+        if (!Link.canLink(p1, p2))
+        {
+            console.warn("[core_link] cannot link ports!", p1, p2);
+            return false;
+        }
+
+        if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN)
+        {
+            this.portIn = p1;
+            this.portOut = p2;
         }
         else
         {
-            if (this.portIn.changeAlways) this.portIn.set(v);
-            if (this.portOut.forceRefChange) this.portIn.forceChange();
+            this.portIn = p2;
+            this.portOut = p1;
         }
+
+        p1.addLink(this);
+        p2.addLink(this);
+
+        this.setValue();
+
+        if (p1.onLink) p1.onLink(this);
+        if (p2.onLink) p2.onLink(this);
+
+        p1.op._checkLinksNeededToWork();
+        p2.op._checkLinksNeededToWork();
     }
-};
 
-/**
- * @function getOtherPort
- * @memberof Link
- * @instance
- * @param {Port} p port
- * @description returns the port of the link, which is not port
- */
-Link.prototype.getOtherPort = function (p)
-{
-    if (p == this.portIn) return this.portOut;
-    return this.portIn;
-};
-
-/**
- * @function remove
- * @memberof Link
- * @instance
- * @description unlink/remove this link from all ports
- */
-Link.prototype.remove = function ()
-{
-    if (this.portIn) this.portIn.removeLink(this);
-    if (this.portOut) this.portOut.removeLink(this);
-    if (this.scene)
+    getSerialized()
     {
-        this.scene.emitEvent("onUnLink", this.portIn, this.portOut, this);
+        const obj = {};
+
+        obj.portIn = this.portIn.getName();
+        obj.portOut = this.portOut.getName();
+        obj.objIn = this.portIn.op.id;
+        obj.objOut = this.portOut.op.id;
+
+        return obj;
     }
-
-    if (this.portIn && (this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT || this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY))
-    {
-        this.portIn.set(null);
-        if (this.portIn.links.length > 0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());
-    }
-
-    if (this.portIn) this.portIn.op._checkLinksNeededToWork();
-    if (this.portOut) this.portOut.op._checkLinksNeededToWork();
-
-    this.portIn = null;
-    this.portOut = null;
-    this.scene = null;
-};
-
-/**
- * @function link
- * @memberof Link
- * @instance
- * @description link those two ports
- * @param {Port} p1 port1
- * @param {Port} p2 port2
- */
-Link.prototype.link = function (p1, p2)
-{
-    if (!Link.canLink(p1, p2))
-    {
-        console.warn("[core_link] cannot link ports!", p1, p2);
-        return false;
-    }
-
-    if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN)
-    {
-        this.portIn = p1;
-        this.portOut = p2;
-    }
-    else
-    {
-        this.portIn = p2;
-        this.portOut = p1;
-    }
-
-    p1.addLink(this);
-    p2.addLink(this);
-
-    this.setValue();
-
-    if (p1.onLink) p1.onLink(this);
-    if (p2.onLink) p2.onLink(this);
-
-    p1.op._checkLinksNeededToWork();
-    p2.op._checkLinksNeededToWork();
-};
-
-Link.prototype.getSerialized = function ()
-{
-    const obj = {};
-
-    obj.portIn = this.portIn.getName();
-    obj.portOut = this.portOut.getName();
-    obj.objIn = this.portIn.op.id;
-    obj.objOut = this.portOut.op.id;
-
-    return obj;
-};
+}
 
 // --------------------------------------------
+
 
 /**
  * @function canLinkText
@@ -193,8 +191,6 @@ Link.canLinkText = function (p1, p2)
     if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN && p1.isAnimated()) return "can not link: is animated";
     if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN && p2.isAnimated()) return "can not link: is animated";
 
-    // if(p1.direction==CABLES.CONSTANTS.PORT.PORT_DIR_IN && p1.links.length>0)return 'input port already busy';
-    // if(p2.direction==CABLES.CONSTANTS.PORT.PORT_DIR_IN && p2.links.length>0)return 'input port already busy';
     if (p1.isLinkedTo(p2)) return "ports already linked";
 
     if ((p1.canLink && !p1.canLink(p2)) || (p2.canLink && !p2.canLink(p1))) return "Incompatible";

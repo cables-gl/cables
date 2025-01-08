@@ -10,199 +10,204 @@ import { EventTarget } from "./eventtarget.js";
  * @class
  * @param patch
  */
-const LoadingStatus = function (patch)
+
+class LoadingStatus extends EventTarget
 {
-    EventTarget.apply(this);
-
-    this._log = new Logger("LoadingStatus");
-    this._loadingAssets = {};
-    this._cbFinished = [];
-    this._assetTasks = [];
-    this._percent = 0;
-    this._count = 0;
-    this._countFinished = 0;
-    this._order = 0;
-    this._startTime = 0;
-    this._patch = patch;
-    this._wasFinishedPrinted = false;
-    this._loadingAssetTaskCb = false;
-};
-
-LoadingStatus.prototype.setOnFinishedLoading = function (cb)
-{
-    this._cbFinished.push(cb);
-};
-
-LoadingStatus.prototype.getNumAssets = function ()
-{
-    return this._countFinished;
-};
-
-LoadingStatus.prototype.getProgress = function ()
-{
-    return this._percent;
-};
-
-LoadingStatus.prototype.checkStatus = function ()
-{
-    this._countFinished = 0;
-    this._count = 0;
-
-    for (const i in this._loadingAssets)
+    constructor(patch)
     {
-        this._count++;
-        if (!this._loadingAssets[i].finished)
-        {
-            this._countFinished++;
-        }
+        super();
+        this._log = new Logger("LoadingStatus");
+        this._loadingAssets = {};
+        this._cbFinished = [];
+        this._assetTasks = [];
+        this._percent = 0;
+        this._count = 0;
+        this._countFinished = 0;
+        this._order = 0;
+        this._startTime = 0;
+        this._patch = patch;
+        this._wasFinishedPrinted = false;
+        this._loadingAssetTaskCb = false;
     }
 
-    this._percent = (this._count - this._countFinished) / this._count;
 
-    if (this._countFinished === 0)
+    setOnFinishedLoading(cb)
     {
-        for (let j = 0; j < this._cbFinished.length; j++)
+        this._cbFinished.push(cb);
+    }
+
+    getNumAssets()
+    {
+        return this._countFinished;
+    }
+
+    getProgress()
+    {
+        return this._percent;
+    }
+
+    checkStatus()
+    {
+        this._countFinished = 0;
+        this._count = 0;
+
+        for (const i in this._loadingAssets)
         {
-            if (this._cbFinished[j])
+            this._count++;
+            if (!this._loadingAssets[i].finished)
             {
-                const cb = this._cbFinished[j];
-                setTimeout(() => { cb(this._patch); this.emitEvent("finishedAll"); }, 100);
+                this._countFinished++;
             }
         }
 
-        if (!this._wasFinishedPrinted)
+        this._percent = (this._count - this._countFinished) / this._count;
+
+        if (this._countFinished === 0)
         {
-            this._wasFinishedPrinted = true;
-            this.print();
+            for (let j = 0; j < this._cbFinished.length; j++)
+            {
+                if (this._cbFinished[j])
+                {
+                    const cb = this._cbFinished[j];
+                    setTimeout(() => { cb(this._patch); this.emitEvent("finishedAll"); }, 100);
+                }
+            }
+
+            if (!this._wasFinishedPrinted)
+            {
+                this._wasFinishedPrinted = true;
+                this.print();
+            }
+            this.emitEvent("finishedAll");
         }
-        this.emitEvent("finishedAll");
     }
-};
 
-LoadingStatus.prototype.getList = function ()
-{
-    let arr = [];
-    for (const i in this._loadingAssets)
+    getList()
     {
-        arr.push(this._loadingAssets[i]);
+        let arr = [];
+        for (const i in this._loadingAssets)
+        {
+            arr.push(this._loadingAssets[i]);
+        }
+
+        return arr;
     }
 
-    return arr;
-};
 
-
-LoadingStatus.prototype.getListJobs = function ()
-{
-    let arr = [];
-    for (const i in this._loadingAssets)
+    getListJobs()
     {
-        if (!this._loadingAssets[i].finished)arr.push(this._loadingAssets[i].name);
+        let arr = [];
+        for (const i in this._loadingAssets)
+        {
+            if (!this._loadingAssets[i].finished)arr.push(this._loadingAssets[i].name);
+        }
+
+        return arr;
     }
 
-    return arr;
-};
-
-LoadingStatus.prototype.print = function ()
-{
-    if (this._patch.config.silent) return;
-
-    const rows = [];
-
-    for (const i in this._loadingAssets)
+    print()
     {
-        rows.push([
-            this._loadingAssets[i].order,
-            this._loadingAssets[i].type,
-            this._loadingAssets[i].name,
-            (this._loadingAssets[i].timeEnd - this._loadingAssets[i].timeStart) / 1000 + "s",
-        ]);
+        if (this._patch.config.silent) return;
+
+        const rows = [];
+
+        for (const i in this._loadingAssets)
+        {
+            rows.push([
+                this._loadingAssets[i].order,
+                this._loadingAssets[i].type,
+                this._loadingAssets[i].name,
+                (this._loadingAssets[i].timeEnd - this._loadingAssets[i].timeStart) / 1000 + "s",
+            ]);
+        }
+
+        this._log.groupCollapsed("finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s");
+        this._log.table(rows);
+        this._log.groupEnd();
     }
 
-    this._log.groupCollapsed("finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s");
-    this._log.table(rows);
-    this._log.groupEnd();
-};
-
-LoadingStatus.prototype.finished = function (id)
-{
-    const l = this._loadingAssets[id];
-    if (l)
+    finished(id)
     {
-        if (l.finished) this._log.warn("loading job was already finished", l);
+        const l = this._loadingAssets[id];
+        if (l)
+        {
+            if (l.finished) this._log.warn("loading job was already finished", l);
 
-        if (l.op) l.op.setUiAttribs({ "loading": false });
-        l.finished = true;
-        l.timeEnd = Date.now();
+            if (l.op) l.op.setUiAttribs({ "loading": false });
+            l.finished = true;
+            l.timeEnd = Date.now();
+        }
+
+        this.checkStatus();
+        this.emitEvent("finishedTask");
+        return null;
     }
 
-    this.checkStatus();
-    this.emitEvent("finishedTask");
-    return null;
-};
-
-LoadingStatus.prototype._startAssetTasks = function ()
-{
-    for (let i = 0; i < this._assetTasks.length; i++) this._assetTasks[i]();
-    this._assetTasks.length = 0;
-};
-
-/**
- * delay an asset loading task, mainly to wait for ui to be finished loading and showing, and only then start loading assets
- * @function addAssetLoadingTask
- * @instance
- * @memberof LoadingStatus
- * @param {function} cb callback
- */
-LoadingStatus.prototype.addAssetLoadingTask = function (cb)
-{
-    if (this._patch.isEditorMode() && !CABLES.UI.loaded)
+    _startAssetTasks()
     {
-        this._assetTasks.push(cb);
-
-        if (!this._loadingAssetTaskCb)window.gui.addEventListener("uiloaded", this._startAssetTasks.bind(this));
-        this._loadingAssetTaskCb = true;
+        for (let i = 0; i < this._assetTasks.length; i++) this._assetTasks[i]();
+        this._assetTasks.length = 0;
     }
-    else
+
+    /**
+     * delay an asset loading task, mainly to wait for ui to be finished loading and showing, and only then start loading assets
+     * @function addAssetLoadingTask
+     * @instance
+     * @memberof LoadingStatus
+     * @param {function} cb callback
+     */
+    addAssetLoadingTask(cb)
     {
-        cb();
-    }
-    this.emitEvent("addAssetTask");
-};
+        if (this._patch.isEditorMode() && !CABLES.UI.loaded)
+        {
+            this._assetTasks.push(cb);
 
-LoadingStatus.prototype.existByName = function (name)
-{
-    for (let i in this._loadingAssets)
+            if (!this._loadingAssetTaskCb)window.gui.addEventListener("uiloaded", this._startAssetTasks.bind(this));
+            this._loadingAssetTaskCb = true;
+        }
+        else
+        {
+            cb();
+        }
+        this.emitEvent("addAssetTask");
+    }
+
+    existByName(name)
     {
-        if (this._loadingAssets[i].name == name && !this._loadingAssets[i].finished)
-            return true;
+        for (let i in this._loadingAssets)
+        {
+            if (this._loadingAssets[i].name == name && !this._loadingAssets[i].finished)
+                return true;
+        }
     }
-};
 
-LoadingStatus.prototype.start = function (type, name, op)
-{
-    if (this._startTime == 0) this._startTime = Date.now();
-    const id = generateUUID();
+    start(type, name, op)
+    {
+        if (this._startTime == 0) this._startTime = Date.now();
+        const id = generateUUID();
 
-    name = name || "unknown";
-    if (name.length > 100)name = name.substring(0, 100);
+        name = name || "unknown";
+        if (name.length > 100)name = name.substring(0, 100);
 
 
-    if (op)op.setUiAttribs({ "loading": true });
+        if (op)op.setUiAttribs({ "loading": true });
 
-    this._loadingAssets[id] = {
-        "id": id,
-        "op": op,
-        "type": type,
-        "name": name,
-        "finished": false,
-        "timeStart": Date.now(),
-        "order": this._order,
-    };
-    this._order++;
+        this._loadingAssets[id] = {
+            "id": id,
+            "op": op,
+            "type": type,
+            "name": name,
+            "finished": false,
+            "timeStart": Date.now(),
+            "order": this._order,
+        };
+        this._order++;
 
-    this.emitEvent("startTask");
+        this.emitEvent("startTask");
 
-    return id;
-};
+        return id;
+    }
+}
+
 
 export { LoadingStatus };

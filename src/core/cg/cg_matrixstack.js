@@ -1,40 +1,42 @@
-
-const MatrixStack = function ()
+class MatrixStack
 {
-    this._arr = [mat4.create()];
-    this._index = 0;
-    this.stateCounter = 0;
-};
-
-MatrixStack.prototype.push = function (m)
-{
-    this._index++;
-    this.stateCounter++;
-
-    if (this._index == this._arr.length)
+    constructor()
     {
-        const copy = mat4.create();
-        this._arr.push(copy);
+        this._arr = [mat4.create()];
+        this._index = 0;
+        this.stateCounter = 0;
     }
 
-    mat4.copy(this._arr[this._index], m || this._arr[this._index - 1]);
+    push(m)
+    {
+        this._index++;
+        this.stateCounter++;
 
-    return this._arr[this._index];
-};
+        if (this._index == this._arr.length)
+        {
+            const copy = mat4.create();
+            this._arr.push(copy);
+        }
 
-MatrixStack.prototype.pop = function ()
-{
-    this.stateCounter++;
+        mat4.copy(this._arr[this._index], m || this._arr[this._index - 1]);
 
-    this._index--;
-    if (this._index < 0) this._index = 0;
+        return this._arr[this._index];
+    }
 
-    return this._arr[this._index];
-};
+    pop()
+    {
+        this.stateCounter++;
 
-MatrixStack.prototype.length = function ()
-{
-    return this._index;
-};
+        this._index--;
+        if (this._index < 0) this._index = 0;
+
+        return this._arr[this._index];
+    }
+
+    length()
+    {
+        return this._index;
+    }
+}
 
 export { MatrixStack };

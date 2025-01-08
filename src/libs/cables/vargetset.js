@@ -70,9 +70,7 @@ const VarSetOpWrapper = class
             else
             {
                 if (this._op.hasUiErrors)
-                {
                     this._op.setUiError("novarname", null);
-                }
             }
         }
     }
@@ -122,7 +120,7 @@ const VarSetOpWrapper = class
     {
         if (CABLES.UI && CABLES.UI.loaded && CABLES.UI.loaded)
         {
-            const perf = CABLES.UI.uiProfiler.start("[vars] _updateVarNamesDropdown");
+            const perf = gui.uiProfiler.start("[vars] _updateVarNamesDropdown");
 
             const varnames = [];
             const vars = this._op.patch.getVars();
